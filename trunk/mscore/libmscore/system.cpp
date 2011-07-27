@@ -39,6 +39,7 @@
 #include "box.h"
 #include "chordrest.h"
 #include "iname.h"
+#include "spanner.h"
 
 //---------------------------------------------------------
 //   SysStaff
@@ -587,6 +588,21 @@ void System::add(Element* el)
             case FBOX:
                   score()->addMeasure(static_cast<MeasureBase*>(el));
                   break;
+            case TEXTLINE_SEGMENT:
+            case HAIRPIN_SEGMENT:
+            case OTTAVA_SEGMENT:
+            case TRILL_SEGMENT:
+            case VOLTA_SEGMENT:
+            case SLUR_SEGMENT:
+                  {
+                  SpannerSegment* ss = static_cast<SpannerSegment*>(el);
+                  if (!_spannerSegments.contains(ss))
+                        _spannerSegments.append(ss);
+                  else {
+                        printf("System::add() spanner already there\n");
+                        }
+                  }
+                  break;
             default:
                   printf("System::add(%s) not implemented\n", el->name());
                   break;
@@ -626,6 +642,15 @@ void System::remove(Element* el)
             case TBOX:
             case FBOX:
                   score()->remove(el);
+                  break;
+            case TEXTLINE_SEGMENT:
+            case HAIRPIN_SEGMENT:
+            case OTTAVA_SEGMENT:
+            case TRILL_SEGMENT:
+            case VOLTA_SEGMENT:
+            case SLUR_SEGMENT:
+                  if (!_spannerSegments.removeOne(static_cast<SpannerSegment*>(el)))
+                        printf("System::remove(): spanner not found\n");
                   break;
             default:
                   printf("System::remove(%s) not implemented\n", el->name());
@@ -773,15 +798,15 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
                   if (sysIdx1 == sysIdx2) {
                         // single segment
                         line->setPos(p1);
-                        qreal len = seg->canvasPos().x() - l->canvasPos().x() - lw + 2 * _spatium;
+                        qreal len = seg->pagePos().x() - l->pagePos().x() - lw + 2 * _spatium;
                         line->setLen(Spatium(len / _spatium));
                         }
                   else if (i == sysIdx1) {
                         // start segment
                         line->setPos(p1);
                         qreal w   = system->staff(l->staffIdx())->right();
-                        qreal x   = system->canvasPos().x() + w;
-                        qreal len = x - l->canvasPos().x() - lw;
+                        qreal x   = system->pagePos().x() + w;
+                        qreal len = x - l->pagePos().x() - lw;
                         line->setLen(Spatium(len / _spatium));
                         }
                   else if (i > 0 && i != sysIdx2) {
@@ -840,12 +865,12 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
             qreal y  = b.y() + h * .58;
             line->setPos(QPointF(x, y));
 
-            qreal x1 = l->canvasPos().x();
-            qreal x2 = nl->canvasPos().x();
+            qreal x1 = l->pagePos().x();
+            qreal x2 = nl->pagePos().x();
             qreal len;
             if (x2 < x1 || s->measure()->system()->page() != ns->measure()->system()->page()) {
                   System* system = s->measure()->system();
-                  x2 = system->canvasPos().x() + system->bbox().width();
+                  x2 = system->pagePos().x() + system->bbox().width();
                   }
 
             qreal gap = x2 - x1 - w;
@@ -884,6 +909,8 @@ void System::scanElements(void* data, void (*func)(void*, Element*), bool all)
             foreach(InstrumentName* t, st->instrumentNames)
                   func(data, t);
             }
+      foreach(SpannerSegment* ss, _spannerSegments)
+            func(data, ss);
       }
 
 //---------------------------------------------------------
@@ -895,9 +922,9 @@ qreal System::staffY(int staffIdx) const
       if (_staves.size() <= staffIdx) {
             printf("staffY: staves %d <= staff %d, vbox %d\n",
                _staves.size(), staffIdx, _vbox);
-            return canvasPos().y();
+            return pagePos().y();
             }
-      return _staves[staffIdx]->y() + canvasPos().y();
+      return _staves[staffIdx]->y() + pagePos().y();
       }
 
 //---------------------------------------------------------

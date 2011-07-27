@@ -66,7 +66,7 @@ class LedgerLine : public Line {
       LedgerLine &operator=(const LedgerLine&);
       virtual LedgerLine* clone() const { return new LedgerLine(*this); }
       virtual ElementType type() const  { return LEDGER_LINE; }
-      virtual QPointF canvasPos() const;      ///< position in canvas coordinates
+      virtual QPointF pagePos() const;      ///< position in page coordinates
       Chord* chord() const { return (Chord*)parent(); }
       virtual void layout();
       qreal measureXPos() const;

@@ -1743,6 +1743,30 @@ void ChangeElement::flip()
             int tick = t->segment()->tick();
             score->tempomap()->changeTempo(tick, t->tempo());
             }
+      ElementType t = newElement->type();
+      if (t == SLUR || t == TIE || t == HAIRPIN || t == OTTAVA || t == TRILL
+         || t == TEXTLINE || t == VOLTA) {
+            Spanner* np = static_cast<Spanner*>(newElement);
+            Spanner* op = static_cast<Spanner*>(oldElement);
+            foreach(SpannerSegment* ss, op->spannerSegments()) {
+                  if (ss->system())
+                        ss->system()->add(ss);
+                  }
+            foreach(SpannerSegment* ss, np->spannerSegments()) {
+                  if (ss->system())
+                        ss->system()->remove(ss);
+                  }
+            }
+
+      if (newElement->isSegment()) {
+printf("ChangeElement:: spannerSegment %p -> %p\n", oldElement, newElement);
+            SpannerSegment* os = static_cast<SpannerSegment*>(oldElement);
+            SpannerSegment* ns = static_cast<SpannerSegment*>(newElement);
+            if (os->system())
+                  os->system()->remove(os);
+            if (ns->system())
+                  ns->system()->add(ns);
+            }
       }
 
 //---------------------------------------------------------

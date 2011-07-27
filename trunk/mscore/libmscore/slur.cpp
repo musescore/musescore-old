@@ -43,8 +43,7 @@ SlurSegment::SlurSegment(const SlurSegment& b)
       {
       for (int i = 0; i < 4; ++i)
             ups[i] = b.ups[i];
-      path         = b.path;
-      _system      = b._system;
+      path = b.path;
       }
 
 //---------------------------------------------------------
@@ -103,12 +102,13 @@ void SlurSegment::draw(Painter* painter) const
 
 //---------------------------------------------------------
 //   updateGrips
+//    return grip rectangles in page coordinates
 //---------------------------------------------------------
 
 void SlurSegment::updateGrips(int* n, QRectF* r) const
       {
       *n = 4;
-      QPointF p(canvasPos());
+      QPointF p(pagePos());
       for (int i = 0; i < 4; ++i)
             r[i].translate(ups[i].p + ups[i].off * spatium() + p);
       }
@@ -191,33 +191,36 @@ QPointF SlurSegment::gripAnchor(int grip) const
       SlurPos spos;
       slurTie()->slurPos(&spos);
 
-      QPointF sp(_system->canvasPos());
+      QPointF sp(system()->pagePos());
+      QPointF p1(spos.p1 + spos.system1->pagePos());
+      QPointF p2(spos.p2 + spos.system2->pagePos());
       switch(spannerSegmentType()) {
             case SEGMENT_SINGLE:
                   if (grip == 0)
-                        return spos.p1;
+                        return p1;
                   else if (grip == 3)
-                        return spos.p2;
-                  return QPointF();
+                        return p2;
+                  break;
 
             case SEGMENT_BEGIN:
                   if (grip == 0)
-                        return spos.p1;
+                        return p1;
                   else if (grip == 3)
-                        return _system->abbox().topRight();
+                        return system()->abbox().topRight();
                   break;
 
             case SEGMENT_MIDDLE:
                   if (grip == 0)
                         return sp;
                   else if (grip == 3)
-                        return _system->abbox().topRight();
+                        return system()->abbox().topRight();
                   break;
+
             case SEGMENT_END:
                   if (grip == 0)
                         return sp;
                   else if (grip == 3)
-                        return spos.p2;
+                        return p2;
                   break;
             }
       return QPointF();
@@ -281,7 +284,7 @@ void SlurSegment::editDrag(const EditData& ed)
                         if ((ed.curGrip == 3 && chord != slur->endElement())
                            || (ed.curGrip == 0 && chord != slur->startElement())) {
                               changeAnchor(ed.view, ed.curGrip, chord);
-                              QPointF p1 = ed.pos - ups[ed.curGrip].p + canvasPos();
+                              QPointF p1 = ed.pos - ups[ed.curGrip].p + pagePos();
                               ups[ed.curGrip].off = p1 / spatium();
                               return;
                               }
@@ -518,6 +521,7 @@ static qreal fixArticulations(qreal yo, Chord* c, qreal _up)
 //---------------------------------------------------------
 //   slurPos
 //    calculate position of start- and endpoint of slur
+//    relative to System() position
 //---------------------------------------------------------
 
 void SlurTie::slurPos(SlurPos* sp)
@@ -540,8 +544,8 @@ void SlurTie::slurPos(SlurPos* sp)
             }
       else {
             if ((e1->type() != CHORD) || (e2->type() != CHORD)) {
-                  sp->p1 = e1->canvasPos();
-                  sp->p2 = e2->canvasPos();
+                  sp->p1 = e1->pagePos();
+                  sp->p2 = e2->pagePos();
                   sp->p1.rx() += e1->width();
                   sp->p2.rx() += e2->width();
                   sp->system1 = static_cast<ChordRest*>(e1)->measure()->system();
@@ -553,8 +557,8 @@ void SlurTie::slurPos(SlurPos* sp)
             note1 = up ? sc->upNote() : sc->downNote();
             note2 = up ? ec->upNote() : ec->downNote();
             }
-      sp->p1      = sc->canvasPos();
-      sp->p2      = ec->canvasPos();
+      sp->p1      = sc->pagePos();
+      sp->p2      = ec->pagePos();
       sp->system1 = sc->measure()->system();
       sp->system2 = ec->measure()->system();
 
@@ -685,6 +689,9 @@ void SlurTie::slurPos(SlurPos* sp)
                   }
             }
       sp->p2 += QPointF(xo, yo);
+
+      sp->p1 -= sp->system1->pagePos();
+      sp->p2 -= sp->system2->pagePos();
       }
 
 //---------------------------------------------------------
@@ -961,6 +968,8 @@ void Slur::layout()
       else if (nsegs < onsegs) {
             for (unsigned i = nsegs; i < onsegs; ++i) {
                   SlurSegment* s = takeLastSegment();
+                  if (s->system())
+                        s->system()->remove(s);
                   delSegments.enqueue(s);  // cannot delete: used in SlurSegment->edit()
                   }
             }
@@ -973,10 +982,6 @@ void Slur::layout()
                   }
             SlurSegment* segment = segmentAt(i);
             segment->setSystem(system);
-            ChordRest* cr1 = (ChordRest*)startElement();
-            SysStaff* ss = system->staff(cr1->staffIdx());
-            QPointF sp(system->canvasPos());
-            sp.ry() += ss->y();
 
             // case 1: one segment
             if (sPos.system1 == sPos.system2) {
@@ -986,15 +991,16 @@ void Slur::layout()
             // case 2: start segment
             else if (i == 0) {
                   segment->setSubtype(SEGMENT_BEGIN);
-                  qreal x = sp.x() + system->bbox().width();
+                  qreal x = system->bbox().width();
                   segment->layout(sPos.p1, QPointF(x, sPos.p1.y()));
                   }
             // case 3: middle segment
             else if (i != 0 && system != sPos.system2) {
                   segment->setSubtype(SEGMENT_MIDDLE);
                   qreal x1 = firstNoteRestSegmentX(system) - _spatium;
-                  qreal x2 = sp.x() + system->bbox().width();
-                  segment->layout(QPointF(x1, sp.y()), QPointF(x2, sp.y()));
+                  qreal x2 = system->bbox().width();
+                  qreal y  = system->staff(startElement()->staffIdx())->y();
+                  segment->layout(QPointF(x1, y), QPointF(x2, y));
                   }
             // case 4: end segment
             else {
@@ -1009,16 +1015,17 @@ void Slur::layout()
 
 //---------------------------------------------------------
 //   firstNoteRestSegmentX
+//    in System() coordinates
 //---------------------------------------------------------
 
 qreal SlurTie::firstNoteRestSegmentX(System* system)
       {
       foreach(const MeasureBase* mb, system->measures()) {
             if (mb->type() == MEASURE) {
-                  Measure* measure = (Measure*)mb;
-                  for (Segment* seg = measure->first(); seg; seg = seg->next()) {
+                  const Measure* measure = static_cast<const Measure*>(mb);
+                  for (const Segment* seg = measure->first(); seg; seg = seg->next()) {
                         if (seg->subtype() == SegChordRest) {
-                              return seg->canvasPos().x();
+                              return seg->pos().x() + seg->measure()->pos().x();
                               }
                         }
                   }
@@ -1117,10 +1124,7 @@ void Tie::layout()
 
       Chord* c1   = startNote()->chord();
       Measure* m1 = c1->measure();
-//      System* s1  = m1->system();
-      Chord* c2   = endNote()->chord();
-//      Measure* m2 = c2->measure();
-//      System* s2  = m2->system();
+      // Chord* c2   = endNote()->chord();
 
       if (_slurDirection == AUTO)
             if (m1->mstaff(c1->staffIdx())->hasVoices) {
@@ -1139,7 +1143,7 @@ void Tie::layout()
       QPointF off1(xo1, yo);
       QPointF off2(0.0, yo);
 
-      QPointF ppos(canvasPos());
+      QPointF ppos(pagePos());
 
       // TODO: cleanup
 
@@ -1173,8 +1177,7 @@ void Tie::layout()
                   int n = nsegs - onsegs;
                   for (int i = 0; i < n; ++i) {
                         SlurSegment* s = new SlurSegment(score());
-                        s->setParent(this);
-                        spannerSegments().append(s);
+                        add(s);
                         }
                   }
             else {
@@ -1186,13 +1189,13 @@ void Tie::layout()
                   }
             }
 
-      sPos.p1 -= canvasPos();
-      sPos.p2 -= canvasPos();
-      for (unsigned int i = 0; i < nsegs; ++i) {
-            System* system       = (*systems)[sysIdx1++];
+      int i = 0;
+      for (uint ii = 0; ii < nsegs; ++ii) {
+            System* system = (*systems)[sysIdx1++];
+            if (system->isVbox())
+                  continue;
             SlurSegment* segment = segmentAt(i);
             segment->setSystem(system);
-            QPointF sp(system->canvasPos() - canvasPos());
 
             // case 1: one segment
             if (sPos.system1 == sPos.system2) {
@@ -1201,27 +1204,18 @@ void Tie::layout()
                   }
             // case 2: start segment
             else if (i == 0) {
-                  qreal x = sp.x() + system->bbox().width();
+                  qreal x = system->bbox().width();
                   segment->layout(sPos.p1, QPointF(x, sPos.p1.y()));
                   segment->setSpannerSegmentType(SEGMENT_BEGIN);
                   }
-            // case 3: middle segment
-            else if (i != 0 && system != sPos.system2) {
-                  // cannot happen
-                  printf("sysIdx %d - %d\n", sysIdx1, sysIdx2);
-                  Measure* m1 = c1->measure();
-                  Measure* m2 = c2->measure();
-                  printf("Measure %d - %d, %d %d\n", m1->no(), m2->no(), m1->tick(), m2->tick());
-                  // abort();
-                  }
             // case 4: end segment
             else {
-                  // qreal x = sp.x();
-                  qreal x = firstNoteRestSegmentX(system) - 2 * _spatium - canvasPos().x();
+                  qreal x = firstNoteRestSegmentX(system) - 2 * _spatium;
 
                   segment->layout(QPointF(x, sPos.p2.y()), sPos.p2);
                   segment->setSpannerSegmentType(SEGMENT_END);
                   }
+            ++i;
             }
       }
 

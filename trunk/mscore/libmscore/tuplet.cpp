@@ -331,7 +331,7 @@ void Tuplet::layout()
       qreal l2 = _spatium * .5;     // bracket distance to note
 
       setPos(0.0, 0.0);
-      QPointF mp(parent()->canvasPos());
+      QPointF mp(parent()->pagePos());
       p1 -= mp;
       p2 -= mp;
 
@@ -656,8 +656,8 @@ void Tuplet::editDrag(const EditData& ed)
 void Tuplet::updateGrips(int* grips, QRectF*grip) const
       {
       *grips = 2;
-      grip[0].translate(canvasPos() + p1);
-      grip[1].translate(canvasPos() + p2);
+      grip[0].translate(pagePos() + p1);
+      grip[1].translate(pagePos() + p2);
       }
 
 //---------------------------------------------------------

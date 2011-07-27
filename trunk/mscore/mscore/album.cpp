@@ -106,7 +106,7 @@ void Album::print()
                         if (!e->visible())
                               continue;
                         p.save();
-                        p.translate(e->canvasPos() - page->pos());
+                        p.translate(e->pagePos() - page->pos());
                         p.setPen(QPen(e->color()));
                         e->draw(&painter);
                         p.restore();

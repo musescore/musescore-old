@@ -42,7 +42,7 @@ class Lyrics : public Text {
       ~Lyrics();
       virtual Lyrics* clone() const    { return new Lyrics(*this); }
       virtual ElementType type() const { return LYRICS; }
-      virtual QPointF canvasPos() const;
+      virtual QPointF pagePos() const;
       virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
       virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);

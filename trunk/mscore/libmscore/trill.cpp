@@ -48,7 +48,7 @@ void TrillSegment::draw(Painter* painter) const
 
             if (trill()->accidental()) {
                   painter->save();
-                  painter->translate(trill()->accidental()->canvasPos());
+                  painter->translate(trill()->accidental()->pagePos());
                   trill()->accidental()->draw(painter);
                   painter->restore();
                   }
@@ -169,11 +169,11 @@ void Trill::layout()
          && (spannerSegments().size() == 1)
          && (seg2->tick() == seg2->measure()->tick())
          ) {
-            qreal x1   = seg2->canvasPos().x();
+            qreal x1   = seg2->pagePos().x();
             Measure* m = seg2->measure()->prevMeasure();
             if (m) {
                   Segment* s2 = m->last();
-                  qreal x2 = s2->canvasPos().x();
+                  qreal x2 = s2->pagePos().x();
                   qreal dx = x1 - x2 + _spatium * .3;
                   TrillSegment* ls = static_cast<TrillSegment*>(frontSegment());
                   ls->setPos2(ls->pos2() + QPointF(-dx, 0.0));

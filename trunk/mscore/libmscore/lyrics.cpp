@@ -185,16 +185,16 @@ void Lyrics::draw(Painter* painter) const
       }
 
 //---------------------------------------------------------
-//   canvasPos
+//   pagePos
 //---------------------------------------------------------
 
-QPointF Lyrics::canvasPos() const
+QPointF Lyrics::pagePos() const
       {
       System* system = measure()->system();
       qreal yp = y();
       if (system)
 	      yp = yp + system->staff(staffIdx())->y() + system->y();
-      return QPointF(canvasX(), yp);
+      return QPointF(pageX(), yp);
       }
 
 //---------------------------------------------------------

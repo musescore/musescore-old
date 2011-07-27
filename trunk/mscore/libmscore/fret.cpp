@@ -84,10 +84,10 @@ FretDiagram::~FretDiagram()
       }
 
 //---------------------------------------------------------
-//   canvasPos
+//   pagePos
 //---------------------------------------------------------
 
-QPointF FretDiagram::canvasPos() const
+QPointF FretDiagram::pagePos() const
       {
       if (parent() == 0)
             return pos();
@@ -95,7 +95,7 @@ QPointF FretDiagram::canvasPos() const
       qreal yp = y();
       if (system)
             yp += system->staffY(staffIdx());
-      return QPointF(canvasX(), yp);
+      return QPointF(pageX(), yp);
       }
 
 //---------------------------------------------------------
@@ -107,7 +107,7 @@ QLineF FretDiagram::dragAnchor() const
       Measure* m     = measure();
       System* system = m->system();
       qreal yp      = system->staff(staffIdx())->y() + system->y();
-      qreal xp      = m->tick2pos(segment()->tick()) + m->canvasPos().x();
+      qreal xp      = m->tick2pos(segment()->tick()) + m->pagePos().x();
       QPointF p1(xp, yp);
 
       qreal x  = 0.0;

@@ -97,7 +97,7 @@ Element* BSymbol::drop(const DropData& data)
       Element* el = data.element;
       if (el->type() == SYMBOL || el->type() == IMAGE) {
             el->setParent(this);
-            QPointF p = data.pos - canvasPos() - data.dragOffset;
+            QPointF p = data.pos - pagePos() - data.dragOffset;
             el->setUserOff(p);
             score()->undoAddElement(el);
             return el;
@@ -311,29 +311,29 @@ QLineF Symbol::dragAnchor() const
             Segment* seg     = segment();
             Measure* measure = seg->measure();
             System* s        = measure->system();
-            qreal y         = measure->canvasPos().y() + s->staff(staffIdx())->y();
+            qreal y         = measure->pagePos().y() + s->staff(staffIdx())->y();
             QPointF anchor(seg->abbox().x(), y);
-            return QLineF(canvasPos(), anchor);
+            return QLineF(pagePos(), anchor);
             }
       else {
-            return QLineF(canvasPos(), parent()->canvasPos());
+            return QLineF(pagePos(), parent()->pagePos());
             }
       }
 
 //---------------------------------------------------------
-//   canvasPos
+//   pagePos
 //---------------------------------------------------------
 
-QPointF BSymbol::canvasPos() const
+QPointF BSymbol::pagePos() const
       {
       if (parent() && (parent()->type() == SEGMENT)) {
             qreal yp = y();
             Segment* s = static_cast<Segment*>(parent());
             yp += s->measure()->system()->staffY(staffIdx());
-            return QPointF(canvasX(), yp);
+            return QPointF(pageX(), yp);
             }
       else
-            return Element::canvasPos();
+            return Element::pagePos();
       }
 
 //---------------------------------------------------------

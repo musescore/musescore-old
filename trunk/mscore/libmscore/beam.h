@@ -85,7 +85,7 @@ class Beam : public Element {
       ~Beam();
       virtual Beam* clone() const         { return new Beam(*this); }
       virtual ElementType type() const    { return BEAM; }
-      virtual QPointF canvasPos() const;  ///< position in canvas coordinates
+      virtual QPointF pagePos() const;  ///< position in page coordinates
 
       virtual bool isEditable() const { return true; }
       virtual void startEdit(MuseScoreView*, const QPointF&);

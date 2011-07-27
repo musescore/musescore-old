@@ -148,13 +148,13 @@ void Marker::layout()
       }
 
 //---------------------------------------------------------
-//   canvasPos
+//   pagePos
 //---------------------------------------------------------
 
-QPointF Marker::canvasPos() const
+QPointF Marker::pagePos() const
       {
       if (parent())
-            return measure()->canvasPos() + pos();
+            return measure()->pagePos() + pos();
       return pos();
       }
 
@@ -237,7 +237,7 @@ void Marker::write(Xml& xml) const
 
 QLineF Marker::dragAnchor() const
       {
-      return QLineF(measure()->canvasPos(), canvasPos());
+      return QLineF(measure()->pagePos(), pagePos());
       }
 
 //---------------------------------------------------------

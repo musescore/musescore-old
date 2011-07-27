@@ -111,7 +111,7 @@ class Page : public Element {
       QList<const Element*> items(const QRectF& r);
       QList<const Element*> items(const QPointF& p);
       void rebuildBspTree() { bspTreeValid = false; }
-      virtual QPointF canvasPos() const { return QPointF(); }     ///< position in page coordinates
+      virtual QPointF pagePos() const { return QPointF(); }     ///< position in page coordinates
       };
 
 extern const PaperSize paperSizes[];

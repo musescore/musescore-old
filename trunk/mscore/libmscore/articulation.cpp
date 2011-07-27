@@ -217,10 +217,10 @@ int Articulation::name2idx(const QString& s)
       }
 
 //---------------------------------------------------------
-//   canvasPos
+//   pagePos
 //---------------------------------------------------------
 
-QPointF Articulation::canvasPos() const
+QPointF Articulation::pagePos() const
       {
       if (parent() == 0 || parent()->parent() == 0)
             return pos();
@@ -233,9 +233,9 @@ QPointF Articulation::canvasPos() const
             if (system == 0)
                   return pos();
             qreal yp = y() + system->staff(staffIdx() + cr->staffMove())->y() + system->y();
-            return QPointF(canvasX(), yp);
+            return QPointF(pageX(), yp);
             }
-      return Element::canvasPos();
+      return Element::pagePos();
       }
 
 //---------------------------------------------------------

@@ -29,22 +29,22 @@ enum SpannerSegmentType {
 //---------------------------------------------------------
 
 class SpannerSegment : public Element {
-
-      virtual bool isEditable() const { return true; }
-
-   protected:
-      System* _system;
+      Spanner* _spanner;
 
    public:
       SpannerSegment(Score* s);
       SpannerSegment(const SpannerSegment&);
       virtual SpannerSegment* clone() const = 0;
-      Spanner* spanner() const                         { return (Spanner*)parent();  }
+      Spanner* spanner() const                         { return _spanner;            }
+      Spanner* setSpanner(Spanner* val)                { return _spanner = val;      }
       void setSpannerSegmentType(SpannerSegmentType s) { setSubtype(s);              }
       SpannerSegmentType spannerSegmentType() const    { return SpannerSegmentType(subtype()); }
-      void setSystem(System* s)                        { _system = s;                }
+      void setSystem(System* s);
+      System* system() const                           { return (System*)parent();   }
+
       virtual void startEdit(MuseScoreView*, const QPointF&);
-      virtual void endEdit()                           { parent()->endEdit(); }
+      virtual void endEdit();
+      virtual bool isEditable() const { return true; }
       };
 
 //---------------------------------------------------------

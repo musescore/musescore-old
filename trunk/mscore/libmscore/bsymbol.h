@@ -44,7 +44,7 @@ class BSymbol : public Element, public ElementLayout {
 
       const QList<Element*>& leafs() const { return _leafs; }
       QList<Element*>& leafs()             { return _leafs; }
-      virtual QPointF canvasPos() const;
+      virtual QPointF pagePos() const;
       Segment* segment() const            { return (Segment*)parent(); }
       virtual int z() const               { return _z; }
       void setZ(int val)                  { _z = val;  }

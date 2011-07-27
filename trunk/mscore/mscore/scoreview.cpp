@@ -1097,8 +1097,17 @@ void ScoreView::updateGrips()
 
       editObject->updateGrips(&grips, grip);
 
-      for (int i = 0; i < grips; ++i)
+      // updateGrips returns grips in page coordinates,
+      // transform to view coordinates:
+
+      Element* page = editObject;
+      while (page->parent())
+            page = page->parent();
+      QPointF pageOffset(page->pos());
+      for (int i = 0; i < grips; ++i) {
+            grip[i].translate(pageOffset);
             score()->addRefresh(grip[i].adjusted(-dx, -dy, dx, dy));
+            }
 
       if (curGrip == -1)
             curGrip = grips-1;
@@ -1122,7 +1131,7 @@ void ScoreView::updateGrips()
 
       QPointF anchor = editObject->gripAnchor(curGrip);
       if (!anchor.isNull())
-            setDropAnchor(QLineF(anchor, grip[curGrip].center()));
+            setDropAnchor(QLineF(anchor + pageOffset, grip[curGrip].center()));
       else
             setDropTarget(0); // this also resets dropAnchor
       score()->addRefresh(editObject->abbox());
@@ -1315,7 +1324,7 @@ void ScoreView::moveCursor(Segment* segment, int track)
             return;
             }
       int idx         = staffIdx == -1 ? 0 : staffIdx;
-      double x        = segment->canvasPos().x();
+      double x        = segment->pagePos().x();
       double y        = system->staffY(idx);
       double _spatium = _cursor->spatium();
 
@@ -1429,7 +1438,7 @@ static void paintElement(void* data, Element* e)
       PainterQt* p = static_cast<PainterQt*>(data);
       p->painter()->save();
       p->painter()->setPen(QPen(e->curColor()));
-      p->painter()->translate(e->canvasPos());
+      p->painter()->translate(e->pagePos());
       e->draw(p);
       p->painter()->restore();
       }
@@ -1650,12 +1659,12 @@ void ScoreView::paint(const QRect& r, QPainter& p)
 
             p.setPen(pen);
             double _spatium = score()->spatium();
-            double x2      = ss->canvasPos().x() - _spatium;
+            double x2      = ss->pagePos().x() - _spatium;
             int staffStart = sel.staffStart();
             int staffEnd   = sel.staffEnd();
 
             System* system2 = ss->measure()->system();
-            QPointF pt      = ss->canvasPos();
+            QPointF pt      = ss->pagePos();
             double y        = pt.y();
             SysStaff* ss1   = system2->staff(staffStart);
             SysStaff* ss2   = system2->staff(staffEnd - 1);
@@ -1672,7 +1681,7 @@ void ScoreView::paint(const QRect& r, QPainter& p)
                   Segment* ns = s->next1();
                   system1  = system2;
                   system2  = s->measure()->system();
-                  pt       = s->canvasPos();
+                  pt       = s->pagePos();
                   x1  = x2;
                   x2  = pt.x() + _spatium * 2;
 
@@ -2603,7 +2612,7 @@ static void drawDebugInfo(QPainter& p, const Element* e)
 
             if (ee->type() == SEGMENT) {
                   qreal w    = 7.0 / p.matrix().m11();
-                  QPointF pt = ee->canvasPos();
+                  QPointF pt = ee->pagePos();
                   p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
                   p.drawLine(QLineF(pt.x()-w, pt.y()-h, pt.x()+w, pt.y()+h));
                   p.drawLine(QLineF(pt.x()+w, pt.y()-h, pt.x()-w, pt.y()+h));
@@ -2626,7 +2635,7 @@ void ScoreView::drawElements(QPainter& p, const QList<const Element*>& el)
                         continue;
                   }
             p.save();
-            QPointF pos(e->canvasPos());
+            QPointF pos(e->pagePos());
             p.translate(pos);
             p.setPen(QPen(e->curColor()));
             e->draw(&painter);
@@ -3749,6 +3758,7 @@ void ScoreView::editInputTransition(QInputMethodEvent* ie)
 void ScoreView::setDropTarget(const Element* el)
       {
       if (dropTarget != el) {
+            QRectF r = dropTarget->abbox();
             if (dropTarget) {
                   dropTarget->setDropTarget(false);
                   _score->addRefresh(dropTarget->abbox());
@@ -3967,7 +3977,7 @@ void ScoreView::adjustCanvasPosition(const Element* el, bool playBack)
 
       System* sys = m->system();
 
-      QPointF p(el->canvasPos());
+      QPointF p(el->pagePos());
       QRectF r(imatrix.mapRect(geometry()));
       QRectF mRect(m->abbox());
       QRectF sysRect(sys->abbox());

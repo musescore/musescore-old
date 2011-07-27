@@ -52,7 +52,7 @@ class LineSegment : public SpannerSegment {
       LineSegment(const LineSegment&);
       virtual LineSegment* clone() const = 0;
       virtual void draw(Painter*) const = 0;
-      SLine* line() const                         { return (SLine*)parent(); }
+      SLine* line() const                         { return (SLine*)spanner(); }
       const QPointF& userOff2() const             { return _userOff2;       }
       void setUserOff2(const QPointF& o)          { _userOff2 = o;          }
       void setUserXoffset2(qreal x)               { _userOff2.setX(x);      }
@@ -60,7 +60,7 @@ class LineSegment : public SpannerSegment {
       QPointF pos2() const                        { return _p2 + _userOff2; }
       virtual void toDefault();
       virtual void spatiumChanged(qreal, qreal);
-      virtual QPointF canvasPos() const;
+      virtual QPointF pagePos() const;
 
       friend class SLine;
       };

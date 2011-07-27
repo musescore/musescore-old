@@ -160,8 +160,8 @@ void Arpeggio::updateGrips(int* grips, QRectF* grip) const
       *grips   = 2;
       QPointF p1(0.0, -_userLen1.val() * _spatium);
       QPointF p2(0.0, _height + _userLen2.val() * _spatium);
-      grip[0].translate(canvasPos() + p1);
-      grip[1].translate(canvasPos() + p2);
+      grip[0].translate(pagePos() + p1);
+      grip[1].translate(pagePos() + p2);
       }
 
 //---------------------------------------------------------
@@ -185,7 +185,7 @@ QLineF Arpeggio::dragAnchor() const
       {
       Chord* c = chord();
       if (c)
-            return QLineF(canvasPos(), c->upNote()->canvasPos());
+            return QLineF(pagePos(), c->upNote()->pagePos());
       return QLineF();
       }
 
@@ -199,14 +199,14 @@ QPointF Arpeggio::gripAnchor(int n) const
       if (c == 0)
             return QPointF();
       if (n == 0)
-            return c->upNote()->canvasPos();
+            return c->upNote()->pagePos();
       else if (n == 1) {
             Note* dnote = c->downNote();
             int btrack  = track() + (_span - 1) * VOICES;
             ChordRest* bchord = static_cast<ChordRest*>(c->segment()->element(btrack));
             if (bchord && bchord->type() == CHORD)
                   dnote = static_cast<Chord*>(bchord)->downNote();
-            return dnote->canvasPos();
+            return dnote->pagePos();
             }
       return QPointF();
       }

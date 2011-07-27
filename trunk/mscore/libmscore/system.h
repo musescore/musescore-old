@@ -32,6 +32,7 @@ class Segment;
 class MeasureBase;
 class Text;
 class InstrumentName;
+class SpannerSegment;
 
 //---------------------------------------------------------
 //   SysStaff
@@ -89,6 +90,8 @@ class System : public Element {
       bool _firstSystem;      ///< used to decide between long and short instrument
                               ///< names; set by score()->doLayout()
 
+      QList<SpannerSegment*> _spannerSegments;
+
       bool _vbox;             ///< contains only one VBox in ml
 
       void setDistanceUp(int n, Spatium v)   { _staves[n]->setDistanceUp(v); }
@@ -142,7 +145,7 @@ class System : public Element {
       MeasureBase* prevMeasure(const MeasureBase*) const;
       MeasureBase* nextMeasure(const MeasureBase*) const;
 
-      qreal leftMargin() const   { return _leftMargin; }
+      qreal leftMargin() const    { return _leftMargin; }
       void setFirstSystem(bool v) { _firstSystem = v;   }
       bool isVbox() const         { return _vbox;       }
       void setVbox(bool v)        { _vbox = v;          }

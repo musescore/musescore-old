@@ -45,9 +45,9 @@ LineSegment::LineSegment(const LineSegment& s)
 void LineSegment::updateGrips(int* grips, QRectF* grip) const
       {
       *grips = 2;
-      QPointF pp2(_p2 + _userOff2 + canvasPos());
+      QPointF pp2(_p2 + _userOff2 + pagePos());
       grip[1].translate(pp2);
-      grip[0].translate(canvasPos());
+      grip[0].translate(pagePos());
       }
 
 //---------------------------------------------------------
@@ -59,12 +59,12 @@ void LineSegment::setGrip(int grip, const QPointF& p)
       QPointF pt(p * spatium());
 
       if (grip == 0) {
-            QPointF delta = pt - (canvasPos() - gripAnchor(grip));
+            QPointF delta = pt - (pagePos() - gripAnchor(grip));
             setUserOff(userOff() + delta);
             _userOff2 -= delta;
             }
       else {
-            setUserOff2(pt - canvasPos() - _p2 + gripAnchor(grip));
+            setUserOff2(pt - pagePos() - _p2 + gripAnchor(grip));
             }
       layout();
       }
@@ -77,18 +77,18 @@ QPointF LineSegment::getGrip(int grip) const
       {
       QPointF pt;
       if (grip == 0)
-            pt = canvasPos() - gripAnchor(grip);
+            pt = pagePos() - gripAnchor(grip);
       else
-            pt = _p2 + _userOff2 + canvasPos() - gripAnchor(grip);
+            pt = _p2 + _userOff2 + pagePos() - gripAnchor(grip);
       return pt / spatium();
       }
 
 //---------------------------------------------------------
-//   canvasPos
+//   pagePos
 //    return position in canvas coordinates
 //---------------------------------------------------------
 
-QPointF LineSegment::canvasPos() const
+QPointF LineSegment::pagePos() const
       {
       return pos() + parent()->pos();
       }
@@ -100,17 +100,18 @@ QPointF LineSegment::canvasPos() const
 QPointF LineSegment::gripAnchor(int grip) const
       {
       if (spannerSegmentType() == SEGMENT_MIDDLE) {
-            qreal y = _system->staffY(staffIdx());
+            qreal y = system()->staffY(staffIdx());
             qreal x;
             if (grip == 0)
-                  x = _system->firstMeasure()->abbox().left();
+                  x = system()->firstMeasure()->abbox().left();
             else
-                  x = _system->lastMeasure()->abbox().right();
+                  x = system()->lastMeasure()->abbox().right();
             return QPointF(x, y);
             }
       else {
-            System* s;  // dummy
-            return line()->tick2pos(grip, &s);
+            System* s;
+            QPointF pt(line()->tick2pos(grip, &s));
+            return pt + s->pagePos();
             }
       }
 
@@ -322,6 +323,7 @@ SLine::SLine(const SLine& s)
 
 //---------------------------------------------------------
 //   tick2pos
+//    return System() coordinates
 //---------------------------------------------------------
 
 QPointF SLine::tick2pos(int grip, System** sys)
@@ -330,7 +332,7 @@ QPointF SLine::tick2pos(int grip, System** sys)
       Measure* m   = seg->measure();
       *sys         = m->system();
 
-      qreal x = seg->canvasPos().x();
+      qreal x = seg->pos().x() + m->pos().x();
 
       if (anchor() == ANCHOR_SEGMENT) {
             if ((grip == 1)
@@ -339,13 +341,13 @@ QPointF SLine::tick2pos(int grip, System** sys)
                   m = m->prevMeasure();
                   if (m) {
                         *sys = m->system();
-                        x = m->abbox().right();
+                        x = m->bbox().right();
                         }
                   }
             }
       else {
             // anchor() == MEASURE
-            x = m->canvasPos().x();
+            x = m->pagePos().x();
             if (m->tick() < seg->tick()) {      // to end of last measure?
                   x += m->bbox().width();
                   }
@@ -357,7 +359,7 @@ QPointF SLine::tick2pos(int grip, System** sys)
                         }
                   }
             }
-      qreal y = (*sys)->staffY(staffIdx());
+      qreal y = (*sys)->staff(staffIdx())->y();
       return QPointF(x, y);
       }
 
@@ -438,9 +440,11 @@ void SLine::layout()
                   continue;
             LineSegment* seg = segmentAt(segIdx++);
             seg->setSystem(system);
-            qreal x1 = system->firstMeasure()->first(SegChordRest)->canvasPos().x();
-            qreal x2 = system->abbox().right();
-            qreal y  = system->staffY(si);
+
+            Measure* m = system->firstMeasure();
+            qreal x1 = m->first(SegChordRest)->pos().x() + m->pos().x();
+            qreal x2 = system->bbox().right();
+            qreal y  = system->staff(si)->y();
 
             if (sysIdx1 == sysIdx2) {
                   // single segment

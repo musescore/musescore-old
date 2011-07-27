@@ -104,7 +104,7 @@ static QScriptValue prototype_Measure_call(QScriptContext* context, QScriptEngin
             case 3:     // "pos"
                   if (context->argumentCount() == 0){
                         Page* page = (Page*)measure->parent()->parent();
-                        QPointF pos(measure->canvasPos().x() - page->canvasPos().x(),  measure->canvasPos().y());
+                        QPointF pos(measure->pagePos().x() - page->pagePos().x(),  measure->pagePos().y());
                         return qScriptValueFromValue(context->engine(), pos);
                         }
                   break;

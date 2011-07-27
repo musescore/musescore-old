@@ -137,7 +137,7 @@ void Spacer::updateGrips(int* grips, QRectF* grip) const
             p = QPointF(_spatium * .5, _space.val() * _spatium);
       else if (subtype() == SPACER_UP)
             p = QPointF(_spatium * .5, 0.0);
-      grip[0].translate(canvasPos() + p);
+      grip[0].translate(pagePos() + p);
       }
 
 //---------------------------------------------------------

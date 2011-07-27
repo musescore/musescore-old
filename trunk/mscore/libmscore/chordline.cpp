@@ -235,7 +235,7 @@ void ChordLine::updateGrips(int* grips, QRectF* grip) const
       {
       int n = path.elementCount();
       *grips = n;
-      QPointF cp(canvasPos());
+      QPointF cp(pagePos());
       qreal sp = spatium();
       for (int i = 0; i < n; ++i)
             grip[i].translate(cp + QPointF(path.elementAt(i).x * sp, path.elementAt(i).y * sp));

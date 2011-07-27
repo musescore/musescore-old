@@ -91,16 +91,16 @@ void Clef::add(Element* e, qreal x, qreal y)
       }
 
 //---------------------------------------------------------
-//   canvasPos
+//   pagePos
 //---------------------------------------------------------
 
-QPointF Clef::canvasPos() const
+QPointF Clef::pagePos() const
       {
       if (parent() == 0)
             return pos();
       System* system = segment()->measure()->system();
       qreal yp = y() + system->staff(staffIdx())->y() + system->y();
-      return QPointF(canvasX(), yp);
+      return QPointF(pageX(), yp);
       }
 
 //---------------------------------------------------------

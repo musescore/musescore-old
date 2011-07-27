@@ -173,10 +173,10 @@ void ChordRest::scanElements(void* data, void (*func)(void*, Element*), bool all
       }
 
 //---------------------------------------------------------
-//   canvasPos
+//   pagePos
 //---------------------------------------------------------
 
-QPointF ChordRest::canvasPos() const
+QPointF ChordRest::pagePos() const
       {
       if (parent() == 0)
             return pos();
@@ -184,7 +184,7 @@ QPointF ChordRest::canvasPos() const
       if (system == 0)
             return QPointF();
       qreal yp = y() + system->staff(staffIdx())->y() + system->y();
-      return QPointF(canvasX(), yp);
+      return QPointF(pageX(), yp);
       }
 
 //---------------------------------------------------------

@@ -1276,8 +1276,8 @@ void ExportMusicXml::credits(Xml& xml)
                         }
                   if (mustPrint) printf(" '%s at %f,%f'\n",
                                         text->getText().toUtf8().data(),
-                                        text->canvasPos().x(),
-                                        text->canvasPos().y()
+                                        text->pagePos().x(),
+                                        text->pagePos().y()
                                        );
                   }
             }
@@ -1304,11 +1304,11 @@ void ExportMusicXml::credits(Xml& xml)
             if (element->type() == TEXT) {
                   const Text* text = (const Text*)element;
                   printf("x=%g, y=%g fs=%d\n",
-                         text->canvasPos().x(),
-                         h - text->canvasPos().y(),
+                         text->pagePos().x(),
+                         h - text->pagePos().y(),
                          text->font().pointSize()
                         );
-                  const double ty = h - getTenthsFromDots(text->canvasPos().y());
+                  const double ty = h - getTenthsFromDots(text->pagePos().y());
                   const int fs = text->font().pointSize();
                   switch (text->subtype()) {
                         case TEXT_TITLE:
@@ -2141,10 +2141,10 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
             QString noteTag = QString("note");
 
             if (pf && (!converterMode || score->defaultsRead()) ) {
-                  double measureX = getTenthsFromDots(chord->measure()->canvasPos().x());
-                  double measureY = pageHeight - getTenthsFromDots(chord->measure()->canvasPos().y());
-                  double noteX = getTenthsFromDots(note->canvasPos().x());
-                  double noteY = pageHeight - getTenthsFromDots(note->canvasPos().y());
+                  double measureX = getTenthsFromDots(chord->measure()->pagePos().x());
+                  double measureY = pageHeight - getTenthsFromDots(chord->measure()->pagePos().y());
+                  double noteX = getTenthsFromDots(note->pagePos().x());
+                  double noteY = pageHeight - getTenthsFromDots(note->pagePos().y());
 
                   noteTag += QString(" default-x=\"%1\"").arg(QString::number(noteX - measureX,'f',2));
                   noteTag += QString(" default-y=\"%1\"").arg(QString::number(noteY - measureY,'f',2));
@@ -2550,7 +2550,7 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
                         printf(" x=%g y=%g w=%g h=%g cpx=%g cpy=%g userOff.y=%g\n",
                                seg->x(), seg->y(),
                                seg->width(), seg->height(),
-                               seg->canvasPos().x(), seg->canvasPos().y(),
+                               seg->pagePos().x(), seg->pagePos().y(),
                                seg->userOff().y());
                          }
                   } // if (el->type() == ...
@@ -2583,8 +2583,8 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
 /*
                   printf("directionTag()  syst x=%g y=%g cpx=%g cpy=%g\n",
                          sys->pos().x(),  sys->pos().y(),
-                         sys->canvasPos().x(),
-                         sys->canvasPos().y()
+                         sys->pagePos().x(),
+                         sys->pagePos().y()
                         );
                   printf("directionTag()  staf x=%g y=%g w=%g h=%g\n",
                          bb.x(), bb.y(),
@@ -2599,7 +2599,7 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
                               // for the line type elements the reference point is vertically centered
                               // actual position info is in the segments
                               // compare the segment's canvas ypos with the staff's center height
-                              if (seg->canvasPos().y() < sys->canvasPos().y() + bb.y() + bb.height() / 2)
+                              if (seg->pagePos().y() < sys->pagePos().y() + bb.y() + bb.height() / 2)
                                      tagname += " placement=\"above\"";
                               else
                                      tagname += " placement=\"below\"";
@@ -3831,10 +3831,10 @@ foreach(Element* el, *(score->gel())) {
 
                   if ((irregularMeasureNo + measureNo + pickupMeasureNo) == 4)
                         currentSystem = TopSystem;
-                  else if ((measureNo > 2 && int(m->canvasPos().x() / DPI / pf->width()) != int(previousMeasure->canvasPos().x() / DPI / pf->width())))    // TODO: MeasureBase
+                  else if ((measureNo > 2 && int(m->pagePos().x() / DPI / pf->width()) != int(previousMeasure->pagePos().x() / DPI / pf->width())))    // TODO: MeasureBase
                         currentSystem = NewPage;
                   else if (previousMeasure &&
-                        m->canvasPos().y() > (previousMeasure->canvasPos().y()))  // TODO: MeasureBase
+                        m->pagePos().y() > (previousMeasure->pagePos().y()))  // TODO: MeasureBase
                         currentSystem = NewSystem;
 
                   if (currentSystem != NoSystem) {
@@ -3855,7 +3855,7 @@ foreach(Element* el, *(score->gel())) {
                           // Put the system print suggestions only for the first part in a score...
                           if (idx == 0) {
                               // Find the right margin of the system.
-                              double systemLM = getTenthsFromDots(m->canvasPos().x() - m->system()->page()->canvasPos().x()) - lm;
+                              double systemLM = getTenthsFromDots(m->pagePos().x() - m->system()->page()->pagePos().x()) - lm;
                               double systemRM = pageWidth - rm - (getTenthsFromDots(m->system()->bbox().width()) + lm);
 
                               xml.stag("system-layout");
@@ -3865,9 +3865,9 @@ foreach(Element* el, *(score->gel())) {
                               xml.etag();
 
                               if (currentSystem == NewPage || currentSystem == TopSystem)
-                                  xml.tag("top-system-distance", QString("%1").arg(QString::number(getTenthsFromDots(m->canvasPos().y()) - tm,'f',2)) );
+                                  xml.tag("top-system-distance", QString("%1").arg(QString::number(getTenthsFromDots(m->pagePos().y()) - tm,'f',2)) );
                               else if (currentSystem == NewSystem)
-                                  xml.tag("system-distance", QString("%1").arg(QString::number(getTenthsFromDots(m->canvasPos().y() - previousMeasure->canvasPos().y() - previousMeasure->bbox().height()),'f',2)));
+                                  xml.tag("system-distance", QString("%1").arg(QString::number(getTenthsFromDots(m->pagePos().y() - previousMeasure->pagePos().y() - previousMeasure->bbox().height()),'f',2)));
 
                               xml.etag();
                               }

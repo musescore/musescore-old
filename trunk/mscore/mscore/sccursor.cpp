@@ -289,7 +289,7 @@ static QScriptValue prototype_Cursor_call(QScriptContext* context, QScriptEngine
                   if (context->argumentCount() == 0){
                         if(cursor->segment()){
                               Page* page = (Page*)cursor->segment()->measure()->parent()->parent();
-                              QPointF pos(cursor->segment()->canvasPos().x() - page->canvasPos().x(),  cursor->segment()->canvasPos().y());
+                              QPointF pos(cursor->segment()->pagePos().x() - page->pagePos().x(),  cursor->segment()->pagePos().y());
                               return qScriptValueFromValue(context->engine(), pos);
                             }
                         }

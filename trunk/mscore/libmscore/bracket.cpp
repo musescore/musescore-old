@@ -177,7 +177,7 @@ void Bracket::startEdit(MuseScoreView*, const QPointF&)
 void Bracket::updateGrips(int* grips, QRectF* grip) const
       {
       *grips = 1;
-      grip[0].translate(QPointF(0.0, h2 * 2) + QPointF(0.0, yoff) + canvasPos());
+      grip[0].translate(QPointF(0.0, h2 * 2) + QPointF(0.0, yoff) + pagePos());
       }
 
 //---------------------------------------------------------
@@ -227,7 +227,7 @@ void Bracket::endEditDrag()
       h2 += yoff * .5;
       yoff = 0.0;
 
-      qreal ay1 = canvasPos().y();
+      qreal ay1 = pagePos().y();
       qreal ay2 = ay1 + h2 * 2;
 
       int staffIdx1 = staffIdx();
@@ -236,7 +236,7 @@ void Bracket::endEditDrag()
       if (staffIdx1 + 1 >= n)
             staffIdx2 = staffIdx1;
       else {
-            qreal ay  = parent()->canvasPos().y();
+            qreal ay  = parent()->pagePos().y();
             System* s = system();
             qreal y   = s->staff(staffIdx1)->y() + ay;
             qreal h1  = staff()->height();

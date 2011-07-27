@@ -1147,7 +1147,7 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
                         return;
                         }
                   s->setPos(0.0, 0.0);
-                  s->setUserOff(pos - m->canvasPos() - off);
+                  s->setUserOff(pos - m->pagePos() - off);
                   s->setTrack(0);
                   s->setParent(m);
                   foundPage = true;
@@ -1191,7 +1191,7 @@ void Score::deleteItem(Element* el)
             case TEXTLINE_SEGMENT:
             case VOLTA_SEGMENT:
             case SLUR_SEGMENT:
-                  undoRemoveElement(el->parent());
+                  undoRemoveElement(static_cast<SpannerSegment*>(el)->spanner());
                   break;
 
             case NOTE:
