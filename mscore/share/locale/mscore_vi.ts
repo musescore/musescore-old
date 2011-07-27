@@ -23,10 +23,10 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }&#13;
 &lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;&#13;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Đến thăm trang nhà &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; để tìm phiên bản mới và tìm thêm tin tức.&lt;/span&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Hổ trợ MuseScore với &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;tiền tặng của bạn&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Hổ trợ MuseScore với &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;khả năng tài chánh của bạn&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer và những người khác. &lt;/span&gt;&lt;/p&gt;line break&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Xuất bản dưới license của GNU General Public&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Giữ bản quyền: &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2011 Werner Schweer và những người khác. &lt;/span&gt;&lt;/p&gt;line break&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Xuất bản dưới môn bài của GNU General Public&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -157,7 +157,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>ChordEdit</name>
     <message>
         <source>MuseScore: Harmony Properties</source>
-        <translation>MuseScore: Đặc tính của Harmony</translation>
+        <translation>MuseScore: Đặc tính của hòa âm</translation>
     </message>
     <message>
         <source>TextLabel</source>
@@ -193,7 +193,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>(no accidental)</source>
-        <translation>(không có accidental)</translation>
+        <translation>(không có dấu hóa)</translation>
     </message>
     <message>
         <source>A</source>
@@ -741,7 +741,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Degrees</source>
-        <translation>Degrees</translation>
+        <translation>Độ</translation>
     </message>
     <message>
         <source>Add</source>
@@ -856,7 +856,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>additional trailing space</source>
-        <translation>additional trailing space</translation>
+        <translation>khoảng cách của đường vệt thêm</translation>
     </message>
     <message>
         <source>Note Properties</source>
@@ -1054,7 +1054,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Chord Description File:</source>
-        <translation>Chord Description File:</translation>
+        <translation>Chú thích về tài liệu của hợp âm:</translation>
     </message>
     <message>
         <source>...</source>
@@ -1074,7 +1074,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>MuseScore: Chord Style Editor</source>
-        <translation>MuseScore: Chord Style Editor</translation>
+        <translation>MuseScore: Điều chỉnh thể cách của hợp âm</translation>
     </message>
 </context>
 <context>
@@ -1209,7 +1209,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Staff Line:</source>
-        <translation>Staff Line:</translation>
+        <translation>Đường kẻ của khuông nhạc:</translation>
     </message>
     <message>
         <source>Stem Direction:</source>
@@ -1557,7 +1557,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Numbers</source>
-        <translation>Numbers</translation>
+        <translation>Số</translation>
     </message>
     <message>
         <source>Beams</source>
@@ -1610,7 +1610,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create clef for all systems</source>
-        <translation>Tạo ra khóa âm nhạc cho tất cả dòng nhạc</translation>
+        <translation>Tạo ra khóa nhạc cho tất cả dòng nhạc</translation>
     </message>
     <message>
         <source>Create time signatures</source>
@@ -1626,7 +1626,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>spaces</source>
-        <translation>spaces</translation>
+        <translation>khoảng cách</translation>
     </message>
     <message>
         <source>Page Numbers</source>
@@ -1678,7 +1678,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Articulations, Ornaments</source>
-        <translation>Phụ âm, Nét hoa mỹ</translation>
+        <translation>Phụ âm; Nét hoa mỹ</translation>
     </message>
     <message>
         <source>Voices</source>
@@ -1763,19 +1763,19 @@ space unit</extracomment>
     </message>
     <message>
         <source>Music upper margin</source>
-        <translation>Music upper margin</translation>
+        <translation>Mép trên của nhạc</translation>
     </message>
     <message>
         <source>Music lower margin</source>
-        <translation>Music lower margin</translation>
+        <translation>Mép dưới của nhạc</translation>
     </message>
     <message>
         <source>Staff distance</source>
-        <translation>Staff distance</translation>
+        <translation>Khoảng cách của khuông nhạc</translation>
     </message>
     <message>
         <source>Akkolade distance</source>
-        <translation>Akkolade distance</translation>
+        <translation>Khoảng cách của Akkolade</translation>
     </message>
     <message>
         <source>System distance</source>
@@ -1791,15 +1791,15 @@ space unit</extracomment>
     </message>
     <message>
         <source>V-frame upper margin</source>
-        <translation>V-frame upper margin</translation>
+        <translation>Mép trên của V-frame</translation>
     </message>
     <message>
         <source>V-frame lower margin</source>
-        <translation>V-frame lower margin</translation>
+        <translation>M'p dưới của V-frame</translation>
     </message>
     <message>
         <source>Spacing (1=tight)</source>
-        <translation>Spacing (1=tight)</translation>
+        <translation>Khoảng cách (1=tight)</translation>
     </message>
     <message>
         <source>Left margin</source>
@@ -1815,7 +1815,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Clef left margin</source>
-        <translation>Clef left margin</translation>
+        <translation>Mép trái của khóa nhạc</translation>
     </message>
     <message>
         <source>Key sig. left margin</source>
@@ -1851,11 +1851,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Accidental note distance</source>
-        <translation>Accidental note distance</translation>
+        <translation>Khoảng cách nốt dấu hóa</translation>
     </message>
     <message>
         <source>Accidental distance</source>
-        <translation>Accidental distance</translation>
+        <translation>Khoảng cách của dấu hóa</translation>
     </message>
     <message>
         <source>Note dot distance</source>
@@ -2109,7 +2109,7 @@ space unit</extracomment>
     <name>Harmony</name>
     <message>
         <source>Harmony Properties...</source>
-        <translation>Đặc tính của Harmony...</translation>
+        <translation>Đặc tính của hòa âm...</translation>
     </message>
     <message>
         <source>Text Properties...</source>
@@ -2336,7 +2336,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Clef</source>
-        <translation>Clef</translation>
+        <translation>Khóa nhạc</translation>
     </message>
     <message>
         <source>Instrument List</source>
@@ -2509,7 +2509,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Line style:</source>
-        <translation>Line style:</translation>
+        <translation>Thẻ loại của đường kẻ:</translation>
     </message>
     <message>
         <source>solid</source>
@@ -3484,7 +3484,7 @@ Trong danh bạ "Giúp đỡ", chọn "Sách hướng dẫn trên mạng".</tran
     </message>
     <message>
         <source>Trill line</source>
-        <translation>Trill line</translation>
+        <translation>Đường kẻ cho dấu rung (láy)</translation>
     </message>
     <message>
         <source>Text line</source>
@@ -3492,7 +3492,7 @@ Trong danh bạ "Giúp đỡ", chọn "Sách hướng dẫn trên mạng".</tran
     </message>
     <message>
         <source>Line</source>
-        <translation>Line</translation>
+        <translation>Đường kẻ</translation>
     </message>
     <message>
         <source>Arpeggio &amp;&amp; Glissando</source>
@@ -3544,7 +3544,7 @@ Trong danh bạ "Giúp đỡ", chọn "Sách hướng dẫn trên mạng".</tran
     </message>
     <message>
         <source>Line break</source>
-        <translation>Line đổi giọng</translation>
+        <translation>Đường kẻ đổi giọng</translation>
     </message>
     <message>
         <source>Page break</source>
@@ -4773,7 +4773,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>tr (Trill)</source>
-        <translation>tr (Trill)</translation>
+        <translation>tr (dấu rung)</translation>
     </message>
 </context>
 <context>
@@ -6655,7 +6655,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Download free sheet music</source>
-        <translation>Chuyển về sheet music miễn phí</translation>
+        <translation>Chuyển về bản nhạc rời miễn phí</translation>
     </message>
     <message>
         <source>Start</source>
@@ -6770,11 +6770,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation>sori</translation>
     </message>
     <message>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation>koron</translation>
     </message>
 </context>
 <context>
@@ -6801,7 +6801,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Reload</source>
-        <translation>Làm mới lại dữ liệu trên màn ảnh</translation>
+        <translation>Điều chỉnh dữ liệu trên màn ảnh mới lại</translation>
     </message>
     <message>
         <source>Close</source>
@@ -7713,11 +7713,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>violin clef</source>
-        <translation>violin clef</translation>
+        <translation>khóa nhạc cho vĩ cầm</translation>
     </message>
     <message>
         <source>bass clef</source>
-        <translation>bass clef</translation>
+        <translation>khóa nhạc cho bass</translation>
     </message>
     <message>
         <source>Exchange Voice 1-2</source>
@@ -8137,11 +8137,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add trill</source>
-        <translation>Add trill</translation>
+        <translation>Thêm vào dấu rung (láy)</translation>
     </message>
     <message>
         <source>Trill</source>
-        <translation>Trill</translation>
+        <translation>Dấu rung (láy)</translation>
     </message>
     <message>
         <source>More stretch</source>
@@ -8464,7 +8464,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>trill</source>
-        <translation>trill</translation>
+        <translation>dấu rung (láy)</translation>
     </message>
     <message>
         <source>prall</source>
@@ -8543,71 +8543,71 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Treble clef</source>
-        <translation>Treble clef</translation>
+        <translation>Khóa nhạc cho Treble</translation>
     </message>
     <message>
         <source>Treble clef 8va</source>
-        <translation>Treble clef 8va</translation>
+        <translation>Khoá nhạc cho Treble 8va</translation>
     </message>
     <message>
         <source>Treble clef 15ma</source>
-        <translation>Treble clef 15ma</translation>
+        <translation>Khoá nhạc cho Treble 15ma</translation>
     </message>
     <message>
         <source>Treble clef 8vb</source>
-        <translation>Treble clef 8vb</translation>
+        <translation>Khoá nhạc cho Treble 8vb</translation>
     </message>
     <message>
         <source>Bass clef</source>
-        <translation>Bass clef</translation>
+        <translation>Khoá nhạc cho Bass</translation>
     </message>
     <message>
         <source>Bass clef 8vb</source>
-        <translation>Bass clef 8vb</translation>
+        <translation>Khoá nhạc cho Bass 8vb</translation>
     </message>
     <message>
         <source>Bass clef 15mb</source>
-        <translation>Bass clef 15mb</translation>
+        <translation>Khoá nhạc cho Bass 15mb</translation>
     </message>
     <message>
         <source>Baritone clef (C clef)</source>
-        <translation>Baritone clef (C clef)</translation>
+        <translation>Khoá nhạc cho Baritone (khóa C)</translation>
     </message>
     <message>
         <source>Subbass clef</source>
-        <translation>Subbass clef</translation>
+        <translation>Khoác nhạc cho Subbass</translation>
     </message>
     <message>
         <source>Soprano clef</source>
-        <translation>Soprano clef</translation>
+        <translation>Khoá nhạc cho Soprano</translation>
     </message>
     <message>
         <source>Mezzo-soprano clef</source>
-        <translation>Mezzo-soprano clef</translation>
+        <translation>Khoá nhạc cho Mezzo-soprano</translation>
     </message>
     <message>
         <source>Alto clef</source>
-        <translation>Alto clef</translation>
+        <translation>Khoá nhạc cho Alto</translation>
     </message>
     <message>
         <source>Tenor clef</source>
-        <translation>Tenor clef</translation>
+        <translation>Khoá nhạc cho Tenor</translation>
     </message>
     <message>
         <source>Baritone clef (F clef)</source>
-        <translation>Baritone clef (F clef)</translation>
+        <translation>Khoá nhạc cho Baritone (khóa F)</translation>
     </message>
     <message>
         <source>French violin clef</source>
-        <translation>French violin clef</translation>
+        <translation>Khoá nhạc cho vĩ cầm Pháp</translation>
     </message>
     <message>
         <source>Bass clef 8va</source>
-        <translation>Bass clef 8va</translation>
+        <translation>Khoá nhạc cho Bass 8va</translation>
     </message>
     <message>
         <source>Bass clef 15ma</source>
-        <translation>Bass clef 15ma</translation>
+        <translation>Khoá nhạc cho Bass 15ma</translation>
     </message>
 </context>
 <context>
@@ -8733,7 +8733,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Accidental</source>
-        <translation>Accidental</translation>
+        <translation>Dấu hóa</translation>
     </message>
     <message>
         <source>Note</source>
@@ -8821,7 +8821,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Harmony</source>
-        <translation>Harmony</translation>
+        <translation>Hòa âm</translation>
     </message>
     <message>
         <source>Volta</source>
@@ -8913,7 +8913,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Trill</source>
-        <translation>Trill</translation>
+        <translation>Dấu rung (láy)</translation>
     </message>
     <message>
         <source>TextLine</source>
@@ -8977,7 +8977,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>AccidentalBracket</source>
-        <translation>AccidentalBracket</translation>
+        <translation>Móc ngoặc cho dấu hóa</translation>
     </message>
 </context>
 <context>
@@ -9098,15 +9098,15 @@ Phiên bản MuseCrore của bạn quá cũ.</translation>
     <name>symbol</name>
     <message>
         <source>clef eight</source>
-        <translation>clef tám</translation>
+        <translation>Khoá nhạc tám</translation>
     </message>
     <message>
         <source>clef one</source>
-        <translation>clef một</translation>
+        <translation>Khoá nhạc một</translation>
     </message>
     <message>
         <source>clef five</source>
-        <translation>clef năm</translation>
+        <translation>Khoá nhạc năm</translation>
     </message>
     <message>
         <source>f</source>
@@ -9618,7 +9618,7 @@ Phiên bản MuseCrore của bạn quá cũ.</translation>
     </message>
     <message>
         <source>trill</source>
-        <translation>trill</translation>
+        <translation>dấu rung (láy)</translation>
     </message>
     <message>
         <source>upedal heel</source>
@@ -9782,19 +9782,19 @@ Phiên bản MuseCrore của bạn quá cũ.</translation>
     </message>
     <message>
         <source>alto clef</source>
-        <translation>Khóa nhạc alto</translation>
+        <translation>Khóa nhạc cho alto</translation>
     </message>
     <message>
         <source>calto clef</source>
-        <translation>Khóa nhạc calto</translation>
+        <translation>Khóa nhạc cho calto</translation>
     </message>
     <message>
         <source>bass clef</source>
-        <translation>Khóa nhạc bass</translation>
+        <translation>Khóa nhạc cho bass</translation>
     </message>
     <message>
         <source>cbass clef</source>
-        <translation>chà khóa cbass</translation>
+        <translation>Khoá nhạc cho cbass</translation>
     </message>
     <message>
         <source>trebleclef</source>
@@ -9982,11 +9982,11 @@ Phiên bản MuseCrore của bạn quá cũ.</translation>
     </message>
     <message>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation>sori</translation>
     </message>
     <message>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation>koron</translation>
     </message>
 </context>
 </TS>

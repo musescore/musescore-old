@@ -34,7 +34,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>AboutBoxDialog</name>
     <message>
         <source>Unstable Prerelease for Version: </source>
-        <translation>这是一个不稳定的开发版本： </translation>
+        <translation>这不是一个稳定的开发版本： </translation>
     </message>
     <message>
         <source>Version: </source>
@@ -8382,11 +8382,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>next score</source>
-        <translation type="unfinished"/>
+        <translation>下个乐谱</translation>
     </message>
     <message>
         <source>previous score</source>
-        <translation type="unfinished"/>
+        <translation>前个乐谱</translation>
     </message>
 </context>
 <context>
@@ -9005,7 +9005,7 @@ p, li { white-space: pre-wrap; }
     <name>noteheadnames</name>
     <message>
         <source>normal</source>
-        <translation type="unfinished">标准</translation>
+        <translation>普通</translation>
     </message>
     <message>
         <source>cross</source>
@@ -9013,11 +9013,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished">菱形</translation>
+        <translation>菱形</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished">三角形</translation>
+        <translation>三角形</translation>
     </message>
     <message>
         <source>mi</source>

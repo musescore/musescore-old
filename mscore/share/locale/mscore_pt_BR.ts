@@ -1021,11 +1021,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>sol</translation>
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation>alt. brevis</translation>
     </message>
 </context>
 <context>
@@ -3694,19 +3694,19 @@ Incompatível com a atual interface</translation>
     <name>MyWebView</name>
     <message>
         <source>Could not&lt;br /&gt; connect</source>
-        <translation type="unfinished"/>
+        <translation>Não foi possível&lt;br /&gt; conectar</translation>
     </message>
     <message>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
-        <translation type="unfinished"/>
+        <translation>Para se conectar com a comunidade, &lt;br /&gt; você precisa ter uma conexão &lt;br /&gt; com a Internet habilitada</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished"/>
+        <translation>Tentar de novo</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Fechar isso permanentemente</translation>
     </message>
 </context>
 <context>
@@ -4743,15 +4743,15 @@ Incompatível com a atual interface</translation>
     </message>
     <message>
         <source>Show Play Panel</source>
-        <translation type="unfinished"/>
+        <translation>Exibir Painel de Reprodução</translation>
     </message>
     <message>
         <source>Show Navigator</source>
-        <translation type="unfinished"/>
+        <translation>Exibir Navegador</translation>
     </message>
     <message>
         <source>Show MuseScore Connect</source>
-        <translation type="unfinished"/>
+        <translation>Exibir MuseScore Connect</translation>
     </message>
 </context>
 <context>
@@ -5866,7 +5866,7 @@ e verifique se a localização do arquivo está correta</translation>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation type="unfinished">Propriedades da Pauta...</translation>
+        <translation>Propriedades da Pauta</translation>
     </message>
 </context>
 <context>
@@ -6640,31 +6640,31 @@ p, li { white-space: pre-wrap; }
     <name>WebPageDockWidget</name>
     <message>
         <source>Connect with the &lt;br /&gt; Community</source>
-        <translation type="unfinished"/>
+        <translation>Conectar com a &lt;br /&gt; Comunidade</translation>
     </message>
     <message>
         <source>Find help</source>
-        <translation type="unfinished"/>
+        <translation>Encontrar ajuda</translation>
     </message>
     <message>
         <source>Improve your skills</source>
-        <translation type="unfinished"/>
+        <translation>Melhorar suas habilidades</translation>
     </message>
     <message>
         <source>Read the latest news</source>
-        <translation type="unfinished"/>
+        <translation>Ler as últimas novidades</translation>
     </message>
     <message>
         <source>Download free sheet music</source>
-        <translation type="unfinished"/>
+        <translation>Baixar partituras gratuitamente</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation>Iniciar</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Fechar isso permanentemente</translation>
     </message>
 </context>
 <context>
@@ -6771,11 +6771,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation>sori</translation>
     </message>
     <message>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation>koron</translation>
     </message>
 </context>
 <context>
@@ -8382,11 +8382,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>next score</source>
-        <translation type="unfinished"/>
+        <translation>partitura seguinte</translation>
     </message>
     <message>
         <source>previous score</source>
-        <translation type="unfinished"/>
+        <translation>partitura anterior</translation>
     </message>
 </context>
 <context>
@@ -9000,59 +9000,59 @@ p, li { white-space: pre-wrap; }
     <name>noteheadnames</name>
     <message>
         <source>normal</source>
-        <translation type="unfinished">normal</translation>
+        <translation>normal</translation>
     </message>
     <message>
         <source>cross</source>
-        <translation type="unfinished">cruz</translation>
+        <translation>cruz</translation>
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished">losango</translation>
+        <translation>diamante</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished">triângulo</translation>
+        <translation>triângulo</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished">mi</translation>
+        <translation>mi</translation>
     </message>
     <message>
         <source>slash</source>
-        <translation type="unfinished">diagonal</translation>
+        <translation>diagonal</translation>
     </message>
     <message>
         <source>xcircle</source>
-        <translation type="unfinished">cruz-círculo</translation>
+        <translation>cruz-círculo</translation>
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished">dó</translation>
+        <translation>dó</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished">ré</translation>
+        <translation>ré</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished">fá</translation>
+        <translation>fá</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished">lá</translation>
+        <translation>lá</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished">si</translation>
+        <translation>ti</translation>
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>sol</translation>
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation>alt. brevis</translation>
     </message>
 </context>
 <context>
@@ -9943,51 +9943,51 @@ sua versão do MuseScore é muito antiga.</translation>
     </message>
     <message>
         <source>s0sol head</source>
-        <translation type="unfinished"/>
+        <translation>cabeça s0sol</translation>
     </message>
     <message>
         <source>s1sol head</source>
-        <translation type="unfinished"/>
+        <translation>cabeça s1sol</translation>
     </message>
     <message>
         <source>s2sol head</source>
-        <translation type="unfinished"/>
+        <translation>cabeça s2sol</translation>
     </message>
     <message>
         <source>longa up alt</source>
-        <translation type="unfinished"/>
+        <translation>longa para cima alt</translation>
     </message>
     <message>
         <source>longa down alt</source>
-        <translation type="unfinished"/>
+        <translation>longa para baixo alt</translation>
     </message>
     <message>
         <source>brevis head alt</source>
-        <translation type="unfinished"/>
+        <translation>Breve alt</translation>
     </message>
     <message>
         <source>time sig C dot</source>
-        <translation type="unfinished"/>
+        <translation>compasso C-ponto</translation>
     </message>
     <message>
         <source>time sig O</source>
-        <translation type="unfinished"/>
+        <translation>Compasso O</translation>
     </message>
     <message>
         <source>time sig O cut</source>
-        <translation type="unfinished"/>
+        <translation>compasso O cortado</translation>
     </message>
     <message>
         <source>time sig O dot</source>
-        <translation type="unfinished"/>
+        <translation>compasso O-ponto</translation>
     </message>
     <message>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation>sori</translation>
     </message>
     <message>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation>koron</translation>
     </message>
 </context>
 </TS>

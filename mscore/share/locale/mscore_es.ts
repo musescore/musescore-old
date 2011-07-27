@@ -25,7 +25,7 @@ p, li { white-space: pre-wrap; }
     <name>AboutBoxDialog</name>
     <message>
         <source>Unstable Prerelease for Version: </source>
-        <translation>Prelanzamiento Inestable de la Versión: </translation>
+        <translation>Versiones preliminares de la versión inestable: </translation>
     </message>
     <message>
         <source>Version: </source>
@@ -3690,7 +3690,7 @@ no es compatible con el interfaz actual</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished"/>
+        <translation>Reintentar</translation>
     </message>
     <message>
         <source>Close this permanently</source>
@@ -4739,7 +4739,7 @@ no es compatible con el interfaz actual</translation>
     </message>
     <message>
         <source>Show MuseScore Connect</source>
-        <translation type="unfinished"/>
+        <translation>Mostrar MuseScore Connect</translation>
     </message>
 </context>
 <context>
@@ -5226,7 +5226,7 @@ Intenta guardarlo en una localización distinta</translation>
     </message>
     <message>
         <source>Drumroll Editor...</source>
-        <translation type="unfinished"/>
+        <translation>Editor de trémolo</translation>
     </message>
     <message>
         <source>Pianoroll Editor...</source>
@@ -6625,7 +6625,7 @@ p, li { white-space: pre-wrap; }
     <name>WebPageDockWidget</name>
     <message>
         <source>Connect with the &lt;br /&gt; Community</source>
-        <translation type="unfinished"/>
+        <translation>Conectar con la &lt;br /&gt; Comunidad</translation>
     </message>
     <message>
         <source>Find help</source>
@@ -6633,7 +6633,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Improve your skills</source>
-        <translation type="unfinished"/>
+        <translation>Mejorar sus habilidades</translation>
     </message>
     <message>
         <source>Read the latest news</source>
@@ -6756,11 +6756,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation>sori</translation>
     </message>
     <message>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation>koron</translation>
     </message>
 </context>
 <context>
@@ -9968,11 +9968,11 @@ Su versión de MuseScore es muy antigua</translation>
     </message>
     <message>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation>sori</translation>
     </message>
     <message>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation>koron</translation>
     </message>
 </context>
 </TS>

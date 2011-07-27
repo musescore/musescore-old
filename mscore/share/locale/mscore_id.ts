@@ -56,7 +56,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>Articulation</name>
     <message>
         <source>Articulation Properties...</source>
-        <translation>Artikulasi Properti</translation>
+        <translation>Properti Artikulasi</translation>
     </message>
 </context>
 <context>

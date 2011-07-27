@@ -1021,11 +1021,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>sol</translation>
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation>alt. brevis</translation>
     </message>
 </context>
 <context>
@@ -3692,19 +3692,19 @@ není slučitelný se současným rozhraním</translation>
     <name>MyWebView</name>
     <message>
         <source>Could not&lt;br /&gt; connect</source>
-        <translation type="unfinished"/>
+        <translation>Nepodařilo se&lt;br /&gt; spojit</translation>
     </message>
     <message>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
-        <translation type="unfinished"/>
+        <translation>Pro spojení se společenstvím &lt;br /&gt;potřebujete mít povoleno internetové spojení&lt;br /&gt;</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished"/>
+        <translation>Zkusit ještě jednou</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Zavřít toto trvale</translation>
     </message>
 </context>
 <context>
@@ -4742,15 +4742,15 @@ v pixelech (vyšší hodnota rovná se větší poloměr)</translation>
     </message>
     <message>
         <source>Show Play Panel</source>
-        <translation type="unfinished"/>
+        <translation>Ukázat panel pro přehrávání</translation>
     </message>
     <message>
         <source>Show Navigator</source>
-        <translation type="unfinished"/>
+        <translation>Ukázat navigátora</translation>
     </message>
     <message>
         <source>Show MuseScore Connect</source>
-        <translation type="unfinished"/>
+        <translation>Ukázat spojení MuseScore</translation>
     </message>
 </context>
 <context>
@@ -5866,7 +5866,7 @@ a zaškrtněte, že umístění souboru je správné</translation>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation type="unfinished">Vlastnosti osnovy...</translation>
+        <translation>Vlastnosti osnovy...</translation>
     </message>
 </context>
 <context>
@@ -6640,31 +6640,31 @@ p, li { white-space: pre-wrap; }
     <name>WebPageDockWidget</name>
     <message>
         <source>Connect with the &lt;br /&gt; Community</source>
-        <translation type="unfinished"/>
+        <translation>Spojit se se &lt;br /&gt;společenstvím</translation>
     </message>
     <message>
         <source>Find help</source>
-        <translation type="unfinished"/>
+        <translation>Najít nápovědu</translation>
     </message>
     <message>
         <source>Improve your skills</source>
-        <translation type="unfinished"/>
+        <translation>Zlepšit své dovednosti</translation>
     </message>
     <message>
         <source>Read the latest news</source>
-        <translation type="unfinished"/>
+        <translation>Číst poslední zprávy</translation>
     </message>
     <message>
         <source>Download free sheet music</source>
-        <translation type="unfinished"/>
+        <translation>Stáhnout notové listy zdarma</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation>Spustit</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Zavřít toto trvale</translation>
     </message>
 </context>
 <context>
@@ -6771,11 +6771,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation>sori</translation>
     </message>
     <message>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation>koron</translation>
     </message>
 </context>
 <context>
@@ -8382,11 +8382,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>next score</source>
-        <translation type="unfinished"/>
+        <translation>další notový zápis</translation>
     </message>
     <message>
         <source>previous score</source>
-        <translation type="unfinished"/>
+        <translation>předchozí notový zápis</translation>
     </message>
 </context>
 <context>
@@ -9000,59 +9000,59 @@ p, li { white-space: pre-wrap; }
     <name>noteheadnames</name>
     <message>
         <source>normal</source>
-        <translation type="unfinished">Normální</translation>
+        <translation>normální</translation>
     </message>
     <message>
         <source>cross</source>
-        <translation type="unfinished">Křížek</translation>
+        <translation>křížek</translation>
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished">Kosočtverec</translation>
+        <translation>kosočtverec</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished">Trojúhelník</translation>
+        <translation>trojúhelník</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished">mi</translation>
+        <translation>mi</translation>
     </message>
     <message>
         <source>slash</source>
-        <translation type="unfinished">Šikmá čára</translation>
+        <translation>lomítko</translation>
     </message>
     <message>
         <source>xcircle</source>
-        <translation type="unfinished">XKruh</translation>
+        <translation>xkruh</translation>
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished">do</translation>
+        <translation>do</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished">re</translation>
+        <translation>re</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished">fa</translation>
+        <translation>fa</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished">la</translation>
+        <translation>la</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished">ti</translation>
+        <translation>ti</translation>
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>sol</translation>
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation>alt. brevis</translation>
     </message>
 </context>
 <context>
@@ -9943,51 +9943,51 @@ vaše verze MuseScore je příliš stará.</translation>
     </message>
     <message>
         <source>s0sol head</source>
-        <translation type="unfinished"/>
+        <translation>hlavička s0sol</translation>
     </message>
     <message>
         <source>s1sol head</source>
-        <translation type="unfinished"/>
+        <translation>hlavička s1sol</translation>
     </message>
     <message>
         <source>s2sol head</source>
-        <translation type="unfinished"/>
+        <translation>hlavička s2sol</translation>
     </message>
     <message>
         <source>longa up alt</source>
-        <translation type="unfinished"/>
+        <translation>longa nahoru alt</translation>
     </message>
     <message>
         <source>longa down alt</source>
-        <translation type="unfinished"/>
+        <translation>longa dolů alt</translation>
     </message>
     <message>
         <source>brevis head alt</source>
-        <translation type="unfinished"/>
+        <translation>brevis hlavička alt</translation>
     </message>
     <message>
         <source>time sig C dot</source>
-        <translation type="unfinished"/>
+        <translation>taktové označení C tečka</translation>
     </message>
     <message>
         <source>time sig O</source>
-        <translation type="unfinished"/>
+        <translation>taktové označení O</translation>
     </message>
     <message>
         <source>time sig O cut</source>
-        <translation type="unfinished"/>
+        <translation>taktové označení O cut</translation>
     </message>
     <message>
         <source>time sig O dot</source>
-        <translation type="unfinished"/>
+        <translation>taktové označení O tečka</translation>
     </message>
     <message>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation>sori</translation>
     </message>
     <message>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation>koron</translation>
     </message>
 </context>
 </TS>
