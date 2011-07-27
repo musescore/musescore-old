@@ -1052,7 +1052,7 @@ void Text::setBlockFormat(const QTextBlockFormat& bf)
 
 bool Text::setCursor(const QPointF& p, QTextCursor::MoveMode mode)
       {
-      QPointF pt  = p - canvasPos();
+      QPointF pt  = p - pagePos();
       if (!bbox().contains(pt))
             return false;
 
@@ -1115,7 +1115,7 @@ QLineF Text::dragAnchor() const
             Measure* m     = static_cast<Measure*>(parent());
             System* system = m->system();
             qreal yp      = system->staff(staffIdx())->y() + system->y();
-            // TODO1 qreal xp      = m->tick2pos(tick()) + m->canvasPos().x();
+            // TODO1 qreal xp      = m->tick2pos(tick()) + m->pagePos().x();
             qreal xp = 0.0;
             p1 = QPointF(xp, yp);
             }

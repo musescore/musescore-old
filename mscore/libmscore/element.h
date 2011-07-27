@@ -197,8 +197,9 @@ class Element {
       virtual void move(qreal xd, qreal yd)   { _pos += QPointF(xd, yd); }
       virtual void move(const QPointF& s)     { _pos += s;               }
 
-      virtual QPointF canvasPos() const;      ///< position in canvas coordinates
-      qreal canvasX() const;
+      virtual QPointF pagePos() const;          ///< position in page coordinates
+      QPointF canvasPos() const;                ///< position in canvas coordinates
+      qreal pageX() const;
 
       const QPointF& userOff() const          { return _userOff;  }
       void setUserOff(const QPointF& o)       { _userOff = o;     }
@@ -428,7 +429,7 @@ class StaffLines : public Element {
 
       Measure* measure() const             { return (Measure*)parent(); }
       virtual void draw(Painter*) const;
-      virtual QPointF canvasPos() const;   ///< position in canvas coordinates
+      virtual QPointF pagePos() const;   ///< position in page coordinates
       qreal y1() const;
       qreal y2() const;
       };

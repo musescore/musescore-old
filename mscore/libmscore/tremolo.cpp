@@ -158,7 +158,7 @@ void Tremolo::layout()
 
       qreal x2     = _chord2->stemPos(_chord2->up(), true).x();
       qreal x1     = _chord1->stemPos(_chord1->up(), true).x();
-      x             = x1 - _chord1->canvasPos().x() + (x2 - x1) * .5;
+      x             = x1 - _chord1->pagePos().x() + (x2 - x1) * .5;
       setPos(x, y);
       }
 

@@ -1310,7 +1310,7 @@ QRectF Measure::staffabbox(int staffIdx) const
       {
       System* s = system();
       QRectF sb(s->staff(staffIdx)->bbox());
-      QRectF rrr(sb.translated(s->canvasPos()));
+      QRectF rrr(sb.translated(s->pagePos()));
       QRectF rr(abbox());
       QRectF r(rr.x(), rrr.y(), rr.width(), rrr.height());
       return r;
@@ -1331,7 +1331,7 @@ QRectF Measure::staffabbox(int staffIdx) const
 bool Measure::acceptDrop(MuseScoreView* viewer, const QPointF& p, int type, int) const
       {
       // convert p from canvas to measure relative position and take x and y coordinates
-      QPointF mrp = p - canvasPos(); // pos() - system()->pos() - system()->page()->pos();
+      QPointF mrp = p - pagePos(); // pos() - system()->pos() - system()->page()->pos();
       qreal mrpx = mrp.x();
       qreal mrpy = mrp.y();
 
@@ -1345,9 +1345,13 @@ bool Measure::acceptDrop(MuseScoreView* viewer, const QPointF& p, int type, int)
       qreal b = sb.bottom(); // bottom of staff
 
       // compute rectangle of staff in measure
-      QRectF rrr(sb.translated(s->canvasPos()));
+      QRectF rrr(sb.translated(s->pagePos()));
       QRectF rr(abbox());
       QRectF r(rr.x(), rrr.y(), rr.width(), rrr.height());
+
+      Page* page = system()->page();
+      r.translate(page->pos());
+      rr.translate(page->pos());
 
       switch(type) {
             case STAFF_LIST:
@@ -1432,7 +1436,7 @@ printf("Measure drop %s\n", e->name());
 
       if (e->systemFlag())
             staffIdx = 0;
-      QPointF mrp(data.pos - canvasPos());
+      QPointF mrp(data.pos - pagePos());
 //      qreal mrpx  = mrp.x();
       Staff* staff = score()->staff(staffIdx);
 
@@ -1467,7 +1471,7 @@ printf("drop staffList\n");
                   e->setTrack(staffIdx * VOICES);
                   e->layout();
                   {
-                  QPointF uo(data.pos - e->canvasPos() - data.dragOffset);
+                  QPointF uo(data.pos - e->pagePos() - data.dragOffset);
                   e->setUserOff(uo);
                   }
                   score()->undoAddElement(e);

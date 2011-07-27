@@ -172,7 +172,7 @@ void Navigator::paintEvent(QPaintEvent* ev)
                         if (!e->visible())
                               continue;
                         p.save();
-                        p.translate(e->canvasPos());
+                        p.translate(e->pagePos());
                         p.setPen(QPen(e->curColor()));
                         e->draw(&painter);
                         p.restore();

@@ -70,7 +70,7 @@ class SlurSegment : public SpannerSegment {
       virtual void move(const QPointF& s);
 
 
-      SlurTie* slurTie() const                      { return (SlurTie*)parent(); }
+      SlurTie* slurTie() const                      { return (SlurTie*)spanner(); }
 
       void write(Xml& xml, int no) const;
       void read(QDomElement);
@@ -130,7 +130,7 @@ class SlurTie : public Spanner {
       void setLineType(int val)           { _lineType = val;  }
       SlurSegment* frontSegment() const   { return (SlurSegment*)spannerSegments().front(); }
       SlurSegment* backSegment() const    { return (SlurSegment*)spannerSegments().back();  }
-      SlurSegment* takeFirstSegment()     { return (SlurSegment*)spannerSegments().takeFirst(); }
+//      SlurSegment* takeFirstSegment()     { return (SlurSegment*)spannerSegments().takeFirst(); }
       SlurSegment* takeLastSegment()      { return (SlurSegment*)spannerSegments().takeLast(); }
       SlurSegment* segmentAt(int n) const { return (SlurSegment*)spannerSegments().at(n); }
       };

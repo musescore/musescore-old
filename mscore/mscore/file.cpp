@@ -1693,7 +1693,7 @@ bool MuseScore::saveSvg(Score* score, const QString& saveName)
                   if (!e->visible())
                         continue;
                   p.save();
-                  p.translate(e->canvasPos() - page->pos());
+                  p.translate(e->pagePos() - page->pos());
                   p.setPen(QPen(e->color()));
                   e->draw(&painter);
                   p.restore();
@@ -1702,7 +1702,7 @@ bool MuseScore::saveSvg(Score* score, const QString& saveName)
                   if (!e->visible())
                         continue;
                   p.save();
-                  p.translate(e->canvasPos() - page->pos());
+                  p.translate(e->pagePos() - page->pos());
                   p.setPen(QPen(e->color()));
                   e->draw(&painter);
                   p.restore();
@@ -1779,7 +1779,7 @@ bool MuseScore::savePng(Score* score, const QString& name, bool screenshot, bool
             foreach(const Element* e, eel) {
                   if (!e->visible())
                         continue;
-                  QPointF ap(e->canvasPos() - page->pos());
+                  QPointF ap(e->pagePos() - page->pos());
                   p.translate(ap);
                   p.setPen(QPen(e->color()));
                   e->draw(&painter);
@@ -1791,7 +1791,7 @@ bool MuseScore::savePng(Score* score, const QString& name, bool screenshot, bool
             foreach(const Element* e, el) {
                   if (!e->visible())
                         continue;
-                  QPointF ap(e->canvasPos() - page->pos());
+                  QPointF ap(e->pagePos() - page->pos());
                   p.translate(ap);
                   p.setPen(QPen(e->color()));
                   e->draw(&painter);

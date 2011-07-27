@@ -126,7 +126,7 @@ void PagePreview::paintEvent(QPaintEvent* ev)
                   continue;
 
             p.save();
-            p.translate(e->canvasPos());
+            p.translate(e->pagePos());
             p.setPen(QPen(e->curColor()));
             e->draw(&painter);
             p.restore();

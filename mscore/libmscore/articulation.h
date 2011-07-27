@@ -69,7 +69,7 @@ class Articulation : public Symbol {
       QString subtypeUserName() const { return articulationList[subtype()].name; }
       int relGateTime() const { return articulationList[subtype()].relGateTime; }
       int relVelocity() const { return articulationList[subtype()].relVelocity; }
-      virtual QPointF canvasPos() const;      ///< position in canvas coordinates
+      virtual QPointF pagePos() const;      ///< position in page coordinates
 
       ChordRest* chordRest() const;
 

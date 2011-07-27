@@ -79,7 +79,7 @@ class Marker : public Text {
       void setLabel(const QString& s)  { _label = s; }
 
       virtual void layout();
-      virtual QPointF canvasPos() const;
+      virtual QPointF pagePos() const;
       virtual QLineF dragAnchor() const;
       virtual void styleChanged();
       };

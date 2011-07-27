@@ -64,8 +64,8 @@ void Glissando::layout()
 
       setPos(0.0, 0.0);
 
-      QPointF cp1    = anchor1->canvasPos();
-      QPointF cp2    = anchor2->canvasPos();
+      QPointF cp1    = anchor1->pagePos();
+      QPointF cp2    = anchor2->pagePos();
 
       // construct line from notehead to notehead
       qreal x1 = (anchor1->headWidth()) - (cp2.x() - cp1.x());

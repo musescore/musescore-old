@@ -58,7 +58,7 @@ class ChordRest : public DurationElement {
       ChordRest &operator=(const ChordRest&);
       ~ChordRest();
       virtual ElementType type() const = 0;
-      virtual QPointF canvasPos() const;      ///< position in canvas coordinates
+      virtual QPointF pagePos() const;      ///< position in page coordinates
       virtual Element* drop(const DropData&);
 
       Segment* segment() const                   { return (Segment*)parent(); }
@@ -85,7 +85,7 @@ class ChordRest : public DurationElement {
       virtual int upLine() const                { return 0;}
       virtual int downLine() const              { return 8;}
       virtual int line(bool up) const           { return up ? upLine() : downLine(); }
-      virtual QPointF stemPos(bool, bool) const { return canvasPos(); }    // point to connect stem
+      virtual QPointF stemPos(bool, bool) const { return pagePos(); }    // point to connect stem
       bool up() const                           { return _up;   }
       void setUp(bool val)                      { _up = val; }
       QList<Articulation*>* getArticulations()  { return &articulations; }

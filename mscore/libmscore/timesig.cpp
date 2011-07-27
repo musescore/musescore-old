@@ -71,16 +71,16 @@ TimeSig::TimeSig(Score* s, const Fraction& f)
       }
 
 //---------------------------------------------------------
-//   canvasPos
+//   pagePos
 //---------------------------------------------------------
 
-QPointF TimeSig::canvasPos() const
+QPointF TimeSig::pagePos() const
       {
       if (parent() == 0)
             return pos();
       System* system = segment()->measure()->system();
       qreal yp = system ? y() + system->staff(staffIdx())->y() + system->y() : 0.0;
-      return QPointF(canvasX(), yp);
+      return QPointF(pageX(), yp);
       }
 
 //---------------------------------------------------------

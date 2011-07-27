@@ -1592,8 +1592,8 @@ void ShowElementBase::setElement(Element* e)
       eb.z->setValue(e->z());
       eb.posx->setValue(e->ipos().x());
       eb.posy->setValue(e->ipos().y());
-      eb.cposx->setValue(e->canvasPos().x());
-      eb.cposy->setValue(e->canvasPos().y());
+      eb.cposx->setValue(e->pagePos().x());
+      eb.cposy->setValue(e->pagePos().y());
       eb.offsetx->setValue(e->userOff().x());
       eb.offsety->setValue(e->userOff().y());
       eb.readPosX->setValue(e->readPos().x());

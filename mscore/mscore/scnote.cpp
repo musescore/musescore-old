@@ -188,7 +188,7 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
           	case 9:     // "pos"
         				  if (context->argumentCount() == 0){
               				  Page* page = (Page*)note->parent()->parent()->parent()->parent()->parent();
-              				  QPointF pos(note->canvasPos().x() - page->canvasPos().x(),  note->canvasPos().y());
+              				  QPointF pos(note->pagePos().x() - page->pagePos().x(),  note->pagePos().y());
               				  return qScriptValueFromValue(context->engine(), pos);
                         }
           			  break;

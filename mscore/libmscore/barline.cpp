@@ -45,10 +45,10 @@ BarLine::BarLine(Score* s)
       }
 
 //---------------------------------------------------------
-//   canvasPos
+//   pagePos
 //---------------------------------------------------------
 
-QPointF BarLine::canvasPos() const
+QPointF BarLine::pagePos() const
       {
       if (parent() == 0)
             return pos();
@@ -56,7 +56,7 @@ QPointF BarLine::canvasPos() const
       qreal yp = y();
       if (system)
             yp += system->staffY(staffIdx());
-      return QPointF(canvasX(), yp);
+      return QPointF(pageX(), yp);
       }
 
 //---------------------------------------------------------
@@ -438,7 +438,7 @@ void BarLine::updateGrips(int* grips, QRectF* grip) const
       qreal lw = point(score()->styleS(ST_barWidth));
       qreal y1, y2;
       getY(&y1, &y2);
-      grip[0].translate(QPointF(lw * .5, y2) + canvasPos());
+      grip[0].translate(QPointF(lw * .5, y2) + pagePos());
       }
 
 //---------------------------------------------------------
@@ -485,7 +485,7 @@ void BarLine::endEditDrag()
       qreal y1, h2;
       getY(&y1, &h2);
       yoff      = 0.0;
-      qreal ay1 = canvasPos().y();
+      qreal ay1 = pagePos().y();
       qreal ay2 = ay1 + h2;
 
       int staffIdx1 = staffIdx();
@@ -497,7 +497,7 @@ void BarLine::endEditDrag()
       if (staffIdx1 + 1 >= n)
             staffIdx2 = staffIdx1;
       else {
-            qreal ay = s->canvasPos().y();
+            qreal ay = s->pagePos().y();
             qreal y  = s->staff(staffIdx1)->y() + ay;
             qreal h1 = staff()->lines() * spatium();
 

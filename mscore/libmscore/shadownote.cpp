@@ -38,7 +38,7 @@ void ShadowNote::draw(Painter* painter) const
       if (!visible() || sym == 0)
             return;
 
-      QPointF ap(canvasPos());
+      QPointF ap(pagePos());
       QRect r(abbox().toRect());
 
       painter->translate(ap);

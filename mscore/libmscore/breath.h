@@ -39,7 +39,7 @@ class Breath : public Element {
       virtual void layout();
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
-      virtual QPointF canvasPos() const;      ///< position in canvas coordinates
+      virtual QPointF pagePos() const;      ///< position in page coordinates
       };
 
 #endif

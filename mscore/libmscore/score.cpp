@@ -616,7 +616,7 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* rst, int* pitch,
 
       System* s = m->system();
 //      qreal sy1 = 0;
-      qreal y   = p.y() - s->canvasPos().y();
+      qreal y   = p.y() - s->pagePos().y();
 
       int i;
       for (i = 0; i < nstaves();) {
@@ -649,7 +649,7 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* rst, int* pitch,
             }
 
       // search for segment + offset
-      QPointF pppp = p - m->canvasPos();
+      QPointF pppp = p - m->pagePos();
       int track = i * VOICES;
 
       SysStaff* sstaff = m->system()->staff(i);
@@ -1070,7 +1070,7 @@ Measure* Score::searchMeasure(const QPointF& p) const
             return 0;
 
       foreach(System* system, systems) {
-            qreal x = p.x() - system->canvasPos().x();
+            qreal x = p.x() - system->pagePos().x();
             foreach(MeasureBase* mb, system->measures()) {
                   if (mb->type() != MEASURE)
                         continue;
@@ -1160,7 +1160,7 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
       pos->staffIdx      = 0;
       SysStaff* sstaff   = 0;
       System* system     = pos->measure->system();
-      qreal y           = p.y() - system->canvasPos().y();
+      qreal y           = p.y() - system->pagePos().y();
       for (; pos->staffIdx < nstaves(); ++pos->staffIdx) {
             qreal sy2;
             SysStaff* ss = system->staff(pos->staffIdx);
@@ -1183,7 +1183,7 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
       //
       //    search segment
       //
-      QPointF pppp(p - pos->measure->canvasPos());
+      QPointF pppp(p - pos->measure->pagePos());
       qreal x         = pppp.x();
       Segment* segment = 0;
       pos->segment     = 0;
@@ -1251,8 +1251,8 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
                   return false;
             }
 
-      y         = pos->measure->canvasPos().y() + sstaff->y() + pos->line * lineDist;
-      pos->pos  = QPointF(x + pos->measure->canvasPos().x(), y);
+      y         = pos->measure->pagePos().y() + sstaff->y() + pos->line * lineDist;
+      pos->pos  = QPointF(x + pos->measure->pagePos().x(), y);
       return true;
       }
 
@@ -1425,9 +1425,28 @@ void Score::addElement(Element* element)
       else
             element->parent()->add(element);
       switch(element->type()) {
+            case VOLTA:
+            case TRILL:
+            case PEDAL:
+            case TEXTLINE:
+            case HAIRPIN:
+            case TIE:
+                  {
+                  Spanner* spanner = static_cast<Spanner*>(element);
+                  foreach(SpannerSegment* ss, spanner->spannerSegments()) {
+                        if (ss->system())
+                              ss->system()->add(ss);
+                        }
+                  }
+                  break;
+
             case SLUR:
                   {
                   Slur* s = static_cast<Slur*>(element);
+                  foreach(SpannerSegment* ss, s->spannerSegments()) {
+                        if (ss->system())
+                              ss->system()->add(ss);
+                        }
                   if (s->startElement())
                         static_cast<ChordRest*>(s->startElement())->addSlurFor(s);
                   if (s->endElement())
@@ -1437,6 +1456,10 @@ void Score::addElement(Element* element)
             case OTTAVA:
                   {
                   Ottava* o = static_cast<Ottava*>(element);
+                  foreach(SpannerSegment* ss, o->spannerSegments()) {
+                        if (ss->system())
+                              ss->system()->add(ss);
+                        }
                   Staff* s  = o->staff();
                   if (o->startElement()) {
                         int tick = static_cast<Segment*>(o->startElement())->tick();
@@ -1531,9 +1554,28 @@ void Score::removeElement(Element* element)
             remove(element);
 
       switch(element->type()) {
+            case VOLTA:
+            case TRILL:
+            case PEDAL:
+            case TEXTLINE:
+            case HAIRPIN:
+            case TIE:
+                  {
+                  Spanner* spanner = static_cast<Spanner*>(element);
+                  foreach(SpannerSegment* ss, spanner->spannerSegments()) {
+                        if (ss->system())
+                              ss->system()->remove(ss);
+                        }
+                  }
+                  break;
+
             case OTTAVA:
                   {
                   Ottava* o = static_cast<Ottava*>(element);
+                  foreach(SpannerSegment* ss, o->spannerSegments()) {
+                        if (ss->system())
+                              ss->system()->remove(ss);
+                        }
                   Staff* s = o->staff();
                   int tick1 = static_cast<Segment*>(o->startElement())->tick();
                   int tick2 = static_cast<Segment*>(o->endElement())->tick();
@@ -1561,6 +1603,10 @@ void Score::removeElement(Element* element)
             case SLUR:
                   {
                   Slur* s = static_cast<Slur*>(element);
+                  foreach(SpannerSegment* ss, s->spannerSegments()) {
+                        if (ss->system())
+                              ss->system()->remove(ss);
+                        }
                   static_cast<ChordRest*>(s->startElement())->removeSlurFor(s);
                   static_cast<ChordRest*>(s->endElement())->removeSlurBack(s);
                   }

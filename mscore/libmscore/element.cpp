@@ -251,7 +251,7 @@ QString Element::userName() const
 
 QRectF Element::abbox() const
       {
-      return bbox().translated(canvasPos());
+      return bbox().translated(pagePos());
       }
 
 Element::~Element()
@@ -476,23 +476,39 @@ QRectF Element::drag(const EditData& data)
       }
 
 //---------------------------------------------------------
-//   canvasPos
+//   pagePos
 //    return position in canvas coordinates
 //---------------------------------------------------------
 
-QPointF Element::canvasPos() const
+QPointF Element::pagePos() const
       {
       QPointF p(pos());
       if (parent() && parent()->parent())
-            p += parent()->canvasPos();
+            p += parent()->pagePos();
       return p;
       }
 
 //---------------------------------------------------------
-//   canvasX
+//   canvasPos
 //---------------------------------------------------------
 
-qreal Element::canvasX() const
+QPointF Element::canvasPos() const
+      {
+      QPointF p = pagePos();
+      Element* e = parent();
+      if (e) {
+            while (e->parent())
+                  e = e->parent();
+            p += e->pos();
+            }
+      return p;
+      }
+
+//---------------------------------------------------------
+//   pageX
+//---------------------------------------------------------
+
+qreal Element::pageX() const
       {
       qreal xp = x();
       for (Element* e = parent(); e && e->parent(); e = e->parent())
@@ -512,7 +528,7 @@ qreal Element::canvasX() const
 
 bool Element::contains(const QPointF& p) const
       {
-      return shape().contains(p - canvasPos());
+      return shape().contains(p - pagePos());
       }
 
 //---------------------------------------------------------
@@ -747,10 +763,10 @@ StaffLines::StaffLines(Score* s)
       }
 
 //---------------------------------------------------------
-//   canvasPos
+//   pagePos
 //---------------------------------------------------------
 
-QPointF StaffLines::canvasPos() const
+QPointF StaffLines::pagePos() const
       {
       System* system = measure()->system();
       return QPointF(measure()->x() + system->x(),
@@ -1166,7 +1182,7 @@ bool Element::edit(MuseScoreView*, int, int key, Qt::KeyboardModifiers, const QS
 
 void Element::add(Element* e)
       {
-      printf("cannot add %s to %s\n", e->name(), name());
+      printf("Element: cannot add %s to %s\n", e->name(), name());
       }
 
 //---------------------------------------------------------
@@ -1175,7 +1191,8 @@ void Element::add(Element* e)
 
 void Element::remove(Element* e)
       {
-      printf("cannot remove %s from %s\n", e->name(), name());
+      printf("Element: cannot remove %s from %s\n", e->name(), name());
+      abort();
       }
 
 //---------------------------------------------------------

@@ -51,7 +51,7 @@ class TimeSig : public Element {
 
       TimeSig* clone() const             { return new TimeSig(*this); }
       ElementType type() const           { return TIMESIG; }
-      virtual QPointF canvasPos() const;      ///< position in canvas coordinates
+      virtual QPointF pagePos() const;      ///< position in page coordinates
       void setSubtype(int val);
       void draw(Painter*) const;
       void write(Xml& xml) const;

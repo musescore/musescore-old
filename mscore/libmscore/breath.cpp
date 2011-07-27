@@ -87,10 +87,10 @@ Space Breath::space() const
       }
 
 //---------------------------------------------------------
-//   canvasPos
+//   pagePos
 //---------------------------------------------------------
 
-QPointF Breath::canvasPos() const
+QPointF Breath::pagePos() const
       {
       if (parent() == 0)
             return pos();
@@ -98,7 +98,7 @@ QPointF Breath::canvasPos() const
       qreal yp = y();
       if (system)
             yp += system->staff(staffIdx())->y() + system->y();
-      return QPointF(canvasX(), yp);
+      return QPointF(pageX(), yp);
       }
 
 

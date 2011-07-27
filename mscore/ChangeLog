@@ -1,3 +1,6 @@
+27.jul (ws)
+      - fix #11709: slur/tie across page break shown on wrong page
+        (all spanner elements are affected)
 26.jul (ws)
       - fix #11710: cannot select any element on pages other than first
       - add screen update after dropping image element

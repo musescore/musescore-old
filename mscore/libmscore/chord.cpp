@@ -223,7 +223,7 @@ QPointF Chord::stemPos(bool upFlag, bool top) const
       if(staff() && staff()->useTablature()) {
             qreal sp = spatium();
             return QPointF(STAFFTYPE_TAB_DEFAULTSTEMPOSX*sp, STAFFTYPE_TAB_DEFAULTSTEMPOSY*sp) +
-                        canvasPos();
+                        pagePos();
             }
       const Note* note = (top ? !upFlag : upFlag) ? downNote() : upNote();
       return note->stemPos(upFlag);
@@ -904,15 +904,15 @@ LedgerLine::LedgerLine(Score* s)
       }
 
 //---------------------------------------------------------
-//   canvasPos
+//   pagePos
 //---------------------------------------------------------
 
-QPointF LedgerLine::canvasPos() const
+QPointF LedgerLine::pagePos() const
       {
       System* system = chord()->measure()->system();
       int st = track() / VOICES;
       qreal yp = y() + system->staff(st)->y() + system->y();
-      return QPointF(canvasX(), yp);
+      return QPointF(pageX(), yp);
       }
 
 //---------------------------------------------------------
@@ -1123,7 +1123,7 @@ void Chord::layoutStem()
 
             qreal sl = point(stemLen);
             _stem->setLen(sl);
-            _stem->setPos(npos - canvasPos());
+            _stem->setPos(npos - pagePos());
 
             if (_stemSlash) {
                   // TODO: does not work for chords
@@ -1145,7 +1145,7 @@ void Chord::layoutStem()
                   _hook->setSubtype(hookIdx);
                   qreal lw  = point(score()->styleS(ST_stemWidth)) * .5;
                   QPointF p = npos + QPointF(lw, _stem->stemLen());
-                  _hook->setPos(p - canvasPos());
+                  _hook->setPos(p - pagePos());
                   }
             else {
                   if (_hook)
@@ -1513,7 +1513,7 @@ void Chord::layoutArpeggio2()
             return;
       Note* upnote      = upNote();
       qreal headHeight = upnote->headHeight();
-      qreal y          = upNote()->canvasPos().y() - headHeight * .5;
+      qreal y          = upNote()->pagePos().y() - headHeight * .5;
       int span          = _arpeggio->span();
       Note* dnote       = downNote();
       int btrack        = track() + (span - 1) * VOICES;
@@ -1521,7 +1521,7 @@ void Chord::layoutArpeggio2()
 
       if (bchord && bchord->type() == CHORD)
             dnote = static_cast<Chord*>(bchord)->downNote();
-      qreal h = dnote->canvasPos().y() - y;
+      qreal h = dnote->pagePos().y() - y;
       _arpeggio->setHeight(h);
 
       QList<Note*> notes;

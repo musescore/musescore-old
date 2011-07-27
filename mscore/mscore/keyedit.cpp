@@ -120,13 +120,13 @@ void KeyCanvas::paintEvent(QPaintEvent*)
             }
       if (dragElement) {
             p.save();
-            p.translate(dragElement->canvasPos());
+            p.translate(dragElement->pagePos());
             dragElement->draw(&painter);
             p.restore();
             }
       foreach(Accidental* a, accidentals) {
             p.save();
-            p.translate(a->canvasPos());
+            p.translate(a->pagePos());
 //            p.setPen(QPen(a->curColor()));
             p.setPen(QPen(Qt::white));
             a->draw(&painter);
@@ -134,7 +134,7 @@ void KeyCanvas::paintEvent(QPaintEvent*)
             }
       clef->setPos(0.0, 0.0);
       clef->layout();
-      p.translate(clef->canvasPos());
+      p.translate(clef->pagePos());
       clef->draw(&painter);
       }
 

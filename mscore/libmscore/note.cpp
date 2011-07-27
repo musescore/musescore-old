@@ -480,7 +480,7 @@ QPointF Note::stemPos(bool upFlag) const
                   pt.ry() -= off.y();
                   }
             }
-      return pt + chord()->canvasPos();
+      return pt + chord()->pagePos();
       }
 
 //---------------------------------------------------------
@@ -902,7 +902,7 @@ QRectF Note::drag(const EditData& data)
       qreal step = _spatium * (tab ? staff()->staffType()->lineDistance().val() : 0.5);
       _lineOffset = lrint(data.pos.y() / step);
       score()->setLayout(chord()->measure());
-      return bb.translated(chord()->canvasPos());
+      return bb.translated(chord()->pagePos());
       }
 
 //---------------------------------------------------------
@@ -1380,10 +1380,10 @@ NoteType Note::noteType() const
       }
 
 //---------------------------------------------------------
-//   canvasPos
+//   pagePos
 //---------------------------------------------------------
 
-QPointF Note::canvasPos() const
+QPointF Note::pagePos() const
       {
       if (parent() == 0)
             return pos();
@@ -1397,7 +1397,7 @@ QPointF Note::canvasPos() const
       if (system == 0)
             return pos();
       qreal yp = y() + system->staff(staffIdx() + chord()->staffMove())->y() + system->y();
-      return QPointF(canvasX(), yp);
+      return QPointF(pageX(), yp);
       }
 
 //---------------------------------------------------------

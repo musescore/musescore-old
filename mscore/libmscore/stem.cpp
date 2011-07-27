@@ -123,7 +123,7 @@ void Stem::updateGrips(int* grips, QRectF* grip) const
       {
       *grips   = 1;
       QPointF p(0.0, stemLen());
-      grip[0].translate(canvasPos() + p);
+      grip[0].translate(pagePos() + p);
       }
 
 //---------------------------------------------------------

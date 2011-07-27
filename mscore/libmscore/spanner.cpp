@@ -12,6 +12,7 @@
 //=============================================================================
 
 #include "spanner.h"
+#include "system.h"
 
 //---------------------------------------------------------
 //   SpannerSegment
@@ -22,13 +23,13 @@ SpannerSegment::SpannerSegment(Score* s)
       {
       setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE | ELEMENT_SEGMENT);
       setSubtype(SEGMENT_SINGLE);
-      _system = 0;
+      _spanner = 0;
       }
 
 SpannerSegment::SpannerSegment(const SpannerSegment& s)
    : Element(s)
       {
-      _system = s._system;
+      _spanner = s._spanner;
       }
 
 //---------------------------------------------------------
@@ -37,7 +38,30 @@ SpannerSegment::SpannerSegment(const SpannerSegment& s)
 
 void SpannerSegment::startEdit(MuseScoreView*s , const QPointF& p)
       {
-      parent()->startEdit(s, p);
+      spanner()->startEdit(s, p);
+      }
+
+//---------------------------------------------------------
+//   endEdit
+//---------------------------------------------------------
+
+void SpannerSegment::endEdit()
+      {
+      spanner()->endEdit();
+      }
+
+//---------------------------------------------------------
+//   setSystem
+//---------------------------------------------------------
+
+void SpannerSegment::setSystem(System* s)
+      {
+      if (system() != s) {
+            if (system())
+                  system()->remove(this);
+            s->add(this);
+            setParent(s);
+            }
       }
 
 //---------------------------------------------------------
@@ -77,7 +101,7 @@ Spanner::~Spanner()
 void Spanner::add(Element* e)
       {
       SpannerSegment* ls = static_cast<SpannerSegment*>(e);
-      ls->setParent(this);
+      ls->setSpanner(this);
       segments.append(ls);
       }
 
@@ -87,7 +111,10 @@ void Spanner::add(Element* e)
 
 void Spanner::remove(Element* e)
       {
-      segments.removeOne(static_cast<SpannerSegment*>(e));
+      SpannerSegment* ss = static_cast<SpannerSegment*>(e);
+      if (ss->system())
+            ss->system()->remove(ss);
+      segments.removeOne(ss);
       }
 
 //---------------------------------------------------------
@@ -96,8 +123,8 @@ void Spanner::remove(Element* e)
 
 void Spanner::scanElements(void* data, void (*func)(void*, Element*), bool all)
       {
-      foreach(SpannerSegment* seg, segments)
-            seg->scanElements(data, func, true);
+//      foreach(SpannerSegment* seg, segments)
+//            seg->scanElements(data, func, true);
       }
 
 //---------------------------------------------------------

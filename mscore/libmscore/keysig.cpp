@@ -62,10 +62,10 @@ KeySig::KeySig(const KeySig& k)
       }
 
 //---------------------------------------------------------
-//   canvasPos
+//   pagePos
 //---------------------------------------------------------
 
-QPointF KeySig::canvasPos() const
+QPointF KeySig::pagePos() const
       {
       if (parent() == 0)
             return pos();
@@ -73,7 +73,7 @@ QPointF KeySig::canvasPos() const
       System* system = segment()->measure()->system();
       if (system)
             yp += system->staff(staffIdx())->y() + system->y();
-      return QPointF(canvasX(), yp);
+      return QPointF(pageX(), yp);
       }
 
 //---------------------------------------------------------
