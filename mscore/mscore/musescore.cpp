@@ -2131,7 +2131,7 @@ int main(int argc, char* av[])
 
       setMscoreLocale(localeName);
 
-//      initShortcuts();
+      initShortcuts();
       preferences.init();
 
       QWidget wi(0);
@@ -2222,7 +2222,7 @@ int main(int argc, char* av[])
       //   _spatium    = SPATIUM20  * DPI;     // 20.0 / 72.0 * DPI / 4.0;
 
       genIcons();
-      initShortcuts();
+//      initShortcuts();
 
       if (!converterMode)
             qApp->setWindowIcon(*icons[window_ICON]);
