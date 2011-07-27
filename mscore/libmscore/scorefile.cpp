@@ -1271,7 +1271,8 @@ void Score::print(Painter* painter, int pageNo)
             if (!e->visible())
                   continue;
             painter->save();
-            painter->translate(e->pagePos() - page->pos());
+//            painter->translate(e->pagePos() - page->pos());
+            painter->translate(e->pagePos());
             painter->setPenColor(e->color());
             e->draw(painter);
             painter->restore();
