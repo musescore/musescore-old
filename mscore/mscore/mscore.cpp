@@ -2544,7 +2544,9 @@ void MuseScore::readSettings()
             QList<int> sizes;
             sizes << 500 << 100;
             mainWindow->setSizes(sizes);
+#ifndef Q_WS_MAC
             showMaximized();
+#endif
             return;
             }
       QSettings settings;
@@ -2553,8 +2555,10 @@ void MuseScore::readSettings()
       mainWindow->restoreState(settings.value("inspectorSplitter").toByteArray());
       settings.setValue("inspectorSplitter", mainWindow->saveState());
       move(settings.value("pos", QPoint(10, 10)).toPoint());
+#ifndef Q_WS_MAC
       if (settings.value("maximized", true).toBool())
             showMaximized();
+#endif
       mscore->showPalette(settings.value("showPanel", "1").toBool());
       restoreState(settings.value("state").toByteArray());
       if (settings.value("splitScreen", false).toBool()) {
