@@ -1,3 +1,6 @@
+28.jul (ws)
+      - fix #11709: slurs/ties across pages: slur/tie on second page is also shown
+        on first page
 27.jul (ws)
       - fix #11731: printing problems
       - fix #11707: Shortcuts not read back from .ini file (patch from Miwarre)

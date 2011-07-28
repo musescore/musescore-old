@@ -240,7 +240,7 @@ void Preferences::init()
       oscPort                 = 5282;
       appStyleFile            = ":/data/appstyle-dark.css";
       singlePalette           = false;
-      
+
 #if defined(Q_WS_MAC)
       // On OSX, the default style should be native to get Aqua
       styleName               = "native";   // ??
@@ -1140,12 +1140,7 @@ void PreferenceDialog::defineShortcutClicked()
 
 void PreferenceDialog::selectFgWallpaper()
       {
-      QString s = QFileDialog::getOpenFileName(
-         this,                            // parent
-         tr("Choose Notepaper"),          // caption
-         fgWallpaper->text(),             // dir
-         tr("Images (*.jpg *.gif *.png)") // filter
-         );
+      QString s = mscore->getWallpaper(tr("Choose Notepaper"));
       if (!s.isNull())
             fgWallpaper->setText(s);
       }
@@ -1156,12 +1151,7 @@ void PreferenceDialog::selectFgWallpaper()
 
 void PreferenceDialog::selectBgWallpaper()
       {
-      QString s = QFileDialog::getOpenFileName(
-         this,
-         tr("Choose Background Wallpaper"),
-         bgWallpaper->text(),
-         tr("Images (*.jpg *.gif *.png)")
-         );
+      QString s = mscore->getWallpaper(tr("Choose Background Wallpaper"));
       if (!s.isNull())
             bgWallpaper->setText(s);
       }

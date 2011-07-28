@@ -39,6 +39,25 @@ class LoadFile {
       QString name() const { return _name; }
       };
 
+//---------------------------------------------------------
+//   WallpaperPreview
+//---------------------------------------------------------
+
+class WallpaperPreview : public QFrame {
+      Q_OBJECT
+      QPixmap* _pixmap;
+
+      virtual void paintEvent(QPaintEvent*);
+      virtual QSize sizeHint() const { return QSize(100, 100); }
+
+   public slots:
+      void setImage(const QString& path);
+
+   public:
+      WallpaperPreview(QWidget* parent = 0);
+      };
+
+
 extern QString getSoundFont(const QString&);
 #endif
 

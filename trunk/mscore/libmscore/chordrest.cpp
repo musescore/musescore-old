@@ -160,8 +160,9 @@ void ChordRest::scanElements(void* data, void (*func)(void*, Element*), bool all
       {
       if (_beam && (_beam->elements().front() == this))
             _beam->scanElements(data, func, all);
-      foreach(Slur* slur, _slurFor)
-            slur->scanElements(data, func, all);
+//    slur segments are collected from System:
+//          foreach(Slur* slur, _slurFor)
+//                slur->scanElements(data, func, all);
       foreach(Articulation* a, articulations)
             func(data, a);
       foreach(Lyrics* l, _lyricsList) {

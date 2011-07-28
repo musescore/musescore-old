@@ -269,6 +269,7 @@ class MuseScore : public QMainWindow {
       QFileDialog* loadChordStyleDialog;
       QFileDialog* saveChordStyleDialog;
       QFileDialog* loadSoundFontDialog;
+      QFileDialog* loadBackgroundDialog;
       QFileDialog* loadScanDialog;
       QFileDialog* loadAudioDialog;
       QFileDialog* loadDrumsetDialog;
@@ -507,6 +508,7 @@ class MuseScore : public QMainWindow {
       QString getScanFile(const QString&);
       QString getAudioFile(const QString&);
       QString getDrumsetFilename(bool open);
+      QString getWallpaper(const QString& caption);
 
       bool hRaster() const { return hRasterAction->isChecked(); }
       bool vRaster() const { return vRasterAction->isChecked(); }

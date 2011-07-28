@@ -1407,8 +1407,9 @@ QPointF Note::pagePos() const
 void Note::scanElements(void* data, void (*func)(void*, Element*), bool all)
       {
       func(data, this);
-      if (_tieFor && !staff()->useTablature())  // no ties in tablature
-            _tieFor->scanElements(data, func, all);
+      // tie segments are collected from System
+      //      if (_tieFor && !staff()->useTablature())  // no ties in tablature
+      //            _tieFor->scanElements(data, func, all);
       foreach(Element* e, _el) {
             if (score()->tagIsValid(e->tag()))
                   e->scanElements(data, func, all);

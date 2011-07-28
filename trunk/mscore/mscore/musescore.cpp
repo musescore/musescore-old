@@ -394,6 +394,7 @@ MuseScore::MuseScore()
       saveStyleDialog       = 0;
       saveImageDialog       = 0;
       loadSoundFontDialog   = 0;
+      loadBackgroundDialog  = 0;
       loadScanDialog        = 0;
       loadAudioDialog       = 0;
       loadChordStyleDialog  = 0;
