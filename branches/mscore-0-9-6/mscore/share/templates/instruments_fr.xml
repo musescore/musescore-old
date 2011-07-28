@@ -4327,7 +4327,7 @@
 
   <instrument-group name="Cordes">
      <instrument>
-        <name>Violion</name>
+        <name>Violon</name>
         <short-name>Vln.</short-name>
         <clef>0</clef>
         <aPitchRange>55-88</aPitchRange>
@@ -4343,7 +4343,7 @@
           </channel>
         </instrument>
      <instrument>
-        <name>Premiers Violions</name>
+        <name>Premiers Violons</name>
         <short-name>Vlns. 1</short-name>
         <clef>0</clef>
         <aPitchRange>55-88</aPitchRange>
@@ -4359,7 +4359,7 @@
           </channel>
         </instrument>
      <instrument>
-        <name>Deuxi&#232;mes Violions</name>
+        <name>Deuxi&#232;mes Violons</name>
         <short-name>Vlns. 2</short-name>
         <clef>0</clef>
         <aPitchRange>55-88</aPitchRange>
