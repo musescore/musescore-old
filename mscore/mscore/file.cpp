@@ -1826,4 +1826,98 @@ bool MuseScore::savePng(Score* score, const QString& name, bool screenshot, bool
       return rv;
       }
 
+//---------------------------------------------------------
+//   WallpaperPreview
+//---------------------------------------------------------
+
+WallpaperPreview::WallpaperPreview(QWidget* parent)
+   : QFrame(parent)
+      {
+      _pixmap = 0;
+      }
+
+//---------------------------------------------------------
+//   paintEvent
+//---------------------------------------------------------
+
+void WallpaperPreview::paintEvent(QPaintEvent* ev)
+      {
+      QPainter p(this);
+      int fw = frameWidth();
+      QRect r(frameRect().adjusted(fw, fw, -2*fw, -2*fw));
+      if (_pixmap)
+            p.drawTiledPixmap(r, *_pixmap);
+      QFrame::paintEvent(ev);
+      }
+
+//---------------------------------------------------------
+//   setImage
+//---------------------------------------------------------
+
+void WallpaperPreview::setImage(const QString& path)
+      {
+      printf("setImage <%s>\n", qPrintable(path));
+      delete _pixmap;
+      _pixmap = new QPixmap(path);
+      update();
+      }
+
+//---------------------------------------------------------
+//   getWallpaper
+//---------------------------------------------------------
+
+QString MuseScore::getWallpaper(const QString& caption)
+      {
+      QString filter = tr("Images (*.jpg *.gif *.png);;All (*)");
+      QString d = mscoreGlobalShare + "/wallpaper";
+
+      if (preferences.nativeDialogs) {
+            QString s = QFileDialog::getOpenFileName(
+               this,                            // parent
+               caption,
+               d,
+               filter
+               );
+            return s;
+            }
+
+      if (loadBackgroundDialog == 0) {
+            loadBackgroundDialog = new QFileDialog(this);
+            loadBackgroundDialog->setFileMode(QFileDialog::ExistingFile);
+            loadBackgroundDialog->setOption(QFileDialog::DontUseNativeDialog, true);
+            loadBackgroundDialog->setWindowTitle(caption);
+            loadBackgroundDialog->setNameFilter(filter);
+            loadBackgroundDialog->setDirectory(d);
+
+            QSettings settings;
+            loadBackgroundDialog->restoreState(settings.value("loadBackgroundDialog").toByteArray());
+            loadBackgroundDialog->setAcceptMode(QFileDialog::AcceptOpen);
+
+            QSplitter* splitter = loadBackgroundDialog->findChild<QSplitter*>("splitter");
+            if (splitter) {
+                  printf("splitter found\n");
+                  WallpaperPreview* preview = new WallpaperPreview;
+                  splitter->addWidget(preview);
+                  connect(loadBackgroundDialog, SIGNAL(currentChanged(const QString&)),
+                     preview, SLOT(setImage(const QString&)));
+                  }
+            }
+
+      //
+      // setup side bar urls
+      //
+      QList<QUrl> urls;
+      QString home = QDir::homePath();
+      urls.append(QUrl::fromLocalFile(d));
+      urls.append(QUrl::fromLocalFile(home));
+      urls.append(QUrl::fromLocalFile(QDir::currentPath()));
+      loadBackgroundDialog->setSidebarUrls(urls);
+
+      if (loadBackgroundDialog->exec()) {
+            QStringList result = loadBackgroundDialog->selectedFiles();
+            return result.front();
+            }
+      return QString();
+      }
+
 

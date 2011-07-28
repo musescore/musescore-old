@@ -147,10 +147,13 @@
    <item row="0" column="1">
     <widget class="QStackedWidget" name="pageStack">
      <property name="currentIndex">
-      <number>15</number>
+      <number>16</number>
      </property>
      <widget class="QWidget" name="Seite1">
       <layout class="QVBoxLayout" name="verticalLayout_20">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="groupBox_12">
          <property name="title">
@@ -294,6 +297,9 @@
      </widget>
      <widget class="QWidget" name="Seite2">
       <layout class="QVBoxLayout" name="verticalLayout_21">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="groupBox_13">
          <property name="title">
@@ -848,6 +854,9 @@
        <property name="margin">
         <number>8</number>
        </property>
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item row="0" column="0">
         <widget class="QGroupBox" name="showHeader">
          <property name="sizePolicy">
@@ -866,6 +875,9 @@
           <bool>true</bool>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_23">
+          <property name="spacing">
+           <number>0</number>
+          </property>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
             <item>
@@ -1442,6 +1454,9 @@ p, li { white-space: pre-wrap; }
      </widget>
      <widget class="QWidget" name="Seite4">
       <layout class="QVBoxLayout" name="verticalLayout_3">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="groupBox_2">
          <property name="title">
@@ -1514,6 +1529,9 @@ p, li { white-space: pre-wrap; }
      </widget>
      <widget class="QWidget" name="Seite5">
       <layout class="QVBoxLayout" name="verticalLayout_4">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="groupBox_3">
          <property name="title">
@@ -1830,6 +1848,9 @@ p, li { white-space: pre-wrap; }
      </widget>
      <widget class="QWidget" name="Seite6">
       <layout class="QVBoxLayout" name="verticalLayout_17">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="groupBox_8">
          <property name="title">
@@ -1980,6 +2001,9 @@ p, li { white-space: pre-wrap; }
      </widget>
      <widget class="QWidget" name="Seite7">
       <layout class="QVBoxLayout" name="verticalLayout_7">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="groupBox_4">
          <property name="title">
@@ -2226,6 +2250,9 @@ p, li { white-space: pre-wrap; }
      </widget>
      <widget class="QWidget" name="Seite8">
       <layout class="QVBoxLayout" name="verticalLayout_27">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="groupBox_17">
          <property name="title">
@@ -2275,6 +2302,9 @@ p, li { white-space: pre-wrap; }
      </widget>
      <widget class="QWidget" name="Seite9">
       <layout class="QVBoxLayout" name="verticalLayout_15">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="groupBox_7">
          <property name="title">
@@ -2368,6 +2398,9 @@ p, li { white-space: pre-wrap; }
      </widget>
      <widget class="QWidget" name="Seite10">
       <layout class="QVBoxLayout" name="verticalLayout_14">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="groupBox_6">
          <property name="title">
@@ -2494,6 +2527,9 @@ p, li { white-space: pre-wrap; }
      </widget>
      <widget class="QWidget" name="Seite11">
       <layout class="QVBoxLayout" name="verticalLayout_13">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="groupBox_9">
          <property name="title">
@@ -2632,6 +2668,9 @@ p, li { white-space: pre-wrap; }
      </widget>
      <widget class="QWidget" name="Seite12">
       <layout class="QVBoxLayout" name="verticalLayout_18">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="groupBox_10">
          <property name="title">
@@ -2804,12 +2843,18 @@ p, li { white-space: pre-wrap; }
      </widget>
      <widget class="QWidget" name="Seite13">
       <layout class="QVBoxLayout" name="verticalLayout_19">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="groupBox_11">
          <property name="title">
           <string>Hairpins</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_7">
+          <property name="verticalSpacing">
+           <number>0</number>
+          </property>
           <item row="0" column="0">
            <widget class="QLabel" name="label_8">
             <property name="text">
@@ -2887,6 +2932,9 @@ p, li { white-space: pre-wrap; }
           <string>Volta</string>
          </property>
          <layout class="QGridLayout" name="gridLayout0">
+          <property name="verticalSpacing">
+           <number>0</number>
+          </property>
           <item row="0" column="2">
            <spacer name="horizontalSpacer_5">
             <property name="orientation">
@@ -2979,6 +3027,9 @@ p, li { white-space: pre-wrap; }
           <string>Ottava</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_12">
+          <property name="verticalSpacing">
+           <number>0</number>
+          </property>
           <item row="2" column="0">
            <widget class="QLabel" name="label_88">
             <property name="text">
@@ -3060,6 +3111,9 @@ p, li { white-space: pre-wrap; }
      </widget>
      <widget class="QWidget" name="Seite14">
       <layout class="QVBoxLayout" name="verticalLayout_12">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="groupBox_5">
          <property name="title">
@@ -3117,6 +3171,9 @@ p, li { white-space: pre-wrap; }
      </widget>
      <widget class="QWidget" name="Seite15">
       <layout class="QVBoxLayout" name="verticalLayout_24">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="groupBox_14">
          <property name="title">
@@ -3238,6 +3295,9 @@ p, li { white-space: pre-wrap; }
      </widget>
      <widget class="QWidget" name="Seite16">
       <layout class="QVBoxLayout" name="verticalLayout_30">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="groupBox_19">
          <property name="title">
@@ -3270,6 +3330,9 @@ p, li { white-space: pre-wrap; }
      </widget>
      <widget class="QWidget" name="Seite17">
       <layout class="QVBoxLayout" name="verticalLayout1">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="groupBox">
          <property name="title">

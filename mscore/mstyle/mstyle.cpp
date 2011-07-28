@@ -349,7 +349,7 @@ QSize MStyle::checkBoxSizeFromContents(const QStyleOption*, const QSize& content
       size.setHeight(qMax(size.height(), indicator));
 
       //Add space for the indicator and the icon
-      const int spacer( CheckBox_BoxTextSpace );
+      const int spacer = CheckBox_BoxTextSpace;
       size.rwidth() += indicator + spacer;
 
       return size;
@@ -378,8 +378,8 @@ QSize MStyle::comboBoxSizeFromContents( const QStyleOption* option, const QSize&
       // this is still to be understood and might reveal some deeper issue.
       // notably, should compare to zhqt is done for PushButtons
       const QStyleOptionComboBox *cb = qstyleoption_cast<const QStyleOptionComboBox *>(option);
-      if( cb && !cb->editable && (!cb->currentIcon.isNull() || cb->fontMetrics.height() > 13 ) )
-            size.rheight()+=1;
+      if (cb && !cb->editable && (!cb->currentIcon.isNull() || cb->fontMetrics.height() > 13))
+            size.rheight() += 1;
 
       // also expand to account for scrollbar
       size.rwidth() += MStyleConfigData::scrollBarWidth - 6;

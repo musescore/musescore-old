@@ -67,7 +67,7 @@ QT4_WRAP_CPP (mocs
       script.h articulationprop.h metaedit.h magbox.h voiceselector.h
       textprop.h dynamicprop.h textproperties.h tupletdialog.h tupletproperties.h
       slurproperties.h selectdialog.h synthcontrol.h drumroll.h pianoroll.h
-      piano.h ruler.h
+      piano.h ruler.h file.h
       pianoview.h drumview.h splitstaff.h scoretab.h keyedit.h keycanvas.h harmonyedit.h
       harmonycanvas.h updatechecker.h fretproperties.h fretcanvas.h editstafftype.h
       prefsdialog.h sectionbreakprop.h hairpinprop.h bendproperties.h

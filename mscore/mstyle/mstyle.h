@@ -298,7 +298,7 @@ class MStyle : public QCommonStyle {
       FrameShadowFactory* _frameShadowFactory;
 
       //! widget explorer
-      WidgetExplorer* _widgetExplorer;
+//      WidgetExplorer* _widgetExplorer;
 
       //! tabBar data
       TabBarData* _tabBarData;
