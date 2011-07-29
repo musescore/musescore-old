@@ -2273,6 +2273,13 @@ MScore::init();         // initialize libmscore
       mscore->loadPlugins();
       mscore->writeSessionFile(false);
       mscore->changeState(STATE_DISABLED);   // DEBUG
+      
+#ifdef Q_WS_MAC
+      // there's a bug in Qt showing the toolbar unified after switching showFullScreen(), showMaximized(),
+      // showNormal()...
+      mscore->setUnifiedTitleAndToolBarOnMac(false);
+#endif
+
       mscore->show();
       if (sc)
             sc->finish(mscore);
@@ -4365,6 +4372,12 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
                   showFullScreen();
             else
                   showNormal();
+                  
+#ifdef Q_WS_MAC
+            // Qt Bug: Toolbar goes into unified mode
+            // after switching back from fullscreen
+            setUnifiedTitleAndToolBarOnMac(false);
+#endif
             }
       else if (cmd == "config-raster")
             editRaster();

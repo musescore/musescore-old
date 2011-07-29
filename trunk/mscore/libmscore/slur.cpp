@@ -351,12 +351,14 @@ void SlurSegment::computeBezier()
       //
       QPointF pp1 = ups[GRIP_START].p + ups[GRIP_START].off * _spatium;
       QPointF pp2 = ups[GRIP_END].p + ups[GRIP_END].off * _spatium;
+      QPointF p6o = ups[GRIP_SHOULDER].off * _spatium;
 
       QPointF p2 = pp2 - pp1;
       qreal sinb = atan(p2.y() / p2.x());
       QTransform t;
       t.rotateRadians(-sinb);
-      p2 = t.map(p2);
+      p2  = t.map(p2);
+      p6o = t.map(p6o);
 
       qreal d = p2.x() / _spatium;
       if (d <= 2.0) {
@@ -378,11 +380,14 @@ void SlurSegment::computeBezier()
 
       if (!slurTie()->isUp())
             shoulderH = -shoulderH;
+      shoulderH -= p6o.y();
 
       qreal c    = p2.x();
-      qreal c1   = (c - c * shoulderW) * .5;
-      qreal c2   = c1 + c * shoulderW;
+      qreal c1   = (c - c * shoulderW) * .5 + p6o.x();
+      qreal c2   = c1 + c * shoulderW       + p6o.x();
+
       QPointF p5 = QPointF(c * .5, 0.0);
+      QPointF p6 = QPointF(c1 + (c2 - c1) * .5, -shoulderH) - p6o;
 
       QPointF p3(c1, -shoulderH);
       QPointF p4(c2, -shoulderH);
@@ -409,12 +414,13 @@ void SlurSegment::computeBezier()
       t.reset();
       t.translate(pp1.x(), pp1.y());
       t.rotateRadians(sinb);
-      path                = t.map(path);
-      shapePath           = t.map(shapePath);
-      ups[GRIP_BEZIER1].p = t.map(p3);
-      ups[GRIP_BEZIER2].p = t.map(p4);
-      ups[GRIP_END].p     = t.map(p2) - ups[GRIP_END].off * _spatium;
-      ups[GRIP_DRAG].p    = t.map(p5);
+      path                 = t.map(path);
+      shapePath            = t.map(shapePath);
+      ups[GRIP_BEZIER1].p  = t.map(p3);
+      ups[GRIP_BEZIER2].p  = t.map(p4);
+      ups[GRIP_END].p      = t.map(p2) - ups[GRIP_END].off * _spatium;
+      ups[GRIP_DRAG].p     = t.map(p5);
+      ups[GRIP_SHOULDER].p = t.map(p6);
       }
 
 //---------------------------------------------------------
