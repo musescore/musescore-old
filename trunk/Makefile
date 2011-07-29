@@ -48,7 +48,7 @@ debug:
             cd build.debug;                            \
             cmake -DCMAKE_BUILD_TYPE=DEBUG	       \
             	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
-            	   ../mscore; 			       \
+            	   ../mscore; 		             \
             make lrelease;                             \
             make -j ${CPUS};                           \
          else                                          \

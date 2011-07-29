@@ -47,27 +47,6 @@ SlurSegment::SlurSegment(const SlurSegment& b)
       }
 
 //---------------------------------------------------------
-//   updatePath
-//---------------------------------------------------------
-
-void SlurSegment::updatePath()
-      {
-      qreal _spatium = spatium();
-
-      QPointF pp[4];
-      for (int i = 0; i < 4; ++i)
-            pp[i] = ups[i].p + ups[i].off * _spatium;
-      path = QPainterPath();
-      qreal w = (score()->styleS(ST_SlurMidWidth).val() - score()->styleS(ST_SlurEndWidth).val()) * _spatium;
-      QPointF t(0.0, w);    // thickness of slur
-
-      path.moveTo(pp[0]);
-      path.cubicTo(pp[1]-t, pp[2]-t, pp[3]);
-      if (slurTie()->lineType() == 0)
-            path.cubicTo(pp[2]+t, pp[1]+t, pp[0]);
-      }
-
-//---------------------------------------------------------
 //   move
 //---------------------------------------------------------
 
@@ -266,8 +245,8 @@ void SlurSegment::setGrip(int n, const QPointF& pt)
 void SlurSegment::editDrag(const EditData& ed)
       {
       ups[ed.curGrip].off += (ed.delta / spatium());
+      computeBezier();
       if (ed.curGrip == 0 || ed.curGrip == 3) {
-            computeBezier();
             //
             // move anchor for slurs
             //
@@ -284,14 +263,13 @@ void SlurSegment::editDrag(const EditData& ed)
                         if ((ed.curGrip == 3 && chord != slur->endElement())
                            || (ed.curGrip == 0 && chord != slur->startElement())) {
                               changeAnchor(ed.view, ed.curGrip, chord);
-                              QPointF p1 = ed.pos - ups[ed.curGrip].p + pagePos();
+                              QPointF p1 = ed.pos - ups[ed.curGrip].p - pagePos();
                               ups[ed.curGrip].off = p1 / spatium();
                               return;
                               }
                         }
                   }
             }
-      updatePath();
       }
 
 //---------------------------------------------------------
@@ -301,15 +279,6 @@ void SlurSegment::editDrag(const EditData& ed)
 QRectF SlurSegment::bbox() const
       {
       return path.boundingRect();
-      }
-
-//---------------------------------------------------------
-//   shape
-//---------------------------------------------------------
-
-QPainterPath SlurSegment::shape() const
-      {
-      return path;
       }
 
 //---------------------------------------------------------
@@ -374,78 +343,80 @@ void SlurSegment::read(QDomElement e)
 
 void SlurSegment::computeBezier()
       {
-      qreal _spatium = spatium();
-      qreal bow       = score()->styleS(ST_SlurBow).val() * _spatium;
+      qreal _spatium  = spatium();
+      qreal shoulderW;              // height as fraction of slur-length
+      qreal shoulderH;
       //
-      //  compute bezier help points
+      // p1 and p2 are the end points of the slur
       //
-      QPointF p1 = ups[0].p;
-      QPointF p2 = ups[3].p;
-      qreal x0   = p1.x() + ups[0].off.x() * _spatium;
-      qreal y0   = p1.y() + ups[0].off.y() * _spatium;
-      qreal x3   = p2.x() + ups[3].off.x() * _spatium;
-      qreal y3   = p2.y() + ups[3].off.y() * _spatium;
+      QPointF pp1 = ups[0].p + ups[0].off * _spatium;
+      QPointF pp2 = ups[3].p + ups[3].off * _spatium;
 
-      qreal dx = x3 - x0;
-      if (dx <= 0.0 || (x0 > x3)) {
-            if (debugMode)
-                  printf("illegal slurSegment dx %f ---  x0 %f > x3 %f\n", dx, x0, x3);
-            return;
-            }
-      if (bow > (dx * .2))       // limit bow for small slurs
-            bow = dx * .2;
+      QPointF p2 = pp2 - pp1;
+      qreal sinb = atan(p2.y() / p2.x());
+      QTransform t;
+      t.rotateRadians(-sinb);
+      p2 = t.map(p2);
 
-      qreal d     = dx / 5.0;
-      qreal x1    = x0 + d;
-      qreal x2    = x3 - d;
-      qreal dy    = y3 - y0;
-      qreal slope = dy / dx;
-
-      qreal y1, y2;
-      bool up   = slurTie()->isUp();
-      qreal ddx = dx * .1 * slope;
-      qreal ddy = bow * (1.0 - qAbs(slope) * 1.5);
-      if (ddy < 0.5 * _spatium)
-            ddy = 0.5 * _spatium;
-      if (up) {
-            if (slope > 0.0) {
-                  y1 = y0 - ddy;
-                  y2 = y3 - bow - dy * slope * .8;
-                  if (y2 < y1)
-                        y2 = y1;
-                  x2 += ddx;
-                  }
-            else {
-                  y2 = y3 - ddy;
-                  y1 = y0 - bow - dy * slope * .8;
-                  if (y1 < y2)
-                        y1 = y2;
-                  x1 -= ddx;
-                  }
+      qreal d = p2.x() / _spatium;
+      if (d <= 2.0) {
+            shoulderH = d *.5 * _spatium;
+            shoulderW = .6;
             }
       else {
-            if (slope < 0.0) {
-                  y1 = y0 + ddy;
-                  y2 = y3 + bow + dy * slope * .8;
-                  if (y2 > y1)
-                        y2 = y1;
-                  x2 += ddx;
-                  }
-            else {
-                  y2 = y3 + ddy;
-                  y1 = y0 + bow + dy * slope * .8;
-                  if (y1 > y2)
-                        y1 = y2;
-                  x1 -= ddx;
-                  }
+            qreal dd = log10(1.0 + (d - 2.0) * .5) * 2.0;
+            if (dd > 3.0)
+                  dd = 3.0;
+            shoulderH = (dd + 1.0) * _spatium;
+            if (d > 18.0)
+                  shoulderW = 0.8;
+            else if (d > 10)
+                  shoulderW = 0.7;
+            else
+                  shoulderW = 0.6;
             }
 
-      ups[1].p = QPointF(x1, y1);
-      ups[2].p = QPointF(x2, y2);
+      if (!slurTie()->isUp())
+            shoulderH = -shoulderH;
+
+      qreal c  = p2.x();
+      qreal c1 = (c - c * shoulderW) * .5;
+      qreal c2 = c1 + c * shoulderW;
+      QPointF p3(c1, -shoulderH);
+      QPointF p4(c2, -shoulderH);
+
+      qreal w = (score()->styleS(ST_SlurMidWidth).val() - score()->styleS(ST_SlurEndWidth).val()) * _spatium;
+      QPointF th(0.0, w);    // thickness of slur
+
+      QPointF p3o = t.map(ups[1].off * _spatium);
+      QPointF p4o = t.map(ups[2].off * _spatium);
+
+      path = QPainterPath();
+      path.moveTo(QPointF());
+      path.cubicTo(p3 + p3o - th, p4 + p4o - th, p2);
+      if (slurTie()->lineType() == 0)
+            path.cubicTo(p4 +p4o + th, p3 + p3o + th, QPointF());
+
+      th = QPointF(0.0, 3.0 * w);
+      shapePath = QPainterPath();
+      shapePath.moveTo(QPointF());
+      shapePath.cubicTo(p3 + p3o - th, p4 + p4o - th, p2);
+      shapePath.cubicTo(p4 +p4o + th, p3 + p3o + th, QPointF());
+
+      // translate back
+      t.reset();
+      t.translate(pp1.x(), pp1.y());
+      t.rotateRadians(sinb);
+      path = t.map(path);
+      shapePath = t.map(shapePath);
+      ups[1].p = t.map(p3);
+      ups[2].p = t.map(p4);
+      ups[3].p = t.map(p2) - ups[3].off * _spatium;
       }
 
 //---------------------------------------------------------
 //   layout
+//    p1, p2  are in System coordinates
 //---------------------------------------------------------
 
 void SlurSegment::layout(const QPointF& p1, const QPointF& p2)
@@ -453,7 +424,6 @@ void SlurSegment::layout(const QPointF& p1, const QPointF& p2)
       ups[0].p = p1;
       ups[3].p = p2;
       computeBezier();
-      updatePath();
       }
 
 //---------------------------------------------------------

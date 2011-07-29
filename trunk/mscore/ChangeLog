@@ -1,3 +1,5 @@
+29.jul (ws)
+      - changed calculation of cubic bezier for slurs/ties
 28.jul (ws)
       - fix #11709: slurs/ties across pages: slur/tie on second page is also shown
         on first page
