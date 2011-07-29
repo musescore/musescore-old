@@ -1,4 +1,5 @@
 29.jul (ws)
+      - fix #11755: switching from fullscreen to normal makes toolbar unified
       - experimental: selecting slur enters edit mode
       - changed calculation of cubic bezier for slurs/ties
 28.jul (ws)
