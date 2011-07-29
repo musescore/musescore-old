@@ -1484,9 +1484,17 @@ void ScoreView::paintEvent(QPaintEvent* ev)
 
       if (grips) {
             qreal lw = 2.0/p.matrix().m11();
-            // QPen pen(Qt::blue);
-            QPen pen(MScore::defaultColor);
+            QPen pen(Qt::gray);
             pen.setWidthF(lw);
+            if (grips >= 4) {
+                  p.setPen(pen);
+                  QPolygonF polygon(grips+1);
+                  for (int i = 0; i < grips; ++i)
+                        polygon[i] = QPointF(grip[i].center());
+                  polygon[grips] = QPointF(grip[0].center());
+                  p.drawPolyline(polygon);
+                  }
+            pen.setColor(MScore::defaultColor);
             p.setPen(pen);
             for (int i = 0; i < grips; ++i) {
                   p.setBrush(((i == curGrip) && hasFocus()) ? QBrush(Qt::blue) : Qt::NoBrush);
@@ -3520,6 +3528,13 @@ void ScoreView::select(QMouseEvent* ev)
             curElement = 0;
       _score->setUpdateAll(true);   //DEBUG
       mscore->endCmd();
+      // Experimental:
+      if (_score->selection().isSingle()) {
+            // start edit mode
+            Element* e = _score->selection().element();
+            if (e->type() == SLUR_SEGMENT)
+                  startEdit(e);
+            }
       }
 
 //---------------------------------------------------------

@@ -31,6 +31,11 @@ struct UP {
       QPointF off;          // user offset in spatium units
       };
 
+enum {
+      GRIP_START, GRIP_BEZIER1, GRIP_BEZIER2, GRIP_END, GRIP_DRAG,
+      SLUR_GRIPS
+      };
+
 //---------------------------------------------------------
 //   SlurSegment
 //    also used for Tie
@@ -39,7 +44,7 @@ struct UP {
 class SlurSegment : public SpannerSegment {
       Q_DECLARE_TR_FUNCTIONS(SlurSegment)
 
-      struct UP ups[4];
+      struct UP ups[SLUR_GRIPS];
       QPainterPath path;
       QPainterPath shapePath;
 
