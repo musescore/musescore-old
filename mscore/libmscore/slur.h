@@ -41,9 +41,9 @@ class SlurSegment : public SpannerSegment {
 
       struct UP ups[4];
       QPainterPath path;
+      QPainterPath shapePath;
 
       void computeBezier();
-      void updatePath();
       void changeAnchor(MuseScoreView*, int curGrip, ChordRest*);
 
    public:
@@ -55,7 +55,7 @@ class SlurSegment : public SpannerSegment {
       virtual QRectF bbox() const;
 
       void layout(const QPointF& p1, const QPointF& p2);
-      virtual QPainterPath shape() const;
+      virtual QPainterPath shape() const { return shapePath; }
       virtual void draw(Painter*) const;
 
       virtual bool isEditable() const { return true; }
