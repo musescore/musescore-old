@@ -67,11 +67,28 @@ else (OMR)
 endif (OMR)
 
 if (APPLE)
+
+      # Currently, just 'ppc', 'i386' or 'ppc i386' are useful architectures,
+      # because the Flash-Player is not yet available as a 64-bit version.
+      # Flash is required for displaying the videos of MuseScore-Connect.
+      # See http://qt.gitorious.org/qt/pages/Qt470KnownIssues
+      # Since 10.6+ only runs on intel, just set it to i386.
+      set(CMAKE_OSX_ARCHITECTURES i386)
+
+      # Adjust and uncomment this variable, if you target a different version
+      # of MacOSX. 
+      # set(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.6.sdk)
+
+      # Building against the Binary-Package of Qt might require to uncomment
+      # and possibly adjust the following path, because the QtUiTools are not
+      # deployed as a framework.
+      # set(QT_QTUITOOLS_INCLUDE_DIR /usr/include/QtUiTools )
+
+
+      set(CMAKE_OSX_DEPLOYMENT_TARGET 10.4)      #min version required
       set(HAS_AUDIOFILE TRUE)            # requires libsndfile
       set(STATIC_SCRIPT_BINDINGS TRUE)
-#      set(CMAKE_OSX_ARCHITECTURES i386)
-      set(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.6.sdk)
-      set(CMAKE_OSX_DEPLOYMENT_TARGET 10.4)      #min version required
+
       find_library(AudioToolboxFW        NAMES AudioToolbox)
       find_library(AudioUnitFW           NAMES AudioUnit)
       find_library(CoreAudioFW           NAMES CoreAudio)

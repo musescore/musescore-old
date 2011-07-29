@@ -1,5 +1,8 @@
 29.jul (ws)
+      - task #11784: dev-experience: explanations for global CMakeList.txt
+        (patch from mokaspar)
       - fix #11755: switching from fullscreen to normal makes toolbar unified
+        (patch from mokaspar)
       - experimental: selecting slur enters edit mode
       - changed calculation of cubic bezier for slurs/ties
 28.jul (ws)
