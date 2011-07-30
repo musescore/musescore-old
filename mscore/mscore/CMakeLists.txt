@@ -45,7 +45,7 @@ QT4_WRAP_UI (ui_headers
       lineproperties.ui excerptsdialog.ui lyrics.ui stafftext.ui
       imageproperties.ui tupletdialog.ui tupletproperties.ui
       glissandoprop.ui articulation.ui metaedit.ui palette.ui
-      dynamicproperties.ui textline.ui slurproperties.ui inspector.ui
+      dynamicproperties.ui textline.ui slurproperties.ui debugger.ui
       select.ui synthcontrol.ui splitstaff.ui cellproperties.ui beam.ui keyedit.ui
       harmonyedit.ui selectinstr.ui tremolo.ui fretdprops.ui stafftype.ui
       sectionbreak.ui hairpinproperties.ui spanner.ui bend.ui tremolobar.ui
@@ -55,7 +55,7 @@ QT4_WRAP_UI (ui_headers
       )
 
 QT4_WRAP_CPP (mocs
-      scoreview.h editinstrument.h editstyle.h edittempo.h instrdialog.h inspector.h
+      scoreview.h editinstrument.h editstyle.h edittempo.h instrdialog.h debugger.h
       musescore.h navigator.h pagesettings.h palette.h mixer.h playpanel.h
       measureproperties.h preview.h seq.h textpalette.h textstyle.h
       timedialog.h symboldialog.h shortcutcapturedialog.h simplebutton.h
@@ -133,7 +133,7 @@ add_executable ( ${ExecutableName}
 
       actions.cpp scoreview.cpp editinstrument.cpp editstyle.cpp
       edittempo.cpp exportxml.cpp icons.cpp importbww.cpp importxml.cpp
-      instrdialog.cpp inspector.cpp menus.cpp importmidi.cpp
+      instrdialog.cpp debugger.cpp menus.cpp importmidi.cpp
       musescore.cpp navigator.cpp pagesettings.cpp palette.cpp
       mixer.cpp playpanel.cpp preferences.cpp measureproperties.cpp
       preview.cpp seq.cpp boxproperties.cpp textpalette.cpp

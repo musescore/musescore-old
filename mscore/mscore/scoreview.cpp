@@ -923,7 +923,7 @@ void ScoreView::objectPopup(const QPoint& pos, Element* obj)
       createElementPropertyMenu(obj, popup);
 
       popup->addSeparator();
-      a = popup->addAction(tr("Object Inspector"));
+      a = popup->addAction(tr("Object Debugger"));
       a->setData("list");
       a = popup->exec(pos);
       if (a == 0)
@@ -1009,7 +1009,7 @@ void ScoreView::measurePopup(const QPoint& gpos, Measure* obj)
       popup->addAction(tr("Measure Properties..."))->setData("props");
       popup->addSeparator();
 
-      popup->addAction(tr("Object Inspector"))->setData("list");
+      popup->addAction(tr("Object Debugger"))->setData("list");
 
       a = popup->exec(gpos);
       if (a == 0)

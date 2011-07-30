@@ -18,10 +18,10 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __INSPECTOR_H__
-#define __INSPECTOR_H__
+#ifndef __DEBUGGER_H__
+#define __DEBUGGER_H__
 
-#include "ui_inspector.h"
+#include "ui_debugger.h"
 #include "ui_element.h"
 #include "ui_note.h"
 #include "ui_page.h"
@@ -61,10 +61,10 @@ class ElementItem;
 class ShowNoteWidget;
 
 //---------------------------------------------------------
-//   Inspector
+//   Debugger
 //---------------------------------------------------------
 
-class Inspector : public QDialog, public Ui::InspectorBase {
+class Debugger : public QDialog, public Ui::DebuggerBase {
       Q_OBJECT;
 
       QStack<Element*>backStack;
@@ -93,7 +93,7 @@ class Inspector : public QDialog, public Ui::InspectorBase {
       void reloadClicked();
 
    public:
-      Inspector(QWidget* parent = 0);
+      Debugger(QWidget* parent = 0);
       void writeSettings();
 	void updateList(Score*);
       };

@@ -402,10 +402,10 @@ void MuseScore::pluginExecuteFunction(int idx, const char* functionName)
             }
       if (scriptDebug) {
             if (debugger == 0) {
-                  debugger = new QScriptEngineDebugger();
-                  debugger->attachTo(se);
+                  scriptDebugger = new QScriptEngineDebugger();
+                  scriptDebugger->attachTo(se);
                   }
-            debugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
+            scriptDebugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
             }
 
       se->globalObject().setProperty("curScore", se->newVariant(qVariantFromValue(cs)));

@@ -41,7 +41,7 @@ class MidiFile;
 class TextStyleDialog;
 class PlayPanel;
 class InstrumentListEditor;
-class Inspector;
+class Debugger;
 class MeasureListEditor;
 class Score;
 class PageSettings;
@@ -210,7 +210,7 @@ class MuseScore : public QMainWindow {
       PlayPanel* playPanel;
       InstrumentListEditor* iledit;
       SynthControl* synthControl;
-      Inspector* inspector;
+      Debugger* debugger;
       MeasureListEditor* measureListEdit;
       PageSettings* pageSettings;
 
@@ -243,7 +243,7 @@ class MuseScore : public QMainWindow {
       ScriptEngine* se;
       QString pluginPath;
 
-      QScriptEngineDebugger* debugger;
+      QScriptEngineDebugger* scriptDebugger;
 
       QTimer* autoSaveTimer;
       QList<QAction*> pluginActions;
@@ -317,7 +317,7 @@ class MuseScore : public QMainWindow {
       void fingeringMenu();
       void registerPlugin(const QString& pluginPath);
       void pluginExecuteFunction(int idx, const char* functionName);
-      void startInspector();
+      void startDebugger();
       void midiinToggled(bool);
       void speakerToggled(bool);
       void undo();
