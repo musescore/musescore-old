@@ -273,6 +273,7 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
       else
             printf("unknown selection state\n");
       score->endCmd();
+      mscore->endCmd();
       }
 
 //---------------------------------------------------------
