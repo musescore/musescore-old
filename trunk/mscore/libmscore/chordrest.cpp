@@ -458,6 +458,19 @@ void ChordRest::layoutArticulations()
       qreal dy = 0.0;
 
       //
+      // staccato and tenuto are placed near to notehead
+      // reserve extra space for slur for all other articulations
+      //
+      //    TODO: - check for slur direction
+      //
+/*      Articulation* a = articulations.front();
+      if (!_slurFor.isEmpty()
+         && (a->subtype() != TenutoSym)
+         && (a->subtype() != StaccatoSym)) {
+            dy += _spatium;
+            }
+  */
+      //
       //    pass 1
       //    place all articulations with anchor at chord/rest
       //
@@ -479,7 +492,7 @@ void ChordRest::layoutArticulations()
                   //
                   // check for collision with staff line
                   //
-                  if (y <= staffBotY-.1) {
+                  if (y <= staffBotY -.1 - dy) {
                         qreal l = y / _spatium;
                         qreal delta = fabs(l - round(l));
                         if (delta < 0.4) {
@@ -493,7 +506,7 @@ void ChordRest::layoutArticulations()
                   //
                   // check for collision with staff line
                   //
-                  if (y >= staffTopY+.1) {
+                  if (y >= (staffTopY +.1 + dy)) {
                         qreal l = y / _spatium;
                         qreal delta = fabs(l - round(l));
                         if (delta < 0.4) {
