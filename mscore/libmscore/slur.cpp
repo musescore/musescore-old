@@ -350,7 +350,7 @@ void SlurSegment::computeBezier()
       // p1 and p2 are the end points of the slur
       //
       QPointF pp1 = ups[GRIP_START].p + ups[GRIP_START].off * _spatium;
-      QPointF pp2 = ups[GRIP_END].p + ups[GRIP_END].off * _spatium;
+      QPointF pp2 = ups[GRIP_END].p   + ups[GRIP_END].off   * _spatium;
       QPointF p6o = ups[GRIP_SHOULDER].off * _spatium;
 
       QPointF p2 = pp2 - pp1;
@@ -360,16 +360,17 @@ void SlurSegment::computeBezier()
       p2  = t.map(p2);
       p6o = t.map(p6o);
 
+      double smallH = 0.5;
       qreal d = p2.x() / _spatium;
       if (d <= 2.0) {
-            shoulderH = d *.5 * _spatium;
+            shoulderH = d * 0.5 * smallH * _spatium;
             shoulderW = .6;
             }
       else {
             qreal dd = log10(1.0 + (d - 2.0) * .5) * 2.0;
             if (dd > 3.0)
                   dd = 3.0;
-            shoulderH = (dd + 1.0) * _spatium;
+            shoulderH = (dd + smallH) * _spatium;
             if (d > 18.0)
                   shoulderW = 0.8;
             else if (d > 10)
@@ -387,7 +388,6 @@ void SlurSegment::computeBezier()
       qreal c2   = c1 + c * shoulderW       + p6o.x();
 
       QPointF p5 = QPointF(c * .5, 0.0);
-      QPointF p6 = QPointF(c1 + (c2 - c1) * .5, -shoulderH) - p6o;
 
       QPointF p3(c1, -shoulderH);
       QPointF p4(c2, -shoulderH);
@@ -397,6 +397,19 @@ void SlurSegment::computeBezier()
 
       QPointF p3o = t.map(ups[GRIP_BEZIER1].off * _spatium);
       QPointF p4o = t.map(ups[GRIP_BEZIER2].off * _spatium);
+
+      //-----------------------------------calculate p6
+      QPointF pp3  = p3 + p3o;
+      QPointF pp4  = p4 + p4o;
+      QPointF ppp4 = pp4 - pp3;
+
+      qreal r2 = atan(ppp4.y() / ppp4.x());
+      t.reset();
+      t.rotateRadians(-r2);
+      QPointF p6  = QPointF(t.map(ppp4).x() * .5, 0.0);
+      t.rotateRadians(2 * r2);
+      p6 = t.map(p6) + pp3 - p6o;
+      //-----------------------------------
 
       path = QPainterPath();
       path.moveTo(QPointF());
@@ -492,7 +505,8 @@ static qreal fixArticulations(qreal yo, Chord* c, qreal _up)
       if (al->size() == 1) {
             Articulation* a = al->at(0);
             if (a->subtype() == TenutoSym || a->subtype() == StaccatoSym)
-                  yo = a->y() + (a->height() + c->score()->spatium() * .5) * _up;
+                  yo = a->y() + (a->height() + c->score()->spatium() * .3) * _up;
+//                  yo = a->y() + (a->height() + c->score()->spatium() * .5) * _up;
             }
       return yo;
       }
