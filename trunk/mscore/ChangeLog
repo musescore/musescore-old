@@ -1,3 +1,6 @@
+30.jul (ws)
+      - fix #11804: double-clicking object in palette does not apply to note
+        correctly
 29.jul (ws)
       - task #11784: dev-experience: explanations for global CMakeList.txt
         (patch from mokaspar)
