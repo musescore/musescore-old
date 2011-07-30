@@ -3514,6 +3514,8 @@ void ExportLy::findLyrics()
 	  for(Segment* seg = meas->first(st); seg; seg = seg->next(st))
 	    {
 	      const QList<Lyrics*>* lyrlist = seg->lyricsList(staffno);
+            if (!lyrlist)
+                  continue;
 
 	      foreach(const Lyrics* lix, *lyrlist)
 		{

@@ -18,7 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "inspector.h"
+#include "debugger.h"
 #include "musescore.h"
 #include "icons.h"
 #include "textstyle.h"
@@ -116,14 +116,14 @@ void ElementItem::init()
       }
 
 //---------------------------------------------------------
-//   Inspector
+//   Debugger
 //---------------------------------------------------------
 
-Inspector::Inspector(QWidget* parent)
+Debugger::Debugger(QWidget* parent)
    : QDialog(parent)
       {
       setupUi(this);
-      setWindowTitle(tr("MuseScore: Object Inspector"));
+      setWindowTitle(tr("MuseScore: Debugger"));
 
       for (int i = 0; i < MAXTYPE; ++i)
             elementViews[i] = 0;
@@ -139,7 +139,7 @@ Inspector::Inspector(QWidget* parent)
       list->resizeColumnToContents(0);
       if (!useFactorySettings) {
             QSettings settings;
-            settings.beginGroup("Inspector");
+            settings.beginGroup("Debugger");
             split->restoreState(settings.value("splitter").toByteArray());
             resize(settings.value("size", QSize(1000, 500)).toSize());
             move(settings.value("pos", QPoint(10, 10)).toPoint());
@@ -156,10 +156,10 @@ Inspector::Inspector(QWidget* parent)
 //   writeSettings
 //---------------------------------------------------------
 
-void Inspector::writeSettings()
+void Debugger::writeSettings()
       {
       QSettings settings;
-      settings.beginGroup("Inspector");
+      settings.beginGroup("Debugger");
       settings.setValue("size", size());
       settings.setValue("pos", pos());
       settings.setValue("splitter", split->saveState());
@@ -170,7 +170,7 @@ void Inspector::writeSettings()
 //   layoutScore
 //---------------------------------------------------------
 
-void Inspector::layoutScore()
+void Debugger::layoutScore()
       {
 //      cs->setLayoutAll(true);
 //      cs->end();
@@ -180,7 +180,7 @@ void Inspector::layoutScore()
 //   addSymbol
 //---------------------------------------------------------
 
-void Inspector::addSymbol(ElementItem* parent, BSymbol* bs)
+void Debugger::addSymbol(ElementItem* parent, BSymbol* bs)
       {
       const QList<Element*>el = bs->leafs();
       ElementItem* i = new ElementItem(parent, bs);
@@ -207,7 +207,7 @@ static void addMeasureBaseToList(ElementItem* mi, MeasureBase* mb)
 //   showEvent
 //---------------------------------------------------------
 
-void Inspector::showEvent(QShowEvent*)
+void Debugger::showEvent(QShowEvent*)
       {
       updateList(cs);
       }
@@ -227,7 +227,7 @@ static void addBSymbol(ElementItem* item, BSymbol* e)
 //   updateList
 //---------------------------------------------------------
 
-void Inspector::updateList(Score* s)
+void Debugger::updateList(Score* s)
       {
       if (cs != s) {
             backStack.clear();
@@ -373,7 +373,7 @@ void Inspector::updateList(Score* s)
 //   searchElement
 //---------------------------------------------------------
 
-bool Inspector::searchElement(QTreeWidgetItem* pi, Element* el)
+bool Debugger::searchElement(QTreeWidgetItem* pi, Element* el)
       {
       for (int i = 0;; ++i) {
             QTreeWidgetItem* item = pi->child(i);
@@ -399,7 +399,7 @@ bool Inspector::searchElement(QTreeWidgetItem* pi, Element* el)
 //   setElement
 //---------------------------------------------------------
 
-void Inspector::setElement(Element* el)
+void Debugger::setElement(Element* el)
       {
       if (curElement) {
             backStack.push(curElement);
@@ -414,7 +414,7 @@ void Inspector::setElement(Element* el)
 //   itemExpanded
 //---------------------------------------------------------
 
-void Inspector::itemExpanded(QTreeWidgetItem*)
+void Debugger::itemExpanded(QTreeWidgetItem*)
       {
       list->resizeColumnToContents(0);
       }
@@ -423,7 +423,7 @@ void Inspector::itemExpanded(QTreeWidgetItem*)
 //   itemClicked
 //---------------------------------------------------------
 
-void Inspector::itemClicked(QTreeWidgetItem* i, int)
+void Debugger::itemClicked(QTreeWidgetItem* i, int)
       {
       if (i == 0)
             return;
@@ -443,14 +443,14 @@ void Inspector::itemClicked(QTreeWidgetItem* i, int)
 //   updateElement
 //---------------------------------------------------------
 
-void Inspector::updateElement(Element* el)
+void Debugger::updateElement(Element* el)
       {
       if (el == 0 || !isVisible())
             return;
       for (int i = 0;; ++i) {
             QTreeWidgetItem* item = list->topLevelItem(i);
             if (item == 0) {
-                  printf("Inspector::Element not found %s %p\n", el->name(), el);
+                  printf("Debugger::Element not found %s %p\n", el->name(), el);
                   break;
                   }
             ElementItem* ei = (ElementItem*)item;
@@ -1998,7 +1998,7 @@ void LyricsView::setElement(Element* e)
 //   backClicked
 //---------------------------------------------------------
 
-void Inspector::backClicked()
+void Debugger::backClicked()
       {
       if (backStack.isEmpty())
             return;
@@ -2012,7 +2012,7 @@ void Inspector::backClicked()
 //   forwardClicked
 //---------------------------------------------------------
 
-void Inspector::forwardClicked()
+void Debugger::forwardClicked()
       {
       if (forwardStack.isEmpty())
             return;
@@ -2026,7 +2026,7 @@ void Inspector::forwardClicked()
 //   reloadClicked
 //---------------------------------------------------------
 
-void Inspector::reloadClicked()
+void Debugger::reloadClicked()
       {
       Element* e = curElement;
 	updateList(cs);

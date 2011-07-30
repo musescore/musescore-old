@@ -34,7 +34,7 @@
 #include "al/tempo.h"
 #include "libmscore/sym.h"
 #include "pagesettings.h"
-#include "inspector.h"
+#include "debugger.h"
 #include "editstyle.h"
 #include "playpanel.h"
 #include "libmscore/page.h"
@@ -262,8 +262,8 @@ void MuseScore::closeEvent(QCloseEvent* ev)
             synthControl->updatePreferences();
 
       writeSettings();
-      if (inspector)
-            inspector->writeSettings();
+      if (debugger)
+            debugger->writeSettings();
 
       seq->stopWait();
       seq->exit();
@@ -355,7 +355,7 @@ MuseScore::MuseScore()
       insertMeasuresDialog  = 0;
       iledit                = 0;
       synthControl          = 0;
-      inspector             = 0;
+      debugger              = 0;
       measureListEdit       = 0;
       symbolDialog          = 0;
       clefPalette           = 0;
@@ -740,7 +740,7 @@ MuseScore::MuseScore()
       menuEdit->addSeparator();
       menuEdit->addAction(getAction("edit-meta"));
       menuEdit->addAction(getAction("media"));
-      menuEdit->addAction(getAction("inspector"));
+      menuEdit->addAction(getAction("debugger"));
       menuEdit->addSeparator();
 
       menuProfiles = new QMenu(tr("Profiles"));
@@ -1414,17 +1414,17 @@ void MuseScore::showPageSettings()
       }
 
 //---------------------------------------------------------
-//   startInspector
+//   startDebugger
 //---------------------------------------------------------
 
-void MuseScore::startInspector()
+void MuseScore::startDebugger()
       {
       if (!cs)
             return;
-      if (inspector == 0)
-            inspector = new Inspector(this);
-      inspector->updateList(cs);
-      inspector->show();
+      if (debugger == 0)
+            debugger = new Debugger(this);
+      debugger->updateList(cs);
+      debugger->show();
       }
 
 //---------------------------------------------------------
@@ -1435,8 +1435,8 @@ void MuseScore::showElementContext(Element* el)
       {
       if (el == 0)
             return;
-      startInspector();
-      inspector->setElement(el);
+      startDebugger();
+      debugger->setElement(el);
       }
 
 //---------------------------------------------------------
@@ -2273,7 +2273,7 @@ MScore::init();         // initialize libmscore
       mscore->loadPlugins();
       mscore->writeSessionFile(false);
       mscore->changeState(STATE_DISABLED);   // DEBUG
-      
+
 #ifdef Q_WS_MAC
       // there's a bug in Qt showing the toolbar unified after switching showFullScreen(), showMaximized(),
       // showNormal()...
@@ -2486,8 +2486,8 @@ void MuseScore::changeState(ScoreState val)
             case STATE_DISABLED:
                   _modeText->setText(tr("no score"));
                   _modeText->show();
-                  if (inspector)
-                        inspector->hide();
+                  if (debugger)
+                        debugger->hide();
                   showDrumTools(0, 0);
                   showPianoKeyboard(false);
                   break;
@@ -2568,7 +2568,7 @@ void MuseScore::writeSettings()
       settings.setValue("showPanel", paletteBox && paletteBox->isVisible());
       settings.setValue("state", saveState());
       settings.setValue("splitScreen", _splitScreen);
-      settings.setValue("inspectorSplitter", mainWindow->saveState());
+      settings.setValue("debuggerSplitter", mainWindow->saveState());
 //      if (_splitScreen) {
             settings.setValue("split", _horizontalSplit);
             settings.setValue("splitter", splitter->saveState());
@@ -2625,7 +2625,7 @@ void MuseScore::readSettings()
 
       settings.beginGroup("MainWindow");
       resize(settings.value("size", QSize(950, 700)).toSize());
-      mainWindow->restoreState(settings.value("inspectorSplitter").toByteArray());
+      mainWindow->restoreState(settings.value("debuggerSplitter").toByteArray());
       move(settings.value("pos", QPoint(10, 10)).toPoint());
       if (settings.value("maximized", false).toBool())
             showMaximized();
@@ -4316,8 +4316,8 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             cmdAppendMeasures();
       else if (cmd == "insert-measures")
             cmdInsertMeasures();
-      else if (cmd == "inspector")
-            startInspector();
+      else if (cmd == "debugger")
+            startDebugger();
       else if (cmd == "album")
             showAlbumManager();
       else if (cmd == "layer")
@@ -4372,7 +4372,7 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
                   showFullScreen();
             else
                   showNormal();
-                  
+
 #ifdef Q_WS_MAC
             // Qt Bug: Toolbar goes into unified mode
             // after switching back from fullscreen
@@ -4455,8 +4455,8 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             else
                   printf("2:unknown cmd <%s>\n", qPrintable(cmd));
             }
-      if (inspector)
-            inspector->reloadClicked();
+      if (debugger)
+            debugger->reloadClicked();
       }
 
 //---------------------------------------------------------

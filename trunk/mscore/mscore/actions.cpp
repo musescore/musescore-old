@@ -2290,12 +2290,12 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          0,
-         "inspector",
-         QT_TRANSLATE_NOOP("action","Show inspector"),
+         "debugger",
+         QT_TRANSLATE_NOOP("action","Show debugger"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Inspector"),
-         QT_TRANSLATE_NOOP("action","Show inspector")
+         QT_TRANSLATE_NOOP("action","Debugger"),
+         QT_TRANSLATE_NOOP("action","Show debugger")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,

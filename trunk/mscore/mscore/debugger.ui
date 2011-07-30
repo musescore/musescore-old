@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <author>ws</author>
- <class>InspectorBase</class>
- <widget class="QWidget" name="InspectorBase">
+ <class>DebuggerBase</class>
+ <widget class="QWidget" name="DebuggerBase">
   <property name="geometry">
    <rect>
     <x>0</x>
