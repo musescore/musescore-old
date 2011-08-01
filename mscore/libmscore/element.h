@@ -506,8 +506,8 @@ class RubberBand : public Element {
       QPointF p2() const { return _p2; }
       };
 
-extern void collectElements(void*, Element*);
 extern bool elementLessThan(const Element* const, const Element* const);
+extern void collectElements(void* data, Element* e);
 
 #endif
 

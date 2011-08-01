@@ -380,7 +380,7 @@ void Element::adjustReadPos()
 
 void Element::scanElements(void* data, void (*func)(void*, Element*), bool all)
       {
-      if (all || _visible)
+      if (all || _visible || score()->showInvisible())
             func(data, this);
       }
 
@@ -1418,16 +1418,6 @@ Element* Element::name2Element(const QString& s, Score* sc)
       }
 
 //---------------------------------------------------------
-//   collectElements
-//---------------------------------------------------------
-
-void collectElements(void* data, Element* e)
-      {
-      QList<Element*>* el = static_cast<QList<Element*>*>(data);
-      el->append(e);
-      }
-
-//---------------------------------------------------------
 //   elementLessThan
 //---------------------------------------------------------
 
@@ -1455,4 +1445,15 @@ void Element::setGrip(int, const QPointF& pt)
       qreal _spatium = score()->spatium();
       setUserOff(QPointF(pt.x() * _spatium, pt.y() * _spatium));
       }
+
+//---------------------------------------------------------
+//   collectElements
+//---------------------------------------------------------
+
+void collectElements(void* data, Element* e)
+      {
+      QList<Element*>* el = static_cast<QList<Element*>*>(data);
+      el->append(e);
+      }
+
 
