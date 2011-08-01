@@ -380,7 +380,8 @@ Fraction Duration::fraction() const
       Fraction a(z, n);
       for (int i = 0; i < _dots; ++i) {
             n *= 2;
-            a += Fraction(1, n);
+//            a += Fraction(1, n);
+            a += Fraction(z, n);
             }
       return a;
       }

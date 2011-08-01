@@ -1,4 +1,6 @@
 1.aug (ws)
+      - fix #11815: dot for note longer than whole has wrong value
+        (patch from Miwarre)
       - fix #11817: Headers and footers not drawn
       - experimental: beginning "inspector" panel
       - implement "flip" action for articulations; the right symbol is automatically
