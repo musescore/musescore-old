@@ -1,4 +1,5 @@
 1.aug (ws)
+      - fix #11834: Playback bar disappears on second page
       - fix #11819: Invisible text not drawn at all
       - fix #11815: dot for note longer than whole has wrong value
         (patch from Miwarre)

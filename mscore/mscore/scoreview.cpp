@@ -1324,8 +1324,8 @@ void ScoreView::moveCursor(Segment* segment, int track)
             return;
             }
       int idx         = staffIdx == -1 ? 0 : staffIdx;
-      double x        = segment->pagePos().x();
-      double y        = system->staffY(idx);
+      double x        = segment->canvasPos().x();
+      double y        = system->staffY(idx) + system->page()->pos().y();
       double _spatium = _cursor->spatium();
 
       update(_matrix.mapRect(_cursor->abbox()).toRect().adjusted(-1,-1,1,1));
@@ -1470,6 +1470,7 @@ void ScoreView::paintEvent(QPaintEvent* ev)
       p.setClipping(false);
 
       _cursor->draw(&vp);
+
       lasso->draw(&vp);
       if (fotoMode())
             _foto->draw(&vp);
