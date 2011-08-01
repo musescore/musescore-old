@@ -3229,4 +3229,17 @@ void ChangeAccidental::flip()
       a->score()->addRefresh(a->abbox());
       }
 
+//---------------------------------------------------------
+//   ChangeArticulation::flip
+//---------------------------------------------------------
+
+void ChangeArticulation::flip()
+      {
+      a->score()->addRefresh(a->abbox());
+      Direction d = a->direction();
+      a->setDirection(direction);
+      direction = d;
+      a->score()->addRefresh(a->abbox());
+      }
+
 

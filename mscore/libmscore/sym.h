@@ -14,9 +14,10 @@
 #ifndef __SYM_H__
 #define __SYM_H__
 
-#include "style.h"
+// #include "style.h"
 
 class Painter;
+class TextStyle;
 
 extern void initSymbols(int);
 
@@ -90,8 +91,13 @@ class Sym {
       QString toString() const;
       };
 
-enum {
-      clefEightSym,
+//---------------------------------------------------------
+//   SymId
+//---------------------------------------------------------
+
+enum SymId {
+      noSym = -1,
+      clefEightSym = 0,
       clefOneSym,
       clefFiveSym,
 
@@ -348,8 +354,6 @@ enum {
       timesigodotSym,
 
       tabclef2Sym,
-
-
       lastSym
       };
 

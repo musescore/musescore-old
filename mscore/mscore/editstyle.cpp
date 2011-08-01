@@ -284,8 +284,9 @@ void EditStyle::getValues()
 
       for (int i = 0; i < ARTICULATIONS; ++i) {
             QComboBox* cb = static_cast<QComboBox*>(articulationTable->cellWidget(i, 1));
-            lstyle.set(StyleIdx(ST_UfermataAnchor + i), cb->itemData(cb->currentIndex()).toInt());
+            lstyle.setArticulationAnchor(i, ArticulationAnchor(cb->itemData(cb->currentIndex()).toInt()));
             }
+
 //      lstyle.set(ST_warnPitchRange,  warnPitchRange->isChecked());
 
       lstyle.set(ST_voltaY,                  Spatium(voltaY->value()));
@@ -415,7 +416,7 @@ void EditStyle::setValues()
             QComboBox* cb = static_cast<QComboBox*>(articulationTable->cellWidget(i, 1));
             if (cb == 0)
                   continue;
-            int st  = lstyle.value(StyleIdx(ST_UfermataAnchor + i)).toInt();
+            int st  = lstyle.articulationAnchor(i);
             int idx = 0;
             if (st == A_TOP_STAFF)
                   idx = 0;

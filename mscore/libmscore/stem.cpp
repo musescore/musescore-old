@@ -144,8 +144,8 @@ void Stem::editDrag(const EditData& ed)
 
 void Stem::toDefault()
       {
-      _userLen = Spatium(0.0);
-      setUserOff(QPointF());
+      _userLen = Spatium(0.0);      // TODO: make undoable
+      Element::toDefault();
       }
 
 //---------------------------------------------------------

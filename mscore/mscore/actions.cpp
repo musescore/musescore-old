@@ -2280,12 +2280,12 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_EDIT,
          0,
-         "reset-positions",
-         QT_TRANSLATE_NOOP("action","Reset positions"),
+         "reset",
+         QT_TRANSLATE_NOOP("action","Reset user settings"),
          Qt::CTRL+Qt::Key_R,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Reset Positions"),
-         QT_TRANSLATE_NOOP("action","Reset positions")
+         QT_TRANSLATE_NOOP("action","Reset"),
+         QT_TRANSLATE_NOOP("action","Reset user settings")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
@@ -2820,6 +2820,16 @@ Shortcut MuseScore::sc[] = {
          "MuseScore Connect",
          "MuseScore Connect",
          community_ICON
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY | STATE_EDIT,
+         0,
+         "inspector",
+         QT_TRANSLATE_NOOP("action","Show Inspector"),
+         Qt::Key_F8,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","inspector"),
+         QT_TRANSLATE_NOOP("action","Show inspector")
          ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, 0, QKeySequence::UnknownKey)

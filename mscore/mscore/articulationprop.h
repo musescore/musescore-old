@@ -33,7 +33,7 @@ class Articulation;
 class ArticulationProperties : public QDialog, public Ui::ArticulationProperties {
       Q_OBJECT
 
-      Articulation* noteAttribute;
+      Articulation* articulation;
 
    private slots:
       void saveValues();

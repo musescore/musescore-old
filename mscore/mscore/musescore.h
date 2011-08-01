@@ -78,6 +78,7 @@ class ChordList;
 class EditTempo;
 class Capella;
 class CapVoice;
+class Inspector;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -235,6 +236,7 @@ class MuseScore : public QMainWindow {
       NewWizard* newWizard;
 
       PaletteBox* paletteBox;
+      Inspector* inspector;
 
       bool _midiinEnabled;
       bool _speakerEnabled;
@@ -323,6 +325,7 @@ class MuseScore : public QMainWindow {
       void undo();
       void redo();
       void showPalette(bool);
+      void showInspector(bool);
       void showPlayPanel(bool);
       void showNavigator(bool);
       void showMixer(bool);
@@ -517,7 +520,7 @@ class MuseScore : public QMainWindow {
       void disableCommands(bool val) { inChordEditor = val; }
 
       void updateInputState(Score*);
-      void setEditPos(const QPointF&);
+      void updateElement(Element*, const QPointF&);
 
       void tupletDialog();
       void selectSimilar(Element*, bool);

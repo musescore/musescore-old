@@ -19,6 +19,7 @@
 //
 
 #include "elementlayout.h"
+#include "articulation.h"
 
 class Xml;
 struct ChordDescription;
@@ -85,6 +86,7 @@ class StyleData : public QSharedData {
       QList<TextStyle> _textStyles;
       PageFormat* _pageFormat;
       qreal _spatium;
+      ArticulationAnchor _articulationAnchor[ARTICULATIONS];
 
       bool _customChordList;        // if true, chordlist will be saved as part of score
 
@@ -108,11 +110,13 @@ class StyleData : public QSharedData {
       const ChordDescription* chordDescription(int id) const;
       ChordList* chordList() const;
       void setChordList(ChordList*);      // Style gets ownership of ChordList
-      PageFormat* pageFormat() const           { return _pageFormat; }
+      PageFormat* pageFormat() const                             { return _pageFormat; }
       void setPageFormat(const PageFormat& pf);
       friend class Style;
-      qreal spatium() const    { return _spatium; }
-      void setSpatium(qreal v) { _spatium = v; }
+      qreal spatium() const                                      { return _spatium; }
+      void setSpatium(qreal v)                                   { _spatium = v;    }
+      ArticulationAnchor articulationAnchor(int id) const        { return _articulationAnchor[id]; }
+      void setArticulationAnchor(int id, ArticulationAnchor val) { _articulationAnchor[id] = val;  }
       };
 
 #endif

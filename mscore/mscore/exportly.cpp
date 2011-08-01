@@ -2583,90 +2583,90 @@ void ExportLy::writeArticulation(ChordRest* c)
     {
       switch(a->subtype())
 	{
-	case UfermataSym:
-	  out << "\\fermata ";
+	case Articulation_Fermata:
+        if (a->up())
+	      out << "\\fermata ";
+        else
+	      out << "_\\fermata ";
 	  break;
-	case DfermataSym:
-	  out << "_\\fermata ";
-	  break;
-	case ThumbSym:
+	case Articulation_Thumb:
 	  out << "\\thumb ";
 	  break;
-	case SforzatoaccentSym:
+	case Articulation_Sforzatoaccent:
 	  out << "-> ";
 	  break;
-	case EspressivoSym:
+	case Articulation_Espressivo:
 	  out << "\\espressivo ";
 	  break;
-	case StaccatoSym:
+	case Articulation_Staccato:
 	  out << "-. ";
 	  break;
-	case UstaccatissimoSym:
-	  out << "-| ";
+	case Articulation_Staccatissimo:
+        if (a->up())
+	      out << "-| ";
+        else
+	      out << "_| ";
 	  break;
-	case DstaccatissimoSym:
-	  out << "_| ";
-	  break;
-	case TenutoSym:
+	case Articulation_Tenuto:
 	  out << "-- ";
 	  break;
-	case flageoletSym:
-	  out << "\\flageolet ";
-	case UportatoSym:
-	  out << "-_ ";
+//TODO:	case Articulation_Flageolet:
+//	  out << "\\flageolet ";
+	case Articulation_Portato:
+        if (a->up())
+	      out << "-_ ";
+        else
+	      out << "__ ";
 	  break;
-	case DportatoSym:
-	  out << "__ ";
+	case Articulation_Marcato:
+        if (a->up())
+	      out << "-^ ";
+        else
+	      out << "_^ ";
 	  break;
-	case UmarcatoSym:
-	  out << "-^ ";
-	  break;
-	case DmarcatoSym:
-	  out << "_^ ";
-	  break;
-	case OuvertSym:
+	case Articulation_Ouvert:
 	  out << "\\open ";
 	  break;
-	case PlusstopSym:
+	case Articulation_Plusstop:
 	  out << "-+ ";
 	  break;
-	case UpbowSym:
+	case Articulation_Upbow:
 	  out << "\\upbow ";
 	  break;
-	case DownbowSym:
+	case Articulation_Downbow:
 	  out << "\\downbow ";
 	  break;
-	case ReverseturnSym:
+	case Articulation_Reverseturn:
 	  out << "\\reverseturn ";
 	  break;
-	case TurnSym:
+	case Articulation_Turn:
 	  out << "\\turn ";
 	  break;
-	case TrillSym:
+	case Articulation_Trill:
 	  out << "\\trill ";
 	  break;
-	case PrallSym:
+	case Articulation_Prall:
 	  out << "\\prall ";
 	  break;
-	case MordentSym:
+	case Articulation_Mordent:
 	  out << "\\mordent ";
 	  break;
-	case PrallPrallSym:
+	case Articulation_PrallPrall:
 	  out << "\\prallprall ";
 	  break;
-	case PrallMordentSym:
+	case Articulation_PrallMordent:
 	  out << "\\prallmordent ";
 	  break;
-	case UpPrallSym:
+	case Articulation_UpPrall:
 	  out << "\\prallup ";
 	  break;
-	case DownPrallSym:
+	case Articulation_DownPrall:
 	  out << "\\pralldown ";
 	  break;
-	case UpMordentSym:
+	case Articulation_UpMordent:
 	  out << "\\upmordent ";
 	  break;
-	case DownMordentSym:
+	case Articulation_DownMordent:
 	  out << "\\downmordent ";
 	  break;
 	default:

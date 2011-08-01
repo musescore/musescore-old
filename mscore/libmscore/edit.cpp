@@ -1094,25 +1094,15 @@ void Score::cmdFlip()
                   undo()->push(new ChangeSubtype(hp, hp->subtype() == 0 ? 1 : 0));
                   }
             else if (e->type() == ARTICULATION) {
-                  int newSubtype = -1;
-                  if (e->subtype() == UfermataSym)
-                        newSubtype = DfermataSym;
-                  else if (e->subtype() == DfermataSym)
-                        newSubtype = UfermataSym;
-                  else if (e->subtype() == TenutoSym) {
-                        Articulation* a = static_cast<Articulation*>(e);
-                        if (a->anchor() == A_TOP_CHORD)
-                              a->setAnchor(A_BOTTOM_CHORD);
-                        else if (a->anchor() == A_BOTTOM_CHORD)
-                              a->setAnchor(A_TOP_CHORD);
-                        else if (a->anchor() == A_CHORD) {
-                              ChordRest* cr = a->chordRest();
-                              if (cr)
-                                    a->setAnchor(cr->up() ? A_TOP_CHORD : A_BOTTOM_CHORD);
-                              }
-                        }
-                  if (newSubtype != -1)
-                        undoChangeSubtype(e, newSubtype);
+                  Articulation* a = static_cast<Articulation*>(e);
+                  Direction d = a->direction();
+                  if (d == AUTO)
+                        d = a->up() ? DOWN : UP;
+                  else if (d == UP)
+                        d = DOWN;
+                  else
+                        d = UP;
+                  undo()->push(new ChangeArticulation(a, d));
                   }
             else if (e->type() == TUPLET)
                   undo()->push(new FlipTupletDirection(static_cast<Tuplet*>(e)));

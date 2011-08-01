@@ -407,6 +407,7 @@ void SlurSegment::computeBezier()
       t.reset();
       t.rotateRadians(-r2);
       QPointF p6  = QPointF(t.map(ppp4).x() * .5, 0.0);
+
       t.rotateRadians(2 * r2);
       p6 = t.map(p6) + pp3 - p6o;
       //-----------------------------------
@@ -504,7 +505,7 @@ static qreal fixArticulations(qreal yo, Chord* c, qreal _up)
       QList<Articulation*>* al = c->getArticulations();
       if (al->size() == 1) {
             Articulation* a = al->at(0);
-            if (a->subtype() == TenutoSym || a->subtype() == StaccatoSym)
+            if (a->subtype() == Articulation_Tenuto || a->subtype() == Articulation_Staccato)
                   yo = a->y() + (a->height() + c->score()->spatium() * .3) * _up;
 //                  yo = a->y() + (a->height() + c->score()->spatium() * .5) * _up;
             }

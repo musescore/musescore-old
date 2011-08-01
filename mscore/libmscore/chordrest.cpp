@@ -439,13 +439,8 @@ void ChordRest::layoutArticulations()
       if (parent() == 0 || articulations.isEmpty())
             return;
       qreal _spatium  = spatium();
-//      Measure* m       = measure();
-//      System* s        = m->system();
-//      int idx          = staff()->rstaff() + staffMove();   // DEBUG
-
-      qreal x          = centerX();
-
-      qreal distance0 = score()->styleS(ST_propertyDistance).val() * _spatium;
+      qreal x         = centerX();
+      qreal distance0 = score()->styleS(ST_propertyDistance).val()     * _spatium;
       qreal distance1 = score()->styleS(ST_propertyDistanceHead).val() * _spatium;
       qreal distance2 = score()->styleS(ST_propertyDistanceStem).val() * _spatium;
 
@@ -456,6 +451,18 @@ void ChordRest::layoutArticulations()
       qreal staffBotY = staff()->height() + distance2;
 
       qreal dy = 0.0;
+
+      foreach (Articulation* a, articulations) {
+            if (a->direction() != AUTO) {
+                  a->setUp(a->direction() == UP);
+                  }
+            else {
+                  if (a->anchor() == A_CHORD)
+                        a->setUp(!up());
+                  else
+                        a->setUp(a->anchor() == A_TOP_STAFF || a->anchor() == A_TOP_CHORD);
+                  }
+            }
 
       //
       // staccato and tenuto are placed near to notehead
@@ -481,18 +488,19 @@ void ChordRest::layoutArticulations()
             if (aa != A_CHORD && aa != A_TOP_CHORD && aa != A_BOTTOM_CHORD)
                   continue;
 
+            // for tenuto and staccate check for staff line collision
+            bool staffLineCT = a->subtype() == Articulation_Tenuto
+                               || a->subtype() == Articulation_Staccato;
+
             qreal sh = a->bbox().height() * mag();
+            bool bottom = (aa == A_BOTTOM_CHORD) || (aa == A_CHORD && up());
 
             dy += distance1;
-            if (sh > (_spatium * .5))   // hack
-                  dy += sh * .5;
-            qreal y;
-            if (up()) {
-                  y = chordBotY + dy;
-                  //
-                  // check for collision with staff line
-                  //
-                  if (y <= staffBotY -.1 - dy) {
+//            if (sh > (_spatium * .5))   // hack
+//                  dy += sh * .5;
+            if (bottom) {
+                  qreal y = chordBotY + dy;
+                  if (staffLineCT && (y <= staffBotY -.1 - dy)) {
                         qreal l = y / _spatium;
                         qreal delta = fabs(l - round(l));
                         if (delta < 0.4) {
@@ -500,13 +508,11 @@ void ChordRest::layoutArticulations()
                               dy += _spatium * .5;
                               }
                         }
+                  a->setPos(x, y); // - a->bbox().y() + a->bbox().height() * .5);
                   }
             else {
-                  y = chordTopY - dy;
-                  //
-                  // check for collision with staff line
-                  //
-                  if (y >= (staffTopY +.1 + dy)) {
+                  qreal y = chordTopY - dy;
+                  if (staffLineCT && (y >= (staffTopY +.1 + dy))) {
                         qreal l = y / _spatium;
                         qreal delta = fabs(l - round(l));
                         if (delta < 0.4) {
@@ -514,8 +520,8 @@ void ChordRest::layoutArticulations()
                               dy += _spatium * .5;
                               }
                         }
+                  a->setPos(x, y); // + a->bbox().y() - a->bbox().height() * .5);
                   }
-            a->setPos(x, y);
             }
 
       //
@@ -532,11 +538,13 @@ void ChordRest::layoutArticulations()
   */
       foreach (Articulation* a, articulations) {
             ArticulationAnchor aa = a->anchor();
-            if (aa == A_TOP_STAFF) {
+            if (aa != A_TOP_STAFF && aa != A_BOTTOM_STAFF)
+                  continue;
+            if (a->up()) {
                   a->setPos(x, dyTop);
                   dyTop -= distance0;
                   }
-            else if (aa == A_BOTTOM_STAFF) {
+            else {
                   a->setPos(x, dyBot);
                   dyBot += distance0;
                   }

@@ -1860,13 +1860,12 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
       QList<Articulation*>* na = chord->getArticulations();
       // first output the fermatas
       foreach (const Articulation* a, *na) {
-            if (a->subtype() == UfermataSym) {
+            if (a->subtype() == Articulation_Fermata) {
                   notations.tag(xml);
-                  xml.tagE("fermata type=\"upright\"");
-                  }
-            else if (a->subtype() == DfermataSym) {
-                  notations.tag(xml);
-                  xml.tagE("fermata type=\"inverted\"");
+                  if (a->up())
+                        xml.tagE("fermata type=\"upright\"");
+                  else
+                        xml.tagE("fermata type=\"inverted\"");
                   }
             }
 
@@ -1874,63 +1873,57 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
       Articulations articulations;
       foreach (const Articulation* a, *na) {
             switch (a->subtype()) {
-                  case UfermataSym:
-                  case DfermataSym:
+                  case Articulation_Fermata:
                         // ignore, already handled
                         break;
-                  case SforzatoaccentSym:
+                  case Articulation_Sforzatoaccent:
                         {
                         notations.tag(xml);
                         articulations.tag(xml);
                         xml.tagE("accent");
                         }
                         break;
-                  case StaccatoSym:
+                  case Articulation_Staccato:
                         {
                         notations.tag(xml);
                         articulations.tag(xml);
                         xml.tagE("staccato");
                         }
                         break;
-                  case UstaccatissimoSym:
-                  case DstaccatissimoSym:
+                  case Articulation_Staccatissimo:
                         {
                         notations.tag(xml);
                         articulations.tag(xml);
                         xml.tagE("staccatissimo");
                         }
                         break;
-                  case TenutoSym:
+                  case Articulation_Tenuto:
                         {
                         notations.tag(xml);
                         articulations.tag(xml);
                         xml.tagE("tenuto");
                         }
                         break;
-                  case DmarcatoSym:
+                  case Articulation_Marcato:
                         {
                         notations.tag(xml);
                         articulations.tag(xml);
-                        xml.tagE("strong-accent type=\"down\"");
+                        if (a->up())
+                              xml.tagE("strong-accent type=\"up\"");
+                        else
+                              xml.tagE("strong-accent type=\"down\"");
                         }
                         break;
-                  case UmarcatoSym:
-                        {
-                        notations.tag(xml);
-                        articulations.tag(xml);
-                        xml.tagE("strong-accent type=\"up\"");
-                        }
-                        break;
-                  case ReverseturnSym:
-                  case TurnSym:
-                  case TrillSym:
-                  case PrallSym:
-                  case MordentSym:
+                  case Articulation_Reverseturn:
+                  case Articulation_Turn:
+                  case Articulation_Trill:
+                  case Articulation_Prall:
+                  case Articulation_Mordent:
                         // ignore, handled with ornaments
                         break;
-                  case PlusstopSym:
-                  case UpbowSym:
-                  case DownbowSym:
+                  case Articulation_Plusstop:
+                  case Articulation_Upbow:
+                  case Articulation_Downbow:
                         // ignore, handled with technical
                         break;
                   default:
@@ -1949,55 +1942,52 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
       Ornaments ornaments;
       foreach (const Articulation* a, *na) {
             switch (a->subtype()) {
-                  case UfermataSym:
-                  case DfermataSym:
-                  case SforzatoaccentSym:
-                  case StaccatoSym:
-                  case UstaccatissimoSym:
-                  case DstaccatissimoSym:
-                  case TenutoSym:
-                  case DmarcatoSym:
-                  case UmarcatoSym:
+                  case Articulation_Fermata:
+                  case Articulation_Sforzatoaccent:
+                  case Articulation_Staccato:
+                  case Articulation_Staccatissimo:
+                  case Articulation_Tenuto:
+                  case Articulation_Marcato:
                         // ignore, already handled
                         break;
-                  case ReverseturnSym:
+                  case Articulation_Reverseturn:
                         {
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tagE("inverted-turn");
                         }
                         break;
-                  case TurnSym:
+                  case Articulation_Turn:
                         {
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tagE("turn");
                         }
                         break;
-                  case TrillSym:
+                  case Articulation_Trill:
                         {
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tagE("trill-mark");
                         }
                         break;
-                  case PrallSym:
+                  case Articulation_Prall:
                         {
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tagE("inverted-mordent");
                         }
                         break;
-                  case MordentSym:
+                  case Articulation_Mordent:
                         {
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tagE("mordent");
                         }
                         break;
-                  case PlusstopSym:
-                  case UpbowSym:
-                  case DownbowSym:
+                  case Articulation_Plusstop:
+                  case Articulation_Upbow:
+                  case Articulation_Downbow:
                         // ignore, handled with technical
                         break;
                   default:
@@ -2012,21 +2002,21 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
       // and finally the attributes whose elements are children of <technical>
       foreach (const Articulation* a, *na) {
             switch (a->subtype()) {
-                  case PlusstopSym:
+                  case Articulation_Plusstop:
                         {
                         notations.tag(xml);
                         technical.tag(xml);
                         xml.tagE("stopped");
                         }
                         break;
-                  case UpbowSym:
+                  case Articulation_Upbow:
                         {
                         notations.tag(xml);
                         technical.tag(xml);
                         xml.tagE("up-bow");
                         }
                         break;
-                  case DownbowSym:
+                  case Articulation_Downbow:
                         {
                         notations.tag(xml);
                         technical.tag(xml);

@@ -313,42 +313,44 @@ void MuseData::readNote(Part* part, const QString& s)
                   closeSlur(3, tick, staff, voice);
             else if (an[i] == '.') {
                   Articulation* atr = new Articulation(score);
-                  atr->setSubtype(StaccatoSym);
+                  atr->setSubtype(Articulation_Staccato);
                   chord->add(atr);
                   }
             else if (an[i] == '_') {
                   Articulation* atr = new Articulation(score);
-                  atr->setSubtype(TenutoSym);
+                  atr->setSubtype(Articulation_Tenuto);
                   chord->add(atr);
                   }
             else if (an[i] == 'v') {
                   Articulation* atr = new Articulation(score);
-                  atr->setSubtype(UpbowSym);
+                  atr->setSubtype(Articulation_Upbow);
                   chord->add(atr);
                   }
             else if (an[i] == 'n') {
                   Articulation* atr = new Articulation(score);
-                  atr->setSubtype(DownbowSym);
+                  atr->setSubtype(Articulation_Downbow);
                   chord->add(atr);
                   }
             else if (an[i] == 't') {
                   Articulation* atr = new Articulation(score);
-                  atr->setSubtype(TrillSym);
+                  atr->setSubtype(Articulation_Trill);
                   chord->add(atr);
                   }
             else if (an[i] == 'F') {
                   Articulation* atr = new Articulation(score);
-                  atr->setSubtype(UfermataSym);
+                  atr->setUp(true);
+                  atr->setSubtype(Articulation_Fermata);
                   chord->add(atr);
                   }
             else if (an[i] == 'E') {
                   Articulation* atr = new Articulation(score);
-                  atr->setSubtype(DfermataSym);
+                  atr->setUp(false);
+                  atr->setSubtype(Articulation_Fermata);
                   chord->add(atr);
                   }
             else if (an[i] == 'O') {
                   // Articulation* atr = new Articulation(score);
-                  // atr->setSubtype(DownbowSym);
+                  // atr->setSubtype(Articulation_Downbow);
                   // chord->add(atr);
                   printf("%06d: open string '%c' not implemented\n", tick, an[i].toAscii());
                   }

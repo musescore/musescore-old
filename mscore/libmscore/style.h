@@ -16,6 +16,7 @@
 
 #include "mscore.h"
 #include "spatium.h"
+#include "articulation.h"
 
 class Xml;
 struct ChordDescription;
@@ -238,51 +239,6 @@ enum StyleIdx {
       ST_staccatoGateTime,
       ST_slurGateTime,
 
-      ST_UfermataAnchor,
-      ST_DfermataAnchor,
-      ST_UshortfermataAnchor,
-      ST_DshortfermataAnchor,
-      ST_UlongfermataAnchor,
-      ST_DlongfermataAnchor,
-      ST_UverylongfermataAnchor,
-      ST_DverylongfermataAnchor,
-      ST_ThumbAnchor,
-      ST_SforzatoaccentAnchor,
-      ST_EspressivoAnchor,
-      ST_StaccatoAnchor,
-
-      // 102
-      ST_UstaccatissimoAnchor,
-      ST_DstaccatissimoAnchor,
-      ST_TenutoAnchor,
-      ST_UportatoAnchor,
-      ST_DportatoAnchor,
-      ST_UmarcatoAnchor,
-      ST_DmarcatoAnchor,
-      ST_OuvertAnchor,
-      ST_PlusstopAnchor,
-      ST_UpbowAnchor,
-
-      // 112
-      ST_DownbowAnchor,
-      ST_ReverseturnAnchor,
-      ST_TurnAnchor,
-      ST_TrillAnchor,
-      ST_PrallAnchor,
-      ST_MordentAnchor,
-      ST_PrallPrallAnchor,
-      ST_PrallMordentAnchor,
-      ST_UpPrallAnchor,
-      ST_DownPrallAnchor,
-
-      // 121
-      ST_UpMordentAnchor,
-      ST_DownMordentAnchor,
-      ST_SnappizzicatoAnchor,
-      ST_TappingAnchor,
-      ST_SlappingAnchor,
-      ST_PoppingAnchor,
-
       ST_ArpeggioNoteDistance,
       ST_ArpeggioLineWidth,
       ST_ArpeggioHookLen,
@@ -415,6 +371,8 @@ class Style {
       void setPageFormat(const PageFormat& pf);
       qreal spatium() const;
       void setSpatium(qreal v);
+      ArticulationAnchor articulationAnchor(int id) const;
+      void setArticulationAnchor(int id, ArticulationAnchor val);
       };
 
 extern QVector<TextStyle> defaultTextStyles;

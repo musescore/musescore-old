@@ -390,7 +390,8 @@ void Element::scanElements(void* data, void (*func)(void*, Element*), bool all)
 
 void Element::toDefault()
       {
-      score()->undo()->push(new ChangeUserOffset(this, QPointF()));
+      if (!_userOff.isNull())
+            score()->undo()->push(new ChangeUserOffset(this, QPointF()));
       }
 
 //---------------------------------------------------------
