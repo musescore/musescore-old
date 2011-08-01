@@ -544,20 +544,16 @@ void Score::fixTicks()
                               qreal stretch = -1.0;
                               foreach(Articulation* a, *cr->getArticulations()) {
                                     switch(a->subtype()) {
-                                          case UshortfermataSym:
-                                          case DshortfermataSym:
+                                          case Articulation_Shortfermata:
                                                 stretch = 1.5;
                                                 break;
-                                          case UfermataSym:
-                                          case DfermataSym:
+                                          case Articulation_Fermata:
                                                 stretch = 2.0;
                                                 break;
-                                          case UlongfermataSym:
-                                          case DlongfermataSym:
+                                          case Articulation_Longfermata:
                                                 stretch = 3.0;
                                                 break;
-                                          case UverylongfermataSym:
-                                          case DverylongfermataSym:
+                                          case Articulation_Verylongfermata:
                                                 stretch = 4.0;
                                                 break;
                                           default:

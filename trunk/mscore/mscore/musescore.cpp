@@ -72,6 +72,7 @@
 #include "metaedit.h"
 #include "chordedit.h"
 #include "edittempo.h"
+#include "inspector.h"
 
 #include "libmscore/mscore.h"
 #include "libmscore/system.h"
@@ -372,6 +373,7 @@ MuseScore::MuseScore()
       accidentalsPalette    = 0;
       layoutBreakPalette    = 0;
       paletteBox            = 0;
+      inspector             = 0;
       _midiinEnabled        = true;
       _speakerEnabled       = true;
       newWizard             = 0;
@@ -828,7 +830,7 @@ MuseScore::MuseScore()
 
       menuLayout->addAction(getAction("page-settings"));
 
-      menuLayout->addAction(getAction("reset-positions"));
+      menuLayout->addAction(getAction("reset"));
       menuLayout->addAction(getAction("stretch+"));
       menuLayout->addAction(getAction("stretch-"));
 
@@ -857,6 +859,10 @@ MuseScore::MuseScore()
       menuDisplay->setObjectName("Display");
 
       a = getAction("toggle-palette");
+      a->setCheckable(true);
+      menuDisplay->addAction(a);
+
+      a = getAction("inspector");
       a->setCheckable(true);
       menuDisplay->addAction(a);
 
@@ -3807,7 +3813,7 @@ void MuseScore::editYChanged(double val)
 //   setEditX
 //---------------------------------------------------------
 
-void MuseScore::setEditPos(const QPointF& pt)
+void MuseScore::updateElement(Element* e, const QPointF& pt)
       {
       if (_editX) {
             _editX->blockSignals(true);
@@ -3817,6 +3823,8 @@ void MuseScore::setEditPos(const QPointF& pt)
             _editX->blockSignals(false);
             _editY->blockSignals(false);
             }
+      if (inspector)
+            inspector->setElement(e);
       }
 
 //---------------------------------------------------------
@@ -4201,14 +4209,24 @@ void MuseScore::endCmd()
                         pianorollEditor->changeSelection(ss);
                   if (drumrollEditor)
                         drumrollEditor->changeSelection(ss);
+                  if (inspector) {
+                        if (cs->selection().isSingle())
+                              inspector->setElement(cs->selection().element());
+                        else
+                              inspector->setElement(0);
+                        }
                   }
-
             QAction* action = getAction("concert-pitch");
             action->setChecked(cs->styleB(ST_concertPitch));
 
             enableInput = e && (e->type() == NOTE || e->type() == REST);
             cs->end();
             }
+      else {
+            if (inspector)
+                  inspector->setElement(0);
+            }
+
       static const char* actionNames[] = {
             "pad-rest", "pad-dot", "pad-dotdot", "note-longa",
             "note-breve", "pad-note-1", "pad-note-2", "pad-note-4",
@@ -4340,6 +4358,8 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             redo();
       else if (cmd == "toggle-palette")
             showPalette(a->isChecked());
+      else if (cmd == "inspector")
+            showInspector(a->isChecked());
       else if (cmd == "toggle-playpanel")
             showPlayPanel(a->isChecked());
       else if (cmd == "toggle-navigator")

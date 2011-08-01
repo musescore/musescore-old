@@ -46,6 +46,7 @@
 #include "ui_slursegment.h"
 #include "ui_accidental.h"
 #include "ui_clef.h"
+#include "ui_articulationbase.h"
 
 #include "globals.h"
 #include "libmscore/mscore.h"
@@ -598,6 +599,20 @@ class ClefView : public ShowElementBase {
 
    public:
       ClefView();
+      virtual void setElement(Element*);
+      };
+
+//---------------------------------------------------------
+//   ArticulationView
+//---------------------------------------------------------
+
+class ArticulationView : public ShowElementBase {
+      Q_OBJECT;
+
+      Ui::ArticulationBase articulation;
+
+   public:
+      ArticulationView();
       virtual void setElement(Element*);
       };
 

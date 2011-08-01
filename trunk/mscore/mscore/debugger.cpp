@@ -494,6 +494,7 @@ void Debugger::updateElement(Element* el)
                   case OTTAVA:        ew = new OttavaView;        break;
                   case SLUR_SEGMENT:  ew = new SlurSegmentView;   break;
                   case ACCIDENTAL:    ew = new AccidentalView;    break;
+                  case ARTICULATION:  ew = new ArticulationView;  break;
                   case MARKER:
                   case JUMP:
                   case TEXT:
@@ -2270,6 +2271,34 @@ void ClefView::setElement(Element* e)
 
       clef.concertClef->setValue(int(c->concertClef()));
       clef.transposingClef->setValue(int(c->transposingClef()));
+      }
+
+//---------------------------------------------------------
+//   ArticulationView
+//---------------------------------------------------------
+
+ArticulationView::ArticulationView()
+   : ShowElementBase()
+      {
+      QWidget* w = new QWidget;
+      articulation.setupUi(w);
+      layout->addWidget(w);
+      layout->addStretch(10);
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void ArticulationView::setElement(Element* e)
+      {
+      Articulation* a = static_cast<Articulation*>(e);
+      ShowElementBase::setElement(e);
+
+      articulation.direction->setCurrentIndex(int(a->direction()));
+      articulation.up->setChecked(a->up());
+      articulation.anchor->setCurrentIndex(int(a->anchor()));
+      articulation.channelName->setText(a->channelName());
       }
 
 

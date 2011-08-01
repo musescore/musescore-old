@@ -2438,7 +2438,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             } // for (int s ...
       if (!found) {
             if (voicelist[relStaff].size() >= unsigned(VOICES))
-                  printf("ImportMusicXml: too many voices (staff %d, relStaff %d, %d >= %d)\n",
+                  printf("ImportMusicXml: too many voices (staff %d, relStaff %d, %zd >= %d)\n",
                          staff, relStaff, voicelist[relStaff].size(), VOICES);
             else {
                   voicelist[relStaff].push_back(voice);
@@ -3023,11 +3023,13 @@ printf("use Tie %p\n", tie);
       if (!fermataType.isEmpty()) {
             Articulation* f = new Articulation(score);
             if (fermataType == "upright") {
-                  f->setSubtype(UfermataSym);
+                  f->setUp(true);
+                  f->setSubtype(Articulation_Fermata);
                   cr->add(f);
                   }
             else if (fermataType == "inverted") {
-                  f->setSubtype(DfermataSym);
+                  f->setUp(false);
+                  f->setSubtype(Articulation_Fermata);
                   f->setUserYoffset(5.3); // force below note (albeit by brute force)
                   cr->add(f);
                   }
@@ -3081,12 +3083,13 @@ printf("use Tie %p\n", tie);
       if (!strongAccentType.isEmpty()) {
             Articulation* na = new Articulation(score);
             if (strongAccentType == "up") {
-                  na->setSubtype(UmarcatoSym);
+                  na->setUp(true);
+                  na->setSubtype(Articulation_Marcato);
                   cr->add(na);
                   }
             else if (strongAccentType == "down") {
-                  na->setSubtype(DmarcatoSym);
-//                  f->setUserYoffset(5.3); // force below note (albeit by brute force)
+                  na->setUp(false);
+                  na->setSubtype(Articulation_Marcato);
                   cr->add(na);
                   }
             else {
@@ -3127,62 +3130,63 @@ printf("use Tie %p\n", tie);
       // so don't add an additional one
       if (trillMark && !wavyLineStart) {
             Articulation* na = new Articulation(score);
-            na->setSubtype(TrillSym);
+            na->setSubtype(Articulation_Trill);
             cr->add(na);
             }
       if (invertedTurn) {
             Articulation* na = new Articulation(score);
-            na->setSubtype(ReverseturnSym);
+            na->setSubtype(Articulation_Reverseturn);
             cr->add(na);
             }
       if (turn) {
             Articulation* na = new Articulation(score);
-            na->setSubtype(TurnSym);
+            na->setSubtype(Articulation_Turn);
             cr->add(na);
             }
       if (mordent) {
             Articulation* na = new Articulation(score);
-            na->setSubtype(MordentSym);
+            na->setSubtype(Articulation_Mordent);
             cr->add(na);
             }
       if (invertedMordent) {
             Articulation* na = new Articulation(score);
-            na->setSubtype(PrallSym);
+            na->setSubtype(Articulation_Prall);
             cr->add(na);
             }
       if (accent) {
             Articulation* na = new Articulation(score);
-            na->setSubtype(SforzatoaccentSym);
+            na->setSubtype(Articulation_Sforzatoaccent);
             cr->add(na);
             }
       if (staccatissimo) {
             Articulation* na = new Articulation(score);
-            na->setSubtype(UstaccatissimoSym);
+            na->setUp(true);
+            na->setSubtype(Articulation_Staccatissimo);
             cr->add(na);
             }
       if (staccato) {
             Articulation* na = new Articulation(score);
-            na->setSubtype(StaccatoSym);
+            na->setSubtype(Articulation_Staccato);
             cr->add(na);
             }
       if (tenuto) {
             Articulation* na = new Articulation(score);
-            na->setSubtype(TenutoSym);
+            na->setSubtype(Articulation_Tenuto);
             cr->add(na);
             }
       if (stopped) {
             Articulation* na = new Articulation(score);
-            na->setSubtype(PlusstopSym);
+            na->setSubtype(Articulation_Plusstop);
             cr->add(na);
             }
       if (upbow) {
             Articulation* na = new Articulation(score);
-            na->setSubtype(UpbowSym);
+            na->setSubtype(Articulation_Upbow);
             cr->add(na);
             }
       if (downbow) {
             Articulation* na = new Articulation(score);
-            na->setSubtype(DownbowSym);
+            na->setSubtype(Articulation_Downbow);
             cr->add(na);
             }
       if (breathmark) {

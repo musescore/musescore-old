@@ -51,7 +51,7 @@ QT4_WRAP_UI (ui_headers
       sectionbreak.ui hairpinproperties.ui spanner.ui bend.ui tremolobar.ui
       textproperties.ui editpitch.ui editstringdata.ui slursegment.ui
       accidental.ui clef.ui editraster.ui mediadialog.ui textstyle.ui
-      album.ui layer.ui
+      album.ui layer.ui inspector.ui articulationbase.ui
       )
 
 QT4_WRAP_CPP (mocs
@@ -74,7 +74,7 @@ QT4_WRAP_CPP (mocs
       bendcanvas.h tremolobarprop.h tremolobarcanvas.h
       drumtools.h texteditor.h texttools.h pianotools.h editpitch.h  editstringdata.h
       editraster.h mediadialog.h chordeditor.h chordview.h album.h layer.h
-      webpage.h
+      webpage.h inspector.h
       )
 
 if (APPLE)
@@ -161,7 +161,7 @@ add_executable ( ${ExecutableName}
       bendproperties.cpp tremolobarprop.cpp file.cpp keyb.cpp
       layer.cpp jumpproperties.cpp selectdialog.cpp
       propertymenu.cpp imageproperties.cpp shortcut.cpp bb.cpp
-      midifile.cpp
+      midifile.cpp inspector.cpp
       ${OMR_FILES}
       ${AUDIO}
       )

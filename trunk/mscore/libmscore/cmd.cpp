@@ -2475,11 +2475,11 @@ void Score::cmd(const QAction* a)
                   upDown(false, UP_DOWN_CHROMATIC);
             }
 	else if (cmd == "add-staccato")
-            addArticulation(StaccatoSym);
+            addArticulation(Articulation_Staccato);
 	else if (cmd == "add-tenuto")
-            addArticulation(TenutoSym);
+            addArticulation(Articulation_Tenuto);
 	else if (cmd == "add-trill")
-            addArticulation(TrillSym);
+            addArticulation(Articulation_Trill);
       else if (cmd == "add-hairpin")
             cmdAddHairpin(false);
       else if (cmd == "add-hairpin-reverse")

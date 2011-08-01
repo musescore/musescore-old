@@ -1,3 +1,7 @@
+1.aug (ws)
+      - experimental: beginning "inspector" panel
+      - implement "flip" action for articulations; the right symbol is automatically
+        choosen dependent on chord stem direction
 30.jul (ws)
       - renamed "inspector" to "debugger"
       - fix #11804: double-clicking object in palette does not apply to note

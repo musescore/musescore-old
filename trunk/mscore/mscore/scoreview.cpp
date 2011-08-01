@@ -1113,7 +1113,7 @@ void ScoreView::updateGrips()
             curGrip = grips-1;
 
       QPointF pt(editObject->getGrip(curGrip));
-      mscore->setEditPos(pt);
+      mscore->updateElement(editObject, pt);
 #if 0
       double x, y;
       if (grips) {
@@ -3098,7 +3098,7 @@ void ScoreView::cmd(const QAction* a)
                         }
                   }
             }
-      else if (cmd == "reset-positions") {
+      else if (cmd == "reset") {
             if (editMode()) {
                   editObject->toDefault();
                   updateGrips();

@@ -70,6 +70,7 @@ class SlurSegment;
 class InstrumentChange;
 class Box;
 class Accidental;
+class Articulation;
 
 // #define DEBUG_UNDO
 
@@ -1633,6 +1634,23 @@ class ChangeAccidental : public UndoCommand {
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeAccidental");
+      };
+
+//---------------------------------------------------------
+//   ChangeArticulation
+//---------------------------------------------------------
+
+class ChangeArticulation : public UndoCommand {
+      Articulation* a;
+      Direction direction;
+
+      void flip();
+
+   public:
+      ChangeArticulation(Articulation* _a, Direction d) : a(_a), direction(d) {}
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      UNDO_NAME("ChangeArticulation");
       };
 
 #endif

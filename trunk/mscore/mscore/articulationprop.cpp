@@ -27,6 +27,8 @@
 #include "libmscore/measure.h"
 #include "libmscore/staff.h"
 #include "libmscore/stafftype.h"
+#include "libmscore/part.h"
+#include "libmscore/segment.h"
 
 //---------------------------------------------------------
 //   ArticulationProperties
@@ -36,37 +38,51 @@ ArticulationProperties::ArticulationProperties(Articulation* na, QWidget* parent
    : QDialog(parent)
       {
       setupUi(this);
-      noteAttribute = na;
+      articulation = na;
 
-#if 0
-      Part* part = st->staff()->part();
-      Instrument* i = part->instrument();
-      foreach(Channel* a, i->articulations) {
-            if (a->name.isEmpty())
-                  articulationList->addItem("normal");
-            else
-                  articulationList->addItem(a->name);
+      ChordRest* cr          = articulation->chordRest();
+      if (cr) {
+            Segment* segment       = cr->segment();
+            Part* part             = articulation->staff()->part();
+            Instrument* instrument = part->instr(segment->tick());
+//      const QList<NamedEventList>& midiActions() const;
+//      const QList<MidiArticulation>& articulation() const;
+//      const QList<Channel>& channel() const;
+
+            foreach(const Channel& a, instrument->channel()) {
+                  if (a.name.isEmpty())
+                        channelList->addItem("normal");
+                  else
+                        channelList->addItem(a.name);
+                  }
+            foreach(const NamedEventList& el, instrument->midiActions()) {
+                  midiActionList->addItem(el.name);
+                  }
             }
-
-      foreach(const NamedEventList& e, i->midiActions)
+#if 0
+      foreach(const NamedEventList& e, instrument->midiActions)
             midiActionList->addItem(e.name);
 
-      articulationChange->setChecked(!st->articulationName().isEmpty());
-      midiAction->setChecked(!st->midiActionName().isEmpty());
+      articulationChange->setChecked(!articulation->articulationName().isEmpty());
+      midiAction->setChecked(!articulation->midiActionName().isEmpty());
 
-      if (!st->articulationName().isEmpty()) {
+      if (!articulation->articulationName().isEmpty()) {
             QList<QListWidgetItem*> wl = articulationList
                ->findItems(st->articulationName(), Qt::MatchExactly);
             if (!wl.isEmpty())
                   articulationList->setCurrentRow(articulationList->row(wl[0]));
             }
-      if (!st->midiActionName().isEmpty()) {
+      if (!articulation->midiActionName().isEmpty()) {
             QList<QListWidgetItem*> wl = midiActionList
                ->findItems(st->midiActionName(), Qt::MatchExactly);
             if (!wl.isEmpty())
                   midiActionList->setCurrentRow(midiActionList->row(wl[0]));
             }
 #endif
+
+      direction->setCurrentIndex(int(articulation->direction()));
+      anchor->setCurrentIndex(int(articulation->anchor()));
+
       connect(this, SIGNAL(accepted()), SLOT(saveValues()));
       }
 

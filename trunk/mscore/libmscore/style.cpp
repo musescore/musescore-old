@@ -139,54 +139,6 @@ StyleType styleTypes[] = {
       StyleType("staccatoGateTime",        ST_INT),
       StyleType("slurGateTime",            ST_INT),
 
-      //---------------------------------------------------------
-      //    Articulations
-      //---------------------------------------------------------
-
-      StyleType("UfermataAnchor",          ST_INT),
-      StyleType("DfermataAnchor",          ST_INT),
-
-      StyleType("UshortfermataAnchor",     ST_INT),
-      StyleType("DshortfermataAnchor",     ST_INT),
-      StyleType("UlongfermataAnchor",      ST_INT),
-      StyleType("DlongfermataAnchor",      ST_INT),
-      StyleType("UverylongfermataAnchor",  ST_INT),
-      StyleType("DverylongfermataAnchor",  ST_INT),
-      StyleType("ThumbAnchor",             ST_INT),
-      StyleType("SforzatoaccentAnchor",    ST_INT),
-      StyleType("EspressivoAnchor",        ST_INT),
-      StyleType("StaccatoAnchor",          ST_INT),
-
-      StyleType("UstaccatissimoAnchor",    ST_INT),
-      StyleType("DstaccatissimoAnchor",    ST_INT),
-      StyleType("TenutoAnchor",            ST_INT),
-      StyleType("UportatoAnchor",          ST_INT),
-      StyleType("DportatoAnchor",          ST_INT),
-      StyleType("UmarcatoAnchor",          ST_INT),
-      StyleType("DmarcatoAnchor",          ST_INT),
-      StyleType("OuvertAnchor",            ST_INT),
-      StyleType("PlusstopAnchor",          ST_INT),
-      StyleType("UpbowAnchor",             ST_INT),
-
-      StyleType("DownbowAnchor",           ST_INT),
-      StyleType("ReverseturnAnchor",       ST_INT),
-      StyleType("TurnAnchor",              ST_INT),
-      StyleType("TrillAnchor",             ST_INT),
-      StyleType("PrallAnchor",             ST_INT),
-      StyleType("MordentAnchor",           ST_INT),
-      StyleType("PrallPrallAnchor",        ST_INT),
-      StyleType("PrallMordentAnchor",      ST_INT),
-      StyleType("UpPrallAnchor",           ST_INT),
-      StyleType("DownPrallAnchor",         ST_INT),
-
-      StyleType("UpMordentAnchor",         ST_INT),
-      StyleType("DownMordentAnchor",       ST_INT),
-      StyleType("SnappizzicatorAnchor",    ST_INT),
-
-      StyleType("TappingAnchor",           ST_INT),
-      StyleType("SlappingAnchor",          ST_INT),
-      StyleType("PoppingAnchor",           ST_INT),
-
       StyleType("ArpeggioNoteDistance",    ST_SPATIUM),
       StyleType("ArpeggioLineWidth",       ST_SPATIUM),
       StyleType("ArpeggioHookLen",         ST_SPATIUM),
@@ -479,46 +431,6 @@ StyleData::StyleData()
             StyleVal(ST_staccatoGateTime, 50),
             StyleVal(ST_slurGateTime, 100),
 
-            StyleVal(ST_UfermataAnchor, int(A_TOP_STAFF)),
-            StyleVal(ST_DfermataAnchor, int(A_BOTTOM_STAFF)),
-            StyleVal(ST_UshortfermataAnchor, int(A_TOP_STAFF)),
-            StyleVal(ST_DshortfermataAnchor, int(A_BOTTOM_STAFF)),
-            StyleVal(ST_UlongfermataAnchor, int(A_TOP_STAFF)),
-            StyleVal(ST_DlongfermataAnchor, int(A_BOTTOM_STAFF)),
-            StyleVal(ST_UverylongfermataAnchor, int(A_TOP_STAFF)),
-            StyleVal(ST_DverylongfermataAnchor, int(A_BOTTOM_STAFF)),
-
-            StyleVal(ST_ThumbAnchor, int(A_CHORD)),
-            StyleVal(ST_SforzatoaccentAnchor, int(A_CHORD)),
-            StyleVal(ST_EspressivoAnchor, int(A_CHORD)),
-            StyleVal(ST_StaccatoAnchor, int(A_CHORD)),
-            StyleVal(ST_UstaccatissimoAnchor, int(A_CHORD)),
-            StyleVal(ST_DstaccatissimoAnchor, int(A_CHORD)),
-            StyleVal(ST_TenutoAnchor, int(A_CHORD)),
-            StyleVal(ST_UportatoAnchor, int(A_CHORD)),
-            StyleVal(ST_DportatoAnchor, int(A_CHORD)),
-            StyleVal(ST_UmarcatoAnchor, int(A_CHORD)),
-            StyleVal(ST_DmarcatoAnchor, int(A_CHORD)),
-            StyleVal(ST_OuvertAnchor, int(A_CHORD)),
-            StyleVal(ST_PlusstopAnchor, int(A_CHORD)),
-            StyleVal(ST_UpbowAnchor, int(A_TOP_STAFF)),
-            StyleVal(ST_DownbowAnchor, int(A_TOP_STAFF)),
-            StyleVal(ST_ReverseturnAnchor, int(A_TOP_STAFF)),
-            StyleVal(ST_TurnAnchor, int(A_TOP_STAFF)),
-            StyleVal(ST_TrillAnchor, int(A_TOP_STAFF)),
-            StyleVal(ST_PrallAnchor, int(A_TOP_STAFF)),
-            StyleVal(ST_MordentAnchor, int(A_TOP_STAFF)),
-            StyleVal(ST_PrallPrallAnchor, int(A_TOP_STAFF)),
-            StyleVal(ST_PrallMordentAnchor, int(A_TOP_STAFF)),
-            StyleVal(ST_UpPrallAnchor, int(A_TOP_STAFF)),
-            StyleVal(ST_DownPrallAnchor, int(A_TOP_STAFF)),
-            StyleVal(ST_UpMordentAnchor, int(A_TOP_STAFF)),
-            StyleVal(ST_DownMordentAnchor, int(A_TOP_STAFF)),
-            StyleVal(ST_SnappizzicatoAnchor, int(A_CHORD)),
-            StyleVal(ST_TappingAnchor, int(A_TOP_STAFF)),
-            StyleVal(ST_SlappingAnchor, int(A_TOP_STAFF)),
-            StyleVal(ST_PoppingAnchor, int(A_TOP_STAFF)),
-
             StyleVal(ST_ArpeggioNoteDistance, Spatium(.5)),
             StyleVal(ST_ArpeggioLineWidth, Spatium(.18)),
             StyleVal(ST_ArpeggioHookLen, Spatium(.8)),
@@ -629,6 +541,42 @@ StyleData::StyleData()
       _chordList = 0;
       _pageFormat = new PageFormat;
       _spatium = MScore::spatium * DPI;
+
+      _articulationAnchor[Articulation_Fermata]         = A_TOP_STAFF;
+      _articulationAnchor[Articulation_Shortfermata]    = A_TOP_STAFF;
+      _articulationAnchor[Articulation_Longfermata]     = A_TOP_STAFF;
+      _articulationAnchor[Articulation_Verylongfermata] = A_TOP_STAFF;
+      _articulationAnchor[Articulation_Thumb]           = A_CHORD;
+      _articulationAnchor[Articulation_Sforzatoaccent]  = A_CHORD;
+      _articulationAnchor[Articulation_Espressivo]      = A_CHORD;
+      _articulationAnchor[Articulation_Staccato]        = A_CHORD;
+      _articulationAnchor[Articulation_Staccatissimo]   = A_CHORD;
+      _articulationAnchor[Articulation_Tenuto]          = A_CHORD;
+      _articulationAnchor[Articulation_Portato]         = A_CHORD;
+      _articulationAnchor[Articulation_Marcato]         = A_CHORD;
+      _articulationAnchor[Articulation_Ouvert]          = A_CHORD;
+      _articulationAnchor[Articulation_Plusstop]        = A_CHORD;
+      _articulationAnchor[Articulation_Upbow]           = A_TOP_STAFF;
+      _articulationAnchor[Articulation_Downbow]         = A_TOP_STAFF;
+      _articulationAnchor[Articulation_Reverseturn]     = A_TOP_STAFF;
+      _articulationAnchor[Articulation_Turn]            = A_TOP_STAFF;
+      _articulationAnchor[Articulation_Trill]           = A_TOP_STAFF;
+      _articulationAnchor[Articulation_Prall]           = A_TOP_STAFF;
+      _articulationAnchor[Articulation_Mordent]         = A_TOP_STAFF;
+      _articulationAnchor[Articulation_PrallPrall]      = A_TOP_STAFF;
+      _articulationAnchor[Articulation_PrallMordent]    = A_TOP_STAFF;
+      _articulationAnchor[Articulation_UpPrall]         = A_TOP_STAFF;
+      _articulationAnchor[Articulation_DownPrall]       = A_TOP_STAFF;
+      _articulationAnchor[Articulation_UpMordent]       = A_TOP_STAFF;
+      _articulationAnchor[Articulation_DownMordent]     = A_TOP_STAFF;
+      _articulationAnchor[Articulation_PrallDown]       = A_TOP_STAFF;
+      _articulationAnchor[Articulation_PrallUp]         = A_TOP_STAFF;
+      _articulationAnchor[Articulation_LinePrall]       = A_TOP_STAFF;
+      _articulationAnchor[Articulation_Schleifer]       = A_TOP_STAFF;
+      _articulationAnchor[Articulation_Snappizzicato]   = A_TOP_STAFF;
+      _articulationAnchor[Articulation_Tapping]         = A_TOP_STAFF;
+      _articulationAnchor[Articulation_Slapping]        = A_TOP_STAFF;
+      _articulationAnchor[Articulation_Popping]         = A_TOP_STAFF;
       };
 
 StyleData::StyleData(const StyleData& s)
@@ -643,6 +591,8 @@ StyleData::StyleData(const StyleData& s)
       _textStyles      = s._textStyles;
       _pageFormat      = new PageFormat(*(s._pageFormat));
       _spatium         = s._spatium;
+      for (int i = 0; i < ARTICULATIONS; ++i)
+            _articulationAnchor[i] = s._articulationAnchor[i];
       }
 
 //---------------------------------------------------------
@@ -975,8 +925,18 @@ void StyleData::load(QDomElement e)
                               ;
                         else if (tag == "evenHeader")
                               ;
-                        else
-                              domError(e);
+                        else {
+                              int idx2;
+                              for (idx2 = 0; idx2 < ARTICULATIONS; ++idx2) {
+                                    ArticulationInfo& ai =  Articulation::articulationList[idx2];
+                                    if (tag == ai.name + "Anchor") {
+                                          _articulationAnchor[idx2] = ArticulationAnchor(val.toInt());
+                                          break;
+                                          }
+                                    }
+                              if (idx2 == ARTICULATIONS)
+                                    domError(e);
+                              }
                         }
                   }
             }
@@ -1037,6 +997,13 @@ void StyleData::save(Xml& xml, bool optimize) const
             _chordList->write(xml);
             xml.etag();
             }
+      for (int i = 0; i < ARTICULATIONS; ++i) {
+            if (optimize && _articulationAnchor[i] == MScore::defaultStyle()->articulationAnchor(i))
+                  continue;
+            const ArticulationInfo& ai = Articulation::articulationList[i];
+            xml.tag(ai.name + "Anchor", int(_articulationAnchor[i]));
+            }
+
       xml.tag("Spatium", _spatium / DPMM);
       xml.etag();
       }
@@ -1555,13 +1522,39 @@ void StyleData::setPageFormat(const PageFormat& pf)
       *_pageFormat = pf;
       }
 
+//---------------------------------------------------------
+//   spatium
+//---------------------------------------------------------
+
 qreal Style::spatium() const
       {
       return d->spatium();
       }
 
+//---------------------------------------------------------
+//   setSpatium
+//---------------------------------------------------------
+
 void Style::setSpatium(qreal v)
       {
       d->setSpatium(v);
+      }
+
+//---------------------------------------------------------
+//   articulationAnchor
+//---------------------------------------------------------
+
+ArticulationAnchor Style::articulationAnchor(int id) const
+      {
+      return d->articulationAnchor(id);
+      }
+
+//---------------------------------------------------------
+//   setArticulationAnchor
+//---------------------------------------------------------
+
+void Style::setArticulationAnchor(int id, ArticulationAnchor val)
+      {
+      return d->setArticulationAnchor(id, val);
       }
 

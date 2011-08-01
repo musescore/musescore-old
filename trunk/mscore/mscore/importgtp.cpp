@@ -431,13 +431,13 @@ void GuitarPro::applyBeatEffects(Chord* chord, int beatEffect)
       chord->add(a);
       switch (beatEffect) {
             case 1:
-                  a->setSubtype(Tapping);
+                  a->setSubtype(Articulation_Tapping);
                   break;
             case 2:
-                  a->setSubtype(Slapping);
+                  a->setSubtype(Articulation_Slapping);
                   break;
             case 3:
-                  a->setSubtype(Popping);
+                  a->setSubtype(Articulation_Popping);
                   break;
             default:
                   printf("GuitarPro import: unknown beat effect %d\n", beatEffect);
@@ -1990,7 +1990,7 @@ void GuitarPro5::readNoteEffects(Note* note)
       if (modMask2 & 0x1) {   // staccato - palm mute
             Chord* chord = note->chord();
             Articulation* a = new Articulation(chord->score());
-            a->setSubtype(StaccatoSym);
+            a->setSubtype(Articulation_Staccato);
             chord->add(a);
             }
       if (modMask2 & 0x2) {   // palm mute - mute the whole column
