@@ -329,8 +329,7 @@ void Page::scanElements(void* data, void (*func)(void*, Element*), bool all)
       {
       foreach(System* s, _systems)
             s->scanElements(data, func, all);
-      if (all)
-            func(data, this);
+      func(data, this);
       }
 
 //---------------------------------------------------------
