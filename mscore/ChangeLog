@@ -1,4 +1,5 @@
 1.aug (ws)
+      - fix #11817: Headers and footers not drawn
       - experimental: beginning "inspector" panel
       - implement "flip" action for articulations; the right symbol is automatically
         choosen dependent on chord stem direction
