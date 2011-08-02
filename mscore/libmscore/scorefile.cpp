@@ -656,7 +656,6 @@ bool Score::loadCompressedMsc(QString name)
                         QImage image;
                         if (image.loadFromData(dbuf.data(), "PNG")) {
                               page->setImage(image);
-printf("read image %s\n", qPrintable(path));
                               }
                         else
                               printf("load image failed\n");
@@ -864,18 +863,12 @@ bool Score::read(QDomElement dScore)
                   // obsolete
                   ;
                   }
-#ifdef OMR
             else if (tag == "Omr") {
+#ifdef OMR
                   _omr = new Omr(this);
                   _omr->read(ee);
-/*                  if (!_omr->read()) {
-                        delete _omr;
-                        _omr = 0;
-                        }
-                  */
-
-                  }
 #endif
+                  }
             else if (tag == "showOmr")
                   _showOmr = i;
             else if (tag == "LayerTag") {

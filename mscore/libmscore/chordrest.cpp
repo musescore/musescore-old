@@ -465,26 +465,18 @@ void ChordRest::layoutArticulations()
             }
 
       //
-      // staccato and tenuto are placed near to notehead
-      // reserve extra space for slur for all other articulations
-      //
-      //    TODO: - check for slur direction
-      //
-/*      Articulation* a = articulations.front();
-      if (!_slurFor.isEmpty()
-         && (a->subtype() != TenutoSym)
-         && (a->subtype() != StaccatoSym)) {
-            dy += _spatium;
-            }
-  */
-      //
       //    pass 1
-      //    place all articulations with anchor at chord/rest
+      //    place tenuto and staccato
       //
 
       foreach (Articulation* a, articulations) {
             a->layout();
             ArticulationAnchor aa = a->anchor();
+
+            if ((a->subtype() != Articulation_Tenuto)
+               && (a->subtype() != Articulation_Staccato))
+                  continue;
+
             if (aa != A_CHORD && aa != A_TOP_CHORD && aa != A_BOTTOM_CHORD)
                   continue;
 
@@ -492,12 +484,78 @@ void ChordRest::layoutArticulations()
             bool staffLineCT = a->subtype() == Articulation_Tenuto
                                || a->subtype() == Articulation_Staccato;
 
-            qreal sh = a->bbox().height() * mag();
+//            qreal sh = a->bbox().height() * mag();
             bool bottom = (aa == A_BOTTOM_CHORD) || (aa == A_CHORD && up());
 
             dy += distance1;
-//            if (sh > (_spatium * .5))   // hack
-//                  dy += sh * .5;
+            if (bottom) {
+                  qreal y = chordBotY + dy;
+                  if (staffLineCT && (y <= staffBotY -.1 - dy)) {
+                        qreal l = y / _spatium;
+                        qreal delta = fabs(l - round(l));
+                        if (delta < 0.4) {
+                              y  += _spatium * .5;
+                              dy += _spatium * .5;
+                              }
+                        }
+                  a->setPos(x, y); // - a->bbox().y() + a->bbox().height() * .5);
+                  }
+            else {
+                  qreal y = chordTopY - dy;
+                  if (staffLineCT && (y >= (staffTopY +.1 + dy))) {
+                        qreal l = y / _spatium;
+                        qreal delta = fabs(l - round(l));
+                        if (delta < 0.4) {
+                              y  -= _spatium * .5;
+                              dy += _spatium * .5;
+                              }
+                        }
+                  a->setPos(x, y); // + a->bbox().y() - a->bbox().height() * .5);
+                  }
+            }
+
+      // reserve space for slur
+      bool botGap = false;
+      bool topGap = false;
+      foreach(Slur* s, _slurFor) {
+            if (s->up())
+                  topGap = true;
+            else
+                  botGap = true;
+            }
+      foreach(Slur* s, _slurBack) {
+            if (s->up())
+                  topGap = true;
+            else
+                  botGap = true;
+            }
+      if (botGap)
+            chordBotY += _spatium;
+      if (topGap)
+            chordTopY -= _spatium;
+
+      //
+      //    pass 2
+      //    place all articulations with anchor at chord/rest
+      //
+      foreach (Articulation* a, articulations) {
+            a->layout();
+            ArticulationAnchor aa = a->anchor();
+            if ((a->subtype() == Articulation_Tenuto)
+               || (a->subtype() == Articulation_Staccato))
+                  continue;
+
+            if (aa != A_CHORD && aa != A_TOP_CHORD && aa != A_BOTTOM_CHORD)
+                  continue;
+
+            // for tenuto and staccate check for staff line collision
+            bool staffLineCT = a->subtype() == Articulation_Tenuto
+                               || a->subtype() == Articulation_Staccato;
+
+//            qreal sh = a->bbox().height() * mag();
+            bool bottom = (aa == A_BOTTOM_CHORD) || (aa == A_CHORD && up());
+
+            dy += distance1;
             if (bottom) {
                   qreal y = chordBotY + dy;
                   if (staffLineCT && (y <= staffBotY -.1 - dy)) {
@@ -525,7 +583,7 @@ void ChordRest::layoutArticulations()
             }
 
       //
-      //    pass 2
+      //    pass 3
       //    now place all articulations with staff top or bottom anchor
       //
       qreal dyTop = staffTopY;

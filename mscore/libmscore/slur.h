@@ -106,7 +106,7 @@ class SlurTie : public Spanner {
 
    protected:
       qreal _len;
-      bool up;
+      bool _up;
       QQueue<SlurSegment*> delSegments;   // "deleted" segments
       Direction _slurDirection;
       qreal firstNoteRestSegmentX(System* system);
@@ -117,8 +117,8 @@ class SlurTie : public Spanner {
       ~SlurTie();
 
       virtual ElementType type() const = 0;
-      bool isUp() const                  { return up; }
-      void setUp(bool val)               { up = val;  }
+      bool up() const                    { return _up; }
+      void setUp(bool val)               { _up = val;  }
       Direction slurDirection() const    { return _slurDirection; }
       void setSlurDirection(Direction d) { _slurDirection = d; }
 

@@ -2484,8 +2484,6 @@ void Score::cmd(const QAction* a)
             cmdAddHairpin(false);
       else if (cmd == "add-hairpin-reverse")
             cmdAddHairpin(true);
-      else if (cmd == "delete")
-            cmdDeleteSelection();
       else if (cmd == "delete-measures")
             cmdDeleteSelectedMeasures();
       else if (cmd == "time-delete") {
