@@ -1094,7 +1094,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          A_CMD,
          "delete",
          QT_TRANSLATE_NOOP("action","Delete"),
