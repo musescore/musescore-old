@@ -1634,7 +1634,7 @@ FlipSlurDirection::FlipSlurDirection(SlurTie* s)
 
 void FlipSlurDirection::flip()
       {
-      slur->setSlurDirection(slur->isUp() ? DOWN : UP);
+      slur->setSlurDirection(slur->up() ? DOWN : UP);
       }
 
 //---------------------------------------------------------

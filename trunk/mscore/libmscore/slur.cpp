@@ -105,7 +105,7 @@ bool SlurSegment::edit(MuseScoreView* viewer, int curGrip, int key, Qt::Keyboard
       Slur* sl = static_cast<Slur*>(slurTie());
 
       if (key == Qt::Key_X) {
-            sl->setSlurDirection(sl->isUp() ? DOWN : UP);
+            sl->setSlurDirection(sl->up() ? DOWN : UP);
             sl->layout();
             return true;
             }
@@ -379,7 +379,7 @@ void SlurSegment::computeBezier()
                   shoulderW = 0.6;
             }
 
-      if (!slurTie()->isUp())
+      if (!slurTie()->up())
             shoulderH = -shoulderH;
       shoulderH -= p6o.y();
 
@@ -470,7 +470,7 @@ SlurTie::SlurTie(Score* s)
    : Spanner(s)
       {
       _slurDirection = AUTO;
-      up             = true;
+      _up            = true;
       _len           = 0;
       _lineType      = 0;     // default is solid
       }
@@ -478,7 +478,7 @@ SlurTie::SlurTie(Score* s)
 SlurTie::SlurTie(const SlurTie& t)
    : Spanner(t)
       {
-      up             = t.up;
+      _up            = t._up;
       _slurDirection = t._slurDirection;
       _len           = t._len;
       _lineType      = t._lineType;
@@ -503,11 +503,15 @@ static qreal fixArticulations(qreal yo, Chord* c, qreal _up)
       // handle special case of tenuto and staccato;
       //
       QList<Articulation*>* al = c->getArticulations();
-      if (al->size() == 1) {
+      if (al->size() >= 2) {
+            Articulation* a = al->at(1);
+            if (a->subtype() == Articulation_Tenuto || a->subtype() == Articulation_Staccato)
+                  return a->y() + (a->height() + c->score()->spatium() * .3) * _up;
+            }
+      else if (al->size() >= 1) {
             Articulation* a = al->at(0);
             if (a->subtype() == Articulation_Tenuto || a->subtype() == Articulation_Staccato)
-                  yo = a->y() + (a->height() + c->score()->spatium() * .3) * _up;
-//                  yo = a->y() + (a->height() + c->score()->spatium() * .5) * _up;
+                  return a->y() + (a->height() + c->score()->spatium() * .3) * _up;
             }
       return yo;
       }
@@ -548,8 +552,8 @@ void SlurTie::slurPos(SlurPos* sp)
                   }
             sc    = static_cast<Chord*>(e1);
             ec    = static_cast<Chord*>(e2);
-            note1 = up ? sc->upNote() : sc->downNote();
-            note2 = up ? ec->upNote() : ec->downNote();
+            note1 = _up ? sc->upNote() : sc->downNote();
+            note2 = _up ? ec->upNote() : ec->downNote();
             }
       sp->p1      = sc->pagePos();
       sp->p2      = ec->pagePos();
@@ -568,7 +572,7 @@ void SlurTie::slurPos(SlurPos* sp)
       //
       qreal hw  = note1->headWidth();
       qreal hh  = note1->headHeight();
-      qreal _up = up ? -1.0 : 1.0;
+      qreal __up = _up ? -1.0 : 1.0;
 
       //------p1
       xo = hw * .5;
@@ -578,17 +582,17 @@ void SlurTie::slurPos(SlurPos* sp)
 
       if (isTie && sc->notes().size() > 1) {
             xo = hw * 1.12;
-            yo = note1->pos().y() + hw * .3 * _up;
+            yo = note1->pos().y() + hw * .3 * __up;
             }
       else {
-            yo = note1->yPos() + (hh * .5 + _spatium * .4) * _up;
+            yo = note1->yPos() + (hh * .5 + _spatium * .4) * __up;
             if (stem1) {
                   // bool startIsGrace = sc->noteType() != NOTE_NORMAL;
 
                   Beam* beam1 = sc->beam();
-                  if (beam1 && (beam1->elements().back() != sc) && (sc->up() == up)) {
+                  if (beam1 && (beam1->elements().back() != sc) && (sc->up() == _up)) {
                         qreal sh = stem1->height() + _spatium;
-                        if (up)
+                        if (_up)
                               yo = sc->downNote()->yPos() - sh;
                         else
                               yo = sc->upNote()->yPos() + sh;
@@ -596,14 +600,14 @@ void SlurTie::slurPos(SlurPos* sp)
                         stemPos = true;
                         }
                   else {
-                        if (sc->up() && up)
+                        if (sc->up() && _up)
                               xo = note1->headWidth() + _spatium * .3;
 
                         //
                         // handle case: stem up   - stem down
                         //              stem down - stem up
                         //
-                        if ((sc->up() != ec->up()) && (sc->up() == up)) {
+                        if ((sc->up() != ec->up()) && (sc->up() == _up)) {
                               Note* n1  = sc->up() ? sc->downNote() : sc->upNote();
                               Note* n2  = ec->up() ? ec->downNote() : ec->upNote();
                               qreal yd = n2->yPos() - n1->yPos();
@@ -618,11 +622,11 @@ void SlurTie::slurPos(SlurPos* sp)
                                           yd = -sh;
                                     }
                               stemPos = true;
-                              if ((up && (yd < -_spatium)) || (!up && (yd > _spatium)))
+                              if ((_up && (yd < -_spatium)) || (!_up && (yd > _spatium)))
                                     yo += yd;
                               }
-                        else if (sc->up() != up)
-                              yo = fixArticulations(yo, sc, _up);
+                        else if (sc->up() != _up)
+                              yo = fixArticulations(yo, sc, __up);
                         }
                   }
             }
@@ -633,34 +637,34 @@ void SlurTie::slurPos(SlurPos* sp)
       yo = 0.0;
       if (isTie && ec->notes().size() > 1) {
             xo = - hw * 0.12;
-            yo = note2->pos().y() + hw * .3 * _up;
+            yo = note2->pos().y() + hw * .3 * __up;
             }
       else {
-            yo = note2->yPos() + (hh * .5 + _spatium * .4) * _up;
+            yo = note2->yPos() + (hh * .5 + _spatium * .4) * __up;
             if (stem2) {
                   Beam* beam2 = ec->beam();
                   if ((stemPos && (sc->up() == ec->up()))
                      || (beam2
                        && (!beam2->elements().isEmpty())
                        && (beam2->elements().front() != ec)
-                       && (ec->up() == up)
+                       && (ec->up() == _up)
                        && (sc->noteType() == NOTE_NORMAL)
                        )
                         ) {
                         qreal sh = stem2->height() + _spatium;
-                        if (up)
+                        if (_up)
                               yo = ec->downNote()->yPos() - sh;
                         else
                               yo = ec->upNote()->yPos() + sh;
                         xo = stem2->pos().x();
                         }
-                  else if (!ec->up() && !up)
+                  else if (!ec->up() && !_up)
                         xo = -_spatium * .3;
                   //
                   // handle case: stem up   - stem down
                   //              stem down - stem up
                   //
-                  if ((sc->up() != ec->up()) && (ec->up() == up)) {
+                  if ((sc->up() != ec->up()) && (ec->up() == _up)) {
                         Note* n1 = sc->up() ? sc->downNote() : sc->upNote();
                         Note* n2 = ec->up() ? ec->downNote() : ec->upNote();
                         qreal yd = n2->yPos() - n1->yPos();
@@ -675,11 +679,11 @@ void SlurTie::slurPos(SlurPos* sp)
                                     yd = -mh;
                               }
 
-                        if ((up && (yd > _spatium)) || (!up && (yd < -_spatium)))
+                        if ((_up && (yd > _spatium)) || (!_up && (yd < -_spatium)))
                               yo -= yd;
                         }
-                  else if (ec->up() != up)
-                        yo = fixArticulations(yo, ec, _up);
+                  else if (ec->up() != _up)
+                        yo = fixArticulations(yo, ec, __up);
                   }
             }
       sp->p2 += QPointF(xo, yo);
@@ -873,10 +877,10 @@ void Slur::layout()
             }
       switch (_slurDirection) {
             case UP:
-                  up = true;
+                  _up = true;
                   break;
             case DOWN:
-                  up = false;
+                  _up = false;
                   break;
             case AUTO:
                   {
@@ -891,27 +895,27 @@ void Slur::layout()
                   Chord* c1 = (cr1->type() == CHORD) ? static_cast<Chord*>(cr1) : 0;
                   Chord* c2 = (cr2->type() == CHORD) ? static_cast<Chord*>(cr2) : 0;
 
-                  up = !(cr1->up());
+                  _up = !(cr1->up());
 
                   if ((cr2->tick() - cr1->tick()) > m1->ticks()) {
                         // long slurs are always above
-                        up = true;
+                        _up = true;
                         }
                   else
-                        up = !(cr1->up());
+                        _up = !(cr1->up());
 
                   if (c1 && c2 && isDirectionMixture(c1, c2) && (c1->noteType() == NOTE_NORMAL)) {
                         // slurs go above if start and end note have different stem directions,
                         // but grace notes are exceptions
-                        up = true;
+                        _up = true;
                         }
                   else if (m1->mstaff(cr1->staffIdx())->hasVoices && c1 && c1->noteType() == NOTE_NORMAL) {
                         // in polyphonic passage, slurs go on the stem side
-                        up = cr1->up();
+                        _up = cr1->up();
                         }
                   else if (c1 && c2 && chordsHaveTie(c1, c2)) {
                         // could confuse slur with tie, put slur on stem side
-                        up = cr1->up();
+                        _up = cr1->up();
                         }
                   }
                   break;
@@ -1123,16 +1127,16 @@ void Tie::layout()
       if (_slurDirection == AUTO)
             if (m1->mstaff(c1->staffIdx())->hasVoices) {
                   // in polyphonic passage, ties go on the stem side
-                  up = c1->up();
+                  _up = c1->up();
                   }
             else
-                  up = !(c1->up());
+                  _up = !(c1->up());
       else
-            up = _slurDirection == UP ? true : false;
+            _up = _slurDirection == UP ? true : false;
       qreal w   = startNote()->headWidth();
       qreal xo1 = w * 1.12;
       qreal h   = w * 0.3;
-      qreal yo  = up ? -h : h;
+      qreal yo  = _up ? -h : h;
 
       QPointF off1(xo1, yo);
       QPointF off2(0.0, yo);
