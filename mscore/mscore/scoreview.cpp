@@ -3143,6 +3143,8 @@ void ScoreView::cmd(const QAction* a)
                   _score->cmdJoinMeasure(m1, m2);
                   }
             }
+      else if (cmd == "delete")
+            _score->cmdDeleteSelection();
       else
             _score->cmd(a);
       _score->processMidiInput();
@@ -3154,7 +3156,6 @@ void ScoreView::cmd(const QAction* a)
 
 void ScoreView::showOmr(bool flag)
       {
-printf("showOmr %d\n", flag);
       _score->setShowOmr(flag);
       ScoreTab* t = mscore->getTab1();
       if (t->view() != this)

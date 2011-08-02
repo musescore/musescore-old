@@ -1753,7 +1753,7 @@ void SlurView::setElement(Element* e)
             item->setData(0, Qt::UserRole, QVariant::fromValue<void*>((void*)e));
             st.segments->addTopLevelItem(item);
             }
-      st.upFlag->setChecked(slur->isUp());
+      st.upFlag->setChecked(slur->up());
       st.direction->setCurrentIndex(slur->slurDirection());
       st.startElement->setEnabled(slur->startElement());
       st.endElement->setEnabled(slur->endElement());
@@ -1831,11 +1831,10 @@ void TieView::setElement(Element* e)
       foreach(const Element* e, el) {
             QTreeWidgetItem* item = new QTreeWidgetItem;
             item->setText(0, QString("%1").arg((unsigned long)e, 8, 16));
-item->setText(1, "klops");
             item->setData(0, Qt::UserRole, QVariant::fromValue<void*>((void*)e));
             st.segments->addTopLevelItem(item);
             }
-      st.upFlag->setChecked(tie->isUp());
+      st.upFlag->setChecked(tie->up());
       st.direction->setCurrentIndex(tie->slurDirection());
       }
 
