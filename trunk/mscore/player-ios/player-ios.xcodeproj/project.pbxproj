@@ -131,6 +131,7 @@
 		5456D08413D5FE3C00937580 /* velo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5456D01C13D5FE3A00937580 /* velo.cpp */; };
 		5456D08513D5FE3C00937580 /* volta.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5456D01E13D5FE3A00937580 /* volta.cpp */; };
 		5456D08613D5FE3C00937580 /* xml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5456D02013D5FE3A00937580 /* xml.cpp */; };
+		54ADFC6813E73A68002F0D45 /* ossia.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54ADFC6613E73A68002F0D45 /* ossia.cpp */; };
 		54B64BFC13D61AA700360341 /* scoreview.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54B64BF513D61AA700360341 /* scoreview.cpp */; };
 		54B64BFD13D61AA700360341 /* seq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54B64BF713D61AA700360341 /* seq.cpp */; };
 		54B64C1213D61B3700360341 /* al.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54B64C0113D61B3700360341 /* al.cpp */; };
@@ -399,6 +400,8 @@
 		5456D01F13D5FE3A00937580 /* volta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = volta.h; sourceTree = "<group>"; };
 		5456D02013D5FE3A00937580 /* xml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xml.cpp; sourceTree = "<group>"; };
 		5456D02113D5FE3A00937580 /* xml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xml.h; sourceTree = "<group>"; };
+		54ADFC6613E73A68002F0D45 /* ossia.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ossia.cpp; sourceTree = "<group>"; };
+		54ADFC6713E73A68002F0D45 /* ossia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ossia.h; sourceTree = "<group>"; };
 		54B64BF513D61AA700360341 /* scoreview.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scoreview.cpp; sourceTree = "<group>"; };
 		54B64BF613D61AA700360341 /* scoreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scoreview.h; sourceTree = "<group>"; };
 		54B64BF713D61AA700360341 /* seq.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = seq.cpp; sourceTree = "<group>"; };
@@ -555,6 +558,8 @@
 		5456CF5013D5FE3A00937580 /* libmscore */ = {
 			isa = PBXGroup;
 			children = (
+				54ADFC6613E73A68002F0D45 /* ossia.cpp */,
+				54ADFC6713E73A68002F0D45 /* ossia.h */,
 				5456CF5113D5FE3A00937580 /* accidental.cpp */,
 				5456CF5213D5FE3A00937580 /* accidental.h */,
 				5456CF5313D5FE3A00937580 /* arpeggio.cpp */,
@@ -1023,6 +1028,7 @@
 				54B64C4C13D620C400360341 /* sparm.cpp in Sources */,
 				54B64C4E13D6218D00360341 /* moc_scoreview.cpp in Sources */,
 				542645CE13D6CEAC00EBD426 /* mscoreplay.cpp in Sources */,
+				54ADFC6813E73A68002F0D45 /* ossia.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1070,6 +1076,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: werner schweer (M5D5ZCGA24)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1095,6 +1102,7 @@
 					"\"$(SRCROOT)/../../../../qt/sim/plugins/platforms\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "BC6CC035-AE5E-4958-97A7-D8519A93F8C8";
 				VALID_ARCHS = "armv7 i386";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1105,6 +1113,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: werner schweer (M5D5ZCGA24)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "player-ios-Prefix.pch";
@@ -1119,6 +1128,7 @@
 					"\"$(SRCROOT)/../../../../qt/dev/lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "BC6CC035-AE5E-4958-97A7-D8519A93F8C8";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 i386";
 				WRAPPER_EXTENSION = app;
