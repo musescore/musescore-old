@@ -4170,10 +4170,8 @@ void MuseScore::cmd(QAction* a)
             cs->startCmd();
             }
       cmd(a, cmdn);
-      if (lastShortcut->flags & A_CMD) {
-            printf("cs->endCmd\n");
+      if (lastShortcut->flags & A_CMD)
             cs->endCmd();
-            }
       endCmd();
       }
 

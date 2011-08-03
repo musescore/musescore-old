@@ -444,11 +444,17 @@ void ChordRest::layoutArticulations()
       qreal distance1 = score()->styleS(ST_propertyDistanceHead).val() * _spatium;
       qreal distance2 = score()->styleS(ST_propertyDistanceStem).val() * _spatium;
 
-      qreal chordTopY = upPos();
-      qreal chordBotY = downPos();
+      qreal chordTopY = upPos();    // note position of highest note
+      qreal chordBotY = downPos();  // note position of lowest note
 
       qreal staffTopY = -distance2;
       qreal staffBotY = staff()->height() + distance2;
+
+      // avoid collisions of staff articulations with chord notes:
+      // gap between note and staff articulation is distance0 + 0.5 spatium
+
+      staffTopY = qMin(staffTopY, chordTopY - distance0 - 0.5 * _spatium);
+      staffBotY = qMax(staffBotY, chordBotY + distance0 + 0.5 * _spatium);
 
       qreal dy = 0.0;
 

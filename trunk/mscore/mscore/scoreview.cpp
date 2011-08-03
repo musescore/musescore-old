@@ -3265,9 +3265,8 @@ void ScoreView::endEdit()
             harmonyEndEdit();
       _score->setLayoutAll(true);
       _score->endCmd();
-      if (dragElement != editObject) {
+      if (dragElement && (dragElement != editObject)) {
             curElement = dragElement;
-printf("select %p\n", curElement);
             _score->select(curElement);
             _score->end();
             }
