@@ -285,7 +285,7 @@ void Beam::draw(Painter* painter) const
       painter->setNoPen(true);
       qreal lw2 = point(score()->styleS(ST_beamWidth)) * .5 * mag();
       foreach (const QLineF* bs, beamSegments) {
-            painter->fillRect(
+            painter->fillPolygon(
                bs->x1(), bs->y1()-lw2,
                bs->x2(), bs->y2()-lw2,
                bs->x2(), bs->y2()+lw2,
