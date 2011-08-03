@@ -28,6 +28,7 @@
 #include "beam.h"
 #include "painter.h"
 #include "mscore.h"
+#include "page.h"
 
 //---------------------------------------------------------
 //   SlurSegment
@@ -354,6 +355,18 @@ void SlurSegment::computeBezier()
       QPointF p6o = ups[GRIP_SHOULDER].off * _spatium;
 
       QPointF p2 = pp2 - pp1;
+      if (p2.x() == 0.0) {
+            printf("zero slur\n");
+            if (slurTie()->type() == SLUR) {
+                  Slur* s = static_cast<Slur*>(slurTie());
+                  Measure* m1 = s->startChord()->segment()->measure();
+                  Measure* m2 = s->endChord()->segment()->measure();
+                  Page* page = m1->system()->page();
+                  printf("   in measure %d-%d page %d\n", m1->no(), m2->no(), page->no());
+                  }
+            return;
+            }
+
       qreal sinb = atan(p2.y() / p2.x());
       QTransform t;
       t.rotateRadians(-sinb);

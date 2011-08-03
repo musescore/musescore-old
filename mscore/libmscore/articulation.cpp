@@ -417,6 +417,7 @@ void Articulation::layout()
       {
       SymId sym = _up ? articulationList[subtype()].upSym : articulationList[subtype()].downSym;
       setbbox(symbols[score()->symIdx()][sym].bbox(magS()));
+      adjustReadPos();
       }
 
 //---------------------------------------------------------

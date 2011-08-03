@@ -365,18 +365,11 @@ printf("add pitch %d %d\n", pitch, addFlag);
       nval.pitch     = pitch;
       nval.headGroup = headGroup;
       Fraction duration;
-      Segment* seg = _is.segment();
-      if (_is.repitchMode() || (_is.cr()->duration() == _is.duration().fraction())) {
-printf("repitch note\n");
-            Note* oNote = static_cast<Chord*>(seg->element(track))->upNote();
-            int tpc = 0;
-            int line = 0;
-            undoChangePitch(oNote, pitch, 0, 0, -1, -1);
-            }
-      else {
+      if (_is.repitchMode())
+            duration = _is.cr()->duration();
+      else
             duration = _is.duration().fraction();
-            seg = setNoteRest(_is.segment(), track, nval, duration, stemDirection);
-            }
+      Segment* seg   = setNoteRest(_is.segment(), track, nval, duration, stemDirection);
       Note* note     = 0;
       if (seg) {
             note = static_cast<Chord*>(seg->element(track))->upNote();

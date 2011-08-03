@@ -1160,6 +1160,8 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
 
 void Score::deleteItem(Element* el)
       {
+printf("deleteItem <%s>\n", el->name());
+
       switch(el->type()) {
             case INSTRUMENT_NAME: {
                   Part* part = el->staff()->part();
@@ -1364,6 +1366,7 @@ void Score::cmdDeleteSelectedMeasures()
 
 void Score::cmdDeleteSelection()
       {
+printf("cmdDeleteSelection state %d\n", selection().state());
       if (selection().state() == SEL_RANGE) {
             Segment* s1 = selection().startSegment();
             Segment* s2 = selection().endSegment();
@@ -1456,6 +1459,7 @@ void Score::cmdDeleteSelection()
             // deleteItem modifies selection().elements() list,
             // so we need a local copy:
             QList<Element*> el(selection().elements());
+printf("   cmdDeleteSelection %d\n", el.size());
             foreach(Element* e, el) {
                   deleteItem(e);
                   deselect(e);
