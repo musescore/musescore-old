@@ -54,7 +54,7 @@ class PainterQt : public Painter {
       virtual void drawLine(qreal a, qreal b, qreal c, qreal d) {
             _painter->drawLine(QLineF(a, b, c, d));
             }
-      virtual void fillRect(qreal x1, qreal y1,
+      virtual void fillPolygon(qreal x1, qreal y1,
          qreal x2, qreal y2,
          qreal x3, qreal y3,
          qreal x4, qreal y4);
