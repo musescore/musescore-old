@@ -175,30 +175,30 @@ QPointF SlurSegment::gripAnchor(int grip) const
       QPointF p2(spos.p2 + spos.system2->pagePos());
       switch(spannerSegmentType()) {
             case SEGMENT_SINGLE:
-                  if (grip == 0)
+                  if (grip == GRIP_START)
                         return p1;
-                  else if (grip == 3)
+                  else if (grip == GRIP_END)
                         return p2;
                   break;
 
             case SEGMENT_BEGIN:
-                  if (grip == 0)
+                  if (grip == GRIP_START)
                         return p1;
-                  else if (grip == 3)
+                  else if (grip == GRIP_END)
                         return system()->abbox().topRight();
                   break;
 
             case SEGMENT_MIDDLE:
-                  if (grip == 0)
+                  if (grip == GRIP_START)
                         return sp;
-                  else if (grip == 3)
+                  else if (grip == GRIP_END)
                         return system()->abbox().topRight();
                   break;
 
             case SEGMENT_END:
-                  if (grip == 0)
+                  if (grip == GRIP_START)
                         return sp;
-                  else if (grip == 3)
+                  else if (grip == GRIP_END)
                         return p2;
                   break;
             }

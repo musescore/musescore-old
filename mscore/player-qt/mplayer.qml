@@ -13,13 +13,12 @@
 
 import QtQuick 1.0
 import MuseScore 1.0
+import "mobile" as Mobile
 
-Rectangle {
-      id: player
-      x: 0; y: 0
+Item {
+      id: screen
       width: 1024; height: 768
       state: "myscores"
-      border.width: 1
 
       states: [
             State {
@@ -78,9 +77,9 @@ Rectangle {
 
       ListView {
             id: scores
-            anchors.left: player.left
-            anchors.top: player.top
-            anchors.bottom: player.bottom
+            anchors.left: screen.left
+            anchors.top: screen.top
+            anchors.bottom: screen.bottom
             anchors.margins: 10
             clip: true
 
@@ -131,9 +130,9 @@ Rectangle {
       Rectangle {
             id: view
             anchors.left:  scores.right
-            anchors.right: player.right
-            anchors.top:   player.top
-            anchors.bottom: player.bottom
+            anchors.right: screen.right
+            anchors.top:   screen.top
+            anchors.bottom: screen.bottom
 
             ScoreView {
                   id: scoreview
@@ -167,10 +166,10 @@ Rectangle {
                               if (state == "pressed"
                                  && (mouseX > width * .3)
                                  && (mouseX < width * .6)) {
-                                    if (player.state == "normal")
-                                          player.state = "toolbar1"
+                                    if (screen.state == "normal")
+                                          screen.state = "toolbar1"
                                     else if (player.state == "toolbar1")
-                                          player.state = "normal"
+                                          screen.state = "normal"
                                     }
                               // state = "normal";
                               }
@@ -184,62 +183,18 @@ Rectangle {
                   }
             }
 
-      Rectangle {
-            id: toolbar
-            x: 0
-            z: 1
-            height: 25
-            color: "lightblue"
-            anchors.bottom: player.bottom
-            anchors.left:   player.left
-            anchors.right:  player.right
-
-            Rectangle {
-                  id: myScoreButton
-                  x:      10
-                  width:  buttontext.implicitWidth+8
-                  border.width: 1
-                  smooth: true
-                  height: 20
-                  radius: 4
-                  anchors.verticalCenter: parent.verticalCenter
-                  color: "yellow"
-                  Text {
-                        id: buttontext
-                        anchors.centerIn: parent
-                        text: "MyScores"
+      Mobile.ToolBar {
+            id: toolBar
+            height: 40; anchors.bottom: parent.bottom;
+            width: parent.width; opacity: 0.9
+            button1Label: "MyScores"; button2Label: "Play"
+            onButton1Clicked: {
+                  if (screen.state == "toolbar1")
+                        screen.state = "myscores"
+                  else
+                        screen.state = "toolbar1"
                         }
-                  MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                              if (player.state == "toolbar1")
-                                    player.state = "myscores"
-                              else
-                                    player.state = "toolbar1"
-                              }
-                        }
-                  }
-            Rectangle {
-                  id: playButton
-                  x:      80
-                  width:  buttontext.implicitWidth+8
-                  border.width: 1
-                  smooth: true
-                  height: 20
-                  radius: 4
-                  anchors.verticalCenter: parent.verticalCenter
-                  color: "yellow"
-                  Text {
-                        anchors.centerIn: parent
-                        text: "Play"
-                        }
-                  MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                              scoreview.play()
-                              }
-                        }
-                  }
+            onButton2Clicked: scoreview.play();
             }
       }
 

@@ -300,10 +300,10 @@ class ElementDragTransition : public QEventTransition
       };
 
 //---------------------------------------------------------
-//   EditElementDragTransition
+//   EditDragEditTransition
 //---------------------------------------------------------
 
-class EditElementDragTransition : public QMouseEventTransition
+class EditDragEditTransition : public QMouseEventTransition
       {
       ScoreView* canvas;
 
@@ -316,7 +316,7 @@ class EditElementDragTransition : public QMouseEventTransition
             return canvas->editElementDragTransition(me);
             }
    public:
-      EditElementDragTransition(ScoreView* c, QState* target)
+      EditDragEditTransition(ScoreView* c, QState* target)
          : QMouseEventTransition(c, QEvent::MouseButtonPress, Qt::LeftButton), canvas(c) {
             setTargetState(target);
             }
@@ -364,10 +364,10 @@ class EditInputTransition : public QEventTransition
       };
 
 //---------------------------------------------------------
-//   EditScoreViewDragTransition
+//   EditDragTransition
 //---------------------------------------------------------
 
-class EditScoreViewDragTransition : public QMouseEventTransition
+class EditDragTransition : public QMouseEventTransition
       {
       ScoreView* canvas;
 
@@ -379,7 +379,29 @@ class EditScoreViewDragTransition : public QMouseEventTransition
             return canvas->editScoreViewDragTransition(me);
             }
    public:
-      EditScoreViewDragTransition(ScoreView* c, QState* target)
+      EditDragTransition(ScoreView* c, QState* target)
+         : QMouseEventTransition(c, QEvent::MouseButtonPress, Qt::LeftButton), canvas(c) {
+            setTargetState(target);
+            }
+      };
+
+//---------------------------------------------------------
+//   EditSelectTransition
+//---------------------------------------------------------
+
+class EditSelectTransition : public QMouseEventTransition
+      {
+      ScoreView* canvas;
+
+   protected:
+      virtual bool eventTest(QEvent* event) {
+            if (!QMouseEventTransition::eventTest(event))
+                  return false;
+            QMouseEvent* me = static_cast<QMouseEvent*>(static_cast<QStateMachine::WrappedEvent*>(event)->event());
+            return canvas->editSelectTransition(me);
+            }
+   public:
+      EditSelectTransition(ScoreView* c, QState* target)
          : QMouseEventTransition(c, QEvent::MouseButtonPress, Qt::LeftButton), canvas(c) {
             setTargetState(target);
             }
@@ -636,9 +658,13 @@ ScoreView::ScoreView(QWidget* parent)
       connect(stateActive, SIGNAL(exited()), SLOT(exitState()));
 
       CommandTransition* ct;
+      QEventTransition* evt;
       QState* s;
 
-      // setup normal state
+      //----------------------------------
+      //    setup normal state
+      //----------------------------------
+
       s = states[NORMAL];
       s->assignProperty(this, "cursor", QCursor(Qt::ArrowCursor));
       s->addTransition(new ContextTransition(this));                          // context menu
@@ -673,13 +699,19 @@ ScoreView::ScoreView(QWidget* parent)
       connect(ct, SIGNAL(triggered()), SLOT(normalCut()));
       s->addTransition(ct);
 
-      // setup mag state
+      //----------------------------------
+      //    setup mag state
+      //----------------------------------
+
       s = states[MAG];
       s->assignProperty(this, "cursor", QCursor(Qt::SizeAllCursor));
       s->addTransition(new MagTransition1(this, states[NORMAL]));
       s->addTransition(new MagTransition2(this));
 
+      //----------------------------------
       // setup drag element state
+      //----------------------------------
+
       s = states[DRAG_OBJECT];
       s->assignProperty(this, "cursor", QCursor(Qt::ArrowCursor));
       QEventTransition* cl = new QEventTransition(this, QEvent::MouseButtonRelease);
@@ -689,31 +721,49 @@ ScoreView::ScoreView(QWidget* parent)
       connect(s, SIGNAL(entered()), SLOT(startDrag()));
       connect(s, SIGNAL(exited()), SLOT(endDrag()));
 
-      //----- setup edit state
+      //----------------------------------
+      //    setup edit state
+      //----------------------------------
+
       s = states[EDIT];
       s->assignProperty(this, "cursor", QCursor(Qt::ArrowCursor));
-//      connect(s, SIGNAL(entered()), mscore, SLOT(setEditState()));
-      ct = new CommandTransition("escape", states[NORMAL]);                   // ->normal
+
+      ct = new CommandTransition("escape", states[NORMAL]);                   // ->NORMAL
       connect(ct, SIGNAL(triggered()), SLOT(endEdit()));
       s->addTransition(ct);
+
       s->addTransition(new EditKeyTransition(this));                          // key events
-      et = new EditTransition(this, s);                                       // ->edit
+
+      et = new EditTransition(this, s);                                       // ->EDIT
       connect(et, SIGNAL(triggered()), SLOT(endStartEdit()));
       s->addTransition(et);
-      s->addTransition(new EditElementDragTransition(this, states[DRAG_EDIT]));  // ->editDrag
-      EditScoreViewDragTransition* ent = new EditScoreViewDragTransition(this, states[DRAG]); // ->drag
-      connect(ent, SIGNAL(triggered()), SLOT(endEdit()));
-      s->addTransition(ent);
+
+      s->addTransition(new EditDragEditTransition(this, states[DRAG_EDIT]));  // ->DRAG_EDIT
+
+      evt = new EditDragTransition(this, states[DRAG]);                       // ->DRAG
+      connect(evt, SIGNAL(triggered()), SLOT(endEdit()));
+      s->addTransition(evt);
+
+      evt = new EditSelectTransition(this, states[NORMAL]);                   // ->NORMAL
+      connect(evt, SIGNAL(triggered()), SLOT(endEdit()));
+      s->addTransition(evt);
+
       s->addTransition(new EditInputTransition(this));                        // compose text
+
       s->addTransition(new EditPasteTransition(this));                        // paste text
-      ct = new CommandTransition("copy", 0);                   // copy
+
+      ct = new CommandTransition("copy", 0);                                  // copy
       connect(ct, SIGNAL(triggered()), SLOT(editCopy()));
       s->addTransition(ct);
-      ct = new CommandTransition("paste", 0);                   // paste
+
+      ct = new CommandTransition("paste", 0);                                 // paste
       connect(ct, SIGNAL(triggered()), SLOT(editPaste()));
       s->addTransition(ct);
 
-      // setup drag edit state
+      //----------------------------------
+      //    setup drag edit state
+      //----------------------------------
+
       s = states[DRAG_EDIT];
       s->assignProperty(this, "cursor", QCursor(Qt::ArrowCursor));
       cl = new QEventTransition(this, QEvent::MouseButtonRelease);
@@ -3215,6 +3265,12 @@ void ScoreView::endEdit()
             harmonyEndEdit();
       _score->setLayoutAll(true);
       _score->endCmd();
+      if (dragElement != editObject) {
+            curElement = dragElement;
+printf("select %p\n", curElement);
+            _score->select(curElement);
+            _score->end();
+            }
       editObject = 0;
       grips      = 0;
       }
@@ -3674,8 +3730,27 @@ bool ScoreView::editScoreViewDragTransition(QMouseEvent* ev)
       {
       QPointF p = toLogical(ev->pos());
       Element* e = elementNear(p);
+
+      if (e == 0 || e->type() == MEASURE) {
+            startMove   = p;
+            dragElement = e;
+            return true;
+            }
+      return false;
+      }
+
+//---------------------------------------------------------
+//   editSelectTransition
+//    Check for mouse click outside of editObject.
+//---------------------------------------------------------
+
+bool ScoreView::editSelectTransition(QMouseEvent* ev)
+      {
+      QPointF p = toLogical(ev->pos());
+      Element* e = elementNear(p);
+
       if (e != editObject) {
-            startMove  = p;
+            startMove   = p;
             dragElement = e;
             return true;
             }

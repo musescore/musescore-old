@@ -44,7 +44,7 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
       virtual void cmdAddSlur(Note* firstNote, Note* lastNote);
       virtual void startEdit() { printf("startEdit\n");}
       virtual void startEdit(Element*, int /*startGrip*/) { printf("startEdit\n");}
-      virtual Element* elementNear(const QPointF&) { printf("elementNear\n"); return 0; }
+      virtual Element* elementNear(QPointF) { printf("elementNear\n"); return 0; }
 
       virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidget*);
 

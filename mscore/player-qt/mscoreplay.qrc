@@ -18,5 +18,11 @@
       <file alias="scores/schnee.mscz">../demos/schnee.mscz</file>
       <file alias="scores/italian-1.mscz">../demos/italian-1.mscz</file>
       <file>mplayer.qml</file>
+      <file>mobile/ToolBar.qml</file>
+      <file>mobile/Button.qml</file>
+      <file>mobile/images/titlebar.sci</file>
+      <file>mobile/images/titlebar.png</file>
+      <file>mobile/images/toolbutton.sci</file>
+      <file>mobile/images/toolbutton.png</file>
    </qresource>
 </RCC>

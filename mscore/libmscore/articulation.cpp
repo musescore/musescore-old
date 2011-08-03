@@ -265,27 +265,46 @@ void Articulation::setSubtype(const QString& s)
             setSubtype(s.toInt());
             return;
             }
-      int i;
-      for (i = 0; i < ARTICULATIONS; ++i) {
-            if (articulationList[i].name == s)
+      int st;
+      for (st = 0; st < ARTICULATIONS; ++st) {
+            if (articulationList[st].name == s)
                   break;
             }
-      if (i == ARTICULATIONS) {
-            // backward compatibility:
-            if (s == "umarcato") {
-                  _up = true;
-                  i = Articulation_Marcato;
+      if (st == ARTICULATIONS) {
+            struct {
+                  const char* name;
+                  bool up;
+                  ArticulationType type;
+                  } al[] = {
+                  { "umarcato",         true,  Articulation_Marcato },
+                  { "dmarcato",         false, Articulation_Marcato },
+                  { "ufermata",         true,  Articulation_Fermata },
+                  { "dfermata",         false, Articulation_Fermata },
+                  { "ushortfermata",    true,  Articulation_Shortfermata },
+                  { "dshortfermata",    false, Articulation_Shortfermata },
+                  { "ulongfermata",     true,  Articulation_Longfermata },
+                  { "dlongfermata",     false, Articulation_Longfermata },
+                  { "uverylongfermata", true,  Articulation_Verylongfermata },
+                  { "dverylongfermata", false, Articulation_Verylongfermata },
+                  { "uportatoSym",      true,  Articulation_Portato },
+                  { "dportatoSym",      false, Articulation_Portato }
+                  };
+
+            int i;
+            int n = sizeof(al) / sizeof(*al);
+            for (i = 0; i < n; ++i) {
+                  if (s == al[i].name) {
+                        _up = al[i].up;
+                        st  = int(al[i].type);
+                        break;
+                        }
                   }
-            else if (s == "dmarcato") {
-                  _up = false;
-                  i = Articulation_Marcato;
-                  }
-            else {
-                  i = 0;
+            if (i == n) {
+                  st = 0;
                   printf("Articulation: unknown <%s>\n", qPrintable(s));
                   }
             }
-      setSubtype(i);
+      setSubtype(st);
       }
 
 //---------------------------------------------------------
