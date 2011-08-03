@@ -317,6 +317,7 @@ class ScoreView : public QWidget, public MuseScoreView {
       bool editElementDragTransition(QMouseEvent* ev);
       bool fotoEditElementDragTransition(QMouseEvent* ev);
       bool editScoreViewDragTransition(QMouseEvent* e);
+      bool editSelectTransition(QMouseEvent* me);
       void cmdAddSlur();
       virtual void cmdAddSlur(Note* firstNote, Note* lastNote);
       bool noteEntryMode() const;

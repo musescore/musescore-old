@@ -134,7 +134,7 @@ void ScoreView::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidge
       foreach(const Element* e, ell) {
             e->itemDiscovered = 0;
             painter->save();
-            painter->translate(e->canvasPos());
+            painter->translate(e->pagePos());
             painter->setPen(QPen(e->curColor()));
             e->draw(&p);
             painter->restore();
