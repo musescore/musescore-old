@@ -127,10 +127,10 @@ void PainterQt::setBrushColor(const QColor& c)
       }
 
 //---------------------------------------------------------
-//   fillRect
+//   fillPolygon
 //---------------------------------------------------------
 
-void PainterQt::fillRect(qreal x1, qreal y1,
+void PainterQt::fillPolygon(qreal x1, qreal y1,
    qreal x2, qreal y2,
    qreal x3, qreal y3,
    qreal x4, qreal y4)
@@ -139,7 +139,7 @@ void PainterQt::fillRect(qreal x1, qreal y1,
       pg << QPointF(x1, y1) << QPointF(x2, y2)
          << QPointF(x3, y3) << QPointF(x4, y4);
 
-      _painter->setBrush(Qt::black);
+//      _painter->setBrush(Qt::black);
       _painter->drawPolygon(pg, Qt::OddEvenFill);
       }
 
