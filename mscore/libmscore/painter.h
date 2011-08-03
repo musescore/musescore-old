@@ -55,7 +55,7 @@ class Painter {
       virtual void setTransform(const QTransform& t) = 0;
 
       virtual void drawLine(qreal, qreal, qreal, qreal) = 0;
-      virtual void fillRect(qreal x1, qreal y1,
+      virtual void fillPolygon(qreal x1, qreal y1,
          qreal x2, qreal y2,
          qreal x3, qreal y3,
          qreal x4, qreal y4) = 0;
