@@ -66,7 +66,7 @@
 
         {
             // default enability, duration and maxFrame
-            bool animationsEnabled( MStyleConfigData::animationsEnabled );
+            bool animationsEnabled = MStyleConfigData::animationsEnabled;
 
             // enability
             widgetEnabilityEngine_->setEnabled( animationsEnabled &&  MStyleConfigData::genericAnimationsEnabled );
@@ -310,7 +310,6 @@ void Animations::registerWidget( QWidget* widget ) const
 
 void Animations::unregisterWidget( QWidget* widget ) const
     {
-
         if( !widget ) return;
 
         /*
