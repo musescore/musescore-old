@@ -206,8 +206,10 @@ int MStyle::pixelMetric(PixelMetric metric, const QStyleOption* option, const QW
             case PM_DefaultChildMargin: return 4;
             case PM_DefaultTopLevelMargin: return 11;
             case PM_DefaultLayoutSpacing: return 4;
-            case PM_LayoutHorizontalSpacing: return -1;
-            case PM_LayoutVerticalSpacing: return -1;
+//            case PM_LayoutHorizontalSpacing: return -1;   // this crashes qt4.8
+//            case PM_LayoutVerticalSpacing: return -1;
+            case PM_LayoutHorizontalSpacing: return 0;
+            case PM_LayoutVerticalSpacing: return 0;
 
             // buttons
             case PM_ButtonDefaultIndicator: return 0;
