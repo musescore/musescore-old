@@ -344,13 +344,13 @@ QPointF SLine::tick2pos(int grip, System** sys)
                   m = m->prevMeasure();
                   if (m) {
                         *sys = m->system();
-                        x = m->bbox().right();
+                        x = seg->pos().x() + m->bbox().right();
                         }
                   }
             }
       else {
             // anchor() == MEASURE
-            x = m->pagePos().x();
+            x = m->pos().x();
             if (m->tick() < seg->tick()) {      // to end of last measure?
                   x += m->bbox().width();
                   }

@@ -135,7 +135,6 @@ class SlurTie : public Spanner {
       void setLineType(int val)           { _lineType = val;  }
       SlurSegment* frontSegment() const   { return (SlurSegment*)spannerSegments().front(); }
       SlurSegment* backSegment() const    { return (SlurSegment*)spannerSegments().back();  }
-//      SlurSegment* takeFirstSegment()     { return (SlurSegment*)spannerSegments().takeFirst(); }
       SlurSegment* takeLastSegment()      { return (SlurSegment*)spannerSegments().takeLast(); }
       SlurSegment* segmentAt(int n) const { return (SlurSegment*)spannerSegments().at(n); }
       };
