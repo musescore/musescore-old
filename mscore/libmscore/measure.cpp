@@ -3295,7 +3295,8 @@ Measure* Measure::cloneMeasure(Score* sc, SlurMap* slurMap, TieMap* tieMap, Span
                                     ncr->setTuplet(nt);
                                     }
                               foreach(Slur* s, ocr->slurFor()) {
-                                    Slur* slur = new Slur(sc);
+                                    Slur* slur = new Slur(*s);
+                                    slur->setScore(sc);
                                     slur->setStartElement(ncr);
                                     ncr->addSlurFor(slur);
                                     slurMap[track].add(s, slur);

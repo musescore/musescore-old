@@ -362,7 +362,8 @@ void SlurSegment::computeBezier()
                   Measure* m1 = s->startChord()->segment()->measure();
                   Measure* m2 = s->endChord()->segment()->measure();
                   Page* page = m1->system()->page();
-                  printf("   in measure %d-%d page %d\n", m1->no(), m2->no(), page->no());
+                  printf("   at tick %d in measure %d-%d page %d\n",
+                     m1->tick(), m1->no(), m2->no(), page->no());
                   }
             return;
             }
