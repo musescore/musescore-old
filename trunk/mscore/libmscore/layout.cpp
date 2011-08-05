@@ -663,7 +663,13 @@ void Score::doLayout()
       firstSystem  = true;
       startWithLongNames = true;
       for (curPage = 0; curMeasure; curPage++) {
-            getCurPage();
+            Page* page = curPage >= _pages.size() ? addPage() : _pages[curPage];
+            page->setNo(curPage);
+            page->layout();
+            qreal x = (curPage == 0) ? 0.0 : _pages[curPage - 1]->pos().x()
+               + page->width() + ((curPage & 1) ? 50.0 : 1.0);
+            page->setPos(x, 0.0);
+
             MeasureBase* om = curMeasure;
             if (!layoutPage())
                   break;
@@ -671,6 +677,10 @@ void Score::doLayout()
                   printf("empty page?\n");
                   break;
                   }
+            }
+      // TODO: make undoable:
+      for (int i = curPage; i < _pages.size(); ++i) {
+            _pages.takeLast();
             }
 
       //---------------------------------------------------
@@ -856,21 +866,6 @@ System* Score::getNextSystem(bool isFirstSystem, bool isVbox)
                   system->removeStaff(system->staves()->size()-1);
             }
       return system;
-      }
-
-//---------------------------------------------------------
-//   getCurPage
-//---------------------------------------------------------
-
-void Score::getCurPage()
-      {
-      Page* page = curPage >= _pages.size() ? addPage() : _pages[curPage];
-      page->setNo(curPage);
-      page->layout();
-      qreal x = (curPage == 0) ? 0.0 : _pages[curPage - 1]->pos().x()
-//         + page->width() + ((curPage & 1) ? 1.0 : 50.0);
-         + page->width() + ((curPage & 1) ? 50.0 : 1.0);
-      page->setPos(x, 0.0);
       }
 
 //---------------------------------------------------------

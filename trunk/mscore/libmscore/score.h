@@ -372,7 +372,6 @@ class Score {
       QList<System*> layoutSystemRow(qreal x, qreal y, qreal w, bool, bool, qreal*);
       void processSystemHeader(Measure* m, bool);
       System* getNextSystem(bool, bool);
-      void getCurPage();
       bool doReLayout();
       Measure* skipEmptyMeasures(Measure*, System*);
 

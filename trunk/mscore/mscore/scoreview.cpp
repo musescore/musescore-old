@@ -4010,6 +4010,7 @@ void ScoreView::pageNext()
       Page* page = score()->pages().back();
       qreal x    = xoffset() - (page->width() + 25.0) * mag();
       qreal lx   = 10.0 - page->pos().x() * mag();
+
       if (x < lx)
             x = lx;
       setOffset(x, 10.0);
@@ -4024,8 +4025,8 @@ void ScoreView::pagePrev()
       {
       if (score()->pages().empty())
             return;
-      Page* page = score()->pages().back();
-      qreal x = xoffset() +( page->width() + 25.0) * mag();
+      Page* page = score()->pages().front();
+      qreal x    = xoffset() + (page->width() + 25.0) * mag();
       if (x > 10.0)
             x = 10.0;
       setOffset(x, 10.0);
