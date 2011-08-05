@@ -450,8 +450,7 @@ QColor Element::curColor() const
 
 QRectF Element::drag(const EditData& data)
       {
-      QRectF r(abbox());
-
+      QRectF r(canvasBoundingRect());
 
       qreal x = data.pos.x();
       qreal y = data.pos.y();
@@ -468,7 +467,7 @@ QRectF Element::drag(const EditData& data)
             y = vRaster * n;
             }
       setUserOff(QPointF(x, y));
-      return abbox() | r;
+      return canvasBoundingRect() | r;
       }
 
 //---------------------------------------------------------

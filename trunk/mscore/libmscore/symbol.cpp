@@ -124,9 +124,9 @@ void BSymbol::layout()
 
 QRectF BSymbol::drag(const EditData& data)
       {
-      QRectF r(abbox());
+      QRectF r(canvasBoundingRect());
       foreach(const Element* e, _leafs)
-            r |= e->abbox();
+            r |= e->canvasBoundingRect();
 
       qreal x = data.pos.x();
       qreal y = data.pos.y();
@@ -145,9 +145,9 @@ QRectF BSymbol::drag(const EditData& data)
 
       setUserOff(QPointF(x, y));
 
-      r |= abbox();
+      r |= canvasBoundingRect();
       foreach(const Element* e, _leafs)
-            r |= e->abbox();
+            r |= e->canvasBoundingRect();
       return r;
       }
 
@@ -311,12 +311,12 @@ QLineF Symbol::dragAnchor() const
             Segment* seg     = segment();
             Measure* measure = seg->measure();
             System* s        = measure->system();
-            qreal y         = measure->pagePos().y() + s->staff(staffIdx())->y();
+            qreal y          = measure->canvasPos().y() + s->staff(staffIdx())->y();
             QPointF anchor(seg->abbox().x(), y);
-            return QLineF(pagePos(), anchor);
+            return QLineF(canvasPos(), anchor);
             }
       else {
-            return QLineF(pagePos(), parent()->pagePos());
+            return QLineF(canvasPos(), parent()->canvasPos());
             }
       }
 

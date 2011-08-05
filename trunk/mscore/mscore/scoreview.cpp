@@ -1804,6 +1804,7 @@ void ScoreView::setViewRect(const QRectF& r)
 
 //---------------------------------------------------------
 //   dragTimeAnchorElement
+//    pos is in canvas coordinates
 //---------------------------------------------------------
 
 bool ScoreView::dragTimeAnchorElement(const QPointF& pos)
@@ -1815,11 +1816,9 @@ bool ScoreView::dragTimeAnchorElement(const QPointF& pos)
             Measure* m = static_cast<Measure*>(mb);
             System* s  = m->system();
             qreal y    = s->staff(staffIdx)->y() + s->pos().y() + s->page()->pos().y();
-            QPointF anchor(seg->abbox().x(), y);
+            QPointF anchor(seg->canvasBoundingRect().x(), y);
             setDropAnchor(QLineF(pos, anchor));
             dragElement->setTrack(staffIdx * VOICES);
-//TODO1            if (dragElement->type() == SYMBOL)
-//                  static_cast<Symbol*>(dragElement)->setTick(tick);
             return true;
             }
       setDropTarget(0);
@@ -2072,10 +2071,9 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
                   default:
                         break;
                   }
-            score()->addRefresh(dragElement->abbox());
-//            dragElement->setPos(pos - dragOffset);
+            score()->addRefresh(dragElement->canvasBoundingRect());
             dragElement->setPos(pos);
-            score()->addRefresh(dragElement->abbox());
+            score()->addRefresh(dragElement->canvasBoundingRect());
             _score->end();
             return;
             }
