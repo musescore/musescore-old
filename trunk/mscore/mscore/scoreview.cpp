@@ -2559,6 +2559,7 @@ Page* ScoreView::point2page(const QPointF& p)
 
 //---------------------------------------------------------
 //   elementsAt
+//    p is in canvas coordinates
 //---------------------------------------------------------
 
 const QList<const Element*> ScoreView::elementsAt(const QPointF& p)

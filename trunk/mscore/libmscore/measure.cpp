@@ -1331,7 +1331,7 @@ QRectF Measure::staffabbox(int staffIdx) const
 bool Measure::acceptDrop(MuseScoreView* viewer, const QPointF& p, int type, int) const
       {
       // convert p from canvas to measure relative position and take x and y coordinates
-      QPointF mrp = p - pagePos(); // pos() - system()->pos() - system()->page()->pos();
+      QPointF mrp = p - canvasPos(); // pos() - system()->pos() - system()->page()->pos();
       qreal mrpx = mrp.x();
       qreal mrpy = mrp.y();
 
@@ -2406,7 +2406,7 @@ bool Measure::createEndBarLines()
             Staff* staff = score()->staff(staffIdx);
             int span     = staff->barLineSpan();
             BarLine* bl  = 0;
-            int aspan;
+            int aspan = 0;
             for (int i = 0; i < span; ++i) {
                   int track = (staffIdx + i) * VOICES;
                   SysStaff* s  = system()->staff(staffIdx + i);
@@ -3163,11 +3163,7 @@ void Measure::updateAccidentals(Segment* segment, int staffIdx, AccidentalState*
       int startTrack          = staffIdx * VOICES;
       int endTrack            = startTrack + VOICES;
       StaffGroup staffGroup   = staff->staffType()->group();
-      Tablature* tab;
       const Instrument* instrument = staff->part()->instr();
-
-      if (staffGroup == TAB_STAFF)
-            tab = instrument->tablature();
 
       for (int track = startTrack; track < endTrack; ++track) {
             Chord* chord = static_cast<Chord*>(segment->element(track));
@@ -3178,7 +3174,7 @@ void Measure::updateAccidentals(Segment* segment, int staffIdx, AccidentalState*
             // in the context of the whole chord
 
             if (staffGroup == TAB_STAFF) {
-                  tab->fretChord(chord);
+                  instrument->tablature()->fretChord(chord);
                   continue;               // skip other staff type cases
                   }
 

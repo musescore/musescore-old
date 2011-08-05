@@ -95,7 +95,7 @@ void ChordLine::read(QDomElement e)
                   path = QPainterPath();
                   QPointF curveTo;
                   QPointF p1;
-                  int state;
+                  int state = 0;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
                         if (tag == "Element") {
@@ -122,6 +122,7 @@ void ChordLine::read(QDomElement e)
                                                 }
                                           else if (state == 2) {
                                                 path.cubicTo(curveTo, p1, QPointF(x, y));
+                                                state = 0;
                                                 }
                                           break;
                                     }

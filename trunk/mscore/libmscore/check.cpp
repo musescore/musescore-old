@@ -105,7 +105,7 @@ printf("checkScore: remove empty ChordRest segment\n");
       checkSlurs();
       checkTuplets();
 
-      ChordRest* lcr;
+      ChordRest* lcr = 0;
       for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
             int track = staffIdx * VOICES;
             int tick  = 0;

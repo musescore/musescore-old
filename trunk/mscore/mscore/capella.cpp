@@ -1507,8 +1507,8 @@ printf("readCapVoice 1\n");
 
       Tuplet* tuplet = 0;
       int tupletCount = 0;
-      int nTuplet;
-      int tupletTick;
+      int nTuplet = 0;
+      int tupletTick = 0;
 
 //printf("    read voice: tick %d track: %d)\n", tick, track);
       foreach(NoteObj* no, cvoice->objects) {
@@ -1966,7 +1966,7 @@ printf("==================convert-capella\n");
             score->sigmap()->add(0, Fraction(cs->numerator, 1 << cs->log2Denom));
 
       Staff* bstaff = 0;
-      int span;
+      int span = 1;
       int midiPatch = -1;
       Part* part = 0;
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {

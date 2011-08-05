@@ -524,7 +524,7 @@ QList<Duration> toDurationList(Fraction l, bool useDottedValues)
 void Duration::print() const
       {
       printf("Duration(");
-      const char* s;
+      const char* s = "?";
       switch(_val) {
             case V_LONG:      s = "Long"; break;
             case V_BREVE:     s = "Breve"; break;

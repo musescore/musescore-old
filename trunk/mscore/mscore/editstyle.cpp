@@ -487,7 +487,7 @@ void EditStyle::selectChordDescriptionFile()
 
 void EditStyle::editTextClicked(int id)
       {
-      QTextEdit* e;
+      QTextEdit* e = 0;
 
       switch(id) {
             case  0:  e = evenHeaderL;break;
@@ -503,7 +503,8 @@ void EditStyle::editTextClicked(int id)
             case 10:  e = oddFooterC;break;
             case 11:  e = oddFooterR;break;
             }
-      e->setHtml(editText(e->toHtml()));
+      if (e)
+            e->setHtml(editText(e->toHtml()));
       }
 
 //---------------------------------------------------------

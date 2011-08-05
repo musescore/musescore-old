@@ -188,7 +188,7 @@ MarkerType Marker::markerType(const QString& s) const
 
 void Marker::read(QDomElement e)
       {
-      MarkerType mt;
+      MarkerType mt = MARKER_SEGNO;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "label") {
