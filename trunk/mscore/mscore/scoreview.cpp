@@ -1532,8 +1532,8 @@ void ScoreView::paintEvent(QPaintEvent* ev)
             p.setPen(pen);
             p.drawLine(dropAnchor);
             }
-      if (dragElement)
-            dragElement->scanElements(&vp, paintElement, false);
+//      if (dragElement)
+//            dragElement->scanElements(&vp, paintElement, false);
 
       if (grips) {
             qreal lw = 2.0/p.matrix().m11();
@@ -2138,8 +2138,7 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
 
 void ScoreView::dropEvent(QDropEvent* event)
       {
-if (debugMode)
-      printf("dropEvent\n");
+printf("dropEvent\n");
 
       QPointF pos(imatrix.map(QPointF(event->pos())));
 
@@ -2254,8 +2253,8 @@ printf("drop at %s\n", el->name());
                                     //
                                     // continue drag with a cloned element
                                     //
-                                    CloneEvent* ce = new CloneEvent(dropElement);
-                                    QCoreApplication::postEvent(this, ce);
+//??                                    CloneEvent* ce = new CloneEvent(dropElement);
+//                                    QCoreApplication::postEvent(this, ce);
                                     }
                               }
                         event->acceptProposedAction();
@@ -2391,6 +2390,7 @@ if (debugMode)
 
 void ScoreView::dragLeaveEvent(QDragLeaveEvent*)
       {
+printf("dragLeaveEvent\n");
       if (dragElement) {
             _score->setLayoutAll(false);
             _score->addRefresh(dragElement->abbox());
@@ -3929,7 +3929,7 @@ void ScoreView::setDropAnchor(const QLineF& l)
             }
       if (dropTarget) {
             dropTarget->setDropTarget(false);
-            _score->addRefresh(dropTarget->abbox());
+            _score->addRefresh(dropTarget->canvasBoundingRect());
             dropTarget = 0;
             }
       if (dropRectangle.isValid()) {
