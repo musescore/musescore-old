@@ -1001,6 +1001,7 @@ void ScoreView::objectPopup(const QPoint& pos, Element* obj)
             _score->startCmd();
             elementPropertyAction(cmd, obj);
             _score->endCmd();
+            mscore->endCmd();
             }
       }
 
@@ -1287,6 +1288,7 @@ void ScoreView::startEdit()
             _editText = t;
             mscore->textTools()->setText(t);
             mscore->textTools()->updateTools();
+            mscore->textTools()->show();
             textUndoLevel = 0;
             connect(t->doc(), SIGNAL(undoCommandAdded()), SLOT(textUndoLevelAdded()));
             }
@@ -1697,7 +1699,10 @@ void ScoreView::paint(const QRect& r, QPainter& p)
       // frame text in edit mode, except for text in a text frame
       //
       if (_editText && !(_editText->parent() && _editText->parent()->type() == TBOX)) {
-            QRectF r = _editText->pageRectangle(); // abbox();
+            Element* e = _editText;
+            while (e->parent())
+                  e = e->parent();
+            QRectF r = _editText->pageRectangle().translated(e->pos()); // abbox();
             p.setPen(QPen(QBrush(Qt::blue), 2.0 / matrix().m11()));  // 2 pixel pen size
             p.setBrush(QBrush(Qt::NoBrush));
             p.drawRect(r);
@@ -1849,6 +1854,8 @@ bool ScoreView::dragMeasureAnchorElement(const QPointF& pos)
 
 void ScoreView::dragEnterEvent(QDragEnterEvent* event)
       {
+      if (debugMode)
+            printf("dragEnterEvent===========================\n");
       double _spatium = score()->spatium();
       dragElement = 0;
 
@@ -2133,6 +2140,9 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
 
 void ScoreView::dropEvent(QDropEvent* event)
       {
+if (debugMode)
+      printf("dropEvent\n");
+
       QPointF pos(imatrix.map(QPointF(event->pos())));
 
       DropData dropData;
@@ -2232,6 +2242,7 @@ void ScoreView::dropEvent(QDropEvent* event)
                               delete dragElement;
                               break;
                               }
+printf("drop at %s\n", el->name());
                         _score->addRefresh(el->abbox());
                         Element* dropElement = el->drop(dropData);
                         _score->addRefresh(el->abbox());
@@ -3193,8 +3204,13 @@ void ScoreView::cmd(const QAction* a)
                   _score->cmdJoinMeasure(m1, m2);
                   }
             }
-      else if (cmd == "delete")
-            _score->cmdDeleteSelection();
+      else if (cmd == "delete") {
+            // no delete in edit mode except for slurs/ties
+            if (!editMode() || editObject->type() == SLUR_SEGMENT)
+                  _score->cmdDeleteSelection();
+            if (editMode() && editObject->type() == SLUR_SEGMENT)
+                  sm->postEvent(new CommandEvent("escape"));   // leave edit mode
+            }
       else
             _score->cmd(a);
       _score->processMidiInput();

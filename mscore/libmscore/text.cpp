@@ -857,10 +857,10 @@ bool Text::edit(MuseScoreView* view, int /*grip*/, int key, Qt::KeyboardModifier
             else
                   h = height();
             tb->setHeight(h);
-            score()->addRefresh(tb->abbox().adjusted(-w, -w, w, w));
+            score()->addRefresh(tb->canvasBoundingRect().adjusted(-w, -w, w, w));
             }
       else
-            score()->addRefresh(abbox().adjusted(-w, -w, w, w));
+            score()->addRefresh(canvasBoundingRect().adjusted(-w, -w, w, w));
       return true;
       }
 
@@ -1052,7 +1052,7 @@ void Text::setBlockFormat(const QTextBlockFormat& bf)
 
 bool Text::setCursor(const QPointF& p, QTextCursor::MoveMode mode)
       {
-      QPointF pt  = p - pagePos();
+      QPointF pt  = p - canvasPos();
       if (!bbox().contains(pt))
             return false;
 
@@ -1114,7 +1114,7 @@ QLineF Text::dragAnchor() const
       if (parent()->type() == MEASURE) {
             Measure* m     = static_cast<Measure*>(parent());
             System* system = m->system();
-            qreal yp      = system->staff(staffIdx())->y() + system->y();
+            qreal yp       = system->staff(staffIdx())->y() + system->y();
             // TODO1 qreal xp      = m->tick2pos(tick()) + m->pagePos().x();
             qreal xp = 0.0;
             p1 = QPointF(xp, yp);

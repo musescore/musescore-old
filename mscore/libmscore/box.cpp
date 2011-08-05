@@ -40,6 +40,10 @@ Box::Box(Score* score)
       _rightMargin  = BOX_MARGIN;
       _topMargin    = BOX_MARGIN;
       _bottomMargin = BOX_MARGIN;
+
+      qreal _spatium = score->spatium();
+      _topGap    = score->styleS(ST_systemFrameDistance).val() * _spatium;
+      _bottomGap = score->styleS(ST_frameSystemDistance).val() * _spatium;
       }
 
 //---------------------------------------------------------
@@ -160,6 +164,7 @@ void Box::updateGrips(int* grips, QRectF* grip) const
 
 void Box::write(Xml& xml) const
       {
+      qreal _spatium = spatium();
       xml.stag(name());
       if (type() == VBOX)
             xml.tag("height", _boxHeight.val());
@@ -173,6 +178,12 @@ void Box::write(Xml& xml) const
             xml.tag("topMargin", _topMargin);
       if (_bottomMargin != BOX_MARGIN)
             xml.tag("bottomMargin", _bottomMargin);
+      qreal gap = _topGap / _spatium;
+      if (gap != score()->styleS(ST_systemFrameDistance).val())
+            xml.tag("topGap", gap);
+      gap = _bottomGap / _spatium;
+      if (gap != score()->styleS(ST_frameSystemDistance).val())
+            xml.tag("bottomGap", gap);
       Element::writeProperties(xml);
       foreach (const Element* el, _el)
             el->write(xml);
@@ -212,6 +223,10 @@ void Box::read(QDomElement e)
                   _topMargin = val.toDouble();
             else if (tag == "bottomMargin")
                   _bottomMargin = val.toDouble();
+            else if (tag == "topGap")
+                  _topGap = val.toDouble() * _spatium;
+            else if (tag == "bottomGap")
+                  _bottomGap = val.toDouble() * _spatium;
             else if (tag == "Text") {
                   Text* t;
                   if (type() == TBOX) {
@@ -360,7 +375,7 @@ void HBox::layout2()
 
 bool Box::acceptDrop(MuseScoreView*, const QPointF&, int type, int) const
       {
-      if (type == LAYOUT_BREAK)
+      if (type == LAYOUT_BREAK || type == TEXT || type == STAFF_TEXT)
             return true;
       return false;
       }
@@ -401,6 +416,17 @@ Element* Box::drop(const DropData& data)
                   score()->undoAddElement(lb);
                   return lb;
                   }
+            case STAFF_TEXT:
+                  {
+                  Text* text = new Text(score());
+                  text->setSubtype(TEXT_FRAME);
+                  text->setTextStyle(TEXT_STYLE_FRAME);
+                  text->setParent(this);
+                  score()->select(text, SELECT_SINGLE, 0);
+                  score()->undoAddElement(text);
+                  return text;
+                  }
+
             default:
                   e->setParent(this);
                   score()->select(e, SELECT_SINGLE, 0);

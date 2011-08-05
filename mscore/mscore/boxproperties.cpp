@@ -32,6 +32,7 @@ BoxProperties::BoxProperties(Box* b, QWidget* parent)
       {
       _box = b;
       setupUi(this);
+      qreal _spatium = b->spatium();
 
       if (b->type() == HBOX) {     // enable width and set it to box width
             frameWidth->setEnabled(true);
@@ -41,6 +42,8 @@ BoxProperties::BoxProperties(Box* b, QWidget* parent)
             frameHeight->setEnabled(true);
             frameHeight->setValue(b->boxHeight().val());
             }
+      topGap->setValue(b->topGap() / _spatium);
+      bottomGap->setValue(b->bottomGap() / _spatium);
 
       leftMargin->setValue(b->leftMargin());
       rightMargin->setValue(b->rightMargin());
@@ -57,11 +60,13 @@ void BoxProperties::ok()
       {
       ElementType type = _box->type();
       // scan selection and update each element of the same type of this one
+      qreal _spatium = _box->spatium();
       foreach (Element* elem, _box->score()->selection().elements()) {
             if (elem->type() == type) {  // if current element matches type of this box, push new box props in undo stack
                   Box* box = static_cast<Box*>(elem);
                   box->score()->undo()->push(new ChangeBoxProperties(box, leftMargin->value(), topMargin->value(),
-                        rightMargin->value(), bottomMargin->value(), frameHeight->value(), frameWidth->value()));
+                        rightMargin->value(), bottomMargin->value(), frameHeight->value(), frameWidth->value(),
+                        topGap->value() * _spatium, bottomGap->value() * _spatium));
                   }
             }
       }

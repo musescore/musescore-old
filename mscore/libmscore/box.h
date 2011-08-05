@@ -31,9 +31,13 @@ class Painter;
 //---------------------------------------------------------
 
 class Box : public MeasureBase {
-      Spatium _boxWidth;       // only valid for HBox
-      Spatium _boxHeight;      // only valid for VBox
-      qreal _leftMargin, _rightMargin;   // values in metric mm
+      Spatium _boxWidth;   // only valid for HBox
+      Spatium _boxHeight;  // only valid for VBox
+      qreal _topGap;       // distance from previous system (left border for hbox)
+                           // initialized with ST_systemFrameDistance
+      qreal _bottomGap;    // distance to next system (right border for hbox)
+                           // initialized with ST_frameSystemDistance
+      qreal _leftMargin, _rightMargin;   // inner margins in metric mm
       qreal _topMargin, _bottomMargin;
       bool editMode;
       qreal dragX;            // used during drag of hbox
@@ -56,10 +60,10 @@ class Box : public MeasureBase {
       virtual Element* drop(const DropData&);
       virtual void add(Element* e);
 
-      Spatium boxWidth() const         { return _boxWidth;     }
-      void setBoxWidth(Spatium val)    { _boxWidth = val;      }
-      Spatium boxHeight() const        { return _boxHeight;    }
-      void setBoxHeight(Spatium val)   { _boxHeight = val;     }
+      Spatium boxWidth() const        { return _boxWidth;     }
+      void setBoxWidth(Spatium val)   { _boxWidth = val;      }
+      Spatium boxHeight() const       { return _boxHeight;    }
+      void setBoxHeight(Spatium val)  { _boxHeight = val;     }
       qreal leftMargin() const        { return _leftMargin;   }
       qreal rightMargin() const       { return _rightMargin;  }
       qreal topMargin() const         { return _topMargin;    }
@@ -68,6 +72,10 @@ class Box : public MeasureBase {
       void setRightMargin(qreal val)  { _rightMargin = val;   }
       void setTopMargin(qreal val)    { _topMargin = val;     }
       void setBottomMargin(qreal val) { _bottomMargin = val;  }
+      qreal topGap() const            { return _topGap;       }
+      void setTopGap(qreal val)       { _topGap = val;        }
+      qreal bottomGap() const         { return _bottomGap;    }
+      void setBottomGap(qreal val)    { _bottomGap = val;     }
       };
 
 //---------------------------------------------------------
