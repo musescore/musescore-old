@@ -29,6 +29,7 @@
 #include "libmscore/stafftype.h"
 #include "libmscore/part.h"
 #include "libmscore/segment.h"
+#include "libmscore/undo.h"
 
 //---------------------------------------------------------
 //   ArticulationProperties
@@ -104,5 +105,10 @@ void ArticulationProperties::saveValues()
                   staffText->setMidiActionName(i->text());
             }
 #endif
+      if (int(articulation->direction()) != direction->currentIndex()
+         || int(articulation->anchor()) != anchor->currentIndex()) {
+            articulation->score()->undo()->push(new ChangeArticulation(articulation,
+               Direction(direction->currentIndex()), ArticulationAnchor(anchor->currentIndex())));
+            }
       }
 

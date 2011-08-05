@@ -671,7 +671,7 @@ void Score::doLayout()
             page->setPos(x, 0.0);
 
             MeasureBase* om = curMeasure;
-            if (!layoutPage())
+            if (!layoutPage(page))
                   break;
             if (curMeasure == om) {
                   printf("empty page?\n");
@@ -873,9 +873,8 @@ System* Score::getNextSystem(bool isFirstSystem, bool isVbox)
 //    return true, if next page must be relayouted
 //---------------------------------------------------------
 
-bool Score::layoutPage()
+bool Score::layoutPage(Page* page)
       {
-      Page* page                 = _pages[curPage];
       QList<System*>* systemList = page->systems();
 
       qreal _spatium  = spatium();
@@ -908,22 +907,21 @@ bool Score::layoutPage()
                   VBox* vbox = static_cast<VBox*>(curMeasure);
                   vbox->setParent(system);
                   vbox->layout();
-                  h = vbox->height();
+                  system->setHeight(vbox->height());
 
                   System* ls = systemList->empty() ? 0 : systemList->back();
-                  qreal yy = vbox->topGap();
+                  y = vbox->topGap();
                   if (ls)
-                        yy += ls->y() + ls->height();
+                        y += ls->y() + ls->height();
                   else
-                        yy += page->tm();
+                        y += page->tm();
 
                   // put at least one system on page
-                  if (((yy + h + vbox->bottomGap()) > ey) && !firstSystemOnPage)
+                  h = vbox->height() + vbox->bottomGap();
+                  if (((y + h) > ey) && !systemList->empty())
                         break;
 
-                  y = yy;
                   system->setPos(x, y);
-                  system->setHeight(h);
                   system->setPageBreak(vbox->pageBreak());
                   sl.append(system);
 
@@ -931,7 +929,7 @@ bool Score::layoutPage()
                   page->appendSystem(system);
                   curMeasure = curMeasure->next();
                   ++curSystem;
-                  y += h + vbox->bottomGap();
+                  y += h;
                   if (y > ey) {
                         ++rows;
                         break;
