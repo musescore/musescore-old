@@ -4161,14 +4161,8 @@ void MuseScore::cmd(QAction* a)
             printf("no score\n");
             return;
             }
-      if (sc->flags & A_CMD) {
-            if (cv->editMode()) {
-                  cmd(getAction("escape"), "escape");
-                  qApp->processEvents();
-                  cs->endCmd();
-                  }
+      if (sc->flags & A_CMD)
             cs->startCmd();
-            }
       cmd(a, cmdn);
       if (lastShortcut->flags & A_CMD)
             cs->endCmd();

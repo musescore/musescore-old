@@ -72,15 +72,19 @@ void ScoreView::editKey(QKeyEvent* ev)
                   found = true;
                   }
             else if (key == Qt::Key_Left) {
-                  if (!ctrl && editObject->edit(this, curGrip, key, modifiers, s))
+                  if (!ctrl && editObject->edit(this, curGrip, key, modifiers, s)) {
                         _score->end();
+                        mscore->endCmd();
+                        }
                   else
                         lyricsTab(true, true, true);      // go to previous lyrics
                   found = true;
                   }
             else if (key == Qt::Key_Right) {
-                  if (!ctrl && editObject->edit(this, curGrip, key, modifiers, s))
+                  if (!ctrl && editObject->edit(this, curGrip, key, modifiers, s)) {
                         _score->end();
+                        mscore->endCmd();
+                        }
                   else
                         lyricsTab(false, false, true);    // go to next lyrics
                   found = true;
@@ -128,11 +132,13 @@ void ScoreView::editKey(QKeyEvent* ev)
                   updateGrips();
                   ev->accept();
                   _score->end();
+                  mscore->endCmd();
                   return;
                   }
             if (editObject->isText() && (key == Qt::Key_Left || key == Qt::Key_Right)) {
                   ev->accept();
                   _score->end();
+                  mscore->endCmd();
                   //return;
                   }
             }
@@ -184,6 +190,7 @@ void ScoreView::editKey(QKeyEvent* ev)
       editObject->editDrag(ed);
       updateGrips();
       _score->end();
+      mscore->endCmd();
       ev->accept();
       }
 

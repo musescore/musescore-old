@@ -246,13 +246,8 @@ QString Element::userName() const
       }
 
 //---------------------------------------------------------
-//   abbox
+//   ~Element
 //---------------------------------------------------------
-
-QRectF Element::abbox() const
-      {
-      return bbox().translated(pagePos());
-      }
 
 Element::~Element()
       {
@@ -1132,7 +1127,6 @@ QByteArray Element::mimeData(const QPointF& dragOffset) const
 
 //---------------------------------------------------------
 //   readType
-//    return -1 if no valid type found
 //---------------------------------------------------------
 
 ElementType Element::readType(QDomElement& e, QPointF* dragOffset)
@@ -1402,6 +1396,7 @@ ElementType Element::name2type(const QString& s)
             if (s == elementNames[i])
                   return ElementType(i);
             }
+printf("name2type: invalid type <%s>\n", qPrintable(s));
       return INVALID;
       }
 

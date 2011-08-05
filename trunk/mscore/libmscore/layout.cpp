@@ -880,7 +880,9 @@ void Score::getCurPage()
 
 bool Score::layoutPage()
       {
-      Page* page      = _pages[curPage];
+      Page* page                 = _pages[curPage];
+      QList<System*>* systemList = page->systems();
+
       qreal _spatium  = spatium();
       const qreal slb = styleS(ST_staffLowerBorder).val() * _spatium;
       const qreal sub = styleS(ST_staffUpperBorder).val() * _spatium;
@@ -913,10 +915,18 @@ bool Score::layoutPage()
                   vbox->layout();
                   h = vbox->height();
 
+                  System* ls = systemList->empty() ? 0 : systemList->back();
+                  qreal yy = vbox->topGap();
+                  if (ls)
+                        yy += ls->y() + ls->height();
+                  else
+                        yy += page->tm();
+
                   // put at least one system on page
-                  if (((y + h) > ey) && !firstSystemOnPage)
+                  if (((yy + h + vbox->bottomGap()) > ey) && !firstSystemOnPage)
                         break;
 
+                  y = yy;
                   system->setPos(x, y);
                   system->setHeight(h);
                   system->setPageBreak(vbox->pageBreak());
@@ -924,10 +934,9 @@ bool Score::layoutPage()
 
                   system->measures().push_back(vbox);
                   page->appendSystem(system);
-
                   curMeasure = curMeasure->next();
                   ++curSystem;
-                  y += h + styleS(ST_frameSystemDistance).val() * _spatium;
+                  y += h + vbox->bottomGap();
                   if (y > ey) {
                         ++rows;
                         break;
@@ -1002,6 +1011,7 @@ bool Score::layoutPage()
 
       qreal systemDistance = styleS(ST_systemDistance).val() * _spatium;
       qreal extraDist      = (restHeight + systemDistance) / (rows - 1);
+
       y = 0;
       int n = page->systems()->size();
       for (int i = 0; i < n;) {

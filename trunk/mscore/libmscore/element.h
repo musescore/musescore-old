@@ -217,9 +217,10 @@ class Element {
       virtual void setHeight(qreal v)         { _bbox.setHeight(v);        }
       virtual qreal width() const             { return bbox().width();     }
       virtual void setWidth(qreal v)          { _bbox.setWidth(v);         }
-      QRectF abbox() const;
-      virtual void setbbox(const QRectF& r) const   { _bbox = r;           }
-      virtual void addbbox(const QRectF& r) const   { _bbox |= r;          }
+      QRectF abbox() const                        { return bbox().translated(pagePos());   }
+      QRectF canvasBoundingRect() const           { return bbox().translated(canvasPos()); }
+      virtual void setbbox(const QRectF& r) const { _bbox = r;           }
+      virtual void addbbox(const QRectF& r) const { _bbox |= r;          }
       virtual bool contains(const QPointF& p) const;
       bool intersects(const QRectF& r) const;
       virtual QPainterPath shape() const;
