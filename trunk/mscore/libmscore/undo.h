@@ -1645,11 +1645,13 @@ class ChangeAccidental : public UndoCommand {
 class ChangeArticulation : public UndoCommand {
       Articulation* a;
       Direction direction;
+      ArticulationAnchor anchor;
 
       void flip();
 
    public:
-      ChangeArticulation(Articulation* _a, Direction d) : a(_a), direction(d) {}
+      ChangeArticulation(Articulation* _a, Direction d, ArticulationAnchor an)
+         : a(_a), direction(d), anchor(an) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeArticulation");

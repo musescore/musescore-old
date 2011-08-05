@@ -1102,7 +1102,7 @@ void Score::cmdFlip()
                         d = DOWN;
                   else
                         d = UP;
-                  undo()->push(new ChangeArticulation(a, d));
+                  undo()->push(new ChangeArticulation(a, d, a->anchor()));
                   }
             else if (e->type() == TUPLET)
                   undo()->push(new FlipTupletDirection(static_cast<Tuplet*>(e)));

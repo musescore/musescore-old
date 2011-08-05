@@ -437,8 +437,10 @@ void Articulation::setDirection(Direction d)
 
 void Articulation::toDefault()
       {
-      if (_direction != AUTO)
-            score()->undo()->push(new ChangeArticulation(this, AUTO));
+      if (_direction != AUTO) {
+            score()->undo()->push(new ChangeArticulation(this, AUTO,
+              score()->style()->articulationAnchor(subtype())));
+            }
       Element::toDefault();
       }
 

@@ -1318,11 +1318,11 @@ void ChangeNoteHead::flip()
       {
       int headGroup = note->headGroup();
       NoteHeadType t = note->headType();
-      QRectF r = note->abbox();
+      QRectF r = note->canvasBoundingRect();
       note->setHeadGroup(group);
       note->setHeadType(type);
       if(note->noteHead() != -1){
-        r |= note->abbox();
+        r |= note->canvasBoundingRect();
         group = headGroup;
         type  = t;
         note->score()->addRefresh(r);
@@ -1531,7 +1531,7 @@ void ChangeInvisible::flip()
       bool oval = element->visible();
       element->setVisible(invisible);
       invisible = oval;
-      element->score()->addRefresh(element->abbox());
+      element->score()->addRefresh(element->canvasBoundingRect());
       }
 
 //---------------------------------------------------------
@@ -2062,9 +2062,9 @@ ChangeUserOffset::ChangeUserOffset(Element* e, const QPointF& o)
 void ChangeUserOffset::flip()
       {
       QPointF p = element->userOff();
-      element->score()->addRefresh(element->abbox());
+      element->score()->addRefresh(element->canvasBoundingRect());
       element->setUserOff(offset);
-      element->score()->addRefresh(element->abbox());
+      element->score()->addRefresh(element->canvasBoundingRect());
       offset = p;
       }
 
@@ -3230,11 +3230,11 @@ void MoveStaff::flip()
 
 void ChangeAccidental::flip()
       {
-      a->score()->addRefresh(a->abbox());
+      a->score()->addRefresh(a->canvasBoundingRect());
       bool s = a->small();
       a->setSmall(small);
       small = s;
-      a->score()->addRefresh(a->abbox());
+      a->score()->addRefresh(a->canvasBoundingRect());
       }
 
 //---------------------------------------------------------
@@ -3243,11 +3243,14 @@ void ChangeAccidental::flip()
 
 void ChangeArticulation::flip()
       {
-      a->score()->addRefresh(a->abbox());
+      a->score()->addRefresh(a->canvasBoundingRect());
       Direction d = a->direction();
+      ArticulationAnchor an = a->anchor();
       a->setDirection(direction);
+      a->setAnchor(anchor);
       direction = d;
-      a->score()->addRefresh(a->abbox());
+      anchor    = an;
+      a->score()->addRefresh(a->canvasBoundingRect());
       }
 
 

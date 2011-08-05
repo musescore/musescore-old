@@ -367,7 +367,7 @@ class Score {
       void resetUserStretch();
 
       Page* addPage();
-      bool layoutPage();
+      bool layoutPage(Page*);
       bool layoutSystem1(qreal& minWidth, qreal w, bool, bool);
       QList<System*> layoutSystemRow(qreal x, qreal y, qreal w, bool, bool, qreal*);
       void processSystemHeader(Measure* m, bool);
