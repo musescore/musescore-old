@@ -1373,6 +1373,7 @@ bool Measure::acceptDrop(MuseScoreView* viewer, const QPointF& p, int type, int)
                   return true;
 
             case BAR_LINE:
+            case SYMBOL:
                   // accept drop only inside staff
                   if (mrpy < t || mrpy > b)
                         return false;
@@ -1471,7 +1472,7 @@ printf("drop staffList\n");
                   e->setTrack(staffIdx * VOICES);
                   e->layout();
                   {
-                  QPointF uo(data.pos - e->pagePos() - data.dragOffset);
+                  QPointF uo(data.pos - e->canvasPos() - data.dragOffset);
                   e->setUserOff(uo);
                   }
                   score()->undoAddElement(e);

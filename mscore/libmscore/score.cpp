@@ -612,7 +612,7 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* rst, int* pitch,
 
       System* s = m->system();
 //      qreal sy1 = 0;
-      qreal y   = p.y() - s->pagePos().y();
+      qreal y   = p.y() - s->canvasPos().y();
 
       int i;
       for (i = 0; i < nstaves();) {
@@ -1000,6 +1000,7 @@ int Score::midiChannel(int idx) const
 
 //---------------------------------------------------------
 //   searchPage
+//    p is in canvas coordinates
 //---------------------------------------------------------
 
 Page* Score::searchPage(const QPointF& p) const
@@ -1066,7 +1067,7 @@ Measure* Score::searchMeasure(const QPointF& p) const
             return 0;
 
       foreach(System* system, systems) {
-            qreal x = p.x() - system->pagePos().x();
+            qreal x = p.x() - system->canvasPos().x();
             foreach(MeasureBase* mb, system->measures()) {
                   if (mb->type() != MEASURE)
                         continue;

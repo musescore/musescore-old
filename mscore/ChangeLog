@@ -1,4 +1,5 @@
 5.aug (ws)
+      - fix #11891: Cannot drop symbols on any page except the first
       - fix #11890: Cannot drop time signatures on any page except the first
       - fix #11887: Texts on page after the first: weird editing
 1.aug (ws)
