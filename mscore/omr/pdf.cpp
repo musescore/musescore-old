@@ -141,7 +141,7 @@ printf("  bytes %d\n", (pw * ph) / 8);
             yoff = ny;
 
             int stride  = (width + 7) / 8;
-            uchar mask  = 0xff << (stride * 8 - width);
+//            uchar mask  = 0xff << (stride * 8 - width);
             int qstride = image->bytesPerLine();
             uchar* p    = image->bits();
 

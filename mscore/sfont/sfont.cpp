@@ -906,7 +906,7 @@ void SoundFont::writePhdr()
             zoneIdx += p->zones.size();
             }
       Preset p;
-      memset(&p, sizeof(p), 0);
+      memset(&p, 0, sizeof(p));
       writePreset(zoneIdx, &p);
       }
 
@@ -1037,7 +1037,7 @@ void SoundFont::writeInst()
             zoneIdx += p->zones.size();
             }
       Instrument p;
-      memset(&p, sizeof(p), 0);
+      memset(&p, 0, sizeof(p));
       writeInstrument(zoneIdx, &p);
       }
 

@@ -1042,8 +1042,8 @@ void Score::upDown(bool up, UpDownMode mode)
       foreach(Note* oNote, el) {
             Part* part  = oNote->staff()->part();
             int pitch   = oNote->pitch();
-            int newTpc;
-            int newPitch;
+            int newTpc = 0;
+            int newPitch = 0;
             int string = oNote->string();
             int fret   = oNote->fret();
 

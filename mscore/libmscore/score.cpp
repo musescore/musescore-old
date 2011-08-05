@@ -1004,9 +1004,9 @@ int Score::midiChannel(int idx) const
 
 Page* Score::searchPage(const QPointF& p) const
       {
-      for (int i = 0; i < _pages.size(); ++i) {
-            if (_pages[i]->contains(p))
-                  return _pages[i];
+      foreach(Page* page, pages()) {
+            if (page->bbox().translated(page->pos()).contains(p))
+                  return page;
             }
       return 0;
       }
