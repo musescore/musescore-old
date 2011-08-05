@@ -709,7 +709,7 @@ void Text::startEdit(MuseScoreView* view, const QPointF& p)
             setBlockFormat(bf);
             }
       qreal w = 8.0 / view->matrix().m11();
-      score()->addRefresh(abbox().adjusted(-w, -w, w, w));
+      score()->addRefresh(canvasBoundingRect().adjusted(-w, -w, w, w));
       }
 
 //---------------------------------------------------------
@@ -728,7 +728,7 @@ bool Text::edit(MuseScoreView* view, int /*grip*/, int key, Qt::KeyboardModifier
       bool lo = (subtype() == TEXT_INSTRUMENT_SHORT) || (subtype() == TEXT_INSTRUMENT_LONG);
       score()->setLayoutAll(lo);
       qreal w = 8.0 / view->matrix().m11();
-      score()->addRefresh(abbox().adjusted(-w, -w, w, w));
+      score()->addRefresh(canvasBoundingRect().adjusted(-w, -w, w, w));
 
       if (modifiers == Qt::ControlModifier) {
             switch (key) {
