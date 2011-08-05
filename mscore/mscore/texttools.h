@@ -55,6 +55,7 @@ class TextTools : public QDockWidget {
 
       void blockAllSignals(bool val);
       void updateText();
+      void layoutText();
       QTextCursor* cursor();
 
    private slots:

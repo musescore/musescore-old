@@ -23,6 +23,7 @@
 #include "fret.h"
 #include "painter.h"
 #include "mscore.h"
+#include "stafftext.h"
 
 static const qreal BOX_MARGIN = 0.0;
 
@@ -422,6 +423,7 @@ Element* Box::drop(const DropData& data)
                   text->setSubtype(TEXT_FRAME);
                   text->setTextStyle(TEXT_STYLE_FRAME);
                   text->setParent(this);
+                  text->setHtml(static_cast<StaffText*>(e)->getHtml());
                   score()->select(text, SELECT_SINGLE, 0);
                   score()->undoAddElement(text);
                   return text;

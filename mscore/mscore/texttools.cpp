@@ -143,12 +143,12 @@ TextTools::TextTools(QWidget* parent)
       connect(typefaceSubscript,   SIGNAL(triggered(bool)), SLOT(subscriptClicked(bool)));
       connect(typefaceSuperscript, SIGNAL(triggered(bool)), SLOT(superscriptClicked(bool)));
       connect(typefaceFamily,      SIGNAL(currentFontChanged(const QFont&)), SLOT(fontChanged(const QFont&)));
-      connect(leftAlign,           SIGNAL(triggered()), SLOT(setLeftAlign()));
-      connect(rightAlign,          SIGNAL(triggered()), SLOT(setRightAlign()));
-      connect(centerAlign,         SIGNAL(triggered()), SLOT(setHCenterAlign()));
-      connect(topAlign,            SIGNAL(triggered()), SLOT(setTopAlign()));
-      connect(bottomAlign,         SIGNAL(triggered()), SLOT(setBottomAlign()));
-      connect(vcenterAlign,        SIGNAL(triggered()), SLOT(setVCenterAlign()));
+      connect(leftAlign,           SIGNAL(triggered()),     SLOT(setLeftAlign()));
+      connect(rightAlign,          SIGNAL(triggered()),     SLOT(setRightAlign()));
+      connect(centerAlign,         SIGNAL(triggered()),     SLOT(setHCenterAlign()));
+      connect(topAlign,            SIGNAL(triggered()),     SLOT(setTopAlign()));
+      connect(bottomAlign,         SIGNAL(triggered()),     SLOT(setBottomAlign()));
+      connect(vcenterAlign,        SIGNAL(triggered()),     SLOT(setVCenterAlign()));
       connect(showKeyboard,        SIGNAL(triggered(bool)), SLOT(showKeyboardClicked(bool)));
       connect(toggleStyled,        SIGNAL(triggered(bool)), SLOT(styledChanged(bool)));
       connect(unorderedList,       SIGNAL(triggered()),     SLOT(unorderedListClicked()));
@@ -244,6 +244,18 @@ void TextTools::updateTools()
 void TextTools::updateText()
       {
       _textElement->score()->setLayoutAll(true);
+      _textElement->score()->end();
+      }
+
+//---------------------------------------------------------
+//   layoutText
+//---------------------------------------------------------
+
+void TextTools::layoutText()
+      {
+      QRectF r(_textElement->canvasBoundingRect());
+      _textElement->layout();
+      _textElement->score()->addRefresh(_textElement->canvasBoundingRect() | r);
       _textElement->score()->end();
       }
 
@@ -446,9 +458,10 @@ void TextTools::setRightAlign()
 
 void TextTools::setTopAlign()
       {
-      Align align = (_textElement->align() & ~ALIGN_HMASK) | ALIGN_TOP;
+      Align align = (_textElement->align() & ~ALIGN_VMASK) | ALIGN_TOP;
       _textElement->setAlign(align);
       updateTools();
+      layoutText();
       }
 
 //---------------------------------------------------------
@@ -457,9 +470,10 @@ void TextTools::setTopAlign()
 
 void TextTools::setBottomAlign()
       {
-      Align align = (_textElement->align() & ~ALIGN_HMASK) | ALIGN_BOTTOM;
+      Align align = (_textElement->align() & ~ALIGN_VMASK) | ALIGN_BOTTOM;
       _textElement->setAlign(align);
       updateTools();
+      layoutText();
       }
 
 //---------------------------------------------------------
@@ -468,9 +482,10 @@ void TextTools::setBottomAlign()
 
 void TextTools::setVCenterAlign()
       {
-      Align align = (_textElement->align() & ~ALIGN_HMASK) | ALIGN_VCENTER;
+      Align align = (_textElement->align() & ~ALIGN_VMASK) | ALIGN_VCENTER;
       _textElement->setAlign(align);
       updateTools();
+      layoutText();
       }
 
 //---------------------------------------------------------

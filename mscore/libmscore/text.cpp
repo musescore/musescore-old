@@ -1114,13 +1114,12 @@ QLineF Text::dragAnchor() const
       if (parent()->type() == MEASURE) {
             Measure* m     = static_cast<Measure*>(parent());
             System* system = m->system();
-            qreal yp       = system->staff(staffIdx())->y() + system->y();
-            // TODO1 qreal xp      = m->tick2pos(tick()) + m->pagePos().x();
-            qreal xp = 0.0;
+            qreal yp       = system->staff(staffIdx())->y() + system->y() + system->page()->pos().x();
+            qreal xp       = m->canvasPos().x(); // m->tick2pos(tick()) + m->canvasPos().x();
             p1 = QPointF(xp, yp);
             }
       else {
-            p1 = QPointF(parent()->abbox().topLeft());
+            p1 = QPointF(parent()->canvasBoundingRect().topLeft());
             }
       qreal tw = width();
       qreal th = height();
@@ -1136,7 +1135,7 @@ QLineF Text::dragAnchor() const
             x = tw;
       else if (align() & ALIGN_HCENTER)
             x = (tw * .5);
-      return QLineF(p1, abbox().topLeft() + QPointF(x, y));
+      return QLineF(p1, canvasBoundingRect().topLeft() + QPointF(x, y));
       }
 
 //---------------------------------------------------------
