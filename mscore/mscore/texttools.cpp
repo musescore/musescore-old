@@ -243,8 +243,12 @@ void TextTools::updateTools()
 
 void TextTools::updateText()
       {
-      _textElement->score()->setLayoutAll(true);
-      _textElement->score()->end();
+      if (_textElement->type() == LYRICS) {
+            _textElement->score()->setLayoutAll(true);
+            _textElement->score()->end();
+            }
+      else
+            layoutText();
       }
 
 //---------------------------------------------------------

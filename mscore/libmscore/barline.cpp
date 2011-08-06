@@ -595,11 +595,11 @@ void BarLine::layout()
             if (e->type() == ARTICULATION) {
                   Articulation* a       = static_cast<Articulation*>(e);
                   ArticulationAnchor aa = a->anchor();
-                  qreal distance       = score()->styleS(ST_propertyDistanceStem).val() * _spatium;
+//                  qreal distance       = score()->styleS(ST_propertyDistanceStem).val() * _spatium;
+                  qreal distance        = 0.4 * _spatium;
                   qreal topY            = y1 - distance;
                   qreal botY            = y2 + distance;
-                  qreal x               = 0.0;
-
+                  qreal x               = -(a->width() * .5);
                   if (aa == A_TOP_STAFF)
                         a->setPos(x, topY);
                   else if (aa == A_BOTTOM_STAFF)

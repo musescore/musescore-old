@@ -1339,7 +1339,7 @@ void ScoreView::startEdit()
             }
       curGrip = -1;
       updateGrips();
-      _score->setLayoutAll(true);
+//      _score->setLayoutAll(true);
       score()->end();
       }
 
@@ -3275,8 +3275,9 @@ void ScoreView::endEdit()
             lyricsEndEdit();
       else if (tp == HARMONY)
             harmonyEndEdit();
-      _score->setLayoutAll(true);
+//      _score->setLayoutAll(true);
       _score->endCmd();
+      mscore->endCmd();
       if (dragElement && (dragElement != editObject)) {
             curElement = dragElement;
             _score->select(curElement);
@@ -3613,7 +3614,8 @@ void ScoreView::select(QMouseEvent* ev)
 
 bool ScoreView::mousePress(QMouseEvent* ev)
       {
-      startMove  = imatrix.map(QPointF(ev->pos()));
+      startMoveI = ev->pos();
+      startMove  = imatrix.map(QPointF(startMoveI));
       curElement = elementNear(startMove);
 
       if (curElement && curElement->type() == MEASURE) {
@@ -3644,7 +3646,7 @@ bool ScoreView::testElementDragTransition(QMouseEvent* ev) const
       if (curElement == 0 || !curElement->isMovable() || QApplication::mouseButtons() != Qt::LeftButton)
             return false;
       QPoint delta = ev->pos() - startMoveI;
-      return sqrt(pow(delta.x(),2) + pow(delta.y(),2)) > 2;
+      return delta.manhattanLength() > 2;
       }
 
 //---------------------------------------------------------
