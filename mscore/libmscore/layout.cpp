@@ -889,12 +889,13 @@ bool Score::layoutPage(Page* page)
       page->clear();
       qreal y = page->tm();
 
-      int  rows              = 0;
+      int  gaps              = 0;
       bool firstSystemOnPage = true;
 
       while (curMeasure) {
             qreal h;
-            QList<System*> sl;
+            bool pageBreak;
+            System* lastSystem = systemList->empty() ? 0 : systemList->back();
             ElementType t = curMeasure->type();
             if (t == VBOX || t == TBOX || t == FBOX) {
                   System* system = getNextSystem(false, true);
@@ -909,10 +910,9 @@ bool Score::layoutPage(Page* page)
                   vbox->layout();
                   system->setHeight(vbox->height());
 
-                  System* ls = systemList->empty() ? 0 : systemList->back();
                   y = vbox->topGap();
-                  if (ls)
-                        y += ls->y() + ls->height();
+                  if (lastSystem)
+                        y += lastSystem->y() + lastSystem->height();
                   else
                         y += page->tm();
 
@@ -923,19 +923,15 @@ bool Score::layoutPage(Page* page)
 
                   system->setPos(x, y);
                   system->setPageBreak(vbox->pageBreak());
-                  sl.append(system);
 
                   system->measures().push_back(vbox);
                   page->appendSystem(system);
                   curMeasure = curMeasure->next();
                   ++curSystem;
-                  y += h;
-                  if (y > ey) {
-                        ++rows;
-                        break;
-                        }
+                  pageBreak = system->pageBreak();
                   }
             else {
+                  QList<System*> sl;
                   if (firstSystemOnPage)
                         y += sub;
                   int cs          = curSystem;
@@ -963,7 +959,7 @@ bool Score::layoutPage(Page* page)
                         }
 
                   // a page contains at least one system
-                  if (rows && (y + h + moveY > ey)) {
+                  if (!systemList->empty() && (y + h + moveY > ey)) {
                         // system does not fit on page: rollback
                         curMeasure = cm;
                         curSystem  = cs;
@@ -975,7 +971,6 @@ bool Score::layoutPage(Page* page)
                               s->rypos() = y;
                               }
                         }
-
                   foreach (System* system, sl) {
                         page->appendSystem(system);
                         system->rypos() = y;
@@ -984,10 +979,12 @@ bool Score::layoutPage(Page* page)
                   firstSystem  = !sl.isEmpty() && lm && lm->sectionBreak();
                   startWithLongNames = firstSystem && lm->sectionBreak()->startWithLongNames();
                   firstSystemOnPage = false;
-                  y += h;
+                  pageBreak = sl.back()->pageBreak();
+                  if (lastSystem && !lastSystem->isVbox())
+                        ++gaps;
                   }
-            ++rows;
-            if (sl.back()->pageBreak())
+            y += h;
+            if (pageBreak)
                   break;
             }
 
@@ -999,14 +996,15 @@ bool Score::layoutPage(Page* page)
       qreal restHeight = ey - y;
       qreal ph         = page->loHeight() - page->bm() - page->tm() - slb - sub;
 
-      if ((rows <= 1) || (restHeight > (ph * (1.0 - styleD(ST_pageFillLimit)))))
+      if (!gaps || (restHeight > (ph * (1.0 - styleD(ST_pageFillLimit)))))
             return true;
 
       qreal systemDistance = styleS(ST_systemDistance).val() * _spatium;
-      qreal extraDist      = (restHeight + systemDistance) / (rows - 1);
+      qreal extraDist      = (restHeight + systemDistance) / gaps;
 
       y = 0;
       int n = page->systems()->size();
+int tgap = 0;
       for (int i = 0; i < n;) {
             System* system = page->systems()->at(i);
             qreal yy = system->pos().y();
@@ -1015,8 +1013,13 @@ bool Score::layoutPage(Page* page)
             if (i >= n)
                   break;
             System* nsystem = page->systems()->at(i);
-            if (nsystem->pos().y() != yy)
+            if ((nsystem->pos().y() != yy) && !(system->isVbox() || nsystem->isVbox())) {
                   y += extraDist;               // next system row
+                  ++tgap;
+                  }
+            }
+      if (tgap != gaps) {
+            printf("===========inconsistent system expansion gaps %d counted %d\n", gaps, tgap);
             }
       return true;
       }
