@@ -16,6 +16,7 @@
 
 #include "ui_inspector_element.h"
 #include "ui_inspector_vbox.h"
+#include "ui_inspector_articulation.h"
 
 class Element;
 class Inspector;
@@ -63,6 +64,21 @@ class InspectorVBox : public InspectorElementBase {
 
    public:
       InspectorVBox(Inspector*, QWidget* parent = 0);
+      virtual void setElement(Element*);
+      virtual void apply();
+      };
+
+//---------------------------------------------------------
+//   InspectorArticulation
+//---------------------------------------------------------
+
+class InspectorArticulation : public InspectorElementBase {
+      Q_OBJECT
+
+      Ui::InspectorArticulation ar;
+
+   public:
+      InspectorArticulation(Inspector*, QWidget* parent = 0);
       virtual void setElement(Element*);
       virtual void apply();
       };

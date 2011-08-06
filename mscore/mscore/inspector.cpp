@@ -101,8 +101,9 @@ void Inspector::setElement(Element* e)
       if (_element == 0)
             return;
       switch(_element->type()) {
-            case VBOX: ie = new InspectorVBox(this, this); break;
-            default:   ie = new InspectorElement(this, this); break;
+            case VBOX:         ie = new InspectorVBox(this, this); break;
+            case ARTICULATION: ie = new InspectorArticulation(this, this); break;
+            default:           ie = new InspectorElement(this, this); break;
             }
       layout->insertWidget(0, ie);
       ie->setElement(_element);
@@ -219,5 +220,71 @@ void InspectorVBox::apply()
             score->endCmd();
             mscore->endCmd();
             }
+      }
+
+//---------------------------------------------------------
+//   InspectorArticulation
+//---------------------------------------------------------
+
+InspectorArticulation::InspectorArticulation(Inspector* i, QWidget* parent)
+   : InspectorElementBase(i, parent)
+      {
+      QWidget* w = new QWidget;
+      layout = new QVBoxLayout;
+      setLayout(layout);
+
+      ar.setupUi(w);
+      layout->addWidget(w);
+      connect(ar.x, SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      connect(ar.y, SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      connect(ar.direction, SIGNAL(currentIndexChanged(int)), inspector, SLOT(enableApply()));
+      connect(ar.anchor, SIGNAL(currentIndexChanged(int)), inspector, SLOT(enableApply()));
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void InspectorArticulation::setElement(Element* e)
+      {
+      Articulation* a = static_cast<Articulation*>(e);
+      qreal _spatium = e->score()->spatium();
+      ar.elementName->setText(e->name());
+      ar.x->blockSignals(true);
+      ar.y->blockSignals(true);
+      ar.direction->blockSignals(true);
+      ar.anchor->blockSignals(true);
+
+      ar.x->setValue(a->userOff().x() / _spatium);
+      ar.y->setValue(a->userOff().y() / _spatium);
+      ar.direction->setCurrentIndex(int(a->direction()));
+      ar.anchor->setCurrentIndex(int(a->anchor()));
+
+      ar.x->blockSignals(false);
+      ar.y->blockSignals(false);
+      ar.direction->blockSignals(false);
+      ar.anchor->blockSignals(false);
+      }
+
+//---------------------------------------------------------
+//   apply
+//---------------------------------------------------------
+
+void InspectorArticulation::apply()
+      {
+      Articulation* a = static_cast<Articulation*>(inspector->element());
+      Score* score    = a->score();
+      qreal _spatium  = score->spatium();
+
+      QPointF o(ar.x->value() * _spatium, ar.y->value() * _spatium);
+      score->startCmd();
+      if (o != a->userOff())
+            score->undo()->push(new ChangeUserOffset(a, o));
+      Direction d = Direction(ar.direction->currentIndex());
+      ArticulationAnchor anchor = ArticulationAnchor(ar.anchor->currentIndex());
+      if (d != a->direction() || anchor != a->anchor())
+            score->undo()->push(new ChangeArticulation(a, d, anchor));
+      score->endCmd();
+      mscore->endCmd();
       }
 
