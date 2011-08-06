@@ -1222,6 +1222,7 @@ bool Score::layoutSystem1(qreal& minWidth, qreal w, bool isFirstSystem, bool lon
 //---------------------------------------------------------
 //   layoutSystemRow
 //    x, y  position of row on page
+//    return hight in h
 //---------------------------------------------------------
 
 QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,

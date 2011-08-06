@@ -415,7 +415,7 @@ void Text::draw(Painter* painter) const
 
       c.palette.setColor(QPalette::Text, color);
 
-      painter->drawText(_doc, color, c.cursorPosition);
+      painter->drawText(_doc, c);
 
       // draw frame
       if (hasFrame()) {
