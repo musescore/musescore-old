@@ -1539,13 +1539,14 @@ class ChangeBoxProperties : public UndoCommand {
       Box* _box;
 
       qreal _marginLeft, _marginTop, _marginRight, _marginBottom;
-      qreal _height, _width;
+      Spatium _height, _width;
       qreal _topGap, _bottomGap;
 
       void flip();
 
    public:
-      ChangeBoxProperties(Box *, qreal, qreal, qreal, qreal, qreal, qreal,
+      ChangeBoxProperties(Box *, qreal, qreal, qreal, qreal,
+         Spatium, Spatium,
          qreal, qreal);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
