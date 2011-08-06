@@ -187,9 +187,9 @@ void Selection::deselectAll()
 void Selection::clear()
       {
       foreach(Element* e, _el) {
-            _score->addRefresh(e->abbox());
+            _score->addRefresh(e->canvasBoundingRect());
             e->setSelected(false);
-            _score->addRefresh(e->abbox());
+            _score->addRefresh(e->canvasBoundingRect());
             }
       _el.clear();
       setState(SEL_NONE);

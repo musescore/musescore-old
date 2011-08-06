@@ -4351,10 +4351,16 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             midiinToggled(a->isChecked());
       else if (cmd == "sound-on")
             speakerToggled(a->isChecked());
-      else if (cmd == "undo")
+      else if (cmd == "undo") {
             undo();
-      else if (cmd == "redo")
+            if (inspector)
+                  inspector->reset();
+            }
+      else if (cmd == "redo") {
             redo();
+            if (inspector)
+                  inspector->reset();
+            }
       else if (cmd == "toggle-palette")
             showPalette(a->isChecked());
       else if (cmd == "inspector")
