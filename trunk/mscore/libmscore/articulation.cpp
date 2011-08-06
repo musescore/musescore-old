@@ -195,6 +195,7 @@ void Articulation::setSubtype(int idx)
 
 void Articulation::read(QDomElement e)
       {
+      setSubtype(0);    // default
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
@@ -205,19 +206,21 @@ void Articulation::read(QDomElement e)
             else if (tag == "anchor")
                   _anchor = ArticulationAnchor(val.toInt());
             else if (tag == "direction") {
+                  Direction dir = AUTO;
                   if (val == "up")
-                        _direction = UP;
+                        dir = UP;
                   else if (val == "down")
-                        _direction = DOWN;
+                        dir = DOWN;
                   else if (val == "auto")
-                        _direction = AUTO;
+                        dir = AUTO;
                   else
                         domError(e);
+//                  printf("setDirection %s %d\n", qPrintable(val), int(dir));
+                  setDirection(dir);
                   }
             else if (!Element::readProperties(e))
                   domError(e);
             }
-      setSubtype(subtype());
       }
 
 //---------------------------------------------------------
@@ -428,7 +431,8 @@ void Articulation::setDirection(Direction d)
       {
       _direction = d;
       if (d != AUTO)
-            _up = d == UP;
+            _up = (d == UP);
+//      printf("setDirection %p %d %d\n", this, _up, int(d));
       }
 
 //---------------------------------------------------------
