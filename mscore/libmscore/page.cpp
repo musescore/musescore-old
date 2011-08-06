@@ -274,19 +274,24 @@ void Page::draw(Painter* painter) const
 
             bool odd = (n & 1) && _score->styleB(ST_headerOddEven);
             QString s = _score->styleSt(odd ? ST_oddHeaderL : ST_evenHeaderL);
+
+            QAbstractTextDocumentLayout::PaintContext c;
+            c.cursorPosition = -1;
+            c.palette.setColor(QPalette::Text, ts.foregroundColor());
+
             if (!s.isEmpty()) {
                   d.setHtml(replaceTextMacros(s));
-                  painter->drawText(&d, ts.foregroundColor(), -1);
+                  painter->drawText(&d, c);
                   }
             s = _score->styleSt(odd ? ST_oddHeaderC : ST_evenHeaderC);
             if (!s.isEmpty()) {
                   d.setHtml(replaceTextMacros(s));
-                  painter->drawText(&d, ts.foregroundColor(), -1);
+                  painter->drawText(&d, c);
                   }
             s = _score->styleSt(odd ? ST_oddHeaderR : ST_evenHeaderR);
             if (!s.isEmpty()) {
                   d.setHtml(replaceTextMacros(s));
-                  painter->drawText(&d, ts.foregroundColor(), -1);
+                  painter->drawText(&d, c);
                   }
             painter->translate(-o);
             }
@@ -304,19 +309,24 @@ void Page::draw(Painter* painter) const
             bool odd = (n & 1) && _score->styleB(ST_footerOddEven);
             QString s = _score->styleSt(odd ? ST_oddFooterL : ST_evenFooterL);
             painter->translate(QPointF(0.0, loHeight() - (tm()+bm())));
+
+            QAbstractTextDocumentLayout::PaintContext c;
+            c.cursorPosition = -1;
+            c.palette.setColor(QPalette::Text, ts.foregroundColor());
+
             if (!s.isEmpty()) {
                   d.setHtml(replaceTextMacros(s));
-                  painter->drawText(&d, ts.foregroundColor(), -1);
+                  painter->drawText(&d, c);
                   }
             s = _score->styleSt(odd ? ST_oddFooterC : ST_evenFooterC);
             if (!s.isEmpty()) {
                   d.setHtml(replaceTextMacros(s));
-                  painter->drawText(&d, ts.foregroundColor(), -1);
+                  painter->drawText(&d, c);
                   }
             s = _score->styleSt(odd ? ST_oddFooterR : ST_evenFooterR);
             if (!s.isEmpty()) {
                   d.setHtml(replaceTextMacros(s));
-                  painter->drawText(&d, ts.foregroundColor(), -1);
+                  painter->drawText(&d, c);
                   }
             }
       }

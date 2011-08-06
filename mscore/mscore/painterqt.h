@@ -73,7 +73,7 @@ class PainterQt : public Painter {
             _painter->drawText(QPointF(x, y), s);
             }
 
-      virtual void drawText(const QTextDocument*, const QColor&, int cursor);
+      virtual void drawText(const QTextDocument*, const QAbstractTextDocumentLayout::PaintContext&);
       virtual void drawTextHCentered(qreal x, qreal y, const QString& s);
       virtual void drawTextVCentered(qreal x, qreal y, const QString& s);
 #if QT_VERSION >= 0x040800

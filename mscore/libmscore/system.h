@@ -85,14 +85,13 @@ class System : public Element {
       QList<MeasureBase*> ml;
       QList<SysStaff*> _staves;
       Line* barLine;          ///< Left hand bar, connects staves in system.
-      bool _pageBreak;
       qreal _leftMargin;      ///< left margin for instrument name, brackets etc.
+      bool _pageBreak;
       bool _firstSystem;      ///< used to decide between long and short instrument
                               ///< names; set by score()->doLayout()
+      bool _vbox;             ///< contains only one VBox in ml
 
       QList<SpannerSegment*> _spannerSegments;
-
-      bool _vbox;             ///< contains only one VBox in ml
 
       void setDistanceUp(int n, Spatium v)   { _staves[n]->setDistanceUp(v); }
       void setDistanceDown(int n, Spatium v) { _staves[n]->setDistanceDown(v); }

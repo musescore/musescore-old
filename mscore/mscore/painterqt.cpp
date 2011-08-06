@@ -18,11 +18,8 @@
 //   drawText
 //---------------------------------------------------------
 
-void PainterQt::drawText(const QTextDocument* doc, const QColor& color, int cp)
+void PainterQt::drawText(const QTextDocument* doc, const QAbstractTextDocumentLayout::PaintContext& c)
       {
-      QAbstractTextDocumentLayout::PaintContext c;
-      c.cursorPosition = cp;
-      c.palette.setColor(QPalette::Text, color);
       doc->documentLayout()->draw(_painter, c);
       }
 
