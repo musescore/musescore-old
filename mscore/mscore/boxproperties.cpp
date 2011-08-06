@@ -65,7 +65,8 @@ void BoxProperties::ok()
             if (elem->type() == type) {  // if current element matches type of this box, push new box props in undo stack
                   Box* box = static_cast<Box*>(elem);
                   box->score()->undo()->push(new ChangeBoxProperties(box, leftMargin->value(), topMargin->value(),
-                        rightMargin->value(), bottomMargin->value(), frameHeight->value(), frameWidth->value(),
+                        rightMargin->value(), bottomMargin->value(),
+                        Spatium(frameHeight->value()), Spatium(frameWidth->value()),
                         topGap->value() * _spatium, bottomGap->value() * _spatium));
                   }
             }

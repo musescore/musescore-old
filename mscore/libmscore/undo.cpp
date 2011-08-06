@@ -3094,7 +3094,7 @@ void ChangeInstrument::flip()
 
 ChangeBoxProperties::ChangeBoxProperties(Box* box,
    qreal marginLeft, qreal marginTop, qreal marginRight, qreal marginBottom,
-   qreal height, qreal width, qreal tg, qreal bg)
+   Spatium height, Spatium width, qreal tg, qreal bg)
       {
       _box              = box;
       _marginLeft       = marginLeft;
@@ -3136,15 +3136,15 @@ void ChangeBoxProperties::flip()
       _bottomGap        = bg;
 
       // according to box type, flip either height or width (or none)
-      qreal val;
+      Spatium val;
       if (_box->type() == VBOX) {
-            val = _box->boxHeight().val();
-            _box->setBoxHeight(Spatium(_height));
+            val = _box->boxHeight();
+            _box->setBoxHeight(_height);
             _height = val;
             }
       if (_box->type() == HBOX) {
-            val = _box->boxWidth().val();
-            _box->setBoxWidth(Spatium(_width));
+            val = _box->boxWidth();
+            _box->setBoxWidth(_width);
             _width = val;
             }
       }

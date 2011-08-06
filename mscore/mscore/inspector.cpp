@@ -32,6 +32,8 @@ void MuseScore::showInspector(bool visible)
                   connect(inspector, SIGNAL(inspectorVisible(bool)), a, SLOT(setChecked(bool)));
                   addDockWidget(Qt::RightDockWidgetArea, inspector);
                   }
+            if (cs && cs->selection().element())
+                  inspector->setElement(cs->selection().element());
             }
       if (inspector)
             inspector->setVisible(visible);
@@ -186,7 +188,7 @@ void InspectorVBox::setElement(Element* e)
       vb.height->blockSignals(true);
       vb.topGap->setValue(box->topGap() / _spatium);
       vb.bottomGap->setValue(box->bottomGap() / _spatium);
-      vb.height->setValue(box->height() / _spatium);
+      vb.height->setValue(box->boxHeight().val());
       vb.topGap->blockSignals(false);
       vb.bottomGap->blockSignals(false);
       vb.height->blockSignals(false);
@@ -203,13 +205,14 @@ void InspectorVBox::apply()
       qreal _spatium  = score->spatium();
       qreal topGap    = vb.topGap->value() * _spatium;
       qreal bottomGap = vb.bottomGap->value() * _spatium;
-      qreal height    = vb.height->value() * _spatium;
+      Spatium height(vb.height->value());
+
       if (topGap != box->topGap() || bottomGap != box->bottomGap()
-         || height != box->height()) {
+         || height != box->boxHeight()) {
             score->startCmd();
             score->undo()->push(new ChangeBoxProperties(box,
                box->leftMargin(), box->topMargin(), box->rightMargin(), box->bottomMargin(),
-               height, box->width(),
+               height, box->boxWidth(),
                topGap, bottomGap
                ));
             score->setLayoutAll(true);

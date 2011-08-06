@@ -1185,7 +1185,7 @@ void ScoreView::updateGrips()
             setDropAnchor(QLineF(anchor + pageOffset, grip[curGrip].center()));
       else
             setDropTarget(0); // this also resets dropAnchor
-      score()->addRefresh(editObject->abbox());
+      score()->addRefresh(editObject->canvasBoundingRect());
       }
 
 //---------------------------------------------------------
@@ -2138,8 +2138,6 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
 
 void ScoreView::dropEvent(QDropEvent* event)
       {
-printf("dropEvent\n");
-
       QPointF pos(imatrix.map(QPointF(event->pos())));
 
       DropData dropData;
@@ -2152,7 +2150,7 @@ printf("dropEvent\n");
       if (dragElement) {
             _score->startCmd();
             dragElement->setScore(_score);      // CHECK: should already be ok
-            _score->addRefresh(dragElement->abbox());
+            _score->addRefresh(dragElement->canvasBoundingRect());
             switch(dragElement->type()) {
                   case VOLTA:
                   case OTTAVA:
@@ -2184,14 +2182,14 @@ printf("dropEvent\n");
                                     break;
                                     }
                              }
-                        _score->addRefresh(el->abbox());
-                        _score->addRefresh(dragElement->abbox());
+                        _score->addRefresh(el->canvasBoundingRect());
+                        _score->addRefresh(dragElement->canvasBoundingRect());
 
                         Element* dropElement = el->drop(dropData);
-                        _score->addRefresh(el->abbox());
+                        _score->addRefresh(el->canvasBoundingRect());
                         if (dropElement) {
                               _score->select(dropElement, SELECT_SINGLE, 0);
-                              _score->addRefresh(dropElement->abbox());
+                              _score->addRefresh(dropElement->canvasBoundingRect());
                               }
                         }
                         event->acceptProposedAction();
@@ -2240,13 +2238,13 @@ printf("dropEvent\n");
                               break;
                               }
 printf("drop at %s\n", el->name());
-                        _score->addRefresh(el->abbox());
+                        _score->addRefresh(el->canvasBoundingRect());
                         Element* dropElement = el->drop(dropData);
-                        _score->addRefresh(el->abbox());
+                        _score->addRefresh(el->canvasBoundingRect());
                         if (dropElement) {
                               if (!_score->noteEntryMode())
                                     _score->select(dropElement, SELECT_SINGLE, 0);
-                              _score->addRefresh(dropElement->abbox());
+                              _score->addRefresh(dropElement->canvasBoundingRect());
 
                               Qt::KeyboardModifiers keyState = event->keyboardModifiers();
                               if (keyState == (Qt::ShiftModifier | Qt::ControlModifier)) {
@@ -2390,10 +2388,9 @@ if (debugMode)
 
 void ScoreView::dragLeaveEvent(QDragLeaveEvent*)
       {
-printf("dragLeaveEvent\n");
       if (dragElement) {
             _score->setLayoutAll(false);
-            _score->addRefresh(dragElement->abbox());
+            _score->addRefresh(dragElement->canvasBoundingRect());
             delete dragElement;
             dragElement = 0;
             _score->end();
@@ -3509,9 +3506,9 @@ void ScoreView::dragScoreView(QMouseEvent* ev)
 void ScoreView::dragNoteEntry(QMouseEvent* ev)
       {
       QPointF p = toLogical(ev->pos());
-      _score->addRefresh(shadowNote->abbox());
+      _score->addRefresh(shadowNote->canvasBoundingRect());
       setShadowNote(p);
-      _score->addRefresh(shadowNote->abbox());
+      _score->addRefresh(shadowNote->canvasBoundingRect());
       _score->end();
       }
 
@@ -3656,11 +3653,11 @@ bool ScoreView::testElementDragTransition(QMouseEvent* ev) const
 
 void ScoreView::endDragEdit()
       {
-      _score->addRefresh(editObject->abbox());
+      _score->addRefresh(editObject->canvasBoundingRect());
       editObject->endEditDrag();
       updateGrips();
       // setDropTarget(0); // this also resets dropRectangle and dropAnchor
-      _score->addRefresh(editObject->abbox());
+      _score->addRefresh(editObject->canvasBoundingRect());
       _score->end();
       }
 
@@ -3673,7 +3670,7 @@ void ScoreView::doDragEdit(QMouseEvent* ev)
       QPointF p     = toLogical(ev->pos());
       QPointF delta = p - startMove;
       _score->setLayoutAll(false);
-      score()->addRefresh(editObject->abbox());
+      score()->addRefresh(editObject->canvasBoundingRect());
       if (editObject->isText()) {
             Text* text = static_cast<Text*>(editObject);
             text->dragTo(p);
@@ -3701,7 +3698,7 @@ bool ScoreView::editElementDragTransition(QMouseEvent* ev)
       Element* e = elementNear(startMove);
       if (e && (e == editObject) && (editObject->isText())) {
             if (editObject->mousePress(startMove, ev)) {
-                  _score->addRefresh(editObject->abbox());
+                  _score->addRefresh(editObject->canvasBoundingRect());
                   _score->end();
                   }
             return true;
@@ -3729,7 +3726,7 @@ void ScoreView::onEditPasteTransition(QMouseEvent* ev)
       Element* e = elementNear(startMove);
       if (e == editObject) {
             if (editObject->mousePress(startMove, ev)) {
-                  _score->addRefresh(editObject->abbox());
+                  _score->addRefresh(editObject->canvasBoundingRect());
                   _score->end();
                   }
             }
@@ -3778,7 +3775,7 @@ bool ScoreView::editSelectTransition(QMouseEvent* ev)
 void ScoreView::doDragLasso(QMouseEvent* ev)
       {
       QPointF p = toLogical(ev->pos());
-      _score->addRefresh(lasso->abbox());
+      _score->addRefresh(lasso->canvasBoundingRect());
       QRectF r;
       r.setCoords(startMove.x(), startMove.y(), p.x(), p.y());
       lasso->setRect(r.normalized());
@@ -3786,7 +3783,7 @@ void ScoreView::doDragLasso(QMouseEvent* ev)
       r = _matrix.mapRect(_lassoRect);
       QSize sz(r.size().toSize());
       mscore->statusBar()->showMessage(QString("%1 x %2").arg(sz.width()).arg(sz.height()), 3000);
-      _score->addRefresh(lasso->abbox());
+      _score->addRefresh(lasso->canvasBoundingRect());
       _score->lassoSelect(lasso->rect());
       _score->end();
       }
@@ -3797,7 +3794,7 @@ void ScoreView::doDragLasso(QMouseEvent* ev)
 
 void ScoreView::endLasso()
       {
-      _score->addRefresh(lasso->abbox());
+      _score->addRefresh(lasso->canvasBoundingRect());
       lasso->setRect(QRectF());
       _score->lassoSelectEnd();
       _score->end();
@@ -3866,13 +3863,13 @@ void ScoreView::setDropTarget(const Element* el)
       if (dropTarget != el) {
             if (dropTarget) {
                   dropTarget->setDropTarget(false);
-                  _score->addRefresh(dropTarget->abbox());
+                  _score->addRefresh(dropTarget->canvasBoundingRect());
                   dropTarget = 0;
                   }
             dropTarget = el;
             if (dropTarget) {
                   dropTarget->setDropTarget(true);
-                  _score->addRefresh(dropTarget->abbox());
+                  _score->addRefresh(dropTarget->canvasBoundingRect());
                   }
             }
       if (!dropAnchor.isNull()) {
@@ -3899,7 +3896,7 @@ void ScoreView::setDropRectangle(const QRectF& r)
       dropRectangle = r;
       if (dropTarget) {
             dropTarget->setDropTarget(false);
-            _score->addRefresh(dropTarget->abbox());
+            _score->addRefresh(dropTarget->canvasBoundingRect());
             dropTarget = 0;
             }
       else if (!dropAnchor.isNull()) {
@@ -5659,7 +5656,7 @@ void ScoreView::selectMeasure(int n)
             _score->selection().setStaffEnd(_score->nstaves());
             _score->selection().updateSelectedElements();
             _score->selection().setState(SEL_RANGE);
-            _score->addRefresh(measure->abbox());
+            _score->addRefresh(measure->canvasBoundingRect());
             adjustCanvasPosition(measure, true);
             _score->setUpdateAll(true);
             _score->end();
