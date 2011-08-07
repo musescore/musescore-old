@@ -16,7 +16,9 @@
 
 #include "ui_inspector_element.h"
 #include "ui_inspector_vbox.h"
+#include "ui_inspector_hbox.h"
 #include "ui_inspector_articulation.h"
+#include "ui_inspector_spacer.h"
 
 class Element;
 class Inspector;
@@ -69,6 +71,21 @@ class InspectorVBox : public InspectorElementBase {
       };
 
 //---------------------------------------------------------
+//   InspectorHBox
+//---------------------------------------------------------
+
+class InspectorHBox : public InspectorElementBase {
+      Q_OBJECT
+
+      Ui::InspectorHBox hb;
+
+   public:
+      InspectorHBox(Inspector*, QWidget* parent = 0);
+      virtual void setElement(Element*);
+      virtual void apply();
+      };
+
+//---------------------------------------------------------
 //   InspectorArticulation
 //---------------------------------------------------------
 
@@ -79,6 +96,21 @@ class InspectorArticulation : public InspectorElementBase {
 
    public:
       InspectorArticulation(Inspector*, QWidget* parent = 0);
+      virtual void setElement(Element*);
+      virtual void apply();
+      };
+
+//---------------------------------------------------------
+//   InspectorSpacer
+//---------------------------------------------------------
+
+class InspectorSpacer : public InspectorElementBase {
+      Q_OBJECT
+
+      Ui::InspectorSpacer sp;
+
+   public:
+      InspectorSpacer(Inspector*, QWidget* parent = 0);
       virtual void setElement(Element*);
       virtual void apply();
       };

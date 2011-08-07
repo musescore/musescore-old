@@ -884,7 +884,7 @@ bool Score::layoutPage(Page* page)
       // usable width of page:
       qreal x  = page->lm();
       qreal w  = page->loWidth() - x - page->rm();
-      qreal ey = page->loHeight() - page->bm() - slb;
+      qreal ey = page->loHeight() - page->bm();
 
       page->clear();
       qreal y = page->tm();
@@ -959,7 +959,7 @@ bool Score::layoutPage(Page* page)
                         }
 
                   // a page contains at least one system
-                  if (!systemList->empty() && (y + h + moveY > ey)) {
+                  if (!systemList->empty() && (y + h + moveY + slb > ey)) {
                         // system does not fit on page: rollback
                         curMeasure = cm;
                         curSystem  = cs;
@@ -987,6 +987,9 @@ bool Score::layoutPage(Page* page)
             if (pageBreak)
                   break;
             }
+      System* lastSystem = systemList->back();
+      if (!lastSystem->isVbox())    // add ST_staffLowerBorder
+            y += slb;
 
       //-----------------------------------------------------------------------
       // if remaining y space on page is greater (pageHeight*pageFillLimit)
@@ -994,7 +997,7 @@ bool Score::layoutPage(Page* page)
       //-----------------------------------------------------------------------
 
       qreal restHeight = ey - y;
-      qreal ph         = page->loHeight() - page->bm() - page->tm() - slb - sub;
+      qreal ph         = page->loHeight() - page->bm() - page->tm();
 
       if (!gaps || (restHeight > (ph * (1.0 - styleD(ST_pageFillLimit)))))
             return true;

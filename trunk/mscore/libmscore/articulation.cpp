@@ -221,6 +221,11 @@ void Articulation::read(QDomElement e)
             else if (!Element::readProperties(e))
                   domError(e);
             }
+/*DEBUG      if (subtype() == Articulation_Fermata) {
+            printf("Fermata %f %f\n", readPos().x(), readPos().y());
+            setReadPos(QPointF());
+            }
+      */
       }
 
 //---------------------------------------------------------
