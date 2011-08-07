@@ -600,7 +600,6 @@ void Score::fixTicks()
 
 /**
  Return measure for canvas relative position \a p.
-
 */
 
 MeasureBase* Score::pos2measure(const QPointF& p, int* rst, int* pitch,
@@ -1016,6 +1015,7 @@ Page* Score::searchPage(const QPointF& p) const
 //   searchSystem
 //    return list of systems as there may be more than
 //    one system in a row
+//    p is in canvas coordinates
 //---------------------------------------------------------
 
 QList<System*> Score::searchSystem(const QPointF& pos) const
@@ -1058,6 +1058,7 @@ QList<System*> Score::searchSystem(const QPointF& pos) const
 
 //---------------------------------------------------------
 //   searchMeasure
+//    p is in canvas coordinates
 //---------------------------------------------------------
 
 Measure* Score::searchMeasure(const QPointF& p) const

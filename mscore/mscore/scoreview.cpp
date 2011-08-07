@@ -1833,13 +1833,13 @@ bool ScoreView::dragMeasureAnchorElement(const QPointF& pos)
       {
       Measure* m = _score->searchMeasure(pos);
       if (m) {
-            QRectF b(m->abbox());
+            QRectF b(m->canvasBoundingRect());
 
             QPointF anchor;
             if (pos.x() < (b.x() + b.width() * .5))
-                  anchor = m->abbox().topLeft();
+                  anchor = m->canvasBoundingRect().topLeft();
             else
-                  anchor = m->abbox().topRight();
+                  anchor = m->canvasBoundingRect().topRight();
             setDropAnchor(QLineF(pos, anchor));
             return true;
             }
@@ -2237,7 +2237,6 @@ void ScoreView::dropEvent(QDropEvent* event)
                               delete dragElement;
                               break;
                               }
-printf("drop at %s\n", el->name());
                         _score->addRefresh(el->canvasBoundingRect());
                         Element* dropElement = el->drop(dropData);
                         _score->addRefresh(el->canvasBoundingRect());
@@ -3294,15 +3293,13 @@ void ScoreView::endEdit()
 void ScoreView::startDrag()
       {
       dragElement = curElement;
-      startMove -= dragElement->userOff();
+      startMove  -= dragElement->userOff();
       _score->startCmd();
 
       foreach(Element* e, _score->selection().elements())
             e->setStartDragPosition(e->userOff());
       QList<Element*> el;
       dragElement->scanElements(&el, collectElements);
-//TODO2      foreach(Element* e, el)
-//            _score->removeBsp(e);
       _score->end();
       }
 
@@ -4479,7 +4476,7 @@ void ScoreView::cmdChangeEnharmonic(bool up)
 
 void ScoreView::cloneElement(Element* e)
       {
-      if (!e->isMovable())
+      if (!e->isMovable() && e->type() != SPACER)
             return;
       QDrag* drag = new QDrag(this);
       QMimeData* mimeData = new QMimeData;

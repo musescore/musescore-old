@@ -113,7 +113,7 @@ QPointF LineSegment::gripAnchor(int grip) const
             }
       else {
             System* s;
-            QPointF pt(line()->tick2pos(grip, &s));
+            QPointF pt(line()->linePos(grip, &s));
             return pt + s->pagePos();
             }
       }
@@ -325,40 +325,47 @@ SLine::SLine(const SLine& s)
       }
 
 //---------------------------------------------------------
-//   tick2pos
+//   linePos
 //    return System() coordinates
 //---------------------------------------------------------
 
-QPointF SLine::tick2pos(int grip, System** sys)
+QPointF SLine::linePos(int grip, System** sys)
       {
       Segment* seg = static_cast<Segment*>(grip == 0 ? startElement() : endElement());
       Measure* m   = seg->measure();
       *sys         = m->system();
+      qreal _spatium = spatium();
 
       qreal x = seg->pos().x() + m->pos().x();
 
       if (anchor() == ANCHOR_SEGMENT) {
-            if ((grip == 1)
-               && ((*sys)->firstMeasure() == m)
-               && (seg->tick() == m->tick())) {
-                  m = m->prevMeasure();
-                  if (m) {
-                        *sys = m->system();
-                        x = seg->pos().x() + m->bbox().right();
+            if (grip == 1) {
+                  if (((*sys)->firstMeasure() == m) && (seg->tick() == m->tick())) {
+                        m = m->prevMeasure();
+                        if (m) {
+                              *sys = m->system();
+                              x = seg->pos().x() + m->bbox().right();
+                              }
                         }
                   }
             }
       else {
             // anchor() == MEASURE
-            x = m->pos().x();
-            if (m->tick() < seg->tick()) {      // to end of last measure?
-                  x += m->bbox().width();
+            if (grip == 0) {
+                  x = m->pos().x();
                   }
-            else if (grip == 1 && (*sys)->firstMeasure() == m) {
-                  m = m->prevMeasure();
-                  if (m) {
-                        *sys = m->system();
-                        x    += m->bbox().width();
+            else {
+                  x = m->pos().x() + m->bbox().right();
+                  if (type() == VOLTA) {
+                        if (seg->subtype() == SegEndBarLine) {
+                              Element* e = seg->element(0);
+                              if (e && e->type() == BAR_LINE) {
+                                    if (e->subtype() == START_REPEAT)
+                                          x -= e->width() - _spatium * .5;
+                                    else
+                                          x -= _spatium * .5;
+                                    }
+                              }
                         }
                   }
             }
@@ -394,8 +401,8 @@ void SLine::layout()
 
       System* s1;
       System* s2;
-      QPointF p1 = tick2pos(0, &s1);
-      QPointF p2 = tick2pos(1, &s2);
+      QPointF p1 = linePos(0, &s1);
+      QPointF p2 = linePos(1, &s2);
 
       QList<System*>* systems = score()->systems();
       int sysIdx1 = systems->indexOf(s1);

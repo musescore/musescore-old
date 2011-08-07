@@ -86,7 +86,7 @@ class SLine : public Spanner {
       void setLen(qreal l);
       virtual QRectF bbox() const;
 
-      virtual QPointF tick2pos(int grip, System** system);
+      virtual QPointF linePos(int grip, System** system);
 
       virtual void write(Xml&) const;
       virtual void read(QDomElement);

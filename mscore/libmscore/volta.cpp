@@ -56,7 +56,6 @@ void Volta::setSubtype(int val)
 
 //---------------------------------------------------------
 //   layout
-//    compute segments from tick() to _tick2
 //---------------------------------------------------------
 
 void Volta::layout()

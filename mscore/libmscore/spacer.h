@@ -39,8 +39,6 @@ class Spacer : public Element {
       virtual void read(QDomElement);
       virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
-//      void setSpace(const Spatium& sp) { _space = sp;   }
-//      Spatium space() const            { return _space; }
       virtual void layout();
       virtual void draw(Painter*) const;
       virtual bool isEditable() const { return true; }
