@@ -756,12 +756,12 @@ void MuseScore::populatePalette()
       sp->append(lb, tr("Section break"));
 
       Spacer* spacer = new Spacer(gscore);
-      spacer->setSpace(Spatium(3));
+      spacer->setGap(Spatium(3));
       spacer->setSubtype(SPACER_DOWN);
       sp->append(spacer, tr("Staff spacer down"));
 
       spacer = new Spacer(gscore);
-      spacer->setSpace(Spatium(3));
+      spacer->setGap(Spatium(3));
       spacer->setSubtype(SPACER_UP);
       sp->append(spacer, tr("Staff spacer up"));
 
@@ -1325,7 +1325,7 @@ void MuseScore::showLayoutBreakPalette()
             sp->append(lb, tr("Section break"));
 
             Spacer* spacer = new Spacer(gscore);
-            spacer->setSpace(Spatium(3));
+            spacer->setGap(Spatium(3));
             sp->append(spacer, tr("Staff spacer"));
             }
       layoutBreakPalette->show();

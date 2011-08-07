@@ -599,7 +599,7 @@ void BarLine::layout()
                   qreal distance        = 0.4 * _spatium;
                   qreal topY            = y1 - distance;
                   qreal botY            = y2 + distance;
-                  qreal x               = -(a->width() * .5);
+                  qreal x               = width() - (a->width() * .5);
                   if (aa == A_TOP_STAFF)
                         a->setPos(x, topY);
                   else if (aa == A_BOTTOM_STAFF)

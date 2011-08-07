@@ -23,13 +23,13 @@
 Spacer::Spacer(Score* score)
    : Element(score)
       {
-      _space = Spatium(0);
+      _gap = Spatium(0);
       }
 
 Spacer::Spacer(const Spacer& s)
    : Element(s)
       {
-      _space = s._space;
+      _gap = s._gap;
       path   = s.path;
       }
 
@@ -63,7 +63,7 @@ void Spacer::layout()
       path     = QPainterPath();
       qreal w = _spatium;
       qreal b = w * .5;
-      qreal h = _space.val() * _spatium;
+      qreal h = _gap.val() * _spatium;
 
       if (subtype() == SPACER_DOWN) {
             path.lineTo(w, 0.0);
@@ -115,11 +115,11 @@ void Spacer::editDrag(const EditData& ed)
       {
       Spatium s(ed.delta.y() / spatium());
       if (subtype() == SPACER_DOWN)
-            _space += s;
+            _gap += s;
       else if (subtype() == SPACER_UP)
-            _space -= s;
-      if (_space.val() < 2.0)
-            _space = Spatium(2.0);
+            _gap -= s;
+      if (_gap.val() < 2.0)
+            _gap = Spatium(2.0);
       layout();
       score()->setLayoutAll(true);
       }
@@ -134,7 +134,7 @@ void Spacer::updateGrips(int* grips, QRectF* grip) const
       qreal _spatium = spatium();
       QPointF p;
       if (subtype() == SPACER_DOWN)
-            p = QPointF(_spatium * .5, _space.val() * _spatium);
+            p = QPointF(_spatium * .5, _gap.val() * _spatium);
       else if (subtype() == SPACER_UP)
             p = QPointF(_spatium * .5, 0.0);
       grip[0].translate(pagePos() + p);
@@ -148,7 +148,7 @@ void Spacer::write(Xml& xml) const
       {
       xml.stag(name());
       Element::writeProperties(xml);
-      xml.tag("space", _space.val());
+      xml.tag("space", _gap.val());
       xml.etag();
       }
 
@@ -162,7 +162,7 @@ void Spacer::read(QDomElement e)
             QString tag(e.tagName());
             QString val(e.text());
             if (tag == "space")
-                  _space = Spatium(val.toDouble());
+                  _gap = Spatium(val.toDouble());
             else if (!Element::readProperties(e))
                   domError(e);
             }

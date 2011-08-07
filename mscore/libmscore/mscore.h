@@ -606,5 +606,12 @@ inline static int restrict(int val, int min, int max) {
             return min;
       return val;
       }
+
+#define PROPERTY(a, b, c)                              \
+         a _ ## b;                                     \
+      public:                                          \
+         a b () const               { return _ ## b; } \
+         void set ## c (const a& x) { _ ## b = x; }    \
+      private:
 #endif
 

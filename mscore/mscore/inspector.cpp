@@ -17,6 +17,7 @@
 #include "libmscore/score.h"
 #include "libmscore/box.h"
 #include "libmscore/undo.h"
+#include "libmscore/spacer.h"
 
 //---------------------------------------------------------
 //   showInspector
@@ -102,7 +103,9 @@ void Inspector::setElement(Element* e)
             return;
       switch(_element->type()) {
             case VBOX:         ie = new InspectorVBox(this, this); break;
+            case HBOX:         ie = new InspectorHBox(this, this); break;
             case ARTICULATION: ie = new InspectorArticulation(this, this); break;
+            case SPACER:       ie = new InspectorSpacer(this, this); break;
             default:           ie = new InspectorElement(this, this); break;
             }
       layout->insertWidget(0, ie);
@@ -223,6 +226,74 @@ void InspectorVBox::apply()
       }
 
 //---------------------------------------------------------
+//   InspectorHBox
+//---------------------------------------------------------
+
+InspectorHBox::InspectorHBox(Inspector* i, QWidget* parent)
+   : InspectorElementBase(i, parent)
+      {
+      QWidget* w = new QWidget;
+      layout = new QVBoxLayout;
+      setLayout(layout);
+
+      hb.setupUi(w);
+      layout->addWidget(w);
+      connect(hb.topGap,    SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      connect(hb.bottomGap, SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      connect(hb.width,     SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void InspectorHBox::setElement(Element* e)
+      {
+      HBox* box = static_cast<HBox*>(e);
+      qreal _spatium = e->score()->spatium();
+      hb.elementName->setText(e->name());
+
+      hb.topGap->blockSignals(true);
+      hb.bottomGap->blockSignals(true);
+      hb.width->blockSignals(true);
+
+      hb.topGap->setValue(box->topGap() / _spatium);
+      hb.bottomGap->setValue(box->bottomGap() / _spatium);
+      hb.width->setValue(box->boxHeight().val());
+
+      hb.topGap->blockSignals(false);
+      hb.bottomGap->blockSignals(false);
+      hb.width->blockSignals(false);
+      }
+
+//---------------------------------------------------------
+//   apply
+//---------------------------------------------------------
+
+void InspectorHBox::apply()
+      {
+      HBox* box       = static_cast<HBox*>(inspector->element());
+      Score* score    = box->score();
+      qreal _spatium  = score->spatium();
+      qreal topGap    = hb.topGap->value() * _spatium;
+      qreal bottomGap = hb.bottomGap->value() * _spatium;
+      Spatium width(hb.width->value());
+
+      if (topGap != box->topGap() || bottomGap != box->bottomGap()
+         || width != box->boxWidth()) {
+            score->startCmd();
+            score->undo()->push(new ChangeBoxProperties(box,
+               box->leftMargin(), box->topMargin(), box->rightMargin(), box->bottomMargin(),
+               box->boxHeight(), width,
+               topGap, bottomGap
+               ));
+            score->setLayoutAll(true);
+            score->endCmd();
+            mscore->endCmd();
+            }
+      }
+
+//---------------------------------------------------------
 //   InspectorArticulation
 //---------------------------------------------------------
 
@@ -287,4 +358,53 @@ void InspectorArticulation::apply()
       score->endCmd();
       mscore->endCmd();
       }
+
+//---------------------------------------------------------
+//   InspectorElement
+//---------------------------------------------------------
+
+InspectorSpacer::InspectorSpacer(Inspector* i, QWidget* parent)
+   : InspectorElementBase(i, parent)
+      {
+      QWidget* w = new QWidget;
+      layout = new QVBoxLayout;
+      setLayout(layout);
+
+      sp.setupUi(w);
+      layout->addWidget(w);
+      connect(sp.height, SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void InspectorSpacer::setElement(Element* e)
+      {
+      Spacer* spacer = static_cast<Spacer*>(e);
+      qreal _spatium = e->score()->spatium();
+      sp.elementName->setText(e->name());
+      sp.height->setValue(spacer->gap().val() / _spatium);
+      }
+
+//---------------------------------------------------------
+//   apply
+//---------------------------------------------------------
+
+void InspectorSpacer::apply()
+      {
+      Spacer* spacer = static_cast<Spacer*>(inspector->element());
+      Score* score   = spacer->score();
+      qreal _spatium = score->spatium();
+      Spatium space(sp.height->value() * _spatium);
+      if (space != spacer->gap()) {
+            score->startCmd();
+            //TODO score->undo()->push(new ChangeUserOffset(e, o));
+            spacer->setGap(space);
+            score->setLayoutAll(true);
+            score->endCmd();
+            mscore->endCmd();
+            }
+      }
+
 
