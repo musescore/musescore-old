@@ -382,9 +382,8 @@ InspectorSpacer::InspectorSpacer(Inspector* i, QWidget* parent)
 void InspectorSpacer::setElement(Element* e)
       {
       Spacer* spacer = static_cast<Spacer*>(e);
-      qreal _spatium = e->score()->spatium();
       sp.elementName->setText(e->name());
-      sp.height->setValue(spacer->gap().val() / _spatium);
+      sp.height->setValue(spacer->gap().val());
       }
 
 //---------------------------------------------------------
@@ -395,13 +394,14 @@ void InspectorSpacer::apply()
       {
       Spacer* spacer = static_cast<Spacer*>(inspector->element());
       Score* score   = spacer->score();
-      qreal _spatium = score->spatium();
-      Spatium space(sp.height->value() * _spatium);
+      Spatium space(sp.height->value());
       if (space != spacer->gap()) {
             score->startCmd();
-            //TODO score->undo()->push(new ChangeUserOffset(e, o));
+            //TODO make undoable
             spacer->setGap(space);
             score->setLayoutAll(true);
+            score->setDirty(true);
+
             score->endCmd();
             mscore->endCmd();
             }

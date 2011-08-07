@@ -30,7 +30,7 @@ Spacer::Spacer(const Spacer& s)
    : Element(s)
       {
       _gap = s._gap;
-      path   = s.path;
+      path = s.path;
       }
 
 //---------------------------------------------------------
