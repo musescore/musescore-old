@@ -3632,7 +3632,7 @@ foreach(Element* el, *(score->gel())) {
                                     foreach(Element* he, *m->el()) {
                                     printf("staff %d %d tick %d\n", he->staffIdx(), sstaff, he->tick());
                                           if ((he->type() == HARMONY) && (he->staffIdx() == sstaff)
-                                             && (he->tick() >= el->tick()) && (he->tick() <= endTick)) {
+                                             && (he->tick() >= el->tick()) && (he->tick() < endTick)) {
                                                 list << he;
                                                 }
                                           }
