@@ -1,3 +1,5 @@
+fix #11927: MusicXML export duplicate chordnames
+fix #11479: playback swing of quarter notes on counter beat
 
 ======== MuseScore 1.1 released ==============
 

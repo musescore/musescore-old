@@ -350,7 +350,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                         }
 
                   //detect 8th on the offbeat
-                  bool swing = ((tick - m->tick()+offSet)%AL::division == 240 && chord->tickLen() == 240);
+                  bool swing = ((tick - m->tick()+offSet)%AL::division == 240 && chord->tickLen() >= 240);
 
                   if (swing)
                         tick += (swingCoeff * AL::division /2);
@@ -377,7 +377,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                         bool tiedNote = false;
                         int lastNoteLen = len;
                         //swing
-                        if (swing)
+                        if (swing && chord->tickLen() == 240)
                             len *= (1-swingCoeff);
                         if (swingBeat)
                             len *= (1+swingCoeff);
