@@ -1752,10 +1752,10 @@ void Score::cmdSplitMeasure(ChordRest* cr)
       m2->setLen(Fraction::fromTicks(ticks2));
       int tracks = nstaves() * VOICES;
 
-      m1->setNext(m2);
-      m2->setNext(measure->next());
-      undoInsertMeasure(m2);
-      undoInsertMeasure(m1);
+//      m1->setNext(m2);
+//      m2->setNext(measure->next());
+      undoInsertMeasure(m2, measure->next());
+      undoInsertMeasure(m1, m2);
 
       SlurMap* slurMap = new SlurMap[tracks];
       TieMap* tieMap   = new TieMap[tracks];
@@ -1867,7 +1867,7 @@ void Score::cmdJoinMeasure(Measure* m1, Measure* m2)
 
       startCmd();
       undo()->push(new RemoveMeasures(m1, m2->prevMeasure()));
-      undoInsertMeasure(m);
+      undoInsertMeasure(m, m2);
 
       int tracks       = nstaves() * VOICES;
       SlurMap* slurMap = new SlurMap[tracks];

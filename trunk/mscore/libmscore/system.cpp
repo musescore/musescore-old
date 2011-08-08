@@ -581,13 +581,14 @@ void System::add(Element* el)
                   b->staff()->setBracketSpan(level, b->span());
                   }
                   break;
-            case MEASURE:
+/*            case MEASURE:
             case HBOX:
             case VBOX:
             case TBOX:
             case FBOX:
                   score()->addMeasure(static_cast<MeasureBase*>(el));
                   break;
+            */
             case TEXTLINE_SEGMENT:
             case HAIRPIN_SEGMENT:
             case OTTAVA_SEGMENT:
@@ -636,13 +637,14 @@ void System::remove(Element* el)
                   }
                   break;
 
-            case MEASURE:
+/*            case MEASURE:
             case HBOX:
             case VBOX:
             case TBOX:
             case FBOX:
                   score()->remove(el);
                   break;
+ */
             case TEXTLINE_SEGMENT:
             case HAIRPIN_SEGMENT:
             case OTTAVA_SEGMENT:

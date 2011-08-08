@@ -268,9 +268,10 @@ class RemoveMStaff : public UndoCommand {
 
 class InsertMeasure : public UndoCommand {
       MeasureBase* measure;
+      MeasureBase* pos;
 
    public:
-      InsertMeasure(MeasureBase*);
+      InsertMeasure(MeasureBase* nm, MeasureBase* p) : measure(nm), pos(p) {}
       virtual void undo();
       virtual void redo();
       UNDO_NAME("InsertMeasure");

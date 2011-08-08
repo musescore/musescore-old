@@ -411,7 +411,7 @@ class Score {
       void insertStaff(Staff*, int);
       void cmdRemoveStaff(int staffIdx);
       void removeStaff(Staff*);
-      void addMeasure(MeasureBase*);
+      void addMeasure(MeasureBase*, MeasureBase*);
       void readStaff(QDomElement);
 
       void cmdInsertPart(Part*, int);
@@ -473,7 +473,7 @@ class Score {
       void undoInsertPart(Part* part, int idx);
       void undoRemoveStaff(Staff* staff, int idx);
       void undoInsertStaff(Staff* staff, int idx);
-      void undoInsertMeasure(MeasureBase*);
+      void undoInsertMeasure(MeasureBase*, MeasureBase*);
       void undoChangeInvisible(Element*, bool);
       void undoMove(Element* e, const QPointF& pt);
       void undoChangeBracketSpan(Staff* staff, int column, int span);

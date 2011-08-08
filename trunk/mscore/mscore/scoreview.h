@@ -215,8 +215,8 @@ class ScoreView : public QWidget, public MuseScoreView {
       Page* point2page(const QPointF&);
       void setupFotoMode();
 
-      void insertMeasures(int, ElementType);
-      MeasureBase* insertMeasure(ElementType, int tick);
+      MeasureBase* insertMeasure(ElementType, MeasureBase*);
+      MeasureBase* checkSelectionStateForInsertMeasure();
 
       void appendMeasures(int, ElementType);
       MeasureBase* appendMeasure(ElementType);

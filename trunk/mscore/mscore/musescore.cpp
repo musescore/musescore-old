@@ -78,6 +78,7 @@
 #include "libmscore/system.h"
 #include "libmscore/measurebase.h"
 #include "libmscore/chordlist.h"
+#include "libmscore/volta.h"
 
 #ifdef OSC
 #include "ofqf/qoscserver.h"
@@ -3949,7 +3950,7 @@ static void collectMatch(void* data, Element* e)
 /*      if (p->type == e->type() && p->subtype != e->subtype())
             printf("%s subtype %d does not match\n", e->name(), e->subtype());
       */
-      if ((p->type != e->type()) || (p->subtype != e->subtype()))
+      if ((p->type != e->type()) || (p->subtypeValid && p->subtype != e->subtype()))
             return;
       if ((p->staff != -1) && (p->staff != e->staffIdx()))
             return;
@@ -3977,10 +3978,21 @@ static void collectMatch(void* data, Element* e)
 
 void MuseScore::selectSimilar(Element* e, bool sameStaff)
       {
-      Score* score = e->score();
+      ElementType type = e->type();
+      int subtype      = e->subtype();
+
       ElementPattern pattern;
-      pattern.type    = e->type();
-      pattern.subtype = e->subtype();
+      pattern.subtypeValid = true;
+      if (type == VOLTA_SEGMENT) {
+            // Volta* volta = static_cast<VoltaSegment*>(e)->volta();
+            // type    = volta->type();
+            // subtype = volta->subtype();
+            pattern.subtypeValid = false;
+            }
+
+      Score* score = e->score();
+      pattern.type    = type;
+      pattern.subtype = subtype;
       pattern.staff   = sameStaff ? e->staffIdx() : -1;
       pattern.voice   = -1;
       pattern.system  = 0;
@@ -3988,8 +4000,9 @@ void MuseScore::selectSimilar(Element* e, bool sameStaff)
       score->scanElements(&pattern, collectMatch);
 
       score->select(0, SELECT_SINGLE, 0);
-      foreach(Element* e, pattern.el)
+      foreach(Element* e, pattern.el) {
             score->select(e, SELECT_ADD, 0);
+            }
       }
 
 //---------------------------------------------------------
