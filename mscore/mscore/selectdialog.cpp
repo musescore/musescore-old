@@ -50,6 +50,7 @@ void SelectDialog::setPattern(ElementPattern* p)
       p->subtype = e->subtype();
       p->staff   = sameStaff->isChecked() ? e->staffIdx() : -1;
       p->voice   = sameVoice->isChecked() ? e->voice() : -1;
+      p->subtypeValid = true;
       p->system  = 0;
       if (sameSystem->isChecked()) {
             do {

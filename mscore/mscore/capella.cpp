@@ -1888,9 +1888,9 @@ printf("readCapVoice 2\n");
                               s->setHtml(ss);
                               MeasureBase* measure = score->measures()->first();
                               if (measure->type() != VBOX) {
-                                    measure = new VBox(score);
-                                    measure->setTick(0);
-                                    score->addMeasure(measure);
+                                    MeasureBase* mb = new VBox(score);
+                                    mb->setTick(0);
+                                    score->addMeasure(mb, measure);
                                     }
                               s->setSubtype(TEXT_TITLE);
                               measure->add(s);
@@ -2033,7 +2033,7 @@ printf("==================convert-capella\n");
                         s->setText(ss);
                         MeasureBase* measure = new VBox(score);
                         measure->setTick(0);
-                        score->addMeasure(measure);
+                        score->addMeasure(score->measures()->first(), measure);
                         measure->add(s);
                         }
                         break;
@@ -2049,9 +2049,10 @@ printf("==================convert-capella\n");
             if (mbl->size() && mbl->first()->type() == VBOX)
                   mb = static_cast<VBox*>(mbl->first());
             else {
-                  mb = new VBox(score);
-                  mb->setTick(0);
-                  score->addMeasure(mb);
+                  VBox* vb = new VBox(score);
+                  vb->setTick(0);
+                  score->addMeasure(vb, mb);
+                  mb = vb;
                   }
             mb->setBoxHeight(Spatium(cap->topDist));
             }

@@ -477,7 +477,10 @@ bool HBox::isMovable() const
 void VBox::layout()
       {
       setPos(QPointF());      // !?
-      setbbox(QRectF(0.0, 0.0, system()->width(), point(boxHeight())));
+      if (system())
+            setbbox(QRectF(0.0, 0.0, system()->width(), point(boxHeight())));
+      else
+            setbbox(QRectF(0.0, 0.0, 50, 50));
       Box::layout();
       }
 

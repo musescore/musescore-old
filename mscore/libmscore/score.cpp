@@ -429,10 +429,10 @@ Part* Score::part(int n)
 //   addMeasure
 //---------------------------------------------------------
 
-void Score::addMeasure(MeasureBase* m)
+void Score::addMeasure(MeasureBase* m, MeasureBase* pos)
       {
-      if (!m->next())
-            m->setNext(tick2measureBase(m->tick()));
+      // if (!m->next())
+      m->setNext(pos);
       _measures.add(m);
       addLayoutFlags(LAYOUT_FIX_TICKS);
       }

@@ -102,10 +102,10 @@ static void addText(Score* score, int subtype, const QString& s)
       {
       MeasureBase* measure = score->first();
       if (measure == 0 || measure->type() != VBOX) {
-            measure = new VBox(score);
-            measure->setNext(score->first());
-            measure->setTick(0);
-            score->undoInsertMeasure(measure);
+            MeasureBase* mb = new VBox(score);
+            mb->setNext(score->first());
+            mb->setTick(0);
+            score->undoInsertMeasure(mb, measure);
             }
       Text* text = new Text(score);
       switch(subtype) {

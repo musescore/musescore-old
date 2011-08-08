@@ -2689,14 +2689,15 @@ bool MuseScore::importGTP(Score* score, const QString& name)
       if (!score->measures()->first()) {
             m = new VBox(score);
             m->setTick(0);
-            score->addMeasure(m);
+            score->addMeasure(m, 0);
             }
       else  {
             m = score->measures()->first();
             if (m->type() != VBOX) {
-                  m = new VBox(score);
-                  m->setTick(0);
-                  score->addMeasure(m);
+                  MeasureBase* mb = new VBox(score);
+                  mb->setTick(0);
+                  score->addMeasure(mb, m);
+                  m = mb;
                   }
             }
       if (!gp->title.isEmpty()) {
@@ -2800,9 +2801,10 @@ bool MuseScore::importGTP(Score* score, const QString& name)
             //
             MeasureBase* measure = pscore->first();
             if (!measure || (measure->type() != VBOX)) {
-                  measure = new VBox(pscore);
-                  measure->setTick(0);
-                  pscore->addMeasure(measure);
+                  MeasureBase* mb = new VBox(pscore);
+                  mb->setTick(0);
+                  pscore->addMeasure(mb, measure);
+                  measure = mb;
                   }
             Text* txt = new Text(pscore);
             txt->setSubtype(TEXT_INSTRUMENT_EXCERPT);

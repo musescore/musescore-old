@@ -34,6 +34,7 @@ struct ElementPattern {
       int staff;
       int voice;
       const System* system;
+      bool subtypeValid;
       };
 
 //---------------------------------------------------------

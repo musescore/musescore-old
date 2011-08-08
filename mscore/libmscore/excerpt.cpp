@@ -120,9 +120,9 @@ Score* createExcerpt(const QList<Part*>& parts)
       //
       MeasureBase* measure = score->first();
       if (!measure || (measure->type() != VBOX)) {
-            measure = new VBox(score);
-            measure->setTick(0);
-            score->addMeasure(measure);
+            MeasureBase* nmeasure = new VBox(score);
+            nmeasure->setTick(0);
+            score->addMeasure(nmeasure, measure);
             }
       Text* txt = new Text(score);
       txt->setSubtype(TEXT_INSTRUMENT_EXCERPT);

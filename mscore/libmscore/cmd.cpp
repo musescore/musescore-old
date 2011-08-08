@@ -1187,10 +1187,10 @@ MeasureBase* Score::appendMeasure(ElementType type)
                   }
             }
       else if (type == TBOX) {
-            undoInsertMeasure(mb);
+            undoInsertMeasure(mb, 0);
             return mb;
             }
-      undoInsertMeasure(mb);
+      undoInsertMeasure(mb, 0);
       return mb;
       }
 

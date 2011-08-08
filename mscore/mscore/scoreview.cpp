@@ -1067,6 +1067,7 @@ void ScoreView::measurePopup(const QPoint& gpos, Measure* obj)
             return;
       QString cmd(a->data().toString());
       if (cmd == "cut" || cmd =="copy" || cmd == "paste" || cmd == "insert-measure"
+         || cmd == "select-similar"
          || cmd == "delete") {
             // these actions are already activated
             return;
@@ -4476,7 +4477,7 @@ void ScoreView::cmdChangeEnharmonic(bool up)
 
 void ScoreView::cloneElement(Element* e)
       {
-      if (!e->isMovable() && e->type() != SPACER)
+      if (!e->isMovable() && e->type() != SPACER && e->type() != VBOX)
             return;
       QDrag* drag = new QDrag(this);
       QMimeData* mimeData = new QMimeData;
@@ -5278,10 +5279,9 @@ void ScoreView::cmdAddText(int subtype)
                   {
                   MeasureBase* measure = ml.front();
                   if (measure->type() != VBOX) {
-                        measure = new VBox(_score);
-                        measure->setNext(ml.front());
-                        measure->setTick(0);
-                        _score->undoInsertMeasure(measure);
+                        MeasureBase* mb = new VBox(_score);
+                        mb->setTick(0);
+                        _score->undoInsertMeasure(mb, measure);
                         }
                   s = new Text(_score);
                   switch(subtype) {
@@ -5413,34 +5413,39 @@ void ScoreView::appendMeasures(int n, ElementType type)
       }
 
 //---------------------------------------------------------
+//   checkSelectionStateForInsertMeasure
+//---------------------------------------------------------
+
+MeasureBase* ScoreView::checkSelectionStateForInsertMeasure()
+      {
+	if (_score->selection().state() == SEL_RANGE) {
+	      MeasureBase* mb = _score->selection().startSegment()->measure();
+            return mb;
+            }
+      Element* e = _score->selection().element();
+      if (e) {
+            if (e->type() == VBOX)
+                  return static_cast<MeasureBase*>(e);
+            }
+	QMessageBox::warning(0, "MuseScore",
+         tr("No Measure selected:\n" "please select a measure and try again"));
+      return 0;
+      }
+
+//---------------------------------------------------------
 //   cmdInsertMeasures
-//    - keyboard callback
-//    - called from pulldown menu
 //---------------------------------------------------------
 
 void ScoreView::cmdInsertMeasures(int n, ElementType type)
       {
+      MeasureBase* mb = checkSelectionStateForInsertMeasure();
+      if (!mb)
+            return;
       _score->startCmd();
-      insertMeasures(n, type);
-      _score->endCmd();
-      }
-
-//---------------------------------------------------------
-//   insertMeasures
-//---------------------------------------------------------
-
-void ScoreView::insertMeasures(int n, ElementType type)
-      {
-	if (_score->selection().state() != SEL_RANGE) {
-		QMessageBox::warning(0, "MuseScore",
-			tr("No Measure selected:\n"
-			"please select a measure and try again"));
-		return;
-            }
-	int tick  = _score->selection().startSegment()->measure()->tick();
 	for (int i = 0; i < n; ++i)
-            insertMeasure(type, tick);
+            mb = insertMeasure(type, mb);
       _score->select(0, SELECT_SINGLE, 0);
+      _score->endCmd();
       }
 
 //---------------------------------------------------------
@@ -5449,15 +5454,11 @@ void ScoreView::insertMeasures(int n, ElementType type)
 
 void ScoreView::cmdInsertMeasure(ElementType type)
       {
-	if (_score->selection().state() != SEL_RANGE) {
-		QMessageBox::warning(0, "MuseScore",
-			tr("No Measure selected:\n"
-			"please select a measure and try again"));
-		return;
-            }
+      MeasureBase* mb = checkSelectionStateForInsertMeasure();
+      if (!mb)
+            return;
       _score->startCmd();
-	int tick  = _score->selection().startSegment()->tick();
-      MeasureBase* mb = insertMeasure(type, tick);
+      mb = insertMeasure(type, mb);
       if (mb->type() == TBOX) {
             TBox* tbox = static_cast<TBox*>(mb);
             Text* s = tbox->getText();
@@ -5474,24 +5475,25 @@ void ScoreView::cmdInsertMeasure(ElementType type)
 //   insertMeasure
 //---------------------------------------------------------
 
-MeasureBase* ScoreView::insertMeasure(ElementType type, int tick)
+MeasureBase* ScoreView::insertMeasure(ElementType type, MeasureBase* measure)
       {
+      int tick = measure->tick();
       MeasureBase* mb = static_cast<MeasureBase*>(Element::create(type, _score));
       mb->setTick(tick);
 
       if (type == MEASURE) {
-            Measure* m = _score->tick2measure(tick);
-            Fraction f(m->timesig());
+            Measure* m = static_cast<Measure*>(mb);
+            // Fraction f(m->timesig());  TODO
+            Fraction f(4,4);
 	      int ticks = f.ticks();
 
-            Measure* measure = static_cast<Measure*>(mb);
-            measure->setTimesig(f);
-            measure->setLen(f);
+            m->setTimesig(f);
+            m->setLen(f);
 	      for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx) {
     	            Rest* rest = new Rest(_score, Duration(Duration::V_MEASURE));
-                  rest->setDuration(measure->len());
+                  rest->setDuration(m->len());
               	rest->setTrack(staffIdx * VOICES);
-                    Segment* s = measure->getSegment(SegChordRest, tick);
+                    Segment* s = m->getSegment(SegChordRest, tick);
               	s->add(rest);
 	            }
             QList<TimeSig*> tsl;
@@ -5534,7 +5536,7 @@ MeasureBase* ScoreView::insertMeasure(ElementType type, int tick)
                               }
                         }
                   }
-            _score->undoInsertMeasure(measure);
+            _score->undoInsertMeasure(m, measure);
             _score->undoInsertTime(tick, ticks);
 
             //
@@ -5544,9 +5546,9 @@ MeasureBase* ScoreView::insertMeasure(ElementType type, int tick)
             foreach(TimeSig* ts, tsl) {
                   TimeSig* nts = new TimeSig(*ts);
                   SegmentType st = SegTimeSig;
-                  Segment* s = measure->findSegment(st, 0);
+                  Segment* s = m->findSegment(st, 0);
                   if (s == 0) {
-                        s = new Segment(measure, st, 0);
+                        s = new Segment(m, st, 0);
                         _score->undoAddElement(s);
                         }
                   nts->setParent(s);
@@ -5555,9 +5557,9 @@ MeasureBase* ScoreView::insertMeasure(ElementType type, int tick)
             foreach(KeySig* ks, ksl) {
                   KeySig* nks = new KeySig(*ks);
                   SegmentType st = SegKeySig;
-                  Segment* s = measure->findSegment(st, 0);
+                  Segment* s = m->findSegment(st, 0);
                   if (s == 0) {
-                        s = new Segment(measure, st, 0);
+                        s = new Segment(m, st, 0);
                         _score->undoAddElement(s);
                         }
                   nks->setParent(s);
@@ -5565,13 +5567,10 @@ MeasureBase* ScoreView::insertMeasure(ElementType type, int tick)
                   }
             }
       else {
-printf("insert measure\n");
-            _score->undoInsertMeasure(mb);
+            _score->undoInsertMeasure(mb, measure);
             }
       return mb;
       }
-
-
 
 //---------------------------------------------------------
 //   cmdRepeatSelection

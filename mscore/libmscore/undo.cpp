@@ -760,9 +760,9 @@ void Score::undoInsertPart(Part* part, int idx)
 //   undoInsertMeasure
 //---------------------------------------------------------
 
-void Score::undoInsertMeasure(MeasureBase* m)
+void Score::undoInsertMeasure(MeasureBase* m, MeasureBase* pos)
       {
-      undo()->push(new InsertMeasure(m));
+      undo()->push(new InsertMeasure(m, pos));
       }
 
 //---------------------------------------------------------
@@ -1481,11 +1481,6 @@ void RemoveMStaff::redo()
 //   InsertMeasure
 //---------------------------------------------------------
 
-InsertMeasure::InsertMeasure(MeasureBase* m)
-      {
-      measure = m;
-      }
-
 void InsertMeasure::undo()
       {
       measure->score()->remove(measure);
@@ -1494,7 +1489,7 @@ void InsertMeasure::undo()
 
 void InsertMeasure::redo()
       {
-      measure->score()->addMeasure(measure);
+      measure->score()->addMeasure(measure, pos);
       measure->score()->addLayoutFlags(LAYOUT_FIX_TICKS);
       }
 
