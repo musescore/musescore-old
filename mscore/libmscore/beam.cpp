@@ -1117,7 +1117,6 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   qreal x2 = npos.x();
                   qreal y1 = npos.y();
                   qreal y  = chordUp ? 1000000.0 : -1000000;
-
                   //  extend stem to farest beam segment
                   qreal x = x2 - parent()->pagePos().x();
                   foreach(QLineF* l, beamSegments) {

@@ -50,7 +50,6 @@ class Stem : public Element {
       virtual void read(QDomElement e);
       virtual void toDefault();
       Spatium userLen() const         { return _userLen; }
-//      virtual void setVisible(bool f);
       virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
       Chord* chord() const            { return (Chord*)parent(); }
