@@ -2406,6 +2406,7 @@ void Score::cmdMoveRest(Rest* rest, Direction dir)
       else if (dir == DOWN)
             pos.ry() += spatium();
       undoChangeUserOffset(rest, pos);
+      setLayoutAll(false);
       }
 
 //---------------------------------------------------------

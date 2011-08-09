@@ -1431,14 +1431,15 @@ void Chord::layout()
                   rr = lhw;
             if (rr > rrr)
                   rrr = rr;
-            qreal xx = note->pos().x() + headWidth;
+            qreal xx = note->pos().x() + headWidth + pos().x();
             if (xx > dotPosX())
                   setDotPosX(xx);
             }
       if (dots()) {
             if (dotPosX() > rrr)
                   rrr = dotPosX();
-            rrr += point(score()->styleS(ST_dotNoteDistance)) + dots() * point(score()->styleS(ST_dotDotDistance));
+            // rrr += point(score()->styleS(ST_dotNoteDistance)) + dots() * point(score()->styleS(ST_dotDotDistance));
+            rrr += point(score()->styleS(ST_dotNoteDistance)) + (dots()-1) * point(score()->styleS(ST_dotDotDistance));
             }
 
       rrr += _extraTrailingSpace.val() * _spatium;
