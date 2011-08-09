@@ -1265,7 +1265,10 @@ void Beam::editDrag(const EditData& ed)
       f->p2[idx] += d;
       _userModified[idx] = true;
       setGenerated(false);
-      score()->setLayoutAll(true);
+layout1();
+layout();
+      score()->setUpdateAll(true);
+//      score()->setLayoutAll(true);
       }
 
 //---------------------------------------------------------
