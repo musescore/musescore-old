@@ -696,7 +696,7 @@ void Score::doLayout()
                         if (cr->beam() && cr->beam()->elements().front() == cr)
                               cr->beam()->layout();
 
-                        cr->layoutArticulations();    // DEBUG
+                        // cr->layoutArticulations();    // DEBUG
                         if (cr->type() == CHORD) {
                               Chord* c = static_cast<Chord*>(cr);
                               if (!c->beam())
@@ -708,6 +708,7 @@ void Score::doLayout()
                                           tie->layout();
                                     }
                               }
+                        cr->layoutArticulations();    // DEBUG
                         }
                   else if (e && e->type() == BAR_LINE)
                         e->layout();

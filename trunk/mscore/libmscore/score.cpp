@@ -1181,7 +1181,7 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
       //
       //    search segment
       //
-      QPointF pppp(p - pos->measure->pagePos());
+      QPointF pppp(p - pos->measure->canvasPos());
       qreal x         = pppp.x();
       Segment* segment = 0;
       pos->segment     = 0;
@@ -1197,16 +1197,13 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
 
             qreal x1 = segment->x();
             qreal x2;
-//            int ntick;
             qreal d;
             if (ns) {
                   x2    = ns->x();
-//                  ntick = ns->tick();
                   d     = x2 - x1;
                   }
             else {
                   x2    = pos->measure->bbox().width();
-//                  ntick = pos->measure->tick() + pos->measure->ticks();
                   d     = (x2 - x1) * 2.0;
                   x     = x1;
                   pos->segment = segment;
@@ -1249,8 +1246,8 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
                   return false;
             }
 
-      y         = pos->measure->pagePos().y() + sstaff->y() + pos->line * lineDist;
-      pos->pos  = QPointF(x + pos->measure->pagePos().x(), y);
+      y         = sstaff->y() + pos->line * lineDist;
+      pos->pos  = QPointF(x, y) + pos->measure->canvasPos();
       return true;
       }
 

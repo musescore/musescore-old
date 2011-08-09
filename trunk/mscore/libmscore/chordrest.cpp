@@ -38,6 +38,7 @@
 #include "segment.h"
 #include "stafftype.h"
 #include "undo.h"
+#include "stem.h"
 
 //---------------------------------------------------------
 //   DurationElement
@@ -452,6 +453,26 @@ void ChordRest::layoutArticulations()
 
       // avoid collisions of staff articulations with chord notes:
       // gap between note and staff articulation is distance0 + 0.5 spatium
+
+      if (type() == CHORD) {
+            Chord* chord = static_cast<Chord*>(this);
+            Stem* stem   = chord->stem();
+            if (stem) {
+                  qreal y = stem->pos().y() + pos().y();
+                  if (up() && stem->stemLen() < 0.0)
+                        y += stem->stemLen();
+                  else if (!up() && stem->stemLen() > 0.0)
+                        y -= stem->stemLen();
+                  if (beam()) {
+                        qreal bw = score()->styleS(ST_beamWidth).val() * _spatium;
+                        y += up() ? -bw : bw;
+                        }
+                  if (up())
+                        staffTopY = qMin(staffTopY, y - 0.5 * _spatium);
+                  else
+                        staffBotY = qMax(staffBotY, y + 0.5 * _spatium);
+                  }
+            }
 
       staffTopY = qMin(staffTopY, chordTopY - distance0 - 0.5 * _spatium);
       staffBotY = qMax(staffBotY, chordBotY + distance0 + 0.5 * _spatium);
