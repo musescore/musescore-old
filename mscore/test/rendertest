@@ -155,7 +155,7 @@ function genFiles() {
       if [[ -f mops.png ]]; then
             rm mops.png
             fi
-      mscore -S xmltest.mss -r 100 $1.xml -o mops.png
+      mscore -d -S xmltest.mss -r 100 $1.xml -o mops.png
       convert -trim mops-1.png $TESTDIR/mscore/$1.png
       genHtml $1
       }
