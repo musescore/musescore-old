@@ -1989,7 +1989,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
             attr.doAttr(xml, false);
             QString noteTag = QString("note");
 
-            if (pf && (!converterMode || score->defaultsRead()) ) {
+            if (pf && (!debugMode || score->defaultsRead()) ) {
                   double measureX = getTenthsFromDots(chord->measure()->canvasPos().x());
                   double measureY = pageHeight - getTenthsFromDots(chord->measure()->canvasPos().y());
                   double noteX = getTenthsFromDots(note->canvasPos().x());
@@ -2088,14 +2088,15 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
             bool editorial = false;
             int acc        = note->accidentalType();
             if (acc != ACC_NONE) {
-                  if (6 <= acc && acc <= 10) {
+                  printf("ACCIDENTAL %d\n", acc);
+                  /*if (6 <= acc && acc <= 10) {
                         acc -= 5;
                         editorial = true;
                         }
                   else if (11 <= acc && acc <= 15) {
                         acc -= 10;
                         editorial = true;
-                        }
+                        }*/
                   if (note->accidental()->hasBracket()) {
                         editorial = true;
                         }
@@ -2112,18 +2113,20 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                         case ACC_SHARP2:  s = "double-sharp"; break;
                         case ACC_FLAT2:   s = "flat-flat";    break;
                         case ACC_NATURAL: s = "natural";      break;
-                        case 16: s = "quarter-flat";          break; //flat-slash (alternative)
-                        case 19: s = "quarter-flat";          break; //mirrored-flat (recommended by Michael)
-                        case 29: s = "quarter-flat";          break; //flat arrow up (alternative)
-                        case 33: s = "quarter-flat";          break; //natural arrow down (alternative)
-                        case 22: s = "quarter-sharp";         break; //sharp-slash (recommended by Michael)
-                        case 27: s = "quarter-sharp";         break; //sharp arrow down (alternative)
-                        case 32: s = "quarter-sharp";         break; //natural arrow up (alternative)
-                        case 18: s = "three-quarters-flat";   break; //mirrored-flat1 (recommended by Michael)
-                        case 21: s = "three-quarters-flat";   break; //flat-flat-slash (alternative)
-                        case 30: s = "three-quarters-flat";   break; //flat arrow down (alternative)
-                        case 25: s = "three-quarters-sharp";  break; //sharp-slash4 (recommended by Michael)
-                        case 26: s = "three-quarters-sharp";  break; //sharp arrow up (alternate)
+                        case ACC_FLAT_SLASH:          s = "quarter-flat";          break; //flat-slash (alternative)
+                        case ACC_MIRRORED_FLAT:       s = "quarter-flat";          break; //mirrored-flat (recommended by Michael)
+                        case ACC_FLAT_ARROW_UP:       s = "quarter-flat";          break; //flat arrow up (alternative)
+                        case ACC_NATURAL_ARROW_DOWN:  s = "quarter-flat";          break; //natural arrow down (alternative)
+                        case ACC_SHARP_SLASH:         s = "quarter-sharp";         break; //sharp-slash (recommended by Michael)
+                        case ACC_SHARP_ARROW_DOWN:    s = "quarter-sharp";         break; //sharp arrow down (alternative)
+                        case ACC_NATURAL_ARROW_UP:    s = "quarter-sharp";         break; //natural arrow up (alternative)
+                        case ACC_MIRRORED_FLAT2:      s = "three-quarters-flat";   break; //mirrored-flat1 (recommended by Michael)
+                        case ACC_FLAT_FLAT_SLASH:     s = "three-quarters-flat";   break; //flat-flat-slash (alternative)
+                        case ACC_FLAT_ARROW_DOWN:     s = "three-quarters-flat";   break; //flat arrow down (alternative)
+                        case ACC_SHARP_SLASH4:        s = "three-quarters-sharp";  break; //sharp-slash4 (recommended by Michael)
+                        case ACC_SHARP_ARROW_UP:      s = "three-quarters-sharp";  break; //sharp arrow up (alternate)
+                        case ACC_SORI:    s = "sori";  break; //sori
+                        case ACC_KORON:   s = "koron";  break; //koron
                         default:
                               printf("unknown accidental %d\n", acc);
                         }
@@ -3267,10 +3270,10 @@ foreach(Element* el, *(score->gel())) {
       xml.etag();
 
       // to keep most regression testfiles simple, write defaults and credits
-      // in convertermode only when already present in the input file
-      if (!converterMode || score->defaultsRead())
+      // in debugMode only when already present in the input file
+      if (!debugMode || score->defaultsRead())
             defaults(xml, score, millimeters, tenths);
-      if (!converterMode || score->creditsRead())
+      if (!debugMode || score->creditsRead())
             credits(xml);
 
       xml.stag("part-list");
@@ -3414,7 +3417,7 @@ foreach(Element* el, *(score->gel())) {
                         measureTag += QString("\"X%1\" implicit=\"yes\"").arg(irregularMeasureNo++);
                   else
                         measureTag += QString("\"%1\"").arg(measureNo++);
-                  if (!converterMode || score->defaultsRead())
+                  if (!debugMode || score->defaultsRead())
                         measureTag += QString(" width=\"%1\"").arg(QString::number(m->bbox().width() / DPMM / millimeters * tenths,'f',2));
                   xml.stag(measureTag);
 
@@ -3437,7 +3440,7 @@ foreach(Element* el, *(score->gel())) {
                         currentSystem = NewSystem;
 
                   if (currentSystem != NoSystem) {
-                      if (!converterMode || score->defaultsRead()) {
+                      if (!debugMode || score->defaultsRead()) {
                           const double pageWidth  = getTenthsFromInches(pf->width());
                           const double lm = getTenthsFromInches(pf->oddLeftMargin);
                           const double rm = getTenthsFromInches(pf->oddRightMargin);
@@ -3479,14 +3482,14 @@ foreach(Element* el, *(score->gel())) {
                               }
 
                           xml.etag();
-                          } // if (!converterMode ...
+                          } // if (!debugMode ...
 
                       else {
                           if (currentSystem == NewSystem)
                               xml.tagE("print new-system=\"yes\"");
                           else if (currentSystem == NewPage)
                               xml.tagE("print new-page=\"yes\"");
-                          } // if (!converterMode ...
+                          } // if (!debugMode ...
                       } // if (currentSystem ...
 
                   attr.start();
