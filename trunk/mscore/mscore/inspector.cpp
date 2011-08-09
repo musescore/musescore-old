@@ -137,8 +137,8 @@ void InspectorElement::setElement(Element* e)
       {
       qreal _spatium = e->score()->spatium();
       ie.elementName->setText(e->name());
-      ie.x->setValue(e->userOff().x() / _spatium);
-      ie.y->setValue(e->userOff().y() / _spatium);
+      ie.x->setValue(e->pos().x() / _spatium);
+      ie.y->setValue(e->pos().y() / _spatium);
       }
 
 //---------------------------------------------------------
@@ -151,9 +151,9 @@ void InspectorElement::apply()
       Score* score    = e->score();
       qreal _spatium  = score->spatium();
       QPointF o(ie.x->value() * _spatium, ie.y->value() * _spatium);
-      if (o != e->userOff()) {
+      if (o != e->pos()) {
             score->startCmd();
-            score->undo()->push(new ChangeUserOffset(e, o));
+            score->undo()->push(new ChangeUserOffset(e, o - e->ipos()));
             score->setLayoutAll(true);
             score->endCmd();
             mscore->endCmd();
@@ -326,8 +326,8 @@ void InspectorArticulation::setElement(Element* e)
       ar.direction->blockSignals(true);
       ar.anchor->blockSignals(true);
 
-      ar.x->setValue(a->userOff().x() / _spatium);
-      ar.y->setValue(a->userOff().y() / _spatium);
+      ar.x->setValue(a->pos().x() / _spatium);
+      ar.y->setValue(a->pos().y() / _spatium);
       ar.direction->setCurrentIndex(int(a->direction()));
       ar.anchor->setCurrentIndex(int(a->anchor()));
 
@@ -349,8 +349,8 @@ void InspectorArticulation::apply()
 
       QPointF o(ar.x->value() * _spatium, ar.y->value() * _spatium);
       score->startCmd();
-      if (o != a->userOff())
-            score->undo()->push(new ChangeUserOffset(a, o));
+      if (o != a->pos())
+            score->undo()->push(new ChangeUserOffset(a, o - a->ipos()));
       Direction d = Direction(ar.direction->currentIndex());
       ArticulationAnchor anchor = ArticulationAnchor(ar.anchor->currentIndex());
       if (d != a->direction() || anchor != a->anchor())

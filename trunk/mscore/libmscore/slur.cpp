@@ -100,9 +100,6 @@ void SlurSegment::updateGrips(int* n, QRectF* r) const
 
 bool SlurSegment::edit(MuseScoreView* viewer, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&)
       {
-      if (slurTie()->type() != SLUR)
-            return false;
-
       Slur* sl = static_cast<Slur*>(slurTie());
 
       if (key == Qt::Key_X) {
@@ -110,6 +107,9 @@ bool SlurSegment::edit(MuseScoreView* viewer, int curGrip, int key, Qt::Keyboard
             sl->layout();
             return true;
             }
+      if (slurTie()->type() != SLUR)
+            return false;
+
       if (!((modifiers & Qt::ShiftModifier)
          && ((spannerSegmentType() == SEGMENT_SINGLE)
               || (spannerSegmentType() == SEGMENT_BEGIN && curGrip == 0)

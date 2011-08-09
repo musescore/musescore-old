@@ -1340,7 +1340,6 @@ void ScoreView::startEdit()
             }
       curGrip = -1;
       updateGrips();
-//      _score->setLayoutAll(true);
       score()->end();
       }
 
@@ -1381,7 +1380,7 @@ void ScoreView::moveCursor(Segment* segment, int track)
       double y        = system->staffY(idx) + system->page()->pos().y();
       double _spatium = _cursor->spatium();
 
-      update(_matrix.mapRect(_cursor->abbox()).toRect().adjusted(-1,-1,1,1));
+      update(_matrix.mapRect(_cursor->canvasBoundingRect()).toRect().adjusted(-1,-1,1,1));
 
       double h;
       double w;
@@ -1436,7 +1435,7 @@ void ScoreView::setCursorOn(bool val)
             _cursor->setVisible(val);
             cursorSegment = 0;
             cursorTrack   = -1;
-            update(_matrix.mapRect(_cursor->abbox()).toRect().adjusted(-2,-2,2,2));
+            update(_matrix.mapRect(_cursor->canvasBoundingRect()).toRect().adjusted(-2,-2,2,2));
             }
       }
 
@@ -3252,7 +3251,10 @@ void ScoreView::endEdit()
       if (!editObject)
 	      return;
 
-      _score->addRefresh(editObject->bbox());
+      _score->addRefresh(editObject->canvasBoundingRect());
+      for (int i = 0; i < grips; ++i)
+            score()->addRefresh(grip[i]);
+
       editObject->endEdit();
       if (editObject->isText()) {
             if (textPalette) {
@@ -3261,7 +3263,7 @@ void ScoreView::endEdit()
                   }
             mscore->textTools()->hide();
             }
-      _score->addRefresh(editObject->bbox());
+      _score->addRefresh(editObject->canvasBoundingRect());
 
       if (editObject->isText()) {
             Text* t = static_cast<Text*>(editObject);
@@ -3275,7 +3277,6 @@ void ScoreView::endEdit()
             lyricsEndEdit();
       else if (tp == HARMONY)
             harmonyEndEdit();
-//      _score->setLayoutAll(true);
       _score->endCmd();
       mscore->endCmd();
       if (dragElement && (dragElement != editObject)) {
@@ -3694,7 +3695,7 @@ void ScoreView::doDragEdit(QMouseEvent* ev)
 
 bool ScoreView::editElementDragTransition(QMouseEvent* ev)
       {
-      startMove = imatrix.map(QPointF(ev->pos()));
+      startMove = toLogical(ev->pos());
       Element* e = elementNear(startMove);
       if (e && (e == editObject) && (editObject->isText())) {
             if (editObject->mousePress(startMove, ev)) {
@@ -3704,16 +3705,16 @@ bool ScoreView::editElementDragTransition(QMouseEvent* ev)
             return true;
             }
       int i;
+      qreal a = grip[0].width() * 1.0;
       for (i = 0; i < grips; ++i) {
-            if (grip[i].contains(startMove)) {
+            if (grip[i].adjusted(-a, -a, a, a).contains(startMove)) {
                   curGrip = i;
                   updateGrips();
                   score()->end();
                   break;
                   }
             }
-      QPointF delta = toLogical(ev->pos()) - startMove;
-      return (i != grips) && (sqrt(pow(delta.x(),2)+pow(delta.y(),2)) * _matrix.m11() <= 2.0);
+      return i != grips;
       }
 
 //---------------------------------------------------------
