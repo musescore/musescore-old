@@ -193,43 +193,6 @@ Measure* MeasureBase::prevMeasure() const
       }
 
 //---------------------------------------------------------
-//   spatiumChanged
-//---------------------------------------------------------
-
-void MeasureBase::spatiumChanged(qreal oldValue, qreal newValue)
-      {
-      foreach(Element* e, _el)
-            e->spatiumChanged(oldValue, newValue);
-      if (type() == MEASURE) {
-            Measure* m = static_cast<Measure*>(this);
-            if (m->noText())
-                  m->noText()->spatiumChanged(oldValue, newValue);
-            for (Segment* s = m->first(); s; s = s->next()) {
-                  for (int staffIdx = 0; staffIdx < score()->nstaves(); ++staffIdx) {
-                        const QList<Lyrics*>* ll = s->lyricsList(staffIdx);
-                        if (ll) {
-                              foreach(Lyrics* l, *ll) {
-                                    if (l)
-                                          l->spatiumChanged(oldValue, newValue);
-                                    }
-                              }
-                        }
-                  for (int track = 0; track < score()->nstaves()*VOICES; ++track) {
-                        Element* e = s->element(track);
-                        if ((e == 0) || (e->type() != CHORD))
-                              continue;
-                        Chord* ch = static_cast<Chord*>(e);
-                        foreach(Note* n, ch->notes()) {
-                              ElementList* el = n->el();
-                              foreach(Element* e, *el)
-                                    e->spatiumChanged(oldValue, newValue);
-                              }
-                        }
-                  }
-            }
-      }
-
-//---------------------------------------------------------
 //   pause
 //---------------------------------------------------------
 

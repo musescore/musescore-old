@@ -23,7 +23,7 @@
 Spacer::Spacer(Score* score)
    : Element(score)
       {
-      _gap = Spatium(0);
+      _gap = 0.0;
       }
 
 Spacer::Spacer(const Spacer& s)
@@ -53,17 +53,17 @@ void Spacer::draw(Painter* painter) const
       }
 
 //---------------------------------------------------------
-//   layout
+//   layout0
 //---------------------------------------------------------
 
-void Spacer::layout()
+void Spacer::layout0()
       {
       qreal _spatium = spatium();
 
-      path     = QPainterPath();
+      path    = QPainterPath();
       qreal w = _spatium;
       qreal b = w * .5;
-      qreal h = _gap.val() * _spatium;
+      qreal h = _gap;
 
       if (subtype() == SPACER_DOWN) {
             path.lineTo(w, 0.0);
@@ -90,21 +90,33 @@ void Spacer::layout()
       }
 
 //---------------------------------------------------------
-//   acceptDrop
+//   setGap
 //---------------------------------------------------------
 
-bool Spacer::acceptDrop(MuseScoreView*, const QPointF&, int, int) const
+void Spacer::setGap(qreal sp)
       {
-      return false;
+      _gap = sp;
+      layout0();
       }
 
 //---------------------------------------------------------
-//   drop
+//   spatiumChanged
 //---------------------------------------------------------
 
-Element* Spacer::drop(const DropData& data)
+void Spacer::spatiumChanged(qreal ov, qreal nv)
       {
-      return data.element;
+      _gap = (_gap / ov) * nv;
+      layout0();
+      }
+
+//---------------------------------------------------------
+//   setSubtype
+//---------------------------------------------------------
+
+void Spacer::setSubtype(int val)
+      {
+      Element::setSubtype(val);
+      layout0();
       }
 
 //---------------------------------------------------------
@@ -113,14 +125,14 @@ Element* Spacer::drop(const DropData& data)
 
 void Spacer::editDrag(const EditData& ed)
       {
-      Spatium s(ed.delta.y() / spatium());
+      qreal s = ed.delta.y();
       if (subtype() == SPACER_DOWN)
             _gap += s;
       else if (subtype() == SPACER_UP)
             _gap -= s;
-      if (_gap.val() < 2.0)
-            _gap = Spatium(2.0);
-      layout();
+      if (_gap < spatium() * 2.0)
+            _gap = spatium() * 2;
+      layout0();
       score()->setLayoutAll(true);
       }
 
@@ -130,11 +142,11 @@ void Spacer::editDrag(const EditData& ed)
 
 void Spacer::updateGrips(int* grips, QRectF* grip) const
       {
-      *grips   = 1;
+      *grips         = 1;
       qreal _spatium = spatium();
       QPointF p;
       if (subtype() == SPACER_DOWN)
-            p = QPointF(_spatium * .5, _gap.val() * _spatium);
+            p = QPointF(_spatium * .5, _gap);
       else if (subtype() == SPACER_UP)
             p = QPointF(_spatium * .5, 0.0);
       grip[0].translate(pagePos() + p);
@@ -148,7 +160,7 @@ void Spacer::write(Xml& xml) const
       {
       xml.stag(name());
       Element::writeProperties(xml);
-      xml.tag("space", _gap.val());
+      xml.tag("space", _gap / spatium());
       xml.etag();
       }
 
@@ -162,8 +174,9 @@ void Spacer::read(QDomElement e)
             QString tag(e.tagName());
             QString val(e.text());
             if (tag == "space")
-                  _gap = Spatium(val.toDouble());
+                  _gap = val.toDouble() * spatium();
             else if (!Element::readProperties(e))
                   domError(e);
             }
+      layout0();
       }

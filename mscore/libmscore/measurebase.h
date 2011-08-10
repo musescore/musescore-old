@@ -103,19 +103,17 @@ class MeasureBase : public Element {
 
       virtual void moveTicks(int diff)       { setTick(tick() + diff); }
 
-      virtual qreal distanceUp(int) const        { return 0.0; }
-      virtual qreal distanceDown(int) const      { return 0.0; }
-      virtual Spatium userDistanceUp(int) const   { return Spatium(0.0); }
-      virtual Spatium userDistanceDown(int) const { return Spatium(0.0); }
+      virtual qreal distanceUp(int) const       { return 0.0; }
+      virtual qreal distanceDown(int) const     { return 0.0; }
+      virtual qreal userDistanceUp(int) const   { return .0;  }
+      virtual qreal userDistanceDown(int) const { return .0;  }
 
       virtual void add(Element*);
       virtual void remove(Element*);
-      void setDirty(bool val = true)              { _dirty = val; }
-      bool dirty() const                          { return _dirty; }
-      virtual void spatiumChanged(qreal oldValue, qreal newValue);
-
-      int tick() const                       { return _tick;         }
-      void setTick(int t)                    { _tick = t;            }
+      void setDirty(bool val = true)         { _dirty = val;  }
+      bool dirty() const                     { return _dirty; }
+      int tick() const                       { return _tick;  }
+      void setTick(int t)                    { _tick = t;     }
 
       qreal pause() const;
       };

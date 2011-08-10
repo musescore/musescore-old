@@ -949,11 +949,11 @@ bool Score::layoutPage(Page* page)
                         if (ps->staves()->isEmpty())
                               b1 = 0.0;
                         else
-                              b1 = ps->distanceDown(ps->staves()->size() - 1).val() * _spatium;
+                              b1 = ps->distanceDown(ps->staves()->size() - 1);
                         qreal b2  = 0.0;
                         foreach(System* s, sl) {
-                              if (s->distanceUp(0).val() * _spatium > b2)
-                                    b2 = s->distanceUp(0).val() * _spatium;
+                              if (s->distanceUp(0) > b2)
+                                    b2 = s->distanceUp(0);
                               }
                         if (b2 > b1)
                               moveY = b2 - b1;
@@ -1532,7 +1532,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                         mb->setHeight(system->height());
                   }
             xx += w;
-            qreal hh = system->height() + point(system->staves()->back()->distanceDown());
+            qreal hh = system->height() + system->staves()->back()->distanceDown();
             if (hh > *h)
                   *h = hh;
             }

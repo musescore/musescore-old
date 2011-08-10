@@ -44,8 +44,8 @@ class SpannerSegment;
 
 class SysStaff {
       QRectF _bbox;           ///< Bbox of StaffLines.
-      Spatium _distanceUp;    ///< distance to previous staff
-      Spatium _distanceDown;  ///< distance to next staff
+      qreal _distanceUp;      ///< distance to previous staff
+      qreal _distanceDown;    ///< distance to next staff
       bool _show;             ///< derived from Staff or false if empty
                               ///< staff is hidden
    public:
@@ -53,20 +53,20 @@ class SysStaff {
       QList<Bracket*> brackets;
       QList<InstrumentName*> instrumentNames;
 
-      const QRectF& bbox() const     { return _bbox; }
-      QRectF& rbb()                  { return _bbox; }
+      const QRectF& bbox() const    { return _bbox; }
+      QRectF& rbb()                 { return _bbox; }
       qreal y() const               { return _bbox.y(); }
       qreal right() const           { return _bbox.right(); }
-      void setbbox(const QRectF& r)  { _bbox = r; }
+      void setbbox(const QRectF& r) { _bbox = r; }
       void move(qreal x, qreal y);
 
-      Spatium distanceUp() const      { return _distanceUp;   }
-      void setDistanceUp(Spatium v)   { _distanceUp = v;      }
-      Spatium distanceDown() const    { return _distanceDown; }
-      void setDistanceDown(Spatium v) { _distanceDown = v;    }
+      qreal distanceUp() const      { return _distanceUp;   }
+      void setDistanceUp(qreal v)   { _distanceUp = v;      }
+      qreal distanceDown() const    { return _distanceDown; }
+      void setDistanceDown(qreal v) { _distanceDown = v;    }
 
-      bool show() const               { return _show; }
-      void setShow(bool v)            { _show = v; }
+      bool show() const             { return _show; }
+      void setShow(bool v)          { _show = v; }
 
       SysStaff();
       ~SysStaff();
@@ -93,8 +93,8 @@ class System : public Element {
 
       QList<SpannerSegment*> _spannerSegments;
 
-      void setDistanceUp(int n, Spatium v)   { _staves[n]->setDistanceUp(v); }
-      void setDistanceDown(int n, Spatium v) { _staves[n]->setDistanceDown(v); }
+      void setDistanceUp(int n, qreal v)   { _staves[n]->setDistanceUp(v); }
+      void setDistanceDown(int n, qreal v) { _staves[n]->setDistanceDown(v); }
 
    public:
       System(Score*);
@@ -113,7 +113,7 @@ class System : public Element {
       Page* page() const                 { return (Page*)parent(); }
 
       virtual void layout(qreal xoffset);
-      void layout2();         ///< Called after Measure layout.
+      void layout2();                     ///< Called after Measure layout.
       void clear();                       ///< Clear measure list.
 
       QList<MeasureBase*>& measures()        { return ml; }
@@ -124,8 +124,8 @@ class System : public Element {
       qreal staffY(int staffIdx) const;
       SysStaff* staff(int staffIdx) const    { return _staves[staffIdx]; }
 
-      Spatium distanceUp(int idx) const      { return _staves[idx]->distanceUp(); }
-      Spatium distanceDown(int idx) const    { return _staves[idx]->distanceDown(); }
+      qreal distanceUp(int idx) const        { return _staves[idx]->distanceUp(); }
+      qreal distanceDown(int idx) const      { return _staves[idx]->distanceDown(); }
       bool pageBreak() const                 { return _pageBreak; }
       void setPageBreak(bool val)            { _pageBreak = val; }
 

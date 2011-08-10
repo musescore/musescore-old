@@ -26,8 +26,12 @@ enum { SPACER_UP, SPACER_DOWN };
 //---------------------------------------------------------
 
 class Spacer : public Element {
-      PROPERTY(Spatium, gap, Gap)
+//      PROPERTY(qreal, gap, Gap)
+      qreal _gap;
+
       QPainterPath path;
+
+      void layout0();
 
    public:
       Spacer(Score*);
@@ -37,13 +41,14 @@ class Spacer : public Element {
 
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
-      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
-      virtual Element* drop(const DropData&);
-      virtual void layout();
       virtual void draw(Painter*) const;
       virtual bool isEditable() const { return true; }
       virtual void editDrag(const EditData&);
       virtual void updateGrips(int*, QRectF*) const;
+      virtual void setSubtype(int val);
+      virtual void spatiumChanged(qreal, qreal);
+      void setGap(qreal sp);
+      qreal gap() const     { return _gap; }
       };
 
 #endif

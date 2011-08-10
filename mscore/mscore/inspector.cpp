@@ -383,7 +383,7 @@ void InspectorSpacer::setElement(Element* e)
       {
       Spacer* spacer = static_cast<Spacer*>(e);
       sp.elementName->setText(e->name());
-      sp.height->setValue(spacer->gap().val());
+      sp.height->setValue(spacer->gap() / spacer->spatium());
       }
 
 //---------------------------------------------------------
@@ -394,7 +394,7 @@ void InspectorSpacer::apply()
       {
       Spacer* spacer = static_cast<Spacer*>(inspector->element());
       Score* score   = spacer->score();
-      Spatium space(sp.height->value());
+      qreal space    = sp.height->value() * spacer->spatium();
       if (space != spacer->gap()) {
             score->startCmd();
             //TODO make undoable

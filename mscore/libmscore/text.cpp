@@ -657,6 +657,10 @@ void Text::spatiumChanged(qreal oldVal, qreal newVal)
       Element::spatiumChanged(oldVal, newVal);
       if (!sizeIsSpatiumDependent())
             return;
+#if 0
+printf("Text::spatiumChanged %s %s %p %f\n",
+      name(), parent() ? parent()->name() : "?", this, newVal);
+#endif
       qreal v = newVal / oldVal;
       QTextCursor cursor(_doc);
       cursor.movePosition(QTextCursor::Start);
