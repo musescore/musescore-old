@@ -31,14 +31,13 @@
 //   Navigator
 //---------------------------------------------------------
 
-Navigator::Navigator(QWidget* parent)
-  : QFrame(parent)
+Navigator::Navigator(QScrollArea* sa, QWidget* parent)
+  : QWidget(parent)
       {
       setAttribute(Qt::WA_NoBackground);
 
-      setFrameStyle(QFrame::Box | QFrame::Raised);
-      setLineWidth(2);
       _score = 0;
+      scrollArea = sa;
       _cv    = 0;
       moving = false;
       redraw = false;
@@ -58,6 +57,7 @@ void Navigator::resizeEvent(QResizeEvent* ev)
             matrix.m23(), matrix.m31(), matrix.m32(), matrix.m33());
             }
       pm.fill(Qt::gray);
+      updateViewRect();
       }
 
 //---------------------------------------------------------
@@ -66,14 +66,17 @@ void Navigator::resizeEvent(QResizeEvent* ev)
 
 void MuseScore::showNavigator(bool visible)
       {
-      if (navigator == 0) {
-            navigator = new Navigator(this);
-            navigator->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-            connect(navigator, SIGNAL(viewRectMoved(const QRectF&)), SLOT(setViewRect(const QRectF&)));
+      Navigator* n = static_cast<Navigator*>(navigator->widget());
+      if (n == 0) {
+            n = new Navigator(navigator, this);
+            n->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+            navigator->setWidget(n);
+            navigator->setWidgetResizable(true);
+            // connect(n, SIGNAL(viewRectMoved(const QRectF&)), SLOT(setViewRect(const QRectF&)));
             }
       navigator->setShown(visible);
-      navigator->setScore(cv);
-      navigator->updateViewRect();
+      n->setScore(cv);
+      n->updateViewRect();
       getAction("toggle-navigator")->setChecked(visible);
       }
 
@@ -107,12 +110,24 @@ void Navigator::setScore(ScoreView* v)
 
 void Navigator::updateViewRect()
       {
-      qreal m = (height()-10.0) / (_score->pageFormat()->height() * DPI);
+      if (_score == 0) {
+            setViewRect(QRect());
+            return;
+            }
+      qreal m = height() / (_score->pageFormat()->height() * DPI);
       matrix.setMatrix(m, matrix.m12(), matrix.m13(), matrix.m21(), m,
          matrix.m23(), matrix.m31(), matrix.m32(), matrix.m33());
 
       QRectF r(0.0, 0.0, _cv->width(), _cv->height());
       setViewRect(_cv->toLogical(r));
+      if (!_score->pages().isEmpty()) {
+            Page* lp = _score->pages().back();
+            int w    = int ((lp->x() + lp->width()) * m);
+            if (w != cachedWidth) {
+                  cachedWidth = w;
+                  setFixedWidth(w);
+                  }
+            }
       }
 
 //---------------------------------------------------------
@@ -135,7 +150,7 @@ void Navigator::paintEvent(QPaintEvent* ev)
       QRect r(ev->rect());
       if (redraw && _cv) {
             redraw = false;
-            qreal m = (height()-10.0) / (_score->pageFormat()->height() * DPI);
+            qreal m = height() / (_score->pageFormat()->height() * DPI);
             matrix.setMatrix(m, matrix.m12(), matrix.m13(), matrix.m21(), m,
                matrix.m23(), matrix.m31(), matrix.m32(), matrix.m33());
 
@@ -192,7 +207,6 @@ void Navigator::paintEvent(QPaintEvent* ev)
       if (_cv)
             p.drawRect(viewRect);
       p.end();
-      QFrame::paintEvent(ev);
       }
 
 //---------------------------------------------------------
@@ -227,20 +241,10 @@ void Navigator::mouseMoveEvent(QMouseEvent* ev)
       viewRect.translate(delta);
       startMove = ev->pos();
 
-      if (viewRect.x() < 0) {
-            double dx = -viewRect.x() / matrix.m11();
+      if (viewRect.x() < 0)
             viewRect.moveLeft(0);
-            if (matrix.dx() < 5.0)
-                  matrix.translate(dx, 0.0);
-            redraw = true;
-            }
-      if (viewRect.right() > width()) {
-            double dx = (rect().right() - viewRect.right()) / matrix.m11();
-            dx *= 5.0;
+      else if (viewRect.right() > width())
             viewRect.moveRight(width());
-            matrix.translate(dx, 0.0);
-            redraw = true;
-            }
       if (viewRect.y() < 0)
             viewRect.moveTop(0);
       else if (viewRect.bottom() > height())
@@ -257,6 +261,7 @@ void Navigator::mouseMoveEvent(QMouseEvent* ev)
 void Navigator::setViewRect(const QRectF& _viewRect)
       {
       viewRect = matrix.mapRect(_viewRect).toRect();
+      scrollArea->ensureVisible(viewRect.x(), 0);
       update();
       }
 

@@ -28,10 +28,11 @@ class ScoreView;
 //   Navigator
 //---------------------------------------------------------
 
-class Navigator : public QFrame {
+class Navigator : public QWidget {
       Q_OBJECT
 
       Score* _score;
+      QScrollArea* scrollArea;
       QPointer<ScoreView> _cv;
 
       QRect viewRect;
@@ -40,6 +41,8 @@ class Navigator : public QFrame {
       QPixmap pm;
       bool redraw;
       QTransform matrix;
+
+      int cachedWidth;
 
       virtual void paintEvent(QPaintEvent*);
       virtual void mousePressEvent(QMouseEvent*);
@@ -55,7 +58,7 @@ class Navigator : public QFrame {
       void viewRectMoved(const QRectF&);
 
    public:
-      Navigator(QWidget* parent = 0);
+      Navigator(QScrollArea* sa, QWidget* parent = 0);
       void setScore(ScoreView*);
       void setViewRect(const QRectF& r);
       void layoutChanged();
