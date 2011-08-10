@@ -502,7 +502,7 @@ void Measure::layout2()
                   sp = staves[staffIdx]->_vspacerUp;
                   if (sp) {
                         sp->layout();
-                        sp->setPos(_spatium * .5, y - sp->gap().val() * _spatium);
+                        sp->setPos(_spatium * .5, y - sp->gap());
                         }
                   }
             }
@@ -1430,7 +1430,6 @@ bool Measure::acceptDrop(MuseScoreView* viewer, const QPointF& p, int type, int)
 Element* Measure::drop(const DropData& data)
       {
       Element* e = data.element;
-printf("Measure drop %s\n", e->name());
       int staffIdx;
       Segment* seg;
       _score->pos2measure(data.pos, &staffIdx, 0, &seg, 0);
@@ -1438,7 +1437,6 @@ printf("Measure drop %s\n", e->name());
       if (e->systemFlag())
             staffIdx = 0;
       QPointF mrp(data.pos - pagePos());
-//      qreal mrpx  = mrp.x();
       Staff* staff = score()->staff(staffIdx);
 
       switch(e->type()) {
@@ -1752,11 +1750,12 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
             if (_noOffset)
                   xml.tag("noOffset", _noOffset);
             }
+      qreal _spatium = spatium();
       MStaff* mstaff = staves[staff];
       if (mstaff->_vspacerUp)
-            xml.tag("vspacerUp", mstaff->_vspacerUp->gap().val());
+            xml.tag("vspacerUp", mstaff->_vspacerUp->gap() / _spatium);
       if (mstaff->_vspacerDown)
-            xml.tag("vspacerDown", mstaff->_vspacerDown->gap().val());
+            xml.tag("vspacerDown", mstaff->_vspacerDown->gap() / _spatium);
       if (!mstaff->_visible)
             xml.tag("visible", mstaff->_visible);
       if (mstaff->_slashStyle)
@@ -1843,6 +1842,7 @@ void Measure::read(QDomElement e, int staffIdx)
       {
       Segment* segment = 0;
       Fraction measureDuration(0,1);
+      qreal _spatium = spatium();
 
       if (staffIdx == 0)
             _len = Fraction(0, 1);
@@ -2203,7 +2203,7 @@ void Measure::read(QDomElement e, int staffIdx)
                         spacer->setTrack(staffIdx * VOICES);
                         add(spacer);
                         }
-                  staves[staffIdx]->_vspacerDown->setGap(Spatium(val.toDouble()));
+                  staves[staffIdx]->_vspacerDown->setGap(val.toDouble() * _spatium);
                   }
             else if (tag == "vspacer" || tag == "vspacerUp") {
                   if (staves[staffIdx]->_vspacerUp == 0) {
@@ -2212,7 +2212,7 @@ void Measure::read(QDomElement e, int staffIdx)
                         spacer->setTrack(staffIdx * VOICES);
                         add(spacer);
                         }
-                  staves[staffIdx]->_vspacerUp->setGap(Spatium(val.toDouble()));
+                  staves[staffIdx]->_vspacerUp->setGap(val.toDouble() * _spatium);
                   }
             else if (tag == "visible")
                   staves[staffIdx]->_visible = val.toInt();
@@ -2631,18 +2631,18 @@ bool Measure::isFullMeasureRest()
 //   userDistanceDown
 //---------------------------------------------------------
 
-Spatium Measure::userDistanceDown(int i) const
+qreal Measure::userDistanceDown(int i) const
       {
-      return staves[i]->_vspacerDown ? staves[i]->_vspacerDown->gap() : Spatium(0);
+      return staves[i]->_vspacerDown ? staves[i]->_vspacerDown->gap() : .0;
       }
 
 //---------------------------------------------------------
 //   userDistanceUp
 //---------------------------------------------------------
 
-Spatium Measure::userDistanceUp(int i) const
+qreal Measure::userDistanceUp(int i) const
       {
-      return staves[i]->_vspacerUp ? staves[i]->_vspacerUp->gap() : Spatium(0);
+      return staves[i]->_vspacerUp ? staves[i]->_vspacerUp->gap() : .0;
       }
 
 //---------------------------------------------------------

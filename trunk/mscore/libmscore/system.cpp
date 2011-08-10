@@ -312,26 +312,24 @@ void System::layout2()
                         }
                   s->setDistanceDown(score()->styleS(
                      nextMeasureIsVBOX ? ST_systemFrameDistance : ST_systemDistance
-                     ));
+                     ).val() * _spatium);
                   }
             else if (staff->rstaff() < (staff->part()->staves()->size()-1))
-                  s->setDistanceDown(score()->styleS(ST_akkoladeDistance));
+                  s->setDistanceDown(score()->styleS(ST_akkoladeDistance).val() * _spatium);
             else
-                  s->setDistanceDown(score()->styleS(ST_staffDistance));
+                  s->setDistanceDown(score()->styleS(ST_staffDistance).val() * _spatium);
 
             qreal distDown = 0.0;
             qreal distUp   = 0.0;
             foreach(MeasureBase* m, ml) {
-                  distDown = std::max(distDown, m->distanceDown(staffIdx));
-                  distDown = std::max(distDown, point(m->userDistanceDown(staffIdx)));
-                  distUp   = std::max(distUp, m->distanceUp(staffIdx));
-                  distUp   = std::max(distUp, point(m->userDistanceUp(staffIdx)));
+                  distDown = qMax(distDown, m->distanceDown(staffIdx));
+                  distDown = qMax(distDown, m->userDistanceDown(staffIdx));
+                  distUp   = qMax(distUp,   m->distanceUp(staffIdx));
+                  distUp   = qMax(distUp,   m->userDistanceUp(staffIdx));
                   }
-            Spatium sdistDown(distDown / _spatium);
-            if (sdistDown > s->distanceDown())
-                  s->setDistanceDown(sdistDown);
-            Spatium sdistUp(distUp / _spatium);
-            s->setDistanceUp(sdistUp);
+            if (distDown > s->distanceDown())
+                  s->setDistanceDown(distDown);
+            s->setDistanceUp(distUp);     // TODO: min?
 
             if (!s->show()) {
                   s->setbbox(QRectF());  // already done in layout() ?
@@ -339,7 +337,7 @@ void System::layout2()
                   }
             qreal sHeight = staff->height();   // (staff->lines() - 1) * _spatium * staffMag;
             s->setbbox(QRectF(_leftMargin, y, width() - _leftMargin, sHeight));
-            y += sHeight + (s->distanceDown().val() * _spatium);
+            y += sHeight + s->distanceDown();
             lastStaffIdx = staffIdx;
             }
       qreal systemHeight = staff(lastStaffIdx)->bbox().bottom();

@@ -637,7 +637,8 @@ bool Element::readProperties(QDomElement e)
             }
       else if (tag == "subtype") {
             // does not always call Element::setSubtype():
-            this->setSubtype(val);
+            // this->setSubtype(val);
+            setSubtype(val);
             }
       else if (tag == "tick")
             score()->curTick = score()->fileDivision(i);

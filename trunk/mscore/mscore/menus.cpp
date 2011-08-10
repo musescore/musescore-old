@@ -737,6 +737,7 @@ void MuseScore::populatePalette()
       //    breaks
       //-----------------------------------
 
+      qreal _spatium = gscore->spatium();
       sp = new Palette;
       sp->setName(tr("Breaks && Spacer"));
       sp->setMag(.7);
@@ -756,12 +757,12 @@ void MuseScore::populatePalette()
       sp->append(lb, tr("Section break"));
 
       Spacer* spacer = new Spacer(gscore);
-      spacer->setGap(Spatium(3));
+      spacer->setGap(3 * _spatium);
       spacer->setSubtype(SPACER_DOWN);
       sp->append(spacer, tr("Staff spacer down"));
 
       spacer = new Spacer(gscore);
-      spacer->setGap(Spatium(3));
+      spacer->setGap(3 * _spatium);
       spacer->setSubtype(SPACER_UP);
       sp->append(spacer, tr("Staff spacer up"));
 
@@ -1305,7 +1306,8 @@ void MuseScore::addMetronome()
 void MuseScore::showLayoutBreakPalette()
       {
       if (layoutBreakPalette == 0) {
-            Palette* sp = new Palette;
+            qreal _spatium = gscore->spatium();
+            Palette* sp    = new Palette;
             layoutBreakPalette = new PaletteScrollArea(sp);
             layoutBreakPalette->setRestrictHeight(false);
             layoutBreakPalette->setWindowTitle(tr("MuseScore: Breaks & Spacer"));
@@ -1325,7 +1327,7 @@ void MuseScore::showLayoutBreakPalette()
             sp->append(lb, tr("Section break"));
 
             Spacer* spacer = new Spacer(gscore);
-            spacer->setGap(Spatium(3));
+            spacer->setGap(_spatium * 3);
             sp->append(spacer, tr("Staff spacer"));
             }
       layoutBreakPalette->show();

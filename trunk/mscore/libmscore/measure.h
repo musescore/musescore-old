@@ -158,8 +158,8 @@ class Measure : public MeasureBase {
       void setNoOffset(int n)              { _noOffset = n;       }
       virtual qreal distanceUp(int i) const   { return staves[i]->distanceUp; }
       virtual qreal distanceDown(int i) const { return staves[i]->distanceDown; }
-      virtual Spatium userDistanceUp(int i) const;
-      virtual Spatium userDistanceDown(int i) const;
+      virtual qreal userDistanceUp(int i) const;
+      virtual qreal userDistanceDown(int i) const;
 
       Fraction timesig() const             { return _timesig;     }
       void setTimesig(const Fraction& f)   { _timesig = f;        }

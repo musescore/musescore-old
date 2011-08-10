@@ -1853,7 +1853,7 @@ bool ScoreView::dragMeasureAnchorElement(const QPointF& pos)
 void ScoreView::dragEnterEvent(QDragEnterEvent* event)
       {
       if (debugMode)
-            printf("dragEnterEvent===========================\n");
+            printf("dragEnterEvent\n");
       double _spatium = score()->spatium();
       dragElement = 0;
 

@@ -1351,7 +1351,7 @@ void Score::spatiumChanged(qreal oldValue, qreal newValue)
       qreal data[2];
       data[0] = oldValue;
       data[1] = newValue;
-      scanElements(data, spatiumHasChanged);
+      scanElements(data, spatiumHasChanged, true);
       }
 
 //---------------------------------------------------------
