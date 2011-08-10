@@ -174,7 +174,7 @@ class MuseScore : public QMainWindow {
       QSplitter* splitter;
       ScoreTab* tab1;
       ScoreTab* tab2;
-      Navigator* navigator;
+      QScrollArea* navigator;
       QSplitter* mainWindow;
 
       QMenu* menuDisplay;

@@ -40,7 +40,6 @@ class PagePreview : public QWidget {
       PagePreview(QWidget* parent = 0);
       void setScore(Score*);
       ~PagePreview();
-      void layout();
       Score* score() const { return _score; }
       };
 

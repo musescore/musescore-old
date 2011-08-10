@@ -495,11 +495,15 @@ MuseScore::MuseScore()
       layout->setSpacing(0);
       mainScore->setLayout(layout);
 
-      navigator = new Navigator;
+      navigator = new QScrollArea;
+      navigator->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+      navigator->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
       navigator->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
       navigator->setMinimumHeight(40);
+      navigator->setFrameStyle(QFrame::Box | QFrame::Raised);
+      navigator->setLineWidth(2);
       mainWindow->addWidget(navigator);
-      navigator->setShown(preferences.showNavigator);
+      showNavigator(preferences.showNavigator);
 
       QList<int> sizes;
       sizes << 500 << 500;
@@ -1326,7 +1330,7 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
             _undoGroup->setActiveStack(0);
             setWindowTitle("MuseScore");
             if (navigator)
-                  navigator->setScore(0);
+                  static_cast<Navigator*>(navigator->widget())->setScore(0);
             return;
             }
       changeState(view->mscoreState());
@@ -1353,7 +1357,7 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
       setPos(cs->inputPos());
       _statusBar->showMessage(cs->filePath(), 2000);
       if (navigator)
-            navigator->setScore(cv);
+            static_cast<Navigator*>(navigator->widget())->setScore(view);
       }
 
 //---------------------------------------------------------

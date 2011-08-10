@@ -1,3 +1,5 @@
+10.aug (ws)
+      - new: scrollbar for navigator window
 5.aug (ws)
       - fix #11891: Cannot drop symbols on any page except the first
       - fix #11890: Cannot drop time signatures on any page except the first
