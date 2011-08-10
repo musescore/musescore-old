@@ -25,6 +25,7 @@
 #include "libmscore/score.h"
 #include "preview.h"
 #include "libmscore/mscore.h"
+#include "musescore.h"
 
 //---------------------------------------------------------
 //   PageSettings
@@ -99,9 +100,7 @@ void PageSettings::setScore(Score* s)
       connect(evenPageRightMargin, SIGNAL(valueChanged(double)), SLOT(ermChanged(double)));
       connect(pageGroup, SIGNAL(activated(int)), SLOT(pageFormatSelected(int)));
       connect(spatiumEntry, SIGNAL(valueChanged(double)), SLOT(spatiumChanged(double)));
-
 	connect(pageOffsetEntry, SIGNAL(valueChanged(int)), SLOT(pageOffsetChanged(int)));
-
       }
 
 //---------------------------------------------------------
@@ -267,8 +266,8 @@ void PageSettings::apply()
 
       cs->startCmd();
       cs->undoChangePageFormat(&pf, sp, pageOffsetEntry->value()-1);
-      cs->setLayoutAll(true);
       cs->endCmd();
+      mscore->endCmd();
       }
 
 //---------------------------------------------------------

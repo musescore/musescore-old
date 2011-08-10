@@ -85,10 +85,10 @@ void LayoutBreak::draw(Painter* painter) const
       }
 
 //---------------------------------------------------------
-//   layout
+//   layout0
 //---------------------------------------------------------
 
-void LayoutBreak::layout()
+void LayoutBreak::layout0()
       {
       qreal _spatium = spatium();
       path      = QPainterPath();
@@ -139,10 +139,6 @@ void LayoutBreak::layout()
       QRectF bb(0, 0, w, h);
       bb.adjust(-lw, -lw, lw, lw);
       setbbox(bb);
-
-      if (parent()) {
-            setPos(-_spatium - w + parent()->width(), -2 * _spatium - h);
-            }
       }
 
 //---------------------------------------------------------
@@ -157,6 +153,21 @@ void LayoutBreak::setSubtype(const QString& s)
             setSubtype(LAYOUT_BREAK_PAGE);
       else
             setSubtype(LAYOUT_BREAK_SECTION);
+      }
+
+void LayoutBreak::setSubtype(int val)
+      {
+      Element::setSubtype(val);
+      layout0();
+      }
+
+//---------------------------------------------------------
+//   spatiumChanged
+//---------------------------------------------------------
+
+void LayoutBreak::spatiumChanged(qreal, qreal)
+      {
+      layout0();
       }
 
 //---------------------------------------------------------

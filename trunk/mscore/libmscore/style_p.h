@@ -55,7 +55,7 @@ class TextStyleData : public QSharedData, public ElementLayout {
          Align _align,
          qreal _xoff, qreal _yoff, OffsetType _ot,
          qreal _rxoff, qreal _ryoff,
-         bool sd,
+         bool sizeSpatiumDependent,
          qreal fw, qreal pw, int fr,
          QColor co, bool circle, bool systemFlag,
          QColor fg);

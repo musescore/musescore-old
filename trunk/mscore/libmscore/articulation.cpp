@@ -221,8 +221,8 @@ void Articulation::read(QDomElement e)
             else if (!Element::readProperties(e))
                   domError(e);
             }
-/*DEBUG      if (subtype() == Articulation_Fermata) {
-            printf("Fermata %f %f\n", readPos().x(), readPos().y());
+/* if (subtype() == Articulation_Schleifer) {
+            printf("Schleifer %f %f\n", readPos().x(), readPos().y());
             setReadPos(QPointF());
             }
       */
@@ -425,7 +425,6 @@ void Articulation::layout()
       {
       SymId sym = _up ? articulationList[subtype()].upSym : articulationList[subtype()].downSym;
       setbbox(symbols[score()->symIdx()][sym].bbox(magS()));
-      adjustReadPos();
       }
 
 //---------------------------------------------------------

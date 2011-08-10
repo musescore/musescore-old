@@ -101,8 +101,6 @@ class Text : public Element {
 
       QTextDocument* doc() const            { return _doc; }
 
-      virtual void resetMode();
-
       qreal frameWidth() const;
       qreal paddingWidth() const;
       QColor frameColor() const;

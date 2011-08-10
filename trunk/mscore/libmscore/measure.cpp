@@ -510,14 +510,14 @@ void Measure::layout2()
       foreach(const MStaff* ms, staves)
             ms->lines->setWidth(width());
 
+      int breakCount = 0;
       foreach (Element* element, _el) {
-            element->layout();
             if (element->type() == LAYOUT_BREAK) {
-                  if (_sectionBreak && (_lineBreak | _pageBreak)
-                     && (element->subtype() == LAYOUT_BREAK_PAGE || element->subtype() == LAYOUT_BREAK_LINE))
-                        {
-                        element->rxpos() -= (element->width() + _spatium * .8);
-                        }
+                  qreal x = -_spatium - element->width() + width()
+                            - breakCount * (element->width() + _spatium * .8);
+                  qreal y = -2 * _spatium - element->height();
+                  element->setPos(x, y);
+                  breakCount++;
                   }
             }
 
