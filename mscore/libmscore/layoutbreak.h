@@ -35,25 +35,26 @@ class LayoutBreak : public Element {
       bool _startWithMeasureOne;
 
       virtual void draw(Painter*) const;
-      virtual void layout();
+      void layout0();
+      virtual void spatiumChanged(qreal /*oldValue*/, qreal /*newValue*/);
 
    public:
       LayoutBreak(Score*);
       virtual LayoutBreak* clone() const { return new LayoutBreak(*this); }
       virtual ElementType type() const { return LAYOUT_BREAK; }
       virtual void setSubtype(const QString&);
-      virtual void setSubtype(int st) { Element::setSubtype(st); }
+      virtual void setSubtype(int st);
       virtual const QString subtypeName() const;
       virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
-      qreal pause() const                { return _pause; }
-      void setPause(qreal v)             { _pause = v; }
-      bool startWithLongNames() const     { return _startWithLongNames; }
-      void setStartWithLongNames(bool v)  { _startWithLongNames = v; }
+      qreal pause() const                 { return _pause;               }
+      void setPause(qreal v)              { _pause = v;                  }
+      bool startWithLongNames() const     { return _startWithLongNames;  }
+      void setStartWithLongNames(bool v)  { _startWithLongNames = v;     }
       bool startWithMeasureOne() const    { return _startWithMeasureOne; }
-      void setStartWithMeasureOne(bool v) { _startWithMeasureOne = v; }
+      void setStartWithMeasureOne(bool v) { _startWithMeasureOne = v;    }
       };
 
 #endif

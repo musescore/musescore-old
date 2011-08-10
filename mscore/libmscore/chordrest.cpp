@@ -623,16 +623,17 @@ void ChordRest::layoutArticulations()
   */
       foreach (Articulation* a, articulations) {
             ArticulationAnchor aa = a->anchor();
-            if (aa != A_TOP_STAFF && aa != A_BOTTOM_STAFF)
-                  continue;
-            if (a->up()) {
-                  a->setPos(x, dyTop);
-                  dyTop -= distance0;
+            if (aa == A_TOP_STAFF || aa == A_BOTTOM_STAFF) {
+                  if (a->up()) {
+                        a->setPos(x, dyTop);
+                        dyTop -= distance0;
+                        }
+                  else {
+                        a->setPos(x, dyBot);
+                        dyBot += distance0;
+                        }
                   }
-            else {
-                  a->setPos(x, dyBot);
-                  dyBot += distance0;
-                  }
+            a->adjustReadPos();
             }
       }
 

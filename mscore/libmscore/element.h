@@ -275,7 +275,6 @@ class Element {
 
       virtual void layout() {}
       virtual void spatiumChanged(qreal /*oldValue*/, qreal /*newValue*/);
-      virtual void resetMode() {}
 
       // debug functions
       virtual void dump() const;

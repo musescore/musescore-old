@@ -83,7 +83,7 @@ void Spacer::layout()
             path.moveTo(0.0, h);
             path.lineTo(w, h);
             }
-      qreal lw = spatium() * 0.4;
+      qreal lw = _spatium * 0.4;
       QRectF bb(0, 0, w, h);
       bb.adjust(-lw, -lw, lw, lw);
       setbbox(bb);

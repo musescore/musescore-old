@@ -302,10 +302,14 @@ TextLine::TextLine(const TextLine& e)
       _mxmlOff2             = e._mxmlOff2;
       _beginText            = 0;
       _continueText         = 0;
-      if (e._beginText)
+      if (e._beginText) {
             _beginText = e._beginText->clone(); // deep copy
-      if (e._continueText)
+            _beginText->setParent(this);
+            }
+      if (e._continueText) {
             _continueText = e._continueText->clone();
+            _continueText->setParent(this);
+            }
       _sp = 0;
       }
 
@@ -469,6 +473,7 @@ bool TextLine::readProperties(QDomElement e)
             _lineColor = readColor(e);
       else if (tag == "beginText") {
             _beginText = new Text(score());
+            _beginText->setParent(this);
             _beginText->setSubtype(TEXT_TEXTLINE);
             for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                   if (!_beginText->readProperties(ee))
@@ -477,6 +482,7 @@ bool TextLine::readProperties(QDomElement e)
             }
       else if (tag == "continueText") {
             _continueText = new Text(score());
+            _continueText->setParent(this);
             _continueText->setSubtype(TEXT_TEXTLINE);
             for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                   if (!_continueText->readProperties(ee))
@@ -525,6 +531,10 @@ void TextLine::setContinueText(Text* v)
 void TextLine::layout()
       {
       setPos(0.0, 0.0);
+      if (_beginText)
+            _beginText->layout();
+      if (_continueText)
+            _continueText->layout();
       SLine::layout();
       }
 
@@ -534,7 +544,9 @@ void TextLine::layout()
 
 void TextLineSegment::spatiumChanged(qreal ov, qreal nv)
       {
-      parent()->spatiumChanged(ov, nv);
+      textLine()->spatiumChanged(ov, nv);
+      if (_text)
+            _text->spatiumChanged(ov, nv);
       }
 
 //---------------------------------------------------------

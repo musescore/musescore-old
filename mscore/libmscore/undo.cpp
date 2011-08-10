@@ -2359,6 +2359,7 @@ void ChangePageFormat::flip()
       score->setSpatium(spatium);
       score->spatiumChanged(os, spatium);
       score->setPageNumberOffset(pageOffset);
+      score->setLayoutAll(true);
 
       *pf     = f;
       spatium = os;

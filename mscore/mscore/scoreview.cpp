@@ -1294,7 +1294,6 @@ void ScoreView::startEdit()
             connect(t->doc(), SIGNAL(undoCommandAdded()), SLOT(textUndoLevelAdded()));
             }
       else if (origEditObject->isSegment()) {
-            origEditObject->resetMode();
             SpannerSegment* ols = (SpannerSegment*)origEditObject;
             Spanner* ohp        = ols->spanner();
 
