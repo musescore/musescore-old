@@ -89,8 +89,9 @@ void MeasureBase::scanElements(void* data, void (*func)(void*, Element*), bool a
                   }
             }
       else {
-            foreach(Element* e, _el)
+            foreach(Element* e, _el) {
                   e->scanElements(data, func, all);
+                  }
             }
 //      if (all)
             func(data, this);
@@ -199,5 +200,24 @@ Measure* MeasureBase::prevMeasure() const
 qreal MeasureBase::pause() const
       {
       return _sectionBreak ? _sectionBreak->pause() : 0.0;
+      }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void MeasureBase::layout()
+      {
+      int breakCount = 0;
+      foreach (Element* element, _el) {
+            if (element->type() == LAYOUT_BREAK) {
+                  qreal _spatium = spatium();
+                  qreal x = -_spatium - element->width() + width()
+                            - breakCount * (element->width() + _spatium * .8);
+                  qreal y = -2 * _spatium - element->height();
+                  element->setPos(x, y);
+                  breakCount++;
+                  }
+            }
       }
 

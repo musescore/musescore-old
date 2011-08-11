@@ -1111,7 +1111,7 @@ bool Score::layoutSystem1(qreal& minWidth, qreal w, bool isFirstSystem, bool lon
                   if (!isFirstMeasure) {
                         // try to put another system on current row
                         // if not a line break
-                        continueFlag = !curMeasure->lineBreak();
+                        continueFlag = !(curMeasure->lineBreak() | curMeasure->pageBreak());
                         }
                   }
             else if (curMeasure->type() == MEASURE) {
@@ -1456,8 +1456,9 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                   }
 
             foreach (MeasureBase* mb, ml) {
-                  if (mb->type() != MEASURE)
+                  if (mb->type() != MEASURE) {
                         continue;
+                        }
                   Measure* m = static_cast<Measure*>(mb);
                   int nn = m->multiMeasure() - 1;
                   if (nn > 0) {
@@ -1478,8 +1479,9 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
 
       foreach(System* system, sl) {
             foreach (MeasureBase* mb, system->measures()) {
-                  if (mb->type() == HBOX)
+                  if (mb->type() == HBOX) {
                         minWidth += point(((Box*)mb)->boxWidth());
+                        }
                   else if (mb->type() == MEASURE) {
                         Measure* m = (Measure*)mb;
                         if (needRelayout)
@@ -1528,8 +1530,9 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
             system->setWidth(w);
             system->layout2();
             foreach(MeasureBase* mb, system->measures()) {
-                  if (mb->type() == HBOX)
+                  if (mb->type() == HBOX) {
                         mb->setHeight(system->height());
+                        }
                   }
             xx += w;
             qreal hh = system->height() + system->staves()->back()->distanceDown();

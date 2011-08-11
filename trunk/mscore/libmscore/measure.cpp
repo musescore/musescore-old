@@ -510,16 +510,8 @@ void Measure::layout2()
       foreach(const MStaff* ms, staves)
             ms->lines->setWidth(width());
 
-      int breakCount = 0;
-      foreach (Element* element, _el) {
-            if (element->type() == LAYOUT_BREAK) {
-                  qreal x = -_spatium - element->width() + width()
-                            - breakCount * (element->width() + _spatium * .8);
-                  qreal y = -2 * _spatium - element->height();
-                  element->setPos(x, y);
-                  breakCount++;
-                  }
-            }
+
+      MeasureBase::layout();  // layout LAYOUT_BREAK elements
 
       //
       //   set measure number
