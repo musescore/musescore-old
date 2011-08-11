@@ -458,6 +458,7 @@ void SysStaff::move(qreal x, qreal y)
 void System::clear()
       {
       ml.clear();
+      _spannerSegments.clear();
       _vbox        = false;
       _firstSystem = false;
       _pageBreak   = false;
