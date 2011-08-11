@@ -14,9 +14,11 @@
       <file alias="fonts/mscore_tab_modern.ttf">../fonts/mscore_tab_modern.ttf</file>
       <file alias="fonts/mscore_tab_renaiss.ttf">../fonts/mscore_tab_renaiss.ttf</file>
       <file alias="fonts/mscore_tab_renaiss2.ttf">../fonts/mscore_tab_renaiss2.ttf</file>
+
       <file alias="scores/promenade.mscz">../demos/promenade.mscz</file>
       <file alias="scores/schnee.mscz">../demos/schnee.mscz</file>
       <file alias="scores/italian-1.mscz">../demos/italian-1.mscz</file>
+
       <file>mplayer.qml</file>
       <file>mobile/ToolBar.qml</file>
       <file>mobile/Button.qml</file>

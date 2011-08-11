@@ -343,11 +343,13 @@ void System::layout2()
       qreal systemHeight = staff(lastStaffIdx)->bbox().bottom();
       setHeight(systemHeight);
       foreach(MeasureBase* m, ml) {
-            if (m->type() == MEASURE || m->type() == HBOX) {
+            if (m->type() == MEASURE) {
                   m->setbbox(QRectF(0.0, -_spatium, m->width(), systemHeight + 2 * _spatium));
                   }
-            if (m->type() == HBOX)
+            else if (m->type() == HBOX) {
+                  m->setbbox(QRectF(0.0, 0.0, m->width(), systemHeight));
                   static_cast<HBox*>(m)->layout2();
+                  }
             }
 
 //      qreal staffY[nstaves];
@@ -650,8 +652,7 @@ void System::remove(Element* el)
             case TRILL_SEGMENT:
             case VOLTA_SEGMENT:
             case SLUR_SEGMENT:
-                  if (!_spannerSegments.removeOne(static_cast<SpannerSegment*>(el)))
-                        printf("System::remove(): spanner not found\n");
+                  _spannerSegments.removeOne(static_cast<SpannerSegment*>(el));
                   break;
             default:
                   printf("System::remove(%s) not implemented\n", el->name());
@@ -894,7 +895,7 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
 //    collect all visible elements
 //---------------------------------------------------------
 
-void System::scanElements(void* data, void (*func)(void*, Element*), bool all)
+void System::scanElements(void* data, void (*func)(void*, Element*), bool /*all*/)
       {
       if (isVbox())
             return;

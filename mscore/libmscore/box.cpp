@@ -154,9 +154,9 @@ void Box::updateGrips(int* grips, QRectF* grip) const
       *grips = 1;
       QRectF r(abbox());
       if (type() == HBOX)
-            grip[0].translate(QPointF(r.right(), r.bottom() * .5));
+            grip[0].translate(QPointF(r.right(), r.top() + r.height() * .5));
       else if (type() == VBOX)
-            grip[0].translate(QPointF(r.right() * .5, r.bottom()));
+            grip[0].translate(QPointF(r.x() + r.width() * .5, r.bottom()));
       }
 
 //---------------------------------------------------------
@@ -354,9 +354,9 @@ void HBox::layout()
             setbbox(QRectF(0.0, 0.0, w, h));
             }
       else {
-            setPos(0.0, 0.0);
             setbbox(QRectF(0.0, 0.0, point(boxWidth()), system()->height()));
             }
+      MeasureBase::layout();
       adjustReadPos();
       }
 
@@ -444,9 +444,8 @@ Element* Box::drop(const DropData& data)
 
 QRectF HBox::drag(const EditData& data)
       {
-      QPointF delta(data.pos - startDragPosition());
-      QRectF r(abbox());
-      qreal diff = delta.x();
+      QRectF r(canvasBoundingRect());
+      qreal diff = data.delta.x();
       qreal x1   = userOff().x() + diff;
       if (parent()->type() == VBOX) {
             VBox* vb = static_cast<VBox*>(parent());
@@ -458,7 +457,7 @@ QRectF HBox::drag(const EditData& data)
             }
       setUserOff(QPointF(x1, 0.0));
       setStartDragPosition(data.pos);
-      return abbox() | r;
+      return canvasBoundingRect() | r;
       }
 
 //---------------------------------------------------------
