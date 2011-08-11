@@ -33,7 +33,8 @@ PagePreview::PagePreview(QWidget* parent)
    : QWidget(parent)
       {
       setAttribute(Qt::WA_NoBackground);
-      _score  = 0;
+      _score      = 0;
+      currentPage = 0;
       }
 
 //---------------------------------------------------------
@@ -47,6 +48,15 @@ void PagePreview::setScore(Score* s)
       if (_score == 0)
             return;
       layout();
+      }
+
+//---------------------------------------------------------
+//   pages
+//---------------------------------------------------------
+
+int PagePreview::pages() const
+      {
+      return _score ? _score->pages().size() : 0;
       }
 
 //---------------------------------------------------------
@@ -84,6 +94,30 @@ void PagePreview::resizeEvent(QResizeEvent*)
       }
 
 //---------------------------------------------------------
+//   doLayout
+//---------------------------------------------------------
+
+void PagePreview::doLayout()
+      {
+      _score->doLayout();
+      update();
+      }
+
+//---------------------------------------------------------
+//   showPage
+//---------------------------------------------------------
+
+void PagePreview::showPage(int n)
+      {
+      if (n >= pages())
+            n = pages() - 1;
+      if (n < 0)
+            n = 0;
+      currentPage = n;
+      update();
+      }
+
+//---------------------------------------------------------
 //   paintEvent
 //---------------------------------------------------------
 
@@ -102,7 +136,7 @@ void PagePreview::paintEvent(QPaintEvent* ev)
 
       p.setTransform(matrix);
 
-      Page* page = _score->pages().front();
+      Page* page = _score->pages().at(currentPage);
       QRectF pbbox(page->abbox());
       p.fillRect(pbbox, Qt::white);
 
