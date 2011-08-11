@@ -41,7 +41,8 @@ int main(int argc, char *argv[])
       viewer.setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
 	viewer.engine()->setOfflineStoragePath(documentsDirectory());
       NSString* resourcePath = [[NSBundle mainBundle] resourcePath];
-      viewer.setMainQmlFile(qStringFromNSString([resourcePath stringByAppendingPathComponent:@"main.qml"]));
+//      viewer.setMainQmlFile(qStringFromNSString([resourcePath stringByAppendingPathComponent:@"main.qml"]));
+      viewer.setMainQmlFile(QString(":/mplayer.qml"));
       viewer.showMaximized();
       int retVal = app.exec();
       [pool release];
