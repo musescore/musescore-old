@@ -23,17 +23,17 @@ Item {
       states: [
             State {
                   name: "normal"
-                  PropertyChanges { target: toolbar; opacity: 0 }
+                  PropertyChanges { target: toolBar; opacity: 0 }
                   PropertyChanges { target: scores; width: 0 }
                   },
             State {
                   name: "toolbar1"
-                  PropertyChanges { target: toolbar; opacity: 1 }
+                  PropertyChanges { target: toolBar; opacity: 1 }
                   PropertyChanges { target: scores;  width: 0 }
                   },
             State {
                   name: "myscores"
-                  PropertyChanges { target: toolbar; opacity: 1 }
+                  PropertyChanges { target: toolBar; opacity: 1 }
                   PropertyChanges { target: scores;  width: 250 }
                   }
             ]
@@ -129,10 +129,15 @@ Item {
 
       Rectangle {
             id: view
-            anchors.left:  scores.right
-            anchors.right: screen.right
-            anchors.top:   screen.top
+            anchors.left:   scores.right
+            anchors.right:  screen.right
+            anchors.top:    screen.top
             anchors.bottom: screen.bottom
+            Image {
+                  source: "mobile/images/paper5.png";
+                  fillMode: Image.Tile;
+                  anchors.fill: parent;
+                  }
 
             ScoreView {
                   id: scoreview

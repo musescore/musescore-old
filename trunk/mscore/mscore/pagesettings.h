@@ -37,6 +37,7 @@ class PageSettings : public QDialog, private Ui::PageSettingsBase {
       bool mmUnit;
       Score* cs;
       void setValues(Score*);
+      void updatePreview();
 
    private slots:
       void mmClicked();
@@ -61,8 +62,9 @@ class PageSettings : public QDialog, private Ui::PageSettingsBase {
       void pageHeightChanged(double);
       void pageWidthChanged(double);
 	void pageOffsetChanged(int val);
+      void setPage(int);
 
-	public:
+   public:
       PageSettings(QWidget* parent = 0);
       ~PageSettings();
       void setScore(Score*);

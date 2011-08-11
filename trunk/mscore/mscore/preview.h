@@ -31,6 +31,7 @@ class PagePreview : public QWidget {
       Q_OBJECT
       Score* _score;
       QTransform matrix;
+      int currentPage;
 
       virtual void paintEvent(QPaintEvent*);
       virtual void resizeEvent(QResizeEvent*);
@@ -40,7 +41,10 @@ class PagePreview : public QWidget {
       PagePreview(QWidget* parent = 0);
       void setScore(Score*);
       ~PagePreview();
+      void doLayout();
       Score* score() const { return _score; }
+      int pages() const;
+      void showPage(int);
       };
 
 #endif
