@@ -1,4 +1,5 @@
 11.aug (ws)
+      - fix #12049: Page count change causes crash
       - fix #12051: Score must be clicked or moved to see pages in navigator
       - fix #12048: Drag-selecting page identically selects others
       - fix #12047: Page Settings Preview doesn't udate
