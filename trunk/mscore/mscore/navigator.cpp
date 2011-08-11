@@ -35,12 +35,11 @@ Navigator::Navigator(QScrollArea* sa, QWidget* parent)
   : QWidget(parent)
       {
       setAttribute(Qt::WA_NoBackground);
-
-      _score = 0;
+      _score     = 0;
       scrollArea = sa;
-      _cv    = 0;
-      moving = false;
-      redraw = false;
+      _cv        = 0;
+      moving     = false;
+      redraw     = false;
       }
 
 //---------------------------------------------------------
@@ -95,6 +94,7 @@ void Navigator::setScore(ScoreView* v)
             _score  = v->score();
             connect(this, SIGNAL(viewRectMoved(const QRectF&)), v, SLOT(setViewRect(const QRectF&)));
             connect(_cv,  SIGNAL(viewRectChanged()), this, SLOT(updateViewRect()));
+            updateViewRect();
             updateLayout();
             }
       else {
@@ -149,6 +149,10 @@ void Navigator::paintEvent(QPaintEvent* ev)
       QPainter p;
       QRect r(ev->rect());
       if (redraw && _cv) {
+            if (pm.isNull()) {
+                  printf("Navigator: null pixmap\n");
+                  return;
+                  }
             redraw = false;
             qreal m = height() / (_score->pageFormat()->height() * DPI);
             matrix.setMatrix(m, matrix.m12(), matrix.m13(), matrix.m21(), m,
