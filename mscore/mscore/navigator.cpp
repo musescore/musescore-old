@@ -196,6 +196,9 @@ void Navigator::paintEvent(QPaintEvent* ev)
                         e->draw(&painter);
                         p.restore();
                         }
+                  p.setFont(QFont("FreeSans", 400));
+                  p.setPen(QColor(0, 0, 255, 50));
+                  p.drawText(page->bbox(), Qt::AlignCenter, QString("%1").arg(page->no()+1));
                   p.restore();
                   }
             p.setMatrixEnabled(false);
