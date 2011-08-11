@@ -3194,17 +3194,18 @@ void Score::lassoSelect(const QRectF& bbox)
       select(0, SELECT_SINGLE, 0);
       QRectF fr(bbox.normalized());
       foreach(Page* page, _pages) {
-            QRectF pr(page->abbox());
-            if (pr.right() < fr.left())
+            QRectF pr(page->bbox());
+            QRectF frr(fr.translated(-page->pos()));
+            if (pr.right() < frr.left())
                   continue;
-            if (pr.left() > fr.right())
+            if (pr.left() > frr.right())
                   break;
 
-            QList<const Element*> el = page->items(fr);
+            QList<const Element*> el = page->items(frr);
             for (int i = 0; i < el.size(); ++i) {
                   const Element* e = el.at(i);
                   e->itemDiscovered = 0;
-                  if (fr.contains(e->abbox())) {
+                  if (frr.contains(e->abbox())) {
                         if (e->type() != MEASURE && e->selectable())
                               select(const_cast<Element*>(e), SELECT_ADD, 0);
                         }
