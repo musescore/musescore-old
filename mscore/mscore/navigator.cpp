@@ -177,6 +177,7 @@ void Navigator::mousePressEvent(QMouseEvent* ev)
             r.translate(dx, 0.0);
             setViewRect(r);
             emit viewRectMoved(matrix.inverted().mapRect(viewRect));
+            update();
             }
       moving = true;
       }
@@ -193,16 +194,28 @@ void Navigator::mouseMoveEvent(QMouseEvent* ev)
       viewRect.translate(delta);
       startMove = ev->pos();
 
-      if (viewRect.x() < 0)
+      if (viewRect.x() <= 0 && viewRect.width() < width())
             viewRect.moveLeft(0);
-      else if (viewRect.right() > width())
+      else if (viewRect.right() > width() && viewRect.width() < width())
             viewRect.moveRight(width());
-      if (viewRect.y() < 0)
+      if (viewRect.height() == height())
             viewRect.moveTop(0);
-      else if (viewRect.bottom() > height())
-            viewRect.moveBottom(height());
+      else if (viewRect.height() < height()) {
+            if (viewRect.y() < 0)
+                  viewRect.moveTop(0);
+            else if (viewRect.bottom() > height())
+                  viewRect.moveBottom(height());
+            }
+      else {
+            if (viewRect.bottom() < (height()))
+                  viewRect.moveBottom(height());
+            else if (viewRect.top() > 0)
+                  viewRect.moveTop(0);
+            }
 
       emit viewRectMoved(matrix.inverted().mapRect(viewRect));
+      int x = delta.x() > 0 ? viewRect.x() + viewRect.width() : viewRect.x();
+      scrollArea->ensureVisible(x, height()/2, 0, 0);
       update();
       }
 
@@ -224,6 +237,7 @@ void Navigator::setViewRect(const QRectF& _viewRect)
 void Navigator::mouseReleaseEvent(QMouseEvent*)
       {
       moving = false;
+//      scrollArea->ensureVisible(viewRect.x(), 0);
       }
 
 //---------------------------------------------------------
