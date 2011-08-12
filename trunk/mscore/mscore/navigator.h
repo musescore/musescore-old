@@ -39,8 +39,13 @@ class Navigator : public QWidget {
       QPoint startMove;
       bool moving;
       QPixmap pm;
-      bool redraw;
       QTransform matrix;
+
+      QFuture<QImage> updatePixmap;
+      QFutureWatcher<QImage> watcher;
+      QMutex mutex;
+      QImage createPixmap();
+      bool recreatePixmap;
 
       int cachedWidth;
 
@@ -50,9 +55,12 @@ class Navigator : public QWidget {
       virtual void mouseReleaseEvent(QMouseEvent*);
       virtual void resizeEvent(QResizeEvent*);
 
+   private slots:
+      void pmFinished();
+
    public slots:
       void updateViewRect();
-      void updateLayout();
+      void layoutChanged();
 
    signals:
       void viewRectMoved(const QRectF&);
@@ -61,7 +69,6 @@ class Navigator : public QWidget {
       Navigator(QScrollArea* sa, QWidget* parent = 0);
       void setScore(ScoreView*);
       void setViewRect(const QRectF& r);
-      void layoutChanged();
       };
 
 #endif

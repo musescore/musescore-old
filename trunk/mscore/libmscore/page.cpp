@@ -639,9 +639,10 @@ void Page::clear()
 void Page::doRebuildBspTree()
       {
       QList<Element*> el;
-      foreach(System* s, _systems)
+      foreach(System* s, _systems) {
             foreach(MeasureBase* m, s->measures()) {
                   m->scanElements(&el, collectElements, false);
+                  }
             }
       scanElements(&el, collectElements, false);
 

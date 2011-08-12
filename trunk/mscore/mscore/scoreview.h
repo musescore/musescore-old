@@ -380,6 +380,7 @@ class ScoreView : public QWidget, public MuseScoreView {
       void setEditPos(const QPointF&);
 
       virtual void moveCursor();
+      virtual void layoutChanged();
       virtual void dataChanged(const QRectF&);
       virtual void updateAll();
       virtual void adjustCanvasPosition(const Element* el, bool playBack);

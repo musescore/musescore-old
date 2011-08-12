@@ -725,6 +725,9 @@ void Score::doLayout()
             m->layout2();
 
       rebuildBspTree();
+printf("doLayout\n");
+      foreach(MuseScoreView* v, viewer)
+            v->layoutChanged();
       }
 
 //---------------------------------------------------------

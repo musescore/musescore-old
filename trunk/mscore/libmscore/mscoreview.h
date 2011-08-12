@@ -25,6 +25,7 @@ class Note;
 class MuseScoreView {
    public:
       MuseScoreView() {}
+      virtual void layoutChanged() {}
       virtual void dataChanged(const QRectF&) = 0;
       virtual void updateAll() = 0;
       virtual void moveCursor() = 0;

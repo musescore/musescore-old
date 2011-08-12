@@ -495,14 +495,14 @@ MuseScore::MuseScore()
       layout->setSpacing(0);
       mainScore->setLayout(layout);
 
-      navigator = new QScrollArea;
-      navigator->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-      navigator->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-      navigator->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-      navigator->setMinimumHeight(40);
-      navigator->setFrameStyle(QFrame::Box | QFrame::Raised);
-      navigator->setLineWidth(2);
-      mainWindow->addWidget(navigator);
+      _navigator = new QScrollArea;
+      _navigator->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+      _navigator->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+      _navigator->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+      _navigator->setMinimumHeight(40);
+      _navigator->setFrameStyle(QFrame::Box | QFrame::Raised);
+      _navigator->setLineWidth(2);
+      mainWindow->addWidget(_navigator);
       showNavigator(preferences.showNavigator);
 
       QList<int> sizes;
@@ -1329,8 +1329,8 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
             changeState(STATE_DISABLED);
             _undoGroup->setActiveStack(0);
             setWindowTitle("MuseScore");
-            if (navigator)
-                  static_cast<Navigator*>(navigator->widget())->setScore(0);
+            if (_navigator)
+                  static_cast<Navigator*>(_navigator->widget())->setScore(0);
             return;
             }
       changeState(view->mscoreState());
@@ -1356,8 +1356,8 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
 
       setPos(cs->inputPos());
       _statusBar->showMessage(cs->filePath(), 2000);
-      if (navigator)
-            static_cast<Navigator*>(navigator->widget())->setScore(view);
+      if (_navigator)
+            static_cast<Navigator*>(_navigator->widget())->setScore(view);
       }
 
 //---------------------------------------------------------
@@ -4384,8 +4384,10 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             showInspector(a->isChecked());
       else if (cmd == "toggle-playpanel")
             showPlayPanel(a->isChecked());
-      else if (cmd == "toggle-navigator")
+      else if (cmd == "toggle-navigator") {
+printf("cmd show navigator\n");
             showNavigator(a->isChecked());
+            }
       else if (cmd == "toggle-mixer")
             showMixer(a->isChecked());
       else if (cmd == "synth-control")
@@ -4575,5 +4577,14 @@ void MuseScore::closeWebPanelPermanently()
       showWebPanel(false);
       preferences.showWebPanel = false;
       preferences.dirty  = true;
+      }
+
+//---------------------------------------------------------
+//   navigator
+//---------------------------------------------------------
+
+Navigator* MuseScore::navigator() const
+      {
+      return _navigator ? static_cast<Navigator*>(_navigator->widget()) : 0;
       }
 
