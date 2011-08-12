@@ -28,7 +28,6 @@
 		543E98A713D57E7F0034391A /* libQtXmlPatterns.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 543E98A413D57E7F0034391A /* libQtXmlPatterns.a */; };
 		5456CC6613D57FDE00937580 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5456CC6513D57FDE00937580 /* OpenGLES.framework */; };
 		5456CC6913D57FEC00937580 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5456CC6813D57FEC00937580 /* QuartzCore.framework */; };
-		5456CD7613D5BA3300937580 /* main.qml in Resources */ = {isa = PBXBuildFile; fileRef = 543E987E13D5765A0034391A /* main.qml */; };
 		5456CDA313D5E4C700937580 /* painterqt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5456CD9913D5E4C700937580 /* painterqt.cpp */; };
 		5456CDAB13D5F80000937580 /* audioqueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5456CDA813D5F80000937580 /* audioqueue.cpp */; };
 		5456D02213D5FE3A00937580 /* accidental.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5456CF5113D5FE3A00937580 /* accidental.cpp */; };
@@ -168,7 +167,6 @@
 		543E986113D575C80034391A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		543E986913D575C80034391A /* player-ios-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "player-ios-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		543E987D13D5765A0034391A /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = SOURCE_ROOT; };
-		543E987E13D5765A0034391A /* main.qml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.qml; sourceTree = SOURCE_ROOT; };
 		543E987F13D5765A0034391A /* moc_qmlapplicationviewer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = moc_qmlapplicationviewer.cpp; sourceTree = SOURCE_ROOT; };
 		543E988013D5765A0034391A /* player-ios-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "player-ios-Info.plist"; sourceTree = SOURCE_ROOT; };
 		543E988113D5765A0034391A /* qmlapplicationviewer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = qmlapplicationviewer.cpp; sourceTree = SOURCE_ROOT; };
@@ -548,7 +546,6 @@
 			isa = PBXGroup;
 			children = (
 				54350E8B13D7F5900019790B /* fonts */,
-				543E987E13D5765A0034391A /* main.qml */,
 				54B64C5B13D622AB00360341 /* mscore20.xml */,
 				54B64C5513D622AB00360341 /* gonville.xml */,
 			);
@@ -885,7 +882,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5456CD7613D5BA3300937580 /* main.qml in Resources */,
 				54B64C6113D622AB00360341 /* gonville.xml in Resources */,
 				54B64C6713D622AB00360341 /* mscore20.xml in Resources */,
 				54350E8C13D7F5900019790B /* fonts in Resources */,

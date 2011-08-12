@@ -20,12 +20,12 @@
       <file alias="scores/italian-1.mscz">../demos/italian-1.mscz</file>
 
       <file alias="mplayer.qml">../player-qt/mplayer.qml</file>
-      <file alias="mobile/ToolBar.qml>../player-qt/mobile/ToolBar.qml</file>
-      <file alias="mobile/Button.qml>../player-qt/mobile/Button.qml</file>
-      <file alias="mobile/images/titlebar.sci>../player-qt/mobile/images/titlebar.sci</file>
-      <file alias="mobile/images/titlebar.png>../player-qt/mobile/images/titelbar.png</file>
-      <file alias="mobile/images/toolbutton.sci>../player-qt/mobile/images/toolbutton.sci</file>
-      <file alias="mobile/images/toolbutton.png>../player-qt/mobile/images/toolbutton.png</file>
+      <file alias="mobile/ToolBar.qml">../player-qt/mobile/ToolBar.qml</file>
+      <file alias="mobile/Button.qml">../player-qt/mobile/Button.qml</file>
+      <file alias="mobile/images/titlebar.sci">../player-qt/mobile/images/titlebar.sci</file>
+      <file alias="mobile/images/titlebar.png">../player-qt/mobile/images/titlebar.png</file>
+      <file alias="mobile/images/toolbutton.sci">../player-qt/mobile/images/toolbutton.sci</file>
+      <file alias="mobile/images/toolbutton.png">../player-qt/mobile/images/toolbutton.png</file>
       <file alias="mobile/images/paper5.png">../share/wallpaper/paper5.png</file>
    </qresource>
 </RCC>
