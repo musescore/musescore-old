@@ -174,7 +174,7 @@ class MuseScore : public QMainWindow {
       QSplitter* splitter;
       ScoreTab* tab1;
       ScoreTab* tab2;
-      QScrollArea* navigator;
+      QScrollArea* _navigator;
       QSplitter* mainWindow;
 
       QMenu* menuDisplay;
@@ -564,6 +564,8 @@ class MuseScore : public QMainWindow {
       void addMetronome();
 
       Q_INVOKABLE QString getLocaleISOCode();
+      Navigator* navigator() const;
+      QScrollArea* navigatorScrollArea() const { return _navigator; }
       };
 
 extern MuseScore* mscore;

@@ -80,6 +80,8 @@
 #include "libmscore/keysig.h"
 #include "libmscore/timesig.h"
 
+#include "navigator.h"
+
 static const QEvent::Type CloneDrag = QEvent::Type(QEvent::User + 1);
 extern TextPalette* textPalette;
 
@@ -5763,4 +5765,13 @@ void ScoreView::cmdAddPitch1(int pitch, bool addFlag)
       _score->endCmd();
       }
 
+//---------------------------------------------------------
+//   layoutChanged
+//---------------------------------------------------------
+
+void ScoreView::layoutChanged()
+      {
+      if (mscore->navigator())
+            mscore->navigator()->layoutChanged();
+      }
 
