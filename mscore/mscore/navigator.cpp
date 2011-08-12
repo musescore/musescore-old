@@ -148,12 +148,17 @@ void Navigator::paintEvent(QPaintEvent* ev)
       {
       QPainter p(this);
       QRect r(ev->rect());
+      if (pm.isNull()) {
+            p.fillRect(r, QColor(Qt::darkGray));
+            return;
+            }
       p.drawPixmap(r.topLeft(), pm, r);
       QPen pen(Qt::blue, 2.0);
       p.setPen(pen);
-      p.setBrush(Qt::NoBrush);
-      if (_cv)
+      p.setBrush(QColor(0, 0, 255, 40));
+      if (_cv && !recreatePixmap) {
             p.drawRect(viewRect);
+            }
       }
 
 //---------------------------------------------------------
