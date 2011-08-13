@@ -1,13 +1,13 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'scoreview.h'
 **
-** Created: Fri Aug 12 20:32:48 2011
+** Created: Sat Aug 13 14:54:30 2011
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "scoreview.h"
+#include "../player-qt/scoreview.h"
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'scoreview.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 63
@@ -33,16 +33,16 @@ static const uint qt_meta_data_ScoreView[] = {
  // slots: signature, parameters, type, tag, flags
       13,   11,   10,   10, 0x0a,
       31,   10,   10,   10, 0x0a,
-      38,   10,   10,   10, 0x0a,
-      58,   10,   10,   10, 0x0a,
-      69,   10,   10,   10, 0x0a,
+      40,   38,   10,   10, 0x0a,
+      60,   10,   10,   10, 0x0a,
+      71,   10,   10,   10, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_ScoreView[] = {
     "ScoreView\0\0s\0setScore(QString)\0play()\0"
-    "setCurrentPage(int)\0nextPage()\0"
+    "n\0setCurrentPage(int)\0nextPage()\0"
     "prevPage()\0"
 };
 
