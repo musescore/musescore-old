@@ -50,6 +50,7 @@ bool QueueAudioData::init()
       {
       OSStatus status = 0;
 
+      printf("QueueAudioData::init()\n");
       //
       // Setup the audio device.
       //
@@ -71,8 +72,8 @@ bool QueueAudioData::init()
       status = AudioQueueNewOutput(&deviceFormat,  // Format
          processAudio,                             // Callback
          this,                                     // User data, passed to the callback
-         CFRunLoopGetMain(),            // RunLoop
-         0, // kCFRunLoopDefaultMode,                    // RunLoop mode
+         CFRunLoopGetMain(),                       // RunLoop
+         0, // kCFRunLoopDefaultMode,              // RunLoop mode
          0,                                        // Flags ; must be zero (per documentation)...
          &audioQueue);                             // Output
 
@@ -99,6 +100,7 @@ bool QueueAudioData::init()
 
 bool QueueAudioData::start()
       {
+      printf("QueueAudioData::start()\n");
       AudioQueueStart(audioQueue, 0);
       running = true;
       return true;
@@ -110,6 +112,7 @@ bool QueueAudioData::start()
 
 bool QueueAudioData::stop()
       {
+      printf("QueueAudioData::stop()\n");
       AudioQueueStop(audioQueue, true); // stop immediately, synchronously
       running = false;
       return true;

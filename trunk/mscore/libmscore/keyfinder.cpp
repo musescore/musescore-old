@@ -124,7 +124,8 @@ static QList<qreal> analysis[56][56];
 static QList<int> best[56];
 static QList<int> final;
 
-static int numnotes, numchords, num_sbeats;
+// static int numnotes, numchords, num_sbeats;
+static int num_sbeats;
 
 static QList<int> pc_tally;
 static QList<qreal> final_score;
