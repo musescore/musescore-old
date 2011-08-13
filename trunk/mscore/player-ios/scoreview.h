@@ -28,8 +28,7 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
       Q_OBJECT
 
       Score* score;
-      QPointF _startDrag;
-      QPointF _offset;
+      int _currentPage;
 
       virtual void dataChanged(const QRectF&);
       virtual void updateAll();
@@ -51,14 +50,14 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
 
       virtual void setCursor(const QCursor&) {} // { QWidget::setCursor(c); }
       virtual QCursor cursor() const { return QCursor(); } // { return QWidget::cursor(); }
-
-      void zoom(int step, const QPoint&);
+      virtual QRectF boundingRect() const;
 
    public slots:
-      void drag(qreal x, qreal y);
-      void startDrag(qreal x, qreal y);
       void setScore(const QString& s);
       void play();
+      void setCurrentPage(int);
+      void nextPage();
+      void prevPage();
 
    public:
       ScoreView(QDeclarativeItem* parent = 0);
