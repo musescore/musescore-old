@@ -124,6 +124,8 @@ void Seq::start()
       {
       if (playlistChanged)
             collectEvents();
+      if (!cs)
+            return;
       seek(cs->playPos());
       state = TRANSPORT_PLAY;
       }

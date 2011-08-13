@@ -25,10 +25,12 @@ Item {
             id: background;
             anchors.fill: parent;
 
+            color: "#343434"
             Image {
-                  source: "mobile/images/paper5.png";
-                  fillMode: Image.Tile;
-                  anchors.fill: parent;
+                  source: "mobile/images/stripes.png"
+                  fillMode: Image.Tile
+                  anchors.fill: parent
+                  opacity: 0.3
                   }
 
             states: State {
@@ -41,6 +43,11 @@ Item {
                   PropertyChanges {
                         target: scoreListView
                         x: -(parent.width * 1.5)
+                        }
+                  PropertyChanges {
+                        target: toolBar
+                        button1Visible: true
+                        button2Visible: true
                         }
                   }
             transitions: Transition {
@@ -78,31 +85,16 @@ Item {
 
             ListView {
                   id: scoreListView
-                  width: parent.width;
-                  height: parent.height;
-
-                  clip: true
+                  width: parent.width
+                  height: parent.height
                   model: scorelist
-
                   delegate: Mobile.ListDelegate { }
-                  header: myScoresBanner
 
-                  footer: Rectangle {
-                        width: parent.width; height: 30
-                        gradient: scorecolors
-                        }
-                  highlight: Rectangle {
-                        width: parent.width
-                        color: "lightgray"
-                        }
                   MouseArea {
                         anchors.fill: parent
                         onClicked: {
                               var idx = scoreListView.indexAt(mouseX, mouseY)
                               if (idx >= 0) {
-                                    scoreListView.currentIndex = idx
-                                    console.log(idx)
-                                    console.log(scorelist.get(idx).type)
                                     scoreView.setScore(scorelist.get(idx).path)
                                     screen.inScoreView = true
                                     }
@@ -140,7 +132,8 @@ Item {
                         fillMode: Image.Tile;
                         anchors.fill: parent;
                         }
-  */
+                        */
+
                   MouseArea {
                         state: "normal"
                         states: [
@@ -196,6 +189,8 @@ Item {
                               screen.inScoreView = true;
                         }
                   onButton2Clicked: scoreView.play();
+                  button1Visible: false
+                  button2Visible: false
                   }
             }
       }
