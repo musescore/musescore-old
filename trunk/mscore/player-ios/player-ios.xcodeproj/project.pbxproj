@@ -131,7 +131,8 @@
 		5456D08613D5FE3C00937580 /* xml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5456D02013D5FE3A00937580 /* xml.cpp */; };
 		54ADFC6813E73A68002F0D45 /* ossia.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54ADFC6613E73A68002F0D45 /* ossia.cpp */; };
 		54B395A813F678FA00542718 /* painterqt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54B395A713F678FA00542718 /* painterqt.cpp */; };
-		54B64BFC13D61AA700360341 /* scoreview.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54B64BF513D61AA700360341 /* scoreview.cpp */; };
+		54B395B013F6AC6900542718 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B395AF13F6AC6900542718 /* AudioToolbox.framework */; };
+		54B395B213F6B42600542718 /* scoreview.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54B395B113F6B42600542718 /* scoreview.cpp */; };
 		54B64BFD13D61AA700360341 /* seq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54B64BF713D61AA700360341 /* seq.cpp */; };
 		54B64C1213D61B3700360341 /* al.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54B64C0113D61B3700360341 /* al.cpp */; };
 		54B64C1713D61B3700360341 /* fraction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54B64C0813D61B3700360341 /* fraction.cpp */; };
@@ -400,8 +401,8 @@
 		54ADFC6613E73A68002F0D45 /* ossia.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ossia.cpp; sourceTree = "<group>"; };
 		54ADFC6713E73A68002F0D45 /* ossia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ossia.h; sourceTree = "<group>"; };
 		54B395A713F678FA00542718 /* painterqt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = painterqt.cpp; path = "../player-qt/painterqt.cpp"; sourceTree = "<group>"; };
-		54B64BF513D61AA700360341 /* scoreview.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scoreview.cpp; sourceTree = "<group>"; };
-		54B64BF613D61AA700360341 /* scoreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scoreview.h; sourceTree = "<group>"; };
+		54B395AF13F6AC6900542718 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		54B395B113F6B42600542718 /* scoreview.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scoreview.cpp; path = "../player-qt/scoreview.cpp"; sourceTree = "<group>"; };
 		54B64BF713D61AA700360341 /* seq.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = seq.cpp; sourceTree = "<group>"; };
 		54B64BF813D61AA700360341 /* seq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = seq.h; sourceTree = "<group>"; };
 		54B64BF913D61AA700360341 /* sparm_p.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sparm_p.h; sourceTree = "<group>"; };
@@ -471,6 +472,7 @@
 				543E98A713D57E7F0034391A /* libQtXmlPatterns.a in Frameworks */,
 				5456CC6613D57FDE00937580 /* OpenGLES.framework in Frameworks */,
 				5456CC6913D57FEC00937580 /* QuartzCore.framework in Frameworks */,
+				54B395B013F6AC6900542718 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,10 +487,9 @@
 				54B64C0013D61B3700360341 /* al */,
 				5456CF5013D5FE3A00937580 /* libmscore */,
 				543E987D13D5765A0034391A /* main.mm */,
+				54B395B113F6B42600542718 /* scoreview.cpp */,
 				542645CD13D6CEAC00EBD426 /* mscoreplay.cpp */,
-				54B64BF513D61AA700360341 /* scoreview.cpp */,
 				54B64C4D13D6218D00360341 /* moc_scoreview.cpp */,
-				54B64BF613D61AA700360341 /* scoreview.h */,
 				54B64BF713D61AA700360341 /* seq.cpp */,
 				54B64BF813D61AA700360341 /* seq.h */,
 				54B64BF913D61AA700360341 /* sparm_p.h */,
@@ -522,6 +523,7 @@
 		543E985C13D575C80034391A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				54B395AF13F6AC6900542718 /* AudioToolbox.framework */,
 				543E98A213D57E7F0034391A /* libQtScript.a */,
 				543E98A313D57E7F0034391A /* libQtSql.a */,
 				543E98A413D57E7F0034391A /* libQtXmlPatterns.a */,
@@ -999,7 +1001,6 @@
 				5456D08413D5FE3C00937580 /* velo.cpp in Sources */,
 				5456D08513D5FE3C00937580 /* volta.cpp in Sources */,
 				5456D08613D5FE3C00937580 /* xml.cpp in Sources */,
-				54B64BFC13D61AA700360341 /* scoreview.cpp in Sources */,
 				54B64BFD13D61AA700360341 /* seq.cpp in Sources */,
 				54B64C1213D61B3700360341 /* al.cpp in Sources */,
 				54B64C1713D61B3700360341 /* fraction.cpp in Sources */,
@@ -1025,6 +1026,7 @@
 				542645CE13D6CEAC00EBD426 /* mscoreplay.cpp in Sources */,
 				54ADFC6813E73A68002F0D45 /* ossia.cpp in Sources */,
 				54B395A813F678FA00542718 /* painterqt.cpp in Sources */,
+				54B395B213F6B42600542718 /* scoreview.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

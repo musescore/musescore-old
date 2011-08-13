@@ -81,14 +81,16 @@ bool Seq::init()
       {
       driver = new QueueAudio(this);
       if (!driver->init()) {
-            printf("init audio queue failed\n");
+printf("init audio queue failed\n");
             delete driver;
             driver = 0;
             }
       int sampleRate = driver->sampleRate();
       synti->init(sampleRate);
-      if (!driver->start())
+      if (!driver->start()) {
+printf("audio: driver start failed\n");
             return false;
+            }
       running = true;
       return true;
       }
@@ -122,6 +124,7 @@ void Seq::setScore(Score* s)
 
 void Seq::start()
       {
+      printf("start\n");
       if (playlistChanged)
             collectEvents();
       seek(cs->playPos());
@@ -134,6 +137,7 @@ void Seq::start()
 
 void Seq::stop()
       {
+      printf("stop\n");
       state    = TRANSPORT_STOP;
       int tick = 0;
       if (playPos != events.constEnd())
@@ -206,7 +210,8 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
                   if (f >= endTime)
                         break;
                   int n = lrint((f - playTime) * AL::sampleRate);
-
+                  if (n < 0)
+                        return;
                   synti->process(n, l, r);
                   l += n;
                   r += n;
@@ -415,7 +420,7 @@ QRectF Seq::heartBeat(int* pageIdx, bool* stopped)
             return r;
             }
       *stopped = false;
-#if 0
+#if 1
       qreal endTime = curTime() - startTime;
       const Note* note = 0;
       for (; guiPos != events.constEnd(); ++guiPos) {
@@ -433,7 +438,7 @@ QRectF Seq::heartBeat(int* pageIdx, bool* stopped)
       if (note) {
             Page* page = note->chord()->segment()->measure()->system()->page();
             *pageIdx = cs->pageIdx(page);
-            r = cs->moveCursor(note->chord()->segment());
+//            r = cs->moveCursor(note->chord()->segment());
             }
       else
             r.setWidth(.0);

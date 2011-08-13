@@ -428,6 +428,8 @@ class Score {
       Score* clone();
       bool appendScore(Score*);
 
+      int pageIdx(Page* page) const { return _pages.indexOf(page); }
+
       void write(Xml&);
       bool read(QDomElement);
       bool read1(QDomElement);

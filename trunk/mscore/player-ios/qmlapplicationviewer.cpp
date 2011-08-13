@@ -57,6 +57,7 @@ QmlApplicationViewer::QmlApplicationViewer(QWidget *parent)
 
       MScore::init();
       seq = new Seq;
+      seq->init();
 
       qmlRegisterType<ScoreView>("MuseScore", 1, 0, "ScoreView");
 
