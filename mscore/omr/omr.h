@@ -79,6 +79,7 @@ class Omr {
 
 class Omr {
       QList<OmrPage*> _pages;
+      QString _path;
 
    public:
       Omr(Score*)                          {}
@@ -101,7 +102,7 @@ class Omr {
       double staffDistance() const         { return 0; }
       double systemDistance() const        { return 0; }
       Score* score() const                 { return 0; }
-      const QString& path() const          { return QString(); }
+      const QString& path() const          { return _path; }
       };
 
 #endif
