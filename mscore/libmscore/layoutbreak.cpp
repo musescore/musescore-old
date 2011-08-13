@@ -23,9 +23,10 @@
 LayoutBreak::LayoutBreak(Score* score)
    : Element(score)
       {
-      _pause = score->styleD(ST_SectionPause);
-      _startWithLongNames = true;
+      _pause               = score->styleD(ST_SectionPause);
+      _startWithLongNames  = true;
       _startWithMeasureOne = true;
+      lw                   = spatium() * 0.3;
       }
 
 //---------------------------------------------------------
@@ -92,7 +93,6 @@ void LayoutBreak::layout0()
       {
       qreal _spatium = spatium();
       path      = QPainterPath();
-      lw        = _spatium * 0.3;
       qreal h  = _spatium * 4;
       qreal w  = _spatium * 2.5;
       qreal w1 = w * .6;
@@ -167,6 +167,7 @@ void LayoutBreak::setSubtype(int val)
 
 void LayoutBreak::spatiumChanged(qreal, qreal)
       {
+      lw = spatium() * 0.3;
       layout0();
       }
 

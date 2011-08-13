@@ -19,131 +19,128 @@ Item {
       id: screen
       width: 1024; height: 768
       state: "myscores"
-
-      states: [
-            State {
-                  name: "normal"
-                  PropertyChanges { target: toolBar; opacity: 0 }
-                  PropertyChanges { target: scores; width: 0 }
-                  },
-            State {
-                  name: "toolbar1"
-                  PropertyChanges { target: toolBar; opacity: 1 }
-                  PropertyChanges { target: scores;  width: 0 }
-                  },
-            State {
-                  name: "myscores"
-                  PropertyChanges { target: toolBar; opacity: 1 }
-                  PropertyChanges { target: scores;  width: 250 }
-                  }
-            ]
-      transitions: Transition {
-            PropertyAnimation {
-                  property: "width"
-                  easing.type: Easing.Linear
-                  duration: 500
-                  }
-            PropertyAnimation {
-                  property: "opacity"
-                  easing.type: Easing.Linear
-                  duration: 500
-                  }
-            }
-
-      ListModel {
-            id: scorelist
-            ListElement {
-                  type: "Promenade"
-                  path: ":/scores/promenade.mscz"
-                  }
-            ListElement {
-                  type: "Leise rieselt der Schnee"
-                  path: ":/scores/schnee.mscz"
-                  }
-            ListElement {
-                  type: "Italienisches Konzert"
-                  path: ":/scores/italian-1.mscz"
-                  }
-            }
-
-      Component {
-            id: scorelistdelegate
-            Text {
-                  id: label
-                  font.pixelSize: 18
-                  text: type
-                  }
-            }
-
-      ListView {
-            id: scores
-            anchors.left: screen.left
-            anchors.top: screen.top
-            anchors.bottom: screen.bottom
-            anchors.margins: 10
-            clip: true
-
-            model: scorelist
-            delegate: scorelistdelegate
-            header: myScoresBanner
-            footer: Rectangle {
-                  width: parent.width; height: 30
-                  gradient: scorecolors
-                  }
-            highlight: Rectangle {
-                  width: parent.width
-                  color: "lightgray"
-                  }
-            MouseArea {
-                  anchors.fill: parent
-                  onClicked: {
-                        var idx = scores.indexAt(mouseX, mouseY)
-                        if (idx >= 0) {
-                              scores.currentIndex = idx
-                              console.log(idx)
-                              console.log(scorelist.get(idx).type)
-                              scoreview.setScore(scorelist.get(idx).path)
-                              }
-                        }
-                  }
-            }
-      Component {
-            id: myScoresBanner
-            Rectangle {
-                  id: banner
-                  width: parent.width; height: 50
-                  gradient: scorecolors
-                  border { color: "#9eddf2"; width: 2 }
-                  Text {
-                        anchors.centerIn: parent
-                        text: "My Scores"
-                        font.pixelSize: 32
-                        }
-                  }
-            }
-      Gradient {
-            id: scorecolors
-            GradientStop { position: 0.0; color:  "#8ee2fe" }
-            GradientStop { position: 0.66; color: "#7ed2ee" }
-            }
+      property bool inScoreView: false;
 
       Rectangle {
-            id: view
-            anchors.left:   scores.right
-            anchors.right:  screen.right
-            anchors.top:    screen.top
-            anchors.bottom: screen.bottom
+            id: background;
+            anchors.fill: parent;
+
             Image {
                   source: "mobile/images/paper5.png";
                   fillMode: Image.Tile;
                   anchors.fill: parent;
                   }
 
-            ScoreView {
-                  id: scoreview
-                  x: 0
-                  y: 0
+            states: State {
+                  name: "ScoreView"
+                  when: screen.inScoreView == true
+                  PropertyChanges {
+                        target: scoreView
+                        x: 0
+                        }
+                  PropertyChanges {
+                        target: scoreListView
+                        x: -(parent.width * 1.5)
+                        }
+                  }
+            transitions: Transition {
+                  NumberAnimation {
+                        properties: "x"
+                        easing.type: Easing.InOutQuad
+                        duration: 500
+                        }
+                  }
 
+            ListModel {
+                  id: scorelist
+                  ListElement {
+                        title: "Promenade"
+                        path: ":/scores/promenade.mscz"
+                        }
+                  ListElement {
+                        title: "Leise rieselt der Schnee"
+                        path: ":/scores/schnee.mscz"
+                        }
+                  ListElement {
+                        title: "Italienisches Konzert"
+                        path: ":/scores/italian-1.mscz"
+                        }
+                  }
+
+            Component {
+                  id: scorelistdelegate
+                  Text {
+                        id: label
+                        font.pixelSize: 18
+                        text: type
+                        }
+                  }
+
+            ListView {
+                  id: scoreListView
+                  width: parent.width;
+                  height: parent.height;
+
+                  clip: true
+                  model: scorelist
+
+                  delegate: Mobile.ListDelegate { }
+                  header: myScoresBanner
+
+                  footer: Rectangle {
+                        width: parent.width; height: 30
+                        gradient: scorecolors
+                        }
+                  highlight: Rectangle {
+                        width: parent.width
+                        color: "lightgray"
+                        }
+                  MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                              var idx = scoreListView.indexAt(mouseX, mouseY)
+                              if (idx >= 0) {
+                                    scoreListView.currentIndex = idx
+                                    console.log(idx)
+                                    console.log(scorelist.get(idx).type)
+                                    scoreView.setScore(scorelist.get(idx).path)
+                                    screen.inScoreView = true
+                                    }
+                              }
+                        }
+                  }
+            Component {
+                  id: myScoresBanner
+                  Rectangle {
+                        id: banner
+                        width: parent.width; height: 50
+                        gradient: scorecolors
+                        border { color: "#9eddf2"; width: 2 }
+                        Text {
+                              anchors.centerIn: parent
+                              text: "My Scores"
+                              font.pixelSize: 32
+                              }
+                        }
+                  }
+            Gradient {
+                  id: scorecolors
+                  GradientStop { position: 0.0; color:  "#8ee2fe" }
+                  GradientStop { position: 0.66; color: "#7ed2ee" }
+                  }
+
+            ScoreView {
+                  id: scoreView
+                  width: parent.width;
+                  height: parent.height;
+                  x: -(parent.width * 1.5);
+
+/*                  Image {
+                        source: "mobile/images/paper5.png";
+                        fillMode: Image.Tile;
+                        anchors.fill: parent;
+                        }
+  */
                   MouseArea {
                         state: "normal"
                         states: [
@@ -152,7 +149,7 @@ Item {
                               State { name: "drag" }
                               ]
                         anchors.fill: parent
-                        drag.target: scoreview
+                        drag.target: scoreView
                         drag.axis: Drag.XandYAxis
                         drag.minimumX: 0
                         drag.maximumX: 1000
@@ -186,20 +183,20 @@ Item {
                               }
                         }
                   }
-            }
 
-      Mobile.ToolBar {
-            id: toolBar
-            height: 40; anchors.bottom: parent.bottom;
-            width: parent.width; opacity: 0.9
-            button1Label: "MyScores"; button2Label: "Play"
-            onButton1Clicked: {
-                  if (screen.state == "toolbar1")
-                        screen.state = "myscores"
-                  else
-                        screen.state = "toolbar1"
+            Mobile.ToolBar {
+                  id: toolBar
+                  height: 40; anchors.bottom: parent.bottom;
+                  width: parent.width; opacity: 0.9
+                  button1Label: "MyScores"; button2Label: "Play"
+                  onButton1Clicked: {
+                        if (screen.inScoreView == true)
+                              screen.inScoreView = false;
+                        else
+                              screen.inScoreView = true;
                         }
-            onButton2Clicked: scoreview.play();
+                  onButton2Clicked: scoreView.play();
+                  }
             }
       }
 
