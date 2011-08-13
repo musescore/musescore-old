@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'scoreview.h'
 **
-** Created: Tue Jul 19 22:32:11 2011
+** Created: Fri Aug 12 20:32:48 2011
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_ScoreView[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -31,18 +31,19 @@ static const uint qt_meta_data_ScoreView[] = {
        0,       // signalCount
 
  // slots: signature, parameters, type, tag, flags
-      15,   11,   10,   10, 0x0a,
-      33,   11,   10,   10, 0x0a,
-      58,   56,   10,   10, 0x0a,
-      76,   10,   10,   10, 0x0a,
+      13,   11,   10,   10, 0x0a,
+      31,   10,   10,   10, 0x0a,
+      38,   10,   10,   10, 0x0a,
+      58,   10,   10,   10, 0x0a,
+      69,   10,   10,   10, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_ScoreView[] = {
-    "ScoreView\0\0x,y\0drag(qreal,qreal)\0"
-    "startDrag(qreal,qreal)\0s\0setScore(QString)\0"
-    "play()\0"
+    "ScoreView\0\0s\0setScore(QString)\0play()\0"
+    "setCurrentPage(int)\0nextPage()\0"
+    "prevPage()\0"
 };
 
 void ScoreView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -51,10 +52,11 @@ void ScoreView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         Q_ASSERT(staticMetaObject.cast(_o));
         ScoreView *_t = static_cast<ScoreView *>(_o);
         switch (_id) {
-        case 0: _t->drag((*reinterpret_cast< qreal(*)>(_a[1])),(*reinterpret_cast< qreal(*)>(_a[2]))); break;
-        case 1: _t->startDrag((*reinterpret_cast< qreal(*)>(_a[1])),(*reinterpret_cast< qreal(*)>(_a[2]))); break;
-        case 2: _t->setScore((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 3: _t->play(); break;
+        case 0: _t->setScore((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 1: _t->play(); break;
+        case 2: _t->setCurrentPage((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 3: _t->nextPage(); break;
+        case 4: _t->prevPage(); break;
         default: ;
         }
     }
@@ -94,9 +96,9 @@ int ScoreView::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }
