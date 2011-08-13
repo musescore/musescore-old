@@ -55,6 +55,8 @@ ScoreView::ScoreView(QDeclarativeItem* parent)
 
 void ScoreView::setScore(const QString& name)
       {
+      if (seq->isPlaying())
+            seq->stop();
       _currentPage = 0;
       delete score;
       score = new Score(MScore::defaultStyle());
@@ -116,11 +118,15 @@ void ScoreView::setScore(const QString& name)
 
 void ScoreView::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidget*)
       {
-      PainterQt p(painter, this);
+      if (!score)
+            return;
+      QPixmap pm(width(), height());
 
-      painter->save();
-      painter->setRenderHint(QPainter::Antialiasing, true);
-      painter->setRenderHint(QPainter::TextAntialiasing, true);
+      QPainter p(&pm);
+      PainterQt pqt(&p, this);
+      p.setRenderHint(QPainter::Antialiasing, true);
+      p.setRenderHint(QPainter::TextAntialiasing, true);
+      p.drawTiledPixmap(QRect(0, 0, width(), height()), QPixmap(":/mobile/images/paper5.png"), QPoint(0,0));
 
       Page* page = score->pages()[_currentPage];
       QList<const Element*> el;
@@ -132,13 +138,13 @@ void ScoreView::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidge
       qStableSort(el.begin(), el.end(), elementLessThan);
 
       foreach(const Element* e, el) {
-            painter->save();
-            painter->translate(e->pagePos());
-            painter->setPen(QPen(e->curColor()));
-            e->draw(&p);
-            painter->restore();
+            p.save();
+            p.translate(e->pagePos());
+            p.setPen(QPen(e->curColor()));
+            e->draw(&pqt);
+            p.restore();
             }
-      painter->restore();
+      painter->drawPixmap(0, 0, pm);
       }
 
 //---------------------------------------------------------

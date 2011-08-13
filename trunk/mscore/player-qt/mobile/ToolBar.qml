@@ -5,6 +5,7 @@ Item {
 
       property alias button1Label: button1.text
       property alias button2Label: button2.text
+      property alias button1Visible: button1.visible
       property alias button2Visible: button2.visible
 
       signal button1Clicked

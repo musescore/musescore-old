@@ -50,7 +50,6 @@ int main(int argc, char* argv[])
             }
 
       qmlRegisterType<ScoreView>("MuseScore", 1, 0, "ScoreView");
-      qmlRegisterType<ScoreView>("MuseScore", 1, 0, "ScoreView1");
 
       QDeclarativeView view;
       view.resize(1040, 780);
