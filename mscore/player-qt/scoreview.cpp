@@ -46,6 +46,7 @@ ScoreView::ScoreView(QDeclarativeItem* parent)
       setFlag(QGraphicsItem::ItemHasNoContents, false);
       setCacheMode(QGraphicsItem::DeviceCoordinateCache);
       setSmooth(true);
+      setCacheMode(QGraphicsItem::ItemCoordinateCache);
       score = 0;
       }
 
@@ -113,7 +114,7 @@ void ScoreView::setScore(const QString& name)
       }
 
 //---------------------------------------------------------
-//   paintEvent
+//   paint
 //---------------------------------------------------------
 
 void ScoreView::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidget*)
@@ -209,47 +210,39 @@ void ScoreView::updateAll()
 
 void ScoreView::moveCursor()
       {
-      printf("moveCursor\n");
       }
 
 void ScoreView::adjustCanvasPosition(const Element*, bool)
       {
-      printf("adjustCanvasPosition\n");
       }
 
 void ScoreView::changeEditElement(Element*)
       {
-      printf("changeEditElement\n");
       }
 
 int ScoreView::gripCount() const
       {
-      printf("gripCount\n");
       return 0;
       }
 
 const QRectF& ScoreView::getGrip(int) const
       {
-      printf("getGrip\n");
       static const QRectF a;
       return a;
       }
 
 const QTransform& ScoreView::matrix() const
       {
-      printf("matrix\n");
       static const QTransform t;
       return t; // _matrix;
       }
 
 void ScoreView::setDropRectangle(const QRectF&)
       {
-      printf("setDropRectanble\n");
       }
 
 void ScoreView::cmdAddSlur(Note*, Note*)
       {
-      printf("cmdAddSlur\n");
       }
 
 //---------------------------------------------------------

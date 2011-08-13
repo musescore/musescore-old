@@ -17,6 +17,8 @@ import "mobile" as Mobile
 
 Item {
       id: screen
+//      anchors.fill: parent;
+
       width: 1024; height: 768
       state: "myscores"
       property bool inScoreView: false;
@@ -37,7 +39,7 @@ Item {
                   name: "ScoreView"
                   when: screen.inScoreView == true
                   PropertyChanges {
-                        target: scoreView
+                        target: scoreViewFlick
                         x: 0
                         }
                   PropertyChanges {
@@ -101,78 +103,26 @@ Item {
                               }
                         }
                   }
-            Component {
-                  id: myScoresBanner
-                  Rectangle {
-                        id: banner
-                        width: parent.width; height: 50
-                        gradient: scorecolors
-                        border { color: "#9eddf2"; width: 2 }
-                        Text {
-                              anchors.centerIn: parent
-                              text: "My Scores"
-                              font.pixelSize: 32
-                              }
-                        }
-                  }
-            Gradient {
-                  id: scorecolors
-                  GradientStop { position: 0.0; color:  "#8ee2fe" }
-                  GradientStop { position: 0.66; color: "#7ed2ee" }
-                  }
 
-            ScoreView {
-                  id: scoreView
+            Flickable {
+                  id: scoreViewFlick
                   width: parent.width;
                   height: parent.height;
                   x: -(parent.width * 1.5);
 
-/*                  Image {
-                        source: "mobile/images/paper5.png";
-                        fillMode: Image.Tile;
-                        anchors.fill: parent;
-                        }
-                        */
+                  contentWidth: scoreView.width
+                  contentHeight: scoreView.height
 
-                  MouseArea {
-                        state: "normal"
-                        states: [
-                              State { name: "normal" },
-                              State { name: "pressed" },
-                              State { name: "drag" }
-                              ]
-                        anchors.fill: parent
-                        drag.target: scoreView
-                        drag.axis: Drag.XandYAxis
-                        drag.minimumX: 0
-                        drag.maximumX: 1000
-                        drag.minimumY: 0
-                        drag.maximumY: 1000
-
-                        onPositionChanged: {
-                              // parent.drag(mouseX, mouseY)
-                              state = "drag"
-                              }
-                        onPressed:         {
-                              state = "pressed"
-                             // parent.startDrag(mouseX, mouseY)
-                              }
-                        onReleased: {
-                              if (state == "pressed"
-                                 && (mouseX > width * .3)
-                                 && (mouseX < width * .6)) {
-                                    if (screen.state == "normal")
-                                          screen.state = "toolbar1"
-                                    else if (player.state == "toolbar1")
-                                          screen.state = "normal"
+                  ScoreView {
+                        id: scoreView
+                        MouseArea {
+                              anchors.fill: parent
+                              onClicked: {
+                                    if (mouseX < width * .3)
+                                          parent.prevPage()
+                                    else if (mouseX > width * .6)
+                                          parent.nextPage()
                                     }
-                              // state = "normal";
-                              }
-                        onClicked: {
-                              if (mouseX < width * .3)
-                                    parent.prevPage()
-                              else if (mouseX > width * .6)
-                                    parent.nextPage()
                               }
                         }
                   }
