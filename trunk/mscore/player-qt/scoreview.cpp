@@ -32,6 +32,7 @@
 #include "libmscore/measure.h"
 #include "libmscore/segment.h"
 #include "libmscore/keysig.h"
+#include "libmscore/system.h"
 
 #include "seq.h"
 
@@ -46,7 +47,6 @@ ScoreView::ScoreView(QDeclarativeItem* parent)
       setCacheMode(QGraphicsItem::DeviceCoordinateCache);
       setSmooth(true);
       score = 0;
-      setScore(":/scores/promenade.mscz");
       }
 
 //---------------------------------------------------------
@@ -119,20 +119,19 @@ void ScoreView::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidge
       PainterQt p(painter, this);
 
       painter->save();
-      QRectF fr(boundingRect());
-      painter->setClipRect(fr);
-      painter->setClipping(true);
       painter->setRenderHint(QPainter::Antialiasing, true);
       painter->setRenderHint(QPainter::TextAntialiasing, true);
 
       Page* page = score->pages()[_currentPage];
-      QRectF pr(page->abbox());
+      QList<const Element*> el;
+      foreach(System* s, *page->systems()) {
+            foreach(MeasureBase* m, s->measures())
+                  m->scanElements(&el, collectElements, false);
+            }
+      page->scanElements(&el, collectElements, false);
+      qStableSort(el.begin(), el.end(), elementLessThan);
 
-      QList<const Element*> ell = page->items(fr);
-      qStableSort(ell.begin(), ell.end(), elementLessThan);
-
-      foreach(const Element* e, ell) {
-            e->itemDiscovered = 0;
+      foreach(const Element* e, el) {
             painter->save();
             painter->translate(e->pagePos());
             painter->setPen(QPen(e->curColor()));
@@ -148,6 +147,8 @@ void ScoreView::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidge
 
 QRectF ScoreView::boundingRect() const
       {
+      if (score == 0)
+            return QRectF();
       Page* page = score->pages()[_currentPage];
       QRectF pr(page->abbox());
       return QRectF(0.0, 0.0, pr.width(), pr.height());

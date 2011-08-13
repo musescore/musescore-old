@@ -22,10 +22,12 @@
       <file>mplayer.qml</file>
       <file>mobile/ToolBar.qml</file>
       <file>mobile/Button.qml</file>
+      <file>mobile/ListDelegate.qml</file>
       <file>mobile/images/titlebar.sci</file>
       <file>mobile/images/titlebar.png</file>
       <file>mobile/images/toolbutton.sci</file>
       <file>mobile/images/toolbutton.png</file>
+      <file>mobile/images/gloss.png</file>
       <file alias="mobile/images/paper5.png">../share/wallpaper/paper5.png</file>
    </qresource>
 </RCC>
