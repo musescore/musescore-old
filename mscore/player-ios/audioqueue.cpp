@@ -50,7 +50,6 @@ bool QueueAudioData::init()
       {
       OSStatus status = 0;
 
-      printf("QueueAudioData::init()\n");
       //
       // Setup the audio device.
       //
@@ -77,6 +76,8 @@ bool QueueAudioData::init()
          0,                                        // Flags ; must be zero (per documentation)...
          &audioQueue);                             // Output
 
+      Float32 volume = 1.0;
+      AudioQueueSetParameter(audioQueue, kAudioQueueParam_Volume,  volume);
       //
       // Allocate buffers for the AudioQueue,
       // and pre-fill them.

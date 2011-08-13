@@ -124,7 +124,6 @@ void Seq::setScore(Score* s)
 
 void Seq::start()
       {
-      printf("start\n");
       if (playlistChanged)
             collectEvents();
       seek(cs->playPos());
@@ -137,7 +136,6 @@ void Seq::start()
 
 void Seq::stop()
       {
-      printf("stop\n");
       state    = TRANSPORT_STOP;
       int tick = 0;
       if (playPos != events.constEnd())
@@ -211,7 +209,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
                         break;
                   int n = lrint((f - playTime) * AL::sampleRate);
                   if (n < 0)
-                        return;
+                        break;
                   synti->process(n, l, r);
                   l += n;
                   r += n;
@@ -356,12 +354,8 @@ void Seq::collectEvents()
             --e;
             endTick = e.key();
             }
-
-//      PlayPanel* pp = mscore->getPlayPanel();
-//      if (pp)
-//            pp->setEndpos(endTick);
+      printf("collect events %d\n", events.size());
       playlistChanged = false;
-//      cs->setPlaylistDirty(false);
       }
 
 //---------------------------------------------------------
