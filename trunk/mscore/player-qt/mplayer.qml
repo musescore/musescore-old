@@ -17,15 +17,13 @@ import "mobile" as Mobile
 
 Item {
       id: screen
-//      anchors.fill: parent;
-
       width: 1024; height: 768
       state: "myscores"
-      property bool inScoreView: false;
+      property bool inScoreView: false
 
       Rectangle {
             id: background;
-            anchors.fill: parent;
+            anchors.fill: parent
 
             color: "#343434"
             Image {
@@ -106,15 +104,18 @@ Item {
 
             Flickable {
                   id: scoreViewFlick
-                  width: parent.width;
-                  height: parent.height;
-                  x: -(parent.width * 1.5);
+                  width:  parent.width
+                  height: parent.height
+                  x: -(parent.width * 1.5)
 
-                  contentWidth: scoreView.width
+                  contentWidth:  scoreView.width
                   contentHeight: scoreView.height
 
                   ScoreView {
                         id: scoreView
+                        parentWidth: screen.width
+                        parentHeight: screen.height
+
                         MouseArea {
                               anchors.fill: parent
                               onClicked: {
@@ -129,14 +130,14 @@ Item {
 
             Mobile.ToolBar {
                   id: toolBar
-                  height: 40; anchors.bottom: parent.bottom;
+                  height: 40; anchors.bottom: parent.bottom
                   width: parent.width; opacity: 0.9
                   button1Label: "MyScores"; button2Label: "Play"
                   onButton1Clicked: {
                         if (screen.inScoreView == true)
-                              screen.inScoreView = false;
+                              screen.inScoreView = false
                         else
-                              screen.inScoreView = true;
+                              screen.inScoreView = true
                         }
                   onButton2Clicked: scoreView.play();
                   button1Visible: false

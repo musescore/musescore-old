@@ -26,9 +26,14 @@
 
 class ScoreView : public QDeclarativeItem, public MuseScoreView {
       Q_OBJECT
+      Q_PROPERTY(qreal parentWidth  READ parentWidth  WRITE setParentWidth)
+      Q_PROPERTY(qreal parentHeight READ parentHeight WRITE setParentHeight)
 
       Score* score;
       int _currentPage;
+      qreal _parentWidth, _parentHeight;
+      qreal mag;
+      QRectF _boundingRect;
 
       virtual void dataChanged(const QRectF&);
       virtual void updateAll();
@@ -50,7 +55,7 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
 
       virtual void setCursor(const QCursor&) {} // { QWidget::setCursor(c); }
       virtual QCursor cursor() const { return QCursor(); } // { return QWidget::cursor(); }
-      virtual QRectF boundingRect() const;
+      virtual QRectF boundingRect() const { return _boundingRect; }
 
    public slots:
       void setScore(const QString& s);
@@ -62,6 +67,10 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
    public:
       ScoreView(QDeclarativeItem* parent = 0);
       virtual ~ScoreView() {}
+      qreal parentWidth() const       { return _parentWidth;  }
+      void setParentWidth(qreal val)  { _parentWidth = val;   }
+      qreal parentHeight() const      { return _parentHeight; }
+      void setParentHeight(qreal val) { _parentHeight = val;  }
       };
 
 

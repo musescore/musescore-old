@@ -1356,7 +1356,7 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
 
       setPos(cs->inputPos());
       _statusBar->showMessage(cs->filePath(), 2000);
-      if (_navigator)
+      if (_navigator && _navigator->widget())
             static_cast<Navigator*>(_navigator->widget())->setScore(view);
       }
 

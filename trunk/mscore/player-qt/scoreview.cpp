@@ -106,10 +106,18 @@ void ScoreView::setScore(const QString& name)
             }
       score->updateNotes();
       score->doLayout();
+      score->setPrinting(true);     // render only printable elements
 
       seq->setScore(score);
-      setWidth(boundingRect().width());
-      setHeight(boundingRect().height());
+      Page* page = score->pages()[_currentPage];
+      QRectF pr(page->abbox());
+      qreal m1 = parentWidth()  / pr.width();
+      qreal m2 = parentHeight() / pr.height();
+      mag = qMax(m1, m2);
+      _boundingRect = QRectF(0.0, 0.0, pr.width() * mag, pr.height() * mag);
+
+      setWidth(pr.width() * mag);
+      setHeight(pr.height() * mag);
       update();
       }
 
@@ -123,11 +131,16 @@ void ScoreView::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidge
             return;
       QPixmap pm(width(), height());
 
+      if (pm.isNull())
+            return;
+
       QPainter p(&pm);
       PainterQt pqt(&p, this);
       p.setRenderHint(QPainter::Antialiasing, true);
       p.setRenderHint(QPainter::TextAntialiasing, true);
       p.drawTiledPixmap(QRect(0, 0, width(), height()), QPixmap(":/mobile/images/paper.png"), QPoint(0,0));
+
+      p.scale(mag, mag);
 
       Page* page = score->pages()[_currentPage];
       QList<const Element*> el;
@@ -136,7 +149,7 @@ void ScoreView::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidge
                   m->scanElements(&el, collectElements, false);
             }
       page->scanElements(&el, collectElements, false);
-      qStableSort(el.begin(), el.end(), elementLessThan);
+//      qStableSort(el.begin(), el.end(), elementLessThan);
 
       foreach(const Element* e, el) {
             p.save();
@@ -145,20 +158,9 @@ void ScoreView::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidge
             e->draw(&pqt);
             p.restore();
             }
+      p.end();
+
       painter->drawPixmap(0, 0, pm);
-      }
-
-//---------------------------------------------------------
-//   boundingRect
-//---------------------------------------------------------
-
-QRectF ScoreView::boundingRect() const
-      {
-      if (score == 0)
-            return QRectF();
-      Page* page = score->pages()[_currentPage];
-      QRectF pr(page->abbox());
-      return QRectF(0.0, 0.0, pr.width(), pr.height());
       }
 
 //---------------------------------------------------------
