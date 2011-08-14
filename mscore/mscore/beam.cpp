@@ -786,7 +786,7 @@ void Beam::layout()
 
             double x2 = npos.x();
             double y1 = npos.y();
-            double y  = _up ? qMin(qreal(p1dy), _p1[idx].y()) : qMax(p1dy, _p1[idx].y());
+            double y  = _up ? qMin(qreal(p1dy), _p1[idx].y()) : qMax(qreal(p1dy), _p1[idx].y());
             double y2 = y + (x2 - x1) * slope + cp.y();
 
             double stemLen = _up ? (y1 - y2) : (y2 - y1);

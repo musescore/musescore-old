@@ -156,7 +156,7 @@ void genIcons()
       icons[grace32_ICON]    = new QIcon(":/data/grace32.svg");
       icons[keys_ICON]       = new QIcon(":/data/keyboard.svg");
       icons[tie_ICON]        = new QIcon(":/data/tie.svg");
-      icons[window_ICON]     = new QIcon(":/data/mscore.xpm");
+      icons[window_ICON]     = new QIcon(":/data/mscore.png");
       icons[community_ICON]     = new QIcon(":/data/community.svg");
       }
 

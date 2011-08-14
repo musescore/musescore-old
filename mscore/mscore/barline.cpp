@@ -96,7 +96,7 @@ void BarLine::draw(QPainter& p) const
       {
       double lw = point(score()->styleS(ST_barWidth));
       double y1, y2;
-      getY(&y1, &y2);
+      getY((double*)&y1, (double*)&y2);
 
       QPen pen(p.pen());
       pen.setWidthF(lw);
@@ -346,7 +346,7 @@ void BarLine::updateGrips(int* grips, QRectF* grip) const
       *grips   = 1;
       double lw = point(score()->styleS(ST_barWidth));
       double y1, y2;
-      getY(&y1, &y2);
+      getY((double*)&y1, (double*)&y2);
       grip[0].translate(QPointF(lw * .5, y2) + canvasPos());
       }
 
@@ -393,7 +393,7 @@ void BarLine::editDrag(int, const QPointF& delta)
 void BarLine::endEditDrag()
       {
       double y1, h2;
-      getY(&y1, &h2);
+      getY((double*)&y1, (double*)&h2);
       yoff      = 0.0;
       double ay1 = canvasPos().y();
       double ay2 = ay1 + h2;
@@ -449,7 +449,7 @@ void BarLine::layout()
       _span = staff() ? staff()->barLineSpan() : 1;
 
       double y1, y2;
-      getY(&y1, &y2);
+      getY((double*)&y1, (double*)&y2);
       Spatium w = score()->styleS(ST_barWidth);
       double dw  = 0.0;
 
