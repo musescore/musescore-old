@@ -2366,7 +2366,7 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
                    el->userOff().y());
 */
             if (el->type() == HAIRPIN || el->type() == OTTAVA || el->type() == TEXTLINE) {
-                  SLine* sl = static_cast<const SLine*>(el);
+                  SLine* sl = static_cast<SLine*>(el);
 //                  printf("slin segsz=%d", sl->lineSegments().size());
                   if (sl->lineSegments().size() > 0) {
                         LineSegment* seg = sl->lineSegments().at(0);
