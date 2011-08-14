@@ -187,6 +187,11 @@ add_executable ( ${ExecutableName}
       ${AUDIO}
       )
 
+# gold does not use indirect shared libraries for symbol resolution, Linux only
+if (NOT MINGW AND NOT APPLE)
+      target_link_libraries(mscore dl rt)
+endif (NOT MINGW AND NOT APPLE)
+
 if (STATIC_SCRIPT_BINDINGS)
       target_link_libraries(mscore
             qtscript_core
