@@ -341,7 +341,7 @@ class Fluid : public Synti {
       virtual float gain() const             { return _gain * .5; }
       virtual void setGain(float v)          { _gain = v * 2.0; }
 
-      virtual void process(unsigned len, float* lout, float* rout);
+      virtual void process(unsigned len, float*);
 
       Preset* get_preset(unsigned int banknum, unsigned int prognum);
       void all_notes_off(int chan);

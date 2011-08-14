@@ -57,7 +57,7 @@ Seq::Seq()
       driver   = 0;
       running  = false;
       playPos  = events.constBegin();
-      playTime = 0.0;
+      playTime = 0;
       cs       = 0;
       state    = TRANSPORT_STOP;
       playlistChanged = false;
@@ -81,14 +81,12 @@ bool Seq::init()
       {
       driver = new QueueAudio(this);
       if (!driver->init()) {
-printf("init audio queue failed\n");
             delete driver;
             driver = 0;
             }
       int sampleRate = driver->sampleRate();
       synti->init(sampleRate);
       if (!driver->start()) {
-printf("audio: driver start failed\n");
             return false;
             }
       running = true;
@@ -168,11 +166,10 @@ void Seq::processMessages()
             switch(msg.id) {
                   case SEQ_TEMPO_CHANGE:
                         if (playTime != 0) {
-                              int tick = cs->utime2utick(playTime);
+                              int tick = cs->utime2utick(playTime / AL::sampleRate);
                               cs->tempomap()->setRelTempo(msg.data);
                               cs->repeatList()->update();
-                              playTime = cs->utick2utime(tick);
-                              startTime = curTime() - playTime;
+                              playTime = cs->utick2utime(tick) * AL::sampleRate;
                               }
                         else
                               cs->tempomap()->setRelTempo(msg.data);
@@ -191,37 +188,31 @@ void Seq::processMessages()
 //   process
 //---------------------------------------------------------
 
-void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
+void Seq::process(unsigned n, float* p)
       {
       unsigned frames = n;
-      float* l = lbuffer;
-      float* r = rbuffer;
-      memset(l, 0, sizeof(float)*n);
-      memset(r, 0, sizeof(float)*n);
 
       processMessages();
       if (state == TRANSPORT_PLAY) {
-            unsigned framePos = 0;
-            qreal endTime = playTime + qreal(frames)/qreal(AL::sampleRate);
+            int endTime = playTime + frames;
             for (; playPos != events.constEnd(); ++playPos) {
-                  qreal f = cs->utick2utime(playPos.key());
+                  int f = cs->utick2utime(playPos.key()) * AL::sampleRate;
                   if (f >= endTime)
                         break;
-                  int n = lrint((f - playTime) * AL::sampleRate);
-                  if (n < 0)
+                  int n = f - playTime;
+                  if (n < 0) {
+                        printf("n < 0\n");
                         break;
-                  synti->process(n, l, r);
-                  l += n;
-                  r += n;
-                  playTime += qreal(n)/qreal(AL::sampleRate);
-
+                        }
+                  synti->process(n, p);
+                  p += 2 * n;
+                  playTime  += n;
                   frames    -= n;
-                  framePos  += n;
                   playEvent(playPos.value());
                   }
             if (frames) {
-                  synti->process(frames, l, r);
-                  playTime += qreal(frames)/qreal(AL::sampleRate);
+                  synti->process(frames, p);
+                  playTime += frames;
                   }
             if (playPos == events.constEnd()) {
                   driver->stopTransport();
@@ -230,7 +221,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
                   }
             }
       else {
-            synti->process(frames, l, r);
+            synti->process(frames, p);
             }
       }
 
@@ -309,8 +300,7 @@ void Seq::setPos(int utick)
             }
       activeNotes.clear();
 
-      playTime  = cs->utick2utime(utick);
-      startTime = curTime() - playTime;
+      playTime  = cs->utick2utime(utick) * AL::sampleRate;
       playPos   = events.lowerBound(utick);
       guiPos    = playPos;
       }
@@ -354,7 +344,6 @@ void Seq::collectEvents()
             --e;
             endTick = e.key();
             }
-      printf("collect events %d\n", events.size());
       playlistChanged = false;
       }
 
@@ -414,7 +403,7 @@ QRectF Seq::heartBeat(int* pageIdx, bool* stopped)
             return r;
             }
       *stopped = false;
-#if 1
+#if 0
       qreal endTime = curTime() - startTime;
       const Note* note = 0;
       for (; guiPos != events.constEnd(); ++guiPos) {

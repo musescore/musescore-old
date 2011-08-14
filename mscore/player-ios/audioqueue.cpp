@@ -128,23 +128,17 @@ void QueueAudioData::processAudio(void* p, AudioQueueRef inAQ, AudioQueueBufferR
       QueueAudioData* audio = static_cast<QueueAudioData*>(p);
 
       if (audio) {
-            float l[FRAME_SIZE];
-            float r[FRAME_SIZE];
-
-            audio->seq->process(FRAME_SIZE, l, r);
-
             float* fp = (float*)(inBuffer->mAudioData);
-            for (int i = 0; i < FRAME_SIZE; ++i) {
-                  *fp++ = l[i];
-                  *fp++ = r[i];
-                  }
+            audio->seq->process(FRAME_SIZE, fp);
             inBuffer->mAudioDataByteSize = FRAME_SIZE * sizeof(float) * 2;
             }
       else {
             memset(inBuffer->mAudioData, 0, inBuffer->mAudioDataBytesCapacity);
             inBuffer->mAudioDataByteSize = inBuffer->mAudioDataBytesCapacity;
             }
-      AudioQueueEnqueueBuffer(inAQ, inBuffer, 0, 0);
+      int r = AudioQueueEnqueueBuffer(inAQ, inBuffer, 0, 0);
+      if (r)
+            printf("audio error %d\n", r);
       }
 
 //---------------------------------------------------------
