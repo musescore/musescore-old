@@ -30,6 +30,6 @@
       <file alias="mobile/images/gloss.png">../player-qt/mobile/images/gloss.png</file>
       <file alias="mobile/images/stripes.png">../player-qt/mobile/images/stripes.png</file>
 
-      <file alias="mobile/images/paper5.png">../share/wallpaper/paper5.png</file>
+      <file alias="mobile/images/paper.png">../share/wallpaper/paper1.png</file>
    </qresource>
 </RCC>

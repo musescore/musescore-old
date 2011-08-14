@@ -127,7 +127,7 @@ void ScoreView::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidge
       PainterQt pqt(&p, this);
       p.setRenderHint(QPainter::Antialiasing, true);
       p.setRenderHint(QPainter::TextAntialiasing, true);
-      p.drawTiledPixmap(QRect(0, 0, width(), height()), QPixmap(":/mobile/images/paper5.png"), QPoint(0,0));
+      p.drawTiledPixmap(QRect(0, 0, width(), height()), QPixmap(":/mobile/images/paper.png"), QPoint(0,0));
 
       Page* page = score->pages()[_currentPage];
       QList<const Element*> el;

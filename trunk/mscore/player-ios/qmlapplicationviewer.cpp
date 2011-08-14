@@ -8,7 +8,7 @@
 #include <QtDeclarative/QDeclarativeContext>
 
 #include "libmscore/mscore.h"
-#include "scoreview.h"
+#include "player-qt/scoreview.h"
 #include "omr/omr.h"
 #include "seq.h"
 
@@ -83,6 +83,7 @@ void QmlApplicationViewer::addImportPath(const QString &path)
 
 void QmlApplicationViewer::setOrientation(ScreenOrientation orientation)
       {
+      printf("setOrientation %d\n", int(orientation));
       }
 
 void QmlApplicationViewer::showExpanded()

@@ -1125,6 +1125,15 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../../qt/dev/lib\"",
 				);
+				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*][arch=*]" = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../qt/dev/lib\"",
+					"\"$(SRCROOT)/../../../../qt/dev/plugins/platforms",
+				);
+				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*][arch=*]" = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../qt/dev/lib\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "BC6CC035-AE5E-4958-97A7-D8519A93F8C8";
 				VALIDATE_PRODUCT = YES;

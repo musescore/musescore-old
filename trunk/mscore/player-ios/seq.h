@@ -77,8 +77,7 @@ class Seq {
       Synti* synti;
       Driver* driver;
 
-      qreal playTime;
-      qreal startTime;
+      int playTime;           // sample count
       int endTick;
 
       EventMap::const_iterator playPos;   // moved in real time thread
@@ -102,7 +101,7 @@ class Seq {
       void exit();
       void sendEvent(const SeqEvent&);
 
-      void process(unsigned, float*, float*);
+      void process(unsigned, float*);
       void setScore(Score* s);
       void start();
       void stop();
