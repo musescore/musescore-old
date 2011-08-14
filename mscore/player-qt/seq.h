@@ -102,7 +102,7 @@ class Seq {
       void exit();
       void sendEvent(const SeqEvent&);
 
-      void process(unsigned, float*, float*);
+      void process(unsigned, float*);
       void setScore(Score* s);
       void start();
       void stop();

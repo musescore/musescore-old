@@ -191,14 +191,9 @@ void Seq::processMessages()
 //   process
 //---------------------------------------------------------
 
-void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
+void Seq::process(unsigned n, float* p)
       {
       unsigned frames = n;
-      float* l = lbuffer;
-      float* r = rbuffer;
-      memset(l, 0, sizeof(float)*n);
-      memset(r, 0, sizeof(float)*n);
-
       processMessages();
       if (state == TRANSPORT_PLAY) {
             unsigned framePos = 0;
@@ -209,9 +204,8 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
                         break;
                   int n = lrint((f - playTime) * AL::sampleRate);
 
-                  synti->process(n, l, r);
-                  l += n;
-                  r += n;
+                  synti->process(n, p);
+                  p += 2 * n;
                   playTime += qreal(n)/qreal(AL::sampleRate);
 
                   frames    -= n;
@@ -219,7 +213,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
                   playEvent(playPos.value());
                   }
             if (frames) {
-                  synti->process(frames, l, r);
+                  synti->process(frames, p);
                   playTime += qreal(frames)/qreal(AL::sampleRate);
                   }
             if (playPos == events.constEnd()) {
@@ -229,7 +223,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
                   }
             }
       else {
-            synti->process(frames, l, r);
+            synti->process(frames, p);
             }
       }
 
