@@ -43,6 +43,7 @@ Navigator::Navigator(QScrollArea* sa, QWidget* parent)
       moving         = false;
       recreatePixmap = false;
       viewRect       = QRect();
+      cachedWidth    = -1;
       connect(&watcher, SIGNAL(finished()), SLOT(pmFinished()));
       }
 
@@ -260,8 +261,9 @@ static void paintElement(void* data, Element* e)
 
 QImage Navigator::createPixmap()
       {
-      QImage pixmap = QImage(size(), QImage::Format_ARGB32_Premultiplied);
+      QMutexLocker locker(_score->mutex());
 
+      QImage pixmap = QImage(size(), QImage::Format_ARGB32_Premultiplied);
       QPainter p(&pixmap);
 
       QColor _fgColor(Qt::white);
@@ -299,11 +301,12 @@ QImage Navigator::createPixmap()
 void Navigator::layoutChanged()
       {
       pm.fill(Qt::darkGray);
-      if (_cv == 0 || _score->pages().isEmpty() || !mutex.tryLock()) {
+      if (_cv == 0 || _score->pages().isEmpty() || !_score->mutex()->tryLock()) {
             recreatePixmap = true;
             update();
             return;
             }
+      _score->mutex()->unlock();
       Page* lp = _score->pages().back();
       int w    = int ((lp->x() + lp->width()) * matrix.m11());
       if (w != cachedWidth) {
@@ -311,7 +314,6 @@ void Navigator::layoutChanged()
             setFixedWidth(w);
             }
       if (w == 0) {
-            mutex.unlock();
             return;
             }
       updatePixmap = QtConcurrent::run(this, &Navigator::createPixmap);
@@ -325,7 +327,6 @@ void Navigator::layoutChanged()
 
 void Navigator::pmFinished()
       {
-      mutex.unlock();
       if (recreatePixmap) {
             recreatePixmap = false;
             layoutChanged();

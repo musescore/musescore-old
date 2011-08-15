@@ -43,7 +43,6 @@ class Navigator : public QWidget {
 
       QFuture<QImage> updatePixmap;
       QFutureWatcher<QImage> watcher;
-      QMutex mutex;
       QImage createPixmap();
       bool recreatePixmap;
 

@@ -62,15 +62,21 @@ Item {
                   id: scorelist
                   ListElement {
                         title: "Promenade"
+                        author: "Modeste Moussorgsky"
                         path: ":/scores/promenade.mscz"
+                        imagePath: ":/scores/promenade.png"
                         }
                   ListElement {
                         title: "Leise rieselt der Schnee"
+                        author: "Traditional"
                         path: ":/scores/schnee.mscz"
+                        imagePath: ":/scores/schnee.png"
                         }
                   ListElement {
                         title: "Italienisches Konzert"
+                        author: "J.S. Bach"
                         path: ":/scores/italian-1.mscz"
+                        imagePath: ":/scores/italian-1.png"
                         }
                   }
 
@@ -83,8 +89,24 @@ Item {
                         }
                   }
 
+            Mobile.TitleBar {
+                  id: titleBar
+                  height: 40
+                  width: parent.width
+                  opacity: .9
+                  }
+
+/*            Rectangle {
+                  id: titleBar
+                  height: 40
+                  width: parent.width
+                  }
+  */
             ListView {
                   id: scoreListView
+                  anchors.top: titleBar.bottom
+                  anchors.bottom: toolBar.top
+
                   width: parent.width
                   height: parent.height
                   model: scorelist
@@ -97,6 +119,7 @@ Item {
                               if (idx >= 0) {
                                     scoreView.setScore(scorelist.get(idx).path)
                                     screen.inScoreView = true
+                                    scoreViewFlick.contentY = 0
                                     }
                               }
                         }
@@ -104,6 +127,7 @@ Item {
 
             Flickable {
                   id: scoreViewFlick
+                  anchors.top: titleBar.bottom
                   width:  parent.width
                   height: parent.height
                   x: -(parent.width * 1.5)
@@ -130,8 +154,10 @@ Item {
 
             Mobile.ToolBar {
                   id: toolBar
-                  height: 40; anchors.bottom: parent.bottom
-                  width: parent.width; opacity: 0.9
+                  height: 40;
+                  anchors.bottom: parent.bottom
+                  width: parent.width;
+                  opacity: 0.9
                   button1Label: "MyScores"; button2Label: "Play"
                   onButton1Clicked: {
                         if (screen.inScoreView == true)

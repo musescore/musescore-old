@@ -83,7 +83,6 @@ void QmlApplicationViewer::addImportPath(const QString &path)
 
 void QmlApplicationViewer::setOrientation(ScreenOrientation orientation)
       {
-      printf("setOrientation %d\n", int(orientation));
       }
 
 void QmlApplicationViewer::showExpanded()

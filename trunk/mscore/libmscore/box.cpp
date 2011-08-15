@@ -124,7 +124,7 @@ void Box::editDrag(const EditData& ed)
                         }
                   }
             }
-      layout();   //??
+//      layout();   //??
       score()->setLayoutAll(true);
       }
 

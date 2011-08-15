@@ -15,7 +15,7 @@ Component {
                         width: wrapper.width;
                         y: 1
                         }
-/*                  Rectangle {
+                  Rectangle {
                         x: 6;
                         y: 4;
                         width: 77;
@@ -26,7 +26,7 @@ Component {
                         Image { source: imagePath; x: 1; y: 1 }
                         Image { source: "images/gloss.png" }
                         }
-*/
+
                   Column {
                         x: 92;
                         width: wrapper.ListView.view.width - 95;
@@ -42,8 +42,8 @@ Component {
                               style: Text.Raised;
                               styleColor: "black"
                               }
-/*                        Text {
-                              text: photoAuthor;
+                        Text {
+                              text: author;
                               width: parent.width;
                               font.pixelSize: 14;
                               elide: Text.ElideLeft;
@@ -51,7 +51,7 @@ Component {
                               style: Text.Raised;
                               styleColor: "black"
                               }
-                        Text {
+/*                        Text {
                               text: photoDate;
                               width: parent.width;
                               font.pixelSize: 14;
