@@ -4094,7 +4094,7 @@ void MuseScore::transpose()
       {
       if (cs->last() == 0)     // empty score?
             return;
-      if (cs->selection().state() == SEL_NONE) {
+      if (cs->selection().state() != SEL_RANGE) {
             QMessageBox::StandardButton sb = QMessageBox::question(mscore,
                tr("MuseScore: transpose"),
                tr("There is nothing selected. Transpose whole score?"),

@@ -1,3 +1,5 @@
+15.aug (la)
+      - fix #12084: Crash when running transpose with title selected
 12.aug (ws)
       - navigator preview is now calculated in background task
 11.aug (ws)
