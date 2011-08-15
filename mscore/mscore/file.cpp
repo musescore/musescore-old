@@ -1250,8 +1250,8 @@ bool Score::read(QDomElement e)
 //                                                   v1, v2, v3, rv1, rv2, rv3);
 
                                                 int currentVersion = v1 * 10000 + v2 * 100 + v3;
-                                                int readVersion    = rv1 * 10000 + rv2 * 100 + rv3;
-                                                if (readVersion > currentVersion) {
+                                                _programVersion    = rv1 * 10000 + rv2 * 100 + rv3;
+                                                if (_programVersion > currentVersion) {
                                                       printf("read future version\n");
                                                       }
                                                 }

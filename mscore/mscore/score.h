@@ -261,8 +261,9 @@ class Score : public QObject {
                                       ///< indicating if playPos after expanded repeats
                                       ///< has been calculated.
 
-      int _fileDivision; ///< division of current loading *.msc file
-      int _mscVersion;   ///< version of current loading *.msc file
+      int _fileDivision; ///< division of current loading *.mscx file
+      int _mscVersion;   ///< version of current loading *.mscx file
+      int _programVersion; // the actual program version the file has been created with
 
       QString _movementNumber;       // some meta data; used for musicXML
       QString _movementTitle;
@@ -657,6 +658,9 @@ class Score : public QObject {
       void toEList(EventMap* events, int staffIdx);
       int mscVersion() const    { return _mscVersion; }
       void setMscVersion(int v) { _mscVersion = v; }
+      
+      int programVersion() const    { return _programVersion; }
+      void setProgramVersion(int v) { _programVersion = v; }
 
       AL::TimeSigMap* sigmap()  { return _sigmap; }
       MeasureBase* appendMeasure(int type);

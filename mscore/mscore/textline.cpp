@@ -422,11 +422,11 @@ bool TextLine::readProperties(QDomElement e)
       else if (tag == "hookUp")           // obsolete
             _endHookHeight *= -1.0;
       else if (tag == "beginSymbol" || tag == "symbol")     // "symbol" is obsolete
-            _beginSymbol = text.toInt();
+            _beginSymbol = resolveSymCompatibility(text.toInt());
       else if (tag == "continueSymbol")
-            _continueSymbol = text.toInt();
+            _continueSymbol = resolveSymCompatibility(text.toInt());
       else if (tag == "endSymbol")
-            _endSymbol = text.toInt();
+            _endSymbol = resolveSymCompatibility(text.toInt());
       else if (tag == "beginSymbolOffset")
             _beginSymbolOffset = readPoint(e);
       else if (tag == "continueSymbolOffset")
@@ -462,6 +462,13 @@ bool TextLine::readProperties(QDomElement e)
       else if (!SLine::readProperties(e))
             return false;
       return true;
+      }
+
+int TextLine::resolveSymCompatibility(int i)
+      {
+      if(score()->programVersion() < 10100)
+          return i + 5;
+      return i;  
       }
 
 //---------------------------------------------------------
