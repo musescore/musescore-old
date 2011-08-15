@@ -1,5 +1,6 @@
 15.aug (la)
       - fix #12084: Crash when running transpose with title selected
+      - fix #11926: Pedal marking created in 1.0 are displayed incorrectly in MuseScore 1.1
 14.aug (la)
       - fix translation of context menu on keysig
       - apply patches from Toby Smithe (#12108)

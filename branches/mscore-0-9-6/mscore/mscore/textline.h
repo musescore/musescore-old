@@ -77,7 +77,10 @@ class TextLine : public SLine {
       QPointF _beginSymbolOffset, _continueSymbolOffset, _endSymbolOffset;
 
       int _mxmlOff2;
-
+   
+   private:
+      int resolveSymCompatibility(int);
+      
    protected:
       TextC* _beginText;
       TextC* _continueText;
