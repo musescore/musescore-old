@@ -148,6 +148,25 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>ArticulationBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Articulation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Direction:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Anchor:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ArticulationProperties</name>
     <message>
         <source>MuseScore: Articulations Properties</source>
@@ -160,6 +179,50 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Midi Action</source>
         <translation>Akcja midi</translation>
+    </message>
+    <message>
+        <source>Appearance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Direction:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto</source>
+        <translation type="unfinished">Auto</translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished">W górę</translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Anchor:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top Staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom Staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chord Direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top Chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom Chord</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -226,10 +289,6 @@ p, li { white-space: pre-wrap; }
         <translation>MuseScore: Właściwości ramki</translation>
     </message>
     <message>
-        <source>Margins</source>
-        <translation>Marginesy</translation>
-    </message>
-    <message>
         <source>left:</source>
         <translation>lewy:</translation>
     </message>
@@ -259,10 +318,29 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sp</source>
+        <extracomment>spatium unit
+----------
+spatium unit</extracomment>
         <translation type="unfinished">sp</translation>
     </message>
     <message>
         <source>height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gaps</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>top/left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bottom/right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inner Margins</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1132,12 +1210,24 @@ p, li { white-space: pre-wrap; }
         <source>breve</source>
         <translation>brevis</translation>
     </message>
+    <message>
+        <source>sol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>alt. brevis</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
     <message>
         <source>Form</source>
         <translation>Forma</translation>
+    </message>
+    <message>
+        <source>Lyrics:</source>
+        <translation type="unfinished">Słowa:</translation>
     </message>
 </context>
 <context>
@@ -1199,6 +1289,20 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Show courtesy clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Debugger</name>
+    <message>
+        <source>MuseScore: Debugger</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DebuggerBase</name>
+    <message>
+        <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3086,6 +3190,38 @@ p, li { white-space: pre-wrap; }
         <source>Ottava</source>
         <translation type="unfinished">Ottava</translation>
     </message>
+    <message>
+        <source>Clefs</source>
+        <translation type="unfinished">Klucze</translation>
+    </message>
+    <message>
+        <source>Accidentals</source>
+        <translation type="unfinished">Znaki chromatyczne</translation>
+    </message>
+    <message>
+        <source>Default TAB Clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clef1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clef2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accidental</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>semitones offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cents offset</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -3261,6 +3397,14 @@ p, li { white-space: pre-wrap; }
         <source>scale to fill frame</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Stacking Order:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(0 = foreground)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ImportMidiDialog</name>
@@ -3323,15 +3467,184 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Inspector</name>
     <message>
-        <source>MuseScore: Object Inspector</source>
-        <translation>Kontroler objektu</translation>
+        <source>Inspector</source>
+        <translation type="unfinished">Kontroler</translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation type="unfinished">Zastosuj</translation>
     </message>
 </context>
 <context>
-    <name>InspectorBase</name>
+    <name>InspectorArticulation</name>
     <message>
         <source>Form</source>
-        <translation>Forma</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Offset X:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <extracomment>spatium unit
+----------
+spatium unit</extracomment>
+        <translation type="unfinished">sp</translation>
+    </message>
+    <message>
+        <source>Offset Y:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Direction:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto</source>
+        <translation type="unfinished">Auto</translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished">W górę</translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Anchor:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top Staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom Staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chord Automatic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top Chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom Chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>InspectorElement</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Offset X:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <extracomment>spatium unit
+----------
+spatium unit</extracomment>
+        <translation type="unfinished">sp</translation>
+    </message>
+    <message>
+        <source>Offset Y:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>InspectorHBox</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left Gap:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <extracomment>spatium unit
+----------
+spatium unit</extracomment>
+        <translation type="unfinished">sp</translation>
+    </message>
+    <message>
+        <source>Right Gap:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Szerokość:</translation>
+    </message>
+</context>
+<context>
+    <name>InspectorSpacer</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <extracomment>spatium unit</extracomment>
+        <translation type="unfinished">sp</translation>
+    </message>
+</context>
+<context>
+    <name>InspectorVBox</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top Gap:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <extracomment>spatium unit
+----------
+spatium unit</extracomment>
+        <translation type="unfinished">sp</translation>
+    </message>
+    <message>
+        <source>Bottom Gap:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4519,26 +4832,6 @@ Z menu &quot;Pomoc&quot; wybierz &quot;Podręcznik online&quot;.</translation>
         <translation>Przednutki</translation>
     </message>
     <message>
-        <source>Acciaccatura</source>
-        <translation>Przednutka krótka</translation>
-    </message>
-    <message>
-        <source>Appoggiatura</source>
-        <translation>Przednutka długa</translation>
-    </message>
-    <message>
-        <source>Quarter grace note</source>
-        <translation>Przednutka ćwierćnutowa</translation>
-    </message>
-    <message>
-        <source>16th grace note</source>
-        <translation>Przednutka 16-owa</translation>
-    </message>
-    <message>
-        <source>32nd grace note</source>
-        <translation>Przednutka 32-owa</translation>
-    </message>
-    <message>
         <source>Key Signatures</source>
         <translation>Oznaczenia tonacji</translation>
     </message>
@@ -4661,22 +4954,6 @@ Z menu &quot;Pomoc&quot; wybierz &quot;Podręcznik online&quot;.</translation>
     <message>
         <source>Staff spacer</source>
         <translation>Odstęp pięciolinii</translation>
-    </message>
-    <message>
-        <source>Start beam</source>
-        <translation>Początek belki</translation>
-    </message>
-    <message>
-        <source>Middle of beam</source>
-        <translation>Środek belki</translation>
-    </message>
-    <message>
-        <source>No beam</source>
-        <translation>Brak belki</translation>
-    </message>
-    <message>
-        <source>Auto beam</source>
-        <translation>Autobelkowanie</translation>
     </message>
     <message>
         <source>Brackets...</source>
@@ -4991,18 +5268,6 @@ jest niekompatybilny z obecnym interfejsem.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Start 1/32 subbeam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start 1/64 subbeam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>feathered beam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Fret Diagram</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5264,6 +5529,10 @@ Czy przetransponować całą partyturę?</translation>
         <source>Error %1 returned from MP3 encoder</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Images (*.jpg *.gif *.png);;All (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MyWebView</name>
@@ -5365,6 +5634,14 @@ Czy przetransponować całą partyturę?</translation>
     <message>
         <source>Select Template File:</source>
         <translation>Wybierz plik szablonu:</translation>
+    </message>
+    <message>
+        <source>MuseScore: Select Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Template Files (*.mscz *.mscx)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5532,6 +5809,10 @@ Czy przetransponować całą partyturę?</translation>
     </message>
     <message>
         <source>Left margin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5841,10 +6122,6 @@ Czy przetransponować całą partyturę?</translation>
     <message>
         <source>Choose Notepaper</source>
         <translation>Wybierz papier nutowy</translation>
-    </message>
-    <message>
-        <source>Images (*.jpg *.gif *.png)</source>
-        <translation>Obrazy (*.jpg*.gif*.png)</translation>
     </message>
     <message>
         <source>Choose Background Wallpaper</source>
@@ -6709,10 +6986,6 @@ failed: </source>
         <translation>Więcej...</translation>
     </message>
     <message>
-        <source>Object Inspector</source>
-        <translation>Kontroler objektów</translation>
-    </message>
-    <message>
         <source>Staff</source>
         <translation>Pięciolinia</translation>
     </message>
@@ -6950,6 +7223,10 @@ please select a chord/rest and try again</source>
     <message>
         <source>No measures selected:
 please select range of measures to join and try again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Object Debugger</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9535,14 +9812,6 @@ p, li { white-space: pre-wrap; }
         <translation>Edytuj element</translation>
     </message>
     <message>
-        <source>Reset Positions</source>
-        <translation>Wyzeruj pozycje</translation>
-    </message>
-    <message>
-        <source>Inspector</source>
-        <translation>Kontroler</translation>
-    </message>
-    <message>
         <source>Reset Stretch</source>
         <translation>Resetuj rozciągnięcie</translation>
     </message>
@@ -10611,10 +10880,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Reset positions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Show inspector</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10767,14 +11032,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show OMR scan</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show OMR Scan</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Full screen</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10887,19 +11144,39 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piano keyboard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>piano keyboard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>next score</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>previous score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset user settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show debugger</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Debugger</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piano Keyboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Inspector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>inspector</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -218,6 +218,7 @@ struct Layer {
 
 class Score {
       Score* _parentScore;          // set if score is an excerpt (part)
+      QMutex _mutex;
       QList<MuseScoreView*> viewer;
 
       QDate _creationDate;
@@ -835,6 +836,8 @@ class Score {
 
       LayoutMode layoutMode() const         { return _layoutMode; }
       void setLayoutMode(LayoutMode lm)     { _layoutMode = lm;   }
+
+      QMutex* mutex() { return &_mutex; }
       };
 
 extern Score* gscore;

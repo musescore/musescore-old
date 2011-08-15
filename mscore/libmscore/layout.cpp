@@ -579,6 +579,9 @@ void Score::layoutStage3()
 
 void Score::doLayout()
       {
+      {
+      QMutexLocker locker(&_mutex);
+
       _symIdx = 0;
       if (_style.valueSt(ST_MusicalSymbolFont) == "Gonville")
             _symIdx = 1;
@@ -725,6 +728,8 @@ void Score::doLayout()
             m->layout2();
 
       rebuildBspTree();
+
+      }     // unlock mutex
       foreach(MuseScoreView* v, viewer)
             v->layoutChanged();
       }
