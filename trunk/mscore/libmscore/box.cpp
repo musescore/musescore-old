@@ -41,10 +41,8 @@ Box::Box(Score* score)
       _rightMargin  = BOX_MARGIN;
       _topMargin    = BOX_MARGIN;
       _bottomMargin = BOX_MARGIN;
-
-      qreal _spatium = score->spatium();
-      _topGap    = score->styleS(ST_systemFrameDistance).val() * _spatium;
-      _bottomGap = score->styleS(ST_frameSystemDistance).val() * _spatium;
+      _topGap       = 0.0;
+      _bottomGap    = 0.0;
       }
 
 //---------------------------------------------------------
@@ -109,6 +107,10 @@ void Box::editDrag(const EditData& ed)
                   int n = lrint(_boxHeight.val() / vRaster);
                   _boxHeight = Spatium(vRaster * n);
                   }
+            setbbox(QRectF(0.0, 0.0, system()->width(), point(boxHeight())));
+            system()->setHeight(height());
+            score()->doLayoutPages();
+            score()->setUpdateAll();
             }
       else {
             _boxWidth += Spatium(ed.delta.x() / spatium());
@@ -123,17 +125,8 @@ void Box::editDrag(const EditData& ed)
                         static_cast<Text*>(e)->setModified(true);  // force relayout
                         }
                   }
+            score()->setLayoutAll(true);
             }
-//      layout();   //??
-      score()->setLayoutAll(true);
-      }
-
-//---------------------------------------------------------
-//   endEditDrag
-//---------------------------------------------------------
-
-void Box::endEditDrag()
-      {
       }
 
 //---------------------------------------------------------

@@ -4384,10 +4384,8 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             showInspector(a->isChecked());
       else if (cmd == "toggle-playpanel")
             showPlayPanel(a->isChecked());
-      else if (cmd == "toggle-navigator") {
-printf("cmd show navigator\n");
+      else if (cmd == "toggle-navigator")
             showNavigator(a->isChecked());
-            }
       else if (cmd == "toggle-mixer")
             showMixer(a->isChecked());
       else if (cmd == "synth-control")

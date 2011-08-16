@@ -313,9 +313,8 @@ void Navigator::layoutChanged()
             cachedWidth = w;
             setFixedWidth(w);
             }
-      if (w == 0) {
+      if (w == 0)
             return;
-            }
       updatePixmap = QtConcurrent::run(this, &Navigator::createPixmap);
       watcher.setFuture(updatePixmap);
       update();

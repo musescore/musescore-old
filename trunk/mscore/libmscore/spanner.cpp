@@ -59,9 +59,8 @@ void SpannerSegment::setSystem(System* s)
       if (system() != s) {
             if (system())
                   system()->remove(this);
-            s->add(this);
-            setParent(s);
             }
+      s->add(this);
       }
 
 //---------------------------------------------------------

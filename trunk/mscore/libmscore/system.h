@@ -33,6 +33,7 @@ class MeasureBase;
 class Text;
 class InstrumentName;
 class SpannerSegment;
+class VBox;
 
 //---------------------------------------------------------
 //   SysStaff
@@ -90,6 +91,8 @@ class System : public Element {
       bool _firstSystem;      ///< used to decide between long and short instrument
                               ///< names; set by score()->doLayout()
       bool _vbox;             ///< contains only one VBox in ml
+      bool _sameLine;
+      bool _addStretch;
 
       QList<SpannerSegment*> _spannerSegments;
 
@@ -147,7 +150,13 @@ class System : public Element {
       qreal leftMargin() const    { return _leftMargin; }
       void setFirstSystem(bool v) { _firstSystem = v;   }
       bool isVbox() const         { return _vbox;       }
+      VBox* vbox() const          { return (VBox*)ml[0];       }
       void setVbox(bool v)        { _vbox = v;          }
+      bool sameLine() const       { return _sameLine;   }
+      bool addStretch() const     { return _addStretch; }
+      void setSameLine(bool v)    { _sameLine = v; }
+      void setAddStretch(bool v)  { _addStretch = v; }
+
       void layoutLyrics(Lyrics*, Segment*, int staffIdx);
       };
 

@@ -1649,6 +1649,11 @@ void ScoreView::paintPageBorder(QPainter& p, Page* page)
                   p.drawLine(QLineF(x2-bw+i, y1, x2-bw+i, y2));
                   }
             }
+      // show page margins
+      p.setPen(QColor(0, 0, 255, 40));
+      QRectF f(page->canvasBoundingRect());
+      f.adjust(page->lm(), page->tm(), -page->rm(), -page->bm());
+      p.drawRect(f);
       }
 
 //---------------------------------------------------------
