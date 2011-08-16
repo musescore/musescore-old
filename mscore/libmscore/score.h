@@ -288,6 +288,7 @@ class Score {
       bool _showInvisible;
       bool _showUnprintable;
       bool _showFrames;
+      bool _showPageborders;
 
       QList<Part*> _parts;
       QList<Staff*> _staves;
@@ -552,9 +553,11 @@ class Score {
       bool showInvisible() const   { return _showInvisible; }
       bool showUnprintable() const { return _showUnprintable; }
       bool showFrames() const      { return _showFrames; }
+      bool showPageborders() const { return _showPageborders; }
       void setShowInvisible(bool v);
       void setShowUnprintable(bool v);
       void setShowFrames(bool v);
+      void setShowPageborders(bool v);
 
       bool loadMsc(QString name);
       bool loadCompressedMsc(QString name);

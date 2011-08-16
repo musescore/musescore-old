@@ -292,6 +292,7 @@ void Score::init()
       _showInvisible  = true;
       _showUnprintable = true;
       _showFrames     = true;
+      _showPageborders = false;
       _printing       = false;
       _playlistDirty  = false;
       _autosaveDirty  = false;
@@ -731,6 +732,17 @@ void Score::setShowFrames(bool v)
       {
       _showFrames = v;
       _updateAll  = true;
+      end();
+      }
+
+//---------------------------------------------------------
+//   setShowPageborders
+//---------------------------------------------------------
+
+void Score::setShowPageborders(bool v)
+      {
+      _showPageborders = v;
+      _updateAll = true;
       end();
       }
 

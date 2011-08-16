@@ -1765,13 +1765,15 @@ void Score::layoutPages()
       const qreal systemFrameDistance = styleS(ST_systemFrameDistance).val() * _spatium;
       const qreal frameSystemDistance = styleS(ST_frameSystemDistance).val() * _spatium;
 
-      PageFormat* pf     = pageFormat();
-      qreal lm           = pf->oddLeftMargin * DPI;
-      qreal tm           = pf->oddTopMargin * DPI;
-      qreal ey           = (pf->height() - pf->oddBottomMargin) * DPI;
+      qreal lm, tm, ey;
 
       curPage            = 0;
       Page* page         = getEmptyPage();
+
+      lm                 = page->lm();
+      tm                 = page->tm();
+      ey                 = page->height() - page->bm();
+
       qreal y            = tm;
       int nSystems       = _systems.size();
       System* lastSystem = 0;
@@ -1829,6 +1831,9 @@ void Score::layoutPages()
                         d = slb;
                   layoutPage(page, gaps, ey - y - d);
                   page = getEmptyPage();
+                  lm   = page->lm();
+                  tm   = page->tm();
+                  ey   = page->height() - page->bm();
                   gaps = 0;
                   y    = tm;
                   if (sr.isVbox())
@@ -1866,6 +1871,9 @@ void Score::layoutPages()
                         break;
                         }
                   page       = getEmptyPage();
+                  lm         = page->lm();
+                  tm         = page->tm();
+                  ey         = page->height() - page->bm();
                   gaps       = 0;
                   y          = tm;
                   lastSystem = 0;

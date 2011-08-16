@@ -2338,6 +2338,16 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Show frames")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_SCORE,
+         "show-pageborders",
+         QT_TRANSLATE_NOOP("action","Show Page Margins"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Show Page Margins"),
+         QT_TRANSLATE_NOOP("action","Show Page Margins")
+         ),
+      Shortcut(
          STATE_EDIT,
          0,
          "show-keys",

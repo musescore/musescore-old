@@ -652,7 +652,7 @@ MuseScore::MuseScore()
       sl1.clear();
       sl1 << "appoggiatura" << "acciaccatura" << "grace4" <<"grace16" << "grace32"
           << "beam-start" << "beam-mid" << "no-beam" << "beam32" << "auto-beam"
-          << "show-invisible" << "show-unprintable" << "show-frames";
+          << "show-invisible" << "show-unprintable" << "show-frames" << "show-pageborders";
 
       foreach(const QString& s, sl1) {
             QAction* a = getAction(s.toLatin1().data());
@@ -930,6 +930,7 @@ MuseScore::MuseScore()
       menuDisplay->addAction(getAction("show-invisible"));
       menuDisplay->addAction(getAction("show-unprintable"));
       menuDisplay->addAction(getAction("show-frames"));
+      menuDisplay->addAction(getAction("show-pageborders"));
       menuDisplay->addSeparator();
       a = getAction("fullscreen");
       a->setCheckable(true);
@@ -1342,6 +1343,7 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
       getAction("show-invisible")->setChecked(cs->showInvisible());
       getAction("show-unprintable")->setChecked(cs->showUnprintable());
       getAction("show-frames")->setChecked(cs->showFrames());
+      getAction("show-pageborders")->setChecked(cs->showPageborders());
       updateUndoRedo();
 
       if (view->magIdx() == MAG_FREE)
@@ -4483,6 +4485,8 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             cs->setShowUnprintable(a->isChecked());
       else if (cmd == "show-frames")
             cs->setShowFrames(getAction(cmd.toLatin1().data())->isChecked());
+      else if (cmd == "show-pageborders")
+            cs->setShowPageborders(getAction(cmd.toLatin1().data())->isChecked());
       else if (cmd == "harmony-properties")
             cmdAddChordName2();
       else if (cmd == "tempo")
