@@ -75,6 +75,8 @@ System::System(Score* s)
       _pageBreak   = false;
       _firstSystem = false;
       _vbox        = false;
+      _sameLine    = false;
+      _addStretch  = false;
       }
 
 //---------------------------------------------------------
@@ -582,14 +584,13 @@ void System::add(Element* el)
                   b->staff()->setBracketSpan(level, b->span());
                   }
                   break;
-/*            case MEASURE:
+            case MEASURE:
             case HBOX:
             case VBOX:
             case TBOX:
             case FBOX:
-                  score()->addMeasure(static_cast<MeasureBase*>(el));
+                  score()->add(static_cast<MeasureBase*>(el));
                   break;
-            */
             case TEXTLINE_SEGMENT:
             case HAIRPIN_SEGMENT:
             case OTTAVA_SEGMENT:
@@ -601,7 +602,7 @@ void System::add(Element* el)
                   if (!_spannerSegments.contains(ss))
                         _spannerSegments.append(ss);
                   else {
-                        printf("System::add() spanner already there\n");
+                        // printf("System::add() spanner already there\n");
                         }
                   }
                   break;
@@ -638,14 +639,13 @@ void System::remove(Element* el)
                   }
                   break;
 
-/*            case MEASURE:
+            case MEASURE:
             case HBOX:
             case VBOX:
             case TBOX:
             case FBOX:
                   score()->remove(el);
                   break;
- */
             case TEXTLINE_SEGMENT:
             case HAIRPIN_SEGMENT:
             case OTTAVA_SEGMENT:
@@ -667,8 +667,11 @@ void System::remove(Element* el)
 void System::change(Element* o, Element* n)
       {
       if (o->type() == VBOX || o->type() == HBOX || o->type() == TBOX || o->type() == FBOX) {
-            score()->remove((MeasureBase*)o);
-            score()->add((MeasureBase*)n);
+            int idx = ml.indexOf((MeasureBase*)o);
+            if (idx != -1)
+                  ml.removeAt(idx);
+            ml.insert(idx, (MeasureBase*)n);
+            score()->measures()->change((MeasureBase*)o, (MeasureBase*)n);
             }
       else {
             remove(o);

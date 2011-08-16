@@ -489,13 +489,9 @@ QPointF Element::pagePos() const
 
 QPointF Element::canvasPos() const
       {
-      QPointF p = pagePos();
-      Element* e = parent();
-      if (e) {
-            while (e->parent())
-                  e = e->parent();
-            p += e->pos();
-            }
+      QPointF p(pos());
+      if (parent())
+            p += parent()->canvasPos();
       return p;
       }
 
@@ -518,7 +514,7 @@ qreal Element::pageX() const
 /**
  Return true if \a p is inside the shape of the object.
 
- Note: \a p is in canvas coordinates
+ Note: \a p is in page coordinates
 */
 
 bool Element::contains(const QPointF& p) const
@@ -554,15 +550,12 @@ QPainterPath Element::shape() const
 /**
  Return true if \a rr intersects bounding box of object.
 
- Note: \a rr is relative to the coordinate system of parent().
+ Note: \a rr is in page coordinates
 */
 
 bool Element::intersects(const QRectF& rr) const
       {
-      QRectF r(rr);
-      r.translate(pos());
-//      return bbox().intersects(r);
-      return shape().intersects(r);
+      return shape().intersects(rr.translated(-pagePos()));
       }
 
 //---------------------------------------------------------

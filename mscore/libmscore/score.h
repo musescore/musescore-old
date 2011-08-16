@@ -243,8 +243,6 @@ class Score {
       // values used during doLayout:
       int curPage;
       int curSystem;
-      bool firstSystem;
-      bool startWithLongNames;            // long instrument names
       MeasureBase* curMeasure;
 
       UndoStack* _undo;
@@ -368,9 +366,9 @@ class Score {
       void resetUserStretch();
 
       Page* addPage();
-      bool layoutPage(Page*);
-      bool layoutSystem1(qreal& minWidth, qreal w, bool, bool);
-      QList<System*> layoutSystemRow(qreal x, qreal y, qreal w, bool, bool, qreal*);
+      void layoutPage(Page* page, int gaps, qreal restHeight);
+      bool layoutSystem(qreal& minWidth, qreal w, bool, bool);
+      QList<System*> layoutSystemRow(qreal w, bool, bool);
       void processSystemHeader(Measure* m, bool);
       System* getNextSystem(bool, bool);
       bool doReLayout();
@@ -765,7 +763,12 @@ class Score {
       bool showOmr() const                     { return _showOmr; }
       void setShowOmr(bool v)                  { _showOmr = v;    }
       void enqueueMidiEvent(MidiInputEvent ev) { midiInputQueue.enqueue(ev); }
+
       void doLayout();
+      void layoutSystems();
+      void layoutPages();
+      Page* getEmptyPage();
+
       void layoutChords1(Segment* segment, int staffIdx);
       SyntiState& syntiState()                           { return _syntiState;         }
       void setSyntiState(const SyntiState& s);
@@ -838,6 +841,7 @@ class Score {
       void setLayoutMode(LayoutMode lm)     { _layoutMode = lm;   }
 
       QMutex* mutex() { return &_mutex; }
+      void doLayoutPages();
       };
 
 extern Score* gscore;

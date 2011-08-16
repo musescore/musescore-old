@@ -106,7 +106,6 @@ class Page : public Element {
 
       virtual void draw(Painter*) const;
       virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
-      void clear();
 
       QList<const Element*> items(const QRectF& r);
       QList<const Element*> items(const QPointF& p);

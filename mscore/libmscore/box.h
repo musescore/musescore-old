@@ -49,7 +49,6 @@ class Box : public MeasureBase {
       virtual void startEdit(MuseScoreView*, const QPointF&);
       virtual bool edit(MuseScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
       virtual void editDrag(const EditData&);
-      virtual void endEditDrag();
       virtual void endEdit();
       virtual void updateGrips(int* grips, QRectF*) const;
       virtual void layout();

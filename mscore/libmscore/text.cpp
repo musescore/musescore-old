@@ -181,7 +181,7 @@ const QString Text::subtypeName() const
             case TEXT_INSTRUMENT_CHANGE: return "InstrumentChange";
             case TEXT_LYRICS_VERSE_NUMBER: return "LyricsVerseNumber";
             default:
-                  printf("unknown text subtype %d\n", subtype());
+                  printf("unknown text(%s) subtype %d\n", name(), subtype());
                   break;
             }
       return "?";
@@ -243,7 +243,7 @@ void Text::setSubtype(const QString& s)
       else if (s == "LyricsVerseNumber")
             st = TEXT_LYRICS_VERSE_NUMBER;
       else
-            printf("setSubtype: unknown type <%s>\n", qPrintable(s));
+            printf("Text(%s): setSubtype: unknown type <%s>\n", name(), qPrintable(s));
       setSubtype(st);
       }
 
