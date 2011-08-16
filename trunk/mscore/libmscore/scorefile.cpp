@@ -87,6 +87,7 @@ void Score::write(Xml& xml)
       xml.tag("showInvisible", _showInvisible);
       xml.tag("showUnprintable", _showUnprintable);
       xml.tag("showFrames", _showFrames);
+      xml.tag("showMargins", _showPageborders);
       pageFormat()->write(xml);
 
       QMapIterator<QString, QString> i(_metaTags);
@@ -918,6 +919,8 @@ bool Score::read(QDomElement dScore)
                   _showUnprintable = i;
             else if (tag == "showFrames")
                   _showFrames = i;
+            else if (tag == "showMargins")
+                  _showPageborders = i;
             else if (tag == "Style")
                   _style.load(ee);
             else if (tag == "TextStyle") {      // obsolete: is now part of style
