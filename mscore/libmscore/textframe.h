@@ -32,6 +32,10 @@ class TBox : public VBox {
       virtual void layout();
       virtual void add(Element*);
       Text* getText();
+      virtual const QString subtypeName() const {
+            printf("TBOX ??????????????\n");
+            return QString();
+            }
       };
 
 #endif

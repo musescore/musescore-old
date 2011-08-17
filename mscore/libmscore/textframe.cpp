@@ -47,21 +47,22 @@ void TBox::layout()
       {
       setPos(QPointF());      // !?
       setbbox(QRectF(0.0, 0.0, system()->width(), point(boxHeight())));
-      if (_el.size() == 1) {
-            Text* text = static_cast<Text*>(_el[0]);
-            if (text->type() != TEXT)
-                  return;
-            text->layout();
-            qreal h;
-            if (text->isEmpty()) {
-                  QFontMetricsF fm(text->font());
-                  h = fm.lineSpacing();
+      foreach(Element* e, _el) {
+            if (e->isText()) {
+                  Text* text = static_cast<Text*>(e);
+                  text->layout();
+                  qreal h;
+                  if (text->isEmpty()) {
+                        QFontMetricsF fm(text->font());
+                        h = fm.lineSpacing();
+                        }
+                  else
+                        h = text->height();
+                  text->setPos(leftMargin() * DPMM, topMargin() * DPMM);
+                  setbbox(QRectF(0.0, 0.0, system()->width(), h));
                   }
-            else
-                  h = text->height();
-            text->setPos(leftMargin() * DPMM, topMargin() * DPMM);
-            setbbox(QRectF(0.0, 0.0, system()->width(), h));
             }
+      MeasureBase::layout();  // layout LayoutBreak's
       }
 
 //---------------------------------------------------------
@@ -76,12 +77,10 @@ void TBox::add(Element* e)
             Text* text = static_cast<Text*>(e);
             text->setLayoutToParentWidth(true);
             text->setFlag(ELEMENT_MOVABLE, false);
+            _el.append(e);
             }
-      else {
-            printf("TBox::add: element not allowed\n");
-            return;
-            }
-      _el.append(e);
+      else
+            Box::add(e);
       }
 
 //---------------------------------------------------------
