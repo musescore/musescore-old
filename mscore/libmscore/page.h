@@ -93,8 +93,8 @@ class PageFormat {
       void setSize(int val)       { _size = val; }
 
       // convenience functions
-      qreal evenRightMargin() const  { return _width - _printableWidth - _evenLeftMargin; }
-      qreal oddRightMargin() const   { return _width - _printableWidth - _oddLeftMargin;  }
+      qreal evenRightMargin() const  { return width() - _printableWidth - _evenLeftMargin; }
+      qreal oddRightMargin() const   { return width() - _printableWidth - _oddLeftMargin;  }
       };
 
 //---------------------------------------------------------

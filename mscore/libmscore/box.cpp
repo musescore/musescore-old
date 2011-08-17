@@ -172,12 +172,10 @@ void Box::write(Xml& xml) const
             xml.tag("topMargin", _topMargin);
       if (_bottomMargin != BOX_MARGIN)
             xml.tag("bottomMargin", _bottomMargin);
-      qreal gap = _topGap / _spatium;
-      if (gap != score()->styleS(ST_systemFrameDistance).val())
-            xml.tag("topGap", gap);
-      gap = _bottomGap / _spatium;
-      if (gap != score()->styleS(ST_frameSystemDistance).val())
-            xml.tag("bottomGap", gap);
+      if (_topGap != 0.0)
+            xml.tag("topGap", _topGap / _spatium);
+      if (_bottomGap != 0.0)
+            xml.tag("bottomGap", _bottomGap / _spatium);
       Element::writeProperties(xml);
       foreach (const Element* el, _el)
             el->write(xml);
