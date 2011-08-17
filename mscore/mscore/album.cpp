@@ -51,7 +51,7 @@ void Album::print()
       printer.setCreator("MuseScore Version: " MSC_VERSION);
       printer.setFullPage(true);
       printer.setColorMode(QPrinter::Color);
-      printer.setDoubleSidedPrinting(score->pageFormat()->twosided);
+      printer.setDoubleSidedPrinting(score->pageFormat()->twosided());
       printer.setOutputFormat(QPrinter::NativeFormat);
 
       QPrintDialog pd(&printer, 0);

@@ -1147,20 +1147,19 @@ void MuseScore::printFile()
       QPrinter printerDev(QPrinter::HighResolution);
       PageFormat* pf = cs->pageFormat();
 
-      if (paperSizes[pf->size].qtsize >= int(QPrinter::Custom)) {
-            printerDev.setPaperSize(QSizeF(pf->_width, pf->_height),
-               QPrinter::Inch);
+      if (paperSizes[pf->size()].qtsize >= int(QPrinter::Custom)) {
+            printerDev.setPaperSize(QSizeF(pf->width(), pf->height()), QPrinter::Inch);
             }
       else
-            printerDev.setPaperSize(QPrinter::PageSize(paperSizes[pf->size].qtsize));
+            printerDev.setPaperSize(QPrinter::PageSize(paperSizes[pf->size()].qtsize));
 
-      printerDev.setOrientation(pf->landscape ? QPrinter::Landscape : QPrinter::Portrait);
+      printerDev.setOrientation(pf->landscape() ? QPrinter::Landscape : QPrinter::Portrait);
       printerDev.setCreator("MuseScore Version: " VERSION);
       printerDev.setFullPage(true);
       printerDev.setColorMode(QPrinter::Color);
 
       printerDev.setDocName(cs->name());
-      printerDev.setDoubleSidedPrinting(pf->twosided);
+      printerDev.setDoubleSidedPrinting(pf->twosided());
       printerDev.setOutputFormat(QPrinter::NativeFormat);
 
 #if defined(Q_WS_MAC) || defined(__MINGW32__)
@@ -1375,19 +1374,19 @@ bool MuseScore::savePsPdf(const QString& saveName, QPrinter::OutputFormat format
       PageFormat* pf = cs->pageFormat();
       QPrinter printerDev(QPrinter::HighResolution);
 
-      if (paperSizes[pf->size].qtsize >= int(QPrinter::Custom)) {
-            printerDev.setPaperSize(QSizeF(pf->_width, pf->_height),
+      if (paperSizes[pf->size()].qtsize >= int(QPrinter::Custom)) {
+            printerDev.setPaperSize(QSizeF(pf->width(), pf->height()),
                QPrinter::Inch);
             }
       else
-            printerDev.setPaperSize(QPrinter::PageSize(paperSizes[pf->size].qtsize));
+            printerDev.setPaperSize(QPrinter::PageSize(paperSizes[pf->size()].qtsize));
 
-      printerDev.setOrientation(pf->landscape ? QPrinter::Landscape : QPrinter::Portrait);
+      printerDev.setOrientation(pf->landscape() ? QPrinter::Landscape : QPrinter::Portrait);
       printerDev.setCreator("MuseScore Version: " VERSION);
       printerDev.setFullPage(true);
       printerDev.setColorMode(QPrinter::Color);
       printerDev.setDocName(cs->name());
-      printerDev.setDoubleSidedPrinting(pf->twosided);
+      printerDev.setDoubleSidedPrinting(pf->twosided());
       printerDev.setOutputFormat(format);
       printerDev.setOutputFileName(saveName);
 

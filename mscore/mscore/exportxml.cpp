@@ -1292,10 +1292,10 @@ void ExportMusicXml::credits(Xml& xml)
       //const double t  = INCH / millimeters * tenths;
       const double h  = getTenthsFromInches(pf->height());
       const double w  = getTenthsFromInches(pf->width());
-      const double lm = getTenthsFromInches(pf->oddLeftMargin);
-      const double rm = getTenthsFromInches(pf->oddRightMargin);
-      const double tm = getTenthsFromInches(pf->oddTopMargin);
-      const double bm = getTenthsFromInches(pf->oddBottomMargin);
+      const double lm = getTenthsFromInches(pf->oddLeftMargin());
+      const double rm = getTenthsFromInches(pf->oddRightMargin());
+      const double tm = getTenthsFromInches(pf->oddTopMargin());
+      const double bm = getTenthsFromInches(pf->oddBottomMargin());
       printf(" h=%g w=%g lm=%g rm=%g tm=%g bm=%g\n", h, w, lm, rm, tm, bm);
 /**/
       // write the credits
@@ -3830,9 +3830,9 @@ foreach(Element* el, *(score->gel())) {
                   if (currentSystem != NoSystem) {
                       if (!converterMode || score->defaultsRead()) {
                           const double pageWidth  = getTenthsFromInches(pf->width());
-                          const double lm = getTenthsFromInches(pf->oddLeftMargin);
-                          const double rm = getTenthsFromInches(pf->oddRightMargin);
-                          const double tm = getTenthsFromInches(pf->oddTopMargin);
+                          const double lm = getTenthsFromInches(pf->oddLeftMargin());
+                          const double rm = getTenthsFromInches(pf->oddRightMargin());
+                          const double tm = getTenthsFromInches(pf->oddTopMargin());
 
                           if (currentSystem == TopSystem)
                               xml.stag("print");

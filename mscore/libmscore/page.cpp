@@ -159,7 +159,7 @@ QList<const Element*> Page::items(const QPointF& p)
 qreal Page::tm() const
       {
       PageFormat* pf = score()->pageFormat();
-      return ((!pf->twosided || isOdd()) ? pf->oddTopMargin : pf->evenTopMargin) * DPI;
+      return ((!pf->twosided() || isOdd()) ? pf->oddTopMargin() : pf->evenTopMargin()) * DPI;
       }
 
 //---------------------------------------------------------
@@ -169,7 +169,7 @@ qreal Page::tm() const
 qreal Page::bm() const
       {
       PageFormat* pf = score()->pageFormat();
-      return ((!pf->twosided || isOdd()) ? pf->oddBottomMargin : pf->evenBottomMargin) * DPI;
+      return ((!pf->twosided() || isOdd()) ? pf->oddBottomMargin() : pf->evenBottomMargin()) * DPI;
       }
 
 //---------------------------------------------------------
@@ -179,7 +179,7 @@ qreal Page::bm() const
 qreal Page::lm() const
       {
       PageFormat* pf = score()->pageFormat();
-      return ((!pf->twosided || isOdd()) ? pf->oddLeftMargin : pf->evenLeftMargin) * DPI;
+      return ((!pf->twosided() || isOdd()) ? pf->oddLeftMargin() : pf->evenLeftMargin()) * DPI;
       }
 
 //---------------------------------------------------------
@@ -189,7 +189,7 @@ qreal Page::lm() const
 qreal Page::rm() const
       {
       PageFormat* pf = score()->pageFormat();
-      return ((!pf->twosided || isOdd()) ? pf->oddRightMargin : pf->evenRightMargin) * DPI;
+      return ((!pf->twosided() || isOdd()) ? pf->oddRightMargin() : pf->evenRightMargin()) * DPI;
       }
 
 //---------------------------------------------------------
@@ -347,20 +347,19 @@ void Page::scanElements(void* data, void (*func)(void*, Element*), bool all)
 //---------------------------------------------------------
 
 PageFormat::PageFormat()
-   : size(MScore::paperSize),
-   _width(MScore::paperWidth),
-   _height(MScore::paperHeight),
-   evenLeftMargin(10.0 / INCH),
-   evenRightMargin(10.0 / INCH),
-   evenTopMargin(10.0 / INCH),
-   evenBottomMargin(20.0 / INCH),
-   oddLeftMargin(10.0 / INCH),
-   oddRightMargin(10.0 / INCH),
-   oddTopMargin(10.0 / INCH),
-   oddBottomMargin(20.0 / INCH),
-   landscape(MScore::landscape),
-   twosided(MScore::twosided)
       {
+      _size             = MScore::paperSize;
+      _width            = MScore::paperWidth;
+      _height           = MScore::paperHeight;
+      _evenLeftMargin   = 10.0 / INCH;
+      _oddLeftMargin    = 10.0 / INCH;
+      _printableWidth   = _width - 20.0 / INCH;
+      _evenTopMargin    = 10.0 / INCH;
+      _evenBottomMargin = 20.0 / INCH;
+      _oddTopMargin     = 10.0 / INCH;
+      _oddBottomMargin  = 20.0 / INCH;
+      _landscape        = MScore::landscape;
+      _twosided         = MScore::twosided;
       }
 
 //---------------------------------------------------------
@@ -369,7 +368,7 @@ PageFormat::PageFormat()
 
 QString PageFormat::name() const
       {
-      return QString(paperSizes[size].name);
+      return QString(paperSizes[_size].name);
       }
 
 //---------------------------------------------------------
@@ -379,9 +378,9 @@ QString PageFormat::name() const
 
 qreal PageFormat::width() const
       {
-      if (paperSizes[size].qtsize == QPrinter::Custom)
-            return landscape ? _height : _width;
-      return landscape ? paperSizes[size].h : paperSizes[size].w;
+      if (paperSizes[_size].qtsize == QPrinter::Custom)
+            return _landscape ? _height : _width;
+      return _landscape ? paperSizes[_size].h : paperSizes[_size].w;
       }
 
 //---------------------------------------------------------
@@ -391,9 +390,9 @@ qreal PageFormat::width() const
 
 qreal PageFormat::height() const
       {
-      if (paperSizes[size].qtsize == QPrinter::Custom)
-            return landscape ? _width : _height;
-      return landscape ? paperSizes[size].w : paperSizes[size].h;
+      if (paperSizes[_size].qtsize == QPrinter::Custom)
+            return _landscape ? _width : _height;
+      return _landscape ? paperSizes[_size].w : paperSizes[_size].h;
       }
 
 //---------------------------------------------------------
@@ -416,22 +415,23 @@ qreal PageFormat::height() const
 
 void PageFormat::read(QDomElement e, Score* score)
       {
-      landscape = false;      // for compatibility with old versions
+      _landscape = false;      // for compatibility with old versions
+      qreal _oddRightMargin  = 0.0;
+      qreal _evenRightMargin = 0.0;
+      QString type;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             int i = val.toInt();
-            if (tag == "pageFormat") {
-                  size = paperSizeNameToIndex(val);
-                  }
+            if (tag == "pageFormat")
+                  _size = paperSizeNameToIndex(val);
             else if (tag == "landscape")
-                  landscape = i;
+                  _landscape = i;
             else if (tag == "page-margins") {
-                  QString type = e.attribute("type","both");
+                  type = e.attribute("type","both");
                   qreal lm = 0.0, rm = 0.0, tm = 0.0, bm = 0.0;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
-//                        qreal val = ee.text().toDouble() * (20/4)/ PPI  * .1;
                         qreal val = ee.text().toDouble() * 0.5 / PPI;
                         if (tag == "left-margin")
                               lm = val;
@@ -444,26 +444,26 @@ void PageFormat::read(QDomElement e, Score* score)
                         else
                               domError(ee);
                         }
-                  twosided = type == "odd" || type == "even";
+                  _twosided = type == "odd" || type == "even";
                   if (type == "odd" || type == "both") {
-                        oddLeftMargin   = lm;
-                        oddRightMargin  = rm;
-                        oddTopMargin    = tm;
-                        oddBottomMargin = bm;
+                        _oddLeftMargin   = lm;
+                        _oddRightMargin  = rm;
+                        _oddTopMargin    = tm;
+                        _oddBottomMargin = bm;
                         }
                   if (type == "even" || type == "both") {
-                        evenLeftMargin   = lm;
-                        evenRightMargin  = rm;
-                        evenTopMargin    = tm;
-                        evenBottomMargin = bm;
+                        _evenLeftMargin   = lm;
+                        _evenRightMargin  = rm;
+                        _evenTopMargin    = tm;
+                        _evenBottomMargin = bm;
                         }
                   }
             else if (tag == "page-height") {
-                  size = paperSizeNameToIndex("Custom");
+                  _size = paperSizeNameToIndex("Custom");
                   _height = val.toDouble() * 0.5 / PPI;
                   }
             else if (tag == "page-width") {
-                  size = paperSizeNameToIndex("Custom");
+                  _size = paperSizeNameToIndex("Custom");
                   _width = val.toDouble() * .5 / PPI;
                   }
             else if (tag == "page-offset")            // obsolete, moved to Score
@@ -471,6 +471,9 @@ void PageFormat::read(QDomElement e, Score* score)
             else
                   domError(e);
             }
+      qreal w1 = width() - _oddLeftMargin - _oddRightMargin;
+      qreal w2 = width() - _evenLeftMargin - _evenRightMargin;
+      _printableWidth = qMax(w1, w2);     // silently adjust right margins
       }
 
 //---------------------------------------------------------
@@ -491,7 +494,9 @@ void PageFormat::read(QDomElement e, Score* score)
 
 void PageFormat::readMusicXML(QDomElement e, qreal conversion)
       {
-      landscape = false;
+      _landscape = false;
+      qreal _oddRightMargin  = 0.0;
+      qreal _evenRightMargin = 0.0;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
@@ -514,36 +519,37 @@ void PageFormat::readMusicXML(QDomElement e, qreal conversion)
                         else
                               domError(ee);
                         }
-                  twosided = type == "odd" || type == "even";
+                  _twosided = type == "odd" || type == "even";
                   if (type == "odd" || type == "both") {
-                        oddLeftMargin   = lm;
-                        oddRightMargin  = rm;
-                        oddTopMargin    = tm;
-                        oddBottomMargin = bm;
+                        _oddLeftMargin   = lm;
+                        _oddRightMargin  = rm;
+                        _oddTopMargin    = tm;
+                        _oddBottomMargin = bm;
                         }
                   if (type == "even" || type == "both") {
-                        evenLeftMargin   = lm;
-                        evenRightMargin  = rm;
-                        evenTopMargin    = tm;
-                        evenBottomMargin = bm;
+                        _evenLeftMargin   = lm;
+                        _evenRightMargin  = rm;
+                        _evenTopMargin    = tm;
+                        _evenBottomMargin = bm;
                         }
                   }
             else if (tag == "page-height") {
-                  size = paperSizeNameToIndex("Custom");
+                  _size = paperSizeNameToIndex("Custom");
                   _height = val.toDouble() * conversion;
                   }
             else if (tag == "page-width") {
-                  size = paperSizeNameToIndex("Custom");
+                  _size = paperSizeNameToIndex("Custom");
                   _width = val.toDouble() * conversion;
                   }
             else
                   domError(e);
             }
-      printf("PageFormat::readMusicXML size=%d, height=%g, width=%g\n",
-      size, _height, _width);
       int match = paperSizeSizeToIndex(_width, _height);
-      printf("PageFormat::readMusicXML match=%d\n", match);
-      if (match >= 0) size = match;
+      if (match >= 0)
+            _size = match;
+      qreal w1 = width() - _oddLeftMargin - _oddRightMargin;
+      qreal w2 = width() - _evenLeftMargin - _evenRightMargin;
+      _printableWidth = qMax(w1, w2);     // silently adjust right margins
       }
 
 //---------------------------------------------------------
@@ -562,29 +568,29 @@ void PageFormat::write(Xml& xml)
 
       if (name() != "Custom") {
             xml.tag("pageFormat", QString(name()));
-            if (landscape)
-                  xml.tag("landscape", landscape);
+            if (_landscape)
+                  xml.tag("landscape", _landscape);
             }
       else {
             xml.tag("page-height", height() * t);
             xml.tag("page-width", width() * t);
             }
       QString type("both");
-      if (twosided) {
+      if (_twosided) {
             type = "even";
             xml.stag(QString("page-margins type=\"%1\"").arg(type));
-            xml.tag("left-margin",   evenLeftMargin * t);
-            xml.tag("right-margin",  evenRightMargin * t);
-            xml.tag("top-margin",    evenTopMargin * t);
-            xml.tag("bottom-margin", evenBottomMargin * t);
+            xml.tag("left-margin",   evenLeftMargin() * t);
+            xml.tag("right-margin",  evenRightMargin() * t);
+            xml.tag("top-margin",    evenTopMargin() * t);
+            xml.tag("bottom-margin", evenBottomMargin() * t);
             xml.etag();
             type = "odd";
             }
       xml.stag(QString("page-margins type=\"%1\"").arg(type));
-      xml.tag("left-margin",   oddLeftMargin * t);
-      xml.tag("right-margin",  oddRightMargin * t);
-      xml.tag("top-margin",    oddTopMargin * t);
-      xml.tag("bottom-margin", oddBottomMargin * t);
+      xml.tag("left-margin",   oddLeftMargin() * t);
+      xml.tag("right-margin",  oddRightMargin() * t);
+      xml.tag("top-margin",    oddTopMargin() * t);
+      xml.tag("bottom-margin", oddBottomMargin() * t);
       xml.etag();
 
       xml.etag();
@@ -603,21 +609,21 @@ void PageFormat::writeMusicXML(Xml& xml, qreal conversion )
       xml.tag("page-height", height() * conversion);
       xml.tag("page-width", width() * conversion);
       QString type("both");
-      if (twosided) {
+      if (_twosided) {
             type = "even";
             xml.stag(QString("page-margins type=\"%1\"").arg(type));
-            xml.tag("left-margin",   evenLeftMargin * conversion);
-            xml.tag("right-margin",  evenRightMargin * conversion);
-            xml.tag("top-margin",    evenTopMargin * conversion);
-            xml.tag("bottom-margin", evenBottomMargin * conversion);
+            xml.tag("left-margin",   evenLeftMargin() * conversion);
+            xml.tag("right-margin",  evenRightMargin() * conversion);
+            xml.tag("top-margin",    evenTopMargin() * conversion);
+            xml.tag("bottom-margin", evenBottomMargin() * conversion);
             xml.etag();
             type = "odd";
             }
       xml.stag(QString("page-margins type=\"%1\"").arg(type));
-      xml.tag("left-margin",   oddLeftMargin * conversion);
-      xml.tag("right-margin",  oddRightMargin * conversion);
-      xml.tag("top-margin",    oddTopMargin * conversion);
-      xml.tag("bottom-margin", oddBottomMargin * conversion);
+      xml.tag("left-margin",   oddLeftMargin() * conversion);
+      xml.tag("right-margin",  oddRightMargin() * conversion);
+      xml.tag("top-margin",    oddTopMargin() * conversion);
+      xml.tag("bottom-margin", oddBottomMargin() * conversion);
       xml.etag();
 
       xml.etag();

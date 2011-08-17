@@ -4587,7 +4587,7 @@ void ExportLy::writePageFormat()
 {
   PageFormat* pf = score->pageFormat();
   os << "#(set-default-paper-size ";
-  switch(pf->size) {
+  switch(pf->size()) {
   default:
   case  0: os << "\"a4\""; break;
   case  2: os << "\"letter\""; break;
@@ -4597,19 +4597,19 @@ void ExportLy::writePageFormat()
   case 29: os << "\"11x17\""; break;
   }
 
-  if (pf->landscape) os << " 'landscape";
+  if (pf->landscape()) os << " 'landscape";
 
   os << ")\n\n";
 
   // TODO/O.G.: choose between standard formats and specified paper
   // dimensions. We normally don't need both.
 
-  double lw = pf->width() - pf->evenLeftMargin - pf->evenRightMargin;
+  double lw = pf->printableWidth();
   os << "\\paper {\n";
   os <<  "  line-width    = " << lw * INCH << "\\mm\n";
-  os <<  "  left-margin   = " << pf->evenLeftMargin * INCH << "\\mm\n";
-  os <<  "  top-margin    = " << pf->evenTopMargin * INCH << "\\mm\n";
-  os <<  "  bottom-margin = " << pf->evenBottomMargin * INCH << "\\mm\n";
+  os <<  "  left-margin   = " << pf->evenLeftMargin() * INCH << "\\mm\n";
+  os <<  "  top-margin    = " << pf->evenTopMargin() * INCH << "\\mm\n";
+  os <<  "  bottom-margin = " << pf->evenBottomMargin() * INCH << "\\mm\n";
   os <<  "  %%indent = 0 \\mm \n";
   os <<  "  %%set to ##t if your score is less than one page: \n";
   os <<  "  ragged-last-bottom = ##t \n";

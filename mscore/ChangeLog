@@ -1,3 +1,6 @@
+17.aug (ws)
+      - changed page settings to ensure that the printable area of a page
+        is equal for odd and even pages
 16.aug (ws)
       - new option: "show page margins"
       - optimized page layout
