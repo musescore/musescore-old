@@ -18,6 +18,7 @@
 
 class Tablature;
 class Chord;
+class Harmony;
 
 //---------------------------------------------------------
 //   FretDiagram
@@ -32,6 +33,7 @@ class FretDiagram : public Element {
       char* _dots;
       char* _marker;
       char* _fingering;
+      Harmony* _harmony;
 
       qreal lw1;
       qreal lw2;             // top line
@@ -71,6 +73,14 @@ class FretDiagram : public Element {
       char* marker()    { return _marker; }
       char* fingering() { return _fingering; }
       void init(Tablature*, Chord*);
+
+      virtual void add(Element*);
+      virtual void remove(Element*);
+
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
+      virtual Element* drop(const DropData&);
+
+      virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
       };
 
 #endif

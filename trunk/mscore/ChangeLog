@@ -1,4 +1,5 @@
 17.aug (ws)
+      - fix #12096: crash on startup if no navigator window (patch from Miwarre)
       - changed page settings to ensure that the printable area of a page
         is equal for odd and even pages
 16.aug (ws)

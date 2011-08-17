@@ -1330,7 +1330,7 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
             changeState(STATE_DISABLED);
             _undoGroup->setActiveStack(0);
             setWindowTitle("MuseScore");
-            if (_navigator)
+            if (_navigator && _navigator->widget())
                   static_cast<Navigator*>(_navigator->widget())->setScore(0);
             return;
             }
