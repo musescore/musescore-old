@@ -337,7 +337,7 @@ StyleData::StyleData()
             StyleVal(ST_lyricsMinBottomDistance, Spatium(2)),
             StyleVal(ST_lyricsLineHeight, qreal(1.0)),
             StyleVal(ST_systemFrameDistance, Spatium(7.0)),
-            StyleVal(ST_frameSystemDistance, Spatium(1.0)),
+            StyleVal(ST_frameSystemDistance, Spatium(7.0)),
             StyleVal(ST_minMeasureWidth, Spatium(4.0)),
                                                             // finale european style
             StyleVal(ST_barWidth, Spatium(0.16)),           // 0.1875

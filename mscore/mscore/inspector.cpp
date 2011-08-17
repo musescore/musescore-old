@@ -102,6 +102,8 @@ void Inspector::setElement(Element* e)
       if (_element == 0)
             return;
       switch(_element->type()) {
+            case FBOX:
+            case TBOX:
             case VBOX:         ie = new InspectorVBox(this, this); break;
             case HBOX:         ie = new InspectorHBox(this, this); break;
             case ARTICULATION: ie = new InspectorArticulation(this, this); break;
@@ -406,5 +408,3 @@ void InspectorSpacer::apply()
             mscore->endCmd();
             }
       }
-
-

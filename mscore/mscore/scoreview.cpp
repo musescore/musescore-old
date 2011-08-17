@@ -5293,6 +5293,7 @@ void ScoreView::cmdAddText(int subtype)
                         MeasureBase* mb = new VBox(_score);
                         mb->setTick(0);
                         _score->undoInsertMeasure(mb, measure);
+                        measure = mb;
                         }
                   s = new Text(_score);
                   switch(subtype) {
