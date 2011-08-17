@@ -118,6 +118,7 @@ class MeasureBase : public Element {
       void setTick(int t)                    { _tick = t;     }
 
       qreal pause() const;
+      virtual const QString subtypeName() const      { return QString(); }
       };
 
 #endif

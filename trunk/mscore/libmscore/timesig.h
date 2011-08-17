@@ -81,6 +81,7 @@ class TimeSig : public Element {
       QString nText() const              { return sn; }
       void setText(const QString&, const QString&);
       void setFrom(const TimeSig*);
+      virtual const QString subtypeName() const      { return QString(); }
       };
 
 #endif

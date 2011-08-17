@@ -51,8 +51,11 @@ Box::Box(Score* score)
 
 void Box::layout()
       {
-      foreach (Element* el, _el)
-            el->layout();
+      foreach (Element* el, _el) {
+            if (el->type() != LAYOUT_BREAK)
+                  el->layout();
+            }
+      MeasureBase::layout();
       }
 
 //---------------------------------------------------------
@@ -299,33 +302,13 @@ void Box::read(QDomElement e)
 
 void Box::add(Element* e)
       {
-      e->setParent(this);
-      if (e->type() == LAYOUT_BREAK) {
-            for (iElement i = _el.begin(); i != _el.end(); ++i) {
-                  if ((*i)->type() == LAYOUT_BREAK && (*i)->subtype() == e->subtype()) {
-                        if (debugMode)
-                              printf("warning: layout break already set\n");
-                        return;
-                        }
-                  }
-            switch(e->subtype()) {
-                  case LAYOUT_BREAK_PAGE:
-                        _pageBreak = true;
-                        break;
-                  case LAYOUT_BREAK_LINE:
-                        _lineBreak = true;
-                        break;
-                  case LAYOUT_BREAK_SECTION:
-                        _sectionBreak = static_cast<LayoutBreak*>(e);
-                        break;
-                  }
-            }
       if (e->type() == TEXT) {
+            e->setParent(this);
             static_cast<Text*>(e)->setLayoutToParentWidth(true);
+            _el.append(e);
             }
-      _el.append(e);
-      if (e->type() == IMAGE)
-            static_cast<Image*>(e)->reference();
+      else
+            MeasureBase::add(e);
       }
 
 //---------------------------------------------------------
