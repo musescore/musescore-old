@@ -110,7 +110,6 @@ void Box::editDrag(const EditData& ed)
             setbbox(QRectF(0.0, 0.0, system()->width(), point(boxHeight())));
             system()->setHeight(height());
             score()->doLayoutPages();
-            score()->setUpdateAll();
             }
       else {
             _boxWidth += Spatium(ed.delta.x() / spatium());

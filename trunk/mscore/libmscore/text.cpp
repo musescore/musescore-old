@@ -850,7 +850,8 @@ bool Text::edit(MuseScoreView* view, int /*grip*/, int key, Qt::KeyboardModifier
             else
                   h = height();
             tb->setHeight(h);
-            score()->addRefresh(tb->canvasBoundingRect().adjusted(-w, -w, w, w));
+            tb->system()->setHeight(tb->height());
+            score()->doLayoutPages();
             }
       else
             score()->addRefresh(canvasBoundingRect().adjusted(-w, -w, w, w));
