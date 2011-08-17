@@ -66,11 +66,11 @@ static QScriptValue prototype_PageFormat_call(QScriptContext* context, QScriptEn
       switch(_id) {
             case 0:     // "landscape",
                   if (context->argumentCount() == 0)
-                        return qScriptValueFromValue(context->engine(), pageFormat->landscape);
+                        return qScriptValueFromValue(context->engine(), pageFormat->landscape());
                   break;
             case 1:     // "twosided",
                   if (context->argumentCount() == 0)
-                        return qScriptValueFromValue(context->engine(), pageFormat->twosided);
+                        return qScriptValueFromValue(context->engine(), pageFormat->twosided());
                   break;
             case 2:     // "width",
                   if (context->argumentCount() == 0)

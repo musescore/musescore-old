@@ -40,30 +40,61 @@ struct PaperSize {
 //   PageFormat
 //---------------------------------------------------------
 
-struct PageFormat {
-      int size;                     // index in paperSizes[]
+class PageFormat {
+      int _size;                    // index in paperSizes[]
       qreal _width;
       qreal _height;
-      qreal evenLeftMargin;        // values in inch
-      qreal evenRightMargin;
-      qreal evenTopMargin;
-      qreal evenBottomMargin;
-      qreal oddLeftMargin;
-      qreal oddRightMargin;
-      qreal oddTopMargin;
-      qreal oddBottomMargin;
-      bool landscape;
-      bool twosided;
+      qreal _printableWidth;        // _width - left margin - right margin
+      qreal _evenLeftMargin;        // values in inch
+      qreal _oddLeftMargin;
+      qreal _evenTopMargin;
+      qreal _evenBottomMargin;
+      qreal _oddTopMargin;
+      qreal _oddBottomMargin;
+      bool _landscape;
+      bool _twosided;
 
    public:
       PageFormat();
+
       qreal width() const;         // return width in inch
+      void setWidth(qreal val)  { _width = val; }
       qreal height() const;        // height in inch
+      void setHeight(qreal val) { _height = val; }
+
       QString name() const;
       void read(QDomElement,  Score*);
       void readMusicXML(QDomElement, qreal);
       void write(Xml&);
       void writeMusicXML(Xml&, qreal);
+      qreal evenLeftMargin() const   { return _evenLeftMargin;   }
+      qreal oddLeftMargin() const    { return _oddLeftMargin;    }
+      qreal evenTopMargin() const    { return _evenTopMargin;    }
+      qreal evenBottomMargin() const { return _evenBottomMargin; }
+      qreal oddTopMargin() const     { return _oddTopMargin;     }
+      qreal oddBottomMargin() const  { return _oddBottomMargin;  }
+      qreal printableWidth() const   { return _printableWidth;   }
+
+      void setEvenLeftMargin(qreal val)   { _evenLeftMargin = val;   }
+      void setOddLeftMargin(qreal val)    { _oddLeftMargin = val;    }
+      void setEvenTopMargin(qreal val)    { _evenTopMargin = val;    }
+      void setEvenBottomMargin(qreal val) { _evenBottomMargin = val; }
+      void setOddTopMargin(qreal val)     { _oddTopMargin = val;     }
+      void setOddBottomMargin(qreal val)  { _oddBottomMargin = val;  }
+      void setPrintableWidth(qreal val)   { _printableWidth = val;   }
+
+      bool landscape() const      { return _landscape; }
+      void setLandscape(bool val) { _landscape = val; }
+
+      bool twosided() const       { return _twosided; }
+      void setTwosided(bool val)  { _twosided = val; }
+
+      int size() const            { return _size; }
+      void setSize(int val)       { _size = val; }
+
+      // convenience functions
+      qreal evenRightMargin() const  { return _width - _printableWidth - _evenLeftMargin; }
+      qreal oddRightMargin() const   { return _width - _printableWidth - _oddLeftMargin;  }
       };
 
 //---------------------------------------------------------

@@ -1644,11 +1644,7 @@ void Score::layoutSystems()
       bool firstSystem        = true;
       bool startWithLongNames = true;
 
-      PageFormat* pf = pageFormat();
-      qreal lm = pf->oddLeftMargin * DPI;
-      qreal rm = pf->oddRightMargin * DPI;
-      qreal pw = pf->width() * DPI;
-      qreal w  = pw - lm - rm;
+      qreal w  = pageFormat()->printableWidth() * DPI;
 
       while (curMeasure) {
             ElementType t = curMeasure->type();

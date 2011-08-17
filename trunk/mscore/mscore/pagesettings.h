@@ -36,7 +36,7 @@ class PageSettings : public QDialog, private Ui::PageSettingsBase {
       PagePreview* preview;
       bool mmUnit;
       Score* cs;
-      void setValues(Score*);
+      void updateValues();
       void updatePreview();
 
    private slots:
@@ -48,6 +48,7 @@ class PageSettings : public QDialog, private Ui::PageSettingsBase {
       void ok();
       void done(int val);
 
+      void pwChanged(double val);
       void twosidedToggled(bool);
       void landscapeToggled(bool);
       void otmChanged(double val);
