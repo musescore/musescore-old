@@ -21,6 +21,7 @@
 #include "segment.h"
 #include "painter.h"
 #include "mscore.h"
+#include "harmony.h"
 
 static const int DEFAULT_STRINGS = 6;
 static const int DEFAULT_FRETS = 5;
@@ -44,6 +45,7 @@ FretDiagram::FretDiagram(Score* score)
       font.setFamily("FreeSans");
       int size = lrint(4.0 * DPI * mag()/ PPI);
       font.setPixelSize(size);
+      _harmony = 0;
       }
 
 FretDiagram::FretDiagram(const FretDiagram& f)
@@ -70,6 +72,10 @@ FretDiagram::FretDiagram(const FretDiagram& f)
             _fingering = new char[_strings];
             memcpy(_fingering, f._fingering, _strings);
             }
+      if (f._harmony)
+            _harmony = new Harmony(*f._harmony);
+      else
+            _harmony = 0;
       }
 
 //---------------------------------------------------------
@@ -264,6 +270,8 @@ void FretDiagram::layout()
 //      setPos(ipos() + QPointF(-w * .5, - (h + _spatium * 1.5)));
       setPos(0.0, 0.0);
       adjustReadPos();
+      if (_harmony)
+            _harmony->layout();
       }
 
 //---------------------------------------------------------
@@ -377,5 +385,68 @@ void FretDiagram::setFingering(int string, int finger)
             memset(_fingering, 0, _strings);
             }
       _fingering[string] = finger;
+      }
+
+//---------------------------------------------------------
+//   add
+//---------------------------------------------------------
+
+void FretDiagram::add(Element* e)
+      {
+      e->setParent(this);
+      if (e->type() == HARMONY) {
+            _harmony = static_cast<Harmony*>(e);
+            }
+      else
+            qWarning("FretDiagram: cannot add <%s>\n", e->name());
+      }
+
+//---------------------------------------------------------
+//   remove
+//---------------------------------------------------------
+
+void FretDiagram::remove(Element* e)
+      {
+      if (e == _harmony)
+            _harmony = 0;
+      else
+            qWarning("FretDiagram: cannot remove <%s>\n", e->name());
+      }
+
+//---------------------------------------------------------
+//   acceptDrop
+//---------------------------------------------------------
+
+bool FretDiagram::acceptDrop(MuseScoreView*, const QPointF&, int t, int) const
+      {
+      return t == HARMONY;
+      }
+
+//---------------------------------------------------------
+//   drop
+//---------------------------------------------------------
+
+Element* FretDiagram::drop(const DropData& data)
+      {
+      Element* e = data.element;
+      if (e->type() == HARMONY) {
+            // TODO: make undoable
+            _harmony = static_cast<Harmony*>(e);
+            score()->setUpdateAll(true);
+            }
+      else
+            qWarning("FretDiagram: cannot drop <%s>\n", e->name());
+      return e;
+      }
+
+//---------------------------------------------------------
+//   scanElements
+//---------------------------------------------------------
+
+void FretDiagram::scanElements(void* data, void (*func)(void*, Element*), bool all)
+      {
+      func(data, this);
+      if (_harmony)
+            func(data, _harmony);
       }
 
