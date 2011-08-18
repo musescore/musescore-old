@@ -1,4 +1,6 @@
-18.aug (la)
+18.aug (lv)
+      - reworked MusicXML voice mapper
+       (la)
       - fix bug on midi import
 15.aug (la)
       - fix #12084: Crash when running transpose with title selected
