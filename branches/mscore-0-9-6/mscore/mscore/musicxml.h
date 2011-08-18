@@ -119,6 +119,31 @@ class MusicXmlCreator {
       };
 
 //---------------------------------------------------------
+//   VoiceDesc
+//---------------------------------------------------------
+
+/**
+ The description of a single voice in a MusicXML part.
+*/
+
+class VoiceDesc {
+   public:
+      VoiceDesc();
+      void incrChordRests(int s);
+      int numberChordRests() const;
+      int preferredStaff() const;    ///< Determine preferred staff for this voice
+      void setStaff(int s) { if (s >= 0) _staff = s; }
+      int staff() const    { return _staff; }
+      void setVoice(int v) { if (v >= 0) _voice = v; }
+      int voice() const    { return _voice; }
+      QString toString() const;
+   private:
+      int _chordRests[MAX_STAVES]; ///< The number of chordrests on each MusicXML staff
+      int _staff;                  ///< The MuseScore staff allocated
+      int _voice;                  ///< The MuseScore voice allocated
+      };
+
+//---------------------------------------------------------
 //   MusicXml
 //---------------------------------------------------------
 
@@ -128,7 +153,7 @@ class MusicXmlCreator {
 
 class MusicXml {
       Score* score;
-      std::vector<int> voicelist[MAX_STAVES];
+      QMap<int, VoiceDesc> voicelist;
 
       Slur* slur[MAX_NUMBER_LEVEL];
 
@@ -182,6 +207,7 @@ class MusicXml {
       void xmlNote(Measure*, int stave, QDomElement node);
       void xmlHarmony(QDomElement node, int tick, Measure* m);
       void xmlClef(QDomElement, int staffIdx, Measure*);
+      void initVoiceMapperAndMapVoices(QDomElement e);
 
    public:
       MusicXml(QDomDocument* d);
