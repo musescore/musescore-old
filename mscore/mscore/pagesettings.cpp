@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -23,7 +23,7 @@
 #include "libmscore/page.h"
 #include "libmscore/style.h"
 #include "libmscore/score.h"
-#include "preview.h"
+#include "navigator.h"
 #include "libmscore/mscore.h"
 #include "musescore.h"
 
@@ -36,8 +36,21 @@ PageSettings::PageSettings(QWidget* parent)
       {
       setupUi(this);
       setModal(true);
-      preview = new PagePreview;
-      static_cast<QVBoxLayout*>(previewGroup->layout())->insertWidget(0, preview);
+
+      QScrollArea* sa = new QScrollArea;
+      sa->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+      sa->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+      sa->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+      sa->setMinimumHeight(40);
+//      sa->setFrameStyle(QFrame::Box | QFrame::Raised);
+      sa->setLineWidth(0);
+
+      preview = new Navigator(sa, this);
+      preview->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+      sa->setWidget(preview);
+      sa->setWidgetResizable(true);
+
+      static_cast<QVBoxLayout*>(previewGroup->layout())->insertWidget(0, sa);
 
       mmUnit = true;      // should be made a global configuration item
 
@@ -53,7 +66,6 @@ PageSettings::PageSettings(QWidget* parent)
       connect(twosided,             SIGNAL(toggled(bool)),        SLOT(twosidedToggled(bool)));
       connect(pageHeight,           SIGNAL(valueChanged(double)), SLOT(pageHeightChanged(double)));
       connect(pageWidth,            SIGNAL(valueChanged(double)), SLOT(pageWidthChanged(double)));
-      connect(previewPage,          SIGNAL(valueChanged(int)),    SLOT(setPage(int)));
       connect(printableWidth,       SIGNAL(valueChanged(double)), SLOT(pwChanged(double)));
       connect(oddPageTopMargin,     SIGNAL(valueChanged(double)), SLOT(otmChanged(double)));
       connect(oddPageBottomMargin,  SIGNAL(valueChanged(double)), SLOT(obmChanged(double)));
@@ -83,8 +95,7 @@ PageSettings::~PageSettings()
 void PageSettings::setScore(Score* s)
       {
       cs  = s;
-      preview->setScore(s);
-      // previewPage->setValue(1);
+      preview->setScore(s->clone());
 
       Score* sl = preview->score();
       PageFormat* pf = s->pageFormat();
@@ -101,6 +112,7 @@ void PageSettings::setScore(Score* s)
 
       pageGroup->setCurrentIndex(pf->size());
       updateValues();
+      updatePreview(0);
       }
 
 //---------------------------------------------------------
@@ -239,7 +251,7 @@ void PageSettings::landscapeToggled(bool flag)
       {
       preview->score()->pageFormat()->setLandscape(flag);
       updateValues();
-      updatePreview();
+      updatePreview(0);
       }
 
 //---------------------------------------------------------
@@ -250,7 +262,7 @@ void PageSettings::twosidedToggled(bool flag)
       {
       preview->score()->pageFormat()->setTwosided(flag);
       updateValues();
-      updatePreview();
+      updatePreview(1);
       }
 
 //---------------------------------------------------------
@@ -312,8 +324,8 @@ void PageSettings::done(int val)
 void PageSettings::pageFormatSelected(int pf)
       {
       preview->score()->pageFormat()->setSize(pf);
-      preview->doLayout();
-      updatePreview();
+      preview->score()->doLayout();
+      updatePreview(0);
       }
 
 //---------------------------------------------------------
@@ -325,7 +337,7 @@ void PageSettings::otmChanged(double val)
       if (mmUnit)
             val /= INCH;
       preview->score()->pageFormat()->setOddTopMargin(val);
-      updatePreview();
+      updatePreview(1);
       }
 
 //---------------------------------------------------------
@@ -346,7 +358,7 @@ void PageSettings::olmChanged(double val)
       oddPageRightMargin->setValue(pf->oddRightMargin() * (mmUnit ? INCH : 1.0));
       evenPageRightMargin->blockSignals(false);
 
-      updatePreview();
+      updatePreview(1);
       }
 
 //---------------------------------------------------------
@@ -363,10 +375,10 @@ void PageSettings::ormChanged(double val)
       // left margin depends, as score width is identical
       // for even and odd pages
       oddPageLeftMargin->blockSignals(true);
-      oddPageLeftMargin->setValue(pf->oddLeftMargin() * (mmUnit ? INCH : 1.0));
+      oddPageLeftMargin->setValue((pf->width() - pf->printableWidth() - val) * (mmUnit ? INCH : 1.0));
       evenPageRightMargin->blockSignals(false);
 
-      updatePreview();
+      updatePreview(1);
       }
 
 //---------------------------------------------------------
@@ -378,7 +390,7 @@ void PageSettings::obmChanged(double val)
       if (mmUnit)
             val /= INCH;
       preview->score()->pageFormat()->setOddBottomMargin(val);
-      updatePreview();
+      updatePreview(1);
       }
 
 //---------------------------------------------------------
@@ -390,7 +402,7 @@ void PageSettings::etmChanged(double val)
       if (mmUnit)
             val /= INCH;
       preview->score()->pageFormat()->setEvenTopMargin(val);
-      updatePreview();
+      updatePreview(1);
       }
 
 //---------------------------------------------------------
@@ -411,7 +423,7 @@ void PageSettings::elmChanged(double val)
       evenPageRightMargin->setValue(pf->evenRightMargin() * (mmUnit ? INCH : 1.0));
       evenPageRightMargin->blockSignals(false);
 
-      updatePreview();
+      updatePreview(1);
       }
 
 //---------------------------------------------------------
@@ -428,10 +440,10 @@ void PageSettings::ermChanged(double val)
       // left margin depends, as score width is identical
       // for even and odd pages
       evenPageLeftMargin->blockSignals(true);
-      evenPageLeftMargin->setValue(pf->evenLeftMargin() * (mmUnit ? INCH : 1.0));
+      evenPageLeftMargin->setValue((pf->width() - pf->printableWidth() - val) * (mmUnit ? INCH : 1.0));
       evenPageLeftMargin->blockSignals(false);
 
-      updatePreview();
+      updatePreview(1);
       }
 
 //---------------------------------------------------------
@@ -443,7 +455,7 @@ void PageSettings::ebmChanged(double val)
       if (mmUnit)
             val /= INCH;
       preview->score()->pageFormat()->setEvenBottomMargin(val);
-      updatePreview();
+      updatePreview(1);
       }
 
 //---------------------------------------------------------
@@ -454,7 +466,7 @@ void PageSettings::spatiumChanged(double val)
       {
       val *= mmUnit ? DPMM : DPI;
       preview->score()->setSpatium(val);
-      updatePreview();
+      updatePreview(0);
       }
 
 //---------------------------------------------------------
@@ -464,7 +476,7 @@ void PageSettings::spatiumChanged(double val)
 void PageSettings::pageOffsetChanged(int val)
       {
       preview->score()->setPageNumberOffset(val);
-      updatePreview();
+      updatePreview(0);
       }
 
 //---------------------------------------------------------
@@ -486,7 +498,7 @@ void PageSettings::pageHeightChanged(double val)
       f->setHeight(val);
       f->setWidth(val2);
 
-      updatePreview();
+      updatePreview(1);
       }
 
 //---------------------------------------------------------
@@ -508,27 +520,24 @@ void PageSettings::pageWidthChanged(double val)
       f->setWidth(val);
       f->setHeight(val2);
 
-      updatePreview();
-      }
-
-//---------------------------------------------------------
-//   setPage
-//---------------------------------------------------------
-
-void PageSettings::setPage(int n)
-      {
-      preview->showPage(n-1);
+      updatePreview(0);
       }
 
 //---------------------------------------------------------
 //   updatePreview
 //---------------------------------------------------------
 
-void PageSettings::updatePreview()
+void PageSettings::updatePreview(int val)
       {
-      preview->doLayout();
-      previewPage->setMaximum(preview->pages());
-      setPage(previewPage->value());
+      switch(val) {
+            case 0:
+                  preview->score()->doLayout();
+                  break;
+            case 1:
+                  preview->score()->doLayoutPages();
+                  break;
+            }
+      preview->layoutChanged();
       }
 
 //---------------------------------------------------------
@@ -549,5 +558,6 @@ void PageSettings::pwChanged(double val)
             pf->setEvenLeftMargin(pf->width() - val);
 
       updateValues();
+      updatePreview(0);
       }
 

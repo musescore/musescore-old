@@ -24,7 +24,7 @@
 #include "ui_pagesettings.h"
 
 class Score;
-class PagePreview;
+class Navigator;
 
 //---------------------------------------------------------
 //   PageSettings
@@ -33,11 +33,11 @@ class PagePreview;
 class PageSettings : public QDialog, private Ui::PageSettingsBase {
       Q_OBJECT
 
-      PagePreview* preview;
+      Navigator* preview;
       bool mmUnit;
       Score* cs;
       void updateValues();
-      void updatePreview();
+      void updatePreview(int);
 
    private slots:
       void mmClicked();
@@ -63,7 +63,6 @@ class PageSettings : public QDialog, private Ui::PageSettingsBase {
       void pageHeightChanged(double);
       void pageWidthChanged(double);
 	void pageOffsetChanged(int val);
-      void setPage(int);
 
    public:
       PageSettings(QWidget* parent = 0);

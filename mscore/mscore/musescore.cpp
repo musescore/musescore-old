@@ -1359,7 +1359,7 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
       setPos(cs->inputPos());
       _statusBar->showMessage(cs->filePath(), 2000);
       if (_navigator && _navigator->widget())
-            static_cast<Navigator*>(_navigator->widget())->setScore(view);
+            static_cast<Navigator*>(_navigator->widget())->setScoreView(view);
       }
 
 //---------------------------------------------------------
@@ -2009,6 +2009,11 @@ int main(int argc, char* av[])
       // Save the preferences in QSettings::NativeFormat
       QSettings::setDefaultFormat(QSettings::IniFormat);
 #endif
+
+      if (!QFontDatabase::supportsThreadedFontRendering()) {
+            printf("Your computer does not support threaded font rendering!\n");
+            exit(-1);
+            }
 
       QStringList argv =  QCoreApplication::arguments();
       argv.removeFirst();

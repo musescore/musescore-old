@@ -404,7 +404,13 @@ void Text::draw(Painter* painter) const
 
       c.palette.setColor(QPalette::Text, color);
 
+#if 1
+      // make it thread save
+      QScopedPointer<QTextDocument> __doc(_doc->clone());
+      painter->drawText(__doc.data(), c);
+#else
       painter->drawText(_doc, c);
+#endif
 
       // draw frame
       if (hasFrame()) {

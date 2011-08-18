@@ -580,7 +580,7 @@ void Score::layoutStage3()
 void Score::doLayout()
       {
       {
-      QMutexLocker locker(&_mutex);
+      QWriteLocker locker(&_layoutLock);
 
       _symIdx = 0;
       if (_style.valueSt(ST_MusicalSymbolFont) == "Gonville")
@@ -1923,9 +1923,13 @@ void Score::layoutPage(Page* page, int gaps, qreal restHeight)
 
 void Score::doLayoutPages()
       {
+      {
+      QWriteLocker locker(&_layoutLock);
       layoutPages();
       rebuildBspTree();
       _updateAll = true;
+      }
+
       foreach(MuseScoreView* v, viewer)
             v->layoutChanged();
       }

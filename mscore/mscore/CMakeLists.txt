@@ -58,7 +58,7 @@ QT4_WRAP_UI (ui_headers
 QT4_WRAP_CPP (mocs
       scoreview.h editinstrument.h editstyle.h edittempo.h instrdialog.h debugger.h
       musescore.h navigator.h pagesettings.h palette.h mixer.h playpanel.h
-      measureproperties.h preview.h seq.h textpalette.h textstyle.h
+      measureproperties.h seq.h textpalette.h textstyle.h
       timedialog.h symboldialog.h shortcutcapturedialog.h simplebutton.h
       greendotbutton.h recordbutton.h editdrumset.h editstaff.h selinstrument.h
       voltaproperties.h chordproperties.h restproperties.h timesigproperties.h
@@ -137,7 +137,7 @@ add_executable ( ${ExecutableName}
       instrdialog.cpp debugger.cpp menus.cpp importmidi.cpp
       musescore.cpp navigator.cpp pagesettings.cpp palette.cpp
       mixer.cpp playpanel.cpp preferences.cpp measureproperties.cpp
-      preview.cpp seq.cpp boxproperties.cpp textpalette.cpp
+      seq.cpp boxproperties.cpp textpalette.cpp
       timedialog.cpp symboldialog.cpp shortcutcapturedialog.cpp
       simplebutton.cpp musedata.cpp lilypond.cpp exportly.cpp
       editdrumset.cpp editstaff.cpp voltaproperties.cpp chordproperties.cpp
