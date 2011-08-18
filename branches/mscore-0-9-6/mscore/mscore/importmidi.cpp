@@ -1213,7 +1213,7 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
             //
       	// process pending notes
             //
-            Measure* measure;
+            Measure* measure = 0;
             while (!notes.isEmpty()) {
                   int tick = notes[0]->mc->ontime();
             	measure = tick2measure(tick);
@@ -1295,22 +1295,24 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                               }
                         }
                   }
-            //
-            // check for gap and fill with rest
-            //
-            int restLen = measure->tick() + measure->tickLen() - ctick;
-            while (restLen > 0 && voice == 0) {
-                  QList<Duration> dl = toDurationList(Fraction::fromTicks(restLen), false);
-                  Duration d = dl.back();
-                  Rest* rest = new Rest(this, ctick, d);
-      		Measure* measure = tick2measure(ctick);
-                  rest->setTrack(staffIdx * VOICES + voice);
-                  Segment* s = measure->getSegment(rest);
-                  s->add(rest);
-                  int ticks = d.ticks();
-                  restLen -= ticks;
-                  ctick   += ticks;
-                  }
+                  //
+                  // check for gap and fill with rest
+                  //
+                  if(measure) {
+                        int restLen = measure->tick() + measure->tickLen() - ctick;
+                        while (restLen > 0 && voice == 0) {
+                              QList<Duration> dl = toDurationList(Fraction::fromTicks(restLen), false);
+                              Duration d = dl.back();
+                              Rest* rest = new Rest(this, ctick, d);
+                  		        Measure* measure = tick2measure(ctick);
+                              rest->setTrack(staffIdx * VOICES + voice);
+                              Segment* s = measure->getSegment(rest);
+                              s->add(rest);
+                              int ticks = d.ticks();
+                              restLen -= ticks;
+                              ctick   += ticks;
+                              }
+                        }
             }
       if (!midiTrack->hasKey() && !midiTrack->isDrumTrack()) {
             KeySigEvent ks;
