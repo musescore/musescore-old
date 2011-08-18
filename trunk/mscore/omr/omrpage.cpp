@@ -102,7 +102,6 @@ void OmrPage::read(int /*pageNo*/)
 
       QFuture<void> bl = QtConcurrent::map(_systems, &OmrSystem::searchBarLines);
       bl.waitForFinished();
-
       }
 
 //---------------------------------------------------------

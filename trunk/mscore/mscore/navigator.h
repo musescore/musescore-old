@@ -23,6 +23,20 @@
 
 class Score;
 class ScoreView;
+class Page;
+class Navigator;
+
+//---------------------------------------------------------
+//   PageCache
+//---------------------------------------------------------
+
+struct PageCache {
+      bool valid;
+      Page* page;
+      QImage pm;
+      QTransform matrix;
+      Navigator* navigator;
+      };
 
 //---------------------------------------------------------
 //   Navigator
@@ -37,13 +51,12 @@ class Navigator : public QWidget {
 
       QRect viewRect;
       QPoint startMove;
-      bool moving;
-      QPixmap pm;
+      QList<PageCache> pcl;
+      QList<PageCache*> npcl;
       QTransform matrix;
 
-      QFuture<QImage> updatePixmap;
-      QFutureWatcher<QImage> watcher;
-      QImage createPixmap();
+      QFuture<void> updatePixmap;
+      QFutureWatcher<void> watcher;
       bool recreatePixmap;
 
       int cachedWidth;
@@ -51,7 +64,6 @@ class Navigator : public QWidget {
       virtual void paintEvent(QPaintEvent*);
       virtual void mousePressEvent(QMouseEvent*);
       virtual void mouseMoveEvent(QMouseEvent*);
-      virtual void mouseReleaseEvent(QMouseEvent*);
       virtual void resizeEvent(QResizeEvent*);
 
    private slots:
@@ -66,7 +78,9 @@ class Navigator : public QWidget {
 
    public:
       Navigator(QScrollArea* sa, QWidget* parent = 0);
-      void setScore(ScoreView*);
+      void setScoreView(ScoreView*);
+      void setScore(Score*);
+      Score* score() const { return _score; }
       void setViewRect(const QRectF& r);
       };
 
