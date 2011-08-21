@@ -2447,8 +2447,9 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       qreal xoffset = 0.0;
       bool hasYoffset = false;
       QColor noteheadColor = QColor::Invalid;
+      bool chord = false;
 
-      // first read voice and staff and do voice mapping
+      // first read all elements required for voice mapping
       QDomElement e2 = e;
       for (; !e2.isNull(); e2 = e2.nextSiblingElement()) {
             QString tag(e2.tagName());
@@ -2457,8 +2458,25 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   voice = s.toInt() - 1;
             else if (tag == "staff")
                   relStaff = s.toInt() - 1;
-            // silently ignore others
+            else if (tag == "grace") {
+                  grace = true;
+                  }
+            else if (tag == "duration") {
+                  bool ok;
+                  duration = stringToInt(s, &ok);
+                  if (!ok) {
+                        printf("MusicXml-Import: bad note duration value: <%s>\n",
+                           qPrintable(s));
+                              duration = 1;
+                        }
+                  }
+            else if (tag == "chord") {
+                  chord = true;
+                  }
+            // silently ignore others (will be handled later)
             }
+
+      int ticks = (AL::division * duration) / divisions;
 
       // Musicxml voices are counted for all staffs of an
       // instrument. They are not limited. In mscore voices are associated
@@ -2474,9 +2492,17 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       int v = voicelist.value(voice).voice();
       printf("voice mapper before: relStaff=%d voice=%d s=%d v=%d\n", relStaff, voice, s, v);
       if (s < 0 || v < 0) {
-            printf("ImportMusicXml: too many voices (staff %d, relStaff %d at line %d col %d)\n",
-                   staff, relStaff, e.lineNumber(), e.columnNumber());
-            // TODO: correct error handling (ignore note but move forward correct amount of ticks)
+            printf("ImportMusicXml: too many voices (staff %d, relStaff %d, voice %d at line %d col %d)\n",
+                   staff + 1, relStaff, voice + 1, e.lineNumber(), e.columnNumber());
+            // error handling: ignore note but move forward correct amount of ticks
+            // this effectively changes a note that cannot be mapped to an invisible rest
+            if (!grace && !chord) {
+                  lastLen = ticks; // ?
+                  tick += ticks;
+                  if (tick > maxtick)
+                        maxtick = tick;
+                  }
+            return;
             }
       else {
             int d = relStaff - s;
@@ -2486,6 +2512,11 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             }
 
       printf("after: relStaff=%d move=%d voice=%d", relStaff, move, voice);
+
+      // for notes that are part of a chord (except the first one)
+      // move tick back to the start time of the first note
+      if (chord && !grace)
+            tick -= lastLen;
 
       // trk is first track of staff
       int trk = (staff + relStaff) * VOICES;
@@ -2535,22 +2566,9 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               domError(ee);
                         }
                   }
-            else if (tag == "duration") {
-                  bool ok;
-                  duration = stringToInt(s, &ok);
-                  if (!ok) {
-                        printf("MusicXml-Import: bad note duration value: <%s>\n",
-                           qPrintable(s));
-                              duration = 1;
-                        }
-                  }
             else if (tag == "type")
                   durationType = Duration(s);
-            else if (tag == "chord") {
-                  if (!grace)
-                        tick -= lastLen;
-                  }
-            else if (tag == "staff" || tag == "voice")
+            else if (tag == "chord" || tag == "duration" || tag == "staff" || tag == "voice")
                   // already handled by voice mapper, ignore here but prevent
                   // spurious "Unknown Node <staff>" or "... <voice>" messages
                   ;
@@ -2805,7 +2823,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         printf("unknown tie type %s\n", tieType.toLatin1().data());
                   }
             else if (tag == "grace") {
-                  grace = true;
                   graceSlash = e.attribute(QString("slash"));
                   }
             else if (tag == "time-modification") {  // tuplets
@@ -2862,11 +2879,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       int track = trk + voice;
 //      printf("staff=%d relStaff=%d VOICES=%d voice=%d track=%d\n",
 //             staff, relStaff, VOICES, voice, track);
-
-      int ticks = (AL::division * duration) / divisions;
-
-      if (!grace && tick + ticks > maxtick)
-            maxtick = tick + ticks;
 
 //      printf("%s at %d voice %d dur = %d, beat %d/%d div %d pitch %d ticks %d\n",
 //         rest ? "Rest" : "Note", tick, voice, duration, beats, beatType,
@@ -3292,7 +3304,10 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       if (!grace) {
             lastLen = ticks;
             tick += ticks;
+            if (tick > maxtick)
+                  maxtick = tick;
             }
+
 //      printf(" after inserting note tick=%d\n", tick);
       }
 

@@ -1,3 +1,8 @@
+21.aug (lv)
+      - fix #11675: Crash opening MusicXML from Finale
+        note: the attached file romance-1.zip still does not open correctly (probably a separate
+        issue still to be investigated), but at least it does not crash due to the voice mapper
+        anymore
 18.aug (lv)
       - reworked MusicXML voice mapper
        (la)
