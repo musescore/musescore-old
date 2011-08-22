@@ -79,8 +79,8 @@ void MScore::init()
       defaultPlayDuration = 300;      // ms
       warnPitchRange      = true;
       paperSize           = QPrinter::A4;     // default paper size
-      paperWidth          = 1.0;
-      paperHeight         = 1.0;
+      paperWidth          = (210 / INCH);
+      paperHeight         = (297 / INCH);
       landscape           = false;
       twosided            = true;
       replaceFractions    = true;
