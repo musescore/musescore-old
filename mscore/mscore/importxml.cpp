@@ -907,6 +907,167 @@ void MusicXml::xmlScorePart(QDomElement e, QString id, int& parts)
  */
       }
 
+
+//---------------------------------------------------------
+//   VoiceDesc
+//---------------------------------------------------------
+
+VoiceDesc::VoiceDesc() : _staff(-1), _voice(-1)
+      {
+      for (int i = 0; i < MAX_STAVES; ++i)
+            _chordRests[i] = 0;
+      }
+
+void VoiceDesc::incrChordRests(int s)
+      {
+      if (0 <= s && s < MAX_STAVES)
+            _chordRests[s]++;
+      }
+
+int VoiceDesc::numberChordRests() const
+      {
+      int res = 0;
+      for (int i = 0; i < MAX_STAVES; ++i)
+            res += _chordRests[i];
+      return res;
+      }
+
+int VoiceDesc::preferredStaff() const
+      {
+      int max = 0;
+      int res = 0;
+      for (int i = 0; i < MAX_STAVES; ++i)
+            if (_chordRests[i] > max) {
+                  max = _chordRests[i];
+                  res = i;
+                  }
+      return res;
+      }
+
+QString VoiceDesc::toString() const
+      {
+      QString res = "[";
+      for (int i = 0; i < MAX_STAVES; ++i)
+            res += QString(" %1").arg(_chordRests[i]);
+      res += QString(" ] staff %1 voice %2").arg(_staff + 1).arg(_voice + 1);
+      return res;
+      }
+
+
+// allocate MuseScore staff to MusicXML voices
+// for each staff, allocate at most VOICES voices to the staff
+// allocate ordered by number of chordrests in the MusicXML voice
+
+static void allocateStaves(QMap<int, VoiceDesc>& voicelist)
+      {
+      int voicesAllocated[MAX_STAVES]; // number of voices allocated on each staff
+      for (int i = 0; i < MAX_STAVES; ++i)
+            voicesAllocated[i] = 0;
+      // outer loop executed voicelist.size() times, as each inner loop handles exactly one item
+      for (int i = 0; i < voicelist.size(); ++i) {
+            // find the voice containing the highest number of chords and rests that has not been handled yet
+            int max = 0;
+            int key = -1;
+            for (QMap<int, VoiceDesc>::const_iterator j = voicelist.constBegin(); j != voicelist.constEnd(); ++j) {
+                  if (j.value().numberChordRests() > max && j.value().staff() == -1) {
+                        max = j.value().numberChordRests();
+                        key = j.key();
+                        }
+                  }
+            if (key >= 0) {
+                  int prefSt = voicelist.value(key).preferredStaff();
+                  if (voicesAllocated[prefSt] < VOICES) {
+                        voicelist[key].setStaff(prefSt);
+                        voicesAllocated[prefSt]++;
+                        }
+                  else
+                        voicelist[key].setStaff(-2); // mark as used but not allocated
+                  }
+            }
+      }
+
+
+// allocate MuseScore voice to MusicXML voices
+// for each staff, the voices are number 1, 2, 3, 4
+// in the same order they are numbered in the MusicXML file
+
+static void allocateVoices(QMap<int, VoiceDesc>& voicelist)
+      {
+      int nextVoice[MAX_STAVES]; // number of voices allocated on each staff
+      for (int i = 0; i < MAX_STAVES; ++i)
+            nextVoice[i] = 0;
+      for (QMap<int, VoiceDesc>::const_iterator i = voicelist.constBegin(); i != voicelist.constEnd(); ++i) {
+            int staff = i.value().staff();
+            int key   = i.key();
+            if (staff >= 0) {
+                  voicelist[key].setVoice(nextVoice[staff]);
+                  nextVoice[staff]++;
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   initVoiceMapperAndMapVoices
+//   in: e is the parts first child node
+//---------------------------------------------------------
+
+/**
+ Setup the voice mapper for a MusicXML part.
+ */
+
+void MusicXml::initVoiceMapperAndMapVoices(QDomElement e)
+      {
+      // init
+      voicelist.clear();
+      // count number of chordrests on each MusicXML staff
+      for (; !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "measure") {
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "note") {
+                              bool chord = false;
+                              int voice = -1;
+                              int staff = -1;
+                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                                    QString tag(eee.tagName());
+                                    QString s(eee.text());
+                                    if (tag == "chord")
+                                          chord = true;
+                                    else if (tag == "voice")
+                                          voice = s.toInt() - 1;
+                                    else if (tag == "staff")
+                                          staff = s.toInt() - 1;
+                                    }
+                              // set correct defaults for missing elements
+                              if (voice == -1) voice = 0;
+                              if (staff == -1) staff = 0;
+                              // count the chords (only the first note in a chord is counted)
+                              if (!chord) {
+                                    if (0 <= staff && staff < MAX_STAVES) {
+                                          if (!voicelist.contains(voice)) {
+                                                VoiceDesc vs;
+                                                voicelist.insert(voice, vs);
+                                                }
+                                          voicelist[voice].incrChordRests(staff);
+                                          }
+                                    }
+                              }
+                        }
+                  }
+            }
+
+      // allocate MuseScore staff to MusicXML voices
+      allocateStaves(voicelist);
+      // allocate MuseScore voice to MusicXML voices
+      allocateVoices(voicelist);
+
+      // debug: print results
+      printf("voiceMapperStats: new staff\n");
+      for (QMap<int, VoiceDesc>::const_iterator i = voicelist.constBegin(); i != voicelist.constEnd(); ++i) {
+            printf("voiceMapperStats: voice %d staff data %s \n",
+                   i.key() + 1, qPrintable(i.value().toString()));
+            }
+      }
+
 //---------------------------------------------------------
 //   xmlPart
 //---------------------------------------------------------
@@ -935,10 +1096,7 @@ void MusicXml::xmlPart(QDomElement e, QString id)
       multiMeasureRestCount = 0;
       startMultiMeasureRest = false;
 
-      // initialize voice list
-      // for (int i = 0; i < part->nstaves(); ++i) {
-      for (int i = 0; i < MAX_STAVES; ++i)
-            voicelist[i].clear();
+      initVoiceMapperAndMapVoices(e);
 
       if (!score->measures()->first()) {
             doCredits();
@@ -2396,8 +2554,9 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       QSet<Slur *> slursStopped;
       QColor noteheadColor = QColor::Invalid;
       QList<Lyrics *> lyrics;
+      bool chord = false;
 
-      // first read voice and staff and do voice mapping
+      // first read all elements required for voice mapping
       QDomElement e2 = e;
       for (; !e2.isNull(); e2 = e2.nextSiblingElement()) {
             QString tag(e2.tagName());
@@ -2406,8 +2565,25 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   voice = s.toInt() - 1;
             else if (tag == "staff")
                   relStaff = s.toInt() - 1;
-            // silently ignore others
+            else if (tag == "grace") {
+                  grace = true;
+                  }
+            else if (tag == "duration") {
+                  bool ok;
+                  duration = stringToInt(s, &ok);
+                  if (!ok) {
+                        printf("MusicXml-Import: bad note duration value: <%s>\n",
+                           qPrintable(s));
+                              duration = 1;
+                        }
+                  }
+            else if (tag == "chord") {
+                  chord = true;
+                  }
+            // silently ignore others (will be handled later)
             }
+
+      int ticks = (AL::division * duration) / divisions;
 
       // Musicxml voices are counted for all staffs of an
       // instrument. They are not limited. In mscore voices are associated
@@ -2417,36 +2593,36 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       // "move" parameter in mscore.
 
       // Musicxml voices are unique within a part, but not across parts.
-      // LVIFIX: check: Thus the search for a given MusicXML voice number should be restricted
-      // the the staves of the part it belongs to.
 
-//      printf("voice mapper before: relStaff=%d voice=%d", relStaff, voice);
-      int found = false;
-      for (int s = 0; s < MAX_STAVES; ++s) {
-            int v = 0;
-            for (std::vector<int>::iterator i = voicelist[s].begin(); i != voicelist[s].end(); ++i, ++v) {
-                  if (*i == voice) {
-                        int d = relStaff - s;
-                        relStaff = s;
-                        move += d;
-                        voice = v;
-//                        printf(" -> found at s=%d\n", s);
-                        found = true;
-                        break;
-                        }
+      int s = voicelist.value(voice).staff();
+      int v = voicelist.value(voice).voice();
+      printf("voice mapper before: relStaff=%d voice=%d s=%d v=%d\n", relStaff, voice, s, v);
+      if (s < 0 || v < 0) {
+            printf("ImportMusicXml: too many voices (staff %d, relStaff %d, voice %d at line %d col %d)\n",
+                   staff + 1, relStaff, voice + 1, e.lineNumber(), e.columnNumber());
+            // error handling: ignore note but move forward correct amount of ticks
+            // this effectively changes a note that cannot be mapped to an invisible rest
+            if (!grace && !chord) {
+                  lastLen = ticks; // ?
+                  tick += ticks;
+                  if (tick > maxtick)
+                        maxtick = tick;
                   }
-            } // for (int s ...
-      if (!found) {
-            if (voicelist[relStaff].size() >= unsigned(VOICES))
-                  printf("ImportMusicXml: too many voices (staff %d, relStaff %d, %zd >= %d)\n",
-                         staff, relStaff, voicelist[relStaff].size(), VOICES);
-            else {
-                  voicelist[relStaff].push_back(voice);
-//                  printf(" -> append %d to voicelist[%d]\n", voice, relStaff);
-                  voice = voicelist[relStaff].size() -1;
-                  }
+            return;
             }
-//      printf("after: relStaff=%d move=%d voice=%d\n", relStaff, move, voice);
+      else {
+            int d = relStaff - s;
+            relStaff = s;
+            move += d;
+            voice = v;
+            }
+
+      printf("after: relStaff=%d move=%d voice=%d", relStaff, move, voice);
+
+      // for notes that are part of a chord (except the first one)
+      // move tick back to the start time of the first note
+      if (chord && !grace)
+            tick -= lastLen;
 
       // trk is first track of staff
       int trk = (staff + relStaff) * VOICES;
@@ -2496,22 +2672,9 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               domError(ee);
                         }
                   }
-            else if (tag == "duration") {
-                  bool ok;
-                  duration = stringToInt(s, &ok);
-                  if (!ok) {
-                        printf("MusicXml-Import: bad note duration value: <%s>\n",
-                           qPrintable(s));
-                              duration = 1;
-                        }
-                  }
             else if (tag == "type")
                   durationType = Duration(s);
-            else if (tag == "chord") {
-                  if (!grace)
-                        tick -= lastLen;
-                  }
-            else if (tag == "staff" || tag == "voice")
+            else if (tag == "chord" || tag == "duration" || tag == "staff" || tag == "voice")
                   // already handled by voice mapper, ignore here but prevent
                   // spurious "Unknown Node <staff>" or "... <voice>" messages
                   ;
@@ -2777,7 +2940,6 @@ printf("new Tie %p\n", tie);
                         printf("unknown tie type %s\n", tieType.toLatin1().data());
                   }
             else if (tag == "grace") {
-                  grace = true;
                   graceSlash = e.attribute(QString("slash"));
                   }
             else if (tag == "time-modification") {  // tuplets
@@ -2836,11 +2998,6 @@ printf("new Tie %p\n", tie);
       int track = trk + voice;
 //      printf("staff=%d relStaff=%d VOICES=%d voice=%d track=%d\n",
 //             staff, relStaff, VOICES, voice, track);
-
-      int ticks = (AL::division * duration) / divisions;
-
-      if (!grace && tick + ticks > maxtick)
-            maxtick = tick + ticks;
 
 //      printf("%s at %d voice %d dur = %d, beat %d/%d div %d pitch %d ticks %d\n",
 //         rest ? "Rest" : "Note", tick, voice, duration, beats, beatType,
@@ -3291,7 +3448,10 @@ printf("use Tie %p\n", tie);
       if (!grace) {
             lastLen = ticks;
             tick += ticks;
+            if (tick > maxtick)
+                  maxtick = tick;
             }
+
 //      printf(" after inserting note tick=%d\n", tick);
       }
 

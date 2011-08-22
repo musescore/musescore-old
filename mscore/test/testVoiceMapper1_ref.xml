@@ -33,7 +33,7 @@
           <mode>major</mode>
           </key>
         <time>
-          <beats>4</beats>
+          <beats>3</beats>
           <beat-type>4</beat-type>
           </time>
         <clef>
@@ -43,47 +43,87 @@
         </attributes>
       <note>
         <pitch>
-          <step>B</step>
-          <octave>3</octave>
+          <step>E</step>
+          <octave>5</octave>
           </pitch>
-        <duration>4</duration>
+        <duration>1</duration>
         <voice>1</voice>
-        <type>whole</type>
+        <type>quarter</type>
+        <stem>up</stem>
+        </note>
+      <note>
+        <pitch>
+          <step>E</step>
+          <octave>5</octave>
+          </pitch>
+        <duration>1</duration>
+        <voice>1</voice>
+        <type>quarter</type>
+        <stem>up</stem>
+        </note>
+      <note>
+        <pitch>
+          <step>E</step>
+          <octave>5</octave>
+          </pitch>
+        <duration>1</duration>
+        <voice>1</voice>
+        <type>quarter</type>
+        <stem>up</stem>
         </note>
       <backup>
-        <duration>4</duration>
+        <duration>3</duration>
+        </backup>
+      <note>
+        <pitch>
+          <step>C</step>
+          <octave>5</octave>
+          </pitch>
+        <duration>3</duration>
+        <voice>2</voice>
+        <type>half</type>
+        <dot/>
+        <stem>up</stem>
+        </note>
+      <backup>
+        <duration>3</duration>
         </backup>
       <note>
         <pitch>
           <step>A</step>
-          <octave>5</octave>
+          <octave>4</octave>
           </pitch>
-        <duration>4</duration>
-        <voice>2</voice>
-        <type>whole</type>
-        </note>
-      </measure>
-    <measure number="2">
-      <note>
-        <pitch>
-          <step>B</step>
-          <octave>3</octave>
-          </pitch>
-        <duration>4</duration>
-        <voice>1</voice>
-        <type>whole</type>
+        <duration>3</duration>
+        <voice>3</voice>
+        <type>half</type>
+        <dot/>
+        <stem>up</stem>
         </note>
       <backup>
-        <duration>4</duration>
+        <duration>3</duration>
         </backup>
       <note>
         <pitch>
-          <step>A</step>
-          <octave>5</octave>
+          <step>F</step>
+          <octave>4</octave>
           </pitch>
-        <duration>4</duration>
-        <voice>2</voice>
-        <type>whole</type>
+        <duration>1</duration>
+        <voice>4</voice>
+        <type>quarter</type>
+        <stem>down</stem>
+        </note>
+      <forward>
+        <duration>1</duration>
+        </forward>
+      <note>
+        <pitch>
+          <step>F</step>
+          <octave>4</octave>
+          </pitch>
+        <duration>1</duration>
+        <voice>4</voice>
+        <type>quarter</type>
+        <stem>down</stem>
         </note>
       <barline location="right">
         <bar-style>light-heavy</bar-style>

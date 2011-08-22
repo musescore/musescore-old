@@ -1,3 +1,5 @@
+22.aug (lv)
+      - fix #11675: Crash opening MusicXML from Finale
 17.aug (ws)
       - fix #12096: crash on startup if no navigator window (patch from Miwarre)
       - changed page settings to ensure that the printable area of a page
