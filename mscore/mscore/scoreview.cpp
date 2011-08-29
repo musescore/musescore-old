@@ -2061,6 +2061,7 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
                   case SPACER:
                   case SLUR:
                   case ACCIDENTAL_BRACKET:
+                  case HARMONY:
                         {
                         QList<const Element*> el = elementsAt(pos);
                         bool found = false;
@@ -2177,6 +2178,7 @@ void ScoreView::dropEvent(QDropEvent* event)
                   case IMAGE:
                   case DYNAMIC:
                   case FRET_DIAGRAM:
+                  case HARMONY:
                         {
                         Element* el = elementAt(pos);
                         if (el == 0) {

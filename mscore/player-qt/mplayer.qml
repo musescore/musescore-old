@@ -17,13 +17,32 @@ import "mobile" as Mobile
 
 Item {
       id: screen
-      width: 1024; height: 768
-      state: "myscores"
       property bool inScoreView: false
 
+      states: [
+            State {
+                  name: "landscape"
+                  when: (runtime.orientation == Orientation.Landscape
+                        || runtime.orientation == Orientation.LandscapeInverted)
+                  PropertyChanges {
+                        target: screen
+                        width: 1024; height: 768
+                        }
+                  },
+            State {
+                  name: "portrait"
+                  when: (runtime.orientation == Orientation.Portrait
+                        || runtime.orientation == Orientation.PortraitInverted)
+                  PropertyChanges {
+                        target: screen
+                        height: 1024; width: 768
+                        }
+                  }
+            ]
       Rectangle {
             id: background;
             anchors.fill: parent
+            state: "myscores"
 
             color: "#343434"
             Image {

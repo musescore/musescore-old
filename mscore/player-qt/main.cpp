@@ -14,11 +14,14 @@
 #include <stdio.h>
 #include <QtDeclarative/qdeclarative.h>
 #include <QtDeclarative/QDeclarativeView>
+#include <QtDeclarative/QDeclarativeContext>
 
 #include "libmscore/mscore.h"
 #include "scoreview.h"
 #include "omr/omr.h"
 #include "seq.h"
+#include "runtime.h"
+#include "deviceorientation.h"
 
 bool debugMode = false;
 QString revision;
@@ -52,6 +55,14 @@ int main(int argc, char* argv[])
       qmlRegisterType<ScoreView>("MuseScore", 1, 0, "ScoreView");
 
       QDeclarativeView view;
+
+      QDeclarativeContext* ctxt = view.rootContext();
+      ctxt->setContextProperty(QLatin1String("runtime"), Runtime::instance());
+
+      // registering only for exposing the DeviceOrientation::Orientation enum
+      qmlRegisterUncreatableType<DeviceOrientation>("Qt", 4, 7, "Orientation", QString());
+      qmlRegisterUncreatableType<DeviceOrientation>("QtQuick", 1, 0, "Orientation", QString());
+
       view.setSource(QUrl("qrc:/mplayer.qml"));
       view.show();
       return app.exec();

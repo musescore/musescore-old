@@ -301,6 +301,8 @@ void FretDiagram::write(Xml& xml) const
                   xml.etag();
                   }
             }
+      if (_harmony)
+            _harmony->write(xml);
       xml.etag();
       }
 
@@ -341,6 +343,11 @@ void FretDiagram::read(QDomElement e)
                         else
                               domError(ee);
                         }
+                  }
+            else if (tag == "Harmony") {
+                  Harmony* h = new Harmony(score());
+                  h->read(e);
+                  add(h);
                   }
             else if (!Element::readProperties(e))
                   domError(e);
@@ -419,6 +426,7 @@ void FretDiagram::remove(Element* e)
 
 bool FretDiagram::acceptDrop(MuseScoreView*, const QPointF&, int t, int) const
       {
+printf("FretDiagram: accept drop %d\n", t);
       return t == HARMONY;
       }
 
