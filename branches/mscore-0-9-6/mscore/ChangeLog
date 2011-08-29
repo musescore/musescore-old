@@ -1,3 +1,5 @@
+29.aug (la)
+      - fix #12322: Exported parts close on command without a warning
 21.aug (lv)
       - fix #11675: Crash opening MusicXML from Finale
         note: the attached file romance-1.zip still does not open correctly (probably a separate

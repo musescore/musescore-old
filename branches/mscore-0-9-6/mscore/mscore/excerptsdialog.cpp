@@ -264,8 +264,8 @@ void ExcerptsDialog::createExcerptClicked(QListWidgetItem* cur)
             nscore->updateChannel();
             nscore->fixPpitch();
             nscore->layout();
-      
             mscore->appendScore(nscore);
+            nscore->setDirty(true);
             }
       }
 
