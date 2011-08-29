@@ -291,7 +291,7 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets, QLi
             else if (val == "begin64")
                   bm = BEAM_BEGIN64;
             else
-                  bm = i;
+                  bm = BeamMode(i);
             _beamMode = BeamMode(bm);
             }
       else if (tag == "Attribute" || tag == "Articulation") {     // obsolete: "Attribute"
@@ -811,8 +811,13 @@ void ChordRest::toDefault()
       {
       score()->undoChangeChordRestSpace(this, Spatium(0.0), Spatium(0.0));
       score()->undoChangeUserOffset(this, QPointF());
-      if (type() == CHORD)
+      if (type() == CHORD) {
             score()->undo()->push(new SetStemDirection(static_cast<Chord*>(this), AUTO));
+            score()->undo()->push(new ChangeBeamMode(this, BEAM_AUTO));
+            }
+      else {
+            score()->undo()->push(new ChangeBeamMode(this, BEAM_NO));
+            }
       }
 
 //---------------------------------------------------------

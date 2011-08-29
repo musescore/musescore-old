@@ -69,6 +69,7 @@
 #include "profile.h"
 #include "libmscore/icon.h"
 #include "libmscore/accidental.h"
+#include "libmscore/harmony.h"
 
 extern bool useFactorySettings;
 
@@ -730,6 +731,10 @@ void MuseScore::populatePalette()
             tt->setText(tp[i].pattern);
             sp->append(tt, tr("Tempo Text"), QString(), 1.5);
             }
+
+      Harmony* harmony = new Harmony(gscore);
+      harmony->setText("c7");
+      sp->append(harmony, tr("Chord Name"));
 
       paletteBox->addPalette(sp);
 
