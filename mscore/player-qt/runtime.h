@@ -14,37 +14,43 @@
 #ifndef __RUNTIME_H__
 #define __RUNTIME_H__
 
-#include "deviceorientation.h"
-
 //---------------------------------------------------------
 //   Runtime
 //---------------------------------------------------------
 
 class Runtime : public QObject {
       Q_OBJECT
-      Q_PROPERTY(DeviceOrientation::Orientation orientation READ orientation NOTIFY orientationChanged)
-
-      Runtime(QObject* parent = 0)
-         : QObject(parent)
-            {
-            connect(DeviceOrientation::instance(), SIGNAL(orientationChanged()),
-               this, SIGNAL(orientationChanged()));
-            }
+      Q_PROPERTY(Orientation orientation READ orientation NOTIFY orientationChanged)
+      Q_ENUMS(Orientation)
 
    public:
-      static Runtime* instance() {
-            static Runtime* instance = 0;
-            if (!instance)
-                  instance = new Runtime;
-            return instance;
-            }
-      DeviceOrientation::Orientation orientation() const {
-            return DeviceOrientation::instance()->orientation();
+      enum Orientation {
+            UnknownOrientation,
+            Portrait,
+            Landscape,
+            PortraitInverted,
+            LandscapeInverted
+            };
+   private:
+      Orientation m_o;
+
+   public:
+      Runtime(QObject* parent = 0) : QObject(parent) { }
+
+      Orientation orientation() const { return m_o; }
+
+      void setOrientation(Orientation o)  {
+            if (o != m_o) {
+                  m_o = o;
+printf("orientation changed %d\n", int(o));
+                  emit orientationChanged();
+                  }
             }
 
    Q_SIGNALS:
       void orientationChanged();
       };
 
+extern Runtime* runtimeInstance;
 #endif
 

@@ -22,20 +22,18 @@ Item {
       states: [
             State {
                   name: "landscape"
-                  when: (runtime.orientation == Orientation.Landscape
-                        || runtime.orientation == Orientation.LandscapeInverted)
+                  when: width == 1024
                   PropertyChanges {
                         target: screen
-                        width: 1024; height: 768
+/*                        width: 1024; height: 768*/
                         }
                   },
             State {
                   name: "portrait"
-                  when: (runtime.orientation == Orientation.Portrait
-                        || runtime.orientation == Orientation.PortraitInverted)
+                  when: width == 768
                   PropertyChanges {
                         target: screen
-                        height: 1024; width: 768
+/*                        height: 1024; width: 768 */
                         }
                   }
             ]
@@ -115,12 +113,6 @@ Item {
                   opacity: .9
                   }
 
-/*            Rectangle {
-                  id: titleBar
-                  height: 40
-                  width: parent.width
-                  }
-  */
             ListView {
                   id: scoreListView
                   anchors.top: titleBar.bottom

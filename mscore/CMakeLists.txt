@@ -76,7 +76,7 @@ if (APPLE)
       set(CMAKE_OSX_ARCHITECTURES i386)
 
       # Adjust and uncomment this variable, if you target a different version
-      # of MacOSX. 
+      # of MacOSX.
       # set(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.6.sdk)
 
       # Building against the Binary-Package of Qt might require to uncomment

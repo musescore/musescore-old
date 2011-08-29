@@ -1,10 +1,25 @@
+//=============================================================================
+//  MuseScore
+//  Music Composition & Notation
+//  $Id:$
+//
+//  Copyright (C) 2011 Werner Schweer and others
+//
+//  This program is free software; you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License version 2
+//  as published by the Free Software Foundation and appearing in
+//  the file LICENSE.GPL
+//=============================================================================
+
 #include "qmlapplicationviewer.h"
 
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDir>
 #include <QtCore/QFileInfo>
+#include <QtDeclarative/QtDeclarative>
 #include <QtDeclarative/QDeclarativeComponent>
 #include <QtDeclarative/QDeclarativeEngine>
+#include <QtDeclarative/QDeclarativeView>
 #include <QtDeclarative/QDeclarativeContext>
 
 #include "libmscore/mscore.h"
@@ -12,14 +27,11 @@
 #include "omr/omr.h"
 #include "seq.h"
 
+#include "player-qt/runtime.h"
+
 bool debugMode = false;
 QString revision;
-
-// dummies:
-
-// Omr::Omr(Score*) {}
-// void Omr::write(Xml&) const {}
-// void Omr::read(QDomElement) {}
+Runtime* runtimeInstance;
 
 //---------------------------------------------------------
 //   QmlApplicationViewerPrivate
@@ -55,11 +67,20 @@ QmlApplicationViewer::QmlApplicationViewer(QWidget *parent)
       DPI  = PDPI;
       DPMM = DPI / INCH;
 
+      runtimeInstance = new Runtime;
+
       MScore::init();
       seq = new Seq;
       seq->init();
 
       qmlRegisterType<ScoreView>("MuseScore", 1, 0, "ScoreView");
+
+      QDeclarativeContext* ctxt = rootContext();
+      ctxt->setContextProperty(QLatin1String("runtime"), runtimeInstance);
+
+      // registering only for exposing the Runtime::Orientation enum
+      qmlRegisterUncreatableType<Runtime>("Qt",      4, 7, "Orientation", QString());
+      qmlRegisterUncreatableType<Runtime>("QtQuick", 1, 0, "Orientation", QString());
 
       connect(engine(), SIGNAL(quit()), SLOT(close()));
       setResizeMode(QDeclarativeView::SizeRootObjectToView);
