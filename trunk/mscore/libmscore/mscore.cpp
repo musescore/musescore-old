@@ -99,7 +99,7 @@ void MScore::init()
       // do not load application specific fonts
       // for MAC, they are in Resources/fonts
       //
-#ifndef Q_WS_MAC
+#if !defined(Q_WS_MAC) && !defined(Q_WS_UIKIT)
       static const char* fonts[] = {
             "mscore-20.otf",
             "mscore1-20.ttf",

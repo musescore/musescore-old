@@ -41,5 +41,7 @@
 #cmakedefine OPENGL
 #cmakedefine SOUNDFONT3
 
+#cmakedefine Q_WS_UIKIT
+
 #define SVG_IMAGES      true
 

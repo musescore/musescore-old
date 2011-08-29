@@ -157,6 +157,8 @@
 		54B64C4E13D6218D00360341 /* moc_scoreview.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54B64C4D13D6218D00360341 /* moc_scoreview.cpp */; };
 		54B64C6113D622AB00360341 /* gonville.xml in Resources */ = {isa = PBXBuildFile; fileRef = 54B64C5513D622AB00360341 /* gonville.xml */; };
 		54B64C6713D622AB00360341 /* mscore20.xml in Resources */ = {isa = PBXBuildFile; fileRef = 54B64C5B13D622AB00360341 /* mscore20.xml */; };
+		54F8BECC140BA5050022C3B8 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54F8BECB140BA5050022C3B8 /* CoreText.framework */; };
+		54F8BED1140BBF950022C3B8 /* moc_runtime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54F8BECF140BBF950022C3B8 /* moc_runtime.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -449,6 +451,8 @@
 		54B64C4D13D6218D00360341 /* moc_scoreview.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = moc_scoreview.cpp; sourceTree = SOURCE_ROOT; };
 		54B64C5513D622AB00360341 /* gonville.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = gonville.xml; path = ../fonts/gonville.xml; sourceTree = "<group>"; };
 		54B64C5B13D622AB00360341 /* mscore20.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = mscore20.xml; path = ../fonts/mscore20.xml; sourceTree = "<group>"; };
+		54F8BECB140BA5050022C3B8 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		54F8BECF140BBF950022C3B8 /* moc_runtime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = moc_runtime.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -473,6 +477,7 @@
 				5456CC6613D57FDE00937580 /* OpenGLES.framework in Frameworks */,
 				5456CC6913D57FEC00937580 /* QuartzCore.framework in Frameworks */,
 				54B395B013F6AC6900542718 /* AudioToolbox.framework in Frameworks */,
+				54F8BECC140BA5050022C3B8 /* CoreText.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,6 +506,7 @@
 				5456CDAA13D5F80000937580 /* config.h */,
 				5456CD9613D5E4C700937580 /* driver.h */,
 				543E987F13D5765A0034391A /* moc_qmlapplicationviewer.cpp */,
+				54F8BECF140BBF950022C3B8 /* moc_runtime.cpp */,
 				543E988013D5765A0034391A /* player-ios-Info.plist */,
 				543E988113D5765A0034391A /* qmlapplicationviewer.cpp */,
 				543E988213D5765A0034391A /* qmlapplicationviewer.h */,
@@ -523,6 +529,7 @@
 		543E985C13D575C80034391A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				54F8BECB140BA5050022C3B8 /* CoreText.framework */,
 				54B395AF13F6AC6900542718 /* AudioToolbox.framework */,
 				543E98A213D57E7F0034391A /* libQtScript.a */,
 				543E98A313D57E7F0034391A /* libQtSql.a */,
@@ -1027,6 +1034,7 @@
 				54ADFC6813E73A68002F0D45 /* ossia.cpp in Sources */,
 				54B395A813F678FA00542718 /* painterqt.cpp in Sources */,
 				54B395B213F6B42600542718 /* scoreview.cpp in Sources */,
+				54F8BED1140BBF950022C3B8 /* moc_runtime.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1079,6 +1087,8 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "player-ios-Prefix.pch";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = Q_WS_UIKIT;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = 4.2;
 				HEADER_SEARCH_PATHS = (
 					"/Users/ws/qt/dev/include/**",
@@ -1115,6 +1125,8 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "player-ios-Prefix.pch";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = Q_WS_UIKIT;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = 4.2;
 				HEADER_SEARCH_PATHS = (
 					"/Users/ws/qt/dev/include/**",

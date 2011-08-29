@@ -6,6 +6,8 @@
 	<string>English</string>
 	<key>CFBundleDisplayName</key>
 	<string>${PRODUCT_NAME}</string>
+	<key>CFBundleDocumentTypes</key>
+	<array/>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
@@ -20,10 +22,25 @@
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array/>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>fonts/mscore20.ttf</string>
+		<string>fonts/mscore1-20.ttf</string>
+		<string>fonts/FreeSans.ttf</string>
+		<string>fonts/FreeSerifBold.ttf</string>
+		<string>fonts/FreeSerifMscore.ttf</string>
+		<string>fonts/mscore_tab_baroque.ttf</string>
+		<string>fonts/MuseJazz.ttf</string>
+		<string>fonts/mscore_tab_modern.ttf</string>
+		<string>fonts/mscore_tab_renaiss.ttf</string>
+		<string>fonts/mscore_tab_renaiss2.ttf</string>
+	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationLandscapeRight</string>
@@ -31,10 +48,9 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string> mscore-20.otf</string>
-		<string>mscore1-20.ttf</string>
-	</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array/>
+	<key>UTImportedTypeDeclarations</key>
+	<array/>
 </dict>
 </plist>
