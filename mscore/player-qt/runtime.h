@@ -35,7 +35,7 @@ class Runtime : public QObject {
       Orientation m_o;
 
    public:
-      Runtime(QObject* parent = 0) : QObject(parent) { }
+      Runtime(QObject* parent = 0) : QObject(parent) { m_o = Portrait;}
 
       Orientation orientation() const { return m_o; }
 
