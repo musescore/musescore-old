@@ -23,18 +23,18 @@ Item {
       states: [
             State {
                   name: "landscape"
-                  when: width == 1024
+                  when: runtime.orientation == Orientation.Landscape
                   PropertyChanges {
                         target: screen
-/*                        width: 1024; height: 768*/
+                        width: 1024; height: 768
                         }
                   },
             State {
                   name: "portrait"
-                  when: width == 768
+                  when: runtime.orientation == Orientation.Portrait
                   PropertyChanges {
                         target: screen
-/*                        height: 1024; width: 768 */
+                        height: 1024; width: 768
                         }
                   }
             ]
