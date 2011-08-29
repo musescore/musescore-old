@@ -21,10 +21,11 @@
 #include "omr/omr.h"
 #include "seq.h"
 #include "runtime.h"
-#include "deviceorientation.h"
 
 bool debugMode = false;
 QString revision;
+
+Runtime* runtime;
 
 // dummies:
 
@@ -45,6 +46,8 @@ int main(int argc, char* argv[])
       DPI  = PDPI;                // logical drawing resolution
       DPMM = DPI / INCH;          // dots/mm
 
+      runtime = new Runtime;
+
       MScore::init();
       seq = new Seq;
       if (!seq->init()) {
@@ -55,13 +58,13 @@ int main(int argc, char* argv[])
       qmlRegisterType<ScoreView>("MuseScore", 1, 0, "ScoreView");
 
       QDeclarativeView view;
-
+      view.setResizeMode(QDeclarativeView::SizeRootObjectToView);
       QDeclarativeContext* ctxt = view.rootContext();
-      ctxt->setContextProperty(QLatin1String("runtime"), Runtime::instance());
+      ctxt->setContextProperty(QLatin1String("runtime"), runtime);
 
-      // registering only for exposing the DeviceOrientation::Orientation enum
-      qmlRegisterUncreatableType<DeviceOrientation>("Qt", 4, 7, "Orientation", QString());
-      qmlRegisterUncreatableType<DeviceOrientation>("QtQuick", 1, 0, "Orientation", QString());
+      // registering only for exposing the Runtime::Orientation enum
+      qmlRegisterUncreatableType<Runtime>("Qt", 4, 7, "Orientation", QString());
+      qmlRegisterUncreatableType<Runtime>("QtQuick", 1, 0, "Orientation", QString());
 
       view.setSource(QUrl("qrc:/mplayer.qml"));
       view.show();

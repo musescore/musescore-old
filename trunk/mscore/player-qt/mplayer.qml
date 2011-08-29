@@ -18,6 +18,7 @@ import "mobile" as Mobile
 Item {
       id: screen
       property bool inScoreView: false
+      width: 1024; height: 768
 
       states: [
             State {
@@ -106,13 +107,6 @@ Item {
                         }
                   }
 
-            Mobile.TitleBar {
-                  id: titleBar
-                  height: 40
-                  width: parent.width
-                  opacity: .9
-                  }
-
             ListView {
                   id: scoreListView
                   anchors.top: titleBar.bottom
@@ -161,6 +155,13 @@ Item {
                                     }
                               }
                         }
+                  }
+
+            Mobile.TitleBar {
+                  id: titleBar
+                  height: 40
+                  width: parent.width
+                  opacity: .9
                   }
 
             Mobile.ToolBar {
