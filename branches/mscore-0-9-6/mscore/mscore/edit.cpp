@@ -467,7 +467,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
       Fraction ofraction(_sigmap->timesig(tick).fraction());
       Fraction nfraction(TimeSig::getSig(timeSigSubtype));
 
-      if (ofraction == nfraction) {
+      if ((ofraction.numerator() == nfraction.numerator()) && (ofraction.denominator() == nfraction.denominator())) {
             //
             // check if there is already a time signature symbol
             //
