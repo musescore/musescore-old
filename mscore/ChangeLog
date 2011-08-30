@@ -1,3 +1,5 @@
+30.aug (la)
+      - fix #12161: Changing time signature should change autobeam properties
 29.aug (la)
       - fix #12322: Exported parts close on command without a warning
 21.aug (lv)
