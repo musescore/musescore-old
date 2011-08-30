@@ -1,4 +1,6 @@
-30.aug (la)
+30.aug (lv)
+      - refactored tick handling in MusicXML import, in preparation for fixing #12276
+       (la)
       - fix #12161: Changing time signature should change autobeam properties
 29.aug (la)
       - fix #12322: Exported parts close on command without a warning

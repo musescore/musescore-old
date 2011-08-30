@@ -1109,6 +1109,87 @@ static int stringToInt(const QString& s, bool* ok)
 
 
 //---------------------------------------------------------
+//   calcTicks
+//---------------------------------------------------------
+
+static int calcTicks(QString text, int divisions)
+      {
+      bool ok;
+      int val = stringToInt(text, &ok);
+      if (!ok) {
+            printf("MusicXml-Import: bad duration value: <%s>\n",
+                  qPrintable(text));
+            }
+      if (val == 0)     // neuratron scanner produces sometimes 0 !?
+            val = 1;
+      val = val * AL::division / divisions;
+      return val;
+      }
+
+//---------------------------------------------------------
+//   moveTick
+//---------------------------------------------------------
+
+/**
+ Move tick by amount specified in the element e, which must be
+ a forward, backup or note.
+ */
+
+static void moveTick(int& tick, int& maxtick, int& lastLen, int divisions, QDomElement e)
+      {
+      if (e.tagName() == "forward") {
+            for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                  if (ee.tagName() == "duration") {
+                        int val = calcTicks(ee.text(), divisions);
+                        printf("forward %d\n", val);
+                        tick += val;
+                        if (tick > maxtick)
+                              maxtick = tick;
+                        lastLen = val;    // ?
+                        }
+                  else if (ee.tagName() == "voice")
+                        ;
+                  else if (ee.tagName() == "staff")
+                        ;
+                  else
+                        domError(ee);
+                  }
+            }
+      else if (e.tagName() == "backup") {
+            for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                  if (ee.tagName() == "duration") {
+                        int val = calcTicks(ee.text(), divisions);
+                        printf("backup %d\n", val);
+                        tick -= val;
+                        lastLen = val;    // ?
+                        }
+                  else
+                        domError(ee);
+                  }
+            }
+      else if (e.tagName() == "note") {
+            bool grace   = false;
+            int ticks = 0;
+            for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                  QString tag(ee.tagName());
+                  if (tag == "grace") {
+                        grace = true;
+                        }
+                  else if (tag == "duration") {
+                        ticks = calcTicks(ee.text(), divisions);
+                        }
+                  }
+            if (!grace) {
+                  lastLen = ticks; // ?
+                  tick += ticks;
+                  if (tick > maxtick)
+                        maxtick = tick;
+                  }
+            }
+      }
+
+
+//---------------------------------------------------------
 //   xmlMeasure
 //---------------------------------------------------------
 
@@ -1118,6 +1199,7 @@ static int stringToInt(const QString& s, bool* ok)
 
 Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
       {
+      printf("xmlMeasure %d begin\n", number);
       int staves = score->nstaves();
       int staff = score->staffIdx(part);
 
@@ -1169,26 +1251,13 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "attributes")
                   xmlAttributes(measure, staff, e.firstChildElement());
-            else if (e.tagName() == "note")
-                  xmlNote(measure, staff, e.firstChildElement());
+            else if (e.tagName() == "note") {
+                  xmlNote(measure, staff, e);
+                  moveTick(tick, maxtick, lastLen, divisions, e);
+                  printf(" after inserting note tick=%d\n", tick);
+                  }
             else if (e.tagName() == "backup") {
-                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        if (ee.tagName() == "duration") {
-                              bool ok;
-                              int val = stringToInt(ee.text(), &ok);
-                              if (!ok) {
-                                    printf("MusicXml-Import: bad backup duration value: <%s>\n",
-                                       qPrintable(ee.text()));
-                                    }
-                              if (val == 0)     // neuratron scanner produces sometimes 0 !?
-                                    val = 1;
-                              val = (val * AL::division) / divisions;
-                              tick -= val;
-                              lastLen = val;    // ?
-                              }
-                        else
-                              domError(ee);
-                        }
+                  moveTick(tick, maxtick, lastLen, divisions, e);
                   }
             else if (e.tagName() == "direction") {
                   direction(measure, staff, e);
@@ -1222,27 +1291,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                         }
                   }
             else if (e.tagName() == "forward") {
-                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        if (ee.tagName() == "duration") {
-                              bool ok;
-                              int val = stringToInt(ee.text(), &ok);
-                              if (!ok) {
-                                    printf("MusicXml-Import: bad forward duration value: <%s>\n",
-                                       qPrintable(ee.text()));
-                                    }
-                              val = val * AL::division / divisions;
-                              tick += val;
-                              if (tick > maxtick)
-                                    maxtick = tick;
-                              lastLen = val;    // ?
-                              }
-                        else if (ee.tagName() == "voice")
-                              ;
-                        else if (ee.tagName() == "staff")
-                              ;
-                        else
-                              domError(ee);
-                        }
+                  moveTick(tick, maxtick, lastLen, divisions, e);
                   }
             else if (e.tagName() == "barline") {
                   QString loc = e.attribute("location", "right");
@@ -1331,10 +1380,10 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                                           }
                                     else if (endingType == "stop") {
                                           if (lastVolta) {
-												lastVolta->setTick2(tick);
-												lastVolta->setSubtype(Volta::VOLTA_CLOSED);
+                                                lastVolta->setTick2(tick);
+                                                lastVolta->setSubtype(Volta::VOLTA_CLOSED);
                                                 score->add(lastVolta);
-												lastVolta = 0;
+                                                lastVolta = 0;
                                                 }
                                           else {
                                                 printf("lastVolta == 0 on stop\n");
@@ -1344,7 +1393,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                                           if (lastVolta) {
                                                 lastVolta->setTick2(tick);
                                                 lastVolta->setSubtype(Volta::VOLTA_OPEN);
-												score->add(lastVolta);
+                                                score->add(lastVolta);
                                                 lastVolta = 0;
                                                 }
                                           else {
@@ -1418,6 +1467,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                   measure->setBreakMultiMeasureRest(true);
             }
 
+      printf("xmlMeasure %d end maxtick=%d\n", number, maxtick);
       return measure;
       }
 
@@ -2390,12 +2440,11 @@ static int nrOfGraceSegsReq(QDomNode n)
 
 void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       {
-//      printf("xmlNote start tick=%d\n", tick);
-      QDomNode pn = e.parentNode();
+      int ticks = 0;
+      printf("xmlNote start tick=%d (%d div) divisions=%d\n", tick, tick * divisions / AL::division, divisions);
+      QDomNode pn = e; // TODO remove pn
       voice = 0;
       move  = 0;
-
-      int duration = 0;
       bool rest    = false;
       int relStaff = 0;
       BeamMode bm  = BEAM_AUTO;
@@ -2450,7 +2499,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       bool chord = false;
 
       // first read all elements required for voice mapping
-      QDomElement e2 = e;
+      QDomElement e2 = e.firstChildElement();
       for (; !e2.isNull(); e2 = e2.nextSiblingElement()) {
             QString tag(e2.tagName());
             QString s(e2.text());
@@ -2462,13 +2511,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   grace = true;
                   }
             else if (tag == "duration") {
-                  bool ok;
-                  duration = stringToInt(s, &ok);
-                  if (!ok) {
-                        printf("MusicXml-Import: bad note duration value: <%s>\n",
-                           qPrintable(s));
-                              duration = 1;
-                        }
+                  ticks = calcTicks(s, divisions);
                   }
             else if (tag == "chord") {
                   chord = true;
@@ -2476,7 +2519,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             // silently ignore others (will be handled later)
             }
 
-      int ticks = (AL::division * duration) / divisions;
 
       // Musicxml voices are counted for all staffs of an
       // instrument. They are not limited. In mscore voices are associated
@@ -2490,18 +2532,10 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 
       int s = voicelist.value(voice).staff();
       int v = voicelist.value(voice).voice();
-      printf("voice mapper before: relStaff=%d voice=%d s=%d v=%d\n", relStaff, voice, s, v);
+//      printf("voice mapper before: relStaff=%d voice=%d s=%d v=%d\n", relStaff, voice, s, v);
       if (s < 0 || v < 0) {
             printf("ImportMusicXml: too many voices (staff %d, relStaff %d, voice %d at line %d col %d)\n",
                    staff + 1, relStaff, voice + 1, e.lineNumber(), e.columnNumber());
-            // error handling: ignore note but move forward correct amount of ticks
-            // this effectively changes a note that cannot be mapped to an invisible rest
-            if (!grace && !chord) {
-                  lastLen = ticks; // ?
-                  tick += ticks;
-                  if (tick > maxtick)
-                        maxtick = tick;
-                  }
             return;
             }
       else {
@@ -2511,7 +2545,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             voice = v;
             }
 
-      printf("after: relStaff=%d move=%d voice=%d", relStaff, move, voice);
+//      printf("voice mapper after: relStaff=%d move=%d voice=%d\n", relStaff, move, voice);
 
       // for notes that are part of a chord (except the first one)
       // move tick back to the start time of the first note
@@ -2527,7 +2561,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             printObject = pne.attribute("print-object", "yes");
             }
 
-      for (; !e.isNull(); e = e.nextSiblingElement()) {
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString s(e.text());
 
@@ -2883,6 +2917,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 //      printf("%s at %d voice %d dur = %d, beat %d/%d div %d pitch %d ticks %d\n",
 //         rest ? "Rest" : "Note", tick, voice, duration, beats, beatType,
 //         divisions, 0 /* pitch */, ticks);
+
+      printf("step/alter/oct %s/%d/%d\n", qPrintable(step), alter, octave);
 
       ChordRest* cr = 0;
 
@@ -3300,15 +3336,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             dyn->setTick(tick);
             measure->add(dyn);
             }
-
-      if (!grace) {
-            lastLen = ticks;
-            tick += ticks;
-            if (tick > maxtick)
-                  maxtick = tick;
-            }
-
-//      printf(" after inserting note tick=%d\n", tick);
       }
 
 //---------------------------------------------------------
