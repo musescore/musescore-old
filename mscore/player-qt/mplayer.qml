@@ -22,11 +22,9 @@ Item {
       states: [
             State {
                   name: "landscape"
-                  when: (runtime.orientation == Orientation.Landscape
-                        || runtime.oriention == Orientation.LandscapeInverted)
+                  when: (runtime.orientation == Orientation.Landscape)
                   PropertyChanges {
                         target: screen
-                        width: 1024; height: 748
                         }
                   PropertyChanges {
                         target: background
@@ -34,11 +32,21 @@ Item {
                         }
                   },
             State {
+                  name: "landscapeInverted"
+                  when: (runtime.orientation == Orientation.LandscapeInverted)
+                  PropertyChanges {
+                        target: screen
+                        }
+                  PropertyChanges {
+                        target: background
+                        color: "red"
+                        }
+                  },
+            State {
                   name: "portrait"
                   when: (runtime.orientation == Orientation.Portrait)
                   PropertyChanges {
                         target: screen
-                        height: 1004; width: 768
                         }
                   PropertyChanges {
                         target: background
@@ -50,7 +58,6 @@ Item {
                   when: (runtime.orientation == Orientation.PortraitInverted)
                   PropertyChanges {
                         target: screen
-                        height: 1004; width: 768
                         }
                   PropertyChanges {
                         target: background
@@ -102,19 +109,19 @@ Item {
                         title: "Promenade"
                         author: "Modeste Moussorgsky"
                         path: ":/scores/promenade.mscz"
-                        imagePath: ":/scores/promenade.png"
+                        imagePath: "qrc:///scores/promenade.png"
                         }
                   ListElement {
                         title: "Leise rieselt der Schnee"
                         author: "Traditional"
                         path: ":/scores/schnee.mscz"
-                        imagePath: ":/scores/schnee.png"
+                        imagePath: "qrc:///scores/schnee.png"
                         }
                   ListElement {
                         title: "Italienisches Konzert"
                         author: "J.S. Bach"
                         path: ":/scores/italian-1.mscz"
-                        imagePath: ":/scores/italian-1.png"
+                        imagePath: "qrc:///scores/italian-1.png"
                         }
                   }
 

@@ -16,11 +16,11 @@ Item {
             Text {
                   id: categoryText
                   anchors {
-                        leftMargin: 10
-                        rightMargin: 10
+                        left: parent.left
+                        right: parent.right
                         verticalCenter: parent.verticalCenter
-                        horizontalCenter: parent.horizontalCenter
                         }
+                  horizontalAlignment: Text.AlignHCenter
                   elide: Text.ElideLeft
                   text: "MyScores"
                   font.bold: true
