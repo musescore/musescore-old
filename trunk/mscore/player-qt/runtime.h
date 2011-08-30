@@ -42,7 +42,6 @@ class Runtime : public QObject {
       void setOrientation(Orientation o)  {
             if (o != m_o) {
                   m_o = o;
-printf("orientation changed %d\n", int(o));
                   emit orientationChanged();
                   }
             }
