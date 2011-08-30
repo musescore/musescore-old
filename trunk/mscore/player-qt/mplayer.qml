@@ -18,23 +18,43 @@ import "mobile" as Mobile
 Item {
       id: screen
       property bool inScoreView: false
-      width: 1024; height: 768
 
       states: [
             State {
                   name: "landscape"
-                  when: runtime.orientation == Orientation.Landscape
+                  when: (runtime.orientation == Orientation.Landscape
+                        || runtime.oriention == Orientation.LandscapeInverted)
                   PropertyChanges {
                         target: screen
-                        width: 1024; height: 768
+                        width: 1024; height: 748
+                        }
+                  PropertyChanges {
+                        target: background
+                        color: "blue"
                         }
                   },
             State {
                   name: "portrait"
-                  when: runtime.orientation == Orientation.Portrait
+                  when: (runtime.orientation == Orientation.Portrait)
                   PropertyChanges {
                         target: screen
-                        height: 1024; width: 768
+                        height: 1004; width: 768
+                        }
+                  PropertyChanges {
+                        target: background
+                        color: "green"
+                        }
+                  },
+            State {
+                  name: "portraitInverted"
+                  when: (runtime.orientation == Orientation.PortraitInverted)
+                  PropertyChanges {
+                        target: screen
+                        height: 1004; width: 768
+                        }
+                  PropertyChanges {
+                        target: background
+                        color: "yellow"
                         }
                   }
             ]
@@ -162,6 +182,7 @@ Item {
                   height: 40
                   width: parent.width
                   opacity: .9
+                  anchors.top: parent.top
                   }
 
             Mobile.ToolBar {

@@ -1,6 +1,6 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
-   <qresource prefix="/">
+   <qresource>
       <file alias="fonts/mscore20.xml">../fonts/mscore20.xml</file>
       <file alias="fonts/gonville.xml">../fonts/gonville.xml</file>
       <file alias="fonts/gonville-20.otf">../fonts/gonville-20.otf</file>

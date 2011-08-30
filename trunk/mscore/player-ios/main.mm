@@ -38,12 +38,11 @@ int main(int argc, char *argv[])
 
       QApplication app(argc, argv);
       QmlApplicationViewer viewer;
-      viewer.setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
 	viewer.engine()->setOfflineStoragePath(documentsDirectory());
 //      NSString* resourcePath = [[NSBundle mainBundle] resourcePath];
 //      viewer.setMainQmlFile(qStringFromNSString([resourcePath stringByAppendingPathComponent:@"main.qml"]));
       viewer.setMainQmlFile(QString(":/mplayer.qml"));
-      viewer.showMaximized();
+      viewer.show();
       int retVal = app.exec();
       [pool release];
       return retVal;

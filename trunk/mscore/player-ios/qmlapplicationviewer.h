@@ -58,25 +58,14 @@ class QmlApplicationViewer : public QDeclarativeView
 {
     Q_OBJECT
 
-public:
-    enum ScreenOrientation {
-        ScreenOrientationLockPortrait,
-        ScreenOrientationLockLandscape,
-        ScreenOrientationAuto
-    };
-
+   public:
     explicit QmlApplicationViewer(QWidget *parent = 0);
     virtual ~QmlApplicationViewer();
 
     void setMainQmlFile(const QString &file);
     void addImportPath(const QString &path);
 
-    // Note that this will only have an effect on Symbian and Fremantle.
-    void setOrientation(ScreenOrientation orientation);
-
-    void showExpanded();
-
-private:
+   private:
     class QmlApplicationViewerPrivate *m_d;
 };
 
