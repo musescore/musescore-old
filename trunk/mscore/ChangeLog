@@ -1,4 +1,5 @@
 31.aug (ws)
+      - fix #12344: Crash on closing the last score
       - removed edit position from statusline; this functionality moved to the inspector panel
       - tempo fixes
 22.aug (lv)
