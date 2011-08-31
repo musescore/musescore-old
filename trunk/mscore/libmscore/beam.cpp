@@ -15,14 +15,13 @@
 #include "segment.h"
 #include "score.h"
 #include "chord.h"
-#include "al/sig.h"
+#include "sig.h"
 #include "style.h"
 #include "note.h"
 #include "tuplet.h"
 #include "system.h"
 #include "tremolo.h"
 #include "measure.h"
-#include "al/al.h"
 #include "undo.h"
 #include "staff.h"
 #include "stafftype.h"
@@ -165,7 +164,7 @@ bool endBeam(const Fraction& ts, ChordRest* cr, ChordRest* prevCr)
                         continue;
                   }
             else {            // if (h.pos.numerator() == 0) {   // stop on every beat
-                  int len = (4 * AL::division) / h.timeSig.denominator();
+                  int len = (4 * MScore::division) / h.timeSig.denominator();
                   if (p % len) {
                         continue;
                         }

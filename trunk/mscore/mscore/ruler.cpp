@@ -109,7 +109,7 @@ Ruler::Ruler(QWidget* parent)
       magStep = 0;
       _xpos   = 0;
       _xmag   = 0.1;
-      _timeType = AL::TICKS;
+      _timeType = TICKS;
       _font2.setPixelSize(14);
       _font2.setBold(true);
       _font1.setPixelSize(10);
@@ -119,7 +119,7 @@ Ruler::Ruler(QWidget* parent)
 //   setScore
 //---------------------------------------------------------
 
-void Ruler::setScore(Score* s, AL::Pos* lc)
+void Ruler::setScore(Score* s, Pos* lc)
       {
       _score = s;
       _locator = lc;
@@ -167,19 +167,19 @@ void Ruler::setXpos(int val)
 //   pix2pos
 //---------------------------------------------------------
 
-AL::Pos Ruler::pix2pos(int x) const
+Pos Ruler::pix2pos(int x) const
       {
       int val = lrint((x + _xpos - MAP_OFFSET)/_xmag - 480);
       if (val < 0)
             val = 0;
-      return AL::Pos(_score->tempomap(), _score->sigmap(), val, _timeType);
+      return Pos(_score->tempomap(), _score->sigmap(), val, _timeType);
       }
 
 //---------------------------------------------------------
 //   pos2pix
 //---------------------------------------------------------
 
-int Ruler::pos2pix(const AL::Pos& p) const
+int Ruler::pos2pix(const Pos& p) const
       {
       return lrint((p.time(_timeType)+480) * _xmag) + MAP_OFFSET - _xpos;
       }
@@ -212,8 +212,8 @@ void Ruler::paintEvent(QPaintEvent* e)
       if (x < (MAP_OFFSET - _xpos))
             x = MAP_OFFSET - _xpos;
 
-      AL::Pos pos1 = pix2pos(x);
-      AL::Pos pos2 = pix2pos(x+w);
+      Pos pos1 = pix2pos(x);
+      Pos pos2 = pix2pos(x+w);
 
       //---------------------------------------------------
       //    draw raster
@@ -232,7 +232,7 @@ void Ruler::paintEvent(QPaintEvent* e)
       bar2 = ((bar2 + n - 1) / n) * n; // round up
 
       for (int bar = bar1; bar <= bar2;) {
-            AL::Pos stick(_score->tempomap(), _score->sigmap(), bar, 0, 0);
+            Pos stick(_score->tempomap(), _score->sigmap(), bar, 0, 0);
             if (magStep) {
                   p.setFont(_font2);
                   int x = pos2pix(stick);
@@ -248,10 +248,10 @@ void Ruler::paintEvent(QPaintEvent* e)
                         p.drawLine(x, y1, x, y2);
                   }
             else {
-                  AL::SigEvent sig = stick.timesig();
+                  SigEvent sig = stick.timesig();
                   int z = sig.timesig().numerator();
                   for (int beat = 0; beat < z; beat++) {
-                        AL::Pos xx(_score->tempomap(), _score->sigmap(), bar, beat, 0);
+                        Pos xx(_score->tempomap(), _score->sigmap(), bar, beat, 0);
                         int xp = pos2pix(xx);
                         if (xp < 0)
                               continue;
@@ -379,7 +379,7 @@ void Ruler::leaveEvent(QEvent*)
 //   setPos
 //---------------------------------------------------------
 
-void Ruler::setPos(const AL::Pos& pos)
+void Ruler::setPos(const Pos& pos)
       {
       if (_cursor != pos) {
             int x1 = pos2pix(_cursor);

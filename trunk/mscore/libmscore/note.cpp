@@ -1088,19 +1088,19 @@ Element* Note::drop(const DropData& data)
                   {
                   switch(e->subtype()) {
                         case ICON_ACCIACCATURA:
-                              score()->setGraceNote(ch, pitch(), NOTE_ACCIACCATURA, AL::division/2);
+                              score()->setGraceNote(ch, pitch(), NOTE_ACCIACCATURA, MScore::division/2);
                               break;
                         case ICON_APPOGGIATURA:
-                              score()->setGraceNote(ch, pitch(), NOTE_APPOGGIATURA, AL::division/2);
+                              score()->setGraceNote(ch, pitch(), NOTE_APPOGGIATURA, MScore::division/2);
                               break;
                         case ICON_GRACE4:
-                              score()->setGraceNote(ch, pitch(), NOTE_GRACE4, AL::division);
+                              score()->setGraceNote(ch, pitch(), NOTE_GRACE4, MScore::division);
                               break;
                         case ICON_GRACE16:
-                              score()->setGraceNote(ch, pitch(), NOTE_GRACE16, AL::division/4);
+                              score()->setGraceNote(ch, pitch(), NOTE_GRACE16, MScore::division/4);
                               break;
                         case ICON_GRACE32:
-                              score()->setGraceNote(ch, pitch(), NOTE_GRACE32, AL::division/8);
+                              score()->setGraceNote(ch, pitch(), NOTE_GRACE32, MScore::division/8);
                               break;
                         case ICON_SBEAM:
                               score()->undoChangeBeamMode(ch, BEAM_BEGIN);

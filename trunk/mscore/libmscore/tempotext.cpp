@@ -13,7 +13,7 @@
 
 #include "score.h"
 #include "tempotext.h"
-#include "al/tempo.h"
+#include "tempo.h"
 #include "system.h"
 #include "measure.h"
 
@@ -69,7 +69,6 @@ void TempoText::read(QDomElement e)
                   styleChanged();
                   }
             }
-      score()->changeTempo(segment(), _tempo);
       }
 
 //---------------------------------------------------------

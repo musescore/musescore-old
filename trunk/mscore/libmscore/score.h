@@ -24,19 +24,15 @@
 #include "style.h"
 #include "durationtype.h"
 #include "select.h"
-#include "al/fraction.h"
-#include "al/al.h"
+#include "fraction.h"
 #include "interval.h"
 #include "msynth/sparm.h"
 #include "mscoreview.h"
 
-namespace AL {
-      class TempoMap;
-      struct TEvent;
-      class SigEvent;
-      class TimeSigMap;
-      };
-
+class TempoMap;
+struct TEvent;
+class SigEvent;
+class TimeSigMap;
 class System;
 class TextStyle;
 class Page;
@@ -254,8 +250,8 @@ class Score {
       MeasureBaseList _measures;          // here are the notes
 
       RepeatList* _repeatList;
-      AL::TimeSigMap* _sigmap;
-      AL::TempoMap* _tempomap;
+      TimeSigMap* _sigmap;
+      TempoMap* _tempomap;
 
       InputState _is;
 
@@ -593,7 +589,7 @@ class Score {
       void setPlaylistDirty(bool val) { _playlistDirty = val; }
 
       void cmd(const QAction*);
-      int fileDivision(int t) const { return (t * AL::division + _fileDivision/2) / _fileDivision; }
+      int fileDivision(int t) const { return (t * MScore::division + _fileDivision/2) / _fileDivision; }
       bool saveFile();
 
       QString filePath() const       { return info.filePath(); }
@@ -673,10 +669,11 @@ class Score {
       void cmdTransposeStaff(int staffIdx, Interval, bool useDoubleSharpsFlats);
       void cmdConcertPitchChanged(bool, bool useSharpsFlats);
 
-      AL::TempoMap* tempomap() const;
-      AL::TimeSigMap* sigmap() const;
+      TempoMap* tempomap() const;
+      TimeSigMap* sigmap() const;
 
       void changeTempo(Segment*, qreal);
+      void changeTempo(int tick, qreal bps);
 
       qreal swingRatio()                            { return _swingRatio;}
       void setSwingRatio(qreal d)                   { _swingRatio = d;}

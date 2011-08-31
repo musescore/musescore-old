@@ -24,7 +24,7 @@
 #include "slur.h"
 #include "system.h"
 #include "select.h"
-#include "al/sig.h"
+#include "sig.h"
 #include "utils.h"
 #include "text.h"
 #include "segment.h"

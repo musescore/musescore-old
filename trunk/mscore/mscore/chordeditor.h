@@ -21,7 +21,7 @@
 #ifndef __CHORDEDITOR_H__
 #define __CHORDEDITOR_H__
 
-#include "al/pos.h"
+#include "libmscore/pos.h"
 
 class ChordView;
 class Chord;

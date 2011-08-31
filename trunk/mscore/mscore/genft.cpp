@@ -28,7 +28,7 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include <freetype/tttables.h>
-#include "al/xml.h"
+#include "xml.h"
 
 QMap<int, int> codemap;
 QMap<QString, int> namemap;

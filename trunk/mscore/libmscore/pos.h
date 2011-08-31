@@ -23,8 +23,6 @@
 
 #include "sig.h"
 
-namespace AL {
-
 class TempoMap;
 class TimeSigMap;
 class Xml;
@@ -133,5 +131,4 @@ class PosLen : public Pos {
       bool operator==(const PosLen& s) const;
       };
 
-}     // namespace AL
 #endif

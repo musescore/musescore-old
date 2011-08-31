@@ -27,7 +27,7 @@
 #include "key.h"
 #include "dynamic.h"
 #include "slur.h"
-#include "al/sig.h"
+#include "sig.h"
 #include "beam.h"
 #include "tuplet.h"
 #include "system.h"
@@ -1010,6 +1010,7 @@ void Measure::remove(Element* el)
                               break;
                         case LAYOUT_BREAK_SECTION:
                               _sectionBreak = 0;
+                              score()->tempomap()->addPause(tick() + ticks(), 0.0);
                               break;
                         }
                   if (!_el.remove(el))

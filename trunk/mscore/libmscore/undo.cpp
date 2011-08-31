@@ -36,7 +36,7 @@
 #include "clef.h"
 #include "staff.h"
 #include "chord.h"
-#include "al/sig.h"
+#include "sig.h"
 #include "key.h"
 #include "barline.h"
 #include "volta.h"
@@ -63,6 +63,7 @@
 #include "box.h"
 #include "stafftype.h"
 #include "accidental.h"
+#include "layoutbreak.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -1736,7 +1737,12 @@ void ChangeElement::flip()
       else if (newElement->type() == TEMPO_TEXT) {
             TempoText* t = static_cast<TempoText*>(oldElement);
             score->changeTempo(t->segment(), t->tempo());
-printf("change tempo %f\n", t->tempo());
+            }
+      else if (newElement->type() == LAYOUT_BREAK && newElement->subtype() ==
+         LAYOUT_BREAK_SECTION) {
+            LayoutBreak* b = static_cast<LayoutBreak*>(newElement);
+            score->tempomap()->addPause(b->measure()->tick()
+               + b->measure()->ticks(), b->pause());
             }
       ElementType t = newElement->type();
       if (t == SLUR || t == TIE || t == HAIRPIN || t == OTTAVA || t == TRILL

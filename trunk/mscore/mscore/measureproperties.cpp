@@ -20,7 +20,7 @@
 
 #include "measureproperties.h"
 #include "libmscore/measure.h"
-#include "al/sig.h"
+#include "libmscore/sig.h"
 #include "libmscore/score.h"
 #include "libmscore/repeat.h"
 #include "libmscore/undo.h"

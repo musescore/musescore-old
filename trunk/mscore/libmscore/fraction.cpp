@@ -19,6 +19,7 @@
 //=============================================================================
 
 #include "fraction.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   gcd
@@ -174,5 +175,16 @@ Fraction& Fraction::operator/=(int val)
 
 Fraction Fraction::fromTicks(int ticks)
       {
-      return Fraction(ticks, AL::division * 4).reduced();
+      return Fraction(ticks, MScore::division * 4).reduced();
       }
+
+//---------------------------------------------------------
+//   ticks
+//---------------------------------------------------------
+
+int Fraction::ticks() const
+      {
+      return (_numerator * MScore::division * 4 + (_denominator/2)) / _denominator;
+      }
+
+

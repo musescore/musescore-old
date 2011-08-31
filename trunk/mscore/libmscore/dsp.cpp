@@ -21,8 +21,6 @@
 #include "dsp.h"
 #include "config.h"
 
-namespace AL {
-
 Dsp* dsp;
 
 #ifdef __i386__
@@ -115,6 +113,4 @@ void initDsp()
 #endif
       dsp = new Dsp();
       }
-
-}
 

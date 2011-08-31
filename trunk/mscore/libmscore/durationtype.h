@@ -14,7 +14,7 @@
 #ifndef __DURATIONTYPE_H__
 #define __DURATIONTYPE_H__
 
-#include "al/fraction.h"
+#include "fraction.h"
 
 //---------------------------------------------------------
 //   Duration

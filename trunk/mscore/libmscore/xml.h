@@ -16,23 +16,30 @@
 
 #include "mscore.h"
 #include "spatium.h"
-#include "al/xml.h"
-#include "al/fraction.h"
+#include "fraction.h"
 
-using AL::Prop;
-using AL::docName;
-using AL::readPoint;
-using AL::readRectF;
-using AL::readSize;
-using AL::readColor;
-using AL::domError;
-using AL::domNotImplemented;
+//---------------------------------------------------------
+//   Property
+//---------------------------------------------------------
+
+class Prop {
+   public:
+      const char* name;
+      QVariant data;
+      Prop() {}
+      Prop(const char* n, const QVariant& d) : name(n), data(d) {}
+      };
 
 //---------------------------------------------------------
 //   Xml
 //---------------------------------------------------------
 
-class Xml : public AL::Xml {
+class Xml : public QTextStream {
+      static const int BS = 2048;
+
+      QList<QString> stack;
+      void putLevel();
+
 
    public:
       int curTick;            // used to optimize output
@@ -50,14 +57,47 @@ class Xml : public AL::Xml {
       Xml(QIODevice* dev);
       Xml();
 
-      void sTag(const char* name, Spatium sp) { AL::Xml::tag(name, QVariant(sp.val())); }
+      void sTag(const char* name, Spatium sp) { Xml::tag(name, QVariant(sp.val())); }
       void pTag(const char* name, Placement);
       void fTag(const char* name, const Fraction&);
       void valueTypeTag(const char* name, ValueType t);
+
+      void header();
+
+      void stag(const QString&);
+      void etag();
+
+      void tagE(const QString&);
+      void tagE(const char* format, ...);
+      void ntag(const char* name);
+      void netag(const char* name);
+
+      void prop(const Prop& p)  { tag(p.name, p.data); }
+      void prop(QList<Prop> pl) { foreach(Prop p, pl) prop(p); }
+
+      void tag(const QString& name, QVariant data);
+      void tag(const char* name, const char* s)    { tag(name, QVariant(s)); }
+      void tag(const char* name, const QString& s) { tag(name, QVariant(s)); }
+      void tag(const char* name, const QWidget*);
+
+      void writeHtml(const QString& s);
+      void dump(int len, const unsigned char* p);
+
+      static QString xmlString(const QString&);
+      static void htmlToString(QDomElement, int level, QString*);
+      static QString htmlToString(QDomElement);
       };
 
 extern Placement readPlacement(QDomElement);
 extern ValueType readValueType(QDomElement);
 extern Fraction  readFraction(QDomElement);
+extern QString docName;
+extern QPointF readPoint(QDomElement);
+extern QSizeF readSize(QDomElement);
+extern QRectF readRectF(QDomElement);
+extern QColor readColor(QDomElement e);
+extern void domError(QDomElement node);
+extern void domNotImplemented(QDomElement node);
+
 #endif
 

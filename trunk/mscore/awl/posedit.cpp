@@ -25,9 +25,6 @@
 
 namespace Awl {
 
-      using AL::mtcType;
-      using AL::sigmap;
-
 //---------------------------------------------------------
 //   PosEdit
 //---------------------------------------------------------
@@ -238,9 +235,9 @@ QAbstractSpinBox::StepEnabled PosEdit::stepEnabled() const
       else {
             int bar, beat;
             unsigned tick;
-            AL::sigmap.tickValues(_pos.tick(), &bar, &beat, &tick);
-            unsigned tb = AL::sigmap.ticksBeat(_pos.tick());
-            unsigned tm = AL::sigmap.ticksMeasure(_pos.tick());
+            sigmap.tickValues(_pos.tick(), &bar, &beat, &tick);
+            unsigned tb = sigmap.ticksBeat(_pos.tick());
+            unsigned tm = sigmap.ticksMeasure(_pos.tick());
             int bm = tm / tb;
 
             switch (segment) {
@@ -385,8 +382,8 @@ void PosEdit::stepBy(int steps)
             int bar, beat, tick;
             _pos.mbt(&bar, &beat, &tick);
 
-            int tb = AL::sigmap.ticksBeat(_pos.tick());
-            unsigned tm = AL::sigmap.ticksMeasure(_pos.tick());
+            int tb = sigmap.ticksBeat(_pos.tick());
+            unsigned tm = sigmap.ticksMeasure(_pos.tick());
             int bm = tm / tb;
 
             switch(segment) {

@@ -23,7 +23,6 @@
 
 #include "fraction.h"
 
-namespace AL {
 class Xml;
 
 //-------------------------------------------------------------------
@@ -88,5 +87,4 @@ class TimeSigMap : public std::map<const int, SigEvent > {
       int rasterStep(unsigned tick, int raster) const;
       };
 
-}     // namespace AL
 #endif

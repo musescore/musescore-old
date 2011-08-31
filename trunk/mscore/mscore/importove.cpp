@@ -22,8 +22,8 @@
 
 #include "globals.h"
 #include "musescore.h"
-#include "al/sig.h"
-#include "al/tempo.h"
+#include "libmscore/sig.h"
+#include "libmscore/tempo.h"
 #include "libmscore/arpeggio.h"
 #include "libmscore/articulation.h"
 #include "libmscore/barline.h"
@@ -738,7 +738,7 @@ void OveToMScore::convertSignatures(){
 		MeasureToTick::TimeTick tt = tts[i];
 		Fraction f(tt.numerator_, tt.denominator_);
 
-            AL::TimeSigMap* sigmap = score_->sigmap();
+            TimeSigMap* sigmap = score_->sigmap();
             sigmap->add(tt.tick_, f);
 
 		Measure* measure  = score_->tick2measure(tt.tick_);
@@ -905,7 +905,7 @@ void OveToMScore::convertSignatures(){
 	int lastTempo = 0;
 	for(it=tempos.begin(); it!=tempos.end(); ++it) {
 		if( it==tempos.begin() || (*it).second != lastTempo ) {
-	        AL::TempoMap* tl = score_->tempomap();
+	        TempoMap* tl = score_->tempomap();
 	        if(tl){
 	        	double tpo = ((double)(*it).second) / 60.0;
 	        	tl->addTempo((*it).first, tpo);
@@ -1288,7 +1288,7 @@ void OveToMScore::convertMeasureMisc(Measure* measure, int part, int staff, int 
 		int absTick = mtt_->getTick(measure->no(), tempoPtr->getTick());
 		double tpo = ((double)tempoPtr->getQuarterTempo())/60.0;
 
-        AL::TempoMap* tl = score_->tempomap();
+        TempoMap* tl = score_->tempomap();
         if(tl){
         	tl->addTempo(absTick, tpo);
         }

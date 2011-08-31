@@ -30,7 +30,7 @@
 #include "line.h"
 #include "hairpin.h"
 #include "ottava.h"
-#include "al/sig.h"
+#include "sig.h"
 #include "staffstate.h"
 #include "instrchange.h"
 #include "clef.h"

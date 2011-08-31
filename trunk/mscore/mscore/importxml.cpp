@@ -33,7 +33,7 @@
 #include "libmscore/score.h"
 #include "libmscore/rest.h"
 #include "libmscore/chord.h"
-#include "al/sig.h"
+#include "libmscore/sig.h"
 #include "libmscore/key.h"
 #include "libmscore/clef.h"
 #include "libmscore/note.h"
@@ -72,7 +72,7 @@
 #include "libmscore/arpeggio.h"
 #include "libmscore/glissando.h"
 #include "libmscore/breath.h"
-#include "al/tempo.h"
+#include "libmscore/tempo.h"
 #include "libmscore/chordlist.h"
 #include "libmscore/mscore.h"
 #include "libmscore/accidental.h"
@@ -1239,7 +1239,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                                     }
                               if (val == 0)     // neuratron scanner produces sometimes 0 !?
                                     val = 1;
-                              val = (val * AL::division) / divisions;
+                              val = (val * MScore::division) / divisions;
                               tick -= val;
                               lastLen = val;    // ?
                               }
@@ -1287,7 +1287,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                                     printf("MusicXml-Import: bad forward duration value: <%s>\n",
                                        qPrintable(ee.text()));
                                     }
-                              val = val * AL::division / divisions;
+                              val = val * MScore::division / divisions;
                               tick += val;
                               if (tick > maxtick)
                                     maxtick = tick;
@@ -1434,17 +1434,17 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
 
       if (lastMeasureLen != measureLen) {
 #if 0 // TODOxx
-            AL::TimeSigMap* sigmap = score->sigmap();
+            TimeSigMap* sigmap = score->sigmap();
             int tick        = measure->tick();
-            AL::SigEvent se = sigmap->timesig(tick);
+            SigEvent se = sigmap->timesig(tick);
 
             if (measureLen != sigmap->ticksMeasure(tick)) {
-                  AL::SigEvent se = sigmap->timesig(tick);
+                  SigEvent se = sigmap->timesig(tick);
 
                   Fraction f = se.getNominal();
 // printf("Add Sig %d  len %d:  %s\n", tick, measureLen, qPrintable(f.print()));
                   score->sigmap()->add(tick, measureLen, f);
-                  int tm = AL::ticks_measure(se.fraction());
+                  int tm = ticks_measure(se.fraction());
                   if (tm != measureLen) {
                         if (!measure->irregular()) {
                             /* MusicXML's implicit means "don't print measure number",
@@ -1741,7 +1741,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   tempo = e.attribute("tempo");
                   }
             else if (e.tagName() == "offset")
-                  offset = (e.text().toInt() * AL::division)/divisions;
+                  offset = (e.text().toInt() * MScore::division)/divisions;
             else if (e.tagName() == "staff") {
                   // DEBUG: <staff>0</staff>
                   rstaff = e.text().toInt() - 1;
@@ -1892,7 +1892,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   t = new TempoText(score);
                   double tpo = tempo.toDouble()/60.0;
                   ((TempoText*) t)->setTempo(tpo);
-                  AL::TempoMap* tl = score->tempomap();
+                  TempoMap* tl = score->tempomap();
                   if(tl) tl->addTempo(tick, tpo);
                   }
             else {
@@ -2583,7 +2583,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             // silently ignore others (will be handled later)
             }
 
-      int ticks = (AL::division * duration) / divisions;
+      int ticks = (MScore::division * duration) / divisions;
 
       // Musicxml voices are counted for all staffs of an
       // instrument. They are not limited. In mscore voices are associated
@@ -3099,7 +3099,7 @@ printf("use Tie %p\n", tie);
                               nt = NOTE_ACCIACCATURA;
                         ((Chord*)cr)->setNoteType(nt);
                         // the subtraction causes a grace at tick=0 to fail
-                        // cr->setTick(tick - (AL::division / 2));
+                        // cr->setTick(tick - (MScore::division / 2));
                         if (durationType.type() == Duration::V_QUARTER) {
                               ((Chord*)cr)->setNoteType(NOTE_GRACE4);
                               cr->setDurationType(Duration::V_QUARTER);
@@ -3361,7 +3361,7 @@ printf("use Tie %p\n", tie);
                   // tuplet->setBaseLen(cr->ticks() * actualNotes / normalNotes);
                   // avoid rounding errors:
                   // int bl = duration * actualNotes / normalNotes;
-                  // tuplet->setBaseLen((AL::division * bl) / divisions);
+                  // tuplet->setBaseLen((MScore::division * bl) / divisions);
 
                   // type, placement
 

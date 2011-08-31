@@ -22,7 +22,7 @@
 #define __MEASUREPROPERTIES_H__
 
 #include "ui_measureproperties.h"
-#include "al/sig.h"
+#include "libmscore/sig.h"
 
 class Measure;
 

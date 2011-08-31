@@ -28,7 +28,7 @@ class Note;
 class Ruler;
 class Seq;
 
-#include "al/pos.h"
+#include "libmscore/pos.h"
 
 namespace Awl {
       class PitchEdit;
@@ -47,7 +47,7 @@ class PianorollEditor : public QMainWindow {
       Staff* staff;
       Awl::PitchEdit* pitch;
       QSpinBox* velocity;
-      AL::Pos locator[3];
+      Pos locator[3];
       QComboBox* veloType;
       Awl::PosLabel* pos;
       Ruler* ruler;

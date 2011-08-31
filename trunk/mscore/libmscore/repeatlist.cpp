@@ -15,7 +15,7 @@
 #include "score.h"
 #include "measure.h"
 #include "repeat.h"
-#include "al/tempo.h"
+#include "tempo.h"
 #include "volta.h"
 #include "segment.h"
 
@@ -117,7 +117,7 @@ RepeatList::RepeatList(Score* s)
 
 void RepeatList::update()
       {
-      const AL::TempoMap* tl = _score->tempomap();
+      const TempoMap* tl = _score->tempomap();
 
       int utick = 0;
       qreal t  = 0;

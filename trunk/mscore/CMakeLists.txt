@@ -349,7 +349,7 @@ endif(${CMAKE_CXX_COMPILER_ID} EQUAL "Clang")
 ADD_CUSTOM_TARGET(mops1 DEPENDS ${PROJECT_BINARY_DIR}/all.h)
 ADD_CUSTOM_TARGET(mops2 DEPENDS ${PCH})
 
-subdirs(mscore al awl bww2mxml zarchive rtf2html share manual demos
+subdirs(mscore awl bww2mxml zarchive rtf2html share manual demos
       fluid msynth diff mstyle libmscore)
 
 add_subdirectory(player-qt EXCLUDE_FROM_ALL)
@@ -392,7 +392,6 @@ endif (OSC)
 include_directories(
    ${PROJECT_SOURCE_DIR}
    ${PROJECT_BINARY_DIR}
-#   ${PROJECT_BINARY_DIR}/mscore
    ${ALSA_INCDIR}
    ${JACK_INCDIR}
    ${PORTAUDIO_INCDIR}

@@ -127,21 +127,21 @@ DrumrollEditor::DrumrollEditor(QWidget* parent)
 
       connect(gv->verticalScrollBar(), SIGNAL(valueChanged(int)), piano, SLOT(setYpos(int)));
       connect(gv->horizontalScrollBar(), SIGNAL(valueChanged(int)), ruler, SLOT(setXpos(int)));
-      connect(gv,          SIGNAL(xposChanged(int)),           ruler,       SLOT(setXpos(int)));
-      connect(gv,          SIGNAL(magChanged(double,double)),  ruler,       SLOT(setMag(double,double)));
-      connect(gv,          SIGNAL(magChanged(double,double)),  piano,       SLOT(setMag(double,double)));
-      connect(gv,          SIGNAL(pitchChanged(int)),          pl,          SLOT(setPitch(int)));
-      connect(gv,          SIGNAL(pitchChanged(int)),          piano,       SLOT(setPitch(int)));
-      connect(piano,       SIGNAL(pitchChanged(int)),          pl,          SLOT(setPitch(int)));
-      connect(gv,          SIGNAL(posChanged(const AL::Pos&)), pos,         SLOT(setValue(const AL::Pos&)));
-      connect(gv,          SIGNAL(posChanged(const AL::Pos&)), ruler,       SLOT(setPos(const AL::Pos&)));
-      connect(ruler,       SIGNAL(posChanged(const AL::Pos&)), pos,         SLOT(setValue(const AL::Pos&)));
-      connect(ruler,       SIGNAL(locatorMoved(int)),                       SLOT(moveLocator(int)));
-      connect(veloType,    SIGNAL(activated(int)),                          SLOT(veloTypeChanged(int)));
-      connect(velocity,    SIGNAL(valueChanged(int)),                       SLOT(velocityChanged(int)));
-      connect(gv->scene(), SIGNAL(selectionChanged()),                      SLOT(selectionChanged()));
-      connect(piano,       SIGNAL(keyPressed(int)),                         SLOT(keyPressed(int)));
-      connect(piano,       SIGNAL(keyReleased(int)),                        SLOT(keyReleased(int)));
+      connect(gv,          SIGNAL(xposChanged(int)),           ruler, SLOT(setXpos(int)));
+      connect(gv,          SIGNAL(magChanged(double,double)),  ruler, SLOT(setMag(double,double)));
+      connect(gv,          SIGNAL(magChanged(double,double)),  piano, SLOT(setMag(double,double)));
+      connect(gv,          SIGNAL(pitchChanged(int)),          pl,    SLOT(setPitch(int)));
+      connect(gv,          SIGNAL(pitchChanged(int)),          piano, SLOT(setPitch(int)));
+      connect(piano,       SIGNAL(pitchChanged(int)),          pl,    SLOT(setPitch(int)));
+      connect(gv,          SIGNAL(posChanged(const Pos&)),     pos,   SLOT(setValue(const Pos&)));
+      connect(gv,          SIGNAL(posChanged(const Pos&)),     ruler, SLOT(setPos(const Pos&)));
+      connect(ruler,       SIGNAL(posChanged(const Pos&)),     pos,   SLOT(setValue(const Pos&)));
+      connect(ruler,       SIGNAL(locatorMoved(int)),                 SLOT(moveLocator(int)));
+      connect(veloType,    SIGNAL(activated(int)),                    SLOT(veloTypeChanged(int)));
+      connect(velocity,    SIGNAL(valueChanged(int)),                 SLOT(velocityChanged(int)));
+      connect(gv->scene(), SIGNAL(selectionChanged()),                SLOT(selectionChanged()));
+      connect(piano,       SIGNAL(keyPressed(int)),                   SLOT(keyPressed(int)));
+      connect(piano,       SIGNAL(keyReleased(int)),                  SLOT(keyReleased(int)));
       resize(800, 400);
 
       QActionGroup* ag = new QActionGroup(this);
@@ -162,8 +162,8 @@ void DrumrollEditor::setStaff(Staff* st)
       staff = st;
       _score = staff->score();
       setWindowTitle(QString(tr("MuseScore: <%1> Staff: %2")).arg(_score->name()).arg(st->idx()));
-      AL::TempoMap* tl = _score->tempomap();
-      AL::TimeSigMap*  sl = _score->sigmap();
+      TempoMap* tl = _score->tempomap();
+      TimeSigMap*  sl = _score->sigmap();
       for (int i = 0; i < 3; ++i)
             locator[i].setContext(tl, sl);
 

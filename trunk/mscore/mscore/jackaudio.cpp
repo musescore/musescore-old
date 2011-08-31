@@ -20,11 +20,11 @@
 
 #include "jackaudio.h"
 
+#include "libmscore/mscore.h"
 #include "preferences.h"
 #include "msynth/synti.h"
 #include "musescore.h"
 #include "seq.h"
-#include "al/al.h"
 
 #include <jack/midiport.h>
 
@@ -416,7 +416,7 @@ bool JackAudio::init()
       jack_set_freewheel_callback (client, freewheel_callback, this);
       _segmentSize  = jack_get_buffer_size(client);
 
-      AL::sampleRate = sampleRate();
+      MScore::sampleRate = sampleRate();
       // register mscore left/right output ports
       if (preferences.useJackAudio) {
             registerPort("left", false, false);

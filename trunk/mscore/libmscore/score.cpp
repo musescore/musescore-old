@@ -19,9 +19,9 @@
 #include <assert.h>
 #include "score.h"
 #include "key.h"
-#include "al/sig.h"
+#include "sig.h"
 #include "clef.h"
-#include "al/tempo.h"
+#include "tempo.h"
 #include "measure.h"
 #include "page.h"
 #include "undo.h"
@@ -299,13 +299,13 @@ void Score::init()
       _dirty          = false;
       _saved          = false;
       _playPos        = 0;
-      _fileDivision   = AL::division;
+      _fileDivision   = MScore::division;
       _creditsRead    = false;
       _defaultsRead   = false;
       _omr            = 0;
       _showOmr        = false;
-      _sigmap         = new AL::TimeSigMap();
-      _tempomap       = new AL::TempoMap;
+      _sigmap         = new TimeSigMap();
+      _tempomap       = new TempoMap;
       _playRepeats    = true;
       _layoutMode     = LayoutPage;
       }
@@ -492,7 +492,7 @@ void Score::fixTicks()
       if (!parentScore()) {
             tempomap()->clear();
             sigmap()->clear();
-            sigmap()->add(0, AL::SigEvent(sig,  number));
+            sigmap()->add(0, SigEvent(sig,  number));
             }
 
       for (MeasureBase* mb = first(); mb; mb = mb->next()) {
@@ -506,7 +506,7 @@ void Score::fixTicks()
                         foreach(Element* e, s->annotations()) {
                               if (e->type() == TEMPO_TEXT) {
                                     const TempoText* tt = static_cast<const TempoText*>(e);
-                                    tempomap()->addTempo(tt->segment()->tick(), tt->tempo());
+                                    changeTempo(tt->segment(), tt->tempo());
                                     }
                               }
                         }
@@ -564,8 +564,8 @@ void Score::fixTicks()
                               if (stretch > 0.0) {
                                     qreal otempo = tempomap()->tempo(cr->tick());
                                     qreal ntempo = otempo / stretch;
-                                    tempomap()->addTempo(cr->tick(), ntempo);
-                                    tempomap()->addTempo(cr->tick() + cr->actualTicks(), otempo);
+                                    changeTempo(cr->tick(), ntempo);
+                                    changeTempo(cr->tick() + cr->actualTicks(), otempo);
                                     break;      // do not consider more staves/voices
                                     }
                               }
@@ -590,7 +590,7 @@ void Score::fixTicks()
             //
             if (!parentScore() && (m->timesig() != sig)) {
                   sig = m->timesig();
-                  sigmap()->add(tick, AL::SigEvent(sig,  number));
+                  sigmap()->add(tick, SigEvent(sig,  number));
                   }
             }
       }
@@ -1505,7 +1505,7 @@ void Score::addElement(Element* element)
                   {
                   TempoText* tt = static_cast<TempoText*>(element);
                   int tick = tt->segment()->tick();
-                  _tempomap->addTempo(tick, AL::TEvent(tt->tempo()));
+                  _tempomap->addTempo(tick, TEvent(tt->tempo()));
                   }
                   break;
             case INSTRUMENT_CHANGE:
@@ -1873,7 +1873,7 @@ QHash<int, LinkedElements*>& Score::links()
 //   tempomap
 //---------------------------------------------------------
 
-AL::TempoMap* Score::tempomap() const
+TempoMap* Score::tempomap() const
       {
       return rootScore()->_tempomap;
       }
@@ -1882,7 +1882,7 @@ AL::TempoMap* Score::tempomap() const
 //   sigmap
 //---------------------------------------------------------
 
-AL::TimeSigMap* Score::sigmap() const
+TimeSigMap* Score::sigmap() const
       {
       return rootScore()->_sigmap;
       }
@@ -3319,9 +3319,13 @@ void Score::addLyrics(int tick, int staffIdx, const QString& txt)
 
 void Score::changeTempo(Segment* segment, qreal tempo)
       {
-      _tempomap->changeTempo(segment->tick(), tempo);
+      changeTempo(segment->tick(), tempo);
+      }
+
+void Score::changeTempo(int tick, qreal tempo)
+      {
+      _tempomap->changeTempo(tick, tempo);
       _playlistDirty = true;
-printf("Score: change tempo %f\n", tempo);
       }
 
 

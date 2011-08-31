@@ -25,7 +25,7 @@
 #include <sndfile.h>
 #include "libmscore/score.h"
 #include "fluid.h"
-#include "al/tempo.h"
+// #include "libmscore/tempo.h"
 #include "libmscore/note.h"
 #include "musescore.h"
 #include "libmscore/part.h"

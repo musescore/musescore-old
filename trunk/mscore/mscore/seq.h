@@ -24,7 +24,7 @@
 #include "libmscore/event.h"
 #include "driver.h"
 #include "libmscore/fifo.h"
-#include "al/tempo.h"
+#include "libmscore/tempo.h"
 
 class Note;
 class QTimer;

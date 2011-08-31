@@ -370,7 +370,7 @@ void BarLine::read(QDomElement e)
                   add(a);
                   }
             else if (!Element::readProperties(e))
-                  AL::domError(e);
+                  domError(e);
             }
       }
 

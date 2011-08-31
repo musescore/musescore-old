@@ -92,19 +92,19 @@ void PianoItem::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidge
 //   pix2pos
 //---------------------------------------------------------
 
-AL::Pos PianoView::pix2pos(int x) const
+Pos PianoView::pix2pos(int x) const
       {
       x -= MAP_OFFSET;
       if (x < 0)
             x = 0;
-      return AL::Pos(staff->score()->tempomap(), staff->score()->sigmap(), x, _timeType);
+      return Pos(staff->score()->tempomap(), staff->score()->sigmap(), x, _timeType);
       }
 
 //---------------------------------------------------------
 //   pos2pix
 //---------------------------------------------------------
 
-int PianoView::pos2pix(const AL::Pos& p) const
+int PianoView::pos2pix(const Pos& p) const
       {
       return p.time(_timeType) + MAP_OFFSET;
       }
@@ -160,8 +160,8 @@ void PianoView::drawBackground(QPainter* p, const QRectF& r)
             1, 1, 2, 5, 10, 20, 50
             };
 
-      AL::Pos pos1 = pix2pos(x1);
-      AL::Pos pos2 = pix2pos(x2);
+      Pos pos1 = pix2pos(x1);
+      Pos pos2 = pix2pos(x2);
 
       //---------------------------------------------------
       //    draw raster
@@ -179,7 +179,7 @@ void PianoView::drawBackground(QPainter* p, const QRectF& r)
       bar2 = ((bar2 + n - 1) / n) * n; // round up
 
       for (int bar = bar1; bar <= bar2;) {
-            AL::Pos stick(_score->tempomap(), _score->sigmap(), bar, 0, 0);
+            Pos stick(_score->tempomap(), _score->sigmap(), bar, 0, 0);
             if (magStep > 0) {
                   double x = double(pos2pix(stick));
                   if (x > 0) {
@@ -195,7 +195,7 @@ void PianoView::drawBackground(QPainter* p, const QRectF& r)
                   int z = stick.timesig().timesig().numerator();
                   for (int beat = 0; beat < z; beat++) {
                         if (magStep == 0) {
-                              AL::Pos xx(_score->tempomap(), _score->sigmap(), bar, beat, 0);
+                              Pos xx(_score->tempomap(), _score->sigmap(), bar, beat, 0);
                               int xp = pos2pix(xx);
                               if (xp < 0)
                                     continue;
@@ -221,9 +221,9 @@ void PianoView::drawBackground(QPainter* p, const QRectF& r)
                               else
                                     k = 32;
 
-                              int n = (AL::division * 4) / stick.timesig().timesig().denominator();
+                              int n = (MScore::division * 4) / stick.timesig().timesig().denominator();
                               for (int i = 0; i < k; ++i) {
-                                    AL::Pos xx(_score->tempomap(), _score->sigmap(), bar, beat, (n * i)/ k);
+                                    Pos xx(_score->tempomap(), _score->sigmap(), bar, beat, (n * i)/ k);
                                     int xp = pos2pix(xx);
                                     if (xp < 0)
                                           continue;
@@ -259,7 +259,7 @@ PianoView::PianoView()
       setMouseTracking(true);
       setRubberBandSelectionMode(Qt::IntersectsItemBoundingRect);
       setDragMode(QGraphicsView::RubberBandDrag);
-      _timeType = AL::TICKS;
+      _timeType = TICKS;
       magStep   = 0;
       staff     = 0;
       chord     = 0;
@@ -269,7 +269,7 @@ PianoView::PianoView()
 //   setChord
 //---------------------------------------------------------
 
-void PianoView::setChord(Chord* c, AL::Pos* l)
+void PianoView::setChord(Chord* c, Pos* l)
       {
       static const QColor lcColors[3] = { Qt::red, Qt::blue, Qt::blue };
 
@@ -327,7 +327,7 @@ void PianoView::setChord(Chord* c, AL::Pos* l)
 //   setStaff
 //---------------------------------------------------------
 
-void PianoView::setStaff(Staff* s, AL::Pos* l)
+void PianoView::setStaff(Staff* s, Pos* l)
       {
       static const QColor lcColors[3] = { Qt::red, Qt::blue, Qt::blue };
 

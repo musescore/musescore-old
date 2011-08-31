@@ -21,11 +21,6 @@
 #ifndef __DSP_H__
 #define __DSP_H__
 
-// #include <math.h>
-// #include <memory.h>
-
-namespace AL {
-
 //---------------------------------------------------------
 //   f_max
 //---------------------------------------------------------
@@ -79,8 +74,6 @@ class Dsp {
 
 extern void initDsp();
 extern Dsp* dsp;
-
-}
 
 #endif
 

@@ -21,7 +21,6 @@
 #ifndef __AL_TEMPO_H__
 #define __AL_TEMPO_H__
 
-namespace AL {
 class Xml;
 
 enum TempoType { TEMPO_FIX, TEMPO_RAMP };
@@ -107,5 +106,4 @@ class TempoMap : public std::map<int, TEvent> {
       TEvent getTempo(int tick) const;
       };
 
-}     // namespace AL
 #endif

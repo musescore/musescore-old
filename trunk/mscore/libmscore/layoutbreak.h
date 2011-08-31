@@ -49,6 +49,7 @@ class LayoutBreak : public Element {
       virtual Element* drop(const DropData&);
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
+      Measure* measure() const            { return (Measure*)parent();   }
       qreal pause() const                 { return _pause;               }
       void setPause(qreal v)              { _pause = v;                  }
       bool startWithLongNames() const     { return _startWithLongNames;  }

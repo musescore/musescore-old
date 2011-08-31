@@ -21,7 +21,7 @@
 #ifndef __PIANOVIEW_H__
 #define __PIANOVIEW_H__
 
-#include "al/pos.h"
+#include "libmscore/pos.h"
 
 class Staff;
 class Chord;
@@ -50,18 +50,18 @@ class PianoView : public QGraphicsView {
 
       Staff* staff;
       Chord* chord;
-      AL::Pos pos;
-      AL::Pos* _locator;
+      Pos pos;
+      Pos* _locator;
       QGraphicsLineItem* locatorLines[3];
       int ticks;
-      AL::TType _timeType;
+      TType _timeType;
       int magStep;
 
       virtual void drawBackground(QPainter* painter, const QRectF& rect);
 
       int y2pitch(int y) const;
-      AL::Pos pix2pos(int x) const;
-      int pos2pix(const AL::Pos& p) const;
+      Pos pix2pos(int x) const;
+      int pos2pix(const Pos& p) const;
 
    protected:
       virtual void wheelEvent(QWheelEvent* event);
@@ -72,15 +72,15 @@ class PianoView : public QGraphicsView {
       void magChanged(double, double);
       void xposChanged(int);
       void pitchChanged(int);
-      void posChanged(const AL::Pos&);
+      void posChanged(const Pos&);
 
    public slots:
       void moveLocator(int);
 
    public:
       PianoView();
-      void setStaff(Staff*, AL::Pos* locator);
-      void setChord(Chord*, AL::Pos* locator);
+      void setStaff(Staff*, Pos* locator);
+      void setChord(Chord*, Pos* locator);
       void ensureVisible(int tick);
       QList<QGraphicsItem*> items() { return scene()->selectedItems(); }
       };
