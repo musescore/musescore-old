@@ -70,6 +70,7 @@ static const char* iconNames[] = {
       "start.svg",
       "play.svg",
       "repeat.svg",
+      "pan.svg",
       "sbeam.svg",
       "mbeam.svg",
       "nbeam.svg",

@@ -759,7 +759,8 @@ void Seq::heartBeat()
             int td = curTick - sv->cursorTick();
             if (td > 0 || td < 480 * 2) {       // heuristic
                   sv->moveCursor(note->chord()->segment(), -1);
-                  cv->adjustCanvasPosition(note, true);
+                  if(MScore::panPlayback)
+                        cv->adjustCanvasPosition(note, true);
                   curUtick = guiPos.key();
                   if (pp)
                         pp->heartBeat(curTick, curUtick);

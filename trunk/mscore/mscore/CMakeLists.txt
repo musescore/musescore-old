@@ -445,6 +445,7 @@ endif (MINGW)
       data/icons/exit.svg
       data/icons/viewmag.svg
       data/icons/repeat.svg
+      data/icons/pan.svg
       data/icons/noteentry.svg
       data/icons/grace4.svg
       data/icons/grace16.svg
@@ -556,6 +557,7 @@ endif (MINGW)
       data/icons-dark/exit.svg
       data/icons-dark/viewmag.svg
       data/icons-dark/repeat.svg
+      data/icons-dark/pan.svg
       data/icons-dark/noteentry.svg
       data/icons-dark/grace4.svg
       data/icons-dark/grace16.svg

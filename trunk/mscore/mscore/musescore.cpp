@@ -549,6 +549,9 @@ MuseScore::MuseScore()
       a = getAction("repeat");
       a->setCheckable(true);
       a->setChecked(true);
+      a = getAction("pan");
+      a->setCheckable(true);
+      a->setChecked(true);
 
       //---------------------------------------------------
       //    File Action
@@ -589,6 +592,9 @@ MuseScore::MuseScore()
       transportTools->addSeparator();
       a = getAction("repeat");
       a->setChecked(MScore::playRepeats);
+      transportTools->addAction(a);
+      a = getAction("pan");
+      a->setChecked(MScore::panPlayback);
       transportTools->addAction(a);
 
 //      fileTools->addAction(getAction("mag"));
@@ -4398,6 +4404,8 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             MScore::playRepeats = !MScore::playRepeats;
             cs->updateRepeatList(MScore::playRepeats);
             }
+      else if (cmd == "pan")
+            MScore::panPlayback = !MScore::panPlayback;
       else if (cmd == "show-invisible")
             cs->setShowInvisible(a->isChecked());
       else if (cmd == "show-unprintable")

@@ -208,6 +208,7 @@ void Preferences::init()
 
       midiExpandRepeats        = true;
       MScore::playRepeats      = true;
+      MScore::panPlayback      = true;
       instrumentList           = ":/data/instruments.xml";
 
       alternateNoteEntryMethod = false;
@@ -335,6 +336,7 @@ void Preferences::write()
 
       s.setValue("midiExpandRepeats",  midiExpandRepeats);
       s.setValue("playRepeats",        MScore::playRepeats);
+      s.setValue("panPlayback",        MScore::panPlayback);
       s.setValue("instrumentList", instrumentList);
 
       s.setValue("alternateNoteEntry", alternateNoteEntryMethod);
@@ -473,6 +475,7 @@ void Preferences::read()
       showSplashScreen         = s.value("showSplashScreen", showSplashScreen).toBool();
       midiExpandRepeats        = s.value("midiExpandRepeats", midiExpandRepeats).toBool();
       MScore::playRepeats      = s.value("playRepeats", MScore::playRepeats).toBool();
+      MScore::panPlayback      = s.value("panPlayback", MScore::panPlayback).toBool();
       alternateNoteEntryMethod = s.value("alternateNoteEntry", alternateNoteEntryMethod).toBool();
       midiPorts                = s.value("midiPorts", midiPorts).toInt();
       rememberLastMidiConnections = s.value("rememberLastMidiConnections", rememberLastMidiConnections).toBool();
