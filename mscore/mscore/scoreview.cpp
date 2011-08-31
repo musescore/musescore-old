@@ -1166,8 +1166,6 @@ void ScoreView::updateGrips()
       if (curGrip == -1)
             curGrip = grips-1;
 
-      QPointF pt(editObject->getGrip(curGrip));
-      mscore->updateElement(editObject, pt);
 #if 0
       double x, y;
       if (grips) {
@@ -1486,6 +1484,7 @@ void ScoreView::setShadowNote(const QPointF& p)
 //   paintElement
 //---------------------------------------------------------
 
+#if 0
 static void paintElement(void* data, Element* e)
       {
       PainterQt* p = static_cast<PainterQt*>(data);
@@ -1495,6 +1494,7 @@ static void paintElement(void* data, Element* e)
       e->draw(p);
       p->painter()->restore();
       }
+#endif
 
 //---------------------------------------------------------
 //   paintEvent
@@ -3272,17 +3272,15 @@ void ScoreView::endEdit()
                   mscore->textTools()->kbAction()->setChecked(false);
                   }
             mscore->textTools()->hide();
-            }
-      _score->addRefresh(editObject->canvasBoundingRect());
 
-      if (editObject->isText()) {
             Text* t = static_cast<Text*>(editObject);
             if (textUndoLevel)
                   _score->undo()->push(new EditText(t, textUndoLevel));
             disconnect(t->doc(), SIGNAL(undoCommandAdded()), this, SLOT(textUndoLevelAdded()));
             }
-      int tp = editObject->type();
+      _score->addRefresh(editObject->canvasBoundingRect());
 
+      int tp = editObject->type();
       if (tp == LYRICS)
             lyricsEndEdit();
       else if (tp == HARMONY)

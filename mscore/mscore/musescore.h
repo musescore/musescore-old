@@ -286,10 +286,6 @@ class MuseScore : public QMainWindow {
       QAction* deleteProfileAction;
 
       bool inChordEditor;
-      QDoubleSpinBox* _editX;
-      QDoubleSpinBox* _editY;
-      QLabel* xLabel;
-      QLabel* yLabel;
 
       QComboBox* layerSwitch;
       QNetworkAccessManager* networkManager;
@@ -341,7 +337,6 @@ class MuseScore : public QMainWindow {
       void showMediaDialog();
       void showAlbumManager();
       void showLayerManager();
-      void enableEditMode(bool);
       void gotoNextScore();
       void gotoPreviousScore();
       void updateUndoRedo();
@@ -400,8 +395,6 @@ class MuseScore : public QMainWindow {
       void showProfileMenu();
       void changeProfile(QAction*);
       void changeProfile(Profile* p);
-      void editXChanged(double);
-      void editYChanged(double);
       void switchLayer(const QString&);
       void networkFinished(QNetworkReply*);
 
@@ -520,7 +513,6 @@ class MuseScore : public QMainWindow {
       void disableCommands(bool val) { inChordEditor = val; }
 
       void updateInputState(Score*);
-      void updateElement(Element*, const QPointF&);
 
       void tupletDialog();
       void selectSimilar(Element*, bool);

@@ -2044,7 +2044,7 @@ printf("==================convert-capella\n");
             }
 
       if (cap->topDist) {
-            VBox* mb;
+            VBox* mb = 0;
             MeasureBaseList* mbl = score->measures();
             if (mbl->size() && mbl->first()->type() == VBOX)
                   mb = static_cast<VBox*>(mbl->first());

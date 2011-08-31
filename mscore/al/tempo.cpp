@@ -39,13 +39,13 @@ TempoMap::TempoMap()
 //   addPause
 //---------------------------------------------------------
 
-void TempoMap::addP(int tick, double pause)
+void TempoMap::addP(int tick, qreal pause)
       {
       iTEvent e = find(tick);
       if (e != end())
             e->second.pause = pause;
       else {
-            double t = tempo(tick);
+            qreal t = tempo(tick);
             insert(std::pair<const int, TEvent> (tick, TEvent(t, pause)));
             }
       normalize();
@@ -55,7 +55,7 @@ void TempoMap::addP(int tick, double pause)
 //   add
 //---------------------------------------------------------
 
-void TempoMap::add(int tick, double tempo)
+void TempoMap::add(int tick, qreal tempo)
       {
       iTEvent e = find(tick);
       if (e != end())
@@ -77,17 +77,18 @@ void TempoMap::add(int tick, const TEvent& ev)
 
 void TempoMap::normalize()
       {
-      double time  = 0;
+      qreal time  = 0;
       int tick     = 0;
-      double tempo = 2.0;
+      qreal tempo = 2.0;
       for (iTEvent e = begin(); e != end(); ++e) {
             int delta = e->first - tick;
-            time += double(delta) / (division * tempo * _relTempo * 0.01);
+            time += qreal(delta) / (division * tempo * _relTempo * 0.01);
             time += e->second.pause;
             e->second.time = time;
             tick  = e->first;
             tempo = e->second.tempo;
             }
+      ++_tempoSN;
       }
 
 //---------------------------------------------------------
@@ -116,7 +117,7 @@ void TempoMap::clear()
 //   tempo
 //---------------------------------------------------------
 
-double TempoMap::tempo(int tick) const
+qreal TempoMap::tempo(int tick) const
       {
       if (empty())
             return 2.0;
@@ -172,19 +173,20 @@ void TempoMap::del(iTEvent e)
       {
       erase(e);
       normalize();
-      ++_tempoSN;
       }
 
 //---------------------------------------------------------
 //   change
 //---------------------------------------------------------
 
-void TempoMap::change(int tick, double newTempo)
+void TempoMap::change(int tick, qreal newTempo)
       {
+      add(tick, newTempo);
+#if 0
       iTEvent e = find(tick);
       e->second.tempo = newTempo;
       normalize();
-      ++_tempoSN;
+#endif
       }
 
 //---------------------------------------------------------
@@ -194,7 +196,6 @@ void TempoMap::change(int tick, double newTempo)
 void TempoMap::setRelTempo(int val)
       {
       _relTempo = val;
-      ++_tempoSN;
       normalize();
       }
 
@@ -202,7 +203,7 @@ void TempoMap::setRelTempo(int val)
 //   addPause
 //---------------------------------------------------------
 
-void TempoMap::addPause(int t, double pause)
+void TempoMap::addPause(int t, qreal pause)
       {
       addP(t, pause);
       ++_tempoSN;
@@ -212,7 +213,7 @@ void TempoMap::addPause(int t, double pause)
 //   addTempo
 //---------------------------------------------------------
 
-void TempoMap::addTempo(int t, double tempo)
+void TempoMap::addTempo(int t, qreal tempo)
       {
       add(t, tempo);
       ++_tempoSN;
@@ -238,7 +239,7 @@ void TempoMap::delTempo(int tick)
 //   changeTempo
 //---------------------------------------------------------
 
-void TempoMap::changeTempo(int tick, double newTempo)
+void TempoMap::changeTempo(int tick, qreal newTempo)
       {
       change(tick, newTempo);
       ++_tempoSN;
@@ -248,7 +249,7 @@ void TempoMap::changeTempo(int tick, double newTempo)
 //   tick2time
 //---------------------------------------------------------
 
-double TempoMap::tick2time(int tick, double time, int* sn) const
+qreal TempoMap::tick2time(int tick, qreal time, int* sn) const
       {
       return (*sn == _tempoSN) ? time : tick2time(tick, sn);
       }
@@ -258,7 +259,7 @@ double TempoMap::tick2time(int tick, double time, int* sn) const
 //    return cached value t if list did not change
 //---------------------------------------------------------
 
-int TempoMap::time2tick(double time, int t, int* sn) const
+int TempoMap::time2tick(qreal time, int t, int* sn) const
       {
       return (*sn == _tempoSN) ? t : time2tick(time, sn);
       }
@@ -267,11 +268,11 @@ int TempoMap::time2tick(double time, int t, int* sn) const
 //   tick2time
 //---------------------------------------------------------
 
-double TempoMap::tick2time(int tick, int* sn) const
+qreal TempoMap::tick2time(int tick, int* sn) const
       {
-      double time  = 0.0;
-      double delta = double(tick);
-      double tempo = 2.0;
+      qreal time  = 0.0;
+      qreal delta = qreal(tick);
+      qreal tempo = 2.0;
 
       if (!empty()) {
             int ptick  = 0;
@@ -295,8 +296,10 @@ double TempoMap::tick2time(int tick, int* sn) const
                   tempo = pe->second.tempo;
                   time  = pe->second.time;
                   }
-            delta = double(tick - ptick);
+            delta = qreal(tick - ptick);
             }
+      else
+            printf("TempoMap: empty\n");
       if (sn)
             *sn = _tempoSN;
       time += delta / (division * tempo * _relTempo * 0.01);
@@ -307,11 +310,11 @@ double TempoMap::tick2time(int tick, int* sn) const
 //   time2tick
 //---------------------------------------------------------
 
-int TempoMap::time2tick(double time, int* sn) const
+int TempoMap::time2tick(qreal time, int* sn) const
       {
       int tick     = 0;
-      double delta = time;
-      double tempo = _tempo;
+      qreal delta = time;
+      qreal tempo = _tempo;
 
       delta = 0.0;
       tempo = 2.0;
@@ -367,7 +370,6 @@ void TempoMap::read(QDomElement e, int sourceDivision)
                   domError(e);
             }
       normalize();
-      ++_tempoSN;
       }
 
 //---------------------------------------------------------
@@ -410,7 +412,6 @@ void TempoMap::removeTime(int tick, int len)
       std::map<int,TEvent>::clear();
       insert(tmp.begin(), tmp.end());
       normalize();
-      ++_tempoSN;
       }
 
 //---------------------------------------------------------
@@ -429,7 +430,6 @@ void TempoMap::insertTime(int tick, int len)
       std::map<int,TEvent>::clear();
       insert(tmp.begin(), tmp.end());
       normalize();
-      ++_tempoSN;
       }
 }     // namespace al
 

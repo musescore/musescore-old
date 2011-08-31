@@ -753,8 +753,8 @@ Element* ChordRest::drop(const DropData& data)
             case TEMPO_TEXT:
                   {
                   TempoText* tt = static_cast<TempoText*>(e);
-                  score()->tempomap()->addTempo(tick(), tt->tempo());
                   tt->setParent(segment());
+                  score()->changeTempo(segment(), tt->tempo());
                   score()->undoAddElement(tt);
                   }
                   break;

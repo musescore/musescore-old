@@ -676,6 +676,8 @@ class Score {
       AL::TempoMap* tempomap() const;
       AL::TimeSigMap* sigmap() const;
 
+      void changeTempo(Segment*, qreal);
+
       qreal swingRatio()                            { return _swingRatio;}
       void setSwingRatio(qreal d)                   { _swingRatio = d;}
 

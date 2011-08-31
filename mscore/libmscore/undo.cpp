@@ -1735,8 +1735,8 @@ void ChangeElement::flip()
             newElement->score()->addLayoutFlags(LAYOUT_FIX_PITCH_VELO);
       else if (newElement->type() == TEMPO_TEXT) {
             TempoText* t = static_cast<TempoText*>(oldElement);
-            int tick = t->segment()->tick();
-            score->tempomap()->changeTempo(tick, t->tempo());
+            score->changeTempo(t->segment(), t->tempo());
+printf("change tempo %f\n", t->tempo());
             }
       ElementType t = newElement->type();
       if (t == SLUR || t == TIE || t == HAIRPIN || t == OTTAVA || t == TRILL
@@ -2261,12 +2261,22 @@ void EditText::undo()
       {
       for (int i = 0; i < undoLevel; ++i)
             text->doc()->undo();
+      text->textChanged();
+      if (text->type() == TEMPO_TEXT) {
+            TempoText* tt = static_cast<TempoText*>(text);
+            tt->score()->changeTempo(tt->segment(), tt->tempo());
+            }
       }
 
 void EditText::redo()
       {
       for (int i = 0; i < undoLevel; ++i)
             text->doc()->redo();
+      text->textChanged();
+      if (text->type() == TEMPO_TEXT) {
+            TempoText* tt = static_cast<TempoText*>(text);
+            tt->score()->changeTempo(tt->segment(), tt->tempo());
+            }
       }
 
 //---------------------------------------------------------

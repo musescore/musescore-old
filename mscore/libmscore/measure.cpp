@@ -2119,9 +2119,9 @@ void Measure::read(QDomElement e, int staffIdx)
                ) {
                   Element* el = Element::name2Element(tag, score());
                   el->setTrack(score()->curTrack);
-                  el->read(e);
                   segment = getSegment(SegChordRest, score()->curTick);
                   segment->add(el);
+                  el->read(e);
                   }
             else if (tag == "Image") {
                   // look ahead for image type

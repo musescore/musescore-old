@@ -1916,8 +1916,8 @@ printf("cannot make gap in staff %d at tick %d\n", staffIdx, dst->tick());
                            || tag == "TempoText"
                            ) {
                               Element* e = Element::name2Element(tag, this);
-                              e->read(eee);
                               e->setTrack(dstStaffIdx * VOICES);
+
                               int tick = curTick - tickStart + dstTick;
                               Measure* m = tick2measure(tick);
                               Segment* seg = m->findSegment(SegChordRest, tick);
@@ -1926,6 +1926,8 @@ printf("cannot make gap in staff %d at tick %d\n", staffIdx, dst->tick());
                                     undoAddElement(seg);
                                     }
                               e->setParent(seg);
+                              e->read(eee);
+
                               undoAddElement(e);
                               }
                         else if (tag == "Clef") {

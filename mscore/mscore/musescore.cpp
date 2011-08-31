@@ -407,10 +407,6 @@ MuseScore::MuseScore()
 
       editRasterDialog      = 0;
       inChordEditor         = false;
-      _editX                = 0;
-      _editY                = 0;
-      xLabel                = 0;
-      yLabel                = 0;
       networkManager        = 0;
 
       profiles              = 0;
@@ -2496,10 +2492,6 @@ void MuseScore::changeState(ScoreState val)
       mag->setEnabled(enable);
       entryTools->setEnabled(enable);
 
-      if ((_sstate == STATE_EDIT && val != STATE_EDIT)
-         || (_sstate != STATE_EDIT && val == STATE_EDIT)) {
-            enableEditMode(val == STATE_EDIT);
-            }
       switch(val) {
             case STATE_DISABLED:
                   _modeText->setText(tr("no score"));
@@ -3759,84 +3751,6 @@ void MuseScore::midiNoteReceived(int pitch, bool ctrl)
       {
       if (cv)
             cv->midiNoteReceived(pitch, ctrl);
-      }
-
-//---------------------------------------------------------
-//   enableEditMode
-//---------------------------------------------------------
-
-void MuseScore::enableEditMode(bool enable)
-      {
-      if (enable) {
-            if (_editX == 0) {
-                  _editX  = new QDoubleSpinBox(this);
-                  _editX->setSuffix(tr("sp"));
-                  _editX->setRange(-99999, 99999);
-                  _editX->setSingleStep(.1);
-                  _editY  = new QDoubleSpinBox(this);
-                  _editY->setSuffix(tr("sp"));
-                  _editY->setRange(-99999, 99999);
-                  _editY->setSingleStep(.1);
-                  xLabel = new QLabel(tr("x:"), this);
-                  yLabel = new QLabel(tr("y:"), this);
-                  _statusBar->insertPermanentWidget(2, xLabel, 0);
-                  _statusBar->insertPermanentWidget(3, _editX, 2);
-                  _statusBar->insertPermanentWidget(4, yLabel, 0);
-                  _statusBar->insertPermanentWidget(5, _editY, 2);
-                  connect(_editX, SIGNAL(valueChanged(double)), SLOT(editXChanged(double)));
-                  connect(_editY, SIGNAL(valueChanged(double)), SLOT(editYChanged(double)));
-                  }
-            _editX->setVisible(true);
-            _editY->setVisible(true);
-            xLabel->setVisible(true);
-            yLabel->setVisible(true);
-            }
-      else {
-            if (_editX) {
-                  _editX->setVisible(false);
-                  _editY->setVisible(false);
-                  xLabel->setVisible(false);
-                  yLabel->setVisible(false);
-                  }
-            }
-      }
-
-//---------------------------------------------------------
-//   editXChanged
-//---------------------------------------------------------
-
-void MuseScore::editXChanged(double val)
-      {
-      if (cv)
-            cv->setEditPos(QPointF(val, _editY->value()));
-      }
-
-//---------------------------------------------------------
-//   editYChanged
-//---------------------------------------------------------
-
-void MuseScore::editYChanged(double val)
-      {
-      if (cv)
-            cv->setEditPos(QPointF(_editX->value(), val));
-      }
-
-//---------------------------------------------------------
-//   setEditX
-//---------------------------------------------------------
-
-void MuseScore::updateElement(Element* e, const QPointF& pt)
-      {
-      if (_editX) {
-            _editX->blockSignals(true);
-            _editY->blockSignals(true);
-            _editX->setValue(pt.x());
-            _editY->setValue(pt.y());
-            _editX->blockSignals(false);
-            _editY->blockSignals(false);
-            }
-      if (inspector)
-            inspector->setElement(e);
       }
 
 //---------------------------------------------------------

@@ -70,7 +70,7 @@ Item {
             anchors.fill: parent
             state: "myscores"
 
-            color: "#343434"
+//            color: "#343434"
             Image {
                   source: "mobile/images/stripes.png"
                   fillMode: Image.Tile
