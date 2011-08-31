@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "playpanel.h"
-#include "al/sig.h"
+#include "libmscore/sig.h"
 #include "libmscore/score.h"
 #include "seq.h"
 #include "musescore.h"

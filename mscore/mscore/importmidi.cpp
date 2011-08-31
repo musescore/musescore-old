@@ -25,8 +25,8 @@
 #include "libmscore/score.h"
 #include "libmscore/key.h"
 #include "libmscore/clef.h"
-#include "al/sig.h"
-#include "al/tempo.h"
+#include "libmscore/sig.h"
+#include "libmscore/tempo.h"
 #include "libmscore/note.h"
 #include "libmscore/chord.h"
 #include "libmscore/rest.h"
@@ -749,7 +749,7 @@ void MuseScore::convertMidi(Score* score, MidiFile* mf)
       {
       mf->separateChannel();
       mf->process1();                    // merge noteOn/noteOff into NoteEvent etc.
-      mf->changeDivision(AL::division);
+      mf->changeDivision(MScore::division);
 
       *(score->sigmap()) = mf->siglist();
 
@@ -987,8 +987,8 @@ void MuseScore::convertMidi(Score* score, MidiFile* mf)
                   }
             }
 
-      for (AL::iSigEvent is = score->sigmap()->begin(); is != score->sigmap()->end(); ++is) {
-            AL::SigEvent se = is->second;
+      for (iSigEvent is = score->sigmap()->begin(); is != score->sigmap()->end(); ++is) {
+            SigEvent se = is->second;
             int tick    = is->first;
             Measure* m  = score->tick2measure(tick);
             if (!m)
@@ -1338,15 +1338,15 @@ ImportMidiDialog::ImportMidiDialog(QWidget* parent)
 int ImportMidiDialog::shortestNote() const
       {
       switch(shortestNoteCombo->currentIndex()) {
-            case 0:     return AL::division;
-            case 1:     return AL::division / 2;
-            case 2:     return AL::division / 4;
-            case 3:     return AL::division / 8;
-            case 4:     return AL::division / 16;
+            case 0:     return MScore::division;
+            case 1:     return MScore::division / 2;
+            case 2:     return MScore::division / 4;
+            case 3:     return MScore::division / 8;
+            case 4:     return MScore::division / 16;
 
             default:
             case 5:
-                  return AL::division / 32;
+                  return MScore::division / 32;
             }
       }
 
@@ -1358,15 +1358,15 @@ void ImportMidiDialog::setShortestNote(int val)
       {
       int idx;
 
-      if (val == AL::division)
+      if (val == MScore::division)
             idx = 0;
-      else if (val == AL::division/2)
+      else if (val == MScore::division/2)
             idx = 1;
-      else if (val == AL::division/4)
+      else if (val == MScore::division/4)
             idx = 2;
-      else if (val == AL::division/8)
+      else if (val == MScore::division/8)
             idx = 3;
-      else if (val == AL::division/16)
+      else if (val == MScore::division/16)
             idx = 4;
       else
             idx = 5;
@@ -1403,7 +1403,7 @@ bool MuseScore::importMidi(Score* score, const QString& name)
             }
       fp.close();
 
-      int shortestNote = AL::division / 16;     // 1/64
+      int shortestNote = MScore::division / 16;     // 1/64
       if (!noGui) {
             ImportMidiDialog id(0);
             id.setShortestNote(shortestNote);

@@ -35,7 +35,7 @@
 #include "libmscore/segment.h"
 #include "libmscore/note.h"
 #include "libmscore/chord.h"
-#include "al/tempo.h"
+#include "libmscore/tempo.h"
 #include "scoreview.h"
 #include "playpanel.h"
 #include "libmscore/staff.h"
@@ -247,8 +247,8 @@ bool Seq::init()
             printf("init audio driver failed\n");
             return false;
             }
-      AL::sampleRate = driver->sampleRate();
-      synti->init(AL::sampleRate);
+      MScore::sampleRate = driver->sampleRate();
+      synti->init(MScore::sampleRate);
 
       if (!driver->start()) {
             printf("Cannot start I/O\n");
@@ -578,12 +578,12 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
             // play events for one segment
             //
             unsigned framePos = 0;
-            double endTime = playTime + double(frames)/double(AL::sampleRate);
+            double endTime = playTime + double(frames)/double(MScore::sampleRate);
             for (; playPos != events.constEnd(); ++playPos) {
                   double f = cs->utick2utime(playPos.key());
                   if (f >= endTime)
                         break;
-                  int n = lrint((f - playTime) * AL::sampleRate);
+                  int n = lrint((f - playTime) * MScore::sampleRate);
 
                   if (n < 0) {
                         printf("%d:  %f - %f\n", playPos.key(), f, playTime);
@@ -592,7 +592,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
                   synti->process(n, l, r);
                   l += n;
                   r += n;
-                  playTime += double(n)/double(AL::sampleRate);
+                  playTime += double(n)/double(MScore::sampleRate);
 
                   frames    -= n;
                   framePos  += n;
@@ -600,7 +600,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
                   }
             if (frames) {
                   synti->process(frames, l, r);
-                  playTime += double(frames)/double(AL::sampleRate);
+                  playTime += double(frames)/double(MScore::sampleRate);
                   }
             if (playPos == events.constEnd()) {
                   driver->stopTransport();

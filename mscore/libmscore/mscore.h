@@ -577,6 +577,7 @@ class MScore {
       static bool landscape, twosided;
       static bool replaceFractions;
       static bool playRepeats;
+      static bool panPlayback;
       static qreal nudgeStep;
       static int defaultPlayDuration;
       static QString partStyle;
@@ -585,6 +586,10 @@ class MScore {
       static bool layoutDebug;
 
       static qreal spatium;
+      static int division;
+      static int sampleRate;
+      static bool debugMsg;
+      static int mtcType;
       };
 
 //---------------------------------------------------------

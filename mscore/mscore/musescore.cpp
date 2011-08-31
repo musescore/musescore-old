@@ -31,7 +31,7 @@
 #include "textstyle.h"
 #include "libmscore/xml.h"
 #include "seq.h"
-#include "al/tempo.h"
+#include "libmscore/tempo.h"
 #include "libmscore/sym.h"
 #include "pagesettings.h"
 #include "debugger.h"
@@ -49,7 +49,7 @@
 #include "libmscore/harmony.h"
 #include "magbox.h"
 #include "voiceselector.h"
-#include "al/sig.h"
+#include "libmscore/sig.h"
 #include "libmscore/undo.h"
 #include "synthcontrol.h"
 #include "pianoroll.h"
@@ -2818,7 +2818,7 @@ void MuseScore::setPos(int t)
       if (cs == 0 || t < 0)
             return;
 
-      AL::TimeSigMap* s = cs->sigmap();
+      TimeSigMap* s = cs->sigmap();
       int bar, beat, tick;
       s->tickValues(t, &bar, &beat, &tick);
       _positionLabel->setText(tr("Bar %1 Beat %2.%3")

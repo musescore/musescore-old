@@ -14,7 +14,7 @@
 #ifndef __MIDIFILE_H__
 #define __MIDIFILE_H__
 
-#include "al/sig.h"
+#include "libmscore/sig.h"
 #include "libmscore/event.h"
 
 const int MIDI_CHANNEL = 16;
@@ -82,7 +82,7 @@ class MidiTrack {
       void changeDivision(int newDivision);
       void move(int ticks);
       bool isDrumTrack() const;
-      void extractTimeSig(AL::TimeSigMap* sig);
+      void extractTimeSig(TimeSigMap* sig);
       void quantize(int startTick, int endTick, EventList* dst);
       int getInitProgram();
       void findChords();
@@ -104,7 +104,7 @@ class MidiTrack {
 //---------------------------------------------------------
 
 class MidiFile {
-      AL::TimeSigMap _siglist;
+      TimeSigMap _siglist;
       QIODevice* fp;
       QList<MidiTrack*> _tracks;
       int _division;
@@ -160,7 +160,7 @@ class MidiFile {
       void sortTracks();
       void separateChannel();
       void move(int ticks);
-      AL::TimeSigMap siglist() const     { return _siglist;         }
+      TimeSigMap siglist() const     { return _siglist;         }
       int noRunningStatus() const     { return _noRunningStatus; }
       void setNoRunningStatus(bool v) { _noRunningStatus = v;    }
       void processMeta(Score*, MidiTrack* track, const Event& e);

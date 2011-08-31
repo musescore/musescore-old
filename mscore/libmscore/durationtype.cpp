@@ -12,6 +12,7 @@
 //=============================================================================
 
 #include "durationtype.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   dots
@@ -107,17 +108,17 @@ int Duration::ticks() const
       {
       int t;
       switch(_val) {
-            case V_QUARTER:   t = AL::division;        break;
-            case V_EIGHT:     t = AL::division / 2;    break;
-            case V_256TH:     t = AL::division / 64;   break;
-            case V_128TH:     t = AL::division / 32;   break;
-            case V_64TH:      t = AL::division / 16;   break;
-            case V_32ND:      t = AL::division / 8;    break;
-            case V_16TH:      t = AL::division / 4;    break;
-            case V_HALF:      t = AL::division * 2;    break;
-            case V_WHOLE:     t = AL::division * 4;    break;
-            case V_BREVE:     t = AL::division * 8;    break;
-            case V_LONG:      t = AL::division * 16;   break;
+            case V_QUARTER:   t = MScore::division;        break;
+            case V_EIGHT:     t = MScore::division / 2;    break;
+            case V_256TH:     t = MScore::division / 64;   break;
+            case V_128TH:     t = MScore::division / 32;   break;
+            case V_64TH:      t = MScore::division / 16;   break;
+            case V_32ND:      t = MScore::division / 8;    break;
+            case V_16TH:      t = MScore::division / 4;    break;
+            case V_HALF:      t = MScore::division * 2;    break;
+            case V_WHOLE:     t = MScore::division * 4;    break;
+            case V_BREVE:     t = MScore::division * 8;    break;
+            case V_LONG:      t = MScore::division * 16;   break;
             case V_ZERO:
             case V_MEASURE:
                   return 0;

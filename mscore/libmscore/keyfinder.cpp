@@ -53,7 +53,7 @@
 #include <math.h>
 #include "keyfinder.h"
 // #include "midifile.h"
-#include "al/sig.h"
+#include "sig.h"
 #include "pitchspelling.h"
 #include "event.h"
 
@@ -805,7 +805,7 @@ static void best_key_analysis()
 //   findKey
 //---------------------------------------------------------
 
-int findKey(MidiTrack* mt, AL::TimeSigMap* sigmap)
+int findKey(MidiTrack* mt, TimeSigMap* sigmap)
       {
       int tpc_found, npc_found;
 

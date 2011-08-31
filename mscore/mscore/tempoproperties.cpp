@@ -21,7 +21,7 @@
 #include "libmscore/score.h"
 #include "libmscore/tempotext.h"
 #include "tempoproperties.h"
-#include "al/tempo.h"
+#include "libmscore/tempo.h"
 #include "libmscore/system.h"
 #include "libmscore/measure.h"
 

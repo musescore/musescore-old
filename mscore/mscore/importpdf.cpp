@@ -24,7 +24,6 @@
 #include "libmscore/part.h"
 #include "libmscore/staff.h"
 #include "libmscore/measure.h"
-#include "al/al.h"
 #include "libmscore/rest.h"
 #include "omr/omrpage.h"
 #include "libmscore/segment.h"
@@ -103,7 +102,7 @@ bool MuseScore::importPdf(Score* score, const QString& path)
 		            s->add(rest);
 
                         score->measures()->add(measure);
-                        tick += AL::division * 4;
+                        tick += MScore::division * 4;
                         }
                   if (k < (nsystems-1)) {
                         LayoutBreak* b = new LayoutBreak(score);

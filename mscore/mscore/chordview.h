@@ -21,7 +21,7 @@
 #ifndef __CHORDVIEW_H__
 #define __CHORDVIEW_H__
 
-#include "al/pos.h"
+#include "libmscore/pos.h"
 
 class Staff;
 class Chord;

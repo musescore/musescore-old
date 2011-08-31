@@ -26,13 +26,13 @@
 #include "breath.h"
 #include "barline.h"
 #include "articulation.h"
-#include "al/tempo.h"
+#include "tempo.h"
 #include "tempotext.h"
 #include "note.h"
 #include "arpeggio.h"
 #include "dynamic.h"
 #include "stafftext.h"
-#include "al/sig.h"
+#include "sig.h"
 #include "clef.h"
 #include "lyrics.h"
 #include "segment.h"
@@ -378,7 +378,7 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets, QLi
                   }
             else {
                   if (score()->mscVersion() < 115) {
-                        AL::SigEvent e = score()->sigmap()->timesig(score()->curTick);
+                        SigEvent e = score()->sigmap()->timesig(score()->curTick);
                         setDuration(e.timesig());
                         }
                   }

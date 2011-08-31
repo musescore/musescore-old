@@ -50,6 +50,6 @@ target_link_libraries(bww2mxml
    ${QT_LIBRARIES}
    )
 
-ADD_DEPENDENCIES(al mops1)
-ADD_DEPENDENCIES(al mops2)
+# ADD_DEPENDENCIES(al mops1)
+# ADD_DEPENDENCIES(al mops2)
 

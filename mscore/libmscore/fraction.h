@@ -21,8 +21,6 @@
 #ifndef __FRACTION_H__
 #define __FRACTION_H__
 
-#include "al/al.h"
-
 //---------------------------------------------------------
 //   Fraction
 //---------------------------------------------------------
@@ -50,9 +48,7 @@ class Fraction {
             return (_numerator == v._numerator) && (_denominator == v._denominator);
             }
 
-      int ticks() const       {
-            return (_numerator * AL::division * 4 + (_denominator/2)) / _denominator;
-            }
+      int ticks() const;
 
       static Fraction fromTicks(int v);
 

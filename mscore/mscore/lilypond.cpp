@@ -74,7 +74,7 @@ class Lilypond {
       Lilypond(Score* s) {
             score    = s;
             relpitch = -1;
-            curLen   = AL::division;
+            curLen   = MScore::division;
             }
       bool read(const QString&);
       void convert();
@@ -194,13 +194,13 @@ printf("scanNote pitch %d relpitch %d\n", pitch, relpitch);
                         buffer.append(data[ci++]);
                   int len = buffer.toInt();
                   switch(len) {
-                        case 1:  curLen = AL::division * 4; break;
-                        case 2:  curLen = AL::division * 2; break;
-                        case 4:  curLen = AL::division;     break;
-                        case 8:  curLen = AL::division / 2; break;
-                        case 16: curLen = AL::division / 4; break;
-                        case 32: curLen = AL::division / 8; break;
-                        case 64: curLen = AL::division / 16; break;
+                        case 1:  curLen = MScore::division * 4; break;
+                        case 2:  curLen = MScore::division * 2; break;
+                        case 4:  curLen = MScore::division;     break;
+                        case 8:  curLen = MScore::division / 2; break;
+                        case 16: curLen = MScore::division / 4; break;
+                        case 32: curLen = MScore::division / 8; break;
+                        case 64: curLen = MScore::division / 16; break;
                         default:
                               printf("illegal note len %d\n", len);
                               break;
@@ -233,13 +233,13 @@ void Lilypond::scanRest()
                         buffer.append(data[ci++]);
                   int len = buffer.toInt();
                   switch(len) {
-                        case 1:  curLen = AL::division * 4; break;
-                        case 2:  curLen = AL::division * 2; break;
-                        case 4:  curLen = AL::division;     break;
-                        case 8:  curLen = AL::division / 2; break;
-                        case 16: curLen = AL::division / 4; break;
-                        case 32: curLen = AL::division / 8; break;
-                        case 64: curLen = AL::division / 16; break;
+                        case 1:  curLen = MScore::division * 4; break;
+                        case 2:  curLen = MScore::division * 2; break;
+                        case 4:  curLen = MScore::division;     break;
+                        case 8:  curLen = MScore::division / 2; break;
+                        case 16: curLen = MScore::division / 4; break;
+                        case 32: curLen = MScore::division / 8; break;
+                        case 64: curLen = MScore::division / 16; break;
                         default:
                               printf("illegal note len %d\n", len);
                               break;

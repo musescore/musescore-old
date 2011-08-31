@@ -21,10 +21,10 @@
 #include "libmscore/score.h"
 #include "libmscore/part.h"
 #include "libmscore/staff.h"
-#include "al/tempo.h"
+#include "libmscore/tempo.h"
 #include "midifile.h"
 #include "libmscore/event.h"
-#include "al/sig.h"
+#include "libmscore/sig.h"
 #include "libmscore/key.h"
 #include "preferences.h"
 #include "libmscore/text.h"
@@ -114,17 +114,17 @@ void ExportMidi::writeHeader()
       //    write time signature
       //--------------------------------------------
 
-      AL::TimeSigMap* sigmap = cs->sigmap();
+      TimeSigMap* sigmap = cs->sigmap();
       foreach(const RepeatSegment* rs, *cs->repeatList()) {
             int startTick  = rs->tick;
             int endTick    = startTick + rs->len;
             int tickOffset = rs->utick - rs->tick;
 
-            AL::iSigEvent bs = sigmap->lower_bound(startTick);
-            AL::iSigEvent es = sigmap->lower_bound(endTick);
+            iSigEvent bs = sigmap->lower_bound(startTick);
+            iSigEvent es = sigmap->lower_bound(endTick);
 
-            for (AL::iSigEvent is = bs; is != es; ++is) {
-                  AL::SigEvent se   = is->second;
+            for (iSigEvent is = bs; is != es; ++is) {
+                  SigEvent se   = is->second;
                   unsigned char* data = new unsigned char[4];
                   Fraction ts(se.timesig());
                   data[0] = ts.numerator();
@@ -205,15 +205,15 @@ void ExportMidi::writeHeader()
       //    write tempo changes
       //--------------------------------------------
 
-      AL::TempoMap* tempomap = cs->tempomap();
+      TempoMap* tempomap = cs->tempomap();
       foreach(const RepeatSegment* rs, *cs->repeatList()) {
             int startTick  = rs->tick;
             int endTick    = startTick + rs->len;
             int tickOffset = rs->utick - rs->tick;
 
-            AL::iTEvent se = tempomap->lower_bound(startTick);
-            AL::iTEvent ee = tempomap->lower_bound(endTick);
-            for (AL::iTEvent it = se; it != ee; ++it) {
+            iTEvent se = tempomap->lower_bound(startTick);
+            iTEvent ee = tempomap->lower_bound(endTick);
+            for (iTEvent it = se; it != ee; ++it) {
                   Event ev(ME_META);
                   ev.setOntime(it->first + tickOffset);
                   //
@@ -245,7 +245,7 @@ bool ExportMidi::write(const QString& name)
       if (!f.open(QIODevice::WriteOnly))
             return false;
 
-      mf.setDivision(AL::division);
+      mf.setDivision(MScore::division);
       mf.setFormat(1);
       QList<MidiTrack*>* tracks = mf.tracks();
 

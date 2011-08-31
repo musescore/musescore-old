@@ -20,7 +20,7 @@
 */
 
 #include "measurebase.h"
-#include "al/fraction.h"
+#include "fraction.h"
 #include "segmentlist.h"
 
 class Xml;

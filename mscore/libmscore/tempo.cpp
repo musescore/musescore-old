@@ -20,9 +20,6 @@
 
 #include "tempo.h"
 #include "xml.h"
-#include "al.h"
-
-namespace AL {
 
 //---------------------------------------------------------
 //   TempoMap
@@ -82,7 +79,7 @@ void TempoMap::normalize()
       qreal tempo = 2.0;
       for (iTEvent e = begin(); e != end(); ++e) {
             int delta = e->first - tick;
-            time += qreal(delta) / (division * tempo * _relTempo * 0.01);
+            time += qreal(delta) / (MScore::division * tempo * _relTempo * 0.01);
             time += e->second.pause;
             e->second.time = time;
             tick  = e->first;
@@ -302,7 +299,7 @@ qreal TempoMap::tick2time(int tick, int* sn) const
             printf("TempoMap: empty\n");
       if (sn)
             *sn = _tempoSN;
-      time += delta / (division * tempo * _relTempo * 0.01);
+      time += delta / (MScore::division * tempo * _relTempo * 0.01);
       return time;
       }
 
@@ -326,7 +323,7 @@ int TempoMap::time2tick(qreal time, int* sn) const
             tick  = e->first;
             }
       delta = time - delta;
-      tick += lrint(delta * _relTempo * 0.01 * division * tempo);
+      tick += lrint(delta * _relTempo * 0.01 * MScore::division * tempo);
       if (sn)
             *sn = _tempoSN;
       return tick;
@@ -358,7 +355,7 @@ void TempoMap::read(QDomElement e, int sourceDivision)
             if (e.tagName() == "tempo") {
                   TEvent t;
                   unsigned tick = t.read(e);
-                  tick = (tick * division + sourceDivision/2) / sourceDivision;
+                  tick = (tick * MScore::division + sourceDivision/2) / sourceDivision;
                   iTEvent pos = find(tick);
                   if (pos != end())
                         erase(pos);
@@ -431,6 +428,5 @@ void TempoMap::insertTime(int tick, int len)
       insert(tmp.begin(), tmp.end());
       normalize();
       }
-}     // namespace al
 
 

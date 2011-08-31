@@ -15,7 +15,7 @@
 #define __TIMESIG_H__
 
 #include "element.h"
-#include "al/sig.h"
+#include "sig.h"
 #include "mscore.h"
 
 class MuseScoreView;

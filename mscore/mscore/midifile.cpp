@@ -17,7 +17,6 @@
 #include "libmscore/note.h"
 #include "libmscore/drumset.h"
 #include "libmscore/utils.h"
-#include "al/al.h"
 
 #define BE_SHORT(x) ((((x)&0xFF)<<8) | (((x)>>8)&0xFF))
 #ifdef __i486__
@@ -72,7 +71,7 @@ MidiFile::MidiFile()
       _format          = 1;
       _midiType        = MT_UNKNOWN;
       _noRunningStatus = false;
-      _shortestNote    = AL::division /32;       // 1/128
+      _shortestNote    = MScore::division /32;       // 1/128
       }
 
 //---------------------------------------------------------
@@ -883,7 +882,7 @@ void MidiTrack::setOutChannel(int n)
 //   extractTimeSig
 //---------------------------------------------------------
 
-void MidiTrack::extractTimeSig(AL::TimeSigMap* sigmap)
+void MidiTrack::extractTimeSig(TimeSigMap* sigmap)
       {
       EventList el;
 
@@ -1082,10 +1081,10 @@ void MidiFile::changeDivision(int newDivision)
       foreach (MidiTrack* t, _tracks)
             t->changeDivision(newDivision);
 
-      AL::TimeSigMap sl;
-      for (AL::iSigEvent is = _siglist.begin(); is != _siglist.end(); ++is) {
+      TimeSigMap sl;
+      for (iSigEvent is = _siglist.begin(); is != _siglist.end(); ++is) {
             int tick    = (is->first * newDivision + _division/2) / _division;
-            AL::SigEvent se = is->second;
+            SigEvent se = is->second;
             sl.add(tick, se);
             }
       _siglist = sl;

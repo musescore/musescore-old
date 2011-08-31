@@ -20,9 +20,6 @@
 
 #include "sig.h"
 #include "xml.h"
-#include "al.h"
-
-namespace AL {
 
 //---------------------------------------------------------
 //   ticks_beat
@@ -30,8 +27,8 @@ namespace AL {
 
 static int ticks_beat(int n)
       {
-      int m = (AL::division * 4) / n;
-      if ((AL::division * 4) % n) {
+      int m = (MScore::division * 4) / n;
+      if ((MScore::division * 4) % n) {
             fprintf(stderr, "Mscore: ticks_beat(): bad divisor %d\n", n);
             abort();
             }
@@ -44,7 +41,7 @@ static int ticks_beat(int n)
 
 static int ticks_measure(const Fraction& f)
       {
-      return (AL::division * 4 * f.numerator()) / f.denominator();
+      return (MScore::division * 4 * f.numerator()) / f.denominator();
       }
 
 //---------------------------------------------------------
@@ -250,7 +247,7 @@ void SigEvent::write(Xml& xml, int tick) const
 int SigEvent::read(QDomElement e, int fileDivision)
       {
       int tick  = e.attribute("tick", "0").toInt();
-      tick      = tick * AL::division / fileDivision;
+      tick      = tick * MScore::division / fileDivision;
 
       int numerator;
       int denominator;
@@ -368,5 +365,4 @@ void TimeSigMap::dump() const
                i->first, qPrintable(i->second.timesig().print()), i->second.bar());
       }
 
-}     // namespace AL
 

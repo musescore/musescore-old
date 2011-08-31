@@ -39,7 +39,7 @@
 #include "libmscore/score.h"
 #include "libmscore/rest.h"
 #include "libmscore/chord.h"
-#include "al/sig.h"
+#include "libmscore/sig.h"
 #include "libmscore/key.h"
 #include "libmscore/clef.h"
 #include "libmscore/note.h"
@@ -1118,7 +1118,7 @@ void ExportMusicXml::calcDivisions()
       // init
       integers.clear();
       primes.clear();
-      integers.append(AL::division);
+      integers.append(MScore::division);
       primes.append(2);
       primes.append(3);
       primes.append(5);
@@ -1201,7 +1201,7 @@ void ExportMusicXml::calcDivisions()
                   }
             }
 
-      div = AL::division / integers[0];
+      div = MScore::division / integers[0];
       printf("divisions=%d div=%d\n", integers[0], div);
       }
 
@@ -2312,7 +2312,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
             if (chord->noStem() || chord->measure()->slashStyle(chord->staffIdx())){
                   xml.tag("stem", QString("none"));
             }
-            else if ((note->chord()->actualTicks() * actNotes / (nrmNotes * tremCorr)) < (4 * AL::division)) {
+            else if ((note->chord()->actualTicks() * actNotes / (nrmNotes * tremCorr)) < (4 * MScore::division)) {
                   xml.tag("stem", QString(note->chord()->up() ? "up" : "down"));
             }
 
@@ -3890,7 +3890,7 @@ foreach(Element* el, *(score->gel())) {
                   // output attributes with the first actual measure (pickup or regular)
                   if ((irregularMeasureNo + measureNo + pickupMeasureNo) == 4) {
                         attr.doAttr(xml, true);
-                        xml.tag("divisions", AL::division / div);
+                        xml.tag("divisions", MScore::division / div);
                         }
                   // output attributes at start of measure: key, time
                   KeySig* ksig = 0;

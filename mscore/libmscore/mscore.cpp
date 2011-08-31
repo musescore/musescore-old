@@ -38,6 +38,7 @@ bool    MScore::landscape;
 bool    MScore::twosided;
 bool    MScore::replaceFractions;
 bool    MScore::playRepeats;
+bool    MScore::panPlayback;
 qreal   MScore::nudgeStep;
 int     MScore::defaultPlayDuration;
 QString MScore::partStyle;
@@ -45,6 +46,10 @@ QString MScore::soundFont;
 qreal   MScore::spatium;
 QString MScore::lastError;
 bool    MScore::layoutDebug = false;
+int     MScore::division = 480;
+int     MScore::sampleRate = 44100;
+bool    MScore::debugMsg = false;
+int     MScore::mtcType;
 
 extern void initSymbols(int);
 extern void initStaffTypes();

@@ -40,7 +40,7 @@
 #include "libmscore/slur.h"
 #include "libmscore/box.h"
 #include "libmscore/measure.h"
-#include "al/sig.h"
+#include "libmscore/sig.h"
 #include "libmscore/tuplet.h"
 #include "libmscore/segment.h"
 #include "libmscore/layoutbreak.h"
@@ -1225,16 +1225,16 @@ int BasicDurationalObj::ticks() const
             return 0;
       int len = 0;
       switch (t) {
-            case D1:          len = 4 * AL::division; break;
-            case D2:          len = 2 * AL::division; break;
-            case D4:          len = AL::division; break;
-            case D8:          len = AL::division >> 1; break;
-            case D16:         len = AL::division >> 2; break;
-            case D32:         len = AL::division >> 3; break;
-            case D64:         len = AL::division >> 4; break;
-            case D128:        len = AL::division >> 5; break;
-            case D256:        len = AL::division >> 6; break;
-            case D_BREVE:     len = AL::division * 8; break;
+            case D1:          len = 4 * MScore::division; break;
+            case D2:          len = 2 * MScore::division; break;
+            case D4:          len = MScore::division; break;
+            case D8:          len = MScore::division >> 1; break;
+            case D16:         len = MScore::division >> 2; break;
+            case D32:         len = MScore::division >> 3; break;
+            case D64:         len = MScore::division >> 4; break;
+            case D128:        len = MScore::division >> 5; break;
+            case D256:        len = MScore::division >> 6; break;
+            case D_BREVE:     len = MScore::division * 8; break;
             default:
                   printf("BasicDurationalObj::ticks: illegal duration value %d\n", t);
                   break;
@@ -1754,9 +1754,9 @@ printf("     <Meter> tick %d %d/%d\n", tick, o->numerator, 1 << o->log2Denom);
                               printf("illegal fraction\n");
                               abort();
                               }
-                        AL::SigEvent se = score->sigmap()->timesig(tick);
+                        SigEvent se = score->sigmap()->timesig(tick);
                         Fraction f(o->numerator, 1 << o->log2Denom);
-                        AL::SigEvent ne(f);
+                        SigEvent ne(f);
                         if (!(se == ne))
                               score->sigmap()->add(tick, ne);
                         TimeSig* ts = new TimeSig(score);

@@ -333,7 +333,7 @@ bool BBFile::read(const QString& name)
                               continue;
                               }
                         Event note(ME_NOTE);
-                        note.setOntime((tick * AL::division) / bbDivision);
+                        note.setOntime((tick * MScore::division) / bbDivision);
                         note.setPitch(a[idx + 5]);
                         note.setVelo(a[idx + 6]);
                         note.setChannel(channel);
@@ -346,7 +346,7 @@ bool BBFile::read(const QString& name)
                               len = lastLen;
                               }
                         lastLen = len;
-                        note.setDuration((len * AL::division) / bbDivision);
+                        note.setDuration((len * MScore::division) / bbDivision);
                         track->append(note);
                         }
                   else if (type == 0xb0) {
@@ -457,7 +457,7 @@ bool MuseScore::importBB(Score* score, const QString& name)
             14, 9, 16, 11, 18, 13, 8, 15, 10, 17, 12, 19
             };
       foreach(const BBChord& c, bb.chords()) {
-            int tick = c.beat * AL::division;
+            int tick = c.beat * MScore::division;
 // printf("CHORD %d %d\n", c.beat, tick);
             Measure* m = score->tick2measure(tick);
             if (m == 0) {
@@ -716,7 +716,7 @@ void BBFile::convertTrack(Score* score, BBTrack* track, int staffIdx)
 
 void BBTrack::quantize(int startTick, int endTick, EventList* dst)
       {
-      int mintick = AL::division * 64;
+      int mintick = MScore::division * 64;
       iEvent i = _events.begin();
       for (; i != _events.end(); ++i) {
             if (i->ontime() >= startTick)
@@ -730,25 +730,25 @@ void BBTrack::quantize(int startTick, int endTick, EventList* dst)
             if (e.type() == ME_NOTE && (e.duration() < mintick))
                   mintick = e.duration();
             }
-      if (mintick <= AL::division / 16)        // minimum duration is 1/64
-            mintick = AL::division / 16;
-      else if (mintick <= AL::division / 8)
-            mintick = AL::division / 8;
-      else if (mintick <= AL::division / 4)
-            mintick = AL::division / 4;
-      else if (mintick <= AL::division / 2)
-            mintick = AL::division / 2;
-      else if (mintick <= AL::division)
-            mintick = AL::division;
-      else if (mintick <= AL::division * 2)
-            mintick = AL::division * 2;
-      else if (mintick <= AL::division * 4)
-            mintick = AL::division * 4;
-      else if (mintick <= AL::division * 8)
-            mintick = AL::division * 8;
+      if (mintick <= MScore::division / 16)        // minimum duration is 1/64
+            mintick = MScore::division / 16;
+      else if (mintick <= MScore::division / 8)
+            mintick = MScore::division / 8;
+      else if (mintick <= MScore::division / 4)
+            mintick = MScore::division / 4;
+      else if (mintick <= MScore::division / 2)
+            mintick = MScore::division / 2;
+      else if (mintick <= MScore::division)
+            mintick = MScore::division;
+      else if (mintick <= MScore::division * 2)
+            mintick = MScore::division * 2;
+      else if (mintick <= MScore::division * 4)
+            mintick = MScore::division * 4;
+      else if (mintick <= MScore::division * 8)
+            mintick = MScore::division * 8;
       int raster;
-      if (mintick > AL::division)
-            raster = AL::division;
+      if (mintick > MScore::division)
+            raster = MScore::division;
       else
             raster = mintick;
 

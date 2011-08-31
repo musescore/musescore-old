@@ -215,7 +215,6 @@ if (MINGW)
 
    target_link_libraries(mscore
       libmscore
-      al
       awl
       mstyle
       diff_match_patch
@@ -289,7 +288,6 @@ else (MINGW)
       ${PORTAUDIO_LIB}
       diff_match_patch
       libmscore
-      al
       awl
       mstyle
       msynth

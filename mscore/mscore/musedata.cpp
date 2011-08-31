@@ -36,7 +36,7 @@
 #include "libmscore/dynamic.h"
 #include "libmscore/lyrics.h"
 #include "libmscore/articulation.h"
-#include "al/sig.h"
+#include "libmscore/sig.h"
 #include "libmscore/measure.h"
 #include "libmscore/timesig.h"
 #include "libmscore/segment.h"
@@ -222,7 +222,7 @@ void MuseData::readNote(Part* part, const QString& s)
       if (pitch > 127)
             pitch = 127;
       int ticks = s.mid(5, 3).toInt();
-      ticks     = (ticks * AL::division + _division/2) / _division;
+      ticks     = (ticks * MScore::division + _division/2) / _division;
       int tick  = curTick;
       curTick  += ticks;
 
@@ -440,7 +440,7 @@ QString MuseData::diacritical(QString s)
 void MuseData::readRest(Part* part, const QString& s)
       {
       int ticks = s.mid(5, 3).toInt();
-      ticks     = (ticks * AL::division + _division/2) / _division;
+      ticks     = (ticks * MScore::division + _division/2) / _division;
 
       int tick  = curTick;
       curTick  += ticks;
@@ -484,7 +484,7 @@ void MuseData::readRest(Part* part, const QString& s)
 void MuseData::readBackup(const QString& s)
       {
       int ticks = s.mid(5, 3).toInt();
-      ticks     = (ticks * AL::division + _division/2) / _division;
+      ticks     = (ticks * MScore::division + _division/2) / _division;
       if (s[0] == 'b')
             curTick  -= ticks;
       else

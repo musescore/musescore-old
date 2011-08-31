@@ -22,9 +22,6 @@
 #include "xml.h"
 #include "sig.h"
 #include "tempo.h"
-#include "al.h"
-
-namespace AL {
 
 //---------------------------------------------------------
 //   Pos
@@ -94,7 +91,7 @@ Pos::Pos(TempoMap* tl, TimeSigMap* sl, int min, int sec, int frame, int subframe
       double time = min * 60.0 + sec;
 
       double f = frame + subframe/100.0;
-      switch (mtcType) {
+      switch (MScore::mtcType) {
             case 0:     // 24 frames sec
                   time += f * 1.0/24.0;
                   break;
@@ -109,7 +106,7 @@ Pos::Pos(TempoMap* tl, TimeSigMap* sl, int min, int sec, int frame, int subframe
                   break;
             }
       _type  = FRAMES;
-      _frame = lrint(time * sampleRate);
+      _frame = lrint(time * MScore::sampleRate);
       sn     = -1;
       _valid = true;
       }
@@ -125,11 +122,11 @@ void Pos::setType(TType t)
 
       if (_type == TICKS) {
             // convert from ticks to frames
-            _frame = tempo->tick2time(_tick, _frame, &sn) * sampleRate;
+            _frame = tempo->tick2time(_tick, _frame, &sn) * MScore::sampleRate;
             }
       else {
             // convert from frames to ticks
-            _tick = tempo->time2tick(_frame / sampleRate, _tick, &sn);
+            _tick = tempo->time2tick(_frame / MScore::sampleRate, _tick, &sn);
             }
       _type = t;
       }
@@ -269,7 +266,7 @@ bool Pos::operator!=(const Pos& s) const
 unsigned Pos::tick() const
       {
       if (_type == FRAMES)
-            _tick = tempo->time2tick(_frame / sampleRate, _tick, &sn);
+            _tick = tempo->time2tick(_frame / MScore::sampleRate, _tick, &sn);
       return _tick;
       }
 
@@ -280,7 +277,7 @@ unsigned Pos::tick() const
 unsigned Pos::frame() const
       {
 	if (_type == TICKS)
-            _frame = tempo->tick2time(_tick, _frame, &sn) * sampleRate;
+            _frame = tempo->tick2time(_tick, _frame, &sn) * MScore::sampleRate;
       return _frame;
       }
 
@@ -293,7 +290,7 @@ void Pos::setTick(unsigned pos)
       _tick = pos;
       sn    = -1;
       if (_type == FRAMES)
-            _frame = tempo->tick2time(pos, &sn) * sampleRate;
+            _frame = tempo->tick2time(pos, &sn) * MScore::sampleRate;
       _valid = true;
       }
 
@@ -306,7 +303,7 @@ void Pos::setFrame(unsigned pos)
       _frame = pos;
       sn     = -1;
       if (_type == TICKS)
-            _tick = tempo->time2tick(pos/sampleRate, &sn);
+            _tick = tempo->time2tick(pos/MScore::sampleRate, &sn);
       _valid = true;
       }
 
@@ -445,7 +442,7 @@ void PosLen::setLenTick(unsigned len)
       _lenTick = len;
       sn       = -1;
       if (type() == FRAMES)
-            _lenFrame = tempo->tick2time(len, &sn) * sampleRate;
+            _lenFrame = tempo->tick2time(len, &sn) * MScore::sampleRate;
       else
             _lenTick = len;
       }
@@ -458,7 +455,7 @@ void PosLen::setLenFrame(unsigned len)
       {
       sn      = -1;
       if (type() == TICKS)
-            _lenTick = tempo->time2tick(len/sampleRate, &sn);
+            _lenTick = tempo->time2tick(len/MScore::sampleRate, &sn);
       else
             _lenFrame = len;
       }
@@ -470,7 +467,7 @@ void PosLen::setLenFrame(unsigned len)
 unsigned PosLen::lenTick() const
       {
       if (type() == FRAMES)
-            _lenTick = tempo->time2tick(_lenFrame/sampleRate, _lenTick, &sn);
+            _lenTick = tempo->time2tick(_lenFrame/MScore::sampleRate, _lenTick, &sn);
       return _lenTick;
       }
 
@@ -481,7 +478,7 @@ unsigned PosLen::lenTick() const
 unsigned PosLen::lenFrame() const
       {
       if (type() == TICKS)
-            _lenFrame = tempo->tick2time(_lenTick, _lenFrame, &sn) * sampleRate;
+            _lenFrame = tempo->tick2time(_lenTick, _lenFrame, &sn) * MScore::sampleRate;
       return _lenFrame;
       }
 
@@ -548,11 +545,11 @@ void Pos::msf(int* min, int* sec, int* fr, int* subFrame) const
       {
       // for further testing:
 
-      double time = double(frame()) / double(sampleRate);
+      double time = double(frame()) / double(MScore::sampleRate);
       *min        = int(time) / 60;
       *sec        = int(time) % 60;
       double rest = time - ((*min) * 60 + (*sec));
-      switch(mtcType) {
+      switch(MScore::mtcType) {
             case 0:     // 24 frames sec
                   rest *= 24;
                   break;
@@ -574,7 +571,7 @@ void Pos::msf(int* min, int* sec, int* fr, int* subFrame) const
 //   timesig
 //---------------------------------------------------------
 
-AL::SigEvent Pos::timesig() const
+SigEvent Pos::timesig() const
       {
       return sig->timesig(tick());
       }
@@ -615,5 +612,4 @@ Pos Pos::downSnaped(int raster) const
       {
       return Pos(tempo, sig, sig->raster1(tick(), raster));
       }
-}     // namespace AL
 

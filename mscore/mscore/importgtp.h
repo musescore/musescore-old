@@ -22,7 +22,7 @@
 #define __IMPORTGTP_H__
 
 #include "libmscore/mscore.h"
-#include "al/fraction.h"
+#include "libmscore/fraction.h"
 
 class Score;
 class Chord;

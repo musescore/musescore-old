@@ -37,7 +37,7 @@
 #include "stafftype.h"
 #include "omr/omr.h"
 #include "omr/omrpage.h"
-#include "al/sig.h"
+#include "sig.h"
 #include "undo.h"
 
 //---------------------------------------------------------
@@ -71,7 +71,7 @@ void Score::write(Xml& xml)
 
       if (pageNumberOffset())
             xml.tag("page-offset", pageNumberOffset());
-      xml.tag("Division", AL::division);
+      xml.tag("Division", MScore::division);
       xml.curTrack = -1;
 
       _style.save(xml, true);      // save only differences to buildin style
@@ -155,7 +155,7 @@ void Score::readStaff(QDomElement e)
                         measure->setTick(curTick);
                         add(measure);
                         if (_mscVersion < 115) {
-                              const AL::SigEvent& ev = sigmap()->timesig(measure->tick());
+                              const SigEvent& ev = sigmap()->timesig(measure->tick());
                               measure->setLen(ev.timesig());
                               measure->setTimesig(ev.nominal());
                               }
@@ -1162,7 +1162,7 @@ bool Score::read(QDomElement dScore)
 
       searchSelectedElements();
 
-      _fileDivision = AL::division;
+      _fileDivision = MScore::division;
 
       //
       //    sanity check for barLineSpan
@@ -1209,6 +1209,7 @@ bool Score::read(QDomElement dScore)
                         }
                   }
             }
+      fixTicks();
       renumberMeasures();
       rebuildMidiMapping();
       updateChannel();

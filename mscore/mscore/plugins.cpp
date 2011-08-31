@@ -351,7 +351,7 @@ ScriptEngine::ScriptEngine()
       globalObject().setProperty("PageFormat",create_PageFormat_class(this),    QScriptValue::SkipInEnumeration);
 
       globalObject().setProperty("mscore",              newQObject(mscore));
-      globalObject().setProperty("division",            newVariant(AL::division));
+      globalObject().setProperty("division",            newVariant(MScore::division));
       globalObject().setProperty("mscoreVersion",       newVariant(version()));
       globalObject().setProperty("mscoreMajorVersion",  newVariant(majorVersion()));
       globalObject().setProperty("mscoreMinorVersion",  newVariant(minorVersion()));

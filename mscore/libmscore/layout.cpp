@@ -13,7 +13,7 @@
 
 #include <fenv.h>
 #include "page.h"
-#include "al/sig.h"
+#include "sig.h"
 #include "key.h"
 #include "clef.h"
 #include "score.h"

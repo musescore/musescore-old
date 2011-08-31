@@ -30,7 +30,7 @@
 #include "musescore.h"
 #include "edittempo.h"
 #include "libmscore/select.h"
-#include "al/tempo.h"
+#include "libmscore/tempo.h"
 #include "libmscore/segment.h"
 #include "libmscore/undo.h"
 #include "icons.h"

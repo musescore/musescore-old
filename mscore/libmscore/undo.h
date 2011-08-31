@@ -21,8 +21,8 @@
 
 #include "spatium.h"
 #include "mscore.h"
-#include "al/sig.h"
-#include "al/tempo.h"
+#include "sig.h"
+#include "tempo.h"
 #include "input.h"
 #include "style.h"
 #include "key.h"

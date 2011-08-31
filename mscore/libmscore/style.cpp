@@ -380,7 +380,7 @@ StyleData::StyleData()
             StyleVal(ST_beamMinSlope, qreal(0.05)),
 
             StyleVal(ST_beamMaxSlope,         qreal(0.2)),
-            StyleVal(ST_maxBeamTicks,         AL::division),
+            StyleVal(ST_maxBeamTicks,         MScore::division),
             StyleVal(ST_dotNoteDistance,      Spatium(0.35)),
             StyleVal(ST_dotRestDistance,      Spatium(0.25)),
             StyleVal(ST_dotDotDistance,       Spatium(0.5)),
