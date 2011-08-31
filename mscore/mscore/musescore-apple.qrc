@@ -56,6 +56,7 @@
       <file>data/icons/exit.svg</file>
       <file>data/icons/viewmag.svg</file>
       <file>data/icons/repeat.svg</file>
+      <file>data/icons/pan.svg</file>
       <file>data/icons/noteentry.svg</file>
       <file>data/icons/grace4.svg</file>
       <file>data/icons/grace16.svg</file>
@@ -173,6 +174,7 @@
       <file>data/icons-dark/exit.svg</file>
       <file>data/icons-dark/viewmag.svg</file>
       <file>data/icons-dark/repeat.svg</file>
+      <file>data/icons-dark/pan.svg</file>
       <file>data/icons-dark/noteentry.svg</file>
       <file>data/icons-dark/grace4.svg</file>
       <file>data/icons-dark/grace16.svg</file>
