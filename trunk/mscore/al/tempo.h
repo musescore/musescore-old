@@ -32,9 +32,9 @@ enum TempoType { TEMPO_FIX, TEMPO_RAMP };
 
 struct TEvent {
       TempoType type;
-      double tempo;     // beats per second
-      double pause;     // pause in seconds
-      double time;      // precomputed time for tick in sec
+      qreal tempo;     // beats per second
+      qreal pause;     // pause in seconds
+      qreal time;      // precomputed time for tick in sec
 
       int read(QDomElement);
       void write(Xml&, int) const;
@@ -47,7 +47,7 @@ struct TEvent {
             pause = e.pause;
             time  = e.time;
             }
-      TEvent(double t, double p = 0.0) {
+      TEvent(qreal t, qreal p = 0.0) {
             tempo = t;
             pause = p;
             time  = 0.0;
@@ -66,13 +66,13 @@ typedef std::map<int, TEvent>::const_reverse_iterator criTEvent;
 
 class TempoMap : public std::map<int, TEvent> {
       int _tempoSN;           // serial no to track tempo changes
-      double _tempo;          // tempo if not using tempo list (beats per second)
+      qreal _tempo;          // tempo if not using tempo list (beats per second)
       int _relTempo;          // rel. tempo (100 == 1.0)
 
       void normalize();
-      void add(int tick, double);
-      void addP(int tick, double);
-      void change(int tick, double);
+      void add(int tick, qreal);
+      void addP(int tick, qreal);
+      void change(int tick, qreal);
       void del(iTEvent);
       void del(int tick);
       void add(int t, const TEvent&);
@@ -85,19 +85,19 @@ class TempoMap : public std::map<int, TEvent> {
       void write(Xml&) const;
       void dump() const;
 
-      double tempo(int tick) const;
+      qreal tempo(int tick) const;
 
-      double tick2time(int tick, int* sn = 0) const;
-      double tick2timeLC(int tick, int* sn) const;
-      double tick2time(int tick, double time, int* sn) const;
-      int time2tick(double time, int* sn = 0) const;
-      int time2tick(double time, int tick, int* sn) const;
+      qreal tick2time(int tick, int* sn = 0) const;
+      qreal tick2timeLC(int tick, int* sn) const;
+      qreal tick2time(int tick, qreal time, int* sn) const;
+      int time2tick(qreal time, int* sn = 0) const;
+      int time2tick(qreal time, int tick, int* sn) const;
       int tempoSN() const { return _tempoSN; }
-      void addTempo(int t, double);
-      void addPause(int t, double);
+      void addTempo(int t, qreal);
+      void addPause(int t, qreal);
       void addTempo(int tick, const TEvent& ev);
       void delTempo(int tick);
-      void changeTempo(int tick, double newTempo);
+      void changeTempo(int tick, qreal newTempo);
       int tick2samples(int tick);
       int samples2tick(int samples);
       void setRelTempo(int val);

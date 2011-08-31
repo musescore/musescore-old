@@ -33,8 +33,8 @@ class TempoText : public Text  {
       virtual void read(QDomElement);
       Segment* segment() const   { return (Segment*)parent(); }
       Measure* measure() const   { return (Measure*)parent()->parent(); }
-      qreal tempo() const       { return _tempo;      }
-      void setTempo(qreal v)    { _tempo = v;         }
+      qreal tempo() const        { return _tempo;      }
+      void setTempo(qreal v)     { _tempo = v;         }
       bool followText() const    { return _followText; }
       void setFollowText(bool v) { _followText = v;    }
       virtual void textChanged();

@@ -52,10 +52,8 @@ void TempoText::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
-            if (tag == "tempo"){
+            if (tag == "tempo")
                   _tempo = e.text().toDouble();
-                  //Don't need to add to tempo since tempo map is read at the beginning of the file.
-                  }
             else if (tag == "followText")
                   _followText = e.text().toInt();
             else if (!Text::readProperties(e))
@@ -71,6 +69,7 @@ void TempoText::read(QDomElement e)
                   styleChanged();
                   }
             }
+      score()->changeTempo(segment(), _tempo);
       }
 
 //---------------------------------------------------------

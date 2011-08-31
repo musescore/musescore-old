@@ -3312,4 +3312,16 @@ void Score::addLyrics(int tick, int staffIdx, const QString& txt)
             }
       }
 
+//---------------------------------------------------------
+//   changeTempo
+//    convenience function to access TempoMap
+//---------------------------------------------------------
+
+void Score::changeTempo(Segment* segment, qreal tempo)
+      {
+      _tempomap->changeTempo(segment->tick(), tempo);
+      _playlistDirty = true;
+printf("Score: change tempo %f\n", tempo);
+      }
+
 
