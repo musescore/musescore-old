@@ -336,6 +336,8 @@ void Navigator::paintEvent(QPaintEvent* ev)
       QRect r(ev->rect());
 
       p.fillRect(r, Qt::gray);
+      if (_cv == 0)
+            return;
       npcl.clear();
       for (int i = 0; i < pcl.size(); ++i) {
             const PageCache& pc = pcl[i];
