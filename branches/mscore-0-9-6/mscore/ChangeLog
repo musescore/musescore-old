@@ -1,3 +1,5 @@
+31.aug (lv)
+      - added function to determine measure length, in preparation for fixing #12276
 30.aug (lv)
       - refactored tick handling in MusicXML import, in preparation for fixing #12276
        (la)
