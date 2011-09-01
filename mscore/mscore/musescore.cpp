@@ -257,7 +257,7 @@ void MuseScore::closeEvent(QCloseEvent* ev)
       settings.setValue("lastSaveCopyDirectory", lastSaveCopyDirectory);
       settings.setValue("lastSaveDirectory", lastSaveDirectory);
 
-      if(playPanel)
+      if (playPanel)
             preferences.playPanelPos = playPanel->pos();
 
       if (synthControl)
@@ -4208,8 +4208,11 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             if (iledit)
                   iledit->updateAll(cs);
             }
-      else if (cmd == "rewind")
+      else if (cmd == "rewind") {
             seq->rewindStart();
+            if (playPanel)
+                  playPanel->heartBeat(0, 0);
+            }
       else if (cmd == "play-next-measure")
             seq->nextMeasure();
       else if (cmd == "play-next-chord")
