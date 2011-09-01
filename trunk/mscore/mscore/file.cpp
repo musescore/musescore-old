@@ -570,7 +570,7 @@ void MuseScore::newFile()
             tt->setTrack(0);
             Segment* seg = score->firstMeasure()->first(SegChordRest);
             seg->add(tt);
-            score->tempomap()->changeTempo(0, tempo);
+            score->setTempo(0, tempo);
             }
       if (!copyright.isEmpty())
             score->setMetaTag("copyright", copyright);

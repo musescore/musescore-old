@@ -268,9 +268,6 @@ void Chord::add(Element* e)
                         }
                   }
                   break;
-            case ARTICULATION:
-                  articulations.push_back(static_cast<Articulation*>(e));
-                  break;
             case ARPEGGIO:
                   _arpeggio = static_cast<Arpeggio*>(e);
                   break;
@@ -336,10 +333,6 @@ void Chord::remove(Element* e)
                   }
                   break;
 
-            case ARTICULATION:
-                  if (!articulations.removeOne(static_cast<Articulation*>(e)))
-                        printf("Chord::remove(): articulation not found\n");
-                  break;
             case ARPEGGIO:
                   _arpeggio = 0;
                   break;

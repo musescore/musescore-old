@@ -44,7 +44,6 @@ target_link_libraries(mscoreplay
       /home/ws/qt/qt/lib/libQtDeclarative.so
       libmscore
       zarchive
-      al
       m-msynth
       portaudio
       )

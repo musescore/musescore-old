@@ -943,6 +943,7 @@ void Measure::add(Element* el)
                               break;
                         case LAYOUT_BREAK_SECTION:
                               _sectionBreak = static_cast<LayoutBreak*>(el);
+                              score()->setPause(tick() + ticks(), _sectionBreak->pause());
                               break;
                         }
                   _el.push_back(el);
@@ -1010,7 +1011,7 @@ void Measure::remove(Element* el)
                               break;
                         case LAYOUT_BREAK_SECTION:
                               _sectionBreak = 0;
-                              score()->tempomap()->addPause(tick() + ticks(), 0.0);
+                              score()->setPause(tick() + ticks(), 0.0);
                               break;
                         }
                   if (!_el.remove(el))

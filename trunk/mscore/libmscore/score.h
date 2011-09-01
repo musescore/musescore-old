@@ -672,8 +672,11 @@ class Score {
       TempoMap* tempomap() const;
       TimeSigMap* sigmap() const;
 
-      void changeTempo(Segment*, qreal);
-      void changeTempo(int tick, qreal bps);
+      void setTempo(Segment*, qreal);
+      void setTempo(int tick, qreal bps);
+      void removeTempo(int tick);
+      void setPause(int tick, qreal seconds);
+      qreal tempo(int tick) const;
 
       qreal swingRatio()                            { return _swingRatio;}
       void setSwingRatio(qreal d)                   { _swingRatio = d;}

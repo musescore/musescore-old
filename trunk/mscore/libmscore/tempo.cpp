@@ -1,25 +1,45 @@
 //=============================================================================
 //  MuseScore
-//  Linux Music Score Editor
+//  Music Composition & Notation
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License version 2.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with this program; if not, write to the Free Software
-//  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+//  it under the terms of the GNU General Public License version 2
+//  as published by the Free Software Foundation and appearing in
+//  the file LICENCE.GPL
 //=============================================================================
 
 #include "tempo.h"
 #include "xml.h"
+
+//---------------------------------------------------------
+//   TEvent
+//---------------------------------------------------------
+
+TEvent::TEvent()
+      {
+      type     = TEMPO_INVALID;
+      tempo    = 0.0;
+      pause    = 0.0;
+      }
+
+TEvent::TEvent(const TEvent& e)
+      {
+      type  = e.type;
+      tempo = e.tempo;
+      pause = e.pause;
+      time  = e.time;
+      }
+
+TEvent::TEvent(qreal t, qreal p, TempoType tp)
+      {
+      type  = tp;
+      tempo = t;
+      pause = p;
+      time  = 0.0;
+      }
 
 //---------------------------------------------------------
 //   TempoMap
@@ -27,44 +47,40 @@
 
 TempoMap::TempoMap()
       {
-      _tempo    = 2.0;
+      _tempo    = 2.0;        // default fixed tempo in beat per second
       _tempoSN  = 1;
-      _relTempo = 100;
+      _relTempo = 1.0;
       }
 
 //---------------------------------------------------------
-//   addPause
+//   setPause
 //---------------------------------------------------------
 
-void TempoMap::addP(int tick, qreal pause)
+void TempoMap::setPause(int tick, qreal pause)
       {
       iTEvent e = find(tick);
       if (e != end())
             e->second.pause = pause;
       else {
             qreal t = tempo(tick);
-            insert(std::pair<const int, TEvent> (tick, TEvent(t, pause)));
+            insert(std::pair<const int, TEvent> (tick, TEvent(t, pause, TEMPO_FIX)));
             }
       normalize();
       }
 
 //---------------------------------------------------------
-//   add
+//   setTempo
 //---------------------------------------------------------
 
-void TempoMap::add(int tick, qreal tempo)
+void TempoMap::setTempo(int tick, qreal tempo)
       {
       iTEvent e = find(tick);
-      if (e != end())
+      if (e != end()) {
             e->second.tempo = tempo;
+            e->second.type = TEMPO_FIX;
+            }
       else
-            insert(std::pair<const int, TEvent> (tick, TEvent(tempo)));
-      normalize();
-      }
-
-void TempoMap::add(int tick, const TEvent& ev)
-      {
-      (*this)[tick] = ev;
+            insert(std::pair<const int, TEvent> (tick, TEvent(tempo, 0.0, TEMPO_FIX)));
       normalize();
       }
 
@@ -75,11 +91,11 @@ void TempoMap::add(int tick, const TEvent& ev)
 void TempoMap::normalize()
       {
       qreal time  = 0;
-      int tick     = 0;
+      int tick    = 0;
       qreal tempo = 2.0;
       for (iTEvent e = begin(); e != end(); ++e) {
             int delta = e->first - tick;
-            time += qreal(delta) / (MScore::division * tempo * _relTempo * 0.01);
+            time += qreal(delta) / (MScore::division * tempo * _relTempo);
             time += e->second.pause;
             e->second.time = time;
             tick  = e->first;
@@ -132,27 +148,6 @@ qreal TempoMap::tempo(int tick) const
       }
 
 //---------------------------------------------------------
-//   tempo
-//---------------------------------------------------------
-
-TEvent TempoMap::getTempo(int tick) const
-      {
-      if (empty())
-            return TEvent(2.0);
-      ciTEvent i = lower_bound(tick);
-      if (i == end()) {
-            --i;
-            return i->second;
-            }
-      if (i->first == tick)
-            return i->second;
-      if (i == begin())
-            return TEvent(2.0);
-      --i;
-      return i->second;
-      }
-
-//---------------------------------------------------------
 //   del
 //---------------------------------------------------------
 
@@ -163,63 +158,18 @@ void TempoMap::del(int tick)
             printf("TempoMap::del event at (%d): not found\n", tick);
             return;
             }
-      del(e);
-      }
-
-void TempoMap::del(iTEvent e)
-      {
       erase(e);
       normalize();
-      }
-
-//---------------------------------------------------------
-//   change
-//---------------------------------------------------------
-
-void TempoMap::change(int tick, qreal newTempo)
-      {
-      add(tick, newTempo);
-#if 0
-      iTEvent e = find(tick);
-      e->second.tempo = newTempo;
-      normalize();
-#endif
       }
 
 //---------------------------------------------------------
 //   setRelTempo
 //---------------------------------------------------------
 
-void TempoMap::setRelTempo(int val)
+void TempoMap::setRelTempo(qreal val)
       {
       _relTempo = val;
       normalize();
-      }
-
-//---------------------------------------------------------
-//   addPause
-//---------------------------------------------------------
-
-void TempoMap::addPause(int t, qreal pause)
-      {
-      addP(t, pause);
-      ++_tempoSN;
-      }
-
-//---------------------------------------------------------
-//   addTempo
-//---------------------------------------------------------
-
-void TempoMap::addTempo(int t, qreal tempo)
-      {
-      add(t, tempo);
-      ++_tempoSN;
-      }
-
-void TempoMap::addTempo(int tick, const TEvent& ev)
-      {
-      add(tick, ev);
-      ++_tempoSN;
       }
 
 //---------------------------------------------------------
@@ -229,16 +179,6 @@ void TempoMap::addTempo(int tick, const TEvent& ev)
 void TempoMap::delTempo(int tick)
       {
       del(tick);
-      ++_tempoSN;
-      }
-
-//---------------------------------------------------------
-//   changeTempo
-//---------------------------------------------------------
-
-void TempoMap::changeTempo(int tick, qreal newTempo)
-      {
-      change(tick, newTempo);
       ++_tempoSN;
       }
 
@@ -299,7 +239,7 @@ qreal TempoMap::tick2time(int tick, int* sn) const
             printf("TempoMap: empty\n");
       if (sn)
             *sn = _tempoSN;
-      time += delta / (MScore::division * tempo * _relTempo * 0.01);
+      time += delta / (MScore::division * tempo * _relTempo);
       return time;
       }
 
@@ -319,114 +259,13 @@ int TempoMap::time2tick(qreal time, int* sn) const
             if (e->second.time >= time)
                   break;
             delta = e->second.time;
-            tempo = e->second.tempo;
             tick  = e->first;
+            tempo = e->second.tempo;
             }
       delta = time - delta;
-      tick += lrint(delta * _relTempo * 0.01 * MScore::division * tempo);
+      tick += lrint(delta * _relTempo * MScore::division * tempo);
       if (sn)
             *sn = _tempoSN;
       return tick;
       }
-
-//---------------------------------------------------------
-//   TempoMap::write
-//---------------------------------------------------------
-
-void TempoMap::write(Xml& xml) const
-      {
-      xml.stag(QString("tempolist fix=\"%1\"").arg(_tempo));
-      if (_relTempo != 100)
-            xml.tag("relTempo", _relTempo);
-      for (ciTEvent i = begin(); i != end(); ++i)
-            i->second.write(xml, i->first);
-      xml.etag();
-      }
-
-//---------------------------------------------------------
-//   TempoMap::read
-//---------------------------------------------------------
-
-void TempoMap::read(QDomElement e, int sourceDivision)
-      {
-      _tempo = e.attribute("fix","2.0").toDouble();
-
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (e.tagName() == "tempo") {
-                  TEvent t;
-                  unsigned tick = t.read(e);
-                  tick = (tick * MScore::division + sourceDivision/2) / sourceDivision;
-                  iTEvent pos = find(tick);
-                  if (pos != end())
-                        erase(pos);
-                  insert(std::pair<const int, TEvent> (tick, t));
-                  }
-            else if (e.tagName() == "relTempo")
-                  _relTempo = e.text().toInt();
-            else
-                  domError(e);
-            }
-      normalize();
-      }
-
-//---------------------------------------------------------
-//   TEvent::write
-//---------------------------------------------------------
-
-void TEvent::write(Xml& xml, int at) const
-      {
-      xml.tag(QString("tempo tick=\"%1\"").arg(at), QVariant(tempo));
-      }
-
-//---------------------------------------------------------
-//   TEvent::read
-//---------------------------------------------------------
-
-int TEvent::read(QDomElement e)
-      {
-      int at = e.attribute("tick", "0").toInt();
-      tempo  = e.text().toDouble();
-      return at;
-      }
-
-//---------------------------------------------------------
-//   remove
-//---------------------------------------------------------
-
-void TempoMap::removeTime(int tick, int len)
-      {
-      TempoMap tmp;
-      for (ciTEvent i = begin(); i != end(); ++i) {
-            if (i->first >= tick) {
-                  if (i->first >= tick + len)
-                        tmp.add(i->first - len, i->second);
-                  else
-                        printf("remove tempo event\n");
-                  }
-            else
-                  tmp.add(i->first, i->second);
-            }
-      std::map<int,TEvent>::clear();
-      insert(tmp.begin(), tmp.end());
-      normalize();
-      }
-
-//---------------------------------------------------------
-//   insert
-//---------------------------------------------------------
-
-void TempoMap::insertTime(int tick, int len)
-      {
-      TempoMap tmp;
-      for (ciTEvent i = begin(); i != end(); ++i) {
-            if (i->first >= tick)
-                  tmp.add(i->first + len, i->second);
-            else
-                  tmp.add(i->first, i->second);
-            }
-      std::map<int,TEvent>::clear();
-      insert(tmp.begin(), tmp.end());
-      normalize();
-      }
-
 

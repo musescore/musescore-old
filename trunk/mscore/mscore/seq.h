@@ -49,6 +49,7 @@ enum { SEQ_NO_MESSAGE, SEQ_TEMPO_CHANGE, SEQ_PLAY, SEQ_SEEK,
 struct SeqMsg {
       int id;
       int data;
+      qreal rdata;
       Event event;
       };
 

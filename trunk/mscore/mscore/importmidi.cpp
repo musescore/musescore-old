@@ -668,7 +668,8 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, const Event& mm)
                   {
                   unsigned tempo = data[2] + (data[1] << 8) + (data[0] <<16);
                   double t = 1000000.0 / double(tempo);
-                  cs->tempomap()->addTempo(tick, t);
+                  cs->setTempo(tick, t);
+                  // TODO: create TempoText
                   }
                   break;
 

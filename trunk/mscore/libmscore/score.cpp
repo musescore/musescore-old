@@ -444,6 +444,7 @@ void Score::addMeasure(MeasureBase* m, MeasureBase* pos)
 
 void Score::insertTime(int tick, int len)
       {
+#if 0
       if (len < 0) {
             //
             // remove time
@@ -462,6 +463,7 @@ void Score::insertTime(int tick, int len)
                   staff->keymap()->insertTime(tick, len);
             }
       addLayoutFlags(LAYOUT_FIX_TICKS);
+#endif
       }
 
 //---------------------------------------------------------
@@ -506,7 +508,7 @@ void Score::fixTicks()
                         foreach(Element* e, s->annotations()) {
                               if (e->type() == TEMPO_TEXT) {
                                     const TempoText* tt = static_cast<const TempoText*>(e);
-                                    changeTempo(tt->segment(), tt->tempo());
+                                    setTempo(tt->segment(), tt->tempo());
                                     }
                               }
                         }
@@ -526,7 +528,7 @@ void Score::fixTicks()
                   //  implement section break rest
                   //
                   if (m->sectionBreak())
-                        tempomap()->addPause(m->tick() + m->ticks(), m->pause());
+                        setPause(m->tick() + m->ticks(), m->pause());
 
                   //
                   // implement fermata as a tempo change
@@ -535,38 +537,22 @@ void Score::fixTicks()
 
                   for (Segment* s = m->first(st); s; s = s->next(st)) {
                         if (s->subtype() == SegBreath) {
-                              tempomap()->addPause(s->tick(), .1);
+                              setPause(s->tick(), .1);
                               continue;
                               }
+                        qreal stretch = -1.0;
                         foreach(Element* e, s->elist()) {
                               if (!e)
                                     continue;
                               ChordRest* cr = static_cast<ChordRest*>(e);
-                              qreal stretch = -1.0;
-                              foreach(Articulation* a, *cr->getArticulations()) {
-                                    switch(a->subtype()) {
-                                          case Articulation_Shortfermata:
-                                                stretch = 1.5;
-                                                break;
-                                          case Articulation_Fermata:
-                                                stretch = 2.0;
-                                                break;
-                                          case Articulation_Longfermata:
-                                                stretch = 3.0;
-                                                break;
-                                          case Articulation_Verylongfermata:
-                                                stretch = 4.0;
-                                                break;
-                                          default:
-                                                break;
-                                          }
-                                    }
+                              foreach(Articulation* a, *cr->getArticulations())
+                                    stretch = qMax(a->timeStretch(), stretch);
                               if (stretch > 0.0) {
                                     qreal otempo = tempomap()->tempo(cr->tick());
                                     qreal ntempo = otempo / stretch;
-                                    changeTempo(cr->tick(), ntempo);
-                                    changeTempo(cr->tick() + cr->actualTicks(), otempo);
-                                    break;      // do not consider more staves/voices
+                                    setTempo(cr->tick(), ntempo);
+                                    setTempo(cr->tick() + cr->actualTicks(), otempo);
+                                    break;
                                     }
                               }
                         }
@@ -1504,8 +1490,7 @@ void Score::addElement(Element* element)
             case TEMPO_TEXT:
                   {
                   TempoText* tt = static_cast<TempoText*>(element);
-                  int tick = tt->segment()->tick();
-                  _tempomap->addTempo(tick, TEvent(tt->tempo()));
+                  setTempo(tt->segment(), tt->tempo());
                   }
                   break;
             case INSTRUMENT_CHANGE:
@@ -1630,7 +1615,6 @@ void Score::removeElement(Element* element)
                   Staff*  staff = element->staff();
                   staff->removeKey(ks->segment()->tick());
                   }
-//                  element->staff()->setUpdateKeymap(true);
                   break;
             case TEMPO_TEXT:
                   {
@@ -3313,19 +3297,47 @@ void Score::addLyrics(int tick, int staffIdx, const QString& txt)
       }
 
 //---------------------------------------------------------
-//   changeTempo
+//   setTempo
 //    convenience function to access TempoMap
 //---------------------------------------------------------
 
-void Score::changeTempo(Segment* segment, qreal tempo)
+void Score::setTempo(Segment* segment, qreal tempo)
       {
-      changeTempo(segment->tick(), tempo);
+      setTempo(segment->tick(), tempo);
       }
 
-void Score::changeTempo(int tick, qreal tempo)
+void Score::setTempo(int tick, qreal tempo)
       {
-      _tempomap->changeTempo(tick, tempo);
+      _tempomap->setTempo(tick, tempo);
       _playlistDirty = true;
       }
 
+//---------------------------------------------------------
+//   removeTempo
+//---------------------------------------------------------
+
+void Score::removeTempo(int tick)
+      {
+      _tempomap->delTempo(tick);
+      _playlistDirty = true;
+      }
+
+//---------------------------------------------------------
+//   setPause
+//---------------------------------------------------------
+
+void Score::setPause(int tick, qreal seconds)
+      {
+      _tempomap->setPause(tick, seconds);
+      _playlistDirty = true;
+      }
+
+//---------------------------------------------------------
+//   tempo
+//---------------------------------------------------------
+
+qreal Score::tempo(int tick) const
+      {
+      _tempomap->tempo(tick);
+      }
 

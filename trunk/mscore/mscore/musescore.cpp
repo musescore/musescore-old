@@ -1467,8 +1467,8 @@ void MuseScore::showPlayPanel(bool visible)
                   return;
             playPanel = new PlayPanel(this);
             connect(playPanel, SIGNAL(gainChange(float)),    seq, SLOT(setGain(float)));
-            connect(playPanel, SIGNAL(relTempoChanged(double,int)),seq, SLOT(setRelTempo(double)));
-            connect(playPanel, SIGNAL(posChange(int)),      seq, SLOT(seek(int)));
+            connect(playPanel, SIGNAL(relTempoChanged(double)),seq, SLOT(setRelTempo(double)));
+            connect(playPanel, SIGNAL(posChange(int)),         seq, SLOT(seek(int)));
             connect(playPanel, SIGNAL(closed()),                 SLOT(closePlayPanel()));
             connect(seq,       SIGNAL(gainChanged(float)), playPanel, SLOT(setGain(float)));
 

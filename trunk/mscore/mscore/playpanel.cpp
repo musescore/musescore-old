@@ -51,6 +51,15 @@ PlayPanel::PlayPanel(QWidget* parent)
       }
 
 //---------------------------------------------------------
+//   relTempoChanged
+//---------------------------------------------------------
+
+void PlayPanel::relTempoChanged(double d, int)
+      {
+      emit relTempoChanged(d * .001);
+      }
+
+//---------------------------------------------------------
 //   closeEvent
 //---------------------------------------------------------
 
@@ -81,7 +90,7 @@ void PlayPanel::setScore(Score* s)
       swingStyle->setEnabled(enable);
       if (cs) {
             setTempo(cs->tempomap()->tempo(0));
-            setRelTempo(cs->tempomap()->relTempo());
+            setRelTempo(cs->tempomap()->relTempo() * 100);
             Measure* m = cs->lastMeasure();
             if (m)
                   setEndpos(m ? m->tick() + m->ticks() : 0);
@@ -124,9 +133,9 @@ void PlayPanel::setTempo(double val)
 //   setRelTempo
 //---------------------------------------------------------
 
-void PlayPanel::setRelTempo(int val)
+void PlayPanel::setRelTempo(qreal val)
       {
-      relTempo->setText(QString("%1 %").arg(val, 3));
+      relTempo->setText(QString("%1 %").arg(val * 100.0, 3));
       tempoSlider->setValue(val);
       }
 

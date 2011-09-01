@@ -905,11 +905,8 @@ void OveToMScore::convertSignatures(){
 	int lastTempo = 0;
 	for(it=tempos.begin(); it!=tempos.end(); ++it) {
 		if( it==tempos.begin() || (*it).second != lastTempo ) {
-	        TempoMap* tl = score_->tempomap();
-	        if(tl){
-	        	double tpo = ((double)(*it).second) / 60.0;
-	        	tl->addTempo((*it).first, tpo);
-	        }
+	        double tpo = ((double)(*it).second) / 60.0;
+	        score_->setTempo((*it).first, tpo);
 		}
 
 		lastTempo = (*it).second;
@@ -1288,10 +1285,7 @@ void OveToMScore::convertMeasureMisc(Measure* measure, int part, int staff, int 
 		int absTick = mtt_->getTick(measure->no(), tempoPtr->getTick());
 		double tpo = ((double)tempoPtr->getQuarterTempo())/60.0;
 
-        TempoMap* tl = score_->tempomap();
-        if(tl){
-        	tl->addTempo(absTick, tpo);
-        }
+        score_->setTempo(absTick, tpo);
 
         t->setTempo(tpo);
         t->setText(tempoPtr->getRightText());

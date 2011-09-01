@@ -33,6 +33,7 @@ enum ArticulationAnchor {
       A_BOTTOM_CHORD,   // attribute is placed at bottom of chord
       };
 
+// flags:
 enum { ARTICULATION_SHOW_IN_PITCHED_STAFF = 1, ARTICULATION_SHOW_IN_TABLATURE = 2 };
 
 struct ArticulationInfo {
@@ -42,6 +43,7 @@ struct ArticulationInfo {
       QString description;    // translated name
       int relVelocity;        // add velocity to note/chord in percent
       int relGateTime;        // add to gateTime in percent;
+      qreal timeStretch;      // for fermata
       int flags;
       };
 
@@ -100,6 +102,7 @@ class Articulation : public Element {
       QString channelName() const           { return _channelName; }
       void setChannelName(const QString& s) { _channelName = s;    }
 
+      qreal timeStretch() const;
 
       static QString idx2name(int idx);
       };
