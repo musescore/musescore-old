@@ -1892,8 +1892,6 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   t = new TempoText(score);
                   double tpo = tempo.toDouble()/60.0;
                   ((TempoText*) t)->setTempo(tpo);
-                  TempoMap* tl = score->tempomap();
-                  if(tl) tl->addTempo(tick, tpo);
                   }
             else {
                   t = new Text(score);

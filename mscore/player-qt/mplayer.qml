@@ -18,6 +18,8 @@ import "mobile" as Mobile
 Item {
       id: screen
       property bool inScoreView: false
+      width: 1024
+      height: 768
 
       states: [
             State {

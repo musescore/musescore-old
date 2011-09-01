@@ -754,7 +754,6 @@ Element* ChordRest::drop(const DropData& data)
                   {
                   TempoText* tt = static_cast<TempoText*>(e);
                   tt->setParent(segment());
-                  score()->changeTempo(segment(), tt->tempo());
                   score()->undoAddElement(tt);
                   }
                   break;
@@ -882,7 +881,16 @@ void ChordRest::add(Element* e)
       e->setTrack(track());
       switch(e->type()) {
             case ARTICULATION:
-                  articulations.push_back(static_cast<Articulation*>(e));
+                  {
+                  Articulation* a = static_cast<Articulation*>(e);
+                  articulations.push_back(a);
+                  if (a->timeStretch() > 0.0) {
+                        qreal otempo = score()->tempo(tick());
+                        qreal ntempo = otempo / a->timeStretch();
+                        score()->setTempo(tick(), ntempo);
+                        score()->setTempo(tick() + actualTicks(), otempo);
+                        }
+                  }
                   break;
             case LYRICS:
                   {
@@ -909,8 +917,15 @@ void ChordRest::remove(Element* e)
       {
       switch(e->type()) {
             case ARTICULATION:
-                  if (!articulations.removeOne(static_cast<Articulation*>(e)))
+                  {
+                  Articulation* a = static_cast<Articulation*>(e);
+                  if (!articulations.removeOne(a))
                         printf("ChordRest::remove(): articulation not found\n");
+                  if (a->timeStretch() > 0.0) {
+                        score()->removeTempo(tick());
+                        score()->removeTempo(tick() + actualTicks());
+                        }
+                  }
                   break;
             case LYRICS:
                   {

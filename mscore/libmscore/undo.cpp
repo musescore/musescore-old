@@ -1736,12 +1736,12 @@ void ChangeElement::flip()
             newElement->score()->addLayoutFlags(LAYOUT_FIX_PITCH_VELO);
       else if (newElement->type() == TEMPO_TEXT) {
             TempoText* t = static_cast<TempoText*>(oldElement);
-            score->changeTempo(t->segment(), t->tempo());
+            score->setTempo(t->segment(), t->tempo());
             }
       else if (newElement->type() == LAYOUT_BREAK && newElement->subtype() ==
          LAYOUT_BREAK_SECTION) {
             LayoutBreak* b = static_cast<LayoutBreak*>(newElement);
-            score->tempomap()->addPause(b->measure()->tick()
+            score->tempomap()->setPause(b->measure()->tick()
                + b->measure()->ticks(), b->pause());
             }
       ElementType t = newElement->type();
@@ -2270,7 +2270,7 @@ void EditText::undo()
       text->textChanged();
       if (text->type() == TEMPO_TEXT) {
             TempoText* tt = static_cast<TempoText*>(text);
-            tt->score()->changeTempo(tt->segment(), tt->tempo());
+            tt->score()->setTempo(tt->segment(), tt->tempo());
             }
       }
 
@@ -2281,7 +2281,7 @@ void EditText::redo()
       text->textChanged();
       if (text->type() == TEMPO_TEXT) {
             TempoText* tt = static_cast<TempoText*>(text);
-            tt->score()->changeTempo(tt->segment(), tt->tempo());
+            tt->score()->setTempo(tt->segment(), tt->tempo());
             }
       }
 

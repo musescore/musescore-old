@@ -1160,8 +1160,6 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
 
 void Score::deleteItem(Element* el)
       {
-printf("deleteItem <%s>\n", el->name());
-
       switch(el->type()) {
             case INSTRUMENT_NAME: {
                   Part* part = el->staff()->part();

@@ -1,3 +1,5 @@
+1.sep (ws)
+      - fixes for tempo, section break pause, fermata
 31.aug (ws)
       - patch #12331: Option to not pan the score while playing (from Sure)
       - moved al library into libmscore

@@ -529,13 +529,13 @@ void Seq::processMessages()
                         {
                         if (playTime != 0) {
                               int tick = cs->utime2utick(playTime);
-                              cs->tempomap()->setRelTempo(msg.data);
+                              cs->tempomap()->setRelTempo(msg.rdata);
                               cs->repeatList()->update();
                               playTime = cs->utick2utime(tick);
                               startTime = curTime() - playTime;
                               }
                         else
-                              cs->tempomap()->setRelTempo(msg.data);
+                              cs->tempomap()->setRelTempo(msg.rdata);
                         }
                         break;
                   case SEQ_PLAY:
@@ -799,21 +799,22 @@ void Seq::processToGuiMessages()
 
 //---------------------------------------------------------
 //   setRelTempo
+//    relTempo = 1.0 = normal tempo
 //---------------------------------------------------------
 
 void Seq::setRelTempo(double relTempo)
       {
       SeqMsg msg;
-      msg.data = lrint(relTempo);
-      msg.id   = SEQ_TEMPO_CHANGE;
+      msg.rdata = relTempo;
+      msg.id    = SEQ_TEMPO_CHANGE;
       guiToSeq(msg);
 
-      double t = cs->tempomap()->tempo(playPos.key()) * relTempo * 0.01;
+      double t = cs->tempomap()->tempo(playPos.key()) * relTempo;
 
       PlayPanel* pp = mscore->getPlayPanel();
       if (pp) {
             pp->setTempo(t);
-            pp->setRelTempo(lrint(relTempo));
+            pp->setRelTempo(relTempo);
             }
       }
 

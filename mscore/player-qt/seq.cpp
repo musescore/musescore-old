@@ -31,7 +31,7 @@
 #include "libmscore/segment.h"
 #include "libmscore/measure.h"
 #include "libmscore/system.h"
-#include "al/tempo.h"
+#include "libmscore/tempo.h"
 #include "pa.h"
 
 Seq* seq;
@@ -197,16 +197,16 @@ void Seq::process(unsigned n, float* p)
       processMessages();
       if (state == TRANSPORT_PLAY) {
             unsigned framePos = 0;
-            qreal endTime = playTime + qreal(frames)/qreal(AL::sampleRate);
+            qreal endTime = playTime + qreal(frames)/qreal(MScore::sampleRate);
             for (; playPos != events.constEnd(); ++playPos) {
                   qreal f = cs->utick2utime(playPos.key());
                   if (f >= endTime)
                         break;
-                  int n = lrint((f - playTime) * AL::sampleRate);
+                  int n = lrint((f - playTime) * MScore::sampleRate);
 
                   synti->process(n, p);
                   p += 2 * n;
-                  playTime += qreal(n)/qreal(AL::sampleRate);
+                  playTime += qreal(n)/qreal(MScore::sampleRate);
 
                   frames    -= n;
                   framePos  += n;
@@ -214,7 +214,7 @@ void Seq::process(unsigned n, float* p)
                   }
             if (frames) {
                   synti->process(frames, p);
-                  playTime += qreal(frames)/qreal(AL::sampleRate);
+                  playTime += qreal(frames)/qreal(MScore::sampleRate);
                   }
             if (playPos == events.constEnd()) {
                   driver->stopTransport();
