@@ -46,7 +46,7 @@ PlayPanel::PlayPanel(QWidget* parent)
 
       connect(volumeSlider, SIGNAL(valueChanged(double,int)), SLOT(volumeChanged(double,int)));
       connect(posSlider,    SIGNAL(sliderMoved(int)),         SLOT(setPos(int)));
-      connect(tempoSlider,  SIGNAL(valueChanged(double,int)), SIGNAL(relTempoChanged(double,int)));
+      connect(tempoSlider,  SIGNAL(valueChanged(double,int)), SLOT(relTempoChanged(double,int)));
       connect(swingStyle,   SIGNAL(currentIndexChanged(int)), SLOT(swingStyleChanged(int)));
       }
 
@@ -56,7 +56,7 @@ PlayPanel::PlayPanel(QWidget* parent)
 
 void PlayPanel::relTempoChanged(double d, int)
       {
-      emit relTempoChanged(d * .001);
+      emit relTempoChanged(d * .01);
       }
 
 //---------------------------------------------------------
@@ -90,7 +90,7 @@ void PlayPanel::setScore(Score* s)
       swingStyle->setEnabled(enable);
       if (cs) {
             setTempo(cs->tempomap()->tempo(0));
-            setRelTempo(cs->tempomap()->relTempo() * 100);
+            setRelTempo(cs->tempomap()->relTempo());
             Measure* m = cs->lastMeasure();
             if (m)
                   setEndpos(m ? m->tick() + m->ticks() : 0);
@@ -99,7 +99,7 @@ void PlayPanel::setScore(Score* s)
             }
       else {
             setTempo(120.0);
-            setRelTempo(100);
+            setRelTempo(1.0);
             setEndpos(0);
             heartBeat(0, 0);
             }
@@ -126,7 +126,7 @@ void PlayPanel::setEndpos(int val)
 void PlayPanel::setTempo(double val)
       {
       int tempo = lrint(val * 60.0);
-      tempoLabel->setText(QString("%1 bpm").arg(tempo, 3));
+      tempoLabel->setText(QString("%1 bpm").arg(tempo, 3, 10, QLatin1Char(' ')));
       }
 
 //---------------------------------------------------------
@@ -135,7 +135,8 @@ void PlayPanel::setTempo(double val)
 
 void PlayPanel::setRelTempo(qreal val)
       {
-      relTempo->setText(QString("%1 %").arg(val * 100.0, 3));
+      val *= 100;
+      relTempo->setText(QString("%1 %").arg(val, 3, 'f', 0));
       tempoSlider->setValue(val);
       }
 
