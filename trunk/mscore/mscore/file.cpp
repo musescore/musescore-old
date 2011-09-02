@@ -566,7 +566,9 @@ void MuseScore::newFile()
 
             QString s = symbols[0][note4Sym].toString();
             tt->setText(QString("%1 = %2").arg(s).arg(tempo));
-            tt->setTempo(tempo/60.0);
+            tempo /= 60;      // bpm -> bps
+
+            tt->setTempo(tempo);
             tt->setTrack(0);
             Segment* seg = score->firstMeasure()->first(SegChordRest);
             seg->add(tt);
