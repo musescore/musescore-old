@@ -1,4 +1,6 @@
 2.sep (ws)
+      - if no explicit start repeat, go back to nearest section break if it exists instead
+        to score beginning
       - show layer selector only if score has layers
 1.sep (ws)
       - fixes for tempo, section break pause, fermata

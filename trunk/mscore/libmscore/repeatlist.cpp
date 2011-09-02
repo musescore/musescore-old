@@ -361,8 +361,11 @@ Measure* RepeatList::jumpToStartRepeat(Measure* m)
       {
       Measure* nm;
       for (nm = m; nm && nm != _score->firstMeasure(); nm = nm->prevMeasure()) {
-            if (nm->repeatFlags() & RepeatStart)
+            if (nm->repeatFlags() & RepeatStart || nm->sectionBreak()) {
+                  if (nm->sectionBreak() && nm->nextMeasure())
+                        nm = nm->nextMeasure();
                   break;
+                  }
             }
       rs->len = m->tick() + m->ticks() - rs->tick;
       append(rs);
