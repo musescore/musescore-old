@@ -323,10 +323,12 @@ void Text::layout(qreal layoutWidth, qreal x, qreal y)
       if ((style().align() & ALIGN_VCENTER) && (subtype() == TEXT_TEXTLINE)) {
             // special case: vertically centered text with TextLine needs to
             // take into account the line width
-            TextLineSegment* tls = (TextLineSegment*)parent();
-            TextLine* tl = (TextLine*)(tls->line());
-            qreal textlineLineWidth = point(tl->lineWidth());
-            rypos() -= textlineLineWidth * .5;
+            TextLineSegment* tls = static_cast<TextLineSegment*>(parent());
+            TextLine* tl = tls->textLine();
+            if (tl) {
+                  qreal textlineLineWidth = point(tl->lineWidth());
+                  rypos() -= textlineLineWidth * .5;
+                  }
             }
 
       if (parent() == 0)
