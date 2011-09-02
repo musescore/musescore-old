@@ -24,6 +24,7 @@
 #include <string.h>
 #include <sndfile.h>
 #include <vorbis/vorbisenc.h>
+#include "omr/omr.h"
 
 #include "sfont.h"
 #include "libmscore/xml.h"
@@ -45,6 +46,14 @@
 #define FOURCC(a, b, c, d) a << 24 | b << 16 | c << 8 | d
 
 static const bool writeCompressed = true;
+bool debugMode = false;
+int revision = 0;
+
+// dummies:
+
+Omr::Omr(Score*) {}
+void Omr::write(Xml&) const {}
+void Omr::read(QDomElement) {}
 
 //---------------------------------------------------------
 //   Sample
@@ -61,15 +70,15 @@ Sample::~Sample()
       }
 
 //---------------------------------------------------------
-//   Instrument
+//   SfInstrument
 //---------------------------------------------------------
 
-Instrument::Instrument()
+SfInstrument::SfInstrument()
       {
       name = 0;
       }
 
-Instrument::~Instrument()
+SfInstrument::~SfInstrument()
       {
       delete name;
       }
@@ -553,7 +562,7 @@ void SoundFont::readInst(int size)
       int n = size / 22;
       int index1 = 0, index2;
       for (int i = 0; i < n; ++i) {
-            Instrument* instrument = new Instrument;
+            SfInstrument* instrument = new SfInstrument;
             instrument->name = readString(20);
             index2           = readWord();
             if (index2 < index1)
@@ -606,19 +615,19 @@ printf("readFontHeader %d %d   %d %d\n", s->start, s->end, s->loopstart, s->loop
 
 bool SoundFont::writeXml(QFile* f)
       {
-      AL::Xml xml(f);
+      Xml xml(f);
 
       xml.header();
       xml.stag("Sfont");
       xml.tag("version", QString("%1.%2").arg(version.major).arg(version.minor));
-      xml.tag("name",      AL::Xml::xmlString(name));
-      xml.tag("engine",    AL::Xml::xmlString(engine));
-      xml.tag("date",      AL::Xml::xmlString(date));
-      xml.tag("comment",   AL::Xml::xmlString(comment));
-      xml.tag("tools",     AL::Xml::xmlString(tools));
-      xml.tag("creator",   AL::Xml::xmlString(creator));
-      xml.tag("product",   AL::Xml::xmlString(product));
-      xml.tag("copyright", AL::Xml::xmlString(copyright));
+      xml.tag("name",      Xml::xmlString(name));
+      xml.tag("engine",    Xml::xmlString(engine));
+      xml.tag("date",      Xml::xmlString(date));
+      xml.tag("comment",   Xml::xmlString(comment));
+      xml.tag("tools",     Xml::xmlString(tools));
+      xml.tag("creator",   Xml::xmlString(creator));
+      xml.tag("product",   Xml::xmlString(product));
+      xml.tag("copyright", Xml::xmlString(copyright));
 
       foreach(Preset* p, presets) {
             xml.stag(QString("Preset name=\"%1\" preset=\"%2\" bank=\"%3\"")
@@ -627,7 +636,7 @@ bool SoundFont::writeXml(QFile* f)
                   write(xml, z);
             xml.etag();
             }
-      foreach(Instrument* instrument, instruments) {
+      foreach(SfInstrument* instrument, instruments) {
             xml.stag(QString("Instrument name=\"%1\"").arg(instrument->name));
             foreach(Zone* z, instrument->zones)
                   write(xml, z);
@@ -678,7 +687,7 @@ static const char* generatorNames[] = {
 //   write
 //---------------------------------------------------------
 
-void SoundFont::write(AL::Xml& xml, Zone* z)
+void SoundFont::write(Xml& xml, Zone* z)
       {
       xml.stag("Zone");
       foreach(GeneratorList* g, z->generators) {
@@ -1032,11 +1041,11 @@ void SoundFont::writeInst()
       int n = instruments.size();
       writeDword((n + 1) * 22);
       int zoneIdx = 0;
-      foreach(const Instrument* p, instruments) {
+      foreach(const SfInstrument* p, instruments) {
             writeInstrument(zoneIdx, p);
             zoneIdx += p->zones.size();
             }
-      Instrument p;
+      SfInstrument p;
       memset(&p, 0, sizeof(p));
       writeInstrument(zoneIdx, &p);
       }
@@ -1045,7 +1054,7 @@ void SoundFont::writeInst()
 //   writeInstrument
 //---------------------------------------------------------
 
-void SoundFont::writeInstrument(int zoneIdx, const Instrument* instrument)
+void SoundFont::writeInstrument(int zoneIdx, const SfInstrument* instrument)
       {
       char name[20];
       memset(name, 0, 20);

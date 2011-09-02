@@ -387,7 +387,7 @@ class Element {
       virtual bool isMovable() const   { return flag(ELEMENT_MOVABLE);     }
       bool isSegment() const           { return flag(ELEMENT_SEGMENT);     }
       uint tag() const                 { return _tag;                      }
-      void setTag(unsigned val)        { _tag = val;                       }
+      void setTag(uint val)            { _tag = val;                       }
       };
 
 //---------------------------------------------------------

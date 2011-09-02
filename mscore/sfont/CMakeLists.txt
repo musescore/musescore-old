@@ -27,7 +27,9 @@ add_executable(sfconvert
    )
 
 target_link_libraries(sfconvert
-   al
+   libmscore
+   msynth
+   zarchive
    ${QT_LIBRARIES}
    vorbis
    vorbisenc

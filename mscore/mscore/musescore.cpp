@@ -1311,15 +1311,8 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
             }
       else
             cs = 0;
-      layerSwitch->clear();
       bool enable = false;
-      if (cs) {
-            enable = true;
-            foreach(const Layer& l, *cs->layer())
-                  layerSwitch->addItem(l.name);
-            layerSwitch->setCurrentIndex(cs->currentLayer());
-            }
-      layerSwitch->setEnabled(enable);
+      updateLayer();
       if (seq)
             seq->setScoreView(cv);
       if (playPanel)
@@ -4518,5 +4511,26 @@ void MuseScore::closeWebPanelPermanently()
 Navigator* MuseScore::navigator() const
       {
       return _navigator ? static_cast<Navigator*>(_navigator->widget()) : 0;
+      }
+
+//---------------------------------------------------------
+//   updateLayer
+//---------------------------------------------------------
+
+void MuseScore::updateLayer()
+      {
+      layerSwitch->clear();
+      bool enable;
+      if (cs) {
+            enable = cs->layer()->size() > 1;
+            if (enable) {
+                  foreach(const Layer& l, *cs->layer())
+                        layerSwitch->addItem(l.name);
+                  layerSwitch->setCurrentIndex(cs->currentLayer());
+                  }
+            }
+      else
+           enable = false;
+      layerSwitch->setVisible(enable);
       }
 

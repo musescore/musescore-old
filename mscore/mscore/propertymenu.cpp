@@ -238,7 +238,7 @@ void ScoreView::createElementPropertyMenu(Element* e, QMenu* popup)
             genPropertyMenuText(e, popup);
             popup->addAction(tr("Staff Text Properties..."))->setData("st-props");
             }
-      else if (e->type() == TEXT) {
+      else if (e->type() == TEXT || e->type() == FINGERING) {
             genPropertyMenuText(e, popup);
             }
       else if (e->type() == TEMPO_TEXT) {
