@@ -33,7 +33,7 @@ Volta* Score::searchVolta(int tick) const
                         continue;
                   int tick1 = static_cast<Segment*>(e->startElement())->tick();
                   int tick2 = static_cast<Segment*>(e->endElement())->tick();
-
+// printf("spanner %s %d - %d %d\n", e->name(), tick, tick1, tick2);
                   if (tick >= tick1 && tick < tick2)
                         return static_cast<Volta*>(e);
                   }
@@ -230,21 +230,20 @@ void RepeatList::dump() const
 
 void RepeatList::unwind()
       {
-      foreach(RepeatSegment* s, *this)
-            delete s;
+      qDeleteAll(*this);
       clear();
-
-      rs                 = new RepeatSegment;
-      rs->tick           = 0;
-      Measure* endRepeat = 0;
-      Measure* continueAt = 0;
-      int loop           = 0;
-      int repeatCount    = 0;
-      bool isGoto        = false;
-
       Measure* fm = _score->firstMeasure();
       if (!fm)
             return;
+
+// printf("unwind===================\n");
+      rs                  = new RepeatSegment;
+      rs->tick            = 0;
+      Measure* endRepeat  = 0;
+      Measure* continueAt = 0;
+      int loop            = 0;
+      int repeatCount     = 0;
+      bool isGoto         = false;
 
       for (Measure* m = fm; m; m = m->nextMeasure())
             m->setPlaybackCount(0);
@@ -253,12 +252,14 @@ void RepeatList::unwind()
             m->setPlaybackCount(m->playbackCount() + 1);
             int flags = m->repeatFlags();
 
-//            printf("repeat m%d(%d) loop %d repeatCount %d isGoto %d endRepeat %p\n",
-//               m->no(), m->playbackCount(), loop, repeatCount, isGoto, endRepeat);
+// printf("repeat m%d(%d) lc%d loop %d repeatCount %d isGoto %d endRepeat %p\n",
+//               m->no(), m->tick(), m->playbackCount(), loop, repeatCount, isGoto, endRepeat);
 
             if (endRepeat) {
                   Volta* volta = _score->searchVolta(m->tick());
+// printf("endRepeat volta %p  playbackCount %d\n", volta, m->playbackCount());
                   if (volta && !volta->hasEnding(m->playbackCount())) {
+// printf("  skip\n");
                         // skip measure
                         if (rs->tick < m->tick()) {
                               rs->len = m->tick() - rs->tick;
@@ -374,5 +375,4 @@ Measure* RepeatList::jumpToStartRepeat(Measure* m)
       rs->tick  = nm->tick();
       return nm;
       }
-
 
