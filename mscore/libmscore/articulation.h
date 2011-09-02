@@ -79,6 +79,7 @@ class Articulation : public Element {
       virtual void write(Xml& xml) const;
 
       virtual void toDefault();
+      virtual QLineF dragAnchor() const;
 
       ArticulationType articulationType() const;
       QString subtypeUserName() const;

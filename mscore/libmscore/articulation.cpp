@@ -461,3 +461,13 @@ void Articulation::toDefault()
       Element::toDefault();
       }
 
+//---------------------------------------------------------
+//   dragAnchor
+//---------------------------------------------------------
+
+QLineF Articulation::dragAnchor() const
+      {
+      return QLineF(canvasPos(), parent()->canvasPos());
+      }
+
+
