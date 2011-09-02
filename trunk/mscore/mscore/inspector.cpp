@@ -99,6 +99,8 @@ void Inspector::setElement(Element* e)
             delete ie;
       ie = 0;
       _element = e;
+      apply->setEnabled(_element != 0);
+
       if (_element == 0)
             return;
       switch(_element->type()) {

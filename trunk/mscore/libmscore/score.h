@@ -818,6 +818,7 @@ class Score {
       int pageNumberOffset() const          { return _pageNumberOffset; }
       void setPageNumberOffset(int v)       { _pageNumberOffset = v; }
       const QDate& creationDate() const     { return _creationDate;  }
+
       uint currentLayerMask() const         { return _layer[_currentLayer].tags; }
       void setCurrentLayer(int val)         { _currentLayer = val;  }
       int currentLayer() const              { return _currentLayer; }
@@ -825,6 +826,7 @@ class Score {
       QString* layerTagComments()           { return _layerTagComments;    }
       QList<Layer>* layer()                 { return &_layer;       }
       bool tagIsValid(uint tag) const       { return tag & _layer[_currentLayer].tags; }
+
       void transpose(int mode, TransposeDirection, int transposeKey, int transposeInterval,
          bool trKeys, bool transposeChordNames, bool useDoubleSharpsFlats);
       void addViewer(MuseScoreView* v)      { viewer.append(v);   }

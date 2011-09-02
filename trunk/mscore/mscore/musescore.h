@@ -558,6 +558,7 @@ class MuseScore : public QMainWindow {
       Q_INVOKABLE QString getLocaleISOCode();
       Navigator* navigator() const;
       QScrollArea* navigatorScrollArea() const { return _navigator; }
+      void updateLayer();
       };
 
 extern MuseScore* mscore;

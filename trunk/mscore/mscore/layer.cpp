@@ -95,6 +95,7 @@ void LayerManager::createClicked()
 
 void LayerManager::deleteClicked()
       {
+      printf("TODO\n");
       }
 
 //---------------------------------------------------------
@@ -206,6 +207,7 @@ void LayerManager:: accept()
       score->setDirty(true);
       score->setLayoutAll(true);
       score->endCmd();
+      mscore->updateLayer();
       QDialog::accept();
       }
 

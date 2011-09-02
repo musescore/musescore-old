@@ -21,9 +21,7 @@
 #ifndef __SOUNDFONT_H__
 #define __SOUNDFONT_H__
 
-namespace AL {
-class Xml;
-      };
+#include "libmscore/xml.h"
 
 //---------------------------------------------------------
 //   sfVersionTag
@@ -114,16 +112,16 @@ struct Preset {
       };
 
 //---------------------------------------------------------
-//   Instrument
+//   SfInstrument
 //---------------------------------------------------------
 
-struct Instrument {
+struct SfInstrument {
       char* name;
       int index;        // used only for read
       QList<Zone*> zones;
 
-      Instrument();
-      ~Instrument();
+      SfInstrument();
+      ~SfInstrument();
       };
 
 //---------------------------------------------------------
@@ -165,7 +163,7 @@ class SoundFont {
       int sampleLen;
 
       QList<Preset*> presets;
-      QList<Instrument*> instruments;
+      QList<SfInstrument*> instruments;
 
       QList<Zone*> pZones;
       QList<Zone*> iZones;
@@ -198,14 +196,14 @@ class SoundFont {
       void writeChar(char);
       void writeShort(short);
       void write(const char* p, int n);
-      void write(AL::Xml&, Zone*);
+      void write(Xml&, Zone*);
       bool writeSampleFile(Sample*, QString);
       void writeSample(const Sample*);
       void writeStringSection(const char* fourcc, char* s);
       void writePreset(int zoneIdx, const Preset*);
       void writeModulator(const ModulatorList*);
       void writeGenerator(const GeneratorList*);
-      void writeInstrument(int zoneIdx, const Instrument*);
+      void writeInstrument(int zoneIdx, const SfInstrument*);
 
       void writeIfil();
       void writeSmpl();
