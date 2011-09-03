@@ -3630,11 +3630,11 @@ foreach(Element* el, *(score->gel())) {
                                     int endTick = el->tick();
                                     if (cr) {
                                         endTick = cr->tick();
-                                        printf("CR %d %d\n", endTick, el->tick());
+                                        //printf("CR %d %d\n", endTick, el->tick());
                                         }
                                     foreach(Element* he, *m->el()) {
-                                    printf("staff %d %d tick %d\n", he->staffIdx(), sstaff, he->tick());
-                                          if ((he->type() == HARMONY) && (he->staffIdx() == sstaff)
+                                          //printf("staff %d %d tick %d\n", he->staffIdx(), sstaff, he->tick());
+                                          if ((he->type() == HARMONY) && (he->track() == st)
                                              && (he->tick() >= el->tick()) && (he->tick() < endTick)) {
                                                 list << he;
                                                 }
