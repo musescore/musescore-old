@@ -265,7 +265,7 @@ class ExportMusicXml {
       void dynamic(Dynamic* dyn, int staff);
       void symbol(Symbol * sym, int staff);
       void tempoText(TempoText* text, int staff);
-      void harmony(Harmony*, Element*);
+      void harmony(Harmony*, Element*, int staff);
       };
 
 //---------------------------------------------------------
@@ -3622,7 +3622,15 @@ foreach(Element* el, *(score->gel())) {
                               // must ignore start repeat to prevent spurious backup/forward
                               if (el->type() == BAR_LINE && el->subtype() == START_REPEAT)
                                     continue;
-
+                              
+                              // generate backup or forward to the start time of the element
+                              // but not for breath, which has the same start time as the
+                              // previous note, while tick is already at the end of that note
+                              if (tick != el->tick()) {
+                                    attr.doAttr(xml, false);
+                                    if (el->type() != BREATH) moveToTick(el->tick());
+                                    }
+                              
                               // look for harmony element for this tick position
                               if (el->isChordRest()) {
                                     QList<Element*> list;
@@ -3644,16 +3652,8 @@ foreach(Element* el, *(score->gel())) {
 
                                     foreach (Element* hhe, list){
                                           attr.doAttr(xml, false);
-                                          harmony((Harmony*)hhe, el);
+                                          harmony((Harmony*)hhe, el, sstaff);
                                           }
-                                    }
-
-                              // generate backup or forward to the start time of the element
-                              // but not for breath, which has the same start time as the
-                              // previous note, while tick is already at the end of that note
-                              if (tick != el->tick()) {
-                                    attr.doAttr(xml, false);
-                                    if (el->type() != BREATH) moveToTick(el->tick());
                                     }
 /*
                               if (el->isChordRest()) {
@@ -3882,7 +3882,7 @@ double ExportMusicXml::getTenthsFromDots(double dots){
 //   harmony
 //---------------------------------------------------------
 
-void ExportMusicXml::harmony(Harmony* h, Element* e)
+void ExportMusicXml::harmony(Harmony* h, Element* e, int staff)
       {
       int rootTpc = h->rootTpc();
       if (rootTpc != INVALID_TPC) {
@@ -3949,6 +3949,8 @@ void ExportMusicXml::harmony(Harmony* h, Element* e)
                   }
             if(e->tick() < h->tick())
                   xml.tag("offset", (h->tick() - e->tick()) / div);
+            if(staff != 0)
+                  xml.tag("staff", staff);
             xml.etag();
             }
       else {
