@@ -99,6 +99,9 @@
         <type>half</type>
         <stem>down</stem>
         </note>
+      <forward>
+        <duration>1</duration>
+        </forward>
       </measure>
     <measure number="5">
       <note>
@@ -170,6 +173,9 @@
         <type>quarter</type>
         <stem>up</stem>
         </note>
+      <forward>
+        <duration>1</duration>
+        </forward>
       </measure>
     <measure number="3">
       <note>

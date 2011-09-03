@@ -1304,7 +1304,7 @@ void MusicXml::xmlPart(QDomElement e, QString id)
             if (e.tagName() == "measure") {
                   // set the correct start tick for the measure
                   tick = measureStart.at(measureNr);
-                  xmlMeasure(part, e, e.attribute(QString("number")).toInt()-1);
+                  xmlMeasure(part, e, e.attribute(QString("number")).toInt()-1, measureLength.at(measureNr));
                   }
             else
                   domError(e);
@@ -1320,7 +1320,7 @@ void MusicXml::xmlPart(QDomElement e, QString id)
  Read the MusicXML measure element.
  */
 
-Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
+Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measureLen)
       {
       printf("xmlMeasure %d begin\n", number);
       int staves = score->nstaves();
@@ -1538,7 +1538,6 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                   domError(e);
             }
       staves         = part->nstaves();
-      int measureLen = maxtick - measure->tick();
 
       if (lastMeasureLen != measureLen) {
             AL::TimeSigMap* sigmap = score->sigmap();
