@@ -154,6 +154,8 @@ class VoiceDesc {
 class MusicXml {
       Score* score;
       QMap<int, VoiceDesc> voicelist;
+      QVector<int> measureLength;               ///< Length of each measure in ticks
+      QVector<int> measureStart;                ///< Start tick of each measure
 
       Slur* slur[MAX_NUMBER_LEVEL];
 
@@ -165,17 +167,17 @@ class MusicXml {
       Volta* lastVolta;
 
       QDomDocument* doc;
-      int tick;         ///< Current position in MusicXML time
-      int maxtick;      ///< Maxtick of a measure, used to calculate measure len
+      int tick;                                 ///< Current position in MusicXML time
+      int maxtick;                              ///< Maxtick of a measure, used to calculate measure len
       int lastMeasureLen;
       unsigned int multiMeasureRestCount;       ///< Remaining measures in a multi measure rest
       bool startMultiMeasureRest;               ///< Multi measure rest started in this measure
 
-      int lastLen;      ///< Needed for chords
+      int lastLen;                              ///< Needed for chords
       int maxLyrics;
 
       int divisions;
-      Tuplet* tuplet;   ///< Current tuplet
+      Tuplet* tuplet;                           ///< Current tuplet
 
       QString composer;
       QString poet;
@@ -185,11 +187,11 @@ class MusicXml {
       std::vector<MusicXmlWedge> wedgeList;
       std::vector<MusicXmlPartGroup*> partGroupList;
 
-      Ottava* ottava;    ///< Current ottava
-      Trill* trill;      ///< Current trill
-      Pedal* pedal;      ///< Current pedal
-      Chord* tremStart;  ///< Starting chord for current tremolo
-      BeamMode beamMode; ///< Current beam mode
+      Ottava* ottava;                           ///< Current ottava
+      Trill* trill;                             ///< Current trill
+      Pedal* pedal;                             ///< Current pedal
+      Chord* tremStart;                         ///< Starting chord for current tremolo
+      BeamMode beamMode;                        ///< Current beam mode
 
       //-----------------------------
 

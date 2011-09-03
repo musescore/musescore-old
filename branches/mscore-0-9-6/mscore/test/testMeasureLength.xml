@@ -8,8 +8,8 @@
   <identification>
     <creator type="composer">Leon Vinken</creator>
     <encoding>
-      <software>MuseScore 1.1</software>
-      <encoding-date>2011-08-31</encoding-date>
+      <software>MuseScore 0.7.0</software>
+      <encoding-date>2007-09-10</encoding-date>
       </encoding>
     </identification>
   <part-list>
@@ -37,16 +37,7 @@
       </score-part>
     </part-list>
   <part id="P1">
-    <measure number="1" width="242.64">
-      <print>
-        <system-layout>
-          <system-margins>
-            <left-margin>105.49</left-margin>
-            <right-margin>-0.00</right-margin>
-            </system-margins>
-          <top-system-distance>70.00</top-system-distance>
-          </system-layout>
-        </print>
+    <measure number="1">
       <attributes>
         <divisions>1</divisions>
         <key>
@@ -62,7 +53,7 @@
           <line>2</line>
           </clef>
         </attributes>
-      <note default-x="82.11" default-y="-30.00">
+      <note>
         <pitch>
           <step>G</step>
           <octave>4</octave>
@@ -73,8 +64,8 @@
         <stem>up</stem>
         </note>
       </measure>
-    <measure number="2" width="188.95">
-      <note default-x="12.00" default-y="-25.00">
+    <measure number="2">
+      <note>
         <pitch>
           <step>A</step>
           <octave>4</octave>
@@ -85,8 +76,8 @@
         <stem>up</stem>
         </note>
       </measure>
-    <measure number="3" width="172.53">
-      <note default-x="12.00" default-y="-20.00">
+    <measure number="3">
+      <note>
         <pitch>
           <step>B</step>
           <octave>4</octave>
@@ -97,8 +88,8 @@
         <stem>down</stem>
         </note>
       </measure>
-    <measure number="4" width="188.95">
-      <note default-x="12.00" default-y="-15.00">
+    <measure number="4">
+      <note>
         <pitch>
           <step>C</step>
           <octave>5</octave>
@@ -109,8 +100,8 @@
         <stem>down</stem>
         </note>
       </measure>
-    <measure number="5" width="178.53">
-      <note default-x="12.00" default-y="-5.00">
+    <measure number="5">
+      <note>
         <pitch>
           <step>E</step>
           <octave>5</octave>
@@ -126,12 +117,7 @@
       </measure>
     </part>
   <part id="P2">
-    <measure number="1" width="242.64">
-      <print>
-        <staff-layout number="1">
-          <staff-distance>65.00</staff-distance>
-          </staff-layout>
-        </print>
+    <measure number="1">
       <attributes>
         <divisions>1</divisions>
         <key>
@@ -151,7 +137,7 @@
           <chromatic>-5</chromatic>
           </transpose>
         </attributes>
-      <note default-x="82.11" default-y="-135.00">
+      <note>
         <pitch>
           <step>G</step>
           <octave>4</octave>
@@ -162,8 +148,8 @@
         <stem>up</stem>
         </note>
       </measure>
-    <measure number="2" width="188.95">
-      <note default-x="12.00" default-y="-130.00">
+    <measure number="2">
+      <note>
         <pitch>
           <step>A</step>
           <octave>4</octave>
@@ -173,7 +159,7 @@
         <type>quarter</type>
         <stem>up</stem>
         </note>
-      <note default-x="12.00" default-y="-25.00">
+      <note>
         <chord/>
         <pitch>
           <step>B</step>
@@ -185,8 +171,8 @@
         <stem>up</stem>
         </note>
       </measure>
-    <measure number="3" width="172.53">
-      <note default-x="12.00" default-y="-135.00">
+    <measure number="3">
+      <note>
         <pitch>
           <step>G</step>
           <octave>4</octave>
@@ -197,8 +183,8 @@
         <stem>up</stem>
         </note>
       </measure>
-    <measure number="4" width="188.95">
-      <note default-x="12.00" default-y="-130.00">
+    <measure number="4">
+      <note>
         <pitch>
           <step>A</step>
           <octave>4</octave>
@@ -208,7 +194,7 @@
         <type>quarter</type>
         <stem>up</stem>
         </note>
-      <note default-x="99.68" default-y="-125.00">
+      <note>
         <pitch>
           <step>B</step>
           <alter>-1</alter>
@@ -219,7 +205,7 @@
         <type>quarter</type>
         <stem>down</stem>
         </note>
-      <note default-x="99.68" default-y="-125.00">
+      <note>
         <pitch>
           <step>C</step>
           <octave>5</octave>
@@ -230,8 +216,8 @@
         <stem>down</stem>
         </note>
       </measure>
-    <measure number="5" width="178.53">
-      <note default-x="12.00" default-y="-115.00">
+    <measure number="5">
+      <note>
         <pitch>
           <step>D</step>
           <octave>5</octave>
