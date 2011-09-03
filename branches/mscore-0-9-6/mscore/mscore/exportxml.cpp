@@ -3622,7 +3622,7 @@ foreach(Element* el, *(score->gel())) {
                               // must ignore start repeat to prevent spurious backup/forward
                               if (el->type() == BAR_LINE && el->subtype() == START_REPEAT)
                                     continue;
-                              
+
                               // generate backup or forward to the start time of the element
                               // but not for breath, which has the same start time as the
                               // previous note, while tick is already at the end of that note
@@ -3630,7 +3630,7 @@ foreach(Element* el, *(score->gel())) {
                                     attr.doAttr(xml, false);
                                     if (el->type() != BREATH) moveToTick(el->tick());
                                     }
-                              
+
                               // look for harmony element for this tick position
                               if (el->isChordRest()) {
                                     QList<Element*> list;
@@ -3750,7 +3750,7 @@ foreach(Element* el, *(score->gel())) {
                               }
                         }
                   // move to end of measure (in case of incomplete last voice)
-//                  printf("end of measure\n");
+                  printf("end of measure m->tick() %d m->tickLen() %d tick %d\n", m->tick(), m->tickLen(), tick);
                   moveToTick(m->tick() + m->tickLen());
                   if (idx == 0)
                         repeatAtMeasureStop(xml, m);

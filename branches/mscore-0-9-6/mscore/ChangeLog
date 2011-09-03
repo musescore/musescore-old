@@ -1,6 +1,5 @@
 3.sep (lv)
-      - partial fix #12276: MusicXML import: sub-optimal handling of different duration measures
-        import is OK, but on export some spurious backups and forwards are generated
+      - fix #12276: MusicXML import: sub-optimal handling of different duration measures
       (la)
       - fix #12394: Chordnames are not exported for grand staff
 31.aug (lv)
