@@ -1533,7 +1533,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
             else if (e.tagName() == "sound")
                   domNotImplemented(e);
             else if (e.tagName() == "harmony")
-                  xmlHarmony(e, tick, measure);
+                  xmlHarmony(e, tick, measure, staff);
             else
                   domError(e);
             }
@@ -3520,14 +3520,16 @@ void MusicXml::genWedge(int no, int endTick, Measure* /*measure*/, int staff)
 //   xmlHarmony
 //---------------------------------------------------------
 
-void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
+void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure, int staff)
       {
       // type:
-
+      
       // placement:
       double rx = e.attribute("relative-x", "0").toDouble()*0.1;
       double ry = e.attribute("relative-y", "0").toDouble()*-0.1;
 
+      int relStaff = 0;
+      
       double styleYOff = score->textStyle(TEXT_STYLE_HARMONY)->yoff;
       OffsetType offsetType = score->textStyle(TEXT_STYLE_HARMONY)->offsetType;
       if (offsetType == OFFSET_ABS) {
@@ -3640,12 +3642,15 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
             else if (tag == "offset") {
                   offset = (e.text().toInt() * AL::division)/divisions;
                   }
+            else if (tag == "staff") {
+                  relStaff = e.text().toInt() - 1;
+            }
             else
                   domError(e);
             }
 
       ha->setTick(tick + offset);
-
+      ha->setTrack((staff + relStaff) * VOICES);
       const ChordDescription* d = ha->fromXml(kind, degreeList);
       if (d == 0) {
             QString degrees;
