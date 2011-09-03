@@ -619,8 +619,10 @@ void MusicXml::doCredits()
  Determine the length in ticks of each measure in part e
  */
 
-static void determineMeasureLength(QDomElement e)
+static void determineMeasureLength(QDomElement e, QVector<int>& ml)
       {
+      // debug
+      printf("measurelength ml size %d\n", ml.size());
       int divisions = 0;
       int tick = 0;
       int maxtick = 0;
@@ -628,6 +630,7 @@ static void determineMeasureLength(QDomElement e)
       int lastLen = 0;
       int measureNr = 0;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            // handle all measures in this part
             if (e.tagName() == "measure") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "attributes") {
@@ -640,6 +643,7 @@ static void determineMeasureLength(QDomElement e)
                                                    qPrintable(eee.text()));
                                                       divisions = 4;
                                                 }
+                                          // debug
                                           printf("measurelength divisions %d\n", divisions);
                                           }
                                     }
@@ -656,6 +660,8 @@ static void determineMeasureLength(QDomElement e)
                                           }
                                     }
                               if (chord && !grace)
+                                    // LVIFIX: use of lastLen for chord handling is abit of a hack
+                                    // TODO: replace by more elegant mechanism
                                     tick -= lastLen;
                               moveTick(tick, maxtick, lastLen, divisions, ee);
                               }
@@ -666,13 +672,58 @@ static void determineMeasureLength(QDomElement e)
                               moveTick(tick, maxtick, lastLen, divisions, ee);
                               }
                         }
-                  printf("measurelength measure %d tick %d maxtick %d delta %d\n",
-                         measureNr + 1, tick, maxtick, maxtick - prevmaxtick);
+                  // determine length of this measure
+                  int length = maxtick - prevmaxtick;
+                  // debug
+                  printf("measurelength measure %d tick %d maxtick %d length %d\n",
+                         measureNr + 1, tick, maxtick, length);
+                  // store the maximum measure length
+                  if (ml.size() < measureNr + 1)
+                        // as we loop over the measures one by one
+                        // if size of ml is too small, it will be one element short
+                        ml.append(length);
+                  else {
+                        // check if measure contains more ticks in this part
+                        // than in previous parts and if so update length
+                        if (length > ml.at(measureNr))
+                              ml[measureNr] = length;
+                        }
+                  // prepare for next measure
                   prevmaxtick = maxtick;
+                  tick = maxtick;
                   measureNr++;
                   }
             }
+      // debug
+      printf("measurelength ml size %d\n", ml.size());
+      for (int i = 0; i < ml.size(); i++)
+            printf("measurelength ml[%d] %d\n", i + 1, ml.at(i));
       }
+
+
+//---------------------------------------------------------
+//   determineMeasureStart
+//---------------------------------------------------------
+
+/**
+ Determine the start ticks of each measure
+ i.e. the sum of all previous measures length
+ or start tick measure equals start tick previous measure plus length previous measure
+ */
+
+static void determineMeasureStart(const QVector<int>& ml, QVector<int>& ms)
+      {
+      ms.resize(ml.size());
+      // first measure starts at tick = 0
+      ms[0] = 0;
+      // all others start at start tick previous measure plus length previous measure
+      for (int i = 1; i < ml.size(); i++)
+            ms[i] = ms.at(i - 1) + ml.at(i - 1);
+      // debug
+      for (int i = 0; i < ms.size(); i++)
+            printf("measurelength ms[%d] %d\n", i + 1, ms.at(i));
+      }
+
 
 //---------------------------------------------------------
 //   scorePartwise
@@ -699,9 +750,10 @@ void MusicXml::scorePartwise(QDomElement ee)
                   part->staves()->push_back(staff);
                   score->staves().push_back(staff);
                   printf("measurelength part %s\n", qPrintable(id));
-                  determineMeasureLength(e);
+                  determineMeasureLength(e, measureLength);
                   }
             }
+      determineMeasureStart(measureLength, measureStart);
       for (QDomElement e = ee; !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "part-list")
@@ -1248,8 +1300,10 @@ void MusicXml::xmlPart(QDomElement e, QString id)
             doCredits();
             }
 
-      for (; !e.isNull(); e = e.nextSiblingElement()) {
+      for (int measureNr = 0; !e.isNull(); e = e.nextSiblingElement(), measureNr++) {
             if (e.tagName() == "measure") {
+                  // set the correct start tick for the measure
+                  tick = measureStart.at(measureNr);
                   xmlMeasure(part, e, e.attribute(QString("number")).toInt()-1);
                   }
             else
@@ -1300,7 +1354,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
             measure->setTick(tick);
             measure->setNo(number);
             score->measures()->add(measure);
-      }else{
+      } else {
             int pstaves = part->nstaves();
             for (int i = 0; i < pstaves; ++i) {
                 Staff* reals = score->staff(staff+i);
