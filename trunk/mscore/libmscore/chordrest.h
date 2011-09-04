@@ -14,7 +14,6 @@
 #ifndef __CHORDREST_H__
 #define __CHORDREST_H__
 
-// #include "mscore.h"
 #include "symbol.h"
 #include "duration.h"
 

@@ -248,7 +248,7 @@ bool Score::saveFile()
                   return false;
                   }
             undo()->setClean();
-            setClean(true);
+            setDirty(false);
             return true;
             }
       //
@@ -324,7 +324,7 @@ bool Score::saveFile()
          | QFile::ReadGroup | QFile::ReadOther);
 
       undo()->setClean();
-      setClean(true);
+      setDirty(false);
       setSaved(true);
       return true;
       }

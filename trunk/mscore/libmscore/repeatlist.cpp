@@ -27,12 +27,13 @@
 Volta* Score::searchVolta(int tick) const
       {
       Measure* fm = firstMeasure();
-      for (Segment* s = fm->first(SegChordRest); s; s = s->next1(SegChordRest)) {
-            foreach(Spanner* e, s->spannerFor()) {
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+            foreach(Spanner* e, m->spannerFor()) {
                   if (e->type() != VOLTA)
                         continue;
-                  int tick1 = static_cast<Segment*>(e->startElement())->tick();
-                  int tick2 = static_cast<Segment*>(e->endElement())->tick();
+                  Volta* volta = static_cast<Volta*>(e);
+                  int tick1 = volta->startMeasure()->tick();
+                  int tick2 = volta->endMeasure()->endTick();
 // printf("spanner %s %d - %d %d\n", e->name(), tick, tick1, tick2);
                   if (tick >= tick1 && tick < tick2)
                         return static_cast<Volta*>(e);

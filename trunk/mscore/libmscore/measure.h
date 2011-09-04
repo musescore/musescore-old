@@ -39,6 +39,7 @@ class SlurMap;
 class TieMap;
 class SpannerMap;
 class AccidentalState;
+class Spanner;
 
 //---------------------------------------------------------
 //   MStaff
@@ -94,6 +95,9 @@ class Measure : public MeasureBase {
 
       QList<MStaff*>  staves;
       QList<Tuplet*>  _tuplets;
+
+      QList<Spanner*> _spannerFor;
+      QList<Spanner*> _spannerBack;
 
       int    _no;             ///< Measure number, counting from zero
       int    _noOffset;       ///< Offset to measure number
@@ -259,6 +263,13 @@ class Measure : public MeasureBase {
       int playbackCount() const      { return _playbackCount; }
       void setPlaybackCount(int val) { _playbackCount = val; }
       QRectF staffabbox(int staffIdx) const;
+
+      QList<Spanner*> spannerFor() const  { return _spannerFor;        }
+      QList<Spanner*> spannerBack() const { return _spannerBack;       }
+      void addSpannerBack(Spanner* e)     { _spannerBack.append(e);    }
+      void removeSpannerBack(Spanner* e)  { _spannerBack.removeOne(e); }
+      void addSpannerFor(Spanner* e)      { _spannerFor.append(e);     }
+      void removeSpannerFor(Spanner* e)   { _spannerFor.removeOne(e);  }
       };
 
 #endif

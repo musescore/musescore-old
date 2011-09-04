@@ -266,6 +266,15 @@ void Selection::updateSelectedElements()
                               _el.append(sp);
                         }
                   }
+            for (Measure* m = _score->firstMeasure(); m; m = m->nextMeasure()) {
+                  foreach(Spanner* sp, m->spannerFor()) {
+                        if (sp->track() < startTrack || sp->track() >= endTrack)
+                              continue;
+                        Segment* s2 = static_cast<Segment*>(sp->endElement());
+                        if (s2->tick() < _endSegment->tick())
+                              _el.append(sp);
+                        }
+                  }
             }
       update();
       }

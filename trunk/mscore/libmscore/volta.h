@@ -19,6 +19,7 @@
 class Score;
 class Xml;
 class Volta;
+class Measure;
 
 //---------------------------------------------------------
 //   VoltaSegment
@@ -47,7 +48,7 @@ class Volta : public TextLine {
       enum { VOLTA_OPEN, VOLTA_CLOSED };
 
       Volta(Score* s);
-      virtual Volta* clone() const { return new Volta(*this); }
+      virtual Volta* clone()     const { return new Volta(*this); }
       virtual ElementType type() const { return VOLTA; }
       virtual LineSegment* createLineSegment();
       virtual void layout();
@@ -62,6 +63,8 @@ class Volta : public TextLine {
       QString text() const;
       virtual void setSubtype(int val);
       bool hasEnding(int repeat) const;
+      Measure* startMeasure() const { return (Measure*)startElement(); }
+      Measure* endMeasure() const   { return (Measure*)endElement(); }
       };
 
 #endif

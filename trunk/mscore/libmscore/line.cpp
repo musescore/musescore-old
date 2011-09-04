@@ -331,14 +331,15 @@ SLine::SLine(const SLine& s)
 
 QPointF SLine::linePos(int grip, System** sys)
       {
-      Segment* seg = static_cast<Segment*>(grip == 0 ? startElement() : endElement());
-      Measure* m   = seg->measure();
-      *sys         = m->system();
       qreal _spatium = spatium();
 
-      qreal x = seg->pos().x() + m->pos().x();
+      qreal x;
 
       if (anchor() == ANCHOR_SEGMENT) {
+            Segment* seg = static_cast<Segment*>(grip == 0 ? startElement() : endElement());
+            Measure* m   = seg->measure();
+            *sys         = m->system();
+            x            = seg->pos().x() + m->pos().x();
             if (grip == 1) {
                   if (((*sys)->firstMeasure() == m) && (seg->tick() == m->tick())) {
                         m = m->prevMeasure();
@@ -351,12 +352,15 @@ QPointF SLine::linePos(int grip, System** sys)
             }
       else {
             // anchor() == MEASURE
+            Measure* m = static_cast<Measure*>(grip == 0 ? startElement() : endElement());
+            *sys       = m->system();
             if (grip == 0) {
                   x = m->pos().x();
                   }
             else {
                   x = m->pos().x() + m->bbox().right();
                   if (type() == VOLTA) {
+                        Segment* seg = m->last();
                         if (seg->subtype() == SegEndBarLine) {
                               Element* e = seg->element(0);
                               if (e && e->type() == BAR_LINE) {

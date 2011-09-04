@@ -1,3 +1,6 @@
+4.sep (ws)
+      - voltas are now anchord to measures instead of segments
+      - removed UndoGroup class
 2.sep (ws)
       - if no explicit start repeat, go back to nearest section break if it exists instead
         to score beginning

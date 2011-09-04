@@ -272,6 +272,12 @@ void Debugger::updateList(Score* s)
                         if (mb->type() != MEASURE)
                               continue;
                         Measure* measure = (Measure*) mb;
+                        foreach(Spanner* s, measure->spannerFor()) {
+                              SLine* sl = (SLine*)s;
+                              ElementItem* si = new ElementItem(mi, s);
+                              foreach(Element* ls, sl->spannerSegments())
+                                    new ElementItem(si, ls);
+                              }
                         if (measure->noText())
                               new ElementItem(mi, measure->noText());
                         for (Segment* segment = measure->first(); segment; segment = segment->next()) {
