@@ -1684,13 +1684,6 @@ void ScoreView::paint(const QRect& r, QPainter& p)
                   continue;
             if (pr.left() > fr.right())
                   break;
-            if (debugMode) {
-                  //
-                  // show page margins
-                  //
-                  p.setPen(QPen(Qt::gray));
-                  p.drawRect(fr);
-                  }
             QList<const Element*> ell = page->items(fr.translated(-page->pos()));
             qStableSort(ell.begin(), ell.end(), elementLessThan);
             p.save();
@@ -2673,9 +2666,11 @@ static void drawDebugInfo(QPainter& p, const Element* e)
       qreal y = 0; // e->bbox().y();
       p.drawLine(QLineF(x-w, y-h, x+w, y+h));
       p.drawLine(QLineF(x+w, y-h, x-w, y+h));
+
       if (e->parent()) {
             p.restore();
             p.save();
+            // we are now in page coordinate system
             const Element* ee = e->parent();
             if (e->type() == NOTE)
                   ee = static_cast<const Note*>(e)->chord()->segment();
@@ -2683,10 +2678,9 @@ static void drawDebugInfo(QPainter& p, const Element* e)
                   ee = static_cast<const Clef*>(e)->segment();
 
             p.setPen(QPen(Qt::green, 0, Qt::SolidLine));
-            p.drawRect(ee->abbox());
+            p.drawRect(ee->pageBoundingRect());
 
             if (ee->type() == SEGMENT) {
-                  qreal w    = 7.0 / p.matrix().m11();
                   QPointF pt = ee->pagePos();
                   p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
                   p.drawLine(QLineF(pt.x()-w, pt.y()-h, pt.x()+w, pt.y()+h));
@@ -2717,7 +2711,6 @@ void ScoreView::drawElements(QPainter& p, const QList<const Element*>& el)
 
             if (debugMode && e->selected())
                   drawDebugInfo(p, e);
-//            p.translate(-pos);
             p.restore();
             }
       }

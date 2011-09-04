@@ -388,7 +388,7 @@ void Seq::guiStop()
       //
       foreach(const Note* n, markedNotes) {
             ((Note*)n)->setSelected(false);     //HACK
-            cs->addRefresh(n->abbox());
+            cs->addRefresh(n->canvasBoundingRect());
             }
       markedNotes.clear();
       cs->setPlayPos(cs->utime2utick(playTime));
@@ -738,7 +738,7 @@ void Seq::heartBeat()
                         while (note1) {
                               ((Note*)note1)->setSelected(true);  // HACK
                               markedNotes.append(note1);
-                              cs->addRefresh(note1->abbox());
+                              cs->addRefresh(note1->canvasBoundingRect());
                               note1 = note1->tieFor() ? note1->tieFor()->endNote() : 0;
                               }
 
@@ -746,7 +746,7 @@ void Seq::heartBeat()
                   else {
                         while (note1) {
                               ((Note*)note1)->setSelected(false);       // HACK
-                              cs->addRefresh(note1->abbox());
+                              cs->addRefresh(note1->canvasBoundingRect());
                               markedNotes.removeOne(note1);
                               note1 = note1->tieFor() ? note1->tieFor()->endNote() : 0;
                               }
@@ -867,7 +867,7 @@ void Seq::seek(int tick)
       mscore->setPos(tick);
       foreach(const Note* n, markedNotes) {
             ((Note*)n)->setSelected(false);     // HACK
-            cs->addRefresh(n->abbox());
+            cs->addRefresh(n->canvasBoundingRect());
             }
       }
 
