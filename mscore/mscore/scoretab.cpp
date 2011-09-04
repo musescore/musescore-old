@@ -133,7 +133,7 @@ void ScoreTab::setCurrent(int n)
       if (n == -1) {
             clearTab2();
             tab2->setVisible(false);
-            clearTab2();
+            // clearTab2();      //??
             emit currentScoreViewChanged(0);
             return;
             }
@@ -220,7 +220,7 @@ void ScoreTab::updateExcerpts()
       if (idx == -1)
             return;
       ScoreView* v = view(idx);
-      Score* score = v->score();
+      Score* score = v->score()->rootScore();
       clearTab2();
       QList<Excerpt*>* excerpts = score->excerpts();
       if (v && excerpts && !excerpts->isEmpty()) {

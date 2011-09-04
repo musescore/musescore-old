@@ -324,16 +324,24 @@ Element::Element(const Element& e)
 
 void Element::linkTo(Element* element)
       {
+      Q_ASSERT(!_links || !element->links() | (_links == element->links()));
       if (!_links) {
-            if (element->links())
+            if (element->links()) {
                   _links = element->links();
+                  Q_ASSERT(_links->contains(element));
+                  }
             else {
                   _links = new LinkedElements;
                   _links->append(element);
                   element->setLinks(_links);
                   }
+            _links->append(this);
             }
-      _links->append(this);
+      else {
+            Q_ASSERT(_links->contains(this));
+            _links->append(element);
+            element->setLinks(_links);
+            }
       }
 
 //---------------------------------------------------------

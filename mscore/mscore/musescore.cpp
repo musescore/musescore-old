@@ -4126,12 +4126,13 @@ void MuseScore::endCmd()
                   cs->setPlayNote(false);
                   }
             if (cs->excerptsChanged()) {
+                  Q_ASSERT(cs == cs->rootScore());
                   excerptsChanged(cs);
                   cs->setExcerptsChanged(false);
                   }
             if (cs->instrumentsChanged()) {
                   seq->initInstruments();
-                  cs->setExcerptsChanged(false);
+                  cs->setInstrumentsChanged(false);
                   }
             if (cs->selectionChanged()) {
                   cs->setSelectionChanged(false);

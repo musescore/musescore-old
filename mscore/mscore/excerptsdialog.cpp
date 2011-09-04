@@ -240,7 +240,6 @@ void ExcerptsDialog::createExcerptClicked()
 printf("  already there %d %d\n", i, n);
                   continue;
                   }
-printf("create %d %d\n", i, n);
             createExcerptClicked(item);
             }
       }

@@ -1066,7 +1066,10 @@ void Measure::remove(Element* el)
                   Volta* volta = static_cast<Volta*>(el);
                   Measure* m = volta->endMeasure();
                   m->removeSpannerBack(volta);
-                  _spannerFor.removeOne(volta);
+                  if (!_spannerFor.removeOne(volta)) {
+                        printf("Measure:remove: %s not found\n", volta->name());
+                        Q_ASSERT(volta->score() == score());
+                        }
                   }
                   break;
 
