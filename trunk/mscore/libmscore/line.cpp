@@ -131,28 +131,23 @@ bool LineSegment::edit(MuseScoreView* sv, int curGrip, int key, Qt::KeyboardModi
               || (spannerSegmentType() == SEGMENT_END && curGrip == 1))))
             return false;
 
+      LineSegment* ls = 0;
+      SLine* l        = line();
+      bool bspDirty   = false;
       SpannerSegmentType st = spannerSegmentType();
-      SLine* l    = line();
-      Segment* s1 = static_cast<Segment*>(l->startElement());
-      Segment* s2 = static_cast<Segment*>(l->endElement());
+      int track   = l->track();
 
-      int track        = l->track();
-      bool snapSegment = l->anchor() == ANCHOR_SEGMENT;
+      if (l->anchor() == ANCHOR_SEGMENT) {
+            Segment* s1 = static_cast<Segment*>(l->startElement());
+            Segment* s2 = static_cast<Segment*>(l->endElement());
 
-      bool removeSegment = false;
-      bool bspDirty = false;
+            bool removeSegment = false;
 
-      if (key == Qt::Key_Left) {
-            if (curGrip == 0) {
-                  if (snapSegment)
+            if (key == Qt::Key_Left) {
+                  if (curGrip == 0) {
                         s1 = prevSeg1(s1, track);
-                  else {
-                        Measure* m = s1->measure()->prevMeasure();
-                        s1 = m ? m->first(SegChordRest) : s1;
                         }
-                  }
-            else if (curGrip == 1) {
-                  if (snapSegment) {
+                  else if (curGrip == 1) {
                         s2 = prevSeg1(s2, track);
                         if (s2
                            && (s2->system()->firstMeasure() == s2->measure())
@@ -160,95 +155,150 @@ bool LineSegment::edit(MuseScoreView* sv, int curGrip, int key, Qt::KeyboardModi
                               removeSegment = true;
                               }
                         }
-                  else {
-                        if (s2 && (s2->system()->firstMeasure() == s2->measure()))
-                              removeSegment = true;
-                        Measure* m = s2->measure()->prevMeasure();
-                        if (m)
-                              s2 = m->last();
-                        else {
-                              // at end of score?
-                              s2 = m->first(SegChordRest);
-                              }
-                        }
                   }
-            }
-      else if (key == Qt::Key_Right) {
-            if (curGrip == 0) {
-                  if (snapSegment)
+            else if (key == Qt::Key_Right) {
+                  if (curGrip == 0)
                         s1 = nextSeg1(s1, track);
-                  else {
-                        Measure* m  = s1->measure()->nextMeasure();
-                        s1 = m ? m->first(SegChordRest) : s1;
-                        }
-                  }
-            else if (curGrip == 1) {
-                  if (snapSegment) {
+                  else if (curGrip == 1) {
                         if ((s2->system()->firstMeasure() == s2->measure())
                            && (s2->tick() == s2->measure()->tick()))
                               bspDirty = true;
                         s2 = nextSeg1(s2, track);
                         }
+                  }
+            if (s1 == 0 || s2 == 0 || s1->tick() >= s2->tick())
+                  return true;
+
+            LinkedElements* links = l->links();
+            if (l->startElement() != s1) {
+                  if (s1->system() != (static_cast<Segment*>(l->startElement())->system())) {
+                        bspDirty = true;
+                        if (key == Qt::Key_Right)
+                              ls = l->takeFirstSegment();
+                        }
+                  if (links) {
+                        int tick = s1->tick();
+                        foreach(Element* e, *links) {
+                              Score* score = e->score();
+                              SLine* ll = static_cast<SLine*>(e);
+                              static_cast<Segment*>(ll->endElement())->removeSpannerBack(ll);
+                              Measure* m = score->tick2measure(tick);
+                              Segment* segment1 = m->findSegment(SegChordRest, tick);
+                              ll->setStartElement(segment1);
+                              segment1->add(ll);
+                              }
+                        }
                   else {
-                        Measure* m = s2->measure()->nextMeasure();
+                        static_cast<Segment*>(l->startElement())->remove(l);
+                        l->setStartElement(s1);
+                        s1->add(l);
+                        }
+                  }
+            else if (l->endElement() != s2) {
+                  if (removeSegment) {
+                        bspDirty = true;
+                        if (key == Qt::Key_Left)
+                              ls = l->takeLastSegment();
+                        }
+                  if (links) {
+                        int tick = s2->tick();
+                        foreach(Element* e, *links) {
+                              Score* score = e->score();
+                              SLine* ll = static_cast<SLine*>(e);
+                              static_cast<Segment*>(ll->endElement())->removeSpannerBack(ll);
+                              Measure* m = score->tick2measure(tick);
+                              Segment* segment2 = m->findSegment(SegChordRest, tick);
+                              ll->setEndElement(segment2);
+                              segment2->addSpannerBack(ll);
+                              }
+                        }
+                  else {
+                        static_cast<Segment*>(l->endElement())->removeSpannerBack(l);
+                        l->setEndElement(s2);
+                        s2->addSpannerBack(l);
+                        }
+                  }
+            }
+      else {
+            Measure* m1 = static_cast<Measure*>(l->startElement());
+            Measure* m2 = static_cast<Measure*>(l->endElement());
+
+            bool removeSegment = false;
+
+            if (key == Qt::Key_Left) {
+                  if (curGrip == 0) {
+                        if (m1->prevMeasure())
+                              m1 = m1->prevMeasure();
+                        }
+                  else if (curGrip == 1) {
+                        if (m2 && (m2->system()->firstMeasure() == m2))
+                              removeSegment = true;
+                        Measure* m = m2->prevMeasure();
                         if (m)
-                              s2 = m->last();
-                        if (s2->system()->firstMeasure() == s2->measure())
+                              m2 = m;
+                        }
+                  }
+            else if (key == Qt::Key_Right) {
+                  if (curGrip == 0) {
+                        if (m1->nextMeasure())
+                              m1 = m1->nextMeasure();
+                        }
+                  else if (curGrip == 1) {
+                        if (m2->nextMeasure())
+                              m2 = m2->nextMeasure();
+                        if (m2->system()->firstMeasure() == m2)
                               bspDirty = true;
                         }
                   }
-            }
-      if (s1 == 0 || s2 == 0 || s1->tick() >= s2->tick())
-            return true;
+            if (m1->tick() > m2->tick())
+                  return true;
 
-      LineSegment* ls = 0;
-      LinkedElements* links = l->links();
-      if (l->startElement() != s1) {
-            if (s1->system() != (static_cast<Segment*>(l->startElement())->system())) {
-                  bspDirty = true;
-                  if (key == Qt::Key_Right)
-                        ls = l->takeFirstSegment();
-                  }
-            if (links) {
-                  int tick = s1->tick();
-                  foreach(Element* e, *links) {
-                        Score* score = e->score();
-                        SLine* ll = static_cast<SLine*>(e);
-                        static_cast<Segment*>(ll->endElement())->removeSpannerBack(ll);
-                        Measure* m = score->tick2measure(tick);
-                        Segment* segment1 = m->findSegment(SegChordRest, tick);
-                        ll->setStartElement(segment1);
-                        segment1->add(ll);
+            LinkedElements* links = l->links();
+            if (l->startElement() != m1) {
+                  if (m1->system() != (static_cast<Measure*>(l->startElement())->system())) {
+                        bspDirty = true;
+                        if (key == Qt::Key_Right)
+                              ls = l->takeFirstSegment();
+                        }
+                  if (links) {
+                        int tick = m1->tick();
+                        foreach(Element* e, *links) {
+                              Score* score = e->score();
+                              SLine* ll = static_cast<SLine*>(e);
+                              static_cast<Measure*>(ll->endElement())->removeSpannerBack(ll);
+                              Measure* m = score->tick2measure(tick);
+                              ll->setStartElement(m);
+                              m->add(ll);
+                              }
+                        }
+                  else {
+                        l->startElement()->remove(l);
+                        l->setStartElement(m1);
+                        m1->add(l);
                         }
                   }
-            else {
-                  static_cast<Segment*>(l->startElement())->remove(l);
-                  l->setStartElement(s1);
-                  s1->add(l);
-                  }
-            }
-      else if (l->endElement() != s2) {
-            if (removeSegment) {
-                  bspDirty = true;
-                  if (key == Qt::Key_Left)
-                        ls = l->takeLastSegment();
-                  }
-            if (links) {
-                  int tick = s2->tick();
-                  foreach(Element* e, *links) {
-                        Score* score = e->score();
-                        SLine* ll = static_cast<SLine*>(e);
-                        static_cast<Segment*>(ll->endElement())->removeSpannerBack(ll);
-                        Measure* m = score->tick2measure(tick);
-                        Segment* segment2 = m->findSegment(SegChordRest, tick);
-                        ll->setEndElement(segment2);
-                        segment2->addSpannerBack(ll);
+            else if (l->endElement() != m2) {
+                  if (removeSegment) {
+                        bspDirty = true;
+                        if (key == Qt::Key_Left)
+                              ls = l->takeLastSegment();
                         }
-                  }
-            else {
-                  static_cast<Segment*>(l->endElement())->removeSpannerBack(l);
-                  l->setEndElement(s2);
-                  s2->addSpannerBack(l);
+                  if (links) {
+                        int tick = m2->tick();
+                        foreach(Element* e, *links) {
+                              Score* score = e->score();
+                              SLine* ll = static_cast<SLine*>(e);
+                              static_cast<Measure*>(ll->endElement())->removeSpannerBack(ll);
+                              Measure* m = score->tick2measure(tick);
+                              ll->setEndElement(m);
+                              m->addSpannerBack(ll);
+                              }
+                        }
+                  else {
+                        static_cast<Measure*>(l->endElement())->removeSpannerBack(l);
+                        l->setEndElement(m2);
+                        m2->addSpannerBack(l);
+                        }
                   }
             }
       l->layout();
@@ -257,16 +307,16 @@ bool LineSegment::edit(MuseScoreView* sv, int curGrip, int key, Qt::KeyboardModi
       if (st == SEGMENT_SINGLE)
             nls = curGrip ? l->backSegment() : l->frontSegment();
       else if (st == SEGMENT_BEGIN)
-            nls = l->frontSegment();
-      else if (st == SEGMENT_END)
-            nls = l->backSegment();
+                  nls = l->frontSegment();
+            else if (st == SEGMENT_END)
+                  nls = l->backSegment();
 
-      if (nls && (nls != this))
-            sv->changeEditElement(nls);
-
+            if (nls && (nls != this))
+                  sv->changeEditElement(nls);
       if (bspDirty)
             _score->rebuildBspTree();
-      delete ls;
+      if (ls)
+            _score->undoRemoveElement(ls);
       return true;
       }
 

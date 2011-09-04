@@ -1147,7 +1147,6 @@ void MuseScore::selectionChanged(int state)
 
 int MuseScore::appendScore(Score* score)
       {
-printf("appendScore\n");
       int index = scoreList.size();
       for (int i = 0; i < scoreList.size(); ++i) {
             if (scoreList[i]->filePath() == score->filePath()) {
