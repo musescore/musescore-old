@@ -123,7 +123,7 @@ void Spanner::remove(Element* e)
 
 void Spanner::scanElements(void* data, void (*func)(void*, Element*), bool all)
       {
-      foreach(SpannerSegment* seg, segments)          // needed for palette
+      foreach(SpannerSegment* seg, segments)
             seg->scanElements(data, func, true);
       }
 

@@ -2035,7 +2035,7 @@ void Measure::read(QDomElement e, int staffIdx)
                   if (e) {
                         if (e->anchor() == ANCHOR_MEASURE) {
                               e->setEndElement(this);
-                              _spannerBack.append(e);
+                              addSpannerBack(e);
                               }
                         else {
                               segment = getSegment(SegChordRest, score()->curTick);
@@ -2336,24 +2336,13 @@ void Measure::scanElements(void* data, void (*func)(void*, Element*), bool all)
                   }
             foreach(Spanner* e, s->spannerFor())
                   e->scanElements(data,  func, all);
-            foreach(Element* e, s->annotations()) {
-#if 0
-                  if (e->type() == TEMPO_TEXT) {
-                        QString s = static_cast<TempoText*>(e)->getText();
-                        QRectF r(e->abbox());
-                        printf("scan %f %f %f %f<%s>\n", r.x(), r.y(), r.width(), r.height(), qPrintable(s));
-                        }
-#endif
+            foreach(Element* e, s->annotations())
                   e->scanElements(data,  func, all);
-                  }
             }
       foreach(Tuplet* tuplet, _tuplets) {
             if (visible(tuplet->staffIdx()))
                   func(data, tuplet);
             }
-
-      foreach(Spanner* e, _spannerFor)
-            e->scanElements(data,  func, all);
       if (noText())
             func(data, noText());
       }

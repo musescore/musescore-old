@@ -709,7 +709,7 @@ bool Fluid::loadSoundFonts(const QStringList& sl)
       {
       QStringList ol = soundFonts();
       if (ol == sl) {
-            printf("Fluid:loadSoundFonts: already loaded\n");
+            // printf("Fluid:loadSoundFonts: already loaded\n");
             return true;
             }
       mutex.lock();

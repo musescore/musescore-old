@@ -198,7 +198,7 @@ class Element {
       virtual void move(const QPointF& s)     { _pos += s;               }
 
       virtual QPointF pagePos() const;          ///< position in page coordinates
-      QPointF canvasPos() const;                ///< position in canvas coordinates
+      virtual QPointF canvasPos() const;        ///< position in canvas coordinates
       qreal pageX() const;
 
       const QPointF& userOff() const          { return _userOff;  }
@@ -218,6 +218,7 @@ class Element {
       virtual qreal width() const             { return bbox().width();     }
       virtual void setWidth(qreal v)          { _bbox.setWidth(v);         }
       QRectF abbox() const                        { return bbox().translated(pagePos());   }
+      QRectF pageBoundingRect() const             { return bbox().translated(pagePos());   }
       QRectF canvasBoundingRect() const           { return bbox().translated(canvasPos()); }
       virtual void setbbox(const QRectF& r) const { _bbox = r;           }
       virtual void addbbox(const QRectF& r) const { _bbox |= r;          }

@@ -1213,6 +1213,7 @@ bool Score::read(QDomElement dScore)
       renumberMeasures();
       rebuildMidiMapping();
       updateChannel();
+      updateNotes();    // only for parts needed?
       return true;
       }
 
