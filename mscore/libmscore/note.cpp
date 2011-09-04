@@ -52,6 +52,7 @@
 #include "noteevent.h"
 #include "mscore.h"
 #include "accidental.h"
+#include "page.h"
 
 //---------------------------------------------------------
 //   noteHeads
@@ -1398,6 +1399,28 @@ QPointF Note::pagePos() const
             return pos();
       qreal yp = y() + system->staff(staffIdx() + chord()->staffMove())->y() + system->y();
       return QPointF(pageX(), yp);
+      }
+
+//---------------------------------------------------------
+//   canvasPos
+//---------------------------------------------------------
+
+QPointF Note::canvasPos() const
+      {
+      if (parent() == 0)
+            return pos();
+      Chord* ch = chord();
+      if (ch == 0 || ch->parent() == 0)
+            return pos();
+      Measure* m = ch->measure();
+      if (m == 0)
+            return pos();
+      System* system = m->system();
+      if (system == 0)
+            return pos();
+      qreal yp = y() + system->staff(staffIdx() + chord()->staffMove())->y() + system->y();
+      QPointF p(pageX(), yp);
+      return p + system->page()->pos();
       }
 
 //---------------------------------------------------------

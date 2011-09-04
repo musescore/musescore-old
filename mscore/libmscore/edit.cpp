@@ -1456,10 +1456,9 @@ void Score::cmdDeleteSelection()
             // deleteItem modifies selection().elements() list,
             // so we need a local copy:
             QList<Element*> el(selection().elements());
-            foreach(Element* e, el) {
+            foreach(Element* e, el)
                   deleteItem(e);
-                  deselect(e);
-                  }
+            deselectAll();
             }
       layoutAll = true;
       }

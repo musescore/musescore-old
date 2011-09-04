@@ -205,8 +205,9 @@ Element* ElementMap::findNew(Element* o) const
 void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
       {
       int tracks = score->nstaves() * VOICES;
-      SlurMap* slurMap = new SlurMap[tracks];
-      TieMap*  tieMap  = new TieMap[tracks];
+      SlurMap slurMap[tracks];
+      TieMap  tieMap[tracks];
+      SpannerMap spannerMap;
 
       MeasureBaseList* nmbl = score->measures();
       for (MeasureBase* mb = oscore->measures()->first(); mb; mb = mb->next()) {
@@ -233,6 +234,24 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                      m->endBarLineGenerated(),
                      m->endBarLineVisible(),
                      m->endBarLineColor());
+
+                  foreach(Spanner* s, m->spannerFor()) {
+                        Spanner* ns = static_cast<Spanner*>(s->linkedClone());
+                        ns->setScore(score);
+                        ns->setStartElement(nm);
+                        nm->addSpannerFor(ns);
+                        spannerMap.add(s, ns);
+                        }
+                  foreach(Spanner* s, m->spannerBack()) {
+                        Spanner* ns = spannerMap.findNew(s);
+                        if (ns) {
+                              ns->setEndElement(nm);
+                              nm->addSpannerBack(ns);
+                              }
+                        else {
+                              printf("cloneSpanner(measure): cannot find spanner\n");
+                              }
+                        }
 
                   // Fraction ts = nm->len();
                   for (int track = 0; track < tracks; ++track) {
@@ -335,8 +354,6 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
       //DEBUG:
       for (int track = 0; track < tracks; ++track)
             slurMap[track].check();
-      delete[] slurMap;
-      delete[] tieMap;
 
       int n = map.size();
       for (int dstStaffIdx = 0; dstStaffIdx < n; ++dstStaffIdx) {
@@ -362,9 +379,9 @@ void cloneStaff(Staff* srcStaff, Staff* dstStaff)
       Score* score = srcStaff->score();
       dstStaff->linkTo(srcStaff);
 
-      int tracks       = score->nstaves() * VOICES;
-      SlurMap* slurMap = new SlurMap[tracks];
-      TieMap* tieMap   = new TieMap[tracks];
+      int tracks = score->nstaves() * VOICES;
+      SlurMap slurMap[tracks];
+      TieMap tieMap[tracks];
 
       int srcStaffIdx  = score->staffIdx(srcStaff);
       int dstStaffIdx  = score->staffIdx(dstStaff);
@@ -455,7 +472,5 @@ void cloneStaff(Staff* srcStaff, Staff* dstStaff)
                         }
                   }
             }
-      delete[] slurMap;
-      delete[] tieMap;
       }
 

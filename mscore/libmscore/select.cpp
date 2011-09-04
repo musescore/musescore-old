@@ -125,8 +125,7 @@ ChordRest* Selection::activeCR() const
 ChordRest* Selection::firstChordRest(int track) const
       {
       ChordRest* cr = 0;
-      for (ciElement i = _el.begin(); i != _el.end(); ++i) {
-            Element* el = *i;
+      foreach (Element* el, _el) {
             if (el->type() == NOTE)
                   el = el->parent();
             if (el->isChordRest()) {
@@ -247,23 +246,23 @@ void Selection::updateSelectedElements()
                   if (e->type() == CHORD) {
                         Chord* chord = static_cast<Chord*>(e);
                         foreach(Note* note, chord->notes()) {
-                              _el.append(note);
+                              add(note);
                               }
                         }
                   else {
-                        _el.append(e);
+                        add(e);
                         }
                   foreach(Element* e, s->annotations()) {
                         if (e->track() < startTrack || e->track() >= endTrack)
                               continue;
-                        _el.append(e);
+                        add(e);
                         }
                   foreach(Spanner* sp, s->spannerFor()) {
                         if (sp->track() < startTrack || sp->track() >= endTrack)
                               continue;
                         Segment* s2 = static_cast<Segment*>(sp->endElement());
                         if (s2->tick() < _endSegment->tick())
-                              _el.append(sp);
+                              add(sp);
                         }
                   }
             for (Measure* m = _score->firstMeasure(); m; m = m->nextMeasure()) {
@@ -272,7 +271,7 @@ void Selection::updateSelectedElements()
                               continue;
                         Segment* s2 = static_cast<Segment*>(sp->endElement());
                         if (s2->tick() < _endSegment->tick())
-                              _el.append(sp);
+                              add(sp);
                         }
                   }
             }
@@ -304,8 +303,9 @@ void Selection::setRange(Segment* a, Segment* b, int c, int d)
 static void collectSelectedElements(void* data, Element* e)
       {
       QList<const Element*>* l = static_cast<QList<const Element*>*>(data);
-      if (e->selected())
+      if (e->selected()) {
             l->append(e);
+            }
       }
 
 void Selection::searchSelectedElements()
@@ -342,8 +342,8 @@ void Selection::dump()
             case SEL_RANGE:  printf("RANGE\n"); break;
             case SEL_LIST:   printf("LIST\n"); break;
             }
-      for (ciElement i = _el.begin(); i != _el.end(); ++i)
-            printf("  %p %s\n", *i, (*i)->name());
+      foreach(const Element* e, _el)
+            printf("  %p %s\n", e, e->name());
       }
 
 //---------------------------------------------------------

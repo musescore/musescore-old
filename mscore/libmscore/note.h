@@ -138,6 +138,7 @@ class Note : public Element {
       virtual Note* clone() const      { return new Note(*this); }
       virtual ElementType type() const { return NOTE; }
       virtual QPointF pagePos() const;      ///< position in page coordinates
+      virtual QPointF canvasPos() const;    ///< position in page coordinates
       virtual void layout();
       void layout10(AccidentalState*);
       virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);

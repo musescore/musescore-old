@@ -1303,10 +1303,10 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
                   updateInputState(cv->score());
             cs = cv->score();
             view->setFocusRect();
+            cs->end();  // do layout if necessary
             }
       else
             cs = 0;
-      bool enable = false;
       updateLayer();
       if (seq)
             seq->setScoreView(cv);
@@ -1316,7 +1316,7 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
             synthControl->setScore(cs);
       if (iledit)
             iledit->updateAll(cs);
-      if (!enable) {
+      if (!cs) {
             changeState(STATE_DISABLED);
             setWindowTitle("MuseScore");
             if (_navigator && _navigator->widget())
@@ -2428,11 +2428,11 @@ void MuseScore::clipboardChanged()
 
 void MuseScore::changeState(ScoreState val)
       {
-      if (_sstate == val)
-            return;
       if (debugMode)
             printf("MuseScore::changeState: %s\n", stateName(val));
 
+      if (_sstate == val)
+            return;
       foreach (Shortcut* s, shortcuts) {
             if (!s->action)
                   continue;

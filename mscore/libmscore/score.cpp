@@ -1617,7 +1617,7 @@ void Score::removeElement(Element* element)
                   {
                   TempoText* tt = static_cast<TempoText*>(element);
                   int tick = tt->segment()->tick();
-                  _tempomap->delTempo(tick);
+                  tempomap()->delTempo(tick);
                   }
                   break;
             case INSTRUMENT_CHANGE:
@@ -3311,7 +3311,7 @@ void Score::setTempo(Segment* segment, qreal tempo)
 
 void Score::setTempo(int tick, qreal tempo)
       {
-      _tempomap->setTempo(tick, tempo);
+      tempomap()->setTempo(tick, tempo);
       _playlistDirty = true;
       }
 
@@ -3321,7 +3321,7 @@ void Score::setTempo(int tick, qreal tempo)
 
 void Score::removeTempo(int tick)
       {
-      _tempomap->delTempo(tick);
+      tempomap()->delTempo(tick);
       _playlistDirty = true;
       }
 
@@ -3331,7 +3331,7 @@ void Score::removeTempo(int tick)
 
 void Score::setPause(int tick, qreal seconds)
       {
-      _tempomap->setPause(tick, seconds);
+      tempomap()->setPause(tick, seconds);
       _playlistDirty = true;
       }
 
@@ -3341,6 +3341,6 @@ void Score::setPause(int tick, qreal seconds)
 
 qreal Score::tempo(int tick) const
       {
-      return _tempomap->tempo(tick);
+      return tempomap()->tempo(tick);
       }
 
