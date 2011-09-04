@@ -178,6 +178,8 @@ typedef QList<JumpMarkerDesc> JumpMarkerDescList;
 class MusicXml {
       Score* score;
       QMap<int, VoiceDesc> voicelist;
+      QVector<int> measureLength;               ///< Length of each measure in ticks
+      QVector<int> measureStart;                ///< Start tick of each measure
 
       Slur* slur[MAX_NUMBER_LEVEL];
 
@@ -230,7 +232,7 @@ class MusicXml {
       void xmlPartList(QDomElement);
       void xmlPart(QDomElement, QString id);
       void xmlScorePart(QDomElement node, QString id, int& parts);
-      Measure* xmlMeasure(Part*, QDomElement, int);
+      Measure* xmlMeasure(Part*, QDomElement, int, int measureLen);
       void xmlAttributes(Measure*, int stave, QDomElement node);
       Lyrics*  xmlLyric(int staff, QDomElement e);
       void xmlNote(Measure*, int stave, QDomElement node);
