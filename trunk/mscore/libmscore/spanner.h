@@ -72,6 +72,7 @@ class Spanner : public Element {
       ~Spanner();
 
       virtual ElementType type() const = 0;
+      virtual void setScore(Score* s);
 
       void setStartElement(Element* e) { _startElement = e;    }
       void setEndElement(Element* e)   { _endElement = e;      }

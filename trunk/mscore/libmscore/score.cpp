@@ -1923,6 +1923,7 @@ void Score::addExcerpt(Score* score)
                         }
                   }
             }
+      setExcerptsChanged(true);
       }
 
 //---------------------------------------------------------

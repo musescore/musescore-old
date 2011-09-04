@@ -1065,10 +1065,8 @@ void Score::undoRemoveElement(Element* element)
       {
       QList<Element*> elements;
       LinkedElements* le = element->links();
-      if (le) {
-            foreach(Element* e, *le)
-                  elements.append(e);
-            }
+      if (le)
+            elements.append(*le);
       else
             elements.append(element);
 

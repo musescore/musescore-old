@@ -996,7 +996,6 @@ bool Score::read(QDomElement dScore)
                   s->setParentScore(this);
                   s->read(ee);
                   addExcerpt(s);
-                  s->setExcerptsChanged(true);
                   }
             else if (tag == "PageList") {
                   for (QDomElement e = ee.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {

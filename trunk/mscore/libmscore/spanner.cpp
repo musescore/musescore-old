@@ -83,8 +83,11 @@ Spanner::Spanner(const Spanner& s)
       _endElement   = s._endElement;
       _anchor       = s._anchor;
       _yoffset      = s._yoffset;
-      foreach(SpannerSegment* ss, s.segments)
-            add(ss->clone());
+      foreach(SpannerSegment* ss, s.segments) {
+            SpannerSegment* nss = ss->clone();
+            nss->setParent(0);
+            add(nss);
+            }
       }
 
 Spanner::~Spanner()
@@ -125,6 +128,17 @@ void Spanner::scanElements(void* data, void (*func)(void*, Element*), bool all)
       {
       foreach(SpannerSegment* seg, segments)
             seg->scanElements(data, func, true);
+      }
+
+//---------------------------------------------------------
+//   setScore
+//---------------------------------------------------------
+
+void Spanner::setScore(Score* s)
+      {
+      Element::setScore(s);
+      foreach(SpannerSegment* seg, segments)
+            seg->setScore(s);
       }
 
 //---------------------------------------------------------

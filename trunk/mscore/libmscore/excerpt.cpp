@@ -237,6 +237,7 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
 
                   foreach(Spanner* s, m->spannerFor()) {
                         Spanner* ns = static_cast<Spanner*>(s->linkedClone());
+                        ns->setParent(nm);
                         ns->setScore(score);
                         ns->setStartElement(nm);
                         nm->addSpannerFor(ns);
