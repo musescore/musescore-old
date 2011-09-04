@@ -115,6 +115,7 @@ class MeasureBase : public Element {
       void setDirty(bool val = true)         { _dirty = val;  }
       bool dirty() const                     { return _dirty; }
       int tick() const                       { return _tick;  }
+      int endTick() const                    { return tick() + ticks();  }
       void setTick(int t)                    { _tick = t;     }
 
       qreal pause() const;

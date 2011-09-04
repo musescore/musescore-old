@@ -150,7 +150,6 @@ void UndoCommand::unwind()
 
 UndoStack::UndoStack()
       {
-      group    = 0;
       curCmd   = 0;
       curIdx   = 0;
       cleanIdx = 0;
@@ -162,8 +161,6 @@ UndoStack::UndoStack()
 
 UndoStack::~UndoStack()
       {
-      if (group)
-            group->removeStack(this);
       }
 
 //---------------------------------------------------------
@@ -273,92 +270,6 @@ void UndoStack::redo()
       if (canRedo()) {
             list[curIdx++]->redo();
             }
-      }
-
-//---------------------------------------------------------
-//   undo
-//---------------------------------------------------------
-
-void UndoGroup::undo()
-      {
-      if (_activeStack)
-            _activeStack->undo();
-      }
-
-//---------------------------------------------------------
-//   redo
-//---------------------------------------------------------
-
-void UndoGroup::redo()
-      {
-      if (_activeStack)
-            _activeStack->redo();
-      }
-
-//---------------------------------------------------------
-//   UndoGroup
-//---------------------------------------------------------
-
-UndoGroup::UndoGroup()
-      {
-      _activeStack = 0;
-      }
-
-//---------------------------------------------------------
-//   addStack
-//---------------------------------------------------------
-
-void UndoGroup::addStack(UndoStack* stack)
-      {
-      stack->setGroup(this);
-      group.append(stack);
-      }
-
-//---------------------------------------------------------
-//   removeStack
-//---------------------------------------------------------
-
-void UndoGroup::removeStack(UndoStack* stack)
-      {
-      group.removeOne(stack);
-      if (stack == _activeStack)
-            _activeStack = 0;
-      }
-
-//---------------------------------------------------------
-//   setActiveStack
-//---------------------------------------------------------
-
-void UndoGroup::setActiveStack(UndoStack* stack)
-      {
-      _activeStack = stack;
-      }
-
-//---------------------------------------------------------
-//   canUndo
-//---------------------------------------------------------
-
-bool UndoGroup::canUndo() const
-      {
-      return _activeStack ? _activeStack->canUndo() : false;
-      }
-
-//---------------------------------------------------------
-//   canRedo
-//---------------------------------------------------------
-
-bool UndoGroup::canRedo() const
-      {
-      return _activeStack ? _activeStack->canRedo() : false;
-      }
-
-//---------------------------------------------------------
-//   isClean
-//---------------------------------------------------------
-
-bool UndoGroup::isClean() const
-      {
-      return _activeStack ? _activeStack->isClean() : false;
       }
 
 //---------------------------------------------------------
@@ -996,7 +907,6 @@ void Score::undoAddElement(Element* element)
                || element->type() == OTTAVA
                || element->type() == TRILL
                || element->type() == TEXTLINE
-               || element->type() == VOLTA
                ) {
                   SLine* hp      = static_cast<SLine*>(element);
                   Segment* s1    = static_cast<Segment*>(hp->startElement());
@@ -1012,6 +922,18 @@ void Score::undoAddElement(Element* element)
                   nhp->setEndElement(ns2);
                   nhp->setParent(ns1);
                   undo()->push(new AddElement(nhp));
+                  }
+            else if (element->type() == VOLTA) {
+                  Volta* v       = static_cast<Volta*>(element);
+                  Measure* m1    = v->startMeasure();
+                  Measure* m2    = v->endMeasure();
+                  Measure* nm1   = score->tick2measure(m1->tick());
+                  Measure* nm2   = score->tick2measure(m2->tick());
+                  Volta* nv      = static_cast<Volta*>(ne);
+                  nv->setStartElement(nm1);
+                  nv->setEndElement(nm2);
+                  nv->setParent(nm1);
+                  undo()->push(new AddElement(nv));
                   }
             else if (element->type() == TIE) {
                   Tie* tie       = static_cast<Tie*>(element);
@@ -2744,7 +2666,7 @@ void ChangeMeasureProperties::flip()
 
       score->addLayoutFlags(LAYOUT_FIX_TICKS);
       score->setLayoutAll(true);
-      score->setDirty();
+      score->setDirty(true);
       }
 
 //---------------------------------------------------------

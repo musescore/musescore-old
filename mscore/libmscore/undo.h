@@ -56,7 +56,6 @@ struct Channel;
 struct PageFormat;
 class TextStyle;
 class Tuplet;
-class UndoGroup;
 class KeySig;
 class StaffType;
 class TimeSig;
@@ -105,7 +104,6 @@ class UndoCommand {
 //---------------------------------------------------------
 
 class UndoStack {
-      UndoGroup* group;
       UndoCommand* curCmd;
       QList<UndoCommand*> list;
       int curIdx;
@@ -124,32 +122,9 @@ class UndoStack {
       bool canUndo() const          { return curIdx > 0;           }
       bool canRedo() const          { return curIdx < list.size(); }
       bool isClean() const          { return cleanIdx == curIdx;   }
-      void setGroup(UndoGroup* g)   { group = g;                   }
       UndoCommand* current() const  { return curCmd;               }
       void undo();
       void redo();
-      };
-
-//---------------------------------------------------------
-//   UndoGroup
-//---------------------------------------------------------
-
-class UndoGroup {
-      QList<UndoStack*> group;
-      UndoStack* _activeStack;
-
-   public:
-      void undo();
-      void redo();
-
-      UndoGroup();
-      void addStack(UndoStack*);
-      void removeStack(UndoStack*);
-
-      void setActiveStack(UndoStack*);
-      bool canUndo() const;
-      bool canRedo() const;
-      bool isClean() const;
       };
 
 //---------------------------------------------------------

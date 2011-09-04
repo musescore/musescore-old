@@ -390,10 +390,8 @@ class Score {
       void init();
 
    public:
-      void setClean(bool val);
-      void setDirty(bool val = true) { setClean(!val); }
+      void setDirty(bool val);
 
-   public:
       // read context
       int curTick;                  // for read optimizations
       int curTrack;

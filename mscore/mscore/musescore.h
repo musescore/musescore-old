@@ -66,7 +66,6 @@ class DrumTools;
 class ScriptEngine;
 class KeyEditor;
 class ChordStyleEditor;
-class UndoGroup;
 class Navigator;
 class Style;
 class PianoTools;
@@ -164,7 +163,6 @@ class MuseScore : public QMainWindow {
       Q_OBJECT
 
       ScoreState _sstate;
-      UndoGroup* _undoGroup;
       UpdateChecker* ucheck;
       QList<Score*> scoreList;
       Score* cs;              // current score

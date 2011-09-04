@@ -344,7 +344,6 @@ MuseScore::MuseScore()
       ucheck                = new UpdateChecker();
 
       setAcceptDrops(true);
-      _undoGroup            = new UndoGroup();
       cs                    = 0;
       cv                    = 0;
       se                    = 0;    // script engine
@@ -1148,9 +1147,7 @@ void MuseScore::selectionChanged(int state)
 
 int MuseScore::appendScore(Score* score)
       {
-//      connect(score, SIGNAL(dirtyChanged(Score*)),  SLOT(dirtyChanged(Score*)));
-//      connect(score, SIGNAL(posChanged(int)),       SLOT(setPos(int)));
-
+printf("appendScore\n");
       int index = scoreList.size();
       for (int i = 0; i < scoreList.size(); ++i) {
             if (scoreList[i]->filePath() == score->filePath()) {
@@ -1166,7 +1163,6 @@ int MuseScore::appendScore(Score* score)
       tab1->insertTab(score);
       if (tab2)
             tab2->insertTab(score);
-      _undoGroup->addStack(score->undo());
       tab1->blockSignals(false);
       if (tab2)
             tab2->blockSignals(false);
@@ -1323,7 +1319,6 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
             iledit->updateAll(cs);
       if (!enable) {
             changeState(STATE_DISABLED);
-            _undoGroup->setActiveStack(0);
             setWindowTitle("MuseScore");
             if (_navigator && _navigator->widget())
                   static_cast<Navigator*>(_navigator->widget())->setScore(0);
@@ -1331,7 +1326,6 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
             }
       changeState(view->mscoreState());
 
-      _undoGroup->setActiveStack(cs->undo());
       view->setFocus(Qt::OtherFocusReason);
 
       getAction("file-save")->setEnabled(cs->isSavable());
@@ -2444,9 +2438,9 @@ void MuseScore::changeState(ScoreState val)
             if (!s->action)
                   continue;
             if (strcmp(s->xml, "undo") == 0)
-                  s->action->setEnabled((s->state & val) && _undoGroup->canUndo());
+                  s->action->setEnabled((s->state & val) && (cs ? cs->undo()->canUndo() : false));
             else if (strcmp(s->xml, "redo") == 0)
-                  s->action->setEnabled((s->state & val) && _undoGroup->canRedo());
+                  s->action->setEnabled((s->state & val) && (cs ? cs->undo()->canRedo() : false));
             else if (strcmp(s->xml, "cut") == 0)
                   s->action->setEnabled(cs && cs->selection().state());
             else if (strcmp(s->xml, "copy") == 0)
@@ -2729,6 +2723,7 @@ AboutBoxDialog::AboutBoxDialog()
 void MuseScore::dirtyChanged(Score* s)
       {
       Score* score = s->rootScore();
+
       int idx = scoreList.indexOf(score);
       if (idx == -1) {
             printf("score not in list\n");
@@ -2829,7 +2824,8 @@ void MuseScore::undo()
       {
       if (cv)
             cv->startUndoRedo();
-      _undoGroup->undo();
+      if (cs)
+            cs->undo()->undo();
       if (cv)
             cv->endUndoRedo();
       }
@@ -2842,7 +2838,8 @@ void MuseScore::redo()
       {
       if (cv)
             cv->startUndoRedo();
-      _undoGroup->redo();
+      if (cs)
+            cs->undo()->redo();
       if (cv)
             cv->endUndoRedo();
       }
@@ -4122,7 +4119,7 @@ void MuseScore::endCmd()
 // printf("updateInputState %s\n", qPrintable(cs->inputState().duration().name()));
             updateInputState(cs);
             updateUndoRedo();
-            cs->setDirty(!_undoGroup->isClean());
+            cs->setDirty(!cs->undo()->isClean());
             dirtyChanged(cs);
             Element* e = cs->selection().element();
             if (e && cs->playNote()) {
@@ -4185,9 +4182,9 @@ void MuseScore::endCmd()
 void MuseScore::updateUndoRedo()
       {
       QAction* a = getAction("undo");
-      a->setEnabled(_undoGroup->canUndo());
+      a->setEnabled(cs ? cs->undo()->canUndo() : false);
       a = getAction("redo");
-      a->setEnabled(_undoGroup->canRedo());
+      a->setEnabled(cs ? cs->undo()->canRedo() : false);
       }
 
 //---------------------------------------------------------

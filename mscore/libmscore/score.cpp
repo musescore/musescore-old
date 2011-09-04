@@ -733,17 +733,14 @@ void Score::setShowPageborders(bool v)
       }
 
 //---------------------------------------------------------
-//   setClean
+//   setDirty
 //---------------------------------------------------------
 
-void Score::setClean(bool val)
+void Score::setDirty(bool val)
       {
-      val = !val;
-
       if (_dirty != val) {
             _dirty         = val;
             _playlistDirty = true;
-//            emit dirtyChanged(this);
             }
       if (_dirty) {
             _playlistDirty = true;
@@ -1956,6 +1953,12 @@ Spanner* Score::findSpanner(int id) const
       static const SegmentTypes st = SegChordRest;
       for (Segment* s = firstMeasure()->first(st); s; s = s->next1(st)) {
             foreach(Spanner* e, s->spannerFor()) {
+                  if (e->id() == id)
+                        return e;
+                  }
+            }
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+            foreach(Spanner* e, m->spannerFor()) {
                   if (e->id() == id)
                         return e;
                   }
@@ -3338,6 +3341,6 @@ void Score::setPause(int tick, qreal seconds)
 
 qreal Score::tempo(int tick) const
       {
-      _tempomap->tempo(tick);
+      return _tempomap->tempo(tick);
       }
 

@@ -115,8 +115,7 @@ void Score::endCmd()
             }
       bool noUndo = undo()->current()->childCount() <= 1;
       if (!noUndo)
-            setClean(noUndo);
-//      end();
+            setDirty(!noUndo);
       undo()->endMacro(noUndo);
       }
 
@@ -198,10 +197,11 @@ void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& /
 
       int track = staffIdx == -1 ? -1 : staffIdx * VOICES;
       spanner->setTrack(track);
-      spanner->setStartElement(segment);
-      spanner->setParent(segment);
 
       if (spanner->anchor() == ANCHOR_SEGMENT) {
+            spanner->setStartElement(segment);
+            spanner->setParent(segment);
+
             static const SegmentType st = SegChordRest;
             Segment* s = segment;
             for (;;) {
@@ -220,7 +220,10 @@ void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& /
             spanner->setEndElement(s);
             }
       else {      // ANCHOR_MEASURE
-            spanner->setEndElement(segment->measure()->last());
+            Measure* measure = segment->measure();
+            spanner->setStartElement(measure);
+            spanner->setEndElement(measure);
+            spanner->setParent(measure);
             }
 
       undoAddElement(spanner);

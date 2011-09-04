@@ -178,6 +178,8 @@ void Measure::setScore(Score* score)
             s->setScore(score);
       foreach(Tuplet* t, _tuplets)
             t->setScore(score);
+      foreach(Spanner* s, _spannerFor)
+            s->setScore(score);
       }
 
 //---------------------------------------------------------
@@ -960,6 +962,16 @@ void Measure::add(Element* el)
                   _el.append(el);
                   break;
 
+            case VOLTA:
+                  {
+                  Volta* volta = static_cast<Volta*>(el);
+                  Measure* m = volta->endMeasure();
+                  if (m)
+                        m->addSpannerBack(volta);
+                  _spannerFor.append(volta);
+                  }
+                  break;
+
             default:
                   printf("Measure::add(%s) not impl.\n", el->name());
                   break;
@@ -1047,6 +1059,15 @@ void Measure::remove(Element* el)
                               }
                         }
                   printf("Measure::remove: %s %p not found\n", el->name(), el);
+                  break;
+
+            case VOLTA:
+                  {
+                  Volta* volta = static_cast<Volta*>(el);
+                  Measure* m = volta->endMeasure();
+                  m->removeSpannerBack(volta);
+                  _spannerFor.removeOne(volta);
+                  }
                   break;
 
             default:
@@ -1755,6 +1776,19 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
       if (mstaff->_slashStyle)
             xml.tag("slashStyle", mstaff->_slashStyle);
 
+      int strack = staff * VOICES;
+      int etrack = strack + VOICES;
+      foreach(Spanner* e, _spannerFor) {
+            if (e->track() >= strack && e->track() < etrack && !e->generated()) {
+                  e->setId(++xml.spannerId);
+                  e->write(xml);
+                  }
+            }
+      foreach(Spanner* e, _spannerBack) {
+            if (e->track() >= strack && e->track() < etrack && !e->generated()) {
+                  xml.tagE(QString("endSpanner id=\"%1\"").arg(e->id()));
+                  }
+            }
       foreach (const Element* el, _el) {
             if ((el->staffIdx() == staff) || (el->systemFlag() && writeSystemElements)) {
                   el->write(xml);
@@ -1999,12 +2033,15 @@ void Measure::read(QDomElement e, int staffIdx)
                   int id = e.attribute("id").toInt();
                   Spanner* e = score()->findSpanner(id);
                   if (e) {
-                        if (e->anchor() == ANCHOR_MEASURE && score()->curTick == (tick()+ticks()))
-                              segment = getSegment(SegEndBarLine, score()->curTick);
-                        else
+                        if (e->anchor() == ANCHOR_MEASURE) {
+                              e->setEndElement(this);
+                              _spannerBack.append(e);
+                              }
+                        else {
                               segment = getSegment(SegChordRest, score()->curTick);
-                        e->setEndElement(segment);
-                        segment->addSpannerBack(e);
+                              e->setEndElement(segment);
+                              segment->addSpannerBack(e);
+                              }
                         if (e->type() == OTTAVA) {
                               Ottava* o = static_cast<Ottava*>(e);
                               int shift = o->pitchShift();
@@ -2031,8 +2068,14 @@ void Measure::read(QDomElement e, int staffIdx)
                   sp->setTrack(staffIdx * VOICES);
                   sp->read(e);
                   segment = getSegment(SegChordRest, score()->curTick);
-                  sp->setStartElement(segment);
-                  segment->add(sp);
+                  if (sp->anchor() == ANCHOR_SEGMENT) {
+                        sp->setStartElement(segment);
+                        segment->add(sp);
+                        }
+                  else {
+                        sp->setStartElement(this);
+                        add(sp);
+                        }
                   }
             else if (tag == "RepeatMeasure") {
                   RepeatMeasure* rm = new RepeatMeasure(score());
@@ -2309,6 +2352,8 @@ void Measure::scanElements(void* data, void (*func)(void*, Element*), bool all)
                   func(data, tuplet);
             }
 
+      foreach(Spanner* e, _spannerFor)
+            e->scanElements(data,  func, all);
       if (noText())
             func(data, noText());
       }
