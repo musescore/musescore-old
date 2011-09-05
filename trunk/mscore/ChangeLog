@@ -1,3 +1,5 @@
+5.sep (ws)
+      - implemented spanners (haipins etc.) for linked parts
 4.sep (lv)
       - fix #12276: MusicXML import: sub-optimal handling of different duration measures
       (ws)

@@ -150,7 +150,8 @@ void ExcerptsDialog::newClicked()
       e->setTitle(name);
       ExcerptItem* ei = new ExcerptItem(e);
       excerptList->addItem(ei);
-      excerptList->setCurrentRow(score->excerpts()->size() - 1);
+      excerptList->selectionModel()->clearSelection();
+      excerptList->setCurrentItem(ei, QItemSelectionModel::SelectCurrent);
       }
 
 //---------------------------------------------------------
