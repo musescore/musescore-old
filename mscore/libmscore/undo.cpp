@@ -1658,12 +1658,6 @@ void ChangeElement::flip()
             TempoText* t = static_cast<TempoText*>(oldElement);
             score->setTempo(t->segment(), t->tempo());
             }
-      else if (newElement->type() == LAYOUT_BREAK && newElement->subtype() ==
-         LAYOUT_BREAK_SECTION) {
-            LayoutBreak* b = static_cast<LayoutBreak*>(newElement);
-            score->tempomap()->setPause(b->measure()->tick()
-               + b->measure()->ticks(), b->pause());
-            }
       ElementType t = newElement->type();
       if (t == SLUR || t == TIE || t == HAIRPIN || t == OTTAVA || t == TRILL
          || t == TEXTLINE || t == VOLTA) {

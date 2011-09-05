@@ -928,28 +928,6 @@ void Measure::add(Element* el)
                         tuplet->tuplet()->add(tuplet);
                   }
                   break;
-            case LAYOUT_BREAK:
-                  for (iElement i = _el.begin(); i != _el.end(); ++i) {
-                        if ((*i)->type() == LAYOUT_BREAK && (*i)->subtype() == el->subtype()) {
-                              if (debugMode)
-                                    printf("warning: layout break already set\n");
-                              return;
-                              }
-                        }
-                  switch(el->subtype()) {
-                        case LAYOUT_BREAK_PAGE:
-                              _pageBreak = true;
-                              break;
-                        case LAYOUT_BREAK_LINE:
-                              _lineBreak = true;
-                              break;
-                        case LAYOUT_BREAK_SECTION:
-                              _sectionBreak = static_cast<LayoutBreak*>(el);
-                              score()->setPause(tick() + ticks(), _sectionBreak->pause());
-                              break;
-                        }
-                  _el.push_back(el);
-                  break;
 
             case JUMP:
                   _repeatFlags |= RepeatJump;
@@ -973,7 +951,7 @@ void Measure::add(Element* el)
                   break;
 
             default:
-                  printf("Measure::add(%s) not impl.\n", el->name());
+                  MeasureBase::add(el);
                   break;
             }
       }
@@ -1012,23 +990,6 @@ void Measure::remove(Element* el)
                   if (tuplet->tuplet())
                         tuplet->tuplet()->remove(tuplet);
                   }
-                  break;
-            case LAYOUT_BREAK:
-                  switch(el->subtype()) {
-                        case LAYOUT_BREAK_PAGE:
-                              _pageBreak = false;
-                              break;
-                        case LAYOUT_BREAK_LINE:
-                              _lineBreak = false;
-                              break;
-                        case LAYOUT_BREAK_SECTION:
-                              _sectionBreak = 0;
-                              score()->setPause(tick() + ticks(), 0.0);
-                              break;
-                        }
-                  if (!_el.remove(el))
-                        printf("Measure(%p)::remove(%s,%p) not found\n",
-                           this, el->name(), el);
                   break;
 
             case JUMP:
@@ -1074,7 +1035,7 @@ void Measure::remove(Element* el)
                   break;
 
             default:
-                  printf("Measure::remove %s: not impl.\n", el->name());
+                  MeasureBase::remove(el);
                   break;
             }
       }
