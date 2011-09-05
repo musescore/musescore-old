@@ -142,7 +142,10 @@ void ScoreView::genPropertyMenuText(Element* e, QMenu* popup)
 
 void ScoreView::createElementPropertyMenu(Element* e, QMenu* popup)
       {
-      if (e->type() == ARTICULATION) {
+      if (e->type() == BAR_LINE) {
+            genPropertyMenu1(e, popup);
+            }
+      else if (e->type() == ARTICULATION) {
             genPropertyMenu1(e, popup);
             popup->addAction(tr("Articulation Properties..."))->setData("a-props");
             }
@@ -195,7 +198,7 @@ void ScoreView::createElementPropertyMenu(Element* e, QMenu* popup)
                   a = popup->addAction(ts->showCourtesySig()
                      ? QT_TRANSLATE_NOOP("TimeSig", "Hide Courtesy Time Signature")
                      : QT_TRANSLATE_NOOP("TimeSig", "Show Courtesy Time Signature") );
-                  a->setData("courtesy");
+                  a->setData("ts-courtesy");
                   }
             popup->addSeparator();
             popup->addAction(tr("Time Signature Properties..."))->setData("ts-props");
@@ -215,7 +218,7 @@ void ScoreView::createElementPropertyMenu(Element* e, QMenu* popup)
                   QAction* a = popup->addAction(static_cast<Clef*>(e)->showCourtesyClef()
                      ? QT_TRANSLATE_NOOP("Clef", "Hide courtesy clef")
                      : QT_TRANSLATE_NOOP("Clef", "Show courtesy clef") );
-                        a->setData("courtesy");
+                        a->setData("clef-courtesy");
                   }
             }
       else if (e->type() == DYNAMIC) {
@@ -253,11 +256,11 @@ void ScoreView::createElementPropertyMenu(Element* e, QMenu* popup)
                   QAction* a = popup->addAction(ks->showCourtesySig()
                      ? QT_TRANSLATE_NOOP("KeySig", "Hide Courtesy Key Signature")
                      : QT_TRANSLATE_NOOP("KeySig", "Show Courtesy Key Signature") );
-                  a->setData("courtesy");
+                  a->setData("key-courtesy");
                   a = popup->addAction(ks->showNaturals()
                      ? QT_TRANSLATE_NOOP("KeySig", "Hide Naturals")
                      : QT_TRANSLATE_NOOP("KeySig", "Show Naturals") );
-                  a->setData("naturals");
+                  a->setData("key-naturals");
                   }
             }
       else if (e->type() == STAFF_STATE && e->subtype() == STAFF_STATE_INSTRUMENT) {
@@ -489,13 +492,13 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             if (bp.exec())
                   score()->undo()->push(new ChangeTremoloBar(tb, bp.points()));
             }
-      if (cmd == "courtesy") {
+      if (cmd == "ts-courtesy") {
             TimeSig* ts = static_cast<TimeSig*>(e);
             score()->undo()->push(new ChangeTimesig(static_cast<TimeSig*>(e),
                !ts->showCourtesySig(), ts->sig(), ts->stretch(), ts->subtype(),
                ts->zText(), ts->nText()));
             }
-      else if (cmd == "props") {
+      else if (cmd == "ts-props") {
             TimeSig* ts = static_cast<TimeSig*>(e);
             TimeSig r(*ts);
             TimeSigProperties vp(&r);
@@ -514,7 +517,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             Accidental* a = static_cast<Accidental*>(e);
             score()->undo()->push(new ChangeAccidental(a, !a->small()));
             }
-      else if (cmd == "courtesy") {
+      else if (cmd == "clef-courtesy") {
             Clef* clef = static_cast<Clef*>(e);
             score()->undo()->push(new ChangeClef(clef, !clef->showCourtesyClef()));
             }
@@ -625,11 +628,11 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             TempoProperties rp(static_cast<TempoText*>(e));
             rp.exec();
             }
-      else if (cmd == "courtesy") {
+      else if (cmd == "key-courtesy") {
             KeySig* ks = static_cast<KeySig*>(e);
             score()->undo()->push(new ChangeKeySig(ks, ks->keySigEvent(), !ks->showCourtesySig(), ks->showNaturals()));
             }
-      else if (cmd == "naturals") {
+      else if (cmd == "key-naturals") {
             KeySig* ks = static_cast<KeySig*>(e);
             score()->undo()->push(new ChangeKeySig(ks, ks->keySigEvent(), ks->showCourtesySig(), !ks->showNaturals()));
             }

@@ -21,6 +21,7 @@
 #include "layoutbreak.h"
 #include "image.h"
 #include "segment.h"
+#include "tempo.h"
 
 //---------------------------------------------------------
 //   MeasureBase
@@ -109,8 +110,9 @@ void MeasureBase::add(Element* e)
       {
       e->setParent(this);
       if (e->type() == LAYOUT_BREAK) {
-            for (iElement i = _el.begin(); i != _el.end(); ++i) {
-                  if ((*i)->type() == LAYOUT_BREAK && (*i)->subtype() == e->subtype()) {
+            LayoutBreak* b = static_cast<LayoutBreak*>(e);
+            foreach (Element* ee, _el) {
+                  if (ee->type() == LAYOUT_BREAK && ee->subtype() == e->subtype()) {
                         if (debugMode)
                               printf("warning: layout break already set\n");
                         return;
@@ -124,7 +126,8 @@ void MeasureBase::add(Element* e)
                         _lineBreak = true;
                         break;
                   case LAYOUT_BREAK_SECTION:
-                        _sectionBreak = static_cast<LayoutBreak*>(e);
+                        _sectionBreak = b;
+                        score()->tempomap()->setPause(endTick(), b->pause());
                         break;
                   }
             }
@@ -144,6 +147,7 @@ void MeasureBase::add(Element* e)
 void MeasureBase::remove(Element* el)
       {
       if (el->type() == LAYOUT_BREAK) {
+            LayoutBreak* b = static_cast<LayoutBreak*>(el);
             switch(el->subtype()) {
                   case LAYOUT_BREAK_PAGE:
                         _pageBreak = false;
@@ -153,6 +157,7 @@ void MeasureBase::remove(Element* el)
                         break;
                   case LAYOUT_BREAK_SECTION:
                         _sectionBreak = 0;
+                        score()->tempomap()->setPause(endTick(), 0);
                         break;
                   }
             }
