@@ -303,8 +303,10 @@ void Articulation::setSubtype(const QString& s)
                   { "dlongfermata",     false, Articulation_Longfermata },
                   { "uverylongfermata", true,  Articulation_Verylongfermata },
                   { "dverylongfermata", false, Articulation_Verylongfermata },
-                  { "uportatoSym",      true,  Articulation_Portato },
-                  { "dportatoSym",      false, Articulation_Portato }
+                  { "uportato",         true,  Articulation_Portato },
+                  { "dportato",         false, Articulation_Portato },
+                  { "ustaccatissimo",   true,  Articulation_Staccatissimo },
+                  { "dstaccatissimo",   false, Articulation_Staccatissimo }
                   };
 
             int i;

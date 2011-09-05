@@ -364,11 +364,21 @@ void Score::layoutStage1()
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             ++idx;
             m->layoutStage1();
+            foreach(Spanner* spanner, m->spannerFor()) {
+                  if (spanner->type() == VOLTA) {
+                        m->setBreakMMRest(true);
+                        }
+                  }
             MeasureBase* mb = m->prev();
             if (mb && mb->type() == MEASURE) {
-                  Measure* prev = static_cast<Measure*>(mb);
-                  if (prev->endBarLineType() != NORMAL_BAR && prev->endBarLineType() != BROKEN_BAR)
+                  Measure* pm = static_cast<Measure*>(mb);
+                  if (pm->endBarLineType() != NORMAL_BAR && pm->endBarLineType() != BROKEN_BAR)
                         m->setBreakMMRest(true);
+                  foreach(Spanner* spanner, pm->spannerBack()) {
+                        if (spanner->type() == VOLTA) {
+                              m->setBreakMMRest(true);
+                              }
+                        }
                   }
             }
       }

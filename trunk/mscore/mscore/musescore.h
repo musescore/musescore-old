@@ -78,6 +78,7 @@ class EditTempo;
 class Capella;
 class CapVoice;
 class Inspector;
+class NScrollArea;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -172,7 +173,7 @@ class MuseScore : public QMainWindow {
       QSplitter* splitter;
       ScoreTab* tab1;
       ScoreTab* tab2;
-      QScrollArea* _navigator;
+      NScrollArea* _navigator;
       QSplitter* mainWindow;
 
       QMenu* menuDisplay;
@@ -555,7 +556,7 @@ class MuseScore : public QMainWindow {
 
       Q_INVOKABLE QString getLocaleISOCode();
       Navigator* navigator() const;
-      QScrollArea* navigatorScrollArea() const { return _navigator; }
+      NScrollArea* navigatorScrollArea() const { return _navigator; }
       void updateLayer();
       };
 

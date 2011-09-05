@@ -1297,43 +1297,36 @@ void ScoreView::startEdit()
             SpannerSegment* ols = (SpannerSegment*)origEditObject;
             Spanner* ohp        = ols->spanner();
 
-            LinkedElements* links = ohp->links();
-            if (links) {
-                  foreach(Element* e, *links) {
-                        Spanner* sp = static_cast<Spanner*>(e);
-                        Spanner* csp = static_cast<Spanner*>(sp->clone());
-                        if (sp == ohp) {
-                              int idx = sp->spannerSegments().indexOf(ols);
-                              editObject = csp->spannerSegments().at(idx);
-                              }
-                        _score->undoChangeElement(sp, csp);
+            QList<Element*> spl;
+            if (ohp->links())
+                  spl.append(*ohp->links());
+            else
+                  spl.append(ohp);
+
+            foreach(Element* e, spl) {
+                  Spanner* sp  = static_cast<Spanner*>(e);
+                  Spanner* csp = static_cast<Spanner*>(sp->clone());
+                  if (sp == ohp) {
+                        int idx = sp->spannerSegments().indexOf(ols);
+                        editObject = csp->spannerSegments().at(idx);
                         }
-                  }
-            else {
-                  Spanner* hp         = (Spanner*)ohp->clone();
-                  int idx             = ohp->spannerSegments().indexOf(ols);
-                  editObject          = hp->spannerSegments().at(idx);
-                  hp->setSelected(true);
-                  _score->undoChangeElement(ohp, hp);
+                  _score->undoChangeElement(sp, csp);
                   }
             editObject->startEdit(this, startMove);
             }
       else {
-            LinkedElements* links = origEditObject->links();
-            if (links) {
-                  foreach(Element* e, *links) {
-                        Element* ce = e->clone();
-                        if (e == origEditObject) {
-                              editObject = ce;
-                              editObject->setSelected(true);
-                              }
-                        _score->undoChangeElement(e, ce);
+            QList<Element*> el;
+            if (origEditObject->links())
+                  el.append(*origEditObject->links());
+            else
+                  el.append(origEditObject);
+            foreach(Element* e, el) {
+                  Element* ce = e->clone();
+                  if (e == origEditObject) {
+                        editObject = ce;
+                        editObject->setSelected(true);
                         }
-                  }
-            else {
-                  editObject = origEditObject->clone();
-                  editObject->setSelected(true);
-                  _score->undoChangeElement(origEditObject, editObject);
+                  _score->undoChangeElement(e, ce);
                   }
             editObject->startEdit(this, startMove);
             }

@@ -48,7 +48,6 @@ class PageSettings : public QDialog, private Ui::PageSettingsBase {
       void ok();
       void done(int val);
 
-      void pwChanged(double val);
       void twosidedToggled(bool);
       void landscapeToggled(bool);
       void otmChanged(double val);
@@ -57,8 +56,6 @@ class PageSettings : public QDialog, private Ui::PageSettingsBase {
       void ormChanged(double val);
       void etmChanged(double val);
       void ebmChanged(double val);
-      void elmChanged(double val);
-      void ermChanged(double val);
       void spatiumChanged(double val);
       void pageHeightChanged(double);
       void pageWidthChanged(double);

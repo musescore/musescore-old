@@ -1,4 +1,5 @@
 5.sep (ws)
+      - fix #12202: Page settings (patch from lasconic)
       - fix #12395: Several issues with property pop menu (patch from Miwarre)
       - implemented spanners (haipins etc.) for linked parts
 4.sep (lv)

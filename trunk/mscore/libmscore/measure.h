@@ -251,11 +251,11 @@ class Measure : public MeasureBase {
       void setBreakMMRest(bool v)               { _breakMMRest = v;    }
       bool getBreakMultiMeasureRest() const     { return _breakMultiMeasureRest; }
       void setBreakMultiMeasureRest(bool val)   { _breakMultiMeasureRest = val;  }
+      int multiMeasure() const                  { return _multiMeasure; }
+      void setMultiMeasure(int val)             { _multiMeasure = val;  }
 
       bool isEmpty() const;
 
-      int multiMeasure() const                  { return _multiMeasure; }
-      void setMultiMeasure(int val)             { _multiMeasure = val;  }
       void layoutChords0(Segment* segment, int startTrack);
       void layoutChords10(Segment* segment, int startTrack, AccidentalState*);
       void updateAccidentals(Segment* segment, int staffIdx, AccidentalState*);

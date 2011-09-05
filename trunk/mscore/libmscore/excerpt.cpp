@@ -250,6 +250,8 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
 
                   foreach(Spanner* s, m->spannerFor()) {
                         Spanner* ns = static_cast<Spanner*>(s->linkedClone());
+                        foreach(SpannerSegment* ss, ns->spannerSegments())
+                              ss->setParent(0);
                         ns->setParent(nm);
                         ns->setScore(score);
                         ns->setStartElement(nm);
@@ -278,6 +280,8 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                                     if (spanner->track() != track)
                                           continue;
                                     Spanner* nspanner = static_cast<Spanner*>(spanner->linkedClone());
+                                    foreach(SpannerSegment* ss, nspanner->spannerSegments())
+                                          ss->setParent(0);
                                     nspanner->setScore(score);
                                     nspanner->setParent(ns);
                                     nspanner->setStartElement(ns);
@@ -355,7 +359,7 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                                     if (oe->type() == CHORD) {
                                           Chord* och = static_cast<Chord*>(ocr);
                                           Chord* nch = static_cast<Chord*>(ncr);
-                                          int n = och->notes().size();
+                                          int n      = och->notes().size();
                                           for (int i = 0; i < n; ++i) {
                                                 Note* on = och->notes().at(i);
                                                 Note* nn = nch->notes().at(i);

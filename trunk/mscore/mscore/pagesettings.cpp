@@ -37,18 +37,8 @@ PageSettings::PageSettings(QWidget* parent)
       setupUi(this);
       setModal(true);
 
-      QScrollArea* sa = new QScrollArea;
-      sa->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-      sa->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-      sa->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-      sa->setMinimumHeight(40);
-//      sa->setFrameStyle(QFrame::Box | QFrame::Raised);
-      sa->setLineWidth(0);
-
+      NScrollArea* sa = new NScrollArea;
       preview = new Navigator(sa, this);
-      preview->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
-      sa->setWidget(preview);
-      sa->setWidgetResizable(true);
 
       static_cast<QVBoxLayout*>(previewGroup->layout())->insertWidget(0, sa);
 
@@ -66,18 +56,15 @@ PageSettings::PageSettings(QWidget* parent)
       connect(twosided,             SIGNAL(toggled(bool)),        SLOT(twosidedToggled(bool)));
       connect(pageHeight,           SIGNAL(valueChanged(double)), SLOT(pageHeightChanged(double)));
       connect(pageWidth,            SIGNAL(valueChanged(double)), SLOT(pageWidthChanged(double)));
-      connect(printableWidth,       SIGNAL(valueChanged(double)), SLOT(pwChanged(double)));
       connect(oddPageTopMargin,     SIGNAL(valueChanged(double)), SLOT(otmChanged(double)));
       connect(oddPageBottomMargin,  SIGNAL(valueChanged(double)), SLOT(obmChanged(double)));
       connect(oddPageLeftMargin,    SIGNAL(valueChanged(double)), SLOT(olmChanged(double)));
       connect(oddPageRightMargin,   SIGNAL(valueChanged(double)), SLOT(ormChanged(double)));
       connect(evenPageTopMargin,    SIGNAL(valueChanged(double)), SLOT(etmChanged(double)));
       connect(evenPageBottomMargin, SIGNAL(valueChanged(double)), SLOT(ebmChanged(double)));
-      connect(evenPageLeftMargin,   SIGNAL(valueChanged(double)), SLOT(elmChanged(double)));
-      connect(evenPageRightMargin,  SIGNAL(valueChanged(double)), SLOT(ermChanged(double)));
       connect(pageGroup,            SIGNAL(activated(int)),       SLOT(pageFormatSelected(int)));
       connect(spatiumEntry,         SIGNAL(valueChanged(double)), SLOT(spatiumChanged(double)));
-	connect(pageOffsetEntry,      SIGNAL(valueChanged(int)),    SLOT(pageOffsetChanged(int)));
+      connect(pageOffsetEntry,      SIGNAL(valueChanged(int)),    SLOT(pageOffsetChanged(int)));
       }
 
 //---------------------------------------------------------
@@ -135,8 +122,7 @@ void PageSettings::updateValues()
       spatiumEntry->blockSignals(true);
       pageWidth->blockSignals(true);
       pageHeight->blockSignals(true);
-	pageOffsetEntry->blockSignals(true);
-      printableWidth->blockSignals(true);
+      pageOffsetEntry->blockSignals(true);
 
       const char* suffix = mm ? "mm" : "in";
       oddPageTopMargin->setSuffix(suffix);
@@ -150,13 +136,12 @@ void PageSettings::updateValues()
       spatiumEntry->setSuffix(suffix);
       pageWidth->setSuffix(suffix);
       pageHeight->setSuffix(suffix);
-      printableWidth->setSuffix(suffix);
 
       PageFormat* pf = sc->pageFormat();
 
       QString s;
 
-      qreal printableWidthValue = pf->printableWidth();
+      //qreal printableWidthValue = pf->printableWidth();
       qreal widthValue = pf->width();
       if (mm) {
             oddPageTopMargin->setValue(pf->oddTopMargin() * INCH);
@@ -172,7 +157,6 @@ void PageSettings::updateValues()
             spatiumEntry->setValue(cs->spatium()/DPMM);
             pageHeight->setValue(pf->height() * INCH);
             widthValue          *= INCH;
-            printableWidthValue *= INCH;
             }
       else {
             oddPageTopMargin->setValue(pf->oddTopMargin());
@@ -189,24 +173,30 @@ void PageSettings::updateValues()
             pageHeight->setValue(pf->height());
             }
       pageWidth->setValue(widthValue);
-      printableWidth->setValue(printableWidthValue);
-      printableWidth->setMaximum(widthValue);
-      qreal maxBorder = widthValue - printableWidthValue;
 
-      oddPageLeftMargin->setMaximum(maxBorder);
-      oddPageRightMargin->setMaximum(maxBorder);
-      evenPageLeftMargin->setMaximum(maxBorder);
-      evenPageRightMargin->setMaximum(maxBorder);
+      oddPageLeftMargin->setMaximum(widthValue);
+      oddPageRightMargin->setMaximum(widthValue);
+      evenPageLeftMargin->setMaximum(widthValue);
+      evenPageRightMargin->setMaximum(widthValue);
 
       evenPageTopMargin->setEnabled(pf->twosided());
       evenPageBottomMargin->setEnabled(pf->twosided());
-      evenPageLeftMargin->setEnabled(pf->twosided());
-      evenPageRightMargin->setEnabled(pf->twosided());
+      evenPageLeftMargin->setEnabled(false);
+      evenPageRightMargin->setEnabled(false);
+
+      if(twosided->isChecked()) {
+            evenPageRightMargin->setValue(oddPageLeftMargin->value());
+            evenPageLeftMargin->setValue(oddPageRightMargin->value());
+            }
+      else {
+            evenPageRightMargin->setValue(oddPageRightMargin->value());
+            evenPageLeftMargin->setValue(oddPageLeftMargin->value());
+      }
 
       landscape->setChecked(pf->landscape());
       twosided->setChecked(pf->twosided());
 
-	pageOffsetEntry->setValue(sc->pageNumberOffset() + 1);
+      pageOffsetEntry->setValue(sc->pageNumberOffset() + 1);
 
       pageWidth->blockSignals(false);
       pageHeight->blockSignals(false);
@@ -219,8 +209,7 @@ void PageSettings::updateValues()
       evenPageLeftMargin->blockSignals(false);
       evenPageRightMargin->blockSignals(false);
       spatiumEntry->blockSignals(false);
-	pageOffsetEntry->blockSignals(false);
-      printableWidth->blockSignals(false);
+      pageOffsetEntry->blockSignals(false);
 	}
 
 //---------------------------------------------------------
@@ -279,7 +268,7 @@ void PageSettings::apply()
       pf.setSize(pageGroup->currentIndex());
       pf.setWidth(pageWidth->value() * f);
       pf.setHeight(pageHeight->value() * f);
-      pf.setPrintableWidth(printableWidth->value() * f);
+      pf.setPrintableWidth((pageWidth->value() - oddPageLeftMargin->value() - oddPageRightMargin->value())  * f);
       pf.setEvenTopMargin(evenPageTopMargin->value() * f);
       pf.setEvenBottomMargin(evenPageBottomMargin->value() * f);
       pf.setEvenLeftMargin(evenPageLeftMargin->value() * f);
@@ -349,16 +338,20 @@ void PageSettings::olmChanged(double val)
       if (mmUnit)
             val /= INCH;
 
+      if(twosided->isChecked()) {
+            evenPageRightMargin->blockSignals(true);
+            evenPageRightMargin->setValue(val * (mmUnit ? INCH : 1.0));
+            evenPageRightMargin->blockSignals(false);
+            }
+      else{
+            evenPageLeftMargin->blockSignals(true);
+            evenPageLeftMargin->setValue(val * (mmUnit ? INCH : 1.0));
+            evenPageLeftMargin->blockSignals(false);
+            }
       PageFormat* pf = preview->score()->pageFormat();
+      pf->setPrintableWidth(pf->width() - pf->oddRightMargin() - val);
       pf->setOddLeftMargin(val);
-
-      // right margin depends, as score width is identical
-      // for even and odd pages
-      oddPageRightMargin->blockSignals(true);
-      oddPageRightMargin->setValue(pf->oddRightMargin() * (mmUnit ? INCH : 1.0));
-      evenPageRightMargin->blockSignals(false);
-
-      updatePreview(1);
+      updatePreview(0);
       }
 
 //---------------------------------------------------------
@@ -372,13 +365,19 @@ void PageSettings::ormChanged(double val)
 
       PageFormat* pf = preview->score()->pageFormat();
 
-      // left margin depends, as score width is identical
-      // for even and odd pages
-      oddPageLeftMargin->blockSignals(true);
-      oddPageLeftMargin->setValue((pf->width() - pf->printableWidth() - val) * (mmUnit ? INCH : 1.0));
-      evenPageRightMargin->blockSignals(false);
+      if(twosided->isChecked()) {
+            evenPageLeftMargin->blockSignals(true);
+            evenPageLeftMargin->setValue(val * (mmUnit ? INCH : 1.0));
+            evenPageLeftMargin->blockSignals(false);
+            }
+      else {
+            evenPageRightMargin->blockSignals(true);
+            evenPageRightMargin->setValue(val * (mmUnit ? INCH : 1.0));
+            evenPageRightMargin->blockSignals(false);
+            }
 
-      updatePreview(1);
+      pf->setPrintableWidth(pf->width() - pf->oddLeftMargin() - val);
+      updatePreview(0);
       }
 
 //---------------------------------------------------------
@@ -406,31 +405,10 @@ void PageSettings::etmChanged(double val)
       }
 
 //---------------------------------------------------------
-//   elmChanged
-//---------------------------------------------------------
-
-void PageSettings::elmChanged(double val)
-      {
-      if (mmUnit)
-            val /= INCH;
-
-      PageFormat* pf = preview->score()->pageFormat();
-      pf->setEvenLeftMargin(val);
-
-      // right margin depends, as score width is identical
-      // for even and odd pages
-      evenPageRightMargin->blockSignals(true);
-      evenPageRightMargin->setValue(pf->evenRightMargin() * (mmUnit ? INCH : 1.0));
-      evenPageRightMargin->blockSignals(false);
-
-      updatePreview(1);
-      }
-
-//---------------------------------------------------------
 //   ermChanged
 //---------------------------------------------------------
 
-void PageSettings::ermChanged(double val)
+/*void PageSettings::ermChanged(double val)
       {
       if (mmUnit)
             val /= INCH;
@@ -444,7 +422,7 @@ void PageSettings::ermChanged(double val)
       evenPageLeftMargin->blockSignals(false);
 
       updatePreview(1);
-      }
+      }*/
 
 //---------------------------------------------------------
 //   ebmChanged
@@ -538,26 +516,5 @@ void PageSettings::updatePreview(int val)
                   break;
             }
       preview->layoutChanged();
-      }
-
-//---------------------------------------------------------
-//   pwChanged
-//---------------------------------------------------------
-
-void PageSettings::pwChanged(double val)
-      {
-      if (mmUnit)
-            val /= INCH;
-
-      PageFormat* pf = preview->score()->pageFormat();
-      pf->setPrintableWidth(val);
-
-      if (val + pf->oddLeftMargin() > pf->width())
-            pf->setOddLeftMargin(pf->width() - val);
-      if (val + pf->evenLeftMargin() > pf->width())
-            pf->setEvenLeftMargin(pf->width() - val);
-
-      updateValues();
-      updatePreview(0);
       }
 
