@@ -27,6 +27,20 @@ class Page;
 class Navigator;
 
 //---------------------------------------------------------
+//   NScrollArea
+//    modified QScrollArea for Navigator
+//---------------------------------------------------------
+
+class NScrollArea : public QScrollArea {
+      Q_OBJECT
+
+      virtual void resizeEvent(QResizeEvent*);
+
+   public:
+      NScrollArea(QWidget* w = 0);
+      };
+
+//---------------------------------------------------------
 //   PageCache
 //---------------------------------------------------------
 
@@ -46,7 +60,7 @@ class Navigator : public QWidget {
       Q_OBJECT
 
       Score* _score;
-      QScrollArea* scrollArea;
+      NScrollArea* scrollArea;
       QPointer<ScoreView> _cv;
 
       QRect viewRect;
@@ -77,7 +91,7 @@ class Navigator : public QWidget {
       void viewRectMoved(const QRectF&);
 
    public:
-      Navigator(QScrollArea* sa, QWidget* parent = 0);
+      Navigator(NScrollArea* sa, QWidget* parent = 0);
       void setScoreView(ScoreView*);
       void setScore(Score*);
       Score* score() const { return _score; }

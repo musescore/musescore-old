@@ -152,10 +152,10 @@ Chord::Chord(const Chord& c)
 Chord* Chord::linkedClone()
       {
       Chord* chord = new Chord(*this);
-      chord->linkTo(this);
+      linkTo(chord);
       int n = notes().size();
       for (int i = 0; i < n; ++i)
-            chord->_notes[i]->linkTo(_notes[i]);
+            _notes[i]->linkTo(chord->_notes[i]);
       return chord;
       }
 

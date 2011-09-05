@@ -38,9 +38,6 @@ void MuseScore::showNavigator(bool visible)
       Navigator* n = static_cast<Navigator*>(_navigator->widget());
       if (n == 0 && visible) {
             n = new Navigator(_navigator, this);
-            n->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
-            _navigator->setWidget(n);
-            _navigator->setWidgetResizable(true);
             n->setScoreView(cv);
             n->updateViewRect();
             }
@@ -49,10 +46,39 @@ void MuseScore::showNavigator(bool visible)
       }
 
 //---------------------------------------------------------
+//   NScrollArea
+//---------------------------------------------------------
+
+NScrollArea::NScrollArea(QWidget* w)
+   : QScrollArea(w)
+      {
+      setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+//      setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+      setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+      setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+      setMinimumHeight(40);
+      setLineWidth(0);
+      }
+
+//---------------------------------------------------------
+//   resizeEvent
+//---------------------------------------------------------
+
+void NScrollArea::resizeEvent(QResizeEvent* ev)
+      {
+      if (ev->size().height() != ev->oldSize().height()) {
+            if (widget())
+                  widget()->resize(widget()->width(), ev->size().height());
+            }
+      QScrollArea::resizeEvent(ev);
+      }
+
+//---------------------------------------------------------
 //   Navigator
 //---------------------------------------------------------
 
-Navigator::Navigator(QScrollArea* sa, QWidget* parent)
+Navigator::Navigator(NScrollArea* sa, QWidget* parent)
   : QWidget(parent)
       {
       setAttribute(Qt::WA_NoBackground);
@@ -62,6 +88,9 @@ Navigator::Navigator(QScrollArea* sa, QWidget* parent)
       recreatePixmap = false;
       viewRect       = QRect();
       cachedWidth    = -1;
+      setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+      sa->setWidget(this);
+      sa->setWidgetResizable(false);
       connect(&watcher, SIGNAL(finished()), SLOT(pmFinished()));
       }
 
@@ -76,7 +105,7 @@ void Navigator::resizeEvent(QResizeEvent* ev)
 //      if (!isVisible())
 //            return;
       if (_score) {
-            qreal m = height() / (_score->pageFormat()->height() * DPI);
+            qreal m = ev->size().height() / (_score->pageFormat()->height() * DPI);
             matrix.setMatrix(m, matrix.m12(), matrix.m13(), matrix.m21(), m,
                matrix.m23(), matrix.m31(), matrix.m32(), matrix.m33());
 
@@ -84,6 +113,7 @@ void Navigator::resizeEvent(QResizeEvent* ev)
             int w    = int ((lp->x() + lp->width()) * matrix.m11());
             if (w != cachedWidth) {
                   cachedWidth = w;
+                  // setFixedSize(w, ev->size().height());
                   setFixedWidth(w);
                   QScrollArea* sa = mscore->navigatorScrollArea();
                   if (!sa->horizontalScrollBar()->isVisible() && (w > sa->width())) {
