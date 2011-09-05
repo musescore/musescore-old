@@ -260,7 +260,7 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                         int srcTrack = map[track/VOICES] * VOICES + (track % VOICES);
                         for (Segment* oseg = m->first(); oseg; oseg = oseg->next()) {
                               Segment* ns = nm->getSegment(SegmentType(oseg->subtype()), oseg->tick());
-#if 1
+
                               foreach(Spanner* spanner, oseg->spannerFor()) {
                                     if (spanner->track() != track)
                                           continue;
@@ -283,7 +283,6 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                                           printf("cloneSpanner(seg): cannot find spanner\n");
                                           }
                                     }
-#endif
 
                               Element* oe = oseg->element(srcTrack);
                               if (oe == 0)
