@@ -961,7 +961,10 @@ printf("  ChangeCRLen:: %d += %d(actual=%d)\n", tick, f2.ticks(), f2.ticks() * t
             else {
                   QList<Duration> dList = toDurationList(f2, true);
                   Measure* measure = tick2measure(tick);
-                  if (((tick - measure->tick()) % dList[0].ticks()) == 0) {
+                  int etick = measure->tick();
+//                  if (measure->tick() != tick)
+//                        etick += measure->ticks();
+                  if (((tick - etick) % dList[0].ticks()) == 0) {
                         foreach(Duration d, dList) {
                               bool genTie;
                               Chord* cc;
@@ -974,11 +977,12 @@ printf("  ChangeCRLen:: %d += %d(actual=%d)\n", tick, f2.ticks(), f2.ticks() * t
                                     cc = static_cast<Chord*>(cr);
                                     }
                               oc = addChord(tick, d, cc, genTie, tuplet);
-                              if (first) {
+                              if (oc && first) {
                                     select(oc, SELECT_SINGLE, 0);
                                     first = false;
                                     }
-                              tick += oc->actualTicks();
+                              if (oc)
+                                    tick += oc->actualTicks();
                               }
                         }
                   else {

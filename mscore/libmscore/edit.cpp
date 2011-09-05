@@ -181,13 +181,17 @@ Rest* Score::addRest(Segment* s, int track, Duration d, Tuplet* tuplet)
 Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tuplet)
       {
       Measure* measure = tick2measure(tick);
+      if (measure->endTick() <= tick) {
+            printf("Score::addChord(): end of score?\n");
+            return 0;
+            }
 
       Chord* chord = new Chord(this);
       chord->setTuplet(tuplet);
       chord->setTrack(oc->track());
       chord->setDurationType(d);
       chord->setDuration(d.fraction());
-      undoAddCR(chord, measure, tick);
+      // undoAddCR(chord, measure, tick);
 
       foreach(Note* n, oc->notes()) {
             Note* nn = new Note(this);
@@ -201,6 +205,8 @@ Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tup
                   undoAddElement(tie);
                   }
             }
+      undoAddCR(chord, measure, tick);
+
       updateAccidentals(measure, chord->staffIdx());
       return chord;
       }
