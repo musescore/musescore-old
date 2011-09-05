@@ -1001,6 +1001,8 @@ void Score::undoAddElement(Element* element)
 
 void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
       {
+      Q_ASSERT(cr->type() != CHORD || !(static_cast<Chord*>(cr)->notes()).isEmpty());
+
       QList<Staff*> staffList;
       Staff* ostaff = cr->staff();
       LinkedStaves* linkedStaves = ostaff->linkedStaves();
