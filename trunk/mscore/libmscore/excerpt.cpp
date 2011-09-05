@@ -259,6 +259,32 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                         TupletMap tupletMap;    // tuplets cannot cross measure boundaries
                         int srcTrack = map[track/VOICES] * VOICES + (track % VOICES);
                         for (Segment* oseg = m->first(); oseg; oseg = oseg->next()) {
+                              Segment* ns = nm->getSegment(SegmentType(oseg->subtype()), oseg->tick());
+#if 1
+                              foreach(Spanner* spanner, oseg->spannerFor()) {
+                                    if (spanner->track() != track)
+                                          continue;
+                                    Spanner* nspanner = static_cast<Spanner*>(spanner->linkedClone());
+                                    nspanner->setScore(score);
+                                    nspanner->setParent(ns);
+                                    nspanner->setStartElement(ns);
+                                    ns->addSpannerFor(nspanner);
+                                    spannerMap.add(spanner, nspanner);
+                                    }
+                              foreach(Spanner* spanner, oseg->spannerBack()) {
+                                    if (spanner->track() != track)
+                                          continue;
+                                    Spanner* nspanner = spannerMap.findNew(spanner);
+                                    if (nspanner) {
+                                          nspanner->setEndElement(ns);
+                                          ns->addSpannerBack(nspanner);
+                                          }
+                                    else {
+                                          printf("cloneSpanner(seg): cannot find spanner\n");
+                                          }
+                                    }
+#endif
+
                               Element* oe = oseg->element(srcTrack);
                               if (oe == 0)
                                     continue;
@@ -270,7 +296,6 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                               ne->setTrack(track);
                               ne->scanElements(score, localSetScore);
                               ne->setScore(score);
-                              Segment* s = nm->getSegment(SegmentType(oseg->subtype()), oseg->tick());
                               if (oe->isChordRest()) {
                                     ChordRest* ocr = static_cast<ChordRest*>(oe);
                                     ChordRest* ncr = static_cast<ChordRest*>(ne);
@@ -312,7 +337,7 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                                                 continue;
                                           Element* ne = e->clone();
                                           ne->setTrack(track);
-                                          s->add(ne);
+                                          ns->add(ne);
                                           }
 
                                     if (oe->type() == CHORD) {
@@ -341,7 +366,7 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                                                 }
                                           }
                                     }
-                              s->add(ne);
+                              ns->add(ne);
                               }
                         }
                   }
