@@ -435,7 +435,7 @@ void Score::updateHairpin(Hairpin* h)
       int incr  = h->veloChange();
 
       Segment* es = static_cast<Segment*>(h->endElement());
-      if (!es)
+      if (!es || es->parent() == 0)
             return;
       int tick2 = es->tick() - 1;
 
