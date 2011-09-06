@@ -182,7 +182,7 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
             int move     = chord->staffMove();
             int line     = note->line();
             int ticks    = chord->actualTicks();
-            int head     = note->noteHead();      // symbol number or note head
+            int head     = note->headGroup();      // symbol number or note head
 
             bool conflict = (qAbs(ll - line) < 2) && (move1 == move);
             bool sameHead = (ll == line) && (head == lastHead);
