@@ -59,7 +59,7 @@
 //    note head groups
 //---------------------------------------------------------
 
-const int noteHeads[2][HEAD_GROUPS][4] = {
+const int noteHeads[2][HEAD_GROUPS][HEAD_TYPES] = {
       {     // down stem
       { wholeheadSym,         halfheadSym,         quartheadSym,      brevisheadSym        },
       { wholecrossedheadSym,  halfcrossedheadSym,  crossedheadSym,    wholecrossedheadSym  },
@@ -98,9 +98,9 @@ const int noteHeads[2][HEAD_GROUPS][4] = {
 //   noteHeadSym
 //---------------------------------------------------------
 
-Sym* noteHeadSym(bool up, int group, int n)
+Sym* noteHeadSym(bool up, int group, int type)
       {
-      return &symbols[0][noteHeads[up][group][n]];
+      return &symbols[0][noteHeads[up][group][type]];
       }
 
 //---------------------------------------------------------

@@ -55,6 +55,15 @@ enum MuseScoreStyleType {
       };
 
 //---------------------------------------------------------
+//   PluginDescription
+//---------------------------------------------------------
+
+struct PluginDescription {
+      QString path;
+      bool load;
+      };
+
+//---------------------------------------------------------
 //   Preferences
 //---------------------------------------------------------
 
@@ -150,12 +159,17 @@ struct Preferences {
       int exportAudioSampleRate;
 
       QString profile;
-      
+
       bool firstStartWeb;
 
       bool dirty;
 
+      QList<PluginDescription*> pluginList;
+
       Preferences();
+      bool readPluginList();
+      void writePluginList();
+
       void write();
       void read();
       void init();
