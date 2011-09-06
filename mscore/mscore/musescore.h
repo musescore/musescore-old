@@ -373,7 +373,6 @@ class MuseScore : public QMainWindow {
       void clipboardChanged();
       void endSearch();
       void closeSynthControl();
-      void loadPluginDir(const QString& pluginPath);
       void saveScoreDialogFilterSelected(const QString&);
 #ifdef OSC
       void oscIntMessage(int);

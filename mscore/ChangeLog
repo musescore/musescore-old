@@ -1,4 +1,6 @@
 6.sep (ws)
+      - new simple plugin manager in "Preferences->Plugins":
+        plugins now have to be configured to be loaded on mscore startup
       - fix 12218: shared noteheads aren't shared
       - fix 12419: Ledger lines are still visible for invisible notes
       - fix 12428: Part name appears over the staves

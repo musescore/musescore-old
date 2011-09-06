@@ -24,6 +24,7 @@
 #include "globals.h"
 #include "script.h"
 #include "config.h"
+#include "preferences.h"
 #include "libmscore/chord.h"
 #include "libmscore/note.h"
 #include "libmscore/utils.h"
@@ -256,23 +257,9 @@ void MuseScore::loadPlugins()
       {
       pluginMapper = new QSignalMapper(this);
       connect(pluginMapper, SIGNAL(mapped(int)), SLOT(pluginTriggered(int)));
-      loadPluginDir(dataPath + "/plugins");
-      loadPluginDir(mscoreGlobalShare + "plugins");
-      }
-
-void MuseScore::loadPluginDir(const QString& pluginPath)
-      {
-      if (debugMode)
-            printf("Plugin Path <%s>\n", qPrintable(pluginPath));
-      QDir pluginDir(pluginPath);
-      QDirIterator it(pluginDir, QDirIterator::Subdirectories);
-      while (it.hasNext()) {
-            it.next();
-            QFileInfo fi = it.fileInfo();
-            if (fi.isFile()) {
-                  QString path(fi.filePath());
-                  if (path.endsWith(".js"))
-                        registerPlugin(path);
+      foreach(PluginDescription* d, preferences.pluginList) {
+            if (d->load) {
+                  registerPlugin(d->path);
                   }
             }
       }
