@@ -442,7 +442,7 @@ void Score::addMeasure(MeasureBase* m, MeasureBase* pos)
 //   insertTime
 //---------------------------------------------------------
 
-void Score::insertTime(int tick, int len)
+void Score::insertTime(int /*tick*/, int /*len*/)
       {
 #if 0
       if (len < 0) {

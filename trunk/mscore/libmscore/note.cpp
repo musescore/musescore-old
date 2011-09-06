@@ -1261,6 +1261,7 @@ void Note::layout()
                               score()->undoAddElement(dot); // move dot to _dots[i]
                               }
                         _dots[i]->layout();
+                        _dots[i]->setVisible(visible());
                         }
                   else if (_dots[i])
                         score()->undoRemoveElement(_dots[i]);

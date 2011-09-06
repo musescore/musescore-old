@@ -147,7 +147,6 @@ void MeasureBase::add(Element* e)
 void MeasureBase::remove(Element* el)
       {
       if (el->type() == LAYOUT_BREAK) {
-            LayoutBreak* b = static_cast<LayoutBreak*>(el);
             switch(el->subtype()) {
                   case LAYOUT_BREAK_PAGE:
                         _pageBreak = false;
