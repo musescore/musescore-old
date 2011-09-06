@@ -1097,8 +1097,9 @@ bool Score::read(QDomElement dScore)
                               s1->add(s);
                               }
                         if (s->type() == VOLTA) {
-                              // fix volta position
                               Volta* volta = static_cast<Volta*>(s);
+                              volta->setStartMeasure(s1->measure());
+                              volta->setEndMeasure(s2->measure());
                               int n = volta->spannerSegments().size();
                               for (int i = 0; i < n; ++i) {
                                     LineSegment* seg = volta->segmentAt(i);

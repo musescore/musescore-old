@@ -73,7 +73,7 @@ void MuseScore::registerPlugin(const QString& pluginPath)
       if (lName.toLower() == "system")
             lName = QLocale::system().name();
       QTranslator* translator = new QTranslator;
-      if(translator->load("locale_"+lName, pPath+"/translations"))
+      if (translator->load("locale_"+lName, pPath+"/translations"))
             qApp->installTranslator(translator);
 
       QScriptValue val  = se->evaluate(f.readAll(), pluginPath);

@@ -650,6 +650,10 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       bgButtons->addButton(bgColorButton);
       bgButtons->addButton(bgWallpaperButton);
 
+
+      pluginTable->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("load")));
+      pluginTable->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Plugin Path")));
+
       updateValues(&preferences);
 
       connect(buttonBox,          SIGNAL(clicked(QAbstractButton*)), SLOT(buttonBoxClicked(QAbstractButton*)));
@@ -1014,6 +1018,32 @@ void PreferenceDialog::updateValues(Preferences* p)
             idx = 0;
       exportAudioSampleRate->setCurrentIndex(idx);
 
+      QList<QString> pluginPathList;
+      pluginPathList.append(dataPath + "/plugins");
+      pluginPathList.append(mscoreGlobalShare + "plugins");
+
+      QList<QString> plugins;
+      foreach(QString pluginPath, pluginPathList) {
+            QDir pluginDir(pluginPath);
+            QDirIterator it(pluginDir, QDirIterator::Subdirectories);
+            while (it.hasNext()) {
+                  it.next();
+                  QFileInfo fi = it.fileInfo();
+                  if (fi.isFile()) {
+                        QString path(fi.filePath());
+                        if (path.endsWith(".js"))
+                              plugins.append(path);
+                        }
+                  }
+            }
+      pluginTable->setRowCount(plugins.size());
+      for (int i = 0; i < plugins.size(); ++i) {
+            QTableWidgetItem* item = new QTableWidgetItem(plugins[i]);
+            pluginTable->setItem(i, 1, item);
+            item = new QTableWidgetItem;
+            item->setCheckState(Qt::Checked);
+            pluginTable->setItem(i, 0, item);
+            }
       sfChanged = false;
       }
 
