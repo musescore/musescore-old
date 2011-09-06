@@ -2484,7 +2484,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
-         A_SCORE,
+         A_CMD,
          "edit-style",
          QT_TRANSLATE_NOOP("action","Edit general style"),
          0,
@@ -2494,7 +2494,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
-         A_SCORE,
+         A_CMD,
          "edit-text-style",
          QT_TRANSLATE_NOOP("action","Edit text style"),
          0,
