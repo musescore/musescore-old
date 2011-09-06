@@ -408,7 +408,7 @@ QRectF Chord::bbox() const
 ///   \arg line       vertical position of line
 //---------------------------------------------------------
 
-void Chord::addLedgerLine(qreal x, int staffIdx, int line, int lr)
+void Chord::addLedgerLine(qreal x, int staffIdx, int line, int lr, bool visible)
       {
       qreal _spatium = spatium();
       qreal hw       = upNote()->headWidth();
@@ -419,7 +419,9 @@ void Chord::addLedgerLine(qreal x, int staffIdx, int line, int lr)
       LedgerLine* h   = new LedgerLine(score());
       h->setParent(this);
       h->setTrack(staffIdx * VOICES);
-      h->setVisible(!staff()->invisible());
+      if (staff()->invisible())
+            visible = false;
+      h->setVisible(visible);
 
       // ledger lines extend less than half a space on each side
       // of the notehead:
@@ -461,18 +463,28 @@ void Chord::addLedgerLines(qreal x, int move)
       int uppos = 1000;
       int ulr   = 0;
       int idx   = staffIdx() + move;
+
+      // make ledger lines invisible if all notes
+      // are invisible
+      bool visible = false;
+      foreach(const Note* note, _notes) {
+            if (note->visible()) {
+                  visible = true;
+                  break;
+                  }
+            }
       for (int ni = _notes.size() - 1; ni >= 0; --ni) {
             const Note* note = _notes[ni];
             int l = note->line();
             if (l >= 0)
                   break;
             for (int i = (uppos+1) & ~1; i < l; i += 2)
-                  addLedgerLine(x, idx, i, ulr);
+                  addLedgerLine(x, idx, i, ulr, visible);
             ulr |= (up() ^ note->mirror()) ? 0x1 : 0x2;
             uppos = l;
             }
       for (int i = (uppos+1) & ~1; i <= -2; i += 2)
-            addLedgerLine(x, idx, i, ulr);
+            addLedgerLine(x, idx, i, ulr, visible);
 
       int downpos = -1000;
       int dlr = 0;
@@ -481,12 +493,12 @@ void Chord::addLedgerLines(qreal x, int move)
             if (l <= 8)
                   break;
             for (int i = downpos & ~1; i > l; i -= 2)
-                  addLedgerLine(x, idx, i, dlr);
+                  addLedgerLine(x, idx, i, dlr, visible);
             dlr |= (up() ^ note->mirror()) ? 0x1 : 0x2;
             downpos = l;
             }
       for (int i = downpos & ~1; i >= 10; i -= 2)
-            addLedgerLine(x, idx, i, dlr);
+            addLedgerLine(x, idx, i, dlr, visible);
       }
 
 //-----------------------------------------------------------------------------

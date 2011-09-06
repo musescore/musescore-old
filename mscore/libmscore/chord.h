@@ -102,7 +102,7 @@ class Chord : public ChordRest {
       virtual qreal upPos()   const;
       virtual qreal downPos() const;
       virtual qreal centerX() const;
-      void addLedgerLine(qreal x, int staffIdx, int line, int extend);
+      void addLedgerLine(qreal x, int staffIdx, int line, int extend, bool visible);
       void addLedgerLines(qreal x, int move);
       void renderArticulation(ArticulationType);
 
