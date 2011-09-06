@@ -166,10 +166,11 @@ struct Preferences {
 
       QList<PluginDescription*> pluginList;
 
-      Preferences();
       bool readPluginList();
       void writePluginList();
+      void updatePluginList();
 
+      Preferences();
       void write();
       void read();
       void init();

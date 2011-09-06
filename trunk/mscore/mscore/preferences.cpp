@@ -268,6 +268,8 @@ void Preferences::init()
 
       profile                 = "default";
 
+      // TODO: pluginList
+
       firstStartWeb = true;
       };
 
@@ -1020,30 +1022,15 @@ void PreferenceDialog::updateValues(Preferences* p)
             idx = 0;
       exportAudioSampleRate->setCurrentIndex(idx);
 
-      QList<QString> pluginPathList;
-      pluginPathList.append(dataPath + "/plugins");
-      pluginPathList.append(mscoreGlobalShare + "plugins");
+      p->updatePluginList();
+      pluginTable->setRowCount(p->pluginList.size());
 
-      QList<QString> plugins;
-      foreach(QString pluginPath, pluginPathList) {
-            QDir pluginDir(pluginPath);
-            QDirIterator it(pluginDir, QDirIterator::Subdirectories);
-            while (it.hasNext()) {
-                  it.next();
-                  QFileInfo fi = it.fileInfo();
-                  if (fi.isFile()) {
-                        QString path(fi.filePath());
-                        if (path.endsWith(".js"))
-                              plugins.append(path);
-                        }
-                  }
-            }
-      pluginTable->setRowCount(plugins.size());
-      for (int i = 0; i < plugins.size(); ++i) {
-            QTableWidgetItem* item = new QTableWidgetItem(plugins[i]);
+      for (int i = 0; i < p->pluginList.size(); ++i) {
+            PluginDescription* d = p->pluginList[i];
+            QTableWidgetItem* item = new QTableWidgetItem(d->path);
             pluginTable->setItem(i, 1, item);
             item = new QTableWidgetItem;
-            item->setCheckState(Qt::Checked);
+            item->setCheckState(d->load ? Qt::Checked : Qt::Unchecked);
             pluginTable->setItem(i, 0, item);
             }
       sfChanged = false;
@@ -1497,6 +1484,16 @@ void PreferenceDialog::apply()
 
       mscore->setIconSize(QSize(preferences.iconWidth, preferences.iconHeight));
 
+      int n = pluginTable->rowCount();
+      qDeleteAll(preferences.pluginList);
+      preferences.pluginList.clear();
+      for (int i = 0; i < n; ++i) {
+            PluginDescription* d = new PluginDescription;
+            d->path = pluginTable->item(i, 1)->text();
+            d->load = pluginTable->item(i, 0)->checkState() == Qt::Checked;
+            preferences.pluginList.append(d);
+            }
+
       emit preferencesChanged();
       preferences.write();
       mscore->startAutoSave();
@@ -1729,6 +1726,7 @@ bool Preferences::readPluginList()
                                     else if (tag == "load")
                                           d->load = eee.text().toInt();
                                     }
+                              pluginList.append(d);
                               }
                         else
                               domError(ee);
@@ -1764,5 +1762,45 @@ void Preferences::writePluginList()
             }
       xml.etag();
       f.close();
+      }
+
+//---------------------------------------------------------
+//   updatePluginList
+//    scan plugin folders for new plugins and update
+//    pluginList
+//---------------------------------------------------------
+
+void Preferences::updatePluginList()
+      {
+      QList<QString> pluginPathList;
+      pluginPathList.append(dataPath + "/plugins");
+      pluginPathList.append(mscoreGlobalShare + "plugins");
+
+      foreach(QString pluginPath, pluginPathList) {
+            QDir pluginDir(pluginPath);
+            QDirIterator it(pluginDir, QDirIterator::Subdirectories);
+            while (it.hasNext()) {
+                  it.next();
+                  QFileInfo fi = it.fileInfo();
+                  if (fi.isFile()) {
+                        QString path(fi.filePath());
+                        if (path.endsWith(".js")) {
+                              bool alreadyInList = false;
+                              foreach (PluginDescription* p, pluginList) {
+                                    if (p->path == path) {
+                                          alreadyInList = true;
+                                          break;
+                                          }
+                                    }
+                              if (!alreadyInList) {
+                                    PluginDescription* p = new PluginDescription;
+                                    p->path = path;
+                                    p->load = false;
+                                    pluginList.append(p);
+                                    }
+                              }
+                        }
+                  }
+            }
       }
 
