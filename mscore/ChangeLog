@@ -1,3 +1,5 @@
+6.sep (ws)
+      - fix 12429: crash loading V1 scores
 5.sep (ws)
       - fix #12137: Extending length of note into non-existing bar in part causes crash
       - fix #12202: Page settings (patch from lasconic)

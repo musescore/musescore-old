@@ -423,6 +423,10 @@ QPointF SLine::linePos(int grip, System** sys)
                         }
                   }
             }
+      //DEBUG:
+      if ((*sys)->staves()->isEmpty())
+            return QPointF(x, 0.0);
+
       qreal y = (*sys)->staff(staffIdx())->y();
       return QPointF(x, y);
       }

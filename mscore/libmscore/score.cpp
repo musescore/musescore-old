@@ -304,8 +304,8 @@ void Score::init()
       _defaultsRead   = false;
       _omr            = 0;
       _showOmr        = false;
-      _sigmap         = new TimeSigMap();
-      _tempomap       = new TempoMap;
+      _sigmap         = 0; // new TimeSigMap();
+      _tempomap       = 0; // new TempoMap;
       _playRepeats    = true;
       _layoutMode     = LayoutPage;
       }
@@ -318,6 +318,8 @@ Score::Score(const Style* s)
    : _selection(this)
       {
       init();
+      _tempomap  = new TempoMap;
+      _sigmap    = new TimeSigMap();
       _style = *s;
       }
 
@@ -344,8 +346,6 @@ Score::Score(Score* parent)
             if (f.open(QIODevice::ReadOnly))
                   _style.load(&f);
             }
-      _sigmap         = 0;
-      _tempomap       = 0;
       _syntiState     = parent->_syntiState;
       }
 
@@ -579,6 +579,8 @@ void Score::fixTicks()
                   sigmap()->add(tick, SigEvent(sig,  number));
                   }
             }
+      if (tempomap()->empty())
+            tempomap()->setTempo(0, 2.0);
       }
 
 //---------------------------------------------------------

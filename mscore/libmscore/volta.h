@@ -63,8 +63,10 @@ class Volta : public TextLine {
       QString text() const;
       virtual void setSubtype(int val);
       bool hasEnding(int repeat) const;
-      Measure* startMeasure() const { return (Measure*)startElement(); }
-      Measure* endMeasure() const   { return (Measure*)endElement(); }
+      Measure* startMeasure() const    { return (Measure*)startElement(); }
+      Measure* endMeasure() const      { return (Measure*)endElement(); }
+      void setStartMeasure(Measure* m) { setStartElement((Element*)m); }
+      void setEndMeasure(Measure* m)   { setEndElement((Element*)m);   }
       };
 
 #endif
