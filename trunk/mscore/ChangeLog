@@ -1,4 +1,5 @@
 6.sep (ws)
+      - fix 12428: Part name appears over the staves
       - fix 12430: edit style does not set score dirty bit
       - fix 12429: crash loading V1 scores
 5.sep (ws)

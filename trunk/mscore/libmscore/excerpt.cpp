@@ -136,6 +136,7 @@ Score* createExcerpt(const QList<Part*>& parts)
             MeasureBase* nmeasure = new VBox(score);
             nmeasure->setTick(0);
             score->addMeasure(nmeasure, measure);
+            measure = nmeasure;
             }
       Text* txt = new Text(score);
       txt->setSubtype(TEXT_INSTRUMENT_EXCERPT);
