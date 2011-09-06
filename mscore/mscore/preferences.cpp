@@ -412,6 +412,7 @@ void Preferences::write()
       s.endGroup();
 
       writeShortcuts();
+      writePluginList();
       }
 
 //---------------------------------------------------------
@@ -584,6 +585,7 @@ void Preferences::read()
       s.endGroup();
 
       readShortcuts();
+      readPluginList();
       }
 
 //---------------------------------------------------------
@@ -1691,4 +1693,76 @@ void PreferenceDialog::selectImagesDirectory()
             myImages->setText(s);
       }
 
+//---------------------------------------------------------
+//   readPluginList
+//---------------------------------------------------------
+
+bool Preferences::readPluginList()
+      {
+      QFile f(dataPath + "/plugins.xml");
+      if (!f.exists())
+            return false;
+      if (!f.open(QIODevice::ReadOnly)) {
+            printf("cannot open plugins file <%s>\n", qPrintable(f.fileName()));
+            return false;
+            }
+      QDomDocument doc;
+      int line, column;
+      QString err;
+      docName = f.fileName();
+      if (!doc.setContent(&f, false, &err, &line, &column)) {
+            QString error;
+            error.sprintf("error reading session file %s at line %d column %d: %s\n",
+               qPrintable(docName), line, column, qPrintable(err));
+            return false;
+            }
+      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "museScore") {
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+                        if (tag == "Plugin") {
+                              PluginDescription* d = new PluginDescription;
+                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull();  eee = eee.nextSiblingElement()) {
+                                    QString tag(eee.tagName());
+                                    if (tag == "path")
+                                          d->path = eee.text();
+                                    else if (tag == "load")
+                                          d->load = eee.text().toInt();
+                                    }
+                              }
+                        else
+                              domError(ee);
+                        }
+                  }
+            else
+                  domError(e);
+            }
+      return true;
+      }
+
+//---------------------------------------------------------
+//   writePluginList
+//---------------------------------------------------------
+
+void Preferences::writePluginList()
+      {
+      QDir dir;
+      dir.mkpath(dataPath);
+      QFile f(dataPath + "/plugins.xml");
+      if (!f.open(QIODevice::WriteOnly)) {
+            printf("cannot create plugin file <%s>\n", qPrintable(f.fileName()));
+            return;
+            }
+      Xml xml(&f);
+      xml.header();
+      xml.stag("museScore version=\"" MSC_VERSION "\"");
+      foreach(PluginDescription* d, pluginList) {
+            xml.stag("Plugin");
+            xml.tag("path", d->path);
+            xml.tag("load", d->load);
+            xml.etag();
+            }
+      xml.etag();
+      f.close();
+      }
 

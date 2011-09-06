@@ -35,7 +35,7 @@ class Painter;
 class AccidentalState;
 class Accidental;
 
-extern const int noteHeads[2][HEAD_GROUPS][4];
+extern const int noteHeads[2][HEAD_GROUPS][HEAD_TYPES];
 
 //---------------------------------------------------------
 //   NoteHead
