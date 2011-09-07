@@ -137,7 +137,6 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "Tremolo"),
       QT_TRANSLATE_NOOP("elementName", "Measure"),
       QT_TRANSLATE_NOOP("elementName", "StaffLines"),
-      QT_TRANSLATE_NOOP("elementName", "Cursor"),
       QT_TRANSLATE_NOOP("elementName", "Selection"),
       QT_TRANSLATE_NOOP("elementName", "Lasso"),
       QT_TRANSLATE_NOOP("elementName", "ShadowNote"),
@@ -1270,7 +1269,6 @@ Element* Element::create(ElementType type, Score* score)
             case VOLTA_SEGMENT:
             case LEDGER_LINE:
             case STAFF_LINES:
-            case CURSOR:
             case SELECTION:
             case LASSO:
             case SHADOW_NOTE:
@@ -1352,7 +1350,6 @@ const char* Element::name(ElementType type)
             case TREMOLO:           return "Tremolo";
             case MEASURE:           return "Measure";
             case STAFF_LINES:       return "StaffLines";
-            case CURSOR:            return "Cursor";
             case SELECTION:         return "Selection";
             case LASSO:             return "Lasso";
             case SHADOW_NOTE:       return "ShadowNote";

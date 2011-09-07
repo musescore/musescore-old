@@ -421,6 +421,36 @@ void Score::toEList(EventMap* events)
       updateChannel();
       foreach (Part* part, _parts)
             renderPart(events, part);
+      // add metronome ticks
+      foreach (const RepeatSegment* rs, *repeatList()) {
+            int startTick  = rs->tick;
+            int endTick    = startTick + rs->len;
+            int tickOffset = rs->utick - rs->tick;
+            for (Measure* m = tick2measure(startTick); m; m = m->nextMeasure()) {
+                  Fraction ts = sigmap()->timesig(m->tick()).timesig();
+
+                  int tw = 0;
+                  switch(ts.denominator()) {
+                        case  1: tw = MScore::division * 4; break;
+                        case  2: tw = MScore::division * 2; break;
+                        case  4: tw = MScore::division; break;
+                        case  8: tw = MScore::division / 2; break;
+                        case 16: tw = MScore::division / 4; break;
+                        case 32: tw = MScore::division / 8; break;
+                        }
+
+                  if (tw == 0)
+                        continue;
+                  for (int i = 0; i < ts.numerator(); i++) {
+                        int tick = m->tick() + i * tw + tickOffset;
+                        Event event;
+                        event.setType(i == 0 ? ME_TICK1 : ME_TICK2);
+                        events->insertMulti(tick, event);
+                        }
+                  if (m->tick() + m->ticks() >= endTick)
+                        break;
+                  }
+            }
       }
 
 //---------------------------------------------------------

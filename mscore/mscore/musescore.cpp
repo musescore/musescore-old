@@ -445,6 +445,9 @@ MuseScore::MuseScore()
       vraster->setDefaultAction(vRasterAction);
       vraster->setContextMenuPolicy(Qt::ActionsContextMenu);
       vraster->addAction(getAction("config-raster"));
+      metronomeAction = getAction("metronome");
+      metronomeAction->setCheckable(true);
+      metronomeAction->setChecked(false);
 
       _statusBar->addPermanentWidget(hraster, 0);
       _statusBar->addPermanentWidget(vraster, 0);
@@ -595,6 +598,7 @@ MuseScore::MuseScore()
       a = getAction("pan");
       a->setChecked(MScore::panPlayback);
       transportTools->addAction(a);
+      transportTools->addAction(metronomeAction);
 
 //      fileTools->addAction(getAction("mag"));
 
@@ -4411,8 +4415,8 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             cmdAddChordName2();
       else if (cmd == "tempo")
             addTempo();
-      else if (cmd == "metronome")
-            addMetronome();
+      else if (cmd == "metronome")  // no action
+            ;
       else {
             if (cv) {
                   cv->setFocus();

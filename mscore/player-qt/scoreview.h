@@ -34,6 +34,8 @@ class PlaybackCursor : public QDeclarativeItem {
    public:
       PlaybackCursor(QDeclarativeItem* parent = 0);
       virtual ~PlaybackCursor() {}
+      void setColor(const QColor&) {}
+      void setTick(int) {}
       };
 
 //---------------------------------------------------------
@@ -88,7 +90,7 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
       void setParentWidth(qreal val)  { _parentWidth = val;   }
       qreal parentHeight() const      { return _parentHeight; }
       void setParentHeight(qreal val) { _parentHeight = val;  }
-      void moveCursor(Segment*);
+      void moveCursor(int);
       };
 
 

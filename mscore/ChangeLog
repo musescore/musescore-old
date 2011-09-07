@@ -1,4 +1,5 @@
 7.sep (ws)
+      - first implementation of metronome; missing: icon, volume
       - fix 12447: Changing volta text doesn't work
 6.sep (ws)
       - new simple plugin manager in "Preferences->Plugins":

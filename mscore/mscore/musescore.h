@@ -292,6 +292,8 @@ class MuseScore : public QMainWindow {
       Shortcut* lastShortcut;
       EditTempo* editTempo;
 
+      QAction* metronomeAction;
+
       //---------------------
 
       virtual void closeEvent(QCloseEvent*);
@@ -557,6 +559,7 @@ class MuseScore : public QMainWindow {
       Navigator* navigator() const;
       NScrollArea* navigatorScrollArea() const { return _navigator; }
       void updateLayer();
+      bool metronome() { return metronomeAction->isChecked(); }
       };
 
 extern MuseScore* mscore;

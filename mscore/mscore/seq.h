@@ -106,6 +106,12 @@ class Seq : public QObject {
       int curTick;
       int curUtick;
 
+      uint tackRest;     // metronome state
+      uint tickRest;
+      qreal metronomeVolume;
+
+      int playTick;
+
       QTimer* heartBeatTimer;
       QTimer* noteTimer;
 
@@ -118,6 +124,7 @@ class Seq : public QObject {
       void setPos(int);
       void playEvent(const Event&);
       void guiToSeq(const SeqMsg& msg);
+      void metronome(unsigned n, float* l, float* r);
 
    private slots:
       void seqMessage(int msg);

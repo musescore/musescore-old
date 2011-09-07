@@ -57,6 +57,7 @@
 #endif
 
 #include "fluid.h"
+#include "click.h"
 
 Seq* seq;
 MasterSynth* synti;
@@ -87,6 +88,7 @@ Seq::Seq()
       startTime = 0.0;
       curTick   = 0;
       curUtick  = 0;
+      metronomeVolume = 0.3;
 
       meterValue[0]     = 0.0;
       meterValue[1]     = 0.0;
@@ -158,6 +160,8 @@ void Seq::setScoreView(ScoreView* v)
             initInstruments();
             seek(cs->playPos());
             }
+      tackRest = 0;
+      tickRest = 0;
       }
 
 //---------------------------------------------------------
@@ -510,6 +514,10 @@ void Seq::playEvent(const Event& event)
                         }
                   }
             }
+      else if (type == ME_TICK1)
+            ; // printf("tick====\n");
+      else if (type == ME_TICK2)
+            ; // printf("  tack\n");
       else if (type == ME_CONTROLLER)
             putEvent(event);
       }
@@ -545,6 +553,39 @@ void Seq::processMessages()
                         setPos(msg.data);
                         break;
                   }
+            }
+      }
+
+//---------------------------------------------------------
+//   metronome
+//---------------------------------------------------------
+
+void Seq::metronome(unsigned n, float* l, float* r)
+      {
+      if (!mscore->metronome()) {
+            tickRest = 0;
+            tackRest = 0;
+            return;
+            }
+      if (tickRest) {
+            int idx = tickLength - tickRest;
+            int nn = n < tickRest ? n : tickRest;
+            for (int i = 0; i < nn; ++i) {
+                  l[i] += tick[idx] * metronomeVolume;
+                  r[i] += tick[idx] * metronomeVolume;
+                  ++idx;
+                  }
+            tickRest -= nn;
+            }
+      if (tackRest) {
+            int idx = tackLength - tackRest;
+            int nn = n < tackRest ? n : tackRest;
+            for (int i = 0; i < nn; ++i) {
+                  l[i] += tack[idx] * metronomeVolume;
+                  r[i] += tack[idx] * metronomeVolume;
+                  ++idx;
+                  }
+            tackRest -= nn;
             }
       }
 
@@ -587,8 +628,9 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
 
                   if (n < 0) {
                         printf("%d:  %f - %f\n", playPos.key(), f, playTime);
-						n=0;
+				n = 0;
                         }
+                  metronome(n, l, r);
                   synti->process(n, l, r);
                   l += n;
                   r += n;
@@ -596,9 +638,16 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
 
                   frames    -= n;
                   framePos  += n;
-                  playEvent(playPos.value());
+                  const Event& event = playPos.value();
+                  playEvent(event);
+                  playTick = playPos.key();
+                  if (event.type() == ME_TICK1)
+                        tickRest = tickLength;
+                  else if (event.type() == ME_TICK2)
+                        tackRest = tackLength;
                   }
             if (frames) {
+                  metronome(frames, l, r);
                   synti->process(frames, l, r);
                   playTime += double(frames)/double(MScore::sampleRate);
                   }
@@ -700,77 +749,6 @@ void Seq::getCurTick(int* tick, int* utick)
 int Seq::getCurTick()
       {
       return cs->utime2utick(curTime() - startTime);
-      }
-
-//---------------------------------------------------------
-//   heartBeat
-//    update GUI
-//---------------------------------------------------------
-
-void Seq::heartBeat()
-      {
-      SynthControl* sc = mscore->getSynthControl();
-      if (sc && driver) {
-            if (++peakTimer[0] >= peakHold)
-                  meterPeakValue[0] *= .7f;
-            if (++peakTimer[1] >= peakHold)
-                  meterPeakValue[1] *= .7f;
-            sc->setMeter(meterValue[0], meterValue[1], meterPeakValue[0], meterPeakValue[1]);
-            }
-      processToGuiMessages();
-      if (state != TRANSPORT_PLAY)
-            return;
-      PlayPanel* pp = mscore->getPlayPanel();
-      double endTime = curTime() - startTime;
-      if (pp)
-            pp->heartBeat2(lrint(endTime));
-
-      const Note* note = 0;
-      for (; guiPos != events.constEnd(); ++guiPos) {
-            double f = cs->utick2utime(guiPos.key());
-            if (f >= endTime)
-                  break;
-            if (guiPos.value().type() == ME_NOTEON) {
-                  Event n = guiPos.value();
-                  const Note* note1 = n.note();
-                  if (n.velo()) {
-                        note = note1;
-                        while (note1) {
-                              ((Note*)note1)->setSelected(true);  // HACK
-                              markedNotes.append(note1);
-                              cs->addRefresh(note1->canvasBoundingRect());
-                              note1 = note1->tieFor() ? note1->tieFor()->endNote() : 0;
-                              }
-
-                        }
-                  else {
-                        while (note1) {
-                              ((Note*)note1)->setSelected(false);       // HACK
-                              cs->addRefresh(note1->canvasBoundingRect());
-                              markedNotes.removeOne(note1);
-                              note1 = note1->tieFor() ? note1->tieFor()->endNote() : 0;
-                              }
-                        }
-                  }
-            }
-      if (note) {
-            curTick = note->chord()->tick();
-            ScoreView* sv = mscore->currentScoreView();
-            int td = curTick - sv->cursorTick();
-            if (td > 0 || td < 480 * 2) {       // heuristic
-                  sv->moveCursor(note->chord()->segment(), -1);
-                  if(MScore::panPlayback)
-                        cv->adjustCanvasPosition(note, true);
-                  curUtick = guiPos.key();
-                  if (pp)
-                        pp->heartBeat(curTick, curUtick);
-                  mscore->setPos(curTick);
-                  }
-            }
-      PianorollEditor* pre = mscore->getPianorollEditor();
-      if (pre && pre->isVisible())
-            pre->heartBeat(this);
-      cs->end();
       }
 
 //---------------------------------------------------------
@@ -1232,5 +1210,63 @@ int Seq::synthNameToIndex(const QString& name) const
 QString Seq::synthIndexToName(int idx) const
       {
       return synti->synthIndexToName(idx);
+      }
+
+//---------------------------------------------------------
+//   heartBeat
+//    update GUI
+//---------------------------------------------------------
+
+void Seq::heartBeat()
+      {
+      SynthControl* sc = mscore->getSynthControl();
+      if (sc && driver) {
+            if (++peakTimer[0] >= peakHold)
+                  meterPeakValue[0] *= .7f;
+            if (++peakTimer[1] >= peakHold)
+                  meterPeakValue[1] *= .7f;
+            sc->setMeter(meterValue[0], meterValue[1], meterPeakValue[0], meterPeakValue[1]);
+            }
+      processToGuiMessages();
+      if (state != TRANSPORT_PLAY)
+            return;
+      PlayPanel* pp = mscore->getPlayPanel();
+      double endTime = curTime() - startTime;
+      if (pp)
+            pp->heartBeat2(lrint(endTime));
+
+      for (; guiPos != events.constEnd(); ++guiPos) {
+            double f = cs->utick2utime(guiPos.key());
+            if (f >= endTime)
+                  break;
+            if (guiPos.value().type() == ME_NOTEON) {
+                  Event n = guiPos.value();
+                  const Note* note1 = n.note();
+                  if (n.velo()) {
+                        while (note1) {
+                              ((Note*)note1)->setSelected(true);  // HACK
+                              markedNotes.append(note1);
+                              cs->addRefresh(note1->canvasBoundingRect());
+                              note1 = note1->tieFor() ? note1->tieFor()->endNote() : 0;
+                              }
+
+                        }
+                  else {
+                        while (note1) {
+                              ((Note*)note1)->setSelected(false);       // HACK
+                              cs->addRefresh(note1->canvasBoundingRect());
+                              markedNotes.removeOne(note1);
+                              note1 = note1->tieFor() ? note1->tieFor()->endNote() : 0;
+                              }
+                        }
+                  }
+            }
+      int tick = cs->repeatList()->utick2tick(playTick);
+      mscore->currentScoreView()->moveCursor(tick);
+
+      PianorollEditor* pre = mscore->getPianorollEditor();
+      if (pre && pre->isVisible())
+            pre->heartBeat(this);
+      cs->end();
       }
 

@@ -34,7 +34,6 @@ class Xml;
 class Note;
 class Lasso;
 class ShadowNote;
-class Cursor;
 class Segment;
 class Measure;
 class System;
@@ -42,6 +41,28 @@ class Score;
 class ScoreView;
 class Text;
 class MeasureBase;
+
+//---------------------------------------------------------
+//   Cursor
+//---------------------------------------------------------
+
+class Cursor {
+      QRectF _rect;
+      bool _visible;
+      QColor _color;
+      int _tick;
+
+   public:
+      Cursor()                       { _visible = false; }
+      QRectF rect() const            { return _rect;     }
+      void setRect(const QRectF& r)  { _rect = r;        }
+      bool visible() const           { return _visible;  }
+      void setVisible(bool val)      { _visible = val;   }
+      QColor color() const           { return _color;    }
+      void setColor(const QColor& c) { _color = c;       }
+      int tick() const               { return _tick;     }
+      void setTick(int val)          { _tick = val;      }
+      };
 
 //---------------------------------------------------------
 //   CommandTransition
@@ -147,8 +168,6 @@ class ScoreView : public QWidget, public MuseScoreView {
 
       //--input state:
       Cursor* _cursor;
-      Segment* cursorSegment;
-      int cursorTrack;
       ShadowNote* shadowNote;
 
       Lasso* lasso;           ///< temporarily drawn lasso selection
@@ -277,7 +296,8 @@ class ScoreView : public QWidget, public MuseScoreView {
       virtual void startEdit(Element*, int startGrip);
       void startEdit(Element*);
 
-      void moveCursor(Segment*, int staffIdx);
+      void moveCursor(Segment*, int track);
+      void moveCursor(int tick);
       int cursorTick() const;
       void setCursorOn(bool);
       void setBackground(QPixmap*);

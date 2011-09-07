@@ -21,6 +21,7 @@ include_directories(
 QT4_WRAP_CPP (mocs
      scoreview.h
      runtime.h
+     seq.h
      )
 
 QT4_ADD_RESOURCES(qrc_files mscoreplay.qrc)
