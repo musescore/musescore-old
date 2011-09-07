@@ -295,9 +295,9 @@ void ScoreView::moveCursor(int tick)
       double y        = system->staffY(0) + system->page()->pos().y();
       double _spatium = score->spatium();
 
-      qreal mag = _spatium / (DPI * SPATIUM20);
-      double w  = _spatium * 2.0 + symbols[score->symIdx()][quartheadSym].width(mag);
-      double h  = 6 * _spatium;
+      qreal xmag = _spatium / (DPI * SPATIUM20);
+      double w   = _spatium * 2.0 + symbols[score->symIdx()][quartheadSym].width(xmag);
+      double h   = 8 * _spatium;
       //
       // set cursor height for whole system
       //
@@ -310,11 +310,11 @@ void ScoreView::moveCursor(int tick)
             }
       h += y2;
       x -= _spatium;
-      y -= _spatium;
+      y -= 2* _spatium;
 
-      playbackCursor->setPos(x / mag, y / mag);
-      playbackCursor->setWidth(w / mag);
-      playbackCursor->setHeight(h / mag);
+      playbackCursor->setPos(x * mag, y * mag);
+      playbackCursor->setWidth(w * mag);
+      playbackCursor->setHeight(h * mag);
       }
 
 
