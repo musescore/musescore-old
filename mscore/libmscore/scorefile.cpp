@@ -1126,6 +1126,13 @@ bool Score::read(QDomElement dScore)
                   foreach(Spanner* s, m->spannerFor()) {
                         if (s->type() == VOLTA) {
                               Volta* volta = static_cast<Volta*>(s);
+                              // reset user offsets
+                              volta->setUserOff(QPointF());
+                              volta->setReadPos(QPointF());
+                              foreach(SpannerSegment* ss, volta->spannerSegments()) {
+                                    ss->setUserOff(QPointF());
+                                    ss->setReadPos(QPointF());
+                                    }
                               Measure* m2 = volta->endMeasure();
                               m2->removeSpannerBack(volta);
                               if (m2->prevMeasure())
