@@ -1121,6 +1121,22 @@ bool Score::read(QDomElement dScore)
                   }
             }
 
+      if (_mscVersion <= 118) {
+            for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+                  foreach(Spanner* s, m->spannerFor()) {
+                        if (s->type() == VOLTA) {
+                              Volta* volta = static_cast<Volta*>(s);
+                              Measure* m2 = volta->endMeasure();
+                              m2->removeSpannerBack(volta);
+                              if (m2->prevMeasure())
+                                    m2 = m2->prevMeasure();
+                              volta->setEndMeasure(m2);
+                              m2->addSpannerBack(volta);
+                              }
+                        }
+                  }
+            }
+
       // check slurs
       foreach(Slur* slur, slurs) {
             if (!slur->startElement() || !slur->endElement()) {
