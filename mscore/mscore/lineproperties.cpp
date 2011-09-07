@@ -126,8 +126,25 @@ LineProperties::LineProperties(TextLine* l, QWidget* parent)
       endSymbolX->setValue(tl->endSymbolOffset().x());
       endSymbolY->setValue(tl->endSymbolOffset().y());
 
-      beginTextPlace->setCurrentIndex(tl->beginTextPlace() == PLACE_LEFT ? 0 : 1);
-      continueTextPlace->setCurrentIndex(tl->continueTextPlace() == PLACE_LEFT ? 0 : 1);
+      int idx = 0;
+      switch(tl->beginTextPlace()) {
+            case PLACE_ABOVE: idx = 0; break;
+            case PLACE_BELOW: idx = 1; break;
+            case PLACE_LEFT:  idx = 2; break;
+            default:
+                  printf("illegal text placement\n");
+            }
+      beginTextPlace->setCurrentIndex(idx);
+
+      idx = 0;
+      switch(tl->continueTextPlace()) {
+            case PLACE_ABOVE: idx = 0; break;
+            case PLACE_BELOW: idx = 1; break;
+            case PLACE_LEFT:  idx = 2; break;
+            default:
+                  printf("illegal text placement\n");
+            }
+      continueTextPlace->setCurrentIndex(idx);
 
       beginHook->setChecked(tl->beginHook());
       endHook->setChecked(tl->endHook());
@@ -197,8 +214,21 @@ void LineProperties::accept()
       sym = endSymbol->itemData(endSymbol->currentIndex()).toInt();
       tl->setEndSymbol(endSymbolRb->isChecked() ? sym : -1);
 
-      tl->setBeginTextPlace(beginTextPlace->currentIndex() == 0 ? PLACE_LEFT : PLACE_ABOVE);
-      tl->setContinueTextPlace(continueTextPlace->currentIndex() == 0 ? PLACE_LEFT : PLACE_ABOVE);
+      Placement p = PLACE_ABOVE;
+      switch(beginTextPlace->currentIndex()) {
+            case 0: p = PLACE_ABOVE; break;
+            case 1: p = PLACE_BELOW; break;
+            case 2: p = PLACE_LEFT; break;
+            }
+      tl->setBeginTextPlace(p);
+
+      p = PLACE_ABOVE;
+      switch(continueTextPlace->currentIndex()) {
+            case 0: p = PLACE_ABOVE; break;
+            case 1: p = PLACE_BELOW; break;
+            case 2: p = PLACE_LEFT; break;
+            }
+      tl->setContinueTextPlace(p);
 
       tl->setBeginSymbolOffset(QPointF(beginSymbolX->value(), beginSymbolY->value()));
       tl->setContinueSymbolOffset(QPointF(continueSymbolX->value(), continueSymbolY->value()));

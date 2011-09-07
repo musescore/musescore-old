@@ -89,7 +89,8 @@ Item {
                         }
                   PropertyChanges {
                         target: scoreListView
-                        x: -(parent.width * 1.5)
+//                        x: -(parent.width * 1)
+                        x: -width;
                         }
                   PropertyChanges {
                         target: toolBar
@@ -164,7 +165,8 @@ Item {
                   anchors.top: titleBar.bottom
                   width:  parent.width
                   height: parent.height
-                  x: -(parent.width * 1.5)
+//                  x: -(parent.width * 1.5)
+                  x: width
 
                   contentWidth:  scoreView.width
                   contentHeight: scoreView.height
@@ -197,9 +199,10 @@ Item {
             Mobile.ToolBar {
                   id: toolBar
                   height: 40;
-                  anchors.bottom: parent.bottom
                   width: parent.width;
-                  opacity: 0.9
+                  opacity: .9
+                  anchors.bottom: parent.bottom
+
                   button1Label: "MyScores"; button2Label: "Play"
                   onButton1Clicked: {
                         if (screen.inScoreView == true)

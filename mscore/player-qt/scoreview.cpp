@@ -37,6 +37,26 @@
 #include "seq.h"
 
 //---------------------------------------------------------
+//   PlaybackCursor
+//---------------------------------------------------------
+
+PlaybackCursor::PlaybackCursor(QDeclarativeItem* parent)
+   : QDeclarativeItem(parent)
+      {
+      setFlag(QGraphicsItem::ItemHasNoContents, false);
+      setCacheMode(QGraphicsItem::ItemCoordinateCache);
+      }
+
+//---------------------------------------------------------
+//   paint
+//---------------------------------------------------------
+
+void PlaybackCursor::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidget*)
+      {
+      painter->fillRect(QRect(0, 0, width(), height()), Qt::blue);
+      }
+
+//---------------------------------------------------------
 //   ScoreView
 //---------------------------------------------------------
 
@@ -44,10 +64,10 @@ ScoreView::ScoreView(QDeclarativeItem* parent)
    : QDeclarativeItem(parent)
       {
       setFlag(QGraphicsItem::ItemHasNoContents, false);
-      setCacheMode(QGraphicsItem::DeviceCoordinateCache);
-      setSmooth(true);
       setCacheMode(QGraphicsItem::ItemCoordinateCache);
+      playbackCursor = new PlaybackCursor(this);
       score = 0;
+      seq->setView(this);
       }
 
 //---------------------------------------------------------
@@ -118,6 +138,9 @@ void ScoreView::setScore(const QString& name)
 
       setWidth(pr.width() * mag);
       setHeight(pr.height() * mag);
+
+      playbackCursor->setWidth(10);
+      playbackCursor->setHeight(50);
       update();
       }
 
@@ -205,28 +228,6 @@ void ScoreView::dataChanged(const QRectF&)
       update();
       }
 
-void ScoreView::updateAll()
-      {
-      update();
-      }
-
-void ScoreView::moveCursor()
-      {
-      }
-
-void ScoreView::adjustCanvasPosition(const Element*, bool)
-      {
-      }
-
-void ScoreView::changeEditElement(Element*)
-      {
-      }
-
-int ScoreView::gripCount() const
-      {
-      return 0;
-      }
-
 const QRectF& ScoreView::getGrip(int) const
       {
       static const QRectF a;
@@ -239,14 +240,6 @@ const QTransform& ScoreView::matrix() const
       return t; // _matrix;
       }
 
-void ScoreView::setDropRectangle(const QRectF&)
-      {
-      }
-
-void ScoreView::cmdAddSlur(Note*, Note*)
-      {
-      }
-
 //---------------------------------------------------------
 //   play
 //---------------------------------------------------------
@@ -255,4 +248,14 @@ void ScoreView::play()
       {
       seq->startStop();
       }
+
+//---------------------------------------------------------
+//   moveCursor
+//---------------------------------------------------------
+
+void ScoreView::moveCursor(Segment*)
+      {
+printf("moveCursor\n");
+      }
+
 

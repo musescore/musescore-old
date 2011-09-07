@@ -33,6 +33,7 @@
 #include "libmscore/system.h"
 #include "libmscore/tempo.h"
 #include "pa.h"
+#include "scoreview.h"
 
 Seq* seq;
 
@@ -411,7 +412,7 @@ QRectF Seq::heartBeat(int* pageIdx, bool* stopped)
             return r;
             }
       *stopped = false;
-#if 0
+
       qreal endTime = curTime() - startTime;
       const Note* note = 0;
       for (; guiPos != events.constEnd(); ++guiPos) {
@@ -429,11 +430,11 @@ QRectF Seq::heartBeat(int* pageIdx, bool* stopped)
       if (note) {
             Page* page = note->chord()->segment()->measure()->system()->page();
             *pageIdx = cs->pageIdx(page);
-            r = cs->moveCursor(note->chord()->segment());
+            r = view->moveCursor(note->chord()->segment());
             }
       else
             r.setWidth(.0);
-#endif
+
       return r;
       }
 

@@ -20,6 +20,22 @@
 #include <QtCore/QRectF>
 #include <QtDeclarative/QDeclarativeItem>
 
+class Segment;
+
+//---------------------------------------------------------
+//   PlaybackCursor
+//---------------------------------------------------------
+
+class PlaybackCursor : public QDeclarativeItem {
+      Q_OBJECT
+
+      virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*);
+
+   public:
+      PlaybackCursor(QDeclarativeItem* parent = 0);
+      virtual ~PlaybackCursor() {}
+      };
+
 //---------------------------------------------------------
 //   ScoreView
 //---------------------------------------------------------
@@ -30,32 +46,33 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
       Q_PROPERTY(qreal parentHeight READ parentHeight WRITE setParentHeight)
 
       Score* score;
+      PlaybackCursor* playbackCursor;
       int _currentPage;
       qreal _parentWidth, _parentHeight;
       qreal mag;
       QRectF _boundingRect;
 
       virtual void dataChanged(const QRectF&);
-      virtual void updateAll();
-      virtual void moveCursor();
-      virtual void adjustCanvasPosition(const Element* el, bool playBack);
-      virtual void setScore(Score*) { printf("setScore\n");}
-      virtual void removeScore() {printf("removeScore\n");}
-      virtual void changeEditElement(Element*);
-      virtual int gripCount() const;
+      virtual void updateAll()                  { update(); }
+      virtual void moveCursor()                 {}
+      virtual void adjustCanvasPosition(const Element*, bool) {}
+      virtual void setScore(Score*)             {}
+      virtual void removeScore()                {}
+      virtual void changeEditElement(Element*)  {}
+      virtual int gripCount() const             { return 0; }
       virtual const QRectF& getGrip(int) const;
       virtual const QTransform& matrix() const;
-      virtual void setDropRectangle(const QRectF&);
-      virtual void cmdAddSlur(Note* firstNote, Note* lastNote);
-      virtual void startEdit() { printf("startEdit\n");}
-      virtual void startEdit(Element*, int /*startGrip*/) { printf("startEdit\n");}
-      virtual Element* elementNear(QPointF) { printf("elementNear\n"); return 0; }
+      virtual void setDropRectangle(const QRectF&)              {}
+      virtual void cmdAddSlur(Note*, Note*)     {}
+      virtual void startEdit()                  {}
+      virtual void startEdit(Element*, int)     {}
+      virtual Element* elementNear(QPointF)     { return 0; }
 
-      virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidget*);
+      virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*);
 
-      virtual void setCursor(const QCursor&) {} // { QWidget::setCursor(c); }
-      virtual QCursor cursor() const { return QCursor(); } // { return QWidget::cursor(); }
-      virtual QRectF boundingRect() const { return _boundingRect; }
+      virtual void setCursor(const QCursor&)    {}
+      virtual QCursor cursor() const            { return QCursor(); }
+      virtual QRectF boundingRect() const       { return _boundingRect; }
 
    public slots:
       void setScore(const QString& s);
@@ -71,6 +88,7 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
       void setParentWidth(qreal val)  { _parentWidth = val;   }
       qreal parentHeight() const      { return _parentHeight; }
       void setParentHeight(qreal val) { _parentHeight = val;  }
+      void moveCursor(Segment*);
       };
 
 
