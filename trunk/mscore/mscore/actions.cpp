@@ -1869,18 +1869,6 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Tempo..."),
          QT_TRANSLATE_NOOP("action","Tempo")
          ),
-#if 0
-      Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY,
-         A_CMD,
-         "metronome",
-         QT_TRANSLATE_NOOP("action","Metronome"),
-         Qt::CTRL+Qt::ALT + Qt::Key_M,
-         Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Metronome"),
-         QT_TRANSLATE_NOOP("action","Metronome")
-         ),
-#endif
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          0,
@@ -2862,6 +2850,16 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","inspector"),
          QT_TRANSLATE_NOOP("action","Show inspector")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY | STATE_EDIT,
+         0,
+         "metronome",
+         QT_TRANSLATE_NOOP("action","M"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","metronome"),
+         QT_TRANSLATE_NOOP("action","toggle metronome")
          ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, 0, QKeySequence::UnknownKey)

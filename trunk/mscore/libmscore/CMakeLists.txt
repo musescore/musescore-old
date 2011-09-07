@@ -20,7 +20,7 @@ add_library (
       segmentlist.cpp fingering.cpp accidental.cpp arpeggio.cpp
       articulation.cpp barline.cpp beam.cpp bend.cpp box.cpp
       bracket.cpp breath.cpp bsp.cpp chord.cpp chordline.cpp
-      chordlist.cpp chordrest.cpp clef.cpp cleflist.cpp cursor.cpp
+      chordlist.cpp chordrest.cpp clef.cpp cleflist.cpp
       drumset.cpp durationtype.cpp dynamic.cpp edit.cpp
       element.cpp elementlayout.cpp event.cpp excerpt.cpp
       fifo.cpp fret.cpp glissando.cpp hairpin.cpp

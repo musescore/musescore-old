@@ -67,7 +67,9 @@ class SeqMsgFifo : public FifoBase {
 //    sequencer
 //---------------------------------------------------------
 
-class Seq {
+class Seq : public QObject {
+      Q_OBJECT
+
       bool running;                       // true if sequencer is available
       int  state;                         // STOP, PLAY, START_PLAY
       bool playlistChanged;
@@ -83,6 +85,7 @@ class Seq {
       qreal playTime;
       qreal startTime;
       int endTick;
+      int playTick;
 
       EventMap::const_iterator playPos;   // moved in real time thread
       EventMap::const_iterator guiPos;
@@ -96,6 +99,9 @@ class Seq {
       void playEvent(const SeqEvent&);
       void collectEvents();
       void setPos(int utick);
+
+   private slots:
+      void heartBeat();
 
    public:
       Seq();
@@ -118,7 +124,6 @@ class Seq {
                   start();
             }
       void seek(int);
-      QRectF heartBeat(int* pageIdx, bool* stopped);
       void setRelTempo(float);
       };
 

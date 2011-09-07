@@ -62,6 +62,8 @@ Seq::Seq()
       cs       = 0;
       state    = TRANSPORT_STOP;
       playlistChanged = false;
+      heartBeatTimer = new QTimer(this);
+      connect(heartBeatTimer, SIGNAL(timeout()), this, SLOT(heartBeat()));
       }
 
 //---------------------------------------------------------
@@ -118,6 +120,15 @@ void Seq::setScore(Score* s)
       }
 
 //---------------------------------------------------------
+//   setView
+//---------------------------------------------------------
+
+void Seq::setView(ScoreView* v)
+      {
+      view = v;
+      }
+
+//---------------------------------------------------------
 //   start
 //---------------------------------------------------------
 
@@ -129,6 +140,8 @@ void Seq::start()
             return;
       seek(cs->playPos());
       state = TRANSPORT_PLAY;
+      if (!heartBeatTimer->isActive())
+            heartBeatTimer->start(1000/10);
       }
 
 //---------------------------------------------------------
@@ -142,6 +155,7 @@ void Seq::stop()
       if (playPos != events.constEnd())
             tick = playPos.key();
       cs->setPlayPos(tick);
+      heartBeatTimer->stop();
       }
 
 //---------------------------------------------------------
@@ -212,6 +226,7 @@ void Seq::process(unsigned n, float* p)
                   frames    -= n;
                   framePos  += n;
                   playEvent(playPos.value());
+                  playTick = playPos.key();
                   }
             if (frames) {
                   synti->process(frames, p);
@@ -403,16 +418,12 @@ void Seq::playEvent(const SeqEvent& event)
 //    update GUI
 //---------------------------------------------------------
 
-QRectF Seq::heartBeat(int* pageIdx, bool* stopped)
+void Seq::heartBeat()
       {
       QRectF r;
       if (state != TRANSPORT_PLAY) {
-            *stopped = true;
-            r.setWidth(0.0);
-            return r;
+            return;
             }
-      *stopped = false;
-
       qreal endTime = curTime() - startTime;
       const Note* note = 0;
       for (; guiPos != events.constEnd(); ++guiPos) {
@@ -427,14 +438,6 @@ QRectF Seq::heartBeat(int* pageIdx, bool* stopped)
                         }
                   }
             }
-      if (note) {
-            Page* page = note->chord()->segment()->measure()->system()->page();
-            *pageIdx = cs->pageIdx(page);
-            r = view->moveCursor(note->chord()->segment());
-            }
-      else
-            r.setWidth(.0);
-
-      return r;
+      view->moveCursor(playTick);
       }
 

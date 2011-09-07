@@ -53,7 +53,8 @@ PlaybackCursor::PlaybackCursor(QDeclarativeItem* parent)
 
 void PlaybackCursor::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidget*)
       {
-      painter->fillRect(QRect(0, 0, width(), height()), Qt::blue);
+      QColor c(0,0,255,50);
+      painter->fillRect(QRect(0, 0, width(), height()), c);
       }
 
 //---------------------------------------------------------
@@ -138,9 +139,6 @@ void ScoreView::setScore(const QString& name)
 
       setWidth(pr.width() * mag);
       setHeight(pr.height() * mag);
-
-      playbackCursor->setWidth(10);
-      playbackCursor->setHeight(50);
       update();
       }
 
@@ -253,9 +251,70 @@ void ScoreView::play()
 //   moveCursor
 //---------------------------------------------------------
 
-void ScoreView::moveCursor(Segment*)
+void ScoreView::moveCursor(int tick)
       {
-printf("moveCursor\n");
+      Measure* measure = score->tick2measure(tick);
+      if (measure == 0)
+            return;
+
+      qreal x;
+      Segment* s;
+      for (s = measure->first(SegChordRest); s;) {
+            int t1 = s->tick();
+            int x1 = s->canvasPos().x();
+            qreal x2;
+            int t2;
+            Segment* ns = s->next(SegChordRest);
+            if (ns) {
+                  t2 = ns->tick();
+                  x2 = ns->canvasPos().x();
+                  }
+            else {
+                  t2 = measure->endTick();
+                  x2 = measure->canvasPos().x() + measure->width();
+                  }
+            if (tick >= t1 && tick < t2) {
+                  int   dt = t2 - t1;
+                  qreal dx = x2 - x1;
+                  x = x1 + dx * (tick-t1) / dt;
+                  break;
+                  }
+            s = ns;
+            }
+      if (s == 0)
+            return;
+
+      QColor c(MScore::selectColor[0]);
+      c.setAlpha(50);
+      playbackCursor->setColor(c);
+      playbackCursor->setTick(tick);
+
+      System* system = measure->system();
+      if (system == 0)
+            return;
+      double y        = system->staffY(0) + system->page()->pos().y();
+      double _spatium = score->spatium();
+
+      qreal mag = _spatium / (DPI * SPATIUM20);
+      double w  = _spatium * 2.0 + symbols[score->symIdx()][quartheadSym].width(mag);
+      double h  = 6 * _spatium;
+      //
+      // set cursor height for whole system
+      //
+      double y2 = 0.0;
+      for (int i = 0; i < score->nstaves(); ++i) {
+            SysStaff* ss = system->staff(i);
+            if (!ss->show())
+                  continue;
+            y2 = ss->y();
+            }
+      h += y2;
+      x -= _spatium;
+      y -= _spatium;
+
+      playbackCursor->setPos(x / mag, y / mag);
+      playbackCursor->setWidth(w / mag);
+      playbackCursor->setHeight(h / mag);
       }
 
 

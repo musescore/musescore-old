@@ -117,7 +117,6 @@ enum ElementType {
       TREMOLO,
       MEASURE,
       STAFF_LINES,
-      CURSOR,
       SELECTION,
       LASSO,
       SHADOW_NOTE,

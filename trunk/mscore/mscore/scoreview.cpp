@@ -66,7 +66,6 @@
 #include "libmscore/sym.h"
 #include "libmscore/lasso.h"
 #include "libmscore/box.h"
-#include "libmscore/cursor.h"
 #include "texttools.h"
 #include "libmscore/clef.h"
 #include "scoretab.h"
@@ -636,7 +635,7 @@ ScoreView::ScoreView(QWidget* parent)
       lasso       = new Lasso(_score);
       _foto       = new Lasso(_score);
 
-      _cursor     = 0;
+      _cursor     = new Cursor;
       shadowNote  = 0;
       grips       = 0;
       origEditObject   = 0;
@@ -902,24 +901,14 @@ void ScoreView::setScore(Score* s)
       _score = s;
       _score->addViewer(this);
 
-      if (_cursor == 0) {
-            _cursor = new Cursor(_score);
+      if (shadowNote == 0) {
             shadowNote = new ShadowNote(_score);
-            _cursor->setVisible(false);
             shadowNote->setVisible(false);
             }
-      else {
-            _cursor->setScore(_score);
+      else
             shadowNote->setScore(_score);
-            }
-      cursorSegment = 0;
-      cursorTrack   = -2;
-
       lasso->setScore(s);
       _foto->setScore(s);
-//      connect(s, SIGNAL(updateAll()),                SLOT(updateAll()));
-//      connect(s, SIGNAL(dataChanged(const QRectF&)), SLOT(dataChanged(const QRectF&)));
-//      connect(s, SIGNAL(inputCursorChanged()),       SLOT(moveCursor()));
       }
 
 //---------------------------------------------------------
@@ -1342,24 +1331,86 @@ void ScoreView::startEdit()
 void ScoreView::moveCursor()
       {
       const InputState& is = _score->inputState();
-      int track = is.track();
-      if (track == -1)
-            track = 0;
-
-      _cursor->setTrack(track);
+      int track = is.track() == -1 ? 0 : is.track();
       Segment* segment = is.segment();
       if (segment)
             moveCursor(segment, track);
       }
 
+void ScoreView::moveCursor(int tick)
+      {
+      Measure* measure = score()->tick2measure(tick);
+      if (measure == 0)
+            return;
+
+      qreal x;
+      Segment* s;
+      for (s = measure->first(SegChordRest); s;) {
+            int t1 = s->tick();
+            int x1 = s->canvasPos().x();
+            qreal x2;
+            int t2;
+            Segment* ns = s->next(SegChordRest);
+            if (ns) {
+                  t2 = ns->tick();
+                  x2 = ns->canvasPos().x();
+                  }
+            else {
+                  t2 = measure->endTick();
+                  x2 = measure->canvasPos().x() + measure->width();
+                  }
+            if (tick >= t1 && tick < t2) {
+                  int   dt = t2 - t1;
+                  qreal dx = x2 - x1;
+                  x = x1 + dx * (tick-t1) / dt;
+                  break;
+                  }
+            s = ns;
+            }
+      if (s == 0)
+            return;
+
+      QColor c(MScore::selectColor[0]);
+      c.setAlpha(50);
+      _cursor->setColor(c);
+      _cursor->setTick(tick);
+
+      System* system = measure->system();
+      if (system == 0)
+            return;
+      double y        = system->staffY(0) + system->page()->pos().y();
+      double _spatium = score()->spatium();
+
+      update(_matrix.mapRect(_cursor->rect()).toRect().adjusted(-1,-1,1,1));
+
+      qreal mag = _spatium / (DPI * SPATIUM20);
+      double w  = _spatium * 2.0 + symbols[score()->symIdx()][quartheadSym].width(mag);
+      double h  = 6 * _spatium;
+      //
+      // set cursor height for whole system
+      //
+      double y2 = 0.0;
+      for (int i = 0; i < _score->nstaves(); ++i) {
+            SysStaff* ss = system->staff(i);
+            if (!ss->show())
+                  continue;
+            y2 = ss->y();
+            }
+      h += y2;
+      x -= _spatium;
+      y -= _spatium;
+
+      _cursor->setRect(QRectF(x, y, w, h));
+      update(_matrix.mapRect(_cursor->rect()).toRect().adjusted(-1,-1,1,1));
+      }
+
 void ScoreView::moveCursor(Segment* segment, int track)
       {
-      if (cursorSegment == segment && cursorTrack == track)
-            return;
-      cursorTrack = track;
-      cursorSegment = segment;
-
-      int staffIdx = (track == -1) ? -1 : (track / VOICES);
+      int voice = track == -1 ? 0 : track % VOICES;
+      QColor c(MScore::selectColor[voice]);
+      c.setAlpha(50);
+      _cursor->setColor(c);
+      _cursor->setTick(segment->tick());
 
       System* system = segment->measure()->system();
       if (system == 0) {
@@ -1367,16 +1418,18 @@ void ScoreView::moveCursor(Segment* segment, int track)
             printf("zero SYSTEM\n");
             return;
             }
-      int idx         = staffIdx == -1 ? 0 : staffIdx;
+      int staffIdx    = track == -1 ? 0 : track / VOICES;
       double x        = segment->canvasPos().x();
-      double y        = system->staffY(idx) + system->page()->pos().y();
-      double _spatium = _cursor->spatium();
+      double y        = system->staffY(staffIdx) + system->page()->pos().y();
+      double _spatium = score()->spatium();
 
-      update(_matrix.mapRect(_cursor->canvasBoundingRect()).toRect().adjusted(-1,-1,1,1));
+      update(_matrix.mapRect(_cursor->rect()).toRect().adjusted(-1,-1,1,1));
 
       double h;
-      double w;
-      if (staffIdx == -1) {
+      qreal mag = _spatium / (DPI * SPATIUM20);
+      double w  = _spatium * 2.0 + symbols[score()->symIdx()][quartheadSym].width(mag);
+
+      if (track == -1) {
             h  = 6 * _spatium;
             //
             // set cursor height for whole system
@@ -1389,8 +1442,6 @@ void ScoreView::moveCursor(Segment* segment, int track)
                   y2 = ss->y();
                   }
             h += y2;
-            // w = _spatium * 2.0;
-            w  = _spatium * 2.0 + symbols[score()->symIdx()][quartheadSym].width(_cursor->magS());
             x -= _spatium;
             y -= _spatium;
             }
@@ -1399,13 +1450,11 @@ void ScoreView::moveCursor(Segment* segment, int track)
             double lineDist = staff->useTablature() ? 1.5 * _spatium : _spatium;
             int lines       = staff->lines();
             h               = (lines - 1) * lineDist + 4 * _spatium;
-            w               = _spatium * 2.0 + symbols[score()->symIdx()][quartheadSym].width(_cursor->magS());
             x              -= _spatium;
             y              -= 2.0 * _spatium;
             }
-      _cursor->setPos(x, y);
-      _cursor->setbbox(QRectF(0.0, 0.0, w, h));
-      update(_matrix.mapRect(QRectF(x, y, w, h)).toRect().adjusted(-1,-1,1,1));
+      _cursor->setRect(QRectF(x, y, w, h));
+      update(_matrix.mapRect(_cursor->rect()).toRect().adjusted(-1,-1,1,1));
       }
 
 //---------------------------------------------------------
@@ -1414,7 +1463,7 @@ void ScoreView::moveCursor(Segment* segment, int track)
 
 int ScoreView::cursorTick() const
       {
-      return cursorSegment ? cursorSegment->tick() : 0;
+      return _cursor->tick();
       }
 
 //---------------------------------------------------------
@@ -1425,9 +1474,7 @@ void ScoreView::setCursorOn(bool val)
       {
       if (_cursor && (_cursor->visible() != val)) {
             _cursor->setVisible(val);
-            cursorSegment = 0;
-            cursorTrack   = -1;
-            update(_matrix.mapRect(_cursor->canvasBoundingRect()).toRect().adjusted(-2,-2,2,2));
+            update(_matrix.mapRect(_cursor->rect()).toRect().adjusted(-1,-1,1,1));
             }
       }
 
@@ -1515,7 +1562,8 @@ void ScoreView::paintEvent(QPaintEvent* ev)
       p.setTransform(_matrix);
       p.setClipping(false);
 
-      _cursor->draw(&vp);
+      if (_cursor && _cursor->visible())
+            p.fillRect(_cursor->rect(), _cursor->color());
 
       lasso->draw(&vp);
       if (fotoMode())
