@@ -61,10 +61,10 @@ Text::Text(const Text& e)
       _doc                  = e._doc->clone();
       frame                 = e.frame;
       _styled               = e._styled;
-      _localStyle           = e._localStyle;
       _editMode             = e._editMode;
       cursor                = 0;
       cursorPos             = e.cursorPos;
+      _localStyle           = e._localStyle;
       _textStyle            = e._textStyle;
       _layoutToParentWidth  = e._layoutToParentWidth;
       }

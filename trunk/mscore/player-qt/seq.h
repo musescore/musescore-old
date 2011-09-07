@@ -23,11 +23,12 @@
 
 #include "m-msynth/event.h"
 #include "libmscore/fifo.h"
-#include "libmscore/painter.h"
+// #include "libmscore/painter.h"
 
 class Synti;
 class Driver;
 class Score;
+class ScoreView;
 
 enum { TRANSPORT_STOP=0, TRANSPORT_PLAY=1, TRANSPORT_STARTING=3,
        TRANSPORT_NET_STARTING=4 };
@@ -71,6 +72,8 @@ class Seq {
       int  state;                         // STOP, PLAY, START_PLAY
       bool playlistChanged;
       Score* cs;
+      ScoreView* view;
+      QTimer* heartBeatTimer;
 
       SeqMsgFifo toSeq;
 
@@ -103,7 +106,8 @@ class Seq {
       void sendEvent(const SeqEvent&);
 
       void process(unsigned, float*);
-      void setScore(Score* s);
+      void setScore(Score*);
+      void setView(ScoreView*);
       void start();
       void stop();
       bool isPlaying() const { return state == TRANSPORT_PLAY; }

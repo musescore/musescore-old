@@ -288,10 +288,10 @@ TextLine::TextLine(const TextLine& e)
 
       _beginHook            = e._beginHook;
       _endHook              = e._endHook;
-      _beginHookHeight      = e._beginHookHeight;
-      _endHookHeight        = e._endHookHeight;
       _beginHookType        = e._beginHookType;
       _endHookType          = e._endHookType;
+      _beginHookHeight      = e._beginHookHeight;
+      _endHookHeight        = e._endHookHeight;
 
       _beginSymbol          = e._beginSymbol;
       _continueSymbol       = e._continueSymbol;

@@ -1,3 +1,5 @@
+7.sep (ws)
+      - fix 12447: Changing volta text doesn't work
 6.sep (ws)
       - new simple plugin manager in "Preferences->Plugins":
         plugins now have to be configured to be loaded on mscore startup

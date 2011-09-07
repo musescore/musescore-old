@@ -181,11 +181,9 @@ void ScoreView::createElementPropertyMenu(Element* e, QMenu* popup)
             genPropertyMenu1(e, popup);
             popup->addAction(tr("Tuplet Properties..."))->setData("tuplet-props");
             }
-//      else if (e->type() == VOLTA) {
       else if (e->type() == VOLTA_SEGMENT) {
             genPropertyMenu1(e, popup);
             popup->addAction(tr("Volta Properties..."))->setData("v-props");
-            popup->addAction(tr("Line Properties..."))->setData("l-props");
             }
       else if (e->type() == TIMESIG) {
             genPropertyMenu1(e, popup);
@@ -479,9 +477,8 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             if (lp.exec()) {
                   score()->undoChangeElement(vs->textLine(), nTl);
                   // force new text
-                  foreach(SpannerSegment* l, nTl->spannerSegments()) {
+                  foreach(SpannerSegment* l, nTl->spannerSegments())
                         static_cast<TextLineSegment*>(l)->clearText();
-                        }
                   }
             else
                   delete nTl;

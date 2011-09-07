@@ -185,12 +185,17 @@
          <widget class="QComboBox" name="beginTextPlace">
           <item>
            <property name="text">
-            <string>Left</string>
+            <string>Above</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Above</string>
+            <string>Below</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Left</string>
            </property>
           </item>
          </widget>
@@ -393,12 +398,17 @@
          <widget class="QComboBox" name="continueTextPlace">
           <item>
            <property name="text">
-            <string>Left</string>
+            <string>Above</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Above</string>
+            <string>Below</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Left</string>
            </property>
           </item>
          </widget>
