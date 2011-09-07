@@ -14,6 +14,62 @@ I did some changes to the files to better fit for MuseScore:
             score snippet to full page
 
 -------------------------------------------------
+      *.mscz files
+-------------------------------------------------
+accidentals3.mscz
+      accidentals positioning in chords     
+aeolus.mscx
+      test aeolus synthesizer
+arpeggio.mscz
+      arpeggio up down
+beam1.mscz
+
+chordlist.mscx
+
+crossbeams.mscx
+
+fractional_beams.mscz
+
+harmony.mscx
+
+mmrest.mcsz
+
+noteheads.mscz
+
+
+repeat1.mscz
+      two measures barline repeat
+repeat2.mscz
+      single measure barline repeat
+repeat3.mscz
+      two measure repeat, single barline, at start
+repeat4.mscz
+      2 nested repeat barline, Playback  123-234-234567
+repeat5.mscz  
+      3 nested repeat barline, Playback  123-23-234-23456
+repeat6.mscz
+      Simple volta - 123 2456
+repeat7.mscz
+      DC al fine
+repeat9.mscz
+      DS al coda
+repeat10.mscz
+      3 voltas Playback 123-24-256
+repeat11.mscz
+      4 voltas, spanning 2 measures Playback 1234 1256 1278 129 10 11 12
+
+slur1.mscx
+
+slur3.mscz
+
+tab.mscx
+
+test3.mscx
+
+testsmall.mscx    
+
+
+-------------------------------------------------
       *.msc Testfiles
 -------------------------------------------------
 
