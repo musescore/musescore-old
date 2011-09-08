@@ -97,6 +97,7 @@ Item {
                         button1Visible: true
                         button2Visible: true
                         button3Visible: true
+                        tempoButtonVisible: true
                         }
                   }
             transitions: Transition {
@@ -214,10 +215,14 @@ Item {
                   onButton3Clicked: {
                         scoreView.rewind()
                         }
+                  onTempoChanged: {
+                        scoreView.setTempo(tempo)
+                        }
                   onButton2Clicked: scoreView.play();
                   button1Visible: false
                   button2Visible: false
                   button3Visible: false
+                  tempoButtonVisible: false
                   }
             }
       }
