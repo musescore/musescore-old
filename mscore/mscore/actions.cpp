@@ -2855,11 +2855,12 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY | STATE_EDIT,
          0,
          "metronome",
-         QT_TRANSLATE_NOOP("action","M"),
+         QT_TRANSLATE_NOOP("action","Metronome"),
          0,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","metronome"),
-         QT_TRANSLATE_NOOP("action","toggle metronome")
+         QT_TRANSLATE_NOOP("action","toggle metronome"),
+         metronome_ICON
          ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, 0, QKeySequence::UnknownKey)

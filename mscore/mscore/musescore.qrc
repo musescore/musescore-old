@@ -163,6 +163,7 @@
       <file>data/icons/format_indent_more.svgz</file>
       <file>data/icons/format_indent_less.svgz</file>
       <file>data/icons/community.svg</file>
+      <file>data/icons/metronome.svg</file>
       <file>data/webview.css</file>
 
       <file>data/icons-dark/minus.svg</file>
@@ -281,5 +282,6 @@
       <file>data/icons-dark/format_indent_more.svgz</file>
       <file>data/icons-dark/format_indent_less.svgz</file>
       <file>data/icons-dark/community.svg</file>
+      <file>data/icons-dark/metronome.svg</file>
    </qresource>
 </RCC>
