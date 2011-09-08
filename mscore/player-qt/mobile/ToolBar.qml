@@ -4,12 +4,14 @@ Item {
       id: toolbar
 
       property alias button1Label: button1.text
-      property alias button2Label: button2.text
+
       property alias button1Visible: button1.visible
       property alias button2Visible: button2.visible
+      property alias button3Visible: button3.visible
 
       signal button1Clicked
       signal button2Clicked
+      signal button3Clicked
 
       BorderImage {
             source: "images/titlebar.sci"
@@ -17,18 +19,21 @@ Item {
             }
 
       Row {
-            anchors.right: parent.right; anchors.rightMargin: 5
+            anchors.right: parent.right; anchors.rightMargin: 32
             y: 3; height: 32; spacing: 30
             Button {
                   id: button1
                   width: 140; height: 32
                   onClicked: toolbar.button1Clicked()
                   }
-
-            Button {
+            RewindButton {
+                  id: button3
+                  onClicked: toolbar.button3Clicked()
+                  }
+            PlayButton {
                   id: button2
-                  width: 140; height: 32
                   onClicked: toolbar.button2Clicked()
                   }
             }
       }
+

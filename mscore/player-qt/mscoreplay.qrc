@@ -25,6 +25,8 @@
       <file>mplayer.qml</file>
       <file>mobile/ToolBar.qml</file>
       <file>mobile/Button.qml</file>
+      <file>mobile/RewindButton.qml</file>
+      <file>mobile/PlayButton.qml</file>
       <file>mobile/ListDelegate.qml</file>
       <file>mobile/TitleBar.qml</file>
 
@@ -37,6 +39,10 @@
       <file>mobile/images/lineedit.sci</file>
       <file>mobile/images/lineedit.png</file>
       <file>mobile/images/quit.png</file>
+      <file>mobile/images/playbuttonOn.png</file>
+      <file>mobile/images/playbuttonOff.png</file>
+      <file>mobile/images/rewindbuttonOn.png</file>
+      <file>mobile/images/rewindbuttonOff.png</file>
 
       <file alias="mobile/images/paper.png">../share/wallpaper/paper1.png</file>
    </qresource>
