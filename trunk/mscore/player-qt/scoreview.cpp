@@ -69,6 +69,7 @@ ScoreView::ScoreView(QDeclarativeItem* parent)
       playbackCursor = new PlaybackCursor(this);
       score = 0;
       seq->setView(this);
+      grabGesture(Qt::SwipeGesture);
       }
 
 //---------------------------------------------------------
@@ -334,6 +335,19 @@ void ScoreView::moveCursor(int tick)
       playbackCursor->setPos(x * mag, y * mag);
       playbackCursor->setWidth(w * mag);
       playbackCursor->setHeight(h * mag);
+      }
+
+//---------------------------------------------------------
+//   sceneEvent
+//---------------------------------------------------------
+
+bool ScoreView::sceneEvent(QEvent* event)
+      {
+      if (event->type() == QEvent::Gesture) {
+            printf("gesture\n");
+            return true;
+            }
+      return QGraphicsItem::sceneEvent(event);
       }
 
 

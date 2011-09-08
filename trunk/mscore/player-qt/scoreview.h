@@ -71,6 +71,7 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
       virtual Element* elementNear(QPointF)     { return 0; }
 
       virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*);
+      virtual bool sceneEvent(QEvent*);
 
       virtual void setCursor(const QCursor&)    {}
       virtual QCursor cursor() const            { return QCursor(); }
