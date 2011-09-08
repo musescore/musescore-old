@@ -96,6 +96,7 @@ Item {
                         target: toolBar
                         button1Visible: true
                         button2Visible: true
+                        button3Visible: true
                         }
                   }
             transitions: Transition {
@@ -203,16 +204,20 @@ Item {
                   opacity: .9
                   anchors.bottom: parent.bottom
 
-                  button1Label: "MyScores"; button2Label: "Play"
+                  button1Label: "MyScores"
                   onButton1Clicked: {
                         if (screen.inScoreView == true)
                               screen.inScoreView = false
                         else
                               screen.inScoreView = true
                         }
+                  onButton3Clicked: {
+                        scoreView.rewind()
+                        }
                   onButton2Clicked: scoreView.play();
                   button1Visible: false
                   button2Visible: false
+                  button3Visible: false
                   }
             }
       }

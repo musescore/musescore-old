@@ -82,6 +82,7 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
       void setCurrentPage(int n);
       void nextPage();
       void prevPage();
+      void rewind();
 
    public:
       ScoreView(QDeclarativeItem* parent = 0);
