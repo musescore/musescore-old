@@ -83,6 +83,7 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
       void nextPage();
       void prevPage();
       void rewind();
+      void setTempo(qreal);
 
    public:
       ScoreView(QDeclarativeItem* parent = 0);

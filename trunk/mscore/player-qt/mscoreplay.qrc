@@ -29,6 +29,7 @@
       <file>mobile/PlayButton.qml</file>
       <file>mobile/ListDelegate.qml</file>
       <file>mobile/TitleBar.qml</file>
+      <file>mobile/Slider.qml</file>
 
       <file>mobile/images/titlebar.sci</file>
       <file>mobile/images/titlebar.png</file>

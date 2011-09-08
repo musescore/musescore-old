@@ -42,7 +42,10 @@ enum { SEQ_NO_MESSAGE, SEQ_TEMPO_CHANGE, SEQ_PLAY, SEQ_SEEK };
 
 struct SeqMsg {
       int id;
-      int data;
+      union {
+            int intVal;
+            qreal realVal;
+            } data;
       SeqEvent event;
       };
 
@@ -124,7 +127,7 @@ class Seq : public QObject {
                   start();
             }
       void seek(int);
-      void setRelTempo(float);
+      void setRelTempo(qreal);
       };
 
 extern Seq* seq;

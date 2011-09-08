@@ -162,11 +162,11 @@ void Seq::stop()
 //   setRelTempo
 //---------------------------------------------------------
 
-void Seq::setRelTempo(float val)
+void Seq::setRelTempo(qreal val)
       {
       SeqMsg msg;
-      msg.data = lrint(val);
-      msg.id   = SEQ_TEMPO_CHANGE;
+      msg.data.realVal = val;
+      msg.id = SEQ_TEMPO_CHANGE;
       toSeq.enqueue(msg);
       }
 
@@ -184,19 +184,19 @@ void Seq::processMessages()
                   case SEQ_TEMPO_CHANGE:
                         if (playTime != 0) {
                               int tick = cs->utime2utick(playTime);
-                              cs->tempomap()->setRelTempo(msg.data);
+                              cs->tempomap()->setRelTempo(msg.data.realVal);
                               cs->repeatList()->update();
                               playTime = cs->utick2utime(tick);
                               startTime = curTime() - playTime;
                               }
                         else
-                              cs->tempomap()->setRelTempo(msg.data);
+                              cs->tempomap()->setRelTempo(msg.data.realVal);
                         break;
                   case SEQ_PLAY:
                         putEvent(msg.event);
                         break;
                   case SEQ_SEEK:
-                        setPos(msg.data);
+                        setPos(msg.data.intVal);
                         break;
                   }
             }
@@ -342,8 +342,8 @@ void Seq::seek(int tick)
       tick = cs->repeatList()->tick2utick(tick);
 
       SeqMsg msg;
-      msg.data = tick;
-      msg.id   = SEQ_SEEK;
+      msg.data.intVal = tick;
+      msg.id          = SEQ_SEEK;
       toSeq.enqueue(msg);
       }
 
