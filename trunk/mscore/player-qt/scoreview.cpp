@@ -345,6 +345,16 @@ bool ScoreView::sceneEvent(QEvent* event)
       {
       if (event->type() == QEvent::Gesture) {
             printf("gesture\n");
+            QGestureEvent* ge = static_cast<QGestureEvent*>(event);
+            QGesture* g = ge->gesture(Qt::SwipeGesture);
+            if (g && g->gestureType() == Qt::SwipeGesture) {
+                  QSwipeGesture* sg = static_cast<QSwipeGesture*>(g);
+                  QSwipeGesture::SwipeDirection d = sg->horizontalDirection();
+                  if (d == QSwipeGesture::Left)
+                        printf("  swipe left\n");
+                  else if (d == QSwipeGesture::Right)
+                        printf("  swipe right\n");
+                  }
             return true;
             }
       return QGraphicsItem::sceneEvent(event);
