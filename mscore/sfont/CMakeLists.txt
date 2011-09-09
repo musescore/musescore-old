@@ -35,6 +35,8 @@ target_link_libraries(sfconvert
    vorbisenc
    ogg
    sndfile
+   z
+   rt
    )
 
 set_target_properties (

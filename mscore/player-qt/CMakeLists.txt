@@ -47,6 +47,8 @@ target_link_libraries(mscoreplay
       zarchive
       m-msynth
       portaudio
+      z
+      rt
       )
 
 set_target_properties (
