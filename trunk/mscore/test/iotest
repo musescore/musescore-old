@@ -63,7 +63,7 @@ rwtestXml() {
 
 rwtestXmlRef() {
       echo -n "testing load/save $1";
-      REF=`basename $1 .xml`_ref.xml
+      REF=musicxml/`basename $1 .xml`_ref.xml
       $MSCORE $1 -d -o mops.xml &> /dev/null
       if diff -q $REF mops.xml &> /dev/null; then
             echo -e "\r\t\t\t\t\t\t...OK";
