@@ -69,6 +69,8 @@ ScoreView::ScoreView(QDeclarativeItem* parent)
       playbackCursor = new PlaybackCursor(this);
       score = 0;
       seq->setView(this);
+      setAcceptedMouseButtons(Qt::LeftButton);
+      setAcceptTouchEvents(true);
       grabGesture(Qt::SwipeGesture);
       }
 
@@ -350,12 +352,16 @@ bool ScoreView::sceneEvent(QEvent* event)
             if (g && g->gestureType() == Qt::SwipeGesture) {
                   QSwipeGesture* sg = static_cast<QSwipeGesture*>(g);
                   QSwipeGesture::SwipeDirection d = sg->horizontalDirection();
-                  if (d == QSwipeGesture::Left)
+                  if (d == QSwipeGesture::Left) {
                         printf("  swipe left\n");
-                  else if (d == QSwipeGesture::Right)
+                        prevPage();
+                        }
+                  else if (d == QSwipeGesture::Right) {
                         printf("  swipe right\n");
+                        nextPage();
+                        }
+                  return true;
                   }
-            return true;
             }
       return QGraphicsItem::sceneEvent(event);
       }
