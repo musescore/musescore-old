@@ -1557,17 +1557,15 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                                           // LVIFIX TODO also support endings "1, 2" and "1 - 3"
                                           volta->endings().clear();
                                           volta->endings().append(iEendingNumber);
-                                          Segment* seg = measure->getSegment(SegChordRest, tick);
-                                          volta->setStartElement(seg);
-                                          seg->add(volta);
+                                          volta->setStartElement(measure);
+                                          measure->add(volta);
                                           lastVolta = volta;
                                           }
                                     else if (endingType == "stop") {
                                           if (lastVolta) {
                                                 lastVolta->setSubtype(Volta::VOLTA_CLOSED);
-                                                Segment* seg = measure->getSegment(SegChordRest, tick);
-                                                lastVolta->setEndElement(seg);
-                                                seg->addSpannerBack(lastVolta);
+                                                lastVolta->setEndElement(measure);
+                                                measure->addSpannerBack(lastVolta);
                                                 lastVolta = 0;
                                                 }
                                           else {
@@ -1577,9 +1575,8 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                                     else if (endingType == "discontinue") {
                                           if (lastVolta) {
                                                 lastVolta->setSubtype(Volta::VOLTA_OPEN);
-                                                Segment* seg = measure->getSegment(SegChordRest, tick);
-                                                lastVolta->setEndElement(seg);
-                                                seg->addSpannerBack(lastVolta);
+                                                lastVolta->setEndElement(measure);
+                                                measure->addSpannerBack(lastVolta);
                                                 lastVolta = 0;
                                                 }
                                           else {
