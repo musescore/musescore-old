@@ -1440,17 +1440,10 @@ static QString tick2xml(const int ticks, int* dots)
 
 static Volta* findVolta(Measure* m, bool left)
       {
-      Segment* s = m->score()->firstMeasure()->first(SegChordRest);
-      for (; s; s = s->next1(SegChordRest)) {
-            foreach(Spanner* el, s->spannerFor()) {
-                  if (el->type() != VOLTA)
-                        continue;
-                  Volta* v = (Volta*) el;
-                  if ((left && v->tick() == m->tick())
-                      || (!left && v->tick2() == (m->tick() + m->ticks()))) {
-                        return v;
-                        }
-                  }
+      foreach(Spanner* el, m->spannerFor()) {
+            if (el->type() != VOLTA)
+                  continue;
+            return (Volta*) el;
             }
       return 0;
       }
