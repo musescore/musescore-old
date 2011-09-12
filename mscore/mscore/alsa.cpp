@@ -592,7 +592,6 @@ AlsaAudio::AlsaAudio(Seq* s)
       alsa       = 0;
       state      = Seq::TRANSPORT_STOP;
       seekflag   = false;
-      startTime  = curTime();
       midiDriver = 0;
       }
 

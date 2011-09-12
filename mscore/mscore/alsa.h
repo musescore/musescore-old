@@ -108,7 +108,6 @@ class AlsaAudio : public Driver {
       volatile int runAlsa;
       int state;
       bool seekflag;
-      double startTime;
 
       MidiDriver* midiDriver;
 

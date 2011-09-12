@@ -11,8 +11,6 @@
 //  the file LICENCE.GPL
 //=============================================================================
 
-#include <sys/time.h>
-
 #include "config.h"
 #include "score.h"
 #include "page.h"
@@ -318,23 +316,6 @@ int quantizeLen(int len, int raster)
       rl = ((len + rl - 1) / rl) * rl;
 #endif
       return rl;
-      }
-
-//---------------------------------------------------------
-//   curTime
-//---------------------------------------------------------
-
-qreal curTime()
-      {
-#if defined (__MINGW32__) || defined (__APPLE__)
-      struct timeval t;
-      gettimeofday(&t, 0);
-      return (qreal)((qreal)t.tv_sec + (t.tv_usec / 1000000.0));
-#else
-      struct timespec t;
-      clock_gettime(CLOCK_MONOTONIC, &t);
-      return qreal(t.tv_sec) + qreal(t.tv_nsec) / 1000000000.0;
-#endif
       }
 
 //---------------------------------------------------------
