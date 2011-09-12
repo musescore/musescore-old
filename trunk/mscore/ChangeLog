@@ -1,4 +1,6 @@
-12.sep (ws)
+12.sep (lv)
+      - fix #12437: R4754 MusicXML issues: keysig imports in first staff only
+       (ws)
       - fix #12483: Score doesn't pan during playback
 11.sep (lv)
       - fix MusicXML import/export of voltas (trunk regression in rev 4734)
