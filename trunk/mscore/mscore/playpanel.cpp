@@ -225,8 +225,9 @@ void PlayPanel::heartBeat(int tick, int utick)
 //   heartBeat2
 //---------------------------------------------------------
 
-void PlayPanel::heartBeat2(int sec)
+void PlayPanel::heartBeat2(int samples)
       {
+      int sec = samples/MScore::sampleRate;
       if (sec == cachedTimePosition)
             return;
       cachedTimePosition = sec;

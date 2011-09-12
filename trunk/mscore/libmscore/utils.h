@@ -42,7 +42,6 @@ extern int pitchKeyAdjust(int note, int key);
 extern int line2pitch(int line, int clef, int key);
 extern int y2pitch(qreal y, int clef, qreal spatium);
 extern int quantizeLen(int, int);
-extern qreal curTime();
 extern void selectNoteMessage();
 extern void selectNoteRestMessage();
 extern void selectNoteSlurMessage();

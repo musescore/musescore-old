@@ -94,8 +94,8 @@ class Seq : public QObject {
 
       EventMap events;                    // playlist
 
-      double playTime;
-      double startTime;
+      int playTime;                       // in samples
+      int playTick;
 
       EventMap::const_iterator playPos;   // moved in real time thread
       EventMap::const_iterator guiPos;    // moved in gui thread
@@ -108,8 +108,6 @@ class Seq : public QObject {
       uint tackRest;     // metronome state
       uint tickRest;
       qreal metronomeVolume;
-
-      int playTick;
 
       QTimer* heartBeatTimer;
       QTimer* noteTimer;
@@ -186,9 +184,7 @@ class Seq : public QObject {
 
       QList<MidiPatch*> getPatchInfo() const;
       Driver* getDriver()  { return driver; }
-      int getCurTime();
       int getCurTick();
-      void getCurTick(int*, int*);
 
       float gain() const;
 

@@ -84,8 +84,7 @@ Seq::Seq()
       driver   = 0;
       playPos  = events.constBegin();
 
-      playTime = 0.0;
-      startTime = 0.0;
+      playTime  = 0;
       curTick   = 0;
       curUtick  = 0;
       metronomeVolume = 0.3;
@@ -142,7 +141,6 @@ void Seq::setScoreView(ScoreView* v)
       {
       if (cv !=v && cs) {
             cs->setSyntiState(synti->state());
-//            disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
             markedNotes.clear();
             stopWait();
             }
@@ -155,7 +153,6 @@ void Seq::setScoreView(ScoreView* v)
       playlistChanged = true;
       synti->reset();
       if (cs) {
-//            connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
             synti->setState(cs->syntiState());
             initInstruments();
             seek(cs->playPos());
@@ -366,11 +363,6 @@ void MuseScore::seqStarted()
 void MuseScore::seqStopped()
       {
       cv->setCursorOn(false);
-#if 0
-      cs->setLayoutAll(false);
-      cs->setUpdateAll();
-      cs->end();
-#endif
       }
 
 //---------------------------------------------------------
@@ -395,7 +387,7 @@ void Seq::guiStop()
             cs->addRefresh(n->canvasBoundingRect());
             }
       markedNotes.clear();
-      cs->setPlayPos(cs->utime2utick(playTime));
+      cs->setPlayPos(cs->utime2utick(playTime) * MScore::sampleRate);
       cs->end();
       emit stopped();
       }
@@ -464,8 +456,7 @@ void Seq::stopTransport()
 void Seq::startTransport()
       {
       emit toGui('1');
-      startTime  = curTime() - playTime;
-      state      = TRANSPORT_PLAY;
+      state = TRANSPORT_PLAY;
       }
 
 //---------------------------------------------------------
@@ -491,10 +482,6 @@ void Seq::playEvent(const Event& event)
             if (!event.velo() || !mute)
                   putEvent(event);
             }
-      else if (type == ME_TICK1)
-            ; // printf("tick====\n");
-      else if (type == ME_TICK2)
-            ; // printf("  tack\n");
       else if (type == ME_CONTROLLER)
             putEvent(event);
       }
@@ -513,11 +500,10 @@ void Seq::processMessages()
                   case SEQ_TEMPO_CHANGE:
                         {
                         if (playTime != 0) {
-                              int tick = cs->utime2utick(playTime);
+                              int tick = cs->utime2utick(qreal(playTime) / qreal(MScore::sampleRate));
                               cs->tempomap()->setRelTempo(msg.rdata);
                               cs->repeatList()->update();
-                              playTime = cs->utick2utime(tick);
-                              startTime = curTime() - playTime;
+                              playTime = cs->utick2utime(tick) * MScore::sampleRate;
                               }
                         else
                               cs->tempomap()->setRelTempo(msg.rdata);
@@ -596,23 +582,21 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
             // play events for one segment
             //
             unsigned framePos = 0;
-            double endTime = playTime + double(frames)/double(MScore::sampleRate);
+            int endTime = playTime + frames;
             for (; playPos != events.constEnd(); ++playPos) {
-                  double f = cs->utick2utime(playPos.key());
+                  int f = cs->utick2utime(playPos.key()) * MScore::sampleRate;
                   if (f >= endTime)
                         break;
-                  int n = lrint((f - playTime) * MScore::sampleRate);
-
+                  int n = f - playTime;
                   if (n < 0) {
-                        printf("%d:  %f - %f\n", playPos.key(), f, playTime);
+                        printf("%d:  %d - %d\n", playPos.key(), f, playTime);
 				n = 0;
                         }
                   metronome(n, l, r);
                   synti->process(n, l, r);
                   l += n;
                   r += n;
-                  playTime += double(n)/double(MScore::sampleRate);
-
+                  playTime  += n;
                   frames    -= n;
                   framePos  += n;
                   const Event& event = playPos.value();
@@ -626,7 +610,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
             if (frames) {
                   metronome(frames, l, r);
                   synti->process(frames, l, r);
-                  playTime += double(frames)/double(MScore::sampleRate);
+                  playTime += frames;
                   }
             if (playPos == events.constEnd()) {
                   driver->stopTransport();
@@ -704,27 +688,12 @@ void Seq::collectEvents()
       }
 
 //---------------------------------------------------------
-//   getCurTime
-//---------------------------------------------------------
-
-int Seq::getCurTime()
-      {
-      return (startTime > 0 ? lrint(curTime() - startTime) : 0);
-      }
-
-//---------------------------------------------------------
 //   getCurTick
 //---------------------------------------------------------
 
-void Seq::getCurTick(int* tick, int* utick)
-      {
-      *tick  = curTick;
-      *utick = curUtick;
-      }
-
 int Seq::getCurTick()
       {
-      return cs->utime2utick(curTime() - startTime);
+      return cs->utime2utick(qreal(playTime) / qreal(MScore::sampleRate));
       }
 
 //---------------------------------------------------------
@@ -783,8 +752,7 @@ void Seq::setPos(int utick)
       // send note off events
       synti->allNotesOff();
 
-      playTime  = cs->utick2utime(utick);
-      startTime = curTime() - playTime;
+      playTime  = cs->utick2utime(utick) * MScore::sampleRate;
       playPos   = events.lowerBound(utick);
       guiPos    = playPos;
       }
@@ -1201,9 +1169,9 @@ void Seq::heartBeat()
       if (state != TRANSPORT_PLAY)
             return;
       PlayPanel* pp = mscore->getPlayPanel();
-      double endTime = curTime() - startTime;
+      int endTime = playTime;
       if (pp)
-            pp->heartBeat2(lrint(endTime));
+            pp->heartBeat2(endTime);
 
       for (; guiPos != events.constEnd(); ++guiPos) {
             double f = cs->utick2utime(guiPos.key());
@@ -1233,6 +1201,8 @@ void Seq::heartBeat()
             }
       int tick = cs->repeatList()->utick2tick(playTick);
       mscore->currentScoreView()->moveCursor(tick);
+      if (pp)
+            pp->heartBeat(tick, playTick);
 
       PianorollEditor* pre = mscore->getPianorollEditor();
       if (pre && pre->isVisible())

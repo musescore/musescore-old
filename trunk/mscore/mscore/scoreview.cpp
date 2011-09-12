@@ -1390,7 +1390,7 @@ void ScoreView::moveCursor(int tick)
 
       qreal mag = _spatium / (DPI * SPATIUM20);
       double w  = _spatium * 2.0 + symbols[score()->symIdx()][quartheadSym].width(mag);
-      double h  = 6 * _spatium;
+      double h  = 10 * _spatium;
       //
       // set cursor height for whole system
       //
@@ -1403,7 +1403,7 @@ void ScoreView::moveCursor(int tick)
             }
       h += y2;
       x -= _spatium;
-      y -= _spatium;
+      y -= 3 * _spatium;
 
       _cursor->setRect(QRectF(x, y, w, h));
       update(_matrix.mapRect(_cursor->rect()).toRect().adjusted(-1,-1,1,1));
@@ -4132,24 +4132,19 @@ void ScoreView::adjustCanvasPosition(const Element* el, bool playBack)
 
       System* sys = m->system();
 
-      QPointF p(el->pagePos());
+      QPointF p(el->canvasPos());
       QRectF r(imatrix.mapRect(geometry()));
-      QRectF mRect(m->abbox());
-      QRectF sysRect(sys->abbox());
-
-      double _spatium = score()->spatium();
-      const qreal BORDER_X = _spatium * 3;
-      const qreal BORDER_Y = _spatium * 3;
+      QRectF mRect(m->canvasBoundingRect());
+      QRectF sysRect(sys->canvasBoundingRect());
 
       // only try to track measure if not during playback
       if (!playBack)
             sysRect = mRect;
-      qreal top = sysRect.top() - BORDER_Y;
-      qreal bottom = sysRect.bottom() + BORDER_Y;
-      qreal left = mRect.left() - BORDER_X;
-      qreal right = mRect.right() + BORDER_X;
 
-      QRectF showRect(left, top, right - left, bottom - top);
+      double _spatium    = score()->spatium();
+      const qreal border = _spatium * 3;
+      QRectF showRect = QRectF(mRect.x(), sysRect.y(), mRect.width(), sysRect.height())
+                        .adjusted(-border, -border, border, border);
 
       // canvas is not as wide as measure, track note instead
       if (r.width() < showRect.width()) {
@@ -4180,17 +4175,17 @@ void ScoreView::adjustCanvasPosition(const Element* el, bool playBack)
       qreal oldX = x, oldY = y;
 
       if (showRect.left() < r.left())
-            x = showRect.left() - BORDER_X;
+            x = showRect.left() - border;
       else if (showRect.left() > r.right())
-            x = showRect.right() - width() / mag() + BORDER_X;
+            x = showRect.right() - width() / mag() + border;
       else if (r.width() >= showRect.width() && showRect.right() > r.right())
-            x = showRect.left() - BORDER_X;
+            x = showRect.left() - border;
       if (showRect.top() < r.top() && showRect.bottom() < r.bottom())
-            y = showRect.top() - BORDER_Y;
+            y = showRect.top() - border;
       else if (showRect.top() > r.bottom())
-            y = showRect.bottom() - height() / mag() + BORDER_Y;
+            y = showRect.bottom() - height() / mag() + border;
       else if (r.height() >= showRect.height() && showRect.bottom() > r.bottom())
-            y = showRect.top() - BORDER_Y;
+            y = showRect.top() - border;
 
       // align to page borders if extends beyond
       Page* page = sys->page();
