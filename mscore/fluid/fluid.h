@@ -376,6 +376,7 @@ class Fluid : public Synth {
       // get/set synthesizer state (parameter set)
       virtual SyntiState state() const;
       virtual void setState(SyntiState&);
+      virtual void allNotesOff();
 
       bool log(const char* fmt, ...);
 

@@ -445,21 +445,13 @@ void Seq::stopTransport()
       state = TRANSPORT_STOP;
       if (cs == 0)
             return;
-      // send note off events
-      foreach(Event e, activeNotes) {
-            if (e.type() != ME_NOTEON)
-                  continue;
-            e.setVelo(0);
-            putEvent(e);
-            }
+      synti->allNotesOff();
       // send sustain off
       Event e;
       e.setType(ME_CONTROLLER);
       e.setController(CTRL_SUSTAIN);
       e.setValue(0);
       putEvent(e);
-
-      activeNotes.clear();
       emit toGui('0');
       }
 
@@ -496,23 +488,8 @@ void Seq::playEvent(const Event& event)
             else
                   mute = false;
 
-            if (event.velo()) {
-                  if (!mute) {
-                        putEvent(event);
-                        activeNotes.append(event);
-                        }
-                  }
-            else {
-                  for (QList<Event>::iterator k = activeNotes.begin(); k != activeNotes.end(); ++k) {
-                        Event l = *k;
-                        if (l.channel() == event.channel() && l.pitch() == event.pitch()) {
-                              l.setVelo(0);
-                              activeNotes.erase(k);
-                              putEvent(l);
-                              break;
-                              }
-                        }
-                  }
+            if (!event.velo() || !mute)
+                  putEvent(event);
             }
       else if (type == ME_TICK1)
             ; // printf("tick====\n");
@@ -710,7 +687,6 @@ void Seq::initInstruments()
 void Seq::collectEvents()
       {
       events.clear();
-      activeNotes.clear();
 
       cs->toEList(&events);
       endTick = 0;
@@ -805,13 +781,7 @@ void Seq::setRelTempo(double relTempo)
 void Seq::setPos(int utick)
       {
       // send note off events
-      foreach(Event n, activeNotes) {
-            if (n.type() != ME_NOTEON)
-                  continue;
-            n.setVelo(0);
-            putEvent(n);
-            }
-      activeNotes.clear();
+      synti->allNotesOff();
 
       playTime  = cs->utick2utime(utick);
       startTime = curTime() - playTime;
