@@ -1337,6 +1337,11 @@ void ScoreView::moveCursor()
             moveCursor(segment, track);
       }
 
+//---------------------------------------------------------
+//   moveCursor
+//    move cursor during playback
+//---------------------------------------------------------
+
 void ScoreView::moveCursor(int tick)
       {
       Measure* measure = score()->tick2measure(tick);
@@ -1402,6 +1407,8 @@ void ScoreView::moveCursor(int tick)
 
       _cursor->setRect(QRectF(x, y, w, h));
       update(_matrix.mapRect(_cursor->rect()).toRect().adjusted(-1,-1,1,1));
+      if (mscore->panDuringPlayback())
+            adjustCanvasPosition(measure, true);
       }
 
 void ScoreView::moveCursor(Segment* segment, int track)

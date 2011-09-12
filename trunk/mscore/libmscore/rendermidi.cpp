@@ -421,6 +421,7 @@ void Score::toEList(EventMap* events)
       updateChannel();
       foreach (Part* part, _parts)
             renderPart(events, part);
+
       // add metronome ticks
       foreach (const RepeatSegment* rs, *repeatList()) {
             int startTick  = rs->tick;

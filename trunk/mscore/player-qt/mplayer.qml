@@ -12,6 +12,7 @@
 //=============================================================================
 
 import QtQuick 1.0
+import Qt.labs.gestures 1.0
 import MuseScore 1.0
 import "mobile" as Mobile
 
@@ -27,6 +28,8 @@ Item {
                   when: (runtime.orientation == Orientation.Landscape)
                   PropertyChanges {
                         target: screen
+                        width: 1024
+                        height: 768
                         }
                   PropertyChanges {
                         target: background
@@ -38,6 +41,8 @@ Item {
                   when: (runtime.orientation == Orientation.LandscapeInverted)
                   PropertyChanges {
                         target: screen
+                        width: 1024
+                        height: 768
                         }
                   PropertyChanges {
                         target: background
@@ -49,6 +54,8 @@ Item {
                   when: (runtime.orientation == Orientation.Portrait)
                   PropertyChanges {
                         target: screen
+                        width:  768
+                        height: 1024
                         }
                   PropertyChanges {
                         target: background
@@ -60,6 +67,8 @@ Item {
                   when: (runtime.orientation == Orientation.PortraitInverted)
                   PropertyChanges {
                         target: screen
+                        width:  768
+                        height: 1024
                         }
                   PropertyChanges {
                         target: background
@@ -84,7 +93,7 @@ Item {
                   name: "ScoreView"
                   when: screen.inScoreView == true
                   PropertyChanges {
-                        target: scoreViewFlick
+                        target: scoreView
                         x: 0
                         }
                   PropertyChanges {
@@ -156,38 +165,16 @@ Item {
                               if (idx >= 0) {
                                     scoreView.setScore(scorelist.get(idx).path)
                                     screen.inScoreView = true
-                                    scoreViewFlick.contentY = 0
+                                    scoreView.contentY = 0
                                     }
                               }
                         }
                   }
 
-            Flickable {
-                  id: scoreViewFlick
-                  anchors.top: titleBar.bottom
-                  width:  parent.width
-                  height: parent.height
-//                  x: -(parent.width * 1.5)
-                  x: width
-
-                  contentWidth:  scoreView.width
-                  contentHeight: scoreView.height
-
-                  ScoreView {
-                        id: scoreView
-                        parentWidth: screen.width
-                        parentHeight: screen.height
-
-                        MouseArea {
-                              anchors.fill: parent
-                              onClicked: {
-                                    if (mouseX < width * .3)
-                                          parent.prevPage()
-                                    else if (mouseX > width * .6)
-                                          parent.nextPage()
-                                    }
-                              }
-                        }
+            ScoreView {
+                  id: scoreView
+                  parentWidth: screen.width
+                  parentHeight: screen.height
                   }
 
             Mobile.TitleBar {

@@ -2086,17 +2086,6 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          A_SCORE,
-         "pan",
-         QT_TRANSLATE_NOOP("action","Pan score while playing on/off"),
-         0,
-         Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Pan"),
-         QT_TRANSLATE_NOOP("action","Pan score while playing on/off"),
-          pan_ICON
-         ),
-      Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
-         A_SCORE,
          "load-style",
          QT_TRANSLATE_NOOP("action","Load style"),
          0,
