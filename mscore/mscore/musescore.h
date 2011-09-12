@@ -293,6 +293,7 @@ class MuseScore : public QMainWindow {
       EditTempo* editTempo;
 
       QAction* metronomeAction;
+      QAction* panAction;
 
       //---------------------
 
@@ -559,7 +560,8 @@ class MuseScore : public QMainWindow {
       Navigator* navigator() const;
       NScrollArea* navigatorScrollArea() const { return _navigator; }
       void updateLayer();
-      bool metronome() { return metronomeAction->isChecked(); }
+      bool metronome() const         { return metronomeAction->isChecked(); }
+      bool panDuringPlayback() const { return panAction->isChecked(); }
       };
 
 extern MuseScore* mscore;

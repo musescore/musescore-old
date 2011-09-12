@@ -551,9 +551,10 @@ MuseScore::MuseScore()
       a = getAction("repeat");
       a->setCheckable(true);
       a->setChecked(true);
-      a = getAction("pan");
-      a->setCheckable(true);
-      a->setChecked(true);
+
+      panAction = getAction("pan");
+      panAction->setCheckable(true);
+      panAction->setChecked(true);
 
       //---------------------------------------------------
       //    File Action

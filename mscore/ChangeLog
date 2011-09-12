@@ -1,3 +1,5 @@
+12.sep (ws)
+      - fix #12483: Score doesn't pan during playback
 11.sep (lv)
       - fix MusicXML import/export of voltas (trunk regression in rev 4734)
 10.sep (lv)
