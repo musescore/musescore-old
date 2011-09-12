@@ -176,6 +176,7 @@ Articulation::Articulation(Score* s)
    : Element(s)
       {
       _direction = AUTO;
+      _up = true;
       setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       }
 
@@ -221,11 +222,6 @@ void Articulation::read(QDomElement e)
             else if (!Element::readProperties(e))
                   domError(e);
             }
-/* if (subtype() == Articulation_Schleifer) {
-            printf("Schleifer %f %f\n", readPos().x(), readPos().y());
-            setReadPos(QPointF());
-            }
-      */
       }
 
 //---------------------------------------------------------

@@ -1725,7 +1725,7 @@ struct SystemRow {
       QList<System*> systems;
 
       qreal height() const {
-            qreal h;
+            qreal h = 0.0;
             foreach(System* s, systems) {
                   if (s->height() > h)
                         h = s->height();
