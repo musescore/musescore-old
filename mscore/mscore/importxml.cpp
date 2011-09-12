@@ -2332,10 +2332,8 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
 
 // Standard order of attributes as written by Dolet for Finale is divisions,
 // key, time, staves and clef(s). For the first measure this means number of
-// staves is unknown when the time attributes is read. As this translates
-// into a time signature that must be inserted into every staff of the
-// part, delay insertion of time signatures until after all attributes
-// have been read.
+// staves must be read first, as it determines how many key and time signatures
+// must be inserted.
 
 void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
       {
@@ -2343,7 +2341,22 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
       QString beatType = "";
       QString timeSymbol = "";
 
-      for (;!e.isNull(); e = e.nextSiblingElement()) {
+      int staves = 1; // default is one staff
+      for (QDomElement e2 = e; !e2.isNull(); e2 = e2.nextSiblingElement()) {
+            if (e2.tagName() == "staves") {
+                  staves = e2.text().toInt();
+                  Part* part = score->part(staff);
+                  part->setStaves(staves);
+                  Staff* st = part->staff(0);
+                  if (st && staves == 2) {
+                        st->setBracket(0, BRACKET_AKKOLADE);
+                        st->setBracketSpan(0, 2);
+                        st->setBarLineSpan(2); //seems to be default in musicXML
+                        }
+                  }
+            }
+
+      for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "divisions") {
                   bool ok;
                   divisions = stringToInt(e.text(), &ok);
@@ -2371,9 +2384,6 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                   if (number == -1) {
                         //
                         //   apply key to all staves in the part
-                        //   ws: number of staves is not always known at this
-                        //       point, so we have to set key signature when
-                        //       we see the "staves" tag
                         //
                         int staves = score->part(staff)->nstaves();
                         // apply to all staves in part
@@ -2422,24 +2432,8 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                   }
             else if (e.tagName() == "clef")
                   xmlClef(e, staff, measure);
-            else if (e.tagName() == "staves") {
-                  int staves = e.text().toInt();
-                  Part* part = score->part(staff);
-                  part->setStaves(staves);
-                  Staff* st = part->staff(0);
-                  if (st && staves == 2) {
-                        st->setBracket(0, BRACKET_AKKOLADE);
-                        st->setBracketSpan(0, 2);
-                        st->setBarLineSpan(2); //seems to be default in musicXML
-                        }
-                  // set key signature
-                  KeySigEvent key = score->staff(staff)->keymap()->key(tick);
-                  for (int i = 1; i < staves; ++i) {
-                        KeySigEvent oldkey = score->staff(staff+i)->keymap()->key(tick);
-                        if (oldkey != key)
-                              (*score->staff(staff+i)->keymap())[tick] = key;
-                        }
-                  }
+            else if (e.tagName() == "staves")
+                  ; // ignore, already handled
             else if (e.tagName() == "staff-details"){
                   int number  = e.attribute(QString("number"), "-1").toInt();
                   int staffIdx = staff;
