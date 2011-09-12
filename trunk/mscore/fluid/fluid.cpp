@@ -266,6 +266,17 @@ void Fluid::all_notes_off(int chan)
       }
 
 //---------------------------------------------------------
+//   allNotesOff
+//---------------------------------------------------------
+
+void Fluid::allNotesOff()
+      {
+      foreach(Voice* v, activeVoices)
+            v->noteoff();
+      }
+
+
+//---------------------------------------------------------
 //   all_sounds_off
 //    immediately stop all notes on this channel.
 //---------------------------------------------------------

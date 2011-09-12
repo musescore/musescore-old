@@ -94,7 +94,6 @@ class Seq : public QObject {
 
       EventMap events;                    // playlist
 
-      QList<Event> activeNotes;           // notes sounding
       double playTime;
       double startTime;
 
