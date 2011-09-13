@@ -203,21 +203,19 @@ void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& /
             spanner->setParent(segment);
 
             static const SegmentType st = SegChordRest;
-            Segment* s = segment;
-            for (;;) {
-                  Segment* sn = s->next1(st);
-                  if (sn == 0)
-                        break;
-                  s = sn;
+            Segment* ns;
+            for (Segment* s = segment; s; s = s->next1(st)) {
+                  ns = s;
                   if (s->measure() != segment->measure())
                         break;
                   }
-            if (s == segment) {
+            if (ns == segment) {
                   printf("cmdAddSpanner: cannot put object on last segment\n");
                   delete spanner;
                   return;
                   }
-            spanner->setEndElement(s);
+            spanner->setEndElement(ns);
+printf("cmdAddSpanner %p - %p   %p - %p\n", segment, ns, segment->measure(), ns->measure());
             }
       else {      // ANCHOR_MEASURE
             Measure* measure = segment->measure();

@@ -395,7 +395,7 @@ QPointF SLine::linePos(int grip, System** sys)
                         m = m->prevMeasure();
                         if (m) {
                               *sys = m->system();
-                              x = seg->pos().x() + m->bbox().right();
+                              x = m->pos().x() + m->width();
                               }
                         }
                   }
