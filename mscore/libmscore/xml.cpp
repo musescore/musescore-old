@@ -24,6 +24,7 @@ Xml::Xml()
       stack.clear();
       curTick       = 0;
       curTrack      = -1;
+      tickDiff      = 0;
       trackDiff     = 0;
       clipboardmode = false;
       excerptmode   = false;
@@ -41,6 +42,7 @@ Xml::Xml(QIODevice* device)
       stack.clear();
       curTick       = 0;
       curTrack      = -1;
+      tickDiff      = 0;
       trackDiff     = 0;
       clipboardmode = false;
       excerptmode   = false;
