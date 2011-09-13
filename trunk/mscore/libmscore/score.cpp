@@ -2033,7 +2033,7 @@ Score* Score::clone()
       xml.header();
 
       xml.stag("museScore version=\"" MSC_VERSION "\"");
-      write(xml);
+      write(xml, false);
       xml.etag();
 
       buffer.close();

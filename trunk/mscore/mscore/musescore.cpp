@@ -695,6 +695,7 @@ MuseScore::MuseScore()
       _fileMenu->addAction(getAction("file-save"));
       _fileMenu->addAction(getAction("file-save-as"));
       _fileMenu->addAction(getAction("file-save-a-copy"));
+      _fileMenu->addAction(getAction("file-save-selection"));
       _fileMenu->addAction(getAction("file-export"));
       _fileMenu->addSeparator();
       _fileMenu->addAction(getAction("file-reload"));
@@ -1936,7 +1937,7 @@ static bool processNonGui()
             if (fn.endsWith(".mscz")) {
                   QFileInfo fi(fn);
                   try {
-                        cs->saveCompressedFile(fi);
+                        cs->saveCompressedFile(fi, false);
                         }
                   catch(QString) {
                         return false;
@@ -3046,7 +3047,7 @@ void MuseScore::autoSaveTimerTimeout()
                   if (!tmp.isEmpty()) {
                         QFileInfo fi(tmp);
                         // TODO: cannot catch exeption here:
-                        cs->saveCompressedFile(fi);
+                        cs->saveCompressedFile(fi, false);
                         }
                   else {
                         QDir dir;
@@ -3059,7 +3060,7 @@ void MuseScore::autoSaveTimerTimeout()
                               }
                         s->setTmpName(tf.fileName());
                         QFileInfo info(tf.fileName());
-                        s->saveCompressedFile(&tf, info);
+                        s->saveCompressedFile(&tf, info, false);
                         tf.close();
                         sessionChanged = true;
                         }
@@ -4253,6 +4254,10 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
       else if (cmd == "file-save-as") {
             cs->setSyntiState(synti->state());
             saveAs(cs, false);
+            }
+      else if (cmd == "file-save-selection") {
+            cs->setSyntiState(synti->state());
+            saveSelection(cs);
             }
       else if (cmd == "file-save-a-copy") {
             cs->setSyntiState(synti->state());

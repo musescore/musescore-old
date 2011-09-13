@@ -163,7 +163,7 @@ void Album::createScore()
       score->fileInfo()->setFile(fn);
       printf("Album::createScore: save file\n");
       try {
-            score->saveCompressedFile(*score->fileInfo());
+            score->saveCompressedFile(*score->fileInfo(), false);
             }
       catch (QString s) {
             QMessageBox::critical(mscore, QWidget::tr("MuseScore: Save File"), s);

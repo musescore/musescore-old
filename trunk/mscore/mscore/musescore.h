@@ -530,6 +530,7 @@ class MuseScore : public QMainWindow {
       bool savePsPdf(const QString& saveName, QPrinter::OutputFormat format);
       bool readScore(Score*, QString name);
       bool saveAs(Score*, bool saveCopy = false);
+      bool saveSelection(Score*);
       void addImage(Score*, Element*);
       bool importMidi(Score*, const QString& name);
       bool savePng(Score*, const QString& name, bool screenshot, bool transparent, double convDpi, QImage::Format format);

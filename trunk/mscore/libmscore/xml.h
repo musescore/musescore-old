@@ -44,7 +44,9 @@ class Xml : public QTextStream {
    public:
       int curTick;            // used to optimize output
       int curTrack;
+      int tickDiff;
       int trackDiff;          // saved track is curTrack-trackDiff
+
       bool clipboardmode;     // used to modify write() behaviour
       bool excerptmode;       // true when writing a part
       bool writeOmr;          // false if writing into *.msc file

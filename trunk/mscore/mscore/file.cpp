@@ -1303,7 +1303,7 @@ bool MuseScore::saveAs(Score* cs, bool saveCopy, const QString& path, const QStr
             rv = true;
             try {
                   if (ext == "mscz")
-                        cs->saveCompressedFile(fi);
+                        cs->saveCompressedFile(fi, false);
                   else
                         cs->saveFile(fi);
                   }
@@ -1615,6 +1615,68 @@ bool MuseScore::saveAs(Score* cs, bool saveCopy)
       if (fi.suffix() != ext)
             fn += "." + ext;
       return saveAs(cs, saveCopy, fn, ext);
+      }
+
+//---------------------------------------------------------
+//   saveSelection
+//    return true on success
+//---------------------------------------------------------
+
+bool MuseScore::saveSelection(Score* cs)
+      {
+      QStringList fl;
+      fl.append(tr("MuseScore Format (*.mscz)"));
+      fl.append(tr("All Files (*)"));
+      QString saveDialogTitle = tr("MuseScore: Save Selection");
+
+      QSettings settings;
+      if (mscore->lastSaveCopyDirectory.isEmpty())
+            mscore->lastSaveCopyDirectory = settings.value("lastSaveCopyDirectory", preferences.workingDirectory).toString();
+      if (mscore->lastSaveDirectory.isEmpty())
+            mscore->lastSaveDirectory = settings.value("lastSaveDirectory", preferences.workingDirectory).toString();
+      QString saveDirectory = mscore->lastSaveDirectory;
+
+      if (saveDirectory.isEmpty())
+            saveDirectory = preferences.workingDirectory;
+
+      QString selectedFilter;
+      QString name   = QString("%1.mscz").arg(cs->fileInfo()->baseName());
+      QString filter = fl.join(";;");
+      QString fn     = mscore->getSaveScoreName(saveDialogTitle, name, filter, &selectedFilter);
+      if (fn.isEmpty())
+            return false;
+
+      QFileInfo fi(fn);
+      mscore->lastSaveDirectory = fi.absolutePath();
+
+      QString ext;
+      if (selectedFilter.isEmpty())
+            ext = fi.suffix();
+      else {
+            int idx = fl.indexOf(selectedFilter);
+            if (idx != -1) {
+                  static const char* extensions[] = {
+                        "mscz"
+                        };
+                  ext = extensions[idx];
+                  }
+            }
+      if (ext.isEmpty()) {
+            QMessageBox::critical(mscore, tr("MuseScore: Save Selection"), tr("cannot determine file type"));
+            return false;
+            }
+
+      if (fi.suffix() != ext)
+            fn += "." + ext;
+      bool rv = true;
+      try {
+            cs->saveCompressedFile(fi, true);
+            }
+      catch (QString s) {
+            rv = false;
+            QMessageBox::critical(this, tr("MuseScore: Save Selected"), s);
+            }
+      return rv;
       }
 
 //---------------------------------------------------------

@@ -44,7 +44,7 @@
 //   write
 //---------------------------------------------------------
 
-void Score::write(Xml& xml)
+void Score::write(Xml& xml, bool selectionOnly)
       {
       slurs.clear();
       xml.stag("Score");
@@ -100,10 +100,12 @@ void Score::write(Xml& xml)
       foreach(KeySig* ks, customKeysigs)
             ks->write(xml);
 
-      xml.stag("PageList");
-      foreach(Page* page, _pages)
-            page->write(xml);
-      xml.etag();
+      if (!selectionOnly) {
+            xml.stag("PageList");
+            foreach(Page* page, _pages)
+                  page->write(xml);
+            xml.etag();
+            }
 
       foreach(const Part* part, _parts)
             part->write(xml);
@@ -112,14 +114,29 @@ void Score::write(Xml& xml)
             foreach(Tuplet* tuplet, *m->tuplets())
                   tuplet->setId(xml.tupletId++);
             }
-      xml.curTrack = 0;
-      for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
+
+      xml.curTrack              = 0;
+      int staffStart            = 0;
+      int staffEnd              = _staves.size();
+      MeasureBase* measureStart = first();
+      MeasureBase* measureEnd   = 0;
+
+      if (selectionOnly) {
+            staffStart   = _selection.staffStart();
+            staffEnd     = _selection.staffEnd();
+            measureStart = _selection.startSegment()->measure();
+            measureEnd   = _selection.endSegment()->measure();
+            }
+
+      xml.trackDiff = -staffStart * VOICES;
+      for (int staffIdx = staffStart; staffIdx < staffEnd; ++staffIdx) {
             xml.stag(QString("Staff id=\"%1\"").arg(staffIdx + 1));
-            xml.curTick  = 0;
+            xml.curTick  = measureStart->tick();
+            xml.tickDiff = xml.curTick;
             xml.curTrack = staffIdx * VOICES;
-            for (MeasureBase* m = first(); m; m = m->next()) {
+            for (MeasureBase* m = measureStart; m != measureEnd; m = m->next()) {
                   if (m->type() == MEASURE || staffIdx == 0)
-                        m->write(xml, staffIdx, staffIdx == 0);
+                        m->write(xml, staffIdx, staffIdx == staffStart);
                   if (m->type() == MEASURE)
                         xml.curTick = m->tick() + m->ticks();
                   }
@@ -127,8 +144,10 @@ void Score::write(Xml& xml)
             }
       xml.curTrack = -1;
       xml.tag("cursorTrack", _is.track());
-      foreach(Excerpt* excerpt, _excerpts)
-            excerpt->score()->write(xml);       // recursion
+      if (!selectionOnly) {
+            foreach(Excerpt* excerpt, _excerpts)
+                  excerpt->score()->write(xml, false);       // recursion
+            }
       if (parentScore())
             xml.tag("name", name());
       xml.etag();
@@ -241,7 +260,7 @@ bool Score::saveFile()
                   if (suffix == "msc" || suffix == "mscx")
                         saveFile(info);
                   else
-                        saveCompressedFile(info);
+                        saveCompressedFile(info, false);
                   }
             catch (QString s) {
                   MScore::lastError = s;
@@ -268,7 +287,7 @@ bool Score::saveFile()
             if (suffix == "msc" || suffix == "mscx")
                   saveFile(&temp, false);
             else
-                  saveCompressedFile(&temp, info);
+                  saveCompressedFile(&temp, info, false);
             }
       catch (QString s) {
             MScore::lastError = s;
@@ -333,7 +352,7 @@ bool Score::saveFile()
 //   saveCompressedFile
 //---------------------------------------------------------
 
-void Score::saveCompressedFile(QFileInfo& info)
+void Score::saveCompressedFile(QFileInfo& info, bool onlySelection)
       {
       if (info.suffix().isEmpty())
             info.setFile(info.filePath() + ".mscz");
@@ -344,7 +363,7 @@ void Score::saveCompressedFile(QFileInfo& info)
                + QString(strerror(errno));
             throw(s);
             }
-      saveCompressedFile(&fp, info);
+      saveCompressedFile(&fp, info, onlySelection);
       fp.close();
       }
 
@@ -353,7 +372,7 @@ void Score::saveCompressedFile(QFileInfo& info)
 //    file is already opened
 //---------------------------------------------------------
 
-void Score::saveCompressedFile(QIODevice* f, QFileInfo& info)
+void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool onlySelection)
       {
       Zip uz;
       if (!uz.createArchive(f))
@@ -445,7 +464,7 @@ void Score::saveCompressedFile(QIODevice* f, QFileInfo& info)
 
       QBuffer dbuf;
       dbuf.open(QIODevice::ReadWrite);
-      saveFile(&dbuf, true);
+      saveFile(&dbuf, true, onlySelection);
       dbuf.seek(0);
       if (!uz.createEntry(fn, dbuf, dt))
             throw(QString("Cannot add %1 to zipfile '%2'").arg(fn).arg(info.filePath()));
@@ -529,7 +548,7 @@ bool Score::saveStyle(const QString& name)
 
 extern QString revision;
 
-void Score::saveFile(QIODevice* f, bool msczFormat)
+void Score::saveFile(QIODevice* f, bool msczFormat, bool onlySelection)
       {
       Xml xml(f);
       xml.writeOmr = msczFormat;
@@ -537,7 +556,7 @@ void Score::saveFile(QIODevice* f, bool msczFormat)
       xml.stag("museScore version=\"" MSC_VERSION "\"");
       xml.tag("programVersion", VERSION);
       xml.tag("programRevision", revision);
-      write(xml);
+      write(xml, onlySelection);
       xml.etag();
       if (!parentScore())
             _revisions->write(xml);
@@ -1465,7 +1484,7 @@ void Score::writeSegments(Xml& xml, const Measure* m, int strack, int etrack, Se
                         if (e->track() != track || e->generated())
                               continue;
                         if (needTick) {
-                              xml.tag("tick", segment->tick());
+                              xml.tag("tick", segment->tick() - xml.tickDiff);
                               xml.curTick = segment->tick();
                               needTick = false;
                               }
@@ -1474,7 +1493,7 @@ void Score::writeSegments(Xml& xml, const Measure* m, int strack, int etrack, Se
                   foreach(Spanner* e, segment->spannerFor()) {
                         if (e->track() == track && !e->generated()) {
                               if (needTick) {
-                                    xml.tag("tick", segment->tick());
+                                    xml.tag("tick", segment->tick() - xml.tickDiff);
                                     xml.curTick = segment->tick();
                                     needTick = false;
                                     }
@@ -1485,16 +1504,29 @@ void Score::writeSegments(Xml& xml, const Measure* m, int strack, int etrack, Se
                   foreach(Spanner* e, segment->spannerBack()) {
                         if (e->track() == track && !e->generated()) {
                               if (needTick) {
-                                    xml.tag("tick", segment->tick());
+                                    xml.tag("tick", segment->tick() - xml.tickDiff);
                                     xml.curTick = segment->tick();
                                     needTick = false;
                                     }
                               xml.tagE(QString("endSpanner id=\"%1\"").arg(e->id()));
                               }
                         }
-                  if (e && !e->generated()) {
+                  if (e) {
+                        if (e->generated()) {
+                              if ((xml.curTick - xml.tickDiff) == 0) {
+                                    if (e->type() == CLEF) {
+                                          if (needTick) {
+                                                xml.tag("tick", segment->tick() - xml.tickDiff);
+                                                xml.curTick = segment->tick();
+                                                needTick = false;
+                                                }
+                                          e->write(xml);
+                                          }
+                                    }
+                              continue;
+                              }
                         if (needTick) {
-                              xml.tag("tick", segment->tick());
+                              xml.tag("tick", segment->tick() - xml.tickDiff);
                               xml.curTick = segment->tick();
                               needTick = false;
                               }
