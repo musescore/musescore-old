@@ -423,7 +423,7 @@ void Rest::layout()
             }
       _space.setLw(point(_extraLeadingSpace));
       _space.setRw(width() + point(_extraTrailingSpace + rs));
-      adjustReadPos();
+//      adjustReadPos();
       }
 
 //---------------------------------------------------------
