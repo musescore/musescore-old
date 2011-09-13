@@ -575,12 +575,9 @@ QList<Prop> Element::properties(Xml& xml, const Element* proto) const
       if (_links && (_links->size() > 1))
             pl.append(Prop("lid", _links->lid()));
       QString s(this->subtypeName());
-      if (!s.isEmpty()) {
-// printf("subtype <%s> <%s>\n", name(), qPrintable(s));
+      if (!s.isEmpty())
             pl.append(Prop("subtype", s));
-            }
-      if (isMovable() && !userOff().isNull())
-            pl.append(Prop("pos", pos() / spatium()));
+      pl.append(Prop("pos", pos() / spatium()));
       if ((track() != xml.curTrack) && (track() != -1)) {
             int t;
             t = track() + xml.trackDiff;

@@ -3078,6 +3078,7 @@ void Measure::layoutX(qreal stretch)
                         }
                   else {
                         e->setPos(-e->bbox().x(), 0.0);
+                        e->adjustReadPos();
                         }
                   }
             }

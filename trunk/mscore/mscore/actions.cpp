@@ -73,6 +73,17 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          A_SCORE,
+         "file-save-selection",
+         QT_TRANSLATE_NOOP("action","Save Selection"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Save Selection..."),
+         QT_TRANSLATE_NOOP("action","Save current selection as new score"),
+          fileSaveAs_ICON
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         A_SCORE,
          "file-save-a-copy",
          QT_TRANSLATE_NOOP("action","File save a copy"),
          0,
