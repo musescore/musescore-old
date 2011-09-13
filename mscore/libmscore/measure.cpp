@@ -3059,6 +3059,7 @@ void Measure::layoutX(qreal stretch)
                                     w  = xpos[segs-1] - x1;
                               e->rxpos() = (w - e->width()) * .5 + x1 - s->x();
                               }
+                        e->adjustReadPos();
                         }
                   else if (t == REPEAT_MEASURE) {
                         qreal x1 = seg == 0 ? 0.0 : xpos[seg] - clefKeyRightMargin;
