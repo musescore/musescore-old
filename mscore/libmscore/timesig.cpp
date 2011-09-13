@@ -335,7 +335,7 @@ void TimeSig::layout()
 
       pz *= im;                           // convert positions to raster units
       pn *= im;
-      adjustReadPos();
+      // adjustReadPos();
       }
 
 //---------------------------------------------------------
