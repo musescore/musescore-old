@@ -1771,27 +1771,26 @@ struct SystemRow {
 void Score::layoutPages()
       {
       const qreal _spatium            = spatium();
-      const qreal slb                 = styleS(ST_staffLowerBorder).val() * _spatium;
-      const qreal sub                 = styleS(ST_staffUpperBorder).val() * _spatium;
-      const qreal systemDist          = styleS(ST_systemDistance).val() * _spatium;
+      const qreal slb                 = styleS(ST_staffLowerBorder).val()    * _spatium;
+      const qreal sub                 = styleS(ST_staffUpperBorder).val()    * _spatium;
+      const qreal systemDist          = styleS(ST_systemDistance).val()      * _spatium;
       const qreal systemFrameDistance = styleS(ST_systemFrameDistance).val() * _spatium;
       const qreal frameSystemDistance = styleS(ST_frameSystemDistance).val() * _spatium;
 
-      qreal lm, tm, ey;
-
       curPage            = 0;
       Page* page         = getEmptyPage();
-
-      lm                 = page->lm();
-      tm                 = page->tm();
-      ey                 = page->height() - page->bm();
-
-      qreal y            = tm;
+      qreal ey           = page->height() - page->bm();
+      qreal y            = page->tm();
       int nSystems       = _systems.size();
       System* lastSystem = 0;
       int gaps           = 0;
 
+      qreal prevDist     = .0;
+
       for (int i = 0; i < nSystems; ++i) {
+            //
+            // collect system row
+            //
             SystemRow sr;
             for (;;) {
                   System* system = _systems[i];
@@ -1824,13 +1823,16 @@ void Score::layoutPages()
                         if (lastSystem->isVbox())
                               tmargin = lastSystem->vbox()->bottomGap() + frameSystemDistance;
                         else
-                              tmargin = systemDist;
+                              tmargin = qMax(sr.tm(), systemDist);
                         }
                   else {
                         tmargin = qMax(sr.tm(), sub);
                         }
                   bmargin = qMax(sr.bm(), slb);
                   }
+
+            tmargin = qMax(tmargin, prevDist);
+            prevDist = bmargin;
 
             if (lastSystem && (y + h + bmargin + tmargin > ey)) {
                   //
@@ -1843,19 +1845,18 @@ void Score::layoutPages()
                         d = slb;
                   layoutPage(page, gaps, ey - y - d);
                   page = getEmptyPage();
-                  lm   = page->lm();
-                  tm   = page->tm();
                   ey   = page->height() - page->bm();
                   gaps = 0;
-                  y    = tm;
+                  y    = page->tm();
                   if (sr.isVbox())
                         tmargin = sr.vbox()->topGap();
                   else
                         tmargin = qMax(sr.tm(), sub);
                   lastSystem = 0;
+                  prevDist = 0;
                   }
 
-            qreal x = lm;
+            qreal x = page->lm();
             foreach(System* system, sr.systems) {
                   system->setPos(x, y + tmargin);
                   x += system->width();
@@ -1883,11 +1884,9 @@ void Score::layoutPages()
                         break;
                         }
                   page       = getEmptyPage();
-                  lm         = page->lm();
-                  tm         = page->tm();
                   ey         = page->height() - page->bm();
                   gaps       = 0;
-                  y          = tm;
+                  y          = page->tm();
                   lastSystem = 0;
                   }
             else {
@@ -1939,12 +1938,12 @@ void Score::layoutPage(Page* page, int gaps, qreal restHeight)
 
 void Score::doLayoutPages()
       {
-      {
-      QWriteLocker locker(&_layoutLock);
-      layoutPages();
-      rebuildBspTree();
-      _updateAll = true;
-      }
+      /*--*/ {
+            QWriteLocker locker(&_layoutLock);
+            layoutPages();
+            rebuildBspTree();
+            _updateAll = true;
+            }
 
       foreach(MuseScoreView* v, viewer)
             v->layoutChanged();
