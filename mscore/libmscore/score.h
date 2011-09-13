@@ -424,7 +424,7 @@ class Score {
 
       int pageIdx(Page* page) const { return _pages.indexOf(page); }
 
-      void write(Xml&);
+      void write(Xml&, bool onlySelection);
       bool read(QDomElement);
       bool read1(QDomElement);
 
@@ -557,9 +557,9 @@ class Score {
       bool loadCompressedMsc(QString name);
 
       void saveFile(QFileInfo& info);
-      void saveFile(QIODevice* f, bool msczFormat);
-      void saveCompressedFile(QFileInfo&);
-      void saveCompressedFile(QIODevice*, QFileInfo&);
+      void saveFile(QIODevice* f, bool msczFormat, bool onlySelection = false);
+      void saveCompressedFile(QFileInfo&, bool onlySelection);
+      void saveCompressedFile(QIODevice*, QFileInfo&, bool onlySelection);
       bool exportFile();
 
       void print(Painter* printer, int page);

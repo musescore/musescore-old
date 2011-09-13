@@ -1710,7 +1710,7 @@ void Measure::adjustToLen(int ol, int nl)
 void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
       {
       if (xml.curTick != tick())
-            xml.stag(QString("Measure number=\"%1\" tick=\"%2\"").arg(_no + 1).arg(tick()));
+            xml.stag(QString("Measure number=\"%1\" tick=\"%2\"").arg(_no + 1).arg(tick() - xml.tickDiff));
       else
             xml.stag(QString("Measure number=\"%1\"").arg(_no + 1));
       xml.curTick = tick();

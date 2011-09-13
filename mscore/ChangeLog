@@ -1,4 +1,5 @@
 13.sep (ws)
+      - new function: "Save Selected"
       - fix #12527: nudget time sig gets more and more displaced at each save and re-load
 12.sep (lv)
       - fix #12437: R4754 MusicXML issues: keysig imports in first staff only
