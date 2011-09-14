@@ -72,8 +72,6 @@ static const int peakHold     = (peakHoldTime * guiRefresh) / 1000;
 
 Seq::Seq()
       {
-      printf("Seq::Seq %p\n", mscore);
-
       running         = false;
       playlistChanged = false;
       cs              = 0;
@@ -85,8 +83,6 @@ Seq::Seq()
       playPos  = events.constBegin();
 
       playTime  = 0;
-      curTick   = 0;
-      curUtick  = 0;
       metronomeVolume = 0.3;
 
       meterValue[0]     = 0.0;
@@ -437,7 +433,7 @@ void Seq::stopTransport()
       state = TRANSPORT_STOP;
       if (cs == 0)
             return;
-      synti->allNotesOff();
+      stopNotes();
       // send sustain off
       Event e;
       e.setType(ME_CONTROLLER);
@@ -601,7 +597,6 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
                   framePos  += n;
                   const Event& event = playPos.value();
                   playEvent(event);
-                  playTick = playPos.key();
                   if (event.type() == ME_TICK1)
                         tickRest = tickLength;
                   else if (event.type() == ME_TICK2)
@@ -749,8 +744,7 @@ void Seq::setRelTempo(double relTempo)
 
 void Seq::setPos(int utick)
       {
-      // send note off events
-      synti->allNotesOff();
+      stopNotes();
 
       playTime  = cs->utick2utime(utick) * MScore::sampleRate;
       playPos   = events.lowerBound(utick);
@@ -795,46 +789,19 @@ void Seq::startNote(const Channel& a, int pitch, int velo, double nt)
       {
       if (state != TRANSPORT_STOP)
             return;
-
-      bool active = false;
-
-      //
-      // Check if there is already a note sounding
-      // for channel/pitch. If found, stop note by
-      // sending a note off event
-      //
-      foreach(const Event& event, eventList) {
-            if ((event.channel() == a.channel) && (event.pitch() == pitch)) {
-                  sendEvent(event); // send stop note
-                  active = true;
-                  break;
-                  }
-            }
-
       Event ev(ME_NOTEON);
       ev.setChannel(a.channel);
       ev.setPitch(pitch);
       ev.setTuning(nt);
       ev.setVelo(velo);
       sendEvent(ev);
-
-      if (!active) {
-            Event e(ME_NOTEON);
-            e.setChannel(a.channel);
-            e.setPitch(pitch);
-            e.setVelo(0);
-            eventList.append(e);
-            }
       }
 
 void Seq::startNote(const Channel& a, int pitch, int velo, int duration, double nt)
       {
       stopNotes();
       startNote(a, pitch, velo, nt);
-      if (duration) {
-            noteTimer->setInterval(duration);
-            noteTimer->start();
-            }
+      startNoteTimer(duration);
       }
 
 //---------------------------------------------------------
@@ -856,9 +823,7 @@ void Seq::startNoteTimer(int duration)
 
 void Seq::stopNotes()
       {
-      foreach(const Event& event, eventList)
-            sendEvent(event);
-      eventList.clear();
+      synti->allNotesOff();
       }
 
 //---------------------------------------------------------
@@ -1173,10 +1138,11 @@ void Seq::heartBeat()
       if (pp)
             pp->heartBeat2(endTime);
 
-      for (; guiPos != events.constEnd(); ++guiPos) {
-            double f = cs->utick2utime(guiPos.key());
-            if (f >= endTime)
+      for (;;) {
+            EventMap::const_iterator p = guiPos + 1;
+            if ((p == events.constEnd()) || (p.key() >= playPos.key()))
                   break;
+            guiPos = p;
             if (guiPos.value().type() == ME_NOTEON) {
                   Event n = guiPos.value();
                   const Note* note1 = n.note();
@@ -1199,10 +1165,11 @@ void Seq::heartBeat()
                         }
                   }
             }
-      int tick = cs->repeatList()->utick2tick(playTick);
+
+      int tick = cs->repeatList()->utick2tick(guiPos.key());
       mscore->currentScoreView()->moveCursor(tick);
       if (pp)
-            pp->heartBeat(tick, playTick);
+            pp->heartBeat(tick, playPos.key());
 
       PianorollEditor* pre = mscore->getPianorollEditor();
       if (pre && pre->isVisible())
