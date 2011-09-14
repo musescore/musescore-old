@@ -94,16 +94,13 @@ class Seq : public QObject {
 
       EventMap events;                    // playlist
 
-      int playTime;                       // in samples
-      int playTick;
+      int playTime;                       // current play position in samples
 
       EventMap::const_iterator playPos;   // moved in real time thread
       EventMap::const_iterator guiPos;    // moved in gui thread
       QList<const Note*> markedNotes;     // notes marked as sounding
 
       int endTick;
-      int curTick;
-      int curUtick;
 
       uint tackRest;     // metronome state
       uint tickRest;
@@ -111,8 +108,6 @@ class Seq : public QObject {
 
       QTimer* heartBeatTimer;
       QTimer* noteTimer;
-
-      QList<Event> eventList;
 
       void collectMeasureEvents(Measure*, int staffIdx);
 

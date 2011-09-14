@@ -1,3 +1,5 @@
+14.sep (ws)
+      - fix #12520: Note heads don't highlight during playback
 13.sep (ws)
       - new function: "Save Selected"
       - fix #12527: nudget time sig gets more and more displaced at each save and re-load
