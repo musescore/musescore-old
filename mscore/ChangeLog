@@ -1,4 +1,8 @@
 14.sep (ws)
+      - fix #12522: Mid-measure bar lines in qst stave list by saving and re-loading
+      - new style parameter in editor: minimum measure width
+      - incremented file version to 1.23: add length property to measure for
+        irregular measures
       - fix #12520: Note heads don't highlight during playback
 13.sep (ws)
       - new function: "Save Selected"

@@ -14,8 +14,8 @@
 #ifndef __MSCORE_H__
 #define __MSCORE_H__
 
-#define MSC_VERSION     "1.22"
-static const int MSCVERSION = 122;
+#define MSC_VERSION     "1.23"
+static const int MSCVERSION = 123;
 
 // History:
 //      1.3   added staff->_barLineSpan
@@ -28,7 +28,8 @@ static const int MSCVERSION = 122;
 //      1.11  Instrument name in part saved as TextC
 //      1.12  use durationType, remove tickLen
 //      1.13  Clefs: userOffset is not (mis)used for vertical layout position
-//1.0:  1.14  save user modified beam position as spatium value
+// 1.0, 1.1
+//    1.14  save user modified beam position as spatium value
 //
 //    1.15  save timesig inline; Lyrics "endTick" replaced by "ticks"
 //    1.16  spanners (hairpin, trill etc.) are now inline and have no ticks anymore
@@ -40,6 +41,7 @@ static const int MSCVERSION = 122;
 //    1.20  instrument names are saved as html again
 //    1.21  no cleflist anymore
 //    1.22  timesig changed
+//    1.23  measure property for actual length
 
 
 static const int VOICES = 4;
