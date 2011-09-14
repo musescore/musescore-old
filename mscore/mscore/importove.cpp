@@ -2436,7 +2436,7 @@ bool MuseScore::importOve(Score* score, const QString& name) {
 		OveToMScore otm;
 		otm.convert(&oveSong, score);
 
-		score->connectSlurs();
+//		score->connectSlurs();
             for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure()) {
                   int tick = m->tick();
                   m->setLen(score->sigmap()->timesig(tick).timesig());

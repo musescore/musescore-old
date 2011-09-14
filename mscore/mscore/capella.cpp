@@ -2121,6 +2121,6 @@ printf("  ReadCapStaff %d/%d\n", cstaff->numerator, 1 << cstaff->log2Denom);
                         }
                   }
             }
-      score->connectSlurs();
+//      score->connectSlurs();
       }
 
