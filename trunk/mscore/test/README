@@ -56,7 +56,9 @@ repeat9.mscz
 repeat10.mscz
       3 voltas Playback 123-24-256
 repeat11.mscz
-      4 voltas, spanning 2 measures Playback 1234 1256 1278 129 10 11 12
+      3 voltas and end, spanning 2 measures Playback 1234 125678 12 9 10 12 11 12
+repeat12.mscz
+      DS al coda, voltas after To coda, DS on start repeat
 
 slur1.mscx
 
