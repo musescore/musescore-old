@@ -52,9 +52,7 @@ void MuseScore::showNavigator(bool visible)
 NScrollArea::NScrollArea(QWidget* w)
    : QScrollArea(w)
       {
-      setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-//      setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
+      setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
       setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
       setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
       setMinimumHeight(40);
@@ -67,9 +65,9 @@ NScrollArea::NScrollArea(QWidget* w)
 
 void NScrollArea::resizeEvent(QResizeEvent* ev)
       {
-      if (ev->size().height() != ev->oldSize().height()) {
-            if (widget())
-                  widget()->resize(widget()->width(), ev->size().height());
+// printf("NScrollArea: resize %d -> %d\n", ev->oldSize().height(), ev->size().height());
+      if (widget() && (ev->size().height() != ev->oldSize().height())) {
+            widget()->resize(widget()->width(), ev->size().height());
             }
       QScrollArea::resizeEvent(ev);
       }
@@ -88,7 +86,7 @@ Navigator::Navigator(NScrollArea* sa, QWidget* parent)
       recreatePixmap = false;
       viewRect       = QRect();
       cachedWidth    = -1;
-      setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+      setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
       sa->setWidget(this);
       sa->setWidgetResizable(false);
       connect(&watcher, SIGNAL(finished()), SLOT(pmFinished()));
@@ -100,15 +98,13 @@ Navigator::Navigator(NScrollArea* sa, QWidget* parent)
 
 void Navigator::resizeEvent(QResizeEvent* ev)
       {
+// printf("Navigator resizeEvent -> %d %d\n", ev->oldSize().height(), ev->size().height());
       if (ev->size().height() == ev->oldSize().height())
             return;
 //      if (!isVisible())
 //            return;
       if (_score) {
-            qreal m = ev->size().height() / (_score->pageFormat()->height() * DPI);
-            matrix.setMatrix(m, matrix.m12(), matrix.m13(), matrix.m21(), m,
-               matrix.m23(), matrix.m31(), matrix.m32(), matrix.m33());
-
+            rescale();
             Page* lp = _score->pages().back();
             int w    = int ((lp->x() + lp->width()) * matrix.m11());
             if (w != cachedWidth) {
@@ -117,8 +113,14 @@ void Navigator::resizeEvent(QResizeEvent* ev)
                   setFixedWidth(w);
                   QScrollArea* sa = mscore->navigatorScrollArea();
                   if (!sa->horizontalScrollBar()->isVisible() && (w > sa->width())) {
+// printf("  enable scroll bar m = %f\n", m);
+                        sa->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
                         // we will get another resize event with bc. a scrollbar will
                         // be added
+                        return;
+                        }
+                  else if (sa->horizontalScrollBar()->isVisible() && w < sa->width()) {
+                        sa->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
                         return;
                         }
                   updateViewRect();
@@ -143,6 +145,7 @@ void Navigator::setScoreView(ScoreView* v)
       _cv = QPointer<ScoreView>(v);
       if (v) {
             _score  = v->score();
+            rescale();
             connect(this, SIGNAL(viewRectMoved(const QRectF&)), v, SLOT(setViewRect(const QRectF&)));
             connect(_cv,  SIGNAL(viewRectChanged()), this, SLOT(updateViewRect()));
             updateViewRect();
@@ -164,6 +167,7 @@ void Navigator::setScore(Score* v)
       _cv = 0;
       if (v) {
             _score  = v;
+            rescale();
             setViewRect(QRect());
             layoutChanged();
             }
@@ -172,6 +176,17 @@ void Navigator::setScore(Score* v)
             pcl.clear();
             update();
             }
+      }
+
+//---------------------------------------------------------
+//   rescale
+//---------------------------------------------------------
+
+void Navigator::rescale()
+      {
+      qreal m = height() / (_score->pageFormat()->height() * DPI);
+      matrix.setMatrix(m, matrix.m12(), matrix.m13(), matrix.m21(), m,
+         matrix.m23(), matrix.m31(), matrix.m32(), matrix.m33());
       }
 
 //---------------------------------------------------------

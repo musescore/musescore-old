@@ -75,6 +75,8 @@ class Navigator : public QWidget {
 
       int cachedWidth;
 
+      void rescale();
+
       virtual void paintEvent(QPaintEvent*);
       virtual void mousePressEvent(QMouseEvent*);
       virtual void mouseMoveEvent(QMouseEvent*);
