@@ -577,7 +577,8 @@ QList<Prop> Element::properties(Xml& xml, const Element* proto) const
       QString s(this->subtypeName());
       if (!s.isEmpty())
             pl.append(Prop("subtype", s));
-      pl.append(Prop("pos", pos() / spatium()));
+      if (!userOff().isNull())
+            pl.append(Prop("pos", pos() / spatium()));
       if ((track() != xml.curTrack) && (track() != -1)) {
             int t;
             t = track() + xml.trackDiff;

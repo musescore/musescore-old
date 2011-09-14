@@ -832,7 +832,6 @@ class Score {
       void moveCursor();
       bool playNote() const                 { return _playNote; }
       void setPlayNote(bool v)              { _playNote = v;    }
-      void connectSlurs();
       bool excerptsChanged() const          { return _excerptsChanged; }
       void setExcerptsChanged(bool val)     { _excerptsChanged = val; }
       bool instrumentsChanged() const       { return _instrumentsChanged; }

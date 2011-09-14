@@ -1034,9 +1034,6 @@ bool Score::read(QDomElement dScore)
                   domError(ee);
             }
 
-      if (_mscVersion < 108)
-            connectSlurs();
-
       if (_mscVersion < 121) {            // 115
             for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
                   Staff* s = _staves[staffIdx];
@@ -1222,20 +1219,6 @@ bool Score::read(QDomElement dScore)
       if (_omr == 0)
             _showOmr = false;
 
-      if (_mscVersion < 103) {
-            foreach(Staff* staff, _staves) {
-                  Part* part = staff->part();
-                  if (part->staves()->size() == 1)
-                        staff->setBarLineSpan(1);
-                  else {
-                        if (staff == part->staves()->front())
-                              staff->setBarLineSpan(part->staves()->size());
-                        else
-                              staff->setBarLineSpan(0);
-                        }
-                  }
-            }
-
       if (_mscVersion < 117) {
             // create excerpts
             foreach(Excerpt* excerpt, _excerpts) {
@@ -1257,40 +1240,6 @@ bool Score::read(QDomElement dScore)
       updateChannel();
       updateNotes();    // only for parts needed?
       return true;
-      }
-
-//---------------------------------------------------------
-//   connectSlurs
-//    helper routine for old msc versions
-//    and MusicXml and Capella import
-//---------------------------------------------------------
-
-void Score::connectSlurs()
-      {
-#if 0
-      foreach (Slur* s, slurs) {
-            Element* n1 = searchNote(s->tick(), s->track());
-            Element* n2 = searchNote(s->tick2(), s->track2());
-            if (n1 == 0 || n2 == 0) {
-                  printf("connectSlurs: position not found\n");
-                  // remove in checkSlurs
-                  }
-            else {
-                  if (n1->isChordRest()) {
-                        ((ChordRest*)n1)->addSlurFor(s);
-                        s->setStartElement(n1);
-                        }
-                  else
-                        printf("   n1 is %s\n", n1->name());
-                  if (n2->isChordRest()) {
-                        ((ChordRest*)n2)->addSlurBack(s);
-                        s->setEndElement(n2);
-                        }
-                  else
-                        printf("connectSlurs: n2 is %s\n", n2->name());
-                  }
-            }
-#endif
       }
 
 //---------------------------------------------------------

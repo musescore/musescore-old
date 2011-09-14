@@ -1709,10 +1709,13 @@ void Measure::adjustToLen(int ol, int nl)
 
 void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
       {
-      if (xml.curTick != tick())
-            xml.stag(QString("Measure number=\"%1\" tick=\"%2\"").arg(_no + 1).arg(tick() - xml.tickDiff));
+      int mno = _no + 1;
+      if (_len != _timesig) {
+            // this is an irregular measure
+            xml.stag(QString("Measure number=\"%1\" len=\"%2/%3\"").arg(mno).arg(_len.numerator()).arg(_len.denominator()));
+            }
       else
-            xml.stag(QString("Measure number=\"%1\"").arg(_no + 1));
+            xml.stag(QString("Measure number=\"%1\"").arg(mno));
       xml.curTick = tick();
 
       if (writeSystemElements) {
@@ -1833,11 +1836,9 @@ void Measure::write(Xml& xml) const
 void Measure::read(QDomElement e, int staffIdx)
       {
       Segment* segment = 0;
-      Fraction measureDuration(0,1);
       qreal _spatium = spatium();
+      bool irregular;
 
-      if (staffIdx == 0)
-            _len = Fraction(0, 1);
       for (int n = staves.size(); n <= staffIdx; ++n) {
             MStaff* s    = new MStaff;
             Staff* staff = score()->staff(n);
@@ -1849,14 +1850,28 @@ void Measure::read(QDomElement e, int staffIdx)
             s->lines->setVisible(!staff->invisible());
             staves.append(s);
             }
-      int tck = e.attribute("tick", "-1").toInt();
-      if (tck >= 0) {
-            tck = score()->fileDivision(tck);
-            setTick(tck);
+
+      // tick is obsolete
+      if (e.hasAttribute("tick"))
+            score()->curTick = score()->fileDivision(e.attribute("tick").toInt());
+      setTick(score()->curTick);
+
+      const SigEvent& sigEvent = score()->sigmap()->timesig(tick());
+      _timesig  = sigEvent.nominal();
+      if (e.hasAttribute("len")) {
+            QStringList sl = e.attribute("len").split('/');
+            if (sl.size() == 2)
+                  _len = Fraction(sl[0].toInt(), sl[1].toInt());
+            else
+                  printf("illegal measure size <%s>\n", qPrintable(e.attribute("len")));
+            irregular = true;
+            score()->sigmap()->add(tick(), SigEvent(_len, _timesig));
+            score()->sigmap()->add(tick() + ticks(), SigEvent(_timesig));
             }
-      else
-            setTick(score()->curTick);
-      score()->curTick = tick();
+      else {
+            _len      = sigEvent.timesig();
+            irregular = false;
+            }
 
       Staff* staff = score()->staff(staffIdx);
 
@@ -1866,12 +1881,11 @@ void Measure::read(QDomElement e, int staffIdx)
 
             if (tag == "tick") {
                   score()->curTick = val.toInt();
-                  measureDuration = Fraction::fromTicks(score()->curTick - tick());
                   }
             else if (tag == "BarLine") {
                   BarLine* barLine = new BarLine(score());
                   barLine->setTrack(score()->curTrack);
-                  barLine->setParent(this);     //??
+//                  barLine->setParent(this);     //??
                   barLine->read(e);
                   if ((score()->curTick != tick()) && (score()->curTick != (tick() + ticks())))
                         // this is a mid measure bar line
@@ -1949,10 +1963,6 @@ void Measure::read(QDomElement e, int staffIdx)
                         score()->curTick += crticks;
                         }
                   segment->add(chord);
-
-                  measureDuration = Fraction::fromTicks(score()->curTick - tick());
-                  if (measureDuration > _len)
-                        _len = measureDuration;
                   }
             else if (tag == "Rest") {
                   Rest* rest = new Rest(score());
@@ -1968,9 +1978,6 @@ void Measure::read(QDomElement e, int staffIdx)
                   Fraction ts(timeStretch * rest->globalDuration());
 
                   score()->curTick += ts.ticks();
-                  measureDuration = Fraction::fromTicks(score()->curTick - tick());
-                  if (measureDuration > _len)
-                        _len = measureDuration;
                   }
             else if (tag == "Note") {
                   Chord* chord = new Chord(score());
@@ -1982,9 +1989,6 @@ void Measure::read(QDomElement e, int staffIdx)
                   Fraction timeStretch(staff->timeStretch(score()->curTick));
                   Fraction ts(timeStretch * chord->globalDuration());
                   score()->curTick += ts.ticks();
-                  measureDuration = Fraction::fromTicks(score()->curTick - tick());
-                  if (measureDuration > _len)
-                        _len = measureDuration;
                   }
             else if (tag == "Breath") {
                   Breath* breath = new Breath(score());
@@ -2076,7 +2080,10 @@ void Measure::read(QDomElement e, int staffIdx)
                   ts->read(e);
                   segment = getSegment(SegTimeSig, score()->curTick);
                   segment->add(ts);
-                  _timesig    = ts->sig();
+                  _timesig = ts->sig();
+                  if (!irregular)
+                        _len = _timesig;
+                  score()->sigmap()->add(tick(), SigEvent(_timesig));
                   // timeStretch = ts->stretch();
                   }
             else if (tag == "KeySig") {
@@ -2238,7 +2245,31 @@ void Measure::read(QDomElement e, int staffIdx)
                   // delete b;
                   }
             }
-      _len.reduce();
+      int endTick = tick();
+      for (Segment* s = last(); s; s = s->prev()) {
+            if (s->segmentType() == SegChordRest) {
+                  for (int track = 0; track < staves.size() * VOICES; ++track) {
+                        if (s->element(track)) {
+                              ChordRest* cr = static_cast<ChordRest*>(s->element(track));
+                              endTick = cr->tick() + cr->actualTicks();
+                              break;
+                              }
+                        }
+                  break;
+                  }
+            }
+      //
+      // for compatibility with 1.22:
+      //
+      if (endTick != (tick() + ticks())) {
+            // printf("measure endTick %d, expected %d\n", endTick, tick() + ticks());
+            int diff = tick() + ticks() - endTick;
+            if (diff > 0) {
+                  // this is a irregular measure
+                  _len = Fraction::fromTicks(diff);
+                  _len.reduce();
+                  }
+            }
       }
 
 //---------------------------------------------------------

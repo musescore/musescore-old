@@ -41,7 +41,10 @@ class SigEvent {
       void write(Xml&, int) const;
 
       SigEvent() : _timesig(0, 0) {}       ///< default SigEvent is invalid
-      SigEvent(const Fraction& s, int bar = 0) : _timesig(s), _bar(bar) {}
+      SigEvent(const Fraction& s, int bar = 0)
+         : _timesig(s), _nominal(s), _bar(bar) {}
+      SigEvent(const Fraction& s, const Fraction& ss, int bar = 0)
+         : _timesig(s), _nominal(ss), _bar(bar) {}
       SigEvent(const SigEvent& e);
 
       bool operator==(const SigEvent& e) const;
