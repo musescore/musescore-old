@@ -52,8 +52,10 @@ void MuseScore::showNavigator(bool visible)
 NScrollArea::NScrollArea(QWidget* w)
    : QScrollArea(w)
       {
-      setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+//      setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+      setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
       setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
       setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
       setMinimumHeight(40);
       setLineWidth(0);
@@ -65,7 +67,6 @@ NScrollArea::NScrollArea(QWidget* w)
 
 void NScrollArea::resizeEvent(QResizeEvent* ev)
       {
-// printf("NScrollArea: resize %d -> %d\n", ev->oldSize().height(), ev->size().height());
       if (widget() && (ev->size().height() != ev->oldSize().height())) {
             widget()->resize(widget()->width(), ev->size().height());
             }
@@ -86,7 +87,7 @@ Navigator::Navigator(NScrollArea* sa, QWidget* parent)
       recreatePixmap = false;
       viewRect       = QRect();
       cachedWidth    = -1;
-      setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+      setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
       sa->setWidget(this);
       sa->setWidgetResizable(false);
       connect(&watcher, SIGNAL(finished()), SLOT(pmFinished()));
@@ -98,31 +99,15 @@ Navigator::Navigator(NScrollArea* sa, QWidget* parent)
 
 void Navigator::resizeEvent(QResizeEvent* ev)
       {
-// printf("Navigator resizeEvent -> %d %d\n", ev->oldSize().height(), ev->size().height());
       if (ev->size().height() == ev->oldSize().height())
             return;
-//      if (!isVisible())
-//            return;
       if (_score) {
             rescale();
             Page* lp = _score->pages().back();
             int w    = int ((lp->x() + lp->width()) * matrix.m11());
+
             if (w != cachedWidth) {
                   cachedWidth = w;
-                  // setFixedSize(w, ev->size().height());
-                  setFixedWidth(w);
-                  QScrollArea* sa = mscore->navigatorScrollArea();
-                  if (!sa->horizontalScrollBar()->isVisible() && (w > sa->width())) {
-// printf("  enable scroll bar m = %f\n", m);
-                        sa->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-                        // we will get another resize event with bc. a scrollbar will
-                        // be added
-                        return;
-                        }
-                  else if (sa->horizontalScrollBar()->isVisible() && w < sa->width()) {
-                        sa->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-                        return;
-                        }
                   updateViewRect();
                   layoutChanged();
                   }
@@ -169,7 +154,6 @@ void Navigator::setScore(Score* v)
             _score  = v;
             rescale();
             setViewRect(QRect());
-            layoutChanged();
             }
       else {
             _score = 0;
@@ -184,9 +168,36 @@ void Navigator::setScore(Score* v)
 
 void Navigator::rescale()
       {
-      qreal m = height() / (_score->pageFormat()->height() * DPI);
+      int sbh  = scrollArea->style()->pixelMetric(QStyle::PM_ScrollBarExtent);
+      int h    = scrollArea->height();
+      int w    = scrollArea->width();
+      Page* lp = _score->pages().back();
+      qreal m;
+      qreal m1 = h / (_score->pageFormat()->height() * DPI);
+      qreal m2 = (h-sbh) / (_score->pageFormat()->height() * DPI);
+      int w1   = int ((lp->x() + lp->width()) * m1);
+      int w2   = int ((lp->x() + lp->width()) * m2);  // always w1 > w2
+
+      if ((w > w2) && (w <= w1)) {
+            setFixedWidth(w1);
+            m = m2;
+            }
+      else {
+            if (scrollArea->horizontalScrollBar()->isVisible()) {
+                  setFixedWidth(w2);
+                  m = m2;
+                  }
+            else {
+                  setFixedWidth(w1);
+                  m = m1;
+                  }
+            }
+
       matrix.setMatrix(m, matrix.m12(), matrix.m13(), matrix.m21(), m,
          matrix.m23(), matrix.m31(), matrix.m32(), matrix.m33());
+      int n = pcl.size();
+      for (int i = 0; i < n; ++i)
+            pcl[i].matrix = matrix;
       }
 
 //---------------------------------------------------------
@@ -294,6 +305,9 @@ static void createPixmap(PageCache* pc)
       QReadLocker locker (pc->page->score()->layoutLock());
       pc->valid = false;
       QRect pageRect = pc->matrix.mapRect(pc->page->bbox()).toRect();
+      if (pageRect.width() == 0 || pageRect.height() == 0)
+            return;
+
       pc->pm = QImage(pageRect.size(), QImage::Format_ARGB32_Premultiplied);
       QPainter p(&pc->pm);
 
@@ -335,15 +349,7 @@ void Navigator::layoutChanged()
             update();
             return;
             }
-      Page* lp = _score->pages().back();
-      int w    = int ((lp->x() + lp->width()) * matrix.m11());
-      if (w != cachedWidth) {
-            cachedWidth = w;
-            setFixedWidth(w);
-            }
-      if (w == 0) {
-            return;
-            }
+
       pcl.clear();
       int n = _score->pages().size();
       for (int i = 0; i < n; ++i) {
@@ -354,6 +360,7 @@ void Navigator::layoutChanged()
             pc.navigator = this;
             pcl.append(pc);
             }
+      rescale();
       update();
       }
 
@@ -386,16 +393,18 @@ void Navigator::paintEvent(QPaintEvent* ev)
 //      if (_cv == 0)
 //            return;
       npcl.clear();
-      for (int i = 0; i < pcl.size(); ++i) {
-            const PageCache& pc = pcl[i];
-            QRect rr = matrix.mapRect(pc.page->canvasBoundingRect()).toRect();
-            if (rr.intersects(r)) {
-                  if (pc.valid) {
-                        QPixmap pm = QPixmap::fromImage(pc.pm);
-                        p.drawPixmap(rr.topLeft(), pm);
+      if (matrix.m11() != .0) {
+            for (int i = 0; i < pcl.size(); ++i) {
+                  const PageCache& pc = pcl[i];
+                  QRect rr = matrix.mapRect(pc.page->canvasBoundingRect()).toRect();
+                  if (rr.intersects(r)) {
+                        if (pc.valid) {
+                              QPixmap pm = QPixmap::fromImage(pc.pm);
+                              p.drawPixmap(rr.topLeft(), pm);
+                              }
+                        else
+                              npcl.append(&pcl[i]);
                         }
-                  else
-                        npcl.append(&pcl[i]);
                   }
             }
 
