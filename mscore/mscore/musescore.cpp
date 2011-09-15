@@ -494,12 +494,6 @@ MuseScore::MuseScore()
       mainScore->setLayout(layout);
 
       _navigator = new NScrollArea;
-      _navigator->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-      _navigator->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-      _navigator->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-      _navigator->setMinimumHeight(40);
-      _navigator->setFrameStyle(QFrame::Box | QFrame::Raised);
-      _navigator->setLineWidth(2);
       mainWindow->addWidget(_navigator);
       showNavigator(preferences.showNavigator);
 
