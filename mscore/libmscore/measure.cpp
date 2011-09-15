@@ -1885,7 +1885,6 @@ void Measure::read(QDomElement e, int staffIdx)
             else if (tag == "BarLine") {
                   BarLine* barLine = new BarLine(score());
                   barLine->setTrack(score()->curTrack);
-//                  barLine->setParent(this);     //??
                   barLine->read(e);
                   if ((score()->curTick != tick()) && (score()->curTick != (tick() + ticks())))
                         // this is a mid measure bar line
@@ -2245,29 +2244,27 @@ void Measure::read(QDomElement e, int staffIdx)
                   // delete b;
                   }
             }
-      int endTick = tick();
-      for (Segment* s = last(); s; s = s->prev()) {
-            if (s->segmentType() == SegChordRest) {
-                  for (int track = 0; track < staves.size() * VOICES; ++track) {
-                        if (s->element(track)) {
-                              ChordRest* cr = static_cast<ChordRest*>(s->element(track));
-                              endTick = cr->tick() + cr->actualTicks();
-                              break;
-                              }
-                        }
-                  break;
-                  }
-            }
       //
       // for compatibility with 1.22:
       //
+      int endTick = tick();
+      for (Segment* s = last(); s; s = s->prev()) {
+            if (s->segmentType() == SegChordRest) {
+                  if (s->element(0)) {
+                        ChordRest* cr = static_cast<ChordRest*>(s->element(0));
+                        endTick = cr->tick() + cr->actualTicks();
+                        break;
+                        }
+                  }
+            }
       if (endTick != (tick() + ticks())) {
-            // printf("measure endTick %d, expected %d\n", endTick, tick() + ticks());
             int diff = tick() + ticks() - endTick;
-            if (diff > 0) {
+            if (diff) {
                   // this is a irregular measure
-                  _len = Fraction::fromTicks(diff);
+                  _len = Fraction::fromTicks(endTick - tick());
                   _len.reduce();
+                  if (last()->segmentType() == SegBarLine)
+                        last()->setSubtype(SegEndBarLine);
                   }
             }
       }

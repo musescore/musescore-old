@@ -1808,7 +1808,6 @@ void Score::layoutPages()
 
             if (sr.isVbox()) {
                   VBox* vbox = sr.vbox();
-                  tmargin  = vbox->topGap();
                   bmargin  = vbox->bottomGap();
                   if (lastSystem) {
                        if (lastSystem->isVbox())
@@ -1817,6 +1816,8 @@ void Score::layoutPages()
                               tmargin += systemFrameDistance;
                               }
                         }
+                  else
+                        tmargin = vbox->topGap();
                   }
             else {
                   if (lastSystem) {
@@ -1888,6 +1889,7 @@ void Score::layoutPages()
                   gaps       = 0;
                   y          = page->tm();
                   lastSystem = 0;
+                  prevDist   = 0;
                   }
             else {
                   lastSystem = sr.systems.back();
