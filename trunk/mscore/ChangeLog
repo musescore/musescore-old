@@ -1,3 +1,7 @@
+15.sep (ws)
+      - fix #12012: Undo doesn't work after changing value of grace note
+      - fix #11778: Stroke on multiple acciaccatura doesn't appear after save
+      - fix #11779: Stroke of multiple acciaccatura immobile and incorrect
 14.sep (ws)
       - fix #12547: Ottava line property menu missing
       - fix #12522: Mid-measure bar lines in qst stave list by saving and re-loading

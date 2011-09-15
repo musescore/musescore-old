@@ -2854,7 +2854,7 @@ void Score::padToggle(int n)
             //
             // handle appoggiatura and acciaccatura
             //
-            cr->setDurationType(_is.duration());
+            _undo->push(new ChangeDurationType(cr, _is.duration()));
             }
       else
             changeCRlen(cr, _is.duration());
