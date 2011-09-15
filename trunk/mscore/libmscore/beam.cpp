@@ -1086,6 +1086,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
       //    create stem's
       //---------------------------------------------------
 
+      bool firstChord = true;
       foreach (ChordRest* cr, crl) {
             if (cr->type() != CHORD)
                   continue;
@@ -1096,6 +1097,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   stem = new Stem(score());
                   chord->setStem(stem);
                   }
+
             if (chord->hook())
                   score()->undoRemoveElement(chord->hook());
 
@@ -1134,15 +1136,24 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                                     }
                               }
                         }
-                  qreal y2 = y + canvPos.y();
-                  qreal stemLen = chordUp ? (y1 - y2) : (y2 - y1);
-
-                  stem->setLen(stemLen);
-
-                  if (chordUp)
-                        npos.ry() -= stemLen;
+                  stem->setLen(y + canvPos.y() - y1);
                   stem->setPos(npos - chord->pagePos());
                   }
+
+            //
+            // layout stem slash for acciacatura
+            //
+            if (firstChord && chord->noteType() == NOTE_ACCIACCATURA) {
+                  StemSlash* stemSlash = chord->stemSlash();
+                  if (!stemSlash) {
+                        stemSlash = new StemSlash(score());
+                        chord->add(stemSlash);
+                        }
+                  stemSlash->layout();
+                  }
+            else
+                  chord->setStemSlash(0);
+            firstChord = false;
 
             Tremolo* tremolo = chord->tremolo();
             if (tremolo)

@@ -29,6 +29,7 @@ class Chord;
 class Glissando;
 class Stem;
 class Painter;
+class Chord;
 
 enum TremoloChordType { TremoloSingle, TremoloFirstNote, TremoloSecondNote };
 
@@ -49,6 +50,8 @@ class StemSlash : public Element {
       virtual StemSlash* clone() const { return new StemSlash(*this); }
       virtual ElementType type() const { return STEM_SLASH; }
       virtual void draw(Painter*) const;
+      virtual void layout();
+      Chord* chord() const { return (Chord*)parent(); }
       };
 
 //---------------------------------------------------------
@@ -147,6 +150,7 @@ class Chord : public ChordRest {
       void setTremolo(Tremolo* t)            { _tremolo = t;      }
       Glissando* glissando() const           { return _glissando; }
       StemSlash* stemSlash() const           { return _stemSlash; }
+      void setStemSlash(StemSlash* s)        { delete _stemSlash; _stemSlash = s; }
 
       virtual QPointF stemPos(bool, bool) const;
 

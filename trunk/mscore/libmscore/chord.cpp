@@ -76,6 +76,46 @@ void StemSlash::setLine(const QLineF& l)
       }
 
 //---------------------------------------------------------
+//   layout
+//    TODO: does not work for chords/beamed acciacatura
+//---------------------------------------------------------
+
+void StemSlash::layout()
+      {
+printf("StemSlash layout: %p up %d\n", chord(), chord()->up());
+      Stem* stem = chord()->stem();
+      qreal x, y, h2;
+      if (chord()->beam()) {
+            qreal l = spatium();
+            x = stem->pos().x() + l * .1;
+            y = stem->pos().y() + stem->stemLen();
+            if (chord()->up()) {
+                  y += l * .3;
+                  h2 = l * .8;
+                  }
+            else {
+                  y -= l * .3;
+                  h2 = l * -.8;
+                  }
+            }
+      else {
+            qreal l = spatium();
+            x = stem->pos().x() + l * .1;
+            y = stem->pos().y() + stem->stemLen();
+            if (chord()->up()) {
+                  y += l * 1.2;
+                  h2 = l * .4;
+                  }
+            else {
+                  y -= l * 1.2;
+                  h2 = l * -.4;
+                  }
+            }
+      qreal w  = chord()->upNote()->headWidth() * .7;
+      setLine(QLineF(QPointF(x + w, y - h2), QPointF(x - w, y + h2)));
+      }
+
+//---------------------------------------------------------
 //   upLine
 //---------------------------------------------------------
 
@@ -134,11 +174,8 @@ Chord::Chord(const Chord& c)
             add(new Glissando(*(c._glissando)));
       if (c._arpeggio)
             add(new Arpeggio(*(c._arpeggio)));
-      if (c._stemSlash) {
-            _stemSlash = new StemSlash(*(c._stemSlash));
-            _stemSlash->setParent(this);
-            _stemSlash->setTrack(track());
-            }
+      if (c._stemSlash)
+            add(new StemSlash(*(c._stemSlash)));
       _stemDirection    = c._stemDirection;
       _tremoloChordType = TremoloSingle;
       _tremolo          = 0;
@@ -305,6 +342,10 @@ void Chord::add(Element* e)
                   break;
             case CHORDLINE:
                   _el.append(e);
+                  break;
+            case STEM_SLASH:
+                  _stemSlash = static_cast<StemSlash*>(e);
+                  _stemSlash->setMag(mag());
                   break;
             default:
                   ChordRest::add(e);
@@ -998,15 +1039,14 @@ void Chord::layoutStem1()
       else
             setStem(0);
 
-      if (hasStem && _noteType == NOTE_ACCIACCATURA) {
-            _stemSlash = new StemSlash(score());
-            _stemSlash->setMag(mag());
-            _stemSlash->setParent(this);
+      if (hasStem && (_noteType == NOTE_ACCIACCATURA)) {
+            if (_stemSlash == 0) {
+                  printf("layoutStem1: %p add slash\n", this);
+                  add(new StemSlash(score()));
+                  }
             }
-      else {
-            delete _stemSlash;
-            _stemSlash = 0;
-            }
+      else
+            setStemSlash(0);
 
       //-----------------------------------------
       //  process hook
@@ -1132,16 +1172,7 @@ void Chord::layoutStem()
 
             if (_stemSlash) {
                   // TODO: does not work for chords
-                  qreal l = spatium() * 1.0;
-                  qreal x = _stem->pos().x() + l * .1;
-                  qreal y = _stem->pos().y() + point(stemLen);
-                  if (up())
-                        y += l * 1.2;
-                  else
-                        y -= l * 1.2;
-                  qreal h2 = l * (up() ? .4 : -.4);
-                  qreal w  = upnote->headWidth() * .7;
-                  _stemSlash->setLine(QLineF(QPointF(x + w, y - h2), QPointF(x - w, y + h2)));
+                  _stemSlash->layout();
                   }
 
             if (hookIdx) {
