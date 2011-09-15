@@ -1634,5 +1634,23 @@ class ChangeArticulation : public UndoCommand {
       UNDO_NAME("ChangeArticulation");
       };
 
+//---------------------------------------------------------
+//   ChangeDurationType
+//---------------------------------------------------------
+
+class ChangeDurationType : public UndoCommand {
+      ChordRest* cr;
+      Duration t;
+
+      void flip();
+
+   public:
+      ChangeDurationType(ChordRest* _cr, Duration _t)
+         : cr(_cr), t(_t) {}
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      UNDO_NAME("ChangeDurationType");
+      };
+
 #endif
 

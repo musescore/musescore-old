@@ -3181,4 +3181,14 @@ void ChangeArticulation::flip()
       a->score()->addRefresh(a->canvasBoundingRect());
       }
 
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void ChangeDurationType::flip()
+      {
+      Duration type = cr->durationType();
+      cr->setDurationType(t);
+      t = type;
+      }
 

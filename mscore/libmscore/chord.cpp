@@ -82,7 +82,6 @@ void StemSlash::setLine(const QLineF& l)
 
 void StemSlash::layout()
       {
-printf("StemSlash layout: %p up %d\n", chord(), chord()->up());
       Stem* stem = chord()->stem();
       qreal x, y, h2;
       if (chord()->beam()) {
@@ -1040,10 +1039,8 @@ void Chord::layoutStem1()
             setStem(0);
 
       if (hasStem && (_noteType == NOTE_ACCIACCATURA)) {
-            if (_stemSlash == 0) {
-                  printf("layoutStem1: %p add slash\n", this);
+            if (_stemSlash == 0)
                   add(new StemSlash(score()));
-                  }
             }
       else
             setStemSlash(0);
