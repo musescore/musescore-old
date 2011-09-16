@@ -246,7 +246,7 @@ void SlurSegment::setGrip(int n, const QPointF& pt)
 void SlurSegment::editDrag(const EditData& ed)
       {
       ups[ed.curGrip].off += (ed.delta / spatium());
-      computeBezier();
+      slurTie()->computeBezier(this);
       if (ed.curGrip == GRIP_START || ed.curGrip == GRIP_END) {
             //
             // move anchor for slurs
@@ -342,7 +342,7 @@ void SlurSegment::read(QDomElement e)
 //    compute help points of slur bezier segment
 //---------------------------------------------------------
 
-void SlurSegment::computeBezier()
+void Slur::computeBezier(SlurSegment* ss)
       {
       qreal _spatium  = spatium();
       qreal shoulderW;              // height as fraction of slur-length
@@ -350,21 +350,18 @@ void SlurSegment::computeBezier()
       //
       // p1 and p2 are the end points of the slur
       //
-      QPointF pp1 = ups[GRIP_START].p + ups[GRIP_START].off * _spatium;
-      QPointF pp2 = ups[GRIP_END].p   + ups[GRIP_END].off   * _spatium;
-      QPointF p6o = ups[GRIP_SHOULDER].off * _spatium;
+      QPointF pp1 = ss->ups[GRIP_START].p + ss->ups[GRIP_START].off * _spatium;
+      QPointF pp2 = ss->ups[GRIP_END].p   + ss->ups[GRIP_END].off   * _spatium;
+      QPointF p6o = ss->ups[GRIP_SHOULDER].off * _spatium;
 
       QPointF p2 = pp2 - pp1;
       if (p2.x() == 0.0) {
             printf("zero slur\n");
-            if (slurTie()->type() == SLUR) {
-                  Slur* s = static_cast<Slur*>(slurTie());
-                  Measure* m1 = s->startChord()->segment()->measure();
-                  Measure* m2 = s->endChord()->segment()->measure();
-                  Page* page = m1->system()->page();
-                  printf("   at tick %d in measure %d-%d page %d\n",
-                     m1->tick(), m1->no(), m2->no(), page->no());
-                  }
+            Measure* m1 = startChord()->segment()->measure();
+            Measure* m2 = endChord()->segment()->measure();
+            Page* page = m1->system()->page();
+            printf("   at tick %d in measure %d-%d page %d\n",
+               m1->tick(), m1->no(), m2->no(), page->no());
             return;
             }
 
@@ -393,7 +390,7 @@ void SlurSegment::computeBezier()
                   shoulderW = 0.6;
             }
 
-      if (!slurTie()->up())
+      if (!up())
             shoulderH = -shoulderH;
       shoulderH -= p6o.y();
 
@@ -409,8 +406,8 @@ void SlurSegment::computeBezier()
       qreal w = (score()->styleS(ST_SlurMidWidth).val() - score()->styleS(ST_SlurEndWidth).val()) * _spatium;
       QPointF th(0.0, w);    // thickness of slur
 
-      QPointF p3o = t.map(ups[GRIP_BEZIER1].off * _spatium);
-      QPointF p4o = t.map(ups[GRIP_BEZIER2].off * _spatium);
+      QPointF p3o = t.map(ss->ups[GRIP_BEZIER1].off * _spatium);
+      QPointF p4o = t.map(ss->ups[GRIP_BEZIER2].off * _spatium);
 
       //-----------------------------------calculate p6
       QPointF pp3  = p3 + p3o;
@@ -426,29 +423,121 @@ void SlurSegment::computeBezier()
       p6 = t.map(p6) + pp3 - p6o;
       //-----------------------------------
 
-      path = QPainterPath();
-      path.moveTo(QPointF());
-      path.cubicTo(p3 + p3o - th, p4 + p4o - th, p2);
-      if (slurTie()->lineType() == 0)
-            path.cubicTo(p4 +p4o + th, p3 + p3o + th, QPointF());
+      ss->path = QPainterPath();
+      ss->path.moveTo(QPointF());
+      ss->path.cubicTo(p3 + p3o - th, p4 + p4o - th, p2);
+      if (lineType() == 0)
+            ss->path.cubicTo(p4 +p4o + th, p3 + p3o + th, QPointF());
 
       th = QPointF(0.0, 3.0 * w);
-      shapePath = QPainterPath();
-      shapePath.moveTo(QPointF());
-      shapePath.cubicTo(p3 + p3o - th, p4 + p4o - th, p2);
-      shapePath.cubicTo(p4 +p4o + th, p3 + p3o + th, QPointF());
+      ss->shapePath = QPainterPath();
+      ss->shapePath.moveTo(QPointF());
+      ss->shapePath.cubicTo(p3 + p3o - th, p4 + p4o - th, p2);
+      ss->shapePath.cubicTo(p4 +p4o + th, p3 + p3o + th, QPointF());
 
       // translate back
       t.reset();
       t.translate(pp1.x(), pp1.y());
       t.rotateRadians(sinb);
-      path                 = t.map(path);
-      shapePath            = t.map(shapePath);
-      ups[GRIP_BEZIER1].p  = t.map(p3);
-      ups[GRIP_BEZIER2].p  = t.map(p4);
-      ups[GRIP_END].p      = t.map(p2) - ups[GRIP_END].off * _spatium;
-      ups[GRIP_DRAG].p     = t.map(p5);
-      ups[GRIP_SHOULDER].p = t.map(p6);
+      ss->path                 = t.map(ss->path);
+      ss->shapePath            = t.map(ss->shapePath);
+      ss->ups[GRIP_BEZIER1].p  = t.map(p3);
+      ss->ups[GRIP_BEZIER2].p  = t.map(p4);
+      ss->ups[GRIP_END].p      = t.map(p2) - ss->ups[GRIP_END].off * _spatium;
+      ss->ups[GRIP_DRAG].p     = t.map(p5);
+      ss->ups[GRIP_SHOULDER].p = t.map(p6);
+      }
+
+//---------------------------------------------------------
+//   computeBezier
+//    compute help points of slur bezier segment
+//---------------------------------------------------------
+
+void Tie::computeBezier(SlurSegment* ss)
+      {
+      qreal _spatium  = spatium();
+      qreal shoulderW;              // height as fraction of slur-length
+      qreal shoulderH;
+      //
+      // p1 and p2 are the end points of the slur
+      //
+      QPointF pp1 = ss->ups[GRIP_START].p + ss->ups[GRIP_START].off * _spatium;
+      QPointF pp2 = ss->ups[GRIP_END].p   + ss->ups[GRIP_END].off   * _spatium;
+      QPointF p6o = ss->ups[GRIP_SHOULDER].off * _spatium;
+
+      QPointF p2 = pp2 - pp1;
+      if (p2.x() == 0.0) {
+            printf("zero tie\n");
+            return;
+            }
+
+      qreal sinb = atan(p2.y() / p2.x());
+      QTransform t;
+      t.rotateRadians(-sinb);
+      p2  = t.map(p2);
+      p6o = t.map(p6o);
+
+      double smallH = 0.38;
+      qreal d   = p2.x() / _spatium;
+      shoulderH = d * 0.5 * smallH * _spatium;
+      shoulderW = .6;
+
+      if (!up())
+            shoulderH = -shoulderH;
+      shoulderH -= p6o.y();
+
+      qreal c    = p2.x();
+      qreal c1   = (c - c * shoulderW) * .5 + p6o.x();
+      qreal c2   = c1 + c * shoulderW       + p6o.x();
+
+      QPointF p5 = QPointF(c * .5, 0.0);
+
+      QPointF p3(c1, -shoulderH);
+      QPointF p4(c2, -shoulderH);
+
+      qreal w = (score()->styleS(ST_SlurMidWidth).val() - score()->styleS(ST_SlurEndWidth).val()) * _spatium;
+      QPointF th(0.0, w);    // thickness of slur
+
+      QPointF p3o = t.map(ss->ups[GRIP_BEZIER1].off * _spatium);
+      QPointF p4o = t.map(ss->ups[GRIP_BEZIER2].off * _spatium);
+
+      //-----------------------------------calculate p6
+      QPointF pp3  = p3 + p3o;
+      QPointF pp4  = p4 + p4o;
+      QPointF ppp4 = pp4 - pp3;
+
+      qreal r2 = atan(ppp4.y() / ppp4.x());
+      t.reset();
+      t.rotateRadians(-r2);
+      QPointF p6  = QPointF(t.map(ppp4).x() * .5, 0.0);
+
+      t.rotateRadians(2 * r2);
+      p6 = t.map(p6) + pp3 - p6o;
+      //-----------------------------------
+
+      ss->path = QPainterPath();
+      ss->path.moveTo(QPointF());
+      ss->path.cubicTo(p3 + p3o - th, p4 + p4o - th, p2);
+      if (lineType() == 0)
+            ss->path.cubicTo(p4 +p4o + th, p3 + p3o + th, QPointF());
+
+      th = QPointF(0.0, 3.0 * w);
+      ss->shapePath = QPainterPath();
+      ss->shapePath.moveTo(QPointF());
+      ss->shapePath.cubicTo(p3 + p3o - th, p4 + p4o - th, p2);
+      ss->shapePath.cubicTo(p4 +p4o + th, p3 + p3o + th, QPointF());
+
+      // translate back
+      t.reset();
+      t.translate(pp1.x(), pp1.y());
+      t.rotateRadians(sinb);
+      ss->path                 = t.map(ss->path);
+      ss->shapePath            = t.map(ss->shapePath);
+      ss->ups[GRIP_BEZIER1].p  = t.map(p3);
+      ss->ups[GRIP_BEZIER2].p  = t.map(p4);
+      ss->ups[GRIP_END].p      = t.map(p2) - ss->ups[GRIP_END].off * _spatium;
+      ss->ups[GRIP_DRAG].p     = t.map(p5);
+      ss->ups[GRIP_SHOULDER].p = t.map(p6);
       }
 
 //---------------------------------------------------------
@@ -460,20 +549,7 @@ void SlurSegment::layout(const QPointF& p1, const QPointF& p2)
       {
       ups[GRIP_START].p = p1;
       ups[GRIP_END].p   = p2;
-      computeBezier();
-      }
-
-//---------------------------------------------------------
-//   dump
-//---------------------------------------------------------
-
-void SlurSegment::dump() const
-      {
-      printf("SlurSegment %f/%f %f/%f %f/%f %f/%f\n",
-            ups[GRIP_START].off.x(), ups[GRIP_START].off.y(),
-            ups[GRIP_BEZIER1].off.x(), ups[GRIP_BEZIER1].off.y(),
-            ups[GRIP_BEZIER2].off.x(), ups[GRIP_BEZIER2].off.y(),
-            ups[GRIP_END].off.x(), ups[GRIP_END].off.y());
+      slurTie()->computeBezier(this);
       }
 
 //---------------------------------------------------------
@@ -536,39 +612,26 @@ static qreal fixArticulations(qreal yo, Chord* c, qreal _up)
 //    relative to System() position
 //---------------------------------------------------------
 
-void SlurTie::slurPos(SlurPos* sp)
+void Slur::slurPos(SlurPos* sp)
       {
       qreal _spatium = spatium();
       Element* e1 = startElement();
       Element* e2 = endElement();
-      bool isTie  = e1->type() == NOTE;
 
-      Note* note1;
-      Note* note2;
-      Chord* sc;
-      Chord* ec;
+      if ((e1->type() != CHORD) || (e2->type() != CHORD)) {
+            sp->p1 = e1->pagePos();
+            sp->p2 = e2->pagePos();
+            sp->p1.rx() += e1->width();
+            sp->p2.rx() += e2->width();
+            sp->system1 = static_cast<ChordRest*>(e1)->measure()->system();
+            sp->system2 = static_cast<ChordRest*>(e2)->measure()->system();
+            return;
+            }
+      Chord* sc   = static_cast<Chord*>(e1);
+      Chord* ec   = static_cast<Chord*>(e2);
+      Note* note1 = _up ? sc->upNote() : sc->downNote();
+      Note* note2 = _up ? ec->upNote() : ec->downNote();
 
-      if (isTie) {
-            note1 = static_cast<Note*>(e1);
-            note2 = static_cast<Note*>(e2);
-            sc    = note1->chord();
-            ec    = note2->chord();
-            }
-      else {
-            if ((e1->type() != CHORD) || (e2->type() != CHORD)) {
-                  sp->p1 = e1->pagePos();
-                  sp->p2 = e2->pagePos();
-                  sp->p1.rx() += e1->width();
-                  sp->p2.rx() += e2->width();
-                  sp->system1 = static_cast<ChordRest*>(e1)->measure()->system();
-                  sp->system2 = static_cast<ChordRest*>(e2)->measure()->system();
-                  return;
-                  }
-            sc    = static_cast<Chord*>(e1);
-            ec    = static_cast<Chord*>(e2);
-            note1 = _up ? sc->upNote() : sc->downNote();
-            note2 = _up ? ec->upNote() : ec->downNote();
-            }
       sp->p1      = sc->pagePos();
       sp->p2      = ec->pagePos();
       sp->system1 = sc->measure()->system();
@@ -594,116 +657,151 @@ void SlurTie::slurPos(SlurPos* sp)
 
       bool stemPos = false;   // p1 starts at chord stem side
 
-      if (isTie && sc->notes().size() > 1) {
-            xo = hw * 1.12;
-            yo = note1->pos().y() + hw * .3 * __up;
-            }
-      else {
-            yo = note1->yPos() + (hh * .5 + _spatium * .4) * __up;
-            if (stem1) {
-                  // bool startIsGrace = sc->noteType() != NOTE_NORMAL;
+      yo = note1->yPos() + (hh * .5 + _spatium * .4) * __up;
+      if (stem1) {
+            // bool startIsGrace = sc->noteType() != NOTE_NORMAL;
 
-                  Beam* beam1 = sc->beam();
-                  if (beam1 && (beam1->elements().back() != sc) && (sc->up() == _up)) {
-                        qreal sh = stem1->height() + _spatium;
-                        if (_up)
-                              yo = sc->downNote()->yPos() - sh;
-                        else
-                              yo = sc->upNote()->yPos() + sh;
-                        xo = stem1->pos().x();
-                        stemPos = true;
-                        }
-                  else {
-                        if (sc->up() && _up)
-                              xo = note1->headWidth() + _spatium * .3;
+            Beam* beam1 = sc->beam();
+            if (beam1 && (beam1->elements().back() != sc) && (sc->up() == _up)) {
+                  qreal sh = stem1->height() + _spatium;
+                  if (_up)
+                        yo = sc->downNote()->yPos() - sh;
+                  else
+                        yo = sc->upNote()->yPos() + sh;
+                  xo = stem1->pos().x();
+                  stemPos = true;
+                  }
+            else {
+                  if (sc->up() && _up)
+                        xo = note1->headWidth() + _spatium * .3;
 
-                        //
-                        // handle case: stem up   - stem down
-                        //              stem down - stem up
-                        //
-                        if ((sc->up() != ec->up()) && (sc->up() == _up)) {
-                              Note* n1  = sc->up() ? sc->downNote() : sc->upNote();
-                              Note* n2  = ec->up() ? ec->downNote() : ec->upNote();
-                              qreal yd = n2->yPos() - n1->yPos();
+                  //
+                  // handle case: stem up   - stem down
+                  //              stem down - stem up
+                  //
+                  if ((sc->up() != ec->up()) && (sc->up() == _up)) {
+                        Note* n1  = sc->up() ? sc->downNote() : sc->upNote();
+                        Note* n2  = ec->up() ? ec->downNote() : ec->upNote();
+                        qreal yd = n2->yPos() - n1->yPos();
 
-                              qreal sh = stem1->height();    // limit y move
-                              if (yd > 0.0) {
-                                    if (yd > sh)
-                                          yd = sh;
-                                    }
-                              else {
-                                    if (yd < - sh)
-                                          yd = -sh;
-                                    }
-                              stemPos = true;
-                              if ((_up && (yd < -_spatium)) || (!_up && (yd > _spatium)))
-                                    yo += yd;
+                        qreal sh = stem1->height();    // limit y move
+                        if (yd > 0.0) {
+                              if (yd > sh)
+                                    yd = sh;
                               }
-                        else if (sc->up() != _up)
-                              yo = fixArticulations(yo, sc, __up);
+                        else {
+                              if (yd < - sh)
+                                    yd = -sh;
+                              }
+                        stemPos = true;
+                        if ((_up && (yd < -_spatium)) || (!_up && (yd > _spatium)))
+                              yo += yd;
                         }
+                  else if (sc->up() != _up)
+                        yo = fixArticulations(yo, sc, __up);
                   }
             }
+
       sp->p1 += QPointF(xo, yo);
 
       //------p2
       xo = hw * .5;
       yo = 0.0;
-      if (isTie && ec->notes().size() > 1) {
+
+      yo = note2->yPos() + (hh * .5 + _spatium * .4) * __up;
+      if (stem2) {
+            Beam* beam2 = ec->beam();
+            if ((stemPos && (sc->up() == ec->up()))
+               || (beam2
+                 && (!beam2->elements().isEmpty())
+                 && (beam2->elements().front() != ec)
+                 && (ec->up() == _up)
+                 && (sc->noteType() == NOTE_NORMAL)
+                 )
+                  ) {
+                  qreal sh = stem2->height() + _spatium;
+                  if (_up)
+                        yo = ec->downNote()->yPos() - sh;
+                  else
+                        yo = ec->upNote()->yPos() + sh;
+                  xo = stem2->pos().x();
+                  }
+            else if (!ec->up() && !_up)
+                  xo = -_spatium * .3;
+            //
+            // handle case: stem up   - stem down
+            //              stem down - stem up
+            //
+            if ((sc->up() != ec->up()) && (ec->up() == _up)) {
+                  Note* n1 = sc->up() ? sc->downNote() : sc->upNote();
+                  Note* n2 = ec->up() ? ec->downNote() : ec->upNote();
+                  qreal yd = n2->yPos() - n1->yPos();
+
+                  qreal mh = stem2->height();    // limit y move
+                  if (yd > 0.0) {
+                        if (yd > mh)
+                              yd = mh;
+                        }
+                  else {
+                        if (yd < - mh)
+                              yd = -mh;
+                        }
+
+                  if ((_up && (yd > _spatium)) || (!_up && (yd < -_spatium)))
+                        yo -= yd;
+                  }
+            else if (ec->up() != _up)
+                  yo = fixArticulations(yo, ec, __up);
+            }
+
+      sp->p2 += QPointF(xo, yo);
+      sp->p1 -= sp->system1->pagePos();
+      sp->p2 -= sp->system2->pagePos();
+      }
+
+//---------------------------------------------------------
+//   slurPos
+//    calculate position of start- and endpoint of slur
+//    relative to System() position
+//---------------------------------------------------------
+
+void Tie::slurPos(SlurPos* sp)
+      {
+      Note* note1 = static_cast<Note*>(startElement());
+      Note* note2 = static_cast<Note*>(endElement());
+      Chord* sc   = note1->chord();
+      Chord* ec   = note2->chord();
+
+      sp->system1 = sc->measure()->system();
+      sp->system2 = ec->measure()->system();
+
+      qreal hw   = note1->headWidth();
+      qreal __up = _up ? -1.0 : 1.0;
+      qreal _spatium = spatium();
+
+      qreal xo, yo;
+
+      //------p1
+      if (sc->notes().size() > 1) {
+            xo = hw * 1.12;
+            yo = note1->pos().y() + hw * .3 * __up;
+            }
+      else {
+            xo = hw * 0.85;
+            yo = note1->pos().y() + _spatium * .75 * __up;
+            }
+      sp->p1 = sc->pagePos() - sp->system1->pagePos() + QPointF(xo, yo);
+
+      //------p2
+      if (ec->notes().size() > 1) {
             xo = - hw * 0.12;
             yo = note2->pos().y() + hw * .3 * __up;
             }
       else {
-            yo = note2->yPos() + (hh * .5 + _spatium * .4) * __up;
-            if (stem2) {
-                  Beam* beam2 = ec->beam();
-                  if ((stemPos && (sc->up() == ec->up()))
-                     || (beam2
-                       && (!beam2->elements().isEmpty())
-                       && (beam2->elements().front() != ec)
-                       && (ec->up() == _up)
-                       && (sc->noteType() == NOTE_NORMAL)
-                       )
-                        ) {
-                        qreal sh = stem2->height() + _spatium;
-                        if (_up)
-                              yo = ec->downNote()->yPos() - sh;
-                        else
-                              yo = ec->upNote()->yPos() + sh;
-                        xo = stem2->pos().x();
-                        }
-                  else if (!ec->up() && !_up)
-                        xo = -_spatium * .3;
-                  //
-                  // handle case: stem up   - stem down
-                  //              stem down - stem up
-                  //
-                  if ((sc->up() != ec->up()) && (ec->up() == _up)) {
-                        Note* n1 = sc->up() ? sc->downNote() : sc->upNote();
-                        Note* n2 = ec->up() ? ec->downNote() : ec->upNote();
-                        qreal yd = n2->yPos() - n1->yPos();
-
-                        qreal mh = stem2->height();    // limit y move
-                        if (yd > 0.0) {
-                              if (yd > mh)
-                                    yd = mh;
-                              }
-                        else {
-                              if (yd < - mh)
-                                    yd = -mh;
-                              }
-
-                        if ((_up && (yd > _spatium)) || (!_up && (yd < -_spatium)))
-                              yo -= yd;
-                        }
-                  else if (ec->up() != _up)
-                        yo = fixArticulations(yo, ec, __up);
-                  }
+            xo = hw * 0.15;
+            yo = note2->pos().y() + _spatium * .75 * __up;
             }
-      sp->p2 += QPointF(xo, yo);
-
-      sp->p1 -= sp->system1->pagePos();
-      sp->p2 -= sp->system2->pagePos();
+      sp->p2 = ec->pagePos() - sp->system2->pagePos() + QPointF(xo, yo);
       }
 
 //---------------------------------------------------------
@@ -1136,7 +1234,6 @@ void Tie::layout()
 
       Chord* c1   = startNote()->chord();
       Measure* m1 = c1->measure();
-      // Chord* c2   = endNote()->chord();
 
       if (_slurDirection == AUTO)
             if (m1->mstaff(c1->staffIdx())->hasVoices) {
