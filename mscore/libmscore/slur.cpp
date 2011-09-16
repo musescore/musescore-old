@@ -479,7 +479,10 @@ void Tie::computeBezier(SlurSegment* ss)
 
       double smallH = 0.38;
       qreal d   = p2.x() / _spatium;
-      shoulderH = d * 0.5 * smallH * _spatium;
+      shoulderH = d * 0.5 * smallH;
+      if (shoulderH > 1.5)            // maximum tie shoulder height
+            shoulderH = 1.5;
+      shoulderH *= _spatium;
       shoulderW = .6;
 
       if (!up())
@@ -782,7 +785,7 @@ void Tie::slurPos(SlurPos* sp)
       qreal xo, yo;
 
       //------p1
-      if (sc->notes().size() > 1) {
+      if ((sc->notes().size() > 1) || (sc->stem() && (sc->up() == _up))) {
             xo = hw * 1.12;
             yo = note1->pos().y() + hw * .3 * __up;
             }
@@ -793,14 +796,10 @@ void Tie::slurPos(SlurPos* sp)
       sp->p1 = sc->pagePos() - sp->system1->pagePos() + QPointF(xo, yo);
 
       //------p2
-      if (ec->notes().size() > 1) {
+      if ((ec->notes().size() > 1) || (ec->stem() && !ec->up() && !_up))
             xo = - hw * 0.12;
-            yo = note2->pos().y() + hw * .3 * __up;
-            }
-      else {
+      else
             xo = hw * 0.15;
-            yo = note2->pos().y() + _spatium * .75 * __up;
-            }
       sp->p2 = ec->pagePos() - sp->system2->pagePos() + QPointF(xo, yo);
       }
 
