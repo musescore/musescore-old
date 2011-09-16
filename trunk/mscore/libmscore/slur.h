@@ -44,6 +44,7 @@ enum {
 class SlurSegment : public SpannerSegment {
       Q_DECLARE_TR_FUNCTIONS(SlurSegment)
 
+   protected:
       struct UP ups[SLUR_GRIPS];
       QPainterPath path;
       QPainterPath shapePath;
@@ -79,11 +80,12 @@ class SlurSegment : public SpannerSegment {
 
       void write(Xml& xml, int no) const;
       void read(QDomElement);
-      void dump() const;
       virtual void toDefault();
       void setSlurOffset(int i, const QPointF& val) { ups[i].off = val;  }
       QPointF slurOffset(int i) const               { return ups[i].off; }
       const struct UP* getUps(int idx) const        { return &ups[idx]; }
+      friend class Tie;
+      friend class Slur;
       };
 
 //---------------------------------------------------------
@@ -127,7 +129,6 @@ class SlurTie : public Spanner {
 
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomElement);
-      void slurPos(SlurPos*);
 
       virtual void toDefault();
       void setLen(qreal v)               { _len = v; }
@@ -138,6 +139,8 @@ class SlurTie : public Spanner {
       SlurSegment* takeLastSegment()      { return (SlurSegment*)spannerSegments().takeLast(); }
       SlurSegment* segmentAt(int n) const { return (SlurSegment*)spannerSegments().at(n); }
       virtual const QString subtypeName() const { return QString(); }
+      virtual void slurPos(SlurPos*) = 0;
+      virtual void computeBezier(SlurSegment*) = 0;
       };
 
 //---------------------------------------------------------
@@ -158,6 +161,8 @@ class Slur : public SlurTie {
       virtual void layout();
       virtual QRectF bbox() const;
       virtual void setTrack(int val);
+      virtual void slurPos(SlurPos*);
+      virtual void computeBezier(SlurSegment*);
 
       int track2() const        { return _track2; }
       int staffIdx2() const     { return _track2 / VOICES; }
@@ -177,6 +182,7 @@ class Slur : public SlurTie {
 //---------------------------------------------------------
 
 class Tie : public SlurTie {
+
    public:
       Tie(Score*);
       virtual Tie* clone() const          { return new Tie(*this);        }
@@ -188,6 +194,8 @@ class Tie : public SlurTie {
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       virtual void layout();
+      virtual void slurPos(SlurPos*);
+      virtual void computeBezier(SlurSegment*);
       };
 
 #endif
