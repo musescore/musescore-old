@@ -211,7 +211,8 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
       bool isLeft   = notes[startIdx]->chord()->up();
       int move1     = notes[startIdx]->chord()->staffMove();
       bool mirror   = false;
-      int lastHead  = -1;
+      int lastHeadGroup  = -1;
+      int lastHeadType  = -1;
 
       for (int idx = startIdx; idx != endIdx; idx += incIdx) {
             Note* note   = notes[idx];
@@ -219,10 +220,13 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
             int move     = chord->staffMove();
             int line     = note->line();
             int ticks    = chord->tickLen();
-            int head     = note->noteHead();      // symbol number or note head
+            int headGroup     = note->headGroup();      // symbol number or note head
+            int headType     =  (note->headType() == HEAD_AUTO) ? note->chord()->duration().headType() : note->headType() - 1;
+            //int headType     =  note->chord()->duration().headType();
 
             bool conflict = (qAbs(ll - line) < 2) && (move1 == move);
-            bool sameHead = (ll == line) && (head == lastHead);
+            bool sameHead = (ll == line) && (headGroup == lastHeadGroup) && (headType == lastHeadType);
+            
             if ((chord->up() != isLeft) || conflict)
                   isLeft = !isLeft;
             bool nmirror  = (chord->up() != isLeft) && !sameHead;
@@ -273,7 +277,8 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
 
             move1    = move;
             ll       = line;
-            lastHead = head;
+            lastHeadGroup = headGroup;
+            lastHeadType = headType;
             }
 
       //---------------------------------------------------
