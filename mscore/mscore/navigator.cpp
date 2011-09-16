@@ -135,6 +135,7 @@ void Navigator::setScoreView(ScoreView* v)
             connect(_cv,  SIGNAL(viewRectChanged()), this, SLOT(updateViewRect()));
             updateViewRect();
             layoutChanged();
+            rescale();
             }
       else {
             _score = 0;
@@ -178,17 +179,22 @@ void Navigator::rescale()
       int w1   = int ((lp->x() + lp->width()) * m1);
       int w2   = int ((lp->x() + lp->width()) * m2);  // always w1 > w2
 
-      if ((w > w2) && (w <= w1)) {
+// printf("rescale %d   %d - %d - %d  sbh %d h %d\n",
+//   scrollArea->horizontalScrollBar()->isVisible(), w2, w, w1, sbh, h);
+
+      if ((w >= w2) && (w < w1)) {
             setFixedWidth(w1);
             m = m2;
             }
       else {
             if (scrollArea->horizontalScrollBar()->isVisible()) {
-                  setFixedWidth(w2);
+                  setFixedWidth(w1);
+                  printf("  visible %d > %d\n", w2, w);
                   m = m2;
                   }
             else {
                   setFixedWidth(w1);
+                  printf("  invisible %d < %d\n", w1, w);
                   m = m1;
                   }
             }
@@ -360,7 +366,6 @@ void Navigator::layoutChanged()
             pc.navigator = this;
             pcl.append(pc);
             }
-      rescale();
       update();
       }
 
