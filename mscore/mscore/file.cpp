@@ -201,11 +201,11 @@ void MuseScore::loadFile()
       QString fn = getOpenScoreName(
          lastOpenPath,
 #ifdef OMR
-         tr("All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.pdf *.ove *.scw *.bww *.GTP *.GP3 *.GP4);;")+
+         tr("All Supported Files (*.mscz *.mscx *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.pdf *.ove *.scw *.bww *.GTP *.GP3 *.GP4 *.GP5);;")+
 #else
-         tr("All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.scw *.bww *.GTP *.GP3 *.GP4);;")+
+         tr("All Supported Files (*.mscz *.mscx *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.scw *.bww *.GTP *.GP3 *.GP4 *.GP5);;")+
 #endif
-         tr("MuseScore Files (*.mscz *.mscx *.msc);;")+
+         tr("MuseScore Files (*.mscz *.mscx);;")+
          tr("MusicXML Files (*.xml *.mxl);;")+
          tr("MIDI Files (*.mid *.midi *.kar);;")+
          tr("Muse Data Files (*.md);;")+
