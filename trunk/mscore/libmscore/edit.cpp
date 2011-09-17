@@ -1561,11 +1561,7 @@ printf("tuplet note duration %s  actualNotes %d  ticks %d\n",
             rest->setDuration(tuplet->baseLen().fraction());
 #if 0
             SegmentType st = Segment::segmentType(rest->type());
-            Segment* seg = measure->findSegment(st, tick);
-            if (seg == 0) {
-                  seg = new Segment(measure, st, tick);
-                  undoAddElement(seg);
-                  }
+            Segment* seg = measure->undoGetSegment(st, tick);
             rest->setParent(seg);
 #endif
             undoAddCR(rest, measure, tick);

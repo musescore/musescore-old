@@ -26,7 +26,6 @@
 
 Volta* Score::searchVolta(int tick) const
       {
-      Measure* fm = firstMeasure();
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             foreach(Spanner* e, m->spannerFor()) {
                   if (e->type() != VOLTA)

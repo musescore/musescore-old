@@ -39,6 +39,7 @@
 #include "stafftype.h"
 #include "undo.h"
 #include "stem.h"
+#include "page.h"
 
 //---------------------------------------------------------
 //   DurationElement
@@ -186,6 +187,21 @@ QPointF ChordRest::pagePos() const
       if (system == 0)
             return QPointF();
       qreal yp = y() + system->staff(staffIdx())->y() + system->y();
+      return QPointF(pageX(), yp);
+      }
+
+//---------------------------------------------------------
+//   canvasPos
+//---------------------------------------------------------
+
+QPointF ChordRest::canvasPos() const
+      {
+      if (parent() == 0)
+            return pos();
+      System* system = measure()->system();
+      if (system == 0 || system->page() == 0)
+            return QPointF();
+      qreal yp = y() + system->staff(staffIdx())->y() + system->y() + system->page()->y();
       return QPointF(pageX(), yp);
       }
 
@@ -713,11 +729,7 @@ Element* ChordRest::drop(const DropData& data)
 
                   // TODO: insert automatically in all staves?
 
-                  Segment* seg = m->findSegment(SegBreath, tick());
-                  if (seg == 0) {
-                        seg = new Segment(m, SegBreath, tick());
-                        score()->undoAddElement(seg);
-                        }
+                  Segment* seg = m->undoGetSegment(SegBreath, tick());
                   b->setParent(seg);
                   score()->undoAddElement(b);
                   }
@@ -735,11 +747,7 @@ Element* ChordRest::drop(const DropData& data)
                         return m->drop(data);
                         }
 
-                  Segment* seg = m->findSegment(SegBarLine, tick());
-                  if (seg == 0) {
-                        seg = new Segment(m, SegBarLine, tick());
-                        score()->undoAddElement(seg);
-                        }
+                  Segment* seg = m->undoGetSegment(SegBarLine, tick());
                   bl->setParent(seg);
                   score()->undoAddElement(bl);
                   }

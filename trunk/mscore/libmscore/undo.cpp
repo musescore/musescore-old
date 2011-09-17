@@ -397,11 +397,7 @@ void Score::undoChangeKeySig(Staff* ostaff, int tick, KeySigEvent st)
                   printf("measure for tick %d not found!\n", tick);
                   continue;
                   }
-            Segment* s = measure->findSegment(SegKeySig, tick);
-            if (!s) {
-                  s = new Segment(measure, SegKeySig, tick);
-                  score->undoAddElement(s);
-                  }
+            Segment* s   = measure->undoGetSegment(SegKeySig, tick);
             int staffIdx = score->staffIdx(staff);
             int track    = staffIdx * VOICES;
             KeySig* ks   = static_cast<KeySig*>(s->element(track));

@@ -216,6 +216,7 @@ class Measure : public MeasureBase {
       int repeatCount() const         { return _repeatCount; }
       void setRepeatCount(int val)    { _repeatCount = val; }
 
+      Segment* undoGetSegment(SegmentType st, int tick);
       Segment* getSegment(Element* el, int tick);
       Segment* getSegment(SegmentType st, int tick);
       Segment* getSegment(SegmentType st, int tick, int gl);

@@ -738,9 +738,9 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                   continue;
                   }
 
-            KeySig* keysig  = 0;
-            Clef*   hasClef = 0;
-            int strack      = i * VOICES;
+            KeySig* keysig = 0;
+            Clef*   clef   = 0;
+            int strack     = i * VOICES;
 
             // we assume that keysigs and clefs are only in the first
             // track (voice 0) of a staff
@@ -764,9 +764,9 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                               keysig->setMag(staff->mag());
                               break;
                         case CLEF:
-                              hasClef = static_cast<Clef*>(el);
-                              hasClef->setMag(staff->mag());
-                              hasClef->setSmall(false);
+                              clef = static_cast<Clef*>(el);
+                              clef->setMag(staff->mag());
+                              clef->setSmall(false);
                               break;
                         case TIMESIG:
                               el->setMag(staff->mag());
@@ -793,45 +793,35 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                   keysig->setTrack(i * VOICES);
                   keysig->setGenerated(true);
                   keysig->setMag(staff->mag());
-                  Segment* seg = m->getSegment(keysig, tick);
-                  seg->add(keysig);
-                  m->setDirty();
+                  Segment* seg = m->undoGetSegment(SegKeySig, tick);
+                  keysig->setParent(seg);
+                  undoAddElement(keysig);
                   }
-            else if (!needKeysig && keysig) {
-                  int track = keysig->track();
-                  Segment* seg = keysig->segment();
-                  seg->setElement(track, 0);    // TODO: delete element
-                  m->setDirty();
-                  }
+            else if (!needKeysig && keysig)
+                  undoRemoveElement(keysig);
             bool needClef = isFirstSystem || styleB(ST_genClef);
             if (needClef) {
-                  if (!hasClef) {
+                  if (!clef) {
                         //
                         // create missing clef
                         //
-                        hasClef = new Clef(this);
-                        hasClef->setClefType(staff->clefTypeList(tick));
-                        hasClef->setTrack(i * VOICES);
-                        // set first clef as "not generated" so it will be
-                        // saved in score file
-                        hasClef->setGenerated(tick != 0);
-                        hasClef->setSmall(false);
-                        hasClef->setMag(staff->mag());
-                        Segment* s = m->getSegment(hasClef, tick);
-                        s->add(hasClef);
-                        m->setDirty();
+                        clef = new Clef(this);
+                        clef->setClefType(staff->clefTypeList(tick));
+                        clef->setTrack(i * VOICES);
+                        clef->setGenerated(true);
+                        clef->setSmall(false);
+                        clef->setMag(staff->mag());
+
+                        Segment* s = m->undoGetSegment(SegClef, tick);
+                        clef->setParent(s);
+                        undoAddElement(clef);
                         }
-                  if (hasClef->generated())
-                        hasClef->setClefType(staff->clefTypeList(tick));
+                  if (clef->generated())
+                        clef->setClefType(staff->clefTypeList(tick));
                   }
             else {
-                  if (hasClef && hasClef->generated()) {
-                        int track = hasClef->track();
-                        Segment* seg = hasClef->segment();
-                        seg->setElement(track, 0);
-                        m->setDirty();
-                        delete hasClef;
-                        }
+                  if (clef && clef->generated())
+                        undoRemoveElement(clef);
                   }
             ++i;
             }
@@ -959,7 +949,6 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
                   //
                   // remove generated elements
                   //    assume: generated elements are only living in voice 0
-                  //    TODO: check if removed elements can be deleted
                   //
                   for (Segment* seg = m->first(); seg; seg = seg->next()) {
                         if (seg->subtype() == SegEndBarLine)
@@ -971,7 +960,7 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
                                     continue;
                               if (el->generated()) {
                                     if (!isFirstMeasure || (seg->subtype() == SegTimeSigAnnounce))
-                                          seg->setElement(track, 0);
+                                          undoRemoveElement(el);
                                     }
                               qreal staffMag = staff(staffIdx)->mag();
                               if (el->type() == CLEF) {
@@ -1021,7 +1010,6 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
       //
       //    hide empty staves
       //
-//      bool showChanged = false;
       int staves = _staves.size();
       int staffIdx = 0;
       foreach (Staff* staff, _staves) {
@@ -1048,7 +1036,6 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
                   }
 
             if (oldShow != s->show()) {
-//                  showChanged = true;
                   foreach (MeasureBase* mb, system->measures()) {
                         if (mb->type() != MEASURE)
                               continue;
@@ -1173,7 +1160,6 @@ void Score::remove(Element* el)
 
 void Score::reLayout(Measure* m)
       {
-//      _needLayout = true;
       startLayout = m;
       }
 
@@ -1303,7 +1289,6 @@ void Score::layoutFingering(Fingering* f)
       bool below   = (n > 1) && (staff->rstaff() == n-1);
 
       f->layout();
-//      QRectF r = f->abbox();
       qreal x = 0.0;
       qreal y = 0.0;
       qreal headWidth = note->headWidth();
@@ -1397,7 +1382,7 @@ QList<System*> Score::layoutSystemRow(qreal rowWidth,
                         }
                   if (showCourtesySig) {
                         // if due, create a new courtesy time signature for each staff
-                        s  = m->getSegment(SegTimeSigAnnounce, tick);
+                        s  = m->undoGetSegment(SegTimeSigAnnounce, tick);
                         int nstaves = Score::nstaves();
                         for (int track = 0; track < nstaves * VOICES; track += VOICES) {
                               TimeSig* nts = static_cast<TimeSig*>(tss->element(track));
@@ -1409,7 +1394,8 @@ QList<System*> Score::layoutSystemRow(qreal rowWidth,
                                     ts->setTrack(track);
                                     ts->setGenerated(true);
                                     ts->setMag(ts->staff()->mag());
-                                    s->add(ts);
+                                    ts->setParent(s);
+                                    undoAddElement(ts);
                                     }
                               ts->setFrom(nts);
                               needRelayout = true;
@@ -1435,7 +1421,7 @@ QList<System*> Score::layoutSystemRow(qreal rowWidth,
 
                               if (key1 != key2 && showCourtesySig) {
                                     hasCourtesyKeysig = true;
-                                    s  = m->getSegment(SegKeySigAnnounce, tick);
+                                    s  = m->undoGetSegment(SegKeySigAnnounce, tick);
                                     int track = staffIdx * VOICES;
                                     if (!s->element(track)) {
                                           KeySig* ks = new KeySig(this);
@@ -1443,8 +1429,8 @@ QList<System*> Score::layoutSystemRow(qreal rowWidth,
                                           ks->setTrack(track);
                                           ks->setGenerated(true);
                                           ks->setMag(staff->mag());
-                                          s->add(ks);
-                                          needRelayout = true;
+                                          ks->setParent(s);
+                                          undoAddElement(ks);
                                           }
                                     // change bar line to qreal bar line
                                     m->setEndBarLineType(DOUBLE_BAR, true);
@@ -1473,7 +1459,7 @@ QList<System*> Score::layoutSystemRow(qreal rowWidth,
                                                 continue;   // this key change has court. sig turned off
                                           }
 
-                                    s  = m->getSegment(SegClef, tick);
+                                    s = m->undoGetSegment(SegClef, tick);
                                     int track = staffIdx * VOICES;
                                     if (!s->element(track)) {
                                           c = new Clef(this);
@@ -1482,8 +1468,8 @@ QList<System*> Score::layoutSystemRow(qreal rowWidth,
                                           c->setGenerated(true);
                                           c->setSmall(true);
                                           c->setMag(staff->mag());
-                                          s->add(c);
-                                          needRelayout = true;
+                                          c->setParent(s);
+                                          undoAddElement(c);
                                           }
                                     }
                               }

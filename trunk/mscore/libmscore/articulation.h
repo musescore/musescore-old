@@ -87,6 +87,7 @@ class Articulation : public Element {
       int relVelocity() const;
 
       virtual QPointF pagePos() const;      ///< position in page coordinates
+      virtual QPointF canvasPos() const;
 
       bool up() const                       { return _up; }
       void setUp(bool val)                  { _up = val;  }

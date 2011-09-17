@@ -453,6 +453,7 @@ Element* FretDiagram::drop(const DropData& data)
 
 void FretDiagram::scanElements(void* data, void (*func)(void*, Element*), bool all)
       {
+      Q_UNUSED(all);
       func(data, this);
       if (_harmony)
             func(data, _harmony);
