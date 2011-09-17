@@ -404,6 +404,8 @@ void Slur::computeBezier(SlurSegment* ss)
       QPointF p4(c2, -shoulderH);
 
       qreal w = (score()->styleS(ST_SlurMidWidth).val() - score()->styleS(ST_SlurEndWidth).val()) * _spatium;
+      if (((c2 - c1) / _spatium) <= _spatium)
+            w *= .5;
       QPointF th(0.0, w);    // thickness of slur
 
       QPointF p3o = t.map(ss->ups[GRIP_BEZIER1].off * _spatium);
@@ -635,10 +637,10 @@ void Slur::slurPos(SlurPos* sp)
       Note* note1 = _up ? sc->upNote() : sc->downNote();
       Note* note2 = _up ? ec->upNote() : ec->downNote();
 
-      sp->p1      = sc->pagePos();
-      sp->p2      = ec->pagePos();
       sp->system1 = sc->measure()->system();
       sp->system2 = ec->measure()->system();
+      sp->p1      = sc->pagePos() - sp->system1->pagePos();
+      sp->p2      = ec->pagePos() - sp->system2->pagePos();
 
       qreal xo, yo;
 
@@ -650,34 +652,25 @@ void Slur::slurPos(SlurPos* sp)
       //    horizontal: middle of note head
       //    vertical:   _spatium * .4 above/below note head
       //
-      qreal hw  = note1->headWidth();
-      qreal hh  = note1->headHeight();
+      qreal hw   = note1->headWidth();
       qreal __up = _up ? -1.0 : 1.0;
 
       //------p1
-      xo = hw * .5;
-      yo = 0.0;
-
       bool stemPos = false;   // p1 starts at chord stem side
+      yo = note1->yPos() + _spatium * .9 * __up;
+      xo = hw * .5;
 
-      yo = note1->yPos() + (hh * .5 + _spatium * .4) * __up;
       if (stem1) {
-            // bool startIsGrace = sc->noteType() != NOTE_NORMAL;
-
             Beam* beam1 = sc->beam();
             if (beam1 && (beam1->elements().back() != sc) && (sc->up() == _up)) {
                   qreal sh = stem1->height() + _spatium;
-                  if (_up)
-                        yo = sc->downNote()->yPos() - sh;
-                  else
-                        yo = sc->upNote()->yPos() + sh;
-                  xo = stem1->pos().x();
-                  stemPos = true;
+                  yo       = sc->downNote()->yPos() + sh * __up;
+                  xo       = stem1->pos().x();
+                  stemPos  = true;
                   }
             else {
                   if (sc->up() && _up)
-                        xo = note1->headWidth() + _spatium * .3;
-
+                        xo = hw + _spatium * .3;
                   //
                   // handle case: stem up   - stem down
                   //              stem down - stem up
@@ -685,7 +678,9 @@ void Slur::slurPos(SlurPos* sp)
                   if ((sc->up() != ec->up()) && (sc->up() == _up)) {
                         Note* n1  = sc->up() ? sc->downNote() : sc->upNote();
                         Note* n2  = ec->up() ? ec->downNote() : ec->upNote();
-                        qreal yd = n2->yPos() - n1->yPos();
+                        qreal yd  = n2->yPos() - n1->yPos();
+
+                        yd *= .5;
 
                         qreal sh = stem1->height();    // limit y move
                         if (yd > 0.0) {
@@ -700,8 +695,9 @@ void Slur::slurPos(SlurPos* sp)
                         if ((_up && (yd < -_spatium)) || (!_up && (yd > _spatium)))
                               yo += yd;
                         }
-                  else if (sc->up() != _up)
+                  else if (sc->up() != _up) {
                         yo = fixArticulations(yo, sc, __up);
+                        }
                   }
             }
 
@@ -709,9 +705,8 @@ void Slur::slurPos(SlurPos* sp)
 
       //------p2
       xo = hw * .5;
-      yo = 0.0;
+      yo = note2->yPos() + _spatium * .9 * __up;
 
-      yo = note2->yPos() + (hh * .5 + _spatium * .4) * __up;
       if (stem2) {
             Beam* beam2 = ec->beam();
             if ((stemPos && (sc->up() == ec->up()))
@@ -740,6 +735,8 @@ void Slur::slurPos(SlurPos* sp)
                   Note* n2 = ec->up() ? ec->downNote() : ec->upNote();
                   qreal yd = n2->yPos() - n1->yPos();
 
+                  yd *= .5;
+
                   qreal mh = stem2->height();    // limit y move
                   if (yd > 0.0) {
                         if (yd > mh)
@@ -758,8 +755,6 @@ void Slur::slurPos(SlurPos* sp)
             }
 
       sp->p2 += QPointF(xo, yo);
-      sp->p1 -= sp->system1->pagePos();
-      sp->p2 -= sp->system2->pagePos();
       }
 
 //---------------------------------------------------------

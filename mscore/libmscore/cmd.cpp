@@ -1829,11 +1829,7 @@ printf("cannot make gap in staff %d at tick %d\n", staffIdx, dst->tick());
                               sp->read(eee);
                               int tick = curTick - tickStart + dstTick;
                               Measure* m = tick2measure(tick);
-                              Segment* segment = m->findSegment(SegChordRest, tick);
-                              if (segment == 0) {
-                                    segment = new Segment(m, SegChordRest, tick);
-                                    undoAddElement(segment);
-                                    }
+                              Segment* segment = m->undoGetSegment(SegChordRest, tick);
                               sp->setStartElement(segment);
                               sp->setParent(segment);
                               undoAddElement(sp);
@@ -1844,11 +1840,7 @@ printf("cannot make gap in staff %d at tick %d\n", staffIdx, dst->tick());
                               if (e) {
                                     int tick = curTick - tickStart + dstTick;
                                     Measure* m = tick2measure(tick);
-                                    Segment* seg = m->findSegment(SegChordRest, tick);
-                                    if (seg == 0) {
-                                          seg = new Segment(m, SegChordRest, tick);
-                                          undoAddElement(seg);
-                                          }
+                                    Segment* seg = m->undoGetSegment(SegChordRest, tick);
                                     e->setEndElement(seg);
                                     seg->addSpannerBack(e);
                                     if (e->type() == OTTAVA) {
@@ -1901,11 +1893,7 @@ printf("cannot make gap in staff %d at tick %d\n", staffIdx, dst->tick());
 
                               int tick = curTick - tickStart + dstTick;
                               Measure* m = tick2measure(tick);
-                              Segment* seg = m->findSegment(SegChordRest, tick);
-                              if (seg == 0) {
-                                    seg = new Segment(m, SegChordRest, tick);
-                                    undoAddElement(seg);
-                                    }
+                              Segment* seg = m->undoGetSegment(SegChordRest, tick);
                               harmony->setParent(seg);
                               undoAddElement(harmony);
                               }
@@ -1924,11 +1912,7 @@ printf("cannot make gap in staff %d at tick %d\n", staffIdx, dst->tick());
 
                               int tick = curTick - tickStart + dstTick;
                               Measure* m = tick2measure(tick);
-                              Segment* seg = m->findSegment(SegChordRest, tick);
-                              if (seg == 0) {
-                                    seg = new Segment(m, SegChordRest, tick);
-                                    undoAddElement(seg);
-                                    }
+                              Segment* seg = m->undoGetSegment(SegChordRest, tick);
                               e->setParent(seg);
                               e->read(eee);
 
@@ -1942,12 +1926,9 @@ printf("cannot make gap in staff %d at tick %d\n", staffIdx, dst->tick());
                               Measure* m = tick2measure(tick);
                               if (m->tick() && m->tick() == tick)
                                     m = m->prevMeasure();
-                              Segment* segment = m->findSegment(SegClef, tick);
-                              if (!segment) {
-                                    segment = new Segment(m, SegClef, tick);
-                                    undoAddElement(segment);
-                                    }
-                              segment->add(clef);
+                              Segment* segment = m->undoGetSegment(SegClef, tick);
+                              clef->setParent(segment);
+                              undoAddElement(clef);
                               }
                         else if (tag == "Breath") {
                               Breath* breath = new Breath(this);
@@ -1955,12 +1936,9 @@ printf("cannot make gap in staff %d at tick %d\n", staffIdx, dst->tick());
                               breath->setTrack(dstStaffIdx * VOICES);
                               int tick = curTick - tickStart + dstTick;
                               Measure* m = tick2measure(tick);
-                              Segment* segment = m->findSegment(SegBreath, tick);
-                              if (!segment) {
-                                    segment = new Segment(m, SegBreath, tick);
-                                    undoAddElement(segment);
-                                    }
-                              segment->add(breath);
+                              Segment* segment = m->undoGetSegment(SegBreath, tick);
+                              breath->setParent(segment);
+                              undoAddElement(breath);
                               }
                         else if (tag == "BarLine") {
                               // ignore bar line

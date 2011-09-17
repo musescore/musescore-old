@@ -10,5 +10,9 @@
       <name>tie</name>
       <path>/home/ws/mscore/mscore/trunk/mscore/test/ntest/tie.mscx</path>
       </Score>
+    <Score>
+      <name>slur</name>
+      <path>/home/ws/mscore/mscore/trunk/mscore/test/ntest/slur.mscx</path>
+      </Score>
     </Album>
   </museScore>

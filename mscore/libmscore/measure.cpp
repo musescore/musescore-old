@@ -665,6 +665,20 @@ Segment* Measure::findSegment(SegmentType st, int t)
       }
 
 //---------------------------------------------------------
+//   undoGetSegment
+//---------------------------------------------------------
+
+Segment* Measure::undoGetSegment(SegmentType type, int tick)
+      {
+      Segment* s = findSegment(type, tick);
+      if (s == 0) {
+            s = new Segment(this, type, tick);
+            score()->undoAddElement(s);
+            }
+      return s;
+      }
+
+//---------------------------------------------------------
 //   getSegment
 //---------------------------------------------------------
 
@@ -1193,11 +1207,7 @@ void Measure::cmdAddStaves(int sStaff, int eStaff, bool createRest)
                   Rest* rest = new Rest(score(), Duration(Duration::V_MEASURE));
                   rest->setTrack(i * VOICES);
                   rest->setDuration(len());
-                  Segment* s = findSegment(SegChordRest, tick());
-                  if (s == 0) {
-                        s = new Segment(this, SegChordRest, tick());
-                        score()->undoAddElement(s);
-                        }
+                  Segment* s = undoGetSegment(SegChordRest, tick());
                   rest->setParent(s);
                   score()->undoAddElement(rest);
                   }
@@ -1564,11 +1574,7 @@ printf("drop staffList\n");
                   // add repeat measure
                   //
 
-                  Segment* seg = findSegment(SegChordRest, tick());
-                  if (seg == 0) {
-                        seg = new Segment(this, SegChordRest, tick());
-                        _score->undoAddElement(seg);
-                        }
+                  Segment* seg = undoGetSegment(SegChordRest, tick());
                   RepeatMeasure* rm = new RepeatMeasure(_score);
                   rm->setTrack(staffIdx * VOICES);
                   rm->setParent(seg);
@@ -1672,11 +1678,7 @@ void Measure::adjustToLen(int ol, int nl)
                         if ((n > 0) && (rFlag || voice == 0)) {
                               // add rest to measure
                               int rtick = tick() + nl - n;
-                              Segment* seg = findSegment(SegChordRest, rtick);
-                              if (seg == 0) {
-                                    seg = new Segment(this, SegChordRest, rtick);
-                                    score()->undoAddElement(seg);
-                                    }
+                              Segment* seg = undoGetSegment(SegChordRest, rtick);
                               Duration d;
                               d.setVal(n);
                               rest = new Rest(score(), d);
