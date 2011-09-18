@@ -326,7 +326,6 @@
         </note>
       </measure>
     <measure number="7">
-      <print new-system="yes"/>
       <direction placement="above">
         <direction-type>
           <metronome parentheses="no">

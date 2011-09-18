@@ -66,14 +66,14 @@
       </score-part>
     </part-list>
   <part id="P1">
-    <measure number="1" width="103.75">
+    <measure number="1" width="110.65">
       <print>
         <system-layout>
           <system-margins>
             <left-margin>68.54</left-margin>
-            <right-margin>1024.55</right-margin>
+            <right-margin>1017.65</right-margin>
             </system-margins>
-          <top-system-distance>180.00</top-system-distance>
+          <top-system-distance>170.00</top-system-distance>
           </system-layout>
         </print>
       <attributes>

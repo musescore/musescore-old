@@ -432,7 +432,6 @@
         </note>
       </measure>
     <measure number="15">
-      <print new-system="yes"/>
       <harmony print-frame="no">
         <root>
           <root-step>C</root-step>
@@ -829,7 +828,6 @@
         </note>
       </measure>
     <measure number="30">
-      <print new-system="yes"/>
       <harmony print-frame="no">
         <root>
           <root-step>C</root-step>

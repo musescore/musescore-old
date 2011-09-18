@@ -2575,7 +2575,7 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
                   // element is above the staff if center of bbox is above center of staff
                   printf("directionTag()  center diff=%g\n", el->y() + el->height() / 2 - bb.y() - bb.height() / 2);
 */
-                  if (el->type() == HAIRPIN || el->type() == OTTAVA || el->type() == TEXTLINE) {
+                  if (el->type() == HAIRPIN || el->type() == OTTAVA || el->type() == PEDAL || el->type() == TEXTLINE) {
                         SLine* sl = static_cast<SLine*>(el);
                         if (sl->spannerSegments().size() > 0) {
                               LineSegment* seg = (LineSegment*)sl->spannerSegments().at(0);
@@ -3863,13 +3863,6 @@ foreach(Element* el, *(score->gel())) {
                               }
 
                           xml.etag();
-                          } // if (!converterMode ...
-
-                      else {
-                          if (currentSystem == NewSystem)
-                              xml.tagE("print new-system=\"yes\"");
-                          else if (currentSystem == NewPage)
-                              xml.tagE("print new-page=\"yes\"");
                           } // if (!converterMode ...
                       } // if (currentSystem ...
 

@@ -1664,21 +1664,22 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
 
 static void setSLinePlacement(SLine* sli, float s, const QString pl, bool hasYoff, qreal yoff)
       {
-      printf("setSLinePlacement s=%g pl='%s' hasy=%d yoff=%g\n",
+      printf("setSLinePlacement s=%g pl='%s' hasy=%d yoff=%g",
              s, qPrintable(pl), hasYoff, yoff
             );
       float offs = 0.0;
       if (hasYoff) offs = yoff;
       else {
             if (pl == "above")
-                  offs = -3;
+                  offs = 0;
             else if (pl == "below")
-                  offs = 8;
+                  offs = 10;
             else
                   printf("setSLinePlacement invalid placement '%s'\n", qPrintable(pl));
             }
       LineSegment* ls = (LineSegment*)sli->spannerSegments().front();
       ls->setUserOff(QPointF(0, offs * s));
+      printf(" -> offs*s=%g\n", offs * s);
       }
 
 //---------------------------------------------------------
@@ -2123,9 +2124,16 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               pedal = new Pedal(score);
                               pedal->setTrack((staff + rstaff) * VOICES);
                               if (placement == "") placement = "below";
+                              /* original:
                               setSLinePlacement(pedal,
                                           score->spatium(), placement,
                                           hasYoffset, yoffset);
+                              */
+                              // TODO LVIFIX: following is a hack, as it overrules the MusicXML offset:
+                              // but for the time being it places pedal marks at a reasonable location
+                              setSLinePlacement(pedal,
+                                          score->spatium(), placement,
+                                          true, 0);
                               spanners[pedal] = QPair<int, int>(tick, -1);
                               printf("wedge pedal=%p inserted at first tick %d\n", pedal, tick);
                               }
@@ -3329,13 +3337,15 @@ printf("use Tie %p\n", tie);
       if (!fermataType.isEmpty()) {
             Articulation* f = new Articulation(score);
             if (fermataType == "upright") {
-                  f->setUp(true);
                   f->setSubtype(Articulation_Fermata);
+                  f->setUp(true);
+                  f->setAnchor(A_TOP_STAFF);
                   cr->add(f);
                   }
             else if (fermataType == "inverted") {
-                  f->setUp(false);
                   f->setSubtype(Articulation_Fermata);
+                  f->setUp(false);
+                  f->setAnchor(A_BOTTOM_STAFF);
                   f->setUserYoffset(5.3); // force below note (albeit by brute force)
                   cr->add(f);
                   }
@@ -3389,13 +3399,15 @@ printf("use Tie %p\n", tie);
       if (!strongAccentType.isEmpty()) {
             Articulation* na = new Articulation(score);
             if (strongAccentType == "up") {
-                  na->setUp(true);
                   na->setSubtype(Articulation_Marcato);
+                  na->setUp(true);
+                  na->setAnchor(A_TOP_STAFF);
                   cr->add(na);
                   }
             else if (strongAccentType == "down") {
-                  na->setUp(false);
                   na->setSubtype(Articulation_Marcato);
+                  na->setUp(false);
+                  na->setAnchor(A_BOTTOM_STAFF);
                   cr->add(na);
                   }
             else {
