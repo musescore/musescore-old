@@ -1,3 +1,9 @@
+18.sep (lv)
+      - fix MusicXML import of inverted fermata and marcato
+      - fix vertical placement of SLines on MusicXML import
+      - don't export system and page breaks when running the MusicXML autotest
+        (make several testcases independent of precise layout)
+      - updated MusicXML testfiles correspondingly
 15.sep (ws)
       - fix #12012: Undo doesn't work after changing value of grace note
       - fix #11778: Stroke on multiple acciaccatura doesn't appear after save

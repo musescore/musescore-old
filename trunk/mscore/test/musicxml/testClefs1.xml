@@ -122,7 +122,6 @@
         </note>
       </measure>
     <measure number="6">
-      <print new-system="yes"/>
       <attributes>
         <clef>
           <sign>C</sign>
@@ -208,7 +207,6 @@
         </note>
       </measure>
     <measure number="11">
-      <print new-system="yes"/>
       <attributes>
         <clef>
           <sign>F</sign>
@@ -298,7 +296,6 @@
         </note>
       </measure>
     <measure number="16">
-      <print new-system="yes"/>
       <attributes>
         <clef>
           <sign>F</sign>
