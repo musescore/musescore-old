@@ -26,9 +26,17 @@ class MuseScoreView;
 class Painter;
 class ChordRest;
 
+//---------------------------------------------------------
+//   UP
+//---------------------------------------------------------
+
 struct UP {
       QPointF p;            // layout position relative to pos()
       QPointF off;          // user offset in spatium units
+
+      bool operator!=(const UP& up) const {
+            return p != up.p || off != up.off;
+            }
       };
 
 enum {
@@ -84,6 +92,9 @@ class SlurSegment : public SpannerSegment {
       void setSlurOffset(int i, const QPointF& val) { ups[i].off = val;  }
       QPointF slurOffset(int i) const               { return ups[i].off; }
       const struct UP* getUps(int idx) const        { return &ups[idx]; }
+
+      virtual bool isEdited(SpannerSegment*) const;
+
       friend class Tie;
       friend class Slur;
       };

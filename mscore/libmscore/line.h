@@ -36,7 +36,7 @@ class LineSegment : public SpannerSegment {
    protected:
       QPointF _p2;
       QPointF _userOff2;            // depends on spatium
-      QRectF r1, r2;
+//      QRectF r1, r2;
 
       virtual bool isEditable() const { return true; }
       virtual void editDrag(const EditData&);
@@ -61,6 +61,7 @@ class LineSegment : public SpannerSegment {
       virtual void toDefault();
       virtual void spatiumChanged(qreal, qreal);
       virtual QPointF pagePos() const;
+      virtual bool isEdited(SpannerSegment*) const;
 
       friend class SLine;
       };

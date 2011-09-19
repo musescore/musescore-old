@@ -124,7 +124,7 @@ void BspTree::clear()
 void BspTree::insert(const Element* element)
       {
       insertVisitor->item = element;
-      climbTree(insertVisitor, element->abbox());
+      climbTree(insertVisitor, element->pageBoundingRect());
       }
 
 //---------------------------------------------------------
@@ -134,7 +134,7 @@ void BspTree::insert(const Element* element)
 void BspTree::remove(const Element* element)
       {
       removeVisitor->item = element;
-      climbTree(removeVisitor, element->abbox());
+      climbTree(removeVisitor, element->pageBoundingRect());
       }
 
 //---------------------------------------------------------

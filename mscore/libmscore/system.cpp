@@ -653,7 +653,7 @@ void System::remove(Element* el)
             case VOLTA_SEGMENT:
             case SLUR_SEGMENT:
                   if (!_spannerSegments.removeOne(static_cast<SpannerSegment*>(el))) {
-                        printf("System::remove: %s not found, score %p\n", el->name(), el->score());
+                        printf("System::remove: %p(%s) not found, score %p\n", el, el->name(), el->score());
                         Q_ASSERT(score() == el->score());
                         }
                   break;
