@@ -1656,7 +1656,7 @@ void ChangeElement::flip()
             TempoText* t = static_cast<TempoText*>(oldElement);
             score->setTempo(t->segment(), t->tempo());
             }
-      ElementType t = newElement->type();
+/*      ElementType t = newElement->type();
       if (t == SLUR || t == TIE || t == HAIRPIN || t == OTTAVA || t == TRILL
          || t == TEXTLINE || t == VOLTA) {
             Spanner* np = static_cast<Spanner*>(newElement);
@@ -1670,7 +1670,7 @@ void ChangeElement::flip()
                         ss->system()->remove(ss);
                   }
             }
-
+  */
       if (newElement->isSegment()) {
 printf("ChangeElement:: spannerSegment %p -> %p\n", oldElement, newElement);
             SpannerSegment* os = static_cast<SpannerSegment*>(oldElement);

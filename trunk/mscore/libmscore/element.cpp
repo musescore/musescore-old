@@ -355,6 +355,20 @@ Element* Element::linkedClone()
       }
 
 //---------------------------------------------------------
+//   linkList
+//---------------------------------------------------------
+
+QList<Element*> Element::linkList() const
+      {
+      QList<Element*> el;
+      if (links())
+            el.append(*links());
+      else
+            el.append((Element*)this);
+      return el;
+      }
+
+//---------------------------------------------------------
 //   setPos
 //---------------------------------------------------------
 

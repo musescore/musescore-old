@@ -48,6 +48,20 @@ SlurSegment::SlurSegment(const SlurSegment& b)
       }
 
 //---------------------------------------------------------
+//   isEdited
+//---------------------------------------------------------
+
+bool SlurSegment::isEdited(SpannerSegment* ss) const
+      {
+      SlurSegment* seg = static_cast<SlurSegment*>(ss);
+      for (int i = 0; i < SLUR_GRIPS; ++i) {
+            if (ups[i] != seg->ups[i])
+                  return true;
+            }
+      return false;
+      }
+
+//---------------------------------------------------------
 //   move
 //---------------------------------------------------------
 

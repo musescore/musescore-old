@@ -34,8 +34,20 @@ LineSegment::LineSegment(const LineSegment& s)
       {
       _p2       = s._p2;
       _userOff2 = s._userOff2;
-      r1        = s.r1;
-      r2        = s.r2;
+//      r1        = s.r1;
+//      r2        = s.r2;
+      }
+
+//---------------------------------------------------------
+//   isEdited
+//---------------------------------------------------------
+
+bool LineSegment::isEdited(SpannerSegment* ss) const
+      {
+      LineSegment* ls = static_cast<LineSegment*>(ss);
+      if (pos() != ls->pos() || pos2() != ls->pos2())
+            return true;
+      return false;
       }
 
 //---------------------------------------------------------

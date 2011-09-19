@@ -323,6 +323,7 @@ class ScoreView : public QWidget, public MuseScoreView {
       void zoom(qreal _mag, const QPointF& pos);
       void contextPopup(QMouseEvent* ev);
       void setOrigEditObject(Element* e) { origEditObject = e; }
+      Element* getOrigEditObject()       { return origEditObject; }
       void editKey(QKeyEvent*);
       void dragScoreView(QMouseEvent* ev);
       void dragNoteEntry(QMouseEvent* ev);

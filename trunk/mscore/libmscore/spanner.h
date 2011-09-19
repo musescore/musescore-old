@@ -45,6 +45,7 @@ class SpannerSegment : public Element {
       virtual void startEdit(MuseScoreView*, const QPointF&);
       virtual void endEdit();
       virtual bool isEditable() const { return true; }
+      virtual bool isEdited(SpannerSegment*) const = 0;
       };
 
 //---------------------------------------------------------
@@ -103,6 +104,7 @@ class Spanner : public Element {
       virtual void setSelected(bool f);
       void setYoff(qreal d) { _yoffset = d;        }
       qreal yoff() const    { return _yoffset;     }
+      virtual bool isEdited(Spanner* originalSpanner) const;
       };
 #endif
 

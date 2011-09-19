@@ -164,6 +164,7 @@ class Element {
       Element &operator=(const Element&);
       virtual Element* clone() const = 0;
       virtual Element* linkedClone();
+      QList<Element*> linkList() const;
 
       void linkTo(Element*);
       int lid() const                         { return _links ? _links->lid() : 0; }

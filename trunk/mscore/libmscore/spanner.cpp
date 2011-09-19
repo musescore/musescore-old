@@ -125,6 +125,7 @@ void Spanner::remove(Element* e)
 
 void Spanner::scanElements(void* data, void (*func)(void*, Element*), bool all)
       {
+      Q_UNUSED(all)
       foreach(SpannerSegment* seg, segments)
             seg->scanElements(data, func, true);
       }
@@ -161,3 +162,22 @@ void Spanner::setSelected(bool f)
       Element::setSelected(f);
       }
 
+//---------------------------------------------------------
+//   isEdited
+//    compare edited spanner with origSpanner
+//---------------------------------------------------------
+
+bool Spanner::isEdited(Spanner* originalSpanner) const
+      {
+      if (startElement() != originalSpanner->startElement()
+         || endElement() != originalSpanner->endElement()) {
+            return true;
+            }
+      if (spannerSegments().size() != originalSpanner->spannerSegments().size())
+            return true;
+      for (int i = 0; i < segments.size(); ++i) {
+            if (segments[i]->isEdited(originalSpanner->segments[i]))
+                  return true;
+            }
+      return false;
+      }

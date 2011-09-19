@@ -182,12 +182,13 @@ class EditTransition : public QMouseEventTransition
 
    protected:
       virtual bool eventTest(QEvent* event) {
-            if (!QMouseEventTransition::eventTest(event))
+            if (!QMouseEventTransition::eventTest(event) || canvas->getOrigEditObject())
                   return false;
             QMouseEvent* me = static_cast<QMouseEvent*>(static_cast<QStateMachine::WrappedEvent*>(event)->event());
             QPointF p = canvas->toLogical(me->pos());
             Element* e = canvas->elementNear(p);
-            canvas->setOrigEditObject(e);
+            if (e)
+                  canvas->setOrigEditObject(e);
             return e && e->isEditable();
             }
    public:
@@ -1249,6 +1250,19 @@ void ScoreView::updateAll()
 //   startEdit
 //---------------------------------------------------------
 
+void ScoreView::startEdit(Element* e)
+      {
+      if (e->type() == TBOX)
+            e = static_cast<TBox*>(e)->getText();
+      origEditObject = e;
+      sm->postEvent(new CommandEvent("edit"));
+      _score->end();
+      }
+
+//---------------------------------------------------------
+//   startEdit
+//---------------------------------------------------------
+
 void ScoreView::startEdit(Element* element, int startGrip)
       {
       origEditObject = element;
@@ -1266,11 +1280,11 @@ void ScoreView::startEdit(Element* element, int startGrip)
 void ScoreView::startEdit()
       {
       mscore->setEditState();
-      if (!score()->undo()->active())
-            score()->startCmd();
       score()->setLayoutAll(false);
       curElement  = 0;
       setFocus();
+      if (!score()->undo()->active())
+            score()->startCmd();
       if (origEditObject->isText()) {
             editObject = origEditObject;
             editObject->startEdit(this, startMove);
@@ -1283,33 +1297,16 @@ void ScoreView::startEdit()
             connect(t->doc(), SIGNAL(undoCommandAdded()), SLOT(textUndoLevelAdded()));
             }
       else if (origEditObject->isSegment()) {
-            SpannerSegment* ols = (SpannerSegment*)origEditObject;
-            Spanner* ohp        = ols->spanner();
-
-            QList<Element*> spl;
-            if (ohp->links())
-                  spl.append(*ohp->links());
-            else
-                  spl.append(ohp);
-
-            foreach(Element* e, spl) {
-                  Spanner* sp  = static_cast<Spanner*>(e);
-                  Spanner* csp = static_cast<Spanner*>(sp->clone());
-                  if (sp == ohp) {
-                        int idx = sp->spannerSegments().indexOf(ols);
-                        editObject = csp->spannerSegments().at(idx);
-                        }
-                  _score->undoChangeElement(sp, csp);
-                  }
+            SpannerSegment* ss = (SpannerSegment*)origEditObject;
+            Spanner* spanner   = ss->spanner();
+            Spanner* clone     = static_cast<Spanner*>(spanner->clone());
+            int idx            = spanner->spannerSegments().indexOf(ss);
+            editObject         = clone->spannerSegments()[idx];
             editObject->startEdit(this, startMove);
+            _score->undoChangeElement(spanner, clone);
             }
       else {
-            QList<Element*> el;
-            if (origEditObject->links())
-                  el.append(*origEditObject->links());
-            else
-                  el.append(origEditObject);
-            foreach(Element* e, el) {
+            foreach(Element* e, origEditObject->linkList()) {
                   Element* ce = e->clone();
                   if (e == origEditObject) {
                         editObject = ce;
@@ -1322,6 +1319,64 @@ void ScoreView::startEdit()
       curGrip = -1;
       updateGrips();
       score()->end();
+      }
+
+//---------------------------------------------------------
+//   endEdit
+//---------------------------------------------------------
+
+void ScoreView::endEdit()
+      {
+      setDropTarget(0);
+      setEditText(0);
+      if (!editObject)
+	      return;
+
+      _score->addRefresh(editObject->canvasBoundingRect());
+      for (int i = 0; i < grips; ++i)
+            score()->addRefresh(grip[i]);
+
+      editObject->endEdit();
+      if (editObject->isText()) {
+            if (textPalette) {
+                  textPalette->hide();
+                  mscore->textTools()->kbAction()->setChecked(false);
+                  }
+            mscore->textTools()->hide();
+
+            Text* t = static_cast<Text*>(editObject);
+            if (textUndoLevel)
+                  _score->undo()->push(new EditText(t, textUndoLevel));
+            disconnect(t->doc(), SIGNAL(undoCommandAdded()), this, SLOT(textUndoLevelAdded()));
+            }
+      else if (editObject->isSegment()) {
+            Spanner* spanner  = static_cast<SpannerSegment*>(editObject)->spanner();
+            Spanner* original = static_cast<SpannerSegment*>(origEditObject)->spanner();
+
+            if (!spanner->isEdited(original)) {
+                  _score->undo()->current()->removeChild();
+                  _score->select(editObject);
+                  delete origEditObject;
+                  origEditObject = 0;
+                  }
+            }
+
+      _score->addRefresh(editObject->canvasBoundingRect());
+
+      int tp = editObject->type();
+      if (tp == LYRICS)
+            lyricsEndEdit();
+      else if (tp == HARMONY)
+            harmonyEndEdit();
+      _score->endCmd();
+      mscore->endCmd();
+      if (dragElement && (dragElement != editObject)) {
+            curElement = dragElement;
+            _score->select(curElement);
+            _score->end();
+            }
+      editObject = 0;
+      grips      = 0;
       }
 
 //---------------------------------------------------------
@@ -3252,10 +3307,12 @@ void ScoreView::cmd(const QAction* a)
             }
       else if (cmd == "delete") {
             // no delete in edit mode except for slurs/ties
-            if (!editMode() || editObject->type() == SLUR_SEGMENT)
-                  _score->cmdDeleteSelection();
-            if (editMode() && editObject->type() == SLUR_SEGMENT)
+            if (editMode() && editObject->type() == SLUR_SEGMENT) {
                   sm->postEvent(new CommandEvent("escape"));   // leave edit mode
+                  qApp->processEvents();
+                  }
+            _score->startCmd();
+            _score->cmdDeleteSelection();
             }
       else
             _score->cmd(a);
@@ -3276,65 +3333,6 @@ void ScoreView::showOmr(bool flag)
             t->setCurrent(t->currentIndex());
       else
             printf("view not found\n");
-      }
-
-//---------------------------------------------------------
-//   startEdit
-//---------------------------------------------------------
-
-void ScoreView::startEdit(Element* e)
-      {
-      if (e->type() == TBOX)
-            e = static_cast<TBox*>(e)->getText();
-      origEditObject = e;
-      sm->postEvent(new CommandEvent("edit"));
-      _score->end();
-      }
-
-//---------------------------------------------------------
-//   endEdit
-//---------------------------------------------------------
-
-void ScoreView::endEdit()
-      {
-      setDropTarget(0);
-      setEditText(0);
-      if (!editObject)
-	      return;
-
-      _score->addRefresh(editObject->canvasBoundingRect());
-      for (int i = 0; i < grips; ++i)
-            score()->addRefresh(grip[i]);
-
-      editObject->endEdit();
-      if (editObject->isText()) {
-            if (textPalette) {
-                  textPalette->hide();
-                  mscore->textTools()->kbAction()->setChecked(false);
-                  }
-            mscore->textTools()->hide();
-
-            Text* t = static_cast<Text*>(editObject);
-            if (textUndoLevel)
-                  _score->undo()->push(new EditText(t, textUndoLevel));
-            disconnect(t->doc(), SIGNAL(undoCommandAdded()), this, SLOT(textUndoLevelAdded()));
-            }
-      _score->addRefresh(editObject->canvasBoundingRect());
-
-      int tp = editObject->type();
-      if (tp == LYRICS)
-            lyricsEndEdit();
-      else if (tp == HARMONY)
-            harmonyEndEdit();
-      _score->endCmd();
-      mscore->endCmd();
-      if (dragElement && (dragElement != editObject)) {
-            curElement = dragElement;
-            _score->select(curElement);
-            _score->end();
-            }
-      editObject = 0;
-      grips      = 0;
       }
 
 //---------------------------------------------------------
