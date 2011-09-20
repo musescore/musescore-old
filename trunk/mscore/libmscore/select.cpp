@@ -260,18 +260,33 @@ void Selection::updateSelectedElements()
                   foreach(Spanner* sp, s->spannerFor()) {
                         if (sp->track() < startTrack || sp->track() >= endTrack)
                               continue;
-                        Segment* s2 = static_cast<Segment*>(sp->endElement());
-                        if (s2->tick() < _endSegment->tick())
-                              add(sp);
+                        if (sp->endElement()->type() == SEGMENT) {
+                              Segment* s2 = static_cast<Segment*>(sp->endElement());
+                              if (s2->tick() < _endSegment->tick())
+                                    add(sp);
+                              }
+                        else {
+                              printf("1spanner element type %s\n", sp->endElement()->name());
+                              }
                         }
                   }
             for (Measure* m = _score->firstMeasure(); m; m = m->nextMeasure()) {
                   foreach(Spanner* sp, m->spannerFor()) {
                         if (sp->track() < startTrack || sp->track() >= endTrack)
                               continue;
-                        Segment* s2 = static_cast<Segment*>(sp->endElement());
-                        if (s2->tick() < _endSegment->tick())
-                              add(sp);
+                        if (sp->endElement()->type() == SEGMENT) {
+                              Segment* s2 = static_cast<Segment*>(sp->endElement());
+                              if (s2->tick() < _endSegment->tick())
+                                    add(sp);
+                              }
+                        else if (sp->endElement()->type() == MEASURE) {
+                              Measure* s2 = static_cast<Measure*>(sp->endElement());
+                              if (s2->tick() < _endSegment->tick())
+                                    add(sp);
+                              }
+                        else {
+                              printf("2spanner element type %s\n", sp->endElement()->name());
+                              }
                         }
                   }
             }
