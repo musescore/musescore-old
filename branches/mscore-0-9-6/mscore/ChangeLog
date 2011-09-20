@@ -1,3 +1,6 @@
+20.sep (la)
+      - fix pedal ending in midi export
+        http://musescore.org/en/node/12642#comment-42743
 6.sep (la)
       - fix 12218: shaped noteheads aren't shared
       - fix 12419: Ledger lines are still visible for invisible notes

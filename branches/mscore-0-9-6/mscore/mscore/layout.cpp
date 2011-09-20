@@ -222,7 +222,6 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
             int ticks    = chord->tickLen();
             int headGroup     = note->headGroup();      // symbol number or note head
             int headType     =  (note->headType() == HEAD_AUTO) ? note->chord()->duration().headType() : note->headType() - 1;
-            //int headType     =  note->chord()->duration().headType();
 
             bool conflict = (qAbs(ll - line) < 2) && (move1 == move);
             bool sameHead = (ll == line) && (headGroup == lastHeadGroup) && (headType == lastHeadType);
