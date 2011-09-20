@@ -189,12 +189,12 @@ void Navigator::rescale()
       else {
             if (scrollArea->horizontalScrollBar()->isVisible()) {
                   setFixedWidth(w1);
-                  printf("  visible %d > %d\n", w2, w);
+                  // printf("  visible %d > %d\n", w2, w);
                   m = m2;
                   }
             else {
                   setFixedWidth(w1);
-                  printf("  invisible %d < %d\n", w1, w);
+                  // printf("  invisible %d < %d\n", w1, w);
                   m = m1;
                   }
             }
