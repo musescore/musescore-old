@@ -1,8 +1,10 @@
-20.sep
+20.sep (ws)
       - fix 12644: Bar and beat count on status bar doesn't update during playback
       - fix #12639: line dragged from palette are duplicated at the same
         position for linked part
       - fix #12638: Delete tie or slur in linked parts doesn't work
+       (la)
+      - fix #12648: Quitting, then cancelling to an unsaved score quits MuseScore
 18.sep (lv)
       - fix MusicXML import of inverted fermata and marcato
       - fix vertical placement of SLines on MusicXML import
