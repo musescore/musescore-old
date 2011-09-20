@@ -1382,25 +1382,38 @@ void ScoreView::endEdit()
                   // to linked elements
                   //
                   foreach(Element* e, *le) {
-                        if (e == spanner) {
+                        if (e == spanner)
                               continue;
-                              }
                         Spanner* lspanner = static_cast<Spanner*>(e);
                         Element* lse = 0;
                         Element* lee = 0;
-                        foreach(Element* e, *se->links()) {
-                              if (e->score() == lspanner->score()
-                                 && e->staffIdx() == se->staffIdx()) {
-                                    lse = e;
-                                    break;
+                        if (se->type() == NOTE || se->type() == CHORD || se->type() == MEASURE) {
+                              foreach(Element* e, *se->links()) {
+                                    if (e->score() == lspanner->score()
+                                       && e->staffIdx() == se->staffIdx()) {
+                                          lse = e;
+                                          break;
+                                          }
+                                    }
+                              foreach(Element* e, *ee->links()) {
+                                    if (e->score() == lspanner->score()
+                                       && e->staffIdx() == ee->staffIdx()) {
+                                          lee = e;
+                                          break;
+                                          }
                                     }
                               }
-                        foreach(Element* e, *ee->links()) {
-                              if (e->score() == lspanner->score()
-                                 && e->staffIdx() == ee->staffIdx()) {
-                                    lee = e;
-                                    break;
-                                    }
+                        else if (se->type() == SEGMENT) {
+                              Score* score     = lspanner->score();
+                              Segment* segment = static_cast<Segment*>(se);
+                              int tick         = segment->tick();
+                              Measure* m       = score->tick2measure(tick);
+                              lse              = m->findSegment(segment->segmentType(), tick);
+
+                              segment          = static_cast<Segment*>(ee);
+                              tick             = segment->tick();
+                              m                = score->tick2measure(tick);
+                              lee              = m->findSegment(segment->segmentType(), tick);
                               }
                         Q_ASSERT(lse && lee);
                         score()->undo()->push(new ChangeSpannerAnchor(lspanner, lse, lee));
