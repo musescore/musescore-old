@@ -1331,8 +1331,10 @@ void ScoreView::endEdit()
       {
       setDropTarget(0);
       setEditText(0);
-      if (!editObject)
+      if (!editObject) {
+            origEditObject = 0;
 	      return;
+            }
 
       _score->addRefresh(editObject->canvasBoundingRect());
       for (int i = 0; i < grips; ++i)
@@ -1435,8 +1437,9 @@ void ScoreView::endEdit()
             _score->select(curElement);
             _score->end();
             }
-      editObject = 0;
-      grips      = 0;
+      editObject     = 0;
+      origEditObject = 0;
+      grips          = 0;
       }
 
 //---------------------------------------------------------
