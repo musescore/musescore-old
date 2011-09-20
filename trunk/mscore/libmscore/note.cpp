@@ -376,6 +376,10 @@ void Note::add(Element* e)
       		setTieFor(tie);
                   if (tie->endNote())
                         tie->endNote()->setTieBack(tie);
+                  foreach(SpannerSegment* ss, tie->spannerSegments()) {
+                        if (ss->system())
+                              ss->system()->add(ss);
+                        }
                   }
                   break;
             case ACCIDENTAL:
@@ -419,6 +423,11 @@ void Note::remove(Element* e)
                   setTieFor(0);
                   if (tie->endNote())
                         tie->endNote()->setTieBack(0);
+                  foreach(SpannerSegment* ss, tie->spannerSegments()) {
+                        Q_ASSERT(ss->spanner() == tie);
+                        if (ss->system())
+                              ss->system()->remove(ss);
+                        }
                   }
                   break;
 

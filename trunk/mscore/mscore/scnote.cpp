@@ -134,7 +134,7 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                         QColor c = qscriptvalue_cast<QColor>(context->argument(0));
                         Score* score = note->score();
                         if (score)
-                              score->undo()->push(new ChangeColor(note, c));
+                              score->undo()->push(new ChangeProperty(note, P_COLOR, c));
                         else
                               note->setColor(c);
                         return context->engine()->undefinedValue();

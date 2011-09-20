@@ -133,9 +133,9 @@ class Segment : public Element {
       QList<Spanner*> spannerFor() const { return _spannerFor;  }
       QList<Spanner*> spannerBack() const { return _spannerBack;       }
       void addSpannerBack(Spanner* e)     { _spannerBack.append(e);    }
-      void removeSpannerBack(Spanner* e)  { _spannerBack.removeOne(e); }
+      bool removeSpannerBack(Spanner* e)  { return _spannerBack.removeOne(e); }
       void addSpannerFor(Spanner* e)      { _spannerFor.append(e);    }
-      void removeSpannerFor(Spanner* e)   { _spannerFor.removeOne(e); }
+      bool removeSpannerFor(Spanner* e)   { return _spannerFor.removeOne(e); }
 
       const QList<Element*>& annotations() const  { return _annotations;  }
       void removeAnnotation(Element* e)           { _annotations.removeOne(e); }

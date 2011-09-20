@@ -4094,8 +4094,10 @@ void MuseScore::cmd(QAction* a)
             printf("no score\n");
             return;
             }
-      if (sc->flags & A_CMD)
-            cs->startCmd();
+      if (sc->flags & A_CMD) {
+            if (!cv->editMode())
+                  cs->startCmd();
+            }
       cmd(a, cmdn);
       if (lastShortcut->flags & A_CMD)
             cs->endCmd();

@@ -687,14 +687,12 @@ void ChordRest::addSlurBack(Slur* s)
 
 void ChordRest::removeSlurFor(Slur* s)
       {
-      int idx = _slurFor.indexOf(s);
-      if (idx < 0) {
+      if (!_slurFor.removeOne(s)) {
             printf("ChordRest<%p>::removeSlurFor(): %p not found\n", this, s);
             foreach(Slur* s, _slurFor)
                   printf("  %p\n", s);
-            return;
+            abort();
             }
-      _slurFor.removeAt(idx);
       }
 
 //---------------------------------------------------------
@@ -703,14 +701,11 @@ void ChordRest::removeSlurFor(Slur* s)
 
 void ChordRest::removeSlurBack(Slur* s)
       {
-      int idx = _slurBack.indexOf(s);
-      if (idx < 0) {
+      if (!_slurBack.removeOne(s)) {
             printf("ChordRest<%p>::removeSlurBack(): %p not found\n", this, s);
             foreach(Slur* s, _slurBack)
                   printf("  %p\n", s);
-            return;
             }
-      _slurBack.removeAt(idx);
       }
 
 //---------------------------------------------------------

@@ -1462,6 +1462,8 @@ void Score::cmdDeleteSelection()
             // deleteItem modifies selection().elements() list,
             // so we need a local copy:
             QList<Element*> el(selection().elements());
+            if (el.isEmpty())
+                  printf("...nothing selected\n");
             foreach(Element* e, el)
                   deleteItem(e);
             deselectAll();
@@ -1582,7 +1584,7 @@ void Score::colorItem(Element* element)
 
       foreach(Element* e, selection().elements()) {
             if (e->color() != c) {
-                  undo()->push(new ChangeColor(e, c));
+                  undo()->push(new ChangeProperty(e, P_COLOR, c));
                   e->setGenerated(false);
                   refresh |= e->abbox();
                   if (e->type() == BAR_LINE) {
@@ -1595,7 +1597,7 @@ void Score::colorItem(Element* element)
                         }
                   }
             }
-      _selection.deselectAll();
+      deselectAll();
       }
 
 //---------------------------------------------------------

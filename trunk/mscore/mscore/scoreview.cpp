@@ -78,6 +78,7 @@
 #include "libmscore/stafftext.h"
 #include "libmscore/keysig.h"
 #include "libmscore/timesig.h"
+#include "libmscore/spanner.h"
 
 #include "navigator.h"
 
@@ -1300,6 +1301,7 @@ void ScoreView::startEdit()
             SpannerSegment* ss = (SpannerSegment*)origEditObject;
             Spanner* spanner   = ss->spanner();
             Spanner* clone     = static_cast<Spanner*>(spanner->clone());
+            clone->setLinks(spanner->links());
             int idx            = spanner->spannerSegments().indexOf(ss);
             editObject         = clone->spannerSegments()[idx];
             editObject->startEdit(this, startMove);
@@ -1354,10 +1356,55 @@ void ScoreView::endEdit()
             Spanner* original = static_cast<SpannerSegment*>(origEditObject)->spanner();
 
             if (!spanner->isEdited(original)) {
-                  _score->undo()->current()->removeChild();
+                  UndoStack* undo = _score->undo();
+                  undo->current()->unwind();
                   _score->select(editObject);
-                  delete origEditObject;
+                  _score->addRefresh(editObject->canvasBoundingRect());
+                  _score->addRefresh(origEditObject->canvasBoundingRect());
+                  _score->deselect(editObject);
+                  _score->select(origEditObject);
+                  delete spanner;
                   origEditObject = 0;
+                  editObject = 0;
+                  grips = 0;
+                  _score->endCmd();
+                  mscore->endCmd();
+                  return;
+                  }
+
+            // handle linked elements
+            LinkedElements* le = original->links();
+            Element* se = spanner->startElement();
+            Element* ee = spanner->endElement();
+            if (le && (se != original->startElement() || ee != original->endElement())) {
+                  //
+                  // apply anchor changes
+                  // to linked elements
+                  //
+                  foreach(Element* e, *le) {
+                        if (e == spanner) {
+                              continue;
+                              }
+                        Spanner* lspanner = static_cast<Spanner*>(e);
+                        Element* lse = 0;
+                        Element* lee = 0;
+                        foreach(Element* e, *se->links()) {
+                              if (e->score() == lspanner->score()
+                                 && e->staffIdx() == se->staffIdx()) {
+                                    lse = e;
+                                    break;
+                                    }
+                              }
+                        foreach(Element* e, *ee->links()) {
+                              if (e->score() == lspanner->score()
+                                 && e->staffIdx() == ee->staffIdx()) {
+                                    lee = e;
+                                    break;
+                                    }
+                              }
+                        Q_ASSERT(lse && lee);
+                        score()->undo()->push(new ChangeSpannerAnchor(lspanner, lse, lee));
+                        }
                   }
             }
 
@@ -3310,8 +3357,8 @@ void ScoreView::cmd(const QAction* a)
             if (editMode() && editObject->type() == SLUR_SEGMENT) {
                   sm->postEvent(new CommandEvent("escape"));   // leave edit mode
                   qApp->processEvents();
+                  _score->startCmd();     // start new command
                   }
-            _score->startCmd();
             _score->cmdDeleteSelection();
             }
       else
@@ -4412,6 +4459,9 @@ void ScoreView::cmdAddSlur(Note* firstNote, Note* lastNote)
       slur->setEndElement(cr2);
       slur->setParent(0);
       _score->undoAddElement(slur);
+
+      _score->endCmd();
+      _score->startCmd();
 
       slur->layout();
       if (cr1 == cr2) {

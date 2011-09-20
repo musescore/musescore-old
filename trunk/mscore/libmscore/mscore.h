@@ -223,10 +223,11 @@ enum NoteHeadType {
 
 //---------------------------------------------------------
 //   Anchor
+//    used for Spanner elements
 //---------------------------------------------------------
 
 enum Anchor {
-      ANCHOR_SEGMENT, ANCHOR_MEASURE
+      ANCHOR_SEGMENT, ANCHOR_MEASURE, ANCHOR_CHORD, ANCHOR_NOTE
       };
 
 //---------------------------------------------------------
