@@ -1168,6 +1168,7 @@ void Seq::heartBeat()
 
       int tick = cs->repeatList()->utick2tick(guiPos.key());
       mscore->currentScoreView()->moveCursor(tick);
+      mscore->setPos(tick);
       if (pp)
             pp->heartBeat(tick, playPos.key());
 
