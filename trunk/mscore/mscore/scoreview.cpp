@@ -1305,7 +1305,9 @@ void ScoreView::startEdit()
             int idx            = spanner->spannerSegments().indexOf(ss);
             editObject         = clone->spannerSegments()[idx];
             editObject->startEdit(this, startMove);
-            _score->undoChangeElement(spanner, clone);
+            _score->undoRemoveElement(spanner);
+            _score->undoAddElement(clone);
+            // _score->undoChangeElement(spanner, clone);
             }
       else {
             foreach(Element* e, origEditObject->linkList()) {
