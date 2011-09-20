@@ -113,6 +113,15 @@ struct EditData {
       };
 
 //---------------------------------------------------------
+//   Element Properties
+//---------------------------------------------------------
+
+enum {
+      P_COLOR, P_VISIBLE
+      };
+
+
+//---------------------------------------------------------
 ///   \brief base class of score layout elements
 ///
 ///   The Element class is the virtual base class of all
@@ -137,7 +146,7 @@ class Element {
       int _track;                 ///< staffIdx * VOICES + voice
                                   ///< -1 if this is a system element
       QColor _color;
-      qreal _mag;                ///< standard magnification (derived value)
+      qreal _mag;                 ///< standard magnification (derived value)
 
       QPointF _pos;               ///< Reference position, relative to _parent.
       QPointF _userOff;           ///< offset from normal layout position:
@@ -390,6 +399,8 @@ class Element {
       bool isSegment() const           { return flag(ELEMENT_SEGMENT);     }
       uint tag() const                 { return _tag;                      }
       void setTag(uint val)            { _tag = val;                       }
+      virtual QVariant getProperty(int propertyId) const;
+      virtual void setProperty(int propertyId, const QVariant&);
       };
 
 //---------------------------------------------------------

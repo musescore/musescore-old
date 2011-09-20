@@ -303,9 +303,8 @@ void Selection::setRange(Segment* a, Segment* b, int c, int d)
 static void collectSelectedElements(void* data, Element* e)
       {
       QList<const Element*>* l = static_cast<QList<const Element*>*>(data);
-      if (e->selected()) {
+      if (e->selected())
             l->append(e);
-            }
       }
 
 void Selection::searchSelectedElements()
@@ -313,6 +312,17 @@ void Selection::searchSelectedElements()
       _el.clear();
       _score->scanElements(&_el, collectSelectedElements, true);
       updateState();
+      }
+
+//---------------------------------------------------------
+//   reconstructElementList
+//    reconstruct list of selected elements after
+//    undo/redo
+//---------------------------------------------------------
+
+void Selection::reconstructElementList()
+      {
+      searchSelectedElements();
       }
 
 //---------------------------------------------------------
@@ -526,16 +536,5 @@ bool Selection::canCopy() const
                   return false;
             }
       return true;
-      }
-
-//---------------------------------------------------------
-//   reconstructElementList
-//    reconstruct list of selected elements after
-//    undo/redo
-//---------------------------------------------------------
-
-void Selection::reconstructElementList()
-      {
-      searchSelectedElements();
       }
 

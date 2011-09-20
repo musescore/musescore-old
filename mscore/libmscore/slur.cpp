@@ -883,6 +883,7 @@ Slur::Slur(Score* s)
       {
       setId(-1);
       _track2 = 0;
+      setAnchor(ANCHOR_CHORD);
       }
 
 //---------------------------------------------------------
@@ -1183,6 +1184,7 @@ void Slur::setTrack(int n)
 Tie::Tie(Score* s)
    : SlurTie(s)
       {
+      setAnchor(ANCHOR_NOTE);
       }
 
 //---------------------------------------------------------
@@ -1289,23 +1291,27 @@ void Tie::layout()
       unsigned nsegs  = sysIdx2 - sysIdx1 + 1;
       unsigned onsegs = spannerSegments().size();
 
-      if (nsegs != onsegs) {
-            if (nsegs > onsegs) {
-                  int n = nsegs - onsegs;
-                  for (int i = 0; i < n; ++i) {
-                        SlurSegment* s = new SlurSegment(score());
-                        add(s);
+      if (nsegs > onsegs) {
+            for (unsigned i = onsegs; i < nsegs; ++i) {
+                  SlurSegment* s;
+                  if (!delSegments.isEmpty()) {
+                        s = delSegments.dequeue();
                         }
-                  }
-            else {
-                  int n = onsegs - nsegs;
-                  for (int i = 0; i < n; ++i) {
-                        /* LineSegment* seg = */ takeLastSegment();
-                        // delete seg;   // DEBUG: will be used later
+                  else {
+                        s = new SlurSegment(score());
                         }
+                  s->setTrack(track());
+                  add(s);
                   }
             }
-
+      else if (nsegs < onsegs) {
+            for (unsigned i = nsegs; i < onsegs; ++i) {
+                  SlurSegment* s = takeLastSegment();
+                  if (s->system())
+                        s->system()->remove(s);
+                  delSegments.enqueue(s);  // cannot delete: used in SlurSegment->edit()
+                  }
+            }
       int i = 0;
       for (uint ii = 0; ii < nsegs; ++ii) {
             System* system = (*systems)[sysIdx1++];

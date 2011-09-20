@@ -2328,8 +2328,8 @@ void Measure::scanElements(void* data, void (*func)(void*, Element*), bool all)
                         continue;
                   e->scanElements(data, func, all);
                   }
-            foreach(Spanner* e, s->spannerFor())
-                  e->scanElements(data,  func, all);
+//            foreach(Spanner* e, s->spannerFor())          collected in System
+//                  e->scanElements(data,  func, all);
             foreach(Element* e, s->annotations())
                   e->scanElements(data,  func, all);
             }

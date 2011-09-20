@@ -367,9 +367,14 @@ void Segment::addSpanner(Spanner* l)
 
 void Segment::removeSpanner(Spanner* l)
       {
-      static_cast<Segment*>(l->endElement())->removeSpannerBack(l);
-      if (!_spannerFor.removeOne(l))
-            printf("%p cannot remove spanner %p, size %d\n", this, l, _spannerFor.size());
+      if (!static_cast<Segment*>(l->endElement())->removeSpannerBack(l)) {
+            printf("Segment(%p): cannot remove spannerBack %s %p, size %d\n", this, l->name(), l, _spannerFor.size());
+            // abort();
+            }
+      if (!_spannerFor.removeOne(l)) {
+            printf("Segment(%p): cannot remove spannerFor %s %p, size %d\n", this, l->name(), l, _spannerFor.size());
+            // abort();
+            }
       }
 
 //---------------------------------------------------------

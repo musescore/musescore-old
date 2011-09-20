@@ -552,6 +552,8 @@ int System::y2staff(qreal y) const
 
 void System::add(Element* el)
       {
+//      printf("System::add: %s\n", el->name());
+
       el->setParent(this);
       switch(el->type()) {
             case INSTRUMENT_NAME:
@@ -598,6 +600,8 @@ void System::add(Element* el)
             case VOLTA_SEGMENT:
             case SLUR_SEGMENT:
                   {
+// printf("System::add: %p %s spanner %p %s\n", el, el->name(),
+//            ((SpannerSegment*)el)->spanner(), ((SpannerSegment*)el)->spanner()->name());
                   SpannerSegment* ss = static_cast<SpannerSegment*>(el);
                   if (!_spannerSegments.contains(ss))
                         _spannerSegments.append(ss);
@@ -618,6 +622,8 @@ void System::add(Element* el)
 
 void System::remove(Element* el)
       {
+//      printf("System::remove: %s\n", el->name());
+
       switch (el->type()) {
             case INSTRUMENT_NAME:
                   _staves[el->staffIdx()]->instrumentNames.removeOne(static_cast<InstrumentName*>(el));
@@ -652,6 +658,9 @@ void System::remove(Element* el)
             case TRILL_SEGMENT:
             case VOLTA_SEGMENT:
             case SLUR_SEGMENT:
+// printf("System::remove: %p %s spanner %p %s\n", el, el->name(),
+//            ((SpannerSegment*)el)->spanner(), ((SpannerSegment*)el)->spanner()->name());
+
                   if (!_spannerSegments.removeOne(static_cast<SpannerSegment*>(el))) {
                         printf("System::remove: %p(%s) not found, score %p\n", el, el->name(), el->score());
                         Q_ASSERT(score() == el->score());

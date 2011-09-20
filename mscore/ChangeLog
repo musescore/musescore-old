@@ -1,3 +1,5 @@
+20.sep
+      - fix #12638: Delete tie or slur in linked parts doesn't work
 18.sep (lv)
       - fix MusicXML import of inverted fermata and marcato
       - fix vertical placement of SLines on MusicXML import

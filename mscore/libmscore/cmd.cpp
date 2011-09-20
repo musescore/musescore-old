@@ -91,6 +91,7 @@ void Score::startCmd()
       if (undo()->active()) {
             // if (debugMode)
             fprintf(stderr, "Score::startCmd(): cmd already active\n");
+            abort();
             return;
             }
       undo()->beginMacro();
@@ -215,7 +216,6 @@ void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& /
                   return;
                   }
             spanner->setEndElement(ns);
-printf("cmdAddSpanner %p - %p   %p - %p\n", segment, ns, segment->measure(), ns->measure());
             }
       else {      // ANCHOR_MEASURE
             Measure* measure = segment->measure();

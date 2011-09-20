@@ -64,6 +64,7 @@
 #include "stafftype.h"
 #include "accidental.h"
 #include "layoutbreak.h"
+#include "spanner.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -110,7 +111,7 @@ void UndoCommand::undo()
       int n = childList.size();
       for (int i = n-1; i >= 0; --i) {
 #ifdef DEBUG_UNDO
-            printf("   undo<%s>\n", childList[i]->name());
+            printf("   undo<%s> %p\n", childList[i]->name(), childList[i]);
 #endif
             childList[i]->undo();
             }
@@ -125,7 +126,7 @@ void UndoCommand::redo()
       int n = childList.size();
       for (int i = 0; i < n; ++i) {
 #ifdef DEBUG_UNDO
-            printf("   redo<%s>\n", childList[i]->name());
+            printf("   redo<%s> %p\n", childList[i]->name(), childList[i]);
 #endif
             childList[i]->redo();
             }
@@ -213,12 +214,13 @@ void UndoStack::push(UndoCommand* cmd)
       if (!curCmd) {
             // this can happen for layout() outside of a command (load)
 //            printf("UndoStack:push(): no active command, UndoStack %p\n", this);
+
             cmd->redo();
             delete cmd;
             return;
             }
 #ifdef DEBUG_UNDO
-      printf("UndoStack::push <%s>\n", cmd->name());
+      printf("UndoStack::push <%s> %p\n", cmd->name(), cmd);
 #endif
       curCmd->appendChild(cmd);
       cmd->redo();
@@ -257,6 +259,9 @@ void UndoStack::undo()
       {
       if (curIdx) {
             --curIdx;
+            Q_ASSERT(curIdx >= 0);
+            if (debugMode)
+                  printf("--undo index %d\n", curIdx);
             list[curIdx]->undo();
             }
       }
@@ -268,6 +273,8 @@ void UndoStack::undo()
 void UndoStack::redo()
       {
       if (canRedo()) {
+            if (debugMode)
+                  printf("--redo index %d\n", curIdx);
             list[curIdx++]->redo();
             }
       }
@@ -769,7 +776,7 @@ void Score::undoChangeBracketSpan(Staff* staff, int column, int span)
 
 void Score::undoChangeInvisible(Element* e, bool v)
       {
-      undo()->push(new ChangeInvisible(e, v));
+      undo()->push(new ChangeProperty(e, P_VISIBLE, v));
       e->setGenerated(false);
       }
 
@@ -817,6 +824,7 @@ void Score::undoAddElement(Element* element)
                   ne = element->linkedClone();
                   ne->setScore(score);
                   ne->setSelected(false);
+                  ne->setTrack(staffIdx * VOICES + element->voice());
                   }
             if (element->type() == ARTICULATION) {
                   Articulation* a  = static_cast<Articulation*>(element);
@@ -889,6 +897,35 @@ void Score::undoAddElement(Element* element)
                   nslur->setParent(0);
                   undo()->push(new AddElement(nslur));
                   }
+            else if (element->type() == TIE) {
+                  Tie* tie       = static_cast<Tie*>(element);
+                  Note* n1       = tie->startNote();
+                  Note* n2       = tie->endNote();
+                  Chord* cr1     = n1->chord();
+                  Chord* cr2     = n2->chord();
+                  Segment* s1    = cr1->segment();
+                  Segment* s2    = cr2->segment();
+                  Measure* nm1   = score->tick2measure(s1->tick());
+                  Measure* nm2   = score->tick2measure(s2->tick());
+                  Segment* ns1   = nm1->findSegment(s1->segmentType(), s1->tick());
+                  Segment* ns2   = nm2->findSegment(s2->segmentType(), s2->tick());
+                  Chord* c1      = static_cast<Chord*>(ns1->element((staffIdx - cr1->staffMove()) * VOICES + cr1->voice()));
+                  Chord* c2      = static_cast<Chord*>(ns2->element((staffIdx - cr2->staffMove()) * VOICES + cr2->voice()));
+                  Note* nn1      = c1->findNote(n1->pitch());
+                  Note* nn2      = c2->findNote(n2->pitch());
+                  Tie* ntie      = static_cast<Tie*>(ne);
+                  QList<SpannerSegment*>& segments = ntie->spannerSegments();
+                  foreach(SpannerSegment* segment, segments)
+                              delete segment;
+                  segments.clear();
+                  ntie->setTrack(c1->track());
+                  ntie->setStartNote(nn1);
+                  ntie->setEndNote(nn2);
+                  undo()->push(new AddElement(ntie));
+                  score->updateAccidentals(nm1, staffIdx);
+                  if (nm1 != nm2)
+                        score->updateAccidentals(nm2, staffIdx);
+                  }
             else if (element->type() == INSTRUMENT_CHANGE) {
                   InstrumentChange* is = static_cast<InstrumentChange*>(element);
                   Segment* s1    = is->segment();
@@ -930,35 +967,6 @@ void Score::undoAddElement(Element* element)
                   nv->setEndElement(nm2);
                   nv->setParent(nm1);
                   undo()->push(new AddElement(nv));
-                  }
-            else if (element->type() == TIE) {
-                  Tie* tie       = static_cast<Tie*>(element);
-                  Note* n1       = tie->startNote();
-                  Note* n2       = tie->endNote();
-                  Chord* cr1     = n1->chord();
-                  Chord* cr2     = n2->chord();
-                  Segment* s1    = cr1->segment();
-                  Segment* s2    = cr2->segment();
-                  Measure* nm1   = score->tick2measure(s1->tick());
-                  Measure* nm2   = score->tick2measure(s2->tick());
-                  Segment* ns1   = nm1->findSegment(s1->segmentType(), s1->tick());
-                  Segment* ns2   = nm2->findSegment(s2->segmentType(), s2->tick());
-                  Chord* c1      = static_cast<Chord*>(ns1->element((staffIdx - cr1->staffMove()) * VOICES + cr1->voice()));
-                  Chord* c2      = static_cast<Chord*>(ns2->element((staffIdx - cr2->staffMove()) * VOICES + cr2->voice()));
-                  Note* nn1      = c1->findNote(n1->pitch());
-                  Note* nn2      = c2->findNote(n2->pitch());
-                  Tie* ntie      = static_cast<Tie*>(ne);
-                  QList<SpannerSegment*>& segments = ntie->spannerSegments();
-                  foreach(SpannerSegment* segment, segments)
-                              delete segment;
-                  segments.clear();
-                  ntie->setTrack(c1->track());
-                  ntie->setStartNote(nn1);
-                  ntie->setEndNote(nn2);
-                  undo()->push(new AddElement(ntie));
-                  score->updateAccidentals(nm1, staffIdx);
-                  if (nm1 != nm2)
-                        score->updateAccidentals(nm2, staffIdx);
                   }
             else if (element->type() == NOTE) {
                   Note* note       = static_cast<Note*>(element);
@@ -1061,15 +1069,8 @@ void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
 
 void Score::undoRemoveElement(Element* element)
       {
-      QList<Element*> elements;
-      LinkedElements* le = element->links();
-      if (le)
-            elements.append(*le);
-      else
-            elements.append(element);
-
       QList<Segment*> segments;
-      foreach(Element* e, elements) {
+      foreach(Element* e, element->linkList()) {
             undo()->push(new RemoveElement(e));
             if (e->type() == KEYSIG)                  // TODO: should be done in undo()/redo()
                   e->score()->cmdUpdateNotes();
@@ -1437,35 +1438,6 @@ void SortStaves::undo()
       }
 
 //---------------------------------------------------------
-//   ChangeInvisible
-//---------------------------------------------------------
-
-void ChangeInvisible::flip()
-      {
-      bool oval = element->visible();
-      element->setVisible(invisible);
-      invisible = oval;
-      element->score()->addRefresh(element->canvasBoundingRect());
-      }
-
-//---------------------------------------------------------
-//   ChangeColor
-//---------------------------------------------------------
-
-ChangeColor::ChangeColor(Element* e, QColor c)
-      {
-      element = e;
-      color   = c;
-      }
-
-void ChangeColor::flip()
-      {
-      QColor c = element->color();
-      element->setColor(color);
-      color = c;
-      }
-
-//---------------------------------------------------------
 //   ChangePitch
 //---------------------------------------------------------
 
@@ -1629,6 +1601,10 @@ ChangeElement::ChangeElement(Element* oe, Element* ne)
 
 void ChangeElement::flip()
       {
+//      printf("ChangeElement::flip() %s(%p) -> %s(%p) links %d\n",
+//         oldElement->name(), oldElement, newElement->name(), newElement,
+//         oldElement->links() ? oldElement->links()->size() : -1);
+
       LinkedElements* links = oldElement->links();
       if (links) {
             links->removeOne(oldElement);
@@ -1647,7 +1623,9 @@ void ChangeElement::flip()
       else {
             oldElement->parent()->change(oldElement, newElement);
             }
+
       qSwap(oldElement, newElement);
+
       if (newElement->type() == KEYSIG)
             newElement->staff()->setUpdateKeymap(true);
       else if (newElement->type() == DYNAMIC)
@@ -1656,23 +1634,7 @@ void ChangeElement::flip()
             TempoText* t = static_cast<TempoText*>(oldElement);
             score->setTempo(t->segment(), t->tempo());
             }
-/*      ElementType t = newElement->type();
-      if (t == SLUR || t == TIE || t == HAIRPIN || t == OTTAVA || t == TRILL
-         || t == TEXTLINE || t == VOLTA) {
-            Spanner* np = static_cast<Spanner*>(newElement);
-            Spanner* op = static_cast<Spanner*>(oldElement);
-            foreach(SpannerSegment* ss, op->spannerSegments()) {
-                  if (ss->system())
-                        ss->system()->add(ss);
-                  }
-            foreach(SpannerSegment* ss, np->spannerSegments()) {
-                  if (ss->system())
-                        ss->system()->remove(ss);
-                  }
-            }
-  */
       if (newElement->isSegment()) {
-printf("ChangeElement:: spannerSegment %p -> %p\n", oldElement, newElement);
             SpannerSegment* os = static_cast<SpannerSegment*>(oldElement);
             SpannerSegment* ns = static_cast<SpannerSegment*>(newElement);
             if (os->system())
@@ -3178,7 +3140,7 @@ void ChangeArticulation::flip()
       }
 
 //---------------------------------------------------------
-//   flip
+//   ChangeDurationType::flip
 //---------------------------------------------------------
 
 void ChangeDurationType::flip()
@@ -3186,5 +3148,77 @@ void ChangeDurationType::flip()
       Duration type = cr->durationType();
       cr->setDurationType(t);
       t = type;
+      }
+
+//---------------------------------------------------------
+//   ChangeSpannerAnchor::flip
+//---------------------------------------------------------
+
+void ChangeSpannerAnchor::flip()
+      {
+      Element* se = spanner->startElement();
+      Element* ee = spanner->endElement();
+
+      printf("ChangeSpannerAnchor:flip() spanner(%p--%p) %s  cr(%p) -> cr(%p)\n",
+         spanner->score(), spanner, spanner->name(),
+         spanner->startElement(), startElement);
+
+      switch(spanner->anchor()) {
+            case ANCHOR_CHORD:
+                  {
+                  Q_ASSERT(spanner->type() == SLUR);
+                  Slur* slur = static_cast<Slur*>(spanner);
+                  slur->startChord()->removeSlurFor(slur);
+                  spanner->setStartElement(startElement);
+                  static_cast<ChordRest*>(startElement)->addSlurFor(slur);
+
+                  slur->endChord()->removeSlurBack(slur);
+                  spanner->setEndElement(endElement);
+                  static_cast<ChordRest*>(endElement)->addSlurBack(slur);
+                  }
+                  break;
+
+            case ANCHOR_MEASURE:
+                  Q_ASSERT(spanner->startElement()->type() == MEASURE);
+                  static_cast<Measure*>(spanner->startElement())->removeSpannerFor(spanner);
+                  spanner->setStartElement(startElement);
+                  static_cast<Measure*>(startElement)->addSpannerFor(spanner);
+
+                  Q_ASSERT(spanner->endElement()->type() == MEASURE);
+                  static_cast<Measure*>(spanner->endElement())->removeSpannerBack(spanner);
+                  spanner->setEndElement(endElement);
+                  static_cast<Measure*>(endElement)->addSpannerBack(spanner);
+                  break;
+
+            case ANCHOR_SEGMENT:
+                  Q_ASSERT(spanner->startElement()->type() == SEGMENT);
+                  static_cast<Segment*>(spanner->startElement())->removeSpannerFor(spanner);
+                  spanner->setStartElement(startElement);
+                  static_cast<Segment*>(startElement)->addSpannerFor(spanner);
+
+                  Q_ASSERT(spanner->endElement()->type() == SEGMENT);
+                  static_cast<Segment*>(spanner->endElement())->removeSpannerBack(spanner);
+                  spanner->setEndElement(endElement);
+                  static_cast<Segment*>(endElement)->addSpannerBack(spanner);
+                  break;
+
+            default:
+                  printf("ChangeSpannerAnchor: not implemented for %s\n", spanner->name());
+                  break;
+            }
+      startElement = se;
+      endElement   = ee;
+      spanner->score()->setLayoutAll(true);
+      }
+
+//---------------------------------------------------------
+//   ChangeProperty::flip
+//---------------------------------------------------------
+
+void ChangeProperty::flip()
+      {
+      QVariant v = element->getProperty(id);
+      element->setProperty(id, property);
+      property = v;
       }
 

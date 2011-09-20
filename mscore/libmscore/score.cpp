@@ -1416,16 +1416,18 @@ void Score::addElement(Element* element)
             add(element);
       else
             element->parent()->add(element);
-      switch(element->type()) {
+
+      switch(et) {
             case VOLTA:
             case TRILL:
             case PEDAL:
             case TEXTLINE:
             case HAIRPIN:
-            case TIE:
+//            case TIE:
                   {
                   Spanner* spanner = static_cast<Spanner*>(element);
                   foreach(SpannerSegment* ss, spanner->spannerSegments()) {
+                        Q_ASSERT(ss->spanner() == spanner);
                         if (ss->system())
                               ss->system()->add(ss);
                         }
@@ -1434,17 +1436,19 @@ void Score::addElement(Element* element)
 
             case SLUR:
                   {
-                  Slur* s = static_cast<Slur*>(element);
-                  foreach(SpannerSegment* ss, s->spannerSegments()) {
+                  Slur* slur = static_cast<Slur*>(element);
+                  foreach(SpannerSegment* ss, slur->spannerSegments()) {
+                        Q_ASSERT(ss->spanner() == slur);
                         if (ss->system())
                               ss->system()->add(ss);
                         }
-                  if (s->startElement())
-                        static_cast<ChordRest*>(s->startElement())->addSlurFor(s);
-                  if (s->endElement())
-                        static_cast<ChordRest*>(s->endElement())->addSlurBack(s);
+                  if (slur->startElement())
+                        static_cast<ChordRest*>(slur->startElement())->addSlurFor(slur);
+                  if (slur->endElement())
+                        static_cast<ChordRest*>(slur->endElement())->addSlurBack(slur);
                   }
                   break;
+
             case OTTAVA:
                   {
                   Ottava* o = static_cast<Ottava*>(element);
@@ -1465,6 +1469,7 @@ void Score::addElement(Element* element)
                   _playlistDirty = true;
                   }
                   break;
+
             case DYNAMIC:
                   layoutFlags |= LAYOUT_FIX_PITCH_VELO;
                   _playlistDirty = true;
@@ -1536,6 +1541,7 @@ void Score::removeElement(Element* element)
             addLayoutFlags(LAYOUT_FIX_TICKS);
             return;
             }
+
       if (et == BEAM)          // beam parent does not survive layout
             element->setParent(0);
 
@@ -1544,13 +1550,26 @@ void Score::removeElement(Element* element)
       else
             remove(element);
 
-      switch(element->type()) {
+      switch(et) {
+            case SLUR:
+                  {
+                  Slur* slur = static_cast<Slur*>(element);
+                  foreach(SpannerSegment* ss, slur->spannerSegments()) {
+                        Q_ASSERT(ss->spanner() == slur);
+                        if (ss->system())
+                              ss->system()->remove(ss);
+                        }
+                  static_cast<ChordRest*>(slur->startElement())->removeSlurFor(slur);
+                  static_cast<ChordRest*>(slur->endElement())->removeSlurBack(slur);
+                  }
+                  break;
+
             case VOLTA:
             case TRILL:
             case PEDAL:
             case TEXTLINE:
             case HAIRPIN:
-            case TIE:
+//            case TIE:
                   {
                   Spanner* spanner = static_cast<Spanner*>(element);
                   foreach(SpannerSegment* ss, spanner->spannerSegments()) {
@@ -1589,17 +1608,6 @@ void Score::removeElement(Element* element)
                   if (cr->beam())
                         cr->beam()->remove(cr);
                   // cr->setBeam(0);
-                  }
-                  break;
-            case SLUR:
-                  {
-                  Slur* s = static_cast<Slur*>(element);
-                  foreach(SpannerSegment* ss, s->spannerSegments()) {
-                        if (ss->system())
-                              ss->system()->remove(ss);
-                        }
-                  static_cast<ChordRest*>(s->startElement())->removeSlurFor(s);
-                  static_cast<ChordRest*>(s->endElement())->removeSlurBack(s);
                   }
                   break;
             case CLEF:
@@ -2463,48 +2471,6 @@ void Score::sortStaves(QList<int>& dst)
             Measure* m = static_cast<Measure*>(mb);
             m->sortStaves(dst);
             }
-
-/*      foreach(Beam* beam, _beams) {
-            int staffIdx = beam->staffIdx();
-            int voice    = beam->voice();
-            int idx      = dst.indexOf(staffIdx);
-            beam->setTrack(idx * VOICES + voice);
-            }
-*/
-#if 0 // imlementation changed
-      foreach(Element* e, _gel) {
-            switch(e->type()) {
-                  case SLUR:
-                        {
-                        Slur* slur    = static_cast<Slur*>(e);
-                        int staffIdx  = slur->startElement()->staffIdx();
-                        int voice     = slur->startElement()->voice();
-                        int staffIdx2 = slur->endElement()->staffIdx();
-                        int voice2    = slur->endElement()->voice();
-                        slur->setTrack(dst[staffIdx] * VOICES + voice);
-                        slur->setTrack2(dst[staffIdx2] * VOICES + voice2);
-                        }
-                    break;
-                  case VOLTA:  //volta always attached to top staff
-                        break;
-                  case OTTAVA:
-                  case TRILL:
-                  case PEDAL:
-                  case HAIRPIN:
-                  case TEXTLINE:
-                        {
-                        SLine* line = static_cast<SLine*>(e);
-                        int voice    = line->voice();
-                        int staffIdx = line->staffIdx();
-                        int idx = dst.indexOf(staffIdx);
-                        line->setTrack(idx * VOICES + voice);
-                        }
-                        break;
-                  default:
-                        break;
-                }
-            }
-#endif
       }
 
 //---------------------------------------------------------
@@ -2948,7 +2914,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
       SelState selState = _selection.state();
 
       if (type == SELECT_SINGLE) {
-            _selection.deselectAll();
+            deselectAll();
             if (e == 0) {
                   selState = SEL_NONE;
                   _updateAll = true;

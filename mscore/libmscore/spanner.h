@@ -55,7 +55,8 @@ class SpannerSegment : public Element {
 class Spanner : public Element {
       Element* _startElement;
       Element* _endElement;
-      Anchor _anchor;         // enum Anchor { ANCHOR_SEGMENT, ANCHOR_MEASURE};
+      Anchor _anchor;    // enum Anchor { ANCHOR_SEGMENT, ANCHOR_MEASURE,
+                         //    ANCHOR_CHORD, ANCHOR_NOTE};
 
       QList<SpannerSegment*> segments;
 

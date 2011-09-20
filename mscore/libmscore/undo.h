@@ -70,6 +70,7 @@ class InstrumentChange;
 class Box;
 class Accidental;
 class Articulation;
+class Spanner;
 
 // #define DEBUG_UNDO
 
@@ -298,38 +299,6 @@ class SortStaves : public UndoCommand {
       virtual void undo();
       virtual void redo();
       UNDO_NAME("SortStaves");
-      };
-
-//---------------------------------------------------------
-//   ChangeInvisible
-//---------------------------------------------------------
-
-class ChangeInvisible : public UndoCommand {
-      Element* element;
-      bool invisible;
-      void flip();
-
-   public:
-      ChangeInvisible(Element* e, bool v) : element(e), invisible(v) {}
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      UNDO_NAME("ChangeInvisible");
-      };
-
-//---------------------------------------------------------
-//   ChangeColor
-//---------------------------------------------------------
-
-class ChangeColor : public UndoCommand {
-      Element* element;
-      QColor color;
-
-      void flip();
-   public:
-      ChangeColor(Element*, QColor);
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      UNDO_NAME("ChangeColor");
       };
 
 //---------------------------------------------------------
@@ -1650,6 +1619,43 @@ class ChangeDurationType : public UndoCommand {
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeDurationType");
+      };
+
+//---------------------------------------------------------
+//   ChangeSpannerAnchor
+//---------------------------------------------------------
+
+class ChangeSpannerAnchor : public UndoCommand {
+      Spanner* spanner;
+      Element* startElement;
+      Element* endElement;
+
+      void flip();
+
+   public:
+      ChangeSpannerAnchor(Spanner* s, Element* se, Element* ee)
+         : spanner(s), startElement(se), endElement(ee) {}
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      UNDO_NAME("ChangeSpannerAnchor");
+      };
+
+//---------------------------------------------------------
+//   ChangeProperty
+//---------------------------------------------------------
+
+class ChangeProperty : public UndoCommand {
+      Element* element;
+      int id;
+      QVariant property;
+
+      void flip();
+
+   public:
+      ChangeProperty(Element* e, int i, QVariant v) : element(e), id(i), property(v) {}
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      UNDO_NAME("ChangeProperty");
       };
 
 #endif
