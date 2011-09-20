@@ -500,7 +500,7 @@ void Score::toEList(EventMap* events, int staffIdx)
                               ev->setChannel(channel);
                               ev->setController(CTRL_SUSTAIN);
                               ev->setValue(0);
-                              events->insertMulti(p->tick2() + tickOffset, ev);
+                              events->insertMulti(p->tick2() + tickOffset - 1, ev);
                               }
                         }
                   }
