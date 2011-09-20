@@ -4263,7 +4263,6 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             newFile();
       else if (cmd == "quit") {
             close();
-            exit(0);
             }
       else if (cmd == "fingering")
             fingeringMenu();
