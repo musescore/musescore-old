@@ -112,9 +112,12 @@ struct EditData {
       bool vRaster;
       };
 
-//---------------------------------------------------------
+//------------------------------------------------------------------------
 //   Element Properties
-//---------------------------------------------------------
+//    accessible through
+//    virtual QVariant Element::getProperty(int propertyId)
+//    virtual void Element::setProperty(int propertyId, const QVariant&)
+//------------------------------------------------------------------------
 
 enum {
       P_COLOR,

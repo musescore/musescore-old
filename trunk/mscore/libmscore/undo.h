@@ -72,7 +72,7 @@ class Accidental;
 class Articulation;
 class Spanner;
 
-// #define DEBUG_UNDO
+#define DEBUG_UNDO
 
 #ifdef DEBUG_UNDO
 #define UNDO_NAME(a)  virtual const char* name() const { return a; }
