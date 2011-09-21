@@ -68,6 +68,10 @@ void BarLine::getY(qreal* y1, qreal* y2) const
       if (parent() && parent()->type() == SEGMENT) {
             int staffIdx1    = staffIdx();
             int staffIdx2    = staffIdx1 + _span - 1;
+            if (staffIdx2 >= score()->nstaves()) {
+                  printf("BarLine: bad _span %d\n", _span);
+                  staffIdx2 = score()->nstaves() - 1;
+                  }
             Segment* segment = static_cast<Segment*>(parent());
             Measure* measure = segment->measure();
             System* system   = measure->system();

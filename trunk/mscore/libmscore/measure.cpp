@@ -1149,21 +1149,25 @@ void Measure::insertStaves(int sStaff, int eStaff)
 
 void Measure::cmdRemoveStaves(int sStaff, int eStaff)
       {
+printf("cmdRemoveStaves %d-%d\n", sStaff, eStaff);
       int sTrack = sStaff * VOICES;
       int eTrack = eStaff * VOICES;
       for (Segment* s = first(); s; s = s->next()) {
+            printf(" seg %d <%s>\n", s->tick(), s->subTypeName());
             for (int track = eTrack - 1; track >= sTrack; --track) {
                   Element* el = s->element(track);
-                  if (el && !el->generated())
+                  if (el && !el->generated()) {
+                        printf("  remove %s track %d\n", el->name(), track);
                         _score->undoRemoveElement(el);
+                        }
                   }
             foreach(Element* e, s->annotations()) {
                   int staffIdx = e->staffIdx();
-                  if ((staffIdx >= sStaff) && (staffIdx < eStaff))
+                  if ((staffIdx >= sStaff) && (staffIdx < eStaff)) {
+                        printf("  remove annotation %s staffIdx %d\n", e->name(), staffIdx);
                         _score->undoRemoveElement(e);
+                        }
                   }
-            if (s->isEmpty())
-                  _score->undoRemoveElement(s);
             }
       foreach(Element* e, _el) {
             if (e->track() == -1)
@@ -2377,16 +2381,11 @@ bool Measure::setStartRepeatBarLine(bool val)
       {
       bool changed = false;
       Segment* s = findSegment(SegStartRepeatBarLine, tick());
-      if (s == 0) {
-            s = new Segment(this, SegStartRepeatBarLine, tick());
-            score()->undoAddElement(s);
-            changed = true;
-            }
 
       for (int staffIdx = 0; staffIdx < score()->nstaves();) {
             int track    = staffIdx * VOICES;
             Staff* staff = score()->staff(staffIdx);
-            BarLine* bl  = static_cast<BarLine*>(s->element(track));
+            BarLine* bl  = s ? static_cast<BarLine*>(s->element(track)) : 0;
             int span     = staff->barLineSpan();
 
             if (span && val && (bl == 0)) {
@@ -2394,6 +2393,8 @@ bool Measure::setStartRepeatBarLine(bool val)
                   bl = new BarLine(score());
                   bl->setTrack(track);
                   bl->setBarLineType(START_REPEAT);
+                  if (s == 0)
+                        s = undoGetSegment(SegStartRepeatBarLine, tick());
                   bl->setParent(s);
                   score()->undoAddElement(bl);
                   changed = true;
@@ -2403,20 +2404,22 @@ bool Measure::setStartRepeatBarLine(bool val)
                   score()->undoRemoveElement(bl);
                   changed = true;
                   }
-            if (val)
+            if (bl && val && span)
                   bl->setSpan(span);
 
             ++staffIdx;
             //
             // remove any unwanted barlines:
             //
-            for (int i = 1; i < span; ++i) {
-                  BarLine* bl  = static_cast<BarLine*>(s->element(staffIdx * VOICES));
-                  if (bl) {
-                        score()->undoRemoveElement(bl);
-                        changed = true;
+            if (s) {
+                  for (int i = 1; i < span; ++i) {
+                        BarLine* bl  = static_cast<BarLine*>(s->element(staffIdx * VOICES));
+                        if (bl) {
+                              score()->undoRemoveElement(bl);
+                              changed = true;
+                              }
+                        ++staffIdx;
                         }
-                  ++staffIdx;
                   }
             }
       return changed;
@@ -2431,7 +2434,7 @@ bool Measure::createEndBarLines()
       {
       bool changed = false;
       int nstaves  = score()->nstaves();
-      Segment* seg = getSegment(SegEndBarLine, tick() + ticks());
+      Segment* seg = findSegment(SegEndBarLine, tick() + ticks());
 
       for (int staffIdx = 0; staffIdx < nstaves;) {
             Staff* staff = score()->staff(staffIdx);
@@ -2442,7 +2445,7 @@ bool Measure::createEndBarLines()
                   int track = (staffIdx + i) * VOICES;
                   SysStaff* s  = system()->staff(staffIdx + i);
                   if (!s->show()) {
-                        BarLine* bl1 = static_cast<BarLine*>(seg->element(track));
+                        BarLine* bl1 = seg ? static_cast<BarLine*>(seg->element(track)) : 0;
                         if (bl1) {
                               score()->undoRemoveElement(bl1);
                               // seg->setElement(track, 0);
@@ -2452,12 +2455,13 @@ bool Measure::createEndBarLines()
                         continue;
                         }
                   if (bl == 0) {
-                        bl = static_cast<BarLine*>(seg->element(track));
+                        bl = seg ? static_cast<BarLine*>(seg->element(track)) : 0;
                         if (bl == 0) {
                               bl = new BarLine(score());
                               bl->setVisible(_endBarLineVisible);
                               bl->setColor(_endBarLineColor);
                               bl->setGenerated(bl->el()->isEmpty() && _endBarLineGenerated);
+                              seg = undoGetSegment(SegEndBarLine, tick() + ticks());
                               bl->setParent(seg);
                               bl->setTrack(track);
                               score()->undoAddElement(bl);
@@ -2473,7 +2477,7 @@ bool Measure::createEndBarLines()
                         aspan = 0;
                         }
                   else {
-                        BarLine* bl1 = static_cast<BarLine*>(seg->element(track));
+                        BarLine* bl1 = seg ? static_cast<BarLine*>(seg->element(track)) : 0;
                         if (bl1) {
                               score()->undoRemoveElement(bl1);
                               // seg->setElement(track, 0);
