@@ -409,6 +409,32 @@ Element* Accidental::drop(const DropData& data)
       }
 
 //---------------------------------------------------------
+//   getProperty
+//---------------------------------------------------------
+
+QVariant Accidental::getProperty(int propertyId) const
+      {
+      switch(propertyId) {
+            case P_SMALL: return _small;
+            default:
+                  return Element::getProperty(propertyId);
+            }
+      }
+
+//---------------------------------------------------------
+//   setProperty
+//---------------------------------------------------------
+
+void Accidental::setProperty(int propertyId, const QVariant& v)
+      {
+      switch(propertyId) {
+            case P_SMALL: _small = v.toBool(); break;
+            default:
+                  Element::setProperty(propertyId, v);
+            }
+      }
+
+//---------------------------------------------------------
 //   AccidentalBracket
 //---------------------------------------------------------
 

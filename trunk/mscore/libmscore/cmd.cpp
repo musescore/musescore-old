@@ -106,18 +106,23 @@ void Score::startCmd()
 
 void Score::endCmd()
       {
-      if (debugMode)
-            printf("===endCmd()\n");
       if (!undo()->active()) {
             // if (debugMode)
                   fprintf(stderr, "Score::endCmd(): no cmd active\n");
             end();
             return;
             }
+      Score* score = rootScore();
+      score->end2();
+      foreach(Excerpt* e, score->_excerpts)
+            e->score()->end2();
+
       bool noUndo = undo()->current()->childCount() <= 1;
       if (!noUndo)
             setDirty(!noUndo);
       undo()->endMacro(noUndo);
+      if (debugMode)
+            printf("===endCmd\n");
       }
 
 //---------------------------------------------------------
@@ -127,6 +132,8 @@ void Score::endCmd()
 
 void Score::end()
       {
+      if (debugMode)
+            printf("===end\n");
       Score* score = parentScore() ? parentScore() : this;
       score->end1();
       foreach(Excerpt* e, score->_excerpts)
@@ -134,10 +141,10 @@ void Score::end()
       }
 
 //---------------------------------------------------------
-//   end1
+//   end2
 //---------------------------------------------------------
 
-void Score::end1()
+void Score::end2()
       {
       bool _needLayout = false;
       if (layoutAll) {
@@ -151,6 +158,16 @@ void Score::end1()
             }
       if (_needLayout)
             doLayout();
+      layoutAll   = false;
+      startLayout = 0;
+      }
+
+//---------------------------------------------------------
+//   end1
+//---------------------------------------------------------
+
+void Score::end1()
+      {
       if (_updateAll) {
             foreach(MuseScoreView* v, viewer)
                   v->updateAll();
@@ -163,9 +180,7 @@ void Score::end1()
                   v->dataChanged(refresh);
             }
       refresh     = QRectF();
-      layoutAll   = false;
       _updateAll  = false;
-      startLayout = 0;
       }
 
 //---------------------------------------------------------
@@ -1579,8 +1594,10 @@ void Score::processMidiInput()
 //                        seq->startNote(p->instr()->channel(0), ev.pitch, 80, MScore::defaultPlayDuration, 0.0);
                   }
             else  {
-                  startCmd();
-                  cmdActive = true;
+                  if (!cmdActive) {
+                        startCmd();
+                        cmdActive = true;
+                        }
                   n = addPitch(ev.pitch, ev.chord);
                   }
             }

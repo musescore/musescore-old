@@ -213,7 +213,7 @@ void UndoStack::push(UndoCommand* cmd)
       {
       if (!curCmd) {
             // this can happen for layout() outside of a command (load)
-//            printf("UndoStack:push(): no active command, UndoStack %p\n", this);
+             // printf("UndoStack:push(): no active command, UndoStack %p\n", this);
 
             cmd->redo();
             delete cmd;
@@ -529,7 +529,7 @@ void Score::undoChangeClef(Staff* ostaff, Segment* seg, ClefType st)
 
 void Score::undoChangeTpc(Note* note, int tpc)
       {
-      undo()->push(new ChangeTpc(note, tpc));
+      undo()->push(new ChangeProperty(note, P_TPC, tpc));
       }
 
 //---------------------------------------------------------
@@ -1476,23 +1476,6 @@ void ChangePitch::flip()
       }
 
 //---------------------------------------------------------
-//   ChangeTpc
-//---------------------------------------------------------
-
-ChangeTpc::ChangeTpc(Note* _note, int _tpc)
-      {
-      note = _note;
-      tpc  = _tpc;
-      }
-
-void ChangeTpc::flip()
-      {
-      int ntpc = note->tpc();
-      note->setTpc(tpc);
-      tpc = ntpc;
-      }
-
-//---------------------------------------------------------
 //   SetStemDirection
 //---------------------------------------------------------
 
@@ -2111,7 +2094,9 @@ MoveElement::MoveElement(Element* e, const QPointF& o)
 void MoveElement::flip()
       {
       QPointF po = element->userOff();
+      element->score()->addRefresh(element->canvasBoundingRect());
       element->setUserOff(offset);
+      element->score()->addRefresh(element->canvasBoundingRect());
       offset = po;
       }
 
@@ -2459,26 +2444,6 @@ void ChangeStyle::flip()
       }
 
 //---------------------------------------------------------
-//   ChangeSlurProperties
-//---------------------------------------------------------
-
-ChangeSlurProperties::ChangeSlurProperties(SlurTie* _st, int lt)
-   : st(_st), lineType(lt)
-      {
-      }
-
-//---------------------------------------------------------
-//   flip
-//---------------------------------------------------------
-
-void ChangeSlurProperties::flip()
-      {
-      int ols = st->lineType();
-      st->setLineType(lineType);
-      lineType = ols;
-      }
-
-//---------------------------------------------------------
 //   ChangeChordStaffMove
 //---------------------------------------------------------
 
@@ -2767,17 +2732,6 @@ void InsertMeasures::undo()
 void InsertMeasures::redo()
       {
       fm->score()->measures()->insert(fm, lm);
-      }
-
-//---------------------------------------------------------
-//   flip
-//---------------------------------------------------------
-
-void ChangeClef::flip()
-      {
-      bool sc = clef->showCourtesyClef();
-      clef->setShowCourtesyClef(showCourtesy);
-      showCourtesy = sc;
       }
 
 //---------------------------------------------------------
@@ -3108,19 +3062,6 @@ void MoveStaff::flip()
       part = oldPart;
       rstaff = idx;
       staff->score()->setLayoutAll(true);
-      }
-
-//---------------------------------------------------------
-//   ChangeAccidental::flip
-//---------------------------------------------------------
-
-void ChangeAccidental::flip()
-      {
-      a->score()->addRefresh(a->canvasBoundingRect());
-      bool s = a->small();
-      a->setSmall(small);
-      small = s;
-      a->score()->addRefresh(a->canvasBoundingRect());
       }
 
 //---------------------------------------------------------

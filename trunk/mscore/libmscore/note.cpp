@@ -1672,3 +1672,30 @@ void Note::setNval(NoteVal nval)
       _string    = nval.string;
       _headGroup = nval.headGroup;
       }
+
+//---------------------------------------------------------
+//   getProperty
+//---------------------------------------------------------
+
+QVariant Note::getProperty(int propertyId) const
+      {
+      switch(propertyId) {
+            case P_TPC: return tpc();
+            default:
+                  return Element::getProperty(propertyId);
+            }
+      }
+
+//---------------------------------------------------------
+//   setProperty
+//---------------------------------------------------------
+
+void Note::setProperty(int propertyId, const QVariant& v)
+      {
+      switch(propertyId) {
+            case P_TPC: setTpc(v.toInt()); break;
+            default:
+                  Element::setProperty(propertyId, v);
+            }
+      }
+

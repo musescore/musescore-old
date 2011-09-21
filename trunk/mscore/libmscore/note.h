@@ -252,6 +252,9 @@ class Note : public Element {
       const QList<NoteEvent*>& playEvents() const    { return _playEvents; }
       void setPlayEvents(const QList<NoteEvent*>& v) { _playEvents = v;    }
       virtual const QString subtypeName() const      { return QString(); }
+
+      virtual QVariant getProperty(int propertyId) const;
+      virtual void setProperty(int propertyId, const QVariant&);
       };
 
 extern Sym* noteHeadSym(bool up, int group, int n);

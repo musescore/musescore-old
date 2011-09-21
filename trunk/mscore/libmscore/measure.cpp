@@ -2439,6 +2439,8 @@ bool Measure::createEndBarLines()
       for (int staffIdx = 0; staffIdx < nstaves;) {
             Staff* staff = score()->staff(staffIdx);
             int span     = staff->barLineSpan();
+            if (staffIdx + span > score()->nstaves())
+                  span = score()->nstaves() - staffIdx;
             BarLine* bl  = 0;
             int aspan = 0;
             for (int i = 0; i < span; ++i) {
