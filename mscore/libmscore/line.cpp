@@ -181,7 +181,6 @@ bool LineSegment::edit(MuseScoreView* sv, int curGrip, int key, Qt::KeyboardModi
             if (s1 == 0 || s2 == 0 || s1->tick() >= s2->tick())
                   return true;
 
-            LinkedElements* links = l->links();
             if (l->startElement() != s1) {
                   if (s1->system() != (static_cast<Segment*>(l->startElement())->system())) {
                         bspDirty = true;
@@ -238,7 +237,6 @@ bool LineSegment::edit(MuseScoreView* sv, int curGrip, int key, Qt::KeyboardModi
             if (m1->tick() > m2->tick())
                   return true;
 
-            LinkedElements* links = l->links();
             if (l->startElement() != m1) {
                   if (m1->system() != (static_cast<Measure*>(l->startElement())->system())) {
                         bspDirty = true;

@@ -1519,9 +1519,10 @@ void Score::removeElement(Element* element)
       {
       Element* parent = element->parent();
 
-      if (debugMode)
+      if (debugMode) {
             printf("   Score(%p)::removeElement %p(%s) parent %p(%s)\n",
                this, element, element->name(), parent, parent ? parent->name() : "");
+            }
 
       // special for MEASURE, HBOX, VBOX
       // their parent is not static

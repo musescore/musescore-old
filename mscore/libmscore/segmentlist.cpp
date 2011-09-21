@@ -37,14 +37,30 @@ SegmentList SegmentList::clone() const
 
 void SegmentList::check()
       {
+#ifndef NDEBUG
       int n = 0;
-      for (Segment* s = _first; s; s = s->next())
+      Segment* f = 0;
+      Segment* l = 0;
+      for (Segment* s = _first; s; s = s->next()) {
+            if (f == 0)
+                  f = s;
+            l = s;
             ++n;
+            }
+      if (f != _first) {
+            printf("SegmentList::check: bad first\n");
+            abort();
+            }
+      if (l != _last) {
+            printf("SegmentList::check: bad last\n");
+            abort();
+            }
       if (n != _size) {
             printf("SegmentList::check: wrong segment segments %d count %d\n", n, _size);
             _size = n;
             abort();
             }
+#endif
       }
 
 //---------------------------------------------------------
@@ -147,6 +163,39 @@ void SegmentList::push_front(Segment* e)
 
 void SegmentList::insert(Segment* seg)
       {
+#ifndef NDEBUG
+      printf("insertSeg <%s> %p %p %p\n", seg->subTypeName(), seg->prev(), seg, seg->next());
+      check();
+      for (Segment* s = _first; s; s = s->next()) {
+            if (s == seg) {
+                  printf("SegmentList::insert: already in list\n");
+                  abort();
+                  }
+            }
+      if (seg->prev()) {
+            Segment* s;
+            for (s = _first; s; s = s->next()) {
+                  if (s == seg->prev())
+                        break;
+                  }
+            if (s != seg->prev()) {
+                  printf("SegmentList::insert: seg->prev() not in list\n");
+                  abort();
+                  }
+            }
+
+      if (seg->next()) {
+            Segment* s;
+            for (s = _first; s; s = s->next()) {
+                  if (s == seg->next())
+                        break;
+                  }
+            if (s != seg->next()) {
+                  printf("SegmentList::insert: seg->next() not in list\n");
+                  abort();
+                  }
+            }
+#endif
       if (seg->prev())
             seg->prev()->setNext(seg);
       else
