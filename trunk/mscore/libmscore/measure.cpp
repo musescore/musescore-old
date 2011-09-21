@@ -961,6 +961,10 @@ void Measure::add(Element* el)
                   if (m)
                         m->addSpannerBack(volta);
                   _spannerFor.append(volta);
+                  foreach(SpannerSegment* ss, volta->spannerSegments()) {
+                        if (ss->system())
+                              ss->system()->add(ss);
+                        }
                   }
                   break;
 
@@ -1044,6 +1048,10 @@ void Measure::remove(Element* el)
                   if (!_spannerFor.removeOne(volta)) {
                         printf("Measure:remove: %s not found\n", volta->name());
                         Q_ASSERT(volta->score() == score());
+                        }
+                  foreach(SpannerSegment* ss, volta->spannerSegments()) {
+                        if (ss->system())
+                              ss->system()->remove(ss);
                         }
                   }
                   break;

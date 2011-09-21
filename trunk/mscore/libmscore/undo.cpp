@@ -3159,9 +3159,9 @@ void ChangeSpannerAnchor::flip()
       Element* se = spanner->startElement();
       Element* ee = spanner->endElement();
 
-      printf("ChangeSpannerAnchor:flip() spanner(%p--%p) %s  cr(%p) -> cr(%p)\n",
-         spanner->score(), spanner, spanner->name(),
-         spanner->startElement(), startElement);
+//      printf("ChangeSpannerAnchor:flip() spanner(%p--%p) %s  end(%p) -> end(%p)\n",
+//         spanner->score(), spanner, spanner->name(),
+//         spanner->endElement(), endElement);
 
       switch(spanner->anchor()) {
             case ANCHOR_CHORD:

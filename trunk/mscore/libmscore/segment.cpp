@@ -35,6 +35,7 @@
 #include "instrchange.h"
 #include "clef.h"
 #include "timesig.h"
+#include "system.h"
 
 //---------------------------------------------------------
 //   subTypeName
@@ -359,6 +360,11 @@ void Segment::addSpanner(Spanner* l)
       if (e)
             static_cast<Segment*>(e)->addSpannerBack(l);
       _spannerFor.append(l);
+      foreach(SpannerSegment* ss, l->spannerSegments()) {
+            Q_ASSERT(ss->spanner() == l);
+            if (ss->system())
+                  ss->system()->add(ss);
+            }
       }
 
 //---------------------------------------------------------
@@ -374,6 +380,10 @@ void Segment::removeSpanner(Spanner* l)
       if (!_spannerFor.removeOne(l)) {
             printf("Segment(%p): cannot remove spannerFor %s %p, size %d\n", this, l->name(), l, _spannerFor.size());
             // abort();
+            }
+      foreach(SpannerSegment* ss, l->spannerSegments()) {
+            if (ss->system())
+                  ss->system()->remove(ss);
             }
       }
 

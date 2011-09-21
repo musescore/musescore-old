@@ -1305,9 +1305,7 @@ void ScoreView::startEdit()
             int idx            = spanner->spannerSegments().indexOf(ss);
             editObject         = clone->spannerSegments()[idx];
             editObject->startEdit(this, startMove);
-            _score->undoRemoveElement(spanner);
-            _score->undoAddElement(clone);
-            // _score->undoChangeElement(spanner, clone);
+            _score->undoChangeElement(spanner, clone);
             }
       else {
             foreach(Element* e, origEditObject->linkList()) {
@@ -1391,33 +1389,39 @@ void ScoreView::endEdit()
                         Spanner* lspanner = static_cast<Spanner*>(e);
                         Element* lse = 0;
                         Element* lee = 0;
-                        if (se->type() == NOTE || se->type() == CHORD || se->type() == MEASURE) {
+                        Score* sc = lspanner->score();
+
+                        if (se->type() == NOTE || se->type() == CHORD) {
                               foreach(Element* e, *se->links()) {
-                                    if (e->score() == lspanner->score()
-                                       && e->staffIdx() == se->staffIdx()) {
+                                    if (e->score() == sc && e->staffIdx() == se->staffIdx()) {
                                           lse = e;
                                           break;
                                           }
                                     }
                               foreach(Element* e, *ee->links()) {
-                                    if (e->score() == lspanner->score()
-                                       && e->staffIdx() == ee->staffIdx()) {
+                                    if (e->score() == sc && e->staffIdx() == ee->staffIdx()) {
                                           lee = e;
                                           break;
                                           }
                                     }
                               }
                         else if (se->type() == SEGMENT) {
-                              Score* score     = lspanner->score();
-                              Segment* segment = static_cast<Segment*>(se);
-                              int tick         = segment->tick();
-                              Measure* m       = score->tick2measure(tick);
-                              lse              = m->findSegment(segment->segmentType(), tick);
+                              int tick   = static_cast<Segment*>(se)->tick();
+                              Measure* m = sc->tick2measure(tick);
+                              lse        = m->findSegment(SegChordRest, tick);
 
-                              segment          = static_cast<Segment*>(ee);
-                              tick             = segment->tick();
-                              m                = score->tick2measure(tick);
-                              lee              = m->findSegment(segment->segmentType(), tick);
+                              int tick2  = static_cast<Segment*>(ee)->tick();
+                              m          = sc->tick2measure(tick2);
+                              lee        = m->findSegment(SegChordRest, tick2);
+                              }
+                        else if (se->type() == MEASURE) {
+                              Measure* measure = static_cast<Measure*>(se);
+                              int tick         = measure->tick();
+                              lse              = sc->tick2measure(tick);
+
+                              measure          = static_cast<Measure*>(ee);
+                              tick             = measure->tick();
+                              lee              = sc->tick2measure(tick);
                               }
                         Q_ASSERT(lse && lee);
                         score()->undo()->push(new ChangeSpannerAnchor(lspanner, lse, lee));
@@ -1439,6 +1443,8 @@ void ScoreView::endEdit()
             _score->select(curElement);
             _score->end();
             }
+      _score->deselect(origEditObject);
+      _score->select(editObject);
       editObject     = 0;
       origEditObject = 0;
       grips          = 0;
