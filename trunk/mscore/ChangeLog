@@ -1,4 +1,5 @@
 21.sep (ws)
+      - fix #12672: removing instrument causes crash
       - fix #12673: Removing treble stave from mutli-stave instrument causes crash
       - fix #12674: Removing bass stave from multi-stave instrument, then undo causes crash
 20.sep (ws)

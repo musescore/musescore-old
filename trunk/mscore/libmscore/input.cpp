@@ -47,7 +47,7 @@ InputState::InputState() :
 
 Drumset* InputState::drumset() const
       {
-      if (_segment == 0)
+      if (_segment == 0 || _track == -1)
             return 0;
       return _segment->score()->staff(_track/VOICES)->part()->instr(_segment->tick())->drumset();
       }
