@@ -487,3 +487,30 @@ ClefType Clef::clefType() const
             return _clefTypes._transposingClef;
       }
 
+//---------------------------------------------------------
+//   getProperty
+//---------------------------------------------------------
+
+QVariant Clef::getProperty(int propertyId) const
+      {
+      switch(propertyId) {
+            case P_SHOW_COURTESY: return _showCourtesyClef;
+            default:
+                  return Element::getProperty(propertyId);
+            }
+      }
+
+//---------------------------------------------------------
+//   setProperty
+//---------------------------------------------------------
+
+void Clef::setProperty(int propertyId, const QVariant& v)
+      {
+      switch(propertyId) {
+            case P_SHOW_COURTESY: _showCourtesyClef = v.toBool(); break;
+            default:
+                  Element::setProperty(propertyId, v);
+            }
+      }
+
+

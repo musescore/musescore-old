@@ -864,6 +864,36 @@ void SlurTie::toDefault()
       score()->undoChangeUserOffset(this, QPointF());
       }
 
+//---------------------------------------------------------
+//   getProperty
+//---------------------------------------------------------
+
+QVariant SlurTie::getProperty(int propertyId) const
+      {
+      switch(propertyId) {
+            case P_LINE_TYPE: return lineType();
+            default:
+                  return Spanner::getProperty(propertyId);
+            }
+      }
+
+//---------------------------------------------------------
+//   setProperty
+//---------------------------------------------------------
+
+void SlurTie::setProperty(int propertyId, const QVariant& v)
+      {
+      switch(propertyId) {
+            case P_LINE_TYPE: setLineType(v.toInt()); break;
+            default:
+                  Spanner::setProperty(propertyId, v);
+            }
+      }
+
+//---------------------------------------------------------
+//   toDefault
+//---------------------------------------------------------
+
 void SlurSegment::toDefault()
       {
       score()->undoChangeUserOffset(this, QPointF());

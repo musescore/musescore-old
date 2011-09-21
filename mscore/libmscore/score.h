@@ -527,6 +527,7 @@ class Score {
       void endCmd();          // end undoable command
       void end();             // layout & update canvas
       void end1();
+      void end2();
 
       void cmdRemoveTimeSig(TimeSig*);
       void cmdAddTimeSig(Measure*, int staffIdx, TimeSig*);

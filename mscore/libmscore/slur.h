@@ -152,6 +152,8 @@ class SlurTie : public Spanner {
       virtual const QString subtypeName() const { return QString(); }
       virtual void slurPos(SlurPos*) = 0;
       virtual void computeBezier(SlurSegment*) = 0;
+      virtual QVariant getProperty(int propertyId) const;
+      virtual void setProperty(int propertyId, const QVariant&);
       };
 
 //---------------------------------------------------------

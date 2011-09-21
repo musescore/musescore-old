@@ -322,22 +322,6 @@ class ChangePitch : public UndoCommand {
       };
 
 //---------------------------------------------------------
-//   ChangeTpc
-//---------------------------------------------------------
-
-class ChangeTpc : public UndoCommand {
-      Note* note;
-      int tpc;
-
-      void flip();
-   public:
-      ChangeTpc(Note* note, int tpc);
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      UNDO_NAME("ChangeTpc");
-      };
-
-//---------------------------------------------------------
 //   ChangeSubtype
 //---------------------------------------------------------
 
@@ -1105,22 +1089,6 @@ class ChangeStyle : public UndoCommand {
       };
 
 //---------------------------------------------------------
-//   ChangeSlurProperties
-//---------------------------------------------------------
-
-class ChangeSlurProperties : public UndoCommand {
-      SlurTie* st;
-      int lineType;
-      void flip();
-
-   public:
-      ChangeSlurProperties(SlurTie*, int);
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      UNDO_NAME("ChangeSlurProperties");
-      };
-
-//---------------------------------------------------------
 //   ChangeChordStaffMove
 //---------------------------------------------------------
 
@@ -1533,23 +1501,6 @@ class ChangeClefType : public UndoCommand {
       };
 
 //---------------------------------------------------------
-//   ChangeClef
-//---------------------------------------------------------
-
-class ChangeClef : public UndoCommand {
-      Clef* clef;
-      bool showCourtesy;
-
-      void flip();
-
-   public:
-      ChangeClef(Clef* _clef, bool sc) : clef(_clef), showCourtesy(sc) {}
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      UNDO_NAME("ChangeClef");
-      };
-
-//---------------------------------------------------------
 //   MoveStaff
 //---------------------------------------------------------
 
@@ -1565,23 +1516,6 @@ class MoveStaff : public UndoCommand {
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("MoveStaff");
-      };
-
-//---------------------------------------------------------
-//   ChangeAccidental
-//---------------------------------------------------------
-
-class ChangeAccidental : public UndoCommand {
-      Accidental* a;
-      bool small;
-
-      void flip();
-
-   public:
-      ChangeAccidental(Accidental* _a, bool s) : a(_a), small(s) {}
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      UNDO_NAME("ChangeAccidental");
       };
 
 //---------------------------------------------------------

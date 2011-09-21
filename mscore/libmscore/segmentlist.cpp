@@ -164,7 +164,7 @@ void SegmentList::push_front(Segment* e)
 void SegmentList::insert(Segment* seg)
       {
 #ifndef NDEBUG
-      printf("insertSeg <%s> %p %p %p\n", seg->subTypeName(), seg->prev(), seg, seg->next());
+//      printf("insertSeg <%s> %p %p %p\n", seg->subTypeName(), seg->prev(), seg, seg->next());
       check();
       for (Segment* s = _first; s; s = s->next()) {
             if (s == seg) {

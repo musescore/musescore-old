@@ -511,12 +511,13 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
                   }
             }
       else if (cmd == "small") {
-            Accidental* a = static_cast<Accidental*>(e);
-            score()->undo()->push(new ChangeAccidental(a, !a->small()));
+            score()->undo()->push(
+               new ChangeProperty(e, P_SMALL, !static_cast<Accidental*>(e)->small())
+               );
             }
       else if (cmd == "clef-courtesy") {
-            Clef* clef = static_cast<Clef*>(e);
-            score()->undo()->push(new ChangeClef(clef, !clef->showCourtesyClef()));
+            bool show = !static_cast<Clef*>(e)->showCourtesyClef();
+            score()->undo()->push(new ChangeProperty(e, P_SHOW_COURTESY, show));
             }
       else if (cmd == "d-props") {
             Dynamic* dynamic = static_cast<Dynamic*>(e);
@@ -658,7 +659,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             if (rv) {
                   int lt = sp.getLineType();
                   if (lt != ss->slurTie()->lineType()) {
-                        score()->undo()->push(new ChangeSlurProperties(ss->slurTie(), lt));
+                        score()->undo()->push(new ChangeProperty(ss->slurTie(), P_LINE_TYPE, lt));
                         }
                   }
             }

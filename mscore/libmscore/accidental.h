@@ -82,6 +82,9 @@ class Accidental : public Element {
       virtual void read(QDomElement);
       virtual void write(Xml& xml) const;
 
+      virtual QVariant getProperty(int propertyId) const;
+      virtual void setProperty(int propertyId, const QVariant&);
+
       static int subtype2value(AccidentalType);             // return effective pitch offset
       static const char* subtype2name(AccidentalType);      // return effective pitch offset
       static AccidentalType value2subtype(int);
