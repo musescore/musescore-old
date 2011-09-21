@@ -1,4 +1,5 @@
 21.sep (ws)
+      - fix #11157: Omitting staves when creating score causes crash
       - fix #12651: Moving object, then undo causes crash
       - fix #12672: removing instrument causes crash
       - fix #12673: Removing treble stave from mutli-stave instrument causes crash

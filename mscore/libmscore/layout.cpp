@@ -592,7 +592,7 @@ void Score::layoutStage3()
 
 void Score::doLayout()
       {
-//      printf("doLayout\n");
+      printf("doLayout\n");
       {
       QWriteLocker locker(&_layoutLock);
 
@@ -966,6 +966,8 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
                               qreal staffMag = staff(staffIdx)->mag();
                               if (el->type() == CLEF) {
                                     Clef* clef = static_cast<Clef*>(el);
+printf("Clef: setSmall %d - firstMeasure %d firstSegment %d\n",
+        !isFirstMeasure || (seg != m->first()), isFirstMeasure, seg == m->first());
                                     clef->setSmall(!isFirstMeasure || (seg != m->first()));
                                     clef->setMag(staffMag);
                                     }
