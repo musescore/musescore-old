@@ -188,23 +188,9 @@ bool LineSegment::edit(MuseScoreView* sv, int curGrip, int key, Qt::KeyboardModi
                         if (key == Qt::Key_Right)
                               ls = l->takeFirstSegment();
                         }
-                  if (links) {
-                        int tick = s1->tick();
-                        foreach(Element* e, *links) {
-                              Score* score = e->score();
-                              SLine* ll = static_cast<SLine*>(e);
-                              static_cast<Segment*>(ll->endElement())->removeSpannerBack(ll);
-                              Measure* m = score->tick2measure(tick);
-                              Segment* segment1 = m->findSegment(SegChordRest, tick);
-                              ll->setStartElement(segment1);
-                              segment1->add(ll);
-                              }
-                        }
-                  else {
-                        static_cast<Segment*>(l->startElement())->remove(l);
-                        l->setStartElement(s1);
-                        s1->add(l);
-                        }
+                  static_cast<Segment*>(l->startElement())->remove(l);
+                  l->setStartElement(s1);
+                  s1->add(l);
                   }
             else if (l->endElement() != s2) {
                   if (removeSegment) {
@@ -212,23 +198,10 @@ bool LineSegment::edit(MuseScoreView* sv, int curGrip, int key, Qt::KeyboardModi
                         if (key == Qt::Key_Left)
                               ls = l->takeLastSegment();
                         }
-                  if (links) {
-                        int tick = s2->tick();
-                        foreach(Element* e, *links) {
-                              Score* score = e->score();
-                              SLine* ll = static_cast<SLine*>(e);
-                              static_cast<Segment*>(ll->endElement())->removeSpannerBack(ll);
-                              Measure* m = score->tick2measure(tick);
-                              Segment* segment2 = m->findSegment(SegChordRest, tick);
-                              ll->setEndElement(segment2);
-                              segment2->addSpannerBack(ll);
-                              }
-                        }
-                  else {
-                        static_cast<Segment*>(l->endElement())->removeSpannerBack(l);
-                        l->setEndElement(s2);
-                        s2->addSpannerBack(l);
-                        }
+
+                  static_cast<Segment*>(l->endElement())->removeSpannerBack(l);
+                  l->setEndElement(s2);
+                  s2->addSpannerBack(l);
                   }
             }
       else {
@@ -272,22 +245,9 @@ bool LineSegment::edit(MuseScoreView* sv, int curGrip, int key, Qt::KeyboardModi
                         if (key == Qt::Key_Right)
                               ls = l->takeFirstSegment();
                         }
-                  if (links) {
-                        int tick = m1->tick();
-                        foreach(Element* e, *links) {
-                              Score* score = e->score();
-                              SLine* ll = static_cast<SLine*>(e);
-                              static_cast<Measure*>(ll->endElement())->removeSpannerBack(ll);
-                              Measure* m = score->tick2measure(tick);
-                              ll->setStartElement(m);
-                              m->add(ll);
-                              }
-                        }
-                  else {
-                        l->startElement()->remove(l);
-                        l->setStartElement(m1);
-                        m1->add(l);
-                        }
+                  l->startElement()->remove(l);
+                  l->setStartElement(m1);
+                  m1->add(l);
                   }
             else if (l->endElement() != m2) {
                   if (removeSegment) {
@@ -295,22 +255,9 @@ bool LineSegment::edit(MuseScoreView* sv, int curGrip, int key, Qt::KeyboardModi
                         if (key == Qt::Key_Left)
                               ls = l->takeLastSegment();
                         }
-                  if (links) {
-                        int tick = m2->tick();
-                        foreach(Element* e, *links) {
-                              Score* score = e->score();
-                              SLine* ll = static_cast<SLine*>(e);
-                              static_cast<Measure*>(ll->endElement())->removeSpannerBack(ll);
-                              Measure* m = score->tick2measure(tick);
-                              ll->setEndElement(m);
-                              m->addSpannerBack(ll);
-                              }
-                        }
-                  else {
-                        static_cast<Measure*>(l->endElement())->removeSpannerBack(l);
-                        l->setEndElement(m2);
-                        m2->addSpannerBack(l);
-                        }
+                  static_cast<Measure*>(l->endElement())->removeSpannerBack(l);
+                  l->setEndElement(m2);
+                  m2->addSpannerBack(l);
                   }
             }
       l->layout();

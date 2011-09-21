@@ -1422,7 +1422,7 @@ void Score::addElement(Element* element)
             case TRILL:
             case PEDAL:
             case TEXTLINE:
-            case HAIRPIN:
+//            case HAIRPIN:
 //            case TIE:
                   {
                   Spanner* spanner = static_cast<Spanner*>(element);
@@ -1568,7 +1568,7 @@ void Score::removeElement(Element* element)
             case TRILL:
             case PEDAL:
             case TEXTLINE:
-            case HAIRPIN:
+//            case HAIRPIN:
 //            case TIE:
                   {
                   Spanner* spanner = static_cast<Spanner*>(element);
