@@ -4406,6 +4406,7 @@ bool ScoreView::event(QEvent* event)
 void ScoreView::startUndoRedo()
       {
       // exit edit mode
+      _score->setLayoutAll(false);
       if (sm->configuration().contains(states[EDIT]))
             sm->postEvent(new CommandEvent("escape"));
       }
@@ -4428,9 +4429,9 @@ void ScoreView::endUndoRedo()
             postCmd("escape");
             }
       _score->updateSelection();
-      _score->setLayoutAll(true);
       mscore->updateInputState(_score);
-      _score->doLayout();           // TODO: does not really work
+      if (_score->layoutAll())
+            _score->doLayout();           // TODO: does not really work
       _score->end();
       mscore->endCmd();
       }

@@ -524,16 +524,30 @@ void ChordRest::layoutArticulations()
                   continue;
 
             // for tenuto and staccate check for staff line collision
-            bool staffLineCT = a->subtype() == Articulation_Tenuto
+            bool staffLineCheck = a->subtype() == Articulation_Tenuto
                                || a->subtype() == Articulation_Staccato;
 
-//            qreal sh = a->bbox().height() * mag();
             bool bottom = (aa == A_BOTTOM_CHORD) || (aa == A_CHORD && up());
+            bool headSide = bottom == up();
 
             dy += distance1;
+            qreal y;
+            Chord* chord = static_cast<Chord*>(this);
             if (bottom) {
-                  qreal y = chordBotY + dy;
-                  if (staffLineCT && (y <= staffBotY -.1 - dy)) {
+                  y = chordBotY + dy;
+                  if (!headSide && type() == CHORD && chord->stem()) {
+                        Stem* stem = chord->stem();
+                        y          = chordTopY + stem->stemLen();
+                        if (chord->beam())
+                              y += score()->styleS(ST_beamWidth).val() * _spatium * .5;
+                        x          = stem->pos().x();
+                        int line   = lrint((y+0.5*_spatium) / _spatium);
+                        if (line <= 4)    // align between staff lines
+                              y = line * _spatium + _spatium * .5;
+                        else
+                              y += _spatium;
+                        }
+                  else if (staffLineCheck && (y <= staffBotY -.1 - dy)) {
                         qreal l = y / _spatium;
                         qreal delta = fabs(l - round(l));
                         if (delta < 0.4) {
@@ -541,11 +555,22 @@ void ChordRest::layoutArticulations()
                               dy += _spatium * .5;
                               }
                         }
-                  a->setPos(x, y); // - a->bbox().y() + a->bbox().height() * .5);
                   }
             else {
-                  qreal y = chordTopY - dy;
-                  if (staffLineCT && (y >= (staffTopY +.1 + dy))) {
+                  y = chordTopY - dy;
+                  if (!headSide && type() == CHORD && chord->stem()) {
+                        Stem* stem = chord->stem();
+                        y          = chordBotY + stem->stemLen();
+                        if (chord->beam())
+                              y -= score()->styleS(ST_beamWidth).val() * _spatium * .5;
+                        x          = stem->pos().x();
+                        int line   = lrint((y-0.5*_spatium) / _spatium);
+                        if (line >= 0)    // align between staff lines
+                              y = line * _spatium - _spatium * .5;
+                        else
+                              y -= _spatium;
+                        }
+                  else if (staffLineCheck && (y >= (staffTopY +.1 + dy))) {
                         qreal l = y / _spatium;
                         qreal delta = fabs(l - round(l));
                         if (delta < 0.4) {
@@ -553,8 +578,8 @@ void ChordRest::layoutArticulations()
                               dy += _spatium * .5;
                               }
                         }
-                  a->setPos(x, y); // + a->bbox().y() - a->bbox().height() * .5);
                   }
+            a->setPos(x, y);
             }
 
       // reserve space for slur
@@ -814,7 +839,7 @@ void ChordRest::toDefault()
       score()->undoChangeChordRestSpace(this, Spatium(0.0), Spatium(0.0));
       score()->undoChangeUserOffset(this, QPointF());
       if (type() == CHORD) {
-            score()->undo()->push(new SetStemDirection(static_cast<Chord*>(this), AUTO));
+            score()->undo()->push(new ChangeProperty(this, P_STEM_DIRECTION, int(AUTO)));
             score()->undo()->push(new ChangeBeamMode(this, BEAM_AUTO));
             }
       else {

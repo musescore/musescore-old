@@ -82,7 +82,7 @@ void Score::startCmd()
       {
       if (debugMode)
             printf("===startCmd()\n");
-      layoutAll = true;      ///< do a complete relayout
+      _layoutAll = true;      ///< do a complete relayout
       _playNote = false;
 
       // Start collecting low-level undo operations for a
@@ -147,7 +147,7 @@ void Score::end()
 void Score::end2()
       {
       bool _needLayout = false;
-      if (layoutAll) {
+      if (_layoutAll) {
             _updateAll  = true;
             _needLayout = true;
             startLayout = 0;
@@ -158,7 +158,7 @@ void Score::end2()
             }
       if (_needLayout)
             doLayout();
-      layoutAll   = false;
+      _layoutAll   = false;
       startLayout = 0;
       }
 
@@ -1460,7 +1460,7 @@ void Score::resetUserStretch()
             if (m == m2)
                   break;
             }
-      layoutAll = true;
+      _layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -1494,7 +1494,7 @@ printf("moveDown staffMove==%d  rstaff %d rstaves %d\n", staffMove, rstaff, rsta
             return;
             }
       undo()->push(new ChangeChordStaffMove(chord, staffMove + 1));
-      layoutAll = true;
+      _layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -1516,7 +1516,7 @@ void Score::cmdAddStretch(qreal val)
             stretch += val;
             undo()->push(new ChangeStretch(m, stretch));
             }
-      layoutAll = true;
+      _layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -1563,7 +1563,7 @@ void Score::cmdResetBeamMode()
                         }
                   }
             }
-      layoutAll = true;
+      _layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -1602,7 +1602,7 @@ void Score::processMidiInput()
                   }
             }
       if (cmdActive) {
-            layoutAll = true;
+            _layoutAll = true;
             endCmd();
             //after relayout
             foreach(MuseScoreView* v, viewer)

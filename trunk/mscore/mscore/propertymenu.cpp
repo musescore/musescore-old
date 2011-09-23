@@ -734,7 +734,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
                         if (vp.noStem() != chord->noStem())
                               score()->undoChangeChordNoStem(chord, vp.noStem());
                         if (vp.getStemDirection() != chord->stemDirection())
-                              score()->undo()->push(new SetStemDirection(chord, Direction(vp.getStemDirection())));
+                              score()->undo()->push(new ChangeProperty(chord, P_STEM_DIRECTION, Direction(vp.getStemDirection())));
                         if (vp.tuning() != note->tuning())
                               score()->undoChangeTuning(note, vp.tuning());
                         if (DirectionH(vp.getUserMirror()) != note->userMirror())

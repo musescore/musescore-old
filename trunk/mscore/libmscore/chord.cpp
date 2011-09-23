@@ -1757,3 +1757,31 @@ void Chord::setDotPosX(qreal val)
       segment()->setDotPosX(staffIdx(), val);
       }
 
+//---------------------------------------------------------
+//   getProperty
+//---------------------------------------------------------
+
+QVariant Chord::getProperty(int propertyId) const
+      {
+      switch(propertyId) {
+            case P_STEM_DIRECTION: return int(stemDirection());
+            default:
+                  return Element::getProperty(propertyId);
+            }
+      }
+
+//---------------------------------------------------------
+//   setProperty
+//---------------------------------------------------------
+
+void Chord::setProperty(int propertyId, const QVariant& v)
+      {
+      switch(propertyId) {
+            case P_STEM_DIRECTION: setStemDirection(Direction(v.toInt())); break;
+            default:
+                  Element::setProperty(propertyId, v);
+            }
+      }
+
+
+

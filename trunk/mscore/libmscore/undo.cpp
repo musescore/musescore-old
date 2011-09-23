@@ -1476,23 +1476,6 @@ void ChangePitch::flip()
       }
 
 //---------------------------------------------------------
-//   SetStemDirection
-//---------------------------------------------------------
-
-SetStemDirection::SetStemDirection(Chord* c, Direction d)
-      {
-      chord     = c;
-      direction = d;
-      }
-
-void SetStemDirection::flip()
-      {
-      Direction dir = chord->stemDirection();
-      chord->setStemDirection(direction);
-      direction = dir;
-      }
-
-//---------------------------------------------------------
 //   FlipSlurDirection
 //---------------------------------------------------------
 

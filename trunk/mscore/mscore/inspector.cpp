@@ -95,24 +95,27 @@ void Inspector::applyClicked()
 
 void Inspector::setElement(Element* e)
       {
-      if (ie)
-            delete ie;
-      ie = 0;
-      _element = e;
-      apply->setEnabled(_element != 0);
+      if (e == 0 || _element == 0 || (e->type() != _element->type())) {
+            if (ie)
+                  delete ie;
+            ie = 0;
+            _element = e;
+            apply->setEnabled(_element != 0);
 
-      if (_element == 0)
-            return;
-      switch(_element->type()) {
-            case FBOX:
-            case TBOX:
-            case VBOX:         ie = new InspectorVBox(this, this); break;
-            case HBOX:         ie = new InspectorHBox(this, this); break;
-            case ARTICULATION: ie = new InspectorArticulation(this, this); break;
-            case SPACER:       ie = new InspectorSpacer(this, this); break;
-            default:           ie = new InspectorElement(this, this); break;
+            if (_element == 0)
+                  return;
+            switch(_element->type()) {
+                  case FBOX:
+                  case TBOX:
+                  case VBOX:         ie = new InspectorVBox(this, this); break;
+                  case HBOX:         ie = new InspectorHBox(this, this); break;
+                  case ARTICULATION: ie = new InspectorArticulation(this, this); break;
+                  case SPACER:       ie = new InspectorSpacer(this, this); break;
+                  default:           ie = new InspectorElement(this, this); break;
+                  }
+            layout->insertWidget(0, ie);
             }
-      layout->insertWidget(0, ie);
+      _element = e;
       ie->setElement(_element);
       }
 

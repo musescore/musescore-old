@@ -1059,7 +1059,7 @@ void Score::cmdSetBeamMode(int mode)
       if (cr == 0)
             return;
       cr->setBeamMode(BeamMode(mode));
-      layoutAll = true;
+      _layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -1084,7 +1084,7 @@ void Score::cmdFlip()
                               dir = chord->up() ? DOWN : UP;
                         else
                               dir = dir == UP ? DOWN : UP;
-                        undo()->push(new SetStemDirection(chord, dir));
+                        undo()->push(new ChangeProperty(chord, P_STEM_DIRECTION, dir));
                         }
                   }
             else if (e->type() == SLUR_SEGMENT) {
@@ -1099,21 +1099,36 @@ void Score::cmdFlip()
                   undoChangeSubtype(e, e->subtype() == 0 ? 1 : 0);
             else if (e->type() == ARTICULATION) {
                   Articulation* a = static_cast<Articulation*>(e);
-                  Direction d = a->direction();
-                  if (d == AUTO)
-                        d = a->up() ? DOWN : UP;
-                  else if (d == UP)
-                        d = DOWN;
-                  else
-                        d = UP;
-                  undo()->push(new ChangeArticulation(a, d, a->anchor()));
+                  if (e->subtype() == Articulation_Staccato
+                     || e->subtype() == Articulation_Tenuto) {
+                        ArticulationAnchor aa = a->anchor();
+                        if (aa == A_TOP_CHORD)
+                              aa = A_BOTTOM_CHORD;
+                        else if (aa == A_BOTTOM_CHORD)
+                              aa = A_TOP_CHORD;
+                        else if (aa == A_CHORD)
+                              aa = a->up() ? A_BOTTOM_CHORD : A_TOP_CHORD;
+                        if (aa != a->anchor())
+                              undo()->push(new ChangeProperty(a, P_ARTICULATION_ANCHOR, aa));
+                        }
+                  else {
+                        Direction d = a->direction();
+                        if (d == AUTO)
+                              d = a->up() ? DOWN : UP;
+                        else if (d == UP)
+                              d = DOWN;
+                        else
+                              d = UP;
+                        undo()->push(new ChangeProperty(a, P_DIRECTION, d));
+                        }
+                  return;   // no layoutAll
                   }
             else if (e->type() == TUPLET)
                   undo()->push(new FlipTupletDirection(static_cast<Tuplet*>(e)));
             else if (e->type() == NOTEDOT)
                   undo()->push(new FlipNoteDotDirection(static_cast<Note*>(e->parent())));
             }
-      layoutAll = true;
+      _layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -1359,7 +1374,7 @@ void Score::cmdDeleteSelectedMeasures()
 //      selection().clearElements();
       select(0, SELECT_SINGLE, 0);
       _is.setSegment(0);        // invalidate position
-      layoutAll = true;
+      _layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -1466,7 +1481,7 @@ void Score::cmdDeleteSelection()
                   deleteItem(e);
             deselectAll();
             }
-      layoutAll = true;
+      _layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -1566,7 +1581,7 @@ printf("tuplet note duration %s  actualNotes %d  ticks %d\n",
 #endif
             undoAddCR(rest, measure, tick);
             }
-      layoutAll = true;
+      _layoutAll = true;
       }
 
 //---------------------------------------------------------
