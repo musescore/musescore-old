@@ -1468,7 +1468,8 @@ void collectElements(void* data, Element* e)
 QVariant Element::getProperty(int propertyId) const
       {
       switch(propertyId) {
-            case P_COLOR:    return _color;
+            case P_SUBTYPE:  return subtype(); break;
+            case P_COLOR:    return color();
             case P_VISIBLE:  return visible();
             default:
                   printf("getProperty: unknown property %d\n", propertyId);
@@ -1483,7 +1484,8 @@ QVariant Element::getProperty(int propertyId) const
 void Element::setProperty(int propertyId, const QVariant& v)
       {
       switch(propertyId) {
-            case P_COLOR:   _color = v.value<QColor>(); break;
+            case P_SUBTYPE: setSubtype(v.toInt()); break;
+            case P_COLOR:   setColor(v.value<QColor>()); break;
             case P_VISIBLE: setVisible(v.toBool()); break;
             default:
                   printf("getProperty: unknown property %d\n", propertyId);

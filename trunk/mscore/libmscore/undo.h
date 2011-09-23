@@ -322,23 +322,6 @@ class ChangePitch : public UndoCommand {
       };
 
 //---------------------------------------------------------
-//   ChangeSubtype
-//---------------------------------------------------------
-
-class ChangeSubtype : public UndoCommand {
-      Element* element;
-      int subtype;
-      bool generated;
-      void flip();
-
-   public:
-      ChangeSubtype(Element*, int subtype);
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      UNDO_NAME("ChangeSubtype");
-      };
-
-//---------------------------------------------------------
 //   SetStemDirection
 //---------------------------------------------------------
 

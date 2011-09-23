@@ -120,12 +120,14 @@ struct EditData {
 //------------------------------------------------------------------------
 
 enum {
+      P_SUBTYPE,
       P_COLOR,
       P_VISIBLE,
       P_SMALL,
       P_SHOW_COURTESY,
       P_LINE_TYPE,
-      P_TPC
+      P_TPC,
+      P_STEM_DIRECTION
       };
 
 

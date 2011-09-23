@@ -1474,10 +1474,11 @@ static void processBasicDrawObj(QList<BasicDrawObj*> objects, Segment* s, int tr
                         text->setText(st->text());
                         QPointF p(st->pos());
                         p = p / 32.0 * DPMM;
-                        text->setUserOff(st->pos());
-printf("setText %s %f %f <%s>\n",
+                        // text->setUserOff(st->pos());
+                        text->setUserOff(p);
+printf("setText %s (%f %f)(%f %f) <%s>\n",
            qPrintable(st->font().family()),
-           st->pos().x(), st->pos().y(), qPrintable(st->text()));
+           st->pos().x(), st->pos().y(), p.x(), p.y(), qPrintable(st->text()));
                         text->setAlign(ALIGN_LEFT | ALIGN_BASELINE);
                         text->setTrack(track);
                         s->add(text);

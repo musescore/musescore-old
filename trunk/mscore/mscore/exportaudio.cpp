@@ -76,14 +76,13 @@ bool MuseScore::saveAudio(Score* score, const QString& name, const QString& ext)
 
       double peak = 0.0;
       double gain = 1.0;
+      EventMap::const_iterator endPos = events.constEnd();
+      --endPos;
+      const int et = (score->utick2utime(endPos.key()) + 1) * MScore::sampleRate;
       for (int pass = 0; pass < 2; ++pass) {
             EventMap::const_iterator playPos;
             playPos = events.constBegin();
-            EventMap::const_iterator endPos = events.constEnd();
-            --endPos;
-            double et = score->utick2utime(endPos.key());
-            et += 1.0;   // add trailer (sec)
-            pBar->setRange(0, int(et));
+            pBar->setRange(0, et);
 
             //
             // init instruments
@@ -103,7 +102,7 @@ bool MuseScore::saveAudio(Score* score, const QString& name, const QString& ext)
 
             static const unsigned FRAMES = 512;
             float buffer[FRAMES * 2];
-            double playTime = 0.0;
+            int playTime = 0;
             synti->setGain(gain);
 
             for (;;) {
@@ -112,19 +111,19 @@ bool MuseScore::saveAudio(Score* score, const QString& name, const QString& ext)
                   // collect events for one segment
                   //
                   memset(buffer, 0, sizeof(float) * FRAMES * 2);
-                  double endTime = playTime + double(frames)/double(sampleRate);
+                  int endTime = playTime + frames;
                   float* l = buffer;
-                  float* r = buffer + 1;
+                  float* r = buffer + FRAMES;
                   for (; playPos != events.constEnd(); ++playPos) {
-                        double f = score->utick2utime(playPos.key());
+                        int f = score->utick2utime(playPos.key()) * MScore::sampleRate;
                         if (f >= endTime)
                               break;
-                        int n = lrint((f - playTime) * sampleRate);
+                        int n = f - playTime;
                         synti->process(n, l, r);
 
                         l         += n;
                         r         += n;
-                        playTime += double(n)/double(sampleRate);
+                        playTime  += n;
                         frames    -= n;
                         const Event& e = playPos.value();
                         if (e.isChannelEvent()) {
@@ -137,10 +136,18 @@ bool MuseScore::saveAudio(Score* score, const QString& name, const QString& ext)
                         }
                   if (frames) {
                         synti->process(frames, l, r);
-                        playTime += double(frames)/double(sampleRate);
+                        playTime += frames;
                         }
                   if (pass == 1) {
-                        sf_writef_float(sf, buffer, FRAMES);
+                        float b[FRAMES * 2];
+                        float* dp = b;
+                        float* spl = buffer;
+                        float* spr = buffer + FRAMES;
+                        for (unsigned i = 0; i < FRAMES; ++i) {
+                              *dp++ = *spl++;
+                              *dp++ = *spr++;
+                              }
+                        sf_writef_float(sf, b, FRAMES);
                         }
                   else {
                         for (unsigned i = 0; i < FRAMES * 2; ++i) {
@@ -149,8 +156,8 @@ bool MuseScore::saveAudio(Score* score, const QString& name, const QString& ext)
                               }
                         }
                   playTime = endTime;
-                  pBar->setValue(int(playTime));
-                  if (playTime > et)
+                  pBar->setValue(playTime);
+                  if (playTime >= et)
                         break;
                   }
             gain = 0.99 / peak;
