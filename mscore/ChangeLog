@@ -1,4 +1,5 @@
 23.sep (ws)
+      - fix sustain (pedal)
       - fix capella import: text position
       - fix audio (wav/ogg/flac) export
 21.sep (ws)

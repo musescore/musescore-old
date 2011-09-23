@@ -360,6 +360,27 @@ static void collectMeasureEvents(EventMap* events, Measure* m, Part* part, int t
                               }
                         }
                   }
+            foreach(Spanner* e, s->spannerFor()) {
+                  if (e->staffIdx() < firstStaffIdx || e->staffIdx() >= nextStaffIdx)
+                        continue;
+                  if (e->type() == PEDAL) {
+                        Segment* s1 = static_cast<Segment*>(e->startElement());
+                        Segment* s2 = static_cast<Segment*>(e->endElement());
+                        Staff* staff = e->staff();
+
+                        int channel = staff->channel(s1->tick(), 0);
+
+                        Event event(ME_CONTROLLER);
+                        event.setChannel(channel);
+                        event.setController(CTRL_SUSTAIN);
+
+                        event.setValue(127);
+                        events->insertMulti(s1->tick() + tickOffset, event);
+
+                        event.setValue(0);
+                        events->insertMulti(s2->tick() + tickOffset - 1, event);
+                        }
+                  }
             }
       }
 

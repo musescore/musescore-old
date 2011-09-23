@@ -130,7 +130,7 @@ class Segment : public Element {
       int rtick() const       { return _tick; } // tickposition relative to measure start
       void setRtick(int val)  { _tick = val; }
 
-      QList<Spanner*> spannerFor() const { return _spannerFor;  }
+      QList<Spanner*> spannerFor() const  { return _spannerFor;  }
       QList<Spanner*> spannerBack() const { return _spannerBack;       }
       void addSpannerBack(Spanner* e)     { _spannerBack.append(e);    }
       bool removeSpannerBack(Spanner* e)  { return _spannerBack.removeOne(e); }
