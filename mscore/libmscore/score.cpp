@@ -281,7 +281,7 @@ void Score::init()
       _created        = false;
 
       _updateAll      = true;
-      layoutAll       = true;
+      _layoutAll      = true;
       layoutFlags     = 0;
       _playNote       = false;
       _excerptsChanged = false;
@@ -2118,8 +2118,8 @@ void Score::setLayoutAll(bool val)
       while (score->parentScore())
             score = parentScore();
       foreach(Excerpt* excerpt, score->_excerpts)
-            excerpt->score()->layoutAll = val;
-      score->layoutAll = val;
+            excerpt->score()->_layoutAll = val;
+      score->_layoutAll = val;
       }
 
 //---------------------------------------------------------

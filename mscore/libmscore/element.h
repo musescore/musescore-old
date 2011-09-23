@@ -127,7 +127,9 @@ enum {
       P_SHOW_COURTESY,
       P_LINE_TYPE,
       P_TPC,
-      P_STEM_DIRECTION
+      P_STEM_DIRECTION,
+      P_DIRECTION,
+      P_ARTICULATION_ANCHOR
       };
 
 

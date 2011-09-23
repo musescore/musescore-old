@@ -72,7 +72,7 @@ class Accidental;
 class Articulation;
 class Spanner;
 
-#define DEBUG_UNDO
+// #define DEBUG_UNDO
 
 #ifdef DEBUG_UNDO
 #define UNDO_NAME(a)  virtual const char* name() const { return a; }
@@ -319,22 +319,6 @@ class ChangePitch : public UndoCommand {
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangePitch");
-      };
-
-//---------------------------------------------------------
-//   SetStemDirection
-//---------------------------------------------------------
-
-class SetStemDirection : public UndoCommand {
-      Chord* chord;
-      Direction direction;
-      void flip();
-
-   public:
-      SetStemDirection(Chord*, Direction);
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      UNDO_NAME("SetStemDirection");
       };
 
 //---------------------------------------------------------

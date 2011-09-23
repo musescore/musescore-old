@@ -469,4 +469,35 @@ QLineF Articulation::dragAnchor() const
       return QLineF(canvasPos(), parent()->canvasPos());
       }
 
+//---------------------------------------------------------
+//   getProperty
+//---------------------------------------------------------
+
+QVariant Articulation::getProperty(int propertyId) const
+      {
+      switch(propertyId) {
+            case P_DIRECTION:           return int(direction());
+            case P_ARTICULATION_ANCHOR: return int(anchor());
+            default:
+                  return Element::getProperty(propertyId);
+            }
+      }
+
+//---------------------------------------------------------
+//   setProperty
+//---------------------------------------------------------
+
+void Articulation::setProperty(int propertyId, const QVariant& v)
+      {
+      score()->addRefresh(canvasBoundingRect());
+      switch(propertyId) {
+            case P_DIRECTION:           setDirection(Direction(v.toInt())); break;
+            case P_ARTICULATION_ANCHOR: setAnchor(ArticulationAnchor(v.toInt())); break;
+            default:
+                  Element::setProperty(propertyId, v);
+            }
+      chordRest()->layoutArticulations();
+      score()->addRefresh(canvasBoundingRect());
+      score()->setLayoutAll(false);       //DEBUG
+      }
 

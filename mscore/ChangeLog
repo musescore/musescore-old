@@ -1,4 +1,6 @@
 23.sep (ws)
+      - implement flip command ("x") for tenuto and staccato articulation symbols.
+        Flip changes anchor position note head <-> stem
       - fix sustain (pedal)
       - fix capella import: text position
       - fix audio (wav/ogg/flac) export

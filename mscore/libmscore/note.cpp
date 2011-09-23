@@ -1495,7 +1495,7 @@ void Note::toDefault()
       score()->undoChangeChordRestSpace(chord(), Spatium(0.0), Spatium(0.0));
       score()->undoChangeUserOffset(this, QPointF());
       score()->undoChangeUserOffset(chord(), QPointF());
-      score()->undo()->push(new SetStemDirection(chord(), AUTO));
+      score()->undo()->push(new ChangeProperty(chord(), P_STEM_DIRECTION, AUTO));
       }
 
 //---------------------------------------------------------

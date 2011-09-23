@@ -270,7 +270,7 @@ class Score {
       QRectF refresh;
       bool _updateAll;
       Measure* startLayout;   ///< start a relayout at this measure
-      bool layoutAll;         ///< do a complete relayout
+      bool _layoutAll;        ///< do a complete relayout
       LayoutFlags layoutFlags;
       bool _playNote;         ///< play selected note after command
       bool _excerptsChanged;
@@ -534,6 +534,7 @@ class Score {
 
       void setUpdateAll(bool v = true) { _updateAll = v;   }
       void setLayoutAll(bool val);
+      bool layoutAll() const           { return _layoutAll; }
       void addRefresh(const QRectF& r) { refresh |= r;     }
 
       void changeVoice(int);

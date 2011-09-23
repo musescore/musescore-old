@@ -4117,7 +4117,6 @@ void MuseScore::endCmd()
             if (cv->noteEntryMode())
                   cs->moveCursor();
             setPos(cs->inputState().tick());
-// printf("updateInputState %s\n", qPrintable(cs->inputState().duration().name()));
             updateInputState(cs);
             updateUndoRedo();
             cs->setDirty(!cs->undo()->isClean());
