@@ -341,7 +341,7 @@ void Score::undoChangeElement(Element* oldElement, Element* newElement)
 
 void Score::undoChangeSubtype(Element* element, int st)
       {
-      undo()->push(new ChangeSubtype(element, st));
+      undo()->push(new ChangeProperty(element, P_SUBTYPE, st));
       }
 
 //---------------------------------------------------------
@@ -1536,40 +1536,6 @@ void FlipTupletDirection::flip()
 void FlipNoteDotDirection::flip()
       {
       note->setDotPosition(note->dotIsUp() ? DOWN : UP);
-      }
-
-//---------------------------------------------------------
-//   ChangeSubtype
-//---------------------------------------------------------
-
-ChangeSubtype::ChangeSubtype(Element* e, int st)
-      {
-      element   = e;
-      generated = false;
-      subtype   = st;
-      }
-
-void ChangeSubtype::flip()
-      {
-      int st  = element->subtype();
-      bool og = element->generated();
-
-      element->setSubtype(subtype);
-      element->setGenerated(generated);
-      if (element->type() == CLEF) {
-            //
-            // TODO: remove; should not be called anymore: replaced by
-            // ChangeClefType
-            //
-            Clef* clef       = static_cast<Clef*>(element);
-            Segment* segment = clef->segment();
-            // Staff* staff     = clef->staff();
-            // staff->setClef(segment->tick(), ClefType(subtype));
-            updateNoteLines(segment, clef->track());
-            clef->score()->setLayoutAll(true);
-            }
-      subtype   = st;
-      generated = og;
       }
 
 //---------------------------------------------------------

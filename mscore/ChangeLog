@@ -1,3 +1,6 @@
+23.sep (ws)
+      - fix capella import: text position
+      - fix audio (wav/ogg/flac) export
 21.sep (ws)
       - fix #11157: Omitting staves when creating score causes crash
       - fix #12651: Moving object, then undo causes crash

@@ -1095,10 +1095,8 @@ void Score::cmdFlip()
                   Beam* beam = static_cast<Beam*>(e);
                   undo()->push(new FlipBeamDirection(beam));
                   }
-            else if (e->type() == HAIRPIN_SEGMENT) {
-                  Hairpin* hp = static_cast<HairpinSegment*>(e)->hairpin();
-                  undo()->push(new ChangeSubtype(hp, hp->subtype() == 0 ? 1 : 0));
-                  }
+            else if (e->type() == HAIRPIN_SEGMENT)
+                  undoChangeSubtype(e, e->subtype() == 0 ? 1 : 0);
             else if (e->type() == ARTICULATION) {
                   Articulation* a = static_cast<Articulation*>(e);
                   Direction d = a->direction();
