@@ -127,11 +127,11 @@ void LayerManager::addTagClicked()
       QString item = QInputDialog::getItem(this, tr("MuseScore: select layer tag"), tr("layer tag"),
          items, 0, false, &ok);
       if (ok && !item.isEmpty()) {
-            uint tagBits = 0;
+//            uint tagBits = 0;
             for (int i = 0; i < 31; ++i) {
                   QString s = score->layerTags()[i+1];
                   if (s == item) {
-                        tagBits = 1 << (i+1);
+//                        tagBits = 1 << (i+1);
                         break;
                         }
                   }

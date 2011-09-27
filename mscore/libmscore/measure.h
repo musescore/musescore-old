@@ -151,6 +151,7 @@ class Measure : public MeasureBase {
       System* system() const               { return (System*)parent(); }
       QList<MStaff*>* staffList()          { return &staves;      }
       MStaff* mstaff(int staffIdx)         { return staves[staffIdx]; }
+      bool hasVoices(int staffIdx) const   { return staves[staffIdx]->hasVoices; }
       StaffLines* staffLines(int staffIdx) { return staves[staffIdx]->lines; }
       QList<Tuplet*>* tuplets()            { return &_tuplets;    }
       int no() const                       { return _no;          }

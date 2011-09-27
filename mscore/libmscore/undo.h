@@ -69,10 +69,9 @@ class SlurSegment;
 class InstrumentChange;
 class Box;
 class Accidental;
-class Articulation;
 class Spanner;
 
-// #define DEBUG_UNDO
+#define DEBUG_UNDO
 
 #ifdef DEBUG_UNDO
 #define UNDO_NAME(a)  virtual const char* name() const { return a; }
@@ -1483,25 +1482,6 @@ class MoveStaff : public UndoCommand {
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("MoveStaff");
-      };
-
-//---------------------------------------------------------
-//   ChangeArticulation
-//---------------------------------------------------------
-
-class ChangeArticulation : public UndoCommand {
-      Articulation* a;
-      Direction direction;
-      ArticulationAnchor anchor;
-
-      void flip();
-
-   public:
-      ChangeArticulation(Articulation* _a, Direction d, ArticulationAnchor an)
-         : a(_a), direction(d), anchor(an) {}
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      UNDO_NAME("ChangeArticulation");
       };
 
 //---------------------------------------------------------

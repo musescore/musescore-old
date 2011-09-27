@@ -80,8 +80,8 @@ class KeyList : public std::map<const int, KeySigEvent> {
       void read(QDomElement, Score*);
       void write(Xml&, const char* name) const;
 
-      void removeTime(int start, int len);
-      void insertTime(int start, int len);
+//      void removeTime(int start, int len);
+//      void insertTime(int start, int len);
       };
 
 extern int transposeKey(int oldKey, int semitones);

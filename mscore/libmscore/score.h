@@ -388,6 +388,7 @@ class Score {
       QList<Fraction> splitGapToMeasureBoundaries(ChordRest*, Fraction);
       void pasteChordRest(ChordRest* cr, int tick);
       void init();
+      void removeGeneratedElements(MeasureBase* mb, MeasureBase* end);
 
    public:
       void setDirty(bool val);

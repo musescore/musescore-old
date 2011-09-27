@@ -3423,6 +3423,7 @@ void ScoreView::startDrag()
       _score->end();
       }
 
+#if 0
 //---------------------------------------------------------
 //   drag
 //---------------------------------------------------------
@@ -3449,6 +3450,7 @@ void ScoreView::drag(const QPointF& delta)
             _score->setPlayNote(false);
             }
       }
+#endif
 
 //---------------------------------------------------------
 //   endDrag
@@ -3654,7 +3656,29 @@ void ScoreView::noteEntryButton(QMouseEvent* ev)
 void ScoreView::doDragElement(QMouseEvent* ev)
       {
       QPointF delta = toLogical(ev->pos()) - startMove;
-      drag(delta);
+//      drag(delta);
+
+      QPointF pt(delta);
+      if (qApp->keyboardModifiers() == Qt::ShiftModifier)
+            pt.setX(0.0);
+      else if (qApp->keyboardModifiers() == Qt::ControlModifier)
+            pt.setY(0.0);
+      EditData data;
+      data.hRaster = mscore->hRaster();
+      data.vRaster = mscore->vRaster();
+      data.pos     = pt;
+      foreach(Element* e, _score->selection().elements())
+            _score->addRefresh(e->drag(data));
+//      _score->end();
+      if (_score->playNote()) {
+            Element* e = _score->selection().element();
+            if (e) {
+                  mscore->play(e);
+                  }
+            _score->setPlayNote(false);
+            }
+
+
       Element* e = _score->getSelectedElement();
       if (e) {
             QLineF anchor = e->dragAnchor();
@@ -3663,6 +3687,7 @@ void ScoreView::doDragElement(QMouseEvent* ev)
             else
                   setDropTarget(0); // this also resets dropAnchor
             }
+      _score->end();
       }
 
 //---------------------------------------------------------
@@ -4430,8 +4455,10 @@ void ScoreView::endUndoRedo()
             }
       _score->updateSelection();
       mscore->updateInputState(_score);
-      if (_score->layoutAll())
+      if (_score->layoutAll()) {
             _score->doLayout();           // TODO: does not really work
+            _score->setUpdateAll(true);
+            }
       _score->end();
       mscore->endCmd();
       }

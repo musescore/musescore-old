@@ -1100,7 +1100,8 @@ void Score::cmdFlip()
             else if (e->type() == ARTICULATION) {
                   Articulation* a = static_cast<Articulation*>(e);
                   if (e->subtype() == Articulation_Staccato
-                     || e->subtype() == Articulation_Tenuto) {
+                     || e->subtype() == Articulation_Tenuto
+                     || e->subtype() == Articulation_Sforzatoaccent) {
                         ArticulationAnchor aa = a->anchor();
                         if (aa == A_TOP_CHORD)
                               aa = A_BOTTOM_CHORD;

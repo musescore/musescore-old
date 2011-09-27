@@ -505,11 +505,12 @@ void Staff::setKey(int tick, int st)
       KeySigEvent ke;
       ke.setAccidentalType(st);
 
-      (*_keymap)[tick] = ke;
+      setKey(tick, ke);
       }
 
 void Staff::setKey(int tick, const KeySigEvent& st)
       {
+printf("Staff::setKey staff %d tick %d -- %d\n", idx(), tick, st.accidentalType());
       (*_keymap)[tick] = st;
       }
 
