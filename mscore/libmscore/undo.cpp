@@ -1862,6 +1862,7 @@ void ChangeBarLineSpan::flip()
       int nspan = staff->barLineSpan();
       staff->setBarLineSpan(span);
       span = nspan;
+      staff->score()->setLayoutAll(true);
       }
 
 //---------------------------------------------------------
