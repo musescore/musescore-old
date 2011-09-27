@@ -1,3 +1,6 @@
+27.sep (ws)
+      - fix #12682: When reducing bar line span, other bar lines are not updated
+        (patch from miwarre)
 24.sep (lv)
       - add MusicXML testfile for issue 12382 ("Key Signature for 2 Staves")
 23.sep (ws)

@@ -4756,7 +4756,7 @@ void ScoreView::changeVoice(int voice)
                                     score()->undoRemoveElement(note);
                                     score()->undoAddElement(newChord);
                                     }
-                              else if (notes > 1 || (voice && chord->voice())) {
+                              else if (notes == 1 && voice && chord->voice()) {
                                     Chord* newChord = new Chord(*chord);
                                     int track = chord->staffIdx() * VOICES + voice;
                                     newChord->setTrack(track);

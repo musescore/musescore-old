@@ -457,17 +457,22 @@ void BarLine::endEdit()
       int idx1 = staffIdx();
 
       if (_span > staff()->barLineSpan()) {
+            // if span increased, set span to 0 for all newly spanned staves
             int idx2 = idx1 + _span;
             for (int idx = idx1 + 1; idx < idx2; ++idx)
                   score()->undoChangeBarLineSpan(score()->staff(idx), 0);
             }
       else {
+            // if span decreased, set span to 1 (the default) for all staves no longer spanned
             int idx1 = staffIdx() + _span;
             int idx2 = staffIdx() + staff()->barLineSpan();
             for (int idx = idx1; idx < idx2; ++idx)
                   score()->undoChangeBarLineSpan(score()->staff(idx), 1);
             }
+      // update span for the staff the edited bar line belongs to
       score()->undoChangeBarLineSpan(staff(), _span);
+      // added "_score->setLayoutAll(true);" to ChangeBarLineSpan::flip()
+      // otherwise no measure bar line update occurs
       }
 
 //---------------------------------------------------------
@@ -515,6 +520,7 @@ void BarLine::endEditDrag()
             }
       int newSpan = staffIdx2 - staffIdx1 + 1;
       if (newSpan != _span) {
+/*    ONLY TAKE NOTE OF NEW BAR LINE SPAN: LET BarLine::endEdit() DO THE JOB!
             if (newSpan > _span) {
                   int diff = newSpan - _span;
                   staffIdx1 += _span;
@@ -529,8 +535,8 @@ void BarLine::endEditDrag()
                               }
                         }
                   }
-            _span = newSpan;
-            score()->undoChangeBarLineSpan(staff(), _span);
+*/            _span = newSpan;
+//            score()->undoChangeBarLineSpan(staff(), _span);
             }
       }
 
