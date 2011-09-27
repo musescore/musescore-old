@@ -217,7 +217,6 @@ void Articulation::read(QDomElement e)
                         dir = AUTO;
                   else
                         domError(e);
-//                  printf("setDirection %s %d\n", qPrintable(val), int(dir));
                   setDirection(dir);
                   }
             else if (!Element::readProperties(e))
@@ -453,11 +452,14 @@ void Articulation::setDirection(Direction d)
 
 void Articulation::toDefault()
       {
-      if (_direction != AUTO) {
-            score()->undo()->push(new ChangeArticulation(this, AUTO,
-              score()->style()->articulationAnchor(subtype())));
-            }
+      if (_direction != AUTO)
+            score()->undo()->push(new ChangeProperty(this, P_DIRECTION, int(AUTO)));
+      ArticulationAnchor a = score()->style()->articulationAnchor(subtype());
+      if (_anchor != a)
+            score()->undo()->push(new ChangeProperty(this, P_ARTICULATION_ANCHOR, int(a)));
       Element::toDefault();
+      chordRest()->layoutArticulations();
+      score()->addRefresh(canvasBoundingRect());
       }
 
 //---------------------------------------------------------

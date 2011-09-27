@@ -226,31 +226,27 @@ bool KeySig::acceptDrop(MuseScoreView*, const QPointF&, int type, int) const
 Element* KeySig::drop(const DropData& data)
       {
       Element* e = data.element;
-      if (e->type() == KEYSIG) {
-            KeySig* ks    = static_cast<KeySig*>(e);
-            KeySigEvent k = ks->keySigEvent();
-            if (k.custom()) {
-                  int customIdx = score()->customKeySigIdx(ks);
-                  if (customIdx == -1)
-                        customIdx = score()->addCustomKeySig(ks);
-                  else
-                        delete ks;
-                  }
-            else
-                  delete ks;
-            if (data.modifiers & Qt::ControlModifier) {
-                  // apply to all staves:
-                  foreach(Staff* s, score()->staves())
-                        score()->undoChangeKeySig(s, tick(), k);
-                  }
-            else {
-                  if (k != keySigEvent())
-                        score()->undoChangeKeySig(staff(), tick(), k);
-                  }
-            return this;
+      if (e->type() != KEYSIG) {
+            delete e;
+            return 0;
             }
-      delete e;
-      return 0;
+
+      KeySig* ks    = static_cast<KeySig*>(e);
+      KeySigEvent k = ks->keySigEvent();
+      if (k.custom() && (score()->customKeySigIdx(ks) == -1))
+            score()->addCustomKeySig(ks);
+      else
+            delete ks;
+      if (data.modifiers & Qt::ControlModifier) {
+            // apply to all staves:
+            foreach(Staff* s, score()->staves())
+                  score()->undoChangeKeySig(s, tick(), k);
+            }
+      else {
+            if (k != keySigEvent())
+                  score()->undoChangeKeySig(staff(), tick(), k);
+            }
+      return this;
       }
 
 //---------------------------------------------------------

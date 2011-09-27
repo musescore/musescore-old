@@ -388,6 +388,9 @@ void Score::undoChangePitch(Note* note, int pitch, int tpc, int line, int fret, 
 
 void Score::undoChangeKeySig(Staff* ostaff, int tick, KeySigEvent st)
       {
+printf("undoChangeKeySig staff %d, tick %d -- %d\n",
+   ostaff->score()->staffIdx(ostaff), tick, st.accidentalType());
+
       QList<Staff*> staffList;
       LinkedStaves* linkedStaves = ostaff->linkedStaves();
       if (linkedStaves)
@@ -409,7 +412,7 @@ void Score::undoChangeKeySig(Staff* ostaff, int tick, KeySigEvent st)
             int track    = staffIdx * VOICES;
             KeySig* ks   = static_cast<KeySig*>(s->element(track));
 
-            KeySig* nks = new KeySig(score);
+            KeySig* nks  = new KeySig(score);
             nks->setTrack(track);
             nks->changeKeySigEvent(st);
             nks->setParent(s);
@@ -418,10 +421,14 @@ void Score::undoChangeKeySig(Staff* ostaff, int tick, KeySigEvent st)
             links->append(nks);
             nks->setLinks(links);
 
-            if (ks)
+            if (ks) {
+                  printf("  changeElement\n");
                   undo()->push(new ChangeElement(ks, nks));
-            else
+                  }
+            else {
+                  printf("  addElement\n");
                   undo()->push(new AddElement(nks));
+                  }
             score->cmdUpdateNotes();
             }
       }
@@ -916,7 +923,7 @@ void Score::undoAddElement(Element* element)
                   Tie* ntie      = static_cast<Tie*>(ne);
                   QList<SpannerSegment*>& segments = ntie->spannerSegments();
                   foreach(SpannerSegment* segment, segments)
-                              delete segment;
+                        delete segment;
                   segments.clear();
                   ntie->setTrack(c1->track());
                   ntie->setStartNote(nn1);
@@ -1647,6 +1654,7 @@ void ChangeKeySig::flip()
       showCourtesy = sc;
       showNaturals = sn;
       ks           = oe;
+      keysig->score()->setLayoutAll(true);
       }
 
 //---------------------------------------------------------
@@ -3011,22 +3019,6 @@ void MoveStaff::flip()
       part = oldPart;
       rstaff = idx;
       staff->score()->setLayoutAll(true);
-      }
-
-//---------------------------------------------------------
-//   ChangeArticulation::flip
-//---------------------------------------------------------
-
-void ChangeArticulation::flip()
-      {
-      a->score()->addRefresh(a->canvasBoundingRect());
-      Direction d = a->direction();
-      ArticulationAnchor an = a->anchor();
-      a->setDirection(direction);
-      a->setAnchor(anchor);
-      direction = d;
-      anchor    = an;
-      a->score()->addRefresh(a->canvasBoundingRect());
       }
 
 //---------------------------------------------------------

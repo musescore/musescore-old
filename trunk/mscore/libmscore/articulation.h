@@ -56,9 +56,9 @@ class Articulation : public Element {
       Q_DECLARE_TR_FUNCTIONS(Articulation)
 
       Direction _direction;
-      bool _up;
       QString _channelName;
       ArticulationAnchor _anchor;
+      bool _up;
 
       virtual void draw(Painter*) const;
 

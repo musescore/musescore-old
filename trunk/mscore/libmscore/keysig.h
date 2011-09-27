@@ -55,8 +55,10 @@ class KeySig : public Element {
       virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
       virtual void layout();
+
       void setSig(int oldSig, int newSig);
       void setOldSig(int oldSig);
+
       Segment* segment() const            { return (Segment*)parent(); }
       Measure* measure() const            { return (Measure*)parent()->parent(); }
       Space space() const;

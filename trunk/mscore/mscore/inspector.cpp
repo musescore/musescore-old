@@ -360,8 +360,10 @@ void InspectorArticulation::apply()
             score->undo()->push(new ChangeUserOffset(a, o - a->ipos()));
       Direction d = Direction(ar.direction->currentIndex());
       ArticulationAnchor anchor = ArticulationAnchor(ar.anchor->currentIndex());
-      if (d != a->direction() || anchor != a->anchor())
-            score->undo()->push(new ChangeArticulation(a, d, anchor));
+      if (anchor != a->anchor())
+            score->undo()->push(new ChangeProperty(a, P_ARTICULATION_ANCHOR, int(anchor)));
+      if (d != a->direction())
+            score->undo()->push(new ChangeProperty(a, P_DIRECTION, int(d)));
       score->endCmd();
       mscore->endCmd();
       }

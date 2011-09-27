@@ -42,6 +42,7 @@
 #include "layoutbreak.h"
 #include "mscore.h"
 #include "accidental.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //   rebuildBspTree
@@ -608,42 +609,36 @@ void Score::doLayout()
             updateVelo();
       layoutFlags = 0;
 
-      bool updateStaffLists = true;
-      foreach(Staff* st, _staves) {
-            if (st->updateKeymap()) {
-                  st->keymap()->clear();
-                  updateStaffLists = true;
-                  }
-            }
-      if (updateStaffLists) {
-            int nstaves = _staves.size();
-            for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-                  int track = staffIdx * VOICES;
-                  Staff* st = _staves[staffIdx];
-                  KeySig* key1 = 0;
-                  for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
-                        for (Segment* s = m->first(); s; s = s->next()) {
-                              if (s == s->next())
-                                    abort();
-                              Element* e = s->element(track);
-                              if (e == 0 || e->generated())
-                                    continue;
-                              if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
-                                    KeySig* ks = static_cast<KeySig*>(e);
-                                    int naturals = key1 ? key1->keySigEvent().accidentalType() : 0;
-                                    ks->setOldSig(naturals);
-                                    st->setKey(s->tick(), ks->keySigEvent());
-                                    key1 = ks;
-                                    }
+      int nstaves = _staves.size();
+      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+            Staff* st = _staves[staffIdx];
+            if (!st->updateKeymap())
+                  continue;
+            int track = staffIdx * VOICES;
+            st->keymap()->clear();
+            KeySig* key1 = 0;
+            for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+                  for (Segment* s = m->first(); s; s = s->next()) {
+                        if (s == s->next())
+                              abort();
+                        Element* e = s->element(track);
+                        if (e == 0 || e->generated())
+                              continue;
+                        if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
+                              KeySig* ks = static_cast<KeySig*>(e);
+                              int naturals = key1 ? key1->keySigEvent().accidentalType() : 0;
+                              ks->setOldSig(naturals);
+                              st->setKey(s->tick(), ks->keySigEvent());
+                              key1 = ks;
                               }
-                        if (m->sectionBreak())
-                              key1 = 0;
                         }
+                  if (m->sectionBreak())
+                        key1 = 0;
                   }
-            foreach(Staff* st, _staves)
-                  st->setUpdateKeymap(false);
+            st->setUpdateKeymap(false);
             }
 
+            printf("-----\n");
 #if 0 // DEBUG
       if (startLayout) {
             startLayout->setDirty();
@@ -678,7 +673,7 @@ void Score::doLayout()
       //   place Spanner & beams
       //---------------------------------------------------
 
-      int tracks = nstaves() * VOICES;
+      int tracks = nstaves * VOICES;
       for (int track = 0; track < tracks; ++track) {
             for (Segment* segment = firstSegment(); segment; segment = segment->next1()) {
                   Element* e = segment->element(track);
@@ -760,8 +755,10 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                         case KEYSIG:
                               keysig = static_cast<KeySig*>(el);
                               keysig->changeKeySigEvent(keyIdx);
-                              if (!keysig->isCustom() && oKeySigBefore.accidentalType() == keysig->keySignature())
+                              if (!keysig->isCustom() && oKeySigBefore.accidentalType() == keysig->keySignature()) {
+printf("set old keysig tick %d staff %d\n", tick, i);
                                     keysig->setOldSig(0);
+                                    }
                               keysig->setMag(staff->mag());
                               break;
                         case CLEF:
@@ -783,6 +780,7 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
             if (staff->useTablature())
                   needKeysig = false;
             if (needKeysig && !keysig) {
+printf("create missing keysig\n");
                   //
                   // create missing key signature
                   //
@@ -798,8 +796,10 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                   keysig->setParent(seg);
                   undoAddElement(keysig);
                   }
-            else if (!needKeysig && keysig)
+            else if (!needKeysig && keysig) {
+printf("remove unneeded keysig\n");
                   undoRemoveElement(keysig);
+                  }
             bool needClef = isFirstSystem || styleB(ST_genClef);
             if (needClef) {
                   if (!clef) {
@@ -906,13 +906,12 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
       system->setInstrumentNames(longName);
       system->layout(xo);
 
-      minWidth            = system->leftMargin();
-      qreal systemWidth  = w;
-
-      bool continueFlag   = false;
-
-      int nstaves = Score::nstaves();
-      bool isFirstMeasure = true;
+      minWidth              = system->leftMargin();
+      qreal systemWidth     = w;
+      bool continueFlag     = false;
+      bool isFirstMeasure   = true;
+      Measure* firstMeasure = 0;
+      Measure* lastMeasure  = 0;
 
       for (; curMeasure;) {
             MeasureBase* nextMeasure;
@@ -944,37 +943,12 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
                   }
             else if (curMeasure->type() == MEASURE) {
                   Measure* m = static_cast<Measure*>(curMeasure);
+                  if (firstMeasure == 0)
+                        firstMeasure = m;
+                  lastMeasure = m;
+
                   if (isFirstMeasure)
                         processSystemHeader(m, isFirstSystem);
-
-                  //
-                  // remove generated elements
-                  //    assume: generated elements are only living in voice 0
-                  //
-                  for (Segment* seg = m->first(); seg; seg = seg->next()) {
-                        if (seg->subtype() == SegEndBarLine)
-                              continue;
-                        for (int staffIdx = 0;  staffIdx < nstaves; ++staffIdx) {
-                              int track = staffIdx * VOICES;
-                              Element* el = seg->element(track);
-                              if (el == 0)
-                                    continue;
-                              if (el->generated()) {
-                                    if (!isFirstMeasure || (seg->subtype() == SegTimeSigAnnounce))
-                                          undoRemoveElement(el);
-                                    }
-                              qreal staffMag = staff(staffIdx)->mag();
-                              if (el->type() == CLEF) {
-                                    Clef* clef = static_cast<Clef*>(el);
-//printf("Clef: setSmall %d - firstMeasure %d firstSegment %d\n",
-//        !isFirstMeasure || (seg != m->first()), isFirstMeasure, seg == m->first());
-                                    clef->setSmall(!isFirstMeasure || (seg != m->first()));
-                                    clef->setMag(staffMag);
-                                    }
-                              else if (el->type() == KEYSIG || el->type() == TIMESIG)
-                                    el->setMag(staffMag);
-                              }
-                        }
 
                   m->createEndBarLines();
 
@@ -1008,6 +982,11 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
                   }
             else
                   curMeasure = nextMeasure;
+            }
+
+      if (firstMeasure != 0 && lastMeasure != 0 && firstMeasure != lastMeasure) {
+            MeasureBase* mb = firstMeasure->next();
+            removeGeneratedElements(mb, lastMeasure);
             }
 
       //
@@ -1048,6 +1027,44 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
             ++staffIdx;
             }
       return continueFlag && curMeasure;
+      }
+
+//---------------------------------------------------------
+//   removeGeneratedElements (TimeSig Announce)
+//    helper function
+//---------------------------------------------------------
+
+void Score::removeGeneratedElements(MeasureBase* mb, MeasureBase* end)
+      {
+      for (; mb != end; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = static_cast<Measure*>(mb);
+            //
+            // remove generated elements
+            //    assume: generated elements are only living in voice 0
+            //
+            for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                  if (seg->subtype() == SegEndBarLine)
+                        continue;
+                  for (int staffIdx = 0;  staffIdx < nstaves(); ++staffIdx) {
+                        int track = staffIdx * VOICES;
+                        Element* el = seg->element(track);
+                        if (el == 0)
+                              continue;
+                        qreal staffMag = staff(staffIdx)->mag();
+                        if (el->generated() && seg->subtype() == SegTimeSigAnnounce)
+                              undoRemoveElement(el);
+                        else if (el->type() == CLEF) {
+                              Clef* clef = static_cast<Clef*>(el);
+                              clef->setSmall(true);
+                              clef->setMag(staffMag);
+                              }
+                        else if (el->type() == KEYSIG || el->type() == TIMESIG)
+                              el->setMag(staffMag);
+                        }
+                  }
+            }
       }
 
 //---------------------------------------------------------
@@ -1327,8 +1344,7 @@ void Score::layoutFingering(Fingering* f)
 //    return hight in h
 //---------------------------------------------------------
 
-QList<System*> Score::layoutSystemRow(qreal rowWidth,
-   bool isFirstSystem, bool useLongName)
+QList<System*> Score::layoutSystemRow(qreal rowWidth, bool isFirstSystem, bool useLongName)
       {
       bool raggedRight = MScore::layoutDebug;
 
@@ -1404,40 +1420,56 @@ QList<System*> Score::layoutSystemRow(qreal rowWidth,
                               needRelayout = true;
                               }
                         }
-                  // courtesy key signatures
-                  if (styleB(ST_genCourtesyKeysig)) {
-                        int n = _staves.size();
-                        for (int staffIdx = 0; staffIdx < n; ++staffIdx) {
-                              Staff* staff = _staves[staffIdx];
-                              KeySigEvent key1 = staff->key(tick - 1);
-                              KeySigEvent key2 = staff->key(tick);
 
+                  // courtesy key signatures
+                  int n = _staves.size();
+                  for (int staffIdx = 0; staffIdx < n; ++staffIdx) {
+                        int track = staffIdx * VOICES;
+                        Staff* staff = _staves[staffIdx];
+                        showCourtesySig = false;
+
+                        KeySigEvent key1 = staff->key(tick - 1);
+                        KeySigEvent key2 = staff->key(tick);
+                        if (styleB(ST_genCourtesyKeysig) && (key1 != key2)) {
                               // locate a key sig. in next measure and, if found,
                               // check if it has court. sig turned off
                               s = nm->findSegment(SegKeySig, tick);
                               showCourtesySig = true;	// assume this key change has court. sig turned on
                               if (s) {
-                                    KeySig* ks = static_cast<KeySig*>(s->element(staffIdx*VOICES));
+                                    KeySig* ks = static_cast<KeySig*>(s->element(track));
                                     if (ks && !ks->showCourtesySig())
                                           showCourtesySig = false;     // this key change has court. sig turned off
                                     }
 
-                              if (key1 != key2 && showCourtesySig) {
+                              if (showCourtesySig) {
                                     hasCourtesyKeysig = true;
                                     s  = m->undoGetSegment(SegKeySigAnnounce, tick);
-                                    int track = staffIdx * VOICES;
-                                    if (!s->element(track)) {
-                                          KeySig* ks = new KeySig(this);
-                                          ks->setSig(key1.accidentalType(), key2.accidentalType());
+                                    KeySig* ks = static_cast<KeySig*>(s->element(track));
+                                    KeySigEvent ksv(key2);
+                                    ksv.setNaturalType(key1.accidentalType());
+
+                                    if (!ks) {
+                                          ks = new KeySig(this);
+                                          ks->setKeySigEvent(ksv);
                                           ks->setTrack(track);
                                           ks->setGenerated(true);
                                           ks->setMag(staff->mag());
                                           ks->setParent(s);
                                           undoAddElement(ks);
                                           }
+                                    else if (ks->keySigEvent() != ksv) {
+                                          undo()->push(new ChangeKeySig(ks, ksv,
+                                             ks->showCourtesySig(), ks->showNaturals()));
+                                          }
                                     // change bar line to qreal bar line
                                     m->setEndBarLineType(DOUBLE_BAR, true);
                                     }
+                              }
+                        if (!showCourtesySig) {
+                              // remove any existent courtesy key signature
+                              Segment* s = m->findSegment(SegKeySigAnnounce, tick);
+                              if (s && s->element(track))
+                                    undoRemoveElement(s->element(track));
                               }
                         }
 

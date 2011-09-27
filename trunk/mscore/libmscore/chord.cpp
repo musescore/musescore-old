@@ -1783,5 +1783,159 @@ void Chord::setProperty(int propertyId, const QVariant& v)
             }
       }
 
+//---------------------------------------------------------
+//   layoutArticulation
+//    called from chord()->layoutArticulations()
+//---------------------------------------------------------
 
+void Chord::layoutArticulation(Articulation* a)
+      {
+      qreal _spatium  = spatium();
 
+      a->layout();
+      ArticulationAnchor aa = a->anchor();
+
+      qreal chordTopY = upPos();    // note position of highest note
+      qreal chordBotY = downPos();  // note position of lowest note
+      qreal x         = centerX();
+
+      if (a->subtype() == Articulation_Tenuto || a->subtype() == Articulation_Staccato) {
+            bool bottom;
+            if ((aa == A_CHORD) && measure()->hasVoices(a->staffIdx()))
+                  bottom = !up();
+            else
+                  bottom = (aa == A_BOTTOM_CHORD) || (aa == A_CHORD && up());
+            bool stemSide = (bottom != up()) && stem();
+
+            qreal y;
+            if (bottom) {
+                  int line = downLine();
+                  if (stemSide) {
+                        y = chordTopY + stem()->stemLen();
+                        if (beam())
+                              y += score()->styleS(ST_beamWidth).val() * _spatium * .5;
+                        x = stem()->pos().x();
+                        int line   = lrint((y + 0.5 * _spatium) / _spatium);
+                        if (line <= 4)    // align between staff lines
+                              y = (line - .5) * _spatium;
+                        else
+                              y += _spatium;
+                        }
+                  else {
+                        int lines = (staff()->lines() - 1) * 2;
+                        if (line < lines)
+                              y = (line & ~1) + 3;
+                        else
+                              y = line + 2;
+                        y *= _spatium * .5;
+                        }
+                  }
+            else {
+                  int line = upLine();
+                  if (stemSide) {
+                        y = chordBotY + stem()->stemLen();
+                        if (beam())
+                              y -= score()->styleS(ST_beamWidth).val() * _spatium * .5;
+                        x = stem()->pos().x();
+                        int line = lrint((y - 0.5 * _spatium) / _spatium);
+                        if (line >= 0)    // align between staff lines
+                              y = (line - .5) * _spatium;
+                        else
+                              y -= _spatium;
+                        }
+                  else {
+                        if (line > 0)
+                              y = ((line+1) & ~1) - 3;
+                        else
+                              y = line - 2;
+                        y *= _spatium * .5;
+                        }
+                  }
+            a->setPos(x, y);
+            return;
+            }
+
+      // reserve space for slur
+      bool botGap = false;
+      bool topGap = false;
+      foreach(Slur* s, slurFor()) {
+            if (s->up())
+                  topGap = true;
+            else
+                  botGap = true;
+            }
+      foreach(Slur* s, slurBack()) {
+            if (s->up())
+                  topGap = true;
+            else
+                  botGap = true;
+            }
+      if (botGap)
+            chordBotY += _spatium;
+      if (topGap)
+            chordTopY -= _spatium;
+
+      // avoid collisions of staff articulations with chord notes:
+      // gap between note and staff articulation is distance0 + 0.5 spatium
+
+      qreal staffTopY = 0;
+      qreal staffBotY = staff()->height();
+
+      if (stem()) {
+            qreal y = stem()->pos().y() + pos().y();
+            if (up() && stem()->stemLen() < 0.0)
+                  y += stem()->stemLen();
+            else if (!up() && stem()->stemLen() > 0.0)
+                  y -= stem()->stemLen();
+            if (beam()) {
+                  qreal bw = score()->styleS(ST_beamWidth).val() * _spatium;
+                  y += up() ? -bw : bw;
+                  }
+            if (up())
+                  staffTopY = qMin(staffTopY, y);
+            else
+                  staffBotY = qMax(staffBotY, y);
+            }
+
+      staffTopY = qMin(staffTopY, qreal(chordTopY));
+      staffBotY = qMax(staffBotY, qreal(chordBotY));
+
+      //
+      // determine Direction
+      //
+      if (a->direction() != AUTO) {
+            a->setUp(a->direction() == UP);
+            }
+      else {
+            if (measure()->hasVoices(a->staffIdx())) {
+                  a->setUp(up());
+                  aa = up() ? A_TOP_STAFF : A_BOTTOM_STAFF;
+                  }
+            else {
+                  if (aa == A_CHORD)
+                        a->setUp(!up());
+                  else
+                        a->setUp(aa == A_TOP_STAFF || aa == A_TOP_CHORD);
+                  }
+            }
+
+      qreal dist;
+      switch(a->subtype()) {
+            case Articulation_Marcato:        dist = 1.0 * _spatium; break;
+            case Articulation_Sforzatoaccent: dist = 1.5 * _spatium; break;
+            default: dist = score()->styleS(ST_propertyDistance).val() * _spatium;
+            }
+
+      if (aa == A_CHORD || aa == A_TOP_CHORD || aa == A_BOTTOM_CHORD) {
+            bool bottom;
+            if ((aa == A_CHORD) && measure()->hasVoices(a->staffIdx()))
+                  bottom = !up();
+            else
+                  bottom = (aa == A_BOTTOM_CHORD) || (aa == A_CHORD && up());
+            a->setPos(x, bottom ? chordBotY + dist : chordTopY - dist);
+            }
+      else if (aa == A_TOP_STAFF || aa == A_BOTTOM_STAFF) {
+            a->setPos(x, a->up() ? staffTopY - dist : staffBotY + dist);
+            }
+      a->adjustReadPos();
+      }

@@ -455,6 +455,10 @@ void ChordRest::layoutArticulations()
       {
       if (parent() == 0 || articulations.isEmpty())
             return;
+      if (type() == CHORD && articulations.size() == 1) {
+            static_cast<Chord*>(this)->layoutArticulation(articulations[0]);
+            return;
+            }
       qreal _spatium  = spatium();
       qreal x         = centerX();
       qreal distance0 = score()->styleS(ST_propertyDistance).val()     * _spatium;
@@ -496,6 +500,9 @@ void ChordRest::layoutArticulations()
       qreal dy = 0.0;
 
       foreach (Articulation* a, articulations) {
+            //
+            // determine Direction
+            //
             if (a->direction() != AUTO) {
                   a->setUp(a->direction() == UP);
                   }
@@ -523,11 +530,11 @@ void ChordRest::layoutArticulations()
             if (aa != A_CHORD && aa != A_TOP_CHORD && aa != A_BOTTOM_CHORD)
                   continue;
 
-            // for tenuto and staccate check for staff line collision
-            bool staffLineCheck = a->subtype() == Articulation_Tenuto
-                               || a->subtype() == Articulation_Staccato;
-
-            bool bottom = (aa == A_BOTTOM_CHORD) || (aa == A_CHORD && up());
+            bool bottom;
+            if ((aa == A_CHORD) && measure()->hasVoices(a->staffIdx()))
+                  bottom = !up();
+            else
+                  bottom = (aa == A_BOTTOM_CHORD) || (aa == A_CHORD && up());
             bool headSide = bottom == up();
 
             dy += distance1;
@@ -547,7 +554,7 @@ void ChordRest::layoutArticulations()
                         else
                               y += _spatium;
                         }
-                  else if (staffLineCheck && (y <= staffBotY -.1 - dy)) {
+                  else if (y <= staffBotY -.1 - dy) {
                         qreal l = y / _spatium;
                         qreal delta = fabs(l - round(l));
                         if (delta < 0.4) {
@@ -570,7 +577,7 @@ void ChordRest::layoutArticulations()
                         else
                               y -= _spatium;
                         }
-                  else if (staffLineCheck && (y >= (staffTopY +.1 + dy))) {
+                  else if (y >= (staffTopY +.1 + dy)) {
                         qreal l = y / _spatium;
                         qreal delta = fabs(l - round(l));
                         if (delta < 0.4) {

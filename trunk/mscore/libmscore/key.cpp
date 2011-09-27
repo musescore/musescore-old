@@ -219,6 +219,7 @@ void KeyList::read(QDomElement e, Score* cs)
             }
       }
 
+#if 0
 //---------------------------------------------------------
 //   insert
 //---------------------------------------------------------
@@ -256,6 +257,7 @@ void KeyList::insertTime(int tick, int len)
       clear();
       insert(tmp.begin(), tmp.end());
       }
+#endif
 
 //---------------------------------------------------------
 //   transposeKey

@@ -105,10 +105,12 @@ void ArticulationProperties::saveValues()
                   staffText->setMidiActionName(i->text());
             }
 #endif
-      if (int(articulation->direction()) != direction->currentIndex()
-         || int(articulation->anchor()) != anchor->currentIndex()) {
-            articulation->score()->undo()->push(new ChangeArticulation(articulation,
-               Direction(direction->currentIndex()), ArticulationAnchor(anchor->currentIndex())));
-            }
+      if (int(articulation->direction()) != direction->currentIndex())
+            articulation->score()->undo()->push(new ChangeProperty(articulation,
+               P_DIRECTION, direction->currentIndex()));
+
+      if (int(articulation->anchor()) != anchor->currentIndex())
+            articulation->score()->undo()->push(new ChangeProperty(articulation,
+               P_ARTICULATION_ANCHOR, anchor->currentIndex()));
       }
 
