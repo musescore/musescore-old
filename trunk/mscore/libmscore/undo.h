@@ -53,7 +53,7 @@ class Dynamic;
 class Selection;
 class Text;
 struct Channel;
-struct PageFormat;
+class PageFormat;
 class TextStyle;
 class Tuplet;
 class KeySig;

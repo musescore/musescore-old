@@ -105,8 +105,8 @@ class Beam : public Element {
       const QList<ChordRest*>& elements() { return _elements;  }
       void clear()                        { _elements.clear(); }
       bool isEmpty() const                { return _elements.isEmpty(); }
-      void add(ChordRest* a);
-      void remove(ChordRest* a);
+      virtual void add(ChordRest* a);
+      virtual void remove(ChordRest* a);
       void writeMusicXml(Xml& xml, ChordRest* cr) const;
       virtual void move(qreal, qreal);
       virtual void draw(Painter*) const;

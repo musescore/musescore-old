@@ -26,7 +26,7 @@
 #include "cleflist.h"
 
 class Instrument;
-class InstrumentTemplate;
+struct InstrumentTemplate;
 class Xml;
 class Part;
 class Score;

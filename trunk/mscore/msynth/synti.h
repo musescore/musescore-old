@@ -119,7 +119,7 @@ class MasterSynth {
 
       Synth* synth(const QString& name);
       void reset();
-      virtual void allNotesOff();
+      void allNotesOff();
       };
 
 #endif

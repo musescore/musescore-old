@@ -47,6 +47,7 @@ class StaffType {
 
    public:
       StaffType();
+      virtual ~StaffType() {}
       StaffType(const QString& s);
       QString name() const                     { return _name;            }
       void setName(const QString& val)         { _name = val;             }

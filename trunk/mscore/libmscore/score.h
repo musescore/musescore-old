@@ -36,7 +36,7 @@ class TimeSigMap;
 class System;
 class TextStyle;
 class Page;
-struct PageFormat;
+class PageFormat;
 class ElementList;
 class Selection;
 class Segment;
@@ -737,11 +737,11 @@ class Score {
 
       void connectTies();
 
-      virtual void add(Element*);
-      virtual void remove(Element*);
+      void add(Element*);
+      void remove(Element*);
       qreal point(const Spatium sp) const { return sp.val() * spatium(); }
 
-      virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
+      void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
       QByteArray buildCanonical(int track);
       int fileDivision() const { return _fileDivision; } ///< division of current loading *.msc file
       void splitStaff(int staffIdx, int splitPoint);

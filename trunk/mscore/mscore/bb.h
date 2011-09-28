@@ -19,7 +19,7 @@
 const int MAX_BARS = 255;
 
 class BBFile;
-class MNote;
+struct MNote;
 
 //---------------------------------------------------------
 //   BBTrack

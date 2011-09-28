@@ -167,8 +167,6 @@ void Segment::setScore(Score* score)
 
 Segment::~Segment()
       {
-      abort();
-
       foreach(Element* e, _elist) {
             if (e) {
                   if (e->type() == CLEF)

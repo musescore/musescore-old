@@ -20,7 +20,7 @@
 
 class Xml;
 struct ChordDescription;
-struct PageFormat;
+class PageFormat;
 class ChordList;
 class Element;
 

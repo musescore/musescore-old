@@ -82,7 +82,7 @@ Clef::Clef(const Clef& c)
 //   add
 //---------------------------------------------------------
 
-void Clef::add(Element* e, qreal x, qreal y)
+void Clef::addElement(Element* e, qreal x, qreal y)
       {
       e->layout();
       e->setPos(x, y);
