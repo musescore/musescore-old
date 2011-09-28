@@ -23,7 +23,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6.0)
 
 cmake_policy(SET CMP0003 NEW)
 
-set (CMAKE_CXX_COMPILER   clang++)
+# set (CMAKE_CXX_COMPILER   clang++)
 
 # for debugging the make system uncomment next line:
 # set(CMAKE_VERBOSE_MAKEFILE ON)
