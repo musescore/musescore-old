@@ -3302,7 +3302,7 @@ Measure* Measure::cloneMeasure(Score* sc, SlurMap* slurMap, TieMap* tieMap, Span
       m->setSectionBreak(sectionBreak() ? new LayoutBreak(*sectionBreak()) : 0);
 
       int tracks = sc->nstaves() * VOICES;
-      TupletMap tupletMap[tracks];
+      TupletMap tupletMap;
 
       for (Segment* oseg = first(); oseg; oseg = oseg->next()) {
             Segment* s = new Segment(m);
@@ -3318,14 +3318,14 @@ Measure* Measure::cloneMeasure(Score* sc, SlurMap* slurMap, TieMap* tieMap, Span
                               ChordRest* ncr = static_cast<ChordRest*>(ne);
                               Tuplet* ot     = ocr->tuplet();
                               if (ot) {
-                                    Tuplet* nt = tupletMap[track].findNew(ot);
+                                    Tuplet* nt = tupletMap.findNew(ot);
                                     if (nt == 0) {
                                           nt = new Tuplet(*ot);
                                           nt->clear();
                                           nt->setTrack(track);
                                           nt->setScore(sc);
                                           m->add(nt);
-                                          tupletMap[track].add(ot, nt);
+                                          tupletMap.add(ot, nt);
                                           }
                                     ncr->setTuplet(nt);
                                     }

@@ -61,8 +61,8 @@ class Accidental : public Element {
       virtual const QString subtypeName() const;
       const char* subtypeUserName() const;
       virtual void setSubtype(const QString& s);
-      void setSubtype(AccidentalType t)     { Element::setSubtype(int(t)); }
-      AccidentalType accidentalType() const { return AccidentalType(subtype()); }
+      virtual void setSubtype(AccidentalType t) { Element::setSubtype(int(t)); }
+      AccidentalType accidentalType() const     { return AccidentalType(subtype()); }
       virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
       virtual void layout();

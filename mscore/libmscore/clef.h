@@ -93,7 +93,9 @@ class Clef : public Element {
       virtual void draw(Painter*) const;
       virtual void read(QDomElement);
       virtual void write(Xml&) const;
-      virtual void add(Element* e, qreal x, qreal y);
+
+      virtual void addElement(Element* e, qreal x, qreal y);
+
       virtual QVariant getProperty(int propertyId) const;
       virtual void setProperty(int propertyId, const QVariant&);
 

@@ -106,7 +106,7 @@ class GuitarPro {
             };
 
       GuitarPro(Score*, int v);
-      ~GuitarPro();
+      virtual ~GuitarPro();
       virtual void read(QFile*) = 0;
       QString error(GuitarProError n) const { return QString(errmsg[int(n)]); }
       };

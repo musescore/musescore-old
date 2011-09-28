@@ -219,8 +219,8 @@ Element* ElementMap::findNew(Element* o) const
 void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
       {
       int tracks = score->nstaves() * VOICES;
-      SlurMap slurMap[tracks];
-      TieMap  tieMap[tracks];
+      SlurMap slurMap;
+      TieMap  tieMap;
       SpannerMap spannerMap;
 
       MeasureBaseList* nmbl = score->measures();
@@ -334,10 +334,10 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                                           Slur* slur = new Slur(score);
                                           slur->setStartElement(ncr);
                                           ncr->addSlurFor(slur);
-                                          slurMap[track].add(s, slur);
+                                          slurMap.add(s, slur);
                                           }
                                     foreach(Slur* s, ocr->slurBack()) {
-                                          Slur* slur = slurMap[track].findNew(s);
+                                          Slur* slur = slurMap.findNew(s);
                                           if (slur) {
                                                 slur->setEndElement(ncr);
                                                 ncr->addSlurBack(slur);
@@ -368,10 +368,10 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                                                       Tie* tie = new Tie(score);
                                                       nn->setTieFor(tie);
                                                       tie->setStartNote(nn);
-                                                      tieMap[track].add(on->tieFor(), tie);
+                                                      tieMap.add(on->tieFor(), tie);
                                                       }
                                                 if (on->tieBack()) {
-                                                      Tie* tie = tieMap[track].findNew(on->tieBack());
+                                                      Tie* tie = tieMap.findNew(on->tieBack());
                                                       if (tie) {
                                                             nn->setTieBack(tie);
                                                             tie->setEndNote(nn);
@@ -395,8 +395,7 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
             nmbl->add(nmb);
             }
       //DEBUG:
-      for (int track = 0; track < tracks; ++track)
-            slurMap[track].check();
+      slurMap.check();
 
       int n = map.size();
       for (int dstStaffIdx = 0; dstStaffIdx < n; ++dstStaffIdx) {
@@ -423,8 +422,8 @@ void cloneStaff(Staff* srcStaff, Staff* dstStaff)
       dstStaff->linkTo(srcStaff);
 
       int tracks = score->nstaves() * VOICES;
-      SlurMap slurMap[tracks];
-      TieMap tieMap[tracks];
+      SlurMap slurMap;
+      TieMap tieMap;
 
       int srcStaffIdx  = score->staffIdx(srcStaff);
       int dstStaffIdx  = score->staffIdx(dstStaff);
@@ -465,10 +464,10 @@ void cloneStaff(Staff* srcStaff, Staff* dstStaff)
                                     Slur* slur = new Slur(score);
                                     slur->setStartElement(ncr);
                                     ncr->addSlurFor(slur);
-                                    slurMap[dstTrack].add(s, slur);
+                                    slurMap.add(s, slur);
                                     }
                               foreach (Slur* s, ocr->slurBack()) {
-                                    Slur* slur = slurMap[dstTrack].findNew(s);
+                                    Slur* slur = slurMap.findNew(s);
                                     if (slur) {
                                           slur->setEndElement(ncr);
                                           ncr->addSlurBack(slur);
@@ -497,10 +496,10 @@ void cloneStaff(Staff* srcStaff, Staff* dstStaff)
                                                 Tie* tie = new Tie(score);
                                                 nn->setTieFor(tie);
                                                 tie->setStartNote(nn);
-                                                tieMap[dstTrack].add(on->tieFor(), tie);
+                                                tieMap.add(on->tieFor(), tie);
                                                 }
                                           if (on->tieBack()) {
-                                                Tie* tie = tieMap[dstTrack].findNew(on->tieBack());
+                                                Tie* tie = tieMap.findNew(on->tieBack());
                                                 if (tie) {
                                                       nn->setTieBack(tie);
                                                       tie->setEndNote(nn);
