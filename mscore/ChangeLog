@@ -1,3 +1,5 @@
+29.sep (ws)
+      - fix #1395: Accidental after a tied note
 20.sep (la)
       - fix pedal ending in midi export
         http://musescore.org/en/node/12642#comment-42743
@@ -57,7 +59,7 @@
       - open MuseScore maximize on very first startup
       - fix rest position for 1 and 3 staff lines
 30.jun (la)
-      - fix #11267: Shift + drag tuplet, delete, undo cause crash 
+      - fix #11267: Shift + drag tuplet, delete, undo cause crash
 29.jun (ws)
       - fix entry of underline character in lyrics entry mode
         (for german keyboard press Strg+Umsch+"-", for english Ctrl+"_")
