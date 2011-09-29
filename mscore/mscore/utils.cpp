@@ -611,7 +611,7 @@ int transposeTpc(int tpc, Interval interval, bool useDoubleSharpsFlats)
             // alter  = p1 + semitones - pitch;
 	          if (alter < 0) {
 	                alter *= -1;
-	                alter = 12 - alter;
+	                alter = 1200 - alter;
 	                }
             alter %= 12;
 	          if (alter > 6)

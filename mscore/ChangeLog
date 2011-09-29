@@ -1,5 +1,7 @@
 29.sep (ws)
       - fix #1395: Accidental after a tied note
+       (la)
+      - fix #12085: Enharmonics not preserved when toggling concert pitch in part > 1 octave
 20.sep (la)
       - fix pedal ending in midi export
         http://musescore.org/en/node/12642#comment-42743
