@@ -380,7 +380,7 @@ void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
                                     line += 7;
                               else
                                     line -= (tpcPitch/12)*7;
-                              tversatz[line] = ((tpc + 1) / 7) - 2;
+//                              tversatz[line] = ((tpc + 1) / 7) - 2;
                               continue;
                               }
 

@@ -10,26 +10,26 @@
     </message>
     <message utf8="true">
         <location filename="../../mscore/aboutbox.ui" line="594"/>
-        <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visit &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Support MuseScore with &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;&#13;
-&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
-p, li { white-space: pre-wrap; }&#13;
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
-&#13;
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2011 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visit &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Support MuseScore with &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2011 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -945,7 +945,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordedit.ui" line="993"/>
         <source>Degrees</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1008"/>
@@ -1051,7 +1051,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordedit.cpp" line="102"/>
         <source>Alter</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1161,7 +1161,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordproperties.ui" line="341"/>
         <source>diamond</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="346"/>
@@ -1176,7 +1176,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordproperties.ui" line="356"/>
         <source>xcircle</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="361"/>
@@ -1201,7 +1201,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordproperties.ui" line="381"/>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="386"/>
@@ -1216,7 +1216,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordproperties.ui" line="396"/>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="411"/>
@@ -1287,28 +1287,28 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordproperties.ui" line="449"/>
         <source>ontime offset type</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="481"/>
         <source>ontime offset</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="494"/>
         <location filename="../../mscore/chordproperties.ui" line="552"/>
         <source> ticks</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="507"/>
         <source>offtime offset type</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="539"/>
         <source>offtime</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1326,12 +1326,12 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordrest.ui" line="98"/>
         <source>SlurBack:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/chordrest.ui" line="182"/>
         <source>StaffMove:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1354,7 +1354,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/harmonyedit.ui" line="128"/>
         <source>Id</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/harmonyedit.ui" line="133"/>
@@ -1506,7 +1506,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="411"/>
         <source>Write File failed: </source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="412"/>
@@ -2128,7 +2128,7 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/editstyle.ui" line="649"/>
         <source>Create courtesy time signatures</source>
-        <translation>Създаване на "случайни" размери</translation>
+        <translation>Създаване на &quot;случайни&quot; размери</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="700"/>
@@ -2185,7 +2185,7 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/editstyle.ui" line="656"/>
         <source>Create courtesy key signatures</source>
-        <translation>Създаване на "случайна" арматура</translation>
+        <translation>Създаване на &quot;случайна&quot; арматура</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="234"/>
@@ -2294,8 +2294,8 @@ space unit</extracomment>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1038"/>
-        <source>Show repeat bar tips ("winged" repeats)</source>
-        <translation>Показване на черта за повторение тип "крилато повторение"</translation>
+        <source>Show repeat bar tips (&quot;winged&quot; repeats)</source>
+        <translation>Показване на черта за повторение тип &quot;крилато повторение&quot;</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1045"/>
@@ -2687,12 +2687,12 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/hairpin.ui" line="49"/>
         <source>Tick1:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/hairpin.ui" line="69"/>
         <source>Tick2:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2744,7 +2744,7 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/importmidi.ui" line="34"/>
         <source>Shortest note on import:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/importmidi.ui" line="42"/>
@@ -3069,7 +3069,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/repeat.cpp" line="389"/>
         <source>Jump Properties...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3077,7 +3077,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/jumpproperties.ui" line="13"/>
         <source>Jump Properties</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/jumpproperties.ui" line="19"/>
@@ -3136,12 +3136,12 @@ failed: </source>
     <message>
         <location filename="../../mscore/keysig.cpp" line="262"/>
         <source>Hide courtesy signature</source>
-        <translation>Скрий "случайните" знаци</translation>
+        <translation>Скрий &quot;случайните&quot; знаци</translation>
     </message>
     <message>
         <location filename="../../mscore/keysig.cpp" line="263"/>
         <source>Show courtesy signature</source>
-        <translation>Покажи "случайните" знаци</translation>
+        <translation>Покажи &quot;случайните&quot; знаци</translation>
     </message>
     <message>
         <location filename="../../mscore/keysig.cpp" line="266"/>
@@ -3320,37 +3320,37 @@ failed: </source>
     <message>
         <location filename="../../mscore/linesegment.ui" line="20"/>
         <source>LineSegment</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/linesegment.ui" line="31"/>
         <source>SegmentType:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/linesegment.ui" line="39"/>
         <source>SINGLE</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/linesegment.ui" line="44"/>
         <source>BEGIN</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/linesegment.ui" line="49"/>
         <source>MIDDLE</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/linesegment.ui" line="54"/>
         <source>END</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/linesegment.ui" line="79"/>
         <source>Pos2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/linesegment.ui" line="95"/>
@@ -3373,7 +3373,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/lyrics.ui" line="29"/>
         <source>Syllabic:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/lyrics.ui" line="43"/>
@@ -3437,7 +3437,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/markerproperties.ui" line="41"/>
         <source>Label:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3718,9 +3718,9 @@ failed: </source>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="147"/>
-        <source>Save changes to the score "%1"
+        <source>Save changes to the score &quot;%1&quot;
 before closing?</source>
-        <translation>Да се запишат ли измененията в нотния лист "%1"&#13;
+        <translation>Да се запишат ли измененията в нотния лист &quot;%1&quot;
 преди затваряне?</translation>
     </message>
     <message>
@@ -4044,7 +4044,7 @@ before closing?</source>
     <message>
         <location filename="../../mscore/menus.cpp" line="518"/>
         <source>Repeat measure sign</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="542"/>
@@ -4289,7 +4289,7 @@ before closing?</source>
     <message>
         <location filename="../../mscore/menus.cpp" line="530"/>
         <source>Varied coda</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="534"/>
@@ -4482,8 +4482,8 @@ before closing?</source>
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
-        <translation>Предишната сесия завърши неочаквано.&#13;
-&#13;
+        <translation>Предишната сесия завърши неочаквано.
+
 Да възстановя ли сесията?</translation>
     </message>
     <message>
@@ -4517,10 +4517,10 @@ Restore session?</source>
         <location filename="../../mscore/mscore.cpp" line="929"/>
         <source>
 
-From the "Help" menu try choosing "Online Handbook" instead.</source>
+From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
         <translation>
 
-От менюто "Помощ" опитайте избор на "Онлайн ръководство".</translation>
+От менюто &quot;Помощ&quot; опитайте избор на &quot;Онлайн ръководство&quot;.</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="843"/>
@@ -4595,12 +4595,12 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     <message>
         <location filename="../../mscore/style.cpp" line="243"/>
         <source>InstrumentsExcerpt</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="249"/>
         <source>Technik</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="262"/>
@@ -4678,10 +4678,10 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
         <location filename="../../mscore/plugins.cpp" line="88"/>
         <location filename="../../mscore/plugins.cpp" line="422"/>
         <source>Error loading plugin
-"%1" line %2:
+&quot;%1&quot; line %2:
 %3</source>
-        <translation>Грешка при зареждането на добавката&#13;
-"%1" линия %2:&#13;
+        <translation>Грешка при зареждането на добавката
+&quot;%1&quot; линия %2:
 %3</translation>
     </message>
     <message>
@@ -4689,15 +4689,15 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
         <source>Script
 %1
 is incompatible with current interface</source>
-        <translation>Скриптът&#13;
-%1&#13;
+        <translation>Скриптът
+%1
 е несъвместим с текущия интервейс</translation>
     </message>
     <message>
         <location filename="../../mscore/plugins.cpp" line="121"/>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation>MuseScore е твърде стар за работа на скрипта&#13;
+        <translation>MuseScore е твърде стар за работа на скрипта
 %1</translation>
     </message>
 </context>
@@ -4706,22 +4706,22 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/webpage.cpp" line="136"/>
         <source>Could not&lt;br /&gt; connect</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="137"/>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="138"/>
         <source>Retry</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="139"/>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4870,7 +4870,7 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/note.ui" line="77"/>
         <source>head index</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/note.ui" line="111"/>
@@ -4880,12 +4880,12 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/note.ui" line="249"/>
         <source>OnTime:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/note.ui" line="313"/>
         <source>OffTime:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/note.ui" line="263"/>
@@ -5110,7 +5110,7 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/cellproperties.ui" line="58"/>
         <source>Content Offset</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/cellproperties.ui" line="65"/>
@@ -5158,12 +5158,12 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/palette.ui" line="104"/>
         <source>Element Offset</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/palette.ui" line="115"/>
         <source>Scale:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5249,12 +5249,12 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/pianoroll.cpp" line="57"/>
         <source>toolbar1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/pianoroll.cpp" line="77"/>
         <source>toolbar2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/pianoroll.cpp" line="83"/>
@@ -5302,7 +5302,7 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/playpanel.ui" line="1014"/>
         <source>measure.beat</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/playpanel.ui" line="1020"/>
@@ -5342,12 +5342,12 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/playpanel.ui" line="2623"/>
         <source>Straight</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/playpanel.ui" line="2628"/>
         <source>Swing</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/playpanel.ui" line="2633"/>
@@ -5454,7 +5454,7 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="71"/>
         <source>start with new score</source>
-        <translation>Стартиране с "Помощник"</translation>
+        <translation>Стартиране с &quot;Помощник&quot;</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="83"/>
@@ -5464,17 +5464,17 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="284"/>
         <source>Show Play Panel</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="291"/>
         <source>Show Navigator</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="298"/>
         <source>Show MuseScore Connect</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1085"/>
@@ -5790,7 +5790,7 @@ is incompatible with current interface</source>
     <message utf8="true">
         <location filename="../../mscore/prefsdialog.ui" line="812"/>
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
-        <translation>Замяна на (C) със символа © (Приложимо само за текста в секция "Авторски права")</translation>
+        <translation>Замяна на (C) със символа © (Приложимо само за текста в секция &quot;Авторски права&quot;)</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1109"/>
@@ -6002,7 +6002,7 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1938"/>
         <source>screen shot function</source>
-        <translation>Включване на функция "снимка на екрана"</translation>
+        <translation>Включване на функция &quot;снимка на екрана&quot;</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1990"/>
@@ -6046,17 +6046,17 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/textline.cpp" line="526"/>
         <source>* (Pedal)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/textline.cpp" line="527"/>
         <source>. (Pedal)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/textline.cpp" line="528"/>
         <source>dash (Pedal)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/textline.cpp" line="529"/>
@@ -6079,7 +6079,7 @@ is incompatible with current interface</source>
         <source>No note selected:
 Please select a single note and retry operation
 </source>
-        <translation>Не е избрана нота:&#13;
+        <translation>Не е избрана нота:
 Моля изберете отделна нота и повторете операцията
 </translation>
     </message>
@@ -6088,7 +6088,7 @@ Please select a single note and retry operation
         <source>No note or rest selected:
 Please select a single note or rest and retry operation
 </source>
-        <translation>Не е избрана нота или пауза:&#13;
+        <translation>Не е избрана нота или пауза:
 Моля изберете отделна нота или пауза и повторете операцията
 </translation>
     </message>
@@ -6112,7 +6112,7 @@ Please select a single note or rest and retry operation
     <message>
         <location filename="../../mscore/capella.cpp" line="1345"/>
         <source>MuseScore: Import Capella</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/capella.cpp" line="1347"/>
@@ -6193,7 +6193,7 @@ Please select a single note or rest and retry operation
     <message>
         <location filename="../../mscore/mscore.cpp" line="1608"/>
         <source>reading file &lt;</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="2108"/>
@@ -6239,7 +6239,7 @@ Please select a single note or rest and retry operation
         <location filename="../../mscore/plugins.cpp" line="114"/>
         <location filename="../../mscore/plugins.cpp" line="123"/>
         <source>MuseScore: register script plugin:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6323,12 +6323,12 @@ Please select a single note or rest and retry operation
     <message>
         <location filename="../../mscore/line.ui" line="20"/>
         <source>SLine</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/line.ui" line="33"/>
         <source>tick2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/line.ui" line="57"/>
@@ -6353,7 +6353,7 @@ Please select a single note or rest and retry operation
     <message>
         <location filename="../../mscore/line.ui" line="91"/>
         <source>LineSegments</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/line.ui" line="99"/>
@@ -6369,9 +6369,9 @@ Please select a single note or rest and retry operation
 %1 
 
 Try saving to a different location.</source>
-        <translation>Следният файл е заключен: &#13;
-%1 &#13;
-&#13;
+        <translation>Следният файл е заключен: 
+%1 
+
 Try saving to a different location.</translation>
     </message>
     <message>
@@ -6379,15 +6379,15 @@ Try saving to a different location.</translation>
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
-        <translation>Няма петолиния:&#13;
-моля използвайте диалог инструменти&#13;
+        <translation>Няма петолиния:
+моля използвайте диалог инструменти
 за да създадете някакво петолиние</translation>
     </message>
     <message>
         <location filename="../../mscore/cmd.cpp" line="1521"/>
         <source>No Measure selected:
 please select a measure and try again</source>
-        <translation>Няма избран такт:&#13;
+        <translation>Няма избран такт:
 Моля изберете отправен такт и пробвайте отново</translation>
     </message>
     <message>
@@ -6665,7 +6665,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/scoreview.cpp" line="896"/>
         <source>Drumroll Editor...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/scoreview.cpp" line="901"/>
@@ -6691,7 +6691,7 @@ failed: </source>
         <location filename="../../mscore/scoreview.cpp" line="1625"/>
         <source>unknown drop format: formats %1:
 </source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6714,7 +6714,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/segment.ui" line="69"/>
         <source>Key Signature</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/segment.ui" line="74"/>
@@ -6724,7 +6724,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/segment.ui" line="79"/>
         <source>Begin Repeat</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/segment.ui" line="84"/>
@@ -6734,7 +6734,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/segment.ui" line="89"/>
         <source>Breath Segment</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/segment.ui" line="94"/>
@@ -6744,17 +6744,17 @@ failed: </source>
     <message>
         <location filename="../../mscore/segment.ui" line="99"/>
         <source>Time Signature Announce</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/segment.ui" line="110"/>
         <source>Lyrics:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/segment.ui" line="120"/>
         <source>Segment Type:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6839,7 +6839,7 @@ failed: </source>
         <location filename="../../mscore/seq.cpp" line="209"/>
         <source>Init audio driver failed.
 Sequencer will be disabled.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/seq.cpp" line="225"/>
@@ -6851,22 +6851,22 @@ Sequencer will be disabled.</source>
         <location filename="../../mscore/seq.cpp" line="226"/>
         <source>No SoundFont configured
 Playback will be disabled.</source>
-        <translation>Няма избран SoundFont&#13;
+        <translation>Няма избран SoundFont
 Възпроизвеждането ще бъде  невъзможно.</translation>
     </message>
     <message>
         <location filename="../../mscore/seq.cpp" line="238"/>
         <source>Loading SoundFont
-"%1"
+&quot;%1&quot;
 failed. Playback will be disabled.
 
 Go to Display &gt; Synthesizer 
 and check that the file location is correct</source>
-        <translation>Зареждане на SoundFont&#13;
-"%1"&#13;
-неуспешно. Възпроизвеждането ще бъде невъзможно.&#13;
-&#13;
-Отворете Меню Изглед &gt; Синтезатор &#13;
+        <translation>Зареждане на SoundFont
+&quot;%1&quot;
+неуспешно. Възпроизвеждането ще бъде невъзможно.
+
+Отворете Меню Изглед &gt; Синтезатор 
 и проверете правилното местоположение на файла</translation>
     </message>
 </context>
@@ -6875,7 +6875,7 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/shortcutcapturedialog.cpp" line="80"/>
         <source>Shortcut conflicts with </source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/shortcutcapturedialog.cpp" line="106"/>
@@ -6888,7 +6888,7 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/shortcutcapturedialog.ui" line="13"/>
         <source>Enter shortcut sequence</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/shortcutcapturedialog.ui" line="28"/>
@@ -6926,7 +6926,7 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/inspector.cpp" line="799"/>
         <source>auto</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="800"/>
@@ -6951,7 +6951,7 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/inspector.cpp" line="804"/>
         <source>begin 1/32</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="806"/>
@@ -6961,7 +6961,7 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/inspector.cpp" line="807"/>
         <source>Up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="808"/>
@@ -6982,7 +6982,7 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/inspector.cpp" line="1068"/>
         <source>auto</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="1069"/>
@@ -7007,12 +7007,12 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/inspector.cpp" line="1073"/>
         <source>begin 1/32</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="1088"/>
         <source>Segment:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7045,7 +7045,7 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/slur.ui" line="86"/>
         <source>Tick:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7114,12 +7114,12 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/splitstaff.ui" line="52"/>
         <source>Split Staff</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/splitstaff.ui" line="72"/>
         <source>Split Point</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7166,7 +7166,7 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/symboldialog.ui" line="37"/>
         <source>System Flag</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7322,7 +7322,7 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/tempoproperties.ui" line="72"/>
         <source>BPM</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7530,7 +7530,7 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/textproperties.ui" line="35"/>
         <source>font face</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="48"/>
@@ -7636,7 +7636,7 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/textproperties.ui" line="401"/>
         <source>System Flag</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="423"/>
@@ -7883,7 +7883,7 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/timesigwizard.ui" line="94"/>
         <source>Pickup Measure</source>
-        <translation>"Случаен" размер</translation>
+        <translation>&quot;Случаен&quot; размер</translation>
     </message>
     <message>
         <location filename="../../mscore/timesigwizard.ui" line="109"/>
@@ -7902,14 +7902,14 @@ and check that the file location is correct</source>
     </message>
     <message>
         <location filename="../../mscore/timesigwizard.ui" line="225"/>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
-p, li { white-space: pre-wrap; }&#13;
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Съвет: Вие можете да добавяте или премахвате тактове и след създаването на нотния лист.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Съвет: Вие можете да добавяте или премахвате тактове и след създаването на нотния лист.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -8325,8 +8325,8 @@ p, li { white-space: pre-wrap; }&#13;
     <name>UpdateChecker</name>
     <message>
         <location filename="../../mscore/updatechecker.cpp" line="79"/>
-        <source>An update for MuseScore is available: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
-        <translation>Налично е обновяване за MuseScore: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
+        <source>An update for MuseScore is available: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
+        <translation>Налично е обновяване за MuseScore: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../../mscore/updatechecker.cpp" line="83"/>
@@ -8369,7 +8369,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/voltaproperties.ui" line="58"/>
         <source>Repeat List:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8390,37 +8390,37 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/webpage.cpp" line="242"/>
         <source>Connect with the &lt;br /&gt; Community</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="243"/>
         <source>Find help</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="244"/>
         <source>Improve your skills</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="245"/>
         <source>Read the latest news</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="246"/>
         <source>Download free sheet music</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="247"/>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="248"/>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8488,67 +8488,67 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/accidental.cpp" line="55"/>
         <source>sharp-slash</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="56"/>
         <source>sharp-slash2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="57"/>
         <source>sharp-slash3</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="58"/>
         <source>sharp-slash4</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="60"/>
         <source>sharp arrow up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="61"/>
         <source>sharp arrow down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="62"/>
         <source>sharp arrow both</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="63"/>
         <source>flat arrow up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="64"/>
         <source>flat arrow down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="65"/>
         <source>flat arrow both</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="66"/>
         <source>natural arrow up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="67"/>
         <source>natural arrow down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="68"/>
         <source>natural arrow both</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="69"/>
@@ -9635,12 +9635,12 @@ p, li { white-space: pre-wrap; }&#13;
         <location filename="../../mscore/actions.cpp" line="885"/>
         <location filename="../../mscore/actions.cpp" line="888"/>
         <source>Timewise Delete</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="889"/>
         <source>Delete element and duration</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="897"/>
@@ -10091,7 +10091,7 @@ p, li { white-space: pre-wrap; }&#13;
         <location filename="../../mscore/actions.cpp" line="1478"/>
         <location filename="../../mscore/actions.cpp" line="1481"/>
         <source>Mag</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1482"/>
@@ -10350,14 +10350,14 @@ p, li { white-space: pre-wrap; }&#13;
         <location filename="../../mscore/actions.cpp" line="2142"/>
         <location filename="../../mscore/actions.cpp" line="2143"/>
         <source>next score</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2148"/>
         <location filename="../../mscore/actions.cpp" line="2156"/>
         <location filename="../../mscore/actions.cpp" line="2157"/>
         <source>previous score</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1738"/>
@@ -10667,7 +10667,7 @@ p, li { white-space: pre-wrap; }&#13;
         <location filename="../../mscore/actions.cpp" line="1977"/>
         <location filename="../../mscore/actions.cpp" line="1978"/>
         <source>backspace</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1983"/>
@@ -10912,12 +10912,12 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/articulation.cpp" line="52"/>
         <source>ouvert</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="53"/>
         <source>plusstop</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="54"/>
@@ -10932,12 +10932,12 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/articulation.cpp" line="56"/>
         <source>reverseturn</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="57"/>
         <source>turn</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="58"/>
@@ -11104,7 +11104,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/drumset.cpp" line="163"/>
         <source>Side Stick</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="164"/>
@@ -11119,7 +11119,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/drumset.cpp" line="166"/>
         <source>Tom 5</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="167"/>
@@ -11129,7 +11129,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/drumset.cpp" line="168"/>
         <source>Tom 4</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="169"/>
@@ -11139,7 +11139,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/drumset.cpp" line="170"/>
         <source>Tom 3</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="171"/>
@@ -11149,32 +11149,32 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/drumset.cpp" line="172"/>
         <source>Tom 2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="173"/>
         <source>Tom 1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="174"/>
         <source>Crash 1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="175"/>
         <source>Tom</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="176"/>
         <source>Ride</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="177"/>
         <source>China</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="178"/>
@@ -11183,22 +11183,22 @@ p, li { white-space: pre-wrap; }&#13;
         <location filename="../../mscore/drumset.cpp" line="182"/>
         <location filename="../../mscore/drumset.cpp" line="183"/>
         <source>Ride (Bell)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="179"/>
         <source>Tambourine</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="184"/>
         <source>open high conga</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="185"/>
         <source>low conga</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11341,7 +11341,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/element.cpp" line="104"/>
         <source>Jump</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="105"/>
@@ -11401,7 +11401,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/element.cpp" line="116"/>
         <source>LayoutBreak</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="117"/>
@@ -11451,17 +11451,17 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/element.cpp" line="126"/>
         <source>ShadowNote</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="127"/>
         <source>RubberBand</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="128"/>
         <source>HairPin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="129"/>
@@ -11496,7 +11496,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/element.cpp" line="135"/>
         <source>Compound</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="136"/>
@@ -11516,17 +11516,17 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/element.cpp" line="139"/>
         <source>ElementList</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="140"/>
         <source>StaffList</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="141"/>
         <source>MeasureList</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="142"/>
@@ -11536,12 +11536,12 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/element.cpp" line="143"/>
         <source>HBox</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="144"/>
         <source>VBox</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="145"/>
@@ -11587,7 +11587,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="38"/>
         <source>diamond</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="39"/>
@@ -11607,7 +11607,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="42"/>
         <source>xcircle</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="43"/>
@@ -11637,12 +11637,12 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="48"/>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="49"/>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11689,7 +11689,7 @@ p, li { white-space: pre-wrap; }&#13;
         <location filename="../../mscore/file.cpp" line="1211"/>
         <source>Cannot read this score:
 your version of MuseScore is too old.</source>
-        <translation>Не може да се прочете тази партитура:&#13;
+        <translation>Не може да се прочете тази партитура:
 Вашата версия на MuseScore е твърде стара.</translation>
     </message>
 </context>
@@ -11698,23 +11698,23 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="593"/>
         <source>clef eight</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="594"/>
         <source>clef one</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="595"/>
         <source>clef five</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="264"/>
         <location filename="../../mscore/sym.cpp" line="596"/>
         <source>f</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="267"/>
@@ -11726,19 +11726,19 @@ your version of MuseScore is too old.</source>
         <location filename="../../mscore/sym.cpp" line="266"/>
         <location filename="../../mscore/sym.cpp" line="598"/>
         <source>p</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="268"/>
         <location filename="../../mscore/sym.cpp" line="599"/>
         <source>r</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="265"/>
         <location filename="../../mscore/sym.cpp" line="600"/>
         <source>s</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="38"/>
@@ -11763,7 +11763,7 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="42"/>
         <source>rest M3</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="43"/>
@@ -11783,7 +11783,7 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="46"/>
         <source>clas quart rest</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="47"/>
@@ -11792,23 +11792,23 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="48"/>
-        <source>16' rest</source>
+        <source>16&apos; rest</source>
         <translation>шеснайсетина пауза</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="49"/>
-        <source>32' rest</source>
-        <translation>32' пауза</translation>
+        <source>32&apos; rest</source>
+        <translation>32&apos; пауза</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="50"/>
-        <source>64' rest</source>
-        <translation>64' пауза</translation>
+        <source>64&apos; rest</source>
+        <translation>64&apos; пауза</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="51"/>
-        <source>128' rest</source>
-        <translation>128' пауза</translation>
+        <source>128&apos; rest</source>
+        <translation>128&apos; пауза</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="53"/>
@@ -11818,33 +11818,33 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="54"/>
         <source>sharp arrow up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="55"/>
         <location filename="../../mscore/sym.cpp" line="56"/>
         <source>sharp arrow both</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="57"/>
         <source>sharp slash</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="58"/>
         <source>sharp slash2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="59"/>
         <source>sharp slash3</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="60"/>
         <source>sharp slash4</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="61"/>
@@ -11854,17 +11854,17 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="62"/>
         <source>natural arrow up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="63"/>
         <source>natural arrow down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="64"/>
         <source>natural arrow both</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="65"/>
@@ -11874,13 +11874,13 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="66"/>
         <source>flat arrow up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="67"/>
         <location filename="../../mscore/sym.cpp" line="68"/>
         <source>flat arrow both</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="69"/>
@@ -11890,12 +11890,12 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="70"/>
         <source>flat slash2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="71"/>
         <source>mirrored flat2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="72"/>
@@ -11950,12 +11950,12 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="93"/>
         <source>longa up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="94"/>
         <source>longa down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="95"/>
@@ -11985,17 +11985,17 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="100"/>
         <source>whole diamond head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="101"/>
         <source>half diamond head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="102"/>
         <source>diamond head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="103"/>
@@ -12005,207 +12005,207 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="104"/>
         <source>down half triangle head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="105"/>
         <source>up half triangle head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="106"/>
         <source>up quart triangle head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="107"/>
         <source>down quart triangle head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="108"/>
         <source>whole slash head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="109"/>
         <source>half slash head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="110"/>
         <source>quart slash head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="111"/>
         <source>whole cross head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="112"/>
         <source>half cross head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="113"/>
         <source>cross head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="114"/>
         <source>x circle head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="115"/>
         <source>s0do head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="116"/>
         <source>d1do head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="117"/>
         <source>u1do head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="118"/>
         <source>d2do head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="119"/>
         <source>u2do head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="120"/>
         <source>s0re head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="121"/>
         <source>u1re head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="122"/>
         <source>d1re head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="123"/>
         <source>u2re head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="124"/>
         <source>d2re head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="125"/>
         <source>s0mi head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="126"/>
         <source>s1mi head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="127"/>
         <source>s2mi head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="128"/>
         <source>u0fa head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="129"/>
         <source>d0fa head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="130"/>
         <source>u1fa head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="131"/>
         <source>d1fa head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="132"/>
         <source>u2fa head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="133"/>
         <source>d2fa head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="134"/>
         <source>s0la head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="135"/>
         <source>s1la head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="136"/>
         <source>s2la head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="137"/>
         <source>s0ti head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="138"/>
         <source>u1ti head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="139"/>
         <source>d1ti head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="140"/>
         <source>u2ti head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="141"/>
         <source>d2ti head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="143"/>
         <source>s0sol head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="144"/>
         <source>s1sol head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="145"/>
         <source>s2sol head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="147"/>
@@ -12260,7 +12260,7 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="157"/>
         <source>sforza to accent</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="158"/>
@@ -12310,32 +12310,32 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="167"/>
         <source>ouvert</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="168"/>
         <source>plus stop</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="169"/>
         <source>up bow</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="170"/>
         <source>down bow</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="171"/>
         <source>reverse turn</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="172"/>
         <source>turn</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="173"/>
@@ -12345,32 +12345,32 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="174"/>
         <source>upedal heel</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="175"/>
         <source>dpedalheel</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="176"/>
         <source>upedal toe</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="177"/>
         <source>dpedal toe</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="178"/>
         <source>flageolet</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="179"/>
         <source>segno</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="180"/>
@@ -12380,17 +12380,17 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="181"/>
         <source>varied coda</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="182"/>
         <source>rcomma</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="183"/>
         <source>lcomma</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="186"/>
@@ -12475,42 +12475,42 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="202"/>
         <source>caesura curved</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="203"/>
         <source>caesura straight</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="204"/>
         <source>eight flag</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="205"/>
         <source>sixteenth flag</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="206"/>
         <source>thirtysecond flag</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="207"/>
         <source>sixtyfour flag</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="208"/>
         <source>128flag</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="209"/>
         <source>deight flag</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="210"/>
@@ -12525,32 +12525,32 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="212"/>
         <source>dsixteenth flag</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="213"/>
         <source>dthirtysecond flag</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="214"/>
         <source>dsixtyfourth flag</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="215"/>
         <source>d128flag</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="216"/>
         <source>alto clef</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="217"/>
         <source>calto clef</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="218"/>
@@ -12560,7 +12560,7 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="219"/>
         <source>cbass clef</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="220"/>
@@ -12570,7 +12570,7 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="221"/>
         <source>ctrebleclef</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="222"/>
@@ -12580,7 +12580,7 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="223"/>
         <source>cpercussion clef</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="224"/>
@@ -12590,12 +12590,12 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="225"/>
         <source>ctab clef</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="226"/>
         <source>four four meter</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="227"/>
@@ -12605,87 +12605,87 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="228"/>
         <source>pedalasterisk</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="229"/>
         <source>pedaldash</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="230"/>
         <source>pedaldot</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="231"/>
         <source>pedalP</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="232"/>
         <source>pedald</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="233"/>
         <source>pedale</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="234"/>
         <source>pedal ped</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="235"/>
         <source>bracket tips up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="236"/>
         <source>bracket tips down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="237"/>
         <source>bracket tips left up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="238"/>
         <source>bracket tips left down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="239"/>
         <source>acc dot</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="240"/>
         <source>acc freebase</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="241"/>
         <source>acc stdbase</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="242"/>
         <source>acc bayanbase</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="243"/>
         <source>acc old ee</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="244"/>
         <source>acc discant</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="251"/>
@@ -12746,42 +12746,42 @@ your version of MuseScore is too old.</source>
         <location filename="../../mscore/sym.cpp" line="263"/>
         <location filename="../../mscore/sym.cpp" line="601"/>
         <source>z</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="270"/>
         <source>longa up alt</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="271"/>
         <source>longa down alt</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="272"/>
         <source>brevis head alt</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="273"/>
         <source>time sig C dot</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="274"/>
         <source>time sig O</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="275"/>
         <source>time sig O cut</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="276"/>
         <source>time sig O dot</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="603"/>
