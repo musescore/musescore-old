@@ -1,3 +1,5 @@
+29.sep (la)
+      - add dynamic and note velocity support in MusicXML export/import
 27.sep (ws)
       - fix #12682: When reducing bar line span, other bar lines are not updated
         (patch from miwarre)

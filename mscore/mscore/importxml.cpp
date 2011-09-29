@@ -1825,6 +1825,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
       qreal yoffset = 0.0; // actually this is default-y
       qreal xoffset = 0.0;
       bool hasYoffset = false;
+      QString dynaVelocity = "";
       QString tempo = "";
       QString rehearsal = "";
       QString sndCapo = "";
@@ -1911,6 +1912,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   sndFine = e.attribute("fine");
                   sndSegno = e.attribute("segno");
                   tempo = e.attribute("tempo");
+                  dynaVelocity = e.attribute("dynamics");
                   }
             else if (e.tagName() == "offset")
                   offset = (e.text().toInt() * MScore::division)/divisions;
@@ -2176,6 +2178,14 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             for (QStringList::Iterator it = dynamics.begin(); it != dynamics.end(); ++it ) {
                   Dynamic* dyn = new Dynamic(score);
                   dyn->setSubtype(*it);
+                  if(!dynaVelocity.isEmpty()) {
+                        int dynaValue = round(dynaVelocity.toDouble() * 0.9);
+                        if(dynaValue > 127)
+                              dynaValue = 127;
+                        else if (dynaValue < 0)
+                              dynaValue = 0;
+                        dyn->setVelocity( dynaValue );
+                        }
                   if (hasYoffset) dyn->setYoff(yoffset);
                   addElement(dyn, hasYoffset, staff, rstaff, score, placement,
                              rx, ry, offset, measure, tick);
@@ -2726,6 +2736,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       QColor noteheadColor = QColor::Invalid;
       QList<Lyrics *> lyrics;
       bool chord = false;
+      int velocity = -1;
 
       // first read all elements required for voice mapping
       QDomElement e2 = e.firstChildElement();
@@ -2789,7 +2800,9 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             QDomElement pne = pn.toElement();
             printObject = pne.attribute("print-object", "yes");
             }
-
+            
+      velocity = round(e.attribute("dynamics", "-1").toDouble() * 0.9);
+      
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString s(e.text());
@@ -3207,7 +3220,12 @@ printf("new Tie %p\n", tie);
             // note->setStaffMove(move);
             if (noteheadColor != QColor::Invalid)
                   note->setColor(noteheadColor);
-
+            
+            if(velocity > 0){
+                  note->setVeloType(USER_VAL);
+                  note->setVeloOffset(velocity);
+                  }
+                  
             if (!fingering.isEmpty()) {
                   Text* f = new Text(score);
                   f->setSubtype(TEXT_FINGERING);
