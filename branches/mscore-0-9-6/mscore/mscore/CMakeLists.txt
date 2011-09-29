@@ -189,7 +189,10 @@ add_executable ( ${ExecutableName}
 
 # gold does not use indirect shared libraries for symbol resolution, Linux only
 if (NOT MINGW AND NOT APPLE)
-      target_link_libraries(mscore dl rt)
+      if(USE_JACK)
+        target_link_libraries(mscore dl)  
+      endif(USE_JACK)
+      target_link_libraries(mscore rt)
 endif (NOT MINGW AND NOT APPLE)
 
 if (STATIC_SCRIPT_BINDINGS)
