@@ -593,7 +593,7 @@ void Score::layoutStage3()
 
 void Score::doLayout()
       {
-      printf("doLayout\n");
+printf("doLayout\n");
       {
       QWriteLocker locker(&_layoutLock);
 
@@ -638,7 +638,6 @@ void Score::doLayout()
             st->setUpdateKeymap(false);
             }
 
-            printf("-----\n");
 #if 0 // DEBUG
       if (startLayout) {
             startLayout->setDirty();
@@ -717,6 +716,7 @@ void Score::doLayout()
       }     // unlock mutex
       foreach(MuseScoreView* v, viewer)
             v->layoutChanged();
+printf("-----\n");
       }
 
 //---------------------------------------------------------
@@ -755,10 +755,8 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                         case KEYSIG:
                               keysig = static_cast<KeySig*>(el);
                               keysig->changeKeySigEvent(keyIdx);
-                              if (!keysig->isCustom() && oKeySigBefore.accidentalType() == keysig->keySignature()) {
-printf("set old keysig tick %d staff %d\n", tick, i);
+                              if (!keysig->isCustom() && oKeySigBefore.accidentalType() == keysig->keySignature())
                                     keysig->setOldSig(0);
-                                    }
                               keysig->setMag(staff->mag());
                               break;
                         case CLEF:
@@ -780,7 +778,6 @@ printf("set old keysig tick %d staff %d\n", tick, i);
             if (staff->useTablature())
                   needKeysig = false;
             if (needKeysig && !keysig) {
-printf("create missing keysig\n");
                   //
                   // create missing key signature
                   //
@@ -796,10 +793,8 @@ printf("create missing keysig\n");
                   keysig->setParent(seg);
                   undoAddElement(keysig);
                   }
-            else if (!needKeysig && keysig) {
-printf("remove unneeded keysig\n");
+            else if (!needKeysig && keysig)
                   undoRemoveElement(keysig);
-                  }
             bool needClef = isFirstSystem || styleB(ST_genClef);
             if (needClef) {
                   if (!clef) {
@@ -945,7 +940,6 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
                   Measure* m = static_cast<Measure*>(curMeasure);
                   if (firstMeasure == 0)
                         firstMeasure = m;
-                  lastMeasure = m;
 
                   if (isFirstMeasure)
                         processSystemHeader(m, isFirstSystem);
@@ -968,6 +962,8 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
                   break;
                   }
 
+            if (curMeasure->type() == MEASURE)
+                  lastMeasure = static_cast<Measure*>(curMeasure);
             minWidth += ww;
             system->measures().append(curMeasure);
             ElementType nt = curMeasure->next() ? curMeasure->next()->type() : INVALID;
@@ -980,11 +976,10 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
                   curMeasure = nextMeasure;
                   break;
                   }
-            else
-                  curMeasure = nextMeasure;
+            curMeasure = nextMeasure;
             }
 
-      if (firstMeasure != 0 && lastMeasure != 0 && firstMeasure != lastMeasure) {
+      if (firstMeasure && lastMeasure && firstMeasure != lastMeasure) {
             MeasureBase* mb = firstMeasure->next();
             removeGeneratedElements(mb, lastMeasure);
             }
@@ -1036,34 +1031,46 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
 
 void Score::removeGeneratedElements(MeasureBase* mb, MeasureBase* end)
       {
-      for (; mb != end; mb = mb->next()) {
-            if (mb->type() != MEASURE)
-                  continue;
-            Measure* m = static_cast<Measure*>(mb);
-            //
-            // remove generated elements
-            //    assume: generated elements are only living in voice 0
-            //
-            for (Segment* seg = m->first(); seg; seg = seg->next()) {
-                  if (seg->subtype() == SegEndBarLine)
-                        continue;
-                  for (int staffIdx = 0;  staffIdx < nstaves(); ++staffIdx) {
-                        int track = staffIdx * VOICES;
-                        Element* el = seg->element(track);
-                        if (el == 0)
+// printf("removeGeneratedElements %d - %d\n", mb->tick(), end->tick());
+      for (;;) {
+            if (mb->type() == MEASURE) {
+                  Measure* m = static_cast<Measure*>(mb);
+                  //
+                  // remove generated elements
+                  //    assume: generated elements are only living in voice 0
+                  //    - do not remove end bar lines
+                  //    - set size of clefs to small
+                  //
+                  for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                        if (seg->subtype() == SegEndBarLine)
                               continue;
-                        qreal staffMag = staff(staffIdx)->mag();
-                        if (el->generated() && seg->subtype() == SegTimeSigAnnounce)
-                              undoRemoveElement(el);
-                        else if (el->type() == CLEF) {
-                              Clef* clef = static_cast<Clef*>(el);
-                              clef->setSmall(true);
-                              clef->setMag(staffMag);
+                        for (int staffIdx = 0;  staffIdx < nstaves(); ++staffIdx) {
+                              int track = staffIdx * VOICES;
+                              Element* el = seg->element(track);
+                              if (el == 0)
+                                    continue;
+                              qreal staffMag = staff(staffIdx)->mag();
+
+                              if (el->generated()
+                                 && ((seg->subtype() == SegTimeSigAnnounce && mb != end)
+                                  || el->type() == CLEF))
+                                    {
+// printf("=====remove generated Element %p <%s> %d\n", el, el->name(), seg->tick());
+                                    undoRemoveElement(el);
+                                    }
+                              else if (el->type() == CLEF) {
+                                    Clef* clef = static_cast<Clef*>(el);
+                                    clef->setSmall(true);
+                                    clef->setMag(staffMag);
+                                    }
+                              else if (el->type() == KEYSIG || el->type() == TIMESIG)
+                                    el->setMag(staffMag);
                               }
-                        else if (el->type() == KEYSIG || el->type() == TIMESIG)
-                              el->setMag(staffMag);
                         }
                   }
+            if (mb == end)
+                  break;
+            mb = mb->next();
             }
       }
 

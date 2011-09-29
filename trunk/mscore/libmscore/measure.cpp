@@ -233,6 +233,21 @@ void Measure::dump() const
 
 void Measure::remove(Segment* el)
       {
+#ifndef NDEBUG
+      if (el->prev()) {
+            Q_ASSERT(el->prev()->next() == el);
+            }
+      else {
+            Q_ASSERT(el == _segments.first());
+            }
+
+      if (el->next()) {
+            Q_ASSERT(el->next()->prev() == el);
+            }
+      else {
+            Q_ASSERT(el == _segments.last());
+            }
+#endif
       int tracks = staves.size() * VOICES;
       for (int track = 0; track < tracks; track += VOICES) {
             if (!el->element(track))
