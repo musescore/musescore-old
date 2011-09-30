@@ -55,17 +55,40 @@ struct KeySigEvent {
       bool operator!=(const KeySigEvent& e) const;
       void setCustomType(int v);
       void setAccidentalType(int v);
-      
+
       void setNaturalType(int v);
       void setCustom(bool v);
-      
+
       int accidentalType() const;
       int naturalType() const;
       unsigned customType() const;
       bool custom() const;
       bool invalid() const;
-      
+
       void print() const;
+      };
+
+//---------------------------------------------------------
+//   AccidentalState
+//---------------------------------------------------------
+
+static const int TIE_CONTEXT = 0x10;
+
+class AccidentalState {
+      char state[75];    // -7 --- +7   | TIE_CONTEXT
+
+   public:
+      AccidentalState() {}
+      void init(int);
+      int accidentalVal(int line) const {
+            return state[line] & ~TIE_CONTEXT;
+            }
+      bool tieContext(int line) const {
+            return state[line] & TIE_CONTEXT;
+            }
+      void setAccidentalVal(int line, int val, bool tieContext = false) {
+            state[line] = val | (tieContext ? TIE_CONTEXT : 0);
+            }
       };
 
 //---------------------------------------------------------
@@ -89,6 +112,7 @@ class KeyList : public std::map<const int, KeySigEvent> {
       };
 
 extern int transposeKey(int oldKey, int semitones);
+
 
 #endif
 
