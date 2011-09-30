@@ -22,6 +22,7 @@
 #include "xml.h"
 #include "utils.h"
 #include "score.h"
+#include "pitchspelling.h"
 
 //---------------------------------------------------------
 //   KeySigEvent
@@ -113,7 +114,7 @@ bool KeySigEvent::isValid() const
       }
 
 
-  
+
 //---------------------------------------------------------
 //   setCustomType
 //---------------------------------------------------------
@@ -182,7 +183,7 @@ void KeySigEvent::setNaturalType(int v)
       _naturalType = v;
 #endif
       }
-      
+
 //---------------------------------------------------------
 //   setCustom
 //---------------------------------------------------------
@@ -305,7 +306,7 @@ bool KeySigEvent::operator!=(const KeySigEvent& e) const
             return e._customType != _customType;
       else
             return e._accidentalType != _accidentalType;
-#endif      
+#endif
 
       }
 
@@ -442,4 +443,31 @@ printf("transposeKey key %d semitones %d\n", key, semitones);
 printf("  key %d\n", key);
       return key;
       }
+
+//---------------------------------------------------------
+//   initLineList
+//    preset lines list with accidentals for given key
+//---------------------------------------------------------
+
+void AccidentalState::init(int type)
+      {
+      memset(state, 0, 74);
+      for (int octave = 0; octave < 11; ++octave) {
+            if (type > 0) {
+                  for (int i = 0; i < type; ++i) {
+                        int idx = tpc2step(20 + i) + octave * 7;
+                        if (idx < 74)
+                              state[idx] = 1;
+                        }
+                  }
+            else {
+                  for (int i = 0; i > type; --i) {
+                        int idx = tpc2step(12 + i) + octave * 7;
+                        if (idx < 74)
+                              state[idx] = -1;
+                        }
+                  }
+            }
+      }
+
 

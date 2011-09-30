@@ -1218,7 +1218,7 @@ void Note::layout()
 //    compute actual accidental and line
 //---------------------------------------------------------
 
-void Note::layout1(char* tversatz)
+void Note::layout1(AccidentalState* tversatz)
       {
       _line          = tpc2step(_tpc) + (_pitch/12) * 7;
       int tpcPitch   = tpc2pitch(_tpc);
@@ -1233,12 +1233,15 @@ void Note::layout1(char* tversatz)
       else  {
             int accVal = ((_tpc + 1) / 7) - 2;
             acci       = ACC_NONE;
-            if ((accVal != tversatz[_line]) || hidden()) {
-                  if (_tieBack == 0)
-                        tversatz[_line] = accVal;
-                  acci = Accidental::value2subtype(accVal);
-                  if (acci == ACC_NONE)
-                        acci = ACC_NATURAL;
+            if ((accVal != tversatz->accidentalVal(_line)) || hidden() || tversatz->tieContext(_line)) {
+                  tversatz->setAccidentalVal(_line, accVal, _tieBack != 0);
+                  if (_tieBack)
+                        acci = ACC_NONE;
+                  else {
+                        acci = Accidental::value2subtype(accVal);
+                        if (acci == ACC_NONE)
+                              acci = ACC_NATURAL;
+                        }
                   }
             }
       if (acci != ACC_NONE && !_tieBack && !_hidden) {

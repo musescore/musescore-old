@@ -38,6 +38,7 @@ class Text;
 class Score;
 class Sym;
 class ScoreView;
+class AccidentalState;
 
 extern const int noteHeads[2][HEAD_GROUPS][4];
 
@@ -121,7 +122,7 @@ class Note : public Element {
       virtual QRectF bbox() const;
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       virtual void layout();
-      void layout1(char* tversatz);
+      void layout1(AccidentalState*);
       virtual void scanElements(void* data, void (*func)(void*, Element*));
       virtual void setTrack(int val);
 

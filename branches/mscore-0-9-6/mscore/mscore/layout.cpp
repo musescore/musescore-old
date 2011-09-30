@@ -225,7 +225,7 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
 
             bool conflict = (qAbs(ll - line) < 2) && (move1 == move);
             bool sameHead = (ll == line) && (headGroup == lastHeadGroup) && (headType == lastHeadType);
-            
+
             if ((chord->up() != isLeft) || conflict)
                   isLeft = !isLeft;
             bool nmirror  = (chord->up() != isLeft) && !sameHead;
@@ -399,8 +399,8 @@ void Score::layoutStage1()
             for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
                   KeySigEvent key = staff(staffIdx)->keymap()->key(m->tick());
 
-                  char tversatz[75];      // list of already set accidentals for this measure
-                  initLineList(tversatz, key.accidentalType());
+                  AccidentalState tversatz;      // list of already set accidentals for this measure
+                  tversatz.init(key.accidentalType());
 
                   m->setBreakMMRest(false);
                   if (styleB(ST_createMultiMeasureRests)) {
@@ -441,7 +441,7 @@ void Score::layoutStage1()
                               }
 
                         if ((segment->subtype() == SegChordRest) || (segment->subtype() == SegGrace))
-                              m->layoutChords0(segment, staffIdx * VOICES, tversatz);
+                              m->layoutChords0(segment, staffIdx * VOICES, &tversatz);
                         if (e && e->type() == KEYSIG) {
                               KeySigEvent oval = staff(staffIdx)->keymap()->key(e->tick() - 1);
                               static_cast<KeySig*>(e)->setOldSig(oval.accidentalType());

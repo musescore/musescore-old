@@ -344,7 +344,7 @@ struct AcEl {
 //    computes note lines and accidentals
 //---------------------------------------------------------
 
-void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
+void Measure::layoutChords0(Segment* segment, int startTrack, AccidentalState* tversatz)
       {
       int staffIdx     = startTrack/VOICES;
       Staff* staff     = score()->staff(staffIdx);
@@ -369,6 +369,7 @@ void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
                   if (chord->noteType() != NOTE_NORMAL)
                         m *= score()->styleD(ST_graceNoteMag);
                   foreach(Note* note, chord->notes()) {
+#if 0
                         if (note->tieBack()) {
                               int line = note->tieBack()->startNote()->line();
                               note->setLine(line);
@@ -380,10 +381,10 @@ void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
                                     line += 7;
                               else
                                     line -= (tpcPitch/12)*7;
-//                              tversatz[line] = ((tpc + 1) / 7) - 2;
+                              tversatz.setAccidentalVal(line, ((tpc + 1) / 7) - 2);
                               continue;
                               }
-
+#endif
                         if (drumset) {
                               int pitch = note->pitch();
                               if (!drumset->isValid(pitch)) {
@@ -409,9 +410,9 @@ void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
 
 int Measure::findAccidental(Note* note) const
       {
-      char tversatz[75];      // list of already set accidentals for this measure
       KeySigEvent key = note->chord()->staff()->keymap()->key(tick());
-      initLineList(tversatz, key.accidentalType());
+      AccidentalState tversatz;
+      tversatz.init(key.accidentalType());
 
       for (Segment* segment = first(); segment; segment = segment->next()) {
             if ((segment->subtype() != SegChordRest) && (segment->subtype() != SegGrace))
@@ -423,10 +424,6 @@ int Measure::findAccidental(Note* note) const
                   if (!e || e->type() != CHORD)
                         continue;
                   Chord* chord = static_cast<Chord*>(e);
-
-                  Drumset* drumset = 0;
-                  if (chord->staff()->part()->useDrumset())
-                        drumset = chord->staff()->part()->drumset();
 
                   foreach(Note* note1, chord->notes()) {
                         int pitch   = note1->pitch();
@@ -445,7 +442,7 @@ int Measure::findAccidental(Note* note) const
 //                              ;
 //                        else  {
                               int accVal = ((tpc + 1) / 7) - 2;
-                              if (accVal != tversatz[line]) {
+                              if (accVal != tversatz.accidentalVal(line)) {
                                     if (note == note1) {
                                           switch(accVal) {
                                                 case -2: return ACC_FLAT2;
@@ -458,7 +455,7 @@ int Measure::findAccidental(Note* note) const
                                                       return 0;
                                                 }
                                           }
-                                    tversatz[line] = accVal;
+                                    tversatz.setAccidentalVal(line, accVal);
                                     }
                               else {
                                     if (note == note1)
@@ -479,9 +476,9 @@ int Measure::findAccidental(Note* note) const
 
 int Measure::findAccidental2(Note* note) const
       {
-      char tversatz[75];      // list of already set accidentals for this measure
+      AccidentalState tversatz;      // list of already set accidentals for this measure
       KeySigEvent key = note->chord()->staff()->keymap()->key(tick());
-      initLineList(tversatz, key.accidentalType());
+      tversatz.init(key.accidentalType());
 
       for (Segment* segment = first(); segment; segment = segment->next()) {
             if ((segment->subtype() != SegChordRest) && (segment->subtype() != SegGrace))
@@ -493,10 +490,6 @@ int Measure::findAccidental2(Note* note) const
                   if (!e || e->type() != CHORD)
                         continue;
                   Chord* chord = static_cast<Chord*>(e);
-
-                  Drumset* drumset = 0;
-                  if (chord->staff()->part()->useDrumset())
-                        drumset = chord->staff()->part()->drumset();
 
                   foreach(Note* note1, chord->notes()) {
                         int pitch   = note1->pitch();
@@ -513,10 +506,10 @@ int Measure::findAccidental2(Note* note) const
                               line -= (tpcPitch/12)*7;
 
                         if (note == note1)
-                              return tversatz[line];
+                              return tversatz.accidentalVal(line);
                         int accVal = ((tpc + 1) / 7) - 2;
-                        if (accVal != tversatz[line])
-                              tversatz[line] = accVal;
+                        if (accVal != tversatz.accidentalVal(line))
+                              tversatz.setAccidentalVal(line, accVal);
                         }
                   }
             }
