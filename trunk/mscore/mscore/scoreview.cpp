@@ -67,6 +67,7 @@
 #include "libmscore/lasso.h"
 #include "libmscore/box.h"
 #include "texttools.h"
+#include "edittools.h"
 #include "libmscore/clef.h"
 #include "scoretab.h"
 #include "painterqt.h"
@@ -1157,6 +1158,9 @@ void ScoreView::updateGrips()
       if (curGrip == -1)
             curGrip = grips-1;
 
+      QPointF pt(editObject->getGrip(curGrip));
+      mscore->editTools()->setEditPos(pt);
+
 #if 0
       double x, y;
       if (grips) {
@@ -1306,6 +1310,10 @@ void ScoreView::startEdit()
             editObject         = clone->spannerSegments()[idx];
             editObject->startEdit(this, startMove);
             _score->undoChangeElement(spanner, clone);
+
+            mscore->editTools()->setElement(editObject);
+            mscore->editTools()->updateTools();
+            mscore->editTools()->show();
             }
       else {
             foreach(Element* e, origEditObject->linkList()) {
@@ -1317,6 +1325,10 @@ void ScoreView::startEdit()
                   _score->undoChangeElement(e, ce);
                   }
             editObject->startEdit(this, startMove);
+
+            mscore->editTools()->setElement(editObject);
+            mscore->editTools()->updateTools();
+            mscore->editTools()->show();
             }
       curGrip = -1;
       updateGrips();
@@ -1329,6 +1341,8 @@ void ScoreView::startEdit()
 
 void ScoreView::endEdit()
       {
+      mscore->editTools()->hide();
+
       setDropTarget(0);
       setEditText(0);
       if (!editObject) {
@@ -1428,7 +1442,6 @@ void ScoreView::endEdit()
                         }
                   }
             }
-
       _score->addRefresh(editObject->canvasBoundingRect());
 
       int tp = editObject->type();

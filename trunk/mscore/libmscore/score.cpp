@@ -2023,12 +2023,12 @@ void Score::updateAccidentals(Measure* m, int staffIdx)
       {
 // printf("updateAccidentals measure %d staff %d\n", m->no(), staffIdx);
       Staff* st = staff(staffIdx);
-      AccidentalState tversatz;      // list of already set accidentals for this measure
-      tversatz.init(st->keymap()->key(m->tick()));
+      AccidentalState as;      // list of already set accidentals for this measure
+      as.init(st->keymap()->key(m->tick()));
 
       for (Segment* segment = m->first(); segment; segment = segment->next()) {
             if (segment->subtype() & (SegChordRest | SegGrace))
-                  m->updateAccidentals(segment, staffIdx, &tversatz);
+                  m->updateAccidentals(segment, staffIdx, &as);
             }
       }
 

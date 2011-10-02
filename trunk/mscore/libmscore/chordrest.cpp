@@ -455,11 +455,54 @@ void ChordRest::layoutArticulations()
       {
       if (parent() == 0 || articulations.isEmpty())
             return;
-      if (type() == CHORD && articulations.size() == 1) {
-            static_cast<Chord*>(this)->layoutArticulation(articulations[0]);
-            return;
-            }
       qreal _spatium  = spatium();
+      if (type() == CHORD) {
+            if (articulations.size() == 1) {
+                  static_cast<Chord*>(this)->layoutArticulation(articulations[0]);
+                  return;
+                  }
+            if (articulations.size() == 2) {
+                  //
+                  // staccato | tenuto + marcato
+                  //
+                  Articulation* a1 = articulations[0];
+                  Articulation* a2 = articulations[1];
+                  int st1 = a1->subtype();
+                  int st2 = a2->subtype();
+
+                  if ((st2 == Articulation_Tenuto || st2 == Articulation_Staccato)
+                     && (st1 == Articulation_Marcato)) {
+                        qSwap(a1, a2);
+                        qSwap(st1, st2);
+                        }
+                  if ((st1 == Articulation_Tenuto || st1 == Articulation_Staccato)
+                     && (st2 == Articulation_Marcato)) {
+                        QPointF pt = static_cast<Chord*>(this)->layoutArticulation(a1);
+                        pt.ry() += a1->up() ? -_spatium * .5 : _spatium * .5;
+                        a2->setUp(a1->up());
+                        a2->setPos(pt);
+                        a2->adjustReadPos();
+                        return;
+                        }
+                  //
+                  // staccato | tenuto + sforzato
+                  //
+                  if ((st2 == Articulation_Tenuto || st2 == Articulation_Staccato)
+                     && (st1 == Articulation_Sforzatoaccent)) {
+                        qSwap(a1, a2);
+                        qSwap(st1, st2);
+                        }
+                  if ((st1 == Articulation_Tenuto || st1 == Articulation_Staccato)
+                     && (st2 == Articulation_Sforzatoaccent)) {
+                        QPointF pt = static_cast<Chord*>(this)->layoutArticulation(a1);
+                        pt.ry() += a1->up() ? -_spatium * .7 : _spatium * .7;
+                        a2->setUp(a1->up());
+                        a2->setPos(pt);
+                        a2->adjustReadPos();
+                        return;
+                        }
+                  }
+            }
       qreal x         = centerX();
       qreal distance0 = score()->styleS(ST_propertyDistance).val()     * _spatium;
       qreal distance1 = score()->styleS(ST_propertyDistanceHead).val() * _spatium;
@@ -541,6 +584,7 @@ void ChordRest::layoutArticulations()
             qreal y;
             Chord* chord = static_cast<Chord*>(this);
             if (bottom) {
+                  int line = downLine();
                   y = chordBotY + dy;
                   if (!headSide && type() == CHORD && chord->stem()) {
                         Stem* stem = chord->stem();
@@ -554,16 +598,17 @@ void ChordRest::layoutArticulations()
                         else
                               y += _spatium;
                         }
-                  else if (y <= staffBotY -.1 - dy) {
-                        qreal l = y / _spatium;
-                        qreal delta = fabs(l - round(l));
-                        if (delta < 0.4) {
-                              y  += _spatium * .5;
-                              dy += _spatium * .5;
-                              }
+                  else {
+                        int lines = (staff()->lines() - 1) * 2;
+                        if (line < lines)
+                              y = (line & ~1) + 3;
+                        else
+                              y = line + 2;
+                        y *= _spatium * .5;
                         }
                   }
             else {
+                  int line = upLine();
                   y = chordTopY - dy;
                   if (!headSide && type() == CHORD && chord->stem()) {
                         Stem* stem = chord->stem();
@@ -577,15 +622,15 @@ void ChordRest::layoutArticulations()
                         else
                               y -= _spatium;
                         }
-                  else if (y >= (staffTopY +.1 + dy)) {
-                        qreal l = y / _spatium;
-                        qreal delta = fabs(l - round(l));
-                        if (delta < 0.4) {
-                              y  -= _spatium * .5;
-                              dy += _spatium * .5;
-                              }
+                  else {
+                        if (line > 0)
+                              y = ((line+1) & ~1) - 3;
+                        else
+                              y = line - 2;
+                        y *= _spatium * .5;
                         }
                   }
+            dy += _spatium * .5;
             a->setPos(x, y);
             }
 

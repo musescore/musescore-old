@@ -269,8 +269,6 @@ struct AcEl {
 
 //---------------------------------------------------------
 //   layoutChords0
-//    only called from layout0
-//    computes note lines and accidentals
 //---------------------------------------------------------
 
 void Measure::layoutChords0(Segment* segment, int startTrack)
@@ -285,16 +283,15 @@ void Measure::layoutChords0(Segment* segment, int startTrack)
 
       int endTrack = startTrack + VOICES;
       for (int track = startTrack; track < endTrack; ++track) {
-            Element* e = segment->element(track);
-            if (!e)
+            ChordRest* cr = static_cast<ChordRest*>(segment->element(track));
+            if (!cr)
                  continue;
-            ChordRest* cr = static_cast<ChordRest*>(e);
             qreal m = staffMag;
             if (cr->small())
                   m *= score()->styleD(ST_smallNoteMag);
 
             if (cr->type() == CHORD) {
-                  Chord* chord = static_cast<Chord*>(e);
+                  Chord* chord = static_cast<Chord*>(cr);
                   if (chord->noteType() != NOTE_NORMAL)
                         m *= score()->styleD(ST_graceNoteMag);
                   if (drumset) {
@@ -337,20 +334,6 @@ void Measure::layoutChords10(Segment* segment, int startTrack, AccidentalState* 
                  continue;
             Chord* chord = static_cast<Chord*>(e);
             foreach(Note* note, chord->notes()) {
-                  if (note->tieBack()) {
-                        int line = note->tieBack()->startNote()->line();
-                        note->setLine(line);
-
-                        int tpc = note->tpc();
-                        line = tpc2step(tpc) + (note->pitch()/12) * 7;
-                        int tpcPitch   = tpc2pitch(tpc);
-                        if (tpcPitch < 0)
-                              line += 7;
-                        else
-                              line -= (tpcPitch/12)*7;
-                        continue;
-                        }
-
                   if (drumset) {
                         int pitch = note->pitch();
                         if (!drumset->isValid(pitch)) {
