@@ -1039,7 +1039,7 @@ void Score::upDown(bool up, UpDownMode mode)
       {
       QList<Note*> el;
       int tick = -1;
-      bool playNotes = true;
+//      bool playNotes = true;
       foreach (Note* note, selection().noteList()) {
             while (note->tieBack())
                   note = note->tieBack()->startNote();
@@ -1049,8 +1049,8 @@ void Score::upDown(bool up, UpDownMode mode)
                         if (tick == -1)
                               tick = note->chord()->tick();
                         else {
-                              if (tick != note->chord()->tick())
-                                    playNotes = false;      // don't scare the cat
+//                              if (tick != note->chord()->tick())
+//                                    playNotes = false;      // don't scare the cat
                               }
                         }
                   }
@@ -1585,11 +1585,11 @@ void Score::processMidiInput()
                   printf("<-- !noteentry dequeue %i\n", ev.pitch);
             if (!noteEntryMode()) {
                   int staffIdx = selection().staffStart();
-                  Part* p;
-                  if (staffIdx < 0 || staffIdx >= nstaves())
-                        p = part(0);
-                  else
-                        p = staff(staffIdx)->part();
+//                  Part* p;
+//                  if (staffIdx < 0 || staffIdx >= nstaves())
+//                        p = part(0);
+//                  else
+//                        p = staff(staffIdx)->part();
 //TODO-LIB                  if (p)
 //                        seq->startNote(p->instr()->channel(0), ev.pitch, 80, MScore::defaultPlayDuration, 0.0);
                   }

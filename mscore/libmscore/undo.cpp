@@ -929,9 +929,9 @@ void Score::undoAddElement(Element* element)
                   ntie->setStartNote(nn1);
                   ntie->setEndNote(nn2);
                   undo()->push(new AddElement(ntie));
-                  score->updateAccidentals(nm1, staffIdx);
-                  if (nm1 != nm2)
-                        score->updateAccidentals(nm2, staffIdx);
+//                  score->updateAccidentals(nm1, staffIdx);
+//                  if (nm1 != nm2)
+//                        score->updateAccidentals(nm2, staffIdx);
                   }
             else if (element->type() == INSTRUMENT_CHANGE) {
                   InstrumentChange* is = static_cast<InstrumentChange*>(element);
@@ -1132,6 +1132,16 @@ AddElement::AddElement(Element* e)
 void AddElement::undo()
       {
       element->score()->removeElement(element);
+      if (element->type() == TIE) {
+            Tie* tie = static_cast<Tie*>(element);
+            Measure* m1 = tie->startNote()->chord()->measure();
+            Measure* m2 = tie->endNote()->chord()->measure();
+
+            if (m1 != m2)
+                  tie->score()->updateNotes();
+            else
+                  tie->score()->updateAccidentals(m1, tie->staffIdx());
+            }
       }
 
 //---------------------------------------------------------
@@ -1141,6 +1151,16 @@ void AddElement::undo()
 void AddElement::redo()
       {
       element->score()->addElement(element);
+      if (element->type() == TIE) {
+            Tie* tie = static_cast<Tie*>(element);
+            Measure* m1 = tie->startNote()->chord()->measure();
+            Measure* m2 = tie->endNote()->chord()->measure();
+
+            if (m1 != m2)
+                  tie->score()->updateNotes();
+            else
+                  tie->score()->updateAccidentals(m1, tie->staffIdx());
+            }
       }
 
 //---------------------------------------------------------

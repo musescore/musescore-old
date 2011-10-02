@@ -54,14 +54,23 @@ class KeySigEvent {
 //   AccidentalState
 //---------------------------------------------------------
 
+static const int TIE_CONTEXT = 0x10;
+
 class AccidentalState {
-      char state[75];
+      char state[75];    // -7 --- +7   | TIE_CONTEXT
 
    public:
       AccidentalState() {}
       void init(const KeySigEvent&);
-      int accidentalVal(int line) const        { return state[line]; }
-      void setAccidentalVal(int line, int val) { state[line] = val; }
+      int accidentalVal(int line) const {
+            return state[line] & ~TIE_CONTEXT;
+            }
+      bool tieContext(int line) const {
+            return state[line] & TIE_CONTEXT;
+            }
+      void setAccidentalVal(int line, int val, bool tieContext = false) {
+            state[line] = val | (tieContext ? TIE_CONTEXT : 0);
+            }
       };
 
 //---------------------------------------------------------
@@ -79,9 +88,6 @@ class KeyList : public std::map<const int, KeySigEvent> {
       KeySigEvent key(int tick) const;
       void read(QDomElement, Score*);
       void write(Xml&, const char* name) const;
-
-//      void removeTime(int start, int len);
-//      void insertTime(int start, int len);
       };
 
 extern int transposeKey(int oldKey, int semitones);

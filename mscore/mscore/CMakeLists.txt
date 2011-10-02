@@ -73,8 +73,8 @@ QT4_WRAP_CPP (mocs
       harmonycanvas.h updatechecker.h fretproperties.h fretcanvas.h editstafftype.h
       prefsdialog.h sectionbreakprop.h hairpinprop.h bendproperties.h
       bendcanvas.h tremolobarprop.h tremolobarcanvas.h
-      drumtools.h texteditor.h texttools.h pianotools.h editpitch.h  editstringdata.h
-      editraster.h mediadialog.h chordeditor.h chordview.h album.h layer.h
+      drumtools.h texteditor.h texttools.h edittools.h pianotools.h editpitch.h
+      editstringdata.h editraster.h mediadialog.h chordeditor.h chordview.h album.h layer.h
       webpage.h inspector.h
       )
 
@@ -151,8 +151,8 @@ add_executable ( ${ExecutableName}
       pianoview.cpp drumview.cpp scoretab.cpp keyedit.cpp harmonyedit.cpp
       updatechecker.cpp importove.cpp ove.cpp ruler.cpp
       importgtp.cpp fotomode.cpp drumtools.cpp
-      selinstrument.cpp texteditor.cpp editstafftype.cpp texttools.cpp editpitch.cpp
-      editstringdata.cpp editraster.cpp pianotools.cpp mediadialog.cpp
+      selinstrument.cpp texteditor.cpp editstafftype.cpp texttools.cpp edittools.cpp
+      editpitch.cpp editstringdata.cpp editraster.cpp pianotools.cpp mediadialog.cpp
       profile.cpp exportmp3.cpp chordeditor.cpp chordview.cpp
       album.cpp webpage.cpp painterqt.cpp textstyle.cpp tempoproperties.cpp
       lineproperties.cpp stafftextproperties.cpp splitstaff.cpp

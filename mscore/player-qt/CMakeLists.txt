@@ -11,6 +11,8 @@
 #  the file LICENSE.GPL
 #=============================================================================
 
+set(CMAKE_VERBOSE_MAKEFILE ON)
+
 include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
 
 include_directories(
@@ -40,10 +42,12 @@ add_executable(mscoreplay
       seq.cpp
       )
 
+#      QtDeclarative
+#      /home/ws/qt/qt/lib/libQtDeclarative.so
 target_link_libraries(mscoreplay
-      ${QT_LIBRARIES}
-      /home/ws/qt/qt/lib/libQtDeclarative.so
       libmscore
+      /home/ws/qt/qt/lib/libQtDeclarative.so
+      ${QT_LIBRARIES}
       zarchive
       m-msynth
       portaudio

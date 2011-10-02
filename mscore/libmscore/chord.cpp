@@ -1788,7 +1788,7 @@ void Chord::setProperty(int propertyId, const QVariant& v)
 //    called from chord()->layoutArticulations()
 //---------------------------------------------------------
 
-void Chord::layoutArticulation(Articulation* a)
+QPointF Chord::layoutArticulation(Articulation* a)
       {
       qreal _spatium  = spatium();
 
@@ -1798,6 +1798,7 @@ void Chord::layoutArticulation(Articulation* a)
       qreal chordTopY = upPos();    // note position of highest note
       qreal chordBotY = downPos();  // note position of lowest note
       qreal x         = centerX();
+      qreal y;
 
       if (a->subtype() == Articulation_Tenuto || a->subtype() == Articulation_Staccato) {
             bool bottom;
@@ -1807,7 +1808,7 @@ void Chord::layoutArticulation(Articulation* a)
                   bottom = (aa == A_BOTTOM_CHORD) || (aa == A_CHORD && up());
             bool stemSide = (bottom != up()) && stem();
 
-            qreal y;
+            a->setUp(!bottom);
             if (bottom) {
                   int line = downLine();
                   if (stemSide) {
@@ -1852,7 +1853,7 @@ void Chord::layoutArticulation(Articulation* a)
                         }
                   }
             a->setPos(x, y);
-            return;
+            return QPointF(x, y);
             }
 
       // reserve space for slur
@@ -1932,10 +1933,12 @@ void Chord::layoutArticulation(Articulation* a)
                   bottom = !up();
             else
                   bottom = (aa == A_BOTTOM_CHORD) || (aa == A_CHORD && up());
-            a->setPos(x, bottom ? chordBotY + dist : chordTopY - dist);
+            y = bottom ? chordBotY + dist : chordTopY - dist;
             }
       else if (aa == A_TOP_STAFF || aa == A_BOTTOM_STAFF) {
-            a->setPos(x, a->up() ? staffTopY - dist : staffBotY + dist);
+            y = a->up() ? staffTopY - dist : staffBotY + dist;
             }
+      a->setPos(x, y);
       a->adjustReadPos();
+      return QPointF(x, y);
       }

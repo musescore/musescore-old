@@ -188,7 +188,7 @@ class Chord : public ChordRest {
       ElementList& el()                { return _el; }
       const ElementList& el() const    { return _el; }
 
-      void layoutArticulation(Articulation*);
+      QPointF layoutArticulation(Articulation*);
 
       virtual QVariant getProperty(int propertyId) const;
       virtual void setProperty(int propertyId, const QVariant&);

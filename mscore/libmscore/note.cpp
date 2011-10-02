@@ -1316,7 +1316,7 @@ bool Note::dotIsUp() const
 //    compute actual accidental and line
 //---------------------------------------------------------
 
-void Note::layout10(AccidentalState* tversatz)
+void Note::layout10(AccidentalState* as)
       {
       if (staff()->useTablature()) {
             if (_accidental) {
@@ -1347,12 +1347,16 @@ void Note::layout10(AccidentalState* tversatz)
                   acci = _accidental->accidentalType();
             else  {
                   int accVal = tpc2alter(_tpc);
-                  if ((accVal != tversatz->accidentalVal(int(_line))) || hidden()) {
-                        if (_tieBack == 0)
-                              tversatz->setAccidentalVal(int(_line), accVal);
-                        acci = Accidental::value2subtype(accVal);
-                        if (acci == ACC_NONE)
-                              acci = ACC_NATURAL;
+                  if ((accVal != as->accidentalVal(int(_line)))
+                    || hidden() || as->tieContext(int(_line))) {
+                        as->setAccidentalVal(int(_line), accVal, _tieBack != 0);
+                        if (_tieBack)
+                              acci = ACC_NONE;
+                        else {
+                              acci = Accidental::value2subtype(accVal);
+                              if (acci == ACC_NONE)
+                                    acci = ACC_NATURAL;
+                              }
                         }
                   }
             if (acci != ACC_NONE && !_tieBack && !_hidden) {
@@ -1593,7 +1597,7 @@ void Note::endEdit()
 //   updateAccidental
 //---------------------------------------------------------
 
-void Note::updateAccidental(AccidentalState* tversatz)
+void Note::updateAccidental(AccidentalState* as)
       {
       _line          = tpc2step(_tpc) + (_pitch/12) * 7;
       int tpcPitch   = tpc2pitch(_tpc);
@@ -1609,12 +1613,15 @@ void Note::updateAccidental(AccidentalState* tversatz)
             acci = _accidental->accidentalType();
       else  {
             int accVal = tpc2alter(_tpc);
-            if ((accVal != tversatz->accidentalVal(int(_line))) || hidden()) {
-                  if (_tieBack == 0)
-                        tversatz->setAccidentalVal(int(_line), accVal);
-                  acci = Accidental::value2subtype(accVal);
-                  if (acci == ACC_NONE)
-                        acci = ACC_NATURAL;
+            if ((accVal != as->accidentalVal(int(_line))) || hidden() || as->tieContext(int(_line))) {
+                  as->setAccidentalVal(int(_line), accVal, _tieBack != 0);
+                  if (_tieBack)
+                        acci = ACC_NONE;
+                  else {
+                        acci = Accidental::value2subtype(accVal);
+                        if (acci == ACC_NONE)
+                              acci = ACC_NATURAL;
+                        }
                   }
             }
       if (acci != ACC_NONE && !_tieBack && !_hidden) {

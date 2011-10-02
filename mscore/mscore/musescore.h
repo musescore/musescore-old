@@ -79,6 +79,7 @@ class Capella;
 class CapVoice;
 class Inspector;
 class NScrollArea;
+class EditTools;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -189,6 +190,7 @@ class MuseScore : public QMainWindow {
       QToolBar* transportTools;
       QToolBar* entryTools;
       TextTools* _textTools;
+      EditTools* _editTools;
       PianoTools* _pianoTools;
       WebPageDockWidget* _webPage;
       MediaDialog* _mediaDialog;
@@ -451,6 +453,7 @@ class MuseScore : public QMainWindow {
       bool noScore() const { return scoreList.isEmpty(); }
 
       TextTools* textTools();
+      EditTools* editTools();
       void showDrumTools(Drumset*, Staff*);
       void showWebPanel(bool on);
 

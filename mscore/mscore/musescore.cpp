@@ -379,6 +379,7 @@ MuseScore::MuseScore()
       newWizard             = 0;
       lastOpenPath          = preferences.workingDirectory;
       _textTools            = 0;
+      _editTools            = 0;
       _pianoTools           = 0;
       _webPage              = 0;
       _mediaDialog          = 0;
@@ -433,24 +434,29 @@ MuseScore::MuseScore()
       _modeText->setAutoFillBackground(true);
       _statusBar = new QStatusBar;
 
-      QToolButton* hraster = new QToolButton(this);
-      QToolButton* vraster = new QToolButton(this);
       hRasterAction = getAction("hraster");
       hRasterAction->setCheckable(true);
+      vRasterAction = getAction("vraster");
+      vRasterAction->setCheckable(true);
+
+/*
+      QToolButton* hraster = new QToolButton(this);
+      QToolButton* vraster = new QToolButton(this);
       hraster->setDefaultAction(hRasterAction);
       hraster->setContextMenuPolicy(Qt::ActionsContextMenu);
       hraster->addAction(getAction("config-raster"));
-      vRasterAction = getAction("vraster");
-      vRasterAction->setCheckable(true);
+
       vraster->setDefaultAction(vRasterAction);
       vraster->setContextMenuPolicy(Qt::ActionsContextMenu);
       vraster->addAction(getAction("config-raster"));
+*/
+
       metronomeAction = getAction("metronome");
       metronomeAction->setCheckable(true);
       metronomeAction->setChecked(false);
 
-      _statusBar->addPermanentWidget(hraster, 0);
-      _statusBar->addPermanentWidget(vraster, 0);
+//      _statusBar->addPermanentWidget(hraster, 0);
+//      _statusBar->addPermanentWidget(vraster, 0);
       _statusBar->addPermanentWidget(new QWidget(this), 2);
       _statusBar->addPermanentWidget(new QWidget(this), 100);
       _statusBar->addPermanentWidget(_modeText, 0);
