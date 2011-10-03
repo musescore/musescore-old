@@ -139,7 +139,7 @@ include ( ${PROJECT_SOURCE_DIR}/cmake/TargetDoc.cmake)
 ##  look for Qt4
 ##
 
-set(QT_MIN_VERSION "4.8.0")
+set(QT_MIN_VERSION "4.7.0")
 set(QT_USE_QTXML     TRUE)
 set(QT_USE_QTSVG     TRUE)
 set(QT_USE_QTNETWORK TRUE)
@@ -149,10 +149,10 @@ set(QT_USE_QTSCRIPT   TRUE)
 set(QT_USE_QTSCRIPTTOOLS   TRUE)
 set(QT_USE_QTWEBKIT   TRUE)
 
-find_package(Qt4 "4.8")
+find_package(Qt4 "4.7")
 
 if (NOT QT4_FOUND)
-      message(FATAL_ERROR "Fatal error: QT (version >= 4.8.0) required."
+      message(FATAL_ERROR "Fatal error: QT (version >= 4.7.0) required."
          " Cmake tries to detect QT4 by searching for 'qmake' in your PATH."
          "If you have QT4 installed, make sure qmake is found in your PATH. "
          "If you compiled QT4 yourself make sure your new qmake is found"
