@@ -451,7 +451,7 @@ printf("  key %d\n", key);
 
 void AccidentalState::init(int type)
       {
-      memset(state, 0, 74);
+      memset(state, 2, 74);
       for (int octave = 0; octave < 11; ++octave) {
             if (type > 0) {
                   for (int i = 0; i < type; ++i) {
