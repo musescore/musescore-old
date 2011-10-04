@@ -83,7 +83,6 @@ class Clef : public Element {
       virtual Clef* clone() const      { return new Clef(*this); }
       virtual ElementType type() const { return CLEF; }
 
-      virtual QPointF pagePos() const;      ///< position in page coordinates
       Segment* segment() const         { return (Segment*)parent(); }
       Measure* measure() const         { return (Measure*)parent()->parent(); }
 

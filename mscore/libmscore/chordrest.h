@@ -57,8 +57,6 @@ class ChordRest : public DurationElement {
       ChordRest &operator=(const ChordRest&);
       ~ChordRest();
       virtual ElementType type() const = 0;
-      virtual QPointF pagePos() const;      ///< position in page coordinates
-      virtual QPointF canvasPos() const;
       virtual Element* drop(const DropData&);
 
       Segment* segment() const                   { return (Segment*)parent(); }

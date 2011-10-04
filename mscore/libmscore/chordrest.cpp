@@ -39,7 +39,6 @@
 #include "stafftype.h"
 #include "undo.h"
 #include "stem.h"
-#include "page.h"
 
 //---------------------------------------------------------
 //   DurationElement
@@ -173,36 +172,6 @@ void ChordRest::scanElements(void* data, void (*func)(void*, Element*), bool all
             }
       if (_tabDur)
             func(data, _tabDur);
-      }
-
-//---------------------------------------------------------
-//   pagePos
-//---------------------------------------------------------
-
-QPointF ChordRest::pagePos() const
-      {
-      if (parent() == 0)
-            return pos();
-      System* system = measure()->system();
-      if (system == 0)
-            return QPointF();
-      qreal yp = y() + system->staff(staffIdx())->y() + system->y();
-      return QPointF(pageX(), yp);
-      }
-
-//---------------------------------------------------------
-//   canvasPos
-//---------------------------------------------------------
-
-QPointF ChordRest::canvasPos() const
-      {
-      if (parent() == 0)
-            return pos();
-      System* system = measure()->system();
-      if (system == 0 || system->page() == 0)
-            return QPointF();
-      qreal yp = y() + system->staff(staffIdx())->y() + system->y() + system->page()->y();
-      return QPointF(pageX(), yp);
       }
 
 //---------------------------------------------------------

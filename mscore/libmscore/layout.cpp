@@ -1048,7 +1048,7 @@ void Score::removeGeneratedElements(Measure* sm, Measure* em)
                         qreal staffMag = staff(staffIdx)->mag();
 
                         if (el->generated() && ((st == SegTimeSigAnnounce && m != em)
-                            || el->type() == CLEF))
+                            || (el->type() == CLEF && seg->tick() != sm->tick())))
                               {
                               undoRemoveElement(el);
                               }

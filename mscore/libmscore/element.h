@@ -45,7 +45,8 @@ enum ElementFlag {
       ELEMENT_SELECTABLE  = 0x4,
       ELEMENT_MOVABLE     = 0x8,
       ELEMENT_SEGMENT     = 0x10,
-      ELEMENT_HAS_TAG     = 0x20
+      ELEMENT_HAS_TAG     = 0x20,
+      ELEMENT_ON_STAFF    = 0x40          // parent is Segment() type
       };
 
 typedef QFlags<ElementFlag> ElementFlags;
@@ -222,6 +223,7 @@ class Element {
       virtual QPointF pagePos() const;          ///< position in page coordinates
       virtual QPointF canvasPos() const;        ///< position in canvas coordinates
       qreal pageX() const;
+      qreal canvasX() const;
 
       const QPointF& userOff() const          { return _userOff;  }
       void setUserOff(const QPointF& o)       { _userOff = o;     }

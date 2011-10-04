@@ -149,7 +149,7 @@ Chord::Chord(Score* s)
       _noteType      = NOTE_NORMAL;
       _stemSlash     = 0;
       _noStem        = false;
-      setFlags(ELEMENT_MOVABLE);
+      setFlags(ELEMENT_MOVABLE | ELEMENT_ON_STAFF);
       }
 
 Chord::Chord(const Chord& c)

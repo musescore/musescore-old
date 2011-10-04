@@ -3669,7 +3669,6 @@ void ScoreView::noteEntryButton(QMouseEvent* ev)
 void ScoreView::doDragElement(QMouseEvent* ev)
       {
       QPointF delta = toLogical(ev->pos()) - startMove;
-//      drag(delta);
 
       QPointF pt(delta);
       if (qApp->keyboardModifiers() == Qt::ShiftModifier)
@@ -3680,17 +3679,15 @@ void ScoreView::doDragElement(QMouseEvent* ev)
       data.hRaster = mscore->hRaster();
       data.vRaster = mscore->vRaster();
       data.pos     = pt;
+
       foreach(Element* e, _score->selection().elements())
             _score->addRefresh(e->drag(data));
-//      _score->end();
       if (_score->playNote()) {
             Element* e = _score->selection().element();
-            if (e) {
+            if (e)
                   mscore->play(e);
-                  }
             _score->setPlayNote(false);
             }
-
 
       Element* e = _score->getSelectedElement();
       if (e) {
