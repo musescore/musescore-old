@@ -457,14 +457,14 @@ void AccidentalState::init(int type)
                   for (int i = 0; i < type; ++i) {
                         int idx = tpc2step(20 + i) + octave * 7;
                         if (idx < 74)
-                              state[idx] = 1;
+                              state[idx] = 1 + 2;
                         }
                   }
             else {
                   for (int i = 0; i > type; --i) {
                         int idx = tpc2step(12 + i) + octave * 7;
                         if (idx < 74)
-                              state[idx] = -1;
+                              state[idx] = -1 + 2;
                         }
                   }
             }
