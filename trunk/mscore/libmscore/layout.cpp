@@ -979,10 +979,8 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
             curMeasure = nextMeasure;
             }
 
-      if (firstMeasure && lastMeasure && firstMeasure != lastMeasure) {
-            MeasureBase* mb = firstMeasure->next();
-            removeGeneratedElements(mb, lastMeasure);
-            }
+      if (firstMeasure && lastMeasure && firstMeasure != lastMeasure)
+            removeGeneratedElements(firstMeasure, lastMeasure);
 
       //
       //    hide empty staves
@@ -1029,48 +1027,40 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
 //    helper function
 //---------------------------------------------------------
 
-void Score::removeGeneratedElements(MeasureBase* mb, MeasureBase* end)
+void Score::removeGeneratedElements(Measure* sm, Measure* em)
       {
 // printf("removeGeneratedElements %d - %d\n", mb->tick(), end->tick());
-      for (;;) {
-            if (mb->type() == MEASURE) {
-                  Measure* m = static_cast<Measure*>(mb);
-                  //
-                  // remove generated elements
-                  //    assume: generated elements are only living in voice 0
-                  //    - do not remove end bar lines
-                  //    - set size of clefs to small
-                  //
-                  for (Segment* seg = m->first(); seg; seg = seg->next()) {
-                        if (seg->subtype() == SegEndBarLine)
+      for (Measure* m = sm; m != em; m = m->nextMeasure()) {
+            //
+            // remove generated elements
+            //    assume: generated elements are only living in voice 0
+            //    - do not remove end bar lines
+            //    - set size of clefs to small
+            //
+            for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                  SegmentType st = seg->segmentType();
+                  if (st == SegEndBarLine)
+                        continue;
+                  for (int staffIdx = 0;  staffIdx < nstaves(); ++staffIdx) {
+                        Element* el = seg->element(staffIdx * VOICES);
+                        if (el == 0)
                               continue;
-                        for (int staffIdx = 0;  staffIdx < nstaves(); ++staffIdx) {
-                              int track = staffIdx * VOICES;
-                              Element* el = seg->element(track);
-                              if (el == 0)
-                                    continue;
-                              qreal staffMag = staff(staffIdx)->mag();
+                        qreal staffMag = staff(staffIdx)->mag();
 
-                              if (el->generated()
-                                 && ((seg->subtype() == SegTimeSigAnnounce && mb != end)
-                                  || el->type() == CLEF))
-                                    {
-// printf("=====remove generated Element %p <%s> %d\n", el, el->name(), seg->tick());
-                                    undoRemoveElement(el);
-                                    }
-                              else if (el->type() == CLEF) {
-                                    Clef* clef = static_cast<Clef*>(el);
-                                    clef->setSmall(true);
-                                    clef->setMag(staffMag);
-                                    }
-                              else if (el->type() == KEYSIG || el->type() == TIMESIG)
-                                    el->setMag(staffMag);
+                        if (el->generated() && ((st == SegTimeSigAnnounce && m != em)
+                            || el->type() == CLEF))
+                              {
+                              undoRemoveElement(el);
                               }
+                        else if (el->type() == CLEF) {
+                              Clef* clef = static_cast<Clef*>(el);
+                              clef->setSmall(seg->tick() != sm->tick());
+                              clef->setMag(staffMag);
+                              }
+                        else if (el->type() == KEYSIG || el->type() == TIMESIG)
+                              el->setMag(staffMag);
                         }
                   }
-            if (mb == end)
-                  break;
-            mb = mb->next();
             }
       }
 

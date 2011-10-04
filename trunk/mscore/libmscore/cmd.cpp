@@ -1584,7 +1584,7 @@ void Score::processMidiInput()
             if (debugMode)
                   printf("<-- !noteentry dequeue %i\n", ev.pitch);
             if (!noteEntryMode()) {
-                  int staffIdx = selection().staffStart();
+//                  int staffIdx = selection().staffStart();
 //                  Part* p;
 //                  if (staffIdx < 0 || staffIdx >= nstaves())
 //                        p = part(0);
