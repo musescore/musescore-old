@@ -52,7 +52,7 @@ QT4_WRAP_UI (ui_headers
       textproperties.ui editpitch.ui editstringdata.ui slursegment.ui
       accidental.ui clef.ui editraster.ui mediadialog.ui textstyle.ui
       album.ui layer.ui articulationbase.ui inspector_element.ui inspector_vbox.ui
-      inspector_articulation.ui inspector_spacer.ui inspector_hbox.ui
+      inspector_articulation.ui inspector_spacer.ui inspector_hbox.ui keysig.ui
       )
 
 QT4_WRAP_CPP (mocs

@@ -146,25 +146,25 @@ bool KeySigEvent::operator!=(const KeySigEvent& e) const
 void AccidentalState::init(const KeySigEvent& ks)
       {
       int type = ks.accidentalType();
-      memset(state, 0, 74);
+
+      memset(state, 2, 74);
       for (int octave = 0; octave < 11; ++octave) {
             if (type > 0) {
                   for (int i = 0; i < type; ++i) {
                         int idx = tpc2step(20 + i) + octave * 7;
                         if (idx < 74)
-                              state[idx] = 1;
+                              state[idx] = 1 + 2;
                         }
                   }
             else {
                   for (int i = 0; i > type; --i) {
                         int idx = tpc2step(12 + i) + octave * 7;
                         if (idx < 74)
-                              state[idx] = -1;
+                              state[idx] = -1 + 2;
                         }
                   }
             }
       }
-
 
 //---------------------------------------------------------
 //   key

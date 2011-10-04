@@ -54,6 +54,7 @@
 #include "libmscore/stem.h"
 #include "libmscore/iname.h"
 #include "libmscore/accidental.h"
+#include "libmscore/keysig.h"
 
 extern bool useFactorySettings;
 
@@ -484,7 +485,7 @@ void Debugger::updateElement(Element* el)
                   case REST:          ew = new ShowRestWidget;    break;
                   case CLEF:          ew = new ClefView;          break;
                   case TIMESIG:       ew = new ShowTimesigWidget; break;
-                  case KEYSIG:        ew = new ShowKeysigWidget;  break;
+                  case KEYSIG:        ew = new KeySigView;        break;
                   case SEGMENT:       ew = new SegmentView;       break;
                   case HAIRPIN:       ew = new HairpinView;       break;
                   case BAR_LINE:      ew = new BarLineView;       break;
@@ -1255,26 +1256,6 @@ ShowTimesigWidget::ShowTimesigWidget()
 void ShowTimesigWidget::setElement(Element* e)
       {
 //      TimeSig* tsig = (TimeSig*)e;
-      ShowElementBase::setElement(e);
-      }
-
-//---------------------------------------------------------
-//   ShowKeysigWidget
-//---------------------------------------------------------
-
-ShowKeysigWidget::ShowKeysigWidget()
-   : ShowElementBase()
-      {
-      layout->addStretch(100);
-      }
-
-//---------------------------------------------------------
-//   setElement
-//---------------------------------------------------------
-
-void ShowKeysigWidget::setElement(Element* e)
-      {
-//      KeySig* tsig = (KeySig*)e;
       ShowElementBase::setElement(e);
       }
 
@@ -2306,4 +2287,34 @@ void ArticulationView::setElement(Element* e)
       articulation.channelName->setText(a->channelName());
       }
 
+//---------------------------------------------------------
+//   KeySigView
+//---------------------------------------------------------
+
+KeySigView::KeySigView()
+   : ShowElementBase()
+      {
+      QWidget* w = new QWidget;
+      keysig.setupUi(w);
+      layout->addWidget(w);
+      layout->addStretch(10);
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void KeySigView::setElement(Element* e)
+      {
+      KeySig* ks = static_cast<KeySig*>(e);
+      ShowElementBase::setElement(e);
+
+      keysig.showCourtesySig->setChecked(ks->showCourtesySig());
+      keysig.showNaturals->setChecked(ks->showNaturals());
+      keysig.accidentalType->setValue(ks->keySigEvent().accidentalType());
+      keysig.naturalType->setValue(ks->keySigEvent().naturalType());
+      keysig.customType->setValue(ks->keySigEvent().customType());
+      keysig.custom->setChecked(ks->keySigEvent().custom());
+      keysig.invalid->setChecked(ks->keySigEvent().invalid());
+      }
 

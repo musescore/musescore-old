@@ -47,6 +47,7 @@
 #include "ui_accidental.h"
 #include "ui_clef.h"
 #include "ui_articulationbase.h"
+#include "ui_keysig.h"
 
 #include "globals.h"
 #include "libmscore/mscore.h"
@@ -287,18 +288,6 @@ class ShowTimesigWidget : public ShowElementBase {
 
    public:
       ShowTimesigWidget();
-      virtual void setElement(Element*);
-      };
-
-//---------------------------------------------------------
-//   ShowKeysigWidget
-//---------------------------------------------------------
-
-class ShowKeysigWidget : public ShowElementBase {
-      Q_OBJECT;
-
-   public:
-      ShowKeysigWidget();
       virtual void setElement(Element*);
       };
 
@@ -613,6 +602,20 @@ class ArticulationView : public ShowElementBase {
 
    public:
       ArticulationView();
+      virtual void setElement(Element*);
+      };
+
+//---------------------------------------------------------
+//   KeySigView
+//---------------------------------------------------------
+
+class KeySigView : public ShowElementBase {
+      Q_OBJECT;
+
+      Ui::KeySig keysig;
+
+   public:
+      KeySigView();
       virtual void setElement(Element*);
       };
 

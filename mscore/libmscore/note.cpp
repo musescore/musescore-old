@@ -1347,12 +1347,10 @@ void Note::layout10(AccidentalState* as)
                   acci = _accidental->accidentalType();
             else  {
                   int accVal = tpc2alter(_tpc);
-                  if ((accVal != as->accidentalVal(int(_line)))
-                    || hidden() || as->tieContext(int(_line))) {
+
+                  if ((accVal != as->accidentalVal(int(_line))) || hidden() || as->tieContext(int(_line))) {
                         as->setAccidentalVal(int(_line), accVal, _tieBack != 0);
-                        if (_tieBack)
-                              acci = ACC_NONE;
-                        else {
+                        if (!_tieBack) {
                               acci = Accidental::value2subtype(accVal);
                               if (acci == ACC_NONE)
                                     acci = ACC_NATURAL;

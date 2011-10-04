@@ -175,6 +175,7 @@ Item {
                   id: scoreView
                   parentWidth: screen.width
                   parentHeight: screen.height
+                  x: -width;
                   }
 
             Mobile.TitleBar {
