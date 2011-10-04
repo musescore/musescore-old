@@ -510,7 +510,6 @@ void Staff::setKey(int tick, int st)
 
 void Staff::setKey(int tick, const KeySigEvent& st)
       {
-printf("Staff::setKey staff %d tick %d -- %d\n", idx(), tick, st.accidentalType());
       (*_keymap)[tick] = st;
       }
 

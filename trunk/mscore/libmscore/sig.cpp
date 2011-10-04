@@ -177,7 +177,6 @@ int TimeSigMap::bar2tick(int bar, int beat, int tick) const
                bar, beat, tick);
             if (empty())
                   fprintf(stderr, "   list is empty\n");
-            // abort();
             return 0;
             }
       --e;
@@ -288,7 +287,6 @@ unsigned TimeSigMap::raster(unsigned t, int raster) const
       ciSigEvent e = upper_bound(t);
       if (e == end()) {
             printf("TimeSigMap::raster(%x,)\n", t);
-            // abort();
             return t;
             }
       int delta  = t - e->first;

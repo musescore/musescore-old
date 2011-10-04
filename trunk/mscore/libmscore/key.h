@@ -57,19 +57,23 @@ class KeySigEvent {
 static const int TIE_CONTEXT = 0x10;
 
 class AccidentalState {
-      char state[75];    // -7 --- +7   | TIE_CONTEXT
+      uchar state[75];    // (0 -- 4) | TIE_CONTEXT
 
    public:
       AccidentalState() {}
       void init(const KeySigEvent&);
       int accidentalVal(int line) const {
-            return state[line] & ~TIE_CONTEXT;
+            Q_ASSERT(line >= 0 && line < 75);
+            return (state[line] & 0x0f) - 2;
             }
       bool tieContext(int line) const {
+            Q_ASSERT(line >= 0 && line < 75);
             return state[line] & TIE_CONTEXT;
             }
       void setAccidentalVal(int line, int val, bool tieContext = false) {
-            state[line] = val | (tieContext ? TIE_CONTEXT : 0);
+            Q_ASSERT(line >= 0 && line < 75);
+            Q_ASSERT(val >= -2 && val <= 2);
+            state[line] = (val + 2) | (tieContext ? TIE_CONTEXT : 0);
             }
       };
 

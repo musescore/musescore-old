@@ -2101,8 +2101,10 @@ void Measure::read(QDomElement e, int staffIdx)
                   KeySig* ks = new KeySig(score());
                   ks->setTrack(score()->curTrack);
                   ks->read(e);
-                  segment = getSegment(SegKeySig, score()->curTick);
+                  int tick = score()->curTick;
+                  segment = getSegment(SegKeySig, tick);
                   segment->add(ks);
+                  staff->setKey(tick, ks->keySigEvent());
                   }
             else if (tag == "Lyrics") {                           // obsolete
                   Lyrics* lyrics = new Lyrics(score());
