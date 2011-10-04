@@ -15,9 +15,7 @@
 #include "staff.h"
 #include "clef.h"
 #include "keysig.h"
-#include "system.h"
 #include "segment.h"
-#include "measure.h"
 #include "score.h"
 #include "undo.h"
 #include "painter.h"
@@ -47,6 +45,7 @@ const char* keyNames[15] = {
 KeySig::KeySig(Score* s)
   : Element(s)
       {
+      setFlags(ELEMENT_SELECTABLE | ELEMENT_ON_STAFF);
       _showCourtesySig = true;
 	_showNaturals = true;
       }
@@ -59,21 +58,6 @@ KeySig::KeySig(const KeySig& k)
 	foreach(KeySym* ks, k.keySymbols)
             keySymbols.append(new KeySym(*ks));
       _sig = k._sig;
-      }
-
-//---------------------------------------------------------
-//   pagePos
-//---------------------------------------------------------
-
-QPointF KeySig::pagePos() const
-      {
-      if (parent() == 0)
-            return pos();
-      qreal yp = y();
-      System* system = segment()->measure()->system();
-      if (system)
-            yp += system->staff(staffIdx())->y() + system->y();
-      return QPointF(pageX(), yp);
       }
 
 //---------------------------------------------------------

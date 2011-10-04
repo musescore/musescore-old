@@ -12,15 +12,11 @@
 //=============================================================================
 
 #include "timesig.h"
-#include "undo.h"
 #include "xml.h"
 #include "score.h"
 #include "style.h"
 #include "sym.h"
 #include "symbol.h"
-#include "system.h"
-#include "segment.h"
-#include "measure.h"
 #include "staff.h"
 #include "stafftype.h"
 #include "painter.h"
@@ -32,7 +28,7 @@
 TimeSig::TimeSig(Score* s)
   : Element(s)
       {
-      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
+      setFlags(ELEMENT_SELECTABLE | ELEMENT_ON_STAFF);
       _showCourtesySig = true;
       customText = false;
       _stretch.set(1, 1);
@@ -41,7 +37,7 @@ TimeSig::TimeSig(Score* s)
 TimeSig::TimeSig(Score* s, int st)
   : Element(s)
       {
-      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
+      setFlags(ELEMENT_SELECTABLE | ELEMENT_ON_STAFF);
       _showCourtesySig = true;
       customText = false;
       _stretch.set(1, 1);
@@ -51,7 +47,7 @@ TimeSig::TimeSig(Score* s, int st)
 TimeSig::TimeSig(Score* s, int z, int n)
   : Element(s)
       {
-      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
+      setFlags(ELEMENT_SELECTABLE | ELEMENT_ON_STAFF);
       _showCourtesySig = true;
       customText = false;
       _stretch.set(1, 1);
@@ -62,25 +58,12 @@ TimeSig::TimeSig(Score* s, int z, int n)
 TimeSig::TimeSig(Score* s, const Fraction& f)
    : Element(s)
       {
-      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
+      setFlags(ELEMENT_SELECTABLE | ELEMENT_ON_STAFF);
       _showCourtesySig = true;
       customText = false;
       _stretch.set(1, 1);
       setSig(f);
       setSubtype(TSIG_NORMAL);
-      }
-
-//---------------------------------------------------------
-//   pagePos
-//---------------------------------------------------------
-
-QPointF TimeSig::pagePos() const
-      {
-      if (parent() == 0)
-            return pos();
-      System* system = segment()->measure()->system();
-      qreal yp = system ? y() + system->staff(staffIdx())->y() + system->y() : 0.0;
-      return QPointF(pageX(), yp);
       }
 
 //---------------------------------------------------------

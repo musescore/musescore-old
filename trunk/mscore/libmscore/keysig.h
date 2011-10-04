@@ -49,7 +49,6 @@ class KeySig : public Element {
       KeySig(Score*);
       KeySig(const KeySig&);
       virtual KeySig* clone() const { return new KeySig(*this); }
-      virtual QPointF pagePos() const;      ///< position in page coordinates
       virtual void draw(Painter*) const;
       virtual ElementType type() const { return KEYSIG; }
       virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;

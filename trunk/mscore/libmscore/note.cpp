@@ -1401,17 +1401,7 @@ QPointF Note::pagePos() const
       {
       if (parent() == 0)
             return pos();
-      Chord* ch = chord();
-      if (ch == 0 || ch->parent() == 0)
-            return pos();
-      Measure* m = ch->measure();
-      if (m == 0)
-            return pos();
-      System* system = m->system();
-      if (system == 0)
-            return pos();
-      qreal yp = y() + system->staff(staffIdx() + chord()->staffMove())->y() + system->y();
-      return QPointF(pageX(), yp);
+      return parent()->pagePos() + pos();
       }
 
 //---------------------------------------------------------
@@ -1422,18 +1412,7 @@ QPointF Note::canvasPos() const
       {
       if (parent() == 0)
             return pos();
-      Chord* ch = chord();
-      if (ch == 0 || ch->parent() == 0)
-            return pos();
-      Measure* m = ch->measure();
-      if (m == 0)
-            return pos();
-      System* system = m->system();
-      if (system == 0)
-            return pos();
-      qreal yp = y() + system->staff(staffIdx() + chord()->staffMove())->y() + system->y();
-      QPointF p(pageX(), yp);
-      return p + system->page()->pos();
+      return parent()->canvasPos() + pos();
       }
 
 //---------------------------------------------------------

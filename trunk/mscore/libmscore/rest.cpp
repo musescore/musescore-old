@@ -38,7 +38,7 @@
 Rest::Rest(Score* s)
   : ChordRest(s)
       {
-      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
+      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE | ELEMENT_ON_STAFF);
       _beamMode  = BEAM_NO;
       dotline    = -1;
       _sym       = rest4Sym;

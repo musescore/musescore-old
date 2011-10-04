@@ -22,9 +22,7 @@
 #include "symbol.h"
 #include "score.h"
 #include "staff.h"
-#include "system.h"
 #include "segment.h"
-#include "measure.h"
 #include "stafftype.h"
 #include "painter.h"
 
@@ -64,6 +62,8 @@ const ClefInfo clefTable[] = {
 Clef::Clef(Score* s)
   : Element(s)
       {
+      setFlags(ELEMENT_SELECTABLE | ELEMENT_ON_STAFF);
+
       _showCourtesyClef = true;
       _small            = false;
       _clefTypes._concertClef     = CLEF_INVALID;
@@ -73,6 +73,8 @@ Clef::Clef(Score* s)
 Clef::Clef(const Clef& c)
    : Element(c)
       {
+      setFlags(ELEMENT_SELECTABLE | ELEMENT_ON_STAFF);
+
       _showCourtesyClef = c._showCourtesyClef;
       _small            = c._small;
       _clefTypes        = c._clefTypes;
@@ -88,19 +90,6 @@ void Clef::addElement(Element* e, qreal x, qreal y)
       e->setPos(x, y);
       e->setParent(this);
       elements.push_back(e);
-      }
-
-//---------------------------------------------------------
-//   pagePos
-//---------------------------------------------------------
-
-QPointF Clef::pagePos() const
-      {
-      if (parent() == 0)
-            return pos();
-      System* system = segment()->measure()->system();
-      qreal yp = y() + system->staff(staffIdx())->y() + system->y();
-      return QPointF(pageX(), yp);
       }
 
 //---------------------------------------------------------

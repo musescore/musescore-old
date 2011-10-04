@@ -499,8 +499,19 @@ QRectF Element::drag(const EditData& data)
 QPointF Element::pagePos() const
       {
       QPointF p(pos());
-      if (parent() && parent()->parent())
-            p += parent()->pagePos();
+      if (parent() == 0)
+            return p;
+
+      if (_flags & ELEMENT_ON_STAFF) {
+            System* system = static_cast<Segment*>(parent())->measure()->system();
+            if (system)
+                  p.ry() += system->staff(staffIdx())->y() + system->y();
+            p.rx() = pageX();
+            }
+      else {
+            if (parent() && parent()->parent())
+                  p += parent()->pagePos();
+            }
       return p;
       }
 
@@ -511,8 +522,21 @@ QPointF Element::pagePos() const
 QPointF Element::canvasPos() const
       {
       QPointF p(pos());
-      if (parent())
-            p += parent()->canvasPos();
+
+      if (_flags & ELEMENT_ON_STAFF) {
+            System* system = static_cast<Segment*>(parent())->measure()->system();
+            if (system) {
+                  p.ry() += system->staff(staffIdx())->y() + system->y();
+                  Page* page = system->page();
+                  if (page)
+                        p.ry() += page->y();
+                  }
+            p.rx() = canvasX();
+            }
+      else {
+            if (parent())
+                  p += parent()->canvasPos();
+            }
       return p;
       }
 
@@ -524,6 +548,18 @@ qreal Element::pageX() const
       {
       qreal xp = x();
       for (Element* e = parent(); e && e->parent(); e = e->parent())
+            xp += e->x();
+      return xp;
+      }
+
+//---------------------------------------------------------
+//    canvasX
+//---------------------------------------------------------
+
+qreal Element::canvasX() const
+      {
+      qreal xp = x();
+      for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
       return xp;
       }
