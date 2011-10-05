@@ -1,4 +1,5 @@
 5.oct (ws)
+      - feature #12491: Single measure repeat playback
       - fix playback: buildin "end" marker was not found when playing D.S. etc.
       - fix #12936: Part doesn't appear
       - fix #12929: Extending note into next bar causes crash
