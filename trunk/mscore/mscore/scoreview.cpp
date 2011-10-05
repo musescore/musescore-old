@@ -1670,7 +1670,6 @@ void ScoreView::setShadowNote(const QPointF& p)
 //   paintElement
 //---------------------------------------------------------
 
-#if 0
 static void paintElement(void* data, Element* e)
       {
       PainterQt* p = static_cast<PainterQt*>(data);
@@ -1680,7 +1679,6 @@ static void paintElement(void* data, Element* e)
       e->draw(p);
       p->painter()->restore();
       }
-#endif
 
 //---------------------------------------------------------
 //   paintEvent
@@ -1720,8 +1718,9 @@ void ScoreView::paintEvent(QPaintEvent* ev)
             p.setPen(pen);
             p.drawLine(dropAnchor);
             }
-//      if (dragElement)
-//            dragElement->scanElements(&vp, paintElement, false);
+
+      if (dragElement)
+            dragElement->scanElements(&vp, paintElement, false);
 
       if (grips) {
             qreal lw = 2.0/p.matrix().m11();
