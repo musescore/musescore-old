@@ -222,13 +222,14 @@ Element* KeySig::drop(const DropData& data)
       else
             delete ks;
       if (data.modifiers & Qt::ControlModifier) {
+            // apply only to this stave
+            if (k != keySigEvent())
+                  score()->undoChangeKeySig(staff(), tick(), k);
+            }
+      else {
             // apply to all staves:
             foreach(Staff* s, score()->staves())
                   score()->undoChangeKeySig(s, tick(), k);
-            }
-      else {
-            if (k != keySigEvent())
-                  score()->undoChangeKeySig(staff(), tick(), k);
             }
       return this;
       }
