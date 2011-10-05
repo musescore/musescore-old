@@ -1535,20 +1535,9 @@ bool MuseScore::readScore(Score* score, QString name)
             }
       score->updateNotes();
       score->doLayout();
-#if 0
-      //
-      // check if any soundfont is configured
-      //
-      bool hasSoundFont = false;
-      for (int i = 0; i < _syntiState.size(); ++i) {
-            const SyntiParameter& p = _syntiState.at(i);
-            if (p.name() == "soundfont")
-                  hasSoundFont = true;
+      foreach (Excerpt* ex, *score->excerpts()) {
+            ex->score()->doLayout();
             }
-      if (!hasSoundFont)
-            _syntiState.prepend(SyntiParameter("soundfont", MScore::soundFont));
-      score->checkScore();
-#endif
       return true;
       }
 
