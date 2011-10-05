@@ -285,8 +285,8 @@ void Beam::remove(ChordRest* a)
 
 void Beam::draw(QPainter& p) const
       {
+      p.setBrush(p.pen().color());
       p.setPen(QPen(Qt::NoPen));
-      p.setBrush(selected() ? preferences.selectColor[0] : preferences.defaultColor);
       for (ciBeamSegment ibs = beamSegments.begin();
          ibs != beamSegments.end(); ++ibs) {
             BeamSegment* bs = *ibs;
