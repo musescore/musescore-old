@@ -522,7 +522,8 @@ QPointF Element::pagePos() const
 QPointF Element::canvasPos() const
       {
       QPointF p(pos());
-
+      if (parent() == 0)
+            return p;
       if (_flags & ELEMENT_ON_STAFF) {
             System* system = static_cast<Segment*>(parent())->measure()->system();
             if (system) {

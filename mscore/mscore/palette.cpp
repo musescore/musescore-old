@@ -318,7 +318,6 @@ void Palette::mouseMoveEvent(QMouseEvent* ev)
                   QDrag* drag = new QDrag(this);
                   QMimeData* mimeData = new QMimeData;
                   Element* el  = cells[currentIdx]->element;
-                  // QRect ir     = idxRect(currentIdx);
                   qreal mag    = PALETTE_SPATIUM * extraMag / gscore->spatium();
                   QPointF spos = QPointF(dragStartPosition) / mag;
                   spos        -= QPointF(cells[currentIdx]->x, cells[currentIdx]->y);
