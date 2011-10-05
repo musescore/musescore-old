@@ -390,12 +390,20 @@ static void collectMeasureEvents(EventMap* events, Measure* m, Part* part, int t
 
 void Score::renderPart(EventMap* events, Part* part)
       {
+      Measure* lastMeasure = 0;
       foreach (const RepeatSegment* rs, *repeatList()) {
             int startTick  = rs->tick;
             int endTick    = startTick + rs->len;
             int tickOffset = rs->utick - rs->tick;
             for (Measure* m = tick2measure(startTick); m; m = m->nextMeasure()) {
-                  collectMeasureEvents(events, m, part, tickOffset);
+                  if (lastMeasure && m->isRepeatMeasure()) {
+                        int offset = m->tick() - lastMeasure->tick();
+                        collectMeasureEvents(events, lastMeasure, part, tickOffset + offset);
+                        }
+                  else {
+                        lastMeasure = m;
+                        collectMeasureEvents(events, m, part, tickOffset);
+                        }
                   if (m->tick() + m->ticks() >= endTick)
                         break;
                   }

@@ -2657,6 +2657,24 @@ bool Measure::isFullMeasureRest()
       }
 
 //---------------------------------------------------------
+//   isRepeatMeasure
+//---------------------------------------------------------
+
+bool Measure::isRepeatMeasure()
+      {
+      int strack = 0;
+      int etrack = score()->nstaves() * VOICES;
+
+      Segment* s = first(SegChordRest);
+      for (int track = strack; track < etrack; ++track) {
+            Element* e = s->element(track);
+            if (e && e->type() == REPEAT_MEASURE)
+                  return true;
+            }
+      return false;
+      }
+
+//---------------------------------------------------------
 //   userDistanceDown
 //---------------------------------------------------------
 

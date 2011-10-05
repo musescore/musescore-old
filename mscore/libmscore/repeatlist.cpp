@@ -275,9 +275,7 @@ void RepeatList::unwind()
 
             if (endRepeat) {
                   Volta* volta = _score->searchVolta(m->tick());
-// printf("  endRepeat volta %p  playbackCount %d\n", volta, m->playbackCount());
                   if (volta && !volta->hasEnding(m->playbackCount())) {
-// printf("    skip\n");
                         // skip measure
                         if (rs->tick < m->tick()) {
                               rs->len = m->tick() - rs->tick;
