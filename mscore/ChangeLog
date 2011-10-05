@@ -1,4 +1,5 @@
 5.oct (ws)
+      - fix #12959: Two bar rests appear
       - fix #12958: Dragging time signature, clef or key signature onto score causes crash
 2.oct (ws)
       - added edit-tools dock widget
