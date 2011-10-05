@@ -191,13 +191,23 @@ Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tup
       chord->setTrack(oc->track());
       chord->setDurationType(d);
       chord->setDuration(d.fraction());
-      // undoAddCR(chord, measure, tick);
 
       foreach(Note* n, oc->notes()) {
             Note* nn = new Note(this);
             chord->add(nn);
             nn->setPitch(n->pitch(), n->tpc());
-            if (genTie) {
+            }
+      undoAddCR(chord, measure, tick);
+
+      //
+      // now as both chords are in place
+      // (have segments as parent) we can add ties:
+      //
+      if (genTie) {
+            int n = oc->notes().size();
+            for(int i = 0; i < n; ++i) {
+                  Note* n  = oc->notes()[i];
+                  Note* nn = chord->notes()[i];
                   Tie* tie = new Tie(this);
                   tie->setStartNote(n);
                   tie->setEndNote(nn);
@@ -205,7 +215,6 @@ Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tup
                   undoAddElement(tie);
                   }
             }
-      undoAddCR(chord, measure, tick);
 
       updateAccidentals(measure, chord->staffIdx());
       return chord;

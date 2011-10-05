@@ -1,4 +1,5 @@
 5.oct (ws)
+      - fix #12929: Extending note into next bar causes crash
       - fix #12919: drop key signature applies to all staves; ctrl+drop only to current staff
       - fix #12959: Two bar rests appear
       - fix #12958: Dragging time signature, clef or key signature onto score causes crash
