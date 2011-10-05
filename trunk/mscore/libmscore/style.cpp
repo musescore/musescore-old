@@ -696,20 +696,22 @@ bool TextStyleData::operator!=(const TextStyleData& s) const
           || s.bold                   != bold
           || s.italic                 != italic
           || s.underline              != underline
+          || s.hasFrame               != hasFrame
+          || s.sizeIsSpatiumDependent != sizeIsSpatiumDependent
+          || s.frameWidth             != frameWidth
+          || s.paddingWidth           != paddingWidth
+          || s.frameRound             != frameRound
+          || s.frameColor             != frameColor
+          || s.circle                 != circle
+          || s.systemFlag             != systemFlag
+          || s.foregroundColor        != foregroundColor
           || s.align()                != align()
           || s.xoff()                 != xoff()
           || s.yoff()                 != yoff()
           || s.rxoff()                != rxoff()
           || s.ryoff()                != ryoff()
           || s.offsetType()           != offsetType()
-          || s.sizeIsSpatiumDependent != sizeIsSpatiumDependent
-          || s.frameWidth             != frameWidth
-          || s.paddingWidth           != paddingWidth
-          || s.frameRound             != frameRound
-          || s.frameColor             != frameColor
-          || s.foregroundColor        != foregroundColor
-          || s.circle                 != circle
-          || s.systemFlag             != systemFlag;
+          ;
       }
 
 //---------------------------------------------------------

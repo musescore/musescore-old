@@ -528,28 +528,21 @@ void Measure::layout2()
                   smn = (_no == 0 && score()->styleB(ST_showMeasureNumberOne)) ||
                         ( ((_no+1) % score()->style(ST_measureNumberInterval).toInt()) == 0 );
                   }
-            if (smn) {
-                  QString s(QString("%1").arg(_no + 1));
-                  if (_noText == 0) {
-                        _noText = new Text(score());
-                        _noText->setGenerated(true);
-                        _noText->setSubtype(TEXT_MEASURE_NUMBER);
-                        _noText->setTextStyle(TEXT_STYLE_MEASURE_NUMBER);
-                        _noText->setParent(this);
-                        _noText->setSelectable(false);
-                        _noText->setText(s);
-                        }
-                  else {
-                        // if (_noText->getText() != s)
-                              _noText->setText(s);
-                        }
-// printf("mn %d <%s>\n", _no, qPrintable(s));
-                  _noText->layout();
-                  }
             }
-      if (!smn) {
-//            if (_noText)
-//                  printf("delete no %d\n", _no);
+      if (smn) {
+            QString s(QString("%1").arg(_no + 1));
+            if (_noText == 0) {
+                  _noText = new Text(score());
+                  _noText->setGenerated(true);
+                  _noText->setSubtype(TEXT_MEASURE_NUMBER);
+                  _noText->setTextStyle(TEXT_STYLE_MEASURE_NUMBER);
+                  _noText->setParent(this);
+                  _noText->setSelectable(false);
+                  }
+            _noText->setText(s);
+            _noText->layout();
+            }
+      else {
             delete _noText;
             _noText = 0;
             }

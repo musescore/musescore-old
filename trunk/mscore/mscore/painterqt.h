@@ -95,9 +95,7 @@ class PainterQt : public Painter {
       virtual void drawArc(const QRectF& r, int a, int b) const {
             _painter->drawArc(r, a, b);
             }
-      virtual void drawRoundRect(const QRectF& r, qreal a, qreal b) const {
-            _painter->drawRoundRect(r, a, b);
-            }
+      virtual void drawRoundRect(const QRectF& r, qreal a, qreal b) const;
       virtual void drawBackground(const QRectF& r);
       virtual bool editMode() const;
 
