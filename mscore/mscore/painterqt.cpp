@@ -160,3 +160,12 @@ void PainterQt::drawBackground(const QRectF& r)
             _painter->eraseRect(r);
       }
 
+//---------------------------------------------------------
+//   drawRoundRect
+//---------------------------------------------------------
+
+void PainterQt::drawRoundRect(const QRectF& r, qreal a, qreal b) const
+      {
+      _painter->drawRoundRect(r, a, b);
+      }
+

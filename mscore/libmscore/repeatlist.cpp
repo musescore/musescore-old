@@ -47,17 +47,27 @@ Volta* Score::searchVolta(int tick) const
 
 Measure* Score::searchLabel(const QString& s)
       {
-      if (s == "start")
+// printf("searchLabel<%s>\n", qPrintable(s));
+      if (s == "start") {
+// printf("   found %p\n", firstMeasure());
             return firstMeasure();
+            }
+      else if (s == "end") {
+// printf("   found %p\n", firstMeasure());
+            return lastMeasure();
+            }
       for (Segment* segment = firstMeasure()->first(); segment; segment = segment->next1()) {
             foreach(const Element* e, segment->annotations()) {
                   if (e->type() == MARKER) {
                         const Marker* marker = static_cast<const Marker*>(e);
-                        if (marker->label() == s)
+                        if (marker->label() == s) {
+// printf("   found %p\n", segment->measure());
                               return segment->measure();
+                              }
                         }
                   }
             }
+// printf("   found %p\n", 0);
       return 0;
       }
 
@@ -211,9 +221,16 @@ int RepeatList::utime2utick(qreal t) const
 
 void RepeatList::dump() const
       {
-      printf("Dump Repeat List:\n");
+return;
+      printf("==Dump Repeat List:==\n");
       foreach(const RepeatSegment* s, *this) {
-            printf("%p  %6d %6d len %d  %f + %f\n", s, s->utick, s->tick, s->len,
+            printf("%p  tick: %3d(%d) %3d(%d) len %d(%d) beats  %f + %f\n", s,
+               s->utick / 480,
+               s->utick / 480 / 4,
+               s->tick / 480,
+               s->tick / 480 / 4,
+               s->len / 480,
+               s->len / 480 / 4,
                s->utime, s->timeOffset);
             }
       }
@@ -236,7 +253,8 @@ void RepeatList::unwind()
       if (!fm)
             return;
 
-// printf("unwind===================\n");
+//printf("unwind===================\n");
+
       rs                  = new RepeatSegment;
       rs->tick            = 0;
       Measure* endRepeat  = 0;
@@ -257,9 +275,9 @@ void RepeatList::unwind()
 
             if (endRepeat) {
                   Volta* volta = _score->searchVolta(m->tick());
-// printf("endRepeat volta %p  playbackCount %d\n", volta, m->playbackCount());
+// printf("  endRepeat volta %p  playbackCount %d\n", volta, m->playbackCount());
                   if (volta && !volta->hasEnding(m->playbackCount())) {
-// printf("  skip\n");
+// printf("    skip\n");
                         // skip measure
                         if (rs->tick < m->tick()) {
                               rs->len = m->tick() - rs->tick;
@@ -305,12 +323,14 @@ void RepeatList::unwind()
 
             if (isGoto && (endRepeat == m)) {
                   if (continueAt == 0) {
+// printf("  isGoto && endReapeat == %p, continueAt == 0\n", m);
                         rs->len = m->tick() + m->ticks() - rs->tick;
                         if (rs->len)
                               append(rs);
                         else
                               delete rs;
                         update();
+                        dump();
                         return;
                         }
                   rs->len = m->tick() + m->ticks() - rs->tick;
@@ -352,6 +372,7 @@ void RepeatList::unwind()
                   delete rs;
             }
       update();
+      dump();
       }
 
 //---------------------------------------------------------
