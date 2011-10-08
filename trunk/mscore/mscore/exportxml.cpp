@@ -3633,7 +3633,7 @@ void ExportMusicXml::keysigTimesig(Measure* m, int strack, int etrack)
             // write the keysigs
             if (singleKey) {
                   // keysig applies to all staves
-                  keysig(keysigs.value(0)->keySignature());
+                  keysig(keysigs.value(0)->keySignature(), 0, keysigs.value(0)->visible());
                   }
             else {
                   // staff-specific keysigs
