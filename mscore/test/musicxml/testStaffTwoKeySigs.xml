@@ -75,6 +75,38 @@
         <type>whole</type>
         <staff>2</staff>
         </note>
+      </measure>
+    <measure number="2">
+      <attributes>
+        <key number="2">
+          <fifths>-2</fifths>
+          <mode>major</mode>
+          </key>
+        </attributes>
+      <note>
+        <pitch>
+          <step>E</step>
+          <octave>5</octave>
+          </pitch>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>whole</type>
+        <staff>1</staff>
+        </note>
+      <backup>
+        <duration>4</duration>
+        </backup>
+      <note>
+        <pitch>
+          <step>E</step>
+          <alter>-1</alter>
+          <octave>3</octave>
+          </pitch>
+        <duration>4</duration>
+        <voice>5</voice>
+        <type>whole</type>
+        <staff>2</staff>
+        </note>
       <barline location="right">
         <bar-style>light-heavy</bar-style>
         </barline>

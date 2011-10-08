@@ -1,3 +1,5 @@
+8.oct (lv)
+      - fix #12382: [MusicXML] Key Signature for 2 Staves
 5.oct (ws)
       - feature #12491: Single measure repeat playback
       - fix playback: buildin "end" marker was not found when playing D.S. etc.
