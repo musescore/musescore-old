@@ -72,7 +72,6 @@ void EditStaffType::saveCurrent(QListWidgetItem* o)
          || st->lineDistance().val()!= lineDistance->value()
          || st->genClef()           != genClef->isChecked()
          || st->showBarlines()      != showBarlines->isChecked()
-         || st->slashStyle()        != stemless->isChecked()
          || st->genTimesig()        != genTimesig->isChecked()
          ) {
             modif = true;
@@ -85,6 +84,7 @@ void EditStaffType::saveCurrent(QListWidgetItem* o)
                   StaffTypePitched* sp = static_cast<StaffTypePitched*>(st);
                   if (sp->genKeysig()         != genKeysigPitched->isChecked()
                      || sp->showLedgerLines() != showLedgerLinesPitched->isChecked()
+                     || st->slashStyle()      != stemlessPitched->isChecked()
                      ) {
                         modif = true;
                         }
@@ -116,8 +116,9 @@ void EditStaffType::saveCurrent(QListWidgetItem* o)
             case PERCUSSION_STAFF:
                   {
                   StaffTypePercussion* sp = static_cast<StaffTypePercussion*>(st);
-                  if (sp->genKeysig() != genKeysigPercussion->isChecked()
+                  if (sp->genKeysig()         != genKeysigPercussion->isChecked()
                      || sp->showLedgerLines() != showLedgerLinesPercussion->isChecked()
+                     || st->slashStyle()      != stemlessPercussion->isChecked()
                      ) {
                         modif = true;
                         }
@@ -130,7 +131,6 @@ void EditStaffType::saveCurrent(QListWidgetItem* o)
             st->setName(o->text());
             st->setLines(lines->value());
             st->setLineDistance(Spatium(lineDistance->value()));
-            st->setSlashStyle(stemless->isChecked());
             st->setShowBarlines(showBarlines->isChecked());
             st->setGenClef(genClef->isChecked());
             st->setGenTimesig(genTimesig->isChecked());
@@ -141,6 +141,7 @@ void EditStaffType::saveCurrent(QListWidgetItem* o)
                         StaffTypePitched* sp = static_cast<StaffTypePitched*>(st);
                         sp->setGenKeysig(genKeysigPitched->isChecked());
                         sp->setShowLedgerLines(showLedgerLinesPitched->isChecked());
+                        st->setSlashStyle(stemlessPitched->isChecked());
                         }
                         break;
                   case TAB_STAFF:
@@ -169,6 +170,7 @@ void EditStaffType::saveCurrent(QListWidgetItem* o)
                         StaffTypePercussion* sp = static_cast<StaffTypePercussion*>(st);
                         sp->setGenKeysig(genKeysigPercussion->isChecked());
                         sp->setShowLedgerLines(showLedgerLinesPercussion->isChecked());
+                        st->setSlashStyle(stemlessPercussion->isChecked());
                         }
                         break;
                   }
@@ -195,7 +197,6 @@ void EditStaffType::typeChanged(QListWidgetItem* n, QListWidgetItem* o)
       lines->setValue(st->lines());
       lineDistance->setValue(st->lineDistance().val());
       genClef->setChecked(st->genClef());
-      stemless->setChecked(st->slashStyle());
       showBarlines->setChecked(st->showBarlines());
       genTimesig->setChecked(st->genTimesig());
 
@@ -206,10 +207,10 @@ void EditStaffType::typeChanged(QListWidgetItem* n, QListWidgetItem* o)
             case PITCHED_STAFF:
                   {
                   StaffTypePitched* ps = static_cast<StaffTypePitched*>(st);
-
                   stack->setCurrentIndex(0);
                   genKeysigPitched->setChecked(ps->genKeysig());
                   showLedgerLinesPitched->setChecked(ps->showLedgerLines());
+                  stemlessPitched->setChecked(st->slashStyle());
                   }
                   break;
 
@@ -259,9 +260,10 @@ void EditStaffType::typeChanged(QListWidgetItem* n, QListWidgetItem* o)
             case PERCUSSION_STAFF:
                   {
                   StaffTypePercussion* ps = static_cast<StaffTypePercussion*>(st);
+                  stack->setCurrentIndex(2);
                   genKeysigPercussion->setChecked(ps->genKeysig());
                   showLedgerLinesPercussion->setChecked(ps->showLedgerLines());
-                  stack->setCurrentIndex(2);
+                  stemlessPercussion->setChecked(st->slashStyle());
                   }
                   break;
             }
