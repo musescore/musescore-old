@@ -12,6 +12,7 @@
 //=============================================================================
 
 #include "accidental.h"
+#include "note.h"
 #include "symbol.h"
 #include "sym.h"
 #include "score.h"
@@ -288,28 +289,31 @@ void Accidental::layout()
       {
       el.clear();
 
-      qreal m = magS();
       QRectF r;
+      Note* note = static_cast<Note*>(parent());
 
-      QPointF pos;
-      if (_hasBracket) {
-            SymElement e(leftparenSym, 0.0);
+      if ( note == 0 || !note->staff()->useTablature() ) {  //in TAB, accidentals are not shown
+            qreal m = magS();
+            QPointF pos;
+            if (_hasBracket) {
+                  SymElement e(leftparenSym, 0.0);
+                  el.append(e);
+                  r |= symbols[score()->symIdx()][leftparenSym].bbox(m);
+                  pos = symbols[score()->symIdx()][leftparenSym].attach(m);
+                  }
+
+            int s = symbol();
+            SymElement e(s, pos.x());
             el.append(e);
-            r |= symbols[score()->symIdx()][leftparenSym].bbox(m);
-            pos = symbols[score()->symIdx()][leftparenSym].attach(m);
-            }
+            r |= symbols[score()->symIdx()][s].bbox(m);
+            pos += symbols[score()->symIdx()][s].attach(m);
 
-      int s = symbol();
-      SymElement e(s, pos.x());
-      el.append(e);
-      r |= symbols[score()->symIdx()][s].bbox(m);
-      pos += symbols[score()->symIdx()][s].attach(m);
-
-      if (_hasBracket) {
-            qreal x = pos.x();     // symbols[s].width(m) + symbols[s].bbox(m).x();
-            SymElement e(rightparenSym, x);
-            el.append(e);
-            r |= symbols[score()->symIdx()][rightparenSym].bbox(m).translated(x, 0.0);
+            if (_hasBracket) {
+                  qreal x = pos.x();     // symbols[s].width(m) + symbols[s].bbox(m).x();
+                  SymElement e(rightparenSym, x);
+                  el.append(e);
+                  r |= symbols[score()->symIdx()][rightparenSym].bbox(m).translated(x, 0.0);
+                  }
             }
       setbbox(r);
       }
@@ -372,11 +376,14 @@ AccidentalType Accidental::name2subtype(const QString& tag)
 
 void Accidental::draw(Painter* painter) const
       {
-      qreal m = magS();
-      if (_small)
-            m *= score()->styleD(ST_smallNoteMag);
-      foreach(const SymElement& e, el)
-            symbols[score()->symIdx()][e.sym].draw(painter, m, e.x, 0.0);
+      Note* note = static_cast<Note*>(parent());
+      if ( note == 0 || !note->staff()->useTablature() ) {  //in TAB, accidentals are not shown
+            qreal m = magS();
+            if (_small)
+                  m *= score()->styleD(ST_smallNoteMag);
+            foreach(const SymElement& e, el)
+                  symbols[score()->symIdx()][e.sym].draw(painter, m, e.x, 0.0);
+            }
       }
 
 //---------------------------------------------------------

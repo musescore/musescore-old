@@ -545,7 +545,7 @@ void Note::draw(Painter* painter) const
                               painter->restore();
                               }
                         }
-                  painter->drawText(bbox().x(), tab->fretFontYOffset() * mag, s);
+                  painter->drawText(bbox().x(), tab->fretFontYOffset() /* * mag */, s);
                   painter->scale(imag);
                   }
             else {                        // if not tablature

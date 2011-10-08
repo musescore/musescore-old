@@ -1,5 +1,9 @@
 8.oct (lv)
       - fix #12382: [MusicXML] Key Signature for 2 Staves
+      (mi)
+      - fix #12365: pitched staff -> TAB: accidentals remain (r.4850)
+      - Staff Type dlg box re-aligned to TAB properties
+      - improved vert. alignment of fret marks in TAB's
 5.oct (ws)
       - feature #12491: Single measure repeat playback
       - fix playback: buildin "end" marker was not found when playing D.S. etc.
