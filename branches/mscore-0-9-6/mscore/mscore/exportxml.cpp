@@ -239,7 +239,7 @@ class ExportMusicXml {
       void rest(Rest* chord, int staff);
       void clef(int staff, int clef);
       void timesig(TimeSig* tsig);
-      void keysig(int key, bool visible = true);
+      void keysig(int key, int staff = 0, bool visible = true);
       void barlineLeft(Measure* m);
       void barlineRight(Measure* m);
       void pitch2xml(Note* note, char& c, int& alter, int& octave);
@@ -250,6 +250,7 @@ class ExportMusicXml {
       void calcDivisions();
       double getTenthsFromInches(double);
       double getTenthsFromDots(double);
+      void keysigTimesig(Measure* m, int strack, int etrack);
 
    public:
       ExportMusicXml(Score* s) { score = s; tick = 0; div = 1; tenths = 40;
@@ -1503,13 +1504,15 @@ void ExportMusicXml::timesig(TimeSig* tsig)
 //   keysig
 //---------------------------------------------------------
 
-void ExportMusicXml::keysig(int key, bool visible)
+void ExportMusicXml::keysig(int key, int staff, bool visible)
       {
+      QString tg = "key";
+      if (staff)
+            tg += QString(" number=\"%1\"").arg(staff);
+      if (!visible)
+            tg += " print-object=\"no\"";
       attr.doAttr(xml, true);
-      if (visible)
-            xml.stag("key");
-      else
-            xml.stag("key print-object=\"no\"");
+      xml.stag(tg);
       xml.tag("fifths", key);
       xml.tag("mode", QString("major"));
       xml.etag();
@@ -3194,6 +3197,81 @@ static void measureStyle(Xml& xml, Attributes& attr, Measure* m)
       }
 
 //---------------------------------------------------------
+//  keysigTimesig
+//---------------------------------------------------------
+
+/**
+ Output attributes at start of measure: key, time
+ */
+
+void ExportMusicXml::keysigTimesig(Measure* m, int strack, int etrack)
+      {
+      // search all staves for non-generated key signatures
+      QMap<int, KeySig*> keysigs; // map staff to key signature
+      for (Segment* seg = m->first(); seg; seg = seg->next()) {
+            if (seg->tick() > m->tick())
+                  break;
+            for (int t = strack; t < etrack; t += VOICES) {
+                  Element* el = seg->element(t);
+                  if (!el)
+                        continue;
+                  if (el->type() == KEYSIG) {
+                        int st = (t - strack) / VOICES;
+                        if (!el->generated())
+                              keysigs[st] = static_cast<KeySig*>(el);
+                        }
+                  }
+            }
+
+      // write the key signatues
+      if (!keysigs.isEmpty()) {
+            // determine if all staves have a keysig and all keysigs are identical
+            // in that case a single <key> is written, without number=... attribute
+            int nstaves = (etrack - strack) / VOICES;
+            bool singleKey = true;
+            // check if all staves have a keysig
+            for (int i = 0; i < nstaves; i++)
+                  if (!keysigs.contains(i))
+                        singleKey = false;
+            // check if all keysigs are identical
+            if (singleKey)
+                  for (int i = 1; i < nstaves; i++)
+                        if (!(keysigs.value(i)->keySignature() == keysigs.value(0)->keySignature()))
+                              singleKey = false;
+
+            // write the keysigs
+            if (singleKey) {
+                  // keysig applies to all staves
+                  keysig(keysigs.value(0)->keySignature(), 0, keysigs.value(0)->visible());
+                  }
+            else {
+                  // staff-specific keysigs
+                  foreach(int st, keysigs.keys())
+                        keysig(keysigs.value(st)->keySignature(), st + 1, keysigs.value(st)->visible());
+                  }
+            }
+      else {
+            // always write a keysig at tick = 0
+            if (m->tick() == 0)
+                  keysig(0);
+            }
+
+      TimeSig* tsig = 0;
+      for (Segment* seg = m->first(); seg; seg = seg->next()) {
+            if (seg->tick() > m->tick())
+                  break;
+            Element* el = seg->element(strack);
+            if (el && el->type() == TIMESIG)
+                  tsig = (TimeSig*) el;
+            }
+      if (tsig) {
+            // int z, n;
+            // score->sigmap()->timesig(tsig->tick(), z, n);
+            timesig(tsig);
+            }
+      }
+
+//---------------------------------------------------------
 //  write
 //---------------------------------------------------------
 
@@ -3504,39 +3582,7 @@ foreach(Element* el, *(score->gel())) {
                         xml.tag("divisions", AL::division / div);
                         }
                   // output attributes at start of measure: key, time
-                  KeySig* ksig = 0;
-                  TimeSig* tsig = 0;
-                  for (Segment* seg = m->first(); seg; seg = seg->next()) {
-                        if (seg->tick() > m->tick())
-                              break;
-                        Element* el = seg->element(strack);
-                        if (!el)
-                              continue;
-                        if (el->type() == KEYSIG)
-                              ksig = (KeySig*) el;
-                        else if (el->type() == TIMESIG)
-                              tsig = (TimeSig*) el;
-                        }
-                  if (ksig) {
-                        // output only keysig changes, not generated keysigs
-                        // at line beginning
-                        int ti = ksig->tick();
-                        //TODO_K
-                        KeyList* kl = score->staff(strack/VOICES)->keymap();
-                        KeySigEvent key = kl->key(ti);
-                        ciKeyList ci = kl->find(ti);
-                        if (ci != kl->end()) {
-                              keysig(key.accidentalType(), ksig->visible());
-                              }
-                        }
-                  else if (tick == 0)
-                        // always write a keysig at tick = 0
-                        keysig(0);
-                  if (tsig) {
-                        // int z, n;
-                        // score->sigmap()->timesig(tsig->tick(), z, n);
-                        timesig(tsig);
-                        }
+                  keysigTimesig(m, strack, etrack);
                   // output attributes with the first actual measure (pickup or regular) only
                   if ((irregularMeasureNo + measureNo + pickupMeasureNo) == 4) {
                         if (staves > 1)

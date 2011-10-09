@@ -2244,7 +2244,22 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
       QString beatType = "";
       QString timeSymbol = "";
 
-      for (;!e.isNull(); e = e.nextSiblingElement()) {
+      int staves = 1; // default is one staff
+      for (QDomElement e2 = e; !e2.isNull(); e2 = e2.nextSiblingElement()) {
+            if (e2.tagName() == "staves") {
+                  staves = e2.text().toInt();
+                  Part* part = score->part(staff);
+                  part->setStaves(staves);
+                  Staff* st = part->staff(0);
+                  if (st && staves == 2) {
+                        st->setBracket(0, BRACKET_AKKOLADE);
+                        st->setBracketSpan(0, 2);
+                        st->setBarLineSpan(2); //seems to be default in musicXML
+                        }
+                  }
+            }
+
+      for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "divisions") {
                   bool ok;
                   divisions = stringToInt(e.text(), &ok);
@@ -2327,24 +2342,8 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                   }
             else if (e.tagName() == "clef")
                   xmlClef(e, staff, measure);
-            else if (e.tagName() == "staves") {
-                  int staves = e.text().toInt();
-                  Part* part = score->part(staff);
-                  part->setStaves(staves);
-                  Staff* st = part->staff(0);
-                  if (st && staves == 2) {
-                        st->setBracket(0, BRACKET_AKKOLADE);
-                        st->setBracketSpan(0, 2);
-                        st->setBarLineSpan(2); //seems to be default in musicXML
-                        }
-                  // set key signature
-                  KeySigEvent key = score->staff(staff)->keymap()->key(tick);
-                  for (int i = 1; i < staves; ++i) {
-                        KeySigEvent oldkey = score->staff(staff+i)->keymap()->key(tick);
-                        if (oldkey != key)
-                              (*score->staff(staff+i)->keymap())[tick] = key;
-                        }
-                  }
+            else if (e.tagName() == "staves")
+                  ; // ignore, already handled
             else if (e.tagName() == "staff-details"){
                   int number  = e.attribute(QString("number"), "-1").toInt();
                   int staffIdx = staff;
