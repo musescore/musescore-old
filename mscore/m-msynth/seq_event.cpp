@@ -18,9 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-// #include "m-al/xml.h"
-// #include "driver.h"
-#include "event.h"
+#include "seq_event.h"
 #include "event_p.h"
 
 //---------------------------------------------------------
