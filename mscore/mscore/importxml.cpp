@@ -499,7 +499,7 @@ static void addText(VBox* & vbx, Score* s, QString strTxt, int sbtp, TextStyleTy
 void MusicXml::doCredits()
       {
       printf("MusicXml::doCredits()\n");
-      PageFormat* pf = score->pageFormat();
+      const PageFormat* pf = score->pageFormat();
       printf("page format w=%g h=%g spatium=%g DPMM=%g DPI=%g\n",
              pf->width(), pf->height(), score->spatium(), DPMM, DPI);
       // page width and height in tenths
@@ -874,7 +874,9 @@ void MusicXml::scorePartwise(QDomElement ee)
                                      QWidget::tr("MuseScore: load XML"),
                                      QString("Val: ") + QString("%1").arg(QString::number(tenths,'f',2)) + " " + QString("%1").arg(QString::number(millimeter,'f',2)) + " " + QString("%1").arg(QString::number(INCH,'f',2)),
                                      QString::null, QWidget::tr("Quit"), QString::null, 0, 1);*/
-                score->pageFormat()->readMusicXML(pageLayoutElement, millimeter / (tenths * INCH) );
+                PageFormat pf;
+                pf.readMusicXML(pageLayoutElement, millimeter / (tenths * INCH) );
+                score->setPageFormat(pf);
                 score->setDefaultsRead(true); // TODO only if actually succeeded ?
             }
             else if (tag == "movement-number")
@@ -2800,9 +2802,9 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             QDomElement pne = pn.toElement();
             printObject = pne.attribute("print-object", "yes");
             }
-            
+
       velocity = round(e.attribute("dynamics", "-1").toDouble() * 0.9);
-      
+
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString s(e.text());
@@ -3220,12 +3222,12 @@ printf("new Tie %p\n", tie);
             // note->setStaffMove(move);
             if (noteheadColor != QColor::Invalid)
                   note->setColor(noteheadColor);
-            
+
             if(velocity > 0){
                   note->setVeloType(USER_VAL);
                   note->setVeloOffset(velocity);
                   }
-                  
+
             if (!fingering.isEmpty()) {
                   Text* f = new Text(score);
                   f->setSubtype(TEXT_FINGERING);

@@ -475,7 +475,7 @@ void Seq::playEvent(const Event& event)
             else
                   mute = false;
 
-            if (!event.velo() || !mute)
+            if (event.velo() && !mute)
                   putEvent(event);
             }
       else if (type == ME_CONTROLLER)
@@ -497,19 +497,19 @@ void Seq::processMessages()
                         {
                         if (playTime != 0) {
                               int tick = cs->utime2utick(qreal(playTime) / qreal(MScore::sampleRate));
-                              cs->tempomap()->setRelTempo(msg.rdata);
+                              cs->tempomap()->setRelTempo(msg.data.realVal);
                               cs->repeatList()->update();
                               playTime = cs->utick2utime(tick) * MScore::sampleRate;
                               }
                         else
-                              cs->tempomap()->setRelTempo(msg.rdata);
+                              cs->tempomap()->setRelTempo(msg.data.realVal);
                         }
                         break;
                   case SEQ_PLAY:
                         putEvent(msg.event);
                         break;
                   case SEQ_SEEK:
-                        setPos(msg.data);
+                        setPos(msg.data.intVal);
                         break;
                   }
             }
@@ -723,7 +723,7 @@ void Seq::processToGuiMessages()
 void Seq::setRelTempo(double relTempo)
       {
       SeqMsg msg;
-      msg.rdata = relTempo;
+      msg.data.realVal = relTempo;
       msg.id    = SEQ_TEMPO_CHANGE;
       guiToSeq(msg);
 
@@ -771,7 +771,7 @@ void Seq::seek(int tick)
       tick = cs->repeatList()->tick2utick(tick);
 
       SeqMsg msg;
-      msg.data = tick;
+      msg.data.intVal = tick;
       msg.id   = SEQ_SEEK;
       guiToSeq(msg);
       mscore->setPos(tick);

@@ -19,6 +19,8 @@
 //=============================================================================
 
 #include "selinstrument.h"
+#include "instrdialog.h"
+
 #include "libmscore/instrument.h"
 #include "libmscore/instrtemplate.h"
 

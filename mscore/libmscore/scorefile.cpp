@@ -499,7 +499,7 @@ bool Score::loadStyle(const QString& fn)
       {
       QFile f(fn);
       if (f.open(QIODevice::ReadOnly)) {
-            Style st(*MScore::defaultStyle());
+            Style st = _style;
             if (st.load(&f)) {
                   _undo->push(new ChangeStyle(this, st));
                   return true;
@@ -940,8 +940,15 @@ bool Score::read(QDomElement dScore)
                   _showFrames = i;
             else if (tag == "showMargins")
                   _showPageborders = i;
-            else if (tag == "Style")
+            else if (tag == "Style") {
+                  qreal sp      = _style.spatium();
+                  // PageFormat pf = *_style.pageFormat();
                   _style.load(ee);
+                  if (_layoutMode == LayoutFloat) {
+                        _style.setSpatium(sp);
+                        // _style.setPageFormat(pf);
+                        }
+                  }
             else if (tag == "TextStyle") {      // obsolete: is now part of style
                   TextStyle s;
                   s.read(ee);
@@ -952,8 +959,13 @@ bool Score::read(QDomElement dScore)
                   s.setRyoff(0);
                   _style.setTextStyle(s);
                   }
-            else if (tag == "page-layout")
-                  pageFormat()->read(ee, this);
+            else if (tag == "page-layout") {
+                  if (_layoutMode != LayoutFloat) {
+                        PageFormat pf = *pageFormat();
+                        pf.read(ee, this);
+                        setPageFormat(pf);
+                        }
+                  }
             else if (tag == "copyright" || tag == "rights") {
                   Text* text = new Text(this);
                   text->read(ee);

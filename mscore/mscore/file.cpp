@@ -1147,7 +1147,7 @@ QString MuseScore::getDrumsetFilename(bool open)
 void MuseScore::printFile()
       {
       QPrinter printerDev(QPrinter::HighResolution);
-      PageFormat* pf = cs->pageFormat();
+      const PageFormat* pf = cs->pageFormat();
 
       if (paperSizes[pf->size()].qtsize >= int(QPrinter::Custom)) {
             printerDev.setPaperSize(QSizeF(pf->width(), pf->height()), QPrinter::Inch);
@@ -1373,7 +1373,7 @@ bool MuseScore::saveAs(Score* cs, bool saveCopy, const QString& path, const QStr
 
 bool MuseScore::savePsPdf(const QString& saveName, QPrinter::OutputFormat format)
       {
-      PageFormat* pf = cs->pageFormat();
+      const PageFormat* pf = cs->pageFormat();
       QPrinter printerDev(QPrinter::HighResolution);
 
       if (paperSizes[pf->size()].qtsize >= int(QPrinter::Custom)) {

@@ -721,9 +721,9 @@ class Score {
       void nextInputPos(ChordRest* cr, bool);
       void cmdMirrorNoteHead();
 
-      qreal spatium() const                   { return style()->spatium();    }
-      void setSpatium(qreal v)                { style()->setSpatium(v);       }
-      PageFormat* pageFormat() const           { return style()->pageFormat(); }
+      qreal spatium() const                    { return style()->spatium();    }
+      void setSpatium(qreal v)                 { style()->setSpatium(v);       }
+      const PageFormat* pageFormat() const     { return style()->pageFormat(); }
       void setPageFormat(const PageFormat& pf) { style()->setPageFormat(pf);   }
       const QList<Page*>& pages() const        { return _pages;                }
       QList<System*>* systems()                { return &_systems;             }

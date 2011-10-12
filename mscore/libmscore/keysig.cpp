@@ -110,8 +110,8 @@ void KeySig::layout()
 //            yoff = clefTable[clef].yOffset;
             }
 
-      char t1  = _sig.accidentalType();
-      char t2  = _sig.naturalType();
+      int t1   = _sig.accidentalType();
+      int t2   = _sig.naturalType();
       qreal xo = 0.0;
 
       int accidentals = 0, naturals = 0;

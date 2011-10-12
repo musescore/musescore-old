@@ -97,6 +97,11 @@ void MScore::init()
       _defaultStyle         = new Style();
       setDefaultStyle(_defaultStyle);     // initialize default style
       _baseStyle            = new Style(*_defaultStyle);
+
+//      QFontDatabase db;
+//      foreach(const QString& f, db.families())
+//            qDebug("family <%s>\n", qPrintable(f));
+
       //
       //  load internal fonts
       //
@@ -118,10 +123,11 @@ void MScore::init()
             "mscore_tab_renaiss.ttf",
             "mscore_tab_renaiss2.ttf"
             };
+
       for (unsigned i = 0; i < sizeof(fonts)/sizeof(*fonts); ++i) {
             QString s = QString(":/fonts/%1").arg(fonts[i]);
             if (-1 == QFontDatabase::addApplicationFont(s)) {
-                  fprintf(stderr, "Mscore: fatal error: cannot load internal font <%s>\n", fonts[i]);
+                  qDebug("Mscore: fatal error: cannot load internal font <%s>\n", fonts[i]);
                   if (!debugMode)
                         exit(-1);
                   }

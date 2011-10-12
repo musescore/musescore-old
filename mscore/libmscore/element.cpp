@@ -645,7 +645,7 @@ QList<Prop> Element::properties(Xml& xml, const Element* proto) const
             pl.append(Prop("systemFlag", flag(ELEMENT_SYSTEM_FLAG)));
       if (_tag != 0x1) {
             for (int i = 1; i < MAX_TAGS; i++) {
-                  if (_tag == (1 << i)) {
+                  if (_tag == ((unsigned)1 << i)) {
                         pl.append(Prop("tag", score()->layerTags()[i]));
                         break;
                         }

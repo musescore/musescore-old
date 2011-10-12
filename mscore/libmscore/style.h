@@ -367,7 +367,7 @@ class Style {
       bool load(QFile* qf);
       void load(QDomElement e);
       void save(Xml& xml, bool optimize);
-      PageFormat* pageFormat() const;
+      const PageFormat* pageFormat() const;
       void setPageFormat(const PageFormat& pf);
       qreal spatium() const;
       void setSpatium(qreal v);

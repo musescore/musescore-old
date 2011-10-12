@@ -14,16 +14,12 @@
 #ifndef __SYM_H__
 #define __SYM_H__
 
-// #include "style.h"
+#include "config.h"
 
 class Painter;
 class TextStyle;
 
 extern void initSymbols(int);
-
-#if QT_VERSION >= 0x040800
-#define USE_GLYPHS  1            // does not work for printing
-#endif
 
 enum SymbolType {
       SYMBOL_UNKNOWN,

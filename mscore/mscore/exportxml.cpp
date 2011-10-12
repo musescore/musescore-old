@@ -1219,8 +1219,9 @@ static void defaults(Xml& xml, Score* s, double& millimeters, const int& tenths)
       xml.tag("millimeters", millimeters);
       xml.tag("tenths", tenths);
       xml.etag();
-      PageFormat* pf = s->pageFormat();
-      if (pf) pf->writeMusicXML(xml, INCH / millimeters * tenths);
+      const PageFormat* pf = s->pageFormat();
+      if (pf)
+            pf->writeMusicXML(xml, INCH / millimeters * tenths);
       xml.etag();
       }
 
@@ -1287,7 +1288,7 @@ void ExportMusicXml::credits(Xml& xml)
             printf("copyright '%s'\n", qPrintable(rights));
       printf("end credits\n");
       // determine formatting
-      PageFormat* pf = score->pageFormat();
+      const PageFormat* pf = score->pageFormat();
       if (!pf) return;
       //const double t  = 2 * PPI * 10 / 9;
       //const double t  = INCH / millimeters * tenths;
@@ -2116,7 +2117,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
       if (!grace) tick += chord->actualTicks() / tremCorr;
       printf(" newtick=%d\n", tick);
 
-      PageFormat* pf = score->pageFormat();
+      const PageFormat* pf = score->pageFormat();
       const double pageHeight  = getTenthsFromInches(pf->height());
 //      const double pageWidth  = getTenthsFromInches(pf->width());
 
@@ -3045,7 +3046,7 @@ void ExportMusicXml::dynamic(Dynamic* dyn, int staff)
             xml.tag("offset", offs);
       if (staff)
             xml.tag("staff", staff);
-      
+
       xml.tagE(QString("sound dynamics=\"%1\"").arg(QString::number(dyn->velocity() * 100.0 / 90.0, 'f', 2)));
       xml.etag();
       }
@@ -3873,7 +3874,7 @@ foreach(Element* el, *(score->gel())) {
                   if (mb->type() != MEASURE)
                         continue;
                   Measure* m = static_cast<Measure*>(mb);
-                  PageFormat* pf = score->pageFormat();
+                  const PageFormat* pf = score->pageFormat();
 
 
                   // printf("measureNo=%d\n", measureNo);

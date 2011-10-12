@@ -526,10 +526,10 @@ enum BarLineType {
 //---------------------------------------------------------
 
 struct NoteVal {
-      char pitch;
-      char fret;
-      char string;
-      char headGroup;
+      int pitch;
+      int fret;
+      int string;
+      int headGroup;
       NoteVal() { pitch = -1; fret = -1; string = -1; headGroup = 0; }
       };
 

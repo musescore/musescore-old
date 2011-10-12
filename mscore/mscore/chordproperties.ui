@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>534</width>
+    <width>549</width>
     <height>434</height>
    </rect>
   </property>
@@ -325,7 +325,7 @@
                </property>
                <item>
                 <property name="text">
-                 <string>Auto</string>
+                 <string>automatic</string>
                 </property>
                </item>
                <item>
@@ -379,7 +379,7 @@
                </property>
                <item>
                 <property name="text">
-                 <string>Auto</string>
+                 <string>automatic</string>
                 </property>
                </item>
                <item>
@@ -467,7 +467,7 @@
                </property>
                <item>
                 <property name="text">
-                 <string extracomment="velocity type">auto</string>
+                 <string extracomment="velocity type">automatic</string>
                 </property>
                </item>
                <item>
@@ -480,6 +480,16 @@
                  <string extracomment="velocity type">offset</string>
                 </property>
                </item>
+              </widget>
+             </item>
+             <item row="8" column="1">
+              <widget class="QSpinBox" name="velocity">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
               </widget>
              </item>
              <item row="8" column="0">
@@ -498,16 +508,6 @@
                </property>
                <property name="margin">
                 <number>5</number>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="1">
-              <widget class="QSpinBox" name="velocity">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
                </property>
               </widget>
              </item>
@@ -553,19 +553,6 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_12">
-               <property name="text">
-                <string>offtime</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-               </property>
-               <property name="margin">
-                <number>5</number>
-               </property>
-              </widget>
-             </item>
              <item row="1" column="1">
               <widget class="QSpinBox" name="offtimeOffset">
                <property name="sizePolicy">
@@ -582,6 +569,19 @@
                </property>
                <property name="maximum">
                 <number>20000</number>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_12">
+               <property name="text">
+                <string>offtime</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="margin">
+                <number>5</number>
                </property>
               </widget>
              </item>

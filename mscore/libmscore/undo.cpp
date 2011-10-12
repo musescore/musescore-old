@@ -2208,7 +2208,7 @@ void ChangePageFormat::flip()
       qreal os    = score->spatium();
       int po       = score->pageNumberOffset();
 
-      *(score->pageFormat()) = *pf;
+      score->setPageFormat(*pf);
       score->setSpatium(spatium);
       score->spatiumChanged(os, spatium);
       score->setPageNumberOffset(pageOffset);

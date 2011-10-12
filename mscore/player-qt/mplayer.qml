@@ -18,70 +18,16 @@ import "mobile" as Mobile
 
 Item {
       id: screen
-      property bool inScoreView: false
-      width: 1024
-      height: 768
+      property string state: "ListView"
+      width: 854
+      height: 480-38
 
-      states: [
-            State {
-                  name: "landscape"
-                  when: (runtime.orientation == Orientation.Landscape)
-                  PropertyChanges {
-                        target: screen
-                        width: 1024
-                        height: 768
-                        }
-                  PropertyChanges {
-                        target: background
-                        color: "blue"
-                        }
-                  },
-            State {
-                  name: "landscapeInverted"
-                  when: (runtime.orientation == Orientation.LandscapeInverted)
-                  PropertyChanges {
-                        target: screen
-                        width: 1024
-                        height: 768
-                        }
-                  PropertyChanges {
-                        target: background
-                        color: "red"
-                        }
-                  },
-            State {
-                  name: "portrait"
-                  when: (runtime.orientation == Orientation.Portrait)
-                  PropertyChanges {
-                        target: screen
-                        width:  768
-                        height: 1024
-                        }
-                  PropertyChanges {
-                        target: background
-                        color: "green"
-                        }
-                  },
-            State {
-                  name: "portraitInverted"
-                  when: (runtime.orientation == Orientation.PortraitInverted)
-                  PropertyChanges {
-                        target: screen
-                        width:  768
-                        height: 1024
-                        }
-                  PropertyChanges {
-                        target: background
-                        color: "yellow"
-                        }
-                  }
-            ]
       Rectangle {
             id: background;
             anchors.fill: parent
             state: "myscores"
 
-//            color: "#343434"
+            color: "#343434"
             Image {
                   source: "mobile/images/stripes.png"
                   fillMode: Image.Tile
@@ -89,26 +35,47 @@ Item {
                   opacity: 0.3
                   }
 
-            states: State {
-                  name: "ScoreView"
-                  when: screen.inScoreView == true
-                  PropertyChanges {
-                        target: scoreView
-                        x: 0
+            states: [
+                  State {
+                        name: "ScoreView"
+                        when: screen.state == "ScoreView"
+                        PropertyChanges {
+                              target: scoreView
+                              x: 0
+                              }
+                        PropertyChanges {
+                              target: scoreListView
+                              x: -width;
+                              }
+                        PropertyChanges {
+                              target: toolBar
+                              button1Visible: true
+                              button2Visible: true
+                              button3Visible: true
+                              tempoButtonVisible: true
+                              }
+                        },
+                  State {
+                        name: "PlainScoreView"
+                        when: screen.state == "PlainScoreView"
+                        PropertyChanges {
+                              target: scoreView
+                              x: 0
+                              }
+                        PropertyChanges {
+                              target: scoreListView
+                              x: -width;
+                              }
+                        PropertyChanges {
+                              target: toolBar
+                              visible: false
+                              }
+                        PropertyChanges {
+                              target: titleBar
+                              visible: false
+                              }
                         }
-                  PropertyChanges {
-                        target: scoreListView
-//                        x: -(parent.width * 1)
-                        x: -width;
-                        }
-                  PropertyChanges {
-                        target: toolBar
-                        button1Visible: true
-                        button2Visible: true
-                        button3Visible: true
-                        tempoButtonVisible: true
-                        }
-                  }
+                  ]
             transitions: Transition {
                   NumberAnimation {
                         properties: "x"
@@ -164,8 +131,7 @@ Item {
                               var idx = scoreListView.indexAt(mouseX, mouseY)
                               if (idx >= 0) {
                                     scoreView.setScore(scorelist.get(idx).path)
-                                    screen.inScoreView = true
-                                    scoreView.contentY = 0
+                                    screen.state = "ScoreView"
                                     }
                               }
                         }
@@ -176,6 +142,24 @@ Item {
                   parentWidth: screen.width
                   parentHeight: screen.height
                   x: -width;
+                  MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                              if (mouseX > parent.width * .6)
+                                    scoreView.nextPage();
+                              else if (mouseX < parent.width * .3)
+                                    scoreView.prevPage();
+                              else {
+                                    if (screen.state == "ScoreView")
+                                          screen.state = "PlainScoreView"
+                                    else
+                                          screen.state = "ScoreView";
+                                    }
+                              }
+                        onPressAndHold: {
+                              scoreView.seek(mouseX, mouseY);
+                              }
+                        }
                   }
 
             Mobile.TitleBar {
@@ -195,10 +179,10 @@ Item {
 
                   button1Label: "MyScores"
                   onButton1Clicked: {
-                        if (screen.inScoreView == true)
-                              screen.inScoreView = false
+                        if (screen.state == "ScoreView")
+                              screen.state = "ListView"
                         else
-                              screen.inScoreView = true
+                              screen.state = "ScoreView"
                         }
                   onButton3Clicked: {
                         scoreView.rewind()

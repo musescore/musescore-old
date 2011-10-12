@@ -509,25 +509,3 @@ InstrumentTemplate* searchTemplate(const QString& name)
       return 0;
       }
 
-//---------------------------------------------------------
-//   populateInstrumentList
-//---------------------------------------------------------
-
-void populateInstrumentList(QTreeWidget* instrumentList, bool extended)
-      {
-      instrumentList->clear();
-      // TODO: memory leak
-      foreach(InstrumentGroup* g, instrumentGroups) {
-            if (!extended && g->extended)
-                  continue;
-            InstrumentTemplateListItem* group = new InstrumentTemplateListItem(g->name, instrumentList);
-            group->setFlags(Qt::ItemIsEnabled);
-            foreach(InstrumentTemplate* t, g->instrumentTemplates) {
-                  if (!extended && t->extended)
-                        continue;
-                  new InstrumentTemplateListItem(t, group);
-                  }
-            }
-      }
-
-

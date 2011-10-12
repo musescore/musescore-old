@@ -421,7 +421,7 @@ void cloneStaff(Staff* srcStaff, Staff* dstStaff)
       Score* score = srcStaff->score();
       dstStaff->linkTo(srcStaff);
 
-      int tracks = score->nstaves() * VOICES;
+//      int tracks = score->nstaves() * VOICES;
       SlurMap slurMap;
       TieMap tieMap;
 

@@ -1798,7 +1798,7 @@ QPointF Chord::layoutArticulation(Articulation* a)
       qreal chordTopY = upPos();    // note position of highest note
       qreal chordBotY = downPos();  // note position of lowest note
       qreal x         = centerX();
-      qreal y;
+      qreal y = 0.0;
 
       if (a->subtype() == Articulation_Tenuto || a->subtype() == Articulation_Staccato) {
             bool bottom;
@@ -1883,7 +1883,7 @@ QPointF Chord::layoutArticulation(Articulation* a)
       qreal staffBotY = staff()->height();
 
       if (stem()) {
-            qreal y = stem()->pos().y() + pos().y();
+            y = stem()->pos().y() + pos().y();
             if (up() && stem()->stemLen() < 0.0)
                   y += stem()->stemLen();
             else if (!up() && stem()->stemLen() > 0.0)

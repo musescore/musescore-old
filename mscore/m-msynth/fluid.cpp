@@ -18,7 +18,7 @@
  * 02111-1307, USA
  */
 
-#include "event.h"
+#include "seq_event.h"
 #include "fluid.h"
 #include "sfont.h"
 #include "conv.h"
@@ -252,6 +252,16 @@ void Fluid::all_notes_off(int chan)
             if (v->chan == chan)
                   v->noteoff();
             }
+      }
+
+//---------------------------------------------------------
+//   allNotesOff
+//---------------------------------------------------------
+
+void Fluid::allNotesOff()
+      {
+      foreach(Voice* v, activeVoices)
+            v->noteoff();
       }
 
 //---------------------------------------------------------

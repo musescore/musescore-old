@@ -100,7 +100,7 @@ double MagBox::getMag(ScoreView* canvas)
       Score* score   = canvas->score();
       if (score == 0)
             return 1.0;
-      PageFormat* pf = score->pageFormat();
+      const PageFormat* pf = score->pageFormat();
       switch(currentIndex()) {
             case MAG_PAGE_WIDTH:      // page width
                   nmag *= cw / (pf->width() * DPI);

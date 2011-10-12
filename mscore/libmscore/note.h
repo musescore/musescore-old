@@ -80,14 +80,14 @@ class Note : public Element {
       Q_DECLARE_TR_FUNCTIONS(Note)
 
       int _subchannel;        ///< articulation
-      char _line;             ///< y-Position; 0 - top line.
-      char _fret;             ///< for tablature view
-      char _string;
+      int _line;      ///< y-Position; 0 - top line.
+      int _fret;      ///< for tablature view
+      int _string;
       bool _ghost;            ///< ghost note (guitar: death note)
-      char _headGroup;
-      char _pitch;            ///< Note pitch as midi value (0 - 127).
-      char _tpc;              ///< tonal pitch class
-      char _ppitch;           ///< played pitch (honor voltas etc.); cached value
+      int _headGroup;
+      int _pitch;            ///< Note pitch as midi value (0 - 127).
+      int _tpc;              ///< tonal pitch class
+      int _ppitch;           ///< played pitch (honor voltas etc.); cached value
       bool _hidden;           ///< markes this note as the hidden one if there are
                               ///< overlapping notes; hidden notes are not played
                               ///< and heads + accidentals are not shown

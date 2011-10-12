@@ -4585,7 +4585,7 @@ void ExportLy::writeLilyHeader()
   //---------------------------------------------------
 void ExportLy::writePageFormat()
 {
-  PageFormat* pf = score->pageFormat();
+  const PageFormat* pf = score->pageFormat();
   os << "#(set-default-paper-size ";
   switch(pf->size()) {
   default:

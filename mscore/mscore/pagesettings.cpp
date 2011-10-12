@@ -85,7 +85,7 @@ void PageSettings::setScore(Score* s)
       preview->setScore(s->clone());
 
       Score* sl = preview->score();
-      PageFormat* pf = s->pageFormat();
+      const PageFormat* pf = s->pageFormat();
 
       sl->setPageFormat(*pf);
       sl->setSpatium(s->spatium());
@@ -137,7 +137,7 @@ void PageSettings::updateValues()
       pageWidth->setSuffix(suffix);
       pageHeight->setSuffix(suffix);
 
-      PageFormat* pf = sc->pageFormat();
+      const PageFormat* pf = sc->pageFormat();
 
       QString s;
 
@@ -238,7 +238,9 @@ void PageSettings::mmClicked()
 
 void PageSettings::landscapeToggled(bool flag)
       {
-      preview->score()->pageFormat()->setLandscape(flag);
+      PageFormat pf(*preview->score()->pageFormat());
+      pf.setLandscape(flag);
+      preview->score()->setPageFormat(pf);
       updateValues();
       updatePreview(0);
       }
@@ -249,7 +251,9 @@ void PageSettings::landscapeToggled(bool flag)
 
 void PageSettings::twosidedToggled(bool flag)
       {
-      preview->score()->pageFormat()->setTwosided(flag);
+      PageFormat pf(*preview->score()->pageFormat());
+      pf.setTwosided(flag);
+      preview->score()->setPageFormat(pf);
       updateValues();
       updatePreview(1);
       }
@@ -310,9 +314,11 @@ void PageSettings::done(int val)
 //   pageFormatSelected
 //---------------------------------------------------------
 
-void PageSettings::pageFormatSelected(int pf)
+void PageSettings::pageFormatSelected(int size)
       {
-      preview->score()->pageFormat()->setSize(pf);
+      PageFormat pf(*preview->score()->pageFormat());
+      pf.setSize(size);
+      preview->score()->setPageFormat(pf);
       preview->score()->doLayout();
       updatePreview(0);
       }
@@ -325,7 +331,9 @@ void PageSettings::otmChanged(double val)
       {
       if (mmUnit)
             val /= INCH;
-      preview->score()->pageFormat()->setOddTopMargin(val);
+      PageFormat pf(*preview->score()->pageFormat());
+      pf.setOddTopMargin(val);
+      preview->score()->setPageFormat(pf);
       updatePreview(1);
       }
 
@@ -348,9 +356,11 @@ void PageSettings::olmChanged(double val)
             evenPageLeftMargin->setValue(val * (mmUnit ? INCH : 1.0));
             evenPageLeftMargin->blockSignals(false);
             }
-      PageFormat* pf = preview->score()->pageFormat();
-      pf->setPrintableWidth(pf->width() - pf->oddRightMargin() - val);
-      pf->setOddLeftMargin(val);
+      PageFormat pf(*preview->score()->pageFormat());
+      pf.setPrintableWidth(pf.width() - pf.oddRightMargin() - val);
+      pf.setOddLeftMargin(val);
+      preview->score()->setPageFormat(pf);
+
       updatePreview(0);
       }
 
@@ -363,9 +373,9 @@ void PageSettings::ormChanged(double val)
       if (mmUnit)
             val /= INCH;
 
-      PageFormat* pf = preview->score()->pageFormat();
+      PageFormat pf(*preview->score()->pageFormat());
 
-      if(twosided->isChecked()) {
+      if (twosided->isChecked()) {
             evenPageLeftMargin->blockSignals(true);
             evenPageLeftMargin->setValue(val * (mmUnit ? INCH : 1.0));
             evenPageLeftMargin->blockSignals(false);
@@ -376,7 +386,8 @@ void PageSettings::ormChanged(double val)
             evenPageRightMargin->blockSignals(false);
             }
 
-      pf->setPrintableWidth(pf->width() - pf->oddLeftMargin() - val);
+      pf.setPrintableWidth(pf.width() - pf.oddLeftMargin() - val);
+      preview->score()->setPageFormat(pf);
       updatePreview(0);
       }
 
@@ -388,7 +399,10 @@ void PageSettings::obmChanged(double val)
       {
       if (mmUnit)
             val /= INCH;
-      preview->score()->pageFormat()->setOddBottomMargin(val);
+      PageFormat pf(*preview->score()->pageFormat());
+      pf.setOddBottomMargin(val);
+      preview->score()->setPageFormat(pf);
+
       updatePreview(1);
       }
 
@@ -400,29 +414,12 @@ void PageSettings::etmChanged(double val)
       {
       if (mmUnit)
             val /= INCH;
-      preview->score()->pageFormat()->setEvenTopMargin(val);
+      PageFormat pf(*preview->score()->pageFormat());
+      pf.setEvenTopMargin(val);
+      preview->score()->setPageFormat(pf);
+
       updatePreview(1);
       }
-
-//---------------------------------------------------------
-//   ermChanged
-//---------------------------------------------------------
-
-/*void PageSettings::ermChanged(double val)
-      {
-      if (mmUnit)
-            val /= INCH;
-
-      PageFormat* pf = preview->score()->pageFormat();
-
-      // left margin depends, as score width is identical
-      // for even and odd pages
-      evenPageLeftMargin->blockSignals(true);
-      evenPageLeftMargin->setValue((pf->width() - pf->printableWidth() - val) * (mmUnit ? INCH : 1.0));
-      evenPageLeftMargin->blockSignals(false);
-
-      updatePreview(1);
-      }*/
 
 //---------------------------------------------------------
 //   ebmChanged
@@ -432,7 +429,9 @@ void PageSettings::ebmChanged(double val)
       {
       if (mmUnit)
             val /= INCH;
-      preview->score()->pageFormat()->setEvenBottomMargin(val);
+      PageFormat pf(*preview->score()->pageFormat());
+      pf.setEvenBottomMargin(val);
+      preview->score()->setPageFormat(pf);
       updatePreview(1);
       }
 
@@ -471,10 +470,11 @@ void PageSettings::pageHeightChanged(double val)
       int pf = paperSizeNameToIndex("Custom");
       pageGroup->setCurrentIndex(pf);
 
-      PageFormat* f = preview->score()->pageFormat();
-      f->setSize(pf);
-      f->setHeight(val);
-      f->setWidth(val2);
+      PageFormat f(*preview->score()->pageFormat());
+      f.setSize(pf);
+      f.setHeight(val);
+      f.setWidth(val2);
+      preview->score()->setPageFormat(f);
 
       updatePreview(1);
       }
@@ -493,10 +493,11 @@ void PageSettings::pageWidthChanged(double val)
       int pf = paperSizeNameToIndex("Custom");
       pageGroup->setCurrentIndex(pf);
 
-      PageFormat* f = preview->score()->pageFormat();
-      f->setSize(pf);
-      f->setWidth(val);
-      f->setHeight(val2);
+      PageFormat f(*preview->score()->pageFormat());
+      f.setSize(pf);
+      f.setWidth(val);
+      f.setHeight(val2);
+      preview->score()->setPageFormat(f);
 
       updatePreview(0);
       }

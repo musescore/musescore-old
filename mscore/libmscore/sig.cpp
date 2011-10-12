@@ -248,8 +248,8 @@ int SigEvent::read(QDomElement e, int fileDivision)
       int tick  = e.attribute("tick", "0").toInt();
       tick      = tick * MScore::division / fileDivision;
 
-      int numerator;
-      int denominator;
+      int numerator = 1;
+      int denominator = 1;
       int denominator2 = -1;
       int numerator2   = -1;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {

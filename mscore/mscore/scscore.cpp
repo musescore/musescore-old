@@ -417,11 +417,12 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                     return qScriptValueFromValue(context->engine(), duration);
                   }
                   break;
-            case 21:   //pageFormat
-                  if (argc == 0){
-                    return qScriptValueFromValue(context->engine(), score->pageFormat());
-                  }
+/* TODO            case 21:   // pageFormat
+                  if (argc == 0) {
+                        return qScriptValueFromValue(context->engine(), score->pageFormat());
+                        }
                   break;
+*/
             case 22:   //metatag
                   if (argc == 1) {
                         QString tag = qscriptvalue_cast<QString>(context->argument(0));

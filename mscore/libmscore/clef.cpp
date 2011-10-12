@@ -402,7 +402,7 @@ void Clef::setSubtype(const QString& s)
 
 ClefType Clef::clefType(const QString& s)
       {
-      ClefType ct;
+      ClefType ct = CLEF_G;
       bool ok;
       int i = s.toInt(&ok);
       if (ok) {

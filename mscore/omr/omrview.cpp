@@ -65,18 +65,18 @@ void OmrView::setOmr(Omr* s)
             maxTiles = 0;
             return;
             }
-      int n = s->numPages();
-      OmrPage* page   = _omr->page(0);
-      const QImage& i = page->image();
-      Score* score    = _scoreView->score();
-      PageFormat* pf  = score->pageFormat();
-      double mag      = _omr->spatium() / score->spatium();
-      pageWidth       = lrint(pf->width()  * mag * DPI);
+      int n                = s->numPages();
+      OmrPage* page        = _omr->page(0);
+      const QImage& i      = page->image();
+      Score* score         = _scoreView->score();
+      const PageFormat* pf = score->pageFormat();
+      double mag           = _omr->spatium() / score->spatium();
+      pageWidth            = lrint(pf->width()  * mag * DPI);
 
-      int htiles      = ((pageWidth + TILE_W - 1) / TILE_W);
-      pageWidth       = htiles * TILE_W;
-      int vtiles      = (i.height() + TILE_H - 1) / TILE_H;
-      maxTiles        = n * htiles *  vtiles;
+      int htiles = ((pageWidth + TILE_W - 1) / TILE_W);
+      pageWidth  = htiles * TILE_W;
+      int vtiles = (i.height() + TILE_H - 1) / TILE_H;
+      maxTiles   = n * htiles *  vtiles;
       }
 
 //---------------------------------------------------------

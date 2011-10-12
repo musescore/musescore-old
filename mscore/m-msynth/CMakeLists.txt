@@ -28,8 +28,8 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
 
 add_library (m-msynth STATIC
-      dsp.cpp fluid.cpp voice.cpp chan.cpp sfont.cpp chorus.cpp
+      dsp.cpp fluid.cpp synth_voice.cpp chan.cpp sfont.cpp chorus.cpp
       conv.cpp gen.cpp mod.cpp rev.cpp sparm.cpp piano.cpp
-      event.cpp
+      seq_event.cpp
       )
 

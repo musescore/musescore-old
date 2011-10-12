@@ -14,6 +14,8 @@
 #ifndef __PAINTER_H__
 #define __PAINTER_H__
 
+#include "config.h"
+
 class QFont;
 class QString;
 class QPainterPath;
@@ -69,7 +71,7 @@ class Painter {
       virtual void drawTextHCentered(qreal x, qreal y, const QString& s) = 0;
       virtual void drawTextVCentered(qreal x, qreal y, const QString& s) = 0;
 
-#if QT_VERSION >= 0x040800
+#ifdef USE_GLYPHS
       virtual void drawGlyphRun(const QPointF&, const QGlyphRun&) const = 0;
 #endif
       virtual void drawPixmap(qreal x, qreal y, const QPixmap&) const = 0;

@@ -52,9 +52,10 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
       int _currentPage;
       qreal _parentWidth, _parentHeight;
       qreal mag;
+      int playPos;
       QRectF _boundingRect;
 
-      virtual void dataChanged(const QRectF&);
+      virtual void dataChanged(const QRectF&)   { update(); }
       virtual void updateAll()                  { update(); }
       virtual void moveCursor()                 {}
       virtual void adjustCanvasPosition(const Element*, bool) {}
@@ -64,7 +65,7 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
       virtual int gripCount() const             { return 0; }
       virtual const QRectF& getGrip(int) const;
       virtual const QTransform& matrix() const;
-      virtual void setDropRectangle(const QRectF&)              {}
+      virtual void setDropRectangle(const QRectF&) {}
       virtual void cmdAddSlur(Note*, Note*)     {}
       virtual void startEdit()                  {}
       virtual void startEdit(Element*, int)     {}
@@ -85,6 +86,7 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
       void prevPage();
       void rewind();
       void setTempo(qreal);
+      void seek(qreal x, qreal y);
 
    public:
       ScoreView(QDeclarativeItem* parent = 0);
