@@ -23,6 +23,7 @@ class Measure;
 class Xml;
 class Score;
 class Painter;
+class MeasureBase;
 
 //---------------------------------------------------------
 //   PaperSize
@@ -41,7 +42,6 @@ struct PaperSize {
 //---------------------------------------------------------
 
 class PageFormat {
-      int _size;                    // index in paperSizes[]
       qreal _width;
       qreal _height;
       qreal _printableWidth;        // _width - left margin - right margin
@@ -51,6 +51,7 @@ class PageFormat {
       qreal _evenBottomMargin;
       qreal _oddTopMargin;
       qreal _oddBottomMargin;
+      int _size;                    // index in paperSizes[]
       bool _landscape;
       bool _twosided;
 
@@ -65,8 +66,8 @@ class PageFormat {
       QString name() const;
       void read(QDomElement,  Score*);
       void readMusicXML(QDomElement, qreal);
-      void write(Xml&);
-      void writeMusicXML(Xml&, qreal);
+      void write(Xml&) const;
+      void writeMusicXML(Xml&, qreal) const;
       qreal evenLeftMargin() const   { return _evenLeftMargin;   }
       qreal oddLeftMargin() const    { return _oddLeftMargin;    }
       qreal evenTopMargin() const    { return _evenTopMargin;    }
@@ -90,7 +91,7 @@ class PageFormat {
       void setTwosided(bool val)  { _twosided = val; }
 
       int size() const            { return _size; }
-      void setSize(int val)       { _size = val; }
+      void setSize(int);
 
       // convenience functions
       qreal evenRightMargin() const  { return width() - _printableWidth - _evenLeftMargin; }
@@ -142,6 +143,10 @@ class Page : public Element {
       QList<const Element*> items(const QPointF& p);
       void rebuildBspTree() { bspTreeValid = false; }
       virtual QPointF pagePos() const { return QPointF(); }     ///< position in page coordinates
+      QList<System*> searchSystem(const QPointF& pos) const;
+      Measure* searchMeasure(const QPointF& p) const;
+      MeasureBase* pos2measure(const QPointF&, int* staffIdx, int* pitch,
+         Segment**, QPointF* offset) const;
       };
 
 extern const PaperSize paperSizes[];

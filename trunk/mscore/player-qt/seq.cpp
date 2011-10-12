@@ -38,17 +38,6 @@
 Seq* seq;
 
 //---------------------------------------------------------
-//   curTime
-//---------------------------------------------------------
-
-static qreal curTime()
-      {
-      struct timeval t;
-      gettimeofday(&t, 0);
-      return (qreal)((qreal)t.tv_sec + (t.tv_usec / 1000000.0));
-      }
-
-//---------------------------------------------------------
 //   Seq
 //---------------------------------------------------------
 
@@ -58,7 +47,7 @@ Seq::Seq()
       driver   = 0;
       running  = false;
       playPos  = events.constBegin();
-      playTime = 0.0;
+      endTick  = 0;
       cs       = 0;
       state    = TRANSPORT_STOP;
       playlistChanged = false;
@@ -150,11 +139,8 @@ void Seq::start()
 
 void Seq::stop()
       {
-      state    = TRANSPORT_STOP;
-      int tick = 0;
-      if (playPos != events.constEnd())
-            tick = playPos.key();
-      cs->setPlayPos(tick);
+      state = TRANSPORT_STOP;
+      cs->setPlayPos(playPos.key());
       heartBeatTimer->stop();
       }
 
@@ -183,17 +169,16 @@ void Seq::processMessages()
             switch(msg.id) {
                   case SEQ_TEMPO_CHANGE:
                         if (playTime != 0) {
-                              int tick = cs->utime2utick(playTime);
+                              int tick = cs->utime2utick(qreal(playTime) / qreal(MScore::sampleRate));
                               cs->tempomap()->setRelTempo(msg.data.realVal);
                               cs->repeatList()->update();
-                              playTime = cs->utick2utime(tick);
-                              startTime = curTime() - playTime;
+                              playTime = cs->utick2utime(tick) * MScore::sampleRate;
                               }
                         else
                               cs->tempomap()->setRelTempo(msg.data.realVal);
                         break;
                   case SEQ_PLAY:
-                        putEvent(msg.event);
+                        synti->play(msg.event);
                         break;
                   case SEQ_SEEK:
                         setPos(msg.data.intVal);
@@ -212,25 +197,22 @@ void Seq::process(unsigned n, float* p)
       processMessages();
       if (state == TRANSPORT_PLAY) {
             unsigned framePos = 0;
-            qreal endTime = playTime + qreal(frames)/qreal(MScore::sampleRate);
+            int endTime = playTime + frames;
             for (; playPos != events.constEnd(); ++playPos) {
-                  qreal f = cs->utick2utime(playPos.key());
+                  int f = cs->utick2utime(playPos.key()) * MScore::sampleRate;
                   if (f >= endTime)
                         break;
-                  int n = lrint((f - playTime) * MScore::sampleRate);
-
+                  int n = f - playTime;
                   synti->process(n, p);
                   p += 2 * n;
-                  playTime += qreal(n)/qreal(MScore::sampleRate);
-
+                  playTime += n;
                   frames    -= n;
                   framePos  += n;
                   playEvent(playPos.value());
-                  playTick = playPos.key();
                   }
             if (frames) {
                   synti->process(frames, p);
-                  playTime += qreal(frames)/qreal(MScore::sampleRate);
+                  playTime += frames;
                   }
             if (playPos == events.constEnd()) {
                   driver->stopTransport();
@@ -293,15 +275,6 @@ SeqMsg SeqMsgFifo::dequeue()
       }
 
 //---------------------------------------------------------
-//   putEvent
-//---------------------------------------------------------
-
-void Seq::putEvent(const SeqEvent& event)
-      {
-      synti->play(event);
-      }
-
-//---------------------------------------------------------
 //   setPos
 //    seek
 //    realtime environment
@@ -309,19 +282,10 @@ void Seq::putEvent(const SeqEvent& event)
 
 void Seq::setPos(int utick)
       {
-      // send note off events
-      foreach(SeqEvent n, activeNotes) {
-            if (n.type() != ME_NOTEON)
-                  continue;
-            n.setVelo(0);
-            putEvent(n);
-            }
-      activeNotes.clear();
+      stopNotes();
 
-      playTime  = cs->utick2utime(utick);
-      startTime = curTime() - playTime;
-      playPos   = events.lowerBound(utick);
-      guiPos    = playPos;
+      playTime = cs->utick2utime(utick) * MScore::sampleRate;
+      playPos  = events.lowerBound(utick);
       }
 
 //---------------------------------------------------------
@@ -333,12 +297,7 @@ void Seq::seek(int tick)
       {
       if (cs == 0)
             return;
-//      Segment* seg = cs->tick2segment(tick);
-//      if (seg) {
-//            mscore->currentScoreView()->moveCursor(seg, -1);
-//            }
       cs->setPlayPos(tick);
-
       tick = cs->repeatList()->tick2utick(tick);
 
       SeqMsg msg;
@@ -354,7 +313,6 @@ void Seq::seek(int tick)
 void Seq::collectEvents()
       {
       events.clear();
-      activeNotes.clear();
 
       cs->toEList(&events);
       endTick = 0;
@@ -363,12 +321,7 @@ void Seq::collectEvents()
             --e;
             endTick = e.key();
             }
-
-//      PlayPanel* pp = mscore->getPlayPanel();
-//      if (pp)
-//            pp->setEndpos(endTick);
       playlistChanged = false;
-//      cs->setPlaylistDirty(false);
       }
 
 //---------------------------------------------------------
@@ -391,26 +344,21 @@ void Seq::playEvent(const SeqEvent& event)
             else
                   mute = false;
 
-            if (event.velo()) {
-                  if (!mute) {
-                        putEvent(event);
-                        activeNotes.append(event);
-                        }
-                  }
-            else {
-                  for (QList<SeqEvent>::iterator k = activeNotes.begin(); k != activeNotes.end(); ++k) {
-                        SeqEvent l = *k;
-                        if (l.channel() == event.channel() && l.pitch() == event.pitch()) {
-                              l.setVelo(0);
-                              activeNotes.erase(k);
-                              putEvent(l);
-                              break;
-                              }
-                        }
-                  }
+            if (!mute)
+                  synti->play(event);
             }
       else if (type == ME_CONTROLLER)
-            putEvent(event);
+            synti->play(event);
+      }
+
+//---------------------------------------------------------
+//   stopNotes
+//    called from GUI context
+//---------------------------------------------------------
+
+void Seq::stopNotes()
+      {
+      synti->allNotesOff();
       }
 
 //---------------------------------------------------------
@@ -420,24 +368,20 @@ void Seq::playEvent(const SeqEvent& event)
 
 void Seq::heartBeat()
       {
-      QRectF r;
-      if (state != TRANSPORT_PLAY) {
+      if (state != TRANSPORT_PLAY)
             return;
-            }
-      qreal endTime = curTime() - startTime;
-      const Note* note = 0;
-      for (; guiPos != events.constEnd(); ++guiPos) {
-            qreal f = cs->utick2utime(guiPos.key());
-            if (f >= endTime)
-                  break;
-            if (guiPos.value().type() == ME_NOTEON) {
-                  SeqEvent n = guiPos.value();
-                  const Note* note1 = n.note();
-                  if (n.velo()) {
-                        note = note1;
-                        }
-                  }
-            }
-      view->moveCursor(playTick);
+      view->moveCursor(cs->repeatList()->utick2tick(playPos.key()));
+      }
+
+//---------------------------------------------------------
+//   startStop
+//---------------------------------------------------------
+
+void Seq::startStop()
+      {
+      if (isPlaying())
+            stop();
+      else
+            start();
       }
 

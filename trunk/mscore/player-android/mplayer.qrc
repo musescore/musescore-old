@@ -1,0 +1,51 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+   <qresource>
+      <file alias="fonts/mscore20.xml">../fonts/mscore20.xml</file>
+      <file alias="fonts/gonville.xml">../fonts/gonville.xml</file>
+      <file alias="fonts/gonville-20.otf">../fonts/gonville-20.otf</file>
+      <file alias="fonts/mscore-20.otf">../fonts/mscore-20.otf</file>
+      <file alias="fonts/mscore1-20.ttf">../fonts/mscore1-20.ttf</file>
+      <file alias="fonts/MuseJazz.ttf">../fonts/MuseJazz.ttf</file>
+      <file alias="fonts/FreeSerifMscore.ttf">../fonts/FreeSerifMscore.ttf</file>
+      <file alias="fonts/FreeSerifBold.ttf">../fonts/FreeSerifBold.ttf</file>
+      <file alias="fonts/FreeSans.ttf">../fonts/FreeSans.ttf</file>
+      <file alias="fonts/mscore_tab_baroque.ttf">../fonts/mscore_tab_baroque.ttf</file>
+      <file alias="fonts/mscore_tab_modern.ttf">../fonts/mscore_tab_modern.ttf</file>
+      <file alias="fonts/mscore_tab_renaiss.ttf">../fonts/mscore_tab_renaiss.ttf</file>
+      <file alias="fonts/mscore_tab_renaiss2.ttf">../fonts/mscore_tab_renaiss2.ttf</file>
+
+      <file alias="scores/promenade.mscz">../demos/promenade.mscz</file>
+      <file alias="scores/promenade.png">../player-qt/promenade.png</file>
+      <file alias="scores/schnee.mscz">../demos/schnee.mscz</file>
+      <file alias="scores/schnee.png">../player-qt/schnee.png</file>
+      <file alias="scores/italian-1.mscz">../demos/italian-1.mscz</file>
+      <file alias="scores/italian-1.png">../player-qt/italian-1.png</file>
+
+      <file>mplayer.qml</file>
+
+      <file alias="mobile/ToolBar.qml">../player-qt/mobile/ToolBar.qml</file>
+      <file alias="mobile/Button.qml">../player-qt/mobile/Button.qml</file>
+      <file alias="mobile/RewindButton.qml">../player-qt/mobile/RewindButton.qml</file>
+      <file alias="mobile/PlayButton.qml">../player-qt/mobile/PlayButton.qml</file>
+      <file alias="mobile/ListDelegate.qml">../player-qt/mobile/ListDelegate.qml</file>
+      <file alias="mobile/TitleBar.qml">../player-qt/mobile/TitleBar.qml</file>
+      <file alias="mobile/Slider.qml">../player-qt/mobile/Slider.qml</file>
+
+      <file alias="mobile/images/titlebar.sci">../player-qt/mobile/images/titlebar.sci</file>
+      <file alias="mobile/images/titlebar.png">../player-qt/mobile/images/titlebar.png</file>
+      <file alias="mobile/images/toolbutton.sci">../player-qt/mobile/images/toolbutton.sci</file>
+      <file alias="mobile/images/toolbutton.png">../player-qt/mobile/images/toolbutton.png</file>
+      <file alias="mobile/images/gloss.png">../player-qt/mobile/images/gloss.png</file>
+      <file alias="mobile/images/stripes.png">../player-qt/mobile/images/stripes.png</file>
+      <file alias="mobile/images/lineedit.sci">../player-qt/mobile/images/lineedit.sci</file>
+      <file alias="mobile/images/lineedit.png">../player-qt/mobile/images/lineedit.png</file>
+      <file alias="mobile/images/quit.png">../player-qt/mobile/images/quit.png</file>
+      <file alias="mobile/images/playbuttonOn.png">../player-qt/mobile/images/playbuttonOn.png</file>
+      <file alias="mobile/images/playbuttonOff.png">../player-qt/mobile/images/playbuttonOff.png</file>
+      <file alias="mobile/images/rewindbuttonOn.png">../player-qt/mobile/images/rewindbuttonOn.png</file>
+      <file alias="mobile/images/rewindbuttonOff.png">../player-qt/mobile/images/rewindbuttonOff.png</file>
+
+      <file alias="mobile/images/paper.png">../share/wallpaper/paper1.png</file>
+   </qresource>
+</RCC>

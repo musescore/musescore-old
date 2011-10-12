@@ -3022,7 +3022,7 @@ void Measure::layoutX(qreal stretch)
             int t = ticksList[i];
             if (t) {
                   if (minTick > 0)
-                        str += .6 * log2(qreal(t) / qreal(minTick));
+                      str += .6 * log(qreal(t) / qreal(minTick)) / log(2.0);
                   d = w / str;
                   stretchSum += str;
                   }

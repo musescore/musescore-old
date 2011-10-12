@@ -67,6 +67,7 @@ ScoreView::ScoreView(QDeclarativeItem* parent)
       setFlag(QGraphicsItem::ItemHasNoContents, false);
       setCacheMode(QGraphicsItem::ItemCoordinateCache);
       playbackCursor = new PlaybackCursor(this);
+      playbackCursor->setZValue(100);
       score = 0;
       seq->setView(this);
       setAcceptedMouseButtons(Qt::LeftButton);
@@ -84,7 +85,28 @@ void ScoreView::setScore(const QString& name)
             seq->stop();
       _currentPage = 0;
       delete score;
+
       score = new Score(MScore::defaultStyle());
+      score->setLayoutMode(LayoutFloat);
+      PageFormat pageFormat;
+      pageFormat.setSize(QPrinter::Custom);
+      pageFormat.setWidth(parentWidth() / DPI);
+      pageFormat.setHeight(parentHeight() / DPI);
+      pageFormat.setPrintableWidth((parentWidth()-10) / DPI);
+      pageFormat.setEvenLeftMargin(5.0 / DPI);
+      pageFormat.setOddLeftMargin(5.0 / DPI);
+      pageFormat.setEvenTopMargin(0.0);
+      pageFormat.setEvenBottomMargin(0.0);
+      pageFormat.setOddTopMargin(0.0);
+      pageFormat.setOddBottomMargin(0.0);
+
+      pageFormat.setTwosided(false);
+      pageFormat.setLandscape(false);
+
+      Style* style = score->style();
+      style->setPageFormat(pageFormat);
+      style->setSpatium(10.0);
+
       score->setName(name);
       QString cs  = score->fileInfo()->suffix();
       QString csl = cs.toLower();
@@ -92,45 +114,21 @@ void ScoreView::setScore(const QString& name)
       if (csl == "mscz") {
             if (!score->loadCompressedMsc(name)) {
                   delete score;
+                  score = 0;
                   return;
                   }
             }
       else if (csl == "mscx") {
             if (!score->loadMsc(name)) {
                   delete score;
+                  score = 0;
                   return;
                   }
             }
-      int staffIdx = 0;
-      foreach(Staff* st, score->staves()) {
-            if (st->updateKeymap())
-                  st->keymap()->clear();
-            int track = staffIdx * VOICES;
-            KeySig* key1 = 0;
-            for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure()) {
-                  for (Segment* s = m->first(); s; s = s->next()) {
-                        if (!s->element(track))
-                              continue;
-                        Element* e = s->element(track);
-                        if (e->generated())
-                              continue;
-                        if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
-                              KeySig* ks = static_cast<KeySig*>(e);
-                              int naturals = key1 ? key1->keySigEvent().accidentalType() : 0;
-                              ks->setOldSig(naturals);
-                              st->setKey(s->tick(), ks->keySigEvent());
-                              key1 = ks;
-                              }
-                        }
-                  if (m->sectionBreak())
-                        key1 = 0;
-                  }
-            st->setUpdateKeymap(false);
-            ++staffIdx;
-            }
+
       score->updateNotes();
       score->doLayout();
-      score->setPrinting(true);     // render only printable elements
+      score->setPrinting(true);                 // render only printable elements
 
       seq->setScore(score);
       Page* page = score->pages()[_currentPage];
@@ -138,10 +136,15 @@ void ScoreView::setScore(const QString& name)
       qreal m1 = parentWidth()  / pr.width();
       qreal m2 = parentHeight() / pr.height();
       mag = qMax(m1, m2);
+
+// printf("mag====%f/%f %f(%f) %f(%f)\n", m1, m2, parentWidth(), pr.width(),
+//        parentHeight(), pr.height());
+
       _boundingRect = QRectF(0.0, 0.0, pr.width() * mag, pr.height() * mag);
 
       setWidth(pr.width() * mag);
       setHeight(pr.height() * mag);
+      moveCursor(0);
       update();
       }
 
@@ -173,7 +176,6 @@ void ScoreView::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidge
                   m->scanElements(&el, collectElements, false);
             }
       page->scanElements(&el, collectElements, false);
-//      qStableSort(el.begin(), el.end(), elementLessThan);
 
       foreach(const Element* e, el) {
             p.save();
@@ -203,6 +205,7 @@ void ScoreView::setCurrentPage(int n)
       if (n >= nn)
             n = nn - 1;
       _currentPage = n;
+      moveCursor(playPos);
       update();
       }
 
@@ -222,11 +225,6 @@ void ScoreView::nextPage()
 void ScoreView::prevPage()
       {
       setCurrentPage(_currentPage - 1);
-      }
-
-void ScoreView::dataChanged(const QRectF&)
-      {
-      update();
       }
 
 const QRectF& ScoreView::getGrip(int) const
@@ -275,25 +273,40 @@ void ScoreView::setTempo(qreal val)
 
 void ScoreView::moveCursor(int tick)
       {
+      playPos = tick;
       Measure* measure = score->tick2measure(tick);
       if (measure == 0)
             return;
+
+      Page* page = score->pages()[_currentPage];
+      if (measure->system()->page() != page) {
+            page = measure->system()->page();
+            if (seq->isPlaying()) {
+                  setCurrentPage(score->pages().indexOf(page));
+                  playbackCursor->show();
+                  }
+            else
+                  playbackCursor->hide();
+            playbackCursor->setZValue(100);
+            }
+      else
+            playbackCursor->show();
 
       qreal x;
       Segment* s;
       for (s = measure->first(SegChordRest); s;) {
             int t1 = s->tick();
-            int x1 = s->canvasPos().x();
+            int x1 = s->pagePos().x();
             qreal x2;
             int t2;
             Segment* ns = s->next(SegChordRest);
             if (ns) {
                   t2 = ns->tick();
-                  x2 = ns->canvasPos().x();
+                  x2 = ns->pagePos().x();
                   }
             else {
                   t2 = measure->endTick();
-                  x2 = measure->canvasPos().x() + measure->width();
+                  x2 = measure->pagePos().x() + measure->width();
                   }
             if (tick >= t1 && tick < t2) {
                   int   dt = t2 - t1;
@@ -319,7 +332,7 @@ void ScoreView::moveCursor(int tick)
 
       qreal xmag = _spatium / (DPI * SPATIUM20);
       double w   = _spatium * 2.0 + symbols[score->symIdx()][quartheadSym].width(xmag);
-      double h   = 8 * _spatium;
+      double h   = 10 * _spatium;
       //
       // set cursor height for whole system
       //
@@ -332,7 +345,7 @@ void ScoreView::moveCursor(int tick)
             }
       h += y2;
       x -= _spatium;
-      y -= 2* _spatium;
+      y -= 3 * _spatium;
 
       playbackCursor->setPos(x * mag, y * mag);
       playbackCursor->setWidth(w * mag);
@@ -366,4 +379,24 @@ bool ScoreView::sceneEvent(QEvent* event)
       return QGraphicsItem::sceneEvent(event);
       }
 
+//---------------------------------------------------------
+//   seek
+//---------------------------------------------------------
+
+void ScoreView::seek(qreal x, qreal y)
+      {
+      Page* page = score->pages()[_currentPage];
+      x /= mag;
+      y /= mag;
+
+      int staff;
+      int pitch;
+      Segment* seg;
+      page->pos2measure(QPointF(x, y), &staff, &pitch, &seg, 0);
+      if (seg) {
+            int tick =  seg->tick();
+            moveCursor(tick);
+            seq->seek(tick);
+            }
+      }
 

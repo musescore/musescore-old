@@ -632,7 +632,7 @@ printf("doLayout\n");
                               key1 = ks;
                               }
                         }
-                  if (m->sectionBreak())
+                  if (m->sectionBreak() && (_layoutMode != LayoutFloat))
                         key1 = 0;
                   }
             st->setUpdateKeymap(false);
@@ -933,7 +933,8 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
                   if (!isFirstMeasure) {
                         // try to put another system on current row
                         // if not a line break
-                        continueFlag = !(curMeasure->lineBreak() || curMeasure->pageBreak());
+                        continueFlag = !((curMeasure->lineBreak() || curMeasure->pageBreak())
+                           && (_layoutMode != LayoutFloat));
                         }
                   }
             else if (curMeasure->type() == MEASURE) {
@@ -969,8 +970,7 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
             ElementType nt = curMeasure->next() ? curMeasure->next()->type() : INVALID;
             int n = styleI(ST_FixMeasureNumbers);
             if ((n && system->measures().size() >= n)
-               || continueFlag || curMeasure->pageBreak()
-               || curMeasure->lineBreak()
+               || continueFlag || ((curMeasure->pageBreak() || curMeasure->lineBreak()) && _layoutMode != LayoutFloat)
                || (nt == VBOX || nt == TBOX || nt == FBOX)) {
                   system->setPageBreak(curMeasure->pageBreak());
                   curMeasure = nextMeasure;
@@ -1383,7 +1383,7 @@ QList<System*> Score::layoutSystemRow(qreal rowWidth, bool isFirstSystem, bool u
             Measure* nm = m ? m->nextMeasure() : 0;
             Segment* s;
 
-            if (m && nm && !m->sectionBreak()) {
+            if (m && nm && !(m->sectionBreak() && _layoutMode != LayoutFloat)) {
                   int tick = m->tick() + m->ticks();
 
                   // locate a time sig. in the next measure and, if found,
@@ -1706,7 +1706,7 @@ void Score::layoutSystems()
                   startWithLongNames = false;
                   if (!sl.isEmpty()) {
                         Measure* lm = sl.back()->lastMeasure();
-                        firstSystem = lm && lm->sectionBreak();
+                        firstSystem = lm && lm->sectionBreak() && _layoutMode != LayoutFloat;
                         startWithLongNames = firstSystem && lm->sectionBreak()->startWithLongNames();
                         }
                   else
@@ -1891,7 +1891,7 @@ void Score::layoutPages()
                   }
 
             y += (h + tmargin);
-            if (sr.pageBreak()) {
+            if (sr.pageBreak() && (_layoutMode != LayoutFloat)) {
                   qreal d;
                   if (sr.isVbox())
                         d = sr.vbox()->bottomGap();
@@ -1936,6 +1936,16 @@ void Score::layoutPages()
 void Score::layoutPage(Page* page, int gaps, qreal restHeight)
       {
       qreal ph = page->loHeight() - page->bm() - page->tm();
+
+      if (!gaps && (_layoutMode == LayoutFloat)) {
+            qreal y = restHeight * .5;
+            int n = page->systems()->size();
+            for (int i = 0; i < n; ++i) {
+                  System* system = page->systems()->at(i);
+                  system->move(0, y);
+                  }
+            return;
+            }
 
       if (!gaps || (restHeight > (ph * (1.0 - styleD(ST_pageFillLimit)))))
             return;

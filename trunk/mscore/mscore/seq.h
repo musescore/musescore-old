@@ -48,8 +48,10 @@ enum { SEQ_NO_MESSAGE, SEQ_TEMPO_CHANGE, SEQ_PLAY, SEQ_SEEK,
 
 struct SeqMsg {
       int id;
-      int data;
-      qreal rdata;
+      union {
+            int intVal;
+            qreal realVal;
+            } data;
       Event event;
       };
 
@@ -95,12 +97,11 @@ class Seq : public QObject {
       EventMap events;                    // playlist
 
       int playTime;                       // current play position in samples
+      int endTick;
 
       EventMap::const_iterator playPos;   // moved in real time thread
       EventMap::const_iterator guiPos;    // moved in gui thread
       QList<const Note*> markedNotes;     // notes marked as sounding
-
-      int endTick;
 
       uint tackRest;     // metronome state
       uint tickRest;

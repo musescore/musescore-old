@@ -58,6 +58,7 @@ class Synti {
 
       virtual float gain() const = 0;
       virtual void setGain(float) = 0;
+      virtual void allNotesOff() = 0;
       };
 
 #endif

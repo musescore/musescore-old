@@ -340,6 +340,7 @@ class Fluid : public Synti {
       virtual void setMasterTuning(float f)  { _masterTuning = f;    }
       virtual float gain() const             { return _gain * .5; }
       virtual void setGain(float v)          { _gain = v * 2.0; }
+      virtual void allNotesOff();
 
       virtual void process(unsigned len, float*);
 

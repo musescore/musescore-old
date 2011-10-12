@@ -31,10 +31,12 @@
 #include "system.h"
 #include "painter.h"
 #include "mscore.h"
+#include "segment.h"
 
 #define MM(x) ((x)/INCH)
 
 const PaperSize paperSizes[] = {
+      PaperSize(QPrinter::Custom,  "Custom",    MM(210),  MM(297)),
       PaperSize(QPrinter::A4,      "A4",        MM(210),  MM(297)),
       PaperSize(QPrinter::B5,      "B5",        MM(176),  MM(250)),
       PaperSize(QPrinter::Letter,  "Letter",    8.5,      11),
@@ -66,7 +68,6 @@ const PaperSize paperSizes[] = {
       PaperSize(QPrinter::Ledger,  "Ledger",    MM(432),  MM(279)),
       PaperSize(QPrinter::Tabloid, "Tabloid",   MM(279),  MM(432)),
       PaperSize(int(QPrinter::Custom)+1, "iPad", MM(148),  MM(197)),
-      PaperSize(QPrinter::Custom,  "Custom",    MM(210),  MM(297)),
       PaperSize(QPrinter::A4,      0, 0, 0  )
       };
 
@@ -158,7 +159,7 @@ QList<const Element*> Page::items(const QPointF& p)
 
 qreal Page::tm() const
       {
-      PageFormat* pf = score()->pageFormat();
+      const PageFormat* pf = score()->pageFormat();
       return ((!pf->twosided() || isOdd()) ? pf->oddTopMargin() : pf->evenTopMargin()) * DPI;
       }
 
@@ -168,7 +169,7 @@ qreal Page::tm() const
 
 qreal Page::bm() const
       {
-      PageFormat* pf = score()->pageFormat();
+      const PageFormat* pf = score()->pageFormat();
       return ((!pf->twosided() || isOdd()) ? pf->oddBottomMargin() : pf->evenBottomMargin()) * DPI;
       }
 
@@ -178,7 +179,7 @@ qreal Page::bm() const
 
 qreal Page::lm() const
       {
-      PageFormat* pf = score()->pageFormat();
+      const PageFormat* pf = score()->pageFormat();
       return ((!pf->twosided() || isOdd()) ? pf->oddLeftMargin() : pf->evenLeftMargin()) * DPI;
       }
 
@@ -188,7 +189,7 @@ qreal Page::lm() const
 
 qreal Page::rm() const
       {
-      PageFormat* pf = score()->pageFormat();
+      const PageFormat* pf = score()->pageFormat();
       return ((!pf->twosided() || isOdd()) ? pf->oddRightMargin() : pf->evenRightMargin()) * DPI;
       }
 
@@ -363,6 +364,19 @@ PageFormat::PageFormat()
       }
 
 //---------------------------------------------------------
+//   setSize
+//---------------------------------------------------------
+
+void PageFormat::setSize(int val)
+      {
+      _size = val;
+      if (paperSizes[_size].qtsize == QPrinter::Custom)
+            return;
+      _height = paperSizes[_size].h;
+      _width  = paperSizes[_size].w;
+      }
+
+//---------------------------------------------------------
 //   name
 //---------------------------------------------------------
 
@@ -378,9 +392,7 @@ QString PageFormat::name() const
 
 qreal PageFormat::width() const
       {
-      if (paperSizes[_size].qtsize == QPrinter::Custom)
-            return _landscape ? _height : _width;
-      return _landscape ? paperSizes[_size].h : paperSizes[_size].w;
+      return _landscape ? _height : _width;
       }
 
 //---------------------------------------------------------
@@ -390,9 +402,7 @@ qreal PageFormat::width() const
 
 qreal PageFormat::height() const
       {
-      if (paperSizes[_size].qtsize == QPrinter::Custom)
-            return _landscape ? _width : _height;
-      return _landscape ? paperSizes[_size].w : paperSizes[_size].h;
+      return _landscape ? _width : _height;
       }
 
 //---------------------------------------------------------
@@ -424,7 +434,7 @@ void PageFormat::read(QDomElement e, Score* score)
             QString val(e.text());
             int i = val.toInt();
             if (tag == "pageFormat")
-                  _size = paperSizeNameToIndex(val);
+                  setSize(paperSizeNameToIndex(val));
             else if (tag == "landscape")
                   _landscape = i;
             else if (tag == "page-margins") {
@@ -546,7 +556,7 @@ void PageFormat::readMusicXML(QDomElement e, qreal conversion)
             }
       int match = paperSizeSizeToIndex(_width, _height);
       if (match >= 0)
-            _size = match;
+            setSize(match);
       qreal w1 = width() - _oddLeftMargin - _oddRightMargin;
       qreal w2 = width() - _evenLeftMargin - _evenRightMargin;
       _printableWidth = qMax(w1, w2);     // silently adjust right margins
@@ -556,7 +566,7 @@ void PageFormat::readMusicXML(QDomElement e, qreal conversion)
 //   write
 //---------------------------------------------------------
 
-void PageFormat::write(Xml& xml)
+void PageFormat::write(Xml& xml) const
       {
       xml.stag("page-layout");
 
@@ -600,7 +610,7 @@ void PageFormat::write(Xml& xml)
 //   writeMusicXML
 //---------------------------------------------------------
 
-void PageFormat::writeMusicXML(Xml& xml, qreal conversion )
+void PageFormat::writeMusicXML(Xml& xml, qreal conversion) const
       {
       xml.stag("page-layout");
 
@@ -768,3 +778,155 @@ void Page::read(QDomElement e)
                   domError(e);
             }
       }
+
+//---------------------------------------------------------
+//   searchSystem
+//    return list of systems as there may be more than
+//    one system in a row
+//    p is in canvas coordinates
+//---------------------------------------------------------
+
+QList<System*> Page::searchSystem(const QPointF& pos) const
+      {
+      QList<System*> systems;
+      qreal y = pos.y();  // transform to page relative
+      qreal y2;
+      int n = _systems.size();
+      for (int i = 0; i < n; ++i) {
+            System* s = _systems.at(i);
+            System* ns = 0;               // next system row
+            int ii = i + 1;
+            for (; ii < n; ++ii) {
+                  ns = _systems.at(ii);
+                  if (ns->y() != s->y())
+                        break;
+                  }
+            if ((ii == n) || (ns == 0))
+                  y2 = height();
+            else  {
+                  qreal sy2 = s->y() + s->bbox().height();
+                  y2         = sy2 + (ns->y() - sy2) * .5;
+                  }
+            if (y < y2) {
+                  systems.append(s);
+                  for (int ii = i+1; ii < n; ++ii) {
+                        if (_systems.at(ii)->y() != s->y())
+                              break;
+                        systems.append(_systems.at(ii));
+                        }
+                  return systems;
+                  }
+            }
+      return systems;
+      }
+
+//---------------------------------------------------------
+//   searchMeasure
+//    p is in canvas coordinates
+//---------------------------------------------------------
+
+Measure* Page::searchMeasure(const QPointF& p) const
+      {
+      QList<System*> systems = searchSystem(p);
+      if (systems.isEmpty())
+            return 0;
+
+      foreach(System* system, systems) {
+            qreal x = p.x() - system->pagePos().x();
+            foreach(MeasureBase* mb, system->measures()) {
+                  if (mb->type() != MEASURE)
+                        continue;
+                  if (x < (mb->x() + mb->bbox().width()))
+                        return static_cast<Measure*>(mb);
+                  }
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   pos2measure
+//---------------------------------------------------------
+
+/**
+ Return measure for canvas relative position \a p.
+*/
+
+MeasureBase* Page::pos2measure(const QPointF& p, int* rst, int* pitch,
+   Segment** seg, QPointF* offset) const
+      {
+      Measure* m = searchMeasure(p);
+      if (m == 0)
+            return 0;
+
+      System* s = m->system();
+      qreal y   = p.y() - s->canvasPos().y();
+
+      int i;
+      for (i = 0; i < score()->nstaves();) {
+            SysStaff* staff = s->staff(i);
+            if (!staff->show()) {
+                  ++i;
+                  continue;
+                  }
+            int ni = i;
+            for (;;) {
+                  ++ni;
+                  if (ni == score()->nstaves() || s->staff(ni)->show())
+                        break;
+                  }
+
+            qreal sy2;
+            if (ni != score()->nstaves()) {
+                  SysStaff* nstaff = s->staff(ni);
+                  qreal s1y2 = staff->bbox().y() + staff->bbox().height();
+                  sy2 = s1y2 + (nstaff->bbox().y() - s1y2)/2;
+                  }
+            else
+                  sy2 = s->page()->height() - s->pos().y();   // s->height();
+            if (y > sy2) {
+                  i   = ni;
+                  continue;
+                  }
+            break;
+            }
+
+      // search for segment + offset
+      QPointF pppp = p - m->pagePos();
+      int track    = i * VOICES;
+
+      SysStaff* sstaff = m->system()->staff(i);
+      for (Segment* segment = m->first(SegChordRest); segment; segment = segment->next(SegChordRest)) {
+            if ((segment->element(track) == 0)
+               && (segment->element(track+1) == 0)
+               && (segment->element(track+2) == 0)
+               && (segment->element(track+3) == 0)
+               )
+                  continue;
+            Segment* ns = segment->next();
+            for (; ns; ns = ns->next()) {
+                  if (ns->subtype() != SegChordRest)
+                        continue;
+                  if (ns->element(track)
+                     || ns->element(track+1)
+                     || ns->element(track+2)
+                     || ns->element(track+3))
+                        break;
+                  }
+            if (!ns || (pppp.x() < (segment->x() + (ns->x() - segment->x())* .5))) {
+                  *rst = i;
+                  if (pitch) {
+//                        Staff* s = score()->staff(i);
+//                        int clef = s->clef(segment->tick());
+//TODO                        *pitch = score()->y2pitch(pppp.y() - sstaff->bbox().y(), clef, s->spatium());
+                        }
+                  if (offset)
+                        *offset = pppp - QPointF(segment->x(), sstaff->bbox().y());
+                  if (seg)
+                        *seg = segment;
+                  return m;
+                  }
+            }
+      return 0;
+      }
+
+

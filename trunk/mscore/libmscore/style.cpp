@@ -539,7 +539,6 @@ StyleData::StyleData()
 
 // _textStyles.append(TextStyle(defaultTextStyles[i]));
       _chordList = 0;
-      _pageFormat = new PageFormat;
       _spatium = MScore::spatium * DPI;
 
       _articulationAnchor[Articulation_Fermata]         = A_TOP_STAFF;
@@ -589,7 +588,7 @@ StyleData::StyleData(const StyleData& s)
             _chordList = 0;
       _customChordList = s._customChordList;
       _textStyles      = s._textStyles;
-      _pageFormat      = new PageFormat(*(s._pageFormat));
+      _pageFormat      = s._pageFormat;
       _spatium         = s._spatium;
       for (int i = 0; i < ARTICULATIONS; ++i)
             _articulationAnchor[i] = s._articulationAnchor[i];
@@ -602,7 +601,6 @@ StyleData::StyleData(const StyleData& s)
 StyleData::~StyleData()
       {
       delete _chordList;
-      delete _pageFormat;
       }
 
 //---------------------------------------------------------
@@ -1274,7 +1272,7 @@ void TextStyle::setFont(const QFont&)
 
 Style::Style()
       {
-      d        = new StyleData;
+      d = new StyleData;
       }
 
 Style::Style(const Style& s)
@@ -1288,7 +1286,7 @@ Style::~Style()
 
 Style& Style::operator=(const Style& s)
       {
-      d        = s.d;
+      d = s.d;
       return *this;
       }
 
@@ -1505,7 +1503,7 @@ bool StyleData::load(QFile* qf)
 //   pageFormat
 //---------------------------------------------------------
 
-PageFormat* Style::pageFormat() const
+const PageFormat* Style::pageFormat() const
       {
       return d->pageFormat();
       }
@@ -1521,7 +1519,7 @@ void Style::setPageFormat(const PageFormat& pf)
 
 void StyleData::setPageFormat(const PageFormat& pf)
       {
-      *_pageFormat = pf;
+      _pageFormat = pf;
       }
 
 //---------------------------------------------------------

@@ -48,7 +48,6 @@ class InstrumentsDialog : public QDialog, public Ui::InstrumentDialogBase {
       void on_removeButton_clicked();
       void on_upButton_clicked();
       void on_downButton_clicked();
-//      void on_editButton_clicked();
       void on_belowButton_clicked();
       void on_linkedButton_clicked();
       void on_saveButton_clicked();
@@ -62,5 +61,23 @@ class InstrumentsDialog : public QDialog, public Ui::InstrumentDialogBase {
       void genPartList();
       };
 
+//---------------------------------------------------------
+//   InstrumentTemplateListItem
+//---------------------------------------------------------
+
+class InstrumentTemplateListItem : public QTreeWidgetItem {
+      InstrumentTemplate* _instrumentTemplate;
+      QString _group;
+
+   public:
+      InstrumentTemplateListItem(QString group, QTreeWidget* parent);
+      InstrumentTemplateListItem(InstrumentTemplate* i, InstrumentTemplateListItem* parent);
+      InstrumentTemplateListItem(InstrumentTemplate* i, QTreeWidget* parent);
+
+      InstrumentTemplate* instrumentTemplate() const { return _instrumentTemplate; }
+      virtual QString text(int col) const;
+      };
+
+extern void populateInstrumentList(QTreeWidget* instrumentList, bool extended);
 #endif
 

@@ -14,7 +14,6 @@
 #ifndef __INSTRTEMPLATE_H__
 #define __INSTRTEMPLATE_H__
 
-// #include "mscore.h"
 #include "instrument.h"
 
 class Xml;
@@ -77,23 +76,6 @@ struct InstrumentGroup {
       QList<InstrumentTemplate*> instrumentTemplates;
       };
 
-//---------------------------------------------------------
-//   InstrumentTemplateListItem
-//---------------------------------------------------------
-
-class InstrumentTemplateListItem : public QTreeWidgetItem {
-      InstrumentTemplate* _instrumentTemplate;
-      QString _group;
-
-   public:
-      InstrumentTemplateListItem(QString group, QTreeWidget* parent);
-      InstrumentTemplateListItem(InstrumentTemplate* i, InstrumentTemplateListItem* parent);
-      InstrumentTemplateListItem(InstrumentTemplate* i, QTreeWidget* parent);
-
-      InstrumentTemplate* instrumentTemplate() const { return _instrumentTemplate; }
-      virtual QString text(int col) const;
-      };
-
 enum { ITEM_KEEP, ITEM_DELETE, ITEM_ADD };
 enum { PART_LIST_ITEM = QTreeWidgetItem::UserType, STAFF_LIST_ITEM };
 
@@ -143,6 +125,5 @@ extern QList<InstrumentGroup*> instrumentGroups;
 extern QList<MidiArticulation*> articulation;
 extern bool loadInstrumentTemplates(const QString& instrTemplates);
 extern InstrumentTemplate* searchTemplate(const QString& name);
-extern void populateInstrumentList(QTreeWidget* instrumentList, bool extended);
 #endif
 

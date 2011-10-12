@@ -219,7 +219,7 @@ void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& /
             spanner->setParent(segment);
 
             static const SegmentType st = SegChordRest;
-            Segment* ns;
+            Segment* ns = 0;
             for (Segment* s = segment; s; s = s->next1(st)) {
                   ns = s;
                   if (s->measure() != segment->measure())

@@ -22,6 +22,7 @@
 #include "musescore.h"
 #include "preferences.h"
 #include "palette.h"
+#include "instrdialog.h"
 
 #include "libmscore/instrtemplate.h"
 #include "libmscore/score.h"

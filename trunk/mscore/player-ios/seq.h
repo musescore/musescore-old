@@ -23,7 +23,7 @@
 
 #include "m-msynth/event.h"
 #include "libmscore/fifo.h"
-#include "libmscore/painter.h"
+// #include "libmscore/painter.h"
 
 class Synti;
 class Driver;
