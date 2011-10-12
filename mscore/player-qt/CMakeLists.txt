@@ -46,7 +46,7 @@ add_executable(mscoreplay
 #      /home/ws/qt/qt/lib/libQtDeclarative.so
 target_link_libraries(mscoreplay
       libmscore
-      QtDeclarative
+      ${QT_LIBRARY_DIR}/libQtDeclarative.so
       ${QT_LIBRARIES}
       zarchive
       m-msynth
