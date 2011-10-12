@@ -32,7 +32,7 @@ CONFIG += precompile_header
 
 PRECOMPILED_HEADER = ../all.h
 
-QT += xml
+QT += xml declarative
 
 QMAKE_CXXFLAGS += -include ../all.h
 
@@ -165,7 +165,7 @@ SOURCES += main.cpp                              \
     sparm.cpp
 
 # Please do not modify the following two lines. Required for deployment.
-include(qmlapplicationviewer/qmlapplicationviewer.pri)
+
 qtcAddDeployment()
 
 OTHER_FILES += \
