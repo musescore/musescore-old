@@ -33,7 +33,7 @@ install(FILES
       scales.mscx
       sonata16.mscx
       italian-1.mscz
-      golliwogg.mscx
+      golliwogg.mscz
       Estudio-No1-Tarrega.mscx
       PlanxtyCarolan.mscx
       wtc1fuga5.mscz
