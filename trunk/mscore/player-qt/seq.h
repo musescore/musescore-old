@@ -21,9 +21,8 @@
 #ifndef __SEQ_H__
 #define __SEQ_H__
 
-#include "m-msynth/event.h"
+#include "m-msynth/seq_event.h"
 #include "libmscore/fifo.h"
-// #include "libmscore/painter.h"
 
 class Synti;
 class Driver;
