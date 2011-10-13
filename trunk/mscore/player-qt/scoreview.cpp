@@ -76,7 +76,58 @@ ScoreView::ScoreView(QDeclarativeItem* parent)
       }
 
 //---------------------------------------------------------
-//   loadFile
+//   setScore
+//---------------------------------------------------------
+void ScoreView::loadUrl(const QString& s)
+      {
+      QUrl url(s);
+      printf("URL %s\n", qPrintable(s));
+      if(url.scheme().compare("http") == 0) {
+            if (!networkManager) {
+                  networkManager = new QNetworkAccessManager(this);
+                  connect(networkManager, SIGNAL(finished(QNetworkReply*)),
+                       SLOT(networkFinished(QNetworkReply*)));
+                  }
+            networkManager->get(QNetworkRequest(url));
+            return;
+            }
+      setScore(s);
+      }
+
+//---------------------------------------------------------
+//   networkFinished
+//---------------------------------------------------------
+
+void ScoreView::networkFinished(QNetworkReply* reply)
+      {
+      if (reply->error() != QNetworkReply::NoError) {
+            printf("Error while checking update [%s]\n", qPrintable(reply->errorString()));
+            return;
+            }
+      QByteArray ha = reply->rawHeader("Content-Disposition");
+      QString s(ha);
+      QString name;
+      QRegExp re(".*filename=\"(.*)\"");
+      if (s.isEmpty() || re.indexIn(s) == -1)
+            name = "unknown.mscz";
+      else
+            name = re.cap(1);
+
+      printf("header <%s>\n", qPrintable(s));
+      printf("name <%s>\n", qPrintable(name));
+
+      QByteArray data = reply->readAll();
+      QString tmpName = QDir::tempPath () + "/"+ name;
+      QFile f(tmpName);
+      f.open(QIODevice::WriteOnly);
+      f.write(data);
+      f.close();
+
+      setScore(tmpName);
+      }
+
+//---------------------------------------------------------
+//   setScore
 //---------------------------------------------------------
 
 void ScoreView::setScore(const QString& name)

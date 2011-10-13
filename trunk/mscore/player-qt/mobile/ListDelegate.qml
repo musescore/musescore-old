@@ -4,31 +4,30 @@ Component {
       Item {
             id: wrapper
             width: wrapper.ListView.view.width
-            height: 86
+            height: 70
 
             Item {
                   id: moveMe
                   Rectangle {
                         color: "black";
                         opacity: index % 2 ? 0.2 : 0.4;
-                        height: 84;
+                        height: 68;
                         width: wrapper.width;
                         y: 1
                         }
                   Rectangle {
                         x: 6;
                         y: 4;
-                        width: 77;
-                        height: 77;
-                        color: "white";
+                        width: 100;
+                        height: 60;
+                        color: "black";
                         smooth: true
 
-                        Image { source: imagePath; x: 1; y: 1 }
-                        Image { source: "images/gloss.png" }
+                        Image { source: imagePath; x: 0; y: 0 }
                         }
 
                   Column {
-                        x: 92;
+                        x: 115;
                         width: wrapper.ListView.view.width - 95;
                         y: 15;
                         spacing: 2
@@ -51,17 +50,16 @@ Component {
                               style: Text.Raised;
                               styleColor: "black"
                               }
-/*                        Text {
-                              text: photoDate;
-                              width: parent.width;
-                              font.pixelSize: 14;
-                              elide: Text.ElideRight;
-                              color: "#cccccc";
-                              style: Text.Raised;
-                              styleColor: "black"
-                              }
-*/
                         }
                   }
+
+
+            MouseArea{
+                   anchors.fill: parent
+                   onClicked: {
+                         scoreView.loadUrl(scorelist.get(index).path)
+                         screen.state = "ScoreView"
+                         }
+                   }
             }
       }
