@@ -41,8 +41,6 @@ class Driver {
       virtual bool start() = 0;
       virtual bool stop() = 0;
       virtual QList<QString> inputPorts() = 0;
-      virtual void stopTransport() = 0;
-      virtual void startTransport() = 0;
       virtual int getState() = 0;
       virtual int sampleRate() const = 0;
       virtual void registerPort(const QString& name, bool input) = 0;

@@ -18,54 +18,59 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __PORTAUDIO_H__
-#define __PORTAUDIO_H__
+#ifndef __ANDROID_AUDIO_H__
+#define __ANDROID_AUDIO_H__
 
 #include "driver.h"
 #include "config.h"
+
+#include <SLES/OpenSLES.h>
+#include <SLES/OpenSLES_Android.h>
+#include <SLES/OpenSLES_AndroidConfiguration.h>
 
 class Synth;
 class Seq;
 
 //---------------------------------------------------------
-//   Portaudio
+//   AndroidAudio
 //---------------------------------------------------------
 
-class Portaudio : public Driver {
+class AndroidAudio : public Driver {
       bool initialized;
+      bool running;
       int _sampleRate;
 
-      int state;
-      bool seekflag;
-      unsigned pos;
-      double startTime;
+      SLObjectItf engineObject;
+      SLEngineItf engineEngine;
+
+      SLObjectItf outputMixObject;
+      SLEnvironmentalReverbItf outputMixEnvironmentalReverb;
+
+      SLObjectItf bqPlayerObject;
+      SLPlayItf bqPlayerPlay;
+      SLAndroidSimpleBufferQueueItf bqPlayerBufferQueue;
+      SLEffectSendItf bqPlayerEffectSend;
+
+      static void playerCallback(SLAndroidSimpleBufferQueueItf, void*);
 
    public:
-      Portaudio(Seq*);
-      virtual ~Portaudio();
+      AndroidAudio(Seq*);
+      virtual ~AndroidAudio();
       virtual bool init();
       virtual bool start();
       virtual bool stop();
-      virtual QList<QString> inputPorts();
-      virtual void startTransport();
-      virtual void stopTransport();
-      virtual int getState();
+      virtual QList<QString> inputPorts() { return QList<QString>(); }
+      virtual int getState()   { return 0; }
       virtual int sampleRate() const { return _sampleRate; }
-      virtual void registerPort(const QString& name, bool input);
-      virtual void unregisterPort(int);
+      virtual void registerPort(const QString& name, bool input) {}
+      virtual void unregisterPort(int) {}
 
-      int framePos() const;
-      void connect(void*, void*);
-      void disconnect(void* src, void* dst);
+      void connect(void*, void*)            {}
+      void disconnect(void* src, void* dst) {}
       float* getLBuffer(long n);
       float* getRBuffer(long n);
-      virtual bool isRealtime() const   { return false; }
 
-      QStringList apiList() const;
-      QStringList deviceList(int apiIdx);
-      int deviceIndex(int apiIdx, int apiDevIdx);
-      int currentApi() const;
-      int currentDevice() const;
+      virtual bool isRealtime() const   { return false; }
       };
 
 #endif
