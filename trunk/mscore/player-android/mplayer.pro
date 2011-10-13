@@ -34,6 +34,8 @@ PRECOMPILED_HEADER = ../all.h
 
 QT += xml declarative
 
+LIBS += -lOpenSLES
+
 QMAKE_CXXFLAGS += -include ../all.h
 
 RESOURCES += mplayer.qrc
@@ -162,10 +164,11 @@ SOURCES += main.cpp                              \
     ../m-msynth/seq_event.cpp \
     ../m-msynth/synth_voice.cpp \
     ../m-msynth/synth_dsp.cpp \
-    sparm.cpp
+    sparm.cpp \
+    androidaudio.cpp
 
 # Please do not modify the following two lines. Required for deployment.
-
+include(qmlapplicationviewer/qmlapplicationviewer.pri)
 qtcAddDeployment()
 
 OTHER_FILES += \
@@ -187,35 +190,12 @@ OTHER_FILES += \
     android/res/drawable-ldpi/icon.png \
     android/res/drawable-hdpi/icon.png \
     android/res/drawable-mdpi/icon.png \
-    android/AndroidManifest.xml
+    android/AndroidManifest.xml \
+    mplayer.qml
 
 HEADERS += \
     scoreview.h \
     seq.h \
     painterqt.h
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

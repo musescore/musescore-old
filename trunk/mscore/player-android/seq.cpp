@@ -33,7 +33,7 @@
 #include "libmscore/system.h"
 #include "libmscore/tempo.h"
 #include "scoreview.h"
-#include "audio.h"
+#include "androidaudio.h"
 
 Seq* seq;
 
@@ -71,18 +71,18 @@ Seq::~Seq()
 
 bool Seq::init()
       {
-      driver = 0; // new Portaudio(this);
-/*      if (!driver->init()) {
-            printf("init audio queue failed\n");
+      driver = new AndroidAudio(this);
+      if (!driver->init()) {
+            qDebug("init audio failed\n");
             delete driver;
             driver = 0;
+            return false;
             }
       int sampleRate = driver->sampleRate();
       synti->init(sampleRate);
       if (!driver->start())
             return false;
       running = true;
-      */
       return true;
       }
 
@@ -205,7 +205,7 @@ void Seq::process(unsigned n, float* p)
                         break;
                   int n = f - playTime;
                   synti->process(n, p);
-                  p += 2 * n;
+                  p        += 2 * n;
                   playTime += n;
                   frames    -= n;
                   framePos  += n;
@@ -216,7 +216,6 @@ void Seq::process(unsigned n, float* p)
                   playTime += frames;
                   }
             if (playPos == events.constEnd()) {
-                  driver->stopTransport();
                   seek(0);
                   state = TRANSPORT_STOP;
                   }

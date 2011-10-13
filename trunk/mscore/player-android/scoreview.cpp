@@ -70,7 +70,8 @@ ScoreView::ScoreView(QDeclarativeItem* parent)
       playbackCursor->setZValue(100);
       score = 0;
       seq->setView(this);
-      setAcceptedMouseButtons(Qt::LeftButton);
+//      setAcceptedMouseButtons(Qt::LeftButton);
+      setAcceptedMouseButtons(0);
       setAcceptTouchEvents(true);
       grabGesture(Qt::SwipeGesture);
       }
@@ -156,6 +157,7 @@ void ScoreView::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidge
       {
       if (!score)
             return;
+#if 0
       QPixmap pm(width(), height());
 
       if (pm.isNull())
@@ -185,8 +187,32 @@ void ScoreView::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidge
             p.restore();
             }
       p.end();
-
       painter->drawPixmap(0, 0, pm);
+#else
+      PainterQt pqt(painter, this);
+      painter->setRenderHint(QPainter::Antialiasing, true);
+      painter->setRenderHint(QPainter::TextAntialiasing, true);
+      painter->drawTiledPixmap(QRect(0, 0, width(), height()), QPixmap(":/mobile/images/paper.png"), QPoint(0,0));
+
+      painter->scale(mag, mag);
+
+      Page* page = score->pages()[_currentPage];
+      QList<const Element*> el;
+      foreach(System* s, *page->systems()) {
+            foreach(MeasureBase* m, s->measures())
+                  m->scanElements(&el, collectElements, false);
+            }
+      page->scanElements(&el, collectElements, false);
+
+      foreach(const Element* e, el) {
+            painter->save();
+            painter->translate(e->pagePos());
+            painter->setPen(QPen(e->curColor()));
+            e->draw(&pqt);
+            painter->restore();
+            }
+
+#endif
       }
 
 //---------------------------------------------------------
@@ -358,8 +384,9 @@ void ScoreView::moveCursor(int tick)
 
 bool ScoreView::sceneEvent(QEvent* event)
       {
+qDebug("sceneEvent %d\n", int(event->type()));
       if (event->type() == QEvent::Gesture) {
-            qDebug("gesture\n");
+qDebug("gesture\n");
             QGestureEvent* ge = static_cast<QGestureEvent*>(event);
             QGesture* g = ge->gesture(Qt::SwipeGesture);
             if (g && g->gestureType() == Qt::SwipeGesture) {
@@ -404,8 +431,9 @@ void ScoreView::seek(qreal x, qreal y)
 //   resizeEvent
 //---------------------------------------------------------
 
-QVariant ScoreView::itemChange(GraphicsItemChange change, const QVariant&)
+QVariant ScoreView::itemChange(GraphicsItemChange change, const QVariant& v)
       {
       qDebug("itemChange %d\n", int(change));
+      return QDeclarativeItem::itemChange(change, v);
       }
 
