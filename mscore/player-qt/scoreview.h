@@ -55,6 +55,8 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
       int playPos;
       QRectF _boundingRect;
 
+      QNetworkAccessManager* networkManager;
+
       virtual void dataChanged(const QRectF&)   { update(); }
       virtual void updateAll()                  { update(); }
       virtual void moveCursor()                 {}
@@ -78,8 +80,12 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
       virtual QCursor cursor() const            { return QCursor(); }
       virtual QRectF boundingRect() const       { return _boundingRect; }
 
+   private slots:
+      void networkFinished(QNetworkReply*);
+
    public slots:
       void setScore(const QString& s);
+      void loadUrl(const QString& url);
       void play();
       void setCurrentPage(int n);
       void nextPage();

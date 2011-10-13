@@ -17,6 +17,8 @@ import MuseScore 1.0
 import "mobile" as Mobile
 
 Item {
+      property string apiKey : "KeqJNLwjASQKMkoBF6U6qhnGiRXqgTkq"
+
       id: screen
       property string state: "ListView"
       width: 854
@@ -106,14 +108,33 @@ Item {
                         }
                   }
 
-            Component {
-                  id: scorelistdelegate
-                  Text {
-                        id: label
-                        font.pixelSize: 18
-                        text: type
+            //Mobile.ScoreListModel { id: scoreListModel }
+
+            XmlListModel {
+                id: xmlScoreListModel
+                source: "http://api.musescore.com/services/rest/score.xml?oauth_consumer_key="+apiKey
+                query: "/scores/score"
+
+                XmlRole { name: "title"; query: "title/string()" }
+                XmlRole { name: "composer"; query: "metadata/composer/string()" }
+                XmlRole { name: "permalink"; query: "permalink/string()" }
+                XmlRole { name: "description"; query: "description/string()" }
+                XmlRole { name: "id"; query: "id/string()" }
+                XmlRole { name: "secret"; query: "secret/string()" }
+                onStatusChanged: {
+                    if (status == xmlScoreListModel.Ready, progress ==1.0) {
+                        for(var i = 0; i < xmlScoreListModel.count; i++){
+                          var o = xmlScoreListModel.get(i);
+                            print(o.id);
+                           scorelist.append({"title":o.title,
+                                              "author": o.composer,
+                                              "path": "http://static.musescore.com/"+o.id+"/"+o.secret+"/score.mscz",
+                                              imagePath: "http://static.musescore.com/"+o.id+"/"+o.secret+"/thumb.png"
+                           });
                         }
-                  }
+                    }
+                }
+            }
 
             ListView {
                   id: scoreListView
@@ -124,17 +145,6 @@ Item {
                   height: parent.height
                   model: scorelist
                   delegate: Mobile.ListDelegate { }
-
-                  MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                              var idx = scoreListView.indexAt(mouseX, mouseY)
-                              if (idx >= 0) {
-                                    scoreView.setScore(scorelist.get(idx).path)
-                                    screen.state = "ScoreView"
-                                    }
-                              }
-                        }
                   }
 
             ScoreView {
