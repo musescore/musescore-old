@@ -184,7 +184,7 @@ void Harmony::read(QDomElement e)
             14, 9, 16, 11, 18, 13, 8, 15, 10, 17, 12, 19
             };
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
+            const QString& tag(e.tagName());
             int i = e.text().toInt();
             if (tag == "base") {
                   if (score()->mscVersion() >= 106)
@@ -205,7 +205,7 @@ void Harmony::read(QDomElement e)
                   int degreeAlter = 0;
                   QString degreeType = "";
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        QString tag(ee.tagName());
+                        const QString& tag(ee.tagName());
                         if (tag == "degree-value") {
                               degreeValue = ee.text().toInt();
                               }

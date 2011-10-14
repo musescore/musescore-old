@@ -1205,8 +1205,8 @@ void Beam::read(QDomElement e)
       QPointF p1, p2;
       _id = e.attribute("id").toInt();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             if (tag == "y1") {
                   if (fragments.isEmpty())
                         fragments.append(new BeamFragment);

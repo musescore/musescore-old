@@ -195,8 +195,8 @@ void Box::read(QDomElement e)
 
       qreal _spatium = spatium();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             if (tag == "height") {
                   qreal v = val.toDouble();
                   if (score()->mscVersion() <= 100)

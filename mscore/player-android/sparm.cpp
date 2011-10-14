@@ -20,7 +20,6 @@
 
 #include "libmscore/xml.h"
 #include "sparm_p.h"
-// #include "synti.h"
 #include "mscore/seq.h"       // HACK
 
 extern Seq* seq;

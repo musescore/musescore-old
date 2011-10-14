@@ -430,8 +430,8 @@ void PageFormat::read(QDomElement e, Score* score)
       qreal _evenRightMargin = 0.0;
       QString type;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             int i = val.toInt();
             if (tag == "pageFormat")
                   setSize(paperSizeNameToIndex(val));
@@ -508,13 +508,13 @@ void PageFormat::readMusicXML(QDomElement e, qreal conversion)
       qreal _oddRightMargin  = 0.0;
       qreal _evenRightMargin = 0.0;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             if (tag == "page-margins") {
                   QString type = e.attribute("type","both");
                   qreal lm = 0.0, rm = 0.0, tm = 0.0, bm = 0.0;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        QString tag(ee.tagName());
+                        const QString& tag(ee.tagName());
                         //qreal val = ee.text().toDouble() * (18/4)/ PPI  * .1;
                         //qreal val = ee.text().toDouble() * 0.45 / PPI; OLD!!!
                         qreal val = ee.text().toDouble() * conversion;
@@ -767,7 +767,7 @@ void Page::write(Xml& xml) const
 void Page::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
+            const QString& tag(e.tagName());
 
             if (tag == "System") {
                   System* system = new System(score());

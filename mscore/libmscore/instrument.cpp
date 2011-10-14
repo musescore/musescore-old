@@ -91,7 +91,7 @@ void NamedEventList::read(QDomElement e)
       {
       name = e.attribute("name");
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
+            const QString& tag(e.tagName());
             if (tag == "program") {
                   Event ev(ME_CONTROLLER);
                   ev.setController(CTRL_PROGRAM);
@@ -242,8 +242,8 @@ void InstrumentData::read(QDomElement e)
 
       _channel.clear();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             int i = val.toInt();
 
             if (tag == "longName") {
@@ -431,8 +431,8 @@ void Channel::read(QDomElement e)
       synti = 0;
       name = e.attribute("name");
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             if (tag == "program") {
                   program = e.attribute("value", "-1").toInt();
                   if (program == -1)
@@ -582,7 +582,7 @@ void MidiArticulation::read(QDomElement e)
       {
       name = e.attribute("name");
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
+            const QString& tag(e.tagName());
             QString text(e.text());
             if (tag == "velocity") {
                   if (text.endsWith("%"))

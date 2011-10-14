@@ -102,8 +102,8 @@ void Lyrics::read(QDomElement e)
       int   iEndTick = 0;           // used for backward compatibility
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             int i = val.toInt();
             if (tag == "no")
                   _no = i;

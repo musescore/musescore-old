@@ -66,8 +66,8 @@ void Arpeggio::write(Xml& xml) const
 void Arpeggio::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             if (tag == "userLen1")
                   _userLen1 = Spatium(val.toDouble());
             else if (tag == "userLen2")
@@ -80,10 +80,10 @@ void Arpeggio::read(QDomElement e)
       }
 
 //---------------------------------------------------------
-//   bbox
+//   layout
 //---------------------------------------------------------
 
-QRectF Arpeggio::bbox() const
+void Arpeggio::layout()
       {
       qreal _spatium = spatium();
       qreal y1 = -_userLen1.val() * _spatium;
@@ -93,12 +93,14 @@ QRectF Arpeggio::bbox() const
             case ARP_UP:
             case ARP_DOWN:
             default:
-                  return QRectF(0.0, y1, symbols[score()->symIdx()][arpeggioSym].width(magS()), y2-y1);
+                  setbbox(QRectF(0.0, y1, symbols[score()->symIdx()][arpeggioSym].width(magS()), y2-y1));
+                  return;
             case ARP_BRACKET:
                   {
                   qreal lw = score()->styleS(ST_ArpeggioLineWidth).val() * _spatium;
                   qreal w = score()->styleS(ST_ArpeggioHookLen).val() * _spatium;
-                  return QRectF(-lw * .5, y1 - lw * .5, w + lw, y2 - y1 + lw);
+                  setbbox(QRectF(-lw * .5, y1 - lw * .5, w + lw, y2 - y1 + lw));
+                  return;
                   }
             }
       }

@@ -193,7 +193,7 @@ void Seq::processMessages()
 //   process
 //---------------------------------------------------------
 
-void Seq::process(unsigned n, float* p)
+void Seq::process(unsigned n, short* p)
       {
       unsigned frames = n;
       processMessages();

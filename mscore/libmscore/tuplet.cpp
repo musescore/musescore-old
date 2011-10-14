@@ -399,14 +399,6 @@ void Tuplet::layout()
                         }
                   }
             }
-      }
-
-//---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF Tuplet::bbox() const
-      {
       QRectF r;
       if (_number) {
             r |= _number->bbox().translated(_number->pos());
@@ -421,7 +413,7 @@ QRectF Tuplet::bbox() const
             b.setCoords(bracketL[1].x(), bracketL[1].y(), bracketL[3].x(), bracketL[3].y());
             r |= b;
             }
-      return r;
+      setbbox(r);
       }
 
 //---------------------------------------------------------

@@ -1004,8 +1004,8 @@ void Line::writeProperties(Xml& xml) const
 
 bool Line::readProperties(QDomElement e)
       {
-      QString tag(e.tagName());
-      QString val(e.text());
+      const QString& tag(e.tagName());
+      const QString& val(e.text());
 
       if (tag == "lineWidth")
             _width = Spatium(val.toDouble());

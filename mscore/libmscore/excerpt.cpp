@@ -45,7 +45,7 @@ void Excerpt::read(QDomElement e)
       const QList<Part*>* pl = _score->parts();
       QString name;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag = e.tagName();
+            const QString& tag = e.tagName();
             if (tag == "name")
                   name = e.text();
             else if (tag == "title")

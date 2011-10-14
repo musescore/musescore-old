@@ -292,15 +292,6 @@ void SlurSegment::editDrag(const EditData& ed)
       }
 
 //---------------------------------------------------------
-//    bbox
-//---------------------------------------------------------
-
-QRectF SlurSegment::bbox() const
-      {
-      return path.boundingRect();
-      }
-
-//---------------------------------------------------------
 //   writeProperties
 //---------------------------------------------------------
 
@@ -569,6 +560,7 @@ void SlurSegment::layout(const QPointF& p1, const QPointF& p2)
       ups[GRIP_START].p = p1;
       ups[GRIP_END].p   = p2;
       slurTie()->computeBezier(this);
+      setbbox(path.boundingRect());
       }
 
 //---------------------------------------------------------
@@ -1024,6 +1016,7 @@ void Slur::layout()
                   }
             s->setSpannerSegmentType(SEGMENT_SINGLE);
             s->layout(QPointF(0, 0), QPointF(_len, 0));
+            setbbox(frontSegment()->bbox());
             return;
             }
       switch (_slurDirection) {
@@ -1160,6 +1153,7 @@ void Slur::layout()
             if (system == sPos.system2)
                   break;
             }
+      setbbox(spannerSegments().isEmpty() ? QRectF() : frontSegment()->bbox());
       }
 
 //---------------------------------------------------------
@@ -1181,19 +1175,6 @@ qreal SlurTie::firstNoteRestSegmentX(System* system)
             }
       printf("firstNoteRestSegmentX: did not find segment\n");
       return 0.0;
-      }
-
-//---------------------------------------------------------
-//   bbox
-//    used in palette
-//---------------------------------------------------------
-
-QRectF Slur::bbox() const
-      {
-      if (spannerSegments().isEmpty())
-            return QRectF();
-      else
-            return frontSegment()->bbox();
       }
 
 //---------------------------------------------------------

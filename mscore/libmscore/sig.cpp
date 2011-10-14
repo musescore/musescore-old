@@ -204,7 +204,7 @@ void TimeSigMap::write(Xml& xml) const
 void TimeSigMap::read(QDomElement e, int fileDivision)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
+            const QString& tag(e.tagName());
             if (tag == "sig") {
                   SigEvent t;
                   int tick = t.read(e, fileDivision);

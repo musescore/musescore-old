@@ -41,8 +41,8 @@ class Stem : public Element {
       virtual void draw(Painter*) const;
       void setLen(qreal v)            { _len = v; }
       qreal stemLen() const           { return _len + point(_userLen); }
-      virtual QRectF bbox() const;
       virtual bool isEditable() const { return true; }
+      virtual void layout();
 
       virtual void editDrag(const EditData&);
       virtual void updateGrips(int*, QRectF*) const;

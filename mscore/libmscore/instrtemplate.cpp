@@ -243,8 +243,8 @@ void InstrumentTemplate::read(QDomElement e)
       useDrumset = false;
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             int i = val.toInt();
 
             if (tag == "name" || tag == "longName") {               // "name" is obsolete
@@ -413,7 +413,7 @@ void InstrumentTemplate::read(QDomElement e)
 static void readInstrumentGroup(InstrumentGroup* group, QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
+            const QString& tag(e.tagName());
             if (tag == "instrument") {
                   InstrumentTemplate* t = new InstrumentTemplate;
                   group->instrumentTemplates.append(t);

@@ -38,7 +38,6 @@ class Reverb;
 class Chorus;
 class Fluid;
 
-#define FLUID_MAX_BUFSIZE       4096
 #define FLUID_NUM_PROGRAMS      129
 
 enum fluid_loop {
@@ -315,10 +314,6 @@ class Fluid : public Synti {
 
       unsigned int noteid;          // the id is incremented for every new note. it's used for noteoff's
 
-      float* left_buf;
-      float* right_buf;
-      float* fx_buf[2];
-
       Reverb* reverb;
       Chorus* chorus;
 
@@ -342,7 +337,7 @@ class Fluid : public Synti {
       virtual void setGain(float v)          { _gain = v * 2.0; }
       virtual void allNotesOff();
 
-      virtual void process(unsigned len, float*);
+      virtual void process(unsigned len, short*);
 
       Preset* get_preset(unsigned int banknum, unsigned int prognum);
       void all_notes_off(int chan);

@@ -344,8 +344,8 @@ void BarLine::write(Xml& xml) const
 void BarLine::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             if (tag == "subtype") {
                   BarLineType ct;
                   bool ok;

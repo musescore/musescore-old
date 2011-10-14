@@ -44,7 +44,7 @@ class Synti {
       virtual void setMasterTuning(float) {}
       virtual float masterTuning() const { return 440.0; }
 
-      virtual void process(unsigned, float*) = 0;
+      virtual void process(unsigned, short*) = 0;
       virtual void play(const SeqEvent&) = 0;
 
       // set/get a single parameter

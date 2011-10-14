@@ -20,7 +20,7 @@
 
 #include "sparm_p.h"
 #include "synti.h"
-#include "m-al/xml.h"
+#include "mscore/xml.h"
 
 //---------------------------------------------------------
 //   SyntiParameterData

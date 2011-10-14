@@ -57,14 +57,13 @@ static const char* audioError(SLresult r)
 AndroidAudio::AndroidAudio(Seq* s)
    : Driver(s)
       {
-      engineObject = 0;
-      outputMixObject = 0;
+      engineObject                 = 0;
+      outputMixObject              = 0;
       outputMixEnvironmentalReverb = 0;
-      bqPlayerObject = 0;
-      initialized = false;
-      running     = false;
-//      _sampleRate = 44100;
-      _sampleRate = 22050;
+      bqPlayerObject               = 0;
+      initialized                  = false;
+      running                      = false;
+      _sampleRate                  = 22050;    // 44100
       }
 
 AndroidAudio::~AndroidAudio()
@@ -74,29 +73,17 @@ AndroidAudio::~AndroidAudio()
       }
 
 //---------------------------------------------------------
-//   bqPlayerCallback
-// this callback handler is called every time a buffer finishes playing
+//   playerCallback
+//    this callback handler is called every time a
+//    buffer finishes playing
 //---------------------------------------------------------
 
-void AndroidAudio::playerCallback(SLAndroidSimpleBufferQueueItf, void* context)
+void AndroidAudio::playerCallback(SLAndroidSimpleBufferQueueItf bq, void* context)
       {
-      AndroidAudio* aa = (AndroidAudio*)context;
-
       static short buffer[FRAME_SIZE * 2];
-      static float fbuffer[FRAME_SIZE * 2];
-
-      memset(fbuffer, 0, sizeof(fbuffer));
-      aa->seq->process(FRAME_SIZE, fbuffer);
-
-      for (int i = 0; i < FRAME_SIZE * 2; ++i) {
-            int tmp = lrintf(0x7fff * fbuffer[i]);
-            if (tmp > 32767)
-                  tmp = 32767;
-            else if (tmp < -32768)
-                  tmp = -32768;
-            buffer[i] = tmp;
-            }
-      (*aa->bqPlayerBufferQueue)->Enqueue(aa->bqPlayerBufferQueue, buffer, FRAME_SIZE * 2 * sizeof(short));
+      memset(buffer, 0, sizeof(buffer));
+      ((AndroidAudio*)context)->seq->process(FRAME_SIZE, buffer);
+      (*bq)->Enqueue(bq, buffer, FRAME_SIZE * 2 * sizeof(short));
       }
 
 //---------------------------------------------------------
@@ -172,16 +159,14 @@ bool AndroidAudio::init()
             };
 
       // create audio player
-      const SLInterfaceID aids[2] = {
-            SL_IID_BUFFERQUEUE,
-            SL_IID_EFFECTSEND
+      const SLInterfaceID aids[1] = {
+            SL_IID_BUFFERQUEUE
             };
-      const SLboolean areq[2] = {
-            SL_BOOLEAN_TRUE,
+      const SLboolean areq[1] = {
             SL_BOOLEAN_TRUE
             };
       if ((*engineEngine)->CreateAudioPlayer(engineEngine, &bqPlayerObject, &audioSrc,
-         &audioSnk, 2, aids, areq) != SL_RESULT_SUCCESS) {
+         &audioSnk, 1, aids, areq) != SL_RESULT_SUCCESS) {
             qDebug("AndroidAudio: create audio player failed\n");
             return false;
             }

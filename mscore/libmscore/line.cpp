@@ -562,8 +562,8 @@ bool SLine::readProperties(QDomElement e)
       if (Element::readProperties(e))
             return true;
       // setTick(score()->curTick);
-      QString tag(e.tagName());
-      QString val(e.text());
+      const QString& tag(e.tagName());
+      const QString& val(e.text());
       int i = val.toInt();
 
       if (tag == "tick2")

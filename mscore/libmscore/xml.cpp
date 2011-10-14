@@ -87,7 +87,7 @@ void Xml::valueTypeTag(const char* name, ValueType t)
 //   readPlacement
 //---------------------------------------------------------
 
-Placement readPlacement(QDomElement e)
+Placement readPlacement(const QDomElement& e)
       {
       const QString& s(e.text());
       if (s == "auto" || s == "0")
@@ -106,7 +106,7 @@ Placement readPlacement(QDomElement e)
 //   readValueType
 //---------------------------------------------------------
 
-ValueType readValueType(QDomElement e)
+ValueType readValueType(const QDomElement& e)
       {
       const QString& s(e.text());
       if (s == "offset")
@@ -129,7 +129,7 @@ void Xml::fTag(const char* name, const Fraction& f)
 //   readFraction
 //---------------------------------------------------------
 
-Fraction readFraction(QDomElement e)
+Fraction readFraction(const QDomElement& e)
       {
       qreal z = e.attribute("z", "0.0").toDouble();
       qreal n = e.attribute("n", "0.0").toDouble();
@@ -345,7 +345,7 @@ void Xml::dump(int len, const unsigned char* p)
 //   readPoint
 //---------------------------------------------------------
 
-QPointF readPoint(QDomElement e)
+QPointF readPoint(const QDomElement& e)
       {
       QPointF p;
       p.setX(e.attribute("x", "0.0").toDouble());
@@ -357,7 +357,7 @@ QPointF readPoint(QDomElement e)
 //   readColor
 //---------------------------------------------------------
 
-QColor readColor(QDomElement e)
+QColor readColor(const QDomElement& e)
       {
       QColor c;
       c.setRed(e.attribute("r").toInt());
@@ -370,7 +370,7 @@ QColor readColor(QDomElement e)
 //   readSize
 //---------------------------------------------------------
 
-QSizeF readSize(QDomElement e)
+QSizeF readSize(const QDomElement& e)
       {
       QSizeF p;
       p.setWidth(e.attribute("w", "0.0").toDouble());
@@ -382,7 +382,7 @@ QSizeF readSize(QDomElement e)
 //   readRectF
 //---------------------------------------------------------
 
-QRectF readRectF(QDomElement e)
+QRectF readRectF(const QDomElement& e)
       {
       QRectF p;
       p.setX(e.attribute("x", "0.0").toDouble());
@@ -396,13 +396,13 @@ QRectF readRectF(QDomElement e)
 //   printDomElementPath
 //---------------------------------------------------------
 
-static QString domElementPath(QDomElement e)
+static QString domElementPath(const QDomElement& e)
       {
       QString s;
       QDomNode dn(e);
       while (!dn.parentNode().isNull()) {
             dn = dn.parentNode();
-            const QDomElement e = dn.toElement();
+            const QDomElement& e = dn.toElement();
             const QString k(e.tagName());
             if (!s.isEmpty())
                   s += ":";
@@ -415,7 +415,7 @@ static QString domElementPath(QDomElement e)
 //   domError
 //---------------------------------------------------------
 
-void domError(QDomElement e)
+void domError(const QDomElement& e)
       {
       QString s = domElementPath(e);
       if (!docName.isEmpty())
@@ -436,7 +436,7 @@ void domError(QDomElement e)
 //   domNotImplemented
 //---------------------------------------------------------
 
-void domNotImplemented(QDomElement e)
+void domNotImplemented(const QDomElement& e)
       {
       if (!MScore::debugMsg)
             return;
@@ -453,7 +453,7 @@ void domNotImplemented(QDomElement e)
 //   htmlToString
 //---------------------------------------------------------
 
-void Xml::htmlToString(QDomElement e, int level, QString* s)
+void Xml::htmlToString(const QDomElement& e, int level, QString* s)
       {
       *s += QString("<%1").arg(e.tagName());
       QDomNamedNodeMap map = e.attributes();
@@ -474,7 +474,7 @@ void Xml::htmlToString(QDomElement e, int level, QString* s)
       --level;
       }
 
-QString Xml::htmlToString(QDomElement e)
+QString Xml::htmlToString(const QDomElement& e)
       {
       QString s;
       htmlToString(e, 0, &s);

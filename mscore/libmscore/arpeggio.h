@@ -40,7 +40,7 @@ class Arpeggio : public Element {
       virtual Arpeggio* clone() const  { return new Arpeggio(*this); }
       virtual ElementType type() const { return ARPEGGIO; }
       Chord* chord() const             { return (Chord*)parent(); }
-      virtual QRectF bbox() const;
+      virtual void layout();
       virtual void draw(Painter*) const;
       virtual bool isEditable() const { return true; }
       virtual void editDrag(const EditData&);

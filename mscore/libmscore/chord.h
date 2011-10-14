@@ -127,7 +127,6 @@ class Chord : public ChordRest {
       virtual void setSelected(bool f);
       virtual Element* drop(const DropData&);
 
-      virtual QRectF bbox() const;
       void setStemDirection(Direction d)     { _stemDirection = d; }
       Direction stemDirection() const        { return _stemDirection; }
 

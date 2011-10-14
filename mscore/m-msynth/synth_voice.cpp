@@ -203,7 +203,7 @@ float Voice::gen_get(int g)
 // dsp parameters). The dsp routine is #included in several places (fluid_dsp_core.c).
 //-----------------------------------------------------------------------------
 
-void Voice::write(unsigned n, float* left, float* right, float* reverb, float* chorus)
+void Voice::write(unsigned n, short* data)
       {
       /* make sure we're playing and that we have sample data */
       if (!PLAYING())
@@ -539,7 +539,7 @@ void Voice::write(unsigned n, float* left, float* right, float* reverb, float* c
             }
 
       if (count > 0)
-            effects(count, left, right, reverb, chorus);
+            effects(count, data);
 
       /* turn off voice if short count (sample ended and not looping) */
       if (count < n)
@@ -1655,6 +1655,8 @@ void Sample::optimize()
             s->amplitude_that_reaches_noise_floor_is_valid = 1;
             }
       }
+
+
 /* Purpose:
  *
  * - filters (applies a lowpass filter with variable cutoff frequency and quality factor)
@@ -1671,28 +1673,47 @@ void Sample::optimize()
  * - dsp_hist2: same
  *
  */
-void Voice::effects(int count, float* left, float* right, float* reverb, float* chorus)
+void Voice::effects(int count, short* data)
       {
       /* filter (implement the voice filter according to SoundFont standard) */
 
       /* Check for denormal number (too close to zero). */
-      if (fabs (hist1) < 1e-20)
-            hist1 = 0.0f;             /* FIXME JMG - Is this even needed? */
+//      if (fabs (hist1) < 1e-20)
+//            hist1 = 0.0f;             /* FIXME JMG - Is this even needed? */
 
       /* Two versions of the filter loop. One, while the filter is
        * changing towards its new setting. The other, if the filter
        * doesn't change.
        */
 
+      float al = amp_left * 0x7fff;
+      float ar = amp_right * 0x7fff;
+
       if (filter_coeff_incr_count > 0) {
             /* Increment is added to each filter coefficient filter_coeff_incr_count times. */
-            for (int i = 0; i < count; i++) {
-                  /* The filter is implemented in Direct-II form. */
-                  float dsp_centernode = dsp_buf[i] - a1 * hist1 - a2 * hist2;
-                  dsp_buf[i] = b02 * (dsp_centernode + hist2) + b1 * hist1;
-                  hist2 = hist1;
-                  hist1 = dsp_centernode;
+            /* The filter is implemented in Direct-II form. */
 
+            for (int i = 0; i < count; i++) {
+                  float f    = dsp_buf[i] - a1 * hist1 - a2 * hist2;
+                  float v    = b02 * (f + hist2) + b1 * hist1;
+                  dsp_buf[i] = v;
+
+                  int tmp = lrintf(al * v);
+                  if (tmp > 32767)
+                        tmp = 32767;
+                  else if (tmp < -32768)
+                        tmp = -32768;
+                  *data++ += tmp;
+
+                  tmp = lrintf(ar * v);
+                  if (tmp > 32767)
+                        tmp = 32767;
+                  else if (tmp < -32768)
+                        tmp = -32768;
+                  *data++ += tmp;
+
+                  hist2      = hist1;
+                  hist1      = f;
                   if (filter_coeff_incr_count-- > 0) {
                         a1  += a1_incr;
                         a2  += a2_incr;
@@ -1701,46 +1722,33 @@ void Voice::effects(int count, float* left, float* right, float* reverb, float* 
                         }
                   }
             }
-      else { /* The filter parameters are constant.  This is duplicated to save time. */
-            for (int i = 0; i < count; i++) {   // The filter is implemented in Direct-II form.
-                  float dsp_centernode = dsp_buf[i] - a1 * hist1 - a2 * hist2;
-                  dsp_buf[i]     = b02 * (dsp_centernode + hist2) + b1 * hist1;
-                  hist2          = hist1;
-                  hist1          = dsp_centernode;
-                  }
-            }
-
-      /* pan (Copy the signal to the left and right output buffer) The voice
-       * panning generator has a range of -500 .. 500.  If it is centered,
-       * it's close to 0.  amp_left and amp_right are then the
-       * same, and we can save one multiplication per voice and sample.
-       */
-      if ((-0.5 < pan) && (pan < 0.5)) {
-            /* The voice is centered. Use amp_left twice. */
+      else {
+            // The filter parameters are constant.
+            // This is duplicated to save time.
+            // The filter is implemented in Direct-II form.
             for (int i = 0; i < count; i++) {
-                  float v = amp_left * dsp_buf[i];
-                  left[i]  += v;
-                  right[i] += v;
-                  }
-            }
-      else {     /* The voice is not centered. Stereo samples have one side zero. */
-            if (amp_left != 0.0) {
-                  for (int i = 0; i < count; i++)
-                        left[i] += amp_left * dsp_buf[i];
-                  }
+                  float f    = dsp_buf[i] - a1 * hist1 - a2 * hist2;
+                  float v    = b02 * (f + hist2) + b1 * hist1;
+                  dsp_buf[i] = v;
 
-            if (amp_right != 0.0) {
-                  for (int i = 0; i < count; i++)
-                        right[i] += amp_right * dsp_buf[i];
+                  int tmp = lrintf(al * v);
+                  if (tmp > 32767)
+                        tmp = 32767;
+                  else if (tmp < -32768)
+                        tmp = -32768;
+                  *data++ += tmp;
+
+                  tmp = lrintf(ar * v);
+                  if (tmp > 32767)
+                        tmp = 32767;
+                  else if (tmp < -32768)
+                        tmp = -32768;
+                  *data++ += tmp;
+
+                  hist2      = hist1;
+                  hist1      = f;
                   }
             }
-
-/*      for (int i = 0; i < count; i++) {
-            float v = dsp_buf[i];
-            reverb[i] += amp_reverb * v;
-            chorus[i] += amp_chorus * v;
-            }
-      */
       }
 }
 

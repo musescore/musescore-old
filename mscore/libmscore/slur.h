@@ -66,8 +66,6 @@ class SlurSegment : public SpannerSegment {
       virtual SlurSegment* clone() const { return new SlurSegment(*this); }
       virtual ElementType type() const   { return SLUR_SEGMENT; }
 
-      virtual QRectF bbox() const;
-
       void layout(const QPointF& p1, const QPointF& p2);
       virtual QPainterPath shape() const { return shapePath; }
       virtual void draw(Painter*) const;
@@ -172,7 +170,6 @@ class Slur : public SlurTie {
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       virtual void layout();
-      virtual QRectF bbox() const;
       virtual void setTrack(int val);
       virtual void slurPos(SlurPos*);
       virtual void computeBezier(SlurSegment*);

@@ -53,8 +53,6 @@ void Fingering::write(Xml& xml) const
 void Fingering::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
             if (!Text::readProperties(e))
                   domError(e);
             }

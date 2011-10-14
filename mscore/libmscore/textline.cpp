@@ -144,55 +144,6 @@ void TextLineSegment::draw(Painter* painter) const
       }
 
 //---------------------------------------------------------
-//   bbox
-//    FIXME
-//---------------------------------------------------------
-
-QRectF TextLineSegment::bbox() const
-      {
-      QPointF pp1;
-      QPointF pp2(pos2());
-
-      if (!_text && pp2.y() != 0)
-            return QRectF(pp1, pp2).normalized();
-      qreal y1 = point(-textLine()->lineWidth());
-      qreal y2 = -y1;
-
-      int sym = textLine()->beginSymbol();
-      if (_text) {
-            qreal h = _text->height();
-            if (textLine()->beginTextPlace() == PLACE_ABOVE)
-                  y1 = -h;
-            else if (textLine()->beginTextPlace() == PLACE_BELOW)
-                  y2 = h;
-            else {
-                  y1 = -h * .5;
-                  y2 = h * .5;
-                  }
-            }
-      else if (sym != -1) {
-            qreal hh = symbols[score()->symIdx()][sym].height(magS()) * .5;
-            y1 = -hh;
-            y2 = hh;
-            }
-      if (textLine()->endHook()) {
-            qreal h = point(textLine()->endHookHeight());
-            if (h > y2)
-                  y2 = h;
-            else if (h < y1)
-                  y1 = h;
-            }
-      if (textLine()->beginHook()) {
-            qreal h = point(textLine()->beginHookHeight());
-            if (h > y2)
-                  y2 = h;
-            else if (h < y1)
-                  y1 = h;
-            }
-      return QRectF(.0, y1, pp2.x(), y2 - y1);
-      }
-
-//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
@@ -233,6 +184,50 @@ void TextLineSegment::layout()
             }
       if (_text)
             _text->layout();
+
+
+      QPointF pp1;
+      QPointF pp2(pos2());
+
+      if (!_text && pp2.y() != 0) {
+            setbbox(QRectF(pp1, pp2).normalized());
+            return;
+            }
+      qreal y1 = point(-textLine()->lineWidth());
+      qreal y2 = -y1;
+
+      int sym = textLine()->beginSymbol();
+      if (_text) {
+            qreal h = _text->height();
+            if (textLine()->beginTextPlace() == PLACE_ABOVE)
+                  y1 = -h;
+            else if (textLine()->beginTextPlace() == PLACE_BELOW)
+                  y2 = h;
+            else {
+                  y1 = -h * .5;
+                  y2 = h * .5;
+                  }
+            }
+      else if (sym != -1) {
+            qreal hh = symbols[score()->symIdx()][sym].height(magS()) * .5;
+            y1 = -hh;
+            y2 = hh;
+            }
+      if (textLine()->endHook()) {
+            qreal h = point(textLine()->endHookHeight());
+            if (h > y2)
+                  y2 = h;
+            else if (h < y1)
+                  y1 = h;
+            }
+      if (textLine()->beginHook()) {
+            qreal h = point(textLine()->beginHookHeight());
+            if (h > y2)
+                  y2 = h;
+            else if (h < y1)
+                  y1 = h;
+            }
+      setbbox(QRectF(.0, y1, pp2.x(), y2 - y1));
       }
 
 //---------------------------------------------------------

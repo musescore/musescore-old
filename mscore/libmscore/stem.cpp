@@ -37,6 +37,17 @@ Stem::Stem(Score* s)
       }
 
 //---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void Stem::layout()
+      {
+      qreal w = point(score()->styleS(ST_stemWidth));
+      qreal l = _len + point(_userLen);
+      setbbox(QRectF(-w * .5, 0, w, l).normalized());
+      }
+
+//---------------------------------------------------------
 //   draw
 //---------------------------------------------------------
 
@@ -103,17 +114,6 @@ void Stem::setVisible(bool f)
             chord->hook()->setVisible(f);
       }
 #endif
-
-//---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF Stem::bbox() const
-      {
-      qreal w = point(score()->styleS(ST_stemWidth));
-      qreal l = _len + point(_userLen);
-      return QRectF(-w * .5, 0, w, l).normalized();
-      }
 
 //---------------------------------------------------------
 //   updateGrips

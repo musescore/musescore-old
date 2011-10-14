@@ -1821,7 +1821,7 @@ void Score::layoutPages()
                   }
 
             qreal h  = sr.height();
-            qreal tmargin;    // top system margin
+            qreal tmargin = 0.0;    // top system margin
             qreal bmargin;    // bottom system margin
 
             if (sr.isVbox()) {
