@@ -75,13 +75,15 @@ void ShadowNote::draw(Painter* painter) const
       }
 
 //---------------------------------------------------------
-//   bbox
+//   layout
 //---------------------------------------------------------
 
-QRectF ShadowNote::bbox() const
+void ShadowNote::layout()
       {
-      if (sym == 0)
-            return QRectF();
+      if (sym == 0) {
+            setbbox(QRectF());
+            return;
+            }
       QRectF b = sym->bbox(magS());
       qreal _spatium = spatium();
       qreal x  = b.width()/2 - _spatium;
@@ -94,7 +96,7 @@ QRectF ShadowNote::bbox() const
             for (int i = 10; i <= _line; i += 2)
                   b |= r.translated(QPointF(x, _spatium * .5 * (i - _line)));
             }
-      return b;
+      setbbox(b);
       }
 
 

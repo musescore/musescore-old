@@ -103,10 +103,10 @@ void Lasso::updateGrips(int* n, QRectF* r) const
       }
 
 //---------------------------------------------------------
-//   bbox
+//  layout
 //---------------------------------------------------------
 
-QRectF Lasso::bbox() const
+void Lasso::layout()
       {
       QRectF bb(_rect);
       if (view) {
@@ -115,7 +115,7 @@ QRectF Lasso::bbox() const
             for (int i = 0; i < view->gripCount(); ++i)
                   bb |= view->getGrip(i).adjusted(-dx, -dy, dx, dy);
             }
-      return bb;
+      setbbox(bb);
       }
 
 //---------------------------------------------------------

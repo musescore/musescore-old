@@ -42,9 +42,19 @@ Stem::Stem(Score* s)
 
 void Stem::layout()
       {
-      qreal w = point(score()->styleS(ST_stemWidth));
-      qreal l = _len + point(_userLen);
-      setbbox(QRectF(-w * .5, 0, w, l).normalized());
+      qreal lw = point(score()->styleS(ST_stemWidth));
+      qreal l  = stemLen();
+      setbbox(QRectF(-lw * .5, 0, lw, l).normalized());
+      }
+
+//---------------------------------------------------------
+//   setLen
+//---------------------------------------------------------
+
+void Stem::setLen(qreal v)
+      {
+      _len = v;
+      layout();
       }
 
 //---------------------------------------------------------

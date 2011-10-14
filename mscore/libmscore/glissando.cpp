@@ -81,6 +81,7 @@ void Glissando::layout()
       QPointF p2 = fullLine.pointAt(1 - (yo / fullLine.length()));
 
       line = QLineF(p1, p2);
+      setbbox(QRectF(line.p1(), line.p2()).normalized());
       }
 
 //---------------------------------------------------------
@@ -165,15 +166,6 @@ void Glissando::draw(Painter* painter) const
 Space Glissando::space() const
       {
       return Space(0.0, spatium() * 2.0);
-      }
-
-//---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF Glissando::bbox() const
-      {
-      return QRectF(line.p1(), line.p2()).normalized();
       }
 
 //---------------------------------------------------------

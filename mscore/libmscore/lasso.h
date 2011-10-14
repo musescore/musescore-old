@@ -36,7 +36,7 @@ class Lasso : public Element {
       virtual void updateGrips(int*, QRectF*) const;
       QRectF rect() const                 { return _rect; }
       void setRect(const QRectF& r)       { _rect = r;    }
-      virtual QRectF bbox() const;
+      virtual void layout();
       virtual void startEdit(MuseScoreView*, const QPointF&);
       virtual void endEdit();
       };

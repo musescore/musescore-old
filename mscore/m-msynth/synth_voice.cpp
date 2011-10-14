@@ -1698,18 +1698,20 @@ void Voice::effects(int count, short* data)
                   float v    = b02 * (f + hist2) + b1 * hist1;
                   dsp_buf[i] = v;
 
-                  int tmp = lrintf(al * v);
-                  if (tmp > 32767)
+                  int tmp = int(al * v);
+/*                  if (tmp > 32767)
                         tmp = 32767;
                   else if (tmp < -32768)
                         tmp = -32768;
+*/
                   *data++ += tmp;
 
-                  tmp = lrintf(ar * v);
-                  if (tmp > 32767)
+                  tmp = int(ar * v);      // lrintf(ar * v);
+/*                  if (tmp > 32767)
                         tmp = 32767;
                   else if (tmp < -32768)
                         tmp = -32768;
+                  */
                   *data++ += tmp;
 
                   hist2      = hist1;
@@ -1731,18 +1733,20 @@ void Voice::effects(int count, short* data)
                   float v    = b02 * (f + hist2) + b1 * hist1;
                   dsp_buf[i] = v;
 
-                  int tmp = lrintf(al * v);
-                  if (tmp > 32767)
+                  int tmp = int(al * v);
+/*                  if (tmp > 32767)
                         tmp = 32767;
                   else if (tmp < -32768)
                         tmp = -32768;
+ */
                   *data++ += tmp;
 
-                  tmp = lrintf(ar * v);
-                  if (tmp > 32767)
+                  tmp = int(ar * v);
+/*                  if (tmp > 32767)
                         tmp = 32767;
                   else if (tmp < -32768)
                         tmp = -32768;
+                  */
                   *data++ += tmp;
 
                   hist2      = hist1;

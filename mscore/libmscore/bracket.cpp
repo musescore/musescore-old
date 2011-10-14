@@ -104,6 +104,7 @@ void Bracket::layout()
             path.addText(QPointF(0.0, h * 2.0 + o), f, QString(down));
             path.addRect(0.0, -slw * .5, w, h * 2.0 + slw);
             }
+      setbbox(path.boundingRect());
       }
 
 //---------------------------------------------------------
@@ -196,15 +197,6 @@ QPointF Bracket::gripAnchor(int) const
 void Bracket::endEdit()
       {
       endEditDrag();
-      }
-
-//---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF Bracket::bbox() const
-      {
-      return path.boundingRect();
       }
 
 //---------------------------------------------------------

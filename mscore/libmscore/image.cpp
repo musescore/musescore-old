@@ -134,15 +134,6 @@ QString Image::path() const
       }
 
 //---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF Image::bbox() const
-      {
-      return QRectF(0.0, 0.0, sz.width(), sz.height());
-      }
-
-//---------------------------------------------------------
 //   editDrag
 //---------------------------------------------------------
 
@@ -347,5 +338,6 @@ void Image::layout()
 
       // in any case, adjust position relative to parent
       adjustReadPos();
+      setbbox(QRectF(0.0, 0.0, sz.width(), sz.height()));
       }
 

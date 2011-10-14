@@ -35,9 +35,9 @@ class ShadowNote : public Element {
       ShadowNote(Score*);
       virtual ShadowNote* clone() const { return new ShadowNote(*this); }
       virtual ElementType type() const  { return SHADOW_NOTE; }
+      virtual void layout();
       int line() const                  { return _line;   }
       void setLine(int n)               { _line = n;      }
-      virtual QRectF bbox() const;
       virtual void draw(Painter*) const;
       void setSym(Sym* s)               { sym = s;     }
       };
