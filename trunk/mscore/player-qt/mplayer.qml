@@ -46,6 +46,14 @@ Item {
 
             states: [
                   State {
+                        name: "ListView"
+                        when: screen.state == "ListView"
+                        PropertyChanges {
+                              target: toolBar
+                              visible: false
+                              }
+                        },
+                  State {
                         name: "ScoreView"
                         when: screen.state == "ScoreView"
                         PropertyChanges {
@@ -64,7 +72,8 @@ Item {
                               tempoButtonVisible: true
                               }
                         StateChangeScript {
-                              name: plainTimer.start()
+                              name: "timerScript"
+                              script: plainTimer.start()
                               }
                         },
                   State {
@@ -135,8 +144,7 @@ Item {
                     if (status == xmlScoreListModel.Ready, progress ==1.0) {
                         for(var i = 0; i < xmlScoreListModel.count; i++){
                           var o = xmlScoreListModel.get(i);
-                            print(o.id);
-                           scorelist.append({"title":o.title,
+                          scorelist.append({"title":o.title,
                                               "author": o.composer,
                                               "path": "http://static.musescore.com/"+o.id+"/"+o.secret+"/score.mscz",
                                               imagePath: "http://static.musescore.com/"+o.id+"/"+o.secret+"/thumb.png"
