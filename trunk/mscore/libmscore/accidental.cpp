@@ -87,7 +87,7 @@ Accidental::Accidental(Score* s)
 void Accidental::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
+            const QString& tag(e.tagName());
             bool isInt;
             int i = e.text().toInt(&isInt);
             if (tag == "bracket") {

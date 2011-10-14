@@ -20,8 +20,7 @@
 #include "androidaudio.h"
 #include "seq.h"
 
-#define FRAME_SIZE            1024
-#define NUMBER_OF_BUFFERS     6
+#define FRAME_SIZE 512
 
 //---------------------------------------------------------
 //   audioError
@@ -79,7 +78,7 @@ AndroidAudio::~AndroidAudio()
 // this callback handler is called every time a buffer finishes playing
 //---------------------------------------------------------
 
-void AndroidAudio::playerCallback(SLAndroidSimpleBufferQueueItf bq, void* context)
+void AndroidAudio::playerCallback(SLAndroidSimpleBufferQueueItf, void* context)
       {
       AndroidAudio* aa = (AndroidAudio*)context;
 
@@ -106,8 +105,6 @@ void AndroidAudio::playerCallback(SLAndroidSimpleBufferQueueItf bq, void* contex
 
 bool AndroidAudio::init()
       {
-      SLresult result;
-
       // create engine
       if (slCreateEngine(&engineObject, 0, NULL, 0, NULL, NULL) != SL_RESULT_SUCCESS) {
             qDebug("AndroidAudio: create engine failed\n");

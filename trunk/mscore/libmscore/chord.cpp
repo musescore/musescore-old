@@ -712,8 +712,8 @@ void Chord::readNote(QDomElement e, const QList<Tuplet*>& tuplets, QList<Slur*>*
             }
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             int i = val.toInt();
 
             if (tag == "StemDirection") {
@@ -778,8 +778,8 @@ void Chord::read(QDomElement e)
 void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets, QList<Slur*>* slurs)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             int i = val.toInt();
 
             if (tag == "Note") {

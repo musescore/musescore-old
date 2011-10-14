@@ -42,8 +42,6 @@ add_executable(mscoreplay
       seq.cpp
       )
 
-#      QtDeclarative
-#      /home/ws/qt/qt/lib/libQtDeclarative.so
 target_link_libraries(mscoreplay
       libmscore
       ${QT_LIBRARY_DIR}/libQtDeclarative.so

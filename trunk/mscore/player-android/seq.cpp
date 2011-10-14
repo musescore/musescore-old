@@ -82,6 +82,7 @@ bool Seq::init()
       synti->init(sampleRate);
       if (!driver->start())
             return false;
+      MScore::sampleRate = driver->sampleRate();
       running = true;
       return true;
       }

@@ -1881,8 +1881,8 @@ void Measure::read(QDomElement e, int staffIdx)
       Staff* staff = score()->staff(staffIdx);
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
 
             if (tag == "tick") {
                   score()->curTick = val.toInt();

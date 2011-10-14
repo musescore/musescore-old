@@ -669,8 +669,8 @@ void Element::writeProperties(Xml& xml, const Element* proto) const
 
 bool Element::readProperties(QDomElement e)
       {
-      QString tag(e.tagName());
-      QString val(e.text());
+      const QString& tag(e.tagName());
+      const QString& val(e.text());
       int i = val.toInt();
       float _spatium = spatium();
 

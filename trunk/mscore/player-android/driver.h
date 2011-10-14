@@ -40,12 +40,8 @@ class Driver {
       virtual bool init() = 0;
       virtual bool start() = 0;
       virtual bool stop() = 0;
-      virtual QList<QString> inputPorts() = 0;
       virtual int getState() = 0;
       virtual int sampleRate() const = 0;
-      virtual void registerPort(const QString& name, bool input) = 0;
-      virtual void unregisterPort(int) = 0;
-      virtual void putEvent(const Event&, unsigned /*framePos*/) {}
       };
 
 #endif

@@ -2,6 +2,7 @@ import QtQuick 1.0
 
 Item {
       id: toolbar
+      height: 40
 
       property alias button1Label: button1.text
 
@@ -21,30 +22,41 @@ Item {
             width: parent.width; height: parent.height + 14; y: -7
             }
 
-      Row {
-            anchors.right: parent.right; anchors.rightMargin: 32
-            y: 3; height: 32; spacing: 30
-            Button {
-                  id: button1
-                  width: 140; height: 32
-                  onClicked: toolbar.button1Clicked()
-                  }
-            Slider {
-                  y: 7;       // 32-3-16/2
-                  id: tempo
-                  minimum: 0.2
-                  maximum: 1.5
-                  value: 1.0
-                  onValueChanged: toolbar.tempoChanged()
-                  }
-            RewindButton {
-                  id: button3
-                  onClicked: toolbar.button3Clicked()
-                  }
-            PlayButton {
-                  id: button2
-                  onClicked: toolbar.button2Clicked()
-                  }
+      Button {
+            id: button1
+            width: 140
+            height: 32
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+            anchors.rightMargin: 10
+            anchors.verticalCenter: parent.verticalCenter
+            onClicked: toolbar.button1Clicked()
+            }
+      Slider {
+            id: tempo
+            y: 7;       // 32-3-16/2
+            anchors.left:  button1.right
+            anchors.right: button3.left
+            anchors.verticalCenter: parent.verticalCenter
+            minimum: 0.2
+            maximum: 1.5
+            value: 1.0
+            onValueChanged: toolbar.tempoChanged()
+            }
+      RewindButton {
+            id: button3
+            anchors.right: button2.left
+            anchors.leftMargin: 10
+            anchors.rightMargin: 10
+            anchors.verticalCenter: parent.verticalCenter
+            onClicked: toolbar.button3Clicked()
+            }
+      PlayButton {
+            id: button2
+            anchors.right: parent.right
+            anchors.rightMargin: 10
+            anchors.verticalCenter: parent.verticalCenter
+            onClicked: toolbar.button2Clicked()
             }
       }
 
