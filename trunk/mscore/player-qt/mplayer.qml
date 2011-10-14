@@ -24,6 +24,11 @@ Item {
       width: 854
       height: 480-38
 
+      property bool loading: xmlScoreListModel.status == XmlListModel.Loading
+
+      //let see if it works crossplatform
+      SystemPalette { id: activePalette; }
+
       Rectangle {
             id: background;
             anchors.fill: parent
@@ -52,6 +57,10 @@ Item {
                               target: toolBar
                               visible: false
                               }
+                        StateChangeScript {
+                               name: "timerScript"
+                               script: plainTimer.stop()
+                               }
                         },
                   State {
                         name: "ScoreView"
@@ -131,7 +140,11 @@ Item {
 
             XmlListModel {
                 id: xmlScoreListModel
-                source: "http://api.musescore.com/services/rest/score.xml?oauth_consumer_key="+apiKey
+
+                property string queryString : ""
+                property int page : 0;
+
+                source: "http://api.musescore.com/services/rest/score.xml?oauth_consumer_key="+apiKey+"&text="+queryString+"&page="+page
                 query: "/scores/score"
 
                 XmlRole { name: "title"; query: "title/string()" }
@@ -141,7 +154,7 @@ Item {
                 XmlRole { name: "id"; query: "id/string()" }
                 XmlRole { name: "secret"; query: "secret/string()" }
                 onStatusChanged: {
-                    if (status == xmlScoreListModel.Ready, progress ==1.0) {
+                    if (status == xmlScoreListModel.Ready, progress == 1.0) {
                         for(var i = 0; i < xmlScoreListModel.count; i++){
                           var o = xmlScoreListModel.get(i);
                           scorelist.append({"title":o.title,
@@ -163,8 +176,52 @@ Item {
                   height: parent.height
                   model: scorelist
                   delegate: Mobile.ListDelegate { }
-                  }
 
+                  footer: Rectangle {
+                        height: button.height+12
+                        width:parent.width
+                        color:"transparent"
+                        Rectangle {
+                              id:button
+                              state: loading?"loading":"normal"
+                              anchors.centerIn: parent
+                              radius: 5
+                              smooth: true
+                              border.width: 1
+                              border.color: "Black"
+                              height:textButton.height+20
+                              width:textButton.width+20
+
+                              gradient: Gradient {
+                                    GradientStop {
+                                          position: 0.0
+                                          color: !mouseArea.pressed ? activePalette.light : activePalette.button
+                                          }
+                                    GradientStop {
+                                          position: 1.0
+                                          color: !mouseArea.pressed ? activePalette.button : activePalette.dark
+                                          }
+                                    }
+
+                              Text {
+                                    id:textButton
+                                    anchors.centerIn: parent
+                                    color: activePalette.buttonText
+                                    text:loading?qsTr("Loading..."):qsTr("More")
+                                    }
+
+                            MouseArea {
+                                    id:mouseArea
+                                    anchors.fill: parent
+                                    acceptedButtons:Qt.LeftButton
+                                    onClicked: {
+                                          xmlScoreListModel.page++
+                                          xmlScoreListModel.reload()
+                                          }
+                                    }
+                              }
+                        }
+                  }
             ScoreView {
                   id: scoreView
                   parentWidth: screen.width
@@ -198,6 +255,12 @@ Item {
                   width: parent.width
                   opacity: .9
                   anchors.top: parent.top
+                  onSearch: {
+                        print(text);
+                        xmlScoreListModel.queryString = text
+                        scorelist.clear()
+                        xmlScoreListModel.reload()
+                        }
                   }
 
             Mobile.ToolBar {
@@ -209,8 +272,9 @@ Item {
 
                   button1Label: "MyScores"
                   onButton1Clicked: {
-                        if (screen.state == "ScoreView")
+                        if (screen.state == "ScoreView") {
                               screen.state = "ListView"
+                        }
                         else
                               screen.state = "ScoreView"
                         }

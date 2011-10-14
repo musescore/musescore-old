@@ -43,7 +43,6 @@ Item {
             onReturnPressed: {
                   if (searchBox.text !== '') {
                         titleBar.search(searchBox.text);
-                        searchBox.text = ""
                   }
             }
 
