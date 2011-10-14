@@ -46,7 +46,6 @@ class Bracket : public Element {
       void setLevel(int v)   { _column = v; }
       System* system() const { return (System*)parent(); }
 
-      virtual QRectF bbox() const;
       virtual void setHeight(qreal);
       virtual qreal width() const;
 

@@ -51,7 +51,6 @@ class Image : public BSymbol {
       virtual void layout();
 
       QString path() const;
-      virtual QRectF bbox() const;
       void setSize(QSizeF s)          { sz = s; }
       bool lockAspectRatio() const    { return _lockAspectRatio; }
       void setLockAspectRatio(bool v) { _lockAspectRatio = v; }

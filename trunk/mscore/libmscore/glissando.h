@@ -33,7 +33,6 @@ class Glissando : public Element {
       virtual Glissando* clone() const { return new Glissando(*this); }
       virtual ElementType type() const { return GLISSANDO; }
       virtual Space space() const;
-      virtual QRectF bbox() const;
 
       virtual void draw(Painter*) const;
       virtual void layout();
