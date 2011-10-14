@@ -18,9 +18,9 @@ Item {
       states: [
             State {
                   name: "Pressed"
-                  when: mouseRegion.pressed == true
+                  when: mouseRegion.pressed === true
                   PropertyChanges {
-                        target: pressed
+                        target: buttonImage
                         opacity: 1
                         }
                   PropertyChanges {
