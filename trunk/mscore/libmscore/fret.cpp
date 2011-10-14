@@ -321,7 +321,7 @@ void FretDiagram::read(QDomElement e)
       _fretOffset = 0;
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
+            const QString& tag(e.tagName());
             int val = e.text().toInt();
             if (tag == "strings")
                   _strings = val;
@@ -332,7 +332,7 @@ void FretDiagram::read(QDomElement e)
             else if (tag == "string") {
                   int no = e.attribute("no").toInt();
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        QString tag(ee.tagName());
+                        const QString& tag(ee.tagName());
                         int val = ee.text().toInt();
                         if (tag == "dot")
                               setDot(no, val);

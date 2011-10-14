@@ -349,8 +349,8 @@ void ChordDescription::read(QDomElement e)
       {
       id = e.attribute("id").toInt();
       for (e = e.firstChildElement(); !e.isNull();  e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             if (tag == "name")
                   names.append(val);
             else if (tag == "xml")
@@ -406,8 +406,8 @@ void ChordList::read(QDomElement e)
       {
       int fontIdx = 0;
       for (e = e.firstChildElement(); !e.isNull();  e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             if (tag == "font") {
                   ChordFont f;
                   f.family = e.attribute("family", "default");

@@ -104,7 +104,7 @@ void Glissando::read(QDomElement e)
       {
       _showText = false;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
+            const QString& tag(e.tagName());
             if (tag == "text") {
                   _showText = true;
                   _text = e.text();

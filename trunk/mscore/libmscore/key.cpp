@@ -204,7 +204,7 @@ void KeyList::write(Xml& xml, const char* name) const
 void KeyList::read(QDomElement e, Score* cs)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
+            const QString& tag(e.tagName());
             if (tag == "key") {
                   KeySigEvent ke;
                   int tick = e.attribute("tick", "0").toInt();

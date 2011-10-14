@@ -41,9 +41,11 @@ QRectF handleRect(const QPointF& pos)
 
 Measure* Score::tick2measure(int tick) const
       {
-      for (MeasureBase* mb = first(); mb; mb = mb->next()) {
-            if (mb->type() != MEASURE)
+      for (MeasureBase* mb = first(); mb;) {
+            if (mb->type() != MEASURE) {
+                  mb = mb->next();
                   continue;
+                  }
             Measure* m = static_cast<Measure*>(mb);
             int st = m->tick();
             int l  = m->ticks();
@@ -57,6 +59,7 @@ Measure* Score::tick2measure(int tick) const
                   }
             if (nmb == 0)
                   return m;
+            mb = nmb;
             }
       printf("-tick2measure %d not found\n", tick);
 //      if (debugMode) {
@@ -119,41 +122,32 @@ Segment* Score::tick2segment(int tick, bool first, SegmentTypes st) const
 
 Segment* Score::tick2segmentEnd(int track, int tick) const
       {
-//      printf("tick2segmentEnd(track=%d, tick=%d)", track, tick);
-      // loop over all measures
-      for (MeasureBase* mb = first(); mb; mb = mb->next()) {
-            if (mb->type() != MEASURE)
+      Measure* m = tick2measure(tick);
+      if (m == 0) {
+            printf("tick2segment(): not found tick %d\n", tick);
+            return 0;
+            }
+      // loop over all segments
+      for (Segment* segment = m->first(); segment; segment = segment->next()) {
+            Element* el = segment->element(track);
+            if (!el)
                   continue;
-            Measure* m = static_cast<Measure*>(mb);
-            int st = m->tick();
-            int l  = m->ticks();
-            if (tick > st && tick <= (st+l)) {
-                  // loop over all segments
-                  for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                        Element* el = segment->element(track);
-                        if (!el)
-                              continue;
-                        if (!el->isChordRest())
-                              continue;
-                        ChordRest* cr = static_cast<ChordRest*>(el);
-                        // TODO LVI: check if following is correct, see exceptions in
-                        // ExportMusicXml::chord() and ExportMusicXml::rest()
-                        int endTick = cr->tick() + cr->actualTicks();
-                        if (endTick < tick)
-                              continue; // not found yet
-                        else if (endTick == tick) {
-//                              printf(" found seg=%p at tick=%d\n", segment, cr->tick());
-                              return segment; // found it
-                              }
-                        else {
-                              // endTick > tick (beyond the tick we are looking for)
-//                              printf("\n");
-                              return 0;
-                              }
-                        }
+            if (!el->isChordRest())
+                  continue;
+            ChordRest* cr = static_cast<ChordRest*>(el);
+            // TODO LVI: check if following is correct, see exceptions in
+            // ExportMusicXml::chord() and ExportMusicXml::rest()
+            int endTick = cr->tick() + cr->actualTicks();
+            if (endTick < tick)
+                  continue; // not found yet
+            else if (endTick == tick) {
+                  return segment; // found it
+                  }
+            else {
+                  // endTick > tick (beyond the tick we are looking for)
+                  return 0;
                   }
             }
-//      printf("\n");
       return 0;
       }
 
@@ -189,11 +183,7 @@ int Score::nextSeg(int tick, int track)
             if (seg->element(track))
                   break;
             }
-      if (seg == 0) {
-//            printf("no seg found\n");
-            return -1;
-            }
-      return seg->tick();
+      return seg ? seg->tick() : -1;
       }
 
 //---------------------------------------------------------

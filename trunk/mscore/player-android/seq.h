@@ -113,7 +113,7 @@ class Seq : public QObject {
       void exit();
       void sendEvent(const SeqEvent&);
 
-      void process(unsigned, float*);
+      void process(unsigned, short*);
       void setScore(Score*);
       void setView(ScoreView*);
       void start();

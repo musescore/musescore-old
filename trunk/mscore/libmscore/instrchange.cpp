@@ -49,7 +49,7 @@ void InstrumentChange::write(Xml& xml) const
 void InstrumentChange::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
+            const QString& tag(e.tagName());
             if (tag == "Instrument")
                   _instrument.read(e);
             else if (!Text::readProperties(e))

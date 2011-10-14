@@ -127,9 +127,8 @@ void ElementLayout::writeProperties(Xml& xml) const
 
 bool ElementLayout::readProperties(QDomElement e)
       {
-      QString tag(e.tagName());
-      QString val(e.text());
-//      int i = val.toInt();
+      const QString& tag(e.tagName());
+      const QString& val(e.text());
 
       if (tag == "halign") {
             _align &= ~(ALIGN_HCENTER | ALIGN_RIGHT);

@@ -1032,7 +1032,6 @@ bool Score::read(QDomElement dScore)
                   }
             else if (tag == "PageList") {
                   for (QDomElement e = ee.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-                        const QString& tag(e.tagName());
                         if (e.tagName() == "Page") {
                               Page* page = new Page(this);
                               _pages.append(page);
@@ -1098,7 +1097,6 @@ bool Score::read(QDomElement dScore)
             //
             for (QDomElement ee = dScore; !ee.isNull(); ee = ee.nextSiblingElement()) {
                   const QString& tag(ee.tagName());
-                  const QString& val(ee.text());
                   if (   (tag == "HairPin")
                       || (tag == "Ottava")
                       || (tag == "TextLine")

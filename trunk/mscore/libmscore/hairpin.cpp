@@ -150,12 +150,12 @@ void Hairpin::read(QDomElement e)
       spannerSegments().clear();
       setId(e.attribute("id", "-1").toInt());
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+            const QString& tag(e.tagName());
+            int val = e.text().toInt();
             if (tag == "veloChange")
-                  _veloChange = val.toInt();
+                  _veloChange = val;
             else if (e.tagName() == "dynType")
-                  _dynType = DynamicType(e.text().toInt());
+                  _dynType = DynamicType(val);
             else if (!SLine::readProperties(e))
                   domError(e);
             }

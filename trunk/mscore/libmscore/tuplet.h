@@ -66,7 +66,6 @@ class Tuplet : public DurationElement {
       ~Tuplet();
       virtual Tuplet* clone() const    { return new Tuplet(*this); }
       virtual ElementType type() const { return TUPLET; }
-      virtual QRectF bbox() const;
       virtual void setTrack(int val);
 
       virtual void add(Element*);

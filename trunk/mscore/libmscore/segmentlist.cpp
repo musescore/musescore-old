@@ -35,9 +35,9 @@ SegmentList SegmentList::clone() const
 //   check
 //---------------------------------------------------------
 
+#ifndef NDEBUG
 void SegmentList::check()
       {
-#ifndef NDEBUG
       int n = 0;
       Segment* f = 0;
       Segment* l = 0;
@@ -60,8 +60,8 @@ void SegmentList::check()
             _size = n;
             abort();
             }
-#endif
       }
+#endif
 
 //---------------------------------------------------------
 //   insert

@@ -86,20 +86,20 @@ class Xml : public QTextStream {
       void dump(int len, const unsigned char* p);
 
       static QString xmlString(const QString&);
-      static void htmlToString(QDomElement, int level, QString*);
-      static QString htmlToString(QDomElement);
+      static void htmlToString(const QDomElement&, int level, QString*);
+      static QString htmlToString(const QDomElement&);
       };
 
-extern Placement readPlacement(QDomElement);
-extern ValueType readValueType(QDomElement);
-extern Fraction  readFraction(QDomElement);
+extern Placement readPlacement(const QDomElement&);
+extern ValueType readValueType(const QDomElement&);
+extern Fraction  readFraction(const QDomElement&);
 extern QString docName;
-extern QPointF readPoint(QDomElement);
-extern QSizeF readSize(QDomElement);
-extern QRectF readRectF(QDomElement);
-extern QColor readColor(QDomElement e);
-extern void domError(QDomElement node);
-extern void domNotImplemented(QDomElement node);
+extern QPointF readPoint(const QDomElement&);
+extern QSizeF readSize(const QDomElement&);
+extern QRectF readRectF(const QDomElement&);
+extern QColor readColor(const QDomElement&);
+extern void domError(const QDomElement&);
+extern void domNotImplemented(const QDomElement&);
 
 #endif
 

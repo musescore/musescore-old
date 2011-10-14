@@ -45,8 +45,8 @@ void Revision::read(QDomElement e)
       {
       _dateTime = QDateTime::currentDateTime();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             if (tag == "id")
                   _id = val;
             else if (tag == "diff")

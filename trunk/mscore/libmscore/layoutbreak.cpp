@@ -53,7 +53,7 @@ void LayoutBreak::write(Xml& xml) const
 void LayoutBreak::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
+            const QString& tag(e.tagName());
             if (tag == "pause")
                   _pause = e.text().toDouble();
             else if (tag == "startWithLongNames")

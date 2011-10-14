@@ -63,8 +63,8 @@ void Part::read(QDomElement e)
       {
       int rstaff = 0;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             if (tag == "Staff") {
                   Staff* staff = new Staff(_score, this, rstaff);
                   _score->staves().push_back(staff);

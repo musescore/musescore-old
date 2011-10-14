@@ -40,7 +40,6 @@ class TextLineSegment : public LineSegment {
       virtual ElementType type() const       { return TEXTLINE_SEGMENT; }
       TextLine* textLine() const             { return (TextLine*)spanner(); }
       virtual void draw(Painter*) const;
-      virtual QRectF bbox() const;
 
       virtual void layout();
       virtual void setSelected(bool f);

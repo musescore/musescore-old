@@ -377,7 +377,7 @@ void Staff::read(QDomElement e)
       {
       setSmall(false);
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
+            const QString& tag(e.tagName());
             int v = e.text().toInt();
             if (tag == "type") {
                   StaffType* st = score()->staffTypes().value(v);

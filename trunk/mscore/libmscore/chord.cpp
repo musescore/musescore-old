@@ -412,35 +412,6 @@ void Chord::remove(Element* e)
       }
 
 //---------------------------------------------------------
-//   bbox
-//    only used for debugging
-//---------------------------------------------------------
-
-QRectF Chord::bbox() const
-      {
-      QRectF _bbox;
-      foreach (const Note* n, _notes)
-            _bbox |= n->bbox().translated(n->pos());
-      foreach(const LedgerLine* l, _ledgerLines)
-            _bbox |= l->bbox().translated(l->pos());
-      foreach(Articulation* a, articulations)
-            _bbox |= a->bbox().translated(a->pos());
-      if (_hook)
-            _bbox |= _hook->bbox().translated(_hook->pos());
-      if (_stem)
-            _bbox |= _stem->bbox().translated(_stem->pos());
-      if (_arpeggio)
-            _bbox |= _arpeggio->bbox().translated(_arpeggio->pos());
-      if (_glissando)
-            _bbox |= _glissando->bbox().translated(_glissando->pos());
-      if (_stemSlash)
-            _bbox |= _stemSlash->bbox().translated(_stemSlash->pos());
-      if (_tremolo)
-            _bbox |= _tremolo->bbox().translated(_tremolo->pos());
-      return _bbox;
-      }
-
-//---------------------------------------------------------
 //   addLedgerLine
 ///   Add a ledger line to a chord.
 ///   \arg x          center of note head
@@ -1500,6 +1471,26 @@ void Chord::layout()
             _space.rLw() *= m;
             _space.rRw() *= m;
             }
+      QRectF _bbox;
+      foreach (const Note* n, _notes)
+            _bbox |= n->bbox().translated(n->pos());
+      foreach(const LedgerLine* l, _ledgerLines)
+            _bbox |= l->bbox().translated(l->pos());
+      foreach(Articulation* a, articulations)
+            _bbox |= a->bbox().translated(a->pos());
+      if (_hook)
+            _bbox |= _hook->bbox().translated(_hook->pos());
+      if (_stem)
+            _bbox |= _stem->bbox().translated(_stem->pos());
+      if (_arpeggio)
+            _bbox |= _arpeggio->bbox().translated(_arpeggio->pos());
+      if (_glissando)
+            _bbox |= _glissando->bbox().translated(_glissando->pos());
+      if (_stemSlash)
+            _bbox |= _stemSlash->bbox().translated(_stemSlash->pos());
+      if (_tremolo)
+            _bbox |= _tremolo->bbox().translated(_tremolo->pos());
+      setbbox(_bbox);
       }
 
 //---------------------------------------------------------

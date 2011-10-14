@@ -1518,7 +1518,7 @@ void Note::setString(int val)
 
 void Note::setHeadGroup(int val)
       {
-      assert(val >= 0 && val < HEAD_GROUPS);
+      Q_ASSERT(val >= 0 && val < HEAD_GROUPS);
       _headGroup = val;
       }
 

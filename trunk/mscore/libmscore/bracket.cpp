@@ -152,8 +152,8 @@ void Bracket::read(QDomElement e)
             fprintf(stderr, "unknown brace type <%s>\n", t.toLatin1().data());
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             if (tag == "level")
                   _column = val.toInt();
             else if (!Element::readProperties(e))

@@ -327,16 +327,13 @@ void Pos::read(QDomNode node)
       {
       sn = -1;
 
-      QDomElement e = node.toElement();
-      QString s;
-      s = e.attribute("tick");
-      if (!s.isEmpty()) {
-            _tick = s.toInt();
+      const QDomElement& e = node.toElement();
+      if (e.hasAttribute("tick")) {
+            _tick = e.attribute("tick").toInt();
             _type = TICKS;
             }
-      s = e.attribute("frame");
-      if (!s.isEmpty()) {
-            _frame = s.toInt();
+      if (e.hasAttribute("frame")) {
+            _frame = e.attribute("frame").toInt();
             _type = FRAMES;
             }
       }
@@ -411,21 +408,18 @@ void PosLen::write(Xml& xml, const char* name) const
 
 void PosLen::read(QDomNode node)
       {
-      QDomElement e = node.toElement();
+      const QDomElement& e = node.toElement();
       QString s;
-      s = e.attribute("tick");
-      if (!s.isEmpty()) {
+      if (e.hasAttribute("tick")) {
             setType(TICKS);
-            setTick(s.toInt());
+            setTick(e.attribute("tick").toInt());
             }
-      s = e.attribute("sample");
-      if (!s.isEmpty()) {
+      if (e.hasAttribute("sample")) {
             setType(FRAMES);
-            setFrame(s.toInt());
+            setFrame(e.attribute("sample").toInt());
             }
-      s = e.attribute("len");
-      if (!s.isEmpty()) {
-            int n = s.toInt();
+      if (e.hasAttribute("len")) {
+            int n = e.attribute("len").toInt();
             if (type() == TICKS)
                   setLenTick(n);
             else

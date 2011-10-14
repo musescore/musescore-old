@@ -300,13 +300,13 @@ void KeySig::read(QDomElement e)
       _sig = KeySigEvent();   // invalidate _sig
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
+            const QString& tag(e.tagName());
             int val = e.text().toInt();
             if (tag == "KeySym") {
                   KeySym* ks = new KeySym;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        QString tag(ee.tagName());
-                        QString val(ee.text());
+                        const QString& tag(ee.tagName());
+                        const QString& val(ee.text());
                         if (tag == "sym")
                               ks->sym = val.toInt();
                         else if (tag == "pos")

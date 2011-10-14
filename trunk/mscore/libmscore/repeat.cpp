@@ -190,7 +190,7 @@ void Marker::read(QDomElement e)
       {
       MarkerType mt = MARKER_SEGNO;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
+            const QString& tag(e.tagName());
             if (tag == "label") {
                   setLabel(e.text());
                   mt = markerType(e.text());
@@ -334,7 +334,7 @@ int Jump::jumpType() const
 void Jump::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
+            const QString& tag(e.tagName());
             if (tag == "jumpTo")
                   _jumpTo = e.text();
             else if (tag == "playUntil")

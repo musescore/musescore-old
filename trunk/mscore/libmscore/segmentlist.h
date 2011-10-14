@@ -29,8 +29,11 @@ class SegmentList {
    public:
       SegmentList()                        { clear(); }
       void clear()                         { _first = _last = 0; _size = 0; }
+#ifndef NDEBUG
       void check();
-
+#else
+      void check() {}
+#endif
       SegmentList clone() const;
       int size() const                     { return _size;        }
 

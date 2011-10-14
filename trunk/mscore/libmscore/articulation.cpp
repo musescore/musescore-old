@@ -199,8 +199,8 @@ void Articulation::read(QDomElement e)
       {
       setSubtype(0);    // default
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             if (tag == "idx")                         // obsolete
                   setSubtype(val.toInt());
             else if (tag == "channel")
