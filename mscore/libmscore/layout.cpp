@@ -593,7 +593,7 @@ void Score::layoutStage3()
 
 void Score::doLayout()
       {
-printf("doLayout\n");
+qDebug("doLayout\n");
       {
       QWriteLocker locker(&_layoutLock);
 
@@ -716,7 +716,7 @@ printf("doLayout\n");
       }     // unlock mutex
       foreach(MuseScoreView* v, viewer)
             v->layoutChanged();
-printf("-----\n");
+qDebug("  layout done\n");
       }
 
 //---------------------------------------------------------

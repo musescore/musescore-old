@@ -11,16 +11,13 @@
 //  the file LICENSE.GPL
 //=============================================================================
 
-import QtQuick 1.0
-// import Qt.labs.gestures 1.0
+import QtQuick 1.1
 import MuseScore 1.0
 import "mobile" as Mobile
 
 Item {
       id: screen
       property string state: "ListView"
-//      width: 854
-//      height: 480
 
       Rectangle {
             id: background;
@@ -35,7 +32,36 @@ Item {
                   opacity: 0.3
                   }
 
+            Timer {
+                  id: plainTimer
+                  interval: 2000
+                  repeat: false
+                  onTriggered: {
+                        if (screen.state == "ScoreView")
+                              screen.state = "PlainScoreView";
+                        }
+                  }
+
             states: [
+                  State {
+                        name: "ListView"
+                        when: screen.state == "ListView"
+                        PropertyChanges {
+                              target: scoreView
+                              x: -width;
+                              }
+                        PropertyChanges {
+                              target: scoreListView
+                              x: 0
+                              }
+                        PropertyChanges {
+                              target: toolBar
+                              visible: false
+                              }
+                        StateChangeScript {
+                              name: plainTimer.stop()
+                              }
+                        },
                   State {
                         name: "ScoreView"
                         when: screen.state == "ScoreView"
@@ -49,10 +75,10 @@ Item {
                               }
                         PropertyChanges {
                               target: toolBar
-                              button1Visible: true
-                              button2Visible: true
-                              button3Visible: true
-                              tempoButtonVisible: true
+                              visible: true
+                              }
+                        StateChangeScript {
+                              name: plainTimer.start()
                               }
                         },
                   State {
@@ -129,7 +155,9 @@ Item {
                         anchors.fill: parent
                         onClicked: {
                               var idx = scoreListView.indexAt(mouseX, mouseY)
+                              console.log("list clicked");
                               if (idx >= 0) {
+                                    console.log(scorelist.get(idx).path);
                                     scoreView.setScore(scorelist.get(idx).path)
                                     screen.state = "ScoreView"
                                     }
@@ -145,15 +173,19 @@ Item {
                   MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                              if (mouseX > parent.width * .6)
+                              if (mouseX > parent.width * .8)
                                     scoreView.nextPage();
-                              else if (mouseX < parent.width * .3)
+                              else if (mouseX < parent.width * .2)
                                     scoreView.prevPage();
                               else {
-                                    if (screen.state == "ScoreView")
+                                    if (screen.state == "ScoreView") {
                                           screen.state = "PlainScoreView"
-                                    else
+                                          plainTimer.stop()
+                                          }
+                                    else {
                                           screen.state = "ScoreView";
+                                          plainTimer.start()
+                                          }
                                     }
                               }
                         onPressAndHold: {
@@ -172,7 +204,7 @@ Item {
 
             Mobile.ToolBar {
                   id: toolBar
-                  height: 40;
+                  height: 60;
                   width: parent.width;
                   opacity: .9
                   anchors.bottom: parent.bottom
@@ -189,12 +221,9 @@ Item {
                         }
                   onTempoChanged: {
                         scoreView.setTempo(tempo)
+                        plainTimer.restart()
                         }
                   onButton2Clicked: scoreView.play();
-                  button1Visible: false
-                  button2Visible: false
-                  button3Visible: false
-                  tempoButtonVisible: false
                   }
             }
       }

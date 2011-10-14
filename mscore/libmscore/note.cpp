@@ -666,8 +666,8 @@ void Note::read(QDomElement e)
       bool hasAccidental = false;                     // used for userAccidental backward compatibility
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             int i = val.toInt();
 
             if (tag == "pitch") {
@@ -866,7 +866,7 @@ void Note::read(QDomElement e)
                   }
             else if (tag == "Events") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        QString tag(ee.tagName());
+                        const QString& tag(ee.tagName());
                         if (tag == "Event") {
                               NoteEvent* ne = new NoteEvent;
                               ne->read(ee);

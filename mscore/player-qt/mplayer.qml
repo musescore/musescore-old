@@ -37,6 +37,13 @@ Item {
                   opacity: 0.3
                   }
 
+            Timer {
+                  id: plainTimer
+                  interval: 2000
+                  repeat: false
+                  onTriggered: screen.state = "PlainScoreView";
+                  }
+
             states: [
                   State {
                         name: "ScoreView"
@@ -55,6 +62,9 @@ Item {
                               button2Visible: true
                               button3Visible: true
                               tempoButtonVisible: true
+                              }
+                        StateChangeScript {
+                              name: plainTimer.start()
                               }
                         },
                   State {
@@ -162,8 +172,10 @@ Item {
                               else {
                                     if (screen.state == "ScoreView")
                                           screen.state = "PlainScoreView"
-                                    else
-                                          screen.state = "ScoreView";
+                                    else {
+                                          screen.state = "ScoreView"
+                                          plainTimer.start()
+                                          }
                                     }
                               }
                         onPressAndHold: {
@@ -199,6 +211,7 @@ Item {
                         }
                   onTempoChanged: {
                         scoreView.setTempo(tempo)
+                        plainTimer.restart()
                         }
                   onButton2Clicked: scoreView.play();
                   button1Visible: false

@@ -89,7 +89,7 @@ void Xml::valueTypeTag(const char* name, ValueType t)
 
 Placement readPlacement(QDomElement e)
       {
-      QString s(e.text());
+      const QString& s(e.text());
       if (s == "auto" || s == "0")
             return PLACE_AUTO;
       if (s == "above" || s == "1")
@@ -108,7 +108,7 @@ Placement readPlacement(QDomElement e)
 
 ValueType readValueType(QDomElement e)
       {
-      QString s(e.text());
+      const QString& s(e.text());
       if (s == "offset")
             return OFFSET_VAL;
       if (s == "user")

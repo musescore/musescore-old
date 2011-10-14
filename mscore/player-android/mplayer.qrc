@@ -24,13 +24,13 @@
 
       <file>mplayer.qml</file>
 
-      <file alias="mobile/ToolBar.qml">../player-qt/mobile/ToolBar.qml</file>
-      <file alias="mobile/Button.qml">../player-qt/mobile/Button.qml</file>
-      <file alias="mobile/RewindButton.qml">../player-qt/mobile/RewindButton.qml</file>
-      <file alias="mobile/PlayButton.qml">../player-qt/mobile/PlayButton.qml</file>
-      <file alias="mobile/ListDelegate.qml">../player-qt/mobile/ListDelegate.qml</file>
-      <file alias="mobile/TitleBar.qml">../player-qt/mobile/TitleBar.qml</file>
-      <file alias="mobile/Slider.qml">../player-qt/mobile/Slider.qml</file>
+      <file>mobile/ToolBar.qml</file>
+      <file>mobile/Button.qml</file>
+      <file>mobile/RewindButton.qml</file>
+      <file>mobile/PlayButton.qml</file>
+      <file>mobile/ListDelegate.qml</file>
+      <file>mobile/TitleBar.qml</file>
+      <file>mobile/Slider.qml</file>
 
       <file alias="mobile/images/titlebar.sci">../player-qt/mobile/images/titlebar.sci</file>
       <file alias="mobile/images/titlebar.png">../player-qt/mobile/images/titlebar.png</file>

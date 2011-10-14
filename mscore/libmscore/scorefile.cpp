@@ -165,7 +165,7 @@ void Score::readStaff(QDomElement e)
       curTrack        = staff * VOICES;
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
+            const QString& tag(e.tagName());
 
             if (tag == "Measure") {
                   Measure* measure = 0;
@@ -610,8 +610,8 @@ bool Score::loadCompressedMsc(QString name)
                         continue;
                         }
                   for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                        QString tag(eee.tagName());
-                        QString val(eee.text());
+                        const QString& tag(eee.tagName());
+                        const QString& val(eee.text());
 
                         if (tag == "rootfile") {
                               if (rootfile.isEmpty())
@@ -646,6 +646,7 @@ bool Score::loadCompressedMsc(QString name)
       dbuf.open(QIODevice::WriteOnly);
       uz.extractFile(rootfile, &dbuf);
 
+qDebug("after file loading=====\n");
       QDomDocument doc;
       if (!doc.setContent(dbuf.data(), false, &err, &line, &column)) {
             QString col, ln;
@@ -655,6 +656,7 @@ bool Score::loadCompressedMsc(QString name)
             printf("error: %s\n", qPrintable(error));
             return false;
             }
+qDebug("after xml parsing=====\n");
       dbuf.close();
       docName = info.completeBaseName();
       bool retval = read1(doc.documentElement());
@@ -781,7 +783,7 @@ bool Score::read1(QDomElement e)
       _elinks.clear();
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "museScore") {
-                  QString version = e.attribute("version");
+                  const QString& version = e.attribute("version");
                   QStringList sl = version.split('.');
                   _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
                   if (_mscVersion > MSCVERSION) {
@@ -796,8 +798,8 @@ bool Score::read1(QDomElement e)
                         return rv;
                         }
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        QString tag(ee.tagName());
-                        QString val(ee.text());
+                        const QString& tag = ee.tagName();
+                        const QString& val = ee.text();
                         if (tag == "programVersion")
                               parseVersion(val);
                         else if (tag == "programRevision")
@@ -840,8 +842,8 @@ bool Score::read(QDomElement dScore)
       dScore = dScore.firstChildElement();
       for (QDomElement ee = dScore; !ee.isNull(); ee = ee.nextSiblingElement()) {
             curTrack = -1;
-            QString tag(ee.tagName());
-            QString val(ee.text());
+            const QString& tag(ee.tagName());
+            const QString& val(ee.text());
             int i = val.toInt();
             if (tag == "Staff")
                   readStaff(ee);
@@ -893,7 +895,7 @@ bool Score::read(QDomElement dScore)
                   _showOmr = i;
             else if (tag == "LayerTag") {
                   int id = ee.attribute("id").toInt();
-                  QString tag = ee.attribute("tag");
+                  const QString& tag = ee.attribute("tag");
                   if (id >= 0 && id < 32) {
                         _layerTags[id] = tag;
                         _layerTagComments[id] = val;
@@ -1030,7 +1032,7 @@ bool Score::read(QDomElement dScore)
                   }
             else if (tag == "PageList") {
                   for (QDomElement e = ee.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-                        QString tag(e.tagName());
+                        const QString& tag(e.tagName());
                         if (e.tagName() == "Page") {
                               Page* page = new Page(this);
                               _pages.append(page);
@@ -1095,8 +1097,8 @@ bool Score::read(QDomElement dScore)
             // scan spanner in a II. pass
             //
             for (QDomElement ee = dScore; !ee.isNull(); ee = ee.nextSiblingElement()) {
-                  QString tag(ee.tagName());
-                  QString val(ee.text());
+                  const QString& tag(ee.tagName());
+                  const QString& val(ee.text());
                   if (   (tag == "HairPin")
                       || (tag == "Ottava")
                       || (tag == "TextLine")
@@ -1320,8 +1322,8 @@ QByteArray Score::readCompressedToBuffer()
                         continue;
                         }
                   for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                        QString tag(eee.tagName());
-                        QString val(eee.text());
+                        const QString& tag(eee.tagName());
+                        const QString& val(eee.text());
 
                         if (tag == "rootfile") {
                               if (rootfile.isEmpty())

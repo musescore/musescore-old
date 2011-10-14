@@ -84,6 +84,7 @@ void ScoreView::setScore(const QString& name)
       {
       if (seq->isPlaying())
             seq->stop();
+qDebug("===========setScore\n");
       _currentPage = 0;
       delete score;
 
@@ -128,7 +129,9 @@ void ScoreView::setScore(const QString& name)
             }
 
       score->updateNotes();
+qDebug("===========before layout\n");
       score->doLayout();
+qDebug("===========after layout\n");
       score->setPrinting(true);                 // render only printable elements
 
       seq->setScore(score);
@@ -384,7 +387,7 @@ void ScoreView::moveCursor(int tick)
 
 bool ScoreView::sceneEvent(QEvent* event)
       {
-qDebug("sceneEvent %d\n", int(event->type()));
+// qDebug("sceneEvent %d\n", int(event->type()));
       if (event->type() == QEvent::Gesture) {
 qDebug("gesture\n");
             QGestureEvent* ge = static_cast<QGestureEvent*>(event);
@@ -433,7 +436,7 @@ void ScoreView::seek(qreal x, qreal y)
 
 QVariant ScoreView::itemChange(GraphicsItemChange change, const QVariant& v)
       {
-      qDebug("itemChange %d\n", int(change));
+//      qDebug("itemChange %d\n", int(change));
       return QDeclarativeItem::itemChange(change, v);
       }
 

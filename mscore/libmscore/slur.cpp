@@ -337,7 +337,7 @@ void SlurSegment::write(Xml& xml, int no) const
 void SlurSegment::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
+            const QString& tag(e.tagName());
             if (tag == "o1")
                   ups[GRIP_START].off = readPoint(e);
             else if (tag == "o2")
@@ -834,8 +834,8 @@ void SlurTie::writeProperties(Xml& xml) const
 
 bool SlurTie::readProperties(QDomElement e)
       {
-      QString tag(e.tagName());
-      QString val(e.text());
+      const QString& tag(e.tagName());
+      const QString& val(e.text());
 
       if (tag == "SlurSegment") {
             int idx = e.attribute("no", 0).toInt();
@@ -944,8 +944,8 @@ void Slur::read(QDomElement e)
       setTrack(0);      // set staff
       setId(e.attribute("id").toInt());
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             int i = val.toInt();
 //            if (tag == "tick2")
 //                  _tick2 = score()->fileDivision(i);
@@ -1245,8 +1245,6 @@ void Tie::write(Xml& xml) const
 void Tie::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
             if (Element::readProperties(e))
                   ;
             else if (SlurTie::readProperties(e))

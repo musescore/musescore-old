@@ -59,18 +59,8 @@ class AndroidAudio : public Driver {
       virtual bool init();
       virtual bool start();
       virtual bool stop();
-      virtual QList<QString> inputPorts() { return QList<QString>(); }
-      virtual int getState()   { return 0; }
+      virtual int getState()         { return 0; }
       virtual int sampleRate() const { return _sampleRate; }
-      virtual void registerPort(const QString& name, bool input) {}
-      virtual void unregisterPort(int) {}
-
-      void connect(void*, void*)            {}
-      void disconnect(void* src, void* dst) {}
-      float* getLBuffer(long n);
-      float* getRBuffer(long n);
-
-      virtual bool isRealtime() const   { return false; }
       };
 
 #endif

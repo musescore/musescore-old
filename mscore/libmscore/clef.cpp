@@ -334,8 +334,8 @@ void Clef::setSmall(bool val)
 void Clef::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             if (tag == "subtype")
                   setClefType(clefType(val));
             else if (tag == "concertClefType")

@@ -2,15 +2,16 @@ import QtQuick 1.0
 
 Item {
       id: slider
-      width: 400
-      height: 16
+      height: 25
 
       // value is read/write.
       property real value: 1
       onValueChanged: updatePos()
+
       property real maximum: 1
       property real minimum: 1
       property int xMax: width - handle.width - 4
+
       onXMaxChanged:    updatePos()
       onMinimumChanged: updatePos()
 
@@ -46,17 +47,17 @@ Item {
                   GradientStop { position: 0.0; color: "lightgray" }
                   GradientStop { position: 1.0; color: "gray" }
                   }
+            }
 
-            MouseArea {
-                  id: mouse
-                  anchors.fill: parent
-                  drag.target: parent
-                  drag.axis: Drag.XAxis
-                  drag.minimumX: 2
-                  drag.maximumX: slider.xMax+2
-                  onPositionChanged: {
-                        value = (maximum - minimum) * (handle.x-2) / slider.xMax + minimum
-                        }
+      MouseArea {
+            id: mouse
+            anchors.fill: parent
+            drag.target: handle
+            drag.axis: Drag.XAxis
+            drag.minimumX: 2
+            drag.maximumX: slider.xMax+2
+            onPositionChanged: {
+                  value = (maximum - minimum) * (handle.x-2) / slider.xMax + minimum
                   }
             }
       }
