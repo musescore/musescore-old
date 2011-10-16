@@ -1,3 +1,5 @@
+16.oct (oct)
+      - fix #13107: bww import: missing bagpipe doublings
 9.oct (lv)
       - fix #12382: [MusicXML] Key Signature for 2 Staves
       - fix crash reading MusicXML file with different key signatures on the first staff and second staff

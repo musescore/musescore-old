@@ -27,6 +27,7 @@
  Definition of class Lexer
  */
 
+#include <QtCore/QMap>
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtCore/QTextStream>
@@ -51,12 +52,13 @@ namespace Bww {
     int symLineNumber() const { return lineNumber; }
   private:
     void categorizeWord(QString word);
-    QTextStream in;             ///< Input stream
-    QString line;               ///< The current line
-    int lineNumber;             ///< The current line number (zero-based)
-    QStringList list;           ///< Unprocessed words
-    Symbol type;                ///< Last symbol type
-    QString value;              ///< Last symbol value
+    QTextStream in;                     ///< Input stream
+    QString line;                       ///< The current line
+    int lineNumber;                     ///< The current line number (zero-based)
+    QStringList list;                   ///< Unprocessed words
+    Symbol type;                        ///< Last symbol type
+    QString value;                      ///< Last symbol value
+    QMap<QString, QString> graceMap;    ///< Map bww embellishments to separate grace notes
   };
 
 } // namespace Bww

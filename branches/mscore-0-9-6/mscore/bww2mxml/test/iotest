@@ -29,6 +29,7 @@ rwtest() {
 
 rwtestAll() {
       rwtest testBeams.bww
+      rwtest testDoublings.bww
       rwtest testDuration.bww
       rwtest testGraces.bww
       rwtest testHello.bww
