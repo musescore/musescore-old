@@ -129,7 +129,7 @@ namespace Bww {
     graceMap["ltstd"]  = "HA D C";
     graceMap["tste"]   = "HA E LA";
     graceMap["tstf"]   = "HA F E";
-    graceMap["tsthg"]  = "HA F E";
+    graceMap["tsthg"]  = "HA HG F";
 
     graceMap["hstla"]  = "LA LG";
     graceMap["hstb"]   = "B LG";
@@ -138,7 +138,7 @@ namespace Bww {
     graceMap["lhstd"]  = "D C";
     graceMap["hste"]   = "E LA";
     graceMap["hstf"]   = "F E";
-    graceMap["hsthg"]  = "F E";
+    graceMap["hsthg"]  = "HG F";
 
     // Regular Grips
     graceMap["grp"]  = "LG D LG";
@@ -189,7 +189,7 @@ namespace Bww {
     // Light, Heavy and Half D Throws
     graceMap["thrd"]    = "LG D C";
     graceMap["hvthrd"]  = "LG D LG C";
-    graceMap["thtrd"]   = "D C";
+    graceMap["hthrd"]   = "D C";
     graceMap["hhvthrd"] = "D LG C";
 
     // Regular, Thumb Grace Note and Half Peles
@@ -256,6 +256,7 @@ namespace Bww {
     graceMap["hst2e"]    = "E LA E LA";
     graceMap["hst2f"]    = "F E F E";
     graceMap["hst2hg"]   = "HG F HG F";
+    graceMap["hst2ha"]   = "HA HG HA HG";
 
     // Regular Triple Strikes
     graceMap["st3la"]  = "LG LA LG LA LG";
@@ -294,6 +295,7 @@ namespace Bww {
     graceMap["hst3e"]    = "E LA E LA E LA";
     graceMap["hst3f"]    = "F E F E F E";
     graceMap["hst3hg"]   = "HG F HG F HG F";
+    graceMap["hst3ha"]   = "HA HG HA HG HA HG";
 
     // Double Grace notes
     graceMap["dlg"] = "D LG";

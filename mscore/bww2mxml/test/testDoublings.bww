@@ -29,9 +29,9 @@ HA_4	hstla LA_4	hstb B_4	hstc C_4	hstd D_4	lhstd D_4	hste E_4	hstf F_4	hsthg HG_
 LA_4	grp E_4	LG_4	hgrp E_4	D_4	grpb E_4	D_4	grpb LA_4	!t
 
 & sharpf sharpc	
-E_4	ggrpla LA_4	ggrpb B_4	ggrpc C_4	ggrpd D_4	lggrpd D_4	ggrpe E_4	ggrpf F_4	!t
-F_4	tgrpla LA_4	tgrpb B_4	tgrpc C_4	tgrpd D_4	ltgrpd D_4	tgrpe E_4	tgrpf F_4	tgrphg HG_4	!t
-HA_4	hgrpla LA_4	hgrpb B_4	hgrpc C_4	hgrpd D_4	lhgrpd D_4	hgrpe E_4	hgrpf F_4	hgrphg HG_4	!t
+E_4	ggrpla LA_4	ggrpb B_4	ggrpc C_4	ggrpd D_4	ggrpdb D_4	ggrpe E_4	ggrpf F_4	!t
+F_4	tgrpla LA_4	tgrpb B_4	tgrpc C_4	tgrpd D_4	tgrpdb D_4	tgrpe E_4	tgrpf F_4	tgrphg HG_4	!t
+HA_4	hgrpla LA_4	hgrpb B_4	hgrpc C_4	hgrpd D_4	hgrpdb D_4	hgrpe E_4	hgrpf F_4	hgrphg HG_4	hgrpha HA_4	!t
 
 & sharpf sharpc	
 C_4	tar LA_4	D_4	tarb LA_4	LG_4	htar LA_4	C_4	bubly B_4	LG_4	hbubly B_4	!t
@@ -53,7 +53,7 @@ LA_4	st2la LA_4	B_4	st2b B_4	C_4	st2c C_4	D_4	st2d D_4	D_4	lst2d D_4	E_4	st2e E_
 & sharpf sharpc	
 E_4	gst2la LA_4	gst2b B_4	gst2c C_4	gst2d D_4	lgst2d D_4	gst2e E_4	gst2f F_4	!t
 HG_4	tst2la LA_4	tst2b B_4	tst2c C_4	tst2d D_4	ltst2d D_4	tst2e E_4	tst2f F_4	tst2hg HG_4	!t
-HA_4	hst2la LA_4	hst2b B_4	hst2c C_4	hst2d D_4	lhst2d D_4	hst2e E_4	hst2f F_4	hst2hg HG_4	!t
+HA_4	hst2la LA_4	hst2b B_4	hst2c C_4	hst2d D_4	lhst2d D_4	hst2e E_4	hst2f F_4	hst2hg HG_4	hst2ha HA_4	!t
 
 & sharpf sharpc	
 LA_4	st3la LA_4	B_4	st3b B_4	C_4	st3c C_4	D_4	st3d D_4	D_4	lst3d D_4	E_4	st3e E_4	F_4	st3f F_4	HG_4	st3hg HG_4	HA_4	st3ha HA_4	!t
@@ -61,7 +61,7 @@ LA_4	st3la LA_4	B_4	st3b B_4	C_4	st3c C_4	D_4	st3d D_4	D_4	lst3d D_4	E_4	st3e E_
 & sharpf sharpc	
 E_4	gst3la LA_4	gst3b B_4	gst3c C_4	gst3d D_4	lgst3d D_4	gst3e E_4	gst3f F_4	!t
 HG_4	tst3la LA_4	tst3b B_4	tst3c C_4	tst3d D_4	ltst3d D_4	tst3e E_4	tst3f F_4	tst3hg HG_4	!t
-HA_4	hst3la LA_4	hst3b B_4	hst3c C_4	hst3d D_4	lhst3d D_4	hst3e E_4	hst3f F_4	hst3hg HG_4	!t
+HA_4	hst3la LA_4	hst3b B_4	hst3c C_4	hst3d D_4	lhst3d D_4	hst3e E_4	hst3f F_4	hst3hg HG_4	hst3ha HA_4	!t
 
 dlg LA_4	dla B_4	db C_4	dc D_4	elg LA_4	ela B_4	eb C_4	ec D_4	ed E_4	!t
 flg LA_4	fla B_4	fb C_4	fc D_4	fd E_4	fe F_4	!t
