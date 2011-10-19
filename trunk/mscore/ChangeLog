@@ -1,3 +1,5 @@
+19.oct (la)
+      - fix #13183: [MusicXML] Wrong import of right barline
 12.oct (ws)
       - add framework for android player
 8.oct (lv)

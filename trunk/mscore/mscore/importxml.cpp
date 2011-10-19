@@ -1538,8 +1538,12 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                         else if (barLine->subtype() == END_REPEAT) {
                               measure->setRepeatFlags(RepeatEnd);
                               }
-                        else
-                              measure->setEndBarLineType(barLine->barLineType(), false, visible);
+                        else {
+                              if (loc == "right")
+                                    measure->setEndBarLineType(barLine->barLineType(), false, visible);
+                              else if (measure->prevMeasure())
+                                    measure->prevMeasure()->setEndBarLineType(barLine->barLineType(), false, visible);
+                              }
                         }
                   if (!(endingNumber.isEmpty() && endingType.isEmpty())) {
                         if (endingNumber.isEmpty())
