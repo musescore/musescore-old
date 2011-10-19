@@ -2453,10 +2453,14 @@ void MuseScore::changeState(ScoreState val)
             else if (strcmp(s->xml, "synth-control") == 0) {
                   Driver* driver = seq ? seq->getDriver() : 0;
                   // s->action->setEnabled(driver && driver->getSynth());
+                  if (debugMode)
+                        printf("disable synth control\n");
                   s->action->setEnabled(driver);
                   }
             else {
                   bool enable = s->state & val;
+                  if (debugMode)
+                        printf("disable %s\n", s->xml);
                   s->action->setEnabled(enable);
                   }
             }
