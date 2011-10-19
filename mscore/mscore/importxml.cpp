@@ -1477,8 +1477,12 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                         else if (barLine->subtype() == END_REPEAT) {
                               measure->setRepeatFlags(RepeatEnd);
                               }
-                        else
-                              measure->setEndBarLineType(barLine->subtype(), false, visible);
+                        else {
+                              if (loc == "right")
+                                    measure->setEndBarLineType(barLine->subtype(), false, visible);
+                              else if (measure->prevMeasure())
+                                    measure->prevMeasure()->setEndBarLineType(barLine->subtype(), false, visible);
+                              }
                         }
                   if (!(endingNumber.isEmpty() && endingType.isEmpty())) {
                         if (endingNumber.isEmpty())
@@ -1738,6 +1742,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
       qreal yoffset = 0.0; // actually this is default-y
       qreal xoffset = 0.0;
       bool hasYoffset = false;
+      QString dynaVelocity = "";
       QString tempo = "";
       QString rehearsal = "";
       QString sndCapo = "";
@@ -1824,6 +1829,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   sndFine = e.attribute("fine");
                   sndSegno = e.attribute("segno");
                   tempo = e.attribute("tempo");
+                  dynaVelocity = e.attribute("dynamics");
                   }
             else if (e.tagName() == "offset")
                   offset = (e.text().toInt() * AL::division)/divisions;
@@ -2074,6 +2080,14 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   dyn->setMxmlOff(offset);
                   dyn->setTrack((staff + rstaff) * VOICES);
                   dyn->setTick(tick);
+                  if(!dynaVelocity.isEmpty()) {
+                        int dynaValue = round(dynaVelocity.toDouble() * 0.9);
+                        if(dynaValue > 127)
+                              dynaValue = 127;
+                        else if (dynaValue < 0)
+                              dynaValue = 0;
+                        dyn->setVelocity( dynaValue );
+                        }
                   measure->add(dyn);
                   }
             }
@@ -2618,6 +2632,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       bool hasYoffset = false;
       QColor noteheadColor = QColor::Invalid;
       bool chord = false;
+      int velocity = -1;
 
       // first read all elements required for voice mapping
       QDomElement e2 = e.firstChildElement();
@@ -2681,6 +2696,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             QDomElement pne = pn.toElement();
             printObject = pne.attribute("print-object", "yes");
             }
+      
+      velocity = round(e.attribute("dynamics", "-1").toDouble() * 0.9);
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -3087,6 +3104,11 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             if (noteheadColor != QColor::Invalid)
                   note->setColor(noteheadColor);
             // note->setStaffMove(move);
+            
+            if(velocity > 0){
+                  note->setVeloType(USER_VAL);
+                  note->setVelocity(velocity);
+                  }
 
             if (!fingering.isEmpty()) {
                   Text* f = new Text(score);
