@@ -35,8 +35,6 @@ class QIODevice;
 
 namespace Bww {
 
-  static const char* instrumentName = "Bagpipe";
-  static const int midiProgram = 110;
   static const int maxBeamLevel = 3;
 
   enum BeamType
@@ -76,10 +74,14 @@ namespace Bww {
     bool repeatEnd;
     bool endingEnd;
     bool lastOfSystem;
+    bool lastOfPart;
+    bool doubleBarLine;
     MeasureEndFlags() :
         repeatEnd(false),
         endingEnd(false),
-        lastOfSystem(false)
+        lastOfSystem(false),
+        lastOfPart(false),
+        doubleBarLine(false)
     {}
   };
 
@@ -102,6 +104,8 @@ namespace Bww {
                       bool tieStart = false, bool tieStop = false,
                       StartStop triplet = ST_NONE,
                       bool grace = false) = 0;
+    QString instrumentName() const { return "Bagpipe"; }
+    int midiProgram() const { return 110; }
   };
 
 } // namespace Bww

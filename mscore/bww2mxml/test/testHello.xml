@@ -19,14 +19,14 @@
       </score-instrument>
       <midi-instrument id="P1-I1">
         <midi-channel>1</midi-channel>
-        <midi-program>72</midi-program>
+        <midi-program>110</midi-program>
       </midi-instrument>
     </score-part>
   </part-list>
   <part id="P1">
     <measure number="1">
       <attributes>
-        <divisions>16</divisions>
+        <divisions>48</divisions>
         <key>
           <fifths>2</fifths>
           <mode>major</mode>
@@ -42,7 +42,7 @@
       </attributes>
       <direction placement="above">
         <direction-type>
-          <metronome>
+          <metronome parentheses="no">
             <beat-unit>quarter</beat-unit>
             <per-minute>90</per-minute>
           </metronome>
@@ -54,10 +54,12 @@
           <step>G</step>
           <octave>4</octave>
         </pitch>
-        <duration>64</duration>
+        <duration>192</duration>
         <type>whole</type>
-        <stem>down</stem>
       </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
     </measure>
   </part>
 </score-partwise>

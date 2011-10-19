@@ -160,6 +160,7 @@ namespace Bww {
     Tuplet* tuplet;                                     ///< Current tuplet
     Volta* lastVolta;                                   ///< Current volta
     unsigned int tempo;                                 ///< Tempo (0 = not specified)
+    unsigned int ending;                                ///< Current ending
   };
 
   /**
@@ -261,18 +262,16 @@ namespace Bww {
 void MsScWriter::endMeasure(const Bww::MeasureEndFlags mef)
 {
       qDebug() << "MsScWriter::endMeasure()";
-//      BarLine* barLine = new BarLine(score);
-//      bool visible = true;
       if (mef.repeatEnd)
             currentMeasure->setRepeatFlags(RepeatEnd);
-//      barLine->setSubtype(NORMAL_BAR);
-//      barLine->setTrack(0);
-//      currentMeasure->setEndBarLineType(barLine->subtype(), false, visible);
 
       if (mef.endingEnd) {
             if (lastVolta) {
                   printf("adding volta\n");
-                  lastVolta->setSubtype(Volta::VOLTA_CLOSED);
+                  if (ending == 1)
+                        lastVolta->setSubtype(Volta::VOLTA_CLOSED);
+                  else
+                        lastVolta->setSubtype(Volta::VOLTA_OPEN);
 // TODO                  lastVolta->setTick2(tick);
                   score->add(lastVolta);
                   lastVolta = 0;
@@ -288,6 +287,18 @@ void MsScWriter::endMeasure(const Bww::MeasureEndFlags mef)
             lb->setSubtype(LAYOUT_BREAK_LINE);
             currentMeasure->add(lb);
             }
+
+      if (mef.lastOfPart && !mef.repeatEnd) {
+            currentMeasure->setEndBarLineType(END_BAR, false, true);
+            }
+      else if (mef.doubleBarLine) {
+            currentMeasure->setEndBarLineType(DOUBLE_BAR, false, true);
+            }
+//      BarLine* barLine = new BarLine(score);
+//      bool visible = true;
+//      barLine->setSubtype(NORMAL_BAR);
+//      barLine->setTrack(0);
+//      currentMeasure->setEndBarLineType(barLine->subtype(), false, visible);
 }
 
   /**
@@ -405,8 +416,8 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
             score->style()->set(ST_oddFooterC, footer);
 
       Part* part = score->part(0);
-      part->setLongName(Bww::instrumentName);
-      part->setMidiProgram(Bww::midiProgram - 1);
+      part->setLongName(instrumentName());
+      part->setMidiProgram(midiProgram() - 1);
   }
 
   /**

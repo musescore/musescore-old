@@ -28,7 +28,6 @@
  */
 
 #include <QtCore/QList>
-#include <QtCore/QMap>
 #include <QtCore/QString>
 #include <QtCore/QVector>
 
@@ -86,10 +85,8 @@ namespace Bww {
     Parser(Lexer& l, Writer& w);
     void parse();
   private:
-    void beginMeasure(const Bww::MeasureBeginFlags mbf);
-    void endMeasure(const Bww::MeasureEndFlags mef);
     void errorHandler(QString s);
-    void parseBar();
+    void parseBar(Bww::MeasureEndFlags& mef);
     void parseNote();
     void parseGraces();
     void parsePart(Bww::MeasureBeginFlags& mbf, Bww::MeasureEndFlags& mef);
@@ -107,7 +104,6 @@ namespace Bww {
     int tempo;                          ///< Tune tempo read from the header
     int beat;                           ///< Beat type, read from the clef line
     int beats;                          ///< Number of beats, read from the clef line
-    QMap<QString, QString> graceMap;    ///< Map bww embellishments to separate grace notes
     bool inMeasure;                     ///< State: writing the notes in a measure
     int measureNr;                      ///< Current measure number
     bool tieStart;                      ///< Tie start pending
@@ -115,6 +111,7 @@ namespace Bww {
     bool tripletStart;                  ///< Triplet start pending
     bool inTriplet;                     ///< In a triplet
     QList<MeasureDescription> measures; ///< Parsed measures
+    bool tsigFound;                     ///< A valid time signature was found
   };
 
 } // namespace Bww

@@ -30,6 +30,7 @@
 
 #include <QtCore/QStringList>
 #include <QtCore/QtDebug>
+#include <QtCore/QMap>
 
 #include "lexer.h"
 #include "parser.h"
@@ -37,24 +38,6 @@
 
 // Duration of a whole measure in ticks
 static const int WHOLE_MEASURE_DURATION = 192;
-
-/**
- Determine if symbol is a grace sequence
- */
-
-static bool isGrace(Bww::Symbol sym)
-{
-  return (sym == Bww::SINGLEGRACE
-          || sym == Bww::STRIKE
-          || sym == Bww::DOUBLING
-          || sym == Bww::HALFDOUBLING
-          || sym == Bww::THUMBDOUBLING
-          || sym == Bww::SLUR
-          || sym == Bww::THROW
-          || sym == Bww::BIRL
-          || sym == Bww::GRIP
-          || sym == Bww::TAORLUATH);
-}
 
 /**
  Determine if symbol is part of a note sequence
@@ -65,7 +48,7 @@ static bool isNote(Bww::Symbol sym)
   return (sym == Bww::NOTE
           || sym == Bww::TIE
           || sym == Bww::TRIPLET
-          || isGrace(sym));
+          || sym == Bww::GRACE);
 }
 
 /**
@@ -97,29 +80,27 @@ static void dumpBeams(QList<Bww::MeasureDescription> const& measures)
       QString beam = measures.at(j).notes.at(i).beam;
       if (beam == "")
         beam = " ";
-      if (!measures.at(j).notes.at(i).grace)
+
+      beams += beam;
+      switch (measures.at(j).notes.at(i).beamState)
       {
-        beams += beam;
-        switch (measures.at(j).notes.at(i).beamState)
-        {
-        case Bww::ST_NONE:     beamStates += " "; break;
-        case Bww::ST_START:    beamStates += "["; break;
-        case Bww::ST_CONTINUE: beamStates += "_"; break;
-        case Bww::ST_STOP:     beamStates += "]"; break;
-        default:               beamStates += " ";
-        }
-        for (int k = 0; k < 3; k++)
-          switch (measures.at(j).notes.at(i).beamList.at(k))
-          {
-          case Bww::BM_NONE:          beamList[k] += " "; break;
-          case Bww::BM_BEGIN:         beamList[k] += "b"; break;
-          case Bww::BM_CONTINUE:      beamList[k] += "c"; break;
-          case Bww::BM_END:           beamList[k] += "e"; break;
-          case Bww::BM_FORWARD_HOOK:  beamList[k] += ">"; break;
-          case Bww::BM_BACKWARD_HOOK: beamList[k] += "<"; break;
-          default:                    beamList[k] += "?";
-          }
+      case Bww::ST_NONE:     beamStates += " "; break;
+      case Bww::ST_START:    beamStates += "["; break;
+      case Bww::ST_CONTINUE: beamStates += "_"; break;
+      case Bww::ST_STOP:     beamStates += "]"; break;
+      default:               beamStates += " ";
       }
+      for (int k = 0; k < 3; k++)
+        switch (measures.at(j).notes.at(i).beamList.at(k))
+        {
+        case Bww::BM_NONE:          beamList[k] += " "; break;
+        case Bww::BM_BEGIN:         beamList[k] += "b"; break;
+        case Bww::BM_CONTINUE:      beamList[k] += "c"; break;
+        case Bww::BM_END:           beamList[k] += "e"; break;
+        case Bww::BM_FORWARD_HOOK:  beamList[k] += ">"; break;
+        case Bww::BM_BACKWARD_HOOK: beamList[k] += "<"; break;
+        default:                    beamList[k] += "?";
+        }
     }
     qDebug() << "beams measure #" << j + 1 << beams;
     qDebug() << "beams measure #" << j + 1 << beamStates;
@@ -164,6 +145,7 @@ static void dumpMeasures(QList<Bww::MeasureDescription> const& measures)
         << "repeatEnd" << measures.at(j).mef.repeatEnd
         << "endingEnd" << measures.at(j).mef.endingEnd
         << "lastOfSystem" << measures.at(j).mef.lastOfSystem
+        << "lastOfPart" << measures.at(j).mef.lastOfPart
         ;
     qDebug() << "duration:" << measures.at(j).duration;
   }
@@ -203,6 +185,58 @@ static void calculateMeasureDurations(QList<Bww::MeasureDescription> & measures)
 }
 
 /**
+ Determine time signature
+ */
+
+static void determineTimesig(QList<Bww::MeasureDescription> const& measures, int & beats, int & beat)
+{
+  QMap<int, int> map;
+  for (int j = 0; j < measures.size(); ++j)
+  {
+    int dur = measures[j].duration;
+    if (map.contains(dur))
+      map[dur]++;
+    else
+      map.insert(dur, 1);
+  }
+  // determine most common duration
+  int commonDur = 0;
+  int max = 0;
+  QMap<int, int>::const_iterator i = map.constBegin();
+  while (i != map.constEnd())
+  {
+    qDebug() << "measureDurations:" << i.key() << i.value() << endl;
+    if (i.value() > max)
+    {
+      commonDur = i.key();
+      max = i.value();
+    }
+    ++i;
+  }
+  qDebug() << "measureDuration commonDur:" << commonDur << "max:" << max;
+  // determine time signature
+  beat = 4;
+  beats = 0;
+  int divisor = WHOLE_MEASURE_DURATION / 4;
+  for (; beat < 64; beat *= 2, divisor /= 2)
+  {
+    if ((commonDur % divisor) == 0)
+    {
+      beats = commonDur / divisor;
+      qDebug()
+          << "measureDuration found beat:" << beat
+          << "beats:" << beats
+          << "divisor:" << divisor
+          ;
+      return;
+    }
+  }
+  // could not determine time signature, set default
+  beat = 4;
+  beats = 4;
+}
+
+/**
  Find irregular measures
  */
 
@@ -230,6 +264,23 @@ static void findIrregularMeasures(QList<Bww::MeasureDescription> & measures, int
     if (d1 > 0 && d2 > 0 && (d1 + d2) == normalDuration)
       measures[j].mbf.irregular = true;
   }
+}
+
+/**
+ Set mef.lastOfPart flag on last measure
+ */
+
+static void setLastOfPart(QList<Bww::MeasureDescription> & measures)
+{
+  qDebug() << "dumpMeasures #measures" << measures.size()
+      ;
+
+  // need at least one measure
+  if (measures.size() == 0) return;
+
+  // set lastOfPart flag on last measure
+  int j = measures.size() - 1;
+  measures[j].mef.lastOfPart = true;
 }
 
 static QString findNextNextNoteBeam(QList<Bww::MeasureDescription> const& measures, int measureNr, int noteNr)
@@ -269,66 +320,74 @@ static void calculateHigherBeamStates(Bww::MeasureDescription & m)
         ;
 
     if (m.notes.at(i).grace)
-      continue; // ignore grace notes
-
-    int blp = -1; // beam level previous chord
-    int blc = -1; // beam level current chord
-    int bln = -1; // beam level next chord
-
-    // find beam level current note
-    blc = type2beams(m.notes.at(i).type);
-    if (blc == 0)
-      continue; // note does not have a beam
-
-    // find beam level previous note
-    if (m.notes.at(i).beamList[0] == Bww::BM_CONTINUE
-        || m.notes.at(i).beamList[0] == Bww::BM_END)
     {
-      for (int j = i - 1; blp == -1 && j >= 0; --j)
+      // just copy beamList[0] into beamList[1] and beamList[2]
+      m.notes[i].beamList[1] = m.notes.at(i).beamList[0];
+      m.notes[i].beamList[2] = m.notes.at(i).beamList[0];
+    }
+    else
+    {
+      int blp = -1; // beam level previous chord
+      int blc = -1; // beam level current chord
+      int bln = -1; // beam level next chord
+
+      // find beam level current note
+      blc = type2beams(m.notes.at(i).type);
+      if (blc == 0)
+        continue; // note does not have a beam
+
+      // find beam level previous note
+      if (m.notes.at(i).beamList[0] == Bww::BM_CONTINUE
+          || m.notes.at(i).beamList[0] == Bww::BM_END)
       {
-        if (m.notes.at(j).grace)
-          continue; // ignore grace notes
-        blp = type2beams(m.notes.at(j).type);
+        for (int j = i - 1; blp == -1 && j >= 0; --j)
+        {
+          if (m.notes.at(j).grace)
+            continue; // ignore grace notes
+          blp = type2beams(m.notes.at(j).type);
+        }
       }
-    }
 
-    // find beam level next note
-    if (m.notes.at(i).beamList[0] == Bww::BM_BEGIN
-        || m.notes.at(i).beamList[0] == Bww::BM_CONTINUE)
-    {
-      for (int j = i + 1; bln == -1 && j < m.notes.size(); ++j)
+      // find beam level next note
+      if (m.notes.at(i).beamList[0] == Bww::BM_BEGIN
+          || m.notes.at(i).beamList[0] == Bww::BM_CONTINUE)
       {
-        if (m.notes.at(j).grace)
-          continue; // ignore grace notes
-        bln = type2beams(m.notes.at(j).type);
+        for (int j = i + 1; bln == -1 && j < m.notes.size(); ++j)
+        {
+          if (m.notes.at(j).grace)
+            continue; // ignore grace notes
+          bln = type2beams(m.notes.at(j).type);
+        }
       }
-    }
 
-    qDebug()
-        << "blp" << blp
-        << "blc" << blc
-        << "bln" << bln;
-    for (int j = 2; j <= blc; ++j)
-    {
-      Bww::BeamType bt = Bww::BM_NONE;
-      if (blp < j && bln >= j) bt = Bww::BM_BEGIN;
-      else if (blp < j && bln < j) {
-        if (bln > 0) bt = Bww::BM_FORWARD_HOOK;
-        else if (blp > 0) bt = Bww::BM_BACKWARD_HOOK;
+      qDebug()
+          << "blp" << blp
+          << "blc" << blc
+          << "bln" << bln;
+      for (int j = 2; j <= blc; ++j)
+      {
+        Bww::BeamType bt = Bww::BM_NONE;
+        if (blp < j && bln >= j) bt = Bww::BM_BEGIN;
+        else if (blp < j && bln < j) {
+          if (bln > 0) bt = Bww::BM_FORWARD_HOOK;
+          else if (blp > 0) bt = Bww::BM_BACKWARD_HOOK;
+        }
+        else if (blp >= j && bln < j) bt = Bww::BM_END;
+        else if (blp >= j && bln >= j) bt = Bww::BM_CONTINUE;
+        m.notes[i].beamList[j - 1] = bt;
+        qDebug() << "beamList" << j - 1 << "=" << bt;
       }
-      else if (blp >= j && bln < j) bt = Bww::BM_END;
-      else if (blp >= j && bln >= j) bt = Bww::BM_CONTINUE;
-      m.notes[i].beamList[j - 1] = bt;
-      qDebug() << "beamList" << j - 1 << "=" << bt;
-    }
-
-  }
+    } // else
+  } // for (int i = 0; i < m.notes.size(); ++i)
 }
 
 /**
  Determine all beam states.
- First convert "r" and "l" in notes.beam into BM_BEGIN, BM_CONTINUE and BM_END
- in notes.beamList[0]. Then calculate the higher level beams.
+ First for normal notes convert "r" and "l" in notes.beam into BM_BEGIN,
+ BM_CONTINUE and BM_END in notes.beamList[0]. For grace notes "b", "c" and
+ "e" can be directly converted into the corresponding beam states in
+ notes.beamList[0].
+ Then calculate the higher level beams.
  */
 
 static void determineBeamStates(QList<Bww::MeasureDescription> & measures)
@@ -340,6 +399,7 @@ static void determineBeamStates(QList<Bww::MeasureDescription> & measures)
     for (int i = 0; i < measures.at(j).notes.size(); ++i)
     {
       QString beam = measures.at(j).notes.at(i).beam;
+      // handle normal notes
       if (beam == "")
       {
         measures[j].notes[i].beamState = Bww::ST_NONE;
@@ -388,6 +448,10 @@ static void determineBeamStates(QList<Bww::MeasureDescription> & measures)
           }
         }
       }
+      // handle grace notes
+      else if (beam == "b") measures[j].notes[i].beamList[0] = Bww::BM_BEGIN;
+      else if (beam == "c") measures[j].notes[i].beamList[0] = Bww::BM_CONTINUE;
+      else if (beam == "e") measures[j].notes[i].beamList[0] = Bww::BM_END;
     }
     calculateHigherBeamStates(measures[j]);
   }
@@ -408,147 +472,10 @@ namespace Bww {
     tieStart(false),
     inTie(false),
     tripletStart(false),
-    inTriplet(false)
+    inTriplet(false),
+    tsigFound(false)
   {
     qDebug() << "Parser::Parser()";
-
-    // Initialize the grace note translation table
-    // Grace sequence definitions were taken from Lilyponds bagpipe.ly
-    // For some Lilypond sequences the bww name is unknown
-
-    // Single grace notes
-    graceMap["ag"] = "LA";
-    graceMap["bg"] = "B";
-    graceMap["cg"] = "C";
-    graceMap["dg"] = "D";
-    graceMap["eg"] = "E";
-    graceMap["fg"] = "F";
-    graceMap["gg"] = "HG";
-    graceMap["tg"] = "HA";
-
-    // Strikes (same as single grace notes)
-    graceMap["strlg"] = "LG";
-    graceMap["strla"] = "LA";
-    graceMap["strb"]  = "B";
-    graceMap["strc"]  = "C";
-    graceMap["strd"]  = "D";
-    graceMap["stre"]  = "E";
-    graceMap["strf"]  = "F";
-    graceMap["strhg"] = "HG";
-    graceMap["strha"] = "HA";
-
-    // Doublings
-    graceMap["dblg"] = "HG LG D";
-    graceMap["dbla"] = "HG LA D";
-    graceMap["dbb"]  = "HG B D";
-    graceMap["dbc"]  = "HG C D";
-    graceMap["dbd"]  = "HG D E";
-    graceMap["dbe"]  = "HG E F";
-    graceMap["dbf"]  = "HG F HG";
-    graceMap["dbhg"] = "HG F";
-    graceMap["dbha"] = "HA HG";
-
-    // Half doublings
-    graceMap["hdblg"] = "LG D";
-    graceMap["hdbla"] = "LA D";
-    graceMap["hdbb"]  = "B D";
-    graceMap["hdbc"]  = "C D";
-    graceMap["hdbd"]  = "D E";
-    graceMap["hdbe"]  = "E F";
-    graceMap["hdbf"]  = "F HG";
-    graceMap["hdbhg"] = "HG F";
-    graceMap["hdbha"] = "HA HG";
-
-    // Thumb doublings
-    graceMap["thdblg"] = "HA LG D";
-    graceMap["thdbla"] = "HA LA D";
-    graceMap["thdbb"]  = "HA B D";
-    graceMap["thdbc"]  = "HA C D";
-    graceMap["thdbd"]  = "HA D E";
-    graceMap["thdbe"]  = "HA E F";
-    graceMap["thdbf"]  = "HA F HG";
-    graceMap["thdbhg"] = "HA HG F";
-
-    // Shakes
-    // Half shakes
-    // Thumb shakes
-    // ???
-
-    // Slurs
-    graceMap["gstd"] = "HG D LG";
-    graceMap["lgstd"] = "HG D C";
-
-    // Half slurs
-    // Thumb slurs
-    // ???
-
-    // Catches
-    // ???
-
-    // Throws
-    graceMap["thrd"] = "LG D C";
-    //    graceMap["???"] = "D C";
-    //    graceMap["???"] = "LG D LG C";
-    //    graceMap["???"] = "F E HG E";
-
-    //  Birls
-    graceMap["abr"] = "LA LG LA LG";
-    graceMap["brl"] = "LG LA LG";
-    graceMap["gbrl"] = "HG LA LG LA LG";
-    graceMap["tbrl"] = "D LA LG LA LG";
-
-    // Grips
-    graceMap["grp"] = "LG D LG";
-
-    // Taorluaths
-    graceMap["tar"] = "LG D LG E";
-
-    // Crunluaths
-    // ???
-  }
-
-  /**
-   Transition to the "in measure" state.
-   TODO: remove
-   */
-
-  void Parser::beginMeasure(const Bww::MeasureBeginFlags mbf)
-  {
-    /*
-    qDebug() << "Parser::beginMeasure("
-        << "repeatBegin:" << mbf.repeatBegin
-        << "endingFirst:" << mbf.endingFirst
-        << "endingSecond:" << mbf.endingSecond
-        << ")";
-
-    if (!inMeasure)
-    {
-      inMeasure = true;
-      ++measureNr;
-      wrt.beginMeasure(mbf);
-    }
-    */
-  }
-
-  /**
-   Transition out of the "in measure" state.
-   TODO: remove
-   */
-
-  void Parser::endMeasure(const Bww::MeasureEndFlags mef)
-  {
-    /*
-    qDebug() << "Parser::endMeasure("
-        << "repeatEnd:" << mef.repeatEnd
-        << "endingEnd:" << mef.endingEnd
-        << ")";
-
-    if (inMeasure)
-    {
-      inMeasure = false;
-      wrt.endMeasure(mef);
-    }
-    */
   }
 
   /**
@@ -602,8 +529,14 @@ namespace Bww {
         ;
 
     calculateMeasureDurations(measures);
+    if (!tsigFound)
+    {
+      determineTimesig(measures, beats, beat);
+      wrt.tsig(beats, beat);
+    }
     findIrregularMeasures(measures, beats, beat);
     determineBeamStates(measures);
+    setLastOfPart(measures);
     dumpMeasures(measures);
     dumpBeams(measures);
 
@@ -646,9 +579,10 @@ namespace Bww {
    Parse a bww bar symbol.
    */
 
-  void Parser::parseBar()
+  void Parser::parseBar(Bww::MeasureEndFlags& mef)
   {
     qDebug() << "Parser::parseBar() value:" << qPrintable(lex.symValue());
+    if (lex.symValue() == "!!t") mef.doubleBarLine = true;
     lex.getSym();
   }
 
@@ -754,6 +688,20 @@ namespace Bww {
   }
 
   /**
+   Determine beam for grace note \a index in a group of \a size grace notes.
+   */
+
+  static QString graceBeam(const int size, const int index)
+  {
+    if (size <= 1) return " ";                // no beam
+    if (index < 0) return " ";                // no beam (but should not happen)
+    if (index == 0) return "b";               // begin
+    else if (index == (size - 1)) return "e"; // end
+    else if (index >= size) return " ";       // no beam (but should not happen)
+    else return "c";                          // continue
+  }
+
+  /**
    Parse a bww embellishment.
    */
 
@@ -761,23 +709,20 @@ namespace Bww {
   {
     qDebug() << "Parser::parseGraces() value:" << qPrintable(lex.symValue());
 
-    const QString beam = " "; // TODO
     const QString type = "32";
     const int dots = 0;
-    if (graceMap.contains(lex.symValue()))
+    QStringList graces = lex.symValue().split(" ");
+    for (int i = 0; i < graces.size(); ++i)
     {
-      QStringList graces = graceMap.value(lex.symValue()).split(" ");
-      for (int i = 0; i < graces.size(); ++i)
+      const QString beam = graceBeam(graces.size(), i);
+      NoteDescription noteDesc(graces.at(i), beam, type, dots, false, false, ST_NONE, true);
+      if (measures.isEmpty())
       {
-        NoteDescription noteDesc(graces.at(i), beam, type, dots, false, false, ST_NONE, true);
-        if (measures.isEmpty())
-        {
-          errorHandler("cannot append note: no measure");
-        }
-        else
-        {
-          measures.last().notes.append(noteDesc);
-        }
+        errorHandler("cannot append note: no measure");
+      }
+      else
+      {
+        measures.last().notes.append(noteDesc);
       }
     }
     lex.getSym();
@@ -841,7 +786,7 @@ namespace Bww {
       else if (lex.symType() == PART)
         parsePart(mbfl, mefl);
       else if (lex.symType() == BAR)
-        parseBar();
+        parseBar(mefl);
     }
     // First end the previous measure
     if (!measures.isEmpty())
@@ -866,9 +811,9 @@ namespace Bww {
   void Parser::parseSeqNotes()
   {
     qDebug() << "Parser::parseSeqNotes() value:" << qPrintable(lex.symValue());
-    while (isGrace(lex.symType()) || lex.symType() == NOTE || lex.symType() == TIE || lex.symType() == TRIPLET)
+    while (lex.symType() == GRACE || lex.symType() == NOTE || lex.symType() == TIE || lex.symType() == TRIPLET)
     {
-      if (isGrace(lex.symType())) parseGraces();
+      if (lex.symType() == GRACE) parseGraces();
       else if (lex.symType() == NOTE) parseNote();
       else if (lex.symType() == TIE)
       {
@@ -961,6 +906,7 @@ namespace Bww {
       {
         beats = caps.at(1).toInt();
         beat  = caps.at(2).toInt();
+        tsigFound = true;
         wrt.tsig(beats, beat);
       }
     }
