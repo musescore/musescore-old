@@ -58,8 +58,6 @@ class Portaudio : public Driver {
       int framePos() const;
       void connect(void*, void*);
       void disconnect(void* src, void* dst);
-      float* getLBuffer(long n);
-      float* getRBuffer(long n);
       virtual bool isRealtime() const   { return false; }
 
       QStringList apiList() const;

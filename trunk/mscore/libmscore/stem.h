@@ -30,7 +30,7 @@ class Painter;
 
 class Stem : public Element {
       qreal _len;
-      Spatium _userLen;
+      qreal _userLen;
 
    public:
       Stem(Score*);
@@ -40,16 +40,17 @@ class Stem : public Element {
       virtual ElementType type() const { return STEM; }
       virtual void draw(Painter*) const;
       void setLen(qreal v);
-      qreal stemLen() const            { return _len + point(_userLen); }
+      qreal stemLen() const            { return _len + _userLen; }
       virtual bool isEditable() const  { return true; }
       virtual void layout();
+      virtual void spatiumChanged(qreal /*oldValue*/, qreal /*newValue*/);
 
       virtual void editDrag(const EditData&);
       virtual void updateGrips(int*, QRectF*) const;
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement e);
       virtual void toDefault();
-      Spatium userLen() const         { return _userLen; }
+      qreal userLen() const         { return _userLen; }
       virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
       Chord* chord() const            { return (Chord*)parent(); }
