@@ -32,7 +32,8 @@
 Stem::Stem(Score* s)
    : Element(s)
       {
-      _len = 0.0;
+      _len     = 0.0;
+      _userLen = 0.0;
       setFlags(ELEMENT_SELECTABLE);
       }
 
@@ -58,6 +59,15 @@ void Stem::setLen(qreal v)
       }
 
 //---------------------------------------------------------
+//   spatiumChanged
+//---------------------------------------------------------
+
+void Stem::spatiumChanged(qreal oldValue, qreal newValue)
+      {
+      _userLen = (_userLen / oldValue) * newValue;
+      }
+
+//---------------------------------------------------------
 //   draw
 //---------------------------------------------------------
 
@@ -66,9 +76,9 @@ void Stem::draw(Painter* painter) const
       bool useTab = false;
       Staff* st = staff();
       if (st && st->useTablature()) {     // stems used in palette do not have a staff
-            useTab = true;
             if (st->staffType()->slashStyle())
                   return;
+            useTab = true;
             }
       qreal lw = point(score()->styleS(ST_stemWidth));
       painter->setLineWidth(lw);
@@ -91,8 +101,8 @@ void Stem::write(Xml& xml) const
       {
       xml.stag("Stem");
       Element::writeProperties(xml);
-      if (_userLen.val() != 0.0)
-            xml.sTag("userLen", _userLen);
+      if (_userLen != 0.0)
+            xml.tag("userLen", _userLen / spatium());
       xml.etag();
       }
 
@@ -105,25 +115,11 @@ void Stem::read(QDomElement e)
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "userLen")
-                  _userLen = Spatium(e.text().toDouble());
+                  _userLen = e.text().toDouble() * spatium();
             else if (!Element::readProperties(e))
                   domError(e);
             }
       }
-
-#if 0
-//---------------------------------------------------------
-//   setVisible
-//---------------------------------------------------------
-
-void Stem::setVisible(bool f)
-      {
-      Element::setVisible(f);
-      Chord* chord = static_cast<Chord*>(parent());
-      if (chord && chord->hook() && chord->hook()->visible() != f)
-            chord->hook()->setVisible(f);
-      }
-#endif
 
 //---------------------------------------------------------
 //   updateGrips
@@ -142,7 +138,7 @@ void Stem::updateGrips(int* grips, QRectF* grip) const
 
 void Stem::editDrag(const EditData& ed)
       {
-      _userLen += Spatium(ed.delta.y() / spatium());
+      _userLen += ed.delta.y();
       Chord* c = static_cast<Chord*>(parent());
       if (c->hook())
             c->hook()->move(0.0, ed.delta.y());
@@ -154,7 +150,7 @@ void Stem::editDrag(const EditData& ed)
 
 void Stem::toDefault()
       {
-      _userLen = Spatium(0.0);      // TODO: make undoable
+      _userLen = 0.0;         // TODO: make undoable
       Element::toDefault();
       }
 

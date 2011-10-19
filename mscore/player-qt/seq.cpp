@@ -191,7 +191,7 @@ void Seq::processMessages()
 //   process
 //---------------------------------------------------------
 
-void Seq::process(unsigned n, float* p)
+void Seq::process(unsigned n, short* p)
       {
       unsigned frames = n;
       processMessages();
@@ -204,8 +204,8 @@ void Seq::process(unsigned n, float* p)
                         break;
                   int n = f - playTime;
                   synti->process(n, p);
-                  p += 2 * n;
-                  playTime += n;
+                  p         += 2 * n;
+                  playTime  += n;
                   frames    -= n;
                   framePos  += n;
                   playEvent(playPos.value());
