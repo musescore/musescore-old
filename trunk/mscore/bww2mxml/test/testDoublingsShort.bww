@@ -1,4 +1,4 @@
-"Graces",(T,L,0,0,Times New Roman,16,700,0,0,18,0,0,0)
+"Grace notes and embellishments (short version)",(T,L,0,0,Times New Roman,16,700,0,0,18,0,0,0)
 
 "Testfile",(Y,C,0,0,Times New Roman,14,400,0,0,18,0,0,0)
 
@@ -10,7 +10,7 @@ TuneTempo,90
 
 
 & sharpf sharpc 2_4	
-gstd D_2	!	
-dbf F_2	!
-LGr_8	hdbd LAl_8	B_4
+E_4	dblg LG_4	!t
+HG_4	tdblg LG_4	!t
+
 !I

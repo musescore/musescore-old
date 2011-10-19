@@ -44,16 +44,7 @@ namespace Bww {
     "TIE",
     "TRIPLET",
     "DOT",
-    "SINGLEGRACE",
-    "STRIKE",
-    "DOUBLING",
-    "HALFDOUBLING",
-    "THUMBDOUBLING",
-    "SLUR",
-    "THROW",
-    "BIRL",
-    "GRIP",
-    "TAORLUATH",
+    "GRACE",
     "UNKNOWN",
     "NONE"
   };

@@ -1,4 +1,4 @@
-"Graces",(T,L,0,0,Times New Roman,16,700,0,0,18,0,0,0)
+"Duration",(T,L,0,0,Times New Roman,16,700,0,0,18,0,0,0)
 
 "Testfile",(Y,C,0,0,Times New Roman,14,400,0,0,18,0,0,0)
 
@@ -9,8 +9,7 @@
 TuneTempo,90
 
 
-& sharpf sharpc 2_4	
-gstd D_2	!	
-dbf F_2	!
-LGr_8	hdbd LAl_8	B_4
+& sharpf sharpc 2_16
+^3s LGr_32	LAl_32	Bl_32 ^3e	C_16	!
+LGr_32 'lg	LAr_32 'la	Bl_32
 !I
