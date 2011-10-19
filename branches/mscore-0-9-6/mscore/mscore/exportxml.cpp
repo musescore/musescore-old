@@ -2005,6 +2005,17 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
             if (!note->visible()) {
                   noteTag += QString(" print-object=\"no\"");
                   }
+            if(note->veloType() != AUTO_VAL) {
+                  int velo = note->velocity();
+                  if (note->veloType() == OFFSET_VAL) {
+                        velo = velo + (velo * note->veloOffset()) / 100;
+                        if (velo < 1)
+                              velo = 1;
+                        else if (velo > 127)
+                              velo = 127;
+                        }
+                  noteTag += QString(" dynamics=\"%1\"").arg(QString::number(velo * 100.0 / 90.0,'f',2));
+                  }
 
             xml.stag(noteTag);
 
@@ -2883,7 +2894,15 @@ void ExportMusicXml::dynamic(Dynamic* dyn, int staff)
       else
             xml.tag("words", t);
       xml.etag();
-      directionETag(xml, staff, dyn->mxmlOff());
+      
+      int offs = dyn->mxmlOff();
+      if (offs)
+            xml.tag("offset", offs);
+      if (staff)
+            xml.tag("staff", staff);
+      
+      xml.tagE(QString("sound dynamics=\"%1\"").arg(QString::number(dyn->velocity() * 100.0 / 90.0, 'f', 2)));
+      xml.etag();
       }
 
 //---------------------------------------------------------
