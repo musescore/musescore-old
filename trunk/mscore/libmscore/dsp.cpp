@@ -70,7 +70,7 @@ class DspSSE86 : public Dsp {
             }
       virtual void mix(float* dst, float* src, unsigned n) {
             if ( ((intptr_t)dst & 15) != 0)
-                  fqDebug(stderr, "mix_buffers_no_gain(): dst unaligned! %p\n", dst);
+                  qDebug("mix_buffers_no_gain(): dst unaligned! %p\n", dst);
             if ( ((intptr_t)dst & 15) != ((intptr_t)src & 15) ) {
                   qDebug("mix_buffers_no_gain(): dst & src don't have the same alignment!\n");
                   Dsp::mix(dst, src, n);
