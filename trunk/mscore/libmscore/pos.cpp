@@ -366,26 +366,26 @@ PosLen::PosLen(const PosLen& p)
 void PosLen::dump(int n) const
       {
       Pos::dump(n);
-      printf("  Len(");
+      qDebug("  Len(");
       switch(type()) {
             case FRAMES:
-                  printf("samples=%d)\n", _lenFrame);
+                  qDebug("samples=%d)\n", _lenFrame);
                   break;
             case TICKS:
-                  printf("ticks=%d)\n", _lenTick);
+                  qDebug("ticks=%d)\n", _lenTick);
                   break;
             }
       }
 
 void Pos::dump(int /*n*/) const
       {
-      printf("Pos(%s, sn=%d, ", type() == FRAMES ? "Frames" : "Ticks", sn);
+      qDebug("Pos(%s, sn=%d, ", type() == FRAMES ? "Frames" : "Ticks", sn);
       switch(type()) {
             case FRAMES:
-                  printf("samples=%d)", _frame);
+                  qDebug("samples=%d)", _frame);
                   break;
             case TICKS:
-                  printf("ticks=%d)", _tick);
+                  qDebug("ticks=%d)", _tick);
                   break;
             }
       }

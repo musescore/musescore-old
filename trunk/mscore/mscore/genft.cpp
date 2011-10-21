@@ -52,14 +52,14 @@ static char* getTable(char* t, FT_Face face)
       FT_ULong length = 0;
       int error = FT_Load_Sfnt_Table(face, tag, 0, NULL, &length);
       if (error) {
-            fprintf(stderr, "genft: cannot load table LILC\n");
+            qDebug("genft: cannot load table LILC\n");
             exit(-3);
             }
       FT_Byte* buffer = (FT_Byte*)malloc(length + 1);
       error = FT_Load_Sfnt_Table(face, tag, 0, buffer, &length);
       buffer[length] = 0;
       if (error) {
-            fprintf(stderr, "genft: cannot load font table LILC\n");
+            qDebug("genft: cannot load font table LILC\n");
             exit(4);
             }
       return (char*)buffer;
@@ -91,18 +91,18 @@ static void parseLILC(char* buffer)
             if (namemap.contains(s))
                   idx = namemap[s];
             else
-                  fprintf(stderr, "genft: <%s> not in map\n", qPrintable(s));
+                  qDebug("genft: <%s> not in map\n", qPrintable(s));
             int code = 0;
             if (codemap.contains(idx))
                   code = codemap[idx];
             else
-                  fprintf(stderr, "codemap has no index %d\n", idx);
+                  qDebug("codemap has no index %d\n", idx);
             g.code = code;
 
             s = sl[i+4];
             int val = ra.indexIn(s);
             if (val == -1 || ra.numCaptures() != 2) {
-                  printf("bad reg expr a\n");
+                  qDebug("bad reg expr a\n");
                   exit(-5);
                   }
             g.attach.rx() = ra.cap(1).toDouble();
@@ -111,7 +111,7 @@ static void parseLILC(char* buffer)
             s = sl[i+1];
             val = rb.indexIn(s);
             if (val == -1 || rb.numCaptures() != 4) {
-                  printf("bad reg expr b\n");
+                  qDebug("bad reg expr b\n");
                   exit(-5);
                   }
             double a = rb.cap(1).toDouble();
@@ -156,13 +156,13 @@ int main(int, char* argv[])
       FT_Library library;
 
       if (FT_Init_FreeType(&library)) {
-            fprintf(stderr, "init free type library failed\n");
+            qDebug("init free type library failed\n");
             exit(-1);
             }
       FT_Face face;
       int error = FT_New_Face(library, argv[1], 0, &face);
       if (error) {
-            fprintf(stderr, "open font failed <%s>\n", argv[1]);
+            qDebug("open font failed <%s>\n", argv[1]);
             exit(-2);
             }
 

@@ -442,11 +442,11 @@ void Staff::read(QDomElement e)
 
 void Staff::changeKeySig(int tick, KeySigEvent st)
       {
-// printf("Staff::changeKeySig "); st.print(); printf("\n");
+// qDebug("Staff::changeKeySig "); st.print(); qDebug("\n");
 
       Measure* measure = _score->tick2measure(tick);
       if (!measure) {
-            printf("measure for tick %d not found!\n", tick);
+            qDebug("measure for tick %d not found!\n", tick);
             return;
             }
       Segment* s = measure->findSegment(SegKeySig, tick);
@@ -621,7 +621,7 @@ void Staff::linkTo(Staff* staff)
             _linkedStaves->add(this);
             }
       else {
-            printf("Staff::linkTo: staff already linked\n");
+            qDebug("Staff::linkTo: staff already linked\n");
             abort();
             }
       }
@@ -720,7 +720,7 @@ void Staff::init(const InstrumentTemplate* t, int cidx)
       else
             st = score()->staffTypes().at(PITCHED_STAFF_TYPE);
 
-// printf("init %d %d\n", _initialClef._concertClef, _initialClef._transposingClef);
+// qDebug("init %d %d\n", _initialClef._concertClef, _initialClef._transposingClef);
 
       if (t->staffLines[cidx] != st->lines()) {
             // create new staff type:

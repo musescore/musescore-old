@@ -38,7 +38,7 @@ UpdateChecker::~UpdateChecker()
 void UpdateChecker::onRequestFinished(QNetworkReply* reply)
 {
     if(reply->error() != QNetworkReply::NoError){
-        printf("Error while checking update [%s]\n", reply->errorString().toAscii().constData());
+        qDebug("Error while checking update [%s]\n", reply->errorString().toAscii().constData());
         return;
     }
 
@@ -80,7 +80,7 @@ void UpdateChecker::onRequestFinished(QNetworkReply* reply)
         qDebug() << reader.error() << reader.errorString();
 
     QString message = QString(tr("An update for MuseScore is available: <a href=\"%1\">MuseScore %2 r.%3</a>")).arg(downloadUrl).arg(version).arg(upgradeRevision);
-//    printf("revision %s\n", revision.toAscii().constData());
+//    qDebug("revision %s\n", revision.toAscii().constData());
     if(!version.isEmpty() &&  upgradeRevision > revision ){
         QMessageBox msgBox;
         msgBox.setWindowTitle(tr("Update Available"));
@@ -122,7 +122,7 @@ void UpdateChecker::check(QString rev, bool m)
     }else{
         release = "nightly";
     }
-//    printf("release type: %s\n", release.toAscii().constData());
+//    qDebug("release type: %s\n", release.toAscii().constData());
     if(!os.isEmpty() && !release.isEmpty()){
         revision =  rev;
         manager->get(QNetworkRequest(QUrl("http://update.musescore.org/update_"+os +"_" + release +".xml")));
@@ -151,8 +151,8 @@ bool UpdateChecker::hasToCheck(){
     s.beginGroup("Update");
     QDateTime lastUpdate = s.value("lastUpdateDate", QDateTime::currentDateTime()).value<QDateTime>();
 
-//    printf("preferences.checkUpdateStartup: %d\n" , preferences.checkUpdateStartup);
-//    printf("lastupdate: %s\n", lastUpdate.toString("dd.MM.yyyy hh:mm:ss.zzz").toAscii().constData());
+//    qDebug("preferences.checkUpdateStartup: %d\n" , preferences.checkUpdateStartup);
+//    qDebug("lastupdate: %s\n", lastUpdate.toString("dd.MM.yyyy hh:mm:ss.zzz").toAscii().constData());
 
     if(preferences.checkUpdateStartup < 0 ){ //Never
       return false;

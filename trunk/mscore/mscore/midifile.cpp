@@ -326,7 +326,7 @@ bool MidiFile::write(const void* p, qint64 len)
       qint64 rv = fp->write((char*)p, len);
       if (rv == len)
             return false;
-      printf("write midifile failed: %s\n", fp->errorString().toLatin1().data());
+      qDebug("write midifile failed: %s\n", fp->errorString().toLatin1().data());
       return true;
       }
 
@@ -488,14 +488,14 @@ bool MidiFile::readEvent(Event* event)
 
       int nclick = getvl();
       if (nclick == -1) {
-            printf("readEvent: error 1(getvl)\n");
+            qDebug("readEvent: error 1(getvl)\n");
             return false;
             }
       click += nclick;
       for (;;) {
             read(&me, 1);
             if (me >= 0xf1 && me <= 0xfe && me != 0xf7) {
-                  printf("Midi: Unknown Message 0x%02x\n", me & 0xff);
+                  qDebug("Midi: Unknown Message 0x%02x\n", me & 0xff);
                   }
             else
                   break;
@@ -509,7 +509,7 @@ bool MidiFile::readEvent(Event* event)
             status  = -1;                  // no running status
             int len = getvl();
             if (len == -1) {
-                  printf("readEvent: error 3\n");
+                  qDebug("readEvent: error 3\n");
                   return false;
                   }
             data    = new unsigned char[len+1];
@@ -517,7 +517,7 @@ bool MidiFile::readEvent(Event* event)
             read(data, len);
             data[dataLen] = 0;    // always terminate with zero
             if (data[len-1] != 0xf7) {
-                  printf("SYSEX does not end with 0xf7!\n");
+                  qDebug("SYSEX does not end with 0xf7!\n");
                   // more to come?
                   }
             else
@@ -535,7 +535,7 @@ bool MidiFile::readEvent(Event* event)
             read(&type, 1);
             dataLen = getvl();                // read len
             if (dataLen == -1) {
-                  printf("readEvent: error 6\n");
+                  qDebug("readEvent: error 6\n");
                   return false;
                   }
             data = new unsigned char[dataLen + 1];
@@ -557,8 +557,8 @@ bool MidiFile::readEvent(Event* event)
             }
       else {
             if (status == -1) {
-                  printf("readEvent: no running status, read 0x%02x\n", me);
-                  printf("sstatus ist 0x%02x\n", sstatus);
+                  qDebug("readEvent: no running status, read 0x%02x\n", me);
+                  qDebug("sstatus ist 0x%02x\n", sstatus);
                   if (sstatus == -1) {
                         return 0;
                         }
@@ -628,14 +628,14 @@ bool MidiFile::readEvent(Event* event)
                   event->setValue(a & 0x7f);
                   break;
             default:          // f1 f2 f3 f4 f5 f6 f7 f8 f9
-                  printf("BAD STATUS 0x%02x, me 0x%02x\n", status, me);
+                  qDebug("BAD STATUS 0x%02x, me 0x%02x\n", status, me);
                   return false;
             }
 
       if ((a & 0x80) || (b & 0x80)) {
-            printf("8't bit in data set(%02x %02x): tick %d read 0x%02x  status:0x%02x\n",
+            qDebug("8't bit in data set(%02x %02x): tick %d read 0x%02x  status:0x%02x\n",
               a & 0xff, b & 0xff, click, me, status);
-            printf("readEvent: error 16\n");
+            qDebug("readEvent: error 16\n");
             if (b & 0x80) {
                   // Try to fix: interpret as channel byte
                   status   = b;
@@ -704,7 +704,7 @@ void MidiTrack::mergeNoteOnOff()
                                     }
                               if (!found) {
                                     if (rpnh == -1 || rpnl == -1) {
-                                          printf("parameter number not defined, data 0x%x\n", datah);
+                                          qDebug("parameter number not defined, data 0x%x\n", datah);
                                           _events[i].setType(ME_INVALID);
                                           continue;
                                           }
@@ -722,7 +722,7 @@ void MidiTrack::mergeNoteOnOff()
                               datal = val;
 
                               if (rpnh == -1 || rpnl == -1) {
-                                    printf("parameter number not defined, data 0x%x 0x%x, tick %d, channel %d\n",
+                                    qDebug("parameter number not defined, data 0x%x 0x%x, tick %d, channel %d\n",
                                        datah, datal, ev.ontime(), ev.channel());
                                     break;
                                     }
@@ -818,7 +818,7 @@ void MidiTrack::mergeNoteOnOff()
                   }
             int tick = ev.ontime();
             if (ev.type() == ME_NOTEOFF || ev.velo() == 0) {
-                  printf("-extra note off at %d\n", tick);
+                  qDebug("-extra note off at %d\n", tick);
                   _events[i].setType(ME_INVALID);
                   continue;
                   }
@@ -844,7 +844,7 @@ void MidiTrack::mergeNoteOnOff()
                         }
                   }
             if (k == n) {
-                  printf("-no note-off for note at %d\n", tick);
+                  qDebug("-no note-off for note at %d\n", tick);
                   //
                   // note off at end of bar
                   //
@@ -1036,14 +1036,14 @@ void MidiTrack::cleanup()
                               continue;
                         if (ee.ontime() >= (e.ontime() + e.duration()))
                               break;
-                        printf("MidiTrack::cleanup: overlapping events: %d:%d+%d %d:%d+%d\n",
+                        qDebug("MidiTrack::cleanup: overlapping events: %d:%d+%d %d:%d+%d\n",
                            e.pitch(), e.ontime(), e.duration(),
                            ee.pitch(), ee.ontime(), ee.duration());
                         e.setDuration(ee.ontime() - e.ontime());
                         break;
                         }
                   if (e.duration() <= 0) {
-                        printf("MidiTrack::cleanup: duration <= 0: drop note at %d\n", e.ontime());
+                        qDebug("MidiTrack::cleanup: duration <= 0: drop note at %d\n", e.ontime());
                         continue;
                         }
                   }
@@ -1218,14 +1218,14 @@ static void readData(unsigned char* d, int dataLen, QString s)
       {
       QStringList l = s.simplified().split(" ", QString::SkipEmptyParts);
       if (dataLen != l.size()) {
-            printf("error converting data string <%s>\n", s.toLatin1().data());
+            qDebug("error converting data string <%s>\n", s.toLatin1().data());
             }
       int numberBase = 16;
       for (int i = 0; i < l.size(); ++i) {
             bool ok;
             *d++ = l.at(i).toInt(&ok, numberBase);
             if (!ok)
-                  printf("error converting data val <%s>\n", l.at(i).toLatin1().data());
+                  qDebug("error converting data val <%s>\n", l.at(i).toLatin1().data());
             }
       }
 

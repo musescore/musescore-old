@@ -278,7 +278,7 @@ static void collectMeasureEvents(EventMap* events, Measure* m, Part* part, int t
                                                 }
                                           }
                                     else
-                                          printf("Tremolo: cannot find 2. chord\n");
+                                          qDebug("Tremolo: cannot find 2. chord\n");
                                     }
                               else if (chord->tremoloChordType() == TremoloSingle) {
                                     for (int i = 0; i < repeats; ++i) {

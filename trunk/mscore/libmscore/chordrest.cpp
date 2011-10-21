@@ -293,7 +293,7 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets, QLi
                         }
                   }
             if (tuplet() == 0)
-                  printf("Tuplet id %d not found\n", i);
+                  qDebug("Tuplet id %d not found\n", i);
             }
       else if (tag == "leadingSpace")
             _extraLeadingSpace = Spatium(val.toDouble());
@@ -310,7 +310,7 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets, QLi
             if (beam)
                   beam->add(this);        // also calls this->setBeam(beam)
             else
-                  printf("Beam id %d not found\n", i);
+                  qDebug("Beam id %d not found\n", i);
             }
       else if (tag == "small")
             _small = i;
@@ -325,7 +325,7 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets, QLi
                         }
                   }
             if (!slur) {
-                  printf("ChordRest::read(): Slur id %d not found\n", id);
+                  qDebug("ChordRest::read(): Slur id %d not found\n", id);
                   slur = new Slur(score());
                   slur->setId(id);
                   slurs->append(slur);
@@ -339,7 +339,7 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets, QLi
                   _slurBack.append(slur);
                   }
             else
-                  printf("ChordRest::read(): unknown Slur type <%s>\n", qPrintable(type));
+                  qDebug("ChordRest::read(): unknown Slur type <%s>\n", qPrintable(type));
             }
       else if (tag == "durationType") {
             setDurationType(val);
@@ -707,7 +707,7 @@ void ChordRest::addSlurFor(Slur* s)
       {
       int idx = _slurFor.indexOf(s);
       if (idx >= 0) {
-            printf("ChordRest::setSlurFor(): already there\n");
+            qDebug("ChordRest::setSlurFor(): already there\n");
             return;
             }
       _slurFor.append(s);
@@ -721,7 +721,7 @@ void ChordRest::addSlurBack(Slur* s)
       {
       int idx = _slurBack.indexOf(s);
       if (idx >= 0) {
-            printf("ChordRest::setSlurBack(): already there\n");
+            qDebug("ChordRest::setSlurBack(): already there\n");
             return;
             }
       _slurBack.append(s);
@@ -734,9 +734,9 @@ void ChordRest::addSlurBack(Slur* s)
 void ChordRest::removeSlurFor(Slur* s)
       {
       if (!_slurFor.removeOne(s)) {
-            printf("ChordRest<%p>::removeSlurFor(): %p not found\n", this, s);
+            qDebug("ChordRest<%p>::removeSlurFor(): %p not found\n", this, s);
             foreach(Slur* s, _slurFor)
-                  printf("  %p\n", s);
+                  qDebug("  %p\n", s);
             abort();
             }
       }
@@ -748,9 +748,9 @@ void ChordRest::removeSlurFor(Slur* s)
 void ChordRest::removeSlurBack(Slur* s)
       {
       if (!_slurBack.removeOne(s)) {
-            printf("ChordRest<%p>::removeSlurBack(): %p not found\n", this, s);
+            qDebug("ChordRest<%p>::removeSlurBack(): %p not found\n", this, s);
             foreach(Slur* s, _slurBack)
-                  printf("  %p\n", s);
+                  qDebug("  %p\n", s);
             }
       }
 
@@ -835,7 +835,7 @@ Element* ChordRest::drop(const DropData& data)
                   score()->undoAddElement(e);
                   return e;
             default:
-                  printf("cannot drop %s\n", e->name());
+                  qDebug("cannot drop %s\n", e->name());
                   delete e;
                   return 0;
             }
@@ -953,7 +953,7 @@ void ChordRest::add(Element* e)
                   }
                   break;
             default:
-                  printf("ChordRest::add: unknown element %s\n", e->name());
+                  qDebug("ChordRest::add: unknown element %s\n", e->name());
                   break;
             }
       }
@@ -969,7 +969,7 @@ void ChordRest::remove(Element* e)
                   {
                   Articulation* a = static_cast<Articulation*>(e);
                   if (!articulations.removeOne(a))
-                        printf("ChordRest::remove(): articulation not found\n");
+                        qDebug("ChordRest::remove(): articulation not found\n");
                   if (a->timeStretch() > 0.0) {
                         score()->removeTempo(tick());
                         score()->removeTempo(tick() + actualTicks());
@@ -986,10 +986,10 @@ void ChordRest::remove(Element* e)
                         return;
                         }
                   }
-                  printf("ChordRest::remove: %s %p not found\n", e->name(), e);
+                  qDebug("ChordRest::remove: %s %p not found\n", e->name(), e);
                   break;
             default:
-                  printf("ChordRest::remove: unknown element %s\n", e->name());
+                  qDebug("ChordRest::remove: unknown element %s\n", e->name());
                   break;
             }
       }

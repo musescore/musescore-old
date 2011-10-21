@@ -35,17 +35,17 @@ void Score::checkSlurs()
             Element* n1 = s->startElement();
             Element* n2 = s->endElement();
             if (n1 == 0 || n2 == 0 || n1 == n2) {
-                  printf("unconnected slur: removing\n");
+                  qDebug("unconnected slur: removing\n");
                   if (n1) {
                         ((ChordRest*)n1)->removeSlurFor(s);
                         ((ChordRest*)n1)->removeSlurBack(s);
                         }
                   if (n1 == 0)
-                        printf("  start at %d(%d) not found\n", s->tick(), s->track());
+                        qDebug("  start at %d(%d) not found\n", s->tick(), s->track());
                   if (n2 == 0)
-                        printf("  end at %d(%d) not found\n", s->tick2(), s->track2());
+                        qDebug("  end at %d(%d) not found\n", s->tick2(), s->track2());
                   if ((n1 || n2) && (n1==n2))
-                        printf("  start == end\n");
+                        qDebug("  start == end\n");
                   int idx = _gel.indexOf(s);
                   _gel.removeAt(idx);
                   }
@@ -63,7 +63,7 @@ void Score::checkTuplets()
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             foreach(Tuplet* t, *m->tuplets()) {
                   if (t->elements().empty()) {
-printf("empty tuplet: removing\n");
+qDebug("empty tuplet: removing\n");
                         m->tuplets()->removeAll(t);
                         }
                   }
@@ -95,7 +95,7 @@ void Score::checkScore()
                         }
                   if (empty) {
                         // Measure* m = s->measure();
-printf("checkScore: remove empty ChordRest segment\n");
+qDebug("checkScore: remove empty ChordRest segment\n");
 //                        m->remove(s);
                         }
                   }
@@ -118,13 +118,13 @@ printf("checkScore: remove empty ChordRest segment\n");
                         if (lcr) {
                               Fraction timeStretch = st->timeStretch(lcr->tick());
                               Fraction f = cr->globalDuration() * timeStretch;
-                              printf("Chord/Rest gap at tick %d(%s+%d)-%d(%s) staffIdx %d measure %d (len = %d)\n",
+                              qDebug("Chord/Rest gap at tick %d(%s+%d)-%d(%s) staffIdx %d measure %d (len = %d)\n",
                                  tick, lcr->name(), f.ticks(),
                                  s->tick(), cr->name(), staffIdx, cr->measure()->no(),
                                  cr->tick() - tick);
                               }
                         else {
-                              printf("Chord/Rest gap at tick %d-%d(%s) staffIdx %d measure %d (len = %d)\n",
+                              qDebug("Chord/Rest gap at tick %d-%d(%s) staffIdx %d measure %d (len = %d)\n",
                                  tick,
                                  s->tick(), cr->name(), staffIdx, cr->measure()->no(),
                                  cr->tick() - tick);
@@ -135,7 +135,7 @@ printf("checkScore: remove empty ChordRest segment\n");
                               int ticks = cr->tick() - tick;
 
                               Fraction f = Fraction::fromTicks(ticks) / st->timeStretch(ttick);
-                              printf("  insert %d/%d\n", f.numerator(), f.denominator());
+                              qDebug("  insert %d/%d\n", f.numerator(), f.denominator());
 
                               while (ticks > 0) {
                                     Measure* m = tick2measure(ttick);
@@ -145,7 +145,7 @@ printf("checkScore: remove empty ChordRest segment\n");
                                           len = m->tick() + m->ticks() - ttick;
                                     Fraction timeStretch = st->timeStretch(ttick);
                                     Fraction ff          = Fraction::fromTicks(len);
-printf("    - insert %d/%d\n", ff.numerator(), ff.denominator());
+qDebug("    - insert %d/%d\n", ff.numerator(), ff.denominator());
                                     if (ff.numerator() == 0)
                                           break;
                                     Fraction fff = ff / timeStretch;
@@ -156,7 +156,7 @@ printf("    - insert %d/%d\n", ff.numerator(), ff.denominator());
                                           rest->setDurationType(d);
                                           rest->setDuration(d.fraction());
                                           rest->setColor(Qt::red);
-printf("    -   Rest %d/%d\n", d.fraction().numerator(), d.fraction().denominator());
+qDebug("    -   Rest %d/%d\n", d.fraction().numerator(), d.fraction().denominator());
                                           rest->setTrack(track);
                                           Segment* s = m->getSegment(rest, ttick);
                                           s->add(rest);
@@ -170,7 +170,7 @@ printf("    -   Rest %d/%d\n", d.fraction().numerator(), d.fraction().denominato
                         }
                   Fraction timeStretch = st->timeStretch(tick);
                   Fraction f = cr->globalDuration() * timeStretch;
-//                  printf("%s %d + %d = %d\n", cr->name(), tick, f.ticks(), tick + f.ticks());
+//                  qDebug("%s %d + %d = %d\n", cr->name(), tick, f.ticks(), tick + f.ticks());
                   tick      += f.ticks();
                   lcr        = cr;
                   }

@@ -124,7 +124,7 @@ void Marker::setMarkerType(MarkerType t)
                   break;
 
             default:
-                  printf("unknown marker type %d\n", t);
+                  qDebug("unknown marker type %d\n", t);
                   break;
             }
       }
@@ -301,7 +301,7 @@ void Jump::setJumpType(int t)
                   break;
 
             default:
-                  printf("unknown jump type\n");
+                  qDebug("unknown jump type\n");
                   break;
             }
       }

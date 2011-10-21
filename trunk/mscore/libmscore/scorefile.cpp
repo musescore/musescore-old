@@ -200,7 +200,7 @@ void Score::readStaff(QDomElement e)
                                     }
                               }
                         if (measure == 0) {
-                              printf("Score::readStaff(): missing measure!\n");
+                              qDebug("Score::readStaff(): missing measure!\n");
                               measure = new Measure(this);
                               measure->setTick(curTick);
                               add(measure);
@@ -593,7 +593,7 @@ bool Score::loadCompressedMsc(QString name)
             col.setNum(column);
             ln.setNum(line);
             QString error = err + "\n at line " + ln + " column " + col;
-            printf("error: %s\n", qPrintable(error));
+            qDebug("error: %s\n", qPrintable(error));
             return false;
             }
 
@@ -633,12 +633,12 @@ bool Score::loadCompressedMsc(QString name)
             QBuffer& dbuf = ip->buffer();
             dbuf.open(QIODevice::WriteOnly);
             if (!uz.extractFile(ip->path(), &dbuf))
-                  printf("Cannot read <%s> from zipfile\n", qPrintable(ip->path()));
+                  qDebug("Cannot read <%s> from zipfile\n", qPrintable(ip->path()));
             else
                   ip->setLoaded(true);
             }
       if (rootfile.isEmpty()) {
-            printf("can't find rootfile in: %s\n", qPrintable(name));
+            qDebug("can't find rootfile in: %s\n", qPrintable(name));
             return false;
             }
 
@@ -653,7 +653,7 @@ qDebug("after file loading=====\n");
             col.setNum(column);
             ln.setNum(line);
             QString error = err + "\n at line " + ln + " column " + col;
-            printf("error: %s\n", qPrintable(error));
+            qDebug("error: %s\n", qPrintable(error));
             return false;
             }
 qDebug("after xml parsing=====\n");
@@ -672,7 +672,7 @@ qDebug("after xml parsing=====\n");
                   dbuf.open(QIODevice::WriteOnly);
                   QString path = QString("OmrPages/page%1.png").arg(i+1);
                   if (!uz.extractFile(path, &dbuf))
-                        printf("Cannot read <%s> from zipfile\n", qPrintable(path));
+                        qDebug("Cannot read <%s> from zipfile\n", qPrintable(path));
                   else  {
                         OmrPage* page = _omr->page(i);
                         QImage image;
@@ -680,7 +680,7 @@ qDebug("after xml parsing=====\n");
                               page->setImage(image);
                               }
                         else
-                              printf("load image failed\n");
+                              qDebug("load image failed\n");
                         }
                   }
             }
@@ -745,7 +745,7 @@ void Score::parseVersion(const QString& val)
                               int currentVersion = v1 * 10000 + v2 * 100 + v3;
                               int readVersion = rv1 * 10000 + rv2 * 100 + rv3;
                               if (readVersion > currentVersion) {
-                                    printf("read future version\n");
+                                    qDebug("read future version\n");
                                     }
                               }
                         }
@@ -760,17 +760,17 @@ void Score::parseVersion(const QString& val)
                                     int currentVersion = v1 * 10000 + v2 * 100 + v3;
                                     int readVersion = rv1 * 10000 + rv2 * 100;
                                     if (readVersion > currentVersion) {
-                                          printf("read future version\n");
+                                          qDebug("read future version\n");
                                           }
                                     }
                               }
                         else
-                              printf("1cannot parse <%s>\n", qPrintable(val));
+                              qDebug("1cannot parse <%s>\n", qPrintable(val));
                         }
                   }
             }
       else
-            printf("2cannot parse <%s>\n", VERSION);
+            qDebug("2cannot parse <%s>\n", VERSION);
       }
 
 //---------------------------------------------------------
@@ -1110,7 +1110,7 @@ bool Score::read(QDomElement dScore)
                         Segment* s1 = tick2segment(curTick);
                         Segment* s2 = tick2segment(tick2);
                         if (s1 == 0 || s2 == 0) {
-                              printf("cannot place %s at tick %d - %d\n",
+                              qDebug("cannot place %s at tick %d - %d\n",
                                  s->name(), s->__tick1(), tick2);
                               }
                         else {
@@ -1175,13 +1175,13 @@ bool Score::read(QDomElement dScore)
       // check slurs
       foreach(Slur* slur, slurs) {
             if (!slur->startElement() || !slur->endElement()) {
-                  printf("incomplete Slur\n");
+                  qDebug("incomplete Slur\n");
                   if (slur->startElement()) {
-                        printf("  front %d\n", static_cast<ChordRest*>(slur->startElement())->tick());
+                        qDebug("  front %d\n", static_cast<ChordRest*>(slur->startElement())->tick());
                         static_cast<ChordRest*>(slur->startElement())->removeSlurFor(slur);
                         }
                   if (slur->endElement()) {
-                        printf("  back %d\n", static_cast<ChordRest*>(slur->endElement())->tick());
+                        qDebug("  back %d\n", static_cast<ChordRest*>(slur->endElement())->tick());
                         static_cast<ChordRest*>(slur->endElement())->removeSlurBack(slur);
                         }
                   }
@@ -1189,7 +1189,7 @@ bool Score::read(QDomElement dScore)
                   ChordRest* cr1 = (ChordRest*)(slur->startElement());
                   ChordRest* cr2 = (ChordRest*)(slur->endElement());
                   if (cr1->tick() > cr2->tick()) {
-                        printf("Slur invalid start-end tick %d-%d\n", cr1->tick(), cr2->tick());
+                        qDebug("Slur invalid start-end tick %d-%d\n", cr1->tick(), cr2->tick());
                         slur->setStartElement(cr2);
                         slur->setEndElement(cr1);
                         }
@@ -1204,7 +1204,7 @@ bool Score::read(QDomElement dScore)
                               ++n2;
                         }
                   if (n1 != 1 || n2 != 1) {
-                        printf("Slur references bad: %d %d\n", n1, n2);
+                        qDebug("Slur references bad: %d %d\n", n1, n2);
                         }
                   }
             }
@@ -1223,7 +1223,7 @@ bool Score::read(QDomElement dScore)
             int idx = staffIdx(staff);
             int n = nstaves();
             if (idx + barLineSpan > n) {
-                  printf("bad span: idx %d  span %d staves %d\n", idx, barLineSpan, n);
+                  qDebug("bad span: idx %d  span %d staves %d\n", idx, barLineSpan, n);
                   staff->setBarLineSpan(n - idx);
                   }
             }
@@ -1303,7 +1303,7 @@ QByteArray Score::readCompressedToBuffer()
             col.setNum(column);
             ln.setNum(line);
             QString error = err + "\n at line " + ln + " column " + col;
-            printf("error: %s\n", qPrintable(error));
+            qDebug("error: %s\n", qPrintable(error));
             return QByteArray();
             }
 
@@ -1343,13 +1343,13 @@ QByteArray Score::readCompressedToBuffer()
             QBuffer& dbuf = ip->buffer();
             dbuf.open(QIODevice::WriteOnly);
             if (!uz.extractFile(ip->path(), &dbuf))
-                  printf("Cannot read <%s> from zipfile\n", qPrintable(ip->path()));
+                  qDebug("Cannot read <%s> from zipfile\n", qPrintable(ip->path()));
             else
                   ip->setLoaded(true);
             }
 
       if (rootfile.isEmpty()) {
-            printf("can't find rootfile in: %s\n", qPrintable(filePath()));
+            qDebug("can't find rootfile in: %s\n", qPrintable(filePath()));
             return QByteArray();
             }
 
@@ -1389,7 +1389,7 @@ QByteArray Score::readToBuffer()
 void Score::createRevision()
       {
 #if 0
-printf("createRevision\n");
+qDebug("createRevision\n");
       QBuffer dbuf;
       dbuf.open(QIODevice::ReadWrite);
       saveFile(&dbuf, false, false);
@@ -1406,7 +1406,7 @@ printf("createRevision\n");
       r->setId("1");
       _revisions->add(r);
 
-//      printf("patch:\n%s\n==========\n", qPrintable(patch));
+//      qDebug("patch:\n%s\n==========\n", qPrintable(patch));
       //
 #endif
       }

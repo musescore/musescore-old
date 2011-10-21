@@ -95,7 +95,7 @@ void LayerManager::createClicked()
 
 void LayerManager::deleteClicked()
       {
-      printf("TODO\n");
+      qDebug("TODO\n");
       }
 
 //---------------------------------------------------------
@@ -120,7 +120,7 @@ void LayerManager::addTagClicked()
             }
 
       if (items.isEmpty()) {
-            printf("no tags defined\n");
+            qDebug("no tags defined\n");
             return;
             }
       bool ok;

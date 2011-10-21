@@ -103,7 +103,7 @@ int tpc2pitch(int tpc)
             7,  2,  9,  4, 11,  6, 13      // ##
             };
       if (tpc < 0 || tpc >= int(sizeof(pitches)/sizeof(*pitches))) {
-            printf("tpc %d >= %d\n", tpc, int(sizeof(pitches)/sizeof(*pitches)));
+            qDebug("tpc %d >= %d\n", tpc, int(sizeof(pitches)/sizeof(*pitches)));
             abort();
             }
       return pitches[tpc];
@@ -141,7 +141,7 @@ QString tpc2name(int tpc, bool germanNames)
             case  1: s += "#";  break;
             case  2: s += "##"; break;
             default:
-                  printf("tpc2name(%d): acc %d\n", tpc, acc);
+                  qDebug("tpc2name(%d): acc %d\n", tpc, acc);
                   s += "??";
                   break;
             }
@@ -349,7 +349,7 @@ static const bool enharmonicSpelling[15][34] = {
 static int penalty(int lof1, int lof2, int k)
       {
       if (k < 0 || k >= 15) {
-            printf("illegal key %d >= 15\n", k);
+            qDebug("illegal key %d >= 15\n", k);
             abort();
             }
       if (lof1 < 0 || lof1 >= 34)
@@ -463,7 +463,7 @@ int computeWindow(const QList<Note*>& notes, int start, int end)
             int tick = notes[i]->chord()->tick();
             key[k]   = notes[i]->staff()->keymap()->key(tick).accidentalType() + 7;
             if (key[k] < 0 || key[k] > 14) {
-                  printf("illegal key at tick %d: %d, window %d-%d\n",
+                  qDebug("illegal key at tick %d: %d, window %d-%d\n",
                      tick, key[k] - 7, start, end);
                   return 0;
                   // abort();
@@ -510,16 +510,16 @@ int computeWindow(const QList<Note*>& notes, int start, int end)
                         }
                   }
             }
-/*      printf("compute window\n   ");
+/*      qDebug("compute window\n   ");
       for (int i = 0; i < 10; ++i)
-            printf("%2d ", pitch[i]);
-      printf("\n   ");
+            qDebug("%2d ", pitch[i]);
+      qDebug("\n   ");
       for (int i = 0; i < 10; ++i)
-            printf("%2d ", key[i]);
-      printf("\n   ");
+            qDebug("%2d ", key[i]);
+      qDebug("\n   ");
       for (int i = 0; i < 10; ++i)
-            printf("%2d ", tpc(i, pitch[i], idx));
-      printf("\n");
+            qDebug("%2d ", tpc(i, pitch[i], idx));
+      qDebug("\n");
 */
       return idx;
       }
@@ -687,7 +687,7 @@ int pitch2tpc(int pitch, int key)
             {  14, 21, 16, 23, 18, 25, 20, 15, 22, 17, 24, 19 },     // Fis
             {  26, 21, 16, 23, 18, 25, 20, 15, 22, 17, 24, 19 },     // Cis
             };
-// printf("pitch2tpc %d(%d) %d = %d\n", pitch, step, key, ptab[key+7][step]);
+// qDebug("pitch2tpc %d(%d) %d = %d\n", pitch, step, key, ptab[key+7][step]);
       return ptab[key+7][step];
       }
 

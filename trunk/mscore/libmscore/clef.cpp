@@ -306,7 +306,7 @@ Element* Clef::drop(const DropData& data)
       if (e->type() == CLEF) {
             Clef* clef = static_cast<Clef*>(e);
             ClefType stype  = clef->clefType();
-printf("drop clef %d -> %d, track %d\n", int(clefType()), int(stype), track());
+qDebug("drop clef %d -> %d, track %d\n", int(clefType()), int(stype), track());
             if (clefType() != stype) {
                   score()->undoChangeClef(staff(), segment(), stype);
                   c = this;
@@ -390,7 +390,7 @@ void Clef::setSubtype(const QString& s)
       {
       ClefType ct = clefType(s);
       if (ct == CLEF_INVALID) {
-            printf("Clef::setSubtype: unknown: <%s>\n", qPrintable(s));
+            qDebug("Clef::setSubtype: unknown: <%s>\n", qPrintable(s));
             ct = CLEF_G;
             }
       setClefType(ct);

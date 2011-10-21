@@ -138,7 +138,7 @@ void ExportMidi::writeHeader()
                         case 32: n = 5; break;
                         default:
                               n = 2;
-                              printf("ExportMidi: unknown time signature %s\n",
+                              qDebug("ExportMidi: unknown time signature %s\n",
                                  qPrintable(ts.print()));
                               break;
                         }
@@ -310,7 +310,7 @@ bool ExportMidi::write(const QString& name)
                         track->addCtrl(i.key(), event.channel(), event.controller(), event.value());
                         }
                   else {
-                        printf("writeMidi: unknown midi event 0x%02x\n", event.type());
+                        qDebug("writeMidi: unknown midi event 0x%02x\n", event.type());
                         }
                   }
             }

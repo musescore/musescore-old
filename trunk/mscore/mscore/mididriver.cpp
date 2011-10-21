@@ -120,7 +120,7 @@ bool AlsaMidiDriver::init()
       int error = snd_seq_open(&alsaSeq, "hw", SND_SEQ_OPEN_DUPLEX, SND_SEQ_NONBLOCK);
       if (error < 0) {
             if (error == ENOENT)
-                  fprintf(stderr, "open ALSA sequencer failed: %s\n", snd_strerror(error));
+                  qDebug("open ALSA sequencer failed: %s\n", snd_strerror(error));
             return false;
             }
 
@@ -139,7 +139,7 @@ bool AlsaMidiDriver::init()
          | SND_SEQ_PORT_CAP_NO_EXPORT,
          SND_SEQ_PORT_TYPE_APPLICATION);
       if (rv < 0) {
-            fprintf(stderr, "Alsa: create MuseScore port failed: %s\n", snd_strerror(error));
+            qDebug("Alsa: create MuseScore port failed: %s\n", snd_strerror(error));
             return false;
             }
       dst.port   = rv;
@@ -153,7 +153,7 @@ bool AlsaMidiDriver::init()
       snd_seq_port_subscribe_set_sender(subs, &src);
       error = snd_seq_subscribe_port(alsaSeq, subs);
       if (error < 0) {
-            fprintf(stderr, "Alsa: Subscribe System failed: %s\n", snd_strerror(error));
+            qDebug("Alsa: Subscribe System failed: %s\n", snd_strerror(error));
             return false;
             }
       midiOutPorts = new Port[preferences.midiPorts];
@@ -176,8 +176,8 @@ bool AlsaMidiDriver::init()
       QList<PortName> ol = outputPorts();
       foreach(PortName pn, ol) {
             if (debugMode)
-                  printf("connect to midi output <%s>\n", qPrintable(pn.name));
-            printf("Output <%s>\n", qPrintable(pn.name));
+                  qDebug("connect to midi output <%s>\n", qPrintable(pn.name));
+            qDebug("Output <%s>\n", qPrintable(pn.name));
             }
 #endif
 
@@ -185,7 +185,7 @@ bool AlsaMidiDriver::init()
       QList<PortName> il = inputPorts();
       foreach(PortName pn, il) {
             if (debugMode)
-                  printf("connect to midi input <%s>\n", qPrintable(pn.name));
+                  qDebug("connect to midi input <%s>\n", qPrintable(pn.name));
             connect(pn.port, midiInPort);
             }
       return true;
@@ -278,7 +278,7 @@ bool AlsaMidiDriver::connect(Port src, Port dst)
 
       int rv = snd_seq_subscribe_port(alsaSeq, sub);
       if (rv < 0) {
-            printf("AlsaMidi::connect(%d:%d, %d:%d) failed: %s\n",
+            qDebug("AlsaMidi::connect(%d:%d, %d:%d) failed: %s\n",
                src.alsaClient(), src.alsaPort(),
                dst.alsaClient(), dst.alsaPort(),
                snd_strerror(rv));
@@ -375,51 +375,51 @@ void AlsaMidiDriver::read()
                   }
 
             if (midiInputTrace) {
-                  printf("MidiIn: ");
+                  qDebug("MidiIn: ");
                   switch(ev->type) {
                         case SND_SEQ_EVENT_NOTEON:
-                              printf("noteOn ch:%2d 0x%02x 0x%02x\n",
+                              qDebug("noteOn ch:%2d 0x%02x 0x%02x\n",
                                  ev->data.note.channel,
                                  ev->data.note.note,
                                  ev->data.note.velocity);
                               break;
                         case SND_SEQ_EVENT_SYSEX:
-                              printf("sysEx len %d", ev->data.ext.len);
+                              qDebug("sysEx len %d", ev->data.ext.len);
                               break;
                         case SND_SEQ_EVENT_CONTROLLER:
-                              printf("ctrl 0x%02x 0x%02x",
+                              qDebug("ctrl 0x%02x 0x%02x",
                                  ev->data.control.param,
                                  ev->data.control.value);
                               break;
                         case SND_SEQ_EVENT_PITCHBEND:
-                              printf("pitchbend 0x%04x", ev->data.control.value);
+                              qDebug("pitchbend 0x%04x", ev->data.control.value);
                               break;
                         case SND_SEQ_EVENT_PGMCHANGE:
-                              printf("pgmChange 0x%02x", ev->data.control.value);
+                              qDebug("pgmChange 0x%02x", ev->data.control.value);
                               break;
                         case SND_SEQ_EVENT_CHANPRESS:
-                              printf("channelPress 0x%02x", ev->data.control.value);
+                              qDebug("channelPress 0x%02x", ev->data.control.value);
                               break;
                         case SND_SEQ_EVENT_START:
-                              printf("start");
+                              qDebug("start");
                               break;
                         case SND_SEQ_EVENT_CONTINUE:
-                              printf("continue");
+                              qDebug("continue");
                               break;
                         case SND_SEQ_EVENT_STOP:
-                              printf("stop");
+                              qDebug("stop");
                               break;
                         case SND_SEQ_EVENT_SONGPOS:
-                              printf("songpos");
+                              qDebug("songpos");
                               break;
                         default:
-                              printf("type 0x%02x", ev->type);
+                              qDebug("type 0x%02x", ev->type);
                               break;
                         case SND_SEQ_EVENT_PORT_SUBSCRIBED:
                         case SND_SEQ_EVENT_SENSING:
                               break;
                         }
-                  printf("\n");
+                  qDebug("\n");
                   }
             snd_seq_free_event(ev);
             }
@@ -438,7 +438,7 @@ void AlsaMidiDriver::write(const Event& e)
       int b     = e.dataB();
 
       if (midiOutputTrace)
-            printf("midiOut: %2d %02x %02x %02x\n", port, e.type(), a, b);
+            qDebug("midiOut: %2d %02x %02x %02x\n", port, e.type(), a, b);
 
       snd_seq_event_t event;
       memset(&event, 0, sizeof(event));
@@ -493,7 +493,7 @@ void AlsaMidiDriver::write(const Event& e)
                   return;
                   }
             default:
-                  printf("MidiAlsaDriver::putEvent(): event type 0x%02x not implemented\n", e.type());
+                  qDebug("MidiAlsaDriver::putEvent(): event type 0x%02x not implemented\n", e.type());
                   return;
             }
       putEvent(&event);
@@ -519,13 +519,13 @@ bool AlsaMidiDriver::putEvent(snd_seq_event_t* event)
                         return true;
                         }
                   else {
-                        fprintf(stderr, "MidiAlsaDevice::%p putEvent(): midi write error: %s\n",
+                        qDebug("MidiAlsaDevice::%p putEvent(): midi write error: %s\n",
                            this, snd_strerror(error));
                         //exit(-1);
                         }
                   }
             else
-                  fprintf(stderr, "MidiAlsaDevice::putEvent(): midi write returns %d, expected %d: %s\n",
+                  qDebug("MidiAlsaDevice::putEvent(): midi write returns %d, expected %d: %s\n",
                      error, len, snd_strerror(error));
             } while (error == -12);
       return true;

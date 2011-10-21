@@ -63,7 +63,7 @@ bool AlsaDriver::init()
       {
       if (snd_pcm_open(&_play_handle, _name.toLatin1().data(), SND_PCM_STREAM_PLAYBACK, 0) < 0) {
             _play_handle = 0;
-            fprintf (stderr, "Alsa_driver: Cannot open PCM device %s for playback.\n",
+            qDebug ("Alsa_driver: Cannot open PCM device %s for playback.\n",
                _name.toLatin1().data());
             return false;
             }
@@ -71,12 +71,12 @@ bool AlsaDriver::init()
       // check capabilities here
 
       if (snd_pcm_hw_params_malloc (&_play_hwpar) < 0) {
-            fprintf (stderr, "Alsa_driver: can't allocate playback hw params\n");
+            qDebug ("Alsa_driver: can't allocate playback hw params\n");
             return false;
             }
 
       if (snd_pcm_sw_params_malloc (&_play_swpar) < 0) {
-            fprintf (stderr, "Alsa_driver: can't allocate playback sw params\n");
+            qDebug ("Alsa_driver: can't allocate playback sw params\n");
             return false;
             }
       if (setHwpar(_play_handle, _play_hwpar) < 0)
@@ -86,7 +86,7 @@ bool AlsaDriver::init()
       int dir;
       unsigned rate = _rate;
       if (snd_pcm_hw_params_get_rate (_play_hwpar, &_rate, &dir) || (rate != _rate) || dir) {
-            fprintf (stderr, "Alsa_driver: can't get requested sample rate for playback.\n");
+            qDebug ("Alsa_driver: can't get requested sample rate for playback.\n");
             return false;
             }
 
@@ -107,12 +107,12 @@ bool AlsaDriver::init()
                   _clear_func = clear_16le;
                   break;
             default:
-                  fprintf (stderr, "Alsa_driver: can't handle playback sample format.\n");
+                  qDebug ("Alsa_driver: can't handle playback sample format.\n");
                   return false;
             }
       _play_npfd = snd_pcm_poll_descriptors_count (_play_handle);
       if (_play_npfd > MAXPFD) {
-            fprintf (stderr, "Alsa_driver: interface requires more than %d pollfd\n", MAXPFD);
+            qDebug ("Alsa_driver: interface requires more than %d pollfd\n", MAXPFD);
             return false;
             }
       _stat = 0;
@@ -142,7 +142,7 @@ bool AlsaDriver::pcmStart()
       int err;
       snd_pcm_sframes_t n = snd_pcm_avail_update(_play_handle);
       if (unsigned(n) != _frsize * _nfrags) {
-            fprintf  (stderr, "Alsa_driver: full buffer not available at start.\n");
+            qDebug("Alsa_driver: full buffer not available at start.\n");
             return true;
             }
       if (mmappedInterface) {
@@ -154,7 +154,7 @@ bool AlsaDriver::pcmStart()
                   }
             }
       if ((err = snd_pcm_start (_play_handle)) < 0) {
-            fprintf (stderr, "Alsa_driver: pcm_start(play): %s.\n", snd_strerror (err));
+            qDebug ("Alsa_driver: pcm_start(play): %s.\n", snd_strerror (err));
             return true;
             }
       return false;
@@ -168,7 +168,7 @@ int AlsaDriver::pcmStop()
       {
       int err;
       if (_play_handle && ((err = snd_pcm_drop (_play_handle)) < 0)) {
-            fprintf (stderr, "Alsa_driver: pcm_drop(play): %s\n", snd_strerror (err));
+            qDebug ("Alsa_driver: pcm_drop(play): %s\n", snd_strerror (err));
             return -1;
             }
       return 0;
@@ -195,7 +195,7 @@ snd_pcm_sframes_t AlsaDriver::pcmWait()
                         _stat = 1;
                         return 0;
                         }
-                  fprintf (stderr, "Alsa_driver: poll(): %s\n.", strerror (errno));
+                  qDebug ("Alsa_driver: poll(): %s\n.", strerror (errno));
                   _stat = 2;
                   return 0;
                   }
@@ -214,7 +214,7 @@ snd_pcm_sframes_t AlsaDriver::pcmWait()
                   }
 
             if ((play_to && (play_to == _play_npfd))) {
-                  fprintf (stderr, "Alsa_driver: poll timed out\n.");
+                  qDebug ("Alsa_driver: poll timed out\n.");
                   _stat |= 16;
                   return 0;
                   }
@@ -241,7 +241,7 @@ int AlsaDriver::playInit(snd_pcm_uframes_t len)
       const snd_pcm_channel_area_t* a;
 
       if ((err = snd_pcm_mmap_begin (_play_handle, &a, &_play_offs, &len)) < 0) {
-            fprintf (stderr, "Alsa_driver: snd_pcm_mmap_begin(play): %s.\n", snd_strerror (err));
+            qDebug ("Alsa_driver: snd_pcm_mmap_begin(play): %s.\n", snd_strerror (err));
             return -1;
             }
       _play_step = (a->step) >> 3;
@@ -257,11 +257,11 @@ int AlsaDriver::playInit(snd_pcm_uframes_t len)
 
 void AlsaDriver::printinfo()
       {
-      fprintf (stderr, "\n  nchan  : %d\n", _play_nchan);
-      fprintf (stderr, "  rate   : %d\n", _rate);
-      fprintf (stderr, "  frsize : %ld\n", _frsize);
-      fprintf (stderr, "  nfrags : %d\n", _nfrags);
-      fprintf (stderr, "  format : %s\n", snd_pcm_format_name (_play_format));
+      qDebug("\n  nchan  : %d\n", _play_nchan);
+      qDebug("  rate   : %d\n", _rate);
+      qDebug("  frsize : %ld\n", _frsize);
+      qDebug("  nfrags : %d\n", _nfrags);
+      qDebug("  format : %s\n", snd_pcm_format_name (_play_format));
       }
 
 //---------------------------------------------------------
@@ -273,12 +273,12 @@ int AlsaDriver::setHwpar(snd_pcm_t* handle, snd_pcm_hw_params_t* hwpar)
       int err;
 
       if ((err = snd_pcm_hw_params_any(handle, hwpar)) < 0) {
-            fprintf (stderr, "Alsa_driver: no hw configurations available: %s.\n", snd_strerror (err));
+            qDebug("Alsa_driver: no hw configurations available: %s.\n", snd_strerror (err));
             return -1;
             }
 
       if ((err = snd_pcm_hw_params_set_periods_integer (handle, hwpar)) < 0) {
-            fprintf (stderr, "Alsa_driver: can't set period size to integral value.\n");
+            qDebug("Alsa_driver: can't set period size to integral value.\n");
             return -1;
             }
 
@@ -286,10 +286,10 @@ int AlsaDriver::setHwpar(snd_pcm_t* handle, snd_pcm_hw_params_t* hwpar)
       if (((err = snd_pcm_hw_params_set_access (handle, hwpar, SND_PCM_ACCESS_MMAP_NONINTERLEAVED)) < 0)
          && ((err = snd_pcm_hw_params_set_access (handle, hwpar, SND_PCM_ACCESS_MMAP_INTERLEAVED)) < 0)) {
             mmappedInterface = false;
-            fprintf (stderr, "Alsa_driver: the interface doesn't support mmap-based access.\n");
+            qDebug("Alsa_driver: the interface doesn't support mmap-based access.\n");
             if (((err = snd_pcm_hw_params_set_access (handle, hwpar, SND_PCM_ACCESS_RW_NONINTERLEAVED)) < 0)
                && ((err = snd_pcm_hw_params_set_access (handle, hwpar, SND_PCM_ACCESS_RW_INTERLEAVED)) < 0)) {
-                  fprintf (stderr, "Alsa_driver: the interface doesn't support rw-based access.\n");
+                  qDebug("Alsa_driver: the interface doesn't support rw-based access.\n");
                   return -1;
                   }
             }
@@ -297,17 +297,17 @@ int AlsaDriver::setHwpar(snd_pcm_t* handle, snd_pcm_hw_params_t* hwpar)
       if (((err = snd_pcm_hw_params_set_format(handle, hwpar, SND_PCM_FORMAT_S16)) < 0)
          && ((err = snd_pcm_hw_params_set_format(handle, hwpar, SND_PCM_FORMAT_S24_3LE)) < 0)
          && ((err = snd_pcm_hw_params_set_format(handle, hwpar, SND_PCM_FORMAT_S32)) < 0)) {
-            fprintf (stderr, "Alsa_driver: the interface doesn't support 32, 24 or 16 bit access.\n.");
+            qDebug("Alsa_driver: the interface doesn't support 32, 24 or 16 bit access.\n.");
             return -1;
             }
 
       if ((err = snd_pcm_hw_params_set_rate(handle, hwpar, _rate, 0)) < 0) {
-            fprintf (stderr, "Alsa_driver: can't set sample rate to %u.\n", _rate);
+            qDebug("Alsa_driver: can't set sample rate to %u.\n", _rate);
             return -1;
             }
 
       if ((err = snd_pcm_hw_params_set_channels(handle, hwpar, _play_nchan)) < 0) {
-            fprintf (stderr, "Alsa_driver: can't set channel count to %u.\n",
+            qDebug("Alsa_driver: can't set channel count to %u.\n",
                _play_nchan);
             return -1;
             }
@@ -315,27 +315,27 @@ int AlsaDriver::setHwpar(snd_pcm_t* handle, snd_pcm_hw_params_t* hwpar)
       int dir = 0;
       // if ((err = snd_pcm_hw_params_set_periods_near (handle, hwpar, &_nfrags, &dir)) < 0) {
       if ((err = snd_pcm_hw_params_set_periods(handle, hwpar, _nfrags, 0)) < 0) {
-            fprintf (stderr, "Alsa_driver: can't set periods to %u.\n", _nfrags);
+            qDebug("Alsa_driver: can't set periods to %u.\n", _nfrags);
             return -1;
             }
 
       dir = 0;
       if ((err = snd_pcm_hw_params_set_period_size_near(handle, hwpar, &_frsize, &dir)) < 0) {
-            fprintf (stderr, "Alsa_driver: can't set period size to %lu: %s\n",
+            qDebug("Alsa_driver: can't set period size to %lu: %s\n",
                _frsize, snd_strerror(err));
             return -1;
             }
 
       snd_pcm_uframes_t  n = _frsize * _nfrags;
       if ((err = snd_pcm_hw_params_set_buffer_size_near (handle, hwpar, &n)) < 0) {
-            fprintf (stderr, "Alsa_driver: can't set buffer length to %lu.\n", _frsize * _nfrags);
+            qDebug("Alsa_driver: can't set buffer length to %lu.\n", _frsize * _nfrags);
             return -1;
             }
       if (n != _frsize * _nfrags)
-            fprintf (stderr, "Alsa_driver: buffer size requested %lu got %lu\n", _frsize * _nfrags, n);
+            qDebug("Alsa_driver: buffer size requested %lu got %lu\n", _frsize * _nfrags, n);
 
       if ((err = snd_pcm_hw_params (handle, hwpar)) < 0) {
-            fprintf (stderr, "Alsa_driver: can't set hardware parameters.\n");
+            qDebug("Alsa_driver: can't set hardware parameters.\n");
             return -1;
             }
       return 0;
@@ -351,17 +351,17 @@ int AlsaDriver::setSwpar(snd_pcm_t *handle, snd_pcm_sw_params_t *swpar)
 
       snd_pcm_sw_params_current(handle, swpar);
       if ((err = snd_pcm_sw_params_set_silence_size(handle, swpar, 0)) < 0) {
-            fprintf(stderr, "AlsaDriver: can't set timestamp mode to %u.\n",
+            qDebug("AlsaDriver: can't set timestamp mode to %u.\n",
                SND_PCM_TSTAMP_MMAP);
             return -1;
             }
 
       if ((err = snd_pcm_sw_params_set_avail_min(handle, swpar, _frsize)) < 0) {
-            fprintf(stderr, "AlsaDriver: can't set availmin to %lu.\n", _frsize);
+            qDebug("AlsaDriver: can't set availmin to %lu.\n", _frsize);
             return -1;
             }
       if ((err = snd_pcm_sw_params(handle, swpar)) < 0) {
-            fprintf (stderr, "Alsa_driver: can't set software parameters.\n");
+            qDebug ("Alsa_driver: can't set software parameters.\n");
             return -1;
             }
       return 0;
@@ -379,25 +379,25 @@ int AlsaDriver::recover()
       snd_pcm_status_alloca (&stat);
 
       if ((err = snd_pcm_status (_play_handle, stat)) < 0) {
-            fprintf (stderr, "Alsa_driver: pcm_status(): %s\n",  snd_strerror (err));
+            qDebug("Alsa_driver: pcm_status(): %s\n",  snd_strerror (err));
             }
       else if (snd_pcm_status_get_state (stat) == SND_PCM_STATE_XRUN) {
             struct timeval tnow, trig;
             gettimeofday (&tnow, 0);
             snd_pcm_status_get_trigger_tstamp (stat, &trig);
-            fprintf (stderr, "Alsa_driver: stat = %02x, xrun of at least %8.3lf ms\n", _stat,
+            qDebug("Alsa_driver: stat = %02x, xrun of at least %8.3lf ms\n", _stat,
                1e3 * tnow.tv_sec - 1e3 * trig.tv_sec + 1e-3 * tnow.tv_usec - 1e-3 * trig.tv_usec);
             }
       if (pcmStop()) {
-            printf("pcmStop failed\n");
+            qDebug("pcmStop failed\n");
             return -1;
             }
       if (_play_handle && ((err = snd_pcm_prepare (_play_handle)) < 0)) {
-            fprintf (stderr, "Alsa_driver: pcm_prepare(play): %s\n", snd_strerror (err));
+            qDebug("Alsa_driver: pcm_prepare(play): %s\n", snd_strerror (err));
             return -1;
             }
       if (pcmStart ()) {
-            printf("pcmStart failed\n");
+            qDebug("pcmStart failed\n");
             return -1;
             }
       return 0;
@@ -566,17 +566,17 @@ void AlsaDriver::write(int n, float* l, float* r)
                   bp[0] = lbuffer;
                   bp[1] = rbuffer;
                   if ((err = snd_pcm_writen(_play_handle, bp, n)) < 0)
-                        printf("AlsaDriver::write(): failed (%s)\n", snd_strerror(err));
+                        qDebug("AlsaDriver::write(): failed (%s)\n", snd_strerror(err));
                   }
             else if (_play_access == SND_PCM_ACCESS_RW_INTERLEAVED) {
                   short buffer[n * 2];
                   _play_func(l, (char*)buffer, 4, n);
                   _play_func(r, (char*)(buffer + 1), 4, n);
                   if ((err = snd_pcm_writei(_play_handle, buffer, n)) < 0)
-                        printf("AlsaDriver::write(): failed (%s)\n", snd_strerror(err));
+                        qDebug("AlsaDriver::write(): failed (%s)\n", snd_strerror(err));
                   }
             else {
-                  printf("AlsaDriver::write(): unsupported accesss type %d\n", _play_access);
+                  qDebug("AlsaDriver::write(): unsupported accesss type %d\n", _play_access);
                   return;
                   }
             }
@@ -632,7 +632,7 @@ bool AlsaAudio::init()
       if (!alsa->init()) {
             delete alsa;
             alsa = 0;
-            fprintf(stderr, "init ALSA audio driver failed\n");
+            qDebug("init ALSA audio driver failed\n");
             return false;
             }
 

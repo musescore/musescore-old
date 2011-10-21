@@ -63,11 +63,11 @@ void TimeSigProperties::accept()
             timesig->setSubtype(TSIG_NORMAL);
       else if (fourfourButton->isChecked()) {
             timesig->setSubtype(TSIG_FOUR_FOUR);
-            printf("fourfour\n");
+            qDebug("fourfour\n");
             }
       else if (allaBreveButton->isChecked()) {
             timesig->setSubtype(TSIG_ALLA_BREVE);
-            printf("alla breve\n");
+            qDebug("alla breve\n");
             }
       // setSig() and setActualSig must be AFTER setSubType()
       // as setSubType() also reset sig

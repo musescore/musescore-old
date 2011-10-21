@@ -81,7 +81,7 @@
 void Score::startCmd()
       {
       if (debugMode)
-            printf("===startCmd()\n");
+            qDebug("===startCmd()\n");
       _layoutAll = true;      ///< do a complete relayout
       _playNote = false;
 
@@ -90,7 +90,7 @@ void Score::startCmd()
 
       if (undo()->active()) {
             // if (debugMode)
-            fprintf(stderr, "Score::startCmd(): cmd already active\n");
+            qDebug("Score::startCmd(): cmd already active\n");
             abort();
             return;
             }
@@ -108,7 +108,7 @@ void Score::endCmd()
       {
       if (!undo()->active()) {
             // if (debugMode)
-                  fprintf(stderr, "Score::endCmd(): no cmd active\n");
+                  qDebug("Score::endCmd(): no cmd active\n");
             end();
             return;
             }
@@ -122,7 +122,7 @@ void Score::endCmd()
             setDirty(!noUndo);
       undo()->endMacro(noUndo);
       if (debugMode)
-            printf("===endCmd\n");
+            qDebug("===endCmd\n");
       }
 
 //---------------------------------------------------------
@@ -133,7 +133,7 @@ void Score::endCmd()
 void Score::end()
       {
       if (debugMode)
-            printf("===end\n");
+            qDebug("===end\n");
       Score* score = parentScore() ? parentScore() : this;
       score->end1();
       foreach(Excerpt* e, score->_excerpts)
@@ -206,7 +206,7 @@ void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& /
       Segment* segment;
       MeasureBase* mb = pos2measure(pos, &staffIdx, &pitch, &segment, &offset);
       if (mb == 0 || mb->type() != MEASURE) {
-            printf("cmdAddSpanner: cannot put object here\n");
+            qDebug("cmdAddSpanner: cannot put object here\n");
             delete spanner;
             return;
             }
@@ -226,7 +226,7 @@ void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& /
                         break;
                   }
             if (ns == segment) {
-                  printf("cmdAddSpanner: cannot put object on last segment\n");
+                  qDebug("cmdAddSpanner: cannot put object on last segment\n");
                   delete spanner;
                   return;
                   }
@@ -290,7 +290,7 @@ void Score::expandVoice(Segment* s, int track)
       {
       if (s->element(track)) {
             ChordRest* cr = (ChordRest*)(s->element(track));
-            printf("expand voice: found %s %s\n", cr->name(), qPrintable(cr->duration().print()));
+            qDebug("expand voice: found %s %s\n", cr->name(), qPrintable(cr->duration().print()));
             return;
             }
 
@@ -305,7 +305,7 @@ void Score::expandVoice(Segment* s, int track)
             if (tick == s->tick())
                   return;
             if (tick > s->tick()) {
-                  printf("expandVoice: cannot insert element here\n");
+                  qDebug("expandVoice: cannot insert element here\n");
                   return;
                   }
             }
@@ -346,7 +346,7 @@ void Score::expandVoice()
 
 Note* Score::addPitch(int pitch, bool addFlag)
       {
-printf("add pitch %d %d\n", pitch, addFlag);
+qDebug("add pitch %d %d\n", pitch, addFlag);
 
       if (addFlag) {
             // add note to selected chord
@@ -413,7 +413,7 @@ printf("add pitch %d %d\n", pitch, addFlag);
                         _is.slur->setEndElement(e);
                   }
             else
-                  printf("addPitch: cannot find slur note\n");
+                  qDebug("addPitch: cannot find slur note\n");
             setLayoutAll(true);
             }
       moveToNextInputPos();
@@ -521,7 +521,7 @@ Segment* Score::setNoteRest(Segment* segment, int track, NoteVal nval, Fraction 
             Fraction dd = makeGap(segment, track, sd, cr ? cr->tuplet() : 0);
 
             if (dd.isZero()) {
-                  printf("cannot get gap at %d type: %d/%d\n", tick, sd.numerator(),
+                  qDebug("cannot get gap at %d type: %d/%d\n", tick, sd.numerator(),
                      sd.denominator());
                   break;
                   }
@@ -575,7 +575,7 @@ Segment* Score::setNoteRest(Segment* segment, int track, NoteVal nval, Fraction 
 
             Segment* nseg = tick2segment(tick, false, SegChordRest);
             if (nseg == 0) {
-                  printf("reached end of score\n");
+                  qDebug("reached end of score\n");
                   break;
                   }
             segment = nseg;
@@ -586,7 +586,7 @@ Segment* Score::setNoteRest(Segment* segment, int track, NoteVal nval, Fraction 
                   if (track % VOICES)
                         cr = addRest(segment, track, Duration(Duration::V_MEASURE), 0);
                   else {
-                        printf("no rest in voice 0\n");
+                        qDebug("no rest in voice 0\n");
                         break;
                         }
                   }
@@ -619,7 +619,7 @@ Segment* Score::setNoteRest(Segment* segment, int track, NoteVal nval, Fraction 
 
 Fraction Score::makeGap(Segment* segment, int track, const Fraction& _sd, Tuplet* tuplet)
       {
-printf("makeGap %s at %d track %d\n", qPrintable(_sd.print()), segment->tick(), track);
+qDebug("makeGap %s at %d track %d\n", qPrintable(_sd.print()), segment->tick(), track);
       assert(_sd.numerator());
 
       Measure* measure = segment->measure();
@@ -677,17 +677,17 @@ printf("makeGap %s at %d track %d\n", qPrintable(_sd.print()), segment->tick(), 
                         t = t->tuplet();
                         }
                   if (tupletEnd) {
-//                        printf("makeGap: end of tuplet reached\n");
+//                        qDebug("makeGap: end of tuplet reached\n");
                         return akkumulated;
                         }
                   }
             Fraction td(cr->duration());
-printf("remove %s %s at tick %d track %d\n",
+qDebug("remove %s %s at tick %d track %d\n",
    cr->name(), qPrintable(cr->duration().print()), seg->tick(), track);
 
             Tuplet* ltuplet = cr->tuplet();
             if (cr->tuplet() != tuplet) {
-//                  printf("   remove tuplet %d\n", sd >= ltuplet->fraction());
+//                  qDebug("   remove tuplet %d\n", sd >= ltuplet->fraction());
                   //
                   // Current location points to the start of a (nested)tuplet.
                   // We have to remove the complete tuplet.
@@ -702,7 +702,7 @@ printf("remove %s %s at tick %d track %d\n",
                   tuplet = 0;
                   }
             else {
-printf("  makeGap: remove %d/%d at %d\n", td.numerator(), td.denominator(), cr->tick());
+qDebug("  makeGap: remove %d/%d at %d\n", td.numerator(), td.denominator(), cr->tick());
                   undoRemoveElement(cr);
                   if (seg->isEmpty() && seg != firstSegment)
                         undoRemoveElement(seg);
@@ -721,7 +721,7 @@ printf("  makeGap: remove %d/%d at %d\n", td.numerator(), td.denominator(), cr->
                   akkumulated = _sd;
                   Fraction rd = td - sd;
 
-printf("  makeGap: %d/%d removed %d/%d too much\n", sd.numerator(), sd.denominator(), rd.numerator(), rd.denominator());
+qDebug("  makeGap: %d/%d removed %d/%d too much\n", sd.numerator(), sd.denominator(), rd.numerator(), rd.denominator());
 
                   QList<Duration> dList = toDurationList(rd, false);
                   if (dList.isEmpty())
@@ -730,11 +730,11 @@ printf("  makeGap: %d/%d removed %d/%d too much\n", sd.numerator(), sd.denominat
                   for (Tuplet* t = tuplet; t; t = t->tuplet())
                         f /= t->ratio();
                   int tick  = cr->tick() + f.ticks();
-printf("   gap at tick %d+%d\n", cr->tick(), f.ticks());
+qDebug("   gap at tick %d+%d\n", cr->tick(), f.ticks());
 
                   if ((tuplet == 0) && (((measure->tick() - tick) % dList[0].ticks()) == 0)) {
                         foreach(Duration d, dList) {
-//                              printf("   addClone %d\n", tick);
+//                              qDebug("   addClone %d\n", tick);
                               tick += addClone(cr, tick, d)->actualTicks();
                               }
                         }
@@ -742,12 +742,12 @@ printf("   gap at tick %d+%d\n", cr->tick(), f.ticks());
                         for (int i = dList.size() - 1; i >= 0; --i)
                               tick += addClone(cr, tick, dList[i])->actualTicks();
                         }
-// printf("  return %d/%d\n", akkumulated.numerator(), akkumulated.denominator());
+// qDebug("  return %d/%d\n", akkumulated.numerator(), akkumulated.denominator());
                   return akkumulated;
                   }
             akkumulated += td;
             sd          -= td;
-printf("  akkumulated %d/%d rest %d/%d (-%d/%d)\n",
+qDebug("  akkumulated %d/%d rest %d/%d (-%d/%d)\n",
    akkumulated.numerator(), akkumulated.denominator(), sd.numerator(), sd.denominator(),
    td.numerator(), td.denominator());
             if (sd.isZero())
@@ -779,7 +779,7 @@ bool Score::makeGap1(int tick, int staffIdx, Fraction len)
       ChordRest* cr = 0;
       Segment* seg = tick2segment(tick, true, SegChordRest | SegGrace);
       if (!seg) {
-            printf("1:makeGap1: no segment at %d\n", tick);
+            qDebug("1:makeGap1: no segment at %d\n", tick);
             return false;
             }
       int track = staffIdx * VOICES;
@@ -788,7 +788,7 @@ bool Score::makeGap1(int tick, int staffIdx, Fraction len)
             if (seg->subtype() & SegGrace) {
                   seg = seg->next1(SegChordRest);
                   if (!seg || !seg->element(track)) {
-                        printf("makeGap1: no chord/rest at %d staff %d\n", tick, staffIdx);
+                        qDebug("makeGap1: no chord/rest at %d staff %d\n", tick, staffIdx);
                         return false;
                         }
                   cr = static_cast<ChordRest*>(seg->element(track));
@@ -799,7 +799,7 @@ bool Score::makeGap1(int tick, int staffIdx, Fraction len)
                   for (;;) {
                         seg1 = seg->prev(SegChordRest);
                         if (seg1 == 0) {
-                              printf("1:makeGap1: no segment at %d\n", tick);
+                              qDebug("1:makeGap1: no segment at %d\n", tick);
                               return false;
                               }
                         if (seg1->element(track))
@@ -812,7 +812,7 @@ bool Score::makeGap1(int tick, int staffIdx, Fraction len)
                   for (;;) {
                         seg = seg->next1(SegChordRest | SegGrace);
                         if (seg == 0) {
-                              printf("2:makeGap1: no segment\n");
+                              qDebug("2:makeGap1: no segment\n");
                               return false;
                               }
                         if (seg->element(track)) {
@@ -826,12 +826,12 @@ bool Score::makeGap1(int tick, int staffIdx, Fraction len)
 
       for (;;) {
             if (!cr) {
-                  printf("makeGap1: cannot make gap\n");
+                  qDebug("makeGap1: cannot make gap\n");
                   return false;
                   }
             Fraction l = makeGap(cr->segment(), cr->track(), len, 0);
             if (l.isZero()) {
-                  printf("makeGap1: makeGap returns zero gap\n");
+                  qDebug("makeGap1: makeGap returns zero gap\n");
                   return false;
                   }
             len -= l;
@@ -840,11 +840,11 @@ bool Score::makeGap1(int tick, int staffIdx, Fraction len)
             // go to next cr
             Measure* m = cr->measure()->nextMeasure();
             if (m == 0) {
-                  printf("EOS reached\n");
+                  qDebug("EOS reached\n");
                   appendMeasures(1, MEASURE);
                   m = cr->measure()->nextMeasure();
                   if (m == 0) {
-                        printf("===EOS reached\n");
+                        qDebug("===EOS reached\n");
                         return true;
                         }
                   }
@@ -873,7 +873,7 @@ QList<Fraction> Score::splitGapToMeasureBoundaries(ChordRest* cr, Fraction gap)
       if (tuplet) {
             Fraction rest(tuplet->duration());
             if (rest < gap)
-                  printf("does not fit in tuplet\n");
+                  qDebug("does not fit in tuplet\n");
             else
                   flist.append(rest);
             return flist;
@@ -911,7 +911,7 @@ void Score::changeCRlen(ChordRest* cr, const Duration& d)
       else
             dstF = d.fraction();
 
-printf("changeCRlen: %d/%d -> %d/%d\n", srcF.numerator(), srcF.denominator(),
+qDebug("changeCRlen: %d/%d -> %d/%d\n", srcF.numerator(), srcF.denominator(),
       dstF.numerator(), dstF.denominator());
 
       if (srcF == dstF)
@@ -946,9 +946,9 @@ printf("changeCRlen: %d/%d -> %d/%d\n", srcF.numerator(), srcF.denominator(),
       if (flist.isEmpty())
             return;
 
-printf("ChangeCRLen::List:\n");
+qDebug("ChangeCRLen::List:\n");
       foreach (Fraction f, flist)
-            printf("  %d/%d\n", f.numerator(), f.denominator());
+            qDebug("  %d/%d\n", f.numerator(), f.denominator());
 
       int tick       = cr->tick();
       Fraction f     = dstF;
@@ -961,14 +961,14 @@ printf("ChangeCRLen::List:\n");
             makeGap(cr1->segment(), cr1->track(), f2, tuplet);
 
             if (cr->type() == REST) {
-printf("  +ChangeCRLen::setRest %d/%d\n", f2.numerator(), f2.denominator());
+qDebug("  +ChangeCRLen::setRest %d/%d\n", f2.numerator(), f2.denominator());
                   Fraction timeStretch = cr1->staff()->timeStretch(cr1->tick());
                   Rest* r = setRest(tick, track, f2 * timeStretch, (d.dots() > 0), tuplet);
                   if (first) {
                         select(r, SELECT_SINGLE, 0);
                         first = false;
                         }
-printf("  ChangeCRLen:: %d += %d(actual=%d)\n", tick, f2.ticks(), f2.ticks() * timeStretch.numerator() / timeStretch.denominator());
+qDebug("  ChangeCRLen:: %d += %d(actual=%d)\n", tick, f2.ticks(), f2.ticks() * timeStretch.numerator() / timeStretch.denominator());
                   tick += f2.ticks() * timeStretch.numerator() / timeStretch.denominator();
                   }
             else {
@@ -1490,7 +1490,7 @@ void Score::moveDown(Chord* chord)
       int staffMove = chord->staffMove();
 
       if ((staffMove == 1) || (rstaff + staffMove >= rstaves - 1)) {
-printf("moveDown staffMove==%d  rstaff %d rstaves %d\n", staffMove, rstaff, rstaves);
+qDebug("moveDown staffMove==%d  rstaff %d rstaves %d\n", staffMove, rstaff, rstaves);
             return;
             }
       undo()->push(new ChangeChordStaffMove(chord, staffMove + 1));
@@ -1537,7 +1537,7 @@ void Score::cmdInsertClef(ClefType type)
 void Score::cmdResetBeamMode()
       {
       if (selection().state() != SEL_RANGE) {
-            printf("no system or staff selected\n");
+            qDebug("no system or staff selected\n");
             return;
             }
       int startTick = selection().tickStart();
@@ -1573,7 +1573,7 @@ void Score::cmdResetBeamMode()
 void Score::processMidiInput()
       {
       if (debugMode)
-          printf("processMidiInput\n");
+          qDebug("processMidiInput\n");
       if (midiInputQueue.isEmpty())
             return;
 
@@ -1582,7 +1582,7 @@ void Score::processMidiInput()
       while (!midiInputQueue.isEmpty()) {
             MidiInputEvent ev = midiInputQueue.dequeue();
             if (debugMode)
-                  printf("<-- !noteentry dequeue %i\n", ev.pitch);
+                  qDebug("<-- !noteentry dequeue %i\n", ev.pitch);
             if (!noteEntryMode()) {
 //                  int staffIdx = selection().staffStart();
 //                  Part* p;
@@ -1618,7 +1618,7 @@ void Score::cmdPaste(MuseScoreView* view)
       {
       const QMimeData* ms = QApplication::clipboard()->mimeData();
       if (ms == 0) {
-            printf("no application mime data\n");
+            qDebug("no application mime data\n");
             return;
             }
       if (selection().isSingle() && ms->hasFormat(mimeSymbolFormat)) {
@@ -1627,9 +1627,9 @@ void Score::cmdPaste(MuseScoreView* view)
             int line, column;
             QString err;
             if (!doc.setContent(data, &err, &line, &column)) {
-                  printf("error reading paste data at line %d column %d: %s\n",
+                  qDebug("error reading paste data at line %d column %d: %s\n",
                      line, column, qPrintable(err));
-                  printf("%s\n", data.data());
+                  qDebug("%s\n", data.data());
                   return;
                   }
             docName = "--";
@@ -1667,7 +1667,7 @@ void Score::cmdPaste(MuseScoreView* view)
                         }
                   }
             else
-                  printf("cannot read type\n");
+                  qDebug("cannot read type\n");
             }
       else if ((selection().state() == SEL_RANGE || selection().state() == SEL_LIST)
          && ms->hasFormat(mimeStaffListFormat)) {
@@ -1678,7 +1678,7 @@ void Score::cmdPaste(MuseScoreView* view)
             else if (selection().isSingle()) {
                   Element* e = selection().element();
                   if (e->type() != NOTE && e->type() != REST) {
-                        printf("cannot paste to %s\n", e->name());
+                        qDebug("cannot paste to %s\n", e->name());
                         return;
                         }
                   if (e->type() == NOTE)
@@ -1686,32 +1686,32 @@ void Score::cmdPaste(MuseScoreView* view)
                   cr  = static_cast<ChordRest*>(e);
                   }
             if (cr == 0) {
-                  printf("no destination for paste\n");
+                  qDebug("no destination for paste\n");
                   return;
                   }
 
             QByteArray data(ms->data(mimeStaffListFormat));
-printf("paste <%s>\n", data.data());
+qDebug("paste <%s>\n", data.data());
             QDomDocument doc;
             int line, column;
             QString err;
             if (!doc.setContent(data, &err, &line, &column)) {
-                  printf("error reading paste data at line %d column %d: %s\n",
+                  qDebug("error reading paste data at line %d column %d: %s\n",
                      line, column, qPrintable(err));
-                  printf("%s\n", data.data());
+                  qDebug("%s\n", data.data());
                   return;
                   }
             docName = "--";
             pasteStaff(doc.documentElement(), cr);
             }
       else if (ms->hasFormat(mimeSymbolListFormat) && selection().isSingle()) {
-            printf("cannot paste symbol list to element\n");
+            qDebug("cannot paste symbol list to element\n");
             }
       else {
-            printf("cannot paste selState %d staffList %d\n",
+            qDebug("cannot paste selState %d staffList %d\n",
                selection().state(), ms->hasFormat(mimeStaffListFormat));
             foreach(const QString& s, ms->formats())
-                  printf("  format %s\n", qPrintable(s));
+                  qDebug("  format %s\n", qPrintable(s));
             }
       }
 
@@ -1753,7 +1753,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                   if (staffIdx >= nstaves())
                         break;
                   if (!makeGap1(dst->tick(), staffIdx, Fraction::fromTicks(tickLen))) {
-printf("cannot make gap in staff %d at tick %d\n", staffIdx, dst->tick());
+qDebug("cannot make gap in staff %d at tick %d\n", staffIdx, dst->tick());
                         blackList.insert(staffIdx);
                         }
                   }
@@ -1816,13 +1816,13 @@ printf("cannot make gap in staff %d at tick %d\n", staffIdx, dst->tick());
                                                 cr->setDurationType(cr->duration());
                                                 cr->setTuplet(0);
                                                 tuplet->add(cr);
-                                                printf("cannot paste tuplet across bar line\n");
+                                                qDebug("cannot paste tuplet across bar line\n");
                                                 }
                                           }
                                     else {
                                           foreach(Tuplet* t, invalidTuplets) {
                                                 if (tuplet == t) {
-// printf("remove tuplet note %d %d\n", cr->tick(), cr->actualTicks());
+// qDebug("remove tuplet note %d %d\n", cr->tick(), cr->actualTicks());
                                                       delete cr;
                                                       cr = 0;
                                                       break;
@@ -1888,7 +1888,7 @@ printf("cannot make gap in staff %d at tick %d\n", staffIdx, dst->tick());
                                     }
                               else {
                                     delete lyrics;
-                                    printf("no segment found for lyrics\n");
+                                    qDebug("no segment found for lyrics\n");
                                     }
                               }
                         else if (tag == "Harmony") {
@@ -1998,7 +1998,7 @@ printf("cannot make gap in staff %d at tick %d\n", staffIdx, dst->tick());
 
 void Score::pasteChordRest(ChordRest* cr, int tick)
       {
-// printf("pasteChordRest %s at %d\n", cr->name(), tick);
+// qDebug("pasteChordRest %s at %d\n", cr->name(), tick);
       if (cr->type() == CHORD) {
             // set note track
             // check if staffMove moves a note to a
@@ -2046,7 +2046,7 @@ void Score::pasteChordRest(ChordRest* cr, int tick)
                         tick += c->actualTicks();
                         measure = tick2measure(tick);
                         if (measure->tick() != tick) {  // last measure
-                              printf("==last measure %d != %d\n", measure->tick(), tick);
+                              qDebug("==last measure %d != %d\n", measure->tick(), tick);
                               break;
                               }
                         Chord* c2 = static_cast<Chord*>(c->clone());
@@ -2450,7 +2450,7 @@ void Score::cmd(const QAction* a)
       {
       QString cmd(a ? a->data().toString() : "");
       if (debugMode)
-            printf("Score::cmd <%s>\n", qPrintable(cmd));
+            qDebug("Score::cmd <%s>\n", qPrintable(cmd));
 
       //
       // Hack for moving articulations while selected
@@ -2642,7 +2642,7 @@ void Score::cmd(const QAction* a)
                   end();
                   }
             else
-                  printf("no measures?\n");
+                  qDebug("no measures?\n");
             }
       else if (cmd == "concert-pitch") {
             if (styleB(ST_concertPitch) != a->isChecked())
@@ -2712,6 +2712,6 @@ void Score::cmd(const QAction* a)
       else if (cmd == "add-audio")
             addAudioTrack();
       else
-            printf("1unknown cmd <%s>\n", qPrintable(cmd));
+            qDebug("1unknown cmd <%s>\n", qPrintable(cmd));
       }
 

@@ -339,7 +339,7 @@ void InstrumentWizard::createInstruments(Score* cs)
       for (int idx = 0; (item = pl->topLevelItem(idx)); ++idx) {
             PartListItem* pli = (PartListItem*)item;
             if (pli->op != ITEM_ADD) {
-                  printf("bad op\n");
+                  qDebug("bad op\n");
                   continue;
                   }
             const InstrumentTemplate* t = ((PartListItem*)item)->it;

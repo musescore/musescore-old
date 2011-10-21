@@ -179,7 +179,7 @@ void Navigator::rescale()
       int w1   = int ((lp->x() + lp->width()) * m1);
       int w2   = int ((lp->x() + lp->width()) * m2);  // always w1 > w2
 
-// printf("rescale %d   %d - %d - %d  sbh %d h %d\n",
+// qDebug("rescale %d   %d - %d - %d  sbh %d h %d\n",
 //   scrollArea->horizontalScrollBar()->isVisible(), w2, w, w1, sbh, h);
 
       if ((w >= w2) && (w < w1)) {
@@ -189,12 +189,12 @@ void Navigator::rescale()
       else {
             if (scrollArea->horizontalScrollBar()->isVisible()) {
                   setFixedWidth(w1);
-                  // printf("  visible %d > %d\n", w2, w);
+                  // qDebug("  visible %d > %d\n", w2, w);
                   m = m2;
                   }
             else {
                   setFixedWidth(w1);
-                  // printf("  invisible %d < %d\n", w1, w);
+                  // qDebug("  invisible %d < %d\n", w1, w);
                   m = m1;
                   }
             }

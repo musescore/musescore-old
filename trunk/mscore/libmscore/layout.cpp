@@ -1027,7 +1027,7 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
 
 void Score::removeGeneratedElements(Measure* sm, Measure* em)
       {
-// printf("removeGeneratedElements %d - %d\n", mb->tick(), end->tick());
+// qDebug("removeGeneratedElements %d - %d\n", mb->tick(), end->tick());
       for (Measure* m = sm; m != em; m = m->nextMeasure()) {
             //
             // remove generated elements
@@ -1096,7 +1096,7 @@ void Score::connectTies()
                               continue;
                         Note* nnote = searchTieNote(n);
                         if (nnote == 0) {
-                              printf("next note at %d voice %d for tie not found; delete tie\n",
+                              qDebug("next note at %d voice %d for tie not found; delete tie\n",
                                  s->tick(), i );
                               n->setTieFor(0);
                               delete tie;
@@ -1134,7 +1134,7 @@ void Score::add(Element* el)
             case SLUR:
                   break;
             default:
-                  printf("Score::add() invalid element <%s>\n", el->name());
+                  qDebug("Score::add() invalid element <%s>\n", el->name());
                   delete el;
                   break;
             }
@@ -1164,7 +1164,7 @@ void Score::remove(Element* el)
             case SLUR:
                   break;
             default:
-                  printf("Score::remove(): invalid element %s\n", el->name());
+                  qDebug("Score::remove(): invalid element %s\n", el->name());
                   break;
             }
       }
@@ -1373,7 +1373,7 @@ QList<System*> Score::layoutSystemRow(qreal rowWidth, bool isFirstSystem, bool u
             //
 
             if (system->measures().isEmpty()) {
-                  printf("system %p is empty\n", system);
+                  qDebug("system %p is empty\n", system);
                   abort();
                   }
             Measure* m = system->lastMeasure();
@@ -1708,7 +1708,7 @@ void Score::layoutSystems()
                         startWithLongNames = firstSystem && lm->sectionBreak()->startWithLongNames();
                         }
                   else
-                        printf("empty system!\n");
+                        qDebug("empty system!\n");
                   }
             }
       // TODO: make undoable:
@@ -1763,7 +1763,7 @@ struct SystemRow {
                   if (!s->isVbox())
                         v = qMax(s->distanceUp(0), v);
                   else
-                        printf("distance for vbox? n %d\n", systems.size());
+                        qDebug("distance for vbox? n %d\n", systems.size());
                   }
             return v;
             }
@@ -1773,7 +1773,7 @@ struct SystemRow {
                   if (!s->isVbox())
                         v = qMax(s->distanceDown(s->staves()->size() - 1), v);
                   else
-                        printf("distance for vbox? n %d\n", systems.size());
+                        qDebug("distance for vbox? n %d\n", systems.size());
                   }
             return v;
             }

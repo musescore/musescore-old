@@ -316,7 +316,7 @@ void Articulation::setSubtype(const QString& s)
                   }
             if (i == n) {
                   st = 0;
-                  printf("Articulation: unknown <%s>\n", qPrintable(s));
+                  qDebug("Articulation: unknown <%s>\n", qPrintable(s));
                   }
             }
       setSubtype(st);
@@ -443,7 +443,7 @@ void Articulation::setDirection(Direction d)
       _direction = d;
       if (d != AUTO)
             _up = (d == UP);
-//      printf("setDirection %p %d %d\n", this, _up, int(d));
+//      qDebug("setDirection %p %d %d\n", this, _up, int(d));
       }
 
 //---------------------------------------------------------

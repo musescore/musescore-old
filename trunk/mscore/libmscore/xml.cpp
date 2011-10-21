@@ -98,7 +98,7 @@ Placement readPlacement(const QDomElement& e)
             return PLACE_BELOW;
       if (s == "left" || s == "3")
             return PLACE_LEFT;
-      printf("unknown placement value <%s>\n", qPrintable(s));
+      qDebug("unknown placement value <%s>\n", qPrintable(s));
       return PLACE_AUTO;
       }
 
@@ -288,7 +288,7 @@ void Xml::tag(const QString& name, QVariant data)
                   }
                   break;
             default:
-                  printf("Xml::tag: unsupported type %d\n", data.type());
+                  qDebug("Xml::tag: unsupported type %d\n", data.type());
                   // abort();
                   break;
             }
@@ -419,17 +419,17 @@ void domError(const QDomElement& e)
       {
       QString s = domElementPath(e);
       if (!docName.isEmpty())
-            fprintf(stderr, "<%s>:", qPrintable(docName));
+            qDebug("<%s>:", qPrintable(docName));
       int ln = e.lineNumber();
       if (ln != -1)
-            fprintf(stderr, "line:%d ", ln);
+            qDebug("line:%d ", ln);
       int col = e.columnNumber();
       if (col != -1)
-            fprintf(stderr, "col:%d ", col);
-      fprintf(stderr, "%s: Unknown Node <%s>, type %d\n",
+            qDebug("col:%d ", col);
+      qDebug("%s: Unknown Node <%s>, type %d\n",
          qPrintable(s), qPrintable(e.tagName()), e.nodeType());
       if (e.isText())
-            fprintf(stderr, "  text node <%s>\n", qPrintable(e.toText().data()));
+            qDebug("  text node <%s>\n", qPrintable(e.toText().data()));
       }
 
 //---------------------------------------------------------
@@ -442,11 +442,11 @@ void domNotImplemented(const QDomElement& e)
             return;
       QString s = domElementPath(e);
       if (!docName.isEmpty())
-            fprintf(stderr, "<%s>:", qPrintable(docName));
-      fprintf(stderr, "%s: Node not implemented: <%s>, type %d\n",
+            qDebug("<%s>:", qPrintable(docName));
+      qDebug("%s: Node not implemented: <%s>, type %d\n",
          qPrintable(s), qPrintable(e.tagName()), e.nodeType());
       if (e.isText())
-            fprintf(stderr, "  text node <%s>\n", qPrintable(e.toText().data()));
+            qDebug("  text node <%s>\n", qPrintable(e.toText().data()));
       }
 
 //---------------------------------------------------------

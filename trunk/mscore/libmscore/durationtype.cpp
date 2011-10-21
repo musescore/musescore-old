@@ -65,7 +65,7 @@ static int headType(int tickLen, Duration* type)
                   return rest;
                   }
             }
-printf("1: no duration type for ticks %d\n", tickLen);
+qDebug("1: no duration type for ticks %d\n", tickLen);
       *type = Duration(Duration::V_QUARTER);
       return 0;
       }
@@ -95,7 +95,7 @@ void Duration::setVal(int ticks)
                         return;
                         }
                   }
-            printf("2: no duration type for ticks %d\n", ticks);
+            qDebug("2: no duration type for ticks %d\n", ticks);
             _val = V_QUARTER;       // fallback default value
             }
       }
@@ -152,7 +152,7 @@ QString Duration::name() const
             case V_BREVE:     return "breve";
             case V_LONG:      return "long";
             default:
-printf("Duration::name(): invalid duration type %d\n", _val);
+qDebug("Duration::name(): invalid duration type %d\n", _val);
             case V_ZERO:
             case V_INVALID:   return "";
             }
@@ -276,7 +276,7 @@ void Duration::setType(const QString& s)
             _val = V_MEASURE;
       else {
             _val = V_INVALID;
-            printf("Duration::setVal(%s): unknown\n", qPrintable(s));
+            qDebug("Duration::setVal(%s): unknown\n", qPrintable(s));
             }
       }
 
@@ -432,7 +432,7 @@ Duration::Duration(const Fraction& _f)
                         _dots = 2;
                         break;
                   default:
-                        printf("Duration(%d/%d): not implemented\n", f.numerator(), f.denominator());
+                        qDebug("Duration(%d/%d): not implemented\n", f.numerator(), f.denominator());
 // abort();
                         _val = V_INVALID;
                         _dots = 0;
@@ -514,7 +514,7 @@ QList<Duration> toDurationList(Fraction l, bool useDottedValues)
                   }
             }
       if (l != Fraction())
-            printf("toDurationList:: rest remains %d/%d\n", l.numerator(), l.denominator());
+            qDebug("toDurationList:: rest remains %d/%d\n", l.numerator(), l.denominator());
       return dList;
       }
 
@@ -524,7 +524,7 @@ QList<Duration> toDurationList(Fraction l, bool useDottedValues)
 
 void Duration::print() const
       {
-      printf("Duration(");
+      qDebug("Duration(");
       const char* s = "?";
       switch(_val) {
             case V_LONG:      s = "Long"; break;
@@ -542,6 +542,6 @@ void Duration::print() const
             case V_MEASURE:   s = "Measure"; break;
             case V_INVALID:   s = "Invalid"; break;
             };
-      printf("%s,dots=%d)", s, _dots);
+      qDebug("%s,dots=%d)", s, _dots);
       }
 

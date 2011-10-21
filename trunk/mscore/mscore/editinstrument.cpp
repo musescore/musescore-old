@@ -67,7 +67,7 @@ EditInstrument::~EditInstrument()
 
 void EditInstrument::on_buttonCancel_pressed()
       {
-//      printf("cancel\n");
+//      qDebug("cancel\n");
       }
 
 //---------------------------------------------------------

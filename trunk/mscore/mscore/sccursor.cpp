@@ -484,7 +484,7 @@ void SCursor::add(ChordRest* c)
                 chordRest = score()->addRest(seg, track, Duration(Duration::V_MEASURE), 0);
                 }
             if (!chordRest) {
-                  printf("SCursor::add: no cr\n");
+                  qDebug("SCursor::add: no cr\n");
                   return;
                   }
             }
@@ -494,7 +494,7 @@ void SCursor::add(ChordRest* c)
       Fraction gap    = score()->makeGap(chordRest->segment(), chordRest->track(),
          len, chordRest->tuplet());
       if (gap < len) {
-            printf("cannot make gap\n");
+            qDebug("cannot make gap\n");
             return;
             }
       Measure* measure = score()->tick2measure(tick);

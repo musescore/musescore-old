@@ -54,7 +54,7 @@ ClefTypeList ClefList::clef(int tick) const
 
 void ClefList::setClef(int tick, ClefTypeList idx)
       {
-printf("setClef...\n");
+qDebug("setClef...\n");
       replace(tick, idx);
       }
 

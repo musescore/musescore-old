@@ -58,7 +58,7 @@ static void setLineSymbolComboBox(QComboBox* cb, int sym)
                   return;
                   }
             }
-      printf("setLineSymbol: not found %d\n", sym);
+      qDebug("setLineSymbol: not found %d\n", sym);
       }
 
 //---------------------------------------------------------
@@ -132,7 +132,7 @@ LineProperties::LineProperties(TextLine* l, QWidget* parent)
             case PLACE_BELOW: idx = 1; break;
             case PLACE_LEFT:  idx = 2; break;
             default:
-                  printf("illegal text placement\n");
+                  qDebug("illegal text placement\n");
             }
       beginTextPlace->setCurrentIndex(idx);
 
@@ -142,7 +142,7 @@ LineProperties::LineProperties(TextLine* l, QWidget* parent)
             case PLACE_BELOW: idx = 1; break;
             case PLACE_LEFT:  idx = 2; break;
             default:
-                  printf("illegal text placement\n");
+                  qDebug("illegal text placement\n");
             }
       continueTextPlace->setCurrentIndex(idx);
 

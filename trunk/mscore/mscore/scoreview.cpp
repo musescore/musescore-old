@@ -140,7 +140,7 @@ class MagTransition2 : public QEventTransition
    protected:
       virtual bool eventTest(QEvent* e) {
             if (!QEventTransition::eventTest(e)) {
-                  printf("MagTransition2: wrong event\n");
+                  qDebug("MagTransition2: wrong event\n");
                   return false;
                   }
             return bool(QApplication::keyboardModifiers() & Qt::ShiftModifier);
@@ -888,7 +888,7 @@ ScoreView::ScoreView(QWidget* parent)
       else {
             QPixmap* pm = new QPixmap(preferences.fgWallpaper);
             if (pm == 0 || pm->isNull())
-                  printf("no valid pixmap %s\n", qPrintable(preferences.fgWallpaper));
+                  qDebug("no valid pixmap %s\n", qPrintable(preferences.fgWallpaper));
             setForeground(pm);
             }
       }
@@ -1013,7 +1013,7 @@ void ScoreView::measurePopup(const QPoint& gpos, Measure* obj)
       if (!_score->pos2measure(startMove, &staffIdx, &pitch, &seg, &offset))
             return;
       if (staffIdx == -1) {
-            printf("ScoreView::measurePopup: staffIdx == -1!\n");
+            qDebug("ScoreView::measurePopup: staffIdx == -1!\n");
             return;
             }
 
@@ -1561,7 +1561,7 @@ void ScoreView::moveCursor(Segment* segment, int track)
       System* system = segment->measure()->system();
       if (system == 0) {
             // a new measure was appended but no layout took place
-            printf("zero SYSTEM\n");
+            qDebug("zero SYSTEM\n");
             return;
             }
       int staffIdx    = track == -1 ? 0 : track / VOICES;
@@ -2041,7 +2041,7 @@ bool ScoreView::dragMeasureAnchorElement(const QPointF& pos)
 void ScoreView::dragEnterEvent(QDragEnterEvent* event)
       {
       if (debugMode)
-            printf("dragEnterEvent\n");
+            qDebug("dragEnterEvent\n");
       double _spatium = score()->spatium();
       dragElement = 0;
 
@@ -2059,13 +2059,13 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
             QByteArray a = data->data(mimeSymbolFormat);
 
             if (debugMode)
-                  printf("ScoreView::dragEnterEvent: <%s>\n", a.data());
+                  qDebug("ScoreView::dragEnterEvent: <%s>\n", a.data());
 
             QDomDocument doc;
             int line, column;
             QString err;
             if (!doc.setContent(a, &err, &line, &column)) {
-                  printf("error reading drag data at %d/%d: %s\n<%s>\n",
+                  qDebug("error reading drag data at %d/%d: %s\n<%s>\n",
                      line, column, err.toLatin1().data(), a.data());
                   return;
                   }
@@ -2101,7 +2101,7 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
                         )
                         image = new RasterImage(score());
                   else {
-                        printf("unknown image format <%s>\n", path.toLatin1().data());
+                        qDebug("unknown image format <%s>\n", path.toLatin1().data());
                         }
                   el = image;
                   }
@@ -2134,7 +2134,7 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
             QList<QUrl>ul = data->urls();
             foreach(const QUrl& u, ul) {
                   if (debugMode)
-                        printf("drag Url: %s\n", qPrintable(u.toString()));
+                        qDebug("drag Url: %s\n", qPrintable(u.toString()));
                   if (u.scheme() == "file") {
                         QFileInfo fi(u.path());
                         QString suffix = fi.suffix().toLower();
@@ -2152,9 +2152,9 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
             return;
             }
       QStringList formats = data->formats();
-      printf("unknown drop format: formats:\n");
+      qDebug("unknown drop format: formats:\n");
       foreach(const QString& s, formats)
-            printf("  <%s>\n", qPrintable(s));
+            qDebug("  <%s>\n", qPrintable(s));
       }
 
 //---------------------------------------------------------
@@ -2312,7 +2312,7 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
             return;
             }
       else if (etype == ELEMENT_LIST) {
-            printf("accept drop element list\n");
+            qDebug("accept drop element list\n");
             }
       else if (etype == STAFF_LIST || etype == MEASURE_LIST) {
 //TODO            el->acceptDrop(this, pos, etype, e);
@@ -2365,7 +2365,7 @@ void ScoreView::dropEvent(QDropEvent* event)
                               Segment* seg;
                               el = _score->pos2measure(pos, &staffIdx, 0, &seg, 0);
                               if (el == 0) {
-                                    printf("cannot drop here\n");
+                                    qDebug("cannot drop here\n");
                                     delete dragElement;
                                     dragElement = 0;
                                     break;
@@ -2422,7 +2422,7 @@ void ScoreView::dropEvent(QDropEvent* event)
                                     }
                               }
                         if (!el) {
-                              printf("cannot drop here\n");
+                              qDebug("cannot drop here\n");
                               delete dragElement;
                               break;
                               }
@@ -2481,7 +2481,7 @@ void ScoreView::dropEvent(QDropEvent* event)
                   QString str(u.toLocalFile());
                   s->setPath(str);
 if (debugMode)
-      printf("drop image <%s> <%s>\n", qPrintable(str), qPrintable(s->path()));
+      qDebug("drop image <%s> <%s>\n", qPrintable(str), qPrintable(s->path()));
 
                   Element* el = elementAt(pos);
                   if (el && (el->type() == NOTE || el->type() == REST)) {
@@ -2522,15 +2522,15 @@ if (debugMode)
             data = md->data(mimeStaffListFormat);
             }
       else {
-            printf("cannot drop this object: unknown mime type\n");
+            qDebug("cannot drop this object: unknown mime type\n");
             QStringList sl = md->formats();
             foreach(QString s, sl)
-                  printf("  %s\n", qPrintable(s));
+                  qDebug("  %s\n", qPrintable(s));
             _score->end();
             return;
             }
 
-// printf("drop <%s>\n", data.data());
+// qDebug("drop <%s>\n", data.data());
 
       QDomDocument doc;
       int line, column;
@@ -2549,7 +2549,7 @@ if (debugMode)
       Measure* measure = (Measure*) el;
 
       if (etype == ELEMENT_LIST) {
-            printf("drop element list\n");
+            qDebug("drop element list\n");
             }
       else if (etype == MEASURE_LIST || etype == STAFF_LIST) {
             _score->startCmd();
@@ -2765,9 +2765,9 @@ Element* ScoreView::elementAt(const QPointF& p)
       {
       QList<const Element*> el = elementsAt(p);
 #if 0
-      printf("elementAt\n");
+      qDebug("elementAt\n");
       foreach(const Element* e, el)
-            printf("  %s %d\n", e->name(), e->selected());
+            qDebug("  %s %d\n", e->name(), e->selected());
 #endif
       const Element* e = el.value(0);
       if (e && (e->type() == PAGE))
@@ -2783,7 +2783,7 @@ Element* ScoreView::elementNear(QPointF p)
       {
       Page* page = point2page(p);
       if (!page) {
-            // printf("  no page\n");
+            // qDebug("  no page\n");
             return 0;
             }
 
@@ -2813,15 +2813,15 @@ Element* ScoreView::elementNear(QPointF p)
                   }
             }
       if (ll.empty()) {
-            // printf("  nothing found\n");
+            // qDebug("  nothing found\n");
             return 0;
             }
       qSort(ll.begin(), ll.end(), elementLower);
 
 #if 0
-      printf("elementNear\n");
+      qDebug("elementNear\n");
       foreach(const Element* e, ll)
-            printf("  %s selected %d z %d\n", e->name(), e->selected(), e->z());
+            qDebug("  %s selected %d z %d\n", e->name(), e->selected(), e->z());
 #endif
       Element* e = const_cast<Element*>(ll.at(0));
       return e;
@@ -3017,7 +3017,7 @@ void ScoreView::editCopy()
 void ScoreView::normalCopy()
       {
       if (!_score->selection().canCopy()) {
-            printf("cannot copy selection: intersects a tuplet\n");
+            qDebug("cannot copy selection: intersects a tuplet\n");
             return;
             }
       QString mimeType = _score->selection().mimeType();
@@ -3025,7 +3025,7 @@ void ScoreView::normalCopy()
             QMimeData* mimeData = new QMimeData;
             mimeData->setData(mimeType, _score->selection().mimeData());
             if (debugMode)
-                  printf("cmd copy: <%s>\n", mimeData->data(mimeType).data());
+                  qDebug("cmd copy: <%s>\n", mimeData->data(mimeType).data());
             QApplication::clipboard()->setMimeData(mimeData);
             }
       }
@@ -3037,7 +3037,7 @@ void ScoreView::normalCopy()
 void ScoreView::normalCut()
       {
       if (!_score->selection().canCopy()) {
-            printf("cannot copy selection: intersects a tuplet\n");
+            qDebug("cannot copy selection: intersects a tuplet\n");
             return;
             }
       _score->startCmd();
@@ -3085,7 +3085,7 @@ void ScoreView::cmd(const QAction* a)
       {
       QString cmd(a ? a->data().toString() : "");
       if (debugMode)
-            printf("ScoreView::cmd <%s>\n", qPrintable(cmd));
+            qDebug("ScoreView::cmd <%s>\n", qPrintable(cmd));
 
       if (cmd == "escape")
             sm->postEvent(new CommandEvent(cmd));
@@ -3415,7 +3415,7 @@ void ScoreView::showOmr(bool flag)
       if (t->view() == this)
             t->setCurrent(t->currentIndex());
       else
-            printf("view not found\n");
+            qDebug("view not found\n");
       }
 
 //---------------------------------------------------------
@@ -3586,7 +3586,7 @@ void ScoreView::endNoteEntry()
 
 void ScoreView::contextPopup(QMouseEvent* ev)
       {
-// printf("contextPopup\n");
+// qDebug("contextPopup\n");
       QPoint gp = ev->globalPos();
       startMove = toLogical(ev->pos());
       Element* e = elementNear(startMove);
@@ -4324,14 +4324,14 @@ void ScoreView::cmdEnterRest()
 
 void ScoreView::cmdEnterRest(const Duration& d)
       {
-printf("cmdEnterRest %s\n", qPrintable(d.name()));
+qDebug("cmdEnterRest %s\n", qPrintable(d.name()));
       if (!noteEntryMode())
             sm->postEvent(new CommandEvent("note-input"));
       _score->cmdEnterRest(d);
 #if 0
       expandVoice();
       if (_is.cr() == 0) {
-            printf("cannot enter rest here\n");
+            qDebug("cannot enter rest here\n");
             return;
             }
 
@@ -4372,7 +4372,7 @@ ScoreState ScoreView::mscoreState() const
 void ScoreView::enterState()
       {
       if (debugMode)
-            printf("%p enterState <%s>\n", this, qPrintable(sender()->objectName()));
+            qDebug("%p enterState <%s>\n", this, qPrintable(sender()->objectName()));
       }
 
 //---------------------------------------------------------
@@ -4383,7 +4383,7 @@ void ScoreView::enterState()
 void ScoreView::exitState()
       {
       if (debugMode)
-            printf("%p exitState <%s>\n", this, qPrintable(sender()->objectName()));
+            qDebug("%p exitState <%s>\n", this, qPrintable(sender()->objectName()));
       }
 
 //---------------------------------------------------------
@@ -4537,7 +4537,7 @@ void ScoreView::cmdAddSlur(Note* firstNote, Note* lastNote)
             if (!el.isEmpty())
                   el.front()->setSelected(true);
             else
-                  printf("addSlur: no segment\n");
+                  qDebug("addSlur: no segment\n");
             // set again when leaving slur mode:
             static_cast<ChordRest*>(slur->endElement())->removeSlurBack(slur);
             _score->endCmd();
@@ -4620,7 +4620,7 @@ void ScoreView::cmdChangeEnharmonic(bool up)
                               }
                         }
                   if (i == 36)
-                        printf("tpc %d not found\n", tpc);
+                        qDebug("tpc %d not found\n", tpc);
                   else if (tpc != n->tpc()) {
                         _score->undoChangePitch(n, n->pitch(), tpc, line, n->fret(), n->string());
                         }
@@ -4899,7 +4899,7 @@ void ScoreView::lyricsTab(bool back, bool end, bool moveOnly)
 
       const QList<Lyrics*>* ll = nextSegment->lyricsList(staffIdx);
       if (ll == 0) {
-            printf("no next lyrics list: %s\n", nextSegment->element(track)->name());
+            qDebug("no next lyrics list: %s\n", nextSegment->element(track)->name());
             return;
             }
       lyrics = ll->value(verse);
@@ -5197,12 +5197,12 @@ void ScoreView::lyricsEndEdit()
 void ScoreView::modifyElement(Element* el)
       {
       if (el == 0) {
-            printf("modifyElement: el==0\n");
+            qDebug("modifyElement: el==0\n");
             return;
             }
       Score* cs = el->score();
       if (!cs->selection().isSingle()) {
-            printf("modifyElement: cs->selection().state() != SEL_SINGLE\n");
+            qDebug("modifyElement: cs->selection().state() != SEL_SINGLE\n");
             delete el;
             return;
             }
@@ -5213,7 +5213,7 @@ void ScoreView::modifyElement(Element* el)
       else if (e->type() == NOTE)
             chord = static_cast<Note*>(e)->chord();
       else {
-            printf("modifyElement: no note/Chord selected:\n  ");
+            qDebug("modifyElement: no note/Chord selected:\n  ");
             e->dump();
             delete el;
             return;
@@ -5223,7 +5223,7 @@ void ScoreView::modifyElement(Element* el)
                   chord->add(static_cast<Articulation*>(el));
                   break;
             default:
-                  printf("modifyElement: %s not ARTICULATION\n", el->name());
+                  qDebug("modifyElement: %s not ARTICULATION\n", el->name());
                   delete el;
                   return;
             }
@@ -5240,7 +5240,7 @@ void ScoreView::chordTab(bool back)
       Segment* segment = cn->segment();
       int track        = cn->track();
       if (segment == 0) {
-            printf("chordTab: no segment\n");
+            qDebug("chordTab: no segment\n");
             return;
             }
 
@@ -5250,7 +5250,7 @@ void ScoreView::chordTab(bool back)
       else
             segment = segment->next1(SegChordRest);
       if (segment == 0) {
-            printf("no next segment\n");
+            qDebug("no next segment\n");
             return;
             }
       endEdit();
@@ -5327,7 +5327,7 @@ void ScoreView::midiNoteReceived(int pitch, bool chord)
       ev.pitch = pitch;
       ev.chord = chord;
 
-printf("midiNoteReceived %d chord %d\n", pitch, chord);
+qDebug("midiNoteReceived %d chord %d\n", pitch, chord);
       score()->enqueueMidiEvent(ev);
       if (!score()->undo()->active())
             cmd(0);
@@ -5339,7 +5339,7 @@ printf("midiNoteReceived %d chord %d\n", pitch, chord);
 
 void ScoreView::cmdInsertNote(int note)
       {
-      printf("not implemented: cmdInsertNote %d\n", note);
+      qDebug("not implemented: cmdInsertNote %d\n", note);
       }
 
 //---------------------------------------------------------
@@ -5367,7 +5367,7 @@ void ScoreView::cmdAddPitch(int note, bool addFlag)
                         }
                   }
             if (pitch == -1) {
-                  printf("  shortcut %c not defined in drumset\n", note1);
+                  qDebug("  shortcut %c not defined in drumset\n", note1);
                   return;
                   }
             is.setDrumNote(pitch);
@@ -5745,32 +5745,32 @@ void ScoreView::cmdRepeatSelection()
             }
 
       if (selection.state() != SEL_RANGE) {
-            printf("wrong selection type\n");
+            qDebug("wrong selection type\n");
             return;
             }
 
       QString mimeType = selection.mimeType();
       if (mimeType.isEmpty()) {
-            printf("mime type is empty\n");
+            qDebug("mime type is empty\n");
             return;
             }
       QMimeData* mimeData = new QMimeData;
       mimeData->setData(mimeType, selection.mimeData());
       if (debugMode)
-            printf("cmdRepeatSelection: <%s>\n", mimeData->data(mimeType).data());
+            qDebug("cmdRepeatSelection: <%s>\n", mimeData->data(mimeType).data());
       QApplication::clipboard()->setMimeData(mimeData);
 
       QByteArray data(mimeData->data(mimeType));
 
-// printf("repeat <%s>\n", data.data());
+// qDebug("repeat <%s>\n", data.data());
 
       QDomDocument doc;
       int line, column;
       QString err;
       if (!doc.setContent(data, &err, &line, &column)) {
-            printf("error reading paste data at line %d column %d: %s\n",
+            qDebug("error reading paste data at line %d column %d: %s\n",
                line, column, qPrintable(err));
-            printf("%s\n", data.data());
+            qDebug("%s\n", data.data());
             return;
             }
       docName = "--";
@@ -5789,10 +5789,10 @@ void ScoreView::cmdRepeatSelection()
                   _score->endCmd();
                   }
             else
-                  printf("??? %p <%s>\n", e, e ? e->name() : "");
+                  qDebug("??? %p <%s>\n", e, e ? e->name() : "");
             }
       else {
-            printf("cmdRepeatSelection: endSegment: %p dStaff %d\n", endSegment, dStaff);
+            qDebug("cmdRepeatSelection: endSegment: %p dStaff %d\n", endSegment, dStaff);
             }
       }
 
@@ -5875,7 +5875,7 @@ void ScoreView::search(int n)
 
 static void wrongPosition()
       {
-      printf("cannot enter notes here (no chord rest at current position)\n");
+      qDebug("cannot enter notes here (no chord rest at current position)\n");
       }
 
 //---------------------------------------------------------

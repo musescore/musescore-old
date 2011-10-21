@@ -102,7 +102,7 @@ bool Lilypond::read(const QString& name)
       {
       QFile fp(name);
       if (!fp.open(QIODevice::ReadOnly)) {
-            printf("cannot open file <%s>\n", qPrintable(name));
+            qDebug("cannot open file <%s>\n", qPrintable(name));
             return false;
             }
       QByteArray ba = fp.readAll();
@@ -117,7 +117,7 @@ bool Lilypond::read(const QString& name)
 
 void Lilypond::error(const char* txt)
       {
-      printf("Lilypond parse error: %s\n", txt);
+      qDebug("Lilypond parse error: %s\n", txt);
       }
 
 //---------------------------------------------------------
@@ -165,7 +165,7 @@ LNote Lilypond::scanNote()
             case 'g':   pitch += 7; break;
             }
       ++ci;
-printf("scanNote pitch %d relpitch %d\n", pitch, relpitch);
+qDebug("scanNote pitch %d relpitch %d\n", pitch, relpitch);
       if (relpitch > 0) {
             if (pitch < relpitch) {
                   while ((relpitch - pitch) > 5)
@@ -202,7 +202,7 @@ printf("scanNote pitch %d relpitch %d\n", pitch, relpitch);
                         case 32: curLen = MScore::division / 8; break;
                         case 64: curLen = MScore::division / 16; break;
                         default:
-                              printf("illegal note len %d\n", len);
+                              qDebug("illegal note len %d\n", len);
                               break;
                         }
                   }
@@ -241,7 +241,7 @@ void Lilypond::scanRest()
                         case 32: curLen = MScore::division / 8; break;
                         case 64: curLen = MScore::division / 16; break;
                         default:
-                              printf("illegal note len %d\n", len);
+                              qDebug("illegal note len %d\n", len);
                               break;
                         }
                   }
@@ -330,7 +330,7 @@ void Lilypond::cmdRelative()
       {
       LNote note = scanNote();
       relpitch   = note.pitch;
-printf("cmdRelative %d\n", relpitch);
+qDebug("cmdRelative %d\n", relpitch);
       }
 
 //---------------------------------------------------------
@@ -339,7 +339,7 @@ printf("cmdRelative %d\n", relpitch);
 
 void Lilypond::cmdTime()
       {
-      printf("cmdTime\n");
+      qDebug("cmdTime\n");
       }
 
 //---------------------------------------------------------
@@ -348,7 +348,7 @@ void Lilypond::cmdTime()
 
 void Lilypond::cmdClef()
       {
-      printf("cmdClef\n");
+      qDebug("cmdClef\n");
       }
 
 //---------------------------------------------------------
@@ -412,7 +412,7 @@ void Lilypond::convert()
                         addRest();
                         break;
                   default:
-                        printf("unexpected char <%c>\n", c.toAscii());
+                        qDebug("unexpected char <%c>\n", c.toAscii());
                         ++ci;
                         break;
                   }

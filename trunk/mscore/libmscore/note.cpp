@@ -265,7 +265,7 @@ void Note::setTpcFromPitch()
       {
       KeySigEvent key = (staff() && chord()) ? staff()->key(chord()->tick()) : KeySigEvent();
       _tpc    = pitch2tpc(_pitch, key.accidentalType());
-// printf("setTpcFromPitch pitch %d tick %d key %d tpc %d\n", pitch(), chord()->tick(), key.accidentalType(), _tpc);
+// qDebug("setTpcFromPitch pitch %d tick %d key %d tpc %d\n", pitch(), chord()->tick(), key.accidentalType(), _tpc);
       }
 
 //---------------------------------------------------------
@@ -275,7 +275,7 @@ void Note::setTpcFromPitch()
 void Note::setTpc(int v)
       {
       if (v < -1 || v > 33) {
-            printf("Note::setTpc: bad tpc %d\n", v);
+            qDebug("Note::setTpc: bad tpc %d\n", v);
             abort();
             }
       _tpc = v;
@@ -389,7 +389,7 @@ void Note::add(Element* e)
                   _bend = static_cast<Bend*>(e);
                   break;
             default:
-                  printf("Note::add() not impl. %s\n", e->name());
+                  qDebug("Note::add() not impl. %s\n", e->name());
                   break;
             }
       }
@@ -415,7 +415,7 @@ void Note::remove(Element* e)
             case IMAGE:
             case FINGERING:
                   if (!_el.remove(e))
-                        printf("Note::remove(): cannot find %s\n", e->name());
+                        qDebug("Note::remove(): cannot find %s\n", e->name());
                   break;
 	      case TIE:
                   {
@@ -440,7 +440,7 @@ void Note::remove(Element* e)
                   break;
 
             default:
-                  printf("Note::remove() not impl. %s\n", e->name());
+                  qDebug("Note::remove() not impl. %s\n", e->name());
                   break;
             }
       }
@@ -734,7 +734,7 @@ void Note::read(QDomElement e)
                         image = new RasterImage(score());
                         }
                   else {
-                        printf("unknown image format <%s>\n", qPrintable(path));
+                        qDebug("unknown image format <%s>\n", qPrintable(path));
                         }
                   if (image) {
                         image->setTrack(track());
@@ -852,7 +852,7 @@ void Note::read(QDomElement e)
                               }
                         }
                   if (dot) {
-                        printf("too many dots\n");
+                        qDebug("too many dots\n");
                         delete dot;
                         }
                   }
@@ -1084,7 +1084,7 @@ Element* Note::drop(const DropData& data)
                               }
                         }
                   if (group == -1) {
-                        printf("unknown note head\n");
+                        qDebug("unknown note head\n");
                         group = 0;
                         }
                   delete s;
@@ -1155,13 +1155,13 @@ Element* Note::drop(const DropData& data)
                         s = s->next1();
                         }
                   if (s == 0) {
-                        printf("no segment for second note of glissando found\n");
+                        qDebug("no segment for second note of glissando found\n");
                         delete e;
                         return 0;
                         }
                   ChordRest* cr1 = static_cast<ChordRest*>(s->element(track()));
                   if (cr1 == 0 || cr1->type() != CHORD) {
-                        printf("no second note for glissando found, track %d\n", track());
+                        qDebug("no second note for glissando found, track %d\n", track());
                         delete e;
                         return 0;
                         }
@@ -1183,7 +1183,7 @@ Element* Note::drop(const DropData& data)
                               s = s->next();
                               }
                         if (s == 0) {
-                              printf("no segment for second note of tremolo found\n");
+                              qDebug("no segment for second note of tremolo found\n");
                               delete e;
                               return 0;
                               }

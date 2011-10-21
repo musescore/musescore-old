@@ -650,7 +650,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
                         score()->setLayoutAll(true);
                         }
                   else
-                        printf("no template selected?\n");
+                        qDebug("no template selected?\n");
                   }
             }
       else if (cmd == "slur-props") {
@@ -804,7 +804,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
                         score()->undo()->push(new ChangeInstrument(ic, ic->instrument()));
                         }
                   else
-                        printf("no template selected?\n");
+                        qDebug("no template selected?\n");
                   }
            }
       else if (cmd == "fret-props") {

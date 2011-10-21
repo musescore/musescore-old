@@ -183,7 +183,7 @@ void EventData::write(Xml& xml) const
                                     };
                               int key = (char)(_data[0]) + 7;
                               if (key < 0 || key > 14) {
-                                    printf("bad key signature %d\n", key);
+                                    qDebug("bad key signature %d\n", key);
                                     key = 0;
                                     }
                               QString sex(_data[1] ? "Minor" : "Major");

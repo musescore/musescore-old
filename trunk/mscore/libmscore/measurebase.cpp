@@ -114,7 +114,7 @@ void MeasureBase::add(Element* e)
             foreach (Element* ee, _el) {
                   if (ee->type() == LAYOUT_BREAK && ee->subtype() == e->subtype()) {
                         if (debugMode)
-                              printf("warning: layout break already set\n");
+                              qDebug("warning: layout break already set\n");
                         return;
                         }
                   }
@@ -161,7 +161,7 @@ void MeasureBase::remove(Element* el)
                   }
             }
       if (!_el.remove(el))
-            printf("MeasureBase(%p)::remove(%s,%p) not found\n", this, el->name(), el);
+            qDebug("MeasureBase(%p)::remove(%s,%p) not found\n", this, el->name(), el);
       if (el->type() == IMAGE)
             static_cast<Image*>(el)->dereference();
       }

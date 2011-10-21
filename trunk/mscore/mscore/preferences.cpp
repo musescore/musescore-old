@@ -116,7 +116,7 @@ static void readShortcuts()
             if (sc)
                   sc->key = QKeySequence::fromString(seq, QKeySequence::PortableText);
             else
-                  printf("MuseScore:readShortCuts: unknown tag <%s>\n", qPrintable(name));
+                  qDebug("MuseScore:readShortCuts: unknown tag <%s>\n", qPrintable(name));
             }
       s.endGroup();
       }
@@ -1361,7 +1361,7 @@ void PreferenceDialog::apply()
             preferences.alsaPeriodSize     = alsaPeriodSize->currentText().toInt();
             preferences.alsaFragments      = alsaFragments->value();
             if (!seq->init()) {
-                  printf("sequencer init failed\n");
+                  qDebug("sequencer init failed\n");
                   }
             }
 
@@ -1700,7 +1700,7 @@ bool Preferences::readPluginList()
       if (!f.exists())
             return false;
       if (!f.open(QIODevice::ReadOnly)) {
-            printf("cannot open plugins file <%s>\n", qPrintable(f.fileName()));
+            qDebug("cannot open plugins file <%s>\n", qPrintable(f.fileName()));
             return false;
             }
       QDomDocument doc;
@@ -1748,7 +1748,7 @@ void Preferences::writePluginList()
       dir.mkpath(dataPath);
       QFile f(dataPath + "/plugins.xml");
       if (!f.open(QIODevice::WriteOnly)) {
-            printf("cannot create plugin file <%s>\n", qPrintable(f.fileName()));
+            qDebug("cannot create plugin file <%s>\n", qPrintable(f.fileName()));
             return;
             }
       Xml xml(&f);

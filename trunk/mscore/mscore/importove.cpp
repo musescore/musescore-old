@@ -681,7 +681,7 @@ void OveToMScore::convertTrackElements(int track) {
                     s->add(ottava);
 
 				} else {
-					printf("overlapping octave-shift not supported\n");
+					qDebug("overlapping octave-shift not supported\n");
 					delete ottava;
 					ottava = 0;
 				}
@@ -700,7 +700,7 @@ void OveToMScore::convertTrackElements(int track) {
 
                     ottava = 0;
 				} else {
-                    printf("octave-shift stop without start\n");
+                    qDebug("octave-shift stop without start\n");
 				}
 			}
 		}
@@ -1473,7 +1473,7 @@ void OveToMScore::convertNotes(Measure* measure, int part, int staff, int track)
 					Drumset* drumset = getDrumset(score_, part);
 					if(drumset != 0) {
 						if (!drumset->isValid(pitch) || pitch == -1) {
-							printf("unmapped drum note 0x%02x %d\n", note->pitch(), note->pitch());
+							qDebug("unmapped drum note 0x%02x %d\n", note->pitch(), note->pitch());
 						} else {
 							note->setHeadGroup(drumset->noteHead(pitch));
 							int line = drumset->line(pitch);
@@ -2135,7 +2135,7 @@ void OveToMScore::convertRepeats(Measure* measure, int part, int staff, int trac
                   Segment* s1 = score_->tick2segment(absTick1);
                   Segment* s2 = score_->tick2segment(absTick2);
                   if (s1 == 0 || s2 == 0) {
-                        printf("cannot place %s at tick %d - %d (%p-%p)\n",
+                        qDebug("cannot place %s at tick %d - %d (%p-%p)\n",
                            volta->name(), absTick1, absTick2, s1, s2);
                         }
                   else {
@@ -2181,7 +2181,7 @@ void OveToMScore::convertSlurs(Measure* measure, int part, int staff, int track)
               Element* n1 = score_->searchNote(absStartTick, track);
               Element* n2 = score_->searchNote(absEndTick, track);
               if (n1 == 0 || n2 == 0) {
-                  printf("ImportOve: connectSlurs: position not found\n");
+                  qDebug("ImportOve: connectSlurs: position not found\n");
                   // remove in checkSlurs
                   }
               else {

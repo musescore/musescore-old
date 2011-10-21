@@ -182,8 +182,8 @@ static QString parseInstrName(const QString& name)
             col.setNum(column);
             ln.setNum(line);
             QString error = err + "\n at line " + ln + " column " + col;
-            printf("error: %s\n", qPrintable(error));
-            printf("   data:<%s>\n", qPrintable(name));
+            qDebug("error: %s\n", qPrintable(error));
+            qDebug("   data:<%s>\n", qPrintable(name));
             return QString();
             }
 
@@ -345,18 +345,18 @@ void InstrumentTemplate::read(QDomElement e)
                   if (val == "tablature")
                         useTablature = true;
                   else {
-                        fprintf(stderr, "unknown stafftype <%s>\n", qPrintable(val));
+                        qDebug("unknown stafftype <%s>\n", qPrintable(val));
                         domError(e);
                         }
                   }
             else if (tag == "init") {
                   InstrumentTemplate* ttt = searchTemplate(val);
                   if (ttt) {
-// printf("Instrument template init <%s> from <%s>\n", qPrintable(trackName), qPrintable(ttt->trackName));
+// qDebug("Instrument template init <%s> from <%s>\n", qPrintable(trackName), qPrintable(ttt->trackName));
                         init(*ttt);
                         }
                   else
-                        printf("Instrument template <%s> not found\n", qPrintable(val));
+                        qDebug("Instrument template <%s> not found\n", qPrintable(val));
                   }
             else
                   domError(e);
@@ -426,7 +426,7 @@ static void readInstrumentGroup(InstrumentGroup* group, QDomElement e)
                         group->instrumentTemplates.append(t);
                         }
                   else
-                        printf("instrument reference not found <%s>\n", qPrintable(e.text()));
+                        qDebug("instrument reference not found <%s>\n", qPrintable(e.text()));
                   }
             else
                   domError(e);
@@ -501,7 +501,7 @@ InstrumentTemplate* searchTemplate(const QString& name)
       {
       foreach(InstrumentGroup* g, instrumentGroups) {
             foreach(InstrumentTemplate* it, g->instrumentTemplates) {
-// printf("<%s><%s>\n", qPrintable(name), qPrintable(it->trackName));
+// qDebug("<%s><%s>\n", qPrintable(name), qPrintable(it->trackName));
                   if (it->trackName == name)
                         return it;
                   }

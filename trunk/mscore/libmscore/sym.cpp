@@ -442,7 +442,7 @@ QFont fontId2font(int fontId)
       else if (fontId == 3)
             _font.setFamily("Gonville-20");
       else {
-            printf("illegal font id %d\n", fontId);
+            qDebug("illegal font id %d\n", fontId);
             abort();
             }
       _font.setStyleStrategy(QFont::NoFontMerging);
@@ -473,7 +473,7 @@ void Sym::genGlyphs()
             glyphs.setPositions(QVector<QPointF>(1, QPointF()));
             }
       else
-            printf("no glyphs for <%s> %d\n", _name, s.size());
+            qDebug("no glyphs for <%s> %d\n", _name, s.size());
       }
 #endif
 
@@ -486,7 +486,7 @@ Sym::Sym(const char* name, int c, int fid, qreal ax, qreal ay)
       {
       QFontMetricsF fm(_font);
       if (!fm.inFont(_code)) {
-            printf("Sym: character 0x%x(%d) <%s> are not in font <%s>\n", c, c, _name, qPrintable(_font.family()));
+            qDebug("Sym: character 0x%x(%d) <%s> are not in font <%s>\n", c, c, _name, qPrintable(_font.family()));
             return;
             }
       w     = fm.width(_code);
@@ -671,7 +671,7 @@ void initSymbols(int idx)
       QString path = idx == 0 ? ":/fonts/mscore20.xml" : ":/fonts/gonville.xml";
       QFile f(path);
       if (!f.open(QFile::ReadOnly)) {
-            printf("cannot open symbols file\n");
+            qDebug("cannot open symbols file\n");
             exit(-1);
             }
       QDomDocument doc;
@@ -707,7 +707,7 @@ void initSymbols(int idx)
                                           bool ok;
                                           code = val.mid(2).toInt(&ok, 16);
                                           if (!ok)
-                                                printf("cannot read code\n");
+                                                qDebug("cannot read code\n");
                                           }
                                     else if (tag == "attach")
                                           p = readPoint(eee);
@@ -717,12 +717,12 @@ void initSymbols(int idx)
                                           domError(eee);
                                     }
                               if (code == -1)
-                                    printf("no code for glyph <%s>\n", qPrintable(name));
+                                    qDebug("no code for glyph <%s>\n", qPrintable(name));
                               int idx1 = lnhash[name];
                               if (idx1 > 0)
                                     symbols[idx][idx1] = Sym(strdup(qPrintable(name)), code, fid, p, b);
                               else { // if (idx == 0)
-//                                    printf("symbol <%s> for symbol set %d not found in %s\n",
+//                                    qDebug("symbol <%s> for symbol set %d not found in %s\n",
 //                                       qPrintable(name), idx, qPrintable(path));
                                     }
                               }

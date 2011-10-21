@@ -263,7 +263,7 @@ Element::~Element()
             foreach(Element* e, score()->selection().elements()) {
                   if (e == this) {
 //                        if (debugMode)
-                              printf("======~Element: %p still in selection! generated %d\n",
+                              qDebug("======~Element: %p still in selection! generated %d\n",
                                  this, generated());
 //                        if (debugMode)
                               abort();
@@ -430,7 +430,7 @@ Staff* Element::staff() const
             return 0;
       Staff* st = score()->staff(staffIdx());
 /*      if (debugMode && st == 0) {
-            printf("no staff: <%s> track %d staffIdx %d, staves %d\n",
+            qDebug("no staff: <%s> track %d staffIdx %d, staves %d\n",
                name(), track(), track()/VOICES, score()->staves().size());
             }
       */
@@ -678,7 +678,7 @@ bool Element::readProperties(QDomElement e)
             _links = score()->links().value(i);
             if (!_links) {
                   if (score()->parentScore())   // DEBUG
-                        printf("---link %d not found (%d)\n", i, score()->links().size());
+                        qDebug("---link %d not found (%d)\n", i, score()->links().size());
                   _links = new LinkedElements(i);
                   score()->links().insert(i, _links);
                   }
@@ -778,7 +778,7 @@ void ElementList::replace(Element* o, Element* n)
       {
       int idx = indexOf(o);
       if (idx == -1) {
-            printf("ElementList::replace: element not found\n");
+            qDebug("ElementList::replace: element not found\n");
             return;
             }
       QList<Element*>::replace(idx, n);
@@ -835,7 +835,7 @@ void StaffLines::layout()
             lines = 5;
             }
 
-//      printf("StaffLines::layout:: dist %f st %p\n", dist, st);
+//      qDebug("StaffLines::layout:: dist %f st %p\n", dist, st);
 
       lw = score()->styleS(ST_staffLineWidth).val() * _spatium;
 
@@ -932,7 +932,7 @@ Line::Line(Score* s, bool v)
 
 void Line::dump() const
       {
-      printf("  width:%g height:%g vert:%d\n", point(_width), point(_len), vertical);
+      qDebug("  width:%g height:%g vert:%d\n", point(_width), point(_len), vertical);
       }
 
 //---------------------------------------------------------
@@ -1120,7 +1120,7 @@ void Compound::clear()
 
 void Element::dump() const
       {
-      printf("---Element: %s, pos(%4.2f,%4.2f)\n"
+      qDebug("---Element: %s, pos(%4.2f,%4.2f)\n"
          "   bbox(%g,%g,%g,%g)\n"
          "   abox(%g,%g,%g,%g)\n"
          "  parent: %p\n",
@@ -1226,7 +1226,7 @@ bool Element::edit(MuseScoreView*, int, int key, Qt::KeyboardModifiers, const QS
 
 void Element::add(Element* e)
       {
-      printf("Element: cannot add %s to %s\n", e->name(), name());
+      qDebug("Element: cannot add %s to %s\n", e->name(), name());
       }
 
 //---------------------------------------------------------
@@ -1235,7 +1235,7 @@ void Element::add(Element* e)
 
 void Element::remove(Element* e)
       {
-      printf("Element: cannot remove %s from %s\n", e->name(), name());
+      qDebug("Element: cannot remove %s from %s\n", e->name(), name());
       abort();
       }
 
@@ -1333,7 +1333,7 @@ Element* Element::create(ElementType type, Score* score)
             case MAXTYPE:
             case INVALID:  break;
             }
-      printf("cannot create type <%s>\n", Element::name(type));
+      qDebug("cannot create type <%s>\n", Element::name(type));
       return 0;
       }
 
@@ -1443,7 +1443,7 @@ ElementType Element::name2type(const QString& s)
             if (s == elementNames[i])
                   return ElementType(i);
             }
-printf("name2type: invalid type <%s>\n", qPrintable(s));
+qDebug("name2type: invalid type <%s>\n", qPrintable(s));
       return INVALID;
       }
 
@@ -1509,7 +1509,7 @@ QVariant Element::getProperty(int propertyId) const
             case P_COLOR:    return color();
             case P_VISIBLE:  return visible();
             default:
-                  printf("getProperty: unknown property %d\n", propertyId);
+                  qDebug("getProperty: unknown property %d\n", propertyId);
             }
       return QVariant();
       }
@@ -1533,7 +1533,7 @@ void Element::setProperty(int propertyId, const QVariant& v)
                   score()->addRefresh(canvasBoundingRect());
                   break;
             default:
-                  printf("getProperty: unknown property %d\n", propertyId);
+                  qDebug("getProperty: unknown property %d\n", propertyId);
             }
       }
 

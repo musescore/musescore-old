@@ -259,7 +259,7 @@ void Box::read(QDomElement e)
                         image = new RasterImage(score());
                         }
                   else {
-                        printf("unknown image format <%s>\n", path.toLatin1().data());
+                        qDebug("unknown image format <%s>\n", path.toLatin1().data());
                         }
                   if (image) {
                         image->setTrack(score()->curTrack);
@@ -471,7 +471,7 @@ QPointF VBox::getGrip(int) const
 
 void VBox::setGrip(int, const QPointF& pt)
       {
-//      printf("VBox::setGrip %f\n", pt.y());
+//      qDebug("VBox::setGrip %f\n", pt.y());
       setBoxHeight(Spatium(pt.y()));
       layout();
       }
@@ -500,7 +500,7 @@ void FBox::add(Element* e)
             fd->setFlag(ELEMENT_MOVABLE, false);
             }
       else {
-            printf("FBox::add: element not allowed\n");
+            qDebug("FBox::add: element not allowed\n");
             return;
             }
       _el.append(e);

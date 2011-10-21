@@ -112,11 +112,11 @@ void ChordStyleEditor::loadChordDescriptionFile(const QString& s)
       {
       ChordList* cl = new ChordList;
       if (!cl->read("chords.xml")) {
-            printf("cannot read <chords.xml>\n");
+            qDebug("cannot read <chords.xml>\n");
             return;
             }
       if (!cl->read(s)) {
-            printf("cannot read <%s>\n", qPrintable(s));
+            qDebug("cannot read <%s>\n", qPrintable(s));
             return;
             }
       setChordList(cl);
@@ -345,7 +345,7 @@ void HarmonyCanvas::render(const QList<RenderAction>& renderList, double& x, dou
                         y = pt.y();
                         }
                   else
-                        printf("RenderAction::RENDER_POP: stack empty\n");
+                        qDebug("RenderAction::RENDER_POP: stack empty\n");
                   }
             else if (a.type == RenderAction::RENDER_NOTE) {
                   bool germanNames = gscore->styleB(ST_useGermanNoteNames);
@@ -467,7 +467,7 @@ void HarmonyCanvas::dropEvent(QDropEvent* event)
             QFont ff(st->fontPx(_spatium));
             ff.setFamily(sb->font().family());
 
-//            printf("drop %s\n", dragElement->name());
+//            qDebug("drop %s\n", dragElement->name());
 
             QString s;
             int code = sb->code();
@@ -502,7 +502,7 @@ void HarmonyCanvas::dragEnterEvent(QDragEnterEvent* event)
             int line, column;
             QString err;
             if (!doc.setContent(a, &err, &line, &column)) {
-                  printf("error reading drag data at %d/%d: %s\n<%s>\n",
+                  qDebug("error reading drag data at %d/%d: %s\n<%s>\n",
                      line, column, err.toLatin1().data(), a.data());
                   return;
                   }

@@ -369,7 +369,7 @@ void Chord::remove(Element* e)
                               }
                         }
                   else
-                        printf("Chord::remove() note %p not found!\n", e);
+                        qDebug("Chord::remove() note %p not found!\n", e);
                   }
                   break;
 
@@ -698,7 +698,7 @@ void Chord::readNote(QDomElement e, const QList<Tuplet*>& tuplets, QList<Slur*>*
             else if (tag == "pitch")
                   note->setPitch(i);
             else if (tag == "prefix") {
-                  printf("read Note:: prefix: TODO\n");
+                  qDebug("read Note:: prefix: TODO\n");
                   }
             else if (tag == "line")
                   note->setLine(i);
@@ -1698,7 +1698,7 @@ Element* Chord::drop(const DropData& data)
 
 void Chord::renderArticulation(ArticulationType /*type*/)
       {
-      printf("TODO: renderArticulation\n");
+      qDebug("TODO: renderArticulation\n");
 #if 0
       int key  = staff()->key(segment()->tick()).accidentalType();
       QList<NoteEvent*> events;

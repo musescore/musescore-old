@@ -147,7 +147,7 @@ Rest* Score::addRest(int tick, int track, Duration d, Tuplet* tuplet)
             rest->setDuration(d.fraction());
       rest->setTrack(track);
       rest->setTuplet(tuplet);
-// printf("addRest at %d/%d len %s\n", tick, track, qPrintable(d.name()));
+// qDebug("addRest at %d/%d len %s\n", tick, track, qPrintable(d.name()));
       undoAddCR(rest, measure, tick);
       return rest;
       }
@@ -182,7 +182,7 @@ Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tup
       {
       Measure* measure = tick2measure(tick);
       if (measure->endTick() <= tick) {
-            printf("Score::addChord(): end of score?\n");
+            qDebug("Score::addChord(): end of score?\n");
             return 0;
             }
 
@@ -226,7 +226,7 @@ Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tup
 
 ChordRest* Score::addClone(ChordRest* cr, int tick, const Duration& d)
       {
-// printf("addClone %s at %d %s\n", cr->name(), tick, qPrintable(d.fraction().print()));
+// qDebug("addClone %s at %d %s\n", cr->name(), tick, qPrintable(d.fraction().print()));
       ChordRest* newcr;
       // change a RepeatMeasure() into an Rest()
       if (cr->type() == REPEAT_MEASURE)
@@ -252,7 +252,7 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
       Measure* measure = tick2measure(tick);
       Rest* r = 0;
 
-printf("setRest() %d/%d\n", l.numerator(), l.denominator());
+qDebug("setRest() %d/%d\n", l.numerator(), l.denominator());
 
       while (!l.isZero()) {
             //
@@ -288,7 +288,7 @@ printf("setRest() %d/%d\n", l.numerator(), l.denominator());
                   continue;
                   }
 
-            printf("set rest %d/%d  -> measure %d/%d\n",
+            qDebug("set rest %d/%d  -> measure %d/%d\n",
                f.numerator(), f.denominator(),
                measure->timesig().numerator(), measure->timesig().denominator()
                );
@@ -309,12 +309,12 @@ printf("setRest() %d/%d\n", l.numerator(), l.denominator());
                   //
 
                   Fraction ff = f / staff(track/VOICES)->timeStretch(tick);
-printf(" create duration list from %d/%d\n", ff.numerator(), ff.denominator());
+qDebug(" create duration list from %d/%d\n", ff.numerator(), ff.denominator());
                   QList<Duration> dList = toDurationList(ff, useDots);
                   if (dList.isEmpty())
                         return 0;
                   foreach(Duration d, dList) {
-                        printf("    duration %d/%d\n", d.fraction().numerator(), d.fraction().denominator());
+                        qDebug("    duration %d/%d\n", d.fraction().numerator(), d.fraction().denominator());
                         }
 
                   Rest* rest = 0;
@@ -395,7 +395,7 @@ static bool addCR(int tick, ChordRest* cr, Measure* ml)
                   break;
             }
       if (m == 0) {
-            printf("addCR: cannot insert cr: list too short\n");
+            qDebug("addCR: cannot insert cr: list too short\n");
             return false;
             }
       int etick = m->tick() + m->ticks();
@@ -661,7 +661,7 @@ void Score::rewriteMeasures(Measure* fm, const Fraction& ns)
 
 void Score::cmdAddTimeSig(Measure* fm, int staffIdx, TimeSig* ts)
       {
-printf("cmdAddTimeSig\n");
+qDebug("cmdAddTimeSig\n");
 
       Fraction ns  = ts->sig();
       int tick     = fm->tick();
@@ -687,7 +687,7 @@ printf("cmdAddTimeSig\n");
             if ((ots->subtype()   == ts->subtype())
                && (ots->sig().identical(ts->sig()))
                && (ots->stretch() == ts->stretch())) {
-printf("  already there %d %d\n", ots->subtype(), ts->subtype());
+qDebug("  already there %d %d\n", ots->subtype(), ts->subtype());
                   delete ts;
                   return;
                   }
@@ -698,7 +698,7 @@ printf("  already there %d %d\n", ots->subtype(), ts->subtype());
             //  or redundant time signature
             //
             if (lsig == ts->sig()) {
-printf("  global sig does not change\n");
+qDebug("  global sig does not change\n");
                   ts->setParent(seg);
                   ts->setTrack(track);
                   undoAddElement(ts);
@@ -708,7 +708,7 @@ printf("  global sig does not change\n");
             }
       if (seg)
             undoRemoveElement(seg);
-printf("   cmdAddTimeSig1\n");
+qDebug("   cmdAddTimeSig1\n");
       int n;
       if (ots && ots->sig() == ts->sig() && ots->stretch() == ts->stretch()) {
             // only symbol changes
@@ -780,7 +780,7 @@ void Score::timesigStretchChanged(TimeSig* ts, Measure* fm, int staffIdx)
                               cr->setDuration(ts->actualSig());
                               }
                         else
-                              printf("timeSigChanged: not implemented: chord/rest does not fit\n");
+                              qDebug("timeSigChanged: not implemented: chord/rest does not fit\n");
                         }
                   }
             }
@@ -833,7 +833,7 @@ void Score::putNote(const QPointF& pos, bool replace)
       {
       Position p;
       if (!getPosition(&p, pos, _is.voice())) {
-            printf("cannot put note here, get position failed\n");
+            qDebug("cannot put note here, get position failed\n");
             return;
             }
 
@@ -845,7 +845,7 @@ void Score::putNote(const QPointF& pos, bool replace)
       KeySigEvent key = st->keymap()->key(tick);
       int clef        = st->clef(tick);
 
-printf("putNote at tick %d staff %d line %d key %d clef %d\n",
+qDebug("putNote at tick %d staff %d line %d key %d clef %d\n",
    tick, staffIdx, line, key.accidentalType(), clef);
 
       _is.setTrack(staffIdx * VOICES + _is.voice());
@@ -911,7 +911,7 @@ printf("putNote at tick %d staff %d line %d key %d clef %d\n",
                               d = dd;
                         }
                   else
-                        printf("note not found: %d!\n", nval.pitch);
+                        qDebug("note not found: %d!\n", nval.pitch);
                   }
             if (!replace
                && (d == _is.duration())
@@ -957,21 +957,21 @@ void Score::cmdAddTie()
       else
             noteList = selection().noteList();
       if (noteList.isEmpty()) {
-            printf("no notes selected\n");
+            qDebug("no notes selected\n");
             return;
             }
 
       startCmd();
       foreach (Note* note, noteList) {
             if (note->tieFor()) {
-                  printf("cmdAddTie: has already tie? noteFor: %p\n", note->tieFor());
+                  qDebug("cmdAddTie: has already tie? noteFor: %p\n", note->tieFor());
                   continue;
                   }
             Chord* chord  = note->chord();
             if (noteEntryMode()) {
                   if (_is.cr() == 0) {
                         if (debugMode)
-                              printf("cmdAddTie: no pos\n");
+                              qDebug("cmdAddTie: no pos\n");
                         expandVoice();
                         }
                   Note* n = addPitch(note->pitch(), true);
@@ -1017,7 +1017,7 @@ void Score::cmdAddTie()
                   }
             if (note2 == 0) {
                   if (debugMode)
-                        printf("addTie: next note for tie not found\n");
+                        qDebug("addTie: next note for tie not found\n");
                   continue;
                   }
             Tie* tie = new Tie(this);
@@ -1154,14 +1154,14 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
             if (page->contains(pos)) {
                   const QList<System*>* sl = page->systems();
                   if (sl->isEmpty()) {
-                        printf("addSymbol: cannot put symbol here: no system on page\n");
+                        qDebug("addSymbol: cannot put symbol here: no system on page\n");
                         delete s;
                         return;
                         }
                   System* system = sl->front();
                   MeasureBase* m = system->measures().front();
                   if (m == 0) {
-                        printf("addSymbol: cannot put symbol here: no measure in system\n");
+                        qDebug("addSymbol: cannot put symbol here: no measure in system\n");
                         delete s;
                         return;
                         }
@@ -1174,7 +1174,7 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
                   }
             }
       if (!foundPage) {
-            printf("addSymbol: cannot put symbol here: no page\n");
+            qDebug("addSymbol: cannot put symbol here: no page\n");
             delete s;
             return;
             }
@@ -1346,8 +1346,8 @@ void Score::cmdDeleteSelectedMeasures()
       if (is->next()) {
             Segment* seg = selection().endSegment();
             MeasureBase* ie = seg ? seg->measure() : lastMeasure();
-//printf("cmdDEleteSelectedMeasures %p - %p\n", is, ie);
-//printf("  seg %s\n", seg->subTypeName());
+//qDebug("cmdDEleteSelectedMeasures %p - %p\n", is, ie);
+//qDebug("  seg %s\n", seg->subTypeName());
             if (ie) {
                   if ((seg == 0) || (ie->tick() < selection().tickEnd())) {
                         // if last measure is selected
@@ -1486,7 +1486,7 @@ void Score::cmdDeleteSelection()
             // so we need a local copy:
             QList<Element*> el(selection().elements());
             if (el.isEmpty())
-                  printf("...nothing selected\n");
+                  qDebug("...nothing selected\n");
             foreach(Element* e, el)
                   deleteItem(e);
             deselectAll();
@@ -1536,7 +1536,7 @@ Lyrics* Score::addLyrics()
 
 void Score::cmdCreateTuplet(ChordRest* ocr, Tuplet* tuplet)
       {
-printf("createTuplet at %d <%s> duration <%s> ratio <%s> baseLen <%s>\n",
+qDebug("createTuplet at %d <%s> duration <%s> ratio <%s> baseLen <%s>\n",
   ocr->tick(), ocr->name(),
   qPrintable(ocr->duration().print()),
   qPrintable(tuplet->ratio().print()),
@@ -1570,7 +1570,7 @@ printf("createTuplet at %d <%s> duration <%s> ratio <%s> baseLen <%s>\n",
       cr->setDurationType(tuplet->baseLen());
       cr->setDuration(tuplet->baseLen().fraction());
 
-printf("tuplet note duration %s  actualNotes %d  ticks %d\n",
+qDebug("tuplet note duration %s  actualNotes %d  ticks %d\n",
       qPrintable(tuplet->baseLen().name()), actualNotes, cr->actualTicks());
 
       undoAddCR(cr, measure, tick);
@@ -1656,13 +1656,13 @@ void Score::cmdExchangeVoice(int s, int d)
 void Score::cmdEnterRest(const Duration& d)
       {
       if (_is.track() == -1) {
-            printf("cmdEnterRest: track -1\n");
+            qDebug("cmdEnterRest: track -1\n");
             return;
             }
       startCmd();
       expandVoice();
       if (_is.cr() == 0) {
-            printf("cannot enter rest here\n");
+            qDebug("cannot enter rest here\n");
             return;
             }
 
@@ -1758,7 +1758,7 @@ void Score::cmdSplitMeasure(ChordRest* cr)
 
       //TODO: check for split in tuplet
       if (cr->segment()->tick() == measure->tick()) {
-            printf("cannot split here\n");
+            qDebug("cannot split here\n");
             return;
             }
       startCmd();
@@ -1832,7 +1832,7 @@ void Score::cmdSplitMeasure(ChordRest* cr)
                               ncr->addSlurBack(slur);
                               }
                         else {
-                              printf("cloneStave: cannot find slur\n");
+                              qDebug("cloneStave: cannot find slur\n");
                               }
                         }
                   foreach (Element* e, seg->annotations()) {
@@ -1861,7 +1861,7 @@ void Score::cmdSplitMeasure(ChordRest* cr)
                                           tie->setEndNote(nn);
                                           }
                                     else {
-                                          printf("cloneStave: cannot find tie\n");
+                                          qDebug("cloneStave: cannot find tie\n");
                                           }
                                     }
                               }
@@ -1943,7 +1943,7 @@ void Score::cmdJoinMeasure(Measure* m1, Measure* m2)
                                     ncr->addSlurBack(slur);
                                     }
                               else {
-                                    printf("cloneStave: cannot find slur\n");
+                                    qDebug("cloneStave: cannot find slur\n");
                                     }
                               }
                         foreach (Element* e, seg->annotations()) {
@@ -1972,7 +1972,7 @@ void Score::cmdJoinMeasure(Measure* m1, Measure* m2)
                                                 tie->setEndNote(nn);
                                                 }
                                           else {
-                                                printf("cloneStave: cannot find tie\n");
+                                                qDebug("cloneStave: cannot find tie\n");
                                                 }
                                           }
                                     }

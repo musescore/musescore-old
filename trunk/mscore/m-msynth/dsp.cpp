@@ -181,50 +181,42 @@ int Voice::dsp_float_interpolate_none(unsigned n)
 
 int Voice::dsp_float_interpolate_linear(unsigned n)
       {
-      Voice* voice = this;
-      Phase dsp_phase = voice->phase;
       Phase dsp_phase_incr; // end_phase;
-      const short *dsp_data = voice->sample->data;
-      float *dsp_buf = voice->dsp_buf;
-      float dsp_amp = voice->amp;
-      float dsp_amp_incr = voice->amp_incr;
-      unsigned int dsp_i = 0;
-      unsigned int dsp_phase_index;
-      unsigned int end_index;
-      short int point;
+      const short *dsp_data = sample->data;
+      short point;
       float *coeffs;
-      int looping;
 
       /* Convert playback "speed" floating point value to phase index/fract */
-      dsp_phase_incr.setFloat(voice->phase_incr);
+      dsp_phase_incr.setFloat(phase_incr);
 
       /* voice is currently looping? */
-      looping = SAMPLEMODE() == FLUID_LOOP_DURING_RELEASE
+      bool looping = SAMPLEMODE() == FLUID_LOOP_DURING_RELEASE
          || (SAMPLEMODE() == FLUID_LOOP_UNTIL_RELEASE
-         && voice->volenv_section < FLUID_VOICE_ENVRELEASE);
+         && volenv_section < FLUID_VOICE_ENVRELEASE);
 
       /* last index before 2nd interpolation point must be specially handled */
-      end_index = (looping ? voice->loopend - 1 : voice->end) - 1;
+      unsigned end_index = (looping ? loopend - 1 : end) - 1;
 
       /* 2nd interpolation point to use at end of loop or sample */
       if (looping)
-            point = dsp_data[voice->loopstart];      /* loop start */
+            point = dsp_data[loopstart];       /* loop start */
       else
-            point = dsp_data[voice->end];             /* duplicate end for samples no longer looping */
+            point = dsp_data[end];             /* duplicate end for samples no longer looping */
 
-      while (1) {
-            dsp_phase_index = dsp_phase.index();
+      int dsp_i;
+      for (dsp_i = 0;;) {
+            unsigned phase_index = phase.index();
 
             /* interpolate the sequence of sample points */
-            for ( ; dsp_i < n && dsp_phase_index <= end_index; dsp_i++) {
-                  coeffs = interp_coeff_linear[fluid_phase_fract_to_tablerow (dsp_phase)];
-                  dsp_buf[dsp_i] = dsp_amp * (coeffs[0] * dsp_data[dsp_phase_index]
-				  + coeffs[1] * dsp_data[dsp_phase_index+1]);
+            for ( ; dsp_i < n && phase_index <= end_index; dsp_i++) {
+                  coeffs = interp_coeff_linear[fluid_phase_fract_to_tablerow (phase)];
+                  dsp_buf[dsp_i] = amp * (coeffs[0] * dsp_data[phase_index]
+				  + coeffs[1] * dsp_data[phase_index + 1]);
 
                   /* increment phase and amplitude */
-                  dsp_phase += dsp_phase_incr;
-                  dsp_phase_index = dsp_phase.index();
-                  dsp_amp += dsp_amp_incr;
+                  phase       += dsp_phase_incr;
+                  phase_index = phase.index();
+                  amp         += amp_incr;
                   }
 
             /* break out if buffer filled */
@@ -235,14 +227,14 @@ int Voice::dsp_float_interpolate_linear(unsigned n)
 
             /* interpolate within last point */
             for (; dsp_phase_index <= end_index && dsp_i < n; dsp_i++) {
-                  coeffs = interp_coeff_linear[fluid_phase_fract_to_tablerow (dsp_phase)];
-                  dsp_buf[dsp_i] = dsp_amp * (coeffs[0] * dsp_data[dsp_phase_index]
+                  coeffs = interp_coeff_linear[fluid_phase_fract_to_tablerow (phase)];
+                  dsp_buf[dsp_i] = amp * (coeffs[0] * dsp_data[dsp_phase_index]
                      + coeffs[1] * point);
 
                   /* increment phase and amplitude */
-                  dsp_phase += dsp_phase_incr;
-                  dsp_phase_index = dsp_phase.index();
-                  dsp_amp += dsp_amp_incr;	/* increment amplitude */
+                  phase += dsp_phase_incr;
+                  dsp_phase_index = phase.index();
+                  amp += amp_incr;	/* increment amplitude */
                   }
 
             if (!looping)
@@ -250,8 +242,8 @@ int Voice::dsp_float_interpolate_linear(unsigned n)
 
             /* go back to loop start (if past */
             if (dsp_phase_index > end_index) {
-                  dsp_phase -= (voice->loopend - voice->loopstart);
-                  voice->has_looped = true;
+                  phase -= (loopend - loopstart);
+                  has_looped = true;
                   }
 
             /* break out if filled buffer */
@@ -259,9 +251,6 @@ int Voice::dsp_float_interpolate_linear(unsigned n)
                   break;
             end_index--;	/* set end back to second to last sample point */
             }
-
-      voice->phase = dsp_phase;
-      voice->amp = dsp_amp;
       return dsp_i;
       }
 

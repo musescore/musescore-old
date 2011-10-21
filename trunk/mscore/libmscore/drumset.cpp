@@ -49,7 +49,7 @@ void Drumset::save(Xml& xml)
                               }
                               break;
                         default:
-                              printf("illegal drum shortcut\n");
+                              qDebug("illegal drum shortcut\n");
                               break;
                         }
                   }
@@ -65,7 +65,7 @@ void Drumset::load(QDomElement e)
       {
       int pitch = e.attribute("pitch", "-1").toInt();
       if (pitch < 0 || pitch > 127) {
-            printf("load drumset: invalid pitch %d\n", pitch);
+            qDebug("load drumset: invalid pitch %d\n", pitch);
             return;
             }
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {

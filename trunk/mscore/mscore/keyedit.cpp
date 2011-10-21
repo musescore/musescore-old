@@ -199,7 +199,7 @@ void KeyCanvas::dragEnterEvent(QDragEnterEvent* event)
             int line, column;
             QString err;
             if (!doc.setContent(a, &err, &line, &column)) {
-                  printf("error reading drag data at %d/%d: %s\n<%s>\n",
+                  qDebug("error reading drag data at %d/%d: %s\n<%s>\n",
                      line, column, err.toLatin1().data(), a.data());
                   return;
                   }
@@ -219,9 +219,9 @@ void KeyCanvas::dragEnterEvent(QDragEnterEvent* event)
             }
       else {
             if (debugMode) {
-                  printf("KeyCanvas::dragEnterEvent: formats:\n");
+                  qDebug("KeyCanvas::dragEnterEvent: formats:\n");
                   foreach(const QString& s, event->mimeData()->formats())
-                        printf("   %s\n", qPrintable(s));
+                        qDebug("   %s\n", qPrintable(s));
                   }
             }
       }

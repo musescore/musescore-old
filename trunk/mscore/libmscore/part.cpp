@@ -157,8 +157,8 @@ static QTextDocumentFragment parseInstrName(const QString& name)
             col.setNum(column);
             ln.setNum(line);
             QString error = err + "\n at line " + ln + " column " + col;
-            printf("parse instrument name: %s\n", qPrintable(error));
-            printf("   data:<%s>\n", qPrintable(name));
+            qDebug("parse instrument name: %s\n", qPrintable(error));
+            qDebug("   data:<%s>\n", qPrintable(name));
             return QTextDocumentFragment();
             }
 
@@ -204,7 +204,7 @@ void Part::setStaves(int n)
       {
       int ns = _staves.size();
       if (n < ns) {
-            printf("Part::setStaves(): remove staves not implemented!\n");
+            qDebug("Part::setStaves(): remove staves not implemented!\n");
             return;
             }
       int staffIdx = _score->staffIdx(this) + ns;
@@ -246,7 +246,7 @@ void Part::insertStaff(Staff* staff)
 void Part::removeStaff(Staff* staff)
       {
       if (!_staves.removeOne(staff)) {
-            printf("Part::removeStaff: not found %p\n", staff);
+            qDebug("Part::removeStaff: not found %p\n", staff);
             return;
             }
       int idx = 0;

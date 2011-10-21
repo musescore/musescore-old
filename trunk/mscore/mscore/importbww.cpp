@@ -77,7 +77,7 @@ static void xmlSetPitch(Note* n, char step, int alter, int octave)
       //                       a  b   c  d  e  f  g
       static int table[7]  = { 9, 11, 0, 2, 4, 5, 7 };
       if (istep < 0 || istep > 6) {
-            printf("xmlSetPitch: illegal pitch %d, <%c>\n", istep, step);
+            qDebug("xmlSetPitch: illegal pitch %d, <%c>\n", istep, step);
             return;
             }
       int pitch = table[istep] + alter + (octave+1) * 12;
@@ -267,7 +267,7 @@ void MsScWriter::endMeasure(const Bww::MeasureEndFlags mef)
 
       if (mef.endingEnd) {
             if (lastVolta) {
-                  printf("adding volta\n");
+                  qDebug("adding volta\n");
                   if (ending == 1)
                         lastVolta->setSubtype(Volta::VOLTA_CLOSED);
                   else
@@ -277,7 +277,7 @@ void MsScWriter::endMeasure(const Bww::MeasureEndFlags mef)
                   lastVolta = 0;
                   }
             else {
-                  printf("lastVolta == 0 on stop\n");
+                  qDebug("lastVolta == 0 on stop\n");
                   }
             }
 
@@ -470,18 +470,18 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
                   tuplet = 0;
                   }
             else
-                  printf("BWW::import: triplet stop without triplet start\n");
+                  qDebug("BWW::import: triplet stop without triplet start\n");
             }
       else if (triplet == ST_CONTINUE) {
             if (!tuplet)
-                  printf("BWW::import: triplet continue without triplet start\n");
+                  qDebug("BWW::import: triplet continue without triplet start\n");
             }
       else if (triplet == ST_NONE) {
             if (tuplet)
-                  printf("BWW::import: triplet none inside triplet\n");
+                  qDebug("BWW::import: triplet none inside triplet\n");
             }
       else
-            printf("unknown triplet type %d\n", triplet);
+            qDebug("unknown triplet type %d\n", triplet);
       if (tuplet) {
             cr->setTuplet(tuplet);
             tuplet->add(cr);
@@ -497,7 +497,7 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
 
 bool MuseScore::importBww(Score* score, const QString& path)
       {
-      printf("Score::importBww(%s)\n", qPrintable(path));
+      qDebug("Score::importBww(%s)\n", qPrintable(path));
 
       if (path.isEmpty())
             return false;
@@ -522,7 +522,7 @@ bool MuseScore::importBww(Score* score, const QString& path)
       score->setSaved(false);
       score->setCreated(true);
       score->connectTies();
-      printf("Score::importBww() done\n");
+      qDebug("Score::importBww() done\n");
 //      return false;	// error
       return true;	// OK
       }

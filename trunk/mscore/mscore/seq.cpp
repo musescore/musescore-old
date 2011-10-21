@@ -192,13 +192,13 @@ bool Seq::init()
 
 #ifdef USE_JACK
       if (debugMode)
-            printf("useJackFlag %d\n", useJackFlag);
+            qDebug("useJackFlag %d\n", useJackFlag);
       if (useJackFlag) {
             useAlsaFlag      = false;
             usePortaudioFlag = false;
             driver = new JackAudio(this);
             if (!driver->init()) {
-                  printf("no JACK server found\n");
+                  qDebug("no JACK server found\n");
                   delete driver;
                   driver = 0;
                   }
@@ -208,11 +208,11 @@ bool Seq::init()
 #endif
 #ifdef USE_ALSA
       if (debugMode)
-            printf("useAlsaFlag %d\n", useAlsaFlag);
+            qDebug("useAlsaFlag %d\n", useAlsaFlag);
       if (driver == 0 && useAlsaFlag) {
             driver = new AlsaAudio(this);
             if (!driver->init()) {
-                  printf("init ALSA driver failed\n");
+                  qDebug("init ALSA driver failed\n");
                   delete driver;
                   driver = 0;
                   }
@@ -223,11 +223,11 @@ bool Seq::init()
 #endif
 #ifdef USE_PORTAUDIO
       if (debugMode)
-            printf("usePortaudioFlag %d\n", usePortaudioFlag);
+            qDebug("usePortaudioFlag %d\n", usePortaudioFlag);
       if (usePortaudioFlag) {
             driver = new Portaudio(this);
             if (!driver->init()) {
-                  printf("no audio output found\n");
+                  qDebug("no audio output found\n");
                   delete driver;
                   driver = 0;
                   }
@@ -241,14 +241,14 @@ bool Seq::init()
                                 "Sequencer will be disabled.");
             QMessageBox::critical(0, "MuseScore: Init Audio Driver", s);
 #endif
-            printf("init audio driver failed\n");
+            qDebug("init audio driver failed\n");
             return false;
             }
       MScore::sampleRate = driver->sampleRate();
       synti->init(MScore::sampleRate);
 
       if (!driver->start()) {
-            printf("Cannot start I/O\n");
+            qDebug("Cannot start I/O\n");
             return false;
             }
       running = true;
@@ -263,7 +263,7 @@ void Seq::exit()
       {
       if (driver) {
             if (debugMode)
-                  printf("Stop I/O\n");
+                  qDebug("Stop I/O\n");
             stopWait();
             delete driver;
             driver = 0;
@@ -417,7 +417,7 @@ void Seq::seqMessage(int msg)
                   break;
 
             default:
-                  printf("MScore::Seq:: unknown seq msg %d\n", msg);
+                  qDebug("MScore::Seq:: unknown seq msg %d\n", msg);
                   break;
             }
       }
@@ -563,7 +563,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
             else if (state == TRANSPORT_PLAY && driverState == TRANSPORT_STOP)
                   stopTransport();
             else if (state != driverState)
-                  printf("Seq: state transition %d -> %d ?\n",
+                  qDebug("Seq: state transition %d -> %d ?\n",
                      state, driverState);
             }
 
@@ -585,7 +585,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
                         break;
                   int n = f - playTime;
                   if (n < 0) {
-                        printf("%d:  %d - %d\n", playPos.key(), f, playTime);
+                        qDebug("%d:  %d - %d\n", playPos.key(), f, playTime);
 				n = 0;
                         }
                   metronome(n, l, r);
@@ -974,7 +974,7 @@ void Seq::prevChord()
 
 void Seq::seekEnd()
       {
-      printf("seek to end\n");
+      qDebug("seek to end\n");
       }
 
 //---------------------------------------------------------
@@ -1047,7 +1047,7 @@ void SeqMsgFifo::enqueue(const SeqMsg& msg)
             qwc.wait(&mutex,100);
             }
       if (i == n) {
-            printf("===SeqMsgFifo: overflow\n");
+            qDebug("===SeqMsgFifo: overflow\n");
             return;
             }
       messages[widx] = msg;

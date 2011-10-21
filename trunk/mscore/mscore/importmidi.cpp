@@ -677,7 +677,7 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, const Event& mm)
                   if (staff) {
                         int key = ((const char*)data)[0];
                         if (key < -7 || key > 7) {
-                              printf("ImportMidi: illegal key %d\n", key);
+                              qDebug("ImportMidi: illegal key %d\n", key);
                               break;
                               }
                         KeySigEvent ks;
@@ -686,7 +686,7 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, const Event& mm)
                         track->setHasKey(true);
                         }
                   else
-                        printf("meta key: no staff\n");
+                        qDebug("meta key: no staff\n");
                   break;
             case META_COMPOSER:     // mscore extension
             case META_POET:
@@ -737,7 +737,7 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, const Event& mm)
 
             default:
                   if (debugMode)
-                        printf("unknown meta type 0x%02x\n", mm.metaType());
+                        qDebug("unknown meta type 0x%02x\n", mm.metaType());
                   break;
             }
       }
@@ -792,7 +792,7 @@ void MuseScore::convertMidi(Score* score, MidiFile* mf)
                   }
             }
       if (staffIdx == 0)
-            printf("no tracks found\n");
+            qDebug("no tracks found\n");
 
       //---------------------------------------------------
       //  create instruments
@@ -892,7 +892,7 @@ void MuseScore::convertMidi(Score* score, MidiFile* mf)
 
       tick = score->sigmap()->bar2tick(startBar, 0, 0);
       if (tick)
-            printf("remove empty measures %d ticks\n", tick);
+            qDebug("remove empty measures %d ticks\n", tick);
       mf->move(-tick);
 
       //---------------------------------------------------
@@ -914,7 +914,7 @@ void MuseScore::convertMidi(Score* score, MidiFile* mf)
                         lastTick = tick;
                   }
             }
-      printf("=====tracks %d\n", xx);
+      qDebug("=====tracks %d\n", xx);
       int bars;
       score->sigmap()->tickValues(lastTick, &bars, &beat, &tick);
       if (beat > 0 || tick > 0)
@@ -952,7 +952,7 @@ void MuseScore::convertMidi(Score* score, MidiFile* mf)
                         mf->processMeta(score, track, e);
                   }
             if (debugMode) {
-                  printf("Track %2d:%2d key %d <%s><%s>\n", track->outChannel(),
+                  qDebug("Track %2d:%2d key %d <%s><%s>\n", track->outChannel(),
                      track->outPort(), track->hasKey(), qPrintable(track->name()),
                      qPrintable(track->comment()));
                   }
@@ -1090,7 +1090,7 @@ void MidiFile::convertTrack(Score* score, MidiTrack* midiTrack)
 
                                     if (useDrumset) {
                                           if (!drumset->isValid(mn.pitch())) {
-printf("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
+qDebug("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
                                                 }
                                           else {
                                                 chord->setStemDirection(drumset->stemDirection(mn.pitch()));
@@ -1132,7 +1132,7 @@ printf("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
                               int len = restLen;
                   		Measure* measure = score->tick2measure(ctick);
                               if (ctick >= measure->tick() + measure->ticks()) {
-                                    printf("tick2measure: %d end of score?\n", ctick);
+                                    qDebug("tick2measure: %d end of score?\n", ctick);
                                     ctick += restLen;
                                     restLen = 0;
                                     break;
@@ -1154,7 +1154,7 @@ printf("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
                               else {
                                     QList<Duration> dl = toDurationList(Fraction::fromTicks(len), false);
                                     if (dl.size() == 0) {
-                                          printf("cannot create duration list for len %d\n", len);
+                                          qDebug("cannot create duration list for len %d\n", len);
                                           restLen = 0;      // fake
                                           break;
                                           }
@@ -1199,7 +1199,7 @@ printf("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
                   int tick = notes[0]->mc.ontime();
             	measure = score->tick2measure(tick);
                   if (tick >= measure->tick() + measure->ticks()) {
-                        printf("=======================EOM\n");
+                        qDebug("=======================EOM\n");
                         break;
                         }
 
@@ -1213,16 +1213,16 @@ printf("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
                               len = n->mc.duration();
                         }
                   if (len == 0) {
-                        printf("ImportMidi: note len zero\n");
+                        qDebug("ImportMidi: note len zero\n");
                         abort();
                         }
                   // split notes on measure boundary
-//                  printf("tick %d len %d = %d    mt %d mtl %d = %d\n",
+//                  qDebug("tick %d len %d = %d    mt %d mtl %d = %d\n",
 //                     tick, len, tick+len, measure->tick(), measure->ticks(), measure->tick()+measure->ticks());
                   if ((tick + len) > measure->tick() + measure->ticks()) {
                         len = measure->tick() + measure->ticks() - tick;
                         if (len == 0) {
-                              printf("ImportMidi2: note len zero\n");
+                              qDebug("ImportMidi2: note len zero\n");
                               abort();
                               }
                         }

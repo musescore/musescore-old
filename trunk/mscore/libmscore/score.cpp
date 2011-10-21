@@ -903,7 +903,7 @@ bool Score::isSavable() const
 void Score::setInputTrack(int v)
       {
       if (v < 0) {
-            printf("setInputTrack: bad value: %d\n", v);
+            qDebug("setInputTrack: bad value: %d\n", v);
             return;
             }
       _is.setTrack(v);
@@ -1257,7 +1257,7 @@ bool Score::checkHasMeasures() const
       Page* page = pages().front();
       const QList<System*>* sl = page->systems();
       if (sl == 0 || sl->empty() || sl->front()->measures().empty()) {
-            printf("first create measure, then repeat operation\n");
+            qDebug("first create measure, then repeat operation\n");
             return false;
             }
       return true;
@@ -1366,7 +1366,7 @@ Measure* Score::getCreateMeasure(int tick)
             while (tick >= lastTick) {
                   Measure* m = new Measure(this);
                   Fraction ts = _sigmap->timesig(lastTick).timesig();
-// printf("getCreateMeasure %d  %d/%d\n", tick, ts.numerator(), ts.denominator());
+// qDebug("getCreateMeasure %d  %d/%d\n", tick, ts.numerator(), ts.denominator());
                   m->setTick(lastTick);
                   m->setTimesig(ts);
                   m->setLen(ts);
@@ -1391,7 +1391,7 @@ Measure* Score::getCreateMeasure(int tick)
 void Score::addElement(Element* element)
       {
       if (debugMode) {
-            printf("   Score(%p)::addElement %p(%s) parent %p(%s)\n",
+            qDebug("   Score(%p)::addElement %p(%s) parent %p(%s)\n",
                this, element, element->name(), element->parent(),
                element->parent() ? element->parent()->name() : "");
             }
@@ -1521,7 +1521,7 @@ void Score::removeElement(Element* element)
       Element* parent = element->parent();
 
       if (debugMode) {
-            printf("   Score(%p)::removeElement %p(%s) parent %p(%s)\n",
+            qDebug("   Score(%p)::removeElement %p(%s) parent %p(%s)\n",
                this, element, element->name(), parent, parent ? parent->name() : "");
             }
 
@@ -1741,7 +1741,7 @@ int Score::customKeySigIdx(KeySig* ks) const
                   return idx;
             ++idx;
             }
-      printf("  not found\n");
+      qDebug("  not found\n");
       return -1;
       }
 
@@ -1952,10 +1952,10 @@ void Score::removeExcerpt(Score* score)
                         return;
                         }
                   else
-                        printf("removeExcerpt:: ex not found\n");
+                        qDebug("removeExcerpt:: ex not found\n");
                   }
             }
-      printf("Score::removeExcerpt: excerpt not found\n");
+      qDebug("Score::removeExcerpt: excerpt not found\n");
       }
 
 //---------------------------------------------------------
@@ -1977,7 +1977,7 @@ Spanner* Score::findSpanner(int id) const
                         return e;
                   }
             }
-      printf("Score::findSpanner() id %d not found\n", id);
+      qDebug("Score::findSpanner() id %d not found\n", id);
       return 0;
       }
 
@@ -2021,7 +2021,7 @@ void Score::cmdUpdateNotes()
 
 void Score::updateAccidentals(Measure* m, int staffIdx)
       {
-// printf("updateAccidentals measure %d staff %d\n", m->no(), staffIdx);
+// qDebug("updateAccidentals measure %d staff %d\n", m->no(), staffIdx);
       Staff* st = staff(staffIdx);
       AccidentalState as;      // list of already set accidentals for this measure
       as.init(st->keymap()->key(m->tick()));
@@ -2052,9 +2052,9 @@ Score* Score::clone()
       QDomDocument doc;
       int line, column;
       QString err;
-// printf("buffer <%s>\n", buffer.buffer().data());
+// qDebug("buffer <%s>\n", buffer.buffer().data());
       if (!doc.setContent(buffer.buffer(), &err, &line, &column)) {
-            printf("error cloning score %d/%d: %s\n<%s>\n",
+            qDebug("error cloning score %d/%d: %s\n<%s>\n",
                line, column, err.toLatin1().data(), buffer.buffer().data());
             return 0;
             }
@@ -2170,7 +2170,7 @@ bool Score::appendScore(Score* score)
 
 void Score::splitStaff(int staffIdx, int splitPoint)
       {
-      printf("split staff %d point %d\n", staffIdx, splitPoint);
+      qDebug("split staff %d point %d\n", staffIdx, splitPoint);
 
       //
       // create second staff
@@ -2259,7 +2259,7 @@ void Score::splitStaff(int staffIdx, int splitPoint)
                         // insert Rest
                         Segment* s = tick2segment(ctick);
                         if (s == 0) {
-                              printf("no segment at %d\n", ctick);
+                              qDebug("no segment at %d\n", ctick);
                               continue;
                               }
                         setRest(ctick, dtrack, Fraction::fromTicks(rest), false, 0);
@@ -2286,7 +2286,7 @@ void Score::splitStaff(int staffIdx, int splitPoint)
                         // insert Rest
                         Segment* s = tick2segment(ctick);
                         if (s == 0) {
-                              printf("no segment at %d\n", ctick);
+                              qDebug("no segment at %d\n", ctick);
                               continue;
                               }
                         setRest(ctick, strack, Fraction::fromTicks(rest), false, 0);
@@ -2327,7 +2327,7 @@ void Score::cmdRemovePart(Part* part)
       int n      = part->nstaves();
       int eidx   = sidx + n;
 
-// printf("cmdRemovePart %d-%d\n", sidx, eidx);
+// qDebug("cmdRemovePart %d-%d\n", sidx, eidx);
 
       //
       //    adjust measures
@@ -2391,7 +2391,7 @@ void Score::adjustBracketsDel(int sidx, int eidx)
                   if ((sidx >= staffIdx) && (eidx <= (staffIdx + span)))
                         undoChangeBracketSpan(staff, i, span - (eidx-sidx));
 //                  else {
-//                        printf("TODO: adjust brackets, span %d\n", span);
+//                        qDebug("TODO: adjust brackets, span %d\n", span);
 //                        }
                   }
             int span = staff->barLineSpan();
@@ -2416,7 +2416,7 @@ void Score::adjustBracketsIns(int sidx, int eidx)
                   if ((sidx >= staffIdx) && (eidx < (staffIdx + span)))
                         undoChangeBracketSpan(staff, i, span + (eidx-sidx));
 //                  else {
-//                        printf("TODO: adjust brackets\n");
+//                        qDebug("TODO: adjust brackets\n");
 //                        }
                   }
             int span = staff->barLineSpan();
@@ -2512,7 +2512,7 @@ static Interval keydiff2Interval(int oKey, int nKey, TransposeDirection dir)
             if (chromatic == -12)
                   chromatic = 0;
             }
-printf("TransposeByKey %d -> %d   chromatic %d diatonic %d\n", oKey, nKey, chromatic, diatonic);
+qDebug("TransposeByKey %d -> %d   chromatic %d diatonic %d\n", oKey, nKey, chromatic, diatonic);
       return Interval(diatonic, chromatic);
       }
 
@@ -2835,7 +2835,7 @@ void Score::padToggle(int n)
 
 void Score::setInputState(Element* e)
       {
-// printf("setInputState %s\n", e ? e->name() : "--");
+// qDebug("setInputState %s\n", e ? e->name() : "--");
 
       if (e == 0)
             return;
@@ -2911,7 +2911,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
             setPlayPos(static_cast<ChordRest*>(ee)->segment()->tick());
             }
       if (debugMode)
-            printf("select element <%s> type %d(state %d) staff %d\n",
+            qDebug("select element <%s> type %d(state %d) staff %d\n",
                e ? e->name() : "", type, selection().state(), e ? e->staffIdx() : -1);
 
       SelState selState = _selection.state();
@@ -3046,7 +3046,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         return;
                         }
                   else {
-                        printf("SELECT_RANGE: measure: sel state %d\n", _selection.state());
+                        qDebug("SELECT_RANGE: measure: sel state %d\n", _selection.state());
                         }
                   }
             else if (e->type() == NOTE || e->type() == REST || e->type() == CHORD) {
@@ -3130,7 +3130,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                               }
                         }
                   else {
-                        printf("sel state %d\n", _selection.state());
+                        qDebug("sel state %d\n", _selection.state());
                         }
                   selState = SEL_RANGE;
                   if (!_selection.endSegment())
@@ -3253,7 +3253,7 @@ void Score::addLyrics(int tick, int staffIdx, const QString& txt)
       Measure* measure = tick2measure(tick);
       Segment* seg     = measure->findSegment(SegChordRest, tick);
       if (seg == 0) {
-            printf("no segment found for lyrics<%s> at tick %d\n",
+            qDebug("no segment found for lyrics<%s> at tick %d\n",
                qPrintable(txt), tick);
             return;
             }
@@ -3266,7 +3266,7 @@ void Score::addLyrics(int tick, int staffIdx, const QString& txt)
             cr->add(l);
             }
       else {
-            printf("no chord/rest for lyrics<%s> at tick %d, staff %d\n",
+            qDebug("no chord/rest for lyrics<%s> at tick %d, staff %d\n",
                qPrintable(txt), tick, staffIdx);
             }
       }

@@ -117,7 +117,7 @@ void Lyrics::read(QDomElement e)
                   else if (val == "middle")
                         _syllabic = MIDDLE;
                   else
-                        printf("bad syllabic property\n");
+                        qDebug("bad syllabic property\n");
                   }
             else if (tag == "endTick") {          // obsolete
                   // store <endTick> tag value until a <ticks> tag has been read
@@ -137,7 +137,7 @@ void Lyrics::read(QDomElement e)
       // if any endTick, make it relative to current tick
       if(iEndTick) {
             _ticks = iEndTick - score()->curTick;
-            printf("Lyrics::endTick: %d  ticks %d\n", iEndTick, _ticks);
+            qDebug("Lyrics::endTick: %d  ticks %d\n", iEndTick, _ticks);
             }
       }
 
@@ -153,7 +153,7 @@ void Lyrics::add(Element* el)
       else if (el->type() == TEXT && el->subtype() == TEXT_LYRICS_VERSE_NUMBER)
             _verseNumber = static_cast<Text*>(el);
       else
-            printf("Lyrics::add: unknown element %s\n", el->name());
+            qDebug("Lyrics::add: unknown element %s\n", el->name());
       }
 
 //---------------------------------------------------------
@@ -167,7 +167,7 @@ void Lyrics::remove(Element* el)
       else if (el->type() == TEXT && el->subtype() == TEXT_LYRICS_VERSE_NUMBER)
             _verseNumber = 0;
       else
-            printf("Lyrics::remove: unknown element %s\n", el->name());
+            qDebug("Lyrics::remove: unknown element %s\n", el->name());
       }
 
 //---------------------------------------------------------
@@ -211,7 +211,7 @@ void Lyrics::layout()
 
       System* sys = measure()->system();
       if (sys == 0) {
-            printf("lyrics layout: no system!\n");
+            qDebug("lyrics layout: no system!\n");
             abort();
             }
       const QList<Lyrics*>* ll = &(chordRest()->lyricsList());

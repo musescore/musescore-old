@@ -69,7 +69,7 @@ QObject* MyWebPage::createPlugin(
                   sv->setScore(paramValues[idx]);
                   }
             else {
-                  printf("create WebScoreView: property score not found(%d)\n",
+                  qDebug("create WebScoreView: property score not found(%d)\n",
                      paramNames.size());
                   }
             return sv;
@@ -387,7 +387,7 @@ void WebScoreView::setScore(const QString& url)
 void WebScoreView::networkFinished(QNetworkReply* reply)
       {
       if (reply->error() != QNetworkReply::NoError) {
-            printf("Error while checking update [%s]\n", qPrintable(reply->errorString()));
+            qDebug("Error while checking update [%s]\n", qPrintable(reply->errorString()));
             return;
             }
       QByteArray ha = reply->rawHeader("Content-Disposition");
@@ -408,7 +408,7 @@ void WebScoreView::networkFinished(QNetworkReply* reply)
 
       Score* score = mscore->readScore(tmpName);
       if (!score) {
-            printf("readScore failed\n");
+            qDebug("readScore failed\n");
             return;
             }
       ScoreView::setScore(score);
