@@ -61,13 +61,13 @@ Measure* Score::tick2measure(int tick) const
                   return m;
             mb = nmb;
             }
-      printf("-tick2measure %d not found\n", tick);
+      qDebug("-tick2measure %d not found\n", tick);
 //      if (debugMode) {
-        printf("first %p\n", first());
+        qDebug("first %p\n", first());
             for (MeasureBase* m = first(); m; m = m->next()) {
                   int st = m->tick();
                   int l  = m->ticks();
-                  printf("%d - %d\n", st, st+l);
+                  qDebug("%d - %d\n", st, st+l);
                   }
 //            }
       return 0;
@@ -85,7 +85,7 @@ MeasureBase* Score::tick2measureBase(int tick) const
             if (tick >= st && tick < (st+l))
                   return mb;
             }
-//      printf("tick2measureBase %d not found\n", tick);
+//      qDebug("tick2measureBase %d not found\n", tick);
       return 0;
       }
 
@@ -97,7 +97,7 @@ Segment* Score::tick2segment(int tick, bool first, SegmentTypes st) const
       {
       Measure* m = tick2measure(tick);
       if (m == 0) {
-            printf("   no segment for tick %d\n", tick);
+            qDebug("   no segment for tick %d\n", tick);
             return 0;
             }
       for (Segment* segment = m->first(st); segment;) {
@@ -124,7 +124,7 @@ Segment* Score::tick2segmentEnd(int track, int tick) const
       {
       Measure* m = tick2measure(tick);
       if (m == 0) {
-            printf("tick2segment(): not found tick %d\n", tick);
+            qDebug("tick2segment(): not found tick %d\n", tick);
             return 0;
             }
       // loop over all segments
@@ -539,7 +539,7 @@ int transposeTpc(int tpc, Interval interval, bool useDoubleSharpsFlats)
       int steps     = interval.diatonic;
       int semitones = interval.chromatic;
 
-printf("transposeTpc tpc %d steps %d semitones %d\n", tpc, steps, semitones);
+qDebug("transposeTpc tpc %d steps %d semitones %d\n", tpc, steps, semitones);
       if (semitones == 0 && steps == 0)
             return tpc;
 
@@ -567,9 +567,9 @@ printf("transposeTpc tpc %d steps %d semitones %d\n", tpc, steps, semitones);
                   --steps;
             else
                   break;
-            printf("  again alter %d steps %d, step %d\n", alter, steps, step);
+            qDebug("  again alter %d steps %d, step %d\n", alter, steps, step);
             }
-      printf("  = step %d alter %d  tpc %d\n", step, alter, step2tpc(step, alter));
+      qDebug("  = step %d alter %d  tpc %d\n", step, alter, step2tpc(step, alter));
       return step2tpc(step, alter);
       }
 

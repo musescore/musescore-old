@@ -188,10 +188,10 @@ static QString getSharePath()
 static void printVersion(const char* prog)
       {
 #ifdef MSCORE_UNSTABLE
-      printf("%s: Music Score Editor\nUnstable Prerelease for Version %s; Build %s\n",
+      qDebug("%s: Music Score Editor\nUnstable Prerelease for Version %s; Build %s\n",
          prog, VERSION, qPrintable(revision));
 #else
-     printf("%s: Music Score Editor; Version %s; Build %s\n", prog, VERSION, qPrintable(revision));
+     qDebug("%s: Music Score Editor; Version %s; Build %s\n", prog, VERSION, qPrintable(revision));
 #endif
       }
 
@@ -297,7 +297,7 @@ void MuseScore::preferencesChanged()
             else {
                   QPixmap* pm = new QPixmap(preferences.fgWallpaper);
                   if (pm == 0 || pm->isNull())
-                        printf("no valid pixmap %s\n", preferences.fgWallpaper.toLatin1().data());
+                        qDebug("no valid pixmap %s\n", preferences.fgWallpaper.toLatin1().data());
                   canvas->setForeground(pm);
                   }
             }
@@ -317,7 +317,7 @@ void MuseScore::preferencesChanged()
                   else {
                         QPixmap* pm = new QPixmap(preferences.fgWallpaper);
                         if (pm == 0 || pm->isNull())
-                              printf("no valid pixmap %s\n", preferences.fgWallpaper.toLatin1().data());
+                              qDebug("no valid pixmap %s\n", preferences.fgWallpaper.toLatin1().data());
                         canvas->setForeground(pm);
                         }
                   }
@@ -1037,12 +1037,12 @@ void MuseScore::helpBrowser()
       QString lang = getLocaleISOCode();
 
       if (debugMode)
-            printf("open handbook for language <%s>\n", qPrintable(lang));
+            qDebug("open handbook for language <%s>\n", qPrintable(lang));
 
       QFileInfo mscoreHelp(mscoreGlobalShare + QString("man/MuseScore-") + lang + QString(".pdf"));
       if (!mscoreHelp.isReadable()) {
             if (debugMode) {
-                  printf("cannot open doc <%s>\n", qPrintable(mscoreHelp.filePath()));
+                  qDebug("cannot open doc <%s>\n", qPrintable(mscoreHelp.filePath()));
                   }
             lang = lang.left(2);
             mscoreHelp.setFile(mscoreGlobalShare + QString("man/MuseScore-") + lang + QString(".pdf"));
@@ -1075,7 +1075,7 @@ void MuseScore::helpBrowser1()
       QString lang = getLocaleISOCode();
 
       if (debugMode)
-            printf("open online handbook for language <%s>\n", qPrintable(lang));
+            qDebug("open online handbook for language <%s>\n", qPrintable(lang));
       QString help("http://www.musescore.org/en/handbook");
       //try to find an exact match
       bool found = false;
@@ -1367,7 +1367,7 @@ void MuseScore::dragEnterEvent(QDragEnterEvent* event)
             QList<QUrl>ul = event->mimeData()->urls();
             foreach(const QUrl& u, ul) {
                   if (debugMode)
-                        printf("drag Url: %s\n", qPrintable(u.toString()));
+                        qDebug("drag Url: %s\n", qPrintable(u.toString()));
                   if (u.scheme() == "file") {
                         QFileInfo fi(u.toLocalFile());
                         event->acceptProposedAction();
@@ -1596,7 +1596,7 @@ void MuseScore::midiNoteReceived(int channel, int pitch, int velo)
       if (!midiinEnabled())
             return;
 
-// printf("midiNoteReceived %d %d %d\n", channel, pitch, velo);
+// qDebug("midiNoteReceived %d %d %d\n", channel, pitch, velo);
 
       if (_midiRecordId != -1) {
             preferences.midiRemote[_midiRecordId].type = MIDI_REMOTE_TYPE_NOTEON;
@@ -1631,7 +1631,7 @@ void MuseScore::midiNoteReceived(int channel, int pitch, int velo)
                         active = 0;
                   iter = 0;
                   }
-// printf("    midiNoteReceived %d active %d\n", pitch, active);
+// qDebug("    midiNoteReceived %d active %d\n", pitch, active);
             cv->midiNoteReceived(pitch, active);
             ++active;
             }
@@ -1687,7 +1687,7 @@ void MuseScore::removeTab()
       {
       int n = scoreList.indexOf(cs);
       if (n == -1) {
-            printf("removeTab: %p not found\n", cs);
+            qDebug("removeTab: %p not found\n", cs);
             return;
             }
       removeTab(n);
@@ -1750,20 +1750,20 @@ void setMscoreLocale(QString localeName)
       translatorList.clear();
 
       if (debugMode)
-            printf("configured localeName <%s>\n", qPrintable(localeName));
+            qDebug("configured localeName <%s>\n", qPrintable(localeName));
       if (localeName.toLower() == "system") {
             localeName = QLocale::system().name();
             if (debugMode)
-                  printf("real localeName <%s>\n", qPrintable(localeName));
+                  qDebug("real localeName <%s>\n", qPrintable(localeName));
             }
 
       QTranslator* translator = new QTranslator;
       QString lp = mscoreGlobalShare + "locale/" + QString("mscore_") + localeName;
       if (debugMode)
-            printf("load translator <%s>\n", qPrintable(lp));
+            qDebug("load translator <%s>\n", qPrintable(lp));
 
       if (!translator->load(lp) && debugMode)
-            printf("load translator <%s> failed\n", qPrintable(lp));
+            qDebug("load translator <%s> failed\n", qPrintable(lp));
       else {
             qApp->installTranslator(translator);
             translatorList.append(translator);
@@ -1777,11 +1777,11 @@ void setMscoreLocale(QString localeName)
 #endif
       QTranslator* qtTranslator = new QTranslator;
       if (debugMode)
-            printf("load translator <qt_%s> from <%s>\n",
+            qDebug("load translator <qt_%s> from <%s>\n",
                qPrintable(localeName), qPrintable(resourceDir));
 
       if (!qtTranslator->load(QLatin1String("qt_") + localeName, resourceDir) && debugMode)
-            printf("load translator <qt_%s> failed\n", qPrintable(localeName));
+            qDebug("load translator <qt_%s> failed\n", qPrintable(localeName));
       else {
             qApp->installTranslator(qtTranslator);
             translatorList.append(qtTranslator);
@@ -1971,7 +1971,7 @@ static bool processNonGui()
             if (fn.endsWith(".mp3"))
                   return mscore->saveMp3(cs, fn);
             else {
-                  fprintf(stderr, "dont know how to convert to %s\n", qPrintable(outFileName));
+                  qDebug("dont know how to convert to %s\n", qPrintable(outFileName));
                   return false;
                   }
             }
@@ -2005,7 +2005,7 @@ int main(int argc, char* av[])
 #endif
 
       if (!QFontDatabase::supportsThreadedFontRendering()) {
-            printf("Your computer does not support threaded font rendering!\n");
+            qDebug("Your computer does not support threaded font rendering!\n");
             exit(-1);
             }
 
@@ -2130,7 +2130,7 @@ int main(int argc, char* av[])
       dir.mkpath(dataPath + "/plugins");
 
       if (debugMode)
-            printf("global share: <%s>\n", qPrintable(mscoreGlobalShare));
+            qDebug("global share: <%s>\n", qPrintable(mscoreGlobalShare));
 
       // set translator before preferences are read to get
       //    translations for all shortcuts
@@ -2210,7 +2210,7 @@ int main(int argc, char* av[])
       seq   = new Seq();
       if (!noSeq) {
             if (!seq->init()) {
-                  printf("sequencer init failed\n");
+                  qDebug("sequencer init failed\n");
                   noSeq = true;
                   }
             }
@@ -2227,7 +2227,7 @@ int main(int argc, char* av[])
       if (debugMode) {
             QStringList sl(QCoreApplication::libraryPaths());
             foreach(const QString& s, sl)
-                  printf("LibraryPath: <%s>\n", qPrintable(s));
+                  qDebug("LibraryPath: <%s>\n", qPrintable(s));
             }
 
       // rastral size of font is 20pt = 20/72 inch = 20*DPI/72 dots
@@ -2296,7 +2296,7 @@ MScore::init();         // initialize libmscore
       if (sc)
             sc->finish(mscore);
       if (debugMode)
-            printf("start event loop...\n");
+            qDebug("start event loop...\n");
       if (mscore->hasToCheckForUpdate())
             mscore->checkForUpdate();
       return qApp->exec();
@@ -2435,7 +2435,7 @@ void MuseScore::clipboardChanged()
 void MuseScore::changeState(ScoreState val)
       {
       if (debugMode)
-            printf("MuseScore::changeState: %s\n", stateName(val));
+            qDebug("MuseScore::changeState: %s\n", stateName(val));
 
       if (_sstate == val)
             return;
@@ -2454,13 +2454,13 @@ void MuseScore::changeState(ScoreState val)
                   Driver* driver = seq ? seq->getDriver() : 0;
                   // s->action->setEnabled(driver && driver->getSynth());
                   if (debugMode)
-                        printf("disable synth control\n");
+                        qDebug("disable synth control\n");
                   s->action->setEnabled(driver);
                   }
             else {
                   bool enable = s->state & val;
                   if (debugMode)
-                        printf("disable %s\n", s->xml);
+                        qDebug("disable %s\n", s->xml);
                   s->action->setEnabled(enable);
                   }
             }
@@ -2558,7 +2558,7 @@ void MuseScore::changeState(ScoreState val)
                   _modeText->show();
                   break;
             default:
-                  printf("MuseScore::setState: illegal state %d\n", val);
+                  qDebug("MuseScore::setState: illegal state %d\n", val);
                   break;
             }
       QAction* a = getAction("note-input");
@@ -2735,7 +2735,7 @@ void MuseScore::dirtyChanged(Score* s)
 
       int idx = scoreList.indexOf(score);
       if (idx == -1) {
-            printf("score not in list\n");
+            qDebug("score not in list\n");
             return;
             }
       QString label(score->name());
@@ -2945,13 +2945,13 @@ void MuseScore::editInDrumroll(Staff* staff)
 
 void MuseScore::writeSessionFile(bool cleanExit)
       {
-// printf("write session file\n");
+// qDebug("write session file\n");
 
       QDir dir;
       dir.mkpath(dataPath);
       QFile f(dataPath + "/session");
       if (!f.open(QIODevice::WriteOnly)) {
-            printf("cannot create session file <%s>\n", qPrintable(f.fileName()));
+            qDebug("cannot create session file <%s>\n", qPrintable(f.fileName()));
             return;
             }
       Xml xml(&f);
@@ -2962,7 +2962,7 @@ void MuseScore::writeSessionFile(bool cleanExit)
             xml.stag("Score");
             xml.tag("created", score->created());
             xml.tag("dirty", score->dirty());
-// printf("  %d <%s>\n", score->dirty(), qPrintable(score->fileInfo()->absoluteFilePath()));
+// qDebug("  %d <%s>\n", score->dirty(), qPrintable(score->fileInfo()->absoluteFilePath()));
             if (score->tmpName().isEmpty()) {
                   xml.tag("path", score->fileInfo()->absoluteFilePath());
                   }
@@ -3034,7 +3034,7 @@ void MuseScore::removeSessionFile()
       if (!f.exists())
             return;
       if (!f.remove()) {
-            printf("cannot remove session file <%s>\n", qPrintable(f.fileName()));
+            qDebug("cannot remove session file <%s>\n", qPrintable(f.fileName()));
             }
       }
 
@@ -3059,7 +3059,7 @@ void MuseScore::autoSaveTimerTimeout()
                         QTemporaryFile tf(dataPath + "/scXXXXXX.mscz");
                         tf.setAutoRemove(false);
                         if (!tf.open()) {
-                              printf("autoSaveTimerTimeout(): create temporary file failed\n");
+                              qDebug("autoSaveTimerTimeout(): create temporary file failed\n");
                               return;
                               }
                         s->setTmpName(tf.fileName());
@@ -3093,7 +3093,7 @@ bool MuseScore::restoreSession(bool always)
       if (!f.exists())
             return false;
       if (!f.open(QIODevice::ReadOnly)) {
-            printf("cannot open session file <%s>\n", qPrintable(f.fileName()));
+            qDebug("cannot open session file <%s>\n", qPrintable(f.fileName()));
             return false;
             }
       QDomDocument doc;
@@ -3398,7 +3398,7 @@ void MuseScore::oscStop()
 
 void MuseScore::oscNext()
       {
-      printf("next\n");
+      qDebug("next\n");
       QAction* a = getAction("next-chord");
       a->trigger();
       }
@@ -3411,7 +3411,7 @@ void MuseScore::oscNextMeasure()
 
 void MuseScore::oscGoto(int m)
       {
-      printf("GOTO %d\n", m);
+      qDebug("GOTO %d\n", m);
       if (cv == 0)
             return;
       cv->search(m);
@@ -3419,7 +3419,7 @@ void MuseScore::oscGoto(int m)
 
 void MuseScore::oscSelectMeasure(int m)
       {
-      printf("SelectMeasure %d\n", m);
+      qDebug("SelectMeasure %d\n", m);
       if (cv == 0)
             return;
       cv->selectMeasure(m);
@@ -3532,7 +3532,7 @@ void MuseScore::editRaster()
             editRasterDialog = new EditRaster(this);
             }
       if (editRasterDialog->exec()) {
-            printf("=====accept config raster\n");
+            qDebug("=====accept config raster\n");
             }
       }
 
@@ -3686,11 +3686,11 @@ void MuseScore::deleteProfile()
             return;
       Profile::profiles().removeOne(profile);
       QFile f(profile->path());
-printf("remove <%s>\n", qPrintable(profile->name()));
+qDebug("remove <%s>\n", qPrintable(profile->name()));
       f.remove();
 //TODO:??      delete profile;
       profile             = Profile::profiles().first();
-printf("  change to <%s>\n", qPrintable(profile->name()));
+qDebug("  change to <%s>\n", qPrintable(profile->name()));
       preferences.profile = profile->name();
       }
 
@@ -3708,7 +3708,7 @@ void MuseScore::changeProfile(QAction* a)
                   return;
                   }
             }
-      printf("   profile not found\n");
+      qDebug("   profile not found\n");
       }
 
 //---------------------------------------------------------
@@ -3784,7 +3784,7 @@ void MuseScore::switchLayer(const QString& s)
 void MuseScore::networkFinished(QNetworkReply* reply)
       {
       if (reply->error() != QNetworkReply::NoError) {
-            printf("Error while checking update [%s]\n", qPrintable(reply->errorString()));
+            qDebug("Error while checking update [%s]\n", qPrintable(reply->errorString()));
             return;
             }
       QByteArray ha = reply->rawHeader("Content-Disposition");
@@ -3798,8 +3798,8 @@ void MuseScore::networkFinished(QNetworkReply* reply)
 
       // attachment; filename="Bilder_einer_Ausstellung.mscz"
 
-      printf("header <%s>\n", qPrintable(s));
-      printf("name <%s>\n", qPrintable(name));
+      qDebug("header <%s>\n", qPrintable(s));
+      qDebug("name <%s>\n", qPrintable(name));
 
       QByteArray data = reply->readAll();
       QString tmpName = QDir::tempPath () + "/"+ name;
@@ -3810,7 +3810,7 @@ void MuseScore::networkFinished(QNetworkReply* reply)
 
       Score* score = new Score(MScore::defaultStyle());
       if (!readScore(score, tmpName)) {
-            printf("readScore failed\n");
+            qDebug("readScore failed\n");
             delete score;
             return;
             }
@@ -3878,7 +3878,7 @@ static void collectMatch(void* data, Element* e)
       {
       ElementPattern* p = static_cast<ElementPattern*>(data);
 /*      if (p->type == e->type() && p->subtype != e->subtype())
-            printf("%s subtype %d does not match\n", e->name(), e->subtype());
+            qDebug("%s subtype %d does not match\n", e->name(), e->subtype());
       */
       if ((p->type != e->type()) || (p->subtypeValid && p->subtype != e->subtype()))
             return;
@@ -4074,11 +4074,11 @@ void MuseScore::cmd(QAction* a)
       QString cmdn(a->data().toString());
 
       if (debugMode)
-            printf("MuseScore::cmd <%s>\n", cmdn.toAscii().data());
+            qDebug("MuseScore::cmd <%s>\n", cmdn.toAscii().data());
 
       Shortcut* sc = getShortcut(cmdn.toAscii().data());
       if (sc == 0) {
-            printf("MuseScore::cmd(): unknown action <%s>\n", qPrintable(cmdn));
+            qDebug("MuseScore::cmd(): unknown action <%s>\n", qPrintable(cmdn));
             return;
             }
       if (cs && (sc->state & _sstate) == 0) {
@@ -4101,7 +4101,7 @@ void MuseScore::cmd(QAction* a)
             }
 
       if ((sc->flags & A_SCORE) && ! cs) {
-            printf("no score\n");
+            qDebug("no score\n");
             return;
             }
       if (sc->flags & A_CMD) {
@@ -4433,7 +4433,7 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
                   cv->cmd(a);
                   }
             else
-                  printf("2:unknown cmd <%s>\n", qPrintable(cmd));
+                  qDebug("2:unknown cmd <%s>\n", qPrintable(cmd));
             }
       if (debugger)
             debugger->reloadClicked();

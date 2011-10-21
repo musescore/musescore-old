@@ -396,7 +396,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         return qScriptValueFromValue(context->engine(), result);
                         }
                    else if(argc == 1) {
-                        //printf(":::setKeysig\n");
+                        //qDebug(":::setKeysig\n");
                         int newKey = context->argument(0).toInt32();
                         KeySigEvent ke;
                         ke.setAccidentalType(newKey);

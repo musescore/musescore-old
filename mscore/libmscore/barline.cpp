@@ -69,7 +69,7 @@ void BarLine::getY(qreal* y1, qreal* y2) const
             int staffIdx1    = staffIdx();
             int staffIdx2    = staffIdx1 + _span - 1;
             if (staffIdx2 >= score()->nstaves()) {
-                  printf("BarLine: bad _span %d\n", _span);
+                  qDebug("BarLine: bad _span %d\n", _span);
                   staffIdx2 = score()->nstaves() - 1;
                   }
             Segment* segment = static_cast<Segment*>(parent());
@@ -581,7 +581,7 @@ void BarLine::layout()
                   dw = point(w);
                   break;
             default:
-                  printf("illegal bar line type\n");
+                  qDebug("illegal bar line type\n");
                   break;
             }
       QRectF r(0.0, y1, dw, y2);
@@ -685,7 +685,7 @@ void BarLine::add(Element* e)
                         measure()->setEndBarLineGenerated(false);
                   break;
             default:
-                  printf("BarLine::add() not impl. %s\n", e->name());
+                  qDebug("BarLine::add() not impl. %s\n", e->name());
                   break;
             }
       }
@@ -699,10 +699,10 @@ void BarLine::remove(Element* e)
       switch(e->type()) {
             case ARTICULATION:
                   if (!_el.remove(e))
-                        printf("BarLine::remove(): cannot find %s\n", e->name());
+                        qDebug("BarLine::remove(): cannot find %s\n", e->name());
                   break;
             default:
-                  printf("BarLine::remove() not impl. %s\n", e->name());
+                  qDebug("BarLine::remove() not impl. %s\n", e->name());
                   break;
             }
       }

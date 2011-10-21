@@ -181,7 +181,7 @@ const QString Text::subtypeName() const
             case TEXT_INSTRUMENT_CHANGE: return "InstrumentChange";
             case TEXT_LYRICS_VERSE_NUMBER: return "LyricsVerseNumber";
             default:
-                  printf("unknown text(%s) subtype %d\n", name(), subtype());
+                  qDebug("unknown text(%s) subtype %d\n", name(), subtype());
                   break;
             }
       return "?";
@@ -243,7 +243,7 @@ void Text::setSubtype(const QString& s)
       else if (s == "LyricsVerseNumber")
             st = TEXT_LYRICS_VERSE_NUMBER;
       else
-            printf("Text(%s): setSubtype: unknown type <%s>\n", name(), qPrintable(s));
+            qDebug("Text(%s): setSubtype: unknown type <%s>\n", name(), qPrintable(s));
       setSubtype(st);
       }
 
@@ -664,7 +664,7 @@ void Text::spatiumChanged(qreal oldVal, qreal newVal)
       {
       Element::spatiumChanged(oldVal, newVal);
 #if 0
-printf("Text::spatiumChanged %d  -- %s %s %p %f\n",
+qDebug("Text::spatiumChanged %d  -- %s %s %p %f\n",
       sizeIsSpatiumDependent(), name(), parent() ? parent()->name() : "?", this, newVal);
 #endif
       if (!sizeIsSpatiumDependent())
@@ -721,9 +721,9 @@ void Text::startEdit(MuseScoreView* view, const QPointF& p)
 bool Text::edit(MuseScoreView* view, int /*grip*/, int key, Qt::KeyboardModifiers modifiers, const QString& s)
       {
       if (debugMode)
-            printf("Text::edit(%p) key 0x%x mod 0x%x\n", this, key, int(modifiers));
+            qDebug("Text::edit(%p) key 0x%x mod 0x%x\n", this, key, int(modifiers));
       if (!_editMode || !cursor) {
-            printf("Text::edit(%p): not in edit mode: %d %p\n", this, _editMode, cursor);
+            qDebug("Text::edit(%p): not in edit mode: %d %p\n", this, _editMode, cursor);
             return false;
             }
       bool lo = (subtype() == TEXT_INSTRUMENT_SHORT) || (subtype() == TEXT_INSTRUMENT_LONG);
@@ -923,7 +923,7 @@ void Text::moveCursor(int col)
 void Text::endEdit()
       {
       if (!_editMode || !cursor) {
-            printf("endEdit<%p>: not in edit mode or no cursor: %d %p\n", this, _editMode, cursor);
+            qDebug("endEdit<%p>: not in edit mode or no cursor: %d %p\n", this, _editMode, cursor);
             return;
             }
       cursorPos = cursor->position();
@@ -1096,7 +1096,7 @@ void Text::paste()
       QString txt = QApplication::clipboard()->text(QClipboard::Selection);
 #endif
       if (debugMode)
-            printf("Text::paste() <%s>\n", qPrintable(txt));
+            qDebug("Text::paste() <%s>\n", qPrintable(txt));
       cursor->insertText(txt);
       layout();
       bool lo = (subtype() == TEXT_INSTRUMENT_SHORT) || (subtype() == TEXT_INSTRUMENT_LONG);

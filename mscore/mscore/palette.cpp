@@ -264,7 +264,7 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
                   }
             }
       else
-            printf("unknown selection state\n");
+            qDebug("unknown selection state\n");
       score->endCmd();
       mscore->endCmd();
       }
@@ -616,8 +616,8 @@ void Palette::dragEnterEvent(QDragEnterEvent* event)
             QList<QUrl>ul = event->mimeData()->urls();
             QUrl u = ul.front();
             if (debugMode) {
-                  printf("drag Url: %s\n", u.toString().toLatin1().data());
-                  printf("scheme <%s> path <%s>\n", u.scheme().toLatin1().data(),
+                  qDebug("drag Url: %s\n", u.toString().toLatin1().data());
+                  qDebug("scheme <%s> path <%s>\n", u.scheme().toLatin1().data(),
                      u.path().toLatin1().data());
                   }
             if (u.scheme() == "file") {
@@ -636,9 +636,9 @@ void Palette::dragEnterEvent(QDragEnterEvent* event)
             event->acceptProposedAction();
       else {
             if (debugMode) {
-                  printf("dragEnterEvent: formats:\n");
+                  qDebug("dragEnterEvent: formats:\n");
                   foreach(const QString& s, event->mimeData()->formats())
-                        printf("   %s\n", s.toLatin1().data());
+                        qDebug("   %s\n", s.toLatin1().data());
                   }
             }
       }
@@ -711,7 +711,7 @@ void Palette::dropEvent(QDropEvent* event)
             int line, column;
             QString err;
             if (!doc.setContent(data, &err, &line, &column)) {
-                  printf("error reading drag data\n");
+                  qDebug("error reading drag data\n");
                   return;
                   }
             docName = "--";
@@ -742,7 +742,7 @@ void Palette::dropEvent(QDropEvent* event)
                         )
                         image = new RasterImage(gscore);
                   else {
-                        printf("unknown image format <%s>\n", path.toLatin1().data());
+                        qDebug("unknown image format <%s>\n", path.toLatin1().data());
                         }
                   if (image) {
                         image->read(el);
@@ -893,7 +893,7 @@ void Palette::write(const QString& path)
       {
       QFile f(path);
       if (!f.open(QIODevice::WriteOnly)) {
-            printf("cannot write modified palettes\n");
+            qDebug("cannot write modified palettes\n");
             return;
             }
       Xml xml(&f);
@@ -970,7 +970,7 @@ void Palette::read(QDomElement e)
                                           )
                                           image = new RasterImage(gscore);
                                     else {
-                                          printf("unknown image format <%s>\n", path.toLatin1().data());
+                                          qDebug("unknown image format <%s>\n", path.toLatin1().data());
                                           }
                                     if (image) {
                                           image->read(ee);

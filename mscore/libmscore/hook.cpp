@@ -46,7 +46,7 @@ void Hook::setSubtype(int i)
             case -4:   setSym(dsixtyfourthflagSym);  break;
             case -5:   setSym(dflag128Sym);  break;
             default:
-                  printf("no hook for subtype %d\n", i);
+                  qDebug("no hook for subtype %d\n", i);
                   break;
             }
       }

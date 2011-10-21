@@ -80,7 +80,7 @@ void Harmony::resolveDegreeList()
 
       hc.add(_degreeList);
 
-// printf("resolveDegreeList: <%s> <%s-%s>: ", _descr->name, _descr->xmlKind, _descr->xmlDegrees);
+// qDebug("resolveDegreeList: <%s> <%s-%s>: ", _descr->name, _descr->xmlKind, _descr->xmlDegrees);
 // hc.print();
 // _descr->chord.print();
 
@@ -88,13 +88,13 @@ void Harmony::resolveDegreeList()
       ChordList* cl = score()->style()->chordList();
       foreach(const ChordDescription* cd, *cl) {
             if ((cd->chord == hc) && !cd->names.isEmpty()) {
-printf("ResolveDegreeList: found in table as %s\n", qPrintable(cd->names.front()));
+qDebug("ResolveDegreeList: found in table as %s\n", qPrintable(cd->names.front()));
                   _id = cd->id;
                   _degreeList.clear();
                   return;
                   }
             }
-printf("ResolveDegreeList: not found in table\n");
+qDebug("ResolveDegreeList: not found in table\n");
       }
 
 //---------------------------------------------------------
@@ -221,7 +221,7 @@ void Harmony::read(QDomElement e)
                   if (degreeValue <= 0 || degreeValue > 13
                       || degreeAlter < -2 || degreeAlter > 2
                       || (degreeType != "add" && degreeType != "alter" && degreeType != "subtract")) {
-                        printf("incorrect degree: degreeValue=%d degreeAlter=%d degreeType=%s\n",
+                        qDebug("incorrect degree: degreeValue=%d degreeAlter=%d degreeType=%s\n",
                                degreeValue, degreeAlter, qPrintable(degreeType));
                         }
                   else {
@@ -329,7 +329,7 @@ bool Harmony::parseHarmony(const QString& ss, int* root, int* base)
       bool germanNames = score()->styleB(ST_useGermanNoteNames);
       int r = convertRoot(s, germanNames);
       if (r == INVALID_TPC) {
-            printf("1:parseHarmony failed <%s>\n", qPrintable(ss));
+            qDebug("1:parseHarmony failed <%s>\n", qPrintable(ss));
             return false;
             }
       *root = r;
@@ -353,7 +353,7 @@ bool Harmony::parseHarmony(const QString& ss, int* root, int* base)
                   }
             }
       _userName = s;
-      printf("2:parseHarmony failed <%s><%s>\n", qPrintable(ss), qPrintable(s));
+      qDebug("2:parseHarmony failed <%s><%s>\n", qPrintable(ss), qPrintable(s));
       return false;
       }
 
@@ -484,7 +484,7 @@ const ChordDescription* Harmony::fromXml(const QString& kind,  const QList<HDegr
             QString k     = cd->xmlKind;
             QStringList d = cd->xmlDegrees;
             if ((lowerCaseKind == k) && (d == degrees)) {
-//                  printf("harmony found in db: %s %s -> %d\n", qPrintable(kind), qPrintable(degrees), cd->id);
+//                  qDebug("harmony found in db: %s %s -> %d\n", qPrintable(kind), qPrintable(degrees), cd->id);
                   return cd;
                   }
             }
@@ -662,7 +662,7 @@ void Harmony::render(const QList<RenderAction>& renderList, qreal& x, qreal& y, 
                         y = pt.y();
                         }
                   else
-                        printf("RenderAction::RENDER_POP: stack empty\n");
+                        qDebug("RenderAction::RENDER_POP: stack empty\n");
                   }
             else if (a.type == RenderAction::RENDER_NOTE) {
                   bool germanNames = score()->styleB(ST_useGermanNoteNames);
@@ -703,7 +703,7 @@ void Harmony::render(const QList<RenderAction>& renderList, qreal& x, qreal& y, 
                         }
                   }
             else
-                  printf("========unknown render action %d\n", a.type);
+                  qDebug("========unknown render action %d\n", a.type);
             }
       }
 

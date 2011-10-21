@@ -51,7 +51,7 @@ void BSymbol::add(Element* e)
             static_cast<BSymbol*>(e)->setZ(z() - 1);    // draw on top of parent
             }
       else
-            printf("BSymbol::add: unsupported type %s\n", e->name());
+            qDebug("BSymbol::add: unsupported type %s\n", e->name());
       }
 
 //---------------------------------------------------------
@@ -62,10 +62,10 @@ void BSymbol::remove(Element* e)
       {
       if (e->type() == SYMBOL || e->type() == IMAGE) {
             if (!_leafs.removeOne(e))
-                  printf("BSymbol::remove: element <%s> not found\n", e->name());
+                  qDebug("BSymbol::remove: element <%s> not found\n", e->name());
             }
       else
-            printf("BSymbol::remove: unsupported type %s\n", e->name());
+            qDebug("BSymbol::remove: unsupported type %s\n", e->name());
       }
 
 //---------------------------------------------------------
@@ -249,7 +249,7 @@ void Symbol::read(QDomElement e)
                               }
                         }
                   if (s == -1) {
-                        printf("unknown symbol <%s>, symbols %d\n",
+                        qDebug("unknown symbol <%s>, symbols %d\n",
                            qPrintable(val), symbols[0].size());
                         s = 0;
                         }
@@ -280,7 +280,7 @@ void Symbol::read(QDomElement e)
                         image = new RasterImage(score());
                         }
                   else {
-                        printf("unknown image format <%s>\n", path.toLatin1().data());
+                        qDebug("unknown image format <%s>\n", path.toLatin1().data());
                         }
                   if (image) {
                         image->read(e);
@@ -294,7 +294,7 @@ void Symbol::read(QDomElement e)
                   domError(e);
             }
       if (s == -1) {
-            printf("unknown symbol\n");
+            qDebug("unknown symbol\n");
             s = 0;
             }
       setPos(pos);

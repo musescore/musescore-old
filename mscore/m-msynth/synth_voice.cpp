@@ -497,7 +497,7 @@ void Voice::write(unsigned n, short* data)
                          * at will.
                          */
 
-                  #define FILTER_TRANSITION_SAMPLES 64     // (FLUID_BUFSIZE)
+                  #define FILTER_TRANSITION_SAMPLES 64
 
                         a1_incr = (a1_temp - a1) / FILTER_TRANSITION_SAMPLES;
                         a2_incr = (a2_temp - a2) / FILTER_TRANSITION_SAMPLES;
@@ -1677,16 +1677,12 @@ void Voice::effects(int count, short* data)
       {
       /* filter (implement the voice filter according to SoundFont standard) */
 
-      /* Check for denormal number (too close to zero). */
-//      if (fabs (hist1) < 1e-20)
-//            hist1 = 0.0f;             /* FIXME JMG - Is this even needed? */
-
       /* Two versions of the filter loop. One, while the filter is
        * changing towards its new setting. The other, if the filter
        * doesn't change.
        */
 
-      float al = amp_left * 0x7fff;
+      float al = amp_left  * 0x7fff;
       float ar = amp_right * 0x7fff;
 
       if (filter_coeff_incr_count > 0) {
@@ -1696,23 +1692,8 @@ void Voice::effects(int count, short* data)
             for (int i = 0; i < count; i++) {
                   float f    = dsp_buf[i] - a1 * hist1 - a2 * hist2;
                   float v    = b02 * (f + hist2) + b1 * hist1;
-                  dsp_buf[i] = v;
-
-                  int tmp = int(al * v);
-/*                  if (tmp > 32767)
-                        tmp = 32767;
-                  else if (tmp < -32768)
-                        tmp = -32768;
-*/
-                  *data++ += tmp;
-
-                  tmp = int(ar * v);      // lrintf(ar * v);
-/*                  if (tmp > 32767)
-                        tmp = 32767;
-                  else if (tmp < -32768)
-                        tmp = -32768;
-                  */
-                  *data++ += tmp;
+                  *data++ += int(al * v);
+                  *data++ += int(ar * v);
 
                   hist2      = hist1;
                   hist1      = f;
@@ -1731,23 +1712,9 @@ void Voice::effects(int count, short* data)
             for (int i = 0; i < count; i++) {
                   float f    = dsp_buf[i] - a1 * hist1 - a2 * hist2;
                   float v    = b02 * (f + hist2) + b1 * hist1;
-                  dsp_buf[i] = v;
 
-                  int tmp = int(al * v);
-/*                  if (tmp > 32767)
-                        tmp = 32767;
-                  else if (tmp < -32768)
-                        tmp = -32768;
- */
-                  *data++ += tmp;
-
-                  tmp = int(ar * v);
-/*                  if (tmp > 32767)
-                        tmp = 32767;
-                  else if (tmp < -32768)
-                        tmp = -32768;
-                  */
-                  *data++ += tmp;
+                  *data++ += int(al * v);
+                  *data++ += int(ar * v);
 
                   hist2      = hist1;
                   hist1      = f;

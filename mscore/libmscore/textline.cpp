@@ -372,7 +372,7 @@ void TextLine::read(QDomElement e)
 
 void TextLine::writeProperties(Xml& xml, const TextLine* proto) const
       {
-// printf("  TextLine: begin text <%s> styled %d\n", qPrintable(_beginText->getText()), _beginText->styled());
+// qDebug("  TextLine: begin text <%s> styled %d\n", qPrintable(_beginText->getText()), _beginText->styled());
       if (_beginHook) {
             if (proto == 0 || proto->beginHookHeight() != _beginHookHeight)
                   xml.tag("beginHookHeight", _beginHookHeight.val());

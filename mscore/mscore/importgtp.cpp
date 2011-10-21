@@ -184,7 +184,7 @@ QString GuitarPro::readDelphiString()
       int maxl = readInt();
       uchar l = readUChar();
       if (maxl != l + 1) {
-            printf("readDelphiString: first word doesn't match second byte");
+            qDebug("readDelphiString: first word doesn't match second byte");
             abort();
             }
       char c[l + 1];
@@ -246,7 +246,7 @@ void GuitarPro::setTuplet(Tuplet* tuplet, int tuple)
                   tuplet->setRatio(Fraction(13,8));
                   break;
             default:
-                  printf("unsupported tuplet %d\n", tuple);
+                  qDebug("unsupported tuplet %d\n", tuple);
                   abort();
             }
       }
@@ -263,7 +263,7 @@ void GuitarPro::addDynamic(Note* /*note*/, int d)
             // note->chord()->add(a);
             }
       else {
-            // printf("dynamic %d\n", d);
+            // qDebug("dynamic %d\n", d);
             }
       }
 
@@ -335,7 +335,7 @@ Fraction GuitarPro::len2fraction(int len)
             //case  7: l.set(1, 1024);  break;
             //case  8: l.set(1, 2048);  break;
             default:
-                  printf("unknown beat len: %d\n", len);
+                  qDebug("unknown beat len: %d\n", len);
                   abort();
             }
       return l;
@@ -391,7 +391,7 @@ void GuitarPro::createMeasures()
                   for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
                         Staff* staff = score->staff(staffIdx);
                         StaffType* staffType = staff->staffType();
-printf("staff %d group %d timesig %d\n", staffIdx, int(staffType->group()), staffType->genTimesig());
+qDebug("staff %d group %d timesig %d\n", staffIdx, int(staffType->group()), staffType->genTimesig());
                         if (staffType->genTimesig()) {
                               TimeSig* t = new TimeSig(score, nts);
                               t->setTrack(staffIdx * VOICES);
@@ -440,7 +440,7 @@ void GuitarPro::applyBeatEffects(Chord* chord, int beatEffect)
                   a->setSubtype(Articulation_Popping);
                   break;
             default:
-                  printf("GuitarPro import: unknown beat effect %d\n", beatEffect);
+                  qDebug("GuitarPro import: unknown beat effect %d\n", beatEffect);
             }
       }
 
@@ -691,7 +691,7 @@ void GuitarPro2::read(QFile* fp)
             if (barBits & 0x2)
                   tdenominator = readUChar();
             if (barBits & 0x4) {                // begin reapeat
-printf("BeginRepeat=============================================\n");
+qDebug("BeginRepeat=============================================\n");
                   }
             if (barBits & 0x8)                  // number of repeats
                   /*uchar c =*/ readUChar();
@@ -930,10 +930,10 @@ void GuitarPro1::readNote(int string, Note* note)
             else if (variant == 2)
                   tieNote = true;
             else if (variant == 3) {                 // dead notes
-                  printf("DeathNote tick %d pitch %d\n", note->chord()->segment()->tick(), note->pitch());
+                  qDebug("DeathNote tick %d pitch %d\n", note->chord()->segment()->tick(), note->pitch());
                   }
             else
-                  printf("unknown note variant: %d\n", variant);
+                  qDebug("unknown note variant: %d\n", variant);
             }
 
       //
@@ -950,7 +950,7 @@ void GuitarPro1::readNote(int string, Note* note)
       if (noteBits & 0x1) {               // note != beat
             int a = readUChar();          // length
             int b = readUChar();          // t
-            printf("Time independend note len, len %d t %d\n", a, b);
+            qDebug("Time independend note len, len %d t %d\n", a, b);
             }
       if (noteBits & 0x2) {               // note is dotted
             }
@@ -966,7 +966,7 @@ void GuitarPro1::readNote(int string, Note* note)
       if (noteBits & 0x80) {              // fingering
             int a = readUChar();
             int b = readUChar();
-            printf("Fingering=========%d %d\n", a, b);
+            qDebug("Fingering=========%d %d\n", a, b);
             }
       if (noteBits & 0x8) {
             uchar modMask1 = readUChar();
@@ -1003,7 +1003,7 @@ void GuitarPro1::readNote(int string, Note* note)
                   }
             }
       if (fretNumber == -1) {
-            printf("Note: no fret number, tie %d\n", tieNote);
+            qDebug("Note: no fret number, tie %d\n", tieNote);
             }
       Staff* staff = note->staff();
       if (fretNumber == 255) {
@@ -1044,7 +1044,7 @@ void GuitarPro1::readNote(int string, Note* note)
                   segment = segment->prev1(SegChordRest);
                   }
             if (!found)
-                  printf("tied note not found, pitch %d fret %d string %d\n", note->pitch(), note->fret(), note->string());
+                  qDebug("tied note not found, pitch %d fret %d string %d\n", note->pitch(), note->fret(), note->string());
             }
       }
 
@@ -1162,7 +1162,7 @@ void GuitarPro3::read(QFile* fp)
             if (barBits & 0x2)
                   tdenominator = readUChar();
             if (barBits & 0x4) {                // begin reapeat
-printf("BeginRepeat=============================================\n");
+qDebug("BeginRepeat=============================================\n");
                   }
             if (barBits & 0x8)                  // number of repeats
                   /*uchar c =*/ readUChar();
@@ -1360,7 +1360,7 @@ printf("BeginRepeat=============================================\n");
                               //case  7: l.set(1, 1024);  break;
                               //case  8: l.set(1, 2048);  break;
                               default:
-                                    printf("unknown beat len: %d\n", len);
+                                    qDebug("unknown beat len: %d\n", len);
                                     abort();
                               }
 
@@ -1515,16 +1515,16 @@ void GuitarPro4::readNote(int string, Note* note, GpNote* gpNote)
             else if (variant == 2)
                   tieNote = true;
             else if (variant == 3) {                 // dead notes
-                  //printf("DeathNote tick %d pitch %d\n", note->chord()->segment()->tick(), note->pitch());
+                  //qDebug("DeathNote tick %d pitch %d\n", note->chord()->segment()->tick(), note->pitch());
                   }
             else
-                  printf("unknown note variant: %d\n", variant);
+                  qDebug("unknown note variant: %d\n", variant);
             }
 
       if (noteBits & 0x1) {               // note != beat
             int a = readUChar();          // length
             int b = readUChar();          // t
-            printf("          Time independend note len, len %d t %d\n", a, b);
+            qDebug("          Time independend note len, len %d t %d\n", a, b);
             }
       if (noteBits & 0x2) {               // note is dotted
             }
@@ -1540,7 +1540,7 @@ void GuitarPro4::readNote(int string, Note* note, GpNote* gpNote)
       if (noteBits & 0x80) {              // fingering
             int a = readUChar();
             int b = readUChar();
-            printf("Fingering=========%d %d\n", a, b);
+            qDebug("Fingering=========%d %d\n", a, b);
             }
       gpNote->slur = false;
       if (noteBits & 0x8) {
@@ -1575,7 +1575,7 @@ void GuitarPro4::readNote(int string, Note* note, GpNote* gpNote)
                   }
             }
       if (fretNumber == -1) {
-            printf("Note: no fret number, tie %d\n", tieNote);
+            qDebug("Note: no fret number, tie %d\n", tieNote);
             }
       Staff* staff = note->staff();
       if (fretNumber == 255) {
@@ -1616,7 +1616,7 @@ void GuitarPro4::readNote(int string, Note* note, GpNote* gpNote)
                   segment = segment->prev1(SegChordRest);
                   }
             if (!found)
-                  printf("tied note not found, pitch %d fret %d string %d\n", note->pitch(), note->fret(), note->string());
+                  qDebug("tied note not found, pitch %d fret %d string %d\n", note->pitch(), note->fret(), note->string());
             }
       }
 
@@ -2012,7 +2012,7 @@ void GuitarPro5::readNoteEffects(Note* note)
                   case 3:           // 64
                         break;
                   default:
-                        printf("unknown trill period %d\n", period);
+                        qDebug("unknown trill period %d\n", period);
                         break;
                   }
             }
@@ -2044,10 +2044,10 @@ void GuitarPro5::readNote(int string, Note* note)
             else if (noteType == 2)
                   tieNote = true;
             else if (noteType == 3) {                 // dead notes
-                  //printf("DeathNote tick %d pitch %d\n", note->chord()->segment()->tick(), note->pitch());
+                  //qDebug("DeathNote tick %d pitch %d\n", note->chord()->segment()->tick(), note->pitch());
                   }
             else
-                  printf("unknown note type: %d\n", noteType);
+                  qDebug("unknown note type: %d\n", noteType);
             }
 
       if (noteBits & 0x10) {          // velocity
@@ -2061,7 +2061,7 @@ void GuitarPro5::readNote(int string, Note* note)
       if (noteBits & 0x80) {              // fingering
             int a = readUChar();
             int b = readUChar();
-            printf("   Fingering=========%d %d\n", a, b);
+            qDebug("   Fingering=========%d %d\n", a, b);
             }
       if (noteBits & 0x1)
             skip(8);
@@ -2109,7 +2109,7 @@ void GuitarPro5::readNote(int string, Note* note)
                   segment = segment->prev1(SegChordRest);
                   }
             if (!found)
-                  printf("tied note not found, pitch %d fret %d string %d\n", note->pitch(), note->fret(), note->string());
+                  qDebug("tied note not found, pitch %d fret %d string %d\n", note->pitch(), note->fret(), note->string());
             }
       }
 
@@ -2209,11 +2209,11 @@ int GuitarPro5::readBeatEffects(int track, Segment* segment)
       if (fxBits1 & 0x40) {
             int a = readChar();     // down stroke length
             int b = readChar();     // up stroke length
-            printf("  0x40: 0x%02x 0x%02x\n", a, b);
+            qDebug("  0x40: 0x%02x 0x%02x\n", a, b);
             }
       if (fxBits2 & 0x02) {
             int a = readChar();            // stroke pick direction
-            printf("  0x02: 0x%02x\n", a);
+            qDebug("  0x02: 0x%02x\n", a);
             }
       return effects;
       }
@@ -2327,12 +2327,12 @@ int GuitarPro5::readBeat(int tick, int voice, Measure* measure, int staffIdx, Tu
             else if (rr == 0xa)
                   chord->setStemDirection(UP);
             else
-                  printf("  1beat read 0x%02x\n", rr);
+                  qDebug("  1beat read 0x%02x\n", rr);
             }
       int r = readChar();
       if (r & 0x8) {
             int rrr = readChar();
-printf("  3beat read 0x%02x\n", rrr);
+qDebug("  3beat read 0x%02x\n", rrr);
             }
       return cr ? cr->actualTicks() : measure->ticks();
       }
@@ -2538,7 +2538,7 @@ void GuitarPro5::readMeasures()
                   readMeasure(measure, staffIdx, tuplets);
                   if (!(((bar == (measures-1)) && (staffIdx == (staves-1))))) {
                         int a = readChar();
-                        printf("    ======skip %02x\n", a);
+                        qDebug("    ======skip %02x\n", a);
                         }
                   }
             }
@@ -2645,7 +2645,7 @@ bool MuseScore::importGTP(Score* score, const QString& name)
       else if (s.startsWith("FICHIER GUITARE PRO "))
             s = s.mid(21);
       else {
-            printf("unknown gtp format <%s>\n", ss);
+            qDebug("unknown gtp format <%s>\n", ss);
             return false;
             }
 
@@ -2665,7 +2665,7 @@ bool MuseScore::importGTP(Score* score, const QString& name)
       else if (a == 5)
             gp = new GuitarPro5(score, version);
       else {
-            printf("unknown gtp format %d\n", version);
+            qDebug("unknown gtp format %d\n", version);
             return false;
             }
       try {
@@ -2677,7 +2677,7 @@ bool MuseScore::importGTP(Score* score, const QString& name)
                QString("Load failed: ") + gp->error(errNo),
                QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
             fp.close();
-            printf("guitar pro import error====\n");
+            qDebug("guitar pro import error====\n");
             // avoid another error message box
             return true;
             }

@@ -47,7 +47,7 @@ bool MuseScore::saveAudio(Score* score, const QString& name, const QString& ext)
       else if (ext == "flac")
             format = SF_FORMAT_FLAC | SF_FORMAT_PCM_16;
       else {
-            fprintf(stderr, "unknown audio file type <%s>\n", qPrintable(ext));
+            qDebug("unknown audio file type <%s>\n", qPrintable(ext));
             return false;
             }
       int sampleRate = preferences.exportAudioSampleRate;
@@ -66,7 +66,7 @@ bool MuseScore::saveAudio(Score* score, const QString& name, const QString& ext)
       info.format     = format;
       SNDFILE* sf     = sf_open(qPrintable(name), SFM_WRITE, &info);
       if (sf == 0) {
-            fprintf(stderr, "open soundfile failed: %s\n", sf_strerror(sf));
+            qDebug("open soundfile failed: %s\n", sf_strerror(sf));
             delete synti;
             return false;
             }
@@ -167,7 +167,7 @@ bool MuseScore::saveAudio(Score* score, const QString& name, const QString& ext)
 
       delete synti;
       if (sf_close(sf)) {
-            fprintf(stderr, "close soundfile failed\n");
+            qDebug("close soundfile failed\n");
             return false;
             }
 

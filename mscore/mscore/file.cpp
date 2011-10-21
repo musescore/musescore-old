@@ -287,7 +287,7 @@ void MuseScore::saveFile()
       if (!tmp.isEmpty()) {
             QFile f(tmp);
             if (!f.remove())
-                  printf("cannot remove temporary file <%s>\n", qPrintable(f.fileName()));
+                  qDebug("cannot remove temporary file <%s>\n", qPrintable(f.fileName()));
             cs->setTmpName("");
             }
       writeSessionFile(false);
@@ -1360,7 +1360,7 @@ bool MuseScore::saveAs(Score* cs, bool saveCopy, const QString& path, const QStr
       else if (ext == "mp3")
             rv = saveMp3(cs, fn);
       else {
-            fprintf(stderr, "internal error: unsupported extension <%s>\n",
+            qDebug("internal error: unsupported extension <%s>\n",
                qPrintable(ext));
             return false;
             }
@@ -1493,7 +1493,7 @@ bool MuseScore::readScore(Score* score, QString name)
                         }
                   }
             if (i == n) {
-                  printf("unknown file suffix <%s>, name <%s>\n", qPrintable(cs), qPrintable(name));
+                  qDebug("unknown file suffix <%s>, name <%s>\n", qPrintable(cs), qPrintable(name));
                   return false;
                   }
             }
@@ -1908,7 +1908,7 @@ void WallpaperPreview::paintEvent(QPaintEvent* ev)
 
 void WallpaperPreview::setImage(const QString& path)
       {
-      printf("setImage <%s>\n", qPrintable(path));
+      qDebug("setImage <%s>\n", qPrintable(path));
       delete _pixmap;
       _pixmap = new QPixmap(path);
       update();
@@ -1947,7 +1947,7 @@ QString MuseScore::getWallpaper(const QString& caption)
 
             QSplitter* splitter = loadBackgroundDialog->findChild<QSplitter*>("splitter");
             if (splitter) {
-                  printf("splitter found\n");
+                  qDebug("splitter found\n");
                   WallpaperPreview* preview = new WallpaperPreview;
                   splitter->addWidget(preview);
                   connect(loadBackgroundDialog, SIGNAL(currentChanged(const QString&)),

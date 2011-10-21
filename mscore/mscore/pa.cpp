@@ -87,7 +87,7 @@ Portaudio::~Portaudio()
       if (initialized) {
             PaError err = Pa_CloseStream(stream);
             if (err != paNoError)
-                  printf("Portaudio close stream failed: %s\n", Pa_GetErrorText(err));
+                  qDebug("Portaudio close stream failed: %s\n", Pa_GetErrorText(err));
             Pa_Terminate();
             }
       }
@@ -101,12 +101,12 @@ bool Portaudio::init()
       {
       PaError err = Pa_Initialize();
       if (err != paNoError) {
-            printf("Portaudio initialize failed: %s\n", Pa_GetErrorText(err));
+            qDebug("Portaudio initialize failed: %s\n", Pa_GetErrorText(err));
             return false;
             }
       initialized = true;
       if (debugMode)
-            printf("using PortAudio Version: %s\n", Pa_GetVersionText());
+            qDebug("using PortAudio Version: %s\n", Pa_GetVersionText());
 
       PaDeviceIndex idx = preferences.portaudioDevice;
 
@@ -133,7 +133,7 @@ bool Portaudio::init()
             out.device = Pa_GetDefaultOutputDevice();
             err = Pa_OpenStream(&stream, 0, &out, double(_sampleRate), 0, 0, paCallback, (void*)this);
             if (err != paNoError) {
-                  printf("Portaudio open stream %d failed: %s\n", idx, Pa_GetErrorText(err));
+                  qDebug("Portaudio open stream %d failed: %s\n", idx, Pa_GetErrorText(err));
                   return false;
                   }
             }
@@ -144,7 +144,7 @@ bool Portaudio::init()
       midiDriver = new PortMidiDriver(seq);
 #endif
       if (midiDriver && !midiDriver->init()) {
-            printf("Init midi driver failed\n");
+            qDebug("Init midi driver failed\n");
             delete midiDriver;
             midiDriver = 0;
 #ifdef USE_PORTMIDI
@@ -251,7 +251,7 @@ bool Portaudio::start()
       {
       PaError err = Pa_StartStream(stream);
       if (err != paNoError) {
-            printf("Portaudio: start stream failed: %s\n", Pa_GetErrorText(err));
+            qDebug("Portaudio: start stream failed: %s\n", Pa_GetErrorText(err));
             return false;
             }
       return true;
@@ -265,7 +265,7 @@ bool Portaudio::stop()
       {
       PaError err = Pa_StopStream(stream);      // sometimes the program hangs here on exit
       if (err != paNoError) {
-            printf("Portaudio: stop failed: %s\n", Pa_GetErrorText(err));
+            qDebug("Portaudio: stop failed: %s\n", Pa_GetErrorText(err));
             return false;
             }
       return true;
@@ -337,7 +337,7 @@ int Portaudio::currentApi() const
                         }
                   }
             }
-      printf("Portaudio: no current api found for device %d\n", idx);
+      qDebug("Portaudio: no current api found for device %d\n", idx);
       return -1;
       }
 
@@ -361,7 +361,7 @@ int Portaudio::currentDevice() const
                         }
                   }
             }
-      printf("Portaudio: no current ApiDevice found for device %d\n", idx);
+      qDebug("Portaudio: no current ApiDevice found for device %d\n", idx);
       return -1;
       }
 

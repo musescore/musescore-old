@@ -130,7 +130,7 @@ void System::layout(qreal xo1)
 
       int nstaves  = _staves.size();
       if (nstaves != score()->nstaves())
-            printf("System::layout: nstaves %d != %d\n", nstaves, score()->nstaves());
+            qDebug("System::layout: nstaves %d != %d\n", nstaves, score()->nstaves());
 
       //---------------------------------------------------
       //  find x position of staves
@@ -552,7 +552,7 @@ int System::y2staff(qreal y) const
 
 void System::add(Element* el)
       {
-//      printf("System::add: %s\n", el->name());
+//      qDebug("System::add: %s\n", el->name());
 
       el->setParent(this);
       switch(el->type()) {
@@ -600,18 +600,18 @@ void System::add(Element* el)
             case VOLTA_SEGMENT:
             case SLUR_SEGMENT:
                   {
-// printf("System::add: %p %s spanner %p %s\n", el, el->name(),
+// qDebug("System::add: %p %s spanner %p %s\n", el, el->name(),
 //            ((SpannerSegment*)el)->spanner(), ((SpannerSegment*)el)->spanner()->name());
                   SpannerSegment* ss = static_cast<SpannerSegment*>(el);
                   if (!_spannerSegments.contains(ss))
                         _spannerSegments.append(ss);
                   else {
-                        // printf("System::add() spanner already there\n");
+                        // qDebug("System::add() spanner already there\n");
                         }
                   }
                   break;
             default:
-                  printf("System::add(%s) not implemented\n", el->name());
+                  qDebug("System::add(%s) not implemented\n", el->name());
                   break;
             }
       }
@@ -622,7 +622,7 @@ void System::add(Element* el)
 
 void System::remove(Element* el)
       {
-//      printf("System::remove: %s\n", el->name());
+//      qDebug("System::remove: %s\n", el->name());
 
       switch (el->type()) {
             case INSTRUMENT_NAME:
@@ -641,7 +641,7 @@ void System::remove(Element* el)
                               return;
                               }
                         }
-                  printf("internal error: bracket not found\n");
+                  qDebug("internal error: bracket not found\n");
                   }
                   break;
 
@@ -658,16 +658,16 @@ void System::remove(Element* el)
             case TRILL_SEGMENT:
             case VOLTA_SEGMENT:
             case SLUR_SEGMENT:
-// printf("System::remove: %p %s spanner %p %s\n", el, el->name(),
+// qDebug("System::remove: %p %s spanner %p %s\n", el, el->name(),
 //            ((SpannerSegment*)el)->spanner(), ((SpannerSegment*)el)->spanner()->name());
 
                   if (!_spannerSegments.removeOne(static_cast<SpannerSegment*>(el))) {
-                        printf("System::remove: %p(%s) not found, score %p == %p\n", el, el->name(), score(), el->score());
+                        qDebug("System::remove: %p(%s) not found, score %p == %p\n", el, el->name(), score(), el->score());
                         Q_ASSERT(score() == el->score());
                         }
                   break;
             default:
-                  printf("System::remove(%s) not implemented\n", el->name());
+                  qDebug("System::remove(%s) not implemented\n", el->name());
                   break;
             }
       }
@@ -789,7 +789,7 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
       if (l->ticks()) {
             Segment* seg = score()->tick2segment(l->endTick());
             if (seg == 0) {
-                  printf("System::layoutLyrics: no segment found for tick %d\n", l->endTick());
+                  qDebug("System::layoutLyrics: no segment found for tick %d\n", l->endTick());
                   return;
                   }
 
@@ -937,7 +937,7 @@ void System::scanElements(void* data, void (*func)(void*, Element*), bool /*all*
 qreal System::staffY(int staffIdx) const
       {
       if (_staves.size() <= staffIdx) {
-            printf("staffY: staves %d <= staff %d, vbox %d\n",
+            qDebug("staffY: staves %d <= staff %d, vbox %d\n",
                _staves.size(), staffIdx, _vbox);
             return pagePos().y();
             }

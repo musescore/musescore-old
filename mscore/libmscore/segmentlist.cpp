@@ -48,15 +48,15 @@ void SegmentList::check()
             ++n;
             }
       if (f != _first) {
-            printf("SegmentList::check: bad first\n");
+            qDebug("SegmentList::check: bad first\n");
             abort();
             }
       if (l != _last) {
-            printf("SegmentList::check: bad last\n");
+            qDebug("SegmentList::check: bad last\n");
             abort();
             }
       if (n != _size) {
-            printf("SegmentList::check: wrong segment segments %d count %d\n", n, _size);
+            qDebug("SegmentList::check: wrong segment segments %d count %d\n", n, _size);
             _size = n;
             abort();
             }
@@ -164,11 +164,11 @@ void SegmentList::push_front(Segment* e)
 void SegmentList::insert(Segment* seg)
       {
 #ifndef NDEBUG
-//      printf("insertSeg <%s> %p %p %p\n", seg->subTypeName(), seg->prev(), seg, seg->next());
+//      qDebug("insertSeg <%s> %p %p %p\n", seg->subTypeName(), seg->prev(), seg, seg->next());
       check();
       for (Segment* s = _first; s; s = s->next()) {
             if (s == seg) {
-                  printf("SegmentList::insert: already in list\n");
+                  qDebug("SegmentList::insert: already in list\n");
                   abort();
                   }
             }
@@ -179,7 +179,7 @@ void SegmentList::insert(Segment* seg)
                         break;
                   }
             if (s != seg->prev()) {
-                  printf("SegmentList::insert: seg->prev() not in list\n");
+                  qDebug("SegmentList::insert: seg->prev() not in list\n");
                   abort();
                   }
             }
@@ -191,7 +191,7 @@ void SegmentList::insert(Segment* seg)
                         break;
                   }
             if (s != seg->next()) {
-                  printf("SegmentList::insert: seg->next() not in list\n");
+                  qDebug("SegmentList::insert: seg->next() not in list\n");
                   abort();
                   }
             }

@@ -224,7 +224,7 @@ Measure::~Measure()
 
 void Measure::dump() const
       {
-      printf("dump measure:\n");
+      qDebug("dump measure:\n");
       }
 
 //---------------------------------------------------------
@@ -298,7 +298,7 @@ void Measure::layoutChords0(Segment* segment, int startTrack)
                         foreach(Note* note, chord->notes()) {
                               int pitch = note->pitch();
                               if (!drumset->isValid(pitch)) {
-                                    printf("unmapped drum note %d\n", pitch);
+                                    qDebug("unmapped drum note %d\n", pitch);
                                     }
                               else {
                                     note->setHeadGroup(drumset->noteHead(pitch));
@@ -337,7 +337,7 @@ void Measure::layoutChords10(Segment* segment, int startTrack, AccidentalState* 
                   if (drumset) {
                         int pitch = note->pitch();
                         if (!drumset->isValid(pitch)) {
-                              printf("unmapped drum note %d\n", pitch);
+                              qDebug("unmapped drum note %d\n", pitch);
                               }
                         else {
                               note->setHeadGroup(drumset->noteHead(pitch));
@@ -394,7 +394,7 @@ int Measure::findAccidental(Note* note) const
                         }
                   }
             }
-      printf("note not found\n");
+      qDebug("note not found\n");
       return 0;
       }
 
@@ -731,9 +731,9 @@ Segment* Measure::getSegment(SegmentType st, int t)
 
 Segment* Measure::getSegment(SegmentType st, int t, int gl)
       {
-// printf("Measure::getSegment(st=%d, t=%d, gl=%d)\n", st, t, gl);
+// qDebug("Measure::getSegment(st=%d, t=%d, gl=%d)\n", st, t, gl);
       if (st != SegChordRest && st != SegGrace) {
-            printf("Measure::getSegment(st=%d, t=%d, gl=%d): incorrect segment type\n", st, t, gl);
+            qDebug("Measure::getSegment(st=%d, t=%d, gl=%d): incorrect segment type\n", st, t, gl);
             return 0;
             }
       Segment* s;
@@ -755,16 +755,16 @@ Segment* Measure::getSegment(SegmentType st, int t, int gl)
                   }
             }
 
-//      printf("s=%p sCr=%p nGr=%d\n", s, sCr, nGraces);
-//      printf("segment list\n");
+//      qDebug("s=%p sCr=%p nGr=%d\n", s, sCr, nGraces);
+//      qDebug("segment list\n");
 //      for (Segment* s = first(); s; s = s->next())
-//            printf("  %d: %d\n", s->tick(), s->subtype());
+//            qDebug("  %d: %d\n", s->tick(), s->subtype());
 
       if (gl == 0) {
             if (sCr)
                   return sCr;
             // no SegChordRest at tick = t, must create it
-//            printf("creating SegChordRest at tick=%d\n", t);
+//            qDebug("creating SegChordRest at tick=%d\n", t);
             s = new Segment(this, SegChordRest, t);
             add(s);
             return s;
@@ -772,7 +772,7 @@ Segment* Measure::getSegment(SegmentType st, int t, int gl)
 
       if (gl > 0) {
             if (gl <= nGraces) {
-//                  printf("grace segment %d already exist, returning it\n", gl);
+//                  qDebug("grace segment %d already exist, returning it\n", gl);
                   int graces = 0;
                   // for (Segment* ss = last(); ss && ss->tick() <= t; ss = ss->prev()) {
                   for (Segment* ss = last(); ss && ss->tick() >= t; ss = ss->prev()) {
@@ -786,13 +786,13 @@ Segment* Measure::getSegment(SegmentType st, int t, int gl)
                   return 0; // should not be reached
                   }
             else {
-//                  printf("creating SegGrace at tick=%d and level=%d\n", t, gl);
+//                  qDebug("creating SegGrace at tick=%d and level=%d\n", t, gl);
                   Segment* prevs = 0; // last segment inserted
                   // insert the first grace segment
                   if (nGraces == 0) {
                         ++nGraces;
                         s = new Segment(this, SegGrace, t);
-//                        printf("... creating SegGrace %p at tick=%d and level=%d\n", s, t, nGraces);
+//                        qDebug("... creating SegGrace %p at tick=%d and level=%d\n", s, t, nGraces);
                         add(s);
                         prevs = s;
                         // return s;
@@ -807,7 +807,7 @@ Segment* Measure::getSegment(SegmentType st, int t, int gl)
                   while (nGraces < gl) {
                         ++nGraces;
                         s = new Segment(this, SegGrace, t);
-//                        printf("... creating SegGrace %p at tick=%d and level=%d\n", s, t, nGraces);
+//                        qDebug("... creating SegGrace %p at tick=%d and level=%d\n", s, t, nGraces);
                         _segments.insert(s, prevs);
                         prevs = s;
                         }
@@ -835,7 +835,7 @@ void Measure::add(Element* el)
 
 
 //      if (debugMode)
-//            printf("measure %p(%d): add %s %p\n", this, _no, el->name(), el);
+//            qDebug("measure %p(%d): add %s %p\n", this, _no, el->name(), el);
 
       switch (type) {
             case SPACER:
@@ -993,7 +993,7 @@ void Measure::remove(Element* el)
                   foreach(DurationElement* de, tuplet->elements())
                         de->setTuplet(0);
                   if (!_tuplets.removeOne(tuplet)) {
-                        printf("Measure remove: Tuplet not found\n");
+                        qDebug("Measure remove: Tuplet not found\n");
                         return;
                         }
                   if (tuplet->tuplet())
@@ -1008,7 +1008,7 @@ void Measure::remove(Element* el)
                   if (el->type() == TEXT && el->subtype() == TEXT_MEASURE_NUMBER)
                         break;
                   if (!_el.remove(el)) {
-                        printf("Measure(%p)::remove(%s,%p) not found\n",
+                        qDebug("Measure(%p)::remove(%s,%p) not found\n",
                            this, el->name(), el);
                         }
                   break;
@@ -1028,7 +1028,7 @@ void Measure::remove(Element* el)
                                     }
                               }
                         }
-                  printf("Measure::remove: %s %p not found\n", el->name(), el);
+                  qDebug("Measure::remove: %s %p not found\n", el->name(), el);
                   break;
 
             case VOLTA:
@@ -1037,7 +1037,7 @@ void Measure::remove(Element* el)
                   Measure* m = volta->endMeasure();
                   m->removeSpannerBack(volta);
                   if (!_spannerFor.removeOne(volta)) {
-                        printf("Measure:remove: %s not found\n", volta->name());
+                        qDebug("Measure:remove: %s not found\n", volta->name());
                         Q_ASSERT(volta->score() == score());
                         }
                   foreach(SpannerSegment* ss, volta->spannerSegments()) {
@@ -1140,22 +1140,22 @@ void Measure::insertStaves(int sStaff, int eStaff)
 
 void Measure::cmdRemoveStaves(int sStaff, int eStaff)
       {
-printf("cmdRemoveStaves %d-%d\n", sStaff, eStaff);
+qDebug("cmdRemoveStaves %d-%d\n", sStaff, eStaff);
       int sTrack = sStaff * VOICES;
       int eTrack = eStaff * VOICES;
       for (Segment* s = first(); s; s = s->next()) {
-            printf(" seg %d <%s>\n", s->tick(), s->subTypeName());
+            qDebug(" seg %d <%s>\n", s->tick(), s->subTypeName());
             for (int track = eTrack - 1; track >= sTrack; --track) {
                   Element* el = s->element(track);
                   if (el && !el->generated()) {
-                        printf("  remove %s track %d\n", el->name(), track);
+                        qDebug("  remove %s track %d\n", el->name(), track);
                         _score->undoRemoveElement(el);
                         }
                   }
             foreach(Element* e, s->annotations()) {
                   int staffIdx = e->staffIdx();
                   if ((staffIdx >= sStaff) && (staffIdx < eStaff)) {
-                        printf("  remove annotation %s staffIdx %d\n", e->name(), staffIdx);
+                        qDebug("  remove annotation %s staffIdx %d\n", e->name(), staffIdx);
                         _score->undoRemoveElement(e);
                         }
                   }
@@ -1257,7 +1257,7 @@ void Measure::insertMStaff(MStaff* staff, int idx)
       for (int staffIdx = 0; staffIdx < staves.size(); ++staffIdx)
             staves[staffIdx]->setTrack(staffIdx * VOICES);
       if (debugMode)
-            printf("     Measure::insertMStaff %d -> n:%d\n", idx, staves.size());
+            qDebug("     Measure::insertMStaff %d -> n:%d\n", idx, staves.size());
       }
 
 //---------------------------------------------------------
@@ -1267,7 +1267,7 @@ void Measure::insertMStaff(MStaff* staff, int idx)
 void Measure::removeMStaff(MStaff* /*staff*/, int idx)
       {
       if (debugMode)
-            printf("     Measure::removeMStaff %d\n", idx);
+            qDebug("     Measure::removeMStaff %d\n", idx);
 
       staves.removeAt(idx);
       for (int staffIdx = 0; staffIdx < staves.size(); ++staffIdx)
@@ -1280,7 +1280,7 @@ void Measure::removeMStaff(MStaff* /*staff*/, int idx)
 
 void Measure::insertStaff(Staff* staff, int staffIdx)
       {
-printf("Measure::insertStaff: %d\n", staffIdx);
+qDebug("Measure::insertStaff: %d\n", staffIdx);
       for (Segment* s = first(); s; s = s->next())
             s->insertStaff(staffIdx);
 
@@ -1433,12 +1433,12 @@ Element* Measure::drop(const DropData& data)
 
       switch(e->type()) {
             case MEASURE_LIST:
-printf("drop measureList or StaffList\n");
+qDebug("drop measureList or StaffList\n");
                   delete e;
                   break;
 
             case STAFF_LIST:
-printf("drop staffList\n");
+qDebug("drop staffList\n");
 //TODO                  score()->pasteStaff(e, this, staffIdx);
                   delete e;
                   break;
@@ -1591,7 +1591,7 @@ printf("drop staffList\n");
                   break;
 
             default:
-                  printf("Measure: cannot drop %s here\n", e->name());
+                  qDebug("Measure: cannot drop %s here\n", e->name());
                   delete e;
                   break;
             }
@@ -1868,7 +1868,7 @@ void Measure::read(QDomElement e, int staffIdx)
             if (sl.size() == 2)
                   _len = Fraction(sl[0].toInt(), sl[1].toInt());
             else
-                  printf("illegal measure size <%s>\n", qPrintable(e.attribute("len")));
+                  qDebug("illegal measure size <%s>\n", qPrintable(e.attribute("len")));
             irregular = true;
             score()->sigmap()->add(tick(), SigEvent(_len, _timesig));
             score()->sigmap()->add(tick() + ticks(), SigEvent(_timesig));
@@ -1954,7 +1954,7 @@ void Measure::read(QDomElement e, int staffIdx)
                                     chord->setTremolo(0);
                                     }
                               else {
-                                    printf("tremolo: first note not found\n");
+                                    qDebug("tremolo: first note not found\n");
                                     }
                               score()->curTick += crticks / 2;
                               }
@@ -2028,7 +2028,7 @@ void Measure::read(QDomElement e, int staffIdx)
                               }
                         }
                   else
-                        printf("Measure::read(): cannot find spanner %d\n", id);
+                        qDebug("Measure::read(): cannot find spanner %d\n", id);
                   }
             else if (tag == "HairPin"
                || tag == "Pedal"
@@ -2106,7 +2106,7 @@ void Measure::read(QDomElement e, int staffIdx)
                   segment       = getSegment(SegChordRest, score()->curTick);
                   ChordRest* cr = static_cast<ChordRest*>(segment->element(lyrics->track()));
                   if (!cr)
-                        printf("=====no cr for lyrics\n");
+                        qDebug("=====no cr for lyrics\n");
                   else
                         cr->add(lyrics);
                   }
@@ -2165,7 +2165,7 @@ void Measure::read(QDomElement e, int staffIdx)
                         image = new RasterImage(score());
                         }
                   else {
-                        printf("unknown image format <%s>\n", path.toLatin1().data());
+                        qDebug("unknown image format <%s>\n", path.toLatin1().data());
                         }
                   if (image) {
                         image->setTrack(score()->curTrack);
@@ -2768,7 +2768,7 @@ static qreal sff(qreal x, qreal xMin, SpringMap& springs)
       return f;
       }
 
-#define T(...) if (_no == 1) printf(__VA_ARGS__);
+#define T(...) if (_no == 1) qDebug(__VA_ARGS__);
 
 //-----------------------------------------------------------------------------
 //    layoutX
@@ -2966,9 +2966,9 @@ void Measure::layoutX(qreal stretch)
                   int nticks = (nseg ? nseg->tick() : ntick) - s->tick();
                   if (nticks == 0) {
                         // this happens for tremolo notes
-                        printf("layoutX: empty segment(%p)%s: measure: tick %d ticks %d\n",
+                        qDebug("layoutX: empty segment(%p)%s: measure: tick %d ticks %d\n",
                            s, s->subTypeName(), tick(), ticks());
-                        printf("         nticks==0 segmente %d, segmentIdx: %d, segTick: %d nsegTick(%p) %d\n",
+                        qDebug("         nticks==0 segmente %d, segmentIdx: %d, segTick: %d nsegTick(%p) %d\n",
                            size(), segmentIdx-1, s->tick(), nseg, ntick
                            );
                         }
@@ -2998,7 +2998,7 @@ void Measure::layoutX(qreal stretch)
       width[segmentIdx-1] = segmentWidth;
 
       if (stretch == 1.0) {
-            // printf("this is pass 1\n");
+            // qDebug("this is pass 1\n");
             _mw = MeasureWidth(xpos[segs], 0.0);
             _dirty = false;
             return;
@@ -3250,7 +3250,7 @@ void Measure::updateAccidentals(Segment* segment, int staffIdx, AccidentalState*
                               Drumset* drumset = instrument->drumset();
                               int pitch = note->pitch();
                               if (!drumset->isValid(pitch)) {
-                                    printf("unmapped drum note %d\n", pitch);
+                                    qDebug("unmapped drum note %d\n", pitch);
                                     }
                               else {
                                     note->setHeadGroup(drumset->noteHead(pitch));
@@ -3354,12 +3354,12 @@ Measure* Measure::cloneMeasure(Score* sc, SlurMap* slurMap, TieMap* tieMap, Span
                                           ncr->addSlurBack(slur);
                                           }
                                     else {
-                                          printf("cloneMeasure(%d): cannot find slur, track %d\n", tick(), track);
+                                          qDebug("cloneMeasure(%d): cannot find slur, track %d\n", tick(), track);
                                           int tracks = score()->nstaves() * VOICES;
                                           for (int i = 0; i < tracks; ++i) {
                                                 Slur* sl = slurMap[i].findNew(s);
                                                 if (sl) {
-                                                      printf("    found in track %d\n", i);
+                                                      qDebug("    found in track %d\n", i);
                                                       break;
                                                       }
                                                 }
@@ -3385,7 +3385,7 @@ Measure* Measure::cloneMeasure(Score* sc, SlurMap* slurMap, TieMap* tieMap, Span
                                                       tie->setEndNote(nn);
                                                       }
                                                 else {
-                                                      printf("cloneMeasure: cannot find tie, track %d\n", track);
+                                                      qDebug("cloneMeasure: cannot find tie, track %d\n", track);
                                                       }
                                                 }
                                           }
@@ -3418,7 +3418,7 @@ Measure* Measure::cloneMeasure(Score* sc, SlurMap* slurMap, TieMap* tieMap, Span
                               spanner->setEndElement(s);
                               }
                         else
-                              printf("cloneMeasure: cannot find spanner %p\n", osp);
+                              qDebug("cloneMeasure: cannot find spanner %p\n", osp);
                         }
                   }
             }

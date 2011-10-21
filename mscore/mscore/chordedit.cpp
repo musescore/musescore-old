@@ -150,7 +150,7 @@ void ChordEdit::setHarmony(const Harmony* h)
 
 void ChordEdit::setRoot(int val)
       {
-//      printf("ChordEdit::setRoot(val=%d) tpc2step=%d tpc2stepname=%s tpc2alter=%d\n",
+//      qDebug("ChordEdit::setRoot(val=%d) tpc2step=%d tpc2stepname=%s tpc2alter=%d\n",
 //             val, tpc2step(val), qPrintable(tpc2stepName(val)), tpc2alter(val));
 
       QAbstractButton* button = NULL;
@@ -158,7 +158,7 @@ void ChordEdit::setRoot(int val)
 
       // catch INVALID_TPC
       if (val == INVALID_TPC) {
-            printf("ChordEdit::setRoot(val=INVALID_TPC)\n");
+            qDebug("ChordEdit::setRoot(val=INVALID_TPC)\n");
             // default to C, no accidentals
             button = rootGroup->button(0);
             button->setChecked(true);
@@ -173,14 +173,14 @@ void ChordEdit::setRoot(int val)
       if (button)
             button->setChecked(true);
       else
-            printf("root button %d not found\n", val);
+            qDebug("root button %d not found\n", val);
 
       id = tpc2alter(val);
       button = accidentalsGroup->button(id + 3);
       if (button)
             button->setChecked(true);
       else
-            printf("root button %d not found\n", id);
+            qDebug("root button %d not found\n", id);
 
       chordChanged();
       }
@@ -244,7 +244,7 @@ const ChordDescription* ChordEdit::extension()
 int ChordEdit::root()
       {
       int tpc = step2tpc(rootGroup->checkedId(), accidentalsGroup->checkedId() - 3);
-//      printf("ChordEdit::root() rootid=%d accid=%d -> tpc=%d\n",
+//      qDebug("ChordEdit::root() rootid=%d accid=%d -> tpc=%d\n",
 //             rootGroup->checkedId(), accidentalsGroup->checkedId() - 3, tpc);
       return tpc;
       }
@@ -295,7 +295,7 @@ void ChordEdit::otherToggled(bool val)
 
 void ChordEdit::chordChanged()
       {
-//      printf("ChordEdit::chordChanged() root=%d ext=%d base=%d ndeg=%d\n",
+//      qDebug("ChordEdit::chordChanged() root=%d ext=%d base=%d ndeg=%d\n",
 //             root(), extension(), base(), numberOfDegrees());
       _harmony->clearDegrees();
       for (int i = 0; i < numberOfDegrees(); i++)

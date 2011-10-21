@@ -133,7 +133,7 @@ void LayoutBreak::layout0()
                   break;
 
             default:
-                  printf("unknown layout break symbol\n");
+                  qDebug("unknown layout break symbol\n");
                   break;
             }
       QRectF bb(0, 0, w, h);

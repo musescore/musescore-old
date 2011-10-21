@@ -45,8 +45,8 @@ static QTextDocumentFragment parseInstrName(const QString& name)
             col.setNum(column);
             ln.setNum(line);
             QString error = err + "\n at line " + ln + " column " + col;
-            printf("parse instrument name: %s\n", qPrintable(error));
-            printf("   data:<%s>\n", qPrintable(name));
+            qDebug("parse instrument name: %s\n", qPrintable(error));
+            qDebug("   data:<%s>\n", qPrintable(name));
             return QTextDocumentFragment();
             }
 

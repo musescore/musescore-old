@@ -297,7 +297,7 @@ int Rest::getSymbol(Duration::DurationType type, int line, int lines, int* yoffs
             case Duration::V_128TH:
                   return rest128Sym;
             case Duration::V_256TH:
-printf("Rest: no symbol for 1/256\n");
+qDebug("Rest: no symbol for 1/256\n");
                   return rest128Sym;
             default:
                   return rest4Sym;

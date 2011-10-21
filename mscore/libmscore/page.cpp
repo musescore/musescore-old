@@ -84,7 +84,7 @@ int paperSizeNameToIndex(const QString& name)
             if (name == paperSizes[i].name)
                   return i;
             }
-      printf("unknown paper size\n");
+      qDebug("unknown paper size\n");
       return 0;
       }
 
@@ -116,7 +116,7 @@ int paperSizeSizeToIndex(const qreal wi, const qreal hi)
             if (sizeError(wi, paperSizes[i].w) < maxError && sizeError(hi, paperSizes[i].h) < maxError)
                   return i;
             }
-      printf("unknown paper size\n");
+      qDebug("unknown paper size\n");
       return -1;
       }
 

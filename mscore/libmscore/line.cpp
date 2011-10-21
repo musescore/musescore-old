@@ -409,8 +409,8 @@ void SLine::layout()
             return;
             }
       if (startElement() == 0 || endElement() == 0) {
-            printf("SLine::layout() failed: %s %s\n", parent()->name(), name());
-            printf("   start %p   end %p\n", startElement(), endElement());
+            qDebug("SLine::layout() failed: %s %s\n", parent()->name(), name());
+            qDebug("   start %p   end %p\n", startElement(), endElement());
             return;
             }
 
@@ -443,10 +443,10 @@ void SLine::layout()
                   }
             else {
                   int n = segCount - segmentsNeeded;
-                  printf("SLine: segments %d needed %d, remove %d\n", segCount, segmentsNeeded, n);
+                  qDebug("SLine: segments %d needed %d, remove %d\n", segCount, segmentsNeeded, n);
                   for (int i = 0; i < n; ++i) {
                         if (spannerSegments().isEmpty()) {
-                              printf("SLine::layout(): no segment %d, %d expected\n", i, n);
+                              qDebug("SLine::layout(): no segment %d, %d expected\n", i, n);
                               break;
                               }
                         else {

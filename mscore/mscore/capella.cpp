@@ -108,7 +108,7 @@ void TextObj::read()
       cap->read(txt, size);
       txt[size] = 0;
       text = QString(txt);
-printf("read textObj len %d <%s>\n", size, txt);
+qDebug("read textObj len %d <%s>\n", size, txt);
       }
 
 //---------------------------------------------------------
@@ -122,7 +122,7 @@ void SimpleTextObj::read()
       align  = cap->readByte();
       _font  = cap->readFont();
       _text  = cap->readString();
-printf("read SimpletextObj(%f,%f) len %zd <%s> char0: %02x\n",
+qDebug("read SimpletextObj(%f,%f) len %zd <%s> char0: %02x\n",
       relPos.x(), relPos.y(), strlen(_text), _text, _text[0]);
       }
 
@@ -137,7 +137,7 @@ void LineObj::read()
       pt2       = cap->readPoint();
       color     = cap->readColor();
       lineWidth = cap->readByte();
-printf("LineObj: %f:%f  %f:%f  width %d\n", pt1.x(), pt1.y(), pt2.x(), pt2.y(), lineWidth);
+qDebug("LineObj: %f:%f  %f:%f  width %d\n", pt1.x(), pt1.y(), pt2.x(), pt2.y(), lineWidth);
       }
 
 //---------------------------------------------------------
@@ -172,10 +172,10 @@ void TransposableObj::read()
       relPos = cap->readPoint();
       b = cap->readByte();
       if (b != 12 && b != 21)
-            printf("TransposableObj::read: warning: unknown drawObjectArray size of %d\n", b);
+            qDebug("TransposableObj::read: warning: unknown drawObjectArray size of %d\n", b);
       variants = cap->readDrawObjectArray();
       if (variants.size() != b)
-            printf("variants.size %d, expected %d\n", variants.size(), b);
+            qDebug("variants.size %d, expected %d\n", variants.size(), b);
       assert(variants.size() == b);
       /*int nRefNote =*/ cap->readInt();
       }
@@ -190,7 +190,7 @@ void MetafileObj::read()
       unsigned size = cap->readUnsigned();
       char enhMetaFileBits[size];
       cap->read(enhMetaFileBits, size);
-printf("MetaFileObj::read %d bytes\n", size);
+qDebug("MetaFileObj::read %d bytes\n", size);
       }
 
 //---------------------------------------------------------
@@ -320,11 +320,11 @@ QList<BasicDrawObj*> Capella::readDrawObjectArray()
       QList<BasicDrawObj*> ol;
       int n = readUnsigned();       // draw obj array
 
-printf("readDrawObjectArray %d elements\n", n);
+qDebug("readDrawObjectArray %d elements\n", n);
       for (int i = 0; i < n; ++i) {
             unsigned char type = readByte();
 
-printf("   readDrawObject %d of %d, type %d\n", i, n, type);
+qDebug("   readDrawObject %d of %d, type %d\n", i, n, type);
             switch (type) {
                   case  0: {
                         GroupObj* o = new GroupObj(this);
@@ -423,7 +423,7 @@ printf("   readDrawObject %d of %d, type %d\n", i, n, type);
                         }
                         break;
                   default:
-printf("readDrawObjectArray unsupported type %d\n", type);
+qDebug("readDrawObjectArray unsupported type %d\n", type);
                         abort();
                         break;
                   }
@@ -489,14 +489,14 @@ void BasicDurationalObj::read()
             tripartite   = (tuplet & 0x10) != 0;
             isProlonging = (tuplet & 0x20) != 0;
             if (tuplet & 0xc0)
-                  printf("bad tuplet value 0x%02x\n", tuplet);
+                  qDebug("bad tuplet value 0x%02x\n", tuplet);
             }
       if (c & 0x40) {
             objects = cap->readDrawObjectArray();
             }
       if (c & 0x80)
             abort();
-      printf("   DurationObj timestep %d\n", t);
+      qDebug("   DurationObj timestep %d\n", t);
       }
 
 //---------------------------------------------------------
@@ -523,7 +523,7 @@ void RestObj::read()
       bVerticalCentered      = b & 2;
       bool bAddVerticalShift = b & 4;
       if (b & 0xf8) {
-            printf("RestObj: res. bits 0x%02x\n", b);
+            qDebug("RestObj: res. bits 0x%02x\n", b);
             abort();
             }
       fullMeasures = bMultiMeasures ? cap->readUnsigned() : 0;
@@ -812,7 +812,7 @@ QFont Capella::readFont()
             /*QColor color           =*/ readColor();
             char* face             = readString();
 
-printf("Font <%s> size %d, weight %d\n", face, lfHeight, lfWeight);
+qDebug("Font <%s> size %d, weight %d\n", face, lfHeight, lfWeight);
             QFont font(face);
             font.setPointSizeF(lfHeight / 1000.0);
             font.setItalic(lfItalic);
@@ -829,7 +829,7 @@ printf("Font <%s> size %d, weight %d\n", face, lfHeight, lfWeight);
             }
       index -= 1;
       if (index >= fonts.size()) {
-            printf("illegal font index %d (max %d)\n", index, fonts.size()-1);
+            qDebug("illegal font index %d (max %d)\n", index, fonts.size()-1);
             }
       return fonts[index];
       }
@@ -853,10 +853,10 @@ void Capella::readStaveLayout(CapStaffLayout* sl, int /*idx*/)
                   }
                   break;
             }
-//      printf("StaffLayout %d: noteLines %d\n", idx, sl->noteLines);
+//      qDebug("StaffLayout %d: noteLines %d\n", idx, sl->noteLines);
 
       sl->bSmall      = readByte();
-printf("staff size small %d\n", sl->bSmall);
+qDebug("staff size small %d\n", sl->bSmall);
 
       sl->topDist      = readInt();
       sl->btmDist      = readInt();
@@ -868,7 +868,7 @@ printf("staff size small %d\n", sl->bSmall);
       sl->form = FORM(clef & 7);
       sl->line = CLEF_LINE((clef >> 3) & 7);
       sl->oct  = OCT((clef >> 6));
-//      printf("   clef %x  form %d, line %d, oct %d\n", clef, sl->form, sl->line, sl->oct);
+//      qDebug("   clef %x  form %d, line %d, oct %d\n", clef, sl->form, sl->line, sl->oct);
 
         // Schlagzeuginformation
       unsigned char b   = readByte();
@@ -892,14 +892,14 @@ printf("staff size small %d\n", sl->bSmall);
       sl->sound  = readInt();
       sl->volume = readInt();
       sl->transp = readInt();
-//      printf("   sound %d vol %d transp %d\n", sl->sound, sl->volume, sl->transp);
+//      qDebug("   sound %d vol %d transp %d\n", sl->sound, sl->volume, sl->transp);
 
       sl->descr              = readString();
       sl->name               = readString();
       sl->abbrev             = readString();
       sl->intermediateName   = readString();
       sl->intermediateAbbrev = readString();
-//      printf("   descr <%s> name <%s>  abbrev <%s> iname <%s> iabrev <%s>\n",
+//      qDebug("   descr <%s> name <%s>  abbrev <%s> iname <%s> iabrev <%s>\n",
 //         sl->descr, sl->name, sl->abbrev, sl->intermediateName, sl->intermediateAbbrev);
       }
 
@@ -931,7 +931,7 @@ void Capella::readLayout()
       // Musterzeilen
       unsigned nStaveLayouts = readUnsigned();
 
-//      printf("%d staves\n", nStaveLayouts);
+//      qDebug("%d staves\n", nStaveLayouts);
 
       for (unsigned iStave = 0; iStave < nStaveLayouts; iStave++) {
             CapStaffLayout* sl = new CapStaffLayout;
@@ -946,7 +946,7 @@ void Capella::readLayout()
             b.from   = readInt();
             b.to     = readInt();
             b.curly = readByte();
-//            printf("Bracket%d %d-%d curly %d\n", i, b.from, b.to, b.curly);
+//            qDebug("Bracket%d %d-%d curly %d\n", i, b.from, b.to, b.curly);
             brackets.append(b);
             }
       }
@@ -959,7 +959,7 @@ void Capella::readExtra()
       {
       uchar n = readByte();
       if (n) {
-            printf("Capella::readExtra(%d)\n", n);
+            qDebug("Capella::readExtra(%d)\n", n);
             for (int i = 0; i < n; ++i)
                   readByte();
             }
@@ -975,7 +975,7 @@ void CapClef::read()
       form            = (FORM) (b & 7);
       line            = (CLEF_LINE) ((b >> 3) & 7);
       oct             = (OCT)  (b >> 6);
-      printf("Clef::read form %d line %d oct %d\n", form, line, oct);
+      qDebug("Clef::read form %d line %d oct %d\n", form, line, oct);
       }
 
 //---------------------------------------------------------
@@ -1009,7 +1009,7 @@ ClefType CapClef::clefType(FORM form, CLEF_LINE line, OCT oct)
             default:
                   if (form == FORM_NULL)
                         return CLEF_INVALID;
-                  printf("unknown clef %d %d %d\n", form, line, oct);
+                  qDebug("unknown clef %d %d %d\n", form, line, oct);
                   break;
             }
       return CLEF_INVALID;
@@ -1023,7 +1023,7 @@ void CapKey::read()
       {
       unsigned char b = cap->readByte();
       signature = int(b) - 7;
-// printf("         Key %d\n", signature);
+// qDebug("         Key %d\n", signature);
       }
 
 //---------------------------------------------------------
@@ -1037,8 +1037,8 @@ void CapMeter::read()
       log2Denom = (d & 0x7f) - 1;
       allaBreve = d & 0x80;
       if (log2Denom > 7 || log2Denom < 0) {
-            printf("   Meter %d/%d allaBreve %d\n", numerator, log2Denom, allaBreve);
-            printf("   illegal fraction\n");
+            qDebug("   Meter %d/%d allaBreve %d\n", numerator, log2Denom, allaBreve);
+            qDebug("   illegal fraction\n");
             // abort();
             log2Denom = 2;
             numerator = 4;
@@ -1069,7 +1069,7 @@ void CapExplicitBarline::read()
       assert (_type <= BAR_REPENDSTART);
       assert (_barMode <= 2);
 
-// printf("         Expl.Barline type %d mode %d\n", _type, _barMode);
+// qDebug("         Expl.Barline type %d mode %d\n", _type, _barMode);
       }
 
 //---------------------------------------------------------
@@ -1078,7 +1078,7 @@ void CapExplicitBarline::read()
 
 void Capella::readVoice(CapStaff* cs, int idx)
       {
-printf("      readVoice %d\n", idx);
+qDebug("      readVoice %d\n", idx);
 
       if (readChar() != 'C')
             throw CAP_BAD_VOICE_SIG;
@@ -1095,7 +1095,7 @@ printf("      readVoice %d\n", idx);
       for (unsigned i = 0; i < nNoteObjs; i++) {
             QColor color       = Qt::black;
             uchar type = readByte();
-printf("         Voice %d read object idx %d(%d) type %d\n", idx,  i, nNoteObjs, type);
+qDebug("         Voice %d read object idx %d(%d) type %d\n", idx,  i, nNoteObjs, type);
             readExtra();
             if ((type != T_REST) && (type != T_CHORD) && (type != T_PAGE_BKGR))
                   color = readColor();
@@ -1142,12 +1142,12 @@ printf("         Voice %d read object idx %d(%d) type %d\n", idx,  i, nNoteObjs,
                         {
                         CapExplicitBarline* bl = new CapExplicitBarline(this);
                         bl->read();
-printf("append Expl Barline==========\n");
+qDebug("append Expl Barline==========\n");
                         v->objects.append(bl);
                         }
                         break;
                   default:
-                        printf("bad voice type %d\n", type);
+                        qDebug("bad voice type %d\n", type);
                         abort();
                  }
             }
@@ -1176,7 +1176,7 @@ void Capella::readStaff(CapSystem* system)
       staff->color     = readColor();
       readExtra();
 
-// printf("      Staff iLayout %d\n", staff->iLayout);
+// qDebug("      Staff iLayout %d\n", staff->iLayout);
       // Stimmen
       unsigned nVoices = readUnsigned();
       for (unsigned i = 0; i < nVoices; i++)
@@ -1236,7 +1236,7 @@ int BasicDurationalObj::ticks() const
             case D256:        len = MScore::division >> 6; break;
             case D_BREVE:     len = MScore::division * 8; break;
             default:
-                  printf("BasicDurationalObj::ticks: illegal duration value %d\n", t);
+                  qDebug("BasicDurationalObj::ticks: illegal duration value %d\n", t);
                   break;
             }
       int slen = len;
@@ -1274,7 +1274,7 @@ void Capella::read(QFile* fp)
       if (memcmp(signature, "cap3-v:", 7) != 0)
             throw CAP_BAD_SIG;
 
-//      printf("read Capella file signature <%s>\n", signature);
+//      qDebug("read Capella file signature <%s>\n", signature);
 
       // TODO: test for signature[7] = a-z
 
@@ -1282,7 +1282,7 @@ void Capella::read(QFile* fp)
       keywords = readString();
       comment  = readString();
 
-// printf("author <%s> keywords <%s> comment <%s>\n", author, keywords, comment);
+// qDebug("author <%s> keywords <%s> comment <%s>\n", author, keywords, comment);
 
       nRel   = readUnsigned();            // 75
       nAbs   = readUnsigned();            // 16
@@ -1291,7 +1291,7 @@ void Capella::read(QFile* fp)
       bAllowCompression = b & 2;
       bPrintLandscape   = b & 16;
 
-// printf("  nRel %d  nAbs %d useRealSize %d compresseion %d\n", nRel, nAbs, bUseRealSize, bAllowCompression);
+// qDebug("  nRel %d  nAbs %d useRealSize %d compresseion %d\n", nRel, nAbs, bUseRealSize, bAllowCompression);
 
       readLayout();
 
@@ -1306,11 +1306,11 @@ void Capella::read(QFile* fp)
 
       unsigned n = readUnsigned();
       if (n) {
-            printf("Gallery objects\n");
+            qDebug("Gallery objects\n");
             }
       for (unsigned int i = 0; i < n; ++i) {
             /*char* s =*/ readString();       // names of galerie objects
-//            printf("Galerie: <%s>\n", s);
+//            qDebug("Galerie: <%s>\n", s);
             }
 
       backgroundChord = new ChordObj(this);
@@ -1458,7 +1458,7 @@ static void processBasicDrawObj(QList<BasicDrawObj*> objects, Segment* s, int tr
                                                 addDynamic(score, s, track, "fp");
                                                 break;
                                           default:
-                                                printf("====unsupported capella code %x(%c)\n", code, code);
+                                                qDebug("====unsupported capella code %x(%c)\n", code, code);
                                                 break;
                                           }
                                     break;
@@ -1476,7 +1476,7 @@ static void processBasicDrawObj(QList<BasicDrawObj*> objects, Segment* s, int tr
                         p = p / 32.0 * DPMM;
                         // text->setUserOff(st->pos());
                         text->setUserOff(p);
-printf("setText %s (%f %f)(%f %f) <%s>\n",
+qDebug("setText %s (%f %f)(%f %f) <%s>\n",
            qPrintable(st->font().family()),
            st->pos().x(), st->pos().y(), p.x(), p.y(), qPrintable(st->text()));
                         text->setAlign(ALIGN_LEFT | ALIGN_BASELINE);
@@ -1485,7 +1485,7 @@ printf("setText %s (%f %f)(%f %f) <%s>\n",
                         }
                         break;
                   case CAP_TEXT:
-printf("======================Text:\n");
+qDebug("======================Text:\n");
                         break;
                   }
             }
@@ -1500,7 +1500,7 @@ int MuseScore::readCapVoice(Score* score, CapVoice* cvoice, int staffIdx, int ti
       int voice = cvoice->voiceNo;
       int track = staffIdx * VOICES + voice;
 
-printf("readCapVoice 1\n");
+qDebug("readCapVoice 1\n");
       //
       // pass I
       //
@@ -1511,12 +1511,12 @@ printf("readCapVoice 1\n");
       int nTuplet = 0;
       int tupletTick = 0;
 
-//printf("    read voice: tick %d track: %d)\n", tick, track);
+//qDebug("    read voice: tick %d track: %d)\n", tick, track);
       foreach(NoteObj* no, cvoice->objects) {
             switch(no->type()) {
                   case T_REST:
                         {
-//printf("     <Rest>\n");
+//qDebug("     <Rest>\n");
                         Measure* m = score->getCreateMeasure(tick);
                         RestObj* o = static_cast<RestObj*>(no);
                         int ticks  = o->ticks();
@@ -1532,7 +1532,7 @@ printf("readCapVoice 1\n");
                                     if (tupletCount == 3)
                                           f = Fraction(3,2);
                                     else
-                                          printf("Capella: unknown tuplet\n");
+                                          qDebug("Capella: unknown tuplet\n");
                                     tuplet->setRatio(f);
                                     tuplet->setBaseLen(d);
                                     tuplet->setTrack(track);
@@ -1582,7 +1582,7 @@ printf("readCapVoice 1\n");
                         break;
                   case T_CHORD:
                         {
-//printf("     <Chord>\n");
+//qDebug("     <Chord>\n");
                         ChordObj* o = static_cast<ChordObj*>(no);
                         int ticks = o->ticks();
                         Duration d;
@@ -1600,7 +1600,7 @@ printf("readCapVoice 1\n");
                                     if (tupletCount == 3)
                                           f = Fraction(3,2);
                                     else
-                                          printf("Capella: unknown tuplet\n");
+                                          qDebug("Capella: unknown tuplet\n");
                                     tuplet->setRatio(f);
                                     tuplet->setBaseLen(d);
                                     tuplet->setTrack(track);
@@ -1610,7 +1610,7 @@ printf("readCapVoice 1\n");
                                     tuplet->setDuration(Fraction::fromTicks(nn));
                                     m->add(tuplet);
                                     }
-//                              printf("Tuplet at %d: count: %d  tri: %d  prolonging: %d  ticks %d objects %d\n",
+//                              qDebug("Tuplet at %d: count: %d  tri: %d  prolonging: %d  ticks %d objects %d\n",
 //                                 tick, o->count, o->tripartite, o->isProlonging, ticks,
 //                                 o->objects.size());
                               }
@@ -1716,9 +1716,9 @@ printf("readCapVoice 1\n");
                         break;
                   case T_CLEF:
                         {
-//printf("     <Clef>\n");
+//qDebug("     <Clef>\n");
                         CapClef* o = static_cast<CapClef*>(no);
-// printf("%d:%d <Clef> %s line %d oct %d\n", tick, staffIdx, o->name(), o->line, o->oct);
+// qDebug("%d:%d <Clef> %s line %d oct %d\n", tick, staffIdx, o->name(), o->line, o->oct);
                         ClefType nclef = o->clef();
                         if (nclef == CLEF_INVALID)
                               break;
@@ -1733,7 +1733,7 @@ printf("readCapVoice 1\n");
                         break;
                   case T_KEY:
                         {
-//printf("   <Key>\n");
+//qDebug("   <Key>\n");
                         CapKey* o = static_cast<CapKey*>(no);
                         int key = score->staff(staffIdx)->key(tick).accidentalType();
                         if (key != o->signature) {
@@ -1750,9 +1750,9 @@ printf("readCapVoice 1\n");
                   case T_METER:
                         {
                         CapMeter* o = static_cast<CapMeter*>(no);
-printf("     <Meter> tick %d %d/%d\n", tick, o->numerator, 1 << o->log2Denom);
+qDebug("     <Meter> tick %d %d/%d\n", tick, o->numerator, 1 << o->log2Denom);
                         if (o->log2Denom > 7 || o->log2Denom < 0) {
-                              printf("illegal fraction\n");
+                              qDebug("illegal fraction\n");
                               abort();
                               }
                         SigEvent se = score->sigmap()->timesig(tick);
@@ -1772,7 +1772,7 @@ printf("     <Meter> tick %d %d/%d\n", tick, o->numerator, 1 << o->log2Denom);
                   case T_IMPL_BARLINE:    // does not exist?
                         {
                         CapExplicitBarline* o = static_cast<CapExplicitBarline*>(no);
-printf("     <Barline>\n");
+qDebug("     <Barline>\n");
                         Measure* m = score->getCreateMeasure(tick-1);
                         int ticks = tick - m->tick();
                         if (ticks > 0 && ticks != m->ticks()) {
@@ -1815,13 +1815,13 @@ printf("     <Barline>\n");
                         }
                         break;
                   case T_PAGE_BKGR:
-// printf("     <PageBreak>\n");
+// qDebug("     <PageBreak>\n");
                         break;
                   }
             }
       int endTick = tick;
 
-printf("readCapVoice 2\n");
+qDebug("readCapVoice 2\n");
       //
       // pass II
       //
@@ -1837,14 +1837,14 @@ printf("readCapVoice 2\n");
             foreach(BasicDrawObj* o, d->objects) {
                   switch (o->type) {
                         case CAP_SIMPLE_TEXT:
-                              // printf("simple text at %d\n", tick);
+                              // qDebug("simple text at %d\n", tick);
                               break;
                         case CAP_WAVY_LINE:
                               break;
                         case CAP_SLUR:
                               {
                               SlurObj* so = static_cast<SlurObj*>(o);
-                              // printf("slur tick %d  %d-%d-%d-%d   %d-%d\n", tick, so->nEnd, so->nMid,
+                              // qDebug("slur tick %d  %d-%d-%d-%d   %d-%d\n", tick, so->nEnd, so->nMid,
                               //   so->nDotDist, so->nDotWidth, so->nRefNote, so->nNotes);
                               Segment* seg = score->tick2segment(tick);
                               int tick2 = -1;
@@ -1856,7 +1856,7 @@ printf("readCapVoice 2\n");
                                           if (seg->element(track))
                                                 --n;
                                           else
-                                                printf("  %d empty seg\n", n);
+                                                qDebug("  %d empty seg\n", n);
                                           if (n == 0) {
                                                 tick2 = seg->tick();
                                                 break;
@@ -1864,7 +1864,7 @@ printf("readCapVoice 2\n");
                                           }
                                     }
                               else
-                                    printf("  segment at %d not found\n", tick);
+                                    qDebug("  segment at %d not found\n", tick);
                               if (tick2 >= 0) {
                                     Slur* slur = new Slur(score);
                                     // TODO1 slur->setTick(tick);
@@ -1874,7 +1874,7 @@ printf("readCapVoice 2\n");
                                     score->add(slur);
                                     }
                               else
-                                    printf("second anchor for slur not found\n");
+                                    qDebug("second anchor for slur not found\n");
                               }
                               break;
                         case CAP_TEXT: {
@@ -1884,7 +1884,7 @@ printf("readCapVoice 2\n");
                               Text* s = new Text(score);
                               QString ss = rtf2html(QString(to->text));
 
-//printf("string %f:%f w %d ratio %d <%s>\n",
+//qDebug("string %f:%f w %d ratio %d <%s>\n",
 //   to->relPos.x(), to->relPos.y(), to->width, to->yxRatio, qPrintable(ss));
                               s->setHtml(ss);
                               MeasureBase* measure = score->measures()->first();
@@ -1913,7 +1913,7 @@ printf("readCapVoice 2\n");
                   }
             tick += ticks;
             }
-printf("   readCapVoice\n");
+qDebug("   readCapVoice\n");
       return endTick;
       }
 
@@ -1925,7 +1925,7 @@ void MuseScore::convertCapella(Score* score, Capella* cap)
       {
       if (cap->systems.isEmpty())
             return;
-printf("==================convert-capella\n");
+qDebug("==================convert-capella\n");
 
       score->style()->set(ST_measureSpacing, 1.0);
       score->setSpatium(cap->normalLineDist * DPMM);
@@ -1935,10 +1935,10 @@ printf("==================convert-capella\n");
 
 #if 1
       foreach(CapSystem* csys, cap->systems) {
-            printf("System:\n");
+            qDebug("System:\n");
             foreach(CapStaff* cstaff, csys->staves) {
                   CapStaffLayout* cl = cap->staffLayout(cstaff->iLayout);
-                  printf("  Staff layout <%s><%s><%s><%s><%s> %d  barline %d-%d mode %d\n",
+                  qDebug("  Staff layout <%s><%s><%s><%s><%s> %d  barline %d-%d mode %d\n",
                      cl->descr, cl->name, cl->abbrev, cl->intermediateName,
                      cl->intermediateAbbrev,
                      cstaff->iLayout, cl->barlineFrom, cl->barlineTo, cl->barlineMode);
@@ -1957,7 +1957,7 @@ printf("==================convert-capella\n");
       // associated with a CapStaffLayout
       //
       if (staves != cap->staffLayouts().size()) {
-            printf("Capella: max number of staves != number of staff layouts (%d, %d)\n",
+            qDebug("Capella: max number of staves != number of staff layouts (%d, %d)\n",
                staves, cap->staffLayouts().size());
             staves = qMax(staves, cap->staffLayouts().size());
             }
@@ -1972,7 +1972,7 @@ printf("==================convert-capella\n");
       Part* part = 0;
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
             CapStaffLayout* cl = cap->staffLayout(staffIdx);
-// printf("Midi staff %d program %d\n", staffIdx, cl->sound);
+// qDebug("Midi staff %d program %d\n", staffIdx, cl->sound);
             if (midiPatch != cl->sound || part == 0) {
                   part = new Part(score);
                   midiPatch = cl->sound;
@@ -2010,7 +2010,7 @@ printf("==================convert-capella\n");
       foreach(CapBracket cb, cap->brackets) {
             Staff* staff = score->staves().value(cb.from);
             if (staff == 0) {
-                  printf("bad bracket 'from' value\n");
+                  qDebug("bad bracket 'from' value\n");
                   continue;
                   }
             staff->setBracket(0, cb.curly ? 1 : 0);
@@ -2039,7 +2039,7 @@ printf("==================convert-capella\n");
                         }
                         break;
                   default:
-                        printf("page background object type %d\n", o->type);
+                        qDebug("page background object type %d\n", o->type);
                         break;
                   }
             }
@@ -2060,7 +2060,7 @@ printf("==================convert-capella\n");
 
       int systemTick = 0;
       foreach(CapSystem* csys, cap->systems) {
-printf("readCapSystem\n");
+qDebug("readCapSystem\n");
 /*            if (csys->explLeftIndent > 0) {
                   HBox* mb = new HBox(score);
                   mb->setTick(systemTick);
@@ -2075,7 +2075,7 @@ printf("readCapSystem\n");
                   //    which means that there is a 1:1 relation between layout/staff
                   //
 
-printf("  ReadCapStaff %d/%d\n", cstaff->numerator, 1 << cstaff->log2Denom);
+qDebug("  ReadCapStaff %d/%d\n", cstaff->numerator, 1 << cstaff->log2Denom);
                   int staffIdx = cstaff->iLayout;
                   int voice = 0;
                   foreach(CapVoice* cvoice, cstaff->voices) {

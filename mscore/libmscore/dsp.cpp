@@ -43,7 +43,7 @@ class DspSSE86 : public Dsp {
 
       virtual float peak(float* buf, unsigned n, float current) {
             if ( ((intptr_t)buf % 16) != 0) {
-                  fprintf(stderr, "peak(): buffer unaligned! (%p)\n", buf);
+                  qDebug("peak(): buffer unaligned! (%p)\n", buf);
                   return Dsp::peak(buf, n, current);
                   }
             return x86_sse_compute_peak(buf, n, current);
@@ -51,7 +51,7 @@ class DspSSE86 : public Dsp {
 
       virtual void applyGainToBuffer(float* buf, unsigned n, float gain) {
             if ( ((intptr_t)buf % 16) != 0) {
-                  fprintf(stderr, "applyGainToBuffer(): buffer unaligned! (%p)\n", buf);
+                  qDebug("applyGainToBuffer(): buffer unaligned! (%p)\n", buf);
                   Dsp::applyGainToBuffer(buf, n, gain);
                   }
             else
@@ -60,9 +60,9 @@ class DspSSE86 : public Dsp {
 
       virtual void mixWithGain(float* dst, float* src, unsigned n, float gain) {
             if ( ((intptr_t)dst & 15) != 0)
-                  fprintf(stderr, "mixWithGainain(): dst unaligned! (%p)\n", dst);
+                  qDebug("mixWithGainain(): dst unaligned! (%p)\n", dst);
             if (((intptr_t)dst & 15) != ((intptr_t)src & 15) ) {
-                  fprintf(stderr, "mixWithGain(): dst & src don't have the same alignment!\n");
+                  qDebug("mixWithGain(): dst & src don't have the same alignment!\n");
                   Dsp::mixWithGain(dst, src,n, gain);
                   }
             else
@@ -70,9 +70,9 @@ class DspSSE86 : public Dsp {
             }
       virtual void mix(float* dst, float* src, unsigned n) {
             if ( ((intptr_t)dst & 15) != 0)
-                  fprintf(stderr, "mix_buffers_no_gain(): dst unaligned! %p\n", dst);
+                  fqDebug(stderr, "mix_buffers_no_gain(): dst unaligned! %p\n", dst);
             if ( ((intptr_t)dst & 15) != ((intptr_t)src & 15) ) {
-                  fprintf(stderr, "mix_buffers_no_gain(): dst & src don't have the same alignment!\n");
+                  qDebug("mix_buffers_no_gain(): dst & src don't have the same alignment!\n");
                   Dsp::mix(dst, src, n);
                   }
             else
@@ -105,7 +105,7 @@ void initDsp()
 #endif
       useSSE &= (1 << 25); // bit 25 = SSE support
       if (useSSE) {
-            printf("Using SSE optimized routines\n");
+            qDebug("Using SSE optimized routines\n");
             dsp = new DspSSE86();
             return;
             }

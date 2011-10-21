@@ -70,7 +70,7 @@ void ShortcutCaptureDialog::keyPressEvent(QKeyEvent* e)
             case 2: key = QKeySequence(key[0], key[1], k); break;
             case 3: key = QKeySequence(key[0], key[1], key[2], k); break;
             default:
-                  printf("internal error: bad key count\n");
+                  qDebug("internal error: bad key count\n");
                   break;
             }
 
@@ -89,7 +89,7 @@ void ShortcutCaptureDialog::keyPressEvent(QKeyEvent* e)
       okButton->setEnabled(conflict == false);
       nshrtLabel->setText(key.toString(QKeySequence::NativeText));
 
-printf("capture key 0x%x  modifiers 0x%x virt 0x%x scan 0x%x <%s><%s>\n",
+qDebug("capture key 0x%x  modifiers 0x%x virt 0x%x scan 0x%x <%s><%s>\n",
       k,
       int(e->modifiers()),
       int(e->nativeVirtualKey()),

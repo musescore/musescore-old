@@ -111,11 +111,11 @@ bool BBFile::read(const QString& name)
             case 0x43 ... 0x49:
                   break;
             default:
-                  printf("BB: unknown file version %02x\n", _version);
+                  qDebug("BB: unknown file version %02x\n", _version);
                   return false;
             }
 
-      printf("read <%s> version 0x%02x\n", qPrintable(name), _version);
+      qDebug("read <%s> version 0x%02x\n", qPrintable(name), _version);
 
       //---------------------------------------------------
       //    read title
@@ -135,7 +135,7 @@ bool BBFile::read(const QString& name)
       ++idx;
       _style = a[idx++] - 1;
       if (_style < 0 || _style >= int(sizeof(styles)/sizeof(*styles))) {
-            printf("Import bb: unknown style %d\n", _style + 1);
+            qDebug("Import bb: unknown style %d\n", _style + 1);
             return false;
             }
       _key = a[idx++];
@@ -148,7 +148,7 @@ bool BBFile::read(const QString& name)
                 -3, 4,  -1, -6,  1, -4,  3, -2,  5,  0, -5,  2,  4,  6,  3,  5, 7
            };
       if (_key >= int (sizeof(kt)/sizeof(*kt))) {
-            printf("bad key %d\n", _key);
+            qDebug("bad key %d\n", _key);
             return false;
             }
       _key = kt[_key];
@@ -156,11 +156,11 @@ bool BBFile::read(const QString& name)
       _bpm = a[idx] + (a[idx+1] << 8);
       idx += 2;
 
-      printf("Title <%s>\n", _title);
-      printf("style %d\n",   _style);
-      printf("key   %d\n",   _key);
-      printf("sig   %d/%d\n", timesigZ(), timesigN());
-      printf("bpm   %d\n", _bpm);
+      qDebug("Title <%s>\n", _title);
+      qDebug("style %d\n",   _style);
+      qDebug("key   %d\n",   _key);
+      qDebug("sig   %d/%d\n", timesigZ(), timesigN());
+      qDebug("bpm   %d\n", _bpm);
 
       //---------------------------------------------------
       //    read bar types
@@ -172,7 +172,7 @@ bool BBFile::read(const QString& name)
             if (val == 0)
                   bar += a[idx++];
             else {
-                  printf("bar type: bar %d val %d\n", bar, val);
+                  qDebug("bar type: bar %d val %d\n", bar, val);
                   _barType[bar++] = val;
                   }
             }
@@ -212,7 +212,7 @@ bool BBFile::read(const QString& name)
                         bass = 0;
                   int ibeat = beat + timesigZ() * 4 / timesigN();
                   if (ibeat != _chords[roots].beat) {
-                        printf("import bb: inconsistent chord type and root beat\n");
+                        qDebug("import bb: inconsistent chord type and root beat\n");
                         return false;
                         }
                   _chords[roots].root = root;
@@ -227,22 +227,22 @@ bool BBFile::read(const QString& name)
       _measures = ((maxbeat + timesigZ() - 1) / timesigZ()) + 1;
 
       if (roots != _chords.size()) {
-            printf("import bb: roots %d != extensions %d\n", roots, _chords.size());
+            qDebug("import bb: roots %d != extensions %d\n", roots, _chords.size());
             return false;
             }
-      printf("Measures %d\n", _measures);
+      qDebug("Measures %d\n", _measures);
 
 #if 0
-      printf("================chords=======================\n");
+      qDebug("================chords=======================\n");
       foreach(BBChord c, _chords) {
-            printf("chord beat %3d bass %d root %d extension %d\n",
+            qDebug("chord beat %3d bass %d root %d extension %d\n",
                c.beat, c.bass, c.root, c.extension);
             }
-      printf("================chords=======================\n");
+      qDebug("================chords=======================\n");
 #endif
 
       if (a[idx] == 1) {            //??
-            printf("Skip 0x%02x at 0x%04x\n", a[idx], idx);
+            qDebug("Skip 0x%02x at 0x%04x\n", a[idx], idx);
             ++idx;
             }
 
@@ -250,7 +250,7 @@ bool BBFile::read(const QString& name)
       _endChorus   = a[idx++];
       _repeats     = a[idx++];
 
-      printf("start chorus %d  end chorus %d repeats %d, pos now 0x%x\n",
+      qDebug("start chorus %d  end chorus %d repeats %d, pos now 0x%x\n",
          _startChorus, _endChorus, _repeats, idx);
 
       if (_startChorus >= _endChorus) {
@@ -281,11 +281,11 @@ bool BBFile::read(const QString& name)
                   }
             }
       if (!found) {
-            printf("import bb: style file not found\n");
+            qDebug("import bb: style file not found\n");
             return false;
             }
 
-      printf("read styleName at 0x%x\n", idx);
+      qDebug("read styleName at 0x%x\n", idx);
       len = a[idx++];
       _styleName = new char[len+1];
 
@@ -293,7 +293,7 @@ bool BBFile::read(const QString& name)
             _styleName[i] = a[idx++];
       _styleName[len] = 0;
 
-      printf("style name <%s>\n", _styleName);
+      qDebug("style name <%s>\n", _styleName);
 
       // read midi events
       int eventStart = a[size-4] + a[size-3] * 256;
@@ -302,12 +302,12 @@ bool BBFile::read(const QString& name)
       int endTick = _measures * bbDivision * 4 * timesigZ() / timesigN();
 
       if (eventCount == 0) {
-            printf("no melody\n");
+            qDebug("no melody\n");
             return true;
             }
       else {
             idx = eventStart;
-            printf("melody found at 0x%x\n", idx);
+            qDebug("melody found at 0x%x\n", idx);
             int i = 0;
             int lastLen = 0;
             for (i = 0; i < eventCount; ++i, idx+=12) {
@@ -329,7 +329,7 @@ bool BBFile::read(const QString& name)
                         int tick = a[idx] + (a[idx+1]<<8) + (a[idx+2]<<16) + (a[idx+3]<<24);
                         tick -= 4 * bbDivision;
                         if (tick >= endTick) {
-                              printf("event tick %d > %d\n", tick, endTick);
+                              qDebug("event tick %d > %d\n", tick, endTick);
                               continue;
                               }
                         Event note(ME_NOTE);
@@ -340,7 +340,7 @@ bool BBFile::read(const QString& name)
                         int len = a[idx+8] + (a[idx+9]<<8) + (a[idx+10]<<16) + (a[idx+11]<<24);
                         if (len == 0) {
                               if (lastLen == 0) {
-                                    printf("note event of len 0 at idx %04x\n", idx);
+                                    qDebug("note event of len 0 at idx %04x\n", idx);
                                     continue;
                                     }
                               len = lastLen;
@@ -355,11 +355,11 @@ bool BBFile::read(const QString& name)
                   else if (type == 0)
                         break;
                   else {
-                        printf("unknown event type 0x%02x at x%04x\n", a[idx + 4], idx);
+                        qDebug("unknown event type 0x%02x at x%04x\n", a[idx + 4], idx);
                         break;
                         }
                   }
-            printf("Events found x%02x (%d)\n", i, i);
+            qDebug("Events found x%02x (%d)\n", i, i);
             }
       return true;
       }
@@ -373,7 +373,7 @@ bool MuseScore::importBB(Score* score, const QString& name)
       {
       BBFile bb;
       if (!bb.read(name)) {
-            printf("cannot open file <%s>\n", qPrintable(name));
+            qDebug("cannot open file <%s>\n", qPrintable(name));
             return false;
             }
       *(score->sigmap()) = bb.siglist();
@@ -458,10 +458,10 @@ bool MuseScore::importBB(Score* score, const QString& name)
             };
       foreach(const BBChord& c, bb.chords()) {
             int tick = c.beat * MScore::division;
-// printf("CHORD %d %d\n", c.beat, tick);
+// qDebug("CHORD %d %d\n", c.beat, tick);
             Measure* m = score->tick2measure(tick);
             if (m == 0) {
-                  printf("import BB: measure for tick %d not found\n", tick);
+                  qDebug("import BB: measure for tick %d not found\n", tick);
                   continue;
                   }
             Segment* s = m->getSegment(SegChordRest, tick);
@@ -535,7 +535,7 @@ int BBFile::processPendingNotes(Score* score, QList<MNote*>* notes, int len, int
       //
       Measure* measure = score->tick2measure(tick);
       if (measure == 0 || (tick >= (measure->tick() + measure->ticks()))) {
-            printf("no measure found for tick %d\n", tick);
+            qDebug("no measure found for tick %d\n", tick);
             notes->clear();
             return len;
             }
@@ -561,7 +561,7 @@ int BBFile::processPendingNotes(Score* score, QList<MNote*>* notes, int len, int
 
                   if (useDrumset) {
                         if (!drumset->isValid(mn.pitch())) {
-                              printf("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
+                              qDebug("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
                               }
                         else {
                               chord->setStemDirection(drumset->stemDirection(mn.pitch()));
@@ -639,17 +639,17 @@ void BBFile::convertTrack(Score* score, BBTrack* track, int staffIdx)
                   // process pending notes
                   //
                   int restLen = e.ontime() - ctick;
-// printf("ctick %d  rest %d ontick %d size %d\n", ctick, restLen, e.ontime(), notes.size());
+// qDebug("ctick %d  rest %d ontick %d size %d\n", ctick, restLen, e.ontime(), notes.size());
 
                   if (restLen <= 0) {
-                        printf("bad restlen ontime %d - ctick %d\n", e.ontime(), ctick);
+                        qDebug("bad restlen ontime %d - ctick %d\n", e.ontime(), ctick);
                         abort();
                         }
 
                   while (!notes.isEmpty()) {
                         int len = processPendingNotes(score, &notes, restLen, track);
                         if (len == 0) {
-                              printf("processPendingNotes returns zero, restlen %d, track %d\n", restLen, track);
+                              qDebug("processPendingNotes returns zero, restlen %d, track %d\n", restLen, track);
                               ctick += restLen;
                               restLen = 0;
                               break;
@@ -657,7 +657,7 @@ void BBFile::convertTrack(Score* score, BBTrack* track, int staffIdx)
                         ctick += len;
                         restLen -= len;
                         }
-// printf("  1.ctick %d  rest %d\n", ctick, restLen);
+// qDebug("  1.ctick %d  rest %d\n", ctick, restLen);
                   //
                   // check for gap and fill with rest
                   //
@@ -674,7 +674,7 @@ void BBFile::convertTrack(Score* score, BBTrack* track, int staffIdx)
                               if ((ctick + len) > measure->tick() + measure->ticks()) {
                                     len = measure->tick() + measure->ticks() - ctick;
                                     if (len <= 0) {
-                                          printf("bad len %d\n", len);
+                                          qDebug("bad len %d\n", len);
                                           break;
                                           }
                                     }
@@ -685,7 +685,7 @@ void BBFile::convertTrack(Score* score, BBTrack* track, int staffIdx)
                               rest->setTrack(staffIdx * VOICES);
                               Segment* s = measure->getSegment(rest, ctick);
                               s->add(rest);
-// printf("   add rest %d\n", len);
+// qDebug("   add rest %d\n", len);
 
                               ctick   += len;
                               restLen -= len;
@@ -694,7 +694,7 @@ void BBFile::convertTrack(Score* score, BBTrack* track, int staffIdx)
                   else
                         ctick += restLen;
 
-// printf("  2.ctick %d  rest %d\n", ctick, restLen);
+// qDebug("  2.ctick %d  rest %d\n", ctick, restLen);
                   //
                   // collect all notes at ctick
                   //

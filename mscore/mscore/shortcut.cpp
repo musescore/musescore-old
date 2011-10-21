@@ -97,7 +97,7 @@ Shortcut* getShortcut(const char* id)
       {
       Shortcut* s = shortcuts.value(id);
       if (s == 0) {
-            printf("internal error: shortcut <%s> not found\n", id);
+            qDebug("internal error: shortcut <%s> not found\n", id);
             return 0;
             }
       return s;

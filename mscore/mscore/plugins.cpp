@@ -47,7 +47,7 @@ void MuseScore::registerPlugin(const QString& pluginPath)
             QFileInfo fi(s);
             if (fi.baseName() == baseName) {
                   if (debugMode)
-                        printf("  Plugin <%s> already registered\n", qPrintable(pluginPath));
+                        qDebug("  Plugin <%s> already registered\n", qPrintable(pluginPath));
                   return;
                   }
             }
@@ -55,11 +55,11 @@ void MuseScore::registerPlugin(const QString& pluginPath)
       QFile f(pluginPath);
       if (!f.open(QIODevice::ReadOnly)) {
             if (debugMode)
-                  printf("Loading Plugin <%s> failed\n", qPrintable(pluginPath));
+                  qDebug("Loading Plugin <%s> failed\n", qPrintable(pluginPath));
             return;
             }
       if (debugMode)
-            printf("Register Plugin <%s>\n", qPrintable(pluginPath));
+            qDebug("Register Plugin <%s>\n", qPrintable(pluginPath));
 
       if (se == 0) {
             se = new ScriptEngine();
@@ -81,7 +81,7 @@ void MuseScore::registerPlugin(const QString& pluginPath)
       if (se->hasUncaughtException()) {
             QScriptValue sv = se->uncaughtException();
 #if 0
-            printf("Load plugin <%s>: line %d: %s\n",
+            qDebug("Load plugin <%s>: line %d: %s\n",
                qPrintable(pluginPath),
                se->uncaughtExceptionLineNumber(),
                qPrintable(sv.toString()));
@@ -99,12 +99,12 @@ void MuseScore::registerPlugin(const QString& pluginPath)
       f.close();
       QScriptValue init = val.property("init");
       if (!init.isFunction()) {
-            printf("Load plugin <%s>: no init function found\n", qPrintable(pluginPath));
+            qDebug("Load plugin <%s>: no init function found\n", qPrintable(pluginPath));
             return;
             }
       QScriptValue run = val.property("run");
       if (!run.isFunction()) {
-            printf("Load plugin <%s>: no run function found\n", qPrintable(pluginPath));
+            qDebug("Load plugin <%s>: no run function found\n", qPrintable(pluginPath));
             return;
             }
       int majorVersion = val.property("majorVersion").toInt32();
@@ -118,7 +118,7 @@ void MuseScore::registerPlugin(const QString& pluginPath)
                      QString::null, QString::null, QString::null, 0, 1);
                   }
             else if (minorVersion > SCRIPT_MINOR_VERSION) {
-                  printf("Your MuseScore version may be too old to run script <%s> (minor version %d > %d)\n",
+                  qDebug("Your MuseScore version may be too old to run script <%s> (minor version %d > %d)\n",
                      qPrintable(pluginPath), minorVersion, SCRIPT_MAJOR_VERSION);
                   QString s = tr("MuseScore is too old to run script\n%1");
                   QMessageBox::warning(0,
@@ -139,7 +139,7 @@ void MuseScore::registerPlugin(const QString& pluginPath)
       QString context = fi.baseName();
       menu = qApp->translate(qPrintable(context), qPrintable(menu));
       if (menu.isEmpty()) {
-            printf("Load plugin: no menu property\n");
+            qDebug("Load plugin: no menu property\n");
             return;
             }
 
@@ -194,7 +194,7 @@ void MuseScore::registerPlugin(const QString& pluginPath)
                         curMenu->setObjectName(m);
                         menuBar()->insertMenu(menuBar()->actions().back(), (QMenu*)curMenu);
                         if (debugMode)
-                              printf("add Menu <%s>\n", qPrintable(m));
+                              qDebug("add Menu <%s>\n", qPrintable(m));
                         }
                   else if (i + 1 == n) {
                         QStringList sl = m.split(":");
@@ -221,12 +221,12 @@ void MuseScore::registerPlugin(const QString& pluginPath)
                         pluginMapper->setMapping(a, pluginIdx);
 #endif
                         if (debugMode)
-                              printf("add action <%s>\n", qPrintable(m));
+                              qDebug("add action <%s>\n", qPrintable(m));
                         }
                   else {
                         curMenu = ((QMenu*)curMenu)->addMenu(m);
                         if (debugMode)
-                              printf("add menu <%s>\n", qPrintable(m));
+                              qDebug("add menu <%s>\n", qPrintable(m));
                         }
                   }
             }
@@ -239,7 +239,7 @@ void MuseScore::registerPlugin(const QString& pluginPath)
 void MuseScore::registerPlugin(QAction* a)
       {
       if (!pluginMapper) {
-            printf("registerPlugin: no pluginMapper\n");
+            qDebug("registerPlugin: no pluginMapper\n");
             return;
             }
       a->setEnabled(_sstate != STATE_DISABLED);
@@ -285,7 +285,7 @@ bool MuseScore::loadPlugin(const QString& filename)
 
       QDir pluginDir(mscoreGlobalShare + "plugins");
       if (debugMode)
-            printf("Plugin Path <%s>\n", qPrintable(mscoreGlobalShare + "plugins"));
+            qDebug("Plugin Path <%s>\n", qPrintable(mscoreGlobalShare + "plugins"));
 
       if (filename.endsWith(".js")){
             QFileInfo fi(pluginDir, filename);
@@ -308,7 +308,7 @@ ScriptEngine::ScriptEngine()
 #if 0
       QStringList sl = availableExtensions();
       foreach(QString s, sl)
-            printf("available script extension: <%s>\n", qPrintable(s));
+            qDebug("available script extension: <%s>\n", qPrintable(s));
 #endif
       static const char* xts[] = {
             "qt.core", "qt.gui", "qt.xml", "qt.network", "qt.uitools"
@@ -317,7 +317,7 @@ ScriptEngine::ScriptEngine()
             importExtension(xts[i]);
             if (hasUncaughtException()) {
                   QScriptValue val = uncaughtException();
-                  printf("Error loading Script extension <%s>: %s\n",
+                  qDebug("Error loading Script extension <%s>: %s\n",
                      xts[i], qPrintable(val.toString()));
                   }
             }
@@ -363,28 +363,28 @@ void MuseScore::pluginExecuteFunction(int idx, const char* functionName)
       QFile f(pp);
       if (!f.open(QIODevice::ReadOnly)) {
             if (debugMode)
-                  printf("Loading Plugin <%s> failed\n", qPrintable(pp));
+                  qDebug("Loading Plugin <%s> failed\n", qPrintable(pp));
             return;
             }
       if (debugMode)
-            printf("Run Plugin <%s> : <%s>\n", qPrintable(pp), functionName);
+            qDebug("Run Plugin <%s> : <%s>\n", qPrintable(pp), functionName);
       if (se == 0) {
             se = new ScriptEngine();
             se->installTranslatorFunctions();
             if (debugMode) {
                   QStringList lp = qApp->libraryPaths();
                   foreach(const QString& s, lp)
-                        printf("lib path <%s>\n", qPrintable(s));
+                        qDebug("lib path <%s>\n", qPrintable(s));
 
                   QStringList sl = se->availableExtensions();
-                  printf("available:\n");
+                  qDebug("available:\n");
                   foreach(const QString& s, sl)
-                        printf("  <%s>\n", qPrintable(s));
+                        qDebug("  <%s>\n", qPrintable(s));
 
                   sl = se->importedExtensions();
-                  printf("imported:\n");
+                  qDebug("imported:\n");
                   foreach(const QString& s, sl)
-                        printf("  <%s>\n", qPrintable(s));
+                        qDebug("  <%s>\n", qPrintable(s));
                   }
             }
       if (scriptDebug) {
@@ -406,7 +406,7 @@ void MuseScore::pluginExecuteFunction(int idx, const char* functionName)
       QScriptValue run = val.property(functionName);
       if (!run.isFunction()) {
             if (debugMode)
-                printf("Execute plugin: no %s function found\n", functionName);
+                qDebug("Execute plugin: no %s function found\n", functionName);
             return;
             }
 

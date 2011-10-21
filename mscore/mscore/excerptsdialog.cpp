@@ -238,7 +238,7 @@ void ExcerptsDialog::createExcerptClicked()
             QListWidgetItem* item = excerptList->item(i);
             Excerpt* excerpt = static_cast<ExcerptItem*>(item)->excerpt();
             if (excerpt->score()) {
-printf("  already there %d %d\n", i, n);
+qDebug("  already there %d %d\n", i, n);
                   continue;
                   }
             createExcerptClicked(item);

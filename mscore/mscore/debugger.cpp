@@ -457,7 +457,7 @@ void Debugger::updateElement(Element* el)
       for (int i = 0;; ++i) {
             QTreeWidgetItem* item = list->topLevelItem(i);
             if (item == 0) {
-                  printf("Debugger::Element not found %s %p\n", el->name(), el);
+                  qDebug("Debugger::Element not found %s %p\n", el->name(), el);
                   break;
                   }
             ElementItem* ei = (ElementItem*)item;
@@ -1652,9 +1652,9 @@ void ShowElementBase::parentClicked()
 
 void ShowElementBase::linkClicked()
       {
-      printf("linkClicked\n");
+      qDebug("linkClicked\n");
       foreach(Element* e, *el->links()) {
-            printf("  element <%p> <%p>\n", e->score(), e);
+            qDebug("  element <%p> <%p>\n", e->score(), e);
             if (e != el) {
                   emit elementChanged(e);
                   break;

@@ -229,7 +229,7 @@ void Selection::updateSelectedElements()
       int staves = _score->nstaves();
       if (_staffStart < 0 || _staffStart >= staves || _staffEnd < 0 || _staffEnd > staves
          || _staffStart >= _staffEnd) {
-            printf("updateSelectedElements: bad staff selection %d - %d\n", _staffStart, _staffEnd);
+            qDebug("updateSelectedElements: bad staff selection %d - %d\n", _staffStart, _staffEnd);
             _staffStart = 0;
             _staffEnd   = 0;
             }
@@ -266,7 +266,7 @@ void Selection::updateSelectedElements()
                                     add(sp);
                               }
                         else {
-                              printf("1spanner element type %s\n", sp->endElement()->name());
+                              qDebug("1spanner element type %s\n", sp->endElement()->name());
                               }
                         }
                   }
@@ -285,7 +285,7 @@ void Selection::updateSelectedElements()
                                     add(sp);
                               }
                         else {
-                              printf("2spanner element type %s\n", sp->endElement()->name());
+                              qDebug("2spanner element type %s\n", sp->endElement()->name());
                               }
                         }
                   }
@@ -361,14 +361,14 @@ void Selection::update()
 
 void Selection::dump()
       {
-      printf("Selection dump: ");
+      qDebug("Selection dump: ");
       switch(_state) {
-            case SEL_NONE:   printf("NONE\n"); return;
-            case SEL_RANGE:  printf("RANGE\n"); break;
-            case SEL_LIST:   printf("LIST\n"); break;
+            case SEL_NONE:   qDebug("NONE\n"); return;
+            case SEL_RANGE:  qDebug("RANGE\n"); break;
+            case SEL_LIST:   qDebug("LIST\n"); break;
             }
       foreach(const Element* e, _el)
-            printf("  %p %s\n", e, e->name());
+            qDebug("  %p %s\n", e, e->name());
       }
 
 //---------------------------------------------------------

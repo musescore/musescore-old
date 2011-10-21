@@ -426,7 +426,7 @@ void FretDiagram::remove(Element* e)
 
 bool FretDiagram::acceptDrop(MuseScoreView*, const QPointF&, int t, int) const
       {
-printf("FretDiagram: accept drop %d\n", t);
+qDebug("FretDiagram: accept drop %d\n", t);
       return t == HARMONY;
       }
 

@@ -53,7 +53,7 @@ void Excerpt::read(QDomElement e)
             else if (tag == "part") {
                   int partIdx = e.text().toInt();
                   if (partIdx < 0 || partIdx >= pl->size())
-                        printf("Excerpt::read: bad part index\n");
+                        qDebug("Excerpt::read: bad part index\n");
                   else
                         _parts.append(pl->at(partIdx));
                   }
@@ -192,7 +192,7 @@ void SlurMap::check()
       foreach(const Slur2& s2, map) {
             Slur* slur = s2.n;
             if (slur->endElement() == 0) {
-                  printf("slur end element missing %p new %p\n", s2.o, s2.n);
+                  qDebug("slur end element missing %p new %p\n", s2.o, s2.n);
                   static_cast<ChordRest*>(slur->startElement())->removeSlurFor(slur);
                   delete slur;
                   }
@@ -266,7 +266,7 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                               nm->addSpannerBack(ns);
                               }
                         else {
-                              printf("cloneSpanner(measure): cannot find spanner\n");
+                              qDebug("cloneSpanner(measure): cannot find spanner\n");
                               }
                         }
 
@@ -298,7 +298,7 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                                           ns->addSpannerBack(nspanner);
                                           }
                                     else {
-                                          printf("cloneSpanner(seg): cannot find spanner\n");
+                                          qDebug("cloneSpanner(seg): cannot find spanner\n");
                                           }
                                     }
 
@@ -343,7 +343,7 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                                                 ncr->addSlurBack(slur);
                                                 }
                                           else {
-                                                printf("cloneStave: cannot find slur\n");
+                                                qDebug("cloneStave: cannot find slur\n");
                                                 }
                                           }
                                     foreach(Element* e, oseg->annotations()) {
@@ -377,7 +377,7 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                                                             tie->setEndNote(nn);
                                                             }
                                                       else {
-                                                            printf("cloneStave: cannot find tie\n");
+                                                            qDebug("cloneStave: cannot find tie\n");
                                                             }
                                                       }
                                                 }
@@ -473,7 +473,7 @@ void cloneStaff(Staff* srcStaff, Staff* dstStaff)
                                           ncr->addSlurBack(slur);
                                           }
                                     else {
-                                          printf("cloneStave: cannot find slur\n");
+                                          qDebug("cloneStave: cannot find slur\n");
                                           }
                                     }
                               foreach (Element* e, seg->annotations()) {
@@ -505,7 +505,7 @@ void cloneStaff(Staff* srcStaff, Staff* dstStaff)
                                                       tie->setEndNote(nn);
                                                       }
                                                 else {
-                                                      printf("cloneStave: cannot find tie\n");
+                                                      qDebug("cloneStave: cannot find tie\n");
                                                       }
                                                 }
                                           }

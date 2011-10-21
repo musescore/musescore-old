@@ -210,9 +210,9 @@ void HChord::print() const
 
       for (int i = 0; i < 12; i++) {
             if (contains(i))
-                  printf(" %s", names[i]);
+                  qDebug(" %s", names[i]);
             }
-      printf("\n");
+      qDebug("\n");
       }
 
 //---------------------------------------------------------
@@ -221,7 +221,7 @@ void HChord::print() const
 
 void HChord::add(const QList<HDegree>& degreeList)
       {
-// printf("HChord::add   ");print();
+// qDebug("HChord::add   ");print();
       // convert degrees to semitones
       static const int degreeTable[] = {
             // 1  2  3  4  5  6   7
@@ -247,7 +247,7 @@ void HChord::add(const QList<HDegree>& degreeList)
                         *this += dv;
                         }
                   else {
-//                        printf("ALTER: chord does not contain degree %d(%d):",
+//                        qDebug("ALTER: chord does not contain degree %d(%d):",
 //                           d.value(), d.alter());
 //                        print();
                         *this += dv;      // DEBUG: default to add
@@ -257,15 +257,15 @@ void HChord::add(const QList<HDegree>& degreeList)
                   if (contains(dv1))
                         *this -= dv1;
                   else {
-                        printf("SUB: chord does not contain degree %d(%d):",
+                        qDebug("SUB: chord does not contain degree %d(%d):",
                            d.value(), d.alter());
                         print();
                         }
                   }
             else
-                  printf("degree type %d not supported\n", d.type());
+                  qDebug("degree type %d not supported\n", d.type());
 
-// printf("  HCHord::added  "); print();
+// qDebug("  HCHord::added  "); print();
             }
       }
 
@@ -490,7 +490,7 @@ bool ChordList::read(const QString& name)
       if(!fi.exists())
             path = QString("%1styles/%2").arg(MScore::globalShare()).arg("stdchords.xml");
       if (debugMode)
-            printf("read chordlist from <%s>\n", qPrintable(path));
+            qDebug("read chordlist from <%s>\n", qPrintable(path));
       if (name.isEmpty())
             return false;
       QFile f(path);

@@ -52,12 +52,12 @@ void Glissando::layout()
             s = s->prev1();
             }
       if (s == 0) {
-            printf("no segment for first note of glissando found\n");
+            qDebug("no segment for first note of glissando found\n");
             return;
             }
       ChordRest* cr = static_cast<ChordRest*>(s->element(track()));
       if (cr == 0 || cr->type() != CHORD) {
-            printf("no first note for glissando found, track %d\n", track());
+            qDebug("no first note for glissando found, track %d\n", track());
             return;
             }
       Note* anchor1 = static_cast<Chord*>(cr)->upNote();

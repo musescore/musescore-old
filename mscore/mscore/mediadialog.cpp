@@ -78,7 +78,7 @@ void MediaDialog::addScanPressed()
             return;
       Omr* omr = new Omr(path, score);
       if (!omr->readPdf()) {
-            printf("read omr failed\n");
+            qDebug("read omr failed\n");
             delete omr;
             return;
             }

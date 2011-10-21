@@ -125,7 +125,7 @@ void KeySig::layout()
             case 1: accidentals = 0x1;  break;
             case 0: accidentals = 0;    break;
             default:
-                  printf("illegal t1 key %d (t2=%d)\n", t1, t2);
+                  qDebug("illegal t1 key %d (t2=%d)\n", t1, t2);
                   break;
             }
       switch(qAbs(t2)) {
@@ -138,7 +138,7 @@ void KeySig::layout()
             case 1: naturals = 0x1;  break;
             case 0: naturals = 0;    break;
             default:
-                  printf("illegal t2 key %d (t1=%d)\n", t2, t1);
+                  qDebug("illegal t2 key %d (t1=%d)\n", t2, t1);
                   break;
             }
 
@@ -175,7 +175,7 @@ void KeySig::layout()
             case 0:
                   break;
             default:
-                  printf("illegal t1 key %d (t2=%d)\n", t1, t2);
+                  qDebug("illegal t1 key %d (t2=%d)\n", t1, t2);
                   break;
             }
       foreach(KeySym* ks, keySymbols) {

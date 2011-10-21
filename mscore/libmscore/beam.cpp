@@ -313,26 +313,26 @@ void Beam::move(qreal x, qreal y)
 void Beam::writeMusicXml(Xml& xml, ChordRest* cr) const
       {
 /*
-      printf("Beam::writeMusicXml(cr=%p)\n", cr);
+      qDebug("Beam::writeMusicXml(cr=%p)\n", cr);
       // dump beam contents
       foreach(ChordRest* crst, _elements) {
             if (crst->type() == CHORD) {
                   Chord* c = static_cast<Chord*>(crst);
-                  printf(" chord %p tick=%d durtype=%d beams=%d\n", c, c->tick(), c->duration().type(), c->beams());
+                  qDebug(" chord %p tick=%d durtype=%d beams=%d\n", c, c->tick(), c->duration().type(), c->beams());
                   }
             else if (crst->type() == REST) {
                   Rest* r = static_cast<Rest*>(crst);
-                  printf(" rest %p tick=%d durtype=%d beams=%d\n", r, r->tick(), r->duration().type(), r->beams());
+                  qDebug(" rest %p tick=%d durtype=%d beams=%d\n", r, r->tick(), r->duration().type(), r->beams());
                   }
             else {
-                  printf(" type=%d %p tick=%d\n", crst->type(), crst, crst->tick());
+                  qDebug(" type=%d %p tick=%d\n", crst->type(), crst, crst->tick());
                   }
             }
       // end dump beam contents
 */
       int idx = _elements.indexOf(cr);
       if (idx == -1) {
-            printf("Beam::writeMusicXml(): cannot find ChordRest\n");
+            qDebug("Beam::writeMusicXml(): cannot find ChordRest\n");
             return;
             }
       int blp = -1; // beam level previous chord
@@ -353,7 +353,7 @@ void Beam::writeMusicXml(Xml& xml, ChordRest* cr) const
             if (crst->type() == CHORD)
                   bln = (static_cast<Chord*>(crst))->beams();
             }
-//      printf(" blp=%d blc=%d bln=%d\n", blp, blc, bln);
+//      qDebug(" blp=%d blc=%d bln=%d\n", blp, blc, bln);
       for (int i = 1; i <= blc; ++i) {
             QString s;
             if (blp < i && bln >= i) s = "begin";
@@ -471,7 +471,7 @@ void Beam::layout1()
 void Beam::layout()
       {
       if (_elements.isEmpty() || !c1 || !c2) {
-            printf("Beam::layout: no notes\n");
+            qDebug("Beam::layout: no notes\n");
             return;
             }
       setParent(_elements.front()->measure()->system());
@@ -853,7 +853,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                         if (isGrace)
                               minStemLen *= graceMag;
 
-// printf("Beam===%f\n", minStemLen);
+// qDebug("Beam===%f\n", minStemLen);
                         int beams = 0;
                         foreach(ChordRest* cr, crl) {
                               if (cr->type() != CHORD)
@@ -874,7 +874,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                                     stemLen = y2 - y1;
                                     }
 
-// printf("   min %f len %f max %f\n", min, stemLen, max);
+// qDebug("   min %f len %f max %f\n", min, stemLen, max);
                               if (stemLen < min) {
                                     min = stemLen;
                                     beams = chord->beams() -1;

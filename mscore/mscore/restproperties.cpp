@@ -41,7 +41,7 @@ RestProperties::RestProperties(Rest* r, QWidget* parent)
 
 void RestProperties::accept()
       {
-printf("rest accept %f %f\n", extraLeadingSpace->value(), extraTrailingSpace->value());
+qDebug("rest accept %f %f\n", extraLeadingSpace->value(), extraTrailingSpace->value());
       rest->setSmall(smallCheckBox->isChecked());
       rest->setExtraLeadingSpace(Spatium(extraLeadingSpace->value()));
       rest->setExtraTrailingSpace(Spatium(extraTrailingSpace->value()));

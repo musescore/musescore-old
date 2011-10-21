@@ -84,7 +84,7 @@ void TimeSig::setSubtype(int st)
                   customText = false;
                   break;
             default:
-                  printf("illegal TimeSig subtype 0x%x\n", st);
+                  qDebug("illegal TimeSig subtype 0x%x\n", st);
                   break;
             }
       Element::setSubtype(st);
@@ -134,7 +134,7 @@ void TimeSig::setText(const QString& a, const QString& b)
 void TimeSig::setActualSig(const Fraction& actual)
       {
       _stretch = (_nominal / actual).reduced();
-      printf("setActual %d/%d  stretch %d/%d\n",
+      qDebug("setActual %d/%d  stretch %d/%d\n",
         actual.numerator(), actual.denominator(),
         _stretch.numerator(), _stretch.denominator());
       }

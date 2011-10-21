@@ -150,7 +150,7 @@ void Bracket::read(QDomElement e)
       else if (t == "Akkolade")
             setSubtype(BRACKET_AKKOLADE);
       else
-            fprintf(stderr, "unknown brace type <%s>\n", t.toLatin1().data());
+            qDebug("unknown brace type <%s>\n", t.toLatin1().data());
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());

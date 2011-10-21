@@ -350,7 +350,7 @@ AccidentalType Accidental::value2subtype(int v)
             case -1: return ACC_FLAT;
             case -2: return ACC_FLAT2;
             default:
-                  printf("value2subtype: illegal accidental val %d\n", v);
+                  qDebug("value2subtype: illegal accidental val %d\n", v);
                   abort();
             }
       return ACC_NONE;

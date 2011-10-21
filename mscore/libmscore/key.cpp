@@ -66,7 +66,7 @@ void KeySigEvent::enforceLimits()
             msg = "naturalType > 7";
             }
       if (msg)
-            printf("KeySigEvent: %s\n", msg);
+            qDebug("KeySigEvent: %s\n", msg);
       }
 
 //---------------------------------------------------------
@@ -87,14 +87,14 @@ void KeySigEvent::setCustomType(int v)
 
 void KeySigEvent::print() const
       {
-      printf("<KeySigEvent: ");
+      qDebug("<KeySigEvent: ");
       if (_invalid)
-            printf("invalid>");
+            qDebug("invalid>");
       else {
             if (_custom)
-                  printf("nat %d custom %d>", _naturalType, _customType);
+                  qDebug("nat %d custom %d>", _naturalType, _customType);
             else
-                  printf("nat %d accidental %d>", _naturalType, _accidentalType);
+                  qDebug("nat %d accidental %d>", _naturalType, _accidentalType);
             }
       }
 
@@ -232,7 +232,7 @@ void KeyList::removeTime(int tick, int len)
                   if (i->first >= tick + len)
                         tmp[i->first - len] = i->second;
                   else
-                        printf("remove key event\n");
+                        qDebug("remove key event\n");
                   }
             else
                   tmp[i->first] = i->second;
@@ -284,21 +284,21 @@ int transposeKey(int key, int semitones)
             semitones += 12;
       semitones %= 12;
 
-printf("transposeKey key %d semitones %d\n", key, semitones);
+qDebug("transposeKey key %d semitones %d\n", key, semitones);
 
       // switch to enharmonic key:
       if (key == -7)
             key = 5;
       else if (key == 7)
             key = -5;
-//      printf("  transposeKey key %d semitones %d\n", key, semitones);
+//      qDebug("  transposeKey key %d semitones %d\n", key, semitones);
 
       key += 6;         // normalize key to 0 - 13
 
       int kpitch = kp[key];
       kpitch = (kpitch + semitones) % 12;
       key = kp1[kpitch] - 6;
-printf("  key %d\n", key);
+qDebug("  key %d\n", key);
       return key;
       }
 

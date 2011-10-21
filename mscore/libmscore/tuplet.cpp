@@ -71,7 +71,7 @@ void Tuplet::setSelected(bool f)
 void Tuplet::layout()
       {
       if (_elements.empty()) {
-            printf("Tuplet::layout(): tuplet is empty\n");
+            qDebug("Tuplet::layout(): tuplet is empty\n");
             return;
             }
       qreal _spatium = spatium();
@@ -97,7 +97,7 @@ void Tuplet::layout()
             }
 
       if (_elements.empty()) {
-            printf("layout: not tuplet members\n");
+            qDebug("layout: not tuplet members\n");
             return;
             }
 
@@ -532,7 +532,7 @@ void Tuplet::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Slur
                               }
                         }
                   if (tuplet() == 0)
-                        printf("Tuplet id %d not found\n", i);
+                        qDebug("Tuplet id %d not found\n", i);
                   }
             else if (!Element::readProperties(e))
                   domError(e);
@@ -543,8 +543,8 @@ void Tuplet::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Slur
             Duration d;
             d.setVal(bl);
             _baseLen = d;
-// printf("Tuplet base len %d/%d\n", d.fraction().numerator(), d.fraction().denominator());
-// printf("   %s  dots %d, %d/%d\n", qPrintable(d.name()), d.dots(), _ratio.numerator(), _ratio.denominator());
+// qDebug("Tuplet base len %d/%d\n", d.fraction().numerator(), d.fraction().denominator());
+// qDebug("   %s  dots %d, %d/%d\n", qPrintable(d.name()), d.dots(), _ratio.numerator(), _ratio.denominator());
             d.setVal(bl * _ratio.denominator());
             setDuration(d.fraction());
             }
@@ -558,7 +558,7 @@ void Tuplet::add(Element* e)
       {
 /*      foreach(DurationElement* el, _elements) {
             if (el == e)
-                  printf("Tuplet::add: %p %s already there\n", e, e->name());
+                  qDebug("Tuplet::add: %p %s already there\n", e, e->name());
             }
 */
       switch(e->type()) {
@@ -586,7 +586,7 @@ void Tuplet::add(Element* e)
                   setTick(_elements.front()->tick());
                   break;
             default:
-                  printf("Tuplet::add() unknown element\n");
+                  qDebug("Tuplet::add() unknown element\n");
                   break;
             }
       }
@@ -606,12 +606,12 @@ void Tuplet::remove(Element* e)
             case REST:
             case TUPLET:
                   if (!_elements.removeOne(static_cast<DurationElement*>(e))) {
-                        printf("Tuplet::remove: cannot find element\n");
-                        printf("  elements %d\n", _elements.size());
+                        qDebug("Tuplet::remove: cannot find element\n");
+                        qDebug("  elements %d\n", _elements.size());
                         }
                   break;
             default:
-                  printf("Tuplet::remove: unknown element\n");
+                  qDebug("Tuplet::remove: unknown element\n");
                   break;
             }
       }
@@ -672,7 +672,7 @@ void Tuplet::toDefault()
 void Tuplet::dump() const
       {
       Element::dump();
-      printf("ratio %s\n", qPrintable(_ratio.print()));
+      qDebug("ratio %s\n", qPrintable(_ratio.print()));
       }
 
 //---------------------------------------------------------

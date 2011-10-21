@@ -636,7 +636,7 @@ void MuseScore::editInstrList()
                         cs->undoInsertStaff(staff, staffIdx + rstaff);
                         if (sli->linked()) {
                               // TODO: link staff
-                              printf("TODO: link staff\n");
+                              qDebug("TODO: link staff\n");
                               }
 
                         ++rstaff;
@@ -731,7 +731,7 @@ void MuseScore::editInstrList()
       foreach(Staff* staff, dst) {
             int idx = cs->staves().indexOf(staff);
             if (idx == -1)
-                  printf("staff in dialog(%p) not found in score\n", staff);
+                  qDebug("staff in dialog(%p) not found in score\n", staff);
             else
                   dl.push_back(idx);
             }

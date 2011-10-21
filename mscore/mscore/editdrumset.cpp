@@ -188,7 +188,7 @@ void EditDrumset::bboxClicked(QAbstractButton* button)
                   break;
 
             default:
-                  printf("EditDrumSet: unknown button\n");
+                  qDebug("EditDrumSet: unknown button\n");
                   break;
             }
       }
@@ -331,7 +331,7 @@ void EditDrumset::load()
       int line, column;
       QString err;
       if (!doc.setContent(&fp, false, &err, &line, &column)) {
-            printf("error reading file %s at line %d column %d: %s\n",
+            qDebug("error reading file %s at line %d column %d: %s\n",
                qPrintable(name), line, column, qPrintable(err));
             return;
             }

@@ -33,7 +33,7 @@ Volta* Score::searchVolta(int tick) const
                   Volta* volta = static_cast<Volta*>(e);
                   int tick1 = volta->startMeasure()->tick();
                   int tick2 = volta->endMeasure()->endTick();
-// printf("spanner %s %d - %d %d\n", e->name(), tick, tick1, tick2);
+// qDebug("spanner %s %d - %d %d\n", e->name(), tick, tick1, tick2);
                   if (tick >= tick1 && tick < tick2)
                         return static_cast<Volta*>(e);
                   }
@@ -47,13 +47,13 @@ Volta* Score::searchVolta(int tick) const
 
 Measure* Score::searchLabel(const QString& s)
       {
-// printf("searchLabel<%s>\n", qPrintable(s));
+// qDebug("searchLabel<%s>\n", qPrintable(s));
       if (s == "start") {
-// printf("   found %p\n", firstMeasure());
+// qDebug("   found %p\n", firstMeasure());
             return firstMeasure();
             }
       else if (s == "end") {
-// printf("   found %p\n", firstMeasure());
+// qDebug("   found %p\n", firstMeasure());
             return lastMeasure();
             }
       for (Segment* segment = firstMeasure()->first(); segment; segment = segment->next1()) {
@@ -61,13 +61,13 @@ Measure* Score::searchLabel(const QString& s)
                   if (e->type() == MARKER) {
                         const Marker* marker = static_cast<const Marker*>(e);
                         if (marker->label() == s) {
-// printf("   found %p\n", segment->measure());
+// qDebug("   found %p\n", segment->measure());
                               return segment->measure();
                               }
                         }
                   }
             }
-// printf("   found %p\n", 0);
+// qDebug("   found %p\n", 0);
       return 0;
       }
 
@@ -157,7 +157,7 @@ int RepeatList::utick2tick(int tick) const
                   }
             }
       if (debugMode) {
-            printf("utick %d not found in RepeatList\n", tick);
+            qDebug("utick %d not found in RepeatList\n", tick);
             abort();
             }
       return 0;
@@ -209,7 +209,7 @@ int RepeatList::utime2utick(qreal t) const
                   }
             }
       if (debugMode) {
-            printf("time %f not found in RepeatList\n", t);
+            qDebug("time %f not found in RepeatList\n", t);
             abort();
             }
       return 0;
@@ -222,9 +222,9 @@ int RepeatList::utime2utick(qreal t) const
 void RepeatList::dump() const
       {
 return;
-      printf("==Dump Repeat List:==\n");
+      qDebug("==Dump Repeat List:==\n");
       foreach(const RepeatSegment* s, *this) {
-            printf("%p  tick: %3d(%d) %3d(%d) len %d(%d) beats  %f + %f\n", s,
+            qDebug("%p  tick: %3d(%d) %3d(%d) len %d(%d) beats  %f + %f\n", s,
                s->utick / 480,
                s->utick / 480 / 4,
                s->tick / 480,
@@ -253,7 +253,7 @@ void RepeatList::unwind()
       if (!fm)
             return;
 
-//printf("unwind===================\n");
+//qDebug("unwind===================\n");
 
       rs                  = new RepeatSegment;
       rs->tick            = 0;
@@ -270,7 +270,7 @@ void RepeatList::unwind()
             m->setPlaybackCount(m->playbackCount() + 1);
             int flags = m->repeatFlags();
 
-// printf("repeat m%d(%d) lc%d loop %d repeatCount %d isGoto %d endRepeat %p\n",
+// qDebug("repeat m%d(%d) lc%d loop %d repeatCount %d isGoto %d endRepeat %p\n",
 //               m->no(), m->tick(), m->playbackCount(), loop, repeatCount, isGoto, endRepeat);
 
             if (endRepeat) {
@@ -315,13 +315,13 @@ void RepeatList::unwind()
                                     }
                               }
                         else
-                              printf("Jump not found\n");
+                              qDebug("Jump not found\n");
                         }
                   }
 
             if (isGoto && (endRepeat == m)) {
                   if (continueAt == 0) {
-// printf("  isGoto && endReapeat == %p, continueAt == 0\n", m);
+// qDebug("  isGoto && endReapeat == %p, continueAt == 0\n", m);
                         rs->len = m->tick() + m->ticks() - rs->tick;
                         if (rs->len)
                               append(rs);
