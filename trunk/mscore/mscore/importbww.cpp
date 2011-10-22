@@ -26,6 +26,7 @@
 #include "libmscore/barline.h"
 #include "libmscore/box.h"
 #include "libmscore/chord.h"
+#include "libmscore/clef.h"
 #include "libmscore/keysig.h"
 #include "libmscore/layoutbreak.h"
 #include "libmscore/measure.h"
@@ -236,15 +237,21 @@ namespace Bww {
             lastVolta = volta;
             }
 
-      // set key and time signature in the first measure
+      // set clef, key and time signature in the first measure
       if (measureNumber == 1) {
+            // clef
+            Clef* clef = new Clef(score);
+            clef->setClefType(CLEF_G);
+            clef->setTrack(0);
+            Segment* s = currentMeasure->getSegment(clef, tick);
+            s->add(clef);
             // keysig
             KeySigEvent key;
             key.setAccidentalType(2);
             KeySig* keysig = new KeySig(score);
             keysig->setKeySigEvent(key);
             keysig->setTrack(0);
-            Segment* s = currentMeasure->getSegment(keysig, tick);
+            s = currentMeasure->getSegment(keysig, tick);
             s->add(keysig);
             // timesig
             TimeSig* timesig = new TimeSig(score);
@@ -400,6 +407,10 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
 
       // save tempo for later use
       tempo = temp;
+
+      if (!title.isEmpty()) score->setMetaTag("workTitle", title);
+      if (!type.isEmpty()) score->setMetaTag("workNumber", type);
+      if (!footer.isEmpty()) score->setMetaTag("Copyright", footer);
 
 //  score->setWorkTitle(title);
       VBox* vbox  = 0;
