@@ -48,6 +48,7 @@
 #include "ui_clef.h"
 #include "ui_articulationbase.h"
 #include "ui_keysig.h"
+#include "ui_rest.h"
 
 #include "globals.h"
 #include "libmscore/mscore.h"
@@ -260,22 +261,21 @@ class ShowNoteWidget : public ShowElementBase {
       };
 
 //---------------------------------------------------------
-//   ShowRestWidget
+//   RestView
 //---------------------------------------------------------
 
-class ShowRestWidget : public ShowElementBase {
+class RestView : public ShowElementBase {
       Q_OBJECT;
 
       Ui::ChordRestBase crb;
-
-      QSpinBox* segment;
+      Ui::Rest rb;
 
    private slots:
       void tupletClicked();
       void beamClicked();
 
    public:
-      ShowRestWidget();
+      RestView();
       virtual void setElement(Element*);
       };
 

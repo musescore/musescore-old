@@ -2208,12 +2208,7 @@ int main(int argc, char* av[])
 
       synti = new MasterSynth();
       seq   = new Seq();
-      if (!noSeq) {
-            if (!seq->init()) {
-                  qDebug("sequencer init failed\n");
-                  noSeq = true;
-                  }
-            }
+
       //
       // avoid font problems by overriding the environment
       //    fall back to "C" locale
@@ -2242,6 +2237,13 @@ int main(int argc, char* av[])
       initProfile();
       mscore = new MuseScore();
       gscore = new Score(MScore::defaultStyle());
+
+      if (!noSeq) {
+            if (!seq->init()) {
+                  printf("sequencer init failed\n");
+                  noSeq = true;
+                  }
+            }
 
       //read languages list
       mscore->readLanguages(mscoreGlobalShare + "locale/languages.xml");

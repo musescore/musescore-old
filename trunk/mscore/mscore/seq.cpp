@@ -188,14 +188,18 @@ bool Seq::init()
 
       bool useJackFlag      = preferences.useJackAudio || preferences.useJackMidi;
       bool useAlsaFlag      = preferences.useAlsaAudio;
+#ifdef USE_PORTAUDIO
       bool usePortaudioFlag = preferences.usePortaudioAudio;
+#endif
 
 #ifdef USE_JACK
       if (debugMode)
             qDebug("useJackFlag %d\n", useJackFlag);
       if (useJackFlag) {
             useAlsaFlag      = false;
+#ifdef USE_PORTAUDIO
             usePortaudioFlag = false;
+#endif
             driver = new JackAudio(this);
             if (!driver->init()) {
                   qDebug("no JACK server found\n");
@@ -346,8 +350,10 @@ void Seq::stop()
 
 void MuseScore::seqStarted()
       {
-      cv->setCursorOn(true);
-      cs->end();
+      if(cv)
+            cv->setCursorOn(true);
+      if(cs)
+            cs->end();
       }
 
 //---------------------------------------------------------
@@ -475,7 +481,7 @@ void Seq::playEvent(const Event& event)
             else
                   mute = false;
 
-            if (event.velo() && !mute)
+            if (!mute)
                   putEvent(event);
             }
       else if (type == ME_CONTROLLER)
@@ -588,13 +594,15 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
                         qDebug("%d:  %d - %d\n", playPos.key(), f, playTime);
 				n = 0;
                         }
-                  metronome(n, l, r);
-                  synti->process(n, l, r);
-                  l += n;
-                  r += n;
-                  playTime  += n;
-                  frames    -= n;
-                  framePos  += n;
+                  if (n) {
+                        metronome(n, l, r);
+                        synti->process(n, l, r);
+                        l += n;
+                        r += n;
+                        playTime  += n;
+                        frames    -= n;
+                        framePos  += n;
+                        }
                   const Event& event = playPos.value();
                   playEvent(event);
                   if (event.type() == ME_TICK1)
@@ -618,7 +626,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
       //
       // metering
       //
-      int k = 0;
+      int k    = 0;
       float lv = 0.0f;
       float rv = 0.0f;
       for (unsigned i = 0; i < n; ++i) {
@@ -1094,6 +1102,7 @@ void Seq::putEvent(const Event& event)
             return;
       int channel = event.channel();
       int syntiIdx= cs->midiMapping(channel)->articulation->synti;
+//      event.dump();
       synti->play(event, syntiIdx);
       }
 

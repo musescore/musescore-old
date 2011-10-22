@@ -1,3 +1,5 @@
+22.oct (ws)
+      - fix #13198: Crash on startup (patch from mokaspar)
 19.oct (lv)
       - sync bww importer from 0.9.6 branch
        (la)

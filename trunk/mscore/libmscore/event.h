@@ -142,6 +142,7 @@ class Event {
 
 //      void write(MidiFile*) const;
       void write(Xml&) const;
+      void dump() const;
 
       bool isChannelEvent() const;
 
