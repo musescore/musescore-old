@@ -2,10 +2,11 @@
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 2.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise>
   <work>
-    <work-title>Test Tempo 120</work-title>
+    <work-title>Mid-measure repeat</work-title>
     </work>
   <identification>
     <creator type="composer">Leon Vinken</creator>
+    <rights>Part of bbw2mxml</rights>
     <encoding>
       <software>MuseScore 0.7.0</software>
       <encoding-date>2007-09-10</encoding-date>
@@ -24,7 +25,11 @@
       </score-part>
     </part-list>
   <part id="P1">
-    <measure number="1">
+    <measure number="0" implicit="yes">
+      <barline location="left">
+        <bar-style>heavy-light</bar-style>
+        <repeat direction="forward"/>
+        </barline>
       <attributes>
         <divisions>1</divisions>
         <key>
@@ -32,7 +37,7 @@
           <mode>major</mode>
           </key>
         <time>
-          <beats>4</beats>
+          <beats>3</beats>
           <beat-type>4</beat-type>
           </time>
         <clef>
@@ -44,10 +49,10 @@
         <direction-type>
           <metronome parentheses="no">
             <beat-unit>quarter</beat-unit>
-            <per-minute>120</per-minute>
+            <per-minute>90</per-minute>
             </metronome>
           </direction-type>
-        <sound tempo="120"/>
+        <sound tempo="90"/>
         </direction>
       <note>
         <pitch>
@@ -59,49 +64,65 @@
         <type>quarter</type>
         <stem>down</stem>
         </note>
+      </measure>
+    <measure number="1">
       <note>
         <pitch>
           <step>A</step>
           <octave>4</octave>
           </pitch>
-        <duration>1</duration>
+        <duration>3</duration>
         <voice>1</voice>
-        <type>quarter</type>
-        <stem>down</stem>
-        </note>
-      <note>
-        <pitch>
-          <step>B</step>
-          <octave>4</octave>
-          </pitch>
-        <duration>1</duration>
-        <voice>1</voice>
-        <type>quarter</type>
-        <stem>down</stem>
-        </note>
-      <note>
-        <pitch>
-          <step>C</step>
-          <alter>1</alter>
-          <octave>5</octave>
-          </pitch>
-        <duration>1</duration>
-        <voice>1</voice>
-        <type>quarter</type>
+        <type>half</type>
+        <dot/>
         <stem>down</stem>
         </note>
       </measure>
     <measure number="2">
       <note>
         <pitch>
+          <step>B</step>
+          <octave>4</octave>
+          </pitch>
+        <duration>3</duration>
+        <voice>1</voice>
+        <type>half</type>
+        <dot/>
+        <stem>down</stem>
+        </note>
+      </measure>
+    <measure number="3">
+      <note>
+        <pitch>
+          <step>C</step>
+          <alter>1</alter>
+          <octave>5</octave>
+          </pitch>
+        <duration>3</duration>
+        <voice>1</voice>
+        <type>half</type>
+        <dot/>
+        <stem>down</stem>
+        </note>
+      </measure>
+    <measure number="4">
+      <print new-system="yes"/>
+      <note>
+        <pitch>
           <step>D</step>
           <octave>5</octave>
           </pitch>
-        <duration>1</duration>
+        <duration>2</duration>
         <voice>1</voice>
-        <type>quarter</type>
+        <type>half</type>
         <stem>down</stem>
         </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+        <repeat direction="backward"/>
+        </barline>
+      </measure>
+    <measure number="X1" implicit="yes">
       <note>
         <pitch>
           <step>E</step>
@@ -112,25 +133,44 @@
         <type>quarter</type>
         <stem>down</stem>
         </note>
+      </measure>
+    <measure number="5">
       <note>
         <pitch>
           <step>F</step>
           <alter>1</alter>
           <octave>5</octave>
           </pitch>
-        <duration>1</duration>
+        <duration>3</duration>
         <voice>1</voice>
-        <type>quarter</type>
+        <type>half</type>
+        <dot/>
         <stem>down</stem>
         </note>
+      </measure>
+    <measure number="6">
       <note>
         <pitch>
           <step>G</step>
           <octave>5</octave>
           </pitch>
-        <duration>1</duration>
+        <duration>3</duration>
         <voice>1</voice>
-        <type>quarter</type>
+        <type>half</type>
+        <dot/>
+        <stem>down</stem>
+        </note>
+      </measure>
+    <measure number="7">
+      <print new-system="yes"/>
+      <note>
+        <pitch>
+          <step>A</step>
+          <octave>5</octave>
+          </pitch>
+        <duration>2</duration>
+        <voice>1</voice>
+        <type>half</type>
         <stem>down</stem>
         </note>
       <barline location="right">

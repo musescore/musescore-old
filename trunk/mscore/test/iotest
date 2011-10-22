@@ -80,6 +80,7 @@ rwtestXmlRef() {
 
 rwtestAllBww() {
       rwtestBww testBeams.bww
+      rwtestBww testDoublings.bww
       rwtestBww testDuration.bww
       rwtestBww testGraces.bww
       rwtestBww testHello.bww
