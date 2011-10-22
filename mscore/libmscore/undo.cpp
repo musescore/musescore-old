@@ -2187,9 +2187,9 @@ void ChangeUserMirror::flip()
 
 ChangePageFormat::ChangePageFormat(Score* cs, PageFormat* p, qreal s, int po)
       {
-      score   = cs;
-      pf      = new PageFormat(*p);
-      spatium = s;
+      score      = cs;
+      pf         = new PageFormat(*p);
+      spatium    = s;
       pageOffset = po;
       }
 
@@ -2209,8 +2209,11 @@ void ChangePageFormat::flip()
       int po       = score->pageNumberOffset();
 
       score->setPageFormat(*pf);
-      score->setSpatium(spatium);
-      score->spatiumChanged(os, spatium);
+      if (os != spatium) {
+            score->setSpatium(spatium);
+            score->spatiumChanged(os, spatium);
+printf("ChangePageFormat::flip(): spatium %f -> %f\n", os, spatium);
+            }
       score->setPageNumberOffset(pageOffset);
       score->setLayoutAll(true);
 

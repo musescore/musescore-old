@@ -646,7 +646,6 @@ bool Score::loadCompressedMsc(QString name)
       dbuf.open(QIODevice::WriteOnly);
       uz.extractFile(rootfile, &dbuf);
 
-qDebug("after file loading=====\n");
       QDomDocument doc;
       if (!doc.setContent(dbuf.data(), false, &err, &line, &column)) {
             QString col, ln;
@@ -656,7 +655,6 @@ qDebug("after file loading=====\n");
             qDebug("error: %s\n", qPrintable(error));
             return false;
             }
-qDebug("after xml parsing=====\n");
       dbuf.close();
       docName = info.completeBaseName();
       bool retval = read1(doc.documentElement());

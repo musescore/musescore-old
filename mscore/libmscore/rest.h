@@ -28,11 +28,10 @@ class Duration;
 class Rest : public ChordRest {
       Q_DECLARE_TR_FUNCTIONS(Rest)
 
+      // values calculated by layout:
       int _sym;
-
       int dotline;            // depends on rest symbol
-      qreal _mmWidth;        // width of multi measure rest
-      qreal _yoffset;        // in spatium units
+      qreal _mmWidth;         // width of multi measure rest
 
       virtual QRectF drag(const QPointF& s);
       virtual qreal upPos()   const;
@@ -59,8 +58,8 @@ class Rest : public ChordRest {
       qreal mmWidth() const        { return _mmWidth; }
       static int getSymbol(Duration::DurationType type, int line, int lines,  int* yoffset);
 
-      void setYoff(qreal d) { _yoffset = d;        }
-      qreal yoff() const    { return _yoffset;     }
+      int getDotline() const { return dotline; }
+      int sym() const        { return _sym;    }
       };
 
 #endif

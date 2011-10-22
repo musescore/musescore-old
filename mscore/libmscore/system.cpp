@@ -662,7 +662,7 @@ void System::remove(Element* el)
 //            ((SpannerSegment*)el)->spanner(), ((SpannerSegment*)el)->spanner()->name());
 
                   if (!_spannerSegments.removeOne(static_cast<SpannerSegment*>(el))) {
-                        qDebug("System::remove: %p(%s) not found, score %p == %p\n", el, el->name(), score(), el->score());
+//                        qDebug("System::remove: %p(%s) not found, score %p == %p\n", el, el->name(), score(), el->score());
                         Q_ASSERT(score() == el->score());
                         }
                   break;

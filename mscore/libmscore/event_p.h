@@ -82,6 +82,7 @@ class EventData : public QSharedData {
       qreal tuning() const          { return  _tuning;              }
       void setTuning(qreal v)       {  _tuning = v;                 }
       bool operator==(const EventData& e) const;
+      void dump() const;
 
    public:
       EventData();

@@ -92,6 +92,20 @@ EventData::~EventData()
       }
 
 //---------------------------------------------------------
+//   dump
+//---------------------------------------------------------
+
+void EventData::dump() const
+      {
+      printf("event ");
+      switch (_type) {
+            case ME_NOTEON: printf("noteon"); break;
+            default:        printf("0x%02x", _type); break;
+            }
+      printf(" 0x%02x 0x%02x\n", _a, _b);
+      }
+
+//---------------------------------------------------------
 //   isChannelEvent
 //---------------------------------------------------------
 
@@ -302,6 +316,7 @@ void Event::setNote(const Note* v)    { d->_note = v;                   }
 qreal Event::tuning() const          { return d->_tuning;              }
 void Event::setTuning(qreal v)       { d->_tuning = v;                 }
 bool Event::operator==(const Event& e) const { return d->operator==(*e.d);   }
+void Event::dump() const             { d->dump(); }
 
 //---------------------------------------------------------
 //    midi_meta_name

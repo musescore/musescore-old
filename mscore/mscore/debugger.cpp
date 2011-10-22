@@ -482,7 +482,7 @@ void Debugger::updateElement(Element* el)
                   case MEASURE:       ew = new MeasureView;       break;
                   case CHORD:         ew = new ShowChordWidget;   break;
                   case NOTE:          ew = new ShowNoteWidget;    break;
-                  case REST:          ew = new ShowRestWidget;    break;
+                  case REST:          ew = new RestView;          break;
                   case CLEF:          ew = new ClefView;          break;
                   case TIMESIG:       ew = new ShowTimesigWidget; break;
                   case KEYSIG:        ew = new KeySigView;        break;
@@ -1112,10 +1112,10 @@ void ShowNoteWidget::bendClicked()
       }
 
 //---------------------------------------------------------
-//   ShowRestWidget
+//   RestView
 //---------------------------------------------------------
 
-ShowRestWidget::ShowRestWidget()
+RestView::RestView()
    : ShowElementBase()
       {
       // chort rest
@@ -1129,6 +1129,10 @@ ShowRestWidget::ShowRestWidget()
       crb.beamMode->addItem(tr("no beam"));
       crb.beamMode->addItem(tr("begin 1/32"));
 
+      QWidget* rw = new QWidget;
+      rb.setupUi(rw);
+      layout->addWidget(rw);
+
       connect(crb.beamButton, SIGNAL(clicked()), SLOT(beamClicked()));
       connect(crb.tupletButton, SIGNAL(clicked()), SLOT(tupletClicked()));
       connect(crb.attributes, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
@@ -1136,18 +1140,6 @@ ShowRestWidget::ShowRestWidget()
       connect(crb.slurBack, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
       connect(crb.lyrics, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
 
-      QFrame* line = new QFrame(this);
-      line->setFrameStyle(QFrame::HLine | QFrame::Raised);
-      line->setLineWidth(1);
-      layout->addWidget(line);
-
-      QHBoxLayout* hb = new QHBoxLayout;
-      segment = new QSpinBox(this);
-      hb->addWidget(new QLabel(tr("Segment:"), this));
-      hb->addWidget(segment);
-      hb->addStretch(100);
-
-      layout->addLayout(hb);
       layout->addStretch(100);
       }
 
@@ -1155,7 +1147,7 @@ ShowRestWidget::ShowRestWidget()
 //   setElement
 //---------------------------------------------------------
 
-void ShowRestWidget::setElement(Element* e)
+void RestView::setElement(Element* e)
       {
       Rest* rest = (Rest*)e;
       ShowElementBase::setElement(e);
@@ -1218,14 +1210,16 @@ void ShowRestWidget::setElement(Element* e)
             if (track < tracks)
                   break;
             }
-      segment->setValue(seg);
+      rb.sym->setValue(rest->sym());
+      rb.dotline->setValue(rest->getDotline());
+      rb.mmWidth->setValue(rest->mmWidth());
       }
 
 //---------------------------------------------------------
 //   beamClicked
 //---------------------------------------------------------
 
-void ShowRestWidget::beamClicked()
+void RestView::beamClicked()
       {
       emit elementChanged(static_cast<Rest*>(element())->beam());
       }
@@ -1234,7 +1228,7 @@ void ShowRestWidget::beamClicked()
 //   tupletClicked
 //---------------------------------------------------------
 
-void ShowRestWidget::tupletClicked()
+void RestView::tupletClicked()
       {
       emit elementChanged(static_cast<Rest*>(element())->tuplet());
       }

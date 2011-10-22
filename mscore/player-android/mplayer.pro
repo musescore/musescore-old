@@ -8,7 +8,7 @@ QML_IMPORT_PATH =
 
 # symbian:TARGET.UID3 = 0xEE36C57B
 
-# Smart Installer package's UID   xxx
+# Smart Installer package's UID
 # This UID is from the protected range and therefore the package will
 # fail to install if self-signed. By default qmake uses the unprotected
 # range value if unprotected UID is defined for the application and

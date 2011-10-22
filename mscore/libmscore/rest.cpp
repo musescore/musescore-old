@@ -398,9 +398,8 @@ void Rest::layout()
 
       int yo;
       _sym = getSymbol(durationType().type(), line + lineOffset/2, lines, &yo);
-      setYoff(qreal(yo) + qreal(lineOffset) * .5);
       layoutArticulations();
-      setPos(0.0, yoff() * _spatium);
+      setPos(0.0, (qreal(yo) + qreal(lineOffset) * .5) * _spatium);
 
       Spatium rs;
       if (dots()) {
@@ -423,7 +422,6 @@ void Rest::layout()
             }
       _space.setLw(point(_extraLeadingSpace));
       _space.setRw(width() + point(_extraTrailingSpace + rs));
-//      adjustReadPos();
       }
 
 //---------------------------------------------------------
