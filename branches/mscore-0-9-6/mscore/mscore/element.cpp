@@ -785,15 +785,16 @@ double StaffLines::y2() const
             return 0.0;
 
       double _spatium = spatium();
-      double y = system->staff(staffIdx())->y();
+      double y = system->staff(staffIdx())->y() + _pos.y();
       switch(lines()) {
             case 1:
-                  return y + _pos.y() + 3 * _spatium;
+                  return y  + 3 * _spatium;
             case 2:
-                  return y + _pos.y() + 3 * _spatium;
+                  return y  + 3 * _spatium;
             case 3:
+                  return y  + 4 * _spatium;
             default:
-                  return y + _pos.y() + 4 * _spatium;
+                  return y  + (lines() - 1) * _spatium;
             }
       }
 
