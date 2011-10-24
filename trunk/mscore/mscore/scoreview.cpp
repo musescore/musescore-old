@@ -1697,13 +1697,7 @@ void ScoreView::paintEvent(QPaintEvent* ev)
       p.setRenderHint(QPainter::TextAntialiasing, true);
       PainterQt vp(&p, this);
 
-#if 0
-      // for whatever reason this does not work
-      foreach(const QRect& r, ev->region().rects())
-            paint(r.adjusted(-2, -2, 2, 2), p); // adjust for antialiased drawing
-#else
       paint(ev->rect(), p);
-#endif
 
       p.setTransform(_matrix);
       p.setClipping(false);
@@ -2841,11 +2835,11 @@ static void drawDebugInfo(QPainter& p, const Element* e)
       //
       p.setBrush(Qt::NoBrush);
 
-      // p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
-      // p.drawPath(e->shape());
+      p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
+      p.drawPath(e->shape());
 
-      p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
-      p.drawRect(e->bbox());
+      // p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
+      // p.drawRect(e->bbox());
 
       p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
       qreal w = 5.0 / p.matrix().m11();

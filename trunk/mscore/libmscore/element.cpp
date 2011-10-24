@@ -504,8 +504,12 @@ QPointF Element::pagePos() const
 
       if (_flags & ELEMENT_ON_STAFF) {
             System* system = static_cast<Segment*>(parent())->measure()->system();
-            if (system)
-                  p.ry() += system->staff(staffIdx())->y() + system->y();
+            if (system) {
+                  int si = staffIdx();
+                  if (type() == CHORD || type() == REST)
+                        si += static_cast<const ChordRest*>(this)->staffMove();
+                  p.ry() += system->staff(si)->y() + system->y();
+                  }
             p.rx() = pageX();
             }
       else {
@@ -527,7 +531,10 @@ QPointF Element::canvasPos() const
       if (_flags & ELEMENT_ON_STAFF) {
             System* system = static_cast<Segment*>(parent())->measure()->system();
             if (system) {
-                  p.ry() += system->staff(staffIdx())->y() + system->y();
+                  int si = staffIdx();
+                  if (type() == CHORD || type() == REST)
+                        si += static_cast<const ChordRest*>(this)->staffMove();
+                  p.ry() += system->staff(si)->y() + system->y();
                   Page* page = system->page();
                   if (page)
                         p.ry() += page->y();

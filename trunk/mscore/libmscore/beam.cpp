@@ -528,13 +528,13 @@ QPainterPath Beam::shape() const
       QPainterPath pp;
       qreal lw2 = point(score()->styleS(ST_beamWidth)) * .5 * mag();
       foreach(const QLineF* bs, beamSegments) {
-            QPolygonF a(4);
+            QPolygonF a(5);
             a[0] = QPointF(bs->x1(), bs->y1()-lw2);
             a[1] = QPointF(bs->x2(), bs->y2()-lw2);
             a[2] = QPointF(bs->x2(), bs->y2()+lw2);
             a[3] = QPointF(bs->x1(), bs->y1()+lw2);
-            pp.addRect(a.boundingRect());
-            pp.closeSubpath();
+            a[4] = QPointF(bs->x1(), bs->y1()-lw2);
+            pp.addPolygon(a);
             }
       return pp;
       }
@@ -1214,6 +1214,7 @@ void Beam::read(QDomElement e)
                   int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
                   _userModified[idx] = true;
                   f->p1[idx] = QPointF(0.0, val.toDouble());
+                  // TODO: value is wrong
                   }
             else if (tag == "y2") {
                   if (fragments.isEmpty())
@@ -1222,6 +1223,7 @@ void Beam::read(QDomElement e)
                   int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
                   _userModified[idx] = true;
                   f->p2[idx] = QPointF(0.0, val.toDouble());
+                  // TODO: value is wrong
                   }
             else if (tag == "Fragment") {
                   BeamFragment* f = new BeamFragment;
