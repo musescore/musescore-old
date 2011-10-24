@@ -1664,6 +1664,7 @@ void ScoreView::setShadowNote(const QPointF& p)
       else
             s = noteHeadSym(true, noteheadGroup, noteHead);
       shadowNote->setSym(s);
+      shadowNote->layout();
       shadowNote->setPos(pos.pos);
       }
 
