@@ -81,7 +81,7 @@
 void Score::startCmd()
       {
       if (debugMode)
-            qDebug("===startCmd()\n");
+            qDebug("===startCmd()");
       _layoutAll = true;      ///< do a complete relayout
       _playNote = false;
 
@@ -90,7 +90,7 @@ void Score::startCmd()
 
       if (undo()->active()) {
             // if (debugMode)
-            qDebug("Score::startCmd(): cmd already active\n");
+            qDebug("Score::startCmd(): cmd already active");
             abort();
             return;
             }
@@ -108,7 +108,7 @@ void Score::endCmd()
       {
       if (!undo()->active()) {
             // if (debugMode)
-                  qDebug("Score::endCmd(): no cmd active\n");
+                  qDebug("Score::endCmd(): no cmd active");
             end();
             return;
             }
@@ -122,7 +122,7 @@ void Score::endCmd()
             setDirty(!noUndo);
       undo()->endMacro(noUndo);
       if (debugMode)
-            qDebug("===endCmd\n");
+            qDebug("===endCmd");
       }
 
 //---------------------------------------------------------
@@ -133,7 +133,7 @@ void Score::endCmd()
 void Score::end()
       {
       if (debugMode)
-            qDebug("===end\n");
+            qDebug("===end");
       Score* score = parentScore() ? parentScore() : this;
       score->end1();
       foreach(Excerpt* e, score->_excerpts)
@@ -206,7 +206,7 @@ void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& /
       Segment* segment;
       MeasureBase* mb = pos2measure(pos, &staffIdx, &pitch, &segment, &offset);
       if (mb == 0 || mb->type() != MEASURE) {
-            qDebug("cmdAddSpanner: cannot put object here\n");
+            qDebug("cmdAddSpanner: cannot put object here");
             delete spanner;
             return;
             }
@@ -226,7 +226,7 @@ void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& /
                         break;
                   }
             if (ns == segment) {
-                  qDebug("cmdAddSpanner: cannot put object on last segment\n");
+                  qDebug("cmdAddSpanner: cannot put object on last segment");
                   delete spanner;
                   return;
                   }
@@ -290,7 +290,7 @@ void Score::expandVoice(Segment* s, int track)
       {
       if (s->element(track)) {
             ChordRest* cr = (ChordRest*)(s->element(track));
-            qDebug("expand voice: found %s %s\n", cr->name(), qPrintable(cr->duration().print()));
+            qDebug("expand voice: found %s %s", cr->name(), qPrintable(cr->duration().print()));
             return;
             }
 
@@ -305,7 +305,7 @@ void Score::expandVoice(Segment* s, int track)
             if (tick == s->tick())
                   return;
             if (tick > s->tick()) {
-                  qDebug("expandVoice: cannot insert element here\n");
+                  qDebug("expandVoice: cannot insert element here");
                   return;
                   }
             }
