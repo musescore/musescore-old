@@ -4257,7 +4257,7 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
                   }
             }
       else if (cmd == "file-close")
-            removeTab(scoreList.indexOf(cs));
+            closeScore(cs);
       else if (cmd == "file-save-as") {
             cs->setSyntiState(synti->state());
             saveAs(cs, false);
@@ -4546,4 +4546,11 @@ void MuseScore::updateLayer()
            enable = false;
       layerSwitch->setVisible(enable);
       }
-
+      
+//---------------------------------------------------------
+//   closeScore
+//---------------------------------------------------------
+void MuseScore::closeScore(Score* score)
+      {
+      removeTab(scoreList.indexOf(score));
+      }

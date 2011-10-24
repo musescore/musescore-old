@@ -557,6 +557,8 @@ class MuseScore : public QMainWindow {
       bool importCapella(Score*, const QString& name);
       bool importOve(Score*, const QString& name);
 
+      void closeScore(Score* score);
+
       void addTempo();
       void addMetronome();
 
