@@ -161,23 +161,15 @@ void BarLine::draw(Painter* painter) const
                         dotsym.draw(painter, mags, x0, 2.5 * ld);
                         }
                   else {
-                        qreal doty1, doty2;
+                        qreal doty;
                         if (staff()->useTablature()) {
-                              switch(staff()->lines()) {
-                                    case 4:
-                                          doty1 = .5 * 1.5;
-                                          doty2 = 2.5 * 1.5;
-                                          break;
-                                    default:
-                                    case 6:
-                                          doty1 = 1.5 * 1.5;
-                                          doty2 = 3.5 * 1.5;
-                                          break;
-                                    }
+                              doty = 1; 
                               }
                         else {
-                              doty1 = 1.5;
-                              doty2 = 2.5;
+                              if(staff()->lines() % 2 == 0)
+                                    doty = 1;
+                              else
+                                    doty = 0.5;
                               }
                         Segment* segment = (Segment*)parent();
                         Measure* measure = segment->measure();
@@ -185,10 +177,12 @@ void BarLine::draw(Painter* painter) const
                         qreal yp = system->staff(staffIdx())->y();
                         for (int i = 0; i < _span; ++i) {
                               StaffLines* l2 = measure->staffLines(staffIdx() + i);
-                              qreal yy = l2->y2() - yp;
+                              qreal yy1 = l2->y1() - yp;
+                              qreal yy2 = l2->y2() - yp;
+                              qreal yy = yy1 + ((yy2 - yy1) / 2);
 
-                              dotsym.draw(painter, mags, x0, yy - doty1 * ld);
-                              dotsym.draw(painter, mags, x0, yy - doty2 * ld);
+                              dotsym.draw(painter, mags, x0, yy - doty * ld);
+                              dotsym.draw(painter, mags, x0, yy + doty * ld);
                               }
                         }
 
@@ -218,23 +212,15 @@ void BarLine::draw(Painter* painter) const
                         dotsym.draw(painter, mags, 0.0, 2.5 * ld);
                         }
                   else {
-                        qreal doty1, doty2;
+                        qreal doty;
                         if (staff()->useTablature()) {
-                              switch(staff()->lines()) {
-                                    case 4:
-                                          doty1 = .5 * 1.5;
-                                          doty2 = 2.5 * 1.5;
-                                          break;
-                                    default:
-                                    case 6:
-                                          doty1 = 1.5 * 1.5;
-                                          doty2 = 3.5 * 1.5;
-                                          break;
-                                    }
+                              doty = 1; 
                               }
                         else {
-                              doty1 = 1.5;
-                              doty2 = 2.5;
+                              if(staff()->lines() % 2 == 0)
+                                    doty = 1;
+                              else
+                                    doty = 0.5;
                               }
                         Segment* segment = (Segment*)parent();
                         Measure* measure = segment->measure();
@@ -242,9 +228,11 @@ void BarLine::draw(Painter* painter) const
                         qreal yp = system->staff(staffIdx())->y();
                         for (int i = 0; i < _span; ++i) {
                               StaffLines* l2 = measure->staffLines(staffIdx() + i);
-                              qreal yy = l2->y2() - yp;
-                              dotsym.draw(painter, mags, 0.0, yy - doty1 * ld);
-                              dotsym.draw(painter, mags, 0.0, yy - doty2 * ld);
+                              qreal yy1 = l2->y1() - yp;
+                              qreal yy2 = l2->y2() - yp;
+                              qreal yy = yy1 + ((yy2 - yy1) / 2);
+                              dotsym.draw(painter, mags, 0.0, yy - doty * ld);
+                              dotsym.draw(painter, mags, 0.0, yy + doty * ld);
                               }
                         }
 
@@ -278,23 +266,15 @@ void BarLine::draw(Painter* painter) const
                         dotsym.draw(painter, mags, x4, 2.5 * ld);
                         }
                   else {
-                        qreal doty1, doty2;
+                        qreal doty;
                         if (staff()->useTablature()) {
-                              switch(staff()->lines()) {
-                                    case 4:
-                                          doty1 = .5 * 1.5;
-                                          doty2 = 2.5 * 1.5;
-                                          break;
-                                    default:
-                                    case 6:
-                                          doty1 = 1.5 * 1.5;
-                                          doty2 = 3.5 * 1.5;
-                                          break;
-                                    }
+                              doty = 1; 
                               }
                         else {
-                              doty1 = 1.5;
-                              doty2 = 2.5;
+                              if(staff()->lines() % 2 == 0)
+                                    doty = 1;
+                              else
+                                    doty = 0.5;
                               }
                         Segment* segment = (Segment*)parent();
                         Measure* measure = segment->measure();
@@ -302,12 +282,14 @@ void BarLine::draw(Painter* painter) const
                         qreal yp = system->staff(staffIdx())->y();
                         for (int i = 0; i < _span; ++i) {
                               StaffLines* l2 = measure->staffLines(staffIdx() + i);
-                              qreal yy = l2->y2() - yp;
+                              qreal yy1 = l2->y1() - yp;
+                              qreal yy2 = l2->y2() - yp;
+                              qreal yy = yy1 + ((yy2 - yy1) / 2);
 
-                              dotsym.draw(painter, mags, 0.0, yy - doty1 * ld);
-                              dotsym.draw(painter, mags, 0.0, yy - doty2 * ld);
-                              dotsym.draw(painter, mags, x4, yy - doty1 * ld);
-                              dotsym.draw(painter, mags, x4, yy - doty2 * ld);
+                              dotsym.draw(painter, mags, 0.0, yy - doty * ld);
+                              dotsym.draw(painter, mags, 0.0, yy + doty * ld);
+                              dotsym.draw(painter, mags, x4, yy - doty * ld);
+                              dotsym.draw(painter, mags, x4, yy + doty * ld);
                               }
                         }
 

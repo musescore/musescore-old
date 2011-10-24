@@ -5,6 +5,7 @@
       - fix #7402: Split staff drops lower notes
        (la)
       - fix #13301: add score.close() to plugin framework
+      - fix #5433: Staff with one line and repeat bars are not aligned
 22.oct (ws)
       - fix #13198: Crash on startup (patch from mokaspar)
 19.oct (lv)
