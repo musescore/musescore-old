@@ -165,10 +165,11 @@ void BarLine::draw(QPainter& p) const
                         double yp = system->staff(staffIdx())->y();
                         for (int i = 0; i < _span; ++i) {
                               StaffLines* l2 = measure->staffLines(staffIdx() + i);
-                              double yy = l2->y2() - yp;
-
-                              symbols[dotSym].draw(p, mags, x0, yy - 1.5 * ld);
-                              symbols[dotSym].draw(p, mags, x0, yy - 2.5 * ld);
+                              double yy1 = l2->y1() - yp;
+                              double yy2 = l2->y2() - yp;
+                              double yy  = yy1 + ((yy2 - yy1) / 2);
+                              symbols[dotSym].draw(p, mags, x0, yy  - 0.5 * ld);
+                              symbols[dotSym].draw(p, mags, x0, yy + 0.5 * ld);
                               }
                         }
 
@@ -204,11 +205,12 @@ void BarLine::draw(QPainter& p) const
                         System* system   = measure->system();
                         double yp = system->staff(staffIdx())->y();
                         for (int i = 0; i < _span; ++i) {
-                              StaffLines* l2 = measure->staffLines(staffIdx() + i);
-                              double yy = l2->y2() - yp;
-
-                              symbols[dotSym].draw(p, mags, 0.0, yy - 1.5 * ld);
-                              symbols[dotSym].draw(p, mags, 0.0, yy - 2.5 * ld);
+                              StaffLines* l2 = measure->staffLines(staffIdx() + i); 
+                              double yy1 = l2->y1() - yp;
+                              double yy2 = l2->y2() - yp;
+                              double yy  = yy1 + ((yy2 - yy1) / 2);
+                              symbols[dotSym].draw(p, mags, 0.0, yy  - 0.5 * ld);
+                              symbols[dotSym].draw(p, mags, 0.0, yy + 0.5 * ld);
                               }
                         }
 
@@ -248,12 +250,13 @@ void BarLine::draw(QPainter& p) const
                         double yp = system->staff(staffIdx())->y();
                         for (int i = 0; i < _span; ++i) {
                               StaffLines* l2 = measure->staffLines(staffIdx() + i);
-                              double yy = l2->y2() - yp;
-
-                              symbols[dotSym].draw(p, mags, 0.0, yy - 1.5 * ld);
-                              symbols[dotSym].draw(p, mags, 0.0, yy - 2.5 * ld);
-                              symbols[dotSym].draw(p, mags, x4, yy - 1.5 * ld);
-                              symbols[dotSym].draw(p, mags, x4, yy - 2.5 * ld);
+                              double yy1 = l2->y1() - yp;
+                              double yy2 = l2->y2() - yp;
+                              double yy  = yy1 + ((yy2 - yy1) / 2);
+                              symbols[dotSym].draw(p, mags, 0.0, yy  - 0.5 * ld);
+                              symbols[dotSym].draw(p, mags, 0.0, yy + 0.5 * ld);
+                              symbols[dotSym].draw(p, mags, x4, yy  - 0.5 * ld);
+                              symbols[dotSym].draw(p, mags, x4, yy + 0.5 * ld);
                               }
                         }
 

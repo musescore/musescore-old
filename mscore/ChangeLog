@@ -1,5 +1,6 @@
 24 oct (la)
-      - add score.close() to plugin framework
+      - fix #13301: add score.close() to plugin framework
+      - fix #5433: Staff with one line and repeat bars are not aligned
 19.oct (la)
       - fix #13183: [MusicXML] Wrong import of right barline
       - add dynamic and note velocity support in MusicXML export/import
