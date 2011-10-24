@@ -233,7 +233,6 @@ class Channel {
 
       /* cached values of last MSB values of MSB/LSB controllers */
       unsigned char bank_msb;
-      int interp_method;
 
       /* NRPN system */
       short nrpn_select;
@@ -282,8 +281,6 @@ class Channel {
       void pitchWheelSens(int val);
       int getCC(int num);
       int getNum() const                  { return channum;    }
-      void setInterpMethod(int m)         { interp_method = m; }
-      int getInterpMethod() const         { return interp_method; }
       };
 
 //---------------------------------------------------------
@@ -401,20 +398,6 @@ enum fluid_chorus_mod {
    * Synthesis parameters
    *
    */
-
-  /* Flags to choose the interpolation method */
-enum fluid_interp {
-      /* no interpolation: Fastest, but questionable audio quality */
-      FLUID_INTERP_NONE     = 0,
-      /* Straight-line interpolation: A bit slower, reasonable audio quality */
-      FLUID_INTERP_LINEAR   = 1,
-      /* Fourth-order interpolation: Requires 50 % of the whole DSP processing time, good quality
-       * Default. */
-      FLUID_INTERP_DEFAULT  = 1,
-      FLUID_INTERP_4THORDER = 4,
-      FLUID_INTERP_7THORDER = 7,
-      FLUID_INTERP_HIGHEST  = 7
-      };
 
 #define fluid_sample_refcount(_sample) ((_sample)->refcount)
 
@@ -608,17 +591,14 @@ struct Phase {
       void operator+=(const Phase& p) { data += p.data; }
       void setInt(qint32 b)           { data = qint64(b) << 32; }
       void setFloat(float b)          {
-             data = (((qint64)(b)) << 32) | (quint32) (((float)(b) - (int)(b)) * FLUID_FRACT_MAX);
+            data = (((qint64)(b)) << 32) | (quint32) (((float)(b) - (int)(b)) * FLUID_FRACT_MAX);
             }
 
-      void operator-=(const Phase& b) { data -= b.data;  }
       void operator-=(int b)          { data -= (qint64(b) << 32);  }
       int index() const               { return data >> 32; }
-      quint32 fract() const           { return quint32(data & 0xffffffff); }
-      quint32 index_round() const     { return quint32((data+0x80000000) >> 32); }
+      quint32 fract() const           { return data;       }
 
       Phase() {}
-      Phase(qint64 v) : data(v) {}
       };
 
 /* Purpose:

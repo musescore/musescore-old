@@ -226,14 +226,14 @@ int Voice::dsp_float_interpolate_linear(unsigned n)
             end_index++;	/* we're now interpolating the last point */
 
             /* interpolate within last point */
-            for (; dsp_phase_index <= end_index && dsp_i < n; dsp_i++) {
+            for (; phase_index <= end_index && dsp_i < n; dsp_i++) {
                   coeffs = interp_coeff_linear[fluid_phase_fract_to_tablerow (phase)];
-                  dsp_buf[dsp_i] = amp * (coeffs[0] * dsp_data[dsp_phase_index]
+                  dsp_buf[dsp_i] = amp * (coeffs[0] * dsp_data[phase_index]
                      + coeffs[1] * point);
 
                   /* increment phase and amplitude */
                   phase += dsp_phase_incr;
-                  dsp_phase_index = phase.index();
+                  phase_index = phase.index();
                   amp += amp_incr;	/* increment amplitude */
                   }
 
@@ -241,7 +241,7 @@ int Voice::dsp_float_interpolate_linear(unsigned n)
                   break;    /* break out if not looping (end of sample) */
 
             /* go back to loop start (if past */
-            if (dsp_phase_index > end_index) {
+            if (phase_index > end_index) {
                   phase -= (loopend - loopstart);
                   has_looped = true;
                   }

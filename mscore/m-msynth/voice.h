@@ -70,8 +70,6 @@ class Voice
       Fluid* _fluid;
       float _noteTuning;             // +/- in midicent
 
-      void effects(int count, short*);
-
    public:
 	unsigned char status;
 	unsigned char chan;             // the channel number, quick access for channel messages
@@ -178,9 +176,6 @@ class Voice
 	float chorus_send;
 	float amp_chorus;
 
-	/* interpolation method, as in fluid_interp in fluidsynth.h */
-	int interp_method;
-
 	/* for debugging */
 	int debug;
 	float ref;
@@ -224,7 +219,7 @@ class Voice
       bool ON() const          { return (status == FLUID_VOICE_ON) && (volenv_section < FLUID_VOICE_ENVRELEASE); }
       int SAMPLEMODE() const   { return ((int)gen[GEN_SAMPLEMODE].val); }
 
-      void write(unsigned n, short*);
+      void write(int n, short*);
       void add_mod(const Mod* mod, int mode);
 
       static void dsp_float_config();

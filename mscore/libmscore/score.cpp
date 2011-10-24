@@ -64,6 +64,7 @@
 #include "harmony.h"
 #include "mscore.h"
 #include "omr/omr.h"
+#include "bracket.h"
 
 Score* gscore;                 ///< system score, used for palettes etc.
 QPoint scorePos(0,0);
@@ -2180,24 +2181,30 @@ void Score::splitStaff(int staffIdx, int splitPoint)
       int rstaff = s->rstaff();
       Staff* ns = new Staff(this, p, rstaff + 1);
       ns->setRstaff(rstaff + 1);
-//      ns->setClef(0, CLEF_F);
 
       undoInsertStaff(ns, staffIdx+1);
 
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure())
             m->cmdAddStaves(staffIdx+1, staffIdx+2, false);
 
-//      undoChangeBarLineSpan(s, p->nstaves());
+      Clef* clef = new Clef(this);
+      clef->setClefType(CLEF_F);
+      clef->setTrack((staffIdx+1) * VOICES);
+      Segment* seg = firstMeasure()->getSegment(SegClef, 0);
+      clef->setParent(seg);
+      undoAddElement(clef);
+
+      undoChangeBarLineSpan(s, p->nstaves());
       adjustBracketsIns(staffIdx+1, staffIdx+2);
       undoChangeKeySig(ns, 0, s->key(0));
 
-//      Bracket* b = new Bracket(this);
-//      b->setSubtype(BRACKET_AKKOLADE);
-//      b->setTrack(staffIdx * VOICES);
-//      b->setParent(firstMeasure()->system());
-//      b->setLevel(-1);  // add bracket
-//      b->setSpan(2);
-//      cmdAdd(b);
+      Bracket* b = new Bracket(this);
+      b->setSubtype(BRACKET_AKKOLADE);
+      b->setTrack(staffIdx * VOICES);
+      b->setParent(firstMeasure()->system());
+      b->setLevel(-1);  // add bracket
+      b->setSpan(2);
+      undoAddElement(b);
 
       rebuildMidiMapping();
       _instrumentsChanged = true;

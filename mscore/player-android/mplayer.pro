@@ -2,13 +2,14 @@
 folder_01.source = qml/mplayer
 folder_01.target = qml
 DEPLOYMENTFOLDERS = folder_01
+ANDROID_NDK_PLATFORM = android-9
 
 # Additional import path used to resolve QML modules in Creator's code model
 QML_IMPORT_PATH =
 
 # symbian:TARGET.UID3 = 0xEE36C57B
 
-# Smart Installer package's UID
+# Smart Installer package's UID xxx
 # This UID is from the protected range and therefore the package will
 # fail to install if self-signed. By default qmake uses the unprotected
 # range value if unprotected UID is defined for the application and
@@ -163,7 +164,6 @@ SOURCES += main.cpp                              \
     ../libmscore/event.cpp \
     ../m-msynth/seq_event.cpp \
     ../m-msynth/synth_voice.cpp \
-    ../m-msynth/synth_dsp.cpp \
     sparm.cpp \
     androidaudio.cpp
 
@@ -197,5 +197,3 @@ HEADERS += \
     scoreview.h \
     seq.h \
     painterqt.h
-
-
