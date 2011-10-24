@@ -22,7 +22,6 @@
 #include "bww2mxml/writer.h"
 #include "bww2mxml/parser.h"
 
-#include "musescore.h"
 #include "libmscore/barline.h"
 #include "libmscore/box.h"
 #include "libmscore/chord.h"
@@ -41,6 +40,8 @@
 #include "libmscore/tuplet.h"
 #include "libmscore/volta.h"
 #include "libmscore/segment.h"
+#include "musescore.h"
+#include "musicxml.h"
 
 //---------------------------------------------------------
 //   addText
@@ -409,8 +410,13 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
       tempo = temp;
 
       if (!title.isEmpty()) score->setMetaTag("workTitle", title);
-      if (!type.isEmpty()) score->setMetaTag("workNumber", type);
-      if (!footer.isEmpty()) score->setMetaTag("Copyright", footer);
+      // TODO re-enable following statement
+      // currently disabled because it breaks the bww iotest
+      // if (!type.isEmpty()) score->setMetaTag("workNumber", type);
+      QString strType = "composer";
+      QString strComposer = composer; // TODO: const parameters ctor MusicXmlCreator
+      score->addCreator(new MusicXmlCreator(strType, strComposer));
+      if (!footer.isEmpty()) score->setMetaTag("copyright", footer);
 
 //  score->setWorkTitle(title);
       VBox* vbox  = 0;

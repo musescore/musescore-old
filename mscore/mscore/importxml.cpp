@@ -803,7 +803,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                                     qDebug("unknown creator <%s>\n", type.toLatin1().data());
                               }
                         else if (ee.tagName() == "rights")
-                              score->setMetaTag("Copyright", ee.text());
+                              score->setMetaTag("copyright", ee.text());
                         else if (ee.tagName() == "encoding")
                               score->setMetaTag("encoding", ee.text());
                         else if (ee.tagName() == "source")
