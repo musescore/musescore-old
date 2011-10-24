@@ -19,18 +19,6 @@
 //=============================================================================
 
 #include "splitstaff.h"
-#include "libmscore/score.h"
-#include "libmscore/staff.h"
-#include "libmscore/clef.h"
-#include "libmscore/measure.h"
-#include "libmscore/part.h"
-#include "libmscore/note.h"
-#include "libmscore/chord.h"
-#include "libmscore/bracket.h"
-#include "libmscore/system.h"
-#include "seq.h"
-#include "libmscore/slur.h"
-#include "libmscore/segment.h"
 
 //---------------------------------------------------------
 //   SplitStaff
@@ -42,15 +30,3 @@ SplitStaff::SplitStaff(QWidget* parent)
       setupUi(this);
       splitPoint->setValue(60);
       }
-
-//---------------------------------------------------------
-//   splitStaff
-//---------------------------------------------------------
-
-struct SNote {
-      int tick;
-      int pitch;
-      Fraction fraction;
-      Note* note;
-      };
-

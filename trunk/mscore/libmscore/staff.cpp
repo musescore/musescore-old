@@ -282,9 +282,8 @@ void Staff::addClef(Clef* clef)
       if (clef->segment()->measure() == 0)
             abort();
       int tick = 0;
-      if (!clefs.isEmpty()) {
+      if (!clefs.isEmpty())
             tick = clefs.back()->segment()->tick();
-            }
       clefs.append(clef);
       if (clef->segment()->tick() < tick)
             qSort(clefs.begin(), clefs.end(), clefsGreater);

@@ -203,11 +203,13 @@ void Seq::process(unsigned n, short* p)
                   if (f >= endTime)
                         break;
                   int n = f - playTime;
-                  synti->process(n, p);
-                  p         += 2 * n;
-                  playTime  += n;
-                  frames    -= n;
-                  framePos  += n;
+                  if (n) {
+                        synti->process(n, p);
+                        p         += 2 * n;
+                        playTime  += n;
+                        frames    -= n;
+                        framePos  += n;
+                        }
                   playEvent(playPos.value());
                   }
             if (frames) {

@@ -66,7 +66,6 @@ void ClefList::read(QDomElement e, Score* cs)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
-            const QString& val(e.text());
             if (tag == "clef") {
                   int tick = e.attribute("tick", "0").toInt();
                   ClefType ct = Clef::clefType(e.attribute("idx", "0"));

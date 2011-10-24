@@ -2270,7 +2270,7 @@ void Measure::read(QDomElement e, int staffIdx)
                   // this is a irregular measure
                   _len = Fraction::fromTicks(endTick - tick());
                   _len.reduce();
-                  if (last()->segmentType() == SegBarLine)
+                  if (last() && last()->segmentType() == SegBarLine)
                         last()->setSubtype(SegEndBarLine);
                   }
             }
