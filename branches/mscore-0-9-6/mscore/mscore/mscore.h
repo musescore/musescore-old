@@ -428,6 +428,8 @@ class MuseScore : public QMainWindow {
       void setRevision(QString& r){rev = r;}
       QString revision(){return rev;}
       
+      void closeScore(Score* score);
+      
       void showWebPanel(bool on);
       
       Q_INVOKABLE void newFile();

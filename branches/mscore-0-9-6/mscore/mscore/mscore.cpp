@@ -2200,7 +2200,7 @@ void MuseScore::cmd(QAction* a)
                   }
             }
       else if (cmd == "file-close")
-            removeTab(scoreList.indexOf(cs));
+            closeScore(cs);
       else if (cmd == "file-save-as") {
             if (cs)
                   cs->saveAs(false);
@@ -3293,3 +3293,13 @@ void MuseScore::closeWebPanelPermanently()
       preferences.showWebPanel = false;
       preferences.dirty  = true;
       }
+
+//---------------------------------------------------------
+//   closeScore
+//---------------------------------------------------------
+void MuseScore::closeScore(Score* score)
+      {
+      removeTab(scoreList.indexOf(score));
+      }
+      
+      
