@@ -1722,7 +1722,7 @@ void ScoreView::paintEvent(QPaintEvent* ev)
             qreal lw = 2.0/p.matrix().m11();
             QPen pen(Qt::gray);
             pen.setWidthF(lw);
-            if (grips >= 4) {
+            if (grips == 5) {
                   p.setPen(pen);
                   QPolygonF polygon(grips+1);
                   for (int i = 0; i < grips; ++i)
