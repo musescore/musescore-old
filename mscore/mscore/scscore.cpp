@@ -45,14 +45,14 @@ Q_DECLARE_METATYPE(TimeSig*);
 
 static const char* const function_names_score[] = {
       "title", "subtitle", "composer", "poet",
-      "load", "save",
+      "load", "save", "close",
       "setExpandRepeat", "appendPart", "appendMeasures",
       "pages", "measures", "parts", "part", "startUndo", "endUndo", "setStyle", "hasLyrics", "hasHarmonies",
       "staves", "keysig", "duration", "pageFormat", "source", "timesig"
       };
 static const int function_lengths_score[] = {
       1, 1, 1, 1,
-      1, 6,
+      1, 6, 1,
       1, 1, 1,
       0, 0, 0, 1, 0, 0, 2, 0, 0,
       0, 1, 0, 0, 1, 1
@@ -64,6 +64,7 @@ static const QScriptValue::PropertyFlags flags_score[] = {
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
 
+      QScriptValue::SkipInEnumeration,
       QScriptValue::SkipInEnumeration,
       QScriptValue::SkipInEnumeration,
 
@@ -241,7 +242,14 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         }
                   }
                   break;
-            case 6:    // "setExpandRepeat",
+            case 6:     // "close",
+                  {
+                  if (argc == 0) {
+                        mscore->closeScore(score);
+                        }
+                  return context->engine()->undefinedValue();      
+                  }
+            case 7:    // "setExpandRepeat",
                   if (argc == 1) {
                         bool f = context->argument(0).toBool();
                         getAction("repeat")->setChecked(f);
@@ -250,7 +258,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         return context->engine()->undefinedValue();
                         }
                   break;
-            case 7:    // "appendPart",
+            case 8:    // "appendPart",
                   {
                   InstrumentTemplate* t = 0;
                   static InstrumentTemplate defaultInstrument;
@@ -294,7 +302,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                   return context->engine()->undefinedValue();
                   }
                   break;
-            case 8:    // "appendMeasures",
+            case 9:    // "appendMeasures",
                   if (argc == 1) {
                         int n = context->argument(0).toInt32();
                         score->appendMeasures(n, MEASURE);
@@ -302,11 +310,11 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         }
                   break;
 
-            case 9:    // "pages",
+            case 10:    // "pages",
                   if (argc == 0)
                         return qScriptValueFromValue(context->engine(), score->pages().size());
                   break;
-            case 10:    // "measures",
+            case 11:    // "measures",
                   if (argc == 0) {
                         int n = 0;
                         for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure())
@@ -314,11 +322,11 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         return qScriptValueFromValue(context->engine(), n);
                         }
                   break;
-            case 11:    // "parts",
+            case 12:    // "parts",
                   if (argc == 0)
                         return qScriptValueFromValue(context->engine(), score->parts()->size());
                   break;
-            case 12:    // "part",
+            case 13:    // "part",
                   if (argc == 1) {
                         int n = context->argument(0).toInt32();
                         if(n >= 0 && n < score->parts()->size()){
@@ -327,19 +335,19 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                             }
                         }
                   break;
-            case 13:    // "startUndo",
+            case 14:    // "startUndo",
                   if (argc == 0) {
                         score->startCmd();
                         return context->engine()->undefinedValue();
                         }
 
-            case 14:    // "endUndo",
+            case 15:    // "endUndo",
                   if (argc == 0) {
                         score->endCmd();
                         return context->engine()->undefinedValue();
                         }
                   break;
-            case 15:    // "setStyle",
+            case 16:    // "setStyle",
                   if (argc == 2) {
                         QString name = qscriptvalue_cast<QString>(context->argument(0));
                         QString val  = qscriptvalue_cast<QString>(context->argument(1));
@@ -348,7 +356,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         return context->engine()->undefinedValue();
                         }
                   break;
-            case 16:    // "hasLyrics",
+            case 17:    // "hasLyrics",
                   if (argc == 0) {
                         for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure()) {
                               for (Segment* seg = m->first(); seg; seg = seg->next()) {
@@ -361,7 +369,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         return qScriptValueFromValue(context->engine(), false);
                         }
                   break;
-            case 17:    // "hasHarmonies"
+            case 18:    // "hasHarmonies"
                   if (argc == 0) {
                         for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure()) {
                               foreach(Element* element, *m->el()) {
@@ -375,11 +383,11 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         return qScriptValueFromValue(context->engine(), false);
                         }
                   break;
-            case 18:    // staves
+            case 19:    // staves
                   if (argc == 0)
                         return qScriptValueFromValue(context->engine(), score->nstaves());
                   break;
-            case 19:    // keysig
+            case 20:    // keysig
                   if (argc == 0){
                         int result = 0;
                         if(score->nstaves() > 0){
@@ -412,19 +420,19 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         return context->engine()->undefinedValue();
                         }
                   break;
-            case 20:   //duration
+            case 21:   //duration
                   if (argc == 0){
                     RepeatSegment* rs = score->repeatList()->last();
                     long duration = lrint(score->utick2utime(rs->utick + rs->len));
                     return qScriptValueFromValue(context->engine(), duration);
                   }
                   break;
-            case 21:   //pageFormat
+            case 22:   //pageFormat
                   if (argc == 0){
                     return qScriptValueFromValue(context->engine(), score->pageFormat());
                   }
                   break;
-            case 22:   //source
+            case 23:   //source
                   if (argc == 0) {           
                         return qScriptValueFromValue(context->engine(), score->source());
                         }
@@ -435,7 +443,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         return context->engine()->undefinedValue();
                   }
                   break;
-            case 23:  // timesig
+            case 24:  // timesig
                   if (argc == 0) {
                         TimeSig* t = 0;
                         Segment* s = 0;
