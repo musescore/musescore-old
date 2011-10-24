@@ -1171,7 +1171,7 @@ void AddElement::redo()
 const char* AddElement::name() const
       {
       static char buffer[64];
-      sqDebug(buffer, "Add: %s", element->name());
+      sprintf(buffer, "Add: %s", element->name());
       return buffer;
       }
 #endif
@@ -1243,7 +1243,7 @@ void RemoveElement::redo()
 const char* RemoveElement::name() const
       {
       static char buffer[64];
-      sqDebug(buffer, "Remove: %s", element->name());
+      sprintf(buffer, "Remove: %s", element->name());
       return buffer;
       }
 #endif
@@ -1560,7 +1560,7 @@ ChangeElement::ChangeElement(Element* oe, Element* ne)
 
 void ChangeElement::flip()
       {
-//      qDebug("ChangeElement::flip() %s(%p) -> %s(%p) links %d\n",
+//      qDebug("ChangeElement::flip() %s(%p) -> %s(%p) links %d",
 //         oldElement->name(), oldElement, newElement->name(), newElement,
 //         oldElement->links() ? oldElement->links()->size() : -1);
 
@@ -1601,6 +1601,7 @@ void ChangeElement::flip()
             if (ns->system())
                   ns->system()->add(ns);
             }
+      score->setLayoutAll(true);
       }
 
 //---------------------------------------------------------
