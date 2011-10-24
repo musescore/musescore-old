@@ -793,16 +793,16 @@ ShowChordWidget::ShowChordWidget()
       connect(cb.helplineList, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
       connect(cb.notes, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
 
-      crb.beamMode->addItem(tr("auto"));
-      crb.beamMode->addItem(tr("beam begin"));
-      crb.beamMode->addItem(tr("beam mid"));
-      crb.beamMode->addItem(tr("beam end"));
-      crb.beamMode->addItem(tr("no beam"));
-      crb.beamMode->addItem(tr("begin 1/32"));
+      crb.beamMode->addItem("auto");
+      crb.beamMode->addItem("beam begin");
+      crb.beamMode->addItem("beam mid");
+      crb.beamMode->addItem("beam end");
+      crb.beamMode->addItem("no beam");
+      crb.beamMode->addItem("begin 1/32");
 
-      cb.stemDirection->addItem(tr("Auto"), 0);
-      cb.stemDirection->addItem(tr("Up"), 1);
-      cb.stemDirection->addItem(tr("Down"), 2);
+      cb.stemDirection->addItem("Auto", 0);
+      cb.stemDirection->addItem("Up",   1);
+      cb.stemDirection->addItem("Down", 2);
       }
 
 //---------------------------------------------------------
@@ -1122,12 +1122,12 @@ RestView::RestView()
       QWidget* chr = new QWidget;
       crb.setupUi(chr);
       layout->addWidget(chr);
-      crb.beamMode->addItem(tr("auto"));
-      crb.beamMode->addItem(tr("beam begin"));
-      crb.beamMode->addItem(tr("beam mid"));
-      crb.beamMode->addItem(tr("beam end"));
-      crb.beamMode->addItem(tr("no beam"));
-      crb.beamMode->addItem(tr("begin 1/32"));
+      crb.beamMode->addItem("auto");
+      crb.beamMode->addItem("beam begin");
+      crb.beamMode->addItem("beam mid");
+      crb.beamMode->addItem("beam end");
+      crb.beamMode->addItem("no beam");
+      crb.beamMode->addItem("begin 1/32");
 
       QWidget* rw = new QWidget;
       rb.setupUi(rw);
@@ -1436,9 +1436,9 @@ TupletView::TupletView()
       layout->addWidget(tw);
       layout->addStretch(10);
 
-      tb.direction->addItem(tr("Auto"), 0);
-      tb.direction->addItem(tr("Up"), 1);
-      tb.direction->addItem(tr("Down"), 2);
+      tb.direction->addItem("Auto", 0);
+      tb.direction->addItem("Up",   1);
+      tb.direction->addItem("Down", 2);
 
       connect(tb.number, SIGNAL(clicked()), SLOT(numberClicked()));
       connect(tb.elements, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(elementClicked(QTreeWidgetItem*)));

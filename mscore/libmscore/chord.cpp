@@ -256,7 +256,7 @@ void Chord::setStem(Stem* s)
 
 QPointF Chord::stemPos(bool upFlag, bool top) const
       {
-      if(staff() && staff()->useTablature()) {
+      if (staff() && staff()->useTablature()) {
             qreal sp = spatium();
             return QPointF(STAFFTYPE_TAB_DEFAULTSTEMPOSX*sp, STAFFTYPE_TAB_DEFAULTSTEMPOSY*sp) +
                         pagePos();

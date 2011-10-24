@@ -1,4 +1,5 @@
 24.oct (ws)
+      - fix beam selection (wrong shape)
       - fix drawing of shadow notes
       - fix #7402: Split staff drops lower notes
        (la)

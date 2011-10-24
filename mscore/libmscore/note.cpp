@@ -467,10 +467,11 @@ qreal Note::yPos() const
 QPointF Note::stemPos(bool upFlag) const
       {
       QPointF pt(pos());
-      if (chord()->staffMove()) {
+/*      if (chord()->staffMove()) {
             System* system = chord()->measure()->system();
             pt.ry() += system->staff(staffIdx() + chord()->staffMove())->y() - system->staff(staffIdx())->y();
             }
+      */
       if (_mirror)
             upFlag = !upFlag;
 
@@ -1401,6 +1402,7 @@ QPointF Note::pagePos() const
       {
       if (parent() == 0)
             return pos();
+
       return parent()->pagePos() + pos();
       }
 
