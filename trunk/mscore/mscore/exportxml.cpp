@@ -1283,7 +1283,7 @@ void ExportMusicXml::credits(Xml& xml)
                                        );
                   }
             }
-      QString rights = score->metaTag("Copyright");
+      QString rights = score->metaTag("copyright");
       if (!rights.isEmpty())
             qDebug("copyright '%s'\n", qPrintable(rights));
       qDebug("end credits\n");
@@ -3721,8 +3721,8 @@ foreach(Element* el, *(score->gel())) {
             const MusicXmlCreator* crt = score->getCreator(i);
             xml.tag(QString("creator type=\"%1\"").arg(crt->crType()), crt->crText());
             }
-      if (!score->metaTag("Copyright").isEmpty())
-            xml.tag("rights", score->metaTag("Copyright"));
+      if (!score->metaTag("copyright").isEmpty())
+            xml.tag("rights", score->metaTag("copyright"));
       xml.stag("encoding");
       if (debugMode) {
             xml.tag("software", QString("MuseScore 0.7.0"));
