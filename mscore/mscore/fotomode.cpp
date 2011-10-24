@@ -342,7 +342,12 @@ void ScoreView::startFotomode()
       qreal w = 8.0 / _matrix.m11();
       qreal h = 8.0 / _matrix.m22();
       QRectF r(-w*.5, -h*.5, w, h);
-      _foto->setRect(QRectF(-10, -10, 0, 0));
+
+      if (_foto->rect().isEmpty()) {
+            qreal w = width() / _matrix.m11();
+            qreal h = height() / _matrix.m22();
+            _foto->setRect(QRectF(w * .3, h * .3, w * .4, h * .4));
+            }
       for (int i = 0; i < MAX_GRIPS; ++i)
             grip[i] = r;
       curGrip = 0;
@@ -360,12 +365,11 @@ void ScoreView::stopFotomode()
       QAction* a = getAction("fotomode");
       a->setChecked(false);
 
-      _score->addRefresh(_foto->abbox());
       editObject = 0;
       grips      = 0;
 
       _foto->endEdit();
-      _score->end();
+      update();
       }
 
 //---------------------------------------------------------
@@ -396,8 +400,7 @@ void ScoreView::doDragFoto(QMouseEvent* ev)
       QSize sz(r.size().toSize());
       mscore->statusBar()->showMessage(QString("%1 x %2").arg(sz.width()).arg(sz.height()), 3000);
 
-      _score->addRefresh(_foto->abbox());
-      _score->end();
+      update();
       }
 
 //---------------------------------------------------------
@@ -430,7 +433,7 @@ void ScoreView::doFotoDragEdit(QMouseEvent* ev)
       EditData ed;
       ed.curGrip = curGrip;
       ed.delta   = delta;
-      ed.view    = 0;
+      ed.view    = this;
       _foto->editDrag(ed);
       updateGrips();
       startMove = p;
