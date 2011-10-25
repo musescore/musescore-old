@@ -661,27 +661,19 @@ bool ScoreView::saveFotoAs(bool printMode, const QRectF& r)
       int w = lrint(r.width()  * mag);
       int h = lrint(r.height() * mag);
 
-      if (ext == "pdf") {
+      if (ext == "pdf" || ext == "eps") {
             QPrinter printer(QPrinter::HighResolution);
-            printer.setPaperSize(QSizeF(w/DPI, h/DPI) , QPrinter::Inch);
+            mag = printer.logicalDpiX() / DPI;
+            printer.setPaperSize(QSizeF(r.width() * mag, r.height() * mag) , QPrinter::DevicePixel);
             printer.setCreator("MuseScore Version: " VERSION);
             printer.setFullPage(true);
             printer.setColorMode(QPrinter::Color);
             printer.setDocName(fn);
             printer.setOutputFileName(fn);
-            printer.setOutputFormat(QPrinter::PdfFormat);
-            QPainter p(&printer);
-            paintRect(printMode, p, r, mag);
-            }
-      else if (ext == "eps") {
-            QPrinter printer(QPrinter::HighResolution);
-            printer.setPaperSize(QSizeF(w/DPI, h/DPI) , QPrinter::Inch);
-            printer.setCreator("MuseScore Version: " VERSION);
-            printer.setFullPage(true);
-            printer.setColorMode(QPrinter::Color);
-            printer.setDocName(fn);
-            printer.setOutputFileName(fn);
-            printer.setOutputFormat(QPrinter::PostScriptFormat);
+            if (ext == "pdf")
+                  printer.setOutputFormat(QPrinter::PdfFormat);
+            else
+                  printer.setOutputFormat(QPrinter::PostScriptFormat);
             QPainter p(&printer);
             paintRect(printMode, p, r, mag);
             }
