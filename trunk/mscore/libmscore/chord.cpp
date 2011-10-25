@@ -1361,11 +1361,13 @@ void Chord::layout()
                   note->layout();
                   qreal x = 0.0;
 
-                  bool stemUp = up();
+                  bool stemUp;
                   if (staffMove() < 0)
                         stemUp = false;
                   else if (staffMove() > 0)
                         stemUp = true;
+                  else
+                        stemUp = up();
 
                   if (note->mirror())
                         x += stemUp ? headWidth : - headWidth;
@@ -1442,7 +1444,6 @@ void Chord::layout()
       if (dots()) {
             if (dotPosX() > rrr)
                   rrr = dotPosX();
-            // rrr += point(score()->styleS(ST_dotNoteDistance)) + dots() * point(score()->styleS(ST_dotDotDistance));
             rrr += point(score()->styleS(ST_dotNoteDistance)) + (dots()-1) * point(score()->styleS(ST_dotDotDistance));
             }
 
@@ -1455,6 +1456,13 @@ void Chord::layout()
             }
       lll += _extraLeadingSpace.val() * _spatium;
 
+      if (_noteType != NOTE_NORMAL) {
+            // qreal m = score()->styleD(ST_graceNoteMag);
+            static const qreal m = .9;
+            lll *= m;
+            rrr *= m;
+            }
+
       _space.setLw(lll);
       _space.setRw(rrr + ipos().x());
 
@@ -1466,11 +1474,7 @@ void Chord::layout()
                         _space.setRw(x);
                   }
             }
-      if (_noteType != NOTE_NORMAL) {
-            qreal m = score()->styleD(ST_graceNoteMag);
-            _space.rLw() *= m;
-            _space.rRw() *= m;
-            }
+
       QRectF _bbox;
       foreach (const Note* n, _notes)
             _bbox |= n->bbox().translated(n->pos());

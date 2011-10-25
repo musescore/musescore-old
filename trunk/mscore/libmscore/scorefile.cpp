@@ -804,7 +804,6 @@ bool Score::read1(QDomElement e)
                               }
                         else if (tag == "programRevision") {
                               _mscoreRevision = val.toInt();
-printf("=====revision <%s> %d\n", qPrintable(val), _mscoreRevision);
                               }
                         else if (tag == "Score") {
                               read(ee);
