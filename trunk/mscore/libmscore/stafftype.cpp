@@ -55,7 +55,9 @@ void initStaffTypes()
 
 StaffType::StaffType()
       {
+      _lines           = 5;
       _stepOffset      = 0;
+      _lineDistance    = Spatium(1);
 
       _genClef         = true;      // create clef at beginning of system
       _showBarlines    = true;
@@ -66,7 +68,9 @@ StaffType::StaffType()
 StaffType::StaffType(const QString& s)
       {
       _name            = s;
+      _lines           = 5;
       _stepOffset      = 0;
+      _lineDistance    = Spatium(1);
 
       _genClef         = true;      // create clef at beginning of system
       _showBarlines    = true;
@@ -99,7 +103,11 @@ void StaffType::setLines(int val)
       _lines = val;
       switch(_lines) {
             case 1:
-                  _stepOffset = -4;
+                  _stepOffset = 0;
+                  break;
+            case 2:
+            case 3:
+                  _stepOffset = -2;
                   break;
             default:
                   _stepOffset = 0;
@@ -584,5 +592,59 @@ void TabDurationSymbol::buildText(Duration::DurationType type, int dots)
       _text = QString(g_cDurationChars[type]);
       for(int count=0; count < dots; count++)
             _text.append(g_cDurationChars[STAFFTYPETAB_IDXOFDOTCHAR]);
+      }
+
+//---------------------------------------------------------
+//   doty1
+//    get y dot position of first repeat barline dot
+//---------------------------------------------------------
+
+qreal StaffType::doty1() const
+      {
+      switch(_lines) {
+            case 1:
+                  return -_lineDistance.val() * .5;
+            case 2:
+                  return -_lineDistance.val() * .5;
+            case 3:
+                  return _lineDistance.val() * .5;
+            case 4:
+                  return _lineDistance.val() * .5;
+            case 5:
+                  return _lineDistance.val() * 1.5;
+            case 6:
+                  return _lineDistance.val() * 1.5;
+            default:
+                  qDebug("StaffType::doty1(): lines %d unsupported\n", _lines);
+                  break;
+            }
+      return 0.0;
+      }
+
+//---------------------------------------------------------
+//   doty2
+//    get y dot position of second repeat barline dot
+//---------------------------------------------------------
+
+qreal StaffType::doty2() const
+      {
+      switch(_lines) {
+            case 1:
+                  return _lineDistance.val() * .5;
+            case 2:
+                  return _lineDistance.val() * 1.5;
+            case 3:
+                  return _lineDistance.val() * 1.5;
+            case 4:
+                  return _lineDistance.val() * 2.5;
+            case 5:
+                  return _lineDistance.val() * 2.5;
+            case 6:
+                  return _lineDistance.val() * 3.5;
+            default:
+                  qDebug("StaffType::doty2(): lines %d unsupported\n", _lines);
+                  break;
+            }
+      return 0.0;
       }
 

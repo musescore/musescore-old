@@ -217,17 +217,17 @@ void Clef::layout()
             case CLEF_TAB:
                   symbol->setSym(tabclefSym);
                   // on tablature, position clef at half the number of spaces * line distance
-                  yoff = lineDist * (lines - 1) / 2.0;
+                  yoff = lineDist * (lines - 1) * .5;
                   break;
             case CLEF_TAB2:
                   symbol->setSym(tabclef2Sym);
                   // on tablature, position clef at half the number of spaces * line distance
-                  yoff = lineDist * (lines-1) / 2.0;
+                  yoff = lineDist * (lines - 1) * .5;
                   break;
             case CLEF_PERC:
             case CLEF_PERC2:
                   symbol->setSym(percussionclefSym);
-                  yoff = (lines - 1) * 0.5;
+                  yoff = lineDist * (lines - 1) * 0.5;
                   break;
             case CLEF_G4:
                   symbol->setSym(trebleclefSym);

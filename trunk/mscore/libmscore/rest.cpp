@@ -326,6 +326,11 @@ void Rest::layout()
                   break;
             }
       qreal _spatium = spatium();
+      qreal stepDistance = _spatium * .5;
+      int stepOffset     = 0;
+      if (staff()) {
+            stepOffset = staff()->staffType()->stepOffset();
+            }
       int line        = lrint(userOff().y() / _spatium); //  + ((staff()->lines()-1) * 2);
       int lineOffset  = 0;
 
@@ -399,7 +404,7 @@ void Rest::layout()
       int yo;
       _sym = getSymbol(durationType().type(), line + lineOffset/2, lines, &yo);
       layoutArticulations();
-      setPos(0.0, (qreal(yo) + qreal(lineOffset) * .5) * _spatium);
+      setPos(0.0, (qreal(yo) + qreal(lineOffset + stepOffset) * .5) * _spatium);
 
       Spatium rs;
       if (dots()) {

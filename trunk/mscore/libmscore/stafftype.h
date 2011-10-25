@@ -36,8 +36,8 @@ class StaffType {
 
    protected:
       QString _name;
-      uchar _lines;
-      char  _stepOffset;
+      int _lines;
+      int _stepOffset;
       Spatium _lineDistance;
 
       bool _genClef;          // create clef at beginning of system
@@ -71,8 +71,10 @@ class StaffType {
       bool readProperties(QDomElement e);
       void setSlashStyle(bool val)             { _slashStyle = val;       }
       bool slashStyle() const                  { return _slashStyle;      }
-      bool genTimesig() const                  { return _genTimesig;       }
-      void setGenTimesig(bool val)             { _genTimesig = val;        }
+      bool genTimesig() const                  { return _genTimesig;      }
+      void setGenTimesig(bool val)             { _genTimesig = val;       }
+      qreal doty1() const;
+      qreal doty2() const;
       };
 
 // first three staff types in staffTypes[] are build in:
