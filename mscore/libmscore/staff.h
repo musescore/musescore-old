@@ -100,6 +100,7 @@ class Staff {
       bool _show;             ///< derived from part->show()
       bool _small;
       bool _invisible;
+      qreal _userDist;        ///< user edited extra distance
 
       bool _updateKeymap;
 
@@ -190,6 +191,8 @@ class Staff {
       void linkTo(Staff* staff);
       bool primaryStaff() const;
       ClefList* clefList()          { return &_clefList; }   // for backward compatibility
+      qreal userDist() const        { return _userDist;  }
+      void setUserDist(qreal val)   { _userDist = val;  }
       };
 #endif
 

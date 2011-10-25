@@ -97,7 +97,7 @@ class Chord : public ChordRest {
       Tremolo*   _tremolo;
       TremoloChordType _tremoloChordType;
       Glissando* _glissando;
-      ElementList _el;        ///< chordline
+      ElementList _el;              ///< chordline
 
       NoteType   _noteType;         ///< mark grace notes: acciaccatura and appoggiatura
       bool       _noStem;

@@ -293,7 +293,6 @@ class ElementDragTransition : public QEventTransition
                   return false;
             QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(event);
             QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
-            // canvas->mousePress(me);
             return canvas->testElementDragTransition(me);
             }
    public:
@@ -3424,8 +3423,14 @@ void ScoreView::startDrag()
       startMove  -= dragElement->userOff();
       _score->startCmd();
 
-      foreach(Element* e, _score->selection().elements())
-            e->setStartDragPosition(e->userOff());
+      if (dragElement->type() != MEASURE) {
+            foreach(Element* e, _score->selection().elements())
+                  e->setStartDragPosition(e->userOff());
+            }
+#if 0
+      else
+            dragStaff->setStartDragPosition(e->user
+#endif
       QList<Element*> el;
       dragElement->scanElements(&el, collectElements);
       _score->end();
@@ -3466,11 +3471,13 @@ void ScoreView::drag(const QPointF& delta)
 
 void ScoreView::endDrag()
       {
-      foreach(Element* e, _score->selection().elements()) {
-            e->endDrag();
-            QPointF npos = e->userOff();
-            e->setUserOff(e->startDragPosition());
-            _score->undoMove(e, npos);
+      if (dragElement->type() != MEASURE) {
+            foreach(Element* e, _score->selection().elements()) {
+                  e->endDrag();
+                  QPointF npos = e->userOff();
+                  e->setUserOff(e->startDragPosition());
+                  _score->undoMove(e, npos);
+                  }
             }
       _score->setLayoutAll(true);
       dragElement = 0;
@@ -3675,6 +3682,9 @@ void ScoreView::doDragElement(QMouseEvent* ev)
       data.vRaster = mscore->vRaster();
       data.pos     = pt;
 
+      if (dragElement->type() == MEASURE)
+            return;
+
       foreach(Element* e, _score->selection().elements())
             _score->addRefresh(e->drag(data));
       if (_score->playNote()) {
@@ -3708,10 +3718,10 @@ void ScoreView::select(QMouseEvent* ev)
             }
 
       ElementType type = curElement->type();
-      int dragStaff = 0;
+      int dragStaffIdx = 0;
       if (type == MEASURE) {
             System* dragSystem = (System*)(curElement->parent());
-            dragStaff  = getStaff(dragSystem, startMove);
+            dragStaffIdx  = getStaff(dragSystem, startMove);
             }
       if ((ev->type() == QEvent::MouseButtonRelease) && ((!curElement->selected() || addSelect)))
             return;
@@ -3719,7 +3729,7 @@ void ScoreView::select(QMouseEvent* ev)
       // when clicked "a little bit" above or below it, getStaff
       // may not find the staff and return -1, which would cause
       // select() to crash
-      if (dragStaff >= 0) {
+      if (dragStaffIdx >= 0) {
             SelectType st = SELECT_SINGLE;
             if (keyState == Qt::NoModifier)
                   st = SELECT_SINGLE;
@@ -3734,7 +3744,7 @@ void ScoreView::select(QMouseEvent* ev)
                   addSelect = true;
                   st = SELECT_ADD;
                   }
-            _score->select(curElement, st, dragStaff);
+            _score->select(curElement, st, dragStaffIdx);
             if (curElement && curElement->type() == NOTE) {
                   Note* note = static_cast<Note*>(curElement);
                   int pitch = note->ppitch();
@@ -3767,8 +3777,8 @@ bool ScoreView::mousePress(QMouseEvent* ev)
 
       if (curElement && curElement->type() == MEASURE) {
             System* dragSystem = (System*)(curElement->parent());
-            int dragStaff  = getStaff(dragSystem, startMove);
-            if (dragStaff < 0)
+            int dragStaffIdx  = getStaff(dragSystem, startMove);
+            if (dragStaffIdx < 0)
                   curElement = 0;
             }
       return curElement != 0;
@@ -3788,10 +3798,17 @@ void ScoreView::mouseReleaseEvent(QMouseEvent* event)
 //   testElementDragTransition
 //---------------------------------------------------------
 
-bool ScoreView::testElementDragTransition(QMouseEvent* ev) const
+bool ScoreView::testElementDragTransition(QMouseEvent* ev)
       {
       if (curElement == 0 || !curElement->isMovable() || QApplication::mouseButtons() != Qt::LeftButton)
             return false;
+      if (curElement->type() == MEASURE) {
+            System* dragSystem = (System*)(curElement->parent());
+            int staffIdx  = getStaff(dragSystem, startMove);
+            dragStaff = score()->staff(staffIdx);
+            if (staffIdx == 0)
+                  return false;
+            }
       QPoint delta = ev->pos() - startMoveI;
       return delta.manhattanLength() > 2;
       }

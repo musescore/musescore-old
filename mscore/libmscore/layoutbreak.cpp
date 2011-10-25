@@ -63,6 +63,8 @@ void LayoutBreak::read(QDomElement e)
             else if (!Element::readProperties(e))
                   domError(e);
             }
+      if (subtype() == 0)     // make sure setSubtype() is called
+            setSubtype(0);
       }
 
 //---------------------------------------------------------

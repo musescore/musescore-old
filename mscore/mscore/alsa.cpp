@@ -286,7 +286,8 @@ int AlsaDriver::setHwpar(snd_pcm_t* handle, snd_pcm_hw_params_t* hwpar)
       if (((err = snd_pcm_hw_params_set_access (handle, hwpar, SND_PCM_ACCESS_MMAP_NONINTERLEAVED)) < 0)
          && ((err = snd_pcm_hw_params_set_access (handle, hwpar, SND_PCM_ACCESS_MMAP_INTERLEAVED)) < 0)) {
             mmappedInterface = false;
-            qDebug("Alsa_driver: the interface doesn't support mmap-based access.\n");
+            if (debugMode)
+                  qDebug("Alsa_driver: the interface doesn't support mmap-based access.\n");
             if (((err = snd_pcm_hw_params_set_access (handle, hwpar, SND_PCM_ACCESS_RW_NONINTERLEAVED)) < 0)
                && ((err = snd_pcm_hw_params_set_access (handle, hwpar, SND_PCM_ACCESS_RW_INTERLEAVED)) < 0)) {
                   qDebug("Alsa_driver: the interface doesn't support rw-based access.\n");

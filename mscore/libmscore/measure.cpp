@@ -133,6 +133,7 @@ Measure::Measure(Score* s)
       _endBarLineType        = NORMAL_BAR;
       _mmEndBarLineType      = NORMAL_BAR;
       _multiMeasure          = 0;
+      setFlag(ELEMENT_MOVABLE, true);
       }
 
 //---------------------------------------------------------

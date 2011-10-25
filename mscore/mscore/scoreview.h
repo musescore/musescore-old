@@ -41,6 +41,7 @@ class Score;
 class ScoreView;
 class Text;
 class MeasureBase;
+class Staff;
 
 //---------------------------------------------------------
 //   Cursor
@@ -151,6 +152,7 @@ class ScoreView : public QWidget, public MuseScoreView {
       QFocusFrame* focusFrame;
 
       Element* dragElement;   // valid in state DRAG_OBJECT
+      Staff* dragStaff;
 
       Element* curElement;    // current item at mouse press
       QPointF startMove;      // position of last mouse press
@@ -333,7 +335,7 @@ class ScoreView : public QWidget, public MuseScoreView {
       void doDragEdit(QMouseEvent* ev);
       void select(QMouseEvent*);
       bool mousePress(QMouseEvent* ev);
-      bool testElementDragTransition(QMouseEvent* ev) const;
+      bool testElementDragTransition(QMouseEvent* ev);
       bool editElementDragTransition(QMouseEvent* ev);
       bool fotoEditElementDragTransition(QMouseEvent* ev);
       bool editScoreViewDragTransition(QMouseEvent* e);

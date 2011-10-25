@@ -1,4 +1,5 @@
 25.oct (ws)
+      - fix #13334: Page Break or Spacer not visible when import from musescore 1.1
       - extend meta data dialog: score creation date, MuseScore version/revision, api level
       - new testfile stafftest.mscx
       - various fixes for staves with lines != 5
