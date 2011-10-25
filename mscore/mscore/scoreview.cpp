@@ -1722,7 +1722,7 @@ void ScoreView::paintEvent(QPaintEvent* ev)
             qreal lw = 2.0/p.matrix().m11();
             QPen pen(Qt::gray);
             pen.setWidthF(lw);
-            if (grips == 5) {
+            if (grips == 6) {       // HACK: this are grips of a slur
                   p.setPen(pen);
                   QPolygonF polygon(grips+1);
                   for (int i = 0; i < grips; ++i)
