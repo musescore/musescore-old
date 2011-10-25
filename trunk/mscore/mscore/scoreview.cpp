@@ -2835,7 +2835,7 @@ static void drawDebugInfo(QPainter& p, const Element* e)
       //
       p.setBrush(Qt::NoBrush);
 
-      p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
+      p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
       p.drawPath(e->shape());
 
       // p.setPen(QPen(Qt::red, 0, Qt::SolidLine));

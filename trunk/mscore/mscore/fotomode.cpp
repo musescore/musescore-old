@@ -585,10 +585,10 @@ void ScoreView::fotoContextPopup(QMouseEvent* ev)
             double mag       = convDpi / DPI;
 
             QRectF r(_foto->rect());
-            
+
             int w = lrint(r.width()  * mag);
             int h = lrint(r.height() * mag);
-              
+
             QImage::Format f;
             f = QImage::Format_ARGB32_Premultiplied;
             QImage printer(w, h, f);
@@ -791,11 +791,7 @@ void ScoreView::fotoDragDrop(QMouseEvent*)
 void ScoreView::fotoDragDrop(QMouseEvent*)
       {
       bool printMode   = true;
-      double convDpi   = DPI; // preferences.pngResolution;
-      double mag       = convDpi / DPI;
       QRectF r(_foto->abbox());
-      int w            = lrint(r.width()  * mag);
-      int h            = lrint(r.height() * mag);
 
       QTemporaryFile tf(QDir::tempPath() + QString("/imgXXXXXX.eps"));
       tf.setAutoRemove(false);
@@ -807,7 +803,9 @@ void ScoreView::fotoDragDrop(QMouseEvent*)
       QString fn = tf.fileName();
 
       QPrinter printer(QPrinter::HighResolution);
-      printer.setPaperSize(QSizeF(w/DPI, h/DPI) , QPrinter::Inch);
+      double mag = printer.logicalDpiX() / DPI;
+      printer.setPaperSize(QSizeF(r.width() * mag, r.height() * mag) , QPrinter::DevicePixel);
+
       printer.setCreator("MuseScore Version: " VERSION);
       printer.setFullPage(true);
       printer.setColorMode(QPrinter::Color);
