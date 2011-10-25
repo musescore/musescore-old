@@ -720,29 +720,20 @@ void ScoreView::paintRect(bool printMode, QPainter& p, const QRectF& r, double m
       p.setRenderHint(QPainter::TextAntialiasing, true);
 
       score()->setPrinting(printMode);
-      paint1(printMode, r, p);
-      score()->setPrinting(false);
-      p.end();
-      }
 
-//---------------------------------------------------------
-//   paint
-//---------------------------------------------------------
-
-void ScoreView::paint1(bool printMode, const QRectF& fr, QPainter& p)
-      {
-      score()->setPrinting(printMode);
       foreach (Page* page, _score->pages()) {
             QRectF pr(page->abbox());
-            if (pr.right() < fr.left())
+            if (pr.right() < r.left())
                   continue;
-            if (pr.left() > fr.right())
+            if (pr.left() > r.right())
                   break;
-            QList<const Element*> ell = page->items(fr);
+            QList<const Element*> ell = page->items(r);
             qStableSort(ell.begin(), ell.end(), elementLessThan);
             drawElements(p, ell);
             }
+
       score()->setPrinting(false);
+      p.end();
       }
 
 //---------------------------------------------------------

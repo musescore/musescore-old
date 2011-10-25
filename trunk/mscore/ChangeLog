@@ -1,4 +1,5 @@
 25.oct (ws)
+      - extend meta data dialog: score creation date, MuseScore version/revision, api level
       - new testfile stafftest.mscx
       - various fixes for staves with lines != 5
       - more easy selection of barlines: clickable area is wider than actual barline
