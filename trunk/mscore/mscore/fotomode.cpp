@@ -760,7 +760,7 @@ void ScoreView::fotoDragDrop(QMouseEvent*)
       double convDpi   = DPI; // preferences.pngResolution;
       double mag       = convDpi / DPI;
 
-      QRectF r(_foto->abbox());
+      QRectF r(_foto->rect());
       int w = lrint(r.width()  * mag);
       int h = lrint(r.height() * mag);
       QImage::Format f;
@@ -817,7 +817,8 @@ void ScoreView::fotoDragDrop(QMouseEvent*)
 
       QDrag* drag = new QDrag(this);
       QMimeData* mimeData = new QMimeData;
-      QUrl url(QString("file://") + fn);
+      
+      QUrl url = QUrl::fromLocalFile(fn);
       QList<QUrl> ul;
       ul.append(url);
       mimeData->setUrls(ul);
