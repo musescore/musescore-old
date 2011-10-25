@@ -584,9 +584,11 @@ void ScoreView::fotoContextPopup(QMouseEvent* ev)
             double convDpi   = preferences.pngResolution;
             double mag       = convDpi / DPI;
 
-            QRectF r(_foto->abbox());
+            QRectF r(_foto->rect());
+            
             int w = lrint(r.width()  * mag);
             int h = lrint(r.height() * mag);
+              
             QImage::Format f;
             f = QImage::Format_ARGB32_Premultiplied;
             QImage printer(w, h, f);
