@@ -791,7 +791,7 @@ void ScoreView::fotoDragDrop(QMouseEvent*)
 void ScoreView::fotoDragDrop(QMouseEvent*)
       {
       bool printMode   = true;
-      QRectF r(_foto->abbox());
+      QRectF r(_foto->rect());
 
       QTemporaryFile tf(QDir::tempPath() + QString("/imgXXXXXX.eps"));
       tf.setAutoRemove(false);
