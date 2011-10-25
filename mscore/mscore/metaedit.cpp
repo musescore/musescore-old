@@ -37,6 +37,10 @@ MetaEditDialog::MetaEditDialog(Score* s, QWidget* parent)
       workTitle->setText(score->metaTag("workTitle"));
       source->setText(score->metaTag("source"));
       copyright->setText(score->metaTag("copyright"));
+      date->setDate(score->creationDate());
+      level->setValue(score->mscVersion());
+      version->setText(score->mscoreVersion());
+      revision->setValue(score->mscoreRevision());
       }
 
 //---------------------------------------------------------

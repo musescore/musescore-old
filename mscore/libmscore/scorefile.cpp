@@ -798,10 +798,14 @@ bool Score::read1(QDomElement e)
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         const QString& tag = ee.tagName();
                         const QString& val = ee.text();
-                        if (tag == "programVersion")
+                        if (tag == "programVersion") {
+                              _mscoreVersion = val;
                               parseVersion(val);
-                        else if (tag == "programRevision")
-                              ;
+                              }
+                        else if (tag == "programRevision") {
+                              _mscoreRevision = val.toInt();
+printf("=====revision <%s> %d\n", qPrintable(val), _mscoreRevision);
+                              }
                         else if (tag == "Score") {
                               read(ee);
                               }
@@ -875,10 +879,12 @@ bool Score::read(QDomElement dScore)
                   _sigmap->read(ee, _fileDivision);
             else if (tag == "tempolist")        // obsolete
                   ;           // tempomap()->read(ee, _fileDivision);
-            else if (tag == "programVersion")
+            else if (tag == "programVersion") {
+                  _mscoreVersion = val;
                   parseVersion(val);
+                  }
             else if (tag == "programRevision")
-                  ;
+                  _mscoreRevision = val.toInt();
             else if (tag == "Mag" || tag == "MagIdx" || tag == "xoff" || tag == "yoff") {
                   // obsolete
                   ;

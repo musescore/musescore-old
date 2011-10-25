@@ -180,7 +180,6 @@ class ScoreView : public QWidget, public MuseScoreView {
 
       virtual void paintEvent(QPaintEvent*);
       void paint(const QRect&, QPainter&);
-      void paint1(bool printMode, const QRectF&, QPainter&);
 
       void objectPopup(const QPoint&, Element*);
       void measurePopup(const QPoint&, Measure*);

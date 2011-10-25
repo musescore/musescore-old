@@ -218,6 +218,8 @@ class Score {
       QList<MuseScoreView*> viewer;
 
       QDate _creationDate;
+      QString _mscoreVersion;
+      int _mscoreRevision;
 
       Revisions* _revisions;
       QList<Excerpt*> _excerpts;
@@ -818,7 +820,12 @@ class Score {
       void timesigStretchChanged(TimeSig* ts, Measure* fm, int staffIdx);
       int pageNumberOffset() const          { return _pageNumberOffset; }
       void setPageNumberOffset(int v)       { _pageNumberOffset = v; }
+
       const QDate& creationDate() const     { return _creationDate;  }
+      QString mscoreVersion() const         { return _mscoreVersion; }
+      int mscoreRevision() const            { return _mscoreRevision; }
+      void setMscoreVersion(const QString& val) { _mscoreVersion = val; }
+      void setMscoreRevision(int val)           { _mscoreRevision = val; }
 
       uint currentLayerMask() const         { return _layer[_currentLayer].tags; }
       void setCurrentLayer(int val)         { _currentLayer = val;  }
