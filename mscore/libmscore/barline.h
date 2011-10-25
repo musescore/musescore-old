@@ -31,6 +31,8 @@ class BarLine : public Element {
       void getY(qreal*, qreal*) const;
       ElementList _el;        ///< fermata or other articulations
 
+      void drawDots(Painter* painter, qreal x) const;
+
    public:
       BarLine(Score*);
       BarLine &operator=(const BarLine&);
@@ -46,6 +48,7 @@ class BarLine : public Element {
       virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
       virtual void add(Element*);
       virtual void remove(Element*);
+      virtual QPainterPath shape() const;
 
       virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);

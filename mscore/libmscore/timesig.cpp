@@ -249,7 +249,7 @@ void TimeSig::layout()
       {
       qreal _spatium = spatium();
 
-      setbbox(QRectF());                          // prepare for an empty time signature
+      setbbox(QRectF());                 // prepare for an empty time signature
       pz = QPointF(0.0, 0.0);
       pn = QPointF(0.0, 0.0);
 
@@ -271,7 +271,7 @@ void TimeSig::layout()
       // if some symbol
       // compute vert. displacement to center in the staff height
       // determine middle staff position:
-      qreal yoff = _spatium * (numOfLines-1) / 2.0 * lineDist;
+      qreal yoff = _spatium * (numOfLines-1) *.5 * lineDist;
       qreal mag  = magS();
       // C and Ccut are placed at the middle of the staff: use yoff directly
       if (st ==  TSIG_FOUR_FOUR) {

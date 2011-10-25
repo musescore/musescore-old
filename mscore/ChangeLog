@@ -1,4 +1,8 @@
 25.oct (ws)
+      - new testfile stafftest.mscx
+      - various fixes for staves with lines != 5
+      - more easy selection of barlines: clickable area is wider than actual barline
+      - fix selection of bar line in one line staff
       - fix eps+pdf save in fotomode
 24.oct (ws)
       - fix fotomode

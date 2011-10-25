@@ -892,11 +892,12 @@ qreal StaffLines::y1() const
      System* system = measure()->system();
      if (system == 0)
            return 0.0;
-      qreal _spatium = spatium();
+
       qreal y = system->staff(staffIdx())->y() + ipos().y();
+
       switch (lines) {
             case 1:
-                  return y - _spatium;
+                  return y - spatium();
             default:
                   return y;
             }
@@ -912,7 +913,6 @@ qreal StaffLines::y2() const
       if (system == 0)
             return 0.0;
 
-      QPointF _pos(0.0, 0.0);
       qreal y = system->staff(staffIdx())->y() + ipos().y();
 
       switch (lines) {
