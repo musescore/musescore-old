@@ -274,10 +274,10 @@ void Rest::write(Xml& xml) const
 //   Rest::read
 //---------------------------------------------------------
 
-void Rest::read(QDomElement e, const QList<Tuplet*>& tuplets)
+void Rest::read(QDomElement e, QList<Tuplet*>& tuplets, Measure* measure)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (!ChordRest::readProperties(e, tuplets))
+            if (!ChordRest::readProperties(e, tuplets, measure))
                   domError(e);
             }
       if (!duration().isValid()) {
@@ -327,7 +327,7 @@ void Rest::layout()
       double _spatium = spatium();
       int line = lrint(userOff().y() / _spatium);
       int lines = staff()->lines();
-      
+
       setYoff(2.0);
       switch(duration().type()) {
             case Duration::V_LONG:

@@ -741,7 +741,7 @@ void Chord::write(Xml& xml, int startTick, int endTick) const
 //   Chord::readNote
 //---------------------------------------------------------
 
-void Chord::readNote(QDomElement e, const QList<Tuplet*>& tuplets)
+void Chord::readNote(QDomElement e, QList<Tuplet*>& tuplets, Measure* measure)
       {
       Note* note = new Note(score());
       int ptch   = e.attribute("pitch", "-1").toInt();
@@ -791,7 +791,7 @@ void Chord::readNote(QDomElement e, const QList<Tuplet*>& tuplets)
                   }
             else if (tag == "move")
                   setStaffMove(i);
-            else if (!ChordRest::readProperties(e, tuplets))
+            else if (!ChordRest::readProperties(e, tuplets, measure))
                   domError(e);
             }
       if (ptch != -1) {
@@ -810,7 +810,7 @@ void Chord::readNote(QDomElement e, const QList<Tuplet*>& tuplets)
 void Chord::read(QDomElement e)
       {
       QList<Tuplet*> tl;
-      read(e, tl);
+      read(e, tl, 0);
       if (!duration().isValid())
             convertTicks();
       }
@@ -819,7 +819,7 @@ void Chord::read(QDomElement e)
 //   Chord::read
 //---------------------------------------------------------
 
-void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets)
+void Chord::read(QDomElement e, QList<Tuplet*>& tuplets, Measure* measure)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -879,7 +879,7 @@ void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets)
                   _stem->read(e);
                   add(_stem);
                   }
-            else if (!ChordRest::readProperties(e, tuplets))
+            else if (!ChordRest::readProperties(e, tuplets, measure))
                   domError(e);
             }
       if (!duration().isValid())
@@ -1143,7 +1143,7 @@ void Chord::layoutStem()
                   if (up()) {
                         double dy  = dl + downnote->stemYoff(true);
                         double sel = ul - normalStemLen;
-      
+
                         if (shortenStem && (sel < 0.0) && (hookIdx == 0 || !downnote->mirror()))
                               sel -= sel  * progression.val();
                         if (sel > 2.0)
@@ -1155,7 +1155,7 @@ void Chord::layoutStem()
                   else {
                         double uy  = ul + upnote->stemYoff(false);
                         double sel = dl + normalStemLen;
-      
+
                         if (shortenStem && (sel > 4.0) && (hookIdx == 0 || downnote->mirror()))
                               sel -= (sel - 4.0)  * progression.val();
                         if (sel < 2.0)
@@ -1165,7 +1165,7 @@ void Chord::layoutStem()
                               stemLen = shortest;
                         }
                   }
-                  
+
 
             QPointF npos(stemPos(_up, false));
 
@@ -1325,7 +1325,7 @@ void Chord::layout()
             if (accidental){
                   x = (accidental->x() + accidental->bbox().x()) * mag()+ note->x();
                   }
-            
+
             if (x < lx)
                   lx = x;
             }

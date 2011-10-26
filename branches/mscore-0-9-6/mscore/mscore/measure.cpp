@@ -2137,7 +2137,7 @@ void Measure::read(QDomElement e, int idx)
                   Chord* chord = new Chord(score());
                   chord->setTrack(score()->curTrack);
                   chord->setTick(score()->curTick);   // set default tick position
-                  chord->read(e, _tuplets);
+                  chord->read(e, _tuplets, this);
                   if (chord->tremolo() && chord->tremolo()->twoNotes()) {
                         //
                         // search first note of tremolo
@@ -2182,7 +2182,7 @@ void Measure::read(QDomElement e, int idx)
                   Chord* chord = new Chord(score());
                   chord->setTrack(score()->curTrack);
                   chord->setTick(score()->curTick);   // set default tick position
-                  chord->readNote(e, _tuplets);
+                  chord->readNote(e, _tuplets, this);
                   Segment* s = getSegment(chord);
                   s->add(chord);
                   score()->curTick = chord->tick() + chord->tickLen();
@@ -2191,7 +2191,7 @@ void Measure::read(QDomElement e, int idx)
                   Rest* rest = new Rest(score());
                   rest->setTrack(score()->curTrack);
                   rest->setTick(score()->curTick);    // set default tick position
-                  rest->read(e, _tuplets);
+                  rest->read(e, _tuplets, this);
                   Segment* s = getSegment(rest);
                   s->add(rest);
                   int t = rest->tick() + (rest->ticks() <= 0 ? tickLen() : rest->ticks());
@@ -2348,7 +2348,7 @@ void Measure::read(QDomElement e, int idx)
                   tuplet->setTick(score()->curTick);
                   tuplet->setTrack(score()->curTrack);
                   tuplet->setParent(this);
-                  tuplet->read(e, _tuplets);
+                  tuplet->read(e, _tuplets, this);
                   add(tuplet);
                   }
             else if (tag == "Marker") {
