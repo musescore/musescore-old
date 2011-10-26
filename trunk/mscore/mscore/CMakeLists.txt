@@ -163,7 +163,7 @@ add_executable ( ${ExecutableName}
       bendproperties.cpp tremolobarprop.cpp file.cpp keyb.cpp
       layer.cpp jumpproperties.cpp selectdialog.cpp
       propertymenu.cpp imageproperties.cpp shortcut.cpp bb.cpp
-      midifile.cpp inspector.cpp
+      midifile.cpp inspector.cpp dragelement.cpp
       ${OMR_FILES}
       ${AUDIO}
       )

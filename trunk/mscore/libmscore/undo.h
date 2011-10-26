@@ -1522,6 +1522,24 @@ class ChangeSpannerAnchor : public UndoCommand {
       };
 
 //---------------------------------------------------------
+//   ChangeStaffUserDist
+//---------------------------------------------------------
+
+class ChangeStaffUserDist : public UndoCommand {
+      Staff* staff;
+      qreal dist;
+
+      void flip();
+
+   public:
+      ChangeStaffUserDist(Staff* s, qreal d)
+         : staff(s), dist(d) {}
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      UNDO_NAME("ChangeStaffUserDist");
+      };
+
+//---------------------------------------------------------
 //   ChangeProperty
 //---------------------------------------------------------
 

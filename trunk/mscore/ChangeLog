@@ -1,3 +1,7 @@
+26.oct (ws)
+      - new feature: dragging a staff/measure up/down increases/decreases staff distance
+        in a system score wide. This changes the style parameter akkoladeDistance/staffDistance
+        for a single staff.
 25.oct (ws)
       - fix #13334: Page Break or Spacer not visible when import from musescore 1.1
       - extend meta data dialog: score creation date, MuseScore version/revision, api level

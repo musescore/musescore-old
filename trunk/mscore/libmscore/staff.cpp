@@ -366,6 +366,8 @@ void Staff::write(Xml& xml) const
             xml.tagE("bracket type=\"%d\" span=\"%d\"", i._bracket, i._bracketSpan);
       if (_barLineSpan != 1)
             xml.tag("barLineSpan", _barLineSpan);
+      if (_userDist != 0.0)
+            xml.tag("distOffset", _userDist / spatium());
       xml.etag();
       }
 
@@ -375,7 +377,6 @@ void Staff::write(Xml& xml) const
 
 void Staff::read(QDomElement e)
       {
-      setSmall(false);
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             int v = e.text().toInt();
@@ -404,6 +405,8 @@ void Staff::read(QDomElement e)
                   }
             else if (tag == "barLineSpan")
                   _barLineSpan = v;
+            else if (tag == "distOffset")
+                  _userDist = e.text().toDouble() * spatium();
             else if (tag == "linkedTo") {
                   v -= 1;
                   //
@@ -431,43 +434,6 @@ void Staff::read(QDomElement e)
             }
 */
       }
-
-#if 0
-//---------------------------------------------------------
-//   changeKeySig
-///   Change key signature.
-/// change key signature at tick into subtype st for all staves
-/// in response to gui command (drop keysig on measure or keysig)
-//---------------------------------------------------------
-
-void Staff::changeKeySig(int tick, KeySigEvent st)
-      {
-// qDebug("Staff::changeKeySig "); st.print(); qDebug("\n");
-
-      Measure* measure = _score->tick2measure(tick);
-      if (!measure) {
-            qDebug("measure for tick %d not found!\n", tick);
-            return;
-            }
-      Segment* s = measure->findSegment(SegKeySig, tick);
-      if (!s) {
-            s = new Segment(measure, SegKeySig, tick);
-            _score->undoAddElement(s);
-            }
-      int track = idx() * VOICES;
-      KeySig* ks = static_cast<KeySig*>(s->element(track));
-
-      KeySig* nks = new KeySig(score());
-      nks->setTrack(track);
-      nks->changeKeySigEvent(st);
-      nks->setParent(s);
-
-      if (ks)
-            _score->undoChangeElement(ks, nks);
-      else
-            _score->undoAddElement(nks);
-      }
-#endif
 
 //---------------------------------------------------------
 //   height
@@ -543,8 +509,6 @@ int Staff::channel(int tick,  int voice) const
 
 int Staff::lines() const
       {
-//      if (useTablature())
-//            return part()->instr()->tablature()->strings();
       return _staffType->lines();
       }
 
@@ -720,8 +684,6 @@ void Staff::init(const InstrumentTemplate* t, int cidx)
       else
             st = score()->staffTypes().at(PITCHED_STAFF_TYPE);
 
-// qDebug("init %d %d\n", _initialClef._concertClef, _initialClef._transposingClef);
-
       if (t->staffLines[cidx] != st->lines()) {
             // create new staff type:
             st = st->clone();
@@ -729,5 +691,14 @@ void Staff::init(const InstrumentTemplate* t, int cidx)
             score()->staffTypes().append(st);
             }
       setStaffType(st);
+      }
+
+//---------------------------------------------------------
+//   spatiumChanged
+//---------------------------------------------------------
+
+void Staff::spatiumChanged(qreal oldValue, qreal newValue)
+      {
+      _userDist = (_userDist / oldValue) * newValue;
       }
 

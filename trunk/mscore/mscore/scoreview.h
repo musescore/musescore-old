@@ -153,6 +153,7 @@ class ScoreView : public QWidget, public MuseScoreView {
 
       Element* dragElement;   // valid in state DRAG_OBJECT
       Staff* dragStaff;
+      qreal staffUserDist;    // valid while dragging a staff
 
       Element* curElement;    // current item at mouse press
       QPointF startMove;      // position of last mouse press

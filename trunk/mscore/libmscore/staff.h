@@ -193,6 +193,7 @@ class Staff {
       ClefList* clefList()          { return &_clefList; }   // for backward compatibility
       qreal userDist() const        { return _userDist;  }
       void setUserDist(qreal val)   { _userDist = val;  }
+      void spatiumChanged(qreal /*oldValue*/, qreal /*newValue*/);
       };
 #endif
 

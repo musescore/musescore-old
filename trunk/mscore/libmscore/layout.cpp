@@ -1960,6 +1960,26 @@ void Score::layoutPage(Page* page, int gaps, qreal restHeight)
       }
 
 //---------------------------------------------------------
+//   doLayoutSystems
+//    layout staves in a system
+//    layout pages
+//---------------------------------------------------------
+
+void Score::doLayoutSystems()
+      {
+      /*--*/ {
+            QWriteLocker locker(&_layoutLock);
+            foreach(System* system, _systems)
+                  system->layout2();
+            layoutPages();
+            rebuildBspTree();
+            _updateAll = true;
+            }
+      foreach(MuseScoreView* v, viewer)
+            v->layoutChanged();
+      }
+
+//---------------------------------------------------------
 //   doLayoutPages
 //    small wrapper for layoutPages()
 //---------------------------------------------------------
@@ -1972,7 +1992,6 @@ void Score::doLayoutPages()
             rebuildBspTree();
             _updateAll = true;
             }
-
       foreach(MuseScoreView* v, viewer)
             v->layoutChanged();
       }

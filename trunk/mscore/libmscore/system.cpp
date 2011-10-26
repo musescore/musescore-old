@@ -303,8 +303,12 @@ void System::layout2()
       int lastStaffIdx  = 0;   // last visible staff
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             Staff* staff = score()->staff(staffIdx);
-            SysStaff* s  = _staves[staffIdx];
+            StyleIdx downDistance;
+            qreal userDist = 0.0;
             if ((staffIdx + 1) == nstaves) {
+                  //
+                  // last staff in system
+                  //
                   MeasureBase* mb = ml.last();
                   bool nextMeasureIsVBOX = false;
                   if (mb->next()) {
@@ -312,14 +316,22 @@ void System::layout2()
                         if (type == VBOX || type == TBOX || type == FBOX)
                               nextMeasureIsVBOX = true;
                         }
-                  s->setDistanceDown(score()->styleS(
-                     nextMeasureIsVBOX ? ST_systemFrameDistance : ST_systemDistance
-                     ).val() * _spatium);
+                  downDistance = nextMeasureIsVBOX ? ST_systemFrameDistance : ST_systemDistance;
                   }
-            else if (staff->rstaff() < (staff->part()->staves()->size()-1))
-                  s->setDistanceDown(score()->styleS(ST_akkoladeDistance).val() * _spatium);
-            else
-                  s->setDistanceDown(score()->styleS(ST_staffDistance).val() * _spatium);
+            else if (staff->rstaff() < (staff->part()->staves()->size()-1)) {
+                  //
+                  // staff is not last staff in a part
+                  //
+                  downDistance = ST_akkoladeDistance;
+                  userDist = score()->staff(staffIdx + 1)->userDist();
+                  }
+            else {
+                  downDistance = ST_staffDistance;
+                  userDist = score()->staff(staffIdx + 1)->userDist();
+                  }
+
+            SysStaff* s  = _staves[staffIdx];
+            s->setDistanceDown(score()->styleS(downDistance).val() * _spatium + userDist);
 
             qreal distDown = 0.0;
             qreal distUp   = 0.0;

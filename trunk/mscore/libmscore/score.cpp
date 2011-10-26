@@ -1350,6 +1350,8 @@ void Score::spatiumChanged(qreal oldValue, qreal newValue)
       data[0] = oldValue;
       data[1] = newValue;
       scanElements(data, spatiumHasChanged, true);
+      foreach (Staff* staff, _staves)
+            staff->spatiumChanged(oldValue, newValue);
       }
 
 //---------------------------------------------------------
