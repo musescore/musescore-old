@@ -99,20 +99,36 @@ static void xmlSetPitch(Note* n, char step, int alter, int octave)
 
 //---------------------------------------------------------
 //   setTempo
-//   copied and adapted from importgtp.cpp
+//   copied and adapted from importxml.cpp
 //   TODO: remove duplicate code
 //---------------------------------------------------------
+
+static void addSymbolToText(const SymCode& s, QTextCursor* cur)
+      {
+      QTextCharFormat oFormat = cur->charFormat();
+      if (s.fontId >= 0) {
+            QTextCharFormat oFormat = cur->charFormat();
+            QTextCharFormat nFormat(oFormat);
+            nFormat.setFontFamily(fontId2font(s.fontId).family());
+            cur->setCharFormat(nFormat);
+            cur->insertText(QChar(s.code));
+            cur->setCharFormat(oFormat);
+            }
+      else
+            cur->insertText(QChar(s.code));
+      }
 
 static void setTempo(Score* score, int tempo)
       {
       TempoText* tt = new TempoText(score);
       tt->setTempo(double(tempo)/60.0);
-      int uc = 0x1d15f;
-      QChar h(QChar::highSurrogate(uc));
-      QChar l(QChar::lowSurrogate(uc));
-      tt->setText(QString("%1%2 = %3 ").arg(h).arg(l).arg(tempo));
-
       tt->setTrack(0);
+      QTextDocument* d = tt->doc();
+      QTextCursor c(d);
+      c.movePosition(QTextCursor::EndOfLine);
+      addSymbolToText(SymCode(0xe105, 1), &c);
+      c.insertText(" = ");
+      c.insertText(QString("%1").arg(tempo));
       Measure* measure = score->firstMeasure();
       Segment* segment = measure->getSegment(SegChordRest, 0);
       segment->add(tt);
@@ -225,16 +241,19 @@ namespace Bww {
       if (mbf.endingFirst || mbf.endingSecond) {
             Volta* volta = new Volta(score);
             volta->setTrack(0);
-// TODO            volta->setTick(tick);
             volta->endings().clear();
             if (mbf.endingFirst) {
                   volta->setText("1");
                   volta->endings().append(1);
+                  ending = 1;
                   }
             else {
                   volta->setText("2");
                   volta->endings().append(2);
+                  ending = 2;
                   }
+            volta->setStartElement(currentMeasure);
+            currentMeasure->add(volta);
             lastVolta = volta;
             }
 
@@ -280,8 +299,8 @@ void MsScWriter::endMeasure(const Bww::MeasureEndFlags mef)
                         lastVolta->setSubtype(Volta::VOLTA_CLOSED);
                   else
                         lastVolta->setSubtype(Volta::VOLTA_OPEN);
-// TODO                  lastVolta->setTick2(tick);
-                  score->add(lastVolta);
+                  lastVolta->setEndElement(currentMeasure);
+                  currentMeasure->addSpannerBack(lastVolta);
                   lastVolta = 0;
                   }
             else {
@@ -376,8 +395,8 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
       // add chord to measure
       Segment* s = currentMeasure->getSegment(cr, tick);
       s->add(cr);
-      doTriplet(cr, triplet);
       if (!grace) {
+            doTriplet(cr, triplet);
             int tickBefore = tick;
             tick += ticks;
             Fraction nl(Fraction::fromTicks(tick - currentMeasure->tick()));
