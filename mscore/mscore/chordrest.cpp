@@ -221,7 +221,7 @@ void ChordRest::writeProperties(Xml& xml) const
 //   readProperties
 //---------------------------------------------------------
 
-bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets)
+bool ChordRest::readProperties(QDomElement e, QList<Tuplet*>& tuplets, Measure* measure)
       {
       if (Element::readProperties(e))
             return true;
@@ -260,8 +260,24 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets)
                         break;
                         }
                   }
-            if (tuplet() == 0)
+            if (tuplet() == 0) {
                   printf("Tuplet id %d not found\n", i);
+                  // HACK: collect all tuplets and search again
+                  score()->collectTuplets(e, &tuplets);
+                  foreach(Tuplet* t, tuplets) {
+                        if (t->id() == i) {
+                              measure->add(t);
+                              setTuplet(t);
+                              break;
+                              }
+                        }
+                  }
+            // DEBUG:
+            if (tuplet()->measure() != measure) {
+                  if (tuplet()->measure())
+                        tuplet()->measure()->remove(tuplet());
+                  measure->add(tuplet());
+                  }
             }
       else if (tag == "leadingSpace")
             _extraLeadingSpace = Spatium(val.toDouble());

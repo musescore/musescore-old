@@ -315,7 +315,7 @@ class Score : public QObject {
       void addTempo();
       void addMetronome();
 
-     
+
 
       void cmdAddChordName2();
       int processPendingNotes(QList<MNote*>* notes, int, int);
@@ -658,7 +658,7 @@ class Score : public QObject {
       void toEList(EventMap* events, int staffIdx);
       int mscVersion() const    { return _mscVersion; }
       void setMscVersion(int v) { _mscVersion = v; }
-      
+
       int programVersion() const    { return _programVersion; }
       void setProgramVersion(int v) { _programVersion = v; }
 
@@ -797,6 +797,7 @@ class Score : public QObject {
       void enqueueMidiEvent(MidiInputEvent ev) { midiInputQueue.enqueue(ev); }
       void doLayout();
       void layoutChords1(Segment* segment, int staffIdx);
+      void collectTuplets(QDomElement e, QList<Tuplet*>* tuplets);
       };
 
 extern Score* gscore;

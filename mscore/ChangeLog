@@ -1,3 +1,6 @@
+26.oct (ws)
+      - changes to tuplet handling to allow reading of corrupted files
+        (#13350)
 24 oct (la)
       - fix #13301: add score.close() to plugin framework
       - fix #5433: Staff with one line and repeat bars are not aligned

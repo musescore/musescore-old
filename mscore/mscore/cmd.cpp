@@ -2433,7 +2433,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               Tuplet* tuplet = new Tuplet(this);
                               tuplet->setTrack(curTrack);
                               tuplet->setTick(curTick);
-                              tuplet->read(eee, tuplets);
+                              tuplet->read(eee, tuplets, 0);
                               curTick  = tuplet->tick();
                               int tick = curTick - tickStart + dstTick;
                               Measure* measure = tick2measure(tick);
@@ -2457,10 +2457,10 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                    cr = new Rest(this);
                               else
                                     cr = new RepeatMeasure(this);
-                              
+
                               cr->setTrack(curTrack);
                               cr->setTick(curTick);         // set default tick position
-                              cr->read(eee, tuplets);
+                              cr->read(eee, tuplets, 0);
                               cr->setSelected(false);
                               int voice = cr->voice();
                               int track = dstStaffIdx * VOICES + voice;
@@ -2672,18 +2672,18 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               }
                         }
                   }
-            if(pasted) {      
+            if(pasted) {
                   Segment* s1 = tick2segment(dstTick);
                   Segment* s2 = tick2segment(dstTick + tickLen);
                   _selection.setRange(s1, s2, dstStaffStart, dstStaffStart+staves);
                   updateSelectedElements();
-                  
+
                   ChordRest* cr = s1->nextChordRest(dstStaffStart * VOICES);
                   if(cr)
                         mscore->currentScoreView()->adjustCanvasPosition(cr, false);
                   else
                         mscore->currentScoreView()->adjustCanvasPosition(s1, false);
-                        
+
                   if (selection().state() != SEL_RANGE) {
                         _selection.setState(SEL_RANGE);
                         emit selectionChanged(int(selection().state()));

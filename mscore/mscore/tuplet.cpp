@@ -414,7 +414,7 @@ void Tuplet::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Tuplet::read(QDomElement e, const QList<Tuplet*>& tuplets)
+void Tuplet::read(QDomElement e, QList<Tuplet*>& tuplets, Measure* measure)
       {
       int bl = -1;
       _id    = e.attribute("id", "0").toInt();

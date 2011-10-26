@@ -1819,3 +1819,63 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
       return rv;
       }
 
+//---------------------------------------------------------
+//   collectTuplets
+//---------------------------------------------------------
+
+void Score::collectTuplets(QDomElement e, QList<Tuplet*>* tuplets)
+      {
+      QDomDocument doc = e.ownerDocument();
+
+      QString tag;
+      for (e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            tag = e.tagName();
+            if (tag == "museScore")
+                  break;
+            }
+      if (tag != "museScore") {
+            qDebug("  no museScore found");
+            return;
+            }
+
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            tag = e.tagName();
+            if (tag == "Score" || tag == "Part")
+                  break;
+            }
+      if (tag != "Score" && tag != "Part") {
+            qDebug("  no Score/Part found");
+            return;
+            }
+      if (tag == "Score")
+            e = e.firstChildElement();
+      else
+            e = e.nextSiblingElement();
+      for (; !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "Staff") {
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "Measure") {
+                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                                    if (eee.tagName() == "Tuplet") {
+                                          Tuplet* tuplet = new Tuplet(this);
+                                          QList<Slur*> slurList;
+                                          tuplet->read(eee, *tuplets, 0);
+                                          bool alreadyThere = false;
+                                          foreach(Tuplet* t, *tuplets) {
+                                                if (t->id() == tuplet->id()) {
+                                                      alreadyThere = true;
+                                                      break;
+                                                      }
+                                                }
+                                          if (!alreadyThere)
+                                                tuplets->append(tuplet);
+                                          else
+                                                delete tuplet;
+                                          }
+                                    }
+                              }
+                        }
+                  }
+            }
+      }
+
