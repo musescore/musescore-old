@@ -1,21 +1,14 @@
 //=============================================================================
 //  MuseScore
-//  Linux Music Score Editor
+//  Music Composition & Notation
 //  $Id$
 //
-//  Copyright (C) 2002-2011 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License version 2.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with this program; if not, write to the Free Software
-//  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+//  it under the terms of the GNU General Public License version 2
+//  as published by the Free Software Foundation and appearing in
+//  the file LICENCE.GPL
 //=============================================================================
 
 /**
@@ -3414,79 +3407,6 @@ void ScoreView::showOmr(bool flag)
       }
 
 //---------------------------------------------------------
-//   startDrag
-//---------------------------------------------------------
-
-void ScoreView::startDrag()
-      {
-      dragElement = curElement;
-      startMove  -= dragElement->userOff();
-      _score->startCmd();
-
-      if (dragElement->type() != MEASURE) {
-            foreach(Element* e, _score->selection().elements())
-                  e->setStartDragPosition(e->userOff());
-            }
-#if 0
-      else
-            dragStaff->setStartDragPosition(e->user
-#endif
-      QList<Element*> el;
-      dragElement->scanElements(&el, collectElements);
-      _score->end();
-      }
-
-#if 0
-//---------------------------------------------------------
-//   drag
-//---------------------------------------------------------
-
-void ScoreView::drag(const QPointF& delta)
-      {
-      QPointF pt(delta);
-      if (qApp->keyboardModifiers() == Qt::ShiftModifier)
-            pt.setX(0.0);
-      else if (qApp->keyboardModifiers() == Qt::ControlModifier)
-            pt.setY(0.0);
-      EditData data;
-      data.hRaster = mscore->hRaster();
-      data.vRaster = mscore->vRaster();
-      data.pos     = pt;
-      foreach(Element* e, _score->selection().elements())
-            _score->addRefresh(e->drag(data));
-      _score->end();
-      if (_score->playNote()) {
-            Element* e = _score->selection().element();
-            if (e) {
-                  mscore->play(e);
-                  }
-            _score->setPlayNote(false);
-            }
-      }
-#endif
-
-//---------------------------------------------------------
-//   endDrag
-//---------------------------------------------------------
-
-void ScoreView::endDrag()
-      {
-      if (dragElement->type() != MEASURE) {
-            foreach(Element* e, _score->selection().elements()) {
-                  e->endDrag();
-                  QPointF npos = e->userOff();
-                  e->setUserOff(e->startDragPosition());
-                  _score->undoMove(e, npos);
-                  }
-            }
-      _score->setLayoutAll(true);
-      dragElement = 0;
-      setDropTarget(0); // this also resets dropAnchor
-      _score->endCmd();
-      mscore->endCmd();
-      }
-
-//---------------------------------------------------------
 //   textUndoLevelAdded
 //---------------------------------------------------------
 
@@ -3665,47 +3585,6 @@ void ScoreView::noteEntryButton(QMouseEvent* ev)
       }
 
 //---------------------------------------------------------
-//   doDragElement
-//---------------------------------------------------------
-
-void ScoreView::doDragElement(QMouseEvent* ev)
-      {
-      QPointF delta = toLogical(ev->pos()) - startMove;
-
-      QPointF pt(delta);
-      if (qApp->keyboardModifiers() == Qt::ShiftModifier)
-            pt.setX(0.0);
-      else if (qApp->keyboardModifiers() == Qt::ControlModifier)
-            pt.setY(0.0);
-      EditData data;
-      data.hRaster = mscore->hRaster();
-      data.vRaster = mscore->vRaster();
-      data.pos     = pt;
-
-      if (dragElement->type() == MEASURE)
-            return;
-
-      foreach(Element* e, _score->selection().elements())
-            _score->addRefresh(e->drag(data));
-      if (_score->playNote()) {
-            Element* e = _score->selection().element();
-            if (e)
-                  mscore->play(e);
-            _score->setPlayNote(false);
-            }
-
-      Element* e = _score->getSelectedElement();
-      if (e) {
-            QLineF anchor = e->dragAnchor();
-            if (!anchor.isNull())
-                  setDropAnchor(anchor);
-            else
-                  setDropTarget(0); // this also resets dropAnchor
-            }
-      _score->end();
-      }
-
-//---------------------------------------------------------
 //   select
 //---------------------------------------------------------
 
@@ -3792,25 +3671,6 @@ void ScoreView::mouseReleaseEvent(QMouseEvent* event)
       {
       seq->stopNotes();
       QWidget::mouseReleaseEvent(event);
-      }
-
-//---------------------------------------------------------
-//   testElementDragTransition
-//---------------------------------------------------------
-
-bool ScoreView::testElementDragTransition(QMouseEvent* ev)
-      {
-      if (curElement == 0 || !curElement->isMovable() || QApplication::mouseButtons() != Qt::LeftButton)
-            return false;
-      if (curElement->type() == MEASURE) {
-            System* dragSystem = (System*)(curElement->parent());
-            int staffIdx  = getStaff(dragSystem, startMove);
-            dragStaff = score()->staff(staffIdx);
-            if (staffIdx == 0)
-                  return false;
-            }
-      QPoint delta = ev->pos() - startMoveI;
-      return delta.manhattanLength() > 2;
       }
 
 //---------------------------------------------------------

@@ -3119,6 +3119,18 @@ void ChangeSpannerAnchor::flip()
       }
 
 //---------------------------------------------------------
+//   ChangeStaffUserDist
+//---------------------------------------------------------
+
+void ChangeStaffUserDist::flip()
+      {
+      qreal v = staff->userDist();
+      staff->setUserDist(dist);
+      dist = v;
+      staff->score()->setLayoutAll(true);
+      }
+
+//---------------------------------------------------------
 //   ChangeProperty::flip
 //---------------------------------------------------------
 

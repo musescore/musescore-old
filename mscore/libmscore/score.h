@@ -855,6 +855,7 @@ class Score {
       void setLayoutMode(LayoutMode lm)     { _layoutMode = lm;   }
 
       QReadWriteLock* layoutLock() { return &_layoutLock; }
+      void doLayoutSystems();
       void doLayoutPages();
       };
 
