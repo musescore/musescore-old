@@ -1553,7 +1553,11 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
 
                   Fraction f = se.getNominal();
 // printf("Add Sig %d  len %d:  %s\n", tick, measureLen, qPrintable(f.print()));
-                  score->sigmap()->add(tick, measureLen, f);
+                  if(f.ticks() != measureLen)
+                        score->sigmap()->add(tick, measureLen, f);
+                  else
+                        score->sigmap()->add(tick, f, f);
+                  
                   int tm = AL::ticks_measure(se.fraction());
                   if (tm != measureLen) {
                         if (!measure->irregular()) {
