@@ -1,4 +1,5 @@
 28.oct (ws)
+      - fix repeat ("r") command
       - overhaul tuplet handling
 26.oct (ws)
       - new feature: dragging a staff/measure up/down increases/decreases staff distance
