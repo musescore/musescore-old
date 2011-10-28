@@ -1286,8 +1286,9 @@ void MuseScore::setCurrentView(int tabIdx, int idx)
             setCurrentScoreView((ScoreView*)0);
       else {
             ScoreTab* tab = tabIdx ? tab2 : tab1;
-            if (tab)
+            if (tab) {
                   tab->setCurrentIndex(idx);
+                  }
             }
       }
 
@@ -2240,7 +2241,7 @@ int main(int argc, char* av[])
 
       if (!noSeq) {
             if (!seq->init()) {
-                  printf("sequencer init failed\n");
+                  qDebug("sequencer init failed");
                   noSeq = true;
                   }
             }
@@ -2286,7 +2287,7 @@ MScore::init();         // initialize libmscore
             }
       mscore->loadPlugins();
       mscore->writeSessionFile(false);
-      mscore->changeState(STATE_DISABLED);   // DEBUG
+//      mscore->changeState(STATE_DISABLED);   // DEBUG
 
 #ifdef Q_WS_MAC
       // there's a bug in Qt showing the toolbar unified after switching showFullScreen(), showMaximized(),
@@ -2295,6 +2296,7 @@ MScore::init();         // initialize libmscore
 #endif
 
       mscore->show();
+
       if (sc)
             sc->finish(mscore);
       if (debugMode)
