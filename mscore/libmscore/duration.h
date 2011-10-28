@@ -19,6 +19,7 @@
 
 class Tuplet;
 class Beam;
+class Slur;
 
 //---------------------------------------------------------
 //   DurationElement
@@ -31,8 +32,14 @@ class DurationElement : public Element {
    public:
       DurationElement(Score* s);
       DurationElement(const DurationElement& e);
+      ~DurationElement();
 
       virtual Measure* measure() const               { return (Measure*)(parent()); }
+
+      QList<Prop> properties(Xml& xml, bool /*clipboardmode*/) const;
+      bool readProperties(QDomElement e, QList<Tuplet*>*, const QList<Slur*>*);
+      void writeTuplet(Xml& xml);
+
       void setTuplet(Tuplet* t)                      { _tuplet = t;      }
       Tuplet* tuplet() const                         { return _tuplet;   }
       virtual Beam* beam() const                     { return 0;         }

@@ -94,7 +94,7 @@ class Tuplet : public DurationElement {
       virtual void layout();
       Text* number() const { return _number; }
 
-      void read(QDomElement, const QList<Tuplet*>&, const QList<Slur*>&);
+      void read(QDomElement, QList<Tuplet*>*, const QList<Slur*>*);
       void write(Xml&) const;
 
       virtual void toDefault();
@@ -113,6 +113,7 @@ class Tuplet : public DurationElement {
       bool isUp() const                    { return _isUp; }
       virtual int tick() const             { return _tick; }
       void setTick(int val)                { _tick = val; }
+      void sortElements();
       };
 
 #endif

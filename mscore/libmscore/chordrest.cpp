@@ -161,14 +161,16 @@ void ChordRest::scanElements(void* data, void (*func)(void*, Element*), bool all
       {
       if (_beam && (_beam->elements().front() == this))
             _beam->scanElements(data, func, all);
-//    slur segments are collected from System:
-//          foreach(Slur* slur, _slurFor)
-//                slur->scanElements(data, func, all);
       foreach(Articulation* a, articulations)
             func(data, a);
       foreach(Lyrics* l, _lyricsList) {
             if (l)
                   l->scanElements(data, func, all);
+            }
+      DurationElement* de = this;
+      while (de->tuplet() && de->tuplet()->elements().front() == de) {
+            func(data, de->tuplet());
+            de = de->tuplet();
             }
       if (_tabDur)
             func(data, _tabDur);
@@ -178,9 +180,9 @@ void ChordRest::scanElements(void* data, void (*func)(void*, Element*), bool all
 //   properties
 //---------------------------------------------------------
 
-QList<Prop> ChordRest::properties(Xml& xml, bool /*clipboardmode*/) const
+QList<Prop> ChordRest::properties(Xml& xml, bool clipboardmode) const
       {
-      QList<Prop> pl = Element::properties(xml);
+      QList<Prop> pl = DurationElement::properties(xml, clipboardmode);
       //
       // BeamMode default:
       //    REST  - BEAM_NO
@@ -201,8 +203,6 @@ QList<Prop> ChordRest::properties(Xml& xml, bool /*clipboardmode*/) const
                   }
             pl.append(Prop("BeamMode", s));
             }
-      if (tuplet())
-            pl.append(Prop("Tuplet", tuplet()->id()));
       if (_small)
             pl.append(Prop("small", _small));
       if (_extraLeadingSpace.val() != 0.0)
@@ -251,12 +251,12 @@ void ChordRest::writeProperties(Xml& xml) const
 //   readProperties
 //---------------------------------------------------------
 
-bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets, QList<Slur*>* slurs)
+bool ChordRest::readProperties(QDomElement e, QList<Tuplet*>* tuplets, QList<Slur*>* slurs)
       {
-      if (Element::readProperties(e))
+      if (DurationElement::readProperties(e, tuplets, slurs))
             return true;
-      QString tag(e.tagName());
-      QString val(e.text());
+      const QString& tag(e.tagName());
+      const QString& val(e.text());
       int i = val.toInt();
 
       if (tag == "BeamMode") {
@@ -284,17 +284,6 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets, QLi
             atr->read(e);
             add(atr);
             }
-      else if (tag == "Tuplet") {
-            setTuplet(0);
-            foreach(Tuplet* t, tuplets) {
-                  if (t->id() == i) {
-                        setTuplet(t);
-                        break;
-                        }
-                  }
-            if (tuplet() == 0)
-                  qDebug("Tuplet id %d not found\n", i);
-            }
       else if (tag == "leadingSpace")
             _extraLeadingSpace = Spatium(val.toDouble());
       else if (tag == "trailingSpace")
@@ -310,7 +299,7 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets, QLi
             if (beam)
                   beam->add(this);        // also calls this->setBeam(beam)
             else
-                  qDebug("Beam id %d not found\n", i);
+                  qDebug("Beam id %d not found", i);
             }
       else if (tag == "small")
             _small = i;
@@ -325,7 +314,7 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets, QLi
                         }
                   }
             if (!slur) {
-                  qDebug("ChordRest::read(): Slur id %d not found\n", id);
+                  qDebug("ChordRest::read(): Slur id %d not found", id);
                   slur = new Slur(score());
                   slur->setId(id);
                   slurs->append(slur);
@@ -339,7 +328,7 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets, QLi
                   _slurBack.append(slur);
                   }
             else
-                  qDebug("ChordRest::read(): unknown Slur type <%s>\n", qPrintable(type));
+                  qDebug("ChordRest::read(): unknown Slur type <%s>", qPrintable(type));
             }
       else if (tag == "durationType") {
             setDurationType(val);
@@ -707,7 +696,7 @@ void ChordRest::addSlurFor(Slur* s)
       {
       int idx = _slurFor.indexOf(s);
       if (idx >= 0) {
-            qDebug("ChordRest::setSlurFor(): already there\n");
+            qDebug("ChordRest::setSlurFor(): already there");
             return;
             }
       _slurFor.append(s);
@@ -721,7 +710,7 @@ void ChordRest::addSlurBack(Slur* s)
       {
       int idx = _slurBack.indexOf(s);
       if (idx >= 0) {
-            qDebug("ChordRest::setSlurBack(): already there\n");
+            qDebug("ChordRest::setSlurBack(): already there");
             return;
             }
       _slurBack.append(s);
@@ -734,9 +723,9 @@ void ChordRest::addSlurBack(Slur* s)
 void ChordRest::removeSlurFor(Slur* s)
       {
       if (!_slurFor.removeOne(s)) {
-            qDebug("ChordRest<%p>::removeSlurFor(): %p not found\n", this, s);
+            qDebug("ChordRest<%p>::removeSlurFor(): %p not found", this, s);
             foreach(Slur* s, _slurFor)
-                  qDebug("  %p\n", s);
+                  qDebug("  %p", s);
             abort();
             }
       }
@@ -748,9 +737,9 @@ void ChordRest::removeSlurFor(Slur* s)
 void ChordRest::removeSlurBack(Slur* s)
       {
       if (!_slurBack.removeOne(s)) {
-            qDebug("ChordRest<%p>::removeSlurBack(): %p not found\n", this, s);
+            qDebug("ChordRest<%p>::removeSlurBack(): %p not found", this, s);
             foreach(Slur* s, _slurBack)
-                  qDebug("  %p\n", s);
+                  qDebug("  %p", s);
             }
       }
 
@@ -835,7 +824,7 @@ Element* ChordRest::drop(const DropData& data)
                   score()->undoAddElement(e);
                   return e;
             default:
-                  qDebug("cannot drop %s\n", e->name());
+                  qDebug("cannot drop %s", e->name());
                   delete e;
                   return 0;
             }
@@ -909,6 +898,8 @@ void ChordRest::setTrack(int val)
             _beam->setTrack(val);
       foreach(Lyrics* l, _lyricsList)
             l->setTrack(val);
+      if (tuplet())
+            tuplet()->setTrack(val);
       }
 
 //---------------------------------------------------------
@@ -917,7 +908,7 @@ void ChordRest::setTrack(int val)
 
 int ChordRest::tick() const
       {
-      return segment() ? segment()->tick() : 0;
+      return segment() ? segment()->tick() : -1;
       }
 
 //---------------------------------------------------------
@@ -953,7 +944,7 @@ void ChordRest::add(Element* e)
                   }
                   break;
             default:
-                  qDebug("ChordRest::add: unknown element %s\n", e->name());
+                  qDebug("ChordRest::add: unknown element %s", e->name());
                   break;
             }
       }
@@ -969,7 +960,7 @@ void ChordRest::remove(Element* e)
                   {
                   Articulation* a = static_cast<Articulation*>(e);
                   if (!articulations.removeOne(a))
-                        qDebug("ChordRest::remove(): articulation not found\n");
+                        qDebug("ChordRest::remove(): articulation not found");
                   if (a->timeStretch() > 0.0) {
                         score()->removeTempo(tick());
                         score()->removeTempo(tick() + actualTicks());
@@ -986,10 +977,10 @@ void ChordRest::remove(Element* e)
                         return;
                         }
                   }
-                  qDebug("ChordRest::remove: %s %p not found\n", e->name(), e);
+                  qDebug("ChordRest::remove: %s %p not found", e->name(), e);
                   break;
             default:
-                  qDebug("ChordRest::remove: unknown element %s\n", e->name());
+                  qDebug("ChordRest::remove: unknown element %s", e->name());
                   break;
             }
       }

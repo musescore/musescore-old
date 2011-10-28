@@ -1557,6 +1557,7 @@ bool MuseScore::saveAs(Score* cs, bool saveCopy)
       {
       QStringList fl;
       fl.append(tr("MuseScore Format (*.mscz)"));
+      fl.append(tr("MuseScore Format (*.mscx)"));     // for debugging purposes
       fl.append(tr("All Files (*)"));
       QString saveDialogTitle = saveCopy ? tr("MuseScore: Save a Copy") :
                                            tr("MuseScore: Save As");
@@ -1591,7 +1592,7 @@ bool MuseScore::saveAs(Score* cs, bool saveCopy)
             int idx = fl.indexOf(selectedFilter);
             if (idx != -1) {
                   static const char* extensions[] = {
-                        "mscz"
+                        "mscz", "mscx"
                         };
                   ext = extensions[idx];
                   }

@@ -343,6 +343,11 @@ void Debugger::updateList(Score* s)
                                                 }
                                           foreach(Lyrics* lyrics, cr->lyricsList())
                                                 new ElementItem(sei, lyrics);
+                                          DurationElement* de = cr;
+                                          while (de->tuplet() && de->tuplet()->elements().front() == de) {
+                                                new ElementItem(sei, de->tuplet());
+                                                de = de->tuplet();
+                                                }
                                           }
                                     }
                               foreach(Spanner* s, segment->spannerFor()) {
@@ -366,11 +371,13 @@ void Debugger::updateList(Score* s)
                                     }
 #endif
                               }
+#if 0 // TODOxxx
                         foreach(Tuplet* tuplet, *measure->tuplets()) {
 					ElementItem* item = new ElementItem(mi, tuplet);
                               if (tuplet->number())
                                     new ElementItem(item, tuplet->number());
                               }
+#endif
                         }
                   }
             }
@@ -626,7 +633,7 @@ void MeasureView::setElement(Element* e)
 
       mb.segments->setValue(m->size());
       mb.staves->setValue(m->staffList()->size());
-      mb.tuplets->setValue(m->tuplets()->size());
+//TODOxxx      mb.tuplets->setValue(m->tuplets()->size());
       mb.measureNo->setValue(m->no());
       mb.noOffset->setValue(m->noOffset());
       mb.stretch->setValue(m->userStretch());

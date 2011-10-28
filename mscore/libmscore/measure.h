@@ -94,7 +94,6 @@ class Measure : public MeasureBase {
       int _repeatFlags;       ///< or'd RepeatType's
 
       QList<MStaff*>  staves;
-      QList<Tuplet*>  _tuplets;
 
       QList<Spanner*> _spannerFor;
       QList<Spanner*> _spannerBack;
@@ -147,13 +146,13 @@ class Measure : public MeasureBase {
 
       virtual void add(Element*);
       virtual void remove(Element*);
+      virtual void change(Element* o, Element* n);
 
       System* system() const               { return (System*)parent(); }
       QList<MStaff*>* staffList()          { return &staves;      }
       MStaff* mstaff(int staffIdx)         { return staves[staffIdx]; }
       bool hasVoices(int staffIdx) const   { return staves[staffIdx]->hasVoices; }
       StaffLines* staffLines(int staffIdx) { return staves[staffIdx]->lines; }
-      QList<Tuplet*>* tuplets()            { return &_tuplets;    }
       int no() const                       { return _no;          }
       bool irregular() const               { return _irregular;   }
       void setIrregular(bool val)          { _irregular = val;    }

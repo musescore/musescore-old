@@ -258,7 +258,7 @@ void Rest::write(Xml& xml) const
 //   Rest::read
 //---------------------------------------------------------
 
-void Rest::read(QDomElement e, const QList<Tuplet*>& tuplets, QList<Slur*>* slurs)
+void Rest::read(QDomElement e, QList<Tuplet*>* tuplets, QList<Slur*>* slurs)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (!ChordRest::readProperties(e, tuplets, slurs))
@@ -326,7 +326,7 @@ void Rest::layout()
                   break;
             }
       qreal _spatium = spatium();
-      qreal stepDistance = _spatium * .5;
+//      qreal stepDistance = _spatium * .5;
       int stepOffset     = 0;
       if (staff()) {
             stepOffset = staff()->staffType()->stepOffset();

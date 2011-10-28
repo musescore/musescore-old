@@ -27,6 +27,7 @@
 Lyrics::Lyrics(Score* s)
    : Text(s)
       {
+      setSubtype(TEXT_LYRIC);
       setTextStyle(TEXT_STYLE_LYRIC1);
       _no          = 0;
       _ticks       = 0;
@@ -117,7 +118,7 @@ void Lyrics::read(QDomElement e)
                   else if (val == "middle")
                         _syllabic = MIDDLE;
                   else
-                        qDebug("bad syllabic property\n");
+                        qDebug("bad syllabic property");
                   }
             else if (tag == "endTick") {          // obsolete
                   // store <endTick> tag value until a <ticks> tag has been read
@@ -135,9 +136,9 @@ void Lyrics::read(QDomElement e)
                   domError(e);
             }
       // if any endTick, make it relative to current tick
-      if(iEndTick) {
+      if (iEndTick) {
             _ticks = iEndTick - score()->curTick;
-            qDebug("Lyrics::endTick: %d  ticks %d\n", iEndTick, _ticks);
+            // qDebug("Lyrics::endTick: %d  ticks %d", iEndTick, _ticks);
             }
       }
 
@@ -153,7 +154,7 @@ void Lyrics::add(Element* el)
       else if (el->type() == TEXT && el->subtype() == TEXT_LYRICS_VERSE_NUMBER)
             _verseNumber = static_cast<Text*>(el);
       else
-            qDebug("Lyrics::add: unknown element %s\n", el->name());
+            qDebug("Lyrics::add: unknown element %s", el->name());
       }
 
 //---------------------------------------------------------
@@ -167,7 +168,7 @@ void Lyrics::remove(Element* el)
       else if (el->type() == TEXT && el->subtype() == TEXT_LYRICS_VERSE_NUMBER)
             _verseNumber = 0;
       else
-            qDebug("Lyrics::remove: unknown element %s\n", el->name());
+            qDebug("Lyrics::remove: unknown element %s", el->name());
       }
 
 //---------------------------------------------------------
@@ -211,7 +212,7 @@ void Lyrics::layout()
 
       System* sys = measure()->system();
       if (sys == 0) {
-            qDebug("lyrics layout: no system!\n");
+            qDebug("lyrics layout: no system!");
             abort();
             }
       const QList<Lyrics*>* ll = &(chordRest()->lyricsList());
