@@ -2114,6 +2114,8 @@ void MoveElement::flip()
       QPointF po = element->userOff();
       element->score()->addRefresh(element->canvasBoundingRect());
       element->setUserOff(offset);
+      if (element->type() == REST)
+            element->layout();            // ledgerline could change
       element->score()->addRefresh(element->canvasBoundingRect());
       offset = po;
       }
