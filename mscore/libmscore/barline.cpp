@@ -108,12 +108,15 @@ void BarLine::drawDots(Painter* painter, qreal x) const
             }
       else {
             System* s = measure()->system();
+            int _staffIdx = staffIdx();
+            qreal dy  = s->staff(_staffIdx)->y();
             for (int i = 0; i < _span; ++i) {
-                  Staff* staff  = score()->staff(staffIdx() + i);
+                  Staff* staff  = score()->staff(_staffIdx + i);
                   StaffType* st = staff->staffType();
                   qreal doty1   = st->doty1() * _spatium;
                   qreal doty2   = st->doty2() * _spatium;
-                  qreal staffy  = s->staff(staffIdx() + i)->y();
+
+                  qreal staffy  = s->staff(_staffIdx + i)->y() - dy;
 
                   dotsym.draw(painter, mags, x, staffy + doty1);
                   dotsym.draw(painter, mags, x, staffy + doty2);

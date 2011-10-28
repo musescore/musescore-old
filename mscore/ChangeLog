@@ -1,4 +1,5 @@
 28.oct (ws)
+      - fix #13363: Recent change to repeat bar dot
       - fix #13364: Score tabs disappear
       - fix #13375: Dragging rest ot ledger lines and undo doesn't produce stave rest
       - fix: sometimes a tuplet bracket is left when deleting a whole measure
