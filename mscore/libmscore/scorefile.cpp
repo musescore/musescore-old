@@ -1080,10 +1080,12 @@ bool Score::read(QDomElement dScore)
                               static_cast<KeySig*>(seg->element(track))->setGenerated(false);
                         else {
                               KeySig* ks = keySigFactory(ke);
-                              ks->setParent(seg);
-                              ks->setTrack(track);
-                              ks->setGenerated(false);
-                              seg->add(ks);
+                              if (ks) {
+                                    ks->setParent(seg);
+                                    ks->setTrack(track);
+                                    ks->setGenerated(false);
+                                    seg->add(ks);
+                                    }
                               }
                         }
                   }
