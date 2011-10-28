@@ -181,7 +181,7 @@ const QString Text::subtypeName() const
             case TEXT_INSTRUMENT_CHANGE: return "InstrumentChange";
             case TEXT_LYRICS_VERSE_NUMBER: return "LyricsVerseNumber";
             default:
-                  qDebug("unknown text(%s) subtype %d\n", name(), subtype());
+                  qDebug("Text:subtypeName: unknown text(%s) subtype %d", name(), subtype());
                   break;
             }
       return "?";
@@ -243,7 +243,7 @@ void Text::setSubtype(const QString& s)
       else if (s == "LyricsVerseNumber")
             st = TEXT_LYRICS_VERSE_NUMBER;
       else
-            qDebug("Text(%s): setSubtype: unknown type <%s>\n", name(), qPrintable(s));
+            qDebug("Text(%s): setSubtype: unknown type <%s>", name(), qPrintable(s));
       setSubtype(st);
       }
 
@@ -547,7 +547,6 @@ bool Text::readProperties(QDomElement e)
             if (ok) {
                   // obsolete old text styles
                   switch (i) {
-                        case 0:  i = TEXT_STYLE_INVALID;   break;
                         case 1:  i = TEXT_STYLE_INVALID;   break;
                         case 2:  i = TEXT_STYLE_TITLE;     break;
                         case 3:  i = TEXT_STYLE_SUBTITLE;  break;
@@ -586,7 +585,11 @@ bool Text::readProperties(QDomElement e)
                         case 33: i = TEXT_STYLE_BENCH;   break;
                         case 34: i = TEXT_STYLE_HEADER;  break;
                         case 35: i = TEXT_STYLE_FOOTER;  break;
-                        default: i = TEXT_STYLE_INVALID; break;
+                        case 0:
+                        default:
+                              qDebug("Text:readProperties: style %d<%s> invalid", i, qPrintable(val));
+                              i = TEXT_STYLE_INVALID;
+                              break;
                         }
                   setTextStyle(TextStyleType(i));
                   }

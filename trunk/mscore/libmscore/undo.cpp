@@ -378,7 +378,6 @@ void Score::undoChangePitch(Note* note, int pitch, int tpc, int line, int fret, 
             Chord* c     = static_cast<Chord*>(s->element(staffIdx * VOICES + chord->voice()));
             Note* n      = c->notes().at(noteIndex);
             undo()->push(new ChangePitch(n, pitch, tpc, line, fret, string));
-            score->updateAccidentals(m, staffIdx);
             }
       }
 
@@ -809,8 +808,8 @@ void Score::undoAddElement(Element* element)
          && element->type() != TRILL
          && element->type() != TEXTLINE
          && element->type() != VOLTA
-         && element->type() != DYNAMIC
-         && element->type() != TUPLET)
+         && element->type() != DYNAMIC)
+//         && element->type() != TUPLET)
             ) {
             undo()->push(new AddElement(element));
             return;
@@ -992,7 +991,7 @@ void Score::undoAddElement(Element* element)
                   score->updateAccidentals(m, staffIdx);
                   score->setLayout(m);
                   }
-            else if (element->type() == TUPLET) {
+/*            else if (element->type() == TUPLET) {
                   Tuplet* t      = static_cast<Tuplet*>(element);
                   Tuplet* nt     = static_cast<Tuplet*>(ne);
                   int ntrack     = staffIdx * VOICES + t->voice();
@@ -1001,6 +1000,7 @@ void Score::undoAddElement(Element* element)
                   nt->setParent(m);
                   undo()->push(new AddElement(nt));
                   }
+ */
             else
                   qDebug("undoAddElement: unhandled: <%s>\n", element->name());
             }
@@ -1051,6 +1051,7 @@ void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
                               note->setTpcFromPitch();
                         }
                   }
+#if 0 //TODOxxx
             if (cr->tuplet()) {
                   int tick = cr->tuplet()->tick();
                   Tuplet* nt = 0;
@@ -1065,6 +1066,7 @@ void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
                   else
                         qDebug("undoAddCR: Tuplet not found\n");
                   }
+#endif
             undo()->push(new AddElement(newcr));
             score->updateAccidentals(m, staffIdx);
             }
@@ -1126,6 +1128,32 @@ AddElement::AddElement(Element* e)
       }
 
 //---------------------------------------------------------
+//   undoRemoveTuplet
+//---------------------------------------------------------
+
+static void undoRemoveTuplet(DurationElement* cr)
+      {
+      if (cr->tuplet()) {
+            cr->tuplet()->remove(cr);
+            if (cr->tuplet()->elements().isEmpty())
+                  undoRemoveTuplet(cr->tuplet());
+            }
+      }
+
+//---------------------------------------------------------
+//   undoAddTuplet
+//---------------------------------------------------------
+
+static void undoAddTuplet(DurationElement* cr)
+      {
+      if (cr->tuplet()) {
+            cr->tuplet()->add(cr);
+            if (cr->tuplet()->elements().size() == 1)
+                  undoAddTuplet(cr->tuplet());
+            }
+      }
+
+//---------------------------------------------------------
 //   undo
 //---------------------------------------------------------
 
@@ -1141,6 +1169,9 @@ void AddElement::undo()
                   tie->score()->updateNotes();
             else
                   tie->score()->updateAccidentals(m1, tie->staffIdx());
+            }
+      else if (element->isChordRest()) {
+            undoRemoveTuplet(static_cast<ChordRest*>(element));
             }
       }
 
@@ -1160,6 +1191,9 @@ void AddElement::redo()
                   tie->score()->updateNotes();
             else
                   tie->score()->updateAccidentals(m1, tie->staffIdx());
+            }
+      else if (element->isChordRest()) {
+            undoAddTuplet(static_cast<ChordRest*>(element));
             }
       }
 
@@ -1203,11 +1237,6 @@ RemoveElement::RemoveElement(Element* e)
                         }
                   }
             }
-      else if (element->type() == TUPLET) {
-            Tuplet* tuplet = static_cast<Tuplet*>(element);
-            if (tuplet->tuplet() && tuplet->tuplet()->elements().empty())
-                  score->undoRemoveElement(tuplet->tuplet());
-            }
       }
 
 //---------------------------------------------------------
@@ -1217,12 +1246,15 @@ RemoveElement::RemoveElement(Element* e)
 void RemoveElement::undo()
       {
       element->score()->addElement(element);
-      if (element->type() == CHORD) {
-            Chord* chord = static_cast<Chord*>(element);
-            foreach(Note* note, chord->notes()) {
-                  if (note->tieBack())
-                        note->tieBack()->setEndNote(note);
+      if (element->isChordRest()) {
+            if (element->type() == CHORD) {
+                  Chord* chord = static_cast<Chord*>(element);
+                  foreach(Note* note, chord->notes()) {
+                        if (note->tieBack())
+                              note->tieBack()->setEndNote(note);
+                        }
                   }
+            undoAddTuplet(static_cast<ChordRest*>(element));
             }
       }
 
@@ -1233,6 +1265,8 @@ void RemoveElement::undo()
 void RemoveElement::redo()
       {
       element->score()->removeElement(element);
+      if (element->isChordRest())
+            undoRemoveTuplet(static_cast<ChordRest*>(element));
       }
 
 //---------------------------------------------------------
@@ -1499,7 +1533,12 @@ void ChangePitch::flip()
       fret           = f_fret;
       string         = f_string;
 
-      note->score()->setLayout(note->chord()->segment()->measure());
+      Score* score = note->score();
+      Chord* chord = note->chord();
+      Measure* measure = chord->segment()->measure();
+      score->updateAccidentals(measure, chord->staffIdx());
+      // score->setLayout(measure);
+      score->setLayoutAll(true);
       }
 
 //---------------------------------------------------------
@@ -2213,7 +2252,6 @@ void ChangePageFormat::flip()
       if (os != spatium) {
             score->setSpatium(spatium);
             score->spatiumChanged(os, spatium);
-printf("ChangePageFormat::flip(): spatium %f -> %f\n", os, spatium);
             }
       score->setPageNumberOffset(pageOffset);
       score->setLayoutAll(true);

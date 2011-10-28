@@ -1425,8 +1425,6 @@ void Score::addElement(Element* element)
             case TRILL:
             case PEDAL:
             case TEXTLINE:
-//            case HAIRPIN:
-//            case TIE:
                   {
                   Spanner* spanner = static_cast<Spanner*>(element);
                   foreach(SpannerSegment* ss, spanner->spannerSegments()) {

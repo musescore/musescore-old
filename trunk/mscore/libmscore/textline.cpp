@@ -428,7 +428,7 @@ void TextLine::writeProperties(Xml& xml, const TextLine* proto) const
 
 bool TextLine::readProperties(QDomElement e)
       {
-      QString tag(e.tagName());
+      const QString& tag(e.tagName());
       const QString& text = e.text();
       if (tag == "beginHookHeight") {
             _beginHookHeight = Spatium(text.toDouble());

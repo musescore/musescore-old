@@ -238,7 +238,7 @@ class Score {
       QList<Page*> _pages;          // pages are build from systems
       QList<System*> _systems;      // measures are akkumulated to systems
 
-      // values used during doLayout:
+      // temp values used during doLayout:
       int curPage;
       int curSystem;
       MeasureBase* curMeasure;
@@ -380,7 +380,6 @@ class Score {
       void reLayout(Measure*);
 
       void checkSlurs();
-      void checkTuplets();
       void checkScore();
       bool rewriteMeasures(Measure* fm, Measure* lm, const Fraction&);
       void rewriteMeasures(Measure* fm, const Fraction& ns);
@@ -857,6 +856,7 @@ class Score {
       QReadWriteLock* layoutLock() { return &_layoutLock; }
       void doLayoutSystems();
       void doLayoutPages();
+      Tuplet* searchTuplet(QDomElement e, int id);
       };
 
 extern Score* gscore;

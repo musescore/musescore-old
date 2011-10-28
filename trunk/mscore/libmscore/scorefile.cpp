@@ -110,11 +110,6 @@ void Score::write(Xml& xml, bool selectionOnly)
       foreach(const Part* part, _parts)
             part->write(xml);
 
-      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
-            foreach(Tuplet* tuplet, *m->tuplets())
-                  tuplet->setId(xml.tupletId++);
-            }
-
       xml.curTrack              = 0;
       int staffStart            = 0;
       int staffEnd              = _staves.size();
@@ -1475,76 +1470,128 @@ void Score::writeSegments(Xml& xml, const Measure* m, int strack, int etrack, Se
                               xml.tagE(QString("endSpanner id=\"%1\"").arg(e->id()));
                               }
                         }
-                  if (e) {
-                        if (e->generated()) {
-                              if ((xml.curTick - xml.tickDiff) == 0) {
-                                    if (e->type() == CLEF) {
-                                          if (needTick) {
-                                                xml.tag("tick", segment->tick() - xml.tickDiff);
-                                                xml.curTick = segment->tick();
-                                                needTick = false;
-                                                }
-                                          e->write(xml);
+                  if (!e)
+                        continue;
+
+                  if (e->generated()) {
+                        if ((xml.curTick - xml.tickDiff) == 0) {
+                              if (e->type() == CLEF) {
+                                    if (needTick) {
+                                          xml.tag("tick", segment->tick() - xml.tickDiff);
+                                          xml.curTick = segment->tick();
+                                          needTick = false;
                                           }
-                                    }
-                              continue;
-                              }
-                        if (needTick) {
-                              xml.tag("tick", segment->tick() - xml.tickDiff);
-                              xml.curTick = segment->tick();
-                              needTick = false;
-                              }
-                        if (e->isChordRest()) {
-                              ChordRest* cr = static_cast<ChordRest*>(e);
-                              Beam* beam = cr->beam();
-                              if (beam && !beam->generated() && beam->elements().front() == cr) {
-                                    beam->setId(xml.beamId++);
-                                    beam->write(xml);
-                                    }
-                              Tuplet* tuplet = cr->tuplet();
-                              if (tuplet && tuplet->elements().front() == cr) {
-                                    tuplet->setId(xml.tupletId++);
-                                    tuplet->write(xml);
-                                    }
-                              foreach(Slur* slur, cr->slurFor()) {
-                                    bool found = false;
-                                    foreach(Slur* slur1, slurs) {
-                                          if (slur1 == slur) {
-                                                found = true;
-                                                break;
-                                                }
-                                          }
-                                    if (!found) {
-                                          slur->setId(xml.slurId++);
-                                          slurs.append(slur);
-                                          slur->write(xml);
-                                          }
-                                    }
-                              foreach(Slur* slur, cr->slurBack()) {
-                                    bool found = false;
-                                    foreach(Slur* slur1, slurs) {
-                                          if (slur1 == slur) {
-                                                found = true;
-                                                break;
-                                                }
-                                          }
-                                    if (!found) {
-                                          slur->setId(xml.slurId++);
-                                          slurs.append(slur);
-                                          slur->write(xml);
-                                          }
+                                    e->write(xml);
                                     }
                               }
-                        if ((segment->subtype() == SegEndBarLine) && m && (m->multiMeasure() > 0)) {
-                              xml.stag("BarLine");
-                              xml.tag("subtype", m->endBarLineType());
-                              xml.tag("visible", m->endBarLineVisible());
-                              xml.etag();
+                        continue;
+                        }
+                  if (needTick) {
+                        xml.tag("tick", segment->tick() - xml.tickDiff);
+                        xml.curTick = segment->tick();
+                        needTick = false;
+                        }
+                  if (e->isChordRest()) {
+                        ChordRest* cr = static_cast<ChordRest*>(e);
+                        Beam* beam = cr->beam();
+                        if (beam && !beam->generated() && beam->elements().front() == cr) {
+                              beam->setId(xml.beamId++);
+                              beam->write(xml);
                               }
-                        else
-                              e->write(xml);
+                        cr->writeTuplet(xml);
+                        foreach(Slur* slur, cr->slurFor()) {
+                              bool found = false;
+                              foreach(Slur* slur1, slurs) {
+                                    if (slur1 == slur) {
+                                          found = true;
+                                          break;
+                                          }
+                                    }
+                              if (!found) {
+                                    slur->setId(xml.slurId++);
+                                    slurs.append(slur);
+                                    slur->write(xml);
+                                    }
+                              }
+                        foreach(Slur* slur, cr->slurBack()) {
+                              bool found = false;
+                              foreach(Slur* slur1, slurs) {
+                                    if (slur1 == slur) {
+                                          found = true;
+                                          break;
+                                          }
+                                    }
+                              if (!found) {
+                                    slur->setId(xml.slurId++);
+                                    slurs.append(slur);
+                                    slur->write(xml);
+                                    }
+                              }
+                        }
+                  if ((segment->subtype() == SegEndBarLine) && m && (m->multiMeasure() > 0)) {
+                        xml.stag("BarLine");
+                        xml.tag("subtype", m->endBarLineType());
+                        xml.tag("visible", m->endBarLineVisible());
+                        xml.etag();
+                        }
+                  else
+                        e->write(xml);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   searchTuplet
+//    search complete Dom for tuplet id
+//---------------------------------------------------------
+
+Tuplet* Score::searchTuplet(QDomElement e, int id)
+      {
+      QDomDocument doc = e.ownerDocument();
+
+      QString tag;
+      for (e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            tag = e.tagName();
+            if (tag == "museScore")
+                  break;
+            }
+      if (tag != "museScore") {
+            qDebug("Score::searchTuplet():  no museScore found");
+            return 0;
+            }
+
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            tag = e.tagName();
+            if (tag == "Score" || tag == "Part")
+                  break;
+            }
+      if (tag != "Score" && tag != "Part") {
+            qDebug("Score::searchTuplet():  no Score/Part found");
+            return 0;
+            }
+      if (tag == "Score")
+            e = e.firstChildElement();
+      else
+            e = e.nextSiblingElement();
+      for (; !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "Staff") {
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "Measure") {
+                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                                    if (eee.tagName() == "Tuplet") {
+                                          Tuplet* tuplet = new Tuplet(this);
+                                          QList<Slur*> slurList;
+                                          QList<Tuplet*> tuplets;
+                                          tuplet->read(eee, &tuplets, &slurList);
+                                          if (tuplet->id() == id)
+                                                return tuplet;
+                                          delete tuplet;
+                                          }
+                                    }
+                              }
                         }
                   }
             }
+      return 0;
       }
 

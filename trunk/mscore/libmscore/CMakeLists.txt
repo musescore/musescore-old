@@ -40,7 +40,7 @@ add_library (
       utils.cpp velo.cpp volta.cpp xml.cpp mscore.cpp
       undo.cpp cmd.cpp scorefile.cpp revisions.cpp
       check.cpp input.cpp icon.cpp ossia.cpp
-      dsp.cpp tempo.cpp sig.cpp pos.cpp fraction.cpp
+      dsp.cpp tempo.cpp sig.cpp pos.cpp fraction.cpp duration.cpp
       )
 set_target_properties (
       libmscore

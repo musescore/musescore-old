@@ -168,13 +168,13 @@ void Segment::setScore(Score* score)
 Segment::~Segment()
       {
       foreach(Element* e, _elist) {
-            if (e) {
-                  if (e->type() == CLEF)
-                        e->staff()->removeClef(static_cast<Clef*>(e));
-                  else if (e->type() == TIMESIG)
-                        e->staff()->removeTimeSig(static_cast<TimeSig*>(e));
-                  delete e;
-                  }
+            if (!e)
+                  continue;
+            if (e->type() == CLEF)
+                  e->staff()->removeClef(static_cast<Clef*>(e));
+            else if (e->type() == TIMESIG)
+                  e->staff()->removeTimeSig(static_cast<TimeSig*>(e));
+            delete e;
             }
       }
 
@@ -487,13 +487,6 @@ void Segment::add(Element* el)
 
             case CHORD:
             case REST:
-                  {
-                  ChordRest* cr = static_cast<ChordRest*>(el);
-                  if (cr->tuplet()) {
-                        cr->tuplet()->add(cr);
-                        cr->tuplet()->setTrack(track);      // debug
-                        }
-                  }
                   if (_elist[track]) {
                         qDebug("Segment::add(%s) there is already an %s at %d track %d\n",
                            el->name(), _elist[track]->name(), tick(), track);
@@ -522,11 +515,8 @@ void Segment::remove(Element* el)
             case CHORD:
             case REST:
                   {
-                  ChordRest* cr = (ChordRest*)el;
-                  if (cr->tuplet())
-                        cr->tuplet()->remove(cr);
                   _elist[track] = 0;
-                  int staffIdx = cr->staffIdx();
+                  int staffIdx = el->staffIdx();
                   measure()->checkMultiVoices(staffIdx);
                   }
                   break;

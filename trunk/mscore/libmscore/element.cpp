@@ -678,12 +678,12 @@ bool Element::readProperties(QDomElement e)
       {
       const QString& tag(e.tagName());
       const QString& val(e.text());
-      int i = val.toInt();
       float _spatium = spatium();
 
       if (tag == "lid") {
-            _links = score()->links().value(i);
+            _links = score()->links().value(val.toInt());
             if (!_links) {
+                  int i = val.toInt();
                   if (score()->parentScore())   // DEBUG
                         qDebug("---link %d not found (%d)\n", i, score()->links().size());
                   _links = new LinkedElements(i);
@@ -697,7 +697,7 @@ bool Element::readProperties(QDomElement e)
             setSubtype(val);
             }
       else if (tag == "tick")
-            score()->curTick = score()->fileDivision(i);
+            score()->curTick = score()->fileDivision(val.toInt());
       else if (tag == "offset") {         // ??obsolete
             QPointF pt(readPoint(e) * _spatium);
             setUserOff(pt);
@@ -706,18 +706,17 @@ bool Element::readProperties(QDomElement e)
       else if (tag == "pos")
             _readPos = readPoint(e) * _spatium;
       else if (tag == "visible")
-            setVisible(i);
+            setVisible(val.toInt());
       else if (tag == "voice")
-            setTrack((_track/VOICES)*VOICES + i);
-      else if (tag == "track") {
-            // score()->curTrack = i;
-            setTrack(i);
-            }
+            setTrack((_track/VOICES)*VOICES + val.toInt());
+      else if (tag == "track")
+            setTrack(val.toInt());
       else if (tag == "selected")
-            setSelected(i);
+            setSelected(val.toInt());
       else if (tag == "color")
             _color = readColor(e);
       else if (tag == "systemFlag") {
+            int i = val.toInt();
             setFlag(ELEMENT_SYSTEM_FLAG, i);
             if (i)
                   _track = 0;

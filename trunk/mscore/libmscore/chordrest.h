@@ -62,9 +62,9 @@ class ChordRest : public DurationElement {
       Segment* segment() const                   { return (Segment*)parent(); }
       virtual Measure* measure() const           { return (Measure*)(parent()->parent()); }
 
-      virtual void read(QDomElement, const QList<Tuplet*>&, QList<Slur*>*) = 0;
+      virtual void read(QDomElement, QList<Tuplet*>*, QList<Slur*>*) = 0;
       void writeProperties(Xml& xml) const;
-      bool readProperties(QDomElement e, const QList<Tuplet*>&, QList<Slur*>*);
+      bool readProperties(QDomElement e, QList<Tuplet*>*, QList<Slur*>*);
       QList<Prop> properties(Xml&, bool clipboardmode) const;
       virtual QList<Prop> properties(Xml& xml) const { return properties(xml, false); }
       virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);

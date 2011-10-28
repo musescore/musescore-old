@@ -54,23 +54,6 @@ void Score::checkSlurs()
       }
 
 //---------------------------------------------------------
-//   checkTuplets
-//    helper routine to check for tuplet sanity
-//---------------------------------------------------------
-
-void Score::checkTuplets()
-      {
-      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
-            foreach(Tuplet* t, *m->tuplets()) {
-                  if (t->elements().empty()) {
-qDebug("empty tuplet: removing\n");
-                        m->tuplets()->removeAll(t);
-                        }
-                  }
-            }
-      }
-
-//---------------------------------------------------------
 //   checkScore
 //---------------------------------------------------------
 
@@ -103,7 +86,6 @@ qDebug("checkScore: remove empty ChordRest segment\n");
             }
 
       checkSlurs();
-      checkTuplets();
 
       ChordRest* lcr = 0;
       for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
