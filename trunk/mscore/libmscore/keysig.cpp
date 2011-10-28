@@ -372,6 +372,8 @@ void KeySig::changeKeySigEvent(const KeySigEvent& t)
             return;
       if (t.custom()) {
             KeySig* ks = _score->customKeySig(t.customType());
+            if (!ks)
+                  return;
             foreach(KeySym* k, keySymbols)
                   delete k;
             keySymbols.clear();

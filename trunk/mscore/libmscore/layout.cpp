@@ -780,16 +780,18 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                   // create missing key signature
                   //
                   keysig = keySigFactory(keyIdx);
-                  // if signature is not custom or prev. signature has same accid. as
-                  // this one, reset naturals
-                  if (!keysig->isCustom() && oKeySigBefore.accidentalType() == keysig->keySignature())
-                        keysig->setOldSig(0);
-                  keysig->setTrack(i * VOICES);
-                  keysig->setGenerated(true);
-                  keysig->setMag(staff->mag());
-                  Segment* seg = m->undoGetSegment(SegKeySig, tick);
-                  keysig->setParent(seg);
-                  undoAddElement(keysig);
+                  if (keysig) {
+                        // if signature is not custom or prev. signature has same accid. as
+                        // this one, reset naturals
+                        if (!keysig->isCustom() && oKeySigBefore.accidentalType() == keysig->keySignature())
+                              keysig->setOldSig(0);
+                        keysig->setTrack(i * VOICES);
+                        keysig->setGenerated(true);
+                        keysig->setMag(staff->mag());
+                        Segment* seg = m->undoGetSegment(SegKeySig, tick);
+                        keysig->setParent(seg);
+                        undoAddElement(keysig);
+                        }
                   }
             else if (!needKeysig && keysig)
                   undoRemoveElement(keysig);

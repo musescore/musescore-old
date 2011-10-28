@@ -1767,7 +1767,7 @@ int Score::addCustomKeySig(KeySig* ks)
 
 KeySig* Score::customKeySig(int idx) const
       {
-      return customKeysigs[idx];
+      return customKeysigs.value(idx);
       }
 
 //---------------------------------------------------------
@@ -1780,7 +1780,13 @@ KeySig* Score::keySigFactory(const KeySigEvent& e)
       if (!e.isValid())
             return 0;
       if (e.custom()) {
-            ks = new KeySig(*customKeysigs[e.customType()]);
+            KeySig* cks = customKeysigs.value(e.customType());
+            if (cks)
+                  ks = new KeySig(*cks);
+            else {
+                  qDebug("Score::keySigFactory: invalid custom key index");
+                  return 0;
+                  }
             }
       else {
             ks = new KeySig(this);
