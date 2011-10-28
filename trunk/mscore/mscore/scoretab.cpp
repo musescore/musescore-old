@@ -308,10 +308,14 @@ int ScoreTab::currentIndex() const
 
 void ScoreTab::setCurrentIndex(int idx)
       {
-      if (tab->currentIndex() == idx)
+      setCurrent(0);
+      if (currentIndex() == idx)
             setCurrent(idx);
-      else
+      else {
+            Q_ASSERT(idx < tab->count());
             tab->setCurrentIndex(idx);
+            }
+      tab->setTabText(idx, tab->tabText(idx));  // HACK
       }
 
 //---------------------------------------------------------
