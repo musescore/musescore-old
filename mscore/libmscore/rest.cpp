@@ -404,7 +404,7 @@ void Rest::layout()
       int yo;
       _sym = getSymbol(durationType().type(), line + lineOffset/2, lines, &yo);
       layoutArticulations();
-      setPos(0.0, (qreal(yo) + qreal(lineOffset + stepOffset) * .5) * _spatium);
+      rypos() = (qreal(yo) + qreal(lineOffset + stepOffset) * .5) * _spatium;
 
       Spatium rs;
       if (dots()) {
