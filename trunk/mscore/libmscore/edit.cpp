@@ -1397,8 +1397,11 @@ void Score::cmdDeleteSelection()
             Segment* s1 = selection().startSegment();
             Segment* s2 = selection().endSegment();
 
-            bool fullMeasure = (s1->measure()->first(SegChordRest) == s1)
-                               && (s2 == 0 || (s2->segmentType() == SegEndBarLine));
+            Segment* ss1 = s1;
+            if (ss1->segmentType() != SegChordRest)
+                  ss1 = ss1->next1(SegChordRest);
+            bool fullMeasure = ss1 && (ss1->measure()->first(SegChordRest) == ss1)
+                  && (s2 == 0 || (s2->segmentType() == SegEndBarLine));
 
             int tick2   = s2 ? s2->tick() : INT_MAX;
             int track1  = selection().staffStart() * VOICES;
@@ -1443,7 +1446,7 @@ void Score::cmdDeleteSelection()
                               }
                         if (tuplet != cr->tuplet()) {
                               Tuplet* t = cr->tuplet();
-                              if (t && ((t->tick() + t->actualTicks()) < tick2)) {
+                              if (t && (((t->tick() + t->actualTicks()) <= tick2) || fullMeasure)) {
                                     // remove complete top level tuplet
 
                                     while (t->tuplet())

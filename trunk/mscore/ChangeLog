@@ -1,4 +1,5 @@
 28.oct (ws)
+      - fix: sometimes a tuplet bracket is left when deleting a whole measure
       - fix repeat ("r") command
       - overhaul tuplet handling
 26.oct (ws)
