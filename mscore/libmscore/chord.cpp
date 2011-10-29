@@ -554,9 +554,19 @@ void Chord::computeUp()
       if (_stemDirection != AUTO) {
             _up = _stemDirection == UP;
             }
-      if (_noteType != NOTE_NORMAL)
-            _up = true;
-      if (measure()->mstaff(staffIdx())->hasVoices) {
+      else if (_noteType != NOTE_NORMAL) {
+            if (measure()->mstaff(staffIdx())->hasVoices) {
+                  switch(voice()) {
+                        case 0:  _up = (score()->style(ST_stemDir1).toDirection() == UP); break;
+                        case 1:  _up = (score()->style(ST_stemDir2).toDirection() == UP); break;
+                        case 2:  _up = (score()->style(ST_stemDir3).toDirection() == UP); break;
+                        case 3:  _up = (score()->style(ST_stemDir4).toDirection() == UP); break;
+                        }
+                  }
+            else
+                  _up = true;
+            }
+      else if (measure()->mstaff(staffIdx())->hasVoices) {
             switch(voice()) {
                   case 0:  _up = (score()->style(ST_stemDir1).toDirection() == UP); break;
                   case 1:  _up = (score()->style(ST_stemDir2).toDirection() == UP); break;
@@ -1369,7 +1379,10 @@ void Chord::layout()
                         stemUp = up();
 
                   if (note->mirror())
-                        x += stemUp ? headWidth : - headWidth;
+                        x += stemUp ? note->headWidth() : -note->headWidth();
+
+                  if (note->small() && _up)
+                        x += (headWidth - note->headWidth());
 
                   note->setPos(x, (note->line() + stepOffset) * stepDistance);
                   note->adjustReadPos();

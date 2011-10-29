@@ -140,6 +140,7 @@ Note::Note(Score* s)
       _accidental        = 0;
       _mirror            = false;
       _userMirror        = DH_AUTO;
+      _small             = false;
       _dotPosition       = AUTO;
       _line              = 0;
       _fret              = -1;
@@ -209,6 +210,7 @@ Note::Note(const Note& n)
       _headType          = n._headType;
       _mirror            = n._mirror;
       _userMirror        = n._userMirror;
+      _small             = n._small;
       _dotPosition       = n._dotPosition;
       _accidental        = 0;
       if (n._accidental)
@@ -314,7 +316,10 @@ int Note::noteHead() const
 
 qreal Note::headWidth() const
       {
-      return symbols[score()->symIdx()][noteHead()].width(magS());
+      qreal val = symbols[score()->symIdx()][noteHead()].width(magS());
+      if (_small)
+            val *= score()->styleD(ST_smallNoteMag);
+      return val;
       }
 
 //---------------------------------------------------------
@@ -563,7 +568,10 @@ void Note::draw(Painter* painter) const
                         else if (i < in->minPitchA() || i > in->maxPitchA())
                               painter->setPenColor(Qt::darkYellow);
                         }
-                  symbols[score()->symIdx()][noteHead()].draw(painter, magS());
+                  qreal mag = magS();
+                  if (_small)
+                        mag *= score()->styleD(ST_smallNoteMag);
+                  symbols[score()->symIdx()][noteHead()].draw(painter, mag);
                   }
             }
       }
@@ -633,6 +641,8 @@ void Note::write(Xml& xml) const
             xml.tag("headType", _headType);
       if (_userMirror != DH_AUTO)
             xml.tag("mirror", _userMirror);
+      if (_small)
+            xml.tag("small", _small);
       if (_veloType != AUTO_VAL) {
             xml.valueTypeTag("veloType", _veloType);
             xml.tag("velocity", _veloOffset);
@@ -830,6 +840,8 @@ void Note::read(QDomElement e)
                   chord()->setStaffMove(i);
             else if (tag == "mirror")
                   _userMirror = DirectionH(i);
+            else if (tag == "small")
+                  _small = i;
             else if (tag == "veloType")
                   _veloType = readValueType(e);
             else if (tag == "velocity")
@@ -1667,7 +1679,8 @@ void Note::setNval(NoteVal nval)
 QVariant Note::getProperty(int propertyId) const
       {
       switch(propertyId) {
-            case P_TPC: return tpc();
+            case P_TPC:   return tpc();
+            case P_SMALL: return small();
             default:
                   return Element::getProperty(propertyId);
             }
@@ -1680,7 +1693,8 @@ QVariant Note::getProperty(int propertyId) const
 void Note::setProperty(int propertyId, const QVariant& v)
       {
       switch(propertyId) {
-            case P_TPC: setTpc(v.toInt()); break;
+            case P_TPC:   setTpc(v.toInt()); break;
+            case P_SMALL: setSmall(v.toInt()); break;
             default:
                   Element::setProperty(propertyId, v);
             }
