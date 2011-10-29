@@ -35,7 +35,7 @@ PartEdit::PartEdit(QWidget* parent)
    : QWidget(parent, Qt::Dialog)
       {
       setupUi(this);
-      connect(patch,    SIGNAL(currentIndexChanged(int)), SLOT(patchChanged(int)));
+      connect(patch,    SIGNAL(activated(int)),           SLOT(patchChanged(int)));
       connect(volume,   SIGNAL(valueChanged(double,int)), SLOT(volChanged(double)));
       connect(pan,      SIGNAL(valueChanged(double,int)), SLOT(panChanged(double)));
       connect(chorus,   SIGNAL(valueChanged(double,int)), SLOT(chorusChanged(double)));
@@ -198,6 +198,7 @@ void PartEdit::patchChanged(int n)
             score->startCmd();
             score->undo()->push(new ChangePatch(channel, p));
             score->endCmd();
+            mscore->endCmd();
             }
       }
 
