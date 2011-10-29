@@ -486,9 +486,9 @@ void Tie::computeBezier(SlurSegment* ss)
 
       double smallH = 0.38;
       qreal d   = p2.x() / _spatium;
-      shoulderH = d * 0.5 * smallH;
-      if (shoulderH > 1.5)            // maximum tie shoulder height
-            shoulderH = 1.5;
+      shoulderH = d * 0.4 * smallH;
+      if (shoulderH > 1.3)            // maximum tie shoulder height
+            shoulderH = 1.3;
       shoulderH *= _spatium;
       shoulderW = .6;
 
@@ -701,9 +701,8 @@ void Slur::slurPos(SlurPos* sp)
                         if ((_up && (yd < -_spatium)) || (!_up && (yd > _spatium)))
                               yo += yd;
                         }
-                  else if (sc->up() != _up) {
+                  else if (sc->up() != _up)
                         yo = fixArticulations(yo, sc, __up);
-                        }
                   }
             }
 
@@ -731,7 +730,7 @@ void Slur::slurPos(SlurPos* sp)
                   xo = stem2->pos().x();
                   }
             else if (!ec->up() && !_up)
-                  xo = -_spatium * .3;
+                  xo = -_spatium * .3 + note2->x();
             //
             // handle case: stem up   - stem down
             //              stem down - stem up
@@ -783,24 +782,25 @@ void Tie::slurPos(SlurPos* sp)
       qreal __up = _up ? -1.0 : 1.0;
       qreal _spatium = spatium();
 
-      qreal xo, yo;
+      qreal xo;
+      qreal yo;
 
       //------p1
       if ((sc->notes().size() > 1) || (sc->stem() && (sc->up() == _up))) {
-            xo = hw * 1.12;
+            xo = note1->x() + hw * 1.12;
             yo = note1->pos().y() + hw * .3 * __up;
             }
       else {
-            xo = hw * 0.85;
+            xo = note1->x() + hw * 0.85;
             yo = note1->pos().y() + _spatium * .75 * __up;
             }
       sp->p1 = sc->pagePos() - sp->system1->pagePos() + QPointF(xo, yo);
 
       //------p2
       if ((ec->notes().size() > 1) || (ec->stem() && !ec->up() && !_up))
-            xo = - hw * 0.12;
+            xo = note2->x() - hw * 0.12;
       else
-            xo = hw * 0.15;
+            xo = note2->x() + hw * 0.15;
       sp->p2 = ec->pagePos() - sp->system2->pagePos() + QPointF(xo, yo);
       }
 
@@ -1252,17 +1252,56 @@ void Tie::layout()
       qreal _spatium = spatium();
 
       Chord* c1   = startNote()->chord();
+      Chord* c2   = endNote()->chord();
       Measure* m1 = c1->measure();
+      Measure* m2 = c1->measure();
 
-      if (_slurDirection == AUTO)
-            if (m1->mstaff(c1->staffIdx())->hasVoices) {
+      if (_slurDirection == AUTO) {
+            QList<Note*> notes = c1->notes();
+            int n = notes.size();
+            if (m1->mstaff(c1->staffIdx())->hasVoices || m2->mstaff(c2->staffIdx())->hasVoices) {
                   // in polyphonic passage, ties go on the stem side
                   _up = c1->up();
                   }
-            else
-                  _up = !(c1->up());
+            else if (n == 1) {
+                  //
+                  // single note
+                  //
+                  if (c1->up() != c2->up()) {
+                        // if stem direction is mixed, always up
+                        _up = true;
+                        }
+                  else
+                        _up = !(c1->up());
+                  }
+            else {
+                  //
+                  // chords
+                  //
+                  QList<int> ties;
+                  int idx;
+                  for (int i = 0; i < n; ++i) {
+                        if (notes[i]->tieFor()) {
+                              ties.append(notes[i]->line());
+                              if (notes[i] == startNote())
+                                    idx = ties.size() - 1;
+                              }
+                        }
+                  if (idx == 0)
+                        _up = false;
+                  else if (idx == ties.size() - 1)
+                        _up = true;
+                  else {
+                        if (ties[idx] <= 4)
+                              _up = ((ties[idx-1] - ties[idx]) <= 1) || ((ties[idx] - ties[idx+1]) > 1);
+                        else
+                              _up = ((ties[idx-1] - ties[idx]) <= 1) && ((ties[idx] - ties[idx+1]) > 1);
+                        }
+                  }
+            }
       else
             _up = _slurDirection == UP ? true : false;
+
       qreal w   = startNote()->headWidth();
       qreal xo1 = w * 1.12;
       qreal h   = w * 0.3;

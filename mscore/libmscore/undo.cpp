@@ -111,7 +111,7 @@ void UndoCommand::undo()
       int n = childList.size();
       for (int i = n-1; i >= 0; --i) {
 #ifdef DEBUG_UNDO
-            qDebug("   undo<%s> %p\n", childList[i]->name(), childList[i]);
+            qDebug("   undo<%s> %p", childList[i]->name(), childList[i]);
 #endif
             childList[i]->undo();
             }
@@ -126,7 +126,7 @@ void UndoCommand::redo()
       int n = childList.size();
       for (int i = 0; i < n; ++i) {
 #ifdef DEBUG_UNDO
-            qDebug("   redo<%s> %p\n", childList[i]->name(), childList[i]);
+            qDebug("   redo<%s> %p", childList[i]->name(), childList[i]);
 #endif
             childList[i]->redo();
             }
@@ -171,12 +171,12 @@ UndoStack::~UndoStack()
 void UndoStack::beginMacro()
       {
       if (curCmd) {
-            qDebug("UndoStack:beginMacro(): alread active\n");
+            qDebug("UndoStack:beginMacro(): alread active");
             return;
             }
       curCmd = new UndoCommand();
       if (debugMode)
-            qDebug("UndoStack::beginMacro %p, UndoStack %p\n", curCmd, this);
+            qDebug("UndoStack::beginMacro %p, UndoStack %p", curCmd, this);
       }
 
 //---------------------------------------------------------
@@ -186,9 +186,9 @@ void UndoStack::beginMacro()
 void UndoStack::endMacro(bool rollback)
       {
       if (debugMode)
-            qDebug("UndoStack::endMacro %d\n", rollback);
+            qDebug("UndoStack::endMacro %d", rollback);
       if (curCmd == 0) {
-            qDebug("UndoStack:endMacro(): not active\n");
+            qDebug("UndoStack:endMacro(): not active");
             return;
             }
       if (rollback) {
@@ -213,14 +213,14 @@ void UndoStack::push(UndoCommand* cmd)
       {
       if (!curCmd) {
             // this can happen for layout() outside of a command (load)
-             // qDebug("UndoStack:push(): no active command, UndoStack %p\n", this);
+            // qDebug("UndoStack:push(): no active command, UndoStack %p", this);
 
             cmd->redo();
             delete cmd;
             return;
             }
 #ifdef DEBUG_UNDO
-      qDebug("UndoStack::push <%s> %p\n", cmd->name(), cmd);
+      qDebug("UndoStack::push <%s> %p", cmd->name(), cmd);
 #endif
       curCmd->appendChild(cmd);
       cmd->redo();
@@ -233,7 +233,7 @@ void UndoStack::push(UndoCommand* cmd)
 void UndoStack::pop()
       {
       if (!curCmd) {
-            qDebug("UndoStack:pop(): no active command\n");
+            qDebug("UndoStack:pop(): no active command");
             return;
             }
       UndoCommand* cmd = curCmd->removeChild();
@@ -261,7 +261,7 @@ void UndoStack::undo()
             --curIdx;
             Q_ASSERT(curIdx >= 0);
             if (debugMode)
-                  qDebug("--undo index %d\n", curIdx);
+                  qDebug("--undo index %d", curIdx);
             list[curIdx]->undo();
             }
       }
@@ -274,7 +274,7 @@ void UndoStack::redo()
       {
       if (canRedo()) {
             if (debugMode)
-                  qDebug("--redo index %d\n", curIdx);
+                  qDebug("--redo index %d", curIdx);
             list[curIdx++]->redo();
             }
       }
@@ -387,7 +387,7 @@ void Score::undoChangePitch(Note* note, int pitch, int tpc, int line, int fret, 
 
 void Score::undoChangeKeySig(Staff* ostaff, int tick, KeySigEvent st)
       {
-qDebug("undoChangeKeySig staff %d, tick %d -- %d\n",
+qDebug("undoChangeKeySig staff %d, tick %d -- %d",
    ostaff->score()->staffIdx(ostaff), tick, st.accidentalType());
 
       QList<Staff*> staffList;
@@ -403,7 +403,7 @@ qDebug("undoChangeKeySig staff %d, tick %d -- %d\n",
 
             Measure* measure = score->tick2measure(tick);
             if (!measure) {
-                  qDebug("measure for tick %d not found!\n", tick);
+                  qDebug("measure for tick %d not found!", tick);
                   continue;
                   }
             Segment* s   = measure->undoGetSegment(SegKeySig, tick);
@@ -421,11 +421,11 @@ qDebug("undoChangeKeySig staff %d, tick %d -- %d\n",
             nks->setLinks(links);
 
             if (ks) {
-                  qDebug("  changeElement\n");
+                  qDebug("  changeElement");
                   undo()->push(new ChangeElement(ks, nks));
                   }
             else {
-                  qDebug("  addElement\n");
+                  qDebug("  addElement");
                   undo()->push(new AddElement(nks));
                   }
             score->cmdUpdateNotes();
@@ -450,13 +450,13 @@ void Score::undoChangeClef(Staff* ostaff, Segment* seg, ClefType st)
       foreach(Staff* staff, staffList) {
             Score* score = staff->score();
             if (staff->staffType()->group() != clefTable[st].staffGroup) {
-                  qDebug("Staff::changeClef(%d): invalid staff group, src %d, dst %d\n",
+                  qDebug("Staff::changeClef(%d): invalid staff group, src %d, dst %d",
                      st, clefTable[st].staffGroup, staff->staffType()->group());
                   continue;
                   }
             Measure* measure = score->tick2measure(seg->tick());
             if (!measure) {
-                  qDebug("measure for tick %d not found!\n", seg->tick());
+                  qDebug("measure for tick %d not found!", seg->tick());
                   continue;
                   }
 
@@ -855,7 +855,7 @@ void Score::undoAddElement(Element* element)
                         }
                   Segment* seg = m->findSegment(st, tick);
                   if (seg == 0) {
-                        qDebug("undoAddSegment: segment not found\n");
+                        qDebug("undoAddSegment: segment not found");
                         break;
                         }
                   Articulation* na = static_cast<Articulation*>(ne);
@@ -1002,7 +1002,7 @@ void Score::undoAddElement(Element* element)
                   }
  */
             else
-                  qDebug("undoAddElement: unhandled: <%s>\n", element->name());
+                  qDebug("undoAddElement: unhandled: <%s>", element->name());
             }
       }
 
@@ -1064,7 +1064,7 @@ void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
                   if (nt)
                         newcr->setTuplet(nt);
                   else
-                        qDebug("undoAddCR: Tuplet not found\n");
+                        qDebug("undoAddCR: Tuplet not found");
                   }
 #endif
             undo()->push(new AddElement(newcr));
@@ -3106,7 +3106,7 @@ void ChangeSpannerAnchor::flip()
       Element* se = spanner->startElement();
       Element* ee = spanner->endElement();
 
-//      qDebug("ChangeSpannerAnchor:flip() spanner(%p--%p) %s  end(%p) -> end(%p)\n",
+//      qDebug("ChangeSpannerAnchor:flip() spanner(%p--%p) %s  end(%p) -> end(%p)",
 //         spanner->score(), spanner, spanner->name(),
 //         spanner->endElement(), endElement);
 
@@ -3150,7 +3150,7 @@ void ChangeSpannerAnchor::flip()
                   break;
 
             default:
-                  qDebug("ChangeSpannerAnchor: not implemented for %s\n", spanner->name());
+                  qDebug("ChangeSpannerAnchor: not implemented for %s", spanner->name());
                   break;
             }
       startElement = se;
