@@ -79,7 +79,9 @@ class Synth {
       void reset();
       bool active() const             { return _active; }
       void setActive(bool val = true) { _active = val;  }
-      virtual void allNotesOff()      {}  // TODO: implement as midi event
+
+      virtual void allSoundsOff(int /*channel*/) {}
+      virtual void allNotesOff(int /*channel*/) {}
       };
 
 //---------------------------------------------------------
@@ -119,7 +121,8 @@ class MasterSynth {
 
       Synth* synth(const QString& name);
       void reset();
-      void allNotesOff();
+      void allSoundsOff(int channel);
+      void allNotesOff(int channel);
       };
 
 #endif

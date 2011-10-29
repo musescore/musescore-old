@@ -117,7 +117,6 @@ void MasterSynth::reset()
 
 void MasterSynth::play(const Event& event, int syntiIdx)
       {
-//      printf("play synti %d ch %d type 0x%02x\n", syntiIdx, event.channel(), event.type());
       syntis[syntiIdx]->setActive(true);
       syntis[syntiIdx]->play(event);
       }
@@ -211,13 +210,23 @@ void MasterSynth::setState(SyntiState& ss)
       }
 
 //---------------------------------------------------------
+//   allSoundsOff
+//---------------------------------------------------------
+
+void MasterSynth::allSoundsOff(int channel)
+      {
+      foreach(Synth* synti, syntis)
+            synti->allSoundsOff(channel);
+      }
+
+//---------------------------------------------------------
 //   allNotesOff
 //---------------------------------------------------------
 
-void MasterSynth::allNotesOff()
+void MasterSynth::allNotesOff(int channel)
       {
       foreach(Synth* synti, syntis)
-            synti->allNotesOff();
+            synti->allNotesOff(channel);
       }
 
 //---------------------------------------------------------
@@ -232,3 +241,4 @@ Synth* MasterSynth::synth(const QString& s)
             }
       return 0;
       }
+

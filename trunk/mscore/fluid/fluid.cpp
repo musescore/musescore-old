@@ -254,37 +254,27 @@ void Fluid::damp_voices(int chan)
       }
 
 //---------------------------------------------------------
-//   all_notes_off
+//   allNotesOff
 //---------------------------------------------------------
 
-void Fluid::all_notes_off(int chan)
+void Fluid::allNotesOff(int chan)
       {
       foreach(Voice* v, activeVoices) {
-            if (v->chan == chan)
+            if (chan == -1 || v->chan == chan)
                   v->noteoff();
             }
       }
 
 //---------------------------------------------------------
-//   allNotesOff
-//---------------------------------------------------------
-
-void Fluid::allNotesOff()
-      {
-      foreach(Voice* v, activeVoices)
-            v->noteoff();
-      }
-
-
-//---------------------------------------------------------
-//   all_sounds_off
+//   allSoundsOff
 //    immediately stop all notes on this channel.
+//    stop all channel if chan==-1
 //---------------------------------------------------------
 
-void Fluid::all_sounds_off(int chan)
+void Fluid::allSoundsOff(int chan)
       {
       foreach(Voice* v, activeVoices) {
-            if (v->chan == chan)
+            if (chan == -1 || v->chan == chan)
                   v->off();
             }
       }
