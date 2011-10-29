@@ -30,6 +30,7 @@
 #include "libmscore/pitchspelling.h"
 #include "libmscore/measure.h"
 #include "libmscore/segment.h"
+#include "libmscore/keysig.h"
 
 //---------------------------------------------------------
 //   BBTrack
@@ -429,6 +430,20 @@ bool MuseScore::importBB(Score* score, const QString& name)
                   bb.convertTrack(score, track, staffIdx++);
             }
 
+      for (MeasureBase* mb = score->first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* measure = (Measure*)mb;
+            Segment* s = measure->findSegment(SegChordRest, measure->tick());
+            if (s == 0) {  
+                  Rest* rest = new Rest(score, Duration(Duration::V_MEASURE));
+                  rest->setDuration(measure->len());
+                  rest->setTrack(0);
+                  Segment* s = measure->getSegment(rest, measure->tick());
+                  s->add(rest);
+                  }
+            }
+
       score->spell();
 
       //---------------------------------------------------
@@ -505,8 +520,16 @@ bool MuseScore::importBB(Score* score, const QString& name)
             }
 
       foreach(Staff* staff, score->staves()) {
-            KeyList* kl = staff->keymap();
-            (*kl)[0] = bb.key();
+            int tick = 0;
+            KeySigEvent kse;
+            kse.setAccidentalType(bb.key());
+            (*staff->keymap())[tick] = kse;
+            KeySig* keysig = new KeySig(score);
+            keysig->setTrack((score->staffIdx(staff->part()) + staff->rstaff()) * VOICES);
+            keysig->setKeySigEvent(kse);
+            Measure* mks = score->tick2measure(tick);
+            Segment* sks = mks->getSegment(keysig, tick);
+            sks->add(keysig);            
             }
       return true;
       }
