@@ -1,5 +1,6 @@
 29.oct (la)
       - fix #13357: Creating part causes crash (key sig corruption)
+      - fix #13364: Score tabs disappear
 26.oct (ws)
       - changes to tuplet handling to allow reading of corrupted files
         (#13350)
