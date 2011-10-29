@@ -35,6 +35,7 @@
 #include "key.h"
 #include "pitchspelling.h"
 #include "measure.h"
+#include "keysig.h"
 
 //---------------------------------------------------------
 //   BBTrack
@@ -430,6 +431,20 @@ bool Score::importBB(const QString& name)
                   convertTrack(track, staffIdx++);
             }
 
+      
+      for (MeasureBase* mb = first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* measure = (Measure*)mb;
+            Segment* s = measure->findSegment(SegChordRest, measure->tick());
+            if (s == 0) {  
+                  Rest* rest = new Rest(this, measure->tick(), Duration(Duration::V_MEASURE));
+                  rest->setTrack(0);
+                  s = measure->getSegment(rest);
+                  s->add(rest);
+                  }
+            }
+
       spell();
 
       //---------------------------------------------------
@@ -506,8 +521,17 @@ bool Score::importBB(const QString& name)
             }
 
       foreach(Staff* staff, _staves) {
-            KeyList* kl = staff->keymap();
-            (*kl)[0] = bb.key();
+            int tick = 0;
+            KeySigEvent kse;
+            kse.setAccidentalType(bb.key());
+            (*staff->keymap())[tick] = kse;
+            KeySig* keysig = new KeySig(this);
+            keysig->setTick(tick);
+            keysig->setTrack((staffIdx(staff->part()) + staff->rstaff()) * VOICES);
+            keysig->setSubtype(kse);
+            Measure* mks = tick2measure(tick);
+            Segment* sks = mks->getSegment(keysig);
+            sks->add(keysig);
             }
 
       _saved   = false;
