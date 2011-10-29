@@ -1,4 +1,5 @@
 29.oct (ws)
+      - fix #3573: Volta brackets do not anchor to nearest bar line
       - implement #3704: Small note heads in chords
       - fix #3798: Grace note stem direction in multi-voice context
       - fix #13390: Sound doesn't change after changing it in mixer
