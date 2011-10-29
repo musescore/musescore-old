@@ -86,7 +86,7 @@ class LedgerLine : public Line {
 */
 
 class Chord : public ChordRest {
-      QList<Note*> _notes;
+      QList<Note*> _notes;                // sorted to increasing pitch
       QList<LedgerLine*> _ledgerLines;
 
       Stem*      _stem;
