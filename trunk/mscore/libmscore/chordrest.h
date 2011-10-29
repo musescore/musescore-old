@@ -43,7 +43,7 @@ class ChordRest : public DurationElement {
       QList<Articulation*> articulations;
       Beam* _beam;
       BeamMode _beamMode;
-      bool _up;
+      bool _up;                           // actual stem direction
       bool _small;
       Spatium _extraLeadingSpace;
       Spatium _extraTrailingSpace;
