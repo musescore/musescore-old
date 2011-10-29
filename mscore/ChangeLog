@@ -1,3 +1,5 @@
+29.oct (la)
+      - fix #13357: Creating part causes crash (key sig corruption)
 26.oct (ws)
       - changes to tuplet handling to allow reading of corrupted files
         (#13350)

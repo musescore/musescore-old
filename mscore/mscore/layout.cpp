@@ -822,13 +822,15 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                   // create missing key signature
                   //
                   KeySig* ks = keySigFactory(keyIdx);
-                  ks->setTrack(i * VOICES);
-                  ks->setTick(tick);
-                  ks->setGenerated(true);
-                  ks->setMag(staff->mag());
-                  Segment* seg = m->getSegment(ks);
-                  seg->add(ks);
-                  m->setDirty();
+                  if(ks) {
+                        ks->setTrack(i * VOICES);
+                        ks->setTick(tick);
+                        ks->setGenerated(true);
+                        ks->setMag(staff->mag());
+                        Segment* seg = m->getSegment(ks);
+                        seg->add(ks);
+                        m->setDirty();
+                        }
                   }
             else if (!needKeysig && hasKeysig) {
                   int track = hasKeysig->track();
