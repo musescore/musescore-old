@@ -89,13 +89,15 @@ void ShortcutCaptureDialog::keyPressEvent(QKeyEvent* e)
       okButton->setEnabled(conflict == false);
       nshrtLabel->setText(key.toString(QKeySequence::NativeText));
 
+      QString A = key.toString(QKeySequence::NativeText);
+      QString B = key.toString(QKeySequence::PortableText);
 qDebug("capture key 0x%x  modifiers 0x%x virt 0x%x scan 0x%x <%s><%s>\n",
       k,
       int(e->modifiers()),
       int(e->nativeVirtualKey()),
       int(e->nativeScanCode()),
-      qPrintable(key.toString(QKeySequence::NativeText)),
-      qPrintable(key.toString(QKeySequence::PortableText))
+      qPrintable(A),
+      qPrintable(B)
       );
 
       }

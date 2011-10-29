@@ -1,4 +1,5 @@
 29.oct (ws)
+      - fix #4748: Right click on note should also show measure and staff properties
       - fix #13405: Page must be clicked to hear sound change in Mixer
       - fix #12572: Clicking page during playback shortens sound of notes
       - fix #3573: Volta brackets do not anchor to nearest bar line

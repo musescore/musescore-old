@@ -47,6 +47,7 @@
 #include "chordeditor.h"
 #include "editstyle.h"
 #include "editstaff.h"
+#include "measureproperties.h"
 
 #include "libmscore/staff.h"
 #include "libmscore/segment.h"
@@ -282,8 +283,22 @@ void ScoreView::createElementPropertyMenu(Element* e, QMenu* popup)
             }
       else if (e->type() == NOTE) {
             Note* note = static_cast<Note*>(e);
+
+            QAction* b = popup->actions()[0];
+            QAction* a = popup->insertSeparator(b);
+            a->setText(tr("Staff"));
+            a = new QAction(tr("Staff Properties..."), 0);
+            a->setData("staff-props");
+            popup->insertAction(b, a);
+
+            a = popup->insertSeparator(b);
+            a->setText(tr("Measure"));
+            a = new QAction(tr("Measure Properties..."), 0);
+            a->setData("measure-props");
+            popup->insertAction(b, a);
+
             genPropertyMenu1(e, popup);
-            QAction* a = popup->addAction(QT_TRANSLATE_NOOP("Properties", "small"));
+            a = popup->addAction(QT_TRANSLATE_NOOP("Properties", "small"));
             a->setCheckable(true);
             a->setChecked(note->small());
             a->setData("smallNote");
@@ -373,6 +388,10 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             }
       else if (cmd == "f-props") {
             BoxProperties vp(static_cast<Box*>(e), 0);
+            vp.exec();
+            }
+      else if (cmd == "measure-props") {
+            MeasureProperties vp(static_cast<Note*>(e)->chord()->segment()->measure());
             vp.exec();
             }
       else if (cmd == "frame-text") {
