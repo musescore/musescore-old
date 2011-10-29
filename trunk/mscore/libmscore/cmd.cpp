@@ -201,10 +201,9 @@ void Score::moveCursor()
 
 void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& /*dragOffset*/)
       {
-      int pitch, staffIdx;
-      QPointF offset;
+      int staffIdx;
       Segment* segment;
-      MeasureBase* mb = pos2measure(pos, &staffIdx, &pitch, &segment, &offset);
+      MeasureBase* mb = pos2measure(pos, &staffIdx, 0, &segment, 0);
       if (mb == 0 || mb->type() != MEASURE) {
             qDebug("cmdAddSpanner: cannot put object here");
             delete spanner;
@@ -233,10 +232,14 @@ void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& /
             spanner->setEndElement(ns);
             }
       else {      // ANCHOR_MEASURE
-            Measure* measure = segment->measure();
-            spanner->setStartElement(measure);
-            spanner->setEndElement(measure);
-            spanner->setParent(measure);
+            Measure* m = static_cast<Measure*>(mb);
+            QRectF b(m->canvasBoundingRect());
+
+            if (pos.x() >= (b.x() + b.width() * .5))
+                  m = m->nextMeasure();
+            spanner->setStartElement(m);
+            spanner->setEndElement(m);
+            spanner->setParent(m);
             }
 
       undoAddElement(spanner);
