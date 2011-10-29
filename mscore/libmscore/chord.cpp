@@ -554,10 +554,9 @@ void Chord::computeUp()
       if (_stemDirection != AUTO) {
             _up = _stemDirection == UP;
             }
-      else if (_noteType != NOTE_NORMAL) {     // grace notes always go up
+      if (_noteType != NOTE_NORMAL)
             _up = true;
-            }
-      else if (measure()->mstaff(staffIdx())->hasVoices) {
+      if (measure()->mstaff(staffIdx())->hasVoices) {
             switch(voice()) {
                   case 0:  _up = (score()->style(ST_stemDir1).toDirection() == UP); break;
                   case 1:  _up = (score()->style(ST_stemDir2).toDirection() == UP); break;
