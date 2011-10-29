@@ -2683,8 +2683,6 @@ bool MuseScore::importGTP(Score* score, const QString& name)
             }
       fp.close();
 
-      score->syntiState().append(SyntiParameter("soundfont", MScore::soundFont));
-
       MeasureBase* m;
       if (!score->measures()->first()) {
             m = new VBox(score);

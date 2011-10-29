@@ -1496,6 +1496,7 @@ bool MuseScore::readScore(Score* score, QString name)
                   qDebug("unknown file suffix <%s>, name <%s>\n", qPrintable(cs), qPrintable(name));
                   return false;
                   }
+            score->syntiState().append(SyntiParameter("soundfont", MScore::soundFont));
             }
       score->connectTies();
       score->rebuildMidiMapping();

@@ -232,8 +232,7 @@ void MuseScore::closeSynthControl()
 
 void SynthControl::updatePreferences()
       {
-      if ((MScore::soundFont != soundFont->text())
-         || (preferences.tuning != masterTuning->value())
+      if ((preferences.tuning != masterTuning->value())
          || (preferences.masterGain != gain->value())
          || (preferences.reverbRoomSize != reverbRoomSize->value())
          || (preferences.reverbDamp != reverbDamp->value())
@@ -243,7 +242,6 @@ void SynthControl::updatePreferences()
          ) {
             preferences.dirty  = true;
             }
-      MScore::soundFont  = soundFont->text();
       preferences.tuning     = masterTuning->value();
       preferences.masterGain = gain->value();
 

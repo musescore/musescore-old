@@ -910,21 +910,6 @@ bool Score::read(QDomElement dScore)
             else if (tag == "SyntiSettings") {
                   _syntiState.clear();
                   _syntiState.read(ee);
-                  //
-                  // check for soundfont,
-                  // add default soundfont if none found
-                  // (for compatibility with old scores)
-                  //
-                  bool hasSoundfont = false;
-                  foreach(const SyntiParameter& sp, _syntiState) {
-                        if (sp.name() == "soundfont") {
-                              QFileInfo fi(sp.sval());
-                              if(fi.exists())
-                                    hasSoundfont = true;
-                              }
-                        }
-                  if (!hasSoundfont)
-                        _syntiState.append(SyntiParameter("soundfont", MScore::soundFont));
                   }
             else if (tag == "Spatium")
                   _style.setSpatium (val.toDouble() * DPMM); // obsolete, moved to Style
@@ -1246,6 +1231,23 @@ bool Score::read(QDomElement dScore)
                         }
                   }
             }
+            
+      //
+      // check for soundfont,
+      // add default soundfont if none found
+      // (for compatibility with old scores)
+      //
+      bool hasSoundfont = false;
+      foreach(const SyntiParameter& sp, _syntiState) {
+            if (sp.name() == "soundfont") {
+                  QFileInfo fi(sp.sval());
+                  if(fi.exists())
+                        hasSoundfont = true;
+                  }
+            }
+      if (!hasSoundfont)
+            _syntiState.append(SyntiParameter("soundfont", MScore::soundFont));
+            
       fixTicks();
       renumberMeasures();
       rebuildMidiMapping();
