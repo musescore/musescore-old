@@ -823,6 +823,17 @@ void Seq::startNoteTimer(int duration)
             noteTimer->start();
             }
       }
+//---------------------------------------------------------
+//   stopNoteTimer
+//---------------------------------------------------------
+
+void Seq::stopNoteTimer()
+      {
+      if (noteTimer->isActive()) {
+            noteTimer->stop();
+            stopNotes();
+            }
+      }
 
 //---------------------------------------------------------
 //   stopNotes
@@ -831,7 +842,7 @@ void Seq::startNoteTimer(int duration)
 
 void Seq::stopNotes(int channel)
       {
-      synti->allSoundsOff(channel);
+      synti->allNotesOff(channel);
       }
 
 //---------------------------------------------------------
@@ -1102,7 +1113,6 @@ void Seq::putEvent(const Event& event)
             return;
       int channel = event.channel();
       int syntiIdx= cs->midiMapping(channel)->articulation->synti;
-//      event.dump();
       synti->play(event, syntiIdx);
       }
 

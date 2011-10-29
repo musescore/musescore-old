@@ -3668,7 +3668,7 @@ bool ScoreView::mousePress(QMouseEvent* ev)
 
 void ScoreView::mouseReleaseEvent(QMouseEvent* event)
       {
-      seq->stopNotes();
+      seq->stopNoteTimer();
       QWidget::mouseReleaseEvent(event);
       }
 
