@@ -192,6 +192,7 @@ class Seq : public QObject, public Sequencer {
       void startNote(const Channel&, int, int, double nt);
       void eventToGui(Event);
       void processToGuiMessages();
+      void stopNoteTimer();
       };
 
 extern Seq* seq;
