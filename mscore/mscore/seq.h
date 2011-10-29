@@ -129,7 +129,7 @@ class Seq : public QObject {
       void setRelTempo(double);
       void setGain(float);
       void seek(int);
-      void stopNotes();
+      void stopNotes(int channel = -1);
       void start();
       void stop();
 

@@ -829,9 +829,9 @@ void Seq::startNoteTimer(int duration)
 //    called from GUI context
 //---------------------------------------------------------
 
-void Seq::stopNotes()
+void Seq::stopNotes(int channel)
       {
-      synti->allNotesOff();
+      synti->allSoundsOff(channel);
       }
 
 //---------------------------------------------------------

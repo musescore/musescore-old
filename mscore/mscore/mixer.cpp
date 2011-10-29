@@ -245,6 +245,8 @@ void PartEdit::chorusChanged(double val)
 
 void PartEdit::muteChanged(bool val)
       {
+      if (val)
+            seq->stopNotes(channel->channel);
       channel->mute = val;
       }
 
@@ -263,6 +265,8 @@ void PartEdit::soloToggled(bool val)
                         Channel* a = &part->instr()->channel(i);
                         a->soloMute = (channel != a && !a->solo);
                         a->solo     = (channel == a || a->solo);
+                        if (a->soloMute)
+                              seq->stopNotes(a->channel);
                         }
                   }
             emit soloChanged(true);
@@ -278,7 +282,7 @@ void PartEdit::soloToggled(bool val)
                             }
                         }
                   }
-            if(!found){
+            if (!found){
                 foreach(Part* part, *part->score()->parts()) {
                   for (int i = 0; i < part->instr()->channel().size(); ++i) {
                         Channel* a = &part->instr()->channel(i);

@@ -376,14 +376,13 @@ class Fluid : public Synth {
       // get/set synthesizer state (parameter set)
       virtual SyntiState state() const;
       virtual void setState(SyntiState&);
-      virtual void allNotesOff();
+      virtual void allSoundsOff(int);
+      virtual void allNotesOff(int);
 
       bool log(const char* fmt, ...);
 
       Preset* get_preset(unsigned int sfontnum, unsigned int banknum, unsigned int prognum);
       Preset* find_preset(unsigned int banknum, unsigned int prognum);
-      void all_notes_off(int chan);
-      void all_sounds_off(int chan);
       void modulate_voices(int chan, bool is_cc, int ctrl);
       void modulate_voices_all(int chan);
       void damp_voices(int chan);
