@@ -99,8 +99,10 @@ void EventData::dump() const
       {
       printf("event ");
       switch (_type) {
-            case ME_NOTEON: printf("noteon"); break;
-            default:        printf("0x%02x", _type); break;
+            case ME_NOTEON:     printf("noteon    "); break;
+            case ME_CONTROLLER: printf("controller"); break;
+            case ME_PROGRAM:    printf("program   "); break;
+            default:            printf("0x%02x    ", _type); break;
             }
       printf(" 0x%02x 0x%02x\n", _a, _b);
       }

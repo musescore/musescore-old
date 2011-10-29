@@ -1,4 +1,5 @@
 29.oct (ws)
+      - fix #13405: Page must be clicked to hear sound change in Mixer
       - fix #12572: Clicking page during playback shortens sound of notes
       - fix #3573: Volta brackets do not anchor to nearest bar line
       - implement #3704: Small note heads in chords

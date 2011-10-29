@@ -35,7 +35,7 @@ PartEdit::PartEdit(QWidget* parent)
    : QWidget(parent, Qt::Dialog)
       {
       setupUi(this);
-      connect(patch,    SIGNAL(activated(int)),           SLOT(patchChanged(int)));
+      connect(patch,    SIGNAL(currentIndexChanged(int)), SLOT(patchChanged(int)));
       connect(volume,   SIGNAL(valueChanged(double,int)), SLOT(volChanged(double)));
       connect(pan,      SIGNAL(valueChanged(double,int)), SLOT(panChanged(double)));
       connect(chorus,   SIGNAL(valueChanged(double,int)), SLOT(chorusChanged(double)));
@@ -188,11 +188,17 @@ void MuseScore::showMixer(bool val)
 
 void PartEdit::patchChanged(int n)
       {
-      MidiPatch* p = (MidiPatch*)patch->itemData(n, Qt::UserRole).value<void*>();
+      if (part == 0)
+            return;
+      const MidiPatch* p = (MidiPatch*)patch->itemData(n, Qt::UserRole).value<void*>();
+      if (p == 0)
+            return;
       Score* score = part->score();
-      score->startCmd();
-      score->undo()->push(new ChangePatch(channel, p));
-      score->endCmd();
+      if (score) {
+            score->startCmd();
+            score->undo()->push(new ChangePatch(channel, p));
+            score->endCmd();
+            }
       }
 
 //---------------------------------------------------------

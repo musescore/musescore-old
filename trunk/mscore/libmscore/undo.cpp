@@ -2179,7 +2179,7 @@ void ChangePatch::flip()
       channel->program = patch.prog;
       channel->bank    = patch.bank;
       channel->synti   = patch.synti;
-      patch = op;
+      patch            = op;
 
       if (MScore::seq == 0)
             return;
@@ -2187,8 +2187,8 @@ void ChangePatch::flip()
       Event event(ME_CONTROLLER);
       event.setChannel(channel->channel);
 
-      int hbank = (patch.bank >> 7) & 0x7f;
-      int lbank = patch.bank & 0x7f;
+      int hbank = (channel->bank >> 7) & 0x7f;
+      int lbank = channel->bank & 0x7f;
 
       event.setController(CTRL_HBANK);
       event.setValue(hbank);
@@ -2199,7 +2199,7 @@ void ChangePatch::flip()
       MScore::seq->sendEvent(event);
 
       event.setController(CTRL_PROGRAM);
-      event.setValue(patch.prog);
+      event.setValue(channel->program);
 
       MScore::seq->sendEvent(event);
       }
