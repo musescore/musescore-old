@@ -1,4 +1,5 @@
 29.oct (ws)
+      - fix #13400: If a slur is moved, new position is not saved
       - fix #13034: Tie direction for chords
 28.oct (ws)
       - more robust reading of corrupted file (#13357 corrupted key signature)

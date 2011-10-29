@@ -58,6 +58,8 @@ bool SlurSegment::isEdited(SpannerSegment* ss) const
             if (ups[i] != seg->ups[i])
                   return true;
             }
+      if (ss->userOff() != userOff())
+            return true;
       return false;
       }
 
