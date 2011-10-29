@@ -1380,7 +1380,6 @@ void ScoreView::endEdit()
                   mscore->endCmd();
                   return;
                   }
-
             // handle linked elements
             LinkedElements* le = original->links();
             Element* se = spanner->startElement();
