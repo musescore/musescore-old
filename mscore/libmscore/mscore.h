@@ -547,6 +547,7 @@ extern qreal DPMM;
 extern bool debugMode;
 
 class Style;
+class Sequencer;
 
 //---------------------------------------------------------
 //   MScore
@@ -594,6 +595,7 @@ class MScore {
       static int sampleRate;
       static bool debugMsg;
       static int mtcType;
+      static Sequencer* seq;
       };
 
 //---------------------------------------------------------

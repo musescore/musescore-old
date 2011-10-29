@@ -71,7 +71,7 @@ class Box;
 class Accidental;
 class Spanner;
 
-#define DEBUG_UNDO
+// #define DEBUG_UNDO
 
 #ifdef DEBUG_UNDO
 #define UNDO_NAME(a)  virtual const char* name() const { return a; }
@@ -885,15 +885,14 @@ class EditText : public UndoCommand {
 //---------------------------------------------------------
 
 class ChangePatch : public UndoCommand {
-      Part* part;
       Channel* channel;
       MidiPatch patch;
 
       void flip();
 
    public:
-      ChangePatch(Part* p, Channel* c, const MidiPatch* pt)
-         : part(p), channel(c), patch(*pt) {}
+      ChangePatch(Channel* c, const MidiPatch* pt)
+         : channel(c), patch(*pt) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangePitch");
