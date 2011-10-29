@@ -204,10 +204,10 @@ void ScoreView::createElementPropertyMenu(Element* e, QMenu* popup)
       else if (e->type() == ACCIDENTAL) {
             Accidental* acc = static_cast<Accidental*>(e);
             genPropertyMenu1(e, popup);
-            QAction* a = popup->addAction(QT_TRANSLATE_NOOP("Accidental", "small"));
+            QAction* a = popup->addAction(QT_TRANSLATE_NOOP("Properties", "small"));
             a->setCheckable(true);
             a->setChecked(acc->small());
-            a->setData("small");
+            a->setData("smallAcc");
             }
       else if (e->type() == CLEF) {
             genPropertyMenu1(e, popup);
@@ -283,6 +283,10 @@ void ScoreView::createElementPropertyMenu(Element* e, QMenu* popup)
       else if (e->type() == NOTE) {
             Note* note = static_cast<Note*>(e);
             genPropertyMenu1(e, popup);
+            QAction* a = popup->addAction(QT_TRANSLATE_NOOP("Properties", "small"));
+            a->setCheckable(true);
+            a->setChecked(note->small());
+            a->setData("smallNote");
             popup->addSeparator();
             popup->addAction(tr("Note Properties..."))->setData("note-props");
 
@@ -512,9 +516,14 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
                         }
                   }
             }
-      else if (cmd == "small") {
+      else if (cmd == "smallAcc") {
             score()->undo()->push(
                new ChangeProperty(e, P_SMALL, !static_cast<Accidental*>(e)->small())
+               );
+            }
+      else if (cmd == "smallNote") {
+            score()->undo()->push(
+               new ChangeProperty(e, P_SMALL, !static_cast<Note*>(e)->small())
                );
             }
       else if (cmd == "clef-courtesy") {

@@ -96,6 +96,7 @@ class Note : public Element {
 
       bool dragMode;
       bool _mirror;           ///< True if note is mirrored at stem.
+      bool _small;
 
       NoteHeadType _headType;
 
@@ -185,6 +186,9 @@ class Note : public Element {
 
       bool mirror() const             { return _mirror;  }
       void setMirror(bool val)        { _mirror = val;   }
+
+      bool small() const              { return _small;   }
+      void setSmall(bool val)         { _small = val;    }
 
       Tie* tieFor() const             { return _tieFor;  }
       Tie* tieBack() const            { return _tieBack; }
