@@ -65,6 +65,7 @@
 #include "accidental.h"
 #include "layoutbreak.h"
 #include "spanner.h"
+#include "sequencer.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -2178,7 +2179,11 @@ void ChangePatch::flip()
       channel->program = patch.prog;
       channel->bank    = patch.bank;
       channel->synti   = patch.synti;
-#if 0 // TODO-LIB
+      patch = op;
+
+      if (MScore::seq == 0)
+            return;
+
       Event event(ME_CONTROLLER);
       event.setChannel(channel->channel);
 
@@ -2187,18 +2192,16 @@ void ChangePatch::flip()
 
       event.setController(CTRL_HBANK);
       event.setValue(hbank);
-      seq->sendEvent(event);
+      MScore::seq->sendEvent(event);
 
       event.setController(CTRL_LBANK);
       event.setValue(lbank);
-      seq->sendEvent(event);
+      MScore::seq->sendEvent(event);
 
       event.setController(CTRL_PROGRAM);
       event.setValue(patch.prog);
 
-      seq->sendEvent(event);
-#endif
-      patch = op;
+      MScore::seq->sendEvent(event);
       }
 
 //---------------------------------------------------------

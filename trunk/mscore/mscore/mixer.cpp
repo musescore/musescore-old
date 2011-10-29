@@ -191,7 +191,7 @@ void PartEdit::patchChanged(int n)
       MidiPatch* p = (MidiPatch*)patch->itemData(n, Qt::UserRole).value<void*>();
       Score* score = part->score();
       score->startCmd();
-      score->undo()->push(new ChangePatch(part, channel, p));
+      score->undo()->push(new ChangePatch(channel, p));
       score->endCmd();
       }
 

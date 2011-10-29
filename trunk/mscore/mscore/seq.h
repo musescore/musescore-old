@@ -21,6 +21,7 @@
 #ifndef __SEQ_H__
 #define __SEQ_H__
 
+#include "libmscore/sequencer.h"
 #include "libmscore/event.h"
 #include "driver.h"
 #include "libmscore/fifo.h"
@@ -76,7 +77,7 @@ class SeqMsgFifo : public FifoBase {
 //    sequencer
 //---------------------------------------------------------
 
-class Seq : public QObject {
+class Seq : public QObject, public Sequencer {
       Q_OBJECT
 
       Score* cs;
@@ -172,7 +173,7 @@ class Seq : public QObject {
       void sendMessage(SeqMsg&) const;
       void startNote(const Channel&, int, int, int, double nt);
       void setController(int, int, int);
-      void sendEvent(const Event&);
+      virtual void sendEvent(const Event&);
       void setScoreView(ScoreView*);
       Score* score() const   { return cs; }
       ScoreView* viewer() const { return cv; }

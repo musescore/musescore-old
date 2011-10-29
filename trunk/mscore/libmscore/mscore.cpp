@@ -14,6 +14,7 @@
 #include "config.h"
 #include "style.h"
 #include "mscore.h"
+#include "sequencer.h"
 
 qreal PDPI;
 qreal DPI;
@@ -50,6 +51,8 @@ int     MScore::division = 480;
 int     MScore::sampleRate = 44100;
 bool    MScore::debugMsg = false;
 int     MScore::mtcType;
+
+Sequencer* MScore::seq = 0;
 
 extern void initSymbols(int);
 extern void initStaffTypes();
@@ -97,10 +100,6 @@ void MScore::init()
       _defaultStyle         = new Style();
       setDefaultStyle(_defaultStyle);     // initialize default style
       _baseStyle            = new Style(*_defaultStyle);
-
-//      QFontDatabase db;
-//      foreach(const QString& f, db.families())
-//            qDebug("family <%s>\n", qPrintable(f));
 
       //
       //  load internal fonts

@@ -2209,6 +2209,7 @@ int main(int argc, char* av[])
 
       synti = new MasterSynth();
       seq   = new Seq();
+      MScore::seq = seq;
 
       //
       // avoid font problems by overriding the environment

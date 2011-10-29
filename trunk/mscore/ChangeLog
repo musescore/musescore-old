@@ -1,4 +1,5 @@
 29.oct (ws)
+      - fix #13390: Sound doesn't change after changing it in mixer
       - fix #13391: Sound continues after mute or solo
       - fix #13400: If a slur is moved, new position is not saved
       - fix #13034: Tie direction for chords
