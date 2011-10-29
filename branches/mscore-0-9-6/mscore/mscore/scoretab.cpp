@@ -118,7 +118,6 @@ int ScoreTab::currentIndex() const
 
 void ScoreTab::setCurrentIndex(int idx)
       {
-      setCurrent(0);
       if (currentIndex() == idx)
             setCurrent(idx);
       else {
