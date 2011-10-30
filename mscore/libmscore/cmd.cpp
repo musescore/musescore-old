@@ -729,6 +729,8 @@ qDebug("  makeGap: %d/%d removed %d/%d too much", sd.numerator(), sd.denominator
                   QList<Duration> dList = toDurationList(rd, false);
                   if (dList.isEmpty())
                         return akkumulated;
+qDebug("   dList: %d\n", dList.size());
+
                   Fraction f(cr->staff()->timeStretch(cr->tick()) * sd);
                   for (Tuplet* t = tuplet; t; t = t->tuplet())
                         f /= t->ratio();
@@ -737,7 +739,7 @@ qDebug("   gap at tick %d+%d", cr->tick(), f.ticks());
 
                   if ((tuplet == 0) && (((measure->tick() - tick) % dList[0].ticks()) == 0)) {
                         foreach(Duration d, dList) {
-//                              qDebug("   addClone %d", tick);
+                              qDebug("    addClone at %d, %d", tick, d.ticks());
                               tick += addClone(cr, tick, d)->actualTicks();
                               }
                         }
