@@ -77,6 +77,10 @@ void MuseScore::tupletDialog()
       ChordRest* cr = cs->getSelectedChordRest();
       if (cr == 0)
             return;
+      if (cr->durationType() < Duration(Duration::V_128TH)) {
+            noteTooShortForTupletDialog();
+            return;
+            }
       TupletDialog td;
       if (!td.exec())
             return;

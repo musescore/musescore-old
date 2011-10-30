@@ -1,4 +1,6 @@
-30.oct (la)
+30.oct (ws)
+      - fix #9307: Nested tuplets causes crash
+      (la)
       - fix #11473: Preference values overwritten on program initialisation
       - fix #11952: Default SoundFont doesn't sound or appear in Synthesizer
 29.oct (ws)

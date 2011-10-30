@@ -165,7 +165,8 @@ SOURCES += main.cpp                              \
     ../m-msynth/seq_event.cpp \
     ../m-msynth/synth_voice.cpp \
     sparm.cpp \
-    androidaudio.cpp
+    androidaudio.cpp \
+    ../libmscore/duration.cpp
 
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
@@ -197,3 +198,4 @@ HEADERS += \
     scoreview.h \
     seq.h \
     painterqt.h
+

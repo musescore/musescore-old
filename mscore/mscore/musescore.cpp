@@ -4556,3 +4556,15 @@ void MuseScore::closeScore(Score* score)
       {
       removeTab(scoreList.indexOf(score));
       }
+
+//---------------------------------------------------------
+//   noteTooShortForTupletDialog
+//---------------------------------------------------------
+
+void MuseScore::noteTooShortForTupletDialog()
+      {
+      QMessageBox::warning(this, tr("MuseScore: warning"),
+        tr("Cannot create tuplet: note value too short")
+        );
+      }
+
