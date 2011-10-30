@@ -1,3 +1,6 @@
+30.oct (la)
+      - fix #11473: Preference values overwritten on program initialisation
+      - fix #11952: Default SoundFont doesn't sound or appear in Synthesizer
 29.oct (ws)
       - fix #4748: Right click on note should also show measure and staff properties
       - fix #13405: Page must be clicked to hear sound change in Mixer
