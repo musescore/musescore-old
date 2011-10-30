@@ -18,6 +18,9 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+// TODO LVI 2011-10-30: determine how to report import errors.
+// Currently all output (both debug and error reports) are done using qDebug.
+
 #include "bww2mxml/lexer.h"
 #include "bww2mxml/writer.h"
 #include "bww2mxml/parser.h"
@@ -49,7 +52,7 @@
 //   TODO: remove duplicate code
 //---------------------------------------------------------
 
-static void addText(VBox* & vbx, Score* s, QString strTxt, int sbtp, TextStyleType stl)
+static void addText(VBox*& vbx, Score* s, QString strTxt, int sbtp, TextStyleType stl)
       {
       if (!strTxt.isEmpty()) {
             Text* text = new Text(s);
@@ -136,92 +139,92 @@ static void setTempo(Score* score, int tempo)
 
 namespace Bww {
 
-  /**
-   The writer that imports into MuseScore.
-   */
+/**
+ The writer that imports into MuseScore.
+ */
 
-  class MsScWriter : public Writer
-  {
-  public:
-    MsScWriter();
-    void beginMeasure(const Bww::MeasureBeginFlags mbf);
-    void endMeasure(const Bww::MeasureEndFlags mef);
-    void header(const QString title, const QString type,
-                        const QString composer, const QString footer,
-                        const unsigned int temp);
-    void note(const QString pitch, const QVector<Bww::BeamType> beamList,
-              const QString type, const int dots,
-              bool tieStart = false, bool tieStop = false,
-              StartStop triplet = ST_NONE,
-              bool grace = false);
-    void setScore(Score* s) { score = s; }
-    void tsig(const int beats, const int beat);
-    void trailer();
-  private:
-    void doTriplet(Chord* cr, StartStop triplet = ST_NONE);
-    static const int WHOLE_DUR = 64;                    ///< Whole note duration
-    struct StepAlterOct {                               ///< MusicXML step/alter/oct values
-      QChar s;
-      int a;
-      int o;
-      StepAlterOct(QChar step = 'C', int alter = 0, int oct = 1)
-        : s(step), a(alter), o(oct) {};
-    };
-    Score* score;                                       ///< The score
-    int beats;                                          ///< Number of beats
-    int beat;                                           ///< Beat type
-    QMap<QString, StepAlterOct> stepAlterOctMap;        ///< Map bww pitch to step/alter/oct
-    QMap<QString, QString> typeMap;                     ///< Map bww note types to MusicXML
-    unsigned int measureNumber;                         ///< Current measure number
-    unsigned int tick;                                  ///< Current tick
-    Measure* currentMeasure;                            ///< Current measure
-    Tuplet* tuplet;                                     ///< Current tuplet
-    Volta* lastVolta;                                   ///< Current volta
-    unsigned int tempo;                                 ///< Tempo (0 = not specified)
-    unsigned int ending;                                ///< Current ending
-  };
+class MsScWriter : public Writer
+      {
+public:
+      MsScWriter();
+      void beginMeasure(const Bww::MeasureBeginFlags mbf);
+      void endMeasure(const Bww::MeasureEndFlags mef);
+      void header(const QString title, const QString type,
+                  const QString composer, const QString footer,
+                  const unsigned int temp);
+      void note(const QString pitch, const QVector<Bww::BeamType> beamList,
+                const QString type, const int dots,
+                bool tieStart = false, bool tieStop = false,
+                StartStop triplet = ST_NONE,
+                bool grace = false);
+      void setScore(Score* s) { score = s; }
+      void tsig(const int beats, const int beat);
+      void trailer();
+private:
+      void doTriplet(Chord* cr, StartStop triplet = ST_NONE);
+      static const int WHOLE_DUR = 64;                  ///< Whole note duration
+      struct StepAlterOct {                             ///< MusicXML step/alter/oct values
+            QChar s;
+            int a;
+            int o;
+            StepAlterOct(QChar step = 'C', int alter = 0, int oct = 1)
+                  : s(step), a(alter), o(oct) {};
+            };
+      Score* score;                                     ///< The score
+      int beats;                                        ///< Number of beats
+      int beat;                                         ///< Beat type
+      QMap<QString, StepAlterOct> stepAlterOctMap;      ///< Map bww pitch to step/alter/oct
+      QMap<QString, QString> typeMap;                   ///< Map bww note types to MusicXML
+      unsigned int measureNumber;                       ///< Current measure number
+      unsigned int tick;                                ///< Current tick
+      Measure* currentMeasure;                          ///< Current measure
+      Tuplet* tuplet;                                   ///< Current tuplet
+      Volta* lastVolta;                                 ///< Current volta
+      unsigned int tempo;                               ///< Tempo (0 = not specified)
+      unsigned int ending;                              ///< Current ending
+      };
 
-  /**
-   MsScWriter constructor.
-   */
+/**
+ MsScWriter constructor.
+ */
 
-  MsScWriter::MsScWriter()
-    : score(0),
-    beats(4),
-    beat(4),
-    measureNumber(0),
-    tick(0),
-    currentMeasure(0),
-    tuplet(0),
-    lastVolta(0),
-    tempo(0)
-  {
-    qDebug() << "MsScWriter::MsScWriter()";
+MsScWriter::MsScWriter()
+      : score(0),
+      beats(4),
+      beat(4),
+      measureNumber(0),
+      tick(0),
+      currentMeasure(0),
+      tuplet(0),
+      lastVolta(0),
+      tempo(0)
+      {
+      qDebug() << "MsScWriter::MsScWriter()";
 
-    stepAlterOctMap["LG"] = StepAlterOct('G', 0, 4);
-    stepAlterOctMap["LA"] = StepAlterOct('A', 0, 4);
-    stepAlterOctMap["B"] = StepAlterOct('B', 0, 4);
-    stepAlterOctMap["C"] = StepAlterOct('C', 1, 5);
-    stepAlterOctMap["D"] = StepAlterOct('D', 0, 5);
-    stepAlterOctMap["E"] = StepAlterOct('E', 0, 5);
-    stepAlterOctMap["F"] = StepAlterOct('F', 1, 5);
-    stepAlterOctMap["HG"] = StepAlterOct('G', 0, 5);
-    stepAlterOctMap["HA"] = StepAlterOct('A', 0, 5);
+      stepAlterOctMap["LG"] = StepAlterOct('G', 0, 4);
+      stepAlterOctMap["LA"] = StepAlterOct('A', 0, 4);
+      stepAlterOctMap["B"] = StepAlterOct('B', 0, 4);
+      stepAlterOctMap["C"] = StepAlterOct('C', 1, 5);
+      stepAlterOctMap["D"] = StepAlterOct('D', 0, 5);
+      stepAlterOctMap["E"] = StepAlterOct('E', 0, 5);
+      stepAlterOctMap["F"] = StepAlterOct('F', 1, 5);
+      stepAlterOctMap["HG"] = StepAlterOct('G', 0, 5);
+      stepAlterOctMap["HA"] = StepAlterOct('A', 0, 5);
 
-    typeMap["1"] = "whole";
-    typeMap["2"] = "half";
-    typeMap["4"] = "quarter";
-    typeMap["8"] = "eighth";
-    typeMap["16"] = "16th";
-    typeMap["32"] = "32nd";
-  }
+      typeMap["1"] = "whole";
+      typeMap["2"] = "half";
+      typeMap["4"] = "quarter";
+      typeMap["8"] = "eighth";
+      typeMap["16"] = "16th";
+      typeMap["32"] = "32nd";
+      }
 
-  /**
-   Begin a new measure.
-   */
+/**
+ Begin a new measure.
+ */
 
-  void MsScWriter::beginMeasure(const Bww::MeasureBeginFlags mbf)
-  {
+void MsScWriter::beginMeasure(const Bww::MeasureBeginFlags mbf)
+      {
       qDebug() << "MsScWriter::beginMeasure()";
       ++measureNumber;
 
@@ -280,14 +283,14 @@ namespace Bww {
             s = currentMeasure->getSegment(timesig, tick);
             s->add(timesig);
             }
-  }
+      }
 
 /**
  End the current measure.
  */
 
 void MsScWriter::endMeasure(const Bww::MeasureEndFlags mef)
-{
+      {
       qDebug() << "MsScWriter::endMeasure()";
       if (mef.repeatEnd)
             currentMeasure->setRepeatFlags(RepeatEnd);
@@ -321,28 +324,28 @@ void MsScWriter::endMeasure(const Bww::MeasureEndFlags mef)
       else if (mef.doubleBarLine) {
             currentMeasure->setEndBarLineType(DOUBLE_BAR, false, true);
             }
-//      BarLine* barLine = new BarLine(score);
-//      bool visible = true;
-//      barLine->setSubtype(NORMAL_BAR);
-//      barLine->setTrack(0);
-//      currentMeasure->setEndBarLineType(barLine->subtype(), false, visible);
-}
+      // BarLine* barLine = new BarLine(score);
+      // bool visible = true;
+      // barLine->setSubtype(NORMAL_BAR);
+      // barLine->setTrack(0);
+      // currentMeasure->setEndBarLineType(barLine->subtype(), false, visible);
+      }
 
-  /**
-   Write a single note.
-   */
+/**
+ Write a single note.
+ */
 
 void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList,
                       const QString type, const int dots,
                       bool tieStart, bool /*TODO tieStop */,
                       StartStop triplet,
                       bool grace)
-{
+      {
       qDebug() << "MsScWriter::note()"
-            << "type:" << type
-            << "dots:" << dots
-            << "grace" << grace
-            ;
+               << "type:" << type
+               << "dots:" << dots
+               << "grace" << grace
+      ;
 
       if (!stepAlterOctMap.contains(pitch)
           || !typeMap.contains(type)) {
@@ -402,28 +405,28 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
             Fraction nl(Fraction::fromTicks(tick - currentMeasure->tick()));
             currentMeasure->setLen(nl);
             qDebug() << "MsScWriter::note()"
-              << "tickBefore:" << tickBefore
-              << "tick:" << tick
-              << "nl:" << nl.print()
-              ;
+                     << "tickBefore:" << tickBefore
+                     << "tick:" << tick
+                     << "nl:" << nl.print()
+            ;
             }
-}
+      }
 
-  /**
-   Write the header.
-   */
+/**
+ Write the header.
+ */
 
-  void MsScWriter::header(const QString title, const QString type,
-                          const QString composer, const QString footer,
-                          const unsigned int temp)
-  {
+void MsScWriter::header(const QString title, const QString type,
+                        const QString composer, const QString footer,
+                        const unsigned int temp)
+      {
       qDebug() << "MsScWriter::header()"
-        << "title:" << title
-        << "type:" << type
-        << "composer:" << composer
-        << "footer:" << footer
-        << "temp:" << temp
-        ;
+               << "title:" << title
+               << "type:" << type
+               << "composer:" << composer
+               << "footer:" << footer
+               << "temp:" << temp
+      ;
 
       // save tempo for later use
       tempo = temp;
@@ -437,13 +440,13 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
       score->addCreator(new MusicXmlCreator(strType, strComposer));
       if (!footer.isEmpty()) score->setMetaTag("copyright", footer);
 
-//  score->setWorkTitle(title);
+      //  score->setWorkTitle(title);
       VBox* vbox  = 0;
       addText(vbox, score, title, TEXT_TITLE, TEXT_STYLE_TITLE);
       addText(vbox, score, type, TEXT_SUBTITLE, TEXT_STYLE_SUBTITLE);
       addText(vbox, score, composer, TEXT_COMPOSER, TEXT_STYLE_COMPOSER);
-//      addText(vbox, score, strPoet, TEXT_POET, TEXT_STYLE_POET);
-//      addText(vbox, score, strTranslator, TEXT_TRANSLATOR, TEXT_STYLE_TRANSLATOR);
+      // addText(vbox, score, strPoet, TEXT_POET, TEXT_STYLE_POET);
+      // addText(vbox, score, strTranslator, TEXT_TRANSLATOR, TEXT_STYLE_TRANSLATOR);
       if (vbox) {
             vbox->setTick(0);
             score->measures()->add(vbox);
@@ -454,43 +457,43 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
       Part* part = score->part(0);
       part->setLongName(instrumentName());
       part->setMidiProgram(midiProgram() - 1);
-  }
+      }
 
-  /**
-   Store beats and beat type for later use.
-   */
+/**
+ Store beats and beat type for later use.
+ */
 
-  void MsScWriter::tsig(const int bts, const int bt)
-  {
+void MsScWriter::tsig(const int bts, const int bt)
+      {
       qDebug() << "MsScWriter::tsig()"
-        << "beats:" << bts
-        << "beat:" << bt
-        ;
+               << "beats:" << bts
+               << "beat:" << bt
+      ;
 
       beats = bts;
       beat  = bt;
-  }
+      }
 
-  /**
-   Write the trailer.
-   */
+/**
+ Write the trailer.
+ */
 
-  void MsScWriter::trailer()
-  {
+void MsScWriter::trailer()
+      {
       qDebug() << "MsScWriter::trailer()"
-        ;
+      ;
 
       if (tempo) setTempo(score, tempo);
-  }
+      }
 
-  /**
-   Handle the triplet.
-   */
+/**
+ Handle the triplet.
+ */
 
-  void MsScWriter::doTriplet(Chord* cr, StartStop triplet)
-  {
+void MsScWriter::doTriplet(Chord* cr, StartStop triplet)
+      {
       qDebug() << "MsScWriter::doTriplet(" << triplet << ")"
-        ;
+      ;
 
       if (triplet == ST_START) {
             tuplet = new Tuplet(score);
@@ -522,7 +525,7 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
             cr->setTuplet(tuplet);
             tuplet->add(cr);
             }
-  }
+      }
 
 
 } // namespace Bww
@@ -559,7 +562,5 @@ bool MuseScore::importBww(Score* score, const QString& path)
       score->setCreated(true);
       score->connectTies();
       qDebug("Score::importBww() done\n");
-//      return false;	// error
-      return true;	// OK
+      return true;      // OK
       }
-
