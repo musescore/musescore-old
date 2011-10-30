@@ -2258,7 +2258,6 @@ int main(int argc, char* av[])
 #endif
       mscore->setRevision(revision);
 
-MScore::init();         // initialize libmscore
       if (noGui) {
             loadScores(argv);
             exit(processNonGui() ? 0 : -1);
