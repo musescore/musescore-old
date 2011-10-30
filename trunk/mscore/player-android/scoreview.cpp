@@ -84,7 +84,6 @@ void ScoreView::setScore(const QString& name)
       {
       if (seq->isPlaying())
             seq->stop();
-qDebug("===========setScore\n");
       _currentPage = 0;
       delete score;
 
@@ -129,9 +128,7 @@ qDebug("===========setScore\n");
             }
 
       score->updateNotes();
-qDebug("===========before layout\n");
       score->doLayout();
-qDebug("===========after layout\n");
       score->setPrinting(true);                 // render only printable elements
 
       seq->setScore(score);
@@ -140,9 +137,6 @@ qDebug("===========after layout\n");
       qreal m1 = parentWidth()  / pr.width();
       qreal m2 = parentHeight() / pr.height();
       mag = qMax(m1, m2);
-
-// printf("mag====%f/%f %f(%f) %f(%f)\n", m1, m2, parentWidth(), pr.width(),
-//        parentHeight(), pr.height());
 
       _boundingRect = QRectF(0.0, 0.0, pr.width() * mag, pr.height() * mag);
 

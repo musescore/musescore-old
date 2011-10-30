@@ -4543,6 +4543,11 @@ void ScoreView::setCursorVisible(bool v)
 
 void ScoreView::cmdTuplet(int n, ChordRest* cr)
       {
+      if (cr->durationType() < Duration(Duration::V_128TH)) {
+            mscore->noteTooShortForTupletDialog();
+            return;
+            }
+
       Fraction f(cr->duration());
       int tick    = cr->tick();
       Tuplet* ot  = cr->tuplet();

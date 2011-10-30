@@ -568,6 +568,7 @@ class MuseScore : public QMainWindow {
       void updateLayer();
       bool metronome() const         { return metronomeAction->isChecked(); }
       bool panDuringPlayback() const { return panAction->isChecked(); }
+      void noteTooShortForTupletDialog();
       };
 
 extern MuseScore* mscore;
