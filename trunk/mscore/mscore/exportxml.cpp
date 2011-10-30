@@ -32,6 +32,9 @@
 //  Evaluate paramenter handling between the various classes, could be simplified
 //=========================================================
 
+// TODO LVI 2011-10-30: determine how to report export errors.
+// Currently all output (both debug and error reports) are done using qDebug.
+
 #include <math.h>
 #include "config.h"
 #include "musescore.h"

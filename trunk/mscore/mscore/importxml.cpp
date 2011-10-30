@@ -22,6 +22,9 @@
 // import OK but stop is not exported OK. Find out what causes this (import, export,
 // structural issue).
 
+// TODO LVI 2011-10-30: determine how to report import errors.
+// Currently all output (both debug and error reports) are done using qDebug.
+
 /**
  MusicXML import.
  */
@@ -88,8 +91,8 @@
 
 static void xmlSetPitch(Note* n, char step, int alter, int octave, Ottava* ottava, int track)
       {
-//      qDebug("xmlSetPitch(n=%p, st=%c, alter=%d, octave=%d)\n",
-//             n, step, alter, octave);
+      // qDebug("xmlSetPitch(n=%p, st=%c, alter=%d, octave=%d)\n",
+      //        n, step, alter, octave);
       int istep = step - 'A';
       //                       a  b   c  d  e  f  g
       static int table[7]  = { 9, 11, 0, 2, 4, 5, 7 };
@@ -151,11 +154,12 @@ static int calcTicks(QString text, int divisions)
       int val = stringToInt(text, &ok);
       if (!ok) {
             qDebug("MusicXml-Import: bad duration value: <%s>\n",
-                  qPrintable(text));
+                   qPrintable(text));
             }
       if (val == 0)     // neuratron scanner produces sometimes 0 !?
             val = 1;
-      val = (val * MScore::division) / divisions;
+      val *= MScore::division;
+      val /= divisions;
       return val;
       }
 
@@ -250,11 +254,13 @@ MusicXml::MusicXml(QDomDocument* d)
 class LoadMusicXml : public LoadFile {
       QDomDocument* _doc;
 
-   public:
-      LoadMusicXml() {
+public:
+      LoadMusicXml()
+            {
             _doc = new QDomDocument();
             }
-      ~LoadMusicXml() {
+      ~LoadMusicXml()
+            {
             delete _doc;
             }
       virtual bool loader(QFile* f);
@@ -295,11 +301,13 @@ bool LoadMusicXml::loader(QFile* qf)
 class LoadCompressedMusicXml : public LoadFile {
       QDomDocument* _doc;
 
-   public:
-      LoadCompressedMusicXml() {
+public:
+      LoadCompressedMusicXml()
+            {
             _doc = new QDomDocument();
             }
-      ~LoadCompressedMusicXml() {
+      ~LoadCompressedMusicXml()
+            {
             delete _doc;
             }
       virtual bool loader(QFile* f);
@@ -316,19 +324,15 @@ class LoadCompressedMusicXml : public LoadFile {
 
 bool LoadCompressedMusicXml::loader(QFile* qf)
       {
-// qDebug("LoadCompressedMusicXml::loader(%s)\n", qPrintable(qf->fileName()));
       Unzip uz;
       if (!uz.openArchive(qf->fileName())) {
             error = "Unable to open archive(" + qf->fileName() + "):\n" + uz.errorString();
             return false;
             }
-// qDebug("openArchive\n");
 
       QBuffer cbuf;
       cbuf.open(QIODevice::WriteOnly);
       uz.extractFile("META-INF/container.xml", &cbuf);
-// qDebug("extractFile bufsize=%d\n", cbuf.data().size());
-// qDebug("data=%s\n", cbuf.data().data());
 
       QDomDocument container;
       int line, column;
@@ -341,7 +345,6 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
             qDebug("error: %s\n", error.toLatin1().data());
             return false;
             }
-// qDebug("container=%s\n", container.toString().toUtf8().data());
 
       // extract first rootfile
       QString rootfile = "";
@@ -369,15 +372,10 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
             qDebug("can't find rootfile in: %s\n", qf->fileName().toLatin1().data());
             return false;
             }
-// else
-//   qDebug("rootfile=%s\n", rootfile.toUtf8().data());
 
       QBuffer dbuf;
       dbuf.open(QIODevice::WriteOnly);
       uz.extractFile(rootfile, &dbuf);
-// qDebug("bufsize=%d\n", dbuf.data().size());
-// qDebug("data=%s\n", dbuf.data().data());
-// qDebug("data end\n");
 
       if (!_doc->setContent(dbuf.data(), false, &err, &line, &column)) {
             QString col, ln;
@@ -388,7 +386,6 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
             return false;
             }
       docName = qf->fileName();
-// qDebug("LoadCompressedMusicXml::loader loaded (%s) successfully\n", qPrintable(qf->fileName()));
       return true;
       }
 
@@ -474,7 +471,7 @@ void MusicXml::import(Score* s)
 //   addText
 //---------------------------------------------------------
 
-static void addText(VBox* & vbx, Score* s, QString strTxt, int sbtp, TextStyleType stl)
+static void addText(VBox*& vbx, Score* s, QString strTxt, int sbtp, TextStyleType stl)
       {
       if (!strTxt.isEmpty()) {
             Text* text = new Text(s);
@@ -511,18 +508,18 @@ void MusicXml::doCredits()
       qDebug("page format w=%g h=%g\n", pw, ph);
       qDebug("page format pw1=%d pw2=%d ph2=%d\n", pw1, pw2, ph2);
       // dump the credits
-/**/
+      /**/
       for (ciCreditWords ci = credits.begin(); ci != credits.end(); ++ci) {
             CreditWords* w = *ci;
             qDebug("credit-words defx=%g defy=%g just=%s hal=%s val=%s words=%s\n",
-                  w->defaultX,
-                  w->defaultY,
-                  w->justify.toUtf8().data(),
-                  w->hAlign.toUtf8().data(),
-                  w->vAlign.toUtf8().data(),
-                  w->words.toUtf8().data());
+                   w->defaultX,
+                   w->defaultY,
+                   w->justify.toUtf8().data(),
+                   w->hAlign.toUtf8().data(),
+                   w->vAlign.toUtf8().data(),
+                   w->words.toUtf8().data());
             }
-/**/
+      /**/
       // apply simple heuristics using only default x and y
       // to recognize the meaning of credit words
       CreditWords* crwTitle = 0;
@@ -541,8 +538,8 @@ void MusicXml::doCredits()
                   if (!crwTitle || defy > crwTitle->defaultY) crwTitle = w;
                   }
             }
-            // subtitle is highest above middle of the page that is
-            // in the middle column and is not the title
+      // subtitle is highest above middle of the page that is
+      // in the middle column and is not the title
       for (ciCreditWords ci = credits.begin(); ci != credits.end(); ++ci) {
             CreditWords* w = *ci;
             double defx = w->defaultX;
@@ -650,8 +647,8 @@ static void determineMeasureLength(QDomElement e, QVector<int>& ml)
                                           divisions = stringToInt(eee.text(), &ok);
                                           if (!ok) {
                                                 qDebug("MusicXml-Import: bad divisions value: <%s>\n",
-                                                   qPrintable(eee.text()));
-                                                      divisions = 4;
+                                                       qPrintable(eee.text()));
+                                                divisions = 4;
                                                 }
                                           // debug
                                           qDebug("measurelength divisions %d\n", divisions);
@@ -813,72 +810,68 @@ void MusicXml::scorePartwise(QDomElement ee)
                         }
                   }
             else if (tag == "defaults") {
-                double millimeter = score->spatium()/10.0;
-                double tenths = 1.0;
-                QDomElement pageLayoutElement;
-                for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                    QString tag(ee.tagName());
-                    if (tag == "scaling") {
-                        for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                            QString tag(eee.tagName());
-                            if (tag == "millimeters")
-                                millimeter = eee.text().toDouble();
-                            else if (tag == "tenths")
-                                tenths = eee.text().toDouble();
-                            else
-                                domError(eee);
+                  double millimeter = score->spatium()/10.0;
+                  double tenths = 1.0;
+                  QDomElement pageLayoutElement;
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+                        if (tag == "scaling") {
+                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                                    QString tag(eee.tagName());
+                                    if (tag == "millimeters")
+                                          millimeter = eee.text().toDouble();
+                                    else if (tag == "tenths")
+                                          tenths = eee.text().toDouble();
+                                    else
+                                          domError(eee);
+                                    }
+                              double _spatium = DPMM * (millimeter * 10.0 / tenths);
+                              score->setSpatium(_spatium);
+                              }
+                        else if (tag == "page-layout") {
+                              pageLayoutElement = ee;
+                              }
+                        else if (tag == "system-layout") {
+                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                                    QString tag(eee.tagName());
+                                    Spatium val(eee.text().toDouble() / 10.0);
+                                    if (tag == "system-margins")
+                                          ;
+                                    else if (tag == "system-distance") {
+                                          score->style()->set(ST_systemDistance, val);
+                                          qDebug("system distance %f\n", val.val());
+                                          }
+                                    else if (tag == "top-system-distance")
+                                          ;
+                                    else
+                                          domError(eee);
+                                    }
+                              }
+                        else if (tag == "staff-layout") {
+                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                                    QString tag(eee.tagName());
+                                    Spatium val(eee.text().toDouble() / 10.0);
+                                    if (tag == "staff-distance")
+                                          score->style()->set(ST_staffDistance, val);
+                                    else
+                                          domError(eee);
+                                    }
+                              }
+                        else if (tag == "music-font")
+                              domNotImplemented(ee);
+                        else if (tag == "word-font")
+                              domNotImplemented(ee);
+                        else if (tag == "lyric-font")
+                              domNotImplemented(ee);
+                        else
+                              domError(ee);
                         }
-                        double _spatium = DPMM * (millimeter * 10.0 / tenths);
-                        score->setSpatium(_spatium);
-                    }
-                    else if (tag == "page-layout"){
-                        pageLayoutElement = ee;
-                    }
-                    else if (tag == "system-layout") {
-                        for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                            QString tag(eee.tagName());
-                            Spatium val(eee.text().toDouble() / 10.0);
-                            if (tag == "system-margins")
-                                ;
-                            else if (tag == "system-distance") {
-                                score->style()->set(ST_systemDistance, val);
-                                qDebug("system distance %f\n", val.val());
-                            }
-                            else if (tag == "top-system-distance")
-                                ;
-                            else
-                                domError(eee);
-                        }
-                    }
-                    else if (tag == "staff-layout") {
-                        for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                            QString tag(eee.tagName());
-                            Spatium val(eee.text().toDouble() / 10.0);
-                            if (tag == "staff-distance")
-                                score->style()->set(ST_staffDistance, val);
-                            else
-                                domError(eee);
-                        }
-                    }
-                    else if (tag == "music-font")
-                        domNotImplemented(ee);
-                    else if (tag == "word-font")
-                        domNotImplemented(ee);
-                    else if (tag == "lyric-font")
-                        domNotImplemented(ee);
-                    else
-                        domError(ee);
-                }
 
-                /*QMessageBox::warning(0,
-                                     QWidget::tr("MuseScore: load XML"),
-                                     QString("Val: ") + QString("%1").arg(QString::number(tenths,'f',2)) + " " + QString("%1").arg(QString::number(millimeter,'f',2)) + " " + QString("%1").arg(QString::number(INCH,'f',2)),
-                                     QString::null, QWidget::tr("Quit"), QString::null, 0, 1);*/
-                PageFormat pf;
-                pf.readMusicXML(pageLayoutElement, millimeter / (tenths * INCH) );
-                score->setPageFormat(pf);
-                score->setDefaultsRead(true); // TODO only if actually succeeded ?
-            }
+                  PageFormat pf;
+                  pf.readMusicXML(pageLayoutElement, millimeter / (tenths * INCH) );
+                  score->setPageFormat(pf);
+                  score->setDefaultsRead(true); // TODO only if actually succeeded ?
+                  }
             else if (tag == "movement-number")
                   score->setMetaTag("movementNumber", e.text());
             else if (tag == "movement-title")
@@ -923,8 +916,8 @@ void MusicXml::scorePartwise(QDomElement ee)
                   stavesSpan += il->at(pg->start + j)->nstaves();
             // and add bracket
             il->at(pg->start)->staff(0)->addBracket(BracketItem(pg->type, stavesSpan));
-                  if(pg->barlineSpan)
-                	  il->at(pg->start)->staff(0)->setBarLineSpan(pg->span);
+            if (pg->barlineSpan)
+                  il->at(pg->start)->staff(0)->setBarLineSpan(pg->span);
             }
 
       // having read all parts (meaning all segments have been created),
@@ -958,7 +951,7 @@ void MusicXml::scorePartwise(QDomElement ee)
 
 static void partGroupStart(MusicXmlPartGroup* (&pgs)[MAX_PART_GROUPS], int n, int p, QString s, bool barlineSpan)
       {
-//      qDebug("partGroupStart number=%d part=%d symbol=%s\n", n, p, s.toLatin1().data());
+      // qDebug("partGroupStart number=%d part=%d symbol=%s\n", n, p, s.toLatin1().data());
       if (n < 0 || n >= MAX_PART_GROUPS) {
             qDebug("illegal part-group number: %d\n", n);
             return;
@@ -971,7 +964,7 @@ static void partGroupStart(MusicXmlPartGroup* (&pgs)[MAX_PART_GROUPS], int n, in
 
       int bracketType = NO_BRACKET;
       if (s == "")
-            ; //ignore
+            ;  //ignore
       else if (s == "brace")
             bracketType = BRACKET_AKKOLADE;
       else if (s == "bracket")
@@ -1001,9 +994,9 @@ static void partGroupStart(MusicXmlPartGroup* (&pgs)[MAX_PART_GROUPS], int n, in
  */
 
 static void partGroupStop(MusicXmlPartGroup* (&pgs)[MAX_PART_GROUPS], int n, int p,
-                          std::vector<MusicXmlPartGroup*> &pgl)
+                          std::vector<MusicXmlPartGroup*>& pgl)
       {
-//      qDebug("partGroupStop number=%d part=%d\n", n, p);
+      // qDebug("partGroupStop number=%d part=%d\n", n, p);
       if (n < 0 || n >= MAX_PART_GROUPS) {
             qDebug("illegal part-group number: %d\n", n);
             return;
@@ -1015,8 +1008,8 @@ static void partGroupStop(MusicXmlPartGroup* (&pgs)[MAX_PART_GROUPS], int n, int
             }
 
       pgs[n]->span = p - pgs[n]->start;
-//      qDebug("part-group number=%d start=%d span=%d type=%d\n",
-//             n, pgs[n]->start, pgs[n]->span, pgs[n]->type);
+      // qDebug("part-group number=%d start=%d span=%d type=%d\n",
+      //        n, pgs[n]->start, pgs[n]->span, pgs[n]->type);
       pgl.push_back(pgs[n]);
       pgs[n] = 0;
       }
@@ -1037,7 +1030,7 @@ void MusicXml::xmlPartList(QDomElement e)
       for (int i = 0; i < MAX_PART_GROUPS; ++i)
             partGroups[i] = 0;
 
-      for (;!e.isNull(); e = e.nextSiblingElement()) {
+      for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "score-part")
                   xmlScorePart(e.firstChildElement(), e.attribute(QString("id")), scoreParts);
             else if (e.tagName() == "part-group") {
@@ -1047,10 +1040,10 @@ void MusicXml::xmlPartList(QDomElement e)
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "group-symbol")
                               symbol = ee.text();
-                        else if(ee.tagName() == "group-barline"){
-                              if(ee.text() == "yes")
+                        else if (ee.tagName() == "group-barline") {
+                              if (ee.text() == "yes")
                                     barlineSpan = true;
-                        }else
+                              }else
                               domError(ee);
                         }
                   if (type == "start")
@@ -1093,16 +1086,16 @@ void MusicXml::xmlScorePart(QDomElement e, QString id, int& parts)
             return;
             }
 
-// qDebug("create track id:<%s>\n", id.toLatin1().data());
+      // qDebug("create track id:<%s>\n", id.toLatin1().data());
 
-      for (;!e.isNull(); e = e.nextSiblingElement()) {
+      for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "part-name") {
                   // OK? (ws) Yes it should be ok.part-name is display in front of staff in finale. (la)
                   part->setLongName(e.text());
                   // part->setTrackName(e.text());
                   }
             else if (e.tagName() == "part-abbreviation") {
-            	  part->setShortName(e.text());
+                  part->setShortName(e.text());
                   }
             else if (e.tagName() == "score-instrument") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
@@ -1128,11 +1121,12 @@ void MusicXml::xmlScorePart(QDomElement e, QString id, int& parts)
             else
                   domError(e);
             }
-/*      score->parts()->push_back(part);
+      /*
+      score->parts()->push_back(part);
       Staff* staff = new Staff(score, part, 0);
       part->staves()->push_back(staff);
       score->staves().push_back(staff);
- */
+      */
       }
 
 
@@ -1209,7 +1203,7 @@ static void allocateStaves(QMap<int, VoiceDesc>& voicelist)
                         voicesAllocated[prefSt]++;
                         }
                   else
-                        voicelist[key].setStaff(-2); // mark as used but not allocated
+                        voicelist[key].setStaff(-2);  // mark as used but not allocated
                   }
             }
       }
@@ -1362,7 +1356,7 @@ void MusicXml::xmlPart(QDomElement e, QString id)
                         st->pitchOffsets().setPitchOffset(tick1, shift);
                         st->pitchOffsets().setPitchOffset(tick2, 0);
                         }
-                  else  if (sp->type() == HAIRPIN) {
+                  else if (sp->type() == HAIRPIN) {
                         Hairpin* hp = static_cast<Hairpin*>(sp);
                         score->updateHairpin(hp);
                         }
@@ -1418,14 +1412,14 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
             measure->setTick(tick);
             measure->setNo(number);
             score->measures()->add(measure);
-      } else {
+            } else {
             // ws:
             // int pstaves = part->nstaves();
             // for (int i = 0; i < pstaves; ++i) {
             //    Staff* reals = score->staff(staff+i);
             // measure->mstaff(staff+i)->lines->setLines(reals->lines());
             // }
-      }
+            }
 
       QString implicit = e.attribute("implicit", "no");
       if (implicit == "yes")
@@ -1460,8 +1454,8 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                               LayoutBreak* lb = new LayoutBreak(score);
                               lb->setTrack(staff * VOICES);
                               lb->setSubtype(
-                                 newSystem == "yes" ? LAYOUT_BREAK_LINE : LAYOUT_BREAK_PAGE
-                                 );
+                                    newSystem == "yes" ? LAYOUT_BREAK_LINE : LAYOUT_BREAK_PAGE
+                                    );
                               pm->add(lb);
                               }
                         }
@@ -1512,15 +1506,16 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                               barLine->setBarLineType(BROKEN_BAR);
                         else if (barStyle == "light-light")
                               barLine->setBarLineType(DOUBLE_BAR);
-      /*                  else if (barStyle == "heavy-light")
+                        /*
+                        else if (barStyle == "heavy-light")
                               ;
                         else if (barStyle == "heavy-heavy")
                               ;
-      */
-                        else if (barStyle == "none"){
+                        */
+                        else if (barStyle == "none") {
                               barLine->setBarLineType(NORMAL_BAR);
                               visible = false;
-                        }
+                              }
                         else if (barStyle == "") {
                               if (repeat == "backward")
                                     barLine->setBarLineType(END_REPEAT);
@@ -1554,7 +1549,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                               int iEendingNumber = endingNumber.toInt();
                               if (iEendingNumber <= 0)
                                     qDebug("ImportXml: warning: unsupported ending number <%s>\n",
-                                            endingNumber.toLatin1().data());
+                                           endingNumber.toLatin1().data());
                               else {
                                     if (endingType == "start") {
                                           Volta* volta = new Volta(score);
@@ -1591,7 +1586,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                                           }
                                     else
                                           qDebug("ImportXml: warning: unsupported ending type <%s>\n",
-                                                  endingType.toLatin1().data());
+                                                 endingType.toLatin1().data());
                                     }
                               }
                         }
@@ -1619,21 +1614,21 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                   SigEvent se = sigmap->timesig(tick);
 
                   Fraction f = se.getNominal();
-// qDebug("Add Sig %d  len %d:  %s\n", tick, measureLen, qPrintable(f.print()));
+                  // qDebug("Add Sig %d  len %d:  %s\n", tick, measureLen, qPrintable(f.print()));
                   score->sigmap()->add(tick, measureLen, f);
                   int tm = ticks_measure(se.fraction());
                   if (tm != measureLen) {
                         if (!measure->irregular()) {
-                            /* MusicXML's implicit means "don't print measure number",
-                              set it only if explicitly requested, not when the measure length
-                              is not what is expected. See MozartTrio.xml measures 12..13.
-                            */
-                            // measure->setIrregular(true);
-                            /*
-                              qDebug("irregular Measure %d Len %d at %d   lastLen: %d -> should be: %d (tm=%d)\n",
-                                 number, measure->tick(), maxtick,
-                                 lastMeasureLen, measureLen, tm);
+                              /* MusicXML's implicit means "don't print measure number",
+                                set it only if explicitly requested, not when the measure length
+                                is not what is expected. See MozartTrio.xml measures 12..13.
                               */
+                              // measure->setIrregular(true);
+                              /*
+                                qDebug("irregular Measure %d Len %d at %d   lastLen: %d -> should be: %d (tm=%d)\n",
+                                   number, measure->tick(), maxtick,
+                                   lastMeasureLen, measureLen, tm);
+                                */
                               }
                         }
                   }
@@ -1672,7 +1667,7 @@ static void setSLinePlacement(SLine* sli, float s, const QString pl, bool hasYof
       {
       qDebug("setSLinePlacement s=%g pl='%s' hasy=%d yoff=%g",
              s, qPrintable(pl), hasYoff, yoff
-            );
+             );
       float offs = 0.0;
       if (hasYoff) offs = yoff;
       else {
@@ -1770,18 +1765,18 @@ static void metronome(QDomElement e, Text* t)
 static void addElement(Element* el, bool hasYoffset, int staff, int rstaff, Score* score, QString& placement,
                        qreal rx, qreal ry, int offset, Measure* measure, int tick)
       {
-                  if (hasYoffset) /* el->setYoff(yoffset) */ ; // TODO is this still necessary ? Some element types do ot support this
-                  else {
-                        double y = (staff + rstaff) * (score->styleD(ST_staffDistance) + 4); // TODO 4 = #lines/staff - 1
-                        y += (placement == "above" ? -3 : 5);
-                        y *= score->spatium();
-                        el->setReadPos(QPoint(0, y));
-                        }
-                  el->setUserOff(QPointF(rx, ry));
-                  el->setMxmlOff(offset);
-                  el->setTrack((staff + rstaff) * VOICES);
-                  Segment* s = measure->getSegment(SegChordRest, tick);
-                  s->add(el);
+      if (hasYoffset) /* el->setYoff(yoffset) */;              // TODO is this still necessary ? Some element types do ot support this
+      else {
+            double y = (staff + rstaff) * (score->styleD(ST_staffDistance) + 4);             // TODO 4 = #lines/staff - 1
+            y += (placement == "above" ? -3 : 5);
+            y *= score->spatium();
+            el->setReadPos(QPoint(0, y));
+            }
+      el->setUserOff(QPointF(rx, ry));
+      el->setMxmlOff(offset);
+      el->setTrack((staff + rstaff) * VOICES);
+      Segment* s = measure->getSegment(SegChordRest, tick);
+      s->add(el);
       }
 
 //---------------------------------------------------------
@@ -1812,7 +1807,7 @@ static void addElement(Element* el, bool hasYoffset, int staff, int rstaff, Scor
 
 void MusicXml::direction(Measure* measure, int staff, QDomElement e)
       {
-//      qDebug("MusicXml::direction tick=%d\n", tick);
+      // qDebug("MusicXml::direction tick=%d\n", tick);
       QString placement = e.attribute("placement");
 
       QString dirType;
@@ -1910,7 +1905,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   }
             else if (e.tagName() == "sound") {
                   // attr: dynamics, tempo
-// LVIFIX: TODO coda and segno should be numbered uniquely
+                  // LVIFIX: TODO coda and segno should be numbered uniquely
                   sndCapo = e.attribute("capo");
                   sndCoda = e.attribute("coda");
                   sndDacapo = e.attribute("dacapo");
@@ -1932,7 +1927,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   domError(e);
             } // for (e = e.firstChildElement(); ...
 
-/*
+      /*
       qDebug(" tempo=%s txt=%s metrEl=%s coda=%d segno=%d sndCapo=%s sndCoda=%s"
              " sndDacapo=%s sndDalsegno=%s sndFine=%s sndSegno=%s\n",
              tempo.toLatin1().data(),
@@ -1947,7 +1942,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
              sndFine.toLatin1().data(),
              sndSegno.toLatin1().data()
             );
-*/
+      */
 
       // Try to recognize the various repeats
       QString repeat = "";
@@ -1981,12 +1976,12 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
       // If a repeat was found, assume words is no longer needed
       if (repeat != "") txt = "";
 
-/*
+      /*
       qDebug(" txt=%s repeat=%s\n",
              txt.toLatin1().data(),
              repeat.toLatin1().data()
             );
-*/
+      */
 
       if (repeat != "") {
             Jump* jp = 0;
@@ -2058,15 +2053,15 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
 
       if ((dirType == "words" && repeat == "") || dirType == "metronome") {
             qDebug("words txt='%s' metrEl='%s' tempo='%s' pl='%s' hasyoffs=%d fsz='%s' fst='%s' fw='%s'\n",
-                    txt.toUtf8().data(),
-                    qPrintable(metrEl.tagName()),
-                    tempo.toUtf8().data(),
-                    placement.toUtf8().data(),
-                    hasYoffset,
-                    fontSize.toUtf8().data(),
-                    fontStyle.toUtf8().data(),
-                    fontWeight.toUtf8().data()
-                  );
+                   txt.toUtf8().data(),
+                   qPrintable(metrEl.tagName()),
+                   tempo.toUtf8().data(),
+                   placement.toUtf8().data(),
+                   hasYoffset,
+                   fontSize.toUtf8().data(),
+                   fontStyle.toUtf8().data(),
+                   fontWeight.toUtf8().data()
+                   );
             Text* t;
             if (tempo != "") {
                   t = new TempoText(score);
@@ -2092,7 +2087,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             if (hasYoffset) t->setYoff(yoffset);
             addElement(t, hasYoffset, staff, rstaff, score, placement,
                        rx, ry, offset, measure, tick);
-/*
+            /*
             if (hasYoffset) t->setYoff(yoffset);
             else t->setAbove(placement == "above");
             t->setUserOff(QPointF(rx, ry));
@@ -2100,7 +2095,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             t->setTrack((staff + rstaff) * VOICES);
             Segment* s = measure->getSegment(SegChordRest, tick);
             s->add(t);
-*/
+            */
             }
       else if (dirType == "rehearsal") {
             Text* t = new Text(score);
@@ -2112,13 +2107,13 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             if (hasYoffset) t->setYoff(yoffset);
             addElement(t, hasYoffset, staff, rstaff, score, placement,
                        rx, ry, offset, measure, tick);
-/*
+            /*
             t->setUserOff(QPointF(rx, ry));
             t->setMxmlOff(offset);
             t->setTrack((staff + rstaff) * VOICES);
             Segment* s = measure->getSegment(SegChordRest, tick);
             s->add(t);
-*/
+            */
             }
       else if (dirType == "pedal") {
             if (pedalLine) {
@@ -2140,8 +2135,8 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               // TODO LVIFIX: following is a hack, as it overrules the MusicXML offset:
                               // but for the time being it places pedal marks at a reasonable location
                               setSLinePlacement(pedal,
-                                          score->spatium(), placement,
-                                          true, 0);
+                                                score->spatium(), placement,
+                                                true, 0);
                               spanners[pedal] = QPair<int, int>(tick, -1);
                               qDebug("wedge pedal=%p inserted at first tick %d\n", pedal, tick);
                               }
@@ -2184,9 +2179,9 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             for (QStringList::Iterator it = dynamics.begin(); it != dynamics.end(); ++it ) {
                   Dynamic* dyn = new Dynamic(score);
                   dyn->setSubtype(*it);
-                  if(!dynaVelocity.isEmpty()) {
+                  if (!dynaVelocity.isEmpty()) {
                         int dynaValue = round(dynaVelocity.toDouble() * 0.9);
-                        if(dynaValue > 127)
+                        if (dynaValue > 127)
                               dynaValue = 127;
                         else if (dynaValue < 0)
                               dynaValue = 0;
@@ -2249,7 +2244,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         // store for later to set in segment
                         // b->setUserOff(QPointF(rx + xoffset, ry + yoffset));
                         b->setMxmlOff(offset);
-                        if (placement == "") placement = "above"; // set default
+                        if (placement == "") placement = "above";  // set default
                         setSLinePlacement(b,
                                           score->spatium(), placement,
                                           hasYoffset, yoffset);
@@ -2324,7 +2319,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               if (type == "down" && ottavasize == 15) ottava->setSubtype(1);
                               if (type ==   "up" && ottavasize ==  8) ottava->setSubtype(2);
                               if (type ==   "up" && ottavasize == 15) ottava->setSubtype(3);
-                              if (placement == "") placement = "above"; // set default
+                              if (placement == "") placement = "above";  // set default
                               setSLinePlacement(ottava,
                                                 score->spatium(), placement,
                                                 hasYoffset, yoffset);
@@ -2386,8 +2381,8 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                   divisions = stringToInt(e.text(), &ok);
                   if (!ok) {
                         qDebug("MusicXml-Import: bad divisions value: <%s>\n",
-                           qPrintable(e.text()));
-                              divisions = 4;
+                               qPrintable(e.text()));
+                        divisions = 4;
                         }
                   }
             else if (e.tagName() == "key") {
@@ -2448,7 +2443,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                         else if (ee.tagName() == "beat-type") {
                               beatType = ee.text();
                               }
-                        else if(ee.tagName() == "senza-misura")
+                        else if (ee.tagName() == "senza-misura")
                               ;
                         else
                               domError(ee);
@@ -2457,8 +2452,8 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
             else if (e.tagName() == "clef")
                   xmlClef(e, staff, measure);
             else if (e.tagName() == "staves")
-                  ; // ignore, already handled
-            else if (e.tagName() == "staff-details"){
+                  ;  // ignore, already handled
+            else if (e.tagName() == "staff-details") {
                   int number  = e.attribute(QString("number"), "-1").toInt();
                   int staffIdx = staff;
                   if (number != -1)
@@ -2469,17 +2464,17 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                               stafflines = ee.text().toInt();
                         else
                               domNotImplemented(ee);
-                  }
+                        }
 
-                  if (number == -1){
-                      int staves = score->part(staff)->nstaves();
-                      for (int i = 0; i < staves; ++i) {
-                           score->staff(staffIdx+i)->setLines(stafflines);
-                      }
-                  }else{
-                      score->staff(staffIdx)->setLines(stafflines);
+                  if (number == -1) {
+                        int staves = score->part(staff)->nstaves();
+                        for (int i = 0; i < staves; ++i) {
+                              score->staff(staffIdx+i)->setLines(stafflines);
+                              }
+                        }else {
+                        score->staff(staffIdx)->setLines(stafflines);
+                        }
                   }
-            }
             else if (e.tagName() == "instruments")
                   domNotImplemented(e);
             else if (e.tagName() == "transpose") {
@@ -2505,7 +2500,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                                     }
                               else
                                     qDebug("ImportMusicXml: multiple-rest %d not supported\n",
-                                       multipleRest);
+                                           multipleRest);
                               }
                         else
                               domError(ee);
@@ -2528,10 +2523,10 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                   bts = 4;
                   btp = 4;
                   }
-            else  {
+            else {
                   if (!timeSymbol.isEmpty()) {
                         qDebug("ImportMusicXml: time symbol <%s> not recognized with beats=%s and beat-type=%s\n",
-                           qPrintable(timeSymbol), qPrintable(beats), qPrintable(beatType));
+                               qPrintable(timeSymbol), qPrintable(beats), qPrintable(beatType));
                         }
 
                   btp = beatType.toInt();
@@ -2551,7 +2546,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                   for (int i = 0; i < list.size() && i < 4; i++)
                         bts += list.at(i).toInt();
                   }
-//            if (st) {
+            // if (st) {
             if (btp) {
                   // add timesig to all staves
                   //ws score->sigmap()->add(tick, TimeSig::getSig(st));
@@ -2587,7 +2582,7 @@ Lyrics* MusicXml::xmlLyric(int trk, QDomElement e)
       Lyrics* l = new Lyrics(score);
       l->setNo(lyricNo);
       l->setTrack(trk);
-//TODO-WS      l->setTick(tick);
+      //TODO-WS l->setTick(tick);
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "syllabic") {
@@ -2605,11 +2600,11 @@ Lyrics* MusicXml::xmlLyric(int trk, QDomElement e)
             else if (e.tagName() == "text")
                   l->setText(l->getText()+e.text());
             else if (e.tagName() == "elision")
-                  if (e.text().isEmpty()){
+                  if (e.text().isEmpty()) {
                         l->setText(l->getText()+" ");
-                  }else{
+                        }else {
                         l->setText(l->getText()+e.text());
-                  }
+                        }
             else if (e.tagName() == "extend")
                   ;
             else if (e.tagName() == "end-line")
@@ -2737,10 +2732,10 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       qreal yoffset = 0.0; // actually this is default-y
       qreal xoffset = 0.0;
       bool hasYoffset = false;
-      QSet<Slur *> slursStarted;
-      QSet<Slur *> slursStopped;
+      QSet<Slur*> slursStarted;
+      QSet<Slur*> slursStopped;
       QColor noteheadColor = QColor::Invalid;
-      QList<Lyrics *> lyrics;
+      QList<Lyrics*> lyrics;
       bool chord = false;
       int velocity = -1;
 
@@ -2778,7 +2773,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 
       int s = voicelist.value(voice).staff();
       int v = voicelist.value(voice).voice();
-//      qDebug("voice mapper before: relStaff=%d voice=%d s=%d v=%d\n", relStaff, voice, s, v);
+      // qDebug("voice mapper before: relStaff=%d voice=%d s=%d v=%d\n", relStaff, voice, s, v);
       if (s < 0 || v < 0) {
             qDebug("ImportMusicXml: too many voices (staff %d, relStaff %d, voice %d at line %d col %d)\n",
                    staff + 1, relStaff, voice + 1, e.lineNumber(), e.columnNumber());
@@ -2791,7 +2786,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             voice = v;
             }
 
-//      qDebug("after: relStaff=%d move=%d voice=%d", relStaff, move, voice);
+      // qDebug("after: relStaff=%d move=%d voice=%d", relStaff, move, voice);
 
       // for notes that are part of a chord (except the first one)
       // move tick back to the start time of the first note
@@ -2825,7 +2820,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               alter = stringToInt(ee.text(), &ok); // fractions not supported by mscore
                               if (!ok || alter < -2 || alter > 2) {
                                     qDebug("ImportXml: bad 'alter' value: %s at line %d col %d\n",
-                                          qPrintable(ee.text()), ee.lineNumber(), ee.columnNumber());
+                                           qPrintable(ee.text()), ee.lineNumber(), ee.columnNumber());
                                     alter = 0;
                                     }
                               }
@@ -2982,7 +2977,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                           }
                                     else {
                                           tie = new Tie(score);
-qDebug("new Tie %p\n", tie);
+                                          qDebug("new Tie %p\n", tie);
                                           }
                                     QString tiedOrientation = e.attribute("orientation", "auto");
                                     if (tiedOrientation == "over")
@@ -2990,13 +2985,12 @@ qDebug("new Tie %p\n", tie);
                                     else if (tiedOrientation == "under")
                                           tie->setSlurDirection(DOWN);
                                     else if (tiedOrientation == "auto")
-                                          ;
+                                          ;  // ignore
                                     else
                                           qDebug("unknown tied orientation: %s\n", tiedOrientation.toLatin1().data());
-                                          ;
                                     }
                               else if (tiedType == "stop")
-                                    ;
+                                    ;  // ignore
                               else
                                     qDebug("unknown tied type %s\n", tiedType.toLatin1().data());
                               }
@@ -3172,12 +3166,12 @@ qDebug("new Tie %p\n", tie);
             }
 
       int track = trk + voice;
-//      qDebug("staff=%d relStaff=%d VOICES=%d voice=%d track=%d\n",
-//             staff, relStaff, VOICES, voice, track);
+      // qDebug("staff=%d relStaff=%d VOICES=%d voice=%d track=%d\n",
+      //        staff, relStaff, VOICES, voice, track);
 
-//      qDebug("%s at %d voice %d dur = %d, beat %d/%d div %d pitch %d ticks %d\n",
-//         rest ? "Rest" : "Note", tick, voice, duration, beats, beatType,
-//         divisions, 0 /* pitch */, ticks);
+      // qDebug("%s at %d voice %d dur = %d, beat %d/%d div %d pitch %d ticks %d\n",
+      //         rest ? "Rest" : "Note", tick, voice, duration, beats, beatType,
+      //         divisions, 0 /* pitch */, ticks);
 
       ChordRest* cr = 0;
 
@@ -3227,7 +3221,7 @@ qDebug("new Tie %p\n", tie);
             if (noteheadColor != QColor::Invalid)
                   note->setColor(noteheadColor);
 
-            if(velocity > 0){
+            if (velocity > 0) {
                   note->setVeloType(USER_VAL);
                   note->setVeloOffset(velocity);
                   }
@@ -3257,15 +3251,15 @@ qDebug("new Tie %p\n", tie);
                   }
 
             if (tie) {
-qDebug("use Tie %p\n", tie);
+                  qDebug("use Tie %p\n", tie);
                   note->setTieFor(tie);
                   tie->setStartNote(note);
                   tie->setTrack(track);
                   tie = 0;
                   }
 
-//            if (grace)
-//                  qDebug(" grace: nrOfGraceSegsReq: %d\n", nrOfGraceSegsReq(pn));
+            // if (grace)
+            //       qDebug(" grace: nrOfGraceSegsReq: %d\n", nrOfGraceSegsReq(pn));
             int gl = nrOfGraceSegsReq(pn);
             cr = measure->findChord(tick, track, grace);
             if (cr == 0) {
@@ -3273,7 +3267,7 @@ qDebug("use Tie %p\n", tie);
                   cr = new Chord(score);
                   cr->setBeamMode(bm);
                   cr->setTrack(track);
-//                  qDebug(" grace=%d\n", grace);
+                  // qDebug(" grace=%d\n", grace);
                   if (grace) {
                         NoteType nt = NOTE_APPOGGIATURA;
                         if (graceSlash == "yes")
@@ -3304,11 +3298,11 @@ qDebug("use Tie %p\n", tie);
                         }
                   cr->setDots(dots);
                   cr->setDuration(cr->durationType().fraction());
-//                  qDebug(" cr->tick()=%d ", cr->tick());
+                  // qDebug(" cr->tick()=%d ", cr->tick());
                   Segment* s = measure->getSegment(st, tick, gl);
                   s->add(cr);
                   }
-//            qDebug(" cr->tick()=%d", cr->tick());
+            // qDebug(" cr->tick()=%d", cr->tick());
             cr->setStaffMove(move);
 
             // pitch must be set before adding note to chord as note
@@ -3319,8 +3313,8 @@ qDebug("use Tie %p\n", tie);
 
             ((Chord*)cr)->setNoStem(noStem);
 
-//            qDebug("staff for new note: %p (staff=%d, relStaff=%d)\n",
-//                   score->staff(staff + relStaff), staff, relStaff);
+            // qDebug("staff for new note: %p (staff=%d, relStaff=%d)\n",
+            //        score->staff(staff + relStaff), staff, relStaff);
 
             if (editorial) {
                   Accidental* a = new Accidental(score);
@@ -3331,11 +3325,11 @@ qDebug("use Tie %p\n", tie);
                   }
 
             // LVIFIX: quarter tone accidentals support is "drawing only"
-//WS-TODO            if (accidental == 18
-//                || accidental == 19
-//                || accidental == 22
-//                || accidental == 25)
-//                  note->setAccidentalType(accidental);
+            //WS-TODO if (accidental == 18
+            // || accidental == 19
+            // || accidental == 22
+            // || accidental == 25)
+            // note->setAccidentalType(accidental);
 
             if (cr->beamMode() == BEAM_NO)
                   cr->setBeamMode(bm);
@@ -3572,8 +3566,8 @@ qDebug("use Tie %p\n", tie);
             qDebug("tremolo=%d tremoloType='%s'\n", tremolo, qPrintable(tremoloType));
             if (tremolo == 1 || tremolo == 2 || tremolo == 3) {
                   if (tremoloType == "" || tremoloType == "single") {
-                        Tremolo * t = new Tremolo(score);
-                        switch(tremolo) {
+                        Tremolo* t = new Tremolo(score);
+                        switch (tremolo) {
                               case 1: t->setSubtype(TREMOLO_R8); break;
                               case 2: t->setSubtype(TREMOLO_R16); break;
                               case 3: t->setSubtype(TREMOLO_R32); break;
@@ -3587,8 +3581,8 @@ qDebug("use Tie %p\n", tie);
                         }
                   else if (tremoloType == "stop") {
                         if (tremStart) {
-                              Tremolo * t = new Tremolo(score);
-                              switch(tremolo) {
+                              Tremolo* t = new Tremolo(score);
+                              switch (tremolo) {
                                     case 1: t->setSubtype(TREMOLO_C8); break;
                                     case 2: t->setSubtype(TREMOLO_C16); break;
                                     case 3: t->setSubtype(TREMOLO_C32); break;
@@ -3614,7 +3608,7 @@ qDebug("use Tie %p\n", tie);
             if (hasYoffset) dyn->setYoff(yoffset);
             addElement(dyn, hasYoffset, track / VOICES /* staff */, 0 /* rstaff */, score, placement,
                        rx, ry, 0 /*offset */, measure, tick);
-/*
+            /*
             if (hasYoffset) dyn->setYoff(yoffset);
             else dyn->setAbove(placement == "above");
             dyn->setUserOff(QPointF(rx, ry));
@@ -3622,7 +3616,7 @@ qDebug("use Tie %p\n", tie);
             dyn->setTrack(track);
             Segment* s = measure->getSegment(SegChordRest, tick);
             s->add(dyn);
-*/
+            */
             }
 
       while (!lyrics.isEmpty()) {
@@ -3631,7 +3625,7 @@ qDebug("use Tie %p\n", tie);
 
       prevtick = tick; // <- LVIFIX TODO check (this may have to move or change)
 
-//      qDebug(" after inserting note tick=%d\n", tick);
+      // qDebug(" after inserting note tick=%d\n", tick);
       }
 
 //---------------------------------------------------------
@@ -3710,8 +3704,8 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure, int staff)
       // type:
 
       // placement:
-      double rx = e.attribute("relative-x", "0").toDouble()*0.1;
-      double ry = e.attribute("relative-y", "0").toDouble()*-0.1;
+      double rx = 0.1 * e.attribute("relative-x", "0").toDouble();
+      double ry = -0.1 * e.attribute("relative-y", "0").toDouble();
 
       double styleYOff = score->textStyle(TEXT_STYLE_HARMONY).yoff();
       OffsetType offsetType = score->textStyle(TEXT_STYLE_HARMONY).offsetType();
@@ -3719,7 +3713,7 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure, int staff)
             styleYOff = styleYOff * DPMM / score->spatium();
             }
 
-      double dy = e.attribute("default-y", QString::number(styleYOff*-10)).toDouble()*-0.1;
+      double dy = -0.1 * e.attribute("default-y", QString::number(styleYOff* -10)).toDouble();
 
       QString printObject(e.attribute("print-object", "yes"));
       QString printFrame(e.attribute("print-frame"));
@@ -3833,18 +3827,18 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure, int staff)
                   domError(e);
             }
 
-//TODO-WS      ha->setTick(tick);
+      //TODO-WS ha->setTick(tick);
 
       const ChordDescription* d = ha->fromXml(kind, degreeList);
       if (d == 0) {
             QString degrees;
-            foreach(const HDegree& d, degreeList) {
+            foreach(const HDegree &d, degreeList) {
                   if (!degrees.isEmpty())
                         degrees += " ";
                   degrees += d.text();
                   }
             qDebug("unknown chord txt: <%s> kind: <%s> degrees: %s\n",
-               qPrintable(kindText), qPrintable(kind), qPrintable(degrees));
+                   qPrintable(kindText), qPrintable(kind), qPrintable(degrees));
 
             // Strategy II: lookup "kind", merge in degree list and try to find
             //    harmony in list
@@ -3852,8 +3846,8 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure, int staff)
             d = ha->fromXml(kind);
             if (d) {
                   ha->setId(d->id);
-                  foreach(const HDegree& d, degreeList)
-                        ha->addDegree(d);
+                  foreach(const HDegree &d, degreeList)
+                  ha->addDegree(d);
                   ha->resolveDegreeList();
                   ha->render();
                   }
@@ -3865,7 +3859,7 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure, int staff)
             }
       else {
             ha->setId(d->id);
-//            ha->resolveDegreeList();
+            // ha->resolveDegreeList();
             ha->render();
             }
       ha->setVisible(printObject == "yes");
@@ -3904,14 +3898,14 @@ void MusicXml::xmlClef(QDomElement e, int staffIdx, Measure* measure)
 
       //some software (Primus) don't include line and assume some default
       // it's permitted by MusicXML 2.0 XSD
-      if(line == -1) {
-          if(c == "G")
-                line = 2;
-          else if (c == "F")
-                line = 4;
-          else if (c == "C")
-                line = 3;
-          }
+      if (line == -1) {
+            if (c == "G")
+                  line = 2;
+            else if (c == "F")
+                  line = 4;
+            else if (c == "C")
+                  line = 3;
+            }
 
       if (c == "G" && i == 0 && line == 2)
             clef = CLEF_G;
@@ -3961,4 +3955,3 @@ void MusicXml::xmlClef(QDomElement e, int staffIdx, Measure* measure)
       Segment* s = measure->getSegment(clefs, tick);
       s->add(clefs);
       }
-
