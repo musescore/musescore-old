@@ -1,3 +1,5 @@
+31.oct (ws)
+      - fix #3798: Grace notes were created with stem direction "UP", should be "AUTO"
 30.oct (ws)
       - fix #9307: Nested tuplets causes crash
       (la)

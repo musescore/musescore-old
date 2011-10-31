@@ -769,7 +769,7 @@ QLineF Harmony::dragAnchor() const
             xp += e->x();
       qreal yp = measure()->system()->staffY(staffIdx());
       QPointF p(xp, yp);
-      return QLineF(p, pagePos());
+      return QLineF(p, canvasPos());
       }
 
 //---------------------------------------------------------
