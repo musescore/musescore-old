@@ -479,7 +479,6 @@ void Score::setGraceNote(Chord* ch, int pitch, NoteType type, int len)
       d.setVal(len);
       chord->setDurationType(d);
       chord->setDuration(d.fraction());
-      chord->setStemDirection(UP);
       chord->setNoteType(type);
       chord->setMag(ch->staff()->mag() * styleD(ST_graceNoteMag));
 

@@ -77,7 +77,6 @@ void StemSlash::setLine(const QLineF& l)
 
 //---------------------------------------------------------
 //   layout
-//    TODO: does not work for chords/beamed acciacatura
 //---------------------------------------------------------
 
 void StemSlash::layout()
@@ -545,11 +544,10 @@ void Chord::addLedgerLines(qreal x, int move)
 void Chord::computeUp()
       {
       // tablatures
-      if(staff() && staff()->useTablature()) {
-            _up =true;
+      if (staff() && staff()->useTablature()) {
+            _up = true;
             return;
             }
-
       // pitched staves
       if (_stemDirection != AUTO) {
             _up = _stemDirection == UP;
