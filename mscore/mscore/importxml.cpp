@@ -79,6 +79,7 @@
 #include "libmscore/chordlist.h"
 #include "libmscore/mscore.h"
 #include "libmscore/accidental.h"
+#include "preferences.h"
 
 //---------------------------------------------------------
 //   xmlSetPitch
@@ -495,6 +496,7 @@ static void addText(VBox*& vbx, Score* s, QString strTxt, int sbtp, TextStyleTyp
 
 void MusicXml::doCredits()
       {
+      // IMPORT_LAYOUT
       qDebug("MusicXml::doCredits()\n");
       const PageFormat* pf = score->pageFormat();
       qDebug("page format w=%g h=%g spatium=%g DPMM=%g DPI=%g\n",
@@ -810,6 +812,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                         }
                   }
             else if (tag == "defaults") {
+                  // IMPORT_LAYOUT
                   double millimeter = score->spatium()/10.0;
                   double tenths = 1.0;
                   QDomElement pageLayoutElement;
@@ -871,6 +874,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                   pf.readMusicXML(pageLayoutElement, millimeter / (tenths * INCH) );
                   score->setPageFormat(pf);
                   score->setDefaultsRead(true); // TODO only if actually succeeded ?
+                  // IMPORT_LAYOUT END
                   }
             else if (tag == "movement-number")
                   score->setMetaTag("movementNumber", e.text());
@@ -880,6 +884,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
                         if (tag == "credit-words") {
+                              // IMPORT_LAYOUT
                               double defaultx    = ee.attribute(QString("default-x")).toDouble();
                               double defaulty    = ee.attribute(QString("default-y")).toDouble();
                               QString justify = ee.attribute(QString("justify"));
@@ -1441,6 +1446,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                   direction(measure, staff, e);
                   }
             else if (e.tagName() == "print") {
+                  // IMPORT_LAYOUT
                   QString newSystem = e.attribute("new-system", "no");
                   QString newPage   = e.attribute("new-page", "no");
                   //
@@ -1450,7 +1456,8 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                   if (pm == 0)
                         qDebug("ImportXml: warning: break on first measure\n");
                   else {
-                        if (newSystem == "yes" || newPage == "yes") {
+                        if (preferences.musicxmlImportLayout
+                            && (newSystem == "yes" || newPage == "yes")) {
                               LayoutBreak* lb = new LayoutBreak(score);
                               lb->setTrack(staff * VOICES);
                               lb->setSubtype(
@@ -1467,6 +1474,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                         else
                               domError(ee);
                         }
+                  // IMPORT_LAYOUT END
                   }
             else if (e.tagName() == "forward") {
                   moveTick(tick, maxtick, lastLen, divisions, e);
@@ -1848,6 +1856,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "direction-type") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        // IMPORT_LAYOUT
                         dirType = ee.tagName();
                         ry      = ee.attribute(QString("relative-y"), "0").toDouble() * -.1;
                         rx      = ee.attribute(QString("relative-x"), "0").toDouble() * .1;
@@ -3000,6 +3009,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               tupletBracket   = ee.attribute("bracket");
                               }
                         else if (ee.tagName() == "dynamics") {
+                              // IMPORT_LAYOUT
                               placement = ee.attribute("placement");
                               ry        = ee.attribute(QString("relative-y"), "0").toDouble() * -.1;
                               rx        = ee.attribute(QString("relative-x"), "0").toDouble() * .1;
