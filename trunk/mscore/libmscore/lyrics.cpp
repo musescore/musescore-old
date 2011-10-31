@@ -39,7 +39,7 @@ Lyrics::Lyrics(const Lyrics& l)
    : Text(l)
       {
       _no  = l._no;
-      setTextStyle((_no % 2) ? TEXT_STYLE_LYRIC2 : TEXT_STYLE_LYRIC1);
+      setTextStyle(l.textStyle());
       _ticks = l._ticks;
       _syllabic = l._syllabic;
       if (l._verseNumber)
@@ -217,9 +217,9 @@ void Lyrics::layout()
             }
       const QList<Lyrics*>* ll = &(chordRest()->lyricsList());
 
-      int line       = ll->indexOf(this);
-      qreal y       = lh * line + point(score()->styleS(ST_lyricsDistance))
-                       + sys->staff(staffIdx())->bbox().height();
+      int line = ll->indexOf(this);
+      qreal y  = lh * line + point(score()->styleS(ST_lyricsDistance))
+                 + sys->staff(staffIdx())->bbox().height();
       qreal x;
       //
       // left align if syllable has a number
@@ -292,4 +292,14 @@ Element* Lyrics::drop(const DropData& data)
       return e;
       }
 
+//---------------------------------------------------------
+//   setNo
+//---------------------------------------------------------
+
+void Lyrics::setNo(int n)
+      {
+      _no = n;
+      if (type() == LYRICS)
+            setTextStyle((_no % 2) ? TEXT_STYLE_LYRIC2 : TEXT_STYLE_LYRIC1);
+      }
 

@@ -55,11 +55,13 @@ Component {
 
 
             MouseArea{
-                   anchors.fill: parent
-                   onClicked: {
-                         scoreView.loadUrl(scorelist.get(index).path)
-                         screen.state = "ScoreView"
-                         }
-                   }
+                  anchors.fill: parent
+                  onClicked: {
+                        busyIndicator.on = true
+                        scoreView.loadUrl(scorelist.get(index).path)
+                        screen.state = "ScoreView"
+                        busyIndicator.on = false
+                        }
+                  }
             }
       }

@@ -75,6 +75,7 @@
 #include "mscore.h"
 #include "icon.h"
 #include "ossia.h"
+#include "figuredbass.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -111,6 +112,7 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "Beam"),
       QT_TRANSLATE_NOOP("elementName", "Hook"),
       QT_TRANSLATE_NOOP("elementName", "Lyrics"),
+      QT_TRANSLATE_NOOP("elementName", "FiguredBass"),
       QT_TRANSLATE_NOOP("elementName", "Marker"),
       QT_TRANSLATE_NOOP("elementName", "Jump"),
       QT_TRANSLATE_NOOP("elementName", "Fingering"),
@@ -1296,6 +1298,7 @@ Element* Element::create(ElementType type, Score* score)
             case BEND:              return new Bend(score);
             case TREMOLOBAR:        return new TremoloBar(score);
             case LYRICS:            return new Lyrics(score);
+            case FIGURED_BASS:      return new FiguredBass(score);
             case STEM:              return new Stem(score);
             case SLUR:              return new Slur(score);
             case ACCIDENTAL_BRACKET: return new AccidentalBracket(score);
@@ -1379,6 +1382,7 @@ const char* Element::name(ElementType type)
             case BEAM:              return "Beam";
             case HOOK:              return "Hook";
             case LYRICS:            return "Lyrics";
+            case FIGURED_BASS:      return "FiguredBass";
             case MARKER:            return "Marker";
             case JUMP:              return "Jump";
             case FINGERING:         return "Fingering";

@@ -31,6 +31,7 @@
       <file>mobile/TitleBar.qml</file>
       <file>mobile/Slider.qml</file>
       <file>mobile/SearchBox.qml</file>
+      <file>mobile/BusyIndicator.qml</file>
 
       <file>mobile/images/titlebar.sci</file>
       <file>mobile/images/titlebar.png</file>
@@ -45,6 +46,7 @@
       <file>mobile/images/playbuttonOff.png</file>
       <file>mobile/images/rewindbuttonOn.png</file>
       <file>mobile/images/rewindbuttonOff.png</file>
+      <file>mobile/images/busy.png</file>
 
       <file>mobile/images/clear.png</file>
       <file>mobile/images/lineedit-bg.png</file>

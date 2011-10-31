@@ -41,6 +41,7 @@ add_library (
       undo.cpp cmd.cpp scorefile.cpp revisions.cpp
       check.cpp input.cpp icon.cpp ossia.cpp
       dsp.cpp tempo.cpp sig.cpp pos.cpp fraction.cpp duration.cpp
+      figuredbass.cpp
       )
 set_target_properties (
       libmscore

@@ -83,6 +83,7 @@ class MuseScoreView;
 class LinkedElements;
 class Fingering;
 class Painter;
+class FiguredBass;
 
 extern bool showRubberBand;
 
@@ -750,6 +751,7 @@ class Score {
       void setTmpName(const QString& s) { _tmpName = s;         }
       void processMidiInput();
       Lyrics* addLyrics();
+      FiguredBass* addFiguredBass();
       void expandVoice(Segment* s, int track);
       void expandVoice();
       Note* addPitch(int pitch, bool addFlag);

@@ -371,6 +371,7 @@ class Element {
                 || type() == JUMP
                 || type() == STAFF_TEXT
                 || type() == INSTRUMENT_CHANGE
+                || type() == FIGURED_BASS
                 || type() == TEMPO_TEXT;
             }
       qreal point(const Spatium sp) const { return sp.val() * spatium(); }

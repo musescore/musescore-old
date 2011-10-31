@@ -42,6 +42,11 @@ Item {
                   opacity: 0.3
                   }
 
+            Mobile.BusyIndicator {
+                  id: busyIndicator
+                  anchors.centerIn: parent
+                  }
+
             Timer {
                   id: plainTimer
                   interval: 2000

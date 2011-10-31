@@ -168,6 +168,7 @@ const QString Text::subtypeName() const
             case TEXT_INSTRUMENT_EXCERPT: return "InstrumentExcerpt";
             case TEXT_TEMPO:            return "Tempo";
             case TEXT_LYRIC:            return "Lyric";
+            case TEXT_FIGURED_BASS:     return "FiguredBass";
             case TEXT_TUPLET:           return "Tuplet";
             case TEXT_SYSTEM:           return "System";
             case TEXT_STAFF:            return "Staff";
@@ -218,6 +219,8 @@ void Text::setSubtype(const QString& s)
             st = TEXT_TEMPO;
       else if (s == "Lyric")
             st = TEXT_LYRIC;
+      else if (s == "FiguredBass")
+            st = TEXT_FIGURED_BASS;
       else if (s == "Tuplet")
             st = TEXT_TUPLET;
       else if (s == "System")
@@ -809,12 +812,12 @@ bool Text::edit(MuseScoreView* view, int /*grip*/, int key, Qt::KeyboardModifier
                   break;
 
             case Qt::Key_Left:
-                  if (!cursor->movePosition(QTextCursor::Left, mm) && (type() == LYRICS))
+                  if (!cursor->movePosition(QTextCursor::Left, mm) && (type() == LYRICS || type() == FIGURED_BASS))
                         return false;
                   break;
 
             case Qt::Key_Right:
-                  if (!cursor->movePosition(QTextCursor::Right, mm) && (type() == LYRICS))
+                  if (!cursor->movePosition(QTextCursor::Right, mm) && (type() == LYRICS || type() == FIGURED_BASS))
                         return false;
                   break;
 
