@@ -1,4 +1,6 @@
 31.oct (ws)
+      - fix #13413: navigator issues with single page
+      - fix #12695: navigator not updating when adding/removing pages
       - first "figured bass" support (shift+l); works similar as lyrics
       - reduce flicker when updating navigator
       - fix #3798: Grace notes were created with stem direction "UP", should be "AUTO"

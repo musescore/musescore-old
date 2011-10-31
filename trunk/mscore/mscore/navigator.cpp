@@ -355,9 +355,10 @@ void Navigator::layoutChanged()
             update();
             return;
             }
-
-      pcl.clear();
       int n = _score->pages().size();
+      if (n != pcl.size())
+            rescale();
+      pcl.clear();
       for (int i = 0; i < n; ++i) {
             PageCache pc;
             pc.page      = _score->pages()[i];
