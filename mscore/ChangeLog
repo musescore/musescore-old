@@ -1,4 +1,5 @@
 31.oct (ws)
+      - fix #3155: Color and position of flags/hook are not saved
       - fix #13413: navigator issues with single page
       - fix #12695: navigator not updating when adding/removing pages
       - first "figured bass" support (shift+l); works similar as lyrics

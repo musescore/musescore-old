@@ -15,6 +15,7 @@
 #include "sym.h"
 #include "chord.h"
 #include "stem.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   Hook
@@ -51,17 +52,12 @@ void Hook::setSubtype(int i)
             }
       }
 
-#if 0
 //---------------------------------------------------------
-//   setVisible
+//   layout
 //---------------------------------------------------------
 
-void Hook::setVisible(bool f)
+void Hook::layout()
       {
-      Element::setVisible(f);
-      Chord* chord = static_cast<Chord*>(parent());
-      if (chord && chord->stem() && chord->stem()->visible() != f)
-            chord->stem()->setVisible(f);
+      ElementLayout::layout(this);
+      setbbox(symbols[score()->symIdx()][_sym].bbox(magS()));
       }
-#endif
-
