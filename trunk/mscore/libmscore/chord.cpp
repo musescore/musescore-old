@@ -1157,6 +1157,7 @@ void Chord::layoutStem()
                   qreal lw  = point(score()->styleS(ST_stemWidth)) * .5;
                   QPointF p = npos + QPointF(lw, _stem->stemLen());
                   _hook->setPos(p - pagePos());
+                  _hook->adjustReadPos();
                   }
             else {
                   if (_hook)

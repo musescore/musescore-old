@@ -27,6 +27,7 @@ class Hook : public Symbol {
       virtual Hook* clone() const      { return new Hook(*this); }
       virtual ElementType type() const { return HOOK; }
       virtual void setSubtype(int v);
+      virtual void layout();
       };
 
 #endif
