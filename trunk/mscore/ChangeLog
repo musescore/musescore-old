@@ -1,4 +1,6 @@
-31.oct (ws)
+31.oct (lv)
+      - partial implementation of #13451: MusicXML: optionally ignore layout information on import
+       (ws)
       - fix #3155: Color and position of flags/hook are not saved
       - fix #13413: navigator issues with single page
       - fix #12695: navigator not updating when adding/removing pages

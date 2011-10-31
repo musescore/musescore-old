@@ -112,6 +112,8 @@ struct Preferences {
       bool midiExpandRepeats;
       QString instrumentList; // file path of instrument templates
 
+      bool musicxmlImportLayout;
+
       bool alternateNoteEntryMethod;
       int proximity;          // proximity for selecting elements on canvas
       bool autoSave;

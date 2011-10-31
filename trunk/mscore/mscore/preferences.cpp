@@ -211,6 +211,8 @@ void Preferences::init()
       MScore::panPlayback      = true;
       instrumentList           = ":/data/instruments.xml";
 
+      musicxmlImportLayout     = true;
+
       alternateNoteEntryMethod = false;
       proximity                = 6;
       autoSave                 = true;
@@ -340,6 +342,8 @@ void Preferences::write()
       s.setValue("playRepeats",        MScore::playRepeats);
       s.setValue("panPlayback",        MScore::panPlayback);
       s.setValue("instrumentList", instrumentList);
+
+      s.setValue("musicxmlImportLayout",  musicxmlImportLayout);
 
       s.setValue("alternateNoteEntry", alternateNoteEntryMethod);
       s.setValue("proximity",          proximity);
@@ -488,6 +492,8 @@ void Preferences::read()
       pngResolution            = s.value("pngResolution", pngResolution).toDouble();
       pngTransparent           = s.value("pngTransparent", pngTransparent).toBool();
       language                 = s.value("language", language).toString();
+
+      musicxmlImportLayout     = s.value("musicxmlImportLayout", musicxmlImportLayout).toBool();
 
       MScore::replaceFractions = s.value("replaceFractions", MScore::replaceFractions).toBool();
       replaceCopyrightSymbol = s.value("replaceCopyrightSymbol", replaceCopyrightSymbol).toBool();
@@ -869,6 +875,8 @@ void PreferenceDialog::updateValues(Preferences* p)
       showSplashScreen->setChecked(p->showSplashScreen);
       expandRepeats->setChecked(p->midiExpandRepeats);
       instrumentList->setText(p->instrumentList);
+
+      importLayout->setChecked(p->musicxmlImportLayout);
 
       midiPorts->setValue(p->midiPorts);
       rememberLastMidiConnections->setChecked(p->rememberLastMidiConnections);
@@ -1399,6 +1407,8 @@ void PreferenceDialog::apply()
       preferences.showSplashScreen   = showSplashScreen->isChecked();
       preferences.midiExpandRepeats  = expandRepeats->isChecked();
       preferences.instrumentList     = instrumentList->text();
+
+      preferences.musicxmlImportLayout  = importLayout->isChecked();
 
       preferences.midiPorts          = midiPorts->value();
       preferences.rememberLastMidiConnections = rememberLastMidiConnections->isChecked();
