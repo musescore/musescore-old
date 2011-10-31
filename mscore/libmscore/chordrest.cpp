@@ -975,7 +975,8 @@ void ChordRest::remove(Element* e)
                         if (_lyricsList[i] != e)
                               continue;
                         _lyricsList[i] = 0;
-                        // shrink list if possible ?
+                        while (!_lyricsList.isEmpty() && _lyricsList.back() == 0)
+                              _lyricsList.takeLast();
                         return;
                         }
                   }

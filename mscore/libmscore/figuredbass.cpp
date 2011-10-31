@@ -127,16 +127,22 @@ void FiguredBass::layout()
       qreal y  = lh * line + point(score()->styleS(ST_figuredBassDistance))
                  + sys->staff(staffIdx())->bbox().height();
       QString s = getText();
-      qreal x = 0.0;
-      if (s.size() > 1) {
-            for (int i = 0; i < s.size(); ++i) {
-                  if (s[i].isNumber()) {
-                        x = -QFontMetricsF(font()).width(s.left(i));
-                        break;
+      qreal x = symbols[score()->symIdx()][quartheadSym].width(magS()) * .5;
+      QFontMetricsF fm(font());
+      for (int i = 0; i < s.size(); ++i) {
+            if (s[i].isNumber()) {
+                  if (i)
+                        x += -fm.width(s.left(i));
+                  int startIdx = i;
+                  for (; i < s.size(); ++i) {
+                        if (!s[i].isNumber())
+                              break;
                         }
+                  x += -(fm.width(s.mid(startIdx, i - startIdx)) * .5);
+                  break;
                   }
             }
-printf("layout x %f\n", x);
+      x -= spatium() * .25;  // DEBUG
       setPos(x, y);
       }
 
