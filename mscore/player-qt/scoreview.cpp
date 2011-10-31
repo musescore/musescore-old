@@ -78,11 +78,12 @@ ScoreView::ScoreView(QDeclarativeItem* parent)
 //---------------------------------------------------------
 //   setScore
 //---------------------------------------------------------
+
 void ScoreView::loadUrl(const QString& s)
       {
       QUrl url(s);
-      printf("URL %s\n", qPrintable(s));
-      if(url.scheme().compare("http") == 0) {
+printf("URL %s\n", qPrintable(s));
+      if (url.scheme().compare("http") == 0) {
             if (!networkManager) {
                   networkManager = new QNetworkAccessManager(this);
                   connect(networkManager, SIGNAL(finished(QNetworkReply*)),
@@ -113,8 +114,8 @@ void ScoreView::networkFinished(QNetworkReply* reply)
       else
             name = re.cap(1);
 
-      printf("header <%s>\n", qPrintable(s));
-      printf("name <%s>\n", qPrintable(name));
+printf("header <%s>\n", qPrintable(s));
+printf("name <%s>\n", qPrintable(name));
 
       QByteArray data = reply->readAll();
       QString tmpName = QDir::tempPath () + "/"+ name;
@@ -132,6 +133,7 @@ void ScoreView::networkFinished(QNetworkReply* reply)
 
 void ScoreView::setScore(const QString& name)
       {
+sleep(3);
       if (seq->isPlaying())
             seq->stop();
       _currentPage = 0;

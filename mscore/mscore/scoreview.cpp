@@ -49,6 +49,7 @@
 #include "libmscore/measure.h"
 #include "drumroll.h"
 #include "libmscore/lyrics.h"
+#include "libmscore/figuredbass.h"
 #include "textpalette.h"
 #include "libmscore/undo.h"
 #include "libmscore/slur.h"
@@ -3088,6 +3089,14 @@ void ScoreView::cmd(const QAction* a)
                   return;     // no endCmd()
                   }
             }
+      else if (cmd == "figured-bass") {
+            FiguredBass* fb = _score->addFiguredBass();
+            if (fb) {
+                  _score->setLayoutAll(true);
+                  startEdit(fb);
+                  return;     // no endCmd()
+                  }
+            }
       else if (cmd == "mag")
             sm->postEvent(new CommandEvent(cmd));
       else if (cmd == "add-slur")
@@ -5019,7 +5028,7 @@ void ScoreView::lyricsReturn()
 
       Lyrics* oldLyrics = lyrics;
 
-      lyrics = new Lyrics(_score);
+      lyrics = static_cast<Lyrics*>(Element::create(lyrics->type(), _score));
       lyrics->setTrack(oldLyrics->track());
       lyrics->setParent(segment->element(oldLyrics->track()));
       lyrics->setNo(oldLyrics->no() + 1);

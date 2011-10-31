@@ -30,11 +30,13 @@ class Lyrics : public Text {
       enum Syllabic { SINGLE, BEGIN, END, MIDDLE };
 
    private:
-      int _no;                ///< row index
       int _ticks;             ///< if > 0 then draw an underline to tick() + _ticks
       Syllabic _syllabic;
       QList<Line*> _separator;
       Text* _verseNumber;
+
+   protected:
+      int _no;                ///< row index
 
    public:
       Lyrics(Score*);
@@ -55,7 +57,7 @@ class Lyrics : public Text {
 
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
-      void setNo(int n)             { _no = n; setTextStyle((_no % 2) ? TEXT_STYLE_LYRIC2 : TEXT_STYLE_LYRIC1); }
+      void setNo(int n);
       int no() const                { return _no; }
       void setSyllabic(Syllabic s)  { _syllabic = s; }
       Syllabic syllabic() const     { return _syllabic; }

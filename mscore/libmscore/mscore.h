@@ -93,6 +93,7 @@ enum ElementType {
       BEAM,
       HOOK,
       LYRICS,
+      FIGURED_BASS,
       MARKER,
       JUMP,
       FINGERING,
@@ -487,6 +488,7 @@ enum TextStyleType {
       TEXT_STYLE_FOOTER,
       TEXT_STYLE_INSTRUMENT_CHANGE,
       TEXT_STYLE_LYRICS_VERSE_NUMBER,
+      TEXT_STYLE_FIGURED_BASS,
       TEXT_STYLES
       };
 

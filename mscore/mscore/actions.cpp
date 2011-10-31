@@ -2862,6 +2862,16 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","toggle metronome"),
          metronome_ICON
          ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
+         "figured-bass",
+         QT_TRANSLATE_NOOP("action","Figured Bass"),
+         Qt::SHIFT + Qt::Key_L,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Figured Bass"),
+         QT_TRANSLATE_NOOP("action","Figured Bass")
+         ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, 0, QKeySequence::UnknownKey)
       };

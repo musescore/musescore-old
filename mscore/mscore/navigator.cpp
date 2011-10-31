@@ -394,9 +394,9 @@ void Navigator::paintEvent(QPaintEvent* ev)
       QPainter p(this);
       QRect r(ev->rect());
 
-      p.fillRect(r, Qt::gray);
-//      if (_cv == 0)
-//            return;
+      // p.fillRect(r, Qt::gray);
+      QRegion region(r);
+
       npcl.clear();
       if (matrix.m11() != .0) {
             for (int i = 0; i < pcl.size(); ++i) {
@@ -409,9 +409,12 @@ void Navigator::paintEvent(QPaintEvent* ev)
                               }
                         else
                               npcl.append(&pcl[i]);
+                        region -= rr;
                         }
                   }
             }
+      foreach(QRect r, region.rects())
+            p.fillRect(r, Qt::gray);
 
       if (_score && !recreatePixmap) {
             QPen pen(Qt::blue, 2.0);

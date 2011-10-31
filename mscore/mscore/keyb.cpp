@@ -64,7 +64,7 @@ void ScoreView::editKey(QKeyEvent* ev)
       if (!editObject)
             return;
 
-      if (editObject->type() == LYRICS) {
+      if (editObject->type() == LYRICS || editObject->type() == FIGURED_BASS) {
             int found = false;
 		if (key == Qt::Key_Space && !(modifiers & CONTROL_MODIFIER)) {
                   // TODO: shift+tab events are filtered by qt

@@ -53,7 +53,8 @@ enum {
       TEXT_HEADER,
       TEXT_FOOTER,
       TEXT_INSTRUMENT_CHANGE,
-      TEXT_LYRICS_VERSE_NUMBER
+      TEXT_LYRICS_VERSE_NUMBER,
+      TEXT_FIGURED_BASS
       };
 
 //---------------------------------------------------------

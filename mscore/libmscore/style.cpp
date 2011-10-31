@@ -39,8 +39,10 @@ StyleType styleTypes[] = {
       StyleType("akkoladeDistance",        ST_SPATIUM),
       StyleType("systemDistance",          ST_SPATIUM),
       StyleType("lyricsDistance",          ST_SPATIUM),
+      StyleType("figuredBassDistance",     ST_SPATIUM),
       StyleType("lyricsMinBottomDistance", ST_SPATIUM),
       StyleType("lyricsLineHeight",        ST_DOUBLE),      // in % of normal height (default: 1.0)
+      StyleType("figuredBassLineHeight",   ST_DOUBLE),      // in % of normal height
       StyleType("systemFrameDistance",     ST_SPATIUM),     // dist. between staff and vertical box
       StyleType("frameSystemDistance",     ST_SPATIUM),     // dist. between vertical box and next system
       StyleType("minMeasureWidth",         ST_SPATIUM),
@@ -313,6 +315,9 @@ void setDefaultStyle(Style* s)
       AS(TextStyle(TR("Lyrics Verse"), ff, 11, false, false, false,
          ALIGN_RIGHT | ALIGN_TOP, 0, 0, OS, 0.0, 0.0, true));
 
+      AS(TextStyle(TR("Figured Bass"), ff, 11, false, false, false,
+         ALIGN_HCENTER | ALIGN_TOP, 0, 7, OS, 0.0, 0.0, true));
+
 #undef MM
 #undef OA
 #undef OS
@@ -334,8 +339,10 @@ StyleData::StyleData()
             StyleVal(ST_akkoladeDistance, Spatium(6.5)),
             StyleVal(ST_systemDistance, Spatium(9.25)),
             StyleVal(ST_lyricsDistance, Spatium(2)),
+            StyleVal(ST_figuredBassDistance, Spatium(2)),
             StyleVal(ST_lyricsMinBottomDistance, Spatium(2)),
             StyleVal(ST_lyricsLineHeight, qreal(1.0)),
+            StyleVal(ST_figuredBassLineHeight, qreal(.7)),
             StyleVal(ST_systemFrameDistance, Spatium(7.0)),
             StyleVal(ST_frameSystemDistance, Spatium(7.0)),
             StyleVal(ST_minMeasureWidth, Spatium(5.0)),

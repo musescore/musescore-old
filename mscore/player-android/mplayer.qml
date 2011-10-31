@@ -13,6 +13,7 @@
 
 import QtQuick 1.1
 import MuseScore 1.0
+import Qt.labs.gestures 1.0
 import "mobile" as Mobile
 
 Item {
@@ -34,7 +35,7 @@ Item {
 
             Timer {
                   id: plainTimer
-                  interval: 2000
+                  interval: 3000
                   repeat: false
                   onTriggered: {
                         if (screen.state == "ScoreView")
@@ -170,12 +171,13 @@ Item {
                   parentWidth: screen.width
                   parentHeight: screen.height
                   x: -width;
-                  MouseArea {
+                  GestureArea {
                         anchors.fill: parent
-                        onClicked: {
-                              if (mouseX > parent.width * .8)
+                        anchors.bottomMargin: 60
+                        onTap: {
+                              if (gesture.position.x > parent.width * .8)
                                     scoreView.nextPage();
-                              else if (mouseX < parent.width * .2)
+                              else if (gesture.position.x < parent.width * .2)
                                     scoreView.prevPage();
                               else {
                                     if (screen.state == "ScoreView") {
@@ -188,8 +190,12 @@ Item {
                                           }
                                     }
                               }
-                        onPressAndHold: {
-                              scoreView.seek(mouseX, mouseY);
+                        onSwipe: {
+                              if (gesture.swipeAngle < .1) {
+                                    }
+                              }
+                        onTapAndHold: {
+                              scoreView.seek(gesture.position.x, gesture.position.y);
                               }
                         }
                   }
