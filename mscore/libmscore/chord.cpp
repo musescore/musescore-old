@@ -43,6 +43,7 @@
 #include "painter.h"
 #include "mscore.h"
 #include "accidental.h"
+#include "noteevent.h"
 
 //---------------------------------------------------------
 //   StemSlash
@@ -1711,17 +1712,18 @@ Element* Chord::drop(const DropData& data)
 //   renderArticulation
 //---------------------------------------------------------
 
-void Chord::renderArticulation(ArticulationType /*type*/)
+void Chord::renderArticulation(ArticulationType type)
       {
-      qDebug("TODO: renderArticulation\n");
-#if 0
+      qDebug("renderArticulation %d\n", type);
+
       int key  = staff()->key(segment()->tick()).accidentalType();
       QList<NoteEvent*> events;
       int pitch     = upNote()->ppitch();
       int pitchDown = diatonicUpDown(key, pitch, -1);
       int pitchUp   = diatonicUpDown(key, pitch, 1);
+
       switch (type) {
-            case MordentSym:
+            case Articulation_Mordent:
                   //
                   // create default playback for Mordent
                   //
@@ -1729,7 +1731,7 @@ void Chord::renderArticulation(ArticulationType /*type*/)
                   events.append(new NoteEvent(pitchUp - pitch, 125, 125));
                   events.append(new NoteEvent(0, 250, 750));
                   break;
-            case PrallSym:
+            case Articulation_Prall:
                   //
                   // create default playback events for PrallSym
                   //
@@ -1740,9 +1742,12 @@ void Chord::renderArticulation(ArticulationType /*type*/)
             default:
                   return;
             }
-      if (!events.isEmpty())
-            score()->undo()->push(new ChangeNoteEvents(this, events));
-#endif
+      if (!events.isEmpty()) {
+            foreach(Note* note, _notes)
+                  note->setPlayEvents(events);
+            foreach(NoteEvent* e, events)
+                  delete e;
+            }
       }
 
 //---------------------------------------------------------

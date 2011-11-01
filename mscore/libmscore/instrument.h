@@ -137,6 +137,7 @@ class Instrument {
       NamedEventList* midiAction(const QString& s, int channel) const;
       int channelIdx(const QString& s) const;
       void updateVelocity(int* velocity, int channel, const QString& name);
+      void updateGateTime(int* gateTime, int channel, const QString& name);
 
       int minPitchP() const;
       int maxPitchP() const;

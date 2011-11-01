@@ -21,7 +21,6 @@ class ChordRest;
 class Element;
 class Segment;
 class Note;
-struct ElementPattern;
 
 //---------------------------------------------------------
 //   ElementPattern

@@ -46,6 +46,7 @@ class InstrumentData : public QSharedData {
       NamedEventList* midiAction(const QString& s, int channel) const;
       int channelIdx(const QString& s) const;
       void updateVelocity(int* velocity, int channel, const QString& name);
+      void updateGateTime(int* gateTime, int channelIdx, const QString& name);
 
       bool operator==(const InstrumentData&) const;
 

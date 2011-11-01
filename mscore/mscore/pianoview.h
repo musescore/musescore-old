@@ -87,3 +87,4 @@ class PianoView : public QGraphicsView {
 
 
 #endif
+

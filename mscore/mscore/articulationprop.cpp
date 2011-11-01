@@ -41,11 +41,12 @@ ArticulationProperties::ArticulationProperties(Articulation* na, QWidget* parent
       setupUi(this);
       articulation = na;
 
-      ChordRest* cr          = articulation->chordRest();
+      ChordRest* cr = articulation->chordRest();
       if (cr) {
             Segment* segment       = cr->segment();
             Part* part             = articulation->staff()->part();
             Instrument* instrument = part->instr(segment->tick());
+
 //      const QList<NamedEventList>& midiActions() const;
 //      const QList<MidiArticulation>& articulation() const;
 //      const QList<Channel>& channel() const;
@@ -60,10 +61,10 @@ ArticulationProperties::ArticulationProperties(Articulation* na, QWidget* parent
                   midiActionList->addItem(el.name);
                   }
             }
+
 #if 0
       foreach(const NamedEventList& e, instrument->midiActions)
             midiActionList->addItem(e.name);
-
       articulationChange->setChecked(!articulation->articulationName().isEmpty());
       midiAction->setChecked(!articulation->midiActionName().isEmpty());
 

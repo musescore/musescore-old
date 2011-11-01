@@ -29,143 +29,143 @@
 ArticulationInfo Articulation::articulationList[ARTICULATIONS] = {
       { ufermataSym, dfermataSym,
             "fermata", QT_TRANSLATE_NOOP("articulation", "fermata"),
-            100, 100, 2.0, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            2.0, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
       { ushortfermataSym, dshortfermataSym,
             "shortfermata", QT_TRANSLATE_NOOP("articulation", "shortfermata"),
-            100, 100, 1.5, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            1.5, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
       { ulongfermataSym, dlongfermataSym,
             "longfermata", QT_TRANSLATE_NOOP("articulation", "longfermata"),
-            100, 100, 3.0, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            3.0, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
       { uverylongfermataSym, dverylongfermataSym,
             "verylongfermata", QT_TRANSLATE_NOOP("articulation", "verylongfermata"),
-            100, 100, 4.0, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            4.0, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
       { thumbSym, thumbSym,
             "thumb", QT_TRANSLATE_NOOP("articulation", "thumb"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
       { sforzatoaccentSym,   sforzatoaccentSym,
             "sforzato", QT_TRANSLATE_NOOP("articulation", "sforzato"),
-            120, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
       { esprSym, esprSym             ,
             "espressivo", QT_TRANSLATE_NOOP("articulation", "espressivo"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
       { staccatoSym, staccatoSym,
             "staccato", QT_TRANSLATE_NOOP("articulation", "staccato"),
-            100,  50, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF
             },
       { ustaccatissimoSym,   dstaccatissimoSym,
             "staccatissimo", QT_TRANSLATE_NOOP("articulation", "staccatissimo"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF
             },
       { tenutoSym, tenutoSym,
             "tenuto", QT_TRANSLATE_NOOP("articulation", "tenuto"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
       { dportatoSym, uportatoSym,
             "portato", QT_TRANSLATE_NOOP("articulation", "portato"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
       { umarcatoSym, dmarcatoSym,
             "marcato", QT_TRANSLATE_NOOP("articulation", "marcato"),
-            110, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
       { ouvertSym, ouvertSym,
             "ouvert", QT_TRANSLATE_NOOP("articulation", "ouvert"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
       { plusstopSym, plusstopSym,
             "plusstop", QT_TRANSLATE_NOOP("articulation", "plusstop"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
       { upbowSym, upbowSym,
             "upbow", QT_TRANSLATE_NOOP("articulation", "upbow"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
       { downbowSym, downbowSym,
             "downbow", QT_TRANSLATE_NOOP("articulation", "downbow"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
       { reverseturnSym, reverseturnSym,
             "reverseturn", QT_TRANSLATE_NOOP("articulation", "reverseturn"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
       { turnSym, turnSym,
             "turn", QT_TRANSLATE_NOOP("articulation", "turn"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
       { trillSym, trillSym,
             "trill", QT_TRANSLATE_NOOP("articulation", "trill"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
       { prallSym, prallSym,
             "prall", QT_TRANSLATE_NOOP("articulation", "prall"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
       { mordentSym, mordentSym,
             "mordent", QT_TRANSLATE_NOOP("articulation", "mordent"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
       { prallprallSym, prallprallSym,
             "prallprall", QT_TRANSLATE_NOOP("articulation", "prallprall"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
       { prallmordentSym, prallmordentSym,
             "prallmordent", QT_TRANSLATE_NOOP("articulation", "prallmordent"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
       { upprallSym, upprallSym,
             "upprall", QT_TRANSLATE_NOOP("articulation", "upprall"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
 	{ downprallSym, downprallSym,
             "downprall", QT_TRANSLATE_NOOP("articulation", "downprall"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
 	{ upmordentSym, upmordentSym,
             "upmordent", QT_TRANSLATE_NOOP("articulation", "upmordent"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
 	{ downmordentSym, downmordentSym,
             "downmordent", QT_TRANSLATE_NOOP("articulation", "downmordent"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
 	{ pralldownSym, pralldownSym,
             "pralldown", QT_TRANSLATE_NOOP("articulation", "pralldown"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
 	{ prallupSym, prallupSym,
             "prallup", QT_TRANSLATE_NOOP("articulation", "prallup"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
 	{ lineprallSym, lineprallSym,
             "lineprall", QT_TRANSLATE_NOOP("articulation", "lineprall"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
 	{ schleiferSym, schleiferSym,
             "schleifer", QT_TRANSLATE_NOOP("articulation", "schleifer"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
       { snappizzicatoSym, snappizzicatoSym,
             "snappizzicato", QT_TRANSLATE_NOOP("articulation", "snappizzicato"),
-            100, 100, 0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE
             },
       { letterTSym, letterTSym,
             "tapping", QT_TRANSLATE_NOOP("articulation", "tapping"),
-            100, 100, 0., ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_TABLATURE
             },
       { letterSSym, letterSSym,
             "slapping", QT_TRANSLATE_NOOP("articulation", "slapping"),
-            100, 100, 0., ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_TABLATURE
             },
       { letterPSym, letterPSym,
             "popping", QT_TRANSLATE_NOOP("articulation", "popping"),
-            100, 100, 0., ARTICULATION_SHOW_IN_TABLATURE
+            0., ARTICULATION_SHOW_IN_TABLATURE
             },
 	};
 
@@ -402,24 +402,6 @@ ArticulationType Articulation::articulationType() const
 QString Articulation::subtypeUserName() const
       {
       return articulationList[subtype()].description;
-      }
-
-//---------------------------------------------------------
-//   relGateTime
-//---------------------------------------------------------
-
-int Articulation::relGateTime() const
-      {
-      return articulationList[subtype()].relGateTime;
-      }
-
-//---------------------------------------------------------
-//   relVelocity
-//---------------------------------------------------------
-
-int Articulation::relVelocity() const
-      {
-      return articulationList[subtype()].relVelocity;
       }
 
 //---------------------------------------------------------

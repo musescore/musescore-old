@@ -329,6 +329,8 @@ void PianoView::setChord(Chord* c, Pos* l)
 
 void PianoView::setStaff(Staff* s, Pos* l)
       {
+printf("PianoView::setStaff\n");
+
       static const QColor lcColors[3] = { Qt::red, Qt::blue, Qt::blue };
 
       staff    = s;
@@ -348,20 +350,28 @@ void PianoView::setStaff(Staff* s, Pos* l)
             scene()->addItem(locatorLines[i]);
             }
 
-      int staffIdx = staff->idx();
+      int staffIdx   = staff->idx();
       int startTrack = staffIdx * VOICES;
       int endTrack   = startTrack + VOICES;
-      for (Segment* s = staff->score()->firstSegment(); s; s = s->next1()) {
+
+      for (Segment* s = staff->score()->firstSegment(SegChordRest); s; s = s->next1(SegChordRest)) {
             for (int track = startTrack; track < endTrack; ++track) {
                   Element* e = s->element(track);
                   if (e == 0 || e->type() != CHORD)
                         continue;
                   Chord* chord = static_cast<Chord*>(e);
+
                   foreach(Note* n, chord->notes()) {
                         if (n->tieBack())
                               continue;
-                        foreach(NoteEvent* e, n->playEvents())
-                              scene()->addItem(new PianoItem(n, e));
+                        if (n->playEvents().isEmpty()) {
+                              scene()->addItem(new PianoItem(n, 0));
+                              }
+                        else {
+                              foreach(NoteEvent* e, n->playEvents()) {
+                                    scene()->addItem(new PianoItem(n, e));
+                                    }
+                              }
                         }
                   }
             }

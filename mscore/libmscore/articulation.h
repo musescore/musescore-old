@@ -41,8 +41,6 @@ struct ArticulationInfo {
       SymId downSym;
       QString name;
       QString description;    // translated name
-      int relVelocity;        // add velocity to note/chord in percent
-      int relGateTime;        // add to gateTime in percent;
       qreal timeStretch;      // for fermata
       int flags;
       };
@@ -86,8 +84,6 @@ class Articulation : public Element {
 
       ArticulationType articulationType() const;
       QString subtypeUserName() const;
-      int relGateTime() const;
-      int relVelocity() const;
 
       virtual QPointF pagePos() const;      ///< position in page coordinates
       virtual QPointF canvasPos() const;
@@ -106,6 +102,8 @@ class Articulation : public Element {
 
       QString channelName() const           { return _channelName; }
       void setChannelName(const QString& s) { _channelName = s;    }
+
+      const ArticulationInfo* articulationInfo() const { return &articulationList[articulationType()]; }
 
       qreal timeStretch() const;
 

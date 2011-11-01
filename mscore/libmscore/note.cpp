@@ -1700,3 +1700,16 @@ void Note::setProperty(int propertyId, const QVariant& v)
             }
       }
 
+//---------------------------------------------------------
+//   setPlayEvents
+//---------------------------------------------------------
+
+void Note::setPlayEvents(const QList<NoteEvent*>& v)
+      {
+      foreach(NoteEvent* e, _playEvents)
+            delete e;
+      _playEvents.clear();
+      foreach(NoteEvent* e, v)
+            _playEvents.append(new NoteEvent(*e));
+      }
+

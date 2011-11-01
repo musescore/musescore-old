@@ -28,6 +28,7 @@ class Note;
 class Ruler;
 class Seq;
 
+#include "libmscore/mscoreview.h"
 #include "libmscore/pos.h"
 
 namespace Awl {
@@ -39,7 +40,7 @@ namespace Awl {
 //   PianorollEditor
 //---------------------------------------------------------
 
-class PianorollEditor : public QMainWindow {
+class PianorollEditor : public QMainWindow, public MuseScoreView {
       Q_OBJECT
 
       PianoView* gv;
@@ -69,9 +70,29 @@ class PianorollEditor : public QMainWindow {
 
    public:
       PianorollEditor(QWidget* parent = 0);
+      virtual ~PianorollEditor();
+
       void setStaff(Staff* staff);
       Score* score() const { return _score; }
       void heartBeat(Seq*);
+
+      virtual void dataChanged(const QRectF&);
+      virtual void updateAll();
+      virtual void moveCursor();
+      virtual void adjustCanvasPosition(const Element*, bool);
+      virtual void setScore(Score*);
+      virtual void removeScore();
+      virtual void changeEditElement(Element*);
+      virtual QCursor cursor() const;
+      virtual void setCursor(const QCursor&);
+      virtual int gripCount() const;
+      virtual const QRectF& getGrip(int) const;
+      virtual const QTransform& matrix() const;
+      virtual void setDropRectangle(const QRectF&);
+      virtual void cmdAddSlur(Note*, Note*);
+      virtual void startEdit();
+      virtual void startEdit(Element*, int);
+      virtual Element* elementNear(QPointF);
       };
 
 #endif
