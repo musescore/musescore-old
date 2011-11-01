@@ -4369,7 +4369,6 @@ void ScoreView::cmdAddSlur()
             is.slur = 0;
             return;
             }
-      _score->startCmd();
       QList<Note*> nl = _score->selection().noteList();
       Note* firstNote = 0;
       Note* lastNote  = 0;
@@ -4381,6 +4380,7 @@ void ScoreView::cmdAddSlur()
             }
       if (!firstNote)
             return;
+      _score->startCmd();
       if (firstNote == lastNote)
             lastNote = 0;
       cmdAddSlur(firstNote, lastNote);

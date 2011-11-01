@@ -1,4 +1,5 @@
 1.nov (ws)
+      - fix #13433: Typing "S", undo and "S" causes crash (patch from Gai-Luron)
       - playback fixes for staccato/tenuto
       - extend selection dialog: "same subtype"
       - fix #13413: navigator issues with single page (catch case were navigator view

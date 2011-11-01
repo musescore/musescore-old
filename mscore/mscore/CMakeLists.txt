@@ -203,7 +203,7 @@ if (MINGW)
    if(CMAKE_BUILD_TYPE MATCHES "Debug")
      set_target_properties( mscore
         PROPERTIES
-           COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS} -DQT_SVG_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_SCRIPT_LIB"
+           COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g ${QT_DEFINITIONS} -DQT_SVG_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_SCRIPT_LIB"
            LINK_FLAGS "${PROJECT_BINARY_DIR}/resfile.o -mwindows -mconsole -L ${CROSSQT}/lib"
         )
    else(CMAKE_BUILD_TYPE MATCHES "Debug")
