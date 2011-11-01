@@ -1,4 +1,6 @@
-1.nov (ws)
+1.nov (lv)
+      - continued implementation of #13451: MusicXML: optionally ignore layout information on import
+      (ws)
       - fix #13433: Typing "S", undo and "S" causes crash (patch from Gai-Luron)
       - playback fixes for staccato/tenuto
       - extend selection dialog: "same subtype"

@@ -237,11 +237,14 @@ static void moveTick(int& tick, int& maxtick, int& lastLen, int divisions, QDomE
  */
 
 MusicXml::MusicXml(QDomDocument* d)
+      :
+      lastVolta(0),
+      doc(d),
+      maxLyrics(0),
+      beamMode(BEAM_NO),
+      pageWidth(0),
+      pageHeight(0)
       {
-      doc = d;
-      maxLyrics = 0;
-      lastVolta = 0;
-      beamMode = BEAM_NO;
       }
 
 //---------------------------------------------------------
@@ -498,16 +501,19 @@ void MusicXml::doCredits()
       {
       // IMPORT_LAYOUT
       qDebug("MusicXml::doCredits()\n");
+      /*
       const PageFormat* pf = score->pageFormat();
       qDebug("page format w=%g h=%g spatium=%g DPMM=%g DPI=%g\n",
              pf->width(), pf->height(), score->spatium(), DPMM, DPI);
       // page width and height in tenths
       const double pw  = pf->width() * 10 * DPI / score->spatium();
       const double ph  = pf->height() * 10 * DPI / score->spatium();
-      const int pw1 = (int) (pw / 3);
-      const int pw2 = (int) (pw * 2 / 3);
-      const int ph2 = (int) (ph / 2);
-      qDebug("page format w=%g h=%g\n", pw, ph);
+      */
+      const int pw1 = pageWidth / 3;
+      const int pw2 = pageWidth * 2 / 3;
+      const int ph2 = pageHeight / 2;
+      // qDebug("page format w=%g h=%g\n", pw, ph);
+      qDebug("page format w=%d h=%d\n", pageWidth, pageHeight);
       qDebug("page format pw1=%d pw2=%d ph2=%d\n", pw1, pw2, ph2);
       // dump the credits
       /**/
@@ -829,9 +835,21 @@ void MusicXml::scorePartwise(QDomElement ee)
                                           domError(eee);
                                     }
                               double _spatium = DPMM * (millimeter * 10.0 / tenths);
-                              score->setSpatium(_spatium);
+                              if (preferences.musicxmlImportLayout)
+                                    score->setSpatium(_spatium);
                               }
                         else if (tag == "page-layout") {
+                              // set pageHeight and pageWidth for use by doCredits()
+                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                                    QString tag(eee.tagName());
+                                    QString val(eee.text());
+                                    int i = static_cast<int>(val.toDouble() + 0.5);
+                                    if (tag == "page-height")
+                                          pageHeight = i;
+                                    else if (tag == "page-width")
+                                          pageWidth = i;
+                                    }
+                              // remember ee for PageFormat::readMusicXML call
                               pageLayoutElement = ee;
                               }
                         else if (tag == "system-layout") {
@@ -841,8 +859,10 @@ void MusicXml::scorePartwise(QDomElement ee)
                                     if (tag == "system-margins")
                                           ;
                                     else if (tag == "system-distance") {
-                                          score->style()->set(ST_systemDistance, val);
-                                          qDebug("system distance %f\n", val.val());
+                                          if (preferences.musicxmlImportLayout) {
+                                                score->style()->set(ST_systemDistance, val);
+                                                qDebug("system distance %f", val.val());
+                                                }
                                           }
                                     else if (tag == "top-system-distance")
                                           ;
@@ -854,8 +874,10 @@ void MusicXml::scorePartwise(QDomElement ee)
                               for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
                                     QString tag(eee.tagName());
                                     Spatium val(eee.text().toDouble() / 10.0);
-                                    if (tag == "staff-distance")
-                                          score->style()->set(ST_staffDistance, val);
+                                    if (tag == "staff-distance") {
+                                          if (preferences.musicxmlImportLayout)
+                                                score->style()->set(ST_staffDistance, val);
+                                          }
                                     else
                                           domError(eee);
                                     }
@@ -870,9 +892,11 @@ void MusicXml::scorePartwise(QDomElement ee)
                               domError(ee);
                         }
 
-                  PageFormat pf;
-                  pf.readMusicXML(pageLayoutElement, millimeter / (tenths * INCH) );
-                  score->setPageFormat(pf);
+                  if (preferences.musicxmlImportLayout) {
+                        PageFormat pf;
+                        pf.readMusicXML(pageLayoutElement, millimeter / (tenths * INCH) );
+                        score->setPageFormat(pf);
+                        }
                   score->setDefaultsRead(true); // TODO only if actually succeeded ?
                   // IMPORT_LAYOUT END
                   }
@@ -1456,7 +1480,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                   if (pm == 0)
                         qDebug("ImportXml: warning: break on first measure\n");
                   else {
-                        if (preferences.musicxmlImportLayout
+                        if (preferences.musicxmlImportBreaks
                             && (newSystem == "yes" || newPage == "yes")) {
                               LayoutBreak* lb = new LayoutBreak(score);
                               lb->setTrack(staff * VOICES);
@@ -1858,10 +1882,12 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         // IMPORT_LAYOUT
                         dirType = ee.tagName();
-                        ry      = ee.attribute(QString("relative-y"), "0").toDouble() * -.1;
-                        rx      = ee.attribute(QString("relative-x"), "0").toDouble() * .1;
-                        yoffset = ee.attribute("default-y").toDouble(&hasYoffset) * -0.1;
-                        xoffset = ee.attribute("default-x", "0.0").toDouble() * 0.1;
+                        if (preferences.musicxmlImportLayout) {
+                              ry      = ee.attribute(QString("relative-y"), "0").toDouble() * -.1;
+                              rx      = ee.attribute(QString("relative-x"), "0").toDouble() * .1;
+                              yoffset = ee.attribute("default-y").toDouble(&hasYoffset) * -0.1;
+                              xoffset = ee.attribute("default-x", "0.0").toDouble() * 0.1;
+                              }
                         if (dirType == "words") {
                               txt        = ee.text();
                               lang       = ee.attribute(QString("xml:lang"), "it");
@@ -3011,10 +3037,12 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         else if (ee.tagName() == "dynamics") {
                               // IMPORT_LAYOUT
                               placement = ee.attribute("placement");
-                              ry        = ee.attribute(QString("relative-y"), "0").toDouble() * -.1;
-                              rx        = ee.attribute(QString("relative-x"), "0").toDouble() * .1;
-                              yoffset   = ee.attribute("default-y").toDouble(&hasYoffset) * -0.1;
-                              xoffset   = ee.attribute("default-x", "0.0").toDouble() * 0.1;
+                              if (preferences.musicxmlImportLayout) {
+                                    ry        = ee.attribute(QString("relative-y"), "0").toDouble() * -.1;
+                                    rx        = ee.attribute(QString("relative-x"), "0").toDouble() * .1;
+                                    yoffset   = ee.attribute("default-y").toDouble(&hasYoffset) * -0.1;
+                                    xoffset   = ee.attribute("default-x", "0.0").toDouble() * 0.1;
+                                    }
                               QDomElement eee = ee.firstChildElement();
                               if (!eee.isNull()) {
                                     if (eee.tagName() == "other-dynamics")

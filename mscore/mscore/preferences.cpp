@@ -212,6 +212,7 @@ void Preferences::init()
       instrumentList           = ":/data/instruments.xml";
 
       musicxmlImportLayout     = true;
+      musicxmlImportBreaks     = true;
 
       alternateNoteEntryMethod = false;
       proximity                = 6;
@@ -344,6 +345,7 @@ void Preferences::write()
       s.setValue("instrumentList", instrumentList);
 
       s.setValue("musicxmlImportLayout",  musicxmlImportLayout);
+      s.setValue("musicxmlImportBreaks",  musicxmlImportBreaks);
 
       s.setValue("alternateNoteEntry", alternateNoteEntryMethod);
       s.setValue("proximity",          proximity);
@@ -494,6 +496,7 @@ void Preferences::read()
       language                 = s.value("language", language).toString();
 
       musicxmlImportLayout     = s.value("musicxmlImportLayout", musicxmlImportLayout).toBool();
+      musicxmlImportBreaks     = s.value("musicxmlImportBreaks", musicxmlImportBreaks).toBool();
 
       MScore::replaceFractions = s.value("replaceFractions", MScore::replaceFractions).toBool();
       replaceCopyrightSymbol = s.value("replaceCopyrightSymbol", replaceCopyrightSymbol).toBool();
@@ -877,6 +880,7 @@ void PreferenceDialog::updateValues(Preferences* p)
       instrumentList->setText(p->instrumentList);
 
       importLayout->setChecked(p->musicxmlImportLayout);
+      importBreaks->setChecked(p->musicxmlImportBreaks);
 
       midiPorts->setValue(p->midiPorts);
       rememberLastMidiConnections->setChecked(p->rememberLastMidiConnections);
@@ -1409,6 +1413,7 @@ void PreferenceDialog::apply()
       preferences.instrumentList     = instrumentList->text();
 
       preferences.musicxmlImportLayout  = importLayout->isChecked();
+      preferences.musicxmlImportBreaks  = importBreaks->isChecked();
 
       preferences.midiPorts          = midiPorts->value();
       preferences.rememberLastMidiConnections = rememberLastMidiConnections->isChecked();
