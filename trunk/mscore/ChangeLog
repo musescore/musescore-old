@@ -1,3 +1,6 @@
+1.nov (ws)
+      - fix #13413: navigator issues with single page (catch case were navigator view
+        rectangle is bigger than navigator window)
 31.oct (lv)
       - partial implementation of #13451: MusicXML: optionally ignore layout information on import
        (ws)

@@ -252,10 +252,28 @@ void Navigator::mouseMoveEvent(QMouseEvent* ev)
       viewRect.translate(delta);
       startMove = ev->pos();
 
-      if (viewRect.x() <= 0 && viewRect.width() < width())
+/*      if (viewRect.x() <= 0 && viewRect.width() < width())
             viewRect.moveLeft(0);
       else if (viewRect.right() > width() && viewRect.width() < width())
             viewRect.moveRight(width());
+  */
+
+      if (viewRect.width() == width())
+            viewRect.moveLeft(0);
+      else if (viewRect.width() < width()) {
+            if (viewRect.x() < 0)
+                  viewRect.moveLeft(0);
+            else if (viewRect.right() > width())
+                  viewRect.moveRight(width());
+            }
+      else {
+            if (viewRect.right() < width())
+                  viewRect.moveRight(width());
+            else if (viewRect.left() > 0)
+                  viewRect.moveLeft(0);
+            }
+
+
       if (viewRect.height() == height())
             viewRect.moveTop(0);
       else if (viewRect.height() < height()) {
@@ -265,7 +283,7 @@ void Navigator::mouseMoveEvent(QMouseEvent* ev)
                   viewRect.moveBottom(height());
             }
       else {
-            if (viewRect.bottom() < (height()))
+            if (viewRect.bottom() < height())
                   viewRect.moveBottom(height());
             else if (viewRect.top() > 0)
                   viewRect.moveTop(0);
