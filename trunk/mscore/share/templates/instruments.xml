@@ -2602,8 +2602,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Snare
-        Drum</name>
+        <name>Snare Drum</name>
         <short-name>Sn. Dr.</short-name>
         <stafflines>1</stafflines>
         <clef>14</clef>
