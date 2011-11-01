@@ -113,6 +113,7 @@ struct Preferences {
       QString instrumentList; // file path of instrument templates
 
       bool musicxmlImportLayout;
+      bool musicxmlImportBreaks;
 
       bool alternateNoteEntryMethod;
       int proximity;          // proximity for selecting elements on canvas

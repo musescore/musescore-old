@@ -222,6 +222,9 @@ class MusicXml {
       Chord* tremStart;  ///< Starting chord for current tremolo
       BeamMode beamMode; ///< Current beam mode
 
+      int pageWidth;     ///< Page width read from defaults
+      int pageHeight;    ///< Page height read from defaults
+
       //-----------------------------
 
 //      void addWedge(int no, int startPos, qreal rx, qreal ry, bool above, bool hasYoffset, qreal yoffset, int subType);

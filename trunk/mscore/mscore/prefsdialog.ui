@@ -2434,11 +2434,18 @@
          <property name="flat">
           <bool>false</bool>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_10">
+         <layout class="QVBoxLayout" name="verticalLayout_13">
           <item>
            <widget class="QCheckBox" name="importLayout">
             <property name="text">
              <string>Import layout (in development, not functional yet)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="importBreaks">
+            <property name="text">
+             <string>Import system and page breaks (in development, not functional yet)</string>
             </property>
            </widget>
           </item>
