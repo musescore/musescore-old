@@ -608,16 +608,27 @@ void MidiArticulation::read(QDomElement e)
 void InstrumentData::updateVelocity(int* velocity, int channelIdx, const QString& name)
       {
       const Channel& c = _channel[channelIdx];
-      foreach(const MidiArticulation& a, c.articulation) {
-            if (a.name == name) {
-                  *velocity = *velocity * a.velocity / 100;
-                  return;
-                  }
-            }
+//      foreach(const MidiArticulation& a, c.articulation) {
       foreach(const MidiArticulation& a, _articulation) {
             if (a.name == name) {
                   *velocity = *velocity * a.velocity / 100;
-                  return;
+                  break;
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   updateGateTime
+//---------------------------------------------------------
+
+void InstrumentData::updateGateTime(int* gateTime, int channelIdx, const QString& name)
+      {
+      const Channel& c = _channel[channelIdx];
+//      foreach(const MidiArticulation& a, c.articulation) {
+      foreach(const MidiArticulation& a, _articulation) {
+            if (a.name == name) {
+                  *gateTime = *gateTime * a.gateTime / 100;
+                  break;
                   }
             }
       }
@@ -822,6 +833,15 @@ int Instrument::channelIdx(const QString& s) const
 void Instrument::updateVelocity(int* velocity, int channel, const QString& name)
       {
       d->updateVelocity(velocity, channel, name);
+      }
+
+//---------------------------------------------------------
+//   updateGateTime
+//---------------------------------------------------------
+
+void Instrument::updateGateTime(int* gateTime, int channel, const QString& name)
+      {
+      d->updateGateTime(gateTime, channel, name);
       }
 
 //---------------------------------------------------------

@@ -122,15 +122,16 @@ static void playNote(EventMap* events, const Note* note, int channel, int pitch,
 //   collectNote
 //---------------------------------------------------------
 
-static void collectNote(EventMap* events, int channel, const Note* note, int velo, int tickOffset)
+static void collectNote(EventMap* events, int channel, const Note* note, int velo, int tickOffset, int gateTime)
       {
       if (note->hidden() || note->tieBack())       // do not play overlapping notes
             return;
 
       int pitch   = note->ppitch();
-      int tick    = note->chord()->tick() + tickOffset;
-      int onTime  = tick + note->onTimeOffset() + note->onTimeUserOffset();
-      int offTime = tick + note->playTicks() + note->offTimeOffset() + note->offTimeUserOffset() - 1;
+      int tick1   = note->chord()->tick() + tickOffset;
+      int tick2   = tick1 + note->playTicks();
+      int onTime  = tick1 + note->onTimeOffset() + note->onTimeUserOffset();
+      int offTime = tick2 + note->offTimeOffset() + note->offTimeUserOffset() - 1;
 
       if (!note->playEvents().isEmpty()) {
             int ticks = note->playTicks();
@@ -140,13 +141,17 @@ static void collectNote(EventMap* events, int channel, const Note* note, int vel
                         p = 0;
                   else if (p > 127)
                         p = 127;
-                  int on  = tick + (ticks * e->ontime())/1000;
+                  int on  = tick1 + (ticks * e->ontime())/1000;
                   int off = on + (ticks * e->len())/1000;
                   playNote(events, note, channel, p, velo, on, off);
                   }
             }
-      else
+      else {
+            offTime = tick1 + note->playTicks() * gateTime / 100 + note->offTimeOffset() + note->offTimeUserOffset() - 1;
+            if (offTime - onTime <= 0)
+                  offTime = onTime + 1;
             playNote(events, note, channel, pitch, velo, onTime, offTime);
+            }
 #if 0
       if (note->bend()) {
             Bend* bend = note->bend();
@@ -213,6 +218,18 @@ struct OttavaShiftSegment {
       };
 
 //---------------------------------------------------------
+//   playChord
+//---------------------------------------------------------
+
+static void playChord(EventMap* events, Chord* chord, Instrument* instr, int velocity, int tick, int ticks)
+      {
+      foreach (const Note* note, chord->notes()) {
+            int channel = instr->channel(note->subchannel()).channel;
+            playNote(events, note, channel, note->ppitch(), velocity, tick, tick + ticks);
+            }
+      }
+
+//---------------------------------------------------------
 //   collectMeasureEvents
 //---------------------------------------------------------
 
@@ -238,6 +255,7 @@ static void collectMeasureEvents(EventMap* events, Measure* m, Part* part, int t
                         Chord* chord = static_cast<Chord*>(cr);
                         Staff* staff = chord->staff();
                         int velocity = staff->velocities().velo(seg->tick());
+// printf("velo %d(%d) %d\n", tick/480, tick/480/4, velocity);
                         Instrument* instr = chord->staff()->part()->instr(tick);
                         //
                         // adjust velocity for instrument, channel and
@@ -245,8 +263,11 @@ static void collectMeasureEvents(EventMap* events, Measure* m, Part* part, int t
                         //
                         int channel = 0;  // note->subchannel();
                         instr->updateVelocity(&velocity, channel, "");
-                        foreach (Articulation* a, *chord->getArticulations())
+                        int gateTime = 100;
+                        foreach (Articulation* a, *chord->getArticulations()) {
                               instr->updateVelocity(&velocity, channel, a->subtypeName());
+                              instr->updateGateTime(&gateTime, channel, a->subtypeName());
+                              }
 
                         Tremolo* tremolo = chord->tremolo();
                         if (tremolo) {
@@ -265,15 +286,9 @@ static void collectMeasureEvents(EventMap* events, Measure* m, Part* part, int t
                                           Chord* c2 = static_cast<Chord*>(cr);
                                           int tick = chord->tick() + tickOffset;
                                           for (int i = 0; i < repeats; ++i) {
-                                                foreach (const Note* note, chord->notes()) {
-                                                      int channel = instr->channel(note->subchannel()).channel;
-                                                      playNote(events, note, channel, note->ppitch(), velocity, tick, tick + tl.ticks() - 1);
-                                                      }
+                                                playChord(events, chord, instr, velocity, tick, tl.ticks());
                                                 tick += tl.ticks();
-                                                foreach (const Note* note, c2->notes()) {
-                                                      int channel = instr->channel(note->subchannel()).channel;
-                                                      playNote(events, note, channel, note->ppitch(), velocity, tick, tick + tl.ticks() - 1);
-                                                      }
+                                                playChord(events, c2, instr, velocity, tick, tl.ticks());
                                                 tick += tl.ticks();
                                                 }
                                           }
@@ -283,19 +298,19 @@ static void collectMeasureEvents(EventMap* events, Measure* m, Part* part, int t
                               else if (chord->tremoloChordType() == TremoloSingle) {
                                     for (int i = 0; i < repeats; ++i) {
                                           int tick = chord->tick() + tickOffset + i * tl.ticks();
-                                          foreach (const Note* note, chord->notes()) {
-                                                int channel = instr->channel(note->subchannel()).channel;
-                                                playNote(events, note, channel, note->ppitch(), velocity, tick, tick + tl.ticks() - 1);
-                                                }
+                                          playChord(events, chord, instr, velocity, tick, tl.ticks());
                                           }
                                     }
                               // else if (chord->tremoloChordType() == TremoloSecondNote)
                               //    ignore second note of two note tremolo
                               }
                         else {
+                              //
+                              // TODO: channel should be moved to chord instead of note
+                              //
+                              int channel = instr->channel(chord->upNote()->subchannel()).channel;
                               foreach(const Note* note, chord->notes()) {
-                                    int channel = instr->channel(note->subchannel()).channel;
-                                    collectNote(events, channel, note, velocity, tickOffset);
+                                    collectNote(events, channel, note, velocity, tickOffset, gateTime);
                                     }
                               }
                         }
@@ -448,6 +463,7 @@ void Score::toEList(EventMap* events)
       updateRepeatList(_playRepeats);
       _foundPlayPosAfterRepeats = false;
       updateChannel();
+      updateVelo();
       foreach (Part* part, _parts)
             renderPart(events, part);
 
@@ -609,10 +625,12 @@ void Score::updateVelo()
                                           velo.setVelo(tick, v);
                                     break;
                               case DYNAMIC_PART:
-                                    if (dStaffIdx >= partStaff && dStaffIdx < partStaff+partStaves){
-                                        for (int i = partStaff; i < partStaff+partStaves; ++i)
-                                              staff(i)->velocities().setVelo(tick, v);
-                                    }
+                                    if (dStaffIdx >= partStaff && dStaffIdx < partStaff+partStaves) {
+                                          for (int i = partStaff; i < partStaff+partStaves; ++i) {
+                                                staff(i)->velocities().setVelo(tick, v);
+//                                                printf("   setVelo %d %d\n", tick, v);
+                                                }
+                                          }
                                     break;
                               case DYNAMIC_SYSTEM:
                                     for (int i = 0; i < nstaves(); ++i)

@@ -23,7 +23,7 @@
 #include "mscore.h"
 
 QList<InstrumentGroup*> instrumentGroups;
-QList<MidiArticulation*> articulation;                // global articulations
+QList<MidiArticulation> articulation;                // global articulations
 
 //---------------------------------------------------------
 //   InstrumentTemplate
@@ -89,7 +89,7 @@ void InstrumentTemplate::init(const InstrumentTemplate& t)
       else
             tablature = 0;
       midiActions = t.midiActions;
-      channel = t.channel;
+      channel     = t.channel;
       }
 
 InstrumentTemplate::~InstrumentTemplate()
@@ -190,7 +190,7 @@ static QString parseInstrName(const QString& name)
       for (QDomNode e = dom.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             for (QDomNode ee = e.firstChild(); !ee.isNull(); ee = ee.nextSibling()) {
                   QDomElement el = ee.toElement();
-                  QString tag(el.tagName());
+                  const QString& tag(el.tagName());
                   if (tag == "symbol") {
                         QString name = el.attribute(QString("name"));
                         if (name == "flat")
@@ -339,7 +339,16 @@ void InstrumentTemplate::read(QDomElement e)
             else if (tag == "Articulation") {
                   MidiArticulation a;
                   a.read(e);
-                  articulation.append(a);
+                  int n = articulation.size();
+                  int i;
+                  for(i = 0; i < n; ++i) {
+                        if (articulation[i].name == a.name) {
+                              articulation[i] = a;
+                              break;
+                              }
+                        }
+                  if (i == n)
+                        articulation.append(a);
                   }
             else if (tag == "stafftype") {
                   if (val == "tablature")
@@ -416,6 +425,7 @@ static void readInstrumentGroup(InstrumentGroup* group, QDomElement e)
             const QString& tag(e.tagName());
             if (tag == "instrument") {
                   InstrumentTemplate* t = new InstrumentTemplate;
+                  t->articulation.append(articulation);     // init with global articulation
                   group->instrumentTemplates.append(t);
                   t->read(e);
                   }
@@ -471,8 +481,7 @@ bool loadInstrumentTemplates(const QString& instrTemplates)
       for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "museScore") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        QString tag(ee.tagName());
-                        QString val(ee.text());
+                        const QString& tag(ee.tagName());
                         if (tag == "instrument-group" || tag == "InstrumentGroup") {
                               InstrumentGroup* group = new InstrumentGroup;
                               instrumentGroups.append(group);
@@ -481,8 +490,9 @@ bool loadInstrumentTemplates(const QString& instrTemplates)
                               readInstrumentGroup(group, ee);
                               }
                         else if (tag == "Articulation") {
-                              MidiArticulation* a = new MidiArticulation;
-                              a->read(ee);
+                              // read global articulation
+                              MidiArticulation a;
+                              a.read(ee);
                               articulation.append(a);
                               }
                         else

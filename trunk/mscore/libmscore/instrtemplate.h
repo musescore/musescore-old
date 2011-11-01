@@ -122,7 +122,6 @@ class StaffListItem : public QTreeWidgetItem {
       };
 
 extern QList<InstrumentGroup*> instrumentGroups;
-extern QList<MidiArticulation*> articulation;
 extern bool loadInstrumentTemplates(const QString& instrTemplates);
 extern InstrumentTemplate* searchTemplate(const QString& name);
 #endif

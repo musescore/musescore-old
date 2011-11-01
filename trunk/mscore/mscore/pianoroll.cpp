@@ -49,6 +49,9 @@ PianorollEditor::PianorollEditor(QWidget* parent)
       setWindowTitle(QString("MuseScore"));
 //      setIconSize(QSize(preferences.iconWidth, preferences.iconHeight));
 
+      _score = 0;
+      staff  = 0;
+
       QWidget* mainWidget = new QWidget;
       QGridLayout* layout = new QGridLayout;
       mainWidget->setLayout(layout);
@@ -150,6 +153,16 @@ PianorollEditor::PianorollEditor(QWidget* parent)
       ag->addAction(a);
       addActions(ag->actions());
       connect(ag, SIGNAL(triggered(QAction*)), SLOT(cmd(QAction*)));
+      }
+
+//---------------------------------------------------------
+//   ~PianorollEditor
+//---------------------------------------------------------
+
+PianorollEditor::~PianorollEditor()
+      {
+      if (_score)
+            _score->removeViewer(this);
       }
 
 //---------------------------------------------------------
@@ -407,4 +420,154 @@ void PianorollEditor::cmd(QAction* a)
       gv->setStaff(staff, locator);
       score()->endCmd();
       }
+
+//---------------------------------------------------------
+//   dataChanged
+//---------------------------------------------------------
+
+void PianorollEditor::dataChanged(const QRectF&)
+      {
+      }
+
+//---------------------------------------------------------
+//   moveCursor
+//---------------------------------------------------------
+
+void PianorollEditor::moveCursor()
+      {
+      }
+
+//---------------------------------------------------------
+//   adjustCanvasPosition
+//---------------------------------------------------------
+
+void PianorollEditor::adjustCanvasPosition(const Element*, bool)
+      {
+      }
+
+//---------------------------------------------------------
+//   setScore
+//---------------------------------------------------------
+
+void PianorollEditor::setScore(Score* s)
+      {
+      if (_score)
+            _score->removeViewer(this);
+      _score = s;
+      _score->addViewer(this);
+      }
+
+//---------------------------------------------------------
+//   removeScore
+//---------------------------------------------------------
+
+void PianorollEditor::removeScore()
+      {
+      _score = 0;
+      }
+
+//---------------------------------------------------------
+//   changeEditElement
+//---------------------------------------------------------
+
+void PianorollEditor::changeEditElement(Element*)
+      {
+      }
+
+//---------------------------------------------------------
+//   cursor
+//---------------------------------------------------------
+
+QCursor PianorollEditor::cursor() const
+      {
+      return QCursor();
+      }
+
+//---------------------------------------------------------
+//   setCursor
+//---------------------------------------------------------
+
+void PianorollEditor::setCursor(const QCursor&)
+      {
+      }
+
+//---------------------------------------------------------
+//   gripCount
+//---------------------------------------------------------
+
+int PianorollEditor::gripCount() const
+      {
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   getGrip
+//---------------------------------------------------------
+
+const QRectF& PianorollEditor::getGrip(int) const
+      {
+      static QRectF r;
+      return r;
+      }
+
+//---------------------------------------------------------
+//   matrix
+//---------------------------------------------------------
+
+const QTransform& PianorollEditor::matrix() const
+      {
+      static QTransform t;
+      return t;
+      }
+
+//---------------------------------------------------------
+//   setDropRectangle
+//---------------------------------------------------------
+
+void PianorollEditor::setDropRectangle(const QRectF&)
+      {
+      }
+
+//---------------------------------------------------------
+//   cmdAddSlur
+//---------------------------------------------------------
+
+void PianorollEditor::cmdAddSlur(Note*, Note*)
+      {
+      }
+
+//---------------------------------------------------------
+//   startEdit
+//---------------------------------------------------------
+
+void PianorollEditor::startEdit()
+      {
+      }
+
+//---------------------------------------------------------
+//   startEdit
+//---------------------------------------------------------
+
+void PianorollEditor::startEdit(Element*, int)
+      {
+      }
+
+//---------------------------------------------------------
+//   elementNear
+//---------------------------------------------------------
+
+Element* PianorollEditor::elementNear(QPointF)
+      {
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   updateAll
+//---------------------------------------------------------
+
+void PianorollEditor::updateAll()
+      {
+      // printf("PianorollEditor::updateAll()\n");
+      }
+
 

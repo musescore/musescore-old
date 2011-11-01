@@ -193,12 +193,14 @@ static void applyDrop(Score* score, ScoreView* viewer, Element* target, Element*
       if (target->acceptDrop(viewer, pt, e->type(), e->subtype())) {
             Element* ne = e->clone();
             ne->setScore(score);
+
             DropData dropData;
-            dropData.view = viewer;
-            dropData.pos  = pt;
+            dropData.view       = viewer;
+            dropData.pos        = pt;
             dropData.dragOffset = pt;
-            dropData.modifiers = 0;
-            dropData.element = e->clone();
+            dropData.modifiers  = 0;
+            dropData.element    = ne;
+
             ne = target->drop(dropData);
             if (ne)
                   score->select(ne, SELECT_SINGLE, 0);

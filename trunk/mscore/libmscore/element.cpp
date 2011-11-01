@@ -430,13 +430,7 @@ Staff* Element::staff() const
       {
       if (_track == -1)
             return 0;
-      Staff* st = score()->staff(staffIdx());
-/*      if (debugMode && st == 0) {
-            qDebug("no staff: <%s> track %d staffIdx %d, staves %d\n",
-               name(), track(), track()/VOICES, score()->staves().size());
-            }
-      */
-      return st;
+      return score()->staff(staffIdx());
       }
 
 //---------------------------------------------------------

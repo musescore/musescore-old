@@ -2927,6 +2927,7 @@ void MuseScore::editInPianoroll(Staff* staff)
       {
       if (pianorollEditor == 0)
             pianorollEditor = new PianorollEditor;
+      pianorollEditor->setScore(staff->score());
       pianorollEditor->setStaff(staff);
       pianorollEditor->show();
       }

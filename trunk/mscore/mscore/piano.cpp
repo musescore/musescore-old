@@ -263,6 +263,7 @@ Piano::Piano(QWidget* parent)
       curPitch = -1;
       _ypos    = 0;
       curKeyPressed = -1;
+      _orientation = PIANO_VERTICAL;
       }
 
 //---------------------------------------------------------

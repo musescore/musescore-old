@@ -1,4 +1,6 @@
 1.nov (ws)
+      - playback fixes for staccato/tenuto
+      - extend selection dialog: "same subtype"
       - fix #13413: navigator issues with single page (catch case were navigator view
         rectangle is bigger than navigator window)
 31.oct (lv)

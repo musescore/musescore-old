@@ -411,8 +411,12 @@ void Text::draw(Painter* painter) const
 
 #if 1
       // make it thread save
+      {
+      QReadWriteLock lock;
+      QWriteLocker locker(&lock);
       QScopedPointer<QTextDocument> __doc(_doc->clone());
       painter->drawText(__doc.data(), c);
+      }
 #else
       painter->drawText(_doc, c);
 #endif
