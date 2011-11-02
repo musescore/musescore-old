@@ -1,3 +1,5 @@
+2.nov (lv)
+      - partial implementation of #13452: MusicXML: optionally ignore layout information on export
 1.nov (lv)
       - continued implementation of #13451: MusicXML: optionally ignore layout information on import
       (ws)

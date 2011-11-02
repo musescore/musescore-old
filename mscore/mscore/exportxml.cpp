@@ -1732,7 +1732,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
             attr.doAttr(xml, false);
             QString noteTag = QString("note");
 
-            if (pf && (!converterMode || score->defaultsRead()) ) {
+            if (preferences.musicxmlExportLayout && pf) {
                   double measureX = getTenthsFromDots(chord->measure()->pagePos().x());
                   double measureY = pageHeight - getTenthsFromDots(chord->measure()->pagePos().y());
                   double noteX = getTenthsFromDots(note->pagePos().x());
@@ -3294,12 +3294,10 @@ void ExportMusicXml::write(QIODevice* dev)
             xml.tag("source", score->metaTag("source"));
       xml.etag();
 
-      // to keep most regression testfiles simple, write defaults and credits
-      // in convertermode only when already present in the input file
-      if (!converterMode || score->defaultsRead())
+      if (preferences.musicxmlExportLayout) {
             defaults(xml, score, millimeters, tenths);
-      if (!converterMode || score->creditsRead())
             credits(xml);
+            }
 
       xml.stag("part-list");
       const QList<Part*>* il = score->parts();
@@ -3426,7 +3424,7 @@ void ExportMusicXml::write(QIODevice* dev)
                         measureTag += QString("\"X%1\" implicit=\"yes\"").arg(irregularMeasureNo++);
                   else
                         measureTag += QString("\"%1\"").arg(measureNo++);
-                  if (!converterMode || score->defaultsRead())
+                  if (preferences.musicxmlExportLayout)
                         measureTag += QString(" width=\"%1\"").arg(QString::number(m->bbox().width() / DPMM / millimeters * tenths,'f',2));
                   xml.stag(measureTag);
 
@@ -3449,18 +3447,27 @@ void ExportMusicXml::write(QIODevice* dev)
                         currentSystem = NewSystem;
 
                   if (currentSystem != NoSystem) {
-                        if (!converterMode || score->defaultsRead()) {
+
+                        QString nw;
+                        if (preferences.musicxmlExportBreaks) {
+                              if (currentSystem == NewSystem)
+                                    nw = " new-system=\"yes\"";
+                              else if (currentSystem == NewPage)
+                                    nw = " new-page=\"yes\"";
+                              }
+
+                        if (preferences.musicxmlExportLayout)
+                              xml.stag(QString("print%1").arg(nw));
+                        else {
+                              if (nw != "")
+                                    xml.tagE(QString("print%1").arg(nw));
+                              }
+
+                        if (preferences.musicxmlExportLayout) {
                               const double pageWidth  = getTenthsFromInches(pf->width());
                               const double lm = getTenthsFromInches(pf->oddLeftMargin());
                               const double rm = getTenthsFromInches(pf->oddRightMargin());
                               const double tm = getTenthsFromInches(pf->oddTopMargin());
-
-                              if (currentSystem == TopSystem)
-                                    xml.stag("print");
-                              else if (currentSystem == NewSystem)
-                                    xml.stag("print new-system=\"yes\"");
-                              else if (currentSystem == NewPage)
-                                    xml.stag("print new-page=\"yes\"");
 
                               // System Layout
                               // Put the system print suggestions only for the first part in a score...
@@ -3491,7 +3498,7 @@ void ExportMusicXml::write(QIODevice* dev)
                                     }
 
                               xml.etag();
-                              } // if (!converterMode ...
+                              } // if (preferences.musicxmlExportLayout ...
                         } // if (currentSystem ...
 
                   attr.start();
