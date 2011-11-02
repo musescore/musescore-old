@@ -440,7 +440,8 @@ void Articulation::toDefault()
       if (_anchor != a)
             score()->undo()->push(new ChangeProperty(this, P_ARTICULATION_ANCHOR, int(a)));
       Element::toDefault();
-      chordRest()->layoutArticulations();
+      if (chordRest())
+            chordRest()->layoutArticulations();
       score()->addRefresh(canvasBoundingRect());
       }
 
@@ -480,7 +481,8 @@ void Articulation::setProperty(int propertyId, const QVariant& v)
             default:
                   Element::setProperty(propertyId, v);
             }
-      chordRest()->layoutArticulations();
+      if (chordRest())
+            chordRest()->layoutArticulations();
       score()->addRefresh(canvasBoundingRect());
       score()->setLayoutAll(false);       //DEBUG
       }
