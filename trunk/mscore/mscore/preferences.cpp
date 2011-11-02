@@ -213,6 +213,8 @@ void Preferences::init()
 
       musicxmlImportLayout     = true;
       musicxmlImportBreaks     = true;
+      musicxmlExportLayout     = true;
+      musicxmlExportBreaks     = true;
 
       alternateNoteEntryMethod = false;
       proximity                = 6;
@@ -346,6 +348,8 @@ void Preferences::write()
 
       s.setValue("musicxmlImportLayout",  musicxmlImportLayout);
       s.setValue("musicxmlImportBreaks",  musicxmlImportBreaks);
+      s.setValue("musicxmlExportLayout",  musicxmlExportLayout);
+      s.setValue("musicxmlExportBreaks",  musicxmlExportBreaks);
 
       s.setValue("alternateNoteEntry", alternateNoteEntryMethod);
       s.setValue("proximity",          proximity);
@@ -497,6 +501,8 @@ void Preferences::read()
 
       musicxmlImportLayout     = s.value("musicxmlImportLayout", musicxmlImportLayout).toBool();
       musicxmlImportBreaks     = s.value("musicxmlImportBreaks", musicxmlImportBreaks).toBool();
+      musicxmlExportLayout     = s.value("musicxmlExportLayout", musicxmlExportLayout).toBool();
+      musicxmlExportBreaks     = s.value("musicxmlExportBreaks", musicxmlExportBreaks).toBool();
 
       MScore::replaceFractions = s.value("replaceFractions", MScore::replaceFractions).toBool();
       replaceCopyrightSymbol = s.value("replaceCopyrightSymbol", replaceCopyrightSymbol).toBool();
@@ -881,6 +887,8 @@ void PreferenceDialog::updateValues(Preferences* p)
 
       importLayout->setChecked(p->musicxmlImportLayout);
       importBreaks->setChecked(p->musicxmlImportBreaks);
+      exportLayout->setChecked(p->musicxmlExportLayout);
+      exportBreaks->setChecked(p->musicxmlExportBreaks);
 
       midiPorts->setValue(p->midiPorts);
       rememberLastMidiConnections->setChecked(p->rememberLastMidiConnections);
@@ -1414,6 +1422,8 @@ void PreferenceDialog::apply()
 
       preferences.musicxmlImportLayout  = importLayout->isChecked();
       preferences.musicxmlImportBreaks  = importBreaks->isChecked();
+      preferences.musicxmlExportLayout  = exportLayout->isChecked();
+      preferences.musicxmlExportBreaks  = exportBreaks->isChecked();
 
       preferences.midiPorts          = midiPorts->value();
       preferences.rememberLastMidiConnections = rememberLastMidiConnections->isChecked();

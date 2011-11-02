@@ -114,6 +114,8 @@ struct Preferences {
 
       bool musicxmlImportLayout;
       bool musicxmlImportBreaks;
+      bool musicxmlExportLayout;
+      bool musicxmlExportBreaks;
 
       bool alternateNoteEntryMethod;
       int proximity;          // proximity for selecting elements on canvas
