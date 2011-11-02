@@ -1502,10 +1502,13 @@ qDebug("drop staffList");
                         delete lb;
                         break;
                         }
+                  // make sure there is only LAYOUT_BREAK_LINE or LAYOUT_BREAK_PAGE
                   if ((lb->subtype() != LAYOUT_BREAK_SECTION) && (_pageBreak || _lineBreak)) {
-                        foreach(Element* elem, _el) {
-                              if (elem->type() == LAYOUT_BREAK) {
-                                    score()->undoChangeElement(elem, e);
+                        foreach(Element* le, _el) {
+                              if (le->type() == LAYOUT_BREAK
+                                 && (le->subtype() == LAYOUT_BREAK_LINE
+                                  || le->subtype() == LAYOUT_BREAK_PAGE)) {
+                                    score()->undoChangeElement(le, e);
                                     break;
                                     }
                               }
