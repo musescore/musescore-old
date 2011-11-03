@@ -1,4 +1,5 @@
 3.nov (ws)
+      - fix #11197: Capella import crashes
       - fix #12476: Tie created under note if clicked in note entry
       - fix #10471: Piano keyboard note entry
 2.nov (lv)

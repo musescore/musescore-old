@@ -2034,7 +2034,7 @@ qDebug("==================convert-capella\n");
                         s->setText(ss);
                         MeasureBase* measure = new VBox(score);
                         measure->setTick(0);
-                        score->addMeasure(score->measures()->first(), measure);
+                        score->addMeasure(measure, score->measures()->first());
                         measure->add(s);
                         }
                         break;

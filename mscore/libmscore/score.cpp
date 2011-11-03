@@ -433,7 +433,6 @@ Part* Score::part(int n)
 
 void Score::addMeasure(MeasureBase* m, MeasureBase* pos)
       {
-      // if (!m->next())
       m->setNext(pos);
       _measures.add(m);
       addLayoutFlags(LAYOUT_FIX_TICKS);
