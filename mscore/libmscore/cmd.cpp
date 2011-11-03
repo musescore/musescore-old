@@ -354,15 +354,14 @@ Note* Score::addPitch(int pitch, bool addFlag)
 qDebug("add pitch %d %d", pitch, addFlag);
 
       if (addFlag) {
-            // add note to selected chord
-            Note* note = static_cast<Note*>(selection().element());
-            if (note->type() == NOTE) {
-                  Note* n = addNote(note->chord(), pitch);
-                  setLayoutAll(false);
-                  setLayout(note->chord()->measure());
-                  moveToNextInputPos();
-                  return n;
-                  }
+            if (_is.cr() == 0 || _is.cr()->type() != CHORD)
+                  return 0;
+            Chord* chord = static_cast<Chord*>(_is.cr());
+            Note* n = addNote(chord, pitch);
+            setLayoutAll(false);
+            setLayout(chord->measure());
+            moveToNextInputPos();
+            return n;
             }
       expandVoice();
 

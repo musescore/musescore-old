@@ -975,7 +975,11 @@ void Score::cmdAddTie()
                               qDebug("cmdAddTie: no pos");
                         expandVoice();
                         }
-                  Note* n = addPitch(note->pitch(), true);
+                  if (_is.cr() == 0)
+                        break;
+                  bool addFlag = _is.cr()->type() == CHORD;
+printf("====add %d\n", addFlag);
+                  Note* n = addPitch(note->pitch(), addFlag);
                   if (n) {
                         n->setLine(note->line());
                         n->setTpc(note->tpc());
@@ -1018,7 +1022,7 @@ void Score::cmdAddTie()
                   }
             if (note2 == 0) {
                   if (debugMode)
-                        qDebug("addTie: next note for tie not found");
+                        qDebug("cmdAddTie: next note for tie not found");
                   continue;
                   }
             Tie* tie = new Tie(this);

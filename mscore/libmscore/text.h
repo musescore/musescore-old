@@ -65,6 +65,7 @@ class Text : public Element {
       QTextDocument* _doc;
       QRectF frame;           // set by layout()
       bool _styled;
+      QString s;
 
       Q_DECLARE_TR_FUNCTIONS(Text)
 

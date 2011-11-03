@@ -315,7 +315,7 @@ void setDefaultStyle(Style* s)
       AS(TextStyle(TR("Lyrics Verse"), ff, 11, false, false, false,
          ALIGN_RIGHT | ALIGN_TOP, 0, 0, OS, 0.0, 0.0, true));
 
-      AS(TextStyle(TR("Figured Bass"), ff, 11, false, false, false,
+      AS(TextStyle(TR("Figured Bass"), "FiguredBassMH GPL", 11, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, 0, 7, OS, 0.0, 0.0, true));
 
 #undef MM
