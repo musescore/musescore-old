@@ -749,7 +749,7 @@ class Score {
       void splitStaff(int staffIdx, int splitPoint);
       QString tmpName() const           { return _tmpName;      }
       void setTmpName(const QString& s) { _tmpName = s;         }
-      void processMidiInput();
+      bool processMidiInput();
       Lyrics* addLyrics();
       FiguredBass* addFiguredBass();
       void expandVoice(Segment* s, int track);

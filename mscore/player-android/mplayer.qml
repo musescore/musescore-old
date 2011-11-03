@@ -171,13 +171,13 @@ Item {
                   parentWidth: screen.width
                   parentHeight: screen.height
                   x: -width;
-                  GestureArea {
+                  MouseArea {
                         anchors.fill: parent
                         anchors.bottomMargin: 60
-                        onTap: {
-                              if (gesture.position.x > parent.width * .8)
+                        onClicked: {
+                              if (mouseX > parent.width * .8)
                                     scoreView.nextPage();
-                              else if (gesture.position.x < parent.width * .2)
+                              else if (mouseX < parent.width * .2)
                                     scoreView.prevPage();
                               else {
                                     if (screen.state == "ScoreView") {
@@ -185,17 +185,13 @@ Item {
                                           plainTimer.stop()
                                           }
                                     else {
-                                          screen.state = "ScoreView";
+                                          screen.state = "ScoreView"
                                           plainTimer.start()
                                           }
                                     }
                               }
-                        onSwipe: {
-                              if (gesture.swipeAngle < .1) {
-                                    }
-                              }
-                        onTapAndHold: {
-                              scoreView.seek(gesture.position.x, gesture.position.y);
+                        onPressAndHold: {
+                              scoreView.seek(mouseX, mouseY)
                               }
                         }
                   }

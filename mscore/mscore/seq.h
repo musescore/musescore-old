@@ -171,7 +171,7 @@ class Seq : public QObject, public Sequencer {
       int getEndTick() const    { return endTick;  }
       bool isRealtime() const   { return true;     }
       void sendMessage(SeqMsg&) const;
-      void startNote(const Channel&, int, int, int, double nt);
+      virtual void startNote(const Channel&, int, int, int, double nt);
       void setController(int, int, int);
       virtual void sendEvent(const Event&);
       void setScoreView(ScoreView*);

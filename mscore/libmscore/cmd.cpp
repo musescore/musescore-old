@@ -71,6 +71,7 @@
 #include "chordlist.h"
 #include "mscore.h"
 #include "accidental.h"
+#include "sequencer.h"
 
 //---------------------------------------------------------
 //   startCmd
@@ -123,6 +124,7 @@ void Score::endCmd()
       undo()->endMacro(noUndo);
       if (debugMode)
             qDebug("===endCmd");
+      end();      // DEBUG
       }
 
 //---------------------------------------------------------
@@ -1574,12 +1576,12 @@ void Score::cmdResetBeamMode()
 //   processMidiInput
 //---------------------------------------------------------
 
-void Score::processMidiInput()
+bool Score::processMidiInput()
       {
       if (debugMode)
           qDebug("processMidiInput");
       if (midiInputQueue.isEmpty())
-            return;
+            return false;
 
       bool cmdActive = false;
       Note* n = 0;
@@ -1588,14 +1590,15 @@ void Score::processMidiInput()
             if (debugMode)
                   qDebug("<-- !noteentry dequeue %i", ev.pitch);
             if (!noteEntryMode()) {
-//                  int staffIdx = selection().staffStart();
-//                  Part* p;
-//                  if (staffIdx < 0 || staffIdx >= nstaves())
-//                        p = part(0);
-//                  else
-//                        p = staff(staffIdx)->part();
-//TODO-LIB                  if (p)
-//                        seq->startNote(p->instr()->channel(0), ev.pitch, 80, MScore::defaultPlayDuration, 0.0);
+                  int staffIdx = selection().staffStart();
+                  Part* p;
+                  if (staffIdx < 0 || staffIdx >= nstaves())
+                        p = part(0);
+                  else
+                        p = staff(staffIdx)->part();
+                  if (p)
+                        MScore::seq->startNote(p->instr()->channel(0), ev.pitch, 80,
+                           MScore::defaultPlayDuration, 0.0);
                   }
             else  {
                   if (!cmdActive) {
@@ -1611,7 +1614,9 @@ void Score::processMidiInput()
             //after relayout
             foreach(MuseScoreView* v, viewer)
                   v->adjustCanvasPosition(n, false);
+            return true;
             }
+      return false;
       }
 
 //---------------------------------------------------------

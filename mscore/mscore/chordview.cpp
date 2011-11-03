@@ -267,21 +267,21 @@ void ChordView::setChord(Chord* c)
       scene()->addItem(locatorLine);
 
       foreach(Note* note, c->notes()) {
-            if (!note->playEvents().isEmpty()) {
-                  foreach(NoteEvent* e, note->playEvents()) {
-                        ChordItem* item = new ChordItem(note, e);
-                        if (curEvent == 0)
-                              curEvent = item;
-                        scene()->addItem(item);
-                        }
-                  }
-            else {
+            if (note->playEvents().isEmpty()) {
                   NoteEvent* ne = new NoteEvent;
                   note->playEvents().append(ne);
                   ChordItem* item = new ChordItem(note, ne);
                   if (curEvent == 0)
                         curEvent = item;
                   scene()->addItem(item);
+                  }
+            else {
+                  foreach(NoteEvent* e, note->playEvents()) {
+                        ChordItem* item = new ChordItem(note, e);
+                        if (curEvent == 0)
+                              curEvent = item;
+                        scene()->addItem(item);
+                        }
                   }
             }
       curNote = c->notes().front();

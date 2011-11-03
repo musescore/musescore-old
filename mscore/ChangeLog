@@ -1,3 +1,5 @@
+3.nov (ws)
+      - fix -10471: Piano keyboard note entry
 2.nov (lv)
       - partial implementation of #13452: MusicXML: optionally ignore layout information on export
 1.nov (lv)

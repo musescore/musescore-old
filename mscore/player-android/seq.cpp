@@ -71,6 +71,7 @@ Seq::~Seq()
 
 bool Seq::init()
       {
+#ifdef USE_SLES
       driver = new AndroidAudio(this);
       if (!driver->init()) {
             qDebug("init audio failed\n");
@@ -84,6 +85,7 @@ bool Seq::init()
             return false;
       MScore::sampleRate = driver->sampleRate();
       running = true;
+#endif
       return true;
       }
 

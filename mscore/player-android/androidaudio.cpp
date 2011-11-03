@@ -20,6 +20,8 @@
 #include "androidaudio.h"
 #include "seq.h"
 
+#ifdef USE_SLES
+
 #define FRAME_SIZE 512
 
 //---------------------------------------------------------
@@ -237,4 +239,5 @@ bool AndroidAudio::stop()
             }
       return true;
       }
+#endif
 
