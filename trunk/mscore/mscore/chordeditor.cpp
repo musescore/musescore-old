@@ -44,7 +44,7 @@ ChordEditor::ChordEditor(Chord* c, QWidget* parent)
    : QDialog(parent)
       {
       _chord = c;
-      setWindowTitle(QString("MuseScore"));
+      setWindowTitle(QString("MuseScore: Chord Articulation"));
 
       QGridLayout* layout = new QGridLayout;
       setLayout(layout);

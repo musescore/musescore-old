@@ -24,6 +24,7 @@
 #include "driver.h"
 #include "config.h"
 
+#ifdef USE_SLES
 #include <SLES/OpenSLES.h>
 #include <SLES/OpenSLES_Android.h>
 #include <SLES/OpenSLES_AndroidConfiguration.h>
@@ -65,4 +66,5 @@ class AndroidAudio : public Driver {
 
 #endif
 
+#endif
 

@@ -15,6 +15,7 @@
 #define __SEQUENCER_H__
 
 class Event;
+struct Channel;
 
 //---------------------------------------------------------
 //   Sequencer
@@ -26,6 +27,7 @@ class Sequencer {
       virtual ~Sequencer() {}
 
       virtual void sendEvent(const Event&) = 0;
+      virtual void startNote(const Channel&, int, int, int, double nt) = 0;
       };
 #endif
 

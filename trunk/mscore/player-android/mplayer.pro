@@ -35,7 +35,7 @@ PRECOMPILED_HEADER = ../all.h
 
 QT += xml declarative
 
-LIBS += -lOpenSLES
+# LIBS += -lOpenSLES
 
 QMAKE_CXXFLAGS += -include ../all.h
 
@@ -166,7 +166,8 @@ SOURCES += main.cpp                              \
     ../m-msynth/synth_voice.cpp \
     sparm.cpp \
     androidaudio.cpp \
-    ../libmscore/duration.cpp
+    ../libmscore/duration.cpp \
+    ../libmscore/figuredbass.cpp
 
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
@@ -198,4 +199,5 @@ HEADERS += \
     scoreview.h \
     seq.h \
     painterqt.h
+
 
