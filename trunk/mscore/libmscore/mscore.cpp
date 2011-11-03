@@ -120,7 +120,8 @@ void MScore::init()
             "mscore_tab_baroque.ttf",
             "mscore_tab_modern.ttf",
             "mscore_tab_renaiss.ttf",
-            "mscore_tab_renaiss2.ttf"
+            "mscore_tab_renaiss2.ttf",
+            "FiguredBassMHGPL.otf"
             };
 
       for (unsigned i = 0; i < sizeof(fonts)/sizeof(*fonts); ++i) {
