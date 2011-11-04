@@ -12,6 +12,9 @@
       <file>data/reload.png</file>
       <file>data/tab_remove.png</file>
       <file>data/table.svg</file>
+      
+      <file alias="fonts/mscore20.xml">../fonts/mscore20.xml</file>
+      <file alias="fonts/gonville.xml">../fonts/gonville.xml</file>
 
       <file alias="data/instruments.xml">../share/templates/instruments.xml</file>
       <file>data/splash.jpg</file>
