@@ -204,13 +204,13 @@ if (MINGW)
      set_target_properties( mscore
         PROPERTIES
            COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g ${QT_DEFINITIONS} -DQT_SVG_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_SCRIPT_LIB"
-           LINK_FLAGS "${PROJECT_BINARY_DIR}/resfile.o -mwindows -mconsole -L ${CROSSQT}/lib"
+           LINK_FLAGS "${PROJECT_BINARY_DIR}/resfile.o -mwindows -L ${CROSSQT}/lib"
         )
    else(CMAKE_BUILD_TYPE MATCHES "Debug")
      set_target_properties( mscore
           PROPERTIES
              COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS} -DQT_SVG_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_SCRIPT_LIB"
-             LINK_FLAGS "-Wl,-S ${PROJECT_BINARY_DIR}/resfile.o -mwindows -L ${CROSSQT}/lib"
+             LINK_FLAGS "-Wl,-S ${PROJECT_BINARY_DIR}/resfile.o -mwindows -mconsole -L ${CROSSQT}/lib"
           )
    endif(CMAKE_BUILD_TYPE MATCHES "Debug")
 
@@ -655,6 +655,7 @@ if (APPLE)
       ../fonts/mscore_tab_modern.ttf
       ../fonts/mscore_tab_renaiss.ttf
       ../fonts/mscore_tab_renaiss2.ttf
+      ../fonts/FiguredBassMHGPL.otf
      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}fonts
      )
 endif (APPLE)
