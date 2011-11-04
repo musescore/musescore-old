@@ -1203,6 +1203,7 @@ void Beam::write(Xml& xml) const
 void Beam::read(QDomElement e)
       {
       QPointF p1, p2;
+      qreal _spatium = spatium();
       _id = e.attribute("id").toInt();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
@@ -1213,8 +1214,7 @@ void Beam::read(QDomElement e)
                   BeamFragment* f = fragments.back();
                   int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
                   _userModified[idx] = true;
-                  f->p1[idx] = QPointF(0.0, val.toDouble());
-                  // TODO: value is wrong
+                  f->p1[idx] = QPointF(0.0, val.toDouble() * _spatium);
                   }
             else if (tag == "y2") {
                   if (fragments.isEmpty())
@@ -1222,8 +1222,7 @@ void Beam::read(QDomElement e)
                   BeamFragment* f = fragments.back();
                   int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
                   _userModified[idx] = true;
-                  f->p2[idx] = QPointF(0.0, val.toDouble());
-                  // TODO: value is wrong
+                  f->p2[idx] = QPointF(0.0, val.toDouble() * _spatium);
                   }
             else if (tag == "Fragment") {
                   BeamFragment* f = new BeamFragment;

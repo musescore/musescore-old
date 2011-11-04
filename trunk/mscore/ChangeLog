@@ -1,3 +1,6 @@
+4.nov (ws)
+      - fix 1.x backward compatibility for modified beams
+      - playback fixes
 3.nov (ws)
       - fix #11197: Capella import crashes
       - fix #12476: Tie created under note if clicked in note entry
