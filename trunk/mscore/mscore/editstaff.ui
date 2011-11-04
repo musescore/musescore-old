@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>680</width>
-    <height>330</height>
+    <height>339</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -151,11 +151,42 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1,0,0,0,0,1">
       <item>
-       <widget class="QToolButton" name="changeInstrument">
-        <property name="text">
-         <string>Change Instrument...</string>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <property name="leftMargin">
+         <number>0</number>
         </property>
-       </widget>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="instrumentName">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_13">
+          <property name="text">
+           <string>Instrument:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QToolButton" name="changeInstrument">
+          <property name="text">
+           <string>Change Instrument...</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_14">
+          <property name="text">
+           <string>Part Name:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="partName"/>
+        </item>
+       </layout>
       </item>
       <item>
        <layout class="QGridLayout" name="gridLayout">

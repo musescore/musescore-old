@@ -1084,6 +1084,7 @@ void ScoreView::measurePopup(const QPoint& gpos, Measure* obj)
             }
       else if (cmd == "staff-properties") {
             EditStaff editStaff(staff, this);
+            connect(&editStaff, SIGNAL(instrumentChanged()), mscore, SLOT(instrumentChanged()));
             editStaff.exec();
             }
       else if (cmd == "staff-split") {

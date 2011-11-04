@@ -30,7 +30,7 @@ struct InstrumentTemplate;
 class Part {
       Score* _score;
 
-      QString _trackName;           ///< used in tracklist
+      QString _partName;           ///< used in tracklist (mixer)
       InstrumentList _instrList;
 
       QList<Staff*> _staves;
@@ -52,6 +52,7 @@ class Part {
 
       QTextDocumentFragment longName(int tick = 0) const;
       QTextDocumentFragment shortName(int tick = 0) const;
+      QString instrumentName(int tick = 0) const;
 
       const QList<StaffNameDoc>& longNames(int tick = 0) const  { return instr(tick)->longNames();  }
       const QList<StaffNameDoc>& shortNames(int tick = 0) const { return instr(tick)->shortNames(); }
@@ -85,8 +86,8 @@ class Part {
       void setInstrument(const Instrument&, int tick = 0);
       void removeInstrument(int tick);
 
-      QString trackName() const                { return _trackName; }
-      void setTrackName(const QString& s)      { _trackName = s; }
+      QString partName() const                 { return _partName; }
+      void setPartName(const QString& s)       { _partName = s; }
       InstrumentList* instrList()              { return &_instrList;       }
       };
 

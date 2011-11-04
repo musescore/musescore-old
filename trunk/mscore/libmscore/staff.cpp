@@ -144,12 +144,12 @@ void Staff::cleanupBrackets()
       }
 
 //---------------------------------------------------------
-//   trackName
+//   partName
 //---------------------------------------------------------
 
-QString Staff::trackName() const
+QString Staff::partName() const
       {
-      return _part->trackName();
+      return _part->partName();
       }
 
 //---------------------------------------------------------

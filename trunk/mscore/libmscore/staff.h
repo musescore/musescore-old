@@ -119,7 +119,7 @@ class Staff {
       void init(const InstrumentTemplate*, int);
 
       bool isTop() const             { return _rstaff == 0; }
-      QString trackName() const;
+      QString partName() const;
       int rstaff() const             { return _rstaff; }
       int idx() const;
       void setRstaff(int n)          { _rstaff = n;    }

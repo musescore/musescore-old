@@ -775,7 +775,7 @@ qDebug("BeginRepeat=============================================\n");
             Part* part = score->part(i);
             Instrument* instr = part->instr();
             instr->setTablature(tab);
-            part->setTrackName(name);
+            part->setPartName(name);
             instr->setTranspose(Interval(capo));
             part->setLongName(name);
 
@@ -1255,7 +1255,7 @@ qDebug("BeginRepeat=============================================\n");
             Part* part = score->part(i);
             Instrument* instr = part->instr();
             instr->setTablature(tab);
-            part->setTrackName(name);
+            part->setPartName(name);
             part->setLongName(name);
             instr->setTranspose(Interval(capo));
 
@@ -1774,7 +1774,7 @@ void GuitarPro4::read(QFile* fp)
             Part* part = score->part(i);
             Instrument* instr = part->instr();
             instr->setTablature(tab);
-            part->setTrackName(name);
+            part->setPartName(name);
             instr->setTranspose(Interval(capo));
             part->setLongName(name);
 
@@ -2465,7 +2465,7 @@ void GuitarPro5::readTracks()
             Tablature* tab = new Tablature(frets, strings, tuning2);
             Instrument* instr = part->instr();
             instr->setTablature(tab);
-            part->setTrackName(name);
+            part->setPartName(name);
             part->setLongName(name);
             instr->setTranspose(Interval(capo));
 
@@ -2783,9 +2783,9 @@ bool MuseScore::importGTP(Score* score, const QString& name)
 
             cloneStaves(score, pscore, stavesMap);
 
-            pscore->setName(part->trackName());
+            pscore->setName(part->partName());
             Excerpt* excerpt = new Excerpt(pscore);
-            excerpt->setTitle(part->trackName());
+            excerpt->setTitle(part->partName());
             excerpt->parts()->append(part);
             score->excerpts()->append(excerpt);
 

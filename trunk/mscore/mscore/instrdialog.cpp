@@ -126,7 +126,7 @@ PartListItem::PartListItem(Part* p, QTreeWidget* lv)
       part = p;
       it   = 0;
       op   = ITEM_KEEP;
-      setText(0, p->trackName());
+      setText(0, p->partName());
       }
 
 PartListItem::PartListItem(const InstrumentTemplate* i, QTreeWidget* lv)

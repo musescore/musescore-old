@@ -41,7 +41,7 @@ Part::Part(Score* s)
 
 void Part::initFromInstrTemplate(const InstrumentTemplate* t)
       {
-      _trackName = t->trackName;
+      _partName = t->trackName;
       Instrument instr = Instrument::fromTemplate(t);
       setInstrument(instr, 0);
       }
@@ -106,14 +106,14 @@ void Part::read(QDomElement e)
                         }
                   }
             else if (tag == "trackName")
-                  _trackName = val;
+                  _partName = val;
             else if (tag == "show")
                   _show = val.toInt();
             else
                   domError(e);
             }
-      if (_trackName.isEmpty())
-            _trackName = instr(0)->trackName();
+      if (_partName.isEmpty())
+            _partName = instr(0)->trackName();
       }
 
 //---------------------------------------------------------
@@ -127,7 +127,7 @@ void Part::write(Xml& xml) const
             staff->write(xml);
       if (!_show)
             xml.tag("show", _show);
-      xml.tag("trackName", _trackName);
+      xml.tag("trackName", _partName);
       instr(0)->write(xml);
       xml.etag();
       }
@@ -383,6 +383,15 @@ QTextDocumentFragment Part::longName(int tick) const
       {
       const QList<StaffNameDoc>& nl = longNames(tick);
       return nl.isEmpty() ? QTextDocumentFragment() : nl[0].name;
+      }
+
+//---------------------------------------------------------
+//   instrumentName
+//---------------------------------------------------------
+
+QString Part::instrumentName(int tick) const
+      {
+      return instr(tick)->trackName();
       }
 
 //---------------------------------------------------------

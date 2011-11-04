@@ -41,8 +41,7 @@ HPiano::HPiano(QWidget* parent)
       setMouseTracking(true);
       setRubberBandSelectionMode(Qt::IntersectsItemBoundingRect);
       setDragMode(QGraphicsView::RubberBandDrag);
-      setMaximumSize(QSize(KEY_WIDTH * 52+8, KEY_HEIGHT+8+80));
-      setMinimumSize(QSize(100, KEY_HEIGHT+8));
+      setScale(1.0);
 
       scene()->setSceneRect(0.0, 0.0, KEY_WIDTH * 52, KEY_HEIGHT);
 
@@ -103,6 +102,20 @@ HPiano::HPiano(QWidget* parent)
             scene()->addItem(k);
             }
       }
+
+//---------------------------------------------------------
+//   setScale
+//---------------------------------------------------------
+
+void HPiano::setScale(qreal s)
+      {
+      scaleVal = s;
+      setMaximumSize(QSize((KEY_WIDTH * 52) * scaleVal + 8, KEY_HEIGHT * scaleVal + 8 + 80));
+      setMinimumSize(QSize(100, KEY_HEIGHT * scaleVal + 8));
+      QTransform t;
+      t.scale(scaleVal, scaleVal);
+      setTransform(t, false);
+      };
 
 //---------------------------------------------------------
 //   sizeHint
@@ -287,5 +300,35 @@ PianoTools::PianoTools(QWidget* parent)
 //      setTitleBarWidget(w);
 //      titleBarWidget()->hide();
       connect(piano, SIGNAL(keyPressed(int, bool)), SIGNAL(keyPressed(int, bool)));
+      }
+
+//---------------------------------------------------------
+//   wheelEvent
+//---------------------------------------------------------
+
+void HPiano::wheelEvent(QWheelEvent* event)
+      {
+      static int deltaSum = 0;
+      deltaSum += event->delta();
+      int step = deltaSum / 120;
+      deltaSum %= 120;
+
+      if (event->modifiers() & Qt::ControlModifier) {
+            if (step > 0) {
+                  for (int i = 0; i < step; ++i) {
+                        scaleVal *= 1.1;
+                        }
+                  }
+            else {
+                  for (int i = 0; i < -step; ++i) {
+                        scaleVal /= 1.1;
+                        }
+                  }
+            if (scaleVal > 2.0)
+                  scaleVal = 2.0;
+            else if (scaleVal < .5)
+                  scaleVal = .5;
+            setScale(scaleVal);
+            }
       }
 

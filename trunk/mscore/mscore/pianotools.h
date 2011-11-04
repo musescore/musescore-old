@@ -52,6 +52,9 @@ class HPiano : public QGraphicsView {
       int _lastKey;
       int _currentKey;
       QList<PianoKeyItem*> keys;
+      qreal scaleVal;
+      virtual void wheelEvent(QWheelEvent*);
+      void setScale(qreal);
 
    signals:
       void keyPressed(int pitch, bool chord);

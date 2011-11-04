@@ -62,10 +62,40 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       staffType->setCurrentIndex(curIdx);
 
       small->setChecked(staff->small());
-      setInterval(instrument.transpose());
-      shortName->setHtml(part->shortName().toHtml());
-      longName->setHtml(part->longName().toHtml());
       invisible->setChecked(staff->invisible());
+      partName->setText(part->partName());
+
+      updateInstrument();
+
+      connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(bboxClicked(QAbstractButton*)));
+      connect(changeInstrument, SIGNAL(clicked()), SLOT(showInstrumentDialog()));
+      connect(editStaffType,    SIGNAL(clicked()), SLOT(showEditStaffType()));
+      connect(editShortName,    SIGNAL(clicked()), SLOT(editShortNameClicked()));
+      connect(editLongName,     SIGNAL(clicked()), SLOT(editLongNameClicked()));
+      connect(minPitchASelect,  SIGNAL(clicked()), SLOT(minPitchAClicked()));
+      connect(maxPitchASelect,  SIGNAL(clicked()), SLOT(maxPitchAClicked()));
+      connect(minPitchPSelect,  SIGNAL(clicked()), SLOT(minPitchPClicked()));
+      connect(maxPitchPSelect,  SIGNAL(clicked()), SLOT(maxPitchPClicked()));
+      connect(editStringData,   SIGNAL(clicked()), SLOT(editStringDataClicked()));
+      }
+
+//---------------------------------------------------------
+//   updateInstrument
+//---------------------------------------------------------
+
+void EditStaff::updateInstrument()
+      {
+      setInterval(instrument.transpose());
+
+      QList<StaffNameDoc>& nl = instrument.shortNames();
+      QTextDocumentFragment df = nl.isEmpty() ? QTextDocumentFragment() : nl[0].name;
+      shortName->setHtml(df.toHtml());
+
+      nl = instrument.longNames();
+      df = nl.isEmpty() ? QTextDocumentFragment() : nl[0].name;
+      longName->setHtml(df.toHtml());
+
+      instrumentName->setText(instrument.trackName());
 
       _minPitchA = instrument.minPitchA();
       _maxPitchA = instrument.maxPitchA();
@@ -78,17 +108,6 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
 
       int numStr = instrument.tablature() ? instrument.tablature()->strings() : 0;
       numOfStrings->setText(QString::number(numStr));
-
-      connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(bboxClicked(QAbstractButton*)));
-      connect(changeInstrument, SIGNAL(clicked()), SLOT(showInstrumentDialog()));
-      connect(editStaffType,    SIGNAL(clicked()), SLOT(showEditStaffType()));
-      connect(editShortName,    SIGNAL(clicked()), SLOT(editShortNameClicked()));
-      connect(editLongName,     SIGNAL(clicked()), SLOT(editLongNameClicked()));
-      connect(minPitchASelect,  SIGNAL(clicked()), SLOT(minPitchAClicked()));
-      connect(maxPitchASelect,  SIGNAL(clicked()), SLOT(maxPitchAClicked()));
-      connect(minPitchPSelect,  SIGNAL(clicked()), SLOT(minPitchPClicked()));
-      connect(maxPitchPSelect,  SIGNAL(clicked()), SLOT(maxPitchPClicked()));
-      connect(editStringData,   SIGNAL(clicked()), SLOT(editStringDataClicked()));
       }
 
 //---------------------------------------------------------
@@ -192,8 +211,10 @@ void EditStaff::apply()
                           (ng == TAB_STAFF && og == TAB_STAFF
                              && instrument.tablature() != part->instr()->tablature());
 
-      if (!(instrument == *part->instr()))
-            score->undo()->push(new ChangePart(part, instrument));
+      if (!(instrument == *part->instr()) || part->partName() != partName->text()) {
+            score->undo()->push(new ChangePart(part, instrument, partName->text()));
+            emit instrumentChanged();
+            }
 
       if (s != staff->small() || inv != staff->invisible() || st  != staff->staffType())
             score->undo()->push(new ChangeStaff(staff, s, inv, staff->show(), st));
@@ -223,35 +244,8 @@ void EditStaff::showInstrumentDialog()
       {
       SelectInstrument si(instrument, this);
       if (si.exec()) {
-            const InstrumentTemplate* t = si.instrTemplate();
-            // setMidiProgram(t->midiProgram);
-
-            _minPitchA = t->minPitchA;
-            _maxPitchA = t->maxPitchA;
-            _minPitchP = t->minPitchP;
-            _maxPitchP = t->maxPitchP;
-            minPitchA->setText(midiCodeToStr(_minPitchA));
-            maxPitchA->setText(midiCodeToStr(_maxPitchA));
-            minPitchP->setText(midiCodeToStr(_minPitchP));
-            maxPitchP->setText(midiCodeToStr(_maxPitchP));
-
-            if (!t->shortNames.isEmpty())
-                  shortName->setHtml(t->shortNames[0].name);
-            if (!t->longNames.isEmpty())
-                  longName->setHtml(t->longNames[0].name);
-            // trackName = t->trackName;
-
-            setInterval(t->transpose);
-
-            if (t->useDrumset) {
-                  instrument.setDrumset(new Drumset(*((t->drumset) ? t->drumset : smDrumset)));
-                  instrument.setUseDrumset(true);
-                  }
-            else
-                  instrument.setUseDrumset(false);
-            instrument.setMidiActions(t->midiActions);
-            instrument.setArticulation(t->articulation);
-            instrument.setChannel(t->channel);
+            instrument = Instrument::fromTemplate(si.instrTemplate());
+            updateInstrument();
             }
       }
 
