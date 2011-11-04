@@ -41,8 +41,8 @@ class EditStaff : public QDialog, private Ui::EditStaffBase {
       int         _minPitchA, _maxPitchA, _minPitchP, _maxPitchP;
 
       void apply();
-      void initFromInstrument(const Instrument&);
       void setInterval(const Interval&);
+      void updateInstrument();
 
    protected:
       QString midiCodeToStr(int midiCode);
@@ -59,6 +59,9 @@ class EditStaff : public QDialog, private Ui::EditStaffBase {
       void maxPitchAClicked();
       void minPitchPClicked();
       void maxPitchPClicked();
+
+   signals:
+      void instrumentChanged();
 
    public:
       EditStaff(Staff*, QWidget* parent = 0);

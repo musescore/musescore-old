@@ -1983,7 +1983,7 @@ qDebug("==================convert-capella\n");
                   part->setMidiProgram(0, 128);
             else
                   part->setMidiProgram(cl->sound, 0);
-            part->setTrackName(QString::fromLatin1(cl->descr));
+            part->setPartName(QString::fromLatin1(cl->descr));
             part->setLongName(QString::fromLatin1(cl->name));
             part->setShortName(QString::fromLatin1(cl->abbrev));
 

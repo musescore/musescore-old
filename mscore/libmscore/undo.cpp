@@ -2319,10 +2319,11 @@ void ChangeStaff::flip()
 //   ChangePart
 //---------------------------------------------------------
 
-ChangePart::ChangePart(Part* _part, const Instrument& i)
+ChangePart::ChangePart(Part* _part, const Instrument& i, const QString& s)
       {
       instrument = i;
       part       = _part;
+      name       = s;
       }
 
 //---------------------------------------------------------
@@ -2331,9 +2332,12 @@ ChangePart::ChangePart(Part* _part, const Instrument& i)
 
 void ChangePart::flip()
       {
-      Instrument oi         = *part->instr();
+      Instrument oi = *part->instr();
+      QString s     = part->partName();
       part->setInstrument(instrument);
-      instrument            = oi;
+      part->setPartName(name);
+      name       = s;
+      instrument = oi;
       part->score()->rebuildMidiMapping();
       part->score()->setInstrumentsChanged(true);
       part->score()->setPlaylistDirty(true);

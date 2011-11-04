@@ -979,11 +979,12 @@ class ChangeStaff : public UndoCommand {
 class ChangePart : public UndoCommand {
       Part* part;
       Instrument instrument;
+      QString name;
 
       void flip();
 
    public:
-      ChangePart(Part*, const Instrument&);
+      ChangePart(Part*, const Instrument&, const QString& name);
 
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }

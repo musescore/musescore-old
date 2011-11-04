@@ -46,7 +46,7 @@ PartItem::PartItem(Part* p, QListWidget* parent)
       setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
       setCheckState(Qt::Unchecked);
       _part = p;
-      setText(p->trackName());
+      setText(p->partName());
       }
 
 //---------------------------------------------------------
@@ -200,7 +200,7 @@ void ExcerptsDialog::excerptChanged(QListWidgetItem* cur, QListWidgetItem*)
 void ExcerptsDialog::partDoubleClicked(QListWidgetItem* item)
       {
       PartItem* pi = (PartItem*)item;
-      title->setText(pi->part()->trackName());
+      title->setText(pi->part()->partName());
       }
 
 //---------------------------------------------------------

@@ -1292,6 +1292,8 @@ bool MuseScore::exportFile()
 
 bool MuseScore::saveAs(Score* cs, bool saveCopy, const QString& path, const QString& ext)
       {
+      cs->setSyntiState(synti->state());
+
       bool rv = false;
       QString suffix = "." + ext;
       QString fn(path);

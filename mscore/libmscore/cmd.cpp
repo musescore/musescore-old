@@ -1987,7 +1987,10 @@ qDebug("cannot make gap in staff %d at tick %d", staffIdx, dst->tick());
             if (pasted) { //select only if we pasted something
                   Segment* s1 = tick2segment(dstTick);
                   Segment* s2 = tick2segment(dstTick + tickLen);
-                  _selection.setRange(s1, s2, dstStaffStart, dstStaffStart+staves);
+                  int endStaff = dstStaffStart + staves;
+                  if (endStaff > nstaves())
+                        endStaff = nstaves();
+                  _selection.setRange(s1, s2, dstStaffStart, endStaff);
                   _selection.updateSelectedElements();
                   foreach(MuseScoreView* v, viewer)
                         v->adjustCanvasPosition(s1, false);

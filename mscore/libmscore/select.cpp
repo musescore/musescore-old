@@ -229,7 +229,7 @@ void Selection::updateSelectedElements()
       int staves = _score->nstaves();
       if (_staffStart < 0 || _staffStart >= staves || _staffEnd < 0 || _staffEnd > staves
          || _staffStart >= _staffEnd) {
-            qDebug("updateSelectedElements: bad staff selection %d - %d\n", _staffStart, _staffEnd);
+            qDebug("updateSelectedElements: bad staff selection %d - %d, staves %d\n", _staffStart, _staffEnd, staves);
             _staffStart = 0;
             _staffEnd   = 0;
             }
@@ -299,6 +299,8 @@ void Selection::updateSelectedElements()
 
 void Selection::setRange(Segment* a, Segment* b, int c, int d)
       {
+      Q_ASSERT(d > c && c >= 0 && d >= 0 && d <= _score->nstaves());
+
       _startSegment  = a;
       _endSegment    = b;
       _activeSegment = b;

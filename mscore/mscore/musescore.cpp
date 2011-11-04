@@ -4569,3 +4569,13 @@ void MuseScore::noteTooShortForTupletDialog()
         );
       }
 
+//---------------------------------------------------------
+//   instrumentChanged
+//---------------------------------------------------------
+
+void MuseScore::instrumentChanged()
+      {
+      if (iledit)
+            iledit->updateAll(cs);
+      }
+
