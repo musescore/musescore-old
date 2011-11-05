@@ -1864,6 +1864,7 @@ QPointF Chord::layoutArticulation(Articulation* a)
                         }
                   }
             a->setPos(x, y);
+            a->adjustReadPos();
             return QPointF(x, y);
             }
 

@@ -15,6 +15,28 @@
 #include "tuplet.h"
 #include "score.h"
 #include "undo.h"
+#include "staff.h"
+
+//---------------------------------------------------------
+//   DurationElement
+//---------------------------------------------------------
+
+DurationElement::DurationElement(Score* s)
+   : Element(s)
+      {
+      _tuplet = 0;
+      }
+
+//---------------------------------------------------------
+//   DurationElement
+//---------------------------------------------------------
+
+DurationElement::DurationElement(const DurationElement& e)
+   : Element(e)
+      {
+      _tuplet   = e._tuplet;
+      _duration = e._duration;
+      }
 
 //---------------------------------------------------------
 //   DurationElement
@@ -24,6 +46,27 @@ DurationElement::~DurationElement()
       {
       if (tuplet() && tuplet()->elements().front() == this)
             delete tuplet();
+      }
+
+//---------------------------------------------------------
+//   globalDuration
+//---------------------------------------------------------
+
+Fraction DurationElement::globalDuration() const
+      {
+      Fraction f(_duration);
+      for (Tuplet* t = tuplet(); t; t = t->tuplet())
+            f /= t->ratio();
+      return f;
+      }
+
+//---------------------------------------------------------
+//  actualTicks
+//---------------------------------------------------------
+
+int DurationElement::actualTicks() const
+      {
+      return Fraction(staff()->timeStretch(tick()) * globalDuration()).ticks();
       }
 
 //---------------------------------------------------------
