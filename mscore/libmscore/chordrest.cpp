@@ -41,48 +41,6 @@
 #include "stem.h"
 
 //---------------------------------------------------------
-//   DurationElement
-//---------------------------------------------------------
-
-DurationElement::DurationElement(Score* s)
-   : Element(s)
-      {
-      _tuplet = 0;
-      }
-
-//---------------------------------------------------------
-//   DurationElement
-//---------------------------------------------------------
-
-DurationElement::DurationElement(const DurationElement& e)
-   : Element(e)
-      {
-      _tuplet   = e._tuplet;
-      _duration = e._duration;
-      }
-
-//---------------------------------------------------------
-//   globalDuration
-//---------------------------------------------------------
-
-Fraction DurationElement::globalDuration() const
-      {
-      Fraction f(_duration);
-      for (Tuplet* t = tuplet(); t; t = t->tuplet())
-            f /= t->ratio();
-      return f;
-      }
-
-//---------------------------------------------------------
-//  actualTicks
-//---------------------------------------------------------
-
-int DurationElement::actualTicks() const
-      {
-      return Fraction(staff()->timeStretch(tick()) * globalDuration()).ticks();
-      }
-
-//---------------------------------------------------------
 //   hasArticulation
 //---------------------------------------------------------
 

@@ -839,6 +839,8 @@ void Measure::add(Element* el)
 
       switch (type) {
             case TUPLET:
+                  qDebug("Measure::add(Tuplet) ??");
+//                  break;
                   abort();
 
             case SPACER:

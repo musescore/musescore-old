@@ -218,6 +218,7 @@ Element* ElementMap::findNew(Element* o) const
 
 void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
       {
+printf("clone staves\n");
       int tracks = score->nstaves() * VOICES;
       SlurMap slurMap;
       TieMap  tieMap;
@@ -324,10 +325,9 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                                                 nt->clear();
                                                 nt->setTrack(track);
                                                 nt->setScore(score);
-                                                nm->add(nt);
                                                 tupletMap.add(ot, nt);
                                                 }
-                                          // nt->add(ncr);
+                                          nt->add(ncr);
                                           ncr->setTuplet(nt);
                                           }
                                     foreach(Slur* s, ocr->slurFor()) {
@@ -418,6 +418,7 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
 
 void cloneStaff(Staff* srcStaff, Staff* dstStaff)
       {
+printf("clone staff===\n");
       Score* score = srcStaff->score();
       dstStaff->linkTo(srcStaff);
 
@@ -450,15 +451,18 @@ void cloneStaff(Staff* srcStaff, Staff* dstStaff)
                               ChordRest* ncr = static_cast<ChordRest*>(ne);
                               Tuplet* ot     = ocr->tuplet();
                               if (ot) {
+printf("tuplet\n");
                                     Tuplet* nt = tupletMap.findNew(ot);
                                     if (nt == 0) {
+printf("  create tuplet\n");
                                           nt = new Tuplet(*ot);
                                           nt->clear();
                                           nt->setTrack(dstTrack);
-                                          m->add(nt);
+                                          nt->setParent(m);
                                           tupletMap.add(ot, nt);
                                           }
                                     ncr->setTuplet(nt);
+                                    nt->add(ncr);
                                     }
                               foreach (Slur* s, ocr->slurFor()) {
                                     Slur* slur = new Slur(score);
