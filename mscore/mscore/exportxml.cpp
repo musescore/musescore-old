@@ -3446,13 +3446,29 @@ void ExportMusicXml::write(QIODevice* dev)
                            m->pagePos().y() > (previousMeasure->pagePos().y())) // TODO: MeasureBase
                         currentSystem = NewSystem;
 
+                  bool prevMeasLineBreak = false;
+                  bool prevMeasPageBreak = false;
+                  if (previousMeasure) {
+                        prevMeasLineBreak = previousMeasure->lineBreak();
+                        prevMeasPageBreak = previousMeasure->pageBreak();
+                        }
+                  qDebug("measure %d system %p page %p currentsystem %d previous measure line/page break %d/%d",
+                         measureNo - 1, m->parent(), m->parent()->parent(),
+                         currentSystem, prevMeasLineBreak, prevMeasPageBreak);
+
                   if (currentSystem != NoSystem) {
 
                         QString nw;
-                        if (preferences.musicxmlExportBreaks) {
+                        if (preferences.musicxmlExportBreaks == ALL_BREAKS) {
                               if (currentSystem == NewSystem)
                                     nw = " new-system=\"yes\"";
                               else if (currentSystem == NewPage)
+                                    nw = " new-page=\"yes\"";
+                              }
+                        else if (preferences.musicxmlExportBreaks == MANUAL_BREAKS) {
+                              if (currentSystem == NewSystem && prevMeasLineBreak)
+                                    nw = " new-system=\"yes\"";
+                              else if (currentSystem == NewPage && prevMeasPageBreak)
                                     nw = " new-page=\"yes\"";
                               }
 

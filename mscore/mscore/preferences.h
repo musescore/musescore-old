@@ -54,6 +54,11 @@ enum MuseScoreStyleType {
       STYLE_NATIVE
       };
 
+// MusicXML export break values
+enum MusicxmlExportBreaks {
+      ALL_BREAKS, MANUAL_BREAKS, NO_BREAKS
+      };
+
 //---------------------------------------------------------
 //   PluginDescription
 //---------------------------------------------------------
@@ -115,7 +120,7 @@ struct Preferences {
       bool musicxmlImportLayout;
       bool musicxmlImportBreaks;
       bool musicxmlExportLayout;
-      bool musicxmlExportBreaks;
+      MusicxmlExportBreaks musicxmlExportBreaks;
 
       bool alternateNoteEntryMethod;
       int proximity;          // proximity for selecting elements on canvas
