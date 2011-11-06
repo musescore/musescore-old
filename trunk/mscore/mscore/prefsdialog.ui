@@ -2609,9 +2609,23 @@
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="exportBreaks">
+           <widget class="QRadioButton" name="exportAllBreaks">
             <property name="text">
-             <string>Export system and page breaks (in development, not functional yet)</string>
+             <string>Export all system and page breaks</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="exportManualBreaks">
+            <property name="text">
+             <string>Export manually added system and page breaks only (in development, not functional yet)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="exportNoBreaks">
+            <property name="text">
+             <string>Do not export system or page breaks</string>
             </property>
            </widget>
           </item>
