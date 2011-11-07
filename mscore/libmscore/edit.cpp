@@ -137,11 +137,11 @@ int Score::pos()
 //    create segment if necessary
 //---------------------------------------------------------
 
-Rest* Score::addRest(int tick, int track, Duration d, Tuplet* tuplet)
+Rest* Score::addRest(int tick, int track, TDuration d, Tuplet* tuplet)
       {
       Measure* measure = tick2measure(tick);
       Rest* rest       = new Rest(this, d);
-      if (d.type() == Duration::V_MEASURE)
+      if (d.type() == TDuration::V_MEASURE)
             rest->setDuration(measure->stretchedLen(staff(track/VOICES)));
       else
             rest->setDuration(d.fraction());
@@ -156,10 +156,10 @@ Rest* Score::addRest(int tick, int track, Duration d, Tuplet* tuplet)
 //   addRest
 //---------------------------------------------------------
 
-Rest* Score::addRest(Segment* s, int track, Duration d, Tuplet* tuplet)
+Rest* Score::addRest(Segment* s, int track, TDuration d, Tuplet* tuplet)
       {
       Rest* rest = new Rest(this, d);
-      if (d.type() == Duration::V_MEASURE)
+      if (d.type() == TDuration::V_MEASURE)
             rest->setDuration(s->measure()->stretchedLen(staff(track/VOICES)));
       else
             rest->setDuration(d.fraction());
@@ -178,7 +178,7 @@ Rest* Score::addRest(Segment* s, int track, Duration d, Tuplet* tuplet)
 //    - if "genTie" then tie to chord "oc"
 //---------------------------------------------------------
 
-Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tuplet)
+Chord* Score::addChord(int tick, TDuration d, Chord* oc, bool genTie, Tuplet* tuplet)
       {
       Measure* measure = tick2measure(tick);
       if (measure->endTick() <= tick) {
@@ -224,7 +224,7 @@ Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tup
 //   addClone
 //---------------------------------------------------------
 
-ChordRest* Score::addClone(ChordRest* cr, int tick, const Duration& d)
+ChordRest* Score::addClone(ChordRest* cr, int tick, const TDuration& d)
       {
 qDebug("addClone %s at %d %s", cr->name(), tick, qPrintable(d.fraction().print()));
       ChordRest* newcr;
@@ -298,8 +298,8 @@ qDebug("setRest() %d/%d", l.numerator(), l.denominator());
                && (measure->tick() == tick)
                // && ((measure->timesig() / timeStretch) == f)
                && (measure->timesig() == f)
-               && (f < Duration(Duration::V_BREVE).fraction())) {
-                  Rest* rest = addRest(tick, track, Duration(Duration::V_MEASURE), tuplet);
+               && (f < TDuration(TDuration::V_BREVE).fraction())) {
+                  Rest* rest = addRest(tick, track, TDuration(TDuration::V_MEASURE), tuplet);
                   tick += measure->timesig().ticks();
                   if (r == 0)
                         r = rest;
@@ -311,16 +311,16 @@ qDebug("setRest() %d/%d", l.numerator(), l.denominator());
 
                   Fraction ff = f / staff(track/VOICES)->timeStretch(tick);
 qDebug(" create duration list from %d/%d", ff.numerator(), ff.denominator());
-                  QList<Duration> dList = toDurationList(ff, useDots);
+                  QList<TDuration> dList = toDurationList(ff, useDots);
                   if (dList.isEmpty())
                         return 0;
-                  foreach(Duration d, dList) {
+                  foreach(TDuration d, dList) {
                         qDebug("    duration %d/%d", d.fraction().numerator(), d.fraction().denominator());
                         }
 
                   Rest* rest = 0;
                   if (((tick - measure->tick()) % dList[0].ticks()) == 0) {
-                        foreach(Duration d, dList) {
+                        foreach(TDuration d, dList) {
                               rest = addRest(tick, track, d, tuplet);
                               if (r == 0)
                                     r = rest;
@@ -421,12 +421,12 @@ static bool addCR(int tick, ChordRest* cr, Measure* ml)
                         Fraction rest = Fraction::fromTicks(m->tick() + m->ticks() - tick);
                         if (rest > len)
                               rest = len;
-                        QList<Duration> dList = toDurationList(rest, false);
+                        QList<TDuration> dList = toDurationList(rest, false);
                         if (dList.isEmpty())
                               return true;
                         int n = dList.size();
                         for (int i = 0; i < n; ++i) {
-                              const Duration& d = dList[i];
+                              const TDuration& d = dList[i];
                               Chord* c = static_cast<Chord*>(chord->clone());
                               c->setSelected(false);
                               if (i == 0) {
@@ -470,10 +470,10 @@ static bool addCR(int tick, ChordRest* cr, Measure* ml)
                         Fraction rest = Fraction::fromTicks(m->tick() + m->ticks() - tick);
                         if (rest > len)
                               rest = len;
-                        QList<Duration> dList = toDurationList(rest, false);
+                        QList<TDuration> dList = toDurationList(rest, false);
                         if (dList.isEmpty())
                               return true;
-                        foreach(const Duration& d, dList) {
+                        foreach(const TDuration& d, dList) {
                               ChordRest* cr1 = static_cast<ChordRest*>(cr->clone());
                               cr1->setDurationType(d);
                               cr1->setDuration(d.fraction());
@@ -777,7 +777,7 @@ void Score::timesigStretchChanged(TimeSig* ts, Measure* fm, int staffIdx)
                         ChordRest* cr = static_cast<ChordRest*>(s->element(track));
                         if (!cr)
                               continue;
-                        if (cr->type() == REST && cr->durationType() == Duration::V_MEASURE) {
+                        if (cr->type() == REST && cr->durationType() == TDuration::V_MEASURE) {
                               cr->setDuration(ts->actualSig());
                               }
                         else
@@ -896,7 +896,7 @@ qDebug("putNote at tick %d staff %d line %d key %d clef %d",
       bool addToChord = false;
 
       if (cr) {
-            Duration d = cr->durationType();
+            TDuration d = cr->durationType();
             Note* note = 0;
             if (cr->type() == CHORD) {
                   Fraction f = cr->duration();
@@ -907,7 +907,7 @@ qDebug("putNote at tick %d staff %d line %d key %d clef %d",
                               note2 = note2->tieFor()->endNote();
                               f += note2->chord()->duration();
                               }
-                        Duration dd(f);
+                        TDuration dd(f);
                         if (dd.isValid())
                               d = dd;
                         }
@@ -1658,7 +1658,7 @@ void Score::cmdExchangeVoice(int s, int d)
 //   cmdEnterRest
 //---------------------------------------------------------
 
-void Score::cmdEnterRest(const Duration& d)
+void Score::cmdEnterRest(const TDuration& d)
       {
       if (_is.track() == -1) {
             qDebug("cmdEnterRest: track -1");

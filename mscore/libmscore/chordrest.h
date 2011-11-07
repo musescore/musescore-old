@@ -33,7 +33,7 @@ class TabDurationSymbol;
 //---------------------------------------------------------
 
 class ChordRest : public DurationElement {
-      Duration _durationType;
+      TDuration _durationType;
       int _staffMove;         // -1, 0, +1, used for crossbeaming
 
       QList<Slur*> _slurFor;
@@ -111,11 +111,11 @@ class ChordRest : public DurationElement {
       void setExtraTrailingSpace(Spatium v)     { _extraTrailingSpace = v;    }
       virtual void toDefault();
 
-      const Duration& durationType() const      { return _durationType;        }
-      void setDurationType(Duration::DurationType t);
+      const TDuration& durationType() const      { return _durationType;        }
+      void setDurationType(TDuration::DurationType t);
       void setDurationType(const QString& s);
       void setDurationType(int ticks);
-      void setDurationType(const Duration& v);
+      void setDurationType(const TDuration& v);
       void setDots(int n)                       { _durationType.setDots(n); }
       int dots() const                          { return _durationType.dots(); }
 

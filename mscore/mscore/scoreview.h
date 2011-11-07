@@ -226,7 +226,7 @@ class ScoreView : public QWidget, public MuseScoreView {
       void cmdAddPitch1(int, bool);
       void cmdAddChordName();
       void cmdAddText(int style);
-      void cmdEnterRest(const Duration&);
+      void cmdEnterRest(const TDuration&);
       void cmdEnterRest();
       void cmdTuplet(int n, ChordRest*);
       void cmdTuplet(int);

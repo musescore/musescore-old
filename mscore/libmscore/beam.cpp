@@ -379,7 +379,7 @@ void Beam::layout1()
             delete i;
       beamSegments.clear();
 
-      maxDuration.setType(Duration::V_INVALID);
+      maxDuration.setType(TDuration::V_INVALID);
       c1 = 0;
       c2 = 0;
 
@@ -1023,7 +1023,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                                     //       one level higher
                                     //
                                     if (!hasBeamSegment[idx-1] && (cr1 != crl[0])) {
-                                          Duration d = cr1->durationType();
+                                          TDuration d = cr1->durationType();
                                           d = d.shift(-1);
                                           int rtick = cr1->tick() - cr1->measure()->tick();
                                           if (rtick % d.ticks())

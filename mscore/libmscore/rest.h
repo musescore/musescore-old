@@ -16,7 +16,7 @@
 
 #include "chordrest.h"
 
-class Duration;
+class TDuration;
 
 //---------------------------------------------------------
 //    Rest
@@ -41,7 +41,7 @@ class Rest : public ChordRest {
 
    public:
       Rest(Score* s = 0);
-      Rest(Score*, const Duration&);
+      Rest(Score*, const TDuration&);
       virtual Rest* clone() const      { return new Rest(*this); }
       virtual ElementType type() const { return REST; }
 
@@ -56,7 +56,7 @@ class Rest : public ChordRest {
 
       void setMMWidth(qreal val);
       qreal mmWidth() const        { return _mmWidth; }
-      static int getSymbol(Duration::DurationType type, int line, int lines,  int* yoffset);
+      static int getSymbol(TDuration::DurationType type, int line, int lines,  int* yoffset);
 
       int getDotline() const { return dotline; }
       int sym() const        { return _sym;    }

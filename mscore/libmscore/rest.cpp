@@ -44,7 +44,7 @@ Rest::Rest(Score* s)
       _sym       = rest4Sym;
       }
 
-Rest::Rest(Score* s, const Duration& d)
+Rest::Rest(Score* s, const TDuration& d)
   : ChordRest(s)
       {
       setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE | ELEMENT_ON_STAFF);
@@ -272,31 +272,31 @@ void Rest::read(QDomElement e, QList<Tuplet*>* tuplets, QList<Slur*>* slurs)
 //   getSymbol
 //---------------------------------------------------------
 
-int Rest::getSymbol(Duration::DurationType type, int line, int lines, int* yoffset)
+int Rest::getSymbol(TDuration::DurationType type, int line, int lines, int* yoffset)
       {
       *yoffset = 2;
       switch(type) {
-            case Duration::V_LONG:
+            case TDuration::V_LONG:
                   return longarestSym;
-            case Duration::V_BREVE:
+            case TDuration::V_BREVE:
                   return breverestSym;
-            case Duration::V_MEASURE:
-            case Duration::V_WHOLE:
+            case TDuration::V_MEASURE:
+            case TDuration::V_WHOLE:
                   *yoffset = 1;
                   return (line <= -2 || line >= (lines - 1)) ? outsidewholerestSym : wholerestSym;
-            case Duration::V_HALF:
+            case TDuration::V_HALF:
                   return (line <= -3 || line >= (lines - 2)) ? outsidehalfrestSym : halfrestSym;
-            case Duration::V_EIGHT:
+            case TDuration::V_EIGHT:
                   return rest8Sym;
-            case Duration::V_16TH:
+            case TDuration::V_16TH:
                   return rest16Sym;
-            case Duration::V_32ND:
+            case TDuration::V_32ND:
                   return rest32Sym;
-            case Duration::V_64TH:
+            case TDuration::V_64TH:
                   return rest64Sym;
-            case Duration::V_128TH:
+            case TDuration::V_128TH:
                   return rest128Sym;
-            case Duration::V_256TH:
+            case TDuration::V_256TH:
 qDebug("Rest: no symbol for 1/256\n");
                   return rest128Sym;
             default:
@@ -313,12 +313,12 @@ void Rest::layout()
       int lines = staff()->lines();
 
       switch(durationType().type()) {
-            case Duration::V_64TH:
-            case Duration::V_32ND:
+            case TDuration::V_64TH:
+            case TDuration::V_32ND:
                   dotline = -3;
                   break;
-            case Duration::V_256TH:
-            case Duration::V_128TH:
+            case TDuration::V_256TH:
+            case TDuration::V_128TH:
                   dotline = -5;
                   break;
             default:
@@ -338,38 +338,38 @@ void Rest::layout()
             // move rests in a multi voice context
             bool up = (voice() == 0) || (voice() == 2);       // TODO: use style values
             switch(durationType().type()) {
-                  case Duration::V_LONG:
+                  case TDuration::V_LONG:
                         lineOffset = up ? -3 : 5;
                         break;
-                  case Duration::V_BREVE:
+                  case TDuration::V_BREVE:
                         lineOffset = up ? -3 : 5;
                         break;
-                  case Duration::V_MEASURE:
-                  case Duration::V_WHOLE:
+                  case TDuration::V_MEASURE:
+                  case TDuration::V_WHOLE:
                         lineOffset = up ? -4 : 6;
                         break;
-                  case Duration::V_HALF:
+                  case TDuration::V_HALF:
                         lineOffset = up ? -4 : 4;
                         break;
-                  case Duration::V_QUARTER:
+                  case TDuration::V_QUARTER:
                         lineOffset = up ? -4 : 4;
                         break;
-                  case Duration::V_EIGHT:
+                  case TDuration::V_EIGHT:
                         lineOffset = up ? -4 : 4;
                         break;
-                  case Duration::V_16TH:
+                  case TDuration::V_16TH:
                         lineOffset = up ? -6 : 4;
                         break;
-                  case Duration::V_32ND:
+                  case TDuration::V_32ND:
                         lineOffset = up ? -6 : 6;
                         break;
-                  case Duration::V_64TH:
+                  case TDuration::V_64TH:
                         lineOffset = up ? -8 : 6;
                         break;
-                  case Duration::V_128TH:
+                  case TDuration::V_128TH:
                         lineOffset = up ? -8 : 8;
                         break;
-                  case Duration::V_256TH:             // not available
+                  case TDuration::V_256TH:             // not available
                         lineOffset = up ? -10 : 6;
                         break;
                   default:
@@ -378,21 +378,21 @@ void Rest::layout()
             }
       else {
             switch(durationType().type()) {
-                  case Duration::V_LONG:
-                  case Duration::V_BREVE:
-                  case Duration::V_MEASURE:
-                  case Duration::V_WHOLE:
+                  case TDuration::V_LONG:
+                  case TDuration::V_BREVE:
+                  case TDuration::V_MEASURE:
+                  case TDuration::V_WHOLE:
                         if (lines == 1)
                               lineOffset = -2;
                         break;
-                  case Duration::V_HALF:
-                  case Duration::V_QUARTER:
-                  case Duration::V_EIGHT:
-                  case Duration::V_16TH:
-                  case Duration::V_32ND:
-                  case Duration::V_64TH:
-                  case Duration::V_128TH:
-                  case Duration::V_256TH:             // not available
+                  case TDuration::V_HALF:
+                  case TDuration::V_QUARTER:
+                  case TDuration::V_EIGHT:
+                  case TDuration::V_16TH:
+                  case TDuration::V_32ND:
+                  case TDuration::V_64TH:
+                  case TDuration::V_128TH:
+                  case TDuration::V_256TH:             // not available
                         if (lines == 1)
                               lineOffset = -4;
                         break;

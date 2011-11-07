@@ -312,7 +312,7 @@ void Chord::add(Element* e)
                   Tremolo* tr = static_cast<Tremolo*>(e);
                   if (tr->twoNotes()) {
                         if (!(_tremolo && _tremolo->twoNotes())) {
-                              Duration d = durationType();
+                              TDuration d = durationType();
                               int dots = d.dots();
                               d  = d.shift(-1);
                               d.setDots(dots);
@@ -380,7 +380,7 @@ void Chord::remove(Element* e)
                   {
                   Tremolo* tremolo = static_cast<Tremolo*>(e);
                   if (tremolo->twoNotes()) {
-                        Duration d = durationType();
+                        TDuration d = durationType();
                         int dots = d.dots();
                         d          = d.shift(1);
                         d.setDots(dots);
@@ -685,7 +685,7 @@ void Chord::readNote(QDomElement e, QList<Tuplet*>* tuplets, QList<Slur*>* slurs
       int tpc    = e.attribute("tpc", "-1").toInt();
 
       if (ticks != -1) {
-            Duration d;
+            TDuration d;
             d.setVal(ticks);
             setDurationType(d);
             }
@@ -1294,7 +1294,7 @@ void Chord::layout()
                   }
             // if tab type is stemless or duration longer than crochet
             // remove stems
-            if (tab->slashStyle() || durationType().type() < Duration::V_QUARTER) {
+            if (tab->slashStyle() || durationType().type() < TDuration::V_QUARTER) {
                   delete _stem;
                   delete _hook;
                   _stem = 0;

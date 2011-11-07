@@ -592,7 +592,7 @@ void GuitarPro1::read(QFile* fp)
                               cr->setTuplet(tuplet);
                               }
 
-                        Duration d(l);
+                        TDuration d(l);
                         d.setDots(dotted ? 1 : 0);
 
                         if (dotted)
@@ -888,7 +888,7 @@ qDebug("BeginRepeat=============================================\n");
                               cr->setTuplet(tuplet);
                               }
 
-                        Duration d(l);
+                        TDuration d(l);
                         d.setDots(dotted ? 1 : 0);
 
                         if (dotted)
@@ -1387,7 +1387,7 @@ qDebug("BeginRepeat=============================================\n");
                               cr->setTuplet(tuplet);
                               }
 
-                        Duration d(l);
+                        TDuration d(l);
                         d.setDots(dotted ? 1 : 0);
 
                         if (dotted)
@@ -1889,14 +1889,14 @@ void GuitarPro4::read(QFile* fp)
                               cr->setTuplet(tuplet);
                               }
 
-                        Duration d(l);
+                        TDuration d(l);
                         d.setDots(dotted ? 1 : 0);
 
                         if (dotted)
                               l = l + (l/2);
                         cr->setDuration(l);
                         if (cr->type() == REST && (pause == 0 || l == measure->len()))
-                              cr->setDurationType(Duration::V_MEASURE);
+                              cr->setDurationType(TDuration::V_MEASURE);
                         else
                               cr->setDurationType(d);
 
@@ -2292,14 +2292,14 @@ int GuitarPro5::readBeat(int tick, int voice, Measure* measure, int staffIdx, Tu
                   cr->setTuplet(tuplet);
                   }
 
-            Duration d(l);
+            TDuration d(l);
             d.setDots(dotted ? 1 : 0);
 
             if (dotted)
                   l = l + (l/2);
             cr->setDuration(l);
             if (cr->type() == REST && pause == 0)
-                  cr->setDurationType(Duration::V_MEASURE);
+                  cr->setDurationType(TDuration::V_MEASURE);
             else
                   cr->setDurationType(d);
             segment->add(cr);

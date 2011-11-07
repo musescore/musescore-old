@@ -71,7 +71,7 @@ class Beam : public Element {
       Chord* c2;
       bool isGrace;
       bool cross;
-      Duration maxDuration;
+      TDuration maxDuration;
       qreal slope;
       int cut;
 

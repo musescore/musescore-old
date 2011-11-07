@@ -567,7 +567,7 @@ static Element* findLinkedVoiceElement(Element* e, Staff* nstaff)
 //   undoChangeChordRestLen
 //---------------------------------------------------------
 
-void Score::undoChangeChordRestLen(ChordRest* cr, const Duration& d)
+void Score::undoChangeChordRestLen(ChordRest* cr, const TDuration& d)
       {
       Staff* ostaff = cr->staff();
       LinkedStaves* linkedStaves = ostaff->linkedStaves();
@@ -2086,14 +2086,14 @@ void ChangeInstrumentLong::flip()
 //   ChangeChordRestLen
 //---------------------------------------------------------
 
-ChangeChordRestLen::ChangeChordRestLen(ChordRest* c, const Duration& _d)
+ChangeChordRestLen::ChangeChordRestLen(ChordRest* c, const TDuration& _d)
    : cr(c), d(_d)
       {
       }
 
 void ChangeChordRestLen::flip()
       {
-      Duration od = cr->durationType();
+      TDuration od = cr->durationType();
       cr->setDurationType(d);
       cr->setDuration(d.fraction());
       d   = od;
@@ -3099,7 +3099,7 @@ void MoveStaff::flip()
 
 void ChangeDurationType::flip()
       {
-      Duration type = cr->durationType();
+      TDuration type = cr->durationType();
       cr->setDurationType(t);
       t = type;
       }

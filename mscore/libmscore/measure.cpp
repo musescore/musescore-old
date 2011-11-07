@@ -1187,7 +1187,7 @@ void Measure::cmdAddStaves(int sStaff, int eStaff, bool createRest)
             _score->undo()->push(new InsertMStaff(this, ms, i));
 
             if (createRest) {
-                  Rest* rest = new Rest(score(), Duration(Duration::V_MEASURE));
+                  Rest* rest = new Rest(score(), TDuration(TDuration::V_MEASURE));
                   rest->setTrack(i * VOICES);
                   rest->setDuration(len());
                   Segment* s = undoGetSegment(SegChordRest, tick());
@@ -1628,10 +1628,10 @@ void Measure::adjustToLen(int ol, int nl)
                               ++chords;
                         }
                   }
-            if (rests == 1 && chords == 0 && rest->durationType().type() == Duration::V_MEASURE)
+            if (rests == 1 && chords == 0 && rest->durationType().type() == TDuration::V_MEASURE)
                   continue;
             if ((_timesig == _len) && (rests == 1) && (chords == 0)) {
-                  rest->setDurationType(Duration::V_MEASURE);    // whole measure rest
+                  rest->setDurationType(TDuration::V_MEASURE);    // whole measure rest
                   }
             else {
                   int strack = staffIdx * VOICES;
@@ -1646,7 +1646,7 @@ void Measure::adjustToLen(int ol, int nl)
                                     Element* e = segment->element(trk);
                                     if (e && e->isChordRest()) {
                                           ChordRest* cr = static_cast<ChordRest*>(e);
-                                          if (cr->durationType() == Duration::V_MEASURE)
+                                          if (cr->durationType() == TDuration::V_MEASURE)
                                                 n = nl;
                                           else
                                                 n += cr->actualTicks();
@@ -1665,7 +1665,7 @@ void Measure::adjustToLen(int ol, int nl)
                               // add rest to measure
                               int rtick = tick() + nl - n;
                               Segment* seg = undoGetSegment(SegChordRest, rtick);
-                              Duration d;
+                              TDuration d;
                               d.setVal(n);
                               rest = new Rest(score(), d);
                               rest->setDuration(d.fraction());
@@ -1948,7 +1948,7 @@ void Measure::read(QDomElement e, int staffIdx)
                   }
             else if (tag == "Rest") {
                   Rest* rest = new Rest(score());
-                  rest->setDurationType(Duration::V_MEASURE);
+                  rest->setDurationType(TDuration::V_MEASURE);
                   Fraction timeStretch(staff->timeStretch(score()->curTick));
                   rest->setDuration(timesig()/timeStretch);
                   rest->setTrack(score()->curTrack);
@@ -2629,7 +2629,7 @@ bool Measure::isFullMeasureRest()
                   if (e->type() != REST)
                         return false;
                   Rest* rest = static_cast<Rest*>(e);
-                  if (rest->durationType().type() != Duration::V_MEASURE)
+                  if (rest->durationType().type() != TDuration::V_MEASURE)
                         return false;
                   }
             }
@@ -3083,7 +3083,7 @@ void Measure::layoutX(qreal stretch)
                                     e->rxpos() = 0.0;
                                     }
                               }
-                        else if (rest->durationType() == Duration::V_MEASURE) {
+                        else if (rest->durationType() == TDuration::V_MEASURE) {
                               qreal x1 = seg == 0 ? 0.0 : xpos[seg] - clefKeyRightMargin;
                               qreal w;
                               if ((segs > 2) && types[segs-2] == SegClef)

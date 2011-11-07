@@ -417,7 +417,7 @@ bool MuseScore::importBB(Score* score, const QString& name)
                   if (mb->type() != MEASURE)
                         continue;
                   Measure* measure = (Measure*)mb;
-                  Rest* rest = new Rest(score, Duration(Duration::V_MEASURE));
+                  Rest* rest = new Rest(score, TDuration(TDuration::V_MEASURE));
                   rest->setDuration(measure->len());
                   rest->setTrack(0);
                   Segment* s = measure->getSegment(rest, measure->tick());
@@ -435,8 +435,8 @@ bool MuseScore::importBB(Score* score, const QString& name)
                   continue;
             Measure* measure = (Measure*)mb;
             Segment* s = measure->findSegment(SegChordRest, measure->tick());
-            if (s == 0) {  
-                  Rest* rest = new Rest(score, Duration(Duration::V_MEASURE));
+            if (s == 0) {
+                  Rest* rest = new Rest(score, TDuration(TDuration::V_MEASURE));
                   rest->setDuration(measure->len());
                   rest->setTrack(0);
                   Segment* s = measure->getSegment(rest, measure->tick());
@@ -529,7 +529,7 @@ bool MuseScore::importBB(Score* score, const QString& name)
             keysig->setKeySigEvent(kse);
             Measure* mks = score->tick2measure(tick);
             Segment* sks = mks->getSegment(keysig, tick);
-            sks->add(keysig);            
+            sks->add(keysig);
             }
       return true;
       }
@@ -567,7 +567,7 @@ int BBFile::processPendingNotes(Score* score, QList<MNote*>* notes, int len, int
 
       Chord* chord = new Chord(score);
       chord->setTrack(track);
-      Duration d;
+      TDuration d;
       d.setVal(len);
       chord->setDurationType(d);
       Segment* s = measure->getSegment(chord, tick);
@@ -701,7 +701,7 @@ void BBFile::convertTrack(Score* score, BBTrack* track, int staffIdx)
                                           break;
                                           }
                                     }
-                              Duration d;
+                              TDuration d;
                               d.setVal(len);
                               Rest* rest = new Rest(score, d);
                               rest->setDuration(d.fraction());

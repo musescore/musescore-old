@@ -1062,10 +1062,10 @@ void MidiFile::convertTrack(Score* score, MidiTrack* midiTrack)
                         // split notes on measure boundary
                         if ((tick + len) > measure->tick() + measure->ticks())
                               len = measure->tick() + measure->ticks() - tick;
-                        QList<Duration> dl = toDurationList(Fraction::fromTicks(len), false);
+                        QList<TDuration> dl = toDurationList(Fraction::fromTicks(len), false);
                         if (dl.isEmpty())
                               break;
-                        Duration d = dl[0];
+                        TDuration d = dl[0];
                         len = d.ticks();
 
                         Chord* chord = new Chord(score);
@@ -1142,7 +1142,7 @@ qDebug("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
                                     len = measure->tick() + measure->ticks() - ctick;
                               if (len >= measure->ticks()) {
                                     len = measure->ticks();
-                                    Duration d(Duration::V_MEASURE);
+                                    TDuration d(TDuration::V_MEASURE);
                                     Rest* rest = new Rest(score, d);
                                     rest->setDuration(d.fraction());
                                     rest->setTrack(staffIdx * VOICES);
@@ -1152,13 +1152,13 @@ qDebug("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
                                     ctick   += len;
                                     }
                               else {
-                                    QList<Duration> dl = toDurationList(Fraction::fromTicks(len), false);
+                                    QList<TDuration> dl = toDurationList(Fraction::fromTicks(len), false);
                                     if (dl.size() == 0) {
                                           qDebug("cannot create duration list for len %d\n", len);
                                           restLen = 0;      // fake
                                           break;
                                           }
-                                    foreach (Duration d, dl) {
+                                    foreach (TDuration d, dl) {
                                           Rest* rest = new Rest(score, d);
                                           rest->setDuration(d.fraction());
                                           rest->setTrack(staffIdx * VOICES);
@@ -1226,8 +1226,8 @@ qDebug("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
                               abort();
                               }
                         }
-                  QList<Duration> dl = toDurationList(Fraction::fromTicks(len), false);
-                  Duration d = dl.front();
+                  QList<TDuration> dl = toDurationList(Fraction::fromTicks(len), false);
+                  TDuration d = dl.front();
                   len = d.ticks();
                   chord->setDurationType(d);
                   ctick += len;
@@ -1276,8 +1276,8 @@ qDebug("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
             //
             int restLen = measure ? (measure->tick() + measure->ticks() - ctick) : 0;
             while (restLen > 0 && voice == 0) {
-                  QList<Duration> dl = toDurationList(Fraction::fromTicks(restLen), false);
-                  Duration d = dl.back();
+                  QList<TDuration> dl = toDurationList(Fraction::fromTicks(restLen), false);
+                  TDuration d = dl.back();
                   Rest* rest = new Rest(score);
                   rest->setDuration(d.fraction());
       		Measure* measure = score->tick2measure(ctick);

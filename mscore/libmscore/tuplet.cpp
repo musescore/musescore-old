@@ -488,7 +488,7 @@ void Tuplet::read(QDomElement e, QList<Tuplet*>* tuplets, const QList<Slur*>* sl
             else if (tag == "baseLen")            // obsolete
                   bl = i;
             else if (tag == "baseNote")
-                  _baseLen = Duration(e.text());
+                  _baseLen = TDuration(e.text());
             else if (tag == "normalNotes")
                   _ratio.setDenominator(i);
             else if (tag == "actualNotes")
@@ -522,7 +522,7 @@ void Tuplet::read(QDomElement e, QList<Tuplet*>* tuplets, const QList<Slur*>* sl
       Fraction f(_ratio.denominator(), _baseLen.fraction().denominator());
       setDuration(f);
       if (bl != -1) {         // obsolete
-            Duration d;
+            TDuration d;
             d.setVal(bl);
             _baseLen = d;
 // qDebug("Tuplet base len %d/%d", d.fraction().numerator(), d.fraction().denominator());

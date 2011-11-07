@@ -244,18 +244,18 @@ class TabDurationSymbol : public Element {
       StaffTypeTablature* _tab;
       QString             _text;
 
-      void buildText(Duration::DurationType type, int dots);
+      void buildText(TDuration::DurationType type, int dots);
 
    public:
       TabDurationSymbol(Score* s);
-      TabDurationSymbol(Score* s, StaffTypeTablature * tab, Duration::DurationType type, int dots);
+      TabDurationSymbol(Score* s, StaffTypeTablature * tab, TDuration::DurationType type, int dots);
       TabDurationSymbol(const TabDurationSymbol&);
       virtual TabDurationSymbol* clone() const  { return new TabDurationSymbol(*this); }
       virtual void draw(Painter*) const;
       virtual bool isEditable() const           { return false; }
       virtual ElementType type() const          { return TAB_DURATION_SYMBOL; }
 
-      void setDuration(Duration::DurationType type, int dots) { buildText(type, dots); }
+      void setDuration(TDuration::DurationType type, int dots) { buildText(type, dots); }
       void setTablature(StaffTypeTablature * tab)             { _tab = tab; }
       };
 

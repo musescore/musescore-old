@@ -459,7 +459,7 @@ void Score::layoutStage2()
                               }
                         continue;
                         }
-                  if ((cr->durationType().type() <= Duration::V_QUARTER) || (bm == BEAM_NO)) {
+                  if ((cr->durationType().type() <= TDuration::V_QUARTER) || (bm == BEAM_NO)) {
                         if (beam) {
                               beam->layout1();
                               beam = 0;

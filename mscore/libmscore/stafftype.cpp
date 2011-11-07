@@ -537,7 +537,7 @@ TabDurationSymbol::TabDurationSymbol(Score* s)
       _text = QString();
       }
 
-TabDurationSymbol::TabDurationSymbol(Score* s, StaffTypeTablature * tab, Duration::DurationType type, int dots)
+TabDurationSymbol::TabDurationSymbol(Score* s, StaffTypeTablature * tab, TDuration::DurationType type, int dots)
    : Element(s)
       {
       setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
@@ -586,7 +586,7 @@ void TabDurationSymbol::draw(Painter* painter) const
 //   buildText
 //---------------------------------------------------------
 
-void TabDurationSymbol::buildText(Duration::DurationType type, int dots)
+void TabDurationSymbol::buildText(TDuration::DurationType type, int dots)
       {
       // text string is a main symbol plus as many dots as required by chord duration
       _text = QString(g_cDurationChars[type]);

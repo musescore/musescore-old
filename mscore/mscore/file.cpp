@@ -466,9 +466,9 @@ void MuseScore::newFile()
                   if (staff->primaryStaff()) {
                         if (measure->timesig() != measure->len()) {
                               int tick = measure->tick();
-                              QList<Duration> dList = toDurationList(measure->len(), false);
+                              QList<TDuration> dList = toDurationList(measure->len(), false);
                               if (!dList.isEmpty()) {
-                                    foreach(Duration d, dList) {
+                                    foreach(TDuration d, dList) {
 		                              Rest* rest = new Rest(score, d);
                                           rest->setDuration(d.fraction());
             	                        rest->setTrack(staffIdx * VOICES);
@@ -479,7 +479,7 @@ void MuseScore::newFile()
                                     }
                               }
                         else {
-		                  Rest* rest = new Rest(score, Duration(Duration::V_MEASURE));
+		                  Rest* rest = new Rest(score, TDuration(TDuration::V_MEASURE));
                               rest->setDuration(measure->len());
             	            rest->setTrack(staffIdx * VOICES);
 	            	      Segment* s = measure->getSegment(rest, tick);
