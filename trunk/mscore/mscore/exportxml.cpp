@@ -1061,7 +1061,7 @@ void ExportMusicXml::unpitch2xml(Note* note, char& c, int& octave)
 
 static QString tick2xml(const int ticks, int* dots)
       {
-      Duration t;
+      TDuration t;
       t.setVal(ticks);
       *dots = t.dots();
       return t.name();
@@ -2070,9 +2070,9 @@ void ExportMusicXml::rest(Rest* rest, int staff)
             xml.etag();
             }
 
-      Duration d = rest->durationType();
+      TDuration d = rest->durationType();
       int tickLen = rest->actualTicks();
-      if (d.type() == Duration::V_MEASURE) {
+      if (d.type() == TDuration::V_MEASURE) {
             // to avoid forward since rest->ticklen=0 in this case.
             tickLen = rest->measure()->ticks();
             }
@@ -2089,7 +2089,7 @@ void ExportMusicXml::rest(Rest* rest, int staff)
       xml.tag("voice", voice);
 
       // do not output a "type" element for whole measure rest
-      if (d.type() != Duration::V_MEASURE) {
+      if (d.type() != TDuration::V_MEASURE) {
             QString s = d.name();
             int dots  = rest->dots();
             xml.tag("type", s);

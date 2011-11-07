@@ -461,7 +461,7 @@ class Score {
       void spellNotelist(QList<Note*>& notes);
       void undoChangeTpc(Note* note, int tpc);
       void undoChangeBeamMode(ChordRest* cr, BeamMode mode);
-      void undoChangeChordRestLen(ChordRest* cr, const Duration&);
+      void undoChangeChordRestLen(ChordRest* cr, const TDuration&);
       void undoChangeEndBarLineType(Measure*, BarLineType);
       void undoChangeBarLineSpan(Staff*, int);
       void undoChangeUserOffset(Element* e, const QPointF& offset);
@@ -488,16 +488,16 @@ class Score {
       int clefOffset(int tick, Staff*) const;
 
       Segment* setNoteRest(Segment*, int track, NoteVal nval, Fraction, Direction stemDirection = AUTO);
-      void changeCRlen(ChordRest* cr, const Duration&);
+      void changeCRlen(ChordRest* cr, const TDuration&);
 
       Fraction makeGap(Segment*, int track, const Fraction&, Tuplet*);
       bool makeGap1(int tick, int staffIdx, Fraction len);
 
-      Rest* addRest(int tick, int track, Duration, Tuplet*);
-      Rest* addRest(Segment* seg, int track, Duration d, Tuplet*);
-      Chord* addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tuplet);
+      Rest* addRest(int tick, int track, TDuration, Tuplet*);
+      Rest* addRest(Segment* seg, int track, TDuration d, Tuplet*);
+      Chord* addChord(int tick, TDuration d, Chord* oc, bool genTie, Tuplet* tuplet);
 
-      ChordRest* addClone(ChordRest* cr, int tick, const Duration& d);
+      ChordRest* addClone(ChordRest* cr, int tick, const TDuration& d);
       Rest* setRest(int tick,  int track, Fraction, bool useDots, Tuplet* tuplet);
 
       void searchSelectedElements();
@@ -763,7 +763,7 @@ class Score {
       void cmdPaste(MuseScoreView*);
       Element* selectMove(const QString& cmd);
       Element* move(const QString& cmd);
-      void cmdEnterRest(const Duration& d);
+      void cmdEnterRest(const TDuration& d);
       void cmdAddInterval(int, const QList<Note*>&);
       void cmdCreateTuplet(ChordRest*, Tuplet*);
       Omr* omr() const                         { return _omr;     }

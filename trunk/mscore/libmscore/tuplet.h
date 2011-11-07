@@ -47,7 +47,7 @@ class Tuplet : public DurationElement {
       bool _hasBracket;
 
       Fraction _ratio;
-      Duration _baseLen;      // 1/8 for a triplet of 1/8
+      TDuration _baseLen;      // 1/8 for a triplet of 1/8
 
       Direction _direction;
       bool _isUp;
@@ -103,8 +103,8 @@ class Tuplet : public DurationElement {
       int id() const                       { return _id;          }
       void setId(int i) const              { _id = i;             }
 
-      Duration baseLen() const             { return _baseLen;     }
-      void setBaseLen(const Duration& d)   { _baseLen = d;        }
+      TDuration baseLen() const             { return _baseLen;     }
+      void setBaseLen(const TDuration& d)   { _baseLen = d;        }
 
       virtual void dump() const;
 

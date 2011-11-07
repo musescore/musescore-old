@@ -333,7 +333,7 @@ void Score::expandVoice(Segment* s, int track)
             }
       ticks  = ns ? (ns->tick() - s->tick()) : (m->ticks() - s->rtick());
       if (ticks == m->ticks())
-            addRest(s, track, Duration(Duration::V_MEASURE), 0);
+            addRest(s, track, TDuration(TDuration::V_MEASURE), 0);
       else
             setRest(s->tick(), track, Fraction::fromTicks(ticks), false, 0);
       }
@@ -476,7 +476,7 @@ void Score::setGraceNote(Chord* ch, int pitch, NoteType type, int len)
       chord->setTrack(ch->track());
       chord->add(note);
 
-      Duration d;
+      TDuration d;
       d.setVal(len);
       chord->setDurationType(d);
       chord->setDuration(d.fraction());
@@ -528,12 +528,12 @@ Segment* Score::setNoteRest(Segment* segment, int track, NoteVal nval, Fraction 
                      sd.denominator());
                   break;
                   }
-            QList<Duration> dl = toDurationList(dd, true);
+            QList<TDuration> dl = toDurationList(dd, true);
 
             measure = segment->measure();
             int n = dl.size();
             for (int i = 0; i < n; ++i) {
-                  Duration d = dl[i];
+                  TDuration d = dl[i];
 
                   ChordRest* ncr;
                   Note* note = 0;
@@ -587,7 +587,7 @@ Segment* Score::setNoteRest(Segment* segment, int track, NoteVal nval, Fraction 
 
             if (cr == 0) {
                   if (track % VOICES)
-                        cr = addRest(segment, track, Duration(Duration::V_MEASURE), 0);
+                        cr = addRest(segment, track, TDuration(TDuration::V_MEASURE), 0);
                   else {
                         qDebug("no rest in voice 0");
                         break;
@@ -726,7 +726,7 @@ qDebug("  makeGap: remove %d/%d at %d", td.numerator(), td.denominator(), cr->ti
 
 qDebug("  makeGap: %d/%d removed %d/%d too much", sd.numerator(), sd.denominator(), rd.numerator(), rd.denominator());
 
-                  QList<Duration> dList = toDurationList(rd, false);
+                  QList<TDuration> dList = toDurationList(rd, false);
                   if (dList.isEmpty())
                         return akkumulated;
 qDebug("   dList: %d\n", dList.size());
@@ -738,7 +738,7 @@ qDebug("   dList: %d\n", dList.size());
 qDebug("   gap at tick %d+%d", cr->tick(), f.ticks());
 
                   if ((tuplet == 0) && (((measure->tick() - tick) % dList[0].ticks()) == 0)) {
-                        foreach(Duration d, dList) {
+                        foreach(TDuration d, dList) {
                               qDebug("    addClone at %d, %d", tick, d.ticks());
                               tick += addClone(cr, tick, d)->actualTicks();
                               }
@@ -813,7 +813,7 @@ bool Score::makeGap1(int tick, int staffIdx, Fraction len)
                   ChordRest* cr1 = static_cast<ChordRest*>(seg1->element(track));
                   Fraction dstF = Fraction::fromTicks(tick - cr1->tick());
                   len -= cr1->duration() - dstF;
-                  undoChangeChordRestLen(cr1, Duration(dstF));
+                  undoChangeChordRestLen(cr1, TDuration(dstF));
                   for (;;) {
                         seg = seg->next1(SegChordRest | SegGrace);
                         if (seg == 0) {
@@ -857,7 +857,7 @@ bool Score::makeGap1(int tick, int staffIdx, Fraction len)
             int track  = cr->track();
             cr = static_cast<ChordRest*>(s->element(track));
             if (cr == 0) {
-                  addRest(s, track, Duration(Duration::V_MEASURE), 0);
+                  addRest(s, track, TDuration(TDuration::V_MEASURE), 0);
                   cr = static_cast<ChordRest*>(s->element(track));
                   }
             }
@@ -906,12 +906,12 @@ QList<Fraction> Score::splitGapToMeasureBoundaries(ChordRest* cr, Fraction gap)
 //   changeCRlen
 //---------------------------------------------------------
 
-void Score::changeCRlen(ChordRest* cr, const Duration& d)
+void Score::changeCRlen(ChordRest* cr, const TDuration& d)
       {
       deselectAll();
       Fraction srcF(cr->duration());
       Fraction dstF;
-      if (d.type() == Duration::V_MEASURE)
+      if (d.type() == TDuration::V_MEASURE)
             dstF = cr->measure()->stretchedLen(cr->staff());
       else
             dstF = d.fraction();
@@ -937,7 +937,7 @@ qDebug("changeCRlen: %d/%d -> %d/%d", srcF.numerator(), srcF.denominator(),
                               undoRemoveElement(n->tieFor());
                         }
                   }
-            undoChangeChordRestLen(cr, Duration(dstF));
+            undoChangeChordRestLen(cr, TDuration(dstF));
             setRest(cr->tick() + cr->actualTicks(), track, srcF - dstF, false, tuplet);
             select(cr, SELECT_SINGLE, 0);
             return;
@@ -977,13 +977,13 @@ qDebug("  ChangeCRLen:: %d += %d(actual=%d)", tick, f2.ticks(), f2.ticks() * tim
                   tick += f2.ticks() * timeStretch.numerator() / timeStretch.denominator();
                   }
             else {
-                  QList<Duration> dList = toDurationList(f2, true);
+                  QList<TDuration> dList = toDurationList(f2, true);
                   Measure* measure = tick2measure(tick);
                   int etick = measure->tick();
 //                  if (measure->tick() != tick)
 //                        etick += measure->ticks();
                   if (((tick - etick) % dList[0].ticks()) == 0) {
-                        foreach(Duration d, dList) {
+                        foreach(TDuration d, dList) {
                               bool genTie;
                               Chord* cc;
                               if (oc) {
@@ -1203,7 +1203,7 @@ MeasureBase* Score::appendMeasure(ElementType type)
             measure->setTimesig(ts);
             measure->setLen(ts);
             for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-                  Rest* rest = new Rest(this, Duration(Duration::V_MEASURE));
+                  Rest* rest = new Rest(this, TDuration(TDuration::V_MEASURE));
                   rest->setDuration(ts);
                   rest->setTrack(staffIdx * VOICES);
                   Segment* s = measure->getSegment(SegChordRest, tick);
@@ -2055,7 +2055,7 @@ void Score::pasteChordRest(ChordRest* cr, int tick)
                   int rest = c->actualTicks();
                   int len  = measureEnd - tick;
                   rest    -= len;
-                  Duration d;
+                  TDuration d;
                   d.setVal(len);
                   c->setDurationType(d);
                   c->setDuration(d.fraction());
@@ -2069,7 +2069,7 @@ void Score::pasteChordRest(ChordRest* cr, int tick)
                               }
                         Chord* c2 = static_cast<Chord*>(c->clone());
                         len = measure->ticks() > rest ? rest : measure->ticks();
-                        Duration d;
+                        TDuration d;
                         d.setVal(len);
                         c2->setDurationType(d);
                         rest -= len;
@@ -2105,7 +2105,7 @@ void Score::pasteChordRest(ChordRest* cr, int tick)
                         Fraction mlen = Fraction::fromTicks(measure->tick() + measure->ticks() - tick);
                         Fraction len  = rest > mlen ? mlen : rest;
                         r2->setDuration(len);
-                        r2->setDurationType(Duration(len));
+                        r2->setDurationType(TDuration(len));
                         undoAddCR(r2, measure, tick);
                         rest -= len;
                         tick += r2->actualTicks();
@@ -2368,8 +2368,8 @@ void Score::cmdHalfDuration()
             return;
 
       ChordRest* cr = static_cast<ChordRest*>(el);
-      Duration d = _is.duration().shift(1);
-      if (!d.isValid() || (d.type() > Duration::V_64TH))
+      TDuration d = _is.duration().shift(1);
+      if (!d.isValid() || (d.type() > TDuration::V_64TH))
             return;
       if (cr->type() == CHORD && (static_cast<Chord*>(cr)->noteType() != NOTE_NORMAL)) {
             //
@@ -2398,8 +2398,8 @@ void Score::cmdDoubleDuration()
             return;
 
       ChordRest* cr = static_cast<ChordRest*>(el);
-      Duration d = _is.duration().shift(-1);
-      if (!d.isValid() || (d.type() < Duration::V_WHOLE))
+      TDuration d = _is.duration().shift(-1);
+      if (!d.isValid() || (d.type() < TDuration::V_WHOLE))
             return;
       if (cr->type() == CHORD && (static_cast<Chord*>(cr)->noteType() != NOTE_NORMAL)) {
             //

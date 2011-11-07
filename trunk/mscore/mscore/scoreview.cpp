@@ -1928,7 +1928,7 @@ void ScoreView::paint(const QRect& r, QPainter& p)
                   // HACK for whole measure rest:
                   if (ns == 0 || ns == es) {    // last segment?
                         Element* e = s->element(staffStart * VOICES);
-                        if (e && e->type() == REST && static_cast<Rest*>(e)->durationType().type() == Duration::V_MEASURE)
+                        if (e && e->type() == REST && static_cast<Rest*>(e)->durationType().type() == TDuration::V_MEASURE)
                               x2 = s->measure()->abbox().right() - _spatium;
                         }
 
@@ -3222,13 +3222,13 @@ void ScoreView::cmd(const QAction* a)
       else if (cmd == "rest")
             cmdEnterRest();
       else if (cmd == "rest-1")
-            cmdEnterRest(Duration(Duration::V_WHOLE));
+            cmdEnterRest(TDuration(TDuration::V_WHOLE));
       else if (cmd == "rest-2")
-            cmdEnterRest(Duration(Duration::V_HALF));
+            cmdEnterRest(TDuration(TDuration::V_HALF));
       else if (cmd == "rest-4")
-            cmdEnterRest(Duration(Duration::V_QUARTER));
+            cmdEnterRest(TDuration(TDuration::V_QUARTER));
       else if (cmd == "rest-8")
-            cmdEnterRest(Duration(Duration::V_EIGHT));
+            cmdEnterRest(TDuration(TDuration::V_EIGHT));
       else if (cmd.startsWith("interval")) {
             int n = cmd.mid(8).toInt();
             QList<Note*> nl = _score->selection().noteList();
@@ -3467,9 +3467,9 @@ void ScoreView::startNoteEntry()
                   note = c->upNote();
             el = note;
             }
-      Duration d(_score->inputState().duration());
-      if (!d.isValid() || d.isZero() || d.type() == Duration::V_MEASURE)
-            _score->inputState().setDuration(Duration(Duration::V_QUARTER));
+      TDuration d(_score->inputState().duration());
+      if (!d.isValid() || d.isZero() || d.type() == TDuration::V_MEASURE)
+            _score->inputState().setDuration(TDuration(TDuration::V_QUARTER));
 
       _score->select(el, SELECT_SINGLE, 0);
       _score->setInputState(el);
@@ -4204,7 +4204,7 @@ void ScoreView::cmdEnterRest()
 //   cmdEnterRest
 //---------------------------------------------------------
 
-void ScoreView::cmdEnterRest(const Duration& d)
+void ScoreView::cmdEnterRest(const TDuration& d)
       {
 qDebug("cmdEnterRest %s", qPrintable(d.name()));
       if (!noteEntryMode())
@@ -4553,7 +4553,7 @@ void ScoreView::setCursorVisible(bool v)
 
 void ScoreView::cmdTuplet(int n, ChordRest* cr)
       {
-      if (cr->durationType() < Duration(Duration::V_128TH)) {
+      if (cr->durationType() < TDuration(TDuration::V_128TH)) {
             mscore->noteTooShortForTupletDialog();
             return;
             }
@@ -4582,7 +4582,7 @@ void ScoreView::cmdTuplet(int n, ChordRest* cr)
       //
 
       tuplet->setDuration(f);
-      Duration baseLen(fr);
+      TDuration baseLen(fr);
       tuplet->setBaseLen(baseLen);
 
       tuplet->setTrack(cr->track());
@@ -5536,7 +5536,7 @@ MeasureBase* ScoreView::insertMeasure(ElementType type, MeasureBase* measure)
             m->setTimesig(f);
             m->setLen(f);
 	      for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx) {
-    	            Rest* rest = new Rest(_score, Duration(Duration::V_MEASURE));
+    	            Rest* rest = new Rest(_score, TDuration(TDuration::V_MEASURE));
                   rest->setDuration(m->len());
               	rest->setTrack(staffIdx * VOICES);
                     Segment* s = m->getSegment(SegChordRest, tick);

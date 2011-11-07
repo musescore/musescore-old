@@ -757,11 +757,11 @@ class ChangeInstrumentLong : public UndoCommand {
 
 class ChangeChordRestLen : public UndoCommand {
       ChordRest* cr;
-      Duration d;
+      TDuration d;
       void flip();
 
    public:
-      ChangeChordRestLen(ChordRest*, const Duration& d);
+      ChangeChordRestLen(ChordRest*, const TDuration& d);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeChordRestLen");
@@ -1490,12 +1490,12 @@ class MoveStaff : public UndoCommand {
 
 class ChangeDurationType : public UndoCommand {
       ChordRest* cr;
-      Duration t;
+      TDuration t;
 
       void flip();
 
    public:
-      ChangeDurationType(ChordRest* _cr, Duration _t)
+      ChangeDurationType(ChordRest* _cr, TDuration _t)
          : cr(_cr), t(_t) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }

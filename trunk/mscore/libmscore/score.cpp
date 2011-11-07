@@ -2754,34 +2754,34 @@ void Score::padToggle(int n)
       {
       switch (n) {
             case PAD_NOTE00:
-                  _is.setDuration(Duration::V_LONG);
+                  _is.setDuration(TDuration::V_LONG);
                   break;
             case PAD_NOTE0:
-                  _is.setDuration(Duration::V_BREVE);
+                  _is.setDuration(TDuration::V_BREVE);
                   break;
             case PAD_NOTE1:
-                  _is.setDuration(Duration::V_WHOLE);
+                  _is.setDuration(TDuration::V_WHOLE);
                   break;
             case PAD_NOTE2:
-                  _is.setDuration(Duration::V_HALF);
+                  _is.setDuration(TDuration::V_HALF);
                   break;
             case PAD_NOTE4:
-                  _is.setDuration(Duration::V_QUARTER);
+                  _is.setDuration(TDuration::V_QUARTER);
                   break;
             case PAD_NOTE8:
-                  _is.setDuration(Duration::V_EIGHT);
+                  _is.setDuration(TDuration::V_EIGHT);
                   break;
             case PAD_NOTE16:
-                  _is.setDuration(Duration::V_16TH);
+                  _is.setDuration(TDuration::V_16TH);
                   break;
             case PAD_NOTE32:
-                  _is.setDuration(Duration::V_32ND);
+                  _is.setDuration(TDuration::V_32ND);
                   break;
             case PAD_NOTE64:
-                  _is.setDuration(Duration::V_64TH);
+                  _is.setDuration(TDuration::V_64TH);
                   break;
             case PAD_NOTE128:
-                  _is.setDuration(Duration::V_128TH);
+                  _is.setDuration(TDuration::V_128TH);
                   break;
             case PAD_REST:
                   _is.rest = !_is.rest;
@@ -2817,8 +2817,8 @@ void Score::padToggle(int n)
       Element* e = selection().element();
       if (e && e->type() == REST) {
             Rest* r = static_cast<Rest*>(e);
-            Duration d = r->durationType();
-            if (d.type() == Duration::V_MEASURE) {
+            TDuration d = r->durationType();
+            if (d.type() == TDuration::V_MEASURE) {
                   _is.setDots(0);
                   // return;
                   }
@@ -2868,8 +2868,8 @@ void Score::setInputState(Element* e)
             }
       else if (e->type() == REST) {
             Rest* rest   = static_cast<Rest*>(e);
-            if (rest->durationType().type() == Duration::V_MEASURE)
-                  _is.setDuration(Duration::V_QUARTER);
+            if (rest->durationType().type() == TDuration::V_MEASURE)
+                  _is.setDuration(TDuration::V_QUARTER);
             else
                   _is.setDuration(rest->durationType());
             _is.rest     = true;
@@ -2880,7 +2880,7 @@ void Score::setInputState(Element* e)
       else {
 /*            _is.rest     = false;
             _is.setDots(0);
-            _is.setDuration(Duration::V_INVALID);
+            _is.setDuration(TDuration::V_INVALID);
             _is.noteType = NOTE_INVALID;
             _is.beamMode = BEAM_INVALID;
             _is.noteType = NOTE_NORMAL;

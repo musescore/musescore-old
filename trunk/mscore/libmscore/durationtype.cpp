@@ -42,20 +42,20 @@ static int getDots(int base, int rest, int* dots)
 //    return the remaining ticks if any
 //---------------------------------------------------------
 
-static int headType(int tickLen, Duration* type)
+static int headType(int tickLen, TDuration* type)
       {
       if (tickLen == 0) {
-            *type = Duration(Duration::V_MEASURE);
+            *type = TDuration(TDuration::V_MEASURE);
             return 0;
             }
-      Duration dt;
-      for (int i = 0; i < Duration::V_ZERO; ++i) {
-            dt.setType(Duration::DurationType(i));
+      TDuration dt;
+      for (int i = 0; i < TDuration::V_ZERO; ++i) {
+            dt.setType(TDuration::DurationType(i));
             int ticks = dt.ticks();
             if (tickLen / ticks) {
                   int remain = tickLen % ticks;
                   if ((ticks - remain) < (ticks/4)) {
-                        *type = Duration(Duration::DurationType(i-1));
+                        *type = TDuration(TDuration::DurationType(i-1));
                         return 0;
                         }
                   *type = dt;
@@ -66,7 +66,7 @@ static int headType(int tickLen, Duration* type)
                   }
             }
 qDebug("1: no duration type for ticks %d\n", tickLen);
-      *type = Duration(Duration::V_QUARTER);
+      *type = TDuration(TDuration::V_QUARTER);
       return 0;
       }
 #endif
@@ -75,14 +75,14 @@ qDebug("1: no duration type for ticks %d\n", tickLen);
 //   setVal
 //---------------------------------------------------------
 
-void Duration::setVal(int ticks)
+void TDuration::setVal(int ticks)
       {
       if (ticks == 0)
             _val = V_MEASURE;
       else {
-            Duration dt;
-            for (int i = 0; i < Duration::V_ZERO; ++i) {
-                  dt.setType(Duration::DurationType(i));
+            TDuration dt;
+            for (int i = 0; i < TDuration::V_ZERO; ++i) {
+                  dt.setType(TDuration::DurationType(i));
                   int t = dt.ticks();
                   if (ticks / t) {
                         int remain = ticks % t;
@@ -104,7 +104,7 @@ void Duration::setVal(int ticks)
 //   ticks
 //---------------------------------------------------------
 
-int Duration::ticks() const
+int TDuration::ticks() const
       {
       int t;
       switch(_val) {
@@ -136,7 +136,7 @@ int Duration::ticks() const
 //   name
 //---------------------------------------------------------
 
-QString Duration::name() const
+QString TDuration::name() const
       {
       switch(_val) {
             case V_QUARTER:   return "quarter";
@@ -152,7 +152,7 @@ QString Duration::name() const
             case V_BREVE:     return "breve";
             case V_LONG:      return "long";
             default:
-qDebug("Duration::name(): invalid duration type %d\n", _val);
+qDebug("TDuration::name(): invalid duration type %d\n", _val);
             case V_ZERO:
             case V_INVALID:   return "";
             }
@@ -162,7 +162,7 @@ qDebug("Duration::name(): invalid duration type %d\n", _val);
 //   headType
 //---------------------------------------------------------
 
-int Duration::headType() const
+int TDuration::headType() const
       {
       int headType = 0;
       switch(_val) {
@@ -201,7 +201,7 @@ int Duration::headType() const
 //   hooks
 //---------------------------------------------------------
 
-int Duration::hooks() const
+int TDuration::hooks() const
       {
       static const int table[] = {
          // V_LONG, V_BREVE, V_WHOLE, V_HALF, V_QUARTER, V_EIGHT, V_16TH,
@@ -216,7 +216,7 @@ int Duration::hooks() const
 //   hasStem
 //---------------------------------------------------------
 
-bool Duration::hasStem() const
+bool TDuration::hasStem() const
       {
       switch(_val) {
             case V_256TH:
@@ -238,7 +238,7 @@ bool Duration::hasStem() const
 //   setVal
 //---------------------------------------------------------
 
-Duration::Duration(const QString& s)
+TDuration::TDuration(const QString& s)
       {
       setType(s);
       _dots = 0;
@@ -248,7 +248,7 @@ Duration::Duration(const QString& s)
 //   setType
 //---------------------------------------------------------
 
-void Duration::setType(const QString& s)
+void TDuration::setType(const QString& s)
       {
       if (s == "quarter")
             _val = V_QUARTER;
@@ -276,7 +276,7 @@ void Duration::setType(const QString& s)
             _val = V_MEASURE;
       else {
             _val = V_INVALID;
-            qDebug("Duration::setVal(%s): unknown\n", qPrintable(s));
+            qDebug("TDuration::setVal(%s): unknown\n", qPrintable(s));
             }
       }
 
@@ -285,21 +285,21 @@ void Duration::setType(const QString& s)
 //    this discardes any dots
 //---------------------------------------------------------
 
-Duration Duration::shift(int v) const
+TDuration TDuration::shift(int v) const
       {
       if (_val == V_MEASURE || _val == V_INVALID || _val == V_ZERO)
-            return Duration();
+            return TDuration();
       int newValue = _val + v;
       if ((newValue < 0) || (newValue > V_256TH))
-            return Duration();
-      return Duration(DurationType(newValue));
+            return TDuration();
+      return TDuration(DurationType(newValue));
       }
 
 //---------------------------------------------------------
 //   operator<
 //---------------------------------------------------------
 
-bool Duration::operator<(const Duration& t) const
+bool TDuration::operator<(const TDuration& t) const
       {
       if (t._val < _val)
             return true;
@@ -314,7 +314,7 @@ bool Duration::operator<(const Duration& t) const
 //   operator>=
 //---------------------------------------------------------
 
-bool Duration::operator>=(const Duration& t) const
+bool TDuration::operator>=(const TDuration& t) const
       {
       if (t._val > _val)
             return true;
@@ -329,7 +329,7 @@ bool Duration::operator>=(const Duration& t) const
 //   operator<=
 //---------------------------------------------------------
 
-bool Duration::operator<=(const Duration& t) const
+bool TDuration::operator<=(const TDuration& t) const
       {
       if (t._val < _val)
             return true;
@@ -344,7 +344,7 @@ bool Duration::operator<=(const Duration& t) const
 //   operator>
 //---------------------------------------------------------
 
-bool Duration::operator>(const Duration& t) const
+bool TDuration::operator>(const TDuration& t) const
       {
       if (t._val > _val)
             return true;
@@ -359,7 +359,7 @@ bool Duration::operator>(const Duration& t) const
 //   fraction
 //---------------------------------------------------------
 
-Fraction Duration::fraction() const
+Fraction TDuration::fraction() const
       {
       int z = 1;
       unsigned n;
@@ -387,7 +387,7 @@ Fraction Duration::fraction() const
       return a;
       }
 
-Duration::Duration(const Fraction& _f)
+TDuration::TDuration(const Fraction& _f)
       {
       Fraction f(_f.reduced());
       _dots = 0;
@@ -432,7 +432,7 @@ Duration::Duration(const Fraction& _f)
                         _dots = 2;
                         break;
                   default:
-                        qDebug("Duration(%d/%d): not implemented\n", f.numerator(), f.denominator());
+                        qDebug("TDuration(%d/%d): not implemented\n", f.numerator(), f.denominator());
 // abort();
                         _val = V_INVALID;
                         _dots = 0;
@@ -445,10 +445,10 @@ Duration::Duration(const Fraction& _f)
 //   operator -=
 //---------------------------------------------------------
 
-Duration& Duration::operator-=(const Duration& t)
+TDuration& TDuration::operator-=(const TDuration& t)
       {
       Fraction f1 = fraction() - t.fraction();
-      Duration d(f1);
+      TDuration d(f1);
       _val  = d._val;
       _dots = d._dots;
       return *this;
@@ -458,10 +458,10 @@ Duration& Duration::operator-=(const Duration& t)
 //   operator +=
 //---------------------------------------------------------
 
-Duration& Duration::operator+=(const Duration& t)
+TDuration& TDuration::operator+=(const TDuration& t)
       {
       Fraction f1 = fraction() + t.fraction();
-      Duration d(f1);
+      TDuration d(f1);
       _val  = d._val;
       _dots = d._dots;
       return *this;
@@ -472,11 +472,11 @@ Duration& Duration::operator+=(const Duration& t)
 //   toDurationList
 //---------------------------------------------------------
 
-QList<Duration> toDurationList(Fraction l, bool useDottedValues)
+QList<TDuration> toDurationList(Fraction l, bool useDottedValues)
       {
-      QList<Duration> dList;
+      QList<TDuration> dList;
       if (useDottedValues) {
-            for (Duration d = Duration(Duration::V_LONG); d.isValid() && (l.numerator() != 0);) {
+            for (TDuration d = TDuration(TDuration::V_LONG); d.isValid() && (l.numerator() != 0);) {
                   d.setDots(2);
                   Fraction ff(l - d.fraction());
                   if (ff.numerator() >= 0) {
@@ -503,7 +503,7 @@ QList<Duration> toDurationList(Fraction l, bool useDottedValues)
                   }
             }
       else {
-            for (Duration d = Duration(Duration::V_LONG); d.isValid() && (l.numerator() != 0);) {
+            for (TDuration d = TDuration(TDuration::V_LONG); d.isValid() && (l.numerator() != 0);) {
                   Fraction ff(l - d.fraction());
                   if (ff.numerator() < 0) {
                         d = d.shift(1);
@@ -522,9 +522,9 @@ QList<Duration> toDurationList(Fraction l, bool useDottedValues)
 //   print
 //---------------------------------------------------------
 
-void Duration::print() const
+void TDuration::print() const
       {
-      qDebug("Duration(");
+      qDebug("TDuration(");
       const char* s = "?";
       switch(_val) {
             case V_LONG:      s = "Long"; break;

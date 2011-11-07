@@ -134,7 +134,7 @@ void DrumTools::setDrumset(Score* s, Staff* st, Drumset* ds)
                   up = line > 4;
 
             Chord* chord = new Chord(gscore);
-            chord->setDurationType(Duration::V_QUARTER);
+            chord->setDurationType(TDuration::V_QUARTER);
             chord->setStemDirection(dir);
             chord->setTrack(voice);
             Note* note = new Note(gscore);

@@ -266,7 +266,7 @@ void MuseData::readNote(Part* part, const QString& s)
             tuplet->add(chord);
             --ntuplet;
             }
-      Duration d;
+      TDuration d;
       d.setVal(ticks);
       chord->setDurationType(d);
 
@@ -453,7 +453,7 @@ void MuseData::readRest(Part* part, const QString& s)
       Staff* staff = part->staff(staffIdx);
       int gstaff   = staff->idx();
 
-      Duration d;
+      TDuration d;
       d.setVal(ticks);
       Rest* rest = new Rest(score, d);
       rest->setDuration(d.fraction());

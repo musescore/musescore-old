@@ -34,15 +34,15 @@ class DurationElement : public Element {
       DurationElement(const DurationElement& e);
       ~DurationElement();
 
-      virtual Measure* measure() const               { return (Measure*)(parent()); }
+      virtual Measure* measure() const    { return (Measure*)(parent()); }
 
       QList<Prop> properties(Xml& xml, bool /*clipboardmode*/) const;
       bool readProperties(QDomElement e, QList<Tuplet*>*, const QList<Slur*>*);
       void writeTuplet(Xml& xml);
 
-      void setTuplet(Tuplet* t)                      { _tuplet = t;      }
-      Tuplet* tuplet() const                         { return _tuplet;   }
-      virtual Beam* beam() const                     { return 0;         }
+      void setTuplet(Tuplet* t)           { _tuplet = t;      }
+      Tuplet* tuplet() const              { return _tuplet;   }
+      virtual Beam* beam() const          { return 0;         }
       virtual int tick() const = 0;
       int actualTicks() const;
 

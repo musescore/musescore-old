@@ -357,7 +357,7 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
       int ticks = 4 * MScore::division / type.toInt();
       if (dots) ticks = 3 * ticks / 2;
       qDebug() << "ticks:" << ticks;
-      Duration durationType(Duration::V_INVALID);
+      TDuration durationType(TDuration::V_INVALID);
       durationType.setVal(ticks);
       qDebug() << "duration:" << durationType.name();
       if (triplet != ST_NONE) ticks = 2 * ticks / 3;
@@ -372,12 +372,12 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
       cr->setTrack(0);
       if (grace) {
             cr->setNoteType(NOTE_GRACE32);
-            cr->setDurationType(Duration::V_32ND);
+            cr->setDurationType(TDuration::V_32ND);
             sd = UP;
             }
       else {
-            if (durationType.type() == Duration::V_INVALID)
-                  durationType.setType(Duration::V_QUARTER);
+            if (durationType.type() == TDuration::V_INVALID)
+                  durationType.setType(TDuration::V_QUARTER);
             cr->setDurationType(durationType);
             sd = DOWN;
             }

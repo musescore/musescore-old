@@ -481,7 +481,7 @@ void SCursor::add(ChordRest* c)
                       seg = new Segment(measure, st, t);
                       score()->undoAddElement(seg);
                       }
-                chordRest = score()->addRest(seg, track, Duration(Duration::V_MEASURE), 0);
+                chordRest = score()->addRest(seg, track, TDuration(TDuration::V_MEASURE), 0);
                 }
             if (!chordRest) {
                   qDebug("SCursor::add: no cr\n");

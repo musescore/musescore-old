@@ -2739,7 +2739,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       int octave = 4;
       AccidentalType accidental = ACC_NONE;
       bool editorial = false;
-      Duration durationType(Duration::V_INVALID);
+      TDuration durationType(TDuration::V_INVALID);
       bool trillMark = false;
       QString strongAccentType;
       bool accent = false;
@@ -2879,7 +2879,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         }
                   }
             else if (tag == "type")
-                  durationType = Duration(s);
+                  durationType = TDuration(s);
             else if (tag == "chord" || tag == "duration" || tag == "staff" || tag == "voice")
                   // already handled by voice mapper, ignore here but prevent
                   // spurious "Unknown Node <staff>" or "... <voice>" messages
@@ -3216,8 +3216,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       if (rest) {
             // whole measure rests do not have a "type" element
             int len = ticks;
-            if (durationType.type() == Duration::V_INVALID) {
-                  durationType.setType(Duration::V_MEASURE);
+            if (durationType.type() == TDuration::V_INVALID) {
+                  durationType.setType(TDuration::V_MEASURE);
                   len = 0;
                   }
             cr = new Rest(score, durationType);
@@ -3313,25 +3313,25 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         ((Chord*)cr)->setNoteType(nt);
                         // the subtraction causes a grace at tick=0 to fail
                         // cr->setTick(tick - (MScore::division / 2));
-                        if (durationType.type() == Duration::V_QUARTER) {
+                        if (durationType.type() == TDuration::V_QUARTER) {
                               ((Chord*)cr)->setNoteType(NOTE_GRACE4);
-                              cr->setDurationType(Duration::V_QUARTER);
+                              cr->setDurationType(TDuration::V_QUARTER);
                               }
-                        else if (durationType.type() == Duration::V_16TH) {
+                        else if (durationType.type() == TDuration::V_16TH) {
                               ((Chord*)cr)->setNoteType(NOTE_GRACE16);
-                              cr->setDurationType(Duration::V_16TH);
+                              cr->setDurationType(TDuration::V_16TH);
                               }
-                        else if (durationType.type() == Duration::V_32ND) {
+                        else if (durationType.type() == TDuration::V_32ND) {
                               ((Chord*)cr)->setNoteType(NOTE_GRACE32);
-                              cr->setDurationType(Duration::V_32ND);
+                              cr->setDurationType(TDuration::V_32ND);
                               }
                         else
-                              cr->setDurationType(Duration::V_EIGHT);
+                              cr->setDurationType(TDuration::V_EIGHT);
                         st = SegGrace;
                         }
                   else {
-                        if (durationType.type() == Duration::V_INVALID)
-                              durationType.setType(Duration::V_QUARTER);
+                        if (durationType.type() == TDuration::V_INVALID)
+                              durationType.setType(TDuration::V_QUARTER);
                         cr->setDurationType(durationType);
                         }
                   cr->setDots(dots);

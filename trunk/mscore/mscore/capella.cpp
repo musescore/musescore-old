@@ -1520,7 +1520,7 @@ qDebug("readCapVoice 1\n");
                         Measure* m = score->getCreateMeasure(tick);
                         RestObj* o = static_cast<RestObj*>(no);
                         int ticks  = o->ticks();
-                        Duration d;
+                        TDuration d;
                         d.setVal(ticks);
                         if (o->count) {
                               if (tuplet == 0) {
@@ -1552,7 +1552,7 @@ qDebug("readCapVoice 1\n");
                                           Measure* m = score->getCreateMeasure(tick + i * ft);
                                           Segment* s = m->getSegment(SegChordRest, tick + i * ft);
                                           Rest* rest = new Rest(score);
-                                          rest->setDurationType(Duration(Duration::V_MEASURE));
+                                          rest->setDurationType(TDuration(TDuration::V_MEASURE));
                                           rest->setDuration(m->len());
                                           rest->setTrack(staffIdx * VOICES + voice);
                                           s->add(rest);
@@ -1562,9 +1562,9 @@ qDebug("readCapVoice 1\n");
                         if (!o->invisible || voice == 0) {
                               Segment* s = m->getSegment(SegChordRest, tick);
                               Rest* rest = new Rest(score);
-                              Duration d;
+                              TDuration d;
                               if (o->fullMeasures) {
-                                    d.setType(Duration::V_MEASURE);
+                                    d.setType(TDuration::V_MEASURE);
                                     rest->setDuration(m->len());
                                     }
                               else {
@@ -1585,7 +1585,7 @@ qDebug("readCapVoice 1\n");
 //qDebug("     <Chord>\n");
                         ChordObj* o = static_cast<ChordObj*>(no);
                         int ticks = o->ticks();
-                        Duration d;
+                        TDuration d;
                         d.setVal(ticks);
                         Measure* m = score->getCreateMeasure(tick);
                         Segment* s = m->getSegment(SegChordRest, tick);
@@ -2111,9 +2111,9 @@ qDebug("  ReadCapStaff %d/%d\n", cstaff->numerator, 1 << cstaff->log2Denom);
                   if (empty) {
                         Segment* s = m->getSegment(SegChordRest, m->tick());
                         Rest* rest = new Rest(score);
-                        Duration d(m->len());
+                        TDuration d(m->len());
                         if ((m->len() == m->timesig()) || !d.isValid())
-                              rest->setDurationType(Duration::V_MEASURE);
+                              rest->setDurationType(TDuration::V_MEASURE);
                         else
                               rest->setDurationType(d.type());
                         rest->setDuration(m->len());

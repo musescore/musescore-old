@@ -25,7 +25,7 @@ class DrumSet;
 //---------------------------------------------------------
 
 InputState::InputState() :
-   _duration(Duration::V_INVALID),
+   _duration(TDuration::V_INVALID),
    _drumNote(-1),
    _drumset(0),
    _track(0),

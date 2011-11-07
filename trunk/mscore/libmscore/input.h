@@ -27,7 +27,7 @@ class Segment;
 //---------------------------------------------------------
 
 class InputState {
-      Duration _duration;      // currently duration
+      TDuration _duration;      // currently duration
       int _drumNote;
       Drumset* _drumset;
       int _track;
@@ -48,9 +48,9 @@ class InputState {
       ChordRest* cr() const;
 
       int tick() const;
-      void setDuration(const Duration& d) { _duration = d;          }
-      Duration duration() const           { return _duration;       }
-      void setDots(int n)                 { _duration.setDots(n);   }
+      void setDuration(const TDuration& d) { _duration = d;          }
+      TDuration duration() const           { return _duration;       }
+      void setDots(int n)                  { _duration.setDots(n);   }
 
       Segment* segment() const            { return _segment;        }
       void setSegment(Segment* s)         { _segment = s;           }

@@ -290,7 +290,7 @@ bool ChordRest::readProperties(QDomElement e, QList<Tuplet*>* tuplets, QList<Slu
             }
       else if (tag == "durationType") {
             setDurationType(val);
-            if (durationType().type() != Duration::V_MEASURE) {
+            if (durationType().type() != TDuration::V_MEASURE) {
                   if ((type() == REST) &&
                               // for backward compatibility, convert V_WHOLE rests to V_MEASURE
                               // if long enough to fill a measure.
@@ -301,9 +301,9 @@ bool ChordRest::readProperties(QDomElement e, QList<Tuplet*>* tuplets, QList<Slu
                               // rest durations are initialized to full measure duration when
                               // created upon reading the <Rest> tag (see Measure::read() )
                               // so a V_WHOLE rest in a measure of 4/4 or less => V_MEASURE
-                              (durationType()==Duration::V_WHOLE && duration() <= Fraction(4, 4)) ) {
+                              (durationType()==TDuration::V_WHOLE && duration() <= Fraction(4, 4)) ) {
                         // old pre 2.0 scores: convert
-                        setDurationType(Duration::V_MEASURE);
+                        setDurationType(TDuration::V_MEASURE);
                         }
                   else  // not from old score: set duration fraction from duration type
                         setDuration(durationType().fraction());
@@ -321,15 +321,15 @@ bool ChordRest::readProperties(QDomElement e, QList<Tuplet*>* tuplets, QList<Slu
             int mticks = score()->sigmap()->timesig(score()->curTick).timesig().ticks();
             if (i == 0)
                   i = mticks;
-            // if ((type() == REST) && (mticks == i || (durationType()==Duration::V_WHOLE && mticks != 1920))) {
+            // if ((type() == REST) && (mticks == i || (durationType()==TDuration::V_WHOLE && mticks != 1920))) {
             if ((type() == REST) && (mticks == i)) {
-                  setDurationType(Duration::V_MEASURE);
+                  setDurationType(TDuration::V_MEASURE);
                   setDuration(Fraction::fromTicks(i));
                   }
             else {
                   Fraction f = Fraction::fromTicks(i);
                   setDuration(f);
-                  setDurationType(Duration(f));
+                  setDurationType(TDuration(f));
                   }
             }
       else if (tag == "dots")
@@ -819,7 +819,7 @@ void ChordRest::toDefault()
 //   setDurationType
 //---------------------------------------------------------
 
-void ChordRest::setDurationType(Duration::DurationType t)
+void ChordRest::setDurationType(TDuration::DurationType t)
       {
       _durationType.setType(t);
       }
@@ -834,7 +834,7 @@ void ChordRest::setDurationType(int ticks)
       _durationType.setVal(ticks);
       }
 
-void ChordRest::setDurationType(const Duration& v)
+void ChordRest::setDurationType(const TDuration& v)
       {
       _durationType = v;
       }
