@@ -20,8 +20,8 @@ qreal PDPI;
 qreal DPI;
 qreal DPMM;
 
-Style*  MScore::_defaultStyle;
-Style*  MScore::_baseStyle;
+MStyle* MScore::_defaultStyle;
+MStyle* MScore::_baseStyle;
 QString MScore::_globalShare;
 int     MScore::_vRaster;
 int     MScore::_hRaster;
@@ -97,9 +97,9 @@ void MScore::init()
       soundFont           = _globalShare + "sound/TimGM6mb.sf2";
       bgColor.setRgb(0x76, 0x76, 0x6e);
 
-      _defaultStyle         = new Style();
+      _defaultStyle         = new MStyle();
       setDefaultStyle(_defaultStyle);     // initialize default style
-      _baseStyle            = new Style(*_defaultStyle);
+      _baseStyle            = new MStyle(*_defaultStyle);
 
       //
       //  load internal fonts
@@ -142,7 +142,7 @@ void MScore::init()
 //   defaultStyle
 //---------------------------------------------------------
 
-Style* MScore::defaultStyle()
+MStyle* MScore::defaultStyle()
       {
       return _defaultStyle;
       }
@@ -151,7 +151,7 @@ Style* MScore::defaultStyle()
 //   baseStyle
 //---------------------------------------------------------
 
-Style* MScore::baseStyle()
+MStyle* MScore::baseStyle()
       {
       return _baseStyle;
       }

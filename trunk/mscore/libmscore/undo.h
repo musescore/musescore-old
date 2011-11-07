@@ -1044,11 +1044,11 @@ class ChangeStretch : public UndoCommand {
 
 class ChangeStyle : public UndoCommand {
       Score* score;
-      Style style;
+      MStyle style;
       void flip();
 
    public:
-      ChangeStyle(Score*, const Style&);
+      ChangeStyle(Score*, const MStyle&);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeStyle");

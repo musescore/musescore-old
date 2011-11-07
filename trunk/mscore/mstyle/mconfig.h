@@ -22,10 +22,10 @@
 #define __MCONFIG_H__
 
 //---------------------------------------------------------
-//   MStyleConfigData
+//   MgStyleConfigData
 //---------------------------------------------------------
 
-struct MStyleConfigData {
+struct MgStyleConfigData {
       enum {
             MB_NONE,
             MB_FOLLOW_MOUSE,

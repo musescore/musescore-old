@@ -325,19 +325,19 @@ class StyleVal {
       };
 
 //---------------------------------------------------------
-//   Style
+//   MStyle
 //---------------------------------------------------------
 
 class StyleData;
 
-class Style {
+class MStyle {
       QSharedDataPointer<StyleData> d;
 
    public:
-      Style();
-      Style(const Style&);
-      Style& operator=(const Style&);
-      ~Style();
+      MStyle();
+      MStyle(const MStyle&);
+      MStyle& operator=(const MStyle&);
+      ~MStyle();
 
       bool isDefault(StyleIdx idx) const;
       const ChordDescription* chordDescription(int id) const;
@@ -380,6 +380,6 @@ class Style {
 extern QVector<TextStyle> defaultTextStyles;
 extern const TextStyle defaultTextStyleArray[];
 
-extern void setDefaultStyle(Style*);
+extern void setDefaultStyle(MStyle*);
 
 #endif

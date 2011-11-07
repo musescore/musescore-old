@@ -15,7 +15,7 @@
 #define __STYLE_P_H__
 
 //
-// private header for Style
+// private header for MStyle
 //
 
 #include "elementlayout.h"
@@ -113,7 +113,7 @@ class StyleData : public QSharedData {
       void setChordList(ChordList*);      // Style gets ownership of ChordList
       const PageFormat* pageFormat() const           { return &_pageFormat; }
       void setPageFormat(const PageFormat& pf);
-      friend class Style;
+      friend class MStyle;
       qreal spatium() const                                      { return _spatium; }
       void setSpatium(qreal v)                                   { _spatium = v;    }
       ArticulationAnchor articulationAnchor(int id) const        { return _articulationAnchor[id]; }

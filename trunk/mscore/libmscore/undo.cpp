@@ -2424,7 +2424,7 @@ void ChangeStretch::flip()
 //   ChangeStyle
 //---------------------------------------------------------
 
-ChangeStyle::ChangeStyle(Score* s, const Style& st)
+ChangeStyle::ChangeStyle(Score* s, const MStyle& st)
    : score(s), style(st)
       {
       }
@@ -2460,7 +2460,7 @@ static void updateTextStyle2(void*, Element* e)
 
 void ChangeStyle::flip()
       {
-      Style tmp = *score->style();
+      MStyle tmp = *score->style();
 
       if (score->styleB(ST_concertPitch) != style.valueB(ST_concertPitch))
             score->cmdConcertPitchChanged(style.valueB(ST_concertPitch), true);

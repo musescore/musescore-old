@@ -20,48 +20,48 @@
 
 #include "mconfig.h"
 
-bool MStyleConfigData::genericAnimationsEnabled = true;
-bool MStyleConfigData::animationsEnabled = true;
-bool MStyleConfigData::progressBarAnimationsEnabled = true;
-bool MStyleConfigData::progressBarAnimated = true;
+bool MgStyleConfigData::genericAnimationsEnabled = true;
+bool MgStyleConfigData::animationsEnabled = true;
+bool MgStyleConfigData::progressBarAnimationsEnabled = true;
+bool MgStyleConfigData::progressBarAnimated = true;
 
-int  MStyleConfigData::menuBarAnimationType = MStyleConfigData::MB_FADE;
-int  MStyleConfigData::menuAnimationType = MStyleConfigData::ME_FADE;
+int  MgStyleConfigData::menuBarAnimationType = MgStyleConfigData::MB_FADE;
+int  MgStyleConfigData::menuAnimationType = MgStyleConfigData::ME_FADE;
 
-int  MStyleConfigData::genericAnimationsDuration = 150;
-int  MStyleConfigData::toolBarAnimationsDuration = 50;
-int  MStyleConfigData::menuAnimationsDuration = 150;
-int  MStyleConfigData::progressBarAnimationsDuration;
-int  MStyleConfigData::progressBarBusyStepDuration = 50;
-int  MStyleConfigData::menuBarAnimationsDuration = 150;
-int  MStyleConfigData::menuFollowMouseAnimationsDuration = 40;
-int  MStyleConfigData::menuBarFollowMouseAnimationsDuration = 80;
-bool MStyleConfigData::menuBarAnimationsEnabled = true;
-bool MStyleConfigData::menuAnimationsEnabled = true;
-int  MStyleConfigData::toolBarAnimationType = MStyleConfigData::TB_FADE;
+int  MgStyleConfigData::genericAnimationsDuration = 150;
+int  MgStyleConfigData::toolBarAnimationsDuration = 50;
+int  MgStyleConfigData::menuAnimationsDuration = 150;
+int  MgStyleConfigData::progressBarAnimationsDuration;
+int  MgStyleConfigData::progressBarBusyStepDuration = 50;
+int  MgStyleConfigData::menuBarAnimationsDuration = 150;
+int  MgStyleConfigData::menuFollowMouseAnimationsDuration = 40;
+int  MgStyleConfigData::menuBarFollowMouseAnimationsDuration = 80;
+bool MgStyleConfigData::menuBarAnimationsEnabled = true;
+bool MgStyleConfigData::menuAnimationsEnabled = true;
+int  MgStyleConfigData::toolBarAnimationType = MgStyleConfigData::TB_FADE;
 
-int  MStyleConfigData::menuHighlightMode = MStyleConfigData::MM_DARK;
-bool MStyleConfigData::tabSubtleShadow = true;
-bool MStyleConfigData::showMnemonics = true;
-int  MStyleConfigData::scrollBarAddLineButtons = 2;
-int  MStyleConfigData::scrollBarSubLineButtons = 1;
-int  MStyleConfigData::tabStyle = MStyleConfigData::TS_SINGLE;
-bool MStyleConfigData::viewDrawFocusIndicator = true;
-bool MStyleConfigData::cacheEnabled = true;
-int  MStyleConfigData::maxCacheSize = 512;
-bool MStyleConfigData::widgetExplorerEnabled = false;
-bool MStyleConfigData::drawWidgetRects = true;
-int  MStyleConfigData::scrollBarWidth  = 15;
+int  MgStyleConfigData::menuHighlightMode = MgStyleConfigData::MM_DARK;
+bool MgStyleConfigData::tabSubtleShadow = true;
+bool MgStyleConfigData::showMnemonics = true;
+int  MgStyleConfigData::scrollBarAddLineButtons = 2;
+int  MgStyleConfigData::scrollBarSubLineButtons = 1;
+int  MgStyleConfigData::tabStyle = MgStyleConfigData::TS_SINGLE;
+bool MgStyleConfigData::viewDrawFocusIndicator = true;
+bool MgStyleConfigData::cacheEnabled = true;
+int  MgStyleConfigData::maxCacheSize = 512;
+bool MgStyleConfigData::widgetExplorerEnabled = false;
+bool MgStyleConfigData::drawWidgetRects = true;
+int  MgStyleConfigData::scrollBarWidth  = 15;
 
-bool MStyleConfigData::comboBoxTransitionsEnabled = true;
-bool MStyleConfigData::labelTransitionsEnabled = true;
-bool MStyleConfigData::lineEditTransitionsEnabled = true;
-bool MStyleConfigData::stackedWidgetTransitionsEnabled = true;
+bool MgStyleConfigData::comboBoxTransitionsEnabled = true;
+bool MgStyleConfigData::labelTransitionsEnabled = true;
+bool MgStyleConfigData::lineEditTransitionsEnabled = true;
+bool MgStyleConfigData::stackedWidgetTransitionsEnabled = true;
 
-int  MStyleConfigData::comboBoxTransitionsDuration = 75;
-int  MStyleConfigData::labelTransitionsDuration = 75;
-int  MStyleConfigData::lineEditTransitionsDuration = 150;
-int  MStyleConfigData::stackedWidgetTransitionsDuration = 150;
+int  MgStyleConfigData::comboBoxTransitionsDuration = 75;
+int  MgStyleConfigData::labelTransitionsDuration = 75;
+int  MgStyleConfigData::lineEditTransitionsDuration = 150;
+int  MgStyleConfigData::stackedWidgetTransitionsDuration = 150;
 
-bool MStyleConfigData::toolTipDrawStyledFrames = true;
+bool MgStyleConfigData::toolTipDrawStyledFrames = true;
 

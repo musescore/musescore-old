@@ -67,7 +67,6 @@ class ScriptEngine;
 class KeyEditor;
 class ChordStyleEditor;
 class Navigator;
-class Style;
 class PianoTools;
 class MediaDialog;
 class Profile;

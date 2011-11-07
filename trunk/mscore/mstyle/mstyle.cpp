@@ -30,20 +30,20 @@
 #include "windowmanager.h"
 #include "mconfig.h"
 
-#define MStyleConfigData_toolTipTransparent            true
-#define MStyleConfigData_toolBarDrawItemSeparator      true
-#define MStyleConfigData_viewDrawTriangularExpander    true
-#define MStyleConfigData_viewTriangularExpanderSize    ArrowNormal
-#define MStyleConfigData_viewDrawTreeBranchLines       true
-#define MStyleConfigData_checkBoxStyle_CS_CHECK        false
-#define MStyleConfigData_scrollBarColored              true
-#define MStyleConfigData_scrollBarBevel                true
+#define MgStyleConfigData_toolTipTransparent            true
+#define MgStyleConfigData_toolBarDrawItemSeparator      true
+#define MgStyleConfigData_viewDrawTriangularExpander    true
+#define MgStyleConfigData_viewTriangularExpanderSize    ArrowNormal
+#define MgStyleConfigData_viewDrawTreeBranchLines       true
+#define MgStyleConfigData_checkBoxStyle_CS_CHECK        false
+#define MgStyleConfigData_scrollBarColored              true
+#define MgStyleConfigData_scrollBarBevel                true
 
 //---------------------------------------------------------
-//   MStyle
+//   MgStyle
 //---------------------------------------------------------
 
-MStyle::MStyle()
+MgStyle::MgStyle()
    : QCommonStyle()
       {
       _addLineButtons = DoubleButton;
@@ -71,7 +71,7 @@ MStyle::MStyle()
 //   drawMenuBarItem
 //---------------------------------------------------------
 
-bool MStyle::drawMenuBarItem(const QStyleOption* option, QPainter* painter,
+bool MgStyle::drawMenuBarItem(const QStyleOption* option, QPainter* painter,
    const QWidget* widget) const
       {
       const QStyleOptionMenuItem* menuOpt = ::qstyleoption_cast<const QStyleOptionMenuItem*>(option);
@@ -97,15 +97,15 @@ bool MStyle::drawMenuBarItem(const QStyleOption* option, QPainter* painter,
             // do nothing in case of empty intersection between animated rect and current
             if ((intersected || !animated || animatedRect.isNull()) && (active || animated || timerIsActive)) {
                   QColor color(palette.color(QPalette::Window));
-                  if (MStyleConfigData::menuHighlightMode != MStyleConfigData::MM_DARK) {
+                  if (MgStyleConfigData::menuHighlightMode != MgStyleConfigData::MM_DARK) {
                         if (flags & State_Sunken) {
-                              if (MStyleConfigData::menuHighlightMode == MStyleConfigData::MM_STRONG)
+                              if (MgStyleConfigData::menuHighlightMode == MgStyleConfigData::MM_STRONG)
                                     color = palette.color(QPalette::Highlight);
                               else
                                     color = ColorUtils::mix(color, ColorUtils::tint(color, palette.color(QPalette::Highlight), 0.6));
                               }
                         else {
-                              if (MStyleConfigData::menuHighlightMode == MStyleConfigData::MM_STRONG)
+                              if (MgStyleConfigData::menuHighlightMode == MgStyleConfigData::MM_STRONG)
                                     color = ColorUtils::tint(color, _helper.viewHoverBrush().brush(palette).color());
                               else
                                     color = ColorUtils::mix(color, ColorUtils::tint(color, _helper.viewHoverBrush().brush(palette).color()));
@@ -130,7 +130,7 @@ bool MStyle::drawMenuBarItem(const QStyleOption* option, QPainter* painter,
 
       // text
       QPalette::ColorRole role(QPalette::WindowText);
-      if (MStyleConfigData::menuHighlightMode == MStyleConfigData::MM_STRONG && (flags & State_Sunken) && enabled)
+      if (MgStyleConfigData::menuHighlightMode == MgStyleConfigData::MM_STRONG && (flags & State_Sunken) && enabled)
             role = QPalette::HighlightedText;
       drawItemText(painter, r, Qt::AlignCenter | Qt::TextShowMnemonic, palette, enabled, menuOpt->text, role);
       return true;
@@ -140,7 +140,7 @@ bool MStyle::drawMenuBarItem(const QStyleOption* option, QPainter* painter,
 //   pixelMetric
 //---------------------------------------------------------
 
-int MStyle::pixelMetric(PixelMetric metric, const QStyleOption* option, const QWidget* widget ) const
+int MgStyle::pixelMetric(PixelMetric metric, const QStyleOption* option, const QWidget* widget ) const
       {
       switch (metric) {
             // rely on QCommonStyle here
@@ -194,11 +194,11 @@ int MStyle::pixelMetric(PixelMetric metric, const QStyleOption* option, const QW
                         return PushButton_MenuIndicatorSize;
 
             case PM_ScrollBarExtent:
-                  return MStyleConfigData::scrollBarWidth + 2;
+                  return MgStyleConfigData::scrollBarWidth + 2;
 
                         // tooltip label
             case PM_ToolTipLabelFrameWidth:
-                  if (MStyleConfigData::toolTipDrawStyledFrames)
+                  if (MgStyleConfigData::toolTipDrawStyledFrames)
                         return 3;
                   else
                         break;
@@ -307,7 +307,7 @@ int MStyle::pixelMetric(PixelMetric metric, const QStyleOption* option, const QW
 //    expand size based on margins
 //---------------------------------------------------------
 
-QSize MStyle::expandSize(const QSize& size, int main, int left, int top, int right, int bottom) const
+QSize MgStyle::expandSize(const QSize& size, int main, int left, int top, int right, int bottom) const
       {
       return size + QSize(2*main+left+right, 2*main+top+bottom);
       }
@@ -316,7 +316,7 @@ QSize MStyle::expandSize(const QSize& size, int main, int left, int top, int rig
 //   sizeFromContents
 //---------------------------------------------------------
 
-QSize MStyle::sizeFromContents(ContentsType element, const QStyleOption* option, const QSize& size, const QWidget* widget) const
+QSize MgStyle::sizeFromContents(ContentsType element, const QStyleOption* option, const QSize& size, const QWidget* widget) const
       {
       switch(element) {
             case CT_CheckBox:       return checkBoxSizeFromContents(option, size, widget);
@@ -341,7 +341,7 @@ QSize MStyle::sizeFromContents(ContentsType element, const QStyleOption* option,
 //   checkBoxSizeFromContents
 //---------------------------------------------------------
 
-QSize MStyle::checkBoxSizeFromContents(const QStyleOption*, const QSize& contentsSize, const QWidget*) const
+QSize MgStyle::checkBoxSizeFromContents(const QStyleOption*, const QSize& contentsSize, const QWidget*) const
       {
       //Add size for indicator
       const int indicator( CheckBox_Size );
@@ -361,7 +361,7 @@ QSize MStyle::checkBoxSizeFromContents(const QStyleOption*, const QSize& content
 //   comboBoxSizeFromContents
 //---------------------------------------------------------
 
-QSize MStyle::comboBoxSizeFromContents( const QStyleOption* option, const QSize& contentsSize, const QWidget*) const
+QSize MgStyle::comboBoxSizeFromContents( const QStyleOption* option, const QSize& contentsSize, const QWidget*) const
       {
       QSize size = expandSize( contentsSize,
          ComboBox_ContentsMargin,
@@ -384,7 +384,7 @@ QSize MStyle::comboBoxSizeFromContents( const QStyleOption* option, const QSize&
             size.rheight() += 1;
 
       // also expand to account for scrollbar
-      size.rwidth() += MStyleConfigData::scrollBarWidth - 6;
+      size.rwidth() += MgStyleConfigData::scrollBarWidth - 6;
       return size;
       }
 
@@ -392,7 +392,7 @@ QSize MStyle::comboBoxSizeFromContents( const QStyleOption* option, const QSize&
 //   headerSectionSizeFromContents
 //---------------------------------------------------------
 
-QSize MStyle::headerSectionSizeFromContents(const QStyleOption* option, const QSize& contentsSize, const QWidget*) const
+QSize MgStyle::headerSectionSizeFromContents(const QStyleOption* option, const QSize& contentsSize, const QWidget*) const
       {
       const QStyleOptionHeader* headerOpt( qstyleoption_cast<const QStyleOptionHeader *>( option ));
       if( !headerOpt )
@@ -413,7 +413,7 @@ QSize MStyle::headerSectionSizeFromContents(const QStyleOption* option, const QS
 //   menuItemSizeFromContents
 //---------------------------------------------------------
 
-QSize MStyle::menuItemSizeFromContents(const QStyleOption* option, const QSize& contentsSize, const QWidget* widget) const
+QSize MgStyle::menuItemSizeFromContents(const QStyleOption* option, const QSize& contentsSize, const QWidget* widget) const
       {
       const QStyleOptionMenuItem* menuItemOption = qstyleoption_cast<const QStyleOptionMenuItem*>(option);
       if( !menuItemOption)
@@ -484,7 +484,7 @@ QSize MStyle::menuItemSizeFromContents(const QStyleOption* option, const QSize& 
 //   pushButtonSizeFromContents
 //---------------------------------------------------------
 
-QSize MStyle::pushButtonSizeFromContents(const QStyleOption* option, const QSize& contentsSize, const QWidget*) const
+QSize MgStyle::pushButtonSizeFromContents(const QStyleOption* option, const QSize& contentsSize, const QWidget*) const
       {
       const QStyleOptionButton* bOpt = qstyleoption_cast<const QStyleOptionButton*>(option);
       if (!bOpt)
@@ -513,7 +513,7 @@ QSize MStyle::pushButtonSizeFromContents(const QStyleOption* option, const QSize
 //   tabBarTabSizeFromContents
 //---------------------------------------------------------
 
-QSize MStyle::tabBarTabSizeFromContents(const QStyleOption* option, const QSize& contentsSize, const QWidget* widget) const
+QSize MgStyle::tabBarTabSizeFromContents(const QStyleOption* option, const QSize& contentsSize, const QWidget* widget) const
       {
       const QStyleOptionTab *tabOpt( qstyleoption_cast<const QStyleOptionTab*>(option) );
 
@@ -566,7 +566,7 @@ QSize MStyle::tabBarTabSizeFromContents(const QStyleOption* option, const QSize&
 //   toolButtonSizeFromContents
 //---------------------------------------------------------
 
-QSize MStyle::toolButtonSizeFromContents(const QStyleOption* option, const QSize& contentsSize, const QWidget* widget) const
+QSize MgStyle::toolButtonSizeFromContents(const QStyleOption* option, const QSize& contentsSize, const QWidget* widget) const
       {
       QSize size = contentsSize;
       const QStyleOptionToolButton* tbOpt = qstyleoption_cast<const QStyleOptionToolButton*>(option);
@@ -608,7 +608,7 @@ QSize MStyle::toolButtonSizeFromContents(const QStyleOption* option, const QSize
 //   isVerticalTab
 //---------------------------------------------------------
 
-bool MStyle::isVerticalTab( const QTabBar::Shape& shape ) const
+bool MgStyle::isVerticalTab( const QTabBar::Shape& shape ) const
       {
       return shape == QTabBar::RoundedEast
          || shape == QTabBar::RoundedWest
@@ -620,7 +620,7 @@ bool MStyle::isVerticalTab( const QTabBar::Shape& shape ) const
 //   polish
 //---------------------------------------------------------
 
-void MStyle::polish(QWidget* widget)
+void MgStyle::polish(QWidget* widget)
       {
       if (!widget)
             return;
@@ -830,7 +830,7 @@ void MStyle::polish(QWidget* widget)
 //   unpolish
 //---------------------------------------------------------
 
-void MStyle::unpolish(QWidget* widget)
+void MgStyle::unpolish(QWidget* widget)
       {
       // register widget to animations
 
@@ -927,7 +927,7 @@ void MStyle::unpolish(QWidget* widget)
 //   polishScrollArea
 //---------------------------------------------------------
 
-void MStyle::polishScrollArea( QAbstractScrollArea* scrollArea ) const
+void MgStyle::polishScrollArea( QAbstractScrollArea* scrollArea ) const
       {
       if (!scrollArea)
             return;
@@ -958,43 +958,43 @@ void MStyle::polishScrollArea( QAbstractScrollArea* scrollArea ) const
 //   drawPrimitive
 //---------------------------------------------------------
 
-void MStyle::drawPrimitive(PrimitiveElement element, const QStyleOption* option,
+void MgStyle::drawPrimitive(PrimitiveElement element, const QStyleOption* option,
    QPainter* painter, const QWidget* widget) const
       {
       painter->save();
       StylePrimitive fcn(0);
 
       switch(element) {
-            case PE_FrameStatusBar:       fcn = &MStyle::emptyPrimitive; break;
-            case PE_Frame:                fcn = &MStyle::drawFramePrimitive; break;
+            case PE_FrameStatusBar:       fcn = &MgStyle::emptyPrimitive; break;
+            case PE_Frame:                fcn = &MgStyle::drawFramePrimitive; break;
             case PE_FrameFocusRect:       fcn = _frameFocusPrimitive; break;
-            case PE_FrameGroupBox:        fcn = &MStyle::drawFrameGroupBoxPrimitive; break;
-            case PE_FrameLineEdit:        fcn = &MStyle::drawFramePrimitive; break;
-            case PE_FrameMenu:            fcn = &MStyle::drawFrameMenuPrimitive; break;
-            case PE_FrameTabBarBase:      fcn = &MStyle::drawFrameTabBarBasePrimitive; break;
-            case PE_FrameTabWidget:       fcn = &MStyle::drawFrameTabWidgetPrimitive; break;
-            case PE_FrameWindow:          fcn = &MStyle::drawFrameWindowPrimitive; break;
-            case PE_IndicatorArrowUp:     fcn = &MStyle::drawIndicatorArrowUpPrimitive; break;
-            case PE_IndicatorArrowDown:   fcn = &MStyle::drawIndicatorArrowDownPrimitive; break;
-            case PE_IndicatorArrowLeft:   fcn = &MStyle::drawIndicatorArrowLeftPrimitive; break;
-            case PE_IndicatorArrowRight:  fcn = &MStyle::drawIndicatorArrowRightPrimitive; break;
-            case PE_IndicatorDockWidgetResizeHandle: fcn = &MStyle::drawIndicatorDockWidgetResizeHandlePrimitive; break;
-            case PE_IndicatorHeaderArrow: fcn = &MStyle::drawIndicatorHeaderArrowPrimitive; break;
-            case PE_PanelButtonCommand:   fcn = &MStyle::drawPanelButtonCommandPrimitive; break;
-            case PE_PanelButtonTool:      fcn = &MStyle::drawPanelButtonToolPrimitive; break;
-            case PE_PanelItemViewItem:    fcn = &MStyle::drawPanelItemViewItemPrimitive; break;
-            case PE_PanelLineEdit:        fcn = &MStyle::drawPanelLineEditPrimitive; break;
-            case PE_PanelMenu:            fcn = &MStyle::drawPanelMenuPrimitive; break;
-            case PE_PanelScrollAreaCorner: fcn = &MStyle::drawPanelScrollAreaCornerPrimitive; break;
-            case PE_PanelTipLabel:        fcn = &MStyle::drawPanelTipLabelPrimitive; break;
-            case PE_IndicatorBranch:      fcn = &MStyle::drawIndicatorBranchPrimitive; break;
-            case PE_IndicatorButtonDropDown: fcn = &MStyle::drawIndicatorButtonDropDownPrimitive; break;
-            case PE_IndicatorCheckBox:    fcn = &MStyle::drawIndicatorCheckBoxPrimitive; break;
-            case PE_IndicatorRadioButton: fcn = &MStyle::drawIndicatorRadioButtonPrimitive; break;
-            case PE_IndicatorTabTear:     fcn = &MStyle::drawIndicatorTabTearPrimitive; break;
-            case PE_IndicatorToolBarHandle: fcn = &MStyle::drawIndicatorToolBarHandlePrimitive; break;
-            case PE_IndicatorToolBarSeparator: fcn = &MStyle::drawIndicatorToolBarSeparatorPrimitive; break;
-            case PE_Widget:               fcn = &MStyle::drawWidgetPrimitive; break;
+            case PE_FrameGroupBox:        fcn = &MgStyle::drawFrameGroupBoxPrimitive; break;
+            case PE_FrameLineEdit:        fcn = &MgStyle::drawFramePrimitive; break;
+            case PE_FrameMenu:            fcn = &MgStyle::drawFrameMenuPrimitive; break;
+            case PE_FrameTabBarBase:      fcn = &MgStyle::drawFrameTabBarBasePrimitive; break;
+            case PE_FrameTabWidget:       fcn = &MgStyle::drawFrameTabWidgetPrimitive; break;
+            case PE_FrameWindow:          fcn = &MgStyle::drawFrameWindowPrimitive; break;
+            case PE_IndicatorArrowUp:     fcn = &MgStyle::drawIndicatorArrowUpPrimitive; break;
+            case PE_IndicatorArrowDown:   fcn = &MgStyle::drawIndicatorArrowDownPrimitive; break;
+            case PE_IndicatorArrowLeft:   fcn = &MgStyle::drawIndicatorArrowLeftPrimitive; break;
+            case PE_IndicatorArrowRight:  fcn = &MgStyle::drawIndicatorArrowRightPrimitive; break;
+            case PE_IndicatorDockWidgetResizeHandle: fcn = &MgStyle::drawIndicatorDockWidgetResizeHandlePrimitive; break;
+            case PE_IndicatorHeaderArrow: fcn = &MgStyle::drawIndicatorHeaderArrowPrimitive; break;
+            case PE_PanelButtonCommand:   fcn = &MgStyle::drawPanelButtonCommandPrimitive; break;
+            case PE_PanelButtonTool:      fcn = &MgStyle::drawPanelButtonToolPrimitive; break;
+            case PE_PanelItemViewItem:    fcn = &MgStyle::drawPanelItemViewItemPrimitive; break;
+            case PE_PanelLineEdit:        fcn = &MgStyle::drawPanelLineEditPrimitive; break;
+            case PE_PanelMenu:            fcn = &MgStyle::drawPanelMenuPrimitive; break;
+            case PE_PanelScrollAreaCorner: fcn = &MgStyle::drawPanelScrollAreaCornerPrimitive; break;
+            case PE_PanelTipLabel:        fcn = &MgStyle::drawPanelTipLabelPrimitive; break;
+            case PE_IndicatorBranch:      fcn = &MgStyle::drawIndicatorBranchPrimitive; break;
+            case PE_IndicatorButtonDropDown: fcn = &MgStyle::drawIndicatorButtonDropDownPrimitive; break;
+            case PE_IndicatorCheckBox:    fcn = &MgStyle::drawIndicatorCheckBoxPrimitive; break;
+            case PE_IndicatorRadioButton: fcn = &MgStyle::drawIndicatorRadioButtonPrimitive; break;
+            case PE_IndicatorTabTear:     fcn = &MgStyle::drawIndicatorTabTearPrimitive; break;
+            case PE_IndicatorToolBarHandle: fcn = &MgStyle::drawIndicatorToolBarHandlePrimitive; break;
+            case PE_IndicatorToolBarSeparator: fcn = &MgStyle::drawIndicatorToolBarSeparatorPrimitive; break;
+            case PE_Widget:               fcn = &MgStyle::drawWidgetPrimitive; break;
             default:
                   break;
             }
@@ -1010,10 +1010,10 @@ void MStyle::drawPrimitive(PrimitiveElement element, const QStyleOption* option,
 //   drawPanelTipLabelPrimitive
 //---------------------------------------------------------
 
-bool MStyle::drawPanelTipLabelPrimitive(const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+bool MgStyle::drawPanelTipLabelPrimitive(const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
       // parent style painting if frames should not be styled
-      if (!MStyleConfigData::toolTipDrawStyledFrames)
+      if (!MgStyleConfigData::toolTipDrawStyledFrames)
             return false;
 
       const QRect& r( option->rect );
@@ -1024,7 +1024,7 @@ bool MStyle::drawPanelTipLabelPrimitive(const QStyleOption* option, QPainter* pa
       // make tooltip semi transparents when possible
       // alpha is copied from "kdebase/apps/dolphin/tooltips/filemetadatatooltip.cpp"
       const bool hasAlpha = _helper.hasAlphaChannel(widget);
-      if (hasAlpha && MStyleConfigData_toolTipTransparent) {
+      if (hasAlpha && MgStyleConfigData_toolTipTransparent) {
             topColor.setAlpha(220);
             bottomColor.setAlpha(220);
             }
@@ -1065,7 +1065,7 @@ bool MStyle::drawPanelTipLabelPrimitive(const QStyleOption* option, QPainter* pa
       return true;
       }
 
-bool MStyle::drawFramePrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
+bool MgStyle::drawFramePrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
       {
       const State& flags( option->state );
       const QRect& r( option->rect );
@@ -1125,7 +1125,7 @@ bool MStyle::drawFramePrimitive( const QStyleOption* option, QPainter* painter, 
               return true;
           }
 
-bool MStyle::drawFrameFocusRectPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
+bool MgStyle::drawFrameFocusRectPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
       {
       if( !widget ) return true;
 
@@ -1165,7 +1165,7 @@ bool MStyle::drawFrameFocusRectPrimitive( const QStyleOption* option, QPainter* 
 //   drawFrameGroupBoxPrimitive
 //---------------------------------------------------------
 
-bool MStyle::drawFrameGroupBoxPrimitive(const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+bool MgStyle::drawFrameGroupBoxPrimitive(const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
       // cast option and check
       const QStyleOptionFrame *fOpt = qstyleoption_cast<const QStyleOptionFrame *>(option);
@@ -1204,7 +1204,7 @@ bool MStyle::drawFrameGroupBoxPrimitive(const QStyleOption* option, QPainter* pa
       return true;
       }
 
-bool MStyle::drawFrameMenuPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+bool MgStyle::drawFrameMenuPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
       // only draw frame for (expanded) toolbars
       // do nothing for other cases
@@ -1215,7 +1215,7 @@ bool MStyle::drawFrameMenuPrimitive( const QStyleOption* option, QPainter* paint
       return true;
       }
 
-bool MStyle::drawFrameTabBarBasePrimitive( const QStyleOption* option, QPainter* painter, const QWidget* ) const
+bool MgStyle::drawFrameTabBarBasePrimitive( const QStyleOption* option, QPainter* painter, const QWidget* ) const
       {
 
               // cast option and check
@@ -1286,7 +1286,7 @@ bool MStyle::drawFrameTabBarBasePrimitive( const QStyleOption* option, QPainter*
               return true;
           }
 
-bool MStyle::drawFrameTabWidgetPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* ) const
+bool MgStyle::drawFrameTabWidgetPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* ) const
       {
       // cast option and check
       const QStyleOptionTabWidgetFrame* tabOpt( qstyleoption_cast<const QStyleOptionTabWidgetFrame*>( option ) );
@@ -1483,7 +1483,7 @@ bool MStyle::drawFrameTabWidgetPrimitive( const QStyleOption* option, QPainter* 
 
           }
 
-bool MStyle::drawFrameWindowPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* ) const
+bool MgStyle::drawFrameWindowPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* ) const
       {
       const QRect& r( option->rect );
       const QPalette& palette( option->palette );
@@ -1491,7 +1491,7 @@ bool MStyle::drawFrameWindowPrimitive( const QStyleOption* option, QPainter* pai
       return true;
       }
 
-bool MStyle::drawIndicatorArrowPrimitive( ArrowOrientation orientation, const QStyleOption* option, QPainter* painter, const QWidget* ) const
+bool MgStyle::drawIndicatorArrowPrimitive( ArrowOrientation orientation, const QStyleOption* option, QPainter* painter, const QWidget* ) const
       {
       const QRect& r(option->rect);
       const QPalette& palette(option->palette);
@@ -1524,7 +1524,7 @@ bool MStyle::drawIndicatorArrowPrimitive( ArrowOrientation orientation, const QS
       return true;
       }
 
-bool MStyle::drawIndicatorHeaderArrowPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
+bool MgStyle::drawIndicatorHeaderArrowPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
       {
       const QStyleOptionHeader *headerOpt = qstyleoption_cast<const QStyleOptionHeader *>(option);
       const State& flags( option->state );
@@ -1575,7 +1575,7 @@ bool MStyle::drawIndicatorHeaderArrowPrimitive( const QStyleOption* option, QPai
               return true;
           }
 
-bool MStyle::drawPanelButtonCommandPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
+bool MgStyle::drawPanelButtonCommandPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
       {
       const State& flags( option->state );
       const bool enabled( flags & State_Enabled );
@@ -1682,7 +1682,7 @@ bool MStyle::drawPanelButtonCommandPrimitive( const QStyleOption* option, QPaint
 //   drawPanelButtonToolPrimitive
 //---------------------------------------------------------
 
-bool MStyle::drawPanelButtonToolPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+bool MgStyle::drawPanelButtonToolPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
       /*
       For toolbutton in TabBars, corresponding to expanding arrows, no frame is drawn
@@ -1900,7 +1900,7 @@ bool MStyle::drawPanelButtonToolPrimitive( const QStyleOption* option, QPainter*
               return true;
           }
 
-bool MStyle::drawPanelItemViewItemPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+bool MgStyle::drawPanelItemViewItemPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
       const QStyleOptionViewItemV4 *opt = qstyleoption_cast<const QStyleOptionViewItemV4*>(option);
       const QAbstractItemView *view = qobject_cast<const QAbstractItemView *>(widget);
@@ -1980,7 +1980,7 @@ bool MStyle::drawPanelItemViewItemPrimitive( const QStyleOption* option, QPainte
               return true;
           }
 
-bool MStyle::drawPanelLineEditPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+bool MgStyle::drawPanelLineEditPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
 
               const State& flags( option->state );
@@ -2022,7 +2022,7 @@ bool MStyle::drawPanelLineEditPrimitive( const QStyleOption* option, QPainter* p
 //   drawPanelMenuPrimitive
 //---------------------------------------------------------
 
-bool MStyle::drawPanelMenuPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+bool MgStyle::drawPanelMenuPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
       // do nothing if menu is embedded in another widget
       // this corresponds to having a transparent background
@@ -2053,7 +2053,7 @@ bool MStyle::drawPanelMenuPrimitive( const QStyleOption* option, QPainter* paint
       return true;
       }
 
-bool MStyle::drawPanelScrollAreaCornerPrimitive( const QStyleOption*, QPainter*, const QWidget* widget) const
+bool MgStyle::drawPanelScrollAreaCornerPrimitive( const QStyleOption*, QPainter*, const QWidget* widget) const
       {
       // disable painting of PE_PanelScrollAreaCorner
       // the default implementation fills the rect with the window background color
@@ -2063,7 +2063,7 @@ bool MStyle::drawPanelScrollAreaCornerPrimitive( const QStyleOption*, QPainter*,
       return !( widget && widget->inherits( "QWebView" ) );
       }
 
-bool MStyle::drawIndicatorBranchPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* ) const
+bool MgStyle::drawIndicatorBranchPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* ) const
       {
       const State& flags( option->state );
       const QRect& r( option->rect );
@@ -2099,7 +2099,7 @@ bool MStyle::drawIndicatorBranchPrimitive( const QStyleOption* option, QPainter*
                         // color
                         const QColor expanderColor( mouseOver ? _helper.viewHoverBrush().brush(palette).color():palette.color( QPalette::Text ) );
 
-                        if(!MStyleConfigData_viewDrawTriangularExpander)
+                        if(!MgStyleConfigData_viewDrawTriangularExpander)
                               {
 
                                   // plus or minus sign used for expanders
@@ -2121,7 +2121,7 @@ bool MStyle::drawIndicatorBranchPrimitive( const QStyleOption* option, QPainter*
                                   // get size from option
                                   QPolygonF a;
                                   ArrowSize size = ArrowSmall;
-                                  size = MStyleConfigData_viewTriangularExpanderSize;
+                                  size = MgStyleConfigData_viewTriangularExpanderSize;
 
                                   if( expanderOpen )
                                         {
@@ -2148,7 +2148,7 @@ bool MStyle::drawIndicatorBranchPrimitive( const QStyleOption* option, QPainter*
 
 
               // tree branches
-              if( !MStyleConfigData_viewDrawTreeBranchLines) return true;
+              if( !MgStyleConfigData_viewDrawTreeBranchLines) return true;
 
               painter->setPen( ColorUtils::mix( palette.color( QPalette::Text ), palette.color( QPalette::Background ), 0.8 ) );
               if (flags & (State_Item | State_Children | State_Sibling))
@@ -2177,7 +2177,7 @@ bool MStyle::drawIndicatorBranchPrimitive( const QStyleOption* option, QPainter*
               return true;
           }
 
-bool MStyle::drawIndicatorButtonDropDownPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+bool MgStyle::drawIndicatorButtonDropDownPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
       const QPalette& palette( option->palette );
       const QRect& r( option->rect );
@@ -2367,7 +2367,7 @@ bool MStyle::drawIndicatorButtonDropDownPrimitive( const QStyleOption* option, Q
               return true;
 
           }
-bool MStyle::drawIndicatorCheckBoxPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+bool MgStyle::drawIndicatorCheckBoxPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
       const QRect& r( option->rect );
       const State& flags( option->state );
@@ -2417,7 +2417,7 @@ bool MStyle::drawIndicatorCheckBoxPrimitive( const QStyleOption* option, QPainte
 //   drawIndicatorRadioButtonPrimitive
 //---------------------------------------------------------
 
-bool MStyle::drawIndicatorRadioButtonPrimitive(const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+bool MgStyle::drawIndicatorRadioButtonPrimitive(const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
       const QRect& r( option->rect );
       const State& flags( option->state );
@@ -2455,7 +2455,7 @@ bool MStyle::drawIndicatorRadioButtonPrimitive(const QStyleOption* option, QPain
       return true;
       }
 
-bool MStyle::drawIndicatorTabTearPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
+bool MgStyle::drawIndicatorTabTearPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
       {
       const QStyleOptionTab* tabOpt( qstyleoption_cast<const QStyleOptionTab*>(option) );
       if(!tabOpt)
@@ -2533,7 +2533,7 @@ bool MStyle::drawIndicatorTabTearPrimitive( const QStyleOption* option, QPainter
               return true;
           }
 
-bool MStyle::drawIndicatorToolBarHandlePrimitive( const QStyleOption* option, QPainter* painter, const QWidget* ) const
+bool MgStyle::drawIndicatorToolBarHandlePrimitive( const QStyleOption* option, QPainter* painter, const QWidget* ) const
       {
       const State& flags( option->state );
       const bool horizontal( flags & State_Horizontal );
@@ -2565,12 +2565,12 @@ bool MStyle::drawIndicatorToolBarHandlePrimitive( const QStyleOption* option, QP
 
           }
 
-bool MStyle::drawIndicatorToolBarSeparatorPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* ) const
+bool MgStyle::drawIndicatorToolBarSeparatorPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* ) const
       {
       const State& flags( option->state );
       const QRect& r( option->rect );
       const QPalette& palette( option->palette );
-      if( MStyleConfigData_toolBarDrawItemSeparator )
+      if( MgStyleConfigData_toolBarDrawItemSeparator )
                     {
                         const QColor color( palette.color(QPalette::Window) );
                         if(flags & State_Horizontal) _helper.drawSeparator( painter, r, color, Qt::Vertical );
@@ -2584,7 +2584,7 @@ bool MStyle::drawIndicatorToolBarSeparatorPrimitive( const QStyleOption* option,
 //   drawWidgetPrimitive
 //---------------------------------------------------------
 
-bool MStyle::drawWidgetPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+bool MgStyle::drawWidgetPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
       // check widget and attributes
       if (!widget || !widget->testAttribute(Qt::WA_StyledBackground) || widget->testAttribute(Qt::WA_NoSystemBackground))
@@ -2598,7 +2598,7 @@ bool MStyle::drawWidgetPrimitive( const QStyleOption* option, QPainter* painter,
       return true;
       }
 
-void MStyle::renderSplitter( const QStyleOption* option, QPainter* painter, const QWidget* widget, bool horizontal ) const
+void MgStyle::renderSplitter( const QStyleOption* option, QPainter* painter, const QWidget* widget, bool horizontal ) const
     {
 
               const QPalette& palette( option->palette );
@@ -2696,7 +2696,7 @@ void MStyle::renderSplitter( const QStyleOption* option, QPainter* painter, cons
 //   renderRadioButton
 //---------------------------------------------------------
 
-void MStyle::renderRadioButton(QPainter* painter, const QRect& rect,
+void MgStyle::renderRadioButton(QPainter* painter, const QRect& rect,
    const QPalette& palette, StyleOptions options, CheckBoxState state,
    qreal opacity, AnimationMode mode) const
       {
@@ -2739,7 +2739,7 @@ void MStyle::renderRadioButton(QPainter* painter, const QRect& rect,
 //   slabShadowColor
 //---------------------------------------------------------
 
-QColor MStyle::slabShadowColor(QColor color, StyleOptions options, qreal opacity, AnimationMode mode) const
+QColor MgStyle::slabShadowColor(QColor color, StyleOptions options, qreal opacity, AnimationMode mode) const
       {
       QColor glow;
       if( mode == AnimationNone || opacity < 0 ) {
@@ -2774,7 +2774,7 @@ QColor MStyle::slabShadowColor(QColor color, StyleOptions options, qreal opacity
       return glow;
       }
 
-void MStyle::renderCheckBox(
+void MgStyle::renderCheckBox(
         QPainter *painter, const QRect &rect, const QPalette &palette,
         StyleOptions options, CheckBoxState state,
         qreal opacity,
@@ -2805,7 +2805,7 @@ void MStyle::renderCheckBox(
                         if( state == CheckTriState)
                               {
                                   QVector<qreal> dashes;
-                                  if( MStyleConfigData_checkBoxStyle_CS_CHECK)
+                                  if( MgStyleConfigData_checkBoxStyle_CS_CHECK)
                                         {
 
                                             dashes << 1.0 << 2.0;
@@ -2827,7 +2827,7 @@ void MStyle::renderCheckBox(
                               painter->setRenderHint(QPainter::Antialiasing);
 
                         const qreal offset( qMin( penThickness, qreal(1.0) ) );
-                        if( MStyleConfigData_checkBoxStyle_CS_CHECK)
+                        if( MgStyleConfigData_checkBoxStyle_CS_CHECK)
                               {
 
                                   painter->setPen(contrastPen);
@@ -2876,7 +2876,7 @@ void MStyle::renderCheckBox(
 
           }
 
-void MStyle::renderScrollBarHole(
+void MgStyle::renderScrollBarHole(
         QPainter *painter, const QRect &r, const QColor &color,
         const Qt::Orientation& orientation, const TileSet::Tiles& tiles) const
     {
@@ -2894,7 +2894,7 @@ void MStyle::renderScrollBarHole(
 //   renderScrollBarHandle
 //---------------------------------------------------------
 
-void MStyle::renderScrollBarHandle(
+void MgStyle::renderScrollBarHandle(
         QPainter* painter, const QRect& r, const QPalette& palette,
         const Qt::Orientation& orientation, const bool& hover, const qreal& opacity ) const
     {
@@ -2926,7 +2926,7 @@ void MStyle::renderScrollBarHandle(
 
               // draw the slider
               QColor glowColor;
-              if( !MStyleConfigData_scrollBarColored)
+              if( !MgStyleConfigData_scrollBarColored)
                     {
                         QColor base = ColorUtils::mix(dark, shadow, 0.5);
                         QColor hovered = _helper.viewHoverBrush().brush(QPalette::Active).color();
@@ -2951,7 +2951,7 @@ void MStyle::renderScrollBarHandle(
 
               // colored background
               painter->setPen(Qt::NoPen);
-              if( MStyleConfigData_scrollBarColored)
+              if( MgStyleConfigData_scrollBarColored)
                     {
 
                         if( opacity >= 0 ) painter->setBrush( ColorUtils::mix( color, palette.color(QPalette::Highlight), opacity ) );
@@ -2964,7 +2964,7 @@ void MStyle::renderScrollBarHandle(
               // slider gradient
               {
                         QLinearGradient sliderGradient( rect.topLeft(), horizontal ? rect.bottomLeft() : rect.topRight());
-                        if( !MStyleConfigData_scrollBarColored)
+                        if( !MgStyleConfigData_scrollBarColored)
                               {
                                   sliderGradient.setColorAt(0.0, color);
                                   sliderGradient.setColorAt(1.0, mid);
@@ -2979,13 +2979,13 @@ void MStyle::renderScrollBarHandle(
                     }
 
               // pattern
-              if( MStyleConfigData_scrollBarBevel )
+              if( MgStyleConfigData_scrollBarBevel )
                     {
                         // don't let the pattern move
                         QPoint offset = horizontal ? QPoint(-rect.left(), 0) : QPoint(0, -rect.top());
                         QPoint periodEnd = offset + (horizontal ? QPoint(30, 0) : QPoint(0, 30));
                         QLinearGradient patternGradient(rect.topLeft()+offset, rect.topLeft()+periodEnd);
-                        if( !MStyleConfigData_scrollBarColored)
+                        if( !MgStyleConfigData_scrollBarColored)
                               {
                                   patternGradient.setColorAt(0.0, _helper.alphaColor(shadow, 0.1));
                                   patternGradient.setColorAt(1.0, _helper.alphaColor(light, 0.1));
@@ -2999,7 +2999,7 @@ void MStyle::renderScrollBarHandle(
                         painter->drawRoundedRect(rect, 2, 2);
                     }
 
-              if( MStyleConfigData_scrollBarColored) {
+              if( MgStyleConfigData_scrollBarColored) {
                         painter->restore();
                         return;
                     }
@@ -3025,7 +3025,7 @@ void MStyle::renderScrollBarHandle(
 //   renderScrollBarArrow
 //---------------------------------------------------------
 
-void MStyle::renderScrollBarArrow(QPainter* painter, const QRect& r, const QColor& color,
+void MgStyle::renderScrollBarArrow(QPainter* painter, const QRect& r, const QColor& color,
    const QColor& background, ArrowOrientation orientation) const
       {
       const qreal penThickness = 1.6;
@@ -3050,7 +3050,7 @@ void MStyle::renderScrollBarArrow(QPainter* painter, const QRect& r, const QColo
       }
 
     //______________________________________________________________________________
-    QColor MStyle::scrollBarArrowColor( const QStyleOption* option, const SubControl& control, const QWidget* widget ) const
+    QColor MgStyle::scrollBarArrowColor( const QStyleOption* option, const SubControl& control, const QWidget* widget ) const
     {
               const QRect& r( option->rect );
               const QPalette& palette( option->palette );
@@ -3093,7 +3093,7 @@ void MStyle::renderScrollBarArrow(QPainter* painter, const QRect& r, const QColo
           }
 
     //______________________________________________________________________________
-    void MStyle::renderSliderTickmarks( QPainter* painter, const QStyleOptionSlider* option,  const QWidget* widget ) const
+    void MgStyle::renderSliderTickmarks( QPainter* painter, const QStyleOptionSlider* option,  const QWidget* widget ) const
     {
 
               const int& ticks( option->tickPosition );
@@ -3160,7 +3160,7 @@ void MStyle::renderScrollBarArrow(QPainter* painter, const QRect& r, const QColo
 //   genericArrow
 //---------------------------------------------------------
 
-QPolygonF MStyle::genericArrow(MStyle::ArrowOrientation orientation, MStyle::ArrowSize size) const
+QPolygonF MgStyle::genericArrow(MgStyle::ArrowOrientation orientation, MgStyle::ArrowSize size) const
       {
       QPolygonF a(3);
 
@@ -3215,7 +3215,7 @@ QPolygonF MStyle::genericArrow(MStyle::ArrowOrientation orientation, MStyle::Arr
 //   renderDialSlab
 //---------------------------------------------------------
 
-void MStyle::renderDialSlab( QPainter *painter, const QRect& r, const QColor &color, const QStyleOption *option, StyleOptions opts, qreal opacity, AnimationMode mode) const
+void MgStyle::renderDialSlab( QPainter *painter, const QRect& r, const QColor &color, const QStyleOption *option, StyleOptions opts, qreal opacity, AnimationMode mode) const
     {
 
               // cast option
@@ -3288,7 +3288,7 @@ void MStyle::renderDialSlab( QPainter *painter, const QRect& r, const QColor &co
 
           }
 
-void MStyle::renderButtonSlab(QPainter *painter, QRect r, const QColor &color, StyleOptions options, qreal opacity,
+void MgStyle::renderButtonSlab(QPainter *painter, QRect r, const QColor &color, StyleOptions options, qreal opacity,
         AnimationMode mode,
         TileSet::Tiles tiles) const
     {
@@ -3359,7 +3359,7 @@ void MStyle::renderButtonSlab(QPainter *painter, QRect r, const QColor &color, S
 //   renderSlab
 //---------------------------------------------------------
 
-void MStyle::renderSlab(QPainter *painter, QRect r, const QColor &color, StyleOptions options, qreal opacity,
+void MgStyle::renderSlab(QPainter *painter, QRect r, const QColor &color, StyleOptions options, qreal opacity,
    AnimationMode mode, TileSet::Tiles tiles) const
       {
       // check rect
@@ -3419,7 +3419,7 @@ void MStyle::renderSlab(QPainter *painter, QRect r, const QColor &color, StyleOp
             tile->render(r, painter, tiles);
       }
 
-void MStyle::fillTabBackground( QPainter* painter, const QRect &r, const QColor &color, QTabBar::Shape shape, const QWidget* widget ) const
+void MgStyle::fillTabBackground( QPainter* painter, const QRect &r, const QColor &color, QTabBar::Shape shape, const QWidget* widget ) const
       {
       // filling
       QRect fillRect(r);
@@ -3454,7 +3454,7 @@ void MStyle::fillTabBackground( QPainter* painter, const QRect &r, const QColor 
 
           }
 
-void MStyle::fillTab( QPainter* painter, const QRect &r, const QColor &color, QTabBar::Shape shape, bool active ) const
+void MgStyle::fillTab( QPainter* painter, const QRect &r, const QColor &color, QTabBar::Shape shape, bool active ) const
       {
       const QColor dark( _helper.calcDarkColor(color) );
       const QColor shadow( _helper.calcShadowColor(color) );
@@ -3521,49 +3521,49 @@ void MStyle::fillTab( QPainter* painter, const QRect &r, const QColor &color, QT
 //   drawControl
 //---------------------------------------------------------
 
-void MStyle::drawControl(ControlElement element, const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+void MgStyle::drawControl(ControlElement element, const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
       painter->save();
 
       StyleControl fcn(0);
       if (element == CE_CapacityBar)
-            fcn = &MStyle::drawCapacityBarControl;
+            fcn = &MgStyle::drawCapacityBarControl;
       else {
             switch (element) {
-                  case CE_ComboBoxLabel:       fcn = &MStyle::drawComboBoxLabelControl; break;
-                  case CE_DockWidgetTitle:     fcn = &MStyle::drawDockWidgetTitleControl; break;
-                  case CE_HeaderEmptyArea:     fcn = &MStyle::drawHeaderEmptyAreaControl; break;
-                  case CE_HeaderLabel:         fcn = &MStyle::drawHeaderLabelControl; break;
-                  case CE_HeaderSection:       fcn = &MStyle::drawHeaderSectionControl; break;
-                  case CE_MenuBarEmptyArea:    fcn = &MStyle::emptyControl; break;
-                  case CE_MenuBarItem:         fcn = &MStyle::drawMenuBarItemControl; break;
-                  case CE_MenuItem:            fcn = &MStyle::drawMenuItemControl; break;
-                  case CE_ProgressBar:         fcn = &MStyle::drawProgressBarControl; break;
-                  case CE_ProgressBarContents: fcn = &MStyle::drawProgressBarContentsControl; break;
-                  case CE_ProgressBarGroove:   fcn = &MStyle::drawProgressBarGrooveControl; break;
-                  case CE_ProgressBarLabel:    fcn = &MStyle::drawProgressBarLabelControl; break;
+                  case CE_ComboBoxLabel:       fcn = &MgStyle::drawComboBoxLabelControl; break;
+                  case CE_DockWidgetTitle:     fcn = &MgStyle::drawDockWidgetTitleControl; break;
+                  case CE_HeaderEmptyArea:     fcn = &MgStyle::drawHeaderEmptyAreaControl; break;
+                  case CE_HeaderLabel:         fcn = &MgStyle::drawHeaderLabelControl; break;
+                  case CE_HeaderSection:       fcn = &MgStyle::drawHeaderSectionControl; break;
+                  case CE_MenuBarEmptyArea:    fcn = &MgStyle::emptyControl; break;
+                  case CE_MenuBarItem:         fcn = &MgStyle::drawMenuBarItemControl; break;
+                  case CE_MenuItem:            fcn = &MgStyle::drawMenuItemControl; break;
+                  case CE_ProgressBar:         fcn = &MgStyle::drawProgressBarControl; break;
+                  case CE_ProgressBarContents: fcn = &MgStyle::drawProgressBarContentsControl; break;
+                  case CE_ProgressBarGroove:   fcn = &MgStyle::drawProgressBarGrooveControl; break;
+                  case CE_ProgressBarLabel:    fcn = &MgStyle::drawProgressBarLabelControl; break;
 
                   /*
                   for CE_PushButtonBevel the only thing that is done is draw the PanelButtonCommand primitive
                   since the prototypes are identical we register the second directly in the control map: fcn = without
                   using an intermediate function
                   */
-                  case CE_PushButtonBevel:  fcn = &MStyle::drawPanelButtonCommandPrimitive; break;
-                  case CE_PushButtonLabel:  fcn = &MStyle::drawPushButtonLabelControl; break;
-                  case CE_RubberBand:       fcn = &MStyle::drawRubberBandControl; break;
-                  case CE_ScrollBarSlider:  fcn = &MStyle::drawScrollBarSliderControl; break;
-                  case CE_ScrollBarAddLine: fcn = &MStyle::drawScrollBarAddLineControl; break;
-                  case CE_ScrollBarAddPage: fcn = &MStyle::drawScrollBarAddPageControl; break;
-                  case CE_ScrollBarSubLine: fcn = &MStyle::drawScrollBarSubLineControl; break;
-                  case CE_ScrollBarSubPage: fcn = &MStyle::drawScrollBarSubPageControl; break;
-                  case CE_ShapedFrame:      fcn = &MStyle::drawShapedFrameControl; break;
-                  case CE_Splitter:         fcn = &MStyle::drawSplitterControl; break;
-                  case CE_TabBarTabLabel:   fcn = &MStyle::drawTabBarTabLabelControl; break;
-                  case CE_TabBarTabShape:   fcn = &MStyle::drawTabBarTabShapeControl_Single; break;
-                  case CE_ToolBar:          fcn = &MStyle::drawToolBarControl; break;
-                  case CE_ToolBoxTabLabel:  fcn = &MStyle::drawToolBoxTabLabelControl; break;
-                  case CE_ToolBoxTabShape:  fcn = &MStyle::drawToolBoxTabShapeControl; break;
-                  case CE_ToolButtonLabel:  fcn = &MStyle::drawToolButtonLabelControl; break;
+                  case CE_PushButtonBevel:  fcn = &MgStyle::drawPanelButtonCommandPrimitive; break;
+                  case CE_PushButtonLabel:  fcn = &MgStyle::drawPushButtonLabelControl; break;
+                  case CE_RubberBand:       fcn = &MgStyle::drawRubberBandControl; break;
+                  case CE_ScrollBarSlider:  fcn = &MgStyle::drawScrollBarSliderControl; break;
+                  case CE_ScrollBarAddLine: fcn = &MgStyle::drawScrollBarAddLineControl; break;
+                  case CE_ScrollBarAddPage: fcn = &MgStyle::drawScrollBarAddPageControl; break;
+                  case CE_ScrollBarSubLine: fcn = &MgStyle::drawScrollBarSubLineControl; break;
+                  case CE_ScrollBarSubPage: fcn = &MgStyle::drawScrollBarSubPageControl; break;
+                  case CE_ShapedFrame:      fcn = &MgStyle::drawShapedFrameControl; break;
+                  case CE_Splitter:         fcn = &MgStyle::drawSplitterControl; break;
+                  case CE_TabBarTabLabel:   fcn = &MgStyle::drawTabBarTabLabelControl; break;
+                  case CE_TabBarTabShape:   fcn = &MgStyle::drawTabBarTabShapeControl_Single; break;
+                  case CE_ToolBar:          fcn = &MgStyle::drawToolBarControl; break;
+                  case CE_ToolBoxTabLabel:  fcn = &MgStyle::drawToolBoxTabLabelControl; break;
+                  case CE_ToolBoxTabShape:  fcn = &MgStyle::drawToolBoxTabShapeControl; break;
+                  case CE_ToolButtonLabel:  fcn = &MgStyle::drawToolButtonLabelControl; break;
                   default:  break;
                   }
             }
@@ -3577,19 +3577,19 @@ void MStyle::drawControl(ControlElement element, const QStyleOption* option, QPa
 //   drawComplexControl
 //---------------------------------------------------------
 
-void MStyle::drawComplexControl(ComplexControl element, const QStyleOptionComplex* option, QPainter* painter, const QWidget* widget) const
+void MgStyle::drawComplexControl(ComplexControl element, const QStyleOptionComplex* option, QPainter* painter, const QWidget* widget) const
       {
       painter->save();
 
       StyleComplexControl fcn(0);
       switch(element) {
-            case CC_ComboBox:   fcn = &MStyle::drawComboBoxComplexControl; break;
-            case CC_Dial:       fcn = &MStyle::drawDialComplexControl; break;
-            case CC_GroupBox:   fcn = &MStyle::drawGroupBoxComplexControl; break;
-            case CC_Slider:     fcn = &MStyle::drawSliderComplexControl; break;
-            case CC_SpinBox:    fcn = &MStyle::drawSpinBoxComplexControl; break;
-            case CC_TitleBar:   fcn = &MStyle::drawTitleBarComplexControl; break;
-            case CC_ToolButton: fcn = &MStyle::drawToolButtonComplexControl; break;
+            case CC_ComboBox:   fcn = &MgStyle::drawComboBoxComplexControl; break;
+            case CC_Dial:       fcn = &MgStyle::drawDialComplexControl; break;
+            case CC_GroupBox:   fcn = &MgStyle::drawGroupBoxComplexControl; break;
+            case CC_Slider:     fcn = &MgStyle::drawSliderComplexControl; break;
+            case CC_SpinBox:    fcn = &MgStyle::drawSpinBoxComplexControl; break;
+            case CC_TitleBar:   fcn = &MgStyle::drawTitleBarComplexControl; break;
+            case CC_ToolButton: fcn = &MgStyle::drawToolButtonComplexControl; break;
             default: break;
             }
 
@@ -3602,7 +3602,7 @@ void MStyle::drawComplexControl(ComplexControl element, const QStyleOptionComple
 //   drawItemText
 //---------------------------------------------------------
 
-void MStyle::drawItemText(QPainter* painter, const QRect& r, int flags, const QPalette& palette,
+void MgStyle::drawItemText(QPainter* painter, const QRect& r, int flags, const QPalette& palette,
    bool enabled, const QString &text, QPalette::ColorRole textRole ) const
       {
       if( (flags & Qt::TextShowMnemonic) || !(flags&Qt::TextHideMnemonic) ) {
@@ -3629,7 +3629,7 @@ void MStyle::drawItemText(QPainter* painter, const QRect& r, int flags, const QP
 //   eventFilter
 //---------------------------------------------------------
 
-bool MStyle::eventFilter(QObject *object, QEvent *event)
+bool MgStyle::eventFilter(QObject *object, QEvent *event)
       {
       if (QTabBar* tabBar = qobject_cast<QTabBar*>(object))
             return eventFilterTabBar( tabBar, event );
@@ -3651,7 +3651,7 @@ bool MStyle::eventFilter(QObject *object, QEvent *event)
       return QCommonStyle::eventFilter(object, event);
       }
 
-bool MStyle::drawComboBoxComplexControl( const QStyleOptionComplex* option, QPainter* painter, const QWidget* widget ) const
+bool MgStyle::drawComboBoxComplexControl( const QStyleOptionComplex* option, QPainter* painter, const QWidget* widget ) const
     {
 
               // cast option and check
@@ -3847,7 +3847,7 @@ bool MStyle::drawComboBoxComplexControl( const QStyleOptionComplex* option, QPai
 
           }
 
-bool MStyle::drawDialComplexControl( const QStyleOptionComplex* option, QPainter* painter, const QWidget* widget ) const
+bool MgStyle::drawDialComplexControl( const QStyleOptionComplex* option, QPainter* painter, const QWidget* widget ) const
       {
       const State& flags( option->state );
       const bool enabled = flags & State_Enabled;
@@ -3893,7 +3893,7 @@ bool MStyle::drawDialComplexControl( const QStyleOptionComplex* option, QPainter
 //   drawGroupBoxComplexControl
 //---------------------------------------------------------
 
-bool MStyle::drawGroupBoxComplexControl(const QStyleOptionComplex* option, QPainter* painter, const QWidget* widget) const
+bool MgStyle::drawGroupBoxComplexControl(const QStyleOptionComplex* option, QPainter* painter, const QWidget* widget) const
       {
 #if 0
       const QStyleOptionGroupBox *groupBox = qstyleoption_cast<const QStyleOptionGroupBox *>(option);
@@ -3919,7 +3919,7 @@ bool MStyle::drawGroupBoxComplexControl(const QStyleOptionComplex* option, QPain
             return false;
       }
 
-bool MStyle::drawSliderComplexControl( const QStyleOptionComplex* option, QPainter* painter, const QWidget* widget ) const
+bool MgStyle::drawSliderComplexControl( const QStyleOptionComplex* option, QPainter* painter, const QWidget* widget ) const
       {
       const QStyleOptionSlider *slider( qstyleoption_cast<const QStyleOptionSlider *>( option ) );
       if( !slider ) return true;
@@ -3965,7 +3965,7 @@ bool MStyle::drawSliderComplexControl( const QStyleOptionComplex* option, QPaint
               return true;
           }
 
-bool MStyle::drawSpinBoxComplexControl( const QStyleOptionComplex* option, QPainter* painter, const QWidget* widget ) const
+bool MgStyle::drawSpinBoxComplexControl( const QStyleOptionComplex* option, QPainter* painter, const QWidget* widget ) const
       {
               const QStyleOptionSpinBox *sb = qstyleoption_cast<const QStyleOptionSpinBox *>( option );
               if( !sb ) return true;
@@ -4029,7 +4029,7 @@ bool MStyle::drawSpinBoxComplexControl( const QStyleOptionComplex* option, QPain
 
           }
 
-bool MStyle::drawTitleBarComplexControl( const QStyleOptionComplex* option, QPainter* painter, const QWidget* widget ) const
+bool MgStyle::drawTitleBarComplexControl( const QStyleOptionComplex* option, QPainter* painter, const QWidget* widget ) const
     {
               const QStyleOptionTitleBar *tb( qstyleoption_cast<const QStyleOptionTitleBar *>(option) );
               if( !tb) return true;
@@ -4098,7 +4098,7 @@ bool MStyle::drawTitleBarComplexControl( const QStyleOptionComplex* option, QPai
 //   drawToolButtonComplexControl
 //---------------------------------------------------------
 
-bool MStyle::drawToolButtonComplexControl( const QStyleOptionComplex* option, QPainter* painter, const QWidget* widget ) const
+bool MgStyle::drawToolButtonComplexControl( const QStyleOptionComplex* option, QPainter* painter, const QWidget* widget ) const
       {
       // check autoRaise state
       const State flags( option->state );
@@ -4193,7 +4193,7 @@ bool MStyle::drawToolButtonComplexControl( const QStyleOptionComplex* option, QP
       return true;
       }
 
-bool MStyle::eventFilterComboBoxContainer( QWidget* widget, QEvent* event )
+bool MgStyle::eventFilterComboBoxContainer( QWidget* widget, QEvent* event )
     {
               switch(event->type())
               {
@@ -4245,7 +4245,7 @@ bool MStyle::eventFilterComboBoxContainer( QWidget* widget, QEvent* event )
 //   eventFilterDockWidget
 //---------------------------------------------------------
 
-bool MStyle::eventFilterDockWidget( QDockWidget* dockWidget, QEvent* event )
+bool MgStyle::eventFilterDockWidget( QDockWidget* dockWidget, QEvent* event )
       {
       switch( event->type() ) {
             case QEvent::Show:
@@ -4306,7 +4306,7 @@ bool MStyle::eventFilterDockWidget( QDockWidget* dockWidget, QEvent* event )
       }
 
 
-bool MStyle::eventFilterMdiSubWindow( QMdiSubWindow* subWindow, QEvent* event )
+bool MgStyle::eventFilterMdiSubWindow( QMdiSubWindow* subWindow, QEvent* event )
     {
 
               if( event->type() == QEvent::Paint)
@@ -4335,7 +4335,7 @@ bool MStyle::eventFilterMdiSubWindow( QMdiSubWindow* subWindow, QEvent* event )
 
           }
 
-bool MStyle::eventFilterScrollBar( QWidget* widget, QEvent* event )
+bool MgStyle::eventFilterScrollBar( QWidget* widget, QEvent* event )
     {
 
               if( event->type() == QEvent::Paint )
@@ -4348,7 +4348,7 @@ bool MStyle::eventFilterScrollBar( QWidget* widget, QEvent* event )
               return false;
           }
 
-bool MStyle::eventFilterTabBar( QWidget* widget, QEvent* event )
+bool MgStyle::eventFilterTabBar( QWidget* widget, QEvent* event )
     {
               if( event->type() == QEvent::Paint && tabBarData().locks( widget ) )
                     {
@@ -4363,7 +4363,7 @@ bool MStyle::eventFilterTabBar( QWidget* widget, QEvent* event )
           }
 
     //_____________________________________________________________________
-bool MStyle::eventFilterToolBar( QToolBar* toolBar, QEvent* event )
+bool MgStyle::eventFilterToolBar( QToolBar* toolBar, QEvent* event )
     {
               switch(event->type())
               {
@@ -4454,7 +4454,7 @@ bool MStyle::eventFilterToolBar( QToolBar* toolBar, QEvent* event )
 //   eventFilterToolBox
 //---------------------------------------------------------
 
-bool MStyle::eventFilterToolBox( QToolBox* toolBox, QEvent* event )
+bool MgStyle::eventFilterToolBox( QToolBox* toolBox, QEvent* event )
       {
       if (event->type() == QEvent::Paint) {
             if (toolBox->frameShape() != QFrame::NoFrame) {
@@ -4469,7 +4469,7 @@ bool MStyle::eventFilterToolBox( QToolBox* toolBox, QEvent* event )
       return false;
       }
 
-bool MStyle::drawCapacityBarControl( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+bool MgStyle::drawCapacityBarControl( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
     {
 
               // cast option
@@ -4493,7 +4493,7 @@ bool MStyle::drawCapacityBarControl( const QStyleOption* option, QPainter* paint
 
           }
 
-bool MStyle::drawComboBoxLabelControl( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+bool MgStyle::drawComboBoxLabelControl( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
     {
 
               //same as CommonStyle, except for filling behind icon
@@ -4539,7 +4539,7 @@ bool MStyle::drawComboBoxLabelControl( const QStyleOption* option, QPainter* pai
 //   drawDockWidgetTitleControl
 //---------------------------------------------------------
 
-bool MStyle::drawDockWidgetTitleControl( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+bool MgStyle::drawDockWidgetTitleControl( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
       // cast option and check
       const QStyleOptionDockWidget* dwOpt = ::qstyleoption_cast<const QStyleOptionDockWidget*>(option);
@@ -4608,7 +4608,7 @@ bool MStyle::drawDockWidgetTitleControl( const QStyleOption* option, QPainter* p
       return true;
       }
 
-bool MStyle::drawHeaderEmptyAreaControl( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+bool MgStyle::drawHeaderEmptyAreaControl( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
     {
 
               // use the same background as in drawHeaderPrimitive
@@ -4625,7 +4625,7 @@ bool MStyle::drawHeaderEmptyAreaControl( const QStyleOption* option, QPainter* p
 
           }
 
-bool MStyle::drawHeaderLabelControl( const QStyleOption* option, QPainter* painter, const QWidget* ) const
+bool MgStyle::drawHeaderLabelControl( const QStyleOption* option, QPainter* painter, const QWidget* ) const
     {
               const QStyleOptionHeader* headerOpt( qstyleoption_cast<const QStyleOptionHeader *>( option ) );
               if( !headerOpt ) return true;
@@ -4656,7 +4656,7 @@ bool MStyle::drawHeaderLabelControl( const QStyleOption* option, QPainter* paint
               return true;
           }
 
-bool MStyle::drawHeaderSectionControl( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
+bool MgStyle::drawHeaderSectionControl( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
     {
 
               const QRect& r( option->rect );
@@ -4710,7 +4710,7 @@ bool MStyle::drawHeaderSectionControl( const QStyleOption* option, QPainter* pai
 
           }
 
-bool MStyle::drawMenuBarItemControl( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
+bool MgStyle::drawMenuBarItemControl( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
     {
               const QStyleOptionMenuItem* menuOpt = ::qstyleoption_cast<const QStyleOptionMenuItem*>(option);
               if (!menuOpt) return true;
@@ -4738,18 +4738,18 @@ bool MStyle::drawMenuBarItemControl( const QStyleOption* option, QPainter* paint
                               {
 
                                   QColor color( palette.color(QPalette::Window) );
-                                  if( MStyleConfigData::menuHighlightMode != MStyleConfigData::MM_DARK)
+                                  if( MgStyleConfigData::menuHighlightMode != MgStyleConfigData::MM_DARK)
                                         {
 
                                             if(flags & State_Sunken)
                                                   {
 
-                                                      if( MStyleConfigData::menuHighlightMode == MStyleConfigData::MM_STRONG) color = palette.color(QPalette::Highlight);
+                                                      if( MgStyleConfigData::menuHighlightMode == MgStyleConfigData::MM_STRONG) color = palette.color(QPalette::Highlight);
                                                             else color = ColorUtils::mix(color, ColorUtils::tint(color, palette.color(QPalette::Highlight), 0.6));
 
                                                   } else {
 
-                                                      if( MStyleConfigData::menuHighlightMode == MStyleConfigData::MM_STRONG) color = ColorUtils::tint(color, _helper.viewHoverBrush().brush( palette ).color());
+                                                      if( MgStyleConfigData::menuHighlightMode == MgStyleConfigData::MM_STRONG) color = ColorUtils::tint(color, _helper.viewHoverBrush().brush( palette ).color());
                                                             else color = ColorUtils::mix(color, ColorUtils::tint(color, _helper.viewHoverBrush().brush( palette ).color()));
                                                         }
 
@@ -4782,7 +4782,7 @@ bool MStyle::drawMenuBarItemControl( const QStyleOption* option, QPainter* paint
 
               // text
               QPalette::ColorRole role( QPalette::WindowText );
-              if( MStyleConfigData::menuHighlightMode == MStyleConfigData::MM_STRONG && (flags & State_Sunken) && enabled )
+              if( MgStyleConfigData::menuHighlightMode == MgStyleConfigData::MM_STRONG && (flags & State_Sunken) && enabled )
                     { role = QPalette::HighlightedText; }
 
               drawItemText(painter, r, Qt::AlignCenter | Qt::TextShowMnemonic, palette, enabled, menuOpt->text, role);
@@ -4795,7 +4795,7 @@ bool MStyle::drawMenuBarItemControl( const QStyleOption* option, QPainter* paint
 //   drawMenuItemControl
 //---------------------------------------------------------
 
-bool MStyle::drawMenuItemControl(const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+bool MgStyle::drawMenuItemControl(const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
       const QRect& r( option->rect );
       const QPalette& palette( option->palette );
@@ -4891,7 +4891,7 @@ bool MStyle::drawMenuItemControl(const QStyleOption* option, QPainter* painter, 
             }
 
       // color
-      QPalette::ColorRole textRole((active && enabled && MStyleConfigData::menuHighlightMode == MStyleConfigData::MM_STRONG ) ?
+      QPalette::ColorRole textRole((active && enabled && MgStyleConfigData::menuHighlightMode == MgStyleConfigData::MM_STRONG ) ?
          QPalette::HighlightedText: QPalette::WindowText);
 
       //Readjust the column rectangle back to proper height
@@ -5015,7 +5015,7 @@ bool MStyle::drawMenuItemControl(const QStyleOption* option, QPainter* painter, 
       return true;
       }
 
-bool MStyle::drawProgressBarControl( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+bool MgStyle::drawProgressBarControl( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
     {
 
               if( const QStyleOptionProgressBar *pb = qstyleoption_cast<const QStyleOptionProgressBar *>(option))
@@ -5047,7 +5047,7 @@ bool MStyle::drawProgressBarControl( const QStyleOption* option, QPainter* paint
 
           }
 
-bool MStyle::drawProgressBarContentsControl( const QStyleOption* option, QPainter* painter, const QWidget* ) const
+bool MgStyle::drawProgressBarContentsControl( const QStyleOption* option, QPainter* painter, const QWidget* ) const
     {
 
               const QStyleOptionProgressBar* pbOpt = qstyleoption_cast<const QStyleOptionProgressBar*>(option);
@@ -5111,7 +5111,7 @@ bool MStyle::drawProgressBarContentsControl( const QStyleOption* option, QPainte
 
           }
 
-bool MStyle::drawProgressBarGrooveControl( const QStyleOption* option, QPainter* painter, const QWidget* ) const
+bool MgStyle::drawProgressBarGrooveControl( const QStyleOption* option, QPainter* painter, const QWidget* ) const
     {
 
               const QStyleOptionProgressBarV2 *pbOpt = qstyleoption_cast<const QStyleOptionProgressBarV2 *>(option);
@@ -5122,7 +5122,7 @@ bool MStyle::drawProgressBarGrooveControl( const QStyleOption* option, QPainter*
               return true;
           }
 
-bool MStyle::drawProgressBarLabelControl( const QStyleOption* option, QPainter* painter, const QWidget* ) const
+bool MgStyle::drawProgressBarLabelControl( const QStyleOption* option, QPainter* painter, const QWidget* ) const
     {
               const QStyleOptionProgressBar* pbOpt = qstyleoption_cast<const QStyleOptionProgressBar*>(option);
               if( !pbOpt ) return true;
@@ -5197,7 +5197,7 @@ bool MStyle::drawProgressBarLabelControl( const QStyleOption* option, QPainter* 
 //   drawPushButtonLabelControl
 //---------------------------------------------------------
 
-bool MStyle::drawPushButtonLabelControl(const QStyleOption* option, QPainter* painter, const QWidget*) const
+bool MgStyle::drawPushButtonLabelControl(const QStyleOption* option, QPainter* painter, const QWidget*) const
       {
       // cast option and check
       const QStyleOptionButton* bOpt = qstyleoption_cast<const QStyleOptionButton*>(option);
@@ -5302,7 +5302,7 @@ bool MStyle::drawPushButtonLabelControl(const QStyleOption* option, QPainter* pa
               return true;
           }
 
-bool MStyle::drawRubberBandControl( const QStyleOption* option, QPainter* painter, const QWidget* ) const
+bool MgStyle::drawRubberBandControl( const QStyleOption* option, QPainter* painter, const QWidget* ) const
     {
 
               if( const QStyleOptionRubberBand *rbOpt = qstyleoption_cast<const QStyleOptionRubberBand *>(option))
@@ -5322,7 +5322,7 @@ bool MStyle::drawRubberBandControl( const QStyleOption* option, QPainter* painte
 
           }
 
-bool MStyle::drawScrollBarSliderControl( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
+bool MgStyle::drawScrollBarSliderControl( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
     {
 
               // cast option and check
@@ -5357,7 +5357,7 @@ bool MStyle::drawScrollBarSliderControl( const QStyleOption* option, QPainter* p
               return true;
           }
 
-bool MStyle::drawScrollBarAddLineControl( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
+bool MgStyle::drawScrollBarAddLineControl( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
     {
 
               // cast option and check
@@ -5436,7 +5436,7 @@ bool MStyle::drawScrollBarAddLineControl( const QStyleOption* option, QPainter* 
               return true;
           }
 
-bool MStyle::drawScrollBarAddPageControl( const QStyleOption* option, QPainter* painter, const QWidget* ) const
+bool MgStyle::drawScrollBarAddPageControl( const QStyleOption* option, QPainter* painter, const QWidget* ) const
     {
 
               // cast option and check
@@ -5461,7 +5461,7 @@ bool MStyle::drawScrollBarAddPageControl( const QStyleOption* option, QPainter* 
 
           }
 
-bool MStyle::drawScrollBarSubLineControl( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
+bool MgStyle::drawScrollBarSubLineControl( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
     {
 
               // cast option and check
@@ -5548,7 +5548,7 @@ bool MStyle::drawScrollBarSubLineControl( const QStyleOption* option, QPainter* 
               return true;
           }
 
-bool MStyle::drawScrollBarSubPageControl( const QStyleOption* option, QPainter* painter, const QWidget* ) const
+bool MgStyle::drawScrollBarSubPageControl( const QStyleOption* option, QPainter* painter, const QWidget* ) const
     {
 
               // cast option and check
@@ -5573,7 +5573,7 @@ bool MStyle::drawScrollBarSubPageControl( const QStyleOption* option, QPainter* 
 
           }
 
-bool MStyle::drawShapedFrameControl( const QStyleOption* option, QPainter* painter, const QWidget* ) const
+bool MgStyle::drawShapedFrameControl( const QStyleOption* option, QPainter* painter, const QWidget* ) const
     {
 
               // cast option and check
@@ -5609,7 +5609,7 @@ bool MStyle::drawShapedFrameControl( const QStyleOption* option, QPainter* paint
 
           }
 
-bool MStyle::drawTabBarTabLabelControl( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+bool MgStyle::drawTabBarTabLabelControl( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
       const QStyleOptionTab *tabOpt = qstyleoption_cast< const QStyleOptionTab* >(option);
       if( !tabOpt ) return true;
@@ -5652,7 +5652,7 @@ bool MStyle::drawTabBarTabLabelControl( const QStyleOption* option, QPainter* pa
 
           }
 
-bool MStyle::drawTabBarTabShapeControl_Single(const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+bool MgStyle::drawTabBarTabShapeControl_Single(const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
       const QStyleOptionTab* tabOpt( qstyleoption_cast<const QStyleOptionTab*>(option) );
       if (!tabOpt)
@@ -6120,7 +6120,7 @@ bool MStyle::drawTabBarTabShapeControl_Single(const QStyleOption* option, QPaint
 
       // slab options
       StyleOptions slabOptions( NoFill );
-      if( MStyleConfigData::tabSubtleShadow)
+      if( MgStyleConfigData::tabSubtleShadow)
             slabOptions |= SubtleShadow;
       if ((!selected) && (mouseOver || animated))
             slabOptions |= Hover;
@@ -6177,7 +6177,7 @@ bool MStyle::drawTabBarTabShapeControl_Single(const QStyleOption* option, QPaint
       return true;
       }
 
-bool MStyle::drawTabBarTabShapeControl_Plain( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+bool MgStyle::drawTabBarTabShapeControl_Plain( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
     {
 
               const QStyleOptionTab* tabOpt( qstyleoption_cast<const QStyleOptionTab*>(option) );
@@ -6795,7 +6795,7 @@ bool MStyle::drawTabBarTabShapeControl_Plain( const QStyleOption* option, QPaint
 
                         // slab options
                         StyleOptions selectedTabOpts( NoFill );
-                        if( MStyleConfigData::tabSubtleShadow) selectedTabOpts |= SubtleShadow;
+                        if( MgStyleConfigData::tabSubtleShadow) selectedTabOpts |= SubtleShadow;
 
                         TileSet::Tiles tiles( tilesByShape( tabOpt->shape ) );
                         renderSlab( painter, tabRect, color, selectedTabOpts, tiles );
@@ -6839,7 +6839,7 @@ bool MStyle::drawTabBarTabShapeControl_Plain( const QStyleOption* option, QPaint
 
           }
 
-void MStyle::TabBarData::drawTabBarBaseControl( const QStyleOptionTab* tabOpt, QPainter* painter, const QWidget* widget)
+void MgStyle::TabBarData::drawTabBarBaseControl( const QStyleOptionTab* tabOpt, QPainter* painter, const QWidget* widget)
     {
 
               // check parent
@@ -6867,7 +6867,7 @@ void MStyle::TabBarData::drawTabBarBaseControl( const QStyleOptionTab* tabOpt, Q
               const QRect tabBarRect( _style.data()->insideMargin( tabBar->rect(), -GlowWidth ) );
 
               // define slab
-              MStyle::SlabRect slab;
+              MgStyle::SlabRect slab;
 
               // switch on tab shape
               switch( tabOpt->shape )
@@ -6951,7 +6951,7 @@ void MStyle::TabBarData::drawTabBarBaseControl( const QStyleOptionTab* tabOpt, Q
 
           }
 
-bool MStyle::drawToolBarControl( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
+bool MgStyle::drawToolBarControl( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
     {
 
               const QRect& r( option->rect );
@@ -6969,7 +6969,7 @@ bool MStyle::drawToolBarControl( const QStyleOption* option, QPainter* painter, 
 
           }
 
-bool MStyle::drawToolBoxTabLabelControl( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
+bool MgStyle::drawToolBoxTabLabelControl( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
     {
 
               const QStyleOptionToolBox* toolBoxOption( qstyleoption_cast<const QStyleOptionToolBox *>( option ));
@@ -7011,7 +7011,7 @@ bool MStyle::drawToolBoxTabLabelControl( const QStyleOption* option, QPainter* p
               return true;
           }
 
-bool MStyle::drawToolBoxTabShapeControl( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
+bool MgStyle::drawToolBoxTabShapeControl( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
     {
 
               const QRect& r( option->rect );
@@ -7133,7 +7133,7 @@ bool MStyle::drawToolBoxTabShapeControl( const QStyleOption* option, QPainter* p
 //   drawToolButtonLabelControl
 //---------------------------------------------------------
 
-bool MStyle::drawToolButtonLabelControl(const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+bool MgStyle::drawToolButtonLabelControl(const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
       // need to customize palettes to deal with autoraised buttons
       const State& flags( option->state );
@@ -7154,7 +7154,7 @@ bool MStyle::drawToolButtonLabelControl(const QStyleOption* option, QPainter* pa
       return true;
       }
 
-QRect MStyle::groupBoxSubControlRect( const QStyleOptionComplex* option, SubControl subControl, const QWidget* widget ) const
+QRect MgStyle::groupBoxSubControlRect( const QStyleOptionComplex* option, SubControl subControl, const QWidget* widget ) const
       {
       QRect r = option->rect;
 
@@ -7241,7 +7241,7 @@ QRect MStyle::groupBoxSubControlRect( const QStyleOptionComplex* option, SubCont
               return QCommonStyle::subControlRect( CC_GroupBox, option, subControl, widget );
           }
 
-QRect MStyle::comboBoxSubControlRect( const QStyleOptionComplex* option, SubControl subControl, const QWidget* widget ) const
+QRect MgStyle::comboBoxSubControlRect( const QStyleOptionComplex* option, SubControl subControl, const QWidget* widget ) const
       {
       const QRect& r( option->rect );
               const QStyleOptionComboBox *cb = qstyleoption_cast<const QStyleOptionComboBox *>(option);
@@ -7311,7 +7311,7 @@ QRect MStyle::comboBoxSubControlRect( const QStyleOptionComplex* option, SubCont
 
           }
 
-QRect MStyle::scrollBarInternalSubControlRect( const QStyleOptionComplex* option, SubControl subControl ) const
+QRect MgStyle::scrollBarInternalSubControlRect( const QStyleOptionComplex* option, SubControl subControl ) const
       {
 
               const QRect& r = option->rect;
@@ -7341,7 +7341,7 @@ QRect MStyle::scrollBarInternalSubControlRect( const QStyleOptionComplex* option
                     }
           }
 
-QRect MStyle::sliderSubControlRect( const QStyleOptionComplex* option, SubControl subControl, const QWidget* widget ) const
+QRect MgStyle::sliderSubControlRect( const QStyleOptionComplex* option, SubControl subControl, const QWidget* widget ) const
     {
               switch( subControl )
               {
@@ -7391,7 +7391,7 @@ QRect MStyle::sliderSubControlRect( const QStyleOptionComplex* option, SubContro
 
           }
 
-QRect MStyle::scrollBarSubControlRect( const QStyleOptionComplex* option, SubControl subControl, const QWidget* widget ) const
+QRect MgStyle::scrollBarSubControlRect( const QStyleOptionComplex* option, SubControl subControl, const QWidget* widget ) const
     {
               const QRect& r = option->rect;
               const State& flags( option->state );
@@ -7488,7 +7488,7 @@ QRect MStyle::scrollBarSubControlRect( const QStyleOptionComplex* option, SubCon
                     }
           }
 
-QRect MStyle::spinBoxSubControlRect( const QStyleOptionComplex* option, SubControl subControl, const QWidget* widget ) const
+QRect MgStyle::spinBoxSubControlRect( const QStyleOptionComplex* option, SubControl subControl, const QWidget* widget ) const
     {
 
               const QRect& r( option->rect );
@@ -7548,7 +7548,7 @@ QRect MStyle::spinBoxSubControlRect( const QStyleOptionComplex* option, SubContr
 
          }
 
-void MStyle::renderMenuItemBackground( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
+void MgStyle::renderMenuItemBackground( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
       {
       const QRect& r( option->rect );
       const QPalette& palette( option->palette );
@@ -7587,7 +7587,7 @@ void MStyle::renderMenuItemBackground( const QStyleOption* option, QPainter* pai
               return;
           }
 
-void MStyle::renderMenuItemRect( const QStyleOption* opt, const QRect& r, const QColor& base, const QPalette& palette, QPainter* painter, qreal opacity ) const
+void MgStyle::renderMenuItemRect( const QStyleOption* opt, const QRect& r, const QColor& base, const QPalette& palette, QPainter* painter, qreal opacity ) const
       {
       if (opacity == 0)
             return;
@@ -7596,12 +7596,12 @@ void MStyle::renderMenuItemRect( const QStyleOption* opt, const QRect& r, const 
               // TODO: this is inconsistent with MenuBar color.
               // this should change to properly account for 'sunken' state
               QColor color(base);
-              if(MStyleConfigData::menuHighlightMode == MStyleConfigData::MM_STRONG)
+              if(MgStyleConfigData::menuHighlightMode == MgStyleConfigData::MM_STRONG)
                     {
 
                         color = palette.color(QPalette::Highlight);
 
-                    } else if(MStyleConfigData::menuHighlightMode == MStyleConfigData::MM_SUBTLE) {
+                    } else if(MgStyleConfigData::menuHighlightMode == MgStyleConfigData::MM_SUBTLE) {
 
                         color = ColorUtils::mix(color, ColorUtils::tint(color, palette.color(QPalette::Highlight), 0.6));
 
@@ -7656,7 +7656,7 @@ void MStyle::renderMenuItemRect( const QStyleOption* opt, const QRect& r, const 
 
           }
 
-void MStyle::renderHeaderBackground( const QRect& r, const QPalette& palette, QPainter* painter, const QWidget* widget, bool horizontal, bool reverse ) const
+void MgStyle::renderHeaderBackground( const QRect& r, const QPalette& palette, QPainter* painter, const QWidget* widget, bool horizontal, bool reverse ) const
       {
       // use window background for the background
       if( widget ) _helper.renderWindowBackground( painter, r, widget, palette);
@@ -7668,7 +7668,7 @@ void MStyle::renderHeaderBackground( const QRect& r, const QPalette& palette, QP
 
           }
 
-void MStyle::renderHeaderLines( const QRect& r, const QPalette& palette, QPainter* painter, TileSet::Tiles tiles ) const
+void MgStyle::renderHeaderLines( const QRect& r, const QPalette& palette, QPainter* painter, TileSet::Tiles tiles ) const
       {
       // add horizontal lines
               const QColor color( palette.color(QPalette::Window) );
@@ -7727,7 +7727,7 @@ void MStyle::renderHeaderLines( const QRect& r, const QPalette& palette, QPainte
 
           }
 
-void MStyle::renderTitleBarButton( QPainter* painter, const QStyleOptionTitleBar* option, const QWidget* widget, const SubControl& subControl ) const
+void MgStyle::renderTitleBarButton( QPainter* painter, const QStyleOptionTitleBar* option, const QWidget* widget, const SubControl& subControl ) const
     {
 
               const QRect r = subControlRect(CC_TitleBar, option, subControl, widget );
@@ -7806,7 +7806,7 @@ void MStyle::renderTitleBarButton( QPainter* painter, const QStyleOptionTitleBar
           }
 
 
-void MStyle::renderTitleBarIcon(QPainter *painter, const QRectF &r, const SubControl& subControl ) const
+void MgStyle::renderTitleBarIcon(QPainter *painter, const QRectF &r, const SubControl& subControl ) const
     {
 
               painter->save();
@@ -7866,7 +7866,7 @@ void MStyle::renderTitleBarIcon(QPainter *painter, const QRectF &r, const SubCon
               painter->restore();
           }
 
-void MStyle::renderSpinBoxArrow( QPainter* painter, const QStyleOptionSpinBox* option, const QWidget* widget, const SubControl& subControl ) const
+void MgStyle::renderSpinBoxArrow( QPainter* painter, const QStyleOptionSpinBox* option, const QWidget* widget, const SubControl& subControl ) const
       {
       const QPalette& palette( option->palette );
 
@@ -7916,7 +7916,7 @@ void MStyle::renderSpinBoxArrow( QPainter* painter, const QStyleOptionSpinBox* o
 
           }
 
-QRegion MStyle::tabBarClipRegion( const QTabBar* tabBar ) const
+QRegion MgStyle::tabBarClipRegion( const QTabBar* tabBar ) const
       {
       // need to mask-out arrow buttons, if visible.
               QRegion mask( tabBar->rect() );
@@ -7930,7 +7930,7 @@ QRegion MStyle::tabBarClipRegion( const QTabBar* tabBar ) const
 
           }
 
-int MStyle::styleHint(StyleHint hint, const QStyleOption* option, const QWidget* widget, QStyleHintReturn* returnData ) const
+int MgStyle::styleHint(StyleHint hint, const QStyleOption* option, const QWidget* widget, QStyleHintReturn* returnData ) const
       {
       // handles SH_KCustomStyleElement out of switch statement,
       // to avoid warning at compilation
@@ -8019,7 +8019,7 @@ int MStyle::styleHint(StyleHint hint, const QStyleOption* option, const QWidget*
 
           }
 
-QRect MStyle::subElementRect(SubElement element, const QStyleOption* option, const QWidget* widget) const
+QRect MgStyle::subElementRect(SubElement element, const QStyleOption* option, const QWidget* widget) const
     {
 
 
@@ -8065,7 +8065,7 @@ QRect MStyle::subElementRect(SubElement element, const QStyleOption* option, con
 //   subControlRect
 //---------------------------------------------------------
 
-QRect MStyle::subControlRect(ComplexControl element, const QStyleOptionComplex* option, SubControl subControl, const QWidget* widget ) const
+QRect MgStyle::subControlRect(ComplexControl element, const QStyleOptionComplex* option, SubControl subControl, const QWidget* widget ) const
       {
       switch(element) {
             case CC_GroupBox: return groupBoxSubControlRect( option, subControl, widget );
@@ -8077,7 +8077,7 @@ QRect MStyle::subControlRect(ComplexControl element, const QStyleOptionComplex* 
             }
       }
 
-QRect MStyle::tabWidgetTabContentsRect( const QStyleOption* option, const QWidget* widget ) const
+QRect MgStyle::tabWidgetTabContentsRect( const QStyleOption* option, const QWidget* widget ) const
       {
       // cast option and check
       const QStyleOptionTabWidgetFrame* tabOpt = qstyleoption_cast<const QStyleOptionTabWidgetFrame*>(option);
@@ -8105,7 +8105,7 @@ QRect MStyle::tabWidgetTabContentsRect( const QStyleOption* option, const QWidge
 
           }
 
-QRect MStyle::tabWidgetTabPaneRect( const QStyleOption* option, const QWidget* ) const
+QRect MgStyle::tabWidgetTabPaneRect( const QStyleOption* option, const QWidget* ) const
       {
       const QStyleOptionTabWidgetFrame* tabOpt = qstyleoption_cast<const QStyleOptionTabWidgetFrame*>(option);
               if( !tabOpt) return option->rect;
@@ -8153,7 +8153,7 @@ QRect MStyle::tabWidgetTabPaneRect( const QStyleOption* option, const QWidget* )
 
           }
 
-QRect MStyle::tabWidgetLeftCornerRect( const QStyleOption* option, const QWidget* widget ) const
+QRect MgStyle::tabWidgetLeftCornerRect( const QStyleOption* option, const QWidget* widget ) const
       {
       const QStyleOptionTabWidgetFrame *tabOpt = qstyleoption_cast<const QStyleOptionTabWidgetFrame *>(option);
       if(!tabOpt) return QRect();
@@ -8209,7 +8209,7 @@ QRect MStyle::tabWidgetLeftCornerRect( const QStyleOption* option, const QWidget
 
           }
 
-QRect MStyle::tabWidgetRightCornerRect( const QStyleOption* option, const QWidget* widget ) const
+QRect MgStyle::tabWidgetRightCornerRect( const QStyleOption* option, const QWidget* widget ) const
       {
 
               const QStyleOptionTabWidgetFrame *tabOpt = qstyleoption_cast<const QStyleOptionTabWidgetFrame *>(option);
@@ -8265,7 +8265,7 @@ QRect MStyle::tabWidgetRightCornerRect( const QStyleOption* option, const QWidge
               return r;
           }
 
-QStyle::SubControl MStyle::hitTestComplexControl(ComplexControl control, const QStyleOptionComplex* option, const QPoint& point, const QWidget* widget) const
+QStyle::SubControl MgStyle::hitTestComplexControl(ComplexControl control, const QStyleOptionComplex* option, const QPoint& point, const QWidget* widget) const
       {
       switch( control ) {
             case CC_ScrollBar:
@@ -8310,7 +8310,7 @@ QStyle::SubControl MStyle::hitTestComplexControl(ComplexControl control, const Q
 
           }
 
-QRect MStyle::tabBarTabButtonRect( SubElement element, const QStyleOption* option, const QWidget* widget ) const
+QRect MgStyle::tabBarTabButtonRect( SubElement element, const QStyleOption* option, const QWidget* widget ) const
       {
 
               const QStyleOptionTab* tabOpt( qstyleoption_cast<const QStyleOptionTab*>(option) );
@@ -8356,15 +8356,15 @@ QRect MStyle::tabBarTabButtonRect( SubElement element, const QStyleOption* optio
 //   configurationChanged
 //---------------------------------------------------------
 
-void MStyle::configurationChanged()
+void MgStyle::configurationChanged()
       {
       _helper.reloadConfig();
 
       // reset config
-      // MStyleConfigData::self()->readConfig();
+      // MgStyleConfigData::self()->readConfig();
 
       // update caches size
-      int cacheSize = MStyleConfigData::cacheEnabled ? MStyleConfigData::maxCacheSize : 0;
+      int cacheSize = MgStyleConfigData::cacheEnabled ? MgStyleConfigData::maxCacheSize : 0;
       _helper.setMaxCacheSize(cacheSize);
 
       // reinitialize engines
@@ -8373,26 +8373,26 @@ void MStyle::configurationChanged()
 //TODO      windowManager().initialize();
 
       // widget explorer
-//      widgetExplorer().setEnabled(MStyleConfigData::widgetExplorerEnabled);
-//      widgetExplorer().setDrawWidgetRects(MStyleConfigData::drawWidgetRects);
+//      widgetExplorer().setEnabled(MgStyleConfigData::widgetExplorerEnabled);
+//      widgetExplorer().setDrawWidgetRects(MgStyleConfigData::drawWidgetRects);
 
       // scrollbar button dimentions.
       /* it has to be reinitialized here because scrollbar width might have changed */
       _noButtonHeight = 0;
-      _singleButtonHeight = qMax(MStyleConfigData::scrollBarWidth * 7 / 10, 14 );
+      _singleButtonHeight = qMax(MgStyleConfigData::scrollBarWidth * 7 / 10, 14 );
       _doubleButtonHeight = 2*_singleButtonHeight;
 
-      _mnemonic = MStyleConfigData::showMnemonics ? Qt::TextShowMnemonic : Qt::TextHideMnemonic;
+      _mnemonic = MgStyleConfigData::showMnemonics ? Qt::TextShowMnemonic : Qt::TextHideMnemonic;
 
       // scrollbar buttons
-      switch(MStyleConfigData::scrollBarAddLineButtons) {
+      switch(MgStyleConfigData::scrollBarAddLineButtons) {
             case 0: _addLineButtons = NoButton; break;
             case 1: _addLineButtons = SingleButton; break;
             default:
             case 2: _addLineButtons = DoubleButton; break;
             }
 
-      switch(MStyleConfigData::scrollBarSubLineButtons) {
+      switch(MgStyleConfigData::scrollBarSubLineButtons) {
             case 0: _subLineButtons = NoButton; break;
             case 1: _subLineButtons = SingleButton; break;
 
@@ -8401,30 +8401,30 @@ void MStyle::configurationChanged()
             }
 
       // tabbar shape
-      switch (MStyleConfigData::tabStyle) {
-            case MStyleConfigData::TS_PLAIN:
-                  _tabBarTabShapeControl = &MStyle::drawTabBarTabShapeControl_Plain;
+      switch (MgStyleConfigData::tabStyle) {
+            case MgStyleConfigData::TS_PLAIN:
+                  _tabBarTabShapeControl = &MgStyle::drawTabBarTabShapeControl_Plain;
                   break;
 
             default:
-            case MStyleConfigData::TS_SINGLE:
-                  _tabBarTabShapeControl = &MStyle::drawTabBarTabShapeControl_Single;
+            case MgStyleConfigData::TS_SINGLE:
+                  _tabBarTabShapeControl = &MgStyle::drawTabBarTabShapeControl_Single;
                   break;
             }
 
       // frame focus
 
-      if (MStyleConfigData::viewDrawFocusIndicator)
-            _frameFocusPrimitive = &MStyle::drawFrameFocusRectPrimitive;
+      if (MgStyleConfigData::viewDrawFocusIndicator)
+            _frameFocusPrimitive = &MgStyle::drawFrameFocusRectPrimitive;
       else
-            _frameFocusPrimitive = &MStyle::emptyPrimitive;
+            _frameFocusPrimitive = &MgStyle::emptyPrimitive;
       }
 
 //---------------------------------------------------------
 //   standardIconImplementation
 //---------------------------------------------------------
 
-QIcon MStyle::standardIconImplementation(StandardPixmap standardIcon,
+QIcon MgStyle::standardIconImplementation(StandardPixmap standardIcon,
    const QStyleOption *option, const QWidget *widget) const
       {
 #if 0

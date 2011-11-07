@@ -26,7 +26,6 @@
 #include "libmscore/style.h"
 
 class Score;
-class Style;
 
 //---------------------------------------------------------
 //   EditStyle
@@ -36,7 +35,7 @@ class EditStyle : public QDialog, private Ui::EditStyleBase {
       Q_OBJECT
 
       Score* cs;
-      Style lstyle;    // local copy of style
+      MStyle lstyle;    // local copy of style
 
       QButtonGroup* stemGroups[VOICES];
 
