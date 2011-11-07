@@ -22,7 +22,8 @@
 #include "page.h"
 #include "mscore.h"
 
-Style* style;
+MStyle* style;
+
 //  20 points        font design size
 //  72 points/inch   point size
 // 120 dpi           screen resolution
@@ -199,7 +200,7 @@ static const QString ff("FreeSerifMscore");
 //    synchronize with TextStyleType
 //---------------------------------------------------------
 
-void setDefaultStyle(Style* s)
+void setDefaultStyle(MStyle* s)
       {
       AS(TextStyle(TR("Title"), ff, 24, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP));
@@ -1132,27 +1133,27 @@ StyleVal::StyleVal(const QString& name, const QString& val)
 //   value
 //---------------------------------------------------------
 
-StyleVal Style::value(StyleIdx idx) const
+StyleVal MStyle::value(StyleIdx idx) const
       {
       return d->_values[idx];
       }
 
-bool Style::isDefault(StyleIdx idx) const
+bool MStyle::isDefault(StyleIdx idx) const
       {
       return d->isDefault(idx);
       }
 
-const ChordDescription* Style::chordDescription(int id) const
+const ChordDescription* MStyle::chordDescription(int id) const
       {
       return d->chordDescription(id);
       }
 
-ChordList* Style::chordList() const
+ChordList* MStyle::chordList() const
       {
       return d->chordList();
       }
 
-void Style::setChordList(ChordList* cl)
+void MStyle::setChordList(ChordList* cl)
       {
       d->setChordList(cl);
       }
@@ -1274,24 +1275,24 @@ void TextStyle::setFont(const QFont&)
       }
 
 //---------------------------------------------------------
-//   Style
+//   MStyle
 //---------------------------------------------------------
 
-Style::Style()
+MStyle::MStyle()
       {
       d = new StyleData;
       }
 
-Style::Style(const Style& s)
+MStyle::MStyle(const MStyle& s)
    : d(s.d)
       {
       }
 
-Style::~Style()
+MStyle::~MStyle()
       {
       }
 
-Style& Style::operator=(const Style& s)
+MStyle& MStyle::operator=(const MStyle& s)
       {
       d = s.d;
       return *this;
@@ -1301,7 +1302,7 @@ Style& Style::operator=(const Style& s)
 //   set
 //---------------------------------------------------------
 
-void Style::set(const StyleVal& v)
+void MStyle::set(const StyleVal& v)
       {
       d->_values[v.getIdx()] = v;
       }
@@ -1310,12 +1311,12 @@ void Style::set(const StyleVal& v)
 //   TextStyle
 //---------------------------------------------------------
 
-const TextStyle& Style::textStyle(TextStyleType idx) const
+const TextStyle& MStyle::textStyle(TextStyleType idx) const
       {
       return d->textStyle(idx);
       }
 
-const TextStyle& Style::textStyle(const QString& name) const
+const TextStyle& MStyle::textStyle(const QString& name) const
       {
       return d->textStyle(name);
       }
@@ -1324,7 +1325,7 @@ const TextStyle& Style::textStyle(const QString& name) const
 //   textStyleType
 //---------------------------------------------------------
 
-TextStyleType Style::textStyleType(const QString& name) const
+TextStyleType MStyle::textStyleType(const QString& name) const
       {
       return d->textStyleType(name);
       }
@@ -1333,7 +1334,7 @@ TextStyleType Style::textStyleType(const QString& name) const
 //   setTextStyle
 //---------------------------------------------------------
 
-void Style::setTextStyle(const TextStyle& ts)
+void MStyle::setTextStyle(const TextStyle& ts)
       {
       d->setTextStyle(ts);
       }
@@ -1342,7 +1343,7 @@ void Style::setTextStyle(const TextStyle& ts)
 //   addTextStyle
 //---------------------------------------------------------
 
-void Style::addTextStyle(const TextStyle& ts)
+void MStyle::addTextStyle(const TextStyle& ts)
       {
       d->_textStyles.append(ts);
       }
@@ -1351,7 +1352,7 @@ void Style::addTextStyle(const TextStyle& ts)
 //   removeTextStyle
 //---------------------------------------------------------
 
-void Style::removeTextStyle(const TextStyle& /*ts*/)
+void MStyle::removeTextStyle(const TextStyle& /*ts*/)
       {
       // TODO: d->_textStyles.append(ts);
       }
@@ -1360,7 +1361,7 @@ void Style::removeTextStyle(const TextStyle& /*ts*/)
 //   textStyles
 //---------------------------------------------------------
 
-const QList<TextStyle>& Style::textStyles() const
+const QList<TextStyle>& MStyle::textStyles() const
       {
       return d->_textStyles;
       }
@@ -1369,32 +1370,32 @@ const QList<TextStyle>& Style::textStyles() const
 //   set
 //---------------------------------------------------------
 
-void Style::set(StyleIdx t, Spatium val)
+void MStyle::set(StyleIdx t, Spatium val)
       {
       set(StyleVal(t, val));
       }
 
-void Style::set(StyleIdx t, const QString& val)
+void MStyle::set(StyleIdx t, const QString& val)
       {
       set(StyleVal(t, val));
       }
 
-void Style::set(StyleIdx t, bool val)
+void MStyle::set(StyleIdx t, bool val)
       {
       set(StyleVal(t, val));
       }
 
-void Style::set(StyleIdx t, qreal val)
+void MStyle::set(StyleIdx t, qreal val)
       {
       set(StyleVal(t, val));
       }
 
-void Style::set(StyleIdx t, int val)
+void MStyle::set(StyleIdx t, int val)
       {
       set(StyleVal(t, val));
       }
 
-void Style::set(StyleIdx t, Direction val)
+void MStyle::set(StyleIdx t, Direction val)
       {
       set(StyleVal(t, val));
       }
@@ -1403,7 +1404,7 @@ void Style::set(StyleIdx t, Direction val)
 //   valueS
 //---------------------------------------------------------
 
-Spatium Style::valueS(StyleIdx idx) const
+Spatium MStyle::valueS(StyleIdx idx) const
       {
       return value(idx).toSpatium();
       }
@@ -1412,7 +1413,7 @@ Spatium Style::valueS(StyleIdx idx) const
 //   valueSt
 //---------------------------------------------------------
 
-QString Style::valueSt(StyleIdx idx) const
+QString MStyle::valueSt(StyleIdx idx) const
       {
       return value(idx).toString();
       }
@@ -1421,7 +1422,7 @@ QString Style::valueSt(StyleIdx idx) const
 //   valueB
 //---------------------------------------------------------
 
-bool Style::valueB(StyleIdx idx) const
+bool MStyle::valueB(StyleIdx idx) const
       {
       return value(idx).toBool();
       }
@@ -1430,7 +1431,7 @@ bool Style::valueB(StyleIdx idx) const
 //   valueD
 //---------------------------------------------------------
 
-qreal Style::valueD(StyleIdx idx) const
+qreal MStyle::valueD(StyleIdx idx) const
       {
       return value(idx).toDouble();
       }
@@ -1439,7 +1440,7 @@ qreal Style::valueD(StyleIdx idx) const
 //   valueI
 //---------------------------------------------------------
 
-int Style::valueI(StyleIdx idx) const
+int MStyle::valueI(StyleIdx idx) const
       {
       return value(idx).toInt();
       }
@@ -1448,12 +1449,12 @@ int Style::valueI(StyleIdx idx) const
 //   load
 //---------------------------------------------------------
 
-bool Style::load(QFile* qf)
+bool MStyle::load(QFile* qf)
       {
       return d->load(qf);
       }
 
-void Style::load(QDomElement e)
+void MStyle::load(QDomElement e)
       {
       d->load(e);
       }
@@ -1462,7 +1463,7 @@ void Style::load(QDomElement e)
 //   save
 //---------------------------------------------------------
 
-void Style::save(Xml& xml, bool optimize)
+void MStyle::save(Xml& xml, bool optimize)
       {
       d->save(xml, optimize);
       }
@@ -1510,7 +1511,7 @@ bool StyleData::load(QFile* qf)
 //   pageFormat
 //---------------------------------------------------------
 
-const PageFormat* Style::pageFormat() const
+const PageFormat* MStyle::pageFormat() const
       {
       return d->pageFormat();
       }
@@ -1519,7 +1520,7 @@ const PageFormat* Style::pageFormat() const
 //   setPageFormat
 //---------------------------------------------------------
 
-void Style::setPageFormat(const PageFormat& pf)
+void MStyle::setPageFormat(const PageFormat& pf)
       {
       d->setPageFormat(pf);
       }
@@ -1533,7 +1534,7 @@ void StyleData::setPageFormat(const PageFormat& pf)
 //   spatium
 //---------------------------------------------------------
 
-qreal Style::spatium() const
+qreal MStyle::spatium() const
       {
       return d->spatium();
       }
@@ -1542,7 +1543,7 @@ qreal Style::spatium() const
 //   setSpatium
 //---------------------------------------------------------
 
-void Style::setSpatium(qreal v)
+void MStyle::setSpatium(qreal v)
       {
       d->setSpatium(v);
       }
@@ -1551,7 +1552,7 @@ void Style::setSpatium(qreal v)
 //   articulationAnchor
 //---------------------------------------------------------
 
-ArticulationAnchor Style::articulationAnchor(int id) const
+ArticulationAnchor MStyle::articulationAnchor(int id) const
       {
       return d->articulationAnchor(id);
       }
@@ -1560,7 +1561,7 @@ ArticulationAnchor Style::articulationAnchor(int id) const
 //   setArticulationAnchor
 //---------------------------------------------------------
 
-void Style::setArticulationAnchor(int id, ArticulationAnchor val)
+void MStyle::setArticulationAnchor(int id, ArticulationAnchor val)
       {
       return d->setArticulationAnchor(id, val);
       }

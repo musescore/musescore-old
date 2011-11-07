@@ -41,7 +41,7 @@ WindowManager::WindowManager( QObject* parent ):
         QObject( parent ),
         enabled_( true ),
         useWMMoveResize_( true ),
-        dragMode_(MStyleConfigData::WD_FULL ),
+        dragMode_(MgStyleConfigData::WD_FULL ),
         dragDistance_(dndEventDelay ),
         dragDelay_( QApplication::startDragTime() ),
         dragAboutToStart_( false ),
@@ -56,9 +56,9 @@ WindowManager::WindowManager( QObject* parent ):
 
 void WindowManager::initialize()
       {
-//      setEnabled(MStyleConfigData::windowDragEnabled());
-//      setDragMode(MStyleConfigData::windowDragMode());
-//      setUseWMMoveResize(MStyleConfigData::useWMMoveResize() );
+//      setEnabled(MgStyleConfigData::windowDragEnabled());
+//      setDragMode(MgStyleConfigData::windowDragMode());
+//      setUseWMMoveResize(MgStyleConfigData::useWMMoveResize() );
 
       setDragDistance(dndEventDelay);
       setDragDelay(QApplication::startDragTime() );
@@ -101,7 +101,7 @@ void WindowManager::initializeWhiteList()
         whiteList_.insert( ExceptionId( "ViewSliders@kmix" ) );
         whiteList_.insert( ExceptionId( "Sidebar_Widget@konqueror" ) );
 
-        foreach( const QString& exception, MStyleConfigData::windowDragWhiteList )
+        foreach( const QString& exception, MgStyleConfigData::windowDragWhiteList )
         {
             ExceptionId id( exception );
             if( !id.className().isEmpty() )
@@ -115,7 +115,7 @@ void WindowManager::initializeBlackList()
       blackList_.clear();
 #if 0
         blackList_.insert( ExceptionId( "CustomTrackView@kdenlive" ) );
-        foreach( const QString& exception, MStyleConfigData::windowDragBlackList )
+        foreach( const QString& exception, MgStyleConfigData::windowDragBlackList )
         {
             ExceptionId id( exception );
             if( !id.className().isEmpty() )
@@ -400,7 +400,7 @@ bool WindowManager::mouseMoveEvent( QObject* object, QEvent* event )
         // tool buttons
         if( QToolButton* toolButton = qobject_cast<QToolButton*>( widget ) )
         {
-            if( dragMode() == MStyleConfigData::WD_MINIMAL && !qobject_cast<QToolBar*>(widget->parentWidget() ) ) return false;
+            if( dragMode() == MgStyleConfigData::WD_MINIMAL && !qobject_cast<QToolBar*>(widget->parentWidget() ) ) return false;
             return toolButton->autoRaise() && !toolButton->isEnabled();
         }
 
@@ -427,7 +427,7 @@ bool WindowManager::mouseMoveEvent( QObject* object, QEvent* event )
         in MINIMAL mode, anything that has not been already accepted
         and does not come from a toolbar is rejected
         */
-        if( dragMode() == MStyleConfigData::WD_MINIMAL )
+        if( dragMode() == MgStyleConfigData::WD_MINIMAL )
         {
             if( qobject_cast<QToolBar*>( widget ) ) return true;
             else return false;

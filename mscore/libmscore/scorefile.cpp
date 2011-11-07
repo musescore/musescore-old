@@ -494,7 +494,7 @@ bool Score::loadStyle(const QString& fn)
       {
       QFile f(fn);
       if (f.open(QIODevice::ReadOnly)) {
-            Style st = _style;
+            MStyle st = _style;
             if (st.load(&f)) {
                   _undo->push(new ChangeStyle(this, st));
                   return true;
@@ -1231,7 +1231,7 @@ bool Score::read(QDomElement dScore)
                         }
                   }
             }
-            
+
       //
       // check for soundfont,
       // add default soundfont if none found
@@ -1247,7 +1247,7 @@ bool Score::read(QDomElement dScore)
             }
       if (!hasSoundfont)
             _syntiState.append(SyntiParameter("soundfont", MScore::soundFont));
-            
+
       fixTicks();
       renumberMeasures();
       rebuildMidiMapping();

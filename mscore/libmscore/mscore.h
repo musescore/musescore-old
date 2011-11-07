@@ -548,7 +548,7 @@ extern qreal DPI;
 extern qreal DPMM;
 extern bool debugMode;
 
-class Style;
+class MStyle;
 class Sequencer;
 
 //---------------------------------------------------------
@@ -557,15 +557,15 @@ class Sequencer;
 //---------------------------------------------------------
 
 class MScore {
-      static Style* _defaultStyle;
-      static Style* _baseStyle;
+      static MStyle* _defaultStyle;
+      static MStyle* _baseStyle;
       static QString _globalShare;
       static int _hRaster, _vRaster;
 
    public:
       static void init();
-      static Style* defaultStyle();
-      static Style* baseStyle();
+      static MStyle* defaultStyle();
+      static MStyle* baseStyle();
       static const QString& globalShare() { return _globalShare; }
       static qreal hRaster()              { return _hRaster;     }
       static qreal vRaster()              { return _vRaster;     }

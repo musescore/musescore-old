@@ -47,19 +47,19 @@
     {
 
         // default enability, duration and maxFrame
-        bool animationsEnabled( MStyleConfigData::animationsEnabled );
+        bool animationsEnabled( MgStyleConfigData::animationsEnabled );
 
         // enability
-        comboBoxEngine().setEnabled( animationsEnabled && MStyleConfigData::comboBoxTransitionsEnabled );
-        labelEngine().setEnabled( animationsEnabled && MStyleConfigData::labelTransitionsEnabled );
-        lineEditEngine().setEnabled( animationsEnabled && MStyleConfigData::lineEditTransitionsEnabled );
-        stackedWidgetEngine().setEnabled( animationsEnabled && MStyleConfigData::stackedWidgetTransitionsEnabled );
+        comboBoxEngine().setEnabled( animationsEnabled && MgStyleConfigData::comboBoxTransitionsEnabled );
+        labelEngine().setEnabled( animationsEnabled && MgStyleConfigData::labelTransitionsEnabled );
+        lineEditEngine().setEnabled( animationsEnabled && MgStyleConfigData::lineEditTransitionsEnabled );
+        stackedWidgetEngine().setEnabled( animationsEnabled && MgStyleConfigData::stackedWidgetTransitionsEnabled );
 
         // durations
-        comboBoxEngine().setDuration( MStyleConfigData::comboBoxTransitionsDuration );
-        labelEngine().setDuration( MStyleConfigData::labelTransitionsDuration );
-        lineEditEngine().setDuration( MStyleConfigData::lineEditTransitionsDuration );
-        stackedWidgetEngine().setDuration( MStyleConfigData::stackedWidgetTransitionsDuration );
+        comboBoxEngine().setDuration( MgStyleConfigData::comboBoxTransitionsDuration );
+        labelEngine().setDuration( MgStyleConfigData::labelTransitionsDuration );
+        lineEditEngine().setDuration( MgStyleConfigData::lineEditTransitionsDuration );
+        stackedWidgetEngine().setDuration( MgStyleConfigData::stackedWidgetTransitionsDuration );
 
     }
 

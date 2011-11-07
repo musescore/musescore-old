@@ -258,7 +258,7 @@ class Score {
 
       InputState _is;
 
-      Style _style;
+      MStyle _style;
 
       QList<StaffType*> _staffTypes;
 
@@ -418,7 +418,7 @@ class Score {
       void cmdAddStretch(qreal);
       void transpose(Note* n, Interval, bool useSharpsFlats);
 
-      Score(const Style*);
+      Score(const MStyle*);
       Score(Score*);                // used for excerpts
       ~Score();
 
@@ -618,9 +618,9 @@ class Score {
       void spell(Note*);
       int nextSeg(int tick, int track);
 
-      Style* style()                           { return &_style;                  }
-      const Style* style() const               { return &_style;                  }
-      void setStyle(const Style& s)            { _style = s;                      }
+      MStyle* style()                          { return &_style;                  }
+      const MStyle* style() const              { return &_style;                  }
+      void setStyle(const MStyle& s)           { _style = s;                      }
       bool loadStyle(const QString&);
       bool saveStyle(const QString&);
 

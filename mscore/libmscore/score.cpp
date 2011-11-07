@@ -315,7 +315,7 @@ void Score::init()
 //   Score
 //---------------------------------------------------------
 
-Score::Score(const Style* s)
+Score::Score(const MStyle* s)
    : _selection(this)
       {
       init();

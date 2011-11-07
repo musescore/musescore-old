@@ -2103,7 +2103,7 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
                         QString sname = text->styleName();
                         if (!text->styled() && !sname.isEmpty()) {
                               // check if we can transform text into styled text
-                              Style* s = score()->style();
+                              MStyle* s = score()->style();
                               TextStyleType st = s->textStyleType(sname);
                               if (st != TEXT_STYLE_INVALID)
                                     text->setTextStyle(st);

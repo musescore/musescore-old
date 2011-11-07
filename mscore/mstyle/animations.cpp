@@ -66,30 +66,30 @@
 
         {
             // default enability, duration and maxFrame
-            bool animationsEnabled = MStyleConfigData::animationsEnabled;
+            bool animationsEnabled = MgStyleConfigData::animationsEnabled;
 
             // enability
-            widgetEnabilityEngine_->setEnabled( animationsEnabled &&  MStyleConfigData::genericAnimationsEnabled );
-            widgetStateEngine_->setEnabled( animationsEnabled &&  MStyleConfigData::genericAnimationsEnabled );
-            comboBoxEngine_->setEnabled( animationsEnabled &&  MStyleConfigData::genericAnimationsEnabled );
-            toolButtonEngine_->setEnabled( animationsEnabled &&  MStyleConfigData::genericAnimationsEnabled );
-            toolBoxEngine_->setEnabled( animationsEnabled &&  MStyleConfigData::genericAnimationsEnabled );
-            lineEditEngine_->setEnabled( animationsEnabled &&  MStyleConfigData::genericAnimationsEnabled );
-            splitterEngine_->setEnabled( animationsEnabled &&  MStyleConfigData::genericAnimationsEnabled );
-            scrollBarEngine_->setEnabled( animationsEnabled &&  MStyleConfigData::genericAnimationsEnabled );
-            sliderEngine_->setEnabled( animationsEnabled &&  MStyleConfigData::genericAnimationsEnabled );
-            spinBoxEngine_->setEnabled( animationsEnabled &&  MStyleConfigData::genericAnimationsEnabled );
-            tabBarEngine_->setEnabled( animationsEnabled &&  MStyleConfigData::genericAnimationsEnabled );
-            dockSeparatorEngine_->setEnabled( animationsEnabled &&  MStyleConfigData::genericAnimationsEnabled );
-            headerViewEngine_->setEnabled( animationsEnabled &&  MStyleConfigData::genericAnimationsEnabled );
-            mdiWindowEngine_->setEnabled( animationsEnabled &&  MStyleConfigData::genericAnimationsEnabled );
+            widgetEnabilityEngine_->setEnabled( animationsEnabled &&  MgStyleConfigData::genericAnimationsEnabled );
+            widgetStateEngine_->setEnabled( animationsEnabled &&  MgStyleConfigData::genericAnimationsEnabled );
+            comboBoxEngine_->setEnabled( animationsEnabled &&  MgStyleConfigData::genericAnimationsEnabled );
+            toolButtonEngine_->setEnabled( animationsEnabled &&  MgStyleConfigData::genericAnimationsEnabled );
+            toolBoxEngine_->setEnabled( animationsEnabled &&  MgStyleConfigData::genericAnimationsEnabled );
+            lineEditEngine_->setEnabled( animationsEnabled &&  MgStyleConfigData::genericAnimationsEnabled );
+            splitterEngine_->setEnabled( animationsEnabled &&  MgStyleConfigData::genericAnimationsEnabled );
+            scrollBarEngine_->setEnabled( animationsEnabled &&  MgStyleConfigData::genericAnimationsEnabled );
+            sliderEngine_->setEnabled( animationsEnabled &&  MgStyleConfigData::genericAnimationsEnabled );
+            spinBoxEngine_->setEnabled( animationsEnabled &&  MgStyleConfigData::genericAnimationsEnabled );
+            tabBarEngine_->setEnabled( animationsEnabled &&  MgStyleConfigData::genericAnimationsEnabled );
+            dockSeparatorEngine_->setEnabled( animationsEnabled &&  MgStyleConfigData::genericAnimationsEnabled );
+            headerViewEngine_->setEnabled( animationsEnabled &&  MgStyleConfigData::genericAnimationsEnabled );
+            mdiWindowEngine_->setEnabled( animationsEnabled &&  MgStyleConfigData::genericAnimationsEnabled );
 
-            progressBarEngine_->setEnabled( animationsEnabled &&  MStyleConfigData::progressBarAnimationsEnabled );
-            progressBarEngine_->setBusyIndicatorEnabled( animationsEnabled &&  MStyleConfigData::progressBarAnimated );
+            progressBarEngine_->setEnabled( animationsEnabled &&  MgStyleConfigData::progressBarAnimationsEnabled );
+            progressBarEngine_->setBusyIndicatorEnabled( animationsEnabled &&  MgStyleConfigData::progressBarAnimated );
 
             // menubar engine
-            int menuBarAnimationType( MStyleConfigData::menuBarAnimationType );
-            if( menuBarAnimationType == MStyleConfigData::MB_FADE && !qobject_cast<MenuBarEngineV1*>( menuBarEngine_ ) )
+            int menuBarAnimationType( MgStyleConfigData::menuBarAnimationType );
+            if( menuBarAnimationType == MgStyleConfigData::MB_FADE && !qobject_cast<MenuBarEngineV1*>( menuBarEngine_ ) )
             {
                 if( menuBarEngine_ )
                 {
@@ -101,7 +101,7 @@
 
                 } else registerEngine( menuBarEngine_ = new MenuBarEngineV1( this ) );
 
-            } else if( menuBarAnimationType == MStyleConfigData::MB_FOLLOW_MOUSE && !qobject_cast<MenuBarEngineV2*>( menuBarEngine_ ) ) {
+            } else if( menuBarAnimationType == MgStyleConfigData::MB_FOLLOW_MOUSE && !qobject_cast<MenuBarEngineV2*>( menuBarEngine_ ) ) {
 
                 if( menuBarEngine_ )
                 {
@@ -116,8 +116,8 @@
             }
 
             // menu engine
-            int menuAnimationType( MStyleConfigData::menuAnimationType );
-            if( menuAnimationType == MStyleConfigData::ME_FADE && !qobject_cast<MenuEngineV1*>( menuEngine_ ) )
+            int menuAnimationType( MgStyleConfigData::menuAnimationType );
+            if( menuAnimationType == MgStyleConfigData::ME_FADE && !qobject_cast<MenuEngineV1*>( menuEngine_ ) )
             {
 
                 if( menuEngine_ )
@@ -130,7 +130,7 @@
 
                 } else registerEngine( menuEngine_ = new MenuEngineV1( this ) );
 
-            } else if( menuAnimationType == MStyleConfigData::ME_FOLLOW_MOUSE && !qobject_cast<MenuEngineV2*>( menuEngine_ ) ) {
+            } else if( menuAnimationType == MgStyleConfigData::ME_FOLLOW_MOUSE && !qobject_cast<MenuEngineV2*>( menuEngine_ ) ) {
 
                 if( menuEngine_ )
                 {
@@ -144,16 +144,16 @@
 
             }
 
-            menuBarEngine_->setEnabled( animationsEnabled &&  MStyleConfigData::menuBarAnimationsEnabled && menuBarAnimationType != MStyleConfigData::MB_NONE );
-            menuEngine_->setEnabled( animationsEnabled &&  MStyleConfigData::menuAnimationsEnabled && menuAnimationType != MStyleConfigData::ME_NONE );
+            menuBarEngine_->setEnabled( animationsEnabled &&  MgStyleConfigData::menuBarAnimationsEnabled && menuBarAnimationType != MgStyleConfigData::MB_NONE );
+            menuEngine_->setEnabled( animationsEnabled &&  MgStyleConfigData::menuAnimationsEnabled && menuAnimationType != MgStyleConfigData::ME_NONE );
 
             // toolbar engine
-            int toolBarAnimationType( MStyleConfigData::toolBarAnimationType );
-            if( toolBarAnimationType == MStyleConfigData::TB_NONE || toolBarAnimationType == MStyleConfigData::TB_FOLLOW_MOUSE )
+            int toolBarAnimationType( MgStyleConfigData::toolBarAnimationType );
+            if( toolBarAnimationType == MgStyleConfigData::TB_NONE || toolBarAnimationType == MgStyleConfigData::TB_FOLLOW_MOUSE )
             {
 
                 // disable toolbar engine
-                toolBarEngine_->setEnabled( animationsEnabled && toolBarAnimationType == MStyleConfigData::TB_FOLLOW_MOUSE );
+                toolBarEngine_->setEnabled( animationsEnabled && toolBarAnimationType == MgStyleConfigData::TB_FOLLOW_MOUSE );
 
                 // unregister all toolbuttons that belong to a toolbar
                 foreach( QWidget* widget, widgetStateEngine_->registeredWidgets( AnimationHover|AnimationFocus ) )
@@ -162,7 +162,7 @@
                     { widgetStateEngine_->unregisterWidget( widget ); }
                 }
 
-            } else if( toolBarAnimationType == MStyleConfigData::TB_FADE ) {
+            } else if( toolBarAnimationType == MgStyleConfigData::TB_FADE ) {
 
                 // disable toolbar engine
                 toolBarEngine_->setEnabled( false );
@@ -187,32 +187,32 @@
         {
 
             // durations
-            widgetEnabilityEngine_->setDuration( MStyleConfigData::genericAnimationsDuration);
-            widgetStateEngine_->setDuration( MStyleConfigData::genericAnimationsDuration);
-            comboBoxEngine_->setDuration( MStyleConfigData::genericAnimationsDuration);
-            toolButtonEngine_->setDuration( MStyleConfigData::genericAnimationsDuration);
-            toolBoxEngine_->setDuration( MStyleConfigData::genericAnimationsDuration);
-            lineEditEngine_->setDuration( MStyleConfigData::genericAnimationsDuration);
-            splitterEngine_->setDuration( MStyleConfigData::genericAnimationsDuration);
-            scrollBarEngine_->setDuration( MStyleConfigData::genericAnimationsDuration);
-            sliderEngine_->setDuration( MStyleConfigData::genericAnimationsDuration);
-            spinBoxEngine_->setDuration( MStyleConfigData::genericAnimationsDuration);
-            tabBarEngine_->setDuration( MStyleConfigData::genericAnimationsDuration);
-            dockSeparatorEngine_->setDuration( MStyleConfigData::genericAnimationsDuration);
-            headerViewEngine_->setDuration( MStyleConfigData::genericAnimationsDuration);
-            mdiWindowEngine_->setDuration( MStyleConfigData::genericAnimationsDuration);
+            widgetEnabilityEngine_->setDuration( MgStyleConfigData::genericAnimationsDuration);
+            widgetStateEngine_->setDuration( MgStyleConfigData::genericAnimationsDuration);
+            comboBoxEngine_->setDuration( MgStyleConfigData::genericAnimationsDuration);
+            toolButtonEngine_->setDuration( MgStyleConfigData::genericAnimationsDuration);
+            toolBoxEngine_->setDuration( MgStyleConfigData::genericAnimationsDuration);
+            lineEditEngine_->setDuration( MgStyleConfigData::genericAnimationsDuration);
+            splitterEngine_->setDuration( MgStyleConfigData::genericAnimationsDuration);
+            scrollBarEngine_->setDuration( MgStyleConfigData::genericAnimationsDuration);
+            sliderEngine_->setDuration( MgStyleConfigData::genericAnimationsDuration);
+            spinBoxEngine_->setDuration( MgStyleConfigData::genericAnimationsDuration);
+            tabBarEngine_->setDuration( MgStyleConfigData::genericAnimationsDuration);
+            dockSeparatorEngine_->setDuration( MgStyleConfigData::genericAnimationsDuration);
+            headerViewEngine_->setDuration( MgStyleConfigData::genericAnimationsDuration);
+            mdiWindowEngine_->setDuration( MgStyleConfigData::genericAnimationsDuration);
 
-            progressBarEngine_->setDuration( MStyleConfigData::progressBarAnimationsDuration);
-            progressBarEngine_->setBusyStepDuration( MStyleConfigData::progressBarBusyStepDuration);
+            progressBarEngine_->setDuration( MgStyleConfigData::progressBarAnimationsDuration);
+            progressBarEngine_->setBusyStepDuration( MgStyleConfigData::progressBarBusyStepDuration);
 
-            toolBarEngine_->setDuration( MStyleConfigData::genericAnimationsDuration);
-            toolBarEngine_->setFollowMouseDuration( MStyleConfigData::toolBarAnimationsDuration);
+            toolBarEngine_->setDuration( MgStyleConfigData::genericAnimationsDuration);
+            toolBarEngine_->setFollowMouseDuration( MgStyleConfigData::toolBarAnimationsDuration);
 
-            menuBarEngine_->setDuration( MStyleConfigData::menuBarAnimationsDuration);
-            menuBarEngine_->setFollowMouseDuration( MStyleConfigData::menuBarFollowMouseAnimationsDuration);
+            menuBarEngine_->setDuration( MgStyleConfigData::menuBarAnimationsDuration);
+            menuBarEngine_->setFollowMouseDuration( MgStyleConfigData::menuBarFollowMouseAnimationsDuration);
 
-            menuEngine_->setDuration( MStyleConfigData::menuAnimationsDuration);
-            menuEngine_->setFollowMouseDuration( MStyleConfigData::menuFollowMouseAnimationsDuration);
+            menuEngine_->setDuration( MgStyleConfigData::menuAnimationsDuration);
+            menuEngine_->setFollowMouseDuration( MgStyleConfigData::menuFollowMouseAnimationsDuration);
         }
 
     }
@@ -247,7 +247,7 @@ void Animations::registerWidget( QWidget* widget ) const
             if( isInToolBar )
             {
 
-                if( MStyleConfigData::toolBarAnimationType == MStyleConfigData::TB_FADE )
+                if( MgStyleConfigData::toolBarAnimationType == MgStyleConfigData::TB_FADE )
                 { widgetStateEngine().registerWidget( widget, AnimationHover ); }
 
             } else widgetStateEngine().registerWidget( widget, AnimationHover|AnimationFocus );

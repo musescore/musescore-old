@@ -29,13 +29,12 @@ class FrameShadowFactory;
 class WidgetExplorer;
 class Animations;
 class Transitions;
-//class WindowManager;
 
 //---------------------------------------------------------
-//   MStyle
+//   MgStyle
 //---------------------------------------------------------
 
-class MStyle : public QCommonStyle {
+class MgStyle : public QCommonStyle {
       Q_OBJECT
 
       //! arrow orientation
@@ -82,12 +81,12 @@ class MStyle : public QCommonStyle {
       one tab is being drawn
       */
       class TabBarData: public QObject {
-            QWeakPointer<const MStyle> _style;   //! pointer to parent style object
+            QWeakPointer<const MgStyle> _style;   //! pointer to parent style object
             QWeakPointer<const QWidget> _tabBar; //! pointer to target tabBar
             bool _dirty;                         //! if true, will paint on next TabBarTabShapeControlCall
 
          public:
-            TabBarData(MStyle* parent):
+            TabBarData(MgStyle* parent):
                QObject(parent),
                _style(parent),
                _dirty(false)
@@ -304,15 +303,15 @@ class MStyle : public QCommonStyle {
       TabBarData* _tabBarData;
 
       //! pointer to primitive specialized function
-      typedef bool (MStyle::*StylePrimitive)( const QStyleOption*, QPainter*, const QWidget* ) const;
+      typedef bool (MgStyle::*StylePrimitive)( const QStyleOption*, QPainter*, const QWidget* ) const;
       StylePrimitive _frameFocusPrimitive;
 
       //! pointer to control specialized function
-      typedef bool (MStyle::*StyleControl)( const QStyleOption*, QPainter*, const QWidget* ) const;
+      typedef bool (MgStyle::*StyleControl)( const QStyleOption*, QPainter*, const QWidget* ) const;
       StyleControl _tabBarTabShapeControl;
 
       //! pointer to control specialized function
-      typedef bool (MStyle::*StyleComplexControl)( const QStyleOptionComplex*, QPainter*, const QWidget* ) const;
+      typedef bool (MgStyle::*StyleComplexControl)( const QStyleOptionComplex*, QPainter*, const QWidget* ) const;
 
       int _hintCounter;
       int _controlCounter;
@@ -606,7 +605,7 @@ class MStyle : public QCommonStyle {
       void configurationChanged();
 
    public:
-      MStyle();
+      MgStyle();
       virtual int pixelMetric(PixelMetric, const QStyleOption* = 0, const QWidget* = 0) const;
       virtual int styleHint(StyleHint, const QStyleOption* = 0, const QWidget* = 0, QStyleHintReturn* = 0) const;
       virtual QRect subElementRect(SubElement, const QStyleOption*, const QWidget*) const;
@@ -635,7 +634,7 @@ class MStyle : public QCommonStyle {
 //   preceeds
 //---------------------------------------------------------
 
-bool MStyle::preceeds( const QPoint& point, const QRect& bound, const QStyleOption* option ) const
+bool MgStyle::preceeds( const QPoint& point, const QRect& bound, const QStyleOption* option ) const
       {
       if (option->state&QStyle::State_Horizontal) {
             if (option->direction == Qt::LeftToRight)
@@ -651,7 +650,7 @@ bool MStyle::preceeds( const QPoint& point, const QRect& bound, const QStyleOpti
 //   scrollBarHitTest
 //---------------------------------------------------------
 
-QStyle::SubControl MStyle::scrollBarHitTest(const QRect& rect, const QPoint& point, const QStyleOption* option) const
+QStyle::SubControl MgStyle::scrollBarHitTest(const QRect& rect, const QPoint& point, const QStyleOption* option) const
       {
       if (option->state & QStyle::State_Horizontal) {
             if (option->direction == Qt::LeftToRight )
@@ -667,7 +666,7 @@ QStyle::SubControl MStyle::scrollBarHitTest(const QRect& rect, const QPoint& poi
 //   tilesByShape
 //---------------------------------------------------------
 
-TileSet::Tiles MStyle::tilesByShape( const QTabBar::Shape& shape ) const
+TileSet::Tiles MgStyle::tilesByShape( const QTabBar::Shape& shape ) const
       {
       switch (shape) {
             case QTabBar::RoundedNorth:
@@ -695,7 +694,7 @@ TileSet::Tiles MStyle::tilesByShape( const QTabBar::Shape& shape ) const
 //   adjustSlabRect
 //---------------------------------------------------------
 
-void MStyle::adjustSlabRect(SlabRect& slab, const QRect& tabWidgetRect, bool documentMode, bool vertical) const
+void MgStyle::adjustSlabRect(SlabRect& slab, const QRect& tabWidgetRect, bool documentMode, bool vertical) const
       {
       // no tabWidget found, do nothing
       if( documentMode || !tabWidgetRect.isValid() )
