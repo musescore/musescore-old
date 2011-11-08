@@ -23,8 +23,6 @@
 QVector<Sym> symbols[2];
 static bool symbolsInitialized[2] = { false, false };
 
-#undef USE_GLYPHS
-
 #ifdef USE_GLYPHS
 static bool fontsInitialized = false;
 #endif
@@ -457,23 +455,15 @@ QFont fontId2font(int fontId)
 
 void Sym::genGlyphs()
       {
-      QString s(toString());
-      QTextLayout layout(s, _font);
-      QTextOption to = layout.textOption();
-      to.setUseDesignMetrics(true);
-      to.setWrapMode(QTextOption::NoWrap);
-      layout.setTextOption(to);
-      layout.beginLayout();
-      QTextLine line = layout.createLine();
-      line.setPosition(QPointF());
-      layout.endLayout();
-      QList<QGlyphRun> gl = layout.glyphRuns();
-      if (!gl.isEmpty()) {
-            glyphs = gl[0];
-            glyphs.setPositions(QVector<QPointF>(1, QPointF()));
-            }
-      else
-            qDebug("no glyphs for <%s> %d\n", _name, s.size());
+      QRawFont rfont = QRawFont::fromFont(_font);
+      QVector<quint32> idx = rfont.glyphIndexesForString(toString());
+      QVector<QPointF> adv;
+      adv << QPointF();
+      Q_ASSERT(idx.size() == 1);
+      Q_ASSERT(adv.size() == 1);
+      glyphs.setGlyphIndexes(idx);
+      glyphs.setPositions(adv);
+      glyphs.setRawFont(rfont);
       }
 #endif
 
@@ -526,6 +516,14 @@ void Sym::draw(Painter* painter, qreal mag, qreal x, qreal y) const
       qreal imag = 1.0 / mag;
       painter->scale(mag);
 #ifdef USE_GLYPHS
+/*      int n = glyphs.glyphIndexes().size();
+      printf("drawGlyphs <%s %f> n = %d  idx = %d\n",
+         qPrintable(glyphs.rawFont().familyName()),
+         glyphs.rawFont().pixelSize(),
+         n,
+         glyphs.glyphIndexes()[0]
+         );
+  */
       painter->drawGlyphRun(QPointF(x * imag, y * imag), glyphs);
 #else
       painter->setFont(_font);
