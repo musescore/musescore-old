@@ -20,7 +20,7 @@
 
 class MuseScoreView;
 class Segment;
-class Painter;
+class QPainter;
 
 // subtypes:
 
@@ -52,7 +52,7 @@ class TimeSig : public Element {
       TimeSig* clone() const             { return new TimeSig(*this); }
       ElementType type() const           { return TIMESIG; }
       void setSubtype(int val);
-      void draw(Painter*) const;
+      void draw(QPainter*) const;
       void write(Xml& xml) const;
       void read(QDomElement);
       void layout();

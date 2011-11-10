@@ -18,7 +18,7 @@
 
 class Trill;
 class Accidental;
-class Painter;
+class QPainter;
 
 //---------------------------------------------------------
 //   TrillSegment
@@ -31,7 +31,7 @@ class TrillSegment : public LineSegment {
       Trill* trill() const                { return (Trill*)spanner(); }
       virtual ElementType type() const    { return TRILL_SEGMENT; }
       virtual TrillSegment* clone() const { return new TrillSegment(*this); }
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
       virtual void layout();

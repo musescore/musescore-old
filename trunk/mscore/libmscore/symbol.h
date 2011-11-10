@@ -17,7 +17,7 @@
 #include "bsymbol.h"
 
 class Segment;
-class Painter;
+class QPainter;
 
 //---------------------------------------------------------
 //   Symbol
@@ -43,7 +43,7 @@ class Symbol : public BSymbol {
       void setSym(int s) { _sym  = s;    }
       int sym() const    { return _sym;  }
 
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       virtual void layout();
@@ -69,7 +69,7 @@ class FSymbol : public Element {
       virtual FSymbol* clone() const    { return new FSymbol(*this); }
       virtual ElementType type() const  { return FSYMBOL; }
 
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       virtual void layout();

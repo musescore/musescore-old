@@ -40,7 +40,6 @@
 #include "navigate.h"
 #include "stafftype.h"
 #include "stem.h"
-#include "painter.h"
 #include "mscore.h"
 #include "accidental.h"
 #include "noteevent.h"
@@ -58,11 +57,13 @@ StemSlash::StemSlash(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void StemSlash::draw(Painter* painter) const
+void StemSlash::draw(QPainter* painter) const
       {
       qreal lw = point(score()->styleS(ST_stemWidth));
-      painter->setLineWidth(lw);
-      painter->drawLine(line.x1(), line.y1(), line.x2(), line.y2());
+      QPen pen(painter->pen());
+      pen.setWidthF(lw);
+      painter->setPen(pen);
+      painter->drawLine(QLineF(line.x1(), line.y1(), line.x2(), line.y2()));
       }
 
 //---------------------------------------------------------

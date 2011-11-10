@@ -16,7 +16,7 @@
 
 #include "element.h"
 
-class Painter;
+class QPainter;
 
 //---------------------------------------------------------
 //   ShadowNote
@@ -38,7 +38,7 @@ class ShadowNote : public Element {
       virtual void layout();
       int line() const                  { return _line;   }
       void setLine(int n)               { _line = n;      }
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       void setSym(Sym* s)               { sym = s;     }
       };
 

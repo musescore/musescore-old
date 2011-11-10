@@ -20,7 +20,6 @@
 #include "score.h"
 #include "sym.h"
 #include "text.h"
-#include "painter.h"
 #include "mscore.h"
 
 //---------------------------------------------------------
@@ -61,7 +60,7 @@ void TextLineSegment::setSelected(bool f)
 //   draw
 //---------------------------------------------------------
 
-void TextLineSegment::draw(Painter* painter) const
+void TextLineSegment::draw(QPainter* painter) const
       {
       TextLine* tl    = textLine();
       qreal _spatium = spatium();
@@ -83,7 +82,9 @@ void TextLineSegment::draw(Painter* painter) const
                   }
             painter->save();
             painter->translate(_text->pos());
-            painter->setPenColor(_text->curColor());
+            QPen pen(painter->pen());
+            pen.setColor(_text->curColor());
+            painter->setPen(pen);
             _text->draw(painter);
             painter->restore();
             }
@@ -107,38 +108,39 @@ void TextLineSegment::draw(Painter* painter) const
 
       QPointF pp1(l, 0.0);
 
-      painter->setLineWidth(textlineLineWidth);
-      painter->setLineStyle(tl->lineStyle());
-
+      QPen pen(painter->pen());
+      pen.setWidthF(textlineLineWidth);
+      pen.setStyle(tl->lineStyle());
       if (selected() && !(score() && score()->printing()))
-            painter->setPenColor(MScore::selectColor[0]);
+            pen.setColor(MScore::selectColor[0]);
       else if (!visible())
-            painter->setPenColor(Qt::gray);
+            pen.setColor(Qt::gray);
       else
-            painter->setPenColor(tl->lineColor());
+            pen.setColor(tl->lineColor());
+      painter->setPen(pen);
 
       if (tl->beginHook() && tl->beginHookType() == HOOK_45)
             pp1.rx() += fabs(tl->beginHookHeight().val() * _spatium * .4);
       if (tl->endHook() && tl->endHookType() == HOOK_45)
             pp2.rx() -= fabs(tl->endHookHeight().val() * _spatium * .4);
-      painter->drawLine(pp1.x(), pp1.y(), pp2.x(), pp2.y());
+      painter->drawLine(QLineF(pp1.x(), pp1.y(), pp2.x(), pp2.y()));
 
       if (tl->beginHook()) {
             qreal hh = tl->beginHookHeight().val() * _spatium;
             if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN) {
                   if (tl->beginHookType() == HOOK_45)
-                        painter->drawLine(pp1.x(), pp1.y(), pp1.x() - fabs(hh * .4), pp1.y() + hh);
+                        painter->drawLine(QLineF(pp1.x(), pp1.y(), pp1.x() - fabs(hh * .4), pp1.y() + hh));
                   else
-                        painter->drawLine(pp1.x(), pp1.y(), pp1.x(), pp1.y() + hh);
+                        painter->drawLine(QLineF(pp1.x(), pp1.y(), pp1.x(), pp1.y() + hh));
                   }
             }
       if (tl->endHook()) {
             qreal hh = tl->endHookHeight().val() * _spatium;
             if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_END) {
                   if (tl->endHookType() == HOOK_45)
-                        painter->drawLine(pp2.x(), pp2.y(), pp2.x() + fabs(hh * .4), pp2.y() + hh);
+                        painter->drawLine(QLineF(pp2.x(), pp2.y(), pp2.x() + fabs(hh * .4), pp2.y() + hh));
                   else
-                        painter->drawLine(pp2.x(), pp2.y(), pp2.x(), pp2.y() + hh);
+                        painter->drawLine(QLineF(pp2.x(), pp2.y(), pp2.x(), pp2.y() + hh));
                   }
             }
       }

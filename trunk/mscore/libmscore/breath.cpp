@@ -17,7 +17,6 @@
 #include "segment.h"
 #include "measure.h"
 #include "score.h"
-#include "painter.h"
 
 int Breath::symList[Breath::breathSymbols] = {
       rcommaSym,
@@ -72,7 +71,7 @@ void Breath::read(QDomElement e)
 //   draw
 //---------------------------------------------------------
 
-void Breath::draw(Painter* p) const
+void Breath::draw(QPainter* p) const
       {
       symbols[score()->symIdx()][symList[subtype()]].draw(p, magS());
       }

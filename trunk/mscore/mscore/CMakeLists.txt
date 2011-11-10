@@ -155,7 +155,7 @@ add_executable ( ${ExecutableName}
       selinstrument.cpp texteditor.cpp editstafftype.cpp texttools.cpp edittools.cpp
       editpitch.cpp editstringdata.cpp editraster.cpp pianotools.cpp mediadialog.cpp
       profile.cpp exportmp3.cpp chordeditor.cpp chordview.cpp
-      album.cpp webpage.cpp painterqt.cpp textstyle.cpp tempoproperties.cpp
+      album.cpp webpage.cpp textstyle.cpp tempoproperties.cpp
       lineproperties.cpp stafftextproperties.cpp splitstaff.cpp
       tupletdialog.cpp tupletproperties.cpp glissandoproperties.cpp
       articulationprop.cpp textprop.cpp dynamicprop.cpp

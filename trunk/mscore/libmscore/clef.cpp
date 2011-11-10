@@ -24,7 +24,6 @@
 #include "staff.h"
 #include "segment.h"
 #include "stafftype.h"
-#include "painter.h"
 
 #define TR(a)  QT_TRANSLATE_NOOP("clefTable", a)
 
@@ -274,7 +273,7 @@ void Clef::layout()
 //   draw
 //---------------------------------------------------------
 
-void Clef::draw(Painter* painter) const
+void Clef::draw(QPainter* painter) const
       {
       if (staff() && staff()->useTablature() && !staff()->staffType()->genClef())
 	      return;

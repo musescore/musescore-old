@@ -23,7 +23,7 @@ class System;
 class SlurTie;
 class Score;
 class MuseScoreView;
-class Painter;
+class QPainter;
 class ChordRest;
 
 //---------------------------------------------------------
@@ -68,7 +68,7 @@ class SlurSegment : public SpannerSegment {
 
       void layout(const QPointF& p1, const QPointF& p2);
       virtual QPainterPath shape() const { return shapePath; }
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
 
       virtual bool isEditable() const { return true; }
       virtual void editDrag(const EditData&);

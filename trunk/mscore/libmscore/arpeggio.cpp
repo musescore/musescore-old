@@ -19,7 +19,6 @@
 #include "staff.h"
 #include "part.h"
 #include "segment.h"
-#include "painter.h"
 
 //---------------------------------------------------------
 //   Arpeggio
@@ -109,7 +108,7 @@ void Arpeggio::layout()
 //   draw
 //---------------------------------------------------------
 
-void Arpeggio::draw(Painter* p) const
+void Arpeggio::draw(QPainter* p) const
       {
       qreal _spatium = spatium();
 
@@ -139,13 +138,15 @@ void Arpeggio::draw(Painter* p) const
                   y2 = _height + _userLen2.val() * _spatium;
                   p->save();
 
-                  p->setLineWidth(score()->styleS(ST_ArpeggioLineWidth).val() * _spatium);
-                  p->setCapStyle(Qt::RoundCap);
+                  QPen pen(p->pen());
+                  pen.setWidthF(score()->styleS(ST_ArpeggioLineWidth).val() * _spatium);
+                  pen.setCapStyle(Qt::RoundCap);
+                  p->setPen(pen);
 
                   qreal w = score()->styleS(ST_ArpeggioHookLen).val() * _spatium;
-                  p->drawLine(0.0, y1, 0.0, y2);
-                  p->drawLine(0.0, y1, w, y1);
-                  p->drawLine(0.0, y2, w, y2);
+                  p->drawLine(QLineF(0.0, y1, 0.0, y2));
+                  p->drawLine(QLineF(0.0, y1, w, y1));
+                  p->drawLine(QLineF(0.0, y2, w, y2));
                   p->restore();
                   }
                   break;

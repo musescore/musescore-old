@@ -14,7 +14,6 @@
 #include "stafftype.h"
 #include "staff.h"
 #include "xml.h"
-#include "painter.h"
 #include "mscore.h"
 
 QList<StaffType*> staffTypes;
@@ -569,17 +568,17 @@ void TabDurationSymbol::layout()
 //   draw
 //---------------------------------------------------------
 
-void TabDurationSymbol::draw(Painter* painter) const
+void TabDurationSymbol::draw(QPainter* painter) const
       {
       if(!_tab)
             return;
       qreal mag = magS();
       qreal imag = 1.0 / mag;
 
-      painter->scale(mag);
+      painter->scale(mag, mag);
       painter->setFont(_tab->durationFont());
-      painter->drawText(0.0, _tab->durationFontYOffset(), _text);
-      painter->scale(imag);
+      painter->drawText(QPointF(0.0, _tab->durationFontYOffset()), _text);
+      painter->scale(imag, imag);
       }
 
 //---------------------------------------------------------

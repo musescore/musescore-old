@@ -18,7 +18,7 @@
 
 class Score;
 class Hairpin;
-class Painter;
+class QPainter;
 
 //---------------------------------------------------------
 //   HairpinSegment
@@ -33,7 +33,7 @@ class HairpinSegment : public LineSegment {
       Hairpin* hairpin() const              { return (Hairpin*)spanner(); }
       virtual HairpinSegment* clone() const { return new HairpinSegment(*this); }
       virtual ElementType type() const      { return HAIRPIN_SEGMENT; }
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       virtual void layout();
       };
 

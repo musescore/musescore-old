@@ -16,7 +16,7 @@
 
 #include "config.h"
 
-class Painter;
+class QPainter;
 class TextStyle;
 
 extern void initSymbols(int);
@@ -78,8 +78,8 @@ class Sym {
       int getFontId() const                { return fontId;   }
       int setFontId(int v)                 { return fontId = v;   }
       QFont font() const                   { return _font;    }
-      void draw(Painter* painter, qreal mag, qreal x, qreal y, int n) const;
-      void draw(Painter* painter, qreal mag, qreal x = 0.0, qreal y = 0.0) const;
+      void draw(QPainter* painter, qreal mag, qreal x, qreal y, int n) const;
+      void draw(QPainter* painter, qreal mag, qreal x = 0.0, qreal y = 0.0) const;
       void setAttach(const QPointF& r)       { _attach = r; }
       bool isValid() const                   { return _code != 0; }
       QRectF getBbox() const               { return _bbox; }

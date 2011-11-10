@@ -17,7 +17,6 @@
 #include "segment.h"
 #include "staff.h"
 #include "part.h"
-#include "painter.h"
 #include "mscore.h"
 
 //---------------------------------------------------------
@@ -61,20 +60,17 @@ void StaffState::read(QDomElement e)
 //   draw
 //---------------------------------------------------------
 
-void StaffState::draw(Painter* painter) const
+void StaffState::draw(QPainter* painter) const
       {
       if (score()->printing())
             return;
-      QPen pen;
-      if (selected())
-            painter->setPenColor(MScore::selectColor[0]);
-      else
-            painter->setPenColor(MScore::layoutBreakColor);
-
-      painter->setLineWidth(lw);
-      painter->setCapStyle(Qt::RoundCap);
-      painter->setJoinStyle(Qt::RoundJoin);
-      painter->setNoBrush(true);
+      QPen pen(painter->pen());
+      pen.setColor(selected() ? MScore::selectColor[0] : MScore::layoutBreakColor);
+      pen.setWidthF(lw);
+      pen.setCapStyle(Qt::RoundCap);
+      pen.setJoinStyle(Qt::RoundJoin);
+      painter->setPen(pen);
+      painter->setBrush(Qt::NoBrush);
       painter->drawPath(path);
       }
 

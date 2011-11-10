@@ -16,7 +16,7 @@
 
 #include "element.h"
 
-class Painter;
+class QPainter;
 
 // layout break subtypes:
 
@@ -34,7 +34,7 @@ class LayoutBreak : public Element {
       bool _startWithLongNames;
       bool _startWithMeasureOne;
 
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       void layout0();
       virtual void spatiumChanged(qreal /*oldValue*/, qreal /*newValue*/);
 

@@ -18,7 +18,6 @@
 #include "stafftype.h"
 #include "hook.h"
 #include "tremolo.h"
-#include "painter.h"
 
 // TEMPORARY HACK!!
 #include "sym.h"
@@ -71,7 +70,7 @@ void Stem::spatiumChanged(qreal oldValue, qreal newValue)
 //   draw
 //---------------------------------------------------------
 
-void Stem::draw(Painter* painter) const
+void Stem::draw(QPainter* painter) const
       {
       bool useTab = false;
       Staff* st = staff();
@@ -81,9 +80,11 @@ void Stem::draw(Painter* painter) const
             useTab = true;
             }
       qreal lw = point(score()->styleS(ST_stemWidth));
-      painter->setLineWidth(lw);
-      painter->setCapStyle(Qt::RoundCap);
-      painter->drawLine(0.0, 0.0, 0.0, stemLen());
+      QPen pen(painter->pen());
+      pen.setWidthF(lw);
+      pen.setCapStyle(Qt::RoundCap);
+      painter->setPen(pen);
+      painter->drawLine(QLineF(0.0, 0.0, 0.0, stemLen()));
       // NOT THE BEST PLACE FOR THIS?
       // with tablatures, dots are not drawn near 'notes', but near stems
       if (useTab) {

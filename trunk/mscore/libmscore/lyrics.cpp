@@ -18,7 +18,6 @@
 #include "score.h"
 #include "sym.h"
 #include "segment.h"
-#include "painter.h"
 
 //---------------------------------------------------------
 //   Lyrics
@@ -175,7 +174,7 @@ void Lyrics::remove(Element* el)
 //   draw
 //---------------------------------------------------------
 
-void Lyrics::draw(Painter* painter) const
+void Lyrics::draw(QPainter* painter) const
       {
       Text::draw(painter);
       foreach(const Line* l, _separator) {

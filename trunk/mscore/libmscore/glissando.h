@@ -34,7 +34,7 @@ class Glissando : public Element {
       virtual ElementType type() const { return GLISSANDO; }
       virtual Space space() const;
 
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       virtual void layout();
       virtual void write(Xml&) const;
       virtual void read(QDomElement);

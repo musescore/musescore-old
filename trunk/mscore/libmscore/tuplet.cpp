@@ -21,7 +21,6 @@
 #include "element.h"
 #include "undo.h"
 #include "stem.h"
-#include "painter.h"
 
 //---------------------------------------------------------
 //   Tuplet
@@ -412,7 +411,7 @@ void Tuplet::layout()
 //   draw
 //---------------------------------------------------------
 
-void Tuplet::draw(Painter* painter) const
+void Tuplet::draw(QPainter* painter) const
       {
       if (_number) {
             painter->save();
@@ -421,7 +420,9 @@ void Tuplet::draw(Painter* painter) const
             painter->restore();
             }
       if (_hasBracket) {
-            painter->setLineWidth(spatium() * 0.1);
+            QPen pen(painter->pen());
+            pen.setWidthF(spatium() * 0.1);
+            painter->setPen(pen);
             if (!_number)
                   painter->drawPolyline(bracketL, 4);
             else {

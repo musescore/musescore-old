@@ -16,7 +16,7 @@
 
 #include "element.h"
 
-class Painter;
+class QPainter;
 
 // spacer subtypes
 enum { SPACER_UP, SPACER_DOWN };
@@ -41,7 +41,7 @@ class Spacer : public Element {
 
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       virtual bool isEditable() const { return true; }
       virtual void editDrag(const EditData&);
       virtual void updateGrips(int*, QRectF*) const;

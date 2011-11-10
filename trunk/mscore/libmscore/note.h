@@ -31,7 +31,7 @@ class Score;
 class Sym;
 class MuseScoreView;
 class Bend;
-class Painter;
+class QPainter;
 class AccidentalState;
 class Accidental;
 
@@ -198,7 +198,7 @@ class Note : public Element {
       Chord* chord() const            { return (Chord*)parent(); }
       void setChord(Chord* a)         { setParent((Element*)a);  }
 
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       virtual void read(QDomElement);
       virtual void write(Xml& xml) const;
 

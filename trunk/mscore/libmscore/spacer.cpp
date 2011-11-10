@@ -13,7 +13,6 @@
 
 #include "spacer.h"
 #include "score.h"
-#include "painter.h"
 #include "mscore.h"
 
 //---------------------------------------------------------
@@ -37,18 +36,15 @@ Spacer::Spacer(const Spacer& s)
 //   draw
 //---------------------------------------------------------
 
-void Spacer::draw(Painter* painter) const
+void Spacer::draw(QPainter* painter) const
       {
       if (score()->printing() || !score()->showUnprintable())
             return;
-      QPen pen;
-      if (selected())
-            painter->setPenColor(MScore::selectColor[0]);
-      else
-            painter->setPenColor(MScore::layoutBreakColor);
-
-      painter->setLineWidth(spatium() * 0.4);
-      painter->setNoBrush(true);
+      QPen pen(painter->pen());
+      pen.setColor(selected() ? MScore::selectColor[0] : MScore::layoutBreakColor);
+      pen.setWidthF(spatium() * 0.4);
+      painter->setPen(pen);
+      painter->setBrush(Qt::NoBrush);
       painter->drawPath(path);
       }
 

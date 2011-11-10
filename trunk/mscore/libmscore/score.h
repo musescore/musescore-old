@@ -82,7 +82,7 @@ class Spanner;
 class MuseScoreView;
 class LinkedElements;
 class Fingering;
-class Painter;
+class QPainter;
 class FiguredBass;
 
 extern bool showRubberBand;
@@ -567,7 +567,7 @@ class Score {
       void saveCompressedFile(QIODevice*, QFileInfo&, bool onlySelection);
       bool exportFile();
 
-      void print(Painter* printer, int page);
+      void print(QPainter* printer, int page);
       ChordRest* getSelectedChordRest() const;
       void getSelectedChordRest2(ChordRest** cr1, ChordRest** cr2) const;
 

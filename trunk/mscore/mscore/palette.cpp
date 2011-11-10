@@ -30,7 +30,6 @@
 #include "seq.h"
 #include "libmscore/part.h"
 #include "libmscore/textline.h"
-#include "painterqt.h"
 #include "libmscore/measure.h"
 #include "libmscore/icon.h"
 #include "libmscore/mscore.h"
@@ -441,8 +440,7 @@ static void paintPaletteElement(void* data, Element* e)
       QPainter* p = static_cast<QPainter*>(data);
       p->save();
       p->translate(e->pos());
-      PainterQt painter(p, 0);
-      e->draw(&painter);
+      e->draw(p);
       p->restore();
       }
 

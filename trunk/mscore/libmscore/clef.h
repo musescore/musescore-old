@@ -25,7 +25,7 @@
 class Xml;
 class MuseScoreView;
 class Segment;
-class Painter;
+class QPainter;
 
 static const int NO_CLEF = -1000;
 
@@ -89,7 +89,7 @@ class Clef : public Element {
       virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
       virtual void layout();
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       virtual void read(QDomElement);
       virtual void write(Xml&) const;
 

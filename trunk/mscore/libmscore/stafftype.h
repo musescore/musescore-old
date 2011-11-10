@@ -26,7 +26,7 @@
 
 class Staff;
 class Xml;
-class Painter;
+class QPainter;
 
 //---------------------------------------------------------
 //   StaffType
@@ -251,7 +251,7 @@ class TabDurationSymbol : public Element {
       TabDurationSymbol(Score* s, StaffTypeTablature * tab, TDuration::DurationType type, int dots);
       TabDurationSymbol(const TabDurationSymbol&);
       virtual TabDurationSymbol* clone() const  { return new TabDurationSymbol(*this); }
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       virtual bool isEditable() const           { return false; }
       virtual ElementType type() const          { return TAB_DURATION_SYMBOL; }
 

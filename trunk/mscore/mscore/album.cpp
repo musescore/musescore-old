@@ -22,7 +22,6 @@
 #include "globals.h"
 #include "libmscore/score.h"
 #include "libmscore/page.h"
-#include "painterqt.h"
 #include "musescore.h"
 #include "icons.h"
 #include "libmscore/mscore.h"
@@ -58,12 +57,11 @@ void Album::print()
       if (!pd.exec())
             return;
 
-      QPainter p(&printer);
-      PainterQt painter(&p, 0);
-      p.setRenderHint(QPainter::Antialiasing, true);
-      p.setRenderHint(QPainter::TextAntialiasing, true);
+      QPainter painter(&printer);
+      painter.setRenderHint(QPainter::Antialiasing, true);
+      painter.setRenderHint(QPainter::TextAntialiasing, true);
       double mag = printer.logicalDpiX() / DPI;
-      p.scale(mag, mag);
+      painter.scale(mag, mag);
 
       int fromPage = printer.fromPage() - 1;
       int toPage   = printer.toPage()   - 1;
@@ -105,11 +103,11 @@ void Album::print()
                         e->itemDiscovered = 0;
                         if (!e->visible())
                               continue;
-                        p.save();
-                        p.translate(e->pagePos() - page->pos());
-                        p.setPen(QPen(e->color()));
+                        painter.save();
+                        painter.translate(e->pagePos() - page->pos());
+                        painter.setPen(QPen(e->color()));
                         e->draw(&painter);
-                        p.restore();
+                        painter.restore();
                         }
                   }
             pageOffset += pages;
@@ -117,7 +115,7 @@ void Album::print()
             score->setPrinting(false);
             score->setPageNumberOffset(oldPageOffset);
             }
-      p.end();
+      painter.end();
       }
 
 //---------------------------------------------------------

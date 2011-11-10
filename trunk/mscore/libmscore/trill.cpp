@@ -21,13 +21,12 @@
 #include "score.h"
 #include "accidental.h"
 #include "segment.h"
-#include "painter.h"
 
 //---------------------------------------------------------
 //   draw
 //---------------------------------------------------------
 
-void TrillSegment::draw(Painter* painter) const
+void TrillSegment::draw(QPainter* painter) const
       {
       qreal mag = magS();
       int idx    = score()->symIdx();

@@ -17,7 +17,6 @@
 #include "measure.h"
 #include "system.h"
 #include "note.h"
-#include "painter.h"
 
 //---------------------------------------------------------
 //   ChordLine
@@ -163,15 +162,17 @@ void ChordLine::write(Xml& xml) const
 //   Symbol::draw
 //---------------------------------------------------------
 
-void ChordLine::draw(Painter* painter) const
+void ChordLine::draw(QPainter* painter) const
       {
       qreal _spatium = spatium();
-      painter->scale(_spatium);
+      painter->scale(_spatium, _spatium);
       qreal lw = 0.15;
-      painter->setLineWidth(lw);
-      painter->setCapStyle(Qt::RoundCap);
-      painter->setJoinStyle(Qt::RoundJoin);
-      painter->setNoBrush(true);
+      QPen pen(painter->pen());
+      pen.setWidthF(lw);
+      pen.setCapStyle(Qt::RoundCap);
+      pen.setJoinStyle(Qt::RoundJoin);
+      painter->setPen(pen);
+      painter->setBrush(Qt::NoBrush);
       painter->drawPath(path);
       }
 

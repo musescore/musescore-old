@@ -69,7 +69,7 @@ class Harmony : public Text {
       QList<QFont> fontList;              // temp values used in render()
       QList<TextSegment*> textList;       // rendered chord
 
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       void render(const QList<RenderAction>& renderList, qreal&, qreal&, int tpc);
 
    public:

@@ -18,7 +18,6 @@
 #include "system.h"
 #include "measure.h"
 #include "segment.h"
-#include "painter.h"
 #include "articulation.h"
 #include "stafftype.h"
 
@@ -96,7 +95,7 @@ void BarLine::getY(qreal* y1, qreal* y2) const
 //   drawDots
 //---------------------------------------------------------
 
-void BarLine::drawDots(Painter* painter, qreal x) const
+void BarLine::drawDots(QPainter* painter, qreal x) const
       {
       const Sym& dotsym = symbols[score()->symIdx()][dotSym];
       qreal mags = magS();
@@ -128,23 +127,26 @@ void BarLine::drawDots(Painter* painter, qreal x) const
 //   draw
 //---------------------------------------------------------
 
-void BarLine::draw(Painter* painter) const
+void BarLine::draw(QPainter* painter) const
       {
       qreal lw = point(score()->styleS(ST_barWidth));
       qreal y1, y2;
       getY(&y1, &y2);
 
-      painter->setLineWidth(lw);
-      painter->setCapStyle(Qt::FlatCap);
+      QPen pen(painter->pen());
+      pen.setWidthF(lw);
+      pen.setCapStyle(Qt::FlatCap);
+      painter->setPen(pen);
 
       qreal mags = magS();
 
       switch(subtype()) {
             case BROKEN_BAR:
-                  painter->setLineStyle(Qt::DashLine);
+                  pen.setStyle(Qt::DashLine);
+                  painter->setPen(pen);
 
             case NORMAL_BAR:
-                  painter->drawLine(lw * .5, y1, lw * .5, y2);
+                  painter->drawLine(QLineF(lw * .5, y1, lw * .5, y2));
                   break;
 
             case END_BAR:
@@ -152,10 +154,11 @@ void BarLine::draw(Painter* painter) const
                   qreal lw2 = point(score()->styleS(ST_endBarWidth));
                   qreal d   = point(score()->styleS(ST_endBarDistance));
 
-                  painter->drawLine(lw * .5, y1, lw * .5, y2);
-                  painter->setLineWidth(lw2);
+                  painter->drawLine(QLineF(lw * .5, y1, lw * .5, y2));
+                  pen.setWidthF(lw2);
+                  painter->setPen(pen);
                   qreal x = d + lw2 * .5 + lw;
-                  painter->drawLine(x, y1, x, y2);
+                  painter->drawLine(QLineF(x, y1, x, y2));
                   }
                   break;
 
@@ -164,11 +167,12 @@ void BarLine::draw(Painter* painter) const
                   lw      = point(score()->styleS(ST_doubleBarWidth));
                   qreal d = point(score()->styleS(ST_doubleBarDistance));
 
-                  painter->setLineWidth(lw);
+                  pen.setWidthF(lw);
+                  painter->setPen(pen);
                   qreal x = lw * .5;
-                  painter->drawLine(x, y1, x, y2);
+                  painter->drawLine(QLineF(x, y1, x, y2));
                   x += d + lw;
-                  painter->drawLine(x, y1, x, y2);
+                  painter->drawLine(QLineF(x, y1, x, y2));
                   }
                   break;
 
@@ -183,10 +187,11 @@ void BarLine::draw(Painter* painter) const
 
                   drawDots(painter, x0);
 
-                  painter->drawLine(x1, y1, x1, y2);
+                  painter->drawLine(QLineF(x1, y1, x1, y2));
 
-                  painter->setLineWidth(lw2);
-                  painter->drawLine(x2, y1, x2, y2);
+                  pen.setWidthF(lw2);
+                  painter->setPen(pen);
+                  painter->drawLine(QLineF(x2, y1, x2, y2));
 
                   if (score()->styleB(ST_repeatBarTips)) {
                         symbols[score()->symIdx()][brackettipsRightUp].draw(painter, mags, 0.0, y1);
@@ -205,9 +210,10 @@ void BarLine::draw(Painter* painter) const
                   qreal x2   =  dotw + d1 + lw + d1 + lw2 * .5;
 
                   drawDots(painter, 0.0);
-                  painter->drawLine(x1, y1, x1, y2);
-                  painter->setLineWidth(lw2);
-                  painter->drawLine(x2, y1, x2, y2);
+                  painter->drawLine(QLineF(x1, y1, x1, y2));
+                  pen.setWidthF(lw2);
+                  painter->setPen(pen);
+                  painter->drawLine(QLineF(x2, y1, x2, y2));
                   if (score()->styleB(ST_repeatBarTips)) {
                         qreal x = x2 + lw2 * .5;
                         symbols[score()->symIdx()][brackettipsLeftUp].draw(painter, mags, x, y1);
@@ -230,13 +236,15 @@ void BarLine::draw(Painter* painter) const
 
                   drawDots(painter, .0);
                   drawDots(painter, x4);
-                  painter->drawLine(x1, y1, x1, y2);
+                  painter->drawLine(QLineF(x1, y1, x1, y2));
 
-                  painter->setLineWidth(lw2);
-                  painter->drawLine(x2, y1, x2, y2);
+                  pen.setWidthF(lw2);
+                  painter->setPen(pen);
+                  painter->drawLine(QLineF(x2, y1, x2, y2));
 
-                  painter->setLineWidth(lw);
-                  painter->drawLine(x3, y1, x3, y2);
+                  pen.setWidthF(lw);
+                  painter->setPen(pen);
+                  painter->drawLine(QLineF(x3, y1, x3, y2));
                   }
                   break;
             }

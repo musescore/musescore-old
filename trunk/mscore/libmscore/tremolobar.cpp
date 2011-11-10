@@ -17,7 +17,6 @@
 #include "staff.h"
 #include "chord.h"
 #include "note.h"
-#include "painter.h"
 
 //---------------------------------------------------------
 //   TremoloBar
@@ -78,14 +77,16 @@ void TremoloBar::layout()
 //   draw
 //---------------------------------------------------------
 
-void TremoloBar::draw(Painter* painter) const
+void TremoloBar::draw(QPainter* painter) const
       {
       if (staff() && !staff()->useTablature())
             return;
-      painter->setLineWidth(_lw);
-      painter->setCapStyle(Qt::RoundCap);
-      painter->setJoinStyle(Qt::RoundJoin);
-      painter->setBrushColor(Qt::black);
+      QPen pen(painter->pen());
+      pen.setWidthF(_lw);
+      pen.setCapStyle(Qt::RoundCap);
+      pen.setJoinStyle(Qt::RoundJoin);
+      painter->setPen(pen);
+      painter->setBrush(QBrush(QColor(Qt::black)));
 
       qreal _spatium = spatium();
       const TextStyle* st = &score()->textStyle(TEXT_STYLE_BENCH);
@@ -104,8 +105,8 @@ void TremoloBar::draw(Painter* painter) const
 //            int pitch = _points[pt].pitch;
             }
       //debug:
-      painter->drawLine(0.0, 0.0, _spatium*1.5, _spatium*3);
-      painter->drawLine(_spatium*1.5, _spatium*3, _spatium*3, 0.0);
+      painter->drawLine(QLineF(0.0, 0.0, _spatium*1.5, _spatium*3));
+      painter->drawLine(QLineF(_spatium*1.5, _spatium*3, _spatium*3, 0.0));
       }
 
 //---------------------------------------------------------

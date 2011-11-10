@@ -17,7 +17,7 @@
 #include "symbol.h"
 #include "sym.h"
 
-class Painter;
+class QPainter;
 class ChordRest;
 
 //---------------------------------------------------------
@@ -58,7 +58,7 @@ class Articulation : public Element {
       ArticulationAnchor _anchor;
       bool _up;
 
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
 
    public:
       Articulation(Score*);

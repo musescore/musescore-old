@@ -24,7 +24,6 @@
 #include "measure.h"
 #include "box.h"
 #include "segment.h"
-#include "painter.h"
 #include "mscore.h"
 
 //---------------------------------------------------------
@@ -371,7 +370,7 @@ QRectF Text::pageRectangle() const
 //   draw
 //---------------------------------------------------------
 
-void Text::draw(Painter* painter) const
+void Text::draw(QPainter* painter) const
       {
       QAbstractTextDocumentLayout::PaintContext c;
       c.cursorPosition = -1;
@@ -394,9 +393,10 @@ void Text::draw(Painter* painter) const
                   return;
             color = style().foregroundColor();
             }
-      else if (painter->editMode())
+/*TODOxxxx      else if (painter->editMode())
             // if editing, use own color
             color = style().foregroundColor();
+*/
       else if (selected())
             color = MScore::selectColor[0];
       else if (!visible()) {
@@ -415,10 +415,10 @@ void Text::draw(Painter* painter) const
       QReadWriteLock lock;
       QWriteLocker locker(&lock);
       QScopedPointer<QTextDocument> __doc(_doc->clone());
-      painter->drawText(__doc.data(), c);
+      __doc.data()->documentLayout()->draw(painter, c);
       }
 #else
-      painter->drawText(_doc, c);
+      _doc->documentLayout()->draw(painter, c);
 #endif
 
       // draw frame
@@ -428,9 +428,11 @@ void Text::draw(Painter* painter) const
                   color = Qt::gray;
             // else if (selected())
             //       color = MScore::selectColor[track() == -1 ? 0 : voice()];
-            painter->setPenColor(color);
-            painter->setLineWidth(frameWidth() * DPMM);
-            painter->setNoBrush(true);
+            QPen pen(painter->pen());
+            pen.setColor(color);
+            pen.setWidthF(frameWidth() * DPMM);
+            painter->setPen(pen);
+            painter->setBrush(Qt::NoBrush);
             if (circle())
                   painter->drawArc(frame, 0, 5760);
             else {

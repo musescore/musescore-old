@@ -18,7 +18,6 @@
 #include "segment.h"
 #include "score.h"
 #include "undo.h"
-#include "painter.h"
 
 const char* keyNames[15] = {
       QT_TRANSLATE_NOOP("MuseScore", "G major, E minor"),
@@ -188,7 +187,7 @@ void KeySig::layout()
 //   set
 //---------------------------------------------------------
 
-void KeySig::draw(Painter* p) const
+void KeySig::draw(QPainter* p) const
       {
       foreach(const KeySym* ks, keySymbols)
             symbols[score()->symIdx()][ks->sym].draw(p, magS(), ks->pos.x(), ks->pos.y());

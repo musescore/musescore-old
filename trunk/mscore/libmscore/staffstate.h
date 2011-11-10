@@ -18,7 +18,7 @@
 #include "elementlayout.h"
 #include "instrument.h"
 
-class Painter;
+class QPainter;
 
 enum {
       STAFF_STATE_INSTRUMENT, STAFF_STATE_TYPE,
@@ -35,7 +35,7 @@ class StaffState : public Element {
 
       Instrument _instrument;
 
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       virtual void layout();
 
    public:

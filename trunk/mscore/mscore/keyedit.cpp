@@ -26,7 +26,6 @@
 #include "libmscore/accidental.h"
 #include "keycanvas.h"
 #include "libmscore/clef.h"
-#include "painterqt.h"
 #include "libmscore/mscore.h"
 
 extern bool useFactorySettings;
@@ -92,9 +91,8 @@ void KeyCanvas::paintEvent(QPaintEvent*)
       double spatium = 2.0 * PALETTE_SPATIUM / extraMag;
       gscore->setSpatium(spatium);
 
-      QPainter p(this);
-      PainterQt painter(&p, 0);
-      p.setRenderHint(QPainter::Antialiasing, true);
+      QPainter painter(this);
+      painter.setRenderHint(QPainter::Antialiasing, true);
       qreal wh = double(height());
       qreal ww = double(width());
       double y = wh * .5 - 2 * PALETTE_SPATIUM * extraMag;
@@ -106,35 +104,35 @@ void KeyCanvas::paintEvent(QPaintEvent*)
       qreal x = 3;
       qreal w = ww - 6;
 
-      p.setWorldTransform(_matrix);
+      painter.setWorldTransform(_matrix);
 
       QRectF r = imatrix.mapRect(QRectF(x, y, w, wh));
 
       QPen pen(palette().brush(QPalette::Normal, QPalette::Text).color());
       pen.setWidthF(MScore::defaultStyle()->valueS(ST_staffLineWidth).val() * spatium);
-      p.setPen(pen);
+      painter.setPen(pen);
 
       for (int i = 0; i < 5; ++i) {
             qreal yy = r.y() + i * spatium;
-            p.drawLine(QLineF(r.x(), yy, r.x() + r.width(), yy));
+            painter.drawLine(QLineF(r.x(), yy, r.x() + r.width(), yy));
             }
       if (dragElement) {
-            p.save();
-            p.translate(dragElement->pagePos());
+            painter.save();
+            painter.translate(dragElement->pagePos());
             dragElement->draw(&painter);
-            p.restore();
+            painter.restore();
             }
       foreach(Accidental* a, accidentals) {
-            p.save();
-            p.translate(a->pagePos());
-//            p.setPen(QPen(a->curColor()));
-            p.setPen(QPen(Qt::white));
+            painter.save();
+            painter.translate(a->pagePos());
+//            painter.setPen(QPen(a->curColor()));
+            painter.setPen(QPen(Qt::white));
             a->draw(&painter);
-            p.restore();
+            painter.restore();
             }
       clef->setPos(0.0, 0.0);
       clef->layout();
-      p.translate(clef->pagePos());
+      painter.translate(clef->pagePos());
       clef->draw(&painter);
       }
 

@@ -34,7 +34,6 @@ class System;
 class Element;
 class Note;
 
-extern QRectF drawHandle(QPainter& p, const QPointF& pos, bool active);
 extern QRectF handleRect(const QPointF& pos);
 
 extern int getStaff(System* system, const QPointF& p);

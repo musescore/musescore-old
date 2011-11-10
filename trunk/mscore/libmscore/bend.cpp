@@ -17,7 +17,6 @@
 #include "staff.h"
 #include "chord.h"
 #include "note.h"
-#include "painter.h"
 
 //---------------------------------------------------------
 //   label
@@ -154,14 +153,16 @@ void Bend::layout()
 //   draw
 //---------------------------------------------------------
 
-void Bend::draw(Painter* painter) const
+void Bend::draw(QPainter* painter) const
       {
       if (staff() && !staff()->useTablature())
             return;
-      painter->setLineWidth(_lw);
-      painter->setCapStyle(Qt::RoundCap);
-      painter->setJoinStyle(Qt::RoundJoin);
-      painter->setBrushColor(Qt::black);
+      QPen pen(painter->pen());
+      pen.setWidthF(_lw);
+      pen.setCapStyle(Qt::RoundCap);
+      pen.setJoinStyle(Qt::RoundJoin);
+      painter->setPen(pen);
+      painter->setBrush(QBrush(QColor(Qt::black)));
 
       qreal _spatium = spatium();
       const TextStyle* st = &score()->textStyle(TEXT_STYLE_BENCH);
@@ -187,14 +188,14 @@ void Bend::draw(Painter* painter) const
             if (pt == 0 && pitch) {
                   y2 = -notePos.y() -_spatium * 2;
                   x2 = x;
-                  painter->drawLine(x, y, x2, y2);
+                  painter->drawLine(QLineF(x, y, x2, y2));
 
-                  painter->setBrushColor(Qt::black);
+                  painter->setBrush(QBrush(QColor(Qt::black)));
                   painter->drawPolygon(arrowUp.translated(x2, y2 + _spatium * .2));
 
                   int idx = (pitch + 12)/25;
                   const char* l = label[idx];
-                  painter->drawTextHCentered(x2, y2, QString(l));
+                  painter->drawText(QRectF(x2, y2, .0, .0), Qt::AlignVCenter|Qt::TextDontClip, QString(l));
 
                   y = y2;
                   }
@@ -203,7 +204,7 @@ void Bend::draw(Painter* painter) const
                         break;
                   x2 = x + _spatium;
                   y2 = y;
-                  painter->drawLine(x, y, x2, y2);
+                  painter->drawLine(QLineF(x, y, x2, y2));
                   }
             else if (pitch < _points[pt+1].pitch) {
                   // up
@@ -215,15 +216,15 @@ void Bend::draw(Painter* painter) const
                   QPainterPath path;
                   path.moveTo(x, y);
                   path.cubicTo(x+dx/2, y, x2, y+dy/4, x2, y2);
-                  painter->setNoBrush(true);
+                  painter->setBrush(Qt::NoBrush);
                   painter->drawPath(path);
 
-                  painter->setBrushColor(Qt::black);
+                  painter->setBrush(QBrush(QColor(Qt::black)));
                   painter->drawPolygon(arrowUp.translated(x2, y2 + _spatium * .2));
 
                   int idx = (_points[pt+1].pitch + 12)/25;
                   const char* l = label[idx];
-                  painter->drawTextHCentered(x2, y2, QString(l));
+                  painter->drawText(QRectF(x2, y2, .0, .0), Qt::AlignHCenter|Qt::TextDontClip, QString(l));
                   }
             else {
                   // down
@@ -235,10 +236,10 @@ void Bend::draw(Painter* painter) const
                   QPainterPath path;
                   path.moveTo(x, y);
                   path.cubicTo(x+dx/2, y, x2, y+dy/4, x2, y2);
-                  painter->setNoBrush(true);
+                  painter->setBrush(Qt::NoBrush);
                   painter->drawPath(path);
 
-                  painter->setBrushColor(Qt::black);
+                  painter->setBrush(QBrush(QColor(Qt::black)));
                   painter->drawPolygon(arrowDown.translated(x2, y2 - _spatium * .2));
                   }
             x = x2;

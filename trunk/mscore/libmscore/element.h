@@ -33,7 +33,7 @@ class MuseScoreView;
 class Segment;
 class TextStyle;
 class Element;
-class Painter;
+class QPainter;
 
 //---------------------------------------------------------
 //   ElementFlag
@@ -261,7 +261,7 @@ class Element {
                || type() == TRILL || type() == VOLTA || type() == TEXTLINE;
             }
 
-      virtual void draw(Painter*) const {}
+      virtual void draw(QPainter*) const {}
 
       void writeProperties(Xml& xml, const Element* proto = 0) const;
       bool readProperties(QDomElement);
@@ -456,7 +456,7 @@ class StaffLines : public Element {
       virtual void layout();
 
       Measure* measure() const             { return (Measure*)parent(); }
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       virtual QPointF pagePos() const;   ///< position in page coordinates
       qreal y1() const;
       qreal y2() const;
@@ -482,7 +482,7 @@ class Line : public Element {
       virtual ElementType type() const { return LINE; }
       virtual void layout();
 
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomElement);
       void dump() const;
@@ -508,7 +508,7 @@ class Compound : public Element {
       Compound(const Compound&);
       virtual ElementType type() const = 0;
 
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       virtual void addElement(Element*, qreal x, qreal y);
       void clear();
       virtual void setSelected(bool f);
@@ -527,7 +527,7 @@ class RubberBand : public Element {
       RubberBand(Score* s) : Element(s) {}
       virtual RubberBand* clone() const { return new RubberBand(*this); }
       virtual ElementType type() const { return RUBBERBAND; }
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
 
       void set(const QPointF& p1, const QPointF& p2) { _p1 = p1; _p2 = p2; }
       QPointF p1() const { return _p1; }

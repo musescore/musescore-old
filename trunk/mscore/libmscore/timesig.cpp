@@ -19,7 +19,6 @@
 #include "symbol.h"
 #include "staff.h"
 #include "stafftype.h"
-#include "painter.h"
 
 //---------------------------------------------------------
 //   TimeSig
@@ -325,16 +324,16 @@ void TimeSig::layout()
 //   draw
 //---------------------------------------------------------
 
-void TimeSig::draw(Painter* painter) const
+void TimeSig::draw(QPainter* painter) const
       {
       if (staff() && !staff()->staffType()->genTimesig())
             return;
       painter->setFont(symbols[score()->symIdx()][allabreveSym].font());
       qreal m  = spatium() / (DPI * SPATIUM20);
-      painter->scale(m);
+      painter->scale(m, m);
       painter->drawText(pz, sz);    // use positions and strings computed in layout()
       painter->drawText(pn, sn);
-      painter->scale(1.0 / m);
+      painter->scale(1.0 / m, 1.0 / m);
       }
 
 //---------------------------------------------------------

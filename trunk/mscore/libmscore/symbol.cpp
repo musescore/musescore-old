@@ -21,7 +21,6 @@
 #include "score.h"
 #include "image.h"
 #include "segment.h"
-#include "painter.h"
 #include "mscore.h"
 
 //---------------------------------------------------------
@@ -208,7 +207,7 @@ void Symbol::layout()
 //   Symbol::draw
 //---------------------------------------------------------
 
-void Symbol::draw(Painter* p) const
+void Symbol::draw(QPainter* p) const
       {
       if (type() != NOTEDOT || !staff()->useTablature())
             symbols[score()->symIdx()][_sym].draw(p, magS());
@@ -357,7 +356,7 @@ FSymbol::FSymbol(const FSymbol& s)
 //   draw
 //---------------------------------------------------------
 
-void FSymbol::draw(Painter* painter) const
+void FSymbol::draw(QPainter* painter) const
       {
       QString s;
       painter->setFont(_font);
@@ -367,7 +366,7 @@ void FSymbol::draw(Painter* painter) const
             }
       else
             s = QChar(_code);
-      painter->drawText(0, 0, s);
+      painter->drawText(QPointF(0, 0), s);
       }
 
 //---------------------------------------------------------

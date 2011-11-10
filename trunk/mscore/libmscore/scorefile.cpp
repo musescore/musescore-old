@@ -29,7 +29,6 @@
 #include "text.h"
 #include "ottava.h"
 #include "volta.h"
-#include "painter.h"
 #include "excerpt.h"
 #include "zarchive/zarchive.h"
 #include "diff/diff_match_patch.h"
@@ -1260,7 +1259,7 @@ bool Score::read(QDomElement dScore)
 //   print
 //---------------------------------------------------------
 
-void Score::print(Painter* painter, int pageNo)
+void Score::print(QPainter* painter, int pageNo)
       {
       _printing  = true;
 //      int offset = pageNumberOffset();
@@ -1276,7 +1275,9 @@ void Score::print(Painter* painter, int pageNo)
             painter->save();
 //            painter->translate(e->pagePos() - page->pos());
             painter->translate(e->pagePos());
-            painter->setPenColor(e->color());
+            QPen pen(painter->pen());
+            pen.setColor(e->color());
+            painter->setPen(pen);
             e->draw(painter);
             painter->restore();
             }

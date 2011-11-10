@@ -29,7 +29,6 @@
 #include "line.h"
 #include "staff.h"
 #include "system.h"
-#include "painter.h"
 #include "mscore.h"
 #include "segment.h"
 
@@ -244,7 +243,7 @@ void Page::layout()
 //    bounding rectange fr is relative to page QPointF
 //---------------------------------------------------------
 
-void Page::draw(Painter* painter) const
+void Page::draw(QPainter* painter) const
       {
 //      QRectF r = bbox();
 //      qreal x1 = r.x();
@@ -282,17 +281,17 @@ void Page::draw(Painter* painter) const
 
             if (!s.isEmpty()) {
                   d.setHtml(replaceTextMacros(s));
-                  painter->drawText(&d, c);
+                  d.documentLayout()->draw(painter, c);
                   }
             s = _score->styleSt(odd ? ST_oddHeaderC : ST_evenHeaderC);
             if (!s.isEmpty()) {
                   d.setHtml(replaceTextMacros(s));
-                  painter->drawText(&d, c);
+                  d.documentLayout()->draw(painter, c);
                   }
             s = _score->styleSt(odd ? ST_oddHeaderR : ST_evenHeaderR);
             if (!s.isEmpty()) {
                   d.setHtml(replaceTextMacros(s));
-                  painter->drawText(&d, c);
+                  d.documentLayout()->draw(painter, c);
                   }
             painter->translate(-o);
             }
@@ -317,17 +316,17 @@ void Page::draw(Painter* painter) const
 
             if (!s.isEmpty()) {
                   d.setHtml(replaceTextMacros(s));
-                  painter->drawText(&d, c);
+                  d.documentLayout()->draw(painter, c);
                   }
             s = _score->styleSt(odd ? ST_oddFooterC : ST_evenFooterC);
             if (!s.isEmpty()) {
                   d.setHtml(replaceTextMacros(s));
-                  painter->drawText(&d, c);
+                  d.documentLayout()->draw(painter, c);
                   }
             s = _score->styleSt(odd ? ST_oddFooterR : ST_evenFooterR);
             if (!s.isEmpty()) {
                   d.setHtml(replaceTextMacros(s));
-                  painter->drawText(&d, c);
+                  d.documentLayout()->draw(painter, c);
                   }
             }
       }

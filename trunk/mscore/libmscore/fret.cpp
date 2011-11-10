@@ -19,7 +19,6 @@
 #include "chord.h"
 #include "note.h"
 #include "segment.h"
-#include "painter.h"
 #include "mscore.h"
 #include "harmony.h"
 
@@ -202,24 +201,27 @@ void FretDiagram::init(Tablature* tab, Chord* chord)
 //   draw
 //---------------------------------------------------------
 
-void FretDiagram::draw(Painter* painter) const
+void FretDiagram::draw(QPainter* painter) const
       {
       qreal _spatium = spatium();
-      painter->setLineWidth(lw2);
-      painter->setCapStyle(Qt::FlatCap);
-      painter->setBrushColor(painter->penColor());
+      QPen pen(painter->pen());
+      pen.setWidthF(lw2);
+      pen.setCapStyle(Qt::FlatCap);
+      painter->setPen(pen);
+      painter->setBrush(QBrush(QColor(painter->pen().color())));
       qreal x2 = (_strings-1) * stringDist;
-      painter->drawLine(-lw1*.5, 0.0, x2+lw1*.5, 0.0);
+      painter->drawLine(QLineF(-lw1*.5, 0.0, x2+lw1*.5, 0.0));
 
-      painter->setLineWidth(lw1);
+      pen.setWidthF(lw1);
+      painter->setPen(pen);
       qreal y2 = (_frets+1) * fretDist - fretDist*.5;
       for (int i = 0; i < _strings; ++i) {
             qreal x = stringDist * i;
-            painter->drawLine(x, _fretOffset ? -_spatium*.2 : 0.0, x, y2);
+            painter->drawLine(QLineF(x, _fretOffset ? -_spatium*.2 : 0.0, x, y2));
             }
       for (int i = 1; i <= _frets; ++i) {
             qreal y = fretDist * i;
-            painter->drawLine(0.0, y, x2, y);
+            painter->drawLine(QLineF(0.0, y, x2, y));
             }
       painter->setFont(font);
       QFontMetricsF fm(font);
@@ -234,11 +236,14 @@ void FretDiagram::draw(Painter* painter) const
             if (_marker && _marker[i]) {
                   qreal x = stringDist * i;
                   qreal y = -fretDist * .3 - fm.ascent();
-                  painter->drawTextHCentered(x, y, QChar(_marker[i]));
+                  painter->drawText(QRectF(x, y, .0,.0),
+                     Qt::AlignHCenter|Qt::TextDontClip, QChar(_marker[i]));
                   }
             }
       if (_fretOffset > 0) {
-            painter->drawTextVCentered(-stringDist, fretDist*.5, QString("%1").arg(_fretOffset+1));
+            painter->drawText(QRectF(-stringDist, fretDist*.5, .0, .0),
+               Qt::AlignVCenter | Qt::TextDontClip,
+               QString("%1").arg(_fretOffset+1));
             }
       }
 

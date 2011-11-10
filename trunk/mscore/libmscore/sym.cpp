@@ -17,15 +17,10 @@
 #include "utils.h"
 #include "score.h"
 #include "xml.h"
-#include "painter.h"
 #include "mscore.h"
 
 QVector<Sym> symbols[2];
 static bool symbolsInitialized[2] = { false, false };
-
-#ifdef USE_GLYPHS
-static bool fontsInitialized = false;
-#endif
 
 QMap<const char*, SymCode*> charReplaceMap;
 
@@ -511,10 +506,10 @@ const QRectF Sym::bbox(qreal mag) const
 //   draw
 //---------------------------------------------------------
 
-void Sym::draw(Painter* painter, qreal mag, qreal x, qreal y) const
+void Sym::draw(QPainter* painter, qreal mag, qreal x, qreal y) const
       {
       qreal imag = 1.0 / mag;
-      painter->scale(mag);
+      painter->scale(mag, mag);
 #ifdef USE_GLYPHS
 /*      int n = glyphs.glyphIndexes().size();
       printf("drawGlyphs <%s %f> n = %d  idx = %d\n",
@@ -527,9 +522,9 @@ void Sym::draw(Painter* painter, qreal mag, qreal x, qreal y) const
       painter->drawGlyphRun(QPointF(x * imag, y * imag), glyphs);
 #else
       painter->setFont(_font);
-      painter->drawText(x * imag, y * imag, toString());
+      painter->drawText(QPointF(x * imag, y * imag), toString());
 #endif
-      painter->scale(imag);
+      painter->scale(imag, imag);
       }
 
 //---------------------------------------------------------
@@ -552,13 +547,13 @@ QString Sym::toString() const
 //   draw
 //---------------------------------------------------------
 
-void Sym::draw(Painter* painter, qreal mag, qreal x, qreal y, int n) const
+void Sym::draw(QPainter* painter, qreal mag, qreal x, qreal y, int n) const
       {
       qreal imag = 1.0 / mag;
-      painter->scale(mag);
+      painter->scale(mag, mag);
       painter->setFont(_font);
-      painter->drawText(x * imag, y * imag, QString(n, _code));
-      painter->scale(imag);
+      painter->drawText(QPointF(x * imag, y * imag), QString(n, _code));
+      painter->scale(imag, imag);
       }
 
 //---------------------------------------------------------
@@ -629,11 +624,6 @@ QString symToHtml(const Sym& s1, const Sym& s2, int leftMargin)
 
 void initSymbols(int idx)
       {
-#ifdef USE_GLYPHS
-      if (!fontsInitialized) {
-            // rawFonts[0] = new QRawFont(
-            }
-#endif
       if (symbolsInitialized[idx])
             return;
       symbolsInitialized[idx] = true;

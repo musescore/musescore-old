@@ -17,7 +17,7 @@
 #include "symbol.h"
 
 class Chord;
-class Painter;
+class QPainter;
 
 // Tremolo subtypes:
 enum TremoloType {
@@ -43,7 +43,7 @@ class Tremolo : public Element {
       virtual void setSubtype(const QString& s);
       void setSubtype(TremoloType t)   { Element::setSubtype(int(t)); }
 
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       virtual void layout();
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);

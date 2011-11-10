@@ -17,7 +17,7 @@
 #include "element.h"
 #include "pitchvalue.h"
 
-class Painter;
+class QPainter;
 
 //---------------------------------------------------------
 //   Bend
@@ -34,7 +34,7 @@ class Bend : public Element {
       virtual Bend* clone() const { return new Bend(*this); }
       virtual ElementType type() const { return BEND; }
       virtual void layout();
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       virtual void write(Xml&) const;
       virtual void read(QDomElement e);
       QList<PitchValue>& points()                { return _points; }

@@ -17,7 +17,6 @@
 #include "system.h"
 #include "measure.h"
 #include "segment.h"
-#include "painter.h"
 #include "chordlist.h"
 #include "mscore.h"
 
@@ -566,7 +565,7 @@ QPainterPath Harmony::shape() const
 //   draw
 //---------------------------------------------------------
 
-void Harmony::draw(Painter* painter) const
+void Harmony::draw(QPainter* painter) const
       {
       if (_editMode || textList.isEmpty()) {
             Text::draw(painter);
@@ -574,7 +573,7 @@ void Harmony::draw(Painter* painter) const
             }
       foreach(const TextSegment* ts, textList) {
             painter->setFont(ts->font);
-            painter->drawText(ts->x, ts->y, ts->text);
+            painter->drawText(QPointF(ts->x, ts->y), ts->text);
             }
       }
 

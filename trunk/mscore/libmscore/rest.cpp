@@ -28,7 +28,6 @@
 #include "harmony.h"
 #include "lyrics.h"
 #include "segment.h"
-#include "painter.h"
 #include "stafftype.h"
 
 //---------------------------------------------------------
@@ -60,7 +59,7 @@ Rest::Rest(Score* s, const TDuration& d)
 //   Rest::draw
 //---------------------------------------------------------
 
-void Rest::draw(Painter* painter) const
+void Rest::draw(QPainter* painter) const
       {
       if (staff()->useTablature() || generated())
             return;
@@ -70,25 +69,30 @@ void Rest::draw(Painter* painter) const
       if (m && m->multiMeasure()) {
             int n     = m->multiMeasure();
             qreal pw = _spatium * .7;
-            painter->setLineWidth(pw);
+            QPen pen(painter->pen());
+            pen.setWidthF(pw);
+            painter->setPen(pen);
 
             qreal w  = _mmWidth;
             qreal y  = _spatium;
             qreal x1 = 0.0;
             qreal x2 =  w;
             pw *= .5;
-            painter->drawLine(x1 + pw, y, x2 - pw, y);
+            painter->drawLine(QLineF(x1 + pw, y, x2 - pw, y));
 
             // draw vertical lines:
-            painter->setLineWidth(_spatium * .2);
-            painter->drawLine(x1, y-_spatium, x1, y+_spatium);
-            painter->drawLine(x2, y-_spatium, x2, y+_spatium);
+            pen.setWidthF(_spatium * .2);
+            painter->setPen(pen);
+            painter->drawLine(QLineF(x1, y-_spatium, x1, y+_spatium));
+            painter->drawLine(QLineF(x2, y-_spatium, x2, y+_spatium));
 
             QFont font = symbols[score()->symIdx()][allabreveSym].font();
             painter->setFont(font);
             QFontMetricsF fm(font);
             y  = -_spatium * .5 - fm.ascent();
-            painter->drawTextHCentered(center(x1, x2), y, QString("%1").arg(n));
+            painter->drawText(QRectF(center(x1, x2), y, .0, .0),
+               Qt::AlignHCenter|Qt::TextDontClip,
+               QString("%1").arg(n));
             }
       else {
             qreal mag = magS();
