@@ -18,7 +18,6 @@
 #include "style.h"
 #include "score.h"
 #include "sym.h"
-#include "painter.h"
 
 //---------------------------------------------------------
 //   Glissando
@@ -119,13 +118,14 @@ void Glissando::read(QDomElement e)
 //   draw
 //---------------------------------------------------------
 
-void Glissando::draw(Painter* painter) const
+void Glissando::draw(QPainter* painter) const
       {
       qreal _spatium = spatium();
 
-      painter->save();
-      painter->setLineWidth(_spatium * .15);
-      painter->setCapStyle(Qt::RoundCap);
+      QPen pen(painter->pen());
+      pen.setWidthF(_spatium * .15);
+      pen.setCapStyle(Qt::RoundCap);
+      painter->setPen(pen);
 
       qreal w = line.dx();
       qreal h = line.dy();
@@ -136,7 +136,7 @@ void Glissando::draw(Painter* painter) const
       painter->rotate(-wi);
 
       if (subtype() == 0) {
-            painter->drawLine(0.0, 0.0, l, 0.0);
+            painter->drawLine(QLineF(0.0, 0.0, l, 0.0));
             }
       else if (subtype() == 1) {
             qreal mags = magS();
@@ -153,10 +153,9 @@ void Glissando::draw(Painter* painter) const
                   QFont f = st.fontPx(_spatium);
                   painter->setFont(f);
                   qreal x = (l - r.width()) * .5;
-                  painter->drawText(x, -_spatium * .5, _text);
+                  painter->drawText(QPointF(x, -_spatium * .5), _text);
                   }
             }
-      painter->restore();
       }
 
 //---------------------------------------------------------

@@ -24,7 +24,6 @@
 #include "libmscore/system.h"
 #include "libmscore/measure.h"
 #include "globals.h"
-#include "libmscore/painter.h"
 #include "jumpproperties.h"
 #include "markerproperties.h"
 

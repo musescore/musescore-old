@@ -18,7 +18,7 @@
 
 class MuseScoreView;
 class Segment;
-class Painter;
+class QPainter;
 
 //---------------------------------------------------------
 //   BarLine
@@ -31,7 +31,7 @@ class BarLine : public Element {
       void getY(qreal*, qreal*) const;
       ElementList _el;        ///< fermata or other articulations
 
-      void drawDots(Painter* painter, qreal x) const;
+      void drawDots(QPainter* painter, qreal x) const;
 
    public:
       BarLine(Score*);
@@ -41,7 +41,7 @@ class BarLine : public Element {
       virtual ElementType type() const { return BAR_LINE; }
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       virtual Space space() const;
       virtual QPointF pagePos() const;      ///< position in canvas coordinates
       virtual void layout();

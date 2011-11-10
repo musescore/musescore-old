@@ -39,7 +39,7 @@ class TextLineSegment : public LineSegment {
       virtual TextLineSegment* clone() const { return new TextLineSegment(*this); }
       virtual ElementType type() const       { return TEXTLINE_SEGMENT; }
       TextLine* textLine() const             { return (TextLine*)spanner(); }
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
 
       virtual void layout();
       virtual void setSelected(bool f);

@@ -13,7 +13,6 @@
 
 #include "layoutbreak.h"
 #include "score.h"
-#include "painter.h"
 #include "mscore.h"
 
 //---------------------------------------------------------
@@ -71,19 +70,17 @@ void LayoutBreak::read(QDomElement e)
 //   draw
 //---------------------------------------------------------
 
-void LayoutBreak::draw(Painter* painter) const
+void LayoutBreak::draw(QPainter* painter) const
       {
       if (score()->printing() || !score()->showUnprintable())
             return;
-      if (selected())
-            painter->setPenColor(MScore::selectColor[0]);
-      else
-            painter->setPenColor(MScore::layoutBreakColor);
-
-      painter->setLineWidth(lw);
-      painter->setCapStyle(Qt::RoundCap);
-      painter->setJoinStyle(Qt::RoundJoin);
-      painter->setNoBrush(true);
+      QPen pen(painter->pen());
+      pen.setColor(selected() ? MScore::selectColor[0] : MScore::layoutBreakColor);
+      pen.setWidthF(lw);
+      pen.setCapStyle(Qt::RoundCap);
+      pen.setJoinStyle(Qt::RoundJoin);
+      painter->setPen(pen);
+      painter->setBrush(Qt::NoBrush);
       painter->drawPath(path);
       }
 

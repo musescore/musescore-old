@@ -45,7 +45,7 @@ class FretDiagram : public Element {
       FretDiagram(Score* s);
       FretDiagram(const FretDiagram&);
       ~FretDiagram();
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       virtual FretDiagram* clone() const { return new FretDiagram(*this); }
       Segment* segment() const           { return (Segment*)parent(); }
       Measure* measure() const           { return (Measure*)parent()->parent(); }

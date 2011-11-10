@@ -808,7 +808,7 @@ void ScoreView::fotoDragDrop(QMouseEvent*)
 
       QDrag* drag = new QDrag(this);
       QMimeData* mimeData = new QMimeData;
-      
+
       QUrl url = QUrl::fromLocalFile(fn);
       QList<QUrl> ul;
       ul.append(url);

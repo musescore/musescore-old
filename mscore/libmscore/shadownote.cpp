@@ -15,7 +15,6 @@
 #include "score.h"
 #include "drumset.h"
 #include "sym.h"
-#include "painter.h"
 #include "mscore.h"
 
 //---------------------------------------------------------
@@ -33,7 +32,7 @@ ShadowNote::ShadowNote(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void ShadowNote::draw(Painter* painter) const
+void ShadowNote::draw(QPainter* painter) const
       {
       if (!visible() || sym == 0)
             return;
@@ -50,8 +49,10 @@ void ShadowNote::draw(Painter* painter) const
       else
             voice = ps.voice();
 
-      painter->setPenColor(MScore::selectColor[voice].light(140));  // was 160
-      painter->setLineWidth(lw);
+      QPen pen(painter->pen());
+      pen.setColor(MScore::selectColor[voice].light(140));  // was 160
+      pen.setWidthF(lw);
+      painter->setPen(pen);
 
       sym->draw(painter, magS());
 
@@ -64,11 +65,11 @@ void ShadowNote::draw(Painter* painter) const
       if (_line < 100 && _line > -100) {
             for (int i = -2; i >= _line; i -= 2) {
                   qreal y = ms * (i - _line);
-                  painter->drawLine(x1, y, x2, y);
+                  painter->drawLine(QLineF(x1, y, x2, y));
                   }
             for (int i = 10; i <= _line; i += 2) {
                   qreal y = ms * (i - _line);
-                  painter->drawLine(x1, y, x2, y);
+                  painter->drawLine(QLineF(x1, y, x2, y));
                   }
             }
       painter->translate(-ap);

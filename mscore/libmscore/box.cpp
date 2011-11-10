@@ -21,7 +21,6 @@
 #include "image.h"
 #include "layoutbreak.h"
 #include "fret.h"
-#include "painter.h"
 #include "mscore.h"
 #include "stafftext.h"
 
@@ -62,18 +61,20 @@ void Box::layout()
 //   draw
 //---------------------------------------------------------
 
-void Box::draw(Painter* painter) const
+void Box::draw(QPainter* painter) const
       {
       if (score() && score()->printing())
             return;
       if (selected() || editMode || dropTarget() || score()->showFrames()) {
+            QPen pen(painter->pen());
             if (selected() || editMode || dropTarget())
-                  painter->setPenColor(Qt::blue);
+                  pen.setColor(Qt::blue);
             else
-                  painter->setPenColor(Qt::gray);
+                  pen.setColor(Qt::gray);
             qreal w = 2.0 / painter->transform().m11();
-            painter->setLineWidth(w);
-            painter->setNoBrush(true);
+            pen.setWidthF(w);
+            painter->setPen(pen);
+            painter->setBrush(Qt::NoBrush);
             w *= .5;
             painter->drawRect(bbox().adjusted(w, w, -w, -w));
             }

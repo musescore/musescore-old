@@ -26,7 +26,6 @@
 #include "staff.h"
 #include "stafftype.h"
 #include "stem.h"
-#include "painter.h"
 #include "hook.h"
 #include "mscore.h"
 
@@ -274,21 +273,22 @@ void Beam::remove(ChordRest* a)
 //   draw
 //---------------------------------------------------------
 
-void Beam::draw(Painter* painter) const
+void Beam::draw(QPainter* painter) const
       {
       if (staff()->useTablature()) {
             if (staff()->staffType()->slashStyle())
                   return;
             }
-      painter->setBrushColor(painter->penColor());
-      painter->setNoPen(true);
+      painter->setBrush(QBrush(QColor(painter->pen().color())));
+      painter->setPen(Qt::NoPen);
       qreal lw2 = point(score()->styleS(ST_beamWidth)) * .5 * mag();
       foreach (const QLineF* bs, beamSegments) {
-            painter->fillPolygon(
-               bs->x1(), bs->y1()-lw2,
-               bs->x2(), bs->y2()-lw2,
-               bs->x2(), bs->y2()+lw2,
-               bs->x1(), bs->y1()+lw2);
+            QPolygonF pg;
+               pg << QPointF(bs->x1(), bs->y1()-lw2)
+                  << QPointF(bs->x2(), bs->y2()-lw2)
+                  << QPointF(bs->x2(), bs->y2()+lw2)
+                  << QPointF(bs->x1(), bs->y1()+lw2);
+            painter->drawPolygon(pg, Qt::OddEvenFill);
             }
       }
 

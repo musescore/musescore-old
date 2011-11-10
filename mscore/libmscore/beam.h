@@ -21,7 +21,7 @@
 class ChordRest;
 class MuseScoreView;
 class Chord;
-class Painter;
+class QPainter;
 
 //---------------------------------------------------------
 //   BeamHint
@@ -109,7 +109,7 @@ class Beam : public Element {
       virtual void remove(ChordRest* a);
       void writeMusicXml(Xml& xml, ChordRest* cr) const;
       virtual void move(qreal, qreal);
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       int up() const                      { return _up; }
       void setUp(int v)                   { _up = v; }
       void setId(int i) const             { _id = i; }

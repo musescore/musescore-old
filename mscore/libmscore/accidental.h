@@ -23,7 +23,7 @@
 #include "mscore.h"
 
 class Note;
-class Painter;
+class QPainter;
 
 //---------------------------------------------------------
 //   SymElement
@@ -66,7 +66,7 @@ class Accidental : public Element {
       virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
       virtual void layout();
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       virtual bool isEditable() const                    { return true; }
       virtual void startEdit(MuseScoreView*, const QPointF&) { setGenerated(false); }
 

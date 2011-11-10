@@ -12,7 +12,6 @@
 //=============================================================================
 
 #include "lasso.h"
-#include "painter.h"
 #include "mscore.h"
 #include "mscoreview.h"
 
@@ -31,13 +30,15 @@ Lasso::Lasso(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void Lasso::draw(Painter* painter) const
+void Lasso::draw(QPainter* painter) const
       {
-      painter->setBrushColor(QColor(0, 0, 50, 50));
-      QPen pen(MScore::selectColor[0]);
+      painter->setBrush(QBrush(QColor(0, 0, 50, 50)));
+      QPen pen(painter->pen());
+      pen.setColor(MScore::selectColor[0]);
       // always 2 pixel width
       qreal w = 2.0 / painter->transform().m11();
-      painter->setLineWidth(w);
+      pen.setWidthF(w);
+      painter->setPen(pen);
       painter->drawRect(_rect);
       }
 

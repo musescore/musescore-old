@@ -21,7 +21,6 @@
 #include "system.h"
 #include "undo.h"
 #include "staff.h"
-#include "painter.h"
 #include "mscore.h"
 
 //---------------------------------------------------------
@@ -85,11 +84,13 @@ void HairpinSegment::layout()
 //   draw
 //---------------------------------------------------------
 
-void HairpinSegment::draw(Painter* painter) const
+void HairpinSegment::draw(QPainter* painter) const
       {
-      painter->setLineWidth(point(score()->styleS(ST_hairpinWidth)));
-      painter->drawLine(l1.x1(), l1.y1(), l1.x2(), l1.y2());
-      painter->drawLine(l2.x1(), l2.y1(), l2.x2(), l2.y2());
+      QPen pen(painter->pen());
+      pen.setWidthF(point(score()->styleS(ST_hairpinWidth)));
+      painter->setPen(pen);
+      painter->drawLine(QLineF(l1.x1(), l1.y1(), l1.x2(), l1.y2()));
+      painter->drawLine(QLineF(l2.x1(), l2.y1(), l2.x2(), l2.y2()));
       }
 
 //---------------------------------------------------------

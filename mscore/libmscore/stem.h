@@ -17,7 +17,7 @@
 #include "element.h"
 
 class Chord;
-class Painter;
+class QPainter;
 
 //---------------------------------------------------------
 //   Stem
@@ -38,7 +38,7 @@ class Stem : public Element {
 
       virtual Stem* clone() const      { return new Stem(*this); }
       virtual ElementType type() const { return STEM; }
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       void setLen(qreal v);
       qreal stemLen() const            { return _len + _userLen; }
       virtual bool isEditable() const  { return true; }

@@ -24,7 +24,6 @@
 #include "libmscore/score.h"
 #include "libmscore/page.h"
 #include "preferences.h"
-#include "painterqt.h"
 #include "libmscore/mscore.h"
 #include "libmscore/system.h"
 #include "libmscore/measurebase.h"
@@ -312,12 +311,12 @@ void Navigator::setViewRect(const QRectF& _viewRect)
 
 static void paintElement(void* data, Element* e)
       {
-      PainterQt* p = static_cast<PainterQt*>(data);
-      p->painter()->save();
-      p->painter()->setPen(QPen(e->curColor()));
-      p->painter()->translate(e->pagePos());
+      QPainter* p = static_cast<QPainter*>(data);
+      p->save();
+      p->setPen(QPen(e->curColor()));
+      p->translate(e->pagePos());
       e->draw(p);
-      p->painter()->restore();
+      p->restore();
       }
 
 //---------------------------------------------------------
@@ -338,17 +337,14 @@ static void createPixmap(PageCache* pc)
       QColor _fgColor(Qt::white);
       QColor _bgColor(Qt::darkGray);
 
-      PainterQt painter(&p, 0);
       p.setRenderHint(QPainter::Antialiasing, false);
-
       p.setTransform(pc->matrix);
-
       p.fillRect(pc->page->bbox(), _fgColor);
       foreach(System* s, *pc->page->systems()) {
             foreach(MeasureBase* m, s->measures())
-                  m->scanElements(&painter, paintElement, false);
+                  m->scanElements(&p, paintElement, false);
             }
-      pc->page->scanElements(&painter, paintElement, false);
+      pc->page->scanElements(&p, paintElement, false);
 
       p.setFont(QFont("FreeSans", 400));  // !!
       p.setPen(QColor(0, 0, 255, 50));

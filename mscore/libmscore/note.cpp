@@ -48,7 +48,6 @@
 #include "fingering.h"
 #include "bend.h"
 #include "bend.h"
-#include "painter.h"
 #include "noteevent.h"
 #include "mscore.h"
 #include "accidental.h"
@@ -520,7 +519,7 @@ qreal Note::stemYoff(bool upFlag) const
 //   draw
 //---------------------------------------------------------
 
-void Note::draw(Painter* painter) const
+void Note::draw(QPainter* painter) const
       {
       if (!_hidden || !userOff().isNull()) {
             bool tablature = staff() && staff()->useTablature();
@@ -531,7 +530,7 @@ void Note::draw(Painter* painter) const
                   qreal mag = magS();
                   qreal imag = 1.0 / mag;
 
-                  painter->scale(mag);
+                  painter->scale(mag, mag);
                   painter->setFont(tab->fretFont());
 
                   // when using letters, "+(_fret > 8)" skips 'j'
@@ -542,17 +541,19 @@ void Note::draw(Painter* painter) const
                         qreal currSpatium = spatium();
                         qreal d  = currSpatium * .2;
                         QRectF bb = bbox().adjusted(-d, d, d, -d);
-                        painter->drawBackground(bb);
+//TODOxxxx                        painter->drawBackground(bb);
                         if (fretConflict()) {          //on fret conflict, draw on red background
                               painter->save();
-                              painter->setPenColor(Qt::red);
-                              painter->setBrushColor(Qt::red);
+                              QPen pen(painter->pen());
+                              pen.setColor(Qt::red);
+                              painter->setPen(pen);
+                              painter->setBrush(QBrush(QColor(Qt::red)));
                               painter->drawRect(bb);
                               painter->restore();
                               }
                         }
-                  painter->drawText(bbox().x(), tab->fretFontYOffset() /* * mag */, s);
-                  painter->scale(imag);
+                  painter->drawText(QPointF(bbox().x(), tab->fretFontYOffset()), s);
+                  painter->scale(imag, imag);
                   }
             else {                        // if not tablature
                   //
@@ -563,10 +564,16 @@ void Note::draw(Painter* painter) const
                      && !score()->printing() && MScore::warnPitchRange) {
                         const Instrument* in = staff()->part()->instr();
                         int i = ppitch();
-                        if (i < in->minPitchP() || i > in->maxPitchP())
-                              painter->setPenColor(Qt::red);
-                        else if (i < in->minPitchA() || i > in->maxPitchA())
-                              painter->setPenColor(Qt::darkYellow);
+                        if (i < in->minPitchP() || i > in->maxPitchP()) {
+                              QPen pen(painter->pen());
+                              pen.setColor(Qt::red);
+                              painter->setPen(pen);
+                              }
+                        else if (i < in->minPitchA() || i > in->maxPitchA()) {
+                              QPen pen(painter->pen());
+                              pen.setColor(Qt::darkYellow);
+                              painter->setPen(pen);
+                              }
                         }
                   qreal mag = magS();
                   if (_small)

@@ -22,7 +22,7 @@ class Text;
 class Measure;
 class Xml;
 class Score;
-class Painter;
+class QPainter;
 class MeasureBase;
 
 //---------------------------------------------------------
@@ -136,7 +136,7 @@ class Page : public Element {
       qreal loWidth() const;
       qreal loHeight() const;
 
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
 
       QList<const Element*> items(const QRectF& r);

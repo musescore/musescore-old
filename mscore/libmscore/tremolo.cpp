@@ -19,7 +19,6 @@
 #include "measure.h"
 #include "segment.h"
 #include "stem.h"
-#include "painter.h"
 
 //---------------------------------------------------------
 //   Tremolo
@@ -37,15 +36,17 @@ Tremolo::Tremolo(Score* score)
 //   draw
 //---------------------------------------------------------
 
-void Tremolo::draw(Painter* painter) const
+void Tremolo::draw(QPainter* painter) const
       {
-      painter->setBrushColor(painter->penColor());
+      painter->setBrush(QBrush(QColor(painter->pen().color())));
       painter->drawPath(path);
       if ((parent() == 0) && !twoNotes()) {
             qreal x = 0.0; // bbox().width() * .25;
-            painter->setLineWidth(point(score()->styleS(ST_stemWidth)));
+            QPen pen(painter->pen());
+            pen.setWidthF(point(score()->styleS(ST_stemWidth)));
+            painter->setPen(pen);
             qreal _spatium = spatium();
-            painter->drawLine(x, -_spatium*.5, x, bbox().height() + _spatium);
+            painter->drawLine(QLineF(x, -_spatium*.5, x, bbox().height() + _spatium));
             }
       }
 

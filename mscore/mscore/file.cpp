@@ -78,7 +78,6 @@
 #include "libmscore/tempotext.h"
 #include "libmscore/sym.h"
 #include "libmscore/image.h"
-#include "painterqt.h"
 
 #ifdef OMR
 #include "omr/omr.h"
@@ -1191,8 +1190,6 @@ void MuseScore::printFile()
       if ((toPage < 0) || (toPage >= pages))
             toPage = pages - 1;
 
-      PainterQt painter(&p, 0);
-
       for (int copy = 0; copy < printerDev.numCopies(); ++copy) {
             bool firstPage = true;
             for (int n = fromPage; n <= toPage; ++n) {
@@ -1200,7 +1197,7 @@ void MuseScore::printFile()
                         printerDev.newPage();
                   firstPage = false;
 
-                  cs->print(&painter, n);
+                  cs->print(&p, n);
                   if ((copy + 1) < printerDev.numCopies())
                         printerDev.newPage();
                   }
@@ -1410,8 +1407,6 @@ bool MuseScore::savePsPdf(const QString& saveName, QPrinter::OutputFormat format
       if ((toPage < 0) || (toPage >= pages))
             toPage = pages - 1;
 
-      PainterQt painter(&p, 0);
-
       for (int copy = 0; copy < printerDev.numCopies(); ++copy) {
             bool firstPage = true;
             for (int n = fromPage; n <= toPage; ++n) {
@@ -1419,7 +1414,7 @@ bool MuseScore::savePsPdf(const QString& saveName, QPrinter::OutputFormat format
                         printerDev.newPage();
                   firstPage = false;
 
-                  cs->print(&painter, n);
+                  cs->print(&p, n);
                   if ((copy + 1) < printerDev.numCopies())
                         printerDev.newPage();
                   }
@@ -1729,7 +1724,6 @@ bool MuseScore::saveSvg(Score* score, const QString& saveName)
       p.setRenderHint(QPainter::TextAntialiasing, true);
       double mag = converterDpi / DPI;
       p.scale(mag, mag);
-      PainterQt painter(&p, 0);
 
       QList<Element*> eel;
       for (MeasureBase* m = score->measures()->first(); m; m = m->next()) {
@@ -1751,7 +1745,7 @@ bool MuseScore::saveSvg(Score* score, const QString& saveName)
                   p.save();
                   p.translate(e->pagePos() - page->pos());
                   p.setPen(QPen(e->color()));
-                  e->draw(&painter);
+                  e->draw(&p);
                   p.restore();
                   }
             foreach(const Element* e, el) {
@@ -1760,7 +1754,7 @@ bool MuseScore::saveSvg(Score* score, const QString& saveName)
                   p.save();
                   p.translate(e->pagePos() - page->pos());
                   p.setPen(QPen(e->color()));
-                  e->draw(&painter);
+                  e->draw(&p);
                   p.restore();
                   }
             }
@@ -1826,7 +1820,6 @@ bool MuseScore::savePng(Score* score, const QString& name, bool screenshot, bool
 
             double mag = convDpi / DPI;
             QPainter p(&printer);
-            PainterQt painter(&p, 0);
 
             p.setRenderHint(QPainter::Antialiasing, true);
             p.setRenderHint(QPainter::TextAntialiasing, true);
@@ -1838,7 +1831,7 @@ bool MuseScore::savePng(Score* score, const QString& name, bool screenshot, bool
                   QPointF ap(e->pagePos() - page->pos());
                   p.translate(ap);
                   p.setPen(QPen(e->color()));
-                  e->draw(&painter);
+                  e->draw(&p);
                   p.translate(-ap);
                   }
 
@@ -1850,7 +1843,7 @@ bool MuseScore::savePng(Score* score, const QString& name, bool screenshot, bool
                   QPointF ap(e->pagePos() - page->pos());
                   p.translate(ap);
                   p.setPen(QPen(e->color()));
-                  e->draw(&painter);
+                  e->draw(&p);
                   p.translate(-ap);
                   }
 

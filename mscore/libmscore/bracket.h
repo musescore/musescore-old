@@ -18,7 +18,7 @@
 
 class MuseScoreView;
 class System;
-class Painter;
+class QPainter;
 
 // System Brackets
 enum { BRACKET_NORMAL, BRACKET_AKKOLADE, NO_BRACKET = -1};
@@ -49,7 +49,7 @@ class Bracket : public Element {
       virtual void setHeight(qreal);
       virtual qreal width() const;
 
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       virtual void layout();

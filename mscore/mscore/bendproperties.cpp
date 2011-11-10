@@ -26,7 +26,6 @@
 #include "libmscore/staff.h"
 #include "libmscore/chord.h"
 #include "libmscore/note.h"
-#include "libmscore/painter.h"
 
 //---------------------------------------------------------
 //   BendProperties

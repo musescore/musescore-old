@@ -17,7 +17,6 @@
 #include "sym.h"
 #include "score.h"
 #include "staff.h"
-#include "painter.h"
 #include "undo.h"
 
 //---------------------------------------------------------
@@ -374,7 +373,7 @@ AccidentalType Accidental::name2subtype(const QString& tag)
 //   draw
 //---------------------------------------------------------
 
-void Accidental::draw(Painter* painter) const
+void Accidental::draw(QPainter* painter) const
       {
       Note* note = static_cast<Note*>(parent());
       if ( note == 0 || !note->staff()->useTablature() ) {  //in TAB, accidentals are not shown

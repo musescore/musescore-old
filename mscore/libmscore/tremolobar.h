@@ -17,7 +17,7 @@
 #include "element.h"
 #include "pitchvalue.h"
 
-class Painter;
+class QPainter;
 
 //---------------------------------------------------------
 //   TremoloBar
@@ -34,7 +34,7 @@ class TremoloBar : public Element {
       virtual TremoloBar* clone() const { return new TremoloBar(*this); }
       virtual ElementType type() const { return TREMOLOBAR; }
       virtual void layout();
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       virtual void write(Xml&) const;
       virtual void read(QDomElement e);
       QList<PitchValue>& points()                { return _points; }

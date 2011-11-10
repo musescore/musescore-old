@@ -17,7 +17,7 @@
 #include "element.h"
 
 class Chord;
-class Painter;
+class QPainter;
 
 // Arpeggio types
 enum { ARP_NORMAL, ARP_UP, ARP_DOWN, ARP_BRACKET};
@@ -41,7 +41,7 @@ class Arpeggio : public Element {
       virtual ElementType type() const { return ARPEGGIO; }
       Chord* chord() const             { return (Chord*)parent(); }
       virtual void layout();
-      virtual void draw(Painter*) const;
+      virtual void draw(QPainter*) const;
       virtual bool isEditable() const { return true; }
       virtual void editDrag(const EditData&);
       virtual void updateGrips(int*, QRectF*) const;

@@ -25,7 +25,7 @@ class Measure;
 class Segment;
 class ChordRest;
 class Lyrics;
-class Painter;
+class QPainter;
 class Spanner;
 class System;
 

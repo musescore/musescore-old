@@ -18,7 +18,6 @@
 #include "measure.h"
 #include "staff.h"
 #include "stafftype.h"
-#include "painter.h"
 #include "undo.h"
 #include "page.h"
 
@@ -357,7 +356,7 @@ QPointF Articulation::canvasPos() const
 //   Symbol::draw
 //---------------------------------------------------------
 
-void Articulation::draw(Painter* painter) const
+void Articulation::draw(QPainter* painter) const
       {
       SymId sym = _up ? articulationList[subtype()].upSym : articulationList[subtype()].downSym;
       int flags = articulationList[subtype()].flags;

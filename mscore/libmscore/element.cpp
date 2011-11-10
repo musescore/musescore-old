@@ -70,7 +70,6 @@
 #include "instrchange.h"
 #include "stafftype.h"
 #include "stem.h"
-#include "painter.h"
 #include "iname.h"
 #include "mscore.h"
 #include "icon.h"
@@ -862,19 +861,21 @@ void StaffLines::layout()
 //   draw
 //---------------------------------------------------------
 
-void StaffLines::draw(Painter* painter) const
+void StaffLines::draw(QPainter* painter) const
       {
       QPointF _pos(0.0, 0.0);
 
-      painter->setLineWidth(lw);
-      painter->setCapStyle(Qt::FlatCap);
+      QPen pen(painter->pen());
+      pen.setWidthF(lw);
+      pen.setCapStyle(Qt::FlatCap);
+      painter->setPen(pen);
 
       qreal x1 = _pos.x();
       qreal x2 = x1 + width();
 
       for (int i = 0; i < lines; ++i) {
             qreal y = _pos.y() + i * dist;
-            painter->drawLine(x1, y, x2, y);
+            painter->drawLine(QLineF(x1, y, x2, y));
             }
       }
 
@@ -975,17 +976,19 @@ void Line::layout()
 //   draw
 //---------------------------------------------------------
 
-void Line::draw(Painter* painter) const
+void Line::draw(QPainter* painter) const
       {
-      painter->setCapStyle(Qt::FlatCap);
+      QPen pen(painter->pen());
+      pen.setCapStyle(Qt::FlatCap);
       qreal sp = spatium();
-      painter->setLineWidth(_width.val() * sp);
+      pen.setWidthF(_width.val() * sp);
+      painter->setPen(pen);
 
       qreal l = _len.val() * sp;
       if (vertical)
-            painter->drawLine(0.0, 0.0, 0.0, l);
+            painter->drawLine(QLineF(0.0, 0.0, 0.0, l));
       else
-            painter->drawLine(0.0, 0.0, l, 0.0);
+            painter->drawLine(QLineF(0.0, 0.0, l, 0.0));
       }
 
 //---------------------------------------------------------
@@ -1041,7 +1044,7 @@ Compound::Compound(const Compound& c)
 //   draw
 //---------------------------------------------------------
 
-void Compound::draw(Painter* painter) const
+void Compound::draw(QPainter* painter) const
       {
       foreach(Element* e, elemente) {
             QPointF pt(e->pos());
@@ -1136,12 +1139,14 @@ void Element::dump() const
 //   RubberBand::draw
 //---------------------------------------------------------
 
-void RubberBand::draw(Painter* painter) const
+void RubberBand::draw(QPainter* painter) const
       {
       if (!showRubberBand)
             return;
-      painter->setPenColor(Qt::red);
-      painter->drawLine(_p1.x(), _p1.y(), _p2.x(), _p2.y());
+      QPen pen(painter->pen());
+      pen.setColor(Qt::red);
+      painter->setPen(pen);
+      painter->drawLine(QLineF(_p1.x(), _p1.y(), _p2.x(), _p2.y()));
       }
 
 //---------------------------------------------------------

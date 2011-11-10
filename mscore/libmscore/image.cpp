@@ -15,7 +15,6 @@
 #include "xml.h"
 #include "score.h"
 #include "undo.h"
-#include "painter.h"
 #include "mscore.h"
 
 //---------------------------------------------------------
@@ -54,12 +53,14 @@ void Image::dereference()
 //   draw
 //---------------------------------------------------------
 
-void Image::draw(Painter* painter) const
+void Image::draw(QPainter* painter) const
       {
-      painter->drawPixmap(0, 0, buffer);
+      painter->drawPixmap(QPointF(0.0, 0.0), buffer);
       if (selected() && !(score() && score()->printing())) {
-            painter->setNoBrush(true);
-            painter->setPenColor(Qt::blue);   // , 0, Qt::SolidLine));
+            painter->setBrush(Qt::NoBrush);
+            QPen pen(painter->pen());
+            pen.setColor(Qt::blue);   // , 0, Qt::SolidLine));
+            painter->setPen(pen);
 
             QPointF p[5];
             qreal w = buffer.size().width();
@@ -210,7 +211,7 @@ SvgImage* SvgImage::clone() const
 //   draw
 //---------------------------------------------------------
 
-void SvgImage::draw(Painter* painter) const
+void SvgImage::draw(QPainter* painter) const
       {
       if (!doc)
             return;
@@ -273,18 +274,18 @@ RasterImage* RasterImage::clone() const
 //   draw
 //---------------------------------------------------------
 
-void RasterImage::draw(Painter* painter) const
+void RasterImage::draw(QPainter* painter) const
       {
       if (score()->printing()) {
             // use original image size for printing
             painter->scale(sz.width() / doc.width(), sz.height() / doc.height());
-            painter->drawPixmap(0, 0, QPixmap::fromImage(doc));
+            painter->drawPixmap(QPointF(0, 0), QPixmap::fromImage(doc));
             }
       else {
             QTransform t = painter->transform();
             QSize s = QSizeF(sz.width() * t.m11(), sz.height() * t.m22()).toSize();
             t.setMatrix(1.0, t.m12(), t.m13(), t.m21(), 1.0, t.m23(), t.m31(), t.m32(), t.m33());
-            painter->setTransform(t);
+            painter->setWorldTransform(t);
             if (buffer.size() != s || _dirty) {
                   buffer = QPixmap::fromImage(doc.scaled(s, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
                   _dirty = false;

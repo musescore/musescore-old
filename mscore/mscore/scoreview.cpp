@@ -64,7 +64,6 @@
 #include "edittools.h"
 #include "libmscore/clef.h"
 #include "scoretab.h"
-#include "painterqt.h"
 #include "measureproperties.h"
 #include "libmscore/pitchspelling.h"
 
@@ -1667,12 +1666,12 @@ void ScoreView::setShadowNote(const QPointF& p)
 
 static void paintElement(void* data, Element* e)
       {
-      PainterQt* p = static_cast<PainterQt*>(data);
-      p->painter()->save();
-      p->painter()->setPen(QPen(e->curColor()));
-      p->painter()->translate(e->pagePos());
+      QPainter* p = static_cast<QPainter*>(data);
+      p->save();
+      p->setPen(QPen(e->curColor()));
+      p->translate(e->pagePos());
       e->draw(p);
-      p->painter()->restore();
+      p->restore();
       }
 
 //---------------------------------------------------------
@@ -1685,49 +1684,48 @@ void ScoreView::paintEvent(QPaintEvent* ev)
       {
       if (!_score)
             return;
-      QPainter p(this);
-      p.setRenderHint(QPainter::Antialiasing, preferences.antialiasedDrawing);
-      p.setRenderHint(QPainter::TextAntialiasing, true);
-      PainterQt vp(&p, this);
+      QPainter vp(this);
+      vp.setRenderHint(QPainter::Antialiasing, preferences.antialiasedDrawing);
+      vp.setRenderHint(QPainter::TextAntialiasing, true);
 
-      paint(ev->rect(), p);
+      paint(ev->rect(), vp);
 
-      p.setTransform(_matrix);
-      p.setClipping(false);
+      vp.setTransform(_matrix);
+      vp.setClipping(false);
 
       if (_cursor && _cursor->visible())
-            p.fillRect(_cursor->rect(), _cursor->color());
+            vp.fillRect(_cursor->rect(), _cursor->color());
 
       lasso->draw(&vp);
       if (fotoMode())
             _foto->draw(&vp);
       shadowNote->draw(&vp);
       if (!dropAnchor.isNull()) {
-            QPen pen(QBrush(QColor(80, 0, 0)), 2.0 / p.worldMatrix().m11(), Qt::DotLine);
-            p.setPen(pen);
-            p.drawLine(dropAnchor);
+            QPen pen(QBrush(QColor(80, 0, 0)), 2.0 / vp.worldMatrix().m11(), Qt::DotLine);
+            vp.setPen(pen);
+            vp.drawLine(dropAnchor);
             }
 
       if (dragElement)
             dragElement->scanElements(&vp, paintElement, false);
 
       if (grips) {
-            qreal lw = 2.0/p.matrix().m11();
+            qreal lw = 2.0/vp.matrix().m11();
             QPen pen(Qt::gray);
             pen.setWidthF(lw);
             if (grips == 6) {       // HACK: this are grips of a slur
-                  p.setPen(pen);
+                  vp.setPen(pen);
                   QPolygonF polygon(grips+1);
                   for (int i = 0; i < grips; ++i)
                         polygon[i] = QPointF(grip[i].center());
                   polygon[grips] = QPointF(grip[0].center());
-                  p.drawPolyline(polygon);
+                  vp.drawPolyline(polygon);
                   }
             pen.setColor(MScore::defaultColor);
-            p.setPen(pen);
+            vp.setPen(pen);
             for (int i = 0; i < grips; ++i) {
-                  p.setBrush(((i == curGrip) && hasFocus()) ? QBrush(Qt::blue) : Qt::NoBrush);
-                  p.drawRect(grip[i]);
+                  vp.setBrush(((i == curGrip) && hasFocus()) ? QBrush(Qt::blue) : Qt::NoBrush);
+                  vp.drawRect(grip[i]);
                   }
             }
       }
@@ -2868,25 +2866,23 @@ static void drawDebugInfo(QPainter& p, const Element* e)
 //   drawElements
 //---------------------------------------------------------
 
-void ScoreView::drawElements(QPainter& p, const QList<const Element*>& el)
+void ScoreView::drawElements(QPainter& painter, const QList<const Element*>& el)
       {
-      PainterQt painter(&p, this);
-
       foreach(const Element* e, el) {
             e->itemDiscovered = 0;
             if (!e->visible()) {
                   if (score()->printing() || !score()->showInvisible())
                         continue;
                   }
-            p.save();
+            painter.save();
             QPointF pos(e->pagePos());
-            p.translate(pos);
-            p.setPen(QPen(e->curColor()));
+            painter.translate(pos);
+            painter.setPen(QPen(e->curColor()));
             e->draw(&painter);
 
             if (debugMode && e->selected())
-                  drawDebugInfo(p, e);
-            p.restore();
+                  drawDebugInfo(painter, e);
+            painter.restore();
             }
       }
 

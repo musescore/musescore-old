@@ -17,7 +17,6 @@
 #include "system.h"
 #include "measure.h"
 #include "mscore.h"
-#include "painter.h"
 
 //---------------------------------------------------------
 //   RepeatMeasure
@@ -32,9 +31,9 @@ RepeatMeasure::RepeatMeasure(Score* score)
 //   draw
 //---------------------------------------------------------
 
-void RepeatMeasure::draw(Painter* painter) const
+void RepeatMeasure::draw(QPainter* painter) const
       {
-      painter->setBrushColor(painter->penColor());
+      painter->setBrush(QBrush(QColor(painter->pen().color())));
       painter->drawPath(path);
       }
 
