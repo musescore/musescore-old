@@ -3373,6 +3373,10 @@ void MuseScore::initOsc()
             oo = new PathObject( QString("/mute%1").arg(i), QVariant::Double, osc);
             QObject::connect(oo, SIGNAL(data(double)), SLOT(oscMuteChannel(double)));
             }
+      oo = new PathObject( "/open", QVariant::String, osc);
+      QObject::connect(oo, SIGNAL(data(QString)), SLOT(oscOpen(QString)));
+      oo = new PathObject( "/close-all", QVariant::Int, osc);
+      QObject::connect(oo, SIGNAL(data(int)), SLOT(oscCloseAll()));
       }
 
 //---------------------------------------------------------
@@ -3428,6 +3432,21 @@ void MuseScore::oscSelectMeasure(int m)
       if (cv == 0)
             return;
       cv->selectMeasure(m);
+      }
+
+
+void MuseScore::oscOpen(QString path)
+      {
+      qDebug("Open %s", qPrintable(path));
+      openScore(path);
+      }
+      
+      
+void MuseScore::oscCloseAll()
+      {
+      qDebug("CloseAll");
+      while(cs != 0)
+          closeScore(cs);
       }
 
 //---------------------------------------------------------
