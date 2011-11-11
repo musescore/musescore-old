@@ -391,6 +391,8 @@ class MuseScore : public QMainWindow {
       void oscVolChannel(double val);
       void oscPanChannel(double val);
       void oscMuteChannel(double val);
+      void oscOpen(QString path);
+      void oscCloseAll();
 #endif
       void createNewProfile();
       void deleteProfile();
@@ -485,6 +487,7 @@ class MuseScore : public QMainWindow {
       Q_INVOKABLE void newFile();
       Q_INVOKABLE void loadFile(const QString& url);
       void loadFile(const QUrl&);
+      void openScore(const QString& fn);
       bool hasToCheckForUpdate();
       static bool unstable();
       bool eventFilter(QObject *, QEvent *);

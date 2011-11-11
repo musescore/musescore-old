@@ -218,9 +218,14 @@ void MuseScore::loadFile()
          tr("Guitar Pro (*.GTP *.GP3 *.GP4 *.GP5);;")+
          tr("All Files (*)")
          );
+      openScore(fn);
+      }
+
+void MuseScore::openScore(const QString& fn)
+      {
       if (fn.isEmpty())
             return;
-      Score* score = new Score(MScore::defaultStyle());
+            Score* score = new Score(MScore::defaultStyle());
       if (readScore(score, fn)) {
             setCurrentScoreView(appendScore(score));
             lastOpenPath = score->fileInfo()->path();
