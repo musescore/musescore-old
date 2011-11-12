@@ -26,6 +26,7 @@ class Event;
 
 #include "stdint.h"
 #include "msynth/synti.h"
+#include "libmscore/midipatch.h"
 
 #include "asection.h"
 #include "division.h"

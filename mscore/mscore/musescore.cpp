@@ -80,6 +80,8 @@
 #include "libmscore/chordlist.h"
 #include "libmscore/volta.h"
 
+#include "msynth/synti.h"
+
 #ifdef OSC
 #include "ofqf/qoscserver.h"
 static int oscPort = 5282;

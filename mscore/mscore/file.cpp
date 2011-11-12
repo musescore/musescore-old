@@ -78,6 +78,7 @@
 #include "libmscore/tempotext.h"
 #include "libmscore/sym.h"
 #include "libmscore/image.h"
+#include "msynth/synti.h"
 
 #ifdef OMR
 #include "omr/omr.h"
