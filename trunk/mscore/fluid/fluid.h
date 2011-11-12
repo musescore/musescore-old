@@ -23,6 +23,7 @@
 #define __FLUID_S_H__
 
 #include "msynth/synti.h"
+#include "libmscore/midipatch.h"
 #include "rev.h"
 
 namespace FluidS {
