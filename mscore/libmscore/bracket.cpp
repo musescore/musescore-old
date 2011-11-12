@@ -112,6 +112,7 @@ void Bracket::layout()
 
 void Bracket::draw(QPainter* painter) const
       {
+      painter->setPen(Qt::NoPen);
       painter->setBrush(QBrush(QColor(painter->pen().color())));
       painter->drawPath(path);
       }

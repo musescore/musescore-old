@@ -28,7 +28,7 @@
 #include "key.h"
 #include "select.h"
 #include "instrument.h"
-#include "msynth/synti.h"
+#include "midipatch.h"
 #include "pitchvalue.h"
 
 class ElementList;

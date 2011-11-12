@@ -443,7 +443,6 @@ QFont fontId2font(int fontId)
       return _font;
       }
 
-#ifdef USE_GLYPHS
 //---------------------------------------------------------
 //   genGlyphs
 //---------------------------------------------------------
@@ -454,13 +453,10 @@ void Sym::genGlyphs()
       QVector<quint32> idx = rfont.glyphIndexesForString(toString());
       QVector<QPointF> adv;
       adv << QPointF();
-      Q_ASSERT(idx.size() == 1);
-      Q_ASSERT(adv.size() == 1);
       glyphs.setGlyphIndexes(idx);
       glyphs.setPositions(adv);
       glyphs.setRawFont(rfont);
       }
-#endif
 
 //---------------------------------------------------------
 //   Sym
@@ -476,9 +472,7 @@ Sym::Sym(const char* name, int c, int fid, qreal ax, qreal ay)
             }
       w     = fm.width(_code);
       _bbox = fm.boundingRect(_code);
-#ifdef USE_GLYPHS
       genGlyphs();
-#endif
       }
 
 Sym::Sym(const char* name, int c, int fid, const QPointF& a, const QRectF& b)
@@ -488,9 +482,7 @@ Sym::Sym(const char* name, int c, int fid, const QPointF& a, const QRectF& b)
       _bbox.setRect(b.x() * ds, b.y() * ds, b.width() * ds, b.height() * ds);
       _attach = a * ds;
       w = _bbox.width();
-#ifdef USE_GLYPHS
       genGlyphs();
-#endif
       }
 
 //---------------------------------------------------------
@@ -510,20 +502,7 @@ void Sym::draw(QPainter* painter, qreal mag, qreal x, qreal y) const
       {
       qreal imag = 1.0 / mag;
       painter->scale(mag, mag);
-#ifdef USE_GLYPHS
-/*      int n = glyphs.glyphIndexes().size();
-      printf("drawGlyphs <%s %f> n = %d  idx = %d\n",
-         qPrintable(glyphs.rawFont().familyName()),
-         glyphs.rawFont().pixelSize(),
-         n,
-         glyphs.glyphIndexes()[0]
-         );
-  */
       painter->drawGlyphRun(QPointF(x * imag, y * imag), glyphs);
-#else
-      painter->setFont(_font);
-      painter->drawText(QPointF(x * imag, y * imag), toString());
-#endif
       painter->scale(imag, imag);
       }
 
@@ -656,10 +635,19 @@ void initSymbols(int idx)
       for (unsigned int i = 0; i < sizeof(lilypondNames)/sizeof(*lilypondNames); ++i)
             lnhash[QString(lilypondNames[i].name)] = lilypondNames[i].msIndex;
 
-      QString path = idx == 0 ? ":/fonts/mscore20.xml" : ":/fonts/gonville.xml";
+      QString path;
+#ifdef Q_WS_IOS
+      {
+      extern QString resourcePath();
+      QString rpath = resourcePath();
+      path = rpath + QString(idx == 0 ? "/mscore20.xml" : "/mscore/gonville.xml");
+      }
+#else
+      path = idx == 0 ? ":/fonts/mscore20.xml" : ":/fonts/gonville.xml";
+#endif
       QFile f(path);
       if (!f.open(QFile::ReadOnly)) {
-            qDebug("cannot open symbols file\n");
+            qDebug("cannot open symbols file %s\n", qPrintable(path));
             exit(-1);
             }
       QDomDocument doc;
