@@ -160,7 +160,7 @@ add_executable ( ${ExecutableName}
       tupletdialog.cpp tupletproperties.cpp glissandoproperties.cpp
       articulationprop.cpp textprop.cpp dynamicprop.cpp
       fretproperties.cpp sectionbreakprop.cpp hairpinprop.cpp
-      bendproperties.cpp tremolobarprop.cpp file.cpp keyb.cpp
+      bendproperties.cpp tremolobarprop.cpp file.cpp keyb.cpp osc.cpp
       layer.cpp jumpproperties.cpp selectdialog.cpp
       propertymenu.cpp imageproperties.cpp shortcut.cpp bb.cpp
       midifile.cpp inspector.cpp dragelement.cpp

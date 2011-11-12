@@ -23,7 +23,6 @@
 #include "synti.h"
 // #include "mscore/seq.h"       // HACK
 
-extern Seq* seq;
 
 //---------------------------------------------------------
 //   SyntiParameterData
