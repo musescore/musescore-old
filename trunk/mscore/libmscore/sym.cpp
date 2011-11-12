@@ -442,7 +442,8 @@ QFont fontId2font(int fontId)
       _font.setPixelSize(size);
       return _font;
       }
-
+ 
+#ifdef USE_GLYPHS
 //---------------------------------------------------------
 //   genGlyphs
 //---------------------------------------------------------
@@ -457,6 +458,7 @@ void Sym::genGlyphs()
       glyphs.setPositions(adv);
       glyphs.setRawFont(rfont);
       }
+#endif
 
 //---------------------------------------------------------
 //   Sym
@@ -472,7 +474,9 @@ Sym::Sym(const char* name, int c, int fid, qreal ax, qreal ay)
             }
       w     = fm.width(_code);
       _bbox = fm.boundingRect(_code);
+#ifdef USE_GLYPHS
       genGlyphs();
+#endif      
       }
 
 Sym::Sym(const char* name, int c, int fid, const QPointF& a, const QRectF& b)
@@ -482,7 +486,9 @@ Sym::Sym(const char* name, int c, int fid, const QPointF& a, const QRectF& b)
       _bbox.setRect(b.x() * ds, b.y() * ds, b.width() * ds, b.height() * ds);
       _attach = a * ds;
       w = _bbox.width();
+#ifdef USE_GLYPHS
       genGlyphs();
+#endif  
       }
 
 //---------------------------------------------------------
@@ -502,7 +508,12 @@ void Sym::draw(QPainter* painter, qreal mag, qreal x, qreal y) const
       {
       qreal imag = 1.0 / mag;
       painter->scale(mag, mag);
+#ifdef USE_GLYPHS
       painter->drawGlyphRun(QPointF(x * imag, y * imag), glyphs);
+#else	 
+      painter->setFont(_font);	 
+      painter->drawText(QPointF(x * imag, y * imag), toString());	 
+#endif
       painter->scale(imag, imag);
       }
 
