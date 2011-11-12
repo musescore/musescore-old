@@ -1693,10 +1693,10 @@ void Sample::optimize()
                   }
 
             /* Determine the peak level */
-            if (peak_max >- peak_min)
+            if (peak_max > -peak_min)
                   peak = peak_max;
             else
-                  peak =- peak_min;
+                  peak = -peak_min;
             if (peak == 0)    /* Avoid division by zero */
                   peak = 1;
 

@@ -55,7 +55,7 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
       int playPos;
       QRectF _boundingRect;
 
-      QNetworkAccessManager* networkManager;
+            //      QNetworkAccessManager* networkManager;
 
       virtual void dataChanged(const QRectF&)   { update(); }
       virtual void updateAll()                  { update(); }
@@ -81,7 +81,7 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
       virtual QRectF boundingRect() const       { return _boundingRect; }
 
    private slots:
-      void networkFinished(QNetworkReply*);
+            //      void networkFinished(QNetworkReply*);
 
    public slots:
       void setScore(const QString& s);

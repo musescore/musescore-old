@@ -21,7 +21,7 @@
 #ifndef __SEQ_H__
 #define __SEQ_H__
 
-#include "m-msynth/event.h"
+#include "m-msynth/seq_event.h"
 #include "libmscore/fifo.h"
 // #include "libmscore/painter.h"
 
@@ -101,7 +101,7 @@ class Seq {
       void exit();
       void sendEvent(const SeqEvent&);
 
-      void process(unsigned, float*);
+      void process(unsigned, short*);
       void setScore(Score* s);
       void start();
       void stop();

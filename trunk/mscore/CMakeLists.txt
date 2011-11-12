@@ -73,7 +73,7 @@ if (APPLE)
       # Flash is required for displaying the videos of MuseScore-Connect.
       # See http://qt.gitorious.org/qt/pages/Qt470KnownIssues
       # Since 10.6+ only runs on intel, just set it to i386.
-      set(CMAKE_OSX_ARCHITECTURES i386)
+      set(CMAKE_OSX_ARCHITECTURES x86_64)
 
       # Adjust and uncomment this variable, if you target a different version
       # of MacOSX.

@@ -80,7 +80,7 @@ ScoreView::ScoreView(QDeclarativeItem* parent)
 //---------------------------------------------------------
 
 void ScoreView::loadUrl(const QString& s)
-      {
+      {            
       QUrl url(s);
 printf("URL %s\n", qPrintable(s));
       if (url.scheme().compare("http") == 0) {

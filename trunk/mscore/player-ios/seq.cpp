@@ -31,7 +31,7 @@
 #include "libmscore/segment.h"
 #include "libmscore/measure.h"
 #include "libmscore/system.h"
-#include "al/tempo.h"
+#include "libmscore/tempo.h"
 #include "audioqueue.h"
 
 Seq* seq;
@@ -166,10 +166,10 @@ void Seq::processMessages()
             switch(msg.id) {
                   case SEQ_TEMPO_CHANGE:
                         if (playTime != 0) {
-                              int tick = cs->utime2utick(playTime / AL::sampleRate);
+                              int tick = cs->utime2utick(playTime / MScore::sampleRate);
                               cs->tempomap()->setRelTempo(msg.data);
                               cs->repeatList()->update();
-                              playTime = cs->utick2utime(tick) * AL::sampleRate;
+                              playTime = cs->utick2utime(tick) * MScore::sampleRate;
                               }
                         else
                               cs->tempomap()->setRelTempo(msg.data);
@@ -188,7 +188,7 @@ void Seq::processMessages()
 //   process
 //---------------------------------------------------------
 
-void Seq::process(unsigned n, float* p)
+void Seq::process(unsigned n, short* p)
       {
       unsigned frames = n;
 
@@ -196,7 +196,7 @@ void Seq::process(unsigned n, float* p)
       if (state == TRANSPORT_PLAY) {
             int endTime = playTime + frames;
             for (; playPos != events.constEnd(); ++playPos) {
-                  int f = cs->utick2utime(playPos.key()) * AL::sampleRate;
+                  int f = cs->utick2utime(playPos.key()) * MScore::sampleRate;
                   if (f >= endTime)
                         break;
                   int n = f - playTime;
@@ -300,7 +300,7 @@ void Seq::setPos(int utick)
             }
       activeNotes.clear();
 
-      playTime  = cs->utick2utime(utick) * AL::sampleRate;
+      playTime  = cs->utick2utime(utick) * MScore::sampleRate;
       playPos   = events.lowerBound(utick);
       guiPos    = playPos;
       }
