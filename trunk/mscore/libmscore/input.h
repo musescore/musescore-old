@@ -14,8 +14,8 @@
 #ifndef __INPUT_H__
 #define __INPUT_H__
 
-#include "libmscore/mscore.h"
-#include "libmscore/durationtype.h"
+#include "mscore.h"
+#include "durationtype.h"
 
 class Slur;
 class ChordRest;
