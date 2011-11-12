@@ -128,7 +128,7 @@ void QueueAudioData::processAudio(void* p, AudioQueueRef inAQ, AudioQueueBufferR
       QueueAudioData* audio = static_cast<QueueAudioData*>(p);
 
       if (audio) {
-            float* fp = (float*)(inBuffer->mAudioData);
+            short* fp = (short*)(inBuffer->mAudioData);
             audio->seq->process(FRAME_SIZE, fp);
             inBuffer->mAudioDataByteSize = FRAME_SIZE * sizeof(float) * 2;
             }
