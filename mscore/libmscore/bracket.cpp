@@ -52,7 +52,7 @@ qreal Bracket::width() const
       {
       qreal w;
       if (subtype() == BRACKET_AKKOLADE)
-            w = point(score()->styleS(ST_akkoladeWidth));
+            w = point(score()->styleS(ST_akkoladeWidth) + score()->styleS(ST_akkoladeBarDistance));
       else
             w = point(score()->styleS(ST_bracketWidth) + score()->styleS(ST_bracketDistance));
       return w;
@@ -70,7 +70,7 @@ void Bracket::layout()
             return;
 
       qreal h = h2 + yoff * .5;
-      qreal d = point(score()->styleS(ST_akkoladeBarDistance));
+      qreal d = 0.0;
 
       if (subtype() == BRACKET_AKKOLADE) {
             qreal w = point(score()->styleS(ST_akkoladeWidth));
@@ -137,7 +137,6 @@ path.cubicTo(XM( -136), YM( -624), XM(  -8), YM(-1320), XM(   -8), YM(-2048)); /
             path.addRect(0.0, -slw * .5, w, h * 2.0 + slw);
             }
       QRectF r(path.boundingRect());
-      r.adjust(0, 0, d, 0);
       setbbox(path.boundingRect());
       }
 

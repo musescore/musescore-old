@@ -1920,7 +1920,8 @@ static bool processNonGui()
                         cs->style()->load(&f);
                         }
                   }
-            cs->doLayout();
+            for (int i = 0; i < 10; ++i)  //DEBUG
+                  cs->doLayout();
 
             if (fn.endsWith(".mscx")) {
                   QFileInfo fi(fn);
