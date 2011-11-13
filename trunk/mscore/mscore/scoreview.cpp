@@ -5681,7 +5681,7 @@ void ScoreView::cmdRepeatSelection()
       }
 
 //---------------------------------------------------------
-//   cmdRepeatSelection
+//   selectMeasure
 //---------------------------------------------------------
 
 void ScoreView::selectMeasure(int n)

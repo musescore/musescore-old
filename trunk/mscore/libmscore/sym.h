@@ -57,9 +57,10 @@ class Sym {
       qreal w;
       QRectF _bbox;
       QPointF _attach;
+#ifdef USE_GLYPHS
       QGlyphRun glyphs;       // cached values
-
       void genGlyphs(const QFont& font);
+#endif      
 
    public:
       Sym() { _code = 0; }
