@@ -542,6 +542,7 @@ QString Sym::toString() const
 
 void Sym::draw(QPainter* painter, qreal mag, qreal x, qreal y, int n) const
       {
+#ifdef USE_GLYPHS      
       quint32 indexes[n];
       QPointF positions[n];
       QGlyphRun nglyphs;
@@ -554,9 +555,15 @@ void Sym::draw(QPainter* painter, qreal mag, qreal x, qreal y, int n) const
             if (i)
                   positions[i] = QPointF(dist * i, 0.0);
             }
+#endif
       painter->scale(mag, mag);
       qreal imag = 1.0 / mag;
+#ifdef USE_GLYPHS
       painter->drawGlyphRun(QPointF(x * imag, y * imag), nglyphs);
+#else
+      painter->setFont(font());
+      painter->drawText(QPointF(x * imag, y * imag), QString(n, _code));
+#endif
       painter->scale(imag, imag);
       }
 
