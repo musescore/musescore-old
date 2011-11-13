@@ -86,7 +86,7 @@ void Rest::draw(QPainter* painter) const
             painter->drawLine(QLineF(x1, y-_spatium, x1, y+_spatium));
             painter->drawLine(QLineF(x2, y-_spatium, x2, y+_spatium));
 
-            QFont font = symbols[score()->symIdx()][allabreveSym].font();
+            QFont font(fontId2font(0));
             painter->setFont(font);
             QFontMetricsF fm(font);
             y  = -_spatium * .5 - fm.ascent();

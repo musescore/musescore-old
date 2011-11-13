@@ -20,6 +20,7 @@ class QPainter;
 class TextStyle;
 
 extern void initSymbols(int);
+extern QFont fontId2font(int id);
 
 enum SymbolType {
       SYMBOL_UNKNOWN,
@@ -53,35 +54,32 @@ class Sym {
       int _code;
       int fontId;
       const char* _name;
-      QFont _font;
       qreal w;
       QRectF _bbox;
       QPointF _attach;
-#ifdef USE_GLYPHS
-      QGlyphRun glyphs;
-      void genGlyphs();
-      static QRawFont* rawFonts[2];
-#endif
+      QGlyphRun glyphs;       // cached values
+
+      void genGlyphs(const QFont& font);
 
    public:
       Sym() { _code = 0; }
       Sym(const char* name, int c, int fid, qreal x=0.0, qreal y=0.0);
       Sym(const char* name, int c, int fid, const QPointF&, const QRectF&);
 
-      const char* name() const             { return _name; }
-      void setName(const char* s)          { _name = s; }
+      QFont font() const                   { return fontId2font(fontId); }
+      const char* name() const             { return _name;               }
+      void setName(const char* s)          { _name = s;                  }
       const QRectF bbox(qreal mag) const;
-      qreal height(qreal mag) const      { return _bbox.height() * mag; }
-      qreal width(qreal mag) const       { return w * mag;  }
-      QPointF attach(qreal mag) const     { return _attach * mag;   }
+      qreal height(qreal mag) const        { return _bbox.height() * mag; }
+      qreal width(qreal mag) const         { return w * mag;  }
+      QPointF attach(qreal mag) const      { return _attach * mag;   }
       int code() const                     { return _code;    }
       int getFontId() const                { return fontId;   }
       int setFontId(int v)                 { return fontId = v;   }
-      QFont font() const                   { return _font;    }
       void draw(QPainter* painter, qreal mag, qreal x, qreal y, int n) const;
       void draw(QPainter* painter, qreal mag, qreal x = 0.0, qreal y = 0.0) const;
-      void setAttach(const QPointF& r)       { _attach = r; }
-      bool isValid() const                   { return _code != 0; }
+      void setAttach(const QPointF& r)     { _attach = r; }
+      bool isValid() const                 { return _code != 0; }
       QRectF getBbox() const               { return _bbox; }
       QPointF getAttach() const            { return _attach; }
       QString toString() const;
@@ -332,13 +330,14 @@ enum SymId {
       letterPSym,
 
       plusSym,
-      note2Sym,
+
+//      note2Sym,
       note4Sym,
-      note8Sym,
-      note16Sym,
-      note32Sym,
-      note64Sym,
-      dotdotSym,
+//      note8Sym,
+//      note16Sym,
+//      note32Sym,
+//      note64Sym,
+//      dotdotSym,
 
       longaupaltSym,
       longadownaltSym,
@@ -357,6 +356,5 @@ extern QVector<Sym> symbols[2];
 
 extern QString symToHtml(const Sym&, int leftMargin=0, const TextStyle* ts = 0, qreal sp=10.0);
 extern QString symToHtml(const Sym&, const Sym&, int leftMargin=0);
-extern QFont fontId2font(int id);
 #endif
 

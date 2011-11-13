@@ -38,7 +38,7 @@ class MuseScoreView {
       virtual void setCursor(const QCursor&) = 0;
       virtual int gripCount() const = 0;
       virtual const QRectF& getGrip(int) const = 0;
-      virtual const QTransform& matrix() const = 0;
+//      virtual const QTransform& matrix() const = 0;
       virtual void setDropRectangle(const QRectF&) = 0;
       virtual void cmdAddSlur(Note* firstNote, Note* lastNote) = 0;
       virtual void startEdit() = 0;

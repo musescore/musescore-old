@@ -11,7 +11,6 @@
 //  the file LICENCE.GPL
 //=============================================================================
 
-
 #include "style.h"
 #include "sym.h"
 #include "utils.h"
@@ -24,11 +23,13 @@ static bool symbolsInitialized[2] = { false, false };
 
 QMap<const char*, SymCode*> charReplaceMap;
 
-extern void dumpTable();
+//---------------------------------------------------------
+//   SymbolNames
+//---------------------------------------------------------
 
 struct SymbolNames {
       int msIndex;
-      const char* mname;
+      const char* mname;      // user visible name
       const char* name;
       };
 
@@ -415,42 +416,43 @@ SymCode pSymbols[] = {
 
 QFont fontId2font(int fontId)
       {
-      QFont _font;
-      //
-      // font is rendered with a physical resolution of PDPI
-      //    and logical resolution of DPI
-      //
-      // rastral size is 20pt = 20/72 inch
-      //
-      int size = lrint(20.0 * DPI / PPI);
-      if (fontId == 0) {
-            _font.setFamily("MScore");
+      static QFont* fonts[4];       // cached values
+      Q_ASSERT(fontId >= 0 && fontId < 4);
+
+      QFont* f = fonts[fontId];
+      if (f == 0) {
+            f = fonts[fontId] = new QFont();
+            //
+            // font is rendered with a physical resolution of PDPI
+            //    and logical resolution of DPI
+            //
+            // rastral size is 20pt = 20/72 inch
+            //
+            int size = lrint(20.0 * DPI / PPI);
+            if (fontId == 0)
+                  f->setFamily("MScore");
+            else if (fontId == 1)
+                  f->setFamily("MScore1");
+            else if (fontId == 2) {
+                  f->setFamily("FreeSerif");
+                  size = lrint(8 * DPI / PPI);
+                  }
+            else
+                  f->setFamily("Gonville-20");
+            f->setStyleStrategy(QFont::NoFontMerging);
+            f->setPixelSize(size);
             }
-      else if (fontId == 1)
-            _font.setFamily("MScore1");
-      else if (fontId == 2) {
-            _font.setFamily("FreeSerif");
-            size = lrint(8 * DPI / PPI);
-            }
-      else if (fontId == 3)
-            _font.setFamily("Gonville-20");
-      else {
-            qDebug("illegal font id %d\n", fontId);
-            abort();
-            }
-      _font.setStyleStrategy(QFont::NoFontMerging);
-      _font.setPixelSize(size);
-      return _font;
+      return *f;
       }
- 
+
 #ifdef USE_GLYPHS
 //---------------------------------------------------------
 //   genGlyphs
 //---------------------------------------------------------
 
-void Sym::genGlyphs()
+void Sym::genGlyphs(const QFont& font)
       {
-      QRawFont rfont = QRawFont::fromFont(_font);
+      QRawFont rfont = QRawFont::fromFont(font);
       QVector<quint32> idx = rfont.glyphIndexesForString(toString());
       QVector<QPointF> adv;
       adv << QPointF();
@@ -465,8 +467,9 @@ void Sym::genGlyphs()
 //---------------------------------------------------------
 
 Sym::Sym(const char* name, int c, int fid, qreal ax, qreal ay)
-   : _code(c), fontId(fid), _name(name), _font(fontId2font(fid)), _attach(ax * DPI/PPI, ay * DPI/PPI)
+   : _code(c), fontId(fid), _name(name), _attach(ax * DPI/PPI, ay * DPI/PPI)
       {
+      QFont _font(fontId2font(fontId));
       QFontMetricsF fm(_font);
       if (!fm.inFont(_code)) {
             qDebug("Sym: character 0x%x(%d) <%s> are not in font <%s>\n", c, c, _name, qPrintable(_font.family()));
@@ -475,20 +478,20 @@ Sym::Sym(const char* name, int c, int fid, qreal ax, qreal ay)
       w     = fm.width(_code);
       _bbox = fm.boundingRect(_code);
 #ifdef USE_GLYPHS
-      genGlyphs();
-#endif      
+      genGlyphs(fontId2font(fontId));
+#endif
       }
 
 Sym::Sym(const char* name, int c, int fid, const QPointF& a, const QRectF& b)
-   : _code(c), fontId(fid), _name(name), _font(fontId2font(fontId))
+   : _code(c), fontId(fid), _name(name)
       {
       qreal ds = DPI/PPI;
       _bbox.setRect(b.x() * ds, b.y() * ds, b.width() * ds, b.height() * ds);
       _attach = a * ds;
       w = _bbox.width();
 #ifdef USE_GLYPHS
-      genGlyphs();
-#endif  
+      genGlyphs(fontId2font(fontId));
+#endif
       }
 
 //---------------------------------------------------------
@@ -510,9 +513,9 @@ void Sym::draw(QPainter* painter, qreal mag, qreal x, qreal y) const
       painter->scale(mag, mag);
 #ifdef USE_GLYPHS
       painter->drawGlyphRun(QPointF(x * imag, y * imag), glyphs);
-#else	 
-      painter->setFont(_font);	 
-      painter->drawText(QPointF(x * imag, y * imag), toString());	 
+#else
+      painter->setFont(font());
+      painter->drawText(QPointF(x * imag, y * imag), toString());
 #endif
       painter->scale(imag, imag);
       }
@@ -539,10 +542,21 @@ QString Sym::toString() const
 
 void Sym::draw(QPainter* painter, qreal mag, qreal x, qreal y, int n) const
       {
-      qreal imag = 1.0 / mag;
+      quint32 indexes[n];
+      QPointF positions[n];
+      QGlyphRun nglyphs;
+      nglyphs.setRawData(indexes, positions, n);
+      nglyphs.setRawFont(glyphs.rawFont());
+
+      qreal dist = width(mag);
+      for (int i = 0; i < n; ++i) {
+            indexes[i] = glyphs.glyphIndexes()[0];
+            if (i)
+                  positions[i] = QPointF(dist * i, 0.0);
+            }
       painter->scale(mag, mag);
-      painter->setFont(_font);
-      painter->drawText(QPointF(x * imag, y * imag), QString(n, _code));
+      qreal imag = 1.0 / mag;
+      painter->drawGlyphRun(QPointF(x * imag, y * imag), nglyphs);
       painter->scale(imag, imag);
       }
 
@@ -586,7 +600,7 @@ QString symToHtml(const Sym& s, int leftMargin, const TextStyle* ts, qreal _spat
 QString symToHtml(const Sym& s1, const Sym& s2, int leftMargin)
       {
       QFont f        = s1.font();
-      qreal size    = s1.font().pixelSize() * 72.0 / DPI;
+      qreal size     = s1.font().pixelSize() * 72.0 / DPI;
       QString family = f.family();
 
       return QString(
@@ -617,9 +631,9 @@ void initSymbols(int idx)
       if (symbolsInitialized[idx])
             return;
       symbolsInitialized[idx] = true;
+      symbols[idx] = QVector<Sym>(lastSym);
 
 #define MT(a) QT_TRANSLATE_NOOP("symbol", a)
-      symbols[idx] = QVector<Sym>(lastSym);
       symbols[idx][clefEightSym] = Sym(MT("clef eight"), 0x38, 2);
       symbols[idx][clefOneSym]   = Sym(MT("clef one"),   0x31, 2);
       symbols[idx][clefFiveSym]  = Sym(MT("clef five"),  0x35, 2);
@@ -633,13 +647,13 @@ void initSymbols(int idx)
       symbols[idx][letterSSym]   = Sym(MT("S"),          'S', 2);
       symbols[idx][letterPSym]   = Sym(MT("P"),          'P', 2);
       // used for GUI:
-      symbols[idx][note2Sym]     = Sym(MT("note 1/4"),   0xe104, 1);
-      symbols[idx][note4Sym]     = Sym(MT("note 1/4"),  0x1d15f, 1);
-      symbols[idx][note8Sym]     = Sym(MT("note 1/8"),   0xe106, 1);
-      symbols[idx][note16Sym]    = Sym(MT("note 1/16"),  0xe107, 1);
-      symbols[idx][note32Sym]    = Sym(MT("note 1/32"),  0xe108, 1);
-      symbols[idx][note64Sym]    = Sym(MT("note 1/64"),  0xe109, 1);
-      symbols[idx][dotdotSym]    = Sym(MT("dot dot"),    0xe10b, 1);
+//      symbols[idx][note2Sym]     = Sym(MT("note 1/4"),   0xe104, 1);
+      symbols[idx][note4Sym]     = Sym(MT("note 1/4"),   0xe104, 1); // 0x1d15f, 1);
+//      symbols[idx][note8Sym]     = Sym(MT("note 1/8"),   0xe106, 1);
+//      symbols[idx][note16Sym]    = Sym(MT("note 1/16"),  0xe107, 1);
+//      symbols[idx][note32Sym]    = Sym(MT("note 1/32"),  0xe108, 1);
+//      symbols[idx][note64Sym]    = Sym(MT("note 1/64"),  0xe109, 1);
+//      symbols[idx][dotdotSym]    = Sym(MT("dot dot"),    0xe10b, 1);
 #undef MT
 
       QHash<QString, int> lnhash;
@@ -734,3 +748,4 @@ void initSymbols(int idx)
                   }
             }
       }
+

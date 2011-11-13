@@ -175,7 +175,6 @@ void EditStyle::getValues()
       lstyle.set(ST_startBarlineSingle,      showStartBarlineSingle->isChecked());
       lstyle.set(ST_startBarlineMultiple,    showStartBarlineMultiple->isChecked());
 
-      lstyle.set(ST_bracketDistance,         Spatium(bracketDistance->value()));
       lstyle.set(ST_measureSpacing,          measureSpacing->value());
       lstyle.set(ST_minNoteDistance,         Spatium(minNoteDistance->value()));
       lstyle.set(ST_barNoteDistance,         Spatium(barNoteDistance->value()));
@@ -236,6 +235,11 @@ void EditStyle::getValues()
       lstyle.set(ST_dotDotDistance,          Spatium(dotDotDistance->value()));
       lstyle.set(ST_ledgerLineWidth,         Spatium(ledgerLineWidth->value()));
       lstyle.set(ST_ledgerLineLength,        Spatium(ledgerLineLength->value()));
+
+      lstyle.set(ST_bracketWidth,            Spatium(bracketWidth->value()));
+      lstyle.set(ST_bracketDistance,         Spatium(bracketDistance->value()));
+      lstyle.set(ST_akkoladeWidth,           Spatium(akkoladeWidth->value()));
+      lstyle.set(ST_akkoladeBarDistance,     Spatium(akkoladeBarDistance->value()));
 
       lstyle.set(ST_propertyDistanceHead,    Spatium(propertyDistanceHead->value()));
       lstyle.set(ST_propertyDistanceStem,    Spatium(propertyDistanceStem->value()));
@@ -329,8 +333,6 @@ void EditStyle::setValues()
       showStartBarlineSingle->setChecked(lstyle.value(ST_startBarlineSingle).toBool());
       showStartBarlineMultiple->setChecked(lstyle.value(ST_startBarlineMultiple).toBool());
 
-      bracketDistance->setValue(lstyle.value(ST_bracketDistance).toSpatium().val());
-
       measureSpacing->setValue(lstyle.value(ST_measureSpacing).toDouble());
       minNoteDistance->setValue(lstyle.value(ST_minNoteDistance).toSpatium().val());
       barNoteDistance->setValue(lstyle.value(ST_barNoteDistance).toSpatium().val());
@@ -392,6 +394,11 @@ void EditStyle::setValues()
       dotDotDistance->setValue(lstyle.value(ST_dotDotDistance).toSpatium().val());
       ledgerLineWidth->setValue(lstyle.value(ST_ledgerLineWidth).toSpatium().val());
       ledgerLineLength->setValue(lstyle.value(ST_ledgerLineLength).toSpatium().val());
+
+      bracketWidth->setValue(lstyle.value(ST_bracketWidth).toSpatium().val());
+      bracketDistance->setValue(lstyle.value(ST_bracketDistance).toSpatium().val());
+      akkoladeWidth->setValue(lstyle.value(ST_akkoladeWidth).toSpatium().val());
+      akkoladeBarDistance->setValue(lstyle.value(ST_akkoladeBarDistance).toSpatium().val());
 
       propertyDistanceHead->setValue(lstyle.value(ST_propertyDistanceHead).toSpatium().val());
       propertyDistanceStem->setValue(lstyle.value(ST_propertyDistanceStem).toSpatium().val());
