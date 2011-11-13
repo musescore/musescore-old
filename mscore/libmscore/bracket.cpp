@@ -70,19 +70,53 @@ void Bracket::layout()
             return;
 
       qreal h = h2 + yoff * .5;
+      qreal d = point(score()->styleS(ST_akkoladeBarDistance));
 
       if (subtype() == BRACKET_AKKOLADE) {
-            qreal w         = point(score()->styleS(ST_akkoladeWidth));
+            qreal w = point(score()->styleS(ST_akkoladeWidth));
+#if 0
             const qreal X1 =  2.0 * w;
             const qreal X2 = -0.7096 * w;
             const qreal X3 = -1.234 * w;
             const qreal X4 =  1.734 * w;
+            const qreal Y1 =  .3359 * h;
+            const qreal Y2 =  .5089 * h;
+            const qreal Y3 =  .5025 * h;
+            const qreal Y4 =  .2413 * h;
 
             path.moveTo(0, h);
-            path.cubicTo(X1,  h + h * .3359, X2,  h + h * .5089, w, 2 * h);
-            path.cubicTo(X3,  h + h * .5025, X4,  h + h * .2413, 0, h);
-            path.cubicTo(X1,  h - h * .3359, X2,  h - h * .5089, w, 0);
-            path.cubicTo(X3,  h - h * .5025, X4,  h - h * .2413, 0, h);
+            path.cubicTo(X1, h + Y1,   X2, h + Y2,    w, 2 * h);
+            path.cubicTo(X3, h + Y3,   X4, h + Y4,    0, h);
+
+            path.cubicTo(X1, h - Y1,   X2, h - Y2,    w, 0);
+            path.cubicTo(X3, h - Y3,   X4, h - Y4,    0, h);
+#endif
+
+#define XM(a) (a+700)*w/700
+#define YM(a) (a+7100)*h2/7100
+
+path.moveTo( XM(   -8), YM(-2048));
+path.cubicTo(XM(   -8), YM(-3192), XM(-360), YM(-4304), XM( -360), YM(-5400)); // c 0
+path.cubicTo(XM( -360), YM(-5952), XM(-264), YM(-6488), XM(   32), YM(-6968)); // c 1
+path.cubicTo(XM(   40), YM(-6976), XM(  40), YM(-6976), XM(   40), YM(-6984)); // c 0
+path.cubicTo(XM(   40), YM(-7000), XM(  16), YM(-7024), XM(    0), YM(-7024)); // c 0
+path.cubicTo(XM(   -8), YM(-7024), XM( -24), YM(-7024), XM(  -32), YM(-7008)); // c 1
+path.cubicTo(XM( -416), YM(-6392), XM(-544), YM(-5680), XM( -544), YM(-4960)); // c 0
+path.cubicTo(XM( -544), YM(-3800), XM(-168), YM(-2680), XM( -168), YM(-1568)); // c 0
+path.cubicTo(XM( -168), YM(-1016), XM(-264), YM( -496), XM( -560), YM(  -16)); // c 1
+path.lineTo( XM( -560), YM(    0));  //  l 1
+path.lineTo( XM( -560), YM(   16));  //  l 1
+path.cubicTo(XM( -264), YM(  496), XM(-168), YM( 1016), XM( -168), YM( 1568)); // c 0
+path.cubicTo(XM( -168), YM( 2680), XM(-544), YM( 3800), XM( -544), YM( 4960)); // c 0
+path.cubicTo(XM( -544), YM( 5680), XM(-416), YM( 6392), XM(  -32), YM( 7008)); // c 1
+path.cubicTo(XM(  -24), YM( 7024), XM(  -8), YM( 7024), XM(    0), YM( 7024)); // c 0
+path.cubicTo(XM(   16), YM( 7024), XM(  40), YM( 7000), XM(   40), YM( 6984)); // c 0
+path.cubicTo(XM(   40), YM( 6976), XM(  40), YM( 6976), XM(   32), YM( 6968)); // c 1
+path.cubicTo(XM( -264), YM( 6488), XM(-360), YM( 5952), XM( -360), YM( 5400)); // c 0
+path.cubicTo(XM( -360), YM( 4304), XM(  -8), YM( 3192), XM(   -8), YM( 2048)); // c 0
+path.cubicTo(XM( -  8), YM( 1320), XM(-136), YM(  624), XM( -512), YM(    0)); // c 1
+path.cubicTo(XM( -136), YM( -624), XM(  -8), YM(-1320), XM(   -8), YM(-2048)); // c 0
+
             }
       else if (subtype() == BRACKET_NORMAL) {
             qreal w = point(score()->styleS(ST_bracketWidth));
@@ -90,9 +124,8 @@ void Bracket::layout()
             QChar up   = symbols[score()->symIdx()][brackettipsRightUp].code();
             QChar down = symbols[score()->symIdx()][brackettipsRightDown].code();
 
-            QFont ff(symbols[score()->symIdx()][brackettipsRightUp].font());
-
-            QFont f(ff.family(), lrint(2.0 * _spatium));
+            QFont f(fontId2font(0));
+            f.setPointSize(lrint(2.0 * _spatium));
 
             qreal o   = _spatium * .17;
             qreal slw = point(score()->styleS(ST_staffLineWidth));
@@ -103,6 +136,8 @@ void Bracket::layout()
             path.addText(QPointF(0.0, h * 2.0 + o), f, QString(down));
             path.addRect(0.0, -slw * .5, w, h * 2.0 + slw);
             }
+      QRectF r(path.boundingRect());
+      r.adjust(0, 0, d, 0);
       setbbox(path.boundingRect());
       }
 

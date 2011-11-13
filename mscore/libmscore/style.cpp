@@ -58,6 +58,8 @@ StyleType styleTypes[] = {
       StyleType("startBarlineMultiple",    ST_BOOL),
       StyleType("bracketWidth",            ST_SPATIUM),     // system bracket width
       StyleType("bracketDistance",         ST_SPATIUM),     // system bracket distance
+      StyleType("akkoladeWidth",           ST_SPATIUM),
+      StyleType("akkoladeBarDistance",     ST_SPATIUM),
 
       StyleType("clefLeftMargin",          ST_SPATIUM),
       StyleType("keysigLeftMargin",        ST_SPATIUM),
@@ -77,7 +79,6 @@ StyleType styleTypes[] = {
       StyleType("staffLineWidth",          ST_SPATIUM),
       StyleType("ledgerLineWidth",         ST_SPATIUM),
       StyleType("ledgerLineLength",        ST_SPATIUM),
-      StyleType("akkoladeWidth",           ST_SPATIUM),
       StyleType("accidentalDistance",      ST_SPATIUM),
       StyleType("accidentalNoteDistance",  ST_SPATIUM),
       StyleType("beamWidth",               ST_SPATIUM),
@@ -359,6 +360,8 @@ StyleData::StyleData()
 
             StyleVal(ST_bracketWidth, Spatium(0.35)),
             StyleVal(ST_bracketDistance, Spatium(0.25)),
+            StyleVal(ST_akkoladeWidth,Spatium(1.6)),
+            StyleVal(ST_akkoladeBarDistance,Spatium(.8)),
 
             StyleVal(ST_clefLeftMargin, Spatium(0.8)),
             StyleVal(ST_keysigLeftMargin, Spatium(0.5)),
@@ -379,7 +382,6 @@ StyleData::StyleData()
             StyleVal(ST_staffLineWidth,Spatium(0.08)),      // 0.09375
             StyleVal(ST_ledgerLineWidth,Spatium(0.12)),     // 0.1875
             StyleVal(ST_ledgerLineLength, Spatium(.6)),
-            StyleVal(ST_akkoladeWidth,Spatium(1.6)),
             StyleVal(ST_accidentalDistance,Spatium(0.22)),
             StyleVal(ST_accidentalNoteDistance,Spatium(0.22)),
             StyleVal(ST_beamWidth,Spatium(0.5)),            // was 0.48

@@ -1,3 +1,6 @@
+12.nov (ws)
+      - new piano system bracket (akkolade) design
+      - switch to Qt4.8
 11.nov (la)
       - add /close-all and /open osc messages
 10.nov (ws)

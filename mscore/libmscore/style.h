@@ -159,6 +159,9 @@ enum StyleIdx {
 
       ST_bracketWidth,
       ST_bracketDistance,
+      ST_akkoladeWidth,
+      ST_akkoladeBarDistance,
+
       ST_clefLeftMargin,
       ST_keysigLeftMargin,
       ST_timesigLeftMargin,
@@ -178,7 +181,6 @@ enum StyleIdx {
       ST_staffLineWidth,
       ST_ledgerLineWidth,
       ST_ledgerLineLength,
-      ST_akkoladeWidth,
       ST_accidentalDistance,
       ST_accidentalNoteDistance,
       ST_beamWidth,

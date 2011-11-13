@@ -109,6 +109,7 @@ void Lasso::updateGrips(int* n, QRectF* r) const
 
 void Lasso::layout()
       {
+#if 0
       QRectF bb(_rect);
       if (view) {
             qreal dx = 1.5 / view->matrix().m11();
@@ -116,7 +117,8 @@ void Lasso::layout()
             for (int i = 0; i < view->gripCount(); ++i)
                   bb |= view->getGrip(i).adjusted(-dx, -dy, dx, dy);
             }
-      setbbox(bb);
+#endif
+      setbbox(_rect);
       }
 
 //---------------------------------------------------------
