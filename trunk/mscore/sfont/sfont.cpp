@@ -24,7 +24,7 @@
 #include <string.h>
 #include <sndfile.h>
 #include <vorbis/vorbisenc.h>
-#include "omr/omr.h"
+// #include "omr/omr.h"
 
 #include "sfont.h"
 #include "libmscore/xml.h"
@@ -50,10 +50,6 @@ bool debugMode = false;
 int revision = 0;
 
 // dummies:
-
-Omr::Omr(Score*) {}
-void Omr::write(Xml&) const {}
-void Omr::read(QDomElement) {}
 
 //---------------------------------------------------------
 //   Sample
