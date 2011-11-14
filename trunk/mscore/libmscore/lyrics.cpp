@@ -176,6 +176,7 @@ void Lyrics::remove(Element* el)
 
 void Lyrics::draw(QPainter* painter) const
       {
+      painter->setPen(curColor());
       Text::draw(painter);
       foreach(const Line* l, _separator) {
             painter->translate(l->pos());

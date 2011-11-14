@@ -1275,9 +1275,6 @@ void Score::print(QPainter* painter, int pageNo)
             painter->save();
 //            painter->translate(e->pagePos() - page->pos());
             painter->translate(e->pagePos());
-            QPen pen(painter->pen());
-            pen.setColor(e->color());
-            painter->setPen(pen);
             e->draw(painter);
             painter->restore();
             }

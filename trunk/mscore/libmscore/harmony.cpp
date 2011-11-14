@@ -567,6 +567,7 @@ QPainterPath Harmony::shape() const
 
 void Harmony::draw(QPainter* painter) const
       {
+      painter->setPen(curColor());
       if (_editMode || textList.isEmpty()) {
             Text::draw(painter);
             return;

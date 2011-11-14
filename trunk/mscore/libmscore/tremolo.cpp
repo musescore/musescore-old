@@ -38,12 +38,11 @@ Tremolo::Tremolo(Score* score)
 
 void Tremolo::draw(QPainter* painter) const
       {
-      painter->setBrush(QBrush(QColor(painter->pen().color())));
+      painter->setBrush(QBrush(curColor()));
       painter->drawPath(path);
       if ((parent() == 0) && !twoNotes()) {
             qreal x = 0.0; // bbox().width() * .25;
-            QPen pen(painter->pen());
-            pen.setWidthF(point(score()->styleS(ST_stemWidth)));
+            QPen pen(curColor(), point(score()->styleS(ST_stemWidth)));
             painter->setPen(pen);
             qreal _spatium = spatium();
             painter->drawLine(QLineF(x, -_spatium*.5, x, bbox().height() + _spatium));

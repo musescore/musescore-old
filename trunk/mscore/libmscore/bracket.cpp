@@ -70,7 +70,7 @@ void Bracket::layout()
             return;
 
       qreal h = h2 + yoff * .5;
-      qreal d = 0.0;
+//      qreal d = 0.0;
 
       if (subtype() == BRACKET_AKKOLADE) {
             qreal w = point(score()->styleS(ST_akkoladeWidth));
@@ -147,7 +147,7 @@ path.cubicTo(XM( -136), YM( -624), XM(  -8), YM(-1320), XM(   -8), YM(-2048)); /
 void Bracket::draw(QPainter* painter) const
       {
       painter->setPen(Qt::NoPen);
-      painter->setBrush(QBrush(QColor(painter->pen().color())));
+      painter->setBrush(QBrush(curColor()));
       painter->drawPath(path);
       }
 

@@ -259,7 +259,9 @@ void Page::draw(QPainter* painter) const
       int n = no() + 1 + _score->pageNumberOffset();
       d.setTextWidth(loWidth() - lm() - rm());
 
-      painter->translate(QPointF(lm(), 0.0));
+      QPointF o1(lm(), 0.0);
+      painter->translate(o1);
+      painter->setPen(curColor());
 
       if (_score->styleB(ST_showHeader) && (n || _score->styleB(ST_headerFirstPage))) {
             TextStyle ts = score()->textStyle(TEXT_STYLE_HEADER);
@@ -308,7 +310,8 @@ void Page::draw(QPainter* painter) const
 
             bool odd = (n & 1) && _score->styleB(ST_footerOddEven);
             QString s = _score->styleSt(odd ? ST_oddFooterL : ST_evenFooterL);
-            painter->translate(QPointF(0.0, loHeight() - (tm()+bm())));
+
+            painter->translate(o);
 
             QAbstractTextDocumentLayout::PaintContext c;
             c.cursorPosition = -1;
@@ -328,7 +331,9 @@ void Page::draw(QPainter* painter) const
                   d.setHtml(replaceTextMacros(s));
                   d.documentLayout()->draw(painter, c);
                   }
+            painter->translate(-o);
             }
+      painter->translate(-o1);
       }
 
 //---------------------------------------------------------

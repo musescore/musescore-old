@@ -865,18 +865,16 @@ void StaffLines::draw(QPainter* painter) const
       {
       QPointF _pos(0.0, 0.0);
 
-      QPen pen(painter->pen());
-      pen.setWidthF(lw);
-      pen.setCapStyle(Qt::FlatCap);
-      painter->setPen(pen);
-
+      painter->setPen(QPen(curColor(), lw, Qt::SolidLine, Qt::FlatCap));
       qreal x1 = _pos.x();
       qreal x2 = x1 + width();
 
+      QLineF ll[lines];
       for (int i = 0; i < lines; ++i) {
             qreal y = _pos.y() + i * dist;
-            painter->drawLine(QLineF(x1, y, x2, y));
+            ll[i].setLine(x1, y, x2, y);
             }
+      painter->drawLines(ll, lines);
       }
 
 //---------------------------------------------------------
@@ -978,11 +976,8 @@ void Line::layout()
 
 void Line::draw(QPainter* painter) const
       {
-      QPen pen(painter->pen());
-      pen.setCapStyle(Qt::FlatCap);
       qreal sp = spatium();
-      pen.setWidthF(_width.val() * sp);
-      painter->setPen(pen);
+      painter->setPen(QPen(curColor(), _width.val() * sp));
 
       qreal l = _len.val() * sp;
       if (vertical)
@@ -1143,9 +1138,7 @@ void RubberBand::draw(QPainter* painter) const
       {
       if (!showRubberBand)
             return;
-      QPen pen(painter->pen());
-      pen.setColor(Qt::red);
-      painter->setPen(pen);
+      painter->setPen(Qt::red);
       painter->drawLine(QLineF(_p1.x(), _p1.y(), _p2.x(), _p2.y()));
       }
 

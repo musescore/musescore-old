@@ -80,17 +80,15 @@ void Stem::draw(QPainter* painter) const
             useTab = true;
             }
       qreal lw = point(score()->styleS(ST_stemWidth));
-      QPen pen(painter->pen());
-      pen.setWidthF(lw);
-      pen.setCapStyle(Qt::RoundCap);
-      painter->setPen(pen);
+      painter->setPen(QPen(curColor(), lw, Qt::SolidLine, Qt::RoundCap));
       painter->drawLine(QLineF(0.0, 0.0, 0.0, stemLen()));
+
       // NOT THE BEST PLACE FOR THIS?
       // with tablatures, dots are not drawn near 'notes', but near stems
       if (useTab) {
             int nDots = chord()->dots();
             if (nDots > 0)
-                  symbols[score()->symIdx()][dotSym].draw(painter, magS(), spatium(), stemLen(), nDots);
+                  symbols[score()->symIdx()][dotSym].draw(painter, magS(), QPointF(spatium(), stemLen()), nDots);
             }
       }
 

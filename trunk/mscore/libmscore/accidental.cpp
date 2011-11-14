@@ -380,8 +380,9 @@ void Accidental::draw(QPainter* painter) const
             qreal m = magS();
             if (_small)
                   m *= score()->styleD(ST_smallNoteMag);
+            painter->setPen(curColor());
             foreach(const SymElement& e, el)
-                  symbols[score()->symIdx()][e.sym].draw(painter, m, e.x, 0.0);
+                  symbols[score()->symIdx()][e.sym].draw(painter, m, QPointF(e.x, 0.0));
             }
       }
 

@@ -157,12 +157,9 @@ void Bend::draw(QPainter* painter) const
       {
       if (staff() && !staff()->useTablature())
             return;
-      QPen pen(painter->pen());
-      pen.setWidthF(_lw);
-      pen.setCapStyle(Qt::RoundCap);
-      pen.setJoinStyle(Qt::RoundJoin);
+      QPen pen(curColor(), _lw, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
       painter->setPen(pen);
-      painter->setBrush(QBrush(QColor(Qt::black)));
+      painter->setBrush(QBrush(Qt::black));
 
       qreal _spatium = spatium();
       const TextStyle* st = &score()->textStyle(TEXT_STYLE_BENCH);
@@ -190,7 +187,7 @@ void Bend::draw(QPainter* painter) const
                   x2 = x;
                   painter->drawLine(QLineF(x, y, x2, y2));
 
-                  painter->setBrush(QBrush(QColor(Qt::black)));
+                  painter->setBrush(QBrush(Qt::black));
                   painter->drawPolygon(arrowUp.translated(x2, y2 + _spatium * .2));
 
                   int idx = (pitch + 12)/25;
@@ -219,7 +216,7 @@ void Bend::draw(QPainter* painter) const
                   painter->setBrush(Qt::NoBrush);
                   painter->drawPath(path);
 
-                  painter->setBrush(QBrush(QColor(Qt::black)));
+                  painter->setBrush(QBrush(Qt::black));
                   painter->drawPolygon(arrowUp.translated(x2, y2 + _spatium * .2));
 
                   int idx = (_points[pt+1].pitch + 12)/25;
@@ -239,7 +236,7 @@ void Bend::draw(QPainter* painter) const
                   painter->setBrush(Qt::NoBrush);
                   painter->drawPath(path);
 
-                  painter->setBrush(QBrush(QColor(Qt::black)));
+                  painter->setBrush(QBrush(Qt::black));
                   painter->drawPolygon(arrowDown.translated(x2, y2 - _spatium * .2));
                   }
             x = x2;

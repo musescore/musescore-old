@@ -189,8 +189,9 @@ void KeySig::layout()
 
 void KeySig::draw(QPainter* p) const
       {
+      p->setPen(curColor());
       foreach(const KeySym* ks, keySymbols)
-            symbols[score()->symIdx()][ks->sym].draw(p, magS(), ks->pos.x(), ks->pos.y());
+            symbols[score()->symIdx()][ks->sym].draw(p, magS(), QPointF(ks->pos.x(), ks->pos.y()));
       }
 
 //---------------------------------------------------------

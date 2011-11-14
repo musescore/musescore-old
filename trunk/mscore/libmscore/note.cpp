@@ -521,6 +521,7 @@ qreal Note::stemYoff(bool upFlag) const
 
 void Note::draw(QPainter* painter) const
       {
+      painter->setPen(curColor());
       if (!_hidden || !userOff().isNull()) {
             bool tablature = staff() && staff()->useTablature();
             if (tablature) {
@@ -552,6 +553,7 @@ void Note::draw(QPainter* painter) const
                               painter->restore();
                               }
                         }
+                  painter->setPen(curColor());
                   painter->drawText(QPointF(bbox().x(), tab->fretFontYOffset()), s);
                   painter->scale(imag, imag);
                   }
@@ -564,16 +566,10 @@ void Note::draw(QPainter* painter) const
                      && !score()->printing() && MScore::warnPitchRange) {
                         const Instrument* in = staff()->part()->instr();
                         int i = ppitch();
-                        if (i < in->minPitchP() || i > in->maxPitchP()) {
-                              QPen pen(painter->pen());
-                              pen.setColor(Qt::red);
-                              painter->setPen(pen);
-                              }
-                        else if (i < in->minPitchA() || i > in->maxPitchA()) {
-                              QPen pen(painter->pen());
-                              pen.setColor(Qt::darkYellow);
-                              painter->setPen(pen);
-                              }
+                        if (i < in->minPitchP() || i > in->maxPitchP())
+                              painter->setPen(Qt::red);
+                        else if (i < in->minPitchA() || i > in->maxPitchA())
+                              painter->setPen(Qt::darkYellow);
                         }
                   qreal mag = magS();
                   if (_small)

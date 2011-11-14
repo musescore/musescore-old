@@ -1667,11 +1667,10 @@ void ScoreView::setShadowNote(const QPointF& p)
 static void paintElement(void* data, Element* e)
       {
       QPainter* p = static_cast<QPainter*>(data);
-      p->save();
-      p->setPen(QPen(e->curColor()));
-      p->translate(e->pagePos());
+      QPointF pos(e->pagePos());
+      p->translate(pos);
       e->draw(p);
-      p->restore();
+      p->translate(-pos);
       }
 
 //---------------------------------------------------------
@@ -1771,7 +1770,7 @@ void ScoreView::paintPageBorder(QPainter& p, Page* page)
                   c.setHsv(h1+((h2-h1)*i)/bbw,
                      s1+((s2-s1)*i)/bbw,
                      v1+((v2-v1)*i)/bbw);
-                  p.setPen(QPen(c));
+                  p.setPen(c);
                   p.drawLine(QLineF(x1+i, y1, x1+i, y2));
                   }
             c1.getHsv(&h1, &s1, &v1);
@@ -1787,7 +1786,7 @@ void ScoreView::paintPageBorder(QPainter& p, Page* page)
                   c.setHsv(h1+((h2-h1)*i)/bbw,
                      s1+((s2-s1)*i)/bbw,
                      v1+((v2-v1)*i)/bbw);
-                  p.setPen(QPen(c));
+                  p.setPen(c);
                   p.drawLine(QLineF(x2-bw+i, y1+i+1, x2-bw+i, y2-i-1));
                   }
             }
@@ -1804,7 +1803,7 @@ void ScoreView::paintPageBorder(QPainter& p, Page* page)
                   c.setHsv(h1+((h2-h1)*i)/bbw,
                      s1+((s2-s1)*i)/bbw,
                      v1+((v2-v1)*i)/bbw);
-                  p.setPen(QColor(c));
+                  p.setPen(c);
                   p.drawLine(QLineF(x1+i, y1+(bw-i), x1+i, y2-(bw-i)-1));
                   }
             c1.getHsv(&h1, &s1, &v1);
@@ -1818,7 +1817,7 @@ void ScoreView::paintPageBorder(QPainter& p, Page* page)
                   c.setHsv(h1+((h2-h1)*i)/bbw,
                      s1+((s2-s1)*i)/bbw,
                      v1+((v2-v1)*i)/bbw);
-                  p.setPen(QColor(c));
+                  p.setPen(c);
                   p.drawLine(QLineF(x2-bw+i, y1, x2-bw+i, y2));
                   }
             }
@@ -1859,10 +1858,10 @@ void ScoreView::paint(const QRect& r, QPainter& p)
                   break;
             QList<const Element*> ell = page->items(fr.translated(-page->pos()));
             qStableSort(ell.begin(), ell.end(), elementLessThan);
-            p.save();
-            p.translate(page->pos());
+            QPointF pos(page->pos());
+            p.translate(pos);
             drawElements(p, ell);
-            p.restore();
+            p.translate(-pos);
             r1 -= _matrix.mapRect(pr).toAlignedRect();
             }
 
@@ -2828,13 +2827,13 @@ static void drawDebugInfo(QPainter& p, const Element* e)
       //
       p.setBrush(Qt::NoBrush);
 
-      p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
+      p.setPen(Qt::red);
       p.drawPath(e->shape());
 
-      // p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
+      // p.setPen(Qt::red);
       // p.drawRect(e->bbox());
 
-      p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
+      p.setPen(Qt::red);
       qreal w = 5.0 / p.matrix().m11();
       qreal h = w;
       qreal x = 0; // e->bbox().x();
@@ -2852,12 +2851,12 @@ static void drawDebugInfo(QPainter& p, const Element* e)
             else if (e->type() == CLEF)
                   ee = static_cast<const Clef*>(e)->segment();
 
-            p.setPen(QPen(Qt::green, 0, Qt::SolidLine));
+            p.setPen(Qt::green);
             p.drawRect(ee->pageBoundingRect());
 
             if (ee->type() == SEGMENT) {
                   QPointF pt = ee->pagePos();
-                  p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
+                  p.setPen(Qt::blue);
                   p.drawLine(QLineF(pt.x()-w, pt.y()-h, pt.x()+w, pt.y()+h));
                   p.drawLine(QLineF(pt.x()+w, pt.y()-h, pt.x()-w, pt.y()+h));
                   }
@@ -2879,11 +2878,10 @@ void ScoreView::drawElements(QPainter& painter, const QList<const Element*>& el)
             painter.save();
             QPointF pos(e->pagePos());
             painter.translate(pos);
-            painter.setPen(QPen(e->curColor()));
             e->draw(&painter);
-
-            if (debugMode && e->selected())
-                  drawDebugInfo(painter, e);
+//            if (debugMode && e->selected())
+//                  drawDebugInfo(painter, e);
+            painter.translate(-pos);
             painter.restore();
             }
       }

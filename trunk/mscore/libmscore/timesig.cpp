@@ -328,6 +328,7 @@ void TimeSig::draw(QPainter* painter) const
       {
       if (staff() && !staff()->staffType()->genTimesig())
             return;
+      painter->setPen(curColor());
       painter->setFont(symbols[score()->symIdx()][allabreveSym].font());
       qreal m  = spatium() / (DPI * SPATIUM20);
       painter->scale(m, m);

@@ -81,12 +81,9 @@ void TremoloBar::draw(QPainter* painter) const
       {
       if (staff() && !staff()->useTablature())
             return;
-      QPen pen(painter->pen());
-      pen.setWidthF(_lw);
-      pen.setCapStyle(Qt::RoundCap);
-      pen.setJoinStyle(Qt::RoundJoin);
+      QPen pen(curColor(), _lw, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
       painter->setPen(pen);
-      painter->setBrush(QBrush(QColor(Qt::black)));
+      painter->setBrush(QBrush(Qt::black));
 
       qreal _spatium = spatium();
       const TextStyle* st = &score()->textStyle(TEXT_STYLE_BENCH);

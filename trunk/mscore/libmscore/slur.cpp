@@ -79,7 +79,7 @@ void SlurSegment::move(const QPointF& s)
 
 void SlurSegment::draw(QPainter* painter) const
       {
-      QPen pen(painter->pen());
+      QPen pen(curColor());
       if (slurTie()->lineType() == 0) {
             painter->setBrush(QBrush(QColor(curColor())));
             pen.setCapStyle(Qt::RoundCap);

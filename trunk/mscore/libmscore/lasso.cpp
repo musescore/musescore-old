@@ -33,12 +33,9 @@ Lasso::Lasso(Score* s)
 void Lasso::draw(QPainter* painter) const
       {
       painter->setBrush(QBrush(QColor(0, 0, 50, 50)));
-      QPen pen(painter->pen());
-      pen.setColor(MScore::selectColor[0]);
       // always 2 pixel width
       qreal w = 2.0 / painter->transform().m11();
-      pen.setWidthF(w);
-      painter->setPen(pen);
+      painter->setPen(QPen(MScore::selectColor[0], w));
       painter->drawRect(_rect);
       }
 

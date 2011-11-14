@@ -66,14 +66,9 @@ void Box::draw(QPainter* painter) const
       if (score() && score()->printing())
             return;
       if (selected() || editMode || dropTarget() || score()->showFrames()) {
-            QPen pen(painter->pen());
-            if (selected() || editMode || dropTarget())
-                  pen.setColor(Qt::blue);
-            else
-                  pen.setColor(Qt::gray);
             qreal w = 2.0 / painter->transform().m11();
-            pen.setWidthF(w);
-            painter->setPen(pen);
+            painter->setPen(QPen(
+               (selected() || editMode || dropTarget()) ? Qt::blue : Qt::gray, w));
             painter->setBrush(Qt::NoBrush);
             w *= .5;
             painter->drawRect(bbox().adjusted(w, w, -w, -w));

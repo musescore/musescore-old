@@ -575,6 +575,7 @@ void TabDurationSymbol::draw(QPainter* painter) const
       qreal mag = magS();
       qreal imag = 1.0 / mag;
 
+      painter->setPen(curColor());
       painter->scale(mag, mag);
       painter->setFont(_tab->durationFont());
       painter->drawText(QPointF(0.0, _tab->durationFontYOffset()), _text);

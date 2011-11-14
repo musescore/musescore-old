@@ -413,16 +413,17 @@ void Tuplet::layout()
 
 void Tuplet::draw(QPainter* painter) const
       {
+      QColor color(curColor());
       if (_number) {
-            painter->save();
-            painter->translate(_number->pos());
+            painter->setPen(color);
+            QPointF pos(_number->pos());
+            painter->translate(pos);
             _number->draw(painter);
-            painter->restore();
+            painter->translate(-pos);
             }
       if (_hasBracket) {
-            QPen pen(painter->pen());
-            pen.setWidthF(spatium() * 0.1);
-            painter->setPen(pen);
+            QPen pen(color, spatium() * .1);
+            painter->setPen(QPen(color, spatium() * .1));
             if (!_number)
                   painter->drawPolyline(bracketL, 4);
             else {

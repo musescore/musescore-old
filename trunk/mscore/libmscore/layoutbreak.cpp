@@ -74,12 +74,9 @@ void LayoutBreak::draw(QPainter* painter) const
       {
       if (score()->printing() || !score()->showUnprintable())
             return;
-      QPen pen(painter->pen());
-      pen.setColor(selected() ? MScore::selectColor[0] : MScore::layoutBreakColor);
-      pen.setWidthF(lw);
-      pen.setCapStyle(Qt::RoundCap);
-      pen.setJoinStyle(Qt::RoundJoin);
-      painter->setPen(pen);
+      painter->setPen(QPen(selected() ? MScore::selectColor[0] : MScore::layoutBreakColor,
+         lw, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+
       painter->setBrush(Qt::NoBrush);
       painter->drawPath(path);
       }

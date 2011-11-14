@@ -33,6 +33,7 @@ void TrillSegment::draw(QPainter* painter) const
       qreal w2   = symbols[idx][trillelementSym].width(mag);
       QRectF b2(symbols[idx][trillelementSym].bbox(mag));
 
+      painter->setPen(curColor());
       if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN) {
             QRectF b1(symbols[idx][trillSym].bbox(mag));
             QRectF b2(symbols[idx][trillelementSym].bbox(mag));
@@ -42,21 +43,21 @@ void TrillSegment::draw(QPainter* painter) const
             qreal x2   = pos2().x();
             int n      = int(floor((x2-x1) / w2));
 
-            symbols[idx][trillSym].draw(painter, mag, x0, 0.0);
-            symbols[idx][trillelementSym].draw(painter, mag,  x1, b2.y() * .9, n);
+            symbols[idx][trillSym].draw(painter, mag, QPointF(x0, 0.0));
+            symbols[idx][trillelementSym].draw(painter, mag,  QPointF(x1, b2.y() * .9), n);
 
             if (trill()->accidental()) {
-                  painter->save();
-                  painter->translate(trill()->accidental()->pagePos());
+                  QPointF pos(trill()->accidental()->pagePos());
+                  painter->translate(pos);
                   trill()->accidental()->draw(painter);
-                  painter->restore();
+                  painter->translate(-pos);
                   }
             }
       else {
             qreal x1 = 0.0;
             qreal x2 = pos2().x();
             int n = int(floor((x2-x1) / w2));
-            symbols[idx][trillelementSym].draw(painter, mag,  x1, b2.y() * .9, n);
+            symbols[idx][trillelementSym].draw(painter, mag,  QPointF(x1, b2.y() * .9), n);
             }
       }
 

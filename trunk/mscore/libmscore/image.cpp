@@ -58,9 +58,7 @@ void Image::draw(QPainter* painter) const
       painter->drawPixmap(QPointF(0.0, 0.0), buffer);
       if (selected() && !(score() && score()->printing())) {
             painter->setBrush(Qt::NoBrush);
-            QPen pen(painter->pen());
-            pen.setColor(Qt::blue);   // , 0, Qt::SolidLine));
-            painter->setPen(pen);
+            painter->setPen(Qt::blue);
 
             QPointF p[5];
             qreal w = buffer.size().width();

@@ -279,7 +279,7 @@ void Beam::draw(QPainter* painter) const
             if (staff()->staffType()->slashStyle())
                   return;
             }
-      painter->setBrush(QBrush(QColor(painter->pen().color())));
+      painter->setBrush(QBrush(curColor()));
       painter->setPen(Qt::NoPen);
       qreal lw2 = point(score()->styleS(ST_beamWidth)) * .5 * mag();
       foreach (const QLineF* bs, beamSegments) {
