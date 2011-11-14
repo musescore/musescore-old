@@ -37,8 +37,6 @@ int main(int argc, char* argv[])
 
       QWidget wi(0);
       PDPI = wi.logicalDpiX();    // physical resolution
-      // PDPI = 150.0;
-
       DPI  = PDPI;                // logical drawing resolution
       DPMM = DPI / INCH;          // dots/mm
 
