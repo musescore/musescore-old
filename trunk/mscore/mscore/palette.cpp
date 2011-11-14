@@ -229,9 +229,11 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
       if (element == 0)
             return;
       ScoreView* viewer = mscore->currentScoreView();
-//      mimeData->setData(mimeSymbolFormat, element->mimeData(QPointF()));
 
-      score->startCmd();
+
+      //      mimeData->setData(mimeSymbolFormat, element->mimeData(QPointF()));
+      if( viewer->mscoreState() != STATE_EDIT ) // Already in startCmd in this case
+          score->startCmd();
       if (sel.state() == SEL_LIST) {
             foreach(Element* e, sel.elements())
                   applyDrop(score, viewer, e, element);
@@ -266,7 +268,8 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
             }
       else
             qDebug("unknown selection state\n");
-      score->endCmd();
+      if( viewer->mscoreState() != STATE_EDIT ) //Already in startCmd mode in this case
+          score->endCmd();
       mscore->endCmd();
       }
 

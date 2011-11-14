@@ -1,4 +1,6 @@
 14.nov (ws)
+      - fix #13409: Double-clicking object in palette when hairpin/slur/tie on score
+        is in edit mode causes crash (patch from Gai-Luron)
       - fix #13590: disable palettes during play
       - fix #13657: Plugin: new Score() causes crash
       - fix #4645: do not disable plugins menu if there is no score; is allows for
