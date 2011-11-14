@@ -2480,7 +2480,7 @@ void MuseScore::changeState(ScoreState val)
             if (!menu)
                   continue;
             QString s(menu->objectName());
-            if (s == "File" || s == "Help" || s == "Edit")
+            if (s == "File" || s == "Help" || s == "Edit" || s == "Plugins")
                   continue;
             menu->setEnabled(enable);
             }
@@ -2560,7 +2560,7 @@ void MuseScore::changeState(ScoreState val)
                   _modeText->show();
                   break;
             default:
-                  qDebug("MuseScore::setState: illegal state %d", val);
+                  qDebug("MuseScore::changeState: illegal state %d", val);
                   break;
             }
       QAction* a = getAction("note-input");
