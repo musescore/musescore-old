@@ -102,8 +102,8 @@ void BarLine::drawDots(QPainter* painter, qreal x) const
       qreal _spatium = spatium();
 
       if (parent() == 0) {    // for use in palette
-            dotsym.draw(painter, mags, x, 1.5 * _spatium);
-            dotsym.draw(painter, mags, x, 2.5 * _spatium);
+            dotsym.draw(painter, mags, QPointF(x, 1.5 * _spatium));
+            dotsym.draw(painter, mags, QPointF(x, 2.5 * _spatium));
             }
       else {
             System* s = measure()->system();
@@ -117,8 +117,8 @@ void BarLine::drawDots(QPainter* painter, qreal x) const
 
                   qreal staffy  = s->staff(_staffIdx + i)->y() - dy;
 
-                  dotsym.draw(painter, mags, x, staffy + doty1);
-                  dotsym.draw(painter, mags, x, staffy + doty2);
+                  dotsym.draw(painter, mags, QPointF(x, staffy + doty1));
+                  dotsym.draw(painter, mags, QPointF(x, staffy + doty2));
                   }
             }
       }
@@ -133,11 +133,8 @@ void BarLine::draw(QPainter* painter) const
       qreal y1, y2;
       getY(&y1, &y2);
 
-      QPen pen(painter->pen());
-      pen.setWidthF(lw);
-      pen.setCapStyle(Qt::FlatCap);
+      QPen pen(curColor(), lw, Qt::SolidLine, Qt::FlatCap);
       painter->setPen(pen);
-
       qreal mags = magS();
 
       switch(subtype()) {
@@ -194,8 +191,8 @@ void BarLine::draw(QPainter* painter) const
                   painter->drawLine(QLineF(x2, y1, x2, y2));
 
                   if (score()->styleB(ST_repeatBarTips)) {
-                        symbols[score()->symIdx()][brackettipsRightUp].draw(painter, mags, 0.0, y1);
-                        symbols[score()->symIdx()][brackettipsRightDown].draw(painter, mags, 0.0, y2);
+                        symbols[score()->symIdx()][brackettipsRightUp].draw(painter, mags, QPointF(0.0, y1));
+                        symbols[score()->symIdx()][brackettipsRightDown].draw(painter, mags, QPointF(0.0, y2));
                         }
                   }
                   break;
@@ -216,8 +213,8 @@ void BarLine::draw(QPainter* painter) const
                   painter->drawLine(QLineF(x2, y1, x2, y2));
                   if (score()->styleB(ST_repeatBarTips)) {
                         qreal x = x2 + lw2 * .5;
-                        symbols[score()->symIdx()][brackettipsLeftUp].draw(painter, mags, x, y1);
-                        symbols[score()->symIdx()][brackettipsLeftDown].draw(painter, mags, x, y2);
+                        symbols[score()->symIdx()][brackettipsLeftUp].draw(painter, mags, QPointF(x, y1));
+                        symbols[score()->symIdx()][brackettipsLeftDown].draw(painter, mags, QPointF(x, y2));
                         }
                   }
                   break;

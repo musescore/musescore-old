@@ -86,8 +86,7 @@ void HairpinSegment::layout()
 
 void HairpinSegment::draw(QPainter* painter) const
       {
-      QPen pen(painter->pen());
-      pen.setWidthF(point(score()->styleS(ST_hairpinWidth)));
+      QPen pen(curColor(), point(score()->styleS(ST_hairpinWidth)));
       painter->setPen(pen);
       painter->drawLine(QLineF(l1.x1(), l1.y1(), l1.x2(), l1.y2()));
       painter->drawLine(QLineF(l2.x1(), l2.y1(), l2.x2(), l2.y2()));

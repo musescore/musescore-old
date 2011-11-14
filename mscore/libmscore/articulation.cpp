@@ -371,6 +371,7 @@ void Articulation::draw(QPainter* painter) const
                         return;
                   }
             }
+      painter->setPen(curColor());
       symbols[score()->symIdx()][sym].draw(painter, magS());
       }
 

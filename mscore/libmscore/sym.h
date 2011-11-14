@@ -60,7 +60,7 @@ class Sym {
 #ifdef USE_GLYPHS
       QGlyphRun glyphs;       // cached values
       void genGlyphs(const QFont& font);
-#endif      
+#endif
 
    public:
       Sym() { _code = 0; }
@@ -77,8 +77,8 @@ class Sym {
       int code() const                     { return _code;    }
       int getFontId() const                { return fontId;   }
       int setFontId(int v)                 { return fontId = v;   }
-      void draw(QPainter* painter, qreal mag, qreal x, qreal y, int n) const;
-      void draw(QPainter* painter, qreal mag, qreal x = 0.0, qreal y = 0.0) const;
+      void draw(QPainter* painter, qreal mag, const QPointF& pos = QPointF()) const;
+      void draw(QPainter* painter, qreal mag, const QPointF& pos, int n) const;
       void setAttach(const QPointF& r)     { _attach = r; }
       bool isValid() const                 { return _code != 0; }
       QRectF getBbox() const               { return _bbox; }

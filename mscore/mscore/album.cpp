@@ -103,11 +103,10 @@ void Album::print()
                         e->itemDiscovered = 0;
                         if (!e->visible())
                               continue;
-                        painter.save();
-                        painter.translate(e->pagePos() - page->pos());
-                        painter.setPen(QPen(e->color()));
+                        QPointF pos(e->pagePos() - page->pos());
+                        painter.translate(pos);
                         e->draw(&painter);
-                        painter.restore();
+                        painter.translate(-pos);
                         }
                   }
             pageOffset += pages;

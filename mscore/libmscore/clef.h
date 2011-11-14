@@ -82,6 +82,7 @@ class Clef : public Element {
       Clef(const Clef&);
       virtual Clef* clone() const      { return new Clef(*this); }
       virtual ElementType type() const { return CLEF; }
+      virtual void setSelected(bool f);
 
       Segment* segment() const         { return (Segment*)parent(); }
       Measure* measure() const         { return (Measure*)parent()->parent(); }

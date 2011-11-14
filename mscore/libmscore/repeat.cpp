@@ -33,7 +33,8 @@ RepeatMeasure::RepeatMeasure(Score* score)
 
 void RepeatMeasure::draw(QPainter* painter) const
       {
-      painter->setBrush(QBrush(QColor(painter->pen().color())));
+      painter->setBrush(QBrush(curColor()));
+      painter->setPen(Qt::NoPen);
       painter->drawPath(path);
       }
 

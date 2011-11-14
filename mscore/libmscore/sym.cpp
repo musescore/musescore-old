@@ -507,15 +507,15 @@ const QRectF Sym::bbox(qreal mag) const
 //   draw
 //---------------------------------------------------------
 
-void Sym::draw(QPainter* painter, qreal mag, qreal x, qreal y) const
+void Sym::draw(QPainter* painter, qreal mag, const QPointF& pos) const
       {
       qreal imag = 1.0 / mag;
       painter->scale(mag, mag);
 #ifdef USE_GLYPHS
-      painter->drawGlyphRun(QPointF(x * imag, y * imag), glyphs);
+      painter->drawGlyphRun(pos * imag, glyphs);
 #else
       painter->setFont(font());
-      painter->drawText(QPointF(x * imag, y * imag), toString());
+      painter->drawText(pos * imag, toString());
 #endif
       painter->scale(imag, imag);
       }
@@ -540,9 +540,9 @@ QString Sym::toString() const
 //   draw
 //---------------------------------------------------------
 
-void Sym::draw(QPainter* painter, qreal mag, qreal x, qreal y, int n) const
+void Sym::draw(QPainter* painter, qreal mag, const QPointF& pos, int n) const
       {
-#ifdef USE_GLYPHS      
+#ifdef USE_GLYPHS
       quint32 indexes[n];
       QPointF positions[n];
       QGlyphRun nglyphs;
@@ -559,10 +559,10 @@ void Sym::draw(QPainter* painter, qreal mag, qreal x, qreal y, int n) const
       painter->scale(mag, mag);
       qreal imag = 1.0 / mag;
 #ifdef USE_GLYPHS
-      painter->drawGlyphRun(QPointF(x * imag, y * imag), nglyphs);
+      painter->drawGlyphRun(pos * imag, nglyphs);
 #else
       painter->setFont(font());
-      painter->drawText(QPointF(x * imag, y * imag), QString(n, _code));
+      painter->drawText(pos * imag, QString(n, _code));
 #endif
       painter->scale(imag, imag);
       }

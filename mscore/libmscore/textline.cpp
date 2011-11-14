@@ -80,19 +80,17 @@ void TextLineSegment::draw(QPainter* painter) const
                   QRectF bb(_text->bbox());
                   l = _text->pos().x() + bb.width() + textlineTextDistance;
                   }
-            painter->save();
-            painter->translate(_text->pos());
-            QPen pen(painter->pen());
-            pen.setColor(_text->curColor());
-            painter->setPen(pen);
+            QPointF pos(_text->pos());
+            painter->translate(pos);
+            painter->setPen(_text->curColor());
             _text->draw(painter);
-            painter->restore();
+            painter->translate(-pos);
             }
       else if (sym != -1) {
             const QRectF& bb = symbols[score()->symIdx()][sym].bbox(magS());
             qreal h = bb.height() * .5;
             QPointF o = tl->beginSymbolOffset() * _spatium;
-            symbols[score()->symIdx()][sym].draw(painter, 1.0, o.x(), h + o.y());
+            symbols[score()->symIdx()][sym].draw(painter, 1.0, QPointF(o.x(), h + o.y()));
             l = bb.width() + textlineTextDistance;
             }
       if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_END) {
@@ -102,14 +100,13 @@ void TextLineSegment::draw(QPainter* painter) const
                   qreal h = bb.height() * .5;
                   QPointF o = tl->endSymbolOffset() * _spatium;
                   pp2.setX(pp2.x() - bb.width() + textlineTextDistance);
-                  symbols[score()->symIdx()][sym].draw(painter, 1.0, pp2.x() + textlineTextDistance + o.x(), h + o.y());
+                  symbols[score()->symIdx()][sym].draw(painter, 1.0, QPointF(pp2.x() + textlineTextDistance + o.x(), h + o.y()));
                   }
             }
 
       QPointF pp1(l, 0.0);
 
-      QPen pen(painter->pen());
-      pen.setWidthF(textlineLineWidth);
+      QPen pen(curColor(), textlineLineWidth);
       pen.setStyle(tl->lineStyle());
       if (selected() && !(score() && score()->printing()))
             pen.setColor(MScore::selectColor[0]);

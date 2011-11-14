@@ -204,7 +204,7 @@ void FretDiagram::init(Tablature* tab, Chord* chord)
 void FretDiagram::draw(QPainter* painter) const
       {
       qreal _spatium = spatium();
-      QPen pen(painter->pen());
+      QPen pen(curColor());
       pen.setWidthF(lw2);
       pen.setCapStyle(Qt::FlatCap);
       painter->setPen(pen);

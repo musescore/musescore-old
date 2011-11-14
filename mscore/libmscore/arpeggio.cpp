@@ -112,24 +112,25 @@ void Arpeggio::draw(QPainter* p) const
       {
       qreal _spatium = spatium();
 
+      p->setPen(curColor());
       qreal y1 = _spatium - _userLen1.val() * _spatium;
       qreal y2 = _height + (_userLen2.val() + .5) * _spatium;
       switch (subtype()) {
             case ARP_NORMAL:
                   for (qreal y = y1; y < y2; y += _spatium)
-                        symbols[score()->symIdx()][arpeggioSym].draw(p, 1.0, 0.0, y);
+                        symbols[score()->symIdx()][arpeggioSym].draw(p, 1.0, QPointF(0.0, y));
                   break;
             case ARP_UP:
-                  symbols[score()->symIdx()][arpeggioarrowupSym].draw(p, 1.0, 0.0, y1);
+                  symbols[score()->symIdx()][arpeggioarrowupSym].draw(p, 1.0, QPointF(0.0, y1));
                   for (qreal y = y1 + _spatium; y < y2; y += _spatium)
-                        symbols[score()->symIdx()][arpeggioSym].draw(p, 1.0, 0.0, y);
+                        symbols[score()->symIdx()][arpeggioSym].draw(p, 1.0, QPointF(0.0, y));
                   break;
             case ARP_DOWN:
                   {
                   qreal y = y1;
                   for (; y < y2 - _spatium; y += _spatium)
-                        symbols[score()->symIdx()][arpeggioSym].draw(p, 1.0, 0.0, y);
-                  symbols[score()->symIdx()][arpeggioarrowdownSym].draw(p, 1.0, 0.0, y);
+                        symbols[score()->symIdx()][arpeggioSym].draw(p, 1.0, QPointF(0.0, y));
+                  symbols[score()->symIdx()][arpeggioarrowdownSym].draw(p, 1.0, QPointF(0.0, y));
                   }
                   break;
             case ARP_BRACKET:
@@ -138,10 +139,9 @@ void Arpeggio::draw(QPainter* p) const
                   y2 = _height + _userLen2.val() * _spatium;
                   p->save();
 
-                  QPen pen(p->pen());
-                  pen.setWidthF(score()->styleS(ST_ArpeggioLineWidth).val() * _spatium);
-                  pen.setCapStyle(Qt::RoundCap);
-                  p->setPen(pen);
+                  p->setPen(QPen(curColor(),
+                     score()->styleS(ST_ArpeggioLineWidth).val() * _spatium,
+                     Qt::SolidLine, Qt::RoundCap));
 
                   qreal w = score()->styleS(ST_ArpeggioHookLen).val() * _spatium;
                   p->drawLine(QLineF(0.0, y1, 0.0, y2));

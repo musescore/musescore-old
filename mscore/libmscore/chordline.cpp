@@ -166,12 +166,7 @@ void ChordLine::draw(QPainter* painter) const
       {
       qreal _spatium = spatium();
       painter->scale(_spatium, _spatium);
-      qreal lw = 0.15;
-      QPen pen(painter->pen());
-      pen.setWidthF(lw);
-      pen.setCapStyle(Qt::RoundCap);
-      pen.setJoinStyle(Qt::RoundJoin);
-      painter->setPen(pen);
+      painter->setPen(QPen(curColor(), .15, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
       painter->setBrush(Qt::NoBrush);
       painter->drawPath(path);
       }

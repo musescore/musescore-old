@@ -122,7 +122,7 @@ void Glissando::draw(QPainter* painter) const
       {
       qreal _spatium = spatium();
 
-      QPen pen(painter->pen());
+      QPen pen(curColor());
       pen.setWidthF(_spatium * .15);
       pen.setCapStyle(Qt::RoundCap);
       painter->setPen(pen);
@@ -143,7 +143,7 @@ void Glissando::draw(QPainter* painter) const
             QRectF b = symbols[score()->symIdx()][trillelementSym].bbox(mags);
             qreal w  = symbols[score()->symIdx()][trillelementSym].width(mags);
             int n    = lrint(l / w);
-            symbols[score()->symIdx()][trillelementSym].draw(painter, mags, 0.0, b.height()*.5, n);
+            symbols[score()->symIdx()][trillelementSym].draw(painter, mags, QPointF(0.0, b.height()*.5), n);
             }
       if (_showText) {
             const TextStyle& st = score()->textStyle(TEXT_STYLE_GLISSANDO);

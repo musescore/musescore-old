@@ -428,9 +428,7 @@ void Text::draw(QPainter* painter) const
                   color = Qt::gray;
             // else if (selected())
             //       color = MScore::selectColor[track() == -1 ? 0 : voice()];
-            QPen pen(painter->pen());
-            pen.setColor(color);
-            pen.setWidthF(frameWidth() * DPMM);
+            QPen pen(curColor(), frameWidth() * DPMM);
             painter->setPen(pen);
             painter->setBrush(Qt::NoBrush);
             if (circle())

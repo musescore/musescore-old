@@ -65,6 +65,7 @@ void Rest::draw(QPainter* painter) const
             return;
       qreal _spatium = spatium();
 
+      painter->setPen(curColor());
       Measure* m = measure();
       if (m && m->multiMeasure()) {
             int n     = m->multiMeasure();
@@ -103,7 +104,7 @@ void Rest::draw(QPainter* painter) const
                   for (int i = 1; i <= dots; ++i) {
                         qreal x = symbols[score()->symIdx()][_sym].width(mag)
                                    + point(score()->styleS(ST_dotNoteDistance)) * i;
-                        symbols[score()->symIdx()][dotSym].draw(painter, mag, x, y);
+                        symbols[score()->symIdx()][dotSym].draw(painter, mag, QPointF(x, y));
                         }
                   }
             }

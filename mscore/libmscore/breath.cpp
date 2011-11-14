@@ -73,6 +73,7 @@ void Breath::read(QDomElement e)
 
 void Breath::draw(QPainter* p) const
       {
+      p->setPen(curColor());
       symbols[score()->symIdx()][symList[subtype()]].draw(p, magS());
       }
 

@@ -92,6 +92,17 @@ void Clef::addElement(Element* e, qreal x, qreal y)
       }
 
 //---------------------------------------------------------
+//   setSelected
+//---------------------------------------------------------
+
+void Clef::setSelected(bool f)
+      {
+      Element::setSelected(f);
+      foreach(Element* e, elements)
+            e->setSelected(f);
+      }
+
+//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
