@@ -2489,8 +2489,6 @@ void MuseScore::changeState(ScoreState val)
       foreach(QAction* a, pluginActions)
             a->setEnabled(enable);
 
-      if (paletteBox)
-            paletteBox->setEnabled(enable);
       transportTools->setEnabled(enable && !noSeq);
       cpitchTools->setEnabled(enable);
       mag->setEnabled(enable);
@@ -2563,6 +2561,8 @@ void MuseScore::changeState(ScoreState val)
                   qDebug("MuseScore::changeState: illegal state %d", val);
                   break;
             }
+      if (paletteBox)
+            paletteBox->setDisabled(val == STATE_PLAY || val == STATE_DISABLED);
       QAction* a = getAction("note-input");
       a->setChecked(val == STATE_NOTE_ENTRY);
       _sstate = val;

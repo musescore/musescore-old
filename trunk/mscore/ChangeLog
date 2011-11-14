@@ -1,4 +1,5 @@
 14.nov (ws)
+      - fix #13590: disable palettes during play
       - fix #13657: Plugin: new Score() causes crash
       - fix #4645: do not disable plugins menu if there is no score; is allows for
         plugins like "import ABC files"

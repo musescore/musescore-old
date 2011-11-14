@@ -2176,6 +2176,8 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
       // to get a "drop" Event:
 
       event->acceptProposedAction();
+      if (mscore->state() == STATE_PLAY)  // no editing during play
+            return;
 
       // convert window to canvas position
       QPointF pos(imatrix.map(QPointF(event->pos())));
