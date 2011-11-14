@@ -37,7 +37,6 @@ add_executable(mscoreplay
       main.cpp
       sparm.cpp
       scoreview.cpp
-      painterqt.cpp
       pa.cpp
       seq.cpp
       )

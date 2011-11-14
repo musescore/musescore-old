@@ -14,6 +14,7 @@
       <file alias="fonts/mscore_tab_modern.ttf">../fonts/mscore_tab_modern.ttf</file>
       <file alias="fonts/mscore_tab_renaiss.ttf">../fonts/mscore_tab_renaiss.ttf</file>
       <file alias="fonts/mscore_tab_renaiss2.ttf">../fonts/mscore_tab_renaiss2.ttf</file>
+      <file alias="fonts/FiguredBassMHGPL.otf">../fonts/FiguredBassMHGPL.otf</file>
 
       <file alias="scores/promenade.mscz">../demos/promenade.mscz</file>
       <file alias="scores/promenade.png">promenade.png</file>

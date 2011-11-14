@@ -18,14 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include <stdio.h>
-#include <math.h>
-#include <QtCore/QString>
-#include <QtGui/QPainter>
-#include <QtGui/QWheelEvent>
-
 #include "scoreview.h"
-#include "painterqt.h"
 #include "libmscore/score.h"
 #include "libmscore/page.h"
 #include "libmscore/staff.h"
@@ -33,6 +26,7 @@
 #include "libmscore/segment.h"
 #include "libmscore/keysig.h"
 #include "libmscore/system.h"
+#include "libmscore/style.h"
 
 #include "seq.h"
 
@@ -80,7 +74,7 @@ ScoreView::ScoreView(QDeclarativeItem* parent)
 //---------------------------------------------------------
 
 void ScoreView::loadUrl(const QString& s)
-      {            
+      {
       QUrl url(s);
 printf("URL %s\n", qPrintable(s));
       if (url.scheme().compare("http") == 0) {
@@ -133,7 +127,6 @@ printf("name <%s>\n", qPrintable(name));
 
 void ScoreView::setScore(const QString& name)
       {
-sleep(3);
       if (seq->isPlaying())
             seq->stop();
       _currentPage = 0;
@@ -156,7 +149,7 @@ sleep(3);
       pageFormat.setTwosided(false);
       pageFormat.setLandscape(false);
 
-      Style* style = score->style();
+      MStyle* style = score->style();
       style->setPageFormat(pageFormat);
       style->setSpatium(10.0);
 
@@ -205,22 +198,16 @@ sleep(3);
 //   paint
 //---------------------------------------------------------
 
-void ScoreView::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidget*)
+void ScoreView::paint(QPainter* p, const QStyleOptionGraphicsItem*, QWidget*)
       {
       if (!score)
             return;
-      QPixmap pm(width(), height());
 
-      if (pm.isNull())
-            return;
+      p->setRenderHint(QPainter::Antialiasing, true);
+      p->setRenderHint(QPainter::TextAntialiasing, true);
+      p->drawTiledPixmap(QRect(0, 0, width(), height()), QPixmap(":/mobile/images/paper.png"), QPoint(0,0));
 
-      QPainter p(&pm);
-      PainterQt pqt(&p, this);
-      p.setRenderHint(QPainter::Antialiasing, true);
-      p.setRenderHint(QPainter::TextAntialiasing, true);
-      p.drawTiledPixmap(QRect(0, 0, width(), height()), QPixmap(":/mobile/images/paper.png"), QPoint(0,0));
-
-      p.scale(mag, mag);
+      p->scale(mag, mag);
 
       Page* page = score->pages()[_currentPage];
       QList<const Element*> el;
@@ -231,15 +218,12 @@ void ScoreView::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidge
       page->scanElements(&el, collectElements, false);
 
       foreach(const Element* e, el) {
-            p.save();
-            p.translate(e->pagePos());
-            p.setPen(QPen(e->curColor()));
-            e->draw(&pqt);
-            p.restore();
+            QPointF pos(e->pagePos());
+            p->translate(pos);
+            p->setPen(e->curColor());
+            e->draw(p);
+            p->translate(-pos);
             }
-      p.end();
-
-      painter->drawPixmap(0, 0, pm);
       }
 
 //---------------------------------------------------------
