@@ -104,9 +104,10 @@ static void addText(Score* score, int subtype, const QString& s)
       MeasureBase* measure = score->first();
       if (measure == 0 || measure->type() != VBOX) {
             MeasureBase* mb = new VBox(score);
-            mb->setNext(score->first());
+            mb->setNext(measure);
             mb->setTick(0);
             score->undoInsertMeasure(mb, measure);
+            measure = mb;
             }
       Text* text = new Text(score);
       switch(subtype) {
@@ -244,8 +245,8 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                   if (argc == 0) {
                         mscore->closeScore(score);
                         }
-                  return context->engine()->undefinedValue();      
-                  }                 
+                  return context->engine()->undefinedValue();
+                  }
             case 7:    // "setExpandRepeat",
                   if (argc == 1) {
                         bool f = context->argument(0).toBool();
