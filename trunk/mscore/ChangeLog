@@ -1,3 +1,6 @@
+14.nov (ws)
+      - #4645: do not disable plugins menu if there is no score; is allows for
+        plugins like "import ABC files"
 12.nov (ws)
       - new piano system bracket (akkolade) design
       - switch to Qt4.8
