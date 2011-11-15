@@ -56,10 +56,14 @@ bool LineSegment::isEdited(SpannerSegment* ss) const
 
 void LineSegment::updateGrips(int* grips, QRectF* grip) const
       {
-      *grips = 2;
-      QPointF pp2(_p2 + _userOff2 + pagePos());
+      *grips = 3;
+      QPointF pp(pagePos());
+      QPointF pp1(pp);
+      QPointF pp2(pos2() + pp);
+      QPointF pp3(pos2() * .5 + pp);
+      grip[2].translate(pp3);
       grip[1].translate(pp2);
-      grip[0].translate(pagePos());
+      grip[0].translate(pp1);
       }
 
 //---------------------------------------------------------
@@ -88,10 +92,17 @@ void LineSegment::setGrip(int grip, const QPointF& p)
 QPointF LineSegment::getGrip(int grip) const
       {
       QPointF pt;
-      if (grip == 0)
-            pt = pagePos() - gripAnchor(grip);
-      else
-            pt = _p2 + _userOff2 + pagePos() - gripAnchor(grip);
+      switch(grip) {
+            case 0:
+                  pt = pagePos() - gripAnchor(grip);
+                  break;
+            case 1:
+                  pt = _p2 + _userOff2 + pagePos() - gripAnchor(grip);
+                  break;
+            case 2:
+                  pt = (_p2 + _userOff2) * .5 + pagePos() - gripAnchor(grip);
+                  break;
+            }
       return pt / spatium();
       }
 
@@ -117,16 +128,28 @@ QPointF LineSegment::gripAnchor(int grip) const
       if (spannerSegmentType() == SEGMENT_MIDDLE) {
             qreal y = system()->staffY(staffIdx());
             qreal x;
-            if (grip == 0)
-                  x = system()->firstMeasure()->abbox().left();
-            else
-                  x = system()->lastMeasure()->abbox().right();
+            switch(grip) {
+                  case 0:
+                        x = system()->firstMeasure()->abbox().left();
+                        break;
+                  case 1:
+                        x = system()->lastMeasure()->abbox().right();
+                        break;
+                  case 2:
+                        x = 0; // No Anchor
+                        y = 0;
+                        break;
+                  }
             return QPointF(x, y);
             }
       else {
-            System* s;
-            QPointF pt(line()->linePos(grip, &s));
-            return pt + s->pagePos();
+            if (grip == 2) // center grip
+                  return QPointF(0, 0);
+            else {
+                  System* s;
+                  QPointF pt(line()->linePos(grip, &s));
+                  return pt + s->pagePos();
+                  }
             }
       }
 
@@ -283,15 +306,25 @@ bool LineSegment::edit(MuseScoreView* sv, int curGrip, int key, Qt::KeyboardModi
 
 void LineSegment::editDrag(const EditData& ed)
       {
-      QPointF delta(ed.delta.x(), line()->diagonal() ? ed.delta.y() : 0.0);
+// Only for resizing according to the diagonal properties
+        QPointF deltaResize(ed.delta.x(), line()->diagonal() ? ed.delta.y() : 0.0);
+// Only for moving, no y limitaion
+        QPointF deltaMove(ed.delta.x(), ed.delta.y());
 
-      if (ed.curGrip == 0) {
-            setUserOff(userOff() + delta);
-            _userOff2 -= delta;
-            }
-      else
-            _userOff2 += delta;
-      layout();
+        switch(ed.curGrip)
+        {
+            case 0: // Resize the begin of element (left grip)
+              setUserOff(userOff() + deltaResize);
+              _userOff2 -= deltaResize;
+              break;
+            case 1: // Resize the end of element (rigth grip)
+              _userOff2 += deltaResize;
+              break;
+            case 2: // Move the element (middle grip)
+              setUserOff(userOff() + deltaMove);
+              break;
+        }
+        layout();
       }
 
 //---------------------------------------------------------
