@@ -2486,8 +2486,8 @@ void MuseScore::changeState(ScoreState val)
             }
 
       menuProfiles->setEnabled(enable);
-      foreach(QAction* a, pluginActions)
-            a->setEnabled(enable);
+//      foreach (QAction* a, pluginActions)     allow for "create score" plugins
+//            a->setEnabled(enable);
 
       transportTools->setEnabled(enable && !noSeq);
       cpitchTools->setEnabled(enable);
@@ -4342,9 +4342,10 @@ void MuseScore::updateLayer()
 //---------------------------------------------------------
 //   closeScore
 //---------------------------------------------------------
+
 void MuseScore::closeScore(Score* score)
       {
-      removeTab(scoreList.indexOf(score));
+      removeTab(scoreList.indexOf(score->rootScore()));
       }
 
 //---------------------------------------------------------
