@@ -1,4 +1,6 @@
 15.nov (ws)
+      - fix SVG export; font glyphs are now exported as outlines,
+        no external font required anymore
       - fix #13670: Footer text in Wrong Location
       - fix #13668: Closing a score with part via shortcut does nothing
 14.nov (ws)

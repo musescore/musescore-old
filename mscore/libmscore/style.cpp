@@ -1256,10 +1256,10 @@ void TextStyle::setSystemFlag(bool v)                     { d->systemFlag = v; }
 void TextStyle::setForegroundColor(const QColor& v)       { d->foregroundColor = v; }
 void TextStyle::write(Xml& xml) const                     { d->write(xml); }
 void TextStyle::read(QDomElement v)                       { d->read(v); }
-QFont TextStyle::font(qreal space) const                 { return d->font(space); }
-QFont TextStyle::fontPx(qreal spatium) const             { return d->fontPx(spatium); }
-QRectF TextStyle::bbox(qreal sp, const QString& s) const { return d->bbox(sp, s); }
-QFontMetricsF TextStyle::fontMetrics(qreal space) const  { return fontMetrics(space); }
+QFont TextStyle::font(qreal space) const                  { return d->font(space); }
+QFont TextStyle::fontPx(qreal spatium) const              { return d->fontPx(spatium); }
+QRectF TextStyle::bbox(qreal sp, const QString& s) const  { return d->bbox(sp, s); }
+QFontMetricsF TextStyle::fontMetrics(qreal space) const   { return d->fontMetrics(space); }
 bool TextStyle::operator!=(const TextStyle& s) const      { return d->operator!=(*s.d); }
 void TextStyle::layout(Element* e) const                  { d->layout(e);    }
 void TextStyle::writeProperties(Xml& xml) const           { d->writeProperties(xml); }
