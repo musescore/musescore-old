@@ -1,5 +1,7 @@
+15.nov (ws)
+      - fix #13670: Footer text in Wrong Location
+      - fix #13668: Closing a score with part via shortcut does nothing
 14.nov (ws)
-      - fix #10049, #13668: Closing a score with part via shortcut does nothing
       - fix #13409: Double-clicking object in palette when hairpin/slur/tie on score
         is in edit mode causes crash (patch from Gai-Luron)
       - fix #13590: disable palettes during play

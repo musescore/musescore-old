@@ -124,7 +124,7 @@ Debugger::Debugger(QWidget* parent)
    : QDialog(parent)
       {
       setupUi(this);
-      setWindowTitle(tr("MuseScore: Debugger"));
+//      setWindowTitle(tr("MuseScore: Debugger"));
 
       for (int i = 0; i < MAXTYPE; ++i)
             elementViews[i] = 0;
@@ -479,7 +479,7 @@ void Debugger::updateElement(Element* el)
                   break;
                   }
             }
-      setWindowTitle(QString("MuseScore: List Edit: ") + el->name());
+      setWindowTitle(QString("MuseScore: Debugger: ") + el->name());
 
       ShowElementBase* ew = elementViews[el->type()];
       if (ew == 0) {
