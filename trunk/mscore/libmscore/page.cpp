@@ -245,12 +245,6 @@ void Page::layout()
 
 void Page::draw(QPainter* painter) const
       {
-//      QRectF r = bbox();
-//      qreal x1 = r.x();
-//      qreal y1 = r.y();
-//      qreal x2 = x1 + r.width();
-//      qreal y2 = y1 + r.height();
-
       //
       // draw header/footer
       //
@@ -305,12 +299,12 @@ void Page::draw(QPainter* painter) const
                   o *= spatium();
             else
                   o *= DPI;
-            painter->translate(o);
             d.setTextWidth(loWidth() - lm() - rm() - (2.0 * o.x()));
 
             bool odd = (n & 1) && _score->styleB(ST_footerOddEven);
             QString s = _score->styleSt(odd ? ST_oddFooterL : ST_evenFooterL);
 
+            o = QPointF(0.0, loHeight() - (tm() + bm()));
             painter->translate(o);
 
             QAbstractTextDocumentLayout::PaintContext c;
