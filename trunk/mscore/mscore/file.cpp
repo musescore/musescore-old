@@ -79,6 +79,7 @@
 #include "libmscore/sym.h"
 #include "libmscore/image.h"
 #include "msynth/synti.h"
+#include "svggenerator.h"
 
 #ifdef OMR
 #include "omr/omr.h"
@@ -1714,63 +1715,6 @@ void MuseScore::addImage(Score* score, Element* e)
       }
 
 //---------------------------------------------------------
-//   saveSvg
-//---------------------------------------------------------
-
-bool MuseScore::saveSvg(Score* score, const QString& saveName)
-      {
-      QSvgGenerator printer;
-      printer.setResolution(int(DPI));
-      printer.setFileName(saveName);
-
-      score->setPrinting(true);
-
-      QPainter p(&printer);
-      p.setRenderHint(QPainter::Antialiasing, true);
-      p.setRenderHint(QPainter::TextAntialiasing, true);
-      double mag = converterDpi / DPI;
-      p.scale(mag, mag);
-
-      QList<Element*> eel;
-      for (MeasureBase* m = score->measures()->first(); m; m = m->next()) {
-            // skip multi measure rests
-            if (m->type() == MEASURE) {
-                  Measure* mm = static_cast<Measure*>(m);
-                  if (mm->multiMeasure() < 0)
-                        continue;
-                  }
-            m->scanElements(&eel, collectElements);
-            }
-      QList<const Element*> el;
-      foreach(Page* page, score->pages()) {
-            el.clear();
-            page->scanElements(&el, collectElements);
-            foreach(const Element* e, eel) {
-                  if (!e->visible())
-                        continue;
-                  p.save();
-                  p.translate(e->pagePos() - page->pos());
-                  p.setPen(QPen(e->color()));
-                  e->draw(&p);
-                  p.restore();
-                  }
-            foreach(const Element* e, el) {
-                  if (!e->visible())
-                        continue;
-                  p.save();
-                  p.translate(e->pagePos() - page->pos());
-                  p.setPen(QPen(e->color()));
-                  e->draw(&p);
-                  p.restore();
-                  }
-            }
-
-      score->setPrinting(false);
-      p.end();
-      return true;
-      }
-
-//---------------------------------------------------------
 //   savePng
 //    return true on success
 //---------------------------------------------------------
@@ -1973,6 +1917,68 @@ QString MuseScore::getWallpaper(const QString& caption)
             return result.front();
             }
       return QString();
+      }
+
+//---------------------------------------------------------
+//   saveSvg
+//---------------------------------------------------------
+
+bool MuseScore::saveSvg(Score* score, const QString& saveName)
+      {
+      SvgGenerator printer;
+      printer.setResolution(converterDpi);
+      printer.setFileName(saveName);
+      const PageFormat* pf = cs->pageFormat();
+      double mag = converterDpi / DPI;
+
+      qreal w = pf->width() * DPI;
+      qreal h = pf->height() * DPI;
+      printer.setViewBox(QRectF(0.0, 0.0, w * mag, h * mag));
+
+      score->setPrinting(true);
+
+      QPainter p(&printer);
+      p.setRenderHint(QPainter::Antialiasing, true);
+      p.setRenderHint(QPainter::TextAntialiasing, true);
+      p.scale(mag, mag);
+
+      QList<Element*> eel;
+      for (MeasureBase* m = score->measures()->first(); m; m = m->next()) {
+            // skip multi measure rests
+            if (m->type() == MEASURE) {
+                  Measure* mm = static_cast<Measure*>(m);
+                  if (mm->multiMeasure() < 0)
+                        continue;
+                  }
+            m->scanElements(&eel, collectElements);
+            }
+      QList<const Element*> el;
+      foreach(Page* page, score->pages()) {
+            el.clear();
+            page->scanElements(&el, collectElements);
+            foreach(const Element* e, eel) {
+                  if (!e->visible())
+                        continue;
+                  p.save();
+                  p.translate(e->pagePos() - page->pos());
+                  p.setPen(QPen(e->color()));
+                  e->draw(&p);
+                  p.restore();
+                  }
+            foreach(const Element* e, el) {
+                  if (!e->visible())
+                        continue;
+                  p.save();
+                  p.translate(e->pagePos() - page->pos());
+                  p.setPen(QPen(e->color()));
+                  e->draw(&p);
+                  p.restore();
+                  }
+            }
+
+      score->setPrinting(false);
+      p.end();
+      return true;
       }
 
 
