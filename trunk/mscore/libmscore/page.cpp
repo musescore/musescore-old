@@ -253,7 +253,7 @@ void Page::draw(QPainter* painter) const
       int n = no() + 1 + _score->pageNumberOffset();
       d.setTextWidth(loWidth() - lm() - rm());
 
-      QPointF o1(lm(), 0.0);
+      QPointF o1(lm(), tm());
       painter->translate(o1);
       painter->setPen(curColor());
 
