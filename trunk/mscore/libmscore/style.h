@@ -258,6 +258,7 @@ enum StyleIdx {
       ST_MusicalSymbolFont,
 
       ST_showHeader,
+      ST_headerStyled,
       ST_headerFirstPage,
       ST_headerOddEven,
       ST_evenHeaderL,
@@ -268,6 +269,7 @@ enum StyleIdx {
       ST_oddHeaderR,
 
       ST_showFooter,
+      ST_footerStyled,
       ST_footerFirstPage,
       ST_footerOddEven,
       ST_evenFooterL,
@@ -317,7 +319,7 @@ class StyleVal {
       StyleVal(StyleIdx t, const QString& val);
 
       Spatium toSpatium() const       { return Spatium(v.dbl); }
-      qreal toDouble() const         { return v.dbl;  }
+      qreal toDouble() const          { return v.dbl;  }
       bool toBool() const             { return v.b;  }
       int toInt() const               { return v.i;  }
       QString toString() const        { return s;    }
@@ -365,7 +367,7 @@ class MStyle {
       Spatium  valueS(StyleIdx idx) const;
       QString  valueSt(StyleIdx idx) const;
       bool     valueB(StyleIdx idx) const;
-      qreal   valueD(StyleIdx idx) const;
+      qreal    valueD(StyleIdx idx) const;
       int      valueI(StyleIdx idx) const;
 
       bool load(QFile* qf);
