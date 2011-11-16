@@ -71,7 +71,7 @@ TimeSig::TimeSig(Score* s, const Fraction& f)
 
 void TimeSig::setSubtype(int st)
       {
-      switch(st) {
+      switch (st) {
             case TSIG_NORMAL:
                   break;
             case TSIG_FOUR_FOUR:
@@ -174,56 +174,58 @@ void TimeSig::read(QDomElement e)
       _stretch.set(1, 1);
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            int val = e.text().toInt();
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
+
             if (tag == "den") {
                   old = true;
-                  n = val;
+                  n = val.toInt();
                   }
             else if (tag == "nom1") {
                   old = true;
-                  z1 = val;
+                  z1 = val.toInt();
                   }
             else if (tag == "nom2") {
                   old = true;
-                  z2 = val;
+                  z2 = val.toInt();
                   }
             else if (tag == "nom3") {
                   old = true;
-                  z3 = val;
+                  z3 = val.toInt();
                   }
             else if (tag == "nom4") {
                   old = true;
-                  z4 = val;
+                  z4 = val.toInt();
                   }
             else if (tag == "subtype") {
+                  int i = val.toInt();
                   if (score()->mscVersion() < 122) {
                         setSig(Fraction(
-                           ((val>>24)& 0x3f)
-                           + ((val>>18)& 0x3f)
-                           + ((val>>12)& 0x3f)
-                           + ((val>>6) & 0x3f), val & 0x3f));
-                        val = TSIG_NORMAL;
+                             ((i >> 24) & 0x3f)
+                           + ((i >> 18) & 0x3f)
+                           + ((i >> 12) & 0x3f)
+                           + ((i >>  6) & 0x3f), i & 0x3f));
+                        i = TSIG_NORMAL;
                         }
-                  setSubtype(val);
+                  setSubtype(i);
                   }
             else if (tag == "showCourtesySig")
-                  _showCourtesySig = e.text().toInt();
+                  _showCourtesySig = val.toInt();
             else if (tag == "sigN")
-                  _nominal.setNumerator(val);
+                  _nominal.setNumerator(val.toInt());
             else if (tag == "sigD")
-                  _nominal.setDenominator(val);
+                  _nominal.setDenominator(val.toInt());
             else if (tag == "stretchN")
-                  _stretch.setNumerator(val);
+                  _stretch.setNumerator(val.toInt());
             else if (tag == "stretchD")
-                  _stretch.setDenominator(val);
+                  _stretch.setDenominator(val.toInt());
             else if (tag == "textN") {
                   customText = true;
-                  sz = e.text();
+                  sz = val;
                   }
             else if (tag == "textD") {
                   customText = true;
-                  sn = e.text();
+                  sn = val;
                   }
             else if (!Element::readProperties(e))
                   domError(e);
