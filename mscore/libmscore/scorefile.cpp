@@ -1096,6 +1096,7 @@ bool Score::read(QDomElement dScore)
                         if (s1 == 0 || s2 == 0) {
                               qDebug("cannot place %s at tick %d - %d\n",
                                  s->name(), s->__tick1(), tick2);
+                                 continue;
                               }
                         else {
                               s->setStartElement(s1);
