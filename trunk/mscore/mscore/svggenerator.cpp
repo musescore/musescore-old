@@ -40,14 +40,7 @@
 ****************************************************************************/
 
 #include "svggenerator.h"
-#include "qpainterpath.h"
 #include "paintengine_p.h"
-#include "qfile.h"
-#include "qtextcodec.h"
-#include "qtextstream.h"
-#include "qbuffer.h"
-#include "qmath.h"
-#include "qdebug.h"
 
 #if QT_POINTER_SIZE == 8 // 64-bit versions
 
