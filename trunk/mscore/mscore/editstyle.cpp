@@ -268,6 +268,7 @@ void EditStyle::getValues()
       lstyle.set(ST_MusicalSymbolFont,       musicalSymbolFont->currentText());
 
       lstyle.set(ST_showHeader,              showHeader->isChecked());
+      lstyle.set(ST_headerStyled,            headerStyled->isChecked());
       lstyle.set(ST_headerFirstPage,         showHeaderFirstPage->isChecked());
       lstyle.set(ST_headerOddEven,           headerOddEven->isChecked());
       lstyle.set(ST_evenHeaderL,             evenHeaderL->toHtml());
@@ -278,6 +279,7 @@ void EditStyle::getValues()
       lstyle.set(ST_oddHeaderR,              oddHeaderR->toHtml());
 
       lstyle.set(ST_showFooter,              showFooter->isChecked());
+      lstyle.set(ST_footerStyled,            footerStyled->isChecked());
       lstyle.set(ST_footerFirstPage,         showFooterFirstPage->isChecked());
       lstyle.set(ST_footerOddEven,           footerOddEven->isChecked());
       lstyle.set(ST_evenFooterL,             evenFooterL->toHtml());
@@ -447,6 +449,7 @@ void EditStyle::setValues()
       musicalSymbolFont->setCurrentIndex(lstyle.value(ST_MusicalSymbolFont).toString() == "Emmentaler" ? 0 : 1);
 
       showHeader->setChecked(lstyle.value(ST_showHeader).toBool());
+      headerStyled->setChecked(lstyle.value(ST_headerStyled).toBool());
       showHeaderFirstPage->setChecked(lstyle.value(ST_headerFirstPage).toBool());
       headerOddEven->setChecked(lstyle.value(ST_headerOddEven).toBool());
       evenHeaderL->setHtml(lstyle.value(ST_evenHeaderL).toString());
@@ -457,6 +460,7 @@ void EditStyle::setValues()
       oddHeaderR->setHtml(lstyle.value(ST_oddHeaderR).toString());
 
       showFooter->setChecked(lstyle.value(ST_showFooter).toBool());
+      footerStyled->setChecked(lstyle.value(ST_footerStyled).toBool());
       showFooterFirstPage->setChecked(lstyle.value(ST_footerFirstPage).toBool());
       footerOddEven->setChecked(lstyle.value(ST_footerOddEven).toBool());
       evenFooterL->setHtml(lstyle.value(ST_evenFooterL).toString());
