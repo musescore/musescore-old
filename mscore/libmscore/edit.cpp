@@ -681,6 +681,7 @@ qDebug("cmdAddTimeSig");
       Segment* seg = fm->getSegment(SegTimeSig, tick);
       TimeSig* ots = static_cast<TimeSig*>(seg->element(track));
       if (ots) {
+qDebug("  ots subtype %d  ts subtype %d\n", ots->subtype(), ts->subtype());
             //
             //  ignore if there is already a timesig
             //  with same values
