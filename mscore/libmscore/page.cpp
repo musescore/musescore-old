@@ -314,6 +314,7 @@ void Page::draw(QPainter* painter) const
                   }
             painter->translate(-o);
             }
+
       if (_score->styleB(ST_showFooter) && (n || _score->styleB(ST_footerFirstPage))) {
             TextStyle ts = score()->textStyle(TEXT_STYLE_FOOTER);
 
@@ -362,7 +363,7 @@ void Page::draw(QPainter* painter) const
                         }
                   else
                         d1.setHtml(s1);
-                  h1 = d.documentLayout()->documentSize().height();
+                  h1 = d1.documentLayout()->documentSize().height();
                   }
             else
                   h1 = 0.0;
@@ -381,7 +382,7 @@ void Page::draw(QPainter* painter) const
                         }
                   else
                         d2.setHtml(s2);
-                  h2 = d.documentLayout()->documentSize().height();
+                  h2 = d2.documentLayout()->documentSize().height();
                   }
             else
                   h2 = 0.0;
@@ -401,7 +402,7 @@ void Page::draw(QPainter* painter) const
                         }
                   else
                         d3.setHtml(s3);
-                  h3 = d.documentLayout()->documentSize().height();
+                  h3 = d3.documentLayout()->documentSize().height();
                   }
             else
                   h1 = 0.0;
