@@ -144,6 +144,7 @@ void EditStyle::apply()
       getValues();
       cs->undo()->push(new ChangeStyle(cs, lstyle));
       cs->setLayoutAll(true);
+      cs->end2();
       cs->end();
       }
 
