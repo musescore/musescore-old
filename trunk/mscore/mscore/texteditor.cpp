@@ -115,33 +115,63 @@ TextEditor::TextEditor(QWidget* parent)
       }
 
 //---------------------------------------------------------
-//   setText
+//   setHtml
 //---------------------------------------------------------
 
-void TextEditor::setText(const QString& txt)
+void TextEditor::setHtml(const QString& txt)
       {
       edit->setHtml(txt);
       }
 
 //---------------------------------------------------------
-//   text
+//   toHtml
 //---------------------------------------------------------
 
-QString TextEditor::text() const
+QString TextEditor::toHtml() const
       {
       return edit->toHtml();
+      }
+
+//---------------------------------------------------------
+//   setPlainText
+//---------------------------------------------------------
+
+void TextEditor::setPlainText(const QString& txt)
+      {
+      edit->setPlainText(txt);
+      }
+
+//---------------------------------------------------------
+//   toPlainText
+//---------------------------------------------------------
+
+QString TextEditor::toPlainText() const
+      {
+      return edit->toPlainText();
       }
 
 //---------------------------------------------------------
 //   editText
 //---------------------------------------------------------
 
-QString editText(const QString& s)
+QString editPlainText(const QString& s)
       {
       TextEditor editor;
-      editor.setText(s);
+      editor.setPlainText(s);
       editor.exec();
-      return editor.text();
+      return editor.toPlainText();
+      }
+
+//---------------------------------------------------------
+//   editHtml
+//---------------------------------------------------------
+
+QString editHtml(const QString& s)
+      {
+      TextEditor editor;
+      editor.setHtml(s);
+      editor.exec();
+      return editor.toHtml();
       }
 
 //---------------------------------------------------------

@@ -93,14 +93,14 @@ EditStyle::EditStyle(Score* s, QWidget* parent)
       bg->addButton(editEvenHeaderL, 0);
       bg->addButton(editEvenHeaderC, 1);
       bg->addButton(editEvenHeaderR, 2);
-      bg->addButton(editEvenFooterL, 3);
-      bg->addButton(editEvenFooterC, 4);
-      bg->addButton(editEvenFooterR, 5);
+      bg->addButton(editOddHeaderL,  3);
+      bg->addButton(editOddHeaderC,  4);
+      bg->addButton(editOddHeaderR,  5);
 
-      bg->addButton(editOddHeaderL, 6);
-      bg->addButton(editOddHeaderC, 7);
-      bg->addButton(editOddHeaderR, 8);
-      bg->addButton(editOddFooterL, 9);
+      bg->addButton(editEvenFooterL, 6);
+      bg->addButton(editEvenFooterC, 7);
+      bg->addButton(editEvenFooterR, 8);
+      bg->addButton(editOddFooterL,  9);
       bg->addButton(editOddFooterC, 10);
       bg->addButton(editOddFooterR, 11);
 
@@ -267,27 +267,47 @@ void EditStyle::getValues()
 
       lstyle.set(ST_MusicalSymbolFont,       musicalSymbolFont->currentText());
 
-      lstyle.set(ST_showHeader,              showHeader->isChecked());
-      lstyle.set(ST_headerStyled,            headerStyled->isChecked());
-      lstyle.set(ST_headerFirstPage,         showHeaderFirstPage->isChecked());
-      lstyle.set(ST_headerOddEven,           headerOddEven->isChecked());
-      lstyle.set(ST_evenHeaderL,             evenHeaderL->toHtml());
-      lstyle.set(ST_evenHeaderC,             evenHeaderC->toHtml());
-      lstyle.set(ST_evenHeaderR,             evenHeaderR->toHtml());
-      lstyle.set(ST_oddHeaderL,              oddHeaderL->toHtml());
-      lstyle.set(ST_oddHeaderC,              oddHeaderC->toHtml());
-      lstyle.set(ST_oddHeaderR,              oddHeaderR->toHtml());
+      lstyle.set(ST_showHeader,      showHeader->isChecked());
+      lstyle.set(ST_headerStyled,    headerStyled->isChecked());
+      lstyle.set(ST_headerFirstPage, showHeaderFirstPage->isChecked());
+      lstyle.set(ST_headerOddEven,   headerOddEven->isChecked());
+      if (headerStyled->isChecked()) {
+            lstyle.set(ST_evenHeaderL, evenHeaderL->toPlainText());
+            lstyle.set(ST_evenHeaderC, evenHeaderC->toPlainText());
+            lstyle.set(ST_evenHeaderR, evenHeaderR->toPlainText());
+            lstyle.set(ST_oddHeaderL,  oddHeaderL->toPlainText());
+            lstyle.set(ST_oddHeaderC,  oddHeaderC->toPlainText());
+            lstyle.set(ST_oddHeaderR,  oddHeaderR->toPlainText());
+            }
+      else {
+            lstyle.set(ST_evenHeaderL, evenHeaderL->toHtml());
+            lstyle.set(ST_evenHeaderC, evenHeaderC->toHtml());
+            lstyle.set(ST_evenHeaderR, evenHeaderR->toHtml());
+            lstyle.set(ST_oddHeaderL,  oddHeaderL->toHtml());
+            lstyle.set(ST_oddHeaderC,  oddHeaderC->toHtml());
+            lstyle.set(ST_oddHeaderR,  oddHeaderR->toHtml());
+            }
 
-      lstyle.set(ST_showFooter,              showFooter->isChecked());
-      lstyle.set(ST_footerStyled,            footerStyled->isChecked());
-      lstyle.set(ST_footerFirstPage,         showFooterFirstPage->isChecked());
-      lstyle.set(ST_footerOddEven,           footerOddEven->isChecked());
-      lstyle.set(ST_evenFooterL,             evenFooterL->toHtml());
-      lstyle.set(ST_evenFooterC,             evenFooterC->toHtml());
-      lstyle.set(ST_evenFooterR,             evenFooterR->toHtml());
-      lstyle.set(ST_oddFooterL,              oddFooterL->toHtml());
-      lstyle.set(ST_oddFooterC,              oddFooterC->toHtml());
-      lstyle.set(ST_oddFooterR,              oddFooterR->toHtml());
+      lstyle.set(ST_showFooter,      showFooter->isChecked());
+      lstyle.set(ST_footerStyled,    footerStyled->isChecked());
+      lstyle.set(ST_footerFirstPage, showFooterFirstPage->isChecked());
+      lstyle.set(ST_footerOddEven,   footerOddEven->isChecked());
+      if (footerStyled->isChecked()) {
+            lstyle.set(ST_evenFooterL, evenFooterL->toPlainText());
+            lstyle.set(ST_evenFooterC, evenFooterC->toPlainText());
+            lstyle.set(ST_evenFooterR, evenFooterR->toPlainText());
+            lstyle.set(ST_oddFooterL,  oddFooterL->toPlainText());
+            lstyle.set(ST_oddFooterC,  oddFooterC->toPlainText());
+            lstyle.set(ST_oddFooterR,  oddFooterR->toPlainText());
+            }
+      else {
+            lstyle.set(ST_evenFooterL, evenFooterL->toHtml());
+            lstyle.set(ST_evenFooterC, evenFooterC->toHtml());
+            lstyle.set(ST_evenFooterR, evenFooterR->toHtml());
+            lstyle.set(ST_oddFooterL,  oddFooterL->toHtml());
+            lstyle.set(ST_oddFooterC,  oddFooterC->toHtml());
+            lstyle.set(ST_oddFooterR,  oddFooterR->toHtml());
+            }
 
       for (int i = 0; i < ARTICULATIONS; ++i) {
             QComboBox* cb = static_cast<QComboBox*>(articulationTable->cellWidget(i, 1));
@@ -452,23 +472,43 @@ void EditStyle::setValues()
       headerStyled->setChecked(lstyle.value(ST_headerStyled).toBool());
       showHeaderFirstPage->setChecked(lstyle.value(ST_headerFirstPage).toBool());
       headerOddEven->setChecked(lstyle.value(ST_headerOddEven).toBool());
-      evenHeaderL->setHtml(lstyle.value(ST_evenHeaderL).toString());
-      evenHeaderC->setHtml(lstyle.value(ST_evenHeaderC).toString());
-      evenHeaderR->setHtml(lstyle.value(ST_evenHeaderR).toString());
-      oddHeaderL->setHtml(lstyle.value(ST_oddHeaderL).toString());
-      oddHeaderC->setHtml(lstyle.value(ST_oddHeaderC).toString());
-      oddHeaderR->setHtml(lstyle.value(ST_oddHeaderR).toString());
+      if (headerStyled->isChecked()) {
+            evenHeaderL->setPlainText(lstyle.value(ST_evenHeaderL).toString());
+            evenHeaderC->setPlainText(lstyle.value(ST_evenHeaderC).toString());
+            evenHeaderR->setPlainText(lstyle.value(ST_evenHeaderR).toString());
+            oddHeaderL->setPlainText(lstyle.value(ST_oddHeaderL).toString());
+            oddHeaderC->setPlainText(lstyle.value(ST_oddHeaderC).toString());
+            oddHeaderR->setPlainText(lstyle.value(ST_oddHeaderR).toString());
+            }
+      else {
+            evenHeaderL->setHtml(lstyle.value(ST_evenHeaderL).toString());
+            evenHeaderC->setHtml(lstyle.value(ST_evenHeaderC).toString());
+            evenHeaderR->setHtml(lstyle.value(ST_evenHeaderR).toString());
+            oddHeaderL->setHtml(lstyle.value(ST_oddHeaderL).toString());
+            oddHeaderC->setHtml(lstyle.value(ST_oddHeaderC).toString());
+            oddHeaderR->setHtml(lstyle.value(ST_oddHeaderR).toString());
+            }
 
       showFooter->setChecked(lstyle.value(ST_showFooter).toBool());
       footerStyled->setChecked(lstyle.value(ST_footerStyled).toBool());
       showFooterFirstPage->setChecked(lstyle.value(ST_footerFirstPage).toBool());
       footerOddEven->setChecked(lstyle.value(ST_footerOddEven).toBool());
-      evenFooterL->setHtml(lstyle.value(ST_evenFooterL).toString());
-      evenFooterC->setHtml(lstyle.value(ST_evenFooterC).toString());
-      evenFooterR->setHtml(lstyle.value(ST_evenFooterR).toString());
-      oddFooterL->setHtml(lstyle.value(ST_oddFooterL).toString());
-      oddFooterC->setHtml(lstyle.value(ST_oddFooterC).toString());
-      oddFooterR->setHtml(lstyle.value(ST_oddFooterR).toString());
+      if (footerStyled->isChecked()) {
+            evenFooterL->setPlainText(lstyle.value(ST_evenFooterL).toString());
+            evenFooterC->setPlainText(lstyle.value(ST_evenFooterC).toString());
+            evenFooterR->setPlainText(lstyle.value(ST_evenFooterR).toString());
+            oddFooterL->setPlainText(lstyle.value(ST_oddFooterL).toString());
+            oddFooterC->setPlainText(lstyle.value(ST_oddFooterC).toString());
+            oddFooterR->setPlainText(lstyle.value(ST_oddFooterR).toString());
+            }
+      else {
+            evenFooterL->setHtml(lstyle.value(ST_evenFooterL).toString());
+            evenFooterC->setHtml(lstyle.value(ST_evenFooterC).toString());
+            evenFooterR->setHtml(lstyle.value(ST_evenFooterR).toString());
+            oddFooterL->setHtml(lstyle.value(ST_oddFooterL).toString());
+            oddFooterC->setHtml(lstyle.value(ST_oddFooterC).toString());
+            oddFooterR->setHtml(lstyle.value(ST_oddFooterR).toString());
+            }
 
       voltaY->setValue(lstyle.value(ST_voltaY).toSpatium().val());
       voltaHook->setValue(lstyle.value(ST_voltaHook).toSpatium().val());
@@ -495,29 +535,35 @@ void EditStyle::selectChordDescriptionFile()
       }
 
 //---------------------------------------------------------
-//   editEvenHeaderClicked
+//   editTextClicked
 //---------------------------------------------------------
 
 void EditStyle::editTextClicked(int id)
       {
       QTextEdit* e = 0;
+      switch (id) {
+            case  0:  e = evenHeaderL; break;
+            case  1:  e = evenHeaderC; break;
+            case  2:  e = evenHeaderR; break;
+            case  3:  e = oddHeaderL;  break;
+            case  4:  e = oddHeaderC;  break;
+            case  5:  e = oddHeaderR;  break;
 
-      switch(id) {
-            case  0:  e = evenHeaderL;break;
-            case  1:  e = evenHeaderC;break;
-            case  2:  e = evenHeaderR;break;
-            case  3:  e = evenFooterL;break;
-            case  4:  e = evenFooterC;break;
-            case  5:  e = evenFooterR;break;
-            case  6:  e = oddHeaderL;break;
-            case  7:  e = oddHeaderC;break;
-            case  8:  e = oddHeaderR;break;
-            case  9:  e = oddFooterL;break;
-            case 10:  e = oddFooterC;break;
-            case 11:  e = oddFooterR;break;
+            case  6:  e = evenFooterL; break;
+            case  7:  e = evenFooterC; break;
+            case  8:  e = evenFooterR; break;
+            case  9:  e = oddFooterL;  break;
+            case 10:  e = oddFooterC;  break;
+            case 11:  e = oddFooterR;  break;
             }
-      if (e)
-            e->setHtml(editText(e->toHtml()));
+      if (e == 0)
+            return;
+      bool styled = id < 6 ? headerStyled->isChecked() : footerStyled->isChecked();
+
+      if (styled)
+            e->setPlainText(editPlainText(e->toPlainText()));
+      else
+            e->setHtml(editHtml(e->toHtml()));
       }
 
 //---------------------------------------------------------

@@ -281,7 +281,7 @@ void EditStaff::showEditStaffType()
 
 void EditStaff::editShortNameClicked()
       {
-      QString s = editText(shortName->toHtml());
+      QString s = editHtml(shortName->toHtml());
       shortName->setHtml(s);
       }
 
@@ -291,7 +291,7 @@ void EditStaff::editShortNameClicked()
 
 void EditStaff::editLongNameClicked()
       {
-      QString s = editText(longName->toHtml());
+      QString s = editHtml(longName->toHtml());
       longName->setHtml(s);
       }
 

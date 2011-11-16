@@ -39,8 +39,8 @@
 **
 ****************************************************************************/
 
-#ifndef QPAINTENGINE_P_H
-#define QPAINTENGINE_P_H
+#ifndef PAINTENGINE_P_H
+#define PAINTENGINE_P_H
 
 //
 //  W A R N I N G

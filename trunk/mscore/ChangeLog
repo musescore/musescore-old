@@ -1,3 +1,5 @@
+16.nov (ws)
+      - added "styled" option to header and footer
 15.nov (ws)
       - fix SVG export; font glyphs are now exported as outlines,
         no external font required anymore
