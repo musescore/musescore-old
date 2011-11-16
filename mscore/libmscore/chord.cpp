@@ -1787,7 +1787,10 @@ QVariant Chord::getProperty(int propertyId) const
 void Chord::setProperty(int propertyId, const QVariant& v)
       {
       switch(propertyId) {
-            case P_STEM_DIRECTION: setStemDirection(Direction(v.toInt())); break;
+            case P_STEM_DIRECTION:
+                  setStemDirection(Direction(v.toInt()));
+                  score()->setLayoutAll(true);
+                  break;
             default:
                   Element::setProperty(propertyId, v);
             }
