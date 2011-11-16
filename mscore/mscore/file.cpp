@@ -570,8 +570,10 @@ void MuseScore::newFile()
             double tempo = newWizard->tempo();
             TempoText* tt = new TempoText(score);
 
-            QString s = symbols[0][note4Sym].toString();
-            tt->setText(QString("%1 = %2").arg(s).arg(tempo));
+            int uc = 0x1d15f;
+            QChar h(QChar::highSurrogate(uc));
+            QChar l(QChar::lowSurrogate(uc));
+            tt->setText(QString("%1%2 = %3 ").arg(h).arg(l).arg(tempo));
             tempo /= 60;      // bpm -> bps
 
             tt->setTempo(tempo);
