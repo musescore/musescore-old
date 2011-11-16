@@ -168,6 +168,8 @@ void Navigator::setScore(Score* v)
 
 void Navigator::rescale()
       {
+      if (_score->pages().isEmpty())
+            return;
       int sbh  = scrollArea->style()->pixelMetric(QStyle::PM_ScrollBarExtent);
       int h    = scrollArea->height();
       int w    = scrollArea->width();
