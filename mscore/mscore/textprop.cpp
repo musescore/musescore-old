@@ -154,19 +154,19 @@ void TextProp::setTextStyle(const TextStyle& s)
 
       QString str;
       if (s.offsetType() == OFFSET_ABS) {
-            xOffset->setValue(s.xoff() * INCH);
-            yOffset->setValue(s.yoff() * INCH);
+            xOffset->setValue(s.offset().x() * INCH);
+            yOffset->setValue(s.offset().y() * INCH);
             mmUnit->setChecked(true);
             curUnit = 0;
             }
       else if (s.offsetType() == OFFSET_SPATIUM) {
-            xOffset->setValue(s.xoff());
-            yOffset->setValue(s.yoff());
+            xOffset->setValue(s.offset().x());
+            yOffset->setValue(s.offset().y());
             spatiumUnit->setChecked(true);
             curUnit = 1;
             }
-      rxOffset->setValue(s.rxoff());
-      ryOffset->setValue(s.ryoff());
+      rxOffset->setValue(s.reloff().x());
+      ryOffset->setValue(s.reloff().y());
 
       QFont f(s.family());
       f.setPixelSize(lrint(s.size()));
