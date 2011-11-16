@@ -242,7 +242,7 @@ void MuseScore::registerPlugin(QAction* a)
             qDebug("registerPlugin: no pluginMapper\n");
             return;
             }
-      a->setEnabled(_sstate != STATE_DISABLED);
+//      a->setEnabled(_sstate != STATE_DISABLED);
       pluginActions.append(a);
       int pluginIdx = plugins.size() - 1; // plugin is already appended
       connect(a, SIGNAL(triggered()), pluginMapper, SLOT(map()));
