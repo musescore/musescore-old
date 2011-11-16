@@ -130,6 +130,7 @@ void TextStyleDialog::apply()
             }
       for (int i = n; i < styles.size(); ++i)
             cs->undo()->push(new AddTextStyle(cs, styles[i]));
+      cs->end2();
       cs->end();
       }
 
