@@ -1933,6 +1933,7 @@ bool MuseScore::saveSvg(Score* score, const QString& saveName)
 
       qreal w = pf->width() * DPI;
       qreal h = pf->height() * DPI;
+      printer.setSize(QSize(w * mag, h * mag));
       printer.setViewBox(QRectF(0.0, 0.0, w * mag, h * mag));
 
       score->setPrinting(true);

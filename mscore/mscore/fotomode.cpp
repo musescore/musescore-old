@@ -27,6 +27,7 @@
 #include "preferences.h"
 #include "libmscore/image.h"
 #include "libmscore/mscore.h"
+#include "svggenerator.h"
 
 //---------------------------------------------------------
 //   FotoScoreViewDragTransition
@@ -680,7 +681,9 @@ bool ScoreView::saveFotoAs(bool printMode, const QRectF& r)
             paintRect(printMode, p, r, mag);
             }
       else if (ext == "svg") {
-            QSvgGenerator printer;
+            // note that clipping is not implemented
+            // (as of 4.8)
+            SvgGenerator printer;
             printer.setResolution(int(convDpi));
             printer.setFileName(fn);
             printer.setSize(QSize(w, h));
@@ -715,7 +718,6 @@ void ScoreView::paintRect(bool printMode, QPainter& p, const QRectF& r, double m
 
       p.scale(mag, mag);
       p.translate(-x, -y);
-
       p.setRenderHint(QPainter::Antialiasing, true);
       p.setRenderHint(QPainter::TextAntialiasing, true);
 
