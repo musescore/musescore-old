@@ -27,32 +27,35 @@ class ElementLayout {
 
    protected:
       Align  _align;
-      qreal _xoff, _yoff;
+      QPointF _offset;
       OffsetType _offsetType;
       QPointF _reloff;
 
    public:
       ElementLayout();
-      ElementLayout(Align a, qreal xo, qreal yo, OffsetType ot, qreal rx, qreal ry)
-         : _align(a), _xoff(xo), _yoff(yo), _offsetType(ot), _reloff(rx, ry) {}
+      ElementLayout(Align a, const QPointF& o, OffsetType ot, const QPointF& r)
+         : _align(a), _offset(o), _offsetType(ot), _reloff(r) {}
 
-      Align align() const                   { return _align;        }
-      OffsetType offsetType() const         { return _offsetType;   }
-      qreal xoff() const                   { return _xoff;         }
-      qreal yoff() const                   { return _yoff;         }
-      QPointF reloff() const                { return _reloff;       }
-      void setReloff(const QPointF& val)    { _reloff = val;        }
-      void setAlign(Align val)              { _align  = val;        }
-      void setXoff(qreal val)              { _xoff   = val;        }
-      void setYoff(qreal val)              { _yoff   = val;        }
-      void setOffsetType(OffsetType val)    { _offsetType = val;    }
+      Align align() const                 { return _align;        }
+      OffsetType offsetType() const       { return _offsetType;   }
+      qreal xOffset() const               { return _offset.x();   }
+      qreal yOffset() const               { return _offset.y();   }
+      const QPointF& offset() const       { return _offset;      }
+      const QPointF& reloff() const       { return _reloff;       }
+      void setReloff(const QPointF& val)  { _reloff = val;        }
+      void setAlign(Align val)            { _align  = val;        }
+      void setXoff(qreal val)             { _offset.rx() = val;   }
+      void setYoff(qreal val)             { _offset.ry() = val;        }
+      void setOffsetType(OffsetType val)  { _offsetType = val;    }
       void layout(Element*) const;
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomElement e);
-      void setRxoff(qreal v)               { _reloff.rx() = v; }
-      void setRyoff(qreal v)               { _reloff.ry() = v; }
-      qreal rxoff() const                  { return _reloff.x(); }
-      qreal ryoff() const                  { return _reloff.y(); }
+
+      void setRxoff(qreal v)              { _reloff.rx() = v; }
+      void setRyoff(qreal v)              { _reloff.ry() = v; }
+
+      qreal rxoff() const                 { return _reloff.x(); }
+      qreal ryoff() const                 { return _reloff.y(); }
       };
 
 #endif

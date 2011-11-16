@@ -238,8 +238,6 @@ void Page::layout()
       setbbox(QRectF(0.0, 0.0, loWidth(), loHeight()));
       }
 
-
-
 //---------------------------------------------------------
 //   draw
 //    bounding rectange fr is relative to page QPointF
@@ -265,7 +263,7 @@ void Page::draw(QPainter* painter) const
       if (_score->styleB(ST_showHeader) && (n || _score->styleB(ST_headerFirstPage))) {
             TextStyle ts = score()->textStyle(TEXT_STYLE_HEADER);
             d.setDefaultFont(ts.font(1.0));
-            QPointF o(ts.xoff(), ts.yoff());
+            QPointF o(ts.offset());
             if (ts.offsetType() == OFFSET_SPATIUM)
                   o *= spatium();
             else
@@ -319,7 +317,7 @@ void Page::draw(QPainter* painter) const
       if (_score->styleB(ST_showFooter) && (n || _score->styleB(ST_footerFirstPage))) {
             TextStyle ts = score()->textStyle(TEXT_STYLE_FOOTER);
 
-            QPointF o(ts.xoff(), ts.yoff());
+            QPointF o(ts.offset());
             if (ts.offsetType() == OFFSET_SPATIUM)
                   o *= spatium();
             else

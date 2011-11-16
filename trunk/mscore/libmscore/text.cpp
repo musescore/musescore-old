@@ -698,7 +698,7 @@ qDebug("Text::spatiumChanged %d  -- %s %s %p %f\n",
 //   startEdit
 //---------------------------------------------------------
 
-void Text::startEdit(MuseScoreView* view, const QPointF& p)
+void Text::startEdit(MuseScoreView*, const QPointF& p)
       {
       cursor = new QTextCursor(doc());
       cursor->setVisualNavigation(true);
@@ -728,7 +728,7 @@ void Text::startEdit(MuseScoreView* view, const QPointF& p)
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool Text::edit(MuseScoreView* view, int /*grip*/, int key, Qt::KeyboardModifiers modifiers, const QString& s)
+bool Text::edit(MuseScoreView*, int /*grip*/, int key, Qt::KeyboardModifiers modifiers, const QString& s)
       {
       if (debugMode)
             qDebug("Text::edit(%p) key 0x%x mod 0x%x\n", this, key, int(modifiers));
@@ -1248,7 +1248,7 @@ bool Text::circle() const
 
 qreal Text::xoff() const
       {
-      return style().xoff();
+      return style().offset().x();
       }
 
 //---------------------------------------------------------
@@ -1347,7 +1347,7 @@ void Text::setReloff(const QPointF& p)
 
 qreal Text::rxoff() const
       {
-      return style().rxoff();
+      return style().reloff().x();
       }
 
 //---------------------------------------------------------
@@ -1356,7 +1356,7 @@ qreal Text::rxoff() const
 
 qreal Text::ryoff() const
       {
-      return style().ryoff();
+      return style().reloff().y();
       }
 
 //---------------------------------------------------------
@@ -1365,7 +1365,7 @@ qreal Text::ryoff() const
 
 qreal Text::yoff() const
       {
-      return style().yoff();
+      return style().offset().y();
       }
 
 //---------------------------------------------------------

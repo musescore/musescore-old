@@ -3745,7 +3745,7 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure, int staff)
       double rx = 0.1 * e.attribute("relative-x", "0").toDouble();
       double ry = -0.1 * e.attribute("relative-y", "0").toDouble();
 
-      double styleYOff = score->textStyle(TEXT_STYLE_HARMONY).yoff();
+      double styleYOff = score->textStyle(TEXT_STYLE_HARMONY).offset().y();
       OffsetType offsetType = score->textStyle(TEXT_STYLE_HARMONY).offsetType();
       if (offsetType == OFFSET_ABS) {
             styleYOff = styleYOff * DPMM / score->spatium();

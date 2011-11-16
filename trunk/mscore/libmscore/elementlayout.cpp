@@ -24,8 +24,6 @@
 ElementLayout::ElementLayout()
       {
       _align      = ALIGN_LEFT | ALIGN_BASELINE;
-      _xoff       = 0.0;
-      _yoff       = 0.0;
       _offsetType = OFFSET_SPATIUM;
       }
 
@@ -37,7 +35,7 @@ ElementLayout::ElementLayout()
 
 void ElementLayout::layout(Element* e) const
       {
-      QPointF o(_xoff, _yoff);
+      QPointF o(_offset);
       if (_offsetType == OFFSET_SPATIUM)
             o *= e->spatium();
       else
@@ -98,15 +96,12 @@ void ElementLayout::writeProperties(Xml& xml) const
       else
             xml.tag("valign", "top");
 
-      if (_xoff != 0.0 || _yoff != 0.0) {
-            qreal x(_xoff);
-            qreal y(_yoff);
-            if (offsetType() == OFFSET_ABS) {
-                  x *= INCH;
-                  y *= INCH;
-                  }
-            xml.tag("xoffset", x);
-            xml.tag("yoffset", y);
+      if (!_offset.isNull()) {
+            QPointF pt(_offset);
+            if (offsetType() == OFFSET_ABS)
+                  pt *= INCH;
+            xml.tag("xoffset", pt.x());
+            xml.tag("yoffset", pt.y());
             }
       if (_reloff.x() != 0.0)
             xml.tag("rxoffset", _reloff.x());
@@ -176,14 +171,10 @@ bool ElementLayout::readProperties(QDomElement e)
                   ot = OFFSET_SPATIUM;
             if (ot != offsetType()) {
                   setOffsetType(ot);
-                  if (ot == OFFSET_ABS) {
-                        _xoff /= INCH;
-                        _yoff /= INCH;
-                        }
-                  else {
-                        _xoff *= INCH;
-                        _yoff *= INCH;
-                        }
+                  if (ot == OFFSET_ABS)
+                        _offset /= INCH;
+                  else
+                        _offset *= INCH;
                   }
             }
       else
