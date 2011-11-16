@@ -55,10 +55,13 @@ class TextEditor : public QDialog {
 
    public:
       TextEditor(QWidget* parent = 0);
-      QString text() const;
-      void setText(const QString&);
+      QString toHtml() const;
+      void setHtml(const QString&);
+      QString toPlainText() const;
+      void setPlainText(const QString&);
       };
 
-extern QString editText(const QString& s);
+extern QString editPlainText(const QString& s);
+extern QString editHtml(const QString& s);
 
 #endif

@@ -278,20 +278,40 @@ void Page::draw(QPainter* painter) const
             QAbstractTextDocumentLayout::PaintContext c;
             c.cursorPosition = -1;
             c.palette.setColor(QPalette::Text, ts.foregroundColor());
+            bool styled = _score->styleB(ST_headerStyled);
 
             QString s = _score->styleSt(odd ? ST_oddHeaderL : ST_evenHeaderL);
             if (!s.isEmpty()) {
                   d.setHtml(replaceTextMacros(s));
                   d.documentLayout()->draw(painter, c);
                   }
-            s = _score->styleSt(odd ? ST_oddHeaderC : ST_evenHeaderC);
+
+            s = replaceTextMacros(_score->styleSt(odd ? ST_oddHeaderC : ST_evenHeaderC));
             if (!s.isEmpty()) {
-                  d.setHtml(replaceTextMacros(s));
+                  if (styled) {
+                        d.clear();
+                        QTextCursor c(&d);
+                        QTextBlockFormat bf;
+                        bf.setAlignment(Qt::AlignHCenter);
+                        c.setBlockFormat(bf);
+                        c.insertText(s);
+                        }
+                  else
+                        d.setHtml(s);
                   d.documentLayout()->draw(painter, c);
                   }
-            s = _score->styleSt(odd ? ST_oddHeaderR : ST_evenHeaderR);
+            s = replaceTextMacros(_score->styleSt(odd ? ST_oddHeaderR : ST_evenHeaderR));
             if (!s.isEmpty()) {
-                  d.setHtml(replaceTextMacros(s));
+                  if (styled) {
+                        d.clear();
+                        QTextCursor c(&d);
+                        QTextBlockFormat bf;
+                        bf.setAlignment(Qt::AlignRight);
+                        c.setBlockFormat(bf);
+                        c.insertText(s);
+                        }
+                  else
+                        d.setHtml(s);
                   d.documentLayout()->draw(painter, c);
                   }
             painter->translate(-o);
@@ -328,12 +348,22 @@ void Page::draw(QPainter* painter) const
                   }
 
             qreal h1, h2, h3;
+            bool styled = _score->styleB(ST_footerStyled);
             QTextDocument d1, d2, d3;
+            QFont f;
+            if (styled)
+                  f = ts.font(1.0);
             if (!s1.isEmpty()) {
                   d1.setDocumentMargin(0.0);
                   d1.setUseDesignMetrics(true);
+                  s1 = replaceTextMacros(s1);
                   d1.setTextWidth(w);
-                  d1.setHtml(replaceTextMacros(s1));
+                  if (styled) {
+                        d1.setDefaultFont(f);
+                        d1.setPlainText(s1);
+                        }
+                  else
+                        d1.setHtml(s1);
                   h1 = d.documentLayout()->documentSize().height();
                   }
             else
@@ -341,8 +371,18 @@ void Page::draw(QPainter* painter) const
             if (!s2.isEmpty()) {
                   d2.setDocumentMargin(0.0);
                   d2.setUseDesignMetrics(true);
+                  s2 = replaceTextMacros(s2);
                   d2.setTextWidth(w);
-                  d2.setHtml(replaceTextMacros(s2));
+                  if (styled) {
+                        QTextCursor c(&d2);
+                        d2.setDefaultFont(f);
+                        QTextBlockFormat bf;
+                        bf.setAlignment(Qt::AlignHCenter);
+                        c.setBlockFormat(bf);
+                        c.insertText(s2);
+                        }
+                  else
+                        d2.setHtml(s2);
                   h2 = d.documentLayout()->documentSize().height();
                   }
             else
@@ -350,8 +390,19 @@ void Page::draw(QPainter* painter) const
             if (!s3.isEmpty()) {
                   d3.setDocumentMargin(0.0);
                   d3.setUseDesignMetrics(true);
+                  s3 = replaceTextMacros(s3);
                   d3.setTextWidth(w);
-                  d3.setHtml(replaceTextMacros(s3));
+                  if (styled) {
+                        d3.setDefaultFont(f);
+                        QTextCursor c(&d3);
+                        d2.setDefaultFont(f);
+                        QTextBlockFormat bf;
+                        bf.setAlignment(Qt::AlignRight);
+                        c.setBlockFormat(bf);
+                        c.insertText(s3);
+                        }
+                  else
+                        d3.setHtml(s3);
                   h3 = d.documentLayout()->documentSize().height();
                   }
             else
