@@ -380,6 +380,7 @@ StyleData::StyleData()
             StyleVal(ST_barNoteDistance,Spatium(1.2)),
             StyleVal(ST_noteBarDistance,Spatium(1.0)),
 
+            //38
             StyleVal(ST_measureSpacing, qreal(1.2)),
             StyleVal(ST_staffLineWidth,Spatium(0.08)),      // 0.09375
             StyleVal(ST_ledgerLineWidth,Spatium(0.12)),     // 0.1875
@@ -413,6 +414,7 @@ StyleData::StyleData()
             StyleVal(ST_measureNumberInterval, 5),
             StyleVal(ST_measureNumberSystem, true),
 
+            //68
             StyleVal(ST_measureNumberAllStaffs,false),
             StyleVal(ST_smallNoteMag, qreal(.7)),
             StyleVal(ST_graceNoteMag, qreal(0.7)),
@@ -449,6 +451,7 @@ StyleData::StyleData()
             StyleVal(ST_FixMeasureNumbers, 0),
             StyleVal(ST_FixMeasureWidth, false),
 
+            //100
             StyleVal(ST_SlurEndWidth, Spatium(.07)),
             StyleVal(ST_SlurMidWidth, Spatium(.15)),
             StyleVal(ST_SlurDottedWidth, Spatium(.1)),
@@ -458,29 +461,29 @@ StyleData::StyleData()
 
             StyleVal(ST_MusicalSymbolFont, QString("Emmentaler")),
 
-            StyleVal(ST_showHeader, false),
-            StyleVal(ST_headerStyled, true),
+            StyleVal(ST_showHeader,      false),
+            StyleVal(ST_headerStyled,    true),
             StyleVal(ST_headerFirstPage, false),
-            StyleVal(ST_headerOddEven,  true),
+            StyleVal(ST_headerOddEven,   true),
 
-            StyleVal(ST_evenHeaderL,  ""),
-            StyleVal(ST_evenHeaderC,  ""),
-            StyleVal(ST_evenHeaderR,  ""),
-            StyleVal(ST_oddHeaderL,   ""),
-            StyleVal(ST_oddHeaderC,   ""),
-            StyleVal(ST_oddHeaderR,   ""),
+            StyleVal(ST_evenHeaderL, QString()),
+            StyleVal(ST_evenHeaderC, QString()),
+            StyleVal(ST_evenHeaderR, QString()),
+            StyleVal(ST_oddHeaderL,  QString()),
+            StyleVal(ST_oddHeaderC,  QString()),
+            StyleVal(ST_oddHeaderR,  QString()),
 
-            StyleVal(ST_showFooter,  true),
-            StyleVal(ST_footerStyled, true),
+            StyleVal(ST_showFooter,      true),
+            StyleVal(ST_footerStyled,    true),
             StyleVal(ST_footerFirstPage, true),
-            StyleVal(ST_footerOddEven, true),
+            StyleVal(ST_footerOddEven,   true),
 
-            StyleVal(ST_evenFooterL, "$p"),
-            StyleVal(ST_evenFooterC, "$:copyright:"),
-            StyleVal(ST_evenFooterR, ""),
-            StyleVal(ST_oddFooterL, ""),
-            StyleVal(ST_oddFooterC, "$:copyright:"),
-            StyleVal(ST_oddFooterR, "$p"),
+            StyleVal(ST_evenFooterL, QString("$p")),
+            StyleVal(ST_evenFooterC, QString("$:copyright:")),
+            StyleVal(ST_evenFooterR, QString()),
+            StyleVal(ST_oddFooterL,  QString()),
+            StyleVal(ST_oddFooterC,  QString("$:copyright:")),
+            StyleVal(ST_oddFooterR,  QString("$p")),
 
             StyleVal(ST_voltaY, Spatium(-3.0)),
             StyleVal(ST_voltaHook, Spatium(1.9)),
