@@ -2482,12 +2482,13 @@ void MuseScore::changeState(ScoreState val)
             QString s(menu->objectName());
             if (s == "File" || s == "Help" || s == "Edit" || s == "Plugins")
                   continue;
+printf("enable menu <%s> %d\n", qPrintable(s), enable);
             menu->setEnabled(enable);
             }
 
       menuProfiles->setEnabled(enable);
 //      foreach (QAction* a, pluginActions)     allow for "create score" plugins
-//            a->setEnabled(enable);
+//            a->setEnabled(true);
 
       transportTools->setEnabled(enable && !noSeq);
       cpitchTools->setEnabled(enable);
