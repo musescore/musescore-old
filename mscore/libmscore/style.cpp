@@ -158,6 +158,7 @@ StyleType styleTypes[] = {
       StyleType("musicalSymbolFont",       ST_STRING),
 
       StyleType("showHeader",              ST_BOOL),
+      StyleType("headerStyled",            ST_BOOL),
       StyleType("headerFirstPage",         ST_BOOL),
       StyleType("headerOddEven",           ST_BOOL),
       StyleType("evenHeaderL",             ST_STRING),
@@ -168,6 +169,7 @@ StyleType styleTypes[] = {
       StyleType("oddHeaderR",              ST_STRING),
 
       StyleType("showFooter",              ST_BOOL),
+      StyleType("footerStyled",            ST_BOOL),
       StyleType("footerFirstPage",         ST_BOOL),
       StyleType("footerOddEven",           ST_BOOL),
       StyleType("evenFooterL",             ST_STRING),
@@ -457,8 +459,10 @@ StyleData::StyleData()
             StyleVal(ST_MusicalSymbolFont, QString("Emmentaler")),
 
             StyleVal(ST_showHeader, false),
+            StyleVal(ST_headerStyled, true),
             StyleVal(ST_headerFirstPage, false),
             StyleVal(ST_headerOddEven,  true),
+
             StyleVal(ST_evenHeaderL,  ""),
             StyleVal(ST_evenHeaderC,  ""),
             StyleVal(ST_evenHeaderR,  ""),
@@ -467,72 +471,16 @@ StyleData::StyleData()
             StyleVal(ST_oddHeaderR,   ""),
 
             StyleVal(ST_showFooter,  true),
+            StyleVal(ST_footerStyled, true),
             StyleVal(ST_footerFirstPage, true),
             StyleVal(ST_footerOddEven, true),
-            StyleVal(ST_evenFooterL,
-               QString("<html>"
-                 "<head>"
-                   "<meta name=\"qrichtext\" content=\"1\" >"
-                   "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf8\" />"
-                   "<style type=\"text/css\">"
-                     "p, li { white-space: pre-wrap; }"
-                     "</style>"
-                   "</head>"
-                 "<body style=\" font-family:'%1'; font-size:%2pt;\">"
-                   "<p align=\"left\" style=\" margin-top:0px; margin-bottom:0px; margin-left:%3px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
-                       "$p"
-                     "</p>"
-                   "</body>"
-                 "</html>")),
+
+            StyleVal(ST_evenFooterL, "$p"),
+            StyleVal(ST_evenFooterC, "$:copyright:"),
             StyleVal(ST_evenFooterR, ""),
-            StyleVal(ST_evenFooterC,
-               QString("<html>"
-                 "<head>"
-                   "<meta name=\"qrichtext\" content=\"1\" >"
-                   "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf8\" />"
-                   "<style type=\"text/css\">"
-                     "p, li { white-space: pre-wrap; }"
-                     "</style>"
-                   "</head>"
-                 "<body style=\" font-family:'%1'; font-size:%2pt;\">"
-                   "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:%3px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
-                       "$:copyright:"
-                     "</p>"
-                   "</body>"
-                 "</html>")),
-
-            StyleVal(ST_oddFooterL,
-               QString("<html>"
-                 "<head>"
-                   "<meta name=\"qrichtext\" content=\"1\" >"
-                   "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf8\" />"
-                   "<style type=\"text/css\">"
-                     "p, li { white-space: pre-wrap; }"
-                     "</style>"
-                   "</head>"
-                 "<body style=\" font-family:'%1'; font-size:%2pt;\">"
-                   "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:%3px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
-                       "$:copyright:"
-                     "</p>"
-                   "</body>"
-                 "</html>")),
-
-            StyleVal(ST_oddFooterR, ""),
-            StyleVal(ST_oddFooterC,
-               QString("<html>"
-                 "<head>"
-                   "<meta name=\"qrichtext\" content=\"1\" >"
-                   "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf8\" />"
-                   "<style type=\"text/css\">"
-                     "p, li { white-space: pre-wrap; }"
-                     "</style>"
-                   "</head>"
-                 "<body style=\" font-family:'%1'; font-size:%2pt;\">"
-                   "<p align=\"right\" style=\" margin-top:0px; margin-bottom:0px; margin-left:%3px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
-                       "$p"
-                     "</p>"
-                   "</body>"
-                 "</html>")),
+            StyleVal(ST_oddFooterL, ""),
+            StyleVal(ST_oddFooterC, "$:copyright:"),
+            StyleVal(ST_oddFooterR, "$p"),
 
             StyleVal(ST_voltaY, Spatium(-3.0)),
             StyleVal(ST_voltaHook, Spatium(1.9)),
