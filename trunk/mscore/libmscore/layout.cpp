@@ -1030,9 +1030,9 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
 void Score::removeGeneratedElements(Measure* sm, Measure* em)
       {
 // qDebug("removeGeneratedElements %d - %d\n", mb->tick(), end->tick());
-      for (Measure* m = sm; m != em; m = m->nextMeasure()) {
+      for (Measure* m = sm; m; m = m->nextMeasure()) {
             //
-            // remove generated elements
+            // remove generated elements from all measures in [sm;em]
             //    assume: generated elements are only living in voice 0
             //    - do not remove end bar lines
             //    - set size of clefs to small
@@ -1048,7 +1048,8 @@ void Score::removeGeneratedElements(Measure* sm, Measure* em)
                         qreal staffMag = staff(staffIdx)->mag();
 
                         if (el->generated() && ((st == SegTimeSigAnnounce && m != em)
-                            || (el->type() == CLEF && seg->tick() != sm->tick())))
+                            || (el->type() == CLEF && seg->tick() != sm->tick())
+                            || (el->type() == KEYSIG && seg->tick() != sm->tick())))
                               {
                               undoRemoveElement(el);
                               }
@@ -1061,6 +1062,8 @@ void Score::removeGeneratedElements(Measure* sm, Measure* em)
                               el->setMag(staffMag);
                         }
                   }
+            if(m == em)
+                  break;
             }
       }
 
