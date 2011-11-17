@@ -147,6 +147,7 @@ class Page : public Element {
       Measure* searchMeasure(const QPointF& p) const;
       MeasureBase* pos2measure(const QPointF&, int* staffIdx, int* pitch,
          Segment**, QPointF* offset) const;
+      QList<const Element*> elements();         ///< list of visible elements
       };
 
 extern const PaperSize paperSizes[];
