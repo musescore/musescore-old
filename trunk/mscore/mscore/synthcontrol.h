@@ -1,7 +1,7 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id: select.h 2047 2009-08-26 18:33:38Z wschweer $
+//  $Id: synthcontrol.h 2047 2009-08-26 18:33:38Z wschweer $
 //
 //  Copyright (C) 2002-2010 Werner Schweer and others
 //
@@ -44,12 +44,10 @@ class SynthControl : public QWidget, Ui::SynthControl {
       void updateUpDownButtons();
 
    private slots:
-      void selectSoundFont();
       void sfUpClicked();
       void sfDownClicked();
       void sfDeleteClicked();
       void sfAddClicked();
-      void sfChanged(const QString&);
 
       void gainChanged(double, int);
       void masterTuningChanged(double);

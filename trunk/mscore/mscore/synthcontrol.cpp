@@ -43,7 +43,6 @@ SynthControl::SynthControl(QWidget* parent)
    : QWidget(parent, Qt::Dialog)
       {
       setupUi(this);
-      sfButton->setIcon(*icons[fileOpen_ICON]);
       saveReverbPreset->setIcon(*icons[fileSave_ICON]);
       saveChorusPreset->setIcon(*icons[fileSave_ICON]);
 
@@ -95,9 +94,8 @@ SynthControl::SynthControl(QWidget* parent)
       soundFontUp->setEnabled(false);
       soundFontDown->setEnabled(false);
       soundFontDelete->setEnabled(false);
-      soundFontAdd->setEnabled(false);
-
-      connect(sfButton,        SIGNAL(clicked()),                SLOT(selectSoundFont()));
+      soundFontAdd->setEnabled(true);
+      
       connect(gain,            SIGNAL(valueChanged(double,int)), SLOT(gainChanged(double,int)));
       connect(masterTuning,    SIGNAL(valueChanged(double)),     SLOT(masterTuningChanged(double)));
 
@@ -118,7 +116,6 @@ SynthControl::SynthControl(QWidget* parent)
       connect(soundFontDown,   SIGNAL(clicked()),                SLOT(sfDownClicked()));
       connect(soundFontDelete, SIGNAL(clicked()),                SLOT(sfDeleteClicked()));
       connect(soundFontAdd,    SIGNAL(clicked()),                SLOT(sfAddClicked()));
-      connect(soundFont,       SIGNAL(textChanged(const QString&)), SLOT(sfChanged(const QString&)));
       connect(soundFonts,      SIGNAL(currentRowChanged(int)),   SLOT(currentSoundFontChanged(int)));
 
       updateSyntiValues();
@@ -253,29 +250,6 @@ void SynthControl::updatePreferences()
       }
 
 //---------------------------------------------------------
-//   selectSoundFont
-//---------------------------------------------------------
-
-void SynthControl::selectSoundFont()
-      {
-      QString s = mscore->getSoundFont(soundFont->text());
-      if (!s.isEmpty()) {
-            soundFont->setText(s);
-            soundFontAdd->setEnabled(true);
-            }
-      }
-
-//---------------------------------------------------------
-//   sfChanged
-//---------------------------------------------------------
-
-void SynthControl::sfChanged(const QString& s)
-      {
-      if (!s.isEmpty())
-            soundFontAdd->setEnabled(true);
-      }
-
-//---------------------------------------------------------
 //   sfDeleteClicked
 //---------------------------------------------------------
 
@@ -298,7 +272,7 @@ void SynthControl::sfDeleteClicked()
 
 void SynthControl::sfAddClicked()
       {
-      QString s(soundFont->text());
+      QString s = mscore->getSoundFont("");
       if (!s.isEmpty()) {
             int n = soundFonts->count();
             QStringList sl;
@@ -326,7 +300,7 @@ void SynthControl::sfAddClicked()
                         }
                   }
             }
-      updateUpDownButtons();
+      updateUpDownButtons();      
       }
 
 //---------------------------------------------------------

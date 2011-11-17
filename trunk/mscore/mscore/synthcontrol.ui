@@ -94,34 +94,10 @@
                </property>
               </widget>
              </item>
-            </layout>
-           </item>
-           <item row="1" column="0" colspan="2">
-            <layout class="QHBoxLayout" name="horizontalLayout">
              <item>
               <widget class="QPushButton" name="soundFontAdd">
                <property name="text">
                 <string>Add</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="soundFont">
-               <property name="statusTip">
-                <string>Loaded SoundFont</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="readOnly">
-                <bool>false</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QToolButton" name="sfButton">
-               <property name="text">
-                <string>...</string>
                </property>
               </widget>
              </item>
