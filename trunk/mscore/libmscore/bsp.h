@@ -68,7 +68,6 @@ class BspTree
 
       void insert(const Element* item);
       void remove(const Element* item);
-//      void remove(const QSet<const Element*>& items);
 
       QList<const Element*> items(const QRectF& rect);
       QList<const Element*> items(const QPointF& pos);
@@ -79,8 +78,9 @@ class BspTree
       inline int parentIndex(int index) const {
             return index > 0 ? ((index & 1) ? ((index - 1) / 2) : ((index - 2) / 2)) : -1;
             }
-
+#ifndef NDEBUG
       QString debug(int index) const;
+#endif
       };
 
 //---------------------------------------------------------

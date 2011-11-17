@@ -55,24 +55,6 @@ void Score::rebuildBspTree()
       }
 
 //---------------------------------------------------------
-//   first
-//---------------------------------------------------------
-
-MeasureBase* Score::first() const
-      {
-      return _measures.first();
-      }
-
-//---------------------------------------------------------
-//   last
-//---------------------------------------------------------
-
-MeasureBase* Score::last()  const
-      {
-      return _measures.last();
-      }
-
-//---------------------------------------------------------
 //   searchNote
 //    search for note or rest before or at tick position tick
 //    in staff
@@ -1683,6 +1665,8 @@ void Score::layoutSystems()
 
       qreal w  = pageFormat()->printableWidth() * DPI;
 
+printf("layoutSystems with %f\n", w);
+
       while (curMeasure) {
             ElementType t = curMeasure->type();
             if (t == VBOX || t == TBOX || t == FBOX) {
@@ -1938,7 +1922,7 @@ void Score::layoutPages()
 
 void Score::layoutPage(Page* page, int gaps, qreal restHeight)
       {
-      qreal ph = page->loHeight() - page->bm() - page->tm();
+      qreal ph = loHeight() - page->bm() - page->tm();
 
       if (!gaps && (_layoutMode == LayoutFloat)) {
             qreal y = restHeight * .5;

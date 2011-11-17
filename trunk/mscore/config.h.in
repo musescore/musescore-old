@@ -44,6 +44,7 @@
 #cmakedefine Q_WS_UIKIT
 
 #define SVG_IMAGES      true
+#define USE_BSP         true
 
 #if QT_VERSION >= 0x040800
  #define USE_GLYPHS  1

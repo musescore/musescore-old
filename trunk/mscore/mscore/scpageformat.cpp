@@ -27,13 +27,12 @@ Q_DECLARE_METATYPE(PageFormat*);
 Q_DECLARE_METATYPE(Score*);
 
 static const char* const function_names_pageFormat[] = {
-      "landscape", "twosided", "width", "height"
+      "twosided", "width", "height"
       };
 static const int function_lengths_pageFormat[] = {
-      0, 0, 0, 0,
+      0, 0, 0,
       };
 static const QScriptValue::PropertyFlags flags_pageFormat[] = {
-      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
@@ -64,19 +63,15 @@ static QScriptValue prototype_PageFormat_call(QScriptContext* context, QScriptEn
                .arg(function_names_pageFormat[_id]));
             }
       switch(_id) {
-            case 0:     // "landscape",
-                  if (context->argumentCount() == 0)
-                        return qScriptValueFromValue(context->engine(), pageFormat->landscape());
-                  break;
-            case 1:     // "twosided",
+            case 0:     // "twosided",
                   if (context->argumentCount() == 0)
                         return qScriptValueFromValue(context->engine(), pageFormat->twosided());
                   break;
-            case 2:     // "width",
+            case 1:     // "width",
                   if (context->argumentCount() == 0)
                         return qScriptValueFromValue(context->engine(), pageFormat->width() * INCH );
                   break;
-            case 3:     // "height",
+            case 2:     // "height",
                   if (context->argumentCount() == 0)
                         return qScriptValueFromValue(context->engine(), pageFormat->height() * INCH );
                   break;

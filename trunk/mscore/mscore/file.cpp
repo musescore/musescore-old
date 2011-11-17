@@ -1174,13 +1174,13 @@ void MuseScore::printFile()
       const PageFormat* pf = cs->pageFormat();
 
       const PaperSize* paperSize = pf->paperSize();
-      if (paperSize->qtsize >= int(QPrinter::Custom)) {
-            printerDev.setPaperSize(QSizeF(pf->width(), pf->height()), QPrinter::Inch);
-            }
-      else
+      if (paperSize->qtsize >= int(QPrinter::Custom))
+            printerDev.setPaperSize(pf->size(), QPrinter::Inch);
+      else {
             printerDev.setPaperSize(paperSizes->qtsize);
-
-      printerDev.setOrientation(pf->landscape() ? QPrinter::Landscape : QPrinter::Portrait);
+            bool landscape = pf->width() > pf->height();
+            printerDev.setOrientation(landscape ? QPrinter::Landscape : QPrinter::Portrait);
+            }
       printerDev.setCreator("MuseScore Version: " VERSION);
       printerDev.setFullPage(true);
       printerDev.setColorMode(QPrinter::Color);
@@ -1404,10 +1404,11 @@ bool MuseScore::savePsPdf(const QString& saveName, QPrinter::OutputFormat format
       const PaperSize* paperSize = pf->paperSize();
       if (paperSize->qtsize == QPrinter::Custom)
             printerDev.setPaperSize(paperSize->qtsize);
-      else
-            printerDev.setPaperSize(QSizeF(pf->width(), pf->height()), QPrinter::Inch);
-
-      printerDev.setOrientation(pf->landscape() ? QPrinter::Landscape : QPrinter::Portrait);
+      else {
+            printerDev.setPaperSize(pf->size(), QPrinter::Inch);
+            bool landscape = pf->width() > pf->height();
+            printerDev.setOrientation(landscape ? QPrinter::Landscape : QPrinter::Portrait);
+            }
       printerDev.setCreator("MuseScore Version: " VERSION);
       printerDev.setFullPage(true);
       printerDev.setColorMode(QPrinter::Color);

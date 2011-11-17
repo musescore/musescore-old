@@ -581,7 +581,7 @@ class MScore {
       static QPrinter::PageSize paperSize;
       static qreal paperWidth;
       static qreal paperHeight;
-      static bool landscape, twosided;
+      static bool twosided;
       static bool replaceFractions;
       static bool playRepeats;
       static bool panPlayback;

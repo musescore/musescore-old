@@ -175,8 +175,9 @@ void Navigator::rescale()
       int w    = scrollArea->width();
       Page* lp = _score->pages().back();
       qreal m;
-      qreal m1 = h / (_score->pageFormat()->height() * DPI);
-      qreal m2 = (h-sbh) / (_score->pageFormat()->height() * DPI);
+      QSizeF size = _score->pageFormat()->size() * DPI;
+      qreal m1 = h / size.height();
+      qreal m2 = (h-sbh) / size.width();
       int w1   = int ((lp->x() + lp->width()) * m1);
       int w2   = int ((lp->x() + lp->width()) * m2);  // always w1 > w2
 
