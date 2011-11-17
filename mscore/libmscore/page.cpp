@@ -35,7 +35,7 @@
 #define MM(x) ((x)/INCH)
 
 const PaperSize paperSizes[] = {
-      PaperSize(QPrinter::Custom,  "Custom",    MM(210),  MM(297)),
+      PaperSize(QPrinter::Custom,  "Custom",    MM(1),    MM(1)),
       PaperSize(QPrinter::A4,      "A4",        MM(210),  MM(297)),
       PaperSize(QPrinter::B5,      "B5",        MM(176),  MM(250)),
       PaperSize(QPrinter::Letter,  "Letter",    8.5,      11),
@@ -66,25 +66,24 @@ const PaperSize paperSizes[] = {
       PaperSize(QPrinter::Folio,   "Folio",     MM(210),  MM(330)),
       PaperSize(QPrinter::Ledger,  "Ledger",    MM(432),  MM(279)),
       PaperSize(QPrinter::Tabloid, "Tabloid",   MM(279),  MM(432)),
-      PaperSize(int(QPrinter::Custom)+1, "iPad", MM(148),  MM(197)),
+      PaperSize(QPrinter::PageSize(int(QPrinter::Custom)+1), "iPad", MM(148),  MM(197)),
       PaperSize(QPrinter::A4,      0, 0, 0  )
       };
 
 //---------------------------------------------------------
-//   paperSizeNameToIndex
+//   getPaperSize
 //---------------------------------------------------------
 
-int paperSizeNameToIndex(const QString& name)
+const PaperSize* getPaperSize(const QString& name)
       {
-      int i;
-      for (i = 0;;++i) {
+      for (int i = 0;;++i) {
             if (paperSizes[i].name == 0)
                   break;
             if (name == paperSizes[i].name)
-                  return i;
+                  return &paperSizes[i];
             }
       qDebug("unknown paper size\n");
-      return 0;
+      return &paperSizes[0];
       }
 
 //---------------------------------------------------------
@@ -101,22 +100,22 @@ static qreal sizeError(const qreal si, const qreal sref)
       }
 
 //---------------------------------------------------------
-//   paperSizeSizeToIndex
+//   getPaperSize
 //---------------------------------------------------------
 
-int paperSizeSizeToIndex(const qreal wi, const qreal hi)
+const PaperSize* getPaperSize(const qreal wi, const qreal hi)
       {
       if (wi < minSize || hi < minSize)
-            return -1;
-      int i;
-      for (i = 0;;++i) {
+            return &paperSizes[0];
+      for (int i = 0;;++i) {
             if (paperSizes[i].name == 0)
                   break;
-            if (sizeError(wi, paperSizes[i].w) < maxError && sizeError(hi, paperSizes[i].h) < maxError)
-                  return i;
+            if (sizeError(wi, paperSizes[i].w) < maxError
+               && sizeError(hi, paperSizes[i].h) < maxError)
+                  return &paperSizes[i];
             }
-      qDebug("unknown paper size\n");
-      return -1;
+      qDebug("unknown paper size index\n");
+      return &paperSizes[0];
       }
 
 //---------------------------------------------------------
@@ -198,7 +197,7 @@ qreal Page::rm() const
 
 qreal Page::loWidth() const
       {
-      return score()->pageFormat()->width() * DPI;
+      return score()->pageFormat()->size().width() * DPI;
       }
 
 //---------------------------------------------------------
@@ -207,7 +206,7 @@ qreal Page::loWidth() const
 
 qreal Page::loHeight() const
       {
-      return score()->pageFormat()->height() * DPI;
+      return score()->pageFormat()->size().height() * DPI;
       }
 
 //---------------------------------------------------------
@@ -439,12 +438,10 @@ void Page::scanElements(void* data, void (*func)(void*, Element*), bool all)
 
 PageFormat::PageFormat()
       {
-      _size             = MScore::paperSize;
-      _width            = MScore::paperWidth;
-      _height           = MScore::paperHeight;
+      _size             = QSizeF(MScore::paperWidth, MScore::paperHeight);
       _evenLeftMargin   = 10.0 / INCH;
       _oddLeftMargin    = 10.0 / INCH;
-      _printableWidth   = _width - 20.0 / INCH;
+      _printableWidth   = _size.width() - 20.0 / INCH;
       _evenTopMargin    = 10.0 / INCH;
       _evenBottomMargin = 20.0 / INCH;
       _oddTopMargin     = 10.0 / INCH;
@@ -457,13 +454,11 @@ PageFormat::PageFormat()
 //   setSize
 //---------------------------------------------------------
 
-void PageFormat::setSize(int val)
+void PageFormat::setSize(const PaperSize* size)
       {
-      _size = val;
-      if (paperSizes[_size].qtsize == QPrinter::Custom)
+      if (size->qtsize == QPrinter::Custom)
             return;
-      _height = paperSizes[_size].h;
-      _width  = paperSizes[_size].w;
+      _size = QSizeF(size->h, size->w);
       }
 
 //---------------------------------------------------------
@@ -472,7 +467,7 @@ void PageFormat::setSize(int val)
 
 QString PageFormat::name() const
       {
-      return QString(paperSizes[_size].name);
+      return paperSize()->name;
       }
 
 //---------------------------------------------------------
@@ -482,7 +477,7 @@ QString PageFormat::name() const
 
 qreal PageFormat::width() const
       {
-      return _landscape ? _height : _width;
+      return _landscape ? _size.height() : _size.width();
       }
 
 //---------------------------------------------------------
@@ -492,7 +487,7 @@ qreal PageFormat::width() const
 
 qreal PageFormat::height() const
       {
-      return _landscape ? _width : _height;
+      return _landscape ? _size.width() : _size.height();
       }
 
 //---------------------------------------------------------
@@ -524,7 +519,7 @@ void PageFormat::read(QDomElement e, Score* score)
             const QString& val(e.text());
             int i = val.toInt();
             if (tag == "pageFormat")
-                  setSize(paperSizeNameToIndex(val));
+                  setSize(getPaperSize(val));
             else if (tag == "landscape")
                   _landscape = i;
             else if (tag == "page-margins") {
@@ -558,21 +553,17 @@ void PageFormat::read(QDomElement e, Score* score)
                         _evenBottomMargin = bm;
                         }
                   }
-            else if (tag == "page-height") {
-                  _size = paperSizeNameToIndex("Custom");
-                  _height = val.toDouble() * 0.5 / PPI;
-                  }
-            else if (tag == "page-width") {
-                  _size = paperSizeNameToIndex("Custom");
-                  _width = val.toDouble() * .5 / PPI;
-                  }
+            else if (tag == "page-height")
+                  _size.rheight() = val.toDouble() * 0.5 / PPI;
+            else if (tag == "page-width")
+                  _size.rwidth() = val.toDouble() * .5 / PPI;
             else if (tag == "page-offset")            // obsolete, moved to Score
                   score->setPageNumberOffset(val.toInt());
             else
                   domError(e);
             }
-      qreal w1 = width() - _oddLeftMargin - _oddRightMargin;
-      qreal w2 = width() - _evenLeftMargin - _evenRightMargin;
+      qreal w1 = _size.width() - _oddLeftMargin - _oddRightMargin;
+      qreal w2 = _size.width() - _evenLeftMargin - _evenRightMargin;
       _printableWidth = qMax(w1, w2);     // silently adjust right margins
       }
 
@@ -633,20 +624,13 @@ void PageFormat::readMusicXML(QDomElement e, qreal conversion)
                         _evenBottomMargin = bm;
                         }
                   }
-            else if (tag == "page-height") {
-                  _size = paperSizeNameToIndex("Custom");
-                  _height = val.toDouble() * conversion;
-                  }
-            else if (tag == "page-width") {
-                  _size = paperSizeNameToIndex("Custom");
-                  _width = val.toDouble() * conversion;
-                  }
+            else if (tag == "page-height")
+                  _size.rheight() = val.toDouble() * conversion;
+            else if (tag == "page-width")
+                  _size.rwidth() = val.toDouble() * conversion;
             else
                   domError(e);
             }
-      int match = paperSizeSizeToIndex(_width, _height);
-      if (match >= 0)
-            setSize(match);
       qreal w1 = width() - _oddLeftMargin - _oddRightMargin;
       qreal w2 = width() - _evenLeftMargin - _evenRightMargin;
       _printableWidth = qMax(w1, w2);     // silently adjust right margins

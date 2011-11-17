@@ -38,6 +38,7 @@ class PageSettings : public QDialog, private Ui::PageSettingsBase {
       Score* cs;
       void updateValues();
       void updatePreview(int);
+      void blockSignals(bool);
 
    private slots:
       void mmClicked();

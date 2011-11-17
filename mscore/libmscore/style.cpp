@@ -503,7 +503,6 @@ StyleData::StyleData()
 // _textStyles.append(TextStyle(defaultTextStyles[i]));
       _chordList = 0;
       _spatium = MScore::spatium * DPI;
-
       _articulationAnchor[Articulation_Fermata]         = A_TOP_STAFF;
       _articulationAnchor[Articulation_Shortfermata]    = A_TOP_STAFF;
       _articulationAnchor[Articulation_Longfermata]     = A_TOP_STAFF;
