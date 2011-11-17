@@ -91,6 +91,22 @@
 #include "libmscore/mscore.h"
 
 //---------------------------------------------------------
+//   paintElements
+//---------------------------------------------------------
+
+static void paintElements(QPainter& p, const QList<const Element*>& el)
+      {
+      foreach(const Element* e, el) {
+            if (!e->visible())
+                  continue;
+            QPointF pos(e->pagePos());
+            p.translate(pos);
+            e->draw(&p);
+            p.translate(-pos);
+            }
+      }
+
+//---------------------------------------------------------
 //   createDefaultFileName
 //---------------------------------------------------------
 
@@ -1745,16 +1761,6 @@ bool MuseScore::savePng(Score* score, const QString& name, bool screenshot, bool
       const QList<Page*>& pl = score->pages();
       int pages = pl.size();
 
-      QList<Element*> eel;
-      for (MeasureBase* m = score->measures()->first(); m; m = m->next()) {
-            // skip multi measure rests
-            if (m->type() == MEASURE) {
-                  Measure* mm = static_cast<Measure*>(m);
-                  if (mm->multiMeasure() < 0)
-                        continue;
-                  }
-            m->scanElements(&eel, collectElements);
-            }
       int padding = QString("%1").arg(pages).size();
       for (int pageNumber = 0; pageNumber < pages; ++pageNumber) {
             Page* page = pl.at(pageNumber);
@@ -1777,27 +1783,7 @@ bool MuseScore::savePng(Score* score, const QString& name, bool screenshot, bool
             p.setRenderHint(QPainter::TextAntialiasing, true);
             p.scale(mag, mag);
 
-            foreach(const Element* e, eel) {
-                  if (!e->visible())
-                        continue;
-                  QPointF ap(e->pagePos() - page->pos());
-                  p.translate(ap);
-                  p.setPen(QPen(e->color()));
-                  e->draw(&p);
-                  p.translate(-ap);
-                  }
-
-            QList<Element*> el;
-            page->scanElements(&el, collectElements);
-            foreach(const Element* e, el) {
-                  if (!e->visible())
-                        continue;
-                  QPointF ap(e->pagePos() - page->pos());
-                  p.translate(ap);
-                  p.setPen(QPen(e->color()));
-                  e->draw(&p);
-                  p.translate(-ap);
-                  }
+            paintElements(p, page->elements());
 
             if (format == QImage::Format_Indexed8) {
                   //convert to grayscale & respect alpha
@@ -1933,7 +1919,7 @@ bool MuseScore::saveSvg(Score* score, const QString& saveName)
       const PageFormat* pf = cs->pageFormat();
       double mag = converterDpi / DPI;
 
-      qreal w = pf->width() * DPI;
+      qreal w = pf->width() * DPI * score->pages().size();
       qreal h = pf->height() * DPI;
       printer.setSize(QSize(w * mag, h * mag));
       printer.setViewBox(QRectF(0.0, 0.0, w * mag, h * mag));
@@ -1945,38 +1931,9 @@ bool MuseScore::saveSvg(Score* score, const QString& saveName)
       p.setRenderHint(QPainter::TextAntialiasing, true);
       p.scale(mag, mag);
 
-      QList<Element*> eel;
-      for (MeasureBase* m = score->measures()->first(); m; m = m->next()) {
-            // skip multi measure rests
-            if (m->type() == MEASURE) {
-                  Measure* mm = static_cast<Measure*>(m);
-                  if (mm->multiMeasure() < 0)
-                        continue;
-                  }
-            m->scanElements(&eel, collectElements);
-            }
-      QList<const Element*> el;
-      foreach(Page* page, score->pages()) {
-            el.clear();
-            page->scanElements(&el, collectElements);
-            foreach(const Element* e, eel) {
-                  if (!e->visible())
-                        continue;
-                  p.save();
-                  p.translate(e->pagePos() - page->pos());
-                  p.setPen(QPen(e->color()));
-                  e->draw(&p);
-                  p.restore();
-                  }
-            foreach(const Element* e, el) {
-                  if (!e->visible())
-                        continue;
-                  p.save();
-                  p.translate(e->pagePos() - page->pos());
-                  p.setPen(QPen(e->color()));
-                  e->draw(&p);
-                  p.restore();
-                  }
+      foreach (Page* page, score->pages()) {
+            paintElements(p, page->elements());
+            p.translate(QPointF(pf->width() * DPI, 0.0));
             }
 
       score->setPrinting(false);

@@ -220,7 +220,6 @@ void ScoreView::paint(QPainter* p, const QStyleOptionGraphicsItem*, QWidget*)
       foreach(const Element* e, el) {
             QPointF pos(e->pagePos());
             p->translate(pos);
-            p->setPen(e->curColor());
             e->draw(p);
             p->translate(-pos);
             }
