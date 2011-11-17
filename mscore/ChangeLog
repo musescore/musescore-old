@@ -1,3 +1,5 @@
+17.nov (la)
+      - fix #13478: Zoom during playback using shortcuts
 29.oct (la)
       - fix #13357: Creating part causes crash (key sig corruption)
       - fix #13364: Score tabs disappear
