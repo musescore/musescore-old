@@ -365,12 +365,13 @@ void Preferences::write()
 
       s.setValue("replaceFractions", MScore::replaceFractions);
       s.setValue("replaceCopyrightSymbol", replaceCopyrightSymbol);
-      s.setValue("paperSize", MScore::paperSize);
-      s.setValue("paperWidth", MScore::paperWidth);
+      s.setValue("paperSize",   MScore::paperSize);
+      s.setValue("paperWidth",  MScore::paperWidth);
       s.setValue("paperHeight", MScore::paperHeight);
-      s.setValue("landscape", MScore::landscape);
-      s.setValue("twosided", MScore::twosided);
-      s.setValue("spatium", MScore::spatium);
+      s.setValue("landscape",   MScore::landscape);
+      s.setValue("twosided",    MScore::twosided);
+      s.setValue("spatium",     MScore::spatium);
+
       s.setValue("mag", mag);
       s.setValue("tuning", tuning);
       s.setValue("masterGain", masterGain);
@@ -1572,7 +1573,7 @@ void PreferenceDialog::resetAllValues()
 
 void PreferenceDialog::paperSizeChanged(double)
       {
-      pageGroup->setCurrentIndex(paperSizeNameToIndex("Custom"));
+      pageGroup->setCurrentIndex(0);
       }
 
 //---------------------------------------------------------

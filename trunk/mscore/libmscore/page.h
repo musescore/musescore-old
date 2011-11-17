@@ -30,20 +30,22 @@ class MeasureBase;
 //---------------------------------------------------------
 
 struct PaperSize {
-      int qtsize;
+      QPrinter::PageSize qtsize;
       const char* name;
       qreal w, h;            // size in inch
-      PaperSize(int s, const char* n, qreal wi, qreal hi)
+      PaperSize(QPrinter::PageSize s, const char* n, qreal wi, qreal hi)
          : qtsize(s), name(n), w(wi), h(hi) {}
       };
+
+extern const PaperSize* getPaperSize(const QString&);
+extern const PaperSize* getPaperSize(const qreal wi, const qreal hi);
 
 //---------------------------------------------------------
 //   PageFormat
 //---------------------------------------------------------
 
 class PageFormat {
-      qreal _width;
-      qreal _height;
+      QSizeF _size;
       qreal _printableWidth;        // _width - left margin - right margin
       qreal _evenLeftMargin;        // values in inch
       qreal _oddLeftMargin;
@@ -51,30 +53,29 @@ class PageFormat {
       qreal _evenBottomMargin;
       qreal _oddTopMargin;
       qreal _oddBottomMargin;
-      int _size;                    // index in paperSizes[]
       bool _landscape;
       bool _twosided;
 
    public:
       PageFormat();
 
-      qreal width() const;         // return width in inch
-      void setWidth(qreal val)  { _width = val; }
-      qreal height() const;        // height in inch
-      void setHeight(qreal val) { _height = val; }
+      const QSizeF& size() const    { return _size; }    // size in inch
+      void setSize(const QSizeF& s) { _size = s;    }
+      qreal height() const;   // applies landscape flag
+      qreal width() const;
 
       QString name() const;
       void read(QDomElement,  Score*);
       void readMusicXML(QDomElement, qreal);
       void write(Xml&) const;
       void writeMusicXML(Xml&, qreal) const;
-      qreal evenLeftMargin() const   { return _evenLeftMargin;   }
-      qreal oddLeftMargin() const    { return _oddLeftMargin;    }
-      qreal evenTopMargin() const    { return _evenTopMargin;    }
-      qreal evenBottomMargin() const { return _evenBottomMargin; }
-      qreal oddTopMargin() const     { return _oddTopMargin;     }
-      qreal oddBottomMargin() const  { return _oddBottomMargin;  }
-      qreal printableWidth() const   { return _printableWidth;   }
+      qreal evenLeftMargin() const        { return _evenLeftMargin;   }
+      qreal oddLeftMargin() const         { return _oddLeftMargin;    }
+      qreal evenTopMargin() const         { return _evenTopMargin;    }
+      qreal evenBottomMargin() const      { return _evenBottomMargin; }
+      qreal oddTopMargin() const          { return _oddTopMargin;     }
+      qreal oddBottomMargin() const       { return _oddBottomMargin;  }
+      qreal printableWidth() const        { return _printableWidth;   }
 
       void setEvenLeftMargin(qreal val)   { _evenLeftMargin = val;   }
       void setOddLeftMargin(qreal val)    { _oddLeftMargin = val;    }
@@ -84,18 +85,17 @@ class PageFormat {
       void setOddBottomMargin(qreal val)  { _oddBottomMargin = val;  }
       void setPrintableWidth(qreal val)   { _printableWidth = val;   }
 
-      bool landscape() const      { return _landscape; }
-      void setLandscape(bool val) { _landscape = val; }
+      bool landscape() const              { return _landscape; }
+      void setLandscape(bool val)         { _landscape = val; }
 
-      bool twosided() const       { return _twosided; }
-      void setTwosided(bool val)  { _twosided = val; }
-
-      int size() const            { return _size; }
-      void setSize(int);
+      bool twosided() const               { return _twosided; }
+      void setTwosided(bool val)          { _twosided = val; }
 
       // convenience functions
-      qreal evenRightMargin() const  { return width() - _printableWidth - _evenLeftMargin; }
-      qreal oddRightMargin() const   { return width() - _printableWidth - _oddLeftMargin;  }
+      qreal evenRightMargin() const       { return _size.width() - _printableWidth - _evenLeftMargin; }
+      qreal oddRightMargin() const        { return _size.width() - _printableWidth - _oddLeftMargin;  }
+      const PaperSize* paperSize() const  { return getPaperSize(_size.width(), _size.height()); }
+      void setSize(const PaperSize* size);
       };
 
 //---------------------------------------------------------
@@ -151,7 +151,5 @@ class Page : public Element {
       };
 
 extern const PaperSize paperSizes[];
-extern int paperSizeNameToIndex(const QString&);
-extern int paperSizeSizeToIndex(const qreal wi, const qreal hi);
 
 #endif

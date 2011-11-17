@@ -91,15 +91,40 @@ void PageSettings::setScore(Score* s)
       sl->setSpatium(s->spatium());
 
       pageGroup->clear();
+      int index = 0;
+      const PaperSize* ps = pf->paperSize();
       for (int i = 0; true; ++i) {
             if (paperSizes[i].name == 0)
                   break;
+            if (ps == &paperSizes[i])
+                  index = i;
             pageGroup->addItem(QString(paperSizes[i].name));
             }
 
-      pageGroup->setCurrentIndex(pf->size());
+      pageGroup->setCurrentIndex(index);
       updateValues();
       updatePreview(0);
+      }
+
+//---------------------------------------------------------
+//   blockSignals
+//---------------------------------------------------------
+
+void PageSettings::blockSignals(bool block)
+      {
+      oddPageTopMargin->blockSignals(block);
+      oddPageBottomMargin->blockSignals(block);
+      oddPageLeftMargin->blockSignals(block);
+      oddPageRightMargin->blockSignals(block);
+      evenPageTopMargin->blockSignals(block);
+      evenPageBottomMargin->blockSignals(block);
+      evenPageLeftMargin->blockSignals(block);
+      evenPageRightMargin->blockSignals(block);
+      spatiumEntry->blockSignals(block);
+      pageWidth->blockSignals(block);
+      pageHeight->blockSignals(block);
+      pageOffsetEntry->blockSignals(block);
+      pageGroup->blockSignals(block);
       }
 
 //---------------------------------------------------------
@@ -111,18 +136,7 @@ void PageSettings::updateValues()
       Score* sc = preview->score();
       bool mm = mmButton->isChecked();
 
-      oddPageTopMargin->blockSignals(true);
-      oddPageBottomMargin->blockSignals(true);
-      oddPageLeftMargin->blockSignals(true);
-      oddPageRightMargin->blockSignals(true);
-      evenPageTopMargin->blockSignals(true);
-      evenPageBottomMargin->blockSignals(true);
-      evenPageLeftMargin->blockSignals(true);
-      evenPageRightMargin->blockSignals(true);
-      spatiumEntry->blockSignals(true);
-      pageWidth->blockSignals(true);
-      pageHeight->blockSignals(true);
-      pageOffsetEntry->blockSignals(true);
+      blockSignals(true);
 
       const char* suffix = mm ? "mm" : "in";
       oddPageTopMargin->setSuffix(suffix);
@@ -138,7 +152,15 @@ void PageSettings::updateValues()
       pageHeight->setSuffix(suffix);
 
       const PageFormat* pf = sc->pageFormat();
-
+      int index = 0;
+      const PaperSize* ps = pf->paperSize();
+      for (int i = 0; true; ++i) {
+            if (ps == &paperSizes[i]) {
+                  index = i;
+                  break;
+                  }
+            }
+      pageGroup->setCurrentIndex(index);
       QString s;
 
       //qreal printableWidthValue = pf->printableWidth();
@@ -184,32 +206,21 @@ void PageSettings::updateValues()
       evenPageLeftMargin->setEnabled(false);
       evenPageRightMargin->setEnabled(false);
 
-      if(twosided->isChecked()) {
+      if (twosided->isChecked()) {
             evenPageRightMargin->setValue(oddPageLeftMargin->value());
             evenPageLeftMargin->setValue(oddPageRightMargin->value());
             }
       else {
             evenPageRightMargin->setValue(oddPageRightMargin->value());
             evenPageLeftMargin->setValue(oddPageLeftMargin->value());
-      }
+            }
 
       landscape->setChecked(pf->landscape());
       twosided->setChecked(pf->twosided());
 
       pageOffsetEntry->setValue(sc->pageNumberOffset() + 1);
 
-      pageWidth->blockSignals(false);
-      pageHeight->blockSignals(false);
-      oddPageTopMargin->blockSignals(false);
-      oddPageBottomMargin->blockSignals(false);
-      oddPageLeftMargin->blockSignals(false);
-      oddPageRightMargin->blockSignals(false);
-      evenPageTopMargin->blockSignals(false);
-      evenPageBottomMargin->blockSignals(false);
-      evenPageLeftMargin->blockSignals(false);
-      evenPageRightMargin->blockSignals(false);
-      spatiumEntry->blockSignals(false);
-      pageOffsetEntry->blockSignals(false);
+      blockSignals(false);
 	}
 
 //---------------------------------------------------------
@@ -269,9 +280,7 @@ void PageSettings::apply()
 
       PageFormat pf;
 
-      pf.setSize(pageGroup->currentIndex());
-      pf.setWidth(pageWidth->value() * f);
-      pf.setHeight(pageHeight->value() * f);
+      pf.setSize(QSizeF(pageWidth->value(), pageHeight->value()) * f);
       pf.setPrintableWidth((pageWidth->value() - oddPageLeftMargin->value() - oddPageRightMargin->value())  * f);
       pf.setEvenTopMargin(evenPageTopMargin->value() * f);
       pf.setEvenBottomMargin(evenPageBottomMargin->value() * f);
@@ -317,7 +326,7 @@ void PageSettings::done(int val)
 void PageSettings::pageFormatSelected(int size)
       {
       PageFormat pf(*preview->score()->pageFormat());
-      pf.setSize(size);
+      pf.setSize(&paperSizes[size]);
       preview->score()->setPageFormat(pf);
       preview->score()->doLayout();
       updatePreview(0);
@@ -467,13 +476,10 @@ void PageSettings::pageHeightChanged(double val)
             val /= INCH;
             val2 /= INCH;
             }
-      int pf = paperSizeNameToIndex("Custom");
-      pageGroup->setCurrentIndex(pf);
+      pageGroup->setCurrentIndex(0);      // custom
 
       PageFormat f(*preview->score()->pageFormat());
-      f.setSize(pf);
-      f.setHeight(val);
-      f.setWidth(val2);
+      f.setSize(QSizeF(val, val2));
       preview->score()->setPageFormat(f);
 
       updatePreview(1);
@@ -490,13 +496,9 @@ void PageSettings::pageWidthChanged(double val)
             val /= INCH;
             val2 /= INCH;
             }
-      int pf = paperSizeNameToIndex("Custom");
-      pageGroup->setCurrentIndex(pf);
-
+      pageGroup->setCurrentIndex(0);
       PageFormat f(*preview->score()->pageFormat());
-      f.setSize(pf);
-      f.setWidth(val);
-      f.setHeight(val2);
+      f.setSize(QSizeF(val, val2));
       preview->score()->setPageFormat(f);
 
       updatePreview(0);

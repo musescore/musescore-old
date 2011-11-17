@@ -4587,15 +4587,7 @@ void ExportLy::writePageFormat()
 {
   const PageFormat* pf = score->pageFormat();
   os << "#(set-default-paper-size ";
-  switch(pf->size()) {
-  default:
-  case  0: os << "\"a4\""; break;
-  case  2: os << "\"letter\""; break;
-  case  8: os << "\"a3\""; break;
-  case  9: os << "\"a5\""; break;
-  case 10: os << "\"a6\""; break;
-  case 29: os << "\"11x17\""; break;
-  }
+      os << QString(pf->paperSize()->name).toLower();
 
   if (pf->landscape()) os << " 'landscape";
 
