@@ -1,3 +1,5 @@
+17.nov (ws)
+      - fix #4645-2: do not disable script debugger when no score open
 16.nov (ws)
       - fix #13692: Can't make plugins work
       - fix #13602: 4/4 common time and 2/2 alla breve do not apply to score
