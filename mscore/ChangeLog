@@ -1,4 +1,6 @@
-17.nov (ws)
+17.nov (la)
+      - fix #13411: Courtesy clef appears in final bar after bars re-adjust
+       (ws)
       - fix #13703: SVG export overlaps mulipage scores
       - fix #4645-2: do not disable script debugger when no score open
 16.nov (ws)
