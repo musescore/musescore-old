@@ -2439,7 +2439,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Search")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          0,
          "zoomin",
          QT_TRANSLATE_NOOP("action","Zoom in"),
@@ -2451,7 +2451,7 @@ Shortcut MuseScore::sc[] = {
          // conflicts with Ctrl+- in edit mode to enter lyrics hyphen
          // STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
 
-         STATE_NORMAL | STATE_NOTE_ENTRY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          0,
          "zoomout",
          QT_TRANSLATE_NOOP("action","Zoom out"),
