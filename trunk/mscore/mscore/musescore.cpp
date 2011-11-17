@@ -2461,8 +2461,6 @@ void MuseScore::changeState(ScoreState val)
                   }
             else {
                   bool enable = s->state & val;
-//                  if (debugMode)
-//                        qDebug("disable %s", s->xml);
                   s->action->setEnabled(enable);
                   }
             }

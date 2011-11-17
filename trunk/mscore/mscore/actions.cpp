@@ -2369,7 +2369,7 @@ Shortcut MuseScore::sc[] = {
           keys_ICON
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         STATE_ALL,
          0,
          "script-debug",
          QT_TRANSLATE_NOOP("action","Enable script debugger"),
