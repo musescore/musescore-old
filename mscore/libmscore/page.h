@@ -14,6 +14,7 @@
 #ifndef __PAGE_H__
 #define __PAGE_H__
 
+#include "config.h"
 #include "element.h"
 #include "bsp.h"
 
@@ -53,16 +54,15 @@ class PageFormat {
       qreal _evenBottomMargin;
       qreal _oddTopMargin;
       qreal _oddBottomMargin;
-      bool _landscape;
       bool _twosided;
 
    public:
       PageFormat();
 
-      const QSizeF& size() const    { return _size; }    // size in inch
-      void setSize(const QSizeF& s) { _size = s;    }
-      qreal height() const;   // applies landscape flag
-      qreal width() const;
+      const QSizeF& size() const    { return _size;          }    // size in inch
+      qreal width() const           { return _size.width();  }
+      qreal height() const          { return _size.height(); }
+      void setSize(const QSizeF& s) { _size = s;             }
 
       QString name() const;
       void read(QDomElement,  Score*);
@@ -85,11 +85,8 @@ class PageFormat {
       void setOddBottomMargin(qreal val)  { _oddBottomMargin = val;  }
       void setPrintableWidth(qreal val)   { _printableWidth = val;   }
 
-      bool landscape() const              { return _landscape; }
-      void setLandscape(bool val)         { _landscape = val; }
-
       bool twosided() const               { return _twosided; }
-      void setTwosided(bool val)          { _twosided = val; }
+      void setTwosided(bool val)          { _twosided = val;  }
 
       // convenience functions
       qreal evenRightMargin() const       { return _size.width() - _printableWidth - _evenLeftMargin; }
@@ -105,11 +102,13 @@ class PageFormat {
 class Page : public Element {
       QList<System*> _systems;
       int _no;                      // page number
+#ifdef USE_BSP
       BspTree bspTree;
+      void doRebuildBspTree();
+#endif
       bool bspTreeValid;
 
       QString replaceTextMacros(const QString&) const;
-      void doRebuildBspTree();
 
    public:
       Page(Score*);
@@ -128,13 +127,10 @@ class Page : public Element {
       int no() const                     { return _no;        }
       void setNo(int n);
       bool isOdd() const;
-
       qreal tm() const;            // margins in pixel
       qreal bm() const;
       qreal lm() const;
       qreal rm() const;
-      qreal loWidth() const;
-      qreal loHeight() const;
 
       virtual void draw(QPainter*) const;
       virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);

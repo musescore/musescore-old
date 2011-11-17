@@ -4589,7 +4589,7 @@ void ExportLy::writePageFormat()
   os << "#(set-default-paper-size ";
       os << QString(pf->paperSize()->name).toLower();
 
-  if (pf->landscape()) os << " 'landscape";
+  if (pf->size().width() > pf->size().height()) os << " 'landscape";
 
   os << ")\n\n";
 

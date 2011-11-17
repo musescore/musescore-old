@@ -113,8 +113,11 @@ const PaperSize* getPaperSize(const qreal wi, const qreal hi)
             if (sizeError(wi, paperSizes[i].w) < maxError
                && sizeError(hi, paperSizes[i].h) < maxError)
                   return &paperSizes[i];
+            if (sizeError(wi, paperSizes[i].h) < maxError
+               && sizeError(hi, paperSizes[i].w) < maxError)
+                  return &paperSizes[i];
             }
-      qDebug("unknown paper size index\n");
+      qDebug("unknown paper size for %f x %f\n", wi, hi);
       return &paperSizes[0];
       }
 
@@ -139,74 +142,24 @@ Page::~Page()
 
 QList<const Element*> Page::items(const QRectF& r)
       {
+#ifdef USE_BSP
       if (!bspTreeValid)
             doRebuildBspTree();
       return bspTree.items(r);
+#else
+      return QList<const Element*>();
+#endif
       }
 
 QList<const Element*> Page::items(const QPointF& p)
       {
+#ifdef USE_BSP
       if (!bspTreeValid)
             doRebuildBspTree();
       return bspTree.items(p);
-      }
-
-//---------------------------------------------------------
-//   tm
-//---------------------------------------------------------
-
-qreal Page::tm() const
-      {
-      const PageFormat* pf = score()->pageFormat();
-      return ((!pf->twosided() || isOdd()) ? pf->oddTopMargin() : pf->evenTopMargin()) * DPI;
-      }
-
-//---------------------------------------------------------
-//   bm
-//---------------------------------------------------------
-
-qreal Page::bm() const
-      {
-      const PageFormat* pf = score()->pageFormat();
-      return ((!pf->twosided() || isOdd()) ? pf->oddBottomMargin() : pf->evenBottomMargin()) * DPI;
-      }
-
-//---------------------------------------------------------
-//   lm
-//---------------------------------------------------------
-
-qreal Page::lm() const
-      {
-      const PageFormat* pf = score()->pageFormat();
-      return ((!pf->twosided() || isOdd()) ? pf->oddLeftMargin() : pf->evenLeftMargin()) * DPI;
-      }
-
-//---------------------------------------------------------
-//   rm
-//---------------------------------------------------------
-
-qreal Page::rm() const
-      {
-      const PageFormat* pf = score()->pageFormat();
-      return ((!pf->twosided() || isOdd()) ? pf->oddRightMargin() : pf->evenRightMargin()) * DPI;
-      }
-
-//---------------------------------------------------------
-//   loWidth
-//---------------------------------------------------------
-
-qreal Page::loWidth() const
-      {
-      return score()->pageFormat()->size().width() * DPI;
-      }
-
-//---------------------------------------------------------
-//   loHeight
-//---------------------------------------------------------
-
-qreal Page::loHeight() const
-      {
-      return score()->pageFormat()->size().height() * DPI;
+#else
+      return QList<const Element*>();
+#endif
       }
 
 //---------------------------------------------------------
@@ -234,7 +187,7 @@ void Page::setNo(int n)
 
 void Page::layout()
       {
-      setbbox(QRectF(0.0, 0.0, loWidth(), loHeight()));
+      setbbox(QRectF(0.0, 0.0, score()->loWidth(), score()->loHeight()));
       }
 
 //---------------------------------------------------------
@@ -253,7 +206,7 @@ void Page::draw(QPainter* painter) const
       d.setUseDesignMetrics(true);
 
       int n = no() + 1 + _score->pageNumberOffset();
-      d.setTextWidth(loWidth() - lm() - rm());
+      d.setTextWidth(score()->loWidth() - lm() - rm());
 
       QPointF o1(lm(), tm());
       painter->translate(o1);
@@ -268,7 +221,7 @@ void Page::draw(QPainter* painter) const
             else
                   o *= DPI;
             painter->translate(o);
-            d.setTextWidth(loWidth() - lm() - rm() - (2.0 * o.x()));
+            d.setTextWidth(_score->loWidth() - lm() - rm() - (2.0 * o.x()));
 
             bool odd = (n & 1) && _score->styleB(ST_headerOddEven);
 
@@ -322,11 +275,11 @@ void Page::draw(QPainter* painter) const
                   o *= spatium();
             else
                   o *= DPI;
-            qreal w = loWidth() - lm() - rm() - (2.0 * o.x());
+            qreal w = _score->loWidth() - lm() - rm() - (2.0 * o.x());
 
             bool odd = (n & 1) && _score->styleB(ST_footerOddEven);
 
-            o = QPointF(0.0, loHeight() - (tm() + bm()));
+            o = QPointF(0.0, _score->loHeight() - (tm() + bm()));
             painter->translate(o);
 
             QAbstractTextDocumentLayout::PaintContext c;
@@ -446,7 +399,6 @@ PageFormat::PageFormat()
       _evenBottomMargin = 20.0 / INCH;
       _oddTopMargin     = 10.0 / INCH;
       _oddBottomMargin  = 20.0 / INCH;
-      _landscape        = MScore::landscape;
       _twosided         = MScore::twosided;
       }
 
@@ -458,7 +410,7 @@ void PageFormat::setSize(const PaperSize* size)
       {
       if (size->qtsize == QPrinter::Custom)
             return;
-      _size = QSizeF(size->h, size->w);
+      _size = QSizeF(size->w, size->h);
       }
 
 //---------------------------------------------------------
@@ -468,26 +420,6 @@ void PageFormat::setSize(const PaperSize* size)
 QString PageFormat::name() const
       {
       return paperSize()->name;
-      }
-
-//---------------------------------------------------------
-//   width
-//    return in inch
-//---------------------------------------------------------
-
-qreal PageFormat::width() const
-      {
-      return _landscape ? _size.height() : _size.width();
-      }
-
-//---------------------------------------------------------
-//   height
-//    return in inch
-//---------------------------------------------------------
-
-qreal PageFormat::height() const
-      {
-      return _landscape ? _size.width() : _size.height();
       }
 
 //---------------------------------------------------------
@@ -510,9 +442,9 @@ qreal PageFormat::height() const
 
 void PageFormat::read(QDomElement e, Score* score)
       {
-      _landscape = false;      // for compatibility with old versions
       qreal _oddRightMargin  = 0.0;
       qreal _evenRightMargin = 0.0;
+      bool landscape = false;
       QString type;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
@@ -521,7 +453,7 @@ void PageFormat::read(QDomElement e, Score* score)
             if (tag == "pageFormat")
                   setSize(getPaperSize(val));
             else if (tag == "landscape")
-                  _landscape = i;
+                  landscape = i;
             else if (tag == "page-margins") {
                   type = e.attribute("type","both");
                   qreal lm = 0.0, rm = 0.0, tm = 0.0, bm = 0.0;
@@ -565,6 +497,11 @@ void PageFormat::read(QDomElement e, Score* score)
       qreal w1 = _size.width() - _oddLeftMargin - _oddRightMargin;
       qreal w2 = _size.width() - _evenLeftMargin - _evenRightMargin;
       _printableWidth = qMax(w1, w2);     // silently adjust right margins
+      if (landscape) {
+            qreal w = _size.height();
+            qreal h = _size.width();
+            _size = QSizeF(w, h);
+            }
       }
 
 //---------------------------------------------------------
@@ -585,7 +522,6 @@ void PageFormat::read(QDomElement e, Score* score)
 
 void PageFormat::readMusicXML(QDomElement e, qreal conversion)
       {
-      _landscape = false;
       qreal _oddRightMargin  = 0.0;
       qreal _evenRightMargin = 0.0;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
@@ -631,8 +567,8 @@ void PageFormat::readMusicXML(QDomElement e, qreal conversion)
             else
                   domError(e);
             }
-      qreal w1 = width() - _oddLeftMargin - _oddRightMargin;
-      qreal w2 = width() - _evenLeftMargin - _evenRightMargin;
+      qreal w1 = _size.width() - _oddLeftMargin - _oddRightMargin;
+      qreal w2 = _size.width() - _evenLeftMargin - _evenRightMargin;
       _printableWidth = qMax(w1, w2);     // silently adjust right margins
       }
 
@@ -650,15 +586,9 @@ void PageFormat::write(Xml& xml) const
       // qreal t = 10 * PPI / (20 / 4);
       qreal t = 2 * PPI;
 
-      if (name() != "Custom") {
-            xml.tag("pageFormat", QString(name()));
-            if (_landscape)
-                  xml.tag("landscape", _landscape);
-            }
-      else {
-            xml.tag("page-height", height() * t);
-            xml.tag("page-width", width() * t);
-            }
+      xml.tag("page-height", _size.height() * t);
+      xml.tag("page-width",  _size.width() * t);
+
       QString type("both");
       if (_twosided) {
             type = "even";
@@ -690,8 +620,8 @@ void PageFormat::writeMusicXML(Xml& xml, qreal conversion) const
 
       //qreal t = 2 * PPI * 10 / 9;
 
-      xml.tag("page-height", height() * conversion);
-      xml.tag("page-width", width() * conversion);
+      xml.tag("page-height", _size.height() * conversion);
+      xml.tag("page-width", _size.width() * conversion);
       QString type("both");
       if (_twosided) {
             type = "even";
@@ -717,6 +647,7 @@ void PageFormat::writeMusicXML(Xml& xml, qreal conversion) const
 //   doRebuildBspTree
 //---------------------------------------------------------
 
+#ifdef USE_BSP
 void Page::doRebuildBspTree()
       {
       QList<Element*> el;
@@ -732,6 +663,7 @@ void Page::doRebuildBspTree()
       for (int i = 0; i < n; ++i)
             bspTree.insert(el.at(i));
       }
+#endif
 
 //---------------------------------------------------------
 //   replaceTextMacros
@@ -1018,3 +950,42 @@ QList<const Element*> Page::elements()
       return el;
       }
 
+//---------------------------------------------------------
+//   tm
+//---------------------------------------------------------
+
+qreal Page::tm() const
+      {
+      const PageFormat* pf = _score->pageFormat();
+      return ((!pf->twosided() || isOdd()) ? pf->oddTopMargin() : pf->evenTopMargin()) * DPI;
+      }
+
+//---------------------------------------------------------
+//   bm
+//---------------------------------------------------------
+
+qreal Page::bm() const
+      {
+      const PageFormat* pf = _score->pageFormat();
+      return ((!pf->twosided() || isOdd()) ? pf->oddBottomMargin() : pf->evenBottomMargin()) * DPI;
+      }
+
+//---------------------------------------------------------
+//   lm
+//---------------------------------------------------------
+
+qreal Page::lm() const
+      {
+      const PageFormat* pf = _score->pageFormat();
+      return ((!pf->twosided() || isOdd()) ? pf->oddLeftMargin() : pf->evenLeftMargin()) * DPI;
+      }
+
+//---------------------------------------------------------
+//   rm
+//---------------------------------------------------------
+
+qreal Page::rm() const
+      {
+      const PageFormat* pf = _score->pageFormat();
+      return ((!pf->twosided() || isOdd()) ? pf->oddRightMargin() : pf->evenRightMargin()) * DPI;
+      }

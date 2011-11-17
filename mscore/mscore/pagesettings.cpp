@@ -164,7 +164,7 @@ void PageSettings::updateValues()
       QString s;
 
       //qreal printableWidthValue = pf->printableWidth();
-      qreal widthValue = pf->width();
+      qreal widthValue = pf->size().width();
       if (mm) {
             oddPageTopMargin->setValue(pf->oddTopMargin() * INCH);
             oddPageBottomMargin->setValue(pf->oddBottomMargin() * INCH);
@@ -177,7 +177,7 @@ void PageSettings::updateValues()
             evenPageRightMargin->setValue(pf->evenRightMargin() * INCH);
 
             spatiumEntry->setValue(cs->spatium()/DPMM);
-            pageHeight->setValue(pf->height() * INCH);
+            pageHeight->setValue(pf->size().height() * INCH);
             widthValue          *= INCH;
             }
       else {
@@ -192,7 +192,7 @@ void PageSettings::updateValues()
             evenPageRightMargin->setValue(pf->evenRightMargin());
 
             spatiumEntry->setValue(cs->spatium()/DPI);
-            pageHeight->setValue(pf->height());
+            pageHeight->setValue(pf->size().height());
             }
       pageWidth->setValue(widthValue);
 
@@ -215,7 +215,7 @@ void PageSettings::updateValues()
             evenPageLeftMargin->setValue(oddPageLeftMargin->value());
             }
 
-      landscape->setChecked(pf->landscape());
+      landscape->setChecked(pf->width() > pf->height());
       twosided->setChecked(pf->twosided());
 
       pageOffsetEntry->setValue(sc->pageNumberOffset() + 1);
@@ -250,7 +250,10 @@ void PageSettings::mmClicked()
 void PageSettings::landscapeToggled(bool flag)
       {
       PageFormat pf(*preview->score()->pageFormat());
-      pf.setLandscape(flag);
+      if (flag ^ (pf.width() > pf.height()))
+            pf.setSize(QSizeF(pf.height(), pf.width()));
+      double f  = mmUnit ? 1.0/INCH : 1.0;
+      pf.setPrintableWidth(pf.width() - (oddPageLeftMargin->value() + oddPageRightMargin->value())  * f);
       preview->score()->setPageFormat(pf);
       updateValues();
       updatePreview(0);
@@ -288,7 +291,6 @@ void PageSettings::apply()
       pf.setOddTopMargin(oddPageTopMargin->value() * f);
       pf.setOddBottomMargin(oddPageBottomMargin->value() * f);
       pf.setOddLeftMargin(oddPageLeftMargin->value() * f);
-      pf.setLandscape(landscape->isChecked());
       pf.setTwosided(twosided->isChecked());
 
       double sp = spatiumEntry->value() * f1;
@@ -366,7 +368,7 @@ void PageSettings::olmChanged(double val)
             evenPageLeftMargin->blockSignals(false);
             }
       PageFormat pf(*preview->score()->pageFormat());
-      pf.setPrintableWidth(pf.width() - pf.oddRightMargin() - val);
+      pf.setPrintableWidth(pf.size().width() - pf.oddRightMargin() - val);
       pf.setOddLeftMargin(val);
       preview->score()->setPageFormat(pf);
 
@@ -395,7 +397,7 @@ void PageSettings::ormChanged(double val)
             evenPageRightMargin->blockSignals(false);
             }
 
-      pf.setPrintableWidth(pf.width() - pf.oddLeftMargin() - val);
+      pf.setPrintableWidth(pf.size().width() - pf.oddLeftMargin() - val);
       preview->score()->setPageFormat(pf);
       updatePreview(0);
       }

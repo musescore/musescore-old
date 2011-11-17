@@ -925,8 +925,8 @@ void ExportMusicXml::credits(Xml& xml)
       if (!pf) return;
       //const double t  = 2 * PPI * 10 / 9;
       //const double t  = INCH / millimeters * tenths;
-      const double h  = getTenthsFromInches(pf->height());
-      const double w  = getTenthsFromInches(pf->width());
+      const double h  = getTenthsFromInches(pf->size().height());
+      const double w  = getTenthsFromInches(pf->size().width());
       const double lm = getTenthsFromInches(pf->oddLeftMargin());
       const double rm = getTenthsFromInches(pf->oddRightMargin());
       const double tm = getTenthsFromInches(pf->oddTopMargin());
@@ -1723,8 +1723,8 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
       qDebug(" newtick=%d", tick);
 
       const PageFormat* pf = score->pageFormat();
-      const double pageHeight  = getTenthsFromInches(pf->height());
-      // const double pageWidth  = getTenthsFromInches(pf->width());
+      const double pageHeight  = getTenthsFromInches(pf->size().height());
+      // const double pageWidth  = getTenthsFromInches(pf->size().width());
 
       foreach(Note* note, nl) {
             QString val;
@@ -3440,7 +3440,7 @@ void ExportMusicXml::write(QIODevice* dev)
 
                   if ((irregularMeasureNo + measureNo + pickupMeasureNo) == 4)
                         currentSystem = TopSystem;
-                  else if ((measureNo > 2 && int(m->pagePos().x() / DPI / pf->width()) != int(previousMeasure->pagePos().x() / DPI / pf->width())))    // TODO: MeasureBase
+                  else if ((measureNo > 2 && int(m->pagePos().x() / DPI / pf->size().width()) != int(previousMeasure->pagePos().x() / DPI / pf->size().width())))    // TODO: MeasureBase
                         currentSystem = NewPage;
                   else if (previousMeasure &&
                            m->pagePos().y() > (previousMeasure->pagePos().y())) // TODO: MeasureBase
@@ -3480,7 +3480,7 @@ void ExportMusicXml::write(QIODevice* dev)
                               }
 
                         if (preferences.musicxmlExportLayout) {
-                              const double pageWidth  = getTenthsFromInches(pf->width());
+                              const double pageWidth  = getTenthsFromInches(pf->size().width());
                               const double lm = getTenthsFromInches(pf->oddLeftMargin());
                               const double rm = getTenthsFromInches(pf->oddRightMargin());
                               const double tm = getTenthsFromInches(pf->oddTopMargin());

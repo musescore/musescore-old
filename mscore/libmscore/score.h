@@ -727,6 +727,9 @@ class Score {
       void setSpatium(qreal v)                 { style()->setSpatium(v);       }
       const PageFormat* pageFormat() const     { return style()->pageFormat(); }
       void setPageFormat(const PageFormat& pf) { style()->setPageFormat(pf);   }
+      qreal loWidth() const;
+      qreal loHeight() const;
+
       const QList<Page*>& pages() const        { return _pages;                }
       QList<System*>* systems()                { return &_systems;             }
 

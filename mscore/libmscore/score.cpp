@@ -3328,3 +3328,21 @@ qreal Score::tempo(int tick) const
       return tempomap()->tempo(tick);
       }
 
+//---------------------------------------------------------
+//   loWidth
+//---------------------------------------------------------
+
+qreal Score::loWidth() const
+      {
+      return pageFormat()->size().width() * DPI;
+      }
+
+//---------------------------------------------------------
+//   loHeight
+//---------------------------------------------------------
+
+qreal Score::loHeight() const
+      {
+      return pageFormat()->size().height() * DPI;
+      }
+

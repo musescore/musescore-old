@@ -138,26 +138,6 @@ void BspTree::remove(const Element* element)
       }
 
 //---------------------------------------------------------
-//   remove
-//---------------------------------------------------------
-
-#if 0
-void BspTree::remove(const QSet<const Element*>& items)
-      {
-      for (int i = 0; i < leaves.size(); ++i) {
-            QList<const Element*> newItemList;
-            QList<const Element*>& oldItemList = leaves[i];
-            for (int j = 0; j < oldItemList.size(); ++j) {
-                  const Element* item = oldItemList.at(j);
-                  if (!items.contains(item))
-                        newItemList << item;
-                  }
-            leaves[i] = newItemList;
-            }
-      }
-#endif
-
-//---------------------------------------------------------
 //   items
 //---------------------------------------------------------
 
@@ -189,6 +169,7 @@ QList<const Element*> BspTree::items(const QPointF& pos)
       return l;
       }
 
+#ifndef NDEBUG
 //---------------------------------------------------------
 //   debug
 //---------------------------------------------------------
@@ -219,6 +200,7 @@ QString BspTree::debug(int index) const
             }
       return tmp;
       }
+#endif
 
 //---------------------------------------------------------
 //   initialize

@@ -35,7 +35,6 @@ bool    MScore::warnPitchRange;
 QPrinter::PageSize MScore::paperSize;
 qreal   MScore::paperWidth;
 qreal   MScore::paperHeight;
-bool    MScore::landscape;
 bool    MScore::twosided;
 bool    MScore::replaceFractions;
 bool    MScore::playRepeats;
@@ -89,7 +88,6 @@ void MScore::init()
       paperSize           = QPrinter::A4;     // default paper size
       paperWidth          = (210 / INCH);
       paperHeight         = (297 / INCH);
-      landscape           = false;
       twosided            = true;
       replaceFractions    = true;
       partStyle           = "";

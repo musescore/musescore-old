@@ -368,7 +368,6 @@ void Preferences::write()
       s.setValue("paperSize",   MScore::paperSize);
       s.setValue("paperWidth",  MScore::paperWidth);
       s.setValue("paperHeight", MScore::paperHeight);
-      s.setValue("landscape",   MScore::landscape);
       s.setValue("twosided",    MScore::twosided);
       s.setValue("spatium",     MScore::spatium);
 
@@ -520,7 +519,6 @@ void Preferences::read()
       MScore::paperSize      = QPrinter::PageSize(s.value("paperSize", MScore::paperSize).toInt());
       MScore::paperWidth     = s.value("paperWidth", MScore::paperWidth).toDouble();
       MScore::paperHeight    = s.value("paperHeight", MScore::paperWidth).toDouble();
-      MScore::landscape      = s.value("landscape", MScore::landscape).toBool();
       MScore::twosided       = s.value("twosided", MScore::twosided).toBool();
       MScore::spatium        = s.value("spatium", MScore::spatium).toDouble();
       mag                    = s.value("mag", mag).toDouble();
@@ -989,14 +987,8 @@ void PreferenceDialog::updateValues(Preferences* p)
             pw = paperSizes[MScore::paperSize].w;
             ph = paperSizes[MScore::paperSize].h;
             }
-      if (MScore::landscape) {
-            paperWidth->setValue(ph * INCH);
-            paperHeight->setValue(pw * INCH);
-            }
-      else {
-            paperWidth->setValue(pw * INCH);
-            paperHeight->setValue(ph * INCH);
-            }
+      paperWidth->setValue(pw * INCH);
+      paperHeight->setValue(ph * INCH);
 
       paperWidth->blockSignals(false);
       paperHeight->blockSignals(false);
@@ -1005,7 +997,7 @@ void PreferenceDialog::updateValues(Preferences* p)
       spatiumEntry->setValue(MScore::spatium * INCH);
       scale->setValue(p->mag);
 
-      landscape->setChecked(MScore::landscape);
+      landscape->setChecked(pw > ph);
 
       defaultPlayDuration->setValue(MScore::defaultPlayDuration);
       importStyleFile->setText(p->importStyleFile);
@@ -1483,7 +1475,6 @@ void PreferenceDialog::apply()
       MScore::twosided    = twosided->isChecked();
       MScore::spatium     = spatiumEntry->value() / INCH;
       preferences.mag         = scale->value();
-      MScore::landscape   = landscape->isChecked();
       MScore::paperSize   = QPrinter::PageSize(pageGroup->currentIndex());
       MScore::paperHeight = paperHeight->value() * f;
       MScore::paperWidth  = paperWidth->value()  * f;
@@ -1582,6 +1573,9 @@ void PreferenceDialog::paperSizeChanged(double)
 
 void PreferenceDialog::landscapeToggled(bool /*flag*/)
       {
+      double val = paperWidth->value();
+      paperWidth->setValue(paperHeight->value());
+      paperHeight->setValue(val);
       }
 
 //---------------------------------------------------------
