@@ -51,7 +51,6 @@ void MuseScore::showNavigator(bool visible)
 NScrollArea::NScrollArea(QWidget* w)
    : QScrollArea(w)
       {
-//      setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
       setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
       setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
@@ -170,19 +169,18 @@ void Navigator::rescale()
       {
       if (_score->pages().isEmpty())
             return;
-      int sbh  = scrollArea->style()->pixelMetric(QStyle::PM_ScrollBarExtent);
-      int h    = scrollArea->height();
-      int w    = scrollArea->width();
-      Page* lp = _score->pages().back();
-      qreal m;
-      QSizeF size = _score->pageFormat()->size() * DPI;
-      qreal m1 = h / size.height();
-      qreal m2 = (h-sbh) / size.width();
-      int w1   = int ((lp->x() + lp->width()) * m1);
-      int w2   = int ((lp->x() + lp->width()) * m2);  // always w1 > w2
+      int sbh     = scrollArea->style()->pixelMetric(QStyle::PM_ScrollBarExtent);
+      int h       = height();
+      int w       = scrollArea->width();
+      Page* lp    = _score->pages().back();
+      qreal scoreWidth  = lp->x() + lp->width();
+      qreal scoreHeight = lp->height();
 
-// qDebug("rescale %d   %d - %d - %d  sbh %d h %d\n",
-//   scrollArea->horizontalScrollBar()->isVisible(), w2, w, w1, sbh, h);
+      qreal m;
+      qreal m1    = h / scoreHeight;
+      qreal m2    = (h-sbh) / scoreHeight;
+      int w1      = int (scoreWidth * m1);
+      int w2      = int (scoreWidth * m2);  // always w1 > w2
 
       if ((w >= w2) && (w < w1)) {
             setFixedWidth(w1);
@@ -191,12 +189,10 @@ void Navigator::rescale()
       else {
             if (scrollArea->horizontalScrollBar()->isVisible()) {
                   setFixedWidth(w1);
-                  // qDebug("  visible %d > %d\n", w2, w);
                   m = m2;
                   }
             else {
                   setFixedWidth(w1);
-                  // qDebug("  invisible %d < %d\n", w1, w);
                   m = m1;
                   }
             }
@@ -274,7 +270,6 @@ void Navigator::mouseMoveEvent(QMouseEvent* ev)
             else if (viewRect.left() > 0)
                   viewRect.moveLeft(0);
             }
-
 
       if (viewRect.height() == height())
             viewRect.moveTop(0);
@@ -407,8 +402,9 @@ void Navigator::pmFinished()
 
 void Navigator::paintEvent(QPaintEvent* ev)
       {
-      if (watcher.isRunning())
+      if (watcher.isRunning()) {
             return;
+            }
       QPainter p(this);
       QRect r(ev->rect());
 
