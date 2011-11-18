@@ -469,6 +469,10 @@ void Text::setStyled(bool v)
       {
       if (_styled != v) {
             _styled = v;
+            if (_styled) {
+                  if (_textStyle == TEXT_STYLE_INVALID)
+                        _textStyle = TEXT_STYLE_STAFF;
+                  }
             setSystemFlag(style().systemFlag());
             }
       }
