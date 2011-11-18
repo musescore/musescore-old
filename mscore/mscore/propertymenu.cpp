@@ -591,7 +591,8 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
                         Text* t  = static_cast<Text*>(e);
                         Text* tt = t->clone();
 
-                        if (nText->styled() != ot->styled())
+                        if (nText->styled() != ot->styled()) {
+                              tt->setTextStyle(nText->textStyle());
                               tt->setStyled(nText->styled());
 
                         if (nText->textStyle() != ot->textStyle()) {
