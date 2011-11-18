@@ -11,6 +11,7 @@
 //  the file LICENCE.GPL
 //=============================================================================
 
+#include "config.h"
 #include "chordlist.h"
 #include "xml.h"
 #include "pitchspelling.h"
@@ -483,20 +484,29 @@ bool ChordList::read(const QString& name)
       QFileInfo ftest(name);
       if (ftest.isAbsolute())
             path = name;
-      else
+      else {
+#ifdef Q_WS_IOS
+            path = QString("%1/%2").arg(MScore::globalShare()).arg(name);
+#else
             path = QString("%1styles/%2").arg(MScore::globalShare()).arg(name);
+#endif
+            }
       //default to stdchords.xml
       QFileInfo fi(path);
-      if(!fi.exists())
+      if (!fi.exists())
+#ifdef Q_WS_IOS
+            path = QString("%1/%2").arg(MScore::globalShare()).arg("stdchords.xml");
+#else
             path = QString("%1styles/%2").arg(MScore::globalShare()).arg("stdchords.xml");
-      if (debugMode)
-            qDebug("read chordlist from <%s>\n", qPrintable(path));
+#endif
+
       if (name.isEmpty())
             return false;
       QFile f(path);
       if (!f.open(QIODevice::ReadOnly)) {
             QString s = QT_TRANSLATE_NOOP("file", "cannot open chord description:\n%1\n%2");
             MScore::lastError = s.arg(f.fileName()).arg(f.errorString());
+qDebug("ChordList::read failed: <%s>\n", qPrintable(path));
             return false;
             }
       QDomDocument doc;
