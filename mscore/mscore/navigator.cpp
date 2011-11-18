@@ -192,7 +192,9 @@ void Navigator::rescale()
                   m = m2;
                   }
             else {
-                  setFixedWidth(w1);
+                  w1 *= .99;
+                  if (minimumWidth() != w1)
+                        setFixedWidth(w1);
                   m = m1;
                   }
             }
@@ -326,8 +328,9 @@ static void createPixmap(PageCache* pc)
       QReadLocker locker (pc->page->score()->layoutLock());
       pc->valid = false;
       QRect pageRect = pc->matrix.mapRect(pc->page->bbox()).toRect();
-      if (pageRect.width() == 0 || pageRect.height() == 0)
+      if (pageRect.width() == 0 || pageRect.height() == 0) {
             return;
+            }
 
       pc->pm = QImage(pageRect.size(), QImage::Format_ARGB32_Premultiplied);
       QPainter p(&pc->pm);
@@ -368,7 +371,7 @@ void Navigator::layoutChanged()
             return;
             }
       int n = _score->pages().size();
-      if (n != pcl.size())
+//      if (n != pcl.size())
             rescale();
       pcl.clear();
       for (int i = 0; i < n; ++i) {
@@ -402,9 +405,8 @@ void Navigator::pmFinished()
 
 void Navigator::paintEvent(QPaintEvent* ev)
       {
-      if (watcher.isRunning()) {
+      if (watcher.isRunning())
             return;
-            }
       QPainter p(this);
       QRect r(ev->rect());
 
@@ -421,8 +423,9 @@ void Navigator::paintEvent(QPaintEvent* ev)
                               QPixmap pm = QPixmap::fromImage(pc.pm);
                               p.drawPixmap(rr.topLeft(), pm);
                               }
-                        else
+                        else {
                               npcl.append(&pcl[i]);
+                              }
                         region -= rr;
                         }
                   }

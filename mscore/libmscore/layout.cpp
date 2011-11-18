@@ -1665,8 +1665,6 @@ void Score::layoutSystems()
 
       qreal w  = pageFormat()->printableWidth() * DPI;
 
-printf("layoutSystems with %f\n", w);
-
       while (curMeasure) {
             ElementType t = curMeasure->type();
             if (t == VBOX || t == TBOX || t == FBOX) {
