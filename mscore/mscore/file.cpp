@@ -801,12 +801,12 @@ QString MuseScore::getStyleFilename(bool open)
 //   getSoundFont
 //---------------------------------------------------------
 
-QString MuseScore::getSoundFont(const QString& d)
+QStringList MuseScore::getSoundFont(const QString& d)
       {
       QString filter = tr("SoundFont Files (*.sf2 *.SF2);;All (*)");
 
       if (preferences.nativeDialogs) {
-            QString s = QFileDialog::getOpenFileName(
+             QStringList s = QFileDialog::getOpenFileNames(
                mscore,
                MuseScore::tr("Choose Synthesizer SoundFont"),
                d,
@@ -817,7 +817,7 @@ QString MuseScore::getSoundFont(const QString& d)
 
       if (loadSoundFontDialog == 0) {
             loadSoundFontDialog = new QFileDialog(this);
-            loadSoundFontDialog->setFileMode(QFileDialog::ExistingFile);
+            loadSoundFontDialog->setFileMode(QFileDialog::ExistingFiles);
             loadSoundFontDialog->setOption(QFileDialog::DontUseNativeDialog, true);
             loadSoundFontDialog->setWindowTitle(tr("MuseScore: Choose Synthesizer SoundFont"));
             loadSoundFontDialog->setNameFilter(filter);
@@ -845,9 +845,9 @@ QString MuseScore::getSoundFont(const QString& d)
 
       if (loadSoundFontDialog->exec()) {
             QStringList result = loadSoundFontDialog->selectedFiles();
-            return result.front();
+            return result;
             }
-      return QString();
+      return QStringList();
       }
 
 //---------------------------------------------------------

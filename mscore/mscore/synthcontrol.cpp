@@ -272,32 +272,38 @@ void SynthControl::sfDeleteClicked()
 
 void SynthControl::sfAddClicked()
       {
-      QString s = mscore->getSoundFont("");
-      if (!s.isEmpty()) {
+      QStringList files = mscore->getSoundFont("");
+      if (!files.isEmpty()) {
             int n = soundFonts->count();
             QStringList sl;
             for (int i = 0; i < n; ++i) {
                   QListWidgetItem* item = soundFonts->item(i);
                   sl.append(item->text());
                   }
-            if (sl.contains(s)) {
-                  QMessageBox::warning(this,
-                     tr("MuseScore"),
-                     tr("Soundfont already loaded"));
-                  }
-            else {
-                  Synth* sy = synti->synth("Fluid");
-                  if (sy) {
-                        bool loaded = sy->addSoundFont(s);
-                        if (!loaded) {
-                              QMessageBox::warning(this,
-                                 tr("MuseScore"),
-                                 tr("cannot load soundfont"));
-                              }
-                        else {
-                              soundFonts->insertItem(0, s);
+            QStringList list = files;
+            QStringList::Iterator it = list.begin();
+            while(it != list.end()) {
+                  QString s = *it;
+                  if (sl.contains(s)) {
+                        QMessageBox::warning(this,
+                           tr("MuseScore"),
+                           tr("Soundfont already loaded %s", qPrintable(s)));
+                        }
+                  else {
+                        Synth* sy = synti->synth("Fluid");
+                        if (sy) {
+                              bool loaded = sy->addSoundFont(s);
+                              if (!loaded) {
+                                    QMessageBox::warning(this,
+                                       tr("MuseScore"),
+                                       tr("cannot load soundfont %s", qPrintable(s)));
+                                    }
+                              else {
+                                    soundFonts->insertItem(0, s);
+                                    }
                               }
                         }
+                  ++it;      
                   }
             }
       updateUpDownButtons();      
