@@ -82,13 +82,12 @@ PageSettings::~PageSettings()
 void PageSettings::setScore(Score* s)
       {
       cs  = s;
-      preview->setScore(s->clone());
+      Score* sl = s->clone();
+      preview->setScore(sl);
 
-      Score* sl = preview->score();
       const PageFormat* pf = s->pageFormat();
-
-      sl->setPageFormat(*pf);
-      sl->setSpatium(s->spatium());
+//      sl->setPageFormat(*pf);
+//      sl->setSpatium(s->spatium());
 
       pageGroup->clear();
       int index = 0;
@@ -102,7 +101,6 @@ void PageSettings::setScore(Score* s)
             }
 
       pageGroup->setCurrentIndex(index);
-      updateValues();
       updatePreview(0);
       }
 
@@ -255,7 +253,6 @@ void PageSettings::landscapeToggled(bool flag)
       double f  = mmUnit ? 1.0/INCH : 1.0;
       pf.setPrintableWidth(pf.width() - (oddPageLeftMargin->value() + oddPageRightMargin->value())  * f);
       preview->score()->setPageFormat(pf);
-      updateValues();
       updatePreview(0);
       }
 
@@ -268,7 +265,6 @@ void PageSettings::twosidedToggled(bool flag)
       PageFormat pf(*preview->score()->pageFormat());
       pf.setTwosided(flag);
       preview->score()->setPageFormat(pf);
-      updateValues();
       updatePreview(1);
       }
 
@@ -329,8 +325,9 @@ void PageSettings::pageFormatSelected(int size)
       {
       PageFormat pf(*preview->score()->pageFormat());
       pf.setSize(&paperSizes[size]);
+      double f  = mmUnit ? 1.0/INCH : 1.0;
+      pf.setPrintableWidth(pf.width() - (oddPageLeftMargin->value() + oddPageRightMargin->value())  * f);
       preview->score()->setPageFormat(pf);
-      preview->score()->doLayout();
       updatePreview(0);
       }
 
@@ -512,6 +509,7 @@ void PageSettings::pageWidthChanged(double val)
 
 void PageSettings::updatePreview(int val)
       {
+      updateValues();
       switch(val) {
             case 0:
                   preview->score()->doLayout();
