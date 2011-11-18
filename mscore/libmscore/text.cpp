@@ -26,6 +26,8 @@
 #include "segment.h"
 #include "mscore.h"
 
+QReadWriteLock docRenderLock;
+
 //---------------------------------------------------------
 //   Text
 //---------------------------------------------------------
@@ -412,8 +414,7 @@ void Text::draw(QPainter* painter) const
 #if 1
       // make it thread save
       {
-      QReadWriteLock lock;
-      QWriteLocker locker(&lock);
+      QWriteLocker locker(&docRenderLock);
       QScopedPointer<QTextDocument> __doc(_doc->clone());
       __doc.data()->documentLayout()->draw(painter, c);
       }

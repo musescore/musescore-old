@@ -197,6 +197,8 @@ void Page::layout()
 
 void Page::draw(QPainter* painter) const
       {
+      extern QReadWriteLock docRenderLock;
+      QWriteLocker locker(&docRenderLock);
       //
       // draw header/footer
       //
@@ -458,7 +460,7 @@ void PageFormat::read(QDomElement e, Score* score)
                   type = e.attribute("type","both");
                   qreal lm = 0.0, rm = 0.0, tm = 0.0, bm = 0.0;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        QString tag(ee.tagName());
+                        const QString& tag(ee.tagName());
                         qreal val = ee.text().toDouble() * 0.5 / PPI;
                         if (tag == "left-margin")
                               lm = val;
@@ -497,11 +499,8 @@ void PageFormat::read(QDomElement e, Score* score)
       qreal w1 = _size.width() - _oddLeftMargin - _oddRightMargin;
       qreal w2 = _size.width() - _evenLeftMargin - _evenRightMargin;
       _printableWidth = qMax(w1, w2);     // silently adjust right margins
-      if (landscape) {
-            qreal w = _size.height();
-            qreal h = _size.width();
-            _size = QSizeF(w, h);
-            }
+      if (landscape)
+            _size.transpose();
       }
 
 //---------------------------------------------------------
@@ -589,7 +588,7 @@ void PageFormat::write(Xml& xml) const
       xml.tag("page-height", _size.height() * t);
       xml.tag("page-width",  _size.width() * t);
 
-      QString type("both");
+      const char* type = "both";
       if (_twosided) {
             type = "even";
             xml.stag(QString("page-margins type=\"%1\"").arg(type));
@@ -773,9 +772,7 @@ void Page::write(Xml& xml) const
 void Page::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            const QString& tag(e.tagName());
-
-            if (tag == "System") {
+            if (e.tagName() == "System") {
                   System* system = new System(score());
                   score()->systems()->append(system);
                   system->read(e);

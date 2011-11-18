@@ -128,22 +128,22 @@ class Note : public Element {
       int _lineOffset;        ///< Used during mouse dragging.
 
       virtual QRectF drag(const EditData& s);
-      virtual void endDrag();
-      virtual void endEdit();
+      void endDrag();
+      void endEdit();
 
    public:
       Note(Score* s = 0);
       Note(const Note&);
       Note &operator=(const Note&);
       ~Note();
-      virtual Note* clone() const      { return new Note(*this); }
-      virtual ElementType type() const { return NOTE; }
-      virtual QPointF pagePos() const;      ///< position in page coordinates
-      virtual QPointF canvasPos() const;    ///< position in page coordinates
-      virtual void layout();
+      Note* clone() const      { return new Note(*this); }
+      ElementType type() const { return NOTE; }
+      QPointF pagePos() const;      ///< position in page coordinates
+      QPointF canvasPos() const;    ///< position in page coordinates
+      void layout();
       void layout10(AccidentalState*);
-      virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
-      virtual void setTrack(int val);
+      void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
+      void setTrack(int val);
 
       int playTicks() const;
 
@@ -198,16 +198,16 @@ class Note : public Element {
       Chord* chord() const            { return (Chord*)parent(); }
       void setChord(Chord* a)         { setParent((Element*)a);  }
 
-      virtual void draw(QPainter*) const;
-      virtual void read(QDomElement);
-      virtual void write(Xml& xml) const;
+      void draw(QPainter*) const;
+      void read(QDomElement);
+      void write(Xml& xml) const;
 
       QPointF stemPos(bool upFlag) const;    ///< Point to connect stem.
       qreal stemYoff(bool upFlag) const;
       qreal yPos() const;
 
-      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
-      virtual Element* drop(const DropData&);
+      bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
+      Element* drop(const DropData&);
 
       bool hidden() const              { return _hidden; }
       void setHidden(bool val)         { _hidden = val;  }
@@ -227,8 +227,8 @@ class Note : public Element {
       void setDotPosition(Direction d) { _dotPosition = d;    }
       bool dotIsUp() const;               // actual dot position
 
-      virtual void toDefault();
-      virtual void setMag(qreal val);
+      void toDefault();
+      void setMag(qreal val);
 
       ValueType veloType() const       { return _veloType;          }
       void setVeloType(ValueType v)    { _veloType = v;             }
@@ -255,10 +255,10 @@ class Note : public Element {
       QList<NoteEvent*>& playEvents()                { return _playEvents; }
       const QList<NoteEvent*>& playEvents() const    { return _playEvents; }
       void setPlayEvents(const QList<NoteEvent*>& v);
-      virtual const QString subtypeName() const      { return QString(); }
+      const QString subtypeName() const      { return QString(); }
 
-      virtual QVariant getProperty(int propertyId) const;
-      virtual void setProperty(int propertyId, const QVariant&);
+      QVariant getProperty(int propertyId) const;
+      void setProperty(int propertyId, const QVariant&);
       };
 
 extern Sym* noteHeadSym(bool up, int group, int n);

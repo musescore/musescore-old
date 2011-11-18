@@ -137,8 +137,8 @@ class Page : public Element {
 
       QList<const Element*> items(const QRectF& r);
       QList<const Element*> items(const QPointF& p);
-      void rebuildBspTree() { bspTreeValid = false; }
-      virtual QPointF pagePos() const { return QPointF(); }     ///< position in page coordinates
+      void rebuildBspTree()   { bspTreeValid = false; }
+      QPointF pagePos() const { return QPointF(); }     ///< position in page coordinates
       QList<System*> searchSystem(const QPointF& pos) const;
       Measure* searchMeasure(const QPointF& p) const;
       MeasureBase* pos2measure(const QPointF&, int* staffIdx, int* pitch,

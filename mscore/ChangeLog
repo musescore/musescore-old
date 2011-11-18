@@ -1,3 +1,5 @@
+18.nov (ws)
+      - fix #13696: navigator bounding box issues
 17.nov (la)
       - fix #13411: Courtesy clef appears in final bar after bars re-adjust
       - fix #13478: Zoom during playback using shortcuts
