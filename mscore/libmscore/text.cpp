@@ -81,6 +81,8 @@ Text::~Text()
 
 void Text::setText(const QString& s)
       {
+      if (s.isEmpty())
+            return;
       Align align = style().align();
       _doc->clear();
       QFont font(style().font(spatium()));
