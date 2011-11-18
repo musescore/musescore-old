@@ -58,6 +58,6 @@ class WallpaperPreview : public QFrame {
       };
 
 
-extern QString getSoundFont(const QString&);
+extern QStringList getSoundFont(const QString&);
 #endif
 

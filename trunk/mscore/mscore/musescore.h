@@ -507,7 +507,7 @@ class MuseScore : public QMainWindow {
       QString getStyleFilename(bool open);
       QString getFotoFilename();
       QString getChordStyleFilename(bool open);
-      QString getSoundFont(const QString&);
+      QStringList getSoundFont(const QString&);
       QString getScanFile(const QString&);
       QString getAudioFile(const QString&);
       QString getDrumsetFilename(bool open);
