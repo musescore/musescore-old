@@ -212,7 +212,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
             case 4:    // "load",
                   if (argc == 1) {
                         QString s = qscriptvalue_cast<QString>(context->argument(0));
-                        return qScriptValueFromValue(context->engine(), !mscore->readScore(score, s));
+                        return qScriptValueFromValue(context->engine(), mscore->readScore(score, s));
                         }
                   break;
             case 5:     // "save",
