@@ -222,13 +222,11 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         s = qscriptvalue_cast<QString>(context->argument(0));
                         ext = qscriptvalue_cast<QString>(context->argument(1));
                         }
-#ifdef HAS_AUDIOFILE
+
                   if (argc == 2) {
-                        return qScriptValueFromValue(context->engine(), mscore->saveAudio(score, s, ext));
-                        }
-#endif // HAS_AUDIOFILE
-                  else if (argc == 2)
                         return qScriptValueFromValue(context->engine(), mscore->saveAs(score, true, s, ext));
+                        }
+
                   else if (argc == 6 && ext == "png") {
                         bool screenshot  = context->argument(2).toBool();
                         bool transparent = context->argument(3).toBool();
