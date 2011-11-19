@@ -1817,6 +1817,7 @@ void Preferences::updatePluginList()
       QList<QString> pluginPathList;
       pluginPathList.append(dataPath + "/plugins");
       pluginPathList.append(mscoreGlobalShare + "plugins");
+      pluginPathList.append(myPluginsPath);
 
       foreach(QString pluginPath, pluginPathList) {
             QDir pluginDir(pluginPath);
