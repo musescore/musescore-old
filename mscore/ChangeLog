@@ -1,3 +1,7 @@
+19.nov (lv)
+      - fix #4172: MusicXML: create a setting where only the explicit breaks are exported
+      - fix #13451: MusicXML: optionally ignore layout information on import
+      - fix #13452: MusicXML: optionally suppress layout information on export
 18.nov (ws)
       - fix #13696: navigator bounding box issues
 17.nov (la)

@@ -155,6 +155,7 @@ rwtestAllXml() {
       rwtestXml musicxml/testLyricsVoice2a.xml
       rwtestXmlRef musicxml/testLyricsVoice2b.xml
       rwtestXmlRef musicxml/testMeasureLength.xml
+      rwtestXml musicxml/testManualBreaks.xml
       rwtestXml musicxml/testMetaData.xml
       rwtestXml musicxml/testMultiMeasureRest.xml
       rwtestXml musicxml/testNoteAttributes1.xml

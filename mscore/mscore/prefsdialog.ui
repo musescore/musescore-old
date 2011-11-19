@@ -2438,14 +2438,14 @@
           <item>
            <widget class="QCheckBox" name="importLayout">
             <property name="text">
-             <string>Import layout (in development, not functional yet)</string>
+             <string>Import layout</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QCheckBox" name="importBreaks">
             <property name="text">
-             <string>Import system and page breaks (in development, not functional yet)</string>
+             <string>Import system and page breaks</string>
             </property>
            </widget>
           </item>
@@ -2604,7 +2604,7 @@
           <item>
            <widget class="QCheckBox" name="exportLayout">
             <property name="text">
-             <string>Export layout (in development, not functional yet)</string>
+             <string>Export layout</string>
             </property>
            </widget>
           </item>
@@ -2618,7 +2618,7 @@
           <item>
            <widget class="QRadioButton" name="exportManualBreaks">
             <property name="text">
-             <string>Export manually added system and page breaks only (in development, not functional yet)</string>
+             <string>Export manually added system and page breaks only</string>
             </property>
            </widget>
           </item>
