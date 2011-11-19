@@ -855,6 +855,8 @@ static void defaults(Xml& xml, Score* s, double& millimeters, const int& tenths)
       const PageFormat* pf = s->pageFormat();
       if (pf)
             pf->writeMusicXML(xml, INCH / millimeters * tenths);
+      // TODO: also write default system layout here
+      // when exporting only manual or no breaks, system-distance is not written at all
       xml.etag();
       }
 
@@ -3428,6 +3430,14 @@ void ExportMusicXml::write(QIODevice* dev)
                         measureTag += QString(" width=\"%1\"").arg(QString::number(m->bbox().width() / DPMM / millimeters * tenths,'f',2));
                   xml.stag(measureTag);
 
+                  // Handle the <print> element.
+                  // When exporting layout and all breaks, a <print> with layout informations
+                  // is generated for the measure types TopSystem, NewSystem and newPage.
+                  // When exporting layout but only manual or no breaks, a <print> with
+                  // layout informations is generated only for the measure type TopSystem,
+                  // as it is assumed the system layout is broken by the importing application
+                  // anyway and is thus useless.
+
                   int currentSystem = NoSystem;
                   Measure* previousMeasure = 0;
 
@@ -3438,12 +3448,11 @@ void ExportMusicXml::write(QIODevice* dev)
                               }
                         }
 
-                  if ((irregularMeasureNo + measureNo + pickupMeasureNo) == 4)
+                  if (!previousMeasure)
                         currentSystem = TopSystem;
-                  else if ((measureNo > 2 && int(m->pagePos().x() / DPI / pf->size().width()) != int(previousMeasure->pagePos().x() / DPI / pf->size().width())))    // TODO: MeasureBase
+                  else if (m->parent()->parent() != previousMeasure->parent()->parent())
                         currentSystem = NewPage;
-                  else if (previousMeasure &&
-                           m->pagePos().y() > (previousMeasure->pagePos().y())) // TODO: MeasureBase
+                  else if (m->parent() != previousMeasure->parent())
                         currentSystem = NewSystem;
 
                   bool prevMeasLineBreak = false;
@@ -3452,34 +3461,35 @@ void ExportMusicXml::write(QIODevice* dev)
                         prevMeasLineBreak = previousMeasure->lineBreak();
                         prevMeasPageBreak = previousMeasure->pageBreak();
                         }
-                  qDebug("measure %d system %p page %p currentsystem %d previous measure line/page break %d/%d",
-                         measureNo - 1, m->parent(), m->parent()->parent(),
-                         currentSystem, prevMeasLineBreak, prevMeasPageBreak);
 
                   if (currentSystem != NoSystem) {
 
-                        QString nw;
+                        // determine if a new-system or new-page is required
+                        QString newThing; // new-[system|page]="yes" or empty
                         if (preferences.musicxmlExportBreaks == ALL_BREAKS) {
                               if (currentSystem == NewSystem)
-                                    nw = " new-system=\"yes\"";
+                                    newThing = " new-system=\"yes\"";
                               else if (currentSystem == NewPage)
-                                    nw = " new-page=\"yes\"";
+                                    newThing = " new-page=\"yes\"";
                               }
                         else if (preferences.musicxmlExportBreaks == MANUAL_BREAKS) {
                               if (currentSystem == NewSystem && prevMeasLineBreak)
-                                    nw = " new-system=\"yes\"";
+                                    newThing = " new-system=\"yes\"";
                               else if (currentSystem == NewPage && prevMeasPageBreak)
-                                    nw = " new-page=\"yes\"";
+                                    newThing = " new-page=\"yes\"";
                               }
 
-                        if (preferences.musicxmlExportLayout)
-                              xml.stag(QString("print%1").arg(nw));
-                        else {
-                              if (nw != "")
-                                    xml.tagE(QString("print%1").arg(nw));
-                              }
-
+                        // determine if layout information is required
+                        bool doLayout = false;
                         if (preferences.musicxmlExportLayout) {
+                              if (currentSystem == TopSystem
+                                  || (preferences.musicxmlExportBreaks == ALL_BREAKS && newThing != "")) {
+                                    doLayout = true;
+                                    }
+                              }
+
+                        if (doLayout) {
+                              xml.stag(QString("print%1").arg(newThing));
                               const double pageWidth  = getTenthsFromInches(pf->size().width());
                               const double lm = getTenthsFromInches(pf->oddLeftMargin());
                               const double rm = getTenthsFromInches(pf->oddRightMargin());
@@ -3500,7 +3510,7 @@ void ExportMusicXml::write(QIODevice* dev)
 
                                     if (currentSystem == NewPage || currentSystem == TopSystem)
                                           xml.tag("top-system-distance", QString("%1").arg(QString::number(getTenthsFromDots(m->pagePos().y()) - tm,'f',2)) );
-                                    else if (currentSystem == NewSystem)
+                                    if (currentSystem == NewSystem)
                                           xml.tag("system-distance", QString("%1").arg(QString::number(getTenthsFromDots(m->pagePos().y() - previousMeasure->pagePos().y() - previousMeasure->bbox().height()),'f',2)));
 
                                     xml.etag();
@@ -3514,7 +3524,13 @@ void ExportMusicXml::write(QIODevice* dev)
                                     }
 
                               xml.etag();
-                              } // if (preferences.musicxmlExportLayout ...
+                              }
+                        else {
+                              // !doLayout
+                              if (newThing != "")
+                                    xml.tagE(QString("print%1").arg(newThing));
+                              }
+
                         } // if (currentSystem ...
 
                   attr.start();
