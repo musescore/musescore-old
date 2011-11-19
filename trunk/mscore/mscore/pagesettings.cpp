@@ -174,7 +174,7 @@ void PageSettings::updateValues()
             evenPageLeftMargin->setValue(pf->evenLeftMargin() * INCH);
             evenPageRightMargin->setValue(pf->evenRightMargin() * INCH);
 
-            spatiumEntry->setValue(cs->spatium()/DPMM);
+            spatiumEntry->setValue(sc->spatium()/DPMM);
             pageHeight->setValue(pf->size().height() * INCH);
             widthValue          *= INCH;
             }
@@ -189,7 +189,7 @@ void PageSettings::updateValues()
             evenPageLeftMargin->setValue(pf->evenLeftMargin());
             evenPageRightMargin->setValue(pf->evenRightMargin());
 
-            spatiumEntry->setValue(cs->spatium()/DPI);
+            spatiumEntry->setValue(sc->spatium()/DPI);
             pageHeight->setValue(pf->size().height());
             }
       pageWidth->setValue(widthValue);
@@ -450,7 +450,9 @@ void PageSettings::ebmChanged(double val)
 void PageSettings::spatiumChanged(double val)
       {
       val *= mmUnit ? DPMM : DPI;
+      double oldVal = preview->score()->spatium();
       preview->score()->setSpatium(val);
+      preview->score()->spatiumChanged(oldVal, val);
       updatePreview(0);
       }
 
