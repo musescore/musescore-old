@@ -38,7 +38,8 @@ Lyrics::Lyrics(const Lyrics& l)
    : Text(l)
       {
       _no  = l._no;
-      setTextStyle(l.textStyle());
+      if (styled())
+            setTextStyle(l.textStyle());
       _ticks = l._ticks;
       _syllabic = l._syllabic;
       if (l._verseNumber)
@@ -204,11 +205,11 @@ QPointF Lyrics::pagePos() const
 
 void Lyrics::layout()
       {
-      if (!styled())
+      if (styled())
             setTextStyle((_no % 2) ? TEXT_STYLE_LYRIC2 : TEXT_STYLE_LYRIC1);
       Text::layout();
       qreal lh             = lineSpacing() * score()->styleD(ST_lyricsLineHeight);
-      // qreal noteHeadWidth2 = symbols[score()->symIdx()][quartheadSym].width(magS()) * .5;
+      qreal noteHeadWidth2 = symbols[score()->symIdx()][quartheadSym].width(magS()) * .5;
 
       System* sys = measure()->system();
       if (sys == 0) {
@@ -224,12 +225,10 @@ void Lyrics::layout()
       //
       // left align if syllable has a number
       //
-#if 0
       if (_ticks == 0 && (style().align() & ALIGN_HCENTER) && !_verseNumber)
-            x = noteHeadWidth2 - bbox().width() * .5;
-      else
             x = 0.0;
-#endif
+      else
+            x = noteHeadWidth2 - bbox().width() * .5;
       setPos(x, y);
       if (_verseNumber)
             _verseNumber->layout();
