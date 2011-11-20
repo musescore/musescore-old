@@ -1857,7 +1857,6 @@ void Score::layoutPages()
                   else
                         tmargin = qMax(sr.tm(), sub);
                   lastSystem = 0;
-                  prevDist = 0;
                   }
 
             qreal x = page->lm();

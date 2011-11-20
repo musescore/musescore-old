@@ -343,6 +343,7 @@ void System::layout2()
                   }
             if (distDown > s->distanceDown())
                   s->setDistanceDown(distDown);
+
             s->setDistanceUp(distUp);     // TODO: min?
 
             if (!s->show()) {

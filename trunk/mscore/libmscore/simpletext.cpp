@@ -227,7 +227,7 @@ void SimpleText::layout()
       QPointF p;
       int _align = s.align();
       if (_align & ALIGN_BOTTOM)
-            p.setY(ph - height());
+            p.setY(ph);
       else if (_align & ALIGN_VCENTER)
             p.setY((ph - height()) * .5);
       else if (_align & ALIGN_BASELINE)
