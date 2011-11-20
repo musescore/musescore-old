@@ -176,8 +176,8 @@ void Lyrics::remove(Element* el)
 
 void Lyrics::draw(QPainter* painter) const
       {
-      painter->setPen(curColor());
       Text::draw(painter);
+      painter->setPen(curColor());
       foreach(const Line* l, _separator) {
             painter->translate(l->pos());
             l->draw(painter);
@@ -205,10 +205,10 @@ QPointF Lyrics::pagePos() const
 void Lyrics::layout()
       {
       if (!styled())
-            _textStyle = (_no % 2) ? TEXT_STYLE_LYRIC2 : TEXT_STYLE_LYRIC1;
+            setTextStyle((_no % 2) ? TEXT_STYLE_LYRIC2 : TEXT_STYLE_LYRIC1);
       Text::layout();
       qreal lh             = lineSpacing() * score()->styleD(ST_lyricsLineHeight);
-      qreal noteHeadWidth2 = symbols[score()->symIdx()][quartheadSym].width(magS()) * .5;
+      // qreal noteHeadWidth2 = symbols[score()->symIdx()][quartheadSym].width(magS()) * .5;
 
       System* sys = measure()->system();
       if (sys == 0) {
@@ -224,10 +224,12 @@ void Lyrics::layout()
       //
       // left align if syllable has a number
       //
-      if (_ticks == 0 && (align() & ALIGN_HCENTER) && !_verseNumber)
+#if 0
+      if (_ticks == 0 && (style().align() & ALIGN_HCENTER) && !_verseNumber)
             x = noteHeadWidth2 - bbox().width() * .5;
       else
             x = 0.0;
+#endif
       setPos(x, y);
       if (_verseNumber)
             _verseNumber->layout();
@@ -248,7 +250,8 @@ void Lyrics::paste()
       QStringList sl = txt.split(QRegExp("\\s+"), QString::SkipEmptyParts);
       if (sl.isEmpty())
             return;
-      cursor->insertText(sl[0]);
+
+      cursor()->insertText(sl[0]);
       layout();
       bool lo = (subtype() == TEXT_INSTRUMENT_SHORT) || (subtype() == TEXT_INSTRUMENT_LONG);
       score()->setLayoutAll(lo);
@@ -256,6 +259,7 @@ void Lyrics::paste()
       score()->end();
       sl.removeFirst();
       txt = sl.join(" ");
+
       QApplication::clipboard()->setText(txt, mode);
       }
 

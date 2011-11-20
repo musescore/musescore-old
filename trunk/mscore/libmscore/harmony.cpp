@@ -382,17 +382,15 @@ bool Harmony::edit(MuseScoreView* view, int grip, int key, Qt::KeyboardModifiers
             QTextCharFormat tf;
             tf.setUnderlineStyle(QTextCharFormat::SpellCheckUnderline);
             tf.setUnderlineColor(Qt::red);
-            QTextCursor c(doc());
-            c.movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
-            c.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
-            c.setCharFormat(tf);
+            cursor()->movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
+            cursor()->movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
+            cursor()->setCharFormat(tf);
             }
       else {
             QTextCharFormat tf;
-            QTextCursor c(doc());
-            c.movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
-            c.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
-            c.setCharFormat(tf);
+            cursor()->movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
+            cursor()->movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
+            cursor()->setCharFormat(tf);
             }
       return rv;
       }
@@ -522,7 +520,7 @@ const ChordDescription* Harmony::descr() const
 
 bool Harmony::isEmpty() const
       {
-      return textList.isEmpty() && doc()->isEmpty();
+      return textList.isEmpty() && Text::isEmpty();
       }
 
 //---------------------------------------------------------
@@ -718,7 +716,7 @@ void Harmony::render(const TextStyle* st)
             return;
 
       if (st == 0)
-            st = &score()->textStyle(_textStyle);
+            st = &score()->textStyle(textStyle());
       ChordList* chordList = score()->style()->chordList();
 
       fontList.clear();

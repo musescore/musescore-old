@@ -1171,7 +1171,21 @@ bool TextStyle::italic() const                            { return d->italic; }
 bool TextStyle::underline() const                         { return d->underline; }
 bool TextStyle::hasFrame() const                          { return d->hasFrame; }
 Align TextStyle::align() const                            { return d->align(); }
-const QPointF& TextStyle::offset() const                  { return d->offset(); }
+
+//---------------------------------------------------------
+//   offset
+//---------------------------------------------------------
+
+const QPointF& TextStyle::offset() const
+      {
+      return d->offset();
+      }
+
+QPointF TextStyle::offset(qreal spatium) const
+      {
+      return d->offset(spatium);
+      }
+
 OffsetType TextStyle::offsetType() const                  { return d->offsetType(); }
 bool TextStyle::sizeIsSpatiumDependent() const            { return d->sizeIsSpatiumDependent; }
 qreal TextStyle::frameWidth()  const                     { return d->frameWidth; }
@@ -1209,7 +1223,16 @@ QFont TextStyle::fontPx(qreal spatium) const              { return d->fontPx(spa
 QRectF TextStyle::bbox(qreal sp, const QString& s) const  { return d->bbox(sp, s); }
 QFontMetricsF TextStyle::fontMetrics(qreal space) const   { return d->fontMetrics(space); }
 bool TextStyle::operator!=(const TextStyle& s) const      { return d->operator!=(*s.d); }
-void TextStyle::layout(Element* e) const                  { d->layout(e);    }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void TextStyle::layout(Element* e) const
+      {
+      d->layout(e);
+      }
+
 void TextStyle::writeProperties(Xml& xml) const           { d->writeProperties(xml); }
 const QPointF& TextStyle::reloff() const                  { return d->reloff();      }
 void TextStyle::setReloff(const QPointF& p)               { setRxoff(p.x()), setRyoff(p.y()); }

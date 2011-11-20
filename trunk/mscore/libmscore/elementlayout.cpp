@@ -28,6 +28,20 @@ ElementLayout::ElementLayout()
       }
 
 //---------------------------------------------------------
+//   offset
+//---------------------------------------------------------
+
+QPointF ElementLayout::offset(qreal spatium) const
+      {
+      QPointF o(_offset);
+      if (_offsetType == OFFSET_SPATIUM)
+            o *= spatium;
+      else
+            o *= DPI;
+      return o;
+      }
+
+//---------------------------------------------------------
 //   layout
 //    height() and width() should return sensible
 //    values when calling this method
@@ -35,13 +49,9 @@ ElementLayout::ElementLayout()
 
 void ElementLayout::layout(Element* e) const
       {
-      QPointF o(_offset);
-      if (_offsetType == OFFSET_SPATIUM)
-            o *= e->spatium();
-      else
-            o *= DPI;
-      qreal h = 0.0;
+      QPointF o(offset(e->spatium()));
       qreal w = 0.0;
+      qreal h = 0.0;
       if (e->parent()) {
             qreal pw, ph;
             if ((e->type() == MARKER || e->type() == JUMP) && e->parent()->parent()) {

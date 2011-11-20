@@ -60,6 +60,7 @@ class TextStyle {
       Align align() const;
       OffsetType offsetType() const;
       const QPointF& offset() const;
+      QPointF offset(qreal spatium) const;
       const QPointF& reloff() const;
       void setReloff(const QPointF& p);
       bool sizeIsSpatiumDependent() const;

@@ -64,7 +64,7 @@ void TempoText::read(QDomElement e)
             // Reset text in old version to
             // style.
             //
-            if (_textStyle != TEXT_STYLE_INVALID) {
+            if (textStyle() != TEXT_STYLE_INVALID) {
                   setStyled(true);
                   styleChanged();
                   }

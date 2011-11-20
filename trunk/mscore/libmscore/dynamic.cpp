@@ -70,6 +70,7 @@ Dynamic::Dynamic(Score* s)
       _velocity = -1;
       setTextStyle(TEXT_STYLE_DYNAMICS);
       _dynType  = DYNAMIC_PART;
+      setStyled(false);
       }
 
 Dynamic::Dynamic(const Dynamic& d)
@@ -78,6 +79,7 @@ Dynamic::Dynamic(const Dynamic& d)
       setSubtype(subtype());
       _velocity = d._velocity;
       _dynType  = d._dynType;
+      setStyled(false);
       }
 
 //---------------------------------------------------------
@@ -142,10 +144,10 @@ void Dynamic::setSubtype(int idx)
       {
       Element::setSubtype(idx);
       if (idx) {
-            doc()->clear();
-            QTextCursor cursor(doc());
-            cursor.movePosition(QTextCursor::Start);
-            QTextCharFormat tf = cursor.charFormat();
+            clear();
+            QTextCursor* cursor = startCursorEdit();
+            cursor->movePosition(QTextCursor::Start);
+            QTextCharFormat tf = cursor->charFormat();
             const TextStyle& ts = score()->textStyle(TEXT_STYLE_DYNAMICS);
             qreal size = ts.size();
             qreal m = size;
@@ -159,8 +161,9 @@ void Dynamic::setSubtype(int idx)
             font.setStyleStrategy(QFont::NoFontMerging);
             tf.setFont(font);
             tf.setProperty(QTextFormat::FontKerning, true);
-            cursor.setBlockCharFormat(tf);
-            cursor.insertText(dynList[idx].tag);
+            cursor->setBlockCharFormat(tf);
+            cursor->insertText(dynList[idx].tag);
+            endEdit();
             }
       }
 

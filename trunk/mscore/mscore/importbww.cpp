@@ -126,12 +126,14 @@ static void setTempo(Score* score, int tempo)
       TempoText* tt = new TempoText(score);
       tt->setTempo(double(tempo)/60.0);
       tt->setTrack(0);
-      QTextDocument* d = tt->doc();
-      QTextCursor c(d);
-      c.movePosition(QTextCursor::EndOfLine);
-      addSymbolToText(SymCode(0xe105, 1), &c);
-      c.insertText(" = ");
-      c.insertText(QString("%1").arg(tempo));
+
+      QTextCursor* c = tt->startCursorEdit();
+      c->movePosition(QTextCursor::EndOfLine);
+      addSymbolToText(SymCode(0xe105, 1), c);
+      c->insertText(" = ");
+      c->insertText(QString("%1").arg(tempo));
+      tt->endEdit();
+
       Measure* measure = score->firstMeasure();
       Segment* segment = measure->getSegment(SegChordRest, 0);
       segment->add(tt);

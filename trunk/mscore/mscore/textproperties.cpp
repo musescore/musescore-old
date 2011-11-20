@@ -90,7 +90,7 @@ void TextProperties::accept()
       if (tp->isStyled() != text->styled() || tp->isStyled()) {
             // text->setTextStyle(tp->textStyleType());  // this sets styled = true
 
-            text->_textStyle = tp->textStyleType();
+            text->setTextStyle(tp->textStyleType());
             text->setStyled(tp->isStyled());
             text->styleChanged();
             }

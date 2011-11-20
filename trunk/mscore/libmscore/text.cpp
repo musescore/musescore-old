@@ -29,45 +29,50 @@
 QReadWriteLock docRenderLock;
 
 //---------------------------------------------------------
-//   Text
+//   createDoc
 //---------------------------------------------------------
 
-Text::Text(Score* s)
-   : Element(s)
+void Text::createDoc()
       {
       _doc = new QTextDocument(0);
       _doc->setDocumentMargin(1.0);
       _doc->setUseDesignMetrics(true);
       _doc->setUndoRedoEnabled(true);
       _doc->documentLayout()->setProperty("cursorWidth", QVariant(2));
-
       QTextOption to = _doc->defaultTextOption();
       to.setUseDesignMetrics(true);
       to.setWrapMode(QTextOption::NoWrap);
       _doc->setDefaultTextOption(to);
+      _doc->setDefaultFont(style().font(spatium()));
+      }
 
+//---------------------------------------------------------
+//   Text
+//---------------------------------------------------------
+
+Text::Text(Score* s)
+   : SimpleText(s)
+      {
+      _doc       = 0;
       _editMode  = false;
       cursorPos  = 0;
-      cursor     = 0;
+      _cursor    = 0;
       setFlag(ELEMENT_MOVABLE, true);
-      _textStyle = TEXT_STYLE_INVALID;
-      _styled    = false;
-      _layoutToParentWidth = false;
+      _styled    = true;
       setSubtype(0);
       }
 
 Text::Text(const Text& e)
-   : Element(e)
+   : SimpleText(e)
       {
-      _doc                  = e._doc->clone();
+      if (_doc)
+            _doc = e._doc->clone();
       frame                 = e.frame;
       _styled               = e._styled;
       _editMode             = e._editMode;
-      cursor                = 0;
+      _cursor               = 0;
       cursorPos             = e.cursorPos;
       _localStyle           = e._localStyle;
-      _textStyle            = e._textStyle;
-      _layoutToParentWidth  = e._layoutToParentWidth;
       }
 
 Text::~Text()
@@ -83,14 +88,29 @@ void Text::setText(const QString& s)
       {
       if (s.isEmpty())
             return;
+      if (_styled) {
+            SimpleText::setText(s);
+            textChanged();
+            return;
+            }
+      setUnstyledText(s);
+      textChanged();
+      }
+
+//---------------------------------------------------------
+//   setUnstyledText
+//---------------------------------------------------------
+
+void Text::setUnstyledText(const QString& s)
+      {
       Align align = style().align();
       _doc->clear();
       QFont font(style().font(spatium()));
       _doc->setDefaultFont(font);
 
-      QTextCursor cursor(_doc);
-      cursor.setVisualNavigation(true);
-      cursor.movePosition(QTextCursor::Start);
+      QTextCursor c(_doc);
+      c.setVisualNavigation(true);
+      c.movePosition(QTextCursor::Start);
       Qt::Alignment a;
       if (align & ALIGN_HCENTER)
             a = Qt::AlignHCenter;
@@ -98,15 +118,14 @@ void Text::setText(const QString& s)
             a = Qt::AlignRight;
       else
             a = Qt::AlignLeft;
-      QTextBlockFormat bf = cursor.blockFormat();
+      QTextBlockFormat bf = c.blockFormat();
       bf.setAlignment(a);
-      cursor.setBlockFormat(bf);
+      c.setBlockFormat(bf);
 
-      QTextCharFormat tf = cursor.charFormat();
+      QTextCharFormat tf = c.charFormat();
       tf.setFont(font);
-      cursor.setBlockCharFormat(tf);
-      cursor.insertText(s);
-      textChanged();
+      c.setBlockCharFormat(tf);
+      c.insertText(s);
       }
 
 void Text::setText(const QTextDocumentFragment& f)
@@ -120,6 +139,7 @@ void Text::setText(const QTextDocumentFragment& f)
 
 void Text::setHtml(const QString& s)
       {
+      setStyled(false);
       _doc->clear();
       _doc->setHtml(s);
       textChanged();
@@ -131,7 +151,7 @@ void Text::setHtml(const QString& s)
 
 QString Text::getText() const
       {
-      return _doc->toPlainText();
+      return _styled ? SimpleText::getText() : _doc->toPlainText();
       }
 
 //---------------------------------------------------------
@@ -140,7 +160,7 @@ QString Text::getText() const
 
 QString Text::getHtml() const
       {
-      return _doc->toHtml("utf-8");
+      return _styled ? "" : _doc->toHtml("utf-8");
       }
 
 //---------------------------------------------------------
@@ -153,117 +173,21 @@ void Text::setAbove(bool val)
       }
 
 //---------------------------------------------------------
-//   subtypeName
-//---------------------------------------------------------
-
-const QString Text::subtypeName() const
-      {
-      switch (subtype()) {
-            case TEXT_TITLE:            return "Title";
-            case TEXT_SUBTITLE:         return "Subtitle";
-            case TEXT_COMPOSER:         return "Composer";
-            case TEXT_POET:             return "Poet";
-            case TEXT_TRANSLATOR:       return "Translator";
-            case TEXT_MEASURE_NUMBER:   return "MeasureNumber";
-            case TEXT_FINGERING:        return "Fingering";
-            case TEXT_INSTRUMENT_LONG:  return "InstrumentLong";
-            case TEXT_INSTRUMENT_SHORT: return "InstrumentShort";
-            case TEXT_INSTRUMENT_EXCERPT: return "InstrumentExcerpt";
-            case TEXT_TEMPO:            return "Tempo";
-            case TEXT_LYRIC:            return "Lyric";
-            case TEXT_FIGURED_BASS:     return "FiguredBass";
-            case TEXT_TUPLET:           return "Tuplet";
-            case TEXT_SYSTEM:           return "System";
-            case TEXT_STAFF:            return "Staff";
-            case TEXT_CHORD:            return "";     // "Chordname";
-            case TEXT_REHEARSAL_MARK:   return "RehearsalMark";
-            case TEXT_REPEAT:           return "Repeat";
-            case TEXT_VOLTA:            return "Volta";
-            case TEXT_FRAME:            return "Frame";
-            case TEXT_TEXTLINE:         return "TextLine";
-            case TEXT_STRING_NUMBER:    return "StringNumber";
-            case TEXT_INSTRUMENT_CHANGE: return "InstrumentChange";
-            case TEXT_LYRICS_VERSE_NUMBER: return "LyricsVerseNumber";
-            default:
-                  qDebug("Text:subtypeName: unknown text(%s) subtype %d", name(), subtype());
-                  break;
-            }
-      return "?";
-      }
-
-//---------------------------------------------------------
-//   setSubtype
-//---------------------------------------------------------
-
-void Text::setSubtype(const QString& s)
-      {
-      int st = 0;
-      if (s == "Title")
-            st = TEXT_TITLE;
-      else if (s == "Subtitle")
-            st = TEXT_SUBTITLE;
-      else if (s == "Composer")
-            st = TEXT_COMPOSER;
-      else if (s == "Poet")
-            st = TEXT_POET;
-      else if (s == "Translator")
-            st = TEXT_TRANSLATOR;
-      else if (s == "MeasureNumber")
-            st = TEXT_MEASURE_NUMBER;
-      else if (s == "Fingering")
-            st = TEXT_FINGERING;
-      else if (s == "InstrumentLong")
-            st = TEXT_INSTRUMENT_LONG;
-      else if (s == "InstrumentShort")
-            st = TEXT_INSTRUMENT_SHORT;
-      else if (s == "InstrumentExcerpt")
-            st = TEXT_INSTRUMENT_EXCERPT;
-      else if (s == "Tempo")
-            st = TEXT_TEMPO;
-      else if (s == "Lyric")
-            st = TEXT_LYRIC;
-      else if (s == "FiguredBass")
-            st = TEXT_FIGURED_BASS;
-      else if (s == "Tuplet")
-            st = TEXT_TUPLET;
-      else if (s == "System")
-            st = TEXT_SYSTEM;
-      else if (s == "Staff")
-            st = TEXT_STAFF;
-      else if (s == "Chordname")
-            st = TEXT_CHORD;
-      else if (s == "RehearsalMark")
-            st = TEXT_REHEARSAL_MARK;
-      else if (s == "Repeat")
-            st = TEXT_REPEAT;
-      else if (s == "Volta")
-            st = TEXT_VOLTA;
-      else if (s == "Frame")
-            st = TEXT_FRAME;
-      else if (s == "TextLine")
-            st = TEXT_TEXTLINE;
-      else if (s == "StringNumber")
-            st = TEXT_STRING_NUMBER;
-      else if (s == "InstrumentChange")
-            st = TEXT_INSTRUMENT_CHANGE;
-      else if (s == "LyricsVerseNumber")
-            st = TEXT_LYRICS_VERSE_NUMBER;
-      else
-            qDebug("Text(%s): setSubtype: unknown type <%s>", name(), qPrintable(s));
-      setSubtype(st);
-      }
-
-//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
 void Text::layout()
       {
-      _doc->setDefaultFont(style().font(score()->spatium()));
+      if (_styled && !_editMode) {
+            SimpleText::layout();
+            adjustReadPos();
+            return;
+            }
+      _doc->setDefaultFont(style().font(spatium()));
       qreal w = -1.0;
       qreal x = 0.0;
       qreal y = 0.0;
-      if (parent() && _layoutToParentWidth) {
+      if (parent() && layoutToParentWidth()) {
             w = parent()->width();
             if (parent()->type() == HBOX || parent()->type() == VBOX || parent()->type() == TBOX) {
                   Box* box = static_cast<Box*>(parent());
@@ -376,17 +300,21 @@ QRectF Text::pageRectangle() const
 
 void Text::draw(QPainter* painter) const
       {
+      if (_styled && !_editMode) {
+            SimpleText::draw(painter);
+            return;
+            }
       QAbstractTextDocumentLayout::PaintContext c;
       c.cursorPosition = -1;
-      if (cursor && !(score() && score()->printing())) {
-            if (cursor->hasSelection()) {
+      if (_cursor && !(score() && score()->printing())) {
+            if (_cursor->hasSelection()) {
                   QAbstractTextDocumentLayout::Selection selection;
-                  selection.cursor = *cursor;
+                  selection.cursor = *_cursor;
                   selection.format.setBackground(c.palette.brush(QPalette::Active, QPalette::Highlight));
                   selection.format.setForeground(c.palette.brush(QPalette::Active, QPalette::HighlightedText));
                   c.selections.append(selection);
                   }
-            c.cursorPosition = cursor->position();
+            c.cursorPosition = _cursor->position();
             }
 
       QColor color;
@@ -451,30 +379,14 @@ void Text::draw(QPainter* painter) const
 
 void Text::setTextStyle(TextStyleType idx)
       {
-      _textStyle = idx;
-      if (_textStyle != TEXT_STYLE_INVALID) {
-            _localStyle = score()->textStyle(_textStyle);
+      SimpleText::setTextStyle(idx);
+      if (idx != TEXT_STYLE_INVALID) {
+            _localStyle = score()->textStyle(textStyle());
             setText(getText());      // init style
             _styled = true;
             }
       else
             _styled = false;
-      }
-
-//---------------------------------------------------------
-//   setStyled
-//---------------------------------------------------------
-
-void Text::setStyled(bool v)
-      {
-      if (_styled != v) {
-            _styled = v;
-            if (_styled) {
-                  if (_textStyle == TEXT_STYLE_INVALID)
-                        _textStyle = TEXT_STYLE_STAFF;
-                  }
-            setSystemFlag(style().systemFlag());
-            }
       }
 
 //---------------------------------------------------------
@@ -492,7 +404,7 @@ void Text::write(Xml& xml) const
 
 void Text::write(Xml& xml, const char* name) const
       {
-      if (doc()->isEmpty())
+      if (isEmpty())
             return;
       xml.stag(name);
       writeProperties(xml, true);
@@ -514,7 +426,7 @@ void Text::read(QDomElement e)
             // Reset text in old version to
             // style.
             //
-            if (_textStyle != TEXT_STYLE_INVALID) {
+            if (textStyle() != TEXT_STYLE_INVALID) {
                   _styled = true;
                   styleChanged();
                   }
@@ -529,7 +441,7 @@ void Text::read(QDomElement e)
 void Text::writeProperties(Xml& xml, bool writeText) const
       {
       if (_styled)
-            xml.tag("style", score()->textStyle(_textStyle).name());
+            xml.tag("style", score()->textStyle(textStyle()).name());
       Element::writeProperties(xml);
       if (!_styled)
             _localStyle.writeProperties(xml);
@@ -552,8 +464,8 @@ void Text::writeProperties(Xml& xml, bool writeText) const
 
 bool Text::readProperties(QDomElement e)
       {
-      QString tag(e.tagName());
-      QString val(e.text());
+      const QString& tag(e.tagName());
+      const QString& val(e.text());
 
       if (tag == "style") {
             bool ok;
@@ -687,16 +599,16 @@ qDebug("Text::spatiumChanged %d  -- %s %s %p %f\n",
       if (!sizeIsSpatiumDependent())
             return;
       qreal v = newVal / oldVal;
-      QTextCursor cursor(_doc);
-      cursor.movePosition(QTextCursor::Start);
+      QTextCursor c(_doc);
+      c.movePosition(QTextCursor::Start);
       for (;;) {
-            cursor.select(QTextCursor::BlockUnderCursor);
-            QTextCharFormat cf = cursor.charFormat();
+            c.select(QTextCursor::BlockUnderCursor);
+            QTextCharFormat cf = c.charFormat();
             QFont font = cf.font();
             font.setPointSizeF(font.pointSizeF() * v);
             cf.setFont(font);
-            cursor.setCharFormat(cf);
-            if (!cursor.movePosition(QTextCursor::NextBlock))
+            c.setCharFormat(cf);
+            if (!c.movePosition(QTextCursor::NextBlock))
                   break;
             }
       }
@@ -707,15 +619,20 @@ qDebug("Text::spatiumChanged %d  -- %s %s %p %f\n",
 
 void Text::startEdit(MuseScoreView*, const QPointF& p)
       {
-      cursor = new QTextCursor(doc());
-      cursor->setVisualNavigation(true);
-      cursor->setPosition(cursorPos);
       _editMode = true;
+      if (_styled) {
+            createDoc();
+            setUnstyledText(SimpleText::getText());
+            layout();
+            }
+      _cursor = new QTextCursor(_doc);
+      _cursor->setVisualNavigation(true);
+      _cursor->setPosition(cursorPos);
       setCursor(p);
-      cursorPos = cursor->position();
+      cursorPos = _cursor->position();
 
       if (cursorPos == 0 && align()) {
-            QTextBlockFormat bf = cursor->blockFormat();
+            QTextBlockFormat bf = _cursor->blockFormat();
             Qt::Alignment alignment = 0;
             if (align() & ALIGN_HCENTER)
                   alignment |= Qt::AlignHCenter;
@@ -739,8 +656,8 @@ bool Text::edit(MuseScoreView*, int /*grip*/, int key, Qt::KeyboardModifiers mod
       {
       if (debugMode)
             qDebug("Text::edit(%p) key 0x%x mod 0x%x\n", this, key, int(modifiers));
-      if (!_editMode || !cursor) {
-            qDebug("Text::edit(%p): not in edit mode: %d %p\n", this, _editMode, cursor);
+      if (!_editMode || !_cursor) {
+            qDebug("Text::edit(%p): not in edit mode: %d %p\n", this, _editMode, _cursor);
             return false;
             }
       bool lo = (subtype() == TEXT_INSTRUMENT_SHORT) || (subtype() == TEXT_INSTRUMENT_LONG);
@@ -751,48 +668,48 @@ bool Text::edit(MuseScoreView*, int /*grip*/, int key, Qt::KeyboardModifiers mod
       if (modifiers == Qt::ControlModifier) {
             switch (key) {
                   case Qt::Key_A:   // select all
-                        cursor->select(QTextCursor::Document);
+                        _cursor->select(QTextCursor::Document);
                         break;
                   case Qt::Key_B:   // toggle bold face
                         {
-                        QTextCharFormat f = cursor->charFormat();
+                        QTextCharFormat f = _cursor->charFormat();
                         f.setFontWeight(f.fontWeight() == QFont::Bold ? QFont::Normal : QFont::Bold);
-                        cursor->setCharFormat(f);
+                        _cursor->setCharFormat(f);
                         }
                         break;
                   case Qt::Key_I:   // toggle italic
                         {
-                        QTextCharFormat f = cursor->charFormat();
+                        QTextCharFormat f = _cursor->charFormat();
                         f.setFontItalic(!f.fontItalic());
-                        cursor->setCharFormat(f);
+                        _cursor->setCharFormat(f);
                         }
                         break;
                   case Qt::Key_U:   // toggle underline
                         {
-                        QTextCharFormat f = cursor->charFormat();
+                        QTextCharFormat f = _cursor->charFormat();
                         f.setFontUnderline(!f.fontUnderline());
-                        cursor->setCharFormat(f);
+                        _cursor->setCharFormat(f);
                         }
                         break;
                   case Qt::Key_Up:
                         {
-                        QTextCharFormat f = cursor->charFormat();
+                        QTextCharFormat f = _cursor->charFormat();
                         if (f.verticalAlignment() == QTextCharFormat::AlignNormal)
                               f.setVerticalAlignment(QTextCharFormat::AlignSuperScript);
                         else if (f.verticalAlignment() == QTextCharFormat::AlignSubScript)
                               f.setVerticalAlignment(QTextCharFormat::AlignNormal);
-                        cursor->setCharFormat(f);
+                        _cursor->setCharFormat(f);
                         }
                         break;
 
                   case Qt::Key_Down:
                         {
-                        QTextCharFormat f = cursor->charFormat();
+                        QTextCharFormat f = _cursor->charFormat();
                         if (f.verticalAlignment() == QTextCharFormat::AlignNormal)
                               f.setVerticalAlignment(QTextCharFormat::AlignSubScript);
                         else if (f.verticalAlignment() == QTextCharFormat::AlignSuperScript)
                               f.setVerticalAlignment(QTextCharFormat::AlignNormal);
-                        cursor->setCharFormat(f);
+                        _cursor->setCharFormat(f);
                         }
                         break;
                   }
@@ -811,54 +728,54 @@ bool Text::edit(MuseScoreView*, int /*grip*/, int key, Qt::KeyboardModifiers mod
          ? QTextCursor::KeepAnchor : QTextCursor::MoveAnchor;
       switch (key) {
             case Qt::Key_Return:
-                  cursor->insertText(QString("\r"));
+                  _cursor->insertText(QString("\r"));
                   break;
 
             case Qt::Key_Backspace:
-                  cursor->deletePreviousChar();
+                  _cursor->deletePreviousChar();
                   break;
 
             case Qt::Key_Delete:
-                  cursor->deleteChar();
+                  _cursor->deleteChar();
                   break;
 
             case Qt::Key_Left:
-                  if (!cursor->movePosition(QTextCursor::Left, mm) && (type() == LYRICS || type() == FIGURED_BASS))
+                  if (!_cursor->movePosition(QTextCursor::Left, mm) && (type() == LYRICS || type() == FIGURED_BASS))
                         return false;
                   break;
 
             case Qt::Key_Right:
-                  if (!cursor->movePosition(QTextCursor::Right, mm) && (type() == LYRICS || type() == FIGURED_BASS))
+                  if (!_cursor->movePosition(QTextCursor::Right, mm) && (type() == LYRICS || type() == FIGURED_BASS))
                         return false;
                   break;
 
             case Qt::Key_Up:
-                  cursor->movePosition(QTextCursor::Up, mm);
+                  _cursor->movePosition(QTextCursor::Up, mm);
                   break;
 
             case Qt::Key_Down:
-                  cursor->movePosition(QTextCursor::Down, mm);
+                  _cursor->movePosition(QTextCursor::Down, mm);
                   break;
 
             case Qt::Key_Home:
-                  cursor->movePosition(QTextCursor::Start, mm);
+                  _cursor->movePosition(QTextCursor::Start, mm);
                   break;
 
             case Qt::Key_End:
-                  cursor->movePosition(QTextCursor::End, mm);
+                  _cursor->movePosition(QTextCursor::End, mm);
                   break;
 
             case Qt::Key_Space:
-                  cursor->insertText(" ");
+                  _cursor->insertText(" ");
                   break;
 
             case Qt::Key_Minus:
-                  cursor->insertText("-");
+                  _cursor->insertText("-");
                   break;
 
             default:
                   if (!s.isEmpty())
-                        cursor->insertText(s);
+                        _cursor->insertText(s);
                   break;
             }
       if (key == Qt::Key_Return || key == Qt::Key_Space || key == Qt::Key_Tab) {
@@ -889,7 +806,7 @@ bool Text::edit(MuseScoreView*, int /*grip*/, int key, Qt::KeyboardModifiers mod
 
 bool Text::replaceSpecialChars()
       {
-      QTextCursor startCur = *cursor;
+      QTextCursor startCur = *_cursor;
       foreach (const char* s, charReplaceMap.keys()) {
             SymCode sym = *charReplaceMap.value(s);
             switch (sym.type) {
@@ -900,12 +817,12 @@ bool Text::replaceSpecialChars()
                   default:
                         ;
                   }
-            QTextCursor cur = doc()->find(s, cursor->position() - 1 - strlen(s),
+            QTextCursor cur = _doc->find(s, _cursor->position() - 1 - strlen(s),
                   QTextDocument::FindWholeWords);
             if (cur.isNull())
                   continue;
             // do not go beyond the cursor
-            if (cur.selectionEnd() > cursor->selectionEnd())
+            if (cur.selectionEnd() > _cursor->selectionEnd())
                   continue;
             addSymbol(sym, &cur);
             return true;
@@ -919,8 +836,8 @@ bool Text::replaceSpecialChars()
 
 void Text::moveCursorToEnd()
       {
-      if (cursor)
-            cursor->movePosition(QTextCursor::End);
+      if (_cursor)
+            _cursor->movePosition(QTextCursor::End);
       }
 
 //---------------------------------------------------------
@@ -929,26 +846,8 @@ void Text::moveCursorToEnd()
 
 void Text::moveCursor(int col)
       {
-      if (cursor)
-            cursor->setPosition(col);
-      }
-
-//---------------------------------------------------------
-//   endEdit
-//---------------------------------------------------------
-
-void Text::endEdit()
-      {
-      if (!_editMode || !cursor) {
-            qDebug("endEdit<%p>: not in edit mode or no cursor: %d %p\n", this, _editMode, cursor);
-            return;
-            }
-      cursorPos = cursor->position();
-
-      delete cursor;
-      cursor = 0;
-      _editMode = false;
-      textChanged();
+      if (_cursor)
+            _cursor->setPosition(col);
       }
 
 //---------------------------------------------------------
@@ -957,9 +856,11 @@ void Text::endEdit()
 
 QPainterPath Text::shape() const
       {
+      if (_styled)
+            return SimpleText::shape();
       QPainterPath pp;
 
-      for (QTextBlock tb = doc()->begin(); tb.isValid(); tb = tb.next()) {
+      for (QTextBlock tb = _doc->begin(); tb.isValid(); tb = tb.next()) {
             QTextLayout* tl = tb.layout();
             int n = tl->lineCount();
             for (int i = 0; i < n; ++i) {
@@ -979,7 +880,9 @@ QPainterPath Text::shape() const
 
 qreal Text::baseLine() const
       {
-      for (QTextBlock tb = doc()->begin(); tb.isValid(); tb = tb.next()) {
+      if (_styled)
+            return SimpleText::baseLine();
+      for (QTextBlock tb = _doc->begin(); tb.isValid(); tb = tb.next()) {
             const QTextLayout* tl = tb.layout();
             if (tl->lineCount())
                   return (tl->lineAt(0).ascent() + tl->position().y());
@@ -1013,7 +916,7 @@ qreal Text::lineHeight() const
 void Text::addSymbol(const SymCode& s, QTextCursor* cur)
       {
       if (cur == 0)
-            cur = cursor;
+            cur = _cursor;
       if (s.fontId >= 0) {
             QTextCharFormat nFormat(cur->charFormat());
             nFormat.setFontFamily(fontId2font(s.fontId).family());
@@ -1039,7 +942,7 @@ void Text::addSymbol(const SymCode& s, QTextCursor* cur)
 void Text::addChar(int code, QTextCursor* cur)
       {
       if (cur == 0)
-            cur = cursor;
+            cur = _cursor;
 
       QString ss;
       if (code & 0xffff0000) {
@@ -1059,9 +962,9 @@ void Text::addChar(int code, QTextCursor* cur)
 
 void Text::setBlockFormat(const QTextBlockFormat& bf)
       {
-      if (!cursor)
+      if (!_cursor)
             return;
-      cursor->setBlockFormat(bf);
+      _cursor->setBlockFormat(bf);
       score()->setLayoutAll(true);
       }
 
@@ -1075,13 +978,13 @@ bool Text::setCursor(const QPointF& p, QTextCursor::MoveMode mode)
       if (!bbox().contains(pt))
             return false;
 
-      int idx = doc()->documentLayout()->hitTest(pt, Qt::FuzzyHit);
+      int idx = _doc->documentLayout()->hitTest(pt, Qt::FuzzyHit);
       if (idx == -1)
             return true;
-      if (cursor) {
-            cursor->setPosition(idx, mode);
-            if (cursor->hasSelection())
-                  QApplication::clipboard()->setText(cursor->selectedText(), QClipboard::Selection);
+      if (_cursor) {
+            _cursor->setPosition(idx, mode);
+            if (_cursor->hasSelection())
+                  QApplication::clipboard()->setText(_cursor->selectedText(), QClipboard::Selection);
             }
       return true;
       }
@@ -1114,7 +1017,7 @@ void Text::paste()
 #endif
       if (debugMode)
             qDebug("Text::paste() <%s>\n", qPrintable(txt));
-      cursor->insertText(txt);
+      _cursor->insertText(txt);
       layout();
       bool lo = (subtype() == TEXT_INSTRUMENT_SHORT) || (subtype() == TEXT_INSTRUMENT_LONG);
       score()->setLayoutAll(lo);
@@ -1174,7 +1077,7 @@ void Text::dragTo(const QPointF& p)
 
 const TextStyle& Text::style() const
       {
-      return _styled ? score()->textStyle(_textStyle) : _localStyle;
+      return _styled ? score()->textStyle(textStyle()) : _localStyle;
       }
 
 //---------------------------------------------------------
@@ -1494,5 +1397,99 @@ void Text::setScore(Score* s)
 void Text::setFont(const QFont& f)
       {
       _localStyle.setFont(f);
+      }
+
+//---------------------------------------------------------
+//   clear
+//---------------------------------------------------------
+
+void Text::clear()
+      {
+      if (_styled)
+            SimpleText::clear();
+      else
+            _doc->clear();
+      }
+
+//---------------------------------------------------------
+//   setStyled
+//---------------------------------------------------------
+
+void Text::setStyled(bool val)
+      {
+      if (val == _styled)
+            return;
+      if (_styled) {
+            createDoc();
+            _localStyle = score()->textStyle(textStyle());
+            _styled = false;
+            }
+      else {
+            delete _doc;
+            _doc = 0;
+            _styled = true;
+            }
+      }
+
+//---------------------------------------------------------
+//   startCursorEdit
+//---------------------------------------------------------
+
+QTextCursor* Text::startCursorEdit()
+      {
+      if (_styled) {
+            qDebug("Text::startCursorEdit(): edit styled text\n");
+            return 0;
+            }
+      if (_cursor) {
+            qDebug("Text::startCursorEdit(): cursor already active\n");
+            return 0;
+            }
+      _cursor = new QTextCursor(_doc);
+      return _cursor;
+      }
+
+//---------------------------------------------------------
+//   endEdit
+//---------------------------------------------------------
+
+void Text::endEdit()
+      {
+      if (!_cursor) {
+            qDebug("endEdit<%p>: no cursor: edit mode %d %p\n", this, _editMode, _cursor);
+            return;
+            }
+      cursorPos = _cursor->position();
+
+      delete _cursor;
+      _cursor = 0;
+      _editMode = false;
+      if (_styled) {
+            QString s(_doc->toPlainText());
+            SimpleText::setText(s);
+            delete _doc;
+            _doc = 0;
+            layout();
+            }
+      textChanged();
+      }
+
+//---------------------------------------------------------
+//   isEmpty
+//---------------------------------------------------------
+
+bool Text::isEmpty() const
+      {
+      return _styled ? SimpleText::getText().isEmpty() : _doc->isEmpty();
+      }
+
+//---------------------------------------------------------
+//   setModified
+//---------------------------------------------------------
+
+void Text::setModified(bool v)
+      {
+      if (!_styled)
+            _doc->setModified(v);
       }
 

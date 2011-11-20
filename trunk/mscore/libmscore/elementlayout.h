@@ -41,6 +41,7 @@ class ElementLayout {
       qreal xOffset() const               { return _offset.x();   }
       qreal yOffset() const               { return _offset.y();   }
       const QPointF& offset() const       { return _offset;      }
+      QPointF offset(qreal) const;
       const QPointF& reloff() const       { return _reloff;       }
       void setReloff(const QPointF& val)  { _reloff = val;        }
       void setAlign(Align val)            { _align  = val;        }
