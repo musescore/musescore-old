@@ -65,14 +65,16 @@ Text::Text(Score* s)
 Text::Text(const Text& e)
    : SimpleText(e)
       {
-      if (_doc)
+      if (e._doc)
             _doc = e._doc->clone();
-      frame                 = e.frame;
-      _styled               = e._styled;
-      _editMode             = e._editMode;
-      _cursor               = 0;
-      cursorPos             = e.cursorPos;
-      _localStyle           = e._localStyle;
+      else
+            _doc = 0;
+      frame       = e.frame;
+      _styled     = e._styled;
+      _editMode   = false;
+      _cursor     = 0;
+      cursorPos   = e.cursorPos;
+      _localStyle = e._localStyle;
       }
 
 Text::~Text()
@@ -88,12 +90,10 @@ void Text::setText(const QString& s)
       {
       if (s.isEmpty())
             return;
-      if (_styled) {
+      if (_styled)
             SimpleText::setText(s);
-            textChanged();
-            return;
-            }
-      setUnstyledText(s);
+      else
+            setUnstyledText(s);
       textChanged();
       }
 
@@ -383,10 +383,10 @@ void Text::setTextStyle(TextStyleType idx)
       if (idx != TEXT_STYLE_INVALID) {
             _localStyle = score()->textStyle(textStyle());
             setText(getText());      // init style
-            _styled = true;
+            setStyled(true);
             }
       else
-            _styled = false;
+            setStyled(false);
       }
 
 //---------------------------------------------------------
@@ -427,7 +427,7 @@ void Text::read(QDomElement e)
             // style.
             //
             if (textStyle() != TEXT_STYLE_INVALID) {
-                  _styled = true;
+                  setStyled(true);
                   styleChanged();
                   }
             }
@@ -523,11 +523,11 @@ bool Text::readProperties(QDomElement e)
                   TextStyleType st = score()->style()->textStyleType(val);
                   if (st != TEXT_STYLE_INVALID) {
                         setTextStyle(st);
-                        _styled = true;
+                        setStyled(true);
                         }
                   else {
                         _styleName = val;       // name of local style
-                        _styled = false;
+                        setStyled(false);
                         }
                   }
             }
@@ -535,17 +535,17 @@ bool Text::readProperties(QDomElement e)
             _styleName = val;
       else if (tag == "align") {            // obsolete
             _localStyle.setAlign(Align(val.toInt()));
-            _styled = false;
+            setStyled(false);
             }
       else if (tag == "spatiumSizeDependent") {
             setSizeIsSpatiumDependent(val.toInt());
-            _styled = false;
+            setStyled(false);
             }
       else if (tag == "data")                  // obsolete
             _doc->setHtml(val);
       else if (tag == "frame") {
             setHasFrame(val.toInt());
-            _styled = false;
+            setStyled(false);
             }
       else if (tag == "html") {
             QString s = Xml::htmlToString(e);
@@ -560,26 +560,26 @@ bool Text::readProperties(QDomElement e)
       else if (tag == "frameWidth") {
             setFrameWidth(val.toDouble());
             setHasFrame(true);
-            _styled = false;
+            setStyled(false);
             }
       else if (tag == "paddingWidth") {
             setPaddingWidth(val.toDouble());
-            _styled = false;
+            setStyled(false);
             }
       else if (tag == "frameColor") {
             setFrameColor(readColor(e));
-            _styled = false;
+            setStyled(false);
             }
       else if (tag == "frameRound") {
             setFrameRound(val.toInt());
-            _styled = false;
+            setStyled(false);
             }
       else if (tag == "circle") {
             setCircle(val.toInt());
-            _styled = false;
+            setStyled(false);
             }
       else if (_localStyle.readProperties(e))
-            _styled = false;
+            setStyled(false);
       else if (!Element::readProperties(e))
             return false;
       return true;
@@ -1419,16 +1419,21 @@ void Text::setStyled(bool val)
       {
       if (val == _styled)
             return;
-      if (!_styled) {
+      if (_styled) {
+            // change to unstyled
             createDoc();
             _localStyle = score()->textStyle(textStyle());
-            _styled = false;
+            if (!SimpleText::isEmpty())
+                  setUnstyledText(SimpleText::getText());
             }
       else {
+            // change to styled
+            if (!_doc->isEmpty())
+                  SimpleText::setText(_doc->toPlainText());
             delete _doc;
             _doc = 0;
-            _styled = true;
             }
+      _styled = val;
       }
 
 //---------------------------------------------------------

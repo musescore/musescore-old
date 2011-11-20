@@ -31,8 +31,9 @@ SimpleText::SimpleText(Score* s)
 SimpleText::SimpleText(const SimpleText& st)
    : Element(st)
       {
+      _text                = st._text;
+      _textStyle           = st._textStyle;
       _layoutToParentWidth = st._layoutToParentWidth;
-      _text = st._text;
       }
 
 SimpleText::~SimpleText()
