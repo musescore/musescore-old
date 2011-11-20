@@ -1755,39 +1755,42 @@ static void addSymbolToText(const SymCode& s, QTextCursor* cur)
 static void metronome(QDomElement e, Text* t)
       {
       bool textAdded = false;
-      QTextDocument* d = t->doc();
-      QTextCursor c(d);
-      c.movePosition(QTextCursor::EndOfLine);
+
+      QTextCursor* c = t->startCursorEdit();
+      c->movePosition(QTextCursor::EndOfLine);
       QString parenth = e.attribute("parentheses");
-      if (parenth == "yes") c.insertText("(");
+      if (parenth == "yes")
+            c->insertText("(");
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "beat-unit") {
-                  if (textAdded) c.insertText(" = ");
+                  if (textAdded) c->insertText(" = ");
                   QString txt = e.text();
-                  if (txt == "breve") addSymbolToText(SymCode(0xe100, 1), &c);
-                  else if (txt == "whole") addSymbolToText(SymCode(0xe101, 1), &c);
-                  else if (txt == "half") addSymbolToText(SymCode(0xe104, 1), &c);
-                  else if (txt == "quarter") addSymbolToText(SymCode(0xe105, 1), &c);
-                  else if (txt == "eighth") addSymbolToText(SymCode(0xe106, 1), &c);
-                  else if (txt == "16th") addSymbolToText(SymCode(0xe107, 1), &c);
-                  else if (txt == "32nd") addSymbolToText(SymCode(0xe108, 1), &c);
-                  else if (txt == "64th") addSymbolToText(SymCode(0xe109, 1), &c);
-                  else c.insertText(e.text());
+                  if (txt == "breve") addSymbolToText(SymCode(0xe100, 1), c);
+                  else if (txt == "whole") addSymbolToText(SymCode(0xe101, 1), c);
+                  else if (txt == "half") addSymbolToText(SymCode(0xe104, 1), c);
+                  else if (txt == "quarter") addSymbolToText(SymCode(0xe105, 1), c);
+                  else if (txt == "eighth") addSymbolToText(SymCode(0xe106, 1), c);
+                  else if (txt == "16th") addSymbolToText(SymCode(0xe107, 1), c);
+                  else if (txt == "32nd") addSymbolToText(SymCode(0xe108, 1), c);
+                  else if (txt == "64th") addSymbolToText(SymCode(0xe109, 1), c);
+                  else c->insertText(e.text());
                   textAdded = true;
                   }
             else if (e.tagName() == "beat-unit-dot") {
-                  addSymbolToText(SymCode(0xe10a, 1), &c);
+                  addSymbolToText(SymCode(0xe10a, 1), c);
                   textAdded = true;
                   }
             else if (e.tagName() == "per-minute") {
-                  if (textAdded) c.insertText(" = ");
-                  c.insertText(e.text());
+                  if (textAdded) c->insertText(" = ");
+                  c->insertText(e.text());
                   textAdded = true;
                   }
             else
                   domError(e);
             } // for (e = e.firstChildElement(); ...
-      if (parenth == "yes") c.insertText(")");
+      if (parenth == "yes")
+            c->insertText(")");
+      t->endEdit();
       }
 
 //---------------------------------------------------------

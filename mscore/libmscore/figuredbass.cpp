@@ -86,7 +86,7 @@ void FiguredBass::write(Xml& xml) const
       xml.stag("FiguredBass");
       if (_no)
             xml.tag("no", _no);
-      Text::writeProperties(xml);
+      Lyrics::writeProperties(xml);
       xml.etag();
       }
 
@@ -100,7 +100,7 @@ void FiguredBass::read(QDomElement e)
             const QString& tag(e.tagName());
             if (tag == "no")
                   _no = e.text().toInt();
-            else if (!Text::readProperties(e))
+            else if (!Lyrics::readProperties(e))
                   domError(e);
             }
       }
@@ -112,8 +112,8 @@ void FiguredBass::read(QDomElement e)
 void FiguredBass::layout()
       {
       if (!styled())
-            _textStyle = TEXT_STYLE_FIGURED_BASS;
-      Text::layout();
+            setTextStyle(TEXT_STYLE_FIGURED_BASS);
+      Lyrics::layout();
       qreal lh = lineSpacing() * score()->styleD(ST_figuredBassLineHeight);
 
       System* sys = measure()->system();
@@ -128,7 +128,7 @@ void FiguredBass::layout()
                  + sys->staff(staffIdx())->bbox().height();
       QString s = getText();
       qreal x = symbols[score()->symIdx()][quartheadSym].width(magS()) * .5;
-      QFontMetricsF fm(font());
+      QFontMetricsF fm(style().font(spatium()));
       for (int i = 0; i < s.size(); ++i) {
             if (s[i].isNumber()) {
                   if (i)

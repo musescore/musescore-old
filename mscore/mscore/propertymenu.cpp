@@ -643,7 +643,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
                                     tt->setSizeIsSpatiumDependent(nText->sizeIsSpatiumDependent());
                               }
 
-                        tt->doc()->setModified(true);
+                        tt->setModified(true);
                         if (t->selected())
                               selectedElements.append(tt);
                         score()->undoChangeElement(t, tt);

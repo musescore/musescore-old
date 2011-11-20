@@ -198,7 +198,7 @@ void TextTools::blockAllSignals(bool val)
 void TextTools::updateTools()
       {
       blockAllSignals(true);
-      QTextCursor* cursor = _textElement->getCursor();
+      QTextCursor* cursor = _textElement->cursor();
 
       QTextCharFormat format = cursor->charFormat();
       QTextBlockFormat bformat = cursor->blockFormat();
@@ -269,7 +269,7 @@ void TextTools::layoutText()
 
 QTextCursor* TextTools::cursor()
       {
-      return _textElement->getCursor();
+      return _textElement->cursor();
       }
 
 //---------------------------------------------------------

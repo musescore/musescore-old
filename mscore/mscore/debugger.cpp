@@ -1299,8 +1299,9 @@ void TextView::textChanged()
 
 void TextView::setElement(Element* e)
       {
-      Text* te = (Text*)e;
-      tb.textStyle->clear();
+//      Text* te = (Text*)e;
+//      tb.textStyle->clear();
+#if 0       // TODOst
       for (int i = 0; i < TEXT_STYLES; ++i)
             tb.textStyle->addItem(e->score()->textStyle(TextStyleType(i)).name());
 
@@ -1312,6 +1313,7 @@ void TextView::setElement(Element* e)
       tb.ryoffset->setValue(te->reloff().y());
       tb.offsetType->setCurrentIndex(int(te->offsetType()));
       tb.textStyle->setCurrentIndex(te->textStyle());
+#endif
       }
 
 //---------------------------------------------------------

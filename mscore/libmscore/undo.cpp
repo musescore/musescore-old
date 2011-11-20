@@ -2145,8 +2145,8 @@ void ChangeBracketSpan::flip()
 
 void EditText::undo()
       {
-      for (int i = 0; i < undoLevel; ++i)
-            text->doc()->undo();
+//TODOst      for (int i = 0; i < undoLevel; ++i) {
+//            text->doc()->undo();
       text->textChanged();
       if (text->type() == TEMPO_TEXT) {
             TempoText* tt = static_cast<TempoText*>(text);
@@ -2156,8 +2156,8 @@ void EditText::undo()
 
 void EditText::redo()
       {
-      for (int i = 0; i < undoLevel; ++i)
-            text->doc()->redo();
+//TODOst      for (int i = 0; i < undoLevel; ++i)
+//            text->doc()->redo();
       text->textChanged();
       if (text->type() == TEMPO_TEXT) {
             TempoText* tt = static_cast<TempoText*>(text);

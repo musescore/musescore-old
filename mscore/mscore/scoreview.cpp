@@ -1293,7 +1293,7 @@ void ScoreView::startEdit()
             mscore->textTools()->updateTools();
             mscore->textTools()->show();
             textUndoLevel = 0;
-            connect(t->doc(), SIGNAL(undoCommandAdded()), SLOT(textUndoLevelAdded()));
+//TODOst            connect(t->doc(), SIGNAL(undoCommandAdded()), SLOT(textUndoLevelAdded()));
             }
       else if (origEditObject->isSegment()) {
             SpannerSegment* ss = (SpannerSegment*)origEditObject;
@@ -1359,7 +1359,7 @@ void ScoreView::endEdit()
             Text* t = static_cast<Text*>(editObject);
             if (textUndoLevel)
                   _score->undo()->push(new EditText(t, textUndoLevel));
-            disconnect(t->doc(), SIGNAL(undoCommandAdded()), this, SLOT(textUndoLevelAdded()));
+//TODOst            disconnect(t->doc(), SIGNAL(undoCommandAdded()), this, SLOT(textUndoLevelAdded()));
             }
       else if (editObject->isSegment()) {
             Spanner* spanner  = static_cast<SpannerSegment*>(editObject)->spanner();
@@ -2825,8 +2825,9 @@ static void drawDebugInfo(QPainter& p, const Element* e)
       //  draw bounding box rectangle for all
       //  selected Elements
       //
+      QPointF pos(e->pagePos());
+      p.translate(pos);
       p.setBrush(Qt::NoBrush);
-
       p.setPen(Qt::red);
       p.drawPath(e->shape());
 
@@ -2841,10 +2842,8 @@ static void drawDebugInfo(QPainter& p, const Element* e)
       p.drawLine(QLineF(x-w, y-h, x+w, y+h));
       p.drawLine(QLineF(x+w, y-h, x-w, y+h));
 
+      p.translate(-pos);
       if (e->parent()) {
-            p.restore();
-            p.save();
-            // we are now in page coordinate system
             const Element* ee = e->parent();
             if (e->type() == NOTE)
                   ee = static_cast<const Note*>(e)->chord()->segment();
@@ -2875,14 +2874,12 @@ void ScoreView::drawElements(QPainter& painter, const QList<const Element*>& el)
                   if (score()->printing() || !score()->showInvisible())
                         continue;
                   }
-            painter.save();
             QPointF pos(e->pagePos());
             painter.translate(pos);
             e->draw(&painter);
-//            if (debugMode && e->selected())
-//                  drawDebugInfo(painter, e);
             painter.translate(-pos);
-            painter.restore();
+            if (debugMode && e->selected())
+                  drawDebugInfo(painter, e);
             }
       }
 
@@ -2989,7 +2986,7 @@ void ScoreView::editCopy()
             // store selection as plain text
             //
             Text* text = static_cast<Text*>(editObject);
-            QTextCursor* tcursor = text->getCursor();
+            QTextCursor* tcursor = text->cursor();
             if (tcursor && tcursor->hasSelection())
                   QApplication::clipboard()->setText(tcursor->selectedText(), QClipboard::Clipboard);
             }
