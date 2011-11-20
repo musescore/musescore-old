@@ -1419,7 +1419,7 @@ void Text::setStyled(bool val)
       {
       if (val == _styled)
             return;
-      if (_styled) {
+      if (!_styled) {
             createDoc();
             _localStyle = score()->textStyle(textStyle());
             _styled = false;
