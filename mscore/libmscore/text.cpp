@@ -596,7 +596,7 @@ void Text::spatiumChanged(qreal oldVal, qreal newVal)
 qDebug("Text::spatiumChanged %d  -- %s %s %p %f\n",
       sizeIsSpatiumDependent(), name(), parent() ? parent()->name() : "?", this, newVal);
 #endif
-      if (!sizeIsSpatiumDependent())
+      if (!sizeIsSpatiumDependent() || _styled)
             return;
       qreal v = newVal / oldVal;
       QTextCursor c(_doc);
