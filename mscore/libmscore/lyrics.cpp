@@ -224,15 +224,17 @@ void Lyrics::layout()
       //
       // left align if syllable has a number
       //
-      if (_ticks == 0 && (style().align() & ALIGN_HCENTER) && !_verseNumber) {
-            qreal noteHeadWidth2 = symbols[score()->symIdx()][quartheadSym].width(magS()) * .5;
-            x = noteHeadWidth2;
-            }
+      if (_ticks == 0 && (style().align() & ALIGN_HCENTER) && !_verseNumber)
+            x = symbols[score()->symIdx()][quartheadSym].width(magS()) * .5;
+      else if ((style().align() & ALIGN_HCENTER) && _verseNumber)
+            x = width() * .5;
       else
             x = 0.0;
       setPos(x, y);
-      if (_verseNumber)
+      if (_verseNumber) {
             _verseNumber->layout();
+            _verseNumber->setPos(-x, 0.0);
+            }
       }
 
 //---------------------------------------------------------
