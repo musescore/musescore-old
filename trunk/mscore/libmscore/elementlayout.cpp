@@ -110,7 +110,7 @@ void ElementLayout::writeProperties(Xml& xml) const
             QPointF pt(_offset);
             if (offsetType() == OFFSET_ABS)
                   pt *= INCH;
-            xml.tag("xoffset", pt.x());
+            xml.tag("xoffset", pt.x());         // save in spatium or metric mm
             xml.tag("yoffset", pt.y());
             }
       if (_reloff.x() != 0.0)
@@ -182,9 +182,9 @@ bool ElementLayout::readProperties(QDomElement e)
             if (ot != offsetType()) {
                   setOffsetType(ot);
                   if (ot == OFFSET_ABS)
-                        _offset /= INCH;
+                        _offset /= INCH;  // convert spatium -> inch
                   else
-                        _offset *= INCH;
+                        _offset *= INCH;  // convert inch -> spatium
                   }
             }
       else
