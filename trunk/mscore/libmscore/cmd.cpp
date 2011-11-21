@@ -2645,23 +2645,8 @@ void Score::cmd(const QAction* a)
             cmdAddStretch(-0.1);
       else if (cmd == "pitch-spell")
             spell();
-      else if (cmd == "select-all") {
-            MeasureBase* mb = _measures.last();
-            if (mb) {   // check for empty score
-                  _selection.setState(SEL_RANGE);
-                  int tick = mb->tick();
-                  if (mb->type() == MEASURE)
-                        tick += static_cast<Measure*>(mb)->ticks();
-                  Segment* s1 = tick2segment(0);
-                  Segment* s2 = tick2segment(tick);
-                  _selection.setRange(s1, s2, 0, nstaves());
-                  _selection.updateSelectedElements();
-                  setUpdateAll(true);
-                  end();
-                  }
-            else
-                  qDebug("no measures?");
-            }
+      else if (cmd == "select-all")
+            cmdSelectAll();
       else if (cmd == "concert-pitch") {
             if (styleB(ST_concertPitch) != a->isChecked())
                   cmdConcertPitchChanged(a->isChecked(), true);
