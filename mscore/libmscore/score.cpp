@@ -3347,10 +3347,10 @@ qreal Score::loHeight() const
       }
 
 //---------------------------------------------------------
-//   selectAll
+//   cmdSelectAll
 //---------------------------------------------------------
 
-void Score::selectAll()
+void Score::cmdSelectAll()
       {
       MeasureBase* mb = _measures.last();
       if (mb) {   // check for empty score
