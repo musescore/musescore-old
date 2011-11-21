@@ -862,6 +862,7 @@ class Score {
       void doLayoutSystems();
       void doLayoutPages();
       Tuplet* searchTuplet(QDomElement e, int id);
+      void selectAll();
       };
 
 extern Score* gscore;

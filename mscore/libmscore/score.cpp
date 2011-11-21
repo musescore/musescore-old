@@ -2532,7 +2532,8 @@ qDebug("TransposeByKey %d -> %d   chromatic %d diatonic %d\n", oKey, nKey, chrom
 //   transpose
 //---------------------------------------------------------
 
-void Score::transpose(int mode, TransposeDirection direction, int transposeKey, int transposeInterval,
+void Score::transpose(int mode, TransposeDirection direction, int transposeKey,
+  int transposeInterval,
    bool trKeys, bool transposeChordNames, bool useDoubleSharpsFlats)
       {
       bool rangeSelection = selection().state() == SEL_RANGE;
@@ -2543,7 +2544,6 @@ void Score::transpose(int mode, TransposeDirection direction, int transposeKey, 
             startTick     = selection().tickStart();
             }
       KeyList* km = staff(startStaffIdx)->keymap();
-//      int key     = km->key(startTick).accidentalType();
 
       Interval interval;
       if (mode == TRANSPOSE_BY_KEY) {
@@ -3344,5 +3344,26 @@ qreal Score::loWidth() const
 qreal Score::loHeight() const
       {
       return pageFormat()->size().height() * DPI;
+      }
+
+//---------------------------------------------------------
+//   selectAll
+//---------------------------------------------------------
+
+void Score::selectAll()
+      {
+      MeasureBase* mb = _measures.last();
+      if (mb) {   // check for empty score
+            _selection.setState(SEL_RANGE);
+            int tick = mb->tick();
+            if (mb->type() == MEASURE)
+                  tick += static_cast<Measure*>(mb)->ticks();
+            Segment* s1 = tick2segment(0);
+            Segment* s2 = tick2segment(tick);
+            _selection.setRange(s1, s2, 0, nstaves());
+            _selection.updateSelectedElements();
+            setUpdateAll(true);
+            end();
+            }
       }
 

@@ -825,15 +825,14 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
                         l->add(line);
                         }
                   line->setLineWidth(Spatium(0.1 * lmag));
+                  line->setPos(p1);
                   if (sysIdx1 == sysIdx2) {
                         // single segment
-                        line->setPos(p1);
                         qreal len = seg->pagePos().x() - l->pagePos().x() - lw + 2 * _spatium;
                         line->setLen(Spatium(len / _spatium));
                         }
                   else if (i == sysIdx1) {
                         // start segment
-                        line->setPos(p1);
                         qreal w   = system->staff(l->staffIdx())->right();
                         qreal x   = system->pagePos().x() + w;
                         qreal len = x - l->pagePos().x() - lw;
