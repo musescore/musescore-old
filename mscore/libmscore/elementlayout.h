@@ -27,7 +27,7 @@ class ElementLayout {
 
    protected:
       Align  _align;
-      QPointF _offset;
+      QPointF _offset;              // inch or spatium
       OffsetType _offsetType;
       QPointF _reloff;
 
