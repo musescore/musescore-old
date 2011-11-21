@@ -229,7 +229,7 @@ void SimpleText::layout()
       if (_align & ALIGN_BOTTOM)
             p.setY(ph);
       else if (_align & ALIGN_VCENTER)
-            p.setY((ph - height()) * .5);
+            p.setY(ph * .5);
       else if (_align & ALIGN_BASELINE)
             p.setY(-baseLine());
       if (_align & ALIGN_RIGHT)
