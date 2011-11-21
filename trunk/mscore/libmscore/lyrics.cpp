@@ -208,8 +208,7 @@ void Lyrics::layout()
       if (styled())
             setTextStyle((_no % 2) ? TEXT_STYLE_LYRIC2 : TEXT_STYLE_LYRIC1);
       Text::layout();
-      qreal lh             = lineSpacing() * score()->styleD(ST_lyricsLineHeight);
-      qreal noteHeadWidth2 = symbols[score()->symIdx()][quartheadSym].width(magS()) * .5;
+      qreal lh = lineSpacing() * score()->styleD(ST_lyricsLineHeight);
 
       System* sys = measure()->system();
       if (sys == 0) {
@@ -225,10 +224,12 @@ void Lyrics::layout()
       //
       // left align if syllable has a number
       //
-      if (_ticks == 0 && (style().align() & ALIGN_HCENTER) && !_verseNumber)
-            x = 0.0;
+      if (_ticks == 0 && (style().align() & ALIGN_HCENTER) && !_verseNumber) {
+            qreal noteHeadWidth2 = symbols[score()->symIdx()][quartheadSym].width(magS()) * .5;
+            x = noteHeadWidth2;
+            }
       else
-            x = noteHeadWidth2 - bbox().width() * .5;
+            x = 0.0;
       setPos(x, y);
       if (_verseNumber)
             _verseNumber->layout();
