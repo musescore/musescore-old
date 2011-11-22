@@ -164,7 +164,7 @@ void Dynamic::setSubtype(int idx)
             tf.setProperty(QTextFormat::FontKerning, true);
             cursor->setBlockCharFormat(tf);
             cursor->insertText(dynList[idx].tag);
-            endEdit();
+            endCursorEdit();
             }
       }
 
@@ -202,15 +202,6 @@ void Dynamic::startEdit(MuseScoreView* v, const QPointF& p)
       {
       setSubtype(0);
       Text::startEdit(v, p);
-      }
-
-//---------------------------------------------------------
-//   endEdit
-//---------------------------------------------------------
-
-void Dynamic::endEdit()
-      {
-      Text::endEdit();
       }
 
 //---------------------------------------------------------

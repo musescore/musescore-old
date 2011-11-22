@@ -109,6 +109,7 @@ class Text : public SimpleText {
       virtual void startEdit(MuseScoreView*, const QPointF&);
       virtual bool edit(MuseScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString&);
       QTextCursor* startCursorEdit();
+      void endCursorEdit();
       virtual void endEdit();
       void addSymbol(const SymCode&, QTextCursor* c = 0);
       void addChar(int code, QTextCursor* cur = 0);
