@@ -190,8 +190,10 @@ int SimpleText::alignFlags() const
 
 void SimpleText::layout()
       {
-      if (parent() == 0)
+      if (parent() == 0) {
+            printf("PARENT TEXT ZERO: <%s>\n", qPrintable(getText()));
             return;
+            }
 
       const TextStyle& s(style());
 

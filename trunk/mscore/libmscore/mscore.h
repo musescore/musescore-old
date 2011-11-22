@@ -60,8 +60,8 @@ static const char mimeStaffListFormat[]   = "application/mscore/stafflist";
 
 //---------------------------------------------------------
 //   ElementType
-//    The value of this enum determines the "stacking order" the elements are
-//    put on the canvas.
+//    The value of this enum determines the "stacking order"
+//    of elements on the canvas.
 //---------------------------------------------------------
 
 enum ElementType {

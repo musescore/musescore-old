@@ -119,7 +119,6 @@ Chorus::Chorus(float sr)
                         }
                   }
             }
-printf("lookup_tab %d\n", (int)(sample_rate / MIN_SPEED_HZ));
       lookup_tab = new int[(int) (sample_rate / MIN_SPEED_HZ)];
       chorusbuf  = new float[MAX_SAMPLES];
       reset();
