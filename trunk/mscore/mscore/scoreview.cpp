@@ -1444,13 +1444,12 @@ void ScoreView::endEdit()
             harmonyEndEdit();
       _score->endCmd();
       mscore->endCmd();
+      _score->deselect(origEditObject);
       if (dragElement && (dragElement != editObject)) {
             curElement = dragElement;
             _score->select(curElement);
             _score->end();
             }
-      _score->deselect(origEditObject);
-      _score->select(editObject);
       editObject     = 0;
       origEditObject = 0;
       grips          = 0;
