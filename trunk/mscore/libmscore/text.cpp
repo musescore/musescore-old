@@ -1466,16 +1466,25 @@ void Text::endEdit()
             }
       cursorPos = _cursor->position();
 
-      delete _cursor;
-      _cursor   = 0;
       _editMode = false;
+      endCursorEdit();
+      layout();
+      textChanged();
+      }
+
+//---------------------------------------------------------
+//   endCursorEdit
+//---------------------------------------------------------
+
+void Text::endCursorEdit()
+      {
+      delete _cursor;
+      _cursor = 0;
       if (_styled) {
             SimpleText::setText(_doc->toPlainText());
             delete _doc;
             _doc = 0;
             }
-      layout();
-      textChanged();
       }
 
 //---------------------------------------------------------
