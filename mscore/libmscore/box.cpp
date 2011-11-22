@@ -50,11 +50,11 @@ Box::Box(Score* score)
 
 void Box::layout()
       {
+      MeasureBase::layout();
       foreach (Element* el, _el) {
             if (el->type() != LAYOUT_BREAK)
                   el->layout();
             }
-      MeasureBase::layout();
       }
 
 //---------------------------------------------------------
@@ -125,6 +125,7 @@ void Box::editDrag(const EditData& ed)
                   }
             score()->setLayoutAll(true);
             }
+      layout();
       }
 
 //---------------------------------------------------------
@@ -134,6 +135,7 @@ void Box::editDrag(const EditData& ed)
 void Box::endEdit()
       {
       editMode = false;
+      layout();
       }
 
 //---------------------------------------------------------

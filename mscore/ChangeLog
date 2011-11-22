@@ -1,4 +1,6 @@
-22.nov (la)
+22.nov (ws)
+      - fix #13709: Frames and editing text
+      (la)
       - add Score.filepath and Score.filename in plugin framework (patch by Soerboe)
 19.nov (lv)
       - fix #4172: MusicXML: create a setting where only the explicit breaks are exported
