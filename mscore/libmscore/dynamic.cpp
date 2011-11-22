@@ -144,6 +144,7 @@ void Dynamic::setSubtype(int idx)
       {
       Element::setSubtype(idx);
       if (idx) {
+            setStyled(false);
             clear();
             QTextCursor* cursor = startCursorEdit();
             cursor->movePosition(QTextCursor::Start);

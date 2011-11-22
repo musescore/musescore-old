@@ -632,6 +632,16 @@ void Slur::slurPos(SlurPos* sp)
       Element* e1 = startElement();
       Element* e2 = endElement();
 
+      if (e2 == 0) {
+            sp->p1 = e1->pagePos();
+            sp->p1.rx() += e1->width();
+            sp->p2 = sp->p1;
+            sp->p2.rx() += 5 * _spatium;
+            sp->system1 = static_cast<ChordRest*>(e1)->measure()->system();
+            sp->system2 = sp->system1;
+            return;
+            }
+
       if ((e1->type() != CHORD) || (e2->type() != CHORD)) {
             sp->p1 = e1->pagePos();
             sp->p2 = e2->pagePos();
@@ -1037,6 +1047,11 @@ void Slur::layout()
                   //
                   ChordRest* cr1 = static_cast<ChordRest*>(startElement());
                   ChordRest* cr2 = static_cast<ChordRest*>(endElement());
+
+                  if (cr1 == 0 || cr2 == 0) {
+                        _up = true;
+                        break;
+                        }
                   Measure* m1    = cr1->measure();
 
                   Chord* c1 = (cr1->type() == CHORD) ? static_cast<Chord*>(cr1) : 0;

@@ -327,7 +327,7 @@ void HBox::layout()
       else {
             setbbox(QRectF(0.0, 0.0, point(boxWidth()), system()->height()));
             }
-      MeasureBase::layout();
+      Box::layout();
       adjustReadPos();
       }
 

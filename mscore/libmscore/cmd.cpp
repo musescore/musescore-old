@@ -92,7 +92,7 @@ void Score::startCmd()
       if (undo()->active()) {
             // if (debugMode)
             qDebug("Score::startCmd(): cmd already active");
-            abort();
+            // abort();
             return;
             }
       undo()->beginMacro();
