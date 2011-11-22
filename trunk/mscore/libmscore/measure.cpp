@@ -2864,14 +2864,8 @@ void Measure::layoutX(qreal stretch)
                                     l->layout();
                                     lyrics = l;
                                     QRectF b(l->bbox().translated(l->pos()));
-                                    qreal lw = -b.left();
-                                    if (lw > llw)
-                                          llw = lw;
-                                    if (lw > rrw)
-                                          rrw = lw;
-                                    qreal rw = b.right();
-                                    if (rw > rrw)
-                                          rrw = rw;
+                                    llw = qMax(llw, -b.left());
+                                    rrw = qMax(rrw, b.right());
                                     }
                               }
                         if (lyrics) {
@@ -2987,9 +2981,7 @@ void Measure::layoutX(qreal stretch)
       //---------------------------------------------------
 
       SpringMap springs;
-//      qreal stretchList[segs];
       qreal stretchSum = 0.0;
-//      stretchList[0]    = 0.0;
 
       qreal minimum = xpos[0];
       for (int i = 0; i < segs; ++i) {
@@ -3008,7 +3000,6 @@ void Measure::layoutX(qreal stretch)
                   str = 0.0;              // dont stretch timeSig and key
                   d   = 100000000.0;      // CHECK
                   }
-//            stretchList[i] = str;
             springs.insert(std::pair<qreal, Spring>(d, Spring(i, str, w)));
             minimum += w;
             }

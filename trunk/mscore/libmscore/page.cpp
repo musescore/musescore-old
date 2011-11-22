@@ -359,7 +359,7 @@ void Page::draw(QPainter* painter) const
                   h3 = d3.documentLayout()->documentSize().height();
                   }
             else
-                  h1 = 0.0;
+                  h3 = 0.0;
             qreal h = qMax(h1, h2);
             h       = qMax(h, h3);
 

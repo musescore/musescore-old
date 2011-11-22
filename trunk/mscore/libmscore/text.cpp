@@ -1467,15 +1467,14 @@ void Text::endEdit()
       cursorPos = _cursor->position();
 
       delete _cursor;
-      _cursor = 0;
+      _cursor   = 0;
       _editMode = false;
       if (_styled) {
-            QString s(_doc->toPlainText());
-            SimpleText::setText(s);
+            SimpleText::setText(_doc->toPlainText());
             delete _doc;
             _doc = 0;
-            layout();
             }
+      layout();
       textChanged();
       }
 
