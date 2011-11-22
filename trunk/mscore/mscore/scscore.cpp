@@ -47,14 +47,14 @@ static const char* const function_names_score[] = {
       "load", "save", "close",
       "setExpandRepeat", "appendPart", "appendMeasures",
       "pages", "measures", "parts", "part", "startUndo", "endUndo", "setStyle", "hasLyrics", "hasHarmonies",
-      "staves", "keysig", "duration", "pageFormat", "metatag"
+      "staves", "keysig", "duration", "pageFormat", "metatag", "filename", "filepath"
       };
 static const int function_lengths_score[] = {
       1, 1, 1, 1,
       1, 6, 1,
       1, 1, 1,
       0, 0, 0, 1, 0, 0, 2, 0, 0,
-      0, 1, 0, 0, 2
+      0, 1, 0, 0, 2, 0, 0
       };
 
 static const QScriptValue::PropertyFlags flags_score[] = {
@@ -86,6 +86,8 @@ static const QScriptValue::PropertyFlags flags_score[] = {
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter
       };
 
 ScriptInterface scoreInterface = {
@@ -443,6 +445,18 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         return context->engine()->undefinedValue();
                   }
                   break;
+            case 24: // filename
+                  if (argc == 0) {
+                        QString fname = score->fileInfo()->fileName();
+                        return qScriptValueFromValue(context->engine(), fname);
+                  }
+                  break;
+            case 25: // filepath
+                  if (argc == 0) {
+                        QString fpath;
+                        fpath = score->created() ? "" : score->fileInfo()->path();
+                        return qScriptValueFromValue(context->engine(), fpath);
+                  }
             }
       return context->throwError(QScriptContext::TypeError,
          QString::fromLatin1("Score.%0(): bad argument count or value")

@@ -1,3 +1,5 @@
+22.nov (la)
+      - add Score.filepath and Score.filename in plugin framework (patch by Soerboe)
 19.nov (lv)
       - fix #4172: MusicXML: create a setting where only the explicit breaks are exported
       - fix #13451: MusicXML: optionally ignore layout information on import
