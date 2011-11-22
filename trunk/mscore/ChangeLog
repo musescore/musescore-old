@@ -1,4 +1,5 @@
 22.nov (ws)
+      - fix #13710: Horizontal frames issue
       - fix #13711: Vertical Frames moveable
       - fix #13709: Frames and editing text
       (la)
