@@ -131,6 +131,9 @@ struct Preferences {
       bool firstStartWeb;
 
       bool dirty;
+      
+      bool useOsc;
+      int oscPort;
 
       Preferences();
       void write();

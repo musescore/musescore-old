@@ -219,6 +219,9 @@ void Preferences::init()
       warnPitchRange          = true;
       followSong              = true;
       importCharset           = "GBK";
+      
+      useOsc                  = false;
+      oscPort                 = 5282;
 
       //update
       checkUpdateStartup      = 0;

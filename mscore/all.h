@@ -123,6 +123,9 @@
 #include <QtWebKit/QWebView>
 #include <QtWebKit/QWebFrame>
 
+#include <QtNetwork/QHostAddress>
+#include <QtNetwork/QUdpSocket>
+
 #include <QtScript/QScriptEngine>
 #include <QtScript/QScriptValueIterator>
 #include <QtScript/QScriptable>

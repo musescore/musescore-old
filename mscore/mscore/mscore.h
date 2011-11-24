@@ -21,6 +21,7 @@
 #ifndef __MSCORE_H__
 #define __MSCORE_H__
 
+#include "config.h"
 #include "globals.h"
 #include "ui_measuresdialog.h"
 #include "ui_insertmeasuresdialog.h"
@@ -302,6 +303,7 @@ class MuseScore : public QMainWindow {
       void timeMenu();
       void dynamicsMenu();
       void loadFile();
+      void openScore(const QString& fn);
       void saveFile();
       void fingeringMenu();
       void registerPlugin(const QString& pluginPath);
@@ -320,6 +322,7 @@ class MuseScore : public QMainWindow {
       void splitWindow(bool horizontal);
       void removeSessionFile();
       void editChordStyle();
+      void initOsc();
       void startExcerptsDialog();
       void gotoNextScore();
       void gotoPreviousScore();
@@ -354,6 +357,22 @@ class MuseScore : public QMainWindow {
       void drumPaletteSelected(int);
       void endSearch();
       void closeSynthControl();
+#ifdef OSC
+      void oscIntMessage(int);
+      void oscPlay();
+      void oscStop();
+      void oscVolume(int val);
+      void oscTempo(int val);
+      void oscNext();
+      void oscNextMeasure();
+      void oscGoto(int m);
+      void oscSelectMeasure(int m);
+      void oscVolChannel(double val);
+      void oscPanChannel(double val);
+      void oscMuteChannel(double val);
+      void oscOpen(QString path);
+      void oscCloseAll();
+#endif
       void loadPluginDir(const QString& pluginPath);
       void networkFinished(QNetworkReply*);
 

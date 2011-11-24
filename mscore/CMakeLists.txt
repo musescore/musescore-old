@@ -26,10 +26,11 @@ cmake_policy(SET CMP0003 NEW)
 # for debugging the make system uncomment next line:
 # set(CMAKE_VERBOSE_MAKEFILE ON)
 
-set(MSCORE_UNSTABLE  FALSE)                # mark as unstable
+set(MSCORE_UNSTABLE  FALSE)               # mark as unstable
 
 set(GCC_VISIBILITY TRUE)                  # requires gcc 4.x?
 set(HAS_AUDIOFILE TRUE)                   # requires libsndfile
+set(OSC           TRUE)                   # osc remote control
 
 set(BUILD_SCRIPTGEN TRUE)                 #Generate Qt script bindings. (collides with qtscriptgenerator project on several distrib)
 set(STATIC_SCRIPT_BINDINGS FALSE)
@@ -61,7 +62,7 @@ set(CMAKE_SKIP_RULE_DEPENDENCY TRUE)
 
 # The Mscore version number.
 SET(Mscore_VERSION_MAJOR  "1")
-SET(Mscore_VERSION_MINOR  "1")
+SET(Mscore_VERSION_MINOR  "2")
 SET(Mscore_VERSION_PATCH  "0")
 
 SET(Mscore_VERSION       "${Mscore_VERSION_MAJOR}.${Mscore_VERSION_MINOR}")
@@ -236,19 +237,20 @@ if (NOT MINGW AND NOT APPLE)
       install( FILES packaging/mscore.desktop DESTINATION share/applications)
 endif (NOT MINGW AND NOT APPLE)
 
-set (subdirs al awl bww2mxml osdabzip rtf2html mscore share manual demos
+subdirs (al awl bww2mxml osdabzip rtf2html mscore share manual demos
       singleapp fluid)
 
 if (BUILD_SCRIPTGEN)
-      set (subdirs ${subdirs} scriptgen)
+      subdirs (scriptgen)
 endif (BUILD_SCRIPTGEN)
 
 if (MINGW OR APPLE)
-      set (subdirs ${subdirs} portmidi)
+      subdirs (portmidi)
 endif (MINGW OR APPLE)
 
-subdirs(${subdirs})
-
+if (OSC)
+      subdirs (ofqf)
+endif (OSC)
 
 include_directories(
    ${PROJECT_SOURCE_DIR}
