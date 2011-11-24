@@ -47,7 +47,7 @@ static const char* const function_names_score[] = {
       "load", "save", "close",
       "setExpandRepeat", "appendPart", "appendMeasures",
       "pages", "measures", "parts", "part", "startUndo", "endUndo", "setStyle", "hasLyrics", "hasHarmonies",
-      "staves", "keysig", "duration", "pageFormat", "metatag", "filename", "filepath"
+      "staves", "keysig", "duration", "pageFormat", "metatag", "fileName", "path"
       };
 static const int function_lengths_score[] = {
       1, 1, 1, 1,
@@ -445,13 +445,13 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         return context->engine()->undefinedValue();
                   }
                   break;
-            case 24: // filename
+            case 24: // fileName
                   if (argc == 0) {
                         QString fname = score->fileInfo()->fileName();
                         return qScriptValueFromValue(context->engine(), fname);
                   }
                   break;
-            case 25: // filepath
+            case 25: // path
                   if (argc == 0) {
                         QString fpath;
                         fpath = score->created() ? "" : score->fileInfo()->path();
