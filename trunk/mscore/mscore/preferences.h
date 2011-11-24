@@ -107,7 +107,6 @@ struct Preferences {
       bool antialiasedDrawing;
       SessionStart sessionStart;
       QString startScore;
-      QString workingDirectory;
       QString defaultStyle;
       bool showSplashScreen;
 

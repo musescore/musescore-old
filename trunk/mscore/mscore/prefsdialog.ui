@@ -98,9 +98,9 @@
            <number>3</number>
           </property>
           <item row="0" column="0">
-           <widget class="QLabel" name="label_23">
+           <widget class="QLabel" name="label_86">
             <property name="text">
-             <string>Working Directory:</string>
+             <string>Scores Directory:</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -111,9 +111,9 @@
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="label_86">
+           <widget class="QLabel" name="label_88">
             <property name="text">
-             <string>MyScores Directory:</string>
+             <string>Styles Directory:</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -123,20 +123,43 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="workingDirectory"/>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="myStyles"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Templates Directory:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="indent">
+             <number>5</number>
+            </property>
+           </widget>
           </item>
           <item row="0" column="2">
-           <widget class="QToolButton" name="workingDirectoryButton">
+           <widget class="QToolButton" name="myScoresButton">
             <property name="text">
              <string/>
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_88">
+          <item row="1" column="2">
+           <widget class="QToolButton" name="myStylesButton">
             <property name="text">
-             <string>MyStyles Directory:</string>
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="myScores"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_89">
+            <property name="text">
+             <string>Plugins Directory:</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -147,68 +170,45 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLineEdit" name="myStyles"/>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="label_2">
-            <property name="text">
-             <string>MyTemplates Directory:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="indent">
-             <number>5</number>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QToolButton" name="myScoresButton">
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="2">
-           <widget class="QToolButton" name="myStylesButton">
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="myScores"/>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="label_89">
-            <property name="text">
-             <string>MyPlugins Directory:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="indent">
-             <number>5</number>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
            <widget class="QLineEdit" name="myTemplates"/>
           </item>
-          <item row="4" column="1">
+          <item row="3" column="1">
            <widget class="QLineEdit" name="myPlugins"/>
           </item>
-          <item row="4" column="2">
+          <item row="3" column="2">
            <widget class="QToolButton" name="myPluginsButton">
             <property name="text">
              <string>...</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="0">
+          <item row="4" column="0">
            <widget class="QLabel" name="label_5">
             <property name="text">
-             <string>MySoundFonts Directory:</string>
+             <string>SoundFonts Directory:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="indent">
+             <number>5</number>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="mySoundFonts"/>
+          </item>
+          <item row="4" column="2">
+           <widget class="QToolButton" name="mySoundFontsButton">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="label_9">
+            <property name="text">
+             <string>Images Directory:</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -219,39 +219,16 @@
            </widget>
           </item>
           <item row="5" column="1">
-           <widget class="QLineEdit" name="mySoundFonts"/>
-          </item>
-          <item row="5" column="2">
-           <widget class="QToolButton" name="mySoundFontsButton">
-            <property name="text">
-             <string>...</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="0">
-           <widget class="QLabel" name="label_9">
-            <property name="text">
-             <string>MyImages Directory:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="indent">
-             <number>5</number>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="1">
            <widget class="QLineEdit" name="myImages"/>
           </item>
-          <item row="6" column="2">
+          <item row="5" column="2">
            <widget class="QToolButton" name="myImagesButton">
             <property name="text">
              <string>...</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="2">
+          <item row="2" column="2">
            <widget class="QToolButton" name="myTemplatesButton">
             <property name="text">
              <string>...</string>
@@ -530,7 +507,7 @@
              <string>Port Number:</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
@@ -546,6 +523,19 @@
              <number>5282</number>
             </property>
            </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_15">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </widget>
