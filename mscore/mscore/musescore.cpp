@@ -2626,7 +2626,7 @@ void MuseScore::writeSettings()
 void MuseScore::readSettings()
       {
       if (useFactorySettings) {
-            resize(QSize(800, 600));
+            resize(QSize(1024, 768));
             QList<int> sizes;
             sizes << 500 << 100;
             mainWindow->setSizes(sizes);
@@ -2636,7 +2636,7 @@ void MuseScore::readSettings()
       QSettings settings;
 
       settings.beginGroup("MainWindow");
-      resize(settings.value("size", QSize(950, 700)).toSize());
+      resize(settings.value("size", QSize(1024, 768)).toSize());
       mainWindow->restoreState(settings.value("debuggerSplitter").toByteArray());
       move(settings.value("pos", QPoint(10, 10)).toPoint());
       if (settings.value("maximized", false).toBool())
