@@ -374,7 +374,7 @@ MuseScore::MuseScore()
       _midiinEnabled        = true;
       _speakerEnabled       = true;
       newWizard             = 0;
-      lastOpenPath          = preferences.workingDirectory;
+      lastOpenPath          = preferences.myScoresPath;
       _textTools            = 0;
       _editTools            = 0;
       _pianoTools           = 0;

@@ -1260,14 +1260,14 @@ bool MuseScore::exportFile()
 
       QSettings settings;
       if (lastSaveCopyDirectory.isEmpty())
-            lastSaveCopyDirectory = settings.value("lastSaveCopyDirectory", preferences.workingDirectory).toString();
+            lastSaveCopyDirectory = settings.value("lastSaveCopyDirectory", preferences.myScoresPath).toString();
       if (lastSaveDirectory.isEmpty())
-            lastSaveDirectory = settings.value("lastSaveDirectory", preferences.workingDirectory).toString();
+            lastSaveDirectory = settings.value("lastSaveDirectory", preferences.myScoresPath).toString();
       QString saveDirectory = saveCopy ?
             lastSaveCopyDirectory : lastSaveDirectory;
 
       if (saveDirectory.isEmpty()) {
-            saveDirectory = preferences.workingDirectory;
+            saveDirectory = preferences.myScoresPath;
             }
 
       QString selectedFilter;
@@ -1588,13 +1588,13 @@ bool MuseScore::saveAs(Score* cs, bool saveCopy)
 
       QSettings settings;
       if (mscore->lastSaveCopyDirectory.isEmpty())
-            mscore->lastSaveCopyDirectory = settings.value("lastSaveCopyDirectory", preferences.workingDirectory).toString();
+            mscore->lastSaveCopyDirectory = settings.value("lastSaveCopyDirectory", preferences.myScoresPath).toString();
       if (mscore->lastSaveDirectory.isEmpty())
-            mscore->lastSaveDirectory = settings.value("lastSaveDirectory", preferences.workingDirectory).toString();
+            mscore->lastSaveDirectory = settings.value("lastSaveDirectory", preferences.myScoresPath).toString();
       QString saveDirectory = saveCopy ? mscore->lastSaveCopyDirectory : mscore->lastSaveDirectory;
 
       if (saveDirectory.isEmpty())
-            saveDirectory = preferences.workingDirectory;
+            saveDirectory = preferences.myScoresPath;
 
       QString selectedFilter;
       QString name   = QString("%1.mscz").arg(cs->fileInfo()->baseName());
@@ -1645,13 +1645,13 @@ bool MuseScore::saveSelection(Score* cs)
 
       QSettings settings;
       if (mscore->lastSaveCopyDirectory.isEmpty())
-            mscore->lastSaveCopyDirectory = settings.value("lastSaveCopyDirectory", preferences.workingDirectory).toString();
+            mscore->lastSaveCopyDirectory = settings.value("lastSaveCopyDirectory", preferences.myScoresPath).toString();
       if (mscore->lastSaveDirectory.isEmpty())
-            mscore->lastSaveDirectory = settings.value("lastSaveDirectory", preferences.workingDirectory).toString();
+            mscore->lastSaveDirectory = settings.value("lastSaveDirectory", preferences.myScoresPath).toString();
       QString saveDirectory = mscore->lastSaveDirectory;
 
       if (saveDirectory.isEmpty())
-            saveDirectory = preferences.workingDirectory;
+            saveDirectory = preferences.myScoresPath;
 
       QString selectedFilter;
       QString name   = QString("%1.mscz").arg(cs->fileInfo()->baseName());

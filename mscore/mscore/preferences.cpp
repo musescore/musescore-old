@@ -198,7 +198,6 @@ void Preferences::init()
       antialiasedDrawing       = true;
       sessionStart             = SCORE_SESSION;
       startScore               = ":/data/Promenade_Example.mscx";
-      workingDirectory         = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
       defaultStyle             = "";
       showSplashScreen         = true;
 
@@ -256,12 +255,13 @@ void Preferences::init()
       globalStyle             = STYLE_DARK;
 #endif
 
-      myScoresPath            = "MyScores";
-      myStylesPath            = "MuseScore/MyStyles";
-      myImagesPath            = "MuseScore/MyImages";
-      myTemplatesPath         = "MuseScore/MyTemplates";
-      myPluginsPath           = "MuseScore/MyPlugins";
-      mySoundFontsPath        = "MuseScore/MySoundFonts";
+      QString workingDirectory = QString("%1/%2").arg(QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation)).arg(QCoreApplication::applicationName());
+      myScoresPath            = QDir(QString("%1/%2").arg(workingDirectory).arg(QCoreApplication::translate("scores_directory", "Scores"))).absolutePath();
+      myStylesPath            = QDir(QString("%1/%2").arg(workingDirectory).arg(QCoreApplication::translate("styles_directory", "Styles"))).absolutePath();
+      myImagesPath            = QDir(QString("%1/%2").arg(workingDirectory).arg(QCoreApplication::translate("images_directory", "Images"))).absolutePath();
+      myTemplatesPath         = QDir(QString("%1/%2").arg(workingDirectory).arg(QCoreApplication::translate("templates_directory", "Templates"))).absolutePath();
+      myPluginsPath           = QDir(QString("%1/%2").arg(workingDirectory).arg(QCoreApplication::translate("plugins_directory", "Plugins"))).absolutePath();
+      mySoundFontsPath        = QDir(QString("%1/%2").arg(workingDirectory).arg(QCoreApplication::translate("soundfonts_directory", "Soundfonts"))).absolutePath();
 
       nudgeStep10             = 1.0;      // Ctrl + cursor key (default 1.0)
       nudgeStep50             = 5.0;      // Alt  + cursor key (default 5.0)
@@ -336,7 +336,6 @@ void Preferences::write()
             case SCORE_SESSION:  s.setValue("sessionStart", "score"); break;
             }
       s.setValue("startScore",         startScore);
-      s.setValue("workingDirectory",   workingDirectory);
       s.setValue("defaultStyle",       defaultStyle);
       s.setValue("partStyle",          MScore::partStyle);
       s.setValue("showSplashScreen",   showSplashScreen);
@@ -485,7 +484,6 @@ void Preferences::read()
       MScore::layoutBreakColor   = s.value("layoutBreakColor", MScore::layoutBreakColor).value<QColor>();
       antialiasedDrawing = s.value("antialiasedDrawing", antialiasedDrawing).toBool();
 
-      workingDirectory   = s.value("workingDirectory", workingDirectory).toString();
       defaultStyle       = s.value("defaultStyle", defaultStyle).toString();
       MScore::partStyle        = s.value("partStyle", MScore::partStyle).toString();
 
@@ -555,13 +553,24 @@ void Preferences::read()
             appStyleFile = ":/data/appstyle.css";
             globalStyle  = STYLE_NATIVE;
             }
+      
       singlePalette    = s.value("singlePalette",    singlePalette).toBool();
+      
       myScoresPath     = s.value("myScoresPath",     myScoresPath).toString();
       myStylesPath     = s.value("myStylesPath",     myStylesPath).toString();
       myImagesPath     = s.value("myImagesPath",     myImagesPath).toString();
       myTemplatesPath  = s.value("myTemplatesPath",  myTemplatesPath).toString();
       myPluginsPath    = s.value("myPluginsPath",    myPluginsPath).toString();
       mySoundFontsPath = s.value("mySoundFontsPath", mySoundFontsPath).toString();
+      
+      //Create directories if they are missing
+      QDir dir;
+      dir.mkpath(myScoresPath);
+      dir.mkpath(myStylesPath);
+      dir.mkpath(myImagesPath);
+      dir.mkpath(myTemplatesPath);
+      dir.mkpath(myPluginsPath);
+      dir.mkpath(mySoundFontsPath);
 
       MScore::setHRaster(s.value("hraster", MScore::hRaster()).toInt());
       MScore::setVRaster(s.value("vraster", MScore::vRaster()).toInt());
@@ -640,7 +649,6 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       instrumentListButton->setIcon(*icons[fileOpen_ICON]);
       defaultStyleButton->setIcon(*icons[fileOpen_ICON]);
       partStyleButton->setIcon(*icons[fileOpen_ICON]);
-      workingDirectoryButton->setIcon(*icons[fileOpen_ICON]);
       myScoresButton->setIcon(*icons[fileOpen_ICON]);
       myStylesButton->setIcon(*icons[fileOpen_ICON]);
       myTemplatesButton->setIcon(*icons[fileOpen_ICON]);
@@ -687,11 +695,9 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(buttonBox,          SIGNAL(clicked(QAbstractButton*)), SLOT(buttonBoxClicked(QAbstractButton*)));
       connect(fgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectFgWallpaper()));
       connect(bgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectBgWallpaper()));
-      connect(workingDirectoryButton, SIGNAL(clicked()), SLOT(selectWorkingDirectory()));
       connect(myScoresButton, SIGNAL(clicked()), SLOT(selectScoresDirectory()));
       connect(myStylesButton, SIGNAL(clicked()), SLOT(selectStylesDirectory()));
       connect(myTemplatesButton, SIGNAL(clicked()), SLOT(selectTemplatesDirectory()));
-      connect(myPluginsButton, SIGNAL(clicked()), SLOT(selectPluginsDirectory()));
       connect(mySoundFontsButton, SIGNAL(clicked()), SLOT(selectSoundFontsDirectory()));
       connect(myImagesButton, SIGNAL(clicked()), SLOT(selectImagesDirectory()));
 
@@ -889,7 +895,6 @@ void PreferenceDialog::updateValues(Preferences* p)
             case SCORE_SESSION:  scoreSession->setChecked(true); break;
             }
       sessionScore->setText(p->startScore);
-      workingDirectory->setText(p->workingDirectory);
       showSplashScreen->setChecked(p->showSplashScreen);
       expandRepeats->setChecked(p->midiExpandRepeats);
       instrumentList->setText(p->instrumentList);
@@ -1206,21 +1211,6 @@ void PreferenceDialog::selectBgWallpaper()
       }
 
 //---------------------------------------------------------
-//   selectWorkingDirectory
-//---------------------------------------------------------
-
-void PreferenceDialog::selectWorkingDirectory()
-      {
-      QString s = QFileDialog::getExistingDirectory(
-         this,
-         tr("Choose Working Directory"),
-         workingDirectory->text()
-         );
-      if (!s.isNull())
-            workingDirectory->setText(s);
-      }
-
-//---------------------------------------------------------
 //   selectDefaultStyle
 //---------------------------------------------------------
 
@@ -1411,7 +1401,6 @@ void PreferenceDialog::apply()
       else if (emptySession->isChecked())
             preferences.sessionStart = EMPTY_SESSION;
       preferences.startScore         = sessionScore->text();
-      preferences.workingDirectory   = workingDirectory->text();
       preferences.myScoresPath       = myScores->text();
       preferences.myStylesPath       = myStyles->text();
       preferences.myImagesPath       = myImages->text();
@@ -1650,7 +1639,7 @@ void PreferenceDialog::selectScoresDirectory()
       {
       QString s = QFileDialog::getExistingDirectory(
          this,
-         tr("Choose MyScores Directory"),
+         tr("Choose Scores Directory"),
          myScores->text()
          );
       if (!s.isNull())
@@ -1665,7 +1654,7 @@ void PreferenceDialog::selectStylesDirectory()
       {
       QString s = QFileDialog::getExistingDirectory(
          this,
-         tr("Choose MyStyles Directory"),
+         tr("Choose Styles Directory"),
          myStyles->text()
          );
       if (!s.isNull())
@@ -1680,7 +1669,7 @@ void PreferenceDialog::selectTemplatesDirectory()
       {
       QString s = QFileDialog::getExistingDirectory(
          this,
-         tr("Choose MyTemplates Directory"),
+         tr("Choose Templates Directory"),
          myTemplates->text()
          );
       if (!s.isNull())
@@ -1695,7 +1684,7 @@ void PreferenceDialog::selectPluginsDirectory()
       {
       QString s = QFileDialog::getExistingDirectory(
          this,
-         tr("Choose MyPlugins Directory"),
+         tr("Choose Plugins Directory"),
          myPlugins->text()
          );
       if (!s.isNull())
@@ -1710,7 +1699,7 @@ void PreferenceDialog::selectSoundFontsDirectory()
       {
       QString s = QFileDialog::getExistingDirectory(
          this,
-         tr("Choose MySoundFonts Directory"),
+         tr("Choose SoundFonts Directory"),
          mySoundFonts->text()
          );
       if (!s.isNull())
@@ -1725,7 +1714,7 @@ void PreferenceDialog::selectImagesDirectory()
       {
       QString s = QFileDialog::getExistingDirectory(
          this,
-         tr("Choose MyImages Directory"),
+         tr("Choose Images Directory"),
          myImages->text()
          );
       if (!s.isNull())

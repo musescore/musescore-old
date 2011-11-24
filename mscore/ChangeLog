@@ -1,3 +1,5 @@
+24.nov (la)
+      - remove working directory, clean mydirectories, create them on startup
 22.nov (ws)
       - fix #13710: Horizontal frames issue
       - fix #13711: Vertical Frames moveable
