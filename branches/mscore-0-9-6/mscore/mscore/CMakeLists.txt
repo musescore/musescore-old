@@ -155,7 +155,7 @@ add_executable ( ${ExecutableName}
       actions.cpp accidental.cpp barline.cpp beam.cpp
       bracket.cpp scoreview.cpp chord.cpp chordrest.cpp clef.cpp
       cmd.cpp dynamics.cpp edit.cpp editinstrument.cpp editstyle.cpp
-      edittempo.cpp element.cpp exportxml.cpp file.cpp
+      edittempo.cpp element.cpp exportxml.cpp file.cpp osc.cpp
       hairpin.cpp icons.cpp importbww.cpp importxml.cpp instrdialog.cpp
       key.cpp keyb.cpp layout.cpp layoutbreak.cpp line.cpp inspector.cpp
       measure.cpp menus.cpp midifile.cpp importmidi.cpp mscore.cpp
@@ -207,6 +207,10 @@ endif (STATIC_SCRIPT_BINDINGS)
 if (APPLE)
       set_target_properties (mscore PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/packaging/MacOSXBundleInfo.plist.in)
 endif(APPLE)
+
+if (OSC)
+    target_link_libraries(mscore ofqf)
+endif (OSC)
 
 if (MINGW)
    add_custom_command(

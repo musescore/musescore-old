@@ -329,7 +329,6 @@ class Score : public QObject {
       void cmdInsertClef(int type);
       void cmdExchangeVoice(int, int);
 
-      void updateSelectedElements();
       void removeChordRest(ChordRest* cr, bool clearSegment);
       void cmdMove(Element* e, QPointF delta);
 
@@ -373,6 +372,8 @@ class Score : public QObject {
       int curTrack;
 
       TextC* rights;                ///< Copyright printed at bottom of page
+
+      void updateSelectedElements();
 
       void cmdAppendMeasures(int);
       void cmdInsertMeasures(int);
@@ -579,6 +580,7 @@ class Score : public QObject {
 
       Element* getSelectedElement() const   { return _selection.element(); }
       const Selection& selection() const    { return _selection; }
+      Selection& selection()                { return _selection; }
       void setSelection(const Selection& s);
 
       int pos();

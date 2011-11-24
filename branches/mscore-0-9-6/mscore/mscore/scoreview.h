@@ -285,6 +285,7 @@ class ScoreView : public QWidget {
       void changeLineSegment(bool);
       void midiNoteReceived(int pitch, bool);
       void changeVoice(int voice);
+      void selectMeasure(int n);
       };
 
 extern int searchStaff(const Element* element);

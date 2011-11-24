@@ -876,6 +876,7 @@ MuseScore::MuseScore()
       autoSaveTimer = new QTimer(this);
       autoSaveTimer->setSingleShot(true);
       connect(autoSaveTimer, SIGNAL(timeout()), this, SLOT(autoSaveTimerTimeout()));
+      initOsc();
       startAutoSave();
       }
 
@@ -1739,7 +1740,9 @@ int main(int argc, char* av[])
 
       QStringList argv =  QCoreApplication::arguments();
       argv.removeFirst();
-
+      
+      bool useOsc = false;
+      
       for (int i = 0; i < argv.size();) {
             QString s = argv[i];
             if (s[0] != '-') {
@@ -1750,7 +1753,7 @@ int main(int argc, char* av[])
                   case 'v':
                         printVersion("MuseScore");
                         return 0;
-                   case 'd':
+                  case 'd':
                         debugMode       = true;
                         enableInspector = true;
                         break;
@@ -1808,7 +1811,7 @@ int main(int argc, char* av[])
                         enableExperimental = true;
                         enableInspector = true;
                         break;
-                   case 'c':
+                  case 'c':
                         {
                         if (argv.size() - i < 2)
                               usage();
@@ -1821,6 +1824,11 @@ int main(int argc, char* av[])
                               }
                         }
                         break;
+                  case 'C':
+                        {
+                        useOsc = true;
+                        break;
+                        }
                   default:
                         usage();
                   }
@@ -1885,7 +1893,8 @@ int main(int argc, char* av[])
       else {
             preferences.soundFont = mscoreGlobalShare+"sound/TimGM6mb.sf2";
             }
-
+      preferences.useOsc = useOsc;
+      
       QSplashScreen* sc = 0;
       if (!noGui && preferences.showSplashScreen) {
             QPixmap pm(":/data/splash.jpg");

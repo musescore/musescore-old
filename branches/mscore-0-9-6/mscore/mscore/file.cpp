@@ -192,6 +192,11 @@ void MuseScore::loadFile()
          tr("Overture Files <experimental> (*.ove);;")+
          tr("All Files (*)")
          );
+      openScore(fn);
+      }
+
+void MuseScore::openScore(const QString& fn)
+      {
       if (fn.isEmpty())
             return;
       Score* score = new Score(defaultStyle);
