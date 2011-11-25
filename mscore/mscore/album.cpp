@@ -23,6 +23,7 @@
 #include "libmscore/score.h"
 #include "libmscore/page.h"
 #include "musescore.h"
+#include "preferences.h"
 #include "icons.h"
 #include "libmscore/mscore.h"
 
@@ -298,7 +299,7 @@ void Album::save(Xml& xml)
 void Album::write()
       {
       if (_path.isEmpty()) {
-            QString home = QDir::homePath();
+            QString home = preferences.myScoresPath;
             QString selectedFilter;
             QString fn = mscore->getSaveScoreName(
                QWidget::tr("MuseScore: Save Album"),
@@ -440,12 +441,15 @@ void AlbumManager::addClicked()
 
 void AlbumManager::loadClicked()
       {
-      QString home = QDir::homePath();
-      QString fn = mscore->getOpenScoreName(
+      QString home = preferences.myScoresPath;
+      QStringList files = mscore->getOpenScoreNames(
          home,
          tr("MuseScore Album Files (*.album);;")+
          tr("All Files (*)")
          );
+      if (files.isEmpty())
+            return;
+      QString fn = files.front();
       if (fn.isEmpty())
             return;
       Album* a = new Album;
@@ -521,12 +525,15 @@ void AlbumManager::removeClicked()
 
 void AlbumManager::fileDialogClicked()
       {
-      QString home = QDir::homePath();
-      QString fn = mscore->getOpenScoreName(
+      QString home = preferences.myScoresPath;
+      QStringList files = mscore->getOpenScoreNames(
          home,
          tr("MuseScore Files (*.mscz *.mscx *.msc);;")+
          tr("All Files (*)")
          );
+      if (files.isEmpty())
+            return;
+      QString fn = files.front();
       if (fn.isEmpty())
             return;
       scoreName->setText(fn);

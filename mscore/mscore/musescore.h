@@ -313,7 +313,7 @@ class MuseScore : public QMainWindow {
       void showKeyEditor();
       void timeMenu();
       void dynamicsMenu();
-      void loadFile();
+      void loadFiles();
       void saveFile();
       void fingeringMenu();
       void registerPlugin(const QString& pluginPath);
@@ -501,7 +501,7 @@ class MuseScore : public QMainWindow {
       void readScoreError(const QString&) const;
       QList<LanguageItem>& languages() { return _languages; }
 
-      QString getOpenScoreName(QString& dir, const QString& filter);
+      QStringList getOpenScoreNames(QString& dir, const QString& filter);
       QString getSaveScoreName(const QString& title,
          QString& name, const QString& filter, QString* selectedFilter);
       QString getStyleFilename(bool open);

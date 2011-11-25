@@ -213,9 +213,9 @@ bool MuseScore::checkDirty(Score* s)
  Handles the GUI's file-open action.
  */
 
-void MuseScore::loadFile()
+void MuseScore::loadFiles()
       {
-      QString fn = getOpenScoreName(
+      QStringList files = getOpenScoreNames(
          lastOpenPath,
 #ifdef OMR
          tr("All Supported Files (*.mscz *.mscx *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.pdf *.ove *.scw *.bww *.GTP *.GP3 *.GP4 *.GP5);;")+
@@ -236,7 +236,12 @@ void MuseScore::loadFile()
          tr("Guitar Pro (*.GTP *.GP3 *.GP4 *.GP5);;")+
          tr("All Files (*)")
          );
-      openScore(fn);
+      QStringList list = files;
+      QStringList::Iterator it = list.begin();
+      while(it != list.end()) {
+            openScore(*it);
+            ++it;
+            }   
       }
 
 void MuseScore::openScore(const QString& fn)
@@ -612,10 +617,10 @@ void MuseScore::newFile()
 //   getOpenFileName
 //---------------------------------------------------------
 
-QString MuseScore::getOpenScoreName(QString& dir, const QString& filter)
+QStringList MuseScore::getOpenScoreNames(QString& dir, const QString& filter)
       {
       if (preferences.nativeDialogs) {
-            return QFileDialog::getOpenFileName(this,
+            return QFileDialog::getOpenFileNames(this,
                tr("MuseScore: Load Score"), dir, filter);
             }
       QFileInfo myScores(preferences.myScoresPath);
@@ -623,7 +628,7 @@ QString MuseScore::getOpenScoreName(QString& dir, const QString& filter)
             myScores.setFile(QDir::home(), preferences.myScoresPath);
       if (loadScoreDialog == 0) {
             loadScoreDialog = new QFileDialog(this);
-            loadScoreDialog->setFileMode(QFileDialog::ExistingFile);
+            loadScoreDialog->setFileMode(QFileDialog::ExistingFiles);
             loadScoreDialog->setOption(QFileDialog::DontUseNativeDialog, true);
             loadScoreDialog->setWindowTitle(tr("MuseScore: Load Score"));
 
@@ -642,13 +647,13 @@ QString MuseScore::getOpenScoreName(QString& dir, const QString& filter)
 
       loadScoreDialog->setNameFilter(filter);
       loadScoreDialog->setDirectory(dir);
-
+      
       QStringList result;
       if (loadScoreDialog->exec()) {
             result = loadScoreDialog->selectedFiles();
-            return result.front();
+            return result;
             }
-      return QString();
+      return QStringList();
       }
 
 //---------------------------------------------------------

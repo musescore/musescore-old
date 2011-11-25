@@ -4029,7 +4029,7 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
       else if (cmd == "dynamics")
             dynamicsMenu();
       else if (cmd == "file-open")
-            loadFile();
+            loadFiles();
       else if (cmd == "file-save")
             saveFile();
       else if (cmd == "file-export")
