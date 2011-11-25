@@ -2323,7 +2323,7 @@ ChangePart::ChangePart(Part* _part, const Instrument& i, const QString& s)
       {
       instrument = i;
       part       = _part;
-      name       = s;
+      partName   = s;
       }
 
 //---------------------------------------------------------
@@ -2335,8 +2335,8 @@ void ChangePart::flip()
       Instrument oi = *part->instr();
       QString s     = part->partName();
       part->setInstrument(instrument);
-      part->setPartName(name);
-      name       = s;
+      part->setPartName(partName);
+      partName   = s;
       instrument = oi;
       part->score()->rebuildMidiMapping();
       part->score()->setInstrumentsChanged(true);

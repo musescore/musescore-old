@@ -231,6 +231,8 @@ void Measure::dump() const
 void Measure::remove(Segment* el)
       {
 #ifndef NDEBUG
+      Q_ASSERT(!score()->undoRedo());
+      Q_ASSERT(el->type() == SEGMENT);
       if (el->prev()) {
             Q_ASSERT(el->prev()->next() == el);
             }
