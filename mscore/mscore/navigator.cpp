@@ -313,7 +313,7 @@ static void paintElement(void* data, Element* e)
       {
       QPainter* p = static_cast<QPainter*>(data);
       p->save();
-      p->setPen(QPen(e->curColor()));
+//      p->setPen(QPen(e->curColor()));
       p->translate(e->pagePos());
       e->draw(p);
       p->restore();
