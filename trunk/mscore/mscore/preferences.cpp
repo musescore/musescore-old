@@ -268,7 +268,14 @@ void Preferences::init()
 
       MScore::setHRaster(2);        // _spatium / value
       MScore::setVRaster(2);
-      nativeDialogs           = false;    // use system native file dialogs
+#if defined(Q_WS_MAC) || defined(__MINGW32__)
+      // use system native file dialogs
+      // Qt file dialog is very slow on Windows and Mac
+      nativeDialogs           = true;    
+#else
+      nativeDialogs           = false;    // don't use system native file dialogs
+#endif
+      
       exportAudioSampleRate   = exportAudioSampleRates[0];
 
       profile                 = "default";

@@ -1,3 +1,7 @@
+25.nov (la)
+      - fix #13823: Multi-select when opening files
+      - fix #13788: Select All for supported file types
+      - fix #13822: List MIDI file details during import
 24.nov (la)
       - increase default size to 1024x768
       - remove working directory, clean mydirectories, create them on startup

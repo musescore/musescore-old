@@ -1404,9 +1404,11 @@ bool MuseScore::importMidi(Score* score, const QString& name)
             }
       fp.close();
 
-      int shortestNote = MScore::division / 16;     // 1/64
+      int shortestNote = MScore::division / 4;     // 1/64
       if (!noGui) {
             ImportMidiDialog id(0);
+            QFileInfo fn(name);
+            id.setWindowTitle(fn.fileName() + " - "  + tr("MIDI Import"));
             id.setShortestNote(shortestNote);
             id.exec();
             shortestNote = id.shortestNote();
