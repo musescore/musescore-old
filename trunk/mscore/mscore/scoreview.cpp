@@ -4339,7 +4339,9 @@ void ScoreView::endUndoRedo()
       _score->updateSelection();
       mscore->updateInputState(_score);
       if (_score->layoutAll()) {
+            _score->setUndoRedo(true);
             _score->doLayout();           // TODO: does not really work
+            _score->setUndoRedo(false);
             _score->setUpdateAll(true);
             }
       _score->end();

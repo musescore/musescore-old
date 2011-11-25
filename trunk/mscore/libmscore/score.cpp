@@ -284,6 +284,7 @@ void Score::init()
       _updateAll      = true;
       _layoutAll      = true;
       layoutFlags     = 0;
+      _undoRedo       = false;
       _playNote       = false;
       _excerptsChanged = false;
       _instrumentsChanged = false;

@@ -1033,7 +1033,8 @@ void Score::removeGeneratedElements(Measure* sm, Measure* em)
                             || (el->type() == CLEF && seg->tick() != sm->tick())
                             || (el->type() == KEYSIG && seg->tick() != sm->tick())))
                               {
-                              undoRemoveElement(el);
+                              if (!_undoRedo)
+                                    undoRemoveElement(el);
                               }
                         else if (el->type() == CLEF) {
                               Clef* clef = static_cast<Clef*>(el);

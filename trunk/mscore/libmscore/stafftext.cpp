@@ -105,7 +105,7 @@ void StaffText::read(QDomElement e)
             else if (!Text::readProperties(e))
                   domError(e);
             }
-      cursorPos = 0;
+//      cursorPos = 0;
       }
 
 //---------------------------------------------------------

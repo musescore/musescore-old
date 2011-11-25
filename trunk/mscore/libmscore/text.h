@@ -41,8 +41,6 @@ class Text : public SimpleText {
       bool _editMode;
       QTextCursor* _cursor;
 
-      int cursorPos;
-
       TextStyle  _localStyle;       // use this properties if _styled is false
       QString _styleName;           // style name of _localStyle (or "")
 
@@ -67,8 +65,6 @@ class Text : public SimpleText {
       QString getText() const;
       QString getHtml() const;
       QTextDocumentFragment getFragment() const { return QTextDocumentFragment(_doc); }
-
-//      QTextDocument* doc() const            { return _doc; }
 
       qreal frameWidth() const;
       qreal paddingWidth() const;

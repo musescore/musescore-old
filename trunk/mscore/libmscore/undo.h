@@ -979,7 +979,7 @@ class ChangeStaff : public UndoCommand {
 class ChangePart : public UndoCommand {
       Part* part;
       Instrument instrument;
-      QString name;
+      QString partName;
 
       void flip();
 

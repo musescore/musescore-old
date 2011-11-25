@@ -275,6 +275,7 @@ class Score {
       Measure* startLayout;   ///< start a relayout at this measure
       bool _layoutAll;        ///< do a complete relayout
       LayoutFlags layoutFlags;
+      bool _undoRedo;         ///< true if in processing a undo/redo
       bool _playNote;         ///< play selected note after command
       bool _excerptsChanged;
       bool _instrumentsChanged;
@@ -863,6 +864,8 @@ class Score {
       void doLayoutPages();
       Tuplet* searchTuplet(QDomElement e, int id);
       void cmdSelectAll();
+      void setUndoRedo(bool val)            { _undoRedo = val; }
+      bool undoRedo() const                 { return _undoRedo; }
       };
 
 extern Score* gscore;

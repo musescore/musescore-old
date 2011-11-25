@@ -35,7 +35,8 @@ QReadWriteLock docRenderLock;
 void Text::createDoc()
       {
       _doc = new QTextDocument(0);
-      _doc->setDocumentMargin(1.0);
+//      _doc->setDocumentMargin(1.0);
+      _doc->setDocumentMargin(0.0);
       _doc->setUseDesignMetrics(true);
       _doc->setUndoRedoEnabled(true);
       _doc->documentLayout()->setProperty("cursorWidth", QVariant(2));
@@ -55,7 +56,6 @@ Text::Text(Score* s)
       {
       _doc       = 0;
       _editMode  = false;
-      cursorPos  = 0;
       _cursor    = 0;
       setFlag(ELEMENT_MOVABLE, true);
       _styled    = true;
@@ -73,7 +73,6 @@ Text::Text(const Text& e)
       _styled     = e._styled;
       _editMode   = false;
       _cursor     = 0;
-      cursorPos   = e.cursorPos;
       _localStyle = e._localStyle;
       }
 
@@ -105,8 +104,6 @@ void Text::setUnstyledText(const QString& s)
       {
       Align align = style().align();
       _doc->clear();
-      QFont font(style().font(spatium()));
-      _doc->setDefaultFont(font);
 
       QTextCursor c(_doc);
       c.setVisualNavigation(true);
@@ -123,7 +120,7 @@ void Text::setUnstyledText(const QString& s)
       c.setBlockFormat(bf);
 
       QTextCharFormat tf = c.charFormat();
-      tf.setFont(font);
+      tf.setFont(style().font(spatium()));
       c.setBlockCharFormat(tf);
       c.insertText(s);
       }
@@ -263,6 +260,7 @@ void Text::layout(qreal layoutWidth, qreal x, qreal y)
 
       if (parent() == 0)
             return;
+
       if (parent()->type() == SEGMENT) {
             Segment* s = static_cast<Segment*>(parent());
             rypos() += s ? s->measure()->system()->staff(staffIdx())->y() : 0.0;
@@ -345,8 +343,9 @@ void Text::draw(QPainter* painter) const
       // make it thread save
       {
       QWriteLocker locker(&docRenderLock);
-      QScopedPointer<QTextDocument> __doc(_doc->clone());
-      __doc.data()->documentLayout()->draw(painter, c);
+//      QScopedPointer<QTextDocument> __doc(_doc->clone());
+//      __doc.data()->documentLayout()->draw(painter, c);
+      _doc->documentLayout()->draw(painter, c);
       }
 #else
       _doc->documentLayout()->draw(painter, c);
@@ -431,7 +430,6 @@ void Text::read(QDomElement e)
                   styleChanged();
                   }
             }
-      cursorPos = 0;
       }
 
 //---------------------------------------------------------
@@ -627,11 +625,9 @@ void Text::startEdit(MuseScoreView*, const QPointF& p)
             }
       _cursor = new QTextCursor(_doc);
       _cursor->setVisualNavigation(true);
-      _cursor->setPosition(cursorPos);
       setCursor(p);
-      cursorPos = _cursor->position();
 
-      if (cursorPos == 0 && align()) {
+      if (_cursor->position() == 0 && align()) {
             QTextBlockFormat bf = _cursor->blockFormat();
             Qt::Alignment alignment = 0;
             if (align() & ALIGN_HCENTER)
@@ -1464,8 +1460,6 @@ void Text::endEdit()
             qDebug("endEdit<%p>: no cursor: edit mode %d %p\n", this, _editMode, _cursor);
             return;
             }
-      cursorPos = _cursor->position();
-
       _editMode = false;
       endCursorEdit();
       layout();
