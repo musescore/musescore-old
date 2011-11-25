@@ -153,7 +153,7 @@ void SimpleText::setSubtype(const QString& s)
 void SimpleText::draw(QPainter* p) const
       {
       p->setPen(curColor());
-      p->setFont(style().font(spatium()));
+      p->setFont(style().fontPx(spatium()));
       QRectF r;
       int flags = alignFlags();
       p->drawText(r, flags, _text);
