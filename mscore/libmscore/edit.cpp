@@ -46,6 +46,7 @@
 #include "slurmap.h"
 #include "tiemap.h"
 #include "stem.h"
+#include "iname.h"
 
 //---------------------------------------------------------
 //   getSelectedNote
@@ -1199,9 +1200,9 @@ void Score::deleteItem(Element* el)
             case INSTRUMENT_NAME: {
                   Part* part = el->staff()->part();
 
-                  if (el->subtype() == TEXT_INSTRUMENT_LONG)
+                  if (el->subtype() == INSTRUMENT_NAME_LONG)
                         undo()->push(new ChangeInstrumentLong(0, part, QList<StaffNameDoc>()));
-                  else if (el->subtype() == TEXT_INSTRUMENT_SHORT)
+                  else if (el->subtype() == INSTRUMENT_NAME_SHORT)
                         undo()->push(new ChangeInstrumentShort(0, part, QList<StaffNameDoc>()));
                   }
                   break;

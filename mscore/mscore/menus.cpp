@@ -710,7 +710,7 @@ void MuseScore::populatePalette()
       text = new Text(gscore);
       text->setTrack(0);
       text->setTextStyle(TEXT_STYLE_LYRICS_VERSE_NUMBER);
-      text->setSubtype(TEXT_LYRICS_VERSE_NUMBER);
+//      text->setSubtype(TEXT_LYRICS_VERSE_NUMBER);
       text->setText(tr("1."));
       text->setSystemFlag(true);
       sp->append(text, tr("Lyrics Verse Number"));

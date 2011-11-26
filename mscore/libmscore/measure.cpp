@@ -533,7 +533,6 @@ void Measure::layout2()
             if (_noText == 0) {
                   _noText = new Text(score());
                   _noText->setGenerated(true);
-                  _noText->setSubtype(TEXT_MEASURE_NUMBER);
                   _noText->setTextStyle(TEXT_STYLE_MEASURE_NUMBER);
                   _noText->setParent(this);
                   _noText->setSelectable(false);
@@ -990,8 +989,6 @@ void Measure::remove(Element* el)
                   // fall through
 
             case HBOX:
-                  if (el->type() == TEXT && el->subtype() == TEXT_MEASURE_NUMBER)
-                        break;
                   if (!_el.remove(el)) {
                         qDebug("Measure(%p)::remove(%s,%p) not found",
                            this, el->name(), el);
@@ -3128,10 +3125,7 @@ void Measure::layoutStage1()
                   else if (!breakMMRest()) {
                         for (Segment* s = first(); s; s = s->next()) {
                               foreach(Element* e, s->annotations()) {
-                                    if (
-                                       ((e->type() == TEXT) && (e->subtype() == TEXT_REHEARSAL_MARK))
-                                       || (e->type() == TEMPO_TEXT)
-                                       ) {
+                                    if (e->type() == REHEARSAL_MARK || e->type() == TEMPO_TEXT) {
                                           setBreakMMRest(true);
                                           break;
                                           }

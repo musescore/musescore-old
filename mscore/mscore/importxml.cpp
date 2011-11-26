@@ -79,6 +79,8 @@
 #include "libmscore/chordlist.h"
 #include "libmscore/mscore.h"
 #include "libmscore/accidental.h"
+#include "libmscore/rehearsalmark.h"
+#include "libmscore/fingering.h"
 #include "preferences.h"
 
 //---------------------------------------------------------
@@ -475,11 +477,10 @@ void MusicXml::import(Score* s)
 //   addText
 //---------------------------------------------------------
 
-static void addText(VBox*& vbx, Score* s, QString strTxt, int sbtp, TextStyleType stl)
+static void addText(VBox*& vbx, Score* s, QString strTxt, TextStyleType stl)
       {
       if (!strTxt.isEmpty()) {
             Text* text = new Text(s);
-            text->setSubtype(sbtp);
             text->setTextStyle(stl);
             text->setText(strTxt);
             if (vbx == 0)
@@ -612,11 +613,11 @@ void MusicXml::doCredits()
             }
 
       VBox* vbox  = 0;
-      addText(vbox, score, strTitle,      TEXT_TITLE, TEXT_STYLE_TITLE);
-      addText(vbox, score, strSubTitle,   TEXT_SUBTITLE, TEXT_STYLE_SUBTITLE);
-      addText(vbox, score, strComposer,   TEXT_COMPOSER, TEXT_STYLE_COMPOSER);
-      addText(vbox, score, strPoet,       TEXT_POET, TEXT_STYLE_POET);
-      addText(vbox, score, strTranslator, TEXT_TRANSLATOR, TEXT_STYLE_TRANSLATOR);
+      addText(vbox, score, strTitle,      TEXT_STYLE_TITLE);
+      addText(vbox, score, strSubTitle,   TEXT_STYLE_SUBTITLE);
+      addText(vbox, score, strComposer,   TEXT_STYLE_COMPOSER);
+      addText(vbox, score, strPoet,       TEXT_STYLE_POET);
+      addText(vbox, score, strTranslator, TEXT_STYLE_TRANSLATOR);
       if (vbox) {
             vbox->setTick(0);
             score->measures()->add(vbox);
@@ -2138,9 +2139,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             */
             }
       else if (dirType == "rehearsal") {
-            Text* t = new Text(score);
-            t->setSubtype(TEXT_REHEARSAL_MARK);
-            t->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
+            Text* t = new RehearsalMark(score);
             t->setText(rehearsal);
             if (hasYoffset) t->setYoff(yoffset);
             else t->setAbove(placement == "above");
@@ -3284,16 +3283,15 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   }
 
             if (!fingering.isEmpty()) {
-                  Text* f = new Text(score);
-                  f->setSubtype(TEXT_FINGERING);
+                  Text* f = new Fingering(score);
                   f->setTextStyle(TEXT_STYLE_FINGERING);
                   f->setText(fingering);
                   note->add(f);
                   }
 
             if (!pluck.isEmpty()) {
-                  Text* f = new Text(score);
-                  f->setSubtype(TEXT_FINGERING);
+                  Text* f = new Fingering(score);
+                  // f->setSubtype(TEXT_FINGERING);
                   f->setTextStyle(TEXT_STYLE_FINGERING);
                   f->setText(pluck);
                   note->add(f);
@@ -3301,7 +3299,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 
             if (!string.isEmpty()) {
                   Text* f = new Text(score);
-                  f->setSubtype(TEXT_STRING_NUMBER);
+//                  f->setSubtype(TEXT_STRING_NUMBER);
                   f->setTextStyle(TEXT_STYLE_STRING_NUMBER);
                   f->setText(string);
                   note->add(f);

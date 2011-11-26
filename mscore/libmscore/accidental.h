@@ -58,7 +58,7 @@ class Accidental : public Element {
       Accidental(Score* s);
       virtual Accidental* clone() const     { return new Accidental(*this); }
       virtual ElementType type() const      { return ACCIDENTAL; }
-      virtual const QString subtypeName() const;
+      virtual QString subtypeName() const;
       const char* subtypeUserName() const;
       virtual void setSubtype(const QString& s);
       virtual void setSubtype(AccidentalType t) { Element::setSubtype(int(t)); }

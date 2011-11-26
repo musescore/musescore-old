@@ -44,7 +44,7 @@ class LayoutBreak : public Element {
       virtual ElementType type() const { return LAYOUT_BREAK; }
       virtual void setSubtype(const QString&);
       virtual void setSubtype(int st);
-      virtual const QString subtypeName() const;
+      virtual QString subtypeName() const;
       virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
       virtual void write(Xml&) const;

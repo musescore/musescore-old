@@ -396,7 +396,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             }
       else if (cmd == "frame-text") {
             Text* s = new Text(score());
-            s->setSubtype(TEXT_FRAME);
+//            s->setSubtype(TEXT_FRAME);
             s->setTextStyle(TEXT_STYLE_FRAME);
             s->setParent(e);
             score()->undoAddElement(s);
@@ -409,7 +409,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             }
       else if (cmd == "frame-text") {
             Text* t = new Text(score());
-            t->setSubtype(TEXT_FRAME);
+//            t->setSubtype(TEXT_FRAME);
             t->setTextStyle(TEXT_STYLE_FRAME);
             t->setParent(e);
             score()->undoAddElement(t);

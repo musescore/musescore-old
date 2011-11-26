@@ -889,6 +889,7 @@ void ExportMusicXml::credits(Xml& xml)
       qDebug("credits:");
       const MeasureBase* measure = score->measures()->first();
       foreach(const Element* element, *measure->el()) {
+#if 0 // no subtypes for strings
             if (element->type() == TEXT) {
                   const Text* text = (const Text*)element;
                   bool mustPrint = true;
@@ -917,6 +918,7 @@ void ExportMusicXml::credits(Xml& xml)
                                         text->pagePos().y()
                                         );
                   }
+#endif
             }
       QString rights = score->metaTag("copyright");
       if (!rights.isEmpty())
@@ -947,6 +949,8 @@ void ExportMusicXml::credits(Xml& xml)
                          );
                   const double ty = h - getTenthsFromDots(text->pagePos().y());
                   const int fs = text->font().pointSize();
+#if 0
+  // parameters should be extracted from text layout
                   switch (text->subtype()) {
                         case TEXT_TITLE:
                               creditWords(xml, w / 2, ty, fs, "center", "top", text->getText());
@@ -966,6 +970,7 @@ void ExportMusicXml::credits(Xml& xml)
                               qDebug("credits: text subtype %s not supported",
                                      text->subtypeName().toUtf8().data());
                         }
+#endif
                   }
             }
       if (!rights.isEmpty()) {
@@ -1987,13 +1992,14 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                   chordAttributes(chord, notations, technical, xml, trillStart, trillStop);
                   }
             foreach (const Element* e, *note->el()) {
-                  if (e->type() == TEXT
-                      && (e->subtype() == TEXT_FINGERING || e->subtype() == TEXT_STRING_NUMBER)) {
+                  // if (e->type() == FINGERING || (e->type() == TEXT && (e->subtype() == TEXT_STRING_NUMBER)) {
+                  // TODOws
+                  if (e->type() == FINGERING) {
                         Text* f = (Text*)e;
                         notations.tag(xml);
                         technical.tag(xml);
                         QString t = f->getText();
-                        if (e->subtype() == TEXT_FINGERING) {
+                        if (e->type() == FINGERING) {
                               // p, i, m, a, c represent the plucking finger
                               if (t == "p" || t == "i" || t == "m" || t == "a" || t == "c")
                                     xml.tag("pluck", t);

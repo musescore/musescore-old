@@ -60,6 +60,7 @@
 #include "libmscore/tremolo.h"
 #include "libmscore/volta.h"
 #include "libmscore/chordlist.h"
+#include "libmscore/rehearsalmark.h"
 
 class MeasureToTick {
 public:
@@ -315,10 +316,9 @@ OVE::Staff* getStaff(const OVE::OveSong* ove, int track) {
 	return 0;
 }
 
-void addText(VBox* & vbox, Score* s, QString strTxt, int sbtp, TextStyleType stl) {
+void addText(VBox* & vbox, Score* s, QString strTxt, TextStyleType stl) {
 	if (!strTxt.isEmpty()) {
 		Text* text = new Text(s);
-		text->setSubtype(sbtp);
 		text->setTextStyle(stl);
 		text->setText(strTxt);
 		if(vbox == 0) {
@@ -334,18 +334,18 @@ void OveToMScore::convertHeader() {
 	if( !titles.empty() && !titles[0].isEmpty() ) {
 		QString title = titles[0];
 		score_->setMetaTag("movementTitle", title);
-		addText(vbox, score_, title, TEXT_TITLE, TEXT_STYLE_TITLE);
+		addText(vbox, score_, title, TEXT_STYLE_TITLE);
 	}
 
 	QList<QString> writers = ove_->getWriters();
 	if(!writers.empty()) {
 		QString composer = writers[0];
-		addText(vbox, score_, composer, TEXT_COMPOSER, TEXT_STYLE_COMPOSER);
+		addText(vbox, score_, composer, TEXT_STYLE_COMPOSER);
 	}
 
 	if(writers.size() > 1) {
 		QString lyricist = writers[1];
-		addText(vbox, score_, lyricist, TEXT_POET, TEXT_STYLE_POET);
+		addText(vbox, score_, lyricist, TEXT_STYLE_POET);
 	}
 
     if (vbox) {
@@ -1265,9 +1265,7 @@ void OveToMScore::convertMeasureMisc(Measure* measure, int part, int staff, int 
 	for(i=0; i<texts.size(); ++i){
 		OVE::Text* textPtr = static_cast<OVE::Text*>(texts[i]);
 		if(textPtr->getTextType() == OVE::Text::Text_Rehearsal){
-			Text* text = new Text(score_);
-			text->setSubtype(TEXT_REHEARSAL_MARK);
-			text->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
+			Text* text = new RehearsalMark(score_);
             text->setText(textPtr->getText());
             text->setAbove(true);
             text->setTrack(track);

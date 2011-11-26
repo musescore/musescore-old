@@ -71,6 +71,7 @@ void ExportMidi::writeHeader()
       MidiTrack* track  = mf.tracks()->front();
       MeasureBase* measure  = cs->first();
 
+#if 0 // TODOxx
       foreach (const Element* e, *measure->el()) {
             if (e->type() == TEXT) {
                   const Text* text = (const Text*)(e);
@@ -109,7 +110,7 @@ void ExportMidi::writeHeader()
                         }
                   }
             }
-
+#endif
       //--------------------------------------------
       //    write time signature
       //--------------------------------------------

@@ -129,7 +129,7 @@ class ChordRest : public DurationElement {
       virtual void add(Element*);
       virtual void remove(Element*);
       void removeDeleteBeam();
-      virtual const QString subtypeName() const { return QString(); }
+      virtual QString subtypeName() const { return QString(); }
       };
 
 #endif

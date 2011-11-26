@@ -1,4 +1,4 @@
-//=============================================================================
+
 //  MuseScore
 //  Linux Music Score Editor
 //  $Id$
@@ -52,11 +52,10 @@
 //   TODO: remove duplicate code
 //---------------------------------------------------------
 
-static void addText(VBox*& vbx, Score* s, QString strTxt, int sbtp, TextStyleType stl)
+static void addText(VBox*& vbx, Score* s, QString strTxt, TextStyleType stl)
       {
       if (!strTxt.isEmpty()) {
             Text* text = new Text(s);
-            text->setSubtype(sbtp);
             text->setTextStyle(stl);
             text->setText(strTxt);
             if (vbx == 0)
@@ -444,11 +443,11 @@ void MsScWriter::header(const QString title, const QString type,
 
       //  score->setWorkTitle(title);
       VBox* vbox  = 0;
-      addText(vbox, score, title, TEXT_TITLE, TEXT_STYLE_TITLE);
-      addText(vbox, score, type, TEXT_SUBTITLE, TEXT_STYLE_SUBTITLE);
-      addText(vbox, score, composer, TEXT_COMPOSER, TEXT_STYLE_COMPOSER);
-      // addText(vbox, score, strPoet, TEXT_POET, TEXT_STYLE_POET);
-      // addText(vbox, score, strTranslator, TEXT_TRANSLATOR, TEXT_STYLE_TRANSLATOR);
+      addText(vbox, score, title, TEXT_STYLE_TITLE);
+      addText(vbox, score, type, TEXT_STYLE_SUBTITLE);
+      addText(vbox, score, composer, TEXT_STYLE_COMPOSER);
+      // addText(vbox, score, strPoet, TEXT_STYLE_POET);
+      // addText(vbox, score, strTranslator, TEXT_STYLE_TRANSLATOR);
       if (vbox) {
             vbox->setTick(0);
             score->measures()->add(vbox);

@@ -75,6 +75,7 @@
 #include "icon.h"
 #include "ossia.h"
 #include "figuredbass.h"
+#include "rehearsalmark.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -118,6 +119,7 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "Tuplet"),
       QT_TRANSLATE_NOOP("elementName", "Tempo"),
       QT_TRANSLATE_NOOP("elementName", "StaffText"),
+      QT_TRANSLATE_NOOP("elementName", "RehearsalMark"),
       QT_TRANSLATE_NOOP("elementName", "InstrumentChange"),
       QT_TRANSLATE_NOOP("elementName", "Harmony"),
       QT_TRANSLATE_NOOP("elementName", "FretDiagram"),
@@ -1268,6 +1270,7 @@ Element* Element::create(ElementType type, Score* score)
             case TEXT:              return new Text(score);
             case INSTRUMENT_NAME:   return new InstrumentName(score);
             case STAFF_TEXT:        return new StaffText(score);
+            case REHEARSAL_MARK:    return new RehearsalMark(score);
             case INSTRUMENT_CHANGE: return new InstrumentChange(score);
             case NOTEHEAD:          return new NoteHead(score);
             case NOTEDOT:           return new NoteDot(score);
@@ -1381,6 +1384,7 @@ const char* Element::name(ElementType type)
             case TUPLET:            return "Tuplet";
             case TEMPO_TEXT:        return "Tempo";
             case STAFF_TEXT:        return "StaffText";
+            case REHEARSAL_MARK:    return "RehearsalMark";
             case INSTRUMENT_CHANGE: return "InstrumentChange";
             case HARMONY:           return "Harmony";
             case FRET_DIAGRAM:      return "FretDiagram";

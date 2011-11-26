@@ -56,7 +56,7 @@ class Dynamic : public Text {
 
       virtual void setSubtype(int val);
       virtual void setSubtype(const QString&);
-      virtual const QString subtypeName() const;
+      virtual QString subtypeName() const;
 
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);

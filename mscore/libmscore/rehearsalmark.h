@@ -3,7 +3,7 @@
 //  Music Composition & Notation
 //  $Id:$
 //
-//  Copyright (C) 2010-2011 Werner Schweer
+//  Copyright (C) 2011 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2
@@ -11,31 +11,21 @@
 //  the file LICENCE.GPL
 //=============================================================================
 
-#ifndef __TEXTFRAME_H__
-#define __TEXTFRAME_H__
+#ifndef __REHEARSALMARK_H__
+#define __REHEARSALMARK_H__
 
-#include "box.h"
+#include "text.h"
 
 //---------------------------------------------------------
-//   TBox
+//   RehearsalMark
 //---------------------------------------------------------
 
-class TBox : public VBox {
-      Q_DECLARE_TR_FUNCTIONS(TBox)
+class RehearsalMark : public Text  {
 
    public:
-      TBox(Score* score);
-      ~TBox() {}
-      virtual TBox* clone() const      { return new TBox(*this); }
-      virtual ElementType type() const { return TBOX;       }
-
-      virtual void layout();
-      virtual void add(Element*);
-      Text* getText();
-      virtual QString subtypeName() const {
-            printf("TBOX ??????????????\n");
-            return QString();
-            }
+      RehearsalMark(Score* score);
+      virtual RehearsalMark* clone() const { return new RehearsalMark(*this); }
+      virtual ElementType type() const { return REHEARSAL_MARK; }
       };
 
 #endif

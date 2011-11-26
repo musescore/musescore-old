@@ -171,7 +171,7 @@ void LayoutBreak::spatiumChanged(qreal, qreal)
 //   subtypeName
 //---------------------------------------------------------
 
-const QString LayoutBreak::subtypeName() const
+QString LayoutBreak::subtypeName() const
       {
       switch(subtype()) {
             case LAYOUT_BREAK_LINE:

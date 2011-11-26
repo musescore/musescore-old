@@ -73,6 +73,7 @@
 #include "libmscore/keysig.h"
 #include "libmscore/timesig.h"
 #include "libmscore/spanner.h"
+#include "libmscore/rehearsalmark.h"
 
 #include "navigator.h"
 
@@ -3140,6 +3141,7 @@ void ScoreView::cmd(const QAction* a)
             cmdInsertNote(6);
       else if (cmd == "chord-text")
             cmdAddChordName();
+
       else if (cmd == "title-text")
             cmdAddText(TEXT_TITLE);
       else if (cmd == "subtitle-text")
@@ -3154,6 +3156,7 @@ void ScoreView::cmd(const QAction* a)
             cmdAddText(TEXT_STAFF);
       else if (cmd == "rehearsalmark-text")
             cmdAddText(TEXT_REHEARSAL_MARK);
+
       else if (cmd == "edit-element") {
             Element* e = _score->selection().element();
             if (e) {
@@ -5303,7 +5306,7 @@ void ScoreView::cmdAddChordName()
 //   cmdAddText
 //---------------------------------------------------------
 
-void ScoreView::cmdAddText(int subtype)
+void ScoreView::cmdAddText(int type)
       {
       if (!_score->checkHasMeasures())
             return;
@@ -5312,7 +5315,7 @@ void ScoreView::cmdAddText(int subtype)
       const QList<MeasureBase*>& ml = sl->front()->measures();
       Text* s = 0;
       _score->startCmd();
-      switch(subtype) {
+      switch(type) {
             case TEXT_TITLE:
             case TEXT_SUBTITLE:
             case TEXT_COMPOSER:
@@ -5326,13 +5329,12 @@ void ScoreView::cmdAddText(int subtype)
                         measure = mb;
                         }
                   s = new Text(_score);
-                  switch(subtype) {
+                  switch(type) {
                         case TEXT_TITLE:    s->setTextStyle(TEXT_STYLE_TITLE);    break;
                         case TEXT_SUBTITLE: s->setTextStyle(TEXT_STYLE_SUBTITLE); break;
                         case TEXT_COMPOSER: s->setTextStyle(TEXT_STYLE_COMPOSER); break;
                         case TEXT_POET:     s->setTextStyle(TEXT_STYLE_POET);     break;
                         }
-                  s->setSubtype(subtype);
                   s->setParent(measure);
                   }
                   break;
@@ -5342,9 +5344,8 @@ void ScoreView::cmdAddText(int subtype)
                   ChordRest* cr = _score->getSelectedChordRest();
                   if (!cr)
                         break;
-                  s = new Text(_score);
+                  s = new RehearsalMark(_score);
                   s->setTrack(0);
-                  s->setSubtype(subtype);
                   s->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
                   s->setParent(cr->segment());
                   }
@@ -5356,19 +5357,16 @@ void ScoreView::cmdAddText(int subtype)
                   if (!cr)
                         break;
                   s = new StaffText(_score);
-                  if (subtype == TEXT_SYSTEM) {
+                  if (type == TEXT_SYSTEM) {
                         s->setTrack(0);
                         s->setSystemFlag(true);
                         s->setTextStyle(TEXT_STYLE_SYSTEM);
-                        s->setSubtype(TEXT_SYSTEM);
                         }
                   else {
                         s->setTrack(cr->track());
                         s->setSystemFlag(false);
                         s->setTextStyle(TEXT_STYLE_STAFF);
-                        s->setSubtype(TEXT_STAFF);
                         }
-                  s->setSubtype(subtype);
                   s->setParent(cr->segment());
                   }
                   break;

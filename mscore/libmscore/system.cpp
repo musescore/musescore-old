@@ -512,11 +512,11 @@ void System::setInstrumentNames(bool longName)
                         iname->setParent(this);
                         iname->setTrack(staffIdx * VOICES);
                         if (longName) {
-                              iname->setSubtype(TEXT_INSTRUMENT_LONG);
+                              iname->setSubtype(INSTRUMENT_NAME_LONG);
                               iname->setTextStyle(TEXT_STYLE_INSTRUMENT_LONG);
                               }
                         else {
-                              iname->setSubtype(TEXT_INSTRUMENT_SHORT);
+                              iname->setSubtype(INSTRUMENT_NAME_SHORT);
                               iname->setTextStyle(TEXT_STYLE_INSTRUMENT_SHORT);
                               }
                         score()->undoAddElement(iname);

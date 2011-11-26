@@ -189,7 +189,7 @@ void Tremolo::read(QDomElement e)
 //   subtypeName
 //---------------------------------------------------------
 
-const QString Tremolo::subtypeName() const
+QString Tremolo::subtypeName() const
       {
       switch(subtype()) {
             case TREMOLO_R8:  return QString("r8");

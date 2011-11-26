@@ -18,43 +18,6 @@
 #include "system.h"
 
 //---------------------------------------------------------
-//   TextSubtype
-//---------------------------------------------------------
-
-struct TextSubtype {
-      unsigned id;
-      const char* name;
-      };
-
-static const TextSubtype textSubtypes[] = {
-      { TEXT_TITLE,               "Title"             },
-      { TEXT_SUBTITLE,            "Subtitle"          },
-      { TEXT_COMPOSER,            "Composer"          },
-      { TEXT_POET,                "Poet"              },
-      { TEXT_TRANSLATOR,          "Translator"        },
-      { TEXT_MEASURE_NUMBER,      "MeasureNumber"     },
-      { TEXT_FINGERING,           "Fingering"         },
-      { TEXT_INSTRUMENT_LONG,     "InstrumentLong"    },
-      { TEXT_INSTRUMENT_SHORT,    "InstrumentShort"   },
-      { TEXT_INSTRUMENT_EXCERPT,  "InstrumentExcerpt" },
-      { TEXT_TEMPO,               "Tempo"             },
-      { TEXT_LYRIC,               "Lyric"             },
-      { TEXT_FIGURED_BASS,        "FiguredBass"       },
-      { TEXT_TUPLET,              "Tuplet"            },
-      { TEXT_SYSTEM,              "System"            },
-      { TEXT_STAFF,               "Staff"             },
-      { TEXT_CHORD,               ""                  },
-      { TEXT_REHEARSAL_MARK,      "RehearsalMark"     },
-      { TEXT_REPEAT,              "Repeat"            },
-      { TEXT_VOLTA,               "Volta"             },
-      { TEXT_FRAME,               "Frame"             },
-      { TEXT_TEXTLINE,            "TextLine"          },
-      { TEXT_STRING_NUMBER,       "StringNumber"      },
-      { TEXT_INSTRUMENT_CHANGE,   "InstrumentChange"  },
-      { TEXT_LYRICS_VERSE_NUMBER, "LyricsVerseNumber" }
-      };
-
-//---------------------------------------------------------
 //   SimpleText
 //---------------------------------------------------------
 
@@ -85,38 +48,6 @@ SimpleText::~SimpleText()
 const TextStyle& SimpleText::style() const
       {
       return score()->textStyle(_textStyle);
-      }
-
-//---------------------------------------------------------
-//   subtypeName
-//---------------------------------------------------------
-
-const QString SimpleText::subtypeName() const
-      {
-      for (unsigned i = 0; i < sizeof(textSubtypes)/sizeof(*textSubtypes); ++i) {
-            if (textSubtypes[i].id == i)
-                  return QString(textSubtypes[i].name);
-            }
-      qDebug("SimpleText:subtypeName: unknown text(%s) subtype %d", name(), subtype());
-      return "?";
-      }
-
-//---------------------------------------------------------
-//   setSubtype
-//---------------------------------------------------------
-
-void SimpleText::setSubtype(const QString& s)
-      {
-      unsigned st = TEXT_UNKNOWN;
-      for (unsigned i = 0; i < sizeof(textSubtypes)/sizeof(*textSubtypes); ++i) {
-            if (textSubtypes[i].name == s) {
-                  st = textSubtypes[i].id;
-                  break;
-                  }
-            }
-      if (st == TEXT_UNKNOWN)
-            qDebug("SimpleText(%s): setSubtype: unknown type <%s>", name(), qPrintable(s));
-      setSubtype(st);
       }
 
 //---------------------------------------------------------

@@ -211,84 +211,65 @@ void Page::draw(QPainter* painter) const
       d.setTextWidth(score()->loWidth() - lm() - rm());
 
       QPointF o1(lm(), tm());
+
       painter->translate(o1);
       painter->setPen(curColor());
 
+      QString s1, s2, s3;
+
       if (_score->styleB(ST_showHeader) && (n || _score->styleB(ST_headerFirstPage))) {
             TextStyle ts = score()->textStyle(TEXT_STYLE_HEADER);
-            d.setDefaultFont(ts.font(1.0));
-            QPointF o(ts.offset());
-            if (ts.offsetType() == OFFSET_SPATIUM)
-                  o *= spatium();
-            else
-                  o *= DPI;
-            painter->translate(o);
-            d.setTextWidth(_score->loWidth() - lm() - rm() - (2.0 * o.x()));
+            QPointF o(ts.offset(spatium()));
 
             bool odd = (n & 1) && _score->styleB(ST_headerOddEven);
-
-            QAbstractTextDocumentLayout::PaintContext c;
-            c.cursorPosition = -1;
-            c.palette.setColor(QPalette::Text, ts.foregroundColor());
-            bool styled = _score->styleB(ST_headerStyled);
-
-            QString s = _score->styleSt(odd ? ST_oddHeaderL : ST_evenHeaderL);
-            if (!s.isEmpty()) {
-                  d.setHtml(replaceTextMacros(s));
-                  d.documentLayout()->draw(painter, c);
+            if (odd) {
+                  s1 = _score->styleSt(ST_oddHeaderL);
+                  s2 = _score->styleSt(ST_oddHeaderC);
+                  s3 = _score->styleSt(ST_oddHeaderR);
+                  }
+            else {
+                  s1 = _score->styleSt(ST_evenHeaderL);
+                  s2 = _score->styleSt(ST_evenHeaderC);
+                  s3 = _score->styleSt(ST_evenHeaderR);
                   }
 
-            s = replaceTextMacros(_score->styleSt(odd ? ST_oddHeaderC : ST_evenHeaderC));
-            if (!s.isEmpty()) {
-                  if (styled) {
-                        d.clear();
-                        QTextCursor c(&d);
-                        QTextBlockFormat bf;
-                        bf.setAlignment(Qt::AlignHCenter);
-                        c.setBlockFormat(bf);
-                        c.insertText(s);
+            if (_score->styleB(ST_headerStyled)) {
+                  drawStyledHeaderFooter(painter, 0, o, s1);
+                  drawStyledHeaderFooter(painter, 1, o, s2);
+                  drawStyledHeaderFooter(painter, 2, o, s3);
+                  }
+            else {
+                  d.setDefaultFont(ts.font(1.0));
+                  d.setTextWidth(_score->loWidth() - lm() - rm() - (2.0 * o.x()));
+                  QAbstractTextDocumentLayout::PaintContext c;
+                  c.cursorPosition = -1;
+                  c.palette.setColor(QPalette::Text, ts.foregroundColor());
+                  painter->translate(o);
+                  QString s = _score->styleSt(odd ? ST_oddHeaderL : ST_evenHeaderL);
+                  if (!s.isEmpty()) {
+                        d.setHtml(replaceTextMacros(s));
+                        d.documentLayout()->draw(painter, c);
                         }
-                  else
+                  s = replaceTextMacros(_score->styleSt(odd ? ST_oddHeaderC : ST_evenHeaderC));
+                  if (!s.isEmpty()) {
                         d.setHtml(s);
-                  d.documentLayout()->draw(painter, c);
-                  }
-            s = replaceTextMacros(_score->styleSt(odd ? ST_oddHeaderR : ST_evenHeaderR));
-            if (!s.isEmpty()) {
-                  if (styled) {
-                        d.clear();
-                        QTextCursor c(&d);
-                        QTextBlockFormat bf;
-                        bf.setAlignment(Qt::AlignRight);
-                        c.setBlockFormat(bf);
-                        c.insertText(s);
+                        d.documentLayout()->draw(painter, c);
                         }
-                  else
+                  s = replaceTextMacros(_score->styleSt(odd ? ST_oddHeaderR : ST_evenHeaderR));
+                  if (!s.isEmpty()) {
                         d.setHtml(s);
-                  d.documentLayout()->draw(painter, c);
+                        d.documentLayout()->draw(painter, c);
+                        }
+                  painter->translate(-o);
                   }
-            painter->translate(-o);
             }
 
       if (_score->styleB(ST_showFooter) && (n || _score->styleB(ST_footerFirstPage))) {
             TextStyle ts = score()->textStyle(TEXT_STYLE_FOOTER);
 
-            QPointF o(ts.offset());
-            if (ts.offsetType() == OFFSET_SPATIUM)
-                  o *= spatium();
-            else
-                  o *= DPI;
-            qreal w = _score->loWidth() - lm() - rm() - (2.0 * o.x());
+            QPointF o(ts.offset(spatium()));
 
             bool odd = (n & 1) && _score->styleB(ST_footerOddEven);
-
-            o = QPointF(0.0, _score->loHeight() - (tm() + bm()));
-            painter->translate(o);
-
-            QAbstractTextDocumentLayout::PaintContext c;
-            c.cursorPosition = -1;
-            c.palette.setColor(QPalette::Text, ts.foregroundColor());
-
-            QString s1, s2, s3;
             if (odd) {
                   s1 = _score->styleSt(ST_oddFooterL);
                   s2 = _score->styleSt(ST_oddFooterC);
@@ -300,80 +281,105 @@ void Page::draw(QPainter* painter) const
                   s3 = _score->styleSt(ST_evenFooterR);
                   }
 
-            qreal h1, h2, h3;
-            bool styled = _score->styleB(ST_footerStyled);
-            QTextDocument d1, d2, d3;
-            QFont f;
-            if (styled)
-                  f = ts.font(1.0);
-            if (!s1.isEmpty()) {
-                  d1.setDocumentMargin(0.0);
-                  d1.setUseDesignMetrics(true);
-                  s1 = replaceTextMacros(s1);
-                  d1.setTextWidth(w);
-                  if (styled) {
-                        d1.setDefaultFont(f);
-                        d1.setPlainText(s1);
-                        }
-                  else
-                        d1.setHtml(s1);
-                  h1 = d1.documentLayout()->documentSize().height();
+            if (_score->styleB(ST_footerStyled)) {
+                  drawStyledHeaderFooter(painter, 3, o, s1);
+                  drawStyledHeaderFooter(painter, 4, o, s2);
+                  drawStyledHeaderFooter(painter, 5, o, s3);
                   }
-            else
-                  h1 = 0.0;
-            if (!s2.isEmpty()) {
-                  d2.setDocumentMargin(0.0);
-                  d2.setUseDesignMetrics(true);
-                  s2 = replaceTextMacros(s2);
-                  d2.setTextWidth(w);
-                  if (styled) {
-                        QTextCursor c(&d2);
-                        d2.setDefaultFont(f);
-                        QTextBlockFormat bf;
-                        bf.setAlignment(Qt::AlignHCenter);
-                        c.setBlockFormat(bf);
-                        c.insertText(s2);
-                        }
-                  else
-                        d2.setHtml(s2);
-                  h2 = d2.documentLayout()->documentSize().height();
-                  }
-            else
-                  h2 = 0.0;
-            if (!s3.isEmpty()) {
-                  d3.setDocumentMargin(0.0);
-                  d3.setUseDesignMetrics(true);
-                  s3 = replaceTextMacros(s3);
-                  d3.setTextWidth(w);
-                  if (styled) {
-                        d3.setDefaultFont(f);
-                        QTextCursor c(&d3);
-                        d2.setDefaultFont(f);
-                        QTextBlockFormat bf;
-                        bf.setAlignment(Qt::AlignRight);
-                        c.setBlockFormat(bf);
-                        c.insertText(s3);
-                        }
-                  else
-                        d3.setHtml(s3);
-                  h3 = d3.documentLayout()->documentSize().height();
-                  }
-            else
-                  h3 = 0.0;
-            qreal h = qMax(h1, h2);
-            h       = qMax(h, h3);
+            else {
+                  qreal w = _score->loWidth() - lm() - rm() - (2.0 * o.x());
+                  o = QPointF(0.0, _score->loHeight() - (tm() + bm()));
+                  QAbstractTextDocumentLayout::PaintContext c;
+                  c.cursorPosition = -1;
+                  c.palette.setColor(QPalette::Text, ts.foregroundColor());
 
-            QPointF pos(0.0, -h);
-            painter->translate(pos);
-            if (!s1.isEmpty())
-                  d1.documentLayout()->draw(painter, c);
-            if (!s2.isEmpty())
-                  d2.documentLayout()->draw(painter, c);
-            if (!s3.isEmpty())
-                  d3.documentLayout()->draw(painter, c);
-            painter->translate(-(o + pos));
+                  painter->translate(o);
+                  qreal h1, h2, h3;
+                  QTextDocument d1, d2, d3;
+                  QFont f;
+                  if (!s1.isEmpty()) {
+                        d1.setDocumentMargin(0.0);
+                        d1.setUseDesignMetrics(true);
+                        s1 = replaceTextMacros(s1);
+                        d1.setTextWidth(w);
+                        d1.setHtml(s1);
+                        h1 = d1.documentLayout()->documentSize().height();
+                        }
+                  else
+                        h1 = 0.0;
+                  if (!s2.isEmpty()) {
+                        d2.setDocumentMargin(0.0);
+                        d2.setUseDesignMetrics(true);
+                        s2 = replaceTextMacros(s2);
+                        d2.setTextWidth(w);
+                        d2.setHtml(s2);
+                        h2 = d2.documentLayout()->documentSize().height();
+                        }
+                  else
+                        h2 = 0.0;
+                  if (!s3.isEmpty()) {
+                        d3.setDocumentMargin(0.0);
+                        d3.setUseDesignMetrics(true);
+                        s3 = replaceTextMacros(s3);
+                        d3.setTextWidth(w);
+                        d3.setHtml(s3);
+                        h3 = d3.documentLayout()->documentSize().height();
+                        }
+                  else
+                        h3 = 0.0;
+                  qreal h = qMax(h1, h2);
+                  h       = qMax(h, h3);
+
+                  QPointF pos(0.0, -h);
+                  painter->translate(pos);
+                  if (!s1.isEmpty())
+                        d1.documentLayout()->draw(painter, c);
+                  if (!s2.isEmpty())
+                        d2.documentLayout()->draw(painter, c);
+                  if (!s3.isEmpty())
+                        d3.documentLayout()->draw(painter, c);
+                  painter->translate(-(o + pos));
+                  }
             }
       painter->translate(-o1);
+      }
+
+//---------------------------------------------------------
+//   drawStyledFooter
+//---------------------------------------------------------
+
+void Page::drawStyledHeaderFooter(QPainter* p, int area, const QPointF& pt,
+   const QString& ss) const
+      {
+      QString s = replaceTextMacros(ss);
+      if (s.isEmpty())
+            return;
+      TextStyle ts = score()->textStyle(TEXT_STYLE_FOOTER);
+      p->setFont(ts.fontPx(spatium()));
+
+      int flags = Qt::TextDontClip;
+      switch(area) {
+            case 0:
+                  flags |= Qt::AlignLeft | Qt::AlignTop;
+                  break;
+            case 1:
+                  flags |= Qt::AlignHCenter | Qt::AlignTop;
+                  break;
+            case 2:
+                  flags |= Qt::AlignRight | Qt::AlignTop;
+                  break;
+            case 3:
+                  flags |= Qt::AlignLeft | Qt::AlignBottom;
+                  break;
+            case 4:
+                  flags |= Qt::AlignHCenter | Qt::AlignBottom;
+                  break;
+            case 5:
+                  flags |= Qt::AlignRight | Qt::AlignBottom;
+                  break;
+            }
+      QRectF r(pt.x(), pt.y(), width() - lm() - rm(), height() - tm() - bm());
+      p->drawText(r, flags, s);
       }
 
 //---------------------------------------------------------

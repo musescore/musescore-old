@@ -564,7 +564,7 @@ int BarLine::tick() const
 //   subtypeName
 //---------------------------------------------------------
 
-const QString BarLine::subtypeName() const
+QString BarLine::subtypeName() const
       {
       return QString(barLineNames[subtype()]);
       }

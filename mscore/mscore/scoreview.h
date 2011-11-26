@@ -43,6 +43,16 @@ class Text;
 class MeasureBase;
 class Staff;
 
+enum {
+      TEXT_TITLE,
+      TEXT_SUBTITLE,
+      TEXT_COMPOSER,
+      TEXT_POET,
+      TEXT_SYSTEM,
+      TEXT_STAFF,
+      TEXT_REHEARSAL_MARK
+      };
+
 //---------------------------------------------------------
 //   Cursor
 //---------------------------------------------------------

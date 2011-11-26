@@ -47,6 +47,7 @@
 #include "libmscore/bend.h"
 #include "libmscore/tremolobar.h"
 #include "libmscore/segment.h"
+#include "libmscore/rehearsalmark.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -529,11 +530,9 @@ void GuitarPro1::read(QFile* fp)
             const GpBar& gpbar = bars[bar];
 
             if (!gpbar.marker.isEmpty()) {
-                  Text* s = new Text(score);
+                  Text* s = new RehearsalMark(score);
                   s->setText(gpbar.marker.trimmed());
                   s->setTrack(0);
-                  s->setSubtype(TEXT_REHEARSAL_MARK);
-                  s->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
                   Segment* segment = measure->getSegment(SegChordRest, measure->tick());
                   segment->add(s);
                   }
@@ -824,11 +823,9 @@ qDebug("BeginRepeat=============================================\n");
             const GpBar& gpbar = bars[bar];
 
             if (!gpbar.marker.isEmpty()) {
-                  Text* s = new Text(score);
+                  Text* s = new RehearsalMark(score);
                   s->setText(gpbar.marker.trimmed());
                   s->setTrack(0);
-                  s->setSubtype(TEXT_REHEARSAL_MARK);
-                  s->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
                   Segment* segment = measure->getSegment(SegChordRest, measure->tick());
                   segment->add(s);
                   }
@@ -1303,11 +1300,9 @@ qDebug("BeginRepeat=============================================\n");
             const GpBar& gpbar = bars[bar];
 
             if (!gpbar.marker.isEmpty()) {
-                  Text* s = new Text(score);
+                  Text* s = new RehearsalMark(score);
                   s->setText(gpbar.marker.trimmed());
                   s->setTrack(0);
-                  s->setSubtype(TEXT_REHEARSAL_MARK);
-                  s->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
                   Segment* segment = measure->getSegment(SegChordRest, measure->tick());
                   segment->add(s);
                   }
@@ -1826,11 +1821,9 @@ void GuitarPro4::read(QFile* fp)
             const GpBar& gpbar = bars[bar];
 
             if (!gpbar.marker.isEmpty()) {
-                  Text* s = new Text(score);
+                  Text* s = new RehearsalMark(score);
                   s->setText(gpbar.marker.trimmed());
                   s->setTrack(0);
-                  s->setSubtype(TEXT_REHEARSAL_MARK);
-                  s->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
                   Segment* segment = measure->getSegment(SegChordRest, measure->tick());
                   segment->add(s);
                   }
@@ -2521,11 +2514,9 @@ void GuitarPro5::readMeasures()
             const GpBar& gpbar = bars[bar];
 
             if (!gpbar.marker.isEmpty()) {
-                  Text* s = new Text(score);
+                  Text* s = new RehearsalMark(score);
                   s->setText(gpbar.marker.trimmed());
                   s->setTrack(0);
-                  s->setSubtype(TEXT_REHEARSAL_MARK);
-                  s->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
                   Segment* segment = measure->getSegment(SegChordRest, measure->tick());
                   segment->add(s);
                   }
@@ -2700,14 +2691,14 @@ bool MuseScore::importGTP(Score* score, const QString& name)
             }
       if (!gp->title.isEmpty()) {
             Text* s = new Text(score);
-            s->setSubtype(TEXT_TITLE);
+            // s->setSubtype(TEXT_TITLE);
             s->setTextStyle(TEXT_STYLE_TITLE);
             s->setText(gp->title);
             m->add(s);
             }
       if (!gp->subtitle.isEmpty() && !gp->artist.isEmpty() && !gp->album.isEmpty()) {
             Text* s = new Text(score);
-            s->setSubtype(TEXT_SUBTITLE);
+            // s->setSubtype(TEXT_SUBTITLE);
             s->setTextStyle(TEXT_STYLE_SUBTITLE);
             QString str;
             if (!gp->subtitle.isEmpty())
@@ -2727,7 +2718,7 @@ bool MuseScore::importGTP(Score* score, const QString& name)
             }
       if (!gp->composer.isEmpty()) {
             Text* s = new Text(score);
-            s->setSubtype(TEXT_COMPOSER);
+            // s->setSubtype(TEXT_COMPOSER);
             s->setTextStyle(TEXT_STYLE_COMPOSER);
             s->setText(gp->composer);
             m->add(s);
@@ -2805,7 +2796,7 @@ bool MuseScore::importGTP(Score* score, const QString& name)
                   measure = mb;
                   }
             Text* txt = new Text(pscore);
-            txt->setSubtype(TEXT_INSTRUMENT_EXCERPT);
+//            txt->setSubtype(TEXT_INSTRUMENT_EXCERPT);
             txt->setTextStyle(TEXT_STYLE_INSTRUMENT_EXCERPT);
             txt->setText(part->longName().toPlainText());
             measure->add(txt);

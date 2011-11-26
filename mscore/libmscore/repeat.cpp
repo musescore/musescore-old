@@ -73,7 +73,6 @@ Marker::Marker(Score* s)
    : Text(s)
       {
       setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
-      setSubtype(TEXT_REPEAT);
       setTextStyle(TEXT_STYLE_REPEAT);
       }
 
@@ -248,7 +247,6 @@ Jump::Jump(Score* s)
    : Text(s)
       {
       setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
-      setSubtype(TEXT_REPEAT);
       setTextStyle(TEXT_STYLE_REPEAT);
       }
 

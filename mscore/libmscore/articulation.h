@@ -68,7 +68,7 @@ class Articulation : public Element {
       virtual ElementType type() const      { return ARTICULATION; }
 
       virtual void setSubtype(int);
-      virtual const QString subtypeName() const;
+      virtual QString subtypeName() const;
       virtual void setSubtype(const QString& s);
 
       virtual void layout();
