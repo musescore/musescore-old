@@ -24,7 +24,6 @@
 FiguredBass::FiguredBass(Score* s)
    : Lyrics(s)
       {
-      setSubtype(TEXT_FIGURED_BASS);
       setTextStyle(TEXT_STYLE_FIGURED_BASS);
       }
 

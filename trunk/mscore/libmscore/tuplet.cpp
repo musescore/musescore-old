@@ -77,7 +77,6 @@ void Tuplet::layout()
       if (_numberType != NO_TEXT) {
             if (_number == 0) {
                   _number = new Text(score());
-                  _number->setSubtype(TEXT_TUPLET);
                   _number->setTextStyle(TEXT_STYLE_TUPLET);
                   _number->setParent(this);
                   }
@@ -500,7 +499,6 @@ void Tuplet::read(QDomElement e, QList<Tuplet*>* tuplets, const QList<Slur*>* sl
                   _number = new Text(score());
                   _number->setParent(this);
                   _number->read(e);
-                  _number->setSubtype(TEXT_TUPLET);   // override read
                   _number->setTextStyle(TEXT_STYLE_TUPLET);
                   }
             else if (tag == "direction") {

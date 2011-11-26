@@ -1038,9 +1038,8 @@ Element* Note::drop(const DropData& data)
       Element* e = data.element;
       Chord* ch = chord();
       switch(e->type()) {
-            case TEXT:
-                  if (e->subtype() == TEXT_REHEARSAL_MARK)
-                        return ch->drop(data);
+            case REHEARSAL_MARK:
+                  return ch->drop(data);
 
             case SYMBOL:
             case IMAGE:

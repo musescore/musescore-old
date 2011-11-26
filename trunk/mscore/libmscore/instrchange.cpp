@@ -26,7 +26,6 @@
 InstrumentChange::InstrumentChange(Score* s)
    : Text(s)
       {
-      setSubtype(TEXT_INSTRUMENT_CHANGE);
       setTextStyle(TEXT_STYLE_INSTRUMENT_CHANGE);
       }
 

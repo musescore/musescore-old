@@ -109,6 +109,7 @@ class Page : public Element {
       bool bspTreeValid;
 
       QString replaceTextMacros(const QString&) const;
+      void drawStyledHeaderFooter(QPainter*, int area, const QPointF&, const QString&) const;
 
    public:
       Page(Score*);

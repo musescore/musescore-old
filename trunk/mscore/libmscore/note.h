@@ -255,7 +255,7 @@ class Note : public Element {
       QList<NoteEvent*>& playEvents()                { return _playEvents; }
       const QList<NoteEvent*>& playEvents() const    { return _playEvents; }
       void setPlayEvents(const QList<NoteEvent*>& v);
-      const QString subtypeName() const      { return QString(); }
+      QString subtypeName() const      { return QString(); }
 
       QVariant getProperty(int propertyId) const;
       void setProperty(int propertyId, const QVariant&);

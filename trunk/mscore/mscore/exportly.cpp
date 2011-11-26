@@ -2714,26 +2714,22 @@ void ExportLy::writeTremolo(Chord * chord)
 //------------------------------------------------------------------------------------------
 
 void ExportLy::findFingerAndStringno(Note* note, int &fingix, int &stringix, QString (&fingarray)[5], QString (&stringarray)[10])
-{
-  foreach (const Element* e, *note->el())
-    {
-      if (e->type() == TEXT)
-	{
-	  if ( e->subtype() == TEXT_FINGERING)
-	    {
-	      fingix++;
-	      Text* f = (Text*)e;
-	      fingarray[fingix] = f->getText();
-	    }
-	  if (e->subtype() == TEXT_STRING_NUMBER)
-	    {
-	      stringix++;
-	      Text * s = (Text*)e;
-	      stringarray[stringix] = s->getText();
-	    }
-	}
-    }
-}//end findfingerandstringno
+      {
+      foreach (const Element* e, *note->el()) {
+            if (e->type() == FINGERING) {
+	            fingix++;
+	            Text* f = (Text*)e;
+	            fingarray[fingix] = f->getText();
+	            }
+#if 0 //TODOww
+            if (e->subtype() == TEXT_STRING_NUMBER) {
+                  stringix++;
+                  Text * s = (Text*)e;
+                  stringarray[stringix] = s->getText();
+                  }
+#endif
+            }
+      }//end findfingerandstringno
 
 
 void ExportLy::writeStringInstruction(int &strgix, QString stringarr[10])
@@ -4619,6 +4615,8 @@ void ExportLy::writePageFormat()
 //---------------------------------------------------
 void ExportLy::writeScoreTitles()
 {
+#if 0 //TODOws
+
   os << "\\header {\n";
 
   ++level;
@@ -4657,6 +4655,7 @@ void ExportLy::writeScoreTitles()
 
   indentF();
   os << "}\n";
+#endif
 }// end writeScoreTitles
 
 

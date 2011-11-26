@@ -147,7 +147,7 @@ class SlurTie : public Spanner {
       SlurSegment* backSegment() const    { return (SlurSegment*)spannerSegments().back();  }
       SlurSegment* takeLastSegment()      { return (SlurSegment*)spannerSegments().takeLast(); }
       SlurSegment* segmentAt(int n) const { return (SlurSegment*)spannerSegments().at(n); }
-      virtual const QString subtypeName() const { return QString(); }
+      virtual QString subtypeName() const { return QString(); }
       virtual void slurPos(SlurPos*) = 0;
       virtual void computeBezier(SlurSegment*) = 0;
       virtual QVariant getProperty(int propertyId) const;

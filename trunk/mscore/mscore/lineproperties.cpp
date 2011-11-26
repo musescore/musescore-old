@@ -298,7 +298,7 @@ void LineProperties::beginTextProperties()
       {
       if (!_beginText) {
             _beginText = new Text(tl->score());
-            _beginText->setSubtype(TEXT_TEXTLINE);
+//            _beginText->setSubtype(TEXT_TEXTLINE);
             _beginText->setTextStyle(TEXT_STYLE_TEXTLINE);
             }
       _beginText->setText(beginText->text());
@@ -325,7 +325,7 @@ void LineProperties::continueTextProperties()
       {
       if (!_continueText) {
             _continueText = new Text(tl->score());
-            _continueText->setSubtype(TEXT_TEXTLINE);
+//            _continueText->setSubtype(TEXT_TEXTLINE);
             _continueText->setTextStyle(TEXT_STYLE_TEXTLINE);
             }
       _continueText->setText(continueText->text());

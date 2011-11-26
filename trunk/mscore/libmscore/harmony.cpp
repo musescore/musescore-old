@@ -529,8 +529,6 @@ bool Harmony::isEmpty() const
 
 void Harmony::layout()
       {
-      setSubtype(TEXT_CHORD);    // apply style changes
-
       if (_editMode || textList.isEmpty()) {
             Text::layout();
             return;

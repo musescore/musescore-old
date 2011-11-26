@@ -26,7 +26,6 @@
 Lyrics::Lyrics(Score* s)
    : Text(s)
       {
-      setSubtype(TEXT_LYRIC);
       setTextStyle(TEXT_STYLE_LYRIC1);
       _no          = 0;
       _ticks       = 0;
@@ -151,7 +150,7 @@ void Lyrics::add(Element* el)
       el->setParent(this);
       if (el->type() == LINE)
             _separator.append((Line*)el);
-      else if (el->type() == TEXT && el->subtype() == TEXT_LYRICS_VERSE_NUMBER)
+      else if (el->type() == TEXT)
             _verseNumber = static_cast<Text*>(el);
       else
             qDebug("Lyrics::add: unknown element %s", el->name());
@@ -165,7 +164,7 @@ void Lyrics::remove(Element* el)
       {
       if (el->type() == LINE)
             _separator.removeAll((Line*)el);
-      else if (el->type() == TEXT && el->subtype() == TEXT_LYRICS_VERSE_NUMBER)
+      else if (el == _verseNumber)
             _verseNumber = 0;
       else
             qDebug("Lyrics::remove: unknown element %s", el->name());
@@ -255,9 +254,7 @@ void Lyrics::paste()
 
       cursor()->insertText(sl[0]);
       layout();
-      bool lo = (subtype() == TEXT_INSTRUMENT_SHORT) || (subtype() == TEXT_INSTRUMENT_LONG);
-      score()->setLayoutAll(lo);
-      score()->setUpdateAll();
+      score()->setLayoutAll(true);
       score()->end();
       sl.removeFirst();
       txt = sl.join(" ");
@@ -280,7 +277,7 @@ int Lyrics::endTick() const
 
 bool Lyrics::acceptDrop(MuseScoreView*, const QPointF&, int type, int subtype) const
       {
-      return (type == TEXT && subtype == TEXT_LYRICS_VERSE_NUMBER);
+      return (type == TEXT);
       }
 
 //---------------------------------------------------------
@@ -289,8 +286,8 @@ bool Lyrics::acceptDrop(MuseScoreView*, const QPointF&, int type, int subtype) c
 
 Element* Lyrics::drop(const DropData& data)
       {
-      Element* e = data.element;
-      if (!(e->type() == TEXT && e->subtype() == TEXT_LYRICS_VERSE_NUMBER))
+      Text* e = static_cast<Text*>(data.element);
+      if (!(e->type() == TEXT && e->textStyle() == TEXT_STYLE_LYRICS_VERSE_NUMBER))
             return 0;
       e->setParent(this);
       score()->select(e, SELECT_SINGLE, 0);

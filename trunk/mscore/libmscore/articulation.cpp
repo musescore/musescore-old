@@ -253,7 +253,7 @@ void Articulation::write(Xml& xml) const
 //   subtypeName
 //---------------------------------------------------------
 
-const QString Articulation::subtypeName() const
+QString Articulation::subtypeName() const
       {
       return articulationList[subtype()].name;
       }

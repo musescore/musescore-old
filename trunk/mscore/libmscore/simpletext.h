@@ -21,37 +21,6 @@
 class MuseScoreView;
 struct SymCode;
 
-enum {
-      TEXT_UNKNOWN = 0,
-      TEXT_TITLE,
-      TEXT_SUBTITLE,
-      TEXT_COMPOSER,
-      TEXT_POET,
-      TEXT_TRANSLATOR,
-      TEXT_MEASURE_NUMBER,
-      TEXT_FINGERING,
-      TEXT_INSTRUMENT_LONG,
-      TEXT_INSTRUMENT_SHORT,
-      TEXT_INSTRUMENT_EXCERPT,
-      TEXT_TEMPO,
-      TEXT_LYRIC,
-      TEXT_TUPLET,
-      TEXT_SYSTEM,
-      TEXT_STAFF,
-      TEXT_CHORD,
-      TEXT_REHEARSAL_MARK,
-      TEXT_REPEAT,
-      TEXT_VOLTA,
-      TEXT_FRAME,
-      TEXT_TEXTLINE,
-      TEXT_STRING_NUMBER,
-      TEXT_HEADER,
-      TEXT_FOOTER,
-      TEXT_INSTRUMENT_CHANGE,
-      TEXT_LYRICS_VERSE_NUMBER,
-      TEXT_FIGURED_BASS
-      };
-
 //---------------------------------------------------------
 //   SimpleText
 //---------------------------------------------------------
@@ -76,10 +45,6 @@ class SimpleText : public Element {
       ~SimpleText();
 
       SimpleText &operator=(const SimpleText&);
-
-      virtual const QString subtypeName() const;
-      virtual void setSubtype(const QString& s);
-      virtual void setSubtype(int val)      { Element::setSubtype(val);    }
 
       virtual void setTextStyle(TextStyleType st) { _textStyle = st; }
       TextStyleType textStyle() const             { return _textStyle; }

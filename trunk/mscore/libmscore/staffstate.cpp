@@ -147,7 +147,7 @@ void StaffState::setSubtype(const QString& s)
 //   subtypeName
 //---------------------------------------------------------
 
-const QString StaffState::subtypeName() const
+QString StaffState::subtypeName() const
       {
       switch(subtype()) {
             case STAFF_STATE_INSTRUMENT:

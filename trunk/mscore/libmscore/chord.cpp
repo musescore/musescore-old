@@ -718,7 +718,6 @@ void Chord::readNote(QDomElement e, QList<Tuplet*>* tuplets, QList<Slur*>* slurs
                   }
             else if (tag == "Text") {
                   Text* f = new Text(score());
-                  f->setSubtype(TEXT_FINGERING);
                   f->setTextStyle(TEXT_STYLE_FINGERING);
                   f->read(e);
                   f->setParent(this);

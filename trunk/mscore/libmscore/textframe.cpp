@@ -32,7 +32,6 @@ TBox::TBox(Score* score)
       {
       Text* s = new Text(score);
       s->setTextStyle(TEXT_STYLE_FRAME);
-      s->setSubtype(TEXT_FRAME);
       s->setStyled(false);
       add(s);
       }

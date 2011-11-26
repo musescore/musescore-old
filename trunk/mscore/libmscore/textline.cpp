@@ -315,7 +315,6 @@ void TextLine::setBeginText(const QString& s, TextStyleType textStyle)
       if (!_beginText) {
             _beginText = new Text(score());
             _beginText->setParent(this);
-            _beginText->setSubtype(TEXT_TEXTLINE);
             }
       _beginText->setTextStyle(textStyle);
       _beginText->setText(s);
@@ -330,7 +329,6 @@ void TextLine::setContinueText(const QString& s, TextStyleType textStyle)
       if (!_continueText) {
             _continueText = new Text(score());
             _continueText->setParent(this);
-            _continueText->setSubtype(TEXT_TEXTLINE);
             }
       _continueText->setTextStyle(textStyle);
       _continueText->setText(s);
@@ -487,7 +485,6 @@ bool TextLine::readProperties(QDomElement e)
       else if (tag == "beginText") {
             _beginText = new Text(score());
             _beginText->setParent(this);
-            _beginText->setSubtype(TEXT_TEXTLINE);
             for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                   if (!_beginText->readProperties(ee))
                         domError(e);
@@ -496,7 +493,6 @@ bool TextLine::readProperties(QDomElement e)
       else if (tag == "continueText") {
             _continueText = new Text(score());
             _continueText->setParent(this);
-            _continueText->setSubtype(TEXT_TEXTLINE);
             for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                   if (!_continueText->readProperties(ee))
                         domError(e);

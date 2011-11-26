@@ -225,7 +225,7 @@ void Text::layout(qreal layoutWidth, qreal x, qreal y)
       _doc->setModified(false);
       style().layout(this);      // process alignment
 
-      if ((style().align() & ALIGN_VCENTER) && (subtype() == TEXT_TEXTLINE)) {
+      if ((style().align() & ALIGN_VCENTER) && (textStyle() == TEXT_STYLE_TEXTLINE)) {
             // special case: vertically centered text with TextLine needs to
             // take into account the line width
             TextLineSegment* tls = static_cast<TextLineSegment*>(parent());
@@ -598,7 +598,7 @@ bool Text::edit(MuseScoreView*, int /*grip*/, int key, Qt::KeyboardModifiers mod
             qDebug("Text::edit(%p): not in edit mode: %d %p\n", this, _editMode, _cursor);
             return false;
             }
-      bool lo = (subtype() == TEXT_INSTRUMENT_SHORT) || (subtype() == TEXT_INSTRUMENT_LONG);
+      bool lo = type() == INSTRUMENT_NAME;
       score()->setLayoutAll(lo);
       qreal w = 2.0; // 8.0 / view->matrix().m11();
       score()->addRefresh(canvasBoundingRect().adjusted(-w, -w, w, w));
@@ -957,7 +957,7 @@ void Text::paste()
             qDebug("Text::paste() <%s>\n", qPrintable(txt));
       _cursor->insertText(txt);
       layout();
-      bool lo = (subtype() == TEXT_INSTRUMENT_SHORT) || (subtype() == TEXT_INSTRUMENT_LONG);
+      bool lo = type() == INSTRUMENT_NAME;
       score()->setLayoutAll(lo);
       score()->setUpdateAll();
       score()->end();

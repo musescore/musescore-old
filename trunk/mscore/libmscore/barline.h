@@ -64,7 +64,7 @@ class BarLine : public Element {
       virtual void updateGrips(int*, QRectF*) const;
       int tick() const;
 
-      virtual const QString subtypeName() const;
+      virtual QString subtypeName() const;
       virtual void setSubtype(const QString& s);
       void setBarLineType(BarLineType i)  { Element::setSubtype(int(i));    }
       BarLineType barLineType() const     { return BarLineType(subtype());  }

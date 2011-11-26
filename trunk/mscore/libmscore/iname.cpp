@@ -24,3 +24,29 @@ InstrumentName::InstrumentName(Score* s)
       _layoutPos = 0;
       }
 
+//---------------------------------------------------------
+//   subtypeName
+//---------------------------------------------------------
+
+QString InstrumentName::subtypeName() const
+      {
+      if (subtype() == INSTRUMENT_NAME_SHORT)
+            return QString("short");
+      return QString("long");
+      }
+
+//---------------------------------------------------------
+//   setSubtype
+//---------------------------------------------------------
+
+void InstrumentName::setSubtype(const QString& s)
+      {
+      if (s == "short")
+            Element::setSubtype(INSTRUMENT_NAME_SHORT);
+      if (s == "long")
+            Element::setSubtype(INSTRUMENT_NAME_LONG);
+      else
+            qDebug("InstrumentName::setSubtype: unknown <%s>", qPrintable(s));
+      }
+
+

@@ -37,6 +37,8 @@
 #include "libmscore/repeatlist.h"
 #include "libmscore/mscore.h"
 
+#include "scoreview.h"
+
 Q_DECLARE_METATYPE(PageFormat*);
 Q_DECLARE_METATYPE(Score*);
 Q_DECLARE_METATYPE(Part*);
@@ -118,7 +120,6 @@ static void addText(Score* score, int subtype, const QString& s)
             case TEXT_COMPOSER: text->setTextStyle(TEXT_STYLE_COMPOSER); break;
             case TEXT_POET:     text->setTextStyle(TEXT_STYLE_POET);     break;
             }
-      text->setSubtype(subtype);
       text->setParent(measure);
       text->setText(s);
       score->undoAddElement(text);

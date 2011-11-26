@@ -336,7 +336,7 @@ class Element {
  Return a name for a \a subtype. Used for outputting xml data.
  Reimplemented by elements with subtype names.
  */
-      virtual const QString subtypeName() const { return QString("%1").arg(_subtype); }
+      virtual QString subtypeName() const { return QString("%1").arg(_subtype); }
 
 /**
  Set subtype by name
@@ -370,6 +370,7 @@ class Element {
                 || type() == MARKER
                 || type() == JUMP
                 || type() == STAFF_TEXT
+                || type() == REHEARSAL_MARK
                 || type() == INSTRUMENT_CHANGE
                 || type() == FIGURED_BASS
                 || type() == TEMPO_TEXT;

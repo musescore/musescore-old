@@ -241,7 +241,7 @@ void Accidental::write(Xml& xml) const
 //   subtypeName
 //---------------------------------------------------------
 
-const QString Accidental::subtypeName() const
+QString Accidental::subtypeName() const
       {
       return accList[subtype()].tag;
       }

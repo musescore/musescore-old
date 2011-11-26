@@ -189,7 +189,7 @@ void Dynamic::setSubtype(const QString& tag)
 //   subtypeName
 //---------------------------------------------------------
 
-const QString Dynamic::subtypeName() const
+QString Dynamic::subtypeName() const
       {
       return dynList[subtype()].tag;
       }

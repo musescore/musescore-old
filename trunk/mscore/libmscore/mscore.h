@@ -100,6 +100,7 @@ enum ElementType {
       TUPLET,
 /*30*/TEMPO_TEXT,
       STAFF_TEXT,
+      REHEARSAL_MARK,
       INSTRUMENT_CHANGE,
       HARMONY,
       FRET_DIAGRAM,
