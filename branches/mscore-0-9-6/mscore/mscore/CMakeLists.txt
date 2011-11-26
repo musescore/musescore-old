@@ -18,6 +18,8 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
+include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
+
 if (GCC_VISIBILITY)
 set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -Winvalid-pch -fvisibility=hidden -fvisibility-inlines-hidden")
 else (GCC_VISIBILITY)
@@ -37,29 +39,6 @@ endif (NOT MINGW)
 
 
 SET_SOURCE_FILES_PROPERTIES(revision.h PROPERTIES GENERATED TRUE)
-
-add_custom_command(
-   OUTPUT ${PROJECT_BINARY_DIR}/all.h
-   COMMAND cp ${PROJECT_SOURCE_DIR}/all.h ${PROJECT_BINARY_DIR}/all.h
-   DEPENDS ${PROJECT_SOURCE_DIR}/all.h
-   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-   )
-
-add_custom_command(
-   OUTPUT ${PROJECT_BINARY_DIR}/all.h.pch
-   COMMAND ${CMAKE_CXX_COMPILER}
-     -g -Wextra -Wall
-     -I"${QT_INCLUDE_DIR}"
-     -o all.h.pch all.h
-   DEPENDS ${PROJECT_BINARY_DIR}/all.h
-   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-   )
-
-set_source_files_properties(
-      ${PROJECT_BINARY_DIR}/all.h
-      ${PROJECT_BINARY_DIR}/all.h.pch
-      PROPERTIES generated true
-      )
 
 include_directories(
       ${CMAKE_CURRENT_BINARY_DIR}
