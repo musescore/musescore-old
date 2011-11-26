@@ -233,6 +233,32 @@ configure_file (
       ${PROJECT_SOURCE_DIR}/config.h.in
       ${PROJECT_BINARY_DIR}/config.h
       )
+
+
+add_custom_command(
+   OUTPUT ${PROJECT_BINARY_DIR}/all.h
+   COMMAND cp ${PROJECT_SOURCE_DIR}/all.h ${PROJECT_BINARY_DIR}/all.h
+   DEPENDS ${PROJECT_SOURCE_DIR}/all.h
+   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+   )
+
+add_custom_command(
+   OUTPUT ${PROJECT_BINARY_DIR}/all.h.pch
+   COMMAND ${CMAKE_CXX_COMPILER}
+     -g -Wextra -Wall
+     -I"${QT_INCLUDE_DIR}"
+     -o all.h.pch all.h
+   DEPENDS ${PROJECT_BINARY_DIR}/all.h
+   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+   )
+
+set (PCH ${PROJECT_BINARY_DIR}/all.h.pch)
+
+ADD_CUSTOM_TARGET(mops1 DEPENDS ${PROJECT_BINARY_DIR}/all.h)
+ADD_CUSTOM_TARGET(mops2 DEPENDS ${PCH})
+
+
+
 if (NOT MINGW AND NOT APPLE)
       install( FILES packaging/mscore.desktop DESTINATION share/applications)
 endif (NOT MINGW AND NOT APPLE)
