@@ -813,6 +813,8 @@ void MusicXml::scorePartwise(QDomElement ee)
                               score->setMetaTag("encoding", ee.text());
                         else if (ee.tagName() == "source")
                               score->setMetaTag("source", ee.text());
+                        else if (ee.tagName() == "miscellaneous")
+                              ; // ignore
                         else
                               domError(ee);
                         }
@@ -2772,6 +2774,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       bool hasYoffset = false;
       QSet<Slur*> slursStarted;
       QSet<Slur*> slursStopped;
+      QSet<QString> slurIds; // combination start/stop and number must be unique within a note
       QColor noteheadColor = QColor::Invalid;
       QList<Lyrics*> lyrics;
       bool chord = false;
@@ -2970,43 +2973,56 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               int slurNo   = ee.attribute(QString("number"), "1").toInt() - 1;
                               QString slurType = ee.attribute(QString("type"));
 
-                              // int trk = (staff + relStaff) * VOICES;
-                              if (slurType == "start") {
-                                    bool endSlur = false;
-                                    if (slur[slurNo] == 0) {
-                                          slur[slurNo] = new Slur(score);
-                                          slursStarted.insert(slur[slurNo]);
+                              // PriMus Music-Notation by Columbussoft (build 10093) generates overlapping
+                              // slurs that do not have a number attribute to distinguish them.
+                              // The duplicates must be ignored, to prevent memory allocation issues,
+                              // which caused a MuseScore crash
+
+                              QString slurId = QString("slur %1").arg(slurType) + QString(" %1").arg(slurNo);
+                              bool unique = !slurIds.contains(slurId);
+
+                              if (unique) {
+                                    slurIds.insert(slurId);
+                                    if (slurType == "start") {
+                                          bool endSlur = false;
+                                          if (slur[slurNo] == 0) {
+                                                slur[slurNo] = new Slur(score);
+                                                slursStarted.insert(slur[slurNo]);
+                                                }
+                                          else
+                                                endSlur = true;
+                                          QString pl = ee.attribute(QString("placement"));
+                                          if (pl == "above")
+                                                slur[slurNo]->setSlurDirection(UP);
+                                          else if (pl == "below")
+                                                slur[slurNo]->setSlurDirection(DOWN);
+                                          // slur[slurNo]->setStart(tick, trk + voice);
+                                          // slur[slurNo]->setTrack((staff + relStaff) * VOICES);
+                                          // score->add(slur[slurNo]);
+                                          if (endSlur) {
+                                                slursStarted.insert(slur[slurNo]);
+                                                slur[slurNo] = 0;
+                                                }
+                                          }
+                                    else if (slurType == "stop") {
+                                          if (slur[slurNo] == 0) {
+                                                slur[slurNo] = new Slur(score);
+                                                slursStopped.insert(slur[slurNo]);
+                                                // slur[slurNo]->setEnd(tick, trk + voice);
+                                                }
+                                          else {
+                                                // slur[slurNo]->setEnd(tick, trk + voice);
+                                                slursStopped.insert(slur[slurNo]);
+                                                slur[slurNo] = 0;
+                                                }
                                           }
                                     else
-                                          endSlur = true;
-                                    QString pl = ee.attribute(QString("placement"));
-                                    if (pl == "above")
-                                          slur[slurNo]->setSlurDirection(UP);
-                                    else if (pl == "below")
-                                          slur[slurNo]->setSlurDirection(DOWN);
-                                    // slur[slurNo]->setStart(tick, trk + voice);
-                                    // slur[slurNo]->setTrack((staff + relStaff) * VOICES);
-                                    // score->add(slur[slurNo]);
-                                    if (endSlur) {
-                                          slursStarted.insert(slur[slurNo]);
-                                          slur[slurNo] = 0;
-                                          }
-                                    }
-                              else if (slurType == "stop") {
-                                    if (slur[slurNo] == 0) {
-                                          slur[slurNo] = new Slur(score);
-                                          slursStopped.insert(slur[slurNo]);
-                                          // slur[slurNo]->setEnd(tick, trk + voice);
-                                          }
-                                    else {
-                                          // slur[slurNo]->setEnd(tick, trk + voice);
-                                          slursStopped.insert(slur[slurNo]);
-                                          slur[slurNo] = 0;
-                                          }
+                                          qDebug("unknown slur type %s\n", qPrintable(slurType));
                                     }
                               else
-                                    qDebug("unknown slur type %s\n", slurType.toLatin1().data());
+                                    printf("ignoring duplicate '%s'\n", qPrintable(slurId));
                               }
+
                         else if (ee.tagName() == "tied") {
                               QString tiedType = ee.attribute(QString("type"));
                               if (tiedType == "start") {
