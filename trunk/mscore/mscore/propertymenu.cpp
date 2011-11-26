@@ -586,8 +586,9 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
                   QList<Element*> sl = score()->selection().elements();
                   QList<Element*> selectedElements;
                   foreach(Element* e, sl) {
-                        if ((e->type() != ot->type()) || (e->subtype() != ot->subtype()))
+                        if ((e->type() != ot->type()) || (e->subtype() != ot->subtype())) {
                               continue;
+                              }
                         Text* t  = static_cast<Text*>(e);
                         Text* tt = t->clone();
 

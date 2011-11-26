@@ -300,13 +300,9 @@ void Box::read(QDomElement e)
 
 void Box::add(Element* e)
       {
-      if (e->type() == TEXT) {
-            e->setParent(this);
+      if (e->type() == TEXT)
             static_cast<Text*>(e)->setLayoutToParentWidth(true);
-            _el.append(e);
-            }
-      else
-            MeasureBase::add(e);
+      MeasureBase::add(e);
       }
 
 //---------------------------------------------------------

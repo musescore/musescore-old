@@ -931,7 +931,7 @@ ScoreView::~ScoreView()
 void ScoreView::objectPopup(const QPoint& pos, Element* obj)
       {
       // show tuplet properties if number is clicked:
-      if (obj->type() == TEXT && obj->subtype() == TEXT_TUPLET) {
+      if (obj->type() == TEXT && obj->parent() && obj->parent()->type() == TUPLET) {
             obj = obj->parent();
             if (!obj->selected())
                   obj->score()->select(obj, SELECT_SINGLE, 0);
@@ -3512,7 +3512,6 @@ void ScoreView::endNoteEntry()
 
 void ScoreView::contextPopup(QMouseEvent* ev)
       {
-// qDebug("contextPopup");
       QPoint gp = ev->globalPos();
       startMove = toLogical(ev->pos());
       Element* e = elementNear(startMove);
@@ -3527,8 +3526,9 @@ void ScoreView::contextPopup(QMouseEvent* ev)
             seq->stopNotes();       // stop now because we dont get a mouseRelease event
             if (type == MEASURE)
                   measurePopup(gp, static_cast<Measure*>(e));
-            else
+            else {
                   objectPopup(gp, e);
+                  }
             }
       else {
             QMenu* popup = mscore->genCreateMenu();

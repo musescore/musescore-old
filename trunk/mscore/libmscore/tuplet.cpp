@@ -330,18 +330,19 @@ void Tuplet::layout()
       p2 += _p2;
 
       // center number
-      qreal x3 = 0.0, y3 = 0.0;
+      qreal x3 = 0.0;
+      qreal y3 = 0.0;
       qreal numberWidth = 0.0;
       if (_number) {
             _number->layout();
             x3 = p1.x() + (p2.x() - p1.x()) * .5;
 
             y3 = p1.y() + (p2.y() - p1.y()) * .5
-               - _number->bbox().height() * .5
+//               - _number->bbox().height() * .5
                - (l1 + l2) * (_isUp ? 1.0 : -1.0);
 
             numberWidth = _number->bbox().width();
-            _number->setPos(QPointF(x3 - numberWidth * .5, y3) - ipos());
+            _number->setPos(QPointF(x3, y3) - ipos());
             }
 
       if (_hasBracket) {

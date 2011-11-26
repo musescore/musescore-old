@@ -60,8 +60,15 @@ class SimpleText : public Element {
       QString _text;
       TextStyleType _textStyle;
       bool _layoutToParentWidth;
+      QRectF drawingRect;
+      QRectF frame;           // set by layout()
 
       int alignFlags() const;
+
+   protected:
+      void drawFrame(QPainter* painter) const;
+      QColor textColor() const;
+      void layoutFrame();
 
    public:
       SimpleText(Score*);
@@ -76,7 +83,7 @@ class SimpleText : public Element {
 
       virtual void setTextStyle(TextStyleType st) { _textStyle = st; }
       TextStyleType textStyle() const             { return _textStyle; }
-      const TextStyle& style() const;
+      virtual const TextStyle& style() const;
 
       void setText(const QString& s)        { _text = s;    }
       QString getText() const               { return _text; }
@@ -93,6 +100,13 @@ class SimpleText : public Element {
 
       bool layoutToParentWidth() const    { return _layoutToParentWidth; }
       void setLayoutToParentWidth(bool v) { _layoutToParentWidth = v;   }
+
+      qreal frameWidth() const;
+      bool hasFrame() const;
+      qreal paddingWidth() const;
+      QColor frameColor() const;
+      int frameRound() const;
+      bool circle() const;
       };
 
 #endif

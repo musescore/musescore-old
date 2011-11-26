@@ -35,7 +35,6 @@ QReadWriteLock docRenderLock;
 void Text::createDoc()
       {
       _doc = new QTextDocument(0);
-//      _doc->setDocumentMargin(1.0);
       _doc->setDocumentMargin(0.0);
       _doc->setUseDesignMetrics(true);
       _doc->setUndoRedoEnabled(true);
@@ -54,10 +53,10 @@ void Text::createDoc()
 Text::Text(Score* s)
    : SimpleText(s)
       {
+      setFlag(ELEMENT_MOVABLE, true);
       _doc       = 0;
       _editMode  = false;
       _cursor    = 0;
-      setFlag(ELEMENT_MOVABLE, true);
       _styled    = true;
       setSubtype(0);
       }
@@ -69,7 +68,6 @@ Text::Text(const Text& e)
             _doc = e._doc->clone();
       else
             _doc = 0;
-      frame       = e.frame;
       _styled     = e._styled;
       _editMode   = false;
       _cursor     = 0;
@@ -124,6 +122,10 @@ void Text::setUnstyledText(const QString& s)
       c.setBlockCharFormat(tf);
       c.insertText(s);
       }
+
+//---------------------------------------------------------
+//   setText
+//---------------------------------------------------------
 
 void Text::setText(const QTextDocumentFragment& f)
       {
@@ -217,33 +219,9 @@ void Text::layout(qreal layoutWidth, qreal x, qreal y)
             layoutWidth = _doc->idealWidth();
       _doc->setTextWidth(layoutWidth);
 
-      if (hasFrame()) {
-            frame = QRectF();
-            for (QTextBlock tb = _doc->begin(); tb.isValid(); tb = tb.next()) {
-                  QTextLayout* tl = tb.layout();
-                  int n = tl->lineCount();
-                  for (int i = 0; i < n; ++i)
-                        // frame |= tl->lineAt(0).naturalTextRect().translated(tl->position());
-                        frame |= tl->lineAt(0).rect().translated(tl->position());
-                  }
-            if (circle()) {
-                  if (frame.width() > frame.height()) {
-                        frame.setY(frame.y() + (frame.width() - frame.height()) * -.5);
-                        frame.setHeight(frame.width());
-                        }
-                  else {
-                        frame.setX(frame.x() + (frame.height() - frame.width()) * -.5);
-                        frame.setWidth(frame.height());
-                        }
-                  }
-            qreal w = (paddingWidth() + frameWidth() * .5) * DPMM;
-            frame.adjust(-w, -w, w, w);
-            w = frameWidth() * DPMM;
-            setbbox(frame.adjusted(-w, -w, w, w));
-            }
-      else {
-            setbbox(QRectF(QPointF(0.0, 0.0), _doc->size()));
-            }
+      setbbox(QRectF(QPointF(0.0, 0.0), _doc->size()));
+      if (hasFrame())
+            layoutFrame();
       _doc->setModified(false);
       style().layout(this);      // process alignment
 
@@ -314,30 +292,10 @@ void Text::draw(QPainter* painter) const
                   }
             c.cursorPosition = _cursor->position();
             }
-
-      QColor color;
-
-      // if printing, use own color if visible, do nothing if invisible
-      if (score() && score()->printing()) {
-            if (!visible())
-                  return;
-            color = style().foregroundColor();
-            }
-/*TODOxxxx      else if (painter->editMode())
-            // if editing, use own color
-            color = style().foregroundColor();
-*/
-      else if (selected())
-            color = MScore::selectColor[0];
-      else if (!visible()) {
-            if (!score()->showInvisible())
-                  return;
-            color = Qt::gray;
-            }
-      else
-            color = style().foregroundColor();
-
-      c.palette.setColor(QPalette::Text, color);
+      bool printing = score() && score()->printing();
+      if ((printing || !score()->showInvisible()) && !visible())
+            return;
+      c.palette.setColor(QPalette::Text, textColor());
 
 #if 1
       // make it thread save
@@ -350,26 +308,7 @@ void Text::draw(QPainter* painter) const
 #else
       _doc->documentLayout()->draw(painter, c);
 #endif
-
-      // draw frame
-      if (hasFrame()) {
-            QColor color(frameColor());
-            if (!visible())
-                  color = Qt::gray;
-            // else if (selected())
-            //       color = MScore::selectColor[track() == -1 ? 0 : voice()];
-            QPen pen(curColor(), frameWidth() * DPMM);
-            painter->setPen(pen);
-            painter->setBrush(Qt::NoBrush);
-            if (circle())
-                  painter->drawArc(frame, 0, 5760);
-            else {
-                  int r2 = frameRound() * lrint((frame.width() / frame.height()));
-                  if (r2 > 99)
-                        r2 = 99;
-                  painter->drawRoundRect(frame, frameRound(), r2);
-                  }
-            }
+      drawFrame(painter);
       }
 
 //---------------------------------------------------------
@@ -381,8 +320,11 @@ void Text::setTextStyle(TextStyleType idx)
       SimpleText::setTextStyle(idx);
       if (idx != TEXT_STYLE_INVALID) {
             _localStyle = score()->textStyle(textStyle());
-            setText(getText());      // init style
-            setStyled(true);
+            if (!styled()) {
+                  QString s(getText());
+                  setStyled(true);
+                  setText(s);
+                  }
             }
       else
             setStyled(false);
@@ -1095,60 +1037,6 @@ void Text::setSizeIsSpatiumDependent(int v)
       }
 
 //---------------------------------------------------------
-//   frameWidth
-//---------------------------------------------------------
-
-qreal Text::frameWidth() const
-      {
-      return style().frameWidth();
-      }
-
-//---------------------------------------------------------
-//   hasFrame
-//---------------------------------------------------------
-
-bool Text::hasFrame() const
-      {
-      return style().hasFrame();
-      }
-
-//---------------------------------------------------------
-//   paddingWidth
-//---------------------------------------------------------
-
-qreal Text::paddingWidth() const
-      {
-      return style().paddingWidth();
-      }
-
-//---------------------------------------------------------
-//   frameColor
-//---------------------------------------------------------
-
-QColor Text::frameColor() const
-      {
-      return style().frameColor();
-      }
-
-//---------------------------------------------------------
-//   frameRound
-//---------------------------------------------------------
-
-int Text::frameRound() const
-      {
-      return style().frameRound();
-      }
-
-//---------------------------------------------------------
-//   circle
-//---------------------------------------------------------
-
-bool Text::circle() const
-      {
-      return style().circle();
-      }
-
-//---------------------------------------------------------
 //   xoff
 //---------------------------------------------------------
 
@@ -1245,24 +1133,6 @@ void Text::setRyoff(qreal v)
 void Text::setReloff(const QPointF& p)
       {
       _localStyle.setReloff(p);
-      }
-
-//---------------------------------------------------------
-//   rxoff
-//---------------------------------------------------------
-
-qreal Text::rxoff() const
-      {
-      return style().reloff().x();
-      }
-
-//---------------------------------------------------------
-//   ryoff
-//---------------------------------------------------------
-
-qreal Text::ryoff() const
-      {
-      return style().reloff().y();
       }
 
 //---------------------------------------------------------
@@ -1418,7 +1288,7 @@ void Text::setStyled(bool val)
       if (_styled) {
             // change to unstyled
             createDoc();
-            _localStyle = score()->textStyle(textStyle());
+//            _localStyle = score()->textStyle(textStyle());
             if (!SimpleText::isEmpty())
                   setUnstyledText(SimpleText::getText());
             }
