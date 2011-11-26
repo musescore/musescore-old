@@ -208,8 +208,8 @@ void SimpleText::layout()
 
       const TextStyle& s(style());
 
+      QPointF o(s.offset(spatium()));
       if (_layoutToParentWidth && parent()) {
-            QPointF o(s.offset(spatium()));
             Element* e = parent();
             if ((type() == MARKER || type() == JUMP) && e->parent())
                   e = e->parent();
@@ -217,11 +217,11 @@ void SimpleText::layout()
             qreal h = e->height();
             drawingRect = QRectF(0.0, 0.0, w, h);
             QPointF ro = s.reloff() * .01;
-            setPos(s.offset(spatium()) + QPointF(ro.x() * w, ro.y() * h));
+            setPos(o + QPointF(ro.x() * w, ro.y() * h));
             }
       else {
             drawingRect = QRectF();
-            setPos(0.0, 0.0);
+            setPos(o);
             }
 
       QFontMetricsF fm(s.fontPx(spatium()));
