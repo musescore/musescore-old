@@ -1,3 +1,5 @@
+26.nov (lv)
+      - fix #13782: MusicXML: Errors in Import and Crash after closing
 25.nov (la)
       - fix #13823: Multi-select when opening files
       - fix #13788: Select All for supported file types
