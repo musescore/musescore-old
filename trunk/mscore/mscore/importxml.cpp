@@ -3020,7 +3020,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                           qDebug("unknown slur type %s\n", qPrintable(slurType));
                                     }
                               else
-                                    printf("ignoring duplicate '%s'\n", qPrintable(slurId));
+                                    qDebug("ignoring duplicate '%s'", qPrintable(slurId));
                               }
 
                         else if (ee.tagName() == "tied") {
