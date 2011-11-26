@@ -73,18 +73,18 @@ void TextLineSegment::draw(QPainter* painter) const
       qreal l = 0.0;
       int sym = spannerSegmentType() == SEGMENT_MIDDLE ? tl->continueSymbol() : tl->beginSymbol();
       if (_text) {
+            SpannerSegmentType st = spannerSegmentType();
             if (
-               ((spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN) && (tl->beginTextPlace() == PLACE_LEFT))
-               || ((spannerSegmentType() == SEGMENT_MIDDLE || spannerSegmentType() == SEGMENT_END) && (tl->continueTextPlace() == PLACE_LEFT))
+               ((st == SEGMENT_SINGLE || st == SEGMENT_BEGIN) && (tl->beginTextPlace() == PLACE_LEFT))
+               || ((st == SEGMENT_MIDDLE || st == SEGMENT_END) && (tl->continueTextPlace() == PLACE_LEFT))
                ) {
                   QRectF bb(_text->bbox());
                   l = _text->pos().x() + bb.width() + textlineTextDistance;
                   }
-            QPointF pos(_text->pos());
-            painter->translate(pos);
+            painter->translate(_text->pos());
             painter->setPen(_text->curColor());
             _text->draw(painter);
-            painter->translate(-pos);
+            painter->translate(-_text->pos());
             }
       else if (sym != -1) {
             const QRectF& bb = symbols[score()->symIdx()][sym].bbox(magS());
@@ -148,7 +148,7 @@ void TextLineSegment::draw(QPainter* painter) const
 
 void TextLineSegment::layout()
       {
-      TextLine* tl = (TextLine*)line();
+      TextLine* tl = static_cast<TextLine*>(line());
       if (!tl->diagonal())
             _userOff2.setY(0);
       switch (spannerSegmentType()) {
@@ -183,7 +183,6 @@ void TextLineSegment::layout()
             }
       if (_text)
             _text->layout();
-
 
       QPointF pp1;
       QPointF pp2(pos2());
@@ -317,8 +316,8 @@ void TextLine::setBeginText(const QString& s, TextStyleType textStyle)
             _beginText = new Text(score());
             _beginText->setParent(this);
             _beginText->setSubtype(TEXT_TEXTLINE);
-            _beginText->setTextStyle(textStyle);
             }
+      _beginText->setTextStyle(textStyle);
       _beginText->setText(s);
       }
 
@@ -332,9 +331,29 @@ void TextLine::setContinueText(const QString& s, TextStyleType textStyle)
             _continueText = new Text(score());
             _continueText->setParent(this);
             _continueText->setSubtype(TEXT_TEXTLINE);
-            _continueText->setTextStyle(textStyle);
             }
+      _continueText->setTextStyle(textStyle);
       _continueText->setText(s);
+      }
+
+//---------------------------------------------------------
+//   setBeginText
+//---------------------------------------------------------
+
+void TextLine::setBeginText(Text* v)
+      {
+      delete _beginText;
+      _beginText = v;
+      }
+
+//---------------------------------------------------------
+//   setContinueText
+//---------------------------------------------------------
+
+void TextLine::setContinueText(Text* v)
+      {
+      delete _continueText;
+      _continueText = v;
       }
 
 //---------------------------------------------------------
@@ -495,26 +514,6 @@ bool TextLine::readProperties(QDomElement e)
 LineSegment* TextLine::createLineSegment()
       {
       return new TextLineSegment(score());
-      }
-
-//---------------------------------------------------------
-//   setBeginText
-//---------------------------------------------------------
-
-void TextLine::setBeginText(Text* v)
-      {
-      delete _beginText;
-      _beginText = v;
-      }
-
-//---------------------------------------------------------
-//   setContinueText
-//---------------------------------------------------------
-
-void TextLine::setContinueText(Text* v)
-      {
-      delete _continueText;
-      _continueText = v;
       }
 
 //---------------------------------------------------------
