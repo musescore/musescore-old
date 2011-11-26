@@ -29,7 +29,6 @@ struct SymCode;
 
 class Text : public SimpleText {
       QTextDocument* _doc;
-      QRectF frame;           // set by layout()
       bool _styled;
 
       Q_DECLARE_TR_FUNCTIONS(Text)
@@ -66,11 +65,6 @@ class Text : public SimpleText {
       QString getHtml() const;
       QTextDocumentFragment getFragment() const { return QTextDocumentFragment(_doc); }
 
-      qreal frameWidth() const;
-      qreal paddingWidth() const;
-      QColor frameColor() const;
-      int frameRound() const;
-      bool circle() const;
       bool sizeIsSpatiumDependent() const;
       void setSizeIsSpatiumDependent(int v);
       void setFrameWidth(qreal val);
@@ -78,7 +72,6 @@ class Text : public SimpleText {
       void setFrameColor(const QColor& val);
       void setFrameRound(int val);
       void setCircle(bool val);
-      bool hasFrame() const;
       void setHasFrame(bool);
       qreal xoff() const;
       qreal yoff() const;
@@ -91,8 +84,6 @@ class Text : public SimpleText {
       void setOffsetType(OffsetType val);
       void setRxoff(qreal v);
       void setRyoff(qreal v);
-      qreal rxoff() const;
-      qreal ryoff() const;
       void setReloff(const QPointF&);
       QFont font() const;
       void setFont(const QFont&);

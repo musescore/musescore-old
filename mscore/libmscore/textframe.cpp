@@ -72,15 +72,12 @@ void TBox::layout()
 
 void TBox::add(Element* e)
       {
-      e->setParent(this);
       if (e->type() == TEXT) {
             Text* text = static_cast<Text*>(e);
             text->setLayoutToParentWidth(true);
             text->setFlag(ELEMENT_MOVABLE, false);
-            _el.append(e);
             }
-      else
-            Box::add(e);
+      Box::add(e);
       }
 
 //---------------------------------------------------------
