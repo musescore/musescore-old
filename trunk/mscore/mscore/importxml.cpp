@@ -3291,15 +3291,13 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 
             if (!pluck.isEmpty()) {
                   Text* f = new Fingering(score);
-                  // f->setSubtype(TEXT_FINGERING);
                   f->setTextStyle(TEXT_STYLE_FINGERING);
                   f->setText(pluck);
                   note->add(f);
                   }
 
             if (!string.isEmpty()) {
-                  Text* f = new Text(score);
-//                  f->setSubtype(TEXT_STRING_NUMBER);
+                  Text* f = new Fingering(score);
                   f->setTextStyle(TEXT_STYLE_STRING_NUMBER);
                   f->setText(string);
                   note->add(f);

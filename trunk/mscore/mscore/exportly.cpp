@@ -2717,17 +2717,18 @@ void ExportLy::findFingerAndStringno(Note* note, int &fingix, int &stringix, QSt
       {
       foreach (const Element* e, *note->el()) {
             if (e->type() == FINGERING) {
-	            fingix++;
-	            Text* f = (Text*)e;
-	            fingarray[fingix] = f->getText();
-	            }
-#if 0 //TODOww
-            if (e->subtype() == TEXT_STRING_NUMBER) {
-                  stringix++;
-                  Text * s = (Text*)e;
-                  stringarray[stringix] = s->getText();
+                  const Text* text = static_cast<const Text*>(e);
+                  if (text->textStyle() == TEXT_STYLE_FINGERING) {
+	                  fingix++;
+      	            Text* f = (Text*)e;
+	                  fingarray[fingix] = f->getText();
+	                  }
+                  else if (text->textStyle() == TEXT_STYLE_STRING_NUMBER) {
+                        stringix++;
+                        Text * s = (Text*)e;
+                        stringarray[stringix] = s->getText();
+                        }
                   }
-#endif
             }
       }//end findfingerandstringno
 
