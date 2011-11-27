@@ -253,7 +253,7 @@ void RepeatList::unwind()
       if (!fm)
             return;
 
-//qDebug("unwind===================\n");
+qDebug("unwind===================\n");
 
       rs                  = new RepeatSegment;
       rs->tick            = 0;
@@ -379,9 +379,10 @@ void RepeatList::unwind()
 
 Measure* RepeatList::jumpToStartRepeat(Measure* m)
       {
+      qDebug("jumpToStartRepeat from %d", m->no());
       Measure* nm;
       for (nm = m; nm && nm != _score->firstMeasure(); nm = nm->prevMeasure()) {
-            if (nm->repeatFlags() & RepeatStart || nm->sectionBreak()) {
+            if (nm->repeatFlags() & RepeatStart || (nm->sectionBreak() && m != nm)) {
                   if (nm->sectionBreak() && nm->nextMeasure())
                         nm = nm->nextMeasure();
                   break;
