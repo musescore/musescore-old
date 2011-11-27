@@ -1992,23 +1992,23 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                   chordAttributes(chord, notations, technical, xml, trillStart, trillStop);
                   }
             foreach (const Element* e, *note->el()) {
-                  // if (e->type() == FINGERING || (e->type() == TEXT && (e->subtype() == TEXT_STRING_NUMBER)) {
-                  // TODOws
                   if (e->type() == FINGERING) {
                         Text* f = (Text*)e;
                         notations.tag(xml);
                         technical.tag(xml);
                         QString t = f->getText();
-                        if (e->type() == FINGERING) {
+                        if (f->textStyle() == TEXT_STYLE_FINGERING) {
                               // p, i, m, a, c represent the plucking finger
                               if (t == "p" || t == "i" || t == "m" || t == "a" || t == "c")
                                     xml.tag("pluck", t);
                               else
                                     xml.tag("fingering", t);
                               }
-                        else
-                              // TEXT_STRING_NUMBER
+                        else if (f->textStyle() == TEXT_STYLE_STRING_NUMBER) {
                               xml.tag("string", t);
+                              }
+                        else
+                              qDebug("unknown fingering style");
                         }
                   else {
                         // TODO
