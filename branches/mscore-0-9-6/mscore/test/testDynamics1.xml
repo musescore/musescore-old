@@ -47,6 +47,7 @@
             <ppp/>
             </dynamics>
           </direction-type>
+        <sound dynamics="17.78"/>
         </direction>
       <note>
         <pitch>
@@ -65,6 +66,7 @@
             <pp/>
             </dynamics>
           </direction-type>
+        <sound dynamics="36.67"/>
         </direction>
       <note>
         <pitch>
@@ -83,6 +85,7 @@
             <p/>
             </dynamics>
           </direction-type>
+        <sound dynamics="54.44"/>
         </direction>
       <note>
         <pitch>
@@ -101,6 +104,7 @@
             <mp/>
             </dynamics>
           </direction-type>
+        <sound dynamics="71.11"/>
         </direction>
       <note>
         <pitch>
@@ -119,6 +123,7 @@
             <mf/>
             </dynamics>
           </direction-type>
+        <sound dynamics="88.89"/>
         </direction>
       <note>
         <pitch>
@@ -137,6 +142,7 @@
             <f/>
             </dynamics>
           </direction-type>
+        <sound dynamics="106.67"/>
         </direction>
       <note>
         <pitch>
@@ -155,6 +161,7 @@
             <ff/>
             </dynamics>
           </direction-type>
+        <sound dynamics="124.44"/>
         </direction>
       <note>
         <pitch>
@@ -173,6 +180,7 @@
             <fff/>
             </dynamics>
           </direction-type>
+        <sound dynamics="140.00"/>
         </direction>
       <note>
         <pitch>
