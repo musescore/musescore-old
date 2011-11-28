@@ -161,6 +161,7 @@
             <ppp/>
             </dynamics>
           </direction-type>
+        <sound dynamics="17.78"/>
         </direction>
       <note>
         <pitch>
@@ -188,6 +189,7 @@
             <fff/>
             </dynamics>
           </direction-type>
+        <sound dynamics="140.00"/>
         </direction>
       <note>
         <pitch>
