@@ -548,10 +548,11 @@ QString Sym::toString() const
 void Sym::draw(QPainter* painter, qreal mag, const QPointF& pos, int n) const
       {
 #ifdef USE_GLYPHS
-      quint32 indexes[n];
-      QPointF positions[n];
+      QVector<quint32> indexes(n);
+      QVector<QPointF> positions(n);
       QGlyphRun nglyphs;
-      nglyphs.setRawData(indexes, positions, n);
+      nglyphs.setGlyphIndexes(indexes);
+      nglyphs.setPositions(positions);
       nglyphs.setRawFont(glyphs.rawFont());
 
       qreal dist = width(mag);
