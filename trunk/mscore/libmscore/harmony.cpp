@@ -570,6 +570,7 @@ void Harmony::draw(QPainter* painter) const
             }
       foreach(const TextSegment* ts, textList) {
             painter->setFont(ts->font);
+            printf("--font <%s> 0x%x\n", qPrintable(ts->font.family()), ts->text[0].unicode());
             painter->drawText(QPointF(ts->x, ts->y), ts->text);
             }
       }
