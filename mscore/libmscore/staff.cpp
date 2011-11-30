@@ -219,12 +219,12 @@ ClefType Staff::clef(int tick) const
                   break;
             clef = c;
             }
-      return clef == 0 ? CLEF_G : clef->clefType();
+      return clef == 0 ? _initialClef._concertClef : clef->clefType();
       }
 
 ClefType Staff::clef(Segment* segment) const
       {
-      ClefType ct = CLEF_G;
+      ClefType ct = _initialClef._concertClef;
       int track = idx() * VOICES;
       for (;;) {
             segment = segment->prev1(SegClef);
