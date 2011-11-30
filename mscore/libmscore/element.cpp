@@ -872,9 +872,10 @@ void StaffLines::draw(QPainter* painter) const
       qreal x2 = x1 + width();
 
       QVector<QLineF> ll(lines);
+      qreal y = _pos.y();
       for (int i = 0; i < lines; ++i) {
-            qreal y = _pos.y() + i * dist;
             ll[i].setLine(x1, y, x2, y);
+            y += dist;
             }
       painter->drawLines(ll);
       }

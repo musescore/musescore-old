@@ -121,6 +121,7 @@ void Text::setUnstyledText(const QString& s)
       tf.setFont(style().font(spatium()));
       c.setBlockCharFormat(tf);
       c.insertText(s);
+      textChanged();
       }
 
 //---------------------------------------------------------

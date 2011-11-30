@@ -102,12 +102,9 @@ void KeySig::layout()
             delete ks;
       keySymbols.clear();
 
-//      int yoff = 0;
       int clef = 0;
-      if (staff()) {
+      if (staff())
             clef = staff()->clef(segment());
-//            yoff = clefTable[clef].yOffset;
-            }
 
       int t1   = _sig.accidentalType();
       int t2   = _sig.naturalType();
@@ -147,7 +144,7 @@ void KeySig::layout()
       if (!((t1 > 0) ^ (t2 > 0)))
             naturals &= ~accidentals;
 
-      if(_showNaturals) {
+      if (_showNaturals) {
 	      for (int i = 0; i < 7; ++i) {
                   if (naturals & (1 << i)) {
                         addLayout(naturalSym, xo, clefTable[clef].lines[i + coffset]);
@@ -177,6 +174,8 @@ void KeySig::layout()
                   qDebug("illegal t1 key %d (t2=%d)\n", t1, t2);
                   break;
             }
+      setbbox(QRectF());
+
       foreach(KeySym* ks, keySymbols) {
             ks->pos = ks->spos * _spatium;
             addbbox(symbols[score()->symIdx()][ks->sym].bbox(magS()).translated(ks->pos));

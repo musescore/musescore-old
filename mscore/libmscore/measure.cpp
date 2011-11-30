@@ -2775,11 +2775,12 @@ void Measure::layoutX(qreal stretch)
             }
 
       qreal _spatium           = spatium();
-      int tracks                = nstaves * VOICES;
+      int tracks               = nstaves * VOICES;
       qreal clefKeyRightMargin = score()->styleS(ST_clefKeyRightMargin).val() * _spatium;
 
       qreal rest[nstaves];    // fixed space needed from previous segment
       memset(rest, 0, nstaves * sizeof(qreal));
+
       //--------tick table for segments
       int ticksList[segs];
       memset(ticksList, 0, segs * sizeof(int));
@@ -2788,10 +2789,10 @@ void Measure::layoutX(qreal stretch)
       SegmentType types[segs];
       qreal width[segs];
 
-      int segmentIdx  = 0;
+      int segmentIdx = 0;
       qreal x        = 0.0;
-      int minTick     = 100000;
-      int ntick       = tick() + ticks();   // position of next measure
+      int minTick    = 100000;
+      int ntick      = tick() + ticks();   // position of next measure
 
       qreal minNoteDistance = score()->styleS(ST_minNoteDistance).val() * _spatium;
 
@@ -2916,11 +2917,12 @@ void Measure::layoutX(qreal stretch)
                         rest2[staffIdx] = true;
                   clefWidth[staffIdx] = 0.0;
                   }
+
             x += segmentWidth;
             xpos[segmentIdx]  = x;
             if (segmentIdx) {
                   width[segmentIdx-1] = segmentWidth;
-                  pSeg->setbbox(QRectF(0.0, 0.0, segmentWidth, _spatium * 5));
+                  pSeg->setbbox(QRectF(0.0, 0.0, segmentWidth, _spatium * 5));  //??
                   }
 
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
@@ -3048,6 +3050,8 @@ void Measure::layoutX(qreal stretch)
                   continue;
                   }
             s->setPos(xpos[seg], 0.0);
+//            s->setWidth(0.0);
+
             for (int track = 0; track < tracks; ++track) {
                   Element* e = s->element(track);
                   if (e == 0)

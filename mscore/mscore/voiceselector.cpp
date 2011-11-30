@@ -68,20 +68,18 @@ VoiceSelector::VoiceSelector(QWidget* parent)
       vwl->setSpacing(0);
       vwl->setContentsMargins(0, 0, 0, 0);
 
-      QStringList sl2;
-      sl2 << "voice-1" << "voice-3" << "voice-2" << "voice-4";
-      int v[4] = { 0, 2, 1, 3 };
+      static const char* sl2[4] = { "voice-1", "voice-3", "voice-2", "voice-4" };
+      static const int v[4] = { 0, 2, 1, 3 };
+
       QActionGroup* vag = new QActionGroup(this);
       vag->setExclusive(true);
-      int i = 0;
-      foreach(const QString& s, sl2) {
-            QAction* a = getAction(s.toLatin1().data());
+      for (int i = 0; i < 4; ++i) {
+            QAction* a = getAction(sl2[i]);
             a->setCheckable(true);
             vag->addAction(a);
             VoiceButton* tb = new VoiceButton(v[i]);
             tb->setDefaultAction(a);
             vwl->addWidget(tb, i/2, i%2, 1, 1);
-            ++i;
             }
       setLayout(vwl);
       connect(vag, SIGNAL(triggered(QAction*)), this, SIGNAL(triggered(QAction*)));

@@ -4621,11 +4621,16 @@ void ScoreView::changeVoice(int voice)
       InputState* is = &score()->inputState();
       int track = (is->track() / VOICES) * VOICES + voice;
       is->setTrack(track);
-      //
-      // in note entry mode search for a valid input
-      // position
-      //
-      if (!is->noteEntryMode || is->cr()) {
+
+printf("changeVoice %d   noteEntryMode %d  is->cr %p\n", voice, is->noteEntryMode, is->cr());
+
+      if (is->noteEntryMode) {
+            is->setSegment(is->segment()->measure()->firstCRSegment());
+            score()->setUpdateAll(true);
+            score()->end();
+            mscore->setPos(is->segment()->tick());
+            }
+      else {
             score()->startCmd();
             QList<Element*> el;
             foreach(Element* e, score()->selection().elements()) {
@@ -4667,13 +4672,8 @@ void ScoreView::changeVoice(int voice)
                   score()->select(e, SELECT_ADD, -1);
             score()->setLayoutAll(true);
             score()->endCmd();
-            return;
             }
-
-      is->setSegment(is->segment()->measure()->firstCRSegment());
-      score()->setUpdateAll(true);
-      score()->end();
-      mscore->setPos(is->segment()->tick());
+      mscore->updateInputState(score());
       }
 
 //---------------------------------------------------------

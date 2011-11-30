@@ -241,7 +241,7 @@ void MuseScore::loadFiles()
       while(it != list.end()) {
             openScore(*it);
             ++it;
-            }   
+            }
       }
 
 void MuseScore::openScore(const QString& fn)
@@ -594,7 +594,7 @@ void MuseScore::newFile()
             int uc = 0x1d15f;
             QChar h(QChar::highSurrogate(uc));
             QChar l(QChar::lowSurrogate(uc));
-            tt->setText(QString("%1%2 = %3 ").arg(h).arg(l).arg(tempo));
+            tt->setText(QString("%1%2 = %3").arg(h).arg(l).arg(tempo));
             tempo /= 60;      // bpm -> bps
 
             tt->setTempo(tempo);
@@ -647,7 +647,7 @@ QStringList MuseScore::getOpenScoreNames(QString& dir, const QString& filter)
 
       loadScoreDialog->setNameFilter(filter);
       loadScoreDialog->setDirectory(dir);
-      
+
       QStringList result;
       if (loadScoreDialog->exec()) {
             result = loadScoreDialog->selectedFiles();
@@ -1179,13 +1179,14 @@ void MuseScore::printFile()
       const PageFormat* pf = cs->pageFormat();
 
       const PaperSize* paperSize = pf->paperSize();
-      if (paperSize->qtsize >= int(QPrinter::Custom))
+      if (paperSize->qtsize >= QPrinter::Custom)
             printerDev.setPaperSize(pf->size(), QPrinter::Inch);
       else {
-            printerDev.setPaperSize(paperSizes->qtsize);
+            printerDev.setPaperSize(paperSize->qtsize);
             bool landscape = pf->width() > pf->height();
             printerDev.setOrientation(landscape ? QPrinter::Landscape : QPrinter::Portrait);
             }
+
       printerDev.setCreator("MuseScore Version: " VERSION);
       printerDev.setFullPage(true);
       printerDev.setColorMode(QPrinter::Color);
@@ -1407,13 +1408,14 @@ bool MuseScore::savePsPdf(const QString& saveName, QPrinter::OutputFormat format
       QPrinter printerDev(QPrinter::HighResolution);
 
       const PaperSize* paperSize = pf->paperSize();
-      if (paperSize->qtsize == QPrinter::Custom)
-            printerDev.setPaperSize(paperSize->qtsize);
-      else {
+      if (paperSize->qtsize >= QPrinter::Custom)
             printerDev.setPaperSize(pf->size(), QPrinter::Inch);
+      else {
+            printerDev.setPaperSize(paperSize->qtsize);
             bool landscape = pf->width() > pf->height();
             printerDev.setOrientation(landscape ? QPrinter::Landscape : QPrinter::Portrait);
             }
+
       printerDev.setCreator("MuseScore Version: " VERSION);
       printerDev.setFullPage(true);
       printerDev.setColorMode(QPrinter::Color);

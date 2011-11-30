@@ -56,7 +56,7 @@ const TextStyle& SimpleText::style() const
 
 void SimpleText::draw(QPainter* p) const
       {
-      p->setPen(curColor());
+      p->setPen(textColor());
       p->setFont(style().fontPx(spatium()));
       p->drawText(drawingRect, alignFlags(), _text);
       drawFrame(p);

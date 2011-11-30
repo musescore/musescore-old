@@ -24,7 +24,7 @@
 TempoText::TempoText(Score* s)
    : Text(s)
       {
-      _tempo = 2.0;
+      _tempo      = 2.0;
       _followText = false;
       setTextStyle(TEXT_STYLE_TEMPO);
       }
@@ -105,7 +105,11 @@ void TempoText::textChanged()
             if (re.indexIn(s) != -1) {
                   QStringList sl = re.capturedTexts();
                   if (sl.size() == 2) {
-                        _tempo = qreal(sl[1].toInt()) * tp[i].f;
+                        qreal nt = qreal(sl[1].toInt()) * tp[i].f;
+                        if (nt != _tempo) {
+                              _tempo = qreal(sl[1].toInt()) * tp[i].f;
+                              score()->setPlaylistDirty(true);
+                              }
                         break;
                         }
                   }
