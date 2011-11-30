@@ -125,7 +125,7 @@ path.cubicTo(XM( -136), YM( -624), XM(  -8), YM(-1320), XM(   -8), YM(-2048)); /
             QChar down = symbols[score()->symIdx()][brackettipsRightDown].code();
 
             QFont f(fontId2font(0));
-            f.setPointSize(lrint(2.0 * _spatium));
+            f.setPointSizeF(2.0 * _spatium);
 
             qreal o   = _spatium * .17;
             qreal slw = point(score()->styleS(ST_staffLineWidth));

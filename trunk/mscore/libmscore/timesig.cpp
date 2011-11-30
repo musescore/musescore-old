@@ -300,17 +300,23 @@ void TimeSig::layout()
             QRectF rn = fm.tightBoundingRect(sn);
 
             // scale bounding boxes to mag
-            rz = QRectF(rz.x() * mag, rz.y() * mag, rz.width() * mag, rz.height() * mag);
-            rn = QRectF(rn.x() * mag, rn.y() * mag, rn.width() * mag, rn.height() * mag);
+            qreal spatium2 = _spatium * 2.0;
+            rz = QRectF(rz.x() * mag, -spatium2, rz.width() * mag, spatium2);
+            rn = QRectF(rn.x() * mag, -spatium2, rn.width() * mag, spatium2);
 
             // position numerator and denominator; vertical displacement:
             // number of lines is odd: 0.0 (strings are directly above and below the middle line)
             // number of lines even:   0.5 (strings are moved up/down to leave 1 line dist. between them)
-            qreal displ = numOfLines & 1 ? 0.0 : (0.5 * lineDist * _spatium);
+
+            qreal displ = (numOfLines & 1) ? 0.0 : (0.5 * lineDist * _spatium);
+//            yoff -= _spatium*.08;  //??
+//      lw = score()->styleS(ST_staffLineWidth).val() * _spatium;
+
             pz = QPointF(0.0, yoff - displ);
             // denom. horiz. posit.: centred around centre of numerator
             // vert. position:       base line is lowered by displ and by the whole height of a digit
-            pn = QPointF((rz.width() - rn.width())*.5, yoff + displ + _spatium*2.0);
+            pn = QPointF((rz.width() - rn.width())*.5, yoff + displ + spatium2);
+
             setbbox(rz.translated(pz));   // translate bounding boxes to actual string positions
             addbbox(rn.translated(pn));
             }
@@ -331,12 +337,16 @@ void TimeSig::draw(QPainter* painter) const
       if (staff() && !staff()->staffType()->genTimesig())
             return;
       painter->setPen(curColor());
-      painter->setFont(symbols[score()->symIdx()][allabreveSym].font());
-      qreal m  = spatium() / (DPI * SPATIUM20);
-      painter->scale(m, m);
+      QFont font = fontId2font(0);
+      font.setPixelSize(lrint(20.0 * DPI/PPI));
+      painter->setFont(font);
+      qreal mag  = spatium() / (DPI * SPATIUM20);
+      qreal imag = 1.0 / mag;
+
+      painter->scale(mag, mag);
       painter->drawText(pz, sz);    // use positions and strings computed in layout()
       painter->drawText(pn, sn);
-      painter->scale(1.0 / m, 1.0 / m);
+      painter->scale(imag, imag);
       }
 
 //---------------------------------------------------------

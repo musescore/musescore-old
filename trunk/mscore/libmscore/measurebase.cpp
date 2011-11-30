@@ -125,7 +125,7 @@ void MeasureBase::add(Element* e)
                         break;
                   case LAYOUT_BREAK_SECTION:
                         _sectionBreak = b;
-                        score()->tempomap()->setPause(endTick(), b->pause());
+//does not work with repeats: score()->tempomap()->setPause(endTick(), b->pause());
                         break;
                   }
             }

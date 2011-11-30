@@ -255,7 +255,7 @@ void setDefaultStyle(MStyle* s)
       AS(TextStyle(TR( "Metronome"), ff, 12, true, false, false, ALIGN_LEFT));
 
       AS(TextStyle(TR( "Measure Number"), ff, 8, false, false, false,
-         ALIGN_CENTER | ALIGN_BOTTOM, QPointF(-1, .0), OS, QPointF(0.0, 0.0), true));
+         ALIGN_HCENTER | ALIGN_BOTTOM, QPointF(.0, .0), OS, QPointF(0.0, 0.0), true));
 
       AS(TextStyle(TR( "Translator"), ff, 11, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, QPointF(0, 6)));

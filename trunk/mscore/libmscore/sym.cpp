@@ -424,25 +424,19 @@ QFont fontId2font(int fontId)
       QFont* f = fonts[fontId];
       if (f == 0) {
             f = fonts[fontId] = new QFont();
-            //
-            // font is rendered with a physical resolution of PDPI
-            //    and logical resolution of DPI
-            //
-            // rastral size is 20pt = 20/72 inch
-            //
-            int size = lrint(20.0 * DPI / PPI);
+            qreal size = 20.0;
             if (fontId == 0)
                   f->setFamily("MScore");
             else if (fontId == 1)
                   f->setFamily("MScore1");
             else if (fontId == 2) {
                   f->setFamily("FreeSerif");
-                  size = lrint(8 * DPI / PPI);
+                  size = 8.0; //  * DPI / PPI;
                   }
             else
                   f->setFamily("Gonville-20");
             f->setStyleStrategy(QFont::NoFontMerging);
-            f->setPixelSize(size);
+            f->setPointSizeF(size);
             }
       return *f;
       }
@@ -583,12 +577,11 @@ QString symToHtml(const Sym& s, int leftMargin, const TextStyle* ts, qreal _spat
       {
       qreal size;
       if (ts) {
-            size = ts->fontPx(_spatium).pixelSize();
+            size = ts->font(_spatium).pointSizeF();
             }
       else {
-            size = s.font().pixelSize();
+            size = s.font().pointSizeF();
             }
-      size = size * 72.0 / DPI;
 
       QString family = s.font().family();
       return QString(
@@ -613,7 +606,7 @@ QString symToHtml(const Sym& s, int leftMargin, const TextStyle* ts, qreal _spat
 QString symToHtml(const Sym& s1, const Sym& s2, int leftMargin)
       {
       QFont f        = s1.font();
-      qreal size     = s1.font().pixelSize() * 72.0 / DPI;
+      qreal size     = s1.font().pointSizeF();
       QString family = f.family();
 
       return QString(
