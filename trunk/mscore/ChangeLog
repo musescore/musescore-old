@@ -1,4 +1,6 @@
 1.dec (ws)
+      - fix #13850: Instrument short and long names are not imported for 1.1 scores
+        (patch from Gai-Luron)
       - fix #13771: Opening 1.1 score causes crash (patch from Gai-Luron)
       - fix #13432: Selecting duration with number-pad doesnt work after deleting note
         in NoteEntry mode (patch from Gai-Luron)
