@@ -1366,3 +1366,15 @@ void Text::setModified(bool v)
             _doc->setModified(v);
       }
 
+//---------------------------------------------------------
+//   getFragment
+//---------------------------------------------------------
+
+QTextDocumentFragment Text::getFragment() const
+      {
+      if (_styled)
+            return QTextDocumentFragment::fromPlainText(getText());
+      else
+            return QTextDocumentFragment(_doc);
+      }
+

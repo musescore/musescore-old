@@ -63,7 +63,7 @@ class Text : public SimpleText {
 
       QString getText() const;
       QString getHtml() const;
-      QTextDocumentFragment getFragment() const { return QTextDocumentFragment(_doc); }
+      QTextDocumentFragment getFragment() const;
 
       bool sizeIsSpatiumDependent() const;
       void setSizeIsSpatiumDependent(int v);
