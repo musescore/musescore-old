@@ -120,6 +120,7 @@ void Glissando::read(QDomElement e)
 
 void Glissando::draw(QPainter* painter) const
       {
+      painter->save();
       qreal _spatium = spatium();
 
       QPen pen(curColor());
@@ -156,6 +157,7 @@ void Glissando::draw(QPainter* painter) const
                   painter->drawText(QPointF(x, -_spatium * .5), _text);
                   }
             }
+      painter->restore();
       }
 
 //---------------------------------------------------------

@@ -409,6 +409,7 @@ bool Text::readProperties(QDomElement e)
       const QString& val(e.text());
 
       if (tag == "style") {
+            TextStyleType st;
             bool ok;
             int i = val.toInt(&ok);
             if (ok) {
@@ -430,7 +431,7 @@ bool Text::readProperties(QDomElement e)
                         case 13: i = TEXT_STYLE_TECHNIK;   break;
                         case 14: i = TEXT_STYLE_TEMPO;     break;
                         case 15: i = TEXT_STYLE_METRONOME; break;
-                        case 16: i = TEXT_STYLE_INVALID; break;
+                        case 16: i = TEXT_STYLE_FOOTER;    break;  // TEXT_STYLE_COPYRIGHT
                         case 17: i = TEXT_STYLE_MEASURE_NUMBER; break;
                         case 18: i = TEXT_STYLE_FOOTER; break;    // TEXT_STYLE_PAGE_NUMBER_ODD
                         case 19: i = TEXT_STYLE_FOOTER; break;    // TEXT_STYLE_PAGE_NUMBER_EVEN
@@ -458,19 +459,13 @@ bool Text::readProperties(QDomElement e)
                               i = TEXT_STYLE_INVALID;
                               break;
                         }
-                  setTextStyle(TextStyleType(i));
+                  st = TextStyleType(i);
                   }
             else {
-                  TextStyleType st = score()->style()->textStyleType(val);
-                  if (st != TEXT_STYLE_INVALID) {
-                        setTextStyle(st);
-                        setStyled(true);
-                        }
-                  else {
-                        _styleName = val;       // name of local style
-                        setStyled(false);
-                        }
+                  st = score()->style()->textStyleType(val);
+                  _styleName = val;       // name of local style
                   }
+            setTextStyle(st);
             }
       else if (tag == "styleName")
             _styleName = val;
@@ -490,7 +485,7 @@ bool Text::readProperties(QDomElement e)
             }
       else if (tag == "html") {
             QString s = Xml::htmlToString(e);
-            _doc->setHtml(s);
+            setHtml(s);
             }
       else if (tag == "text")
             setText(val);
