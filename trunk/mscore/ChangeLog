@@ -1,3 +1,6 @@
+1.dec (ws)
+      - fix #13432: Selecting duration with number-pad doesnt work after deleting note
+        in NoteEntry mode (patch from Gai-Luron)
 26.nov (lv)
       - fix #13782: MusicXML: Errors in Import and Crash after closing
 25.nov (la)

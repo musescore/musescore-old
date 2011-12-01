@@ -3422,27 +3422,6 @@ void ScoreView::textUndoLevelAdded()
       }
 
 //---------------------------------------------------------
-//   enableInputToolbar
-//---------------------------------------------------------
-
-static void enableInputToolbar(bool val)
-      {
-      static const char* actionNames[] = {
-            "pad-rest", "pad-dot", "pad-dotdot", "note-longa",
-            "note-breve", "pad-note-1", "pad-note-2", "pad-note-4",
-            "pad-note-8", "pad-note-16", "pad-note-32", "pad-note-64",
-            "pad-note-128",
-//            "voice-1", "voice-2", "voice-3", "voice-4",
-            "acciaccatura", "appoggiatura", "grace4", "grace16",
-            "grace32", "beam-start", "beam-mid", "no-beam", "beam32",
-            "auto-beam"
-            };
-      for (unsigned i = 0; i < sizeof(actionNames)/sizeof(*actionNames); ++i) {
-            getAction(actionNames[i])->setEnabled(val);
-            }
-      }
-
-//---------------------------------------------------------
 //   startNoteEntry
 //---------------------------------------------------------
 
@@ -3471,7 +3450,7 @@ void ScoreView::startNoteEntry()
       _score->select(el, SELECT_SINGLE, 0);
       _score->setInputState(el);
       bool enable = el && (el->type() == NOTE || el->type() == REST);
-      enableInputToolbar(enable);
+      mscore->enableInputToolbar(enable);
       if (el == 0)
             mscore->showDrumTools(0, 0);
 
@@ -4621,8 +4600,6 @@ void ScoreView::changeVoice(int voice)
       InputState* is = &score()->inputState();
       int track = (is->track() / VOICES) * VOICES + voice;
       is->setTrack(track);
-
-printf("changeVoice %d   noteEntryMode %d  is->cr %p\n", voice, is->noteEntryMode, is->cr());
 
       if (is->noteEntryMode) {
             is->setSegment(is->segment()->measure()->firstCRSegment());
