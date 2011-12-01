@@ -2164,9 +2164,16 @@ void Score::moveToNextInputPos()
 
 Element* Score::move(const QString& cmd)
       {
-      ChordRest* cr = selection().lastChordRest();
+      ChordRest* cr;
       if (selection().activeCR())
             cr = selection().activeCR();
+      else
+            cr = selection().lastChordRest();
+      if (cr == 0 && inputState().noteEntryMode)
+            cr = inputState().cr();
+      if (cr == 0)
+            return 0;
+
       if (!cr) {
             if (selection().elements().isEmpty())
                   return 0;
@@ -2289,47 +2296,50 @@ Element* Score::selectMove(const QString& cmd)
             cr = selection().activeCR();
       else
             cr = selection().lastChordRest();
+      if (cr == 0 && inputState().noteEntryMode)
+            cr = inputState().cr();
+      if (cr == 0)
+            return 0;
+
       ChordRest* el = 0;
-      if (cr) {
-            if (cmd == "select-next-chord")
-                  el = nextChordRest(cr);
-            else if (cmd == "select-prev-chord")
-                  el = prevChordRest(cr);
-            else if (cmd == "select-next-measure")
-                  el = nextMeasure(cr, true);
-            else if (cmd == "select-prev-measure")
-                  el = prevMeasure(cr);
-            else if (cmd == "select-begin-line") {
-                  Measure* measure = cr->segment()->measure()->system()->firstMeasure();
-                  if (!measure)
-                        return 0;
-                  el = measure->first()->nextChordRest(cr->track());
-                  }
-            else if (cmd == "select-end-line") {
-                  Measure* measure = cr->segment()->measure()->system()->lastMeasure();
-                  if (!measure)
-                        return 0;
-                  el = measure->last()->nextChordRest(cr->track(), true);
-                  }
-            else if (cmd == "select-begin-score") {
-                  Measure* measure = first()->system()->firstMeasure();
-                  if (!measure)
-                        return 0;
-                  el = measure->first()->nextChordRest(cr->track());
-                  }
-            else if (cmd == "select-end-score") {
-                  Measure* measure = last()->system()->lastMeasure();
-                  if (!measure)
-                        return 0;
-                  el = measure->last()->nextChordRest(cr->track(), true);
-                  }
-            else if (cmd == "select-staff-above")
-                  el = upStaff(cr);
-            else if (cmd == "select-staff-below")
-                  el = downStaff(cr);
-            if (el)
-                  select(el, SELECT_RANGE, el->staffIdx());
+      if (cmd == "select-next-chord")
+            el = nextChordRest(cr);
+      else if (cmd == "select-prev-chord")
+            el = prevChordRest(cr);
+      else if (cmd == "select-next-measure")
+            el = nextMeasure(cr, true);
+      else if (cmd == "select-prev-measure")
+            el = prevMeasure(cr);
+      else if (cmd == "select-begin-line") {
+            Measure* measure = cr->segment()->measure()->system()->firstMeasure();
+            if (!measure)
+                  return 0;
+            el = measure->first()->nextChordRest(cr->track());
             }
+      else if (cmd == "select-end-line") {
+            Measure* measure = cr->segment()->measure()->system()->lastMeasure();
+            if (!measure)
+                  return 0;
+            el = measure->last()->nextChordRest(cr->track(), true);
+            }
+      else if (cmd == "select-begin-score") {
+            Measure* measure = first()->system()->firstMeasure();
+            if (!measure)
+                  return 0;
+            el = measure->first()->nextChordRest(cr->track());
+            }
+      else if (cmd == "select-end-score") {
+            Measure* measure = last()->system()->lastMeasure();
+            if (!measure)
+                  return 0;
+            el = measure->last()->nextChordRest(cr->track(), true);
+            }
+      else if (cmd == "select-staff-above")
+            el = upStaff(cr);
+      else if (cmd == "select-staff-below")
+            el = downStaff(cr);
+      if (el)
+            select(el, SELECT_RANGE, el->staffIdx());
       return el;
       }
 

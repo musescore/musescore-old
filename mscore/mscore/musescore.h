@@ -572,6 +572,7 @@ class MuseScore : public QMainWindow {
       bool metronome() const         { return metronomeAction->isChecked(); }
       bool panDuringPlayback() const { return panAction->isChecked(); }
       void noteTooShortForTupletDialog();
+      void enableInputToolbar(bool enableInput);
       };
 
 extern MuseScore* mscore;

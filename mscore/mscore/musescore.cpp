@@ -3955,7 +3955,9 @@ void MuseScore::endCmd()
             QAction* action = getAction("concert-pitch");
             action->setChecked(cs->styleB(ST_concertPitch));
 
-            enableInput = e && (e->type() == NOTE || e->type() == REST);
+            if (e == 0 && cs->inputState().noteEntryMode)
+                  e = cs->inputState().cr();
+            enableInput = e && (e->type() == NOTE || e->isChordRest());
             cs->end();
             }
       else {
@@ -3963,6 +3965,15 @@ void MuseScore::endCmd()
                   inspector->setElement(0);
             }
 
+      enableInputToolbar(enableInput);
+      }
+
+//---------------------------------------------------------
+//   enableInputToolbar
+//---------------------------------------------------------
+
+void MuseScore::enableInputToolbar(bool enableInput)
+      {
       static const char* actionNames[] = {
             "pad-rest", "pad-dot", "pad-dotdot", "note-longa",
             "note-breve", "pad-note-1", "pad-note-2", "pad-note-4",

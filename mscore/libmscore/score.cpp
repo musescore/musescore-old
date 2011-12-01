@@ -2753,6 +2753,7 @@ void Score::addAudioTrack()
 
 void Score::padToggle(int n)
       {
+printf("padToggle %d\n", n);
       switch (n) {
             case PAD_NOTE00:
                   _is.setDuration(TDuration::V_LONG);

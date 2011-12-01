@@ -27,17 +27,16 @@ class Segment;
 //---------------------------------------------------------
 
 class InputState {
-      TDuration _duration;      // currently duration
+      TDuration _duration;    // currently duration
       int _drumNote;
       Drumset* _drumset;
       int _track;
-      Segment* _segment;
+      Segment* _segment;      // current segment
       bool _repitchMode;
 
    public:
-      bool rest;
-      int pad;
-      int pitch;
+      bool rest;              // rest mode
+      int pitch;              // last pitch
       NoteType noteType;
       BeamMode beamMode;
       bool noteEntryMode;

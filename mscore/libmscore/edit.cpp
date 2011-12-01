@@ -1499,7 +1499,8 @@ void Score::cmdDeleteSelection()
                   qDebug("...nothing selected");
             foreach(Element* e, el)
                   deleteItem(e);
-            deselectAll();
+            if (!noteEntryMode())   // in entry mode deleting note or chord add rest selected
+                  deselectAll();
             }
       _layoutAll = true;
       }
