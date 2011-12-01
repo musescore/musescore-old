@@ -66,6 +66,7 @@ const PaperSize paperSizes[] = {
       PaperSize(QPrinter::Ledger,  "Ledger",    MM(432),  MM(279)),
       PaperSize(QPrinter::Tabloid, "Tabloid",   MM(279),  MM(432)),
       PaperSize(QPrinter::Custom,  "Custom",    MM(1),    MM(1)),
+      PaperSize(QPrinter::Custom,  0,    MM(1),    MM(1))   // mark end of list
       };
 
 //---------------------------------------------------------
