@@ -484,6 +484,10 @@ static bool addCR(int tick, ChordRest* cr, Measure* ml)
                               }
                         len -= rest;
                         m = m->nextMeasure();
+                        if (m == 0) {
+                              printf("eof: len %d %d\n", len.numerator(), len.denominator());
+                              break;
+                              }
                         }
                   }
 

@@ -1,4 +1,5 @@
 1.dec (ws)
+      - fix #13878: Glissando position in palette appear offset
       - fix #13907: opening preferences window crashes
       - fix #13850: Instrument short and long names are not imported for 1.1 scores
         (patch from Gai-Luron)

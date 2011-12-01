@@ -395,7 +395,7 @@ void MuseScore::populatePalette()
       paletteBox->addPalette(sp);
 
       //-----------------------------------
-      //    Arpeggios
+      //    Arpeggio && Glissando
       //-----------------------------------
 
       sp = new Palette();
