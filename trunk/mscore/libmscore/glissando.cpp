@@ -40,8 +40,9 @@ Glissando::Glissando(Score* s)
 void Glissando::layout()
       {
       Chord* chord = static_cast<Chord*>(parent());
-      if (chord == 0)
+      if (chord == 0) {
             return;
+            }
       Note* anchor2   = chord->upNote();
       Segment* s = chord->segment();
       s = s->prev1();
@@ -151,7 +152,6 @@ void Glissando::draw(QPainter* painter) const
             QFont f = st.fontPx(_spatium);
             QRectF r = QFontMetricsF(f).boundingRect(_text);
             if (r.width() < l) {
-                  QFont f = st.fontPx(_spatium);
                   painter->setFont(f);
                   qreal x = (l - r.width()) * .5;
                   painter->drawText(QPointF(x, -_spatium * .5), _text);
@@ -177,5 +177,6 @@ Space Glissando::space() const
 void Glissando::setSize(const QSizeF& s)
       {
       line = QLineF(0.0, s.height(), s.width(), 0.0);
+      setbbox(QRectF(QPointF(), s));
       }
 
