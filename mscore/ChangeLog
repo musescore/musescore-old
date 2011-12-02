@@ -1,3 +1,5 @@
+2.dec
+      - fix #13860: MusicXML: support lyrics exported by Sibelius 7
 28.nov (lv)
       - updated MusicXML testfiles: added <sound dynamics="...">
       - code cleanup MusicXML importer/exporter

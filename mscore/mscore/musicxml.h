@@ -42,6 +42,7 @@ class Pedal;
 class Volta;
 class TextLine;
 class Chord;
+class Lyrics;
 
 //---------------------------------------------------------
 //   MusicXmlWedge
@@ -205,7 +206,10 @@ class MusicXml {
       void xmlScorePart(QDomElement node, QString id, int& parts);
       Measure* xmlMeasure(Part*, QDomElement, int, int measureLen);
       void xmlAttributes(Measure*, int stave, QDomElement node);
-      void xmlLyric(Measure* measure, int staff, QDomElement e);
+      void xmlLyric(int staff, QDomElement e,
+                    QMap<int, Lyrics*>& numbrdLyrics,
+                    QMap<int, Lyrics*>& defyLyrics,
+                    QList<Lyrics*>& unNumbrdLyrics);
       void xmlNote(Measure*, int stave, QDomElement node);
       void xmlHarmony(QDomElement node, int tick, Measure* m, int staff);
       void xmlClef(QDomElement, int staffIdx, Measure*);
