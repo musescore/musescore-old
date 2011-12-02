@@ -1,3 +1,6 @@
+2.dec (ws)
+      - fix #13910: Lyrics of 1.1 score appear offset
+      - fix #13911: Notes do not reposition for lyrics
 1.dec (ws)
       - fix #13873: Falls/Doits cause score elements to become enlarged
       - fix #13878: Glissando position in palette appear offset

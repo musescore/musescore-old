@@ -219,16 +219,14 @@ void Lyrics::layout()
       int line = ll->indexOf(this);
       qreal y  = lh * line + point(score()->styleS(ST_lyricsDistance))
                  + sys->staff(staffIdx())->bbox().height();
-      qreal x;
+      qreal x = pos().x();
       //
       // left align if syllable has a number
       //
       if (_ticks == 0 && (style().align() & ALIGN_HCENTER) && !_verseNumber)
-            x = symbols[score()->symIdx()][quartheadSym].width(magS()) * .5;
+            x += symbols[score()->symIdx()][quartheadSym].width(magS()) * .5;
       else if ((style().align() & ALIGN_HCENTER) && _verseNumber)
-            x = width() * .5;
-      else
-            x = 0.0;
+            x += width() * .5;
       setPos(x, y);
       if (_verseNumber) {
             _verseNumber->layout();
@@ -275,7 +273,7 @@ int Lyrics::endTick() const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Lyrics::acceptDrop(MuseScoreView*, const QPointF&, int type, int subtype) const
+bool Lyrics::acceptDrop(MuseScoreView*, const QPointF&, int type, int /*subtype*/) const
       {
       return (type == TEXT);
       }
