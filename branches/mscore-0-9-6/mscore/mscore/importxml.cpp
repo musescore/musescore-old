@@ -2481,18 +2481,102 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
       }
 
 //---------------------------------------------------------
-//   xmlLyric
+//   addLyrics -- add a single lyric to the score
 //---------------------------------------------------------
 
-void MusicXml::xmlLyric(Measure* measure, int trk, QDomElement e)
+static void addLyric(Measure* measure, Lyrics* l, int lyricNo)
       {
-      // printf("xmlLyric track %d\n", trk);
-      int lyricNo = e.attribute(QString("number"), "1").toInt() - 1;
-      if (lyricNo > MAX_LYRICS)
-            printf("too much lyrics (>%d)\n", MAX_LYRICS);
-      Lyrics* l = new Lyrics(score);
       l->setNo(lyricNo);
+      Segment* segment = measure->getSegment(l);
+      segment->add(l);
+      }
+
+//---------------------------------------------------------
+//   addLyrics -- add a notes lyrics to the score
+//---------------------------------------------------------
+
+static void addLyrics(Measure* measure,
+                      QMap<int, Lyrics*>& numbrdLyrics,
+                      QMap<int, Lyrics*>& defyLyrics,
+                      QList<Lyrics*>& unNumbrdLyrics)
+      {
+      // first the lyrics with valid number
+      int lyricNo = -1;
+      for (QMap<int, Lyrics*>::const_iterator i = numbrdLyrics.constBegin(); i != numbrdLyrics.constEnd(); ++i) {
+            // printf("xmlLyric: numbrdLyrics[%d] %p\n", i.key(), i.value());
+            lyricNo = i.key(); // use number obtained from MusicXML file
+            Lyrics* l = i.value();
+            addLyric(measure, l, lyricNo);
+            }
+
+      // then the lyrics without valid number but with valid default-y
+      for (QMap<int, Lyrics*>::const_iterator i = defyLyrics.constBegin(); i != defyLyrics.constEnd(); ++i) {
+            // printf("xmlLyric: defyLyrics[%d] %p\n", i.key(), i.value());
+            lyricNo++; // use sequence number
+            Lyrics* l = i.value();
+            if (lyricNo > MAX_LYRICS) {
+                  printf("too much lyrics (>%d)\n", MAX_LYRICS);
+                  delete l;
+                  }
+            else {
+                  addLyric(measure, l, lyricNo);
+                  }
+            }
+
+      // finally the remaining lyrics, which are simply added in order they appear in the MusicXML file
+      for (QList<Lyrics*>::const_iterator i = unNumbrdLyrics.constBegin(); i != unNumbrdLyrics.constEnd(); ++i) {
+            // printf("xmlLyric: unNumbrdLyrics %p\n", *i);
+            lyricNo++; // use sequence number
+            Lyrics* l = *i;
+            if (lyricNo > MAX_LYRICS) {
+                  printf("too much lyrics (>%d)\n", MAX_LYRICS);
+                  delete l;
+                  }
+            else {
+                  addLyric(measure, l, lyricNo);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   xmlLyric -- parse a MusicXML lyric element
+//---------------------------------------------------------
+
+void MusicXml::xmlLyric(int trk, QDomElement e,
+                        QMap<int, Lyrics*>& numbrdLyrics,
+                        QMap<int, Lyrics*>& defyLyrics,
+                        QList<Lyrics*>& unNumbrdLyrics)
+      {
+      Lyrics* l = new Lyrics(score);
       l->setTick(tick);
+      l->setTrack(trk);
+      // printf("xmlLyric %p track %d\n", l, trk);
+
+      bool ok = true;
+      int lyricNo = e.attribute(QString("number")).toInt(&ok) - 1;
+      printf("xmlLyric ok %d no %d\n", ok, lyricNo);
+      if (ok) {
+            if (lyricNo < 0) {
+                  printf("invalid lyrics number (<0)\n");
+                  delete l;
+                  }
+            else if (lyricNo > MAX_LYRICS) {
+                  printf("too much lyrics (>%d)\n", MAX_LYRICS);
+                  delete l;
+                  }
+            else {
+                  numbrdLyrics[lyricNo] = l;
+                  }
+            }
+      else {
+            int defaultY = e.attribute(QString("default-y")).toInt(&ok);
+            // printf("xmlLyric ok %d default-y %d\n", ok, defaultY);
+            if (ok)
+                  // invert default-y as it decreases with increasing lyric number
+                  defyLyrics[-defaultY] = l;
+            else
+                  unNumbrdLyrics.append(l);
+            }
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "syllabic") {
@@ -2524,9 +2608,6 @@ void MusicXml::xmlLyric(Measure* measure, int trk, QDomElement e)
             else
                   domError(e);
             }
-      l->setTrack(trk);
-      Segment* segment = measure->getSegment(l);
-      segment->add(l);
       }
 
 //---------------------------------------------------------
@@ -2715,6 +2796,11 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 
       velocity = round(e.attribute("dynamics", "-1").toDouble() * 0.9);
 
+      // storage for xmlLyric
+      QMap<int, Lyrics*> numberedLyrics; // lyrics with valid number
+      QMap<int, Lyrics*> defaultyLyrics; // lyrics with valid default-y
+      QList<Lyrics*> unNumberedLyrics;   // lyrics with neither
+
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString s(e.text());
@@ -2801,7 +2887,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         }
                   }
             else if (tag == "lyric")
-                  xmlLyric(measure, trk + voice, e);
+                  xmlLyric(trk + voice, e, numberedLyrics, defaultyLyrics, unNumberedLyrics);
             else if (tag == "dot")
                   ++dots;
             else if (tag == "accidental") {
@@ -3076,6 +3162,9 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             else
                   domError(e);
             }
+
+      // add lyrics found by xmlLyric
+      addLyrics(measure, numberedLyrics, defaultyLyrics, unNumberedLyrics);
 
       int track = trk + voice;
       // printf("staff=%d relStaff=%d VOICES=%d voice=%d track=%d\n",
