@@ -81,7 +81,9 @@ void Glissando::layout()
       QPointF p2 = fullLine.pointAt(1 - (yo / fullLine.length()));
 
       line = QLineF(p1, p2);
-      setbbox(QRectF(line.p1(), line.p2()).normalized());
+      qreal lw = spatium() * .15 * .5;
+      QRectF r = QRectF(line.p1(), line.p2()).normalized();
+      setbbox(r.adjusted(-lw, -lw, lw, lw));
       }
 
 //---------------------------------------------------------
