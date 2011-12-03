@@ -88,6 +88,7 @@ Q_IMPORT_PLUGIN(com_trolltech_qt_core_ScriptPlugin)
 Q_IMPORT_PLUGIN(com_trolltech_qt_network_ScriptPlugin)
 Q_IMPORT_PLUGIN(com_trolltech_qt_uitools_ScriptPlugin)
 Q_IMPORT_PLUGIN(com_trolltech_qt_xml_ScriptPlugin)
+Q_IMPORT_PLUGIN(com_trolltech_qt_webkit_ScriptPlugin)
 #endif
 
 MuseScore* mscore;

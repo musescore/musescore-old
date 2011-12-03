@@ -174,7 +174,8 @@ if (STATIC_SCRIPT_BINDINGS)
             qtscript_gui
             qtscript_network
             qtscript_uitools
-            qtscript_xml)
+            qtscript_xml
+            qtscript_webkit)
 endif (STATIC_SCRIPT_BINDINGS)
 
 if (APPLE)

@@ -338,7 +338,7 @@ ScriptEngine::ScriptEngine()
             qDebug("available script extension: <%s>\n", qPrintable(s));
 #endif
       static const char* xts[] = {
-            "qt.core", "qt.gui", "qt.xml", "qt.network", "qt.uitools"
+            "qt.core", "qt.gui", "qt.xml", "qt.network", "qt.uitools", "qt.webkit"
             };
       for (unsigned i = 0; i < sizeof(xts)/sizeof(*xts); ++i) {
             importExtension(xts[i]);
