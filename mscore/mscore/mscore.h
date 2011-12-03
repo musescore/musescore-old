@@ -374,7 +374,7 @@ class MuseScore : public QMainWindow {
       void oscMuteChannel(double val);
       void oscOpen(QString path);
       void oscCloseAll();
-      void oscTriggerPlugin(QVariantList list);
+      void oscTriggerPlugin(QString list);
 #endif
       void loadPluginDir(const QString& pluginPath);
       void networkFinished(QNetworkReply*);

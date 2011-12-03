@@ -92,6 +92,7 @@ class PathObject : public QObject
 		void data( int );
 		void data( double );
 		void data( QString );
+		void data( QVariantList );
 		void data();
 		// @}
 	private:
