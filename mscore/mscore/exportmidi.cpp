@@ -69,9 +69,9 @@ void ExportMidi::writeHeader()
       if (mf.tracks()->isEmpty())
             return;
       MidiTrack* track  = mf.tracks()->front();
+#if 0 // TODOxx
       MeasureBase* measure  = cs->first();
 
-#if 0 // TODOxx
       foreach (const Element* e, *measure->el()) {
             if (e->type() == TEXT) {
                   const Text* text = (const Text*)(e);

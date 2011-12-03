@@ -20,6 +20,7 @@
 
 #include "metaedit.h"
 #include "libmscore/score.h"
+#include "libmscore/undo.h"
 
 //---------------------------------------------------------
 //   MetaEditDialog
@@ -49,13 +50,16 @@ MetaEditDialog::MetaEditDialog(Score* s, QWidget* parent)
 
 void MetaEditDialog::accept()
       {
-      score->setMetaTag("movementNumber", movementNumber->text());
-      score->setMetaTag("movementTitle", movementTitle->text());
-      score->setMetaTag("workNumber", workNumber->text());
-      score->setMetaTag("workTitle", workTitle->text());
-      score->setMetaTag("source", source->text());
-      score->setMetaTag("copyright", copyright->text());
-      score->setDirty(true);
+#define T(x, y) if (score->metaTag(x) != y->text()) \
+            score->undo()->push(new ChangeMetaText(score, x, y->text()));
+
+      T("movementNumber", movementNumber)
+      T("movementTitle", movementTitle)
+      T("workNumber", workNumber)
+      T("workTitle", workTitle)
+      T("source", source)
+      T("copyright", copyright)
+
       QDialog::accept();
       }
 

@@ -812,6 +812,7 @@ class Score {
       QMap<QString, QString> metaTags()                       { return _metaTags; }
       QString metaTag(const QString& s) const                 { return _metaTags.value(s);}
       void setMetaTag(const QString& tag, const QString& val) { _metaTags.insert(tag, val); }
+
       void updateNotes();
       void cmdUpdateNotes();
       void updateAccidentals(Measure* m, int staffIdx);

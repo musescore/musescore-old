@@ -3166,7 +3166,7 @@ void ChangeSpannerAnchor::flip()
       }
 
 //---------------------------------------------------------
-//   ChangeStaffUserDist
+//   ChangeStaffUserDist::flip
 //---------------------------------------------------------
 
 void ChangeStaffUserDist::flip()
@@ -3186,5 +3186,16 @@ void ChangeProperty::flip()
       QVariant v = element->getProperty(id);
       element->setProperty(id, property);
       property = v;
+      }
+
+//---------------------------------------------------------
+//   ChangeMetaText::flip
+//---------------------------------------------------------
+
+void ChangeMetaText::flip()
+      {
+      QString s = score->metaTag(id);
+      score->setMetaTag(id, text);
+      text = s;
       }
 

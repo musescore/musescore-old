@@ -457,8 +457,8 @@ qreal Note::yPos() const
       {
       qreal y = pos().y();
       if (chord()->staffMove()) {
-            System* system = chord()->measure()->system();
-            y += system->staff(staffIdx() + chord()->staffMove())->y() - system->staff(staffIdx())->y();
+//            System* system = chord()->measure()->system();
+//          y += system->staff(staffIdx() + chord()->staffMove())->y() - system->staff(staffIdx())->y();
             }
       return y;
       }

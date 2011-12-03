@@ -1808,20 +1808,20 @@ void Score::layoutPages()
 
             qreal h  = sr.height();
             qreal tmargin = 0.0;    // top system margin
-            qreal bmargin;    // bottom system margin
+            qreal bmargin;          // bottom system margin
 
             if (sr.isVbox()) {
                   VBox* vbox = sr.vbox();
                   bmargin  = vbox->bottomGap();
+                  tmargin += vbox->topGap();
                   if (lastSystem) {
-                       if (lastSystem->isVbox())
+                       if (lastSystem->isVbox()) {
                               tmargin += lastSystem->vbox()->bottomGap();
+                              }
                         else {
                               tmargin += systemFrameDistance;
                               }
                         }
-                  else
-                        tmargin = vbox->topGap();
                   }
             else {
                   if (lastSystem) {
