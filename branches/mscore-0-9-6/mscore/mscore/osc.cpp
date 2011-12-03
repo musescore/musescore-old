@@ -1,7 +1,7 @@
 //=============================================================================
 //  MuseScore
 //  Music Composition & Notation
-//  $Id: musescore.cpp 4961 2011-11-11 16:24:17Z lasconic $
+//  $Id: osc.cpp 4961 2011-11-11 16:24:17Z lasconic $
 //
 //  Copyright (C) 2002-2011 Werner Schweer and others
 //
@@ -94,6 +94,8 @@ void MuseScore::initOsc()
       QObject::connect(oo, SIGNAL(data(QString)), SLOT(oscOpen(QString)));
       oo = new PathObject( "/close-all", QVariant::Int, osc);
       QObject::connect(oo, SIGNAL(data(int)), SLOT(oscCloseAll()));
+      oo = new PathObject( "/plugin", QVariant::List, osc);
+      QObject::connect(oo, SIGNAL(data(QVariantList)), SLOT(oscTriggerPlugin(QVariantList)));
       }
 
 //---------------------------------------------------------
@@ -179,6 +181,25 @@ void MuseScore::oscTempo(int val)
             playPanel->setRelTempo(val);
       if (seq)
             seq->setRelTempo(double(val));
+      }
+
+//---------------------------------------------------------
+//   oscTriggerPlugin
+//---------------------------------------------------------        
+void MuseScore::oscTriggerPlugin(QVariantList args)
+      {
+      //QStringList args = s.split(",");
+      printf("here\n");
+      if(args.length() > 0) {
+            int idx = pluginIdxFromPath(args.at(0).toString());
+            if(idx != -1) {
+                  for(int i = 1; i < args.length()-1; i++) {
+                        addGlobalObjectToPluginEngine(qPrintable(args.at(i).toString()), args.at(i+1).toString());
+                        i++;
+                        }
+                  pluginTriggered(idx);
+                  }
+            }
       }
 
 //---------------------------------------------------------
