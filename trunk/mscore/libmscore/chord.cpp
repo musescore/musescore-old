@@ -1886,8 +1886,12 @@ QPointF Chord::layoutArticulation(Articulation* a)
             }
       if (botGap)
             chordBotY += _spatium;
+      else
+            chordBotY += _spatium * .5;
       if (topGap)
             chordTopY -= _spatium;
+      else
+            chordTopY -= _spatium * .5;
 
       // avoid collisions of staff articulations with chord notes:
       // gap between note and staff articulation is distance0 + 0.5 spatium

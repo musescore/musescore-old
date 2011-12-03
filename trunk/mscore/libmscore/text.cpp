@@ -944,11 +944,7 @@ bool Text::mousePress(const QPointF& p, QMouseEvent* ev)
 
 void Text::paste()
       {
-#if defined(Q_WS_MAC) || defined(__MINGW32__)
       QString txt = QApplication::clipboard()->text(QClipboard::Clipboard);
-#else
-      QString txt = QApplication::clipboard()->text(QClipboard::Selection);
-#endif
       if (debugMode)
             qDebug("Text::paste() <%s>\n", qPrintable(txt));
       _cursor->insertText(txt);

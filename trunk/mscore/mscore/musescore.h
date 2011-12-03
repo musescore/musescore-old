@@ -346,6 +346,7 @@ class MuseScore : public QMainWindow {
       void cmdAddChordName2();
       void convertCapella(Score*, Capella* cap);
       int readCapVoice(Score*, CapVoice* cvoice, int staffIdx, int tick);
+      void changeScore(int);
 
    private slots:
       void autoSaveTimerTimeout();

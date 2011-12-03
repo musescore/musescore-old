@@ -1557,5 +1557,23 @@ class ChangeProperty : public UndoCommand {
       UNDO_NAME("ChangeProperty");
       };
 
+//---------------------------------------------------------
+//   ChangeMetaText
+//---------------------------------------------------------
+
+class ChangeMetaText : public UndoCommand {
+      Score* score;
+      QString id;
+      QString text;
+
+      void flip();
+
+   public:
+      ChangeMetaText(Score* s, const QString& i, const QString& t) : score(s), id(i), text(t) {}
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      UNDO_NAME("ChangeMetaText");
+      };
+
 #endif
 

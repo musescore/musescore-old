@@ -2239,7 +2239,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
-         A_SCORE,
+         A_CMD,
          "edit-meta",
          QT_TRANSLATE_NOOP("action","Edit score meta data"),
          0,
@@ -2871,6 +2871,26 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Figured Bass"),
          QT_TRANSLATE_NOOP("action","Figured Bass")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
+         "next-score",
+         QT_TRANSLATE_NOOP("action","Next Score"),
+         Qt::Key_F3,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Next Score"),
+         QT_TRANSLATE_NOOP("action","Next Score")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
+         "prev-score",
+         QT_TRANSLATE_NOOP("action","Previous Score"),
+         Qt::SHIFT + Qt::Key_F3,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Previous Score"),
+         QT_TRANSLATE_NOOP("action","Previous Score")
          ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, 0, QKeySequence::UnknownKey)

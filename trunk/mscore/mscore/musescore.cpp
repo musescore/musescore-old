@@ -4230,6 +4230,10 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             addTempo();
       else if (cmd == "metronome")  // no action
             ;
+      else if (cmd == "next-score")
+            changeScore(1);
+      else if (cmd == "prev-score")
+            changeScore(-1);
       else {
             if (cv) {
                   cv->setFocus();
@@ -4376,5 +4380,26 @@ void MuseScore::instrumentChanged()
       {
       if (iledit)
             iledit->updateAll(cs);
+      }
+
+//---------------------------------------------------------
+//   changeScore
+//    switch current score
+//    step = 1    switch to next score
+//    step = -1   switch to previous score
+//---------------------------------------------------------
+
+void MuseScore::changeScore(int step)
+      {
+      int index = tab1->currentIndex();
+      int n     = tab1->count();
+      if (n == 1)
+            return;
+      index += step;
+      if (index >= n)
+            index = 0;
+      if (index < 0)
+            index = n - 1;
+      setCurrentScoreView(index);
       }
 
