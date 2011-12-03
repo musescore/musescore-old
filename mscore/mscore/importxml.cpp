@@ -815,7 +815,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                         else if (ee.tagName() == "source")
                               score->setMetaTag("source", ee.text());
                         else if (ee.tagName() == "miscellaneous")
-                              ; // ignore
+                              ;  // ignore
                         else
                               domError(ee);
                         }
@@ -2608,20 +2608,96 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
       }
 
 //---------------------------------------------------------
-//   xmlLyric
+//   addLyrics -- add a single lyric to the score
+//                or delete it (if number too high)
 //---------------------------------------------------------
 
-Lyrics* MusicXml::xmlLyric(int trk, QDomElement e)
+static void addLyric(ChordRest* cr, Lyrics* l, int lyricNo)
       {
-      int lyricNo = e.attribute(QString("number"), "1").toInt() - 1;
       if (lyricNo > MAX_LYRICS) {
             qDebug("too much lyrics (>%d)\n", MAX_LYRICS);
-            return 0;
+            delete l;
             }
+      else {
+            l->setNo(lyricNo);
+            cr->add(l);
+            }
+      }
+
+//---------------------------------------------------------
+//   addLyrics -- add a notes lyrics to the score
+//---------------------------------------------------------
+
+static void addLyrics(ChordRest* cr,
+                      QMap<int, Lyrics*>& numbrdLyrics,
+                      QMap<int, Lyrics*>& defyLyrics,
+                      QList<Lyrics*>& unNumbrdLyrics)
+      {
+      // first the lyrics with valid number
+      int lyricNo = -1;
+      for (QMap<int, Lyrics*>::const_iterator i = numbrdLyrics.constBegin(); i != numbrdLyrics.constEnd(); ++i) {
+            // qDebug("xmlLyric: numbrdLyrics[%d] %p\n", i.key(), i.value());
+            lyricNo = i.key(); // use number obtained from MusicXML file
+            Lyrics* l = i.value();
+            addLyric(cr, l, lyricNo);
+            }
+
+      // then the lyrics without valid number but with valid default-y
+      for (QMap<int, Lyrics*>::const_iterator i = defyLyrics.constBegin(); i != defyLyrics.constEnd(); ++i) {
+            // qDebug("xmlLyric: defyLyrics[%d] %p\n", i.key(), i.value());
+            lyricNo++; // use sequence number
+            Lyrics* l = i.value();
+            addLyric(cr, l, lyricNo);
+            }
+
+      // finally the remaining lyrics, which are simply added in order they appear in the MusicXML file
+      for (QList<Lyrics*>::const_iterator i = unNumbrdLyrics.constBegin(); i != unNumbrdLyrics.constEnd(); ++i) {
+            // qDebug("xmlLyric: unNumbrdLyrics %p\n", *i);
+            lyricNo++; // use sequence number
+            Lyrics* l = *i;
+            addLyric(cr, l, lyricNo);
+            }
+      }
+
+//---------------------------------------------------------
+//   xmlLyric -- parse a MusicXML lyric element
+//---------------------------------------------------------
+
+void MusicXml::xmlLyric(int trk, QDomElement e,
+                        QMap<int, Lyrics*>& numbrdLyrics,
+                        QMap<int, Lyrics*>& defyLyrics,
+                        QList<Lyrics*>& unNumbrdLyrics)
+      {
       Lyrics* l = new Lyrics(score);
-      l->setNo(lyricNo);
-      l->setTrack(trk);
       //TODO-WS l->setTick(tick);
+      l->setTrack(trk);
+      // qDebug("xmlLyric %p track %d\n", l, trk);
+
+      bool ok = true;
+      int lyricNo = e.attribute(QString("number")).toInt(&ok) - 1;
+      // qDebug("xmlLyric ok %d no %d\n", ok, lyricNo);
+      if (ok) {
+            if (lyricNo < 0) {
+                  qDebug("invalid lyrics number (<0)\n");
+                  delete l;
+                  }
+            else if (lyricNo > MAX_LYRICS) {
+                  qDebug("too much lyrics (>%d)\n", MAX_LYRICS);
+                  delete l;
+                  }
+            else {
+                  numbrdLyrics[lyricNo] = l;
+                  }
+            }
+      else {
+            int defaultY = e.attribute(QString("default-y")).toInt(&ok);
+            // qDebug("xmlLyric ok %d default-y %d\n", ok, defaultY);
+            if (ok)
+                  // invert default-y as it decreases with increasing lyric number
+                  defyLyrics[-defaultY] = l;
+            else
+                  unNumbrdLyrics.append(l);
+            }
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "syllabic") {
@@ -2641,7 +2717,8 @@ Lyrics* MusicXml::xmlLyric(int trk, QDomElement e)
             else if (e.tagName() == "elision")
                   if (e.text().isEmpty()) {
                         l->setText(l->getText()+" ");
-                        }else {
+                        }
+                  else {
                         l->setText(l->getText()+e.text());
                         }
             else if (e.tagName() == "extend")
@@ -2653,7 +2730,6 @@ Lyrics* MusicXml::xmlLyric(int trk, QDomElement e)
             else
                   domError(e);
             }
-      return l;
       }
 
 //---------------------------------------------------------
@@ -2775,7 +2851,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       QSet<Slur*> slursStopped;
       QSet<QString> slurIds; // combination start/stop and number must be unique within a note
       QColor noteheadColor = QColor::Invalid;
-      QList<Lyrics*> lyrics;
       bool chord = false;
       int velocity = -1;
 
@@ -2843,6 +2918,11 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             }
 
       velocity = round(e.attribute("dynamics", "-1").toDouble() * 0.9);
+
+      // storage for xmlLyric
+      QMap<int, Lyrics*> numberedLyrics; // lyrics with valid number
+      QMap<int, Lyrics*> defaultyLyrics; // lyrics with valid default-y
+      QList<Lyrics*> unNumberedLyrics;   // lyrics with neither
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -2929,11 +3009,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               domError(ee);
                         }
                   }
-            else if (tag == "lyric") {
-                  Lyrics* l = xmlLyric(trk + voice, e);
-                  if (l)
-                        lyrics.append(l);
-                  }
+            else if (tag == "lyric")
+                  xmlLyric(trk + voice, e, numberedLyrics, defaultyLyrics, unNumberedLyrics);
             else if (tag == "dot")
                   ++dots;
             else if (tag == "accidental") {
@@ -3672,9 +3749,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             */
             }
 
-      while (!lyrics.isEmpty()) {
-            cr->add(lyrics.takeFirst());
-            }
+      // add lyrics found by xmlLyric
+      addLyrics(cr, numberedLyrics, defaultyLyrics, unNumberedLyrics);
 
       prevtick = tick; // <- LVIFIX TODO check (this may have to move or change)
 
