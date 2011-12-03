@@ -256,7 +256,6 @@ int MuseScore::pluginIdxFromPath(QString pluginPath) {
 
 void MuseScore::addGlobalObjectToPluginEngine(const char * name, const QString & value ) 
       {
-      printf("%s - %s\n", name, qPrintable(value));
       se->globalObject().setProperty(name, se->newVariant(value));
       }
 

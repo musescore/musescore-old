@@ -93,8 +93,8 @@ void MuseScore::initOsc()
       QObject::connect(oo, SIGNAL(data(QString)), SLOT(oscOpen(QString)));
       oo = new PathObject( "/close-all", QVariant::Int, osc);
       QObject::connect(oo, SIGNAL(data(int)), SLOT(oscCloseAll()));
-      oo = new PathObject( "/plugin", QVariant::List, osc);
-      QObject::connect(oo, SIGNAL(data(QVariantList)), SLOT(oscTriggerPlugin(QVariantList)));
+      oo = new PathObject( "/plugin", QVariant::String, osc);
+      QObject::connect(oo, SIGNAL(data(QString)), SLOT(oscTriggerPlugin(QString)));
       }
 
 //---------------------------------------------------------
@@ -187,15 +187,15 @@ void MuseScore::oscTempo(int val)
 //---------------------------------------------------------
 //   oscTriggerPlugin
 //---------------------------------------------------------        
-void MuseScore::oscTriggerPlugin(QVariantList args)
+void MuseScore::oscTriggerPlugin(QString s)
       {
-      //QStringList args = s.split(",");
+      QStringList args = s.split(",");
       printf("here\n");
       if(args.length() > 0) {
-            int idx = pluginIdxFromPath(args.at(0).toString());
+            int idx = pluginIdxFromPath(args.at(0));
             if(idx != -1) {
                   for(int i = 1; i < args.length()-1; i++) {
-                        addGlobalObjectToPluginEngine(qPrintable(args.at(i).toString()), args.at(i+1).toString());
+                        addGlobalObjectToPluginEngine(qPrintable(args.at(i)), args.at(i+1));
                         i++;
                         }
                   pluginTriggered(idx);
