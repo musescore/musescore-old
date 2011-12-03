@@ -228,6 +228,34 @@ void MuseScore::registerPlugin(const QString& pluginPath)
       }
 
 //---------------------------------------------------------
+//   pluginIdxFromPath
+//---------------------------------------------------------
+
+int MuseScore::pluginIdxFromPath(QString pluginPath) {
+      QFileInfo np(pluginPath);
+      QString baseName = np.baseName();
+      int idx = 0;
+      foreach(QString s, plugins) {
+            QFileInfo fi(s);
+            if (fi.baseName() == baseName) {
+                  return idx;
+                  }
+            idx++;
+            }
+      return -1;
+}      
+
+//---------------------------------------------------------
+//   addGlobalObjectToPluginEngine
+//---------------------------------------------------------
+
+void MuseScore::addGlobalObjectToPluginEngine(const char * name, const QString & value ) 
+      {
+      printf("%s - %s\n", name, qPrintable(value));
+      se->globalObject().setProperty(name, se->newVariant(value));
+      }
+
+//---------------------------------------------------------
 //   registerPlugin
 //---------------------------------------------------------
 

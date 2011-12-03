@@ -2412,19 +2412,19 @@ void MuseScore::changeState(ScoreState val)
 
                         searchDialogLayout->addWidget(new QLabel(tr("Go To: ")));
 
-                        searchCombo = new QComboBox;
-                        searchCombo->setEditable(true);
-                        searchCombo->setInsertPolicy(QComboBox::InsertAtTop);
+                        searchCombo = new QLineEdit();
+                        searchCombo->setInputMask("0000");
                         searchDialogLayout->addWidget(searchCombo);
 
                         searchDialogLayout->addStretch(10);
                         searchDialog->hide();
 
-                        connect(searchCombo, SIGNAL(editTextChanged(const QString&)),
+                        connect(searchCombo, SIGNAL(textChanged(const QString&)),
                            SLOT(searchTextChanged(const QString&)));
+                        connect(searchCombo, SIGNAL(returnPressed()), SLOT(endSearch()));
                         }
 
-                  searchCombo->clearEditText();
+                  searchCombo->clear();
                   searchCombo->setFocus();
                   searchDialog->show();
                   _modeText->setText(tr("Search"));
