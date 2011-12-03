@@ -159,6 +159,10 @@ void PathObject::signalData( QVariant v ) {
 			emit data( v.toDouble() );
 		if ( _type == QVariant::String )
 			emit data( v.toString() );
+		if ( _type == QVariant::List ) {
+			emit data( v.toList() );
+			printf("list\n");
+      }
 		emit data( v );
 	}
 }

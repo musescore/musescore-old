@@ -318,6 +318,8 @@ class MuseScore : public QMainWindow {
       void fingeringMenu();
       void registerPlugin(const QString& pluginPath);
       void pluginExecuteFunction(int idx, const char* functionName);
+      int  pluginIdxFromPath(QString pluginPath);
+      void addGlobalObjectToPluginEngine(const char * name, const QString & value );
       void startDebugger();
       void midiinToggled(bool);
       void speakerToggled(bool);
@@ -394,6 +396,7 @@ class MuseScore : public QMainWindow {
       void oscMuteChannel(double val);
       void oscOpen(QString path);
       void oscCloseAll();
+      void oscTriggerPlugin(QVariantList list);
 #endif
       void createNewProfile();
       void deleteProfile();
