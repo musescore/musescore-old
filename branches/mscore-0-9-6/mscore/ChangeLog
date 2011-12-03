@@ -1,4 +1,5 @@
 2.dec
+      - fix #11221: Don't set "Break multi measure rest" when importing from MusicXML
       - fix #13860: MusicXML: support lyrics exported by Sibelius 7
 28.nov (lv)
       - updated MusicXML testfiles: added <sound dynamics="...">
