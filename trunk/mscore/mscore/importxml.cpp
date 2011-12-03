@@ -1724,21 +1724,17 @@ static void setSLinePlacement(SLine* sli, float s, const QString pl, bool hasYof
 //   metronome
 //---------------------------------------------------------
 
-static void addSymbolToText(const SymCode& s, QTextCursor* cur)
+static QString ucs4ToString(int uc)
       {
-      QTextCharFormat oFormat = cur->charFormat();
-      if (s.fontId >= 0) {
-            QTextCharFormat oFormat = cur->charFormat();
-            QTextCharFormat nFormat(oFormat);
-            nFormat.setFontFamily(fontId2font(s.fontId).family());
-            cur->setCharFormat(nFormat);
-            cur->insertText(QChar(s.code));
-            cur->setCharFormat(oFormat);
+      QString s;
+      if (uc & 0xffff0000) {
+            s = QChar(QChar::highSurrogate(uc));
+            s += QChar(QChar::lowSurrogate(uc));
             }
       else
-            cur->insertText(QChar(s.code));
+            s = QChar(uc);
+      return s;
       }
-
 /**
  Read the MusicXML metronome element.
  */
@@ -1759,43 +1755,43 @@ static void addSymbolToText(const SymCode& s, QTextCursor* cur)
 
 static void metronome(QDomElement e, Text* t)
       {
+      if (!t) return;
       bool textAdded = false;
+      QString tempoText = t->getText();
 
-      QTextCursor* c = t->startCursorEdit();
-      c->movePosition(QTextCursor::EndOfLine);
       QString parenth = e.attribute("parentheses");
       if (parenth == "yes")
-            c->insertText("(");
+            tempoText += "(";
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString txt = e.text();
             if (e.tagName() == "beat-unit") {
-                  if (textAdded) c->insertText(" = ");
-                  QString txt = e.text();
-                  if (txt == "breve") addSymbolToText(SymCode(0xe100, 1), c);
-                  else if (txt == "whole") addSymbolToText(SymCode(0xe101, 1), c);
-                  else if (txt == "half") addSymbolToText(SymCode(0xe104, 1), c);
-                  else if (txt == "quarter") addSymbolToText(SymCode(0xe105, 1), c);
-                  else if (txt == "eighth") addSymbolToText(SymCode(0xe106, 1), c);
-                  else if (txt == "16th") addSymbolToText(SymCode(0xe107, 1), c);
-                  else if (txt == "32nd") addSymbolToText(SymCode(0xe108, 1), c);
-                  else if (txt == "64th") addSymbolToText(SymCode(0xe109, 1), c);
-                  else c->insertText(e.text());
+                  if (textAdded) tempoText += " = ";
+                  if (txt == "breve") tempoText += ucs4ToString(0x1d15c);
+                  else if (txt == "whole") tempoText += ucs4ToString(0x1d15d);
+                  else if (txt == "half") tempoText += ucs4ToString(0x1d15e);
+                  else if (txt == "quarter") tempoText += ucs4ToString(0x1d15f);
+                  else if (txt == "eighth") tempoText += ucs4ToString(0x1d160);
+                  else if (txt == "16th") tempoText += ucs4ToString(0x1d161);
+                  else if (txt == "32nd") tempoText += ucs4ToString(0x1d162);
+                  else if (txt == "64th") tempoText += ucs4ToString(0x1d163);
+                  else tempoText += txt;
                   textAdded = true;
                   }
             else if (e.tagName() == "beat-unit-dot") {
-                  addSymbolToText(SymCode(0xe10a, 1), c);
+                  tempoText += ucs4ToString(0x1d16d);
                   textAdded = true;
                   }
             else if (e.tagName() == "per-minute") {
-                  if (textAdded) c->insertText(" = ");
-                  c->insertText(e.text());
+                  if (textAdded) tempoText += " = ";
+                  tempoText += txt;
                   textAdded = true;
                   }
             else
                   domError(e);
             } // for (e = e.firstChildElement(); ...
       if (parenth == "yes")
-            c->insertText(")");
-      t->endEdit();
+            tempoText += ")";
+      t->setText(tempoText);
       }
 
 //---------------------------------------------------------

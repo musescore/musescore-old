@@ -2,6 +2,7 @@
       - changing score metadata is now undoable and sets score dirty
       - new commands: "next score" (F3) and "previous score" (Shift+F3)
       (lv)
+      - fix MusicXML import of metronome
       - fix #11221: Don't set "Break multi measure rest" when importing from MusicXML
       - fix #13860: MusicXML: support lyrics exported by Sibelius 7
       - updated MusicXML testfiles: added <sound dynamics="...">
