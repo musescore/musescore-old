@@ -1347,7 +1347,7 @@ void MusicXml::xmlPart(QDomElement e, QString id)
       maxtick               = 0;
       prevtick              = 0;
       lastMeasureLen        = 0;
-      multiMeasureRestCount = 0;
+      multiMeasureRestCount = -1;
       startMultiMeasureRest = false;
 
       initVoiceMapperAndMapVoices(e);
@@ -1673,10 +1673,10 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
       tick = maxtick;
 
       // multi-measure rest handling:
-      // all normal measures get setBreakMultiMeasureRest(true)
       // the first measure in a multi-measure rest gets setBreakMultiMeasureRest(true)
-      // all other measures in a multi-measure rest get setBreakMultiMeasureRest(false)
       // and count down the remaining number of measures
+      // the first measure after a multi-measure rest gets setBreakMultiMeasureRest(true)
+      // for all other measures breakMultiMeasureRest is unchanged (stays default (false))
       if (startMultiMeasureRest) {
             measure->setBreakMultiMeasureRest(true);
             startMultiMeasureRest = false;
@@ -1684,11 +1684,13 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
       else {
             if (multiMeasureRestCount > 0) {
                   // measure is continuation of a multi-measure rest
-                  measure->setBreakMultiMeasureRest(false);
                   --multiMeasureRestCount;
                   }
-            else
+            else if (multiMeasureRestCount == 0) {
+                  // measure is first measure after a multi-measure rest
                   measure->setBreakMultiMeasureRest(true);
+                  --multiMeasureRestCount;
+                  }
             }
 
       return measure;
