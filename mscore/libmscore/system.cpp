@@ -465,12 +465,9 @@ void SysStaff::move(qreal x, qreal y)
       }
 
 //---------------------------------------------------------
-//   clear
+///   clear
+///   Clear layout of System
 //---------------------------------------------------------
-
-/**
- Clear layout of System.
-*/
 
 void System::clear()
       {

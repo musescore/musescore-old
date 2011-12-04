@@ -596,7 +596,7 @@ bool Text::edit(MuseScoreView*, int /*grip*/, int key, Qt::KeyboardModifiers mod
             }
       bool lo = type() == INSTRUMENT_NAME;
       score()->setLayoutAll(lo);
-      qreal w = 2.0; // 8.0 / view->matrix().m11();
+      static const qreal w = 2.0; // 8.0 / view->matrix().m11();
       score()->addRefresh(canvasBoundingRect().adjusted(-w, -w, w, w));
 
       if (modifiers == Qt::ControlModifier) {
@@ -715,23 +715,29 @@ bool Text::edit(MuseScoreView*, int /*grip*/, int key, Qt::KeyboardModifiers mod
       if (key == Qt::Key_Return || key == Qt::Key_Space || key == Qt::Key_Tab) {
             replaceSpecialChars();
             }
+      layoutEdit();
+      return true;
+      }
+
+//---------------------------------------------------------
+//   layoutEdit
+//---------------------------------------------------------
+
+void Text::layoutEdit()
+      {
       layout();
       if (parent() && parent()->type() == TBOX) {
-            TBox* tb = static_cast<TBox*>(parent());
-            qreal h;
-            if (isEmpty()) {
-                  QFontMetricsF fm(font());
-                  h = fm.lineSpacing();
-                  }
-            else
-                  h = height();
-            tb->setHeight(h);
-            tb->system()->setHeight(tb->height());
+            TBox* tbox = static_cast<TBox*>(parent());
+            tbox->layout();
+            System* system = tbox->system();
+            system->setHeight(tbox->height());
             score()->doLayoutPages();
+            score()->setUpdateAll(true);
             }
-      else
+      else {
+            static const qreal w = 2.0; // 8.0 / view->matrix().m11();
             score()->addRefresh(canvasBoundingRect().adjusted(-w, -w, w, w));
-      return true;
+            }
       }
 
 //---------------------------------------------------------
@@ -948,7 +954,7 @@ void Text::paste()
       if (debugMode)
             qDebug("Text::paste() <%s>\n", qPrintable(txt));
       _cursor->insertText(txt);
-      layout();
+      layoutEdit();
       bool lo = type() == INSTRUMENT_NAME;
       score()->setLayoutAll(lo);
       score()->setUpdateAll();
@@ -1324,7 +1330,7 @@ void Text::endEdit()
             }
       _editMode = false;
       endCursorEdit();
-      layout();
+      layoutEdit();
       textChanged();
       }
 

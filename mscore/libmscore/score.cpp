@@ -2712,7 +2712,7 @@ void Score::transpose(Note* n, Interval interval, bool useDoubleSharpsFlats)
 //    key -   -7(Cb) - +7(C#)
 //---------------------------------------------------------
 
-void Score::transposeKeys(int staffStart, int staffEnd, int tickStart, int tickEnd, int /*semitones*/)
+void Score::transposeKeys(int staffStart, int staffEnd, int tickStart, int tickEnd, int semitones)
       {
       for (int staffIdx = staffStart; staffIdx < staffEnd; ++staffIdx) {
             if (staff(staffIdx)->staffType()->group() == PERCUSSION_STAFF)
@@ -2730,6 +2730,7 @@ void Score::transposeKeys(int staffStart, int staffEnd, int tickStart, int tickE
                         KeySigEvent key  = km->key(s->tick());
                         KeySigEvent okey = km->key(s->tick() - 1);
                         key.setNaturalType(okey.accidentalType());
+                        key.setAccidentalType(transposeKey(key.accidentalType(), semitones));
                         undo()->push(new ChangeKeySig(ks, key, ks->showCourtesySig(),
                            ks->showNaturals()));
                         }
