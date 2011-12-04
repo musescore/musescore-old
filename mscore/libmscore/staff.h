@@ -137,8 +137,7 @@ class Staff {
       QList <BracketItem> brackets() const { return _brackets; }
       void cleanupBrackets();
 
-      KeyList* keymap() const        { return _keymap;      }
-
+      ClefTypeList clefTypeList(int tick) const;
       ClefType clef(int tick) const;
       ClefType clef(Segment*) const;
       void addClef(Clef*);
@@ -152,7 +151,7 @@ class Staff {
       Fraction timeStretch(int tick) const;
       TimeSig* timeSig(int tick) const;
 
-      ClefTypeList clefTypeList(int tick) const;
+      KeyList* keymap() const        { return _keymap;      }
       KeySigEvent key(int tick) const;
       void setKey(int tick, int st);
       void setKey(int tick, const KeySigEvent& st);

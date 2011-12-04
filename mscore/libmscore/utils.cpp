@@ -62,14 +62,14 @@ Measure* Score::tick2measure(int tick) const
             mb = nmb;
             }
       qDebug("-tick2measure %d not found\n", tick);
-//      if (debugMode) {
+      if (debugMode) {
         qDebug("first %p\n", first());
             for (MeasureBase* m = first(); m; m = m->next()) {
                   int st = m->tick();
                   int l  = m->ticks();
                   qDebug("%d - %d\n", st, st+l);
                   }
-//            }
+            }
       return 0;
       }
 
@@ -539,7 +539,7 @@ int transposeTpc(int tpc, Interval interval, bool useDoubleSharpsFlats)
       int steps     = interval.diatonic;
       int semitones = interval.chromatic;
 
-qDebug("transposeTpc tpc %d steps %d semitones %d\n", tpc, steps, semitones);
+// qDebug("transposeTpc tpc %d steps %d semitones %d\n", tpc, steps, semitones);
       if (semitones == 0 && steps == 0)
             return tpc;
 
@@ -567,9 +567,9 @@ qDebug("transposeTpc tpc %d steps %d semitones %d\n", tpc, steps, semitones);
                   --steps;
             else
                   break;
-            qDebug("  again alter %d steps %d, step %d\n", alter, steps, step);
+//            qDebug("  again alter %d steps %d, step %d\n", alter, steps, step);
             }
-      qDebug("  = step %d alter %d  tpc %d\n", step, alter, step2tpc(step, alter));
+//      qDebug("  = step %d alter %d  tpc %d\n", step, alter, step2tpc(step, alter));
       return step2tpc(step, alter);
       }
 

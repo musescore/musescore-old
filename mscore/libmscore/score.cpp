@@ -2559,8 +2559,9 @@ void Score::transpose(int mode, TransposeDirection direction, int transposeKey,
                   interval.flip();
             }
 
-      if (!rangeSelection)
+      if (!rangeSelection) {
             trKeys = false;
+            }
       bool fullOctave = (interval.chromatic % 12) == 0;
       if (fullOctave && (mode != TRANSPOSE_BY_KEY)) {
             trKeys = false;
@@ -2617,7 +2618,6 @@ void Score::transpose(int mode, TransposeDirection direction, int transposeKey,
                         }
                   }
             }
-
       if (trKeys) {
             transposeKeys(_selection.staffStart(), _selection.staffEnd(),
                _selection.tickStart(), _selection.tickEnd(), interval.chromatic);
@@ -2717,6 +2717,18 @@ void Score::transposeKeys(int staffStart, int staffEnd, int tickStart, int tickE
       for (int staffIdx = staffStart; staffIdx < staffEnd; ++staffIdx) {
             if (staff(staffIdx)->staffType()->group() == PERCUSSION_STAFF)
                   continue;
+
+            KeyList* km = staff(staffIdx)->keymap();
+            for (iKeyList ke = km->lower_bound(tickStart);
+                  ke != km->lower_bound(tickEnd); ++ke) {
+                  KeySigEvent oKey  = ke->second;
+                  int tick  = ke->first;
+                  int nKeyType = transposeKey(oKey.accidentalType(), semitones);
+                  KeySigEvent nKey;
+                  nKey.setAccidentalType(nKeyType);
+                  (*km)[tick] = nKey;
+                  // undoChangeKey(staff(staffIdx), tick, oKey, nKey);
+                  }
             for (Segment* s = firstSegment(); s; s = s->next1()) {
                   if (s->subtype() != SegKeySig)
                         continue;
@@ -2726,18 +2738,15 @@ void Score::transposeKeys(int staffStart, int staffEnd, int tickStart, int tickE
                         break;
                   KeySig* ks = static_cast<KeySig*>(s->element(staffIdx * VOICES));
                   if (ks) {
-                        KeyList* km      = staff(staffIdx)->keymap();
                         KeySigEvent key  = km->key(s->tick());
                         KeySigEvent okey = km->key(s->tick() - 1);
                         key.setNaturalType(okey.accidentalType());
-                        key.setAccidentalType(transposeKey(key.accidentalType(), semitones));
-                        undo()->push(new ChangeKeySig(ks, key, ks->showCourtesySig(),
+                        _undo->push(new ChangeKeySig(ks, key, ks->showCourtesySig(),
                            ks->showNaturals()));
                         }
                   }
             }
       }
-
 
 //---------------------------------------------------------
 //   addAudioTrack
@@ -2754,7 +2763,6 @@ void Score::addAudioTrack()
 
 void Score::padToggle(int n)
       {
-printf("padToggle %d\n", n);
       switch (n) {
             case PAD_NOTE00:
                   _is.setDuration(TDuration::V_LONG);

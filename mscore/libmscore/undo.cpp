@@ -388,9 +388,6 @@ void Score::undoChangePitch(Note* note, int pitch, int tpc, int line, int fret, 
 
 void Score::undoChangeKeySig(Staff* ostaff, int tick, KeySigEvent st)
       {
-qDebug("undoChangeKeySig staff %d, tick %d -- %d",
-   ostaff->score()->staffIdx(ostaff), tick, st.accidentalType());
-
       QList<Staff*> staffList;
       LinkedStaves* linkedStaves = ostaff->linkedStaves();
       if (linkedStaves)
@@ -1711,11 +1708,14 @@ void ChangeKeySig::flip()
       keysig->setKeySigEvent(ks);
       keysig->setShowCourtesySig(showCourtesy);
       keysig->setShowNaturals(showNaturals);
+//      keysig->staff()->setKey(keysig->segment()->tick(), ks);
 
       showCourtesy = sc;
       showNaturals = sn;
       ks           = oe;
+
       keysig->score()->setLayoutAll(true);
+      keysig->score()->cmdUpdateNotes();
       }
 
 //---------------------------------------------------------
