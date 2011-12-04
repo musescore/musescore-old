@@ -221,7 +221,6 @@ void MuseScore::oscColorNote(QString s)
             return;
       QStringList args = s.split(",");
       if(args.length() == 2) {
-            
             int tick = args[0].toInt();
             int pitch = args[1].toInt();
             Measure* measure = cs->tick2measure(tick);
@@ -238,7 +237,7 @@ void MuseScore::oscColorNote(QString s)
                         ChordRest* cr = static_cast<ChordRest*>(e);
                         if(cr->type() == CHORD) {
                               Chord* chord = static_cast<Chord*>(cr);
-                              for (int idx = 0; idx < chord->notes().length(); i++) {
+                              for (int idx = 0; idx < chord->notes().length(); idx++) {
                                     Note* note = chord->notes()[idx];
                                     if (note->pitch() == pitch) {
                                           cs->startCmd();
