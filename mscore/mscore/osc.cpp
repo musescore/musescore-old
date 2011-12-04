@@ -217,13 +217,19 @@ void MuseScore::oscTriggerPlugin(QString s)
 //---------------------------------------------------------        
 void MuseScore::oscColorNote(QString s)
       {
+      if(!cs)
+            return;
       QStringList args = s.split(",");
       if(args.length() == 2) {
             
             int tick = args[0].toInt();
             int pitch = args[1].toInt();
             Measure* measure = cs->tick2measure(tick);
+            if(!measure)
+                  return;
             Segment* s = measure->findSegment(SegChordRest, tick);
+            if (!s)
+                  return;
             //get all chords in segment...
             int n = cs->nstaves() * VOICES;
             for (int i = 0; i < n; i++) {
