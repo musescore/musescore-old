@@ -23,6 +23,12 @@
 #include "musescore.h"
 #include "libmscore/score.h"
 #include "libmscore/instrument.h"
+#include "libmscore/measure.h"
+#include "libmscore/segment.h"
+#include "libmscore/chordrest.h"
+#include "libmscore/chord.h"
+#include "libmscore/note.h"
+#include "libmscore/undo.h"
 #include "mixer.h"
 #include "scoreview.h"
 #include "playpanel.h"
@@ -95,6 +101,10 @@ void MuseScore::initOsc()
       QObject::connect(oo, SIGNAL(data(int)), SLOT(oscCloseAll()));
       oo = new PathObject( "/plugin", QVariant::String, osc);
       QObject::connect(oo, SIGNAL(data(QString)), SLOT(oscTriggerPlugin(QString)));
+      
+      oo = new PathObject( "/color-note", QVariant::String, osc);
+      QObject::connect(oo, SIGNAL(data(QString)), SLOT(oscColorNote(QString)));
+      
       }
 
 //---------------------------------------------------------
@@ -190,7 +200,6 @@ void MuseScore::oscTempo(int val)
 void MuseScore::oscTriggerPlugin(QString s)
       {
       QStringList args = s.split(",");
-      printf("here\n");
       if(args.length() > 0) {
             int idx = pluginIdxFromPath(args.at(0));
             if(idx != -1) {
@@ -202,7 +211,42 @@ void MuseScore::oscTriggerPlugin(QString s)
                   }
             }
       }
-
+      
+//---------------------------------------------------------
+//   oscColorNote
+//---------------------------------------------------------        
+void MuseScore::oscColorNote(QString s)
+      {
+      QStringList args = s.split(",");
+      if(args.length() == 2) {
+            
+            int tick = args[0].toInt();
+            int pitch = args[1].toInt();
+            Measure* measure = cs->tick2measure(tick);
+            Segment* s = measure->findSegment(SegChordRest, tick);
+            //get all chords in segment...
+            int n = cs->nstaves() * VOICES;
+            for (int i = 0; i < n; i++) {
+                  Element* e = s->element(i);
+                  if (e && e->isChordRest()) {
+                        ChordRest* cr = static_cast<ChordRest*>(e);
+                        if(cr->type() == CHORD) {
+                              Chord* chord = static_cast<Chord*>(cr);
+                              for (int idx = 0; idx < chord->notes().length(); i++) {
+                                    Note* note = chord->notes()[idx];
+                                    if (note->pitch() == pitch) {
+                                          cs->startCmd();
+                                          cs->undo()->push(new ChangeProperty(note, P_COLOR, QColor("red")));
+                                          cs->endCmd();
+                                          cs->end();
+                                          return;
+                                          }     
+                                    }
+                              }
+                        }
+                  }
+            }
+      }
 //---------------------------------------------------------
 //   oscVolume
 //---------------------------------------------------------
