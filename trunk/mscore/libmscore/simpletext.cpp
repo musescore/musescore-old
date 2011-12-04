@@ -134,7 +134,7 @@ int SimpleText::alignFlags() const
 
 void SimpleText::layout()
       {
-      if (parent() == 0)
+      if (parent() == 0 || _text.isEmpty())
             return;
 
       const TextStyle& s(style());

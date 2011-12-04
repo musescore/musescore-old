@@ -277,28 +277,23 @@ int transposeKey(int key, int semitones)
       //                          0  1  2  3   4  5   6  7  8  9 10  11  12
       static const int kp[] =  {  6, 1, 8, 3, 10, 5,  0, 7, 2, 9, 4, 11, 6  };
 
-//                                C  Db D  Eb  E   F  Gb  G Ab  A  Bb  B
+      //                          C  Db D  Eb  E   F  Gb  G Ab  A  Bb  B
       static const int kp1[] = {  6, 1, 8,  3, 10, 5,  0, 7, 2, 9,  4, 11 };
 
       while (semitones < 0)
             semitones += 12;
       semitones %= 12;
 
-qDebug("transposeKey key %d semitones %d\n", key, semitones);
-
       // switch to enharmonic key:
       if (key == -7)
             key = 5;
       else if (key == 7)
             key = -5;
-//      qDebug("  transposeKey key %d semitones %d\n", key, semitones);
-
       key += 6;         // normalize key to 0 - 13
 
       int kpitch = kp[key];
       kpitch = (kpitch + semitones) % 12;
       key = kp1[kpitch] - 6;
-qDebug("  key %d\n", key);
       return key;
       }
 

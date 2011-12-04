@@ -705,6 +705,7 @@ QFont TextStyleData::fontPx(qreal _spatium) const
       f.setBold(bold);
       f.setItalic(italic);
       f.setUnderline(underline);
+      f.setHintingPreference(QFont::PreferVerticalHinting);
 
       if (sizeIsSpatiumDependent)
             m *= _spatium / (SPATIUM20 * DPI);
