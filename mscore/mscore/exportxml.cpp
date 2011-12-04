@@ -888,8 +888,8 @@ void ExportMusicXml::credits(Xml& xml)
       // debug
       qDebug("credits:");
       const MeasureBase* measure = score->measures()->first();
-      foreach(const Element* element, *measure->el()) {
 #if 0 // no subtypes for strings
+      foreach(const Element* element, *measure->el()) {
             if (element->type() == TEXT) {
                   const Text* text = (const Text*)element;
                   bool mustPrint = true;
@@ -918,8 +918,8 @@ void ExportMusicXml::credits(Xml& xml)
                                         text->pagePos().y()
                                         );
                   }
-#endif
             }
+#endif
       QString rights = score->metaTag("copyright");
       if (!rights.isEmpty())
             qDebug("copyright '%s'", qPrintable(rights));
@@ -947,10 +947,10 @@ void ExportMusicXml::credits(Xml& xml)
                          h - text->pagePos().y(),
                          text->font().pointSize()
                          );
+#if 0
                   const double ty = h - getTenthsFromDots(text->pagePos().y());
                   const int fs = text->font().pointSize();
-#if 0
-  // parameters should be extracted from text layout
+                  // parameters should be extracted from text layout
                   switch (text->subtype()) {
                         case TEXT_TITLE:
                               creditWords(xml, w / 2, ty, fs, "center", "top", text->getText());
@@ -2256,14 +2256,21 @@ static void partGroupStart(Xml& xml, int number, int bracket)
 //   words
 //---------------------------------------------------------
 
+// The note and dot symbols are in Unicode plane, they are stored
+// in a QString as a surrogate pair.
+// Example: quarter note is 0x1d15f, stored as 0xd834 0xdd5f.
+
 // a line containing only a note and zero or more dots
-QRegExp metro("^[\\xe100\\xe101\\xe104-\\xe109][\\xe10a\\xe10b\\.]?$");
+QRegExp metro("^\\xd834([\\xdd5c-\\xdd5f]|[\\xdd60-\\xdd63])(\\xd834\\xdd6d)?$");
 // a note, zero or more dots, zero or more spaces, an equals sign, zero or more spaces
-QRegExp metroPlusEquals("[\\xe100\\xe101\\xe104-\\xe109][\\xe10a\\xe10b\\.]? ?= ?");
+QRegExp metroPlusEquals("\\xd834([\\xdd5c-\\xdd5f]|[\\xdd60-\\xdd63])(\\xd834\\xdd6d)? ?= ?");
 // a parenthesis open, zero or more spaces at end of line
 QRegExp leftParen("\\( ?$");
 // zero or more spaces, an equals sign, zero or more spaces at end of line
 QRegExp equals(" ?= ?$");
+
+// note: findUnitAndDots does not check the first char of the surrogate pair
+//       this has already been done by findMetronome using the regexps above
 
 static bool findUnitAndDots(QString words, QString& unit, int& dots)
       {
@@ -2272,23 +2279,23 @@ static bool findUnitAndDots(QString words, QString& unit, int& dots)
       qDebug("findUnitAndDots('%s') slen=%d", qPrintable(words), words.length());
       if (!metro.exactMatch(words))
             return false;
-      switch (words.at(0).unicode()) {
-            case 0xe100: unit = "breve"; break;
-            case 0xe101: unit = "whole"; break;
-            case 0xe104: unit = "half"; break;
-            case 0xe105: unit = "quarter"; break;
-            case 0xe106: unit = "eighth"; break;
-            case 0xe107: unit = "16th"; break;
-            case 0xe108: unit = "32nd"; break;
-            case 0xe109: unit = "64th"; break;
+      switch (words.at(1).unicode()) {
+            case 0xdd5c: unit = "breve"; break;
+            case 0xdd5d: unit = "whole"; break;
+            case 0xdd5e: unit = "half"; break;
+            case 0xdd5f: unit = "quarter"; break;
+            case 0xdd60: unit = "eighth"; break;
+            case 0xdd61: unit = "16th"; break;
+            case 0xdd62: unit = "32nd"; break;
+            case 0xdd63: unit = "64th"; break;
             default: qDebug("findUnitAndDots: unknown char '%s'(0x%0xd)",
                             qPrintable(words.mid(0, 1)), words.at(0).unicode());
             }
-      for (int i = 1; i < words.length(); ++i)
+      for (int i = 3; i < words.length(); i += 2)
             switch (words.at(i).unicode()) {
                   case '.':    // fall through
-                  case 0xe10a: ++dots; break;
-                  case 0xe10b: ++dots; ++dots; break;
+                  case 0xdd6d: ++dots; break;
+                  // TODO case 0xe10b: ++dots; ++dots; break;
                   default: qDebug("findUnitAndDots: unknown char '%s'(0x%0xd)",
                                   qPrintable(words.mid(i, 1)), words.at(i).unicode());
                   }
@@ -2304,7 +2311,15 @@ static bool findMetronome(QString words,
                           QString& wordsRight  // words right of metronome
                           )
       {
-      qDebug("findMetronome('%s') slen=%d", qPrintable(words), words.length());
+      QString hexWords;
+      for (int i = 0; i < words.length(); ++i) {
+            QString n;
+            n.setNum(words.at(i).unicode(),16);
+            if (i != 0) hexWords += " ";
+            hexWords += "0x";
+            hexWords += n;
+            }
+      qDebug("findMetronome('%s') (%s) slen=%d", qPrintable(words), qPrintable(hexWords), words.length());
       wordsLeft  = "";
       hasParen   = false;
       metroLeft  = "";
