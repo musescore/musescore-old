@@ -389,7 +389,7 @@ class ScoreView : public QWidget, public MuseScoreView {
       void setFocusRect();
       Element* getDragElement() const { return dragElement; }
       void changeVoice(int voice);
-      void drawBackground(QPainter& p, QRectF r);
+      virtual void drawBackground(QPainter* p, const QRectF& r) const;
       bool fotoScoreViewDragTest(QMouseEvent*);
       bool fotoScoreViewDragRectTest(QMouseEvent*);
       void doDragFotoRect(QMouseEvent*);

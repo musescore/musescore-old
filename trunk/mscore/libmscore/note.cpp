@@ -542,12 +542,15 @@ void Note::draw(QPainter* painter) const
                         qreal currSpatium = spatium();
                         qreal d  = currSpatium * .2;
                         QRectF bb = bbox().adjusted(-d, d, d, -d);
-//TODOxxxx                        painter->drawBackground(bb);
+
+                        // we do not know which viewer did this draw() call
+                        // so update all:
+                        foreach(MuseScoreView* view, score()->getViewer())
+                              view->drawBackground(painter, bb);
+
                         if (fretConflict()) {          //on fret conflict, draw on red background
                               painter->save();
-                              QPen pen(painter->pen());
-                              pen.setColor(Qt::red);
-                              painter->setPen(pen);
+                              painter->setPen(Qt::red);
                               painter->setBrush(QBrush(QColor(Qt::red)));
                               painter->drawRect(bb);
                               painter->restore();

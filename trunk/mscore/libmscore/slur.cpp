@@ -364,11 +364,11 @@ void Slur::computeBezier(SlurSegment* ss)
 
       QPointF p2 = pp2 - pp1;
       if (p2.x() == 0.0) {
-            qDebug("zero slur\n");
+            qDebug("zero slur");
             Measure* m1 = startChord()->segment()->measure();
             Measure* m2 = endChord()->segment()->measure();
             Page* page = m1->system()->page();
-            qDebug("   at tick %d in measure %d-%d page %d\n",
+            qDebug("   at tick %d in measure %d-%d page %d",
                m1->tick(), m1->no(), m2->no(), page->no());
             return;
             }
@@ -477,7 +477,7 @@ void Tie::computeBezier(SlurSegment* ss)
 
       QPointF p2 = pp2 - pp1;
       if (p2.x() == 0.0) {
-            qDebug("zero tie\n");
+            qDebug("zero tie");
             return;
             }
 
@@ -1094,7 +1094,7 @@ void Slur::layout()
             ++is;
             }
       if (is == sl->end())
-            qDebug("Slur::layout  first system not found\n");
+            qDebug("Slur::layout  first system not found");
       setPos(0, 0);
 
       //---------------------------------------------------------
@@ -1191,7 +1191,7 @@ qreal SlurTie::firstNoteRestSegmentX(System* system)
                         }
                   }
             }
-      qDebug("firstNoteRestSegmentX: did not find segment\n");
+      qDebug("firstNoteRestSegmentX: did not find segment");
       return 0.0;
       }
 
@@ -1263,7 +1263,7 @@ void Tie::layout()
       // TODO: if there is a startNote but no endNote
       //    show short bow
       if (startElement() == 0 || endElement() == 0) {
-            qDebug("Tie::layout(): no start or end\n");
+            qDebug("Tie::layout(): no start or end");
             return;
             }
 
@@ -1347,9 +1347,9 @@ void Tie::layout()
 
       int sysIdx1 = systems->indexOf(sPos.system1);
       if (sysIdx1 == -1) {
-            qDebug("system not found\n");
+            qDebug("system not found");
             foreach(System* s, *systems)
-                  qDebug("   search %p in %p\n", sPos.system1, s);
+                  qDebug("   search %p in %p", sPos.system1, s);
             return;
             }
 

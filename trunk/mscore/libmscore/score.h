@@ -843,8 +843,9 @@ class Score {
 
       void transpose(int mode, TransposeDirection, int transposeKey, int transposeInterval,
          bool trKeys, bool transposeChordNames, bool useDoubleSharpsFlats);
-      void addViewer(MuseScoreView* v)      { viewer.append(v);   }
+      void addViewer(MuseScoreView* v)      { viewer.append(v);    }
       void removeViewer(MuseScoreView* v)   { viewer.removeAll(v); }
+      const QList<MuseScoreView*>& getViewer() const { return viewer;       }
       void moveCursor();
       bool playNote() const                 { return _playNote; }
       void setPlayNote(bool v)              { _playNote = v;    }
