@@ -583,12 +583,13 @@ void GuitarPro1::read(QFile* fp)
                                     tuplet = new Tuplet(score);
                                     tuplet->setTrack(cr->track());
                                     tuplets[staffIdx] = tuplet;
-                                    measure->add(tuplet);
+                                    tuplet->setParent(measure);
                                     }
                               tuplet->setTrack(staffIdx * VOICES);
                               tuplet->setBaseLen(l);
                               setTuplet(tuplet, tuple);
                               cr->setTuplet(tuplet);
+                              tuplet->add(cr);  //TODOxxx
                               }
 
                         TDuration d(l);
@@ -877,12 +878,13 @@ qDebug("BeginRepeat=============================================\n");
                                     tuplet = new Tuplet(score);
                                     tuplet->setTrack(cr->track());
                                     tuplets[staffIdx] = tuplet;
-                                    measure->add(tuplet);
+                                    tuplet->setParent(measure);
                                     }
                               tuplet->setTrack(staffIdx * VOICES);
                               tuplet->setBaseLen(l);
                               setTuplet(tuplet, tuple);
                               cr->setTuplet(tuplet);
+                              tuplet->add(cr);
                               }
 
                         TDuration d(l);
@@ -1374,12 +1376,13 @@ qDebug("BeginRepeat=============================================\n");
                                     tuplet = new Tuplet(score);
                                     tuplet->setTrack(cr->track());
                                     tuplets[staffIdx] = tuplet;
-                                    measure->add(tuplet);
+                                    tuplet->setParent(measure);
                                     }
                               tuplet->setTrack(staffIdx * VOICES);
                               tuplet->setBaseLen(l);
                               setTuplet(tuplet, tuple);
                               cr->setTuplet(tuplet);
+                              tuplet->add(cr);
                               }
 
                         TDuration d(l);
@@ -1874,12 +1877,13 @@ void GuitarPro4::read(QFile* fp)
                                     tuplet = new Tuplet(score);
                                     tuplet->setTrack(cr->track());
                                     tuplets[staffIdx] = tuplet;
-                                    measure->add(tuplet);
+                                    tuplet->setParent(measure);
                                     }
                               tuplet->setTrack(staffIdx * VOICES);
                               tuplet->setBaseLen(l);
                               setTuplet(tuplet, tuple);
                               cr->setTuplet(tuplet);
+                              tuplet->add(cr);
                               }
 
                         TDuration d(l);
@@ -2277,12 +2281,13 @@ int GuitarPro5::readBeat(int tick, int voice, Measure* measure, int staffIdx, Tu
                         // int track = staffIdx * 2 + voice;
                         tuplets[staffIdx * 2 + voice] = tuplet;
                         tuplet->setTrack(cr->track());
-                        measure->add(tuplet);
+                                    tuplet->setParent(measure);
                         }
                   tuplet->setTrack(cr->track());
                   tuplet->setBaseLen(l);
                   setTuplet(tuplet, tuple);
                   cr->setTuplet(tuplet);
+                  tuplet->add(cr);
                   }
 
             TDuration d(l);

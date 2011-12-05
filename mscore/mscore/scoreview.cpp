@@ -1705,8 +1705,10 @@ void ScoreView::paintEvent(QPaintEvent* ev)
             vp.drawLine(dropAnchor);
             }
 
-      if (dragElement)
+      if (dragElement) {
+//            printf("drag element <%s>\n", dragElement->name());
             dragElement->scanElements(&vp, paintElement, false);
+            }
 
       if (grips) {
             qreal lw = 2.0/vp.matrix().m11();
@@ -1733,12 +1735,16 @@ void ScoreView::paintEvent(QPaintEvent* ev)
 //   drawBackground
 //---------------------------------------------------------
 
-void ScoreView::drawBackground(QPainter& p, QRectF r)
+void ScoreView::drawBackground(QPainter* p, const QRectF& r) const
       {
+      if (score()->printing()) {
+            p->fillRect(r, Qt::white);
+            return;
+            }
       if (fgPixmap == 0 || fgPixmap->isNull())
-            p.fillRect(r, _fgColor);
+            p->fillRect(r, _fgColor);
       else {
-            p.drawTiledPixmap(r, *fgPixmap, r.topLeft()
+            p->drawTiledPixmap(r, *fgPixmap, r.topLeft()
                - QPoint(lrint(_matrix.dx()), lrint(_matrix.dy())));
             }
       }
@@ -2357,7 +2363,6 @@ void ScoreView::dropEvent(QDropEvent* event)
                               if (el == 0) {
                                     qDebug("cannot drop here");
                                     delete dragElement;
-                                    dragElement = 0;
                                     break;
                                     }
                              }
@@ -2500,6 +2505,7 @@ if (debugMode)
             return;
             }
 
+      dragElement = 0;
       const QMimeData* md = event->mimeData();
       QByteArray data;
       int etype;
@@ -3754,7 +3760,7 @@ bool ScoreView::editScoreViewDragTransition(QMouseEvent* ev)
 
       if (e == 0 || e->type() == MEASURE) {
             startMove   = p;
-            dragElement = e;
+//TODOxxx            dragElement = e;
             return true;
             }
       return false;
@@ -3772,7 +3778,7 @@ bool ScoreView::editSelectTransition(QMouseEvent* ev)
 
       if (e != editObject) {
             startMove   = p;
-            dragElement = e;
+//TODOxxx            dragElement = e;
             return true;
             }
       return false;
@@ -5448,7 +5454,7 @@ MeasureBase* ScoreView::checkSelectionStateForInsertMeasure()
             }
       Element* e = _score->selection().element();
       if (e) {
-            if (e->type() == VBOX)
+            if (e->type() == VBOX || e->type() == TBOX)
                   return static_cast<MeasureBase*>(e);
             }
 	QMessageBox::warning(0, "MuseScore",
@@ -5797,4 +5803,3 @@ void ScoreView::layoutChanged()
       if (mscore->navigator())
             mscore->navigator()->layoutChanged();
       }
-

@@ -841,8 +841,7 @@ void Measure::add(Element* el)
       switch (type) {
             case TUPLET:
                   qDebug("Measure::add(Tuplet) ??");
-//                  break;
-                  abort();
+                  break;
 
             case SPACER:
                   {
@@ -1627,8 +1626,10 @@ void Measure::adjustToLen(int ol, int nl)
                               ++chords;
                         }
                   }
-            if (rests == 1 && chords == 0 && rest->durationType().type() == TDuration::V_MEASURE)
+            if (rests == 1 && chords == 0 && rest->durationType().type() == TDuration::V_MEASURE) {
+                  rest->setDuration(Fraction::fromTicks(nl));
                   continue;
+                  }
             if ((_timesig == _len) && (rests == 1) && (chords == 0)) {
                   rest->setDurationType(TDuration::V_MEASURE);    // whole measure rest
                   }

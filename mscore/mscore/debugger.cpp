@@ -1299,21 +1299,20 @@ void TextView::textChanged()
 
 void TextView::setElement(Element* e)
       {
-//      Text* te = (Text*)e;
-//      tb.textStyle->clear();
-#if 0       // TODOst
+      Text* te = (Text*)e;
+      tb.textStyle->clear();
+
       for (int i = 0; i < TEXT_STYLES; ++i)
             tb.textStyle->addItem(e->score()->textStyle(TextStyleType(i)).name());
 
       ShowElementBase::setElement(e);
-      tb.text->setDocument(te->doc()->clone());
+      tb.text->setPlainText(te->getText());
       tb.xoffset->setValue(te->xoff());
       tb.yoffset->setValue(te->yoff());
       tb.rxoffset->setValue(te->reloff().x());
       tb.ryoffset->setValue(te->reloff().y());
       tb.offsetType->setCurrentIndex(int(te->offsetType()));
       tb.textStyle->setCurrentIndex(te->textStyle());
-#endif
       }
 
 //---------------------------------------------------------
