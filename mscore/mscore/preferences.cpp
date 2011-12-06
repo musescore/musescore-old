@@ -539,7 +539,7 @@ void Preferences::read()
          s.value("paperHeight", 297.0/INCH).toDouble()));
       pf.setTwosided(s.value("twosided", true).toBool());
       MScore::defaultStyle()->setPageFormat(pf);
-      MScore::defaultStyle()->setSpatium(s.value("spatium", MScore::spatium).toDouble() * DPI);
+      MScore::defaultStyle()->setSpatium(s.value("spatium", SPATIUM20).toDouble() * DPI);
 
       mag                    = s.value("mag", mag).toDouble();
 
@@ -1005,6 +1005,8 @@ void PreferenceDialog::updateValues(Preferences* p)
       //
       bool mm = true;
       const char* suffix = mm ? "mm" : "in";
+      double f  = mm ? INCH : 1.0;
+
       paperWidth->setSuffix(suffix);
       paperHeight->setSuffix(suffix);
 
@@ -1018,15 +1020,15 @@ void PreferenceDialog::updateValues(Preferences* p)
 
       pageGroup->setCurrentIndex(paperSizeIndex(ps));
 
-      paperWidth->setValue(pw * INCH);
-      paperHeight->setValue(ph * INCH);
+      paperWidth->setValue(pw * f);
+      paperHeight->setValue(ph * f);
       landscape->setChecked(pw > ph);
 
       paperWidth->blockSignals(false);
       paperHeight->blockSignals(false);
 
       twosided->setChecked(MScore::defaultStyle()->pageFormat()->twosided());
-      spatiumEntry->setValue(MScore::defaultStyle()->spatium() / DPMM);
+      spatiumEntry->setValue(MScore::defaultStyle()->spatium() * f / DPI);
       scale->setValue(p->mag);
 
       defaultPlayDuration->setValue(MScore::defaultPlayDuration);
@@ -1492,7 +1494,7 @@ void PreferenceDialog::apply()
       PageFormat pf(*MScore::defaultStyle()->pageFormat());
       pf.setTwosided(twosided->isChecked());
 
-      MScore::defaultStyle()->setSpatium(spatiumEntry->value() * DPMM);
+      MScore::defaultStyle()->setSpatium(spatiumEntry->value() * f * DPI);
       preferences.mag         = scale->value();
       pf.setSize(QSizeF(paperHeight->value() * f,  paperWidth->value()  * f));
       MScore::defaultStyle()->setPageFormat(pf);
@@ -1566,7 +1568,7 @@ void PreferenceDialog::resetAllValues()
       pf.setSize(QSizeF(210.0/INCH, 297.0/INCH));
       pf.setTwosided(true);
       MScore::defaultStyle()->setPageFormat(pf);
-      MScore::defaultStyle()->setSpatium(MScore::spatium);
+      MScore::defaultStyle()->setSpatium(SPATIUM20 * DPI);
 
       updateValues(&prefs);
 
