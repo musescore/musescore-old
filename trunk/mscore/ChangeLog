@@ -1,3 +1,5 @@
+6.dec (lv)
+      - copy tuplet change from importgtp.cpp rev 5087
 4.dec (lv)
       - fix MusicXML export of metronome
       - fix compiler warning on exportxml.cpp
