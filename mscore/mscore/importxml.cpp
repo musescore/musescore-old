@@ -3672,12 +3672,12 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 
                   // type, placement
 
-                  measure->add(tuplet);
+                  tuplet->setParent(measure);
                   }
             else if (tupletType == "stop") {
                   if (tuplet) {
                         cr->setTuplet(tuplet);
-                        tuplet->add(cr);
+                        tuplet->add(cr);  //TODOxxx
                         tuplet = 0;
                         }
                   else
@@ -3688,7 +3688,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             }
       if (tuplet) {
             cr->setTuplet(tuplet);
-            tuplet->add(cr);
+            tuplet->add(cr);  //TODOxxx
             }
       if (tremolo) {
             qDebug("tremolo=%d tremoloType='%s'\n", tremolo, qPrintable(tremoloType));
