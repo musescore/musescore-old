@@ -1,4 +1,6 @@
-6.dec (lv)
+6.dec (ws)
+      - fix #13697: default page size handling in preferences
+      (lv)
       - copy tuplet change from importgtp.cpp rev 5087
 4.dec (lv)
       - fix MusicXML export of metronome
