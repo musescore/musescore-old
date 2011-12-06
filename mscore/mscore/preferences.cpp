@@ -49,6 +49,19 @@ static const char* appStyleFile;
 static int exportAudioSampleRates[2] = { 44100, 48000 };
 
 //---------------------------------------------------------
+//   paperSizeIndex
+//---------------------------------------------------------
+
+static int paperSizeIndex(const PaperSize* ps)
+      {
+      for (int i = 0; true; ++i) {
+            if (strcmp(paperSizes[i].name, ps->name) == 0)
+                  return i;
+            }
+      return -1;
+      }
+
+//---------------------------------------------------------
 //   PeriodItem
 //---------------------------------------------------------
 
@@ -271,11 +284,11 @@ void Preferences::init()
 #if defined(Q_WS_MAC) || defined(__MINGW32__)
       // use system native file dialogs
       // Qt file dialog is very slow on Windows and Mac
-      nativeDialogs           = true;    
+      nativeDialogs           = true;
 #else
       nativeDialogs           = false;    // don't use system native file dialogs
 #endif
-      
+
       exportAudioSampleRate   = exportAudioSampleRates[0];
 
       profile                 = "default";
@@ -371,11 +384,10 @@ void Preferences::write()
 
       s.setValue("replaceFractions", MScore::replaceFractions);
       s.setValue("replaceCopyrightSymbol", replaceCopyrightSymbol);
-      s.setValue("paperSize",   MScore::paperSize);
-      s.setValue("paperWidth",  MScore::paperWidth);
-      s.setValue("paperHeight", MScore::paperHeight);
-      s.setValue("twosided",    MScore::twosided);
-      s.setValue("spatium",     MScore::spatium);
+      s.setValue("paperWidth",  MScore::defaultStyle()->pageFormat()->width());
+      s.setValue("paperHeight", MScore::defaultStyle()->pageFormat()->height());
+      s.setValue("twosided",    MScore::defaultStyle()->pageFormat()->twosided());
+      s.setValue("spatium",     MScore::defaultStyle()->spatium() / DPI);
 
       s.setValue("mag", mag);
       s.setValue("tuning", tuning);
@@ -445,14 +457,14 @@ void Preferences::read()
       {
       QSettings s;
 
-      bgUseColor      = s.value("bgUseColor", bgUseColor).toBool();
-      fgUseColor      = s.value("fgUseColor", fgUseColor).toBool();
-      bgWallpaper     = s.value("bgWallpaper", bgWallpaper).toString();
-      fgWallpaper     = s.value("fgWallpaper", fgWallpaper).toString();
-      fgColor         = s.value("fgColor", fgColor).value<QColor>();
-      MScore::bgColor = s.value("bgColor", MScore::bgColor).value<QColor>();
-      iconHeight      = s.value("iconHeight", iconHeight).toInt();
-      iconWidth       = s.value("iconWidth", iconWidth).toInt();
+      bgUseColor              = s.value("bgUseColor", bgUseColor).toBool();
+      fgUseColor              = s.value("fgUseColor", fgUseColor).toBool();
+      bgWallpaper             = s.value("bgWallpaper", bgWallpaper).toString();
+      fgWallpaper             = s.value("fgWallpaper", fgWallpaper).toString();
+      fgColor                 = s.value("fgColor", fgColor).value<QColor>();
+      MScore::bgColor         = s.value("bgColor", MScore::bgColor).value<QColor>();
+      iconHeight              = s.value("iconHeight", iconHeight).toInt();
+      iconWidth               = s.value("iconWidth", iconWidth).toInt();
 
       MScore::selectColor[0]  = s.value("selectColor1", MScore::selectColor[0]).value<QColor>();
       MScore::selectColor[1]  = s.value("selectColor2", MScore::selectColor[1]).value<QColor>();
@@ -462,12 +474,12 @@ void Preferences::read()
       MScore::defaultColor    = s.value("defaultColor", MScore::defaultColor).value<QColor>();
       MScore::dropColor       = s.value("dropColor",    MScore::dropColor).value<QColor>();
 
-      enableMidiInput = s.value("enableMidiInput", enableMidiInput).toBool();
-      playNotes       = s.value("playNotes", playNotes).toBool();
-      lPort           = s.value("lPort", lPort).toString();
-      rPort           = s.value("rPort", rPort).toString();
+      enableMidiInput         = s.value("enableMidiInput", enableMidiInput).toBool();
+      playNotes               = s.value("playNotes", playNotes).toBool();
+      lPort                   = s.value("lPort", lPort).toString();
+      rPort                   = s.value("rPort", rPort).toString();
 
-      MScore::soundFont       = s.value("soundFont", MScore::soundFont).toString();
+      MScore::soundFont = s.value("soundFont", MScore::soundFont).toString();
       if (MScore::soundFont == ":/data/piano1.sf2") {
             // silently change to new default sound font
             MScore::soundFont = MScore::globalShare() + "sound/TimGM6mb.sf2";
@@ -521,11 +533,14 @@ void Preferences::read()
 
       MScore::replaceFractions = s.value("replaceFractions", MScore::replaceFractions).toBool();
       replaceCopyrightSymbol = s.value("replaceCopyrightSymbol", replaceCopyrightSymbol).toBool();
-      MScore::paperSize      = QPrinter::PageSize(s.value("paperSize", MScore::paperSize).toInt());
-      MScore::paperWidth     = s.value("paperWidth", MScore::paperWidth).toDouble();
-      MScore::paperHeight    = s.value("paperHeight", MScore::paperWidth).toDouble();
-      MScore::twosided       = s.value("twosided", MScore::twosided).toBool();
-      MScore::spatium        = s.value("spatium", MScore::spatium).toDouble();
+
+      PageFormat pf(*MScore::defaultStyle()->pageFormat());
+      pf.setSize(QSizeF(s.value("paperWidth", 210.0/INCH).toDouble(),
+         s.value("paperHeight", 297.0/INCH).toDouble()));
+      pf.setTwosided(s.value("twosided", true).toBool());
+      MScore::defaultStyle()->setPageFormat(pf);
+      MScore::defaultStyle()->setSpatium(s.value("spatium", MScore::spatium).toDouble() * DPI);
+
       mag                    = s.value("mag", mag).toDouble();
 
       tuning                 = s.value("tuning", tuning).toDouble();
@@ -560,16 +575,16 @@ void Preferences::read()
             appStyleFile = ":/data/appstyle.css";
             globalStyle  = STYLE_NATIVE;
             }
-      
+
       singlePalette    = s.value("singlePalette",    singlePalette).toBool();
-      
+
       myScoresPath     = s.value("myScoresPath",     myScoresPath).toString();
       myStylesPath     = s.value("myStylesPath",     myStylesPath).toString();
       myImagesPath     = s.value("myImagesPath",     myImagesPath).toString();
       myTemplatesPath  = s.value("myTemplatesPath",  myTemplatesPath).toString();
       myPluginsPath    = s.value("myPluginsPath",    myPluginsPath).toString();
       mySoundFontsPath = s.value("mySoundFontsPath", mySoundFontsPath).toString();
-      
+
       //Create directories if they are missing
       QDir dir;
       dir.mkpath(myScoresPath);
@@ -814,6 +829,9 @@ void PreferenceDialog::updateRemote()
 
 void PreferenceDialog::updateValues(Preferences* p)
       {
+//      foreach(QObject* o, children())
+//            o->blockSignals(true);
+
       rcGroup->setChecked(p->useMidiRemote);
       fgWallpaper->setText(p->fgWallpaper);
       bgWallpaper->setText(p->bgWallpaper);
@@ -987,29 +1005,29 @@ void PreferenceDialog::updateValues(Preferences* p)
       //
       bool mm = true;
       const char* suffix = mm ? "mm" : "in";
-      pageGroup->setCurrentIndex(MScore::paperSize);
       paperWidth->setSuffix(suffix);
       paperHeight->setSuffix(suffix);
+
       paperWidth->blockSignals(true);
       paperHeight->blockSignals(true);
 
-      double pw = MScore::paperWidth;
-      double ph = MScore::paperHeight;
-      if (MScore::paperSize != QPrinter::Custom) {
-            pw = paperSizes[MScore::paperSize].w;
-            ph = paperSizes[MScore::paperSize].h;
-            }
+      double pw = MScore::defaultStyle()->pageFormat()->width();
+      double ph = MScore::defaultStyle()->pageFormat()->height();
+
+      const PaperSize* ps = getPaperSize(pw, ph);
+
+      pageGroup->setCurrentIndex(paperSizeIndex(ps));
+
       paperWidth->setValue(pw * INCH);
       paperHeight->setValue(ph * INCH);
+      landscape->setChecked(pw > ph);
 
       paperWidth->blockSignals(false);
       paperHeight->blockSignals(false);
 
-      twosided->setChecked(MScore::twosided);
-      spatiumEntry->setValue(MScore::spatium * INCH);
+      twosided->setChecked(MScore::defaultStyle()->pageFormat()->twosided());
+      spatiumEntry->setValue(MScore::defaultStyle()->spatium() / DPMM);
       scale->setValue(p->mag);
-
-      landscape->setChecked(pw > ph);
 
       defaultPlayDuration->setValue(MScore::defaultPlayDuration);
       importStyleFile->setText(p->importStyleFile);
@@ -1073,6 +1091,9 @@ void PreferenceDialog::updateValues(Preferences* p)
             pluginTable->setItem(i, 0, item);
             }
       sfChanged = false;
+
+//      foreach(QObject* o, children())
+//            o->blockSignals(false);
       }
 
 //---------------------------------------------------------
@@ -1468,12 +1489,13 @@ void PreferenceDialog::apply()
 
       bool mmUnit = true;
       double f  = mmUnit ? 1.0/INCH : 1.0;
-      MScore::twosided    = twosided->isChecked();
-      MScore::spatium     = spatiumEntry->value() / INCH;
+      PageFormat pf(*MScore::defaultStyle()->pageFormat());
+      pf.setTwosided(twosided->isChecked());
+
+      MScore::defaultStyle()->setSpatium(spatiumEntry->value() * DPMM);
       preferences.mag         = scale->value();
-      MScore::paperSize   = QPrinter::PageSize(pageGroup->currentIndex());
-      MScore::paperHeight = paperHeight->value() * f;
-      MScore::paperWidth  = paperWidth->value()  * f;
+      pf.setSize(QSizeF(paperHeight->value() * f,  paperWidth->value()  * f));
+      MScore::defaultStyle()->setPageFormat(pf);
 
       MScore::defaultPlayDuration = defaultPlayDuration->value();
 
@@ -1540,6 +1562,12 @@ void PreferenceDialog::resetAllValues()
       Preferences prefs;
       prefs.init();
 
+      PageFormat pf(*MScore::defaultStyle()->pageFormat());
+      pf.setSize(QSizeF(210.0/INCH, 297.0/INCH));
+      pf.setTwosided(true);
+      MScore::defaultStyle()->setPageFormat(pf);
+      MScore::defaultStyle()->setSpatium(MScore::spatium);
+
       updateValues(&prefs);
 
       shortcutsChanged = true;
@@ -1560,7 +1588,12 @@ void PreferenceDialog::resetAllValues()
 
 void PreferenceDialog::paperSizeChanged(double)
       {
-      pageGroup->setCurrentIndex(0);
+      for (int i = 0; true; ++i) {
+            if (strcmp(paperSizes[i].name, "Custom") == 0) {
+                  pageGroup->setCurrentIndex(i);
+                  break;
+                  }
+            }
       }
 
 //---------------------------------------------------------

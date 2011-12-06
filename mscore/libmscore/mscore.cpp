@@ -32,10 +32,11 @@ QColor  MScore::bgColor;
 QColor  MScore::dropColor;
 bool    MScore::warnPitchRange;
 
-QPrinter::PageSize MScore::paperSize;
-qreal   MScore::paperWidth;
-qreal   MScore::paperHeight;
-bool    MScore::twosided;
+// QPrinter::PageSize MScore::paperSize;
+// qreal   MScore::paperWidth;
+// qreal   MScore::paperHeight;
+// bool    MScore::twosided;
+
 bool    MScore::replaceFractions;
 bool    MScore::playRepeats;
 bool    MScore::panPlayback;
@@ -92,10 +93,10 @@ void MScore::init()
       nudgeStep           = .1;       // in spatium units (default 0.1)
       defaultPlayDuration = 300;      // ms
       warnPitchRange      = true;
-      paperSize           = QPrinter::A4;     // default paper size
-      paperWidth          = (210 / INCH);
-      paperHeight         = (297 / INCH);
-      twosided            = true;
+//      paperSize           = QPrinter::A4;     // default paper size
+//      paperWidth          = (210 / INCH);
+//      paperHeight         = (297 / INCH);
+//      twosided            = true;
       replaceFractions    = true;
       partStyle           = "";
       layoutBreakColor    = Qt::green;

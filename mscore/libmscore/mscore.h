@@ -558,8 +558,8 @@ class Sequencer;
 //---------------------------------------------------------
 
 class MScore {
-      static MStyle* _defaultStyle;
-      static MStyle* _baseStyle;
+      static MStyle* _defaultStyle;       // default modified by preferences
+      static MStyle* _baseStyle;          // buildin initial style
       static QString _globalShare;
       static int _hRaster, _vRaster;
 
@@ -579,10 +579,7 @@ class MScore {
       static QColor layoutBreakColor;
       static QColor bgColor;
       static bool warnPitchRange;
-      static QPrinter::PageSize paperSize;
-      static qreal paperWidth;
-      static qreal paperHeight;
-      static bool twosided;
+
       static bool replaceFractions;
       static bool playRepeats;
       static bool panPlayback;

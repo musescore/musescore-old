@@ -398,7 +398,7 @@ void Page::scanElements(void* data, void (*func)(void*, Element*), bool all)
 
 PageFormat::PageFormat()
       {
-      _size             = QSizeF(MScore::paperWidth, MScore::paperHeight);
+      _size             = QSizeF(210.0/INCH, 297.0/INCH); // A4
       _evenLeftMargin   = 10.0 / INCH;
       _oddLeftMargin    = 10.0 / INCH;
       _printableWidth   = _size.width() - 20.0 / INCH;
@@ -406,7 +406,7 @@ PageFormat::PageFormat()
       _evenBottomMargin = 20.0 / INCH;
       _oddTopMargin     = 10.0 / INCH;
       _oddBottomMargin  = 20.0 / INCH;
-      _twosided         = MScore::twosided;
+      _twosided         = true;
       }
 
 //---------------------------------------------------------
