@@ -364,6 +364,8 @@ void MuseScore::newFile()
       int pickupTimesigZ, pickupTimesigN;
       int measures       = newWizard->measures();
       Fraction timesig   = newWizard->timesig();
+      int timesigType    = newWizard->timesigType();
+
       bool pickupMeasure = newWizard->pickupMeasure(&pickupTimesigZ, &pickupTimesigN);
       if (pickupMeasure)
             measures += 1;
@@ -466,6 +468,7 @@ void MuseScore::newFile()
                         if (!staff->useTablature()) {
                               TimeSig* ts = new TimeSig(score);
                               ts->setSig(timesig);
+                              ts->setSubtype(timesigType);
                               ts->setTrack(staffIdx * VOICES);
                               Segment* s = measure->getSegment(ts, 0);
                               s->add(ts);

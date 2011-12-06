@@ -66,11 +66,16 @@ class InstrumentWizard : public QWidget, private Ui::InstrumentWizard {
 class TimesigWizard : public QWidget, private Ui::TimesigWizard {
       Q_OBJECT
 
+   private slots:
+      void commonTimeToggled(bool);
+      void cutTimeToggled(bool);
+
    public:
       TimesigWizard(QWidget* parent = 0);
       int measures() const;
       Fraction timesig() const;
       bool pickup(int* z, int* n) const;
+      int type() const;
       };
 
 //---------------------------------------------------------
@@ -137,6 +142,7 @@ class NewWizardPage3 : public QWizardPage {
       int measures() const                     { return w->measures();   }
       Fraction timesig() const                 { return w->timesig();    }
       bool pickupMeasure(int* z, int* n) const { return w->pickup(z, n); }
+      int timesigType() const                  { return w->type();       }
       };
 
 //---------------------------------------------------------
@@ -213,6 +219,7 @@ class NewWizard : public QWizard {
       QString copyright() const          { return p1->copyright();   }
       KeySigEvent keysig() const          { return p5->keysig();      }
       bool pickupMeasure(int* z, int* n) const { return p3->pickupMeasure(z, n); }
+      int timesigType() const             { return p3->timesigType();       }
       double tempo() const                { return p5->tempo(); }
       bool createTempo() const            { return p5->createTempo(); }
       };

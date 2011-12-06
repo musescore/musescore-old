@@ -34,6 +34,7 @@
 #include "libmscore/measure.h"
 #include "libmscore/tablature.h"
 #include "libmscore/stafftype.h"
+#include "libmscore/timesig.h"
 
 extern Palette* newKeySigPalette();
 
@@ -399,6 +400,8 @@ TimesigWizard::TimesigWizard(QWidget* parent)
    : QWidget(parent)
       {
       setupUi(this);
+      connect(tsCommonTime, SIGNAL(toggled(bool)), SLOT(commonTimeToggled(bool)));
+      connect(tsCutTime,    SIGNAL(toggled(bool)), SLOT(cutTimeToggled(bool)));
       }
 
 //---------------------------------------------------------
@@ -428,6 +431,43 @@ bool TimesigWizard::pickup(int* z, int* n) const
       *z = pickupTimesigZ->value();
       *n = pickupTimesigN->value();
       return pickupMeasure->isChecked();
+      }
+
+//---------------------------------------------------------
+//   type
+//---------------------------------------------------------
+
+int TimesigWizard::type() const
+      {
+      if (tsFraction->isChecked())
+            return TSIG_NORMAL;
+      if (tsCommonTime->isChecked())
+            return TSIG_FOUR_FOUR;
+      return TSIG_ALLA_BREVE;
+      }
+
+//---------------------------------------------------------
+//   commonTimeToggled
+//---------------------------------------------------------
+
+void TimesigWizard::commonTimeToggled(bool val)
+      {
+      if (val) {
+            timesigZ->setValue(4);
+            timesigN->setValue(4);
+            }
+      }
+
+//---------------------------------------------------------
+//   cutTimeToggled
+//---------------------------------------------------------
+
+void TimesigWizard::cutTimeToggled(bool val)
+      {
+      if (val) {
+            timesigZ->setValue(2);
+            timesigN->setValue(2);
+            }
       }
 
 //---------------------------------------------------------
