@@ -79,6 +79,7 @@ class CapVoice;
 class Inspector;
 class NScrollArea;
 class EditTools;
+class Sym;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -589,6 +590,7 @@ extern QAction* getAction(const char*);
 extern QMap<QString, Shortcut*> shortcuts;
 extern Shortcut* midiActionMap[128];
 extern void setMscoreLocale(QString localeName);
+extern QPixmap sym2pixmap(const Sym* s, qreal mag);
 
 #endif
 

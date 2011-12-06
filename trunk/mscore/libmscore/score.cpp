@@ -320,9 +320,9 @@ Score::Score(const MStyle* s)
    : _selection(this)
       {
       init();
-      _tempomap  = new TempoMap;
-      _sigmap    = new TimeSigMap();
-      _style = *s;
+      _tempomap = new TempoMap;
+      _sigmap   = new TimeSigMap();
+      _style    = *s;
       }
 
 //
@@ -338,9 +338,9 @@ Score::Score(Score* parent)
    : _selection(this)
       {
       init();
-      _parentScore    = parent;
-      _undo           = 0;
-      _repeatList     = 0;
+      _parentScore = parent;
+      _undo        = 0;
+      _repeatList  = 0;
 
       _style = *parent->style();
       if (!MScore::partStyle.isEmpty()) {
@@ -348,7 +348,7 @@ Score::Score(Score* parent)
             if (f.open(QIODevice::ReadOnly))
                   _style.load(&f);
             }
-      _syntiState     = parent->_syntiState;
+      _syntiState = parent->_syntiState;
       }
 
 //---------------------------------------------------------

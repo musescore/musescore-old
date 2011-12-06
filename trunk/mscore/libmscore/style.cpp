@@ -502,7 +502,7 @@ StyleData::StyleData()
 
 // _textStyles.append(TextStyle(defaultTextStyles[i]));
       _chordList = 0;
-      _spatium = MScore::spatium * DPI;
+      _spatium = SPATIUM20 * DPI;
       _articulationAnchor[Articulation_Fermata]         = A_TOP_STAFF;
       _articulationAnchor[Articulation_Shortfermata]    = A_TOP_STAFF;
       _articulationAnchor[Articulation_Longfermata]     = A_TOP_STAFF;
@@ -705,7 +705,7 @@ QFont TextStyleData::fontPx(qreal _spatium) const
       f.setBold(bold);
       f.setItalic(italic);
       f.setUnderline(underline);
-#ifdef USE_GLYPHS      
+#ifdef USE_GLYPHS
       f.setHintingPreference(QFont::PreferVerticalHinting);
 #endif
       if (sizeIsSpatiumDependent)
