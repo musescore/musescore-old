@@ -35,6 +35,7 @@
 #include "libmscore/tablature.h"
 #include "libmscore/stafftype.h"
 #include "libmscore/timesig.h"
+#include "libmscore/sym.h"
 
 extern Palette* newKeySigPalette();
 
@@ -400,6 +401,12 @@ TimesigWizard::TimesigWizard(QWidget* parent)
    : QWidget(parent)
       {
       setupUi(this);
+      QPixmap ct = sym2pixmap(&symbols[0][fourfourmeterSym], 3.0);
+      tsCommonTime->setIcon(QIcon(ct));
+      tsCommonTime->setText(QString());
+      ct = sym2pixmap(&symbols[0][allabreveSym], 3.0);
+      tsCutTime->setIcon(QIcon(ct));
+      tsCutTime->setText(QString());
       connect(tsCommonTime, SIGNAL(toggled(bool)), SLOT(commonTimeToggled(bool)));
       connect(tsCutTime,    SIGNAL(toggled(bool)), SLOT(cutTimeToggled(bool)));
       }

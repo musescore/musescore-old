@@ -26,8 +26,8 @@ class QPainter;
 
 enum {
       TSIG_NORMAL,            // use sz/sn text
-      TSIG_FOUR_FOUR,
-      TSIG_ALLA_BREVE
+      TSIG_FOUR_FOUR,         // common time
+      TSIG_ALLA_BREVE         // cut time
       };
 
 //---------------------------------------------------------

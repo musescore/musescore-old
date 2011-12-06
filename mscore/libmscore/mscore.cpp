@@ -32,11 +32,6 @@ QColor  MScore::bgColor;
 QColor  MScore::dropColor;
 bool    MScore::warnPitchRange;
 
-// QPrinter::PageSize MScore::paperSize;
-// qreal   MScore::paperWidth;
-// qreal   MScore::paperHeight;
-// bool    MScore::twosided;
-
 bool    MScore::replaceFractions;
 bool    MScore::playRepeats;
 bool    MScore::panPlayback;
@@ -44,7 +39,7 @@ qreal   MScore::nudgeStep;
 int     MScore::defaultPlayDuration;
 QString MScore::partStyle;
 QString MScore::soundFont;
-qreal   MScore::spatium;
+// qreal   MScore::spatium;            // in inch
 QString MScore::lastError;
 bool    MScore::layoutDebug = false;
 int     MScore::division = 480;
@@ -64,7 +59,7 @@ extern void initDrumset();
 
 void MScore::init()
       {
-      spatium = SPATIUM20;
+//      spatium = SPATIUM20;
 
 #ifdef __MINGW32__
       QDir dir(QCoreApplication::applicationDirPath() + QString("/../" INSTALL_NAME));
@@ -93,10 +88,6 @@ void MScore::init()
       nudgeStep           = .1;       // in spatium units (default 0.1)
       defaultPlayDuration = 300;      // ms
       warnPitchRange      = true;
-//      paperSize           = QPrinter::A4;     // default paper size
-//      paperWidth          = (210 / INCH);
-//      paperHeight         = (297 / INCH);
-//      twosided            = true;
       replaceFractions    = true;
       partStyle           = "";
       layoutBreakColor    = Qt::green;

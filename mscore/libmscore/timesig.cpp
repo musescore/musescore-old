@@ -255,7 +255,7 @@ void TimeSig::layout()
       pn = QPointF(0.0, 0.0);
 
       int st            = subtype();
-      qreal lineDist   = 1.0;            // assume dimensions a standard staff
+      qreal lineDist    = 1.0;            // assume dimensions a standard staff
       int    numOfLines = 5;
       if (staff()) {
             StaffType* staffType = staff()->staffType();
