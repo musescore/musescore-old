@@ -1,3 +1,6 @@
+7.dec (ws)
+      - change MuseScore logo in help box
+      - center hyphen beween lyric syllables
 6.dec (ws)
       - add cut time/common time symbols to new wizard
       - fix #13697: default page size handling in preferences

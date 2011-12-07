@@ -1093,27 +1093,25 @@ void Score::cmdFlip()
             selectNoteSlurMessage();
             return;
             }
-      foreach(Element* e, el) {
+      foreach (Element* e, el) {
             if (e->type() == NOTE) {
                   Chord* chord = static_cast<Note*>(e)->chord();
                   if (chord->beam())
-                        undo()->push(new FlipBeamDirection(chord->beam()));
+                        e = chord->beam();  // fall trough
                   else {
-                        Direction dir = chord->stemDirection();
-                        if (dir == AUTO)
-                              dir = chord->up() ? DOWN : UP;
-                        else
-                              dir = dir == UP ? DOWN : UP;
+                        Direction dir = chord->up() ? DOWN : UP;
                         undo()->push(new ChangeProperty(chord, P_STEM_DIRECTION, dir));
                         }
                   }
+            if (e->type() == BEAM) {
+                  Beam* beam = static_cast<Beam*>(e);
+                  Direction dir = beam->isUp() ? DOWN : UP;
+                  undo()->push(new ChangeProperty(beam, P_BEAM_DIRECTION, dir));
+                  }
             else if (e->type() == SLUR_SEGMENT) {
                   SlurTie* slur = static_cast<SlurSegment*>(e)->slurTie();
-                  undo()->push(new FlipSlurDirection(slur));
-                  }
-            else if (e->type() == BEAM) {
-                  Beam* beam = static_cast<Beam*>(e);
-                  undo()->push(new FlipBeamDirection(beam));
+                  Direction dir = slur->up() ? DOWN : UP;
+                  undo()->push(new ChangeProperty(slur, P_SLUR_DIRECTION, dir));
                   }
             else if (e->type() == HAIRPIN_SEGMENT)
                   undoChangeSubtype(e, e->subtype() == 0 ? 1 : 0);
@@ -1133,13 +1131,7 @@ void Score::cmdFlip()
                               undo()->push(new ChangeProperty(a, P_ARTICULATION_ANCHOR, aa));
                         }
                   else {
-                        Direction d = a->direction();
-                        if (d == AUTO)
-                              d = a->up() ? DOWN : UP;
-                        else if (d == UP)
-                              d = DOWN;
-                        else
-                              d = UP;
+                        Direction d = a->up() ? DOWN : UP;
                         undo()->push(new ChangeProperty(a, P_DIRECTION, d));
                         }
                   return;   // no layoutAll

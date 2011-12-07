@@ -39,7 +39,6 @@ qreal   MScore::nudgeStep;
 int     MScore::defaultPlayDuration;
 QString MScore::partStyle;
 QString MScore::soundFont;
-// qreal   MScore::spatium;            // in inch
 QString MScore::lastError;
 bool    MScore::layoutDebug = false;
 int     MScore::division = 480;
@@ -59,8 +58,6 @@ extern void initDrumset();
 
 void MScore::init()
       {
-//      spatium = SPATIUM20;
-
 #ifdef __MINGW32__
       QDir dir(QCoreApplication::applicationDirPath() + QString("/../" INSTALL_NAME));
       _globalShare = dir.absolutePath() + "/";
