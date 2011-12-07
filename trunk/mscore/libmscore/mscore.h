@@ -590,7 +590,6 @@ class MScore {
       static QString lastError;
       static bool layoutDebug;
 
-//      static qreal spatium;         // in inch
       static int division;
       static int sampleRate;
       static bool debugMsg;

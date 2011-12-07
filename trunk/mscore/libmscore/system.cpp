@@ -783,6 +783,7 @@ MeasureBase* System::nextMeasure(const MeasureBase* m) const
 
 //---------------------------------------------------------
 //   layoutLyrics
+//    layout lyrics separator
 //---------------------------------------------------------
 
 void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
@@ -794,7 +795,7 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
       qreal _spatium = spatium();
 
       const TextStyle& ts = score()->textStyle(l->textStyle());
-      qreal lmag = qreal(ts.size()) / 11.0;
+      qreal lmag          = qreal(ts.size()) / 11.0;
 
       if (l->ticks()) {
             Segment* seg = score()->tick2segment(l->endTick());
@@ -805,10 +806,10 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
 
             QList<Line*>* sl = l->separatorList();
             QList<System*>* systems = score()->systems();
-            System* s1 = this;
-            System* s2 = seg->measure()->system();
-            int sysIdx1  = systems->indexOf(s1);
-            int sysIdx2  = systems->indexOf(s2);
+            System* s1  = this;
+            System* s2  = seg->measure()->system();
+            int sysIdx1 = systems->indexOf(s1);
+            int sysIdx2 = systems->indexOf(s2);
 
             qreal lw = l->bbox().right();            // lyrics width
             QPointF p1(lw, l->baseLine());
@@ -885,22 +886,19 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
                   line = (*sl)[0];
                   }
             QRectF b = l->bbox();
-            qreal w  = b.width();
-            qreal h  = b.height();
-            qreal x  = b.x() + w;
-            qreal y  = b.y() + h * .58;
-            line->setPos(QPointF(x, y));
+            qreal x  = b.right();
+            qreal y  = b.y() + b.height() * .58;
 
-            qreal x1 = l->pagePos().x();
-            qreal x2 = nl->pagePos().x();
+            qreal x1 = x + l->pagePos().x();
+            qreal x2 = nl->bbox().left() + nl->pagePos().x();
             qreal len;
             if (x2 < x1 || s->measure()->system()->page() != ns->measure()->system()->page()) {
                   System* system = s->measure()->system();
                   x2 = system->pagePos().x() + system->bbox().width();
                   }
 
-            qreal gap = x2 - x1 - w;
-            len        = gap;
+            qreal gap = x2 - x1;
+            len       = gap;
             if (len > maxl)
                   len = maxl;
             qreal xo = (gap - len) * .5;

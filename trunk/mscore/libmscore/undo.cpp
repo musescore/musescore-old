@@ -1540,34 +1540,6 @@ void ChangePitch::flip()
       }
 
 //---------------------------------------------------------
-//   FlipSlurDirection
-//---------------------------------------------------------
-
-FlipSlurDirection::FlipSlurDirection(SlurTie* s)
-      {
-      slur = s;
-      }
-
-void FlipSlurDirection::flip()
-      {
-      slur->setSlurDirection(slur->up() ? DOWN : UP);
-      }
-
-//---------------------------------------------------------
-//   FlipBeamDirection
-//---------------------------------------------------------
-
-FlipBeamDirection::FlipBeamDirection(Beam* b)
-      {
-      beam = b;
-      }
-
-void FlipBeamDirection::flip()
-      {
-      beam->setBeamDirection(beam->isUp() ? DOWN : UP);
-      }
-
-//---------------------------------------------------------
 //   FlipTupletDirection
 //---------------------------------------------------------
 

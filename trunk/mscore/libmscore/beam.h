@@ -117,6 +117,8 @@ class Beam : public Element {
       bool isUp() const                   { return _up; }
 
       void setBeamDirection(Direction d);
+      Direction beamDirection() const { return _direction; }
+
       virtual QPainterPath shape() const;
       virtual bool contains(const QPointF& p) const;
       virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
@@ -126,6 +128,9 @@ class Beam : public Element {
       qreal grow2() const      { return _grow2; }
       void setGrow1(qreal val) { _grow1 = val; }
       void setGrow2(qreal val) { _grow2 = val; }
+
+      QVariant getProperty(int propertyId) const;
+      void setProperty(int propertyId, const QVariant&);
       };
 
 extern bool endBeam(const Fraction&, ChordRest* cr, ChordRest* prevCr);

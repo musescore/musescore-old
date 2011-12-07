@@ -1375,4 +1375,30 @@ Element* Beam::drop(const DropData& data)
       return 0;
       }
 
+//---------------------------------------------------------
+//   getProperty
+//---------------------------------------------------------
+
+QVariant Beam::getProperty(int propertyId) const
+      {
+      switch(propertyId) {
+            case P_BEAM_DIRECTION: return beamDirection();
+            default:
+                  return Element::getProperty(propertyId);
+            }
+      }
+
+//---------------------------------------------------------
+//   setProperty
+//---------------------------------------------------------
+
+void Beam::setProperty(int propertyId, const QVariant& v)
+      {
+      switch(propertyId) {
+            case P_BEAM_DIRECTION: setBeamDirection(Direction(v.toInt())); break;
+            default:
+                  Element::setProperty(propertyId, v);
+            }
+      }
+
 

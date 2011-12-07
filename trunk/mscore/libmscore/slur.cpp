@@ -876,7 +876,8 @@ void SlurTie::toDefault()
 QVariant SlurTie::getProperty(int propertyId) const
       {
       switch(propertyId) {
-            case P_LINE_TYPE: return lineType();
+            case P_LINE_TYPE:      return lineType();
+            case P_SLUR_DIRECTION: return slurDirection();
             default:
                   return Spanner::getProperty(propertyId);
             }
@@ -889,7 +890,8 @@ QVariant SlurTie::getProperty(int propertyId) const
 void SlurTie::setProperty(int propertyId, const QVariant& v)
       {
       switch(propertyId) {
-            case P_LINE_TYPE: setLineType(v.toInt()); break;
+            case P_LINE_TYPE:      setLineType(v.toInt()); break;
+            case P_SLUR_DIRECTION: setSlurDirection(Direction(v.toInt())); break;
             default:
                   Spanner::setProperty(propertyId, v);
             }

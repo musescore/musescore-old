@@ -321,36 +321,6 @@ class ChangePitch : public UndoCommand {
       };
 
 //---------------------------------------------------------
-//   FlipSlurDirection
-//---------------------------------------------------------
-
-class FlipSlurDirection : public UndoCommand {
-      SlurTie* slur;
-      void flip();
-
-   public:
-      FlipSlurDirection(SlurTie*);
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      UNDO_NAME("FlipSlurDirection");
-      };
-
-//---------------------------------------------------------
-//   FlipBeamDirection
-//---------------------------------------------------------
-
-class FlipBeamDirection : public UndoCommand {
-      Beam* beam;
-      void flip();
-
-   public:
-      FlipBeamDirection(Beam*);
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      UNDO_NAME("FlipBeamDirection");
-      };
-
-//---------------------------------------------------------
 //   ChangeKeySig
 //---------------------------------------------------------
 
