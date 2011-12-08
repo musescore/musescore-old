@@ -12,7 +12,7 @@
       <file>data/reload.png</file>
       <file>data/tab_remove.png</file>
       <file>data/table.svg</file>
-      
+
       <file alias="fonts/mscore20.xml">../fonts/mscore20.xml</file>
       <file alias="fonts/gonville.xml">../fonts/gonville.xml</file>
 
@@ -25,7 +25,7 @@
       <file>data/bg1.jpg</file>
       <file>data/cancel.png</file>
       <file>revision.h</file>
-      <file>data/musescore_logo_full.png</file>
+      <file>data/musescore_logo_full1.png</file>
       <file alias="data/appstyle-dark.css">../share/styles/appstyle-mac-dark.css</file>
 
       <file>data/greendot.svg</file>
