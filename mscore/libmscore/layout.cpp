@@ -161,13 +161,13 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
       int lastHeadType  = -1;
 
       for (int idx = startIdx; idx != endIdx; idx += incIdx) {
-            Note* note   = notes[idx];
-            Chord* chord = note->chord();
-            int move     = chord->staffMove();
-            int line     = note->line();
-            int ticks    = chord->actualTicks();
+            Note* note    = notes[idx];
+            Chord* chord  = note->chord();
+            int move      = chord->staffMove();
+            int line      = note->line();
+            int ticks     = chord->actualTicks();
             int headGroup = note->headGroup();
-            int headType     =  (note->headType() == HEAD_AUTO) ? note->chord()->durationType().headType() : note->headType() - 1;
+            int headType  =  (note->headType() == HEAD_AUTO) ? note->chord()->durationType().headType() : note->headType() - 1;
 
             bool conflict = (qAbs(ll - line) < 2) && (move1 == move);
             bool sameHead = (ll == line) && (headGroup == lastHeadGroup) && (headType == lastHeadType);
@@ -234,7 +234,6 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
 
       qreal dotPosX  = 0.0;
       int nNotes = notes.size();
-      qreal headWidth = notes[0]->headWidth();
       for (int i = nNotes-1; i >= 0; --i) {
             Note* note     = notes[i];
             Accidental* ac = note->accidental();
@@ -246,7 +245,7 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
                   acel.x    = 0.0;
                   aclist.append(acel);
                   }
-            qreal xx = note->pos().x() + headWidth;
+            qreal xx = note->pos().x() + note->headWidth();
             if (xx > dotPosX)
                   dotPosX = xx;
             }
@@ -1605,7 +1604,17 @@ QList<System*> Score::layoutSystemRow(qreal rowWidth, bool isFirstSystem, bool u
             minWidth += system->leftMargin();
             }
 
-      qreal rest = (raggedRight ? 0.0 : rowWidth - minWidth) / totalWeight;
+      // qreal rest = (raggedRight ? 0.0 : rowWidth - minWidth) / totalWeight;
+      qreal rest = rowWidth - minWidth;
+      // rest = (raggedRight ? 0.0 : rest) / totalWeight;
+      // stretch incomplete row
+      if (raggedRight) {
+            if (minWidth > rest)
+                  rest = rest * .5;
+            else
+                  rest = minWidth;
+            }
+      rest /= totalWeight;
       qreal xx   = 0.0;
       qreal y    = 0.0;
 
