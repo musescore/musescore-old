@@ -1277,6 +1277,69 @@ void MusicXml::initVoiceMapperAndMapVoices(QDomElement e)
       }
 
 //---------------------------------------------------------
+//   fillGap -- fill one gap (tstart - tend) in this track in this measure with rest(s)
+//---------------------------------------------------------
+
+static void fillGap(Measure* measure, int track, int tstart, int tend)
+      {
+      printf("\nfillGIFV     fillGap(measure %p track %d tstart %d tend %d)\n",
+             measure, track, tstart, tend);
+      int len = tstart - tend;
+      Duration d;
+      d.setVal(len);
+      Rest* rest = new Rest(measure->score(), tstart, d);
+      rest->setTrack(track);
+      Segment* s = measure->getSegment(rest);
+      s->add(rest);
+      }
+
+//---------------------------------------------------------
+//   fillGapsInFirstVoices -- fill gaps in first voice of every staff in this measure for this part with rest(s)
+//---------------------------------------------------------
+
+static void fillGapsInFirstVoices(Measure* measure, Part* part)
+      {
+      int measTick     = measure->tick();
+      int measLen      = measure->tickLen();
+      int nextMeasTick = measTick + measLen;
+      int staffIdx = part->score()->staffIdx(part);
+      printf("fillGIFV measure %p part %p idx %d nstaves %d tick %d - %d (len %d)\n",
+             measure, part, staffIdx, part->nstaves(),
+             measTick, nextMeasTick, measLen);
+      for (int st = 0; st < part->nstaves(); ++st) {
+            int track = (staffIdx + st) * VOICES;
+            int endOfLastCR = measTick;
+            for (Segment* s = measure->first(); s; s = s->next()) {
+                  printf("fillGIFV   segment %p tp %s", s, s->subTypeName());
+                  Element* el = s->element(track);
+                  if (el) {
+                        printf(" el[%d] %p", track, el);
+                        if (s->isChordRest()) {
+                              ChordRest* cr  = static_cast<ChordRest*>(el);
+                              int crTick     = cr->tick();
+                              int crLen      = cr->tickLen();
+                              int nextCrTick = crTick + crLen;
+                              printf(" chord/rest tick %d - %d (len %d)",
+                                     crTick, nextCrTick, crLen);
+                              if (crTick > endOfLastCR) {
+                                    printf(" GAP: track %d tick %d - %d",
+                                           track, endOfLastCR, crTick);
+                                    fillGap(measure, track, endOfLastCR, crTick);
+                                    }
+                              endOfLastCR = nextCrTick;
+                              }
+                        }
+                  printf("\n");
+                  }
+            if (nextMeasTick > endOfLastCR) {
+                  printf("fillGIFV   measure end GAP: track %d tick %d - %d\n",
+                         track, endOfLastCR, nextMeasTick);
+                  fillGap(measure, track, endOfLastCR, nextMeasTick);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   xmlPart
 //---------------------------------------------------------
 
@@ -1313,7 +1376,9 @@ void MusicXml::xmlPart(QDomElement e, QString id)
             if (e.tagName() == "measure") {
                   // set the correct start tick for the measure
                   tick = measureStart.at(measureNr);
-                  xmlMeasure(part, e, e.attribute(QString("number")).toInt()-1, measureLength.at(measureNr));
+                  Measure* measure = xmlMeasure(part, e, e.attribute(QString("number")).toInt()-1, measureLength.at(measureNr));
+                  if (measure)
+                        fillGapsInFirstVoices(measure, part);
                   }
             else
                   domError(e);
