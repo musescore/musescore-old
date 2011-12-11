@@ -1282,15 +1282,27 @@ void MusicXml::initVoiceMapperAndMapVoices(QDomElement e)
 
 static void fillGap(Measure* measure, int track, int tstart, int tend)
       {
-      printf("\nfillGIFV     fillGap(measure %p track %d tstart %d tend %d)\n",
-             measure, track, tstart, tend);
-      int len = tstart - tend;
-      Duration d;
-      d.setVal(len);
-      Rest* rest = new Rest(measure->score(), tstart, d);
-      rest->setTrack(track);
-      Segment* s = measure->getSegment(rest);
-      s->add(rest);
+      int ctick = tstart;
+      int restLen = tend - tstart;
+      printf("\nfillGIFV     fillGap(measure %p track %d tstart %d tend %d) restLen %d len",
+             measure, track, tstart, tend, restLen);
+      while (restLen > 0) {
+            int len = restLen;
+            Duration d;
+            if (measure->tickLen() == restLen)
+                  d.setType(Duration::V_MEASURE);
+            else
+                  d.setVal(len);
+            Rest* rest = new Rest(measure->score(), tstart, d);
+            rest->setTrack(track);
+            Segment* s = measure->getSegment(rest);
+            s->add(rest);
+            len = rest->tickLen();
+            printf(" %d", len);
+            ctick   += len;
+            restLen -= len;
+            }
+      printf("\n");
       }
 
 //---------------------------------------------------------
@@ -1622,7 +1634,6 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
       if (lastMeasureLen != measureLen) {
             AL::TimeSigMap* sigmap = score->sigmap();
             int tick        = measure->tick();
-            AL::SigEvent se = sigmap->timesig(tick);
 
             if (measureLen != sigmap->ticksMeasure(tick)) {
                   AL::SigEvent se = sigmap->timesig(tick);
@@ -1817,11 +1828,11 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
       int offset = 0;
       int rstaff = 0;
       QStringList dynamics;
-      int spread = 0;
+      // int spread = 0; // not used
       qreal rx = 0.0;
       qreal ry = 0.0;
       qreal yoffset = 0.0; // actually this is default-y
-      qreal xoffset = 0.0;
+      // qreal xoffset = 0.0; // not used
       bool hasYoffset = false;
       QString dynaVelocity = "";
       QString tempo = "";
@@ -1838,7 +1849,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
       bool pedalLine = false;
       int number = 1;
       QString lineEnd;
-      qreal endLength = 0;
+      // qreal endLength = 0; // not used
       QString lineType;
       QDomElement metrEl;
 
@@ -1849,7 +1860,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         ry      = ee.attribute(QString("relative-y"), "0").toDouble() * -.1;
                         rx      = ee.attribute(QString("relative-x"), "0").toDouble() * .1;
                         yoffset = ee.attribute("default-y").toDouble(&hasYoffset) * -0.1;
-                        xoffset = ee.attribute("default-x", "0.0").toDouble() * 0.1;
+                        // xoffset = ee.attribute("default-x", "0.0").toDouble() * 0.1;
                         if (dirType == "words") {
                               txt        = ee.text();
                               lang       = ee.attribute(QString("xml:lang"), "it");
@@ -1875,7 +1886,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               }
                         else if (dirType == "wedge") {
                               type   = ee.attribute(QString("type"));
-                              spread = ee.attribute(QString("spread"), "0").toInt();
+                              // spread = ee.attribute(QString("spread"), "0").toInt();
                               }
                         else if (dirType == "dashes")
                               domNotImplemented(ee);
@@ -1883,7 +1894,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               type      = ee.attribute(QString("type"));
                               number    = ee.attribute(QString("number"), "1").toInt();
                               lineEnd   = ee.attribute(QString("line-end"), "none");
-                              endLength = ee.attribute(QString("end-length"), "0").toDouble() * 0.1;
+                              // endLength = ee.attribute(QString("end-length"), "0").toDouble() * 0.1;
                               lineType  = ee.attribute(QString("line-type"), "solid");
                               }
                         else if (dirType == "metronome")
@@ -2791,7 +2802,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       qreal rx = 0.0;
       qreal ry = 0.0;
       qreal yoffset = 0.0; // actually this is default-y
-      qreal xoffset = 0.0;
+      // qreal xoffset = 0.0; // not used
       bool hasYoffset = false;
       QColor noteheadColor = QColor::Invalid;
       bool chord = false;
@@ -3071,7 +3082,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               ry        = ee.attribute(QString("relative-y"), "0").toDouble() * -.1;
                               rx        = ee.attribute(QString("relative-x"), "0").toDouble() * .1;
                               yoffset   = ee.attribute("default-y").toDouble(&hasYoffset) * -0.1;
-                              xoffset   = ee.attribute("default-x", "0.0").toDouble() * 0.1;
+                              // xoffset   = ee.attribute("default-x", "0.0").toDouble() * 0.1;
                               QDomElement eee = ee.firstChildElement();
                               if (!eee.isNull()) {
                                     if (eee.tagName() == "other-dynamics")
@@ -3247,11 +3258,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 
       if (rest) {
             // whole measure rests do not have a "type" element
-            int len = ticks;
-            if (durationType.type() == Duration::V_INVALID) {
+            if (durationType.type() == Duration::V_INVALID)
                   durationType.setType(Duration::V_MEASURE);
-                  len = 0;
-                  }
             cr = new Rest(score, tick, durationType);
             cr->setDots(dots);
             if (beamMode == BEAM_BEGIN || beamMode == BEAM_MID)
