@@ -1,5 +1,6 @@
-10.dec (lv)
+11.dec (lv)
       - fix #12445: [MusicXML] Import can produce empty voice 1
+      - fix "variable set but not used" warnings in importxml.cpp
 2.dec (lv)
       - fix #11221: Don't set "Break multi measure rest" when importing from MusicXML
       - fix #13860: MusicXML: support lyrics exported by Sibelius 7
