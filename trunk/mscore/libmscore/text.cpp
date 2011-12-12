@@ -151,7 +151,7 @@ void Text::setHtml(const QString& s)
 
 QString Text::getText() const
       {
-      return _styled ? SimpleText::getText() : _doc->toPlainText();
+      return (_styled && !_editMode) ? SimpleText::getText() : _doc->toPlainText();
       }
 
 //---------------------------------------------------------
