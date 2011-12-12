@@ -1,4 +1,6 @@
 12.dec (ws)
+      - fix #12670: Clef information missing from instrument selection during
+        score creation
       - fix #14043: Common Time and Alla Breve symbols have nominal and
         actual duration of numeral time signature in score creation step
         (regression from #13984)
