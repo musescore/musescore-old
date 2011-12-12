@@ -142,6 +142,7 @@ rwtestAllXml() {
       rwtestXml    musicxml/testDynamics1.xml
       rwtestXml    musicxml/testDynamics2.xml
       rwtestXmlRef musicxml/testDynamics3.xml
+      rwtestXmlRef musicxml/testEmptyVoice1.xml
       rwtestXml    musicxml/testGrace1.xml
       rwtestXml    musicxml/testGrace2.xml
       rwtestXml    musicxml/testHarmony1.xml
