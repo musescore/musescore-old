@@ -150,6 +150,7 @@ class Text : public SimpleText {
       void setStyleName(const QString& v) { _styleName = v;    }
 
       QTextCursor* cursor()               { return _cursor; }
+      QTextDocument* doc() const          { return _doc;    }
       };
 
 #endif

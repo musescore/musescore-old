@@ -79,6 +79,7 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
       virtual void setCursor(const QCursor&)    {}
       virtual QCursor cursor() const            { return QCursor(); }
       virtual QRectF boundingRect() const       { return _boundingRect; }
+      virtual void drawBackground(QPainter*, const QRectF&) const {}
 
    private slots:
       void networkFinished(QNetworkReply*);

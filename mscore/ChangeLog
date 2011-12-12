@@ -1,3 +1,5 @@
+12.dec (ws)
+      - fix #14022: Creating chord name failed
 7.dec (ws)
       - change MuseScore logo in help box
       - center hyphen beween lyric syllables

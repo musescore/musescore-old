@@ -378,20 +378,16 @@ bool Harmony::edit(MuseScoreView* view, int grip, int key, Qt::KeyboardModifiers
       bool rv = Text::edit(view, grip, key, mod, s);
       QString str = getText();
       int root, base;
+      QTextCharFormat tf;
       if (!str.isEmpty() && !parseHarmony(str, &root, &base)) {
-            QTextCharFormat tf;
+            // if text cannot be recognized, then underline with
+            // red squiggle
             tf.setUnderlineStyle(QTextCharFormat::SpellCheckUnderline);
             tf.setUnderlineColor(Qt::red);
-            cursor()->movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
-            cursor()->movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
-            cursor()->setCharFormat(tf);
             }
-      else {
-            QTextCharFormat tf;
-            cursor()->movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
-            cursor()->movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
-            cursor()->setCharFormat(tf);
-            }
+      QTextCursor c(doc());
+      c.select(QTextCursor::Document);
+      c.setCharFormat(tf);
       return rv;
       }
 
@@ -403,6 +399,7 @@ void Harmony::endEdit()
       {
       Text::endEdit();
       setHarmony(getText());
+      layout();
       }
 
 //---------------------------------------------------------
