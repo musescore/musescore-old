@@ -1960,7 +1960,8 @@ void ScoreView::paint(const QRect& r, QPainter& p)
             if (bgPixmap == 0 || bgPixmap->isNull())
                   p.fillRect(r, _bgColor);
             else
-                  p.drawTiledPixmap(r, *bgPixmap, r.topLeft()-QPoint(lrint(xoffset()), lrint(yoffset())));
+                  p.drawTiledPixmap(r, *bgPixmap, r.topLeft() - QPoint(_matrix.m31(), _matrix.m32()));
+//                  p.drawTiledPixmap(r, *bgPixmap, r.topLeft()-QPoint(lrint(xoffset()), lrint(yoffset())));
             }
       p.restore();
       }

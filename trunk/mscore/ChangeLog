@@ -1,4 +1,5 @@
 12.dec (ws)
+      - fix #14036: Background Wallpaper Distortion
       - fix #13982: Different time signatures should be listed vertically during
         score creation
       - fix #13983: Common time and alla breve symbols should be black colour
