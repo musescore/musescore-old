@@ -4421,7 +4421,8 @@ QPixmap sym2pixmap(const Sym* s, qreal mag)
       pm.fill(QColor(0, 0, 0, 0));
       QPainter painter;
       painter.begin(&pm);
-      painter.setPen(Qt::white);
+      QPalette p(mscore->palette());
+      painter.setPen(p.text().color());
       s->draw(&painter, mag, -bb.topLeft() + QPointF(2.0, 2.0));
       painter.end();
       return pm;
