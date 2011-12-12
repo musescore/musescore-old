@@ -409,6 +409,7 @@ TimesigWizard::TimesigWizard(QWidget* parent)
       tsCutTime->setText(QString());
       connect(tsCommonTime, SIGNAL(toggled(bool)), SLOT(commonTimeToggled(bool)));
       connect(tsCutTime,    SIGNAL(toggled(bool)), SLOT(cutTimeToggled(bool)));
+      connect(tsFraction,   SIGNAL(toggled(bool)), SLOT(fractionToggled(bool)));
       }
 
 //---------------------------------------------------------
@@ -460,8 +461,10 @@ int TimesigWizard::type() const
 void TimesigWizard::commonTimeToggled(bool val)
       {
       if (val) {
-            timesigZ->setValue(4);
-            timesigN->setValue(4);
+            // timesigZ->setValue(4);
+            // timesigN->setValue(4);
+            timesigZ->setEnabled(false);
+            timesigN->setEnabled(false);
             }
       }
 
@@ -472,8 +475,22 @@ void TimesigWizard::commonTimeToggled(bool val)
 void TimesigWizard::cutTimeToggled(bool val)
       {
       if (val) {
-            timesigZ->setValue(2);
-            timesigN->setValue(2);
+            // timesigZ->setValue(2);
+            // timesigN->setValue(2);
+            timesigZ->setEnabled(false);
+            timesigN->setEnabled(false);
+            }
+      }
+
+//---------------------------------------------------------
+//   fractionToggled
+//---------------------------------------------------------
+
+void TimesigWizard::fractionToggled(bool val)
+      {
+      if (val) {
+            timesigZ->setEnabled(true);
+            timesigN->setEnabled(true);
             }
       }
 

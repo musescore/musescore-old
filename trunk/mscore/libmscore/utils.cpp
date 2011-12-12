@@ -496,9 +496,8 @@ int searchInterval(int steps, int semitones)
 void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc, Interval interval,
    bool useDoubleSharpsFlats)
       {
-      *rpitch   = pitch + interval.chromatic;
-      *rtpc = transposeTpc(tpc, interval, useDoubleSharpsFlats);
-
+      *rpitch = pitch + interval.chromatic;
+      *rtpc   = transposeTpc(tpc, interval, useDoubleSharpsFlats);
       }
 
 /*!

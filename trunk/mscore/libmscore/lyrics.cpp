@@ -221,11 +221,11 @@ void Lyrics::layout()
                  + sys->staff(staffIdx())->bbox().height();
       qreal x = pos().x();
       //
-      // left align if syllable has a number
+      // left align if syllable has a number or is a melisma
       //
       if (_ticks == 0 && (style().align() & ALIGN_HCENTER) && !_verseNumber)
             x += symbols[score()->symIdx()][quartheadSym].width(magS()) * .5;
-      else if ((style().align() & ALIGN_HCENTER) && _verseNumber)
+      else if (_ticks || ((style().align() & ALIGN_HCENTER) && _verseNumber))
             x += width() * .5;
       setPos(x, y);
       if (_verseNumber) {

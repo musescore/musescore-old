@@ -69,6 +69,7 @@ class TimesigWizard : public QWidget, private Ui::TimesigWizard {
    private slots:
       void commonTimeToggled(bool);
       void cutTimeToggled(bool);
+      void fractionToggled(bool);
 
    public:
       TimesigWizard(QWidget* parent = 0);

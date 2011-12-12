@@ -782,6 +782,33 @@ MeasureBase* System::nextMeasure(const MeasureBase* m) const
       }
 
 //---------------------------------------------------------
+//   searchNextLyrics
+//---------------------------------------------------------
+
+static Lyrics* searchNextLyrics(Segment* s, int staffIdx, int verse)
+      {
+      Lyrics* l = 0;
+      while ((s = s->next1(SegChordRest | SegGrace))) {
+            int strack = staffIdx * VOICES;
+            int etrack = strack + VOICES;
+            QList<Lyrics*>* nll = 0;
+            for (int track = strack; track < etrack; ++track) {
+                  ChordRest* cr = static_cast<ChordRest*>(s->element(track));
+                  if (cr && !cr->lyricsList().isEmpty()) {
+                        nll = &cr->lyricsList();
+                        break;
+                        }
+                  }
+            if (!nll)
+                  continue;
+            l = nll->value(verse);
+            if (l)
+                  break;
+            }
+      return l;
+      }
+
+//---------------------------------------------------------
 //   layoutLyrics
 //    layout lyrics separator
 //---------------------------------------------------------
@@ -798,6 +825,7 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
       qreal lmag          = qreal(ts.size()) / 11.0;
 
       if (l->ticks()) {
+            // melissma
             Segment* seg = score()->tick2segment(l->endTick());
             if (seg == 0) {
                   qDebug("System::layoutLyrics: no segment found for tick %d\n", l->endTick());
@@ -811,8 +839,8 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
             int sysIdx1 = systems->indexOf(s1);
             int sysIdx2 = systems->indexOf(s2);
 
-            qreal lw = l->bbox().right();            // lyrics width
-            QPointF p1(lw, l->baseLine());
+            qreal  x1 = l->bbox().right();            // lyrics width
+            QPointF p1(x1, l->baseLine());
 
             int segIdx = 0;
             for (int i = sysIdx1; i <= sysIdx2; ++i, ++segIdx) {
@@ -826,21 +854,33 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
                   line->setPos(p1);
                   if (sysIdx1 == sysIdx2) {
                         // single segment
-                        qreal len = seg->pagePos().x() - l->pagePos().x() - lw + 2 * _spatium;
+                        qreal headWidth = symbols[0][quartheadSym].width(1.0);
+                        qreal len = seg->pagePos().x() - l->pagePos().x() - x1 + headWidth;
+                        line->setLen(Spatium(len / _spatium));
+                        Lyrics* nl = searchNextLyrics(seg, staffIdx, l->no());
+                        if (nl) {
+                              qreal x2  = nl->bbox().left() + nl->pagePos().x();
+                              qreal lx2 = line->pagePos().x() + len;
+printf("line %f  text %f\n", lx2, x2);
+                              if (lx2 > x2)
+                                    len -= (lx2 - x2);
+                              }
                         line->setLen(Spatium(len / _spatium));
                         }
                   else if (i == sysIdx1) {
                         // start segment
                         qreal w   = system->staff(l->staffIdx())->right();
                         qreal x   = system->pagePos().x() + w;
-                        qreal len = x - l->pagePos().x() - lw;
+                        qreal len = x - l->pagePos().x() - x1;
                         line->setLen(Spatium(len / _spatium));
                         }
                   else if (i > 0 && i != sysIdx2) {
+qDebug("Lyrics: melissma middle segment not implemented");
                         // middle segment
                         }
                   else if (i == sysIdx2) {
                         // end segment
+qDebug("Lyrics: melissma end segment not implemented");
                         }
                   line->layout();
                   }
@@ -857,59 +897,42 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
       const qreal maxl = 0.5 * _spatium * lmag;   // lyrics hyphen length
       const Spatium hlw(0.14 * lmag);              // hyphen line width
 
-      while ((ns = ns->next1(SegChordRest | SegGrace))) {
-            int strack = staffIdx * VOICES;
-            int etrack = strack + VOICES;
-            QList<Lyrics*>* nll = 0;
-            for (int track = strack; track < etrack; ++track) {
-                  ChordRest* cr = static_cast<ChordRest*>(ns->element(track));
-                  if (cr && !cr->lyricsList().isEmpty()) {
-                        nll = &cr->lyricsList();
-                        break;
-                        }
-                  }
-            if (!nll)
-                  continue;
-            Lyrics* nl = nll->value(verse);
-            if (!nl) {
-                  // ignore last line which connects
-                  // to nothing
-                  continue;
-                  }
-            QList<Line*>* sl = l->separatorList();
-            Line* line;
-            if (sl->isEmpty()) {
-                  line = new Line(l->score(), false);
-                  l->add(line);
-                  }
-            else {
-                  line = (*sl)[0];
-                  }
-            QRectF b = l->bbox();
-            qreal x  = b.right();
-            qreal y  = b.y() + b.height() * .58;
-
-            qreal x1 = x + l->pagePos().x();
-            qreal x2 = nl->bbox().left() + nl->pagePos().x();
-            qreal len;
-            if (x2 < x1 || s->measure()->system()->page() != ns->measure()->system()->page()) {
-                  System* system = s->measure()->system();
-                  x2 = system->pagePos().x() + system->bbox().width();
-                  }
-
-            qreal gap = x2 - x1;
-            len       = gap;
-            if (len > maxl)
-                  len = maxl;
-            qreal xo = (gap - len) * .5;
-
-            line->setLineWidth(hlw);
-            line->setPos(QPointF(x + xo, y));
-            line->setLen(Spatium(len / _spatium));
-            line->layout();
+      Lyrics* nl = searchNextLyrics(ns, staffIdx, verse);
+      if (!nl) {
+            l->clearSeparator();
             return;
             }
-      l->clearSeparator();
+      QList<Line*>* sl = l->separatorList();
+      Line* line;
+      if (sl->isEmpty()) {
+            line = new Line(l->score(), false);
+            l->add(line);
+            }
+      else {
+            line = (*sl)[0];
+            }
+      QRectF b = l->bbox();
+      qreal x  = b.right();
+      qreal y  = b.y() + b.height() * .58;
+
+      qreal x1 = x + l->pagePos().x();
+      qreal x2 = nl->bbox().left() + nl->pagePos().x();
+      qreal len;
+      if (x2 < x1 || s->measure()->system()->page() != ns->measure()->system()->page()) {
+            System* system = s->measure()->system();
+            x2 = system->pagePos().x() + system->bbox().width();
+            }
+
+      qreal gap = x2 - x1;
+      len       = gap;
+      if (len > maxl)
+            len = maxl;
+      qreal xo = (gap - len) * .5;
+
+      line->setLineWidth(hlw);
+      line->setPos(QPointF(x + xo, y));
+      line->setLen(Spatium(len / _spatium));
+      line->layout();
       }
 
 //---------------------------------------------------------

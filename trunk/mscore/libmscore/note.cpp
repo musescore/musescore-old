@@ -1039,6 +1039,8 @@ bool Note::acceptDrop(MuseScoreView*, const QPointF&, int type, int subtype) con
 Element* Note::drop(const DropData& data)
       {
       Element* e = data.element;
+printf("DROP %s\n", e->name());
+
       Chord* ch = chord();
       switch(e->type()) {
             case REHEARSAL_MARK:
@@ -1157,6 +1159,10 @@ Element* Note::drop(const DropData& data)
             case NOTE:
                   {
                   Chord* ch = chord();
+                  if (ch->noteType() != NOTE_NORMAL) {
+                        delete e;
+                        return 0;
+                        }
                   e->setParent(ch);
                   score()->undoRemoveElement(this);
                   score()->undoAddElement(e);

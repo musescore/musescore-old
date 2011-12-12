@@ -337,6 +337,7 @@ class Element {
 /**
  Return a name for a \a subtype. Used for outputting xml data.
  Reimplemented by elements with subtype names.
+ If an empty string is returned, no subtype is written.
  */
       virtual QString subtypeName() const { return QString("%1").arg(_subtype); }
 
