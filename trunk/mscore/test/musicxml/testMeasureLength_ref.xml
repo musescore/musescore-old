@@ -99,9 +99,12 @@
         <type>half</type>
         <stem>down</stem>
         </note>
-      <forward>
+      <note>
+        <rest/>
         <duration>1</duration>
-        </forward>
+        <voice>1</voice>
+        <type>quarter</type>
+        </note>
       </measure>
     <measure number="5">
       <note>
@@ -173,9 +176,12 @@
         <type>quarter</type>
         <stem>up</stem>
         </note>
-      <forward>
+      <note>
+        <rest/>
         <duration>1</duration>
-        </forward>
+        <voice>1</voice>
+        <type>quarter</type>
+        </note>
       </measure>
     <measure number="3">
       <note>

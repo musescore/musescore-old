@@ -1,4 +1,6 @@
-12.dec (ws)
+12.dec (lv)
+      - fix #12445: [MusicXML] Import can produce empty voice 1
+       (ws)
       - fix #12670: Clef information missing from instrument selection during
         score creation
       - fix #14043: Common Time and Alla Breve symbols have nominal and

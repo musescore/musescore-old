@@ -1323,6 +1323,81 @@ void MusicXml::initVoiceMapperAndMapVoices(QDomElement e)
       }
 
 //---------------------------------------------------------
+//   fillGap -- fill one gap (tstart - tend) in this track in this measure with rest(s)
+//---------------------------------------------------------
+
+static void fillGap(Measure* measure, int track, int tstart, int tend)
+      {
+      int ctick = tstart;
+      int restLen = tend - tstart;
+      qDebug("\nfillGIFV     fillGap(measure %p track %d tstart %d tend %d) restLen %d len",
+             measure, track, tstart, tend, restLen);
+
+      while (restLen > 0) {
+            int len = restLen;
+            TDuration d(TDuration::V_INVALID);
+            if (measure->ticks() == restLen)
+                  d.setType(TDuration::V_MEASURE);
+            else
+                  d.setVal(len);
+            Rest* rest = new Rest(measure->score(), d);
+            rest->setDuration(Fraction::fromTicks(len));
+            rest->setTrack(track);
+            Segment* s = measure->getSegment(rest, tstart);
+            s->add(rest);
+            len = rest->actualTicks();
+            qDebug(" %d", len);
+            ctick   += len;
+            restLen -= len;
+            }
+      }
+
+//---------------------------------------------------------
+//   fillGapsInFirstVoices -- fill gaps in first voice of every staff in this measure for this part with rest(s)
+//---------------------------------------------------------
+
+static void fillGapsInFirstVoices(Measure* measure, Part* part)
+      {
+      int measTick     = measure->tick();
+      int measLen      = measure->ticks();
+      int nextMeasTick = measTick + measLen;
+      int staffIdx = part->score()->staffIdx(part);
+      qDebug("fillGIFV measure %p part %p idx %d nstaves %d tick %d - %d (len %d)",
+             measure, part, staffIdx, part->nstaves(),
+             measTick, nextMeasTick, measLen);
+      for (int st = 0; st < part->nstaves(); ++st) {
+            int track = (staffIdx + st) * VOICES;
+            int endOfLastCR = measTick;
+            for (Segment* s = measure->first(); s; s = s->next()) {
+                  qDebug("fillGIFV   segment %p tp %s", s, s->subTypeName());
+                  Element* el = s->element(track);
+                  if (el) {
+                        qDebug(" el[%d] %p", track, el);
+                        if (s->isChordRest()) {
+                              ChordRest* cr  = static_cast<ChordRest*>(el);
+                              int crTick     = cr->tick();
+                              int crLen      = cr->actualTicks();
+                              int nextCrTick = crTick + crLen;
+                              qDebug(" chord/rest tick %d - %d (len %d)",
+                                     crTick, nextCrTick, crLen);
+                              if (crTick > endOfLastCR) {
+                                    qDebug(" GAP: track %d tick %d - %d",
+                                           track, endOfLastCR, crTick);
+                                    fillGap(measure, track, endOfLastCR, crTick);
+                                    }
+                              endOfLastCR = nextCrTick;
+                              }
+                        }
+                  }
+            if (nextMeasTick > endOfLastCR) {
+                  qDebug("fillGIFV   measure end GAP: track %d tick %d - %d",
+                         track, endOfLastCR, nextMeasTick);
+                  fillGap(measure, track, endOfLastCR, nextMeasTick);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   xmlPart
 //---------------------------------------------------------
 
@@ -1360,7 +1435,9 @@ void MusicXml::xmlPart(QDomElement e, QString id)
             if (e.tagName() == "measure") {
                   // set the correct start tick for the measure
                   tick = measureStart.at(measureNr);
-                  xmlMeasure(part, e, e.attribute(QString("number")).toInt()-1, measureLength.at(measureNr));
+                  Measure* measure = xmlMeasure(part, e, e.attribute(QString("number")).toInt()-1, measureLength.at(measureNr));
+                  if (measure)
+                        fillGapsInFirstVoices(measure, part);
                   }
             else
                   domError(e);
