@@ -274,6 +274,7 @@ RasterImage* RasterImage::clone() const
 
 void RasterImage::draw(QPainter* painter) const
       {
+      painter->save();
       if (score()->printing()) {
             // use original image size for printing
             painter->scale(sz.width() / doc.width(), sz.height() / doc.height());
@@ -290,6 +291,7 @@ void RasterImage::draw(QPainter* painter) const
                   }
             Image::draw(painter);
             }
+      painter->restore();
       }
 
 //---------------------------------------------------------
