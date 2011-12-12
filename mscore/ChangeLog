@@ -1,3 +1,5 @@
+12.dec (ws)
+      - fix #14036: Background Wallpaper Distortion
 11.dec (lv)
       - fix #12445: [MusicXML] Import can produce empty voice 1
       - fix "variable set but not used" warnings in importxml.cpp

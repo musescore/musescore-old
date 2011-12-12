@@ -1258,11 +1258,11 @@ void ScoreView::paintEvent(QPaintEvent* ev)
       p.setRenderHint(QPainter::Antialiasing, preferences.antialiasedDrawing);
       p.setRenderHint(QPainter::TextAntialiasing, true);
 
-      QRegion region = ev->region();
-
-      const QVector<QRect>& vector = region.rects();
-      foreach(const QRect& r, vector)
-            paint(r, p);
+//      QRegion region = ev->region();
+//      const QVector<QRect>& vector = region.rects();
+//      foreach(const QRect& r, vector)
+//            paint(r, p);
+      paint(ev->rect(), p);
 
       p.setTransform(_matrix);
       p.setClipping(false);
@@ -1414,7 +1414,7 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
             if (bgPixmap == 0 || bgPixmap->isNull())
                   p.fillRect(rr, _bgColor);
             else
-                  p.drawTiledPixmap(rr, *bgPixmap, rr.topLeft()-QPoint(lrint(xoffset()), lrint(yoffset())));
+                  p.drawTiledPixmap(rr, *bgPixmap, rr.topLeft() - QPoint(_matrix.m31(), _matrix.m32()));
             }
       p.restore();
       }
@@ -2704,7 +2704,7 @@ void ScoreView::startNoteEntry()
             int track = _score->inputState().track == -1 ? 0 : _score->inputState().track;
             el = static_cast<ChordRest*>(_score->searchNote(0, track));
             }
-      if(el) {      
+      if(el) {
             if (el->type() == CHORD) {
                   Chord* c = static_cast<Chord*>(el);
                   note = c->selectedNote();
@@ -2714,7 +2714,7 @@ void ScoreView::startNoteEntry()
                   }
             _score->select(el, SELECT_SINGLE, 0);
             }
-            
+
       _score->inputState().noteEntryMode = true;
       _score->setPadState();
       setCursorOn(true);
