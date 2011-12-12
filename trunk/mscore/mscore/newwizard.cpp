@@ -51,8 +51,10 @@ InstrumentWizard::InstrumentWizard(QWidget* parent)
       partiturList->setSelectionMode(QAbstractItemView::SingleSelection);
 
       instrumentList->setHeaderLabels(QStringList(tr("Instrument List")));
-      QStringList header = (QStringList() << tr("Staves") << tr("Clef"));
+
+      QStringList header = (QStringList() << tr("Staves") << tr("Visible") << tr("Clef"));
       partiturList->setHeaderLabels(header);
+      partiturList->setColumnHidden(1, true);  // hide "visible" flag
 
       buildTemplateList();
 

@@ -1705,10 +1705,8 @@ void ScoreView::paintEvent(QPaintEvent* ev)
             vp.drawLine(dropAnchor);
             }
 
-      if (dragElement) {
-//            printf("drag element <%s>\n", dragElement->name());
+      if (dragElement)
             dragElement->scanElements(&vp, paintElement, false);
-            }
 
       if (grips) {
             qreal lw = 2.0/vp.matrix().m11();
@@ -1755,6 +1753,7 @@ void ScoreView::drawBackground(QPainter* p, const QRectF& r) const
 
 void ScoreView::paintPageBorder(QPainter& p, Page* page)
       {
+return;
       QRectF r(page->bbox());
       qreal x1 = r.x();
       qreal y1 = r.y();
@@ -1872,7 +1871,6 @@ void ScoreView::paint(const QRect& r, QPainter& p)
             p.translate(-pos);
             r1 -= _matrix.mapRect(pr).toAlignedRect();
             }
-
       if (dropRectangle.isValid())
             p.fillRect(dropRectangle, QColor(80, 0, 0, 80));
 
@@ -1953,7 +1951,6 @@ void ScoreView::paint(const QRect& r, QPainter& p)
             //
             p.drawLine(QLineF(x2, y1, x2, y2).translated(system2->page()->pos()));
             }
-
       p.setMatrixEnabled(false);
       if (!r1.isEmpty()) {
             p.setClipRegion(r1);  // only background
@@ -1961,7 +1958,6 @@ void ScoreView::paint(const QRect& r, QPainter& p)
                   p.fillRect(r, _bgColor);
             else
                   p.drawTiledPixmap(r, *bgPixmap, r.topLeft() - QPoint(_matrix.m31(), _matrix.m32()));
-//                  p.drawTiledPixmap(r, *bgPixmap, r.topLeft()-QPoint(lrint(xoffset()), lrint(yoffset())));
             }
       p.restore();
       }
