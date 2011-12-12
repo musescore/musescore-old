@@ -1,10 +1,13 @@
 12.dec (ws)
+      - fix #14043: Common Time and Alla Breve symbols have nominal and
+        actual duration of numeral time signature in score creation step
+        (regression from #13984)
       - fix #14036: Background Wallpaper Distortion
       - fix #13982: Different time signatures should be listed vertically during
         score creation
       - fix #13983: Common time and alla breve symbols should be black colour
         during score creation
-      - fix #13984: Selecting common time or alla vreve symbol during score
+      - fix #13984: Selecting common time or alla breve symbol during score
         dreation shouldn't change numeral time signature
       - fix #13985: Selecting common time or alla breve symbol during score
         creation should grey out numerals

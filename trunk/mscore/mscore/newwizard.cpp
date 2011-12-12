@@ -427,7 +427,12 @@ int TimesigWizard::measures() const
 
 Fraction TimesigWizard::timesig() const
       {
-      return Fraction(timesigZ->value(), timesigN->value());
+      if (tsFraction->isChecked())
+            return Fraction(timesigZ->value(), timesigN->value());
+      else if (tsCommonTime->isChecked())
+            return Fraction(4, 4);
+      else
+            return Fraction(2, 2);
       }
 
 //---------------------------------------------------------
