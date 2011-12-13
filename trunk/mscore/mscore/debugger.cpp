@@ -55,6 +55,7 @@
 #include "libmscore/iname.h"
 #include "libmscore/accidental.h"
 #include "libmscore/keysig.h"
+#include "libmscore/sig.h"
 
 extern bool useFactorySettings;
 
@@ -151,6 +152,26 @@ Debugger::Debugger(QWidget* parent)
       connect(back,    SIGNAL(clicked()), SLOT(backClicked()));
       connect(forward, SIGNAL(clicked()), SLOT(forwardClicked()));
       connect(reload,  SIGNAL(clicked()), SLOT(reloadClicked()));
+      connect(selectButton, SIGNAL(clicked()), SLOT(selectElement()));
+      connect(resetButton,  SIGNAL(clicked()), SLOT(resetElement()));
+      }
+
+//---------------------------------------------------------
+//   selectElement
+//---------------------------------------------------------
+
+void Debugger::selectElement()
+      {
+      curElement->score()->select(curElement);
+      }
+
+//---------------------------------------------------------
+//   resetElement
+//---------------------------------------------------------
+
+void Debugger::resetElement()
+      {
+      curElement->toDefault();
       }
 
 //---------------------------------------------------------
@@ -720,6 +741,14 @@ void SegmentView::setElement(Element* e)
             if ((1 << idx) == st)
                   break;
             }
+      int tick = s->tick();
+      TimeSigMap* sm = s->score()->sigmap();
+
+      int bar, beat, ticks;
+      sm->tickValues(tick, &bar, &beat, &ticks);
+      sb.bar->setValue(bar);
+      sb.beat->setValue(beat);
+      sb.ticks->setValue(ticks);
       sb.tick->setValue(s->tick());
       sb.segmentType->setCurrentIndex(idx);
       sb.lyrics->clear();
