@@ -61,7 +61,7 @@
         <type>quarter</type>
         <stem>up</stem>
         </note>
-      <note>
+      <note print-object="no">
         <rest/>
         <duration>1</duration>
         <voice>1</voice>
@@ -79,7 +79,7 @@
         </note>
       </measure>
     <measure number="2">
-      <note>
+      <note print-object="no">
         <rest/>
         <duration>1</duration>
         <voice>1</voice>
@@ -95,7 +95,7 @@
         <type>half</type>
         <stem>up</stem>
         </note>
-      <note>
+      <note print-object="no">
         <rest/>
         <duration>1</duration>
         <voice>1</voice>
@@ -210,7 +210,7 @@
         </note>
       </measure>
     <measure number="2">
-      <note>
+      <note print-object="no">
         <rest/>
         <duration>4</duration>
         <voice>1</voice>
@@ -293,7 +293,7 @@
       <backup>
         <duration>3</duration>
         </backup>
-      <note>
+      <note print-object="no">
         <rest/>
         <duration>3</duration>
         <voice>5</voice>
@@ -301,7 +301,7 @@
         </note>
       </measure>
     <measure number="5">
-      <note>
+      <note print-object="no">
         <rest/>
         <duration>3</duration>
         <voice>1</voice>

@@ -167,6 +167,7 @@ rwtestAllXml() {
       rwtestXml    testNotesRests1.xml
       rwtestXml    testNotesRests2.xml
       rwtestXmlRef testPartsSpecialCases.xml
+      rwtestXml    testSlurs.xml
       rwtestXml    testStaffTwoKeySigs.xml
       rwtestXml    testSystemBrackets1.xml
       rwtestXml    testSystemBrackets2.xml

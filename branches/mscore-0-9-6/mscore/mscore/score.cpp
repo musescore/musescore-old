@@ -354,7 +354,7 @@ bool Score::read(QString name)
 
       QString cs = info.suffix();
       QString csl = cs.toLower();
-      
+
       if (csl == "mscz") {
             if (!loadCompressedMsc(name))
                   return false;
@@ -375,12 +375,10 @@ bool Score::read(QString name)
             if (csl == "xml") {
                   if (!importMusicXml(name))
                         return false;
-                  connectSlurs();
                   }
             else if (csl == "mxl") {
                   if (!importCompressedMusicXml(name))
                         return false;
-                  connectSlurs();
                   }
             else if (csl == "mid" || csl == "midi" || csl == "kar") {
                   if (!importMidi(name))
