@@ -80,7 +80,6 @@ SOURCES += main.cpp                              \
     ../libmscore/icon.cpp                        \
     ../libmscore/image.cpp                       \
     ../libmscore/iname.cpp                       \
-    ../libmscore/init.cpp                        \
     ../libmscore/input.cpp                       \
     ../libmscore/instrchange.cpp                 \
     ../libmscore/instrtemplate.cpp               \
@@ -148,6 +147,11 @@ SOURCES += main.cpp                              \
     ../libmscore/velo.cpp                        \
     ../libmscore/volta.cpp                       \
     ../libmscore/xml.cpp                         \
+    ../libmscore/event.cpp                       \
+    ../libmscore/duration.cpp                    \
+    ../libmscore/figuredbass.cpp                 \
+    ../libmscore/simpletext.cpp                  \
+    ../libmscore/rehearsalmark.cpp               \
     ../m-msynth/chan.cpp                         \
     ../m-msynth/chorus.cpp                       \
     ../m-msynth/conv.cpp                         \
@@ -158,16 +162,12 @@ SOURCES += main.cpp                              \
     ../m-msynth/rev.cpp                          \
     ../m-msynth/sfont.cpp                        \
     ../zarchive/zarchive.cpp                     \
-    seq.cpp \
-    scoreview.cpp \
-    painterqt.cpp \
-    ../libmscore/event.cpp \
-    ../m-msynth/seq_event.cpp \
+    seq.cpp                     \
+    scoreview.cpp               \
+    ../m-msynth/seq_event.cpp   \
     ../m-msynth/synth_voice.cpp \
-    sparm.cpp \
-    androidaudio.cpp \
-    ../libmscore/duration.cpp \
-    ../libmscore/figuredbass.cpp
+    sparm.cpp                   \
+    androidaudio.cpp
 
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
@@ -197,7 +197,5 @@ OTHER_FILES += \
 
 HEADERS += \
     scoreview.h \
-    seq.h \
-    painterqt.h
-
+    seq.h
 

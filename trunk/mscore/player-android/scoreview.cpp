@@ -25,7 +25,6 @@
 #include <QtGui/QWheelEvent>
 
 #include "scoreview.h"
-#include "painterqt.h"
 #include "libmscore/score.h"
 #include "libmscore/page.h"
 #include "libmscore/staff.h"
@@ -90,9 +89,7 @@ void ScoreView::setScore(const QString& name)
       score = new Score(MScore::defaultStyle());
       score->setLayoutMode(LayoutFloat);
       PageFormat pageFormat;
-      pageFormat.setSize(QPrinter::Custom);
-      pageFormat.setWidth(parentWidth() / DPI);
-      pageFormat.setHeight(parentHeight() / DPI);
+      pageFormat.setSize(QSizeF(parentWidth() / DPI,  parentHeight() / DPI));
       pageFormat.setPrintableWidth((parentWidth()-10) / DPI);
       pageFormat.setEvenLeftMargin(5.0 / DPI);
       pageFormat.setOddLeftMargin(5.0 / DPI);
@@ -100,11 +97,9 @@ void ScoreView::setScore(const QString& name)
       pageFormat.setEvenBottomMargin(0.0);
       pageFormat.setOddTopMargin(0.0);
       pageFormat.setOddBottomMargin(0.0);
-
       pageFormat.setTwosided(false);
-      pageFormat.setLandscape(false);
 
-      Style* style = score->style();
+      MStyle* style = score->style();
       style->setPageFormat(pageFormat);
       style->setSpatium(10.0);
 
@@ -186,7 +181,6 @@ void ScoreView::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidge
       p.end();
       painter->drawPixmap(0, 0, pm);
 #else
-      PainterQt pqt(painter, this);
       painter->setRenderHint(QPainter::Antialiasing, true);
       painter->setRenderHint(QPainter::TextAntialiasing, true);
       painter->drawTiledPixmap(QRect(0, 0, width(), height()), QPixmap(":/mobile/images/paper.png"), QPoint(0,0));
@@ -205,7 +199,7 @@ void ScoreView::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidge
             painter->save();
             painter->translate(e->pagePos());
             painter->setPen(QPen(e->curColor()));
-            e->draw(&pqt);
+            e->draw(painter);
             painter->restore();
             }
 
