@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>235</width>
-    <height>194</height>
+    <width>398</width>
+    <height>242</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -41,9 +41,45 @@
      </item>
      <item>
       <widget class="QToolButton" name="reload">
+       <property name="toolTip">
+        <string notr="true">Reload</string>
+       </property>
        <property name="icon">
         <iconset resource="musescore.qrc">
          <normaloff>:/data/reload.png</normaloff>:/data/reload.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QToolButton" name="selectButton">
+       <property name="toolTip">
+        <string notr="true">Select Element</string>
+       </property>
+       <property name="text">
+        <string>Select</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="resetButton">
+       <property name="toolTip">
+        <string notr="true">Reset Element Properties</string>
+       </property>
+       <property name="text">
+        <string notr="true">Reset</string>
        </property>
       </widget>
      </item>
