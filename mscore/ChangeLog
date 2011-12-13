@@ -1,3 +1,8 @@
+13.dec (lv)
+      - fix #5947: [MusicXML] Slurs is not well placed with grace note
+      - fix #12445: [MusicXML] Import can produce empty voice 1:
+                     set (automativally) generated rests to invisible
+      - fix #12349: Wrong placed slurs after importing a MusicXML file
 12.dec (ws)
       - fix #14036: Background Wallpaper Distortion
 11.dec (lv)

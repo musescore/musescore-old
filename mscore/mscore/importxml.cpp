@@ -1295,6 +1295,7 @@ static void fillGap(Measure* measure, int track, int tstart, int tend)
                   d.setVal(len);
             Rest* rest = new Rest(measure->score(), tstart, d);
             rest->setTrack(track);
+            rest->setVisible(false);
             Segment* s = measure->getSegment(rest);
             s->add(rest);
             len = rest->tickLen();
@@ -2807,6 +2808,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       QColor noteheadColor = QColor::Invalid;
       bool chord = false;
       int velocity = -1;
+      QSet<Slur*> slursStarted;
+      QSet<Slur*> slursStopped;
       QSet<QString> slurIds; // combination start/stop and number must be unique within a note
 
       // first read all elements required for voice mapping
@@ -3016,8 +3019,10 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                     slurIds.insert(slurId);
                                     if (slurType == "start") {
                                           bool endSlur = false;
-                                          if (slur[slurNo] == 0)
+                                          if (slur[slurNo] == 0) {
                                                 slur[slurNo] = new Slur(score);
+                                                slursStarted.insert(slur[slurNo]);
+                                                }
                                           else
                                                 endSlur = true;
                                           QString pl = ee.attribute(QString("placement"));
@@ -3025,24 +3030,26 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                                 slur[slurNo]->setSlurDirection(UP);
                                           else if (pl == "below")
                                                 slur[slurNo]->setSlurDirection(DOWN);
-                                          slur[slurNo]->setStart(tick, trk + voice);
-                                          slur[slurNo]->setTrack(trk);
+                                          slur[slurNo]->setTrack(-1);
+                                          slur[slurNo]->setTick(-1);
                                           score->add(slur[slurNo]);
-                                          if (endSlur)
+                                          if (endSlur) {
+                                                slursStarted.insert(slur[slurNo]);
                                                 slur[slurNo] = 0;
+                                                }
                                           }
                                     else if (slurType == "stop") {
                                           if (slur[slurNo] == 0) {
                                                 slur[slurNo] = new Slur(score);
-                                                slur[slurNo]->setEnd(tick, trk + voice);
+                                                slursStopped.insert(slur[slurNo]);
                                                 }
                                           else {
-                                                slur[slurNo]->setEnd(tick, trk + voice);
+                                                slursStopped.insert(slur[slurNo]);
                                                 slur[slurNo] = 0;
                                                 }
                                           }
                                     else
-                                          printf("unknown slur type %s\n", slurType.toLatin1().data());
+                                          printf("unknown slur type %s\n", qPrintable(slurType));
                                     }
                               else
                                     printf("ignoring duplicate '%s'\n", qPrintable(slurId));
@@ -3412,6 +3419,17 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 
             note->setVisible(printObject == "yes");
             }
+
+      // complete slur handling
+      foreach(Slur * s, slursStarted) {
+            cr->addSlurFor(s);
+            s->setStartElement(cr);
+            }
+      foreach(Slur * s, slursStopped) {
+            cr->addSlurBack(s);
+            s->setEndElement(cr);
+            }
+
       if (!fermataType.isEmpty()) {
             Articulation* f = new Articulation(score);
             if (fermataType == "upright") {
