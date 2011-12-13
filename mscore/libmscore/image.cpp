@@ -149,6 +149,7 @@ void Image::editDrag(const EditData& ed)
             if (_lockAspectRatio)
                   sz.setWidth(sz.height() * ratio);
             }
+      layout();
       }
 
 //---------------------------------------------------------
@@ -158,7 +159,7 @@ void Image::editDrag(const EditData& ed)
 void Image::updateGrips(int* grips, QRectF* grip) const
       {
       *grips = 2;
-      QRectF r(abbox());
+      QRectF r(pageBoundingRect());
       grip[0].translate(QPointF(r.x() + r.width(), r.y() + r.height() * .5));
       grip[1].translate(QPointF(r.x() + r.width() * .5, r.y() + r.height()));
       }
