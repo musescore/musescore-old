@@ -2677,7 +2677,6 @@ void ChangeTimesig::flip()
       timesig->setSig(actual);
       timesig->setStretch(stretch);
       timesig->setText(sz, sn);
-//      timesig->setSubtype(subtype);
       showCourtesy = sc;
       actual       = f1;
       stretch      = f2;

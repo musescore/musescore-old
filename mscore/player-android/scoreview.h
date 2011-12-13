@@ -98,6 +98,7 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
       qreal parentHeight() const      { return _parentHeight; }
       void setParentHeight(qreal val) { _parentHeight = val;  }
       void moveCursor(int);
+      virtual void drawBackground(QPainter*, const QRectF&) const {}
       };
 
 
