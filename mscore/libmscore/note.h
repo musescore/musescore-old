@@ -34,6 +34,7 @@ class Bend;
 class QPainter;
 class AccidentalState;
 class Accidental;
+class Spanner;
 
 extern const int noteHeads[2][HEAD_GROUPS][HEAD_TYPES];
 
@@ -200,6 +201,7 @@ class Note : public Element {
 
       void draw(QPainter*) const;
       void read(QDomElement);
+
       void write(Xml& xml) const;
 
       QPointF stemPos(bool upFlag) const;    ///< Point to connect stem.

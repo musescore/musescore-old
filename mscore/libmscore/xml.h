@@ -54,7 +54,6 @@ class Xml : public QTextStream {
       int tupletId;
       int beamId;
       int spannerId;
-      int slurId;
 
       Xml(QIODevice* dev);
       Xml();

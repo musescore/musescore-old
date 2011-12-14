@@ -705,8 +705,13 @@ Note* searchTieNote(Note* note)
       Part* part   = chord->staff()->part();
       int strack   = part->staves()->front()->idx() * VOICES;
       int etrack   = strack + part->staves()->size() * VOICES;
+      int tick     = seg->tick() + chord->duration().ticks();
 
       while ((seg = seg->next1(SegChordRest))) {
+            if (seg->tick() < tick)
+                  continue;
+            if (seg->tick() > tick)
+                  break;
             bool noteFound = false;
             for (int track = strack; track < etrack; ++track) {
                   ChordRest* cr = static_cast<ChordRest*>(seg->element(track));

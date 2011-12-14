@@ -269,17 +269,17 @@ void SlurSegment::editDrag(const EditData& ed)
             // move anchor for slurs
             //
             Slur* slur = static_cast<Slur*>(slurTie());
+            Element* e = ed.view->elementNear(ed.pos);
             if ((slur->type() == SLUR)
                && (
                   (ed.curGrip == GRIP_START && (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN))
                   || (ed.curGrip == GRIP_END && (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_END))
                   )
                ) {
-                  Element* e = ed.view->elementNear(ed.pos);
                   if (e && e->type() == NOTE) {
                         Chord* chord = static_cast<Note*>(e)->chord();
-                        if ((ed.curGrip == 3 && chord != slur->endElement())
-                           || (ed.curGrip == 0 && chord != slur->startElement())) {
+                        if ((ed.curGrip == GRIP_END && chord != slur->endElement())
+                           || (ed.curGrip == GRIP_START && chord != slur->startElement())) {
                               changeAnchor(ed.view, ed.curGrip, chord);
                               QPointF p1 = ed.pos - ups[ed.curGrip].p - pagePos();
                               ups[ed.curGrip].off = p1 / spatium();
@@ -1265,7 +1265,8 @@ void Tie::layout()
       // TODO: if there is a startNote but no endNote
       //    show short bow
       if (startElement() == 0 || endElement() == 0) {
-            qDebug("Tie::layout(): no start or end");
+            if (startElement() == 0)
+                  qDebug("Tie::layout(): no start note");
             return;
             }
 

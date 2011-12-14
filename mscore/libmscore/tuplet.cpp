@@ -468,7 +468,7 @@ void Tuplet::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Tuplet::read(QDomElement e, QList<Tuplet*>* tuplets, const QList<Slur*>* slurs)
+void Tuplet::read(QDomElement e, QList<Tuplet*>* tuplets, const QList<Spanner*>* spanner)
       {
       int bl = -1;
       _id    = e.attribute("id", "0").toInt();
@@ -517,7 +517,7 @@ void Tuplet::read(QDomElement e, QList<Tuplet*>* tuplets, const QList<Slur*>* sl
                   _userModified = true;
                   _p2 = readPoint(e);
                   }
-            else if (!DurationElement::readProperties(e, tuplets, slurs))
+            else if (!DurationElement::readProperties(e, tuplets, spanner))
                   domError(e);
             }
       Fraction f(_ratio.denominator(), _baseLen.fraction().denominator());

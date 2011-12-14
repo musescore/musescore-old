@@ -209,9 +209,9 @@ void ChordRest::writeProperties(Xml& xml) const
 //   readProperties
 //---------------------------------------------------------
 
-bool ChordRest::readProperties(QDomElement e, QList<Tuplet*>* tuplets, QList<Slur*>* slurs)
+bool ChordRest::readProperties(QDomElement e, QList<Tuplet*>* tuplets, QList<Spanner*>* spanner)
       {
-      if (DurationElement::readProperties(e, tuplets, slurs))
+      if (DurationElement::readProperties(e, tuplets, spanner))
             return true;
       const QString& tag(e.tagName());
       const QString& val(e.text());
@@ -265,9 +265,9 @@ bool ChordRest::readProperties(QDomElement e, QList<Tuplet*>* tuplets, QList<Slu
             int id = e.attribute("number").toInt();
             QString type = e.attribute("type");
             Slur* slur = 0;
-            foreach(Slur* s, *slurs) {
+            foreach(Spanner* s, *spanner) {
                   if (s->id() == id) {
-                        slur = s;
+                        slur = static_cast<Slur*>(s);
                         break;
                         }
                   }
@@ -275,7 +275,7 @@ bool ChordRest::readProperties(QDomElement e, QList<Tuplet*>* tuplets, QList<Slu
                   qDebug("ChordRest::read(): Slur id %d not found", id);
                   slur = new Slur(score());
                   slur->setId(id);
-                  slurs->append(slur);
+                  spanner->append(slur);
                   }
             if (type == "start") {
                   slur->setStartElement(this);

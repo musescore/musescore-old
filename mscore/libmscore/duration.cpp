@@ -85,7 +85,7 @@ QList<Prop> DurationElement::properties(Xml& xml, bool /*clipboardmode*/) const
 //   readProperties
 //---------------------------------------------------------
 
-bool DurationElement::readProperties(QDomElement e, QList<Tuplet*>* tuplets, const QList<Slur*>*)
+bool DurationElement::readProperties(QDomElement e, QList<Tuplet*>* tuplets, const QList<Spanner*>*)
       {
       if (Element::readProperties(e))
             return true;
