@@ -1730,7 +1730,7 @@ qDebug("paste <%s>", data.data());
 void Score::pasteStaff(QDomElement e, ChordRest* dst)
       {
       beams.clear();
-      slurs.clear();
+      spanner.clear();
 //      QList<Tuplet*> invalidTuplets;
 
       for (Segment* s = firstMeasure()->first(SegChordRest); s; s = s->next1(SegChordRest)) {
@@ -1773,7 +1773,7 @@ qDebug("cannot make gap in staff %d at tick %d", staffIdx, dst->tick());
                   if (dstStaffIdx >= nstaves())
                         break;
                   QList<Tuplet*> tuplets;
-                  QList<Slur*> slurs;
+                  QList<Spanner*> spanner;
                   for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
                         pasted = true;
                         const QString& tag(eee.tagName());
@@ -1782,7 +1782,7 @@ qDebug("cannot make gap in staff %d at tick %d", staffIdx, dst->tick());
                         else if (tag == "Tuplet") {
                               Tuplet* tuplet = new Tuplet(this);
                               tuplet->setTrack(curTrack);
-                              tuplet->read(eee, &tuplets, &slurs);
+                              tuplet->read(eee, &tuplets, &spanner);
                               int tick = curTick - tickStart + dstTick;
                               Measure* measure = tick2measure(tick);
                               tuplet->setParent(measure);
@@ -1793,12 +1793,12 @@ qDebug("cannot make gap in staff %d at tick %d", staffIdx, dst->tick());
                               Slur* slur = new Slur(this);
                               slur->read(eee);
                               slur->setTrack(dstStaffIdx * VOICES);
-                              slurs.append(slur);
+                              spanner.append(slur);
                               }
                         else if (tag == "Chord" || tag == "Rest" || tag == "RepeatMeasure") {
                               ChordRest* cr = static_cast<ChordRest*>(Element::name2Element(tag, this));
                               cr->setTrack(curTrack);
-                              cr->read(eee, &tuplets, &slurs);
+                              cr->read(eee, &tuplets, &spanner);
                               cr->setSelected(false);
                               int voice = cr->voice();
                               int track = dstStaffIdx * VOICES + voice;
@@ -1968,8 +1968,10 @@ qDebug("cannot make gap in staff %d at tick %d", staffIdx, dst->tick());
                               continue;
                               }
                         }
-                  foreach(Slur* slur, slurs)
-                        undoAddElement(slur);
+                  foreach(Spanner* s, spanner) {
+                        if (s->type() == SLUR)
+                              undoAddElement(s);
+                        }
                   foreach (Tuplet* tuplet, tuplets) {
                         if (tuplet->elements().isEmpty()) {
                               // this should not happen and is a sign of input file corruption

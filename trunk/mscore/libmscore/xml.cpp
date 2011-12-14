@@ -30,8 +30,7 @@ Xml::Xml()
       excerptmode   = false;
       tupletId      = 1;
       beamId        = 1;
-      spannerId     = 0;
-      slurId        = 1;
+      spannerId     = 1;
       writeOmr      = true;
       }
 
@@ -48,8 +47,7 @@ Xml::Xml(QIODevice* device)
       excerptmode   = false;
       tupletId      = 1;
       beamId        = 1;
-      spannerId     = 0;
-      slurId        = 1;
+      spannerId     = 1;
       writeOmr      = true;
       }
 

@@ -399,7 +399,7 @@ class Score {
       // read context
       int curTick;                  // for read optimizations
       int curTrack;
-      QList<Slur*> slurs;
+      QList<Spanner*> spanner;
       QList<Beam*> beams;
 
       void rebuildBspTree();

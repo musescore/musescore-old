@@ -45,7 +45,7 @@
 
 void Score::write(Xml& xml, bool selectionOnly)
       {
-      slurs.clear();
+      spanner.clear();
       xml.stag("Score");
 
       if (_omr && xml.writeOmr)
@@ -830,7 +830,7 @@ bool Score::read1(QDomElement e)
 bool Score::read(QDomElement dScore)
       {
       _fileDivision = 384;   // for compatibility with old mscore files
-      slurs.clear();
+      spanner.clear();
 
       if (parentScore())
             setMscVersion(parentScore()->mscVersion());
@@ -984,7 +984,7 @@ bool Score::read(QDomElement dScore)
             else if (tag == "Slur") {
                   Slur* slur = new Slur(this);
                   slur->read(ee);
-                  slurs.append(slur);
+                  spanner.append(slur);
                   }
             else if ((_mscVersion < 116) &&     // skip and process in II. pass
                ((tag == "HairPin")
@@ -1158,7 +1158,11 @@ bool Score::read(QDomElement dScore)
             }
 
       // check slurs
-      foreach(Slur* slur, slurs) {
+      foreach(Spanner* s, spanner) {
+            if (s->type() != SLUR)
+                  continue;
+            Slur* slur = static_cast<Slur*>(s);
+
             if (!slur->startElement() || !slur->endElement()) {
                   qDebug("incomplete Slur\n");
                   if (slur->startElement()) {
@@ -1193,7 +1197,7 @@ bool Score::read(QDomElement dScore)
                         }
                   }
             }
-      slurs.clear();
+      spanner.clear();
       connectTies();
 
       searchSelectedElements();
@@ -1504,29 +1508,29 @@ void Score::writeSegments(Xml& xml, const Measure* m, int strack, int etrack, Se
                         cr->writeTuplet(xml);
                         foreach(Slur* slur, cr->slurFor()) {
                               bool found = false;
-                              foreach(Slur* slur1, slurs) {
+                              foreach(Spanner* slur1, spanner) {
                                     if (slur1 == slur) {
                                           found = true;
                                           break;
                                           }
                                     }
                               if (!found) {
-                                    slur->setId(xml.slurId++);
-                                    slurs.append(slur);
+                                    slur->setId(xml.spannerId++);
+                                    spanner.append(slur);
                                     slur->write(xml);
                                     }
                               }
                         foreach(Slur* slur, cr->slurBack()) {
                               bool found = false;
-                              foreach(Slur* slur1, slurs) {
+                              foreach(Spanner* slur1, spanner) {
                                     if (slur1 == slur) {
                                           found = true;
                                           break;
                                           }
                                     }
                               if (!found) {
-                                    slur->setId(xml.slurId++);
-                                    slurs.append(slur);
+                                    slur->setId(xml.spannerId++);
+                                    spanner.append(slur);
                                     slur->write(xml);
                                     }
                               }
@@ -1583,9 +1587,9 @@ Tuplet* Score::searchTuplet(QDomElement e, int id)
                               for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
                                     if (eee.tagName() == "Tuplet") {
                                           Tuplet* tuplet = new Tuplet(this);
-                                          QList<Slur*> slurList;
+                                          QList<Spanner*> spannerList;
                                           QList<Tuplet*> tuplets;
-                                          tuplet->read(eee, &tuplets, &slurList);
+                                          tuplet->read(eee, &tuplets, &spannerList);
                                           if (tuplet->id() == id)
                                                 return tuplet;
                                           delete tuplet;

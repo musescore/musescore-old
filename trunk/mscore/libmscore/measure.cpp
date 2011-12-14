@@ -1887,7 +1887,7 @@ void Measure::read(QDomElement e, int staffIdx)
             else if (tag == "Chord") {
                   Chord* chord = new Chord(score());
                   chord->setTrack(score()->curTrack);
-                  chord->read(e, &tuplets, &score()->slurs);
+                  chord->read(e, &tuplets, &score()->spanner);
                   int track = chord->track();
                   Segment* ss = 0;
                   for (Segment* ps = first(SegChordRest); ps; ps = ps->next(SegChordRest)) {
@@ -1952,7 +1952,7 @@ void Measure::read(QDomElement e, int staffIdx)
                   Fraction timeStretch(staff->timeStretch(score()->curTick));
                   rest->setDuration(timesig()/timeStretch);
                   rest->setTrack(score()->curTrack);
-                  rest->read(e, &tuplets, &score()->slurs);
+                  rest->read(e, &tuplets, &score()->spanner);
 
                   segment = getSegment(rest, score()->curTick);
                   segment->add(rest);
@@ -1964,7 +1964,7 @@ void Measure::read(QDomElement e, int staffIdx)
             else if (tag == "Note") {
                   Chord* chord = new Chord(score());
                   chord->setTrack(score()->curTrack);
-                  chord->readNote(e, &tuplets, &score()->slurs);
+                  chord->readNote(e, &tuplets, &score()->spanner);
                   segment = getSegment(chord, score()->curTick);
                   segment->add(chord);
 
@@ -2030,7 +2030,7 @@ void Measure::read(QDomElement e, int staffIdx)
             else if (tag == "RepeatMeasure") {
                   RepeatMeasure* rm = new RepeatMeasure(score());
                   rm->setTrack(score()->curTrack);
-                  rm->read(e, &tuplets, &score()->slurs);
+                  rm->read(e, &tuplets, &score()->spanner);
                   segment = getSegment(SegChordRest, score()->curTick);
                   segment->add(rm);
                   score()->curTick += ticks();
@@ -2172,7 +2172,7 @@ void Measure::read(QDomElement e, int staffIdx)
                   tuplet->setTrack(score()->curTrack);
                   tuplet->setTick(score()->curTick);
                   tuplet->setParent(this);
-                  tuplet->read(e, &tuplets, &score()->slurs);
+                  tuplet->read(e, &tuplets, &score()->spanner);
                   tuplets.append(tuplet);
                   }
             else if (tag == "startRepeat")
@@ -2185,7 +2185,7 @@ void Measure::read(QDomElement e, int staffIdx)
                   Slur* slur = new Slur(score());
                   slur->setTrack(score()->curTrack);
                   slur->read(e);
-                  score()->slurs.append(slur);
+                  score()->spanner.append(slur);
                   }
             else if (tag == "vspacer" || tag == "vspacerDown") {
                   if (staves[staffIdx]->_vspacerDown == 0) {

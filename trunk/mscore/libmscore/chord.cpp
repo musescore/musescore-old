@@ -676,7 +676,7 @@ void Chord::write(Xml& xml) const
 //   Chord::readNote
 //---------------------------------------------------------
 
-void Chord::readNote(QDomElement e, QList<Tuplet*>* tuplets, QList<Slur*>* slurs)
+void Chord::readNote(QDomElement e, QList<Tuplet*>* tuplets, QList<Spanner*>* spanner)
       {
       Note* note = new Note(score());
       int ptch   = e.attribute("pitch", "-1").toInt();
@@ -725,7 +725,7 @@ void Chord::readNote(QDomElement e, QList<Tuplet*>* tuplets, QList<Slur*>* slurs
                   }
             else if (tag == "move")
                   setStaffMove(i);
-            else if (!ChordRest::readProperties(e, tuplets, slurs))
+            else if (!ChordRest::readProperties(e, tuplets, spanner))
                   domError(e);
             }
       if (ptch != -1) {
@@ -744,7 +744,7 @@ void Chord::readNote(QDomElement e, QList<Tuplet*>* tuplets, QList<Slur*>* slurs
 void Chord::read(QDomElement e)
       {
       QList<Tuplet*> tl;
-      QList<Slur*> sl;
+      QList<Spanner*> sl;
       read(e, &tl, &sl);
       }
 
@@ -752,7 +752,7 @@ void Chord::read(QDomElement e)
 //   Chord::read
 //---------------------------------------------------------
 
-void Chord::read(QDomElement e, QList<Tuplet*>* tuplets, QList<Slur*>* slurs)
+void Chord::read(QDomElement e, QList<Tuplet*>* tuplets, QList<Spanner*>* spanner)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
@@ -822,7 +822,7 @@ void Chord::read(QDomElement e, QList<Tuplet*>* tuplets, QList<Slur*>* slurs)
                   cl->read(e);
                   add(cl);
                   }
-            else if (!ChordRest::readProperties(e, tuplets, slurs))
+            else if (!ChordRest::readProperties(e, tuplets, spanner))
                   domError(e);
             }
       }
