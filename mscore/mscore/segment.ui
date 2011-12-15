@@ -108,6 +108,12 @@
           <property name="text">
            <string>Ticks</string>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+          <property name="indent">
+           <number>5</number>
+          </property>
          </widget>
         </item>
         <item row="2" column="0">
@@ -157,6 +163,12 @@
          <widget class="QLabel" name="label_8">
           <property name="text">
            <string>Beat</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+          <property name="indent">
+           <number>5</number>
           </property>
          </widget>
         </item>

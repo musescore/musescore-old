@@ -28,22 +28,51 @@
 
 void TrillSegment::draw(QPainter* painter) const
       {
-      qreal mag = magS();
+      qreal mag  = magS();
       int idx    = score()->symIdx();
-      qreal w2   = symbols[idx][trillelementSym].width(mag);
       QRectF b2(symbols[idx][trillelementSym].bbox(mag));
+      qreal w2   = symbols[idx][trillelementSym].width(mag);
+
+      qreal x2   = pos2().x();
 
       painter->setPen(curColor());
       if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN) {
-            QRectF b1(symbols[idx][trillSym].bbox(mag));
-            QRectF b2(symbols[idx][trillelementSym].bbox(mag));
+            int sym;
+            qreal x0, x1, y;
+            int n;
+            QRectF b1;
 
-            qreal x0   = -b1.x();
-            qreal x1   = x0 + b1.width();
-            qreal x2   = pos2().x();
-            int n      = int(floor((x2-x1) / w2));
+            switch(trill()->subtype()) {
+                  case TRILL_LINE:
+                        sym = trillSym;
+                        b1  = symbols[idx][sym].bbox(mag);
+                        x0   = -b1.x();
+                        x1   = x0 + b1.width();
+                        n    = int(floor((x2-x1) / w2));
+                        y    = 0.0;
+                        break;
 
-            symbols[idx][trillSym].draw(painter, mag, QPointF(x0, 0.0));
+                  case UPPRALL_LINE:
+                        sym = upprallSym;
+                        b1  = symbols[idx][sym].bbox(mag);
+                        x0   = -b1.x();
+                        x1   = b1.width();
+                        n    = int(floor((x2-x1) / w2));
+                        y    = -b1.height();
+                        break;
+                  case PRALLPRALL_LINE:
+                        sym = prallprallSym;
+                        b1  = symbols[idx][sym].bbox(mag);
+                        x0   = -b1.x();
+                        x1   = b1.width();
+                        n    = int(floor((x2-x1) / w2));
+                        y    = -b1.height();
+                        break;
+                  }
+            if (n <= 0)
+                  n = 1;
+
+            symbols[idx][sym].draw(painter, mag, QPointF(x0, y));
             symbols[idx][trillelementSym].draw(painter, mag,  QPointF(x1, b2.y() * .9), n);
 
             if (trill()->accidental()) {
@@ -55,7 +84,6 @@ void TrillSegment::draw(QPainter* painter) const
             }
       else {
             qreal x1 = 0.0;
-            qreal x2 = pos2().x();
             int n = int(floor((x2-x1) / w2));
             symbols[idx][trillelementSym].draw(painter, mag,  QPointF(x1, b2.y() * .9), n);
             }
@@ -231,6 +259,41 @@ void Trill::read(QDomElement e)
                   }
             else if (!SLine::readProperties(e))
                   domError(e);
+            }
+      }
+
+//---------------------------------------------------------
+//   setSubtype
+//---------------------------------------------------------
+
+void Trill::setSubtype(const QString& s)
+      {
+      if (s == "trill")
+            Element::setSubtype(TRILL_LINE);
+      else if (s == "upprall")
+            Element::setSubtype(UPPRALL_LINE);
+      else if (s == "prallprall")
+            Element::setSubtype(PRALLPRALL_LINE);
+      else
+            qDebug("Trill::setSubtype: unknown <%s>", qPrintable(s));
+      }
+
+//---------------------------------------------------------
+//   subtypeName
+//---------------------------------------------------------
+
+QString Trill::subtypeName() const
+      {
+      switch(subtype()) {
+            case TRILL_LINE:
+                  return "trill";
+            case UPPRALL_LINE:
+                  return "upprall";
+            case PRALLPRALL_LINE:
+                  return "prallprall";
+            default:
+                  qDebug("unknown Trill subtype %d", subtype());
+                  return "?";
             }
       }
 
