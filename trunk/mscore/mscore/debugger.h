@@ -92,6 +92,7 @@ class Debugger : public QDialog, public Ui::DebuggerBase {
       void forwardClicked();
       void selectElement();
       void resetElement();
+      void layout();
 
    public slots:
       void setElement(Element*);

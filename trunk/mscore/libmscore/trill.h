@@ -20,6 +20,10 @@ class Trill;
 class Accidental;
 class QPainter;
 
+
+// subtypes:
+enum { TRILL_LINE, UPPRALL_LINE, PRALLPRALL_LINE };
+
 //---------------------------------------------------------
 //   TrillSegment
 //---------------------------------------------------------
@@ -57,6 +61,8 @@ class Trill : public SLine {
       void setAccidental(Accidental* a) { _accidental = a; }
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
+      virtual void setSubtype(const QString& s);
+      virtual QString subtypeName() const;
 
       Segment* segment() const          { return (Segment*)parent(); }
       };

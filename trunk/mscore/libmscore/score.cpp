@@ -491,7 +491,7 @@ void Score::fixTicks()
       if (fm == 0)
             return;
 
-      Fraction sig(fm->timesig());
+      Fraction sig(fm->len());
       if (!parentScore()) {
             tempomap()->clear();
             sigmap()->clear();
@@ -518,10 +518,9 @@ void Score::fixTicks()
             //
             // fix ticks
             //
-            int mtick = m->tick();
-            int diff  = tick - mtick;
+            int mtick        = m->tick();
+            int diff         = tick - mtick;
             int measureTicks = m->ticks();
-            tick += measureTicks;
             m->moveTicks(diff);
 
             if (!parentScore()) {
@@ -575,10 +574,12 @@ void Score::fixTicks()
             //
             // update time signature map
             //
-            if (!parentScore() && (m->timesig() != sig)) {
-                  sig = m->timesig();
-                  sigmap()->add(tick, SigEvent(sig,  number));
+            if (!parentScore() && (m->len() != sig)) {
+                  // sig = m->timesig();
+                  sig = m->len();
+                  sigmap()->add(tick, SigEvent(sig, m->timesig(),  number));
                   }
+            tick += measureTicks;
             }
       if (tempomap()->empty())
             tempomap()->setTempo(0, 2.0);
@@ -634,19 +635,18 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* rst, int* pitch,
             }
 
       // search for segment + offset
-      QPointF pppp = p - m->pagePos();
+      QPointF pppp = p - m->canvasPos();
       int track = i * VOICES;
 
       SysStaff* sstaff = m->system()->staff(i);
-      for (Segment* segment = m->first(); segment; segment = segment->next()) {
-            if (segment->subtype() != SegChordRest)
-                  continue;
+      for (Segment* segment = m->first(SegChordRest); segment; segment = segment->next(SegChordRest)) {
             if ((segment->element(track) == 0)
                && (segment->element(track+1) == 0)
                && (segment->element(track+2) == 0)
                && (segment->element(track+3) == 0)
-               )
+               ) {
                   continue;
+                  }
             Segment* ns = segment->next();
             for (; ns; ns = ns->next()) {
                   if (ns->subtype() != SegChordRest)

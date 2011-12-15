@@ -154,6 +154,7 @@ Debugger::Debugger(QWidget* parent)
       connect(reload,  SIGNAL(clicked()), SLOT(reloadClicked()));
       connect(selectButton, SIGNAL(clicked()), SLOT(selectElement()));
       connect(resetButton,  SIGNAL(clicked()), SLOT(resetElement()));
+      connect(layoutButton, SIGNAL(clicked()), SLOT(layout()));
       }
 
 //---------------------------------------------------------
@@ -172,6 +173,18 @@ void Debugger::selectElement()
 void Debugger::resetElement()
       {
       curElement->toDefault();
+      layout();
+      }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void Debugger::layout()
+      {
+      curElement->score()->doLayout();
+      curElement->score()->end();
+      mscore->endCmd();
       }
 
 //---------------------------------------------------------

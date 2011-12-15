@@ -383,6 +383,14 @@ void MuseScore::populatePalette()
       Trill* trill = new Trill(gscore);
       sp->append(trill, tr("Trill line"));
 
+      trill = new Trill(gscore);
+      trill->setSubtype("upprall");
+      sp->append(trill, tr("Upprall line"));
+
+      trill = new Trill(gscore);
+      trill->setSubtype("prallprall");
+      sp->append(trill, tr("Prallprall line"));
+
       TextLine* textLine = new TextLine(gscore);
       textLine->setBeginText("VII");
       textLine->setEndHook(true);
