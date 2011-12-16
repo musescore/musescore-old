@@ -825,7 +825,7 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
       qreal lmag          = qreal(ts.size()) / 11.0;
 
       if (l->ticks()) {
-            // melissma
+            // melisma
             Segment* seg = score()->tick2segment(l->endTick());
             if (seg == 0) {
                   qDebug("System::layoutLyrics: no segment found for tick %d\n", l->endTick());
@@ -858,7 +858,8 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
                         qreal len = seg->pagePos().x() - l->pagePos().x() - x1 + headWidth;
                         line->setLen(Spatium(len / _spatium));
                         Lyrics* nl = searchNextLyrics(seg, staffIdx, l->no());
-                        if (nl) {
+                        // small correction if next lyrics is moved? not needed if on another system
+                        if (nl && nl->measure()->system() == s1) {
                               qreal x2  = nl->bbox().left() + nl->pagePos().x();
                               qreal lx2 = line->pagePos().x() + len;
 printf("line %f  text %f\n", lx2, x2);
@@ -875,12 +876,12 @@ printf("line %f  text %f\n", lx2, x2);
                         line->setLen(Spatium(len / _spatium));
                         }
                   else if (i > 0 && i != sysIdx2) {
-qDebug("Lyrics: melissma middle segment not implemented");
+qDebug("Lyrics: melisma middle segment not implemented");
                         // middle segment
                         }
                   else if (i == sysIdx2) {
                         // end segment
-qDebug("Lyrics: melissma end segment not implemented");
+qDebug("Lyrics: melisma end segment not implemented");
                         }
                   line->layout();
                   }
