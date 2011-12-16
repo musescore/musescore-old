@@ -70,6 +70,7 @@ class Space {
       void setLw(qreal e)          { _lw = e; }
       void setRw(qreal m)          { _rw = m; }
       inline void max(const Space& s);
+      Space& operator+=(const Space&);
       };
 
 //---------------------------------------------------------
@@ -132,7 +133,9 @@ enum {
       P_DIRECTION,
       P_STEM_DIRECTION,
       P_SLUR_DIRECTION,
-      P_BEAM_DIRECTION
+      P_BEAM_DIRECTION,
+      P_LEADING_SPACE,
+      P_TRAILING_SPACE,
       };
 
 

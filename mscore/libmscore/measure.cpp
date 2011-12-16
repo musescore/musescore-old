@@ -1784,6 +1784,8 @@ void Measure::write(Xml& xml) const
             int etrack = strack + VOICES;
             for (int track = strack; track < etrack; ++track) {
                   for (Segment* segment = first(); segment; segment = segment->next()) {
+                        if (track == 0)
+                              segment->setWritten(false);
                         Element* e = segment->element(track);
                         if (!e || e->generated())
                               continue;
@@ -1793,17 +1795,8 @@ void Measure::write(Xml& xml) const
                               xml.tag("tick", segment->tick());
                               xml.curTick = segment->tick();
                               }
-                        // write all (not generated) bar lines
-#if 0
-                        if (segment->subtype() == SegEndBarLine && _multiMeasure > 0) {
-                              xml.stag("BarLine");
-                              xml.tag("subtype", _endBarLineType);
-                              xml.tag("visible", _endBarLineVisible);
-                              xml.etag();
-                              }
-                        else
-#endif
-                              e->write(xml);
+                        e->write(xml);
+                        segment->write(xml);    // write only once
                         }
                   }
             xml.etag();
@@ -2216,6 +2209,8 @@ void Measure::read(QDomElement e, int staffIdx)
                   beam->setParent(0);
                   score()->beams.prepend(beam);
                   }
+            else if (tag == "Segment")
+                  segment->read(e);
             else
                   domError(e);
             }
@@ -2801,6 +2796,9 @@ void Measure::layoutX(qreal stretch)
       memset(clefWidth, 0, nstaves * sizeof(qreal));
 
       for (const Segment* s = first(); s; s = s->next(), ++segmentIdx) {
+            qreal elsp = s->extraLeadingSpace().val() * _spatium;
+            qreal etsp = s->extraTrailingSpace().val() * _spatium;
+
             if ((s->subtype() == SegClef) && (s != first())) {
                   --segmentIdx;
                   for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
@@ -2836,7 +2834,8 @@ void Measure::layoutX(qreal stretch)
                                     continue;
                               found = true;
                               if (pt & (SegStartRepeatBarLine | SegBarLine)) {
-                                    qreal sp       = score()->styleS(ST_barNoteDistance).val() * _spatium;
+                                    qreal sp        = score()->styleS(ST_barNoteDistance).val() * _spatium;
+                                    sp += elsp;
                                     minDistance     = qMax(minDistance, sp);
                                     stretchDistance = sp * .7;
                                     }
@@ -2907,9 +2906,10 @@ void Measure::layoutX(qreal stretch)
                               space.max(e->space());
                               }
                         }
+                  space += Space(elsp, etsp);
                   if (found) {
                         space.rLw() += clefWidth[staffIdx];
-                        qreal sp  = minDistance + rest[staffIdx] + stretchDistance;
+                        qreal sp     = minDistance + rest[staffIdx] + stretchDistance;
                         if (space.lw() > stretchDistance)
                               sp += (space.lw() - stretchDistance);
                         rest[staffIdx]  = space.rw();

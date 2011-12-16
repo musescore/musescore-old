@@ -60,6 +60,14 @@ void TrillSegment::draw(QPainter* painter) const
                         n    = int(floor((x2-x1) / w2));
                         y    = -b1.height();
                         break;
+                  case DOWNPRALL_LINE:
+                        sym  = downprallSym;
+                        b1   = symbols[idx][sym].bbox(mag);
+                        x0   = -b1.x();
+                        x1   = b1.width();
+                        n    = int(floor((x2-x1) / w2));
+                        y    = -b1.height();
+                        break;
                   case PRALLPRALL_LINE:
                         sym = prallprallSym;
                         b1  = symbols[idx][sym].bbox(mag);
@@ -272,6 +280,8 @@ void Trill::setSubtype(const QString& s)
             Element::setSubtype(TRILL_LINE);
       else if (s == "upprall")
             Element::setSubtype(UPPRALL_LINE);
+      else if (s == "downprall")
+            Element::setSubtype(DOWNPRALL_LINE);
       else if (s == "prallprall")
             Element::setSubtype(PRALLPRALL_LINE);
       else
@@ -289,6 +299,8 @@ QString Trill::subtypeName() const
                   return "trill";
             case UPPRALL_LINE:
                   return "upprall";
+            case DOWNPRALL_LINE:
+                  return "downprall";
             case PRALLPRALL_LINE:
                   return "prallprall";
             default:

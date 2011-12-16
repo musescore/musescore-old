@@ -56,7 +56,10 @@ class Segment : public Element {
       Segment* _prev;
 
       mutable bool empty;           // cached value
+      mutable bool _written;        // used for write()
       int _tick;
+      Spatium _extraLeadingSpace;
+      Spatium _extraTrailingSpace;
       QList<qreal>   _dotPosX;     ///< size = staves
 
       QList<Spanner*> _spannerFor;
@@ -106,8 +109,8 @@ class Segment : public Element {
 
       Measure* measure() const            { return (Measure*)parent(); }
       System* system() const              { return (System*)parent()->parent(); }
-      qreal x() const                    { return ipos().x();         }
-      void setX(qreal v)                 { rxpos() = v;               }
+      qreal x() const                     { return ipos().x();         }
+      void setX(qreal v)                  { rxpos() = v;               }
 
       void insertStaff(int staff);
       void removeStaff(int staff);
@@ -118,30 +121,41 @@ class Segment : public Element {
 
       void sortStaves(QList<int>& dst);
       const char* subTypeName() const;
-      SegmentType segmentType() const     { return SegmentType(subtype()); }
       static SegmentType segmentType(ElementType type);
+      SegmentType segmentType() const            { return SegmentType(subtype()); }
       void removeGeneratedElements();
-      bool isEmpty() const               { return empty; }
+      bool isEmpty() const                       { return empty; }
       void fixStaffIdx();
-      bool isChordRest() const           { return subtype() == SegChordRest; }
-      bool isGrace() const               { return subtype() == SegGrace; }
+      bool isChordRest() const                   { return subtype() == SegChordRest; }
+      bool isGrace() const                       { return subtype() == SegGrace; }
       void setTick(int);
       int tick() const;
-      int rtick() const       { return _tick; } // tickposition relative to measure start
-      void setRtick(int val)  { _tick = val; }
+      int rtick() const                          { return _tick; } // tickposition relative to measure start
+      void setRtick(int val)                     { _tick = val; }
 
-      QList<Spanner*> spannerFor() const  { return _spannerFor;  }
-      QList<Spanner*> spannerBack() const { return _spannerBack;       }
-      void addSpannerBack(Spanner* e)     { _spannerBack.append(e);    }
-      bool removeSpannerBack(Spanner* e)  { return _spannerBack.removeOne(e); }
-      void addSpannerFor(Spanner* e)      { _spannerFor.append(e);    }
-      bool removeSpannerFor(Spanner* e)   { return _spannerFor.removeOne(e); }
+      QList<Spanner*> spannerFor() const         { return _spannerFor;         }
+      QList<Spanner*> spannerBack() const        { return _spannerBack;        }
+      void addSpannerBack(Spanner* e)            { _spannerBack.append(e);     }
+      bool removeSpannerBack(Spanner* e)         { return _spannerBack.removeOne(e); }
+      void addSpannerFor(Spanner* e)             { _spannerFor.append(e);      }
+      bool removeSpannerFor(Spanner* e)          { return _spannerFor.removeOne(e); }
 
-      const QList<Element*>& annotations() const  { return _annotations;  }
-      void removeAnnotation(Element* e)           { _annotations.removeOne(e); }
+      const QList<Element*>& annotations() const { return _annotations;        }
+      void removeAnnotation(Element* e)          { _annotations.removeOne(e);  }
 
-      qreal dotPosX(int staffIdx) const          { return _dotPosX[staffIdx]; }
-      void setDotPosX(int staffIdx, qreal val)   { _dotPosX[staffIdx] = val;  }
+      qreal dotPosX(int staffIdx) const          { return _dotPosX[staffIdx];  }
+      void setDotPosX(int staffIdx, qreal val)   { _dotPosX[staffIdx] = val;   }
+
+      Spatium extraLeadingSpace() const          { return _extraLeadingSpace;  }
+      void setExtraLeadingSpace(Spatium v)       { _extraLeadingSpace = v;     }
+      Spatium extraTrailingSpace() const         { return _extraTrailingSpace; }
+      void setExtraTrailingSpace(Spatium v)      { _extraTrailingSpace = v;    }
+      bool written() const                       { return _written;            }
+      void setWritten(bool val)                  { _written = val;             }
+      virtual void write(Xml&) const;
+      virtual void read(QDomElement);
+      virtual QVariant getProperty(int propertyId) const;
+      virtual void setProperty(int propertyId, const QVariant&);
       };
 
 #endif

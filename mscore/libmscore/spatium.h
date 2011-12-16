@@ -25,13 +25,14 @@ class Spatium {
       qreal _val;
 
    public:
-      Spatium()                        { _val = 0.0; }
+      Spatium()                       { _val = 0.0; }
       explicit Spatium(qreal v)       { _val = v; }
       qreal val() const               { return _val; }
       bool operator>(const Spatium& a) const  { return _val > a._val; }
       bool operator<(const Spatium& a) const  { return _val < a._val; }
       bool operator==(const Spatium& a) const { return _val == a._val; }
       bool operator!=(const Spatium& a) const { return _val != a._val; }
+      bool isZero() const                     { return _val == 0.0; }
 
       Spatium& operator+=(const Spatium& a) {
             _val += a._val;

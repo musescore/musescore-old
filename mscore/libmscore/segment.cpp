@@ -747,3 +747,68 @@ void Segment::swapElements(int i1, int i2)
       }
 
 
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Segment::write(Xml& xml) const
+      {
+      if (_written)
+            return;
+      _written = true;
+      if (_extraLeadingSpace.isZero() && _extraTrailingSpace.isZero())
+            return;
+      xml.stag(name());
+      xml.tag("leadingSpace", _extraLeadingSpace.val());
+      xml.tag("trailingSpace", _extraTrailingSpace.val());
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void Segment::read(QDomElement e)
+      {
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
+
+            if (tag == "leadingSpace")
+                  _extraLeadingSpace = Spatium(val.toDouble());
+            else if (tag == "trailingSpace")
+                  _extraTrailingSpace = Spatium(val.toDouble());
+            else
+                  domError(e);
+            }
+      }
+
+//---------------------------------------------------------
+//   getProperty
+//---------------------------------------------------------
+
+QVariant Segment::getProperty(int propertyId) const
+      {
+      switch(propertyId) {
+            case P_LEADING_SPACE:   return extraLeadingSpace().val();
+            case P_TRAILING_SPACE:  return extraTrailingSpace().val();
+            default:
+                  return Element::getProperty(propertyId);
+            }
+      }
+
+//---------------------------------------------------------
+//   setProperty
+//---------------------------------------------------------
+
+void Segment::setProperty(int propertyId, const QVariant& v)
+      {
+      switch(propertyId) {
+            case P_LEADING_SPACE: setExtraLeadingSpace(Spatium(v.toDouble())); break;
+            case P_TRAILING_SPACE: setExtraTrailingSpace(Spatium(v.toDouble())); break;
+            default:
+                  Element::setProperty(propertyId, v);
+            }
+      }
+
+
