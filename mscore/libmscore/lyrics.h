@@ -31,7 +31,7 @@ class Lyrics : public Text {
 
    private:
       int _ticks;             ///< if > 0 then draw an underline to tick() + _ticks
-                              ///< (melissma)
+                              ///< (melisma)
       Syllabic _syllabic;
       QList<Line*> _separator;
       Text* _verseNumber;
@@ -70,7 +70,7 @@ class Lyrics : public Text {
       int ticks() const             { return _ticks;    }
       void setTicks(int tick)       { _ticks = tick;    }
       int endTick() const;
-      bool isMelissma() const       { return _ticks > 0; }
+      bool isMelisma() const       { return _ticks > 0; }
 
       void clearSeparator()         { _separator.clear(); } // TODO: memory leak
       QList<Line*>* separatorList() { return &_separator; }

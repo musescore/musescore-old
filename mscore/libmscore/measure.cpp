@@ -2864,7 +2864,7 @@ void Measure::layoutX(qreal stretch)
                                           continue;
                                     l->layout();
                                     lyrics = l;
-                                    if (!lyrics->isMelissma()) {
+                                    if (!lyrics->isMelisma()) {
                                           QRectF b(l->bbox().translated(l->pos()));
                                           llw = qMax(llw, -b.left());
                                           rrw = qMax(rrw, b.right());
