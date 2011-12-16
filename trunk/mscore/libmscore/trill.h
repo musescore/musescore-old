@@ -22,7 +22,9 @@ class QPainter;
 
 
 // subtypes:
-enum { TRILL_LINE, UPPRALL_LINE, PRALLPRALL_LINE };
+enum {
+      TRILL_LINE, UPPRALL_LINE, DOWNPRALL_LINE, PRALLPRALL_LINE
+      };
 
 //---------------------------------------------------------
 //   TrillSegment

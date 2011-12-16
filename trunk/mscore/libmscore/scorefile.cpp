@@ -1425,6 +1425,8 @@ void Score::writeSegments(Xml& xml, const Measure* m, int strack, int etrack, Se
       {
       for (int track = strack; track < etrack; ++track) {
             for (Segment* segment = fs; segment && segment != ls; segment = segment->next1()) {
+                  if (track == 0)
+                        segment->setWritten(false);
                   Element* e = segment->element(track);
                   //
                   // special case: - barline span > 1
@@ -1543,6 +1545,7 @@ void Score::writeSegments(Xml& xml, const Measure* m, int strack, int etrack, Se
                         }
                   else
                         e->write(xml);
+                  segment->write(xml);    // write only once
                   }
             }
       }

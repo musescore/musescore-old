@@ -19,6 +19,7 @@
 #include "ui_inspector_hbox.h"
 #include "ui_inspector_articulation.h"
 #include "ui_inspector_spacer.h"
+#include "ui_inspector_segment.h"
 
 class Element;
 class Inspector;
@@ -111,6 +112,42 @@ class InspectorSpacer : public InspectorElementBase {
 
    public:
       InspectorSpacer(Inspector*, QWidget* parent = 0);
+      virtual void setElement(Element*);
+      virtual void apply();
+      };
+
+//---------------------------------------------------------
+//   InspectorNote
+//---------------------------------------------------------
+
+class InspectorNote : public InspectorElementBase {
+      Q_OBJECT
+
+      Ui::InspectorElement iElement;
+      Ui::InspectorSegment iSegment;
+
+   private slots:
+      void resetLeadingSpace();
+      void resetTrailingSpace();
+
+   public:
+      InspectorNote(Inspector*, QWidget* parent = 0);
+      virtual void setElement(Element*);
+      virtual void apply();
+      };
+
+//---------------------------------------------------------
+//   InspectorRest
+//---------------------------------------------------------
+
+class InspectorRest : public InspectorElementBase {
+      Q_OBJECT
+
+      Ui::InspectorElement iElement;
+      Ui::InspectorSegment iSegment;
+
+   public:
+      InspectorRest(Inspector*, QWidget* parent = 0);
       virtual void setElement(Element*);
       virtual void apply();
       };

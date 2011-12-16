@@ -388,6 +388,10 @@ void MuseScore::populatePalette()
       sp->append(trill, tr("Upprall line"));
 
       trill = new Trill(gscore);
+      trill->setSubtype("downprall");
+      sp->append(trill, tr("Downprall line"));
+
+      trill = new Trill(gscore);
       trill->setSubtype("prallprall");
       sp->append(trill, tr("Prallprall line"));
 

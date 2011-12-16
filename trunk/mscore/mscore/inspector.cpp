@@ -18,6 +18,10 @@
 #include "libmscore/box.h"
 #include "libmscore/undo.h"
 #include "libmscore/spacer.h"
+#include "libmscore/note.h"
+#include "libmscore/chord.h"
+#include "libmscore/segment.h"
+#include "libmscore/rest.h"
 
 //---------------------------------------------------------
 //   showInspector
@@ -111,12 +115,15 @@ void Inspector::setElement(Element* e)
                   case HBOX:         ie = new InspectorHBox(this, this); break;
                   case ARTICULATION: ie = new InspectorArticulation(this, this); break;
                   case SPACER:       ie = new InspectorSpacer(this, this); break;
+                  case NOTE:         ie = new InspectorNote(this, this); break;
+                  case REST:         ie = new InspectorRest(this, this); break;
                   default:           ie = new InspectorElement(this, this); break;
                   }
             layout->insertWidget(0, ie);
             }
       _element = e;
       ie->setElement(_element);
+      apply->setEnabled(false);
       }
 
 //---------------------------------------------------------
@@ -415,3 +422,155 @@ void InspectorSpacer::apply()
             mscore->endCmd();
             }
       }
+
+//---------------------------------------------------------
+//   InspectorNote
+//---------------------------------------------------------
+
+InspectorNote::InspectorNote(Inspector* i, QWidget* parent)
+   : InspectorElementBase(i, parent)
+      {
+      QWidget* w1 = new QWidget;
+      QWidget* w2 = new QWidget;
+      layout = new QVBoxLayout;
+      setLayout(layout);
+
+      iElement.setupUi(w1);
+      iSegment.setupUi(w2);
+      layout->addWidget(w1);
+      layout->addWidget(w2);
+      connect(iElement.x, SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      connect(iElement.y, SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      connect(iSegment.leadingSpace, SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      connect(iSegment.trailingSpace, SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      connect(iSegment.resetLeadingSpace, SIGNAL(clicked()), SLOT(resetLeadingSpace()));
+      connect(iSegment.resetTrailingSpace, SIGNAL(clicked()), SLOT(resetTrailingSpace()));
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void InspectorNote::setElement(Element* e)
+      {
+      Note* note = static_cast<Note*>(e);
+      Segment* segment = note->chord()->segment();
+      iElement.elementName->setText(e->name());
+
+      qreal _spatium = e->score()->spatium();
+      iElement.x->setValue(e->pos().x() / _spatium);
+      iElement.y->setValue(e->pos().y() / _spatium);
+      iSegment.leadingSpace->setValue(segment->extraLeadingSpace().val());
+      iSegment.trailingSpace->setValue(segment->extraTrailingSpace().val());
+      }
+
+//---------------------------------------------------------
+//   resetLeadingSpace
+//---------------------------------------------------------
+
+void InspectorNote::resetLeadingSpace()
+      {
+      iSegment.leadingSpace->setValue(0.0);
+      }
+
+//---------------------------------------------------------
+//   resetTrailingSpace
+//---------------------------------------------------------
+
+void InspectorNote::resetTrailingSpace()
+      {
+      iSegment.trailingSpace->setValue(0.0);
+      }
+
+//---------------------------------------------------------
+//   apply
+//---------------------------------------------------------
+
+void InspectorNote::apply()
+      {
+      Note* note       = static_cast<Note*>(inspector->element());
+      Segment* segment = note->chord()->segment();
+      Score* score     = note->score();
+
+      qreal _spatium  = score->spatium();
+      QPointF o(iElement.x->value() * _spatium, iElement.y->value() * _spatium);
+      score->startCmd();
+      if (o != note->pos())
+            score->undo()->push(new ChangeUserOffset(note, o - note->ipos()));
+      qreal val = iSegment.leadingSpace->value();
+      if (segment->extraLeadingSpace().val() != val)
+            score->undo()->push(new ChangeProperty(segment, P_LEADING_SPACE, val));
+      val = iSegment.trailingSpace->value();
+      if (segment->extraTrailingSpace().val() != val)
+            score->undo()->push(new ChangeProperty(segment, P_TRAILING_SPACE, val));
+      score->setLayoutAll(true);
+      score->endCmd();
+      mscore->endCmd();
+      }
+
+//---------------------------------------------------------
+//   InspectorRest
+//---------------------------------------------------------
+
+InspectorRest::InspectorRest(Inspector* i, QWidget* parent)
+   : InspectorElementBase(i, parent)
+      {
+      QWidget* w1 = new QWidget;
+      QWidget* w2 = new QWidget;
+      layout = new QVBoxLayout;
+      setLayout(layout);
+
+      iElement.setupUi(w1);
+      iSegment.setupUi(w2);
+      layout->addWidget(w1);
+      layout->addWidget(w2);
+      connect(iElement.x, SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      connect(iElement.y, SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      connect(iSegment.leadingSpace, SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      connect(iSegment.trailingSpace, SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void InspectorRest::setElement(Element* e)
+      {
+      Rest* rest = static_cast<Rest*>(e);
+      Segment* segment = rest->segment();
+      iElement.elementName->setText(e->name());
+
+      qreal _spatium = e->score()->spatium();
+      iElement.x->setValue(e->pos().x() / _spatium);
+      iElement.y->setValue(e->pos().y() / _spatium);
+      iSegment.leadingSpace->setValue(segment->extraLeadingSpace().val());
+      iSegment.trailingSpace->setValue(segment->extraTrailingSpace().val());
+      }
+
+//---------------------------------------------------------
+//   apply
+//---------------------------------------------------------
+
+void InspectorRest::apply()
+      {
+      Rest* rest       = static_cast<Rest*>(inspector->element());
+      Segment* segment = rest->segment();
+      Score* score     = rest->score();
+
+      qreal _spatium  = score->spatium();
+      QPointF o(iElement.x->value() * _spatium, iElement.y->value() * _spatium);
+      score->startCmd();
+      if (o != rest->pos())
+            score->undo()->push(new ChangeUserOffset(rest, o - rest->ipos()));
+      qreal val = iSegment.leadingSpace->value();
+      if (segment->extraLeadingSpace().val() != val)
+            score->undo()->push(new ChangeProperty(segment, P_LEADING_SPACE, val));
+      val = iSegment.trailingSpace->value();
+      if (segment->extraTrailingSpace().val() != val)
+            score->undo()->push(new ChangeProperty(segment, P_TRAILING_SPACE, val));
+      score->setLayoutAll(true);
+      score->endCmd();
+      mscore->endCmd();
+      }
+
+
