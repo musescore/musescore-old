@@ -1213,14 +1213,18 @@ void ExportMusicXml::moveToTick(int t)
       {
       // qDebug("ExportMusicXml::moveToTick(t=%d) tick=%d\n", t, tick);
       if (t < tick) {
+#ifdef DEBUG_TICK
             qDebug(" -> backup");
+#endif
             attr.doAttr(xml, false);
             xml.stag("backup");
             xml.tag("duration", (tick - t) / div);
             xml.etag();
             }
       else if (t > tick) {
+#ifdef DEBUG_TICK
             qDebug(" -> forward");
+#endif
             attr.doAttr(xml, false);
             xml.stag("forward");
             xml.tag("duration", (t - tick) / div);
@@ -3003,6 +3007,7 @@ static void repeatAtMeasureStop(Xml& xml, Measure* m, int strack, int etrack, in
                                     case TEXT:
                                     case DYNAMIC:
                                     case HARMONY:
+                                          break;
                                     case MARKER:
                                           {
                                           // filter out the markers at measure stop

@@ -168,6 +168,7 @@ rwtestAllXml() {
       rwtestXml    musicxml/testNotesRests2.xml
       rwtestXmlRef musicxml/testNumberedLyrics.xml
       rwtestXmlRef musicxml/testPartsSpecialCases.xml
+      rwtestXml    musicxml/testSlurs.xml
       rwtestXml    musicxml/testStaffTwoKeySigs.xml
       rwtestXml    musicxml/testSystemBrackets1.xml
       rwtestXml    musicxml/testSystemBrackets2.xml
