@@ -43,6 +43,7 @@
 #include "mscore.h"
 #include "accidental.h"
 #include "undo.h"
+#include "layout.h"
 
 //---------------------------------------------------------
 //   rebuildBspTree
@@ -1990,5 +1991,93 @@ void Score::doLayoutPages()
             }
       foreach(MuseScoreView* v, viewer)
             v->layoutChanged();
+      }
+
+//---------------------------------------------------------
+//   sff
+//    compute 1/Force for a given Extend
+//---------------------------------------------------------
+
+qreal sff(qreal x, qreal xMin, SpringMap& springs)
+      {
+      if (x <= xMin)
+            return 0.0;
+      iSpring i = springs.begin();
+      qreal c  = i->second.stretch;
+      if (c == 0.0)           //DEBUG
+            c = 1.1;
+      qreal f = 0.0;
+      for (; i != springs.end();) {
+            xMin -= i->second.fix;
+            f = (x - xMin) / c;
+            ++i;
+            if (i == springs.end() || f <= i->first)
+                  break;
+            c += i->second.stretch;
+            }
+      return f;
+      }
+
+//---------------------------------------------------------
+//   respace
+//---------------------------------------------------------
+
+void Score::respace(QList<ChordRest*>* elements)
+      {
+      ChordRest* cr1 = elements->front();
+      ChordRest* cr2 = elements->back();
+      int n          = elements->size();
+      qreal x1       = cr1->segment()->pos().x();
+      qreal x2       = cr2->segment()->pos().x();
+
+      qreal width[n-1];
+      int ticksList[n-1];
+      int minTick = 100000;
+
+      for (int i = 0; i < n-1; ++i) {
+            ChordRest* cr  = (*elements)[i];
+            ChordRest* ncr = (*elements)[i+1];
+            Space space(cr->space());
+            Space nspace(ncr->space());
+            width[i] = space.rw() + nspace.lw();
+            ticksList[i] = ncr->segment()->tick() - cr->segment()->tick();
+            minTick = qMin(ticksList[i], minTick);
+            }
+
+      //---------------------------------------------------
+      // compute stretches
+      //---------------------------------------------------
+
+      SpringMap springs;
+      qreal minimum = 0.0;
+      for (int i = 0; i < n-1; ++i) {
+            qreal w   = width[i];
+            int t     = ticksList[i];
+            qreal str = 1.0 + .6 * log(qreal(t) / qreal(minTick)) / log(2.0);
+            qreal d   = w / str;
+
+            springs.insert(std::pair<qreal, Spring>(d, Spring(i, str, w)));
+            minimum += w;
+            }
+
+      //---------------------------------------------------
+      //    distribute stretch to elements
+      //---------------------------------------------------
+
+      qreal force = sff(x2 - x1, minimum, springs);
+      for (iSpring i = springs.begin(); i != springs.end(); ++i) {
+            qreal stretch = force * i->second.stretch;
+            if (stretch < i->second.fix)
+                  stretch = i->second.fix;
+            width[i->second.seg] = stretch;
+            }
+      qreal x = x1;
+      for (int i = 1; i < n-1; ++i) {
+            x += width[i-1];
+            ChordRest* cr = (*elements)[i];
+            qreal dx = x - cr->segment()->pos().x();
+//            cr->setUserXoffset(dx);
+            cr->rxpos() += dx;
+            }
       }
 

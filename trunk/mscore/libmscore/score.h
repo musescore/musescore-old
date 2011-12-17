@@ -868,6 +868,7 @@ class Score {
       void cmdSelectAll();
       void setUndoRedo(bool val)            { _undoRedo = val; }
       bool undoRedo() const                 { return _undoRedo; }
+      void respace(QList<ChordRest*>* elements);
       };
 
 extern Score* gscore;

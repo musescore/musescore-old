@@ -1,4 +1,6 @@
-17.dec (lv)
+17.dec (ws)
+      - new feature: respacing beams (inspector property)
+      (lv)
       - remove \n from qDebug statements
       - disabled many debug messages
       - fix #12445: [MusicXML] Import can produce empty voice 1

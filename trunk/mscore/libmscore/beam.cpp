@@ -183,6 +183,7 @@ Beam::Beam(Score* s)
       setFlags(ELEMENT_SELECTABLE);
       _direction       = AUTO;
       _up              = -1;
+      _distribute      = false;
       _userModified[0] = false;
       _userModified[1] = false;
       _grow1           = 1.0;
@@ -390,7 +391,6 @@ void Beam::layout1()
             slope = 0.0;
             foreach(ChordRest* cr, _elements) {
                   if (cr->type() == CHORD) {
-//                        cr->setUp(_up);
                         // set members maxDuration, c1, c2
                         if (!maxDuration.isValid() || (maxDuration < cr->durationType()))
                               maxDuration = cr->durationType();
@@ -585,6 +585,8 @@ inline qreal absLimit(qreal val, qreal limit)
 
 void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
       {
+      if (_distribute)
+            score()->respace(&crl);
       Chord* c1 = 0;          // first chord in beam
       Chord* c2 = 0;          // last chord in beam
       foreach (ChordRest* cr, crl) {
@@ -1179,6 +1181,8 @@ void Beam::write(Xml& xml) const
             case AUTO:
                   break;
             }
+      if (_distribute)
+            xml.tag("distribute", _distribute);
       int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
       if (_userModified[idx]) {
             qreal _spatium = spatium();
@@ -1253,6 +1257,8 @@ void Beam::read(QDomElement e)
                   else
                         domError(e);
                   }
+            else if (tag == "distribute")
+                  _distribute = val.toInt();
             else if (tag == "growLeft")
                   _grow1 = val.toDouble();
             else if (tag == "growRight")
@@ -1383,6 +1389,7 @@ QVariant Beam::getProperty(int propertyId) const
       {
       switch(propertyId) {
             case P_BEAM_DIRECTION: return beamDirection();
+            case P_DISTRIBUTE:     return distribute();
             default:
                   return Element::getProperty(propertyId);
             }
@@ -1396,9 +1403,11 @@ void Beam::setProperty(int propertyId, const QVariant& v)
       {
       switch(propertyId) {
             case P_BEAM_DIRECTION: setBeamDirection(Direction(v.toInt())); break;
+            case P_DISTRIBUTE:     setDistribute(v.toBool()); break;
             default:
                   Element::setProperty(propertyId, v);
             }
+      setGenerated(false);
       }
 
 

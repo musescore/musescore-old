@@ -75,6 +75,7 @@
 #include "tupletmap.h"
 #include "spannermap.h"
 #include "accidental.h"
+#include "layout.h"
 
 //---------------------------------------------------------
 //   MStaff
@@ -2704,45 +2705,6 @@ void Space::max(const Space& s)
             _rw = s._rw;
       }
 
-//---------------------------------------------------------
-//   Spring
-//---------------------------------------------------------
-
-struct Spring {
-      int seg;
-      qreal stretch;
-      qreal fix;
-      Spring(int i, qreal s, qreal f) : seg(i), stretch(s), fix(f) {}
-      };
-
-typedef std::multimap<qreal, Spring, std::less<qreal> > SpringMap;
-typedef SpringMap::iterator iSpring;
-
-//---------------------------------------------------------
-//   sff
-//    compute 1/Force for a given Extend
-//---------------------------------------------------------
-
-static qreal sff(qreal x, qreal xMin, SpringMap& springs)
-      {
-      if (x <= xMin)
-            return 0.0;
-      iSpring i = springs.begin();
-      qreal c  = i->second.stretch;
-      if (c == 0.0)           //DEBUG
-            c = 1.1;
-      qreal f = 0.0;
-      for (; i != springs.end();) {
-            xMin -= i->second.fix;
-            f = (x - xMin) / c;
-            ++i;
-            if (i == springs.end() || f <= i->first)
-                  break;
-            c += i->second.stretch;
-            }
-      return f;
-      }
-
 //-----------------------------------------------------------------------------
 //    layoutX
 ///   \brief main layout routine for note spacing
@@ -2985,7 +2947,7 @@ void Measure::layoutX(qreal stretch)
       //---------------------------------------------------
 
       SpringMap springs;
-      qreal stretchSum = 0.0;
+//      qreal stretchSum = 0.0;
 
       qreal minimum = xpos[0];
       for (int i = 0; i < segs; ++i) {
@@ -2998,7 +2960,7 @@ void Measure::layoutX(qreal stretch)
                   if (minTick > 0)
                       str += .6 * log(qreal(t) / qreal(minTick)) / log(2.0);
                   d = w / str;
-                  stretchSum += str;
+//                  stretchSum += str;
                   }
             else {
                   str = 0.0;              // dont stretch timeSig and key

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>178</width>
-    <height>90</height>
+    <width>191</width>
+    <height>96</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -44,16 +44,9 @@
     </widget>
    </item>
    <item>
-    <layout class="QFormLayout" name="formLayout">
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Offset X:</string>
-       </property>
-      </widget>
-     </item>
+    <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="1">
-      <widget class="QDoubleSpinBox" name="x">
+      <widget class="QDoubleSpinBox" name="offsetX">
        <property name="suffix">
         <string extracomment="spatium unit">sp</string>
        </property>
@@ -75,8 +68,15 @@
        </property>
       </widget>
      </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Offset X:</string>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="1">
-      <widget class="QDoubleSpinBox" name="y">
+      <widget class="QDoubleSpinBox" name="offsetY">
        <property name="suffix">
         <string extracomment="spatium unit">sp</string>
        </property>
@@ -91,10 +91,34 @@
        </property>
       </widget>
      </item>
+     <item row="0" column="2">
+      <widget class="QToolButton" name="resetX">
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="musescore.qrc">
+         <normaloff>:/data/icons-dark/resetproperty.png</normaloff>:/data/icons-dark/resetproperty.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QToolButton" name="resetY">
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="musescore.qrc">
+         <normaloff>:/data/icons-dark/resetproperty.png</normaloff>:/data/icons-dark/resetproperty.png</iconset>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="musescore.qrc"/>
+ </resources>
  <connections/>
 </ui>
