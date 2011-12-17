@@ -1,3 +1,7 @@
+17.dec (lv)
+      - fix #12445: [MusicXML] Import can produce empty voice 1
+                     set (automativally) generated rests to invisible
+      - fix #13949: [trunk] MuseScore aborts when saving certain file as xml or mxl
 15.dec (ws)
       - new linetypes for upprall+trill prallprall+trill
       - fix line drop for page > 1

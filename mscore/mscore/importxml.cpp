@@ -1343,6 +1343,7 @@ static void fillGap(Measure* measure, int track, int tstart, int tend)
             Rest* rest = new Rest(measure->score(), d);
             rest->setDuration(Fraction::fromTicks(len));
             rest->setTrack(track);
+            rest->setVisible(false);
             Segment* s = measure->getSegment(rest, tstart);
             s->add(rest);
             len = rest->actualTicks();
