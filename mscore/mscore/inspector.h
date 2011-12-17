@@ -17,12 +17,53 @@
 #include "ui_inspector_element.h"
 #include "ui_inspector_vbox.h"
 #include "ui_inspector_hbox.h"
+#include "ui_inspector_beam.h"
 #include "ui_inspector_articulation.h"
 #include "ui_inspector_spacer.h"
 #include "ui_inspector_segment.h"
 
 class Element;
 class Inspector;
+
+//---------------------------------------------------------
+//   InspectorSegment
+//---------------------------------------------------------
+
+class InspectorSegment : public QWidget, Ui::InspectorSegment {
+      Q_OBJECT
+
+   private slots:
+      void resetLeadingSpaceClicked();
+      void resetTrailingSpaceClicked();
+
+   signals:
+      void enableApply();
+
+   public:
+      InspectorSegment(QWidget* parent = 0);
+      void setElement(const Element*);
+      void apply(Element*);
+      };
+
+//---------------------------------------------------------
+//   InspectorElementElement
+//---------------------------------------------------------
+
+class InspectorElementElement : public QWidget, Ui::InspectorElement {
+      Q_OBJECT
+
+   private slots:
+      void resetXClicked();
+      void resetYClicked();
+
+   signals:
+      void enableApply();
+
+   public:
+      InspectorElementElement(QWidget* parent = 0);
+      void setElement(const Element*);
+      void apply(Element*);
+      };
 
 //---------------------------------------------------------
 //   InspectorElementBase
@@ -36,7 +77,7 @@ class InspectorElementBase : public QWidget {
       Inspector* inspector;
 
    public:
-      InspectorElementBase(Inspector* i, QWidget* parent = 0) : QWidget(parent), inspector(i) {}
+      InspectorElementBase(QWidget* parent);
       virtual void setElement(Element*) = 0;
       virtual void apply() {}
       };
@@ -48,10 +89,10 @@ class InspectorElementBase : public QWidget {
 class InspectorElement : public InspectorElementBase {
       Q_OBJECT
 
-      Ui::InspectorElement ie;
+      InspectorElementElement* ie;
 
    public:
-      InspectorElement(Inspector*, QWidget* parent = 0);
+      InspectorElement(QWidget* parent);
       virtual void setElement(Element*);
       virtual void apply();
       };
@@ -66,7 +107,7 @@ class InspectorVBox : public InspectorElementBase {
       Ui::InspectorVBox vb;
 
    public:
-      InspectorVBox(Inspector*, QWidget* parent = 0);
+      InspectorVBox(QWidget* parent);
       virtual void setElement(Element*);
       virtual void apply();
       };
@@ -81,7 +122,7 @@ class InspectorHBox : public InspectorElementBase {
       Ui::InspectorHBox hb;
 
    public:
-      InspectorHBox(Inspector*, QWidget* parent = 0);
+      InspectorHBox(QWidget* parent);
       virtual void setElement(Element*);
       virtual void apply();
       };
@@ -96,7 +137,7 @@ class InspectorArticulation : public InspectorElementBase {
       Ui::InspectorArticulation ar;
 
    public:
-      InspectorArticulation(Inspector*, QWidget* parent = 0);
+      InspectorArticulation(QWidget* parent);
       virtual void setElement(Element*);
       virtual void apply();
       };
@@ -111,7 +152,7 @@ class InspectorSpacer : public InspectorElementBase {
       Ui::InspectorSpacer sp;
 
    public:
-      InspectorSpacer(Inspector*, QWidget* parent = 0);
+      InspectorSpacer(QWidget* parent);
       virtual void setElement(Element*);
       virtual void apply();
       };
@@ -123,15 +164,11 @@ class InspectorSpacer : public InspectorElementBase {
 class InspectorNote : public InspectorElementBase {
       Q_OBJECT
 
-      Ui::InspectorElement iElement;
-      Ui::InspectorSegment iSegment;
-
-   private slots:
-      void resetLeadingSpace();
-      void resetTrailingSpace();
+      InspectorElementElement* iElement;
+      InspectorSegment* iSegment;
 
    public:
-      InspectorNote(Inspector*, QWidget* parent = 0);
+      InspectorNote(QWidget* parent);
       virtual void setElement(Element*);
       virtual void apply();
       };
@@ -143,11 +180,29 @@ class InspectorNote : public InspectorElementBase {
 class InspectorRest : public InspectorElementBase {
       Q_OBJECT
 
-      Ui::InspectorElement iElement;
-      Ui::InspectorSegment iSegment;
+      InspectorElementElement* iElement;
+      InspectorSegment* iSegment;
 
    public:
-      InspectorRest(Inspector*, QWidget* parent = 0);
+      InspectorRest(QWidget* parent);
+      virtual void setElement(Element*);
+      virtual void apply();
+      };
+
+//---------------------------------------------------------
+//   InspectorBeam
+//---------------------------------------------------------
+
+class InspectorBeam : public InspectorElementBase {
+      Q_OBJECT
+
+      Ui::InspectorBeam b;
+
+   private slots:
+      void resetDistributeClicked();
+
+   public:
+      InspectorBeam(QWidget* parent);
       virtual void setElement(Element*);
       virtual void apply();
       };

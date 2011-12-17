@@ -56,7 +56,8 @@ class Beam : public Element {
       QList<QLineF*> beamSegments;
       Direction _direction;
       int _up;                // -1: unknown  0: down   1: up
-      qreal _grow1;          // define "feather" beams
+      bool _distribute;       // equal spacing of elements
+      qreal _grow1;           // define "feather" beams
       qreal _grow2;
 
       QList<BeamFragment*> fragments;     // beam splits across systems
@@ -128,6 +129,9 @@ class Beam : public Element {
       qreal grow2() const      { return _grow2; }
       void setGrow1(qreal val) { _grow1 = val; }
       void setGrow2(qreal val) { _grow2 = val; }
+
+      bool distribute() const      { return _distribute; }
+      void setDistribute(bool val) { _distribute = val;  }
 
       QVariant getProperty(int propertyId) const;
       void setProperty(int propertyId, const QVariant&);

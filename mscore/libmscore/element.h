@@ -136,6 +136,7 @@ enum {
       P_BEAM_DIRECTION,
       P_LEADING_SPACE,
       P_TRAILING_SPACE,
+      P_DISTRIBUTE,
       };
 
 
