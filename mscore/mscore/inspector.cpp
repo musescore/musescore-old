@@ -485,7 +485,7 @@ InspectorSegment::InspectorSegment(QWidget* parent)
       connect(leadingSpace,       SIGNAL(valueChanged(double)), SIGNAL(enableApply()));
       connect(trailingSpace,      SIGNAL(valueChanged(double)), SIGNAL(enableApply()));
       connect(resetLeadingSpace,  SIGNAL(clicked()), SLOT(resetLeadingSpaceClicked()));
-      connect(resetTrailingSpace, SIGNAL(clicked()), SLOT(resetLeadingSpaceClicked()));
+      connect(resetTrailingSpace, SIGNAL(clicked()), SLOT(resetTrailingSpaceClicked()));
       }
 
 //---------------------------------------------------------
