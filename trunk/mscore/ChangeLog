@@ -1,6 +1,9 @@
 17.dec (lv)
+      - remove \n from qDebug statements
+      - disabled many debug messages
       - fix #12445: [MusicXML] Import can produce empty voice 1
                      set (automativally) generated rests to invisible
+      - fix #12556: [Trunk] Tempo Text in MusicXML ignored
       - fix #13949: [trunk] MuseScore aborts when saving certain file as xml or mxl
 15.dec (ws)
       - new linetypes for upprall+trill prallprall+trill
