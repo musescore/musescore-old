@@ -270,8 +270,18 @@ void KeyList::insertTime(int tick, int len)
 //    "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B" }
 //---------------------------------------------------------
 
-int transposeKey(int key, int semitones)
+int transposeKey(int key, const Interval& interval)
       {
+                          // Cb  Gb Db Ab   Eb  Bb   F  C   G   D   A   E   B   F#  C#
+                          // -7  -6 -5 -4   -3  -2  -1  0   1   2   3   4   5   6   7
+      static int t1[] = {     7,  8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 10, 21 };
+      static int t2[] = {    -7, -6,-5, -4, -3, -2, -1, 0,  1,  2,  3,  4,  5,  6,  7 };
+
+      int tpc = t1[key + 7];
+      tpc = transposeTpc(tpc, interval, false);
+      return t2[tpc - 7];
+
+#if 0
       //                         Gb Db Ab Eb  Bb   F  C  G  D  A  E  B   F#
       //                         -6 -5 -4 -3  -2  -1  0  1  2  3  4  5   6
       //                          0  1  2  3   4  5   6  7  8  9 10  11  12
@@ -280,6 +290,8 @@ int transposeKey(int key, int semitones)
       //                          C  Db D  Eb  E   F  Gb  G Ab  A  Bb  B
       static const int kp1[] = {  6, 1, 8,  3, 10, 5,  0, 7, 2, 9,  4, 11 };
 
+
+      int semitones = interval.chromatic;
       while (semitones < 0)
             semitones += 12;
       semitones %= 12;
@@ -295,6 +307,7 @@ int transposeKey(int key, int semitones)
       kpitch = (kpitch + semitones) % 12;
       key = kp1[kpitch] - 6;
       return key;
+#endif
       }
 
 //---------------------------------------------------------

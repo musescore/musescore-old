@@ -2620,7 +2620,7 @@ void Score::transpose(int mode, TransposeDirection direction, int transposeKey,
             }
       if (trKeys) {
             transposeKeys(_selection.staffStart(), _selection.staffEnd(),
-               _selection.tickStart(), _selection.tickEnd(), interval.chromatic);
+               _selection.tickStart(), _selection.tickEnd(), interval);
             }
       setLayoutAll(true);
       }
@@ -2636,7 +2636,7 @@ void Score::cmdTransposeStaff(int staffIdx, Interval interval, bool useDoubleSha
       int startTrack = staffIdx * VOICES;
       int endTrack   = startTrack + VOICES;
 
-      transposeKeys(staffIdx, staffIdx+1, 0, lastSegment()->tick(), interval.chromatic);
+      transposeKeys(staffIdx, staffIdx+1, 0, lastSegment()->tick(), interval);
 
       for (Segment* segment = firstSegment(); segment; segment = segment->next1()) {
            for (int st = startTrack; st < endTrack; ++st) {
@@ -2712,7 +2712,7 @@ void Score::transpose(Note* n, Interval interval, bool useDoubleSharpsFlats)
 //    key -   -7(Cb) - +7(C#)
 //---------------------------------------------------------
 
-void Score::transposeKeys(int staffStart, int staffEnd, int tickStart, int tickEnd, int semitones)
+void Score::transposeKeys(int staffStart, int staffEnd, int tickStart, int tickEnd, const Interval& interval)
       {
       for (int staffIdx = staffStart; staffIdx < staffEnd; ++staffIdx) {
             if (staff(staffIdx)->staffType()->group() == PERCUSSION_STAFF)
@@ -2723,7 +2723,7 @@ void Score::transposeKeys(int staffStart, int staffEnd, int tickStart, int tickE
                   ke != km->lower_bound(tickEnd); ++ke) {
                   KeySigEvent oKey  = ke->second;
                   int tick  = ke->first;
-                  int nKeyType = transposeKey(oKey.accidentalType(), semitones);
+                  int nKeyType = transposeKey(oKey.accidentalType(), interval);
                   KeySigEvent nKey;
                   nKey.setAccidentalType(nKeyType);
                   (*km)[tick] = nKey;
