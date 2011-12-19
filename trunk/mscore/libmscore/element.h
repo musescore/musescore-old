@@ -16,6 +16,7 @@
 
 #include "xml.h"
 #include "mscore.h"
+#include "property.h"
 
 /**
  \file
@@ -113,31 +114,6 @@ struct EditData {
       bool hRaster;
       bool vRaster;
       };
-
-//------------------------------------------------------------------------
-//   Element Properties
-//    accessible through
-//    virtual QVariant Element::getProperty(int propertyId)
-//    virtual void Element::setProperty(int propertyId, const QVariant&)
-//------------------------------------------------------------------------
-
-enum {
-      P_SUBTYPE,
-      P_COLOR,
-      P_VISIBLE,
-      P_SMALL,
-      P_SHOW_COURTESY,
-      P_LINE_TYPE,
-      P_TPC,
-      P_ARTICULATION_ANCHOR,
-      P_DIRECTION,
-      P_STEM_DIRECTION,
-      P_SLUR_DIRECTION,
-      P_LEADING_SPACE,
-      P_TRAILING_SPACE,
-      P_DISTRIBUTE,
-      };
-
 
 //---------------------------------------------------------
 ///   \brief base class of score layout elements

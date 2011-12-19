@@ -17,6 +17,7 @@
 #include "mscore.h"
 #include "spatium.h"
 #include "fraction.h"
+#include "property.h"
 
 //---------------------------------------------------------
 //   Property
@@ -80,6 +81,7 @@ class Xml : public QTextStream {
       void tag(const char* name, const char* s)    { tag(name, QVariant(s)); }
       void tag(const char* name, const QString& s) { tag(name, QVariant(s)); }
       void tag(const char* name, const QWidget*);
+      void tag(const char* name, P_DATA_TYPE type, QVariant data);
 
       void writeHtml(const QString& s);
       void dump(int len, const unsigned char* p);
@@ -99,6 +101,6 @@ extern QRectF readRectF(const QDomElement&);
 extern QColor readColor(const QDomElement&);
 extern void domError(const QDomElement&);
 extern void domNotImplemented(const QDomElement&);
-
+extern QVariant readVariant(P_DATA_TYPE, const QString&);
 #endif
 

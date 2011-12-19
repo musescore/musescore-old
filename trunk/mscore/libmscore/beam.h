@@ -47,19 +47,6 @@ struct BeamFragment {
       };
 
 //---------------------------------------------------------
-//   template Property
-//---------------------------------------------------------
-
-template <class T>
-class Property {
-   public:
-      int id;
-      const char* name;                   // xml name of property
-      QVariant (T::*get)() const;         // pointer to getter function
-      void (T::*set)(const QVariant&);    // pointer to setter function
-      };
-
-//---------------------------------------------------------
 //   Beam
 //    Balken
 //---------------------------------------------------------
@@ -150,10 +137,10 @@ class Beam : public Element {
       void setDistribute(bool val)          { _distribute = val;  }
       void setDistribute(const QVariant& v) { _distribute = v.toBool(); }
 
-      QVariant getProperty(int propertyId) const;
-      void setProperty(int propertyId, const QVariant&);
+      virtual QVariant getProperty(int propertyId) const;
+      virtual void setProperty(int propertyId, const QVariant&);
+      virtual QString subtypeName() const   { return QString(); }
 
-   private:
       static Property<Beam> propertyList[];
       };
 

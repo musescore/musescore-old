@@ -1506,6 +1506,17 @@ void collectElements(void* data, Element* e)
       }
 
 //---------------------------------------------------------
+//   Space::operator+=
+//---------------------------------------------------------
+
+Space& Space::operator+=(const Space& s)
+      {
+      _lw += s._lw;
+      _rw += s._rw;
+      return *this;
+      }
+
+//---------------------------------------------------------
 //   getProperty
 //---------------------------------------------------------
 
@@ -1542,12 +1553,5 @@ void Element::setProperty(int propertyId, const QVariant& v)
             default:
                   qDebug("getProperty: unknown property %d\n", propertyId);
             }
-      }
-
-Space& Space::operator+=(const Space& s)
-      {
-      _lw += s._lw;
-      _rw += s._rw;
-      return *this;
       }
 
