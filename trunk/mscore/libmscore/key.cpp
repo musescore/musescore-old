@@ -261,13 +261,6 @@ void KeyList::insertTime(int tick, int len)
 
 //---------------------------------------------------------
 //   transposeKey
-//    -  F# changes to Gb
-//    -  Cb changes to enharmonic B
-//    -  C# changes to enharmonic Db
-//
-//     0    1    2    3     4    5    6     7    8     9    10    11
-//    "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" },
-//    "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B" }
 //---------------------------------------------------------
 
 int transposeKey(int key, const Interval& interval)
@@ -280,34 +273,6 @@ int transposeKey(int key, const Interval& interval)
       int tpc = t1[key + 7];
       tpc = transposeTpc(tpc, interval, false);
       return t2[tpc - 7];
-
-#if 0
-      //                         Gb Db Ab Eb  Bb   F  C  G  D  A  E  B   F#
-      //                         -6 -5 -4 -3  -2  -1  0  1  2  3  4  5   6
-      //                          0  1  2  3   4  5   6  7  8  9 10  11  12
-      static const int kp[] =  {  6, 1, 8, 3, 10, 5,  0, 7, 2, 9, 4, 11, 6  };
-
-      //                          C  Db D  Eb  E   F  Gb  G Ab  A  Bb  B
-      static const int kp1[] = {  6, 1, 8,  3, 10, 5,  0, 7, 2, 9,  4, 11 };
-
-
-      int semitones = interval.chromatic;
-      while (semitones < 0)
-            semitones += 12;
-      semitones %= 12;
-
-      // switch to enharmonic key:
-      if (key == -7)
-            key = 5;
-      else if (key == 7)
-            key = -5;
-      key += 6;         // normalize key to 0 - 13
-
-      int kpitch = kp[key];
-      kpitch = (kpitch + semitones) % 12;
-      key = kp1[kpitch] - 6;
-      return key;
-#endif
       }
 
 //---------------------------------------------------------
