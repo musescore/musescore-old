@@ -30,6 +30,17 @@
 #include "mscore.h"
 
 //---------------------------------------------------------
+//   propertyList
+//---------------------------------------------------------
+
+Property<Beam> Beam::propertyList[] = {
+      { P_DIRECTION,  T_DIRECTION, "StemDirection", &Beam::vBeamDirection, &Beam::setBeamDirection },
+      { P_DISTRIBUTE, T_VARIANT,   "distribute",    &Beam::vDistribute,    &Beam::setDistribute }
+      };
+
+static const int PROPERTIES = sizeof(Beam::propertyList)/sizeof(*Beam::propertyList);
+
+//---------------------------------------------------------
 //   endBeam
 //---------------------------------------------------------
 
@@ -1171,18 +1182,12 @@ void Beam::write(Xml& xml) const
       {
       xml.stag(QString("Beam id=\"%1\"").arg(_id));
       Element::writeProperties(xml);
-      switch(_direction) {
-            case UP:
-                  xml.tag("StemDirection", QVariant("up"));
-                  break;
-            case DOWN:
-                  xml.tag("StemDirection", QVariant("down"));
-                  break;
-            case AUTO:
-                  break;
+
+      for (int i = 0; i < PROPERTIES; ++i) {
+            const Property<Beam>& p = propertyList[i];
+            xml.tag(p.name, p.type, ((*this).*(p.get))());
             }
-      if (_distribute)
-            xml.tag("distribute", _distribute);
+
       int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
       if (_userModified[idx]) {
             qreal _spatium = spatium();
@@ -1212,6 +1217,21 @@ void Beam::read(QDomElement e)
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
+            bool found = false;
+            for (int i = 0; i < PROPERTIES; ++i) {
+                  const Property<Beam>& p = propertyList[i];
+                  if (tag == p.name) {
+                        QVariant v = readVariant(p.type, val);
+                        if (v.isValid())
+                              ((*this).*(p.set))(v);
+                        else
+                              domError(e);
+                        found = true;
+                        break;
+                        }
+                  }
+            if (found)
+                  continue;
             if (tag == "y1") {
                   if (fragments.isEmpty())
                         fragments.append(new BeamFragment);
@@ -1245,20 +1265,6 @@ void Beam::read(QDomElement e)
                         }
                   fragments.append(f);
                   }
-            else if (tag == "StemDirection") {
-                  if (val == "up") {
-                        _direction = UP;
-                        _up = 1;
-                        }
-                  else if (val == "down") {
-                        _direction = DOWN;
-                        _up = 0;
-                        }
-                  else
-                        domError(e);
-                  }
-            else if (tag == "distribute")
-                  _distribute = val.toInt();
             else if (tag == "growLeft")
                   _grow1 = val.toDouble();
             else if (tag == "growRight")
@@ -1387,11 +1393,11 @@ Element* Beam::drop(const DropData& data)
 
 QVariant Beam::getProperty(int propertyId) const
       {
-      for (int i = 0; i < 2; ++i) {
+      for (int i = 0; i < PROPERTIES; ++i) {
             if (propertyList[i].id == propertyId)
                   return ((*this).*(propertyList[i].get))();
             }
-      return QVariant();
+      return Element::getProperty(propertyId);
       }
 
 //---------------------------------------------------------
@@ -1400,21 +1406,12 @@ QVariant Beam::getProperty(int propertyId) const
 
 void Beam::setProperty(int propertyId, const QVariant& v)
       {
-      for (int i = 0; i < 2; ++i) {
+      for (int i = 0; i < PROPERTIES; ++i) {
             if (propertyList[i].id == propertyId) {
                   ((*this).*(propertyList[i].set))(v);
-                  break;
+                  setGenerated(false);
+                  return;
                   }
             }
-      setGenerated(false);
+      Element::setProperty(propertyId, v);
       }
-
-//---------------------------------------------------------
-//   propertyList
-//---------------------------------------------------------
-
-Property<Beam> Beam::propertyList[2] = {
-      { P_DIRECTION,  "StemDirection", &Beam::vBeamDirection, &Beam::setBeamDirection },
-      { P_DISTRIBUTE, "distribute",    &Beam::vDistribute,    &Beam::setDistribute }
-      };
-

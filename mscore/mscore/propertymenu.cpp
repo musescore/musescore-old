@@ -722,22 +722,15 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
                   }
             }
       else if (cmd == "tupletProps") {
+            if (e->type() == NOTE)
+                  e = static_cast<Note*>(e)->chord();
             Tuplet* ot = static_cast<ChordRest*>(e)->tuplet();
             TupletProperties vp(ot);
             if (vp.exec()) {
                   int bracketType = vp.bracketType();
                   int numberType  = vp.numberType();
-
-                  foreach(Element* e, score()->selection().elements()) {
-                        if (e->type() == REST) {
-                              Rest* r = static_cast<Rest*>(e);
-                              if (r->tuplet()) {
-                                    Tuplet* tuplet = r->tuplet();
-                                    if ((bracketType != tuplet->bracketType()) || (numberType != tuplet->numberType()))
-                                          score()->undo()->push(new ChangeTupletProperties(tuplet, numberType, bracketType));
-                                    }
-                              }
-                        }
+                  if ((bracketType != ot->bracketType()) || (numberType != ot->numberType()))
+                        score()->undo()->push(new ChangeTupletProperties(ot, numberType, bracketType));
                   }
             }
       else if (cmd == "tupletDelete") {

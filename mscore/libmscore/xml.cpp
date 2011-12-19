@@ -228,6 +228,52 @@ void Xml::netag(const char* s)
 
 //---------------------------------------------------------
 //   tag
+//---------------------------------------------------------
+
+void Xml::tag(const char* name, P_DATA_TYPE type, QVariant data)
+      {
+      switch(type) {
+            case T_VARIANT:
+                  tag(QString(name), data);
+                  break;
+            case T_DIRECTION:
+                  switch(Direction(data.toInt())) {
+                        case UP:
+                              tag("StemDirection", QVariant("up"));
+                              break;
+                        case DOWN:
+                              tag("StemDirection", QVariant("down"));
+                              break;
+                        case AUTO:
+                              break;
+                        }
+                  break;
+            }
+      }
+
+//---------------------------------------------------------
+//   readVariant
+//---------------------------------------------------------
+
+QVariant readVariant(P_DATA_TYPE type, const QString& data)
+      {
+      switch(type) {
+            case T_VARIANT:
+                  return QVariant(data);
+            case T_DIRECTION:
+                  if (data == "up")
+                        return QVariant(int(UP));
+                  if (data == "down")
+                        return QVariant(int(DOWN));
+                  if (data == "auto")
+                        return QVariant(int(AUTO));
+                  break;
+            }
+      return QVariant();
+      }
+
+//---------------------------------------------------------
+//   tag
 //    <mops>value</mops>
 //---------------------------------------------------------
 
