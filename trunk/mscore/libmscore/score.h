@@ -378,7 +378,7 @@ class Score {
       void layoutStage1();
       void layoutStage2();
       void layoutStage3();
-      void transposeKeys(int staffStart, int staffEnd, int tickStart, int tickEnd, int semitones);
+      void transposeKeys(int staffStart, int staffEnd, int tickStart, int tickEnd, const Interval&);
       void reLayout(Measure*);
 
       void checkSlurs();

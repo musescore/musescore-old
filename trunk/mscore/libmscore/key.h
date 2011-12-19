@@ -94,7 +94,8 @@ class KeyList : public std::map<const int, KeySigEvent> {
       void write(Xml&, const char* name) const;
       };
 
-extern int transposeKey(int oldKey, int semitones);
+struct Interval;
+extern int transposeKey(int oldKey, const Interval&);
 
 #endif
 
