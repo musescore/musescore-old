@@ -1106,7 +1106,7 @@ void Score::cmdFlip()
             if (e->type() == BEAM) {
                   Beam* beam = static_cast<Beam*>(e);
                   Direction dir = beam->isUp() ? DOWN : UP;
-                  undo()->push(new ChangeProperty(beam, P_BEAM_DIRECTION, dir));
+                  undo()->push(new ChangeProperty(beam, P_DIRECTION, dir));
                   }
             else if (e->type() == SLUR_SEGMENT) {
                   SlurTie* slur = static_cast<SlurSegment*>(e)->slurTie();

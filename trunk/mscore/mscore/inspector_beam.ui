@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>287</width>
-    <height>67</height>
+    <height>94</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -45,7 +45,7 @@
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="1">
+     <item row="0" column="2">
       <widget class="QToolButton" name="resetDistribute">
        <property name="text">
         <string>...</string>
@@ -56,7 +56,44 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="0">
+     <item row="1" column="2">
+      <widget class="QToolButton" name="resetDirection">
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="musescore.qrc">
+         <normaloff>:/data/icons-dark/resetproperty.png</normaloff>:/data/icons-dark/resetproperty.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QComboBox" name="direction">
+       <item>
+        <property name="text">
+         <string>Auto</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Up</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Down</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Direction:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0" colspan="2">
       <widget class="QCheckBox" name="distribute">
        <property name="text">
         <string>Distribute Elements</string>

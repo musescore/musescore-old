@@ -638,8 +638,10 @@ InspectorBeam::InspectorBeam(QWidget* parent)
 
       b.setupUi(w);
       layout->addWidget(w);
-      connect(b.distribute, SIGNAL(toggled(bool)), inspector, SLOT(enableApply()));
+      connect(b.distribute, SIGNAL(toggled(bool)),  SLOT(distributeToggled(bool)));
+      connect(b.direction,  SIGNAL(activated(int)), SLOT(directionActivated(int)));
       connect(b.resetDistribute, SIGNAL(clicked()), SLOT(resetDistributeClicked()));
+      connect(b.resetDirection,  SIGNAL(clicked()), SLOT(resetDirectionClicked()));
       }
 
 //---------------------------------------------------------
@@ -653,6 +655,8 @@ void InspectorBeam::setElement(Element* e)
       b.distribute->blockSignals(true);
       b.distribute->setChecked(beam->distribute());
       b.distribute->blockSignals(false);
+      b.direction->setCurrentIndex(beam->beamDirection());
+      b.resetDirection->setEnabled(beam->beamDirection() != AUTO);
       }
 
 //---------------------------------------------------------
@@ -665,13 +669,15 @@ void InspectorBeam::apply()
       Score* score = beam->score();
 
       bool distribute = b.distribute->isChecked();
-      if (beam->distribute() != distribute) {
-            score->startCmd();
+      Direction d     = Direction(b.direction->currentIndex());
+      score->startCmd();
+      if (beam->distribute() != distribute)
             score->undo()->push(new ChangeProperty(beam, P_DISTRIBUTE, distribute));
-            score->setLayoutAll(true);
-            score->endCmd();
-            mscore->endCmd();
-            }
+      if (beam->beamDirection() != d)
+            score->undo()->push(new ChangeProperty(beam, P_DIRECTION, d));
+      score->setLayoutAll(true);
+      score->endCmd();
+      mscore->endCmd();
       }
 
 //---------------------------------------------------------
@@ -681,5 +687,48 @@ void InspectorBeam::apply()
 void InspectorBeam::resetDistributeClicked()
       {
       b.distribute->setChecked(false);
+      }
+
+//---------------------------------------------------------
+//   resetDirectionClicked
+//---------------------------------------------------------
+
+void InspectorBeam::resetDirectionClicked()
+      {
+      b.direction->setCurrentIndex(AUTO);
+      }
+
+//---------------------------------------------------------
+//   directionActivated
+//---------------------------------------------------------
+
+void InspectorBeam::directionActivated(int idx)
+      {
+      b.resetDirection->setEnabled(Direction(idx) != AUTO);
+      inspector->enableApply(dirty());
+      }
+
+//---------------------------------------------------------
+//   distributeToggled
+//---------------------------------------------------------
+
+void InspectorBeam::distributeToggled(bool val)
+      {
+      b.resetDistribute->setEnabled(val);
+      inspector->enableApply(dirty());
+      }
+
+//---------------------------------------------------------
+//   dirty
+//    return true if a property has changed
+//---------------------------------------------------------
+
+bool InspectorBeam::dirty() const
+      {
+      const Beam* beam = static_cast<Beam*>(inspector->element());
+      bool distribute  = b.distribute->isChecked();
+      Direction d      = Direction(b.direction->currentIndex());
+      return (beam->distribute() != distribute)
+             || (beam->beamDirection() != d);
       }
 
