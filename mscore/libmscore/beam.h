@@ -47,6 +47,19 @@ struct BeamFragment {
       };
 
 //---------------------------------------------------------
+//   template Property
+//---------------------------------------------------------
+
+template <class T>
+class Property {
+   public:
+      int id;
+      const char* name;                   // xml name of property
+      QVariant (T::*get)() const;         // pointer to getter function
+      void (T::*set)(const QVariant&);    // pointer to setter function
+      };
+
+//---------------------------------------------------------
 //   Beam
 //    Balken
 //---------------------------------------------------------
@@ -118,23 +131,30 @@ class Beam : public Element {
       bool isUp() const                   { return _up; }
 
       void setBeamDirection(Direction d);
-      Direction beamDirection() const { return _direction; }
+      void setBeamDirection(const QVariant& v) { setBeamDirection(Direction(v.toInt())); }
+      Direction beamDirection() const       { return _direction; }
+      QVariant vBeamDirection() const       { return _direction; }
 
       virtual QPainterPath shape() const;
       virtual bool contains(const QPointF& p) const;
       virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
 
-      qreal grow1() const      { return _grow1; }
-      qreal grow2() const      { return _grow2; }
-      void setGrow1(qreal val) { _grow1 = val; }
-      void setGrow2(qreal val) { _grow2 = val; }
+      qreal grow1() const                   { return _grow1; }
+      qreal grow2() const                   { return _grow2; }
+      void setGrow1(qreal val)              { _grow1 = val; }
+      void setGrow2(qreal val)              { _grow2 = val; }
 
-      bool distribute() const      { return _distribute; }
-      void setDistribute(bool val) { _distribute = val;  }
+      bool distribute() const               { return _distribute; }
+      QVariant vDistribute() const          { return _distribute; }
+      void setDistribute(bool val)          { _distribute = val;  }
+      void setDistribute(const QVariant& v) { _distribute = v.toBool(); }
 
       QVariant getProperty(int propertyId) const;
       void setProperty(int propertyId, const QVariant&);
+
+   private:
+      static Property<Beam> propertyList[];
       };
 
 extern bool endBeam(const Fraction&, ChordRest* cr, ChordRest* prevCr);

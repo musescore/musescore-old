@@ -1387,12 +1387,11 @@ Element* Beam::drop(const DropData& data)
 
 QVariant Beam::getProperty(int propertyId) const
       {
-      switch(propertyId) {
-            case P_BEAM_DIRECTION: return beamDirection();
-            case P_DISTRIBUTE:     return distribute();
-            default:
-                  return Element::getProperty(propertyId);
+      for (int i = 0; i < 2; ++i) {
+            if (propertyList[i].id == propertyId)
+                  return ((*this).*(propertyList[i].get))();
             }
+      return QVariant();
       }
 
 //---------------------------------------------------------
@@ -1401,13 +1400,21 @@ QVariant Beam::getProperty(int propertyId) const
 
 void Beam::setProperty(int propertyId, const QVariant& v)
       {
-      switch(propertyId) {
-            case P_BEAM_DIRECTION: setBeamDirection(Direction(v.toInt())); break;
-            case P_DISTRIBUTE:     setDistribute(v.toBool()); break;
-            default:
-                  Element::setProperty(propertyId, v);
+      for (int i = 0; i < 2; ++i) {
+            if (propertyList[i].id == propertyId) {
+                  ((*this).*(propertyList[i].set))(v);
+                  break;
+                  }
             }
       setGenerated(false);
       }
 
+//---------------------------------------------------------
+//   propertyList
+//---------------------------------------------------------
+
+Property<Beam> Beam::propertyList[2] = {
+      { P_DIRECTION,  "StemDirection", &Beam::vBeamDirection, &Beam::setBeamDirection },
+      { P_DISTRIBUTE, "distribute",    &Beam::vDistribute,    &Beam::setDistribute }
+      };
 

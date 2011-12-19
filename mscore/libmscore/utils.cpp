@@ -383,6 +383,7 @@ QString pitch2string(int v)
  * in diatonic then chromatic order.
  */
 Interval intervalList[26] = {
+      // diatonic - chromatic
       Interval(0, 0),         //  0 Perfect Unison
       Interval(0, 1),         //  1 Augmented Unison
 

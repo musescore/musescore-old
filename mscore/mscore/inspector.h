@@ -198,8 +198,13 @@ class InspectorBeam : public InspectorElementBase {
 
       Ui::InspectorBeam b;
 
+      bool dirty() const;
+
    private slots:
       void resetDistributeClicked();
+      void resetDirectionClicked();
+      void directionActivated(int idx);
+      void distributeToggled(bool val);
 
    public:
       InspectorBeam(QWidget* parent);
