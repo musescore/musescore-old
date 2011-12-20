@@ -262,9 +262,10 @@ void SlurSegment::setGrip(int n, const QPointF& pt)
 
 void SlurSegment::editDrag(const EditData& ed)
       {
-      ups[ed.curGrip].off += (ed.delta / spatium());
-      slurTie()->computeBezier(this);
+      qreal _spatium = spatium();
+      ups[ed.curGrip].off += (ed.delta / _spatium);
       if (ed.curGrip == GRIP_START || ed.curGrip == GRIP_END) {
+            slurTie()->computeBezier(this);
             //
             // move anchor for slurs
             //
@@ -282,11 +283,17 @@ void SlurSegment::editDrag(const EditData& ed)
                            || (ed.curGrip == GRIP_START && chord != slur->startElement())) {
                               changeAnchor(ed.view, ed.curGrip, chord);
                               QPointF p1 = ed.pos - ups[ed.curGrip].p - pagePos();
-                              ups[ed.curGrip].off = p1 / spatium();
+                              ups[ed.curGrip].off = p1 / _spatium;
                               return;
                               }
                         }
                   }
+            }
+      else if (ed.curGrip == GRIP_BEZIER1 || ed.curGrip == GRIP_BEZIER2)
+            slurTie()->computeBezier(this);
+      else if (ed.curGrip == GRIP_SHOULDER) {
+            ups[ed.curGrip].off = QPointF();
+            slurTie()->computeBezier(this, ed.delta);
             }
       else if (ed.curGrip == GRIP_DRAG) {
             ups[GRIP_DRAG].off = QPointF();
@@ -314,13 +321,13 @@ void SlurSegment::write(Xml& xml, int no) const
       if (!userOff().isNull())
             xml.tag("offset", userOff() / spatium());
       if (!(ups[GRIP_START].off.isNull()))
-            xml.tag("o1", ups[0].off);
+            xml.tag("o1", ups[GRIP_START].off);
       if (!(ups[GRIP_BEZIER1].off.isNull()))
-            xml.tag("o2", ups[1].off);
+            xml.tag("o2", ups[GRIP_BEZIER1].off);
       if (!(ups[GRIP_BEZIER2].off.isNull()))
-            xml.tag("o3", ups[2].off);
+            xml.tag("o3", ups[GRIP_BEZIER2].off);
       if (!(ups[GRIP_END].off.isNull()))
-            xml.tag("o4", ups[3].off);
+            xml.tag("o4", ups[GRIP_END].off);
       xml.etag();
       }
 
@@ -350,7 +357,7 @@ void SlurSegment::read(QDomElement e)
 //    compute help points of slur bezier segment
 //---------------------------------------------------------
 
-void Slur::computeBezier(SlurSegment* ss)
+void Slur::computeBezier(SlurSegment* ss, QPointF p6o)
       {
       qreal _spatium  = spatium();
       qreal shoulderW;              // height as fraction of slur-length
@@ -360,7 +367,6 @@ void Slur::computeBezier(SlurSegment* ss)
       //
       QPointF pp1 = ss->ups[GRIP_START].p + ss->ups[GRIP_START].off * _spatium;
       QPointF pp2 = ss->ups[GRIP_END].p   + ss->ups[GRIP_END].off   * _spatium;
-      QPointF p6o = ss->ups[GRIP_SHOULDER].off * _spatium;
 
       QPointF p2 = pp2 - pp1;
       if (p2.x() == 0.0) {
@@ -400,7 +406,7 @@ void Slur::computeBezier(SlurSegment* ss)
 
       if (!up())
             shoulderH = -shoulderH;
-      shoulderH -= p6o.y();
+//      shoulderH -= p6o.y();
 
       qreal c    = p2.x();
       qreal c1   = (c - c * shoulderW) * .5 + p6o.x();
@@ -416,8 +422,10 @@ void Slur::computeBezier(SlurSegment* ss)
             w *= .5;
       QPointF th(0.0, w);    // thickness of slur
 
-      QPointF p3o = t.map(ss->ups[GRIP_BEZIER1].off * _spatium);
-      QPointF p4o = t.map(ss->ups[GRIP_BEZIER2].off * _spatium);
+      QPointF p3o = p6o + t.map(ss->ups[GRIP_BEZIER1].off * _spatium);
+      QPointF p4o = p6o + t.map(ss->ups[GRIP_BEZIER2].off * _spatium);
+      ss->ups[GRIP_BEZIER1].off = t.inverted().map(p3o) / _spatium;
+      ss->ups[GRIP_BEZIER2].off = t.inverted().map(p4o) / _spatium;
 
       //-----------------------------------calculate p6
       QPointF pp3  = p3 + p3o;
@@ -430,7 +438,7 @@ void Slur::computeBezier(SlurSegment* ss)
       QPointF p6  = QPointF(t.map(ppp4).x() * .5, 0.0);
 
       t.rotateRadians(2 * r2);
-      p6 = t.map(p6) + pp3 - p6o;
+      p6 = t.map(p6) + pp3; //  - p6o;
       //-----------------------------------
 
       ss->path = QPainterPath();
@@ -463,19 +471,24 @@ void Slur::computeBezier(SlurSegment* ss)
 //    compute help points of slur bezier segment
 //---------------------------------------------------------
 
-void Tie::computeBezier(SlurSegment* ss)
+void Tie::computeBezier(SlurSegment* ss, QPointF p6o)
       {
       qreal _spatium  = spatium();
       qreal shoulderW;              // height as fraction of slur-length
       qreal shoulderH;
+
       //
-      // p1 and p2 are the end points of the slur
+      // pp1      start of slur
+      // pp2      end of slur
+      // pp3      bezier 1
+      // pp4      bezier 2
+      // pp5      drag
+      // pp6      shoulder
       //
       QPointF pp1 = ss->ups[GRIP_START].p + ss->ups[GRIP_START].off * _spatium;
       QPointF pp2 = ss->ups[GRIP_END].p   + ss->ups[GRIP_END].off   * _spatium;
-      QPointF p6o = ss->ups[GRIP_SHOULDER].off * _spatium;
 
-      QPointF p2 = pp2 - pp1;
+      QPointF p2 = pp2 - pp1;       // normalize to zero
       if (p2.x() == 0.0) {
             qDebug("zero tie");
             return;
@@ -497,7 +510,6 @@ void Tie::computeBezier(SlurSegment* ss)
 
       if (!up())
             shoulderH = -shoulderH;
-      shoulderH -= p6o.y();
 
       qreal c    = p2.x();
       qreal c1   = (c - c * shoulderW) * .5 + p6o.x();
@@ -511,8 +523,10 @@ void Tie::computeBezier(SlurSegment* ss)
       qreal w = (score()->styleS(ST_SlurMidWidth).val() - score()->styleS(ST_SlurEndWidth).val()) * _spatium;
       QPointF th(0.0, w);    // thickness of slur
 
-      QPointF p3o = t.map(ss->ups[GRIP_BEZIER1].off * _spatium);
-      QPointF p4o = t.map(ss->ups[GRIP_BEZIER2].off * _spatium);
+      QPointF p3o = p6o + t.map(ss->ups[GRIP_BEZIER1].off * _spatium);
+      QPointF p4o = p6o + t.map(ss->ups[GRIP_BEZIER2].off * _spatium);
+      ss->ups[GRIP_BEZIER1].off = t.inverted().map(p3o) / _spatium;
+      ss->ups[GRIP_BEZIER2].off = t.inverted().map(p4o) / _spatium;
 
       //-----------------------------------calculate p6
       QPointF pp3  = p3 + p3o;
@@ -525,7 +539,7 @@ void Tie::computeBezier(SlurSegment* ss)
       QPointF p6  = QPointF(t.map(ppp4).x() * .5, 0.0);
 
       t.rotateRadians(2 * r2);
-      p6 = t.map(p6) + pp3 - p6o;
+      p6 = t.map(p6) + pp3; //  - p6o;
       //-----------------------------------
 
       ss->path = QPainterPath();
