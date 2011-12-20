@@ -3641,7 +3641,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             else
                   printf("unknown tuplet type %s\n", tupletType.toLatin1().data());
             }
-      if (tuplet) {
+      if (tuplet && !chord) {
             cr->setTuplet(tuplet);
             tuplet->add(cr);
             }
