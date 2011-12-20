@@ -547,12 +547,11 @@ void Sym::draw(QPainter* painter, qreal mag, const QPointF& pos, int n) const
       QGlyphRun nglyphs;
       nglyphs.setRawFont(glyphs.rawFont());
 
-      qreal dist = width(mag);
       positions[0] = QPointF();
       for (int i = 0; i < n; ++i) {
             indexes[i] = glyphs.glyphIndexes()[0];
             if (i)
-                  positions[i] = QPointF(dist * i, 0.0);
+                  positions[i] = QPointF(w * i, 0.0);
             }
       nglyphs.setGlyphIndexes(indexes);
       nglyphs.setPositions(positions);
