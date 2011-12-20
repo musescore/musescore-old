@@ -832,9 +832,8 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                         foreach(ChordRest* cr, crl) {
                               if (cr->type() != CHORD)
                                     continue;
-                              qreal y;
                               bool _up = cr->up();
-                              y = cr->stemPos(!cr->up(), false).y();
+                              qreal y = cr->stemPos(!cr->up(), false).y();
                               if (_up)
                                     yUpMin = qMin(y, yUpMin);
                               else
@@ -951,7 +950,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                                     }
                               }
                         }
-                  qreal yy       = system()->staffY(c1->staffIdx());
+                  qreal yy        = system()->staffY(c1->staffIdx());
                   f->p1[idx].ry() = alignBeam(l1, f->p1[idx].y() - yy, _spatium, _up) + yy;
                   f->p2[idx].ry() = alignBeam(l2, f->p2[idx].y() - yy, _spatium, _up) + yy;
                   }
@@ -985,6 +984,8 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
             hasBeamSegment[idx] = false;
             }
 
+      int upLines = 0;
+      int downLines = 0;
       for (int beamLevel = 0; beamLevel < beamLevels; ++beamLevel) {
             ChordRest* cr1 = 0;
             ChordRest* cr2 = 0;
@@ -1004,21 +1005,30 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                         if (cr2) {
                               // create short segment
                               qreal y1;
-                              if (cr2->up())
-                                    y1 = p1dy + dist;
-                              else
-                                    y1 = p1dy - dist;
+                              if (cr2->up()) {
+                                    ++upLines;
+                                    // y1 = p1dy + dist;
+                                    y1 = p1dy + beamDist * (beamLevel - (downLines ? downLines - 1 : 0));
+                                    }
+                              else {
+                                    ++downLines;
+                                    y1 = p1dy - beamDist * (beamLevel - (upLines ? upLines - 1 : 0));
+                                    }
                               qreal x2 = cr1->stemPos(cr1->up(), false).x();
                               qreal x3 = cr2->stemPos(cr2->up(), false).x();
-                              beamSegments.push_back(new QLineF(x2 - canvPos.x(), (x2 - x1) * slope + y1,
+                              beamSegments.append(new QLineF(x2 - canvPos.x(), (x2 - x1) * slope + y1,
                                  x3 - canvPos.x(), (x3 - x1) * slope + y1));
                               }
                         else if (cr1) {
                               qreal y1;
-                              if (cr1->up())
+                              if (cr1->up()) {
+                                    ++upLines;
                                     y1 = p1dy + dist;
-                              else
+                                    }
+                              else {
+                                    ++downLines;
                                     y1 = p1dy - dist;
+                                    }
                               // create broken segment
                               qreal len = beamMinLen;
 
@@ -1067,8 +1077,12 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
             memcpy(hasBeamSegment, hasBeamSegment1, sizeof(hasBeamSegment));
             if (cr2) {
                   // create segment
-                  if (!cr2->up())
+                  if (!cr2->up()) {
+                        ++downLines;
                         dist = -dist;
+                        }
+                  else
+                        ++upLines;
 
                   qreal x2 = cr1->stemPos(cr1->up(), false).x();
                   qreal x3 = cr2->stemPos(cr2->up(), false).x();
