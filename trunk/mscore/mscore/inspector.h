@@ -106,6 +106,10 @@ class InspectorVBox : public InspectorElementBase {
 
       Ui::InspectorVBox vb;
 
+   private slots:
+      void resetTopGap();
+      void resetBottomGap();
+
    public:
       InspectorVBox(QWidget* parent);
       virtual void setElement(Element*);
@@ -120,6 +124,10 @@ class InspectorHBox : public InspectorElementBase {
       Q_OBJECT
 
       Ui::InspectorHBox hb;
+
+   private slots:
+      void resetLeftGap();
+      void resetRightGap();
 
    public:
       InspectorHBox(QWidget* parent);
@@ -185,6 +193,22 @@ class InspectorRest : public InspectorElementBase {
 
    public:
       InspectorRest(QWidget* parent);
+      virtual void setElement(Element*);
+      virtual void apply();
+      };
+
+//---------------------------------------------------------
+//   InspectorClef
+//---------------------------------------------------------
+
+class InspectorClef : public InspectorElementBase {
+      Q_OBJECT
+
+      InspectorElementElement* iElement;
+      InspectorSegment* iSegment;
+
+   public:
+      InspectorClef(QWidget* parent);
       virtual void setElement(Element*);
       virtual void apply();
       };

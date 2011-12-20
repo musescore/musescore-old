@@ -2768,7 +2768,7 @@ void Measure::layoutX(qreal stretch)
                         Element* e = s->element(track);
                         if (e) {
                               e->layout();
-                              clefWidth[staffIdx] = e->width() + _spatium;
+                              clefWidth[staffIdx] = e->width() + _spatium + elsp;
                               }
                         }
                   continue;

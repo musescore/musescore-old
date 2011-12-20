@@ -1753,7 +1753,7 @@ void ScoreView::drawBackground(QPainter* p, const QRectF& r) const
 
 void ScoreView::paintPageBorder(QPainter& p, Page* page)
       {
-return;
+#if 0
       QRectF r(page->bbox());
       qreal x1 = r.x();
       qreal y1 = r.y();
@@ -1826,7 +1826,7 @@ return;
                   p.drawLine(QLineF(x2-bw+i, y1, x2-bw+i, y2));
                   }
             }
-
+#endif
       if (_score->showPageborders()) {
             // show page margins
             p.setBrush(Qt::NoBrush);
@@ -1834,6 +1834,10 @@ return;
             QRectF f(page->canvasBoundingRect());
             f.adjust(page->lm(), page->tm(), -page->rm(), -page->bm());
             p.drawRect(f);
+            if (!page->isOdd()) {
+                  QRectF f(page->canvasBoundingRect());
+                  p.drawLine(f.right(), 0.0, f.right(), f.bottom());
+                  }
             }
       }
 
