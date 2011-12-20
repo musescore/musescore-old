@@ -44,14 +44,11 @@
     </widget>
    </item>
    <item>
-    <layout class="QFormLayout" name="formLayout">
-     <property name="fieldGrowthPolicy">
-      <enum>QFormLayout::ExpandingFieldsGrow</enum>
-     </property>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_2">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_3">
        <property name="text">
-        <string>Top Gap:</string>
+        <string>Bottom Gap:</string>
        </property>
       </widget>
      </item>
@@ -71,10 +68,30 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_3">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>Bottom Gap:</string>
+        <string>Top Gap:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QDoubleSpinBox" name="height">
+       <property name="suffix">
+        <string>sp</string>
+       </property>
+       <property name="minimum">
+        <double>-10000.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>10000.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Height:</string>
        </property>
       </widget>
      </item>
@@ -94,23 +111,31 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label">
+     <item row="0" column="2">
+      <widget class="QToolButton" name="resetTopGap">
+       <property name="toolTip">
+        <string>reset value</string>
+       </property>
        <property name="text">
-        <string>Height:</string>
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="musescore.qrc">
+         <normaloff>:/data/icons-dark/resetproperty.png</normaloff>:/data/icons-dark/resetproperty.png</iconset>
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
-      <widget class="QDoubleSpinBox" name="height">
-       <property name="suffix">
-        <string>sp</string>
+     <item row="1" column="2">
+      <widget class="QToolButton" name="resetBottomGap">
+       <property name="toolTip">
+        <string>reset value</string>
        </property>
-       <property name="minimum">
-        <double>-10000.000000000000000</double>
+       <property name="text">
+        <string>...</string>
        </property>
-       <property name="maximum">
-        <double>10000.000000000000000</double>
+       <property name="icon">
+        <iconset resource="musescore.qrc">
+         <normaloff>:/data/icons-dark/resetproperty.png</normaloff>:/data/icons-dark/resetproperty.png</iconset>
        </property>
       </widget>
      </item>
@@ -118,6 +143,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="musescore.qrc"/>
+ </resources>
  <connections/>
 </ui>

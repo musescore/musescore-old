@@ -2726,6 +2726,10 @@ void Score::cmd(const QAction* a)
             }
       else if (cmd == "add-audio")
             addAudioTrack();
+      else if (cmd == "transpose-up")
+            transposeSemitone(1);
+      else if (cmd == "transpose-down")
+            transposeSemitone(-1);
       else
             qDebug("1unknown cmd <%s>", qPrintable(cmd));
       }

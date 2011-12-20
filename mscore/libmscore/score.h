@@ -869,6 +869,7 @@ class Score {
       void setUndoRedo(bool val)            { _undoRedo = val; }
       bool undoRedo() const                 { return _undoRedo; }
       void respace(QList<ChordRest*>* elements);
+      void transposeSemitone(int semitone);
       };
 
 extern Score* gscore;

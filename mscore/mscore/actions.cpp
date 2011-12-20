@@ -2892,6 +2892,27 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Previous Score"),
          QT_TRANSLATE_NOOP("action","Previous Score")
          ),
+      Shortcut(
+         STATE_NORMAL,
+         0,
+         "transpose-up",
+         QT_TRANSLATE_NOOP("action","Transpose Up"),
+         Qt::Key_F2,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Transpose Up"),
+         QT_TRANSLATE_NOOP("action","Transpose Up")
+         ),
+      Shortcut(
+         STATE_NORMAL,
+         0,
+         "transpose-down",
+         QT_TRANSLATE_NOOP("action","Transpose Down"),
+         Qt::SHIFT + Qt::Key_F2,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Transpose Down"),
+         QT_TRANSLATE_NOOP("action","Transpose Down")
+         ),
+
       // xml==0  marks end of list
       Shortcut(0, 0, 0, 0, QKeySequence::UnknownKey)
       };

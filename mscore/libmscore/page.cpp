@@ -269,7 +269,9 @@ void Page::draw(QPainter* painter) const
             QPointF o(ts.offset(spatium()));
 
             bool odd = (n & 1) && _score->styleB(ST_footerOddEven);
+
             if (odd) {
+                  o  = -o;
                   s1 = _score->styleSt(ST_oddFooterL);
                   s2 = _score->styleSt(ST_oddFooterC);
                   s3 = _score->styleSt(ST_oddFooterR);

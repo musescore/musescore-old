@@ -23,6 +23,7 @@
 #include "libmscore/segment.h"
 #include "libmscore/rest.h"
 #include "libmscore/beam.h"
+#include "libmscore/clef.h"
 
 //---------------------------------------------------------
 //   showInspector
@@ -118,6 +119,7 @@ void Inspector::setElement(Element* e)
                   case SPACER:       ie = new InspectorSpacer(this); break;
                   case NOTE:         ie = new InspectorNote(this); break;
                   case REST:         ie = new InspectorRest(this); break;
+                  case CLEF:         ie = new InspectorClef(this); break;
                   case BEAM:         ie = new InspectorBeam(this); break;
                   default:           ie = new InspectorElement(this); break;
                   }
@@ -247,6 +249,26 @@ InspectorVBox::InspectorVBox(QWidget* parent)
       connect(vb.topGap,    SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
       connect(vb.bottomGap, SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
       connect(vb.height,    SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      connect(vb.resetTopGap, SIGNAL(clicked()), SLOT(resetTopGap()));
+      connect(vb.resetBottomGap, SIGNAL(clicked()), SLOT(resetBottomGap()));
+      }
+
+//---------------------------------------------------------
+//   resetTopGap
+//---------------------------------------------------------
+
+void InspectorVBox::resetTopGap()
+      {
+      vb.topGap->setValue(0.0);
+      }
+
+//---------------------------------------------------------
+//   resetBottomGap
+//---------------------------------------------------------
+
+void InspectorVBox::resetBottomGap()
+      {
+      vb.bottomGap->setValue(0.0);
       }
 
 //---------------------------------------------------------
@@ -307,9 +329,29 @@ InspectorHBox::InspectorHBox(QWidget* parent)
 
       hb.setupUi(w);
       layout->addWidget(w);
-      connect(hb.topGap,    SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
-      connect(hb.bottomGap, SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
-      connect(hb.width,     SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      connect(hb.leftGap,  SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      connect(hb.rightGap, SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      connect(hb.width,    SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      connect(hb.resetLeftGap,  SIGNAL(clicked()), SLOT(resetLeftGap()));
+      connect(hb.resetRightGap, SIGNAL(clicked()), SLOT(resetRightGap()));
+      }
+
+//---------------------------------------------------------
+//   resetLeftGap
+//---------------------------------------------------------
+
+void InspectorHBox::resetLeftGap()
+      {
+      hb.leftGap->setValue(0.0);
+      }
+
+//---------------------------------------------------------
+//   resetRightGap
+//---------------------------------------------------------
+
+void InspectorHBox::resetRightGap()
+      {
+      hb.rightGap->setValue(0.0);
       }
 
 //---------------------------------------------------------
@@ -322,16 +364,16 @@ void InspectorHBox::setElement(Element* e)
       qreal _spatium = e->score()->spatium();
       hb.elementName->setText(e->name());
 
-      hb.topGap->blockSignals(true);
-      hb.bottomGap->blockSignals(true);
+      hb.leftGap->blockSignals(true);
+      hb.rightGap->blockSignals(true);
       hb.width->blockSignals(true);
 
-      hb.topGap->setValue(box->topGap() / _spatium);
-      hb.bottomGap->setValue(box->bottomGap() / _spatium);
+      hb.leftGap->setValue(box->topGap() / _spatium);
+      hb.rightGap->setValue(box->bottomGap() / _spatium);
       hb.width->setValue(box->boxHeight().val());
 
-      hb.topGap->blockSignals(false);
-      hb.bottomGap->blockSignals(false);
+      hb.leftGap->blockSignals(false);
+      hb.rightGap->blockSignals(false);
       hb.width->blockSignals(false);
       }
 
@@ -344,17 +386,17 @@ void InspectorHBox::apply()
       HBox* box       = static_cast<HBox*>(inspector->element());
       Score* score    = box->score();
       qreal _spatium  = score->spatium();
-      qreal topGap    = hb.topGap->value() * _spatium;
-      qreal bottomGap = hb.bottomGap->value() * _spatium;
+      qreal leftGap   = hb.leftGap->value() * _spatium;
+      qreal rightGap  = hb.rightGap->value() * _spatium;
       Spatium width(hb.width->value());
 
-      if (topGap != box->topGap() || bottomGap != box->bottomGap()
+      if (leftGap != box->topGap() || rightGap != box->bottomGap()
          || width != box->boxWidth()) {
             score->startCmd();
             score->undo()->push(new ChangeBoxProperties(box,
                box->leftMargin(), box->topMargin(), box->rightMargin(), box->bottomMargin(),
                box->boxHeight(), width,
-               topGap, bottomGap
+               leftGap, rightGap
                ));
             score->setLayoutAll(true);
             score->endCmd();
@@ -620,6 +662,54 @@ void InspectorRest::apply()
       score->startCmd();
 
       iElement->apply(rest);
+      iSegment->apply(segment);
+
+      score->setLayoutAll(true);
+      score->endCmd();
+      mscore->endCmd();
+      }
+
+//---------------------------------------------------------
+//   InspectorClef
+//---------------------------------------------------------
+
+InspectorClef::InspectorClef(QWidget* parent)
+   : InspectorElementBase(parent)
+      {
+      iElement = new InspectorElementElement(this);
+      iSegment = new InspectorSegment(this);
+
+      layout->addWidget(iElement);
+      layout->addWidget(iSegment);
+      connect(iElement, SIGNAL(enableApply()), inspector, SLOT(enableApply()));
+      connect(iSegment, SIGNAL(enableApply()), inspector, SLOT(enableApply()));
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void InspectorClef::setElement(Element* e)
+      {
+      Clef* clef = static_cast<Clef*>(e);
+      Segment* segment = clef->segment();
+
+      iElement->setElement(clef);
+      iSegment->setElement(segment);
+      }
+
+//---------------------------------------------------------
+//   apply
+//---------------------------------------------------------
+
+void InspectorClef::apply()
+      {
+      Clef* clef       = static_cast<Clef*>(inspector->element());
+      Segment* segment = clef->segment();
+      Score* score     = clef->score();
+      score->startCmd();
+
+      iElement->apply(clef);
       iSegment->apply(segment);
 
       score->setLayoutAll(true);
