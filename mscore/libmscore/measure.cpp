@@ -2427,21 +2427,21 @@ bool Measure::createEndBarLines()
                         }
                   if (bl == 0) {
                         bl = seg ? static_cast<BarLine*>(seg->element(track)) : 0;
+                        BarLineType et = _multiMeasure > 0 ? _mmEndBarLineType : _endBarLineType;
                         if (bl == 0) {
                               bl = new BarLine(score());
                               bl->setVisible(_endBarLineVisible);
                               bl->setColor(_endBarLineColor);
                               bl->setGenerated(bl->el()->isEmpty() && _endBarLineGenerated);
+                              bl->setBarLineType(et);
                               seg = undoGetSegment(SegEndBarLine, tick() + ticks());
                               bl->setParent(seg);
                               bl->setTrack(track);
                               score()->undoAddElement(bl);
                               changed = true;
                               }
-                        BarLineType et = _multiMeasure > 0 ? _mmEndBarLineType : _endBarLineType;
-                        if (bl->subtype() != et) {
+                        else if (bl->barLineType() != et) {
                               score()->undoChangeSubtype(bl, et);
-                              // bl->setBarLineType(et);
                               bl->setGenerated(bl->el()->isEmpty() && _endBarLineGenerated);
                               changed = true;
                               }

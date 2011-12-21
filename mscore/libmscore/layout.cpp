@@ -927,7 +927,7 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
                   if (isFirstMeasure)
                         processSystemHeader(m, isFirstSystem);
 
-                  m->createEndBarLines();
+                  m->createEndBarLines();       // TODO: not set here
 
                   m->layoutX(1.0);
                   ww      = m->layoutWidth().stretchable;
@@ -1355,7 +1355,7 @@ QList<System*> Score::layoutSystemRow(qreal rowWidth, bool isFirstSystem, bool u
 
       bool needRelayout = false;
 
-      foreach(System* system, sl) {
+      foreach (System* system, sl) {
             //
             //    add cautionary time/key signatures if needed
             //
@@ -1568,9 +1568,8 @@ QList<System*> Score::layoutSystemRow(qreal rowWidth, bool isFirstSystem, bool u
                   }
 
             foreach (MeasureBase* mb, ml) {
-                  if (mb->type() != MEASURE) {
+                  if (mb->type() != MEASURE)
                         continue;
-                        }
                   Measure* m = static_cast<Measure*>(mb);
                   int nn = m->multiMeasure() - 1;
                   if (nn > 0) {
@@ -1586,18 +1585,19 @@ QList<System*> Score::layoutSystemRow(qreal rowWidth, bool isFirstSystem, bool u
                   }
             }
 
-      minWidth           = 0.0;
+      minWidth          = 0.0;
       qreal totalWeight = 0.0;
 
       foreach(System* system, sl) {
             foreach (MeasureBase* mb, system->measures()) {
-                  if (mb->type() == HBOX) {
+                  if (mb->type() == HBOX)
                         minWidth += point(((Box*)mb)->boxWidth());
-                        }
                   else if (mb->type() == MEASURE) {
                         Measure* m = (Measure*)mb;
-                        if (needRelayout)
+                        if (needRelayout) {
+                              m->setDirty(true);
                               m->layoutX(1.0);
+                              }
                         minWidth    += m->layoutWidth().stretchable;
                         totalWeight += m->ticks() * m->userStretch();
                         }
