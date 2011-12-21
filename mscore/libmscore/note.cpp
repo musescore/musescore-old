@@ -1690,8 +1690,12 @@ void Note::setNval(NoteVal nval)
 QVariant Note::getProperty(int propertyId) const
       {
       switch(propertyId) {
-            case P_TPC:   return tpc();
-            case P_SMALL: return small();
+            case P_TPC:            return tpc();
+            case P_SMALL:          return small();
+            case P_MIRROR_HEAD:    return userMirror();
+            case P_DOT_POSITION:   return dotPosition();
+            case P_ONTIME_OFFSET:  return onTimeUserOffset();
+            case P_OFFTIME_OFFSET: return offTimeUserOffset();
             default:
                   return Element::getProperty(propertyId);
             }
@@ -1704,8 +1708,12 @@ QVariant Note::getProperty(int propertyId) const
 void Note::setProperty(int propertyId, const QVariant& v)
       {
       switch(propertyId) {
-            case P_TPC:   setTpc(v.toInt()); break;
-            case P_SMALL: setSmall(v.toInt()); break;
+            case P_TPC:            setTpc(v.toInt()); break;
+            case P_SMALL:          setSmall(v.toInt()); break;
+            case P_MIRROR_HEAD:    setUserMirror(DirectionH(v.toInt())); break;
+            case P_DOT_POSITION:   setDotPosition(Direction(v.toInt())); break;
+            case P_ONTIME_OFFSET:  setOnTimeUserOffset(v.toInt()); break;
+            case P_OFFTIME_OFFSET: setOffTimeUserOffset(v.toInt()); break;
             default:
                   Element::setProperty(propertyId, v);
             }

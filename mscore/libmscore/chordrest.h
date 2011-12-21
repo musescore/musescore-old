@@ -90,7 +90,9 @@ class ChordRest : public DurationElement {
       QList<Articulation*>* getArticulations()  { return &articulations; }
       Articulation* hasArticulation(const Articulation*);
       bool small() const                        { return _small; }
+      QVariant vSmall() const                   { return _small; }
       void setSmall(bool val);
+      void setSmall(const QVariant& v)          { setSmall(v.toBool()); }
 
       int staffMove() const                     { return _staffMove; }
       void setStaffMove(int val)                { _staffMove = val; }
@@ -131,6 +133,9 @@ class ChordRest : public DurationElement {
       virtual void remove(Element*);
       void removeDeleteBeam();
       virtual QString subtypeName() const { return QString(); }
+      virtual QVariant getProperty(int propertyId) const;
+      virtual void setProperty(int propertyId, const QVariant&);
+      static Property<ChordRest> propertyList[];
       };
 
 #endif

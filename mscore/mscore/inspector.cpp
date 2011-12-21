@@ -145,6 +145,17 @@ InspectorElementElement::InspectorElementElement(QWidget* parent)
       }
 
 //---------------------------------------------------------
+//   dirty
+//---------------------------------------------------------
+
+bool InspectorElementElement::dirty(Element* e) const
+      {
+      qreal _spatium = e->score()->spatium();
+      return offsetX->value() != (e->pos().x() / _spatium)
+         || offsetY->value() != (e->pos().y() / _spatium);
+      }
+
+//---------------------------------------------------------
 //   setElement
 //---------------------------------------------------------
 
@@ -524,21 +535,53 @@ InspectorSegment::InspectorSegment(QWidget* parent)
    : QWidget(parent)
       {
       setupUi(this);
-      connect(leadingSpace,       SIGNAL(valueChanged(double)), SIGNAL(enableApply()));
-      connect(trailingSpace,      SIGNAL(valueChanged(double)), SIGNAL(enableApply()));
+      connect(leadingSpace,       SIGNAL(valueChanged(double)), SLOT(leadingSpaceChanged(double)));
+      connect(trailingSpace,      SIGNAL(valueChanged(double)), SLOT(trailingSpaceChanged(double)));
       connect(resetLeadingSpace,  SIGNAL(clicked()), SLOT(resetLeadingSpaceClicked()));
       connect(resetTrailingSpace, SIGNAL(clicked()), SLOT(resetTrailingSpaceClicked()));
+      }
+
+//---------------------------------------------------------
+//   dirty
+//---------------------------------------------------------
+
+bool InspectorSegment::dirty() const
+      {
+      return segment->extraLeadingSpace().val() != leadingSpace->value()
+         || segment->extraTrailingSpace().val() != trailingSpace->value();
       }
 
 //---------------------------------------------------------
 //   setElement
 //---------------------------------------------------------
 
-void InspectorSegment::setElement(const Element* e)
+void InspectorSegment::setElement(Segment* s)
       {
-      const Segment* segment = static_cast<const Segment*>(e);
+      segment = s;
       leadingSpace->setValue(segment->extraLeadingSpace().val());
       trailingSpace->setValue(segment->extraTrailingSpace().val());
+      resetLeadingSpace->setEnabled(false);
+      resetTrailingSpace->setEnabled(false);
+      }
+
+//---------------------------------------------------------
+//   leadingSpaceChanged
+//---------------------------------------------------------
+
+void InspectorSegment::leadingSpaceChanged(double)
+      {
+      resetLeadingSpace->setEnabled(segment->extraLeadingSpace().val() != leadingSpace->value());
+      emit enableApply();
+      }
+
+//---------------------------------------------------------
+//   trailingSpaceChanged
+//---------------------------------------------------------
+
+void InspectorSegment::trailingSpaceChanged(double)
+      {
+      resetTrailingSpace->setEnabled(segment->extraTrailingSpace().val() != trailingSpace->value());
+      emit enableApply();
       }
 
 //---------------------------------------------------------
@@ -563,15 +606,185 @@ void InspectorSegment::resetTrailingSpaceClicked()
 //   apply
 //---------------------------------------------------------
 
-void InspectorSegment::apply(Element* e)
+void InspectorSegment::apply()
       {
-      Segment* segment = static_cast<Segment*>(e);
       qreal val = leadingSpace->value();
       if (segment->extraLeadingSpace().val() != val)
-            e->score()->undo()->push(new ChangeProperty(segment, P_LEADING_SPACE, val));
+            segment->score()->undo()->push(new ChangeProperty(segment, P_LEADING_SPACE, val));
       val = trailingSpace->value();
       if (segment->extraTrailingSpace().val() != val)
-            e->score()->undo()->push(new ChangeProperty(segment, P_TRAILING_SPACE, val));
+            segment->score()->undo()->push(new ChangeProperty(segment, P_TRAILING_SPACE, val));
+      }
+
+//---------------------------------------------------------
+//   InspectorNoteBase
+//---------------------------------------------------------
+
+InspectorNoteBase::InspectorNoteBase(QWidget* parent)
+   : QWidget(parent)
+      {
+      setupUi(this);
+      connect(small,              SIGNAL(stateChanged(int)),        SLOT(smallChanged(int)));
+      connect(mirrorHead,         SIGNAL(currentIndexChanged(int)), SLOT(mirrorHeadChanged(int)));
+      connect(dotPosition,        SIGNAL(currentIndexChanged(int)), SLOT(dotPositionChanged(int)));
+      connect(ontimeOffset,       SIGNAL(valueChanged(int)),        SLOT(ontimeOffsetChanged(int)));
+      connect(offtimeOffset,      SIGNAL(valueChanged(int)),        SLOT(offtimeOffsetChanged(int)));
+      connect(resetSmall,         SIGNAL(clicked()),                SLOT(resetSmallClicked()));
+      connect(resetMirrorHead,    SIGNAL(clicked()),                SLOT(resetMirrorClicked()));
+      connect(resetDotPosition,   SIGNAL(clicked()),                SLOT(resetDotPositionClicked()));
+      connect(resetOntimeOffset,  SIGNAL(clicked()),                SLOT(resetOntimeOffsetClicked()));
+      connect(resetOfftimeOffset, SIGNAL(clicked()),                SLOT(resetOfftimeOffsetClicked()));
+      }
+
+//---------------------------------------------------------
+//   dirty
+//---------------------------------------------------------
+
+bool InspectorNoteBase::dirty() const
+      {
+      return note->small() != small->isChecked()
+         || note->userMirror()        != mirrorHead->currentIndex()
+         || note->dotPosition()       != dotPosition->currentIndex()
+         || note->onTimeUserOffset()  != ontimeOffset->value()
+         || note->offTimeUserOffset() != offtimeOffset->value();
+      }
+
+//---------------------------------------------------------
+//   smallChanged
+//---------------------------------------------------------
+
+void InspectorNoteBase::smallChanged(int)
+      {
+      resetSmall->setEnabled(note->small() != small->isChecked());
+      emit enableApply();
+      }
+
+//---------------------------------------------------------
+//   mirrorHeadChanged
+//---------------------------------------------------------
+
+void InspectorNoteBase::mirrorHeadChanged(int)
+      {
+      resetMirrorHead->setEnabled(note->userMirror() != mirrorHead->currentIndex());
+      emit enableApply();
+      }
+
+//---------------------------------------------------------
+//   dotPositionChanged
+//---------------------------------------------------------
+
+void InspectorNoteBase::dotPositionChanged(int)
+      {
+      resetDotPosition->setEnabled(note->dotPosition() != dotPosition->currentIndex());
+      emit enableApply();
+      }
+
+//---------------------------------------------------------
+//   ontimeOffsetChanged
+//---------------------------------------------------------
+
+void InspectorNoteBase::ontimeOffsetChanged(int)
+      {
+      resetOntimeOffset->setEnabled(note->onTimeUserOffset() != ontimeOffset->value());
+      emit enableApply();
+      }
+
+//---------------------------------------------------------
+//   offtimeOffsetChanged
+//---------------------------------------------------------
+
+void InspectorNoteBase::offtimeOffsetChanged(int)
+      {
+      resetOfftimeOffset->setEnabled(note->offTimeUserOffset() != offtimeOffset->value());
+      emit enableApply();
+      }
+
+//---------------------------------------------------------
+//   resetSmall
+//---------------------------------------------------------
+
+void InspectorNoteBase::resetSmallClicked()
+      {
+      small->setChecked(false);
+      }
+
+//---------------------------------------------------------
+//   resetMirrorClicked
+//---------------------------------------------------------
+
+void InspectorNoteBase::resetMirrorClicked()
+      {
+      mirrorHead->setCurrentIndex(0);
+      }
+
+//---------------------------------------------------------
+//   resetDotPositionClicked
+//---------------------------------------------------------
+
+void InspectorNoteBase::resetDotPositionClicked()
+      {
+      dotPosition->setCurrentIndex(0);
+      }
+
+//---------------------------------------------------------
+//   resetOntimeOffsetClicked
+//---------------------------------------------------------
+
+void InspectorNoteBase::resetOntimeOffsetClicked()
+      {
+      ontimeOffset->setValue(0);
+      }
+
+//---------------------------------------------------------
+//   resetOfftimeOffsetClicked
+//---------------------------------------------------------
+
+void InspectorNoteBase::resetOfftimeOffsetClicked()
+      {
+      offtimeOffset->setValue(0);
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void InspectorNoteBase::setElement(Note* n)
+      {
+      note = n;
+      small->setChecked(note->small());
+      mirrorHead->setCurrentIndex(note->userMirror());
+      dotPosition->setCurrentIndex(note->dotPosition());
+      ontimeOffset->setValue(note->onTimeOffset());
+      offtimeOffset->setValue(note->offTimeOffset());
+      resetSmall->setEnabled(false);
+      resetMirrorHead->setEnabled(false);
+      resetDotPosition->setEnabled(false);
+      resetOntimeOffset->setEnabled(false);
+      resetOfftimeOffset->setEnabled(false);
+      }
+
+//---------------------------------------------------------
+//   apply
+//---------------------------------------------------------
+
+void InspectorNoteBase::apply()
+      {
+      Score* score = note->score();
+      bool b = small->isChecked();
+      if (note->small() != b)
+            score->undo()->push(new ChangeProperty(note, P_SMALL, b));
+      int val = mirrorHead->currentIndex();
+      if (note->userMirror() != val)
+            score->undo()->push(new ChangeProperty(note, P_MIRROR_HEAD, val));
+      val = dotPosition->currentIndex();
+      if (note->dotPosition() != val)
+            score->undo()->push(new ChangeProperty(note, P_DOT_POSITION, val));
+      val = ontimeOffset->value();
+      if (note->onTimeOffset() != val)
+            score->undo()->push(new ChangeProperty(note, P_ONTIME_OFFSET, val));
+      val = offtimeOffset->value();
+      if (note->offTimeOffset() != val)
+            score->undo()->push(new ChangeProperty(note, P_OFFTIME_OFFSET, val));
       }
 
 //---------------------------------------------------------
@@ -582,11 +795,24 @@ InspectorNote::InspectorNote(QWidget* parent)
    : InspectorElementBase(parent)
       {
       iElement = new InspectorElementElement(this);
+      iNote    = new InspectorNoteBase(this);
       iSegment = new InspectorSegment(this);
+
       layout->addWidget(iElement);
+      layout->addWidget(iNote);
       layout->addWidget(iSegment);
       connect(iElement, SIGNAL(enableApply()), inspector, SLOT(enableApply()));
-      connect(iSegment, SIGNAL(enableApply()), inspector, SLOT(enableApply()));
+      connect(iNote,    SIGNAL(enableApply()), SLOT(checkDirty()));
+      connect(iSegment, SIGNAL(enableApply()), SLOT(checkDirty()));
+      }
+
+//---------------------------------------------------------
+//   checkDirty
+//---------------------------------------------------------
+
+void InspectorNote::checkDirty()
+      {
+      inspector->enableApply(dirty());
       }
 
 //---------------------------------------------------------
@@ -599,6 +825,7 @@ void InspectorNote::setElement(Element* e)
       Segment* segment = note->chord()->segment();
 
       iElement->setElement(e);
+      iNote->setElement(note);
       iSegment->setElement(segment);
       }
 
@@ -608,17 +835,30 @@ void InspectorNote::setElement(Element* e)
 
 void InspectorNote::apply()
       {
-      Note* note       = static_cast<Note*>(inspector->element());
-      Segment* segment = note->chord()->segment();
-      Score*  score    = note->score();
+      Note* note    = static_cast<Note*>(inspector->element());
+      Score*  score = note->score();
       score->startCmd();
 
       iElement->apply(note);
-      iSegment->apply(segment);
+      iNote->apply();
+      iSegment->apply();
 
       score->setLayoutAll(true);
       score->endCmd();
       mscore->endCmd();
+      }
+
+//---------------------------------------------------------
+//   dirty
+//    return true if a property has changed
+//---------------------------------------------------------
+
+bool InspectorNote::dirty() const
+      {
+      Note* note = static_cast<Note*>(inspector->element());
+      return iElement->dirty(note)
+         || iNote->dirty()
+         || iSegment->dirty();
       }
 
 //---------------------------------------------------------
@@ -632,9 +872,15 @@ InspectorRest::InspectorRest(QWidget* parent)
       iSegment = new InspectorSegment(this);
 
       layout->addWidget(iElement);
+      QHBoxLayout* l = new QHBoxLayout;
+      small          = new QCheckBox;
+      small->setText(tr("Small"));
+      l->addWidget(small);
+      layout->addLayout(l);
       layout->addWidget(iSegment);
       connect(iElement, SIGNAL(enableApply()), inspector, SLOT(enableApply()));
       connect(iSegment, SIGNAL(enableApply()), inspector, SLOT(enableApply()));
+      connect(small,    SIGNAL(stateChanged(int)), inspector, SLOT(enableApply()));
       }
 
 //---------------------------------------------------------
@@ -648,6 +894,7 @@ void InspectorRest::setElement(Element* e)
 
       iElement->setElement(rest);
       iSegment->setElement(segment);
+      small->setChecked(rest->small());
       }
 
 //---------------------------------------------------------
@@ -657,13 +904,14 @@ void InspectorRest::setElement(Element* e)
 void InspectorRest::apply()
       {
       Rest* rest       = static_cast<Rest*>(inspector->element());
-      Segment* segment = rest->segment();
       Score* score     = rest->score();
       score->startCmd();
 
       iElement->apply(rest);
-      iSegment->apply(segment);
-
+      iSegment->apply();
+      bool val = small->isChecked();
+      if (val != rest->small())
+            score->undo()->push(new ChangeProperty(rest, P_SMALL, val));
       score->setLayoutAll(true);
       score->endCmd();
       mscore->endCmd();
@@ -704,13 +952,12 @@ void InspectorClef::setElement(Element* e)
 
 void InspectorClef::apply()
       {
-      Clef* clef       = static_cast<Clef*>(inspector->element());
-      Segment* segment = clef->segment();
-      Score* score     = clef->score();
+      Clef* clef   = static_cast<Clef*>(inspector->element());
+      Score* score = clef->score();
       score->startCmd();
 
       iElement->apply(clef);
-      iSegment->apply(segment);
+      iSegment->apply();
 
       score->setLayoutAll(true);
       score->endCmd();

@@ -41,6 +41,16 @@
 #include "stem.h"
 
 //---------------------------------------------------------
+//   propertyList
+//---------------------------------------------------------
+
+Property<ChordRest> ChordRest::propertyList[] = {
+      { P_SMALL,  T_VARIANT, "small", &ChordRest::vSmall, &ChordRest::setSmall },
+      };
+
+static const int PROPERTIES = sizeof(ChordRest::propertyList)/sizeof(*ChordRest::propertyList);
+
+//---------------------------------------------------------
 //   hasArticulation
 //---------------------------------------------------------
 
@@ -955,11 +965,40 @@ void ChordRest::remove(Element* e)
 void ChordRest::removeDeleteBeam()
       {
       if (_beam) {
-//            score()->deselect(_beam);
             Beam* b = _beam;
             b->remove(this);  // this sets _beam to zero
             if (b->isEmpty())
                   delete b;
             }
       }
+
+//---------------------------------------------------------
+//   getProperty
+//---------------------------------------------------------
+
+QVariant ChordRest::getProperty(int propertyId) const
+      {
+      for (int i = 0; i < PROPERTIES; ++i) {
+            if (propertyList[i].id == propertyId)
+                  return ((*this).*(propertyList[i].get))();
+            }
+      return Element::getProperty(propertyId);
+      }
+
+//---------------------------------------------------------
+//   setProperty
+//---------------------------------------------------------
+
+void ChordRest::setProperty(int propertyId, const QVariant& v)
+      {
+      for (int i = 0; i < PROPERTIES; ++i) {
+            if (propertyList[i].id == propertyId) {
+                  ((*this).*(propertyList[i].set))(v);
+                  setGenerated(false);
+                  return;
+                  }
+            }
+      Element::setProperty(propertyId, v);
+      }
+
 
