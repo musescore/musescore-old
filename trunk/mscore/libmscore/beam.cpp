@@ -1429,3 +1429,4 @@ void Beam::setProperty(int propertyId, const QVariant& v)
             }
       Element::setProperty(propertyId, v);
       }
+

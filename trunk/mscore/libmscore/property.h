@@ -36,11 +36,16 @@ enum P_TYPE {
       P_LEADING_SPACE,
       P_TRAILING_SPACE,
       P_DISTRIBUTE,
+      P_MIRROR_HEAD,
+      P_DOT_POSITION,
+      P_ONTIME_OFFSET,
+      P_OFFTIME_OFFSET
       };
 
 enum P_DATA_TYPE {
       T_VARIANT,
-      T_DIRECTION       // enum Direction
+      T_DIRECTION,      // enum Direction
+      T_DIRECTION_H     // enum DirectionH
       };
 
 //---------------------------------------------------------

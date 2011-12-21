@@ -21,9 +21,12 @@
 #include "ui_inspector_articulation.h"
 #include "ui_inspector_spacer.h"
 #include "ui_inspector_segment.h"
+#include "ui_inspector_note.h"
 
 class Element;
+class Note;
 class Inspector;
+class Segment;
 
 //---------------------------------------------------------
 //   InspectorSegment
@@ -31,18 +34,54 @@ class Inspector;
 
 class InspectorSegment : public QWidget, Ui::InspectorSegment {
       Q_OBJECT
+      Segment* segment;
 
    private slots:
       void resetLeadingSpaceClicked();
       void resetTrailingSpaceClicked();
+
+      void leadingSpaceChanged(double);
+      void trailingSpaceChanged(double);
 
    signals:
       void enableApply();
 
    public:
       InspectorSegment(QWidget* parent = 0);
-      void setElement(const Element*);
-      void apply(Element*);
+      void setElement(Segment*);
+      void apply();
+      bool dirty() const;
+      };
+
+//---------------------------------------------------------
+//   InspectorNote
+//---------------------------------------------------------
+
+class InspectorNoteBase : public QWidget, Ui::InspectorNote {
+      Q_OBJECT
+      Note* note;
+
+   private slots:
+      void resetSmallClicked();
+      void resetMirrorClicked();
+      void resetDotPositionClicked();
+      void resetOntimeOffsetClicked();
+      void resetOfftimeOffsetClicked();
+
+      void smallChanged(int);
+      void mirrorHeadChanged(int);
+      void dotPositionChanged(int);
+      void ontimeOffsetChanged(int);
+      void offtimeOffsetChanged(int);
+
+   signals:
+      void enableApply();
+
+   public:
+      InspectorNoteBase(QWidget* parent = 0);
+      void setElement(Note*);
+      void apply();
+      bool dirty() const;
       };
 
 //---------------------------------------------------------
@@ -63,6 +102,7 @@ class InspectorElementElement : public QWidget, Ui::InspectorElement {
       InspectorElementElement(QWidget* parent = 0);
       void setElement(const Element*);
       void apply(Element*);
+      bool dirty(Element*) const;
       };
 
 //---------------------------------------------------------
@@ -173,7 +213,13 @@ class InspectorNote : public InspectorElementBase {
       Q_OBJECT
 
       InspectorElementElement* iElement;
+      InspectorNoteBase* iNote;
       InspectorSegment* iSegment;
+
+      bool dirty() const;
+
+   private slots:
+      void checkDirty();
 
    public:
       InspectorNote(QWidget* parent);
@@ -190,11 +236,13 @@ class InspectorRest : public InspectorElementBase {
 
       InspectorElementElement* iElement;
       InspectorSegment* iSegment;
+      QCheckBox* small;
 
    public:
       InspectorRest(QWidget* parent);
       virtual void setElement(Element*);
       virtual void apply();
+      bool dirty() const;
       };
 
 //---------------------------------------------------------

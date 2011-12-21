@@ -1551,7 +1551,7 @@ void Element::setProperty(int propertyId, const QVariant& v)
                   score()->addRefresh(canvasBoundingRect());
                   break;
             default:
-                  qDebug("getProperty: unknown property %d\n", propertyId);
+                  qDebug("setProperty: unknown property %d\n", propertyId);
             }
       }
 
