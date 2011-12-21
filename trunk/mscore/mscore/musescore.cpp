@@ -82,7 +82,8 @@
 
 #include "msynth/synti.h"
 
-#ifdef STATIC_SCRIPT_BINDINGS
+//import qt bindings for plugin framework
+#if ( defined(BUILD_SCRIPTGEN) && defined(STATIC_SCRIPT_BINDINGS) )
 Q_IMPORT_PLUGIN(com_trolltech_qt_gui_ScriptPlugin)
 Q_IMPORT_PLUGIN(com_trolltech_qt_core_ScriptPlugin)
 Q_IMPORT_PLUGIN(com_trolltech_qt_network_ScriptPlugin)

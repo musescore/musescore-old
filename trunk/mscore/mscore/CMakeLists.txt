@@ -169,7 +169,7 @@ add_executable ( ${ExecutableName}
       ${AUDIO}
       )
 
-if (STATIC_SCRIPT_BINDINGS)
+if (STATIC_SCRIPT_BINDINGS AND BUILD_SCRIPTGEN)
       target_link_libraries(mscore
             qtscript_core
             qtscript_gui
@@ -177,7 +177,7 @@ if (STATIC_SCRIPT_BINDINGS)
             qtscript_uitools
             qtscript_xml
             qtscript_webkit)
-endif (STATIC_SCRIPT_BINDINGS)
+endif (STATIC_SCRIPT_BINDINGS AND BUILD_SCRIPTGEN)
 
 if (APPLE)
       set_target_properties (mscore
