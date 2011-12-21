@@ -2739,6 +2739,112 @@ static int nrOfGraceSegsReq(QDomNode n)
       }
 
 //---------------------------------------------------------
+//   xmlTuplet
+//---------------------------------------------------------
+
+/**
+ Parse and handle tuplet(s)
+ */
+
+void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, QDomElement e)
+      {
+      QString tupletType;
+      QString tupletPlacement;
+      QString tupletBracket;
+      int actualNotes = 1;
+      int normalNotes = 1;
+
+      // parse the elements required for tuplet handling
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            QString s(e.text());
+            if (tag == "notations") {
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "tuplet") {
+                              tupletType      = ee.attribute("type");
+                              tupletPlacement = ee.attribute("placement");
+                              tupletBracket   = ee.attribute("bracket");
+                              }
+                        }
+                  }
+            else if (tag == "time-modification") {  // tuplets
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "actual-notes")
+                              actualNotes = ee.text().toInt();
+                        else if (ee.tagName() == "normal-notes")
+                              normalNotes = ee.text().toInt();
+                        else if (ee.tagName() == "normal-type")
+                              domNotImplemented(ee);
+                        else
+                              domError(ee);
+                        }
+                  }
+            }
+
+      printf("xmlTuplet type '%s' placement '%s' bracket '%s' actualNotes %d normalNotes %d\n",
+             qPrintable(tupletType),
+             qPrintable(tupletPlacement),
+             qPrintable(tupletBracket),
+             actualNotes,
+             normalNotes);
+
+      // handle the tuplet
+      if (!tupletType.isEmpty()) {
+            if (tupletType == "start") {
+                  tuplet = new Tuplet(cr->score());
+                  printf("tuplet start new tuplet %p\n", tuplet);
+                  tuplet->setTrack(cr->track());
+                  tuplet->setRatio(Fraction(actualNotes, normalNotes));
+                  tuplet->setTick(cr->tick());
+
+                  // type, placement
+
+                  cr->measure()->add(tuplet);
+                  }
+            else if (tupletType == "stop") {
+                  if (tuplet) {
+                        printf("tuplet stop add cr %p to tuplet %p\n", cr, tuplet);
+                        cr->setTuplet(tuplet);
+                        tuplet->add(cr);
+                        int totalDuration = 0;
+                        foreach (DurationElement* de, tuplet->elements()) {
+                              if (de->type() == CHORD || de->type() == REST) {
+                                    totalDuration+=de->tickLen();
+                                    }
+                              }
+                        if (totalDuration && normalNotes) {
+                              Duration d;
+                              d.setVal(totalDuration);
+                              tuplet->setFraction(d.fraction());
+                              Duration d2;
+                              d2.setVal(totalDuration/normalNotes);
+                              tuplet->setBaseLen(d2.fraction());
+                              printf("tuplet stop, duration OK, tuplet 0\n");
+                              tuplet = 0;
+                              }
+                        else {
+                              printf("MusicXML::import: tuplet stop but bad duration\n");
+                              }
+                        }
+                  else
+                        printf("MusicXML::import: tuplet stop without tuplet start\n");
+                  }
+            else
+                  printf("unknown tuplet type %s\n", tupletType.toLatin1().data());
+            }
+      // add chord to the current tuplet for all chords except the last one in a tuplet
+      // last chord is added in "if (tupletType == "stop")"
+      if (tuplet) {
+            printf("tuplet add cr %p to tuplet %p\n", cr, tuplet);
+            cr->setTuplet(tuplet);
+            tuplet->add(cr);
+            }
+      if ((actualNotes > 1) && (normalNotes > 1) && !tuplet) {
+            printf("actualNotes %d normalNotes %d but no tuplet\n", actualNotes, normalNotes);
+            }
+      }
+
+//---------------------------------------------------------
 //   xmlNote
 //---------------------------------------------------------
 
@@ -2753,6 +2859,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       int ticks = 0;
       printf("xmlNote start tick=%d (%d div) divisions=%d\n", tick, tick * divisions / AL::division, divisions);
       QDomNode pn = e; // TODO remove pn
+      QDomElement org_e = e; // save e for later
       voice = 0;
       move  = 0;
       bool rest    = false;
@@ -2764,9 +2871,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       QString arpeggioType;
       QString fermataType;
       QString glissandoType;
-      QString tupletType;
-      QString tupletPlacement;
-      QString tupletBracket;
       QString step;
       QString fingering;
       QString pluck;
@@ -2792,8 +2896,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       bool stopped = false;
       bool upbow = false;
       bool downbow = false;
-      int actualNotes = 1;
-      int normalNotes = 1;
       int tremolo = 0;
       QString tremoloType;
       int headGroup = 0;
@@ -3080,9 +3182,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                     printf("unknown tied type %s\n", tiedType.toLatin1().data());
                               }
                         else if (ee.tagName() == "tuplet") {
-                              tupletType      = ee.attribute(QString("type"));
-                              tupletPlacement = ee.attribute("placement");
-                              tupletBracket   = ee.attribute("bracket");
+                              // needed for tuplets, handled in xmlTuplet
                               }
                         else if (ee.tagName() == "dynamics") {
                               placement = ee.attribute("placement");
@@ -3197,17 +3297,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             else if (tag == "grace") {
                   graceSlash = e.attribute(QString("slash"));
                   }
-            else if (tag == "time-modification") {  // tuplets
-                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        if (ee.tagName() == "actual-notes")
-                              actualNotes = ee.text().toInt();
-                        else if (ee.tagName() == "normal-notes")
-                              normalNotes = ee.text().toInt();
-                        else if (ee.tagName() == "normal-type")
-                              domNotImplemented(ee);
-                        else
-                              domError(ee);
-                        }
+            else if (tag == "time-modification") {
+                  // needed for tuplets, handled in xmlTuplet
                   }
             else if (tag == "notehead") {
                   if (s == "slash")
@@ -3601,50 +3692,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             Segment* seg = measure->getSegment(SegBreath, tick);
             seg->add(b);
             }
-      if (!tupletType.isEmpty()) {
-            if (tupletType == "start") {
-                  tuplet = new Tuplet(score);
-                  tuplet->setTrack(trk);
-                  tuplet->setRatio(Fraction(actualNotes, normalNotes));
-                  tuplet->setTick(tick);
-
-                  // type, placement
-
-                  measure->add(tuplet);
-                  }
-            else if (tupletType == "stop") {
-                  if (tuplet) {
-                        cr->setTuplet(tuplet);
-                        tuplet->add(cr);
-                        int totalDuration = 0;
-                        foreach (DurationElement* de, tuplet->elements()) {
-                              if (de->type() == CHORD || de->type() == REST) {
-                                    totalDuration+=de->tickLen();
-                                    }
-                              }
-                        if (totalDuration && normalNotes) {
-                              Duration d;
-                              d.setVal(totalDuration);
-                              tuplet->setFraction(d.fraction());
-                              Duration d2;
-                              d2.setVal(totalDuration/normalNotes);
-                              tuplet->setBaseLen(d2.fraction());
-                              tuplet = 0;
-                              }
-                        else {
-                              printf("MusicXML::import: tuplet stop but bad duration\n");
-                              }
-                        }
-                  else
-                        printf("MusicXML::import: tuplet stop without tuplet start\n");
-                  }
-            else
-                  printf("unknown tuplet type %s\n", tupletType.toLatin1().data());
-            }
-      if (tuplet && !chord) {
-            cr->setTuplet(tuplet);
-            tuplet->add(cr);
-            }
+      if (!chord && !grace)
+            xmlTuplet(tuplet, cr, org_e);
       if (tremolo) {
             // printf("tremolo=%d tremoloType='%s'\n", tremolo, qPrintable(tremoloType));
             if (tremolo == 1 || tremolo == 2 || tremolo == 3) {
