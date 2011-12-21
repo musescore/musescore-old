@@ -34,8 +34,6 @@ LineSegment::LineSegment(const LineSegment& s)
       {
       _p2       = s._p2;
       _userOff2 = s._userOff2;
-//      r1        = s.r1;
-//      r2        = s.r2;
       }
 
 //---------------------------------------------------------
@@ -579,7 +577,6 @@ void SLine::writeProperties(Xml& xml, const SLine* proto) const
       for (int i = 0; i < n; ++i) {
             const LineSegment* seg = segmentAt(i);
             xml.stag("Segment");
-//            xml.tag("off1", seg->userOff() / spatium());   // is saved as "offset"
             xml.tag("off2", seg->userOff2() / spatium());
             seg->Element::writeProperties(xml);
             xml.etag();
