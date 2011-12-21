@@ -32,7 +32,7 @@ release:
          then                                          \
             mkdir build.release;                       \
             cd build.release;                          \
-            cmake -DCMAKE_BUILD_TYPE=RELEASE	       \
+            cmake -DCMAKE_BUILD_TYPE=Release	       \
             	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
             	   ../mscore; 			       \
             make lrelease;                             \
@@ -46,7 +46,7 @@ debug:
          then                                          \
             mkdir build.debug;                         \
             cd build.debug;                            \
-            cmake -DCMAKE_BUILD_TYPE=DEBUG	       \
+            cmake -DCMAKE_BUILD_TYPE=Debug	       \
             	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
             	   ../mscore; 		             \
             make lrelease;                             \

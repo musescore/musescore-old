@@ -1038,7 +1038,7 @@ void Score::removeGeneratedElements(Measure* sm, Measure* em)
                               }
                         else if (el->type() == CLEF) {
                               Clef* clef = static_cast<Clef*>(el);
-                              clef->setSmall(seg->tick() != sm->tick());
+                              clef->setSmall(seg != m->first());
                               clef->setMag(staffMag);
                               }
                         else if (el->type() == KEYSIG || el->type() == TIMESIG)
