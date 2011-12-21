@@ -24,7 +24,7 @@ VERSION   = 2.0r${REVISION}
 MINGW_DIR = C:\QtSDK\mingw
 CPUS = 2
 
-win32:
+release:
 	if not exist win32build\nul mkdir win32build
 	if not exist win32install\nul mkdir win32install
 	cd win32build & cmake -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE=../mscore/cmake/mingw32.mingw.cmake -DCMAKE_INSTALL_PREFIX=../win32install -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=${MINGW_DIR}\bin\mingw32-make.exe ../mscore                                
