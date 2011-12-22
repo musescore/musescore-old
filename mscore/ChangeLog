@@ -1,4 +1,7 @@
-22.dec (lv)
+22.dec (ws)
+      - save "pos" element in addition to "offset" for better upward
+        compatibility to 2.0 version
+      (lv)
       - fix #14088: [MusicXML] Problem importing triplets from XML if tuplet element is missing
 20.dec (lv)
       - fix #14118: [MusicXML] Import of tuplets containing chords is incorrect
