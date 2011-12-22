@@ -1,3 +1,5 @@
+22.dec (lv)
+      - fix #14088: [MusicXML] Problem importing triplets from XML if tuplet element is missing
 20.dec (lv)
       - fix #14118: [MusicXML] Import of tuplets containing chords is incorrect
 13.dec (lv)
