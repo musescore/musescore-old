@@ -178,7 +178,7 @@ class MusicXml {
       int maxLyrics;
 
       int divisions;
-      Tuplet* tuplet;                           ///< Current tuplet
+      QVector<Tuplet*> tuplets;                 ///< Current tuplet for each track in the current part
 
       QString composer;
       QString poet;
