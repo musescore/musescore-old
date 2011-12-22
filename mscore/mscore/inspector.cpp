@@ -655,7 +655,7 @@ bool InspectorNoteBase::dirty() const
 
 void InspectorNoteBase::smallChanged(int)
       {
-      resetSmall->setEnabled(note->small() != small->isChecked());
+      resetSmall->setEnabled(note->small());
       emit enableApply();
       }
 
@@ -665,7 +665,7 @@ void InspectorNoteBase::smallChanged(int)
 
 void InspectorNoteBase::mirrorHeadChanged(int)
       {
-      resetMirrorHead->setEnabled(note->userMirror() != mirrorHead->currentIndex());
+      resetMirrorHead->setEnabled(note->userMirror() != DH_AUTO);
       emit enableApply();
       }
 
@@ -675,7 +675,7 @@ void InspectorNoteBase::mirrorHeadChanged(int)
 
 void InspectorNoteBase::dotPositionChanged(int)
       {
-      resetDotPosition->setEnabled(note->dotPosition() != dotPosition->currentIndex());
+      resetDotPosition->setEnabled(note->dotPosition() != AUTO);
       emit enableApply();
       }
 
@@ -685,7 +685,7 @@ void InspectorNoteBase::dotPositionChanged(int)
 
 void InspectorNoteBase::ontimeOffsetChanged(int)
       {
-      resetOntimeOffset->setEnabled(note->onTimeUserOffset() != ontimeOffset->value());
+      resetOntimeOffset->setEnabled(note->onTimeUserOffset());
       emit enableApply();
       }
 
@@ -695,7 +695,7 @@ void InspectorNoteBase::ontimeOffsetChanged(int)
 
 void InspectorNoteBase::offtimeOffsetChanged(int)
       {
-      resetOfftimeOffset->setEnabled(note->offTimeUserOffset() != offtimeOffset->value());
+      resetOfftimeOffset->setEnabled(note->offTimeUserOffset());
       emit enableApply();
       }
 
@@ -756,11 +756,12 @@ void InspectorNoteBase::setElement(Note* n)
       dotPosition->setCurrentIndex(note->dotPosition());
       ontimeOffset->setValue(note->onTimeOffset());
       offtimeOffset->setValue(note->offTimeOffset());
-      resetSmall->setEnabled(false);
-      resetMirrorHead->setEnabled(false);
-      resetDotPosition->setEnabled(false);
-      resetOntimeOffset->setEnabled(false);
-      resetOfftimeOffset->setEnabled(false);
+
+      resetSmall->setEnabled(note->small());
+      resetMirrorHead->setEnabled(note->userMirror() != DH_AUTO);
+      resetDotPosition->setEnabled(note->dotPosition() != AUTO);
+      resetOntimeOffset->setEnabled(note->onTimeUserOffset());
+      resetOfftimeOffset->setEnabled(note->offTimeUserOffset());
       }
 
 //---------------------------------------------------------
