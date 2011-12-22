@@ -447,7 +447,6 @@ void MusicXml::import(Score* s)
             slur[i] = 0;
       for (int i = 0; i < MAX_BRACKETS; ++i)
             bracket[i] = 0;
-      tuplet = 0;
       ottava = 0;
       trill = 0;
       pedal = 0;
@@ -753,6 +752,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                   Staff* staff = new Staff(score, part, 0);
                   part->staves()->push_back(staff);
                   score->staves().push_back(staff);
+                  tuplets.resize(VOICES); // part now contains one staff, thus VOICES voices
                   printf("measurelength part %s\n", qPrintable(id));
                   determineMeasureLength(e, measureLength);
                   }
@@ -2357,6 +2357,9 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                   staves = e2.text().toInt();
                   Part* part = score->part(staff);
                   part->setStaves(staves);
+                  // grow tuplets size, do not shrink to prevent losing info
+                  if (staves * VOICES > tuplets.size())
+                        tuplets.resize(staves * VOICES);
                   Staff* st = part->staff(0);
                   if (st && staves == 2) {
                         st->setBracket(0, BRACKET_AKKOLADE);
@@ -2832,7 +2835,7 @@ void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, int ticks, QDomElement e)
       // Detect this by comparing the actual duration with the expected duration
       // based on note type. If actual is 2/3 of expected, the rest is part
       // of a tuplet.
-      printf("xmlTuplet(cr %p len %d ticks %d) rest %d\n", cr, cr->tickLen(), ticks, rest);
+      printf("xmlTuplet(tuplet %p cr %p len %d ticks %d) rest %d\n", tuplet, cr, cr->tickLen(), ticks, rest);
       if (rest && actualNotes == 1 && normalNotes == 1 && cr->tickLen() != ticks) {
             printf("xmlTuplet --> found one !\n");
             if (2 * cr->tickLen() == 3 * ticks) {
@@ -3032,6 +3035,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             }
 
       // printf("voice mapper after: relStaff=%d move=%d voice=%d\n", relStaff, move, voice);
+      // note: relStaff is the staff number relative to the parts first staff
+      //       voice is the voice number in the staff
 
       // for notes that are part of a chord (except the first one)
       // move tick back to the start time of the first note
@@ -3762,8 +3767,9 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             Segment* seg = measure->getSegment(SegBreath, tick);
             seg->add(b);
             }
-      if (!chord && !grace)
-            xmlTuplet(tuplet, cr, ticks, org_e);
+      if (!chord && !grace) {
+            xmlTuplet(tuplets[voice + relStaff * VOICES], cr, ticks, org_e);
+            }
       if (tremolo) {
             // printf("tremolo=%d tremoloType='%s'\n", tremolo, qPrintable(tremoloType));
             if (tremolo == 1 || tremolo == 2 || tremolo == 3) {
