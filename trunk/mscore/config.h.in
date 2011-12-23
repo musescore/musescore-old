@@ -27,6 +27,7 @@
 
 #cmakedefine HAS_MIDI
 #cmakedefine STATIC_SCRIPT_BINDINGS
+#cmakedefine BUILD_SCRIPTGEN
 #cmakedefine HAS_AUDIOFILE
 #cmakedefine USE_SSE
 
