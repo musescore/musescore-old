@@ -135,16 +135,16 @@ class VoiceDesc {
       VoiceDesc();
       void incrChordRests(int s);
       int numberChordRests() const;
-      int preferredStaff() const;    ///< Determine preferred staff for this voice
+      int preferredStaff() const;               ///< Determine preferred staff for this voice
       void setStaff(int s) { if (s >= 0) _staff = s; }
       int staff() const    { return _staff; }
       void setVoice(int v) { if (v >= 0) _voice = v; }
       int voice() const    { return _voice; }
       QString toString() const;
    private:
-      int _chordRests[MAX_STAVES]; ///< The number of chordrests on each MusicXML staff
-      int _staff;                  ///< The MuseScore staff allocated
-      int _voice;                  ///< The MuseScore voice allocated
+      int _chordRests[MAX_STAVES];              ///< The number of chordrests on each MusicXML staff
+      int _staff;                               ///< The MuseScore staff allocated
+      int _voice;                               ///< The MuseScore voice allocated
       };
 
 //---------------------------------------------------------
@@ -191,18 +191,18 @@ class MusicXml {
       Volta* lastVolta;
 
       QDomDocument* doc;
-      int tick;         ///< Current position in MusicXML time
-      int maxtick;      ///< Maxtick of a measure, used to calculate measure len
-      int prevtick;     ///< Previous notes tick (used to insert Jumps)
+      int tick;                                 ///< Current position in MusicXML time
+      int maxtick;                              ///< Maxtick of a measure, used to calculate measure len
+      int prevtick;                             ///< Previous notes tick (used to insert Jumps)
       int lastMeasureLen;
       int multiMeasureRestCount;                ///< Remaining measures in a multi measure rest
       bool startMultiMeasureRest;               ///< Multi measure rest started in this measure
 
-      int lastLen;      ///< Needed for chords
+      int lastLen;                              ///< Needed for chords
       int maxLyrics;
 
       int divisions;
-      Tuplet* tuplet;   ///< Current tuplet
+      QVector<Tuplet*> tuplets;                 ///< Current tuplet for each track in the current part
 
       QString composer;
       QString poet;
@@ -214,16 +214,16 @@ class MusicXml {
       std::vector<MusicXmlPartGroup*> partGroupList;
       QMap<Spanner*, QPair<int, int> > spanners;
 
-      Ottava* ottava;    ///< Current ottava
-      Trill* trill;      ///< Current trill
-      Pedal* pedal;      ///< Current pedal
-      Harmony* harmony;  ///< Current harmony
-      Hairpin* hairpin;  ///< Current hairpin (obsoletes wedgelist)
-      Chord* tremStart;  ///< Starting chord for current tremolo
-      BeamMode beamMode; ///< Current beam mode
+      Ottava* ottava;                            ///< Current ottava
+      Trill* trill;                              ///< Current trill
+      Pedal* pedal;                              ///< Current pedal
+      Harmony* harmony;                          ///< Current harmony
+      Hairpin* hairpin;                          ///< Current hairpin (obsoletes wedgelist)
+      Chord* tremStart;                          ///< Starting chord for current tremolo
+      BeamMode beamMode;                         ///< Current beam mode
 
-      int pageWidth;     ///< Page width read from defaults
-      int pageHeight;    ///< Page height read from defaults
+      int pageWidth;                             ///< Page width read from defaults
+      int pageHeight;                            ///< Page height read from defaults
 
       //-----------------------------
 

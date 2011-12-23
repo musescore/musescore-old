@@ -1,6 +1,11 @@
+23.dec (lv)
+      - partial fix #14088: [MusicXML] Problem importing triplets from XML if tuplet element is missing
+        -> works for notes but not yet for rests with missing time-modification
+      - fix #14118: [MusicXML] Import of tuplets containing chords is incorrect
+      - fix #14160: [MusicXML] Problem importing tuplets from XML in a multi-voice context
 17.dec (ws)
       - new feature: respacing beams (inspector property)
-      (lv)
+       (lv)
       - remove \n from qDebug statements
       - disabled many debug messages
       - fix #12445: [MusicXML] Import can produce empty voice 1
