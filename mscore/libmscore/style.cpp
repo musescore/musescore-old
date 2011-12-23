@@ -1011,7 +1011,7 @@ void StyleData::setChordList(ChordList* cl)
 
 const TextStyle& StyleData::textStyle(TextStyleType idx) const
       {
-      Q_ASSERT(idx >= 0 && idx < sizeof(_textStyles)/sizeof(*_textStyles));
+      Q_ASSERT(idx >= 0 && idx < _textStyles.count());
       return _textStyles[idx];
       }
 
