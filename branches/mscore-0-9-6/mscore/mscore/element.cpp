@@ -454,7 +454,7 @@ QList<Prop> Element::properties(Xml& xml, const Element* proto) const
             }
       if (!_userOff.isNull()) {
             pl.append(Prop("offset", _userOff / spatium()));
-            pl.append(Prop("pos", pos() / spatium()); // for upward compatibility
+            pl.append(Prop("pos", pos() / spatium())); // for upward compatibility
             }
       if ((track() != xml.curTrack) && (track() != -1)) {
             int t;
