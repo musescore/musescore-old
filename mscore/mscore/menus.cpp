@@ -70,6 +70,7 @@
 #include "libmscore/icon.h"
 #include "libmscore/accidental.h"
 #include "libmscore/harmony.h"
+#include "libmscore/rehearsalmark.h"
 
 extern bool useFactorySettings;
 
@@ -707,22 +708,18 @@ void MuseScore::populatePalette()
       st->setText(tr("system-text"));
       sp->append(st, tr("System Text"));
 
-      Text* text = new Text(gscore);
-      text->setTrack(0);
-      text->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
-      text->setSubtype(TEXT_REHEARSAL_MARK);
-      text->setText(tr("B1"));
-      text->setSystemFlag(true);
-      sp->append(text, tr("Rehearsal Mark"));
+      RehearsalMark* rhm = new RehearsalMark(gscore);
+      rhm->setTrack(0);
+      rhm->setText("B1");
+      sp->append(rhm, tr("RRehearsal Mark"));
 
       InstrumentChange* is = new InstrumentChange(gscore);
       is->setText(tr("Instrument"));
       sp->append(is, tr("Instrument Change"));
 
-      text = new Text(gscore);
+      Text* text = new Text(gscore);
       text->setTrack(0);
       text->setTextStyle(TEXT_STYLE_LYRICS_VERSE_NUMBER);
-//      text->setSubtype(TEXT_LYRICS_VERSE_NUMBER);
       text->setText(tr("1."));
       text->setSystemFlag(true);
       sp->append(text, tr("Lyrics Verse Number"));

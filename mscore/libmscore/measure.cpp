@@ -2106,6 +2106,7 @@ void Measure::read(QDomElement e, int staffIdx)
                || tag == "Symbol"
                || tag == "Tempo"
                || tag == "StaffText"
+               || tag == "RehearsalMark"
                || tag == "InstrumentChange"
                || tag == "Marker"
                || tag == "Jump"
