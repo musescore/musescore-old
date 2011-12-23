@@ -445,6 +445,7 @@ void Segment::add(Element* el)
             case FRET_DIAGRAM:
             case TEMPO_TEXT:
             case STAFF_TEXT:
+            case REHEARSAL_MARK:
             case MARKER:
             case IMAGE:
             case TEXT:
@@ -494,10 +495,16 @@ void Segment::add(Element* el)
                   if (track % VOICES)
                         measure()->mstaff(staffIdx)->hasVoices = true;
 
-            default:
+                  // fall through
+
+            case BAR_LINE:
                   _elist[track] = el;
                   empty = false;
                   break;
+
+            default:
+                  qDebug("Segment::add() unknown %s", el->name());
+                  abort();
             }
       }
 
@@ -558,6 +565,7 @@ void Segment::remove(Element* el)
             case FRET_DIAGRAM:
             case TEMPO_TEXT:
             case STAFF_TEXT:
+            case REHEARSAL_MARK:
             case MARKER:
             case IMAGE:
             case TEXT:
@@ -597,9 +605,14 @@ void Segment::remove(Element* el)
                   el->staff()->removeTimeSig(static_cast<TimeSig*>(el));
                   break;
 
-            default:
+            case BAR_LINE:
                   _elist[track] = 0;
                   break;
+
+            default:
+                  qDebug("Segment::remove() unknown %s", el->name());
+                  abort();
+
             }
       checkEmpty();
       }

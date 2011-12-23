@@ -1005,6 +1005,16 @@ void StyleData::setChordList(ChordList* cl)
       _customChordList = true;      // TODO: check
       }
 
+//---------------------------------------------------------
+//   textStyle
+//---------------------------------------------------------
+
+const TextStyle& StyleData::textStyle(TextStyleType idx) const
+      {
+      Q_ASSERT(idx >= 0 && idx < sizeof(_textStyles)/sizeof(*_textStyles));
+      return _textStyles[idx];
+      }
+
 StyleVal::StyleVal(StyleIdx t, Spatium val)
       {
       idx  = t;

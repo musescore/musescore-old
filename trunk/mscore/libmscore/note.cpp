@@ -998,6 +998,7 @@ bool Note::acceptDrop(MuseScoreView*, const QPointF&, int type, int subtype) con
       return (type == ARTICULATION
          || type == CHORDLINE
          || type == TEXT
+         || type == REHEARSAL_MARK
          || type == FINGERING
          || type == ACCIDENTAL
          || type == BREATH
@@ -1039,7 +1040,6 @@ bool Note::acceptDrop(MuseScoreView*, const QPointF&, int type, int subtype) con
 Element* Note::drop(const DropData& data)
       {
       Element* e = data.element;
-printf("DROP %s\n", e->name());
 
       Chord* ch = chord();
       switch(e->type()) {

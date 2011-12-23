@@ -337,7 +337,7 @@ void Text::setTextStyle(TextStyleType idx)
 
 void Text::write(Xml& xml) const
       {
-      write(xml, "Text");
+      write(xml, name());
       }
 
 //---------------------------------------------------------
@@ -514,6 +514,8 @@ bool Text::readProperties(QDomElement e)
             setCircle(val.toInt());
             setStyled(false);
             }
+      else if (tag == "systemFlag")       // prevent setting "styled"
+            _localStyle.setSystemFlag(val.toInt());
       else if (_localStyle.readProperties(e))
             setStyled(false);
       else if (!Element::readProperties(e))

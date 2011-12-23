@@ -786,11 +786,13 @@ Element* ChordRest::drop(const DropData& data)
             case HARMONY:
             case STAFF_STATE:
             case INSTRUMENT_CHANGE:
+            case REHEARSAL_MARK:
                   e->setParent(segment());
                   e->setTrack((track() / VOICES) * VOICES);
                   score()->select(e, SELECT_SINGLE, 0);
                   score()->undoAddElement(e);
                   return e;
+
             default:
                   qDebug("cannot drop %s", e->name());
                   delete e;
@@ -969,6 +971,7 @@ void ChordRest::removeDeleteBeam()
             b->remove(this);  // this sets _beam to zero
             if (b->isEmpty())
                   delete b;
+            Q_ASSERT(_beam == 0);
             }
       }
 

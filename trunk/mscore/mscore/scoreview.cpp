@@ -2230,6 +2230,7 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
                   case MARKER:
                   case STAFF_STATE:
                   case INSTRUMENT_CHANGE:
+                  case REHEARSAL_MARK:
                   case JUMP:
                   case REPEAT_MEASURE:
                   case ICON:
@@ -2401,6 +2402,7 @@ void ScoreView::dropEvent(QDropEvent* event)
                   case MARKER:
                   case STAFF_STATE:
                   case INSTRUMENT_CHANGE:
+                  case REHEARSAL_MARK:
                   case JUMP:
                   case REPEAT_MEASURE:
                   case ICON:
@@ -5337,7 +5339,6 @@ void ScoreView::cmdAddText(int type)
                         break;
                   s = new RehearsalMark(_score);
                   s->setTrack(0);
-                  s->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
                   s->setParent(cr->segment());
                   }
                   break;

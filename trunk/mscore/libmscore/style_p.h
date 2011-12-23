@@ -92,7 +92,7 @@ class StyleData : public QSharedData {
 
       void set(const StyleVal& v)                         { _values[v.getIdx()] = v; }
       StyleVal value(StyleIdx idx) const                  { return _values[idx];     }
-      const TextStyle& textStyle(TextStyleType idx) const { return _textStyles[idx]; }
+      const TextStyle& textStyle(TextStyleType idx) const;
       const TextStyle& textStyle(const QString&) const;
       TextStyleType textStyleType(const QString&) const;
       void setTextStyle(const TextStyle& ts);

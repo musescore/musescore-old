@@ -22,5 +22,6 @@ RehearsalMark::RehearsalMark(Score* score)
    : Text(score)
       {
       setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
+      setSystemFlag(true);
       }
 

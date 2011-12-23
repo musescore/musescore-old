@@ -1675,6 +1675,7 @@ void Chord::pitchChanged()
 Element* Chord::drop(const DropData& data)
       {
       Element* e = data.element;
+printf("Chord::drop %s\n", e->name());
       switch (e->type()) {
             case ARTICULATION:
                   {
