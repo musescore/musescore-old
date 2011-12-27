@@ -1,3 +1,6 @@
+27.dec (lv)
+      - fix #14088: [MusicXML] Problem importing triplets from XML if tuplet element is missing
+      - importxml.cpp cleanup
 23.dec (lv)
       - partial fix #14088: [MusicXML] Problem importing triplets from XML if tuplet element is missing
         -> works for notes but not yet for rests with missing time-modification
