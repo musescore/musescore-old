@@ -1377,7 +1377,7 @@ static void fillGap(Measure* measure, int track, int tstart, int tend)
             rest->setVisible(false);
             Segment* s = measure->getSegment(rest, tstart);
             s->add(rest);
-            len = rest->actualTicks();
+            len = rest->globalDuration().ticks();
             qDebug(" %d", len);
             ctick   += len;
             restLen -= len;
@@ -1410,7 +1410,7 @@ static void fillGapsInFirstVoices(Measure* measure, Part* part)
                         if (s->isChordRest()) {
                               ChordRest* cr  = static_cast<ChordRest*>(el);
                               int crTick     = cr->tick();
-                              int crLen      = cr->actualTicks();
+                              int crLen      = cr->globalDuration().ticks();
                               int nextCrTick = crTick + crLen;
                               /*
                               qDebug(" chord/rest tick %d - %d (len %d)",
@@ -2922,12 +2922,12 @@ bool isTupletFilled(Tuplet* t)
       int totalDuration = 0;
       foreach (DurationElement* de, t->elements()) {
             if (de->type() == CHORD || de->type() == REST) {
-                  totalDuration+=de->actualTicks();
+                  totalDuration+=de->globalDuration().ticks();
                   }
             }
       Fraction totalDurFract = Fraction::fromTicks(totalDuration);
       totalDurFract.reduce();
-      printf("isTupletFilled(%p) %d/%d totalDuration %d (%d/%d) done %d\n",
+      qDebug("isTupletFilled(%p) %d/%d totalDuration %d (%d/%d) done %d",
              t, t->ratio().numerator(), t->ratio().denominator(),
              totalDuration, totalDurFract.numerator(), totalDurFract.denominator(),
              (totalDurFract.denominator() % t->ratio().numerator())
@@ -2993,27 +2993,27 @@ void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, int ticks, QDomElement e)
       // Detect this by comparing the actual duration with the expected duration
       // based on note type. If actual is 2/3 of expected, the rest is part
       // of a tuplet.
-      printf("xmlTuplet(tuplet %p cr %p len %d ticks %d) rest %d\n", tuplet, cr, cr->actualTicks(), ticks, rest);
-      if (rest && actualNotes == 1 && normalNotes == 1 && cr->actualTicks() != ticks) {
-            printf("xmlTuplet --> found one !\n");
-            if (2 * cr->actualTicks() == 3 * ticks) {
+      qDebug("xmlTuplet(tuplet %p cr %p len %d ticks %d) rest %d", tuplet, cr, cr->duration().ticks(), ticks, rest);
+      if (rest && actualNotes == 1 && normalNotes == 1 && cr->duration().ticks() != ticks) {
+            qDebug("xmlTuplet --> found one !");
+            if (2 * cr->duration().ticks() == 3 * ticks) {
                   actualNotes = 3;
                   normalNotes = 2;
                   }
-            printf("xmlTuplet --> actualNotes %d normalNotes %d\n", actualNotes, normalNotes);
+            qDebug("xmlTuplet --> actualNotes %d normalNotes %d", actualNotes, normalNotes);
             }
 
       // check for obvious errors
       if (tupletType == "start" && tuplet) {
-            printf("tuplet already started\n");
+            qDebug("tuplet already started");
             // TODO: how to recover ?
             }
       if (tupletType == "stop" && !tuplet) {
-            printf("tuplet stop but no tuplet started\n");
+            qDebug("tuplet stop but no tuplet started");
             // TODO: how to recover ?
             }
       if (tupletType != "" && tupletType != "start" && tupletType != "stop") {
-            printf("unknown tuplet type %s\n", qPrintable(tupletType));
+            qDebug("unknown tuplet type %s", qPrintable(tupletType));
             }
 
       // Tuplet are either started by the tuplet start
@@ -3022,7 +3022,7 @@ void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, int ticks, QDomElement e)
             if (tupletType == "start"
                 || (!tuplet && (actualNotes != 1 || normalNotes != 1))) {
                   tuplet = new Tuplet(cr->score());
-                  printf("tuplet start new tuplet %p\n", tuplet);
+                  qDebug("tuplet start new tuplet %p", tuplet);
                   tuplet->setTrack(cr->track());
                   tuplet->setRatio(Fraction(actualNotes, normalNotes));
                   tuplet->setTick(cr->tick());
@@ -3035,7 +3035,7 @@ void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, int ticks, QDomElement e)
       // Must also check for actual/normal notes to prevent
       // adding one chord too much if tuplet stop is missing.
       if (tuplet && !(actualNotes == 1 && normalNotes == 1)) {
-            printf("tuplet add cr %p to tuplet %p\n", cr, tuplet);
+            qDebug("tuplet add cr %p to tuplet %p", cr, tuplet);
             cr->setTuplet(tuplet);
             tuplet->add(cr);
             }
@@ -3050,7 +3050,7 @@ void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, int ticks, QDomElement e)
                   int totalDuration = 0;
                   foreach (DurationElement* de, tuplet->elements()) {
                         if (de->type() == CHORD || de->type() == REST) {
-                              totalDuration+=de->actualTicks();
+                              totalDuration+=de->globalDuration().ticks();
                               }
                         }
                   if (totalDuration && normalNotes) {
@@ -3062,15 +3062,124 @@ void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, int ticks, QDomElement e)
                         d2.setVal(totalDuration/normalNotes);
                         tuplet->setBaseLen(d2.fraction());
                         */
-                        printf("tuplet stop, duration OK\n");
+                        qDebug("tuplet stop, duration OK");
                         }
                   else {
-                        printf("MusicXML::import: tuplet stop but bad duration\n");
+                        qDebug("MusicXML::import: tuplet stop but bad duration");
                         }
-                  printf("tuplet stop, tuplet 0\n");
+                  qDebug("tuplet stop, tuplet 0");
                   tuplet = 0;
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   readArticulations
+//---------------------------------------------------------
+
+/**
+ Read a "simple" MuseScore articulation.
+ These are the articulations that can be
+ - represented by an enum ArticulationType
+ - added to a ChordRest
+ Return true (articulation recognized and handled)
+ or false (articulation not recognized).
+ Note simple implementation: MusicXML syntax is not strictly
+ checked, the articulations parent element does not matter.
+ */
+
+static bool readArticulations(QString mxmlName, QList<int>& arts)
+      {
+      QMap<QString, int> map; // map MusicXML articulation name to MuseScore symbol
+      map["accent"]           = Articulation_Sforzatoaccent;
+      map["staccatissimo"]    = Articulation_Staccatissimo;
+      map["staccato"]         = Articulation_Staccato;
+      map["tenuto"]           = Articulation_Tenuto;
+      map["turn"]             = Articulation_Turn;
+      map["mordent"]          = Articulation_Mordent;
+      map["inverted-mordent"] = Articulation_Prall;
+      map["inverted-turn"]    = Articulation_Reverseturn;
+      map["stopped"]          = Articulation_Plusstop;
+      map["up-bow"]           = Articulation_Upbow;
+      map["down-bow"]         = Articulation_Downbow;
+
+      if (map.contains(mxmlName)) {
+            arts.append(map.value(mxmlName));
+            return true;
+            }
+      else
+            return false;
+      }
+
+//---------------------------------------------------------
+//   convertAccidental
+//---------------------------------------------------------
+
+/**
+ Convert a MusicXML accidental name to a MuseScore enum AccidentalType.
+ */
+
+static AccidentalType convertAccidental(QString mxmlName)
+      {
+      QMap<QString, AccidentalType> map; // map MusicXML accidental name to MuseScore enum AccidentalType
+      map["natural"] = ACC_NATURAL;
+      map["flat"] = ACC_FLAT;
+      map["sharp"] = ACC_SHARP;
+      map["double-sharp"] = ACC_SHARP2;
+      map["sharp-sharp"] = ACC_SHARP2;
+      map["natural-flat"] = ACC_NONE;
+      // TODO check: following values are in 1.1, do not seem to match with 2.0
+      // map["quarter-flat"] = 19;
+      // map["quarter-sharp"] = 22;
+      // map["three-quarters-flat"] = 18;
+      // map["three-quarters-sharp"] = 25;
+      map["quarter-flat"] = ACC_MIRRORED_FLAT;
+      map["quarter-sharp"] = ACC_SHARP_SLASH;
+      map["three-quarters-flat"] = ACC_MIRRORED_FLAT2;
+      map["three-quarters-sharp"] = ACC_SHARP_SLASH4;
+      map["flat-flat"] = ACC_FLAT2;
+      map["natural-sharp"] = ACC_NONE;
+
+      if (map.contains(mxmlName))
+            return map.value(mxmlName);
+      else
+            qDebug("unknown accidental %s", qPrintable(mxmlName));
+      // default: return ACC_NONE
+      return ACC_NONE;
+      }
+
+//---------------------------------------------------------
+//   convertNotehead
+//---------------------------------------------------------
+
+/**
+ Convert a MusicXML notehead name to a MuseScore headgroup.
+ */
+
+static int convertNotehead(QString mxmlName)
+      {
+      QMap<QString, int> map; // map MusicXML notehead name to a MuseScore headgroup
+      map["slash"] = 5;
+      map["triangle"] = 3;
+      map["diamond"] = 2;
+      map["x"] = 1;
+      map["circle-x"] = 6;
+      map["do"] = 7;
+      map["re"] = 8;
+      map["mi"] = 4;
+      map["fa"] = 9;
+      map["so"] = 12;
+      map["la"] = 10;
+      map["ti"] = 11;
+      map["normal"] = 0;
+
+      if (map.contains(mxmlName))
+            return map.value(mxmlName);
+      else
+            qDebug("unknown notehead %s", qPrintable(mxmlName));
+      // default: return 0
+      return 0;
+
       }
 
 //---------------------------------------------------------
@@ -3116,18 +3225,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       TDuration durationType(TDuration::V_INVALID);
       bool trillMark = false;
       QString strongAccentType;
-      bool accent = false;
+      QList<int> articulations;
       bool breathmark = false;
-      bool staccatissimo = false;
-      bool staccato = false;
-      bool tenuto = false;
-      bool turn = false;
-      bool mordent = false;
-      bool invertedMordent = false;
-      bool invertedTurn = false;
-      bool stopped = false;
-      bool upbow = false;
-      bool downbow = false;
       int tremolo = 0;
       QString tremoloType;
       int headGroup = 0;
@@ -3308,34 +3407,9 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             else if (tag == "dot")
                   ++dots;
             else if (tag == "accidental") {
+                  accidental = convertAccidental(s);
                   if (e.attribute(QString("editorial")) == "yes")
                         editorial = true;
-                  if (s == "natural")
-                        accidental = ACC_NATURAL;
-                  else if (s == "flat")
-                        accidental = ACC_FLAT;
-                  else if (s == "sharp")
-                        accidental = ACC_SHARP;
-                  else if (s == "double-sharp")
-                        accidental = ACC_SHARP2;
-                  else if (s == "sharp-sharp")
-                        accidental = ACC_SHARP2;
-                  else if (s == "natural-flat")
-                        ;
-                  else if (s == "quarter-flat")
-                        accidental = ACC_MIRRORED_FLAT;
-                  else if (s == "quarter-sharp")
-                        accidental = ACC_SHARP_SLASH;
-                  else if (s == "three-quarters-flat")
-                        accidental = ACC_MIRRORED_FLAT2;
-                  else if (s == "three-quarters-sharp")
-                        accidental = ACC_SHARP_SLASH4;
-                  else if (s == "flat-flat")
-                        accidental = ACC_FLAT2;
-                  else if (s == "natural-sharp")
-                        ;
-                  else
-                        qDebug("unknown accidental %s", s.toLatin1().data());
                   }
             else if (tag == "notations") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
@@ -3440,18 +3514,12 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               }
                         else if (ee.tagName() == "articulations") {
                               for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                                    if (eee.tagName() == "accent")
-                                          accent = true;
+                                    if (readArticulations(eee.tagName(), articulations))
+                                          continue;
                                     else if (eee.tagName() == "breath-mark")
                                           breathmark = true;
-                                    else if (eee.tagName() == "staccatissimo")
-                                          staccatissimo = true;
-                                    else if (eee.tagName() == "staccato")
-                                          staccato = true;
                                     else if (eee.tagName() == "strong-accent")
                                           strongAccentType = eee.attribute(QString("type"));
-                                    else if (eee.tagName() == "tenuto")
-                                          tenuto = true;
                                     else
                                           domError(eee);
                                     }
@@ -3462,18 +3530,12 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         else if (ee.tagName() == "ornaments") {
                               // <trill-mark placement="above"/>
                               for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                                    if (eee.tagName() == "trill-mark")
+                                    if (readArticulations(eee.tagName(), articulations))
+                                          continue;
+                                    else if (eee.tagName() == "trill-mark")
                                           trillMark = true;
                                     else if (eee.tagName() == "wavy-line")
                                           wavyLineType = eee.attribute(QString("type"));
-                                    else if (eee.tagName() == "inverted-turn")
-                                          invertedTurn = true;
-                                    else if (eee.tagName() == "turn")
-                                          turn = true;
-                                    else if (eee.tagName() == "inverted-mordent")
-                                          invertedMordent = true;
-                                    else if (eee.tagName() == "mordent")
-                                          mordent = true;
                                     else if (eee.tagName() == "tremolo") {
                                           tremolo = eee.text().toInt();
                                           tremoloType = eee.attribute(QString("type"));
@@ -3488,7 +3550,9 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               }
                         else if (ee.tagName() == "technical") {
                               for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                                    if (eee.tagName() == "fingering")
+                                    if (readArticulations(eee.tagName(), articulations))
+                                          continue;
+                                    else if (eee.tagName() == "fingering")
                                           fingering = eee.text();
                                     else if (eee.tagName() == "fret")
                                           domNotImplemented(eee);
@@ -3498,12 +3562,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                           string = eee.text();
                                     else if (eee.tagName() == "pull-off")
                                           domNotImplemented(eee);
-                                    else if (eee.tagName() == "stopped")
-                                          stopped = true;
-                                    else if (eee.tagName() == "up-bow")
-                                          upbow = true;
-                                    else if (eee.tagName() == "down-bow")
-                                          downbow = true;
                                     else
                                           domError(eee);
                                     }
@@ -3541,34 +3599,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   // needed for tuplets, handled in xmlTuplet
                   }
             else if (tag == "notehead") {
-                  if (s == "slash")
-                        headGroup = 5;
-                  else if (s == "triangle")
-                        headGroup = 3;
-                  else if (s == "diamond")
-                        headGroup = 2;
-                  else if (s == "x")
-                        headGroup = 1;
-                  else if (s == "circle-x")
-                        headGroup = 6;
-                  else if (s == "do")
-                        headGroup = 7;
-                  else if (s == "re")
-                        headGroup = 8;
-                  else if (s == "mi")
-                        headGroup = 4;
-                  else if (s == "fa")
-                        headGroup = 9;
-                  else if (s == "so")
-                        headGroup = 12;
-                  else if (s == "la")
-                        headGroup = 10;
-                  else if (s == "ti")
-                        headGroup = 11;
-                  else if (s == "normal")
-                        ;
-                  else
-                        qDebug("unknown notehead %s", qPrintable(s));
+                  headGroup = convertNotehead(s);
                   QString color = e.attribute(QString("color"), 0);
                   if (color != 0)
                         noteheadColor = QColor(color);
@@ -3592,15 +3623,18 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       ChordRest* cr = 0;
 
       if (rest) {
+            cr = new Rest(score);
             // whole measure rests do not have a "type" element
-            int len = ticks;
             if (durationType.type() == TDuration::V_INVALID) {
                   durationType.setType(TDuration::V_MEASURE);
-                  len = 0;
+                  cr->setDurationType(durationType);
+                  cr->setDuration(Fraction::fromTicks(ticks));
                   }
-            cr = new Rest(score, durationType);
-            cr->setDuration(Fraction::fromTicks(ticks));
-            cr->setDots(dots);
+            else {
+                  cr->setDurationType(durationType);
+                  cr->setDots(dots);
+                  cr->setDuration(cr->durationType().fraction());
+                  }
             if (beamMode == BEAM_BEGIN || beamMode == BEAM_MID)
                   cr->setBeamMode(BEAM_MID);
             else
@@ -3881,62 +3915,14 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             na->setSubtype(Articulation_Trill);
             cr->add(na);
             }
-      if (invertedTurn) {
+
+      // add simple articulations
+      for (int i = 0; i < articulations.size(); ++i) {
             Articulation* na = new Articulation(score);
-            na->setSubtype(Articulation_Reverseturn);
+            na->setSubtype(articulations.at(i));
             cr->add(na);
             }
-      if (turn) {
-            Articulation* na = new Articulation(score);
-            na->setSubtype(Articulation_Turn);
-            cr->add(na);
-            }
-      if (mordent) {
-            Articulation* na = new Articulation(score);
-            na->setSubtype(Articulation_Mordent);
-            cr->add(na);
-            }
-      if (invertedMordent) {
-            Articulation* na = new Articulation(score);
-            na->setSubtype(Articulation_Prall);
-            cr->add(na);
-            }
-      if (accent) {
-            Articulation* na = new Articulation(score);
-            na->setSubtype(Articulation_Sforzatoaccent);
-            cr->add(na);
-            }
-      if (staccatissimo) {
-            Articulation* na = new Articulation(score);
-            na->setUp(true);
-            na->setSubtype(Articulation_Staccatissimo);
-            cr->add(na);
-            }
-      if (staccato) {
-            Articulation* na = new Articulation(score);
-            na->setSubtype(Articulation_Staccato);
-            cr->add(na);
-            }
-      if (tenuto) {
-            Articulation* na = new Articulation(score);
-            na->setSubtype(Articulation_Tenuto);
-            cr->add(na);
-            }
-      if (stopped) {
-            Articulation* na = new Articulation(score);
-            na->setSubtype(Articulation_Plusstop);
-            cr->add(na);
-            }
-      if (upbow) {
-            Articulation* na = new Articulation(score);
-            na->setSubtype(Articulation_Upbow);
-            cr->add(na);
-            }
-      if (downbow) {
-            Articulation* na = new Articulation(score);
-            na->setSubtype(Articulation_Downbow);
-            cr->add(na);
-            }
+
       if (breathmark) {
             Breath* b = new Breath(score);
             b->setTrack(trk + voice);
