@@ -317,7 +317,8 @@ CookieJar::CookieJar(QString path, QObject *parent)
             setAllCookies(list);
             }
       else {
-            qWarning() << "Can't open "<< this->file << " to read cookies";
+            if (debugMode)
+                  qDebug() << "Can't open "<< this->file << " to read cookies";
             }
       }
 
@@ -333,7 +334,8 @@ CookieJar::~CookieJar()
       QFile file(this->file);
 
       if(!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-            qWarning() << "Can't open "<< this->file << " to save cookies";
+            if (debugMode)
+                  qDebug() << "Can't open "<< this->file << " to save cookies";
             return;
             }
 
@@ -387,7 +389,8 @@ void WebScoreView::setScore(const QString& url)
 void WebScoreView::networkFinished(QNetworkReply* reply)
       {
       if (reply->error() != QNetworkReply::NoError) {
-            qDebug("Error while checking update [%s]\n", qPrintable(reply->errorString()));
+            if (debugMode)
+                  qDebug("Error while checking update [%s]\n", qPrintable(reply->errorString()));
             return;
             }
       QByteArray ha = reply->rawHeader("Content-Disposition");
