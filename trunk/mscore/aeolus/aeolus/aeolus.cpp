@@ -22,7 +22,7 @@
 extern QString dataPath;
 extern QString mscoreGlobalShare;
 
-#include "event.h"
+#include "libmscore/event.h"
 #include "xml.h"
 #include "msynth/sparm_p.h"
 
