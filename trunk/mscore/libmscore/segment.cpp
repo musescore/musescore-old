@@ -607,6 +607,7 @@ void Segment::remove(Element* el)
                   break;
 
             case BAR_LINE:
+            case KEYSIG:
                   _elist[track] = 0;
                   break;
 
