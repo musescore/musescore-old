@@ -285,7 +285,10 @@ printf("clone staves\n");
                                           ss->setParent(0);
                                     nspanner->setScore(score);
                                     nspanner->setParent(ns);
-                                    nspanner->setStartElement(ns);
+                                    if(spanner->anchor() == ANCHOR_SEGMENT)
+                                          nspanner->setStartElement(ns);
+                                    else //spanner->anchor() == ANCHOR_MEASURE
+                                          nspanner->setStartElement(nm);
                                     ns->addSpannerFor(nspanner);
                                     spannerMap.add(spanner, nspanner);
                                     }
@@ -294,8 +297,10 @@ printf("clone staves\n");
                                           continue;
                                     Spanner* nspanner = spannerMap.findNew(spanner);
                                     if (nspanner) {
-                                          nspanner->setEndElement(ns);
-                                          ns->addSpannerBack(nspanner);
+                                          if(spanner->anchor() == ANCHOR_SEGMENT)
+                                                nspanner->setEndElement(ns);
+                                          else //spanner->anchor() == ANCHOR_MEASURE
+                                                nspanner->setEndElement(nm);
                                           }
                                     else {
                                           qDebug("cloneSpanner(seg): cannot find spanner\n");
