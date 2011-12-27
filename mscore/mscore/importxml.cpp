@@ -2889,7 +2889,7 @@ void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, int ticks, QDomElement e)
             if (tupletType == "stop"
                 || isTupletFilled(tuplet)
                 || (actualNotes == 1 && normalNotes == 1)) {
-                  printf("tuplet stop add cr %p to tuplet %p\n", cr, tuplet);
+                  printf("stop tuplet %p last chordrest %p\n", tuplet, cr);
                   int totalDuration = 0;
                   foreach (DurationElement* de, tuplet->elements()) {
                         if (de->type() == CHORD || de->type() == REST) {
@@ -2911,10 +2911,114 @@ void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, int ticks, QDomElement e)
                         }
                   }
             }
-      /*
+      }
+
+//---------------------------------------------------------
+//   readArticulations
+//---------------------------------------------------------
+
+/**
+ Read a "simple" MuseScore articulation.
+ These are the articulations that can be
+ - represented by an enum ArticulationIdx
+ - added to a ChordRest
+ Return true (articulation recognized and handled)
+ or false (articulation not recognized).
+ Note simple implementation: MusicXML syntax is not strictly
+ checked, the articulations parent element does not matter.
+ */
+
+static bool readArticulations(QString mxmlName, QList<int>& arts)
+      {
+      QMap<QString, int> map; // map MusicXML articulation name to MuseScore symbol
+      map["accent"]           = SforzatoaccentSym;
+      map["staccatissimo"]    = UstaccatissimoSym;
+      map["staccato"]         = StaccatoSym;
+      map["tenuto"]           = TenutoSym;
+      map["turn"]             = TurnSym;
+      map["mordent"]          = MordentSym;
+      map["inverted-mordent"] = PrallSym;
+      map["inverted-turn"]    = ReverseturnSym;
+      map["stopped"]          = PlusstopSym;
+      map["up-bow"]           = UpbowSym;
+      map["down-bow"]         = DownbowSym;
+
+      if (map.contains(mxmlName)) {
+            arts.append(map.value(mxmlName));
+            return true;
+            }
       else
-            printf("unknown tuplet type %s\n", tupletType.toLatin1().data());
-      */
+            return false;
+      }
+
+//---------------------------------------------------------
+//   convertAccidental
+//---------------------------------------------------------
+
+/**
+ Convert a MusicXML accidental name to a MuseScore enum AccidentalType.
+ */
+
+static int convertAccidental(QString mxmlName)
+      {
+      QMap<QString, int> map; // map MusicXML accidental name to MuseScore enum AccidentalType
+      map["natural"] = ACC_NATURAL;
+      map["flat"] = ACC_FLAT;
+      map["sharp"] = ACC_SHARP;
+      map["double-sharp"] = ACC_SHARP2;
+      map["sharp-sharp"] = ACC_SHARP2;
+      map["natural-flat"] = ACC_NONE;
+      map["quarter-flat"] = 19;
+      map["quarter-sharp"] = 22;
+      map["three-quarters-flat"] = 18;
+      map["three-quarters-sharp"] = 25;
+      // TODO check: following values are in 2.0, do not seem to match with 1.1
+      // map["quarter-flat"] = ACC_MIRRORED_FLAT;
+      // map["quarter-sharp"] = ACC_SHARP_SLASH;
+      // map["three-quarters-flat"] = ACC_MIRRORED_FLAT2;
+      // map["three-quarters-sharp"] = ACC_SHARP_SLASH4;
+      map["flat-flat"] = ACC_FLAT2;
+      map["natural-sharp"] = ACC_NONE;
+
+      if (map.contains(mxmlName))
+            return map.value(mxmlName);
+      else
+            printf("unknown accidental %s\n", qPrintable(mxmlName));
+      // default: return ACC_NONE
+      return ACC_NONE;
+      }
+
+//---------------------------------------------------------
+//   convertNotehead
+//---------------------------------------------------------
+
+/**
+ Convert a MusicXML notehead name to a MuseScore headgroup.
+ */
+
+static int convertNotehead(QString mxmlName)
+      {
+      QMap<QString, int> map; // map MusicXML notehead name to a MuseScore headgroup
+      map["slash"] = 5;
+      map["triangle"] = 3;
+      map["diamond"] = 2;
+      map["x"] = 1;
+      map["circle-x"] = 6;
+      map["do"] = 7;
+      map["re"] = 8;
+      map["mi"] = 4;
+      map["fa"] = 9;
+      map["la"] = 10;
+      map["ti"] = 11;
+      map["normal"] = 0;
+
+      if (map.contains(mxmlName))
+            return map.value(mxmlName);
+      else
+            printf("unknown notehead %s\n", qPrintable(mxmlName));
+      // default: return 0
+      return 0;
+
       }
 
 //---------------------------------------------------------
@@ -2957,18 +3061,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       Duration durationType(Duration::V_INVALID);
       bool trillMark = false;
       QString strongAccentType;
-      bool accent = false;
+      QList<int> articulations;
       bool breathmark = false;
-      bool staccatissimo = false;
-      bool staccato = false;
-      bool tenuto = false;
-      bool turn = false;
-      bool mordent = false;
-      bool invertedMordent = false;
-      bool invertedTurn = false;
-      bool stopped = false;
-      bool upbow = false;
-      bool downbow = false;
       int tremolo = 0;
       QString tremoloType;
       int headGroup = 0;
@@ -3149,34 +3243,9 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             else if (tag == "dot")
                   ++dots;
             else if (tag == "accidental") {
+                  accidental = convertAccidental(s);
                   if (e.attribute(QString("editorial")) == "yes")
                         editorial = true;
-                  if (s == "natural")
-                        accidental = 5;
-                  else if (s == "flat")
-                        accidental = 2;
-                  else if (s == "sharp")
-                        accidental = 1;
-                  else if (s == "double-sharp")
-                        accidental = 3;
-                  else if (s == "sharp-sharp")
-                        accidental = 3;
-                  else if (s == "natural-flat")
-                        ;
-                  else if (s == "quarter-flat")
-                        accidental = 19;
-                  else if (s == "quarter-sharp")
-                        accidental = 22;
-                  else if (s == "three-quarters-flat")
-                        accidental = 18;
-                  else if (s == "three-quarters-sharp")
-                        accidental = 25;
-                  else if (s == "flat-flat")
-                        accidental = 4;
-                  else if (s == "natural-sharp")
-                        ;
-                  else
-                        printf("unknown accidental %s\n", s.toLatin1().data());
                   }
             else if (tag == "notations") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
@@ -3275,18 +3344,12 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               }
                         else if (ee.tagName() == "articulations") {
                               for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                                    if (eee.tagName() == "accent")
-                                          accent = true;
+                                    if (readArticulations(eee.tagName(), articulations))
+                                          continue;
                                     else if (eee.tagName() == "breath-mark")
                                           breathmark = true;
-                                    else if (eee.tagName() == "staccatissimo")
-                                          staccatissimo = true;
-                                    else if (eee.tagName() == "staccato")
-                                          staccato = true;
                                     else if (eee.tagName() == "strong-accent")
                                           strongAccentType = eee.attribute(QString("type"));
-                                    else if (eee.tagName() == "tenuto")
-                                          tenuto = true;
                                     else
                                           domError(eee);
                                     }
@@ -3297,18 +3360,12 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         else if (ee.tagName() == "ornaments") {
                               // <trill-mark placement="above"/>
                               for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                                    if (eee.tagName() == "trill-mark")
+                                    if (readArticulations(eee.tagName(), articulations))
+                                          continue;
+                                    else if (eee.tagName() == "trill-mark")
                                           trillMark = true;
                                     else if (eee.tagName() == "wavy-line")
                                           wavyLineType = eee.attribute(QString("type"));
-                                    else if (eee.tagName() == "inverted-turn")
-                                          invertedTurn = true;
-                                    else if (eee.tagName() == "turn")
-                                          turn = true;
-                                    else if (eee.tagName() == "inverted-mordent")
-                                          invertedMordent = true;
-                                    else if (eee.tagName() == "mordent")
-                                          mordent = true;
                                     else if (eee.tagName() == "tremolo") {
                                           tremolo = eee.text().toInt();
                                           tremoloType = eee.attribute(QString("type"));
@@ -3323,7 +3380,9 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               }
                         else if (ee.tagName() == "technical") {
                               for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                                    if (eee.tagName() == "fingering")
+                                    if (readArticulations(eee.tagName(), articulations))
+                                          continue;
+                                    else if (eee.tagName() == "fingering")
                                           fingering = eee.text();
                                     else if (eee.tagName() == "fret")
                                           domNotImplemented(eee);
@@ -3333,12 +3392,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                           string = eee.text();
                                     else if (eee.tagName() == "pull-off")
                                           domNotImplemented(eee);
-                                    else if (eee.tagName() == "stopped")
-                                          stopped = true;
-                                    else if (eee.tagName() == "up-bow")
-                                          upbow = true;
-                                    else if (eee.tagName() == "down-bow")
-                                          downbow = true;
                                     else
                                           domError(eee);
                                     }
@@ -3376,32 +3429,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   // needed for tuplets, handled in xmlTuplet
                   }
             else if (tag == "notehead") {
-                  if (s == "slash")
-                        headGroup = 5;
-                  else if (s == "triangle")
-                        headGroup = 3;
-                  else if (s == "diamond")
-                        headGroup = 2;
-                  else if (s == "x")
-                        headGroup = 1;
-                  else if (s == "circle-x")
-                        headGroup = 6;
-                  else if (s == "do")
-                        headGroup = 7;
-                  else if (s == "re")
-                        headGroup = 8;
-                  else if (s == "mi")
-                        headGroup = 4;
-                  else if (s == "fa")
-                        headGroup = 9;
-                  else if (s == "la")
-                        headGroup = 10;
-                  else if (s == "ti")
-                        headGroup = 11;
-                  else if (s == "normal")
-                        ;
-                  else
-                        printf("unknown notehead %s\n", qPrintable(s));
+                  headGroup = convertNotehead(s);
                   QString color = e.attribute(QString("color"), 0);
                   if (color != 0)
                         noteheadColor = QColor(color);
@@ -3705,61 +3733,14 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             na->setSubtype(TrillSym);
             cr->add(na);
             }
-      if (invertedTurn) {
+
+      // add simple articulations
+      for (int i = 0; i < articulations.size(); ++i) {
             Articulation* na = new Articulation(score);
-            na->setSubtype(ReverseturnSym);
+            na->setSubtype(articulations.at(i));
             cr->add(na);
             }
-      if (turn) {
-            Articulation* na = new Articulation(score);
-            na->setSubtype(TurnSym);
-            cr->add(na);
-            }
-      if (mordent) {
-            Articulation* na = new Articulation(score);
-            na->setSubtype(MordentSym);
-            cr->add(na);
-            }
-      if (invertedMordent) {
-            Articulation* na = new Articulation(score);
-            na->setSubtype(PrallSym);
-            cr->add(na);
-            }
-      if (accent) {
-            Articulation* na = new Articulation(score);
-            na->setSubtype(SforzatoaccentSym);
-            cr->add(na);
-            }
-      if (staccatissimo) {
-            Articulation* na = new Articulation(score);
-            na->setSubtype(UstaccatissimoSym);
-            cr->add(na);
-            }
-      if (staccato) {
-            Articulation* na = new Articulation(score);
-            na->setSubtype(StaccatoSym);
-            cr->add(na);
-            }
-      if (tenuto) {
-            Articulation* na = new Articulation(score);
-            na->setSubtype(TenutoSym);
-            cr->add(na);
-            }
-      if (stopped) {
-            Articulation* na = new Articulation(score);
-            na->setSubtype(PlusstopSym);
-            cr->add(na);
-            }
-      if (upbow) {
-            Articulation* na = new Articulation(score);
-            na->setSubtype(UpbowSym);
-            cr->add(na);
-            }
-      if (downbow) {
-            Articulation* na = new Articulation(score);
-            na->setSubtype(DownbowSym);
-            cr->add(na);
-            }
+
       if (breathmark) {
             Breath* b = new Breath(score);
             b->setTick(tick);

@@ -1,3 +1,5 @@
+27.dec (lv)
+      - importxml.cpp cleanup
 22.dec (ws)
       - save "pos" element in addition to "offset" for better upward
         compatibility to 2.0 version
