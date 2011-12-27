@@ -498,6 +498,7 @@ void Segment::add(Element* el)
                   // fall through
 
             case BAR_LINE:
+            case KEYSIG:
                   _elist[track] = el;
                   empty = false;
                   break;
