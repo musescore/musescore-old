@@ -2914,6 +2914,21 @@ void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, int ticks, QDomElement e)
       }
 
 //---------------------------------------------------------
+//   addArticulationToChord
+//---------------------------------------------------------
+
+/**
+ Add Articulation to Chord.
+ */
+
+static void addArticulationToChord(ChordRest* cr, int articSym)
+      {
+      Articulation* na = new Articulation(cr->score());
+      na->setSubtype(articSym);
+      cr->add(na);
+      }
+
+//---------------------------------------------------------
 //   readArticulations
 //---------------------------------------------------------
 
@@ -2928,7 +2943,7 @@ void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, int ticks, QDomElement e)
  checked, the articulations parent element does not matter.
  */
 
-static bool readArticulations(QString mxmlName, QList<int>& arts)
+static bool readArticulations(ChordRest* cr, QString mxmlName)
       {
       QMap<QString, int> map; // map MusicXML articulation name to MuseScore symbol
       map["accent"]           = SforzatoaccentSym;
@@ -2944,7 +2959,7 @@ static bool readArticulations(QString mxmlName, QList<int>& arts)
       map["down-bow"]         = DownbowSym;
 
       if (map.contains(mxmlName)) {
-            arts.append(map.value(mxmlName));
+            addArticulationToChord(cr, map.value(mxmlName));
             return true;
             }
       else
@@ -3021,7 +3036,6 @@ static int convertNotehead(QString mxmlName)
 
       }
 
-
 //---------------------------------------------------------
 //   addTextToNote
 //---------------------------------------------------------
@@ -3042,6 +3056,350 @@ static void addTextToNote(QString txt, int subtype, int style, Score* score, Not
       }
 
 //---------------------------------------------------------
+//   xmlNotations
+//---------------------------------------------------------
+
+/**
+ Read MusicXML notations.
+ */
+
+void MusicXml::xmlNotations(Note* note, ChordRest* cr, int trk, int ticks, QDomElement e)
+      {
+      Measure* measure = cr->measure();
+      int track = cr->track();
+
+      QString wavyLineType;
+      QString arpeggioType;
+      QString glissandoType;
+      bool breathmark = false;
+      int tremolo = 0;
+      QString tremoloType;
+      QString placement;
+      QStringList dynamics;
+      qreal rx = 0.0;
+      qreal ry = 0.0;
+      qreal yoffset = 0.0; // actually this is default-y
+      // qreal xoffset = 0.0; // not used
+      bool hasYoffset = false;
+      QSet<QString> slurIds;             // combination start/stop and number must be unique within a note
+      for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+            if (ee.tagName() == "slur") {
+                  int slurNo   = ee.attribute(QString("number"), "1").toInt() - 1;
+                  QString slurType = ee.attribute(QString("type"));
+
+                  // PriMus Music-Notation by Columbussoft (build 10093) generates overlapping
+                  // slurs that do not have a number attribute to distinguish them.
+                  // The duplicates must be ignored, to prevent memory allocation issues,
+                  // which caused a MuseScore crash
+
+                  QString slurId = QString("slur %1").arg(slurType) + QString(" %1").arg(slurNo);
+                  bool unique = !slurIds.contains(slurId);
+
+                  if (unique) {
+                        slurIds.insert(slurId);
+                        if (slurType == "start") {
+                              bool endSlur = false;
+                              if (slur[slurNo] == 0) {
+                                    slur[slurNo] = new Slur(score);
+                                    cr->addSlurFor(slur[slurNo]);
+                                    slur[slurNo]->setStartElement(cr);
+                                    }
+                              else
+                                    endSlur = true;
+                              QString pl = ee.attribute(QString("placement"));
+                              if (pl == "above")
+                                    slur[slurNo]->setSlurDirection(UP);
+                              else if (pl == "below")
+                                    slur[slurNo]->setSlurDirection(DOWN);
+                              slur[slurNo]->setTrack(-1);
+                              slur[slurNo]->setTick(-1);
+                              score->add(slur[slurNo]);
+                              if (endSlur) {
+                                    cr->addSlurFor(slur[slurNo]);
+                                    slur[slurNo]->setStartElement(cr);
+                                    slur[slurNo] = 0;
+                                    }
+                              }
+                        else if (slurType == "stop") {
+                              if (slur[slurNo] == 0) {
+                                    slur[slurNo] = new Slur(score);
+                                    cr->addSlurBack(slur[slurNo]);
+                                    slur[slurNo]->setEndElement(cr);
+                                    }
+                              else {
+                                    cr->addSlurBack(slur[slurNo]);
+                                    slur[slurNo]->setEndElement(cr);
+                                    slur[slurNo] = 0;
+                                    }
+                              }
+                        else
+                              printf("unknown slur type %s\n", qPrintable(slurType));
+                        }
+                  else
+                        printf("ignoring duplicate '%s'\n", qPrintable(slurId));
+                  }
+
+            else if (ee.tagName() == "tied") {
+                  QString tiedType = ee.attribute(QString("type"));
+                  if (tiedType == "start") {
+                        if (tie) {
+                              printf("Tie already active\n");
+                              }
+                        else {
+                              tie = new Tie(score);
+                              note->setTieFor(tie);
+                              tie->setStartNote(note);
+                              tie->setTrack(track);
+                              tie = 0;
+                              }
+                        QString tiedOrientation = e.attribute("orientation", "auto");
+                        if (tiedOrientation == "over")
+                              tie->setSlurDirection(UP);
+                        else if (tiedOrientation == "under")
+                              tie->setSlurDirection(DOWN);
+                        else if (tiedOrientation == "auto")
+                              ;
+                        else
+                              printf("unknown tied orientation: %s\n", tiedOrientation.toLatin1().data());
+                        }
+                  else if (tiedType == "stop")
+                        ;
+                  else
+                        printf("unknown tied type %s\n", tiedType.toLatin1().data());
+                  }
+            else if (ee.tagName() == "tuplet") {
+                  // needed for tuplets, handled in xmlTuplet
+                  }
+            else if (ee.tagName() == "dynamics") {
+                  placement = ee.attribute("placement");
+                  ry        = ee.attribute(QString("relative-y"), "0").toDouble() * -.1;
+                  rx        = ee.attribute(QString("relative-x"), "0").toDouble() * .1;
+                  yoffset   = ee.attribute("default-y").toDouble(&hasYoffset) * -0.1;
+                  // xoffset   = ee.attribute("default-x", "0.0").toDouble() * 0.1;
+                  QDomElement eee = ee.firstChildElement();
+                  if (!eee.isNull()) {
+                        if (eee.tagName() == "other-dynamics")
+                              dynamics.push_back(eee.text());
+                        else
+                              dynamics.push_back(eee.tagName());
+                        }
+                  }
+            else if (ee.tagName() == "articulations") {
+                  for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                        if (readArticulations(cr, eee.tagName()))
+                              continue;
+                        else if (eee.tagName() == "breath-mark")
+                              breathmark = true;
+                        else if (eee.tagName() == "strong-accent") {
+                              QString strongAccentType = eee.attribute(QString("type"));
+                              if (strongAccentType == "up")
+                                    addArticulationToChord(cr, UmarcatoSym);
+                              else if (strongAccentType == "down")
+                                    addArticulationToChord(cr, DmarcatoSym);
+                              else
+                                    printf("unknown mercato type '%s'\n", strongAccentType.toLatin1().data());
+                              }
+                        else
+                              domError(eee);
+                        }
+                  }
+            else if (ee.tagName() == "fermata") {
+                  QString fermataType = ee.attribute(QString("type"));
+                  if (fermataType == "upright")
+                        addArticulationToChord(cr, UfermataSym);
+                  else if (fermataType == "inverted")
+                        addArticulationToChord(cr, DfermataSym);
+                  else
+                        printf("unknown fermata type '%s'\n", qPrintable(fermataType));
+                  }
+            else if (ee.tagName() == "ornaments") {
+                  bool trillMark = false;
+                  // <trill-mark placement="above"/>
+                  for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                        if (readArticulations(cr, eee.tagName()))
+                              continue;
+                        else if (eee.tagName() == "trill-mark")
+                              trillMark = true;
+                        else if (eee.tagName() == "wavy-line")
+                              wavyLineType = eee.attribute(QString("type"));
+                        else if (eee.tagName() == "tremolo") {
+                              tremolo = eee.text().toInt();
+                              tremoloType = eee.attribute(QString("type"));
+                              }
+                        else if (eee.tagName() == "accidental-mark")
+                              domNotImplemented(eee);
+                        else if (eee.tagName() == "delayed-turn")
+                              domNotImplemented(eee);
+                        else
+                              domError(eee);
+                        }
+                  // note that mscore wavy line already implicitly includes a trillsym
+                  // so don't add an additional one
+                  if (trillMark && wavyLineType != "start")
+                        addArticulationToChord(cr, TrillSym);
+                  }
+            else if (ee.tagName() == "technical") {
+                  for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                        if (readArticulations(cr, eee.tagName()))
+                              continue;
+                        else if (eee.tagName() == "fingering")
+                              addTextToNote(eee.text(), TEXT_FINGERING, TEXT_STYLE_FINGERING, score, note);
+                        else if (eee.tagName() == "fret")
+                              domNotImplemented(eee);
+                        else if (eee.tagName() == "pluck")
+                              addTextToNote(eee.text(), TEXT_FINGERING, TEXT_STYLE_FINGERING, score, note);
+                        else if (eee.tagName() == "string")
+                              addTextToNote(eee.text(), TEXT_STRING_NUMBER, TEXT_STYLE_STRING_NUMBER, score, note);
+                        else if (eee.tagName() == "pull-off")
+                              domNotImplemented(eee);
+                        else
+                              domError(eee);
+                        }
+                  }
+            else if (ee.tagName() == "arpeggiate") {
+                  arpeggioType = ee.attribute(QString("direction"));
+                  if (arpeggioType == "") arpeggioType = "none";
+                  }
+            else if (ee.tagName() == "non-arpeggiate")
+                  arpeggioType = "non-arpeggiate";
+            // glissando and slide are added to the "stop" chord only
+            else if (ee.tagName() == "glissando") {
+                  if (ee.attribute("type") == "stop") glissandoType = "glissando";
+                  }
+            else if (ee.tagName() == "slide") {
+                  if (ee.attribute("type") == "stop") glissandoType = "slide";
+                  }
+            else
+                  domError(ee);
+            }
+
+      if (!arpeggioType.isEmpty()) {
+            Arpeggio* a = new Arpeggio(score);
+            if (arpeggioType == "none")
+                  a->setSubtype(0);
+            else if (arpeggioType == "up")
+                  a->setSubtype(1);
+            else if (arpeggioType == "down")
+                  a->setSubtype(2);
+            else if (arpeggioType == "non-arpeggiate")
+                  a->setSubtype(3);
+            else {
+                  printf("unknown arpeggio type %s\n", arpeggioType.toLatin1().data());
+                  delete a;
+                  a = 0;
+                  }
+            if ((static_cast<Chord*>(cr))->arpeggio()) {
+                  // there can be only one
+                  delete a;
+                  a = 0;
+                  }
+            else
+                  cr->add(a);
+            }
+
+      if (!glissandoType.isEmpty()) {
+            Glissando* g = new Glissando(score);
+            if (glissandoType == "slide")
+                  g->setSubtype(0);
+            else if (glissandoType == "glissando")
+                  g->setSubtype(1);
+            else {
+                  printf("unknown glissando type %s\n", glissandoType.toLatin1().data());
+                  delete g;
+                  g = 0;
+                  }
+            if ((static_cast<Chord*>(cr))->glissando()) {
+                  // there can be only one
+                  delete g;
+                  g = 0;
+                  }
+            else
+                  cr->add(g);
+            }
+
+      if (!wavyLineType.isEmpty()) {
+            if (wavyLineType == "start") {
+                  if (trill) {
+                        printf("overlapping wavy-line not supported\n");
+                        delete trill;
+                        trill = 0;
+                        }
+                  else {
+                        trill = new Trill(score);
+                        trill->setTrack(trk); // TODO: replace trk by value calculated from track ?
+                        trill->setTick(tick);
+                        }
+                  }
+            else if (wavyLineType == "stop") {
+                  if (!trill) {
+                        printf("wavy-line stop without start\n");
+                        }
+                  else {
+                        trill->setTick2(tick+ticks); // TODO: replace trk by value calculated from chordrest tick + length ?
+                        score->add(trill);
+                        trill = 0;
+                        }
+                  }
+            else
+                  printf("unknown wavy-line type '%s'\n", wavyLineType.toLatin1().data());
+            }
+
+      if (breathmark) {
+            Breath* b = new Breath(score);
+            b->setTick(tick);
+            b->setTrack(track);
+            Segment* seg = measure->getSegment(SegBreath, tick);
+            seg->add(b);
+            }
+
+      if (tremolo) {
+            // printf("tremolo=%d tremoloType='%s'\n", tremolo, qPrintable(tremoloType));
+            if (tremolo == 1 || tremolo == 2 || tremolo == 3) {
+                  if (tremoloType == "" || tremoloType == "single") {
+                        Tremolo* t = new Tremolo(score);
+                        if (tremolo == 1) t->setSubtype(TREMOLO_1);
+                        if (tremolo == 2) t->setSubtype(TREMOLO_2);
+                        if (tremolo == 3) t->setSubtype(TREMOLO_3);
+                        cr->add(t);
+                        }
+                  else if (tremoloType == "start") {
+                        if (tremStart) printf("MusicXML::import: double tremolo start\n");
+                        tremStart = static_cast<Chord*>(cr);
+                        }
+                  else if (tremoloType == "stop") {
+                        if (tremStart) {
+                              Tremolo* t = new Tremolo(score);
+                              if (tremolo == 1) t->setSubtype(3);
+                              if (tremolo == 2) t->setSubtype(4);
+                              if (tremolo == 3) t->setSubtype(5);
+                              t->setChords(tremStart, static_cast<Chord*>(cr));
+                              cr->add(t);
+                              }
+                        else printf("MusicXML::import: double tremolo stop w/o start\n");
+                        tremStart = 0;
+                        }
+                  }
+            else
+                  printf("unknown tremolo type %d\n", tremolo);
+            }
+
+      // more than one dynamic ???
+      // LVIFIX: check import/export of <other-dynamics>unknown_text</...>
+      // TODO remove duplicate code (see MusicXml::direction)
+      for (QStringList::Iterator it = dynamics.begin(); it != dynamics.end(); ++it ) {
+            Dynamic* dyn = new Dynamic(score);
+            dyn->setSubtype(*it);
+            if (hasYoffset) dyn->setYoff(yoffset);
+            else dyn->setAbove(placement == "above");
+            dyn->setUserOff(QPointF(rx, ry));
+            // dyn->setMxmlOff(offset);
+            dyn->setTrack(track);
+            dyn->setTick(tick);
+            measure->add(dyn);
+            }
+      }
+
+//---------------------------------------------------------
 //   xmlNote
 //---------------------------------------------------------
 
@@ -3057,6 +3415,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       printf("xmlNote start tick=%d (%d div) divisions=%d\n", tick, tick * divisions / AL::division, divisions);
       QDomNode pn = e; // TODO remove pn
       QDomElement org_e = e; // save e for later
+      QDomElement domElemNotations;
       voice = 0;
       move  = 0;
       bool rest    = false;
@@ -3065,37 +3424,18 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       Direction sd = AUTO;
       int dots     = 0;
       bool grace   = false;
-      QString arpeggioType;
-      QString glissandoType;
-      QString step;
-      QString fingering;
-      QString pluck;
-      QString string;
       QString graceSlash;
-      QString wavyLineType;
+      QString step;
       int alter  = 0;
       int octave = 4;
       int accidental = 0;
       bool editorial = false;
       Duration durationType(Duration::V_INVALID);
-      QList<int> articulations;
-      bool breathmark = false;
-      int tremolo = 0;
-      QString tremoloType;
       int headGroup = 0;
       bool noStem = false;
-      QString placement;
-      QStringList dynamics;
-      qreal rx = 0.0;
-      qreal ry = 0.0;
-      qreal yoffset = 0.0; // actually this is default-y
-      // qreal xoffset = 0.0; // not used
-      bool hasYoffset = false;
       QColor noteheadColor = QColor::Invalid;
       bool chord = false;
       int velocity = -1;
-      QSet<Slur*> slursStarted;
-      QSet<Slur*> slursStopped;
 
       // first read all elements required for voice mapping
       QDomElement e2 = e.firstChildElement();
@@ -3155,6 +3495,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 
       // trk is first track of staff
       int trk = (staff + relStaff) * VOICES;
+      // track is current track in staff
+      int track = trk + voice;
 
       QString printObject = "yes";
       if (pn.isElement() && pn.nodeName() == "note") {
@@ -3255,7 +3597,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         }
                   }
             else if (tag == "lyric")
-                  xmlLyric(trk + voice, e, numberedLyrics, defaultyLyrics, unNumberedLyrics);
+                  xmlLyric(track, e, numberedLyrics, defaultyLyrics, unNumberedLyrics);
             else if (tag == "dot")
                   ++dots;
             else if (tag == "accidental") {
@@ -3264,189 +3606,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         editorial = true;
                   }
             else if (tag == "notations") {
-                  QSet<QString> slurIds; // combination start/stop and number must be unique within a note
-                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        if (ee.tagName() == "slur") {
-                              int slurNo   = ee.attribute(QString("number"), "1").toInt() - 1;
-                              QString slurType = ee.attribute(QString("type"));
-
-                              // PriMus Music-Notation by Columbussoft (build 10093) generates overlapping
-                              // slurs that do not have a number attribute to distinguish them.
-                              // The duplicates must be ignored, to prevent memory allocation issues,
-                              // which caused a MuseScore crash
-
-                              QString slurId = QString("slur %1").arg(slurType) + QString(" %1").arg(slurNo);
-                              bool unique = !slurIds.contains(slurId);
-
-                              if (unique) {
-                                    slurIds.insert(slurId);
-                                    if (slurType == "start") {
-                                          bool endSlur = false;
-                                          if (slur[slurNo] == 0) {
-                                                slur[slurNo] = new Slur(score);
-                                                slursStarted.insert(slur[slurNo]);
-                                                }
-                                          else
-                                                endSlur = true;
-                                          QString pl = ee.attribute(QString("placement"));
-                                          if (pl == "above")
-                                                slur[slurNo]->setSlurDirection(UP);
-                                          else if (pl == "below")
-                                                slur[slurNo]->setSlurDirection(DOWN);
-                                          slur[slurNo]->setTrack(-1);
-                                          slur[slurNo]->setTick(-1);
-                                          score->add(slur[slurNo]);
-                                          if (endSlur) {
-                                                slursStarted.insert(slur[slurNo]);
-                                                slur[slurNo] = 0;
-                                                }
-                                          }
-                                    else if (slurType == "stop") {
-                                          if (slur[slurNo] == 0) {
-                                                slur[slurNo] = new Slur(score);
-                                                slursStopped.insert(slur[slurNo]);
-                                                }
-                                          else {
-                                                slursStopped.insert(slur[slurNo]);
-                                                slur[slurNo] = 0;
-                                                }
-                                          }
-                                    else
-                                          printf("unknown slur type %s\n", qPrintable(slurType));
-                                    }
-                              else
-                                    printf("ignoring duplicate '%s'\n", qPrintable(slurId));
-                              }
-
-                        else if (ee.tagName() == "tied") {
-                              QString tiedType = ee.attribute(QString("type"));
-                              if (tiedType == "start") {
-                                    if (tie) {
-                                          printf("Tie already active\n");
-                                          }
-                                    else {
-                                          tie = new Tie(score);
-                                          }
-                                    QString tiedOrientation = e.attribute("orientation", "auto");
-                                    if (tiedOrientation == "over")
-                                          tie->setSlurDirection(UP);
-                                    else if (tiedOrientation == "under")
-                                          tie->setSlurDirection(DOWN);
-                                    else if (tiedOrientation == "auto")
-                                          ;
-                                    else
-                                          printf("unknown tied orientation: %s\n", tiedOrientation.toLatin1().data());
-                                    }
-                              else if (tiedType == "stop")
-                                    ;
-                              else
-                                    printf("unknown tied type %s\n", tiedType.toLatin1().data());
-                              }
-                        else if (ee.tagName() == "tuplet") {
-                              // needed for tuplets, handled in xmlTuplet
-                              }
-                        else if (ee.tagName() == "dynamics") {
-                              placement = ee.attribute("placement");
-                              ry        = ee.attribute(QString("relative-y"), "0").toDouble() * -.1;
-                              rx        = ee.attribute(QString("relative-x"), "0").toDouble() * .1;
-                              yoffset   = ee.attribute("default-y").toDouble(&hasYoffset) * -0.1;
-                              // xoffset   = ee.attribute("default-x", "0.0").toDouble() * 0.1;
-                              QDomElement eee = ee.firstChildElement();
-                              if (!eee.isNull()) {
-                                    if (eee.tagName() == "other-dynamics")
-                                          dynamics.push_back(eee.text());
-                                    else
-                                          dynamics.push_back(eee.tagName());
-                                    }
-                              }
-                        else if (ee.tagName() == "articulations") {
-                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                                    if (readArticulations(eee.tagName(), articulations))
-                                          continue;
-                                    else if (eee.tagName() == "breath-mark")
-                                          breathmark = true;
-                                    else if (eee.tagName() == "strong-accent") {
-                                          QString strongAccentType = eee.attribute(QString("type"));
-                                          if (strongAccentType == "up")
-                                                articulations.append(UmarcatoSym);
-                                          else if (strongAccentType == "down")
-                                                articulations.append(DmarcatoSym);
-                                          else
-                                                printf("unknown mercato type '%s'\n", strongAccentType.toLatin1().data());
-                                          }
-                                    else
-                                          domError(eee);
-                                    }
-                              }
-                        else if (ee.tagName() == "fermata") {
-                              QString fermataType = ee.attribute(QString("type"));
-                              if (fermataType == "upright")
-                                    articulations.append(UfermataSym);
-                              else if (fermataType == "inverted")
-                                    articulations.append(DfermataSym);
-                              else
-                                    printf("unknown fermata type '%s'\n", qPrintable(fermataType));
-                              }
-                        else if (ee.tagName() == "ornaments") {
-                              bool trillMark = false;
-                              // <trill-mark placement="above"/>
-                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                                    if (readArticulations(eee.tagName(), articulations))
-                                          continue;
-                                    else if (eee.tagName() == "trill-mark")
-                                          trillMark = true;
-                                    else if (eee.tagName() == "wavy-line")
-                                          wavyLineType = eee.attribute(QString("type"));
-                                    else if (eee.tagName() == "tremolo") {
-                                          tremolo = eee.text().toInt();
-                                          tremoloType = eee.attribute(QString("type"));
-                                          }
-                                    else if (eee.tagName() == "accidental-mark")
-                                          domNotImplemented(eee);
-                                    else if (eee.tagName() == "delayed-turn")
-                                          domNotImplemented(eee);
-                                    else
-                                          domError(eee);
-                                    }
-                              // note that mscore wavy line already implicitly includes a trillsym
-                              // so don't add an additional one
-                              if (trillMark && wavyLineType != "start")
-                                    articulations.append(TrillSym);
-                              }
-                        else if (ee.tagName() == "technical") {
-                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                                    if (readArticulations(eee.tagName(), articulations))
-                                          continue;
-                                    else if (eee.tagName() == "fingering")
-                                          fingering = eee.text();
-                                    else if (eee.tagName() == "fret")
-                                          domNotImplemented(eee);
-                                    else if (eee.tagName() == "pluck")
-                                          pluck = eee.text();
-                                    else if (eee.tagName() == "string")
-                                          string = eee.text();
-                                    else if (eee.tagName() == "pull-off")
-                                          domNotImplemented(eee);
-                                    else
-                                          domError(eee);
-                                    }
-                              }
-                        else if (ee.tagName() == "arpeggiate") {
-                              arpeggioType = ee.attribute(QString("direction"));
-                              if (arpeggioType == "") arpeggioType = "none";
-                              }
-                        else if (ee.tagName() == "non-arpeggiate")
-                              arpeggioType = "non-arpeggiate";
-                        // glissando and slide are added to the "stop" chord only
-                        else if (ee.tagName() == "glissando") {
-                              if (ee.attribute("type") == "stop") glissandoType = "glissando";
-                              }
-                        else if (ee.tagName() == "slide") {
-                              if (ee.attribute("type") == "stop") glissandoType = "slide";
-                              }
-                        else
-                              domError(ee);
-                        }
+                  // save the QDomElement representing <notations> for later
+                  domElemNotations = e;
                   }
             else if (tag == "tie") {
                   QString tieType = e.attribute(QString("type"));
@@ -3480,7 +3641,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       // add lyrics found by xmlLyric
       addLyrics(measure, numberedLyrics, defaultyLyrics, unNumberedLyrics);
 
-      int track = trk + voice;
       // printf("staff=%d relStaff=%d VOICES=%d voice=%d track=%d\n",
       //        staff, relStaff, VOICES, voice, track);
 
@@ -3491,6 +3651,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       printf("step/alter/oct %s/%d/%d\n", qPrintable(step), alter, octave);
 
       ChordRest* cr = 0;
+      Note* note = 0;
 
       if (rest) {
             // whole measure rests do not have a "type" element
@@ -3526,8 +3687,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   }
             }
       else {
-            char c     = step[0].toLatin1();
-            Note* note = new Note(score);
+            char c = step[0].toLatin1();
+            note = new Note(score);
             note->setHeadGroup(headGroup);
             note->setTrack(track);
             if (noteheadColor != QColor::Invalid)
@@ -3537,17 +3698,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             if (velocity > 0) {
                   note->setVeloType(USER_VAL);
                   note->setVelocity(velocity);
-                  }
-
-            addTextToNote(fingering, TEXT_FINGERING, TEXT_STYLE_FINGERING, score, note);
-            addTextToNote(pluck, TEXT_FINGERING, TEXT_STYLE_FINGERING, score, note);
-            addTextToNote(string, TEXT_STRING_NUMBER, TEXT_STYLE_STRING_NUMBER, score, note);
-
-            if (tie) {
-                  note->setTieFor(tie);
-                  tie->setStartNote(note);
-                  tie->setTrack(track);
-                  tie = 0;
                   }
 
             // if (grace)
@@ -3629,147 +3779,12 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             note->setVisible(printObject == "yes");
             }
 
-      // complete slur handling
-      foreach(Slur * s, slursStarted) {
-            cr->addSlurFor(s);
-            s->setStartElement(cr);
-            }
-      foreach(Slur * s, slursStopped) {
-            cr->addSlurBack(s);
-            s->setEndElement(cr);
-            }
-
-      if (!arpeggioType.isEmpty()) {
-            Arpeggio* a = new Arpeggio(score);
-            if (arpeggioType == "none")
-                  a->setSubtype(0);
-            else if (arpeggioType == "up")
-                  a->setSubtype(1);
-            else if (arpeggioType == "down")
-                  a->setSubtype(2);
-            else if (arpeggioType == "non-arpeggiate")
-                  a->setSubtype(3);
-            else {
-                  printf("unknown arpeggio type %s\n", arpeggioType.toLatin1().data());
-                  delete a;
-                  a = 0;
-                  }
-            if ((static_cast<Chord*>(cr))->arpeggio()) {
-                  // there can be only one
-                  delete a;
-                  a = 0;
-                  }
-            else
-                  cr->add(a);
-            }
-
-      if (!glissandoType.isEmpty()) {
-            Glissando* g = new Glissando(score);
-            if (glissandoType == "slide")
-                  g->setSubtype(0);
-            else if (glissandoType == "glissando")
-                  g->setSubtype(1);
-            else {
-                  printf("unknown glissando type %s\n", glissandoType.toLatin1().data());
-                  delete g;
-                  g = 0;
-                  }
-            if ((static_cast<Chord*>(cr))->glissando()) {
-                  // there can be only one
-                  delete g;
-                  g = 0;
-                  }
-            else
-                  cr->add(g);
-            }
-
-      if (wavyLineType == "start") {
-            if (trill) {
-                  printf("overlapping wavy-line not supported\n");
-                  delete trill;
-                  trill = 0;
-                  }
-            else {
-                  trill = new Trill(score);
-                  trill->setTrack(trk);
-                  trill->setTick(tick);
-                  }
-            }
-      else if (wavyLineType == "stop") {
-            if (!trill) {
-                  printf("wavy-line stop without start\n");
-                  }
-            else {
-                  trill->setTick2(tick+ticks);
-                  score->add(trill);
-                  trill = 0;
-                  }
-            }
-      else
-            printf("unknown wavy-line type '%s'\n", wavyLineType.toLatin1().data());
-
-      // add simple articulations
-      for (int i = 0; i < articulations.size(); ++i) {
-            Articulation* na = new Articulation(score);
-            na->setSubtype(articulations.at(i));
-            cr->add(na);
-            }
-
-      if (breathmark) {
-            Breath* b = new Breath(score);
-            b->setTick(tick);
-            b->setTrack(trk + voice);
-            Segment* seg = measure->getSegment(SegBreath, tick);
-            seg->add(b);
-            }
       if (!chord && !grace) {
             xmlTuplet(tuplets[voice + relStaff * VOICES], cr, ticks, org_e);
             }
-      if (tremolo) {
-            // printf("tremolo=%d tremoloType='%s'\n", tremolo, qPrintable(tremoloType));
-            if (tremolo == 1 || tremolo == 2 || tremolo == 3) {
-                  if (tremoloType == "" || tremoloType == "single") {
-                        Tremolo* t = new Tremolo(score);
-                        if (tremolo == 1) t->setSubtype(TREMOLO_1);
-                        if (tremolo == 2) t->setSubtype(TREMOLO_2);
-                        if (tremolo == 3) t->setSubtype(TREMOLO_3);
-                        cr->add(t);
-                        }
-                  else if (tremoloType == "start") {
-                        if (tremStart) printf("MusicXML::import: double tremolo start\n");
-                        tremStart = static_cast<Chord*>(cr);
-                        }
-                  else if (tremoloType == "stop") {
-                        if (tremStart) {
-                              Tremolo* t = new Tremolo(score);
-                              if (tremolo == 1) t->setSubtype(3);
-                              if (tremolo == 2) t->setSubtype(4);
-                              if (tremolo == 3) t->setSubtype(5);
-                              t->setChords(tremStart, static_cast<Chord*>(cr));
-                              cr->add(t);
-                              }
-                        else printf("MusicXML::import: double tremolo stop w/o start\n");
-                        tremStart = 0;
-                        }
-                  }
-            else
-                  printf("unknown tremolo type %d\n", tremolo);
-            }
 
-      // more than one dynamic ???
-      // LVIFIX: check import/export of <other-dynamics>unknown_text</...>
-      // TODO remove duplicate code (see MusicXml::direction)
-      for (QStringList::Iterator it = dynamics.begin(); it != dynamics.end(); ++it ) {
-            Dynamic* dyn = new Dynamic(score);
-            dyn->setSubtype(*it);
-            if (hasYoffset) dyn->setYoff(yoffset);
-            else dyn->setAbove(placement == "above");
-            dyn->setUserOff(QPointF(rx, ry));
-            // dyn->setMxmlOff(offset);
-            dyn->setTrack(track);
-            dyn->setTick(tick);
-            measure->add(dyn);
-            }
+      if (!domElemNotations.isNull())
+            xmlNotations(note, cr, trk, ticks, domElemNotations);
       }
 
 //---------------------------------------------------------
