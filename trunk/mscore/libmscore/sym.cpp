@@ -424,7 +424,11 @@ QFont fontId2font(int fontId)
       QFont* f = fonts[fontId];
       if (f == 0) {
             f = fonts[fontId] = new QFont();
+#ifdef USE_GLYPHS
             qreal size = 20.0;
+#else
+            qreal size = 20.0 * DPI / PPI;
+#endif
             if (fontId == 0)
                   f->setFamily("MScore");
             else if (fontId == 1)
@@ -432,11 +436,18 @@ QFont fontId2font(int fontId)
             else if (fontId == 2) {
                   f->setFamily("FreeSerif");
                   size = 8.0; //  * DPI / PPI;
+#ifndef USE_GLYPHS
+                  size = size * DPI / PPI;
+#endif
                   }
             else
                   f->setFamily("Gonville-20");
             f->setStyleStrategy(QFont::NoFontMerging);
+#ifdef USE_GLYPHS
             f->setPointSizeF(size);
+#else
+            f->setPixelSize(lrint(size));
+#endif
             }
       return *f;
       }
