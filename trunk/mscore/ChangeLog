@@ -1,3 +1,6 @@
+29.dec (ws)
+      - new abstraction for element properties
+      - removed subtype from Element class
 27.dec (lv)
       - fix #14088: [MusicXML] Problem importing triplets from XML if tuplet element is missing
       - importxml.cpp cleanup
