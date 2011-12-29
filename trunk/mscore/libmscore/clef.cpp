@@ -276,6 +276,7 @@ void Clef::layout()
       setbbox(QRectF());
       for (iElement i = elements.begin(); i != elements.end(); ++i) {
             Element* e = *i;
+            e->setColor(curColor());
             addbbox(e->bbox().translated(e->pos()));
             }
       }
