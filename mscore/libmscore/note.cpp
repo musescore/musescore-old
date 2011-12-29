@@ -66,6 +66,8 @@ static int defaultOffTimeOffset = 0;
 static int defaultHeadGroup = 0;
 static int defaultVeloOffset = 0;
 static qreal defaultTuning = 0.0;
+static int defaultFret = -1;
+static int defaultString = -1;
 
 Property<Note> Note::propertyList[] = {
       { P_TPC,            T_INT,         "tpc",           &Note::pTpc,           0 },
@@ -74,9 +76,12 @@ Property<Note> Note::propertyList[] = {
       { P_DOT_POSITION,   T_DIRECTION,   "dotPosition",   &Note::pDotPosition,   &defaultDotPosition },
       { P_ONTIME_OFFSET,  T_INT,         "onTimeOffset",  &Note::pOnTimeUserOffset,  &defaultOnTimeOffset },
       { P_OFFTIME_OFFSET, T_INT,         "offTimeOffset", &Note::pOffTimeUserOffset, &defaultOffTimeOffset },
-      { P_HEAD_GROUP,     T_INT,         "head",          &Note::pHeadGroup,     &defaultHeadGroup },
+      { P_HEAD_GROUP,     T_INT,         "head",          &Note::pHeadGroup,     &defaultHeadGroup  },
       { P_VELO_OFFSET,    T_INT,         "velocity",      &Note::pVeloOffset,    &defaultVeloOffset },
-      { P_TUNING,         T_REAL,        "tuning",        &Note::pTuning,        &defaultTuning },
+      { P_TUNING,         T_REAL,        "tuning",        &Note::pTuning,        &defaultTuning     },
+      { P_FRET,           T_INT,         "fret",          &Note::pFret,          &defaultFret       },
+      { P_STRING,         T_INT,         "string",        &Note::pString,        &defaultString     },
+      { P_GHOST,          T_BOOL,        "ghost",         &Note::pGhost,         &falseVal          },
       };
 
 static const int PROPERTIES = sizeof(Note::propertyList)/sizeof(*Note::propertyList);
@@ -630,13 +635,6 @@ void Note::write(Xml& xml) const
             }
 
       xml.tag("pitch", rpitch);
-      if (_fret >= 0) {
-            xml.tag("fret", _fret);
-            xml.tag("string", _string);
-            }
-      if (_ghost)
-            xml.tag("ghost", _ghost);
-
       if (_accidental)
             _accidental->write(xml);
       _el.write(xml);
@@ -707,12 +705,6 @@ void Note::read(const QDomElement& de)
                   _pitch  = i;
                   _ppitch = i;
                   }
-            else if (tag == "fret")
-                  _fret = i;
-            else if (tag == "string")
-                  _string = i;
-            else if (tag == "ghost")
-                  _ghost = i;
             else if (tag == "line")
                   _line = i;
             else if (tag == "Tie") {

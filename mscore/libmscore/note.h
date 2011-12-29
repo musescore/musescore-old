@@ -141,6 +141,9 @@ class Note : public Element {
       void* pHeadGroup()         { return &_headGroup;     }
       void* pVeloOffset()        { return &_veloOffset;    }
       void* pTuning()            { return &_tuning;        }
+      void* pFret()              { return &_fret;          }
+      void* pString()            { return &_string;        }
+      void* pGhost()             { return &_ghost;         }
 
       Property<Note>* property(int id) const;
 

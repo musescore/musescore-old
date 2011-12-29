@@ -46,7 +46,10 @@ enum P_TYPE {
       P_TUNING,
       P_PAUSE,
       P_BARLINE_SPAN,
-      P_USER_OFF
+      P_USER_OFF,
+      P_FRET,
+      P_STRING,
+      P_GHOST
       };
 
 enum P_DATA_TYPE {

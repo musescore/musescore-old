@@ -31,7 +31,7 @@
 SyntiParameterData::SyntiParameterData()
       {
       _id   = -1;
-      _type = P_FLOAT;
+      _type = SP_FLOAT;
       _fval = 0.0;
       }
 
@@ -39,7 +39,7 @@ SyntiParameterData::SyntiParameterData(const QString& name, float val)
       {
       _id = -1;
       _name = name;
-      _type = P_FLOAT;
+      _type = SP_FLOAT;
       _fval = val;
       }
 
@@ -47,7 +47,7 @@ SyntiParameterData::SyntiParameterData(int i, const QString& name, float val)
       {
       _id   = i;
       _name = name;
-      _type =  P_FLOAT;
+      _type =  SP_FLOAT;
       _fval = val;
       }
 
@@ -55,7 +55,7 @@ SyntiParameterData::SyntiParameterData(const QString& name, const QString& val)
       {
       _id   = -1;
       _name = name;
-      _type =  P_STRING;
+      _type =  SP_STRING;
       _sval = val;
       }
 
@@ -63,7 +63,7 @@ SyntiParameterData::SyntiParameterData(int i, const QString& name, const QString
       {
       _id   = i;
       _name = name;
-      _type =  P_STRING;
+      _type =  SP_STRING;
       _sval = val;
       }
 
@@ -74,12 +74,12 @@ SyntiParameterData::SyntiParameterData(const SyntiParameterData& pd)
       _name = pd._name;
       _type = pd._type;
       switch(_type) {
-            case P_FLOAT:
+            case SP_FLOAT:
                   _fval = pd._fval;
                   _min  = pd._min;
                   _max  = pd._max;
                   break;
-            case P_STRING:
+            case SP_STRING:
                   _sval = pd._sval;
                   break;
             }
@@ -96,9 +96,9 @@ bool SyntiParameterData::operator==(const SyntiParameterData& sp) const
       if (_id == -1 ? (_name != sp._name) : (_id != sp._id))
             return false;
       switch(_type) {
-            case P_FLOAT:
+            case SP_FLOAT:
                   return qAbs(_fval - sp._fval) < 0.000001;
-            case P_STRING:
+            case SP_STRING:
                   return _sval == sp._sval;
             }
       return false;
@@ -110,9 +110,9 @@ bool SyntiParameterData::operator==(const SyntiParameterData& sp) const
 
 void SyntiParameterData::write(Xml& xml) const
       {
-      if (_type == P_FLOAT)
+      if (_type == SP_FLOAT)
             xml.tagE(QString("f name=\"%1\" val=\"%3\"").arg(_name).arg(_fval));
-      else if (_type == P_STRING)
+      else if (_type == SP_STRING)
             xml.tagE(QString("s name=\"%1\" val=\"%3\"").arg(_name).arg(Xml::xmlString(_sval)));
       }
 
@@ -124,12 +124,12 @@ void SyntiParameterData::write(Xml& xml) const
 void SyntiParameterData::print() const
       {
       SParmId spid(_id);
-      if (_type == P_FLOAT) {
+      if (_type == SP_FLOAT) {
             printf("<id=(%d,%d,%d) name=%s val=%f>",
                spid.syntiId, spid.subsystemId, spid.paramId,
                qPrintable(_name), _fval);
             }
-      else if (_type == P_STRING) {
+      else if (_type == SP_STRING) {
             printf("<id=(%d,%d,%d) name=%s val=%s>",
                spid.syntiId, spid.subsystemId, spid.paramId,
                qPrintable(_name), qPrintable(_sval));
