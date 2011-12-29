@@ -498,6 +498,7 @@ void Segment::add(Element* el)
 
             case KEYSIG:
             case BAR_LINE:
+            case BREATH:
                   _elist[track] = el;
                   empty = false;
                   break;
@@ -607,6 +608,7 @@ void Segment::remove(Element* el)
 
             case KEYSIG:
             case BAR_LINE:
+            case BREATH:
                   _elist[track] = 0;
                   break;
 
