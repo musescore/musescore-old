@@ -244,6 +244,7 @@ void Trill::write(Xml& xml) const
       xml.stag(QString("%1 id=\"%2\"").arg(name()).arg(id()));
       if (_accidental)
             _accidental->write(xml);
+      xml.tag("subtype", subtypeName());
       SLine::writeProperties(xml);
       xml.etag();
       }
@@ -277,7 +278,7 @@ void Trill::read(const QDomElement& de)
 
 void Trill::setSubtype(const QString& s)
       {
-      if (s == "trill")
+      if (s == "trill" || s == "0")
             _subtype = TRILL_LINE;
       else if (s == "upprall")
             _subtype = UPPRALL_LINE;

@@ -114,3 +114,35 @@ void Ottava::endEdit()
             }
       }
 
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Ottava::write(Xml& xml) const
+      {
+      xml.stag(QString("%1 id=\"%2\"").arg(name()).arg(id()));
+      xml.tag("subtype", subtype());
+      TextLine::writeProperties(xml);
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void Ottava::read(const QDomElement& de)
+      {
+      foreach(SpannerSegment* seg, spannerSegments())
+            delete seg;
+      spannerSegments().clear();
+      setId(de.attribute("id", "-1").toInt());
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            const QString& tag(e.tagName());
+            if (tag == "subtype")
+                  setSubtype(e.text().toInt());
+            else if (!TextLine::readProperties(e))
+                  domError(e);
+            }
+      }
+
+

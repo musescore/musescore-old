@@ -90,7 +90,7 @@ void setProperty(P_DATA_TYPE type, void* data, const QVariant& value)
             case T_DIRECTION:
             case T_DIRECTION_H:
             case T_LAYOUT_BREAK:
-                  setProperty(type, data, value.toString());
+                  *(int*)data = value.toInt();
                   break;
             }
       }
@@ -126,21 +126,48 @@ QVariant getProperty(P_DATA_TYPE type, void* data)
 
 QVariant getProperty(P_DATA_TYPE type, const QDomElement& e)
       {
+      const QString& value(e.text());
       switch(type) {
             case T_BOOL:
-                  return QVariant(bool(e.text().toInt()));
+                  return QVariant(bool(value.toInt()));
             case T_SUBTYPE:
             case T_INT:
-            case T_DIRECTION:
-            case T_DIRECTION_H:
-            case T_LAYOUT_BREAK:
-                  return QVariant(e.text().toInt());
+                  return QVariant(value.toInt());
             case T_REAL:
-                  return QVariant(e.text().toDouble());
+                  return QVariant(value.toDouble());
             case T_COLOR:
                   return QVariant(readColor(e));
             case T_POINT:
                   return QVariant(readPoint(e));
+            case T_DIRECTION:
+                  {
+                  if (value == "up")
+                        return QVariant(UP);
+                  else if (value == "down")
+                        return QVariant(DOWN);
+                  else if (value == "auto")
+                        return QVariant(AUTO);
+                  }
+                  break;
+            case T_DIRECTION_H:
+                  {
+                  if (value == "left")
+                        return QVariant(DH_LEFT);
+                  else if (value == "right")
+                        return QVariant(DH_RIGHT);
+                  else if (value == "auto")
+                        return QVariant(DH_AUTO);
+                  }
+                  break;
+            case T_LAYOUT_BREAK:
+                  if (value == "line")
+                        return QVariant(int(LAYOUT_BREAK_LINE));
+                  if (value == "page")
+                        return QVariant(int(LAYOUT_BREAK_PAGE));
+                  if (value == "section")
+                        return QVariant(int(LAYOUT_BREAK_SECTION));
+                  qDebug("getProperty: invalid T_LAYOUT_BREAK: <%s>", qPrintable(value));
+                  break;
             }
       return QVariant();
       }
