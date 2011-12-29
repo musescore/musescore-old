@@ -25,6 +25,7 @@
 #include "ui_timesigwizard.h"
 #include "ui_newwizard.h"
 
+#include "libmscore/timesig.h"
 #include "libmscore/key.h"
 #include "libmscore/fraction.h"
 
@@ -76,7 +77,7 @@ class TimesigWizard : public QWidget, private Ui::TimesigWizard {
       int measures() const;
       Fraction timesig() const;
       bool pickup(int* z, int* n) const;
-      int type() const;
+      TimeSigType type() const;
       };
 
 //---------------------------------------------------------
@@ -143,7 +144,7 @@ class NewWizardPage3 : public QWizardPage {
       int measures() const                     { return w->measures();   }
       Fraction timesig() const                 { return w->timesig();    }
       bool pickupMeasure(int* z, int* n) const { return w->pickup(z, n); }
-      int timesigType() const                  { return w->type();       }
+      TimeSigType timesigType() const          { return w->type();       }
       };
 
 //---------------------------------------------------------
@@ -220,7 +221,7 @@ class NewWizard : public QWizard {
       QString copyright() const          { return p1->copyright();   }
       KeySigEvent keysig() const          { return p5->keysig();      }
       bool pickupMeasure(int* z, int* n) const { return p3->pickupMeasure(z, n); }
-      int timesigType() const             { return p3->timesigType();       }
+      TimeSigType timesigType() const     { return p3->timesigType();       }
       double tempo() const                { return p5->tempo(); }
       bool createTempo() const            { return p5->createTempo(); }
       };

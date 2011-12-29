@@ -80,7 +80,7 @@ class SLine : public Spanner {
       SLine(const SLine&);
 
       virtual void layout();
-      bool readProperties(QDomElement node);
+      bool readProperties(const QDomElement& node);
       void writeProperties(Xml& xml, const SLine* proto = 0) const;
       virtual LineSegment* createLineSegment() = 0;
       void setLen(qreal l);
@@ -89,7 +89,7 @@ class SLine : public Spanner {
       virtual QPointF linePos(int grip, System** system);
 
       virtual void write(Xml&) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
 
       bool diagonal() const         { return _diagonal; }
       void setDiagonal(bool v)      { _diagonal = v;    }

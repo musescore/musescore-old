@@ -12,6 +12,7 @@
 //=============================================================================
 
 #include "xml.h"
+#include "layoutbreak.h"
 
 QString docName;
 
@@ -230,46 +231,74 @@ void Xml::netag(const char* s)
 //   tag
 //---------------------------------------------------------
 
-void Xml::tag(const char* name, P_DATA_TYPE type, QVariant data)
+void Xml::tag(const char* name, P_DATA_TYPE type, void* data, void* defaultVal)
       {
       switch(type) {
-            case T_VARIANT:
-                  tag(QString(name), data);
+            case T_BOOL:
+                  if (compareProperty<bool>(data, defaultVal))
+                        tag(name, QVariant(*(bool*)data));
+                  break;
+            case T_SUBTYPE:
+            case T_INT:
+                  if (compareProperty<int>(data, defaultVal))
+                        tag(name, QVariant(*(int*)data));
+                  break;
+            case T_REAL:
+                  if (compareProperty<qreal>(data, defaultVal))
+                        tag(name, QVariant(*(qreal*)data));
+                  break;
+            case T_POINT:
+                  if (compareProperty<QPointF>(data, defaultVal))
+                        tag(name, QVariant(*(QPointF*)data));
+                  break;
+            case T_COLOR:
+                  if (compareProperty<QColor>(data, defaultVal))
+                        tag(name, QVariant(*(QColor*)data));
                   break;
             case T_DIRECTION:
-                  switch(Direction(data.toInt())) {
-                        case UP:
-                              tag("StemDirection", QVariant("up"));
-                              break;
-                        case DOWN:
-                              tag("StemDirection", QVariant("down"));
-                              break;
-                        case AUTO:
-                              break;
+                  if (compareProperty<Direction>(data, defaultVal)) {
+                        switch(Direction(*(Direction*)data)) {
+                              case UP:
+                                    tag(name, QVariant("up"));
+                                    break;
+                              case DOWN:
+                                    tag(name, QVariant("down"));
+                                    break;
+                              case AUTO:
+                                    break;
+                              }
+                        }
+                  break;
+            case T_DIRECTION_H:
+                  if (compareProperty<DirectionH>(data, defaultVal)) {
+                        switch(DirectionH(*(DirectionH*)data)) {
+                              case DH_LEFT:
+                                    tag(name, QVariant("up"));
+                                    break;
+                              case DH_RIGHT:
+                                    tag(name, QVariant("down"));
+                                    break;
+                              case DH_AUTO:
+                                    break;
+                              }
+                        }
+                  break;
+            case T_LAYOUT_BREAK:
+                  if (compareProperty<LayoutBreakType>(data, defaultVal)) {
+                        switch(*(LayoutBreakType*)data) {
+                              case LAYOUT_BREAK_LINE:
+                                    tag(name, QVariant("line"));
+                                    break;
+                              case LAYOUT_BREAK_PAGE:
+                                    tag(name, QVariant("page"));
+                                    break;
+                              case LAYOUT_BREAK_SECTION:
+                                    tag(name, QVariant("section"));
+                                    break;
+                              }
                         }
                   break;
             }
-      }
-
-//---------------------------------------------------------
-//   readVariant
-//---------------------------------------------------------
-
-QVariant readVariant(P_DATA_TYPE type, const QString& data)
-      {
-      switch(type) {
-            case T_VARIANT:
-                  return QVariant(data);
-            case T_DIRECTION:
-                  if (data == "up")
-                        return QVariant(int(UP));
-                  if (data == "down")
-                        return QVariant(int(DOWN));
-                  if (data == "auto")
-                        return QVariant(int(AUTO));
-                  break;
-            }
-      return QVariant();
       }
 
 //---------------------------------------------------------
@@ -461,19 +490,20 @@ static QString domElementPath(const QDomElement& e)
 
 void domError(const QDomElement& e)
       {
+      QString m;
       QString s = domElementPath(e);
       if (!docName.isEmpty())
-            qDebug("<%s>:", qPrintable(docName));
+            m = QString("<%1>:").arg(docName);
       int ln = e.lineNumber();
       if (ln != -1)
-            qDebug("line:%d ", ln);
+            m += QString("line:%1 ").arg(ln);
       int col = e.columnNumber();
       if (col != -1)
-            qDebug("col:%d ", col);
-      qDebug("%s: Unknown Node <%s>, type %d\n",
-         qPrintable(s), qPrintable(e.tagName()), e.nodeType());
+            m += QString("col:%1 ").arg(col);
+      m += QString("%1: Unknown Node <%2>, type %3").arg(s).arg(e.tagName()).arg(e.nodeType());
       if (e.isText())
-            qDebug("  text node <%s>\n", qPrintable(e.toText().data()));
+            m += QString("  text node <%1>").arg(e.toText().data());
+      qDebug("%s", qPrintable(m));
       }
 
 //---------------------------------------------------------

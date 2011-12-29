@@ -176,13 +176,13 @@ void Harmony::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Harmony::read(QDomElement e)
+void Harmony::read(const QDomElement& de)
       {
       // convert table to tpc values
       static const int table[] = {
             14, 9, 16, 11, 18, 13, 8, 15, 10, 17, 12, 19
             };
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             int i = e.text().toInt();
             if (tag == "base") {

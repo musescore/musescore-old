@@ -40,7 +40,6 @@
 #include "fretproperties.h"
 #include "markerproperties.h"
 #include "chordproperties.h"
-#include "restproperties.h"
 #include "jumpproperties.h"
 #include "selinstrument.h"
 #include "chordedit.h"
@@ -262,7 +261,7 @@ void ScoreView::createElementPropertyMenu(Element* e, QMenu* popup)
                   a->setData("key-naturals");
                   }
             }
-      else if (e->type() == STAFF_STATE && e->subtype() == STAFF_STATE_INSTRUMENT) {
+      else if (e->type() == STAFF_STATE && static_cast<StaffState*>(e)->subtype() == STAFF_STATE_INSTRUMENT) {
             popup->addAction(tr("Change Instrument Properties..."))->setData("ss-props");
             }
       else if (e->type() == SLUR_SEGMENT) {
@@ -273,13 +272,12 @@ void ScoreView::createElementPropertyMenu(Element* e, QMenu* popup)
       else if (e->type() == REST) {
             Rest* rest = static_cast<Rest*>(e);
             genPropertyMenu1(e, popup);
-            popup->addSeparator();
             if (rest->tuplet()) {
+                  popup->addSeparator();
                   QMenu* menuTuplet = popup->addMenu(tr("Tuplet..."));
                   menuTuplet->addAction(tr("Tuplet Properties..."))->setData("tupletProps");
                   menuTuplet->addAction(tr("Delete Tuplet"))->setData("tupletDelete");
                   }
-            popup->addAction(tr("Rest Properties..."))->setData("rest-props");
             }
       else if (e->type() == NOTE) {
             Note* note = static_cast<Note*>(e);
@@ -322,7 +320,7 @@ void ScoreView::createElementPropertyMenu(Element* e, QMenu* popup)
             genPropertyMenu1(e, popup);
             popup->addAction(tr("Jump Properties..."))->setData("jump-props");
             }
-      else if (e->type() == LAYOUT_BREAK && e->subtype() == LAYOUT_BREAK_SECTION) {
+      else if (e->type() == LAYOUT_BREAK && static_cast<LayoutBreak*>(e)->subtype() == LAYOUT_BREAK_SECTION) {
             popup->addAction(tr("Section Break Properties..."))->setData("break-props");
             }
       else if (e->type() == INSTRUMENT_CHANGE) {
@@ -384,7 +382,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             Bend* bend = static_cast<Bend*>(e);
             BendProperties bp(bend, 0);
             if (bp.exec())
-                  score()->undo()->push(new ChangeBend(bend, bp.points()));
+                  score()->undo(new ChangeBend(bend, bp.points()));
             }
       else if (cmd == "f-props") {
             BoxProperties vp(static_cast<Box*>(e), 0);
@@ -418,7 +416,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             }
       else if (cmd == "title-text") {
             Text* t = new Text(score());
-            t->setSubtype(TEXT_TITLE);
+            // t->setSubtype(TEXT_TITLE);
             t->setTextStyle(TEXT_STYLE_TITLE);
             t->setParent(e);
             score()->undoAddElement(t);
@@ -427,7 +425,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             }
       else if (cmd == "subtitle-text") {
             Text* t = new Text(score());
-            t->setSubtype(TEXT_SUBTITLE);
+            // t->setSubtype(TEXT_SUBTITLE);
             t->setTextStyle(TEXT_STYLE_SUBTITLE);
             t->setParent(e);
             score()->undoAddElement(t);
@@ -436,7 +434,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             }
       else if (cmd == "composer-text") {
             Text* t = new Text(score());
-            t->setSubtype(TEXT_COMPOSER);
+            // t->setSubtype(TEXT_COMPOSER);
             t->setTextStyle(TEXT_STYLE_COMPOSER);
             t->setParent(e);
             score()->undoAddElement(t);
@@ -445,7 +443,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             }
       else if (cmd == "poet-text") {
             Text* t = new Text(score());
-            t->setSubtype(TEXT_POET);
+            // t->setSubtype(TEXT_POET);
             t->setTextStyle(TEXT_STYLE_POET);
             t->setParent(e);
             score()->undoAddElement(t);
@@ -475,7 +473,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
                         if (e->type() == TUPLET) {
                               Tuplet* tuplet = static_cast<Tuplet*>(e);
                               if ((bracketType != tuplet->bracketType()) || (numberType != tuplet->numberType()))
-                                    score()->undo()->push(new ChangeTupletProperties(tuplet, numberType, bracketType));
+                                    score()->undo(new ChangeTupletProperties(tuplet, numberType, bracketType));
                               }
                         }
                   }
@@ -512,11 +510,11 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             TremoloBar* tb = static_cast<TremoloBar*>(e);
             TremoloBarProperties bp(tb, 0);
             if (bp.exec())
-                  score()->undo()->push(new ChangeTremoloBar(tb, bp.points()));
+                  score()->undo(new ChangeTremoloBar(tb, bp.points()));
             }
       if (cmd == "ts-courtesy") {
             TimeSig* ts = static_cast<TimeSig*>(e);
-            score()->undo()->push(new ChangeTimesig(static_cast<TimeSig*>(e),
+            score()->undo(new ChangeTimesig(static_cast<TimeSig*>(e),
                !ts->showCourtesySig(), ts->sig(), ts->stretch(), ts->subtype(),
                ts->zText(), ts->nText()));
             }
@@ -528,7 +526,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             if (rv) {
                   bool stretchChanged = r.stretch() != ts->stretch();
                   if (r.zText() != ts->zText() || r.nText() != ts->nText() || r.sig() != ts->sig() || stretchChanged || r.subtype() != ts->subtype()) {
-                        score()->undo()->push(new ChangeTimesig(ts,
+                        score()->undo(new ChangeTimesig(ts,
                            r.showCourtesySig(), r.sig(), r.stretch(), r.subtype(), r.zText(), r.nText()));
                         if (stretchChanged)
                               score()->timesigStretchChanged(ts, ts->measure(), ts->staffIdx());
@@ -536,18 +534,18 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
                   }
             }
       else if (cmd == "smallAcc") {
-            score()->undo()->push(
+            score()->undo(
                new ChangeProperty(e, P_SMALL, !static_cast<Accidental*>(e)->small())
                );
             }
       else if (cmd == "smallNote") {
-            score()->undo()->push(
+            score()->undo(
                new ChangeProperty(e, P_SMALL, !static_cast<Note*>(e)->small())
                );
             }
       else if (cmd == "clef-courtesy") {
             bool show = !static_cast<Clef*>(e)->showCourtesyClef();
-            score()->undo()->push(new ChangeProperty(e, P_SHOW_COURTESY, show));
+            score()->undo(new ChangeProperty(e, P_SHOW_COURTESY, show));
             }
       else if (cmd == "d-props") {
             Dynamic* dynamic = static_cast<Dynamic*>(e);
@@ -586,7 +584,8 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
                   QList<Element*> sl = score()->selection().elements();
                   QList<Element*> selectedElements;
                   foreach(Element* e, sl) {
-                        if ((e->type() != ot->type()) || (e->subtype() != ot->subtype())) {
+                        // TODO if ((e->type() != ot->type()) || (e->subtype() != ot->subtype())) {
+                        if (e->type() != ot->type()) {
                               continue;
                               }
                         Text* t  = static_cast<Text*>(e);
@@ -661,11 +660,11 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             }
       else if (cmd == "key-courtesy") {
             KeySig* ks = static_cast<KeySig*>(e);
-            score()->undo()->push(new ChangeKeySig(ks, ks->keySigEvent(), !ks->showCourtesySig(), ks->showNaturals()));
+            score()->undo(new ChangeKeySig(ks, ks->keySigEvent(), !ks->showCourtesySig(), ks->showNaturals()));
             }
       else if (cmd == "key-naturals") {
             KeySig* ks = static_cast<KeySig*>(e);
-            score()->undo()->push(new ChangeKeySig(ks, ks->keySigEvent(), ks->showCourtesySig(), !ks->showNaturals()));
+            score()->undo(new ChangeKeySig(ks, ks->keySigEvent(), ks->showCourtesySig(), !ks->showNaturals()));
             }
       else if (cmd == "ss-props") {
             StaffState* ss = static_cast<StaffState*>(e);
@@ -692,32 +691,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             if (rv) {
                   int lt = sp.getLineType();
                   if (lt != ss->slurTie()->lineType()) {
-                        score()->undo()->push(new ChangeProperty(ss->slurTie(), P_LINE_TYPE, lt));
-                        }
-                  }
-            }
-      else if (cmd == "rest-props") {
-            Rest* orest = static_cast<Rest*>(e);
-            Rest r(*orest);
-            RestProperties vp(&r);
-            int rv = vp.exec();
-            if (rv) {
-                  bool sizeChanged  = r.small() != orest->small();
-                  bool spaceChanged = r.extraLeadingSpace() != orest->extraLeadingSpace()
-                     || r.extraTrailingSpace() != orest->extraTrailingSpace();
-
-                  foreach(Element* e, score()->selection().elements()) {
-                        if (e->type() != REST)
-                              continue;
-                        Rest* rest = static_cast<Rest*>(e);
-
-                        if (sizeChanged)
-                              score()->undoChangeChordRestSize(rest, r.small());
-
-                        if (spaceChanged) {
-                              score()->undoChangeChordRestSpace(rest, r.extraLeadingSpace(),
-                              r.extraTrailingSpace());
-                              }
+                        score()->undo(new ChangeProperty(ss->slurTie(), P_LINE_TYPE, lt));
                         }
                   }
             }
@@ -730,7 +704,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
                   int bracketType = vp.bracketType();
                   int numberType  = vp.numberType();
                   if ((bracketType != ot->bracketType()) || (numberType != ot->numberType()))
-                        score()->undo()->push(new ChangeTupletProperties(ot, numberType, bracketType));
+                        score()->undo(new ChangeTupletProperties(ot, numberType, bracketType));
                   }
             }
       else if (cmd == "tupletDelete") {
@@ -752,25 +726,20 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
                         Chord* chord = note->chord();
                         if (vp.small() != chord->small())
                               score()->undoChangeChordRestSize(chord, vp.small());
-                        if (Spatium(vp.leadingSpace()) != chord->extraLeadingSpace()
-                           || Spatium(vp.trailingSpace()) != chord->extraTrailingSpace()) {
-                              score()->undoChangeChordRestSpace(chord, Spatium(vp.leadingSpace()),
-                              Spatium(vp.trailingSpace()));
-                              }
                         if (vp.noStem() != chord->noStem())
                               score()->undoChangeChordNoStem(chord, vp.noStem());
                         if (vp.getStemDirection() != chord->stemDirection())
-                              score()->undo()->push(new ChangeProperty(chord, P_STEM_DIRECTION, Direction(vp.getStemDirection())));
+                              score()->undo(new ChangeProperty(chord, P_STEM_DIRECTION, Direction(vp.getStemDirection())));
                         if (vp.tuning() != note->tuning())
                               score()->undoChangeTuning(note, vp.tuning());
                         if (DirectionH(vp.getUserMirror()) != note->userMirror())
                               score()->undoChangeUserMirror(note, DirectionH(vp.getUserMirror()));
                         if (vp.getHeadType() != note->headType() || vp.getHeadGroup() != note->headGroup())
-                              score()->undo()->push(new ChangeNoteHead(note, vp.getHeadGroup(), vp.getHeadType()));
+                              score()->undo(new ChangeNoteHead(note, vp.getHeadGroup(), vp.getHeadType()));
                         if (note->veloType() != vp.veloType() || note->veloOffset() != vp.veloOffset()
                            || note->onTimeUserOffset() != vp.onTimeUserOffset()
                            || note->offTimeUserOffset() != vp.offTimeUserOffset()) {
-                              score()->undo()->push(new ChangeNoteProperties(note,
+                              score()->undo(new ChangeNoteProperties(note,
                               vp.veloType(), vp.veloOffset(),
                               vp.onTimeUserOffset(),
                               vp.offTimeUserOffset()));
@@ -825,7 +794,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
                   const InstrumentTemplate* it = si.instrTemplate();
                   if (it) {
                         ic->setInstrument(Instrument::fromTemplate(it));
-                        score()->undo()->push(new ChangeInstrument(ic, ic->instrument()));
+                        score()->undo(new ChangeInstrument(ic, ic->instrument()));
                         }
                   else
                         qDebug("no template selected?\n");
@@ -859,7 +828,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
                || (dt != hp->dynType())
                || (dp.allowDiagonal() != hp->diagonal())
                )) {
-                  score()->undo()->push(new ChangeHairpin(hp, vo, dt, dp.allowDiagonal()));
+                  score()->undo(new ChangeHairpin(hp, vo, dt, dp.allowDiagonal()));
                   }
               }
        else if (cmd == "ha-props") {
@@ -880,7 +849,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             if (rv) {
                   if (vp.getLockAspectRatio() != img->lockAspectRatio()
                      || vp.getAutoScale() != img->autoScale() || vp.getZ() != img->z()) {
-                        score()->undo()->push(new ChangeImage(img,
+                        score()->undo(new ChangeImage(img,
                            vp.getLockAspectRatio(), vp.getAutoScale(), vp.getZ()));
                         }
                   }

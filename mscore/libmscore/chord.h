@@ -122,8 +122,8 @@ class Chord : public ChordRest {
       virtual ElementType type() const { return CHORD; }
 
       virtual void write(Xml& xml) const;
-      void read(QDomElement, QList<Tuplet*>*, QList<Spanner*>*);
-      virtual void read(QDomElement);
+      void read(const QDomElement&, QList<Tuplet*>*, QList<Spanner*>*);
+      virtual void read(const QDomElement&);
       virtual void setSelected(bool f);
       virtual Element* drop(const DropData&);
 
@@ -164,7 +164,7 @@ class Chord : public ChordRest {
 
       virtual int upLine() const;
       virtual int downLine() const;
-      void readNote(QDomElement node, QList<Tuplet*>*, QList<Spanner*>*);
+      void readNote(const QDomElement& node, QList<Tuplet*>*, QList<Spanner*>*);
 
       NoteType noteType() const         { return _noteType; }
       void setNoteType(NoteType t)      { _noteType = t; }
@@ -190,7 +190,7 @@ class Chord : public ChordRest {
       QPointF layoutArticulation(Articulation*);
 
       virtual QVariant getProperty(int propertyId) const;
-      virtual void setProperty(int propertyId, const QVariant&);
+      virtual bool setProperty(int propertyId, const QVariant&);
       };
 
 #endif

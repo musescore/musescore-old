@@ -20,7 +20,9 @@ class QPainter;
 
 // layout break subtypes:
 
-enum { LAYOUT_BREAK_PAGE, LAYOUT_BREAK_LINE, LAYOUT_BREAK_SECTION };
+enum LayoutBreakType {
+      LAYOUT_BREAK_PAGE, LAYOUT_BREAK_LINE, LAYOUT_BREAK_SECTION
+      };
 
 //---------------------------------------------------------
 //   LayoutBreak
@@ -28,6 +30,7 @@ enum { LAYOUT_BREAK_PAGE, LAYOUT_BREAK_LINE, LAYOUT_BREAK_SECTION };
 //---------------------------------------------------------
 
 class LayoutBreak : public Element {
+      LayoutBreakType _subtype;
       qreal lw;
       QPainterPath path;
       qreal _pause;
@@ -37,18 +40,21 @@ class LayoutBreak : public Element {
       virtual void draw(QPainter*) const;
       void layout0();
       virtual void spatiumChanged(qreal /*oldValue*/, qreal /*newValue*/);
+      void* pPause()   { return  &_pause; }
+      void* pSubtype() { return  &_subtype; }
 
    public:
       LayoutBreak(Score*);
       virtual LayoutBreak* clone() const { return new LayoutBreak(*this); }
+
       virtual ElementType type() const { return LAYOUT_BREAK; }
-      virtual void setSubtype(const QString&);
-      virtual void setSubtype(int st);
-      virtual QString subtypeName() const;
-      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
+      void setSubtype(LayoutBreakType);
+      LayoutBreakType subtype() const  { return _subtype; }
+
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, Element*) const;
       virtual Element* drop(const DropData&);
       virtual void write(Xml&) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       Measure* measure() const            { return (Measure*)parent();   }
       qreal pause() const                 { return _pause;               }
       void setPause(qreal v)              { _pause = v;                  }
@@ -56,6 +62,13 @@ class LayoutBreak : public Element {
       void setStartWithLongNames(bool v)  { _startWithLongNames = v;     }
       bool startWithMeasureOne() const    { return _startWithMeasureOne; }
       void setStartWithMeasureOne(bool v) { _startWithMeasureOne = v;    }
+
+      virtual QVariant getProperty(int propertyId) const;
+      virtual bool setProperty(int propertyId, const QVariant&);
+      virtual bool setProperty(const QString&, const QString&);
+
+      static Property<LayoutBreak> propertyList[];
+      Property<LayoutBreak>* property(int id) const;
       };
 
 #endif

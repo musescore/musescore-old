@@ -82,8 +82,9 @@ void BSymbol::scanElements(void* data, void (*func)(void*, Element*), bool all)
 //   acceptDrop
 //---------------------------------------------------------
 
-bool BSymbol::acceptDrop(MuseScoreView*, const QPointF&, int type, int) const
+bool BSymbol::acceptDrop(MuseScoreView*, const QPointF&, Element* e) const
       {
+      int type = e->type();
       return type == SYMBOL || type == IMAGE;
       }
 
@@ -224,7 +225,6 @@ void Symbol::write(Xml& xml) const
       xml.stag(name());
       xml.tag("name", symbols[score()->symIdx()][_sym].name());
       Element::writeProperties(xml);
-//      xml.tag("small", _small);
       foreach(const Element* e, leafs())
             e->write(xml);
       xml.etag();
@@ -234,14 +234,14 @@ void Symbol::write(Xml& xml) const
 //   Symbol::read
 //---------------------------------------------------------
 
-void Symbol::read(QDomElement e)
+void Symbol::read(const QDomElement& de)
       {
       QPointF pos;
       int s = -1;
 
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             if (tag == "name") {
                   for (int i = 0; i < symbols[0].size(); ++i) {
                         if (val == symbols[0][i].name()) {
@@ -269,11 +269,9 @@ void Symbol::read(QDomElement e)
                         path = ee.text();
                   Image* image = 0;
                   QString s(path.toLower());
-#ifdef SVG_IMAGES
                   if (s.endsWith(".svg"))
                         image = new SvgImage(score());
                   else
-#endif
                         if (s.endsWith(".jpg")
                      || s.endsWith(".png")
                      || s.endsWith(".xpm")
@@ -288,9 +286,8 @@ void Symbol::read(QDomElement e)
                         add(image);
                         }
                   }
-            else if (tag == "small") {
-                  ; // _small = val.toInt();
-                  }
+            else if (tag == "small")
+                  ;
             else if (!Element::readProperties(e))
                   domError(e);
             }
@@ -378,9 +375,9 @@ void FSymbol::draw(QPainter* painter) const
 void FSymbol::write(Xml& xml) const
       {
       xml.stag(name());
-      xml.tag("font", _font.family());
+      xml.tag("font",     _font.family());
       xml.tag("fontsize", _font.pixelSize());
-      xml.tag("code", _code);
+      xml.tag("code",     _code);
       Element::writeProperties(xml);
       xml.etag();
       }
@@ -389,13 +386,11 @@ void FSymbol::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void FSymbol::read(QDomElement e)
+void FSymbol::read(const QDomElement& de)
       {
-      QPointF pos;
-
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             if (tag == "font")
                   _font.setFamily(val);
             else if (tag == "fontsize")
@@ -405,7 +400,7 @@ void FSymbol::read(QDomElement e)
             else if (!Element::readProperties(e))
                   domError(e);
             }
-      setPos(pos);
+      setPos(QPointF());
       }
 
 //---------------------------------------------------------

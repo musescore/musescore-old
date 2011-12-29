@@ -29,18 +29,21 @@ enum SpannerSegmentType {
 //---------------------------------------------------------
 
 class SpannerSegment : public Element {
+      SpannerSegmentType _subtype;
       Spanner* _spanner;
 
    public:
       SpannerSegment(Score* s);
       SpannerSegment(const SpannerSegment&);
       virtual SpannerSegment* clone() const = 0;
-      Spanner* spanner() const                         { return _spanner;            }
-      Spanner* setSpanner(Spanner* val)                { return _spanner = val;      }
-      void setSpannerSegmentType(SpannerSegmentType s) { setSubtype(s);              }
-      SpannerSegmentType spannerSegmentType() const    { return SpannerSegmentType(subtype()); }
+      Spanner* spanner() const              { return _spanner;            }
+      Spanner* setSpanner(Spanner* val)     { return _spanner = val;      }
+
+      void setSubtype(SpannerSegmentType s) { _subtype = s;               }
+      SpannerSegmentType subtype() const    { return _subtype;            }
+
       void setSystem(System* s);
-      System* system() const                           { return (System*)parent();   }
+      System* system() const                { return (System*)parent();   }
 
       virtual void startEdit(MuseScoreView*, const QPointF&);
       virtual void endEdit();

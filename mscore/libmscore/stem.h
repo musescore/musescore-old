@@ -48,10 +48,10 @@ class Stem : public Element {
       virtual void editDrag(const EditData&);
       virtual void updateGrips(int*, QRectF*) const;
       virtual void write(Xml& xml) const;
-      virtual void read(QDomElement e);
+      virtual void read(const QDomElement& e);
       virtual void toDefault();
       qreal userLen() const         { return _userLen; }
-      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, Element*) const;
       virtual Element* drop(const DropData&);
       Chord* chord() const            { return (Chord*)parent(); }
       };

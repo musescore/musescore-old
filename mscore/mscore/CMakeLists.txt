@@ -38,7 +38,7 @@ QT4_WRAP_UI (ui_headers
       measureproperties.ui segment.ui text.ui textpalette.ui timedialog.ui
       symboldialog.ui dynamic.ui tuplet.ui shortcutcapturedialog.ui slurtie.ui
       slur.ui editdrumset.ui editstaff.ui line.ui linesegment.ui
-      voltaproperties.ui chordproperties.ui restproperties.ui timesigproperties.ui
+      voltaproperties.ui chordproperties.ui timesigproperties.ui
       jumpproperties.ui markerproperties.ui boxproperties.ui
       instrwizard.ui timesigwizard.ui newwizard.ui aboutbox.ui
       chordedit.ui transposedialog.ui tempoproperties.ui importmidi.ui
@@ -63,7 +63,7 @@ QT4_WRAP_CPP (mocs
       measureproperties.h seq.h textpalette.h textstyle.h
       timedialog.h symboldialog.h shortcutcapturedialog.h simplebutton.h
       greendotbutton.h recordbutton.h editdrumset.h editstaff.h selinstrument.h
-      voltaproperties.h chordproperties.h restproperties.h timesigproperties.h
+      voltaproperties.h chordproperties.h timesigproperties.h
       jumpproperties.h markerproperties.h boxproperties.h newwizard.h
       transposedialog.h chordedit.h tempoproperties.h importmidi.h lineproperties.h
       excerptsdialog.h stafftextproperties.h imageproperties.h glissandoproperties.h
@@ -143,7 +143,7 @@ add_executable ( ${ExecutableName}
       timedialog.cpp symboldialog.cpp shortcutcapturedialog.cpp
       simplebutton.cpp musedata.cpp lilypond.cpp exportly.cpp
       editdrumset.cpp editstaff.cpp voltaproperties.cpp chordproperties.cpp
-      restproperties.cpp timesigproperties.cpp newwizard.cpp transposedialog.cpp
+      timesigproperties.cpp newwizard.cpp transposedialog.cpp
       chordedit.cpp plugins.cpp excerptsdialog.cpp
       metaedit.cpp magbox.cpp voiceselector.cpp capella.cpp
       scscore.cpp sccursor.cpp scchord.cpp scnote.cpp scpart.cpp sctext.cpp

@@ -37,7 +37,7 @@ class SigEvent {
       int _bar;               ///< precomputed value
 
    public:
-      int read(QDomElement, int fileDivision);
+      int read(const QDomElement&, int fileDivision);
       void write(Xml&, int) const;
 
       SigEvent() : _timesig(0, 0) {}       ///< default SigEvent is invalid
@@ -75,7 +75,7 @@ class TimeSigMap : public std::map<const int, SigEvent > {
 
       void del(int tick);
 
-      void read(QDomElement, int fileDiv);
+      void read(const QDomElement&, int fileDiv);
       void write(Xml&) const;
       void dump() const;
 

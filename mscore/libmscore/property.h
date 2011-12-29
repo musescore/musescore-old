@@ -23,6 +23,7 @@
 
 enum P_TYPE {
       P_SUBTYPE,
+      P_SELECTED,
       P_COLOR,
       P_VISIBLE,
       P_SMALL,
@@ -39,13 +40,25 @@ enum P_TYPE {
       P_MIRROR_HEAD,
       P_DOT_POSITION,
       P_ONTIME_OFFSET,
-      P_OFFTIME_OFFSET
+      P_OFFTIME_OFFSET,
+      P_VELO_OFFSET,
+      P_HEAD_GROUP,
+      P_TUNING,
+      P_PAUSE,
+      P_BARLINE_SPAN,
+      P_USER_OFF
       };
 
 enum P_DATA_TYPE {
-      T_VARIANT,
+      T_SUBTYPE,
+      T_BOOL,
+      T_INT,
+      T_REAL,
+      T_POINT,
+      T_COLOR,
       T_DIRECTION,      // enum Direction
-      T_DIRECTION_H     // enum DirectionH
+      T_DIRECTION_H,    // enum DirectionH
+      T_LAYOUT_BREAK
       };
 
 //---------------------------------------------------------
@@ -57,10 +70,13 @@ class Property {
    public:
       int id;
       P_DATA_TYPE type;
-      const char* name;                   // xml name of property
-      QVariant (T::*get)() const;         // pointer to getter function
-      void (T::*set)(const QVariant&);    // pointer to setter function
+      const char* name;     // xml name of property
+      void* (T::*data)();   // return pointer to data
+      void* defaultVal;
       };
 
+extern void setProperty(P_DATA_TYPE, void*, const QString& value);
+extern void setProperty(P_DATA_TYPE, void*, const QVariant& value);
+extern QVariant getProperty(P_DATA_TYPE, void*);
 #endif
 

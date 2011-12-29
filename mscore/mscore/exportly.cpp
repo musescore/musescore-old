@@ -961,7 +961,7 @@ void ExportLy::words(Text* text)
        int size;
        findTextProperties(text,style,size);
        //todo: find exact mscore-position of text and not only anchorpoint, and position accordingly in lily.
-     if ((text->subtypeName() != "RehearsalMark"))
+//TODO     if ((text->subtypeName() != "RehearsalMark"))
        // if (text->getText() != "")
        out << "^\\markup {" << style<< " \"" << text->getText() << "\"} ";
      //     qDebug("tekst %s\n", tekst.toLatin1().data());
@@ -1231,12 +1231,12 @@ void ExportLy::anchortest()
 	    {
 	    case STAFF_TEXT:
 	      qDebug("STAFF_TEXT ");
-	      if (text->subtypeName()== "RehearsalMark") qDebug(" rehearsal STAFF ");
+//TODO	      if (text->subtypeName()== "RehearsalMark") qDebug(" rehearsal STAFF ");
 	      qDebug("\n");
 	      break;
 	    case TEXT:
 	      qDebug("TEXT ");
-	      if (text->subtypeName()== "RehearsalMark") qDebug(" rehearsal MEASURE");
+//	      if (text->subtypeName()== "RehearsalMark") qDebug(" rehearsal MEASURE");
 	      qDebug("\n");
 	      break;
 	    case MARKER:
@@ -1300,12 +1300,12 @@ void ExportLy::jumptest()
 	    {
 	    case STAFF_TEXT:
 	      qDebug("STAFF_TEXT ");
-	      if (text->subtypeName()== "RehearsalMark") qDebug(" rehearsal ");
+//	      if (text->subtypeName()== "RehearsalMark") qDebug(" rehearsal ");
 	      qDebug("\n");
 	      break;
 	    case TEXT:
 	      qDebug("TEXT ");
-	      if (text->subtypeName()== "RehearsalMark") qDebug(" rehearsal ");
+//	      if (text->subtypeName()== "RehearsalMark") qDebug(" rehearsal ");
 	      qDebug("\n");
 	      break;
 	    case MARKER:
@@ -1448,10 +1448,8 @@ void ExportLy::handlePreInstruction(Element * el)
 	  switch(instructiontype)
 	    {
 	    case STAFF_TEXT:
-	    case TEXT:
+	    case REHEARSAL_MARK:
 	      {
-		if (instruction->subtypeName() == "RehearsalMark")
-		  {
 		    tekst = (Text*) instruction;
 		    if (wholemeasurerest >=1) writeMeasuRestNum();
 		    bool ok = false;
@@ -1468,7 +1466,6 @@ void ExportLy::handlePreInstruction(Element * el)
 		        out << "\\mark\\default ";//xxx
 		      privateRehearsalMark++;
 		      removeAnchor(i); //to use this caused trouble at another place. Maybe remove?
-		  }
 		break;
 	      }
 	    case OTTAVA:
@@ -3885,7 +3882,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	 {
 	 case CLEF:
 	   if (wholemeasurerest >=1) writeMeasuRestNum();
-	   writeClef(e->subtype());
+	   writeClef(static_cast<Clef*>(e)->clefType());
 	   indent();
 	   break;
 	 case TIMESIG:

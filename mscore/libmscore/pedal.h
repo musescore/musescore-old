@@ -25,7 +25,7 @@ class Pedal : public TextLine {
       Pedal(Score* s);
       virtual Pedal* clone() const     { return new Pedal(*this); }
       virtual ElementType type() const { return PEDAL; }
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       };
 #endif
 

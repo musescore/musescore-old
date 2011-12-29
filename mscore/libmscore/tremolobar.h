@@ -36,7 +36,7 @@ class TremoloBar : public Element {
       virtual void layout();
       virtual void draw(QPainter*) const;
       virtual void write(Xml&) const;
-      virtual void read(QDomElement e);
+      virtual void read(const QDomElement& e);
       QList<PitchValue>& points()                { return _points; }
       const QList<PitchValue>& points() const    { return _points; }
       void setPoints(const QList<PitchValue>& p) { _points = p;    }

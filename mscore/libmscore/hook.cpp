@@ -33,7 +33,7 @@ Hook::Hook(Score* s)
 
 void Hook::setSubtype(int i)
       {
-      Element::setSubtype(i);
+      _subtype = i;
       switch(i) {
             case 0:    break;
             case 1:    setSym(eighthflagSym);        break;

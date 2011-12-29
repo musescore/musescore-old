@@ -1020,7 +1020,7 @@ void Score::removeGeneratedElements(Measure* sm, Measure* em)
             //    - set size of clefs to small
             //
             for (Segment* seg = m->first(); seg; seg = seg->next()) {
-                  SegmentType st = seg->segmentType();
+                  SegmentType st = seg->subtype();
                   if (st == SegEndBarLine)
                         continue;
                   for (int staffIdx = 0;  staffIdx < nstaves(); ++staffIdx) {
@@ -1213,7 +1213,7 @@ bool Score::doReLayout()
       // check if another measure will fit into system
       //
       m = m->next();
-      if (m && m->subtype() == MEASURE) {
+      if (m && m->type() == MEASURE) {
             Measure* measure = static_cast<Measure*>(m);
             measure->layoutX(1.0);
             qreal ww      = measure->layoutWidth().stretchable;
@@ -1442,7 +1442,7 @@ QList<System*> Score::layoutSystemRow(qreal rowWidth, bool isFirstSystem, bool u
                                           undoAddElement(ks);
                                           }
                                     else if (ks->keySigEvent() != ksv) {
-                                          undo()->push(new ChangeKeySig(ks, ksv,
+                                          undo(new ChangeKeySig(ks, ksv,
                                              ks->showCourtesySig(), ks->showNaturals()));
                                           }
                                     // change bar line to qreal bar line

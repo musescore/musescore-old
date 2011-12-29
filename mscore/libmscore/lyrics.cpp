@@ -88,8 +88,11 @@ void Lyrics::write(Xml& xml) const
       if (_ticks)
             xml.tag("ticks", _ticks);
       Text::writeProperties(xml);
-      if (_verseNumber)
-            _verseNumber->write(xml, "Number");
+      if (_verseNumber) {
+            xml.stag("Number");
+            _verseNumber->writeProperties(xml);
+            xml.etag();
+            }
       xml.etag();
       }
 
@@ -97,16 +100,15 @@ void Lyrics::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Lyrics::read(QDomElement e)
+void Lyrics::read(const QDomElement& de)
       {
       int   iEndTick = 0;           // used for backward compatibility
 
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
-            int i = val.toInt();
             if (tag == "no")
-                  _no = i;
+                  _no = val.toInt();
             else if (tag == "syllabic") {
                   if (val == "single")
                         _syllabic = SINGLE;
@@ -122,10 +124,10 @@ void Lyrics::read(QDomElement e)
             else if (tag == "endTick") {          // obsolete
                   // store <endTick> tag value until a <ticks> tag has been read
                   // which positions this lyrics element in the score
-                  iEndTick = i;
+                  iEndTick = val.toInt();
                   }
             else if (tag == "ticks")
-                  _ticks = i;
+                  _ticks = val.toInt();
             else if (tag == "Number") {
                   _verseNumber = new Text(score());
                   _verseNumber->read(e);
@@ -273,9 +275,9 @@ int Lyrics::endTick() const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Lyrics::acceptDrop(MuseScoreView*, const QPointF&, int type, int /*subtype*/) const
+bool Lyrics::acceptDrop(MuseScoreView*, const QPointF&, Element* e) const
       {
-      return (type == TEXT);
+      return e->type() == TEXT;
       }
 
 //---------------------------------------------------------

@@ -90,7 +90,7 @@ class KeyList : public std::map<const int, KeySigEvent> {
    public:
       KeyList() {}
       KeySigEvent key(int tick) const;
-      void read(QDomElement, Score*);
+      void read(const QDomElement&, Score*);
       void write(Xml&, const char* name) const;
       };
 

@@ -29,7 +29,7 @@ class Revision {
 
    public:
       Revision();
-      void read(QDomElement);
+      void read(const QDomElement&);
       void write(Xml&) const;
       void setParent(Revision* r)              { _parent = r; }
       Revision* parent() const                 { return _parent; }

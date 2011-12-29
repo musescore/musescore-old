@@ -690,7 +690,7 @@ void MeasureView::setElement(Element* e)
       foreach(const Element* e, *m->el()) {
             QTreeWidgetItem* item = new QTreeWidgetItem;
             item->setText(0, e->name());
-            item->setText(1, QString("%1").arg(e->subtype()));
+//            item->setText(1, QString("%1").arg(e->subtype()));
             void* p = (void*) e;
             item->setData(0, Qt::UserRole, QVariant::fromValue<void*>(p));
             mb.sel->addTopLevelItem(item);
@@ -1614,7 +1614,7 @@ void ShowElementBase::setElement(Element* e)
       eb.address->setText(QString("%1").arg((unsigned long)e, 0, 16));
       eb.score->setText(QString("%1").arg((unsigned long)(e->score()), 0, 16));
 
-      eb.subtype->setValue(e->subtype());
+//      eb.subtype->setValue(e->subtype());
       eb.selected->setChecked(e->selected());
       eb.selectable->setChecked(e->selectable());
       eb.droptarget->setChecked(e->dropTarget());

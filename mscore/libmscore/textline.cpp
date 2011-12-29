@@ -47,7 +47,7 @@ void TextLineSegment::setSelected(bool f)
       {
       Element::setSelected(f);
       if (_text) {
-            if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN) {
+            if (subtype() == SEGMENT_SINGLE || subtype() == SEGMENT_BEGIN) {
                   if (textLine()->beginText())
                         _text->setSelected(f);
                   }
@@ -71,9 +71,9 @@ void TextLineSegment::draw(QPainter* painter) const
       QPointF pp2(pos2());
 
       qreal l = 0.0;
-      int sym = spannerSegmentType() == SEGMENT_MIDDLE ? tl->continueSymbol() : tl->beginSymbol();
+      int sym = subtype() == SEGMENT_MIDDLE ? tl->continueSymbol() : tl->beginSymbol();
       if (_text) {
-            SpannerSegmentType st = spannerSegmentType();
+            SpannerSegmentType st = subtype();
             if (
                ((st == SEGMENT_SINGLE || st == SEGMENT_BEGIN) && (tl->beginTextPlace() == PLACE_LEFT))
                || ((st == SEGMENT_MIDDLE || st == SEGMENT_END) && (tl->continueTextPlace() == PLACE_LEFT))
@@ -93,7 +93,7 @@ void TextLineSegment::draw(QPainter* painter) const
             symbols[score()->symIdx()][sym].draw(painter, 1.0, QPointF(o.x(), h + o.y()));
             l = bb.width() + textlineTextDistance;
             }
-      if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_END) {
+      if (subtype() == SEGMENT_SINGLE || subtype() == SEGMENT_END) {
             if (tl->endSymbol() != -1) {
                   int sym = tl->endSymbol();
                   const QRectF& bb = symbols[score()->symIdx()][sym].bbox(magS());
@@ -124,7 +124,7 @@ void TextLineSegment::draw(QPainter* painter) const
 
       if (tl->beginHook()) {
             qreal hh = tl->beginHookHeight().val() * _spatium;
-            if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN) {
+            if (subtype() == SEGMENT_SINGLE || subtype() == SEGMENT_BEGIN) {
                   if (tl->beginHookType() == HOOK_45)
                         painter->drawLine(QLineF(pp1.x(), pp1.y(), pp1.x() - fabs(hh * .4), pp1.y() + hh));
                   else
@@ -133,7 +133,7 @@ void TextLineSegment::draw(QPainter* painter) const
             }
       if (tl->endHook()) {
             qreal hh = tl->endHookHeight().val() * _spatium;
-            if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_END) {
+            if (subtype() == SEGMENT_SINGLE || subtype() == SEGMENT_END) {
                   if (tl->endHookType() == HOOK_45)
                         painter->drawLine(QLineF(pp2.x(), pp2.y(), pp2.x() + fabs(hh * .4), pp2.y() + hh));
                   else
@@ -151,7 +151,7 @@ void TextLineSegment::layout()
       TextLine* tl = static_cast<TextLine*>(line());
       if (!tl->diagonal())
             _userOff2.setY(0);
-      switch (spannerSegmentType()) {
+      switch (subtype()) {
             case SEGMENT_SINGLE:
             case SEGMENT_BEGIN:
                   if (tl->beginText()) {
@@ -369,13 +369,13 @@ void TextLine::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void TextLine::read(QDomElement e)
+void TextLine::read(const QDomElement& de)
       {
       foreach(SpannerSegment* seg, spannerSegments())
             delete seg;
       spannerSegments().clear();
-      setId(e.attribute("id", "-1").toInt());
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      setId(de.attribute("id", "-1").toInt());
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (!readProperties(e))
                   domError(e);
             }
@@ -441,10 +441,11 @@ void TextLine::writeProperties(Xml& xml, const TextLine* proto) const
 //   readProperties
 //---------------------------------------------------------
 
-bool TextLine::readProperties(QDomElement e)
+bool TextLine::readProperties(const QDomElement& e)
       {
       const QString& tag(e.tagName());
-      const QString& text = e.text();
+      const QString& text(e.text());
+
       if (tag == "beginHookHeight") {
             _beginHookHeight = Spatium(text.toDouble());
             _beginHook = true;
@@ -484,21 +485,17 @@ bool TextLine::readProperties(QDomElement e)
       else if (tag == "beginText") {
             _beginText = new Text(score());
             _beginText->setParent(this);
-            for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                  if (!_beginText->readProperties(ee))
-                        domError(e);
-                  }
+            _beginText->read(e);
             }
       else if (tag == "continueText") {
             _continueText = new Text(score());
             _continueText->setParent(this);
-            for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                  if (!_continueText->readProperties(ee))
-                        domError(e);
-                  }
+            _continueText->read(e);
             }
-      else if (!SLine::readProperties(e))
+      else if (!SLine::readProperties(e)) {
+            printf(" ==readSLineProps: failed\n");
             return false;
+            }
       return true;
       }
 

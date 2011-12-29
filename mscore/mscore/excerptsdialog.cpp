@@ -119,7 +119,7 @@ void ExcerptsDialog::deleteClicked()
 
       if (ex->score()) {
             score->startCmd();
-            score->undo()->push(new RemoveExcerpt(ex->score()));
+            score->undo(new RemoveExcerpt(ex->score()));
             score->endCmd();
             }
       int row = excerptList->row(cur);
@@ -265,7 +265,7 @@ void ExcerptsDialog::createExcerptClicked(QListWidgetItem* cur)
       nscore->addLayoutFlags(LAYOUT_FIX_PITCH_VELO);
       nscore->setLayoutAll(true);
       score->startCmd();
-      score->undo()->push(new AddExcerpt(nscore));
+      score->undo(new AddExcerpt(nscore));
       score->endCmd();
       nscore->style()->set(ST_createMultiMeasureRests, true);
 

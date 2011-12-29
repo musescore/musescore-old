@@ -173,6 +173,23 @@ static const char* elementNames[] = {
 
 int LinkedElements::_linkId = 0;    // highest id in use
 
+static bool defaultVisible = true;
+static bool defaultSelected = false;
+
+//---------------------------------------------------------
+//   propertyList
+//---------------------------------------------------------
+
+Property<Element> Element::propertyList[] = {
+      { P_COLOR,    T_COLOR,  "color",   &Element::pColor,     &MScore::defaultColor },
+      { P_VISIBLE,  T_BOOL,   "visible", &Element::pVisible,   &defaultVisible       },
+      { P_SELECTED, T_BOOL,   "selected", &Element::pSelected, &defaultSelected      },
+      // not written:
+      { P_USER_OFF, T_POINT,  0,         &Element::pUserOff,  0 },
+      };
+
+static const int PROPERTIES = sizeof(Element::propertyList)/sizeof(*Element::propertyList);
+
 //---------------------------------------------------------
 //   LinkedElements
 //---------------------------------------------------------
@@ -287,7 +304,6 @@ Element::Element(Score* s) :
    _generated(false),
    _visible(true),
    _flags(ELEMENT_SELECTABLE),
-   _subtype(0),
    _track(-1),
    _color(MScore::defaultColor),
    _mag(1.0),
@@ -306,7 +322,6 @@ Element::Element(const Element& e)
       _generated  = e._generated;
       _visible    = e._visible;
       _flags      = e._flags;
-      _subtype    = e._subtype;
       _track      = e._track;
       _color      = e._color;
       _mag        = e._mag;
@@ -410,7 +425,7 @@ void Element::scanElements(void* data, void (*func)(void*, Element*), bool all)
 void Element::toDefault()
       {
       if (!_userOff.isNull())
-            score()->undo()->push(new ChangeUserOffset(this, QPointF()));
+            score()->undoChangeUserOffset(this, QPointF());
       }
 
 //---------------------------------------------------------
@@ -621,63 +636,49 @@ bool Element::intersects(const QRectF& rr) const
       }
 
 //---------------------------------------------------------
-//   properties
-//---------------------------------------------------------
-
-QList<Prop> Element::properties(Xml& xml, const Element* proto) const
-      {
-      QList<Prop> pl;
-      if (_links && (_links->size() > 1))
-            pl.append(Prop("lid", _links->lid()));
-      QString s(this->subtypeName());
-      if (!s.isEmpty())
-            pl.append(Prop("subtype", s));
-      if (!userOff().isNull())
-            pl.append(Prop("pos", pos() / spatium()));
-      if ((track() != xml.curTrack) && (track() != -1)) {
-            int t;
-            t = track() + xml.trackDiff;
-            pl.append(Prop("track", t));
-            }
-      if (selected())
-            pl.append(Prop("selected", selected()));
-      if (!visible())
-            pl.append(Prop("visible", visible()));
-      if (_color != MScore::defaultColor)
-            pl.append(Prop("color", _color));
-      if (flag(ELEMENT_SYSTEM_FLAG) && (proto == 0 || proto->systemFlag() != flag(ELEMENT_SYSTEM_FLAG)))
-            pl.append(Prop("systemFlag", flag(ELEMENT_SYSTEM_FLAG)));
-      if (_tag != 0x1) {
-            for (int i = 1; i < MAX_TAGS; i++) {
-                  if (_tag == ((unsigned)1 << i)) {
-                        pl.append(Prop("tag", score()->layerTags()[i]));
-                        break;
-                        }
-                  }
-            }
-      return pl;
-      }
-
-//---------------------------------------------------------
 //   writeProperties
 //---------------------------------------------------------
 
 void Element::writeProperties(Xml& xml, const Element* proto) const
       {
-      xml.prop(properties(xml, proto));
+      if (_links && (_links->size() > 1))
+            xml.tag("lid", _links->lid());
+      if (!userOff().isNull())
+            xml.tag("pos", pos() / spatium());
+      if ((track() != xml.curTrack) && (track() != -1)) {
+            int t;
+            t = track() + xml.trackDiff;
+            xml.tag("track", t);
+            }
+      if (flag(ELEMENT_SYSTEM_FLAG) && (proto == 0 || proto->systemFlag() != flag(ELEMENT_SYSTEM_FLAG)))
+            xml.tag("systemFlag", flag(ELEMENT_SYSTEM_FLAG));
+      if (_tag != 0x1) {
+            for (int i = 1; i < MAX_TAGS; i++) {
+                  if (_tag == ((unsigned)1 << i)) {
+                        xml.tag("tag", score()->layerTags()[i]);
+                        break;
+                        }
+                  }
+            }
+      for (int i = 0; i < PROPERTIES; ++i) {
+            const Property<Element>& p = propertyList[i];
+            if (p.name)
+                  xml.tag(p.name, p.type, ((*(Element*)this).*(p.data))(), p.defaultVal);
+            }
       }
 
 //---------------------------------------------------------
 //   readProperties
 //---------------------------------------------------------
 
-bool Element::readProperties(QDomElement e)
+bool Element::readProperties(const QDomElement& e)
       {
       const QString& tag(e.tagName());
       const QString& val(e.text());
-      float _spatium = spatium();
 
-      if (tag == "lid") {
+      if (setProperty(tag, val))
+            ;
+      else if (tag == "lid") {
             _links = score()->links().value(val.toInt());
             if (!_links) {
                   int i = val.toInt();
@@ -688,30 +689,22 @@ bool Element::readProperties(QDomElement e)
                   }
             _links->append(this);
             }
-      else if (tag == "subtype") {
-            // does not always call Element::setSubtype():
-            // this->setSubtype(val);
-            setSubtype(val);
-            }
       else if (tag == "tick")
             score()->curTick = score()->fileDivision(val.toInt());
       else if (tag == "offset") {         // ??obsolete
+            float _spatium = spatium();
             QPointF pt(readPoint(e) * _spatium);
             setUserOff(pt);
             _readPos = QPointF();
             }
-      else if (tag == "pos")
+      else if (tag == "pos") {
+            float _spatium = spatium();
             _readPos = readPoint(e) * _spatium;
-      else if (tag == "visible")
-            setVisible(val.toInt());
+            }
       else if (tag == "voice")
             setTrack((_track/VOICES)*VOICES + val.toInt());
       else if (tag == "track")
             setTrack(val.toInt());
-      else if (tag == "selected")
-            setSelected(val.toInt());
-      else if (tag == "color")
-            _color = readColor(e);
       else if (tag == "systemFlag") {
             int i = val.toInt();
             setFlag(ELEMENT_SYSTEM_FLAG, i);
@@ -746,14 +739,12 @@ void Element::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Element::read(QDomElement e)
+void Element::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (!Element::readProperties(e))
                   domError(e);
             }
-      if (_subtype == 0)      // make sure setSubtype() is called at least once
-            setSubtype(0);
       }
 
 //---------------------------------------------------------
@@ -1005,7 +996,7 @@ void Line::writeProperties(Xml& xml) const
 //   readProperties
 //---------------------------------------------------------
 
-bool Line::readProperties(QDomElement e)
+bool Line::readProperties(const QDomElement& e)
       {
       const QString& tag(e.tagName());
       const QString& val(e.text());
@@ -1179,6 +1170,7 @@ QByteArray Element::mimeData(const QPointF& dragOffset) const
 
 //---------------------------------------------------------
 //   readType
+//    return new position of QDomElement in e
 //---------------------------------------------------------
 
 ElementType Element::readType(QDomElement& e, QPointF* dragOffset)
@@ -1517,18 +1509,27 @@ Space& Space::operator+=(const Space& s)
       }
 
 //---------------------------------------------------------
+//   property
+//---------------------------------------------------------
+
+Property<Element>* Element::property(int id) const
+      {
+      for (int i = 0; i < PROPERTIES; ++i) {
+            if (propertyList[i].id == id)
+                  return &propertyList[i];
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
 //   getProperty
 //---------------------------------------------------------
 
 QVariant Element::getProperty(int propertyId) const
       {
-      switch(propertyId) {
-            case P_SUBTYPE:  return subtype();
-            case P_COLOR:    return color();
-            case P_VISIBLE:  return visible();
-            default:
-                  qDebug("getProperty: unknown property %d\n", propertyId);
-            }
+      Property<Element>* p = property(propertyId);
+      if (p)
+            return ::getProperty(p->type, ((*(Element*)this).*(p->data))());
       return QVariant();
       }
 
@@ -1536,22 +1537,28 @@ QVariant Element::getProperty(int propertyId) const
 //   setProperty
 //---------------------------------------------------------
 
-void Element::setProperty(int propertyId, const QVariant& v)
+bool Element::setProperty(int propertyId, const QVariant& v)
       {
-      switch(propertyId) {
-            case P_SUBTYPE:
-                  setSubtype(v.toInt());
-                  break;
-            case P_COLOR:
-                  setColor(v.value<QColor>());
-                  score()->addRefresh(canvasBoundingRect());
-                  break;
-            case P_VISIBLE:
-                  setVisible(v.toBool());
-                  score()->addRefresh(canvasBoundingRect());
-                  break;
-            default:
-                  qDebug("setProperty: unknown property %d\n", propertyId);
+      Property<Element>* p = property(propertyId);
+      if (p) {
+            ::setProperty(p->type, ((*this).*(p->data))(), v);
+            setGenerated(false);
+            return true;
             }
+      qDebug("Element::setProperty: unknown id %d, data <%s>", propertyId, qPrintable(v.toString()));
+      abort();
+      return false;
+      }
+
+bool Element::setProperty(const QString& name, const QString& data)
+      {
+      for (int i = 0; i < PROPERTIES; ++i) {
+            if (propertyList[i].name == name) {
+                  ::setProperty(propertyList[i].type, ((*this).*(propertyList[i].data))(), data);
+                  setGenerated(false);
+                  return true;
+                  }
+            }
+      return false;
       }
 

@@ -22,9 +22,7 @@ class MuseScoreView;
 class Segment;
 class QPainter;
 
-// subtypes:
-
-enum {
+enum TimeSigType {
       TSIG_NORMAL,            // use sz/sn text
       TSIG_FOUR_FOUR,         // common time
       TSIG_ALLA_BREVE         // cut time
@@ -36,6 +34,7 @@ enum {
 //---------------------------------------------------------
 
 class TimeSig : public Element {
+      TimeSigType _subtype;
       bool	_showCourtesySig;
       QString sz, sn;         // calculated from actualSig() if !customText
       QPointF pz, pn;
@@ -45,16 +44,19 @@ class TimeSig : public Element {
 
    public:
       TimeSig(Score*);
-      TimeSig(Score* s, int st);
+      TimeSig(Score* s, TimeSigType st);
       TimeSig(Score* s, int z, int n);
       TimeSig(Score* s, const Fraction& f);
 
       TimeSig* clone() const             { return new TimeSig(*this); }
       ElementType type() const           { return TIMESIG; }
-      void setSubtype(int val);
+
+      void setSubtype(TimeSigType val);
+      TimeSigType subtype() const        { return _subtype; }
+
       void draw(QPainter*) const;
       void write(Xml& xml) const;
-      void read(QDomElement);
+      void read(const QDomElement&);
       void layout();
       Space space() const;
 
@@ -67,11 +69,11 @@ class TimeSig : public Element {
       Fraction actualSig() const         { return _nominal / _stretch; }
       void setActualSig(const Fraction& f);
 
-      bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
+      bool acceptDrop(MuseScoreView*, const QPointF&, Element*) const;
       Element* drop(const DropData&);
 
-      Segment* segment() const { return (Segment*)parent(); }
-      Measure* measure() const { return (Measure*)parent()->parent(); }
+      Segment* segment() const           { return (Segment*)parent(); }
+      Measure* measure() const           { return (Measure*)parent()->parent(); }
 
       bool showCourtesySig() const       { return _showCourtesySig; };
       void setShowCourtesySig(bool v)    { _showCourtesySig = v;    };

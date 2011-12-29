@@ -819,7 +819,7 @@ void ExportMusicXml::calcDivisions()
                                     continue;
 
                               // must ignore start repeat to prevent spurious backup/forward
-                              if (el->type() == BAR_LINE && el->subtype() == START_REPEAT)
+                              if (el->type() == BAR_LINE && static_cast<BarLine*>(el)->subtype() == START_REPEAT)
                                     continue;
 
                               if (tick != seg->tick())
@@ -1875,7 +1875,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                         three-quarters-flat, and three-quarters-sharp
                     */
                   QString s;
-                  switch (acc->accidentalType()) {
+                  switch (acc->subtype()) {
                         case ACC_SHARP:
                               s = "sharp";
                               break;
@@ -1928,7 +1928,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                               s = "three-quarters-sharp";
                               break;
                         default:
-                              qDebug("unknown accidental %d\n", acc->accidentalType());
+                              qDebug("unknown accidental %d\n", acc->subtype());
                         }
                   if (editorial)
                         xml.tag("accidental editorial=\"yes\"", s);
@@ -2477,7 +2477,7 @@ void ExportMusicXml::words(Text* text, int staff)
              text->getText().toUtf8().data());
       */
       directionTag(xml, attr, text);
-      if (text->subtypeName() == "RehearsalMark") {
+      if (text->type() == REHEARSAL_MARK) {
             xml.stag("direction-type");
             xml.tag("rehearsal", text->getText());
             xml.etag();
@@ -2894,7 +2894,7 @@ static void directionMarker(Xml& xml, const Marker* const m)
 
 static int findTrackForAnnotations(int track, Segment* seg)
       {
-      if (seg->segmentType() != SegChordRest)
+      if (seg->subtype() != SegChordRest)
             return -1;
 
       int staff = track / VOICES;
@@ -2916,7 +2916,7 @@ static void repeatAtMeasureStart(Xml& xml, Attributes& attr, Measure* m, int str
       {
       // loop over all segments
       for (Segment* seg = m->first(); seg; seg = seg->next()) {
-            if (seg->segmentType() == SegChordRest) {
+            if (seg->subtype() == SegChordRest) {
                   foreach(const Element* e, seg->annotations()) {
 #ifdef DEBUG_REPEATS
                         qDebug("repeatAtMeasureStart seg %p elem %p type %d (%s) track %d",
@@ -2990,7 +2990,7 @@ static void repeatAtMeasureStop(Xml& xml, Measure* m, int strack, int etrack, in
       {
       // loop over all segments
       for (Segment* seg = m->first(); seg; seg = seg->next()) {
-            if (seg->segmentType() == SegChordRest) {
+            if (seg->subtype() == SegChordRest) {
                   foreach(const Element* e, seg->annotations()) {
 #ifdef DEBUG_REPEATS
                         qDebug("repeatAtMeasureStop seg %p elem %p type %d (%s) track %d",
@@ -3118,7 +3118,7 @@ static void measureStyle(Xml& xml, Attributes& attr, Measure* m)
 
 static void annotations(ExportMusicXml* exp, int strack, int etrack, int track, int sstaff, Segment* seg)
       {
-      if (seg->segmentType() == SegChordRest) {
+      if (seg->subtype() == SegChordRest) {
             foreach(const Element* e, seg->annotations()) {
 
                   int wtrack = -1; // track to write annotation
@@ -3172,7 +3172,7 @@ static void annotations(ExportMusicXml* exp, int strack, int etrack, int track, 
 
 static void spannerStart(ExportMusicXml* exp, int strack, int etrack, int track, int sstaff, Segment* seg)
       {
-      if (seg->segmentType() == SegChordRest) {
+      if (seg->subtype() == SegChordRest) {
             foreach(const Element* e, seg->spannerFor()) {
 
                   int wtrack = -1; // track to write spanner
@@ -3215,7 +3215,7 @@ static void spannerStart(ExportMusicXml* exp, int strack, int etrack, int track,
 
 static void spannerStop(ExportMusicXml* exp, int strack, int etrack, int track, int sstaff, Segment* seg)
       {
-      if (seg->segmentType() == SegChordRest) {
+      if (seg->subtype() == SegChordRest) {
             foreach(const Element* e, seg->spannerBack()) {
 
                   int wtrack = -1; // track to write spanner
@@ -3712,7 +3712,7 @@ void ExportMusicXml::write(QIODevice* dev)
                               if (!el)
                                     continue;
                               // must ignore start repeat to prevent spurious backup/forward
-                              if (el->type() == BAR_LINE && el->subtype() == START_REPEAT)
+                              if (el->type() == BAR_LINE && static_cast<BarLine*>(el)->subtype() == START_REPEAT)
                                     continue;
 
                               // look for harmony element for this tick position

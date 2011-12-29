@@ -45,7 +45,7 @@
 //---------------------------------------------------------
 
 Property<ChordRest> ChordRest::propertyList[] = {
-      { P_SMALL,  T_VARIANT, "small", &ChordRest::vSmall, &ChordRest::setSmall },
+      { P_SMALL,  T_BOOL, "small", &ChordRest::pSmall, false },
       };
 
 static const int PROPERTIES = sizeof(ChordRest::propertyList)/sizeof(*ChordRest::propertyList);
@@ -97,8 +97,8 @@ ChordRest::ChordRest(const ChordRest& cr)
       _beamMode           = cr._beamMode;
       _up                 = cr._up;
       _small              = cr._small;
-      _extraLeadingSpace  = cr.extraLeadingSpace();
-      _extraTrailingSpace = cr.extraTrailingSpace();
+//      _extraLeadingSpace  = cr.extraLeadingSpace();
+//      _extraTrailingSpace = cr.extraTrailingSpace();
       _space              = cr._space;
 
       foreach(Lyrics* l, cr._lyricsList) {        // make deep copy
@@ -145,12 +145,13 @@ void ChordRest::scanElements(void* data, void (*func)(void*, Element*), bool all
       }
 
 //---------------------------------------------------------
-//   properties
+//   writeProperties
 //---------------------------------------------------------
 
-QList<Prop> ChordRest::properties(Xml& xml, bool clipboardmode) const
+void ChordRest::writeProperties(Xml& xml) const
       {
-      QList<Prop> pl = DurationElement::properties(xml, clipboardmode);
+      Element::writeProperties(xml);
+
       //
       // BeamMode default:
       //    REST  - BEAM_NO
@@ -169,31 +170,17 @@ QList<Prop> ChordRest::properties(Xml& xml, bool clipboardmode) const
                   case BEAM_BEGIN64: s = "begin64"; break;
                   case BEAM_INVALID: s = "?"; break;
                   }
-            pl.append(Prop("BeamMode", s));
+            xml.tag("BeamMode", s);
             }
       if (_small)
-            pl.append(Prop("small", _small));
-      if (_extraLeadingSpace.val() != 0.0)
-            pl.append(Prop("leadingSpace", _extraLeadingSpace.val()));
-      if (_extraTrailingSpace.val() != 0.0)
-            pl.append(Prop("trailingSpace", _extraTrailingSpace.val()));
+            xml.tag("small", _small);
       if (durationType().dots())
-            pl.append(Prop("dots", durationType().dots()));
+            xml.tag("dots", durationType().dots());
       if (_staffMove)
-            pl.append(Prop("move", _staffMove));
+            xml.tag("move", _staffMove);
       if (durationType().isValid())
-            pl.append(Prop("durationType", durationType().name()));
-      return pl;
-      }
+            xml.tag("durationType", durationType().name());
 
-//---------------------------------------------------------
-//   writeProperties
-//---------------------------------------------------------
-
-void ChordRest::writeProperties(Xml& xml) const
-      {
-      QList<Prop> pl = properties(xml);
-      xml.prop(pl);
       if (!duration().isZero() && (!durationType().fraction().isValid()
          || (durationType().fraction() != duration())))
             xml.fTag("duration", duration());
@@ -219,7 +206,7 @@ void ChordRest::writeProperties(Xml& xml) const
 //   readProperties
 //---------------------------------------------------------
 
-bool ChordRest::readProperties(QDomElement e, QList<Tuplet*>* tuplets, QList<Spanner*>* spanner)
+bool ChordRest::readProperties(const QDomElement& e, QList<Tuplet*>* tuplets, QList<Spanner*>* spanner)
       {
       if (DurationElement::readProperties(e, tuplets, spanner))
             return true;
@@ -252,10 +239,14 @@ bool ChordRest::readProperties(QDomElement e, QList<Tuplet*>* tuplets, QList<Spa
             atr->read(e);
             add(atr);
             }
-      else if (tag == "leadingSpace")
-            _extraLeadingSpace = Spatium(val.toDouble());
-      else if (tag == "trailingSpace")
-            _extraTrailingSpace = Spatium(val.toDouble());
+      else if (tag == "leadingSpace") {
+            if (debugMode)
+                  qDebug("ChordRest: leadingSpace obsolete"); // _extraLeadingSpace = Spatium(val.toDouble());
+            }
+      else if (tag == "trailingSpace") {
+            if (debugMode)
+                  qDebug("ChordRest: trailingSpace obsolete"); // _extraTrailingSpace = Spatium(val.toDouble());
+            }
       else if (tag == "Beam") {
             Beam* beam = 0;
             foreach(Beam* b, score()->beams) {
@@ -816,14 +807,13 @@ void ChordRest::setBeam(Beam* b)
 
 void ChordRest::toDefault()
       {
-      score()->undoChangeChordRestSpace(this, Spatium(0.0), Spatium(0.0));
       score()->undoChangeUserOffset(this, QPointF());
       if (type() == CHORD) {
-            score()->undo()->push(new ChangeProperty(this, P_STEM_DIRECTION, int(AUTO)));
-            score()->undo()->push(new ChangeBeamMode(this, BEAM_AUTO));
+            score()->undoChangeProperty(this, P_STEM_DIRECTION, int(AUTO));
+            score()->undo(new ChangeBeamMode(this, BEAM_AUTO));
             }
       else {
-            score()->undo()->push(new ChangeBeamMode(this, BEAM_NO));
+            score()->undo(new ChangeBeamMode(this, BEAM_NO));
             }
       }
 
@@ -983,7 +973,7 @@ QVariant ChordRest::getProperty(int propertyId) const
       {
       for (int i = 0; i < PROPERTIES; ++i) {
             if (propertyList[i].id == propertyId)
-                  return ((*this).*(propertyList[i].get))();
+                  return ::getProperty(propertyList[i].type, ((*(ChordRest*)this).*(propertyList[i].data))());
             }
       return Element::getProperty(propertyId);
       }
@@ -992,16 +982,16 @@ QVariant ChordRest::getProperty(int propertyId) const
 //   setProperty
 //---------------------------------------------------------
 
-void ChordRest::setProperty(int propertyId, const QVariant& v)
+bool ChordRest::setProperty(int propertyId, const QVariant& v)
       {
       for (int i = 0; i < PROPERTIES; ++i) {
             if (propertyList[i].id == propertyId) {
-                  ((*this).*(propertyList[i].set))(v);
+                  ::setProperty(propertyList[i].type, ((*this).*(propertyList[i].data))(), v);
                   setGenerated(false);
-                  return;
+                  return true;
                   }
             }
-      Element::setProperty(propertyId, v);
+      return Element::setProperty(propertyId, v);
       }
 
 

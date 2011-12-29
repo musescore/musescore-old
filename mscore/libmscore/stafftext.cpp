@@ -56,13 +56,13 @@ void StaffText::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void StaffText::read(QDomElement e)
+void StaffText::read(const QDomElement& de)
       {
       for (int voice = 0; voice < VOICES; ++voice)
             _channelNames[voice].clear();
       clearAeolusStops();
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            const QString& tag(e.tagName());
             if (tag == "MidiAction") {
                   int channel = e.attribute("channel", 0).toInt();
                   QString name = e.attribute("name");
@@ -104,7 +104,6 @@ void StaffText::read(QDomElement e)
             else if (!Text::readProperties(e))
                   domError(e);
             }
-//      cursorPos = 0;
       }
 
 //---------------------------------------------------------

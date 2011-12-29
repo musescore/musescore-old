@@ -94,9 +94,9 @@ void Image::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Image::read(QDomElement e)
+void Image::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             if (tag == "path")
                   setPath(e.text());
@@ -181,7 +181,6 @@ void Image::endEdit()
       {
       }
 
-#ifdef SVG_IMAGES
 //---------------------------------------------------------
 //   SvgImage
 //---------------------------------------------------------
@@ -245,7 +244,6 @@ void SvgImage::setPath(const QString& s)
             _dirty = true;
             }
       }
-#endif
 
 //---------------------------------------------------------
 //   RasterImage

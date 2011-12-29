@@ -184,9 +184,9 @@ Articulation::Articulation(Score* s)
 //   setSubtype
 //---------------------------------------------------------
 
-void Articulation::setSubtype(int idx)
+void Articulation::setSubtype(ArticulationType idx)
       {
-      Element::setSubtype(idx);
+      _subtype = idx;
       _anchor = score()->style()->articulationAnchor(idx);
       }
 
@@ -194,14 +194,14 @@ void Articulation::setSubtype(int idx)
 //   read
 //---------------------------------------------------------
 
-void Articulation::read(QDomElement e)
+void Articulation::read(const QDomElement& de)
       {
-      setSubtype(0);    // default
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      setSubtype(Articulation_Staccato);    // default
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
-            if (tag == "idx")                         // obsolete
-                  setSubtype(val.toInt());
+            if (tag == "subtype")
+                  setSubtype(val);
             else if (tag == "channel")
                   _channelName = e.attribute("name");
             else if (tag == "anchor")
@@ -242,9 +242,9 @@ void Articulation::write(Xml& xml) const
             case AUTO:
                   break;
             }
+      xml.tag("subtype", subtypeName());
       Element::writeProperties(xml);
-      int t = subtype();
-      if (_anchor != score()->style()->articulationAnchor(t))
+      if (_anchor != score()->style()->articulationAnchor(subtype()))
             xml.tag("anchor", int(_anchor));
       xml.etag();
       }
@@ -274,7 +274,7 @@ qreal Articulation::timeStretch() const
 void Articulation::setSubtype(const QString& s)
       {
       if (s[0].isDigit()) {         // for backward compatibility
-            setSubtype(s.toInt());
+            setSubtype(ArticulationType(s.toInt()));
             return;
             }
       int st;
@@ -318,7 +318,7 @@ void Articulation::setSubtype(const QString& s)
                   qDebug("Articulation: unknown <%s>\n", qPrintable(s));
                   }
             }
-      setSubtype(st);
+      setSubtype(ArticulationType(st));
       }
 
 //---------------------------------------------------------
@@ -435,10 +435,10 @@ void Articulation::setDirection(Direction d)
 void Articulation::toDefault()
       {
       if (_direction != AUTO)
-            score()->undo()->push(new ChangeProperty(this, P_DIRECTION, int(AUTO)));
+            score()->undoChangeProperty(this, P_DIRECTION, int(AUTO));
       ArticulationAnchor a = score()->style()->articulationAnchor(subtype());
       if (_anchor != a)
-            score()->undo()->push(new ChangeProperty(this, P_ARTICULATION_ANCHOR, int(a)));
+            score()->undoChangeProperty(this, P_ARTICULATION_ANCHOR, int(a));
       Element::toDefault();
       if (chordRest())
             chordRest()->layoutArticulations();
@@ -472,18 +472,19 @@ QVariant Articulation::getProperty(int propertyId) const
 //   setProperty
 //---------------------------------------------------------
 
-void Articulation::setProperty(int propertyId, const QVariant& v)
+bool Articulation::setProperty(int propertyId, const QVariant& v)
       {
       score()->addRefresh(canvasBoundingRect());
       switch(propertyId) {
             case P_DIRECTION:           setDirection(Direction(v.toInt())); break;
             case P_ARTICULATION_ANCHOR: setAnchor(ArticulationAnchor(v.toInt())); break;
             default:
-                  Element::setProperty(propertyId, v);
+                  return Element::setProperty(propertyId, v);
             }
       if (chordRest())
             chordRest()->layoutArticulations();
       score()->addRefresh(canvasBoundingRect());
       score()->setLayoutAll(false);       //DEBUG
+      return true;
       }
 

@@ -22,8 +22,6 @@
 
 class RehearsalMark : public Text  {
 
-      virtual QString subtypeName() const { return QString(); }   // has no subtype
-
    public:
       RehearsalMark(Score* score);
       virtual RehearsalMark* clone() const { return new RehearsalMark(*this); }

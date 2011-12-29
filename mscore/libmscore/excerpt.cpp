@@ -40,11 +40,11 @@
 //   read
 //---------------------------------------------------------
 
-void Excerpt::read(QDomElement e)
+void Excerpt::read(const QDomElement& de)
       {
       const QList<Part*>* pl = _score->parts();
       QString name;
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag = e.tagName();
             if (tag == "name")
                   name = e.text();

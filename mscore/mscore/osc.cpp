@@ -101,10 +101,10 @@ void MuseScore::initOsc()
       QObject::connect(oo, SIGNAL(data(int)), SLOT(oscCloseAll()));
       oo = new PathObject( "/plugin", QVariant::String, osc);
       QObject::connect(oo, SIGNAL(data(QString)), SLOT(oscTriggerPlugin(QString)));
-      
+
       oo = new PathObject( "/color-note", QVariant::String, osc);
       QObject::connect(oo, SIGNAL(data(QString)), SLOT(oscColorNote(QString)));
-      
+
       }
 
 //---------------------------------------------------------
@@ -168,8 +168,8 @@ void MuseScore::oscOpen(QString path)
       qDebug("Open %s", qPrintable(path));
       openScore(path);
       }
-      
-      
+
+
 void MuseScore::oscCloseAll()
       {
       qDebug("CloseAll");
@@ -196,7 +196,7 @@ void MuseScore::oscTempo(int val)
 
 //---------------------------------------------------------
 //   oscTriggerPlugin
-//---------------------------------------------------------        
+//---------------------------------------------------------
 void MuseScore::oscTriggerPlugin(QString s)
       {
       QStringList args = s.split(",");
@@ -211,10 +211,10 @@ void MuseScore::oscTriggerPlugin(QString s)
                   }
             }
       }
-      
+
 //---------------------------------------------------------
 //   oscColorNote
-//---------------------------------------------------------        
+//---------------------------------------------------------
 void MuseScore::oscColorNote(QString s)
       {
       if(!cs)
@@ -241,11 +241,11 @@ void MuseScore::oscColorNote(QString s)
                                     Note* note = chord->notes()[idx];
                                     if (note->pitch() == pitch) {
                                           cs->startCmd();
-                                          cs->undo()->push(new ChangeProperty(note, P_COLOR, QColor("red")));
+                                          cs->undo(new ChangeProperty(note, P_COLOR, QColor("red")));
                                           cs->endCmd();
                                           cs->end();
                                           return;
-                                          }     
+                                          }
                                     }
                               }
                         }

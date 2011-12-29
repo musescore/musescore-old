@@ -71,7 +71,7 @@ class Marker : public Text {
       Segment* segment() const         { return (Segment*)parent(); }
       Measure* measure() const         { return (Measure*)parent()->parent(); }
 
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       virtual void write(Xml& xml) const;
 
 
@@ -114,7 +114,7 @@ class Jump : public Text {
       virtual Jump* clone() const      { return new Jump(*this); }
       virtual ElementType type() const { return JUMP; }
 
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       virtual void write(Xml& xml) const;
 
       QString jumpTo()               const { return _jumpTo;     }

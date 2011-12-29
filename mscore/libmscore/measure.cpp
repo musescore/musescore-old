@@ -625,9 +625,9 @@ Segment* Measure::tick2segment(int tick, bool grace) const
       {
       for (Segment* s = first(); s; s = s->next()) {
             if (s->tick() == tick) {
-                  if (grace && (s->segmentType() == SegGrace))
+                  if (grace && (s->subtype() == SegGrace))
                         return s;
-                  if (s->segmentType() == SegChordRest)
+                  if (s->subtype() == SegChordRest)
                         return s;
                   }
             if (s->tick() > tick)
@@ -864,7 +864,7 @@ void Measure::add(Element* el)
                               score()->staff(track/VOICES)->setUpdateKeymap(true);
                         }
                   int t  = seg->tick();
-                  int st = el->subtype();
+                  SegmentType st = seg->subtype();
                   if (seg->prev() || seg->next()) {
                         //
                         // undo operation
@@ -975,11 +975,12 @@ void Measure::remove(Element* el)
 
       switch(el->type()) {
             case SPACER:
-                  if (el->subtype() == SPACER_DOWN)
+                  if (static_cast<Spacer*>(el)->subtype() == SPACER_DOWN)
                         staves[el->staffIdx()]->_vspacerDown = 0;
-                  else if (el->subtype() == SPACER_UP)
+                  else if (static_cast<Spacer*>(el)->subtype() == SPACER_UP)
                         staves[el->staffIdx()]->_vspacerUp = 0;
                   break;
+
             case SEGMENT:
                   remove(static_cast<Segment*>(el));
                   break;
@@ -1152,10 +1153,10 @@ qDebug("cmdRemoveStaves %d-%d", sStaff, eStaff);
                   _score->undoRemoveElement(e);
             }
 
-      _score->undo()->push(new RemoveStaves(this, sStaff, eStaff));
+      _score->undo(new RemoveStaves(this, sStaff, eStaff));
 
       for (int i = eStaff - 1; i >= sStaff; --i)
-            _score->undo()->push(new RemoveMStaff(this, *(staves.begin()+i), i));
+            _score->undo(new RemoveMStaff(this, *(staves.begin()+i), i));
 
       for (int i = 0; i < staves.size(); ++i)
             staves[i]->lines->setTrack(i * VOICES);
@@ -1170,7 +1171,7 @@ qDebug("cmdRemoveStaves %d-%d", sStaff, eStaff);
 
 void Measure::cmdAddStaves(int sStaff, int eStaff, bool createRest)
       {
-      _score->undo()->push(new InsertStaves(this, sStaff, eStaff));
+      _score->undo(new InsertStaves(this, sStaff, eStaff));
 
       Segment* ts = findSegment(SegTimeSig, tick());
 
@@ -1183,7 +1184,7 @@ void Measure::cmdAddStaves(int sStaff, int eStaff, bool createRest)
             ms->lines->setParent(this);
             ms->lines->setVisible(!staff->invisible());
 
-            _score->undo()->push(new InsertMStaff(this, ms, i));
+            _score->undo(new InsertMStaff(this, ms, i));
 
             if (createRest) {
                   Rest* rest = new Rest(score(), TDuration(TDuration::V_MEASURE));
@@ -1299,8 +1300,9 @@ QRectF Measure::staffabbox(int staffIdx) const
  and key- and timesig (allow drop if left of first chord or rest).
 */
 
-bool Measure::acceptDrop(MuseScoreView* viewer, const QPointF& p, int type, int) const
+bool Measure::acceptDrop(MuseScoreView* viewer, const QPointF& p, Element* e) const
       {
+      int type = e->type();
       // convert p from canvas to measure relative position and take x and y coordinates
       QPointF mrp = p - canvasPos(); // pos() - system()->pos() - system()->page()->pos();
       qreal mrpx = mrp.x();
@@ -1455,7 +1457,7 @@ qDebug("drop staffList");
                   break;
 
             case CLEF:
-                  score()->undoChangeClef(staff, first(), ClefType(e->subtype()));
+                  score()->undoChangeClef(staff, first(), static_cast<Clef*>(e)->clefType());
                   delete e;
                   break;
 
@@ -1507,8 +1509,8 @@ qDebug("drop staffList");
                   if ((lb->subtype() != LAYOUT_BREAK_SECTION) && (_pageBreak || _lineBreak)) {
                         foreach(Element* le, _el) {
                               if (le->type() == LAYOUT_BREAK
-                                 && (le->subtype() == LAYOUT_BREAK_LINE
-                                  || le->subtype() == LAYOUT_BREAK_PAGE)) {
+                                 && (static_cast<LayoutBreak*>(le)->subtype() == LAYOUT_BREAK_LINE
+                                  || static_cast<LayoutBreak*>(le)->subtype() == LAYOUT_BREAK_PAGE)) {
                                     score()->undoChangeElement(le, e);
                                     break;
                                     }
@@ -1531,7 +1533,7 @@ qDebug("drop staffList");
                   }
 
             case BAR_LINE:
-                  score()->undoChangeBarLine(this, static_cast<BarLine*>(e)->barLineType());
+                  score()->undoChangeBarLine(this, static_cast<BarLine*>(e)->subtype());
                   delete e;
                   break;
 
@@ -1809,7 +1811,7 @@ void Measure::write(Xml& xml) const
 //   Measure::read
 //---------------------------------------------------------
 
-void Measure::read(QDomElement e, int staffIdx)
+void Measure::read(const QDomElement& de, int staffIdx)
       {
       QList<Tuplet*> tuplets;
 
@@ -1830,18 +1832,18 @@ void Measure::read(QDomElement e, int staffIdx)
             }
 
       // tick is obsolete
-      if (e.hasAttribute("tick"))
-            score()->curTick = score()->fileDivision(e.attribute("tick").toInt());
+      if (de.hasAttribute("tick"))
+            score()->curTick = score()->fileDivision(de.attribute("tick").toInt());
       setTick(score()->curTick);
 
       const SigEvent& sigEvent = score()->sigmap()->timesig(tick());
       _timesig  = sigEvent.nominal();
-      if (e.hasAttribute("len")) {
-            QStringList sl = e.attribute("len").split('/');
+      if (de.hasAttribute("len")) {
+            QStringList sl = de.attribute("len").split('/');
             if (sl.size() == 2)
                   _len = Fraction(sl[0].toInt(), sl[1].toInt());
             else
-                  qDebug("illegal measure size <%s>", qPrintable(e.attribute("len")));
+                  qDebug("illegal measure size <%s>", qPrintable(de.attribute("len")));
             irregular = true;
             score()->sigmap()->add(tick(), SigEvent(_len, _timesig));
             score()->sigmap()->add(tick() + ticks(), SigEvent(_timesig));
@@ -1853,7 +1855,7 @@ void Measure::read(QDomElement e, int staffIdx)
 
       Staff* staff = score()->staff(staffIdx);
 
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
 
@@ -1871,7 +1873,7 @@ void Measure::read(QDomElement e, int staffIdx)
                         segment = getSegment(SegStartRepeatBarLine, score()->curTick);
                   else {
                         // setEndBarLineType(barLine->barLineType(), false, barLine->visible(), barLine->color());
-                        setEndBarLineType(barLine->barLineType(), false, true, Qt::black);
+                        setEndBarLineType(barLine->subtype(), false, true, Qt::black);
                         Staff* staff = score()->staff(staffIdx);
                         barLine->setSpan(staff->barLineSpan());
                         segment = getSegment(SegEndBarLine, score()->curTick);
@@ -1909,14 +1911,14 @@ void Measure::read(QDomElement e, int staffIdx)
                         //
                         Tremolo* tremolo = chord->tremolo();
                         TremoloType st;
-                        switch(tremolo->subtype()) {
+                        switch (tremolo->subtype()) {
                               default:
-                              case 0: st = TREMOLO_R8;  break;
-                              case 1: st = TREMOLO_R16; break;
-                              case 2: st = TREMOLO_R32; break;
-                              case 3: st = TREMOLO_C8;  break;
-                              case 4: st = TREMOLO_C16; break;
-                              case 5: st = TREMOLO_C32; break;
+                              case OLD_TREMOLO_R8:  st = TREMOLO_R8;  break;
+                              case OLD_TREMOLO_R16: st = TREMOLO_R16; break;
+                              case OLD_TREMOLO_R32: st = TREMOLO_R32; break;
+                              case OLD_TREMOLO_C8:  st = TREMOLO_C8;  break;
+                              case OLD_TREMOLO_C16: st = TREMOLO_C16; break;
+                              case OLD_TREMOLO_C32: st = TREMOLO_C32; break;
                               }
                         tremolo->setSubtype(st);
                         if (tremolo->twoNotes()) {
@@ -2126,11 +2128,9 @@ void Measure::read(QDomElement e, int staffIdx)
                         path = ee.text();
                   Image* image = 0;
                   QString s(path.toLower());
-#ifdef SVG_IMAGES
                   if (s.endsWith(".svg"))
                         image = new SvgImage(score());
                   else
-#endif
                         if (s.endsWith(".jpg")
                      || s.endsWith(".png")
                      || s.endsWith(".xpm")
@@ -2220,7 +2220,7 @@ void Measure::read(QDomElement e, int staffIdx)
             Segment* s = last();
             if (s && s->subtype() == SegBarLine) {
                   BarLine* b = static_cast<BarLine*>(s->element(0));
-                  setEndBarLineType(b->barLineType(), false, b->visible(), b->color());
+                  setEndBarLineType(b->subtype(), false, b->visible(), b->color());
                   // s->remove(b);
                   // delete b;
                   }
@@ -2230,7 +2230,7 @@ void Measure::read(QDomElement e, int staffIdx)
       //
       int endTick = tick();
       for (Segment* s = last(); s; s = s->prev()) {
-            if (s->segmentType() == SegChordRest) {
+            if (s->subtype() == SegChordRest) {
                   if (s->element(0)) {
                         ChordRest* cr = static_cast<ChordRest*>(s->element(0));
                         endTick = cr->tick() + cr->actualTicks();
@@ -2244,7 +2244,7 @@ void Measure::read(QDomElement e, int staffIdx)
                   // this is a irregular measure
                   _len = Fraction::fromTicks(endTick - tick());
                   _len.reduce();
-                  if (last() && last()->segmentType() == SegBarLine)
+                  if (last() && last()->subtype() == SegBarLine)
                         last()->setSubtype(SegEndBarLine);
                   }
             }
@@ -2362,7 +2362,7 @@ bool Measure::setStartRepeatBarLine(bool val)
                   // no barline were we need one:
                   bl = new BarLine(score());
                   bl->setTrack(track);
-                  bl->setBarLineType(START_REPEAT);
+                  bl->setSubtype(START_REPEAT);
                   if (s == 0)
                         s = undoGetSegment(SegStartRepeatBarLine, tick());
                   bl->setParent(s);
@@ -2434,15 +2434,15 @@ bool Measure::createEndBarLines()
                               bl->setVisible(_endBarLineVisible);
                               bl->setColor(_endBarLineColor);
                               bl->setGenerated(bl->el()->isEmpty() && _endBarLineGenerated);
-                              bl->setBarLineType(et);
+                              bl->setSubtype(et);
                               seg = undoGetSegment(SegEndBarLine, tick() + ticks());
                               bl->setParent(seg);
                               bl->setTrack(track);
                               score()->undoAddElement(bl);
                               changed = true;
                               }
-                        else if (bl->barLineType() != et) {
-                              score()->undoChangeSubtype(bl, et);
+                        else if (bl->subtype() != et) {
+                              score()->undoChangeProperty(bl, P_SUBTYPE, et);
                               bl->setGenerated(bl->el()->isEmpty() && _endBarLineGenerated);
                               changed = true;
                               }
@@ -2775,7 +2775,7 @@ void Measure::layoutX(qreal stretch)
                   continue;
                   }
             bool rest2[nstaves+1];
-            SegmentType segType    = s->segmentType();
+            SegmentType segType    = s->subtype();
             types[segmentIdx]      = segType;
             qreal segmentWidth    = 0.0;
             qreal stretchDistance = 0.0;

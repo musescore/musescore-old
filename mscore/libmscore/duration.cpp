@@ -69,6 +69,7 @@ int DurationElement::actualTicks() const
       return Fraction(staff()->timeStretch(tick()) * globalDuration()).ticks();
       }
 
+#if 0
 //---------------------------------------------------------
 //   properties
 //---------------------------------------------------------
@@ -80,12 +81,13 @@ QList<Prop> DurationElement::properties(Xml& xml, bool /*clipboardmode*/) const
             pl.append(Prop("Tuplet", tuplet()->id()));
       return pl;
       }
+#endif
 
 //---------------------------------------------------------
 //   readProperties
 //---------------------------------------------------------
 
-bool DurationElement::readProperties(QDomElement e, QList<Tuplet*>* tuplets, const QList<Spanner*>*)
+bool DurationElement::readProperties(const QDomElement& e, QList<Tuplet*>* tuplets, const QList<Spanner*>*)
       {
       if (Element::readProperties(e))
             return true;

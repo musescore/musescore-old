@@ -33,8 +33,8 @@ ChordProperties::ChordProperties(const Note* note, QWidget* parent)
       const Chord* chord = note->chord();
       smallCheckBox->setChecked(chord->small());
       noStemCheckBox->setChecked(chord->noStem());
-      extraLeadingSpace->setValue(chord->extraLeadingSpace().val());
-      extraTrailingSpace->setValue(chord->extraTrailingSpace().val());
+//      extraLeadingSpace->setValue(chord->extraLeadingSpace().val());
+//      extraTrailingSpace->setValue(chord->extraTrailingSpace().val());
       tuningSpinBox->setValue(note->tuning());
       userMirror->setCurrentIndex(int(note->userMirror()));
       stemDirection->setCurrentIndex(int(chord->stemDirection()));
@@ -173,24 +173,6 @@ bool ChordProperties::noStem() const
 int ChordProperties::getStemDirection() const
       {
       return stemDirection->currentIndex();
-      }
-
-//---------------------------------------------------------
-//   leadingSpace
-//---------------------------------------------------------
-
-double ChordProperties::leadingSpace() const
-      {
-      return extraLeadingSpace->value();
-      }
-
-//---------------------------------------------------------
-//   trailingSpace
-//---------------------------------------------------------
-
-double ChordProperties::trailingSpace() const
-      {
-      return extraTrailingSpace->value();
       }
 
 //---------------------------------------------------------

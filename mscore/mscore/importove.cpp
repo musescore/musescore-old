@@ -744,7 +744,7 @@ void OveToMScore::convertSignatures(){
 		Measure* measure  = score_->tick2measure(tt.tick_);
 		if(measure){
 			for(int staffIdx = 0; staffIdx < score_->nstaves(); ++staffIdx) {
-				int subtype = 0;
+				TimeSigType subtype = TSIG_NORMAL;
 				if(tt.numerator_ == 4 && tt.denominator_ == 4 && tt.isSymbol_ ){
 					subtype = TSIG_FOUR_FOUR;
 				} else if(tt.numerator_ == 2 && tt.denominator_ == 2 && tt.isSymbol_ ){
@@ -1805,11 +1805,11 @@ void OveToMScore::convertArticulation(
         // there can be only one
         if (!(static_cast<Chord*>(cr))->arpeggio()) {
         	Arpeggio* a = new Arpeggio(score_);
-        	a->setSubtype(0);
+        	a->setSubtype(ARP_NORMAL);
 /*      	if (art->getPlacementAbove()){
-				a->setSubtype(1);
+				a->setSubtype(ARP_UP);
 			}else {
-				a->setSubtype(2);
+				a->setSubtype(ARP_DOWN);
 			}*/
             cr->add(a);
         }
@@ -2142,7 +2142,7 @@ void OveToMScore::convertRepeats(Measure* measure, int part, int staff, int trac
                         s1->add(volta);
                         }
 
-			volta->setSubtype(Volta::VOLTA_CLOSED);
+			volta->setSubtype(VOLTA_CLOSED);
 			volta->setText(ending->getText());
 
 			volta->endings().clear();

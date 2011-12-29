@@ -20,18 +20,6 @@
 #include "property.h"
 
 //---------------------------------------------------------
-//   Property
-//---------------------------------------------------------
-
-class Prop {
-   public:
-      const char* name;
-      QVariant data;
-      Prop() {}
-      Prop(const char* n, const QVariant& d) : name(n), data(d) {}
-      };
-
-//---------------------------------------------------------
 //   Xml
 //---------------------------------------------------------
 
@@ -74,14 +62,11 @@ class Xml : public QTextStream {
       void ntag(const char* name);
       void netag(const char* name);
 
-      void prop(const Prop& p)  { tag(p.name, p.data); }
-      void prop(QList<Prop> pl) { foreach(Prop p, pl) prop(p); }
-
       void tag(const QString& name, QVariant data);
       void tag(const char* name, const char* s)    { tag(name, QVariant(s)); }
       void tag(const char* name, const QString& s) { tag(name, QVariant(s)); }
       void tag(const char* name, const QWidget*);
-      void tag(const char* name, P_DATA_TYPE type, QVariant data);
+      void tag(const char* name, P_DATA_TYPE type, void* data, void* defaultVal);
 
       void writeHtml(const QString& s);
       void dump(int len, const unsigned char* p);
@@ -90,6 +75,16 @@ class Xml : public QTextStream {
       static void htmlToString(const QDomElement&, int level, QString*);
       static QString htmlToString(const QDomElement&);
       };
+
+//---------------------------------------------------------
+//   compareProperty
+//---------------------------------------------------------
+
+template <class T>
+bool compareProperty(void* val, void* defaultVal)
+      {
+      return (defaultVal == 0) || (*(T*)val != *(T*)defaultVal);
+      }
 
 extern Placement readPlacement(const QDomElement&);
 extern ValueType readValueType(const QDomElement&);
@@ -101,6 +96,6 @@ extern QRectF readRectF(const QDomElement&);
 extern QColor readColor(const QDomElement&);
 extern void domError(const QDomElement&);
 extern void domNotImplemented(const QDomElement&);
-extern QVariant readVariant(P_DATA_TYPE, const QString&);
+// extern QVariant readVariant(P_DATA_TYPE, const QString&);
 #endif
 

@@ -85,7 +85,7 @@ static QScriptValue prototype_Measure_call(QScriptContext* context, QScriptEngin
                         else {
                               // remove line break
                               foreach(Element* e, *measure->el()) {
-                                    if (e->type() == LAYOUT_BREAK && e->subtype() == LAYOUT_BREAK_LINE) {
+                                    if (e->type() == LAYOUT_BREAK && static_cast<LayoutBreak*>(e)->subtype() == LAYOUT_BREAK_LINE) {
                                           measure->score()->undoRemoveElement(e);
                                           }
                                     }

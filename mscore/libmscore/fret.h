@@ -53,7 +53,7 @@ class FretDiagram : public Element {
       virtual ElementType type() const   { return FRET_DIAGRAM; }
       virtual void layout();
       virtual void write(Xml& xml) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       virtual QLineF dragAnchor() const;
       virtual QPointF pagePos() const;
 
@@ -77,7 +77,7 @@ class FretDiagram : public Element {
       virtual void add(Element*);
       virtual void remove(Element*);
 
-      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, Element*) const;
       virtual Element* drop(const DropData&);
 
       virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);

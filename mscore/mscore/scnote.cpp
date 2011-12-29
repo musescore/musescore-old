@@ -134,7 +134,7 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                         QColor c = qscriptvalue_cast<QColor>(context->argument(0));
                         Score* score = note->score();
                         if (score)
-                              score->undo()->push(new ChangeProperty(note, P_COLOR, c));
+                              score->undo(new ChangeProperty(note, P_COLOR, c));
                         else
                               note->setColor(c);
                         return context->engine()->undefinedValue();
@@ -200,7 +200,7 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                       if(v < HEAD_GROUPS) {
                             Score* score = note->score();
                             if (score)
-                                  score->undo()->push(new ChangeNoteHead(note, v, note->headType()));
+                                  score->undo(new ChangeNoteHead(note, v, note->headType()));
                             else
                                   note->setHeadGroup(v);
                             }
@@ -217,14 +217,14 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                            return context->engine()->undefinedValue();
                       if(v < 0) {
                             if (note->veloType() != AUTO_VAL) {
-                                  score->undo()->push(new ChangeNoteProperties(note,
+                                  score->undo(new ChangeNoteProperties(note,
                                       AUTO_VAL, note->veloOffset(),
                                       note->onTimeUserOffset(), note->offTimeUserOffset()));
                                       //score->updateVelo();
                                   }
                            }
                       else if (v < 127) {
-                            score->undo()->push(new ChangeNoteProperties(note,
+                            score->undo(new ChangeNoteProperties(note,
                                  USER_VAL, v,
                                  note->onTimeUserOffset(), note->offTimeUserOffset()));
                             }

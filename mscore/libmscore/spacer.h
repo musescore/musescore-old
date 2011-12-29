@@ -18,15 +18,20 @@
 
 class QPainter;
 
-// spacer subtypes
-enum { SPACER_UP, SPACER_DOWN };
+//---------------------------------------------------------
+//   SpacerType
+//---------------------------------------------------------
+
+enum SpacerType {
+      SPACER_UP, SPACER_DOWN
+      };
 
 //---------------------------------------------------------
 //   Spacer
 //---------------------------------------------------------
 
 class Spacer : public Element {
-//      PROPERTY(qreal, gap, Gap)
+      SpacerType _subtype;
       qreal _gap;
 
       QPainterPath path;
@@ -38,14 +43,16 @@ class Spacer : public Element {
       Spacer(const Spacer&);
       virtual Spacer* clone() const    { return new Spacer(*this); }
       virtual ElementType type() const { return SPACER; }
+      SpacerType subtype() const { return _subtype; }
+      void subtype(SpacerType t) { _subtype = t;    }
+      void setSubtype(SpacerType val);
 
       virtual void write(Xml&) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       virtual void draw(QPainter*) const;
       virtual bool isEditable() const { return true; }
       virtual void editDrag(const EditData&);
       virtual void updateGrips(int*, QRectF*) const;
-      virtual void setSubtype(int val);
       virtual void spatiumChanged(qreal, qreal);
       void setGap(qreal sp);
       qreal gap() const     { return _gap; }

@@ -201,9 +201,9 @@ void KeyList::write(Xml& xml, const char* name) const
 //   KeyList::read
 //---------------------------------------------------------
 
-void KeyList::read(QDomElement e, Score* cs)
+void KeyList::read(const QDomElement& de, Score* cs)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             if (tag == "key") {
                   KeySigEvent ke;

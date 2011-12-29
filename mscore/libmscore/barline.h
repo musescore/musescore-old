@@ -25,6 +25,7 @@ class QPainter;
 //---------------------------------------------------------
 
 class BarLine : public Element {
+      BarLineType _subtype;
       int _span;
       qreal yoff;       // used during drag edit to extend y2
 
@@ -32,6 +33,7 @@ class BarLine : public Element {
       ElementList _el;        ///< fermata or other articulations
 
       void drawDots(QPainter* painter, qreal x) const;
+      void* pSubtype() { return &_subtype; }
 
    public:
       BarLine(Score*);
@@ -40,7 +42,7 @@ class BarLine : public Element {
       virtual BarLine* clone() const   { return new BarLine(*this); }
       virtual ElementType type() const { return BAR_LINE; }
       virtual void write(Xml& xml) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       virtual void draw(QPainter*) const;
       virtual Space space() const;
       virtual QPointF pagePos() const;      ///< position in canvas coordinates
@@ -50,7 +52,7 @@ class BarLine : public Element {
       virtual void remove(Element*);
       virtual QPainterPath shape() const;
 
-      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, Element*) const;
       virtual Element* drop(const DropData&);
       void setSpan(int val)    { _span = val;  }
       int span() const         { return _span; }
@@ -64,15 +66,20 @@ class BarLine : public Element {
       virtual void updateGrips(int*, QRectF*) const;
       int tick() const;
 
-      virtual QString subtypeName() const;
-      virtual void setSubtype(const QString& s);
-      void setBarLineType(BarLineType i)  { Element::setSubtype(int(i));    }
-      BarLineType barLineType() const     { return BarLineType(subtype());  }
-
-      static BarLineType barLineType(const QString& s);
-
       ElementList* el()                { return &_el; }
       const ElementList* el() const    { return &_el; }
+
+      QString subtypeName() const;
+      void setSubtype(const QString& s);
+      void setSubtype(BarLineType i)   { _subtype = i;      }
+      BarLineType subtype() const      { return _subtype;  }
+
+      virtual QVariant getProperty(int propertyId) const;
+      virtual bool setProperty(int propertyId, const QVariant&);
+      virtual bool setProperty(const QString&, const QString&);
+
+      static Property<BarLine> propertyList[];
+      Property<BarLine>* property(int id) const;
       };
 
 #endif

@@ -1023,7 +1023,7 @@ static void partGroupStart(MusicXmlPartGroup* (&pgs)[MAX_PART_GROUPS], int n, in
             return;
             }
 
-      int bracketType = NO_BRACKET;
+      BracketType bracketType = NO_BRACKET;
       if (s == "")
             ;  //ignore
       else if (s == "brace")
@@ -1649,19 +1649,19 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                         BarLine* barLine = new BarLine(score);
                         bool visible = true;
                         if (barStyle == "light-heavy" && repeat == "backward") {
-                              barLine->setBarLineType(END_REPEAT);
+                              barLine->setSubtype(END_REPEAT);
                               }
                         else if (barStyle == "heavy-light" && repeat == "forward") {
-                              barLine->setBarLineType(START_REPEAT);
+                              barLine->setSubtype(START_REPEAT);
                               }
                         else if (barStyle == "light-heavy" && repeat.isEmpty())
-                              barLine->setBarLineType(END_BAR);
+                              barLine->setSubtype(END_BAR);
                         else if (barStyle == "regular")
-                              barLine->setBarLineType(NORMAL_BAR);
+                              barLine->setSubtype(NORMAL_BAR);
                         else if (barStyle == "dotted")
-                              barLine->setBarLineType(BROKEN_BAR);
+                              barLine->setSubtype(BROKEN_BAR);
                         else if (barStyle == "light-light")
-                              barLine->setBarLineType(DOUBLE_BAR);
+                              barLine->setSubtype(DOUBLE_BAR);
                         /*
                         else if (barStyle == "heavy-light")
                               ;
@@ -1669,14 +1669,14 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                               ;
                         */
                         else if (barStyle == "none") {
-                              barLine->setBarLineType(NORMAL_BAR);
+                              barLine->setSubtype(NORMAL_BAR);
                               visible = false;
                               }
                         else if (barStyle == "") {
                               if (repeat == "backward")
-                                    barLine->setBarLineType(END_REPEAT);
+                                    barLine->setSubtype(END_REPEAT);
                               else if (repeat == "forward")
-                                    barLine->setBarLineType(START_REPEAT);
+                                    barLine->setSubtype(START_REPEAT);
                               else
                                     qDebug("ImportXml: warning: empty bar type");
                               }
@@ -1691,9 +1691,9 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                               }
                         else {
                               if (loc == "right")
-                                    measure->setEndBarLineType(barLine->barLineType(), false, visible);
+                                    measure->setEndBarLineType(barLine->subtype(), false, visible);
                               else if (measure->prevMeasure())
-                                    measure->prevMeasure()->setEndBarLineType(barLine->barLineType(), false, visible);
+                                    measure->prevMeasure()->setEndBarLineType(barLine->subtype(), false, visible);
                               }
                         }
                   if (!(endingNumber.isEmpty() && endingType.isEmpty())) {
@@ -1720,7 +1720,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                                           }
                                     else if (endingType == "stop") {
                                           if (lastVolta) {
-                                                lastVolta->setSubtype(Volta::VOLTA_CLOSED);
+                                                lastVolta->setSubtype(VOLTA_CLOSED);
                                                 lastVolta->setEndElement(measure);
                                                 measure->addSpannerBack(lastVolta);
                                                 lastVolta = 0;
@@ -1731,7 +1731,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                                           }
                                     else if (endingType == "discontinue") {
                                           if (lastVolta) {
-                                                lastVolta->setSubtype(Volta::VOLTA_OPEN);
+                                                lastVolta->setSubtype(VOLTA_OPEN);
                                                 lastVolta->setEndElement(measure);
                                                 measure->addSpannerBack(lastVolta);
                                                 lastVolta = 0;
@@ -2675,7 +2675,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
             }
       if (beats != "" && beatType != "") {
             // determine if timesig is valid
-            int st  = TSIG_NORMAL;
+            TimeSigType st  = TSIG_NORMAL;
             int bts = 0; // the beats (max 4 separated by "+") as integer
             int btp = 0; // beat-type as integer
             if (beats == "2" && beatType == "2" && timeSymbol == "cut") {
@@ -3821,13 +3821,13 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       if (!arpeggioType.isEmpty()) {
             Arpeggio* a = new Arpeggio(score);
             if (arpeggioType == "none")
-                  a->setSubtype(0);
+                  a->setSubtype(ARP_NORMAL);
             else if (arpeggioType == "up")
-                  a->setSubtype(1);
+                  a->setSubtype(ARP_UP);
             else if (arpeggioType == "down")
-                  a->setSubtype(2);
+                  a->setSubtype(ARP_DOWN);
             else if (arpeggioType == "non-arpeggiate")
-                  a->setSubtype(3);
+                  a->setSubtype(ARP_BRACKET);
             else {
                   qDebug("unknown arpeggio type %s", arpeggioType.toLatin1().data());
                   delete a;
@@ -3919,7 +3919,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       // add simple articulations
       for (int i = 0; i < articulations.size(); ++i) {
             Articulation* na = new Articulation(score);
-            na->setSubtype(articulations.at(i));
+            na->setSubtype(ArticulationType(articulations.at(i)));
             cr->add(na);
             }
 

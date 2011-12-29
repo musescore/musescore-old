@@ -24,6 +24,17 @@
 #include "mscore.h"
 
 //---------------------------------------------------------
+//   propertyList
+//---------------------------------------------------------
+
+static int defaultSubtype = 0;
+
+Property<Hairpin> Hairpin::propertyList[] = {
+      { P_SUBTYPE,  T_INT, "subtype", &Hairpin::pSubtype, &defaultSubtype },
+      };
+static const int PROPERTIES = sizeof(Hairpin::propertyList)/sizeof(*Hairpin::propertyList);
+
+//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
@@ -44,7 +55,7 @@ void HairpinSegment::layout()
 
       if (hairpin()->subtype() == 0) {
             // crescendo
-            switch(spannerSegmentType()) {
+            switch (subtype()) {
                   case SEGMENT_SINGLE:
                   case SEGMENT_BEGIN:
                         l1 = QLineF(.0, .0, len, h1);
@@ -59,7 +70,7 @@ void HairpinSegment::layout()
             }
       else {
             // decrescendo
-            switch(spannerSegmentType()) {
+            switch(subtype()) {
                   case SEGMENT_SINGLE:
                   case SEGMENT_END:
                         l1 = QLineF(.0,  h1, len, 0.0);
@@ -143,13 +154,13 @@ void Hairpin::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Hairpin::read(QDomElement e)
+void Hairpin::read(const QDomElement& de)
       {
       foreach(SpannerSegment* seg, spannerSegments())
             delete seg;
       spannerSegments().clear();
-      setId(e.attribute("id", "-1").toInt());
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      setId(de.attribute("id", "-1").toInt());
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             int val = e.text().toInt();
             if (tag == "veloChange")
@@ -159,5 +170,61 @@ void Hairpin::read(QDomElement e)
             else if (!SLine::readProperties(e))
                   domError(e);
             }
+      }
+
+//---------------------------------------------------------
+//   property
+//---------------------------------------------------------
+
+Property<Hairpin>* Hairpin::property(int id) const
+      {
+      for (int i = 0; i < PROPERTIES; ++i) {
+            if (propertyList[i].id == id)
+                  return &propertyList[i];
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   getProperty
+//---------------------------------------------------------
+
+QVariant Hairpin::getProperty(int propertyId) const
+      {
+      Property<Hairpin>* p = property(propertyId);
+      if (p)
+            return ::getProperty(p->type, ((*(Hairpin*)this).*(p->data))());
+      return Element::getProperty(propertyId);
+      }
+
+//---------------------------------------------------------
+//   setProperty
+//---------------------------------------------------------
+
+bool Hairpin::setProperty(int propertyId, const QVariant& v)
+      {
+      Property<Hairpin>* p = property(propertyId);
+      if (p) {
+            ::setProperty(p->type, ((*this).*(p->data))(), v);
+            setGenerated(false);
+            return true;
+            }
+      return Element::setProperty(propertyId, v);
+      }
+
+//---------------------------------------------------------
+//   setProperty
+//---------------------------------------------------------
+
+bool Hairpin::setProperty(const QString& name, const QString& data)
+      {
+      for (int i = 0; i < PROPERTIES; ++i) {
+            if (propertyList[i].name == name) {
+                  ::setProperty(propertyList[i].type, ((*this).*(propertyList[i].data))(), data);
+                  setGenerated(false);
+                  return true;
+                  }
+            }
+      return Element::setProperty(name, data);
       }
 

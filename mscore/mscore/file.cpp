@@ -364,7 +364,7 @@ void MuseScore::newFile()
       int pickupTimesigZ, pickupTimesigN;
       int measures       = newWizard->measures();
       Fraction timesig   = newWizard->timesig();
-      int timesigType    = newWizard->timesigType();
+      TimeSigType timesigType = newWizard->timesigType();
 
       bool pickupMeasure = newWizard->pickupMeasure(&pickupTimesigZ, &pickupTimesigN);
       if (pickupMeasure)
@@ -562,7 +562,7 @@ void MuseScore::newFile()
                   }
             if (!title.isEmpty()) {
                   Text* s = new Text(score);
-                  s->setSubtype(TEXT_TITLE);
+                  // s->setSubtype(TEXT_TITLE);
                   s->setTextStyle(TEXT_STYLE_TITLE);
                   s->setText(title);
                   measure->add(s);
@@ -570,21 +570,21 @@ void MuseScore::newFile()
                   }
             if (!subtitle.isEmpty()) {
                   Text* s = new Text(score);
-                  s->setSubtype(TEXT_SUBTITLE);
+                  // s->setSubtype(TEXT_SUBTITLE);
                   s->setTextStyle(TEXT_STYLE_SUBTITLE);
                   s->setText(subtitle);
                   measure->add(s);
                   }
             if (!composer.isEmpty()) {
                   Text* s = new Text(score);
-                  s->setSubtype(TEXT_COMPOSER);
+                  // s->setSubtype(TEXT_COMPOSER);
                   s->setTextStyle(TEXT_STYLE_COMPOSER);
                   s->setText(composer);
                   measure->add(s);
                   }
             if (!poet.isEmpty()) {
                   Text* s = new Text(score);
-                  s->setSubtype(TEXT_POET);
+                  // s->setSubtype(TEXT_POET);
                   s->setTextStyle(TEXT_STYLE_POET);
                   s->setText(poet);
                   measure->add(s);
@@ -1728,11 +1728,9 @@ void MuseScore::addImage(Score* score, Element* e)
       Image* s = 0;
       QString suffix(fi.suffix().toLower());
 
-#ifdef SVG_IMAGES
       if (suffix == "svg")
             s = new SvgImage(score);
       else
-#endif
             if (suffix == "jpg" || suffix == "png" || suffix == "xpm")
             s = new RasterImage(score);
       else

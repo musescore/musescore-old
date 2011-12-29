@@ -41,10 +41,10 @@ void Revision::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Revision::read(QDomElement e)
+void Revision::read(const QDomElement& de)
       {
       _dateTime = QDateTime::currentDateTime();
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
             if (tag == "id")

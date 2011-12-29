@@ -24,6 +24,7 @@ class QPainter;
 //---------------------------------------------------------
 
 class Breath : public Element {
+      int _subtype;
       static const int breathSymbols = 4;
       static int symList[breathSymbols];
 
@@ -32,13 +33,17 @@ class Breath : public Element {
    public:
       Breath(Score* s);
       virtual Breath* clone() const { return new Breath(*this); }
+
       virtual ElementType type() const { return BREATH; }
+      int subtype() const { return _subtype; }
+      void setSubtype(int v) { _subtype = v; }
+
       virtual Space space() const;
 
       virtual void draw(QPainter*) const;
       virtual void layout();
       virtual void write(Xml&) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       virtual QPointF pagePos() const;      ///< position in page coordinates
       };
 

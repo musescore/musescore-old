@@ -46,8 +46,6 @@ class ChordRest : public DurationElement {
       BeamMode _beamMode;
       bool _up;                           // actual stem direction
       bool _small;
-      Spatium _extraLeadingSpace;
-      Spatium _extraTrailingSpace;
       Space _space;
       QList<Lyrics*> _lyricsList;
       TabDurationSymbol * _tabDur;        // stores a duration symbol in tablature staves
@@ -63,11 +61,9 @@ class ChordRest : public DurationElement {
       Segment* segment() const                   { return (Segment*)parent(); }
       virtual Measure* measure() const           { return (Measure*)(parent()->parent()); }
 
-      virtual void read(QDomElement, QList<Tuplet*>*, QList<Spanner*>*) = 0;
+      virtual void read(const QDomElement&, QList<Tuplet*>*, QList<Spanner*>*) = 0;
       void writeProperties(Xml& xml) const;
-      bool readProperties(QDomElement e, QList<Tuplet*>*, QList<Spanner*>*);
-      QList<Prop> properties(Xml&, bool clipboardmode) const;
-      virtual QList<Prop> properties(Xml& xml) const { return properties(xml, false); }
+      bool readProperties(const QDomElement& e, QList<Tuplet*>*, QList<Spanner*>*);
       virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
 
       void setBeamMode(BeamMode m)              { _beamMode = m; }
@@ -90,9 +86,8 @@ class ChordRest : public DurationElement {
       QList<Articulation*>* getArticulations()  { return &articulations; }
       Articulation* hasArticulation(const Articulation*);
       bool small() const                        { return _small; }
-      QVariant vSmall() const                   { return _small; }
+      void* pSmall()                            { return &_small; }
       void setSmall(bool val);
-      void setSmall(const QVariant& v)          { setSmall(v.toBool()); }
 
       int staffMove() const                     { return _staffMove; }
       void setStaffMove(int val)                { _staffMove = val; }
@@ -108,10 +103,6 @@ class ChordRest : public DurationElement {
       void setSlurBack(const QList<Slur*>& s)   { _slurBack = s;  }
 
       void layoutArticulations();
-      Spatium extraLeadingSpace() const         { return _extraLeadingSpace;  }
-      void setExtraLeadingSpace(Spatium v)      { _extraLeadingSpace = v;     }
-      Spatium extraTrailingSpace() const        { return _extraTrailingSpace; }
-      void setExtraTrailingSpace(Spatium v)     { _extraTrailingSpace = v;    }
       virtual void toDefault();
 
       const TDuration& durationType() const      { return _durationType;        }
@@ -132,9 +123,8 @@ class ChordRest : public DurationElement {
       virtual void add(Element*);
       virtual void remove(Element*);
       void removeDeleteBeam();
-      virtual QString subtypeName() const { return QString(); }
       virtual QVariant getProperty(int propertyId) const;
-      virtual void setProperty(int propertyId, const QVariant&);
+      virtual bool setProperty(int propertyId, const QVariant&);
       static Property<ChordRest> propertyList[];
       };
 

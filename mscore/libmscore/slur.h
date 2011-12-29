@@ -84,7 +84,7 @@ class SlurSegment : public SpannerSegment {
       SlurTie* slurTie() const                      { return (SlurTie*)spanner(); }
 
       void write(Xml& xml, int no) const;
-      void read(QDomElement);
+      void read(const QDomElement&);
       virtual void toDefault();
       void setSlurOffset(int i, const QPointF& val) { ups[i].off = val;  }
       QPointF slurOffset(int i) const               { return ups[i].off; }
@@ -136,7 +136,7 @@ class SlurTie : public Spanner {
       virtual bool contains(const QPointF&) const     { return false; }  // not selectable
 
       void writeProperties(Xml& xml) const;
-      bool readProperties(QDomElement);
+      bool readProperties(const QDomElement&);
 
       virtual void toDefault();
       void setLen(qreal v)               { _len = v; }
@@ -146,11 +146,10 @@ class SlurTie : public Spanner {
       SlurSegment* backSegment() const    { return (SlurSegment*)spannerSegments().back();  }
       SlurSegment* takeLastSegment()      { return (SlurSegment*)spannerSegments().takeLast(); }
       SlurSegment* segmentAt(int n) const { return (SlurSegment*)spannerSegments().at(n); }
-      virtual QString subtypeName() const { return QString(); }
       virtual void slurPos(SlurPos*) = 0;
       virtual void computeBezier(SlurSegment*, QPointF so = QPointF()) = 0;
       virtual QVariant getProperty(int propertyId) const;
-      virtual void setProperty(int propertyId, const QVariant&);
+      virtual bool setProperty(int propertyId, const QVariant&);
       };
 
 //---------------------------------------------------------
@@ -167,7 +166,7 @@ class Slur : public SlurTie {
       virtual Slur* clone() const      { return new Slur(*this); }
       virtual ElementType type() const { return SLUR; }
       virtual void write(Xml& xml) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       virtual void layout();
       virtual void setTrack(int val);
       virtual void slurPos(SlurPos*);
@@ -201,7 +200,7 @@ class Tie : public SlurTie {
       Note* startNote() const             { return (Note*)startElement(); }
       Note* endNote() const               { return (Note*)endElement();   }
       virtual void write(Xml& xml) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       virtual void layout();
       virtual void slurPos(SlurPos*);
       virtual void computeBezier(SlurSegment*, QPointF so = QPointF());

@@ -3674,7 +3674,8 @@ static void collectMatch(void* data, Element* e)
 /*      if (p->type == e->type() && p->subtype != e->subtype())
             qDebug("%s subtype %d does not match", e->name(), e->subtype());
       */
-      if ((p->type != e->type()) || (p->subtypeValid && p->subtype != e->subtype()))
+//TODO      if ((p->type != e->type()) || (p->subtypeValid && p->subtype != e->subtype()))
+      if (p->type != e->type())
             return;
       if ((p->staff != -1) && (p->staff != e->staffIdx()))
             return;
@@ -3703,20 +3704,20 @@ static void collectMatch(void* data, Element* e)
 void MuseScore::selectSimilar(Element* e, bool sameStaff)
       {
       ElementType type = e->type();
-      int subtype      = e->subtype();
+//TODO      int subtype      = e->subtype();
 
       ElementPattern pattern;
       pattern.subtypeValid = true;
-      if (type == VOLTA_SEGMENT) {
+//TODO      if (type == VOLTA_SEGMENT) {
             // Volta* volta = static_cast<VoltaSegment*>(e)->volta();
             // type    = volta->type();
             // subtype = volta->subtype();
             pattern.subtypeValid = false;
-            }
+//            }
 
       Score* score = e->score();
       pattern.type    = type;
-      pattern.subtype = subtype;
+      pattern.subtype = 0; // TODO subtype;
       pattern.staff   = sameStaff ? e->staffIdx() : -1;
       pattern.voice   = -1;
       pattern.system  = 0;

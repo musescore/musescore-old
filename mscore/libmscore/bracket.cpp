@@ -164,6 +164,8 @@ void Bracket::write(Xml& xml) const
             case BRACKET_NORMAL:
                   xml.stag("Bracket");
                   break;
+            case NO_BRACKET:
+                  break;
             }
       if (_column)
             xml.tag("level", _column);
@@ -175,9 +177,9 @@ void Bracket::write(Xml& xml) const
 //   Bracket::read
 //---------------------------------------------------------
 
-void Bracket::read(QDomElement e)
+void Bracket::read(const QDomElement& de)
       {
-      QString t(e.attribute("type", "Normal"));
+      QString t(de.attribute("type", "Normal"));
 
       if (t == "Normal")
             setSubtype(BRACKET_NORMAL);
@@ -186,11 +188,9 @@ void Bracket::read(QDomElement e)
       else
             qDebug("unknown brace type <%s>\n", t.toLatin1().data());
 
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            const QString& tag(e.tagName());
-            const QString& val(e.text());
-            if (tag == "level")
-                  _column = val.toInt();
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "level")
+                  _column = e.text().toInt();
             else if (!Element::readProperties(e))
                   domError(e);
             }
@@ -288,9 +288,9 @@ void Bracket::endEditDrag()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Bracket::acceptDrop(MuseScoreView*, const QPointF&, int type, int) const
+bool Bracket::acceptDrop(MuseScoreView*, const QPointF&, Element* e) const
       {
-      return type == BRACKET;
+      return e->type() == BRACKET;
       }
 
 //---------------------------------------------------------
@@ -323,7 +323,7 @@ bool Bracket::edit(MuseScoreView*, int, int key, Qt::KeyboardModifiers modifiers
       {
       if (modifiers & Qt::ShiftModifier) {
             if (key == Qt::Key_Left) {
-                  int bt = staff()->bracket(_column);
+                  BracketType bt = staff()->bracket(_column);
                   // search empty level
                   int oldColumn = _column;
                   staff()->setBracket(_column, NO_BRACKET);
@@ -343,8 +343,8 @@ bool Bracket::edit(MuseScoreView*, int, int key, Qt::KeyboardModifiers modifiers
                         int l = _column - 1;
                         for (; l >= 0; --l) {
                               if (staff()->bracket(l) == NO_BRACKET) {
-                                    int bt = staff()->bracket(_column);
-                                    staff()->setBracket(_column, -1);
+                                    BracketType bt = staff()->bracket(_column);
+                                    staff()->setBracket(_column, NO_BRACKET);
                                     staff()->setBracket(l, bt);
                                     staff()->setBracketSpan(l, _span);
                                     score()->moveBracket(staffIdx(), _column, l);

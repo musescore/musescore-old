@@ -57,6 +57,8 @@ class Segment : public Element {
 
       mutable bool empty;           // cached value
       mutable bool _written;        // used for write()
+
+      SegmentType _subtype;
       int _tick;
       Spatium _extraLeadingSpace;
       Spatium _extraTrailingSpace;
@@ -122,12 +124,14 @@ class Segment : public Element {
       void sortStaves(QList<int>& dst);
       const char* subTypeName() const;
       static SegmentType segmentType(ElementType type);
-      SegmentType segmentType() const            { return SegmentType(subtype()); }
+      SegmentType subtype() const                { return _subtype; }
+      void setSubtype(SegmentType t)             { _subtype = t; }
+
       void removeGeneratedElements();
       bool isEmpty() const                       { return empty; }
       void fixStaffIdx();
-      bool isChordRest() const                   { return subtype() == SegChordRest; }
-      bool isGrace() const                       { return subtype() == SegGrace; }
+      bool isChordRest() const                   { return _subtype == SegChordRest; }
+      bool isGrace() const                       { return _subtype == SegGrace; }
       void setTick(int);
       int tick() const;
       int rtick() const                          { return _tick; } // tickposition relative to measure start
@@ -153,9 +157,10 @@ class Segment : public Element {
       bool written() const                       { return _written;            }
       void setWritten(bool val)                  { _written = val;             }
       virtual void write(Xml&) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
+
       virtual QVariant getProperty(int propertyId) const;
-      virtual void setProperty(int propertyId, const QVariant&);
+      virtual bool setProperty(int propertyId, const QVariant&);
       };
 
 #endif

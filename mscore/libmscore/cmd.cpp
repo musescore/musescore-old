@@ -96,7 +96,7 @@ void Score::startCmd()
             return;
             }
       undo()->beginMacro();
-      undo()->push(new SaveState(this));
+      undo(new SaveState(this));
       }
 
 //---------------------------------------------------------
@@ -282,7 +282,7 @@ void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& /
                         events.append(new NoteEvent(0,      i * 1000 / n,    1000/n));
                         events.append(new NoteEvent(dpitch, (i+1) *1000 / n, 1000/n));
                         }
-                  undo()->push(new ChangeNoteEvents(chord, events));
+                  undo(new ChangeNoteEvents(chord, events));
                   }
             }
       }
@@ -1259,7 +1259,7 @@ void Score::appendMeasures(int n, ElementType type)
 ///   Called from padToggle() to add note prefix/accent.
 //---------------------------------------------------------
 
-void Score::addArticulation(int attr)
+void Score::addArticulation(ArticulationType attr)
       {
       foreach(Element* el, selection().elements()) {
             if (el->type() == NOTE || el->type() == CHORD) {
@@ -1363,7 +1363,7 @@ void Score::changeAccidental(Note* note, AccidentalType accidental)
                   }
             else {
                   m   = score->tick2measure(measure->tick());
-                  s   = m->findSegment(segment->segmentType(), segment->tick());
+                  s   = m->findSegment(segment->subtype(), segment->tick());
                   }
             int staffIdx  = score->staffIdx(st);
             Chord* chord  = static_cast<Chord*>(s->element(staffIdx * VOICES + voice));
@@ -1382,7 +1382,7 @@ void Score::changeAccidental(Note* note, AccidentalType accidental)
                               tab->convertPitch(pitch, &string, &fret);
                         }
                   }
-            undo()->push(new ChangePitch(n, pitch, tpc, n->line(), fret, string));
+            undo(new ChangePitch(n, pitch, tpc, n->line(), fret, string));
             if (!st->useTablature()) {
                   //
                   // handle ties
@@ -1396,7 +1396,7 @@ void Score::changeAccidental(Note* note, AccidentalType accidental)
                         Note* nn = n;
                         while (nn->tieFor()) {
                               nn = nn->tieFor()->endNote();
-                              undo()->push(new ChangePitch(nn, pitch, tpc, nn->line(), fret, string));
+                              undo(new ChangePitch(nn, pitch, tpc, nn->line(), fret, string));
                               }
                         }
                   }
@@ -1479,7 +1479,7 @@ void Score::moveUp(Chord* chord)
 
       if ((staffMove == -1) || (rstaff + staffMove <= 0))
             return;
-      undo()->push(new ChangeChordStaffMove(chord, staffMove - 1));
+      undo(new ChangeChordStaffMove(chord, staffMove - 1));
       }
 
 //---------------------------------------------------------
@@ -1498,7 +1498,7 @@ void Score::moveDown(Chord* chord)
 qDebug("moveDown staffMove==%d  rstaff %d rstaves %d", staffMove, rstaff, rstaves);
             return;
             }
-      undo()->push(new ChangeChordStaffMove(chord, staffMove + 1));
+      undo(new ChangeChordStaffMove(chord, staffMove + 1));
       _layoutAll = true;
       }
 
@@ -1519,7 +1519,7 @@ void Score::cmdAddStretch(qreal val)
                   break;
             qreal stretch = m->userStretch();
             stretch += val;
-            undo()->push(new ChangeStretch(m, stretch));
+            undo(new ChangeStretch(m, stretch));
             }
       _layoutAll = true;
       }
@@ -1727,7 +1727,7 @@ qDebug("paste <%s>", data.data());
 //   pasteStaff
 //---------------------------------------------------------
 
-void Score::pasteStaff(QDomElement e, ChordRest* dst)
+void Score::pasteStaff(const QDomElement& de, ChordRest* dst)
       {
       beams.clear();
       spanner.clear();
@@ -1739,7 +1739,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
             }
       int dstStaffStart = dst->staffIdx();
       int dstTick = dst->tick();
-      for (; !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() != "StaffList") {
                   domError(e);
                   continue;
@@ -2682,7 +2682,7 @@ void Score::cmd(const QAction* a)
       else if (cmd == "voice-x34")
             cmdExchangeVoice(2, 3);
       else if (cmd == "system-break" || cmd == "page-break" || cmd == "section-break") {
-            int type;
+            LayoutBreakType type;
             if (cmd == "system-break")
                   type = LAYOUT_BREAK_LINE;
             else if (cmd == "page-break")
@@ -2704,7 +2704,7 @@ void Score::cmd(const QAction* a)
                   else {
                         // remove line break
                         foreach(Element* e, *measure->el()) {
-                              if (e->type() == LAYOUT_BREAK && e->subtype() ==type) {
+                              if (e->type() == LAYOUT_BREAK && static_cast<LayoutBreak*>(e)->subtype() ==type) {
                                     undoRemoveElement(e);
                                     break;
                                     }

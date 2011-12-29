@@ -21,6 +21,10 @@ class Xml;
 class Volta;
 class Measure;
 
+enum VoltaType {
+      VOLTA_OPEN, VOLTA_CLOSED
+      };
+
 //---------------------------------------------------------
 //   VoltaSegment
 //---------------------------------------------------------
@@ -42,6 +46,7 @@ class VoltaSegment : public TextLineSegment {
 //---------------------------------------------------------
 
 class Volta : public TextLine {
+      VoltaType _subtype;
       QList<int> _endings;
 
    public:
@@ -54,14 +59,17 @@ class Volta : public TextLine {
       virtual void layout();
 
       virtual void write(Xml&) const;
-      virtual void read(QDomElement e);
+      virtual void read(const QDomElement& e);
 
       QList<int> endings() const           { return _endings; }
       QList<int>& endings()                { return _endings; }
       void setEndings(const QList<int>& l) { _endings = l;    }
       void setText(const QString& s);
       QString text() const;
-      virtual void setSubtype(int val);
+
+      void setSubtype(VoltaType val);
+      VoltaType subtype() const            { return _subtype; }
+
       bool hasEnding(int repeat) const;
       Measure* startMeasure() const    { return (Measure*)startElement(); }
       Measure* endMeasure() const      { return (Measure*)endElement(); }

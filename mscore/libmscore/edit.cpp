@@ -521,7 +521,7 @@ bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
             //
             Measure* m = fm;
             for (int i = 0; i < measures; ++i, m = m->nextMeasure()) {
-                  undo()->push(new ChangeMeasureProperties(
+                  undo(new ChangeMeasureProperties(
                      m, ns, ns, m->getBreakMultiMeasureRest(), m->repeatCount(),
                      m->userStretch(), m->noOffset(), m->irregular()));
                   int strack = 0;
@@ -531,13 +531,13 @@ bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
                         Element* e = s->element(track);
                         if (e) {
                               Rest* rest = static_cast<Rest*>(e);
-                              undo()->push(new ChangeDuration(rest, ns));
+                              undo(new ChangeDuration(rest, ns));
                               }
                         }
                   }
             return true;
             }
-      undo()->push(new RemoveMeasures(fm, lm));
+      undo(new RemoveMeasures(fm, lm));
       Fraction k = fm->len() * measures;
       k /= ns;
       int nm = (k.numerator() + k.denominator() - 1)/ k.denominator();
@@ -608,7 +608,7 @@ bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
       //
       nfm->setPrev(fm->prev());
       nlm->setNext(lm->next());
-      undo()->push(new InsertMeasures(nfm, nlm));
+      undo(new InsertMeasures(nfm, nlm));
       return true;
       }
 
@@ -642,7 +642,7 @@ void Score::rewriteMeasures(Measure* fm, const Fraction& ns)
                         for (Measure* m = fm1; m; m = m->nextMeasure()) {
                               if (m->first(SegTimeSig))
                                     break;
-                              undo()->push(new ChangeMeasureTimesig(m, ns));
+                              undo(new ChangeMeasureTimesig(m, ns));
                               }
                         return;
                         }
@@ -745,7 +745,7 @@ qDebug("   cmdAddTimeSig1");
             for (Measure* m = fm; m; m = m->nextMeasure()) {
                   if (m->first(SegTimeSig))
                         break;
-                  undo()->push(new ChangeMeasureTimesig(m, ns));
+                  undo(new ChangeMeasureTimesig(m, ns));
                   }
             }
       else {
@@ -823,7 +823,7 @@ void Score::cmdRemoveTimeSig(TimeSig* ts)
             for (Measure* m = fm; m; m = m->nextMeasure()) {
                   if (m->first(SegTimeSig))
                         break;
-                  undo()->push(new ChangeMeasureTimesig(m, ns));
+                  undo(new ChangeMeasureTimesig(m, ns));
                   }
             }
       else {
@@ -1100,26 +1100,28 @@ void Score::cmdFlip()
                         e = chord->beam();  // fall trough
                   else {
                         Direction dir = chord->up() ? DOWN : UP;
-                        undo()->push(new ChangeProperty(chord, P_STEM_DIRECTION, dir));
+                        undoChangeProperty(chord, P_STEM_DIRECTION, dir);
                         }
                   }
             if (e->type() == BEAM) {
                   Beam* beam = static_cast<Beam*>(e);
                   Direction dir = beam->isUp() ? DOWN : UP;
-                  undo()->push(new ChangeProperty(beam, P_DIRECTION, dir));
+                  undoChangeProperty(beam, P_DIRECTION, dir);
                   }
             else if (e->type() == SLUR_SEGMENT) {
                   SlurTie* slur = static_cast<SlurSegment*>(e)->slurTie();
                   Direction dir = slur->up() ? DOWN : UP;
-                  undo()->push(new ChangeProperty(slur, P_SLUR_DIRECTION, dir));
+                  undoChangeProperty(slur, P_SLUR_DIRECTION, dir);
                   }
-            else if (e->type() == HAIRPIN_SEGMENT)
-                  undoChangeSubtype(e, e->subtype() == 0 ? 1 : 0);
+            else if (e->type() == HAIRPIN_SEGMENT) {
+                  int st = static_cast<Hairpin*>(e)->subtype() == 0 ? 1 : 0;
+                  e->score()->undoChangeProperty(e, P_SUBTYPE, st);
+                  }
             else if (e->type() == ARTICULATION) {
                   Articulation* a = static_cast<Articulation*>(e);
-                  if (e->subtype() == Articulation_Staccato
-                     || e->subtype() == Articulation_Tenuto
-                     || e->subtype() == Articulation_Sforzatoaccent) {
+                  if (a->subtype() == Articulation_Staccato
+                     || a->subtype() == Articulation_Tenuto
+                     || a->subtype() == Articulation_Sforzatoaccent) {
                         ArticulationAnchor aa = a->anchor();
                         if (aa == A_TOP_CHORD)
                               aa = A_BOTTOM_CHORD;
@@ -1128,18 +1130,18 @@ void Score::cmdFlip()
                         else if (aa == A_CHORD)
                               aa = a->up() ? A_BOTTOM_CHORD : A_TOP_CHORD;
                         if (aa != a->anchor())
-                              undo()->push(new ChangeProperty(a, P_ARTICULATION_ANCHOR, aa));
+                              undoChangeProperty(a, P_ARTICULATION_ANCHOR, aa);
                         }
                   else {
                         Direction d = a->up() ? DOWN : UP;
-                        undo()->push(new ChangeProperty(a, P_DIRECTION, d));
+                        undoChangeProperty(a, P_DIRECTION, d);
                         }
                   return;   // no layoutAll
                   }
             else if (e->type() == TUPLET)
-                  undo()->push(new FlipTupletDirection(static_cast<Tuplet*>(e)));
+                  undo(new FlipTupletDirection(static_cast<Tuplet*>(e)));
             else if (e->type() == NOTEDOT)
-                  undo()->push(new FlipNoteDotDirection(static_cast<Note*>(e->parent())));
+                  undo(new FlipNoteDotDirection(static_cast<Note*>(e->parent())));
             }
       _layoutAll = true;
       }
@@ -1195,11 +1197,11 @@ void Score::deleteItem(Element* el)
       switch(el->type()) {
             case INSTRUMENT_NAME: {
                   Part* part = el->staff()->part();
-
-                  if (el->subtype() == INSTRUMENT_NAME_LONG)
-                        undo()->push(new ChangeInstrumentLong(0, part, QList<StaffNameDoc>()));
-                  else if (el->subtype() == INSTRUMENT_NAME_SHORT)
-                        undo()->push(new ChangeInstrumentShort(0, part, QList<StaffNameDoc>()));
+                  InstrumentName* in = static_cast<InstrumentName*>(el);
+                  if (in->subtype() == INSTRUMENT_NAME_LONG)
+                        undo(new ChangeInstrumentLong(0, part, QList<StaffNameDoc>()));
+                  else if (in->subtype() == INSTRUMENT_NAME_SHORT)
+                        undo(new ChangeInstrumentShort(0, part, QList<StaffNameDoc>()));
                   }
                   break;
 
@@ -1401,10 +1403,10 @@ void Score::cmdDeleteSelection()
             Segment* s2 = selection().endSegment();
 
             Segment* ss1 = s1;
-            if (ss1->segmentType() != SegChordRest)
+            if (ss1->subtype() != SegChordRest)
                   ss1 = ss1->next1(SegChordRest);
             bool fullMeasure = ss1 && (ss1->measure()->first(SegChordRest) == ss1)
-                  && (s2 == 0 || (s2->segmentType() == SegEndBarLine));
+                  && (s2 == 0 || (s2->subtype() == SegEndBarLine));
 
             int tick2   = s2 ? s2->tick() : INT_MAX;
             int track1  = selection().staffStart() * VOICES;
@@ -1611,15 +1613,15 @@ void Score::colorItem(Element* element)
 
       foreach(Element* e, selection().elements()) {
             if (e->color() != c) {
-                  undo()->push(new ChangeProperty(e, P_COLOR, c));
+                  undoChangeProperty(e, P_COLOR, c);
                   e->setGenerated(false);
                   refresh |= e->abbox();
                   if (e->type() == BAR_LINE) {
                         Element* ep = e->parent();
-                        if (ep->type() == SEGMENT && ep->subtype() == SegEndBarLine) {
+                        if (ep->type() == SEGMENT && static_cast<Segment*>(ep)->subtype() == SegEndBarLine) {
                               Measure* m = static_cast<Segment*>(ep)->measure();
                               BarLine* bl = static_cast<BarLine*>(e);
-                              m->setEndBarLineType(bl->barLineType(), false, e->visible(), e->color());
+                              m->setEndBarLineType(bl->subtype(), false, e->visible(), e->color());
                               }
                         }
                   }
@@ -1800,7 +1802,7 @@ void Score::cmdSplitMeasure(ChordRest* cr)
                   Element* oe = s->element(track);
                   if (oe == 0)
                         continue;
-                  SegmentType st = s->segmentType();
+                  SegmentType st = s->subtype();
                   Measure* m     = (s->tick() < tick) ? m1 : m2;
                   Segment* seg   = m->getSegment(st, s->tick());
                   Element* ne    = oe->clone();
@@ -1900,7 +1902,7 @@ void Score::cmdJoinMeasure(Measure* m1, Measure* m2)
       m->setLen(f);
 
       startCmd();
-      undo()->push(new RemoveMeasures(m1, m2->prevMeasure()));
+      undo(new RemoveMeasures(m1, m2->prevMeasure()));
       undoInsertMeasure(m, m2);
 
       int tracks       = nstaves() * VOICES;
@@ -1916,7 +1918,7 @@ void Score::cmdJoinMeasure(Measure* m1, Measure* m2)
                   if (oe == 0)
                         continue;
 
-                  SegmentType st = s->segmentType();
+                  SegmentType st = s->subtype();
 
                   // do not copy barlines except last
                   if ((st == SegEndBarLine) && (s->tick() < (m2->tick() + m2->ticks())))

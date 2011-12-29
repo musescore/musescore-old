@@ -137,11 +137,11 @@ class Measure : public MeasureBase {
       virtual void setScore(Score* s);
       Measure* cloneMeasure(Score*, SlurMap*, TieMap*, SpannerMap*);
 
-      virtual void read(QDomElement, int idx);
+      virtual void read(const QDomElement&, int idx);
       virtual void write(Xml&, int, bool writeSystemElements) const;
       virtual void write(Xml&) const;
       void writeBox(Xml&) const;
-      void readBox(QDomElement);
+      void readBox(const QDomElement&);
       virtual bool isEditable() const { return false; }
 
       virtual void add(Element*);
@@ -210,7 +210,7 @@ class Measure : public MeasureBase {
       void sortStaves(QList<int>& dst);
 
       void dump() const;
-      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, Element*) const;
       virtual Element* drop(const DropData&);
 
       int repeatCount() const         { return _repeatCount; }

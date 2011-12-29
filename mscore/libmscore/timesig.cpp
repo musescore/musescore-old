@@ -33,7 +33,7 @@ TimeSig::TimeSig(Score* s)
       _stretch.set(1, 1);
       }
 
-TimeSig::TimeSig(Score* s, int st)
+TimeSig::TimeSig(Score* s, TimeSigType st)
   : Element(s)
       {
       setFlags(ELEMENT_SELECTABLE | ELEMENT_ON_STAFF);
@@ -69,7 +69,7 @@ TimeSig::TimeSig(Score* s, const Fraction& f)
 //   setSubtype
 //---------------------------------------------------------
 
-void TimeSig::setSubtype(int st)
+void TimeSig::setSubtype(TimeSigType st)
       {
       switch (st) {
             case TSIG_NORMAL:
@@ -86,16 +86,16 @@ void TimeSig::setSubtype(int st)
                   qDebug("illegal TimeSig subtype 0x%x\n", st);
                   break;
             }
-      Element::setSubtype(st);
+      _subtype = st;
       }
 
 //---------------------------------------------------------
 //   acceptDrop
 //---------------------------------------------------------
 
-bool TimeSig::acceptDrop(MuseScoreView*, const QPointF&, int type, int) const
+bool TimeSig::acceptDrop(MuseScoreView*, const QPointF&, Element* e) const
       {
-      return type == TIMESIG;
+      return e->type() == TIMESIG;
       }
 
 //---------------------------------------------------------
@@ -165,7 +165,7 @@ void TimeSig::write(Xml& xml) const
 //   TimeSig::read
 //---------------------------------------------------------
 
-void TimeSig::read(QDomElement e)
+void TimeSig::read(const QDomElement& de)
       {
       int n=0, z1=0, z2=0, z3=0, z4=0;
       bool old = false;
@@ -173,7 +173,7 @@ void TimeSig::read(QDomElement e)
       customText = false;
       _stretch.set(1, 1);
 
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
 
@@ -198,7 +198,7 @@ void TimeSig::read(QDomElement e)
                   z4 = val.toInt();
                   }
             else if (tag == "subtype") {
-                  int i = val.toInt();
+                  TimeSigType i = TimeSigType(val.toInt());
                   if (score()->mscVersion() < 122) {
                         setSig(Fraction(
                              ((i >> 24) & 0x3f)
@@ -364,7 +364,7 @@ Space TimeSig::space() const
 
 void TimeSig::setFrom(const TimeSig* ts)
       {
-      Element::setSubtype(ts->subtype());
+      _subtype   = ts->subtype();
       sz         = ts->sz;
       sn         = ts->sn;
       _nominal   = ts->_nominal;

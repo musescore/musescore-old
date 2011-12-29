@@ -69,7 +69,7 @@ struct MusicXmlWedge {
 struct MusicXmlPartGroup {
       int span;
       int start;
-      int type;
+      BracketType type;
       bool barlineSpan;
       };
 

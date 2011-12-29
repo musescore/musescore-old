@@ -16,6 +16,19 @@
 #include "mscore.h"
 
 //---------------------------------------------------------
+//   propertyList
+//---------------------------------------------------------
+
+static qreal defaultPause = 0.0;
+
+Property<LayoutBreak> LayoutBreak::propertyList[] = {
+      { P_SUBTYPE, T_LAYOUT_BREAK, "subtype", &LayoutBreak::pSubtype,   0 },
+      { P_PAUSE,   T_REAL,         "pause",   &LayoutBreak::pPause,   &defaultPause },
+      };
+
+static const int PROPERTIES = sizeof(LayoutBreak::propertyList)/sizeof(*LayoutBreak::propertyList);
+
+//---------------------------------------------------------
 //   LayoutBreak
 //---------------------------------------------------------
 
@@ -36,8 +49,10 @@ void LayoutBreak::write(Xml& xml) const
       {
       xml.stag(name());
       Element::writeProperties(xml);
-      if (score()->styleD(ST_SectionPause) != _pause)
-            xml.tag("pause", _pause);
+      for (int i = 0; i < PROPERTIES; ++i) {
+            const Property<LayoutBreak>& p = propertyList[i];
+            xml.tag(p.name, p.type, ((*(LayoutBreak*)this).*(p.data))(), propertyList[i].defaultVal);
+            }
       if (!_startWithLongNames)
             xml.tag("startWithLongNames", _startWithLongNames);
       if (!_startWithMeasureOne)
@@ -49,21 +64,20 @@ void LayoutBreak::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void LayoutBreak::read(QDomElement e)
+void LayoutBreak::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
-            if (tag == "pause")
-                  _pause = e.text().toDouble();
+            const QString& val(e.text());
+            if (setProperty(tag, val))
+                  ;
             else if (tag == "startWithLongNames")
-                  _startWithLongNames = e.text().toInt();
+                  _startWithLongNames = val.toInt();
             else if (tag == "startWithMeasureOne")
-                  _startWithMeasureOne = e.text().toInt();
+                  _startWithMeasureOne = val.toInt();
             else if (!Element::readProperties(e))
                   domError(e);
             }
-      if (subtype() == 0)     // make sure setSubtype() is called
-            setSubtype(0);
       }
 
 //---------------------------------------------------------
@@ -141,19 +155,9 @@ void LayoutBreak::layout0()
 //   setSubtype
 //---------------------------------------------------------
 
-void LayoutBreak::setSubtype(const QString& s)
+void LayoutBreak::setSubtype(LayoutBreakType val)
       {
-      if (s == "line")
-            setSubtype(LAYOUT_BREAK_LINE);
-      else if (s == "page")
-            setSubtype(LAYOUT_BREAK_PAGE);
-      else
-            setSubtype(LAYOUT_BREAK_SECTION);
-      }
-
-void LayoutBreak::setSubtype(int val)
-      {
-      Element::setSubtype(val);
+      _subtype = val;
       layout0();
       }
 
@@ -168,32 +172,12 @@ void LayoutBreak::spatiumChanged(qreal, qreal)
       }
 
 //---------------------------------------------------------
-//   subtypeName
-//---------------------------------------------------------
-
-QString LayoutBreak::subtypeName() const
-      {
-      switch(subtype()) {
-            case LAYOUT_BREAK_LINE:
-                  return "line";
-            case LAYOUT_BREAK_PAGE:
-                  return "page";
-            case LAYOUT_BREAK_SECTION:
-                  return "section";
-            default:
-                  return "??";
-            }
-      }
-
-//---------------------------------------------------------
 //   acceptDrop
 //---------------------------------------------------------
 
-bool LayoutBreak::acceptDrop(MuseScoreView*, const QPointF&, int type, int st) const
+bool LayoutBreak::acceptDrop(MuseScoreView*, const QPointF&, Element* e) const
       {
-      if (type == LAYOUT_BREAK && st != subtype())
-            return true;
-      return false;
+      return e->type() == LAYOUT_BREAK && static_cast<LayoutBreak*>(e)->subtype() != subtype();
       }
 
 //---------------------------------------------------------
@@ -206,3 +190,57 @@ Element* LayoutBreak::drop(const DropData& data)
       score()->undoChangeElement(this, e);
       return e;
       }
+
+//---------------------------------------------------------
+//   property
+//---------------------------------------------------------
+
+Property<LayoutBreak>* LayoutBreak::property(int id) const
+      {
+      for (int i = 0; i < PROPERTIES; ++i) {
+            if (propertyList[i].id == id)
+                  return &propertyList[i];
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   getProperty
+//---------------------------------------------------------
+
+QVariant LayoutBreak::getProperty(int propertyId) const
+      {
+      Property<LayoutBreak>* p = property(propertyId);
+      if (p)
+            return ::getProperty(p->type, ((*(LayoutBreak*)this).*(p->data))());
+      return Element::getProperty(propertyId);
+      }
+
+//---------------------------------------------------------
+//   setProperty
+//---------------------------------------------------------
+
+bool LayoutBreak::setProperty(int propertyId, const QVariant& v)
+      {
+      Property<LayoutBreak>* p = property(propertyId);
+      if (p) {
+            ::setProperty(p->type, ((*this).*(p->data))(), v);
+            setGenerated(false);
+            return true;
+            }
+      return Element::setProperty(propertyId, v);
+      }
+
+bool LayoutBreak::setProperty(const QString& name, const QString& data)
+      {
+      for (int i = 0; i < PROPERTIES; ++i) {
+            if (propertyList[i].name == name) {
+                  ::setProperty(propertyList[i].type, ((*this).*(propertyList[i].data))(), data);
+                  setGenerated(false);
+                  return true;
+                  }
+            }
+      return Element::setProperty(name, data);
+      }
+
+

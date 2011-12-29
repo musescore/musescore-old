@@ -197,9 +197,9 @@ void KeySig::draw(QPainter* p) const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool KeySig::acceptDrop(MuseScoreView*, const QPointF&, int type, int) const
+bool KeySig::acceptDrop(MuseScoreView*, const QPointF&, Element* e) const
       {
-      return type == KEYSIG;
+      return e->type() == KEYSIG;
       }
 
 //---------------------------------------------------------
@@ -294,13 +294,14 @@ void KeySig::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void KeySig::read(QDomElement e)
+void KeySig::read(const QDomElement& de)
       {
       _sig = KeySigEvent();   // invalidate _sig
+      int subtype = 0;
 
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
-            int val = e.text().toInt();
+            const QString& val(e.text());
             if (tag == "KeySym") {
                   KeySym* ks = new KeySym;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
@@ -316,20 +317,22 @@ void KeySig::read(QDomElement e)
                   keySymbols.append(ks);
                   }
             else if (tag == "showCourtesySig")
-		      _showCourtesySig = val;
+		      _showCourtesySig = val.toInt();
             else if (tag == "showNaturals")
-		      _showNaturals = val;
+		      _showNaturals = val.toInt();
             else if (tag == "accidental")
-                  _sig.setAccidentalType(val);
+                  _sig.setAccidentalType(val.toInt());
             else if (tag == "natural")
-                  _sig.setNaturalType(val);
+                  _sig.setNaturalType(val.toInt());
             else if (tag == "custom")
-                  _sig.setCustomType(val);
+                  _sig.setCustomType(val.toInt());
+            else if (tag == "subtype")
+                  subtype = val.toInt();
             else if (!Element::readProperties(e))
                   domError(e);
             }
-      if (_sig.invalid() && subtype()) {
-            _sig.initFromSubtype(subtype());     // for backward compatibility
+      if (_sig.invalid() && subtype) {
+            _sig.initFromSubtype(subtype);     // for backward compatibility
             }
       }
 

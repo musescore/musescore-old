@@ -449,13 +449,13 @@ QString PageFormat::name() const
 //    sizes are given in units of 1/10 spatium;
 //---------------------------------------------------------
 
-void PageFormat::read(QDomElement e, Score* score)
+void PageFormat::read(const QDomElement& de, Score* score)
       {
       qreal _oddRightMargin  = 0.0;
       qreal _evenRightMargin = 0.0;
       bool landscape = false;
       QString type;
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
             int i = val.toInt();
@@ -526,11 +526,11 @@ void PageFormat::read(QDomElement e, Score* score)
 //    sizes are given in units of 1/10 spatium;
 //---------------------------------------------------------
 
-void PageFormat::readMusicXML(QDomElement e, qreal conversion)
+void PageFormat::readMusicXML(const QDomElement& de, qreal conversion)
       {
       qreal _oddRightMargin  = 0.0;
       qreal _evenRightMargin = 0.0;
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
             if (tag == "page-margins") {
@@ -538,8 +538,6 @@ void PageFormat::readMusicXML(QDomElement e, qreal conversion)
                   qreal lm = 0.0, rm = 0.0, tm = 0.0, bm = 0.0;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         const QString& tag(ee.tagName());
-                        //qreal val = ee.text().toDouble() * (18/4)/ PPI  * .1;
-                        //qreal val = ee.text().toDouble() * 0.45 / PPI; OLD!!!
                         qreal val = ee.text().toDouble() * conversion;
                         if (tag == "left-margin")
                               lm = val;
@@ -776,9 +774,9 @@ void Page::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Page::read(QDomElement e)
+void Page::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "System") {
                   System* system = new System(score());
                   score()->systems()->append(system);

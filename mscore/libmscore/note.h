@@ -132,6 +132,18 @@ class Note : public Element {
       void endDrag();
       void endEdit();
 
+      void* pTpc()               { return &_tpc;           }
+      void* pSmall()             { return &_small;         }
+      void* pMirror()            { return &_userMirror;    }
+      void* pDotPosition()       { return &_dotPosition;   }
+      void* pOnTimeUserOffset()  { return &_onTimeUserOffset;  }
+      void* pOffTimeUserOffset() { return &_offTimeUserOffset; }
+      void* pHeadGroup()         { return &_headGroup;     }
+      void* pVeloOffset()        { return &_veloOffset;    }
+      void* pTuning()            { return &_tuning;        }
+
+      Property<Note>* property(int id) const;
+
    public:
       Note(Score* s = 0);
       Note(const Note&);
@@ -200,7 +212,7 @@ class Note : public Element {
       void setChord(Chord* a)         { setParent((Element*)a);  }
 
       void draw(QPainter*) const;
-      void read(QDomElement);
+      void read(const QDomElement&);
 
       void write(Xml& xml) const;
 
@@ -208,7 +220,7 @@ class Note : public Element {
       qreal stemYoff(bool upFlag) const;
       qreal yPos() const;
 
-      bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
+      bool acceptDrop(MuseScoreView*, const QPointF&, Element*) const;
       Element* drop(const DropData&);
 
       bool hidden() const              { return _hidden; }
@@ -257,10 +269,12 @@ class Note : public Element {
       QList<NoteEvent*>& playEvents()                { return _playEvents; }
       const QList<NoteEvent*>& playEvents() const    { return _playEvents; }
       void setPlayEvents(const QList<NoteEvent*>& v);
-      QString subtypeName() const      { return QString(); }
 
-      QVariant getProperty(int propertyId) const;
-      void setProperty(int propertyId, const QVariant&);
+      virtual QVariant getProperty(int propertyId) const;
+      virtual bool setProperty(int propertyId, const QVariant&);
+      virtual bool setProperty(const QString& name, const QString& data);
+
+      static Property<Note> propertyList[];
       };
 
 extern Sym* noteHeadSym(bool up, int group, int n);

@@ -84,6 +84,7 @@ class LinkedElements;
 class Fingering;
 class QPainter;
 class FiguredBass;
+class UndoCommand;
 
 extern bool showRubberBand;
 
@@ -410,7 +411,7 @@ class Score {
       void cmdRemoveStaff(int staffIdx);
       void removeStaff(Staff*);
       void addMeasure(MeasureBase*, MeasureBase*);
-      void readStaff(QDomElement);
+      void readStaff(const QDomElement&);
 
       void cmdInsertPart(Part*, int);
       void cmdRemovePart(Part*);
@@ -429,8 +430,8 @@ class Score {
       int pageIdx(Page* page) const { return _pages.indexOf(page); }
 
       void write(Xml&, bool onlySelection);
-      bool read(QDomElement);
-      bool read1(QDomElement);
+      bool read(const QDomElement&);
+      bool read1(const QDomElement&);
 
       QList<Staff*>& staves()                { return _staves; }
       const QList<Staff*>& staves() const    { return _staves; }
@@ -456,8 +457,6 @@ class Score {
       void undoChangeVoltaText(Volta* volta, const QString& s);
       void undoChangeChordRestSize(ChordRest* cr, bool small);
       void undoChangeChordNoStem(Chord* cr, bool noStem);
-      void undoChangeChordRestSpace(ChordRest* cr, Spatium l, Spatium t);
-      void undoChangeSubtype(Element* element, int st);
       void undoChangePitch(Note* note, int pitch, int tpc, int line, int fret, int string);
       void spellNotelist(QList<Note*>& notes);
       void undoChangeTpc(Note* note, int tpc);
@@ -484,6 +483,7 @@ class Score {
       void undoChangeClef(Staff* ostaff, Segment*, ClefType st);
       void undoChangeBarLine(Measure* m, BarLineType);
       void undoSwapCR(ChordRest* cr1, ChordRest* cr2);
+      void undoChangeProperty(Element*, int, const QVariant& v);
 
       void setGraceNote(Chord*,  int pitch, NoteType type, int len);
       int clefOffset(int tick, Staff*) const;
@@ -508,7 +508,7 @@ class Score {
 
       // undo/redo ops
       void endUndoRedo(Undo*);
-      void addArticulation(int);
+      void addArticulation(ArticulationType);
       void changeAccidental(AccidentalType);
       void changeAccidental(Note* oNote, AccidentalType);
 
@@ -648,7 +648,7 @@ class Score {
 
       void spatiumChanged(qreal oldValue, qreal newValue);
 
-      void pasteStaff(QDomElement, ChordRest* dst);
+      void pasteStaff(const QDomElement&, ChordRest* dst);
       void toEList(EventMap* events);
       void renderPart(EventMap* events, Part*);
       int mscVersion() const    { return _mscVersion; }
@@ -713,6 +713,7 @@ class Score {
       void adjustBracketsIns(int sidx, int eidx);
       void renumberMeasures();
       UndoStack* undo() const;
+      void undo(UndoCommand* cmd) const;
 
       void endUndoRedo();
       Measure* searchLabel(const QString& s);
@@ -864,7 +865,7 @@ class Score {
       QReadWriteLock* layoutLock() { return &_layoutLock; }
       void doLayoutSystems();
       void doLayoutPages();
-      Tuplet* searchTuplet(QDomElement e, int id);
+      Tuplet* searchTuplet(const QDomElement& e, int id);
       void cmdSelectAll();
       void setUndoRedo(bool val)            { _undoRedo = val; }
       bool undoRedo() const                 { return _undoRedo; }

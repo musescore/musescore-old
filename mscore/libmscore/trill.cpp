@@ -36,10 +36,10 @@ void TrillSegment::draw(QPainter* painter) const
       qreal x2   = pos2().x();
 
       painter->setPen(curColor());
-      if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN) {
-            int sym;
-            qreal x0, x1, y;
-            int n;
+      if (subtype() == SEGMENT_SINGLE || subtype() == SEGMENT_BEGIN) {
+            int sym = 0;
+            qreal x0 = 0.0, x1 = 0.0, y = 0.0;
+            int n = 0;
             QRectF b1;
 
             switch(trill()->subtype()) {
@@ -108,7 +108,7 @@ void TrillSegment::layout()
       QRectF b1(symbols[idx][trillSym].bbox(mag));
       QRectF rr(b1.translated(-b1.x(), 0.0));
       rr |= QRectF(0.0, rr.y(), pos2().x(), rr.height());
-      if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN) {
+      if (subtype() == SEGMENT_SINGLE || subtype() == SEGMENT_BEGIN) {
             if (trill()->accidental()) {
                   rr |= trill()->accidental()->bbox().translated(trill()->accidental()->pos());
                   }
@@ -120,9 +120,9 @@ void TrillSegment::layout()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool TrillSegment::acceptDrop(MuseScoreView*, const QPointF&, int type, int /*subtype*/) const
+bool TrillSegment::acceptDrop(MuseScoreView*, const QPointF&, Element* e) const
       {
-      if (type == ACCIDENTAL)
+      if (e->type() == ACCIDENTAL)
             return true;
       return false;
       }
@@ -252,16 +252,17 @@ void Trill::write(Xml& xml) const
 //   Trill::read
 //---------------------------------------------------------
 
-void Trill::read(QDomElement e)
+void Trill::read(const QDomElement& de)
       {
       foreach(SpannerSegment* seg, spannerSegments())
             delete seg;
       spannerSegments().clear();
-      setId(e.attribute("id", "-1").toInt());
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
-            if (tag == "Accidental") {
+      setId(de.attribute("id", "-1").toInt());
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            const QString& tag(e.tagName());
+            if (tag == "subtype")
+                  setSubtype(e.text());
+            else if (tag == "Accidental") {
                   _accidental = new Accidental(score());
                   _accidental->read(e);
                   }
@@ -277,13 +278,13 @@ void Trill::read(QDomElement e)
 void Trill::setSubtype(const QString& s)
       {
       if (s == "trill")
-            Element::setSubtype(TRILL_LINE);
+            _subtype = TRILL_LINE;
       else if (s == "upprall")
-            Element::setSubtype(UPPRALL_LINE);
+            _subtype = UPPRALL_LINE;
       else if (s == "downprall")
-            Element::setSubtype(DOWNPRALL_LINE);
+            _subtype = DOWNPRALL_LINE;
       else if (s == "prallprall")
-            Element::setSubtype(PRALLPRALL_LINE);
+            _subtype = PRALLPRALL_LINE;
       else
             qDebug("Trill::setSubtype: unknown <%s>", qPrintable(s));
       }

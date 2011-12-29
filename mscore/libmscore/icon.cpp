@@ -29,7 +29,7 @@
 void Icon::write(Xml& xml) const
       {
       xml.stag(name());
-      Element::writeProperties(xml);
+      xml.tag("subtype", _subtype);
       xml.tag("action", _action);
       xml.etag();
       }
@@ -38,14 +38,15 @@ void Icon::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Icon::read(QDomElement e)
+void Icon::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
-            if (tag == "action") {
+            if (tag == "action")
                   _action = strdup(e.text().toAscii().data());
-                  }
-            else if (!Element::readProperties(e))
+            else if (tag == "subtyp")
+                  _subtype = e.text().toInt();
+            else
                   domError(e);
             }
       }

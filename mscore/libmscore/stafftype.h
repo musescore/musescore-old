@@ -67,8 +67,8 @@ class StaffType {
       bool showBarlines() const                { return _showBarlines;    }
       virtual void write(Xml& xml, int) const;
       void writeProperties(Xml& xml) const;
-      virtual void read(QDomElement);
-      bool readProperties(QDomElement e);
+      virtual void read(const QDomElement&);
+      bool readProperties(const QDomElement& e);
       void setSlashStyle(bool val)             { _slashStyle = val;       }
       bool slashStyle() const                  { return _slashStyle;      }
       bool genTimesig() const                  { return _genTimesig;      }
@@ -100,7 +100,7 @@ class StaffTypePitched : public StaffType {
       virtual const char* groupName() const   { return "pitched"; }
       virtual bool isEqual(const StaffType&) const;
 
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       virtual void write(Xml& xml, int) const;
 
       void setGenKeysig(bool val)              { _genKeysig = val;        }
@@ -125,7 +125,7 @@ class StaffTypePercussion : public StaffType {
       virtual StaffTypePercussion* clone() const { return new StaffTypePercussion(*this); }
       virtual const char* groupName() const      { return "percussion"; }
 
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       virtual void write(Xml& xml, int) const;
 
       void setGenKeysig(bool val)                { _genKeysig = val;        }
@@ -183,7 +183,7 @@ class StaffTypeTablature : public StaffType {
       virtual StaffGroup group() const          { return TAB_STAFF; }
       virtual StaffTypeTablature* clone() const { return new StaffTypeTablature(*this); }
       virtual const char* groupName() const     { return "tablature"; }
-      virtual void read(QDomElement e);
+      virtual void read(const QDomElement& e);
       virtual void write(Xml& xml, int) const;
       virtual bool isEqual(const StaffType&) const;
 

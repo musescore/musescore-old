@@ -28,14 +28,18 @@
 #include "stem.h"
 #include "hook.h"
 #include "mscore.h"
+#include "icon.h"
 
 //---------------------------------------------------------
 //   propertyList
 //---------------------------------------------------------
 
+static bool defaultDistribute         = true;
+static Direction defaultBeamDirection = AUTO;
+
 Property<Beam> Beam::propertyList[] = {
-      { P_DIRECTION,  T_DIRECTION, "StemDirection", &Beam::vBeamDirection, &Beam::setBeamDirection },
-      { P_DISTRIBUTE, T_VARIANT,   "distribute",    &Beam::vDistribute,    &Beam::setDistribute }
+      { P_DIRECTION,  T_DIRECTION, "StemDirection", &Beam::pBeamDirection, &defaultBeamDirection },
+      { P_DISTRIBUTE, T_BOOL,      "distribute",    &Beam::pDistribute,    &defaultDistribute    }
       };
 
 static const int PROPERTIES = sizeof(Beam::propertyList)/sizeof(*Beam::propertyList);
@@ -1199,7 +1203,7 @@ void Beam::write(Xml& xml) const
 
       for (int i = 0; i < PROPERTIES; ++i) {
             const Property<Beam>& p = propertyList[i];
-            xml.tag(p.name, p.type, ((*this).*(p.get))());
+            xml.tag(p.name, p.type, ((*(Beam*)this).*(p.data))(), propertyList[i].defaultVal);
             }
 
       int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
@@ -1223,30 +1227,17 @@ void Beam::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Beam::read(QDomElement e)
+void Beam::read(const QDomElement& de)
       {
       QPointF p1, p2;
       qreal _spatium = spatium();
-      _id = e.attribute("id").toInt();
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      _id = de.attribute("id").toInt();
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
-            bool found = false;
-            for (int i = 0; i < PROPERTIES; ++i) {
-                  const Property<Beam>& p = propertyList[i];
-                  if (tag == p.name) {
-                        QVariant v = readVariant(p.type, val);
-                        if (v.isValid())
-                              ((*this).*(p.set))(v);
-                        else
-                              domError(e);
-                        found = true;
-                        break;
-                        }
-                  }
-            if (found)
-                  continue;
-            if (tag == "y1") {
+            if (setProperty(tag, val))
+                  ;
+            else if (tag == "y1") {
                   if (fragments.isEmpty())
                         fragments.append(new BeamFragment);
                   BeamFragment* f = fragments.back();
@@ -1268,7 +1259,7 @@ void Beam::read(QDomElement e)
                   _userModified[idx] = true;
                   qreal _spatium = spatium();
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        QString tag(ee.tagName());
+                        const QString& tag(ee.tagName());
                         qreal v = ee.text().toDouble() * _spatium;
                         if (tag == "y1")
                               f->p1[idx] = QPointF(0.0, v);
@@ -1372,10 +1363,10 @@ void Beam::startEdit(MuseScoreView*, const QPointF& p)
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Beam::acceptDrop(MuseScoreView*, const QPointF&, int type, int subtype) const
+bool Beam::acceptDrop(MuseScoreView*, const QPointF&, Element* e) const
       {
-      return (type == ICON && subtype == ICON_FBEAM1)
-         || (type == ICON && subtype == ICON_FBEAM2);
+      return (e->type() == ICON) && ((static_cast<Icon*>(e)->subtype() == ICON_FBEAM1)
+         || (static_cast<Icon*>(e)->subtype() == ICON_FBEAM2));
       }
 
 //---------------------------------------------------------
@@ -1384,9 +1375,12 @@ bool Beam::acceptDrop(MuseScoreView*, const QPointF&, int type, int subtype) con
 
 Element* Beam::drop(const DropData& data)
       {
-      Element* e = data.element;
+      Icon* e = static_cast<Icon*>(data.element);
+      if (e->type() != ICON)
+            return 0;
       qreal g1;
       qreal g2;
+
       if (e->subtype() == ICON_FBEAM1) {
             g1 = 1.0;
             g2 = 0.0;
@@ -1397,7 +1391,20 @@ Element* Beam::drop(const DropData& data)
             }
       else
             return 0;
-      score()->undo()->push(new ChangeBeamProperties(this, g1, g2));
+      score()->undo(new ChangeBeamProperties(this, g1, g2));
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   property
+//---------------------------------------------------------
+
+Property<Beam>* Beam::property(int id) const
+      {
+      for (int i = 0; i < PROPERTIES; ++i) {
+            if (propertyList[i].id == id)
+                  return &propertyList[i];
+            }
       return 0;
       }
 
@@ -1407,10 +1414,9 @@ Element* Beam::drop(const DropData& data)
 
 QVariant Beam::getProperty(int propertyId) const
       {
-      for (int i = 0; i < PROPERTIES; ++i) {
-            if (propertyList[i].id == propertyId)
-                  return ((*this).*(propertyList[i].get))();
-            }
+      Property<Beam>* p = property(propertyId);
+      if (p)
+            return ::getProperty(p->type, ((*(Beam*)this).*(p->data))());
       return Element::getProperty(propertyId);
       }
 
@@ -1418,15 +1424,26 @@ QVariant Beam::getProperty(int propertyId) const
 //   setProperty
 //---------------------------------------------------------
 
-void Beam::setProperty(int propertyId, const QVariant& v)
+bool Beam::setProperty(int propertyId, const QVariant& v)
+      {
+      Property<Beam>* p = property(propertyId);
+      if (p) {
+            ::setProperty(p->type, ((*this).*(p->data))(), v);
+            setGenerated(false);
+            return true;
+            }
+      return Element::setProperty(propertyId, v);
+      }
+
+bool Beam::setProperty(const QString& name, const QString& data)
       {
       for (int i = 0; i < PROPERTIES; ++i) {
-            if (propertyList[i].id == propertyId) {
-                  ((*this).*(propertyList[i].set))(v);
+            if (propertyList[i].name == name) {
+                  ::setProperty(propertyList[i].type, ((*this).*(propertyList[i].data))(), data);
                   setGenerated(false);
-                  return;
+                  return true;
                   }
             }
-      Element::setProperty(propertyId, v);
+      return Element::setProperty(name, data);
       }
 

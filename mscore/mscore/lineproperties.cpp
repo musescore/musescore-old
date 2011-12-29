@@ -306,7 +306,7 @@ void LineProperties::beginTextProperties()
       if (t.exec()) {
             // TODO: delay to ok
             foreach(SpannerSegment* ls, tl->spannerSegments()) {
-                  if (ls->spannerSegmentType() != SEGMENT_SINGLE && ls->spannerSegmentType() != SEGMENT_BEGIN)
+                  if (ls->subtype() != SEGMENT_SINGLE && ls->subtype() != SEGMENT_BEGIN)
                         continue;
                   TextLineSegment* tls = static_cast<TextLineSegment*>(ls);
                   if (!tls->text())
@@ -333,7 +333,7 @@ void LineProperties::continueTextProperties()
       if (t.exec()) {
             // TODO: delay to ok
             foreach(SpannerSegment* ls, tl->spannerSegments()) {
-                  if (ls->spannerSegmentType() != SEGMENT_MIDDLE)
+                  if (ls->subtype() != SEGMENT_MIDDLE)
                         continue;
                   TextLineSegment* tls = static_cast<TextLineSegment*>(ls);
                   if (!tls->text())

@@ -109,7 +109,7 @@ class System : public Element {
       virtual void remove(Element*);
       virtual void change(Element* o, Element* n);
       virtual void write(Xml&) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
 
       virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
 

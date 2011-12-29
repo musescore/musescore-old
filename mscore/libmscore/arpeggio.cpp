@@ -28,6 +28,7 @@ Arpeggio::Arpeggio(Score* s)
   : Element(s)
       {
       setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
+      _subtype = ARP_NORMAL;
       setHeight(spatium() * 4);      // for use in palettes
       _span = 1;
       }
@@ -49,6 +50,7 @@ void Arpeggio::write(Xml& xml) const
       {
       xml.stag("Arpeggio");
       Element::writeProperties(xml);
+      xml.tag("subtype", _subtype);
       if (_userLen1.val() != 0.0)
             xml.sTag("userLen1", _userLen1);
       if (_userLen2.val() != 0.0)
@@ -62,12 +64,14 @@ void Arpeggio::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Arpeggio::read(QDomElement e)
+void Arpeggio::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
-            if (tag == "userLen1")
+            if (tag == "subtype")
+                  _subtype = ArpeggioType(val.toInt());
+            else if (tag == "userLen1")
                   _userLen1 = Spatium(val.toDouble());
             else if (tag == "userLen2")
                   _userLen2 = Spatium(val.toDouble());

@@ -34,7 +34,7 @@ class Excerpt {
       Score* score() const            { return _score;  }
       void setScore(Score* s)         { _score = s; }
 
-      void read(QDomElement);
+      void read(const QDomElement&);
 
       bool operator!=(const Excerpt&) const;
       QString title() const           { return _title; }

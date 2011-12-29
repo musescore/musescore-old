@@ -21,6 +21,13 @@ class QPainter;
 
 // Tremolo subtypes:
 enum TremoloType {
+      OLD_TREMOLO_R8 = 0,
+      OLD_TREMOLO_R16,
+      OLD_TREMOLO_R32,
+      OLD_TREMOLO_C8,
+      OLD_TREMOLO_C16,
+      OLD_TREMOLO_C32,
+
       TREMOLO_R8=6, TREMOLO_R16, TREMOLO_R32, TREMOLO_R64,    // one note tremolo (repeat)
       TREMOLO_C8, TREMOLO_C16, TREMOLO_C32, TREMOLO_C64     // two note tremolo (change)
       };
@@ -30,6 +37,7 @@ enum TremoloType {
 //---------------------------------------------------------
 
 class Tremolo : public Element {
+      TremoloType _subtype;
       Chord* _chord1;
       Chord* _chord2;
       QPainterPath path;
@@ -39,14 +47,16 @@ class Tremolo : public Element {
       Tremolo &operator=(const Tremolo&);
       virtual Tremolo* clone() const   { return new Tremolo(*this); }
       virtual ElementType type() const { return TREMOLO; }
-      virtual QString subtypeName() const;
-      virtual void setSubtype(const QString& s);
-      void setSubtype(TremoloType t)   { Element::setSubtype(int(t)); }
+
+      QString subtypeName() const;
+      void setSubtype(const QString& s);
+      void setSubtype(TremoloType t)   { _subtype = t; }
+      TremoloType subtype() const      { return _subtype; }
 
       virtual void draw(QPainter*) const;
       virtual void layout();
       virtual void write(Xml& xml) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
 
       Chord* chord1() const { return _chord1; }
       Chord* chord2() const { return _chord2; }

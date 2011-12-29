@@ -55,9 +55,6 @@ class Text : public SimpleText {
       virtual Text* clone() const         { return new Text(*this); }
       virtual ElementType type() const    { return TEXT; }
 
-      virtual void setSubtype(const QString& s) { SimpleText::setSubtype(s); }
-      virtual void setSubtype(int val)          { Element::setSubtype(val);    }
-
       void setText(const QString& s);
       void setText(const QTextDocumentFragment&);
       void setHtml(const QString& s);
@@ -103,10 +100,9 @@ class Text : public SimpleText {
       void addChar(int code, QTextCursor* cur = 0);
       void setBlockFormat(const QTextBlockFormat&);
       virtual void write(Xml& xml) const;
-      virtual void write(Xml& xml, const char*) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       void writeProperties(Xml& xml, bool writeText = true) const;
-      bool readProperties(QDomElement node);
+      bool readProperties(const QDomElement& node);
       virtual void layout();
       virtual void layout(qreal width, qreal x, qreal y);
       virtual QPainterPath shape() const;

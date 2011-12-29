@@ -110,13 +110,13 @@ void MeasureBase::add(Element* e)
       if (e->type() == LAYOUT_BREAK) {
             LayoutBreak* b = static_cast<LayoutBreak*>(e);
             foreach (Element* ee, _el) {
-                  if (ee->type() == LAYOUT_BREAK && ee->subtype() == e->subtype()) {
+                  if (ee->type() == LAYOUT_BREAK && static_cast<LayoutBreak*>(ee)->subtype() == b->subtype()) {
                         if (debugMode)
                               qDebug("warning: layout break already set\n");
                         return;
                         }
                   }
-            switch(e->subtype()) {
+            switch (b->subtype()) {
                   case LAYOUT_BREAK_PAGE:
                         _pageBreak = true;
                         break;
@@ -145,7 +145,8 @@ void MeasureBase::add(Element* e)
 void MeasureBase::remove(Element* el)
       {
       if (el->type() == LAYOUT_BREAK) {
-            switch(el->subtype()) {
+            LayoutBreak* lb = static_cast<LayoutBreak*>(el);
+            switch (lb->subtype()) {
                   case LAYOUT_BREAK_PAGE:
                         _pageBreak = false;
                         break;

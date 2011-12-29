@@ -59,10 +59,10 @@ Staff* Part::staff(int idx) const
 //   read
 //---------------------------------------------------------
 
-void Part::read(QDomElement e)
+void Part::read(const QDomElement& de)
       {
       int rstaff = 0;
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
             if (tag == "Staff") {

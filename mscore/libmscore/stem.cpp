@@ -109,12 +109,13 @@ void Stem::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Stem::read(QDomElement e)
+void Stem::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            if (tag == "userLen")
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "userLen")
                   _userLen = e.text().toDouble() * spatium();
+            else if (e.tagName() == "subtype")        // obsolete
+                  ;
             else if (!Element::readProperties(e))
                   domError(e);
             }
@@ -157,9 +158,9 @@ void Stem::toDefault()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Stem::acceptDrop(MuseScoreView*, const QPointF&, int type, int subtype) const
+bool Stem::acceptDrop(MuseScoreView*, const QPointF&, Element* e) const
       {
-      if ((type == TREMOLO) && (subtype <= TREMOLO_R64)) {
+      if ((e->type() == TREMOLO) && (static_cast<Tremolo*>(e)->subtype() <= TREMOLO_R64)) {
             return true;
             }
       return false;

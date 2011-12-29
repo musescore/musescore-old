@@ -452,7 +452,7 @@ bool TimesigWizard::pickup(int* z, int* n) const
 //   type
 //---------------------------------------------------------
 
-int TimesigWizard::type() const
+TimeSigType TimesigWizard::type() const
       {
       if (tsFraction->isChecked())
             return TSIG_NORMAL;

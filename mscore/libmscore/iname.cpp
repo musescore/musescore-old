@@ -21,6 +21,7 @@
 InstrumentName::InstrumentName(Score* s)
    : Text(s)
       {
+      _subtype = INSTRUMENT_NAME_SHORT;
       _layoutPos = 0;
       }
 
@@ -42,9 +43,9 @@ QString InstrumentName::subtypeName() const
 void InstrumentName::setSubtype(const QString& s)
       {
       if (s == "short")
-            Element::setSubtype(INSTRUMENT_NAME_SHORT);
+            _subtype = INSTRUMENT_NAME_SHORT;
       if (s == "long")
-            Element::setSubtype(INSTRUMENT_NAME_LONG);
+            _subtype = INSTRUMENT_NAME_LONG;
       else
             qDebug("InstrumentName::setSubtype: unknown <%s>", qPrintable(s));
       }

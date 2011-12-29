@@ -50,6 +50,7 @@ enum AccidentalRole {
 
 class Accidental : public Element {
       QList<SymElement> el;
+      AccidentalType _subtype;
       bool _hasBracket;
       AccidentalRole _role;
       bool _small;
@@ -58,19 +59,20 @@ class Accidental : public Element {
       Accidental(Score* s);
       virtual Accidental* clone() const     { return new Accidental(*this); }
       virtual ElementType type() const      { return ACCIDENTAL; }
-      virtual QString subtypeName() const;
+
       const char* subtypeUserName() const;
-      virtual void setSubtype(const QString& s);
-      virtual void setSubtype(AccidentalType t) { Element::setSubtype(int(t)); }
-      AccidentalType accidentalType() const     { return AccidentalType(subtype()); }
-      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
+      void setSubtype(const QString& s);
+      void setSubtype(AccidentalType t)     { _subtype = t;    }
+      AccidentalType subtype() const        { return _subtype; }
+
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, Element*) const;
       virtual Element* drop(const DropData&);
       virtual void layout();
       virtual void draw(QPainter*) const;
       virtual bool isEditable() const                    { return true; }
       virtual void startEdit(MuseScoreView*, const QPointF&) { setGenerated(false); }
 
-      int symbol();
+      int symbol() const;
       Note* note() const                  { return (Note*)parent(); }
       bool hasBracket() const             { return _hasBracket;     }
       void setHasBracket(bool val)        { _hasBracket = val;      }
@@ -79,11 +81,11 @@ class Accidental : public Element {
       bool small() const                  { return _small;          }
       void setSmall(bool val)             { _small = val;           }
 
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       virtual void write(Xml& xml) const;
 
       virtual QVariant getProperty(int propertyId) const;
-      virtual void setProperty(int propertyId, const QVariant&);
+      virtual bool setProperty(int propertyId, const QVariant&);
 
       static int subtype2value(AccidentalType);             // return effective pitch offset
       static const char* subtype2name(AccidentalType);      // return effective pitch offset
@@ -97,11 +99,14 @@ class Accidental : public Element {
 //---------------------------------------------------------
 
 class AccidentalBracket : public Compound {
+      int _subtype;
+
    public:
       AccidentalBracket(Score*);
       virtual AccidentalBracket* clone() const { return new AccidentalBracket(*this); }
       virtual ElementType type() const         { return ACCIDENTAL_BRACKET; }
-      virtual void setSubtype(int v);
+      void setSubtype(int v);
+      int subtype() const                      { return _subtype; }
       };
 
 #endif

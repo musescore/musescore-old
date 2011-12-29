@@ -138,8 +138,10 @@ InspectorElementElement::InspectorElementElement(QWidget* parent)
    : QWidget(parent)
       {
       setupUi(this);
-      connect(offsetX, SIGNAL(valueChanged(double)), SIGNAL(enableApply()));
-      connect(offsetY, SIGNAL(valueChanged(double)), SIGNAL(enableApply()));
+      connect(color,   SIGNAL(colorChanged(QColor)), SLOT(colorChanged(QColor)));
+      connect(offsetX, SIGNAL(valueChanged(double)), SLOT(offsetXChanged(double)));
+      connect(offsetY, SIGNAL(valueChanged(double)), SLOT(offsetYChanged(double)));
+      connect(resetColor, SIGNAL(clicked()), SLOT(resetColorClicked()));
       connect(resetX,  SIGNAL(clicked()), SLOT(resetXClicked()));
       connect(resetY,  SIGNAL(clicked()), SLOT(resetYClicked()));
       }
@@ -148,23 +150,70 @@ InspectorElementElement::InspectorElementElement(QWidget* parent)
 //   dirty
 //---------------------------------------------------------
 
-bool InspectorElementElement::dirty(Element* e) const
+bool InspectorElementElement::dirty() const
       {
       qreal _spatium = e->score()->spatium();
       return offsetX->value() != (e->pos().x() / _spatium)
-         || offsetY->value() != (e->pos().y() / _spatium);
+         || offsetY->value() != (e->pos().y() / _spatium)
+         || color->color() != e->color();
       }
 
 //---------------------------------------------------------
 //   setElement
 //---------------------------------------------------------
 
-void InspectorElementElement::setElement(const Element* e)
+void InspectorElementElement::setElement(Element* element)
       {
+      e = element;
       elementName->setText(e->name());
+      color->setColor(e->color());
       qreal _spatium = e->score()->spatium();
       offsetX->setValue(e->pos().x() / _spatium);
       offsetY->setValue(e->pos().y() / _spatium);
+      resetColor->setEnabled(e->color() != MScore::defaultColor);
+      resetX->setEnabled(e->userOff().x() != 0.0);
+      resetY->setEnabled(e->userOff().y() != 0.0);
+      }
+
+//---------------------------------------------------------
+//   colorChanged
+//---------------------------------------------------------
+
+void InspectorElementElement::colorChanged(QColor)
+      {
+      resetColor->setEnabled(color->color() != MScore::defaultColor);
+      emit enableApply();
+      }
+
+//---------------------------------------------------------
+//   offsetXChanged
+//---------------------------------------------------------
+
+void InspectorElementElement::offsetXChanged(double)
+      {
+      resetX->setEnabled(offsetX->value() != e->ipos().x());
+      emit enableApply();
+      }
+
+//---------------------------------------------------------
+//   offsetYChanged
+//---------------------------------------------------------
+
+void InspectorElementElement::offsetYChanged(double)
+      {
+      resetY->setEnabled(offsetY->value() != e->ipos().y());
+      emit enableApply();
+      }
+
+//---------------------------------------------------------
+//   resetColorClicked
+//---------------------------------------------------------
+
+void InspectorElementElement::resetColorClicked()
+      {
+      color->setColor(MScore::defaultColor);
+      resetColor->setEnabled(false);
+      emit enableApply();
       }
 
 //---------------------------------------------------------
@@ -173,7 +222,9 @@ void InspectorElementElement::setElement(const Element* e)
 
 void InspectorElementElement::resetXClicked()
       {
-      offsetX->setValue(0.0);
+      offsetX->setValue(e->ipos().x());
+      resetX->setEnabled(false);
+      emit enableApply();
       }
 
 //---------------------------------------------------------
@@ -182,20 +233,24 @@ void InspectorElementElement::resetXClicked()
 
 void InspectorElementElement::resetYClicked()
       {
-      offsetY->setValue(0.0);
+      offsetY->setValue(e->ipos().y());
+      resetY->setEnabled(false);
+      emit enableApply();
       }
 
 //---------------------------------------------------------
 //   apply
 //---------------------------------------------------------
 
-void InspectorElementElement::apply(Element* e)
+void InspectorElementElement::apply()
       {
       Score* score    = e->score();
       qreal _spatium  = score->spatium();
       QPointF o(offsetX->value() * _spatium, offsetY->value() * _spatium);
       if (o != e->pos())
-            score->undo()->push(new ChangeUserOffset(e, o - e->ipos()));
+            score->undoChangeUserOffset(e, o - e->ipos());
+      if (e->color() != color->color())
+            score->undo(new ChangeProperty(e, P_COLOR, color->color()));
       }
 
 //---------------------------------------------------------
@@ -240,7 +295,7 @@ void InspectorElement::apply()
       Element* e = inspector->element();
       Score* score = e->score();
       score->startCmd();
-      ie->apply(e);
+      ie->apply();
       score->setLayoutAll(true);
       score->endCmd();
       mscore->endCmd();
@@ -318,7 +373,7 @@ void InspectorVBox::apply()
       if (topGap != box->topGap() || bottomGap != box->bottomGap()
          || height != box->boxHeight()) {
             score->startCmd();
-            score->undo()->push(new ChangeBoxProperties(box,
+            score->undo(new ChangeBoxProperties(box,
                box->leftMargin(), box->topMargin(), box->rightMargin(), box->bottomMargin(),
                height, box->boxWidth(),
                topGap, bottomGap
@@ -404,7 +459,7 @@ void InspectorHBox::apply()
       if (leftGap != box->topGap() || rightGap != box->bottomGap()
          || width != box->boxWidth()) {
             score->startCmd();
-            score->undo()->push(new ChangeBoxProperties(box,
+            score->undo(new ChangeBoxProperties(box,
                box->leftMargin(), box->topMargin(), box->rightMargin(), box->bottomMargin(),
                box->boxHeight(), width,
                leftGap, rightGap
@@ -470,13 +525,13 @@ void InspectorArticulation::apply()
       QPointF o(ar.x->value() * _spatium, ar.y->value() * _spatium);
       score->startCmd();
       if (o != a->pos())
-            score->undo()->push(new ChangeUserOffset(a, o - a->ipos()));
+            score->undoChangeUserOffset(a, o - a->ipos());
       Direction d = Direction(ar.direction->currentIndex());
       ArticulationAnchor anchor = ArticulationAnchor(ar.anchor->currentIndex());
       if (anchor != a->anchor())
-            score->undo()->push(new ChangeProperty(a, P_ARTICULATION_ANCHOR, int(anchor)));
+            score->undo(new ChangeProperty(a, P_ARTICULATION_ANCHOR, int(anchor)));
       if (d != a->direction())
-            score->undo()->push(new ChangeProperty(a, P_DIRECTION, int(d)));
+            score->undo(new ChangeProperty(a, P_DIRECTION, int(d)));
       score->endCmd();
       mscore->endCmd();
       }
@@ -610,10 +665,10 @@ void InspectorSegment::apply()
       {
       qreal val = leadingSpace->value();
       if (segment->extraLeadingSpace().val() != val)
-            segment->score()->undo()->push(new ChangeProperty(segment, P_LEADING_SPACE, val));
+            segment->score()->undo(new ChangeProperty(segment, P_LEADING_SPACE, val));
       val = trailingSpace->value();
       if (segment->extraTrailingSpace().val() != val)
-            segment->score()->undo()->push(new ChangeProperty(segment, P_TRAILING_SPACE, val));
+            segment->score()->undo(new ChangeProperty(segment, P_TRAILING_SPACE, val));
       }
 
 //---------------------------------------------------------
@@ -773,19 +828,19 @@ void InspectorNoteBase::apply()
       Score* score = note->score();
       bool b = small->isChecked();
       if (note->small() != b)
-            score->undo()->push(new ChangeProperty(note, P_SMALL, b));
+            score->undo(new ChangeProperty(note, P_SMALL, b));
       int val = mirrorHead->currentIndex();
       if (note->userMirror() != val)
-            score->undo()->push(new ChangeProperty(note, P_MIRROR_HEAD, val));
+            score->undo(new ChangeProperty(note, P_MIRROR_HEAD, val));
       val = dotPosition->currentIndex();
       if (note->dotPosition() != val)
-            score->undo()->push(new ChangeProperty(note, P_DOT_POSITION, val));
+            score->undo(new ChangeProperty(note, P_DOT_POSITION, val));
       val = ontimeOffset->value();
       if (note->onTimeOffset() != val)
-            score->undo()->push(new ChangeProperty(note, P_ONTIME_OFFSET, val));
+            score->undo(new ChangeProperty(note, P_ONTIME_OFFSET, val));
       val = offtimeOffset->value();
       if (note->offTimeOffset() != val)
-            score->undo()->push(new ChangeProperty(note, P_OFFTIME_OFFSET, val));
+            score->undo(new ChangeProperty(note, P_OFFTIME_OFFSET, val));
       }
 
 //---------------------------------------------------------
@@ -840,7 +895,7 @@ void InspectorNote::apply()
       Score*  score = note->score();
       score->startCmd();
 
-      iElement->apply(note);
+      iElement->apply();
       iNote->apply();
       iSegment->apply();
 
@@ -856,8 +911,7 @@ void InspectorNote::apply()
 
 bool InspectorNote::dirty() const
       {
-      Note* note = static_cast<Note*>(inspector->element());
-      return iElement->dirty(note)
+      return iElement->dirty()
          || iNote->dirty()
          || iSegment->dirty();
       }
@@ -908,11 +962,11 @@ void InspectorRest::apply()
       Score* score     = rest->score();
       score->startCmd();
 
-      iElement->apply(rest);
+      iElement->apply();
       iSegment->apply();
       bool val = small->isChecked();
       if (val != rest->small())
-            score->undo()->push(new ChangeProperty(rest, P_SMALL, val));
+            score->undo(new ChangeProperty(rest, P_SMALL, val));
       score->setLayoutAll(true);
       score->endCmd();
       mscore->endCmd();
@@ -957,7 +1011,7 @@ void InspectorClef::apply()
       Score* score = clef->score();
       score->startCmd();
 
-      iElement->apply(clef);
+      iElement->apply();
       iSegment->apply();
 
       score->setLayoutAll(true);
@@ -1010,9 +1064,9 @@ void InspectorBeam::apply()
       Direction d     = Direction(b.direction->currentIndex());
       score->startCmd();
       if (beam->distribute() != distribute)
-            score->undo()->push(new ChangeProperty(beam, P_DISTRIBUTE, distribute));
+            score->undo(new ChangeProperty(beam, P_DISTRIBUTE, distribute));
       if (beam->beamDirection() != d)
-            score->undo()->push(new ChangeProperty(beam, P_DIRECTION, d));
+            score->undo(new ChangeProperty(beam, P_DIRECTION, d));
       score->setLayoutAll(true);
       score->endCmd();
       mscore->endCmd();

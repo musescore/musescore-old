@@ -128,9 +128,9 @@ bool SlurSegment::edit(MuseScoreView* viewer, int curGrip, int key, Qt::Keyboard
             return false;
 
       if (!((modifiers & Qt::ShiftModifier)
-         && ((spannerSegmentType() == SEGMENT_SINGLE)
-              || (spannerSegmentType() == SEGMENT_BEGIN && curGrip == 0)
-              || (spannerSegmentType() == SEGMENT_END && curGrip == 3)
+         && ((subtype() == SEGMENT_SINGLE)
+              || (subtype() == SEGMENT_BEGIN && curGrip == 0)
+              || (subtype() == SEGMENT_END && curGrip == 3)
             )))
             return false;
 
@@ -191,7 +191,7 @@ QPointF SlurSegment::gripAnchor(int grip) const
       QPointF sp(system()->pagePos());
       QPointF p1(spos.p1 + spos.system1->pagePos());
       QPointF p2(spos.p2 + spos.system2->pagePos());
-      switch(spannerSegmentType()) {
+      switch (subtype()) {
             case SEGMENT_SINGLE:
                   if (grip == GRIP_START)
                         return p1;
@@ -273,8 +273,8 @@ void SlurSegment::editDrag(const EditData& ed)
             Element* e = ed.view->elementNear(ed.pos);
             if ((slur->type() == SLUR)
                && (
-                  (ed.curGrip == GRIP_START && (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN))
-                  || (ed.curGrip == GRIP_END && (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_END))
+                  (ed.curGrip == GRIP_START && (subtype() == SEGMENT_SINGLE || subtype() == SEGMENT_BEGIN))
+                  || (ed.curGrip == GRIP_END && (subtype() == SEGMENT_SINGLE || subtype() == SEGMENT_END))
                   )
                ) {
                   if (e && e->type() == NOTE) {
@@ -335,9 +335,9 @@ void SlurSegment::write(Xml& xml, int no) const
 //   readSegment
 //---------------------------------------------------------
 
-void SlurSegment::read(QDomElement e)
+void SlurSegment::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             if (tag == "o1")
                   ups[GRIP_START].off = readPoint(e);
@@ -851,7 +851,7 @@ void SlurTie::writeProperties(Xml& xml) const
 //   readProperties
 //---------------------------------------------------------
 
-bool SlurTie::readProperties(QDomElement e)
+bool SlurTie::readProperties(const QDomElement& e)
       {
       const QString& tag(e.tagName());
       const QString& val(e.text());
@@ -901,14 +901,15 @@ QVariant SlurTie::getProperty(int propertyId) const
 //   setProperty
 //---------------------------------------------------------
 
-void SlurTie::setProperty(int propertyId, const QVariant& v)
+bool SlurTie::setProperty(int propertyId, const QVariant& v)
       {
       switch(propertyId) {
             case P_LINE_TYPE:      setLineType(v.toInt()); break;
             case P_SLUR_DIRECTION: setSlurDirection(Direction(v.toInt())); break;
             default:
-                  Spanner::setProperty(propertyId, v);
+                  return Spanner::setProperty(propertyId, v);
             }
+      return true;
       }
 
 //---------------------------------------------------------
@@ -918,7 +919,7 @@ void SlurTie::setProperty(int propertyId, const QVariant& v)
 void SlurSegment::toDefault()
       {
       score()->undoChangeUserOffset(this, QPointF());
-      score()->undo()->push(new ChangeSlurOffsets(this, QPointF(), QPointF(), QPointF(), QPointF()));
+      score()->undo(new ChangeSlurOffsets(this, QPointF(), QPointF(), QPointF(), QPointF()));
       for (int i = 0; i < SLUR_GRIPS; ++i)
             ups[i].off = QPointF();
       parent()->toDefault();
@@ -960,26 +961,25 @@ void Slur::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Slur::read(QDomElement e)
+void Slur::read(const QDomElement& de)
       {
       setTrack(0);      // set staff
-      setId(e.attribute("id").toInt());
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      setId(de.attribute("id").toInt());
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
-            int i = val.toInt();
 //            if (tag == "tick2")
 //                  _tick2 = score()->fileDivision(i);
             if (tag == "track2")
-                  _track2 = i;
+                  _track2 = val.toInt();
 //            else if (tag == "startTick")        // obsolete
 //                  ; //                  setTick(i);
 //            else if (tag == "endTick")          // obsolete
-//                  setTick2(i);
+//                  setTick2(val.toInt());
             else if (tag == "startTrack")       // obsolete
-                  setTrack(i);
+                  setTrack(val.toInt());
             else if (tag == "endTrack")         // obsolete
-                  setTrack2(i);
+                  setTrack2(val.toInt());
             else if (!SlurTie::readProperties(e))
                   domError(e);
             }
@@ -1043,7 +1043,7 @@ void Slur::layout()
             else {
                   s = frontSegment();
                   }
-            s->setSpannerSegmentType(SEGMENT_SINGLE);
+            s->setSubtype(SEGMENT_SINGLE);
             s->layout(QPointF(0, 0), QPointF(_len, 0));
             setbbox(frontSegment()->bbox());
             return;
@@ -1257,9 +1257,9 @@ void Tie::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Tie::read(QDomElement e)
+void Tie::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (Element::readProperties(e))
                   ;
             else if (SlurTie::readProperties(e))
@@ -1314,7 +1314,7 @@ void Tie::layout()
                   // chords
                   //
                   QList<int> ties;
-                  int idx;
+                  int idx = 0;
                   for (int i = 0; i < n; ++i) {
                         if (notes[i]->tieFor()) {
                               ties.append(notes[i]->line());
@@ -1406,20 +1406,20 @@ void Tie::layout()
             // case 1: one segment
             if (sPos.system1 == sPos.system2) {
                   segment->layout(sPos.p1, sPos.p2);
-                  segment->setSpannerSegmentType(SEGMENT_SINGLE);
+                  segment->setSubtype(SEGMENT_SINGLE);
                   }
             // case 2: start segment
             else if (i == 0) {
                   qreal x = system->bbox().width();
                   segment->layout(sPos.p1, QPointF(x, sPos.p1.y()));
-                  segment->setSpannerSegmentType(SEGMENT_BEGIN);
+                  segment->setSubtype(SEGMENT_BEGIN);
                   }
             // case 4: end segment
             else {
                   qreal x = firstNoteRestSegmentX(system) - 2 * _spatium;
 
                   segment->layout(QPointF(x, sPos.p2.y()), sPos.p2);
-                  segment->setSpannerSegmentType(SEGMENT_END);
+                  segment->setSubtype(SEGMENT_END);
                   }
             ++i;
             }
