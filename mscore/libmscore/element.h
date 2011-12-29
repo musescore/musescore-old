@@ -392,7 +392,7 @@ class Element {
       void setTag(uint val)            { _tag = val;                       }
       virtual QVariant getProperty(int propertyId) const;
       virtual bool setProperty(int propertyId, const QVariant&);
-      virtual bool setProperty(const QString&, const QString&);
+      virtual bool setProperty(const QString&, const QDomElement&); // const QString&);
 
       static Property<Element> propertyList[];
       Property<Element>* property(int id) const;

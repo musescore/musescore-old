@@ -78,5 +78,6 @@ class Property {
 extern void setProperty(P_DATA_TYPE, void*, const QString& value);
 extern void setProperty(P_DATA_TYPE, void*, const QVariant& value);
 extern QVariant getProperty(P_DATA_TYPE, void*);
+extern QVariant getProperty(P_DATA_TYPE type, const QDomElement& e);
 #endif
 
