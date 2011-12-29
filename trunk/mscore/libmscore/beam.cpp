@@ -1274,6 +1274,8 @@ void Beam::read(const QDomElement& de)
                   _grow1 = val.toDouble();
             else if (tag == "growRight")
                   _grow2 = val.toDouble();
+            else if (tag == "subtype")          // obsolete
+                  ;
             else if (!Element::readProperties(e))
                   domError(e);
             }

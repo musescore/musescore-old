@@ -39,9 +39,10 @@ class LayoutBreak : public Element {
 
       virtual void draw(QPainter*) const;
       void layout0();
-      virtual void spatiumChanged(qreal /*oldValue*/, qreal /*newValue*/);
-      void* pPause()   { return  &_pause; }
+      virtual void spatiumChanged(qreal oldValue, qreal newValue);
+
       void* pSubtype() { return  &_subtype; }
+      void* pPause()   { return  &_pause;   }
 
    public:
       LayoutBreak(Score*);

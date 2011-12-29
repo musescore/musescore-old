@@ -35,6 +35,7 @@ static const int PROPERTIES = sizeof(LayoutBreak::propertyList)/sizeof(*LayoutBr
 LayoutBreak::LayoutBreak(Score* score)
    : Element(score)
       {
+      _subtype             = LAYOUT_BREAK_PAGE;
       _pause               = score->styleD(ST_SectionPause);
       _startWithLongNames  = true;
       _startWithMeasureOne = true;
@@ -78,6 +79,7 @@ void LayoutBreak::read(const QDomElement& de)
             else if (!Element::readProperties(e))
                   domError(e);
             }
+      layout0();
       }
 
 //---------------------------------------------------------

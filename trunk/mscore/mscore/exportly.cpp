@@ -1225,7 +1225,7 @@ void ExportLy::anchortest()
 	{
 	  Element * instruction = anchors[i].instruct;
 	  ElementType instructiontype = instruction ->type();
-	  Text* text = (Text*) instruction;
+//	  Text* text = (Text*) instruction;
 	  qDebug("anker nr: %d ", i);
 	  switch(instructiontype)
 	    {
@@ -1293,7 +1293,7 @@ void ExportLy::jumptest()
 	  qDebug("jumptest 2\n");
 	  ElementType instructiontype = merke->type();
 	  qDebug("jumptest 3\n");
-	  Text* text = (Text*) merke;
+//	  Text* text = (Text*) merke;
 	  qDebug("jumptest 4\n");
 	  qDebug("marker nr: %d ", i);
 	  switch(instructiontype)

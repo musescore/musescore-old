@@ -1978,11 +1978,11 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
       int offset = 0;
       int rstaff = 0;
       QStringList dynamics;
-      int spread = 0;
+//      int spread;
       qreal rx = 0.0;
       qreal ry = 0.0;
       qreal yoffset = 0.0; // actually this is default-y
-      qreal xoffset = 0.0;
+//      qreal xoffset;
       bool hasYoffset = false;
       QString dynaVelocity = "";
       QString tempo = "";
@@ -1999,7 +1999,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
       bool pedalLine = false;
       int number = 1;
       QString lineEnd;
-      qreal endLength = 0;
+//      qreal endLength;
       QString lineType;
       QDomElement metrEl;
 
@@ -2012,7 +2012,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               ry      = ee.attribute(QString("relative-y"), "0").toDouble() * -.1;
                               rx      = ee.attribute(QString("relative-x"), "0").toDouble() * .1;
                               yoffset = ee.attribute("default-y").toDouble(&hasYoffset) * -0.1;
-                              xoffset = ee.attribute("default-x", "0.0").toDouble() * 0.1;
+//                              xoffset = ee.attribute("default-x", "0.0").toDouble() * 0.1;
                               }
                         if (dirType == "words") {
                               txt        = ee.text();
@@ -2039,7 +2039,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               }
                         else if (dirType == "wedge") {
                               type   = ee.attribute(QString("type"));
-                              spread = ee.attribute(QString("spread"), "0").toInt();
+//                              spread = ee.attribute(QString("spread"), "0").toInt();
                               }
                         else if (dirType == "dashes")
                               domNotImplemented(ee);
@@ -2047,7 +2047,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               type      = ee.attribute(QString("type"));
                               number    = ee.attribute(QString("number"), "1").toInt();
                               lineEnd   = ee.attribute(QString("line-end"), "none");
-                              endLength = ee.attribute(QString("end-length"), "0").toDouble() * 0.1;
+//                              endLength = ee.attribute(QString("end-length"), "0").toDouble() * 0.1;
                               lineType  = ee.attribute(QString("line-type"), "solid");
                               }
                         else if (dirType == "metronome")
@@ -3236,7 +3236,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       qreal rx = 0.0;
       qreal ry = 0.0;
       qreal yoffset = 0.0; // actually this is default-y
-      qreal xoffset = 0.0;
+//      qreal xoffset;
       bool hasYoffset = false;
       QSet<Slur*> slursStarted;
       QSet<Slur*> slursStopped;
@@ -3502,7 +3502,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                     ry        = ee.attribute(QString("relative-y"), "0").toDouble() * -.1;
                                     rx        = ee.attribute(QString("relative-x"), "0").toDouble() * .1;
                                     yoffset   = ee.attribute("default-y").toDouble(&hasYoffset) * -0.1;
-                                    xoffset   = ee.attribute("default-x", "0.0").toDouble() * 0.1;
+//                                    xoffset   = ee.attribute("default-x", "0.0").toDouble() * 0.1;
                                     }
                               QDomElement eee = ee.firstChildElement();
                               if (!eee.isNull()) {

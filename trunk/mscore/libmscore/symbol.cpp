@@ -286,7 +286,7 @@ void Symbol::read(const QDomElement& de)
                         add(image);
                         }
                   }
-            else if (tag == "small")
+            else if (tag == "small" || tag == "subtype")
                   ;
             else if (!Element::readProperties(e))
                   domError(e);

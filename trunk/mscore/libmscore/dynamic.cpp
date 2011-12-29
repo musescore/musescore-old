@@ -69,6 +69,7 @@ Dynamic::Dynamic(Score* s)
       setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       _velocity = -1;
       setTextStyle(TEXT_STYLE_DYNAMICS);
+      setSubtype(0);
       _dynType  = DYNAMIC_PART;
       setStyled(false);
       }
@@ -145,7 +146,11 @@ void Dynamic::read(const QDomElement& de)
 void Dynamic::setSubtype(int idx)
       {
       _subtype = idx;
-      if (idx) {
+      if (idx > 0) {
+            if ((unsigned)idx >= sizeof(dynList)/sizeof(*dynList)) {
+                  qDebug("Dynamic::setSubtype: bad type %d\n", idx);
+                  idx = 1;
+                  }
             setStyled(false);
             clear();
             QTextCursor* cursor = startCursorEdit();
@@ -183,6 +188,7 @@ void Dynamic::setSubtype(const QString& tag)
                   return;
                   }
             }
+      qDebug("Dynamic: subtype not found <%s>\n", qPrintable(tag));
       _subtype = 0;
       setText(tag);
       }
