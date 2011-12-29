@@ -138,12 +138,14 @@ InspectorElementElement::InspectorElementElement(QWidget* parent)
    : QWidget(parent)
       {
       setupUi(this);
-      connect(color,   SIGNAL(colorChanged(QColor)), SLOT(colorChanged(QColor)));
-      connect(offsetX, SIGNAL(valueChanged(double)), SLOT(offsetXChanged(double)));
-      connect(offsetY, SIGNAL(valueChanged(double)), SLOT(offsetYChanged(double)));
-      connect(resetColor, SIGNAL(clicked()), SLOT(resetColorClicked()));
-      connect(resetX,  SIGNAL(clicked()), SLOT(resetXClicked()));
-      connect(resetY,  SIGNAL(clicked()), SLOT(resetYClicked()));
+      connect(color,        SIGNAL(colorChanged(QColor)), SLOT(colorChanged(QColor)));
+      connect(offsetX,      SIGNAL(valueChanged(double)), SLOT(offsetXChanged(double)));
+      connect(offsetY,      SIGNAL(valueChanged(double)), SLOT(offsetYChanged(double)));
+      connect(visible,      SIGNAL(stateChanged(int)),    SLOT(visibleChanged(int)));
+      connect(resetColor,   SIGNAL(clicked()), SLOT(resetColorClicked()));
+      connect(resetX,       SIGNAL(clicked()), SLOT(resetXClicked()));
+      connect(resetY,       SIGNAL(clicked()), SLOT(resetYClicked()));
+      connect(resetVisible, SIGNAL(clicked()), SLOT(resetVisibleClicked()));
       }
 
 //---------------------------------------------------------
@@ -153,9 +155,10 @@ InspectorElementElement::InspectorElementElement(QWidget* parent)
 bool InspectorElementElement::dirty() const
       {
       qreal _spatium = e->score()->spatium();
-      return offsetX->value() != (e->pos().x() / _spatium)
-         || offsetY->value() != (e->pos().y() / _spatium)
-         || color->color() != e->color();
+      return offsetX->value()     != (e->pos().x() / _spatium)
+         ||  offsetY->value()     != (e->pos().y() / _spatium)
+         ||  color->color()       != e->color()
+         ||  visible->isChecked() != e->visible();
       }
 
 //---------------------------------------------------------
@@ -173,6 +176,20 @@ void InspectorElementElement::setElement(Element* element)
       resetColor->setEnabled(e->color() != MScore::defaultColor);
       resetX->setEnabled(e->userOff().x() != 0.0);
       resetY->setEnabled(e->userOff().y() != 0.0);
+      visible->blockSignals(true);
+      visible->setChecked(e->visible());
+      visible->blockSignals(false);
+      resetVisible->setEnabled(!e->visible());
+      }
+
+//---------------------------------------------------------
+//   visibleChanged
+//---------------------------------------------------------
+
+void InspectorElementElement::visibleChanged(int)
+      {
+      resetVisible->setEnabled(!visible->isChecked());
+      emit enableApply();
       }
 
 //---------------------------------------------------------
@@ -229,6 +246,17 @@ void InspectorElementElement::resetXClicked()
       }
 
 //---------------------------------------------------------
+//   resetVisibleClicked
+//---------------------------------------------------------
+
+void InspectorElementElement::resetVisibleClicked()
+      {
+      visible->setChecked(true);
+      resetVisible->setEnabled(false);
+      emit enableApply();
+      }
+
+//---------------------------------------------------------
 //   resetTrailingSpace
 //---------------------------------------------------------
 
@@ -252,7 +280,9 @@ void InspectorElementElement::apply()
       if (o != e->pos())
             score->undoChangeUserOffset(e, o - e->ipos());
       if (e->color() != color->color())
-            score->undo(new ChangeProperty(e, P_COLOR, color->color()));
+            score->undoChangeProperty(e, P_COLOR, color->color());
+      if (e->visible() != visible->isChecked())
+            score->undoChangeProperty(e, P_VISIBLE, visible->isChecked());
       }
 
 //---------------------------------------------------------
@@ -531,9 +561,9 @@ void InspectorArticulation::apply()
       Direction d = Direction(ar.direction->currentIndex());
       ArticulationAnchor anchor = ArticulationAnchor(ar.anchor->currentIndex());
       if (anchor != a->anchor())
-            score->undo(new ChangeProperty(a, P_ARTICULATION_ANCHOR, int(anchor)));
+            score->undoChangeProperty(a, P_ARTICULATION_ANCHOR, int(anchor));
       if (d != a->direction())
-            score->undo(new ChangeProperty(a, P_DIRECTION, int(d)));
+            score->undoChangeProperty(a, P_DIRECTION, int(d));
       score->endCmd();
       mscore->endCmd();
       }
@@ -667,10 +697,10 @@ void InspectorSegment::apply()
       {
       qreal val = leadingSpace->value();
       if (segment->extraLeadingSpace().val() != val)
-            segment->score()->undo(new ChangeProperty(segment, P_LEADING_SPACE, val));
+            segment->score()->undoChangeProperty(segment, P_LEADING_SPACE, val);
       val = trailingSpace->value();
       if (segment->extraTrailingSpace().val() != val)
-            segment->score()->undo(new ChangeProperty(segment, P_TRAILING_SPACE, val));
+            segment->score()->undoChangeProperty(segment, P_TRAILING_SPACE, val);
       }
 
 //---------------------------------------------------------
@@ -699,7 +729,7 @@ InspectorNoteBase::InspectorNoteBase(QWidget* parent)
 
 bool InspectorNoteBase::dirty() const
       {
-      return note->small() != small->isChecked()
+      return note->small()            != small->isChecked()
          || note->userMirror()        != mirrorHead->currentIndex()
          || note->dotPosition()       != dotPosition->currentIndex()
          || note->onTimeUserOffset()  != ontimeOffset->value()
@@ -712,7 +742,7 @@ bool InspectorNoteBase::dirty() const
 
 void InspectorNoteBase::smallChanged(int)
       {
-      resetSmall->setEnabled(note->small());
+      resetSmall->setEnabled(small->isChecked());
       emit enableApply();
       }
 
@@ -830,19 +860,19 @@ void InspectorNoteBase::apply()
       Score* score = note->score();
       bool b = small->isChecked();
       if (note->small() != b)
-            score->undo(new ChangeProperty(note, P_SMALL, b));
+            score->undoChangeProperty(note, P_SMALL, b);
       int val = mirrorHead->currentIndex();
       if (note->userMirror() != val)
-            score->undo(new ChangeProperty(note, P_MIRROR_HEAD, val));
+            score->undoChangeProperty(note, P_MIRROR_HEAD, val);
       val = dotPosition->currentIndex();
       if (note->dotPosition() != val)
-            score->undo(new ChangeProperty(note, P_DOT_POSITION, val));
+            score->undoChangeProperty(note, P_DOT_POSITION, val);
       val = ontimeOffset->value();
       if (note->onTimeOffset() != val)
-            score->undo(new ChangeProperty(note, P_ONTIME_OFFSET, val));
+            score->undoChangeProperty(note, P_ONTIME_OFFSET, val);
       val = offtimeOffset->value();
       if (note->offTimeOffset() != val)
-            score->undo(new ChangeProperty(note, P_OFFTIME_OFFSET, val));
+            score->undoChangeProperty(note, P_OFFTIME_OFFSET, val);
       }
 
 //---------------------------------------------------------
@@ -859,7 +889,8 @@ InspectorNote::InspectorNote(QWidget* parent)
       layout->addWidget(iElement);
       layout->addWidget(iNote);
       layout->addWidget(iSegment);
-      connect(iElement, SIGNAL(enableApply()), inspector, SLOT(enableApply()));
+
+      connect(iElement, SIGNAL(enableApply()), SLOT(checkDirty()));
       connect(iNote,    SIGNAL(enableApply()), SLOT(checkDirty()));
       connect(iSegment, SIGNAL(enableApply()), SLOT(checkDirty()));
       }
@@ -968,7 +999,7 @@ void InspectorRest::apply()
       iSegment->apply();
       bool val = small->isChecked();
       if (val != rest->small())
-            score->undo(new ChangeProperty(rest, P_SMALL, val));
+            score->undoChangeProperty(rest, P_SMALL, val);
       score->setLayoutAll(true);
       score->endCmd();
       mscore->endCmd();
@@ -1066,9 +1097,9 @@ void InspectorBeam::apply()
       Direction d     = Direction(b.direction->currentIndex());
       score->startCmd();
       if (beam->distribute() != distribute)
-            score->undo(new ChangeProperty(beam, P_DISTRIBUTE, distribute));
+            score->undoChangeProperty(beam, P_DISTRIBUTE, distribute);
       if (beam->beamDirection() != d)
-            score->undo(new ChangeProperty(beam, P_DIRECTION, d));
+            score->undoChangeProperty(beam, P_DIRECTION, d);
       score->setLayoutAll(true);
       score->endCmd();
       mscore->endCmd();

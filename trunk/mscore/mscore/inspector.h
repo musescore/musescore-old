@@ -100,6 +100,8 @@ class InspectorElementElement : public QWidget, Ui::InspectorElement {
       void colorChanged(QColor);
       void offsetXChanged(double);
       void offsetYChanged(double);
+      void visibleChanged(int);
+      void resetVisibleClicked();
 
    signals:
       void enableApply();
