@@ -150,7 +150,7 @@ void ChordRest::scanElements(void* data, void (*func)(void*, Element*), bool all
 
 void ChordRest::writeProperties(Xml& xml) const
       {
-      Element::writeProperties(xml);
+      DurationElement::writeProperties(xml);
 
       //
       // BeamMode default:
