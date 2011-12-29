@@ -126,6 +126,7 @@ bool DurationElement::readProperties(const QDomElement& e, QList<Tuplet*>* tuple
 
 void DurationElement::writeProperties(Xml& xml) const
       {
+      Element::writeProperties(xml);
       if (tuplet())
             xml.tag("Tuplet", tuplet()->id());
       }
