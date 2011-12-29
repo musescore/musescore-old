@@ -222,7 +222,8 @@ void InspectorElementElement::resetColorClicked()
 
 void InspectorElementElement::resetXClicked()
       {
-      offsetX->setValue(e->ipos().x());
+      qreal _spatium = e->score()->spatium();
+      offsetX->setValue(e->ipos().x() / _spatium);
       resetX->setEnabled(false);
       emit enableApply();
       }
@@ -233,7 +234,8 @@ void InspectorElementElement::resetXClicked()
 
 void InspectorElementElement::resetYClicked()
       {
-      offsetY->setValue(e->ipos().y());
+      qreal _spatium = e->score()->spatium();
+      offsetY->setValue(e->ipos().y() / _spatium);
       resetY->setEnabled(false);
       emit enableApply();
       }
