@@ -30,7 +30,7 @@ class SyntiParameterData;
 //---------------------------------------------------------
 
 enum SyntiParameterType {
-      P_FLOAT, P_STRING
+      SP_FLOAT, SP_STRING
       };
 
 //---------------------------------------------------------
