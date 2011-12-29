@@ -30,30 +30,26 @@ ROOT=`pwd`
 
 release:
 	if test ! -d build;                              \
-         then                                          \
-            mkdir build;                               \
-            cd build;                                  \
-            cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
-            	   ../mscore -G Xcode; 			       \
-            xcodebuild -project mscore.xcodeproj -target lrelease;                             \
-	      xcodebuild -project mscore.xcodeproj -configuration Release -target ALL_BUILD;                            \
-         else                                          \
-            echo "build directory does already exist, please remove first with 'make clean'"; \
-         fi;
+    then                                          \
+          mkdir build;                               \
+    fi;                                        \
+    cd build;                                  \
+    cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}" -DCMAKE_BUILD_TYPE=Release \
+          ../mscore -G Xcode; 			       \
+    xcodebuild -project mscore.xcodeproj -target lrelease;                             \
+	xcodebuild -project mscore.xcodeproj -configuration Release -target ALL_BUILD;                            \
+
 
 debug:
 	if test ! -d build;                              \
-         then                                          \
-            mkdir build;                               \
-            cd build;                                  \
-            cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
-                   ../mscore -G Xcode;                         \
-            xcodebuild -project mscore.xcodeproj -target lrelease;                             \
-            xcodebuild -project mscore.xcodeproj -configuration Debug -target ALL_BUILD;                            \
-         else                                          \
-            echo "build directory does already exist, please remove first with 'make clean'"; \
-         fi;
-
+    then                                          \
+          mkdir build;              \
+    fi;                             \
+    cd build;                                  \
+    cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}" -DCMAKE_BUILD_TYPE=Debug \
+          ../mscore -G Xcode;                         \
+    xcodebuild -project mscore.xcodeproj -target lrelease;                             \
+    xcodebuild -project mscore.xcodeproj -configuration Debug -target ALL_BUILD;                            \
 
 #
 # clean out of source build
