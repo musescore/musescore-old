@@ -19,6 +19,7 @@
 #include "xml.h"
 #include "system.h"
 #include "utils.h"
+#include "barline.h"
 
 //---------------------------------------------------------
 //   LineSegment
@@ -123,7 +124,7 @@ QPointF LineSegment::pagePos() const
 
 QPointF LineSegment::gripAnchor(int grip) const
       {
-      if (spannerSegmentType() == SEGMENT_MIDDLE) {
+      if (subtype() == SEGMENT_MIDDLE) {
             qreal y = system()->staffY(staffIdx());
             qreal x;
             switch(grip) {
@@ -133,6 +134,7 @@ QPointF LineSegment::gripAnchor(int grip) const
                   case 1:
                         x = system()->lastMeasure()->abbox().right();
                         break;
+                  default:
                   case 2:
                         x = 0; // No Anchor
                         y = 0;
@@ -159,15 +161,15 @@ QPointF LineSegment::gripAnchor(int grip) const
 bool LineSegment::edit(MuseScoreView* sv, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&)
       {
       if (!((modifiers & Qt::ShiftModifier)
-         && ((spannerSegmentType() == SEGMENT_SINGLE)
-              || (spannerSegmentType() == SEGMENT_BEGIN && curGrip == 0)
-              || (spannerSegmentType() == SEGMENT_END && curGrip == 1))))
+         && ((subtype() == SEGMENT_SINGLE)
+              || (subtype() == SEGMENT_BEGIN && curGrip == 0)
+              || (subtype() == SEGMENT_END && curGrip == 1))))
             return false;
 
       LineSegment* ls = 0;
       SLine* l        = line();
       bool bspDirty   = false;
-      SpannerSegmentType st = spannerSegmentType();
+      SpannerSegmentType st = subtype();
       int track   = l->track();
 
       if (l->anchor() == ANCHOR_SEGMENT) {
@@ -402,7 +404,7 @@ QPointF SLine::linePos(int grip, System** sys)
                         if (seg->subtype() == SegEndBarLine) {
                               Element* e = seg->element(0);
                               if (e && e->type() == BAR_LINE) {
-                                    if (e->subtype() == START_REPEAT)
+                                    if (static_cast<BarLine*>(e)->subtype() == START_REPEAT)
                                           x -= e->width() - _spatium * .5;
                                     else
                                           x -= _spatium * .5;
@@ -577,6 +579,7 @@ void SLine::writeProperties(Xml& xml, const SLine* proto) const
       for (int i = 0; i < n; ++i) {
             const LineSegment* seg = segmentAt(i);
             xml.stag("Segment");
+            xml.tag("subtype", seg->subtype());
             xml.tag("off2", seg->userOff2() / spatium());
             seg->Element::writeProperties(xml);
             xml.etag();
@@ -587,7 +590,7 @@ void SLine::writeProperties(Xml& xml, const SLine* proto) const
 //   readProperties
 //---------------------------------------------------------
 
-bool SLine::readProperties(QDomElement e)
+bool SLine::readProperties(const QDomElement& e)
       {
       if (Element::readProperties(e))
             return true;
@@ -602,13 +605,16 @@ bool SLine::readProperties(QDomElement e)
             __setTick1(score()->fileDivision(i));
       else if (tag == "Segment") {
             LineSegment* ls = createLineSegment();
-            for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-                  if (e.tagName() == "off1")
-                        ls->setUserOff(readPoint(e) * spatium());
-                  else if (e.tagName() == "off2")
-                        ls->setUserOff2(readPoint(e) * spatium());
-                  else if (!ls->Element::readProperties(e))
-                        domError(e);
+            for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                  const QString& tag(ee.tagName());
+                  if (tag == "subtype")
+                        ls->setSubtype(SpannerSegmentType(ee.text().toInt()));
+                  else if (tag == "off1")
+                        ls->setUserOff(readPoint(ee) * spatium());
+                  else if (tag == "off2")
+                        ls->setUserOff2(readPoint(ee) * spatium());
+                  else if (!ls->Element::readProperties(ee))
+                        domError(ee);
                   }
             add(ls);
             }
@@ -667,14 +673,14 @@ void SLine::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void SLine::read(QDomElement e)
+void SLine::read(const QDomElement& de)
       {
       foreach(SpannerSegment* seg, spannerSegments())
             delete seg;
       spannerSegments().clear();
-      setId(e.attribute("id", "-1").toInt());
+      setId(de.attribute("id", "-1").toInt());
 
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (!SLine::readProperties(e))
                   domError(e);
             }

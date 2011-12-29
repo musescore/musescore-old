@@ -201,9 +201,9 @@ void TimeSigMap::write(Xml& xml) const
 //   TimeSigMap::read
 //---------------------------------------------------------
 
-void TimeSigMap::read(QDomElement e, int fileDivision)
+void TimeSigMap::read(const QDomElement& de, int fileDivision)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             if (tag == "sig") {
                   SigEvent t;
@@ -243,17 +243,17 @@ void SigEvent::write(Xml& xml, int tick) const
 //   SigEvent::read
 //---------------------------------------------------------
 
-int SigEvent::read(QDomElement e, int fileDivision)
+int SigEvent::read(const QDomElement& de, int fileDivision)
       {
-      int tick  = e.attribute("tick", "0").toInt();
+      int tick  = de.attribute("tick", "0").toInt();
       tick      = tick * MScore::division / fileDivision;
 
       int numerator = 1;
       int denominator = 1;
       int denominator2 = -1;
       int numerator2   = -1;
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            const QString& tag(e.tagName());
             int i = e.text().toInt();
 
             if (tag == "nom")

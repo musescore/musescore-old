@@ -315,7 +315,7 @@ void FretDiagram::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void FretDiagram::read(QDomElement e)
+void FretDiagram::read(const QDomElement& de)
       {
       delete _dots;
       delete _marker;
@@ -325,7 +325,7 @@ void FretDiagram::read(QDomElement e)
       _fingering  = 0;
       _fretOffset = 0;
 
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             int val = e.text().toInt();
             if (tag == "strings")
@@ -429,10 +429,9 @@ void FretDiagram::remove(Element* e)
 //   acceptDrop
 //---------------------------------------------------------
 
-bool FretDiagram::acceptDrop(MuseScoreView*, const QPointF&, int t, int) const
+bool FretDiagram::acceptDrop(MuseScoreView*, const QPointF&, Element* e) const
       {
-qDebug("FretDiagram: accept drop %d\n", t);
-      return t == HARMONY;
+      return e->type() == HARMONY;
       }
 
 //---------------------------------------------------------

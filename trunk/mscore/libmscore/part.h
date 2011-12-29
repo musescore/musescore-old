@@ -41,7 +41,7 @@ class Part {
       Part(Score*);
       void initFromInstrTemplate(const InstrumentTemplate*);
 
-      void read(QDomElement);
+      void read(const QDomElement&);
       void write(Xml& xml) const;
       int nstaves() const                       { return _staves.size(); }
       QList<Staff*>* staves()                   { return &_staves; }

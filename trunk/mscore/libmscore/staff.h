@@ -62,14 +62,14 @@ class LinkedStaves {
 //---------------------------------------------------------
 
 struct BracketItem {
-      int _bracket;
+      BracketType _bracket;
       int _bracketSpan;
 
       BracketItem() {
-            _bracket = -1;
+            _bracket = NO_BRACKET;
             _bracketSpan = 0;
             }
-      BracketItem(int a, int b) {
+      BracketItem(BracketType a, int b) {
             _bracket = a;
             _bracketSpan = b;
             }
@@ -123,14 +123,14 @@ class Staff {
       int rstaff() const             { return _rstaff; }
       int idx() const;
       void setRstaff(int n)          { _rstaff = n;    }
-      void read(QDomElement);
+      void read(const QDomElement&);
       void write(Xml& xml) const;
       Part* part() const             { return _part;        }
       void setPart(Part* p)          { _part = p;           }
 
-      int bracket(int idx) const;
+      BracketType bracket(int idx) const;
       int bracketSpan(int idx) const;
-      void setBracket(int idx, int val);
+      void setBracket(int idx, BracketType val);
       void setBracketSpan(int idx, int val);
       int bracketLevels() const      { return _brackets.size(); }
       void addBracket(BracketItem);

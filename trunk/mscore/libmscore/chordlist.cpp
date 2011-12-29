@@ -346,10 +346,10 @@ static void writeRenderList(Xml& xml, const QList<RenderAction>* al, const QStri
 //   read
 //---------------------------------------------------------
 
-void ChordDescription::read(QDomElement e)
+void ChordDescription::read(const QDomElement& de)
       {
-      id = e.attribute("id").toInt();
-      for (e = e.firstChildElement(); !e.isNull();  e = e.nextSiblingElement()) {
+      id = de.attribute("id").toInt();
+      for (QDomElement e = de.firstChildElement(); !e.isNull();  e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
             if (tag == "name")
@@ -403,10 +403,10 @@ ChordList::~ChordList()
 //   read
 //---------------------------------------------------------
 
-void ChordList::read(QDomElement e)
+void ChordList::read(const QDomElement& de)
       {
       int fontIdx = 0;
-      for (e = e.firstChildElement(); !e.isNull();  e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull();  e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
             if (tag == "font") {

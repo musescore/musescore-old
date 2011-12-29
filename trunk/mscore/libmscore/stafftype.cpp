@@ -148,9 +148,9 @@ void StaffType::writeProperties(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void StaffType::read(QDomElement e)
+void StaffType::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if(!readProperties(e))
                   domError(e);
             }
@@ -160,9 +160,9 @@ void StaffType::read(QDomElement e)
 //   readProperties
 //---------------------------------------------------------
 
-bool StaffType::readProperties(QDomElement e)
+bool StaffType::readProperties(const QDomElement& e)
       {
-      QString tag(e.tagName());
+      const QString& tag(e.tagName());
       int v = e.text().toInt();
       if (tag == "name")
             setName(e.text());
@@ -224,15 +224,14 @@ void StaffTypePitched::write(Xml& xml, int idx) const
 //   read
 //---------------------------------------------------------
 
-void StaffTypePitched::read(QDomElement e)
+void StaffTypePitched::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            int v = e.text().toInt();
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            const QString& tag(e.tagName());
             if (tag == "keysig")
-                  setGenKeysig(v);
+                  setGenKeysig(e.text().toInt());
             else if (tag == "ledgerlines")
-                  setShowLedgerLines(v);
+                  setShowLedgerLines(e.text().toInt());
             else {
                   if (!StaffType::readProperties(e))
                         domError(e);
@@ -283,15 +282,14 @@ void StaffTypePercussion::write(Xml& xml, int idx) const
 //   read
 //---------------------------------------------------------
 
-void StaffTypePercussion::read(QDomElement e)
+void StaffTypePercussion::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            int v = e.text().toInt();
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            const QString& tag(e.tagName());
             if (tag == "keysig")
-                  setGenKeysig(v);
+                  setGenKeysig(e.text().toInt());
             else if (tag == "ledgerlines")
-                  setShowLedgerLines(v);
+                  setShowLedgerLines(e.text().toInt());
             else {
                   if (!StaffType::readProperties(e))
                         domError(e);
@@ -359,36 +357,36 @@ bool StaffTypeTablature::isEqual(const StaffType& st) const
 //   read
 //---------------------------------------------------------
 
-void StaffTypeTablature::read(QDomElement e)
+void StaffTypeTablature::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            int v = e.text().toInt();
-            qreal val = e.text().toDouble();
-            if(tag == "durations")
-                  setGenDurations(v != 0);
-            else if(tag == "durationFontName")
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
+
+            if (tag == "durations")
+                  setGenDurations(val.toInt() != 0);
+            else if (tag == "durationFontName")
                   setDurationFontName(e.text());
-            else if(tag == "durationFontSize")
-                  setDurationFontSize(val);
-            else if(tag == "durationFontY")
-                  setDurationFontUserY(val);
-            else if(tag == "fretFontName")
+            else if (tag == "durationFontSize")
+                  setDurationFontSize(val.toDouble());
+            else if (tag == "durationFontY")
+                  setDurationFontUserY(val.toDouble());
+            else if (tag == "fretFontName")
                   setFretFontName(e.text());
-            else if(tag == "fretFontSize")
-                  setFretFontSize(val);
-            else if(tag == "fretFontY")
-                  setFretFontUserY(val);
-            else if(tag == "linesThrough")
-                  setLinesThrough(v != 0);
-            else if(tag == "onLines")
-                  setOnLines(v != 0);
-            else if(tag == "timesig")
-                  setGenTimesig(v != 0);
-            else if(tag == "upsideDown")
-                  setUpsideDown(v != 0);
-            else if(tag == "useNumbers")
-                  setUseNumbers(v != 0);
+            else if (tag == "fretFontSize")
+                  setFretFontSize(val.toDouble());
+            else if (tag == "fretFontY")
+                  setFretFontUserY(val.toDouble());
+            else if (tag == "linesThrough")
+                  setLinesThrough(val.toInt() != 0);
+            else if (tag == "onLines")
+                  setOnLines(val.toInt() != 0);
+            else if (tag == "timesig")
+                  setGenTimesig(val.toInt() != 0);
+            else if (tag == "upsideDown")
+                  setUpsideDown(val.toInt() != 0);
+            else if (tag == "useNumbers")
+                  setUseNumbers(val.toInt() != 0);
             else
                   if(!StaffType::readProperties(e))
                         domError(e);

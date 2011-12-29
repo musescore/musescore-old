@@ -21,12 +21,14 @@
 //---------------------------------------------------------
 
 class Hook : public Symbol {
+      int _subtype;
 
    public:
       Hook(Score*);
       virtual Hook* clone() const      { return new Hook(*this); }
       virtual ElementType type() const { return HOOK; }
-      virtual void setSubtype(int v);
+      void setSubtype(int v);
+      int subtype() const { return _subtype; }
       virtual void layout();
       };
 

@@ -18,9 +18,9 @@
 //   read
 //---------------------------------------------------------
 
-void NoteEvent::read(QDomElement e)
+void NoteEvent::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
             int i = val.toInt();

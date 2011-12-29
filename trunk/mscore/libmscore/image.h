@@ -46,7 +46,7 @@ class Image : public BSymbol {
       Image(Score*);
       virtual ElementType type() const { return IMAGE; }
       virtual void write(Xml& xml) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       virtual void setPath(const QString& s);
       virtual void layout();
 
@@ -77,7 +77,6 @@ class RasterImage : public Image {
       virtual QSizeF imageSize() const { return doc.size(); }
       };
 
-#ifdef SVG_IMAGES
 //---------------------------------------------------------
 //   SvgImage
 //---------------------------------------------------------
@@ -93,7 +92,6 @@ class SvgImage : public Image {
       virtual void setPath(const QString& s);
       virtual QSizeF imageSize() const { return doc->defaultSize(); }
       };
-#endif
 
 #endif
 

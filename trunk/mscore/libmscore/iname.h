@@ -16,13 +16,16 @@
 
 #include "text.h"
 
-enum { INSTRUMENT_NAME_LONG, INSTRUMENT_NAME_SHORT };
+enum InstrumentNameType {
+      INSTRUMENT_NAME_LONG, INSTRUMENT_NAME_SHORT
+      };
 
 //---------------------------------------------------------
 //   InstrumentName
 //---------------------------------------------------------
 
 class InstrumentName : public Text  {
+      InstrumentNameType _subtype;
       int _layoutPos;
 
    public:
@@ -31,9 +34,11 @@ class InstrumentName : public Text  {
       virtual ElementType type() const { return INSTRUMENT_NAME; }
       int layoutPos() const      { return _layoutPos; }
       void setLayoutPos(int val) { _layoutPos = val;  }
-      virtual QString subtypeName() const;
-      virtual void setSubtype(const QString& s);
-      virtual void setSubtype(int n) { Element::setSubtype(n); }
+
+      QString subtypeName() const;
+      InstrumentNameType subtype() const { return _subtype; }
+      void setSubtype(InstrumentNameType v) { _subtype = v; }
+      void setSubtype(const QString& s);
       };
 
 #endif

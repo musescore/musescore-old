@@ -107,11 +107,11 @@ void ArticulationProperties::saveValues()
             }
 #endif
       if (int(articulation->direction()) != direction->currentIndex())
-            articulation->score()->undo()->push(new ChangeProperty(articulation,
+            articulation->score()->undo(new ChangeProperty(articulation,
                P_DIRECTION, direction->currentIndex()));
 
       if (int(articulation->anchor()) != anchor->currentIndex())
-            articulation->score()->undo()->push(new ChangeProperty(articulation,
+            articulation->score()->undo(new ChangeProperty(articulation,
                P_ARTICULATION_ANCHOR, anchor->currentIndex()));
       }
 

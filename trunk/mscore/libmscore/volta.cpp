@@ -41,9 +41,9 @@ Volta::Volta(Score* s)
 //   setSubtype
 //---------------------------------------------------------
 
-void Volta::setSubtype(int val)
+void Volta::setSubtype(VoltaType val)
       {
-      Element::setSubtype(val);
+      _subtype = val;
       switch(val) {
             case Volta::VOLTA_OPEN:
                   setEndHook(false);
@@ -92,15 +92,17 @@ QString Volta::text() const
 //   read
 //---------------------------------------------------------
 
-void Volta::read(QDomElement e)
+void Volta::read(const QDomElement& de)
       {
       foreach(SpannerSegment* seg, spannerSegments())
             delete seg;
       spannerSegments().clear();
-      setId(e.attribute("id", "-1").toInt());
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            if (tag == "text")            // obsolete
+      setId(de.attribute("id", "-1").toInt());
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            const QString& tag(e.tagName());
+            if (tag == "subtype")
+                  _subtype = VoltaType(e.text().toInt());
+            else if (tag == "text")            // obsolete
                   setText(e.text());
             else if (tag == "endings") {
                   QString s = e.text();
@@ -126,6 +128,7 @@ void Volta::write(Xml& xml) const
       proto.setSubtype(subtype());
 
       xml.stag(QString("%1 id=\"%2\"").arg(name()).arg(id()));
+      xml.tag("subtype", _subtype);
       TextLine::writeProperties(xml, &proto);
       QString s;
       foreach(int i, _endings) {

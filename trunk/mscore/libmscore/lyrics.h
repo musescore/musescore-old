@@ -35,7 +35,6 @@ class Lyrics : public Text {
       Syllabic _syllabic;
       QList<Line*> _separator;
       Text* _verseNumber;
-      virtual QString subtypeName() const { return QString(); }  // no subtype
 
    protected:
       int _no;                ///< row index
@@ -48,7 +47,7 @@ class Lyrics : public Text {
       virtual ElementType type() const { return LYRICS; }
       virtual QPointF pagePos() const;
       virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
-      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, Element*) const;
       virtual Element* drop(const DropData&);
 
       Segment* segment() const { return (Segment*)parent()->parent(); }
@@ -58,7 +57,7 @@ class Lyrics : public Text {
       virtual void layout();
 
       virtual void write(Xml& xml) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       void setNo(int n);
       int no() const                { return _no; }
       void setSyllabic(Syllabic s)  { _syllabic = s; }

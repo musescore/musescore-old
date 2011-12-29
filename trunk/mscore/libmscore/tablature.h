@@ -37,7 +37,7 @@ class Tablature {
       int strings() const           { return stringTable.size(); }
       QList<int> stringList() const { return stringTable; }
       int frets() const             { return _frets; }
-      void read(QDomElement);
+      void read(const QDomElement&);
       void write(Xml&) const;
       };
 

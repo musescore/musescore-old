@@ -415,7 +415,7 @@ void InstrumentsDialog::on_upButton_clicked()
                         PartListItem* pli = static_cast<PartListItem*>(prevParent);
                         StaffListItem* sli = static_cast<StaffListItem*>(item);
                         int idx = pli->part->nstaves();
-                        cs->undo()->push(new MoveStaff(sli->staff, pli->part, idx));
+                        cs->undo(new MoveStaff(sli->staff, pli->part, idx));
                         }
                   }
             }
@@ -465,7 +465,7 @@ void InstrumentsDialog::on_downButton_clicked()
                         partiturList->setItemSelected(item, true);
                         PartListItem* pli = static_cast<PartListItem*>(nextParent);
                         StaffListItem* sli = static_cast<StaffListItem*>(item);
-                        cs->undo()->push(new MoveStaff(sli->staff, pli->part, 0));
+                        cs->undo(new MoveStaff(sli->staff, pli->part, 0));
                         }
                   }
             }
@@ -700,7 +700,7 @@ void MuseScore::editInstrList()
                         else {
                               Staff* staff = sli->staff;
                               if (sli->visible() != staff->show()) {
-                                    cs->undo()->push(new ChangeStaff(staff, staff->small(), staff->invisible(),
+                                    cs->undo(new ChangeStaff(staff, staff->small(), staff->invisible(),
                                        sli->visible(), staff->staffType()));
                                     }
                               ++staffIdx;
@@ -745,7 +745,7 @@ void MuseScore::editInstrList()
 //            }
 
 //      if (sort)
-            cs->undo()->push(new SortStaves(cs, dl));
+            cs->undo(new SortStaves(cs, dl));
 
       //
       // check for valid barLineSpan and bracketSpan

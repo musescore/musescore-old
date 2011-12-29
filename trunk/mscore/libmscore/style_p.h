@@ -63,8 +63,8 @@ class TextStyleData : public QSharedData, public ElementLayout {
 
       void write(Xml&) const;
       void writeProperties(Xml& xml) const;
-      void read(QDomElement);
-      bool readProperties(QDomElement v);
+      void read(const QDomElement&);
+      bool readProperties(const QDomElement& v);
 
       QFont font(qreal space) const;
       QFont fontPx(qreal spatium) const;
@@ -103,7 +103,7 @@ class StyleData : public QSharedData {
       ~StyleData();
 
       bool load(QFile* qf);
-      void load(QDomElement e);
+      void load(const QDomElement& e);
       void save(Xml& xml, bool optimize) const;
       bool isDefault(StyleIdx) const;
 

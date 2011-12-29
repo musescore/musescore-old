@@ -108,9 +108,9 @@ void Spacer::spatiumChanged(qreal ov, qreal nv)
 //   setSubtype
 //---------------------------------------------------------
 
-void Spacer::setSubtype(int val)
+void Spacer::setSubtype(SpacerType val)
       {
-      Element::setSubtype(val);
+      _subtype = val;
       layout0();
       }
 
@@ -163,13 +163,11 @@ void Spacer::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Spacer::read(QDomElement e)
+void Spacer::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            const QString& tag(e.tagName());
-            const QString& val(e.text());
-            if (tag == "space")
-                  _gap = val.toDouble() * spatium();
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "space")
+                  _gap = e.text().toDouble() * spatium();
             else if (!Element::readProperties(e))
                   domError(e);
             }

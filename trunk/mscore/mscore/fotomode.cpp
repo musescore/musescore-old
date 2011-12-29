@@ -742,45 +742,6 @@ void ScoreView::paintRect(bool printMode, QPainter& p, const QRectF& r, double m
 //   fotoDragDrop
 //---------------------------------------------------------
 
-#if 0
-void ScoreView::fotoDragDrop(QMouseEvent*)
-      {
-      QDrag* drag = new QDrag(this);
-      QMimeData* mimeData = new QMimeData;
-
-      // oowriter wants transparent==false
-      bool transparent = false; // preferences.pngTransparent;
-      double convDpi   = DPI; // preferences.pngResolution;
-      double mag       = convDpi / DPI;
-
-      QRectF r(_foto->rect());
-      int w = lrint(r.width()  * mag);
-      int h = lrint(r.height() * mag);
-      QImage::Format f;
-      f = QImage::Format_ARGB32_Premultiplied;
-      QImage printer(w, h, f);
-      printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
-      printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
-      printer.fill(transparent ? 0 : 0xffffffff);
-      QPainter p(&printer);
-      paintRect(true, p, r, mag);
-      p.end();
-#if 0
-      QByteArray ba;
-      QBuffer ob(&ba);
-      ob.open(QIODevice::WriteOnly);
-      printer.save(&ob, "PNG");
-      mimeData->setData("image/png", ba);
-#else
-      // this is understood by oowriter
-      mimeData->setImageData(printer);
-#endif
-      drag->setMimeData(mimeData);
-      drag->start(Qt::CopyAction);
-      }
-#endif
-
-#if 1
 void ScoreView::fotoDragDrop(QMouseEvent*)
       {
       bool printMode   = true;
@@ -819,37 +780,3 @@ void ScoreView::fotoDragDrop(QMouseEvent*)
       drag->setMimeData(mimeData);
       drag->start(Qt::CopyAction);
       }
-#else
-
-void ScoreView::fotoDragDrop(QMouseEvent*)
-      {
-#ifdef SVG_IMAGES
-      bool printMode   = true;
-      double convDpi   = DPI; // preferences.pngResolution;
-      double mag       = convDpi / DPI;
-      QRectF r(_foto->abbox());
-      int w            = lrint(r.width()  * mag);
-      int h            = lrint(r.height() * mag);
-
-      QTemporaryFile tf(QDir::tempPath() + QString("/imgXXXXXX.svg"));
-      tf.setAutoRemove(false);
-      tf.open();
-      tf.close();
-
-      QString fn = tf.fileName();
-
-      QSvgGenerator printer;
-      printer.setResolution(int(DPI));
-      printer.setFileName(fn);
-
-      QPainter p(&printer);
-      paintRect(printMode, p, r, mag);
-
-      SvgImage* image = new SvgImage(gscore);
-      image->setPath(fn);
-
-      cloneElement(image);
-#endif
-      }
-#endif
-

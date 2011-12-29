@@ -40,6 +40,8 @@ struct Dyn {
 class Dynamic : public Text {
       Q_DECLARE_TR_FUNCTIONS(Dynamic)
 
+      int _subtype;
+
       mutable QPointF dragOffset;
       int _velocity;          // associated midi velocity 0-127
       DynamicType _dynType;
@@ -54,12 +56,13 @@ class Dynamic : public Text {
 
       virtual void layout();
 
-      virtual void setSubtype(int val);
-      virtual void setSubtype(const QString&);
-      virtual QString subtypeName() const;
+      void setSubtype(int val);
+      void setSubtype(const QString&);
+      QString subtypeName() const;
+      int subtype() const { return _subtype; }
 
       virtual void write(Xml& xml) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
 
       virtual bool isEditable() const { return true; }
       virtual void startEdit(MuseScoreView*, const QPointF&);

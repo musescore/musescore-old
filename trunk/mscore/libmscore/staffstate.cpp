@@ -45,11 +45,10 @@ void StaffState::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void StaffState::read(QDomElement e)
+void StaffState::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            if (tag == "Instrument")
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "Instrument")
                   _instrument.read(e);
             else if (!Element::readProperties(e))
                   domError(e);
@@ -167,7 +166,7 @@ QString StaffState::subtypeName() const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool StaffState::acceptDrop(MuseScoreView*, const QPointF&, int /*type*/, int /*st*/) const
+bool StaffState::acceptDrop(MuseScoreView*, const QPointF&, Element*) const
       {
       return false;
       }

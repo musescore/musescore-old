@@ -47,10 +47,10 @@ class Rest : public ChordRest {
 
       virtual void draw(QPainter*) const;
       virtual void write(Xml& xml) const;
-      virtual void read(QDomElement, QList<Tuplet*>*, QList<Spanner*>*);
+      virtual void read(const QDomElement&, QList<Tuplet*>*, QList<Spanner*>*);
       virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
 
-      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, Element*) const;
       virtual Element* drop(const DropData&);
       virtual void layout();
 

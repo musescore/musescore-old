@@ -185,10 +185,10 @@ MarkerType Marker::markerType(const QString& s) const
 //   read
 //---------------------------------------------------------
 
-void Marker::read(QDomElement e)
+void Marker::read(const QDomElement& de)
       {
       MarkerType mt = MARKER_SEGNO;
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             if (tag == "label") {
                   setLabel(e.text());
@@ -329,9 +329,9 @@ int Jump::jumpType() const
 //   read
 //---------------------------------------------------------
 
-void Jump::read(QDomElement e)
+void Jump::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             if (tag == "jumpTo")
                   _jumpTo = e.text();

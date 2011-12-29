@@ -300,9 +300,9 @@ void Clef::draw(QPainter* painter) const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Clef::acceptDrop(MuseScoreView*, const QPointF&, int type, int) const
+bool Clef::acceptDrop(MuseScoreView*, const QPointF&, Element* e) const
       {
-      return type == CLEF;
+      return e->type() == CLEF;
       }
 
 //---------------------------------------------------------
@@ -341,9 +341,9 @@ void Clef::setSmall(bool val)
 //   read
 //---------------------------------------------------------
 
-void Clef::read(QDomElement e)
+void Clef::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
             if (tag == "subtype")
@@ -384,19 +384,10 @@ int Clef::tick() const
       }
 
 //---------------------------------------------------------
-//   subtypeName
+//   setClefType
 //---------------------------------------------------------
 
-QString Clef::subtypeName() const
-      {
-      return QString(clefTable[int(clefType())].tag);
-      }
-
-//---------------------------------------------------------
-//   setSubtype
-//---------------------------------------------------------
-
-void Clef::setSubtype(const QString& s)
+void Clef::setClefType(const QString& s)
       {
       ClefType ct = clefType(s);
       if (ct == CLEF_INVALID) {
@@ -503,13 +494,14 @@ QVariant Clef::getProperty(int propertyId) const
 //   setProperty
 //---------------------------------------------------------
 
-void Clef::setProperty(int propertyId, const QVariant& v)
+bool Clef::setProperty(int propertyId, const QVariant& v)
       {
       switch(propertyId) {
             case P_SHOW_COURTESY: _showCourtesyClef = v.toBool(); break;
             default:
-                  Element::setProperty(propertyId, v);
+                  return Element::setProperty(propertyId, v);
             }
+      return true;
       }
 
 

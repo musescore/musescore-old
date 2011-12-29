@@ -191,7 +191,7 @@ void MeasureProperties::apply()
             bool v = visible(staffIdx);
             bool s = slashStyle(staffIdx);
             if (ms->visible() != v || ms->slashStyle() != s)
-                  score->undo()->push(new ChangeMStaffProperties(ms, v, s));
+                  score->undo(new ChangeMStaffProperties(ms, v, s));
             }
       if (isIrregular() != m->irregular()
          || breakMultiMeasureRest->isChecked() != m->breakMultiMeasureRest()
@@ -201,7 +201,7 @@ void MeasureProperties::apply()
          || m->len() != len()
          ) {
             Fraction oLen(m->len());
-            score->undo()->push(new ChangeMeasureProperties(
+            score->undo(new ChangeMeasureProperties(
                m,
                m->timesig(),
                len(),

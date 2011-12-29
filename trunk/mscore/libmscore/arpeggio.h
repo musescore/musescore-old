@@ -19,14 +19,16 @@
 class Chord;
 class QPainter;
 
-// Arpeggio types
-enum { ARP_NORMAL, ARP_UP, ARP_DOWN, ARP_BRACKET};
+enum ArpeggioType {
+      ARP_NORMAL, ARP_UP, ARP_DOWN, ARP_BRACKET
+      };
 
 //---------------------------------------------------------
 //   Arpeggio
 //---------------------------------------------------------
 
 class Arpeggio : public Element {
+      ArpeggioType _subtype;
       Spatium _userLen1;
       Spatium _userLen2;
       qreal _height;
@@ -39,6 +41,9 @@ class Arpeggio : public Element {
       Arpeggio(Score* s);
       virtual Arpeggio* clone() const  { return new Arpeggio(*this); }
       virtual ElementType type() const { return ARPEGGIO; }
+      ArpeggioType subtype() const     { return _subtype; }
+      void setSubtype(ArpeggioType v)  { _subtype = v;    }
+
       Chord* chord() const             { return (Chord*)parent(); }
       virtual void layout();
       virtual void draw(QPainter*) const;
@@ -47,7 +52,7 @@ class Arpeggio : public Element {
       virtual void updateGrips(int*, QRectF*) const;
       virtual bool edit(MuseScoreView*, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&);
 
-      void read(QDomElement e);
+      void read(const QDomElement& e);
       void write(Xml& xml) const;
       int span() const      { return _span; }
       void setSpan(int val) { _span = val; }

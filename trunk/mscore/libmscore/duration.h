@@ -36,8 +36,8 @@ class DurationElement : public Element {
 
       virtual Measure* measure() const    { return (Measure*)(parent()); }
 
-      QList<Prop> properties(Xml& xml, bool /*clipboardmode*/) const;
-      bool readProperties(QDomElement e, QList<Tuplet*>*, const QList<Spanner*>*);
+//      QList<Prop> properties(Xml& xml, bool /*clipboardmode*/) const;
+      bool readProperties(const QDomElement& e, QList<Tuplet*>*, const QList<Spanner*>*);
       void writeTuplet(Xml& xml);
 
       void setTuplet(Tuplet* t)           { _tuplet = t;      }

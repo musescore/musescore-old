@@ -42,7 +42,7 @@ int Staff::idx() const
 //   bracket
 //---------------------------------------------------------
 
-int Staff::bracket(int idx) const
+BracketType Staff::bracket(int idx) const
       {
       if (idx < _brackets.size())
             return _brackets[idx]._bracket;
@@ -64,7 +64,7 @@ int Staff::bracketSpan(int idx) const
 //   setBracket
 //---------------------------------------------------------
 
-void Staff::setBracket(int idx, int val)
+void Staff::setBracket(int idx, BracketType val)
       {
       if (idx >= _brackets.size()) {
             for (int i = _brackets.size(); i <= idx; ++i)
@@ -375,22 +375,22 @@ void Staff::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Staff::read(QDomElement e)
+void Staff::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
-            int v = e.text().toInt();
+            const QString& val(e.text());
             if (tag == "type") {
-                  StaffType* st = score()->staffTypes().value(v);
+                  StaffType* st = score()->staffTypes().value(val.toInt());
                   if (st)
                         _staffType = st;
                   }
             else if (tag == "lines")
                   ;                       // obsolete: setLines(v);
             else if (tag == "small")
-                  setSmall(v);
+                  setSmall(val.toInt());
             else if (tag == "invisible")
-                  setInvisible(v);
+                  setInvisible(val.toInt());
             else if (tag == "slashStyle")
                   ;                       // obsolete: setSlashStyle(v);
             else if (tag == "cleflist")
@@ -399,16 +399,16 @@ void Staff::read(QDomElement e)
                   _keymap->read(e, _score);
             else if (tag == "bracket") {
                   BracketItem b;
-                  b._bracket = e.attribute("type", "-1").toInt();
+                  b._bracket = BracketType(e.attribute("type", "-1").toInt());
                   b._bracketSpan = e.attribute("span", "0").toInt();
                   _brackets.append(b);
                   }
             else if (tag == "barLineSpan")
-                  _barLineSpan = v;
+                  _barLineSpan = val.toInt();
             else if (tag == "distOffset")
                   _userDist = e.text().toDouble() * spatium();
             else if (tag == "linkedTo") {
-                  v -= 1;
+                  int v = val.toInt() - 1;
                   //
                   // if this is an excerpt, link staff to parentScore()
                   //

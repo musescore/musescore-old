@@ -124,11 +124,10 @@ void TremoloBar::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void TremoloBar::read(QDomElement e)
+void TremoloBar::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull();  e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            if (tag == "point") {
+      for (QDomElement e = de.firstChildElement(); !e.isNull();  e = e.nextSiblingElement()) {
+            if (e.tagName() == "point") {
                   PitchValue pv;
                   pv.time    = e.attribute("time").toInt();
                   pv.pitch   = e.attribute("pitch").toInt();

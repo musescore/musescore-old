@@ -142,7 +142,7 @@ void EditStyle::buttonClicked(QAbstractButton* b)
 void EditStyle::apply()
       {
       getValues();
-      cs->undo()->push(new ChangeStyle(cs, lstyle));
+      cs->undo(new ChangeStyle(cs, lstyle));
       cs->setLayoutAll(true);
       cs->end2();
       cs->end();

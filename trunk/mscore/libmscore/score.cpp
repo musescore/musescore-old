@@ -1811,15 +1811,17 @@ void Score::setSelection(const Selection& s)
 //   getText
 //---------------------------------------------------------
 
-Text* Score::getText(int subtype)
+Text* Score::getText(int /*subtype*/)
       {
+#if 0 // TODO
       MeasureBase* m = measures()->first();
       if (m) {
             foreach(Element* e, *m->el()) {
-                  if (e->type() == TEXT && e->subtype() == subtype)
+                  if (e->type() == TEXT && static_cast<Text*>(e)->subtype() == subtype)
                         return static_cast<Text*>(e);
                   }
             }
+#endif
       return 0;
       }
 
@@ -2495,7 +2497,7 @@ void Score::sortStaves(QList<int>& dst)
 
 void Score::cmdConcertPitchChanged(bool flag, bool useDoubleSharpsFlats)
       {
-      undo()->push(new ChangeConcertPitch(this, flag));
+      undo(new ChangeConcertPitch(this, flag));
 
       foreach(Staff* staff, _staves) {
             if (staff->staffType()->group() == PERCUSSION_STAFF)
@@ -3146,5 +3148,14 @@ void Score::cmdSelectAll()
             setUpdateAll(true);
             end();
             }
+      }
+
+//---------------------------------------------------------
+//   undo
+//---------------------------------------------------------
+
+void Score::undo(UndoCommand* cmd) const
+      {
+      undo()->push(cmd);
       }
 

@@ -47,10 +47,10 @@ void TempoText::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void TempoText::read(QDomElement e)
+void TempoText::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            const QString& tag(e.tagName());
             if (tag == "tempo")
                   _tempo = e.text().toDouble();
             else if (tag == "followText")

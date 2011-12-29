@@ -29,7 +29,7 @@ class FiguredBass : public Lyrics {
       virtual FiguredBass* clone() const { return new FiguredBass(*this); }
       virtual ElementType type() const   { return FIGURED_BASS; }
       virtual void write(Xml& xml) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       virtual void layout();
       };
 

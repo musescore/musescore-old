@@ -453,8 +453,11 @@ void Tuplet::write(Xml& xml) const
             case DOWN: xml.tag("direction", QVariant("down")); break;
             case AUTO: break;
             }
-      if (_number)
-            _number->write(xml, "Number");
+      if (_number) {
+            xml.stag("Number");
+            _number->writeProperties(xml);
+            xml.etag();
+            }
       if (_userModified) {
             xml.tag("p1", _p1);
             xml.tag("p2", _p2);
@@ -468,33 +471,32 @@ void Tuplet::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Tuplet::read(QDomElement e, QList<Tuplet*>* tuplets, const QList<Spanner*>* spanner)
+void Tuplet::read(const QDomElement& de, QList<Tuplet*>* tuplets, const QList<Spanner*>* spanner)
       {
       int bl = -1;
-      _id    = e.attribute("id", "0").toInt();
+      _id    = de.attribute("id", "0").toInt();
 
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
-            int i = val.toInt();
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
             if (tag == "hasNumber")             // obsolete
-                  _numberType = i ? SHOW_NUMBER : NO_TEXT;
+                  _numberType = val.toInt() ? SHOW_NUMBER : NO_TEXT;
             else if (tag == "hasLine") {          // obsolete
-                  _hasBracket = i;
+                  _hasBracket = val.toInt();
                   _bracketType = AUTO_BRACKET;
                   }
             else if (tag == "numberType")
-                  _numberType = i;
+                  _numberType = val.toInt();
             else if (tag == "bracketType")
-                  _bracketType = i;
+                  _bracketType = val.toInt();
             else if (tag == "baseLen")            // obsolete
-                  bl = i;
+                  bl = val.toInt();
             else if (tag == "baseNote")
                   _baseLen = TDuration(e.text());
             else if (tag == "normalNotes")
-                  _ratio.setDenominator(i);
+                  _ratio.setDenominator(val.toInt());
             else if (tag == "actualNotes")
-                  _ratio.setNumerator(i);
+                  _ratio.setNumerator(val.toInt());
             else if (tag == "Number") {
                   _number = new Text(score());
                   _number->setParent(this);
@@ -517,6 +519,8 @@ void Tuplet::read(QDomElement e, QList<Tuplet*>* tuplets, const QList<Spanner*>*
                   _userModified = true;
                   _p2 = readPoint(e);
                   }
+            else if (tag == "subtype")    // obsolete
+                  ;
             else if (!DurationElement::readProperties(e, tuplets, spanner))
                   domError(e);
             }

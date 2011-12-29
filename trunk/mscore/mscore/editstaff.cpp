@@ -212,12 +212,12 @@ void EditStaff::apply()
                              && instrument.tablature() != part->instr()->tablature());
 
       if (!(instrument == *part->instr()) || part->partName() != partName->text()) {
-            score->undo()->push(new ChangePart(part, instrument, partName->text()));
+            score->undo(new ChangePart(part, instrument, partName->text()));
             emit instrumentChanged();
             }
 
       if (s != staff->small() || inv != staff->invisible() || st  != staff->staffType())
-            score->undo()->push(new ChangeStaff(staff, s, inv, staff->show(), st));
+            score->undo(new ChangeStaff(staff, s, inv, staff->show(), st));
 
       if (updateNeeded)
             score->cmdUpdateNotes();

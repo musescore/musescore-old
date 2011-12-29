@@ -15,19 +15,19 @@
 #define __BRACKET_H__
 
 #include "element.h"
+#include "mscore.h"
 
 class MuseScoreView;
 class System;
 class QPainter;
-
-// System Brackets
-enum { BRACKET_NORMAL, BRACKET_AKKOLADE, NO_BRACKET = -1};
 
 //---------------------------------------------------------
 //   Bracket
 //---------------------------------------------------------
 
 class Bracket : public Element {
+      BracketType _subtype;
+
       qreal h2;
 
       int _column, _span;
@@ -38,7 +38,10 @@ class Bracket : public Element {
    public:
       Bracket(Score*);
       virtual Bracket* clone() const { return new Bracket(*this); }
+
       virtual ElementType type() const { return BRACKET; }
+      BracketType subtype() const      { return _subtype; }
+      void setSubtype(BracketType t)   { _subtype = t; }
 
       int span() const       { return _span; }
       void setSpan(int val)  { _span = val; }
@@ -51,7 +54,7 @@ class Bracket : public Element {
 
       virtual void draw(QPainter*) const;
       virtual void write(Xml& xml) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       virtual void layout();
 
       virtual bool isEditable() const { return true; }
@@ -63,7 +66,7 @@ class Bracket : public Element {
       virtual void updateGrips(int*, QRectF*) const;
       virtual QPointF gripAnchor(int grip) const;
 
-      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, Element*) const;
       virtual Element* drop(const DropData&);
       };
 

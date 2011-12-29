@@ -222,7 +222,7 @@ static int readStaffIdx(QDomElement e)
 //   read
 //---------------------------------------------------------
 
-void InstrumentTemplate::read(QDomElement e)
+void InstrumentTemplate::read(const QDomElement& de)
       {
       bool customDrumset = false;
       staves = 1;
@@ -242,10 +242,9 @@ void InstrumentTemplate::read(QDomElement e)
       transpose.chromatic  = 0;
       useDrumset = false;
 
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
-            int i = val.toInt();
 
             if (tag == "name" || tag == "longName") {               // "name" is obsolete
                   int pos = e.attribute("pos", "0").toInt();
@@ -262,7 +261,7 @@ void InstrumentTemplate::read(QDomElement e)
             else if (tag == "extended")
                   extended = true;
             else if (tag == "staves") {
-                  staves = i;
+                  staves = val.toInt();
                   bracketSpan[0] = staves;
                   barlineSpan[0] = staves;
                   }
@@ -279,23 +278,23 @@ void InstrumentTemplate::read(QDomElement e)
                   }
             else if (tag == "stafflines") {
                   int idx = readStaffIdx(e);
-                  staffLines[idx] = i;
+                  staffLines[idx] = val.toInt();
                   }
             else if (tag == "smallStaff") {
                   int idx = readStaffIdx(e);
-                  smallStaff[idx] = i;
+                  smallStaff[idx] = val.toInt();
                   }
             else if (tag == "bracket") {
                   int idx = readStaffIdx(e);
-                  bracket[idx] = i;
+                  bracket[idx] = BracketType(val.toInt());
                   }
             else if (tag == "bracketSpan") {
                   int idx = readStaffIdx(e);
-                  bracketSpan[idx] = i;
+                  bracketSpan[idx] = val.toInt();
                   }
             else if (tag == "barlineSpan") {
                   int idx = readStaffIdx(e);
-                  barlineSpan[idx] = i;
+                  barlineSpan[idx] = val.toInt();
                   }
             else if (tag == "Tablature") {
                   tablature = new Tablature;
@@ -306,15 +305,15 @@ void InstrumentTemplate::read(QDomElement e)
             else if (tag == "pPitchRange")
                   setPitchRange(val, &minPitchP, &maxPitchP);
             else if (tag == "transposition") {    // obsolete
-                  transpose.chromatic = i;
-                  transpose.diatonic = chromatic2diatonic(i);
+                  transpose.chromatic = val.toInt();
+                  transpose.diatonic = chromatic2diatonic(val.toInt());
                   }
             else if (tag == "transposeChromatic")
-                  transpose.chromatic = i;
+                  transpose.chromatic = val.toInt();
             else if (tag == "transposeDiatonic")
-                  transpose.diatonic = i;
+                  transpose.diatonic = val.toInt();
             else if (tag == "drumset")
-                  useDrumset = i;
+                  useDrumset = val.toInt();
             else if (tag == "Drum") {
                   // if we see on of this tags, a custom drumset will
                   // be created
@@ -419,9 +418,9 @@ void InstrumentTemplate::read(QDomElement e)
 //   readInstrumentGroup
 //---------------------------------------------------------
 
-static void readInstrumentGroup(InstrumentGroup* group, QDomElement e)
+static void readInstrumentGroup(InstrumentGroup* group, const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             if (tag == "instrument") {
                   InstrumentTemplate* t = new InstrumentTemplate;

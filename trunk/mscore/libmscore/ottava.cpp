@@ -51,7 +51,7 @@ void Ottava::layout()
 void Ottava::setSubtype(int val)
       {
       setEndHook(true);
-      Element::setSubtype(val);
+      _subtype = val;
 
       Spatium hook(score()->styleS(ST_ottavaHook));
 

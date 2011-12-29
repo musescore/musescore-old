@@ -48,6 +48,7 @@ class OttavaSegment : public TextLineSegment {
 //---------------------------------------------------------
 
 class Ottava : public TextLine {
+      int _subtype;
 
    protected:
       QString text;
@@ -60,7 +61,8 @@ class Ottava : public TextLine {
       Ottava(Score* s);
       virtual Ottava* clone() const    { return new Ottava(*this); }
       virtual ElementType type() const { return OTTAVA; }
-      virtual void setSubtype(int val);
+      void setSubtype(int val);
+      int subtype() const { return _subtype; }
       virtual LineSegment* createLineSegment();
       virtual void layout();
       int pitchShift() const { return _pitchShift; }

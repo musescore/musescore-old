@@ -1359,7 +1359,7 @@ void ScoreView::endEdit()
 
             Text* t = static_cast<Text*>(editObject);
             if (textUndoLevel)
-                  _score->undo()->push(new EditText(t, textUndoLevel));
+                  _score->undo(new EditText(t, textUndoLevel));
 //TODOst            disconnect(t->doc(), SIGNAL(undoCommandAdded()), this, SLOT(textUndoLevelAdded()));
             }
       else if (editObject->isSegment()) {
@@ -1432,7 +1432,7 @@ void ScoreView::endEdit()
                               lee              = sc->tick2measure(tick);
                               }
                         Q_ASSERT(lse && lee);
-                        score()->undo()->push(new ChangeSpannerAnchor(lspanner, lse, lee));
+                        score()->undo(new ChangeSpannerAnchor(lspanner, lse, lee));
                         }
                   }
             }
@@ -2084,11 +2084,9 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
                   Image* image = 0;
                   QString lp(path.toLower());
 
-#ifdef SVG_IMAGES
                   if (lp.endsWith(".svg"))
                         image = new SvgImage(score());
                   else
-#endif
                         if (lp.endsWith(".jpg")
                      || lp.endsWith(".png")
                      || lp.endsWith(".gif")
@@ -2162,7 +2160,7 @@ void ScoreView::dragSymbol(const QPointF& pos)
       const QList<const Element*> el = elementsAt(pos);
       const Element* e = el.isEmpty() ? 0 : el[0];
       if (e && (e->type() == NOTE || e->type() == SYMBOL || e->type() == IMAGE)) {
-            if (e->acceptDrop(this, pos, dragElement->type(), dragElement->subtype())) {
+            if (e->acceptDrop(this, pos, dragElement)) {
                   setDropTarget(e);
                   return;
                   }
@@ -2243,7 +2241,7 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
                         QList<const Element*> el = elementsAt(pos);
                         bool found = false;
                         foreach(const Element* e, el) {
-                              if (e->acceptDrop(this, pos, dragElement->type(), dragElement->subtype())) {
+                              if (e->acceptDrop(this, pos, dragElement)) {
                                     if (e->type() != MEASURE)
                                           setDropTarget(const_cast<Element*>(e));
                                     found = true;
@@ -2414,7 +2412,7 @@ void ScoreView::dropEvent(QDropEvent* event)
                         {
                         Element* el = 0;
                         foreach(const Element* e, elementsAt(pos)) {
-                              if (e->acceptDrop(this, pos, dragElement->type(), dragElement->subtype())) {
+                              if (e->acceptDrop(this, pos, dragElement)) {
                                     el = const_cast<Element*>(e);
                                     break;
                                     }
@@ -2462,11 +2460,9 @@ void ScoreView::dropEvent(QDropEvent* event)
                   QFileInfo fi(u.path());
                   Image* s = 0;
                   QString suffix = fi.suffix().toLower();
-#ifdef SVG_IMAGES
                   if (suffix == "svg")
                         s = new SvgImage(score());
                   else
-#endif
                         if (suffix == "jpg"
                      || suffix == "png"
                      || suffix == "gif"

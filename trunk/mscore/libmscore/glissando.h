@@ -24,6 +24,7 @@ class Note;
 
 class Glissando : public Element {
       Q_DECLARE_TR_FUNCTIONS(Glissando)
+      int _subtype;
       QLineF line;
       QString _text;
       bool _showText;
@@ -32,12 +33,14 @@ class Glissando : public Element {
       Glissando(Score* s);
       virtual Glissando* clone() const { return new Glissando(*this); }
       virtual ElementType type() const { return GLISSANDO; }
+      int subtype() const    { return _subtype; }
+      void setSubtype(int v) { _subtype = v;    }
       virtual Space space() const;
 
       virtual void draw(QPainter*) const;
       virtual void layout();
       virtual void write(Xml&) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
 
       void setSize(const QSizeF&);        // used for palette
 

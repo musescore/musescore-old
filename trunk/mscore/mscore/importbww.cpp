@@ -300,9 +300,9 @@ void MsScWriter::endMeasure(const Bww::MeasureEndFlags mef)
             if (lastVolta) {
                   qDebug("adding volta\n");
                   if (ending == 1)
-                        lastVolta->setSubtype(Volta::VOLTA_CLOSED);
+                        lastVolta->setSubtype(VOLTA_CLOSED);
                   else
-                        lastVolta->setSubtype(Volta::VOLTA_OPEN);
+                        lastVolta->setSubtype(VOLTA_OPEN);
                   lastVolta->setEndElement(currentMeasure);
                   currentMeasure->addSpannerBack(lastVolta);
                   lastVolta = 0;

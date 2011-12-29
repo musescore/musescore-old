@@ -762,12 +762,12 @@ void TextStyleData::writeProperties(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void TextStyleData::read(QDomElement e)
+void TextStyleData::read(const QDomElement& de)
       {
       frameWidth = 0.0;
-      name = e.attribute("name");
+      name = de.attribute("name");
 
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (!readProperties(e))
                   domError(e);
             }
@@ -777,10 +777,10 @@ void TextStyleData::read(QDomElement e)
 //   readProperties
 //---------------------------------------------------------
 
-bool TextStyleData::readProperties(QDomElement e)
+bool TextStyleData::readProperties(const QDomElement& e)
       {
-      QString tag(e.tagName());
-      QString val(e.text());
+      const QString& tag(e.tagName());
+      const QString& val(e.text());
       int i = val.toInt();
 
       if (tag == "family")
@@ -826,11 +826,11 @@ bool TextStyleData::readProperties(QDomElement e)
 //   load
 //---------------------------------------------------------
 
-void StyleData::load(QDomElement e)
+void StyleData::load(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
-            QString val(e.text());
+            const QString& val(e.text());
 
             if (tag == "TextStyle") {
 //                  QString name = e.attribute("name");
@@ -1229,7 +1229,7 @@ void TextStyle::setCircle(bool v)                         { d->circle = v;     }
 void TextStyle::setSystemFlag(bool v)                     { d->systemFlag = v; }
 void TextStyle::setForegroundColor(const QColor& v)       { d->foregroundColor = v; }
 void TextStyle::write(Xml& xml) const                     { d->write(xml); }
-void TextStyle::read(QDomElement v)                       { d->read(v); }
+void TextStyle::read(const QDomElement& v)                       { d->read(v); }
 QFont TextStyle::font(qreal space) const                  { return d->font(space); }
 QFont TextStyle::fontPx(qreal spatium) const              { return d->fontPx(spatium); }
 QRectF TextStyle::bbox(qreal sp, const QString& s) const  { return d->bbox(sp, s); }
@@ -1248,7 +1248,7 @@ void TextStyle::layout(Element* e) const
 void TextStyle::writeProperties(Xml& xml) const           { d->writeProperties(xml); }
 const QPointF& TextStyle::reloff() const                  { return d->reloff();      }
 void TextStyle::setReloff(const QPointF& p)               { setRxoff(p.x()), setRyoff(p.y()); }
-bool TextStyle::readProperties(QDomElement v)             { return d->readProperties(v); }
+bool TextStyle::readProperties(const QDomElement& v)      { return d->readProperties(v); }
 
 //---------------------------------------------------------
 //   setFont
@@ -1439,7 +1439,7 @@ bool MStyle::load(QFile* qf)
       return d->load(qf);
       }
 
-void MStyle::load(QDomElement e)
+void MStyle::load(const QDomElement& e)
       {
       d->load(e);
       }
@@ -1477,12 +1477,10 @@ bool StyleData::load(QFile* qf)
       for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "museScore") {
                   QString version = e.attribute(QString("version"));
-                  QStringList sl = version.split('.');
-                  // _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
+                  QStringList sl  = version.split('.');
+                  // _mscVersion  = sl[0].toInt() * 100 + sl[1].toInt();
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
-                        QString tag(ee.tagName());
-                        QString val(ee.text());
-                        if (tag == "Style")
+                        if (ee.tagName() == "Style")
                               load(ee);
                         else
                               domError(ee);

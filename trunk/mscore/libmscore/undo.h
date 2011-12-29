@@ -30,6 +30,7 @@
 #include "instrument.h"
 #include "midipatch.h"
 #include "pitchvalue.h"
+#include "timesig.h"
 
 class ElementList;
 class Element;
@@ -500,23 +501,6 @@ class ChangeChordNoStem : public UndoCommand {
       };
 
 //---------------------------------------------------------
-//   ChangeChordRestSpace
-//---------------------------------------------------------
-
-class ChangeChordRestSpace : public UndoCommand {
-      ChordRest* cr;
-      Spatium l;
-      Spatium t;
-      void flip();
-
-   public:
-      ChangeChordRestSpace(ChordRest*, Spatium l, Spatium t);
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      UNDO_NAME("ChangeChordRestSpace");
-      };
-
-//---------------------------------------------------------
 //   ChangeEndBarLineType
 //---------------------------------------------------------
 
@@ -546,22 +530,6 @@ class ChangeBarLineSpan : public UndoCommand {
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeBarLineSpan");
-      };
-
-//---------------------------------------------------------
-//   ChangeUserOffset
-//---------------------------------------------------------
-
-class ChangeUserOffset : public UndoCommand {
-      Element* element;
-      QPointF offset;
-      void flip();
-
-   public:
-      ChangeUserOffset(Element*, const QPointF& offset);
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      UNDO_NAME("ChangeUserOffset");
       };
 
 //---------------------------------------------------------
@@ -869,40 +837,6 @@ class ChangePatch : public UndoCommand {
       };
 
 //---------------------------------------------------------
-//   ChangeTuning
-//---------------------------------------------------------
-
-class ChangeTuning : public UndoCommand {
-      Note* note;
-      qreal tuning;
-
-      void flip();
-
-   public:
-      ChangeTuning(Note* n, qreal t) : note(n), tuning(t) {}
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      UNDO_NAME("ChangeTuning");
-      };
-
-//---------------------------------------------------------
-//   ChangeUserMirror
-//---------------------------------------------------------
-
-class ChangeUserMirror : public UndoCommand {
-      Note* note;
-      DirectionH dir;
-
-      void flip();
-
-   public:
-      ChangeUserMirror(Note* n, DirectionH d) : note(n), dir(d) {}
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      UNDO_NAME("ChangeUserMirror");
-      };
-
-//---------------------------------------------------------
 //   ChangePageFormat
 //---------------------------------------------------------
 
@@ -1166,13 +1100,13 @@ class ChangeTimesig : public UndoCommand {
       Fraction stretch;
       QString sz;
       QString sn;
-      int subtype;
+      TimeSigType subtype;
 
       void flip();
 
    public:
       ChangeTimesig(TimeSig * _timesig, bool sc, const Fraction&,
-         const Fraction&, int subtype, const QString&, const QString&);
+         const Fraction&, TimeSigType subtype, const QString&, const QString&);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeTimesig");
@@ -1521,7 +1455,7 @@ class ChangeProperty : public UndoCommand {
       void flip();
 
    public:
-      ChangeProperty(Element* e, int i, QVariant v) : element(e), id(i), property(v) {}
+      ChangeProperty(Element* e, int i, const QVariant& v) : element(e), id(i), property(v) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeProperty");

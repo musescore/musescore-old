@@ -60,7 +60,7 @@ void ChordLine::setSubtype(int st)
             path = QPainterPath();
             path.cubicTo(x2/2, 0.0, x2, y2/2, x2, y2);
             }
-      Element::setSubtype(st);
+      _subtype = st;
       }
 
 //---------------------------------------------------------
@@ -85,10 +85,10 @@ void ChordLine::layout()
 //   read
 //---------------------------------------------------------
 
-void ChordLine::read(QDomElement e)
+void ChordLine::read(const QDomElement& de)
       {
       path = QPainterPath();
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "Path") {
                   path = QPainterPath();

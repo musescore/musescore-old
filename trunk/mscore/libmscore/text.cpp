@@ -58,7 +58,7 @@ Text::Text(Score* s)
       _editMode  = false;
       _cursor    = 0;
       _styled    = true;
-      setSubtype(0);
+//      setSubtype(0);
       }
 
 Text::Text(const Text& e)
@@ -337,18 +337,9 @@ void Text::setTextStyle(TextStyleType idx)
 
 void Text::write(Xml& xml) const
       {
-      write(xml, name());
-      }
-
-//---------------------------------------------------------
-//   write
-//---------------------------------------------------------
-
-void Text::write(Xml& xml, const char* name) const
-      {
       if (isEmpty())
             return;
-      xml.stag(name);
+      xml.stag(name());
       writeProperties(xml, true);
       xml.etag();
       }
@@ -357,9 +348,9 @@ void Text::write(Xml& xml, const char* name) const
 //   read
 //---------------------------------------------------------
 
-void Text::read(QDomElement e)
+void Text::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (!readProperties(e))
                   domError(e);
             }
@@ -403,7 +394,7 @@ void Text::writeProperties(Xml& xml, bool writeText) const
 //   readProperties
 //---------------------------------------------------------
 
-bool Text::readProperties(QDomElement e)
+bool Text::readProperties(const QDomElement& e)
       {
       const QString& tag(e.tagName());
       const QString& val(e.text());
@@ -516,6 +507,8 @@ bool Text::readProperties(QDomElement e)
             }
       else if (tag == "systemFlag")       // prevent setting "styled"
             _localStyle.setSystemFlag(val.toInt());
+      else if (tag == "subtype")          // obsolete
+            ;
       else if (_localStyle.readProperties(e))
             setStyled(false);
       else if (!Element::readProperties(e))

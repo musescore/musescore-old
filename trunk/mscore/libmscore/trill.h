@@ -22,7 +22,7 @@ class QPainter;
 
 
 // subtypes:
-enum {
+enum TrillType {
       TRILL_LINE, UPPRALL_LINE, DOWNPRALL_LINE, PRALLPRALL_LINE
       };
 
@@ -38,7 +38,7 @@ class TrillSegment : public LineSegment {
       virtual ElementType type() const    { return TRILL_SEGMENT; }
       virtual TrillSegment* clone() const { return new TrillSegment(*this); }
       virtual void draw(QPainter*) const;
-      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, Element*) const;
       virtual Element* drop(const DropData&);
       virtual void layout();
       };
@@ -48,6 +48,7 @@ class TrillSegment : public LineSegment {
 //---------------------------------------------------------
 
 class Trill : public SLine {
+      TrillType _subtype;
       Accidental* _accidental;
 
    public:
@@ -62,9 +63,12 @@ class Trill : public SLine {
       Accidental* accidental() const    { return _accidental; }
       void setAccidental(Accidental* a) { _accidental = a; }
       virtual void write(Xml&) const;
-      virtual void read(QDomElement);
-      virtual void setSubtype(const QString& s);
-      virtual QString subtypeName() const;
+      virtual void read(const QDomElement&);
+
+      void setSubtype(const QString& s);
+      void setSubtype(TrillType tt)     { _subtype = tt; }
+      TrillType subtype() const         { return _subtype; }
+      QString subtypeName() const;
 
       Segment* segment() const          { return (Segment*)parent(); }
       };

@@ -50,9 +50,9 @@ void Fingering::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Fingering::read(QDomElement e)
+void Fingering::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (!Text::readProperties(e))
                   domError(e);
             }
@@ -68,5 +68,5 @@ void Fingering::toDefault()
       score()->layoutFingering(this);
       QPointF no(userOff());
       setUserOff(o);
-      score()->undo()->push(new ChangeUserOffset(this, no));
+      score()->undoChangeUserOffset(this, no);
       }

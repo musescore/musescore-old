@@ -42,7 +42,7 @@ class StaffText : public Text  {
       virtual StaffText* clone() const { return new StaffText(*this); }
       virtual ElementType type() const { return STAFF_TEXT; }
       virtual void write(Xml& xml) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
 
       QString channelName(int voice) const                { return _channelNames[voice]; }
       void setChannelName(int v, const QString& s)        { _channelNames[v] = s;        }

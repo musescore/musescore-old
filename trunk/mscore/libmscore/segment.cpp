@@ -43,8 +43,6 @@
 
 const char* Segment::subTypeName() const
       {
-      static char buffer[32];
-
       switch(subtype()) {
             case SegClef:                 return "Clef";
             case SegKeySig:               return "Key Signature";
@@ -57,8 +55,9 @@ const char* Segment::subTypeName() const
             case SegEndBarLine:           return "EndBarLine";
             case SegTimeSigAnnounce:      return "Time Sig Precaution";
             case SegKeySigAnnounce:       return "Key Sig Precaution";
+            default:
+                  return "";
             }
-      return buffer;
       }
 
 //---------------------------------------------------------
@@ -458,7 +457,7 @@ void Segment::add(Element* el)
                   break;
 
             case STAFF_STATE:
-                  if (el->subtype() == STAFF_STATE_INSTRUMENT) {
+                  if (static_cast<StaffState*>(el)->subtype() == STAFF_STATE_INSTRUMENT) {
                         StaffState* ss = static_cast<StaffState*>(el);
                         Part* part = el->staff()->part();
                         part->setInstrument(ss->instrument(), tick());
@@ -497,8 +496,8 @@ void Segment::add(Element* el)
 
                   // fall through
 
-            case BAR_LINE:
             case KEYSIG:
+            case BAR_LINE:
                   _elist[track] = el;
                   empty = false;
                   break;
@@ -580,7 +579,7 @@ void Segment::remove(Element* el)
                   break;
 
             case STAFF_STATE:
-                  if (el->subtype() == STAFF_STATE_INSTRUMENT) {
+                  if (static_cast<StaffState*>(el)->subtype() == STAFF_STATE_INSTRUMENT) {
                         Part* part = el->staff()->part();
                         part->removeInstrument(tick());
                         }
@@ -606,8 +605,8 @@ void Segment::remove(Element* el)
                   el->staff()->removeTimeSig(static_cast<TimeSig*>(el));
                   break;
 
-            case BAR_LINE:
             case KEYSIG:
+            case BAR_LINE:
                   _elist[track] = 0;
                   break;
 
@@ -774,6 +773,7 @@ void Segment::write(Xml& xml) const
       if (_extraLeadingSpace.isZero() && _extraTrailingSpace.isZero())
             return;
       xml.stag(name());
+      xml.tag("subtype", _subtype);
       xml.tag("leadingSpace", _extraLeadingSpace.val());
       xml.tag("trailingSpace", _extraTrailingSpace.val());
       xml.etag();
@@ -783,13 +783,15 @@ void Segment::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Segment::read(QDomElement e)
+void Segment::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
 
-            if (tag == "leadingSpace")
+            if (tag == "subtype")
+                  _subtype = SegmentType(val.toInt());
+            else if (tag == "leadingSpace")
                   _extraLeadingSpace = Spatium(val.toDouble());
             else if (tag == "trailingSpace")
                   _extraTrailingSpace = Spatium(val.toDouble());
@@ -816,14 +818,15 @@ QVariant Segment::getProperty(int propertyId) const
 //   setProperty
 //---------------------------------------------------------
 
-void Segment::setProperty(int propertyId, const QVariant& v)
+bool Segment::setProperty(int propertyId, const QVariant& v)
       {
       switch(propertyId) {
             case P_LEADING_SPACE: setExtraLeadingSpace(Spatium(v.toDouble())); break;
             case P_TRAILING_SPACE: setExtraTrailingSpace(Spatium(v.toDouble())); break;
             default:
-                  Element::setProperty(propertyId, v);
+                  return Element::setProperty(propertyId, v);
             }
+      return true;
       }
 
 

@@ -22,6 +22,18 @@
 #include "stafftype.h"
 
 //---------------------------------------------------------
+//   propertyList
+//---------------------------------------------------------
+
+static int defaultSubtype = 0;
+
+Property<BarLine> BarLine::propertyList[] = {
+      { P_SUBTYPE,      T_INT, "subtype", &BarLine::pSubtype, &defaultSubtype },
+      };
+
+static const int PROPERTIES = sizeof(BarLine::propertyList)/sizeof(*BarLine::propertyList);
+
+//---------------------------------------------------------
 //   barLineNames
 //    must be synchronized with enum BarLineType
 //---------------------------------------------------------
@@ -38,7 +50,7 @@ static const char* barLineNames[] = {
 BarLine::BarLine(Score* s)
    : Element(s)
       {
-      setBarLineType(NORMAL_BAR);
+      setSubtype(NORMAL_BAR);
       _span = 1;
       yoff  = 0.0;
       setHeight(4.0 * spatium()); // for use in palettes
@@ -254,6 +266,7 @@ void BarLine::draw(QPainter* painter) const
 void BarLine::write(Xml& xml) const
       {
       xml.stag("BarLine");
+      xml.tag("subtype", subtypeName());
       xml.tag("span", _span);
       foreach(const Element* e, _el)
             e->write(xml);
@@ -265,18 +278,18 @@ void BarLine::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void BarLine::read(QDomElement e)
+void BarLine::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
             if (tag == "subtype") {
-                  BarLineType ct;
                   bool ok;
                   int i = val.toInt(&ok);
                   if (!ok)
-                        ct = BarLine::barLineType(val);
+                        setSubtype(val);
                   else {
+                        BarLineType ct = NORMAL_BAR;
                         switch (i) {
                               default:
                               case  0: ct = NORMAL_BAR; break;
@@ -287,8 +300,8 @@ void BarLine::read(QDomElement e)
                               case  5: ct = END_BAR; break;
                               case  6: ct = END_START_REPEAT; break;
                               }
+                        setSubtype(ct);
                         }
-                  setBarLineType(ct);
                   }
             else if (tag == "span")
                   _span = val.toInt();
@@ -315,8 +328,9 @@ Space BarLine::space() const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool BarLine::acceptDrop(MuseScoreView*, const QPointF&, int type, int) const
+bool BarLine::acceptDrop(MuseScoreView*, const QPointF&, Element* e) const
       {
+      int type = e->type();
       return type == BAR_LINE
          || (type == ARTICULATION && segment() && segment()->subtype() == SegEndBarLine)
          ;
@@ -330,8 +344,9 @@ Element* BarLine::drop(const DropData& data)
       {
       Element* e = data.element;
       int type = e->type();
-      int st   = e->subtype();
       if (type == BAR_LINE) {
+            BarLine* bl = static_cast<BarLine*>(e);
+            BarLineType st = bl->subtype();
             if (st == subtype()) {
                   delete e;
                   return 0;
@@ -518,6 +533,8 @@ void BarLine::layout()
                         //r |= symbols[brackettipsLeftUp].bbox(mags).translated(0, y1);
                         //r |= symbols[brackettipsLeftDown].bbox(mags).translated(0, y2);
                         break;
+                  default:
+                        break;
                   }
             }
       foreach(Element* e, _el) {
@@ -574,20 +591,13 @@ QString BarLine::subtypeName() const
 
 void BarLine::setSubtype(const QString& s)
       {
-      setBarLineType(barLineType(s));
-      }
-
-//---------------------------------------------------------
-//   barLineType
-//---------------------------------------------------------
-
-BarLineType BarLine::barLineType(const QString& s)
-      {
       for (unsigned i = 0; i < sizeof(barLineNames)/sizeof(*barLineNames); ++i) {
-            if (barLineNames[i] == s)
-                  return BarLineType(i);
+            if (barLineNames[i] == s) {
+                  _subtype = BarLineType(i);
+                  return;
+                  }
             }
-      return NORMAL_BAR;
+      _subtype = NORMAL_BAR;
       }
 
 //---------------------------------------------------------
@@ -638,4 +648,55 @@ void BarLine::remove(Element* e)
             }
       }
 
+//---------------------------------------------------------
+//   property
+//---------------------------------------------------------
+
+Property<BarLine>* BarLine::property(int id) const
+      {
+      for (int i = 0; i < PROPERTIES; ++i) {
+            if (propertyList[i].id == id)
+                  return &propertyList[i];
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   getProperty
+//---------------------------------------------------------
+
+QVariant BarLine::getProperty(int propertyId) const
+      {
+      Property<BarLine>* p = property(propertyId);
+      if (p)
+            return ::getProperty(p->type, ((*(BarLine*)this).*(p->data))());
+      return Element::getProperty(propertyId);
+      }
+
+//---------------------------------------------------------
+//   setProperty
+//---------------------------------------------------------
+
+bool BarLine::setProperty(int propertyId, const QVariant& v)
+      {
+      Property<BarLine>* p = property(propertyId);
+      if (p) {
+            ::setProperty(p->type, ((*this).*(p->data))(), v);
+            setGenerated(false);
+            return true;
+            }
+      return Element::setProperty(propertyId, v);
+      }
+
+bool BarLine::setProperty(const QString& name, const QString& data)
+      {
+      for (int i = 0; i < PROPERTIES; ++i) {
+            if (propertyList[i].name == name) {
+                  ::setProperty(propertyList[i].type, ((*this).*(propertyList[i].data))(), data);
+                  setGenerated(false);
+                  return true;
+                  }
+            }
+      return Element::setProperty(name, data);
+      }
 

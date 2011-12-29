@@ -91,18 +91,24 @@ class InspectorNoteBase : public QWidget, Ui::InspectorNote {
 class InspectorElementElement : public QWidget, Ui::InspectorElement {
       Q_OBJECT
 
+      Element* e;
+
    private slots:
+      void resetColorClicked();
       void resetXClicked();
       void resetYClicked();
+      void colorChanged(QColor);
+      void offsetXChanged(double);
+      void offsetYChanged(double);
 
    signals:
       void enableApply();
 
    public:
       InspectorElementElement(QWidget* parent = 0);
-      void setElement(const Element*);
-      void apply(Element*);
-      bool dirty(Element*) const;
+      void setElement(Element*);
+      void apply();
+      bool dirty() const;
       };
 
 //---------------------------------------------------------

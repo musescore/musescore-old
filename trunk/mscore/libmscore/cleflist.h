@@ -28,7 +28,7 @@ class ClefList : public QMultiMap<int, ClefTypeList> {
       ClefList() {}
       ClefTypeList clef(int tick) const;
       void setClef(int tick, ClefTypeList);
-      void read(QDomElement, Score*);
+      void read(const QDomElement&, Score*);
       };
 
 typedef QMultiMap<int, ClefTypeList>::iterator iClefEvent;

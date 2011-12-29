@@ -65,8 +65,8 @@ class PageFormat {
       void setSize(const QSizeF& s) { _size = s;             }
 
       QString name() const;
-      void read(QDomElement,  Score*);
-      void readMusicXML(QDomElement, qreal);
+      void read(const QDomElement&,  Score*);
+      void readMusicXML(const QDomElement&, qreal);
       void write(Xml&) const;
       void writeMusicXML(Xml&, qreal) const;
       qreal evenLeftMargin() const        { return _evenLeftMargin;   }
@@ -121,7 +121,7 @@ class Page : public Element {
 
       virtual void layout();
       virtual void write(Xml&) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
 
       void appendSystem(System* s);
 

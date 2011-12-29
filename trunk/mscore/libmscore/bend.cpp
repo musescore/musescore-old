@@ -262,9 +262,9 @@ void Bend::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Bend::read(QDomElement e)
+void Bend::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull();  e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull();  e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             if (tag == "point") {
                   PitchValue pv;

@@ -125,7 +125,7 @@ void ScoreView::endDrag()
             qreal userDist = dragStaff->userDist();
             dragStaff->setUserDist(staffUserDist);
             printf("endDrag measure: %f -> %f\n", dragStaff->userDist(), userDist);
-            score()->undo()->push(new ChangeStaffUserDist(dragStaff, userDist));
+            score()->undo(new ChangeStaffUserDist(dragStaff, userDist));
             }
       else {
             foreach(Element* e, _score->selection().elements()) {

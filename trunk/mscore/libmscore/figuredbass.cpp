@@ -93,9 +93,9 @@ void FiguredBass::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void FiguredBass::read(QDomElement e)
+void FiguredBass::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             if (tag == "no")
                   _no = e.text().toInt();

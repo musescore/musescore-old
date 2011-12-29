@@ -676,12 +676,12 @@ void Chord::write(Xml& xml) const
 //   Chord::readNote
 //---------------------------------------------------------
 
-void Chord::readNote(QDomElement e, QList<Tuplet*>* tuplets, QList<Spanner*>* spanner)
+void Chord::readNote(const QDomElement& de, QList<Tuplet*>* tuplets, QList<Spanner*>* spanner)
       {
       Note* note = new Note(score());
-      int ptch   = e.attribute("pitch", "-1").toInt();
-      int ticks  = e.attribute("ticks", "-1").toInt();
-      int tpc    = e.attribute("tpc", "-1").toInt();
+      int ptch   = de.attribute("pitch", "-1").toInt();
+      int ticks  = de.attribute("ticks", "-1").toInt();
+      int tpc    = de.attribute("tpc", "-1").toInt();
 
       if (ticks != -1) {
             TDuration d;
@@ -689,10 +689,9 @@ void Chord::readNote(QDomElement e, QList<Tuplet*>* tuplets, QList<Spanner*>* sp
             setDurationType(d);
             }
 
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
-            int i = val.toInt();
 
             if (tag == "StemDirection") {
                   if (val == "up")
@@ -700,15 +699,15 @@ void Chord::readNote(QDomElement e, QList<Tuplet*>* tuplets, QList<Spanner*>* sp
                   else if (val == "down")
                         _stemDirection = DOWN;
                   else
-                        _stemDirection = Direction(i);
+                        _stemDirection = Direction(val.toInt());
                   }
             else if (tag == "pitch")
-                  note->setPitch(i);
+                  note->setPitch(val.toInt());
             else if (tag == "prefix") {
                   qDebug("read Note:: prefix: TODO\n");
                   }
             else if (tag == "line")
-                  note->setLine(i);
+                  note->setLine(val.toInt());
             else if (tag == "Tie") {
                   Tie* _tieFor = new Tie(score());
                   _tieFor->setTrack(track());
@@ -724,7 +723,7 @@ void Chord::readNote(QDomElement e, QList<Tuplet*>* tuplets, QList<Spanner*>* sp
                   note->add(f);
                   }
             else if (tag == "move")
-                  setStaffMove(i);
+                  setStaffMove(val.toInt());
             else if (!ChordRest::readProperties(e, tuplets, spanner))
                   domError(e);
             }
@@ -741,7 +740,7 @@ void Chord::readNote(QDomElement e, QList<Tuplet*>* tuplets, QList<Spanner*>* sp
 //   read
 //---------------------------------------------------------
 
-void Chord::read(QDomElement e)
+void Chord::read(const QDomElement& e)
       {
       QList<Tuplet*> tl;
       QList<Spanner*> sl;
@@ -752,12 +751,11 @@ void Chord::read(QDomElement e)
 //   Chord::read
 //---------------------------------------------------------
 
-void Chord::read(QDomElement e, QList<Tuplet*>* tuplets, QList<Spanner*>* spanner)
+void Chord::read(const QDomElement& de, QList<Tuplet*>* tuplets, QList<Spanner*>* spanner)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
-            int i = val.toInt();
 
             if (tag == "Note") {
                   Note* note = new Note(score());
@@ -783,10 +781,10 @@ void Chord::read(QDomElement e, QList<Tuplet*>* tuplets, QList<Spanner*>* spanne
                   else if (val == "down")
                         _stemDirection = DOWN;
                   else
-                        _stemDirection = Direction(i);
+                        _stemDirection = Direction(val.toInt());
                   }
             else if (tag == "noStem")
-                  _noStem = i;
+                  _noStem = val.toInt();
             else if (tag == "Arpeggio") {
                   _arpeggio = new Arpeggio(score());
                   _arpeggio->setTrack(track());
@@ -1457,14 +1455,14 @@ void Chord::layout()
             rrr += point(score()->styleS(ST_dotNoteDistance)) + (dots()-1) * point(score()->styleS(ST_dotDotDistance));
             }
 
-      rrr += _extraTrailingSpace.val() * _spatium;
+//      rrr += _extraTrailingSpace.val() * _spatium;
 
       if (_hook) {
             _hook->layout();
             if (up())
                   rrr += _hook->width() + minNoteDistance;
             }
-      lll += _extraLeadingSpace.val() * _spatium;
+//      lll += _extraLeadingSpace.val() * _spatium;
 
       if (_noteType != NOTE_NORMAL) {
             // qreal m = score()->styleD(ST_graceNoteMag);
@@ -1784,7 +1782,7 @@ QVariant Chord::getProperty(int propertyId) const
 //   setProperty
 //---------------------------------------------------------
 
-void Chord::setProperty(int propertyId, const QVariant& v)
+bool Chord::setProperty(int propertyId, const QVariant& v)
       {
       switch(propertyId) {
             case P_STEM_DIRECTION:
@@ -1792,8 +1790,9 @@ void Chord::setProperty(int propertyId, const QVariant& v)
                   score()->setLayoutAll(true);
                   break;
             default:
-                  Element::setProperty(propertyId, v);
+                  return Element::setProperty(propertyId, v);
             }
+      return true;
       }
 
 //---------------------------------------------------------

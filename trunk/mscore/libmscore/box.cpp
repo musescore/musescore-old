@@ -186,13 +186,13 @@ void Box::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Box::read(QDomElement e)
+void Box::read(const QDomElement& de)
       {
       _leftMargin = _rightMargin = _topMargin = _bottomMargin = 0.0;
       bool keepMargins = false;        // whether original margins have to be kept when reading old file
 
       qreal _spatium = spatium();
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
             if (tag == "height") {
@@ -244,11 +244,9 @@ void Box::read(QDomElement e)
                         path = ee.text();
                   Image* image = 0;
                   QString s(path.toLower());
-#ifdef SVG_IMAGES
                   if (s.endsWith(".svg"))
                         image = new SvgImage(score());
                   else
-#endif
                         if (s.endsWith(".jpg")
                      || s.endsWith(".png")
                      || s.endsWith(".gif")
@@ -341,8 +339,9 @@ void HBox::layout2()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Box::acceptDrop(MuseScoreView*, const QPointF&, int type, int) const
+bool Box::acceptDrop(MuseScoreView*, const QPointF&, Element* e) const
       {
+      int type = e->type();
       if (type == LAYOUT_BREAK || type == TEXT || type == STAFF_TEXT)
             return true;
       return false;

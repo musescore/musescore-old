@@ -196,7 +196,7 @@ void PartEdit::patchChanged(int n)
       Score* score = part->score();
       if (score) {
             score->startCmd();
-            score->undo()->push(new ChangePatch(channel, p));
+            score->undo(new ChangePatch(channel, p));
             score->endCmd();
             mscore->endCmd();
             }

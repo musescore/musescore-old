@@ -61,14 +61,14 @@ void Drumset::save(Xml& xml)
 //   load
 //---------------------------------------------------------
 
-void Drumset::load(QDomElement e)
+void Drumset::load(const QDomElement& de)
       {
-      int pitch = e.attribute("pitch", "-1").toInt();
+      int pitch = de.attribute("pitch", "-1").toInt();
       if (pitch < 0 || pitch > 127) {
             qDebug("load drumset: invalid pitch %d\n", pitch);
             return;
             }
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             bool isNum;

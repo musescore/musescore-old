@@ -29,6 +29,7 @@
 //---------------------------------------------------------
 
 class Icon : public Element {
+      int _subtype;
       const char* _action;
       QIcon _icon;
 
@@ -36,11 +37,13 @@ class Icon : public Element {
       Icon(Score* s) : Element(s) {}
       virtual Icon* clone() const        { return new Icon(*this);   }
       virtual ElementType type() const   { return ICON;              }
+      int subtype() const                { return _subtype;          }
+      void setSubtype(int val)           { _subtype = val;           }
       void setAction(const char* s, const QIcon& i)   { _action = s; _icon = i;  }
       const char* action() const         { return _action;           }
       QIcon icon() const                 { return _icon;             }
       virtual void write(Xml&) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       };
 
 #endif

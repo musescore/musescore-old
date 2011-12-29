@@ -62,12 +62,11 @@ qDebug("setClef...\n");
 //   ClefList::read
 //---------------------------------------------------------
 
-void ClefList::read(QDomElement e, Score* cs)
+void ClefList::read(const QDomElement& de, Score* cs)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            const QString& tag(e.tagName());
-            if (tag == "clef") {
-                  int tick = e.attribute("tick", "0").toInt();
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "clef") {
+                  int tick    = e.attribute("tick", "0").toInt();
                   ClefType ct = Clef::clefType(e.attribute("idx", "0"));
                   insert(cs->fileDivision(tick), ClefTypeList(ct, ct));
                   }

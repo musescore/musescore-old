@@ -90,9 +90,7 @@ class EventData : public QSharedData {
       EventData(int t);
       ~EventData();
 
-//      void write(MidiFile*) const;
       void write(Xml&) const;
-//      void read(QDomElement);
 
       bool isChannelEvent() const;
 

@@ -51,7 +51,7 @@ MetaEditDialog::MetaEditDialog(Score* s, QWidget* parent)
 void MetaEditDialog::accept()
       {
 #define T(x, y) if (score->metaTag(x) != y->text()) \
-            score->undo()->push(new ChangeMetaText(score, x, y->text()));
+            score->undo(new ChangeMetaText(score, x, y->text()));
 
       T("movementNumber", movementNumber)
       T("movementTitle", movementTitle)

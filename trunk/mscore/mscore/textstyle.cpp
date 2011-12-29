@@ -125,11 +125,11 @@ void TextStyleDialog::apply()
             const TextStyle& os = cs->textStyle(TextStyleType(i));
             const TextStyle& ns = styles[i];
             if (os != ns) {
-                  cs->undo()->push(new ChangeTextStyle(cs, ns));
+                  cs->undo(new ChangeTextStyle(cs, ns));
                   }
             }
       for (int i = n; i < styles.size(); ++i)
-            cs->undo()->push(new AddTextStyle(cs, styles[i]));
+            cs->undo(new AddTextStyle(cs, styles[i]));
       cs->end2();
       cs->end();
       }

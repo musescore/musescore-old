@@ -130,13 +130,13 @@ class Element {
       LinkedElements* _links;
       Element* _parent;
 
-      bool _selected:1;           ///< set if element is selected
-      bool _generated:1;          ///< automatically generated Element
-      bool _visible:1;            ///< visibility attribute
+      bool _selected;             ///< set if element is selected
+      bool _generated;            ///< automatically generated Element
+      bool _visible;              ///< visibility attribute
 
       mutable ElementFlags _flags;
 
-      int _subtype;
+//      int _subtype;
       int _track;                 ///< staffIdx * VOICES + voice
                                   ///< -1 if this is a system element
       QColor _color;
@@ -151,7 +151,14 @@ class Element {
                                   ///< valid after call to layout()
       uint _tag;                  ///< tag bitmask
 
+      void* pColor()    { return &_color;    }
+      void* pSelected() { return &_selected; }
+      void* pVisible()  { return &_visible;  }
+      void* pUserOff()  { return &_userOff;  }
+
    protected:
+//      void* pSubtype()  { return &_subtype;  }
+
       Score* _score;
 
       int _mxmlOff;               ///< MusicXML offset in ticks.
@@ -213,7 +220,7 @@ class Element {
       int mxmlOff() const                     { return _mxmlOff;  }
       void setMxmlOff(int o)                  { _mxmlOff = o;     }
 
-      QPointF readPos() const                 { return _readPos;   }
+      const QPointF& readPos() const          { return _readPos;   }
       void setReadPos(const QPointF& p)       { _readPos = p;      }
       void adjustReadPos();
 
@@ -233,10 +240,10 @@ class Element {
       virtual qreal baseLine() const          { return -height();       }
 
       virtual ElementType type() const = 0;
-      int subtype() const                     { return _subtype;        }
-      virtual void setSubtype(int val)        { _subtype = val;         }
-      bool isChordRest() const                { return type() == REST || type() == CHORD;   }
-      bool isDurationElement() const          { return isChordRest() || (type() == TUPLET); }
+//      int subtype() const                        { return _subtype;        }
+//      virtual void setSubtype(int val)           { _subtype = val;         }
+      bool isChordRest() const                   { return type() == REST || type() == CHORD;   }
+      bool isDurationElement() const             { return isChordRest() || (type() == TUPLET); }
       bool isSLine() const {
             return type() == HAIRPIN || type() == OTTAVA || type() == PEDAL
                || type() == TRILL || type() == VOLTA || type() == TEXTLINE;
@@ -244,11 +251,11 @@ class Element {
 
       virtual void draw(QPainter*) const {}
 
-      void writeProperties(Xml& xml, const Element* proto = 0) const;
-      bool readProperties(QDomElement);
+      void writeProperties(Xml& xml, const Element* prototype = 0) const;
+      bool readProperties(const QDomElement&);
 
       virtual void write(Xml&) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
 
       virtual QRectF drag(const EditData&);
       virtual void endDrag()                  {}
@@ -290,9 +297,10 @@ class Element {
 
       virtual Space space() const     { return Space(0.0, width()); }
 
-      QColor color() const            { return _color; }
+      QColor color() const             { return _color; }
       QColor curColor() const;
-      void setColor(const QColor& c)  { _color = c;    }
+      void setColor(const QColor& c)   { _color = c;    }
+
       static ElementType readType(QDomElement& node, QPointF*);
 
       virtual QByteArray mimeData(const QPointF&) const;
@@ -303,7 +311,7 @@ class Element {
  Reimplemented by elements that accept drops. Used to change cursor shape while
  dragging to indicate drop targets.
 */
-      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const { return false; }
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, Element*) const { return false; }
 
 /**
  Handle a dropped element at canvas relative \a pos of given element
@@ -314,20 +322,6 @@ class Element {
       virtual Element* drop(const DropData&) { return 0;}
 
 /**
- Return a name for a \a subtype. Used for outputting xml data.
- Reimplemented by elements with subtype names.
- If an empty string is returned, no subtype is written.
- */
-      virtual QString subtypeName() const { return QString("%1").arg(_subtype); }
-
-/**
- Set subtype by name
- Used for reading xml data.
- Reimplemented by elements with subtype names.
- */
-      virtual void setSubtype(const QString& s) { setSubtype(s.toInt()); }
-
-/**
  delivers mouseEvent to element in edit mode
  returns true if mouse event is accepted by element
  */
@@ -335,7 +329,6 @@ class Element {
 
       mutable int itemDiscovered;     ///< helper flag for bsp
 
-      virtual QList<Prop> properties(Xml&, const Element* proto = 0) const;
       virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
 
       virtual void toDefault();
@@ -398,7 +391,11 @@ class Element {
       uint tag() const                 { return _tag;                      }
       void setTag(uint val)            { _tag = val;                       }
       virtual QVariant getProperty(int propertyId) const;
-      virtual void setProperty(int propertyId, const QVariant&);
+      virtual bool setProperty(int propertyId, const QVariant&);
+      virtual bool setProperty(const QString&, const QString&);
+
+      static Property<Element> propertyList[];
+      Property<Element>* property(int id) const;
       };
 
 //---------------------------------------------------------
@@ -412,7 +409,7 @@ class ElementList : public QList<Element*> {
       void replace(Element* old, Element* n);
       void write(Xml&) const;
       void write(Xml&, const char* name) const;
-      void read(QDomElement);
+//      void read(const QDomElement&);
       };
 
 typedef ElementList::iterator iElement;
@@ -467,7 +464,7 @@ class Line : public Element {
 
       virtual void draw(QPainter*) const;
       void writeProperties(Xml& xml) const;
-      bool readProperties(QDomElement);
+      bool readProperties(const QDomElement&);
       void dump() const;
 
       Spatium len()    const { return _len; }

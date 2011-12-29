@@ -29,7 +29,7 @@ class NoteEvent {
       NoteEvent() : _pitch(0), _ontime(0), _len(1000) {}
       NoteEvent(int a, int b, int c) : _pitch(a), _ontime(b), _len(c) {}
 
-      void read(QDomElement);
+      void read(const QDomElement&);
       void write(Xml& xml) const;
 
       char pitch() const     { return _pitch; }

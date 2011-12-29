@@ -989,10 +989,10 @@ void System::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void System::read(QDomElement e)
+void System::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            const QString& tag(e.tagName());
 
             if (tag == "System") {
                   }

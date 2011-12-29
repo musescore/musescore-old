@@ -29,6 +29,7 @@
 #include "lyrics.h"
 #include "segment.h"
 #include "stafftype.h"
+#include "icon.h"
 
 //---------------------------------------------------------
 //    Rest
@@ -156,16 +157,17 @@ QRectF Rest::drag(const QPointF& s)
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Rest::acceptDrop(MuseScoreView*, const QPointF&, int type, int subtype) const
+bool Rest::acceptDrop(MuseScoreView*, const QPointF&, Element* e) const
       {
+      int type = e->type();
       if (
-         (type == ICON && subtype == ICON_SBEAM)
-         || (type == ICON && subtype == ICON_MBEAM)
-         || (type == ICON && subtype == ICON_NBEAM)
-         || (type == ICON && subtype == ICON_BEAM32)
-         || (type == ICON && subtype == ICON_BEAM64)
-         || (type == ICON && subtype == ICON_AUTOBEAM)
-         || (type == ARTICULATION && subtype == Articulation_Fermata)
+         (type == ICON && static_cast<Icon*>(e)->subtype() == ICON_SBEAM)
+         || (type == ICON && static_cast<Icon*>(e)->subtype() == ICON_MBEAM)
+         || (type == ICON && static_cast<Icon*>(e)->subtype() == ICON_NBEAM)
+         || (type == ICON && static_cast<Icon*>(e)->subtype() == ICON_BEAM32)
+         || (type == ICON && static_cast<Icon*>(e)->subtype() == ICON_BEAM64)
+         || (type == ICON && static_cast<Icon*>(e)->subtype() == ICON_AUTOBEAM)
+         || (type == ARTICULATION && static_cast<Articulation*>(e)->subtype() == Articulation_Fermata)
          || (type == CLEF)
          || (type == STAFF_TEXT)
          || (type == BAR_LINE)
@@ -193,12 +195,12 @@ Element* Rest::drop(const DropData& data)
       Element* e = data.element;
       switch (e->type()) {
             case ARTICULATION:
-                  if (e->subtype() == Articulation_Fermata)
+                  if (static_cast<Articulation*>(e)->subtype() == Articulation_Fermata)
                         score()->addArticulation(this, (Articulation*)e);
                   return 0;
             case ICON:
                   {
-                  switch(e->subtype()) {
+                  switch (static_cast<Icon*>(e)->subtype()) {
                         case ICON_SBEAM:
                               score()->undoChangeBeamMode(this, BEAM_BEGIN);
                               break;
@@ -264,9 +266,9 @@ void Rest::write(Xml& xml) const
 //   Rest::read
 //---------------------------------------------------------
 
-void Rest::read(QDomElement e, QList<Tuplet*>* tuplets, QList<Spanner*>* spanner)
+void Rest::read(const QDomElement& de, QList<Tuplet*>* tuplets, QList<Spanner*>* spanner)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (!ChordRest::readProperties(e, tuplets, spanner))
                   domError(e);
             }
@@ -431,8 +433,10 @@ void Rest::layout()
                   }
             setbbox(symbols[score()->symIdx()][_sym].bbox(magS()));
             }
-      _space.setLw(point(_extraLeadingSpace));
-      _space.setRw(width() + point(_extraTrailingSpace + rs));
+//      _space.setLw(point(_extraLeadingSpace));
+//      _space.setRw(width() + point(_extraTrailingSpace + rs));
+      _space.setLw(0.0);
+      _space.setRw(width() + point(rs));
       }
 
 //---------------------------------------------------------

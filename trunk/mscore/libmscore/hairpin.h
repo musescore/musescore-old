@@ -44,13 +44,18 @@ class HairpinSegment : public LineSegment {
 //---------------------------------------------------------
 
 class Hairpin : public SLine {
+      int _subtype;
       int _veloChange;
       DynamicType _dynType;
+
+      void* pSubtype()  { return &_subtype; }
 
    public:
       Hairpin(Score* s);
       virtual Hairpin* clone() const   { return new Hairpin(*this); }
-      virtual ElementType type() const { return HAIRPIN; }
+      virtual ElementType type() const { return HAIRPIN;  }
+      int subtype() const              { return _subtype; }
+      void setSubtype(int val)         { _subtype = val;  }
       Segment* segment() const         { return (Segment*)parent(); }
       virtual void layout();
       virtual LineSegment* createLineSegment();
@@ -59,7 +64,14 @@ class Hairpin : public SLine {
       DynamicType dynType() const      { return _dynType; }
       void setDynType(DynamicType t)   { _dynType = t;    }
       virtual void write(Xml&) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
+
+      virtual QVariant getProperty(int propertyId) const;
+      virtual bool setProperty(int propertyId, const QVariant&);
+      virtual bool setProperty(const QString&, const QString&);
+
+      static Property<Hairpin> propertyList[];
+      Property<Hairpin>* property(int id) const;
       };
 
 #define __HAIRPIN_H__

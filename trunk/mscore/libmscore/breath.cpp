@@ -51,6 +51,7 @@ void Breath::layout()
 void Breath::write(Xml& xml) const
       {
       xml.stag("Breath");
+      xml.tag("subtype", _subtype);
       Element::writeProperties(xml);
       xml.etag();
       }
@@ -59,10 +60,12 @@ void Breath::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Breath::read(QDomElement e)
+void Breath::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (!Element::readProperties(e))
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "subtype")
+                  _subtype = e.text().toInt();
+            else if (!Element::readProperties(e))
                   domError(e);
             }
       }
@@ -100,5 +103,4 @@ QPointF Breath::pagePos() const
             yp += system->staff(staffIdx())->y() + system->y();
       return QPointF(pageX(), yp);
       }
-
 

@@ -50,7 +50,7 @@ class ElementLayout {
       void setOffsetType(OffsetType val)  { _offsetType = val;    }
       void layout(Element*) const;
       void writeProperties(Xml& xml) const;
-      bool readProperties(QDomElement e);
+      bool readProperties(const QDomElement& e);
 
       void setRxoff(qreal v)              { _reloff.rx() = v; }
       void setRyoff(qreal v)              { _reloff.ry() = v; }

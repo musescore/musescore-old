@@ -2013,7 +2013,7 @@ qDebug("==================convert-capella\n");
                   qDebug("bad bracket 'from' value\n");
                   continue;
                   }
-            staff->setBracket(0, cb.curly ? 1 : 0);
+            staff->setBracket(0, cb.curly ? BRACKET_AKKOLADE : BRACKET_NORMAL);
             staff->setBracketSpan(0, cb.to - cb.from + 1);
             }
 

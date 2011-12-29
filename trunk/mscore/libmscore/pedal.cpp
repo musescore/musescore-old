@@ -38,7 +38,7 @@ Pedal::Pedal(Score* s)
 //   read
 //---------------------------------------------------------
 
-void Pedal::read(QDomElement e)
+void Pedal::read(const QDomElement& e)
       {
       if (score()->mscVersion() >= 110) {
             setBeginSymbol(-1);

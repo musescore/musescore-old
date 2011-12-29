@@ -77,15 +77,16 @@ Accidental::Accidental(Score* s)
       _hasBracket = false;
       _role       = ACC_AUTO;
       _small      = false;
+      _subtype    = ACC_NONE;
       }
 
 //---------------------------------------------------------
 //   read
 //---------------------------------------------------------
 
-void Accidental::read(QDomElement e)
+void Accidental::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             bool isInt;
             int i = e.text().toInt(&isInt);
@@ -202,7 +203,7 @@ void Accidental::read(QDomElement e)
                                      i = 0;
                                      break;
                                }
-                        Element::setSubtype(i);
+                        setSubtype(AccidentalType(i));
                         }
                   else
                         setSubtype(e.text());
@@ -233,17 +234,9 @@ void Accidental::write(Xml& xml) const
             xml.tag("role", _role);
       if (_small)
             xml.tag("small", _small);
+      xml.tag("subtype", accList[_subtype].tag);
       Element::writeProperties(xml);
       xml.etag();
-      }
-
-//---------------------------------------------------------
-//   subtypeName
-//---------------------------------------------------------
-
-QString Accidental::subtypeName() const
-      {
-      return accList[subtype()].tag;
       }
 
 //---------------------------------------------------------
@@ -264,18 +257,18 @@ void Accidental::setSubtype(const QString& tag)
       int n = sizeof(accList)/sizeof(*accList);
       for (int i = 0; i < n; ++i) {
             if (accList[i].tag == tag) {
-                  Element::setSubtype(i);
+                  setSubtype(AccidentalType(i));
                   return;
                   }
             }
-      Element::setSubtype(0);
+      setSubtype(ACC_NONE);
       }
 
 //---------------------------------------------------------
 //   symbol
 //---------------------------------------------------------
 
-int Accidental::symbol()
+int Accidental::symbol() const
       {
       return accList[subtype()].sym;
       }
@@ -390,9 +383,9 @@ void Accidental::draw(QPainter* painter) const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Accidental::acceptDrop(MuseScoreView*, const QPointF&, int type, int /*subtype*/) const
+bool Accidental::acceptDrop(MuseScoreView*, const QPointF&, Element* e) const
       {
-      return type == ACCIDENTAL_BRACKET;
+      return e->type() == ACCIDENTAL_BRACKET;
       }
 
 //---------------------------------------------------------
@@ -432,13 +425,14 @@ QVariant Accidental::getProperty(int propertyId) const
 //   setProperty
 //---------------------------------------------------------
 
-void Accidental::setProperty(int propertyId, const QVariant& v)
+bool Accidental::setProperty(int propertyId, const QVariant& v)
       {
       switch(propertyId) {
             case P_SMALL: _small = v.toBool(); break;
             default:
-                  Element::setProperty(propertyId, v);
+                  return Element::setProperty(propertyId, v);
             }
+      return true;
       }
 
 //---------------------------------------------------------
@@ -448,6 +442,7 @@ void Accidental::setProperty(int propertyId, const QVariant& v)
 AccidentalBracket::AccidentalBracket(Score* s)
    : Compound(s)
       {
+      _subtype = 0;
       }
 
 //---------------------------------------------------------
@@ -456,7 +451,7 @@ AccidentalBracket::AccidentalBracket(Score* s)
 
 void AccidentalBracket::setSubtype(int i)
       {
-      Element::setSubtype(i);
+      _subtype = i;
       clear();
 
       Symbol* s1 = new Symbol(score());

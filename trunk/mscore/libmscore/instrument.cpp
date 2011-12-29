@@ -87,10 +87,10 @@ void NamedEventList::write(Xml& xml, const QString& n) const
 //   read
 //---------------------------------------------------------
 
-void NamedEventList::read(QDomElement e)
+void NamedEventList::read(const QDomElement& de)
       {
-      name = e.attribute("name");
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      name = de.attribute("name");
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             if (tag == "program") {
                   Event ev(ME_CONTROLLER);
@@ -230,7 +230,7 @@ void InstrumentData::write(Xml& xml) const
 //   InstrumentData::read
 //---------------------------------------------------------
 
-void InstrumentData::read(QDomElement e)
+void InstrumentData::read(const QDomElement& de)
       {
       int program = -1;
       int bank    = 0;
@@ -241,10 +241,9 @@ void InstrumentData::read(QDomElement e)
       bool customDrumset = false;
 
       _channel.clear();
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
-            int i = val.toInt();
 
             if (tag == "longName") {
                   int pos = e.attribute("pos", "0").toInt();
@@ -259,31 +258,29 @@ void InstrumentData::read(QDomElement e)
             else if (tag == "trackName")
                   _trackName = val;
             else if (tag == "minPitch") {      // obsolete
-                  _minPitchP = i;
-                  _minPitchA = i;
+                  _minPitchP = _minPitchA = val.toInt();
                   }
             else if (tag == "maxPitch") {       // obsolete
-                  _maxPitchP = i;
-                  _maxPitchA = i;
+                  _maxPitchP = _maxPitchA = val.toInt();
                   }
             else if (tag == "minPitchA")
-                  _minPitchA = i;
+                  _minPitchA = val.toInt();
             else if (tag == "minPitchP")
-                  _minPitchP = i;
+                  _minPitchP = val.toInt();
             else if (tag == "maxPitchA")
-                  _maxPitchA = i;
+                  _maxPitchA = val.toInt();
             else if (tag == "maxPitchP")
-                  _maxPitchP = i;
+                  _maxPitchP = val.toInt();
             else if (tag == "transposition") {    // obsolete
-                  _transpose.chromatic = i;
-                  _transpose.diatonic = chromatic2diatonic(i);
+                  _transpose.chromatic = val.toInt();
+                  _transpose.diatonic = chromatic2diatonic(val.toInt());
                   }
             else if (tag == "transposeChromatic")
-                  _transpose.chromatic = i;
+                  _transpose.chromatic = val.toInt();
             else if (tag == "transposeDiatonic")
-                  _transpose.diatonic = i;
+                  _transpose.diatonic = val.toInt();
             else if (tag == "useDrumset") {
-                  _useDrumset = i;
+                  _useDrumset = val.toInt();
                   if (_useDrumset)
                         _drumset = new Drumset(*smDrumset);
                   }
@@ -318,15 +315,15 @@ void InstrumentData::read(QDomElement e)
                   _channel.append(a);
                   }
             else if (tag == "chorus")     // obsolete
-                  chorus = i;
+                  chorus = val.toInt();
             else if (tag == "reverb")     // obsolete
-                  reverb = i;
+                  reverb = val.toInt();
             else if (tag == "midiProgram")  // obsolete
-                  program = i;
+                  program = val.toInt();
             else if (tag == "volume")     // obsolete
-                  volume = i;
+                  volume = val.toInt();
             else if (tag == "pan")        // obsolete
-                  pan = i;
+                  pan = val.toInt();
             else if (tag == "midiChannel")      // obsolete
                   ;
             else
@@ -426,11 +423,11 @@ void Channel::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Channel::read(QDomElement e)
+void Channel::read(const QDomElement& de)
       {
       synti = 0;
-      name = e.attribute("name");
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      name = de.attribute("name");
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
             if (tag == "program") {
@@ -439,9 +436,9 @@ void Channel::read(QDomElement e)
                         program = val.toInt();
                   }
             else if (tag == "controller") {
-                  int value = e.attribute("value", "0").toInt();
-                  int ctrl  = e.attribute("ctrl", "0").toInt();
-                  switch(ctrl) {
+                  int value = e.attribute("value", 0).toInt();
+                  int ctrl  = e.attribute("ctrl", 0).toInt();
+                  switch (ctrl) {
                         case CTRL_HBANK:
                               bank = (value << 7) + (bank & 0x7f);
                               break;
@@ -578,10 +575,10 @@ void MidiArticulation::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void MidiArticulation::read(QDomElement e)
+void MidiArticulation::read(const QDomElement& de)
       {
-      name = e.attribute("name");
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      name = de.attribute("name");
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             QString text(e.text());
             if (tag == "velocity") {
@@ -605,7 +602,7 @@ void MidiArticulation::read(QDomElement e)
 //   updateVelocity
 //---------------------------------------------------------
 
-void InstrumentData::updateVelocity(int* velocity, int channelIdx, const QString& name)
+void InstrumentData::updateVelocity(int* velocity, int /*channelIdx*/, const QString& name)
       {
 //      const Channel& c = _channel[channelIdx];
 //      foreach(const MidiArticulation& a, c.articulation) {
@@ -621,7 +618,7 @@ void InstrumentData::updateVelocity(int* velocity, int channelIdx, const QString
 //   updateGateTime
 //---------------------------------------------------------
 
-void InstrumentData::updateGateTime(int* gateTime, int channelIdx, const QString& name)
+void InstrumentData::updateGateTime(int* gateTime, int /*channelIdx*/, const QString& name)
       {
 //      const Channel& c = _channel[channelIdx];
 //      foreach(const MidiArticulation& a, c.articulation) {
@@ -794,7 +791,7 @@ bool Instrument::operator==(const Instrument& s) const
 //   read
 //---------------------------------------------------------
 
-void Instrument::read(QDomElement e)
+void Instrument::read(const QDomElement& e)
       {
       d->read(e);
       }

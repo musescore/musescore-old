@@ -52,6 +52,34 @@
 #include "mscore.h"
 #include "accidental.h"
 #include "page.h"
+#include "icon.h"
+
+//---------------------------------------------------------
+//   propertyList
+//---------------------------------------------------------
+
+static bool falseVal = false;
+static DirectionH defaultMirror = DH_AUTO;
+static Direction defaultDotPosition = AUTO;
+static int defaultOnTimeOffset = 0;
+static int defaultOffTimeOffset = 0;
+static int defaultHeadGroup = 0;
+static int defaultVeloOffset = 0;
+static qreal defaultTuning = 0.0;
+
+Property<Note> Note::propertyList[] = {
+      { P_TPC,            T_INT,         "tpc",           &Note::pTpc,           0 },
+      { P_SMALL,          T_BOOL,        "small",         &Note::pSmall,         &falseVal },
+      { P_MIRROR_HEAD,    T_DIRECTION_H, "mirror",        &Note::pMirror,        &defaultMirror },
+      { P_DOT_POSITION,   T_DIRECTION,   "dotPosition",   &Note::pDotPosition,   &defaultDotPosition },
+      { P_ONTIME_OFFSET,  T_INT,         "onTimeOffset",  &Note::pOnTimeUserOffset,  &defaultOnTimeOffset },
+      { P_OFFTIME_OFFSET, T_INT,         "offTimeOffset", &Note::pOffTimeUserOffset, &defaultOffTimeOffset },
+      { P_HEAD_GROUP,     T_INT,         "head",          &Note::pHeadGroup,     &defaultHeadGroup },
+      { P_VELO_OFFSET,    T_INT,         "velocity",      &Note::pVeloOffset,    &defaultVeloOffset },
+      { P_TUNING,         T_REAL,        "tuning",        &Note::pTuning,        &defaultTuning },
+      };
+
+static const int PROPERTIES = sizeof(Note::propertyList)/sizeof(*Note::propertyList);
 
 //---------------------------------------------------------
 //   noteHeads
@@ -589,31 +617,25 @@ void Note::draw(QPainter* painter) const
 void Note::write(Xml& xml) const
       {
       xml.stag("Note");
-      QList<Prop> pl = Element::properties(xml);
-      xml.prop(pl);
+      Element::writeProperties(xml);
       //
       // get real pitch for clipboard (copy/paste)
       //
       int rpitch = pitch();
-      int rtpc   = tpc();
 
-      if (xml.clipboardmode && !score()->styleB(ST_concertPitch)) {
-            Part* part = staff()->part();
-            if (part->instr()->transpose().chromatic)
-                  transposeInterval(pitch(), tpc(), &rpitch, &rtpc, part->instr()->transpose(), true);
+      if (xml.clipboardmode && !score()->styleB(ST_concertPitch) && staff()->part()->instr()->transpose().chromatic) {
+            int rtpc = tpc();
+            transposeInterval(pitch(), tpc(), &rpitch, &rtpc, staff()->part()->instr()->transpose(), true);
+            xml.tag("tpc", rtpc);
             }
 
       xml.tag("pitch", rpitch);
-      xml.tag("tpc", rtpc);
       if (_fret >= 0) {
             xml.tag("fret", _fret);
             xml.tag("string", _string);
             }
       if (_ghost)
             xml.tag("ghost", _ghost);
-
-      if (_tuning != 0.0)
-            xml.tag("tuning", _tuning);
 
       if (_accidental)
             _accidental->write(xml);
@@ -632,26 +654,14 @@ void Note::write(Xml& xml) const
                   for (int i = 0; i < dots; ++i)
                         _dots[i]->write(xml);
                   }
-            switch(_dotPosition) {
-                  case UP:   xml.tag("dotPosition", QVariant("up")); break;
-                  case DOWN: xml.tag("dotPosition", QVariant("down")); break;
-                  case AUTO: break;
-                  }
             }
 
       if (_tieFor)
             _tieFor->write(xml);
-      if (_headGroup != 0)
-            xml.tag("head", _headGroup);
       if (_headType != HEAD_AUTO)
             xml.tag("headType", _headType);
-      if (_userMirror != DH_AUTO)
-            xml.tag("mirror", _userMirror);
-      if (_small)
-            xml.tag("small", _small);
       if (_veloType != AUTO_VAL) {
             xml.valueTypeTag("veloType", _veloType);
-            xml.tag("velocity", _veloOffset);
             }
       if (!_playEvents.isEmpty()) {
             xml.stag("Events");
@@ -659,12 +669,12 @@ void Note::write(Xml& xml) const
                   e->write(xml);
             xml.etag();
             }
-      if (_onTimeUserOffset)
-            xml.tag("onTimeOffset", _onTimeUserOffset);
-      if (_offTimeUserOffset)
-            xml.tag("offTimeOffset", _offTimeUserOffset);
       if (_bend)
             _bend->write(xml);
+      for (int i = 0; i < PROPERTIES; ++i) {
+            const Property<Note>& p = propertyList[i];
+            xml.tag(p.name, p.type, ((*(Note*)this).*(p.data))(), propertyList[i].defaultVal);
+            }
       xml.etag();
       }
 
@@ -672,22 +682,24 @@ void Note::write(Xml& xml) const
 //   Note::read
 //---------------------------------------------------------
 
-void Note::read(QDomElement e)
+void Note::read(const QDomElement& de)
       {
-      int ptch = e.attribute("pitch", "-1").toInt();
+      int ptch = de.attribute("pitch", "-1").toInt();
       if (ptch != -1) {
             _pitch = ptch;
             _ppitch = ptch;
             }
-      int tpcVal = e.attribute("tpc", "-100").toInt();
+      int tpcVal = de.attribute("tpc", "-100").toInt();
       bool hasAccidental = false;                     // used for userAccidental backward compatibility
 
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
             int i = val.toInt();
 
-            if (tag == "pitch") {
+            if (setProperty(tag, val))
+                  ;
+            else if (tag == "pitch") {
                   if (i > 127)
                         i = 127;
                   else if (i < 0)
@@ -703,10 +715,6 @@ void Note::read(QDomElement e)
                   _ghost = i;
             else if (tag == "line")
                   _line = i;
-            else if (tag == "tuning")
-                  _tuning = val.toDouble();
-            else if (tag == "tpc")
-                  tpcVal = i;
             else if (tag == "Tie") {
                   _tieFor = new Tie(score());
                   _tieFor->setTrack(track());
@@ -739,11 +747,9 @@ void Note::read(QDomElement e)
                         path = ee.text();
                   Image* image = 0;
                   QString s(path.toLower());
-#ifdef SVG_IMAGES
                   if (s.endsWith(".svg"))
                         image = new SvgImage(score());
                   else
-#endif
                         if (s.endsWith(".jpg")
                      || s.endsWith(".png")
                      || s.endsWith(".xpm")
@@ -759,8 +765,6 @@ void Note::read(QDomElement e)
                         add(image);
                         }
                   }
-            else if (tag == "head")
-                  _headGroup = i;
             else if (tag == "headType")
                   _headType = NoteHeadType(i);
             else if (tag == "userAccidental") {
@@ -844,14 +848,8 @@ void Note::read(QDomElement e)
                   }
             else if (tag == "move")             // obsolete
                   chord()->setStaffMove(i);
-            else if (tag == "mirror")
-                  _userMirror = DirectionH(i);
-            else if (tag == "small")
-                  _small = i;
             else if (tag == "veloType")
                   _veloType = readValueType(e);
-            else if (tag == "velocity")
-                  _veloOffset = i;
             else if (tag == "Bend") {
                   _bend = new Bend(score());
                   _bend->setTrack(track());
@@ -875,14 +873,6 @@ void Note::read(QDomElement e)
                         delete dot;
                         }
                   }
-            else if (tag == "dotPosition") {
-                  if (val == "up")
-                        _dotPosition = UP;
-                  else if (val == "down")
-                        _dotPosition = DOWN;
-                  else
-                        _dotPosition = AUTO;
-                  }
             else if (tag == "Events") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         const QString& tag(ee.tagName());
@@ -897,13 +887,9 @@ void Note::read(QDomElement e)
                   }
             else if (tag == "onTimeType")                   // obsolete
                   ; // _onTimeType = readValueType(e);
-            else if (tag == "onTimeOffset")
-                  _onTimeUserOffset = i;
             else if (tag == "offTimeType")                  // obsolete
                   ; // _offTimeType = readValueType(e);
-            else if (tag == "offTimeOffset")
-                  _offTimeUserOffset = i;
-            else if (tag == "tick")                   // bad input file
+            else if (tag == "tick")                         // bad input file
                   ;
             else if (Element::readProperties(e))
                   ;
@@ -993,8 +979,9 @@ void Note::endDrag()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Note::acceptDrop(MuseScoreView*, const QPointF&, int type, int subtype) const
+bool Note::acceptDrop(MuseScoreView*, const QPointF&, Element* e) const
       {
+      int type = e->type();
       return (type == ARTICULATION
          || type == CHORDLINE
          || type == TEXT
@@ -1012,17 +999,17 @@ bool Note::acceptDrop(MuseScoreView*, const QPointF&, int type, int subtype) con
          || type == CHORD
          || type == HARMONY
          || type == DYNAMIC
-         || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_ACCIACCATURA)
-         || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_APPOGGIATURA)
-	   || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_GRACE4)
-	   || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_GRACE16)
-	   || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_GRACE32)
-         || (type == ICON && subtype == ICON_SBEAM)
-         || (type == ICON && subtype == ICON_MBEAM)
-         || (type == ICON && subtype == ICON_NBEAM)
-         || (type == ICON && subtype == ICON_BEAM32)
-         || (type == ICON && subtype == ICON_BEAM64)
-         || (type == ICON && subtype == ICON_AUTOBEAM)
+         || (noteType() == NOTE_NORMAL && type == ICON && static_cast<Icon*>(e)->subtype() == ICON_ACCIACCATURA)
+         || (noteType() == NOTE_NORMAL && type == ICON && static_cast<Icon*>(e)->subtype() == ICON_APPOGGIATURA)
+	   || (noteType() == NOTE_NORMAL && type == ICON && static_cast<Icon*>(e)->subtype() == ICON_GRACE4)
+	   || (noteType() == NOTE_NORMAL && type == ICON && static_cast<Icon*>(e)->subtype() == ICON_GRACE16)
+	   || (noteType() == NOTE_NORMAL && type == ICON && static_cast<Icon*>(e)->subtype() == ICON_GRACE32)
+         || (type == ICON && static_cast<Icon*>(e)->subtype() == ICON_SBEAM)
+         || (type == ICON && static_cast<Icon*>(e)->subtype() == ICON_MBEAM)
+         || (type == ICON && static_cast<Icon*>(e)->subtype() == ICON_NBEAM)
+         || (type == ICON && static_cast<Icon*>(e)->subtype() == ICON_BEAM32)
+         || (type == ICON && static_cast<Icon*>(e)->subtype() == ICON_BEAM64)
+         || (type == ICON && static_cast<Icon*>(e)->subtype() == ICON_AUTOBEAM)
          || (type == SYMBOL)
          || (type == CLEF)
          || (type == BAR_LINE)
@@ -1069,7 +1056,7 @@ Element* Note::drop(const DropData& data)
                   return e;
 
             case ACCIDENTAL:
-                  score()->changeAccidental(this, AccidentalType(e->subtype()));
+                  score()->changeAccidental(this, static_cast<Accidental*>(e)->subtype());
                   if (_accidental)
                         score()->select(_accidental);
                   break;
@@ -1109,7 +1096,7 @@ Element* Note::drop(const DropData& data)
                         }
                   delete s;
                   if (group != _headGroup) {
-                        score()->undo()->push(new ChangeNoteHead(this, group, _headType));
+                        score()->undo(new ChangeNoteHead(this, group, _headType));
                         score()->select(this);
                         }
                   }
@@ -1117,7 +1104,7 @@ Element* Note::drop(const DropData& data)
 
             case ICON:
                   {
-                  switch(e->subtype()) {
+                  switch(static_cast<Icon*>(e)->subtype()) {
                         case ICON_ACCIACCATURA:
                               score()->setGraceNote(ch, pitch(), NOTE_ACCIACCATURA, MScore::division/2);
                               break;
@@ -1368,7 +1355,7 @@ void Note::layout10(AccidentalState* as)
 
             AccidentalType acci = ACC_NONE;
             if (_accidental && _accidental->role() == ACC_USER)
-                  acci = _accidental->accidentalType();
+                  acci = _accidental->subtype();
             else  {
                   int accVal = tpc2alter(_tpc);
 
@@ -1498,10 +1485,9 @@ void Note::setTrack(int val)
 
 void Note::toDefault()
       {
-      score()->undoChangeChordRestSpace(chord(), Spatium(0.0), Spatium(0.0));
       score()->undoChangeUserOffset(this, QPointF());
       score()->undoChangeUserOffset(chord(), QPointF());
-      score()->undo()->push(new ChangeProperty(chord(), P_STEM_DIRECTION, AUTO));
+      score()->undoChangeProperty(chord(), P_STEM_DIRECTION, AUTO);
       }
 
 //---------------------------------------------------------
@@ -1612,7 +1598,7 @@ void Note::updateAccidental(AccidentalState* as)
 
       AccidentalType acci = ACC_NONE;
       if (_accidental && _accidental->role() == ACC_USER)
-            acci = _accidental->accidentalType();
+            acci = _accidental->subtype();
       else  {
             int accVal = tpc2alter(_tpc);
             if ((accVal != as->accidentalVal(int(_line))) || hidden() || as->tieContext(int(_line))) {
@@ -1684,39 +1670,54 @@ void Note::setNval(NoteVal nval)
       }
 
 //---------------------------------------------------------
+//   property
+//---------------------------------------------------------
+
+Property<Note>* Note::property(int id) const
+      {
+      for (int i = 0; i < PROPERTIES; ++i) {
+            if (propertyList[i].id == id)
+                  return &propertyList[i];
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
 //   getProperty
 //---------------------------------------------------------
 
 QVariant Note::getProperty(int propertyId) const
       {
-      switch(propertyId) {
-            case P_TPC:            return tpc();
-            case P_SMALL:          return small();
-            case P_MIRROR_HEAD:    return userMirror();
-            case P_DOT_POSITION:   return dotPosition();
-            case P_ONTIME_OFFSET:  return onTimeUserOffset();
-            case P_OFFTIME_OFFSET: return offTimeUserOffset();
-            default:
-                  return Element::getProperty(propertyId);
-            }
+      Property<Note>* p = property(propertyId);
+      if (p)
+            return ::getProperty(p->type, ((*(Note*)this).*(p->data))());
+      return Element::getProperty(propertyId);
       }
 
 //---------------------------------------------------------
 //   setProperty
 //---------------------------------------------------------
 
-void Note::setProperty(int propertyId, const QVariant& v)
+bool Note::setProperty(int propertyId, const QVariant& v)
       {
-      switch(propertyId) {
-            case P_TPC:            setTpc(v.toInt()); break;
-            case P_SMALL:          setSmall(v.toInt()); break;
-            case P_MIRROR_HEAD:    setUserMirror(DirectionH(v.toInt())); break;
-            case P_DOT_POSITION:   setDotPosition(Direction(v.toInt())); break;
-            case P_ONTIME_OFFSET:  setOnTimeUserOffset(v.toInt()); break;
-            case P_OFFTIME_OFFSET: setOffTimeUserOffset(v.toInt()); break;
-            default:
-                  Element::setProperty(propertyId, v);
+      Property<Note>* p = property(propertyId);
+      if (p) {
+            ::setProperty(p->type, ((*this).*(p->data))(), v);
+            return true;
             }
+      return Element::setProperty(propertyId, v);
+      }
+
+bool Note::setProperty(const QString& name, const QString& data)
+      {
+      for (int i = 0; i < PROPERTIES; ++i) {
+            if (propertyList[i].name == name) {
+                  ::setProperty(propertyList[i].type, ((*this).*(propertyList[i].data))(), data);
+                  setGenerated(false);
+                  return true;
+                  }
+            }
+      return Element::setProperty(name, data);
       }
 
 //---------------------------------------------------------

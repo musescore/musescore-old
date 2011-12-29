@@ -151,14 +151,14 @@ void Score::write(Xml& xml, bool selectionOnly)
 //   readStaff
 //---------------------------------------------------------
 
-void Score::readStaff(QDomElement e)
+void Score::readStaff(const QDomElement& de)
       {
       MeasureBase* mb = first();
-      int staff       = e.attribute("id", "1").toInt() - 1;
+      int staff       = de.attribute("id", "1").toInt() - 1;
       curTick         = 0;
       curTrack        = staff * VOICES;
 
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
 
             if (tag == "Measure") {
@@ -770,10 +770,10 @@ void Score::parseVersion(const QString& val)
 //    return true on success
 //---------------------------------------------------------
 
-bool Score::read1(QDomElement e)
+bool Score::read1(const QDomElement& de)
       {
       _elinks.clear();
-      for (; !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "museScore") {
                   const QString& version = e.attribute("version");
                   QStringList sl = version.split('.');
@@ -827,15 +827,14 @@ bool Score::read1(QDomElement e)
 //    return false on error
 //---------------------------------------------------------
 
-bool Score::read(QDomElement dScore)
+bool Score::read(const QDomElement& de)
       {
       _fileDivision = 384;   // for compatibility with old mscore files
       spanner.clear();
 
       if (parentScore())
             setMscVersion(parentScore()->mscVersion());
-      dScore = dScore.firstChildElement();
-      for (QDomElement ee = dScore; !ee.isNull(); ee = ee.nextSiblingElement()) {
+      for (QDomElement ee = de.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
             curTrack = -1;
             const QString& tag(ee.tagName());
             const QString& val(ee.text());
@@ -1079,7 +1078,7 @@ bool Score::read(QDomElement dScore)
             //
             // scan spanner in a II. pass
             //
-            for (QDomElement ee = dScore; !ee.isNull(); ee = ee.nextSiblingElement()) {
+            for (QDomElement ee = de.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                   const QString& tag(ee.tagName());
                   if (   (tag == "HairPin")
                       || (tag == "Ottava")
@@ -1555,8 +1554,9 @@ void Score::writeSegments(Xml& xml, const Measure* m, int strack, int etrack, Se
 //    search complete Dom for tuplet id
 //---------------------------------------------------------
 
-Tuplet* Score::searchTuplet(QDomElement e, int id)
+Tuplet* Score::searchTuplet(const QDomElement& de, int id)
       {
+      QDomElement e = de;
       QDomDocument doc = e.ownerDocument();
 
       QString tag;

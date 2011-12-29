@@ -130,7 +130,7 @@ void ElementLayout::writeProperties(Xml& xml) const
 //   readProperties
 //---------------------------------------------------------
 
-bool ElementLayout::readProperties(QDomElement e)
+bool ElementLayout::readProperties(const QDomElement& e)
       {
       const QString& tag(e.tagName());
       const QString& val(e.text());

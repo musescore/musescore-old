@@ -57,24 +57,23 @@ Tablature::Tablature(int numFrets, QList<int>& strings)
 //   read
 //---------------------------------------------------------
 
-void Tablature::read(QDomElement e)
+void Tablature::read(const QDomElement& de)
       {
       int   i, j;
       QList<int> stringsLoc;
 
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            int v = e.text().toInt();
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            const QString& tag(e.tagName());
             if (tag == "frets")
-                  _frets = v;
+                  _frets = e.text().toInt();
             else if (tag == "string")
-                  stringsLoc.append(v);         // accumulate string pitches in local variable
+                  stringsLoc.append(e.text().toInt());      // accumulate string pitches in local variable
             else
                   domError(e);
             }
       // copy string pitches to member variable in increasing pitch order
       // DEEP COPY!
-      foreach(i, stringsLoc) {
+      foreach (i, stringsLoc) {
             for(j=0; j < stringTable.size() && stringTable.at(j) < i; j++)
                   ;
             stringTable.insert(j, i);
@@ -196,7 +195,7 @@ void Tablature::fretChord(Chord * chord) const
                         // mark as fretting conflict
                         note->setFretConflict(true);
                         // store pitch change without affecting chord context
-                        chord->score()->undo()->push(new ChangePitch(note, note->pitch(), note->tpc(),
+                        chord->score()->undo(new ChangePitch(note, note->pitch(), note->tpc(),
                            note->line(), nNewFret, nNewString));
                         continue;
                         }
@@ -226,7 +225,7 @@ void Tablature::fretChord(Chord * chord) const
                   }
             // if fretting did change, store as a pitch change
             if(nString != nNewString || nFret != nNewFret) {
-                  chord->score()->undo()->push(new ChangePitch(note, note->pitch(), note->tpc(),
+                  chord->score()->undo(new ChangePitch(note, note->pitch(), note->tpc(),
                      note->line(), nNewFret, nNewString));
                   }
             nNextFreeString = nNewString+1;     // string is used

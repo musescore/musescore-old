@@ -26,6 +26,7 @@ class QPainter;
 //---------------------------------------------------------
 
 class ChordLine : public Element {
+      int _subtype;
       QPainterPath path;
       bool modified;
 
@@ -38,7 +39,7 @@ class ChordLine : public Element {
       virtual void setSubtype(int);
       Chord* chord() const             { return (Chord*)(parent()); }
 
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       virtual void write(Xml& xml) const;
       virtual void layout();
       virtual void draw(QPainter*) const;

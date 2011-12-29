@@ -27,8 +27,9 @@
 Tremolo::Tremolo(Score* score)
    : Element(score)
       {
-      _chord1 = 0;
-      _chord2 = 0;
+      _subtype = TREMOLO_R8;
+      _chord1  = 0;
+      _chord2  = 0;
       setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       }
 
@@ -177,9 +178,9 @@ void Tremolo::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Tremolo::read(QDomElement e)
+void Tremolo::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (!Element::readProperties(e))
                   domError(e);
             }
@@ -200,6 +201,8 @@ QString Tremolo::subtypeName() const
             case TREMOLO_C16: return QString("c16");
             case TREMOLO_C32: return QString("c32");
             case TREMOLO_C64: return QString("c64");
+            default:
+                  break;
             }
       return QString("??");
       }
@@ -210,7 +213,7 @@ QString Tremolo::subtypeName() const
 
 void Tremolo::setSubtype(const QString& s)
       {
-      int t = 0;
+      TremoloType t;
       if (s == "r8")
             t = TREMOLO_R8;
       else if (s == "r16")
@@ -228,8 +231,8 @@ void Tremolo::setSubtype(const QString& s)
       else if (s == "c64")
             t = TREMOLO_C64;
       else
-            t = s.toInt();    // for compatibility with old tremolo type
-      Element::setSubtype(t);
+            t = TremoloType(s.toInt());    // for compatibility with old tremolo type
+      _subtype = t;
       }
 
 //---------------------------------------------------------

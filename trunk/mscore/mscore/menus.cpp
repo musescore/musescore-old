@@ -124,7 +124,7 @@ Palette* newKeySigPalette()
             sp->append(k, qApp->translate("MuseScore", keyNames[(7 + i) * 2 + 1]));
             }
       KeySig* k = new KeySig(gscore);
-      k->setSubtype(0);
+      k->setKeySigEvent(KeySigEvent(0));
       sp->append(k, qApp->translate("MuseScore", keyNames[14]));
       return sp;
       }
@@ -283,7 +283,7 @@ void MuseScore::populatePalette()
             };
       for (unsigned i = 0; i < sizeof(t)/sizeof(*t); ++i) {
             BarLine* b  = new BarLine(gscore);
-            b->setBarLineType(t[i].type);
+            b->setSubtype(t[i].type);
             sp->append(b, tr(t[i].name));
             }
       paletteBox->addPalette(sp);
@@ -310,7 +310,7 @@ void MuseScore::populatePalette()
       sp->append(gabel1, tr("Diminuendo"));
 
       Volta* volta = new Volta(gscore);
-      volta->setSubtype(Volta::VOLTA_CLOSED);
+      volta->setSubtype(VOLTA_CLOSED);
       volta->setText("1.");
       QList<int> il;
       il.append(1);
@@ -318,7 +318,7 @@ void MuseScore::populatePalette()
       sp->append(volta, tr("Prima volta"));
 
       volta = new Volta(gscore);
-      volta->setSubtype(Volta::VOLTA_CLOSED);
+      volta->setSubtype(VOLTA_CLOSED);
       volta->setText("2.");
       il.clear();
       il.append(2);
@@ -326,7 +326,7 @@ void MuseScore::populatePalette()
       sp->append(volta, tr("Seconda volta"));
 
       volta = new Volta(gscore);
-      volta->setSubtype(Volta::VOLTA_CLOSED);
+      volta->setSubtype(VOLTA_CLOSED);
       volta->setText("3.");
       il.clear();
       il.append(3);
@@ -334,7 +334,7 @@ void MuseScore::populatePalette()
       sp->append(volta, tr("Terza volta"));
 
       volta = new Volta(gscore);
-      volta->setSubtype(Volta::VOLTA_OPEN);
+      volta->setSubtype(VOLTA_OPEN);
       volta->setText("2.");
       il.clear();
       il.append(2);
@@ -417,7 +417,7 @@ void MuseScore::populatePalette()
 
       for (int i = 0; i < 4; ++i) {
             Arpeggio* a = new Arpeggio(gscore);
-            a->setSubtype(i);
+            a->setSubtype(ArpeggioType(i));
             sp->append(a, tr("Arpeggio"));
             }
       for (int i = 0; i < 2; ++i) {
@@ -477,7 +477,7 @@ void MuseScore::populatePalette()
 
       for (int i = 0; i < ARTICULATIONS; ++i) {
             Articulation* s = new Articulation(gscore);
-            s->setSubtype(i);
+            s->setSubtype(ArticulationType(i));
             sp->append(s, qApp->translate("articulation", qPrintable(s->subtypeUserName())));
             }
       Bend* bend = new Bend(gscore);
@@ -697,14 +697,14 @@ void MuseScore::populatePalette()
       StaffText* st = new StaffText(gscore);
       st->setSystemFlag(false);
       st->setTextStyle(TEXT_STYLE_STAFF);
-      st->setSubtype(TEXT_STAFF);
+//TODO      st->setSubtype(TEXT_STAFF);
       st->setText(tr("staff-text"));
       sp->append(st, tr("Staff Text"));
 
       st = new StaffText(gscore);
       st->setSystemFlag(true);
       st->setTextStyle(TEXT_STYLE_SYSTEM);
-      st->setSubtype(TEXT_SYSTEM);
+//      st->setSubtype(TEXT_SYSTEM);
       st->setText(tr("system-text"));
       sp->append(st, tr("System Text"));
 
@@ -1004,7 +1004,7 @@ void MuseScore::lineMenu()
             il.clear();
             il.append(1);
             volta->setEndings(il);
-            volta->setSubtype(Volta::VOLTA_CLOSED);
+            volta->setSubtype(VOLTA_CLOSED);
 
             sp->append(volta, tr("Prima volta"));
 
@@ -1014,7 +1014,7 @@ void MuseScore::lineMenu()
             il.clear();
             il.append(2);
             volta->setEndings(il);
-            volta->setSubtype(Volta::VOLTA_CLOSED);
+            volta->setSubtype(VOLTA_CLOSED);
             sp->append(volta, tr("Seconda volta"));
 
             volta = new Volta(gscore);
@@ -1023,7 +1023,7 @@ void MuseScore::lineMenu()
             il.clear();
             il.append(3);
             volta->setEndings(il);
-            volta->setSubtype(Volta::VOLTA_CLOSED);
+            volta->setSubtype(VOLTA_CLOSED);
             sp->append(volta, tr("Terza volta"));
 
             volta = new Volta(gscore);
@@ -1032,7 +1032,7 @@ void MuseScore::lineMenu()
             il.clear();
             il.append(2);
             volta->setEndings(il);
-            volta->setSubtype(Volta::VOLTA_OPEN);
+            volta->setSubtype(VOLTA_OPEN);
             sp->append(volta, tr("Seconda volta"));
 
             //--------
@@ -1151,7 +1151,7 @@ void MuseScore::noteAttributesMenu()
 
             for (unsigned i = 0; i < nn; ++i) {
                   Articulation* s = new Articulation(gscore);
-                  s->setSubtype(i);
+                  s->setSubtype(ArticulationType(i));
                   sp->append(s, qApp->translate("articulation", qPrintable(s->subtypeName())));
                   }
             }
@@ -1238,7 +1238,7 @@ void MuseScore::barMenu()
             for (unsigned i = 0; i < sizeof(t)/sizeof(*t); ++i) {
                   BarLine* b  = new BarLine(gscore);
                   b->setHeight(4 * gscore->spatium());
-                  b->setBarLineType(t[i].type);
+                  b->setSubtype(t[i].type);
                   sp->append(b, tr(t[i].name));
                   }
             }

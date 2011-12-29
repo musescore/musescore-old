@@ -110,7 +110,7 @@ struct ChordDescription {
       QList<RenderAction> renderList;
 
    public:
-      void read(QDomElement);
+      void read(const QDomElement&);
       void write(Xml&);
       };
 
@@ -152,7 +152,7 @@ class ChordList : public QMap<int, ChordDescription*> {
 
       virtual ~ChordList();
       void write(Xml& xml);
-      void read(QDomElement);
+      void read(const QDomElement&);
       bool read(const QString&);
       bool write(const QString&);
       ChordSymbol symbol(const QString& s) const { return symbols.value(s); }

@@ -20,7 +20,7 @@
 
 class QPainter;
 
-enum {
+enum StaffStateType {
       STAFF_STATE_INSTRUMENT, STAFF_STATE_TYPE,
       STAFF_STATE_VISIBLE, STAFF_STATE_INVISIBLE
       };
@@ -30,6 +30,7 @@ enum {
 //---------------------------------------------------------
 
 class StaffState : public Element {
+      StaffStateType _subtype;
       qreal lw;
       QPainterPath path;
 
@@ -42,13 +43,16 @@ class StaffState : public Element {
       StaffState(Score*);
       virtual StaffState* clone() const { return new StaffState(*this); }
       virtual ElementType type() const   { return STAFF_STATE; }
-      virtual void setSubtype(const QString&);
-      virtual void setSubtype(int st)    { Element::setSubtype(st); }
-      virtual QString subtypeName() const;
-      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
+
+      void setSubtype(const QString&);
+      void setSubtype(StaffStateType st)    { _subtype = st; }
+      StaffStateType subtype() const        { return _subtype; }
+      QString subtypeName() const;
+
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, Element*) const;
       virtual Element* drop(const DropData&);
       virtual void write(Xml&) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       Instrument instrument() const           { return _instrument; }
       void setInstrument(const Instrument& i) { _instrument = i;    }
       Segment* segment()                      { return (Segment*)parent(); }

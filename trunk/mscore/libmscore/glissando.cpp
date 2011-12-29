@@ -95,6 +95,7 @@ void Glissando::write(Xml& xml) const
       xml.stag("Glissando");
       if (_showText && !_text.isEmpty())
             xml.tag("text", _text);
+      xml.tag("subtype", _subtype);
       Element::writeProperties(xml);
       xml.etag();
       }
@@ -103,15 +104,16 @@ void Glissando::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Glissando::read(QDomElement e)
+void Glissando::read(const QDomElement& de)
       {
       _showText = false;
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            const QString& tag(e.tagName());
-            if (tag == "text") {
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "text") {
                   _showText = true;
                   _text = e.text();
                   }
+            else if (e.tagName() == "subtype")
+                  _subtype = e.text().toInt();
             else if (!Element::readProperties(e))
                   domError(e);
             }

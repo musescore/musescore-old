@@ -53,6 +53,7 @@ struct ArticulationInfo {
 class Articulation : public Element {
       Q_DECLARE_TR_FUNCTIONS(Articulation)
 
+      ArticulationType _subtype;
       Direction _direction;
       QString _channelName;
       ArticulationAnchor _anchor;
@@ -67,20 +68,21 @@ class Articulation : public Element {
       virtual Articulation* clone() const   { return new Articulation(*this); }
       virtual ElementType type() const      { return ARTICULATION; }
 
-      virtual void setSubtype(int);
-      virtual QString subtypeName() const;
-      virtual void setSubtype(const QString& s);
+      void setSubtype(ArticulationType);
+      ArticulationType subtype() const      { return _subtype; }
+      void setSubtype(const QString& s);
+      QString subtypeName() const;
 
       virtual void layout();
 
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       virtual void write(Xml& xml) const;
 
       virtual void toDefault();
       virtual QLineF dragAnchor() const;
 
       virtual QVariant getProperty(int propertyId) const;
-      virtual void setProperty(int propertyId, const QVariant&);
+      virtual bool setProperty(int propertyId, const QVariant&);
 
       ArticulationType articulationType() const;
       QString subtypeUserName() const;

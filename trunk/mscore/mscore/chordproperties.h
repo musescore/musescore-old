@@ -50,8 +50,6 @@ class ChordProperties : public QDialog, Ui::ChordPropertyBase {
       ChordProperties(const Note* c, QWidget* parent = 0);
       bool small() const;
       bool noStem() const;
-      double leadingSpace() const;
-      double trailingSpace() const;
       double tuning() const;
       int getUserMirror() const;
       int getStemDirection() const;

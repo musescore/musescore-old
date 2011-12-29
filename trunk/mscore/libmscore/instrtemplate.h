@@ -14,6 +14,7 @@
 #ifndef __INSTRTEMPLATE_H__
 #define __INSTRTEMPLATE_H__
 
+#include "mscore.h"
 #include "instrument.h"
 
 class Xml;
@@ -49,7 +50,7 @@ struct InstrumentTemplate {
       int staffLines[MAX_STAVES];
       bool useTablature;
       Tablature* tablature;
-      int bracket[MAX_STAVES];            // bracket type (NO_BRACKET)
+      BracketType bracket[MAX_STAVES];            // bracket type (NO_BRACKET)
       int bracketSpan[MAX_STAVES];
       int barlineSpan[MAX_STAVES];
       bool smallStaff[MAX_STAVES];
@@ -63,7 +64,7 @@ struct InstrumentTemplate {
 
       void setPitchRange(const QString& s, char* a, char* b) const;
       void write(Xml& xml) const;
-      void read(QDomElement);
+      void read(const QDomElement&);
       };
 
 //---------------------------------------------------------

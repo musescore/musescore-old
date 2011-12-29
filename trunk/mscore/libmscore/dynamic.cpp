@@ -76,7 +76,7 @@ Dynamic::Dynamic(Score* s)
 Dynamic::Dynamic(const Dynamic& d)
    : Text(d)
       {
-      setSubtype(subtype());
+      setSubtype(d._subtype);
       _velocity = d._velocity;
       _dynType  = d._dynType;
       setStyled(false);
@@ -107,6 +107,7 @@ int Dynamic::velocity() const
 void Dynamic::write(Xml& xml) const
       {
       xml.stag("Dynamic");
+      xml.tag("subtype", subtypeName());
       if (_velocity > 0)
             xml.tag("velocity", _velocity);
       if (_dynType != DYNAMIC_PART)
@@ -119,17 +120,18 @@ void Dynamic::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Dynamic::read(QDomElement e)
+void Dynamic::read(const QDomElement& de)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (e.tagName() == "velocity")
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "subtype")
+                  setSubtype(e.text());
+            else if (e.tagName() == "velocity")
                   _velocity = e.text().toInt();
             else if (e.tagName() == "dynType")
                   _dynType = DynamicType(e.text().toInt());
             else if (!Text::readProperties(e))
                   domError(e);
             }
-      setSubtype(subtype());
       if (score()->mscVersion() < 118) {
             setTextStyle(TEXT_STYLE_DYNAMICS);
             setStyled(true);
@@ -142,7 +144,7 @@ void Dynamic::read(QDomElement e)
 
 void Dynamic::setSubtype(int idx)
       {
-      Element::setSubtype(idx);
+      _subtype = idx;
       if (idx) {
             setStyled(false);
             clear();
@@ -169,7 +171,7 @@ void Dynamic::setSubtype(int idx)
       }
 
 //---------------------------------------------------------
-//   toSubtype
+//   setSubtype
 //---------------------------------------------------------
 
 void Dynamic::setSubtype(const QString& tag)
@@ -177,11 +179,11 @@ void Dynamic::setSubtype(const QString& tag)
       int n = sizeof(dynList)/sizeof(*dynList);
       for (int i = 0; i < n; ++i) {
             if (dynList[i].tag == tag) {
-                  setSubtype(i);
+                  _subtype = i;
                   return;
                   }
             }
-      Element::setSubtype(0);
+      _subtype = 0;
       setText(tag);
       }
 

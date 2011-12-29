@@ -87,17 +87,17 @@ class Clef : public Element {
       Segment* segment() const         { return (Segment*)parent(); }
       Measure* measure() const         { return (Measure*)parent()->parent(); }
 
-      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, Element*) const;
       virtual Element* drop(const DropData&);
       virtual void layout();
       virtual void draw(QPainter*) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       virtual void write(Xml&) const;
 
       virtual void addElement(Element* e, qreal x, qreal y);
 
       virtual QVariant getProperty(int propertyId) const;
-      virtual void setProperty(int propertyId, const QVariant&);
+      virtual bool setProperty(int propertyId, const QVariant&);
 
       virtual Space space() const      { return Space(0.0, bbox().x() * 2.0 + width()); }
 
@@ -108,17 +108,17 @@ class Clef : public Element {
       bool showCourtesyClef() const       { return _showCourtesyClef; };
       void setShowCourtesyClef(bool v)    { _showCourtesyClef = v;    };
 
-      virtual QString subtypeName() const;
-      virtual void setSubtype(const QString& s);
       static ClefType clefType(const QString& s);
 
       ClefType clefType() const;
+      void setClefType(ClefType i);
+      void setClefType(const QString& s);
+
       ClefTypeList clefTypeList() const     { return _clefTypes;                  }
       ClefType concertClef() const          { return _clefTypes._concertClef;     }
       ClefType transposingClef() const      { return _clefTypes._transposingClef; }
       void setConcertClef(ClefType val)     { _clefTypes._concertClef = val;      }
       void setTransposingClef(ClefType val) { _clefTypes._transposingClef = val;  }
-      void setClefType(ClefType i);
       void setClefType(const ClefTypeList& ctl) { _clefTypes = ctl; }
       };
 

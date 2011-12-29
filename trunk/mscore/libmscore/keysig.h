@@ -51,7 +51,7 @@ class KeySig : public Element {
       virtual KeySig* clone() const { return new KeySig(*this); }
       virtual void draw(QPainter*) const;
       virtual ElementType type() const { return KEYSIG; }
-      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, Element*) const;
       virtual Element* drop(const DropData&);
       virtual void layout();
 
@@ -63,7 +63,7 @@ class KeySig : public Element {
       Space space() const;
       void setCustom(const QList<KeySym*>& symbols);
       virtual void write(Xml&) const;
-      virtual void read(QDomElement);
+      virtual void read(const QDomElement&);
       int keySignature() const            { return _sig.accidentalType(); }    // -7 - +7
       int customType() const              { return _sig.customType(); }
       bool isCustom() const               { return _sig.custom(); }
