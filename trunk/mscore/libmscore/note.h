@@ -272,7 +272,7 @@ class Note : public Element {
 
       virtual QVariant getProperty(int propertyId) const;
       virtual bool setProperty(int propertyId, const QVariant&);
-      virtual bool setProperty(const QString& name, const QString& data);
+      virtual bool setProperty(const QString& name, const QDomElement& data);
 
       static Property<Note> propertyList[];
       };

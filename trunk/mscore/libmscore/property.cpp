@@ -63,6 +63,8 @@ void setProperty(P_DATA_TYPE type, void* data, const QString& value)
                   else if (value == "section")
                         *(LayoutBreakType*)data = LAYOUT_BREAK_SECTION;
                   break;
+            case T_POINT:
+                  abort();
             }
       }
 
@@ -78,6 +80,9 @@ void setProperty(P_DATA_TYPE type, void* data, const QVariant& value)
                   break;
             case T_REAL:
                   *(qreal*)data = value.toDouble();
+                  break;
+            case T_POINT:
+                  *(QPointF*)data = value.toPointF();
                   break;
             case T_COLOR:
                   *(QColor*)data = value.value<QColor>();
@@ -109,7 +114,35 @@ QVariant getProperty(P_DATA_TYPE type, void* data)
                   return QVariant(*(qreal*)data);
             case T_COLOR:
                   return QVariant(*(QColor*)data);
+            case T_POINT:
+                  return QVariant(*(QPointF*)data);
             }
       return QVariant();
       }
+
+//---------------------------------------------------------
+//   getProperty
+//---------------------------------------------------------
+
+QVariant getProperty(P_DATA_TYPE type, const QDomElement& e)
+      {
+      switch(type) {
+            case T_BOOL:
+                  return QVariant(bool(e.text().toInt()));
+            case T_SUBTYPE:
+            case T_INT:
+            case T_DIRECTION:
+            case T_DIRECTION_H:
+            case T_LAYOUT_BREAK:
+                  return QVariant(e.text().toInt());
+            case T_REAL:
+                  return QVariant(e.text().toDouble());
+            case T_COLOR:
+                  return QVariant(readColor(e));
+            case T_POINT:
+                  return QVariant(readPoint(e));
+            }
+      return QVariant();
+      }
+
 

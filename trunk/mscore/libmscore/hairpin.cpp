@@ -216,15 +216,17 @@ bool Hairpin::setProperty(int propertyId, const QVariant& v)
 //   setProperty
 //---------------------------------------------------------
 
-bool Hairpin::setProperty(const QString& name, const QString& data)
+bool Hairpin::setProperty(const QString& name, const QDomElement& e)
       {
       for (int i = 0; i < PROPERTIES; ++i) {
             if (propertyList[i].name == name) {
-                  ::setProperty(propertyList[i].type, ((*this).*(propertyList[i].data))(), data);
+                  QVariant v = ::getProperty(propertyList[i].type, e);
+                  ::setProperty(propertyList[i].type, ((*this).*(propertyList[i].data))(), v);
                   setGenerated(false);
                   return true;
                   }
             }
-      return Element::setProperty(name, data);
+
+      return Element::setProperty(name, e);
       }
 

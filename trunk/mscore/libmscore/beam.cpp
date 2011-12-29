@@ -1235,7 +1235,7 @@ void Beam::read(const QDomElement& de)
       for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
-            if (setProperty(tag, val))
+            if (setProperty(tag, e))
                   ;
             else if (tag == "y1") {
                   if (fragments.isEmpty())
@@ -1435,15 +1435,16 @@ bool Beam::setProperty(int propertyId, const QVariant& v)
       return Element::setProperty(propertyId, v);
       }
 
-bool Beam::setProperty(const QString& name, const QString& data)
+bool Beam::setProperty(const QString& name, const QDomElement& e)
       {
       for (int i = 0; i < PROPERTIES; ++i) {
             if (propertyList[i].name == name) {
-                  ::setProperty(propertyList[i].type, ((*this).*(propertyList[i].data))(), data);
+                  QVariant v = ::getProperty(propertyList[i].type, e);
+                  ::setProperty(propertyList[i].type, ((*this).*(propertyList[i].data))(), v);
                   setGenerated(false);
                   return true;
                   }
             }
-      return Element::setProperty(name, data);
+      return Element::setProperty(name, e);
       }
 
