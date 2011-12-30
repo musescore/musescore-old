@@ -31,6 +31,8 @@ enum P_TYPE {
       P_LINE_TYPE,
       P_PITCH,
       P_TPC,
+      P_HEAD_TYPE,
+      P_VELO_TYPE,
       P_ARTICULATION_ANCHOR,
       P_DIRECTION,
       P_STEM_DIRECTION,
@@ -63,7 +65,8 @@ enum P_DATA_TYPE {
       T_COLOR,
       T_DIRECTION,      // enum Direction
       T_DIRECTION_H,    // enum DirectionH
-      T_LAYOUT_BREAK
+      T_LAYOUT_BREAK,
+      T_VALUE_TYPE
       };
 
 extern void setProperty(P_DATA_TYPE, void*, const QString& value);

@@ -87,7 +87,6 @@ bool compareProperty(void* val, void* defaultVal)
       }
 
 extern Placement readPlacement(const QDomElement&);
-extern ValueType readValueType(const QDomElement&);
 extern Fraction  readFraction(const QDomElement&);
 extern QString docName;
 extern QPointF readPoint(const QDomElement&);

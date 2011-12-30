@@ -68,6 +68,8 @@ static int defaultVeloOffset = 0;
 static qreal defaultTuning = 0.0;
 static int defaultFret = -1;
 static int defaultString = -1;
+static ValueType defaultVeloType = AUTO_VAL;
+static NoteHeadType defaultHeadType = HEAD_AUTO;
 
 Property<Note> Note::propertyList[] = {
       { P_PITCH,          T_INT,         "pitch",         &Note::pPitch,         0 },
@@ -83,6 +85,8 @@ Property<Note> Note::propertyList[] = {
       { P_FRET,           T_INT,         "fret",          &Note::pFret,          &defaultFret       },
       { P_STRING,         T_INT,         "string",        &Note::pString,        &defaultString     },
       { P_GHOST,          T_BOOL,        "ghost",         &Note::pGhost,         &falseVal          },
+      { P_HEAD_TYPE,      T_INT,         "headType",      &Note::pHeadType,      &defaultHeadType   },
+      { P_VELO_TYPE,      T_VALUE_TYPE,  "veloType",      &Note::pVeloType,      &defaultVeloType   },
       { P_END,            T_INT,         0, 0, 0 },
       };
 
@@ -653,13 +657,8 @@ void Note::write(Xml& xml)
                         _dots[i]->write(xml);
                   }
             }
-
       if (_tieFor)
             _tieFor->write(xml);
-      if (_headType != HEAD_AUTO)                           // TODO: property
-            xml.tag("headType", _headType);
-      if (_veloType != AUTO_VAL)                            // TODO: property
-            xml.valueTypeTag("veloType", _veloType);
       if (!_playEvents.isEmpty()) {
             xml.stag("Events");
             foreach(const NoteEvent* e, _playEvents)
@@ -750,8 +749,6 @@ void Note::read(const QDomElement& de)
                         add(image);
                         }
                   }
-            else if (tag == "headType")
-                  _headType = NoteHeadType(i);
             else if (tag == "userAccidental") {
                   bool ok;
                   int k = val.toInt(&ok);
@@ -833,8 +830,6 @@ void Note::read(const QDomElement& de)
                   }
             else if (tag == "move")             // obsolete
                   chord()->setStaffMove(i);
-            else if (tag == "veloType")
-                  _veloType = readValueType(e);
             else if (tag == "Bend") {
                   _bend = new Bend(score());
                   _bend->setTrack(track());
@@ -1561,8 +1556,7 @@ void Note::endEdit()
       {
       Chord* ch = chord();
       if (ch->notes().size() == 1) {
-            score()->undoChangeUserOffset(ch, userOff());
-            // ch->setUserOff(userOff());
+            score()->undoChangeUserOffset(ch, ch->userOff() + userOff());
             setUserOff(QPointF());
             }
       }
