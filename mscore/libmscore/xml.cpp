@@ -102,20 +102,6 @@ Placement readPlacement(const QDomElement& e)
       }
 
 //---------------------------------------------------------
-//   readValueType
-//---------------------------------------------------------
-
-ValueType readValueType(const QDomElement& e)
-      {
-      const QString& s(e.text());
-      if (s == "offset")
-            return OFFSET_VAL;
-      if (s == "user")
-            return USER_VAL;
-      return AUTO_VAL;
-      }
-
-//---------------------------------------------------------
 //   fTag
 //---------------------------------------------------------
 
@@ -294,6 +280,21 @@ void Xml::tag(const char* name, P_DATA_TYPE type, void* data, void* defaultVal)
                                     break;
                               case LAYOUT_BREAK_SECTION:
                                     tag(name, QVariant("section"));
+                                    break;
+                              }
+                        }
+                  break;
+            case T_VALUE_TYPE:
+                  if (compareProperty<ValueType>(data, defaultVal)) {
+                        switch(*(ValueType*)data) {
+                              case OFFSET_VAL:
+                                    tag(name, QVariant("offset"));
+                                    break;
+                              case USER_VAL:
+                                    tag(name, QVariant("user"));
+                                    break;
+                              case AUTO_VAL:
+                                    tag(name, QVariant("auto"));
                                     break;
                               }
                         }

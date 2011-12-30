@@ -63,6 +63,15 @@ void setProperty(P_DATA_TYPE type, void* data, const QString& value)
                   else if (value == "section")
                         *(LayoutBreakType*)data = LAYOUT_BREAK_SECTION;
                   break;
+            case T_VALUE_TYPE:
+                  if (value == "offset")
+                        *(ValueType*)data = OFFSET_VAL;
+                  else if (value == "user")
+                        *(ValueType*)data = USER_VAL;
+                  else if (value == "auto")
+                        *(ValueType*)data = AUTO_VAL;
+                  break;
+
             case T_POINT:
                   abort();
             }
@@ -90,6 +99,7 @@ void setProperty(P_DATA_TYPE type, void* data, const QVariant& value)
             case T_DIRECTION:
             case T_DIRECTION_H:
             case T_LAYOUT_BREAK:
+            case T_VALUE_TYPE:
                   *(int*)data = value.toInt();
                   break;
             }
@@ -109,6 +119,7 @@ QVariant getProperty(P_DATA_TYPE type, void* data)
             case T_DIRECTION:
             case T_DIRECTION_H:
             case T_LAYOUT_BREAK:
+            case T_VALUE_TYPE:
                   return QVariant(*(int*)data);
             case T_REAL:
                   return QVariant(*(qreal*)data);
@@ -167,6 +178,14 @@ QVariant getProperty(P_DATA_TYPE type, const QDomElement& e)
                   if (value == "section")
                         return QVariant(int(LAYOUT_BREAK_SECTION));
                   qDebug("getProperty: invalid T_LAYOUT_BREAK: <%s>", qPrintable(value));
+                  break;
+            case T_VALUE_TYPE:
+                  if (value == "offset")
+                        return QVariant(int(OFFSET_VAL));
+                  else if (value == "user")
+                        return QVariant(int(USER_VAL));
+                  else if (value == "auto")
+                        return QVariant(int(AUTO_VAL));
                   break;
             }
       return QVariant();

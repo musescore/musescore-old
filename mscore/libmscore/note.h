@@ -100,7 +100,6 @@ class Note : public Element {
       bool _small;
 
       NoteHeadType _headType;
-
       ValueType _veloType;
       int _veloOffset;        ///< velocity user offset in percent, or absolute velocity for this note
 
@@ -145,6 +144,8 @@ class Note : public Element {
       void* pFret()              { return &_fret;          }
       void* pString()            { return &_string;        }
       void* pGhost()             { return &_ghost;         }
+      void* pHeadType()          { return &_headType;      }
+      void* pVeloType()          { return &_veloType;      }
 
 //      Property<Note>* property(int id) const;
 
