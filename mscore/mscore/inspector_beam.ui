@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>287</width>
-    <height>94</height>
+    <height>96</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -96,7 +96,7 @@
      <item row="0" column="0" colspan="2">
       <widget class="QCheckBox" name="distribute">
        <property name="text">
-        <string>Distribute Elements</string>
+        <string>Local Relayout</string>
        </property>
       </widget>
      </item>
