@@ -48,6 +48,7 @@ extern int tpc2pitch(int tpc);
 extern int tpc2step(int tpc);
 extern int tpc2alter(int tpc);
 extern QString tpc2stepName(int tpc);
+extern bool tpcIsValid(int val);
 
 #endif
 

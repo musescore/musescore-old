@@ -132,6 +132,7 @@ class Note : public Element {
       void endDrag();
       void endEdit();
 
+      void* pPitch()             { return &_pitch;         }
       void* pTpc()               { return &_tpc;           }
       void* pSmall()             { return &_small;         }
       void* pMirror()            { return &_userMirror;    }
@@ -145,7 +146,7 @@ class Note : public Element {
       void* pString()            { return &_string;        }
       void* pGhost()             { return &_ghost;         }
 
-      Property<Note>* property(int id) const;
+//      Property<Note>* property(int id) const;
 
    public:
       Note(Score* s = 0);
@@ -217,7 +218,7 @@ class Note : public Element {
       void draw(QPainter*) const;
       void read(const QDomElement&);
 
-      void write(Xml& xml) const;
+      void write(Xml& xml);
 
       QPointF stemPos(bool upFlag) const;    ///< Point to connect stem.
       qreal stemYoff(bool upFlag) const;

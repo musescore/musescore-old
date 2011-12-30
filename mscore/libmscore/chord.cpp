@@ -659,7 +659,7 @@ void Chord::write(Xml& xml) const
             case DOWN: xml.tag("StemDirection", QVariant("down")); break;
             case AUTO: break;
             }
-      foreach (const Note* n, _notes)
+      foreach (Note* n, _notes)
             n->write(xml);
       if (_arpeggio)
             _arpeggio->write(xml);

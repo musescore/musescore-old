@@ -29,6 +29,7 @@ enum P_TYPE {
       P_SMALL,
       P_SHOW_COURTESY,
       P_LINE_TYPE,
+      P_PITCH,
       P_TPC,
       P_ARTICULATION_ANCHOR,
       P_DIRECTION,
@@ -49,7 +50,8 @@ enum P_TYPE {
       P_USER_OFF,
       P_FRET,
       P_STRING,
-      P_GHOST
+      P_GHOST,
+      P_END
       };
 
 enum P_DATA_TYPE {
@@ -64,6 +66,11 @@ enum P_DATA_TYPE {
       T_LAYOUT_BREAK
       };
 
+extern void setProperty(P_DATA_TYPE, void*, const QString& value);
+extern void setProperty(P_DATA_TYPE, void*, const QVariant& value);
+extern QVariant getProperty(P_DATA_TYPE, void*);
+extern QVariant getProperty(P_DATA_TYPE type, const QDomElement& e);
+
 //---------------------------------------------------------
 //   template Property
 //---------------------------------------------------------
@@ -74,13 +81,51 @@ class Property {
       int id;
       P_DATA_TYPE type;
       const char* name;     // xml name of property
-      void* (T::*data)();   // return pointer to data
-      void* defaultVal;
+      void* (T::*data)();   // member function returns pointer to data
+      void* defaultVal;     // pointer to default data
+
+      void setProperty(T* c, const QDomElement& e) {
+            QVariant v = ::getProperty(type, e);
+            ::setProperty(type, ((*c).*(data))(), v);
+            }
       };
 
-extern void setProperty(P_DATA_TYPE, void*, const QString& value);
-extern void setProperty(P_DATA_TYPE, void*, const QVariant& value);
-extern QVariant getProperty(P_DATA_TYPE, void*);
-extern QVariant getProperty(P_DATA_TYPE type, const QDomElement& e);
+//---------------------------------------------------------
+//   property
+//---------------------------------------------------------
+
+template <class T>
+Property<T>* property(Property<T>* list, int id)
+      {
+      for (int i = 0; ; ++i) {
+            if (list[i].id == P_END)
+                  break;
+            else if (list[i].id == id)
+                  return &list[i];
+            }
+      return 0;
+      }
+
+template <class T>
+Property<T>* property(Property<T>* list, const QString& name)
+      {
+      for (int i = 0; ; ++i) {
+            if (list[i].id == P_END)
+                  break;
+            else if (list[i].name == name)
+                  return &list[i];
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   writeProperties
+//---------------------------------------------------------
+
+#define WRITE_PROPERTIES(T) \
+      for (int i = 0; i < PROPERTIES; ++i) {  \
+            const Property<T>& p = propertyList[i]; \
+            xml.tag(p.name, p.type, ((*(T*)this).*(p.data))(), propertyList[i].defaultVal); \
+            }
 #endif
 

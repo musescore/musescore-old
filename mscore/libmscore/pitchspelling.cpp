@@ -15,7 +15,6 @@
 //  algorithmus from Emilios Cambouropoulos as published in:
 //  "Automatic Pitch Spelling: From Numbers to Sharps and Flats"
 
-// #include "midifile.h"
 #include "event.h"
 #include "note.h"
 #include "key.h"
@@ -23,6 +22,15 @@
 #include "staff.h"
 #include "chord.h"
 #include "score.h"
+
+//---------------------------------------------------------
+//   tpcIsValid
+//---------------------------------------------------------
+
+bool tpcIsValid(int val)
+      {
+      return val >= -1 && val <= 33;
+      }
 
 //---------------------------------------------------------
 //   step2tpc
