@@ -707,6 +707,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       bgButtons->setExclusive(true);
       bgButtons->addButton(bgColorButton);
       bgButtons->addButton(bgWallpaperButton);
+      connect(bgColorButton, SIGNAL(toggled(bool)), SLOT(bgClicked(bool)));
 
 
       pluginTable->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("load")));
@@ -717,6 +718,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(buttonBox,          SIGNAL(clicked(QAbstractButton*)), SLOT(buttonBoxClicked(QAbstractButton*)));
       connect(fgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectFgWallpaper()));
       connect(bgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectBgWallpaper()));
+
       connect(myScoresButton, SIGNAL(clicked()), SLOT(selectScoresDirectory()));
       connect(myStylesButton, SIGNAL(clicked()), SLOT(selectStylesDirectory()));
       connect(myTemplatesButton, SIGNAL(clicked()), SLOT(selectTemplatesDirectory()));
