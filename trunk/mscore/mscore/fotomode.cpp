@@ -724,7 +724,8 @@ void ScoreView::paintRect(bool printMode, QPainter& p, const QRectF& r, double m
       score()->setPrinting(printMode);
 
       foreach (Page* page, _score->pages()) {
-            QRectF pr(page->abbox());
+            // QRectF pr(page->abbox());
+            QRectF pr(page->canvasBoundingRect());
             if (pr.right() < r.left())
                   continue;
             if (pr.left() > r.right())
