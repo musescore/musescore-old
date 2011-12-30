@@ -70,6 +70,7 @@ static int defaultFret = -1;
 static int defaultString = -1;
 
 Property<Note> Note::propertyList[] = {
+      { P_PITCH,          T_INT,         "pitch",         &Note::pPitch,         0 },
       { P_TPC,            T_INT,         "tpc",           &Note::pTpc,           0 },
       { P_SMALL,          T_BOOL,        "small",         &Note::pSmall,         &falseVal },
       { P_MIRROR_HEAD,    T_DIRECTION_H, "mirror",        &Note::pMirror,        &defaultMirror },
@@ -82,6 +83,7 @@ Property<Note> Note::propertyList[] = {
       { P_FRET,           T_INT,         "fret",          &Note::pFret,          &defaultFret       },
       { P_STRING,         T_INT,         "string",        &Note::pString,        &defaultString     },
       { P_GHOST,          T_BOOL,        "ghost",         &Note::pGhost,         &falseVal          },
+      { P_END,            T_INT,         0, 0, 0 },
       };
 
 static const int PROPERTIES = sizeof(Note::propertyList)/sizeof(*Note::propertyList);
@@ -619,7 +621,7 @@ void Note::draw(QPainter* painter) const
 //   Note::write
 //---------------------------------------------------------
 
-void Note::write(Xml& xml) const
+void Note::write(Xml& xml)
       {
       xml.stag("Note");
       Element::writeProperties(xml);
@@ -627,14 +629,12 @@ void Note::write(Xml& xml) const
       // get real pitch for clipboard (copy/paste)
       //
       int rpitch = pitch();
+      int rtpc   = tpc();
 
-      if (xml.clipboardmode && !score()->styleB(ST_concertPitch) && staff()->part()->instr()->transpose().chromatic) {
-            int rtpc = tpc();
-            transposeInterval(pitch(), tpc(), &rpitch, &rtpc, staff()->part()->instr()->transpose(), true);
-            xml.tag("tpc", rtpc);
-            }
+      const Interval& interval = staff()->part()->instr()->transpose();
+      if (xml.clipboardmode && !score()->styleB(ST_concertPitch) && interval.chromatic)
+            transposeInterval(rpitch, rtpc, &_pitch, &_tpc, interval, true);
 
-      xml.tag("pitch", rpitch);
       if (_accidental)
             _accidental->write(xml);
       _el.write(xml);
@@ -656,11 +656,10 @@ void Note::write(Xml& xml) const
 
       if (_tieFor)
             _tieFor->write(xml);
-      if (_headType != HEAD_AUTO)
+      if (_headType != HEAD_AUTO)                           // TODO: property
             xml.tag("headType", _headType);
-      if (_veloType != AUTO_VAL) {
+      if (_veloType != AUTO_VAL)                            // TODO: property
             xml.valueTypeTag("veloType", _veloType);
-            }
       if (!_playEvents.isEmpty()) {
             xml.stag("Events");
             foreach(const NoteEvent* e, _playEvents)
@@ -669,10 +668,9 @@ void Note::write(Xml& xml) const
             }
       if (_bend)
             _bend->write(xml);
-      for (int i = 0; i < PROPERTIES; ++i) {
-            const Property<Note>& p = propertyList[i];
-            xml.tag(p.name, p.type, ((*(Note*)this).*(p.data))(), propertyList[i].defaultVal);
-            }
+      WRITE_PROPERTIES(Note)
+      _pitch = rpitch;
+      _tpc   = rtpc;
       xml.etag();
       }
 
@@ -682,14 +680,9 @@ void Note::write(Xml& xml) const
 
 void Note::read(const QDomElement& de)
       {
-      int ptch = de.attribute("pitch", "-1").toInt();
-      if (ptch != -1) {
-            _pitch = ptch;
-            _ppitch = ptch;
-            }
-      int tpcVal = de.attribute("tpc", "-100").toInt();
       bool hasAccidental = false;                     // used for userAccidental backward compatibility
 
+      _tpc = INVALID_TPC;
       for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
@@ -888,11 +881,12 @@ void Note::read(const QDomElement& de)
             else
                   domError(e);
             }
-      if (tpcVal != -100)
-            _tpc = tpcVal;
-      else {
+      // ensure sane values:
+      if (_pitch < 0 || _pitch > 127)
+            _pitch = 60;
+      if (!tpcIsValid(_tpc))
             _tpc = pitch2tpc(_pitch);
-            }
+      _ppitch = _pitch;
       }
 
 //---------------------------------------------------------
@@ -1662,16 +1656,16 @@ void Note::setNval(NoteVal nval)
       }
 
 //---------------------------------------------------------
-//   property
+//   setPlayEvents
 //---------------------------------------------------------
 
-Property<Note>* Note::property(int id) const
+void Note::setPlayEvents(const QList<NoteEvent*>& v)
       {
-      for (int i = 0; i < PROPERTIES; ++i) {
-            if (propertyList[i].id == id)
-                  return &propertyList[i];
-            }
-      return 0;
+      foreach(NoteEvent* e, _playEvents)
+            delete e;
+      _playEvents.clear();
+      foreach(NoteEvent* e, v)
+            _playEvents.append(new NoteEvent(*e));
       }
 
 //---------------------------------------------------------
@@ -1680,7 +1674,7 @@ Property<Note>* Note::property(int id) const
 
 QVariant Note::getProperty(int propertyId) const
       {
-      Property<Note>* p = property(propertyId);
+      Property<Note>* p = ::property(propertyList, propertyId);
       if (p)
             return ::getProperty(p->type, ((*(Note*)this).*(p->data))());
       return Element::getProperty(propertyId);
@@ -1692,7 +1686,7 @@ QVariant Note::getProperty(int propertyId) const
 
 bool Note::setProperty(int propertyId, const QVariant& v)
       {
-      Property<Note>* p = property(propertyId);
+      Property<Note>* p = ::property(propertyList, propertyId);
       if (p) {
             ::setProperty(p->type, ((*this).*(p->data))(), v);
             return true;
@@ -1702,27 +1696,12 @@ bool Note::setProperty(int propertyId, const QVariant& v)
 
 bool Note::setProperty(const QString& name, const QDomElement& e)
       {
-      for (int i = 0; i < PROPERTIES; ++i) {
-            if (propertyList[i].name == name) {
-                  QVariant v = ::getProperty(propertyList[i].type, e);
-                  ::setProperty(propertyList[i].type, ((*this).*(propertyList[i].data))(), v);
-                  setGenerated(false);
-                  return true;
-                  }
+      Property<Note>* p = ::property(propertyList, name);
+      if (p) {
+            p->setProperty(this, e);
+            setGenerated(false);
+            return true;
             }
       return Element::setProperty(name, e);
-      }
-
-//---------------------------------------------------------
-//   setPlayEvents
-//---------------------------------------------------------
-
-void Note::setPlayEvents(const QList<NoteEvent*>& v)
-      {
-      foreach(NoteEvent* e, _playEvents)
-            delete e;
-      _playEvents.clear();
-      foreach(NoteEvent* e, v)
-            _playEvents.append(new NoteEvent(*e));
       }
 
