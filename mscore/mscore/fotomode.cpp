@@ -713,11 +713,8 @@ bool ScoreView::saveFotoAs(bool printMode, const QRectF& r)
 
 void ScoreView::paintRect(bool printMode, QPainter& p, const QRectF& r, double mag)
       {
-      double x = r.x();
-      double y = r.y();
-
       p.scale(mag, mag);
-      p.translate(-x, -y);
+      p.translate(-r.topLeft());
       p.setRenderHint(QPainter::Antialiasing, true);
       p.setRenderHint(QPainter::TextAntialiasing, true);
 
@@ -730,9 +727,11 @@ void ScoreView::paintRect(bool printMode, QPainter& p, const QRectF& r, double m
                   continue;
             if (pr.left() > r.right())
                   break;
-            QList<const Element*> ell = page->items(r);
+            p.translate(page->pos());
+            QList<const Element*> ell = page->items(r.translated(-page->pos()));
             qStableSort(ell.begin(), ell.end(), elementLessThan);
             drawElements(p, ell);
+            p.translate(-page->pos());
             }
 
       score()->setPrinting(false);

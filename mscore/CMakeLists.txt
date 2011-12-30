@@ -316,7 +316,7 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
             set(FLAGS -DQT_DEBUG -DQT_DLL)
       else (MINGW)
             set (FLAGS -DQT_DEBUG)
-      endif (MINGW) 
+      endif (MINGW)
 else (CMAKE_BUILD_TYPE STREQUAL "Debug")
       if (MINGW)
             set(FLAGS -O2 -DNDEBUG -DQT_DLL -DQT_NO_DEBUG)
@@ -357,6 +357,7 @@ subdirs(mscore awl bww2mxml zarchive rtf2html share manual demos
       fluid msynth diff mstyle libmscore)
 
 add_subdirectory(player-qt EXCLUDE_FROM_ALL)
+add_subdirectory(mtest EXCLUDE_FROM_ALL)
 add_subdirectory(msynth2 EXCLUDE_FROM_ALL)
 add_subdirectory(m-msynth EXCLUDE_FROM_ALL)
 
