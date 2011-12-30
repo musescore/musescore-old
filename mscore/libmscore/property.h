@@ -126,9 +126,11 @@ Property<T>* property(Property<T>* list, const QString& name)
 //---------------------------------------------------------
 
 #define WRITE_PROPERTIES(T) \
-      for (int i = 0; i < PROPERTIES; ++i) {  \
+      for (int i = 0;; ++i) {  \
             const Property<T>& p = propertyList[i]; \
-            xml.tag(p.name, p.type, ((*(T*)this).*(p.data))(), propertyList[i].defaultVal); \
+            if (p.id == P_END) \
+                  break;       \
+            xml.tag(p.name, p.type, ((*(T*)this).*(p.data))(), p.defaultVal); \
             }
 #endif
 
