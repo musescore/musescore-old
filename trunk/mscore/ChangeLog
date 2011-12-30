@@ -1,3 +1,5 @@
+30.dec (ws)
+      - new mtest folder; will contain regression tests
 29.dec (ws)
       - new abstraction for element properties
       - removed subtype from Element class

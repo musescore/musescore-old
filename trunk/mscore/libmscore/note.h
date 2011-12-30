@@ -85,8 +85,8 @@ class Note : public Element {
       int _fret;              ///< for tablature view
       int _string;
       int _headGroup;
-      int _tpc;               ///< tonal pitch class
-      int _pitch;             ///< Note pitch as midi value (0 - 127).
+      mutable int _tpc;       ///< tonal pitch class
+      mutable int _pitch;     ///< Note pitch as midi value (0 - 127).
       int  _ppitch;           ///< played pitch (honor voltas etc.); cached value
       bool _ghost;            ///< ghost note (guitar: death note)
       bool _hidden;           ///< markes this note as the hidden one if there are
@@ -219,7 +219,7 @@ class Note : public Element {
       void draw(QPainter*) const;
       void read(const QDomElement&);
 
-      void write(Xml& xml);
+      void write(Xml& xml) const;
 
       QPointF stemPos(bool upFlag) const;    ///< Point to connect stem.
       qreal stemYoff(bool upFlag) const;

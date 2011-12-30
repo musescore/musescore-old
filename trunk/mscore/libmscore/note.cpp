@@ -625,7 +625,7 @@ void Note::draw(QPainter* painter) const
 //   Note::write
 //---------------------------------------------------------
 
-void Note::write(Xml& xml)
+void Note::write(Xml& xml) const
       {
       xml.stag("Note");
       Element::writeProperties(xml);
@@ -635,9 +635,11 @@ void Note::write(Xml& xml)
       int rpitch = pitch();
       int rtpc   = tpc();
 
-      const Interval& interval = staff()->part()->instr()->transpose();
-      if (xml.clipboardmode && !score()->styleB(ST_concertPitch) && interval.chromatic)
-            transposeInterval(rpitch, rtpc, &_pitch, &_tpc, interval, true);
+      if (staff()) {
+            const Interval& interval = staff()->part()->instr()->transpose();
+            if (xml.clipboardmode && !score()->styleB(ST_concertPitch) && interval.chromatic)
+                  transposeInterval(rpitch, rtpc, &_pitch, &_tpc, interval, true);
+            }
 
       if (_accidental)
             _accidental->write(xml);
