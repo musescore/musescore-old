@@ -259,10 +259,10 @@ void Xml::tag(const char* name, P_DATA_TYPE type, void* data, void* defaultVal)
                   if (compareProperty<DirectionH>(data, defaultVal)) {
                         switch(DirectionH(*(DirectionH*)data)) {
                               case DH_LEFT:
-                                    tag(name, QVariant("up"));
+                                    tag(name, QVariant("left"));
                                     break;
                               case DH_RIGHT:
-                                    tag(name, QVariant("down"));
+                                    tag(name, QVariant("right"));
                                     break;
                               case DH_AUTO:
                                     break;
