@@ -46,7 +46,10 @@ bool MuseScore::importPdf(Score* score, const QString& path)
             return false;
             }
       score->setOmr(omr);
-      score->setSpatium(omr->spatiumMM() * DPMM);
+      qreal sp = omr->spatiumMM();
+      if (sp == 0.0)
+            sp = 1.5;
+      score->setSpatium(sp * DPMM);
       score->style()->set(StyleVal(ST_pageFillLimit, 1.0));
       score->style()->set(StyleVal(ST_lastSystemFillLimit, 0.0));
       score->style()->set(StyleVal(ST_staffLowerBorder, 0.0));
@@ -74,18 +77,22 @@ bool MuseScore::importPdf(Score* score, const QString& path)
       part->staves()->front()->setBarLineSpan(part->nstaves());
       score->insertPart(part, 0);
 
-      Duration d(Duration::V_MEASURE);
+      TDuration d(TDuration::V_MEASURE);
       Measure* measure = 0;
       int tick = 0;
       foreach(const OmrPage* omrPage, omr->pages()) {
             int nsystems = omrPage->systems().size();
-            for (int k = 0; k < nsystems; ++k) {
-                  const OmrSystem& omrSystem = omrPage->systems().at(k);
-                  int numMeasures = omrSystem.barLines.size() - 1;
-                  if (numMeasures < 1)
-                        numMeasures = 1;
-                  else if (numMeasures > 50)
-                        numMeasures = 50;
+            int n = nsystems == 0 ? 1 : nsystems;
+            for (int k = 0; k < n; ++k) {
+                  int numMeasures = 1;
+                  if (k < nsystems) {
+                        const OmrSystem& omrSystem = omrPage->systems().at(k);
+                        numMeasures = omrSystem.barLines.size() - 1;
+                        if (numMeasures < 1)
+                              numMeasures = 1;
+                        else if (numMeasures > 50)    // sanity check
+                              numMeasures = 50;
+                        }
                   for (int i = 0; i < numMeasures; ++i) {
                         measure = new Measure(score);
                         measure->setTick(tick);
@@ -124,16 +131,18 @@ bool MuseScore::importPdf(Score* score, const QString& path)
       //---create clefs
 
       measure = score->firstMeasure();
-      Clef* clef = new Clef(score);
-      clef->setClefType(CLEF_G);
-      clef->setTrack(0);
-      Segment* segment = measure->getSegment(SegClef, 0);
-      segment->add(clef);
+      if (measure) {
+            Clef* clef = new Clef(score);
+            clef->setClefType(CLEF_G);
+            clef->setTrack(0);
+            Segment* segment = measure->getSegment(SegClef, 0);
+            segment->add(clef);
 
-      clef = new Clef(score);
-      clef->setClefType(CLEF_F);
-      clef->setTrack(4);
-      segment->add(clef);
+            clef = new Clef(score);
+            clef->setClefType(CLEF_F);
+            clef->setTrack(4);
+            segment->add(clef);
+            }
 
       score->setShowOmr(true);
       omr->page(0)->readHeader(score);

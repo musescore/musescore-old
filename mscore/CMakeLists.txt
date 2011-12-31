@@ -40,14 +40,14 @@ set(SOUNDFONT3        TRUE)         # enable ogg vorbis compressed fonts, requir
 set(AEOLUS            TRUE)         # pipe organ synthesizer
 set(EMBED_ICONS       FALSE)        # do not load icons from share/icons
 set(OSC               TRUE)         # osc remote control
-set(OMR FALSE)                       # OMR - optical music recognition
+set(OMR               TRUE)         # OMR - optical music recognition
 
 if (APPLE OR MINGW)
       set(GCC_VISIBILITY FALSE)     # warnings if not, with gcc4.4 from qt
       set(SF_COMPRESSOR FALSE)
       set(AEOLUS TRUE)
       if(APPLE)
-            set(OMR FALSE) # needs work to get ride of fontconfig dependency
+            set(OMR FALSE) # needs work to get rid of fontconfig dependency
       endif(APPLE)
 else (APPLE OR MINGW)
       set(SF_COMPRESSOR TRUE)       # build sfconvert, require ogg, vorbis, vorbisenc
@@ -58,12 +58,10 @@ if (MINGW)
 endif (MINGW)
 
 if (OMR)
-#      set(OPENGL FALSE)
       set(OCR    FALSE) # requires tesseract 3.0
                         # for installation see: http://ubuntuforums.org/showthread.php?t=1647350
 else (OMR)
       set(OCR FALSE)
-#      set(OPENGL FALSE)
 endif (OMR)
 
 if (APPLE)
@@ -387,7 +385,7 @@ if (AEOLUS)
 endif (AEOLUS)
 
 if (OMR)
-      subdirs (poppler omr)
+      subdirs (omr)
 endif (OMR)
 
 if (OSC)
@@ -400,12 +398,7 @@ include_directories(
    ${ALSA_INCDIR}
    ${JACK_INCDIR}
    ${PORTAUDIO_INCDIR}
-   ${PROJECT_SOURCE_DIR}/poppler
 )
-if (OMR)
-   include_directories(${PROJECT_SOURCE_DIR}/poppler)
-   include_directories(${PROJECT_SOURCE_DIR}/poppler/poppler)
-endif (OMR)
 
 ##
 ## create package target

@@ -21,16 +21,15 @@
 #ifndef __PDF_H__
 #define __PDF_H__
 
-class PDFDoc;
-class QImageOutputDev;
+typedef struct pdf_xref_s pdf_xref;
 
 //---------------------------------------------------------
 //   Pdf
 //---------------------------------------------------------
 
 class Pdf {
-      PDFDoc* _doc;
-      QImageOutputDev* imgOut;
+      static bool init;
+      pdf_xref* xref;
 
    public:
       Pdf(const QString& path);
