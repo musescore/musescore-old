@@ -1,3 +1,5 @@
+31.dec (lv)
+      - importxml.cpp cleanup
 30.dec (ws)
       - new mtest folder; will contain regression tests
 29.dec (ws)

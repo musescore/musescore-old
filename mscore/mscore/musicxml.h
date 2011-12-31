@@ -46,6 +46,7 @@ class Harmony;
 class Hairpin;
 class Spanner;
 class Lyrics;
+class ChordRest;
 
 //---------------------------------------------------------
 //   MusicXmlWedge
@@ -241,6 +242,7 @@ class MusicXml {
                     QMap<int, Lyrics*>& numbrdLyrics,
                     QMap<int, Lyrics*>& defyLyrics,
                     QList<Lyrics*>& unNumbrdLyrics);
+      void xmlNotations(Note* note, ChordRest* cr, int trk, int ticks, QDomElement node);
       void xmlNote(Measure*, int stave, QDomElement node);
       void xmlHarmony(QDomElement node, int tick, Measure* m, int staff);
       void xmlClef(QDomElement, int staffIdx, Measure*);
