@@ -1,4 +1,6 @@
-31.dec (lv)
+31.dec (ws)
+      - omr: switch from using poppler to muPDF for reading pdfs
+      (lv)
       - importxml.cpp cleanup
 30.dec (ws)
       - new mtest folder; will contain regression tests
