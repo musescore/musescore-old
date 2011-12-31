@@ -27,6 +27,11 @@ QString revision;
 
 Runtime* runtime;
 
+// dummy
+Omr::Omr(Score*) {}
+void Omr::read(QDomElement) {}
+void Omr::write(Xml&) const {}
+
 //---------------------------------------------------------
 //   main
 //---------------------------------------------------------
