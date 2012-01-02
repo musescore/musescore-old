@@ -46,9 +46,7 @@ if (APPLE OR MINGW)
       set(GCC_VISIBILITY FALSE)     # warnings if not, with gcc4.4 from qt
       set(SF_COMPRESSOR FALSE)
       set(AEOLUS TRUE)
-      if(APPLE)
-            set(OMR FALSE) # needs work to get rid of fontconfig dependency
-      endif(APPLE)
+      set(OMR FALSE) # needs work to get rid of fontconfig dependency
 else (APPLE OR MINGW)
       set(SF_COMPRESSOR TRUE)       # build sfconvert, require ogg, vorbis, vorbisenc
 endif (APPLE OR MINGW)
