@@ -356,6 +356,8 @@ add_subdirectory(player-qt EXCLUDE_FROM_ALL)
 add_subdirectory(mtest EXCLUDE_FROM_ALL)
 add_subdirectory(msynth2 EXCLUDE_FROM_ALL)
 add_subdirectory(m-msynth EXCLUDE_FROM_ALL)
+add_subdirectory(smftools EXCLUDE_FROM_ALL)
+add_subdirectory(genft EXCLUDE_FROM_ALL)
 
 if (BUILD_SCRIPTGEN)
       subdirs (scriptgen)

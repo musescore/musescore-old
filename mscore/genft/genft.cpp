@@ -28,7 +28,10 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include <freetype/tttables.h>
-#include "xml.h"
+#include "libmscore/xml.h"
+
+bool MScore::debugMsg = true;
+int  MScore::division = 480;
 
 QMap<int, int> codemap;
 QMap<QString, int> namemap;
@@ -132,7 +135,7 @@ static void genXml()
       {
       QFile f;
       f.open(stdout, QFile::WriteOnly);
-      AL::Xml xml(&f);
+      Xml xml(&f);
       xml.header();
       xml.stag("museScore");
       foreach(const Glyph& g, glyphs) {
