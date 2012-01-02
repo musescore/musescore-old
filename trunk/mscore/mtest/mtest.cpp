@@ -11,14 +11,35 @@
 //  the file LICENCE.GPL
 //=============================================================================
 
+#include "config.h"
 #include "libmscore/score.h"
+#include "omr/omr.h"
+#include "mscore/preferences.h"
+#include "libmscore/instrtemplate.h"
 
 bool debugMode = false;
+bool noGui = true;
+
 int bugs = 0;
 Score* score;
 MScore* mscore;
 QString revision;
+
+// dummy
+#ifdef OMR
+Omr::Omr(Score*) {}
+void Omr::read(QDomElement) {}
+void Omr::write(Xml&) const {}
+#endif
+
 extern bool testNote();
+extern bool testMidi();
+
+Preferences preferences;
+
+Preferences::Preferences()
+      {
+      }
 
 //---------------------------------------------------------
 //   main
@@ -29,9 +50,14 @@ int main(int argc, char* argv[])
       QApplication app(argc, argv);
       mscore = new MScore;
       mscore->init();
+      loadInstrumentTemplates("../../mscore/share/templates/instruments.xml");
       score = new Score(mscore->baseStyle());
       if (!testNote()) {
             printf("test note failed\n");
+            ++bugs;
+            }
+      if (!testMidi()) {
+            printf("test midi failed\n");
             ++bugs;
             }
       if (bugs)

@@ -57,6 +57,10 @@ QT4_WRAP_UI (ui_headers
       rest.ui
       )
 
+if (OMR)
+      set(OMR_MOCS omrpanel.h)
+endif (OMR)
+
 QT4_WRAP_CPP (mocs
       scoreview.h editinstrument.h editstyle.h edittempo.h instrdialog.h debugger.h
       musescore.h navigator.h pagesettings.h palette.h mixer.h playpanel.h
@@ -78,6 +82,7 @@ QT4_WRAP_CPP (mocs
       drumtools.h texteditor.h texttools.h edittools.h pianotools.h editpitch.h
       editstringdata.h editraster.h mediadialog.h chordeditor.h chordview.h album.h layer.h
       webpage.h inspector.h
+      ${OMR_MOCS}
       )
 
 if (APPLE)
@@ -123,7 +128,7 @@ else (APPLE)
 endif (APPLE)
 
 if (OMR)
-      set(OMR_FILES importpdf.cpp)
+      set(OMR_FILES importpdf.cpp omrpanel.cpp)
 endif (OMR)
 
 add_executable ( ${ExecutableName}
@@ -141,7 +146,7 @@ add_executable ( ${ExecutableName}
       mixer.cpp playpanel.cpp preferences.cpp measureproperties.cpp
       seq.cpp boxproperties.cpp textpalette.cpp
       timedialog.cpp symboldialog.cpp shortcutcapturedialog.cpp
-      simplebutton.cpp musedata.cpp lilypond.cpp exportly.cpp
+      simplebutton.cpp musedata.cpp exportly.cpp
       editdrumset.cpp editstaff.cpp voltaproperties.cpp chordproperties.cpp
       timesigproperties.cpp newwizard.cpp transposedialog.cpp
       chordedit.cpp plugins.cpp excerptsdialog.cpp

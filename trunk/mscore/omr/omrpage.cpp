@@ -105,60 +105,77 @@ void OmrPage::read(int /*pageNo*/)
       }
 
 //---------------------------------------------------------
+//   maxP
+//---------------------------------------------------------
+
+int maxP(int* projection, int x1, int x2)
+      {
+      int xx = x1;
+      int max = 0;
+      for (int x = x1; x < x2; ++x) {
+            if (projection[x] > max) {
+                  max = projection[x];
+                  xx  = x;
+                  }
+            }
+      return xx;
+      }
+
+//---------------------------------------------------------
 //   searchBarLines
 //---------------------------------------------------------
 
 void OmrSystem::searchBarLines()
       {
-      QRectF& r1 = staves[0];
-      QRectF& r2 = staves[1];
+      QRect& r1 = staves[0];
+      QRect& r2 = staves[1];
 
       int x1  = r1.x();
       int x2  = x1 + r1.width();
       int y1  = r1.y();
       int y2  = r2.y() + r2.height();
       int h   = y2 - y1 + 1;
-      int th  = h * 4 / 5;     // 4/5 threshold
-      int xx  = -1;
-      int w   = 0;
-      bool firstBarLine = true;
+      int th  = h * 4 / 6;     // threshold
+
+      int vpw = x2-x1;
+      int vp[vpw];
+      memset(vp, 0, sizeof(int) * vpw);
+
+      //
+      // compute vertical projections
+      //
+
       for (int x = x1; x < x2; ++x) {
             int dots = 0;
-            //
-            // compute vertical projection
-            //
             for (int y = y1; y < y2; ++y) {
-                  if (_page->dot(x, y) || _page->dot(x-1, y) || _page->dot(x+1, y))
+                  if (_page->dot(x, y))
                         ++dots;
                   }
-            if (dots >= th) {
-                  if (x > xx+1) {
-                        if (w) {
-                              double dx = double(xx) - (w * .5);
-                              barLines.append(QLineF(dx, y1, dx, y1 + h));
-                              if (firstBarLine) {
-                                    firstBarLine = false;
-                                    staves[0].setX(dx);
-                                    staves[1].setX(dx);
-                                    }
-                              else {
-                                    staves[0].setWidth(dx - staves[1].x());
-                                    staves[1].setWidth(dx - staves[1].x());
-                                    }
-                              w = 1;
-                              }
-                        else
-                              ++w;
+            vp[x - x1] = dots;
+            }
+
+      bool firstBarLine = true;
+      for (int x = 1; x < vpw; ++x) {
+            if (vp[x-1] < vp[x])
+                  continue;
+            if (vp[x] < th)
+                  continue;
+//            if (vp[x-1] > vp[x])
+                  {
+                  barLines.append(QLine(x + x1, y1, x + x1, y2));
+                  int xx = x + x1;
+                  if (firstBarLine) {
+                        firstBarLine = false;
+                        staves[0].setX(xx);
+                        staves[1].setX(xx);
                         }
-                  xx = x;
+                  else {
+                        staves[0].setWidth(xx - staves[0].x());
+                        staves[1].setWidth(xx - staves[1].x());
+                        }
                   }
             }
-      if (w) {
-            double dx = double(xx) - (w * .5);
-            barLines.append(QLineF(dx, y1, dx, y1 + h));
-            staves[0].setWidth(dx - staves[0].x());
-            staves[1].setWidth(dx - staves[1].x());
-            }
+
 #ifdef SEARCH_NOTES
       searchNotes(quartheadSym);
       searchNotes(halfheadSym);
@@ -169,15 +186,15 @@ void OmrSystem::searchBarLines()
       //      are detected as two barlines
       //    - barlines which are really note stems
       //
-      QList<QLineF> nbl;
+      QList<QLine> nbl;
       double x = -10000.0;
       double spatium = _page->spatium();
       int nbar = 0;
 //      int i = 0;
       int n = barLines.size();
       for (int i = 0; i < n; ++i) {
-            const QLineF& l = barLines[i];
-            double nx = l.x1();
+            const QLine& l = barLines[i];
+            int nx = l.x1();
             if ((nx - x) > spatium) {
                   //
                   // check for start repeat:
@@ -189,7 +206,6 @@ void OmrSystem::searchBarLines()
                                                  // missing: check fo note heads
                                                  // up to here
                      ) {
-printf("2-SKIP REPEAT?\n");
                         x = nx;
                         continue;
                         }
@@ -729,7 +745,7 @@ printf("   autoTableSize %d\n", autoTableSize);
             }
       qSort(staveTop.begin(), staveTop.end(), sortLvStaves);
       foreach(Lv a, staveTop) {
-            staves.append(QRectF(cropL * 32, a.line, width() - cropR*32, _spatium*4));
+            staves.append(QRect(cropL * 32, a.line, width() - cropR*32, _spatium*4));
             }
       }
 
@@ -836,8 +852,8 @@ void OmrPage::write(Xml& xml) const
       xml.tag("cropR", cropR);
       xml.tag("cropT", cropT);
       xml.tag("cropB", cropB);
-      foreach(const QRectF& r, staves)
-            xml.tag("staff", r);
+      foreach(const QRect& r, staves)
+            xml.tag("staff", QRectF(r));
       xml.etag();
       }
 
@@ -860,7 +876,7 @@ void OmrPage::read(QDomElement e)
             else if (tag == "cropB")
                   cropB = val.toInt();
             else if (tag == "staff") {
-                  QRectF r = readRectF(e);
+                  QRect r = readRectF(e).toRect();
                   staves.append(r);
                   }
             else

@@ -77,6 +77,7 @@ class EditTempo;
 class Capella;
 class CapVoice;
 class Inspector;
+class OmrPanel;
 class NScrollArea;
 class EditTools;
 class Sym;
@@ -238,6 +239,7 @@ class MuseScore : public QMainWindow {
 
       PaletteBox* paletteBox;
       Inspector* inspector;
+      OmrPanel* omrPanel;
 
       bool _midiinEnabled;
       bool _speakerEnabled;
@@ -328,6 +330,7 @@ class MuseScore : public QMainWindow {
       void redo();
       void showPalette(bool);
       void showInspector(bool);
+      void showOmrPanel(bool);
       void showPlayPanel(bool);
       void showNavigator(bool);
       void showMixer(bool);
@@ -347,8 +350,8 @@ class MuseScore : public QMainWindow {
       void gotoPreviousScore();
       void updateUndoRedo();
       void cmdAddChordName2();
-      void convertCapella(Score*, Capella* cap);
-      int readCapVoice(Score*, CapVoice* cvoice, int staffIdx, int tick);
+      static void convertCapella(Score*, Capella* cap);
+//      int readCapVoice(Score*, CapVoice* cvoice, int staffIdx, int tick);
       void changeScore(int);
 
    private slots:
@@ -544,27 +547,25 @@ class MuseScore : public QMainWindow {
       bool saveAs(Score*, bool saveCopy = false);
       bool saveSelection(Score*);
       void addImage(Score*, Element*);
-      bool importMidi(Score*, const QString& name);
       bool savePng(Score*, const QString& name, bool screenshot, bool transparent, double convDpi, QImage::Format format);
       bool saveAudio(Score*, const QString& name, const QString& type);
       bool saveMp3(Score*, const QString& name);
       bool saveMxl(Score*, const QString& name);
       bool saveXml(Score*, const QString& name);
-      bool saveMidi(Score*, const QString& name);
       bool saveSvg(Score*, const QString& name);
       bool savePng(Score*, const QString& name);
       bool saveLilypond(Score*, const QString& name);
-      void convertMidi(Score*, MidiFile* mf);
-      bool importPdf(Score*, const QString& path);
-      bool importGTP(Score*, const QString& name);
-      bool importBww(Score*, const QString& path);
-      bool importMusicXml(Score*, const QString&);
-      bool importCompressedMusicXml(Score*, const QString&);
-      bool importMuseData(Score*, const QString& name);
-      bool importLilypond(Score*, const QString& name);
-      bool importBB(Score*, const QString& name);
-      bool importCapella(Score*, const QString& name);
-      bool importOve(Score*, const QString& name);
+
+      static bool importPdf(Score*, const QString& path);
+      static bool importGTP(Score*, const QString& name);
+      static bool importBww(Score*, const QString& path);
+      static bool importMusicXml(Score*, const QString&);
+      static bool importCompressedMusicXml(Score*, const QString&);
+      static bool importMuseData(Score*, const QString& name);
+      static bool importLilypond(Score*, const QString& name);
+      static bool importBB(Score*, const QString& name);
+      static bool importCapella(Score*, const QString& name);
+      static bool importOve(Score*, const QString& name);
 
       void closeScore(Score* score);
 
@@ -591,6 +592,11 @@ extern QMap<QString, Shortcut*> shortcuts;
 extern Shortcut* midiActionMap[128];
 extern void setMscoreLocale(QString localeName);
 extern QPixmap sym2pixmap(const Sym* s, qreal mag);
+
+extern bool saveMidi(Score*, const QString& name);
+extern bool importMidi(Score*, const QString& name);
+extern void convertMidi(Score*, MidiFile* mf);
+
 
 #endif
 

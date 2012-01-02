@@ -64,6 +64,11 @@ class OmrView : public QWidget {
       bool   _fotoMode;
       QRectF _foto;
 
+      bool _showLines;
+      bool _showBarlines;
+      bool _showSlices;
+      bool _showStaves;
+
       void zoom(int step, const QPoint& pos);
 
       virtual void mousePressEvent(QMouseEvent*);
@@ -91,6 +96,15 @@ class OmrView : public QWidget {
       Omr* omr() const           { return _omr;      }
       bool fotoMode() const      { return _fotoMode; }
       void setFotoMode(bool val) { _fotoMode = val;  }
+
+      void setShowLines(bool val)          { _showLines = val;  }
+      bool showLines() const               { return _showLines; }
+      bool showBarlines() const            { return _showBarlines; }
+      bool showSlices() const              { return _showSlices;   }
+      bool showStaves() const              { return _showStaves;   }
+      void setShowBarlines(bool val);
+      void setShowSlices(bool val);
+      void setShowStaves(bool val);
       };
 
 

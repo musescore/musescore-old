@@ -1481,7 +1481,7 @@ bool MuseScore::readScore(Score* score, QString name)
                   return false;
             }
       else {
-            typedef bool (MuseScore::*ImportFunction)(Score*, const QString&);
+            typedef bool (*ImportFunction)(Score*, const QString&);
             struct ImportDef {
                   const char* extension;
                   ImportFunction importF;
@@ -1489,11 +1489,10 @@ bool MuseScore::readScore(Score* score, QString name)
             ImportDef imports[] = {
                   { "xml",  &MuseScore::importMusicXml           },
                   { "mxl",  &MuseScore::importCompressedMusicXml },
-                  { "mid",  &MuseScore::importMidi               },
-                  { "midi", &MuseScore::importMidi               },
-                  { "kar",  &MuseScore::importMidi               },
+                  { "mid",  &importMidi                          },
+                  { "midi", &importMidi                          },
+                  { "kar",  &importMidi                          },
                   { "md",   &MuseScore::importMuseData           },
-                  { "ly",   &MuseScore::importLilypond           },
                   { "mgu",  &MuseScore::importBB                 },
                   { "sgu",  &MuseScore::importBB                 },
                   { "cap",  &MuseScore::importCapella            },
@@ -1520,7 +1519,8 @@ bool MuseScore::readScore(Score* score, QString name)
             uint i;
             for (i = 0; i < n; ++i) {
                   if (imports[i].extension == csl) {
-                        if (!(this->*imports[i].importF)(score, name))
+                        // if (!(this->*imports[i].importF)(score, name))
+                        if (!(*imports[i].importF)(score, name))
                               return false;
                         break;
                         }

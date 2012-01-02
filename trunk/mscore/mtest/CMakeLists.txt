@@ -30,6 +30,10 @@ add_executable(mtest
       ${mocs}
       mtest.cpp
       testnote.cpp
+      testmidi.cpp
+      ../mscore/exportmidi.cpp
+      ../mscore/importmidi.cpp
+      ../mscore/midifile.cpp
       )
 
 target_link_libraries(mtest

@@ -18,7 +18,6 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "musescore.h"
 #include "midifile.h"
 #include "scoreview.h"
 #include "file.h"
@@ -48,7 +47,7 @@
 #include "libmscore/drumset.h"
 #include "preferences.h"
 #include "libmscore/box.h"
-#include "importmidi.h"
+// #include "importmidi.h"
 #include "libmscore/keysig.h"
 #include "libmscore/pitchspelling.h"
 
@@ -746,7 +745,7 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, const Event& mm)
 //   convertMidi
 //---------------------------------------------------------
 
-void MuseScore::convertMidi(Score* score, MidiFile* mf)
+void convertMidi(Score* score, MidiFile* mf)
       {
       mf->separateChannel();
       mf->process1();                    // merge noteOn/noteOff into NoteEvent etc.
@@ -1322,6 +1321,7 @@ qDebug("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
 #endif
       }
 
+#if 0
 //---------------------------------------------------------
 //   ImportMidiDialog
 //---------------------------------------------------------
@@ -1374,13 +1374,15 @@ void ImportMidiDialog::setShortestNote(int val)
 
       shortestNoteCombo->setCurrentIndex(idx);
       }
+#endif
+
 
 //---------------------------------------------------------
 //   importMidi
 //    return true on success
 //---------------------------------------------------------
 
-bool MuseScore::importMidi(Score* score, const QString& name)
+bool importMidi(Score* score, const QString& name)
       {
       if (name.isEmpty())
             return false;
@@ -1396,7 +1398,7 @@ bool MuseScore::importMidi(Score* score, const QString& name)
             if (!noGui) {
                   QMessageBox::warning(0,
                      QWidget::tr("MuseScore: load midi"),
-                     tr("Load failed: ") + errorText,
+                     QWidget::tr("Load failed: ") + errorText,
                      QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
                   }
             fp.close();
@@ -1404,15 +1406,17 @@ bool MuseScore::importMidi(Score* score, const QString& name)
             }
       fp.close();
 
-      int shortestNote = MScore::division / 4;     // 1/64
+      int shortestNote = MScore::division / 8;     // 1/32
+#if 0
       if (!noGui) {
             ImportMidiDialog id(0);
             QFileInfo fn(name);
-            id.setWindowTitle(fn.fileName() + " - "  + tr("MIDI Import"));
+            id.setWindowTitle(fn.fileName() + " - "  + QWidget::tr("MIDI Import"));
             id.setShortestNote(shortestNote);
             id.exec();
             shortestNote = id.shortestNote();
             }
+#endif
       mf.setShortestNote(shortestNote);
 
       convertMidi(score, &mf);

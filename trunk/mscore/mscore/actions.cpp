@@ -18,6 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+#include "config.h"
 #include "musescore.h"
 #include "libmscore/score.h"      // states
 #include "icons.h"
@@ -2848,9 +2849,21 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Show Inspector"),
          Qt::Key_F8,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","inspector"),
+         QT_TRANSLATE_NOOP("action","Inspector"),
          QT_TRANSLATE_NOOP("action","Show inspector")
          ),
+#ifdef OMR
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY | STATE_EDIT,
+         0,
+         "omr",
+         QT_TRANSLATE_NOOP("action","Show OMR Panel"),
+         Qt::Key_F5,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","OmrPanel"),
+         QT_TRANSLATE_NOOP("action","Show OMR PAnel")
+         ),
+#endif
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY | STATE_EDIT,
          0,

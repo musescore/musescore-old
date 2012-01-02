@@ -28,10 +28,6 @@
 #include "libmscore/sym.h"
 #include "libmscore/mscore.h"
 
-static bool showLines      = false;
-// static bool showStaffLines = true;
-static bool showBarLines   = true;
-
 //---------------------------------------------------------
 //   OmrView
 //---------------------------------------------------------
@@ -42,7 +38,6 @@ OmrView::OmrView(ScoreView* sv, QWidget* parent)
       setFocusPolicy(Qt::StrongFocus);
       setAttribute(Qt::WA_InputMethodEnabled);
       setAttribute(Qt::WA_KeyCompression);
-//      setAttribute(Qt::WA_StaticContents);
       setMouseTracking(true);
 
       _omr       = 0;
@@ -51,6 +46,10 @@ OmrView::OmrView(ScoreView* sv, QWidget* parent)
       _fotoMode  = false;
       _matrix    = QTransform(m, 0.0, 0.0, m, 0.0, 0.0);
       xoff = yoff = 0;
+      _showLines      = false;
+      _showBarlines   = true;
+      _showSlices     = true;
+      _showStaves     = true;
       }
 
 //---------------------------------------------------------
@@ -210,19 +209,25 @@ void OmrView::paintEvent(QPaintEvent* event)
             OmrPage* page = _omr->page(pageNo);
             p.save();
             p.translate(w * pageNo, 0);
-            if (showLines) {
+            if (_showLines) {
                   p.setPen(QPen(QColor(255, 0, 0, 80), 1.0));
                   foreach(QLine l, page->sl())
                         p.drawLine(QLineF(l.x1()+.5, l.y1()+.5, l.x2()+.5, l.y2()+.5));
                   }
-            foreach(const QRect r, page->slices())
-                  p.fillRect(r, QBrush(QColor(0, 100, 100, 50)));
+            if (_showSlices) {
+                  foreach(const QRect r, page->slices())
+                        p.fillRect(r, QBrush(QColor(0, 100, 100, 50)));
+                  }
 
-            foreach(const QRectF& r, page->r())       // staves
-                  p.fillRect(r, QBrush(QColor(0, 0, 100, 50)));
+            if (_showStaves) {
+                  foreach(const OmrSystem& s, page->systems()) {       // staves
+                        foreach(const QRect& r, s.staves)
+                              p.fillRect(r, QBrush(QColor(0, 0, 100, 50)));
+                        }
+                  }
 
             foreach(const OmrSystem& system, page->systems()) {
-                  if (showBarLines) {
+                  if (_showBarlines) {
                         p.setPen(QPen(Qt::blue, 3.0));
                         foreach(const QLineF& l, system.barLines)
                               p.drawLine(l);
@@ -408,4 +413,36 @@ void OmrView::contextMenuEvent(QContextMenuEvent*)
       {
       printf("context menu\n");
       }
+
+//---------------------------------------------------------
+//   setShowBarlines
+//---------------------------------------------------------
+
+void OmrView::setShowBarlines(bool val)
+      {
+      _showBarlines = val;
+      update();
+      }
+
+//---------------------------------------------------------
+//   setShowSlices
+//---------------------------------------------------------
+
+void OmrView::setShowSlices(bool val)
+      {
+      _showSlices = val;
+      update();
+      }
+
+//---------------------------------------------------------
+//   setShowStaves
+//---------------------------------------------------------
+
+void OmrView::setShowStaves(bool val)
+      {
+      _showStaves = val;
+      update();
+      }
+
+
 

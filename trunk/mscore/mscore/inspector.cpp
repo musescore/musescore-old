@@ -35,7 +35,6 @@ void MuseScore::showInspector(bool visible)
       if (visible) {
             if (!inspector) {
                   inspector = new Inspector();
-                  QAction* a = getAction("toggle-palette");
                   connect(inspector, SIGNAL(inspectorVisible(bool)), a, SLOT(setChecked(bool)));
                   addDockWidget(Qt::RightDockWidgetArea, inspector);
                   }
@@ -71,6 +70,16 @@ Inspector::Inspector(QWidget* parent)
       layout->addStretch(10);
       layout->addLayout(hbox);
       connect(apply, SIGNAL(clicked()), SLOT(applyClicked()));
+      }
+
+//---------------------------------------------------------
+//   closeEvent
+//---------------------------------------------------------
+
+void Inspector::closeEvent(QCloseEvent* ev)
+      {
+      emit inspectorVisible(false);
+      QWidget::closeEvent(ev);
       }
 
 //---------------------------------------------------------

@@ -24,7 +24,7 @@ extern "C" {
 #include <mupdf.h>
       }
 
-bool Pdf::init = false;
+int Pdf::references;
 static fz_context* ctx;
 static fz_glyph_cache* cache;
 
@@ -41,20 +41,48 @@ int Pdf::numPages() const
 //   Pdf
 //---------------------------------------------------------
 
-Pdf::Pdf(const QString& path)
+Pdf::Pdf()
       {
-      if (!init) {
-            init = true;
-            ctx = fz_new_context(&fz_alloc_default, 256 << 20);
-            if (!ctx) {
-                  printf("Pdf::init ctx failed\n");
-                  return;
-                  }
+      if (references == 0) {
+            ctx = fz_new_context(&fz_alloc_default, 256 << 20);  // 256MB cache
             cache = fz_new_glyph_cache(ctx);
             }
+      ++references;
+      xref = 0;
+      }
+
+//---------------------------------------------------------
+//   open
+//---------------------------------------------------------
+
+bool Pdf::open(const QString& path)
+      {
       char* name = path.toAscii().data();
-      xref = pdf_open_xref(ctx, name, 0);
-      pdf_load_page_tree(xref);
+      fz_try(ctx) {
+            xref = pdf_open_xref(ctx, name, 0);
+            pdf_load_page_tree(xref);
+            }
+      fz_catch(ctx) {
+            pdf_free_xref(xref);
+            xref = 0;
+            }
+      return true;
+      }
+
+//---------------------------------------------------------
+//   ~Pdf
+//---------------------------------------------------------
+
+Pdf::~Pdf()
+      {
+      pdf_free_xref(xref);
+      --references;
+      if (references == 0) {
+            fz_free_glyph_cache(ctx, cache);
+            cache = 0;
+            fz_free_context(ctx);
+            ctx = 0;
+            }
       }
 
 //---------------------------------------------------------
@@ -86,7 +114,7 @@ QImage Pdf::page(int i)
       int w = pix->w;
       int h = pix->h;
 
-      QImage image(w, h, QImage::Format_Mono);
+      QImage image(w, h, QImage::Format_MonoLSB);
       QVector<QRgb> ct(2);
       ct[0] = qRgb(255, 255, 255);
       ct[1] = qRgb(0, 0, 0);
@@ -102,9 +130,9 @@ QImage Pdf::page(int i)
                   for (int i = 0; i < 8; ++i) {
                         uchar v = *s++;
                         s++;
-                        data <<= 1;
+                        data >>= 1;
                         if (v < 128)
-                              data |= 1;
+                              data |= 0x80;
                         }
                   *d++ = data;
                   }

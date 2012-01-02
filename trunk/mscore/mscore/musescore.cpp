@@ -73,6 +73,7 @@
 #include "chordedit.h"
 #include "edittempo.h"
 #include "inspector.h"
+#include "omrpanel.h"
 
 #include "libmscore/mscore.h"
 #include "libmscore/system.h"
@@ -373,6 +374,7 @@ MuseScore::MuseScore()
       layoutBreakPalette    = 0;
       paletteBox            = 0;
       inspector             = 0;
+      omrPanel              = 0;
       _midiinEnabled        = true;
       _speakerEnabled       = true;
       newWizard             = 0;
@@ -877,6 +879,10 @@ MuseScore::MuseScore()
       a->setCheckable(true);
       menuDisplay->addAction(a);
 
+      a = getAction("omr");
+      a->setCheckable(true);
+      menuDisplay->addAction(a);
+
       playId = getAction("toggle-playpanel");
       playId->setCheckable(true);
       menuDisplay->addAction(playId);
@@ -1322,6 +1328,14 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
             synthControl->setScore(cs);
       if (iledit)
             iledit->updateAll(cs);
+#ifdef OMR
+      if (omrPanel) {
+            if (cv && cv->omrView())
+                  omrPanel->setOmrView(cv->omrView());
+            else
+                  omrPanel->setOmrView(0);
+            }
+#endif
       if (!cs) {
             changeState(STATE_DISABLED);
             setWindowTitle("MuseScore");
@@ -1950,7 +1964,8 @@ static bool processNonGui()
             if (fn.endsWith(".mxl"))
                   return mscore->saveMxl(cs, fn);
             if (fn.endsWith(".mid"))
-                  return mscore->saveMidi(cs, fn);
+                  // return mscore->saveMidi(cs, fn);
+                  return saveMidi(cs, fn);
             if (fn.endsWith(".pdf"))
                   return mscore->savePsPdf(fn, QPrinter::PdfFormat);
             if (fn.endsWith(".ps"))
@@ -4122,6 +4137,10 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             showPalette(a->isChecked());
       else if (cmd == "inspector")
             showInspector(a->isChecked());
+#ifdef OMR
+      else if (cmd == "omr")
+            showOmrPanel(a->isChecked());
+#endif
       else if (cmd == "toggle-playpanel")
             showPlayPanel(a->isChecked());
       else if (cmd == "toggle-navigator")

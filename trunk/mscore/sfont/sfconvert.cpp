@@ -23,12 +23,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include <QtCore/QFile>
+
+#include "config.h"
 #include "sfont.h"
 #include "omr/omr.h"
+
 // dummy
+#ifdef OMR
 Omr::Omr(Score*) {}
 void Omr::read(QDomElement) {}
 void Omr::write(Xml&) const {}
+#endif
 
 
 //---------------------------------------------------------

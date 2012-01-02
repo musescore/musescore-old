@@ -44,6 +44,7 @@ class InspectorSegment : public QWidget, Ui::InspectorSegment {
       void trailingSpaceChanged(double);
 
    signals:
+      void inspectorVisible(bool);
       void enableApply();
 
    public:
@@ -303,6 +304,8 @@ class Inspector : public QDockWidget {
       InspectorElementBase* ie;
       QPushButton* apply;
       Element* _element;
+
+      virtual void closeEvent(QCloseEvent*);
 
    private slots:
       void applyClicked();

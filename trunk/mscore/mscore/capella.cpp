@@ -876,14 +876,14 @@ qDebug("staff size small %d\n", sl->bSmall);
       sl->bSoundMapIn  = b & 2;
       sl->bSoundMapOut = b & 4;
       if (sl->bSoundMapIn) {      // Umleitungstabelle für Eingabe vom Keyboard
-            unsigned char iMin = readByte();
+            /*unsigned char iMin =*/ readByte();
             unsigned char n    = readByte();
             assert (n > 0 and iMin + n <= 128);
             f->read(sl->soundMapIn, n);
             curPos += n;
             }
       if (sl->bSoundMapOut) {     // Umleitungstabelle für das Vorspielen
-            unsigned char iMin = readByte();
+            /*unsigned char iMin =*/ readByte();
             unsigned char n    = readByte();
             assert (n > 0 and iMin + n <= 128);
             f->read(sl->soundMapOut, n);
@@ -1495,7 +1495,7 @@ qDebug("======================Text:\n");
 //   readCapVoice
 //---------------------------------------------------------
 
-int MuseScore::readCapVoice(Score* score, CapVoice* cvoice, int staffIdx, int tick)
+static int readCapVoice(Score* score, CapVoice* cvoice, int staffIdx, int tick)
       {
       int voice = cvoice->voiceNo;
       int track = staffIdx * VOICES + voice;

@@ -143,7 +143,7 @@ void ScoreTab::setCurrent(int n)
       ScoreView* v;
       if (!vs) {
             vs = new QSplitter;
-            v = new ScoreView;
+            v  = new ScoreView;
             tab2->blockSignals(true);
             tab2->setCurrentIndex(0);
             tab2->blockSignals(false);
@@ -157,10 +157,11 @@ void ScoreTab::setCurrent(int n)
 #ifdef OMR
       if (v) {
             Score* score = v->score();
-            if (score->showOmr()) {
+            if (score->showOmr() && score->omr()) {
                   if (vs->count() < 2) {
-                        Omr* omr = score->omr();
+                        Omr* omr    = score->omr();
                         OmrView* sv = omr->newOmrView(v);
+                        v->setOmrView(sv);
                         vs->addWidget(sv);
                         connect(v, SIGNAL(scaleChanged(double)), sv, SLOT(setScale(double)));
                         connect(v, SIGNAL(offsetChanged(double,double)), sv, SLOT(setOffset(double,double)));

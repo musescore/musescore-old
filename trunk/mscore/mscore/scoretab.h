@@ -32,8 +32,8 @@ struct TabScoreView {
       Score* score;
       int part;
       TabScoreView(Score* s) {
-            score = s;
-            part  = 0;
+            score   = s;
+            part    = 0;
             }
       };
 
