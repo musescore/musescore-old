@@ -879,9 +879,11 @@ MuseScore::MuseScore()
       a->setCheckable(true);
       menuDisplay->addAction(a);
 
+#ifdef OMR
       a = getAction("omr");
       a->setCheckable(true);
       menuDisplay->addAction(a);
+#endif
 
       playId = getAction("toggle-playpanel");
       playId->setCheckable(true);
