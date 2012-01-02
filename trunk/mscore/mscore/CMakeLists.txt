@@ -361,57 +361,6 @@ endif (USE_PORTAUDIO)
    endif (APPLE)
 endif (MINGW)
 
-#if (NOT MINGW AND NOT APPLE)
-# command line utilities are not build for windows/apple
-#
-#======================================
-#     target smf2xml
-#======================================
-#
-#   add_executable(
-#      smf2xml
-#      ${ui_headers}
-#      smf2xml.cpp midifile.cpp drumset.cpp xml.cpp
-#      )
-#   target_link_libraries(smf2xml al ${QT_LIBRARIES} )
-#   set_target_properties (
-#      smf2xml
-#      PROPERTIES
-#         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
-#      )
-
-#======================================
-#     target xml2smf
-#======================================
-
-#   add_executable(
-#      xml2smf
-#      ${ui_headers}
-#      xml2smf.cpp midifile.cpp drumset.cpp
-#      )
-#   target_link_libraries(xml2smf al ${QT_LIBRARIES} )
-#   set_target_properties (
-#      xml2smf
-#      PROPERTIES
-#         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
-#      )
-
-#======================================
-#     target genft
-#     create font table
-#======================================
-
-#   add_executable(
-#      genft
-#      ${ui_headers}
-#      genft.cpp
-#      )
-
-#   target_link_libraries(genft al ${QT_LIBRARIES} -lfreetype)
-#   set_target_properties(genft PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -I/usr/include/freetype2 -g -Wall -Wextra -Winvalid-pch")
-
-# endif (NOT MINGW AND NOT APPLE)
-
 #======================================
 #     install icons if not embedded
 #======================================
