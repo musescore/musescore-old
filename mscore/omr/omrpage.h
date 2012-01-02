@@ -62,8 +62,8 @@ class OmrSystem {
 
    public:
       OmrSystem(OmrPage* p) { _page = p;  }
-      QList<QRectF> staves;
-      QList<QLineF> barLines;
+      QList<QRect> staves;
+      QList<QLine> barLines;
       QList<OmrNote*> _notes;
 
       const QList<OmrNote*>& notes() const  { return _notes;   }
@@ -85,7 +85,7 @@ class OmrPage {
       int cropT, cropB;       // crop values in pixel units
 
       QList<QRect> _slices;
-      QList<QRectF> staves;
+      QList<QRect> staves;
       QList<HLine> slines;
 
       QList<QLine>  lines;
@@ -116,7 +116,7 @@ class OmrPage {
 
       const QList<QLine>& sl()           { return lines;    }
       const QList<HLine>& l()            { return slines;   }
-      const QList<QRectF>& r()           { return staves;   }
+      const QList<QRect>& r()            { return staves;   }
 
       const QList<QRect>& slices() const { return _slices;  }
       double spatium() const             { return _spatium; }

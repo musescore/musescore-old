@@ -449,8 +449,10 @@ static void readInstrumentGroup(InstrumentGroup* group, const QDomElement& de)
 bool loadInstrumentTemplates(const QString& instrTemplates)
       {
       QFile qf(instrTemplates);
-      if (!qf.open(QIODevice::ReadOnly))
+      if (!qf.open(QIODevice::ReadOnly)) {
+            qDebug("cannot load instrument templates at <%s>\n", qPrintable(instrTemplates));
             return false;
+            }
 
       QDomDocument doc;
       int line, column;
@@ -508,9 +510,10 @@ bool loadInstrumentTemplates(const QString& instrTemplates)
 
 InstrumentTemplate* searchTemplate(const QString& name)
       {
+// qDebug("searchTemplate groups %d", instrumentGroups.size());
       foreach(InstrumentGroup* g, instrumentGroups) {
             foreach(InstrumentTemplate* it, g->instrumentTemplates) {
-// qDebug("<%s><%s>\n", qPrintable(name), qPrintable(it->trackName));
+// qDebug("<%s><%s>", qPrintable(name), qPrintable(it->trackName));
                   if (it->trackName == name)
                         return it;
                   }

@@ -16,6 +16,7 @@
 #include <QtDeclarative/QDeclarativeView>
 #include <QtDeclarative/QDeclarativeContext>
 
+#include "config.h"
 #include "libmscore/mscore.h"
 #include "scoreview.h"
 #include "omr/omr.h"
@@ -28,9 +29,11 @@ QString revision;
 Runtime* runtime;
 
 // dummy
+#ifdef OMR
 Omr::Omr(Score*) {}
 void Omr::read(QDomElement) {}
 void Omr::write(Xml&) const {}
+#endif
 
 //---------------------------------------------------------
 //   main

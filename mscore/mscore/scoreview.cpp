@@ -612,6 +612,7 @@ ScoreView::ScoreView(QWidget* parent)
       setAutoFillBackground(false);
 
       _score      = 0;
+      _omrView    = 0;
       dropTarget  = 0;
       _editText   = 0;
 

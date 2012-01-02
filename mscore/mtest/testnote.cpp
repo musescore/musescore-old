@@ -14,11 +14,9 @@
 #include "libmscore/score.h"
 #include "libmscore/note.h"
 #include "libmscore/chord.h"
+#include "mtest.h"
 
 extern Score* score;
-
-#define TEST(a) if (!(a)) \
-      printf("Test failed in <%s>: " #a "\n", __func__), passed = false;
 
 //---------------------------------------------------------
 //   writeReadElement

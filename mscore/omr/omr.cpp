@@ -47,9 +47,9 @@ Omr::Omr(Score* s)
 
 Omr::Omr(const QString& p, Score* s)
       {
-      _score = s;
-      _path = p;
-      _ocr = 0;
+      _score        = s;
+      _path         = p;
+      _ocr          = 0;
       initUtils();
       }
 
@@ -137,7 +137,12 @@ bool Omr::readPdf()
 
 printf("Omr::read <%s>\n", qPrintable(_path));
 
-      _doc = new Pdf(_path);
+      _doc = new Pdf();
+      if (!_doc->open(_path)) {
+            delete _doc;
+            _doc = 0;
+            return false;
+            }
 
       int n = _doc->numPages();
       for (int i = 0; i < n; ++i) {
@@ -188,6 +193,5 @@ double Omr::systemDistance() const
       {
       return _pages[0]->systemDistance();
       }
-
 #endif
 

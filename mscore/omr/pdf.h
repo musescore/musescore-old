@@ -28,11 +28,14 @@ typedef struct pdf_xref_s pdf_xref;
 //---------------------------------------------------------
 
 class Pdf {
-      static bool init;
+      static int references;
       pdf_xref* xref;
 
    public:
-      Pdf(const QString& path);
+      Pdf();
+      bool open(const QString& path);
+      ~Pdf();
+
       int numPages() const;
       QImage page(int);
       };

@@ -64,12 +64,12 @@ class Omr {
       void read(QDomElement e);
 
       double spatiumMM() const;           // spatium in millimeter
-      double spatium() const               { return _spatium; }
-      double dpmm() const                  { return _dpmm;    }
+      double spatium() const               { return _spatium;   }
+      double dpmm() const                  { return _dpmm;      }
       double staffDistance() const;
       double systemDistance() const;
-      Score* score() const                 { return _score; }
-      const QString& path() const          { return _path; }
+      Score* score() const                 { return _score;     }
+      const QString& path() const          { return _path;      }
       };
 
 #else
@@ -78,8 +78,8 @@ class Omr {
 //---------------------------------------------------------
 
 class Omr {
-      QList<OmrPage*> _pages;
       QString _path;
+      QList<OmrPage*> _pages;
 
    public:
       Omr(Score*)                          {}
@@ -88,7 +88,7 @@ class Omr {
       int pagesInDocument() const          { return 0; }
       int numPages() const                 { return 0; }
       OmrPage* page(int)                   { return 0; }
-      const QList<OmrPage*>& pages() const  { return _pages; }
+      const QList<OmrPage*>& pages() const { return _pages; }
       OmrView* newOmrView(ScoreView*)      { return 0; }
 #ifdef OCR
       Ocr* ocr() const                     { return 0; }

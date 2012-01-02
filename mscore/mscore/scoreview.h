@@ -42,6 +42,7 @@ class ScoreView;
 class Text;
 class MeasureBase;
 class Staff;
+class OmrView;
 
 enum {
       TEXT_TITLE,
@@ -133,6 +134,7 @@ class ScoreView : public QWidget, public MuseScoreView {
       static const int MAX_GRIPS = 8;
 
       Score* _score;
+      OmrView* _omrView;
 
       // the next elements are used during dragMove to give some visual
       // feedback:
@@ -328,7 +330,6 @@ class ScoreView : public QWidget, public MuseScoreView {
       bool navigatorVisible() const;
       void cmd(const QAction* a);
 
-//      void drag(const QPointF&);
       void startUndoRedo();
       void endUndoRedo();
       void zoom(int step, const QPoint& pos);
@@ -419,6 +420,9 @@ class ScoreView : public QWidget, public MuseScoreView {
       virtual void adjustCanvasPosition(const Element* el, bool playBack);
       virtual void setCursor(const QCursor& c) { QWidget::setCursor(c); }
       virtual QCursor cursor() const { return QWidget::cursor(); }
+
+      OmrView* omrView() const    { return _omrView; }
+      void setOmrView(OmrView* v) { _omrView = v;    }
       };
 
 //---------------------------------------------------------
