@@ -345,6 +345,14 @@ endif (USE_PORTAUDIO)
        target_link_libraries(mscore rt)
    endif (APPLE)
 
+   # gold does not use indirect shared libraries for symbol resolution, Linux only
+   if (NOT MINGW AND NOT APPLE)
+      if(USE_JACK)
+         target_link_libraries(mscore dl)  
+      endif(USE_JACK)
+      target_link_libraries(mscore rt)
+   endif (NOT MINGW AND NOT APPLE)
+
    if (QT45)
      target_link_libraries(mscore ${QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE} )
    endif (QT45)
