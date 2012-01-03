@@ -192,9 +192,9 @@ void Preferences::init()
       usePortaudioAudio  = true;
       useJackMidi        = false;
 #else
-      useAlsaAudio       = true;
+      useAlsaAudio       = false;
       useJackAudio       = false;
-      usePortaudioAudio  = false;
+      usePortaudioAudio  = true;
       useJackMidi        = false;
 #endif
 
