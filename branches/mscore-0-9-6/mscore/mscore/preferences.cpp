@@ -146,9 +146,9 @@ void Preferences::init()
       usePortaudioAudio  = true;
       useJackMidi        = false;
 #else
-      useAlsaAudio       = true;
+      useAlsaAudio       = false;
       useJackAudio       = false;
-      usePortaudioAudio  = false;
+      usePortaudioAudio  = true;
       useJackMidi        = false;
 #endif
       alsaDevice         = "default";
@@ -381,10 +381,10 @@ void Preferences::read()
       useJackMidi        = s.value("useJackMidi",  false).toBool();
       usePortaudioAudio  = s.value("usePortaudioAudio", true).toBool();
 #else
-      useAlsaAudio       = s.value("useAlsaAudio", true).toBool();
+      useAlsaAudio       = s.value("useAlsaAudio", false).toBool();
       useJackAudio       = s.value("useJackAudio", false).toBool();
       useJackMidi        = s.value("useJackMidi",  false).toBool();
-      usePortaudioAudio  = s.value("usePortaudioAudio", false).toBool();
+      usePortaudioAudio  = s.value("usePortaudioAudio", true).toBool();
 #endif
 
       alsaDevice         = s.value("alsaDevice", "default").toString();
