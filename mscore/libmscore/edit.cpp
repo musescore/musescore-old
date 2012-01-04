@@ -47,6 +47,7 @@
 #include "tiemap.h"
 #include "stem.h"
 #include "iname.h"
+#include "durationlist.h"
 
 //---------------------------------------------------------
 //   getSelectedNote
@@ -362,6 +363,7 @@ Note* Score::addNote(Chord* chord, int pitch)
       return note;
       }
 
+#if 0
 //---------------------------------------------------------
 //   addRemoveTimeSigDialog
 //---------------------------------------------------------
@@ -378,6 +380,7 @@ static int addRemoveTimeSigDialog()
             return 1;
       return 0;
       }
+#endif
 
 //---------------------------------------------------------
 //   addCR
@@ -485,7 +488,7 @@ static bool addCR(int tick, ChordRest* cr, Measure* ml)
                         len -= rest;
                         m = m->nextMeasure();
                         if (m == 0) {
-                              printf("eof: len %d %d\n", len.numerator(), len.denominator());
+                              qDebug("eof: len %d %d", len.numerator(), len.denominator());
                               break;
                               }
                         }
@@ -508,39 +511,32 @@ static bool addCR(int tick, ChordRest* cr, Measure* ml)
 
 bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
       {
-      int measures = 1;
-      bool empty = true;
-      for (Measure* m = fm; m != lm; m = m->nextMeasure()) {
-            if (!m->isFullMeasureRest())
-                  empty = false;
-            ++measures;
-            }
-      if (empty) {
-            //
-            // only change measure len
-            //
-            Measure* m = fm;
-            for (int i = 0; i < measures; ++i, m = m->nextMeasure()) {
-                  undo(new ChangeMeasureProperties(
-                     m, ns, ns, m->getBreakMultiMeasureRest(), m->repeatCount(),
-                     m->userStretch(), m->noOffset(), m->irregular()));
-                  int strack = 0;
-                  int etrack = nstaves() * VOICES;
-                  Segment* s = m->first(SegChordRest);
-                  for (int track = strack; track < etrack; ++track) {
-                        Element* e = s->element(track);
-                        if (e) {
-                              Rest* rest = static_cast<Rest*>(e);
-                              undo(new ChangeDuration(rest, ns));
-                              }
-                        }
+      int tracks = nstaves() * VOICES;
+
+      QList<DurationList*> lists;
+      bool canWrite = true;
+      for (int track = 0; track < tracks; ++track) {
+            DurationList* dl = new DurationList(track, fm, lm);
+            lists.append(dl);
+            if (!dl->canWrite(ns)) {
+                  canWrite = false;
+                  break;
                   }
-            return true;
             }
+      if (!canWrite) {
+            foreach(DurationList* dl, lists)
+                  delete dl;
+            return false;
+            }
+
       undo(new RemoveMeasures(fm, lm));
-      Fraction k = fm->len() * measures;
-      k /= ns;
-      int nm = (k.numerator() + k.denominator() - 1)/ k.denominator();
+      //
+      // calculate number of required measures = nm
+      //
+      Fraction k   = lists[0]->duration();
+      k           /= ns;
+      int nm       = (k.numerator() + k.denominator() - 1)/ k.denominator();
+
       Measure* nfm = 0;
       Measure* nlm = 0;
 
@@ -555,54 +551,17 @@ bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
             m->setTick(tick);
             tick += m->ticks();
             nlm = m;
-            if (i == 0)
+            if (nfm == 0)
                   nfm = m;
             }
-      //
-      // rewrite notes from measure list fm into
-      // measure list nfm
-      //
-
-      int stick  = fm->tick();
-      int etick  = stick + measures * fm->ticks();
-      int tracks = fm->staffList()->size() * VOICES;
-      int detick = nm * ns.ticks();
-
-      for (int track = 0; track < tracks;  ++track) {
-            int tick = 0;
-            for (Segment* s = fm->first(); s; s = s->next1()) {
-                  if (s->tick() >= etick)
-                        break;
-                  if (s->subtype() != SegChordRest || s->element(track) == 0)
-                        continue;
-                  ChordRest* cr = static_cast<ChordRest*>(s->element(track));
-                  ChordRest* ncr = static_cast<ChordRest*>(cr->clone());
-
-                  ncr->setSlurFor(cr->slurFor());
-                  ncr->setSlurBack(cr->slurBack());
-
-                  tick = s->tick() - stick;
-                  int ticks = ncr->actualTicks();
-                  if (!addCR(tick, ncr, nfm)) {
-                        undo()->pop();
-                        // TODO: unwind creation of measures
-                        return false;
-                        }
-                  tick += ticks;
-                  }
-            //
-            // fill last measure with rest(s) if necessary
-            //
-            if ((track % VOICES) == 0 && tick < detick) {
-                  int restTicks = detick - tick;
-                  Rest* rest = new Rest(this);
-                  rest->setTrack(track);
-                  rest->setDurationType(restTicks);
-                  rest->setDuration(Fraction::fromTicks(restTicks));
-                  addCR(tick, rest, nfm);
+      for (int track = 0; track < tracks; ++track) {
+            if (!lists[track]->write(track, nfm)) {
+                  qDebug("cannot write measures\n");
+                  abort();
                   }
             }
-
+      foreach(DurationList* dl, lists)
+            delete dl;
       //
       // insert new calculated measures
       //
@@ -611,7 +570,6 @@ bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
       undo(new InsertMeasures(nfm, nlm));
       return true;
       }
-
 
 //---------------------------------------------------------
 //   warnTupletCrossing
@@ -722,12 +680,12 @@ qDebug("   cmdAddTimeSig1");
             n = 0;
             }
       else
-            n = addRemoveTimeSigDialog();
-      if (n == -1) {
+            n = 1;      // addRemoveTimeSigDialog();
+/*      if (n == -1) {
             delete ts;
             return;
             }
-
+  */
       if (n == 0) {
             //
             // Set time signature of all measures up to next
@@ -799,9 +757,12 @@ void Score::timesigStretchChanged(TimeSig* ts, Measure* fm, int staffIdx)
 
 void Score::cmdRemoveTimeSig(TimeSig* ts)
       {
+      int n = 1;
+#if 0
       int n = addRemoveTimeSigDialog();
       if (n == -1)
             return;
+#endif
 
       undoRemoveElement(ts->segment());
 

@@ -63,6 +63,7 @@ class Tuplet : public DurationElement {
 
    public:
       Tuplet(Score*);
+      Tuplet(const Tuplet&);
       ~Tuplet();
       virtual Tuplet* clone() const    { return new Tuplet(*this); }
       virtual ElementType type() const { return TUPLET; }

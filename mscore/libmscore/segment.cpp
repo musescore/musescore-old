@@ -490,6 +490,7 @@ void Segment::add(Element* el)
                   if (_elist[track]) {
                         qDebug("Segment::add(%s) there is already an %s at %d track %d\n",
                            el->name(), _elist[track]->name(), tick(), track);
+                        abort();
                         }
                   if (track % VOICES)
                         measure()->mstaff(staffIdx)->hasVoices = true;

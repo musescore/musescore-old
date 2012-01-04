@@ -22,14 +22,16 @@
 Spacer::Spacer(Score* score)
    : Element(score)
       {
+      _subtype = SPACER_UP;
       _gap = 0.0;
       }
 
 Spacer::Spacer(const Spacer& s)
    : Element(s)
       {
-      _gap = s._gap;
-      path = s.path;
+      _gap    = s._gap;
+      path    = s.path;
+      _subtype = s._subtype;
       }
 
 //---------------------------------------------------------

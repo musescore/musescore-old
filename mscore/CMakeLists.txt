@@ -307,19 +307,19 @@ add_custom_command(
 set(CMAKE_CXX_FLAGS_DEBUG   "")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG")
 
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+if (CMAKE_BUILD_TYPE STREQUAL "DEBUG")
       if (MINGW)
             set(FLAGS -DQT_DEBUG -DQT_DLL)
       else (MINGW)
             set (FLAGS -DQT_DEBUG)
       endif (MINGW)
-else (CMAKE_BUILD_TYPE STREQUAL "Debug")
+else (CMAKE_BUILD_TYPE STREQUAL "DEBUG")
       if (MINGW)
             set(FLAGS -O2 -DNDEBUG -DQT_DLL -DQT_NO_DEBUG)
       else (MINGW)
             set(FLAGS -O2 -DNDEBUG -DQT_NO_DEBUG)
       endif (MINGW)
-endif (CMAKE_BUILD_TYPE STREQUAL "Debug")
+endif (CMAKE_BUILD_TYPE STREQUAL "DEBUG")
 
 if (${CMAKE_CXX_COMPILER_ID} EQUAL "Clang")
       add_custom_command(
