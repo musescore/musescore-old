@@ -364,8 +364,6 @@ endif (USE_PORTAUDIO)
    else (APPLE)
      install( TARGETS mscore RUNTIME DESTINATION bin )
      install( FILES   data/mscore.png DESTINATION share/pixmaps)
-     install( FILES   data/icons/mscore.xpm DESTINATION share/pixmaps)
-     install( FILES   data/icons-dark/mscore.xpm DESTINATION share/pixmaps)
    endif (APPLE)
 endif (MINGW)
 
