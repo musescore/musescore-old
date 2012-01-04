@@ -14,27 +14,18 @@
 #ifndef __ELEMENTMAP_H__
 #define __ELEMENTMAP_H__
 
-//---------------------------------------------------------
-//   Element2
-//---------------------------------------------------------
-
-struct Element2 {
-      Element* o;
-      Element* n;
-      Element2(Element* _o, Element* _n) : o(_o), n(_n) {}
-      };
+class Element;
 
 //---------------------------------------------------------
 //   ElementMap
 //---------------------------------------------------------
 
-class ElementMap {
-      QList<Element2> map;
+class ElementMap : QHash<Element*, Element*> {
 
    public:
       ElementMap() {}
-      Element* findNew(Element* o) const;
-      void add(Element* _o, Element* _n) { map.append(Element2(_o, _n)); }
+      Element* findNew(Element* o) const { return value(o); }
+      void add(Element* o, Element* n)   { insert(o, n); }
       };
 
 #endif

@@ -22,18 +22,39 @@
 #include "tuplet.h"
 #include "utils.h"
 
-//
-// DurationList
-//    list of:
-//    Chord       splittable
-//    Rest        splittable
-//    Tuplet      not splittable
+//---------------------------------------------------------
+//   moveSlur
+//---------------------------------------------------------
+
+static void moveSlur(ChordRest* src, ChordRest* dst, QHash<Slur*, Slur*>* map)
+      {
+      foreach(Slur* oldSlur, src->slurFor()) {
+            Slur* newSlur = new Slur(*oldSlur);
+            map->insert(oldSlur, newSlur);
+            dst->addSlurFor(newSlur);
+            newSlur->setStartElement(dst);
+            }
+      foreach(Slur* oldSlur, src->slurBack()) {
+            Slur* newSlur = map->value(oldSlur);
+            if (newSlur) {
+                  dst->addSlurBack(newSlur);
+                  newSlur->setEndElement(dst);
+                  map->remove(oldSlur);
+                  }
+            else {
+                  printf("moveSlur: slur not found\n");
+                  // TODO: handle failure case:
+                  // - remove start slur from chord/rest
+                  // - delete slur
+                  }
+            }
+      }
 
 //---------------------------------------------------------
 //   append
 //---------------------------------------------------------
 
-void DurationList::append(DurationElement* e)
+void DurationList::append(DurationElement* e, QHash<Slur*, Slur*>* map)
       {
       Q_ASSERT(e->type() == TUPLET || e->type() == CHORD || e->type() == REST);
 
@@ -47,6 +68,11 @@ void DurationList::append(DurationElement* e)
                   Tuplet* dstTuplet = static_cast<Tuplet*>(element);
                   foreach(const DurationElement* de, srcTuplet->elements())
                         dstTuplet->add(de->clone());
+                  }
+            else if (map) {
+                  ChordRest* src = static_cast<ChordRest*>(e);
+                  ChordRest* dst = static_cast<ChordRest*>(element);
+                  moveSlur(src, dst, map);
                   }
             }
       else {
@@ -82,11 +108,14 @@ void DurationList::appendGap(const Fraction& d)
 //   read
 //---------------------------------------------------------
 
-void DurationList::read(int track, const Measure* fm, const Measure* lm)
+void DurationList::read(int track, const Segment* fs, const Segment* es,
+   QHash<Slur*, Slur*>* map)
       {
-      int tick = fm->tick();
+      int tick = fs->tick();
       int gap = 0;
-      for (Segment* s = fm->first(SegChordRest); s; s = s->next1(SegChordRest)) {
+      for (const Segment* s = fs; s; s = s->next1()) {
+            if (s->subtype() != SegChordRest)
+                  continue;
             DurationElement* e = static_cast<ChordRest*>(s->element(track));
             if (!e)
                   continue;
@@ -109,17 +138,15 @@ void DurationList::read(int track, const Measure* fm, const Measure* lm)
                   s = static_cast<ChordRest*>(de)->segment();
                   // continue with first chord/rest after tuplet
                   }
-            if (gap) {
+            if (gap)
                   appendGap(Fraction::fromTicks(gap));
-                  }
-            append(e);
+            append(e, map);
             tick += e->duration().ticks();;
-            if (s == lm->last())
+            if (s == es)
                   break;
             }
-      gap = lm->tick() + lm->ticks() - tick;
+      gap = es->tick() - tick;
       if (gap) {
-            printf("append gap at %d ticks %d\n", tick, gap);
             appendGap(Fraction::fromTicks(gap));
             }
       }
@@ -128,7 +155,7 @@ void DurationList::read(int track, const Measure* fm, const Measure* lm)
 //   writeTuplet
 //---------------------------------------------------------
 
-Tuplet* DurationList::writeTuplet(Tuplet* tuplet, Measure* measure, int tick)
+Tuplet* DurationList::writeTuplet(Tuplet* tuplet, Measure* measure, int tick) const
       {
       Tuplet* dt = tuplet->clone();
       dt->setParent(measure);
@@ -153,7 +180,7 @@ Tuplet* DurationList::writeTuplet(Tuplet* tuplet, Measure* measure, int tick)
 //    check if list can be written to measure list m
 //---------------------------------------------------------
 
-bool DurationList::canWrite(const Fraction& measureLen)
+bool DurationList::canWrite(const Fraction& measureLen) const
       {
       Fraction pos;
       Fraction rest = measureLen;
@@ -186,7 +213,7 @@ bool DurationList::canWrite(const Fraction& measureLen)
 //    rewrite notes into measure list m
 //---------------------------------------------------------
 
-bool DurationList::write(int track, Measure* measure)
+bool DurationList::write(int track, Measure* measure, QHash<Slur*, Slur*>* map) const
       {
       Fraction pos;
       Measure* m       = measure;
@@ -223,6 +250,7 @@ bool DurationList::write(int track, Measure* measure)
                               Rest* r = new Rest(score, TDuration(d));
                               r->setTrack(track);
                               segment->add(r);
+                              moveSlur(static_cast<ChordRest*>(e), r, map);
                               duration -= d;
                               rest -= d;
                               pos += d;
@@ -233,6 +261,7 @@ bool DurationList::write(int track, Measure* measure)
                               c->setTrack(track);
                               c->setDuration(d);
                               c->setDurationType(TDuration(d));
+                              moveSlur(static_cast<ChordRest*>(e), c, map);
                               segment->add(c);
                               duration -= d;
                               rest     -= d;
@@ -284,5 +313,60 @@ bool DurationList::write(int track, Measure* measure)
                   break;
             }
       return true;
+      }
+
+//---------------------------------------------------------
+//   canWrite
+//---------------------------------------------------------
+
+bool ScoreRange::canWrite(const Fraction& f) const
+      {
+      foreach(DurationList dl, tracks) {
+            if (!dl.canWrite(f))
+                  return false;
+            }
+      return true;
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void ScoreRange::read(Segment* first, Segment* last, int startTrack, int endTrack)
+      {
+      spannerMap.clear();
+      for (int track = startTrack; track < endTrack; ++track) {
+            DurationList dl;
+            dl.read(track, first, last, &spannerMap);
+            tracks.append(dl);
+            }
+      if (!spannerMap.isEmpty())
+            printf("ScoreRange::read(): dangling Slurs\n");
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+bool ScoreRange::write(int track, Measure* m) const
+      {
+      spannerMap.clear();
+      foreach(DurationList dl, tracks) {
+            if (!dl.write(track, m, &spannerMap))
+                  return false;
+            ++track;
+            }
+      if (!spannerMap.isEmpty())
+            printf("ScoreRange::write(): dangling Slurs\n");
+      return true;
+      }
+
+//---------------------------------------------------------
+//   duration
+//---------------------------------------------------------
+
+Fraction ScoreRange::duration() const
+      {
+      return tracks.isEmpty() ? Fraction() : tracks[0].duration();
       }
 

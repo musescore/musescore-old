@@ -157,61 +157,6 @@ Score* createExcerpt(const QList<Part*>& parts)
       }
 
 //---------------------------------------------------------
-//   findNew
-//---------------------------------------------------------
-
-Tuplet* TupletMap::findNew(Tuplet* o)
-      {
-      foreach(const Tuplet2& t2, map) {
-            if (t2.o == o)
-                  return t2.n;
-            }
-      return 0;
-      }
-
-//---------------------------------------------------------
-//   findNew
-//---------------------------------------------------------
-
-Slur* SlurMap::findNew(Slur* o)
-      {
-      foreach(const Slur2& s2, map) {
-            if (s2.o == o)
-                  return s2.n;
-            }
-      return 0;
-      }
-
-//---------------------------------------------------------
-//   check
-//---------------------------------------------------------
-
-void SlurMap::check()
-      {
-      foreach(const Slur2& s2, map) {
-            Slur* slur = s2.n;
-            if (slur->endElement() == 0) {
-                  qDebug("slur end element missing %p new %p\n", s2.o, s2.n);
-                  static_cast<ChordRest*>(slur->startElement())->removeSlurFor(slur);
-                  delete slur;
-                  }
-            }
-      }
-
-//---------------------------------------------------------
-//   findNew
-//---------------------------------------------------------
-
-Element* ElementMap::findNew(Element* o) const
-      {
-      foreach(const Element2& s2, map) {
-            if (s2.o == o)
-                  return s2.n;
-            }
-      return 0;
-      }
-
-//---------------------------------------------------------
 //   cloneStaves
 //---------------------------------------------------------
 

@@ -19,6 +19,8 @@
 class DurationElement;
 class Measure;
 class Tuplet;
+class Segment;
+class Slur;
 
 //---------------------------------------------------------
 //   DurationList
@@ -28,17 +30,32 @@ class DurationList : public QList<DurationElement*>
       {
       Fraction _duration;
 
-      Tuplet* writeTuplet(Tuplet* tuplet, Measure* measure, int tick);
-      void append(DurationElement*);
+      Tuplet* writeTuplet(Tuplet* tuplet, Measure* measure, int tick) const;
+      void append(DurationElement*, QHash<Slur*, Slur*>*);
       void appendGap(const Fraction&);
 
    public:
       DurationList() {}
-      DurationList(int track, const Measure* fm, const Measure* lm) { read(track, fm, lm); }
-      void read(int track, const Measure* fm, const Measure* lm);
-      bool canWrite(const Fraction& f);
-      bool write(int track, Measure*);
+      void read(int track, const Segment* fs, const Segment* ls, QHash<Slur*, Slur*>*);
+      bool canWrite(const Fraction& f) const;
+      bool write(int track, Measure*, QHash<Slur*, Slur*>*) const;
       Fraction duration() const  { return _duration; }
       };
 
+//---------------------------------------------------------
+//   ScoreRange
+//---------------------------------------------------------
+
+class ScoreRange {
+      mutable QHash<Slur*, Slur*> spannerMap;
+      QList<DurationList> tracks;
+
+   public:
+      void read(Segment* first, Segment* last, int startTrack, int endTrack);
+      bool canWrite(const Fraction&) const;
+      bool write(int track, Measure*) const;
+      Fraction duration() const;
+      };
+
 #endif
+
