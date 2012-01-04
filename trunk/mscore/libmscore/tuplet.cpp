@@ -39,6 +39,32 @@ Tuplet::Tuplet(Score* s)
       _direction    = AUTO;
       }
 
+Tuplet::Tuplet(const Tuplet& t)
+   : DurationElement(t)
+      {
+      _tick         = t._tick;
+      _numberType   = t._numberType;
+      _bracketType  = t._bracketType;
+      _hasBracket   = t._hasBracket;
+      _userModified = t._userModified;
+      _ratio        = t._ratio;
+      _baseLen      = t._baseLen;
+
+      _direction    = t._direction;
+      _isUp         = t._isUp;
+
+      _userModified = t._userModified;
+      p1            = t.p1;
+      p2            = t.p2;
+      _p1           = t._p1;
+      _p2           = t._p2;
+
+      if (t._number)
+            _number = new Text(*t._number);
+      else
+            _number = 0;
+      }
+
 //---------------------------------------------------------
 //   ~Tuplet
 //---------------------------------------------------------
@@ -50,6 +76,7 @@ Tuplet::~Tuplet()
       //
       foreach(DurationElement* e, _elements)
             e->setTuplet(0);
+      delete _number;
       }
 
 //---------------------------------------------------------
@@ -571,6 +598,7 @@ void Tuplet::add(Element* e)
                               }
                         }
                   _elements.append(de);
+                  de->setTuplet(this);
                   }
 
                   // the tick position of a tuplet is the tick position of its

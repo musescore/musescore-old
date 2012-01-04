@@ -31,6 +31,7 @@ TimeSig::TimeSig(Score* s)
       _showCourtesySig = true;
       customText = false;
       _stretch.set(1, 1);
+      setSubtype(TSIG_NORMAL);
       }
 
 TimeSig::TimeSig(Score* s, TimeSigType st)
