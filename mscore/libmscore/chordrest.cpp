@@ -84,7 +84,8 @@ ChordRest::ChordRest(const ChordRest& cr)
       {
       _durationType = cr._durationType;
       _staffMove    = cr._staffMove;
-      _tabDur       = 0;                  // tab sur. symb. depends upon context: can't be simply copied from another CR
+      _tabDur       = 0;  // tab sur. symb. depends upon context: can't be
+                          // simply copied from another CR
 
       foreach(Articulation* a, cr.articulations) {    // make deep copy
             Articulation* na = new Articulation(*a);
@@ -93,13 +94,11 @@ ChordRest::ChordRest(const ChordRest& cr)
             articulations.append(na);
             }
 
-      _beam               = 0;
-      _beamMode           = cr._beamMode;
-      _up                 = cr._up;
-      _small              = cr._small;
-//      _extraLeadingSpace  = cr.extraLeadingSpace();
-//      _extraTrailingSpace = cr.extraTrailingSpace();
-      _space              = cr._space;
+      _beam      = 0;
+      _beamMode  = cr._beamMode;
+      _up        = cr._up;
+      _small     = cr._small;
+      _space     = cr._space;
 
       foreach(Lyrics* l, cr._lyricsList) {        // make deep copy
             Lyrics* nl = new Lyrics(*l);

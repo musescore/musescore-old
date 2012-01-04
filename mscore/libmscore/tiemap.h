@@ -16,6 +16,8 @@
 
 #include "elementmap.h"
 
+class Tie;
+
 //---------------------------------------------------------
 //   TieMap
 //---------------------------------------------------------
@@ -23,8 +25,8 @@
 class TieMap : public ElementMap {
    public:
       TieMap() {}
-      Tie* findNew(Tie* o) const { return static_cast<Tie*>(ElementMap::findNew(o)); }
-      void add(Tie* _o, Tie* _n) { ElementMap::add(_o, _n); }
+      Tie* findNew(Tie* o) const { return (Tie*)(ElementMap::findNew((Element*)o)); }
+      void add(Tie* _o, Tie* _n) { ElementMap::add((Element*)_o, (Element*)_n); }
       };
 
 #endif

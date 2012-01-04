@@ -16,6 +16,9 @@
 
 #include "elementmap.h"
 
+class Spanner;
+class Element;
+
 //---------------------------------------------------------
 //   SpannerMap
 //---------------------------------------------------------
@@ -23,8 +26,8 @@
 class SpannerMap : public ElementMap {
    public:
       SpannerMap() {}
-      Spanner* findNew(Spanner* o) const { return static_cast<Spanner*>(ElementMap::findNew(o)); }
-      void add(Spanner* _o, Spanner* _n) { ElementMap::add(_o, _n); }
+      Spanner* findNew(Spanner* o) const { return (Spanner*)(ElementMap::findNew((Element*)o)); }
+      void add(Spanner* _o, Spanner* _n) { ElementMap::add((Element*)_o, (Element*)_n); }
       };
 
 #endif

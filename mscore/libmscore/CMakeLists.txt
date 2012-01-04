@@ -42,7 +42,7 @@ add_library (
       check.cpp input.cpp icon.cpp ossia.cpp
       dsp.cpp tempo.cpp sig.cpp pos.cpp fraction.cpp duration.cpp
       figuredbass.cpp simpletext.cpp rehearsalmark.cpp transpose.cpp
-      property.cpp durationlist.cpp
+      property.cpp durationlist.cpp elementmap.cpp
       )
 set_target_properties (
       libmscore

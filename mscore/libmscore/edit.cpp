@@ -513,27 +513,16 @@ bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
       {
       int tracks = nstaves() * VOICES;
 
-      QList<DurationList*> lists;
-      bool canWrite = true;
-      for (int track = 0; track < tracks; ++track) {
-            DurationList* dl = new DurationList(track, fm, lm);
-            lists.append(dl);
-            if (!dl->canWrite(ns)) {
-                  canWrite = false;
-                  break;
-                  }
-            }
-      if (!canWrite) {
-            foreach(DurationList* dl, lists)
-                  delete dl;
+      ScoreRange range;
+      range.read(fm->first(), lm->last(), 0, tracks);
+      if (!range.canWrite(ns))
             return false;
-            }
 
       undo(new RemoveMeasures(fm, lm));
       //
       // calculate number of required measures = nm
       //
-      Fraction k   = lists[0]->duration();
+      Fraction k   = range.duration();
       k           /= ns;
       int nm       = (k.numerator() + k.denominator() - 1)/ k.denominator();
 
@@ -554,14 +543,10 @@ bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
             if (nfm == 0)
                   nfm = m;
             }
-      for (int track = 0; track < tracks; ++track) {
-            if (!lists[track]->write(track, nfm)) {
-                  qDebug("cannot write measures\n");
-                  abort();
-                  }
+      if (!range.write(0, nfm)) {
+            qDebug("cannot write measures\n");
+            abort();
             }
-      foreach(DurationList* dl, lists)
-            delete dl;
       //
       // insert new calculated measures
       //
