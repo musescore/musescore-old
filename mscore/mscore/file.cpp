@@ -1212,10 +1212,12 @@ bool Score::read(QDomElement e)
             _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
             if (_mscVersion > MSCVERSION) {
                   // incompatible version
-                  QMessageBox::critical(0, tr("MuseScore"),
-                     QT_TRANSLATE_NOOP("score", "Cannot read this score:\n"
-                        "your version of MuseScore is too old.")
-                     );
+                  if(!noGui) {
+                        QMessageBox::critical(0, tr("MuseScore"),
+                           QT_TRANSLATE_NOOP("score", "Cannot read this score:\n"
+                              "your version of MuseScore is too old.")
+                           );
+                        }
                   return false;
                   }
 

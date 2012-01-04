@@ -1534,16 +1534,18 @@ void Score::insertMeasures(int n, int type)
                   m = new HBox(this);
             else        // if (type == VBOX)
                   m = new VBox(this);
-		m->setTick(tick);
+                  
+		    m->setTick(tick);
+            
             if (type == MEASURE) {
-      	      Measure* measure = static_cast<Measure*>(m);
-	      	for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-    		            Rest* rest = new Rest(this, tick, Duration(Duration::V_MEASURE));
-        	      	rest->setTrack(staffIdx * VOICES);
-        		      Segment* s = measure->getSegment(rest);
-        			s->add(rest);
-		            }
-              	undoFixTicks();
+      	          Measure* measure = static_cast<Measure*>(m);
+	      	        for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+    		               Rest* rest = new Rest(this, tick, Duration(Duration::V_MEASURE));
+        	      	     rest->setTrack(staffIdx * VOICES);
+        		           Segment* s = measure->getSegment(rest);
+        			         s->add(rest);
+		                   }
+              	  undoFixTicks();
 
                   QList<TimeSig*> tsl;
                   QList<KeySig*>  ksl;
