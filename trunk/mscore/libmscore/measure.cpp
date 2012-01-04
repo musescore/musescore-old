@@ -2643,6 +2643,10 @@ bool Measure::isRepeatMeasure()
       int etrack = score()->nstaves() * VOICES;
 
       Segment* s = first(SegChordRest);
+      
+      if(s == 0)
+            return false;
+      
       for (int track = strack; track < etrack; ++track) {
             Element* e = s->element(track);
             if (e && e->type() == REPEAT_MEASURE)
