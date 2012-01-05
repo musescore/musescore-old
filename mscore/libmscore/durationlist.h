@@ -36,6 +36,7 @@ class DurationList : public QList<DurationElement*>
 
    public:
       DurationList() {}
+      ~DurationList();
       void read(int track, const Segment* fs, const Segment* ls, QHash<Spanner*, Spanner*>*);
       bool canWrite(const Fraction& f) const;
       bool write(int track, Measure*, QHash<Spanner*, Spanner*>*) const;
@@ -48,9 +49,11 @@ class DurationList : public QList<DurationElement*>
 
 class ScoreRange {
       mutable QHash<Spanner*, Spanner*> spannerMap;
-      QList<DurationList> tracks;
+      QList<DurationList*> tracks;
 
    public:
+      ScoreRange() {}
+      ~ScoreRange();
       void read(Segment* first, Segment* last, int startTrack, int endTrack);
       bool canWrite(const Fraction&) const;
       bool write(int track, Measure*) const;

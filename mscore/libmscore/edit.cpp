@@ -515,10 +515,8 @@ static bool addCR(int tick, ChordRest* cr, Measure* ml)
 
 bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
       {
-      int tracks = nstaves() * VOICES;
-
       ScoreRange range;
-      range.read(fm->first(), lm->last(), 0, tracks);
+      range.read(fm->first(), lm->last(), 0, nstaves() * VOICES);
       if (!range.canWrite(ns))
             return false;
 
