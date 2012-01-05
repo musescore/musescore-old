@@ -16,27 +16,27 @@
 
 #include "fraction.h"
 
-class DurationElement;
+class Element;
 class Measure;
 class Tuplet;
 class Segment;
 class Spanner;
 
 //---------------------------------------------------------
-//   DurationList
+//   TrackList
 //---------------------------------------------------------
 
-class DurationList : public QList<DurationElement*>
+class TrackList : public QList<Element*>
       {
       Fraction _duration;
 
       Tuplet* writeTuplet(Tuplet* tuplet, Measure* measure, int tick) const;
-      void append(DurationElement*, QHash<Spanner*, Spanner*>*);
+      void append(Element*, QHash<Spanner*, Spanner*>*);
       void appendGap(const Fraction&);
 
    public:
-      DurationList() {}
-      ~DurationList();
+      TrackList() {}
+      ~TrackList();
       void read(int track, const Segment* fs, const Segment* ls, QHash<Spanner*, Spanner*>*);
       bool canWrite(const Fraction& f) const;
       bool write(int track, Measure*, QHash<Spanner*, Spanner*>*) const;
@@ -49,7 +49,7 @@ class DurationList : public QList<DurationElement*>
 
 class ScoreRange {
       mutable QHash<Spanner*, Spanner*> spannerMap;
-      QList<DurationList*> tracks;
+      QList<TrackList*> tracks;
 
    public:
       ScoreRange() {}
