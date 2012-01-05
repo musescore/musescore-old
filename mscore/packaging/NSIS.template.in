@@ -149,6 +149,14 @@ Var AR_RegFlags
 !macroend
 ;--- End of Add/Remove macros ---
 
+Function InstallDesktopShortcut
+  CreateShortcut "$DESKTOP\MuseScore.lnk" "$INSTDIR\bin\@CPACK_PACKAGE_NAME@.exe"
+FunctionEnd
+
+Function un.InstallDesktopShortcut
+  Delete "$DESKTOP\MuseScore.lnk"
+FunctionEnd
+
 ;--------------------------------
 ;Interface Settings
 
@@ -157,7 +165,11 @@ Var AR_RegFlags
   !define MUI_FINISHPAGE_LINK "http://musescore.org"
   !define MUI_FINISHPAGE_LINK_LOCATION "http://musescore.org"
   !define MUI_FINISHPAGE_RUN "$INSTDIR\bin\@CPACK_PACKAGE_NAME@.exe"
-    
+  !define MUI_FINISHPAGE_SHOWREADME ""
+  !define MUI_FINISHPAGE_SHOWREADME_CHECKED
+  !define MUI_FINISHPAGE_SHOWREADME_TEXT $(createDesktopShortcut)
+  !define MUI_FINISHPAGE_SHOWREADME_FUNCTION InstallDesktopShortcut
+  
 ;--------------------------------
 ; path functions
 
@@ -593,7 +605,12 @@ FunctionEnd
   !insertmacro MUI_LANGUAGE "Turkish"
   !insertmacro MUI_LANGUAGE "Ukrainian"
   !insertmacro MUI_LANGUAGE "Welsh"
-
+  
+  LangString createDesktopShortcut ${LANG_ENGLISH} "Create desktop shortcut"
+  LangString createDesktopShortcut ${LANG_FRENCH} "Créer un raccourci sur le bureau"
+  LangString createDesktopShortcut ${LANG_SPANISH} "Crear un acceso directo en el escritorio"
+  LangString createDesktopShortcut ${LANG_DUTCH} "Snelkoppeling op bureablad aanmaken"
+  LangString createDesktopShortcut ${LANG_GERMAN} "Desktop-Verknüpfung erstellen"
 
 ;--------------------------------
 ;Reserve Files
@@ -810,6 +827,9 @@ Section "Uninstall"
   ;Remove the installation directory if it is empty.
   RMDir "$INSTDIR"
 
+  ; Remove Desktop shortcut
+  Call un.InstallDesktopShortcut
+  
   ; Remove the registry entries.
   DeleteRegKey SHCTX "Software\@CPACK_PACKAGE_VENDOR@\@CPACK_PACKAGE_INSTALL_REGISTRY_KEY@"
 
