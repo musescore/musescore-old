@@ -11,7 +11,7 @@
 //  the file LICENCE.GPL
 //=============================================================================
 
-#include "durationlist.h"
+#include "range.h"
 #include "measure.h"
 #include "segment.h"
 #include "rest.h"
@@ -36,14 +36,14 @@ static void cleanupTuplet(Tuplet* t)
       }
 
 //---------------------------------------------------------
-//   DurationList
+//   TrackList
 //---------------------------------------------------------
 
-DurationList::~DurationList()
+TrackList::~TrackList()
       {
       int n = size();
       for (int i = 0; i < n; ++i) {
-            DurationElement* e = at(i);
+            Element* e = at(i);
             if (e->isChordRest()) {
                   ChordRest* cr = static_cast<ChordRest*>(e);
                   foreach(Spanner* sp, cr->spannerFor())
@@ -51,7 +51,7 @@ DurationList::~DurationList()
                   foreach(Element* el, cr->annotations())
                         delete el;
                   }
-            else {
+            else if (e->type() == TUPLET) {
                   Tuplet* t = static_cast<Tuplet*>(e);
                   cleanupTuplet(t);
                   }
@@ -102,6 +102,7 @@ static void writeSpanner(int track, ChordRest* src, ChordRest* dst,
       {
       foreach(Spanner* oldSpanner, src->spannerFor()) {
             Spanner* newSpanner = static_cast<Spanner*>(oldSpanner->clone());
+            newSpanner->setTrack(track);
             map->insert(oldSpanner, newSpanner);
             if (newSpanner->type() == SLUR) {
                   dst->addSpannerFor(newSpanner);
@@ -135,6 +136,7 @@ static void writeSpanner(int track, ChordRest* src, ChordRest* dst,
             }
       foreach(Element* e, src->annotations()) {
             Element* element = e->clone();
+            element->setTrack(track);
             segment->add(element);
             }
       }
@@ -143,59 +145,61 @@ static void writeSpanner(int track, ChordRest* src, ChordRest* dst,
 //   append
 //---------------------------------------------------------
 
-void DurationList::append(DurationElement* e, QHash<Spanner*,Spanner*>* map)
+void TrackList::append(Element* e, QHash<Spanner*,Spanner*>* map)
       {
-      Q_ASSERT(e->type() == TUPLET || e->type() == CHORD || e->type() == REST);
+      if (e->isDurationElement()) {
+            _duration += static_cast<DurationElement*>(e)->duration();
 
-      _duration += e->duration();
-
-      if (e->type() == TUPLET || e->type() == CHORD || isEmpty() || back()->type() != REST) {
-            Element* element = e->clone();
-            QList<DurationElement*>::append(static_cast<DurationElement*>(element));
-            if (element->type() == TUPLET) {
-                  Tuplet* srcTuplet = static_cast<Tuplet*>(e);
-                  Tuplet* dstTuplet = static_cast<Tuplet*>(element);
-                  foreach(const DurationElement* de, srcTuplet->elements())
-                        dstTuplet->add(de->clone());
+            if (e->type() == REST && !isEmpty() && back()->type() == REST) {
+                  // akkumulate rests
+                  Rest* rest = static_cast<Rest*>(back());
+                  Fraction d = rest->duration();
+                  d += static_cast<Rest*>(e)->duration();
+                  rest->setDuration(d);
                   }
-            else if (map) {
-                  ChordRest* src = static_cast<ChordRest*>(e);
-                  ChordRest* dst = static_cast<ChordRest*>(element);
-                  readSpanner(-1, src->spannerFor(), src->spannerBack(), dst, map);
-                  Segment* s = src->segment();
-                  readSpanner(src->track(), s->spannerFor(), s->spannerBack(), dst, map);
-                  foreach(Element* ee, src->segment()->annotations()) {
-                        if (ee->track() == e->track())
-                              dst->annotations().append(ee->clone());
+            else {
+                  Element* element = e->clone();
+                  QList<Element*>::append(element);
+                  if (element->type() == TUPLET) {
+                        Tuplet* srcTuplet = static_cast<Tuplet*>(e);
+                        Tuplet* dstTuplet = static_cast<Tuplet*>(element);
+                        foreach(const DurationElement* de, srcTuplet->elements())
+                              dstTuplet->add(de->clone());
+                        }
+                  else if (map) {
+                        ChordRest* src = static_cast<ChordRest*>(e);
+                        ChordRest* dst = static_cast<ChordRest*>(element);
+                        readSpanner(-1, src->spannerFor(), src->spannerBack(), dst, map);
+                        Segment* s = src->segment();
+                        readSpanner(src->track(), s->spannerFor(), s->spannerBack(), dst, map);
+                        foreach(Element* ee, src->segment()->annotations()) {
+                              if (ee->track() == e->track())
+                                    dst->annotations().append(ee->clone());
+                              }
                         }
                   }
             }
-      else {
-            // akkumulate rests
-            DurationElement* rest = back();
-            Fraction d = rest->duration();
-            d += e->duration();
-            rest->setDuration(d);
-            }
+      else if (e->type() == CLEF)
+            QList<Element*>::append(e->clone());
       }
 
 //---------------------------------------------------------
 //   appendGap
 //---------------------------------------------------------
 
-void DurationList::appendGap(const Fraction& d)
+void TrackList::appendGap(const Fraction& d)
       {
       _duration += d;
       if (!isEmpty() && (back()->type() == REST)) {
-            DurationElement* rest = back();
+            Rest* rest = static_cast<Rest*>(back());
             Fraction dd = rest->duration();
-            dd += rest->duration();
+            dd += d;
             rest->setDuration(dd);
             }
       else {
             Rest* rest = new Rest(0);
             rest->setDuration(d);
-            QList<DurationElement*>::append(static_cast<DurationElement*>(rest));
+            QList<Element*>::append(rest);
             }
       }
 
@@ -203,40 +207,44 @@ void DurationList::appendGap(const Fraction& d)
 //   read
 //---------------------------------------------------------
 
-void DurationList::read(int track, const Segment* fs, const Segment* es, QHash<Spanner*,Spanner*>* map)
+void TrackList::read(int track, const Segment* fs, const Segment* es, QHash<Spanner*,Spanner*>* map)
       {
       int tick = fs->tick();
       int gap = 0;
       for (const Segment* s = fs; s; s = s->next1()) {
-            if (!(s->subtype() & (SegChordRest | SegGrace)))
-                  continue;
-            DurationElement* e = static_cast<ChordRest*>(s->element(track));
+            Element* e = s->element(track);
             if (!e)
                   continue;
-            gap = s->tick() - tick;
-            if (e->tuplet()) {
-                  Tuplet* tuplet = e->tuplet();
-                  if (tuplet->elements().front() != e) {
-                        qDebug("DurationList::read: cannot start in middle of tuplet");
-                        abort();
-                        }
-                  e = tuplet;
+            if (e->isChordRest()) {
+                  DurationElement* de = static_cast<DurationElement*>(e);
+                  gap = s->tick() - tick;
+                  if (de->tuplet()) {
+                        Tuplet* tuplet = de->tuplet();
+                        if (tuplet->elements().front() != de) {
+                              qDebug("TrackList::read: cannot start in middle of tuplet");
+                              abort();
+                              }
+                        de = tuplet;
 
-                  // find last chord/rest in (possibly nested) tuplet:
-                  DurationElement* de = tuplet;
-                  while (de) {
-                        de = tuplet->elements().back();
-                        if (de->type() != TUPLET)
-                              break;
+                        // find last chord/rest in (possibly nested) tuplet:
+                        DurationElement* nde = tuplet;
+                        while (nde) {
+                              nde = tuplet->elements().back();
+                              if (nde->type() != TUPLET)
+                                    break;
+                              }
+                        s = static_cast<ChordRest*>(nde)->segment();
+                        // continue with first chord/rest after tuplet
                         }
-                  s = static_cast<ChordRest*>(de)->segment();
-                  // continue with first chord/rest after tuplet
+                  if (gap)
+                        appendGap(Fraction::fromTicks(gap));
+                  append(de, map);
+                  if (de->type() != CHORD || !static_cast<Chord*>(de)->isGrace())
+                        tick += de->duration().ticks();;
                   }
-            if (gap)
-                  appendGap(Fraction::fromTicks(gap));
-            append(e, map);
-            if (e->type() != CHORD || !static_cast<Chord*>(e)->isGrace())
-                  tick += e->duration().ticks();;
+            else {
+                  append(e, map);
+                  }
             if (s == es)
                   break;
             }
@@ -250,7 +258,7 @@ void DurationList::read(int track, const Segment* fs, const Segment* es, QHash<S
 //   writeTuplet
 //---------------------------------------------------------
 
-Tuplet* DurationList::writeTuplet(Tuplet* tuplet, Measure* measure, int tick) const
+Tuplet* TrackList::writeTuplet(Tuplet* tuplet, Measure* measure, int tick) const
       {
       Tuplet* dt = tuplet->clone();
       dt->setParent(measure);
@@ -280,31 +288,33 @@ Tuplet* DurationList::writeTuplet(Tuplet* tuplet, Measure* measure, int tick) co
 //    check if list can be written to measure list m
 //---------------------------------------------------------
 
-bool DurationList::canWrite(const Fraction& measureLen) const
+bool TrackList::canWrite(const Fraction& measureLen) const
       {
       Fraction pos;
       Fraction rest = measureLen;
 
       int n = size();
       for (int i = 0; i < n; ++i) {
-            DurationElement* e = at(i);
-            Fraction duration = e->duration();
-            if (duration > rest && e->type() == TUPLET)
-                  return false;
-            while (!duration.isZero()) {
-                  if (e->type() == REST && duration >= rest && rest == measureLen) {
-                        duration -= rest;
-                        pos = measureLen;
-                        }
-                  else {
-                        Fraction d = qMin(rest, duration);
-                        duration -= d;
-                        rest -= d;
-                        pos += d;
-                        }
-                  if (pos == measureLen) {
-                        pos  = Fraction();
-                        rest = measureLen;
+            Element* e = at(i);
+            if (e->isDurationElement()) {
+                  Fraction duration = static_cast<DurationElement*>(e)->duration();
+                  if (duration > rest && e->type() == TUPLET)
+                        return false;
+                  while (!duration.isZero()) {
+                        if (e->type() == REST && duration >= rest && rest == measureLen) {
+                              duration -= rest;
+                              pos = measureLen;
+                              }
+                        else {
+                              Fraction d = qMin(rest, duration);
+                              duration -= d;
+                              rest -= d;
+                              pos += d;
+                              }
+                        if (pos == measureLen) {
+                              pos  = Fraction();
+                              rest = measureLen;
+                              }
                         }
                   }
             }
@@ -316,7 +326,7 @@ bool DurationList::canWrite(const Fraction& measureLen) const
 //    rewrite notes into measure list m
 //---------------------------------------------------------
 
-bool DurationList::write(int track, Measure* measure, QHash<Spanner*, Spanner*>* map) const
+bool TrackList::write(int track, Measure* measure, QHash<Spanner*, Spanner*>* map) const
       {
       Fraction pos;
       Measure* m       = measure;
@@ -325,92 +335,101 @@ bool DurationList::write(int track, Measure* measure, QHash<Spanner*, Spanner*>*
       Segment* segment = 0;
       int n = size();
       for (int i = 0; i < n; ++i) {
-            DurationElement* e = at(i);
+            Element* e = at(i);
 
-            Fraction duration = e->duration();
-            if (e->type() == CHORD && static_cast<Chord*>(e)->isGrace()) {
-                  segment = m->getSegment(SegGrace, m->tick() + pos.ticks());
-                  Element* element = e->clone();
-                  element->setTrack(track);
-                  segment->add(element);
-                  writeSpanner(track, static_cast<Chord*>(e),
-                     static_cast<Chord*>(element), segment, map);
-                  continue;
-                  }
-            if (duration > rest && e->type() == TUPLET) {
-                  // cannot split tuplet
-                  qDebug("DurationList::write: cannot split tuplet\n");
-                  return false;
-                  }
-            while (duration.numerator() > 0) {
-                  if (e->type() == REST && (duration >= rest || e == back()) && rest == m->len()) {
-                        segment = m->getSegment(e, m->tick() + pos.ticks());
-                        //
-                        // handle full measure rest
-                        //
-                        if ((track % VOICES) == 0) {
-                              // write only for voice 1
-                              Rest* r = new Rest(score, TDuration::V_MEASURE);
-                              r->setDuration(m->len());
-                              r->setTrack(track);
-                              segment->add(r);
-                              }
-                        duration -= m->len();
-                        pos      += m->len();
-                        rest.set(0, 1);
+            if (e->isDurationElement()) {
+                  Fraction duration = static_cast<DurationElement*>(e)->duration();
+                  if (e->type() == CHORD && static_cast<Chord*>(e)->isGrace()) {
+                        segment = m->getSegment(SegGrace, m->tick() + pos.ticks());
+                        Element* element = e->clone();
+                        element->setTrack(track);
+                        segment->add(element);
+                        writeSpanner(track + i, static_cast<Chord*>(e),
+                           static_cast<Chord*>(element), segment, map);
+                        continue;
                         }
-                  else {
-                        Fraction d = qMin(rest, duration);
-                        ChordRest* dst;
-                        if (e->type() == REST) {
-                              segment = m->getSegment(SegChordRest, m->tick() + pos.ticks());
-                              Rest* r = new Rest(score, TDuration(d));
-                              dst = r;
-                              r->setTrack(track);
-                              segment->add(r);
-                              duration -= d;
-                              rest -= d;
-                              pos += d;
-                              }
-                        else if (e->type() == CHORD) {
+                  if (duration > rest && e->type() == TUPLET) {
+                        // cannot split tuplet
+                        qDebug("TrackList::write: cannot split tuplet\n");
+                        return false;
+                        }
+                  while (duration.numerator() > 0) {
+                        if (e->type() == REST && (duration >= rest || e == back()) && rest == m->len()) {
                               segment = m->getSegment(e, m->tick() + pos.ticks());
-                              Chord* c = static_cast<Chord*>(e)->clone();
-                              dst = c;
-                              c->setScore(score);
-                              c->setTrack(track);
-                              c->setDuration(d);
-                              c->setDurationType(TDuration(d));
-                              segment->add(c);
-                              duration -= d;
-                              rest     -= d;
-                              pos      += d;
-                              foreach(Note* note, c->notes()) {
-                                    if (!duration.isZero() || note->tieFor()) {
-                                          Tie* tie = new Tie(score);
-                                          note->add(tie);
+                              //
+                              // handle full measure rest
+                              //
+                              if ((track % VOICES) == 0) {
+                                    // write only for voice 1
+                                    Rest* r = new Rest(score, TDuration::V_MEASURE);
+                                    r->setDuration(m->len());
+                                    r->setTrack(track);
+                                    segment->add(r);
+                                    }
+                              duration -= m->len();
+                              pos      += m->len();
+                              rest.set(0, 1);
+                              }
+                        else {
+                              Fraction d = qMin(rest, duration);
+                              ChordRest* dst;
+                              if (e->type() == REST) {
+                                    segment = m->getSegment(SegChordRest, m->tick() + pos.ticks());
+                                    Rest* r = new Rest(score, TDuration(d));
+                                    dst = r;
+                                    r->setTrack(track);
+                                    segment->add(r);
+                                    duration -= d;
+                                    rest -= d;
+                                    pos += d;
+                                    }
+                              else if (e->type() == CHORD) {
+                                    segment = m->getSegment(e, m->tick() + pos.ticks());
+                                    Chord* c = static_cast<Chord*>(e)->clone();
+                                    dst = c;
+                                    c->setScore(score);
+                                    c->setTrack(track);
+                                    c->setDuration(d);
+                                    c->setDurationType(TDuration(d));
+                                    segment->add(c);
+                                    duration -= d;
+                                    rest     -= d;
+                                    pos      += d;
+                                    foreach(Note* note, c->notes()) {
+                                          if (!duration.isZero() || note->tieFor()) {
+                                                Tie* tie = new Tie(score);
+                                                note->add(tie);
+                                                }
+                                          else
+                                                note->setTieFor(0);
+                                          note->setTieBack(0);
                                           }
-                                    else
-                                          note->setTieFor(0);
-                                    note->setTieBack(0);
+                                    }
+                              else if (e->type() == TUPLET) {
+                                    writeTuplet(static_cast<Tuplet*>(e), m, m->tick() + pos.ticks());
+                                    duration -= d;
+                                    rest     -= d;
+                                    pos      += d;
+                                    }
+                              if (e->isChordRest()) {
+                                    ChordRest* src = static_cast<ChordRest*>(e);
+                                    writeSpanner(track, src, dst, segment, map);
                                     }
                               }
-                        else if (e->type() == TUPLET) {
-                              writeTuplet(static_cast<Tuplet*>(e), m, m->tick() + pos.ticks());
-                              duration -= d;
-                              rest     -= d;
-                              pos      += d;
-                              }
-                        if (e->isChordRest()) {
-                              ChordRest* src = static_cast<ChordRest*>(e);
-                              writeSpanner(track, src, dst, segment, map);
+                        if (pos == m->len()) {
+                              pos  = Fraction();
+                              m    = m->nextMeasure();
+                              if (m)
+                                    rest = m->len();
                               }
                         }
-                  if (pos == m->len()) {
-                        pos  = Fraction();
-                        m    = m->nextMeasure();
-                        if (m)
-                              rest = m->len();
-                        }
+                  }
+            else {
+                  segment = m->getSegment(e, m->tick() + pos.ticks());
+                  Element* ne = e->clone();
+                  ne->setScore(score);
+                  ne->setTrack(track);
+                  segment->add(ne);
                   }
             }
 
@@ -443,7 +462,7 @@ bool DurationList::write(int track, Measure* measure, QHash<Spanner*, Spanner*>*
 
 ScoreRange::~ScoreRange()
       {
-      foreach(DurationList* dl, tracks) {
+      foreach(TrackList* dl, tracks) {
             delete dl;
             }
       }
@@ -456,7 +475,7 @@ bool ScoreRange::canWrite(const Fraction& f) const
       {
       int n = tracks.size();
       for (int i = 0; i < n; ++i) {
-            DurationList* dl = tracks[i];
+            TrackList* dl = tracks[i];
             if (!dl->canWrite(f))
                   return false;
             }
@@ -471,7 +490,7 @@ void ScoreRange::read(Segment* first, Segment* last, int startTrack, int endTrac
       {
       spannerMap.clear();
       for (int track = startTrack; track < endTrack; ++track) {
-            DurationList* dl = new DurationList;
+            TrackList* dl = new TrackList;
             dl->read(track, first, last, &spannerMap);
             tracks.append(dl);
             }
@@ -488,7 +507,7 @@ bool ScoreRange::write(int track, Measure* m) const
       spannerMap.clear();
       int n = tracks.size();
       for (int i = 0; i < n; ++i) {
-            const DurationList* dl = tracks[i];
+            const TrackList* dl = tracks[i];
             if (!dl->write(track + i, m, &spannerMap))
                   return false;
             }

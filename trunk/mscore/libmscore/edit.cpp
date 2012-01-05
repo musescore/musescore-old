@@ -47,7 +47,7 @@
 #include "tiemap.h"
 #include "stem.h"
 #include "iname.h"
-#include "durationlist.h"
+#include "range.h"
 
 //---------------------------------------------------------
 //   getSelectedNote
