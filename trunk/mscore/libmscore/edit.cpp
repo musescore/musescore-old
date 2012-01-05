@@ -434,12 +434,16 @@ static bool addCR(int tick, ChordRest* cr, Measure* ml)
                               Chord* c = static_cast<Chord*>(chord->clone());
                               c->setSelected(false);
                               if (i == 0) {
-                                    foreach(Slur* s, chord->slurBack())
-                                          c->addSlurBack(s);
+                                    foreach(Spanner* s, chord->spannerBack()) {
+                                          if (s->type() == SLUR)
+                                                c->addSlurBack(static_cast<Slur*>(s));
+                                          }
                                     }
                               if (i == n-1) {
-                                    foreach(Slur* s, chord->slurFor())
-                                          c->addSlurFor(s);
+                                    foreach(Spanner* s, chord->spannerFor()) {
+                                          if (s->type() == SLUR)
+                                                c->addSlurFor(static_cast<Slur*>(s));
+                                          }
                                     }
                               for (int i = 0; i < notes; ++i) {
                                     Tie* tie = ties[i];
@@ -1888,13 +1892,21 @@ void Score::cmdJoinMeasure(Measure* m1, Measure* m2)
                               ncr->setTuplet(nt);
                               nt->add(ncr);
                               }
-                        foreach (Slur* s, ocr->slurFor()) {
+                        foreach (Spanner* sp, ocr->spannerFor()) {
+                              if (sp->type() != SLUR)
+                                    continue;
+                              Slur* s = static_cast<Slur*>(sp);
+
                               Slur* slur = new Slur(this);
                               slur->setStartElement(ncr);
                               ncr->addSlurFor(slur);
                               slurMap[track].add(s, slur);
                               }
-                        foreach (Slur* s, ocr->slurBack()) {
+                        foreach (Spanner* sp, ocr->spannerBack()) {
+                              if (sp->type() != SLUR)
+                                    continue;
+                              Slur* s = static_cast<Slur*>(sp);
+
                               Slur* slur = slurMap[track].findNew(s);
                               if (slur) {
                                     slur->setEndElement(ncr);

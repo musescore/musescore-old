@@ -279,13 +279,19 @@ printf("clone staves\n");
                                           nt->add(ncr);
                                           ncr->setTuplet(nt);
                                           }
-                                    foreach(Slur* s, ocr->slurFor()) {
+                                    foreach(Spanner* sp, ocr->spannerFor()) {
+                                          if (sp->type() != SLUR)
+                                                continue;
+                                          Slur* s = static_cast<Slur*>(sp);
                                           Slur* slur = new Slur(score);
                                           slur->setStartElement(ncr);
                                           ncr->addSlurFor(slur);
                                           slurMap.add(s, slur);
                                           }
-                                    foreach(Slur* s, ocr->slurBack()) {
+                                    foreach(Spanner* sp, ocr->spannerBack()) {
+                                          if (sp->type() != SLUR)
+                                                continue;
+                                          Slur* s = static_cast<Slur*>(sp);
                                           Slur* slur = slurMap.findNew(s);
                                           if (slur) {
                                                 slur->setEndElement(ncr);
@@ -413,13 +419,19 @@ printf("  create tuplet\n");
                                     ncr->setTuplet(nt);
                                     nt->add(ncr);
                                     }
-                              foreach (Slur* s, ocr->slurFor()) {
+                              foreach (Spanner* sp, ocr->spannerFor()) {
+                                    if (sp->type() != SLUR)
+                                          continue;
+                                    Slur* s = static_cast<Slur*>(sp);
                                     Slur* slur = new Slur(score);
                                     slur->setStartElement(ncr);
                                     ncr->addSlurFor(slur);
                                     slurMap.add(s, slur);
                                     }
-                              foreach (Slur* s, ocr->slurBack()) {
+                              foreach (Spanner* sp, ocr->spannerBack()) {
+                                    if (sp->type() != SLUR)
+                                          continue;
+                                    Slur* s = static_cast<Slur*>(sp);
                                     Slur* slur = slurMap.findNew(s);
                                     if (slur) {
                                           slur->setEndElement(ncr);

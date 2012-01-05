@@ -155,6 +155,7 @@ enum ElementType {
       ACCIDENTAL_BRACKET,
       ICON,
       OSSIA,
+
       MAXTYPE
       };
 

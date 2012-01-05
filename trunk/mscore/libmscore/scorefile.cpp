@@ -1183,11 +1183,11 @@ bool Score::read(const QDomElement& de)
                         }
                   int n1 = 0;
                   int n2 = 0;
-                  foreach(Slur* s, cr1->slurFor()) {
+                  foreach(Spanner* s, cr1->spannerFor()) {
                         if (s == slur)
                               ++n1;
                         }
-                  foreach(Slur* s, cr2->slurBack()) {
+                  foreach(Spanner* s, cr2->spannerBack()) {
                         if (s == slur)
                               ++n2;
                         }
@@ -1507,7 +1507,7 @@ void Score::writeSegments(Xml& xml, const Measure* m, int strack, int etrack, Se
                               beam->write(xml);
                               }
                         cr->writeTuplet(xml);
-                        foreach(Slur* slur, cr->slurFor()) {
+                        foreach(Spanner* slur, cr->spannerFor()) {
                               bool found = false;
                               foreach(Spanner* slur1, spanner) {
                                     if (slur1 == slur) {
@@ -1521,7 +1521,7 @@ void Score::writeSegments(Xml& xml, const Measure* m, int strack, int etrack, Se
                                     slur->write(xml);
                                     }
                               }
-                        foreach(Slur* slur, cr->slurBack()) {
+                        foreach(Spanner* slur, cr->spannerBack()) {
                               bool found = false;
                               foreach(Spanner* slur1, spanner) {
                                     if (slur1 == slur) {

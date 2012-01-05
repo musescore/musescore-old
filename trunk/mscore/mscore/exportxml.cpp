@@ -407,7 +407,10 @@ int SlurHandler::findSlur(const Slur* s) const
 void SlurHandler::doSlurStart(Chord* chord, Notations& notations, Xml& xml)
       {
       // search for slur(s) starting at this chord
-      foreach(const Slur* s, chord->slurFor()) {
+      foreach(const Spanner* sp, chord->spannerFor()) {
+            if (sp->type() != SLUR)
+                  continue;
+            const Slur* s = static_cast<const Slur*>(sp);
             // check if on slur list (i.e. stop already seen)
             int i = findSlur(s);
             if (i >= 0) {
@@ -446,7 +449,10 @@ void SlurHandler::doSlurStart(Chord* chord, Notations& notations, Xml& xml)
 void SlurHandler::doSlurStop(Chord* chord, Notations& notations, Xml& xml)
       {
       // search for slur(s) stopping at this chord but not on slur list yet
-      foreach(const Slur* s, chord->slurBack()) {
+      foreach(const Spanner* sp, chord->spannerBack()) {
+            if (sp->type() != SLUR)
+                  continue;
+            const Slur* s = static_cast<const Slur*>(sp);
             // check if on slur list
             int i = findSlur(s);
             if (i < 0) {

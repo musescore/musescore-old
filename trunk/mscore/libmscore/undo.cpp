@@ -1211,10 +1211,10 @@ RemoveElement::RemoveElement(Element* e)
       if (element->isChordRest()) {
             // remove any slurs pointing to this chor/rest
             ChordRest* cr = static_cast<ChordRest*>(element);
-            foreach(Slur* slur, cr->slurFor())
-                  score->undoRemoveElement(slur);
-            foreach(Slur* slur, cr->slurBack())
-                  score->undoRemoveElement(slur);
+            foreach(Spanner* s, cr->spannerFor())
+                  score->undoRemoveElement(s);
+            foreach(Spanner* s, cr->spannerBack())
+                  score->undoRemoveElement(s);
             if (cr->tuplet() && cr->tuplet()->elements().empty())
                   score->undoRemoveElement(cr->tuplet());
             if (e->type() == CHORD) {

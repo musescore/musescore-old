@@ -369,7 +369,7 @@ void Debugger::updateList(Score* s)
                                           }
                                     if (e->isChordRest()) {
                                           ChordRest* cr = static_cast<ChordRest*>(e);
-                                          foreach(Slur* slur, cr->slurFor()) {
+                                          foreach(Spanner* slur, cr->spannerFor()) {
                                                 ElementItem* sli = new ElementItem(sei, slur);
                                                 foreach(SpannerSegment* ss, slur->spannerSegments()) {
                                                       new ElementItem(sli, ss);
@@ -895,7 +895,7 @@ void ShowChordWidget::setElement(Element* e)
             crb.attributes->addItem(item);
             }
       crb.slurFor->clear();
-      foreach(Slur* slur, chord->slurFor()) {
+      foreach(Spanner* slur, chord->spannerFor()) {
             QString s;
             s.setNum(long(slur), 16);
             QListWidgetItem* item = new QListWidgetItem(s);
@@ -903,7 +903,7 @@ void ShowChordWidget::setElement(Element* e)
             crb.slurFor->addItem(item);
             }
       crb.slurBack->clear();
-      foreach(Slur* slur, chord->slurBack()) {
+      foreach(Spanner* slur, chord->spannerBack()) {
             QString s;
             s.setNum(long(slur), 16);
             QListWidgetItem* item = new QListWidgetItem(s);
@@ -1214,7 +1214,7 @@ void RestView::setElement(Element* e)
       crb.move->setValue(rest->staffMove());
 
       crb.slurFor->clear();
-      foreach(Slur* slur, rest->slurFor()) {
+      foreach(Spanner* slur, rest->spannerFor()) {
             QString s;
             s.setNum(long(slur), 16);
             QListWidgetItem* item = new QListWidgetItem(s);
@@ -1222,7 +1222,7 @@ void RestView::setElement(Element* e)
             crb.slurFor->addItem(item);
             }
       crb.slurBack->clear();
-      foreach(Slur* slur, rest->slurBack()) {
+      foreach(Spanner* slur, rest->spannerBack()) {
             QString s;
             s.setNum(long(slur), 16);
             QListWidgetItem* item = new QListWidgetItem(s);

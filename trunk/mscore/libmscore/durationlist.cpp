@@ -23,26 +23,32 @@
 #include "utils.h"
 
 //---------------------------------------------------------
-//   moveSlur
+//   readSpanner
 //---------------------------------------------------------
 
-static void moveSlur(ChordRest* src, ChordRest* dst, QHash<Slur*, Slur*>* map)
+static void readSpanner(int track, const QList<Spanner*>& spannerFor,
+   const QList<Spanner*>& spannerBack, ChordRest* dst,
+   QHash<Spanner*,Spanner*>* map)
       {
-      foreach(Slur* oldSlur, src->slurFor()) {
-            Slur* newSlur = new Slur(*oldSlur);
-            map->insert(oldSlur, newSlur);
-            dst->addSlurFor(newSlur);
-            newSlur->setStartElement(dst);
+      foreach(Spanner* oldSpanner, spannerFor) {
+            if (oldSpanner->track() != track)
+                  continue;
+            Spanner* newSpanner = static_cast<Spanner*>(oldSpanner->clone());
+            map->insert(oldSpanner, newSpanner);
+            dst->addSpannerFor(newSpanner);
+            newSpanner->setStartElement(dst);
             }
-      foreach(Slur* oldSlur, src->slurBack()) {
-            Slur* newSlur = map->value(oldSlur);
-            if (newSlur) {
-                  dst->addSlurBack(newSlur);
-                  newSlur->setEndElement(dst);
-                  map->remove(oldSlur);
+      foreach(Spanner* oldSpanner, spannerBack) {
+            if (oldSpanner->track() != track)
+                  continue;
+            Spanner* newSpanner = map->value(oldSpanner);
+            if (newSpanner) {
+                  dst->addSpannerBack(newSpanner);
+                  newSpanner->setEndElement(dst);
+                  map->remove(oldSpanner);
                   }
             else {
-                  printf("moveSlur: slur not found\n");
+                  printf("moveSpanner: slur not found\n");
                   // TODO: handle failure case:
                   // - remove start slur from chord/rest
                   // - delete slur
@@ -51,10 +57,58 @@ static void moveSlur(ChordRest* src, ChordRest* dst, QHash<Slur*, Slur*>* map)
       }
 
 //---------------------------------------------------------
+//   writeSpanner
+//---------------------------------------------------------
+
+static void writeSpanner(int track, ChordRest* src, ChordRest* dst,
+   Segment* segment, QHash<Spanner*, Spanner*>* map)
+      {
+      foreach(Spanner* oldSpanner, src->spannerFor()) {
+            Spanner* newSpanner = static_cast<Spanner*>(oldSpanner->clone());
+            map->insert(oldSpanner, newSpanner);
+            if (newSpanner->type() == SLUR) {
+                  dst->addSpannerFor(newSpanner);
+                  newSpanner->setStartElement(dst);
+                  }
+            else {
+                  segment->addSpannerFor(newSpanner);
+                  newSpanner->setStartElement(segment);
+                  }
+            }
+
+      foreach(Spanner* oldSpanner, src->spannerBack()) {
+            if (oldSpanner->track() != track)
+                  continue;
+            Spanner* newSpanner = map->value(oldSpanner);
+            if (newSpanner) {
+                  if (newSpanner->type() == SLUR) {
+                        dst->addSpannerBack(newSpanner);
+                        newSpanner->setEndElement(dst);
+                        }
+                  else {
+                        segment->addSpannerBack(newSpanner);
+                        newSpanner->setEndElement(segment);
+                        }
+                  map->remove(oldSpanner);
+                  }
+            else {
+                  printf("writeSpanner: slur not found\n");
+                  // TODO: handle failure case:
+                  // - remove start slur from chord/rest
+                  // - delete slur
+                  }
+            }
+      foreach(Element* e, src->annotations()) {
+            Element* element = e->clone();
+            segment->add(element);
+            }
+      }
+
+//---------------------------------------------------------
 //   append
 //---------------------------------------------------------
 
-void DurationList::append(DurationElement* e, QHash<Slur*, Slur*>* map)
+void DurationList::append(DurationElement* e, QHash<Spanner*,Spanner*>* map)
       {
       Q_ASSERT(e->type() == TUPLET || e->type() == CHORD || e->type() == REST);
 
@@ -72,7 +126,13 @@ void DurationList::append(DurationElement* e, QHash<Slur*, Slur*>* map)
             else if (map) {
                   ChordRest* src = static_cast<ChordRest*>(e);
                   ChordRest* dst = static_cast<ChordRest*>(element);
-                  moveSlur(src, dst, map);
+                  readSpanner(src->track(), src->spannerFor(), src->spannerBack(), dst, map);
+                  Segment* s = src->segment();
+                  readSpanner(src->track(), s->spannerFor(), s->spannerBack(), dst, map);
+                  foreach(Element* ee, src->segment()->annotations()) {
+                        if (ee->track() == e->track())
+                              dst->annotations().append(ee->clone());
+                        }
                   }
             }
       else {
@@ -108,8 +168,7 @@ void DurationList::appendGap(const Fraction& d)
 //   read
 //---------------------------------------------------------
 
-void DurationList::read(int track, const Segment* fs, const Segment* es,
-   QHash<Slur*, Slur*>* map)
+void DurationList::read(int track, const Segment* fs, const Segment* es, QHash<Spanner*,Spanner*>* map)
       {
       int tick = fs->tick();
       int gap = 0;
@@ -213,7 +272,7 @@ bool DurationList::canWrite(const Fraction& measureLen) const
 //    rewrite notes into measure list m
 //---------------------------------------------------------
 
-bool DurationList::write(int track, Measure* measure, QHash<Slur*, Slur*>* map) const
+bool DurationList::write(int track, Measure* measure, QHash<Spanner*, Spanner*>* map) const
       {
       Fraction pos;
       Measure* m       = measure;
@@ -246,22 +305,23 @@ bool DurationList::write(int track, Measure* measure, QHash<Slur*, Slur*>* map) 
                         }
                   else {
                         Fraction d = qMin(rest, duration);
+                        ChordRest* dst;
                         if (e->type() == REST) {
                               Rest* r = new Rest(score, TDuration(d));
+                              dst = r;
                               r->setTrack(track);
                               segment->add(r);
-                              moveSlur(static_cast<ChordRest*>(e), r, map);
                               duration -= d;
                               rest -= d;
                               pos += d;
                               }
                         else if (e->type() == CHORD) {
                               Chord* c = static_cast<Chord*>(e)->clone();
+                              dst = c;
                               c->setScore(score);
                               c->setTrack(track);
                               c->setDuration(d);
                               c->setDurationType(TDuration(d));
-                              moveSlur(static_cast<ChordRest*>(e), c, map);
                               segment->add(c);
                               duration -= d;
                               rest     -= d;
@@ -281,6 +341,10 @@ bool DurationList::write(int track, Measure* measure, QHash<Slur*, Slur*>* map) 
                               duration -= d;
                               rest     -= d;
                               pos      += d;
+                              }
+                        if (e->isChordRest()) {
+                              ChordRest* src = static_cast<ChordRest*>(e);
+                              writeSpanner(track, src, dst, segment, map);
                               }
                         }
                   if (pos == m->len()) {

@@ -185,9 +185,9 @@ void ChordRest::writeProperties(Xml& xml) const
             xml.fTag("duration", duration());
       foreach(const Articulation* a, articulations)
             a->write(xml);
-      foreach(Slur* s, _slurFor)
+      foreach(Spanner* s, _spannerFor)
             xml.tagE(QString("Slur type=\"start\" number=\"%1\"").arg(s->id()+1));
-      foreach(Slur* s, _slurBack)
+      foreach(Spanner* s, _spannerBack)
             xml.tagE(QString("Slur type=\"stop\" number=\"%1\"").arg(s->id()+1));
       if (!xml.clipboardmode && _beam && !_beam->generated())
             xml.tag("Beam", _beam->id());
@@ -279,11 +279,11 @@ bool ChordRest::readProperties(const QDomElement& e, QList<Tuplet*>* tuplets, QL
                   }
             if (type == "start") {
                   slur->setStartElement(this);
-                  _slurFor.append(slur);
+                  addSlurFor(slur);
                   }
             else if (type == "stop") {
                   slur->setEndElement(this);
-                  _slurBack.append(slur);
+                  addSlurBack(slur);
                   }
             else
                   qDebug("ChordRest::read(): unknown Slur type <%s>", qPrintable(type));
@@ -553,13 +553,19 @@ void ChordRest::layoutArticulations()
       // reserve space for slur
       bool botGap = false;
       bool topGap = false;
-      foreach(Slur* s, _slurFor) {
+      foreach(Spanner* sp, _spannerFor) {
+            if (sp->type() != SLUR)
+                  continue;
+            Slur* s = static_cast<Slur*>(sp);
             if (s->up())
                   topGap = true;
             else
                   botGap = true;
             }
-      foreach(Slur* s, _slurBack) {
+      foreach(Spanner* sp, _spannerBack) {
+            if (sp->type() != SLUR)
+                  continue;
+            Slur* s = static_cast<Slur*>(sp);
             if (s->up())
                   topGap = true;
             else
@@ -647,56 +653,56 @@ void ChordRest::layoutArticulations()
       }
 
 //---------------------------------------------------------
-//   addSlurFor
+//   addSpannerFor
 //---------------------------------------------------------
 
-void ChordRest::addSlurFor(Slur* s)
+void ChordRest::addSpannerFor(Spanner* s)
       {
-      int idx = _slurFor.indexOf(s);
+      int idx = _spannerFor.indexOf(s);
       if (idx >= 0) {
-            qDebug("ChordRest::setSlurFor(): already there");
+            qDebug("ChordRest::setSpannerFor(): already there");
             return;
             }
-      _slurFor.append(s);
+      _spannerFor.append(s);
       }
 
 //---------------------------------------------------------
-//   addSlurBack
+//   addSpannerBack
 //---------------------------------------------------------
 
-void ChordRest::addSlurBack(Slur* s)
+void ChordRest::addSpannerBack(Spanner* s)
       {
-      int idx = _slurBack.indexOf(s);
+      int idx = _spannerBack.indexOf(s);
       if (idx >= 0) {
             qDebug("ChordRest::setSlurBack(): already there");
             return;
             }
-      _slurBack.append(s);
+      _spannerBack.append(s);
       }
 
 //---------------------------------------------------------
-//   removeSlurFor
+//   removeSpannerFor
 //---------------------------------------------------------
 
-void ChordRest::removeSlurFor(Slur* s)
+void ChordRest::removeSpannerFor(Spanner* s)
       {
-      if (!_slurFor.removeOne(s)) {
-            qDebug("ChordRest<%p>::removeSlurFor(): %p not found", this, s);
-            foreach(Slur* s, _slurFor)
+      if (!_spannerFor.removeOne(s)) {
+            qDebug("ChordRest<%p>::removeSpannerFor(): %p not found", this, s);
+            foreach(Spanner* s, _spannerFor)
                   qDebug("  %p", s);
             abort();
             }
       }
 
 //---------------------------------------------------------
-//   removeSlurBack
+//   removeSpannerBack
 //---------------------------------------------------------
 
-void ChordRest::removeSlurBack(Slur* s)
+void ChordRest::removeSpannerBack(Spanner* s)
       {
-      if (!_slurBack.removeOne(s)) {
-            qDebug("ChordRest<%p>::removeSlurBack(): %p not found", this, s);
-            foreach(Slur* s, _slurBack)
+      if (!_spannerBack.removeOne(s)) {
+            qDebug("ChordRest<%p>::removeSpannerBack(): %p not found", this, s);
+            foreach(Spanner* s, _spannerBack)
                   qDebug("  %p", s);
             }
       }
