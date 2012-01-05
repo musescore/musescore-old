@@ -196,9 +196,9 @@ void MeasureBaseList::insert(MeasureBase* fm, MeasureBase* lm)
                         foreach(Element* e, s->elist()) {
                               if (e) {
                                     ChordRest* cr = static_cast<ChordRest*>(e);
-                                    foreach(Slur* s, cr->slurFor())
+                                    foreach(Spanner* s, cr->spannerFor())
                                           s->setStartElement(cr);
-                                    foreach(Slur* s, cr->slurBack())
+                                    foreach(Spanner* s, cr->spannerBack())
                                           s->setEndElement(cr);
                                     }
                               }

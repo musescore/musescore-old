@@ -1872,13 +1872,19 @@ QPointF Chord::layoutArticulation(Articulation* a)
       // reserve space for slur
       bool botGap = false;
       bool topGap = false;
-      foreach(Slur* s, slurFor()) {
+      foreach(Spanner* sp, spannerFor()) {
+            if (sp->type() != SLUR)
+                 continue;
+            Slur* s = static_cast<Slur*>(sp);
             if (s->up())
                   topGap = true;
             else
                   botGap = true;
             }
-      foreach(Slur* s, slurBack()) {
+      foreach(Spanner* sp, spannerBack()) {
+            if (sp->type() != SLUR)
+                 continue;
+            Slur* s = static_cast<Slur*>(sp);
             if (s->up())
                   topGap = true;
             else

@@ -554,8 +554,8 @@ void Measure::layout2()
                   Element* el = s->element(track);
                   if (el) {
                         ChordRest* cr = static_cast<ChordRest*>(el);
-                        foreach(Slur* slur, static_cast<ChordRest*>(el)->slurFor())
-                              slur->layout();
+                        foreach(Spanner* sp, static_cast<ChordRest*>(el)->spannerFor())
+                              sp->layout();
                         DurationElement* de = cr;
                         while (de->tuplet() && de->tuplet()->elements().front() == de) {
                               de->tuplet()->layout();
@@ -2643,10 +2643,10 @@ bool Measure::isRepeatMeasure()
       int etrack = score()->nstaves() * VOICES;
 
       Segment* s = first(SegChordRest);
-      
+
       if(s == 0)
             return false;
-      
+
       for (int track = strack; track < etrack; ++track) {
             Element* e = s->element(track);
             if (e && e->type() == REPEAT_MEASURE)
@@ -3279,14 +3279,22 @@ Measure* Measure::cloneMeasure(Score* sc, SlurMap* slurMap, TieMap* tieMap, Span
                                           }
                                     ncr->setTuplet(nt);
                                     }
-                              foreach(Slur* s, ocr->slurFor()) {
+                              foreach(Spanner* sp, ocr->spannerFor()) {
+                                    if (sp->type() != SLUR)
+                                          continue;
+                                    Slur* s = static_cast<Slur*>(sp);
+
                                     Slur* slur = new Slur(*s);
                                     slur->setScore(sc);
                                     slur->setStartElement(ncr);
                                     ncr->addSlurFor(slur);
                                     slurMap[track].add(s, slur);
                                     }
-                              foreach(Slur* s, ocr->slurBack()) {
+                              foreach(Spanner* sp, ocr->spannerBack()) {
+                                    if (sp->type() != SLUR)
+                                          continue;
+                                    Slur* s = static_cast<Slur*>(sp);
+
                                     Slur* slur = slurMap[track].findNew(s);
                                     if (slur) {
                                           slur->setEndElement(ncr);

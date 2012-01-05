@@ -37,8 +37,9 @@ class ChordRest : public DurationElement {
       TDuration _durationType;
       int _staffMove;         // -1, 0, +1, used for crossbeaming
 
-      QList<Slur*> _slurFor;
-      QList<Slur*> _slurBack;
+      QList<Spanner*> _spannerFor;
+      QList<Spanner*> _spannerBack;
+      QList<Element*> _annotations;
 
    protected:
       QList<Articulation*> articulations;
@@ -92,15 +93,22 @@ class ChordRest : public DurationElement {
       int staffMove() const                     { return _staffMove; }
       void setStaffMove(int val)                { _staffMove = val; }
 
-      void addSlurFor(Slur*);
-      void addSlurBack(Slur*);
-      void removeSlurFor(Slur*);
-      void removeSlurBack(Slur*);
-      const QList<Slur*>& slurFor() const       { return _slurFor;  }
-      const QList<Slur*>& slurBack() const      { return _slurBack; }
+      QList<Spanner*> spannerFor() const        { return _spannerFor;         }
+      QList<Spanner*> spannerBack() const       { return _spannerBack;        }
 
-      void setSlurFor(const QList<Slur*>& s)    { _slurFor = s;  }
-      void setSlurBack(const QList<Slur*>& s)   { _slurBack = s;  }
+      void addSlurFor(Slur* s)                  { addSpannerFor((Spanner*)s);  }
+      void addSlurBack(Slur* s)                 { addSpannerBack((Spanner*)s);    }
+      void removeSlurFor(Slur* s)               { removeSpannerFor((Spanner*)s);  }
+      void removeSlurBack(Slur* s)              { removeSpannerBack((Spanner*)s); }
+
+      void addSpannerFor(Spanner*);
+      void addSpannerBack(Spanner*);
+      void removeSpannerFor(Spanner*);
+      void removeSpannerBack(Spanner*);
+
+      const QList<Element*>& annotations() const { return _annotations;        }
+      QList<Element*>& annotations()             { return _annotations;        }
+      void removeAnnotation(Element* e)          { _annotations.removeOne(e);  }
 
       void layoutArticulations();
       virtual void toDefault();
