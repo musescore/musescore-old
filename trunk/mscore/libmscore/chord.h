@@ -168,6 +168,7 @@ class Chord : public ChordRest {
 
       NoteType noteType() const         { return _noteType; }
       void setNoteType(NoteType t)      { _noteType = t; }
+      bool isGrace() const              { return _noteType != NOTE_NORMAL; }
 
       virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
 
