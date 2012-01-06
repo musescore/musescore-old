@@ -53,6 +53,7 @@
 #include "accidental.h"
 #include "page.h"
 #include "icon.h"
+#include "notedot.h"
 
 //---------------------------------------------------------
 //   propertyList
@@ -151,16 +152,6 @@ void NoteHead::write(Xml& xml) const
       xml.tag("name", symbols[0][_sym].name());
       Element::writeProperties(xml);
       xml.etag();
-      }
-
-//---------------------------------------------------------
-//   NoteDot
-//---------------------------------------------------------
-
-NoteDot::NoteDot(Score* s)
-   : Symbol(s, dotSym)
-      {
-      setFlag(ELEMENT_MOVABLE, false);
       }
 
 //---------------------------------------------------------
@@ -1288,8 +1279,10 @@ void Note::layout()
                               up = 1.0;
                         y += .5 * _spatium * up;
                         }
-                  for (int i = 0; i < dots; ++i)
+                  for (int i = 0; i < dots; ++i) {
                         _dots[i]->setPos(x + d + dd * i, y);
+_dots[i]->adjustReadPos();
+                        }
                   }
             }
       }

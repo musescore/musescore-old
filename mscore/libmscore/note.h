@@ -35,6 +35,7 @@ class QPainter;
 class AccidentalState;
 class Accidental;
 class Spanner;
+class NoteDot;
 
 extern const int noteHeads[2][HEAD_GROUPS][HEAD_TYPES];
 
@@ -50,23 +51,6 @@ class NoteHead : public Symbol {
       virtual NoteHead* clone() const  { return new NoteHead(*this); }
       virtual ElementType type() const { return NOTEHEAD; }
       virtual void write(Xml& xml) const;
-      };
-
-//---------------------------------------------------------
-//   NoteDot
-//---------------------------------------------------------
-
-class NoteDot : public Symbol {
-
-      int _idx;
-
-   public:
-      NoteDot(Score*);
-      NoteDot &operator=(const NoteHead&);
-      virtual NoteDot* clone() const  { return new NoteDot(*this); }
-      virtual ElementType type() const { return NOTEDOT; }
-      int idx() const      { return _idx; }
-      void setIdx(int val) { _idx = val; }
       };
 
 //---------------------------------------------------------

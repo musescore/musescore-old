@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>198</width>
-    <height>123</height>
+    <width>240</width>
+    <height>245</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -45,10 +45,58 @@
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_3">
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_5">
        <property name="text">
-        <string>Bottom Gap:</string>
+        <string>Right Margin:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QToolButton" name="resetTopGap">
+       <property name="toolTip">
+        <string>reset value</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="musescore.qrc">
+         <normaloff>:/data/icons-dark/resetproperty.png</normaloff>:/data/icons-dark/resetproperty.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QToolButton" name="resetBottomGap">
+       <property name="toolTip">
+        <string>reset value</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="musescore.qrc">
+         <normaloff>:/data/icons-dark/resetproperty.png</normaloff>:/data/icons-dark/resetproperty.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="label_7">
+       <property name="text">
+        <string>Bottom Margin:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QDoubleSpinBox" name="leftMargin">
+       <property name="suffix">
+        <string>mm</string>
+       </property>
+       <property name="minimum">
+        <double>-10000.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>10000.000000000000000</double>
        </property>
       </widget>
      </item>
@@ -111,8 +159,68 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="2">
-      <widget class="QToolButton" name="resetTopGap">
+     <item row="6" column="0">
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>Top Margin:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Left Margin:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Bottom Gap:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QDoubleSpinBox" name="topMargin">
+       <property name="suffix">
+        <string>mm</string>
+       </property>
+       <property name="minimum">
+        <double>-10000.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>10000.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QDoubleSpinBox" name="rightMargin">
+       <property name="suffix">
+        <string>mm</string>
+       </property>
+       <property name="minimum">
+        <double>-10000.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>10000.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="QDoubleSpinBox" name="bottomMargin">
+       <property name="suffix">
+        <string>mm</string>
+       </property>
+       <property name="minimum">
+        <double>-10000.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>10000.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="2">
+      <widget class="QToolButton" name="resetLeftMargin">
        <property name="toolTip">
         <string>reset value</string>
        </property>
@@ -125,8 +233,8 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="2">
-      <widget class="QToolButton" name="resetBottomGap">
+     <item row="5" column="2">
+      <widget class="QToolButton" name="resetRightMargin">
        <property name="toolTip">
         <string>reset value</string>
        </property>
@@ -136,6 +244,41 @@
        <property name="icon">
         <iconset resource="musescore.qrc">
          <normaloff>:/data/icons-dark/resetproperty.png</normaloff>:/data/icons-dark/resetproperty.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="2">
+      <widget class="QToolButton" name="resetTopMargin">
+       <property name="toolTip">
+        <string>reset value</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="musescore.qrc">
+         <normaloff>:/data/icons-dark/resetproperty.png</normaloff>:/data/icons-dark/resetproperty.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="2">
+      <widget class="QToolButton" name="resetBottomMargin">
+       <property name="toolTip">
+        <string>reset value</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="musescore.qrc">
+         <normaloff>:/data/icons-dark/resetproperty.png</normaloff>:/data/icons-dark/resetproperty.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0" colspan="3">
+      <widget class="Line" name="line">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>

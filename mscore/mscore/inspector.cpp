@@ -353,11 +353,21 @@ InspectorVBox::InspectorVBox(QWidget* parent)
 
       vb.setupUi(w);
       layout->addWidget(w);
-      connect(vb.topGap,    SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
-      connect(vb.bottomGap, SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
-      connect(vb.height,    SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
-      connect(vb.resetTopGap, SIGNAL(clicked()), SLOT(resetTopGap()));
-      connect(vb.resetBottomGap, SIGNAL(clicked()), SLOT(resetBottomGap()));
+      connect(vb.topGap,            SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      connect(vb.bottomGap,         SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      connect(vb.height,            SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+
+      connect(vb.leftMargin,        SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      connect(vb.rightMargin,       SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      connect(vb.topMargin,         SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      connect(vb.bottomMargin,      SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+
+      connect(vb.resetTopGap,       SIGNAL(clicked()), SLOT(resetTopGap()));
+      connect(vb.resetBottomGap,    SIGNAL(clicked()), SLOT(resetBottomGap()));
+      connect(vb.resetLeftMargin,   SIGNAL(clicked()), SLOT(resetLeftMargin()));
+      connect(vb.resetRightMargin,  SIGNAL(clicked()), SLOT(resetRightMargin()));
+      connect(vb.resetTopMargin,    SIGNAL(clicked()), SLOT(resetTopMargin()));
+      connect(vb.resetBottomMargin, SIGNAL(clicked()), SLOT(resetBottomMargin()));
       }
 
 //---------------------------------------------------------
@@ -379,6 +389,57 @@ void InspectorVBox::resetBottomGap()
       }
 
 //---------------------------------------------------------
+//   resetLeftMargin
+//---------------------------------------------------------
+
+void InspectorVBox::resetLeftMargin()
+      {
+      vb.leftMargin->setValue(0.0);
+      }
+
+//---------------------------------------------------------
+//   resetRightMargin
+//---------------------------------------------------------
+
+void InspectorVBox::resetRightMargin()
+      {
+      vb.rightMargin->setValue(0.0);
+      }
+
+//---------------------------------------------------------
+//   resetTopMargin
+//---------------------------------------------------------
+
+void InspectorVBox::resetTopMargin()
+      {
+      vb.topMargin->setValue(0.0);
+      }
+
+//---------------------------------------------------------
+//   resetBottomMargin
+//---------------------------------------------------------
+
+void InspectorVBox::resetBottomMargin()
+      {
+      vb.bottomMargin->setValue(0.0);
+      }
+
+//---------------------------------------------------------
+//   block
+//---------------------------------------------------------
+
+void InspectorVBox::block(bool val)
+      {
+      vb.topGap->blockSignals(val);
+      vb.bottomGap->blockSignals(val);
+      vb.height->blockSignals(val);
+      vb.leftMargin->blockSignals(val);
+      vb.rightMargin->blockSignals(val);
+      vb.topMargin->blockSignals(val);
+      vb.bottomMargin->blockSignals(val);
+      }
+
+//---------------------------------------------------------
 //   setElement
 //---------------------------------------------------------
 
@@ -387,15 +448,18 @@ void InspectorVBox::setElement(Element* e)
       VBox* box = static_cast<VBox*>(e);
       qreal _spatium = e->score()->spatium();
       vb.elementName->setText(e->name());
-      vb.topGap->blockSignals(true);
-      vb.bottomGap->blockSignals(true);
-      vb.height->blockSignals(true);
+
+      block(true);
+
       vb.topGap->setValue(box->topGap() / _spatium);
       vb.bottomGap->setValue(box->bottomGap() / _spatium);
       vb.height->setValue(box->boxHeight().val());
-      vb.topGap->blockSignals(false);
-      vb.bottomGap->blockSignals(false);
-      vb.height->blockSignals(false);
+      vb.leftMargin->setValue(box->leftMargin());
+      vb.rightMargin->setValue(box->rightMargin());
+      vb.topMargin->setValue(box->topMargin());
+      vb.bottomMargin->setValue(box->bottomMargin());
+
+      block(false);
       }
 
 //---------------------------------------------------------
@@ -411,11 +475,19 @@ void InspectorVBox::apply()
       qreal bottomGap = vb.bottomGap->value() * _spatium;
       Spatium height(vb.height->value());
 
+      qreal lm = vb.leftMargin->value();
+      qreal rm = vb.rightMargin->value();
+      qreal tm = vb.topMargin->value();
+      qreal bm = vb.bottomMargin->value();
+
       if (topGap != box->topGap() || bottomGap != box->bottomGap()
-         || height != box->boxHeight()) {
+         || height != box->boxHeight()
+         || lm != box->leftMargin() || rm != box->rightMargin()
+         || tm != box->topMargin()  || bm != box->bottomMargin()
+         ) {
             score->startCmd();
             score->undo(new ChangeBoxProperties(box,
-               box->leftMargin(), box->topMargin(), box->rightMargin(), box->bottomMargin(),
+               lm, tm, rm, bm,
                height, box->boxWidth(),
                topGap, bottomGap
                ));
