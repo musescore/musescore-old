@@ -180,7 +180,7 @@ void Score::collectNote(EventMap* events, int channel, Note* note, int onTime, i
       if (note->onTimeType() == USER_VAL)
             onTime += note->onTimeOffset();
       else if (note->onTimeType() == OFFSET_VAL) {
-            onTime += note->onTimeUserOffset();
+            onTime += ((note->onTimeUserOffset() * note->chord()->tickLen()) / 100);
             }
             
       int offTime = onTime + len;
@@ -188,7 +188,7 @@ void Score::collectNote(EventMap* events, int channel, Note* note, int onTime, i
             //apply offset on real length
             offTime = onTime + note->chord()->tickLen() + note->offTimeOffset();
       else if (note->offTimeType() == OFFSET_VAL) {
-            offTime += note->offTimeUserOffset();
+            offTime = onTime + note->chord()->tickLen() + ((note->offTimeUserOffset() * note->chord()->tickLen()) / 100);
             }
 
       if (note->hidden() || note->tieBack())       // do not play overlapping notes
