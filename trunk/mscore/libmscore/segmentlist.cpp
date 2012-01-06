@@ -47,16 +47,23 @@ void SegmentList::check()
             l = s;
             ++n;
             }
+      for (Segment* s = _first; s; s = s->next()) {
+            Segment* ss = s->next();
+            while (ss) {
+                  if (s == ss) {
+                        qFatal("SegmentList::check: segment twice in list");
+                        }
+                  ss = ss->next();
+                  }
+            }
       if (f != _first) {
-            qDebug("SegmentList::check: bad first\n");
-            abort();
+            qFatal("SegmentList::check: bad first");
             }
       if (l != _last) {
-            qDebug("SegmentList::check: bad last\n");
-            abort();
+            qFatal("SegmentList::check: bad last");
             }
       if (n != _size) {
-            qDebug("SegmentList::check: wrong segment segments %d count %d\n", n, _size);
+            qDebug("SegmentList::check: count %d but _size is %d", n, _size);
             _size = n;
             abort();
             }
@@ -73,20 +80,18 @@ void SegmentList::check()
 
 void SegmentList::insert(Segment* e, Segment* el)
       {
-      if (el == 0) {
+      if (el == 0)
             push_back(e);
-            return;
-            }
-      if (el == first()) {
+      else if (el == first())
             push_front(e);
-            return;
+      else {
+            ++_size;
+            e->setNext(el);
+            e->setPrev(el->prev());
+            el->prev()->setNext(e);
+            el->setPrev(e);
+            check();
             }
-      ++_size;
-      e->setNext(el);
-      e->setPrev(el->prev());
-      el->prev()->setNext(e);
-      el->setPrev(e);
-      check();
       }
 
 //---------------------------------------------------------
@@ -122,16 +127,12 @@ void SegmentList::remove(Segment* el)
 void SegmentList::push_back(Segment* e)
       {
       ++_size;
-      if (_last) {
+      e->setNext(0);
+      if (_last)
             _last->setNext(e);
-            e->setPrev(_last);
-            e->setNext(0);
-            }
-      else {
+      else
             _first = e;
-            e->setPrev(0);
-            e->setNext(0);
-            }
+      e->setPrev(_last);
       _last = e;
       check();
       }
@@ -143,16 +144,12 @@ void SegmentList::push_back(Segment* e)
 void SegmentList::push_front(Segment* e)
       {
       ++_size;
-      if (_first) {
+      e->setPrev(0);
+      if (_first)
             _first->setPrev(e);
-            e->setNext(_first);
-            e->setPrev(0);
-            }
-      else {
+      else
             _last = e;
-            e->setPrev(0);
-            e->setNext(0);
-            }
+      e->setNext(_first);
       _first = e;
       check();
       }
@@ -164,12 +161,11 @@ void SegmentList::push_front(Segment* e)
 void SegmentList::insert(Segment* seg)
       {
 #ifndef NDEBUG
-//      qDebug("insertSeg <%s> %p %p %p\n", seg->subTypeName(), seg->prev(), seg, seg->next());
+//      qDebug("insertSeg <%s> %p %p %p", seg->subTypeName(), seg->prev(), seg, seg->next());
       check();
       for (Segment* s = _first; s; s = s->next()) {
             if (s == seg) {
-                  qDebug("SegmentList::insert: already in list\n");
-                  abort();
+                  qFatal("SegmentList::insert: already in list\n");
                   }
             }
       if (seg->prev()) {
@@ -179,8 +175,7 @@ void SegmentList::insert(Segment* seg)
                         break;
                   }
             if (s != seg->prev()) {
-                  qDebug("SegmentList::insert: seg->prev() not in list\n");
-                  abort();
+                  qFatal("SegmentList::insert: seg->prev() not in list");
                   }
             }
 
@@ -191,8 +186,7 @@ void SegmentList::insert(Segment* seg)
                         break;
                   }
             if (s != seg->next()) {
-                  qDebug("SegmentList::insert: seg->next() not in list\n");
-                  abort();
+                  qFatal("SegmentList::insert: seg->next() not in list");
                   }
             }
 #endif

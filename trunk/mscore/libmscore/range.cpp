@@ -179,7 +179,7 @@ void TrackList::append(Element* e, QHash<Spanner*,Spanner*>* map)
                         }
                   }
             }
-      else if (e->type() == CLEF)
+      else
             QList<Element*>::append(e->clone());
       }
 
@@ -213,7 +213,7 @@ void TrackList::read(int track, const Segment* fs, const Segment* es, QHash<Span
       int gap = 0;
       for (const Segment* s = fs; s; s = s->next1()) {
             Element* e = s->element(track);
-            if (!e)
+            if (!e || e->generated())
                   continue;
             if (e->isChordRest()) {
                   DurationElement* de = static_cast<DurationElement*>(e);
@@ -242,9 +242,8 @@ void TrackList::read(int track, const Segment* fs, const Segment* es, QHash<Span
                   if (de->type() != CHORD || !static_cast<Chord*>(de)->isGrace())
                         tick += de->duration().ticks();;
                   }
-            else {
+            else
                   append(e, map);
-                  }
             if (s == es)
                   break;
             }
@@ -286,6 +285,7 @@ Tuplet* TrackList::writeTuplet(Tuplet* tuplet, Measure* measure, int tick) const
 //---------------------------------------------------------
 //   canWrite
 //    check if list can be written to measure list m
+//    check for tuplets crossing barlines
 //---------------------------------------------------------
 
 bool TrackList::canWrite(const Fraction& measureLen) const
@@ -424,6 +424,11 @@ bool TrackList::write(int track, Measure* measure, QHash<Spanner*, Spanner*>* ma
                               }
                         }
                   }
+            else if (e->type() == KEYSIG) {
+                  // keysig has to be at start of measure
+                  }
+            else if (e->type() == BAR_LINE)
+                  ;
             else {
                   segment = m->getSegment(e, m->tick() + pos.ticks());
                   Element* ne = e->clone();
