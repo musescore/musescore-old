@@ -142,7 +142,7 @@ Volta* Score::searchVolta(int tick) const
       }
 
 //---------------------------------------------------------
-//   collectChord
+//   collectChord, used for appogiaturra
 //---------------------------------------------------------
 
 void Score::collectChord(EventMap* events, Instrument* instr, Chord* chord, int tick, int len)
@@ -171,28 +171,23 @@ void Score::collectChord(EventMap* events, Instrument* instr, Chord* chord, int 
 
 //---------------------------------------------------------
 //   collectNote
+//   onTime is the offset based on repeat
+//   len is the expected len of the chord
 //---------------------------------------------------------
 
 void Score::collectNote(EventMap* events, int channel, Note* note, int onTime, int len)
       {
-      int noteTick    = note->chord()->tick();
-      int noteOffTick = noteTick + note->chord()->tickLen();
-
-      if (note->onTimeType() == AUTO_VAL)
-            note->setOnTimeOffset(onTime - noteTick);
-      else if (note->onTimeType() == USER_VAL)
-            onTime = noteTick + note->onTimeOffset();
-      else {
-            note->setOnTimeOffset(onTime - noteTick);
+      if (note->onTimeType() == USER_VAL)
+            onTime += note->onTimeOffset();
+      else if (note->onTimeType() == OFFSET_VAL) {
             onTime += note->onTimeUserOffset();
             }
+            
       int offTime = onTime + len;
-      if (note->offTimeType() == AUTO_VAL)
-            note->setOffTimeOffset(offTime - noteOffTick);
-      else if (note->offTimeType() == USER_VAL)
-            offTime = noteOffTick + note->offTimeOffset();
-      else  {
-            note->setOffTimeOffset(offTime - noteOffTick);
+      if (note->offTimeType() == USER_VAL)
+            //apply offset on real length
+            offTime = onTime + note->chord()->tickLen() + note->offTimeOffset();
+      else if (note->offTimeType() == OFFSET_VAL) {
             offTime += note->offTimeUserOffset();
             }
 

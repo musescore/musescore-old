@@ -371,8 +371,11 @@ void KeyList::removeTime(int tick, int len)
       {
       KeyList tmp;
       for (ciKeyList i = begin(); i != end(); ++i) {
-            if ((i->first >= tick) && (tick != 0)) {
-                  if (i->first >= tick + len)
+            if ((i->first >= tick)) {
+                  if (tick == 0 && tick == i->first) {
+                        tmp[i->first] = i->second;
+                        }
+                  else if (i->first >= tick + len)
                         tmp[i->first - len] = i->second;
                   else
                         printf("remove key event\n");
@@ -392,10 +395,16 @@ void KeyList::insertTime(int tick, int len)
       {
       KeyList tmp;
       for (ciKeyList i = begin(); i != end(); ++i) {
-            if ((i->first >= tick) && (tick != 0))
-                  tmp[i->first + len] = i->second;
+            if ((i->first >= tick)) {
+                  if (tick == 0 && tick == i->first) { //don't move the first one
+                        tmp[i->first] = i->second;
+                        }
+                  else{
+                        tmp[i->first + len] = i->second;
+                        }
+                  }
             else
-                  tmp[i->first] = i->second;
+                  tmp[i->first] = i->second; //don't move if < tick
             }
       clear();
       insert(tmp.begin(), tmp.end());

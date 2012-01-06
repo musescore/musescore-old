@@ -1,3 +1,12 @@
+6.jan (la)
+      - add "Create desktop shortcut" option in windows installer
+      - reduce auto update check period
+      - fix default style of Frame Text
+      - fix german chordnames (H / Bb)
+      - fix #14272: Add 'Can't open" dialog for unknow filetype
+      - fix #14076: Add MuseScore.org link in dialog for more recent file
+      - fix: Offset for offtime not saved
+      - Incomplete fix #12966: Measure insert corrupts key changes
 28.dec (lv)
       - importxml.cpp cleanup
 27.dec (lv)

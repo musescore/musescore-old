@@ -160,6 +160,8 @@ void tpc2name(int tpc, bool germanNames, QChar* name, int* acc)
       *acc   = ((tpc+1) / 7) - 2;
       int idx = (tpc + 1) % 7;
       *name = QChar::fromLatin1(germanNames ? gnames[idx] : names[idx]);
+      if (*name == 'H' && *acc == -1)
+              *name = 'B';      
       }
 
 //---------------------------------------------------------

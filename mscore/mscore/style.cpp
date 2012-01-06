@@ -295,7 +295,7 @@ const TextStyle defaultTextStyleArray[] = {
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Volta"), ff, 11, true, false, false,
          ALIGN_LEFT, 0.5, .0, OS, 0, 0, true),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Frame"), ff, 11, true, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Frame"), ff, 11, false, false, false,
          ALIGN_LEFT, 0, 0, OS, 0, 0, true),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "TextLine"), ff,  12, false, false, false,

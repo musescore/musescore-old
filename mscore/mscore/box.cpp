@@ -383,12 +383,13 @@ void HBox::propertyAction(ScoreView* viewer, const QString& cmd)
             vp.exec();
             }
       else if (cmd == "frame-text") {
-            Text* s = new Text(score());
-            s->setSubtype(TEXT_FRAME);
-            s->setParent(this);
-            score()->undoAddElement(s);
-            score()->select(s, SELECT_SINGLE, 0);
-            viewer->startEdit(s);
+            Text* t = new Text(score());
+            t->setSubtype(TEXT_FRAME);
+            t->setTextStyle(TEXT_STYLE_FRAME);
+            t->setParent(this);
+            score()->undoAddElement(t);
+            score()->select(t, SELECT_SINGLE, 0);
+            viewer->startEdit(t);
             score()->setLayoutAll(true);
             }
       }
