@@ -212,7 +212,7 @@ void ChordProperties::offtimeOffsetTypeChanged(int vt)
                   offtimeOffset->setReadOnly(false);
                   offtimeOffset->setSuffix("%");
                   offtimeOffset->setRange(-200, 200);
-                  offtimeOffset->setValue(_ontimeUserOffset);
+                  offtimeOffset->setValue(_offtimeUserOffset);
                   break;
             }
       }
