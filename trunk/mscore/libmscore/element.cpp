@@ -76,6 +76,7 @@
 #include "ossia.h"
 #include "figuredbass.h"
 #include "rehearsalmark.h"
+#include "notedot.h"
 
 extern bool debugMode;
 extern bool showInvisible;

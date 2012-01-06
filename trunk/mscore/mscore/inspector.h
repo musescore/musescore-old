@@ -155,9 +155,15 @@ class InspectorVBox : public InspectorElementBase {
 
       Ui::InspectorVBox vb;
 
+      void block(bool val);
+
    private slots:
       void resetTopGap();
       void resetBottomGap();
+      void resetLeftMargin();
+      void resetRightMargin();
+      void resetTopMargin();
+      void resetBottomMargin();
 
    public:
       InspectorVBox(QWidget* parent);

@@ -56,6 +56,7 @@
 #include "libmscore/accidental.h"
 #include "libmscore/keysig.h"
 #include "libmscore/sig.h"
+#include "libmscore/notedot.h"
 
 extern bool useFactorySettings;
 
