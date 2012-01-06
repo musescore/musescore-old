@@ -138,9 +138,9 @@ int UpdateChecker::defaultPeriod()
         int result = 24;
         if(qApp->applicationName() == "MuseScore"){ //avoid nightly cymbals
             if(MuseScore::unstable()){
-                  result = 72;
+                  result = 24;
             }else{
-                  result = 30*24;
+                  result = 7*24;
             }
         }
         return result;
