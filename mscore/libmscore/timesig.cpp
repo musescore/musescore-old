@@ -124,7 +124,7 @@ void TimeSig::setText(const QString& a, const QString& b)
       {
       sz = a;
       sn = b;
-      customText = true;
+      customText = !(a.isEmpty() && b.isEmpty());
       }
 
 //---------------------------------------------------------

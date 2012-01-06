@@ -643,6 +643,8 @@ SegmentType Segment::segmentType(ElementType type)
                   return SegTimeSig;
             case BAR_LINE:
                   return SegStartRepeatBarLine;
+            case BREATH:
+                  return SegBreath;
             default:
                   qDebug("Segment:segmentType():  bad type: <%s>\n", Element::name(type));
                   return (SegmentType)-1;
