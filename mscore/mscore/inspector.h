@@ -230,11 +230,17 @@ class InspectorNote : public InspectorElementBase {
       InspectorElementElement* iElement;
       InspectorNoteBase* iNote;
       InspectorSegment* iSegment;
+      QToolButton* dot1;
+      QToolButton* dot2;
+      QToolButton* dot3;
 
       bool dirty() const;
 
    private slots:
       void checkDirty();
+      void dot1Clicked();
+      void dot2Clicked();
+      void dot3Clicked();
 
    public:
       InspectorNote(QWidget* parent);
