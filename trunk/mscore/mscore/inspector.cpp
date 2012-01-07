@@ -24,6 +24,7 @@
 #include "libmscore/rest.h"
 #include "libmscore/beam.h"
 #include "libmscore/clef.h"
+#include "libmscore/notedot.h"
 
 //---------------------------------------------------------
 //   showInspector
@@ -301,8 +302,10 @@ void InspectorElementElement::apply()
 InspectorElementBase::InspectorElementBase(QWidget* parent)
    : QWidget(parent)
       {
+      setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
       inspector = static_cast<Inspector*>(parent);
       layout    = new QVBoxLayout;
+      layout->setSizeConstraint(QLayout::SetNoConstraint);
       setLayout(layout);
       }
 
@@ -970,10 +973,42 @@ InspectorNote::InspectorNote(QWidget* parent)
       layout->addWidget(iElement);
       layout->addWidget(iNote);
       layout->addWidget(iSegment);
+      layout->addSpacing(20);
+
+      QLabel* l = new QLabel;
+      l->setText(tr("Select"));
+      QFont font = l->font();
+      font.setBold(true);
+      l->setFont(font);
+      l->setAlignment(Qt::AlignHCenter);
+      layout->addWidget(l);
+      QFrame* f = new QFrame;
+      f->setFrameStyle(QFrame::HLine | QFrame::Raised);
+      f->setLineWidth(2);
+      layout->addWidget(f);
+
+      QHBoxLayout* box = new QHBoxLayout;
+      dot1 = new QToolButton(this);
+      dot1->setText(tr("Dot1"));
+      dot1->setEnabled(false);
+      box->addWidget(dot1);
+      dot2 = new QToolButton(this);
+      dot2->setText(tr("Dot2"));
+      dot2->setEnabled(false);
+      box->addWidget(dot2);
+      dot3 = new QToolButton(this);
+      dot3->setText(tr("Dot3"));
+      dot3->setEnabled(false);
+      box->addWidget(dot3);
+
+      layout->addLayout(box);
 
       connect(iElement, SIGNAL(enableApply()), SLOT(checkDirty()));
       connect(iNote,    SIGNAL(enableApply()), SLOT(checkDirty()));
       connect(iSegment, SIGNAL(enableApply()), SLOT(checkDirty()));
+      connect(dot1,     SIGNAL(clicked()), SLOT(dot1Clicked()));
+      connect(dot2,     SIGNAL(clicked()), SLOT(dot2Clicked()));
+      connect(dot3,     SIGNAL(clicked()), SLOT(dot3Clicked()));
       }
 
 //---------------------------------------------------------
@@ -997,6 +1032,9 @@ void InspectorNote::setElement(Element* e)
       iElement->setElement(e);
       iNote->setElement(note);
       iSegment->setElement(segment);
+      dot1->setEnabled(note->dot(0));
+      dot2->setEnabled(note->dot(1));
+      dot3->setEnabled(note->dot(2));
       }
 
 //---------------------------------------------------------
@@ -1016,6 +1054,57 @@ void InspectorNote::apply()
       score->setLayoutAll(true);
       score->endCmd();
       mscore->endCmd();
+      }
+
+//---------------------------------------------------------
+//   dot1Clicked
+//---------------------------------------------------------
+
+void InspectorNote::dot1Clicked()
+      {
+      Note* note = static_cast<Note*>(inspector->element());
+      if (note == 0)
+            return;
+      NoteDot* dot = note->dot(0);
+      if (dot) {
+            dot->score()->select(dot);
+            inspector->setElement(dot);
+            dot->score()->end();
+            }
+      }
+
+//---------------------------------------------------------
+//   dot2Clicked
+//---------------------------------------------------------
+
+void InspectorNote::dot2Clicked()
+      {
+      Note* note = static_cast<Note*>(inspector->element());
+      if (note == 0)
+            return;
+      NoteDot* dot = note->dot(1);
+      if (dot) {
+            dot->score()->select(dot);
+            inspector->setElement(dot);
+            dot->score()->end();
+            }
+      }
+
+//---------------------------------------------------------
+//   dot3Clicked
+//---------------------------------------------------------
+
+void InspectorNote::dot3Clicked()
+      {
+      Note* note = static_cast<Note*>(inspector->element());
+      if (note == 0)
+            return;
+      NoteDot* dot = note->dot(2);
+      if (dot) {
+            dot->score()->select(dot);
+            inspector->setElement(dot);
+            dot->score()->end();
+            }
       }
 
 //---------------------------------------------------------
