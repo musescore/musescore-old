@@ -72,5 +72,3 @@ void NoteDot::read(const QDomElement& de)
                   domError(e);
             }
       }
-
-

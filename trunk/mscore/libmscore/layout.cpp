@@ -929,7 +929,7 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
 
                   m->createEndBarLines();       // TODO: not set here
 
-                  m->layoutX(1.0);
+                  m->layoutX(1.0, true);
                   ww      = m->layoutWidth().stretchable;
                   stretch = m->userStretch() * styleD(ST_measureSpacing);
 
@@ -1196,7 +1196,7 @@ bool Score::doReLayout()
 //TODOXX                  measure->layout0();
 //TODO            measure->layoutBeams1();
 
-                  measure->layoutX(1.0);
+                  measure->layoutX(1.0, true);
                   ww      = measure->layoutWidth().stretchable;
                   qreal stretch = measure->userStretch() * styleD(ST_measureSpacing);
 
@@ -1215,7 +1215,7 @@ bool Score::doReLayout()
       m = m->next();
       if (m && m->type() == MEASURE) {
             Measure* measure = static_cast<Measure*>(m);
-            measure->layoutX(1.0);
+            measure->layoutX(1.0, true);
             qreal ww      = measure->layoutWidth().stretchable;
             qreal stretch = measure->userStretch() * styleD(ST_measureSpacing);
 
@@ -1597,7 +1597,7 @@ QList<System*> Score::layoutSystemRow(qreal rowWidth, bool isFirstSystem, bool u
                         Measure* m = (Measure*)mb;
                         if (needRelayout) {
                               m->setDirty(true);
-                              m->layoutX(1.0);
+                              m->layoutX(1.0, true);
                               }
                         minWidth    += m->layoutWidth().stretchable;
                         totalWeight += m->ticks() * m->userStretch();

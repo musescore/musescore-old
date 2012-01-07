@@ -547,9 +547,9 @@ void BarLine::layout()
                   qreal botY            = y2 + distance;
                   qreal x               = width() - (a->width() * .5);
                   if (aa == A_TOP_STAFF)
-                        a->setPos(x, topY);
+                        a->setPos(QPointF(x, topY));
                   else if (aa == A_BOTTOM_STAFF)
-                        a->setPos(x, botY);
+                        a->setPos(QPointF(x, botY));
                   }
             }
       setbbox(r);

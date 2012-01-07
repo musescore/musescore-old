@@ -424,7 +424,7 @@ void Measure::layout(qreal width)
       // keep old value for relayout
 
       setbbox(QRectF(0.0, 0.0, width, height()));
-      layoutX(width);
+      layoutX(width, false);
       }
 
 //---------------------------------------------------------
@@ -2718,9 +2718,9 @@ void Space::max(const Space& s)
 ///   to find out the minimal width of the measure.
 //-----------------------------------------------------------------------------
 
-void Measure::layoutX(qreal stretch)
+void Measure::layoutX(qreal stretch, bool firstPass)
       {
-      if (!_dirty && (stretch == 1.0))
+      if (!_dirty && firstPass)
             return;
       int nstaves = _score->nstaves();
 
@@ -2772,7 +2772,8 @@ void Measure::layoutX(qreal stretch)
                         int track  = staffIdx * VOICES;
                         Element* e = s->element(track);
                         if (e) {
-                              e->layout();
+                              if (firstPass)
+                                    e->layout();
                               clefWidth[staffIdx] = e->width() + _spatium + elsp;
                               }
                         }
@@ -2823,12 +2824,14 @@ void Measure::layoutX(qreal stretch)
                                           minDistance = qMax(minDistance, d);
                                           }
                                     }
-                              cr->layout();
+                              if (firstPass)
+                                    cr->layout();
                               space.max(cr->space());
                               foreach(Lyrics* l, cr->lyricsList()) {
                                     if (!l)
                                           continue;
-                                    l->layout();
+                                    if (firstPass)
+                                          l->layout();
                                     lyrics = l;
                                     if (!lyrics->isMelisma()) {
                                           QRectF b(l->bbox().translated(l->pos()));
@@ -2869,7 +2872,8 @@ void Measure::layoutX(qreal stretch)
                               }
                         if (e) {
                               found = true;
-                              e->layout();
+                              if (firstPass)
+                                    e->layout();
                               space.max(e->space());
                               }
                         }
@@ -2940,7 +2944,7 @@ void Measure::layoutX(qreal stretch)
       xpos[segmentIdx]    = x + segmentWidth;
       width[segmentIdx-1] = segmentWidth;
 
-      if (stretch == 1.0) {
+      if (firstPass) {
             // qDebug("this is pass 1");
             _mw = MeasureWidth(xpos[segs], 0.0);
             _dirty = false;
@@ -2952,7 +2956,6 @@ void Measure::layoutX(qreal stretch)
       //---------------------------------------------------
 
       SpringMap springs;
-//      qreal stretchSum = 0.0;
 
       qreal minimum = xpos[0];
       for (int i = 0; i < segs; ++i) {
@@ -2965,7 +2968,6 @@ void Measure::layoutX(qreal stretch)
                   if (minTick > 0)
                       str += .6 * log(qreal(t) / qreal(minTick)) / log(2.0);
                   d = w / str;
-//                  stretchSum += str;
                   }
             else {
                   str = 0.0;              // dont stretch timeSig and key

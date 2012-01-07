@@ -1280,8 +1280,9 @@ void Note::layout()
                         y += .5 * _spatium * up;
                         }
                   for (int i = 0; i < dots; ++i) {
-                        _dots[i]->setPos(x + d + dd * i, y);
-_dots[i]->adjustReadPos();
+                        NoteDot* nd = _dots[i];
+                        nd->setPos(x + d + dd * i, y);
+                        _dots[i]->adjustReadPos();
                         }
                   }
             }
