@@ -184,7 +184,7 @@ class Measure : public MeasureBase {
       qreal userStretch() const           { return _userStretch; }
       void setUserStretch(qreal v)        { _userStretch = v;    }
 
-      void layoutX(qreal stretch);
+      void layoutX(qreal stretch, bool firstPass);
       void layout(qreal width);
       void layout2();
 

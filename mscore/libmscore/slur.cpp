@@ -68,7 +68,7 @@ bool SlurSegment::isEdited(SpannerSegment* ss) const
 
 void SlurSegment::move(const QPointF& s)
       {
-      movePos(s);
+      move(s);
       for (int k = 0; k < SLUR_GRIPS; ++k)
             ups[k].p += s;
       }

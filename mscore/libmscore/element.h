@@ -136,7 +136,6 @@ class Element {
 
       mutable ElementFlags _flags;
 
-//      int _subtype;
       int _track;                 ///< staffIdx * VOICES + voice
                                   ///< -1 if this is a system element
       QColor _color;
@@ -157,7 +156,6 @@ class Element {
       void* pUserOff()  { return &_userOff;  }
 
    protected:
-//      void* pSubtype()  { return &_subtype;  }
 
       Score* _score;
 
@@ -200,9 +198,8 @@ class Element {
       virtual QPointF pos() const             { return _pos + _userOff;         }
       virtual qreal x() const                 { return _pos.x() + _userOff.x(); }
       virtual qreal y() const                 { return _pos.y() + _userOff.y(); }
-      void setPos(qreal x, qreal y);
-      void setPos(const QPointF& p)           { setPos(p.x(), p.y());           }
-      void movePos(const QPointF& p)          { _pos += p;               }
+      void setPos(qreal x, qreal y)           { _pos.rx() = x, _pos.ry() = y;   }
+      void setPos(const QPointF& p)           { _pos = p;                }
       qreal& rxpos()                          { return _pos.rx();        }
       qreal& rypos()                          { return _pos.ry();        }
       virtual void move(qreal xd, qreal yd)   { _pos += QPointF(xd, yd); }
@@ -240,8 +237,6 @@ class Element {
       virtual qreal baseLine() const          { return -height();       }
 
       virtual ElementType type() const = 0;
-//      int subtype() const                        { return _subtype;        }
-//      virtual void setSubtype(int val)           { _subtype = val;         }
       bool isChordRest() const                   { return type() == REST || type() == CHORD;   }
       bool isDurationElement() const             { return isChordRest() || (type() == TUPLET); }
       bool isSLine() const {

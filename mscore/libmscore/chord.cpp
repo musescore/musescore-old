@@ -1362,6 +1362,7 @@ void Chord::layout()
             qreal stepDistance = _spatium * .5;
             int stepOffset      = staff()->staffType()->stepOffset();
 
+            adjustReadPos();
             foreach(Note* note, _notes) {
                   note->layout();
                   qreal x = 0.0;
@@ -1382,14 +1383,12 @@ void Chord::layout()
 
                   note->setPos(x, (note->line() + stepOffset) * stepDistance);
                   note->adjustReadPos();
-
                   Accidental* accidental = note->accidental();
                   if (accidental)
                         x = accidental->x() + note->x() - minNoteDistance;
                   if (x < lx)
                         lx = x;
                   }
-            adjustReadPos();
 
             //---------------------------------------------------
             //    create ledger lines for notes moved to
@@ -1673,7 +1672,6 @@ void Chord::pitchChanged()
 Element* Chord::drop(const DropData& data)
       {
       Element* e = data.element;
-printf("Chord::drop %s\n", e->name());
       switch (e->type()) {
             case ARTICULATION:
                   {

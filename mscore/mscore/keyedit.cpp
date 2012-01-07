@@ -166,7 +166,7 @@ void KeyCanvas::mouseMoveEvent(QMouseEvent* event)
             return;
       QPointF p = imatrix.map(QPointF(event->pos()));
       QPointF delta = p - startMove;
-      moveElement->movePos(delta);
+      moveElement->move(delta);
       startMove = p;
       update();
       }

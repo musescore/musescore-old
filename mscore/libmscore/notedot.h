@@ -26,7 +26,6 @@ class NoteDot : public Element {
 
    public:
       NoteDot(Score*);
-//      NoteDot &operator=(const NoteDot&);
       virtual NoteDot* clone() const  { return new NoteDot(*this); }
       virtual ElementType type() const { return NOTEDOT; }
       int idx() const      { return _idx; }
