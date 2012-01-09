@@ -281,13 +281,16 @@ bool Dynamic::genPropertyMenu(QMenu* popup) const
 void Dynamic::propertyAction(ScoreView* viewer, const QString& s)
       {
       if (s == "props") {
-            Text* nText = new Text(*this);
+            Dynamic* nText = new Dynamic(*this);
             TextProperties tp(nText, 0);
             int rv = tp.exec();
-            if (rv)
+            if (rv) {
+                  nText->setParent(parent());
                   score()->undoChangeElement(this, nText);
-            else
+                  }
+            else {
                   delete nText;
+                  }
             }
       else if (s == "dynamics") {
             int oldVelo    = _velocity;

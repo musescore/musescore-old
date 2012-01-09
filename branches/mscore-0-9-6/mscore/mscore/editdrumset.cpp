@@ -343,7 +343,7 @@ void EditDrumset::load()
       {
       QString name = QFileDialog::getOpenFileName(
          this, tr("MuseScore: Load Drumset"),
-         ".",
+         mscoreGlobalShare + "templates",
          tr("MuseScore drumset (*.drm)")
          );
       if (name.isEmpty())

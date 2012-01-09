@@ -615,10 +615,10 @@ void MuseScore::showPalette(bool visible)
             ik->setAction(getAction("no-beam"));
             sp->append(ik, tr("No beam"));
 
-            ik = new Icon(gscore);
+            /*ik = new Icon(gscore);
             ik->setSubtype(ICON_BEAM32);
             ik->setAction(getAction("beam32"));
-            sp->append(ik, tr("Start subbeam"));
+            sp->append(ik, tr("Start subbeam"));*/
 
             ik = new Icon(gscore);
             ik->setSubtype(ICON_AUTOBEAM);

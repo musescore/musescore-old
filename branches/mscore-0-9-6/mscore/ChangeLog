@@ -1,3 +1,10 @@
+9.jan (la)
+      - add drumset file for french drums notation see #14340
+      - change default drumset folder to "templates" dir
+      - add UK Brass Band template
+      - remove subbeam button
+      - read and ignore "pos"
+      - partly fix #10552 : no more crash on undo, dynamic created
 6.jan (la)
       - add "Create desktop shortcut" option in windows installer
       - reduce auto update check period
