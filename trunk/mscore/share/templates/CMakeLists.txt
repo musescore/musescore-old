@@ -46,6 +46,10 @@ install(FILES
       Guitar\ Tab.mscx
       carol.mscx
       Jazz\ Lead\ Sheet.mscz
+      Jazz\ Big\ Band.mscz
+      Jazz\ Combo.mscz
+      UK\ Brass\ Band.mscz
+      drumset_fr.drm
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}templates
       )
 
