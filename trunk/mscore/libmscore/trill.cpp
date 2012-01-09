@@ -154,7 +154,7 @@ Element* TrillSegment::drop(const DropData& data)
 Trill::Trill(Score* s)
   : SLine(s)
       {
-      _subtype = TRILL_LINE;
+      _subtype    = TRILL_LINE;
       _accidental = 0;
       setLen(spatium() * 7);   // for use in palettes
       setYoff(-1.0);    // default position
@@ -233,6 +233,7 @@ LineSegment* Trill::createLineSegment()
       {
       TrillSegment* seg = new TrillSegment(score());
       seg->setTrack(track());
+      seg->setColor(color());
       return seg;
       }
 

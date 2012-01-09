@@ -26,10 +26,10 @@ class NoteDot : public Element {
 
    public:
       NoteDot(Score*);
-      virtual NoteDot* clone() const  { return new NoteDot(*this); }
+      virtual NoteDot* clone() const   { return new NoteDot(*this); }
       virtual ElementType type() const { return NOTEDOT; }
-      int idx() const      { return _idx; }
-      void setIdx(int val) { _idx = val; }
+      int idx() const                  { return _idx; }
+      void setIdx(int val)             { _idx = val; }
 
       virtual void draw(QPainter*) const;
       virtual void write(Xml& xml) const;

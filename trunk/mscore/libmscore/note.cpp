@@ -305,7 +305,7 @@ void Note::setTpcFromPitch()
 
 void Note::setTpc(int v)
       {
-      if (v < -1 || v > 33) {
+      if (!tpcIsValid(_tpc)) {
             qDebug("Note::setTpc: bad tpc %d\n", v);
             abort();
             }
@@ -678,20 +678,12 @@ void Note::read(const QDomElement& de)
       for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
-            int i = val.toInt();
-
             if (setProperty(tag, e))
                   ;
-            else if (tag == "pitch") {
-                  if (i > 127)
-                        i = 127;
-                  else if (i < 0)
-                        i = 0;
-                  _pitch  = i;
-                  _ppitch = i;
+            else if (tag == "line") {
+                  _line = val.toInt();
+printf("read line %d\n", _line);
                   }
-            else if (tag == "line")
-                  _line = i;
             else if (tag == "Tie") {
                   _tieFor = new Tie(score());
                   _tieFor->setTrack(track());
@@ -822,7 +814,7 @@ void Note::read(const QDomElement& de)
                         hasAccidental = true;   // we now have an accidental
                   }
             else if (tag == "move")             // obsolete
-                  chord()->setStaffMove(i);
+                  chord()->setStaffMove(val.toInt());
             else if (tag == "Bend") {
                   _bend = new Bend(score());
                   _bend->setTrack(track());
@@ -872,8 +864,10 @@ void Note::read(const QDomElement& de)
       // ensure sane values:
       if (_pitch < 0 || _pitch > 127)
             _pitch = 60;
-      if (!tpcIsValid(_tpc))
-            _tpc = pitch2tpc(_pitch);
+      if (!tpcIsValid(_tpc)) {
+            printf("ReadNote: invalid tpc %d\n", _tpc);
+            setTpcFromPitch();
+            }
       _ppitch = _pitch;
       }
 
