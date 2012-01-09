@@ -520,6 +520,9 @@ bool Element::readProperties(QDomElement e)
             if (_systemFlag)
                   _track = 0;
             }
+      else if (tag == "pos") {
+      
+      }
       else
             return false;
       return true;

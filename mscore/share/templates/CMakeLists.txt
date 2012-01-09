@@ -43,6 +43,8 @@ install(FILES
       Lead\ Sheet.mscx
       Piano.mscx
       Jazz\ Lead\ Sheet.mscz
+      UK\ Brass\ Band.mscz
+      drumset_fr.drm
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}templates
       )
 

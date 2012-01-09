@@ -189,8 +189,7 @@ void MuseScore::loadFile()
          tr("Capella Files (*.cap);;")+
          tr("Bagpipe Music Writer Files (*.bww);;")+
          tr("BB Files <experimental> (*.mgu *.MGU *.sgu *.SGU);;")+
-         tr("Overture Files <experimental> (*.ove);;")+
-         tr("All Files (*)")
+         tr("Overture Files <experimental> (*.ove);;")
          );
       openScore(fn);
       }
