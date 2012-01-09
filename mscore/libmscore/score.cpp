@@ -2103,7 +2103,7 @@ Score* Score::clone()
       score->updateNotes();
       score->addLayoutFlags(LAYOUT_FIX_TICKS | LAYOUT_FIX_PITCH_VELO);
       score->doLayout();
-      score->scanElements(0, elementAdjustReadPos);
+      score->scanElements(0, elementAdjustReadPos);  //??
       return score;
       }
 

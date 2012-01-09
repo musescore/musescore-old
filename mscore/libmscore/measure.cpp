@@ -2036,7 +2036,6 @@ void Measure::read(const QDomElement& de, int staffIdx)
                   clef->setTrack(score()->curTrack);
                   clef->read(e);
                   clef->setGenerated(false);
-//                  ClefTypeList tl = clef->clefTypeList();
                   if (segment && segment->next() && segment->next()->subtype() == SegClef) {
                         segment = segment->next();
                         }
@@ -3006,17 +3005,19 @@ void Measure::layoutX(qreal stretch, bool firstPass)
                   for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
                         int track  = staffIdx * VOICES;
                         Element* e = s->element(track);
-                        qreal lm = 0.0;
-                        if (s->next()) {
-                              for (int track = staffIdx * VOICES; track < staffIdx*VOICES+VOICES; ++track) {
-                                    if (s->next()->element(track)) {
-                                          qreal clm = s->next()->element(track)->space().lw();
-                                          lm = qMax(lm, clm);
+                        if (e) {
+                              qreal lm = 0.0;
+                              if (s->next()) {
+                                    for (int track = staffIdx * VOICES; track < staffIdx*VOICES+VOICES; ++track) {
+                                          if (s->next()->element(track)) {
+                                                qreal clm = s->next()->element(track)->space().lw();
+                                                lm = qMax(lm, clm);
+                                                }
                                           }
                                     }
-                              }
-                        if (e)
                               e->setPos(-e->width() - lm - _spatium*.5, 0.0);
+                              e->adjustReadPos();
+                              }
                         }
                   --seg;
                   continue;
@@ -3075,6 +3076,7 @@ void Measure::layoutX(qreal stretch, bool firstPass)
                         if (ps)
                               gap = s->x() - (ps->x() + ps->width());
                         e->rxpos() = -gap * .5;
+                        e->adjustReadPos();
                         }
                   else {
                         e->setPos(-e->bbox().x(), 0.0);

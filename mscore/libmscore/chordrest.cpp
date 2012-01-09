@@ -211,7 +211,6 @@ bool ChordRest::readProperties(const QDomElement& e, QList<Tuplet*>* tuplets, QL
             return true;
       const QString& tag(e.tagName());
       const QString& val(e.text());
-      int i = val.toInt();
 
       if (tag == "BeamMode") {
             int bm = BEAM_AUTO;
@@ -230,7 +229,7 @@ bool ChordRest::readProperties(const QDomElement& e, QList<Tuplet*>* tuplets, QL
             else if (val == "begin64")
                   bm = BEAM_BEGIN64;
             else
-                  bm = BeamMode(i);
+                  bm = BeamMode(val.toInt());
             _beamMode = BeamMode(bm);
             }
       else if (tag == "Attribute" || tag == "Articulation") {     // obsolete: "Attribute"
@@ -239,17 +238,17 @@ bool ChordRest::readProperties(const QDomElement& e, QList<Tuplet*>* tuplets, QL
             add(atr);
             }
       else if (tag == "leadingSpace") {
-            if (debugMode)
+//            if (debugMode)
                   qDebug("ChordRest: leadingSpace obsolete"); // _extraLeadingSpace = Spatium(val.toDouble());
             }
       else if (tag == "trailingSpace") {
-            if (debugMode)
+//            if (debugMode)
                   qDebug("ChordRest: trailingSpace obsolete"); // _extraTrailingSpace = Spatium(val.toDouble());
             }
       else if (tag == "Beam") {
             Beam* beam = 0;
             foreach(Beam* b, score()->beams) {
-                  if (b->id() == i) {
+                  if (b->id() == val.toInt()) {
                         beam = b;
                         break;
                         }
@@ -257,10 +256,10 @@ bool ChordRest::readProperties(const QDomElement& e, QList<Tuplet*>* tuplets, QL
             if (beam)
                   beam->add(this);        // also calls this->setBeam(beam)
             else
-                  qDebug("Beam id %d not found", i);
+                  qDebug("Beam id %d not found", val.toInt());
             }
       else if (tag == "small")
-            _small = i;
+            _small = val.toInt();
       else if (tag == "Slur") {
             int id = e.attribute("number").toInt();
             QString type = e.attribute("type");
@@ -319,6 +318,7 @@ bool ChordRest::readProperties(const QDomElement& e, QList<Tuplet*>* tuplets, QL
             setDuration(readFraction(e));
       else if (tag == "ticklen") {      // obsolete (version < 1.12)
             int mticks = score()->sigmap()->timesig(score()->curTick).timesig().ticks();
+            int i = val.toInt();
             if (i == 0)
                   i = mticks;
             // if ((type() == REST) && (mticks == i || (durationType()==TDuration::V_WHOLE && mticks != 1920))) {
@@ -333,9 +333,9 @@ bool ChordRest::readProperties(const QDomElement& e, QList<Tuplet*>* tuplets, QL
                   }
             }
       else if (tag == "dots")
-            setDots(i);
+            setDots(val.toInt());
       else if (tag == "move")
-            _staffMove = i;
+            _staffMove = val.toInt();
       else if (tag == "Lyrics" || tag == "FiguredBass") {
             Element* element = Element::name2Element(tag, score());
             element->setTrack(score()->curTrack);

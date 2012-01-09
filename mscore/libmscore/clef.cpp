@@ -61,7 +61,7 @@ const ClefInfo clefTable[] = {
 Clef::Clef(Score* s)
   : Element(s)
       {
-      setFlags(ELEMENT_SELECTABLE | ELEMENT_ON_STAFF);
+      setFlags(ELEMENT_SELECTABLE | ELEMENT_ON_STAFF | ELEMENT_MOVABLE);
 
       _showCourtesyClef = true;
       _small            = false;
@@ -72,9 +72,8 @@ Clef::Clef(Score* s)
 Clef::Clef(const Clef& c)
    : Element(c)
       {
-      setFlags(ELEMENT_SELECTABLE | ELEMENT_ON_STAFF);
-
       _showCourtesyClef = c._showCourtesyClef;
+      _showPreviousClef = c._showPreviousClef;
       _small            = c._small;
       _clefTypes        = c._clefTypes;
       }
