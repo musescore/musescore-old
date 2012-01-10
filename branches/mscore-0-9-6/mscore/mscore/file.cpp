@@ -701,11 +701,11 @@ void MuseScore::newFile()
                               // transpose key
                               //
                               KeySigEvent nKey = ks;
-                              if (part->transpose().chromatic && !newWizard->useTemplate()) {
+                              if (part->transpose().chromatic && !score->styleB(ST_concertPitch)) {
                                     int diff = -part->transpose().chromatic;
                                     nKey.setAccidentalType(transposeKey(nKey.accidentalType(), diff));
                                     }
-                              if (nKey.accidentalType()) {
+                              if (nKey.accidentalType() || newWizard->useTemplate()) {
                                     (*(staff->keymap()))[0] = nKey;
                                     KeySig* keysig = new KeySig(score);
                                     keysig->setTrack(staffIdx * VOICES);
