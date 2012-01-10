@@ -8,12 +8,12 @@
         <translation>O programie</translation>
     </message>
     <message utf8="true">
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visit &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Support MuseScore with &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
@@ -23,10 +23,10 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }&#13;
 &lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;&#13;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Odwiedź &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;, gdzie znajdziesz nowe wersje i więcej informacji.&lt;/span&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Wesprzyj MuseScore &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;spafan style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;swoją dotacją&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;.&lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Wesprzyj MuseScore &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;spafan style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;swoją darowizną&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;.&lt;/span&gt;&lt;/p&gt;&#13;
 &#13;
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2011 Werner Schweer i inni. &lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2012 Werner Schweer i inni.&lt;/span&gt;&lt;/p&gt;&#13;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Opublikowane na licencji GNU General Public License.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
@@ -158,7 +158,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>ChordEdit</name>
     <message>
         <source>MuseScore: Harmony Properties</source>
-        <translation>Właściwości akordów</translation>
+        <translation>Właściwości nazwy akordu</translation>
     </message>
     <message>
         <source>TextLabel</source>
@@ -758,7 +758,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>none</source>
-        <translation>Brak</translation>
+        <translation>brak</translation>
     </message>
     <message>
         <source>/C</source>
@@ -1588,7 +1588,7 @@ nieudane: </translation>
     </message>
     <message>
         <source>Articulations, Ornaments</source>
-        <translation>Artykulacja i ornamenty</translation>
+        <translation>Artykulacje i ozdobniki</translation>
     </message>
     <message>
         <source>Voices</source>
@@ -1645,7 +1645,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create key sig for all systems</source>
-        <translation>Utwórz oznaczenia metr. dla wszystkich pięciolinii</translation>
+        <translation>Utwórz oznaczenia tonacji dla wszystkich pięciolinii</translation>
     </message>
     <message>
         <source>Create courtesy time signatures</source>
@@ -1814,7 +1814,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Min. note distance</source>
-        <translation>Min. dystans nut:</translation>
+        <translation>Minimalny dystans nut:</translation>
     </message>
     <message>
         <source>Clef left margin</source>
@@ -1841,8 +1841,8 @@ space unit</extracomment>
         <translation>Lewy margines początku repetycji:</translation>
     </message>
     <message>
-        <source>Show repeat bar tips (&quot;winged&quot; repeats)</source>
-        <translation>Pokazuj &quot;ładne&quot; repetycje</translation>
+        <source>Show repeat bar tips ("winged" repeats)</source>
+        <translation>Pokazuj "ładne" repetycje</translation>
     </message>
     <message>
         <source>Progression</source>
@@ -2112,7 +2112,7 @@ space unit</extracomment>
     <name>Harmony</name>
     <message>
         <source>Harmony Properties...</source>
-        <translation>Właściwości harmonii...</translation>
+        <translation>Właściwości nazwy akordu...</translation>
     </message>
     <message>
         <source>Text Properties...</source>
@@ -2903,7 +2903,7 @@ nieudane: </translation>
     </message>
     <message>
         <source>Rehearsal Mark</source>
-        <translation>Numery rewizyjne</translation>
+        <translation>Numer rewizyjny</translation>
     </message>
     <message>
         <source>Concert Pitch</source>
@@ -2918,9 +2918,9 @@ nieudane: </translation>
         <translation>MuseScore</translation>
     </message>
     <message>
-        <source>Save changes to the score &quot;%1&quot;
+        <source>Save changes to the score "%1"
 before closing?</source>
-        <translation>Czy zapisać zmiany w partyturze &quot;%1&quot; przed zamknięciem?</translation>
+        <translation>Czy zapisać zmiany w partyturze "%1" przed zamknięciem?</translation>
     </message>
     <message>
         <source>MuseScore: Load Score</source>
@@ -3032,7 +3032,7 @@ before closing?</source>
     </message>
     <message>
         <source>End-Start Repeat</source>
-        <translation>Koniec-początek repetycji</translation>
+        <translation>Koniec/początek repetycji</translation>
     </message>
     <message>
         <source>Lines</source>
@@ -3320,7 +3320,7 @@ before closing?</source>
     </message>
     <message>
         <source>InstrumentsShort</source>
-        <translation>Instrumenty - skrót</translation>
+        <translation>Instrumenty - skrót nazwy</translation>
     </message>
     <message>
         <source>InstrumentsExcerpt</source>
@@ -3399,10 +3399,10 @@ before closing?</source>
     <message>
         <source>
 
-From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
+From the "Help" menu try choosing "Online Handbook" instead.</source>
         <translation>
 
-Z menu &quot;Pomoc&quot; wybierz &quot;Podręcznik online&quot;.</translation>
+Z menu "Pomoc" wybierz "Podręcznik online".</translation>
     </message>
     <message>
         <source>Grace Notes</source>
@@ -3510,7 +3510,7 @@ Z menu &quot;Pomoc&quot; wybierz &quot;Podręcznik online&quot;.</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments</source>
-        <translation>Artykulacja &amp;i ornamenty</translation>
+        <translation>Artykulacje &amp;i ozdobniki</translation>
     </message>
     <message>
         <source>Fingering %1</source>
@@ -3538,7 +3538,7 @@ Z menu &quot;Pomoc&quot; wybierz &quot;Podręcznik online&quot;.</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer</source>
-        <translation>Łamanie &amp;i odstęp</translation>
+        <translation>Łamania &amp;i odstępy</translation>
     </message>
     <message>
         <source>Line break</source>
@@ -3578,7 +3578,7 @@ Z menu &quot;Pomoc&quot; wybierz &quot;Podręcznik online&quot;.</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments...</source>
-        <translation>Artykulacja &amp;i ornamenty...</translation>
+        <translation>Artykulacje &amp;i ozdobniki...</translation>
     </message>
     <message>
         <source>Pedal</source>
@@ -3590,7 +3590,7 @@ Z menu &quot;Pomoc&quot; wybierz &quot;Podręcznik online&quot;.</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer...</source>
-        <translation>Łamanie &amp;i odstęp...</translation>
+        <translation>Łamania &amp;i odstępy...</translation>
     </message>
     <message>
         <source>The previous session quit unexpectedly.
@@ -3608,11 +3608,11 @@ Restore session?</source>
     </message>
     <message>
         <source>MuseScore: Articulations &amp; Ornaments</source>
-        <translation>Artykulacja i ornamenty</translation>
+        <translation>Artykulacje i ozdobniki</translation>
     </message>
     <message>
         <source>MuseScore: Breaks &amp; Spacer</source>
-        <translation>Łamanie i odstęp</translation>
+        <translation>Łamania i odstępy</translation>
     </message>
     <message>
         <source>Check for Update</source>
@@ -3622,14 +3622,14 @@ Restore session?</source>
         <source>Script
 %1
 is incompatible with current interface</source>
-        <translation>Skrypt
-%1
+        <translation>Skrypt&#13;
+%1&#13;
 jest niekompatybilny z obecnym interfejsem.</translation>
     </message>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation>MuseScore jest zbyt stary, aby uruchomić skrypt
+        <translation>MuseScore jest zbyt stary, aby uruchomić skrypt&#13;
 %1.</translation>
     </message>
     <message>
@@ -3638,10 +3638,10 @@ jest niekompatybilny z obecnym interfejsem.</translation>
     </message>
     <message>
         <source>Error loading plugin
-&quot;%1&quot; line %2:
+"%1" line %2:
 %3</source>
-        <translation>Błąd wczytywania pluginu
-&quot;%1&quot; linia %2:
+        <translation>Błąd wczytywania pluginu&#13;
+"%1" linia %2:&#13;
 %3</translation>
     </message>
     <message>
@@ -4042,11 +4042,11 @@ jest niekompatybilny z obecnym interfejsem.</translation>
     </message>
     <message>
         <source>w:</source>
-        <translation>sz:</translation>
+        <translation>szer.:</translation>
     </message>
     <message>
         <source>h:</source>
-        <translation>w:</translation>
+        <translation>wys.:</translation>
     </message>
     <message>
         <source>Show Grid</source>
@@ -4782,7 +4782,7 @@ jest niekompatybilny z obecnym interfejsem.</translation>
         <source>No note selected:
 Please select a single note and retry operation
 </source>
-        <translation>Nie zaznaczono nuty.
+        <translation>Nie zaznaczono nuty.&#13;
 Proszę zaznaczyć pojedynczą nutę i powtórzyć operację.
 </translation>
     </message>
@@ -4790,7 +4790,7 @@ Proszę zaznaczyć pojedynczą nutę i powtórzyć operację.
         <source>No note or rest selected:
 Please select a single note or rest and retry operation
 </source>
-        <translation>Nie zaznaczono nuty ani pauzy.
+        <translation>Nie zaznaczono nuty ani pauzy.&#13;
 Proszę zaznaczyć pojedynczą nutę lub pauzę i powtórzyć operację.
 </translation>
     </message>
@@ -4815,7 +4815,7 @@ Proszę zaznaczyć pojedynczą nutę lub pauzę i powtórzyć operację.
     </message>
     <message>
         <source>Quit</source>
-        <translation>Porzuć</translation>
+        <translation>Zakończ</translation>
     </message>
     <message>
         <source>MuseScore: Load Chord Description</source>
@@ -5005,13 +5005,13 @@ Proszę zaznaczyć pojedynczą nutę lub pauzę i powtórzyć operację.
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
-        <translation>Nie znaleziono pięciolinii. Proszę użyć okna dialogowego instrumentów,
+        <translation>Nie znaleziono pięciolinii. Proszę użyć okna dialogowego instrumentów,&#13;
 aby utworzyć pięciolinie.</translation>
     </message>
     <message>
         <source>No Measure selected:
 please select a measure and try again</source>
-        <translation>Nie wybrano taktu.
+        <translation>Nie wybrano taktu.&#13;
 Proszę wybrać takt i spróbować ponownie.</translation>
     </message>
     <message>
@@ -5186,8 +5186,8 @@ Czy przetransponować całą partyturę?</translation>
 %1 
 
 Try saving to a different location.</source>
-        <translation>Następujący plik został zablokowany:
-%1.
+        <translation>Następujący plik został zablokowany:&#13;
+%1.&#13;
 Spróbuj zapisać w innym miejscu.</translation>
     </message>
     <message>
@@ -5378,7 +5378,7 @@ Spróbuj zapisać w innym miejscu.</translation>
     <message>
         <source>Init audio driver failed.
 Sequencer will be disabled.</source>
-        <translation>Inicjalizacja sterownika audio nie powiodła się.
+        <translation>Inicjalizacja sterownika audio nie powiodła się.&#13;
 Sekwencer będzie nieczynny.</translation>
     </message>
     <message>
@@ -5388,20 +5388,20 @@ Sekwencer będzie nieczynny.</translation>
     <message>
         <source>No SoundFont configured
 Playback will be disabled.</source>
-        <translation>Nie skonfigurowano SoundFontu.
+        <translation>Nie skonfigurowano SoundFontu.&#13;
 Odtwarzanie będzie nieczynne.</translation>
     </message>
     <message>
         <source>Loading SoundFont
-&quot;%1&quot;
+"%1"
 failed. Playback will be disabled.
 
 Go to Display &gt; Synthesizer 
 and check that the file location is correct</source>
-        <translation>Wczytywanie SoundFontu
-&quot;%1&quot;
-nieudane. Odtwarzanie będzie nieczynne.
-Idź do Widok &gt; Syntezator
+        <translation>Wczytywanie SoundFontu&#13;
+"%1"&#13;
+nieudane. Odtwarzanie będzie nieczynne.&#13;
+Idź do Widok &gt; Syntezator&#13;
 i sprawdź, czy położenie pliku jest właściwe.</translation>
     </message>
 </context>
@@ -6239,14 +6239,14 @@ i sprawdź, czy położenie pliku jest właściwe.</translation>
         <translation>Takty:</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Rada: Możesz także dodać lub usunąć po stworzeniu partytury.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
+p, li { white-space: pre-wrap; }&#13;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Rada: Możesz także dodać lub usunąć po stworzeniu partytury.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -6580,8 +6580,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>UpdateChecker</name>
     <message>
-        <source>An update for MuseScore is available: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
-        <translation>Dostępna jest aktualizacja MuseScore: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r. %3&lt;/a&gt;.</translation>
+        <source>An update for MuseScore is available: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
+        <translation>Dostępna jest aktualizacja MuseScore: &lt;a href="%1"&gt;MuseScore %2 r. %3&lt;/a&gt;.</translation>
     </message>
     <message>
         <source>Update Available</source>
@@ -6692,11 +6692,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flat-slash2</source>
-        <translation>Przekreślony bemol 2</translation>
+        <translation>Przekreślony bemol</translation>
     </message>
     <message>
         <source>mirrored-flat2</source>
-        <translation>Odwrócony bemol 2</translation>
+        <translation>Odwrócony bemol</translation>
     </message>
     <message>
         <source>mirrored-flat</source>
@@ -6716,15 +6716,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp-slash2</source>
-        <translation>Przekreślony krzyżyk 2</translation>
+        <translation>Przekreślony krzyżyk</translation>
     </message>
     <message>
         <source>sharp-slash3</source>
-        <translation>Przekreślony krzyżyk 3</translation>
+        <translation>Przekreślony krzyżyk</translation>
     </message>
     <message>
         <source>sharp-slash4</source>
-        <translation>Przekreślony krzyżyk 4</translation>
+        <translation>Przekreślony krzyżyk</translation>
     </message>
     <message>
         <source>sharp arrow up</source>
@@ -7379,7 +7379,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>tie</source>
-        <translation>Łuk</translation>
+        <translation>Ligatura</translation>
     </message>
     <message>
         <source>pad rest</source>
@@ -7507,7 +7507,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Quit</source>
-        <translation>Porzuć</translation>
+        <translation>Zakończ</translation>
     </message>
     <message>
         <source>Mag</source>
@@ -7659,7 +7659,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Rehearsal Mark</source>
-        <translation>Numery rewizyjne</translation>
+        <translation>Numer rewizyjny</translation>
     </message>
     <message>
         <source>Play</source>
@@ -8581,7 +8581,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tablature</source>
-        <translation>Klucz tabulaturowy</translation>
+        <translation>Tabulatura</translation>
     </message>
     <message>
         <source>Percussion</source>
@@ -8771,7 +8771,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tie</source>
-        <translation>Łuk</translation>
+        <translation>Ligatura</translation>
     </message>
     <message>
         <source>Articulation</source>
@@ -8819,7 +8819,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Harmony</source>
-        <translation>Harmonia</translation>
+        <translation>Nazwa akordu</translation>
     </message>
     <message>
         <source>Volta</source>
@@ -9084,7 +9084,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Cannot read this score:
 your version of MuseScore is too old.</source>
-        <translation>Nie można odczytać tej parytury.
+        <translation>Nie można odczytać tej parytury.&#13;
 Twoja wersja MuseScore jest zbyt stara.</translation>
     </message>
 </context>
@@ -9195,19 +9195,19 @@ Twoja wersja MuseScore jest zbyt stara.</translation>
         <translation>Pauza ósemkowa</translation>
     </message>
     <message>
-        <source>16&apos; rest</source>
+        <source>16' rest</source>
         <translation>Pauza szesnastkowa</translation>
     </message>
     <message>
-        <source>32&apos; rest</source>
+        <source>32' rest</source>
         <translation>Pauza trzydziestodwójkowa</translation>
     </message>
     <message>
-        <source>64&apos; rest</source>
+        <source>64' rest</source>
         <translation>Pauza sześćdziesięcioczwórkowa</translation>
     </message>
     <message>
-        <source>128&apos; rest</source>
+        <source>128' rest</source>
         <translation>Pauza stodwudziestoósemkowa</translation>
     </message>
     <message>
@@ -9228,15 +9228,15 @@ Twoja wersja MuseScore jest zbyt stara.</translation>
     </message>
     <message>
         <source>sharp slash2</source>
-        <translation>Przekreślony krzyżyk 2</translation>
+        <translation>Przekreślony krzyżyk</translation>
     </message>
     <message>
         <source>sharp slash3</source>
-        <translation>Przekreślony krzyżyk 3</translation>
+        <translation>Przekreślony krzyżyk</translation>
     </message>
     <message>
         <source>sharp slash4</source>
-        <translation>Przekreślony krzyżyk 4</translation>
+        <translation>Przekreślony krzyżyk</translation>
     </message>
     <message>
         <source>natural</source>
@@ -9272,11 +9272,11 @@ Twoja wersja MuseScore jest zbyt stara.</translation>
     </message>
     <message>
         <source>flat slash2</source>
-        <translation>Przekreślony bemol 2</translation>
+        <translation>Przekreślony bemol</translation>
     </message>
     <message>
         <source>mirrored flat2</source>
-        <translation>Odwrócony bemol 2</translation>
+        <translation>Odwrócony bemol</translation>
     </message>
     <message>
         <source>mirrored flat</source>
@@ -9348,7 +9348,7 @@ Twoja wersja MuseScore jest zbyt stara.</translation>
     </message>
     <message>
         <source>diamond head</source>
-        <translation>Romb</translation>
+        <translation>Romboidalna główka ćwierćnuty</translation>
     </message>
     <message>
         <source>whole triangle head</source>
@@ -9392,7 +9392,7 @@ Twoja wersja MuseScore jest zbyt stara.</translation>
     </message>
     <message>
         <source>cross head</source>
-        <translation>Krzyżyk - główka nuty</translation>
+        <translation>Krzyżyk - główka ćwierćnuty</translation>
     </message>
     <message>
         <source>x circle head</source>
@@ -9548,7 +9548,7 @@ Twoja wersja MuseScore jest zbyt stara.</translation>
     </message>
     <message>
         <source>sforza to accent</source>
-        <translation>Sforza to accent</translation>
+        <translation>Sforzato</translation>
     </message>
     <message>
         <source>espressivo</source>
@@ -9728,31 +9728,31 @@ Twoja wersja MuseScore jest zbyt stara.</translation>
     </message>
     <message>
         <source>eight flag</source>
-        <translation>Ogonek ósemki</translation>
+        <translation>Chorągiewka ósemki</translation>
     </message>
     <message>
         <source>sixteenth flag</source>
-        <translation>Ogonek szesnastki</translation>
+        <translation>Chorągiewka szesnastki</translation>
     </message>
     <message>
         <source>thirtysecond flag</source>
-        <translation>Ogonek trzydziestodwójki</translation>
+        <translation>Chorągiewka trzydziestodwójki</translation>
     </message>
     <message>
         <source>sixtyfour flag</source>
-        <translation>Ogonek sześćdziesięcioczwórki</translation>
+        <translation>Chorągiewka sześćdziesięcioczwórki</translation>
     </message>
     <message>
         <source>128flag</source>
-        <translation>Ogonek stodwudziestoósemki</translation>
+        <translation>Chorągiewka stodwudziestoósemki</translation>
     </message>
     <message>
         <source>deight flag</source>
-        <translation>Ogonek ósemki, dolny</translation>
+        <translation>Chorągiewka ósemki</translation>
     </message>
     <message>
         <source>grace dash</source>
-        <translation>Przekreślenie przednutki</translation>
+        <translation>Przekreślenie przednutki w górę</translation>
     </message>
     <message>
         <source>dgrace dash</source>
@@ -9760,19 +9760,19 @@ Twoja wersja MuseScore jest zbyt stara.</translation>
     </message>
     <message>
         <source>dsixteenth flag</source>
-        <translation>Ogonek szesnastki, dolny</translation>
+        <translation>Chorągiewka szesnastki</translation>
     </message>
     <message>
         <source>dthirtysecond flag</source>
-        <translation>Ogonek trzydziestodwójki, dolny</translation>
+        <translation>Chorągiewka trzydziestodwójki</translation>
     </message>
     <message>
         <source>dsixtyfourth flag</source>
-        <translation>Ogonek sześćdziesięcioczwórki, dolny</translation>
+        <translation>Chorągiewka sześćdziesięcioczwórki</translation>
     </message>
     <message>
         <source>d128flag</source>
-        <translation>Ogonek stodwudziestoósemki, dolny</translation>
+        <translation>Chorągiewka stodwudziestoósemki</translation>
     </message>
     <message>
         <source>alto clef</source>
@@ -9808,11 +9808,11 @@ Twoja wersja MuseScore jest zbyt stara.</translation>
     </message>
     <message>
         <source>tab clef</source>
-        <translation>Klucz tabulaturowy</translation>
+        <translation>Tabulatura</translation>
     </message>
     <message>
         <source>ctab clef</source>
-        <translation>Klucz tabulaturowy</translation>
+        <translation>Tabulatura</translation>
     </message>
     <message>
         <source>four four meter</source>
@@ -9868,27 +9868,27 @@ Twoja wersja MuseScore jest zbyt stara.</translation>
     </message>
     <message>
         <source>acc dot</source>
-        <translation>Acc dot</translation>
+        <translation>Accordeon dot</translation>
     </message>
     <message>
         <source>acc freebase</source>
-        <translation>Acc freebase</translation>
+        <translation>Accordeon freebase</translation>
     </message>
     <message>
         <source>acc stdbase</source>
-        <translation>Acc stdbase</translation>
+        <translation>Accordeon stdbase</translation>
     </message>
     <message>
         <source>acc bayanbase</source>
-        <translation>Acc bayanbase</translation>
+        <translation>Accordeon bayanbase</translation>
     </message>
     <message>
         <source>acc old ee</source>
-        <translation>Acc old ee</translation>
+        <translation>Accordeon old ee</translation>
     </message>
     <message>
         <source>acc discant</source>
-        <translation>Acc discant</translation>
+        <translation>Accordeon discant</translation>
     </message>
     <message>
         <source>zero</source>

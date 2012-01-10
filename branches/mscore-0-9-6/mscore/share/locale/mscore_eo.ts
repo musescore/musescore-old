@@ -8,26 +8,26 @@
         <translation>Pria skatolo</translation>
     </message>
     <message utf8="true">
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visit &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Support MuseScore with &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;line break
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;line break
-p, li { white-space: pre-wrap; }line break
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;line break
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Vidu &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; por novaj versioj kaj plia informo.&lt;/span&gt;&lt;/p&gt;line break
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Helpu MuseScore per&lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;via donaĵo&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;line break
-line break
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;line break
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Aŭtorrajto &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;line break
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Eldonita sub la GNU Generala Publika Rajtigilo&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;line break&#13;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;line break&#13;
+p, li { white-space: pre-wrap; }line break&#13;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;line break&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Vidu &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; por novaj versioj kaj plia informo.&lt;/span&gt;&lt;/p&gt;line break&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Helpu MuseScore per&lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;via donaĵo&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;line break&#13;
+line break&#13;
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;line break&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Aŭtorrajto &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;line break&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Eldonita sub la GNU Generala Publika Rajtigilo&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -63,7 +63,7 @@ line break
     <name>ArticulationProperties</name>
     <message>
         <source>MuseScore: Articulations Properties</source>
-        <translation>MuseScore: Articulations Properties</translation>
+        <translation>Musescore: Artikilaciaj Ecoj</translation>
     </message>
     <message>
         <source>Channel</source>
@@ -101,7 +101,7 @@ line break
     </message>
     <message>
         <source>Chord/Rest</source>
-        <translation>Chord/Rest</translation>
+        <translation>Akordo/Paŭzo</translation>
     </message>
 </context>
 <context>
@@ -178,7 +178,7 @@ line break
     </message>
     <message>
         <source>bb (double flat)</source>
-        <translation>bb (double flat)</translation>
+        <translation>bb (duobla bemolo)</translation>
     </message>
     <message>
         <source>F</source>
@@ -186,7 +186,7 @@ line break
     </message>
     <message>
         <source>b (flat)</source>
-        <translation>b (flat)</translation>
+        <translation>b (bemolo)</translation>
     </message>
     <message>
         <source>G</source>
@@ -194,7 +194,7 @@ line break
     </message>
     <message>
         <source>(no accidental)</source>
-        <translation>(no accidental)</translation>
+        <translation>(neniu antaŭsigno)</translation>
     </message>
     <message>
         <source>A</source>
@@ -202,7 +202,7 @@ line break
     </message>
     <message>
         <source># (sharp)</source>
-        <translation># (sharp)</translation>
+        <translation># (dieso)</translation>
     </message>
     <message>
         <source>B</source>
@@ -210,7 +210,7 @@ line break
     </message>
     <message>
         <source>## (double sharp)</source>
-        <translation>## (double sharp)</translation>
+        <translation>## (duobla dieso)</translation>
     </message>
     <message>
         <source>D</source>
@@ -222,7 +222,7 @@ line break
     </message>
     <message>
         <source>Maj</source>
-        <translation>Maj</translation>
+        <translation>Maĵ</translation>
     </message>
     <message>
         <source>2</source>
@@ -230,11 +230,11 @@ line break
     </message>
     <message>
         <source>Maj7</source>
-        <translation>Maj7</translation>
+        <translation>Maĵ7</translation>
     </message>
     <message>
         <source>Maj9</source>
-        <translation>Maj9</translation>
+        <translation>Maĵ9</translation>
     </message>
     <message>
         <source>6</source>
@@ -266,7 +266,7 @@ line break
     </message>
     <message>
         <source>7Sus</source>
-        <translation>7sus</translation>
+        <translation>7Sus</translation>
     </message>
     <message>
         <source>m6</source>
@@ -298,7 +298,7 @@ line break
     </message>
     <message>
         <source>Other:</source>
-        <translation>Other:</translation>
+        <translation>Alia:</translation>
     </message>
     <message>
         <source>5b</source>
@@ -746,11 +746,11 @@ line break
     </message>
     <message>
         <source>Add</source>
-        <translation>Add</translation>
+        <translation>Aldoni</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation>Forigu</translation>
     </message>
     <message>
         <source>Bass Note / Inversion</source>
@@ -758,7 +758,7 @@ line break
     </message>
     <message>
         <source>none</source>
-        <translation>none</translation>
+        <translation>neniu</translation>
     </message>
     <message>
         <source>/C</source>
@@ -840,11 +840,11 @@ line break
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
-        <translation>Chord Properties</translation>
+        <translation>Akordaj Ecoj</translation>
     </message>
     <message>
         <source>small</source>
-        <translation>small</translation>
+        <translation>malgranda</translation>
     </message>
     <message>
         <source>additional leading space </source>
@@ -911,7 +911,7 @@ line break
     <message>
         <source>user</source>
         <extracomment>velocity type</extracomment>
-        <translation>user</translation>
+        <translation>uzanto</translation>
     </message>
     <message>
         <source>offset</source>
@@ -1005,15 +1005,15 @@ line break
     </message>
     <message>
         <source>whole</source>
-        <translation>semibreve</translation>
+        <translation>entjera</translation>
     </message>
     <message>
         <source>half</source>
-        <translation>minim</translation>
+        <translation>duona</translation>
     </message>
     <message>
         <source>quarter</source>
-        <translation>crotchet</translation>
+        <translation>kvarona</translation>
     </message>
     <message>
         <source>breve</source>
@@ -1021,11 +1021,11 @@ line break
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1067,7 +1067,7 @@ line break
     </message>
     <message>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation>Nomo</translation>
     </message>
     <message>
         <source>Save As</source>
@@ -1094,11 +1094,11 @@ line break
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation>Text Properties…</translation>
+        <translation>Tekstaj Ecoj...</translation>
     </message>
     <message>
         <source>MIDI Properties...</source>
-        <translation>MIDI Properties…</translation>
+        <translation>MIDI Ecoj...</translation>
     </message>
 </context>
 <context>
@@ -1112,7 +1112,7 @@ line break
     <name>DynamicProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation>MuseScore: Text Properties</translation>
+        <translation>MuseScore: Tekstaj Ecoj</translation>
     </message>
     <message>
         <source>Velocity:</source>
@@ -1839,8 +1839,8 @@ space unit</extracomment>
         <translation>Begin repeat left margin</translation>
     </message>
     <message>
-        <source>Show repeat bar tips (&quot;winged&quot; repeats)</source>
-        <translation>Show repeat bar tips (&quot;winged&quot; repeats)</translation>
+        <source>Show repeat bar tips ("winged" repeats)</source>
+        <translation>Show repeat bar tips ("winged" repeats)</translation>
     </message>
     <message>
         <source>Progression</source>
@@ -2868,8 +2868,8 @@ failed: </translation>
 <context>
     <name>MuseScore</name>
     <message>
-        <source></source>
-        <translation></translation>
+        <source/>
+        <translation/>
     </message>
     <message>
         <source>Fingering</source>
@@ -3260,9 +3260,9 @@ failed: </translation>
         <translation>no score</translation>
     </message>
     <message>
-        <source>Save changes to the score &quot;%1&quot;
+        <source>Save changes to the score "%1"
 before closing?</source>
-        <translation>Save changes to the score &quot;%1&quot; before closing?</translation>
+        <translation>Save changes to the score "%1" before closing?</translation>
     </message>
     <message>
         <source>Untitled</source>
@@ -3401,10 +3401,10 @@ before closing?</source>
     <message>
         <source>
 
-From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
+From the "Help" menu try choosing "Online Handbook" instead.</source>
         <translation>
 
-From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</translation>
+From the "Help" menu try choosing "Online Handbook" instead.</translation>
     </message>
     <message>
         <source>Grace Notes</source>
@@ -3640,10 +3640,10 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Error loading plugin
-&quot;%1&quot; line %2:
+"%1" line %2:
 %3</source>
         <translation>Error loading plugin
-&quot;%1&quot; line %2:
+"%1" line %2:
 %3</translation>
     </message>
     <message>
@@ -3691,19 +3691,19 @@ is incompatible with current interface</translation>
     <name>MyWebView</name>
     <message>
         <source>Could not&lt;br /&gt; connect</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -4740,15 +4740,15 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Show Play Panel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Show Navigator</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Show MuseScore Connect</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5390,13 +5390,13 @@ Playback will be disabled.</translation>
     </message>
     <message>
         <source>Loading SoundFont
-&quot;%1&quot;
+"%1"
 failed. Playback will be disabled.
 
 Go to Display &gt; Synthesizer 
 and check that the file location is correct</source>
         <translation>Loading SoundFont
-&quot;%1&quot;
+"%1"
 failed. Playback will be disabled.
 
 Go to Display &gt; Synthesizer 
@@ -6237,14 +6237,14 @@ and check that the file location is correct</translation>
         <translation>Bars:</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Hint: you can also add or remove bars after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hint: you can also add or remove bars after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -6578,8 +6578,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>UpdateChecker</name>
     <message>
-        <source>An update for MuseScore is available: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
-        <translation>An update for MuseScore is available: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
+        <source>An update for MuseScore is available: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
+        <translation>An update for MuseScore is available: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Update Available</source>
@@ -6631,31 +6631,31 @@ p, li { white-space: pre-wrap; }
     <name>WebPageDockWidget</name>
     <message>
         <source>Connect with the &lt;br /&gt; Community</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Find help</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Improve your skills</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Read the latest news</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Download free sheet music</source>
-        <translation type="unfinished"></translation>
+        <translation>Elŝuti senpagaj partituroj</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -7077,7 +7077,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>rest</source>
-        <translation>ripozo</translation>
+        <translation>silento</translation>
     </message>
     <message>
         <source>Add More Stretch</source>
@@ -7381,7 +7381,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad rest</source>
-        <translation>silenco (ciferklavaro)</translation>
+        <translation>silento (ciferklavaro)</translation>
     </message>
     <message>
         <source>double sharp</source>
@@ -7809,99 +7809,99 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>reset measure stretch</source>
-        <translation>reset measure stretch</translation>
+        <translation>mezurtreĉon reeki</translation>
     </message>
     <message>
         <source>Reset Stretch</source>
-        <translation>Reset Stretch</translation>
+        <translation>Streĉon reeki</translation>
     </message>
     <message>
         <source>show invisible</source>
-        <translation>show invisible</translation>
+        <translation>nevideblaĵojn montri</translation>
     </message>
     <message>
         <source>Show Invisible</source>
-        <translation>Show Invisible</translation>
+        <translation>Nevideblaĵojn Montri</translation>
     </message>
     <message>
         <source>show frames</source>
-        <translation>show frames</translation>
+        <translation>framojn montri</translation>
     </message>
     <message>
         <source>Show Frames</source>
-        <translation>Show Frames</translation>
+        <translation>Framojn Montri</translation>
     </message>
     <message>
         <source>show keyboard</source>
-        <translation>show keyboard</translation>
+        <translation>klavaron montri</translation>
     </message>
     <message>
         <source>Show Keyboard</source>
-        <translation>Show Keyboard</translation>
+        <translation>Klavaron Montri</translation>
     </message>
     <message>
         <source>enable script debugger</source>
-        <translation>enable script debugger</translation>
+        <translation>ĝustigilon ebligi</translation>
     </message>
     <message>
         <source>Enable Script Debugger</source>
-        <translation>Enable Script Debugger</translation>
+        <translation>Ĝustigilon Ebligi</translation>
     </message>
     <message>
         <source>enter 1/1 rest</source>
-        <translation>enter 1/1 rest</translation>
+        <translation>paŭzon enigi</translation>
     </message>
     <message>
         <source>1/1 rest</source>
-        <translation>1/1 rest</translation>
+        <translation>paŭzo</translation>
     </message>
     <message>
         <source>enter 1/2 rest</source>
-        <translation>enter ½ rest</translation>
+        <translation>duonpaŭzon enigi</translation>
     </message>
     <message>
         <source>1/2 rest</source>
-        <translation>½ rest</translation>
+        <translation>duonpaŭzo</translation>
     </message>
     <message>
         <source>enter 1/4 rest</source>
-        <translation>enter ¼ rest</translation>
+        <translation>suspiron enigi</translation>
     </message>
     <message>
         <source>1/4 rest</source>
-        <translation>¼ rest</translation>
+        <translation>suspiro</translation>
     </message>
     <message>
         <source>enter 1/8 rest</source>
-        <translation>enter 1/8 rest</translation>
+        <translation>duonsuspiron enigi</translation>
     </message>
     <message>
         <source>1/8 rest</source>
-        <translation>1/8 rest</translation>
+        <translation>duonsuspiro</translation>
     </message>
     <message>
         <source>backspace</source>
-        <translation>backspace</translation>
+        <translation>kvaronsuspiron enigi</translation>
     </message>
     <message>
         <source>search</source>
-        <translation>search</translation>
+        <translation>kvaronsuspiro</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation>Search</translation>
+        <translation>Serĉo</translation>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation>Zoom In</translation>
+        <translation>Zomu</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation>Zoom Out</translation>
+        <translation>Malzomu</translation>
     </message>
     <message>
         <source>mirror note head</source>
-        <translation>mirror note head</translation>
+        <translation>notkapon renversu</translation>
     </message>
     <message>
         <source>Edit General Style...</source>
@@ -7913,103 +7913,103 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Select all similar elements</source>
-        <translation>Select all similar elements</translation>
+        <translation>Ĉiujn similajn erojn elektu</translation>
     </message>
     <message>
         <source>All Similar Elements</source>
-        <translation>All Similar Elements</translation>
+        <translation>Ĉiuj Similaj Eroj</translation>
     </message>
     <message>
         <source>Select all similar elements in same staff</source>
-        <translation>Select all similar emements in same stave</translation>
+        <translation>Ĉiujn similajn erojn elektu ene la linjaro</translation>
     </message>
     <message>
         <source>All Similar Elements in Same Staff</source>
-        <translation>All Similar Elements in Same Stave</translation>
+        <translation>Ĉiuj similaj eroj ene la linjaro</translation>
     </message>
     <message>
         <source>Synthesizer</source>
-        <translation>Synthesiser</translation>
+        <translation>Sintezilo</translation>
     </message>
     <message>
         <source>Synthesizer Control</source>
-        <translation>Synthesiser Control</translation>
+        <translation>Sintezilregilo</translation>
     </message>
     <message>
         <source>double duration</source>
-        <translation>double duration</translation>
+        <translation>duobla daŭrado</translation>
     </message>
     <message>
         <source>half duration</source>
-        <translation>half duration</translation>
+        <translation>duona daŭrado</translation>
     </message>
     <message>
         <source>repeat selection</source>
-        <translation>repeat selection</translation>
+        <translation>elektaĵon ripeti</translation>
     </message>
     <message>
         <source>Repeat selection</source>
-        <translation>Repeat selection</translation>
+        <translation>Elektaĵon ripeti</translation>
     </message>
     <message>
         <source>follow song</source>
-        <translation>follow song</translation>
+        <translation>kun kanto</translation>
     </message>
     <message>
         <source>Follow Song</source>
-        <translation>Follow Song</translation>
+        <translation>kun Kanto</translation>
     </message>
     <message>
         <source>Local handbook</source>
-        <translation>Local handbook</translation>
+        <translation>Loka uzmetodo</translation>
     </message>
     <message>
         <source>Show local handbook</source>
-        <translation>Show local handbook</translation>
+        <translation>Lokan uzmetodon</translation>
     </message>
     <message>
         <source>File open</source>
-        <translation>File open</translation>
+        <translation>Dosieron open</translation>
     </message>
     <message>
         <source>Load score from file</source>
-        <translation>Load score from file</translation>
+        <translation>Partituron ŝarĝi</translation>
     </message>
     <message>
         <source>File save</source>
-        <translation>File save</translation>
+        <translation>Dosieron konservi</translation>
     </message>
     <message>
         <source>Save score to file</source>
-        <translation>Save score to file</translation>
+        <translation>Partituron konservi en dosiero</translation>
     </message>
     <message>
         <source>File save as</source>
-        <translation>File save as</translation>
+        <translation>Dosieron konservi kiel</translation>
     </message>
     <message>
         <source>Save score under a new file name</source>
-        <translation>Save score under a new filename</translation>
+        <translation>Partituron konservi en nova dosiero</translation>
     </message>
     <message>
         <source>File save a copy</source>
-        <translation>File save a copy</translation>
+        <translation>Kopion konservi</translation>
     </message>
     <message>
         <source>Save a copy of the score in addition to the current file</source>
-        <translation>Save a copy of the score in addition to the current file</translation>
+        <translation>Pluan kopion de la dosiero konservi</translation>
     </message>
     <message>
         <source>File reload</source>
-        <translation>File reload</translation>
+        <translation>Dosieron reŝarĝi</translation>
     </message>
     <message>
         <source>Reload score from file</source>
-        <translation>Reload score from file</translation>
+        <translation>Partituron el la dosiero reŝarĝi</translation>
     </message>
     <message>
         <source>File close</source>
-        <translation>File close</translation>
+        <translation>Dosieron fermi</translation>
     </message>
     <message>
         <source>Close current score</source>
@@ -8373,11 +8373,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>next score</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>previous score</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9019,31 +9019,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished">do</translation>
+        <translation>do</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished">re</translation>
+        <translation>re</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished">fa</translation>
+        <translation>fa</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished">la</translation>
+        <translation>la</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished">ti</translation>
+        <translation>ti</translation>
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9193,20 +9193,20 @@ this version of MuseScore is too old.</translation>
         <translation>eight rest</translation>
     </message>
     <message>
-        <source>16&apos; rest</source>
-        <translation>16&apos; rest</translation>
+        <source>16' rest</source>
+        <translation>16' rest</translation>
     </message>
     <message>
-        <source>32&apos; rest</source>
-        <translation>32&apos; rest</translation>
+        <source>32' rest</source>
+        <translation>32' rest</translation>
     </message>
     <message>
-        <source>64&apos; rest</source>
-        <translation>64&apos; rest</translation>
+        <source>64' rest</source>
+        <translation>64' rest</translation>
     </message>
     <message>
-        <source>128&apos; rest</source>
-        <translation>128&apos; rest</translation>
+        <source>128' rest</source>
+        <translation>128' rest</translation>
     </message>
     <message>
         <source>sharp</source>
@@ -9934,43 +9934,43 @@ this version of MuseScore is too old.</translation>
     </message>
     <message>
         <source>s0sol head</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>s1sol head</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>s2sol head</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>longa up alt</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>longa down alt</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>brevis head alt</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>time sig C dot</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>time sig O</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>time sig O cut</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>time sig O dot</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>sori</source>
