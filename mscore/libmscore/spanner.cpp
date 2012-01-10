@@ -30,6 +30,7 @@ SpannerSegment::SpannerSegment(const SpannerSegment& s)
    : Element(s)
       {
       _spanner = s._spanner;
+      _subtype = s._subtype;
       }
 
 //---------------------------------------------------------
