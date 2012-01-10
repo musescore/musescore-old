@@ -805,7 +805,8 @@ printf("read line %d\n", _line);
                         a = _accidental;        // re-use the accidental it constructed
                   else
                         a = new Accidental(score());
-                  // the accidental needs to know the properties of the track it belongs to
+                  // the accidental needs to know the properties of the
+                  // track it belongs to (??)
                   a->setTrack(track());
                   a->read(e);
                   if (!hasAccidental)           // only the new accidental, if it has been added previously

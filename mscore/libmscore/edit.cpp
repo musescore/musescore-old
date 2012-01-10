@@ -633,7 +633,7 @@ void Score::cmdAddTimeSig(Measure* fm, int staffIdx, TimeSig* ts)
             //  ignore if there is already a timesig
             //  with same values
             //
-            if ((ots->subtype()   == ts->subtype())
+            if ((ots->subtype() == ts->subtype())
                && (ots->sig().identical(ts->sig()))
                && (ots->stretch() == ts->stretch())) {
                   delete ts;
@@ -653,14 +653,11 @@ void Score::cmdAddTimeSig(Measure* fm, int staffIdx, TimeSig* ts)
                   return;
                   }
             }
-//      if (seg)
-//            undoRemoveElement(seg);
       if (ots && ots->sig() == ts->sig() && ots->stretch() == ts->stretch()) {
             //
             // Set time signature of all measures up to next
             // time signature. Do not touch measure contents.
             //
-            seg = new Segment(fm, SegTimeSig, tick);
             for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
                   TimeSig* nsig = new TimeSig(this);
                   nsig->setSubtype(ts->subtype());
@@ -668,7 +665,6 @@ void Score::cmdAddTimeSig(Measure* fm, int staffIdx, TimeSig* ts)
                   nsig->setTrack(staffIdx * VOICES);
                   seg->add(nsig);
                   }
-            undoAddElement(seg);
             for (Measure* m = fm; m; m = m->nextMeasure()) {
                   if (m->first(SegTimeSig))
                         break;
