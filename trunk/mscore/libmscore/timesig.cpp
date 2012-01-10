@@ -146,7 +146,8 @@ void TimeSig::setActualSig(const Fraction& actual)
 void TimeSig::write(Xml& xml) const
       {
       xml.stag("TimeSig");
-      xml.tag("subtype", subtype());
+      if (subtype() != TSIG_NORMAL)
+            xml.tag("subtype", subtype());
       Element::writeProperties(xml);
 
       xml.tag("sigN",   _nominal.numerator());

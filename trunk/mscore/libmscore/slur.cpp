@@ -424,8 +424,9 @@ void Slur::computeBezier(SlurSegment* ss, QPointF p6o)
 
       QPointF p3o = p6o + t.map(ss->ups[GRIP_BEZIER1].off * _spatium);
       QPointF p4o = p6o + t.map(ss->ups[GRIP_BEZIER2].off * _spatium);
-      ss->ups[GRIP_BEZIER1].off = t.inverted().map(p3o) / _spatium;
-      ss->ups[GRIP_BEZIER2].off = t.inverted().map(p4o) / _spatium;
+
+//??      ss->ups[GRIP_BEZIER1].off = t.inverted().map(p3o) / _spatium;
+//??      ss->ups[GRIP_BEZIER2].off = t.inverted().map(p4o) / _spatium;
 
       //-----------------------------------calculate p6
       QPointF pp3  = p3 + p3o;

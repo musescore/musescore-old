@@ -34,7 +34,7 @@
 //   propertyList
 //---------------------------------------------------------
 
-static bool defaultDistribute         = true;
+static bool defaultDistribute         = false;
 static Direction defaultBeamDirection = AUTO;
 
 Property<Beam> Beam::propertyList[] = {
