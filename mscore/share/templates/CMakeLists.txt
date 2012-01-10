@@ -46,6 +46,9 @@ install(FILES
       Jazz\ Big\ Band.mscz
       Jazz\ Combo.mscz
       UK\ Brass\ Band.mscz
+      SA\ Festival\ Series.mscz
+      SA\ General\ Series.mscz
+      SA\ Triumph\ Series.mscz
       drumset_fr.drm
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}templates
       )

@@ -1,3 +1,6 @@
+10.jan (la)
+      - fix #6649: Transposition when creating a score from a template
+      - add Salvation Army Brass band templates
 9.jan (la)
       - add drumset file for french drums notation see #14340
       - change default drumset folder to "templates" dir
