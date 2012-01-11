@@ -44,8 +44,8 @@ void TrillSegment::draw(QPainter* painter) const
 
             switch(trill()->subtype()) {
                   case TRILL_LINE:
-                        sym = trillSym;
-                        b1  = symbols[idx][sym].bbox(mag);
+                        sym  = trillSym;
+                        b1   = symbols[idx][sym].bbox(mag);
                         x0   = -b1.x();
                         x1   = x0 + b1.width();
                         n    = int(floor((x2-x1) / w2));
@@ -53,8 +53,8 @@ void TrillSegment::draw(QPainter* painter) const
                         break;
 
                   case UPPRALL_LINE:
-                        sym = upprallSym;
-                        b1  = symbols[idx][sym].bbox(mag);
+                        sym  = upprallSym;
+                        b1   = symbols[idx][sym].bbox(mag);
                         x0   = -b1.x();
                         x1   = b1.width();
                         n    = int(floor((x2-x1) / w2));
@@ -69,8 +69,8 @@ void TrillSegment::draw(QPainter* painter) const
                         y    = -b1.height();
                         break;
                   case PRALLPRALL_LINE:
-                        sym = prallprallSym;
-                        b1  = symbols[idx][sym].bbox(mag);
+                        sym  = prallprallSym;
+                        b1   = symbols[idx][sym].bbox(mag);
                         x0   = -b1.x();
                         x1   = b1.width();
                         n    = int(floor((x2-x1) / w2));
@@ -104,7 +104,7 @@ void TrillSegment::draw(QPainter* painter) const
 void TrillSegment::layout()
       {
       qreal mag = magS();
-      int idx    = score()->symIdx();
+      int idx   = score()->symIdx();
       QRectF b1(symbols[idx][trillSym].bbox(mag));
       QRectF rr(b1.translated(-b1.x(), 0.0));
       rr |= QRectF(0.0, rr.y(), pos2().x(), rr.height());
@@ -192,6 +192,7 @@ void Trill::layout()
       {
       qreal _spatium = spatium();
       setPos(0.0, yoff() * _spatium);
+
       SLine::layout();
 
       //
@@ -209,11 +210,11 @@ void Trill::layout()
             qreal x1   = seg2->pagePos().x();
             Measure* m = seg2->measure()->prevMeasure();
             if (m) {
-                  Segment* s2 = m->last();
-                  qreal x2 = s2->pagePos().x();
-                  qreal dx = x1 - x2 + _spatium * .3;
+                  Segment* s2      = m->last();
+                  qreal x2         = s2->pagePos().x();
+                  qreal dx         = x1 - x2 + _spatium * .3;
                   TrillSegment* ls = static_cast<TrillSegment*>(frontSegment());
-                  ls->setPos2(ls->pos2() + QPointF(-dx, 0.0));
+                  ls->setPos2(ls->ipos2() + QPointF(-dx, 0.0));
                   ls->layout();
                   }
             }

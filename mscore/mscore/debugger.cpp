@@ -550,6 +550,10 @@ void Debugger::updateElement(Element* el)
                   case STAFF_TEXT:
                         ew = new TextView;
                         break;
+                  case TRILL_SEGMENT:
+                  case HAIRPIN_SEGMENT:
+                        ew = new LineSegmentView; break;
+                        break;
                   default:
                         ew = new ElementView;
                         break;
@@ -1990,6 +1994,35 @@ VoltaSegmentView::VoltaSegmentView()
 void VoltaSegmentView::setElement(Element* e)
       {
       VoltaSegment* vs = (VoltaSegment*)e;
+      ShowElementBase::setElement(e);
+
+      lb.segmentType->setCurrentIndex(vs->subtype());
+      lb.pos2x->setValue(vs->pos2().x());
+      lb.pos2y->setValue(vs->pos2().y());
+      lb.offset2x->setValue(vs->userOff2().x());
+      lb.offset2y->setValue(vs->userOff2().y());
+      }
+
+//---------------------------------------------------------
+//   LineSegmentView
+//---------------------------------------------------------
+
+LineSegmentView::LineSegmentView()
+   : ShowElementBase()
+      {
+      QWidget* w = new QWidget;
+      lb.setupUi(w);
+      layout->addWidget(w);
+      layout->addStretch(10);
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void LineSegmentView::setElement(Element* e)
+      {
+      LineSegment* vs = (LineSegment*)e;
       ShowElementBase::setElement(e);
 
       lb.segmentType->setCurrentIndex(vs->subtype());

@@ -344,6 +344,7 @@ void LineSegment::spatiumChanged(qreal ov, qreal nv)
 
 //---------------------------------------------------------
 //   toDefault
+//    TODO: make undoable
 //---------------------------------------------------------
 
 void LineSegment::toDefault()
@@ -455,7 +456,7 @@ void SLine::layout()
       System* s1;
       System* s2;
       QPointF p1 = linePos(GRIP_LINE_START, &s1);
-      QPointF p2 = linePos(GRIP_LINE_END, &s2);
+      QPointF p2 = linePos(GRIP_LINE_END,   &s2);
 
       QList<System*>* systems = score()->systems();
       int sysIdx1 = systems->indexOf(s1);
@@ -581,11 +582,12 @@ void SLine::writeProperties(Xml& xml, const SLine* proto) const
       //
       // write user modified layout
       //
+      qreal _spatium = spatium();
       for (int i = 0; i < n; ++i) {
             const LineSegment* seg = segmentAt(i);
             xml.stag("Segment");
             xml.tag("subtype", seg->subtype());
-            xml.tag("off2", seg->userOff2() / spatium());
+            xml.tag("off2", seg->userOff2() / _spatium);
             seg->Element::writeProperties(xml);
             xml.etag();
             }
@@ -599,14 +601,13 @@ bool SLine::readProperties(const QDomElement& e)
       {
       if (Element::readProperties(e))
             return true;
-      // setTick(score()->curTick);
       const QString& tag(e.tagName());
       const QString& val(e.text());
       int i = val.toInt();
 
-      if (tag == "tick2")
+      if (tag == "tick2")           // obsolete
             __setTick2(score()->fileDivision(i));
-      else if (tag == "tick")
+      else if (tag == "tick")       // obsolete
             __setTick1(score()->fileDivision(i));
       else if (tag == "Segment") {
             LineSegment* ls = createLineSegment();
@@ -614,7 +615,7 @@ bool SLine::readProperties(const QDomElement& e)
                   const QString& tag(ee.tagName());
                   if (tag == "subtype")
                         ls->setSubtype(SpannerSegmentType(ee.text().toInt()));
-                  else if (tag == "off1")
+                  else if (tag == "off1")       // obsolete
                         ls->setUserOff(readPoint(ee) * spatium());
                   else if (tag == "off2")
                         ls->setUserOff2(readPoint(ee) * spatium());

@@ -1426,7 +1426,6 @@ bool MuseScore::savePsPdf(const QString& saveName, QPrinter::OutputFormat format
       printerDev.setDoubleSidedPrinting(pf->twosided());
       printerDev.setOutputFormat(format);
       printerDev.setOutputFileName(saveName);
-
       QPainter p(&printerDev);
       p.setRenderHint(QPainter::Antialiasing, true);
       p.setRenderHint(QPainter::TextAntialiasing, true);

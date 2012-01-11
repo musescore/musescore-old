@@ -485,6 +485,20 @@ class VoltaSegmentView : public ShowElementBase {
       };
 
 //---------------------------------------------------------
+//   LineSegmentView
+//---------------------------------------------------------
+
+class LineSegmentView : public ShowElementBase {
+      Q_OBJECT;
+
+      Ui::LineSegmentBase lb;
+
+   public:
+      LineSegmentView();
+      virtual void setElement(Element*);
+      };
+
+//---------------------------------------------------------
 //   VoltaSegmentView
 //---------------------------------------------------------
 

@@ -25,6 +25,8 @@
 #include "libmscore/beam.h"
 #include "libmscore/clef.h"
 #include "libmscore/notedot.h"
+#include "libmscore/hook.h"
+#include "libmscore/stem.h"
 
 //---------------------------------------------------------
 //   showInspector
@@ -731,8 +733,8 @@ void InspectorSegment::setElement(Segment* s)
       segment = s;
       leadingSpace->setValue(segment->extraLeadingSpace().val());
       trailingSpace->setValue(segment->extraTrailingSpace().val());
-      resetLeadingSpace->setEnabled(false);
-      resetTrailingSpace->setEnabled(false);
+      resetLeadingSpace->setEnabled(leadingSpace->value() != 0.0);
+      resetTrailingSpace->setEnabled(leadingSpace->value() != 0.0);
       }
 
 //---------------------------------------------------------
@@ -741,7 +743,7 @@ void InspectorSegment::setElement(Segment* s)
 
 void InspectorSegment::leadingSpaceChanged(double)
       {
-      resetLeadingSpace->setEnabled(segment->extraLeadingSpace().val() != leadingSpace->value());
+      resetLeadingSpace->setEnabled(leadingSpace->value() != 0.0);
       emit enableApply();
       }
 
@@ -751,7 +753,7 @@ void InspectorSegment::leadingSpaceChanged(double)
 
 void InspectorSegment::trailingSpaceChanged(double)
       {
-      resetTrailingSpace->setEnabled(segment->extraTrailingSpace().val() != trailingSpace->value());
+      resetTrailingSpace->setEnabled(trailingSpace->value() != 0.0);
       emit enableApply();
       }
 
@@ -1000,15 +1002,25 @@ InspectorNote::InspectorNote(QWidget* parent)
       dot3->setText(tr("Dot3"));
       dot3->setEnabled(false);
       box->addWidget(dot3);
+      hook = new QToolButton(this);
+      hook->setText(tr("Hook"));
+      hook->setEnabled(false);
+      box->addWidget(hook);
+      stem = new QToolButton(this);
+      stem->setText(tr("Stem"));
+      stem->setEnabled(false);
+      box->addWidget(stem);
 
       layout->addLayout(box);
 
       connect(iElement, SIGNAL(enableApply()), SLOT(checkDirty()));
       connect(iNote,    SIGNAL(enableApply()), SLOT(checkDirty()));
       connect(iSegment, SIGNAL(enableApply()), SLOT(checkDirty()));
-      connect(dot1,     SIGNAL(clicked()), SLOT(dot1Clicked()));
-      connect(dot2,     SIGNAL(clicked()), SLOT(dot2Clicked()));
-      connect(dot3,     SIGNAL(clicked()), SLOT(dot3Clicked()));
+      connect(dot1,     SIGNAL(clicked()),     SLOT(dot1Clicked()));
+      connect(dot2,     SIGNAL(clicked()),     SLOT(dot2Clicked()));
+      connect(dot3,     SIGNAL(clicked()),     SLOT(dot3Clicked()));
+      connect(hook,     SIGNAL(clicked()),     SLOT(hookClicked()));
+      connect(stem,     SIGNAL(clicked()),     SLOT(stemClicked()));
       }
 
 //---------------------------------------------------------
@@ -1035,6 +1047,8 @@ void InspectorNote::setElement(Element* e)
       dot1->setEnabled(note->dot(0));
       dot2->setEnabled(note->dot(1));
       dot3->setEnabled(note->dot(2));
+      stem->setEnabled(note->chord()->stem());
+      hook->setEnabled(note->chord()->hook());
       }
 
 //---------------------------------------------------------
@@ -1104,6 +1118,40 @@ void InspectorNote::dot3Clicked()
             dot->score()->select(dot);
             inspector->setElement(dot);
             dot->score()->end();
+            }
+      }
+
+//---------------------------------------------------------
+//   hookClicked
+//---------------------------------------------------------
+
+void InspectorNote::hookClicked()
+      {
+      Note* note = static_cast<Note*>(inspector->element());
+      if (note == 0)
+            return;
+      Hook* hook = note->chord()->hook();
+      if (hook) {
+            note->score()->select(hook);
+            inspector->setElement(hook);
+            note->score()->end();
+            }
+      }
+
+//---------------------------------------------------------
+//   stemClicked
+//---------------------------------------------------------
+
+void InspectorNote::stemClicked()
+      {
+      Note* note = static_cast<Note*>(inspector->element());
+      if (note == 0)
+            return;
+      Stem* stem = note->chord()->stem();
+      if (stem) {
+            note->score()->select(stem);
+            inspector->setElement(stem);
+            note->score()->end();
             }
       }
 

@@ -1320,6 +1320,7 @@ void ScoreView::startEdit()
                         }
                   _score->undoChangeElement(e, ce);
                   }
+            editObject->layout();
             editObject->startEdit(this, startMove);
 
             mscore->editTools()->setElement(editObject);

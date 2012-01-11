@@ -35,7 +35,7 @@ class QPainter;
 class LineSegment : public SpannerSegment {
    protected:
       QPointF _p2;
-      QPointF _userOff2;            // depends on spatium
+      QPointF _userOff2;
 
       virtual bool isEditable() const { return true; }
       virtual void editDrag(const EditData&);
@@ -57,6 +57,7 @@ class LineSegment : public SpannerSegment {
       void setUserXoffset2(qreal x)               { _userOff2.setX(x);      }
       void setPos2(const QPointF& p)              { _p2 = p;                }
       QPointF pos2() const                        { return _p2 + _userOff2; }
+      const QPointF& ipos2() const                { return _p2;             }
       virtual void toDefault();
       virtual void spatiumChanged(qreal, qreal);
       virtual QPointF pagePos() const;
