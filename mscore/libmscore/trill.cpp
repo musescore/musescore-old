@@ -103,9 +103,7 @@ void TrillSegment::draw(QPainter* painter) const
 
 void TrillSegment::layout()
       {
-      qreal mag = magS();
-      int idx   = score()->symIdx();
-      QRectF b1(symbols[idx][trillSym].bbox(mag));
+      QRectF b1(symbols[score()->symIdx()][trillSym].bbox(magS()));
       QRectF rr(b1.translated(-b1.x(), 0.0));
       rr |= QRectF(0.0, rr.y(), pos2().x(), rr.height());
       if (subtype() == SEGMENT_SINGLE || subtype() == SEGMENT_BEGIN) {
@@ -223,6 +221,7 @@ void Trill::layout()
             _accidental->setMag(.6);
             _accidental->layout();
             _accidental->setPos(_spatium*1.3, -2.2*_spatium);
+            _accidental->adjustReadPos();
             }
       }
 

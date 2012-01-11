@@ -2397,6 +2397,7 @@ bool Measure::setStartRepeatBarLine(bool val)
 //---------------------------------------------------------
 //   createEndBarLines
 //    actually create or modify barlines
+//    return true if layout changes
 //---------------------------------------------------------
 
 bool Measure::createEndBarLines()

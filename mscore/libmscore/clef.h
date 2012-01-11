@@ -76,6 +76,7 @@ class Clef : public Element {
       bool _small;
 
       ClefTypeList _clefTypes;
+      ClefType curClefType;
 
    public:
       Clef(Score*);
@@ -106,7 +107,7 @@ class Clef : public Element {
       int tick() const;
 
       bool showCourtesyClef() const       { return _showCourtesyClef; };
-      void setShowCourtesyClef(bool v)    { _showCourtesyClef = v;    };
+      void setShowCourtesyClef(bool v);
 
       static ClefType clefType(const QString& s);
 
@@ -117,8 +118,8 @@ class Clef : public Element {
       ClefTypeList clefTypeList() const     { return _clefTypes;                  }
       ClefType concertClef() const          { return _clefTypes._concertClef;     }
       ClefType transposingClef() const      { return _clefTypes._transposingClef; }
-      void setConcertClef(ClefType val)     { _clefTypes._concertClef = val;      }
-      void setTransposingClef(ClefType val) { _clefTypes._transposingClef = val;  }
+      void setConcertClef(ClefType val);
+      void setTransposingClef(ClefType val);
       void setClefType(const ClefTypeList& ctl) { _clefTypes = ctl; }
       };
 
