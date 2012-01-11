@@ -67,6 +67,7 @@ Clef::Clef(Score* s)
       _small            = false;
       _clefTypes._concertClef     = CLEF_INVALID;
       _clefTypes._transposingClef = CLEF_INVALID;
+      curClefType                 = CLEF_INVALID;
       }
 
 Clef::Clef(const Clef& c)
@@ -76,6 +77,7 @@ Clef::Clef(const Clef& c)
       _showPreviousClef = c._showPreviousClef;
       _small            = c._small;
       _clefTypes        = c._clefTypes;
+      curClefType       = CLEF_INVALID;
       }
 
 //---------------------------------------------------------
@@ -87,6 +89,7 @@ void Clef::addElement(Element* e, qreal x, qreal y)
       e->layout();
       e->setPos(x, y);
       e->setParent(this);
+      e->setSelected(selected());
       elements.push_back(e);
       }
 
@@ -107,15 +110,21 @@ void Clef::setSelected(bool f)
 
 void Clef::layout()
       {
+      if (curClefType == clefType())
+            return;
+
       qreal smag     = _small ? score()->style(ST_smallClefMag).toDouble() : 1.0;
       qreal _spatium = spatium();
       qreal msp      = _spatium * smag;
       qreal yoff     = 0.0;
+
+      qDeleteAll(elements);
       elements.clear();
 
-      ClefType st    = clefType();
+      curClefType    = clefType();
       int lines      = 5;
       qreal lineDist = 1.0;
+#if 0       // TODO: does not work with caching of curClefType
       if (staff() && staff()->staffType()) {
             StaffType* staffType = staff()->staffType();
 
@@ -128,9 +137,10 @@ void Clef::layout()
             lines = staffType->lines();
             lineDist = staffType->lineDistance().val();
 	      }
+#endif
       Symbol* symbol = new Symbol(score());
 
-      switch (st) {
+      switch (curClefType) {
             case CLEF_G:
                   symbol->setSym(trebleclefSym);
                   yoff = 3.0;
@@ -277,6 +287,7 @@ void Clef::layout()
             Element* e = *i;
             e->setColor(curColor());
             addbbox(e->bbox().translated(e->pos()));
+            e->setSelected(selected());
             }
       }
 
@@ -316,7 +327,6 @@ Element* Clef::drop(const DropData& data)
       if (e->type() == CLEF) {
             Clef* clef = static_cast<Clef*>(e);
             ClefType stype  = clef->clefType();
-qDebug("drop clef %d -> %d, track %d\n", int(clefType()), int(stype), track());
             if (clefType() != stype) {
                   score()->undoChangeClef(staff(), segment(), stype);
                   c = this;
@@ -332,9 +342,11 @@ qDebug("drop clef %d -> %d, track %d\n", int(clefType()), int(stype), track());
 
 void Clef::setSmall(bool val)
       {
-      if (val != _small)
+      if (val != _small) {
             _small = val;
-      layout();
+            curClefType = CLEF_INVALID;
+            layout();
+            }
       }
 
 //---------------------------------------------------------
@@ -466,6 +478,33 @@ void Clef::setClefType(ClefType i)
       }
 
 //---------------------------------------------------------
+//   setShowCourtesyClef
+//---------------------------------------------------------
+
+void Clef::setShowCourtesyClef(bool v)
+      {
+      _showCourtesyClef = v;
+      }
+
+//---------------------------------------------------------
+//   setConcertClef
+//---------------------------------------------------------
+
+void Clef::setConcertClef(ClefType val)
+      {
+      _clefTypes._concertClef = val;
+      }
+
+//---------------------------------------------------------
+//   setTransposingClef
+//---------------------------------------------------------
+
+void Clef::setTransposingClef(ClefType val)
+      {
+      _clefTypes._transposingClef = val;
+      }
+
+//---------------------------------------------------------
 //   clefType
 //---------------------------------------------------------
 
@@ -503,5 +542,3 @@ bool Clef::setProperty(int propertyId, const QVariant& v)
             }
       return true;
       }
-
-
