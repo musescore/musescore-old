@@ -961,8 +961,17 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
             curMeasure = nextMeasure;
             }
 
-      if (firstMeasure && lastMeasure && firstMeasure != lastMeasure)
-            removeGeneratedElements(firstMeasure, lastMeasure);
+      if (firstMeasure && lastMeasure && firstMeasure != lastMeasure) {
+            if (removeGeneratedElements(firstMeasure, lastMeasure)) {
+                  foreach(MeasureBase* mb, system->measures()) {
+                        if (mb->type() != MEASURE)
+                              continue;
+                        Measure* m = static_cast<Measure*>(mb);
+                        m->setDirty(true);
+                        m->layoutX(1.0, true);
+                        }
+                  }
+            }
 
       //
       //    hide empty staves
@@ -1009,9 +1018,9 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
 //    helper function
 //---------------------------------------------------------
 
-void Score::removeGeneratedElements(Measure* sm, Measure* em)
+bool Score::removeGeneratedElements(Measure* sm, Measure* em)
       {
-// qDebug("removeGeneratedElements %d - %d\n", mb->tick(), end->tick());
+      bool layoutChanged = false;
       for (Measure* m = sm; m; m = m->nextMeasure()) {
             //
             // remove generated elements from all measures in [sm;em]
@@ -1033,22 +1042,36 @@ void Score::removeGeneratedElements(Measure* sm, Measure* em)
                             || (el->type() == CLEF && seg->tick() != sm->tick())
                             || (el->type() == KEYSIG && seg->tick() != sm->tick())))
                               {
-                              if (!_undoRedo)
+                              if (!_undoRedo) {
                                     undoRemoveElement(el);
+                                    layoutChanged = true;
+                                    }
                               }
                         else if (el->type() == CLEF) {
                               Clef* clef = static_cast<Clef*>(el);
                               System* s = m->system();
-                              clef->setSmall(seg != m->first() || s->firstMeasure() != m);
-                              clef->setMag(staffMag);
+                              bool small = seg != m->first() || s->firstMeasure() != m;
+                              if (clef->small() != small) {
+                                    clef->setSmall(small);
+                                    layoutChanged = true;
+                                    }
+                              if (clef->mag() != staffMag) {
+                                    clef->setMag(staffMag);
+                                    layoutChanged = true;
+                                    }
                               }
-                        else if (el->type() == KEYSIG || el->type() == TIMESIG)
-                              el->setMag(staffMag);
+                        else if (el->type() == KEYSIG || el->type() == TIMESIG) {
+                              if (el->mag() != staffMag) {
+                                    el->setMag(staffMag);
+                                    layoutChanged = true;
+                                    }
+                              }
                         }
                   }
-            if(m == em)
+            if (m == em)
                   break;
             }
+      return layoutChanged;
       }
 
 //---------------------------------------------------------
@@ -1085,8 +1108,8 @@ void Score::connectTies()
                               continue;
                         Note* nnote = searchTieNote(n);
                         if (nnote == 0) {
-                              // qDebug("next note at %d voice %d for tie not found; delete tie",
-                              // s->tick(), i );
+                              qDebug("next note at %d voice %d for tie not found",
+                                 s->tick(), i );
                               // n->setTieFor(0);  show short bow
                               // delete tie;
                               }
@@ -1401,7 +1424,7 @@ QList<System*> Score::layoutSystemRow(qreal rowWidth, bool isFirstSystem, bool u
                                     undoAddElement(ts);
                                     }
                               ts->setFrom(nts);
-                              needRelayout = true;
+                              m->setDirty(true);
                               }
                         }
 
@@ -1531,7 +1554,7 @@ QList<System*> Score::layoutSystemRow(qreal rowWidth, bool isFirstSystem, bool u
                   if (mb == ml.back()) {       // last measure in system?
                         //
                         // if last bar has a courtesy key signature,
-                        // create a qreal bar line as end bar line
+                        // create a double bar line as end bar line
                         //
                         BarLineType bl = hasCourtesyKeysig ? DOUBLE_BAR : NORMAL_BAR;
 
@@ -1539,7 +1562,8 @@ QList<System*> Score::layoutSystemRow(qreal rowWidth, bool isFirstSystem, bool u
                               m->setEndBarLineType(END_REPEAT, true);
                         else if (m->endBarLineGenerated())
                               m->setEndBarLineType(bl, true);
-                        needRelayout |= m->setStartRepeatBarLine(fmr);
+                        if (m->setStartRepeatBarLine(fmr))
+                              m->setDirty(true);
                         }
                   else {
                         MeasureBase* mb = m->next();
@@ -1562,7 +1586,8 @@ QList<System*> Score::layoutSystemRow(qreal rowWidth, bool isFirstSystem, bool u
                         else if (m->endBarLineGenerated())
                               m->setEndBarLineType(NORMAL_BAR, true);
                         }
-                  needRelayout |= m->createEndBarLines();
+                  if (m->createEndBarLines())
+                        m->setDirty(true);
                   firstMeasure = false;
                   if (mb == lmb)
                         break;
@@ -1580,7 +1605,8 @@ QList<System*> Score::layoutSystemRow(qreal rowWidth, bool isFirstSystem, bool u
                               mm = mm->nextMeasure();
                         if (mm) {
                               m->setMmEndBarLineType(mm->endBarLineType());
-                              needRelayout |= m->createEndBarLines();
+                              if (m->createEndBarLines())
+                                    m->setDirty();
                               }
                         }
                   }
@@ -1595,7 +1621,7 @@ QList<System*> Score::layoutSystemRow(qreal rowWidth, bool isFirstSystem, bool u
                         minWidth += point(((Box*)mb)->boxWidth());
                   else if (mb->type() == MEASURE) {
                         Measure* m = (Measure*)mb;
-                        if (needRelayout) {
+                        if (needRelayout || m->dirty()) {
                               m->setDirty(true);
                               m->layoutX(1.0, true);
                               }

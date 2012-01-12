@@ -47,6 +47,10 @@ Preferences::Preferences()
 
 int main(int argc, char* argv[])
       {
+      DPI  = 120;
+      PDPI = 120;
+      DPMM = DPI / INCH;
+
       QApplication app(argc, argv);
       mscore = new MScore;
       mscore->init();

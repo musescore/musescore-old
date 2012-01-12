@@ -1938,9 +1938,6 @@ static bool processNonGui()
                         cs->style()->load(&f);
                         }
                   }
-            for (int i = 0; i < 10; ++i)  //DEBUG
-                  cs->doLayout();
-
             if (fn.endsWith(".mscx")) {
                   QFileInfo fi(fn);
                   try {
@@ -1966,7 +1963,6 @@ static bool processNonGui()
             if (fn.endsWith(".mxl"))
                   return mscore->saveMxl(cs, fn);
             if (fn.endsWith(".mid"))
-                  // return mscore->saveMidi(cs, fn);
                   return saveMidi(cs, fn);
             if (fn.endsWith(".pdf"))
                   return mscore->savePsPdf(fn, QPrinter::PdfFormat);
@@ -2304,7 +2300,6 @@ int main(int argc, char* av[])
             }
       mscore->loadPlugins();
       mscore->writeSessionFile(false);
-//      mscore->changeState(STATE_DISABLED);   // DEBUG
 
 #ifdef Q_WS_MAC
       // there's a bug in Qt showing the toolbar unified after switching showFullScreen(), showMaximized(),

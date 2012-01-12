@@ -64,30 +64,37 @@ Element* writeReadElement(Element* element)
 
 bool testNote()
       {
+      printf("====test note\n");
+
       bool passed = true;
       Chord* chord = new Chord(score);
       Note* note = new Note(score);
       chord->add(note);
 
    // pitch
+      printf("  -pitch\n");
       note->setPitch(33);
+      note->setTpcFromPitch();
       Note* n = static_cast<Note*>(writeReadElement(note));
       TEST(n->pitch() == 33);
       delete n;
 
    // tpc
+      printf("  -tpc\n");
       note->setTpc(22);
       n = static_cast<Note*>(writeReadElement(note));
       TEST(n->tpc() == 22);
       delete n;
 
    // small
+      printf("  -small\n");
       note->setSmall(true);
       n = static_cast<Note*>(writeReadElement(note));
       TEST(n->small());
       delete n;
 
    // mirror
+      printf("  -mirror\n");
       note->setUserMirror(DH_LEFT);
       n = static_cast<Note*>(writeReadElement(note));
       TEST(n->userMirror() == DH_LEFT);
@@ -104,6 +111,7 @@ bool testNote()
       delete n;
 
    // dot position
+      printf("  -dotPosition\n");
       note->setDotPosition(UP);
       n = static_cast<Note*>(writeReadElement(note));
       TEST(n->dotPosition() == UP);
@@ -120,18 +128,21 @@ bool testNote()
       delete n;
 
   // onTimeUserOffset
+      printf("  -onTimeUserOffset\n");
       note->setOnTimeUserOffset(12);
       n = static_cast<Note*>(writeReadElement(note));
       TEST(n->onTimeUserOffset() == 12);
       delete n;
 
   // offTimeUserOffset
+      printf("  -offTimeUserOffset\n");
       note->setOffTimeUserOffset(21);
       n = static_cast<Note*>(writeReadElement(note));
       TEST(n->offTimeUserOffset() == 21);
       delete n;
 
   // headGroup
+      printf("  -headGroup\n");
       for (int i = 0; i < HEAD_GROUPS; ++i) {
             note->setHeadGroup(i);
             n = static_cast<Note*>(writeReadElement(note));
@@ -140,6 +151,7 @@ bool testNote()
             }
 
   // headType
+      printf("  -headType\n");
       for (int i = 0; i < 5; ++i) {
             note->setHeadType(NoteHeadType(i));
             n = static_cast<Note*>(writeReadElement(note));
@@ -148,36 +160,42 @@ bool testNote()
             }
 
    // velo offset
+      printf("  -velo offset\n");
       note->setVeloOffset(71);
       n = static_cast<Note*>(writeReadElement(note));
       TEST(n->veloOffset() == 71);
       delete n;
 
    // tuning
+      printf("  -tuning\n");
       note->setTuning(1.3);
       n = static_cast<Note*>(writeReadElement(note));
       TEST(n->tuning() == 1.3);
       delete n;
 
    // fret
+      printf("  -fret\n");
       note->setFret(9);
       n = static_cast<Note*>(writeReadElement(note));
       TEST(n->fret() == 9);
       delete n;
 
    // string
+      printf("  -string\n");
       note->setString(3);
       n = static_cast<Note*>(writeReadElement(note));
       TEST(n->string() == 3);
       delete n;
 
    // ghost
+      printf("  -ghost\n");
       note->setGhost(true);
       n = static_cast<Note*>(writeReadElement(note));
       TEST(n->ghost());
       delete n;
 
    // velo type
+      printf("  -veloType\n");
       note->setVeloType(USER_VAL);
       n = static_cast<Note*>(writeReadElement(note));
       TEST(n->veloType() == USER_VAL);
@@ -197,6 +215,7 @@ bool testNote()
       //   test setProperty(int, QVariant)
       //================================================
 
+      printf("  setProperty\n");
    // pitch
       note->setProperty(P_PITCH, 32);
       n = static_cast<Note*>(writeReadElement(note));
