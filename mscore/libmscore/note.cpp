@@ -680,10 +680,8 @@ void Note::read(const QDomElement& de)
             const QString& val(e.text());
             if (setProperty(tag, e))
                   ;
-            else if (tag == "line") {
+            else if (tag == "line")
                   _line = val.toInt();
-printf("read line %d\n", _line);
-                  }
             else if (tag == "Tie") {
                   _tieFor = new Tie(score());
                   _tieFor->setTrack(track());

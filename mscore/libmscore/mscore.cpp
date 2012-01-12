@@ -41,9 +41,9 @@ QString MScore::partStyle;
 QString MScore::soundFont;
 QString MScore::lastError;
 bool    MScore::layoutDebug = false;
-int     MScore::division = 480;
-int     MScore::sampleRate = 44100;
-bool    MScore::debugMsg = false;
+int     MScore::division    = 480;
+int     MScore::sampleRate  = 44100;
+bool    MScore::debugMsg    = false;
 int     MScore::mtcType;
 
 Sequencer* MScore::seq = 0;

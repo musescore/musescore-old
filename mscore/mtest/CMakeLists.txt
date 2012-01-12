@@ -31,6 +31,7 @@ add_executable(mtest
       mtest.cpp
       testnote.cpp
       testmidi.cpp
+      mcursor.cpp
       ../mscore/exportmidi.cpp
       ../mscore/importmidi.cpp
       ../mscore/midifile.cpp

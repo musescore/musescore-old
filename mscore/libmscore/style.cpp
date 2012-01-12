@@ -538,6 +538,7 @@ StyleData::StyleData()
       _articulationAnchor[Articulation_Tapping]         = A_TOP_STAFF;
       _articulationAnchor[Articulation_Slapping]        = A_TOP_STAFF;
       _articulationAnchor[Articulation_Popping]         = A_TOP_STAFF;
+      _spatium = SPATIUM20 * DPI;
       };
 
 StyleData::StyleData(const StyleData& s)

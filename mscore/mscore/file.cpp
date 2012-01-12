@@ -1529,8 +1529,8 @@ bool MuseScore::readScore(Score* score, QString name)
                   return false;
                   }
             score->syntiState().append(SyntiParameter("soundfont", MScore::soundFont));
+            score->connectTies();
             }
-      score->connectTies();
       score->rebuildMidiMapping();
       score->setCreated(false);
       score->setSaved(false);
@@ -1567,6 +1567,7 @@ bool MuseScore::readScore(Score* score, QString name)
             ++staffIdx;
             }
       score->updateNotes();
+//      score->doLayout();            // DEBUG
       score->doLayout();
       foreach (Excerpt* ex, *score->excerpts()) {
             ex->score()->doLayout();

@@ -1220,7 +1220,7 @@ RemoveElement::RemoveElement(Element* e)
             if (e->type() == CHORD) {
                   Chord* chord = static_cast<Chord*>(e);
                   foreach(Note* note, chord->notes()) {
-                        if (note->tieFor())
+                        if (note->tieFor() && note->tieFor()->endNote())
                               note->tieFor()->endNote()->setTieBack(0);
                         }
                   }

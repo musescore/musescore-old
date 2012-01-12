@@ -421,6 +421,10 @@ bool TrackList::write(int track, Measure* measure, QHash<Spanner*, Spanner*>* ma
                               m    = m->nextMeasure();
                               if (m)
                                     rest = m->len();
+                              if (m == 0) {
+                                    printf("end of measure list reached\n");
+                                    break;
+                                    }
                               }
                         }
                   }

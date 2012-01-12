@@ -913,7 +913,6 @@ void convertMidi(Score* score, MidiFile* mf)
                         lastTick = tick;
                   }
             }
-      qDebug("=====tracks %d\n", xx);
       int bars;
       score->sigmap()->tickValues(lastTick, &bars, &beat, &tick);
       if (beat > 0 || tick > 0)

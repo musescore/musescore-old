@@ -345,7 +345,6 @@ void Clef::setSmall(bool val)
       if (val != _small) {
             _small = val;
             curClefType = CLEF_INVALID;
-            layout();
             }
       }
 
