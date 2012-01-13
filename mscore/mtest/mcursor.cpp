@@ -121,6 +121,7 @@ void MCursor::addTimeSig(const Fraction& f)
             ts->setTrack(i * VOICES);
             segment->add(ts);
             }
+      _score->sigmap()->add(_tick, SigEvent(f));
       }
 
 //---------------------------------------------------------

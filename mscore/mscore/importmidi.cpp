@@ -47,7 +47,6 @@
 #include "libmscore/drumset.h"
 #include "preferences.h"
 #include "libmscore/box.h"
-// #include "importmidi.h"
 #include "libmscore/keysig.h"
 #include "libmscore/pitchspelling.h"
 
@@ -1069,6 +1068,7 @@ void MidiFile::convertTrack(Score* score, MidiTrack* midiTrack)
                         Chord* chord = new Chord(score);
                         chord->setTrack(staffIdx * VOICES + voice);
                         chord->setDurationType(d);
+                        chord->setDuration(d.fraction());
                         Segment* s = measure->getSegment(chord, tick);
                         s->add(chord);
 
@@ -1228,6 +1228,7 @@ qDebug("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
                   TDuration d = dl.front();
                   len = d.ticks();
                   chord->setDurationType(d);
+                  chord->setDuration(d.fraction());
                   ctick += len;
 
             	foreach (MNote* n, notes) {
@@ -1276,7 +1277,7 @@ qDebug("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
             while (restLen > 0 && voice == 0) {
                   QList<TDuration> dl = toDurationList(Fraction::fromTicks(restLen), false);
                   TDuration d = dl.back();
-                  Rest* rest = new Rest(score);
+                  Rest* rest = new Rest(score, d);
                   rest->setDuration(d.fraction());
       		Measure* measure = score->tick2measure(ctick);
                   rest->setTrack(staffIdx * VOICES + voice);

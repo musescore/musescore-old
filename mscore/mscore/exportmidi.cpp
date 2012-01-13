@@ -30,7 +30,6 @@
 #include "libmscore/text.h"
 #include "libmscore/measure.h"
 #include "libmscore/repeatlist.h"
-// #include "musescore.h"
 
 //---------------------------------------------------------
 //   exportMidi
