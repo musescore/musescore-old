@@ -18,6 +18,7 @@
 #include "libmscore/segment.h"
 #include "libmscore/chord.h"
 #include "libmscore/note.h"
+#include "libmscore/keysig.h"
 #include "mcursor.h"
 
 extern bool saveMidi(Score*, const QString&);
@@ -35,6 +36,13 @@ bool compareElements(Element* e1, Element* e2)
       if (e1->type() == TIMESIG) {
             }
       else if (e1->type() == KEYSIG) {
+            KeySig* ks1 = static_cast<KeySig*>(e1);
+            KeySig* ks2 = static_cast<KeySig*>(e2);
+            if (ks1->keySignature() != ks2->keySignature()) {
+                  printf("      key signature %d  !=  %d\n",
+                     ks1->keySignature(), ks2->keySignature());
+                  return false;
+                  }
             }
       else if (e1->type() == CLEF) {
             }
@@ -214,6 +222,54 @@ static bool testMidi2()
       }
 
 //---------------------------------------------------------
+//   testMidi3
+//---------------------------------------------------------
+
+static bool testMidi3()
+      {
+      printf("  -keysig\n");
+
+      MCursor c;
+      c.createScore("test3a");
+      c.addPart("Voice");
+      c.move(0, 0);     // move to track 0 tick 0
+
+      c.addKeySig(1);
+      c.addTimeSig(Fraction(4,4));
+      c.addChord(60, TDuration(TDuration::V_QUARTER));
+      c.addChord(61, TDuration(TDuration::V_QUARTER));
+      c.addChord(62, TDuration(TDuration::V_QUARTER));
+      c.addChord(63, TDuration(TDuration::V_QUARTER));
+      Score* score = c.score();
+
+      score->doLayout();
+      score->rebuildMidiMapping();
+      c.saveScore();
+      saveMidi(score, "test3.mid");
+
+      Score* score2 = new Score(mscore->baseStyle());
+      score2->setName("test3b");
+      if (!importMidi(score2, "test3.mid")) {
+            printf("import midi failed\n");
+            abort();
+            }
+      score2->doLayout();
+      score2->rebuildMidiMapping();
+      MCursor c2(score2);
+      c2.saveScore();
+
+      bool rv = true;
+      // compare
+      if (!compareScores(score, score2)) {
+            printf("   failed: readback midi file is different\n");
+            rv = false;
+            }
+      delete score;
+      delete score2;
+      return rv;
+      }
+
+//---------------------------------------------------------
 //   testMidi
 //---------------------------------------------------------
 
@@ -224,6 +280,8 @@ bool testMidi()
       if (!testMidi1())
             return false;
       if (!testMidi2())
+            return false;
+      if (!testMidi3())
             return false;
       return true;
       }

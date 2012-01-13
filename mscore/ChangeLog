@@ -1,3 +1,5 @@
+13.1 (ws)
+      - fix #14403: saved decrescendo appears as crescendo when re-opening
 31.dec (ws)
       - omr: switch from using poppler to muPDF for reading pdfs
       (lv)

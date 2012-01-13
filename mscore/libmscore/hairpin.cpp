@@ -110,6 +110,7 @@ void HairpinSegment::draw(QPainter* painter) const
 Hairpin::Hairpin(Score* s)
    : SLine(s)
       {
+      _subtype    = 0;
       setLen(spatium() * 7);   // for use in palettes
       _veloChange = 10;
       _dynType    = DYNAMIC_PART;
@@ -143,6 +144,7 @@ LineSegment* Hairpin::createLineSegment()
 void Hairpin::write(Xml& xml) const
       {
       xml.stag(QString("%1 id=\"%2\"").arg(name()).arg(id()));
+      xml.tag("subtype", _subtype);
       xml.tag("veloChange", _veloChange);
       if (_dynType != DYNAMIC_PART)
             xml.tag("dynType", _dynType);
@@ -162,11 +164,13 @@ void Hairpin::read(const QDomElement& de)
       setId(de.attribute("id", "-1").toInt());
       for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
-            int val = e.text().toInt();
-            if (tag == "veloChange")
-                  _veloChange = val;
+            const QString& val(e.text());
+            if (tag == "subtype")
+                  _subtype = val.toInt();
+            else if (tag == "veloChange")
+                  _veloChange = val.toInt();
             else if (e.tagName() == "dynType")
-                  _dynType = DynamicType(val);
+                  _dynType = DynamicType(val.toInt());
             else if (!SLine::readProperties(e))
                   domError(e);
             }
