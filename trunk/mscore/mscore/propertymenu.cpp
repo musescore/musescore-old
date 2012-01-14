@@ -39,7 +39,6 @@
 #include "glissandoproperties.h"
 #include "fretproperties.h"
 #include "markerproperties.h"
-#include "chordproperties.h"
 #include "jumpproperties.h"
 #include "selinstrument.h"
 #include "chordedit.h"
@@ -300,12 +299,7 @@ void ScoreView::createElementPropertyMenu(Element* e, QMenu* popup)
             popup->insertAction(b, a);
 
             genPropertyMenu1(e, popup);
-//            a = popup->addAction(QT_TRANSLATE_NOOP("Properties", "small"));
-//            a->setCheckable(true);
-//            a->setChecked(note->small());
-//            a->setData("smallNote");
             popup->addSeparator();
-            popup->addAction(tr("Note Properties..."))->setData("note-props");
 
             popup->addAction(tr("Style..."))->setData("style");
 
@@ -717,37 +711,6 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
                         Rest* r = static_cast<Rest*>(e);
                         if (r->tuplet())
                               score()->cmdDeleteTuplet(r->tuplet(), true);
-                        }
-                  }
-            }
-      else if (cmd == "note-props") {
-            Note* note = static_cast<Note*>(e);
-
-            ChordProperties vp(note);
-            int rv = vp.exec();
-            if (rv) {
-                  foreach(Note* note, score()->selection().noteList()) {
-                        Chord* chord = note->chord();
-                        if (vp.small() != chord->small())
-                              score()->undoChangeChordRestSize(chord, vp.small());
-                        if (vp.noStem() != chord->noStem())
-                              score()->undoChangeChordNoStem(chord, vp.noStem());
-                        if (vp.getStemDirection() != chord->stemDirection())
-                              score()->undo(new ChangeProperty(chord, P_STEM_DIRECTION, Direction(vp.getStemDirection())));
-                        if (vp.tuning() != note->tuning())
-                              score()->undoChangeTuning(note, vp.tuning());
-                        if (DirectionH(vp.getUserMirror()) != note->userMirror())
-                              score()->undoChangeUserMirror(note, DirectionH(vp.getUserMirror()));
-                        if (vp.getHeadType() != note->headType() || vp.getHeadGroup() != note->headGroup())
-                              score()->undo(new ChangeNoteHead(note, vp.getHeadGroup(), vp.getHeadType()));
-                        if (note->veloType() != vp.veloType() || note->veloOffset() != vp.veloOffset()
-                           || note->onTimeUserOffset() != vp.onTimeUserOffset()
-                           || note->offTimeUserOffset() != vp.offTimeUserOffset()) {
-                              score()->undo(new ChangeNoteProperties(note,
-                              vp.veloType(), vp.veloOffset(),
-                              vp.onTimeUserOffset(),
-                              vp.offTimeUserOffset()));
-                              }
                         }
                   }
             }

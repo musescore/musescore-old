@@ -14,6 +14,8 @@
 #ifndef __OMRPANEL_H__
 #define __OMRPANEL_H__
 
+#include "ui_omrpanel.h"
+
 class OmrView;
 
 //---------------------------------------------------------
@@ -23,21 +25,21 @@ class OmrView;
 class OmrPanel : public QDockWidget {
       Q_OBJECT
 
-      QVBoxLayout* layout;
+      Ui::OmrPanel op;
+
       OmrView* omrView;
 
-      QCheckBox* showLines;
-      QCheckBox* showBarlines;
-      QCheckBox* showSlices;
-      QCheckBox* showStaves;
-
       virtual void closeEvent(QCloseEvent*);
+      void blockSignals(bool);
+      void enableGui(bool);
 
    private slots:
       void showBarlinesToggled(bool);
       void showLinesToggled(bool);
       void showSlicesToggled(bool);
       void showStavesToggled(bool);
+      void processClicked();
+      void spatiumChanged(double);
 
    signals:
       void omrPanelVisible(bool);

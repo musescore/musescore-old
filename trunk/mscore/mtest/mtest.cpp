@@ -34,6 +34,7 @@ void Omr::write(Xml&) const {}
 
 extern bool testNote();
 extern bool testMidi();
+extern bool testHairpin();
 
 Preferences preferences;
 
@@ -60,14 +61,18 @@ int main(int argc, char* argv[])
             printf("test note failed\n");
             ++bugs;
             }
+      if (!testHairpin()) {
+            printf("test hairpin failed\n");
+            ++bugs;
+            }
       if (!testMidi()) {
             printf("test midi failed\n");
             ++bugs;
             }
       if (bugs)
-            printf("test failed\n");
+            printf("==%d tests failed==\n", bugs);
       else
-            printf("test passed\n");
+            printf("==passed==\n");
       return bugs;
       }
 

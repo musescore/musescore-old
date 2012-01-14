@@ -65,11 +65,14 @@ class Omr {
 
       double spatiumMM() const;           // spatium in millimeter
       double spatium() const               { return _spatium;   }
+      void setSpatium(double val)          { _spatium = val;    }
       double dpmm() const                  { return _dpmm;      }
+      void setDpmm(double val)             { _dpmm = val;       }
       double staffDistance() const;
       double systemDistance() const;
       Score* score() const                 { return _score;     }
       const QString& path() const          { return _path;      }
+      void process();
       };
 
 #else

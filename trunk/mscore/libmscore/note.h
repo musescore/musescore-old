@@ -131,8 +131,6 @@ class Note : public Element {
       void* pHeadType()          { return &_headType;      }
       void* pVeloType()          { return &_veloType;      }
 
-//      Property<Note>* property(int id) const;
-
    public:
       Note(Score* s = 0);
       Note(const Note&);

@@ -32,10 +32,13 @@ enum P_TYPE {
       P_PITCH,
       P_TPC,
       P_HEAD_TYPE,
+      P_HEAD_GROUP,
       P_VELO_TYPE,
+      P_VELO_OFFSET,
       P_ARTICULATION_ANCHOR,
       P_DIRECTION,
       P_STEM_DIRECTION,
+      P_NO_STEM,
       P_SLUR_DIRECTION,
       P_LEADING_SPACE,
       P_TRAILING_SPACE,
@@ -44,8 +47,6 @@ enum P_TYPE {
       P_DOT_POSITION,
       P_ONTIME_OFFSET,
       P_OFFTIME_OFFSET,
-      P_VELO_OFFSET,
-      P_HEAD_GROUP,
       P_TUNING,
       P_PAUSE,
       P_BARLINE_SPAN,
@@ -120,6 +121,8 @@ Property<T>* property(Property<T>* list, const QString& name)
             }
       return 0;
       }
+
+#include "xml.h"
 
 //---------------------------------------------------------
 //   writeProperties

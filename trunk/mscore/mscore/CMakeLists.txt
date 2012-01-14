@@ -38,7 +38,7 @@ QT4_WRAP_UI (ui_headers
       measureproperties.ui segment.ui text.ui textpalette.ui timedialog.ui
       symboldialog.ui dynamic.ui tuplet.ui shortcutcapturedialog.ui slurtie.ui
       slur.ui editdrumset.ui editstaff.ui line.ui linesegment.ui
-      voltaproperties.ui chordproperties.ui timesigproperties.ui
+      voltaproperties.ui timesigproperties.ui
       jumpproperties.ui markerproperties.ui boxproperties.ui
       instrwizard.ui timesigwizard.ui newwizard.ui aboutbox.ui
       chordedit.ui transposedialog.ui tempoproperties.ui importmidi.ui
@@ -54,7 +54,7 @@ QT4_WRAP_UI (ui_headers
       album.ui layer.ui articulationbase.ui inspector_element.ui inspector_vbox.ui
       inspector_articulation.ui inspector_spacer.ui inspector_hbox.ui keysig.ui
       inspector_segment.ui inspector_beam.ui inspector_note.ui
-      rest.ui
+      rest.ui inspector_chord.ui omrpanel.ui
       )
 
 if (OMR)
@@ -67,7 +67,7 @@ QT4_WRAP_CPP (mocs
       measureproperties.h seq.h textpalette.h textstyle.h
       timedialog.h symboldialog.h shortcutcapturedialog.h simplebutton.h
       greendotbutton.h recordbutton.h editdrumset.h editstaff.h selinstrument.h
-      voltaproperties.h chordproperties.h timesigproperties.h
+      voltaproperties.h timesigproperties.h
       jumpproperties.h markerproperties.h boxproperties.h newwizard.h
       transposedialog.h chordedit.h tempoproperties.h importmidi.h lineproperties.h
       excerptsdialog.h stafftextproperties.h imageproperties.h glissandoproperties.h
@@ -147,7 +147,7 @@ add_executable ( ${ExecutableName}
       seq.cpp boxproperties.cpp textpalette.cpp
       timedialog.cpp symboldialog.cpp shortcutcapturedialog.cpp
       simplebutton.cpp musedata.cpp exportly.cpp
-      editdrumset.cpp editstaff.cpp voltaproperties.cpp chordproperties.cpp
+      editdrumset.cpp editstaff.cpp voltaproperties.cpp
       timesigproperties.cpp newwizard.cpp transposedialog.cpp
       chordedit.cpp plugins.cpp excerptsdialog.cpp
       metaedit.cpp magbox.cpp voiceselector.cpp capella.cpp
@@ -348,7 +348,7 @@ endif (USE_PORTAUDIO)
    # gold does not use indirect shared libraries for symbol resolution, Linux only
    if (NOT MINGW AND NOT APPLE)
       if(USE_JACK)
-         target_link_libraries(mscore dl)  
+         target_link_libraries(mscore dl)
       endif(USE_JACK)
       target_link_libraries(mscore rt)
    endif (NOT MINGW AND NOT APPLE)

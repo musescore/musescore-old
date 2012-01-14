@@ -82,7 +82,7 @@ extern bool debugMode;
 extern bool showInvisible;
 
 //
-// list has to synchronized with ElementType enum
+// list has to be synchronized with ElementType enum
 //
 static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "invalid"),

@@ -266,7 +266,7 @@ enum DirectionH {
 //---------------------------------------------------------
 
 enum ValueType {
-      AUTO_VAL, USER_VAL, OFFSET_VAL
+      OFFSET_VAL, USER_VAL
       };
 
 //---------------------------------------------------------
@@ -627,11 +627,5 @@ inline static int restrict(int val, int min, int max) {
       return val;
       }
 
-#define PROPERTY(a, b, c)                              \
-         a _ ## b;                                     \
-      public:                                          \
-         a b () const               { return _ ## b; } \
-         void set ## c (const a& x) { _ ## b = x; }    \
-      private:
 #endif
 

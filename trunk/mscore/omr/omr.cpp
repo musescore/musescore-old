@@ -151,20 +151,34 @@ printf("Omr::read <%s>\n", qPrintable(_path));
             page->setImage(image);
             _pages.append(page);
             }
+      process();
+      return true;
+      }
+
+//---------------------------------------------------------
+//   process
+//---------------------------------------------------------
+
+void Omr::process()
+      {
       double sp = 0;
       double w  = 0;
 
+      int pages = 0;
+      int n = _pages.size();
       for (int i = 0; i < n; ++i) {
             _pages[i]->read(i);
-            sp += _pages[i]->spatium();
+            if (_pages[i]->systems().size() > 0) {
+                  sp += _pages[i]->spatium();
+                  ++pages;
+                  }
             w  += _pages[i]->width();
             }
-      _spatium = sp / n;
+      _spatium = sp / pages;
       w       /= n;
       _dpmm    = w / 210.0;            // PaperSize A4
 
 printf("*** spatium: %f mm  dpmm: %f\n", spatiumMM(), _dpmm);
-      return true;
       }
 
 //---------------------------------------------------------

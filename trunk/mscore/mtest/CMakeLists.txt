@@ -30,8 +30,10 @@ add_executable(mtest
       ${mocs}
       mtest.cpp
       testnote.cpp
+      testhairpin.cpp
       testmidi.cpp
       mcursor.cpp
+      testutils.cpp
       ../mscore/exportmidi.cpp
       ../mscore/importmidi.cpp
       ../mscore/midifile.cpp
