@@ -59,17 +59,17 @@
 //   propertyList
 //---------------------------------------------------------
 
-static bool falseVal = false;
-static DirectionH defaultMirror = DH_AUTO;
+static bool falseVal                = false;
+static DirectionH defaultMirror     = DH_AUTO;
 static Direction defaultDotPosition = AUTO;
-static int defaultOnTimeOffset = 0;
-static int defaultOffTimeOffset = 0;
-static int defaultHeadGroup = 0;
-static int defaultVeloOffset = 0;
-static qreal defaultTuning = 0.0;
-static int defaultFret = -1;
-static int defaultString = -1;
-static ValueType defaultVeloType = AUTO_VAL;
+static int defaultOnTimeOffset      = 0;
+static int defaultOffTimeOffset     = 0;
+static int defaultHeadGroup         = 0;
+static int defaultVeloOffset        = 0;
+static qreal defaultTuning          = 0.0;
+static int defaultFret              = -1;
+static int defaultString            = -1;
+static ValueType defaultVeloType    = OFFSET_VAL;
 static NoteHeadType defaultHeadType = HEAD_AUTO;
 
 Property<Note> Note::propertyList[] = {
@@ -186,7 +186,7 @@ Note::Note(Score* s)
       _hidden            = false;
       _subchannel        = 0;
 
-      _veloType          = AUTO_VAL;
+      _veloType          = OFFSET_VAL;
       _veloOffset        = 0;
 
       _onTimeOffset      = 0;
@@ -1530,11 +1530,7 @@ int Note::customizeVelocity(int velo) const
             velo = velo + (velo * veloOffset()) / 100;
       else if (veloType() == USER_VAL)
             velo = veloOffset();
-      if (velo < 1)
-            velo = 1;
-      else if (velo > 127)
-            velo = 127;
-      return velo;
+      return restrict(velo, 1, 127);
       }
 
 //---------------------------------------------------------

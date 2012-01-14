@@ -90,9 +90,8 @@ DrumrollEditor::DrumrollEditor(QWidget* parent)
       tb->addSeparator();
       tb->addWidget(new QLabel(tr("Velocity:")));
       veloType = new QComboBox;
-      veloType->addItem(tr("auto"),   0);
-      veloType->addItem(tr("user"),   1);
-      veloType->addItem(tr("offset"), 2);
+      veloType->addItem(tr("offset"), OFFSET_VAL);
+      veloType->addItem(tr("user"),   USER_VAL);
       tb->addWidget(veloType);
 
       velocity = new QSpinBox;
@@ -199,7 +198,7 @@ void DrumrollEditor::updateSelection()
             pitch->setValue(0);
             pitch->setEnabled(false);
             veloType->setEnabled(false);
-            veloType->setCurrentIndex(int(AUTO_VAL));
+            veloType->setCurrentIndex(int(OFFSET_VAL));
             }
       else {
             velocity->setEnabled(true);
@@ -291,11 +290,6 @@ void DrumrollEditor::updateVelocity(Note* note)
       if (vt != ValueType(veloType->currentIndex())) {
             veloType->setCurrentIndex(int(vt));
             switch(vt) {
-                  case AUTO_VAL:
-                        velocity->setReadOnly(true);
-                        velocity->setSuffix("");
-                        velocity->setRange(0, 127);
-                        break;
                   case USER_VAL:
                         velocity->setReadOnly(false);
                         velocity->setSuffix("");
@@ -308,15 +302,7 @@ void DrumrollEditor::updateVelocity(Note* note)
                         break;
                   }
             }
-      switch(vt) {
-            case AUTO_VAL:
-            case USER_VAL:
-                  // TODO: velocity->setValue(note->velocity());
-                  break;
-            case OFFSET_VAL:
-                  velocity->setValue(note->veloOffset());
-                  break;
-            }
+      velocity->setValue(note->veloOffset());
       }
 
 //---------------------------------------------------------
@@ -334,7 +320,7 @@ void DrumrollEditor::velocityChanged(int val)
             return;
       ValueType vt = note->veloType();
 
-      if (vt == AUTO_VAL)
+      if (vt == OFFSET_VAL)
             return;
 
       _score->undo()->beginMacro();

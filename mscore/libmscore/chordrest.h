@@ -47,7 +47,7 @@ class ChordRest : public DurationElement {
       BeamMode _beamMode;
       bool _up;                           // actual stem direction
       bool _small;
-      Space _space;
+      Space _space;                       // cached value from layout
       QList<Lyrics*> _lyricsList;
       TabDurationSymbol * _tabDur;        // stores a duration symbol in tablature staves
 

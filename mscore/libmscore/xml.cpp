@@ -17,6 +17,16 @@
 QString docName;
 
 //---------------------------------------------------------
+//   compareProperty
+//---------------------------------------------------------
+
+template <class T>
+bool compareProperty(void* val, void* defaultVal)
+      {
+      return (defaultVal == 0) || (*(T*)val != *(T*)defaultVal);
+      }
+
+//---------------------------------------------------------
 //   Xml
 //---------------------------------------------------------
 
@@ -64,6 +74,7 @@ void Xml::pTag(const char* name, Placement place)
       tag(name, tags[int(place)]);
       }
 
+#if 0
 //---------------------------------------------------------
 //   valueTypeTag
 //---------------------------------------------------------
@@ -71,16 +82,13 @@ void Xml::pTag(const char* name, Placement place)
 void Xml::valueTypeTag(const char* name, ValueType t)
       {
       const char* s;
-      switch(t) {
-            case AUTO_VAL:   s = "auto"; break;
+      switch (t) {
             case USER_VAL:   s = "user"; break;
             case OFFSET_VAL: s = "offset"; break;
-            default:
-                  s = "?";
-                  break;
             }
       tag(name, s);
       }
+#endif
 
 //---------------------------------------------------------
 //   readPlacement
@@ -292,9 +300,6 @@ void Xml::tag(const char* name, P_DATA_TYPE type, void* data, void* defaultVal)
                                     break;
                               case USER_VAL:
                                     tag(name, QVariant("user"));
-                                    break;
-                              case AUTO_VAL:
-                                    tag(name, QVariant("auto"));
                                     break;
                               }
                         }

@@ -22,11 +22,13 @@
 #include "ui_inspector_spacer.h"
 #include "ui_inspector_segment.h"
 #include "ui_inspector_note.h"
+#include "ui_inspector_chord.h"
 
 class Element;
 class Note;
 class Inspector;
 class Segment;
+class Chord;
 
 //---------------------------------------------------------
 //   InspectorSegment
@@ -55,12 +57,42 @@ class InspectorSegment : public QWidget, Ui::InspectorSegment {
       };
 
 //---------------------------------------------------------
+//   InspectorChord
+//---------------------------------------------------------
+
+class InspectorChord : public QWidget, Ui::InspectorChord {
+      Q_OBJECT
+      Chord* chord;
+
+   private slots:
+      void smallChanged(bool val);
+      void stemlessChanged(bool val);
+      void stemDirectionChanged(int idx);
+
+      void resetSmallClicked();
+      void resetStemlessClicked();
+      void resetStemDirectionClicked();
+
+   signals:
+      void inspectorVisible(bool);
+      void enableApply();
+
+   public:
+      InspectorChord(QWidget* parent = 0);
+      void setElement(Chord*);
+      void apply();
+      bool dirty() const;
+      };
+
+//---------------------------------------------------------
 //   InspectorNote
 //---------------------------------------------------------
 
 class InspectorNoteBase : public QWidget, Ui::InspectorNote {
       Q_OBJECT
       Note* note;
+      int _userVelocity;
+      int _veloOffset;
 
    private slots:
       void resetSmallClicked();
@@ -68,12 +100,22 @@ class InspectorNoteBase : public QWidget, Ui::InspectorNote {
       void resetDotPositionClicked();
       void resetOntimeOffsetClicked();
       void resetOfftimeOffsetClicked();
+      void resetNoteHeadGroupClicked();
+      void resetNoteHeadTypeClicked();
+      void resetTuningClicked();
+      void resetVelocityTypeClicked();
 
       void smallChanged(int);
       void mirrorHeadChanged(int);
       void dotPositionChanged(int);
       void ontimeOffsetChanged(int);
       void offtimeOffsetChanged(int);
+
+      void noteHeadGroupChanged(int);
+      void noteHeadTypeChanged(int);
+      void tuningChanged(double);
+      void velocityTypeChanged(int);
+      void velocityChanged(int);
 
    signals:
       void enableApply();
@@ -229,7 +271,9 @@ class InspectorNote : public InspectorElementBase {
 
       InspectorElementElement* iElement;
       InspectorNoteBase* iNote;
+      InspectorChord*   iChord;
       InspectorSegment* iSegment;
+
       QToolButton* dot1;
       QToolButton* dot2;
       QToolButton* dot3;

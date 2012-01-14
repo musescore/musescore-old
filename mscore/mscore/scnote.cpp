@@ -216,9 +216,9 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                       if (!score)
                            return context->engine()->undefinedValue();
                       if(v < 0) {
-                            if (note->veloType() != AUTO_VAL) {
+                            if (note->veloType() != OFFSET_VAL) {
                                   score->undo(new ChangeNoteProperties(note,
-                                      AUTO_VAL, note->veloOffset(),
+                                      OFFSET_VAL, note->veloOffset(),
                                       note->onTimeUserOffset(), note->offTimeUserOffset()));
                                       //score->updateVelo();
                                   }

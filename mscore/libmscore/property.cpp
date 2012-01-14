@@ -68,8 +68,6 @@ void setProperty(P_DATA_TYPE type, void* data, const QString& value)
                         *(ValueType*)data = OFFSET_VAL;
                   else if (value == "user")
                         *(ValueType*)data = USER_VAL;
-                  else if (value == "auto")
-                        *(ValueType*)data = AUTO_VAL;
                   break;
 
             case T_POINT:
@@ -184,8 +182,6 @@ QVariant getProperty(P_DATA_TYPE type, const QDomElement& e)
                         return QVariant(int(OFFSET_VAL));
                   else if (value == "user")
                         return QVariant(int(USER_VAL));
-                  else if (value == "auto")
-                        return QVariant(int(AUTO_VAL));
                   break;
             }
       return QVariant();

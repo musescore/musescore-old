@@ -50,7 +50,7 @@ class Xml : public QTextStream {
       void sTag(const char* name, Spatium sp) { Xml::tag(name, QVariant(sp.val())); }
       void pTag(const char* name, Placement);
       void fTag(const char* name, const Fraction&);
-      void valueTypeTag(const char* name, ValueType t);
+//      void valueTypeTag(const char* name, ValueType t);
 
       void header();
 
@@ -76,16 +76,6 @@ class Xml : public QTextStream {
       static QString htmlToString(const QDomElement&);
       };
 
-//---------------------------------------------------------
-//   compareProperty
-//---------------------------------------------------------
-
-template <class T>
-bool compareProperty(void* val, void* defaultVal)
-      {
-      return (defaultVal == 0) || (*(T*)val != *(T*)defaultVal);
-      }
-
 extern Placement readPlacement(const QDomElement&);
 extern Fraction  readFraction(const QDomElement&);
 extern QString docName;
@@ -95,6 +85,5 @@ extern QRectF readRectF(const QDomElement&);
 extern QColor readColor(const QDomElement&);
 extern void domError(const QDomElement&);
 extern void domNotImplemented(const QDomElement&);
-// extern QVariant readVariant(P_DATA_TYPE, const QString&);
 #endif
 

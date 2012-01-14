@@ -15,6 +15,7 @@
 #include "musescore.h"
 #include "scoreview.h"
 #include "omr/omrview.h"
+#include "omr/omr.h"
 #include "libmscore/score.h"
 
 //---------------------------------------------------------
@@ -54,35 +55,17 @@ OmrPanel::OmrPanel(QWidget* parent)
       QWidget* mainWidget = new QWidget;
       mainWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
       setWidget(mainWidget);
-      layout = new QVBoxLayout;
-      mainWidget->setLayout(layout);
-      QHBoxLayout* hbox = new QHBoxLayout;
 
-      showLines    = new QCheckBox;
-      showLines->setText(tr("Show Lines"));
-
-      showBarlines = new QCheckBox;
-      showBarlines->setText(tr("Mark Barlines"));
-
-      showSlices   = new QCheckBox;
-      showSlices->setText(tr("Mark Slices"));
-
-      showStaves   = new QCheckBox;
-      showStaves->setText(tr("Mark Staves"));
+      op.setupUi(mainWidget);
 
       setOmrView(0);
 
-      connect(showBarlines, SIGNAL(toggled(bool)), SLOT(showBarlinesToggled(bool)));
-      connect(showLines,    SIGNAL(toggled(bool)), SLOT(showLinesToggled(bool)));
-      connect(showSlices,   SIGNAL(toggled(bool)), SLOT(showSlicesToggled(bool)));
-      connect(showStaves,   SIGNAL(toggled(bool)), SLOT(showStavesToggled(bool)));
-
-      layout->addWidget(showLines);
-      layout->addWidget(showBarlines);
-      layout->addWidget(showSlices);
-      layout->addWidget(showStaves);
-      layout->addStretch(10);
-      layout->addLayout(hbox);
+      connect(op.showBarlines, SIGNAL(toggled(bool)), SLOT(showBarlinesToggled(bool)));
+      connect(op.showLines,    SIGNAL(toggled(bool)), SLOT(showLinesToggled(bool)));
+      connect(op.showSlices,   SIGNAL(toggled(bool)), SLOT(showSlicesToggled(bool)));
+      connect(op.showStaves,   SIGNAL(toggled(bool)), SLOT(showStavesToggled(bool)));
+      connect(op.spatium,      SIGNAL(valueChanged(double)), SLOT(spatiumChanged(double)));
+      connect(op.process,      SIGNAL(clicked()), SLOT(processClicked()));
       }
 
 //---------------------------------------------------------
@@ -136,6 +119,45 @@ void OmrPanel::showStavesToggled(bool val)
       }
 
 //---------------------------------------------------------
+//   spatiumChanged
+//---------------------------------------------------------
+
+void OmrPanel::spatiumChanged(double val)
+      {
+      if (omrView) {
+            omrView->omr()->setSpatium(val * omrView->omr()->dpmm());
+            omrView->update();
+            }
+      }
+
+//---------------------------------------------------------
+//   blockSignals
+//---------------------------------------------------------
+
+void OmrPanel::blockSignals(bool val)
+      {
+      op.showBarlines->blockSignals(val);
+      op.showLines->blockSignals(val);
+      op.showSlices->blockSignals(val);
+      op.showStaves->blockSignals(val);
+      op.spatium->blockSignals(val);
+      }
+
+//---------------------------------------------------------
+//   enableGui
+//---------------------------------------------------------
+
+void OmrPanel::enableGui(bool val)
+      {
+      op.showBarlines->setEnabled(val);
+      op.showLines->setEnabled(val);
+      op.showSlices->setEnabled(val);
+      op.showStaves->setEnabled(val);
+      op.spatium->setEnabled(val);
+      op.process->setEnabled(val);
+      }
+
+//---------------------------------------------------------
 //   setOmr
 //---------------------------------------------------------
 
@@ -143,34 +165,32 @@ void OmrPanel::setOmrView(OmrView* v)
       {
       omrView = v;
       if (omrView) {
-            showBarlines->blockSignals(true);
-            showLines->blockSignals(true);
-            showSlices->blockSignals(true);
-            showStaves->blockSignals(true);
+            enableGui(true);
+            blockSignals(true);
 
-            showBarlines->setEnabled(true);
-            showBarlines->setChecked(omrView->showBarlines());
+            op.showBarlines->setChecked(omrView->showBarlines());
+            op.showLines->setChecked(omrView->showLines());
+            op.showSlices->setChecked(omrView->showSlices());
+            op.showStaves->setChecked(omrView->showStaves());
+            op.spatium->setValue(omrView->omr()->spatiumMM());
 
-            showLines->setEnabled(true);
-            showLines->setChecked(omrView->showLines());
-
-            showSlices->setEnabled(true);
-            showSlices->setChecked(omrView->showSlices());
-
-            showStaves->setEnabled(true);
-            showStaves->setChecked(omrView->showStaves());
-
-            showBarlines->blockSignals(false);
-            showLines->blockSignals(false);
-            showSlices->blockSignals(false);
-            showStaves->blockSignals(false);
+            blockSignals(false);
             }
       else {
-            showBarlines->setEnabled(false);
-            showLines->setEnabled(false);
-            showSlices->setEnabled(false);
-            showStaves->setEnabled(false);
+            enableGui(false);
             }
       }
 
+//---------------------------------------------------------
+//   processClicked
+//---------------------------------------------------------
+
+void OmrPanel::processClicked()
+      {
+      if (omrView) {
+            omrView->omr()->process();
+            omrView->update();
+            setOmrView(omrView);    // update values
+            }
+      }
 
