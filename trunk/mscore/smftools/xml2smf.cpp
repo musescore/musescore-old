@@ -20,12 +20,13 @@
 
 #include <stdio.h>
 #include <unistd.h>
-#include "xml.h"
-#include "midifile.h"
+#include "libmscore/xml.h"
+#include "mscore/midifile.h"
 
 static const char versionString[] = "0.1";
 
-int division         = 480;
+int MScore::division = 480;
+bool MScore::debugMsg = false;
 bool debugMode       = false;
 bool noRunningStatus = false;
 
