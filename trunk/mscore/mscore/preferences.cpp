@@ -253,6 +253,7 @@ void Preferences::init()
       followSong              = true;
       importCharset           = "GBK";
       importStyleFile         = "";
+      shortestNote            = MScore::division/4;
 
       useOsc                  = false;
       oscPort                 = 5282;
@@ -400,6 +401,7 @@ void Preferences::write()
 
       s.setValue("defaultPlayDuration", MScore::defaultPlayDuration);
       s.setValue("importStyleFile", importStyleFile);
+      s.setValue("shortestNote", shortestNote);
       s.setValue("importCharset", importCharset);
       s.setValue("warnPitchRange", MScore::warnPitchRange);
       s.setValue("followSong", followSong);
@@ -553,6 +555,7 @@ void Preferences::read()
 
       MScore::defaultPlayDuration = s.value("defaultPlayDuration", MScore::defaultPlayDuration).toInt();
       importStyleFile        = s.value("importStyleFile", importStyleFile).toString();
+      shortestNote           = s.value("shortestNote", shortestNote).toInt();
       importCharset          = s.value("importCharset", importCharset).toString();
       MScore::warnPitchRange = s.value("warnPitchRange", MScore::warnPitchRange).toBool();
       followSong             = s.value("followSong", followSong).toBool();
@@ -1035,6 +1038,16 @@ void PreferenceDialog::updateValues(Preferences* p)
 
       defaultPlayDuration->setValue(MScore::defaultPlayDuration);
       importStyleFile->setText(p->importStyleFile);
+      int shortestNoteIndex = 2;
+      int nn = (p->shortestNote * 16)/MScore::division;
+      switch(nn) {
+            case 16: shortestNoteIndex = 0; break;
+            case 8:  shortestNoteIndex = 1; break;
+            case 4:  shortestNoteIndex = 2; break;
+            case 2:  shortestNoteIndex = 3; break;
+            case 1:  shortestNoteIndex = 4; break;
+            }
+      shortestNote->setCurrentIndex(shortestNoteIndex);
       useImportBuildinStyle->setChecked(p->importStyleFile.isEmpty());
       useImportStyleFile->setChecked(!p->importStyleFile.isEmpty());
 
@@ -1507,6 +1520,16 @@ void PreferenceDialog::apply()
             preferences.importStyleFile = importStyleFile->text();
       else
             preferences.importStyleFile.clear();
+
+      int ticks = MScore::division/4;
+      switch(shortestNote->currentIndex()) {
+            case 0: ticks = MScore::division;    break;
+            case 1: ticks = MScore::division/2;  break;
+            case 2: ticks = MScore::division/4;  break;
+            case 3: ticks = MScore::division/8;  break;
+            case 4: ticks = MScore::division/16; break;
+            }
+      preferences.shortestNote = ticks;
 
       preferences.importCharset = importCharsetList->currentText();
       MScore::warnPitchRange = warnPitchRange->isChecked();

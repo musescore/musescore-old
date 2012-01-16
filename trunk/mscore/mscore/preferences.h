@@ -146,6 +146,7 @@ struct Preferences {
       bool followSong;
       QString importCharset;
       QString importStyleFile;
+      int shortestNote;             // for midi input
 
       bool useOsc;
       int oscPort;
