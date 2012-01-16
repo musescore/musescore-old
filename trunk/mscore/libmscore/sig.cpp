@@ -67,7 +67,6 @@ TimeSigMap::TimeSigMap()
 
 void TimeSigMap::add(int tick, const Fraction& f)
       {
-qDebug("1TimeSigMap::add at %d: %d/%d", tick, f.numerator(), f.denominator());
       if (!f.isValid()) {
             qDebug("illegal signature %d/%d", f.numerator(), f.denominator());
             }
@@ -77,7 +76,6 @@ qDebug("1TimeSigMap::add at %d: %d/%d", tick, f.numerator(), f.denominator());
 
 void TimeSigMap::add(int tick, const SigEvent& ev)
       {
-qDebug("2TimeSigMap::add at %d: %d/%d", tick, ev.timesig().numerator(), ev.timesig().denominator());
       (*this)[tick] = ev;
       normalize();
       }
