@@ -25,7 +25,9 @@
 
 static const char versionString[] = "0.1";
 
-int division         = 480;
+int MScore::division = 480;
+bool MScore::debugMsg = false;
+
 bool debugMode       = false;
 bool mergeNotes      = false;
 bool separateChannel = false;

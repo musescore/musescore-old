@@ -31,6 +31,7 @@ add_executable(
       ../libmscore/xml.cpp
       ../libmscore/event.cpp
       ../libmscore/fraction.cpp
+      ../libmscore/sig.cpp
       )
 target_link_libraries(smf2xml ${QT_LIBRARIES} )
 set_target_properties (
@@ -50,6 +51,8 @@ add_executable(
       ../libmscore/drumset.cpp
       ../libmscore/event.cpp
       ../libmscore/fraction.cpp
+      ../libmscore/xml.cpp
+      ../libmscore/sig.cpp
       )
 target_link_libraries(xml2smf ${QT_LIBRARIES} )
 set_target_properties (
