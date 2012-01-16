@@ -29,7 +29,7 @@ static int ticks_beat(int n)
       {
       int m = (MScore::division * 4) / n;
       if ((MScore::division * 4) % n) {
-            qDebug("Mscore: ticks_beat(): bad divisor %d\n", n);
+            qDebug("Mscore: ticks_beat(): bad divisor %d", n);
             abort();
             }
       return m;
@@ -67,8 +67,9 @@ TimeSigMap::TimeSigMap()
 
 void TimeSigMap::add(int tick, const Fraction& f)
       {
+qDebug("1TimeSigMap::add at %d: %d/%d", tick, f.numerator(), f.denominator());
       if (!f.isValid()) {
-            qDebug("illegal signature %d/%d\n", f.numerator(), f.denominator());
+            qDebug("illegal signature %d/%d", f.numerator(), f.denominator());
             }
       (*this)[tick] = SigEvent(f);
       normalize();
@@ -76,6 +77,7 @@ void TimeSigMap::add(int tick, const Fraction& f)
 
 void TimeSigMap::add(int tick, const SigEvent& ev)
       {
+qDebug("2TimeSigMap::add at %d: %d/%d", tick, ev.timesig().numerator(), ev.timesig().denominator());
       (*this)[tick] = ev;
       normalize();
       }
@@ -140,7 +142,7 @@ void TimeSigMap::tickValues(int t, int* bar, int* beat, int* tick) const
             }
       ciSigEvent e = upper_bound(t);
       if (empty() || e == begin()) {
-            qDebug("tickValue(0x%x) not found\n", t);
+            qDebug("tickValue(0x%x) not found", t);
             abort();
             }
       --e;
@@ -148,7 +150,7 @@ void TimeSigMap::tickValues(int t, int* bar, int* beat, int* tick) const
       int ticksB = ticks_beat(e->second.timesig().denominator());
       int ticksM = ticksB * e->second.timesig().numerator();
       if (ticksM == 0) {
-            qDebug("TimeSigMap::tickValues: at %d %s\n", t, qPrintable(e->second.timesig().print()));
+            qDebug("TimeSigMap::tickValues: at %d %s", t, qPrintable(e->second.timesig().print()));
             *bar  = 0;
             *beat = 0;
             *tick = 0;
@@ -164,7 +166,7 @@ void TimeSigMap::tickValues(int t, int* bar, int* beat, int* tick) const
 //   bar2tick
 //---------------------------------------------------------
 
-int TimeSigMap::bar2tick(int bar, int beat, int tick) const
+int TimeSigMap::bar2tick(int bar, int beat) const
       {
       ciSigEvent e;
 
@@ -173,16 +175,15 @@ int TimeSigMap::bar2tick(int bar, int beat, int tick) const
                   break;
             }
       if (empty() || e == begin()) {
-            qDebug("TimeSigMap::bar2tick(): not found(%d,%d,%d) not found\n",
-               bar, beat, tick);
+            qDebug("TimeSigMap::bar2tick(): not found(%d,%d) not found", bar, beat);
             if (empty())
-                  qDebug("   list is empty\n");
+                  qDebug("   list is empty");
             return 0;
             }
       --e;
       int ticksB = ticks_beat(e->second.timesig().denominator());
       int ticksM = ticksB * e->second.timesig().numerator();
-      return e->first + (bar - e->second.bar()) * ticksM + ticksB * beat + tick;
+      return e->first + (bar - e->second.bar()) * ticksM + ticksB * beat;
       }
 
 //---------------------------------------------------------
@@ -286,7 +287,7 @@ unsigned TimeSigMap::raster(unsigned t, int raster) const
             return t;
       ciSigEvent e = upper_bound(t);
       if (e == end()) {
-            qDebug("TimeSigMap::raster(%x,)\n", t);
+            qDebug("TimeSigMap::raster(%x,)", t);
             return t;
             }
       int delta  = t - e->first;
@@ -357,9 +358,9 @@ int TimeSigMap::rasterStep(unsigned t, int raster) const
 
 void TimeSigMap::dump() const
       {
-      qDebug("TimeSigMap:\n");
+      qDebug("TimeSigMap:");
       for (ciSigEvent i = begin(); i != end(); ++i)
-            qDebug("%6d timesig: %s measure: %d\n",
+            qDebug("%6d timesig: %s measure: %d",
                i->first, qPrintable(i->second.timesig().print()), i->second.bar());
       }
 

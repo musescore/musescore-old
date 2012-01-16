@@ -1,4 +1,7 @@
-16.1 (ws) midi import: moved "shortest note" from separate dialog into preferences->import
+16.1 (ws)
+      - midi import fixes
+      - fix preferences: page size, height/with was exchanged on save
+      - midi import: moved "shortest note" from separate dialog into preferences->import
 13.1 (ws)
       - fix #14403: saved decrescendo appears as crescendo when re-opening
 31.dec (ws)

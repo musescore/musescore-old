@@ -675,7 +675,7 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, const Event& mm)
                   if (staff) {
                         int key = ((const char*)data)[0];
                         if (key < -7 || key > 7) {
-                              qDebug("ImportMidi: illegal key %d\n", key);
+                              qDebug("ImportMidi: illegal key %d", key);
                               break;
                               }
                         KeySigEvent ks;
@@ -684,7 +684,7 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, const Event& mm)
                         track->setHasKey(true);
                         }
                   else
-                        qDebug("meta key: no staff\n");
+                        qDebug("meta key: no staff");
                   break;
             case META_COMPOSER:     // mscore extension
             case META_POET:
@@ -730,12 +730,13 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, const Event& mm)
                   break;
 
             case META_TIME_SIGNATURE:
+                  qDebug("midi: meta timesig: %d, division %d", tick, _division);
                   cs->sigmap()->add(tick, Fraction(data[0], 1 << data[1]));
                   break;
 
             default:
                   if (debugMode)
-                        qDebug("unknown meta type 0x%02x\n", mm.metaType());
+                        qDebug("unknown meta type 0x%02x", mm.metaType());
                   break;
             }
       }
@@ -750,8 +751,11 @@ void convertMidi(Score* score, MidiFile* mf)
       mf->process1();                    // merge noteOn/noteOff into NoteEvent etc.
       mf->changeDivision(MScore::division);
 
+/*      for (iSigEvent is = mf->siglist().begin(); is != mf->siglist().end(); ++is) {
+            qDebug("   sig at %d\n", is->first);
+            }
+  */
       *(score->sigmap()) = mf->siglist();
-
       QList<MidiTrack*>* tracks = mf->tracks();
 
       //---------------------------------------------------
@@ -790,7 +794,7 @@ void convertMidi(Score* score, MidiFile* mf)
                   }
             }
       if (staffIdx == 0)
-            qDebug("no tracks found\n");
+            qDebug("no tracks found");
 
       //---------------------------------------------------
       //  create instruments
@@ -866,8 +870,8 @@ void convertMidi(Score* score, MidiFile* mf)
             ++endBar;
 
       for (startBar = 0; startBar < endBar; ++startBar) {
-            int tick1 = score->sigmap()->bar2tick(startBar, 0, 0);
-            int tick2 = score->sigmap()->bar2tick(startBar + 1, 0, 0);
+            int tick1 = score->sigmap()->bar2tick(startBar, 0);
+            int tick2 = score->sigmap()->bar2tick(startBar + 1, 0);
             int events = 0;
             foreach (MidiTrack* midiTrack, *tracks) {
                   if (midiTrack->staffIdx() == -1)
@@ -887,10 +891,9 @@ void convertMidi(Score* score, MidiFile* mf)
             if (events)
                   break;
             }
-
-      tick = score->sigmap()->bar2tick(startBar, 0, 0);
+      tick = score->sigmap()->bar2tick(startBar, 0);
       if (tick)
-            qDebug("remove empty measures %d ticks\n", tick);
+            qDebug("remove empty measures %d ticks, startBar %d", tick, startBar);
       mf->move(-tick);
 
       //---------------------------------------------------
@@ -923,7 +926,7 @@ void convertMidi(Score* score, MidiFile* mf)
 
       for (int i = 0; i < bars; ++i) {
             Measure* measure  = new Measure(score);
-            int tick = score->sigmap()->bar2tick(i, 0, 0);
+            int tick = score->sigmap()->bar2tick(i, 0);
             measure->setTick(tick);
             Fraction ts(score->sigmap()->timesig(tick).timesig());
             measure->setTimesig(ts);
@@ -949,7 +952,7 @@ void convertMidi(Score* score, MidiFile* mf)
                         mf->processMeta(score, track, e);
                   }
             if (debugMode) {
-                  qDebug("Track %2d:%2d key %d <%s><%s>\n", track->outChannel(),
+                  qDebug("Track %2d:%2d key %d <%s><%s>", track->outChannel(),
                      track->outPort(), track->hasKey(), qPrintable(track->name()),
                      qPrintable(track->comment()));
                   }
@@ -1088,7 +1091,7 @@ void MidiFile::convertTrack(Score* score, MidiTrack* midiTrack)
 
                                     if (useDrumset) {
                                           if (!drumset->isValid(mn.pitch())) {
-qDebug("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
+qDebug("unmapped drum note 0x%02x %d", mn.pitch(), mn.pitch());
                                                 }
                                           else {
                                                 chord->setStemDirection(drumset->stemDirection(mn.pitch()));
@@ -1130,7 +1133,7 @@ qDebug("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
                               int len = restLen;
                   		Measure* measure = score->tick2measure(ctick);
                               if (ctick >= measure->tick() + measure->ticks()) {
-                                    qDebug("tick2measure: %d end of score?\n", ctick);
+                                    qDebug("tick2measure: %d end of score?", ctick);
                                     ctick += restLen;
                                     restLen = 0;
                                     break;
@@ -1142,7 +1145,7 @@ qDebug("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
                                     len = measure->ticks();
                                     TDuration d(TDuration::V_MEASURE);
                                     Rest* rest = new Rest(score, d);
-                                    rest->setDuration(d.fraction());
+                                    rest->setDuration(measure->len());
                                     rest->setTrack(staffIdx * VOICES);
                                     Segment* s = measure->getSegment(rest, ctick);
                                     s->add(rest);
@@ -1152,7 +1155,7 @@ qDebug("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
                               else {
                                     QList<TDuration> dl = toDurationList(Fraction::fromTicks(len), false);
                                     if (dl.size() == 0) {
-                                          qDebug("cannot create duration list for len %d\n", len);
+                                          qDebug("cannot create duration list for len %d", len);
                                           restLen = 0;      // fake
                                           break;
                                           }
@@ -1197,7 +1200,7 @@ qDebug("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
                   int tick = notes[0]->mc.ontime();
             	measure = score->tick2measure(tick);
                   if (tick >= measure->tick() + measure->ticks()) {
-                        qDebug("=======================EOM\n");
+                        qDebug("=======================EOM");
                         break;
                         }
 
@@ -1211,16 +1214,16 @@ qDebug("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
                               len = n->mc.duration();
                         }
                   if (len == 0) {
-                        qDebug("ImportMidi: note len zero\n");
+                        qDebug("ImportMidi: note len zero");
                         abort();
                         }
                   // split notes on measure boundary
-//                  qDebug("tick %d len %d = %d    mt %d mtl %d = %d\n",
+//                  qDebug("tick %d len %d = %d    mt %d mtl %d = %d",
 //                     tick, len, tick+len, measure->tick(), measure->ticks(), measure->tick()+measure->ticks());
                   if ((tick + len) > measure->tick() + measure->ticks()) {
                         len = measure->tick() + measure->ticks() - tick;
                         if (len == 0) {
-                              qDebug("ImportMidi2: note len zero\n");
+                              qDebug("ImportMidi2: note len zero");
                               abort();
                               }
                         }
@@ -1273,19 +1276,27 @@ qDebug("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
             //
             // check for gap and fill with rest
             //
+            measure = score->lastMeasure();
             int restLen = measure ? (measure->tick() + measure->ticks() - ctick) : 0;
             while (restLen > 0 && voice == 0) {
-                  QList<TDuration> dl = toDurationList(Fraction::fromTicks(restLen), false);
-                  TDuration d = dl.back();
-                  Rest* rest = new Rest(score, d);
-                  rest->setDuration(d.fraction());
       		Measure* measure = score->tick2measure(ctick);
-                  rest->setTrack(staffIdx * VOICES + voice);
-                  Segment* s = measure->getSegment(rest, ctick);
-                  s->add(rest);
-                  int ticks = d.ticks();
-                  restLen -= ticks;
-                  ctick   += ticks;
+                  int ticks = measure->tick() + measure->ticks() - ctick;
+
+                  QList<TDuration> dl = toDurationList(Fraction::fromTicks(ticks), false);
+                  foreach(TDuration d, dl) {
+                        Rest* rest;
+                        if (d.fraction() == measure->len())
+                              rest = new Rest(score, TDuration::V_MEASURE);
+                        else
+                              rest = new Rest(score, d);
+                        rest->setDuration(d.fraction());
+                        rest->setTrack(staffIdx * VOICES + voice);
+                        Segment* s = measure->getSegment(rest, ctick);
+                        s->add(rest);
+                        int ticks2 = d.ticks();
+                        restLen -= ticks2;
+                        ctick   += ticks2;
+                        }
                   }
             }
       if (!midiTrack->hasKey() && !midiTrack->isDrumTrack()) {
@@ -1333,7 +1344,6 @@ bool importMidi(Score* score, const QString& name)
       QFile fp(name);
       if (!fp.open(QIODevice::ReadOnly))
             return false;
-
       MidiFile mf;
       try {
             mf.read(&fp);

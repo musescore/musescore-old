@@ -397,7 +397,7 @@ bool MuseScore::importBB(Score* score, const QString& name)
 
       for (int i = 0; i < bb.measures(); ++i) {
             Measure* measure  = new Measure(score);
-            int tick = score->sigmap()->bar2tick(i, 0, 0);
+            int tick = score->sigmap()->bar2tick(i, 0);
             measure->setTick(tick);
             Fraction ts = score->sigmap()->timesig(tick).timesig();
             measure->setTimesig(ts);
@@ -857,7 +857,7 @@ void BBTrack::cleanup()
             }
       int startTick = 0;
       for (int i = 1;; ++i) {
-            int endTick = bb->siglist().bar2tick(i, 0, 0);
+            int endTick = bb->siglist().bar2tick(i, 0);
             quantize(startTick, endTick, &dl);
             if (endTick > lastTick)
                   break;

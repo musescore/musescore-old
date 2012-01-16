@@ -224,7 +224,6 @@ bool MidiFile::read(QIODevice* in)
       _tracks.clear();
       _siglist.clear();
       _siglist.add(0, Fraction(4, 4));   // default time signature
-
       curPos    = 0;
 
       char tmp[4];
@@ -326,7 +325,7 @@ bool MidiFile::write(const void* p, qint64 len)
       qint64 rv = fp->write((char*)p, len);
       if (rv == len)
             return false;
-      qDebug("write midifile failed: %s\n", fp->errorString().toLatin1().data());
+      qDebug("write midifile failed: %s", fp->errorString().toLatin1().data());
       return true;
       }
 
@@ -488,14 +487,14 @@ bool MidiFile::readEvent(Event* event)
 
       int nclick = getvl();
       if (nclick == -1) {
-            qDebug("readEvent: error 1(getvl)\n");
+            qDebug("readEvent: error 1(getvl)");
             return false;
             }
       click += nclick;
       for (;;) {
             read(&me, 1);
             if (me >= 0xf1 && me <= 0xfe && me != 0xf7) {
-                  qDebug("Midi: Unknown Message 0x%02x\n", me & 0xff);
+                  qDebug("Midi: Unknown Message 0x%02x", me & 0xff);
                   }
             else
                   break;
@@ -509,7 +508,7 @@ bool MidiFile::readEvent(Event* event)
             status  = -1;                  // no running status
             int len = getvl();
             if (len == -1) {
-                  qDebug("readEvent: error 3\n");
+                  qDebug("readEvent: error 3");
                   return false;
                   }
             data    = new unsigned char[len+1];
@@ -517,7 +516,7 @@ bool MidiFile::readEvent(Event* event)
             read(data, len);
             data[dataLen] = 0;    // always terminate with zero
             if (data[len-1] != 0xf7) {
-                  qDebug("SYSEX does not end with 0xf7!\n");
+                  qDebug("SYSEX does not end with 0xf7!");
                   // more to come?
                   }
             else
@@ -535,7 +534,7 @@ bool MidiFile::readEvent(Event* event)
             read(&type, 1);
             dataLen = getvl();                // read len
             if (dataLen == -1) {
-                  qDebug("readEvent: error 6\n");
+                  qDebug("readEvent: error 6");
                   return false;
                   }
             data = new unsigned char[dataLen + 1];
@@ -557,8 +556,8 @@ bool MidiFile::readEvent(Event* event)
             }
       else {
             if (status == -1) {
-                  qDebug("readEvent: no running status, read 0x%02x\n", me);
-                  qDebug("sstatus ist 0x%02x\n", sstatus);
+                  qDebug("readEvent: no running status, read 0x%02x", me);
+                  qDebug("sstatus ist 0x%02x", sstatus);
                   if (sstatus == -1) {
                         return 0;
                         }
@@ -628,14 +627,14 @@ bool MidiFile::readEvent(Event* event)
                   event->setValue(a & 0x7f);
                   break;
             default:          // f1 f2 f3 f4 f5 f6 f7 f8 f9
-                  qDebug("BAD STATUS 0x%02x, me 0x%02x\n", status, me);
+                  qDebug("BAD STATUS 0x%02x, me 0x%02x", status, me);
                   return false;
             }
 
       if ((a & 0x80) || (b & 0x80)) {
-            qDebug("8't bit in data set(%02x %02x): tick %d read 0x%02x  status:0x%02x\n",
+            qDebug("8't bit in data set(%02x %02x): tick %d read 0x%02x  status:0x%02x",
               a & 0xff, b & 0xff, click, me, status);
-            qDebug("readEvent: error 16\n");
+            qDebug("readEvent: error 16");
             if (b & 0x80) {
                   // Try to fix: interpret as channel byte
                   status   = b;
@@ -704,7 +703,7 @@ void MidiTrack::mergeNoteOnOff()
                                     }
                               if (!found) {
                                     if (rpnh == -1 || rpnl == -1) {
-                                          qDebug("parameter number not defined, data 0x%x\n", datah);
+                                          qDebug("parameter number not defined, data 0x%x", datah);
                                           _events[i].setType(ME_INVALID);
                                           continue;
                                           }
@@ -722,7 +721,7 @@ void MidiTrack::mergeNoteOnOff()
                               datal = val;
 
                               if (rpnh == -1 || rpnl == -1) {
-                                    qDebug("parameter number not defined, data 0x%x 0x%x, tick %d, channel %d\n",
+                                    qDebug("parameter number not defined, data 0x%x 0x%x, tick %d, channel %d",
                                        datah, datal, ev.ontime(), ev.channel());
                                     break;
                                     }
@@ -818,7 +817,7 @@ void MidiTrack::mergeNoteOnOff()
                   }
             int tick = ev.ontime();
             if (ev.type() == ME_NOTEOFF || ev.velo() == 0) {
-                  qDebug("-extra note off at %d\n", tick);
+                  qDebug("-extra note off at %d", tick);
                   _events[i].setType(ME_INVALID);
                   continue;
                   }
@@ -844,7 +843,7 @@ void MidiTrack::mergeNoteOnOff()
                         }
                   }
             if (k == n) {
-                  qDebug("-no note-off for note at %d\n", tick);
+                  qDebug("-no note-off for note at %d", tick);
                   //
                   // note off at end of bar
                   //
@@ -894,6 +893,7 @@ void MidiTrack::extractTimeSig(TimeSigMap* sigmap)
                   int n  = 1;
                   for (int i = 0; i < nn; ++i)
                         n *= 2;
+qDebug("add timesig at %d\n", e.ontime());
                   sigmap->add(e.ontime(), Fraction(z, n));
                   }
             else
@@ -967,7 +967,7 @@ void MidiTrack::quantize(int startTick, int endTick, EventList* dst)
       else if (mintick <= division * 8)
             mintick = division * 8;
 
-//DEBUG      if (mintick < mf->shortestNote())
+      if (mintick < mf->shortestNote())         // DEBUG
             mintick = mf->shortestNote();
 
       int raster  = mintick;
@@ -1013,7 +1013,7 @@ void MidiTrack::cleanup()
             }
       int startTick = 0;
       for (int i = 1;; ++i) {
-            int endTick = mf->siglist().bar2tick(i, 0, 0);
+            int endTick = mf->siglist().bar2tick(i, 0);
             quantize(startTick, endTick, &dl);
             if (endTick > lastTick)
                   break;
@@ -1036,14 +1036,14 @@ void MidiTrack::cleanup()
                               continue;
                         if (ee.ontime() >= (e.ontime() + e.duration()))
                               break;
-                        qDebug("MidiTrack::cleanup: overlapping events: %d:%d+%d %d:%d+%d\n",
+                        qDebug("MidiTrack::cleanup: overlapping events: %d:%d+%d %d:%d+%d",
                            e.pitch(), e.ontime(), e.duration(),
                            ee.pitch(), ee.ontime(), ee.duration());
                         e.setDuration(ee.ontime() - e.ontime());
                         break;
                         }
                   if (e.duration() <= 0) {
-                        qDebug("MidiTrack::cleanup: duration <= 0: drop note at %d\n", e.ontime());
+                        qDebug("MidiTrack::cleanup: duration <= 0: drop note at %d", e.ontime());
                         continue;
                         }
                   }
@@ -1218,14 +1218,14 @@ static void readData(unsigned char* d, int dataLen, QString s)
       {
       QStringList l = s.simplified().split(" ", QString::SkipEmptyParts);
       if (dataLen != l.size()) {
-            qDebug("error converting data string <%s>\n", s.toLatin1().data());
+            qDebug("error converting data string <%s>", s.toLatin1().data());
             }
       int numberBase = 16;
       for (int i = 0; i < l.size(); ++i) {
             bool ok;
             *d++ = l.at(i).toInt(&ok, numberBase);
             if (!ok)
-                  qDebug("error converting data val <%s>\n", l.at(i).toLatin1().data());
+                  qDebug("error converting data val <%s>", l.at(i).toLatin1().data());
             }
       }
 
