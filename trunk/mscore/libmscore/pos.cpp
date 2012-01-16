@@ -68,7 +68,7 @@ Pos::Pos(TempoMap* tl, TimeSigMap* sl, const QString& s)
       sig    = sl;
       int m, b, t;
       sscanf(s.toLatin1().data(), "%04d.%02d.%03d", &m, &b, &t);
-      _tick = sig->bar2tick(m, b, t);
+      _tick = sig->bar2tick(m, b) + t;
       _type = TICKS;
       sn    = -1;
       _valid = true;
@@ -78,7 +78,7 @@ Pos::Pos(TempoMap* tl, TimeSigMap* sl, int measure, int beat, int tick)
       {
       tempo  = tl;
       sig    = sl;
-      _tick  = sig->bar2tick(measure, beat, tick);
+      _tick  = sig->bar2tick(measure, beat) + tick;
       _type  = TICKS;
       sn     = -1;
       _valid = true;

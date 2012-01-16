@@ -387,6 +387,7 @@ void Preferences::write()
       s.setValue("replaceCopyrightSymbol", replaceCopyrightSymbol);
       s.setValue("paperWidth",  MScore::defaultStyle()->pageFormat()->width());
       s.setValue("paperHeight", MScore::defaultStyle()->pageFormat()->height());
+
       s.setValue("twosided",    MScore::defaultStyle()->pageFormat()->twosided());
       s.setValue("spatium",     MScore::defaultStyle()->spatium() / DPI);
 
@@ -1017,6 +1018,7 @@ void PreferenceDialog::updateValues(Preferences* p)
 
       paperWidth->blockSignals(true);
       paperHeight->blockSignals(true);
+      landscape->blockSignals(true);
 
       double pw = MScore::defaultStyle()->pageFormat()->width();
       double ph = MScore::defaultStyle()->pageFormat()->height();
@@ -1031,6 +1033,7 @@ void PreferenceDialog::updateValues(Preferences* p)
 
       paperWidth->blockSignals(false);
       paperHeight->blockSignals(false);
+      landscape->blockSignals(false);
 
       twosided->setChecked(MScore::defaultStyle()->pageFormat()->twosided());
       spatiumEntry->setValue(MScore::defaultStyle()->spatium() * f / DPI);
@@ -1511,7 +1514,7 @@ void PreferenceDialog::apply()
 
       MScore::defaultStyle()->setSpatium(spatiumEntry->value() * f * DPI);
       preferences.mag         = scale->value();
-      pf.setSize(QSizeF(paperHeight->value() * f,  paperWidth->value()  * f));
+      pf.setSize(QSizeF(paperWidth->value() * f,  paperHeight->value()  * f));
       MScore::defaultStyle()->setPageFormat(pf);
 
       MScore::defaultPlayDuration = defaultPlayDuration->value();
