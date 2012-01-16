@@ -56,8 +56,6 @@ static const char mimeSymbolFormat[]      = "application/mscore/symbol";
 static const char mimeSymbolListFormat[]  = "application/mscore/symbollist";
 static const char mimeStaffListFormat[]   = "application/mscore/stafflist";
 
-
-
 //---------------------------------------------------------
 //   ElementType
 //    The value of this enum determines the "stacking order"

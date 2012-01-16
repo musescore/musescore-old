@@ -1,3 +1,4 @@
+16.1 (ws) midi import: moved "shortest note" from separate dialog into preferences->import
 13.1 (ws)
       - fix #14403: saved decrescendo appears as crescendo when re-opening
 31.dec (ws)
