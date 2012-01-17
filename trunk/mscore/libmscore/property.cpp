@@ -70,6 +70,7 @@ void setProperty(P_DATA_TYPE type, void* data, const QString& value)
                         *(ValueType*)data = USER_VAL;
                   break;
 
+            case T_FRACTION:
             case T_POINT:
                   abort();
             }
@@ -87,6 +88,9 @@ void setProperty(P_DATA_TYPE type, void* data, const QVariant& value)
                   break;
             case T_REAL:
                   *(qreal*)data = value.toDouble();
+                  break;
+            case T_FRACTION:
+                  *(Fraction*)data = value.value<Fraction>();
                   break;
             case T_POINT:
                   *(QPointF*)data = value.toPointF();
@@ -119,6 +123,8 @@ QVariant getProperty(P_DATA_TYPE type, void* data)
             case T_LAYOUT_BREAK:
             case T_VALUE_TYPE:
                   return QVariant(*(int*)data);
+            case T_FRACTION:
+                  return QVariant::fromValue(*(Fraction*)data);
             case T_REAL:
                   return QVariant(*(qreal*)data);
             case T_COLOR:
@@ -144,6 +150,8 @@ QVariant getProperty(P_DATA_TYPE type, const QDomElement& e)
                   return QVariant(value.toInt());
             case T_REAL:
                   return QVariant(value.toDouble());
+            case T_FRACTION:
+                  return QVariant::fromValue(readFraction(e));
             case T_COLOR:
                   return QVariant(readColor(e));
             case T_POINT:

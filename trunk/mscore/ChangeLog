@@ -1,3 +1,5 @@
+17.1 (ws)
+      - fix #14479: Time signature change broken
 16.1 (ws)
       - midi import fixes
       - fix preferences: page size, height/with was exchanged on save

@@ -67,7 +67,7 @@ static void readSpanner(int track, const QList<Spanner*>& spannerFor,
    const QList<Spanner*>& spannerBack, ChordRest* dst,
    QHash<Spanner*,Spanner*>* map)
       {
-      foreach(Spanner* oldSpanner, spannerFor) {
+      foreach (Spanner* oldSpanner, spannerFor) {
             if (track != -1 && oldSpanner->track() != track)
                   continue;
             Spanner* newSpanner = static_cast<Spanner*>(oldSpanner->clone());
@@ -75,7 +75,7 @@ static void readSpanner(int track, const QList<Spanner*>& spannerFor,
             dst->addSpannerFor(newSpanner);
             newSpanner->setStartElement(dst);
             }
-      foreach(Spanner* oldSpanner, spannerBack) {
+      foreach (Spanner* oldSpanner, spannerBack) {
             if (track != -1 && oldSpanner->track() != track)
                   continue;
             Spanner* newSpanner = map->value(oldSpanner);
@@ -85,10 +85,10 @@ static void readSpanner(int track, const QList<Spanner*>& spannerFor,
                   map->remove(oldSpanner);
                   }
             else {
-                  printf("moveSpanner: slur not found\n");
+                  printf("readSpanner: not found\n");
                   // TODO: handle failure case:
-                  // - remove start slur from chord/rest
-                  // - delete slur
+                  // - remove start spanner
+                  // - delete spanner
                   }
             }
       }
@@ -104,31 +104,25 @@ static void writeSpanner(int track, ChordRest* src, ChordRest* dst,
             Spanner* newSpanner = static_cast<Spanner*>(oldSpanner->clone());
             newSpanner->setTrack(track);
             map->insert(oldSpanner, newSpanner);
-            if (newSpanner->type() == SLUR) {
+            if (newSpanner->type() == SLUR)
                   dst->addSpannerFor(newSpanner);
-                  newSpanner->setStartElement(dst);
-                  }
-            else {
+            else
                   segment->addSpannerFor(newSpanner);
-                  newSpanner->setStartElement(segment);
-                  }
+            newSpanner->setStartElement(segment);
             }
 
       foreach(Spanner* oldSpanner, src->spannerBack()) {
             Spanner* newSpanner = map->value(oldSpanner);
             if (newSpanner) {
-                  if (newSpanner->type() == SLUR) {
+                  if (newSpanner->type() == SLUR)
                         dst->addSpannerBack(newSpanner);
-                        newSpanner->setEndElement(dst);
-                        }
-                  else {
+                  else
                         segment->addSpannerBack(newSpanner);
-                        newSpanner->setEndElement(segment);
-                        }
+                  newSpanner->setEndElement(segment);
                   map->remove(oldSpanner);
                   }
             else {
-                  printf("writeSpanner: slur not found\n");
+                  printf("writeSpanner: not found\n");
                   // TODO: handle failure case:
                   // - remove start slur from chord/rest
                   // - delete slur
@@ -147,10 +141,16 @@ static void writeSpanner(int track, ChordRest* src, ChordRest* dst,
 
 void TrackList::append(Element* e, QHash<Spanner*,Spanner*>* map)
       {
-      if (e->isDurationElement()) {
-            _duration += static_cast<DurationElement*>(e)->duration();
+      Q_ASSERT(map);
 
-            if (e->type() == REST && !isEmpty() && back()->type() == REST) {
+      if (e->isDurationElement()) {
+            Fraction d = static_cast<DurationElement*>(e)->duration();
+            _duration += d;
+
+            bool accumulateRest = e->type() == REST && !isEmpty() && back()->type() == REST;
+            Segment* s = accumulateRest ? static_cast<Rest*>(e)->segment() : 0;
+
+            if (s && s->spannerFor().isEmpty() && s->spannerBack().isEmpty()) {
                   // akkumulate rests
                   Rest* rest = static_cast<Rest*>(back());
                   Fraction d = rest->duration();
@@ -166,7 +166,7 @@ void TrackList::append(Element* e, QHash<Spanner*,Spanner*>* map)
                         foreach(const DurationElement* de, srcTuplet->elements())
                               dstTuplet->add(de->clone());
                         }
-                  else if (map) {
+                  else {
                         ChordRest* src = static_cast<ChordRest*>(e);
                         ChordRest* dst = static_cast<ChordRest*>(element);
                         readSpanner(-1, src->spannerFor(), src->spannerBack(), dst, map);
@@ -191,9 +191,9 @@ void TrackList::appendGap(const Fraction& d)
       {
       _duration += d;
       if (!isEmpty() && (back()->type() == REST)) {
-            Rest* rest = static_cast<Rest*>(back());
+            Rest* rest  = static_cast<Rest*>(back());
             Fraction dd = rest->duration();
-            dd += d;
+            dd          += d;
             rest->setDuration(dd);
             }
       else {
@@ -210,8 +210,9 @@ void TrackList::appendGap(const Fraction& d)
 void TrackList::read(int track, const Segment* fs, const Segment* es, QHash<Spanner*,Spanner*>* map)
       {
       int tick = fs->tick();
-      int gap = 0;
-      for (const Segment* s = fs; s; s = s->next1()) {
+      int gap  = 0;
+      const Segment* s;
+      for (s = fs; s; s = s->next1()) {
             Element* e = s->element(track);
             if (!e || e->generated())
                   continue;
@@ -239,7 +240,8 @@ void TrackList::read(int track, const Segment* fs, const Segment* es, QHash<Span
                   if (gap)
                         appendGap(Fraction::fromTicks(gap));
                   append(de, map);
-                  if (de->type() != CHORD || !static_cast<Chord*>(de)->isGrace())
+                  // add duration to ticks if not grace note
+                  if (!(de->type() == CHORD && static_cast<Chord*>(de)->isGrace()))
                         tick += de->duration().ticks();;
                   }
             else
@@ -248,9 +250,8 @@ void TrackList::read(int track, const Segment* fs, const Segment* es, QHash<Span
                   break;
             }
       gap = es->tick() - tick;
-      if (gap) {
+      if (gap)
             appendGap(Fraction::fromTicks(gap));
-            }
       }
 
 //---------------------------------------------------------
@@ -353,6 +354,11 @@ bool TrackList::write(int track, Measure* measure, QHash<Spanner*, Spanner*>* ma
                         qDebug("TrackList::write: cannot split tuplet\n");
                         return false;
                         }
+                  //
+                  // split note/rest
+                  //
+
+                  bool firstCRinSplit = true;
                   while (duration.numerator() > 0) {
                         if (e->type() == REST && (duration >= rest || e == back()) && rest == m->len()) {
                               segment = m->getSegment(e, m->tick() + pos.ticks());
@@ -365,6 +371,10 @@ bool TrackList::write(int track, Measure* measure, QHash<Spanner*, Spanner*>* ma
                                     r->setDuration(m->len());
                                     r->setTrack(track);
                                     segment->add(r);
+                                    if (e->isChordRest() && firstCRinSplit) {
+                                          ChordRest* src = static_cast<ChordRest*>(e);
+                                          writeSpanner(track, src, r, segment, map);
+                                          }
                                     }
                               duration -= m->len();
                               pos      += m->len();
@@ -411,7 +421,7 @@ bool TrackList::write(int track, Measure* measure, QHash<Spanner*, Spanner*>* ma
                                     rest     -= d;
                                     pos      += d;
                                     }
-                              if (e->isChordRest()) {
+                              if (e->isChordRest() && firstCRinSplit) {
                                     ChordRest* src = static_cast<ChordRest*>(e);
                                     writeSpanner(track, src, dst, segment, map);
                                     }
@@ -421,11 +431,14 @@ bool TrackList::write(int track, Measure* measure, QHash<Spanner*, Spanner*>* ma
                               m    = m->nextMeasure();
                               if (m)
                                     rest = m->len();
-                              if (m == 0) {
-                                    printf("end of measure list reached\n");
+/*                              if (m == 0) {
+                                    printf("end of measure list reached %d/%d\n",
+                                       duration.numerator(), duration.denominator());
                                     break;
                                     }
+ */
                               }
+                        firstCRinSplit = false;
                         }
                   }
             else if (e->type() == KEYSIG) {
@@ -497,14 +510,22 @@ bool ScoreRange::canWrite(const Fraction& f) const
 
 void ScoreRange::read(Segment* first, Segment* last, int startTrack, int endTrack)
       {
+printf("ScoreRange::read(%s %d %s %d)\n", first->subTypeName(), first->tick(),
+      last->subTypeName(), last->tick());
+
       spannerMap.clear();
       for (int track = startTrack; track < endTrack; ++track) {
             TrackList* dl = new TrackList;
             dl->read(track, first, last, &spannerMap);
             tracks.append(dl);
             }
-      if (!spannerMap.isEmpty())
-            printf("ScoreRange::read(): dangling Slurs\n");
+      if (!spannerMap.isEmpty()) {
+            printf("ScoreRange::read(): dangling Spanner\n");
+            foreach(Spanner* s, spannerMap) {
+                  printf("  <%s>\n", s->name());
+                  }
+            }
+      printf("ScoreRange::read: duration %d/%d\n", duration().numerator(), duration().denominator());
       }
 
 //---------------------------------------------------------
@@ -520,8 +541,12 @@ bool ScoreRange::write(int track, Measure* m) const
             if (!dl->write(track + i, m, &spannerMap))
                   return false;
             }
-      if (!spannerMap.isEmpty())
-            printf("ScoreRange::write(): dangling Slurs\n");
+      if (!spannerMap.isEmpty()) {
+            printf("ScoreRange::write(): dangling Spanner\n");
+            foreach(Spanner* s, spannerMap) {
+                  printf("  <%s>\n", s->name());
+                  }
+            }
       return true;
       }
 

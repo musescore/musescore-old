@@ -1073,23 +1073,6 @@ class ChangeNoteProperties : public UndoCommand {
       };
 
 //---------------------------------------------------------
-//   ChangeMeasureTimesig
-//---------------------------------------------------------
-
-class ChangeMeasureTimesig : public UndoCommand {
-      Measure* m;
-      Fraction ts;
-
-      void flip();
-
-   public:
-      ChangeMeasureTimesig(Measure*, const Fraction&);
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      UNDO_NAME("ChangeMeasureTimesig");
-      };
-
-//---------------------------------------------------------
 //   ChangeTimesig
 //---------------------------------------------------------
 
@@ -1455,7 +1438,8 @@ class ChangeProperty : public UndoCommand {
       void flip();
 
    public:
-      ChangeProperty(Element* e, int i, const QVariant& v) : element(e), id(i), property(v) {}
+      ChangeProperty(Element* e, int i, const QVariant& v)
+         : element(e), id(i), property(v) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeProperty");

@@ -74,22 +74,6 @@ void Xml::pTag(const char* name, Placement place)
       tag(name, tags[int(place)]);
       }
 
-#if 0
-//---------------------------------------------------------
-//   valueTypeTag
-//---------------------------------------------------------
-
-void Xml::valueTypeTag(const char* name, ValueType t)
-      {
-      const char* s;
-      switch (t) {
-            case USER_VAL:   s = "user"; break;
-            case OFFSET_VAL: s = "offset"; break;
-            }
-      tag(name, s);
-      }
-#endif
-
 //---------------------------------------------------------
 //   readPlacement
 //---------------------------------------------------------
@@ -240,6 +224,10 @@ void Xml::tag(const char* name, P_DATA_TYPE type, void* data, void* defaultVal)
             case T_REAL:
                   if (compareProperty<qreal>(data, defaultVal))
                         tag(name, QVariant(*(qreal*)data));
+                  break;
+            case T_FRACTION:
+                  if (compareProperty<Fraction>(data, defaultVal))
+                        fTag(name, *(Fraction*)data);
                   break;
             case T_POINT:
                   if (compareProperty<QPointF>(data, defaultVal))

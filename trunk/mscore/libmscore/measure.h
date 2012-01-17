@@ -128,6 +128,9 @@ class Measure : public MeasureBase {
       void push_back(Segment* e);
       void push_front(Segment* e);
 
+      void* pTimesig()  { return &_timesig; }
+      void* pLen()      { return &_len;     }
+
    public:
       Measure(Score*);
       Measure(const Measure&);
@@ -272,6 +275,10 @@ class Measure : public MeasureBase {
       void removeSpannerBack(Spanner* e)  { _spannerBack.removeOne(e); }
       void addSpannerFor(Spanner* e)      { _spannerFor.append(e);     }
       void removeSpannerFor(Spanner* e)   { _spannerFor.removeOne(e);  }
+
+      virtual QVariant getProperty(int propertyId) const;
+      virtual bool setProperty(int propertyId, const QVariant&);
+      static Property<Measure> propertyList[];
       };
 
 #endif

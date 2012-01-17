@@ -2533,26 +2533,6 @@ void ChangeNoteProperties::flip()
       }
 
 //---------------------------------------------------------
-//   ChangeMeasureTimesig
-//---------------------------------------------------------
-
-ChangeMeasureTimesig::ChangeMeasureTimesig(Measure* _m, const Fraction& f)
-   : m(_m), ts(f)
-      {
-      };
-
-//---------------------------------------------------------
-//   flip
-//---------------------------------------------------------
-
-void ChangeMeasureTimesig::flip()
-      {
-      Fraction nts = m->timesig();
-      m->setTimesig(ts);
-      ts = nts;
-      }
-
-//---------------------------------------------------------
 //   ChangeTimesig
 //---------------------------------------------------------
 
