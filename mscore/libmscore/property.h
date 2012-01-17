@@ -54,6 +54,8 @@ enum P_TYPE {
       P_FRET,
       P_STRING,
       P_GHOST,
+      P_TIMESIG_NOMINAL,
+      P_TIMESIG_ACTUAL,
       P_END
       };
 
@@ -62,12 +64,13 @@ enum P_DATA_TYPE {
       T_BOOL,
       T_INT,
       T_REAL,
+      T_FRACTION,
       T_POINT,
       T_COLOR,
       T_DIRECTION,      // enum Direction
       T_DIRECTION_H,    // enum DirectionH
       T_LAYOUT_BREAK,
-      T_VALUE_TYPE
+      T_VALUE_TYPE,
       };
 
 extern void setProperty(P_DATA_TYPE, void*, const QString& value);

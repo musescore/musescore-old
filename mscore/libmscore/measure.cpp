@@ -78,6 +78,16 @@
 #include "layout.h"
 
 //---------------------------------------------------------
+//   propertyList
+//---------------------------------------------------------
+
+Property<Measure> Measure::propertyList[] = {
+      { P_TIMESIG_NOMINAL, T_FRACTION, "pitch", &Measure::pTimesig, 0 },
+      { P_TIMESIG_ACTUAL,  T_FRACTION, "pitch", &Measure::pLen,     0 },
+      { P_END, T_INT, 0, 0, 0 }
+      };
+
+//---------------------------------------------------------
 //   MStaff
 //---------------------------------------------------------
 
@@ -3426,5 +3436,30 @@ int Measure::snapNote(int /*tick*/, const QPointF p, int staff) const
       return s->tick();
       }
 
+//---------------------------------------------------------
+//   getProperty
+//---------------------------------------------------------
+
+QVariant Measure::getProperty(int propertyId) const
+      {
+      Property<Measure>* p = ::property(propertyList, propertyId);
+      if (p)
+            return ::getProperty(p->type, ((*(Measure*)this).*(p->data))());
+      return Element::getProperty(propertyId);
+      }
+
+//---------------------------------------------------------
+//   setProperty
+//---------------------------------------------------------
+
+bool Measure::setProperty(int propertyId, const QVariant& v)
+      {
+      Property<Measure>* p = ::property(propertyList, propertyId);
+      if (p) {
+            ::setProperty(p->type, ((*this).*(p->data))(), v);
+            return true;
+            }
+      return Element::setProperty(propertyId, v);
+      }
 
 
