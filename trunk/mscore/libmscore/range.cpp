@@ -85,7 +85,7 @@ static void readSpanner(int track, const QList<Spanner*>& spannerFor,
                   map->remove(oldSpanner);
                   }
             else {
-                  printf("readSpanner: not found\n");
+                  qDebug("readSpanner: %s not found", oldSpanner->name());
                   // TODO: handle failure case:
                   // - remove start spanner
                   // - delete spanner
@@ -122,7 +122,7 @@ static void writeSpanner(int track, ChordRest* src, ChordRest* dst,
                   map->remove(oldSpanner);
                   }
             else {
-                  printf("writeSpanner: not found\n");
+                  qDebug("writeSpanner: %s not found", oldSpanner->name());
                   // TODO: handle failure case:
                   // - remove start slur from chord/rest
                   // - delete slur
