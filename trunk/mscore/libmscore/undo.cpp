@@ -2573,6 +2573,7 @@ void ChangeTimesig::flip()
       sz           = s1;
       sn           = s2;
       subtype      = st;
+      timesig->layout();
       timesig->score()->addRefresh(timesig->abbox());
       }
 
