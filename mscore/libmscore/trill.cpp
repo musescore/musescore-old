@@ -82,13 +82,6 @@ void TrillSegment::draw(QPainter* painter) const
 
             symbols[idx][sym].draw(painter, mag, QPointF(x0, y));
             symbols[idx][trillelementSym].draw(painter, mag,  QPointF(x1, b2.y() * .9), n);
-
-            if (trill()->accidental()) {
-                  QPointF pos(trill()->accidental()->pagePos());
-                  painter->translate(pos);
-                  trill()->accidental()->draw(painter);
-                  painter->translate(-pos);
-                  }
             }
       else {
             qreal x1 = 0.0;
@@ -106,11 +99,6 @@ void TrillSegment::layout()
       QRectF b1(symbols[score()->symIdx()][trillSym].bbox(magS()));
       QRectF rr(b1.translated(-b1.x(), 0.0));
       rr |= QRectF(0.0, rr.y(), pos2().x(), rr.height());
-      if (subtype() == SEGMENT_SINGLE || subtype() == SEGMENT_BEGIN) {
-            if (trill()->accidental()) {
-                  rr |= trill()->accidental()->bbox().translated(trill()->accidental()->pos());
-                  }
-            }
       setbbox(rr);
       }
 
@@ -152,8 +140,7 @@ Element* TrillSegment::drop(const DropData& data)
 Trill::Trill(Score* s)
   : SLine(s)
       {
-      _subtype    = TRILL_LINE;
-      _accidental = 0;
+      _subtype = TRILL_LINE;
       setLen(spatium() * 7);   // for use in palettes
       setYoff(-1.0);    // default position
       }
@@ -164,8 +151,9 @@ Trill::Trill(Score* s)
 
 void Trill::add(Element* e)
       {
+      e->setParent(this);
       if (e->type() == ACCIDENTAL)
-            _accidental = static_cast<Accidental*>(e);
+            _el.append(e);
       else
             SLine::add(e);
       }
@@ -176,10 +164,8 @@ void Trill::add(Element* e)
 
 void Trill::remove(Element* e)
       {
-      if (e->type() == ACCIDENTAL)
-            _accidental = 0;
-      else
-            SLine::remove(e);
+      if (!_el.remove(e))
+            Spanner::remove(e);
       }
 
 //---------------------------------------------------------
@@ -217,11 +203,11 @@ void Trill::layout()
                   }
             }
 
-      if (_accidental) {
-            _accidental->setMag(.6);
-            _accidental->layout();
-            _accidental->setPos(_spatium*1.3, -2.2*_spatium);
-            _accidental->adjustReadPos();
+      foreach(Element* e, _el) {
+            e->setMag(.6);
+            e->layout();
+            e->setPos(_spatium*1.3, -2.2*_spatium);
+            e->adjustReadPos();
             }
       }
 
@@ -244,10 +230,10 @@ LineSegment* Trill::createLineSegment()
 void Trill::write(Xml& xml) const
       {
       xml.stag(QString("%1 id=\"%2\"").arg(name()).arg(id()));
-      if (_accidental)
-            _accidental->write(xml);
       xml.tag("subtype", subtypeName());
       SLine::writeProperties(xml);
+      foreach(Element* e, _el)
+            e->write(xml);
       xml.etag();
       }
 
@@ -266,8 +252,9 @@ void Trill::read(const QDomElement& de)
             if (tag == "subtype")
                   setSubtype(e.text());
             else if (tag == "Accidental") {
-                  _accidental = new Accidental(score());
-                  _accidental->read(e);
+                  Accidental* a = new Accidental(score());
+                  a->read(e);
+                  add(a);
                   }
             else if (!SLine::readProperties(e))
                   domError(e);
@@ -312,4 +299,16 @@ QString Trill::subtypeName() const
                   return "?";
             }
       }
+
+//---------------------------------------------------------
+//   scanElements
+//---------------------------------------------------------
+
+void Trill::scanElements(void* data, void (*func)(void*, Element*), bool all)
+      {
+      foreach(Element* e, _el)
+            e->scanElements(data, func, all);
+      func(data, this);
+      }
+
 

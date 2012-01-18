@@ -49,7 +49,7 @@ class TrillSegment : public LineSegment {
 
 class Trill : public SLine {
       TrillType _subtype;
-      Accidental* _accidental;
+      ElementList _el;        // accidentals etc.
 
    public:
       Trill(Score* s);
@@ -60,8 +60,6 @@ class Trill : public SLine {
       virtual LineSegment* createLineSegment();
       virtual void add(Element*);
       virtual void remove(Element*);
-      Accidental* accidental() const    { return _accidental; }
-      void setAccidental(Accidental* a) { _accidental = a; }
       virtual void write(Xml&) const;
       virtual void read(const QDomElement&);
 
@@ -71,6 +69,7 @@ class Trill : public SLine {
       QString subtypeName() const;
 
       Segment* segment() const          { return (Segment*)parent(); }
+      virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
       };
 
 #endif

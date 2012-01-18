@@ -2554,6 +2554,7 @@ ChangeTimesig::ChangeTimesig(TimeSig * _timesig, bool sc, const Fraction& f1,
 
 void ChangeTimesig::flip()
       {
+      timesig->score()->addRefresh(timesig->abbox());
       bool sc        = timesig->showCourtesySig();
       Fraction f1    = timesig->sig();
       Fraction f2    = timesig->stretch();
@@ -2572,6 +2573,7 @@ void ChangeTimesig::flip()
       sz           = s1;
       sn           = s2;
       subtype      = st;
+      timesig->score()->addRefresh(timesig->abbox());
       }
 
 //---------------------------------------------------------

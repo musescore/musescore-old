@@ -692,7 +692,7 @@ void Score::cmdAddTimeSig(Measure* fm, int staffIdx, TimeSig* ts)
       seg   = nfm->undoGetSegment(SegTimeSig, nfm->tick());
       int n = _staves.size();
       for (int staffIdx = 0; staffIdx < n; ++staffIdx) {
-            TimeSig* nsig = static_cast<TimeSig*>(seg->element(staffIdx));
+            TimeSig* nsig = static_cast<TimeSig*>(seg->element(staffIdx * VOICES));
             if (nsig == 0) {
                   nsig = new TimeSig(this);
                   nsig->setTrack(staffIdx * VOICES);
