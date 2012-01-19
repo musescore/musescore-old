@@ -1243,7 +1243,6 @@ void MuseScore::printFile()
 
 bool MuseScore::exportFile()
       {
-      bool saveCopy = true;
       QStringList fl;
       fl.append(tr("Uncompressed MuseScore Format (*.mscx)"));
       fl.append(tr("MusicXML Format (*.xml)"));
@@ -1260,16 +1259,14 @@ bool MuseScore::exportFile()
       fl.append(tr("Ogg Vorbis Audio (*.ogg)"));
 #endif
       fl.append(tr("MP3 Audio (*.mp3)"));
-      QString saveDialogTitle = saveCopy ? tr("MuseScore: Save a Copy") :
-                                           tr("MuseScore: Save As");
+      QString saveDialogTitle = tr("MuseScore: Export");
 
       QSettings settings;
       if (lastSaveCopyDirectory.isEmpty())
             lastSaveCopyDirectory = settings.value("lastSaveCopyDirectory", preferences.myScoresPath).toString();
       if (lastSaveDirectory.isEmpty())
             lastSaveDirectory = settings.value("lastSaveDirectory", preferences.myScoresPath).toString();
-      QString saveDirectory = saveCopy ?
-            lastSaveCopyDirectory : lastSaveDirectory;
+      QString saveDirectory = lastSaveCopyDirectory;
 
       if (saveDirectory.isEmpty()) {
             saveDirectory = preferences.myScoresPath;
@@ -1283,10 +1280,7 @@ bool MuseScore::exportFile()
             return false;
 
       QFileInfo fi(fn);
-      if (saveCopy)
-            lastSaveCopyDirectory = fi.absolutePath();
-      else
-            lastSaveDirectory = fi.absolutePath();
+      lastSaveCopyDirectory = fi.absolutePath();
 
       QString ext;
       if (selectedFilter.isEmpty())
@@ -1311,7 +1305,7 @@ bool MuseScore::exportFile()
 
       if (fi.suffix() != ext)
             fn += "." + ext;
-      return saveAs(cs, saveCopy, fn, ext);
+      return saveAs(cs, true, fn, ext);
       }
 
 //---------------------------------------------------------
