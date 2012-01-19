@@ -278,7 +278,7 @@ void ScoreView::createElementPropertyMenu(Element* e, QMenu* popup)
             if (rest->tuplet()) {
                   popup->addSeparator();
                   QMenu* menuTuplet = popup->addMenu(tr("Tuplet..."));
-                  menuTuplet->addAction(tr("Tuplet Properties..."))->setData("tupletProps");
+                  menuTuplet->addAction(tr("Tuplet Properties..."))->setData("tuplet-props");
                   menuTuplet->addAction(tr("Delete Tuplet"))->setData("tupletDelete");
                   }
             }
@@ -305,7 +305,7 @@ void ScoreView::createElementPropertyMenu(Element* e, QMenu* popup)
 
             if (note->chord()->tuplet()) {
                   QMenu* menuTuplet = popup->addMenu(tr("Tuplet..."));
-                  menuTuplet->addAction(tr("Tuplet Properties..."))->setData("tupletProps");
+                  menuTuplet->addAction(tr("Tuplet Properties..."))->setData("tuplet-props");
                   menuTuplet->addAction(tr("Delete Tuplet"))->setData("tupletDelete");
                   }
             popup->addAction(tr("Chord Articulation..."))->setData("articulation");
@@ -460,18 +460,31 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
       else if (cmd == "picture")
             mscore->addImage(score(), e);
       else if (cmd == "tuplet-props") {
-            TupletProperties vp(static_cast<Tuplet*>(e));
+            Tuplet* tuplet;
+            QList<Element*> el;
+            if (e->type() == NOTE) {
+                  tuplet = static_cast<Note*>(e)->chord()->tuplet();
+                  el.append(tuplet);
+                  }
+            else if (e->isChordRest()) {
+                  tuplet = static_cast<ChordRest*>(e)->tuplet();
+                  el.append(tuplet);
+                  }
+            else {
+                  tuplet = static_cast<Tuplet*>(e);
+                  el.append(score()->selection().elements());      // apply to all selected tuplets
+                  }
+            TupletProperties vp(tuplet);
             if (vp.exec()) {
-                  //
-                  // apply changes to all selected tuplets
-                  //
                   int bracketType = vp.bracketType();
                   int numberType  = vp.numberType();
-                  foreach(Element* e, score()->selection().elements()) {
+                  foreach(Element* e, el) {
                         if (e->type() == TUPLET) {
                               Tuplet* tuplet = static_cast<Tuplet*>(e);
-                              if ((bracketType != tuplet->bracketType()) || (numberType != tuplet->numberType()))
-                                    score()->undo(new ChangeTupletProperties(tuplet, numberType, bracketType));
+                              if (bracketType != tuplet->bracketType())
+                                    score()->undoChangeProperty(tuplet, P_BRACKET_TYPE, bracketType);
+                              if (numberType != tuplet->numberType())
+                                    score()->undoChangeProperty(tuplet, P_NUMBER_TYPE, numberType);
                               }
                         }
                   }
@@ -531,19 +544,13 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
                         }
                   }
             }
-      else if (cmd == "smallAcc") {
-            score()->undo(
-               new ChangeProperty(e, P_SMALL, !static_cast<Accidental*>(e)->small())
-               );
-            }
-      else if (cmd == "smallNote") {
-            score()->undo(
-               new ChangeProperty(e, P_SMALL, !static_cast<Note*>(e)->small())
-               );
-            }
+      else if (cmd == "smallAcc")
+            score()->undoChangeProperty(e, P_SMALL, !static_cast<Accidental*>(e)->small());
+      else if (cmd == "smallNote")
+            score()->undoChangeProperty(e, P_SMALL, !static_cast<Note*>(e)->small());
       else if (cmd == "clef-courtesy") {
             bool show = !static_cast<Clef*>(e)->showCourtesyClef();
-            score()->undo(new ChangeProperty(e, P_SHOW_COURTESY, show));
+            score()->undoChangeProperty(e, P_SHOW_COURTESY, show);
             }
       else if (cmd == "d-props") {
             Dynamic* dynamic = static_cast<Dynamic*>(e);
@@ -689,20 +696,8 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             if (rv) {
                   int lt = sp.getLineType();
                   if (lt != ss->slurTie()->lineType()) {
-                        score()->undo(new ChangeProperty(ss->slurTie(), P_LINE_TYPE, lt));
+                        score()->undoChangeProperty(ss->slurTie(), P_LINE_TYPE, lt);
                         }
-                  }
-            }
-      else if (cmd == "tupletProps") {
-            if (e->type() == NOTE)
-                  e = static_cast<Note*>(e)->chord();
-            Tuplet* ot = static_cast<ChordRest*>(e)->tuplet();
-            TupletProperties vp(ot);
-            if (vp.exec()) {
-                  int bracketType = vp.bracketType();
-                  int numberType  = vp.numberType();
-                  if ((bracketType != ot->bracketType()) || (numberType != ot->numberType()))
-                        score()->undo(new ChangeTupletProperties(ot, numberType, bracketType));
                   }
             }
       else if (cmd == "tupletDelete") {

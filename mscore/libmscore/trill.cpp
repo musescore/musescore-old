@@ -142,7 +142,7 @@ Trill::Trill(Score* s)
       {
       _subtype = TRILL_LINE;
       setLen(spatium() * 7);   // for use in palettes
-      setYoff(-1.0);    // default position
+      setYoff(-1.0);           // default position
       }
 
 //---------------------------------------------------------
@@ -151,9 +151,10 @@ Trill::Trill(Score* s)
 
 void Trill::add(Element* e)
       {
-      e->setParent(this);
-      if (e->type() == ACCIDENTAL)
+      if (e->type() == ACCIDENTAL) {
+            e->setParent(this);
             _el.append(e);
+            }
       else
             SLine::add(e);
       }
@@ -164,8 +165,10 @@ void Trill::add(Element* e)
 
 void Trill::remove(Element* e)
       {
-      if (!_el.remove(e))
+      if (!_el.remove(e)) {
+            printf("Trill remove %s\n", e->name());
             Spanner::remove(e);
+            }
       }
 
 //---------------------------------------------------------
@@ -202,7 +205,6 @@ void Trill::layout()
                   ls->layout();
                   }
             }
-
       foreach(Element* e, _el) {
             e->setMag(.6);
             e->layout();
@@ -309,6 +311,7 @@ void Trill::scanElements(void* data, void (*func)(void*, Element*), bool all)
       foreach(Element* e, _el)
             e->scanElements(data, func, all);
       func(data, this);
+      SLine::scanElements(data, func, all);
       }
 
 

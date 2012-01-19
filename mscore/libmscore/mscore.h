@@ -575,6 +575,7 @@ class MScore {
       static void init();
       static MStyle* defaultStyle();
       static MStyle* baseStyle();
+      static void setDefaultStyle(MStyle*);
       static const QString& globalShare() { return _globalShare; }
       static qreal hRaster()              { return _hRaster;     }
       static qreal vRaster()              { return _vRaster;     }

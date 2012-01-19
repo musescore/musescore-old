@@ -75,6 +75,11 @@ Spanner::Spanner(Score* s)
       _endElement   = 0;
       _anchor       = ANCHOR_SEGMENT;
       _yoffset      = 0.0;
+      _id           = 0;
+      _tick1        = 0;
+      _tick2        = 0;
+      oStartElement = 0;
+      oEndElement   = 0;
       }
 
 Spanner::Spanner(const Spanner& s)

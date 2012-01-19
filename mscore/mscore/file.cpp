@@ -562,7 +562,6 @@ void MuseScore::newFile()
                   }
             if (!title.isEmpty()) {
                   Text* s = new Text(score);
-                  // s->setSubtype(TEXT_TITLE);
                   s->setTextStyle(TEXT_STYLE_TITLE);
                   s->setText(title);
                   measure->add(s);
@@ -570,21 +569,18 @@ void MuseScore::newFile()
                   }
             if (!subtitle.isEmpty()) {
                   Text* s = new Text(score);
-                  // s->setSubtype(TEXT_SUBTITLE);
                   s->setTextStyle(TEXT_STYLE_SUBTITLE);
                   s->setText(subtitle);
                   measure->add(s);
                   }
             if (!composer.isEmpty()) {
                   Text* s = new Text(score);
-                  // s->setSubtype(TEXT_COMPOSER);
                   s->setTextStyle(TEXT_STYLE_COMPOSER);
                   s->setText(composer);
                   measure->add(s);
                   }
             if (!poet.isEmpty()) {
                   Text* s = new Text(score);
-                  // s->setSubtype(TEXT_POET);
                   s->setTextStyle(TEXT_STYLE_POET);
                   s->setText(poet);
                   measure->add(s);
@@ -617,7 +613,7 @@ void MuseScore::newFile()
       }
 
 //---------------------------------------------------------
-//   getOpenFileName
+//   getOpenScoreNames
 //---------------------------------------------------------
 
 QStringList MuseScore::getOpenScoreNames(QString& dir, const QString& filter)
@@ -730,7 +726,7 @@ void MuseScore::saveScoreDialogFilterSelected(const QString& s)
 //   getStyleFilename
 //---------------------------------------------------------
 
-QString MuseScore::getStyleFilename(bool open)
+QString MuseScore::getStyleFilename(bool open, const QString& title)
       {
       QString currentPath = QDir::currentPath();
       if (preferences.nativeDialogs) {
@@ -767,7 +763,7 @@ QString MuseScore::getStyleFilename(bool open)
                   loadStyleDialog = new QFileDialog(this);
                   loadStyleDialog->setFileMode(QFileDialog::ExistingFile);
                   loadStyleDialog->setOption(QFileDialog::DontUseNativeDialog, true);
-                  loadStyleDialog->setWindowTitle(tr("MuseScore: Load Style"));
+                  loadStyleDialog->setWindowTitle(title.isEmpty() ? tr("MuseScore: Load Style") : title);
                   loadStyleDialog->setNameFilter(tr("MuseScore Style File (*.mss)"));
                   loadStyleDialog->setDirectory(currentPath);
 
@@ -785,7 +781,7 @@ QString MuseScore::getStyleFilename(bool open)
                   saveStyleDialog->setFileMode(QFileDialog::AnyFile);
                   saveStyleDialog->setOption(QFileDialog::DontConfirmOverwrite, false);
                   saveStyleDialog->setOption(QFileDialog::DontUseNativeDialog, true);
-                  saveStyleDialog->setWindowTitle(tr("MuseScore: Save Style"));
+                  saveStyleDialog->setWindowTitle(title.isEmpty() ? tr("MuseScore: Save Style") : title);
                   saveStyleDialog->setNameFilter(tr("MuseScore Style File (*.mss)"));
                   saveStyleDialog->setDirectory(currentPath);
 

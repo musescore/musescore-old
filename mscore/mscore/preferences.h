@@ -107,7 +107,7 @@ struct Preferences {
       bool antialiasedDrawing;
       SessionStart sessionStart;
       QString startScore;
-      QString defaultStyle;
+      QString defaultStyleFile;
       bool showSplashScreen;
 
       bool useMidiRemote;
@@ -184,6 +184,7 @@ struct Preferences {
       void write();
       void read();
       void init();
+      bool readDefaultStyle();
       };
 
 //---------------------------------------------------------

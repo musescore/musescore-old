@@ -382,6 +382,6 @@ class MStyle {
 extern QVector<TextStyle> defaultTextStyles;
 extern const TextStyle defaultTextStyleArray[];
 
-extern void setDefaultStyle(MStyle*);
+extern void initStyle(MStyle*);
 
 #endif

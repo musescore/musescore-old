@@ -32,7 +32,10 @@ class Fraction {
    public:
       Fraction(int z = 0, int n = 1);
       int numerator() const      { return _numerator;           }
-      int denominator() const    { return _denominator;            }
+      int denominator() const    { return _denominator;         }
+      int& rnumerator()          { return _numerator;           }
+      int& rdenominator()        { return _denominator;         }
+
       void setNumerator(int v)   { _numerator = v;              }
       void setDenominator(int v) { _denominator = v;               }
       void set(int z, int n)     { _numerator = z; _denominator = n; }

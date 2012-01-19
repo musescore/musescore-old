@@ -2117,6 +2117,17 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Save style"),
           fileSave_ICON
          ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         A_SCORE,
+         "save-default-style",
+         QT_TRANSLATE_NOOP("action","Save style as default"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Save style as default..."),
+         QT_TRANSLATE_NOOP("action","Save style as default"),
+          fileSave_ICON
+         ),
       Shortcut (
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          A_CMD,

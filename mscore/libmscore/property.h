@@ -56,6 +56,12 @@ enum P_TYPE {
       P_GHOST,
       P_TIMESIG_NOMINAL,
       P_TIMESIG_ACTUAL,
+      P_NUMBER_TYPE,
+      P_BRACKET_TYPE,
+      P_NORMAL_NOTES,
+      P_ACTUAL_NOTES,
+      P_P1,
+      P_P2,
       P_END
       };
 

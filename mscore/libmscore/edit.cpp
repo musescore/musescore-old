@@ -1085,12 +1085,15 @@ void Score::cmdFlip()
                         }
                   return;   // no layoutAll
                   }
-            else if (e->type() == TUPLET)
-                  undo(new FlipTupletDirection(static_cast<Tuplet*>(e)));
+            else if (e->type() == TUPLET) {
+                  Tuplet* tuplet = static_cast<Tuplet*>(e);
+                  Direction d = tuplet->isUp() ? DOWN : UP;
+                  undoChangeProperty(tuplet, P_DIRECTION, d);
+                  }
             else if (e->type() == NOTEDOT)
                   undo(new FlipNoteDotDirection(static_cast<Note*>(e->parent())));
             }
-      _layoutAll = true;
+      _layoutAll = true;      // must be set in und/redo
       }
 
 //---------------------------------------------------------

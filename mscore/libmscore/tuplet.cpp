@@ -23,6 +23,26 @@
 #include "stem.h"
 
 //---------------------------------------------------------
+//   propertyList
+//---------------------------------------------------------
+
+static Direction defaultDirection = AUTO;
+static int defaultNumberType      = Tuplet::SHOW_NUMBER;
+static int defaultBracketType     = Tuplet::AUTO_BRACKET;
+static QPointF zeroPoint          = QPointF();
+
+Property<Tuplet> Tuplet::propertyList[] = {
+      { P_DIRECTION,    T_DIRECTION, "direction",   &Tuplet::pDirection,   &defaultDirection },
+      { P_NUMBER_TYPE,  T_INT,       "numberType",  &Tuplet::pNumberType,  &defaultNumberType },
+      { P_BRACKET_TYPE, T_INT,       "bracketType", &Tuplet::pBracketType, &defaultBracketType },
+      { P_NORMAL_NOTES, T_INT,       "normalNotes", &Tuplet::pNormalNotes, 0 },
+      { P_ACTUAL_NOTES, T_INT,       "actualNotes", &Tuplet::pActualNotes, 0 },
+      { P_P1,           T_POINT,     "p1",          &Tuplet::pP1,          &zeroPoint },
+      { P_P2,           T_POINT,     "p2",          &Tuplet::pP2,          &zeroPoint },
+      { P_END, T_INT, 0, 0, 0 }
+      };
+
+//---------------------------------------------------------
 //   Tuplet
 //---------------------------------------------------------
 
@@ -30,13 +50,12 @@ Tuplet::Tuplet(Score* s)
   : DurationElement(s)
       {
       setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
-      _numberType   = SHOW_NUMBER;
-      _bracketType  = AUTO_BRACKET;
+      _numberType   = defaultNumberType;
+      _bracketType  = defaultBracketType;
       _number       = 0;
       _hasBracket   = false;
-      _userModified = false;
       _isUp         = true;
-      _direction    = AUTO;
+      _direction    = defaultDirection;
       }
 
 Tuplet::Tuplet(const Tuplet& t)
@@ -46,14 +65,12 @@ Tuplet::Tuplet(const Tuplet& t)
       _numberType   = t._numberType;
       _bracketType  = t._bracketType;
       _hasBracket   = t._hasBracket;
-      _userModified = t._userModified;
       _ratio        = t._ratio;
       _baseLen      = t._baseLen;
 
       _direction    = t._direction;
       _isUp         = t._isUp;
 
-      _userModified = t._userModified;
       p1            = t.p1;
       p2            = t.p2;
       _p1           = t._p1;
@@ -470,24 +487,13 @@ void Tuplet::write(Xml& xml) const
       if (tuplet())
             xml.tag("Tuplet", tuplet()->id());
       Element::writeProperties(xml);
-      xml.tag("numberType", _numberType);
-      xml.tag("bracketType", _bracketType);
-      xml.tag("normalNotes", _ratio.denominator());
-      xml.tag("actualNotes", _ratio.numerator());
-      xml.tag("baseNote",    _baseLen.name());
-      switch(_direction) {
-            case UP:   xml.tag("direction", QVariant("up")); break;
-            case DOWN: xml.tag("direction", QVariant("down")); break;
-            case AUTO: break;
-            }
+      WRITE_PROPERTIES(Tuplet)
+      xml.tag("baseNote", _baseLen.name());
+
       if (_number) {
             xml.stag("Number");
             _number->writeProperties(xml);
             xml.etag();
-            }
-      if (_userModified) {
-            xml.tag("p1", _p1);
-            xml.tag("p2", _p2);
             }
       if (!userOff().isNull())
             xml.tag("offset", userOff() / spatium());
@@ -506,48 +512,27 @@ void Tuplet::read(const QDomElement& de, QList<Tuplet*>* tuplets, const QList<Sp
       for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
-            if (tag == "hasNumber")             // obsolete
-                  _numberType = val.toInt() ? SHOW_NUMBER : NO_TEXT;
-            else if (tag == "hasLine") {          // obsolete
-                  _hasBracket = val.toInt();
-                  _bracketType = AUTO_BRACKET;
-                  }
-            else if (tag == "numberType")
-                  _numberType = val.toInt();
-            else if (tag == "bracketType")
-                  _bracketType = val.toInt();
-            else if (tag == "baseLen")            // obsolete
-                  bl = val.toInt();
+
+            if (setProperty(tag, e))
+                  ;
             else if (tag == "baseNote")
                   _baseLen = TDuration(e.text());
-            else if (tag == "normalNotes")
-                  _ratio.setDenominator(val.toInt());
-            else if (tag == "actualNotes")
-                  _ratio.setNumerator(val.toInt());
             else if (tag == "Number") {
                   _number = new Text(score());
                   _number->setParent(this);
                   _number->read(e);
                   _number->setTextStyle(TEXT_STYLE_TUPLET);
                   }
-            else if (tag == "direction") {
-                  if (val == "up")
-                        _direction = UP;
-                  else if (val == "down")
-                        _direction = DOWN;
-                  else
-                        _direction = AUTO;
-                  }
-            else if (tag == "p1") {
-                  _userModified = true;
-                  _p1 = readPoint(e);
-                  }
-            else if (tag == "p2") {
-                  _userModified = true;
-                  _p2 = readPoint(e);
-                  }
             else if (tag == "subtype")    // obsolete
                   ;
+            else if (tag == "hasNumber")             // obsolete
+                  _numberType = val.toInt() ? SHOW_NUMBER : NO_TEXT;
+            else if (tag == "hasLine") {          // obsolete
+                  _hasBracket = val.toInt();
+                  _bracketType = AUTO_BRACKET;
+                  }
+            else if (tag == "baseLen")            // obsolete
+                  bl = val.toInt();
             else if (!DurationElement::readProperties(e, tuplets, spanner))
                   domError(e);
             }
@@ -656,7 +641,6 @@ void Tuplet::editDrag(const EditData& ed)
             _p1 += ed.delta;
       else
             _p2 += ed.delta;
-      _userModified = true;
       setGenerated(false);
       layout();
       score()->setUpdateAll(true);
@@ -679,11 +663,15 @@ void Tuplet::updateGrips(int* grips, QRectF*grip) const
 
 void Tuplet::toDefault()
       {
+      score()->addRefresh(canvasBoundingRect());
+
+      score()->undoChangeProperty(this, P_P1, QPointF());
+      score()->undoChangeProperty(this, P_P2, QPointF());
+      score()->undoChangeProperty(this, P_DIRECTION, defaultDirection);
+
       Element::toDefault();
-      _userModified = false;
-      _p1           = QPointF();
-      _p2           = QPointF();
-      setGenerated(true);
+      layout();
+      score()->addRefresh(canvasBoundingRect());
       }
 
 //---------------------------------------------------------
@@ -722,4 +710,45 @@ void Tuplet::sortElements()
       {
       qSort(_elements.begin(), _elements.end(), tickGreater);
       }
+
+//---------------------------------------------------------
+//   getProperty
+//---------------------------------------------------------
+
+QVariant Tuplet::getProperty(int propertyId) const
+      {
+      Property<Tuplet>* p = ::property(propertyList, propertyId);
+      if (p)
+            return ::getProperty(p->type, ((*(Tuplet*)this).*(p->data))());
+      return Element::getProperty(propertyId);
+      }
+
+//---------------------------------------------------------
+//   setProperty
+//---------------------------------------------------------
+
+bool Tuplet::setProperty(int propertyId, const QVariant& v)
+      {
+      Property<Tuplet>* p = ::property(propertyList, propertyId);
+      if (p) {
+            score()->addRefresh(canvasBoundingRect());
+            ::setProperty(p->type, ((*this).*(p->data))(), v);
+            layout();
+            score()->addRefresh(canvasBoundingRect());
+            return true;
+            }
+      return Element::setProperty(propertyId, v);
+      }
+
+bool Tuplet::setProperty(const QString& name, const QDomElement& e)
+      {
+      Property<Tuplet>* p = ::property(propertyList, name);
+      if (p) {
+            p->setProperty(this, e);
+            setGenerated(false);
+            return true;
+            }
+      return Element::setProperty(name, e);
+      }
+
 
