@@ -44,7 +44,7 @@ void Icon::read(const QDomElement& de)
             const QString& tag(e.tagName());
             if (tag == "action")
                   _action = strdup(e.text().toAscii().data());
-            else if (tag == "subtyp")
+            else if (tag == "subtype")
                   _subtype = e.text().toInt();
             else
                   domError(e);

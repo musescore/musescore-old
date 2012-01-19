@@ -1,3 +1,5 @@
+19.1 (ws)
+      - fix #14527: Differing grace notes produce the same result
 18.1 (ws)
       - fix #14509: Changing time signature form numerics to symbols and undo moves
         position and has defective appearance
