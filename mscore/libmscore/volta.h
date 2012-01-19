@@ -50,8 +50,6 @@ class Volta : public TextLine {
       QList<int> _endings;
 
    public:
-      enum { VOLTA_OPEN, VOLTA_CLOSED };
-
       Volta(Score* s);
       virtual Volta* clone()     const { return new Volta(*this); }
       virtual ElementType type() const { return VOLTA; }

@@ -39,6 +39,7 @@
       <file>data/cancel.png</file>
       <file>revision.h</file>
       <file>data/musescore_logo_full1.png</file>
+      <file>data/musescore-logo.png</file>
       <file alias="data/appstyle-dark.css">../share/styles/appstyle-dark.css</file>
       <file alias="data/appstyle-light.css">../share/styles/appstyle-light.css</file>
       <file alias="data/appstyle.css">../share/styles/appstyle.css</file>
