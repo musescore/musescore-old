@@ -27,6 +27,7 @@
 #include "ui_measuresdialog.h"
 #include "ui_insertmeasuresdialog.h"
 #include "ui_aboutbox.h"
+#include "ui_startdialog.h"
 #include <QtSingleApplication>
 #include "updatechecker.h"
 #include "shortcut.h"
@@ -143,6 +144,22 @@ class MeasuresDialog : public QDialog, public Ui::MeasuresDialogBase {
 
    public:
       MeasuresDialog(QWidget* parent = 0);
+      };
+
+
+//---------------------------------------------------------
+//   StartDialog
+//---------------------------------------------------------
+
+class StartDialog : public QDialog, public Ui::StartDialog {
+      Q_OBJECT
+
+   private slots:
+      void createScoreClicked();
+      void loadScoreClicked();
+
+   public:
+      StartDialog(QWidget* parent = 0);
       };
 
 //---------------------------------------------------------
@@ -316,7 +333,6 @@ class MuseScore : public QMainWindow {
       void showKeyEditor();
       void timeMenu();
       void dynamicsMenu();
-      void loadFiles();
       void saveFile();
       void fingeringMenu();
       void registerPlugin(const QString& pluginPath);
@@ -580,6 +596,7 @@ class MuseScore : public QMainWindow {
       bool panDuringPlayback() const { return panAction->isChecked(); }
       void noteTooShortForTupletDialog();
       void enableInputToolbar(bool enableInput);
+      void loadFiles();
       };
 
 extern MuseScore* mscore;

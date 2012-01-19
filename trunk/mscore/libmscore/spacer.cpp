@@ -156,6 +156,7 @@ void Spacer::updateGrips(int* grips, QRectF* grip) const
 void Spacer::write(Xml& xml) const
       {
       xml.stag(name());
+      xml.tag("subtype", _subtype);
       Element::writeProperties(xml);
       xml.tag("space", _gap / spatium());
       xml.etag();
@@ -168,7 +169,9 @@ void Spacer::write(Xml& xml) const
 void Spacer::read(const QDomElement& de)
       {
       for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (e.tagName() == "space")
+            if (e.tagName() == "subtype")
+                  _subtype = SpacerType(e.text().toInt());
+            else if (e.tagName() == "space")
                   _gap = e.text().toDouble() * spatium();
             else if (!Element::readProperties(e))
                   domError(e);

@@ -584,9 +584,8 @@ MuseScore::MuseScore()
       a = getAction("pan");
       a->setChecked(MScore::panPlayback);
       transportTools->addAction(a);
-      transportTools->addAction(metronomeAction);
 
-//      fileTools->addAction(getAction("mag"));
+      transportTools->addAction(metronomeAction);
 
       mag = new MagBox;
       connect(mag, SIGNAL(magChanged(int)), SLOT(magChanged(int)));
@@ -1978,6 +1977,37 @@ static bool processNonGui()
       }
 
 //---------------------------------------------------------
+//   StartDialog
+//---------------------------------------------------------
+
+StartDialog::StartDialog(QWidget* parent)
+  : QDialog(parent)
+      {
+	setupUi(this);
+      setWindowTitle(tr("MuseScore Startup Dialog"));
+      connect(createScore, SIGNAL(clicked()), SLOT(createScoreClicked()));
+      connect(loadScore, SIGNAL(clicked()), SLOT(loadScoreClicked()));
+      }
+
+//---------------------------------------------------------
+//   createScoreClicked
+//---------------------------------------------------------
+
+void StartDialog::createScoreClicked()
+      {
+      done(0);
+      }
+
+//---------------------------------------------------------
+//   loadScoreClicked
+//---------------------------------------------------------
+
+void StartDialog::loadScoreClicked()
+      {
+      done(1);
+      }
+
+//---------------------------------------------------------
 //   main
 //---------------------------------------------------------
 
@@ -2231,7 +2261,6 @@ int main(int argc, char* av[])
       //   _spatium    = SPATIUM20  * DPI;     // 20.0 / 72.0 * DPI / 4.0;
 
       genIcons();
-//      initShortcuts();
 
       if (!converterMode)
             qApp->setWindowIcon(*icons[window_ICON]);
@@ -2257,6 +2286,7 @@ int main(int argc, char* av[])
 #endif
       mscore->setRevision(revision);
 
+      int files = 0;
       if (noGui) {
             loadScores(argv);
             exit(processNonGui() ? 0 : -1);
@@ -2268,7 +2298,6 @@ int main(int argc, char* av[])
 
             mscore->showWebPanel(preferences.showWebPanel);
             static_cast<QtSingleApplication*>(qApp)->setActivationWindow(mscore, false);
-            int files = 0;
             foreach(const QString& name, argv) {
                   if (!name.isEmpty())
                         ++files;
@@ -2297,10 +2326,20 @@ int main(int argc, char* av[])
 
       if (sc)
             sc->finish(mscore);
-      if (debugMode)
-            qDebug("start event loop...");
       if (mscore->hasToCheckForUpdate())
             mscore->checkForUpdate();
+
+      if (preferences.sessionStart == EMPTY_SESSION && files == 0) {
+            QDialog* start = new StartDialog(0);
+            switch(start->exec()) {
+                  case 0:
+                        mscore->newFile();
+                        break;
+                  case 1:
+                        mscore->loadFiles();
+                        break;
+                  }
+            }
       return qApp->exec();
       }
 
@@ -4199,8 +4238,13 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
                         QMessageBox::critical(this,
                            tr("MuseScore: save style"), MScore::lastError);
                         }
-                  else
-                        preferences.defaultStyleFile = name;
+                  else {
+printf("set preferences to <%s>\n", qPrintable(name));
+                        QFileInfo info(name);
+                        if (info.suffix().isEmpty())
+                              info.setFile(info.filePath() + ".mss");
+                        preferences.defaultStyleFile = info.filePath();
+                        }
                   }
             }
       else if (cmd == "load-style") {

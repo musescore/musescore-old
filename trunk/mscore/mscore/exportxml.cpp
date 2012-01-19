@@ -1129,10 +1129,10 @@ static void ending(Xml& xml, Volta* v, bool left)
       else {
             int st = v->subtype();
             switch (st) {
-                  case Volta::VOLTA_OPEN:
+                  case VOLTA_OPEN:
                         type = "discontinue";
                         break;
-                  case Volta::VOLTA_CLOSED:
+                  case VOLTA_CLOSED:
                         type = "stop";
                         break;
                   default:

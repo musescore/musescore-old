@@ -24,6 +24,7 @@
 Volta::Volta(Score* s)
    : TextLine(s)
       {
+      _subtype = VOLTA_OPEN;
       setBeginText("1.", TEXT_STYLE_VOLTA);
 
       setBeginTextPlace(PLACE_BELOW);
@@ -45,10 +46,10 @@ void Volta::setSubtype(VoltaType val)
       {
       _subtype = val;
       switch(val) {
-            case Volta::VOLTA_OPEN:
+            case VOLTA_OPEN:
                   setEndHook(false);
                   break;
-            case Volta::VOLTA_CLOSED:
+            case VOLTA_CLOSED:
                   setEndHook(true);
                   break;
             }

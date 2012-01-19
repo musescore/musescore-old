@@ -26,6 +26,7 @@
 StaffState::StaffState(Score* score)
    : Element(score)
       {
+      _subtype = STAFF_STATE_INSTRUMENT;
       }
 
 //---------------------------------------------------------
@@ -35,6 +36,7 @@ StaffState::StaffState(Score* score)
 void StaffState::write(Xml& xml) const
       {
       xml.stag(name());
+      xml.tag("subtype", _subtype);
       if (subtype() == STAFF_STATE_INSTRUMENT)
             _instrument.write(xml);
       Element::writeProperties(xml);
@@ -48,7 +50,9 @@ void StaffState::write(Xml& xml) const
 void StaffState::read(const QDomElement& de)
       {
       for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (e.tagName() == "Instrument")
+            if (e.tagName() == "subtype")
+                  _subtype = StaffStateType(e.text().toInt());
+            else if (e.tagName() == "Instrument")
                   _instrument.read(e);
             else if (!Element::readProperties(e))
                   domError(e);
