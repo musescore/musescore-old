@@ -91,8 +91,6 @@ Property<Note> Note::propertyList[] = {
       { P_END,            T_INT,         0, 0, 0 },
       };
 
-static const int PROPERTIES = sizeof(Note::propertyList)/sizeof(*Note::propertyList);
-
 //---------------------------------------------------------
 //   noteHeads
 //    note head groups

@@ -341,21 +341,6 @@ class ChangeKeySig : public UndoCommand {
       };
 
 //---------------------------------------------------------
-//   FlipTupletDirection
-//---------------------------------------------------------
-
-class FlipTupletDirection : public UndoCommand {
-      Tuplet* tuplet;
-      void flip();
-
-   public:
-      FlipTupletDirection(Tuplet* t) : tuplet(t) {}
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      UNDO_NAME("FlipTupletDirection");
-      };
-
-//---------------------------------------------------------
 //   FlipNoteDotDirection
 //---------------------------------------------------------
 
@@ -972,23 +957,6 @@ class ChangeChordStaffMove : public UndoCommand {
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeChordStaffMove");
-      };
-
-//---------------------------------------------------------
-//   ChangeTupletProperties
-//---------------------------------------------------------
-
-class ChangeTupletProperties : public UndoCommand {
-      Tuplet* tuplet;
-      int numberType;
-      int bracketType;
-      void flip();
-
-   public:
-      ChangeTupletProperties(Tuplet*, int numberType, int bracketType);
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      UNDO_NAME("ChangeTupletProperties");
       };
 
 //---------------------------------------------------------

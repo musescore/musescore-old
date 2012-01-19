@@ -203,7 +203,7 @@ static const QString ff("FreeSerifMscore");
 //    synchronize with TextStyleType
 //---------------------------------------------------------
 
-void setDefaultStyle(MStyle* s)
+void initStyle(MStyle* s)
       {
       AS(TextStyle(TR("Title"), ff, 24, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP));

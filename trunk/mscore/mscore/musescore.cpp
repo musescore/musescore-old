@@ -440,24 +440,10 @@ MuseScore::MuseScore()
       vRasterAction = getAction("vraster");
       vRasterAction->setCheckable(true);
 
-/*
-      QToolButton* hraster = new QToolButton(this);
-      QToolButton* vraster = new QToolButton(this);
-      hraster->setDefaultAction(hRasterAction);
-      hraster->setContextMenuPolicy(Qt::ActionsContextMenu);
-      hraster->addAction(getAction("config-raster"));
-
-      vraster->setDefaultAction(vRasterAction);
-      vraster->setContextMenuPolicy(Qt::ActionsContextMenu);
-      vraster->addAction(getAction("config-raster"));
-*/
-
       metronomeAction = getAction("metronome");
       metronomeAction->setCheckable(true);
       metronomeAction->setChecked(false);
 
-//      _statusBar->addPermanentWidget(hraster, 0);
-//      _statusBar->addPermanentWidget(vraster, 0);
       _statusBar->addPermanentWidget(new QWidget(this), 2);
       _statusBar->addPermanentWidget(new QWidget(this), 100);
       _statusBar->addPermanentWidget(_modeText, 0);
@@ -529,8 +515,6 @@ MuseScore::MuseScore()
       layout->addWidget(splitter);
 
       searchDialog = 0;
-
-//      QAction* whatsThis = QWhatsThis::createAction(this);
 
       //---------------------------------------------------
       //    Transport Action
@@ -863,6 +847,7 @@ MuseScore::MuseScore()
       menuStyle->addSeparator();
       menuStyle->addAction(getAction("load-style"));
       menuStyle->addAction(getAction("save-style"));
+      menuStyle->addAction(getAction("save-default-style"));
 
       //---------------------
       //    Menu Display
@@ -2166,6 +2151,7 @@ int main(int argc, char* av[])
       DPI  = PDPI;                     // logical drawing resolution
       DPMM = DPI / INCH;      // dots/mm
       MScore::init();         // initialize libmscore
+      preferences.readDefaultStyle();
 
       if (!useFactorySettings)
             preferences.read();
@@ -4204,6 +4190,17 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
                         QMessageBox::critical(this,
                            tr("MuseScore: save style"), MScore::lastError);
                         }
+                  }
+            }
+      else if (cmd == "save-default-style") {
+            QString name = getStyleFilename(false);
+            if (!name.isEmpty()) {
+                  if (!cs->saveStyle(name)) {
+                        QMessageBox::critical(this,
+                           tr("MuseScore: save style"), MScore::lastError);
+                        }
+                  else
+                        preferences.defaultStyleFile = name;
                   }
             }
       else if (cmd == "load-style") {

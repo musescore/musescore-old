@@ -92,7 +92,7 @@ void MScore::init()
       bgColor.setRgb(0x76, 0x76, 0x6e);
 
       _defaultStyle         = new MStyle();
-      setDefaultStyle(_defaultStyle);     // initialize default style
+      ::initStyle(_defaultStyle);
       _baseStyle            = new MStyle(*_defaultStyle);
 
       //
@@ -148,5 +148,15 @@ MStyle* MScore::defaultStyle()
 MStyle* MScore::baseStyle()
       {
       return _baseStyle;
+      }
+
+//---------------------------------------------------------
+//   setDefaultStyle
+//---------------------------------------------------------
+
+void MScore::setDefaultStyle(MStyle* s)
+      {
+      delete _defaultStyle;
+      _defaultStyle = s;
       }
 

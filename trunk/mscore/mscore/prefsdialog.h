@@ -58,9 +58,6 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void defineShortcutClicked();
       void portaudioApiActivated(int idx);
       void resetAllValues();
-      void paperSizeChanged(double);
-      void pageFormatSelected(int);
-      void landscapeToggled(bool);
       void styleFileButtonClicked();
       void recordButtonClicked(int);
       void midiRemoteControlClearClicked();

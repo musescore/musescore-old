@@ -1530,15 +1530,6 @@ void ChangePitch::flip()
       }
 
 //---------------------------------------------------------
-//   FlipTupletDirection
-//---------------------------------------------------------
-
-void FlipTupletDirection::flip()
-      {
-      tuplet->setDirection(tuplet->isUp() ? DOWN : UP);
-      }
-
-//---------------------------------------------------------
 //   FlipNoteDotDirection
 //---------------------------------------------------------
 
@@ -2369,25 +2360,6 @@ void ChangeChordStaffMove::flip()
       chord->score()->updateAccidentals(chord->measure(), chord->staffIdx());
       chord->score()->setLayoutAll(true);
       staffMove = v;
-      }
-
-//---------------------------------------------------------
-//   ChangeTupletProperties
-//---------------------------------------------------------
-
-ChangeTupletProperties::ChangeTupletProperties(Tuplet* t, int nt, int bt)
-   : tuplet(t), numberType(nt), bracketType(bt)
-      {
-      }
-
-void ChangeTupletProperties::flip()
-      {
-      int nt = tuplet->numberType();
-      int bt = tuplet->bracketType();
-      tuplet->setNumberType(numberType);
-      tuplet->setBracketType(bracketType);
-      numberType = nt;
-      bracketType = bt;
       }
 
 //---------------------------------------------------------

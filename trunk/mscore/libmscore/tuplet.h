@@ -52,14 +52,21 @@ class Tuplet : public DurationElement {
       Direction _direction;
       bool _isUp;
 
-      bool _userModified;
       QPointF p1, p2;
-      QPointF _p1, _p2;
+      QPointF _p1, _p2;       // user offset
       mutable int _id;        // used during read/write
 
       Text* _number;
       QPointF bracketL[4];
       QPointF bracketR[3];
+
+      void* pDirection()   { return &_direction;            }
+      void* pNumberType()  { return &_numberType;           }
+      void* pBracketType() { return &_bracketType;          }
+      void* pNormalNotes() { return &_ratio.rdenominator(); }
+      void* pActualNotes() { return &_ratio.rnumerator();   }
+      void* pP1()          { return &_p1;                   }
+      void* pP2()          { return &_p2;                   }
 
    public:
       Tuplet(Score*);
@@ -86,7 +93,7 @@ class Tuplet : public DurationElement {
       void setBracketType(int val)  { _bracketType = val;       }
       bool hasBracket() const       { return _hasBracket;       }
 
-      Fraction ratio() const        { return _ratio;            }
+      Fraction ratio() const           { return _ratio;         }
       void setRatio(const Fraction& r) { _ratio = r;            }
 
       const QList<DurationElement*>& elements() const { return _elements; }
@@ -115,6 +122,12 @@ class Tuplet : public DurationElement {
       virtual int tick() const             { return _tick; }
       void setTick(int val)                { _tick = val; }
       void sortElements();
+
+      virtual QVariant getProperty(int propertyId) const;
+      virtual bool setProperty(int propertyId, const QVariant&);
+      virtual bool setProperty(const QString& name, const QDomElement& data);
+
+      static Property<Tuplet> propertyList[];
       };
 
 #endif
