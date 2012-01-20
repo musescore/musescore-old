@@ -1894,26 +1894,30 @@ void Measure::read(const QDomElement& de, int staffIdx)
                   Chord* chord = new Chord(score());
                   chord->setTrack(score()->curTrack);
                   chord->read(e, &tuplets, &score()->spanner);
-                  int track = chord->track();
-                  Segment* ss = 0;
-                  for (Segment* ps = first(SegChordRest); ps; ps = ps->next(SegChordRest)) {
-                        if (ps->tick() >= score()->curTick)
-                              break;
-                        if (ps->element(track))
-                              ss = ps;
-                        }
-                  Chord* pch = 0;       // previous chord
-                  if (ss) {
-                        ChordRest* cr = static_cast<ChordRest*>(ss->element(track));
-                        if (cr && cr->type() == CHORD)
-                              pch = static_cast<Chord*>(cr);
-                        }
 
-                  segment = getSegment(chord, score()->curTick);
+                  if (chord->noteType() != NOTE_NORMAL
+                     && segment
+                     && segment->subtype() == SegChordRest
+                     && segment->tick() == score()->curTick
+                     )
+                        {
+                        //
+                        // handle grace note after chord
+                        //
+                        Segment* s = new Segment(this);
+                        s->setSubtype(SegChordRest);
+                        s->setTick(segment->tick());
+                        s->setPrev(segment);
+                        s->setNext(segment->next());
+                        add(s);
+                        segment = s;
+                        }
+                  else
+                        segment = getSegment(chord, score()->curTick);
 
                   Fraction timeStretch(staff->timeStretch(score()->curTick));
                   Fraction ts(timeStretch * chord->globalDuration());
-                  int crticks = ts.ticks();
+                  int crticks = chord->noteType() != NOTE_NORMAL ? 0 : ts.ticks();
 
                   if (chord->tremolo() && chord->tremolo()->subtype() < 6) {
                         //
@@ -1932,6 +1936,20 @@ void Measure::read(const QDomElement& de, int staffIdx)
                               }
                         tremolo->setSubtype(st);
                         if (tremolo->twoNotes()) {
+                              int track = chord->track();
+                              Segment* ss = 0;
+                              for (Segment* ps = first(SegChordRest); ps; ps = ps->next(SegChordRest)) {
+                                    if (ps->tick() >= score()->curTick)
+                                          break;
+                                    if (ps->element(track))
+                                          ss = ps;
+                                    }
+                              Chord* pch = 0;       // previous chord
+                              if (ss) {
+                                    ChordRest* cr = static_cast<ChordRest*>(ss->element(track));
+                                    if (cr && cr->type() == CHORD)
+                                          pch = static_cast<Chord*>(cr);
+                                    }
                               if (pch) {
                                     tremolo->setParent(pch);
                                     pch->setTremolo(tremolo);
@@ -2792,8 +2810,8 @@ void Measure::layoutX(qreal stretch, bool firstPass)
             bool rest2[nstaves+1];
             SegmentType segType    = s->subtype();
             types[segmentIdx]      = segType;
-            qreal segmentWidth    = 0.0;
-            qreal stretchDistance = 0.0;
+            qreal segmentWidth     = 0.0;
+            qreal stretchDistance  = 0.0;
             Segment* pSeg          = s->prev();
             int pt                 = pSeg ? pSeg->subtype() : SegBarLine;
 
@@ -2817,22 +2835,14 @@ void Measure::layoutX(qreal stretch, bool firstPass)
                                     minDistance     = qMax(minDistance, sp);
                                     stretchDistance = sp * .7;
                                     }
+                              else if (pt & (SegChordRest | SegGrace)) {
+                                    minDistance = qMax(minDistance, minNoteDistance);
+                                    }
                               else {
-                                    if (! (pt & (SegChordRest | SegGrace))) {
-                                          // if (pt & (SegKeySig | SegClef))
-                                          bool firstClef = (segmentIdx == 1) && (pt == SegClef);
-                                          if ((pt & (SegKeySig | SegTimeSig)) || firstClef) {
-                                                minDistance = qMax(minDistance, clefKeyRightMargin);
-                                                }
-                                          // else
-                                          //      minDistance = 0.0;
-                                          }
-                                    else {
-                                          qreal d = minNoteDistance;
-//                                          if (s->subtype() == SegGrace)
-//                                                d *= score()->styleD(ST_graceNoteMag);
-                                          minDistance = qMax(minDistance, d);
-                                          }
+                                    // if (pt & (SegKeySig | SegClef))
+                                    bool firstClef = (segmentIdx == 1) && (pt == SegClef);
+                                    if ((pt & (SegKeySig | SegTimeSig)) || firstClef)
+                                          minDistance = qMax(minDistance, clefKeyRightMargin);
                                     }
                               if (firstPass)
                                     cr->layout();
@@ -2861,9 +2871,6 @@ void Measure::layoutX(qreal stretch, bool firstPass)
                         Element* e = s->element(track);
                         if ((segType == SegClef) && (pt != SegChordRest))
                               minDistance = score()->styleP(ST_clefLeftMargin);
-/*                        else if (segType == SegTimeSig)
-                              minDistance = score()->styleP(ST_clefLeftMargin);
- */
                         else if (segType == SegStartRepeatBarLine)
                               minDistance = .5 * _spatium;
                         else if ((segType == SegEndBarLine) && segmentIdx) {

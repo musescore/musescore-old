@@ -967,6 +967,7 @@ bool Note::acceptDrop(MuseScoreView*, const QPointF&, Element* e) const
          || (noteType() == NOTE_NORMAL && type == ICON && static_cast<Icon*>(e)->subtype() == ICON_ACCIACCATURA)
          || (noteType() == NOTE_NORMAL && type == ICON && static_cast<Icon*>(e)->subtype() == ICON_APPOGGIATURA)
 	   || (noteType() == NOTE_NORMAL && type == ICON && static_cast<Icon*>(e)->subtype() == ICON_GRACE4)
+	   || (noteType() == NOTE_NORMAL && type == ICON && static_cast<Icon*>(e)->subtype() == ICON_GRACE8B)
 	   || (noteType() == NOTE_NORMAL && type == ICON && static_cast<Icon*>(e)->subtype() == ICON_GRACE16)
 	   || (noteType() == NOTE_NORMAL && type == ICON && static_cast<Icon*>(e)->subtype() == ICON_GRACE32)
          || (type == ICON && static_cast<Icon*>(e)->subtype() == ICON_SBEAM)
@@ -1071,19 +1072,22 @@ Element* Note::drop(const DropData& data)
                   {
                   switch(static_cast<Icon*>(e)->subtype()) {
                         case ICON_ACCIACCATURA:
-                              score()->setGraceNote(ch, pitch(), NOTE_ACCIACCATURA, MScore::division/2);
+                              score()->setGraceNote(ch, pitch(), NOTE_ACCIACCATURA, false, MScore::division/2);
                               break;
                         case ICON_APPOGGIATURA:
-                              score()->setGraceNote(ch, pitch(), NOTE_APPOGGIATURA, MScore::division/2);
+                              score()->setGraceNote(ch, pitch(), NOTE_APPOGGIATURA, false, MScore::division/2);
                               break;
                         case ICON_GRACE4:
-                              score()->setGraceNote(ch, pitch(), NOTE_GRACE4, MScore::division);
+                              score()->setGraceNote(ch, pitch(), NOTE_GRACE4, false, MScore::division);
+                              break;
+                        case ICON_GRACE8B:
+                              score()->setGraceNote(ch, pitch(), NOTE_APPOGGIATURA, true, MScore::division/2);
                               break;
                         case ICON_GRACE16:
-                              score()->setGraceNote(ch, pitch(), NOTE_GRACE16, MScore::division/4);
+                              score()->setGraceNote(ch, pitch(), NOTE_GRACE16, false, MScore::division/4);
                               break;
                         case ICON_GRACE32:
-                              score()->setGraceNote(ch, pitch(), NOTE_GRACE32, MScore::division/8);
+                              score()->setGraceNote(ch, pitch(), NOTE_GRACE32, false, MScore::division/8);
                               break;
                         case ICON_SBEAM:
                               score()->undoChangeBeamMode(ch, BEAM_BEGIN);

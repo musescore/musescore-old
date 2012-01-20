@@ -89,6 +89,7 @@ static const char* iconNames[] = {
       "acciaccatura.svg",
       "appoggiatura.svg",
       "grace4.svg",
+      "grace8b.svg",
       "grace16.svg",
       "grace32.svg",
       "noteentry.svg",

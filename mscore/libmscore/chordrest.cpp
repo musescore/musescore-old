@@ -45,7 +45,7 @@
 //---------------------------------------------------------
 
 Property<ChordRest> ChordRest::propertyList[] = {
-      { P_SMALL,  T_BOOL, "small", &ChordRest::pSmall, false },
+      { P_SMALL,    T_BOOL, "small", &ChordRest::pSmall, false },
       };
 
 static const int PROPERTIES = sizeof(ChordRest::propertyList)/sizeof(*ChordRest::propertyList);
@@ -198,6 +198,8 @@ void ChordRest::writeProperties(Xml& xml) const
       Fraction t(globalDuration());
       if (staff())
             t *= staff()->timeStretch(xml.curTick);
+      if (type() == CHORD && static_cast<const Chord*>(this)->noteType() != NOTE_NORMAL)
+            return;
       xml.curTick += t.ticks();
       }
 
