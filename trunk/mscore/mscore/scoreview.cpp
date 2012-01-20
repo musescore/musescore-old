@@ -1651,7 +1651,10 @@ void ScoreView::setShadowNote(const QPointF& p)
       Sym* s;
       if (score()->inputState().rest) {
             int yo;
-            int id = Rest::getSymbol(score()->inputState().duration().type(), 0,
+            TDuration d(score()->inputState().duration());
+            Rest rest(gscore, d.type());
+            rest.setDuration(d.fraction());
+            int id = rest.getSymbol(score()->inputState().duration().type(), 0,
                staff->lines(), &yo);
             s = &symbols[0][id];
             }
