@@ -1,4 +1,5 @@
 20.1 (ws)
+      - fix #14537: Chanracters from dots onward are cut off in Save As and Export boxes
       - patch #13025: Measures long 2/1 or more not cleared to measure rest
         (patch from Miwarre)
 19.1 (ws)
