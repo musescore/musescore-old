@@ -447,6 +447,7 @@ class Score {
          Segment**, QPointF* offset) const;
 
       void undoAddElement(Element* element);
+      void undoAddGrace(Chord* c, Segment* s, bool behind);
       void undoAddCR(ChordRest* element, Measure*, int tick);
       void undoRemoveElement(Element* element);
       void undoChangeMeasureLen(Measure* m, int oldTicks, int newTicks);
@@ -485,7 +486,7 @@ class Score {
       void undoSwapCR(ChordRest* cr1, ChordRest* cr2);
       void undoChangeProperty(Element*, int, const QVariant& v);
 
-      void setGraceNote(Chord*,  int pitch, NoteType type, int len);
+      void setGraceNote(Chord*,  int pitch, NoteType type, bool behind, int len);
       int clefOffset(int tick, Staff*) const;
 
       Segment* setNoteRest(Segment*, int track, NoteVal nval, Fraction, Direction stemDirection = AUTO);

@@ -466,7 +466,7 @@ void Score::cmdAddInterval(int val, const QList<Note*>& nl)
 ///   \len is the visual duration of the grace note (1/16 or 1/32)
 //---------------------------------------------------------
 
-void Score::setGraceNote(Chord* ch, int pitch, NoteType type, int len)
+void Score::setGraceNote(Chord* ch, int pitch, NoteType type, bool behind, int len)
       {
       Measure* measure = ch->measure();
       Note* note       = new Note(this);
@@ -483,7 +483,7 @@ void Score::setGraceNote(Chord* ch, int pitch, NoteType type, int len)
       chord->setNoteType(type);
       chord->setMag(ch->staff()->mag() * styleD(ST_graceNoteMag));
 
-      undoAddCR(chord, measure, ch->segment()->tick());
+      undoAddGrace(chord, ch->segment(), behind);
 
       note->setTpcFromPitch();      // tick must be known
       select(note, SELECT_SINGLE, 0);

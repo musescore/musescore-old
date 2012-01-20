@@ -196,6 +196,7 @@ void MuseScore::populatePalette()
             { ICON_GRACE4,       "grace4" },
             { ICON_GRACE16,      "grace16" },
             { ICON_GRACE32,      "grace32" },
+            { ICON_GRACE8B,      "grace8b" },
             { -1, "" }
             };
       populateIconPalette(notePalette, gna);

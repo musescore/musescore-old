@@ -1582,6 +1582,17 @@ Shortcut MuseScore::sc[] = {
         QT_TRANSLATE_NOOP("action","Grace: 32nd"),
          grace32_ICON
         ),
+     Shortcut(
+        STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
+        "grace8b",
+        QT_TRANSLATE_NOOP("action","Grace: 8nd after"),
+        0,
+        Qt::WindowShortcut,
+        QT_TRANSLATE_NOOP("action","Grace: 8nd after"),
+        QT_TRANSLATE_NOOP("action","Grace: 8nd after"),
+         grace8b_ICON
+        ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          0,

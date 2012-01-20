@@ -74,6 +74,7 @@
       <file>data/icons/pan.svg</file>
       <file>data/icons/noteentry.svg</file>
       <file>data/icons/grace4.svg</file>
+      <file>data/icons/grace8b.svg</file>
       <file>data/icons/grace16.svg</file>
       <file>data/icons/grace32.svg</file>
       <file>data/icons/keyboard.svg</file>
@@ -194,6 +195,7 @@
       <file>data/icons-dark/pan.svg</file>
       <file>data/icons-dark/noteentry.svg</file>
       <file>data/icons-dark/grace4.svg</file>
+      <file>data/icons-dark/grace8b.svg</file>
       <file>data/icons-dark/grace16.svg</file>
       <file>data/icons-dark/grace32.svg</file>
       <file>data/icons-dark/keyboard.svg</file>
