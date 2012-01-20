@@ -1,3 +1,6 @@
+20.1 (ws)
+      - patch #13025: Measures long 2/1 or more not cleared to measure rest
+        (patch from Miwarre)
 19.1 (ws)
       - fix #14529: 'Save as Copy' appears at the top of 'Export'
       - fix #14527: Differing grace notes produce the same result
