@@ -278,7 +278,7 @@ void MuseScore::saveFile()
       cs->setSyntiState(synti->state());
       if (cs->created()) {
             QString selectedFilter;
-            QString fn = cs->fileInfo()->baseName();
+            QString fn = cs->fileInfo()->fileName();
             Text* t = cs->getText(TEXT_TITLE);
             if (t)
                   fn = t->getText();
@@ -286,7 +286,7 @@ void MuseScore::saveFile()
             QString f1 = tr("Compressed MuseScore File (*.mscz)");
             QString f2 = tr("MuseScore File (*.mscx)");
 
-            QString fname   = QString("%1.mscz").arg(name);
+            QString fname   = name + ".mscz";
             QString filter = f1 + ";;" + f2;
             fn = mscore->getSaveScoreName(
                tr("MuseScore: Save Score"),
@@ -718,7 +718,7 @@ void MuseScore::saveScoreDialogFilterSelected(const QString& s)
       QRegExp rx(QString(".+\\(\\*\\.(.+)\\)"));
       if (rx.exactMatch(s)) {
             QFileInfo fi(saveScoreDialog->selectedFiles().front());
-            saveScoreDialog->selectFile(fi.baseName() + "." + rx.cap(1));
+            saveScoreDialog->selectFile(fi.completeBaseName() + "." + rx.cap(1));
             }
       }
 
@@ -1597,7 +1597,7 @@ bool MuseScore::saveAs(Score* cs, bool saveCopy)
             saveDirectory = preferences.myScoresPath;
 
       QString selectedFilter;
-      QString name   = QString("%1.mscz").arg(cs->fileInfo()->baseName());
+      QString name   = QString("%1.mscz").arg(cs->name());
       QString filter = fl.join(";;");
       QString fn     = mscore->getSaveScoreName(saveDialogTitle, name, filter, &selectedFilter);
       if (fn.isEmpty())
@@ -1654,7 +1654,7 @@ bool MuseScore::saveSelection(Score* cs)
             saveDirectory = preferences.myScoresPath;
 
       QString selectedFilter;
-      QString name   = QString("%1.mscz").arg(cs->fileInfo()->baseName());
+      QString name   = QString("%1.mscz").arg(cs->name());
       QString filter = fl.join(";;");
       QString fn     = mscore->getSaveScoreName(saveDialogTitle, name, filter, &selectedFilter);
       if (fn.isEmpty())
