@@ -1273,7 +1273,7 @@ bool MuseScore::exportFile()
             }
 
       QString selectedFilter;
-      QString name   = QString("%1.mscx").arg(cs->fileInfo()->baseName());
+      QString name   = QString("%1.mscx").arg(cs->name());
       QString filter = fl.join(";;");
       QString fn = getSaveScoreName(saveDialogTitle, name, filter, &selectedFilter);
       if (fn.isEmpty())
