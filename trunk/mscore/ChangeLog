@@ -1,6 +1,7 @@
 20.1 (ws)
+      _ fix more places of #14537
       - fix #14528: Elements from Lines appear at the top-left corner of score when dragged
-      - fix #14537: Chanracters from dots onward are cut off in Save As and Export boxes
+      - fix #14537: Characters from dots onward are cut off in Save As and Export boxes
       - patch #13025: Measures long 2/1 or more not cleared to measure rest
         (patch from Miwarre)
 19.1 (ws)
