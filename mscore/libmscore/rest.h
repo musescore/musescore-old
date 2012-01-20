@@ -56,7 +56,7 @@ class Rest : public ChordRest {
 
       void setMMWidth(qreal val);
       qreal mmWidth() const        { return _mmWidth; }
-      static int getSymbol(TDuration::DurationType type, int line, int lines,  int* yoffset);
+      int getSymbol(TDuration::DurationType type, int line, int lines,  int* yoffset);
 
       int getDotline() const { return dotline; }
       int sym() const        { return _sym;    }

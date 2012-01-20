@@ -289,6 +289,9 @@ int Rest::getSymbol(TDuration::DurationType type, int line, int lines, int* yoff
             case TDuration::V_BREVE:
                   return breverestSym;
             case TDuration::V_MEASURE:
+                  if (duration() >= Fraction(2, 1))
+                        return breverestSym;
+                  // fall trough
             case TDuration::V_WHOLE:
                   *yoffset = 1;
                   return (line <= -2 || line >= (lines - 1)) ? outsidewholerestSym : wholerestSym;
@@ -353,6 +356,9 @@ void Rest::layout()
                         lineOffset = up ? -3 : 5;
                         break;
                   case TDuration::V_MEASURE:
+                        if (duration() >= Fraction(2, 1))    // breve symbol
+                              lineOffset = up ? -3 : 5;
+                        // fall through
                   case TDuration::V_WHOLE:
                         lineOffset = up ? -4 : 6;
                         break;
