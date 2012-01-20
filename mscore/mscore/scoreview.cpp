@@ -1672,10 +1672,22 @@ void ScoreView::setShadowNote(const QPointF& p)
 static void paintElement(void* data, Element* e)
       {
       QPainter* p = static_cast<QPainter*>(data);
-      QPointF pos(e->pagePos());
+      QPointF pos(e->canvasPos());
       p->translate(pos);
       e->draw(p);
       p->translate(-pos);
+      }
+
+//---------------------------------------------------------
+//   moveElement
+//---------------------------------------------------------
+
+static void moveElement(void* data, Element* e)
+      {
+      QPointF* pos = (QPointF*)data;
+      e->score()->addRefresh(e->canvasBoundingRect());
+      e->setPos(*pos);
+      e->score()->addRefresh(e->canvasBoundingRect());
       }
 
 //---------------------------------------------------------
@@ -2260,9 +2272,8 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
                   default:
                         break;
                   }
-            score()->addRefresh(dragElement->canvasBoundingRect());
-            dragElement->setPos(pos);
-            score()->addRefresh(dragElement->canvasBoundingRect());
+
+            dragElement->scanElements(&pos, moveElement, false);
             _score->end();
             return;
             }
@@ -2578,7 +2589,8 @@ void ScoreView::dragLeaveEvent(QDragLeaveEvent*)
       {
       if (dragElement) {
             _score->setLayoutAll(false);
-            _score->addRefresh(dragElement->canvasBoundingRect());
+//            _score->addRefresh(dragElement->canvasBoundingRect());
+            _score->setUpdateAll(true);
             delete dragElement;
             dragElement = 0;
             _score->end();
