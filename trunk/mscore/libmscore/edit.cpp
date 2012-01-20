@@ -299,8 +299,9 @@ qDebug("setRest() %d/%d", l.numerator(), l.denominator());
             if ((measure->timesig() == measure->len())   // not in pickup measure
                && (measure->tick() == tick)
                // && ((measure->timesig() / timeStretch) == f)
-               && (measure->timesig() == f)
-               && (f < TDuration(TDuration::V_BREVE).fraction())) {
+               && (measure->timesig() == f)) {
+//  removed to have measures a breve long or more cleared to measure rest instead of actual value rest(s)
+//               && (f < TDuration(TDuration::V_BREVE).fraction())
                   Rest* rest = addRest(tick, track, TDuration(TDuration::V_MEASURE), tuplet);
                   tick += measure->timesig().ticks();
                   if (r == 0)
