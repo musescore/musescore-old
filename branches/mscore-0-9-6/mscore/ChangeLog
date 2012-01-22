@@ -1,3 +1,5 @@
+22.jan (lv)
+      - fix #14451: [MusicXML import] [1.2] import errors 02a-Rests-Durations.xml
 10.jan (la)
       - fix #6649: Transposition when creating a score from a template
       - add Salvation Army Brass band templates
