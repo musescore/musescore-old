@@ -677,9 +677,16 @@ static void determineMeasureLength(QDomElement e, QVector<int>& ml)
                         }
                   // determine length of this measure
                   int length = maxtick - prevmaxtick;
+                  // if necessary, round up to an integral number of 1/32s,
+                  // to comply with MuseScores actual measure length constraints
+                  int correctedLength = length;
+                  if ((length % (AL::division/8)) != 0) {
+                        correctedLength = ((length / (AL::division/8)) + 1) * (AL::division/8);
+                        }
                   // debug
-                  printf("measurelength measure %d tick %d maxtick %d length %d\n",
-                         measureNr + 1, tick, maxtick, length);
+                  printf("measurelength measure %d tick %d maxtick %d length %d corr length %d\n",
+                         measureNr + 1, tick, maxtick, length, correctedLength);
+                  length = correctedLength;
                   // store the maximum measure length
                   if (ml.size() < measureNr + 1)
                         // as we loop over the measures one by one
@@ -1630,46 +1637,46 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
             else
                   domError(e);
             }
-      staves         = part->nstaves();
 
-      if (lastMeasureLen != measureLen) {
-            AL::TimeSigMap* sigmap = score->sigmap();
-            int tick        = measure->tick();
+      // if number of ticks in the measure does not match the nominal time signature
+      // set a different actual time signature
 
-            if (measureLen != sigmap->ticksMeasure(tick)) {
-                  AL::SigEvent se = sigmap->timesig(tick);
+      AL::TimeSigMap* sigmap = score->sigmap();
+      int mtick        = measure->tick();
 
-                  Fraction f = se.getNominal();
-                  // printf("Add Sig %d  len %d:  %s\n", tick, measureLen, qPrintable(f.print()));
-                  if (f.ticks() != measureLen)
-                        score->sigmap()->add(tick, measureLen, f);
-                  else
-                        score->sigmap()->add(tick, f, f);
+      if (measureLen != sigmap->ticksMeasure(mtick)) {
 
-                  int tm = AL::ticks_measure(se.fraction());
-                  if (tm != measureLen) {
-                        if (!measure->irregular()) {
-                              // MusicXML's implicit means "don't print measure number",
-                              // set it only if explicitly requested, not when the measure length
-                              // is not what is expected. See MozartTrio.xml measures 12..13.
-                              // measure->setIrregular(true);
-                              /*
-                              printf("irregular Measure %d Len %d at %d   lastLen: %d -> should be: %d (tm=%d)\n",
-                                     number, measure->tick(), maxtick,
-                                     lastMeasureLen, measureLen, tm);
-                              */
-                              }
-                        }
+            AL::SigEvent se = sigmap->timesig(mtick);
+            Fraction nominal = se.getNominal();
+            printf("measure %d actual len %d at %d -> nominal %d: %s\n",
+                   number+1, measureLen, mtick, sigmap->ticksMeasure(tick), qPrintable(nominal.print()));
+
+            // determine actual duration as fraction
+            Fraction actual;
+            if ((measureLen % AL::division) == 0)
+                  actual = Fraction(measureLen / AL::division, 4);
+            else if ((measureLen % (AL::division/2)) == 0)
+                  actual = Fraction(measureLen / (AL::division/2), 8);
+            else if ((measureLen % (AL::division/4)) == 0)
+                  actual = Fraction(measureLen / (AL::division/4), 16);
+            else if ((measureLen % (AL::division/8)) == 0)
+                  actual = Fraction(measureLen / (AL::division/8), 32);
+            else {
+                  // this shouldn't happen
+                  printf("ImportXml: incorrect measure length calculated by determineMeasureLength()\n");
                   }
+
+            // set time signature
+            printf("Add Sig %d  len %d:  %s\n", mtick, measureLen, qPrintable(actual.print()));
+            score->sigmap()->add(mtick, actual, nominal);
             }
-      lastMeasureLen = measureLen;
-      tick = maxtick;
 
       // multi-measure rest handling:
       // the first measure in a multi-measure rest gets setBreakMultiMeasureRest(true)
       // and count down the remaining number of measures
       // the first measure after a multi-measure rest gets setBreakMultiMeasureRest(true)
       // for all other measures breakMultiMeasureRest is unchanged (stays default (false))
+
       if (startMultiMeasureRest) {
             measure->setBreakMultiMeasureRest(true);
             startMultiMeasureRest = false;
