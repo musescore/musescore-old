@@ -102,7 +102,7 @@ class HBox : public Box {
       Q_DECLARE_TR_FUNCTIONS(HBox)
 
    public:
-      HBox(Score* score) : Box(score) {}
+      HBox(Score* score);
       ~HBox() {}
       virtual HBox* clone() const      { return new HBox(*this); }
       virtual ElementType type() const { return HBOX;       }
@@ -123,7 +123,7 @@ class VBox : public Box {
       Q_DECLARE_TR_FUNCTIONS(VBox)
 
    public:
-      VBox(Score* score) : Box(score) {}
+      VBox(Score* score);
       ~VBox() {}
       virtual VBox* clone() const      { return new VBox(*this); }
       virtual ElementType type() const { return VBOX;       }
