@@ -53,8 +53,8 @@ Box::Box(Score* score)
    : MeasureBase(score)
       {
       editMode      = false;
-      _boxWidth     = Spatium(5.0);
-      _boxHeight    = Spatium(10.0);
+      _boxWidth     = Spatium(0);
+      _boxHeight    = Spatium(0);
       _leftMargin   = BOX_MARGIN;
       _rightMargin  = BOX_MARGIN;
       _topMargin    = BOX_MARGIN;
@@ -390,6 +390,16 @@ void* Box::propertyDefault(P_ID id) const
       }
 
 //---------------------------------------------------------
+//   HBox
+//---------------------------------------------------------
+
+HBox::HBox(Score* score)
+   : Box(score)
+      {
+      setBoxWidth(Spatium(5.0));
+      }
+
+//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
@@ -528,6 +538,16 @@ void HBox::endEditDrag()
 bool HBox::isMovable() const
       {
       return parent() && (parent()->type() == HBOX || parent()->type() == VBOX);
+      }
+
+//---------------------------------------------------------
+//   VBox
+//---------------------------------------------------------
+
+VBox::VBox(Score* score)
+   : Box(score)
+      {
+      setBoxHeight(Spatium(10.0));
       }
 
 //---------------------------------------------------------
