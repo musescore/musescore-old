@@ -484,7 +484,7 @@ class Score {
       void undoChangeClef(Staff* ostaff, Segment*, ClefType st);
       void undoChangeBarLine(Measure* m, BarLineType);
       void undoSwapCR(ChordRest* cr1, ChordRest* cr2);
-      void undoChangeProperty(Element*, int, const QVariant& v);
+      void undoChangeProperty(Element*, P_ID, const QVariant& v);
 
       void setGraceNote(Chord*,  int pitch, NoteType type, bool behind, int len);
       int clefOffset(int tick, Staff*) const;

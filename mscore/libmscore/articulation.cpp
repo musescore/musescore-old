@@ -458,7 +458,7 @@ QLineF Articulation::dragAnchor() const
 //   getProperty
 //---------------------------------------------------------
 
-QVariant Articulation::getProperty(int propertyId) const
+QVariant Articulation::getProperty(P_ID propertyId) const
       {
       switch(propertyId) {
             case P_DIRECTION:           return int(direction());
@@ -472,7 +472,7 @@ QVariant Articulation::getProperty(int propertyId) const
 //   setProperty
 //---------------------------------------------------------
 
-bool Articulation::setProperty(int propertyId, const QVariant& v)
+bool Articulation::setProperty(P_ID propertyId, const QVariant& v)
       {
       score()->addRefresh(canvasBoundingRect());
       switch(propertyId) {

@@ -1230,23 +1230,6 @@ class ChangeNoteEvents : public UndoCommand {
       };
 
 //---------------------------------------------------------
-//   ChangeBeamProperties
-//---------------------------------------------------------
-
-class ChangeBeamProperties : public UndoCommand {
-      Beam* beam;
-      qreal grow1, grow2;
-
-      void flip();
-
-   public:
-      ChangeBeamProperties(Beam* b, qreal g1, qreal g2) : beam(b), grow1(g1), grow2(g2) {}
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      UNDO_NAME("ChangeBeamProperties");
-      };
-
-//---------------------------------------------------------
 //   ChangeInstrument
 //---------------------------------------------------------
 
@@ -1400,13 +1383,13 @@ class ChangeStaffUserDist : public UndoCommand {
 
 class ChangeProperty : public UndoCommand {
       Element* element;
-      int id;
+      P_ID id;
       QVariant property;
 
       void flip();
 
    public:
-      ChangeProperty(Element* e, int i, const QVariant& v)
+      ChangeProperty(Element* e, P_ID i, const QVariant& v)
          : element(e), id(i), property(v) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }

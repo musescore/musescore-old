@@ -148,8 +148,8 @@ class SlurTie : public Spanner {
       SlurSegment* segmentAt(int n) const { return (SlurSegment*)spannerSegments().at(n); }
       virtual void slurPos(SlurPos*) = 0;
       virtual void computeBezier(SlurSegment*, QPointF so = QPointF()) = 0;
-      virtual QVariant getProperty(int propertyId) const;
-      virtual bool setProperty(int propertyId, const QVariant&);
+      virtual QVariant getProperty(P_ID propertyId) const;
+      virtual bool setProperty(P_ID propertyId, const QVariant&);
       };
 
 //---------------------------------------------------------

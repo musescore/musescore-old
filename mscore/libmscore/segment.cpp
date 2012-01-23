@@ -809,7 +809,7 @@ void Segment::read(const QDomElement& de)
 //   getProperty
 //---------------------------------------------------------
 
-QVariant Segment::getProperty(int propertyId) const
+QVariant Segment::getProperty(P_ID propertyId) const
       {
       switch(propertyId) {
             case P_LEADING_SPACE:   return extraLeadingSpace().val();
@@ -823,7 +823,7 @@ QVariant Segment::getProperty(int propertyId) const
 //   setProperty
 //---------------------------------------------------------
 
-bool Segment::setProperty(int propertyId, const QVariant& v)
+bool Segment::setProperty(P_ID propertyId, const QVariant& v)
       {
       switch(propertyId) {
             case P_LEADING_SPACE: setExtraLeadingSpace(Spatium(v.toDouble())); break;

@@ -412,7 +412,7 @@ Element* Accidental::drop(const DropData& data)
 //   getProperty
 //---------------------------------------------------------
 
-QVariant Accidental::getProperty(int propertyId) const
+QVariant Accidental::getProperty(P_ID propertyId) const
       {
       switch(propertyId) {
             case P_SMALL: return _small;
@@ -425,7 +425,7 @@ QVariant Accidental::getProperty(int propertyId) const
 //   setProperty
 //---------------------------------------------------------
 
-bool Accidental::setProperty(int propertyId, const QVariant& v)
+bool Accidental::setProperty(P_ID propertyId, const QVariant& v)
       {
       switch(propertyId) {
             case P_SMALL: _small = v.toBool(); break;

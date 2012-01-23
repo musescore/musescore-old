@@ -519,7 +519,7 @@ ClefType Clef::clefType() const
 //   getProperty
 //---------------------------------------------------------
 
-QVariant Clef::getProperty(int propertyId) const
+QVariant Clef::getProperty(P_ID propertyId) const
       {
       switch(propertyId) {
             case P_SHOW_COURTESY: return _showCourtesyClef;
@@ -532,7 +532,7 @@ QVariant Clef::getProperty(int propertyId) const
 //   setProperty
 //---------------------------------------------------------
 
-bool Clef::setProperty(int propertyId, const QVariant& v)
+bool Clef::setProperty(P_ID propertyId, const QVariant& v)
       {
       switch(propertyId) {
             case P_SHOW_COURTESY: _showCourtesyClef = v.toBool(); break;

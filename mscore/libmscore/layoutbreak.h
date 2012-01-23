@@ -64,12 +64,13 @@ class LayoutBreak : public Element {
       bool startWithMeasureOne() const    { return _startWithMeasureOne; }
       void setStartWithMeasureOne(bool v) { _startWithMeasureOne = v;    }
 
-      virtual QVariant getProperty(int propertyId) const;
-      virtual bool setProperty(int propertyId, const QVariant&);
+      virtual QVariant getProperty(P_ID propertyId) const;
+      virtual bool setProperty(P_ID propertyId, const QVariant&);
       virtual bool setProperty(const QString&, const QDomElement&);
+      Property<LayoutBreak>* property(P_ID id) const;
+      virtual void* propertyDefault(P_ID) const;
 
       static Property<LayoutBreak> propertyList[];
-      Property<LayoutBreak>* property(int id) const;
       };
 
 #endif

@@ -123,11 +123,7 @@ class Tuplet : public DurationElement {
       void setTick(int val)                { _tick = val; }
       void sortElements();
 
-      virtual QVariant getProperty(int propertyId) const;
-      virtual bool setProperty(int propertyId, const QVariant&);
-      virtual bool setProperty(const QString& name, const QDomElement& data);
-
-      static Property<Tuplet> propertyList[];
+      PROPERTY_DECLARATIONS(Tuplet)
       };
 
 #endif

@@ -29,7 +29,6 @@ class Xml : public QTextStream {
       QList<QString> stack;
       void putLevel();
 
-
    public:
       int curTick;            // used to optimize output
       int curTrack;
@@ -50,7 +49,6 @@ class Xml : public QTextStream {
       void sTag(const char* name, Spatium sp) { Xml::tag(name, QVariant(sp.val())); }
       void pTag(const char* name, Placement);
       void fTag(const char* name, const Fraction&);
-//      void valueTypeTag(const char* name, ValueType t);
 
       void header();
 
@@ -62,11 +60,12 @@ class Xml : public QTextStream {
       void ntag(const char* name);
       void netag(const char* name);
 
+      void tag(P_ID id, void* data, void* defaultVal);
       void tag(const QString& name, QVariant data);
       void tag(const char* name, const char* s)    { tag(name, QVariant(s)); }
       void tag(const char* name, const QString& s) { tag(name, QVariant(s)); }
       void tag(const char* name, const QWidget*);
-      void tag(const char* name, P_DATA_TYPE type, void* data, void* defaultVal);
+//      void tag(const char* name, P_TYPE type, void* data, void* defaultVal);
 
       void writeHtml(const QString& s);
       void dump(int len, const unsigned char* p);

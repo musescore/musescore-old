@@ -209,9 +209,12 @@ void Xml::netag(const char* s)
 //   tag
 //---------------------------------------------------------
 
-void Xml::tag(const char* name, P_DATA_TYPE type, void* data, void* defaultVal)
+void Xml::tag(P_ID id, void* data, void* defaultVal)
       {
-      switch(type) {
+      const char* name = propertyName(id);
+      if (name == 0)
+            return;
+      switch(propertyType(id)) {
             case T_BOOL:
                   if (compareProperty<bool>(data, defaultVal))
                         tag(name, QVariant(*(bool*)data));
@@ -221,6 +224,7 @@ void Xml::tag(const char* name, P_DATA_TYPE type, void* data, void* defaultVal)
                   if (compareProperty<int>(data, defaultVal))
                         tag(name, QVariant(*(int*)data));
                   break;
+            case T_SREAL:
             case T_REAL:
                   if (compareProperty<qreal>(data, defaultVal))
                         tag(name, QVariant(*(qreal*)data));

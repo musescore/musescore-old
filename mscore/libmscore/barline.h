@@ -74,12 +74,12 @@ class BarLine : public Element {
       void setSubtype(BarLineType i)   { _subtype = i;      }
       BarLineType subtype() const      { return _subtype;  }
 
-      virtual QVariant getProperty(int propertyId) const;
-      virtual bool setProperty(int propertyId, const QVariant&);
+      virtual QVariant getProperty(P_ID propertyId) const;
+      virtual bool setProperty(P_ID propertyId, const QVariant&);
       virtual bool setProperty(const QString&, const QDomElement&);
 
       static Property<BarLine> propertyList[];
-      Property<BarLine>* property(int id) const;
+      Property<BarLine>* property(P_ID id) const;
       };
 
 #endif

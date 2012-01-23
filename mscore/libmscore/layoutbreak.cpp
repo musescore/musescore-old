@@ -19,14 +19,13 @@
 //   propertyList
 //---------------------------------------------------------
 
-static qreal defaultPause = 0.0;
+static LayoutBreakType defaultLayoutBreak = LAYOUT_BREAK_PAGE;
 
 Property<LayoutBreak> LayoutBreak::propertyList[] = {
-      { P_SUBTYPE, T_LAYOUT_BREAK, "subtype", &LayoutBreak::pSubtype,   0 },
-      { P_PAUSE,   T_REAL,         "pause",   &LayoutBreak::pPause,   &defaultPause },
+      { P_LAYOUT_BREAK, &LayoutBreak::pSubtype,   &defaultLayoutBreak },
+      { P_PAUSE,        &LayoutBreak::pPause,     0       },
+      { P_END, 0, 0 }
       };
-
-static const int PROPERTIES = sizeof(LayoutBreak::propertyList)/sizeof(*LayoutBreak::propertyList);
 
 //---------------------------------------------------------
 //   LayoutBreak
@@ -35,7 +34,7 @@ static const int PROPERTIES = sizeof(LayoutBreak::propertyList)/sizeof(*LayoutBr
 LayoutBreak::LayoutBreak(Score* score)
    : Element(score)
       {
-      _subtype             = LAYOUT_BREAK_PAGE;
+      _subtype             = defaultLayoutBreak;
       _pause               = score->styleD(ST_SectionPause);
       _startWithLongNames  = true;
       _startWithMeasureOne = true;
@@ -50,10 +49,9 @@ void LayoutBreak::write(Xml& xml) const
       {
       xml.stag(name());
       Element::writeProperties(xml);
-      for (int i = 0; i < PROPERTIES; ++i) {
-            const Property<LayoutBreak>& p = propertyList[i];
-            xml.tag(p.name, p.type, ((*(LayoutBreak*)this).*(p.data))(), propertyList[i].defaultVal);
-            }
+
+      WRITE_PROPERTIES(LayoutBreak)
+
       if (!_startWithLongNames)
             xml.tag("startWithLongNames", _startWithLongNames);
       if (!_startWithMeasureOne)
@@ -193,57 +191,4 @@ Element* LayoutBreak::drop(const DropData& data)
       return e;
       }
 
-//---------------------------------------------------------
-//   property
-//---------------------------------------------------------
-
-Property<LayoutBreak>* LayoutBreak::property(int id) const
-      {
-      for (int i = 0; i < PROPERTIES; ++i) {
-            if (propertyList[i].id == id)
-                  return &propertyList[i];
-            }
-      return 0;
-      }
-
-//---------------------------------------------------------
-//   getProperty
-//---------------------------------------------------------
-
-QVariant LayoutBreak::getProperty(int propertyId) const
-      {
-      Property<LayoutBreak>* p = property(propertyId);
-      if (p)
-            return ::getProperty(p->type, ((*(LayoutBreak*)this).*(p->data))());
-      return Element::getProperty(propertyId);
-      }
-
-//---------------------------------------------------------
-//   setProperty
-//---------------------------------------------------------
-
-bool LayoutBreak::setProperty(int propertyId, const QVariant& v)
-      {
-      Property<LayoutBreak>* p = property(propertyId);
-      if (p) {
-            ::setProperty(p->type, ((*this).*(p->data))(), v);
-            setGenerated(false);
-            return true;
-            }
-      return Element::setProperty(propertyId, v);
-      }
-
-bool LayoutBreak::setProperty(const QString& name, const QDomElement& e)
-      {
-      for (int i = 0; i < PROPERTIES; ++i) {
-            if (propertyList[i].name == name) {
-                  QVariant v = ::getProperty(propertyList[i].type, e);
-                  ::setProperty(propertyList[i].type, ((*this).*(propertyList[i].data))(), v);
-                  setGenerated(false);
-                  return true;
-                  }
-            }
-      return Element::setProperty(name, e);
-      }
-
-
+PROPERTY_FUNCTIONS(LayoutBreak)

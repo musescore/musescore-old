@@ -16,12 +16,98 @@
 #include "layoutbreak.h"
 
 //---------------------------------------------------------
+//   PropertyData
+//---------------------------------------------------------
+
+struct PropertyData {
+      P_ID id;
+      const char* name;       // xml name of property
+      P_TYPE type;
+      };
+
+//
+// always: property[subtype].id == subtype
+//
+static const PropertyData propertyList[] = {
+      { P_SUBTYPE,             "subtype",       T_INT   },
+      { P_SELECTED,            "selected",      T_BOOL  },
+      { P_COLOR,               "color",         T_COLOR },
+      { P_VISIBLE,             "visible",       T_BOOL  },
+      { P_SMALL,               "small",         T_BOOL  },
+      { P_SHOW_COURTESY,       "",              T_INT   },
+      { P_LINE_TYPE,           "",              T_INT   },
+      { P_PITCH,               "pitch",         T_INT },
+      { P_TPC,                 "tpc",           T_INT },
+      { P_HEAD_TYPE,           "headType",      T_INT },
+      { P_HEAD_GROUP,          "head",          T_INT },
+      { P_VELO_TYPE,           "veloType",      T_VALUE_TYPE },
+      { P_VELO_OFFSET,         "velocity",      T_INT },
+      { P_ARTICULATION_ANCHOR, "",              T_INT },
+      { P_DIRECTION,           "direction",     T_DIRECTION },
+      { P_STEM_DIRECTION,      "StemDirection", T_DIRECTION },
+      { P_NO_STEM,             "",              T_INT },
+      { P_SLUR_DIRECTION,      "",              T_INT },
+      { P_LEADING_SPACE,       "",              T_INT },
+      { P_TRAILING_SPACE,      "",              T_INT },
+      { P_DISTRIBUTE,          "distribute",    T_BOOL },
+      { P_MIRROR_HEAD,         "mirror",        T_DIRECTION_H },
+      { P_DOT_POSITION,        "dotPosition",   T_DIRECTION },
+      { P_ONTIME_OFFSET,       "onTimeOffset",  T_INT },
+      { P_OFFTIME_OFFSET,      "offTimeOffset", T_INT },
+      { P_TUNING,              "tuning",        T_REAL },
+      { P_PAUSE,               "pause",         T_REAL },
+      { P_BARLINE_SPAN,        "",              T_INT },
+      { P_USER_OFF,            0,               T_POINT },
+      { P_FRET,                "fret",          T_INT   },
+      { P_STRING,              "string",        T_INT   },
+      { P_GHOST,               "ghost",         T_BOOL  },
+      { P_TIMESIG_NOMINAL,     0,               T_FRACTION },
+      { P_TIMESIG_ACTUAL,      0,               T_FRACTION },
+      { P_NUMBER_TYPE,         "numberType",    T_INT   },
+      { P_BRACKET_TYPE,        "bracketType",   T_INT   },
+      { P_NORMAL_NOTES,        "normalNotes",   T_INT   },
+      { P_ACTUAL_NOTES,        "actualNotes",   T_INT   },
+      { P_P1,                  "p1",            T_POINT },
+      { P_P2,                  "p2",            T_POINT },
+      { P_GROW_LEFT,           "growLeft",      T_REAL  },
+      { P_GROW_RIGHT,          "growRight",     T_REAL  },
+      { P_BOX_HEIGHT,          "",              T_REAL  },
+      { P_BOX_WIDTH,           "",              T_REAL  },
+      { P_TOP_GAP,             "",              T_SREAL },
+      { P_BOTTOM_GAP,          "",              T_SREAL },
+      { P_LEFT_MARGIN,         "",              T_REAL  },
+      { P_RIGHT_MARGIN,        "",              T_REAL  },
+      { P_TOP_MARGIN,          "",              T_REAL  },
+      { P_BOTTOM_MARGIN,       "",              T_REAL  },
+      { P_LAYOUT_BREAK,        "subtype",       T_LAYOUT_BREAK },
+      { P_END,                 "",              T_INT   }
+      };
+
+//---------------------------------------------------------
+//   propertyType
+//---------------------------------------------------------
+
+P_TYPE propertyType(P_ID id)
+      {
+      return propertyList[id].type;
+      }
+
+//---------------------------------------------------------
+//   propertyName
+//---------------------------------------------------------
+
+const char* propertyName(P_ID id)
+      {
+      return propertyList[id].name;
+      }
+
+//---------------------------------------------------------
 //   setProperty
 //---------------------------------------------------------
 
-void setProperty(P_DATA_TYPE type, void* data, const QString& value)
+void setProperty(P_ID id, void* data, const QString& value)
       {
-      switch(type) {
+      switch(propertyType(id)) {
             case T_BOOL:
                   *(bool*)data = value.toInt();
                   break;
@@ -30,6 +116,7 @@ void setProperty(P_DATA_TYPE type, void* data, const QString& value)
                   *(int*)data = value.toInt();
                   break;
             case T_REAL:
+            case T_SREAL:
                   *(qreal*)data = value.toDouble();
                   break;
             case T_COLOR:
@@ -76,9 +163,9 @@ void setProperty(P_DATA_TYPE type, void* data, const QString& value)
             }
       }
 
-void setProperty(P_DATA_TYPE type, void* data, const QVariant& value)
+void setProperty(P_ID id, void* data, const QVariant& value)
       {
-      switch(type) {
+      switch(propertyType(id)) {
             case T_BOOL:
                   *(bool*)data = value.toBool();
                   break;
@@ -86,6 +173,7 @@ void setProperty(P_DATA_TYPE type, void* data, const QVariant& value)
             case T_INT:
                   *(int*)data = value.toInt();
                   break;
+            case T_SREAL:
             case T_REAL:
                   *(qreal*)data = value.toDouble();
                   break;
@@ -108,47 +196,20 @@ void setProperty(P_DATA_TYPE type, void* data, const QVariant& value)
       }
 
 //---------------------------------------------------------
-//   getProperty
+// getProperty
 //---------------------------------------------------------
 
-QVariant getProperty(P_DATA_TYPE type, void* data)
-      {
-      switch(type) {
-            case T_BOOL:
-                  return QVariant(*(bool*)data);
-            case T_SUBTYPE:
-            case T_INT:
-            case T_DIRECTION:
-            case T_DIRECTION_H:
-            case T_LAYOUT_BREAK:
-            case T_VALUE_TYPE:
-                  return QVariant(*(int*)data);
-            case T_FRACTION:
-                  return QVariant::fromValue(*(Fraction*)data);
-            case T_REAL:
-                  return QVariant(*(qreal*)data);
-            case T_COLOR:
-                  return QVariant(*(QColor*)data);
-            case T_POINT:
-                  return QVariant(*(QPointF*)data);
-            }
-      return QVariant();
-      }
-
-//---------------------------------------------------------
-//   getProperty
-//---------------------------------------------------------
-
-QVariant getProperty(P_DATA_TYPE type, const QDomElement& e)
+QVariant getProperty(P_ID id, const QDomElement& e)
       {
       const QString& value(e.text());
-      switch(type) {
+      switch(propertyType(id)) {
             case T_BOOL:
                   return QVariant(bool(value.toInt()));
             case T_SUBTYPE:
             case T_INT:
                   return QVariant(value.toInt());
             case T_REAL:
+            case T_SREAL:
                   return QVariant(value.toDouble());
             case T_FRACTION:
                   return QVariant::fromValue(readFraction(e));
@@ -194,5 +255,4 @@ QVariant getProperty(P_DATA_TYPE type, const QDomElement& e)
             }
       return QVariant();
       }
-
 

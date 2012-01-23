@@ -81,8 +81,8 @@ class Articulation : public Element {
       virtual void toDefault();
       virtual QLineF dragAnchor() const;
 
-      virtual QVariant getProperty(int propertyId) const;
-      virtual bool setProperty(int propertyId, const QVariant&);
+      virtual QVariant getProperty(P_ID propertyId) const;
+      virtual bool setProperty(P_ID propertyId, const QVariant&);
 
       ArticulationType articulationType() const;
       QString subtypeUserName() const;

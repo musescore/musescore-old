@@ -300,7 +300,7 @@
        </item>
        <item>
         <property name="text">
-         <string>Offset</string>
+         <string>User</string>
         </property>
        </item>
       </widget>

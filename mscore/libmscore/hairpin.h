@@ -66,12 +66,12 @@ class Hairpin : public SLine {
       virtual void write(Xml&) const;
       virtual void read(const QDomElement&);
 
-      virtual QVariant getProperty(int propertyId) const;
-      virtual bool setProperty(int propertyId, const QVariant&);
+      virtual QVariant getProperty(P_ID propertyId) const;
+      virtual bool setProperty(P_ID propertyId, const QVariant&);
       virtual bool setProperty(const QString&, const QDomElement&);
 
       static Property<Hairpin> propertyList[];
-      Property<Hairpin>* property(int id) const;
+      Property<Hairpin>* property(P_ID id) const;
       };
 
 #define __HAIRPIN_H__

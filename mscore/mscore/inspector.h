@@ -14,10 +14,10 @@
 #ifndef __INSPECTOR_H__
 #define __INSPECTOR_H__
 
+#include "inspectorBase.h"
 #include "ui_inspector_element.h"
 #include "ui_inspector_vbox.h"
 #include "ui_inspector_hbox.h"
-#include "ui_inspector_beam.h"
 #include "ui_inspector_articulation.h"
 #include "ui_inspector_spacer.h"
 #include "ui_inspector_segment.h"
@@ -157,27 +157,10 @@ class InspectorElementElement : public QWidget, Ui::InspectorElement {
       };
 
 //---------------------------------------------------------
-//   InspectorElementBase
-//---------------------------------------------------------
-
-class InspectorElementBase : public QWidget {
-      Q_OBJECT
-
-   protected:
-      QVBoxLayout* layout;
-      Inspector* inspector;
-
-   public:
-      InspectorElementBase(QWidget* parent);
-      virtual void setElement(Element*) = 0;
-      virtual void apply() {}
-      };
-
-//---------------------------------------------------------
 //   InspectorElement
 //---------------------------------------------------------
 
-class InspectorElement : public InspectorElementBase {
+class InspectorElement : public InspectorBase {
       Q_OBJECT
 
       InspectorElementElement* ie;
@@ -192,51 +175,47 @@ class InspectorElement : public InspectorElementBase {
 //   InspectorVBox
 //---------------------------------------------------------
 
-class InspectorVBox : public InspectorElementBase {
+class InspectorVBox : public InspectorBase {
       Q_OBJECT
 
       Ui::InspectorVBox vb;
 
-      void block(bool val);
+      static const int _inspectorItems = 7;
+      InspectorItem iList[_inspectorItems];
 
-   private slots:
-      void resetTopGap();
-      void resetBottomGap();
-      void resetLeftMargin();
-      void resetRightMargin();
-      void resetTopMargin();
-      void resetBottomMargin();
+   protected:
+      virtual const InspectorItem& item(int idx) const { return iList[idx]; }
+      virtual int inspectorItems() const { return _inspectorItems; }
 
    public:
       InspectorVBox(QWidget* parent);
-      virtual void setElement(Element*);
-      virtual void apply();
       };
 
 //---------------------------------------------------------
 //   InspectorHBox
 //---------------------------------------------------------
 
-class InspectorHBox : public InspectorElementBase {
+class InspectorHBox : public InspectorBase {
       Q_OBJECT
 
       Ui::InspectorHBox hb;
 
-   private slots:
-      void resetLeftGap();
-      void resetRightGap();
+      static const int _inspectorItems = 3;
+      InspectorItem iList[_inspectorItems];
+
+   protected:
+      virtual const InspectorItem& item(int idx) const { return iList[idx]; }
+      virtual int inspectorItems() const { return _inspectorItems; }
 
    public:
       InspectorHBox(QWidget* parent);
-      virtual void setElement(Element*);
-      virtual void apply();
       };
 
 //---------------------------------------------------------
 //   InspectorArticulation
 //---------------------------------------------------------
 
-class InspectorArticulation : public InspectorElementBase {
+class InspectorArticulation : public InspectorBase {
       Q_OBJECT
 
       Ui::InspectorArticulation ar;
@@ -251,7 +230,7 @@ class InspectorArticulation : public InspectorElementBase {
 //   InspectorSpacer
 //---------------------------------------------------------
 
-class InspectorSpacer : public InspectorElementBase {
+class InspectorSpacer : public InspectorBase {
       Q_OBJECT
 
       Ui::InspectorSpacer sp;
@@ -266,7 +245,7 @@ class InspectorSpacer : public InspectorElementBase {
 //   InspectorNote
 //---------------------------------------------------------
 
-class InspectorNote : public InspectorElementBase {
+class InspectorNote : public InspectorBase {
       Q_OBJECT
 
       InspectorElementElement* iElement;
@@ -300,7 +279,7 @@ class InspectorNote : public InspectorElementBase {
 //   InspectorRest
 //---------------------------------------------------------
 
-class InspectorRest : public InspectorElementBase {
+class InspectorRest : public InspectorBase {
       Q_OBJECT
 
       InspectorElementElement* iElement;
@@ -318,7 +297,7 @@ class InspectorRest : public InspectorElementBase {
 //   InspectorClef
 //---------------------------------------------------------
 
-class InspectorClef : public InspectorElementBase {
+class InspectorClef : public InspectorBase {
       Q_OBJECT
 
       InspectorElementElement* iElement;
@@ -331,29 +310,6 @@ class InspectorClef : public InspectorElementBase {
       };
 
 //---------------------------------------------------------
-//   InspectorBeam
-//---------------------------------------------------------
-
-class InspectorBeam : public InspectorElementBase {
-      Q_OBJECT
-
-      Ui::InspectorBeam b;
-
-      bool dirty() const;
-
-   private slots:
-      void resetDistributeClicked();
-      void resetDirectionClicked();
-      void directionActivated(int idx);
-      void distributeToggled(bool val);
-
-   public:
-      InspectorBeam(QWidget* parent);
-      virtual void setElement(Element*);
-      virtual void apply();
-      };
-
-//---------------------------------------------------------
 //   Inspector
 //---------------------------------------------------------
 
@@ -361,7 +317,7 @@ class Inspector : public QDockWidget {
       Q_OBJECT
 
       QVBoxLayout* layout;
-      InspectorElementBase* ie;
+      InspectorBase* ie;
       QPushButton* apply;
       Element* _element;
 

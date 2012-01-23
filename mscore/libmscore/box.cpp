@@ -27,6 +27,25 @@
 static const qreal BOX_MARGIN = 0.0;
 
 //---------------------------------------------------------
+//   propertyList
+//---------------------------------------------------------
+
+static qreal zeroVal = 0.0;
+static qreal defaultBoxMargin = BOX_MARGIN;
+
+Property<Box> Box::propertyList[] = {
+      { P_BOX_HEIGHT,    &Box::pBoxHeight,    &zeroVal },
+      { P_BOX_WIDTH,     &Box::pBoxWidth,     &zeroVal },
+      { P_TOP_GAP,       &Box::pTopGap,       &zeroVal },
+      { P_BOTTOM_GAP,    &Box::pBottomGap,    &zeroVal },
+      { P_LEFT_MARGIN,   &Box::pLeftMargin,   &defaultBoxMargin },
+      { P_RIGHT_MARGIN,  &Box::pRightMargin,  &defaultBoxMargin },
+      { P_TOP_MARGIN,    &Box::pTopMargin,    &defaultBoxMargin },
+      { P_BOTTOM_MARGIN, &Box::pBottomMargin, &defaultBoxMargin },
+      { P_END, 0, 0 }
+      };
+
+//---------------------------------------------------------
 //   Box
 //---------------------------------------------------------
 
@@ -158,24 +177,19 @@ void Box::updateGrips(int* grips, QRectF* grip) const
 
 void Box::write(Xml& xml) const
       {
-      qreal _spatium = spatium();
       xml.stag(name());
-      if (type() == VBOX)
-            xml.tag("height", _boxHeight.val());
-      else if (type() == HBOX)
-            xml.tag("width", _boxWidth.val());
-      if (_leftMargin != BOX_MARGIN)
-            xml.tag("leftMargin", _leftMargin);
-      if (_rightMargin != BOX_MARGIN)
-            xml.tag("rightMargin", _rightMargin);
-      if (_topMargin != BOX_MARGIN)
-            xml.tag("topMargin", _topMargin);
-      if (_bottomMargin != BOX_MARGIN)
-            xml.tag("bottomMargin", _bottomMargin);
-      if (_topGap != 0.0)
-            xml.tag("topGap", _topGap / _spatium);
-      if (_bottomGap != 0.0)
-            xml.tag("bottomGap", _bottomGap / _spatium);
+
+      for (int i = 0;; ++i) {
+            const Property<Box>& p = propertyList[i];
+            P_ID id = p.id;
+            if (id == P_END)
+                  break;
+            QVariant val        = getVariant(id, ((*(Box*)this).*(p.data))());
+            QVariant defaultVal = getVariant(id, p.defaultVal);
+            if (val != defaultVal)
+                  xml.tag(propertyName(id), val);
+            }
+
       Element::writeProperties(xml);
       foreach (const Element* el, _el)
             el->write(xml);
@@ -301,6 +315,78 @@ void Box::add(Element* e)
       if (e->type() == TEXT)
             static_cast<Text*>(e)->setLayoutToParentWidth(true);
       MeasureBase::add(e);
+      }
+
+//---------------------------------------------------------
+//   property
+//---------------------------------------------------------
+
+Property<Box>* Box::property(P_ID id) const
+      {
+      for (int i = 0;; ++i) {
+            if (propertyList[i].id == P_END)
+                  break;
+            if (propertyList[i].id == id)
+                  return &propertyList[i];
+            }
+      printf("Box: property %d not found\n", id);
+      abort();
+      }
+
+//---------------------------------------------------------
+//   getProperty
+//---------------------------------------------------------
+
+QVariant Box::getProperty(P_ID propertyId) const
+      {
+      Property<Box>* p = property(propertyId);
+      if (p)
+            return getVariant(propertyId, ((*(Box*)this).*(p->data))());
+      return Element::getProperty(propertyId);
+      }
+
+//---------------------------------------------------------
+//   setProperty
+//---------------------------------------------------------
+
+bool Box::setProperty(P_ID propertyId, const QVariant& v)
+      {
+      score()->addRefresh(canvasBoundingRect());
+      Property<Box>* p = property(propertyId);
+      bool rv = true;
+      if (p) {
+            setVariant(propertyId, ((*this).*(p->data))(), v);
+            setGenerated(false);
+            }
+      else
+            rv = Element::setProperty(propertyId, v);
+      score()->setLayoutAll(true);
+      return rv;
+      }
+
+bool Box::setProperty(const QString& name, const QDomElement& e)
+      {
+      for (int i = 0;; ++i) {
+            P_ID id = propertyList[i].id;
+            if (id == P_END)
+                  break;
+            if (propertyName(id) == name) {
+                  QVariant v = ::getProperty(id, e);
+                  setVariant(id, ((*this).*(propertyList[i].data))(), v);
+                  setGenerated(false);
+                  return true;
+                  }
+            }
+      return Element::setProperty(name, e);
+      }
+
+//---------------------------------------------------------
+//   propertyDefault
+//---------------------------------------------------------
+
+void* Box::propertyDefault(P_ID id) const
+      {
+      return property(id)->defaultVal;
       }
 
 //---------------------------------------------------------
@@ -473,7 +559,6 @@ QPointF VBox::getGrip(int) const
 
 void VBox::setGrip(int, const QPointF& pt)
       {
-//      qDebug("VBox::setGrip %f\n", pt.y());
       setBoxHeight(Spatium(pt.y()));
       layout();
       }

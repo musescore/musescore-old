@@ -2131,8 +2131,8 @@ void BeamView::setElement(Element* e)
             item->setText(1, cr->name());
             bb.elements->addTopLevelItem(item);
             }
-      bb.grow1->setValue(b->grow1());
-      bb.grow2->setValue(b->grow2());
+      bb.grow1->setValue(b->growLeft());
+      bb.grow2->setValue(b->growRight());
       }
 
 //---------------------------------------------------------

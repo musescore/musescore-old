@@ -28,7 +28,7 @@
 static int defaultSubtype = 0;
 
 Property<BarLine> BarLine::propertyList[] = {
-      { P_SUBTYPE,      T_INT, "subtype", &BarLine::pSubtype, &defaultSubtype },
+      { P_SUBTYPE, &BarLine::pSubtype, &defaultSubtype },
       };
 
 static const int PROPERTIES = sizeof(BarLine::propertyList)/sizeof(*BarLine::propertyList);
@@ -652,7 +652,7 @@ void BarLine::remove(Element* e)
 //   property
 //---------------------------------------------------------
 
-Property<BarLine>* BarLine::property(int id) const
+Property<BarLine>* BarLine::property(P_ID id) const
       {
       for (int i = 0; i < PROPERTIES; ++i) {
             if (propertyList[i].id == id)
@@ -665,11 +665,11 @@ Property<BarLine>* BarLine::property(int id) const
 //   getProperty
 //---------------------------------------------------------
 
-QVariant BarLine::getProperty(int propertyId) const
+QVariant BarLine::getProperty(P_ID propertyId) const
       {
       Property<BarLine>* p = property(propertyId);
       if (p)
-            return ::getProperty(p->type, ((*(BarLine*)this).*(p->data))());
+            return getVariant(propertyId, ((*(BarLine*)this).*(p->data))());
       return Element::getProperty(propertyId);
       }
 
@@ -677,11 +677,11 @@ QVariant BarLine::getProperty(int propertyId) const
 //   setProperty
 //---------------------------------------------------------
 
-bool BarLine::setProperty(int propertyId, const QVariant& v)
+bool BarLine::setProperty(P_ID propertyId, const QVariant& v)
       {
       Property<BarLine>* p = property(propertyId);
       if (p) {
-            ::setProperty(p->type, ((*this).*(p->data))(), v);
+            setVariant(propertyId, ((*this).*(p->data))(), v);
             setGenerated(false);
             return true;
             }
@@ -691,9 +691,9 @@ bool BarLine::setProperty(int propertyId, const QVariant& v)
 bool BarLine::setProperty(const QString& name, const QDomElement& e)
       {
       for (int i = 0; i < PROPERTIES; ++i) {
-            if (propertyList[i].name == name) {
-                  QVariant v = ::getProperty(propertyList[i].type, e);
-                  ::setProperty(propertyList[i].type, ((*this).*(propertyList[i].data))(), v);
+            if (propertyName(propertyList[i].id) == name) {
+                  QVariant v = ::getProperty(propertyList[i].id, e);
+                  ::setProperty(propertyList[i].id, ((*this).*(propertyList[i].data))(), v);
                   setGenerated(false);
                   return true;
                   }

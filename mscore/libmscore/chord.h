@@ -190,8 +190,8 @@ class Chord : public ChordRest {
 
       QPointF layoutArticulation(Articulation*);
 
-      virtual QVariant getProperty(int propertyId) const;
-      virtual bool setProperty(int propertyId, const QVariant&);
+      virtual QVariant getProperty(P_ID propertyId) const;
+      virtual bool setProperty(P_ID propertyId, const QVariant&);
       };
 
 #endif

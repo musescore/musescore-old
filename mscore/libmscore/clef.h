@@ -97,8 +97,8 @@ class Clef : public Element {
 
       virtual void addElement(Element* e, qreal x, qreal y);
 
-      virtual QVariant getProperty(int propertyId) const;
-      virtual bool setProperty(int propertyId, const QVariant&);
+      virtual QVariant getProperty(P_ID propertyId) const;
+      virtual bool setProperty(P_ID propertyId, const QVariant&);
 
       virtual Space space() const      { return Space(0.0, bbox().x() * 2.0 + width()); }
 

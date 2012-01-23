@@ -888,7 +888,7 @@ void SlurTie::toDefault()
 //   getProperty
 //---------------------------------------------------------
 
-QVariant SlurTie::getProperty(int propertyId) const
+QVariant SlurTie::getProperty(P_ID propertyId) const
       {
       switch(propertyId) {
             case P_LINE_TYPE:      return lineType();
@@ -902,7 +902,7 @@ QVariant SlurTie::getProperty(int propertyId) const
 //   setProperty
 //---------------------------------------------------------
 
-bool SlurTie::setProperty(int propertyId, const QVariant& v)
+bool SlurTie::setProperty(P_ID propertyId, const QVariant& v)
       {
       switch(propertyId) {
             case P_LINE_TYPE:      setLineType(v.toInt()); break;

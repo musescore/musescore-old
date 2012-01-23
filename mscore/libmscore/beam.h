@@ -80,6 +80,8 @@ class Beam : public Element {
 
       void* pDistribute()     { return &_distribute; }
       void* pBeamDirection()  { return &_direction; }
+      void* pGrowLeft()       { return &_grow1; }
+      void* pGrowRight()      { return &_grow2; }
 
       void layout2(QList<ChordRest*>, SpannerSegmentType, int frag);
 
@@ -128,20 +130,15 @@ class Beam : public Element {
       virtual bool acceptDrop(MuseScoreView*, const QPointF&, Element*) const;
       virtual Element* drop(const DropData&);
 
-      qreal grow1() const                 { return _grow1; }
-      qreal grow2() const                 { return _grow2; }
-      void setGrow1(qreal val)            { _grow1 = val; }
-      void setGrow2(qreal val)            { _grow2 = val; }
+      qreal growLeft() const              { return _grow1; }
+      qreal growRight() const             { return _grow2; }
+      void setGrowLeft(qreal val)         { _grow1 = val;  }
+      void setGrowRight(qreal val)        { _grow2 = val;  }
 
       bool distribute() const             { return _distribute; }
       void setDistribute(bool val)        { _distribute = val;  }
 
-      virtual QVariant getProperty(int propertyId) const;
-      virtual bool setProperty(int propertyId, const QVariant&);
-      virtual bool setProperty(const QString&, const QDomElement&);
-
-      static Property<Beam> propertyList[];
-      Property<Beam>* property(int id) const;
+      PROPERTY_DECLARATIONS(Beam)
       };
 
 extern bool endBeam(const Fraction&, ChordRest* cr, ChordRest* prevCr);
