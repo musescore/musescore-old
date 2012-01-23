@@ -32,14 +32,14 @@ static int defaultBracketType     = Tuplet::AUTO_BRACKET;
 static QPointF zeroPoint          = QPointF();
 
 Property<Tuplet> Tuplet::propertyList[] = {
-      { P_DIRECTION,    T_DIRECTION, "direction",   &Tuplet::pDirection,   &defaultDirection },
-      { P_NUMBER_TYPE,  T_INT,       "numberType",  &Tuplet::pNumberType,  &defaultNumberType },
-      { P_BRACKET_TYPE, T_INT,       "bracketType", &Tuplet::pBracketType, &defaultBracketType },
-      { P_NORMAL_NOTES, T_INT,       "normalNotes", &Tuplet::pNormalNotes, 0 },
-      { P_ACTUAL_NOTES, T_INT,       "actualNotes", &Tuplet::pActualNotes, 0 },
-      { P_P1,           T_POINT,     "p1",          &Tuplet::pP1,          &zeroPoint },
-      { P_P2,           T_POINT,     "p2",          &Tuplet::pP2,          &zeroPoint },
-      { P_END, T_INT, 0, 0, 0 }
+      { P_DIRECTION,    &Tuplet::pDirection,   &defaultDirection },
+      { P_NUMBER_TYPE,  &Tuplet::pNumberType,  &defaultNumberType },
+      { P_BRACKET_TYPE, &Tuplet::pBracketType, &defaultBracketType },
+      { P_NORMAL_NOTES, &Tuplet::pNormalNotes, 0 },
+      { P_ACTUAL_NOTES, &Tuplet::pActualNotes, 0 },
+      { P_P1,           &Tuplet::pP1,          &zeroPoint },
+      { P_P2,           &Tuplet::pP2,          &zeroPoint },
+      { P_END, 0, 0 }
       };
 
 //---------------------------------------------------------
@@ -711,44 +711,5 @@ void Tuplet::sortElements()
       qSort(_elements.begin(), _elements.end(), tickGreater);
       }
 
-//---------------------------------------------------------
-//   getProperty
-//---------------------------------------------------------
-
-QVariant Tuplet::getProperty(int propertyId) const
-      {
-      Property<Tuplet>* p = ::property(propertyList, propertyId);
-      if (p)
-            return ::getProperty(p->type, ((*(Tuplet*)this).*(p->data))());
-      return Element::getProperty(propertyId);
-      }
-
-//---------------------------------------------------------
-//   setProperty
-//---------------------------------------------------------
-
-bool Tuplet::setProperty(int propertyId, const QVariant& v)
-      {
-      Property<Tuplet>* p = ::property(propertyList, propertyId);
-      if (p) {
-            score()->addRefresh(canvasBoundingRect());
-            ::setProperty(p->type, ((*this).*(p->data))(), v);
-            layout();
-            score()->addRefresh(canvasBoundingRect());
-            return true;
-            }
-      return Element::setProperty(propertyId, v);
-      }
-
-bool Tuplet::setProperty(const QString& name, const QDomElement& e)
-      {
-      Property<Tuplet>* p = ::property(propertyList, name);
-      if (p) {
-            p->setProperty(this, e);
-            setGenerated(false);
-            return true;
-            }
-      return Element::setProperty(name, e);
-      }
-
+PROPERTY_FUNCTIONS(Tuplet)
 

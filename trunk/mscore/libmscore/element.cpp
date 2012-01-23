@@ -182,14 +182,13 @@ static bool defaultSelected = false;
 //---------------------------------------------------------
 
 Property<Element> Element::propertyList[] = {
-      { P_COLOR,    T_COLOR,  "color",   &Element::pColor,     &MScore::defaultColor },
-      { P_VISIBLE,  T_BOOL,   "visible", &Element::pVisible,   &defaultVisible       },
-      { P_SELECTED, T_BOOL,   "selected", &Element::pSelected, &defaultSelected      },
+      { P_COLOR,    &Element::pColor,    &MScore::defaultColor },
+      { P_VISIBLE,  &Element::pVisible,  &defaultVisible       },
+      { P_SELECTED, &Element::pSelected, &defaultSelected      },
       // not written:
-      { P_USER_OFF, T_POINT,  0,         &Element::pUserOff,  0 },
+      { P_USER_OFF, &Element::pUserOff,  0 },
+      { P_END, 0, 0 }
       };
-
-static const int PROPERTIES = sizeof(Element::propertyList)/sizeof(*Element::propertyList);
 
 //---------------------------------------------------------
 //   LinkedElements
@@ -651,10 +650,12 @@ void Element::writeProperties(Xml& xml, const Element* proto) const
                         }
                   }
             }
-      for (int i = 0; i < PROPERTIES; ++i) {
+      for (int i = 0;; ++i) {
             const Property<Element>& p = propertyList[i];
-            if (p.name)
-                  xml.tag(p.name, p.type, ((*(Element*)this).*(p.data))(), p.defaultVal);
+            P_ID id = p.id;
+            if (id == P_END)
+                  break;
+            xml.tag(id, ((*(Element*)this).*(p.data))(), p.defaultVal);
             }
       }
 
@@ -1503,9 +1504,11 @@ Space& Space::operator+=(const Space& s)
 //   property
 //---------------------------------------------------------
 
-Property<Element>* Element::property(int id) const
+Property<Element>* Element::property(P_ID id) const
       {
-      for (int i = 0; i < PROPERTIES; ++i) {
+      for (int i = 0;;  ++i) {
+            if (propertyList[i].id == P_END)
+                  break;
             if (propertyList[i].id == id)
                   return &propertyList[i];
             }
@@ -1516,11 +1519,11 @@ Property<Element>* Element::property(int id) const
 //   getProperty
 //---------------------------------------------------------
 
-QVariant Element::getProperty(int propertyId) const
+QVariant Element::getProperty(P_ID propertyId) const
       {
       Property<Element>* p = property(propertyId);
       if (p)
-            return ::getProperty(p->type, ((*(Element*)this).*(p->data))());
+            return getVariant(propertyId, ((*(Element*)this).*(p->data))());
       return QVariant();
       }
 
@@ -1528,11 +1531,11 @@ QVariant Element::getProperty(int propertyId) const
 //   setProperty
 //---------------------------------------------------------
 
-bool Element::setProperty(int propertyId, const QVariant& v)
+bool Element::setProperty(P_ID propertyId, const QVariant& v)
       {
       Property<Element>* p = property(propertyId);
       if (p) {
-            ::setProperty(p->type, ((*this).*(p->data))(), v);
+            setVariant(propertyId, ((*this).*(p->data))(), v);
             setGenerated(false);
             return true;
             }
@@ -1543,10 +1546,13 @@ bool Element::setProperty(int propertyId, const QVariant& v)
 
 bool Element::setProperty(const QString& name, const QDomElement& e)
       {
-      for (int i = 0; i < PROPERTIES; ++i) {
-            if (propertyList[i].name == name) {
-                  QVariant v = ::getProperty(propertyList[i].type, e);
-                  ::setProperty(propertyList[i].type, ((*this).*(propertyList[i].data))(), v);
+      for (int i = 0;; ++i) {
+            P_ID id = propertyList[i].id;
+            if (id == P_END)
+                  break;
+            if (propertyName(id) == name) {
+                  QVariant v = ::getProperty(id, e);
+                  setVariant(id, ((*this).*(propertyList[i].data))(), v);
                   setGenerated(false);
                   return true;
                   }
@@ -1554,4 +1560,76 @@ bool Element::setProperty(const QString& name, const QDomElement& e)
       return false;
       }
 
+//---------------------------------------------------------
+//   getVariant
+//    Return QVariant from void* to property.
+//    The external representation of the property is
+//    returned, suitable for writing to xml.
+//---------------------------------------------------------
+
+QVariant Element::getVariant(P_ID id, void* data) const
+      {
+      if (data) {
+            switch(propertyType(id)) {
+                  case T_BOOL:
+                        return QVariant(*(bool*)data);
+                  case T_SUBTYPE:
+                  case T_INT:
+                  case T_DIRECTION:
+                  case T_DIRECTION_H:
+                  case T_LAYOUT_BREAK:
+                  case T_VALUE_TYPE:
+                        return QVariant(*(int*)data);
+                  case T_FRACTION:
+                        return QVariant::fromValue(*(Fraction*)data);
+                  case T_SREAL:
+                        return QVariant((*(qreal*)data) / spatium());
+                  case T_REAL:
+                        return QVariant(*(qreal*)data);
+                  case T_COLOR:
+                        return QVariant(*(QColor*)data);
+                  case T_POINT:
+                        return QVariant(*(QPointF*)data);
+                  }
+            }
+      return QVariant();
+      }
+
+//---------------------------------------------------------
+//   setVariant
+//---------------------------------------------------------
+
+void Element::setVariant(P_ID id, void* data, const QVariant& value)
+      {
+      switch(propertyType(id)) {
+            case T_BOOL:
+                  *(bool*)data = value.toBool();
+                  break;
+            case T_SUBTYPE:
+            case T_INT:
+                  *(int*)data = value.toInt();
+                  break;
+            case T_SREAL:
+                  *(qreal*)data = value.toDouble() * spatium();
+                  break;
+            case T_REAL:
+                  *(qreal*)data = value.toDouble();
+                  break;
+            case T_FRACTION:
+                  *(Fraction*)data = value.value<Fraction>();
+                  break;
+            case T_POINT:
+                  *(QPointF*)data = value.toPointF();
+                  break;
+            case T_COLOR:
+                  *(QColor*)data = value.value<QColor>();
+                  break;
+            case T_DIRECTION:
+            case T_DIRECTION_H:
+            case T_LAYOUT_BREAK:
+            case T_VALUE_TYPE:
+                  *(int*)data = value.toInt();
+                  break;
+            }
+      }
 

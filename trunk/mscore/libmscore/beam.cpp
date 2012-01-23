@@ -36,13 +36,15 @@
 
 static bool defaultDistribute         = false;
 static Direction defaultBeamDirection = AUTO;
+static qreal defaultGrow              = 1.0;
 
 Property<Beam> Beam::propertyList[] = {
-      { P_DIRECTION,  T_DIRECTION, "StemDirection", &Beam::pBeamDirection, &defaultBeamDirection },
-      { P_DISTRIBUTE, T_BOOL,      "distribute",    &Beam::pDistribute,    &defaultDistribute    }
+      { P_STEM_DIRECTION,  &Beam::pBeamDirection, &defaultBeamDirection },
+      { P_DISTRIBUTE,      &Beam::pDistribute,    &defaultDistribute    },
+      { P_GROW_LEFT,       &Beam::pGrowLeft,      &defaultGrow          },
+      { P_GROW_RIGHT,      &Beam::pGrowRight,     &defaultGrow          },
+      { P_END, 0, 0 }
       };
-
-static const int PROPERTIES = sizeof(Beam::propertyList)/sizeof(*Beam::propertyList);
 
 //---------------------------------------------------------
 //   endBeam
@@ -697,7 +699,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                         if (cr->type() != CHORD)
                               continue;
                         Chord* c = static_cast<Chord*>(cr);
-                        qreal y = c->upNote()->pagePos().y();
+                        qreal y  = c->upNote()->pagePos().y();
                         y1       = qMax(y1, y);
                         y2       = qMin(y2, y);
                         }
@@ -820,8 +822,8 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
 
             qreal xoffLeft  = point(score()->styleS(ST_stemWidth)) * .5;
             qreal xoffRight = xoffLeft;
-            x1               = c1->stemPos(c1->up(), false).x() - xoffLeft;
-            x2               = c2->stemPos(c2->up(), false).x() + xoffRight;
+            x1              = c1->stemPos(c1->up(), false).x() - xoffLeft;
+            x2              = c2->stemPos(c2->up(), false).x() + xoffRight;
 
             f->p1[idx].rx()  = x1;
             f->p2[idx].rx()  = x2;
@@ -1201,9 +1203,12 @@ void Beam::write(Xml& xml) const
       xml.stag(QString("Beam id=\"%1\"").arg(_id));
       Element::writeProperties(xml);
 
-      for (int i = 0; i < PROPERTIES; ++i) {
+      for (int i = 0;; ++i) {
             const Property<Beam>& p = propertyList[i];
-            xml.tag(p.name, p.type, ((*(Beam*)this).*(p.data))(), propertyList[i].defaultVal);
+            P_ID id = p.id;
+            if (id == P_END)
+                  break;
+            xml.tag(id, ((*(Beam*)this).*(p.data))(), propertyList[i].defaultVal);
             }
 
       int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
@@ -1216,10 +1221,6 @@ void Beam::write(Xml& xml) const
                   xml.etag();
                   }
             }
-      if (_grow1 != 1.0)
-            xml.tag("growLeft", _grow1);
-      if (_grow2 != 1.0)
-            xml.tag("growRight", _grow2);
       xml.etag();
       }
 
@@ -1270,10 +1271,6 @@ void Beam::read(const QDomElement& de)
                         }
                   fragments.append(f);
                   }
-            else if (tag == "growLeft")
-                  _grow1 = val.toDouble();
-            else if (tag == "growRight")
-                  _grow2 = val.toDouble();
             else if (tag == "subtype")          // obsolete
                   ;
             else if (!Element::readProperties(e))
@@ -1295,10 +1292,10 @@ void Beam::editDrag(const EditData& ed)
       f->p2[idx] += d;
       _userModified[idx] = true;
       setGenerated(false);
-layout1();
-layout();
-      score()->setUpdateAll(true);
-//      score()->setLayoutAll(true);
+// layout1();
+// layout();
+// score()->setUpdateAll(true);
+      score()->setLayoutAll(true);
       }
 
 //---------------------------------------------------------
@@ -1333,10 +1330,12 @@ void Beam::setBeamDirection(Direction d)
 
 void Beam::toDefault()
       {
-      _direction = AUTO;
-      _up        = -1;
-      _userModified[0] = false;
-      _userModified[1] = false;
+      if (_direction != AUTO) {
+            score()->undoChangeProperty(this, P_DIRECTION, AUTO);
+            _up = -1;
+            _userModified[0] = false;
+            _userModified[1] = false;
+            }
       setGenerated(true);
       }
 
@@ -1393,60 +1392,12 @@ Element* Beam::drop(const DropData& data)
             }
       else
             return 0;
-      score()->undo(new ChangeBeamProperties(this, g1, g2));
+      if (g1 != growLeft())
+            score()->undoChangeProperty(this, P_GROW_LEFT, g1);
+      if (g2 != growRight())
+            score()->undoChangeProperty(this, P_GROW_RIGHT, g2);
       return 0;
       }
 
-//---------------------------------------------------------
-//   property
-//---------------------------------------------------------
-
-Property<Beam>* Beam::property(int id) const
-      {
-      for (int i = 0; i < PROPERTIES; ++i) {
-            if (propertyList[i].id == id)
-                  return &propertyList[i];
-            }
-      return 0;
-      }
-
-//---------------------------------------------------------
-//   getProperty
-//---------------------------------------------------------
-
-QVariant Beam::getProperty(int propertyId) const
-      {
-      Property<Beam>* p = property(propertyId);
-      if (p)
-            return ::getProperty(p->type, ((*(Beam*)this).*(p->data))());
-      return Element::getProperty(propertyId);
-      }
-
-//---------------------------------------------------------
-//   setProperty
-//---------------------------------------------------------
-
-bool Beam::setProperty(int propertyId, const QVariant& v)
-      {
-      Property<Beam>* p = property(propertyId);
-      if (p) {
-            ::setProperty(p->type, ((*this).*(p->data))(), v);
-            setGenerated(false);
-            return true;
-            }
-      return Element::setProperty(propertyId, v);
-      }
-
-bool Beam::setProperty(const QString& name, const QDomElement& e)
-      {
-      for (int i = 0; i < PROPERTIES; ++i) {
-            if (propertyList[i].name == name) {
-                  QVariant v = ::getProperty(propertyList[i].type, e);
-                  ::setProperty(propertyList[i].type, ((*this).*(propertyList[i].data))(), v);
-                  setGenerated(false);
-                  return true;
-                  }
-            }
-      return Element::setProperty(name, e);
-      }
+PROPERTY_FUNCTIONS(Beam)
 

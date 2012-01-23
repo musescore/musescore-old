@@ -1767,7 +1767,7 @@ void Chord::setDotPosX(qreal val)
 //   getProperty
 //---------------------------------------------------------
 
-QVariant Chord::getProperty(int propertyId) const
+QVariant Chord::getProperty(P_ID propertyId) const
       {
       switch(propertyId) {
             case P_NO_STEM:        return noStem();
@@ -1782,7 +1782,7 @@ QVariant Chord::getProperty(int propertyId) const
 //   setProperty
 //---------------------------------------------------------
 
-bool Chord::setProperty(int propertyId, const QVariant& v)
+bool Chord::setProperty(P_ID propertyId, const QVariant& v)
       {
       switch(propertyId) {
             case P_NO_STEM:

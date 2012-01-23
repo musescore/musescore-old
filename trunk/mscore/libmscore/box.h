@@ -42,6 +42,15 @@ class Box : public MeasureBase {
       bool editMode;
       qreal dragX;            // used during drag of hbox
 
+      void* pBoxWidth()     { return &_boxWidth;     }
+      void* pBoxHeight()    { return &_boxHeight;    }
+      void* pTopGap()       { return &_topGap;       }
+      void* pBottomGap()    { return &_bottomGap;    }
+      void* pLeftMargin()   { return &_leftMargin;   }
+      void* pRightMargin()  { return &_rightMargin;  }
+      void* pTopMargin()    { return &_topMargin;    }
+      void* pBottomMargin() { return &_bottomMargin; }
+
    public:
       Box(Score*);
       virtual void draw(QPainter*) const;
@@ -75,6 +84,14 @@ class Box : public MeasureBase {
       void setTopGap(qreal val)       { _topGap = val;        }
       qreal bottomGap() const         { return _bottomGap;    }
       void setBottomGap(qreal val)    { _bottomGap = val;     }
+
+      virtual QVariant getProperty(P_ID propertyId) const;
+      virtual bool setProperty(P_ID propertyId, const QVariant&);
+      virtual bool setProperty(const QString&, const QDomElement&);
+
+      static Property<Box> propertyList[];
+      Property<Box>* property(P_ID) const;
+      virtual void* propertyDefault(P_ID) const;
       };
 
 //---------------------------------------------------------

@@ -73,22 +73,22 @@ static ValueType defaultVeloType    = OFFSET_VAL;
 static NoteHeadType defaultHeadType = HEAD_AUTO;
 
 Property<Note> Note::propertyList[] = {
-      { P_PITCH,          T_INT,         "pitch",         &Note::pPitch,         0 },
-      { P_TPC,            T_INT,         "tpc",           &Note::pTpc,           0 },
-      { P_SMALL,          T_BOOL,        "small",         &Note::pSmall,         &falseVal },
-      { P_MIRROR_HEAD,    T_DIRECTION_H, "mirror",        &Note::pMirror,        &defaultMirror },
-      { P_DOT_POSITION,   T_DIRECTION,   "dotPosition",   &Note::pDotPosition,   &defaultDotPosition },
-      { P_ONTIME_OFFSET,  T_INT,         "onTimeOffset",  &Note::pOnTimeUserOffset,  &defaultOnTimeOffset },
-      { P_OFFTIME_OFFSET, T_INT,         "offTimeOffset", &Note::pOffTimeUserOffset, &defaultOffTimeOffset },
-      { P_HEAD_GROUP,     T_INT,         "head",          &Note::pHeadGroup,     &defaultHeadGroup  },
-      { P_VELO_OFFSET,    T_INT,         "velocity",      &Note::pVeloOffset,    &defaultVeloOffset },
-      { P_TUNING,         T_REAL,        "tuning",        &Note::pTuning,        &defaultTuning     },
-      { P_FRET,           T_INT,         "fret",          &Note::pFret,          &defaultFret       },
-      { P_STRING,         T_INT,         "string",        &Note::pString,        &defaultString     },
-      { P_GHOST,          T_BOOL,        "ghost",         &Note::pGhost,         &falseVal          },
-      { P_HEAD_TYPE,      T_INT,         "headType",      &Note::pHeadType,      &defaultHeadType   },
-      { P_VELO_TYPE,      T_VALUE_TYPE,  "veloType",      &Note::pVeloType,      &defaultVeloType   },
-      { P_END,            T_INT,         0, 0, 0 },
+      { P_PITCH,          &Note::pPitch,         0 },
+      { P_TPC,            &Note::pTpc,           0 },
+      { P_SMALL,          &Note::pSmall,         &falseVal },
+      { P_MIRROR_HEAD,    &Note::pMirror,        &defaultMirror },
+      { P_DOT_POSITION,   &Note::pDotPosition,   &defaultDotPosition },
+      { P_ONTIME_OFFSET,  &Note::pOnTimeUserOffset,  &defaultOnTimeOffset },
+      { P_OFFTIME_OFFSET, &Note::pOffTimeUserOffset, &defaultOffTimeOffset },
+      { P_HEAD_GROUP,     &Note::pHeadGroup,     &defaultHeadGroup  },
+      { P_VELO_OFFSET,    &Note::pVeloOffset,    &defaultVeloOffset },
+      { P_TUNING,         &Note::pTuning,        &defaultTuning     },
+      { P_FRET,           &Note::pFret,          &defaultFret       },
+      { P_STRING,         &Note::pString,        &defaultString     },
+      { P_GHOST,          &Note::pGhost,         &falseVal          },
+      { P_HEAD_TYPE,      &Note::pHeadType,      &defaultHeadType   },
+      { P_VELO_TYPE,      &Note::pVeloType,      &defaultVeloType   },
+      { P_END,            0, 0 },
       };
 
 //---------------------------------------------------------
@@ -1649,40 +1649,4 @@ void Note::setPlayEvents(const QList<NoteEvent*>& v)
             _playEvents.append(new NoteEvent(*e));
       }
 
-//---------------------------------------------------------
-//   getProperty
-//---------------------------------------------------------
-
-QVariant Note::getProperty(int propertyId) const
-      {
-      Property<Note>* p = ::property(propertyList, propertyId);
-      if (p)
-            return ::getProperty(p->type, ((*(Note*)this).*(p->data))());
-      return Element::getProperty(propertyId);
-      }
-
-//---------------------------------------------------------
-//   setProperty
-//---------------------------------------------------------
-
-bool Note::setProperty(int propertyId, const QVariant& v)
-      {
-      Property<Note>* p = ::property(propertyList, propertyId);
-      if (p) {
-            ::setProperty(p->type, ((*this).*(p->data))(), v);
-            return true;
-            }
-      return Element::setProperty(propertyId, v);
-      }
-
-bool Note::setProperty(const QString& name, const QDomElement& e)
-      {
-      Property<Note>* p = ::property(propertyList, name);
-      if (p) {
-            p->setProperty(this, e);
-            setGenerated(false);
-            return true;
-            }
-      return Element::setProperty(name, e);
-      }
-
+PROPERTY_FUNCTIONS(Note)

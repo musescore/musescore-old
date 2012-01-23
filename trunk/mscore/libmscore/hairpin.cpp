@@ -30,7 +30,7 @@
 static int defaultSubtype = 0;
 
 Property<Hairpin> Hairpin::propertyList[] = {
-      { P_SUBTYPE,  T_INT, "subtype", &Hairpin::pSubtype, &defaultSubtype },
+      { P_SUBTYPE,  &Hairpin::pSubtype, &defaultSubtype },
       };
 static const int PROPERTIES = sizeof(Hairpin::propertyList)/sizeof(*Hairpin::propertyList);
 
@@ -180,7 +180,7 @@ void Hairpin::read(const QDomElement& de)
 //   property
 //---------------------------------------------------------
 
-Property<Hairpin>* Hairpin::property(int id) const
+Property<Hairpin>* Hairpin::property(P_ID id) const
       {
       for (int i = 0; i < PROPERTIES; ++i) {
             if (propertyList[i].id == id)
@@ -193,11 +193,11 @@ Property<Hairpin>* Hairpin::property(int id) const
 //   getProperty
 //---------------------------------------------------------
 
-QVariant Hairpin::getProperty(int propertyId) const
+QVariant Hairpin::getProperty(P_ID propertyId) const
       {
       Property<Hairpin>* p = property(propertyId);
       if (p)
-            return ::getProperty(p->type, ((*(Hairpin*)this).*(p->data))());
+            return getVariant(propertyId, ((*(Hairpin*)this).*(p->data))());
       return Element::getProperty(propertyId);
       }
 
@@ -205,11 +205,11 @@ QVariant Hairpin::getProperty(int propertyId) const
 //   setProperty
 //---------------------------------------------------------
 
-bool Hairpin::setProperty(int propertyId, const QVariant& v)
+bool Hairpin::setProperty(P_ID propertyId, const QVariant& v)
       {
       Property<Hairpin>* p = property(propertyId);
       if (p) {
-            ::setProperty(p->type, ((*this).*(p->data))(), v);
+            setVariant(propertyId, ((*this).*(p->data))(), v);
             setGenerated(false);
             return true;
             }
@@ -223,14 +223,14 @@ bool Hairpin::setProperty(int propertyId, const QVariant& v)
 bool Hairpin::setProperty(const QString& name, const QDomElement& e)
       {
       for (int i = 0; i < PROPERTIES; ++i) {
-            if (propertyList[i].name == name) {
-                  QVariant v = ::getProperty(propertyList[i].type, e);
-                  ::setProperty(propertyList[i].type, ((*this).*(propertyList[i].data))(), v);
+            P_ID id = propertyList[i].id;
+            if (propertyName(id) == name) {
+                  QVariant v = ::getProperty(id, e);
+                  setVariant(id, ((*this).*(propertyList[i].data))(), v);
                   setGenerated(false);
                   return true;
                   }
             }
-
       return Element::setProperty(name, e);
       }
 

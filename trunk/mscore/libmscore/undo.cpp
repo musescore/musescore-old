@@ -312,7 +312,7 @@ void SaveState::redo()
 //   undoChangeProperty
 //---------------------------------------------------------
 
-void Score::undoChangeProperty(Element* e, int t, const QVariant& st)
+void Score::undoChangeProperty(Element* e, P_ID t, const QVariant& st)
       {
       undo(new ChangeProperty(e, t, st));
       }
@@ -2776,20 +2776,6 @@ void ChangeNoteEvents::flip()
       chord->setPlayEvents(events);
       events = e;
       */
-      }
-
-//---------------------------------------------------------
-//   flip
-//---------------------------------------------------------
-
-void ChangeBeamProperties::flip()
-      {
-      qreal g1 = beam->grow1();
-      qreal g2 = beam->grow2();
-      beam->setGrow1(grow1);
-      beam->setGrow2(grow2);
-      grow1 = g1;
-      grow2 = g2;
       }
 
 //---------------------------------------------------------

@@ -70,6 +70,17 @@ void TextLineSegment::draw(QPainter* painter) const
 
       QPointF pp2(pos2());
 
+      QColor color;
+      bool normalColor = false;
+      if (selected() && !(score() && score()->printing()))
+            color = MScore::selectColor[0];
+      else if (!visible())
+            color = Qt::gray;
+      else {
+            color = curColor();
+            normalColor = true;
+            }
+
       qreal l = 0.0;
       int sym = subtype() == SEGMENT_MIDDLE ? tl->continueSymbol() : tl->beginSymbol();
       if (_text) {
@@ -82,7 +93,7 @@ void TextLineSegment::draw(QPainter* painter) const
                   l = _text->pos().x() + bb.width() + textlineTextDistance;
                   }
             painter->translate(_text->pos());
-            painter->setPen(_text->curColor());
+            painter->setPen(normalColor ? _text->curColor() : color);
             _text->draw(painter);
             painter->translate(-_text->pos());
             }
@@ -90,9 +101,15 @@ void TextLineSegment::draw(QPainter* painter) const
             const QRectF& bb = symbols[score()->symIdx()][sym].bbox(magS());
             qreal h = bb.height() * .5;
             QPointF o = tl->beginSymbolOffset() * _spatium;
+            painter->setPen(color);
             symbols[score()->symIdx()][sym].draw(painter, 1.0, QPointF(o.x(), h + o.y()));
             l = bb.width() + textlineTextDistance;
             }
+
+      QPen pen(normalColor ? tl->lineColor() : color, textlineLineWidth);
+      pen.setStyle(tl->lineStyle());
+      painter->setPen(pen);
+
       if (subtype() == SEGMENT_SINGLE || subtype() == SEGMENT_END) {
             if (tl->endSymbol() != -1) {
                   int sym = tl->endSymbol();
@@ -105,16 +122,6 @@ void TextLineSegment::draw(QPainter* painter) const
             }
 
       QPointF pp1(l, 0.0);
-
-      QPen pen(curColor(), textlineLineWidth);
-      pen.setStyle(tl->lineStyle());
-      if (selected() && !(score() && score()->printing()))
-            pen.setColor(MScore::selectColor[0]);
-      else if (!visible())
-            pen.setColor(Qt::gray);
-      else
-            pen.setColor(tl->lineColor());
-      painter->setPen(pen);
 
       if (tl->beginHook() && tl->beginHookType() == HOOK_45)
             pp1.rx() += fabs(tl->beginHookHeight().val() * _spatium * .4);

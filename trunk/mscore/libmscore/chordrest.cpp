@@ -45,7 +45,7 @@
 //---------------------------------------------------------
 
 Property<ChordRest> ChordRest::propertyList[] = {
-      { P_SMALL,    T_BOOL, "small", &ChordRest::pSmall, false },
+      { P_SMALL, &ChordRest::pSmall, false },
       };
 
 static const int PROPERTIES = sizeof(ChordRest::propertyList)/sizeof(*ChordRest::propertyList);
@@ -976,11 +976,11 @@ void ChordRest::removeDeleteBeam()
 //   getProperty
 //---------------------------------------------------------
 
-QVariant ChordRest::getProperty(int propertyId) const
+QVariant ChordRest::getProperty(P_ID propertyId) const
       {
       for (int i = 0; i < PROPERTIES; ++i) {
             if (propertyList[i].id == propertyId)
-                  return ::getProperty(propertyList[i].type, ((*(ChordRest*)this).*(propertyList[i].data))());
+                  return getVariant(propertyId, ((*(ChordRest*)this).*(propertyList[i].data))());
             }
       return Element::getProperty(propertyId);
       }
@@ -989,11 +989,11 @@ QVariant ChordRest::getProperty(int propertyId) const
 //   setProperty
 //---------------------------------------------------------
 
-bool ChordRest::setProperty(int propertyId, const QVariant& v)
+bool ChordRest::setProperty(P_ID propertyId, const QVariant& v)
       {
       for (int i = 0; i < PROPERTIES; ++i) {
             if (propertyList[i].id == propertyId) {
-                  ::setProperty(propertyList[i].type, ((*this).*(propertyList[i].data))(), v);
+                  setVariant(propertyId, ((*this).*(propertyList[i].data))(), v);
                   setGenerated(false);
                   return true;
                   }

@@ -21,7 +21,7 @@
 //    virtual void Element::setProperty(int propertyId, const QVariant&)
 //------------------------------------------------------------------------
 
-enum P_TYPE {
+enum P_ID {
       P_SUBTYPE,
       P_SELECTED,
       P_COLOR,
@@ -62,14 +62,27 @@ enum P_TYPE {
       P_ACTUAL_NOTES,
       P_P1,
       P_P2,
+      P_GROW_LEFT,
+      P_GROW_RIGHT,
+      P_BOX_HEIGHT,
+      P_BOX_WIDTH,
+      P_TOP_GAP,
+      P_BOTTOM_GAP,
+      P_LEFT_MARGIN,
+      P_RIGHT_MARGIN,
+      P_TOP_MARGIN,
+      P_BOTTOM_MARGIN,
+      P_LAYOUT_BREAK,
+
       P_END
       };
 
-enum P_DATA_TYPE {
+enum P_TYPE {
       T_SUBTYPE,
       T_BOOL,
       T_INT,
       T_REAL,
+      T_SREAL,
       T_FRACTION,
       T_POINT,
       T_COLOR,
@@ -79,10 +92,13 @@ enum P_DATA_TYPE {
       T_VALUE_TYPE,
       };
 
-extern void setProperty(P_DATA_TYPE, void*, const QString& value);
-extern void setProperty(P_DATA_TYPE, void*, const QVariant& value);
-extern QVariant getProperty(P_DATA_TYPE, void*);
-extern QVariant getProperty(P_DATA_TYPE type, const QDomElement& e);
+extern void setProperty(P_ID, void*, const QString& value);
+extern void setProperty(P_ID, void*, const QVariant& value);
+
+extern QVariant getProperty(P_ID type, const QDomElement& e);
+
+extern P_TYPE propertyType(P_ID);
+const char* propertyName(P_ID);
 
 //---------------------------------------------------------
 //   template Property
@@ -91,16 +107,17 @@ extern QVariant getProperty(P_DATA_TYPE type, const QDomElement& e);
 template <class T>
 class Property {
    public:
-      int id;
-      P_DATA_TYPE type;
-      const char* name;     // xml name of property
+      P_ID id;
+//      P_TYPE type;
+//      const char* name;     // xml name of property
       void* (T::*data)();   // member function returns pointer to data
       void* defaultVal;     // pointer to default data
 
-      void setProperty(T* c, const QDomElement& e) {
-            QVariant v = ::getProperty(type, e);
+/*      void setProperty(T* c, const QDomElement& e) {
+            QVariant v = ::getProperty(id, e);
             ::setProperty(type, ((*c).*(data))(), v);
             }
+      */
       };
 
 //---------------------------------------------------------
@@ -125,7 +142,7 @@ Property<T>* property(Property<T>* list, const QString& name)
       for (int i = 0; ; ++i) {
             if (list[i].id == P_END)
                   break;
-            else if (list[i].name == name)
+            else if (propertyName(i) == name)
                   return &list[i];
             }
       return 0;
@@ -142,7 +159,70 @@ Property<T>* property(Property<T>* list, const QString& name)
             const Property<T>& p = propertyList[i]; \
             if (p.id == P_END) \
                   break;       \
-            xml.tag(p.name, p.type, ((*(T*)this).*(p.data))(), p.defaultVal); \
+            xml.tag(p.id, ((*(T*)this).*(p.data))(), p.defaultVal); \
             }
+
+#define PROPERTY_DECLARATIONS(T)                                                 \
+      virtual QVariant getProperty(P_ID propertyId) const;                       \
+      virtual bool setProperty(P_ID propertyId, const QVariant&);                \
+      virtual bool setProperty(const QString&, const QDomElement&);              \
+      Property<T>* property(P_ID id) const;                                      \
+      virtual void* propertyDefault(P_ID) const;                                 \
+      static Property<T> propertyList[];
+
+#define PROPERTY_FUNCTIONS(T)                                                    \
+                                                                                 \
+Property<T>* T::property(P_ID id) const                                          \
+      {                                                                          \
+      for (int i = 0;; ++i) {                                                    \
+            if (propertyList[i].id == P_END)                                     \
+                  break;                                                         \
+            if (propertyList[i].id == id)                                        \
+                  return &propertyList[i];                                       \
+            }                                                                    \
+      return 0;                                                                  \
+      }                                                                          \
+QVariant T::getProperty(P_ID propertyId) const                                   \
+      {                                                                          \
+      Property<T>* p = property(propertyId);                                     \
+      if (p)                                                                     \
+            return getVariant(propertyId, ((*(T*)this).*(p->data))());           \
+      return Element::getProperty(propertyId);                                   \
+      }                                                                          \
+bool T::setProperty(P_ID propertyId, const QVariant& v)                          \
+      {                                                                          \
+      score()->addRefresh(canvasBoundingRect());                                 \
+      Property<T>* p = property(propertyId);                                     \
+      bool rv = true;                                                            \
+      if (p) {                                                                   \
+            ::setProperty(propertyId, ((*this).*(p->data))(), v);                \
+            setGenerated(false);                                                 \
+            }                                                                    \
+      else                                                                       \
+            rv = Element::setProperty(propertyId, v);                            \
+      score()->setLayoutAll(true);                                               \
+      return rv;                                                                 \
+      }                                                                          \
+bool T::setProperty(const QString& name, const QDomElement& e)                   \
+      {                                                                          \
+      for (int i = 0;; ++i) {                                                    \
+            P_ID id = propertyList[i].id;                                        \
+            if (id == P_END)                                                     \
+                  break;                                                         \
+            if (propertyName(id) == name) {                                      \
+                  QVariant v = ::getProperty(propertyList[i].id, e);             \
+                  ::setProperty(propertyList[i].id, ((*this).*(propertyList[i].data))(), v); \
+                  setGenerated(false);                                           \
+                  return true;                                                   \
+                  }                                                              \
+            }                                                                    \
+      return Element::setProperty(name, e);                                      \
+      }                                                                          \
+void*  T::propertyDefault(P_ID id) const                                         \
+      {                                                                          \
+      Property<T>* p = property(id);                                             \
+      return p->defaultVal;                                                      \
+      }
+
 #endif
 

@@ -385,12 +385,18 @@ class Element {
       bool isSegment() const           { return flag(ELEMENT_SEGMENT);     }
       uint tag() const                 { return _tag;                      }
       void setTag(uint val)            { _tag = val;                       }
-      virtual QVariant getProperty(int propertyId) const;
-      virtual bool setProperty(int propertyId, const QVariant&);
+
+
+      virtual QVariant getProperty(P_ID propertyId) const;
+      virtual bool setProperty(P_ID propertyId, const QVariant&);
       virtual bool setProperty(const QString&, const QDomElement&); // const QString&);
+      virtual void* propertyDefault(P_ID) const { return 0; }
 
       static Property<Element> propertyList[];
-      Property<Element>* property(int id) const;
+      Property<Element>* property(P_ID id) const;
+
+      QVariant getVariant(P_ID, void*) const;  // create QVariant from void* to data
+      void setVariant(P_ID, void*, const QVariant&);
       };
 
 //---------------------------------------------------------

@@ -12,6 +12,7 @@
 //=============================================================================
 
 #include "inspector.h"
+#include "inspectorBeam.h"
 #include "musescore.h"
 #include "libmscore/element.h"
 #include "libmscore/score.h"
@@ -298,25 +299,11 @@ void InspectorElementElement::apply()
       }
 
 //---------------------------------------------------------
-//   InspectorElementBase
-//---------------------------------------------------------
-
-InspectorElementBase::InspectorElementBase(QWidget* parent)
-   : QWidget(parent)
-      {
-      setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-      inspector = static_cast<Inspector*>(parent);
-      layout    = new QVBoxLayout;
-      layout->setSizeConstraint(QLayout::SetNoConstraint);
-      setLayout(layout);
-      }
-
-//---------------------------------------------------------
 //   InspectorElement
 //---------------------------------------------------------
 
 InspectorElement::InspectorElement(QWidget* parent)
-   : InspectorElementBase(parent)
+   : InspectorBase(parent)
       {
       ie = new InspectorElementElement(this);
       layout->addWidget(ie);
@@ -352,154 +339,41 @@ void InspectorElement::apply()
 //---------------------------------------------------------
 
 InspectorVBox::InspectorVBox(QWidget* parent)
-   : InspectorElementBase(parent)
+   : InspectorBase(parent)
       {
       QWidget* w = new QWidget;
-
       vb.setupUi(w);
       layout->addWidget(w);
-      connect(vb.topGap,            SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
-      connect(vb.bottomGap,         SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
-      connect(vb.height,            SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
 
-      connect(vb.leftMargin,        SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
-      connect(vb.rightMargin,       SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
-      connect(vb.topMargin,         SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
-      connect(vb.bottomMargin,      SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      iList[0].t = P_TOP_GAP;
+      iList[0].w = vb.topGap;
+      iList[0].r = vb.resetTopGap;
 
-      connect(vb.resetTopGap,       SIGNAL(clicked()), SLOT(resetTopGap()));
-      connect(vb.resetBottomGap,    SIGNAL(clicked()), SLOT(resetBottomGap()));
-      connect(vb.resetLeftMargin,   SIGNAL(clicked()), SLOT(resetLeftMargin()));
-      connect(vb.resetRightMargin,  SIGNAL(clicked()), SLOT(resetRightMargin()));
-      connect(vb.resetTopMargin,    SIGNAL(clicked()), SLOT(resetTopMargin()));
-      connect(vb.resetBottomMargin, SIGNAL(clicked()), SLOT(resetBottomMargin()));
-      }
+      iList[1].t = P_BOTTOM_GAP;
+      iList[1].w = vb.bottomGap;
+      iList[1].r = vb.resetBottomGap;
 
-//---------------------------------------------------------
-//   resetTopGap
-//---------------------------------------------------------
+      iList[2].t = P_LEFT_MARGIN;
+      iList[2].w = vb.leftMargin;
+      iList[2].r = vb.resetLeftMargin;
 
-void InspectorVBox::resetTopGap()
-      {
-      vb.topGap->setValue(0.0);
-      }
+      iList[3].t = P_RIGHT_MARGIN;
+      iList[3].w = vb.rightMargin;
+      iList[3].r = vb.resetRightMargin;
 
-//---------------------------------------------------------
-//   resetBottomGap
-//---------------------------------------------------------
+      iList[4].t = P_TOP_MARGIN;
+      iList[4].w = vb.topMargin;
+      iList[4].r = vb.resetTopMargin;
 
-void InspectorVBox::resetBottomGap()
-      {
-      vb.bottomGap->setValue(0.0);
-      }
+      iList[5].t = P_BOTTOM_MARGIN;
+      iList[5].w = vb.bottomMargin;
+      iList[5].r = vb.resetBottomMargin;
 
-//---------------------------------------------------------
-//   resetLeftMargin
-//---------------------------------------------------------
+      iList[6].t = P_BOX_HEIGHT;
+      iList[6].w = vb.height;
+      iList[6].r = 0;
 
-void InspectorVBox::resetLeftMargin()
-      {
-      vb.leftMargin->setValue(0.0);
-      }
-
-//---------------------------------------------------------
-//   resetRightMargin
-//---------------------------------------------------------
-
-void InspectorVBox::resetRightMargin()
-      {
-      vb.rightMargin->setValue(0.0);
-      }
-
-//---------------------------------------------------------
-//   resetTopMargin
-//---------------------------------------------------------
-
-void InspectorVBox::resetTopMargin()
-      {
-      vb.topMargin->setValue(0.0);
-      }
-
-//---------------------------------------------------------
-//   resetBottomMargin
-//---------------------------------------------------------
-
-void InspectorVBox::resetBottomMargin()
-      {
-      vb.bottomMargin->setValue(0.0);
-      }
-
-//---------------------------------------------------------
-//   block
-//---------------------------------------------------------
-
-void InspectorVBox::block(bool val)
-      {
-      vb.topGap->blockSignals(val);
-      vb.bottomGap->blockSignals(val);
-      vb.height->blockSignals(val);
-      vb.leftMargin->blockSignals(val);
-      vb.rightMargin->blockSignals(val);
-      vb.topMargin->blockSignals(val);
-      vb.bottomMargin->blockSignals(val);
-      }
-
-//---------------------------------------------------------
-//   setElement
-//---------------------------------------------------------
-
-void InspectorVBox::setElement(Element* e)
-      {
-      VBox* box = static_cast<VBox*>(e);
-      qreal _spatium = e->score()->spatium();
-      vb.elementName->setText(e->name());
-
-      block(true);
-
-      vb.topGap->setValue(box->topGap() / _spatium);
-      vb.bottomGap->setValue(box->bottomGap() / _spatium);
-      vb.height->setValue(box->boxHeight().val());
-      vb.leftMargin->setValue(box->leftMargin());
-      vb.rightMargin->setValue(box->rightMargin());
-      vb.topMargin->setValue(box->topMargin());
-      vb.bottomMargin->setValue(box->bottomMargin());
-
-      block(false);
-      }
-
-//---------------------------------------------------------
-//   apply
-//---------------------------------------------------------
-
-void InspectorVBox::apply()
-      {
-      VBox* box       = static_cast<VBox*>(inspector->element());
-      Score* score    = box->score();
-      qreal _spatium  = score->spatium();
-      qreal topGap    = vb.topGap->value() * _spatium;
-      qreal bottomGap = vb.bottomGap->value() * _spatium;
-      Spatium height(vb.height->value());
-
-      qreal lm = vb.leftMargin->value();
-      qreal rm = vb.rightMargin->value();
-      qreal tm = vb.topMargin->value();
-      qreal bm = vb.bottomMargin->value();
-
-      if (topGap != box->topGap() || bottomGap != box->bottomGap()
-         || height != box->boxHeight()
-         || lm != box->leftMargin() || rm != box->rightMargin()
-         || tm != box->topMargin()  || bm != box->bottomMargin()
-         ) {
-            score->startCmd();
-            score->undo(new ChangeBoxProperties(box,
-               lm, tm, rm, bm,
-               height, box->boxWidth(),
-               topGap, bottomGap
-               ));
-            score->setLayoutAll(true);
-            score->endCmd();
-            mscore->endCmd();
-            }
+      mapSignals();
       }
 
 //---------------------------------------------------------
@@ -507,85 +381,25 @@ void InspectorVBox::apply()
 //---------------------------------------------------------
 
 InspectorHBox::InspectorHBox(QWidget* parent)
-   : InspectorElementBase(parent)
+   : InspectorBase(parent)
       {
       QWidget* w = new QWidget;
-
       hb.setupUi(w);
       layout->addWidget(w);
-      connect(hb.leftGap,  SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
-      connect(hb.rightGap, SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
-      connect(hb.width,    SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
-      connect(hb.resetLeftGap,  SIGNAL(clicked()), SLOT(resetLeftGap()));
-      connect(hb.resetRightGap, SIGNAL(clicked()), SLOT(resetRightGap()));
-      }
 
-//---------------------------------------------------------
-//   resetLeftGap
-//---------------------------------------------------------
+      iList[0].t = P_TOP_GAP;
+      iList[0].w = hb.leftGap;
+      iList[0].r = hb.resetLeftGap;
 
-void InspectorHBox::resetLeftGap()
-      {
-      hb.leftGap->setValue(0.0);
-      }
+      iList[1].t = P_BOTTOM_GAP;
+      iList[1].w = hb.rightGap;
+      iList[1].r = hb.resetRightGap;
 
-//---------------------------------------------------------
-//   resetRightGap
-//---------------------------------------------------------
+      iList[2].t = P_BOX_WIDTH;
+      iList[2].w = hb.width;
+      iList[2].r = 0;
 
-void InspectorHBox::resetRightGap()
-      {
-      hb.rightGap->setValue(0.0);
-      }
-
-//---------------------------------------------------------
-//   setElement
-//---------------------------------------------------------
-
-void InspectorHBox::setElement(Element* e)
-      {
-      HBox* box = static_cast<HBox*>(e);
-      qreal _spatium = e->score()->spatium();
-      hb.elementName->setText(e->name());
-
-      hb.leftGap->blockSignals(true);
-      hb.rightGap->blockSignals(true);
-      hb.width->blockSignals(true);
-
-      hb.leftGap->setValue(box->topGap() / _spatium);
-      hb.rightGap->setValue(box->bottomGap() / _spatium);
-      hb.width->setValue(box->boxHeight().val());
-
-      hb.leftGap->blockSignals(false);
-      hb.rightGap->blockSignals(false);
-      hb.width->blockSignals(false);
-      }
-
-//---------------------------------------------------------
-//   apply
-//---------------------------------------------------------
-
-void InspectorHBox::apply()
-      {
-      HBox* box       = static_cast<HBox*>(inspector->element());
-      Score* score    = box->score();
-      qreal _spatium  = score->spatium();
-      qreal leftGap   = hb.leftGap->value() * _spatium;
-      qreal rightGap  = hb.rightGap->value() * _spatium;
-      Spatium width(hb.width->value());
-
-      if (leftGap != box->topGap() || rightGap != box->bottomGap()
-         || width != box->boxWidth()) {
-            score->startCmd();
-            score->undo(new ChangeBoxProperties(box,
-               box->leftMargin(), box->topMargin(), box->rightMargin(), box->bottomMargin(),
-               box->boxHeight(), width,
-               leftGap, rightGap
-               ));
-            score->setLayoutAll(true);
-            score->endCmd();
-            mscore->endCmd();
-            }
+      mapSignals();
       }
 
 //---------------------------------------------------------
@@ -593,7 +407,7 @@ void InspectorHBox::apply()
 //---------------------------------------------------------
 
 InspectorArticulation::InspectorArticulation(QWidget* parent)
-   : InspectorElementBase(parent)
+   : InspectorBase(parent)
       {
       QWidget* w = new QWidget;
 
@@ -655,11 +469,11 @@ void InspectorArticulation::apply()
       }
 
 //---------------------------------------------------------
-//   InspectorElement
+//   InspectorSpacer
 //---------------------------------------------------------
 
 InspectorSpacer::InspectorSpacer(QWidget* parent)
-   : InspectorElementBase(parent)
+   : InspectorBase(parent)
       {
       QWidget* w = new QWidget;
 
@@ -1131,7 +945,7 @@ void InspectorNoteBase::resetVelocityTypeClicked()
 //---------------------------------------------------------
 
 InspectorNote::InspectorNote(QWidget* parent)
-   : InspectorElementBase(parent)
+   : InspectorBase(parent)
       {
       iElement = new InspectorElementElement(this);
       layout->addWidget(iElement);
@@ -1350,7 +1164,7 @@ bool InspectorNote::dirty() const
 //---------------------------------------------------------
 
 InspectorRest::InspectorRest(QWidget* parent)
-   : InspectorElementBase(parent)
+   : InspectorBase(parent)
       {
       iElement = new InspectorElementElement(this);
       iSegment = new InspectorSegment(this);
@@ -1406,7 +1220,7 @@ void InspectorRest::apply()
 //---------------------------------------------------------
 
 InspectorClef::InspectorClef(QWidget* parent)
-   : InspectorElementBase(parent)
+   : InspectorBase(parent)
       {
       iElement = new InspectorElementElement(this);
       iSegment = new InspectorSegment(this);
@@ -1449,111 +1263,6 @@ void InspectorClef::apply()
       }
 
 //---------------------------------------------------------
-//   InspectorBeam
-//---------------------------------------------------------
-
-InspectorBeam::InspectorBeam(QWidget* parent)
-   : InspectorElementBase(parent)
-      {
-      QWidget* w = new QWidget;
-
-      b.setupUi(w);
-      layout->addWidget(w);
-      connect(b.distribute, SIGNAL(toggled(bool)),  SLOT(distributeToggled(bool)));
-      connect(b.direction,  SIGNAL(activated(int)), SLOT(directionActivated(int)));
-      connect(b.resetDistribute, SIGNAL(clicked()), SLOT(resetDistributeClicked()));
-      connect(b.resetDirection,  SIGNAL(clicked()), SLOT(resetDirectionClicked()));
-      }
-
-//---------------------------------------------------------
-//   setElement
-//---------------------------------------------------------
-
-void InspectorBeam::setElement(Element* e)
-      {
-      Beam* beam = static_cast<Beam*>(e);
-
-      b.distribute->blockSignals(true);
-      b.distribute->setChecked(beam->distribute());
-      b.distribute->blockSignals(false);
-      b.direction->setCurrentIndex(beam->beamDirection());
-      b.resetDirection->setEnabled(beam->beamDirection() != AUTO);
-      }
-
-//---------------------------------------------------------
-//   apply
-//---------------------------------------------------------
-
-void InspectorBeam::apply()
-      {
-      Beam* beam   = static_cast<Beam*>(inspector->element());
-      Score* score = beam->score();
-
-      bool distribute = b.distribute->isChecked();
-      Direction d     = Direction(b.direction->currentIndex());
-      score->startCmd();
-      if (beam->distribute() != distribute)
-            score->undoChangeProperty(beam, P_DISTRIBUTE, distribute);
-      if (beam->beamDirection() != d)
-            score->undoChangeProperty(beam, P_DIRECTION, d);
-      score->setLayoutAll(true);
-      score->endCmd();
-      mscore->endCmd();
-      }
-
-//---------------------------------------------------------
-//   resetDistributeClicked
-//---------------------------------------------------------
-
-void InspectorBeam::resetDistributeClicked()
-      {
-      b.distribute->setChecked(false);
-      }
-
-//---------------------------------------------------------
-//   resetDirectionClicked
-//---------------------------------------------------------
-
-void InspectorBeam::resetDirectionClicked()
-      {
-      b.direction->setCurrentIndex(AUTO);
-      }
-
-//---------------------------------------------------------
-//   directionActivated
-//---------------------------------------------------------
-
-void InspectorBeam::directionActivated(int idx)
-      {
-      b.resetDirection->setEnabled(Direction(idx) != AUTO);
-      inspector->enableApply(dirty());
-      }
-
-//---------------------------------------------------------
-//   distributeToggled
-//---------------------------------------------------------
-
-void InspectorBeam::distributeToggled(bool val)
-      {
-      b.resetDistribute->setEnabled(val);
-      inspector->enableApply(dirty());
-      }
-
-//---------------------------------------------------------
-//   dirty
-//    return true if a property has changed
-//---------------------------------------------------------
-
-bool InspectorBeam::dirty() const
-      {
-      const Beam* beam = static_cast<Beam*>(inspector->element());
-      bool distribute  = b.distribute->isChecked();
-      Direction d      = Direction(b.direction->currentIndex());
-      return (beam->distribute() != distribute)
-             || (beam->beamDirection() != d);
-      }
-
-//---------------------------------------------------------
 //   InspectorChord
 //---------------------------------------------------------
 
@@ -1589,6 +1298,11 @@ bool InspectorChord::dirty() const
 void InspectorChord::setElement(Chord* c)
       {
       chord = c;
+
+      small->blockSignals(true);
+      stemless->blockSignals(true);
+      stemDirection->blockSignals(true);
+
       small->setChecked(chord->small());
       stemless->setChecked(chord->noStem());
       stemDirection->setCurrentIndex(chord->stemDirection());
@@ -1596,6 +1310,10 @@ void InspectorChord::setElement(Chord* c)
       resetSmall->setEnabled(chord->small());
       resetStemless->setEnabled(chord->noStem());
       resetStemDirection->setEnabled(stemDirection->currentIndex() != 0);
+
+      small->blockSignals(false);
+      stemless->blockSignals(false);
+      stemDirection->blockSignals(false);
       }
 
 //---------------------------------------------------------

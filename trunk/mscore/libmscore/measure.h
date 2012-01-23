@@ -276,9 +276,7 @@ class Measure : public MeasureBase {
       void addSpannerFor(Spanner* e)      { _spannerFor.append(e);     }
       void removeSpannerFor(Spanner* e)   { _spannerFor.removeOne(e);  }
 
-      virtual QVariant getProperty(int propertyId) const;
-      virtual bool setProperty(int propertyId, const QVariant&);
-      static Property<Measure> propertyList[];
+      PROPERTY_DECLARATIONS(Measure)
       };
 
 #endif
