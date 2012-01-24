@@ -49,7 +49,6 @@ class PageSettings;
 class PaletteBox;
 class Palette;
 class PaletteScrollArea;
-class TimeDialog;
 class Xml;
 class MagBox;
 class NewWizard;
@@ -82,9 +81,19 @@ class OmrPanel;
 class NScrollArea;
 class EditTools;
 class Sym;
+class MasterPalette;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
+
+//---------------------------------------------------------
+//   IconActions
+//---------------------------------------------------------
+
+struct IconAction {
+      int subtype;
+      const char* action;
+      };
 
 //---------------------------------------------------------
 //   LanguageItem
@@ -217,6 +226,8 @@ class MuseScore : public QMainWindow {
       InstrumentsDialog* instrList;
       MeasuresDialog* measuresDialog;
       InsertMeasuresDialog* insertMeasuresDialog;
+      MasterPalette* masterPalette;
+
       QMenu* _fileMenu;
       QMenu* menuEdit;
       QMenu* menuNotes;
@@ -240,15 +251,6 @@ class MuseScore : public QMainWindow {
       PaletteScrollArea* keyPalette;
       KeyEditor* keyEditor;
       ChordStyleEditor* chordStyleEditor;
-      TimeDialog* timePalette;
-      PaletteScrollArea* linePalette;
-      PaletteScrollArea* bracketPalette;
-      PaletteScrollArea* barPalette;
-      PaletteScrollArea* fingeringPalette;
-      PaletteScrollArea* noteAttributesPalette;
-      PaletteScrollArea* accidentalsPalette;
-      PaletteScrollArea* dynamicsPalette;
-      PaletteScrollArea* layoutBreakPalette;
       QStatusBar* _statusBar;
       QLabel* _modeText;
       QLabel* _positionLabel;
@@ -329,10 +331,7 @@ class MuseScore : public QMainWindow {
       void loadScoreList();
       void editInstrList();
       void symbolMenu();
-      void clefMenu();
       void showKeyEditor();
-      void timeMenu();
-      void dynamicsMenu();
       void saveFile();
       void fingeringMenu();
       void registerPlugin(const QString& pluginPath);
@@ -350,7 +349,7 @@ class MuseScore : public QMainWindow {
       void showPlayPanel(bool);
       void showNavigator(bool);
       void showMixer(bool);
-      void showSynthControl(bool);
+      void showSynthControl();
       void helpBrowser();
       void splitWindow(bool horizontal);
       void removeSessionFile();
@@ -383,14 +382,8 @@ class MuseScore : public QMainWindow {
       void seqStarted();
       void seqStopped();
       void closePlayPanel();
-      void lineMenu();
-      void bracketMenu();
-      void barMenu();
-      void noteAttributesMenu();
-      void accidentalsMenu();
       void cmdAppendMeasures();
       void cmdInsertMeasures();
-      void showLayoutBreakPalette();
       void magChanged(int);
       void showPageSettings();
       void removeTab(int);
@@ -399,7 +392,6 @@ class MuseScore : public QMainWindow {
       void cmd(QAction* a, const QString& cmd);
       void clipboardChanged();
       void endSearch();
-      void closeSynthControl();
       void saveScoreDialogFilterSelected(const QString&);
 #ifdef OSC
       void oscIntMessage(int);
@@ -447,6 +439,7 @@ class MuseScore : public QMainWindow {
       void midiNoteReceived(int channel, int pitch, int velo);
       void midiNoteReceived(int pitch, bool ctrl);
       void instrumentChanged();
+      void showMasterPalette();
 
    public:
       MuseScore();
@@ -597,6 +590,12 @@ class MuseScore : public QMainWindow {
       void noteTooShortForTupletDialog();
       void enableInputToolbar(bool enableInput);
       void loadFiles();
+
+      static Palette* newTextPalette();
+      static Palette* newRepeatsPalette();
+      static Palette* newBreaksPalette();
+      static Palette* newBeamPalette();
+      static Palette* newDynamicsPalette();
       };
 
 extern MuseScore* mscore;

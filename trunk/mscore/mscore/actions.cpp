@@ -213,58 +213,6 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          0,
-         "clefs",
-         QT_TRANSLATE_NOOP("action","Show clefs palette"),
-         Qt::Key_Y,
-         Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Clefs..."),
-         QT_TRANSLATE_NOOP("action","Show clefs palette"),
-          clef_ICON
-         ),
-      Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY,
-         0,
-         "keys",
-         QT_TRANSLATE_NOOP("action","Show keys signatures palette"),
-         Qt::Key_K,
-         Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Key Signatures..."),
-         QT_TRANSLATE_NOOP("action","Show key signatures palette"),
-          sharp_ICON
-         ),
-      Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY,
-         0,
-         "symbols",
-         QT_TRANSLATE_NOOP("action","Show symbols palette"),
-         Qt::Key_Z,
-         Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Symbols..."),
-         QT_TRANSLATE_NOOP("action","Show symbols palette")
-         ),
-      Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY,
-         0,
-         "times",
-         QT_TRANSLATE_NOOP("action","Show time signatures palette"),
-         Qt::Key_T,
-         Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Time Signatures..."),
-         QT_TRANSLATE_NOOP("action","Show time signatures palette")
-         ),
-      Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY,
-         0,
-         "dynamics",
-         QT_TRANSLATE_NOOP("action","Show dynamics palette"),
-         Qt::Key_L,
-         Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Dynamics..."),
-         QT_TRANSLATE_NOOP("action","Show dynamics palette")
-         ),
-      Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY,
-         0,
          "note-input",
          QT_TRANSLATE_NOOP("action","Note input mode"),
          Qt::Key_N,
@@ -1874,16 +1822,6 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
-         0,
-         "fingering",
-         QT_TRANSLATE_NOOP("action","Fingering palette"),
-         0,
-         Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Fingering..."),
-         QT_TRANSLATE_NOOP("action","Fingering palette")
-         ),
-      Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY,
          A_CMD,
          "tempo",
          QT_TRANSLATE_NOOP("action","Tempo"),
@@ -2946,6 +2884,16 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Transpose Down"),
          QT_TRANSLATE_NOOP("action","Transpose Down")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
+         "masterpalette",
+         QT_TRANSLATE_NOOP("action","Show master palette"),
+         Qt::SHIFT + Qt::Key_F9,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Master Palette..."),
+         QT_TRANSLATE_NOOP("action","Show master palette")
          ),
 
       // xml==0  marks end of list
