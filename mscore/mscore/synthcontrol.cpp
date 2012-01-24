@@ -95,7 +95,7 @@ SynthControl::SynthControl(QWidget* parent)
       soundFontDown->setEnabled(false);
       soundFontDelete->setEnabled(false);
       soundFontAdd->setEnabled(true);
-      
+
       connect(gain,            SIGNAL(valueChanged(double,int)), SLOT(gainChanged(double,int)));
       connect(masterTuning,    SIGNAL(valueChanged(double)),     SLOT(masterTuningChanged(double)));
 
@@ -189,7 +189,7 @@ void SynthControl::setGain(float val)
 
 void SynthControl::closeEvent(QCloseEvent* ev)
       {
-      emit closed();
+      emit closed(false);
       QWidget::closeEvent(ev);
       }
 
@@ -197,12 +197,14 @@ void SynthControl::closeEvent(QCloseEvent* ev)
 //   showSynthControl
 //---------------------------------------------------------
 
-void MuseScore::showSynthControl(bool val)
+void MuseScore::showSynthControl()
       {
+      QAction* a = getAction("synth-control");
+
       if (synthControl == 0) {
             synthControl = new SynthControl(this);
             synthControl->setScore(cs);
-            connect(synthControl, SIGNAL(closed()), SLOT(closeSynthControl()));
+            connect(synthControl, SIGNAL(closed(bool)), a, SLOT(setChecked(bool)));
             connect(seq, SIGNAL(gainChanged(float)), synthControl, SLOT(setGain(float)));
             connect(synthControl, SIGNAL(gainChanged(float)), seq, SLOT(setGain(float)));
 
@@ -211,16 +213,7 @@ void MuseScore::showSynthControl(bool val)
                      SLOT(patchListChanged()));
                   }
             }
-      synthControl->setShown(val);
-      }
-
-//---------------------------------------------------------
-//   closeSynthControl
-//---------------------------------------------------------
-
-void MuseScore::closeSynthControl()
-      {
-      getAction("synth-control")->setChecked(false);
+      synthControl->setShown(a->isChecked());
       }
 
 //---------------------------------------------------------
@@ -303,10 +296,10 @@ void SynthControl::sfAddClicked()
                                     }
                               }
                         }
-                  ++it;      
+                  ++it;
                   }
             }
-      updateUpDownButtons();      
+      updateUpDownButtons();
       }
 
 //---------------------------------------------------------

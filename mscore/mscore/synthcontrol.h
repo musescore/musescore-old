@@ -61,7 +61,7 @@ class SynthControl : public QWidget, Ui::SynthControl {
       void chorusTypeChanged(int val);
 
    signals:
-      void closed();
+      void closed(bool);
       void gainChanged(float);
       void soundFontChanged();
 

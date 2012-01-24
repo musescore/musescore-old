@@ -354,6 +354,7 @@ MuseScore::MuseScore()
       preferenceDialog      = 0;
       measuresDialog        = 0;
       insertMeasuresDialog  = 0;
+      masterPalette         = 0;
       iledit                = 0;
       synthControl          = 0;
       debugger              = 0;
@@ -362,16 +363,7 @@ MuseScore::MuseScore()
       clefPalette           = 0;
       keyPalette            = 0;
       keyEditor             = 0;
-      timePalette           = 0;
-      barPalette            = 0;
-      fingeringPalette      = 0;
-      linePalette           = 0;
-      bracketPalette        = 0;
-      dynamicsPalette       = 0;
       pageSettings          = 0;
-      noteAttributesPalette = 0;
-      accidentalsPalette    = 0;
-      layoutBreakPalette    = 0;
       paletteBox            = 0;
       inspector             = 0;
       omrPanel              = 0;
@@ -856,6 +848,10 @@ MuseScore::MuseScore()
       menuDisplay->setObjectName("Display");
 
       a = getAction("toggle-palette");
+      a->setCheckable(true);
+      menuDisplay->addAction(a);
+
+      a = getAction("masterpalette");
       a->setCheckable(true);
       menuDisplay->addAction(a);
 
@@ -2626,8 +2622,6 @@ void MuseScore::writeSettings()
 //            }
       settings.endGroup();
       profile->save();
-      if (timePalette && timePalette->dirty())
-            timePalette->save();
       if (keyEditor && keyEditor->dirty())
             keyEditor->save();
       if (chordStyleEditor)
@@ -4069,16 +4063,8 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             seq->rewindStart();
       else if (cmd == "seek-end")
             seq->seekEnd();
-      else if (cmd == "clefs")
-            clefMenu();
       else if (cmd == "keys")
             showKeyEditor();
-      else if (cmd == "symbols")
-            symbolMenu();
-      else if (cmd == "times")
-            timeMenu();
-      else if (cmd == "dynamics")
-            dynamicsMenu();
       else if (cmd == "file-open")
             loadFiles();
       else if (cmd == "file-save")
@@ -4116,8 +4102,8 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
       else if (cmd == "quit") {
             close();
             }
-      else if (cmd == "fingering")
-            fingeringMenu();
+      else if (cmd == "masterpalette")
+            showMasterPalette();
       else if (cmd == "toggle-statusbar") {
             preferences.showStatusBar = a->isChecked();
             _statusBar->setShown(preferences.showStatusBar);
@@ -4170,7 +4156,7 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
       else if (cmd == "toggle-mixer")
             showMixer(a->isChecked());
       else if (cmd == "synth-control")
-            showSynthControl(a->isChecked());
+            showSynthControl();
       else if (cmd == "show-keys")
             ;
       else if (cmd == "toggle-transport")

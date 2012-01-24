@@ -1,4 +1,5 @@
 24.1 (ws)
+      - moved several floating palettes into "Master Palette"
       - removed "Breaks&Spacer" from Layout menu
 23.1 (ws)
       - new iteration of property system
