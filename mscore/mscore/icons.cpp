@@ -116,6 +116,11 @@ static const char* iconNames[] = {
       "format_indent_less.svgz",
       "community.svg",
       "metronome.svg",
+      "vframe.svg",
+      "hframe.svg",
+      "tframe.svg",
+      "fframe.svg",
+      "measure.svg",
       };
 
 void genIcons()

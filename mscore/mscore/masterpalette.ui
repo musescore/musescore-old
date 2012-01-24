@@ -124,6 +124,11 @@
      </item>
      <item>
       <property name="text">
+       <string>Frames &amp; Measures</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
        <string>Symbols</string>
       </property>
      </item>

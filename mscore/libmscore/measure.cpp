@@ -76,6 +76,7 @@
 #include "spannermap.h"
 #include "accidental.h"
 #include "layout.h"
+#include "icon.h"
 
 //---------------------------------------------------------
 //   propertyList
@@ -1383,6 +1384,17 @@ bool Measure::acceptDrop(MuseScoreView* viewer, const QPointF& p, Element* e) co
                         }
                   }
                   return false;
+            case ICON:
+                  switch(static_cast<Icon*>(e)->subtype()) {
+                        case ICON_VFRAME:
+                        case ICON_HFRAME:
+                        case ICON_TFRAME:
+                        case ICON_FFRAME:
+                        case ICON_MEASURE:
+                              viewer->setDropRectangle(rr);
+                              return true;
+                        }
+                  break;
 
             case KEYSIG:
             case TIMESIG:
@@ -1399,8 +1411,9 @@ bool Measure::acceptDrop(MuseScoreView* viewer, const QPointF& p, Element* e) co
                   // fall through if no chordrest segment found
 
             default:
-                  return false;
+                  break;
             }
+      return false;
       }
 
 //---------------------------------------------------------
@@ -1582,6 +1595,26 @@ qDebug("drop staffList");
                         }
                   _score->select(rm, SELECT_SINGLE, 0);
                   }
+                  break;
+
+            case ICON:
+                  switch(static_cast<Icon*>(e)->subtype()) {
+                        case ICON_VFRAME:
+                              score()->insertMeasure(VBOX, this);
+                              break;
+                        case ICON_HFRAME:
+                              score()->insertMeasure(HBOX, this);
+                              break;
+                        case ICON_TFRAME:
+                              score()->insertMeasure(TBOX, this);
+                              break;
+                        case ICON_FFRAME:
+                              score()->insertMeasure(FBOX, this);
+                              break;
+                        case ICON_MEASURE:
+                              score()->insertMeasure(MEASURE, this);
+                              break;
+                        }
                   break;
 
             default:
