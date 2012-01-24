@@ -198,8 +198,8 @@ void ChordRest::writeProperties(Xml& xml) const
       Fraction t(globalDuration());
       if (staff())
             t *= staff()->timeStretch(xml.curTick);
-      if (type() == CHORD && static_cast<const Chord*>(this)->noteType() != NOTE_NORMAL)
-            return;
+//OPTIMIZE      if (type() == CHORD && static_cast<const Chord*>(this)->noteType() != NOTE_NORMAL)
+//            return;
       xml.curTick += t.ticks();
       }
 

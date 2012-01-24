@@ -22,7 +22,7 @@
 static LayoutBreakType defaultLayoutBreak = LAYOUT_BREAK_PAGE;
 
 Property<LayoutBreak> LayoutBreak::propertyList[] = {
-      { P_LAYOUT_BREAK, &LayoutBreak::pSubtype,   &defaultLayoutBreak },
+      { P_LAYOUT_BREAK, &LayoutBreak::pSubtype,   0       }, // &defaultLayoutBreak },
       { P_PAUSE,        &LayoutBreak::pPause,     0       },
       { P_END, 0, 0 }
       };

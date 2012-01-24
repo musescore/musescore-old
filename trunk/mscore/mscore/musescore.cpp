@@ -832,7 +832,7 @@ MuseScore::MuseScore()
 
       menuLayout->addAction(getAction("reset-stretch"));
       menuLayout->addAction(getAction("reset-beammode"));
-      menuLayout->addAction(tr("Breaks && Spacer..."), this, SLOT(showLayoutBreakPalette()));
+//      menuLayout->addAction(tr("Breaks && Spacer..."), this, SLOT(showLayoutBreakPalette()));
 
       //---------------------
       //    Menu Style
