@@ -41,7 +41,7 @@ void Fingering::layout()
 
 void Fingering::write(Xml& xml) const
       {
-      xml.stag(QString("%1").arg(name()));
+      xml.stag(name());
       Text::writeProperties(xml);
       xml.etag();
       }

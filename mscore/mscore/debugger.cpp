@@ -544,6 +544,7 @@ void Debugger::updateElement(Element* el)
                   case SLUR_SEGMENT:  ew = new SlurSegmentView;   break;
                   case ACCIDENTAL:    ew = new AccidentalView;    break;
                   case ARTICULATION:  ew = new ArticulationView;  break;
+                  case FINGERING:
                   case MARKER:
                   case JUMP:
                   case TEXT:
@@ -1360,6 +1361,7 @@ void TextView::setElement(Element* e)
       tb.ryoffset->setValue(te->reloff().y());
       tb.offsetType->setCurrentIndex(int(te->offsetType()));
       tb.textStyle->setCurrentIndex(te->textStyle());
+      tb.styled->setChecked(te->styled());
       }
 
 //---------------------------------------------------------
