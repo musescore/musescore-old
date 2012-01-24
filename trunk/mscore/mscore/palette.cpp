@@ -376,6 +376,7 @@ void Palette::leaveEvent(QEvent*)
 
 void Palette::append(Element* s, const QString& name, QString tag, qreal mag)
       {
+      s->layout();
       PaletteCell* cell = new PaletteCell;
 
       cells.append(cell);

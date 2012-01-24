@@ -111,6 +111,13 @@
          <widget class="QComboBox" name="textStyle"/>
         </item>
         <item>
+         <widget class="QCheckBox" name="styled">
+          <property name="text">
+           <string>styled</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <spacer>
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -175,11 +182,6 @@
        </widget>
       </item>
      </layout>
-     <zorder>label</zorder>
-     <zorder>text</zorder>
-     <zorder>label_3</zorder>
-     <zorder>label_4</zorder>
-     <zorder>label_5</zorder>
     </widget>
    </item>
   </layout>

@@ -350,6 +350,36 @@ Palette* MuseScore::newBreaksPalette()
       }
 
 //---------------------------------------------------------
+//   newFingeringPalette
+//---------------------------------------------------------
+
+Palette* MuseScore::newFingeringPalette()
+      {
+      Palette* sp = new Palette;
+      sp->setName(tr("Fingering"));
+      sp->setMag(1.5);
+      sp->setGrid(28, 30);
+      sp->setDrawGrid(true);
+
+      const char finger[] = "012345pimac";
+      for (unsigned i = 0; i < strlen(finger); ++i) {
+            Fingering* f = new Fingering(gscore);
+            f->setText(QString(finger[i]));
+            sp->append(f, tr("Fingering %1").arg(finger[i]));
+            }
+      const char stringnumber[] = "0123456";
+      for (unsigned i = 0; i < strlen(stringnumber); ++i) {
+            Fingering* f = new Fingering(gscore);
+            f->setTextStyle(TEXT_STYLE_STRING_NUMBER);
+            f->setText(QString(stringnumber[i]));
+            sp->append(f, tr("String number %1").arg(stringnumber[i]));
+            }
+      Symbol* symbol = new Symbol(gscore, thumbSym);
+      sp->append(symbol, tr("Thumb"));
+      return sp;
+      }
+
+//---------------------------------------------------------
 //   newLinesPalette
 //---------------------------------------------------------
 
@@ -759,28 +789,7 @@ void MuseScore::populatePalette()
       //    Fingering
       //-----------------------------------
 
-      sp = new Palette;
-      sp->setName(tr("Fingering"));
-      sp->setMag(1.5);
-      sp->setGrid(28, 30);
-      sp->setDrawGrid(true);
-
-      const char finger[] = "012345pimac";
-      for (unsigned i = 0; i < strlen(finger); ++i) {
-            Fingering* f = new Fingering(gscore);
-            f->setText(QString(finger[i]));
-            sp->append(f, tr("Fingering %1").arg(finger[i]));
-            }
-      const char stringnumber[] = "0123456";
-      for (unsigned i = 0; i < strlen(stringnumber); ++i) {
-            Fingering* f = new Fingering(gscore);
-            f->setTextStyle(TEXT_STYLE_STRING_NUMBER);
-            f->setText(QString(stringnumber[i]));
-            sp->append(f, tr("String number %1").arg(stringnumber[i]));
-            }
-      Symbol* symbol = new Symbol(gscore, thumbSym);
-      sp->append(symbol, tr("Thumb"));
-
+      sp = newFingeringPalette();
       paletteBox->addPalette(sp);
 
       //-----------------------------------

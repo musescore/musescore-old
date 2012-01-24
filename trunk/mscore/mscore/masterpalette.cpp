@@ -202,20 +202,9 @@ MasterPalette::MasterPalette(QWidget* parent)
       //
       //   Fingering
       //
-      sp = createPalette(28, 30, true, 1.5);
-      const char finger[] = "012345pimac";
-      for (unsigned i = 0; i < strlen(finger); ++i) {
-            Fingering* f = new Fingering(gscore);
-            f->setText(QString(finger[i]));
-            sp->append(f, tr("Fingering %1").arg(finger[i]));
-            }
-      const char stringnumber[] = "0123456";
-      for (unsigned i = 0; i < strlen(stringnumber); ++i) {
-            Fingering* f = new Fingering(gscore);
-            f->setTextStyle(TEXT_STYLE_STRING_NUMBER);
-            f->setText(QString(stringnumber[i]));
-            sp->append(f, tr("String number %1").arg(stringnumber[i]));
-            }
+      psa = new PaletteScrollArea(MuseScore::newFingeringPalette());
+      psa->setRestrictHeight(false);
+      stack->addWidget(psa);
 
       //-----------------------------------
       //    Noteheads
