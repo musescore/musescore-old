@@ -30,6 +30,7 @@
 TBox::TBox(Score* score)
    : VBox(score)
       {
+      setBoxHeight(Spatium(0));
       Text* s = new Text(score);
       s->setTextStyle(TEXT_STYLE_FRAME);
       add(s);
