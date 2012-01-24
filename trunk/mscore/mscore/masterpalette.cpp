@@ -301,6 +301,14 @@ MasterPalette::MasterPalette(QWidget* parent)
       psa->setRestrictHeight(false);
       stack->addWidget(psa);
 
+      //-----------------------------------
+      //    frames
+      //-----------------------------------
+
+      psa = new PaletteScrollArea(MuseScore::newFramePalette());
+      psa->setRestrictHeight(false);
+      stack->addWidget(psa);
+
       //
       //   Symbols
       //

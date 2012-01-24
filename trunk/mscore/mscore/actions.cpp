@@ -2895,7 +2895,61 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Master Palette..."),
          QT_TRANSLATE_NOOP("action","Show master palette")
          ),
-
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
+         "vframe",
+         QT_TRANSLATE_NOOP("action","Insert vertical frame"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Insert Vertical Frame"),
+         QT_TRANSLATE_NOOP("action","Insert Vertical Frame"),
+         vframe_ICON
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
+         "hframe",
+         QT_TRANSLATE_NOOP("action","Insert horizontal frame"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Insert Horizontal Frame"),
+         QT_TRANSLATE_NOOP("action","Insert Horizontal Frame"),
+         hframe_ICON
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
+         "tframe",
+         QT_TRANSLATE_NOOP("action","Insert text frame"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Insert Text Frame"),
+         QT_TRANSLATE_NOOP("action","Insert Text Frame"),
+         tframe_ICON
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
+         "fframe",
+         QT_TRANSLATE_NOOP("action","Insert fret diagram frame"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Insert Fret Diagram Frame"),
+         QT_TRANSLATE_NOOP("action","Insert Fret Diagram Frame"),
+         fframe_ICON
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
+         "measure",
+         QT_TRANSLATE_NOOP("action","Insert measure"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Insert Measure"),
+         QT_TRANSLATE_NOOP("action","Insert Measure"),
+         measure_ICON
+         ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, 0, QKeySequence::UnknownKey)
       };

@@ -119,6 +119,29 @@ Palette* MuseScore::newBeamPalette()
       }
 
 //---------------------------------------------------------
+//   newFramePalette
+//---------------------------------------------------------
+
+Palette* MuseScore::newFramePalette()
+      {
+      Palette* sp = new Palette;
+      sp->setName(tr("Frames"));
+      sp->setGrid(27, 40);
+      sp->setDrawGrid(true);
+
+      static const IconAction bpa[] = {
+            { ICON_VFRAME,   "vframe" },
+            { ICON_HFRAME,   "hframe" },
+            { ICON_TFRAME,   "tframe" },
+            { ICON_FFRAME,   "fframe" },
+            { ICON_MEASURE,  "measure" },
+            { -1, ""}
+            };
+      populateIconPalette(sp, bpa);
+      return sp;
+      }
+
+//---------------------------------------------------------
 //   newDynamicsPalette
 //---------------------------------------------------------
 
@@ -885,6 +908,13 @@ void MuseScore::populatePalette()
       //-----------------------------------
 
       sp = newBeamPalette();
+      paletteBox->addPalette(sp);
+
+      //-----------------------------------
+      //    frames
+      //-----------------------------------
+
+      sp = newFramePalette();
       paletteBox->addPalette(sp);
 
       //-----------------------------------

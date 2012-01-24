@@ -167,6 +167,11 @@
       <file>data/icons/community.svg</file>
       <file>data/icons/metronome.svg</file>
       <file>data/icons/resetproperty.png</file>
+      <file>data/icons/vframe.svg</file>
+      <file>data/icons/hframe.svg</file>
+      <file>data/icons/tframe.svg</file>
+      <file>data/icons/fframe.svg</file>
+      <file>data/icons/measure.svg</file>
       <file>data/webview.css</file>
 
       <file>data/icons-dark/minus.svg</file>
@@ -288,5 +293,10 @@
       <file>data/icons-dark/community.svg</file>
       <file>data/icons-dark/metronome.svg</file>
       <file>data/icons-dark/resetproperty.png</file>
+      <file>data/icons-dark/vframe.svg</file>
+      <file>data/icons-dark/hframe.svg</file>
+      <file>data/icons-dark/tframe.svg</file>
+      <file>data/icons-dark/fframe.svg</file>
+      <file>data/icons-dark/measure.svg</file>
    </qresource>
 </RCC>
