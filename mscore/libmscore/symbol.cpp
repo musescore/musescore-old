@@ -303,14 +303,12 @@ void Symbol::read(const QDomElement& de)
 //   dragAnchor
 //---------------------------------------------------------
 
-QLineF Symbol::dragAnchor() const
+QLineF BSymbol::dragAnchor() const
       {
-      if (parent()->type() == MEASURE) {
-            Segment* seg     = segment();
-            Measure* measure = seg->measure();
-            System* s        = measure->system();
-            qreal y          = measure->canvasPos().y() + s->staff(staffIdx())->y();
-            QPointF anchor(seg->abbox().x(), y);
+      if (parent() && parent()->type() == SEGMENT) {
+            System* system = segment()->measure()->system();
+            qreal y        = system->staff(staffIdx())->y() + system->y();
+            QPointF anchor(segment()->pageX(), y);
             return QLineF(canvasPos(), anchor);
             }
       else {
@@ -325,13 +323,41 @@ QLineF Symbol::dragAnchor() const
 QPointF BSymbol::pagePos() const
       {
       if (parent() && (parent()->type() == SEGMENT)) {
-            qreal yp = y();
-            Segment* s = static_cast<Segment*>(parent());
-            yp += s->measure()->system()->staffY(staffIdx());
-            return QPointF(pageX(), yp);
+            QPointF p(pos());
+            System* system = segment()->measure()->system();
+            if (system) {
+                  p.ry() += system->staff(staffIdx())->y() + system->y();
+                  }
+            p.rx() = pageX();
+            return p;
             }
       else
             return Element::pagePos();
+      }
+
+//---------------------------------------------------------
+//   canvasPos
+//---------------------------------------------------------
+
+QPointF BSymbol::canvasPos() const
+      {
+      if (parent() && (parent()->type() == SEGMENT)) {
+            QPointF p(pos());
+            Segment* s = static_cast<Segment*>(parent());
+
+            System* system = s->measure()->system();
+            if (system) {
+                  int si = staffIdx();
+                  p.ry() += system->staff(si)->y() + system->y();
+                  Page* page = system->page();
+                  if (page)
+                        p.ry() += page->y();
+                  }
+            p.rx() = canvasX();
+            return p;
+            }
+      else
+            return Element::canvasPos();
       }
 
 //---------------------------------------------------------

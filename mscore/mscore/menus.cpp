@@ -783,7 +783,7 @@ Palette* MuseScore::newTextPalette()
       RehearsalMark* rhm = new RehearsalMark(gscore);
       rhm->setTrack(0);
       rhm->setText("B1");
-      sp->append(rhm, tr("RRehearsal Mark"));
+      sp->append(rhm, tr("Rehearsal Mark"));
 
       InstrumentChange* is = new InstrumentChange(gscore);
       is->setText(tr("Instrument"));
