@@ -146,6 +146,7 @@ void Marker::layout()
       Text::layout();
       }
 
+#if 0
 //---------------------------------------------------------
 //   pagePos
 //---------------------------------------------------------
@@ -156,6 +157,7 @@ QPointF Marker::pagePos() const
             return measure()->pagePos() + pos();
       return pos();
       }
+#endif
 
 //---------------------------------------------------------
 //   markerType
@@ -230,6 +232,7 @@ void Marker::write(Xml& xml) const
       xml.etag();
       }
 
+#if 0
 //---------------------------------------------------------
 //   dragAnchor
 //---------------------------------------------------------
@@ -238,6 +241,7 @@ QLineF Marker::dragAnchor() const
       {
       return QLineF(measure()->pagePos(), pagePos());
       }
+#endif
 
 //---------------------------------------------------------
 //   Jump
