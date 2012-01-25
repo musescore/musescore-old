@@ -598,6 +598,19 @@ class MuseScore : public QMainWindow {
       static Palette* newDynamicsPalette();
       static Palette* newFramePalette();
       static Palette* newFingeringPalette();
+      static Palette* newFallDoitPalette();
+      static Palette* newTremoloPalette();
+      static Palette* newNoteHeadsPalette();
+      static Palette* newArticulationsPalette();
+      static Palette* newBracketsPalette();
+      static Palette* newBreathPalette();
+      static Palette* newArpeggioPalette();
+      static Palette* newClefsPalette();
+      static Palette* newGraceNotePalette();
+      static Palette* newKeySigPalette();
+      static Palette* newAccidentalsPalette();
+      static Palette* newBarLinePalette();
+      static Palette* newLinesPalette();
       };
 
 extern MuseScore* mscore;

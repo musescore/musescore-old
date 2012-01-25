@@ -78,7 +78,7 @@ Palette::Palette(QWidget* parent)
       setSizePolicy(policy);
       setSizeIncrement(QSize(hgrid, vgrid));
       setBaseSize(QSize(hgrid, vgrid));
-      setReadOnly(true);
+      setReadOnly(false);
       }
 
 Palette::~Palette()
@@ -103,8 +103,8 @@ void Palette::setReadOnly(bool val)
 
 void Palette::contextMenuEvent(QContextMenuEvent* event)
       {
-//      if (_readOnly)
-//            return;
+      if (_readOnly)
+            return;
       int i = idx(event->pos());
       if (i == -1)
             return;
@@ -279,11 +279,14 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
 
 int Palette::idx(const QPoint& p) const
       {
+      int rightBorder = width() - columns() * hgrid;
+      int hhgrid = hgrid + (rightBorder / columns());
+
       int x = p.x();
       int y = p.y();
 
       int row = y / vgrid;
-      int col = x / hgrid;
+      int col = x / hhgrid;
 
       int nc = columns();
       if (col > nc)
@@ -305,9 +308,11 @@ QRect Palette::idxRect(int i)
             return QRect();
       if (columns() == 0)
             return QRect();
+      int rightBorder = width() - columns() * hgrid;
+      int hhgrid = hgrid + (rightBorder / columns());
       int cc = i % columns();
       int cr = i / columns();
-      return QRect(cc * hgrid, cr * vgrid, hgrid, vgrid);
+      return QRect(cc * hhgrid, cr * vgrid, hhgrid, vgrid);
       }
 
 //---------------------------------------------------------
@@ -460,18 +465,25 @@ void Palette::paintEvent(QPaintEvent* event)
 
       QPainter p(this);
       p.setRenderHint(QPainter::Antialiasing, true);
+      p.fillRect(event->rect(), p.background().color());
 
       //
       // draw grid
       //
+      int rightBorder = width() - columns() * hgrid;
+      int hhgrid = hgrid + (rightBorder / columns());
 
-      int c = columns();
       if (_drawGrid) {
             p.setPen(Qt::gray);
-            for (int row = 1; row < rows(); ++row)
-                  p.drawLine(0, row*vgrid, c * hgrid, row*vgrid);
-            for (int column = 1; column < c; ++column)
-                  p.drawLine(hgrid*column, 0, hgrid*column, rows()*vgrid);
+            for (int row = 1; row < rows(); ++row) {
+                  int x2 = row < rows()-1 ? columns() * hhgrid : width();
+                  int y  = row * vgrid;
+                  p.drawLine(0, y, x2, y);
+                  }
+            for (int column = 1; column < columns(); ++column) {
+                  int x = hhgrid * column;
+                  p.drawLine(x, 0, x, rows() * vgrid);
+                  }
             }
 
       qreal dy = lrint(2 * PALETTE_SPATIUM * extraMag);
@@ -483,7 +495,6 @@ void Palette::paintEvent(QPaintEvent* event)
       QPen pen(palette().color(QPalette::Normal, QPalette::Text));
       pen.setWidthF(MScore::defaultStyle()->valueS(ST_staffLineWidth).val() * PALETTE_SPATIUM * extraMag);
 
-      p.fillRect(event->rect(), p.background().color());
       for (int idx = 0; idx < cells.size(); ++idx) {
             QRect r = idxRect(idx);
             p.setPen(pen);
@@ -509,8 +520,8 @@ void Palette::paintEvent(QPaintEvent* event)
                   continue;
             bool drawStaff = cells[idx]->drawStaff;
             if (el->type() != ICON) {
-                  int row    = idx / c;
-                  int column = idx % c;
+                  int row    = idx / columns();
+                  int column = idx % columns();
 
                   el->layout();
                   el->setPos(0.0, 0.0);   // HACK
@@ -518,7 +529,7 @@ void Palette::paintEvent(QPaintEvent* event)
                   if (drawStaff) {
                         qreal y = r.y() + vgrid * .5 - dy + _yOffset;
                         qreal x = r.x() + 3;
-                        qreal w = hgrid - 6;
+                        qreal w = hhgrid - 6;
                         for (int i = 0; i < 5; ++i) {
                               qreal yy = y + PALETTE_SPATIUM * i * extraMag;
                               p.drawLine(QLineF(x, yy, x + w, yy));
@@ -528,7 +539,7 @@ void Palette::paintEvent(QPaintEvent* event)
                   qreal cellMag = cells[idx]->mag * mag;
                   p.scale(cellMag, cellMag);
 
-                  double gw = hgrid / cellMag;
+                  double gw = hhgrid / cellMag;
                   double gh = vgrid / cellMag;
                   double gx = column * gw + cells[idx]->xoffset / cellMag;
                   double gy = row    * gh + cells[idx]->yoffset / cellMag;
@@ -573,9 +584,9 @@ void Palette::paintEvent(QPaintEvent* event)
                   Icon* _icon = static_cast<Icon*>(el);
                   QIcon icon = _icon->icon();
                   static const int border = 2;
-                  int size   = (hgrid < vgrid ? hgrid : vgrid) - 2 * border;
+                  int size   = (hhgrid < vgrid ? hhgrid : vgrid) - 2 * border;
                   QPixmap pm(icon.pixmap(size, QIcon::Normal, QIcon::On));
-                  p.drawPixmap(x + (hgrid - size) / 2, y + (vgrid - size) / 2, pm);
+                  p.drawPixmap(x + (hhgrid - size) / 2, y + (vgrid - size) / 2, pm);
                   }
             }
       }
@@ -586,13 +597,16 @@ void Palette::paintEvent(QPaintEvent* event)
 
 bool Palette::event(QEvent* ev)
       {
+      int rightBorder = width() - columns() * hgrid;
+      int hhgrid = hgrid + (rightBorder / columns());
+
       if (ev->type() == QEvent::ToolTip) {
             QHelpEvent* he = (QHelpEvent*)ev;
             int x = he->pos().x();
             int y = he->pos().y();
 
             int row = y / vgrid;
-            int col = x / hgrid;
+            int col = x / hhgrid;
 
             if (row < 0 || row >= rows())
                   return false;
@@ -682,6 +696,9 @@ void Palette::dropEvent(QDropEvent* event)
       Element* e = 0;
       QString name;
 
+      int rightBorder = width() - columns() * hgrid;
+      int hhgrid = hgrid + (rightBorder / columns());
+
       const QMimeData* data = event->mimeData();
       if (data->hasUrls()) {
             QList<QUrl>ul = event->mimeData()->urls();
@@ -702,7 +719,7 @@ void Palette::dropEvent(QDropEvent* event)
                         return;
                   qreal mag = PALETTE_SPATIUM * extraMag / gscore->spatium();
                   s->setPath(u.toLocalFile());
-                  s->setSize(QSizeF(hgrid / mag, hgrid / mag));
+                  s->setSize(QSizeF(hhgrid / mag, hhgrid / mag));
                   e = s;
                   name = s->path();
                   }

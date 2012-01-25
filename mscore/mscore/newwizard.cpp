@@ -712,7 +712,7 @@ NewWizardPage5::NewWizardPage5(QWidget* parent)
 
       QGroupBox* b1 = new QGroupBox;
       b1->setTitle(tr("Key Signature"));
-      sp = newKeySigPalette();
+      sp = MuseScore::newKeySigPalette();
       sp->setSelectable(true);
       sp->setSelected(14);
       PaletteScrollArea* sa = new PaletteScrollArea(sp);
