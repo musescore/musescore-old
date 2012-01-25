@@ -468,8 +468,7 @@ void Score::cmdAddInterval(int val, const QList<Note*>& nl)
 
 void Score::setGraceNote(Chord* ch, int pitch, NoteType type, bool behind, int len)
       {
-      Measure* measure = ch->measure();
-      Note* note       = new Note(this);
+      Note* note = new Note(this);
       note->setPitch(pitch);
 
       Chord* chord = new Chord(this);

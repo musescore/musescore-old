@@ -1,3 +1,6 @@
+25.1 (ws)
+      - patch #14598: Staff text for other (non-first) staves is placed
+        relatively to first stave (patch from miwarre)
 24.1 (ws)
       - added "Frames & Measures" palette
       - moved several floating palettes into "Master Palette"
