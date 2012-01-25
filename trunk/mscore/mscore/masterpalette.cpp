@@ -69,8 +69,21 @@ Palette* MasterPalette::createPalette(int w, int h, bool grid, double mag)
       sp->setMag(mag);
       sp->setGrid(w, h);
       sp->setDrawGrid(grid);
+      sp->setReadOnly(true);
       stack->addWidget(psa);
       return sp;
+      }
+
+//---------------------------------------------------------
+//   addPalette
+//---------------------------------------------------------
+
+void MasterPalette::addPalette(Palette* sp)
+      {
+      sp->setReadOnly(true);
+      PaletteScrollArea* psa = new PaletteScrollArea(sp);
+      psa->setRestrictHeight(false);
+      stack->addWidget(psa);
       }
 
 //---------------------------------------------------------
@@ -81,226 +94,31 @@ MasterPalette::MasterPalette(QWidget* parent)
    : QWidget(parent)
       {
       setupUi(this);
-      double _spatium = gscore->spatium();
 
-      //
-      //   Grace notes
-      //
-      Palette* sp = createPalette(32, 40, true);
-      static const IconAction gna[] = {
-            { ICON_ACCIACCATURA, "acciaccatura" },
-            { ICON_APPOGGIATURA, "appoggiatura" },
-            { ICON_GRACE4,       "grace4" },
-            { ICON_GRACE16,      "grace16" },
-            { ICON_GRACE32,      "grace32" },
-            { ICON_GRACE8B,      "grace8b" },
-            { -1, "" }
-            };
-      populateIconPalette(sp, gna);
+      addPalette(MuseScore::newGraceNotePalette());
+      addPalette(MuseScore::newClefsPalette());
+      addPalette(MuseScore::newKeySigPalette());
 
-      //
-      //   Clefs
-      //
-      sp = createPalette(60, 80, false);
-      for (int i = 0; i < CLEF_MAX; ++i) {
-            Clef* k = new ::Clef(gscore);
-            k->setClefType(ClefType(i));
-            sp->append(k, qApp->translate("clefTable", clefTable[i].name));
-            }
-
-      //
-      //   KeySigs
-      //
-      stack->addWidget(newKeySigPalette());
-
-      //
-      //   TimeSig
-      //
       stack->addWidget(new TimeDialog);
 
-      //
-      //   BarLines
-      //
-      PaletteScrollArea* psa = new PaletteScrollArea(newBarLinePalette());
-      psa->setRestrictHeight(false);
-      stack->addWidget(psa);
+      addPalette(MuseScore::newBarLinePalette());
+      addPalette(MuseScore::newKeySigPalette());
+      addPalette(MuseScore::newArpeggioPalette());
+      addPalette(MuseScore::newBreathPalette());
+      addPalette(MuseScore::newBracketsPalette());
+      addPalette(MuseScore::newArticulationsPalette());
+      addPalette(MuseScore::newAccidentalsPalette());
+      addPalette(MuseScore::newDynamicsPalette());
+      addPalette(MuseScore::newFingeringPalette());
+      addPalette(MuseScore::newNoteHeadsPalette());
+      addPalette(MuseScore::newTremoloPalette());
+      addPalette(MuseScore::newFallDoitPalette());
+      addPalette(MuseScore::newRepeatsPalette());
+      addPalette(MuseScore::newTextPalette());
+      addPalette(MuseScore::newBreaksPalette());
+      addPalette(MuseScore::newBeamPalette());
+      addPalette(MuseScore::newFramePalette());
 
-      //
-      //   Lines
-      //
-      psa = new PaletteScrollArea(newLinesPalette());
-      psa->setRestrictHeight(false);
-      stack->addWidget(psa);
-
-      //
-      //    Arpeggio && Glissando
-      //
-
-      sp = createPalette(27, 60, false);
-      for (int i = 0; i < 4; ++i) {
-            Arpeggio* a = new Arpeggio(gscore);
-            a->setSubtype(ArpeggioType(i));
-            sp->append(a, tr("Arpeggio"));
-            }
-      for (int i = 0; i < 2; ++i) {
-            Glissando* a = new Glissando(gscore);
-            a->setSubtype(i);
-            sp->append(a, tr("Glissando"));
-            }
-
-      //
-      //    Symbols: Breath
-      //
-
-      sp = createPalette(42, 40, false);
-      for (int i = 0; i < 4; ++i) {
-            Breath* a = new Breath(gscore);
-            a->setSubtype(i);
-            if (i < 2)
-                  sp->append(a, tr("Breath"));
-            else
-                  sp->append(a, tr("Caesura"));
-            }
-
-      //
-      //   Brackets
-      //
-      sp = createPalette(40, 80, true);
-      Bracket* b1 = new Bracket(gscore);
-      b1->setSubtype(BRACKET_NORMAL);
-      Bracket* b2 = new Bracket(gscore);
-      b2->setSubtype(BRACKET_AKKOLADE);
-      b1->setHeight(_spatium * 7);
-      b2->setHeight(_spatium * 7);
-      sp->append(b1, tr("Bracket"));
-      sp->append(b2, tr("Akkolade"));
-
-      //
-      //   Articulation
-      //
-      sp = createPalette(42, 30, true);
-      for (unsigned i = 0; i < ARTICULATIONS; ++i) {
-            Articulation* s = new Articulation(gscore);
-            s->setSubtype(ArticulationType(i));
-            sp->append(s, qApp->translate("articulation", qPrintable(s->subtypeName())));
-            }
-
-      //
-      //   Accidentals
-      //
-      psa = new PaletteScrollArea(newAccidentalsPalette());
-      psa->setRestrictHeight(false);
-      stack->addWidget(psa);
-
-      //
-      //   Dynamics
-      //
-      psa = new PaletteScrollArea(MuseScore::newDynamicsPalette());
-      psa->setRestrictHeight(false);
-      stack->addWidget(psa);
-
-      //
-      //   Fingering
-      //
-      psa = new PaletteScrollArea(MuseScore::newFingeringPalette());
-      psa->setRestrictHeight(false);
-      stack->addWidget(psa);
-
-      //-----------------------------------
-      //    Noteheads
-      //-----------------------------------
-
-      sp = createPalette(33, 36, true, 1.3);
-      for (int i = 0; i < HEAD_GROUPS; ++i) {
-            int sym = noteHeads[0][i][1];
-            if (i == HEAD_BREVIS_ALT)
-                  sym = noteHeads[0][i][3];
-            NoteHead* nh = new NoteHead(gscore);
-            nh->setSym(sym);
-            sp->append(nh, qApp->translate("symbol", symbols[0][sym].name()));
-            }
-
-      //-----------------------------------
-      //    Tremolo
-      //-----------------------------------
-
-      sp = createPalette(27, 40, true);
-      const char* tremoloName[] = {
-            QT_TR_NOOP("1/8 through stem"),
-            QT_TR_NOOP("1/16 through stem"),
-            QT_TR_NOOP("1/32 through stem"),
-            QT_TR_NOOP("1/64 through stem"),
-            QT_TR_NOOP("1/8 between notes"),
-            QT_TR_NOOP("1/16 between notes"),
-            QT_TR_NOOP("1/32 between notes"),
-            QT_TR_NOOP("1/64 between notes")
-            };
-      for (int i = TREMOLO_R8; i <= TREMOLO_C64; ++i) {
-            Tremolo* tremolo = new Tremolo(gscore);
-            tremolo->setSubtype(TremoloType(i));
-            sp->append(tremolo, tr(tremoloName[i - TREMOLO_R8]));
-            }
-
-      //-----------------------------------
-      //    Fall, Doit
-      //-----------------------------------
-
-      sp = createPalette(27, 40, true);
-      const char* scorelineNames[] = {
-            QT_TR_NOOP("fall"),
-            QT_TR_NOOP("doit"),
-            };
-      ChordLine* cl = new ChordLine(gscore);
-      cl->setSubtype(1);
-      sp->append(cl, tr(scorelineNames[0]));
-
-      cl = new ChordLine(gscore);
-      cl->setSubtype(2);
-      sp->append(cl, tr(scorelineNames[1]));
-
-      //-----------------------------------
-      //    Repeats
-      //-----------------------------------
-
-      psa = new PaletteScrollArea(MuseScore::newRepeatsPalette());
-      psa->setRestrictHeight(false);
-      stack->addWidget(psa);
-
-      //-----------------------------------
-      //    Text
-      //-----------------------------------
-
-      psa = new PaletteScrollArea(MuseScore::newTextPalette());
-      psa->setRestrictHeight(false);
-      stack->addWidget(psa);
-
-      //-----------------------------------
-      //   Breaks
-      //-----------------------------------
-
-      psa = new PaletteScrollArea(MuseScore::newBreaksPalette());
-      psa->setRestrictHeight(false);
-      stack->addWidget(psa);
-
-      //-----------------------------------
-      //    beam properties
-      //-----------------------------------
-
-      psa = new PaletteScrollArea(MuseScore::newBeamPalette());
-      psa->setRestrictHeight(false);
-      stack->addWidget(psa);
-
-      //-----------------------------------
-      //    frames
-      //-----------------------------------
-
-      psa = new PaletteScrollArea(MuseScore::newFramePalette());
-      psa->setRestrictHeight(false);
-      stack->addWidget(psa);
-
-      //
-      //   Symbols
-      //
       stack->addWidget(new SymbolDialog);
       }
 

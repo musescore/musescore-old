@@ -282,7 +282,7 @@ KeyEditor::KeyEditor(QWidget* parent)
       l->setContentsMargins(0, 0, 0, 0);
       frame->setLayout(l);
 
-      sp = newKeySigPalette();
+      sp = MuseScore::newKeySigPalette();
       sp->setReadOnly(false);
 
       PaletteScrollArea* keyPalette = new PaletteScrollArea(sp);
@@ -297,7 +297,7 @@ KeyEditor::KeyEditor(QWidget* parent)
       l = new QVBoxLayout();
       l->setContentsMargins(0, 0, 0, 0);
       frame_3->setLayout(l);
-      sp1 = newAccidentalsPalette();
+      sp1 = MuseScore::newAccidentalsPalette();
       PaletteScrollArea* accPalette = new PaletteScrollArea(sp1);
       QSizePolicy policy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
       accPalette->setSizePolicy(policy1);

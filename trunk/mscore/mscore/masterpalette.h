@@ -29,6 +29,7 @@ class MasterPalette : public QWidget, Ui::MasterPalette
 
       virtual void closeEvent(QCloseEvent*);
       Palette* createPalette(int w, int h, bool grid, double mag = 1.0);
+      void addPalette(Palette* sp);
 
    signals:
       void closed(bool);
