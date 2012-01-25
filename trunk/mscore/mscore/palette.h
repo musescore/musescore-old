@@ -199,7 +199,6 @@ class Palette : public QWidget {
       virtual void dragMoveEvent(QDragMoveEvent*);
       virtual void dropEvent(QDropEvent*);
       virtual void contextMenuEvent(QContextMenuEvent*);
-      virtual QSize sizeHint() const;
 
       int idx(const QPoint&) const;
       QRect idxRect(int);
@@ -249,6 +248,7 @@ class Palette : public QWidget {
       void setName(const QString& s) { _name = s;           }
       int gridWidth() const          { return hgrid;        }
       int gridHeight() const         { return vgrid;        }
+      virtual QSize sizeHint() const;
       };
 
 #endif

@@ -1,4 +1,5 @@
 25.1 (ws)
+      - fix #14573: Can't undo deletion of HBox
       - enhanced palette layout
       - fix palette grid drawing
       - patch #14598: Staff text for other (non-first) staves is placed
