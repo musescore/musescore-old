@@ -180,72 +180,55 @@ void Text::layout()
       {
       if (_styled && !_editMode) {
             SimpleText::layout();
-            adjustReadPos();
-            return;
             }
-      _doc->setDefaultFont(style().font(spatium()));
-      qreal w = -1.0;
-      qreal x = 0.0;
-      qreal y = 0.0;
-      if (parent() && layoutToParentWidth()) {
-            w = parent()->width();
-            if (parent()->type() == HBOX || parent()->type() == VBOX || parent()->type() == TBOX) {
-                  Box* box = static_cast<Box*>(parent());
-                  x += box->leftMargin() * DPMM;
-                  y += box->topMargin() * DPMM;
-                  w = box->width()   - ((box->leftMargin() + box->rightMargin()) * DPMM);
+      else {
+            _doc->setDefaultFont(style().font(spatium()));
+            qreal w = -1.0;
+            qreal x = 0.0;
+            qreal y = 0.0;
+            if (parent() && layoutToParentWidth()) {
+                  w = parent()->width();
+                  if (parent()->type() == HBOX || parent()->type() == VBOX || parent()->type() == TBOX) {
+                        Box* box = static_cast<Box*>(parent());
+                        x += box->leftMargin() * DPMM;
+                        y += box->topMargin() * DPMM;
+                        w = box->width()   - ((box->leftMargin() + box->rightMargin()) * DPMM);
+                        }
                   }
-            }
 
-      QTextOption to = _doc->defaultTextOption();
-      to.setUseDesignMetrics(true);
-      to.setWrapMode(w <= 0.0 ? QTextOption::NoWrap : QTextOption::WrapAtWordBoundaryOrAnywhere);
-      _doc->setDefaultTextOption(to);
-      layout(w, x, y);
-      adjustReadPos();
-      }
+            QTextOption to = _doc->defaultTextOption();
+            to.setUseDesignMetrics(true);
+            to.setWrapMode(w <= 0.0 ? QTextOption::NoWrap : QTextOption::WrapAtWordBoundaryOrAnywhere);
+            _doc->setDefaultTextOption(to);
 
-//---------------------------------------------------------
-//   layoutW
-//---------------------------------------------------------
+            if (w < 0.0)
+                  w = _doc->idealWidth();
+            _doc->setTextWidth(w);
 
-void Text::layout(qreal layoutWidth, qreal x, qreal y)
-      {
-      QTextOption to = _doc->defaultTextOption();
-      to.setUseDesignMetrics(true);
-      to.setWrapMode(layoutWidth < 0.0 ? QTextOption::NoWrap : QTextOption::WrapAtWordBoundaryOrAnywhere);
-      _doc->setDefaultTextOption(to);
+            setbbox(QRectF(QPointF(0.0, 0.0), _doc->size()));
+            if (hasFrame())
+                  layoutFrame();
+            _doc->setModified(false);
+            style().layout(this);      // process alignment
 
-      if (layoutWidth < 0.0)
-            layoutWidth = _doc->idealWidth();
-      _doc->setTextWidth(layoutWidth);
-
-      setbbox(QRectF(QPointF(0.0, 0.0), _doc->size()));
-      if (hasFrame())
-            layoutFrame();
-      _doc->setModified(false);
-      style().layout(this);      // process alignment
-
-      if ((style().align() & ALIGN_VCENTER) && (textStyle() == TEXT_STYLE_TEXTLINE)) {
-            // special case: vertically centered text with TextLine needs to
-            // take into account the line width
-            TextLineSegment* tls = static_cast<TextLineSegment*>(parent());
-            TextLine* tl = tls->textLine();
-            if (tl) {
-                  qreal textlineLineWidth = point(tl->lineWidth());
-                  rypos() -= textlineLineWidth * .5;
+            if ((style().align() & ALIGN_VCENTER) && (textStyle() == TEXT_STYLE_TEXTLINE)) {
+                  // special case: vertically centered text with TextLine needs to
+                  // take into account the line width
+                  TextLineSegment* tls = static_cast<TextLineSegment*>(parent());
+                  TextLine* tl = tls->textLine();
+                  if (tl) {
+                        qreal textlineLineWidth = point(tl->lineWidth());
+                        rypos() -= textlineLineWidth * .5;
+                        }
                   }
+            rxpos() += x;
+            rypos() += y;
             }
-
-      if (parent() == 0)
-            return;
-
-      if (parent()->type() == SEGMENT) {
+      if (parent() && parent()->type() == SEGMENT) {
             Segment* s = static_cast<Segment*>(parent());
             rypos() += s ? s->measure()->system()->staff(staffIdx())->y() : 0.0;
             }
-      rxpos() += x;
-      rypos() += y;
+      adjustReadPos();
       }
 
 //---------------------------------------------------------
@@ -973,6 +956,10 @@ QLineF Text::dragAnchor() const
             }
       else {
             p1 = QPointF(parent()->canvasBoundingRect().topLeft());
+            if (parent()->type() == SEGMENT) {
+                  Segment* s = static_cast<Segment*>(parent());
+                  p1.ry() += s ? s->measure()->system()->staff(staffIdx())->y() : 0.0;
+                  }
             }
       qreal tw = width();
       qreal th = height();
