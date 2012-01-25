@@ -3050,6 +3050,7 @@ void ScoreView::normalCut()
       normalCopy();
       _score->cmdDeleteSelection();
       _score->endCmd();
+      mscore->endCmd();
       }
 
 //---------------------------------------------------------

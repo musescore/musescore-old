@@ -279,7 +279,7 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
 
 int Palette::idx(const QPoint& p) const
       {
-      int rightBorder = width() - columns() * hgrid;
+      int rightBorder = width() % hgrid;
       int hhgrid = hgrid + (rightBorder / columns());
 
       int x = p.x();
@@ -308,8 +308,10 @@ QRect Palette::idxRect(int i)
             return QRect();
       if (columns() == 0)
             return QRect();
-      int rightBorder = width() - columns() * hgrid;
+
+      int rightBorder = width() % hgrid;
       int hhgrid = hgrid + (rightBorder / columns());
+
       int cc = i % columns();
       int cr = i / columns();
       return QRect(cc * hhgrid, cr * vgrid, hhgrid, vgrid);
@@ -470,7 +472,7 @@ void Palette::paintEvent(QPaintEvent* event)
       //
       // draw grid
       //
-      int rightBorder = width() - columns() * hgrid;
+      int rightBorder = width() % hgrid;
       int hhgrid = hgrid + (rightBorder / columns());
 
       if (_drawGrid) {
@@ -597,7 +599,7 @@ void Palette::paintEvent(QPaintEvent* event)
 
 bool Palette::event(QEvent* ev)
       {
-      int rightBorder = width() - columns() * hgrid;
+      int rightBorder = width() % hgrid;
       int hhgrid = hgrid + (rightBorder / columns());
 
       if (ev->type() == QEvent::ToolTip) {
@@ -809,7 +811,6 @@ void Palette::dropEvent(QDropEvent* event)
       if (ok) {
             event->acceptProposedAction();
             updateGeometry();
-//            static_cast<QWidget*>(parent())->updateGeometry();
             update();
             emit changed();
             }
@@ -1056,6 +1057,8 @@ int Palette::heightForWidth(int w) const
       int r = (cells.size() + c - 1) / c;
       if (r <= 0)
             r = 1;
+      if ((w % hgrid) == 0)
+            ++r;
       return r * vgrid;
       }
 
@@ -1065,8 +1068,7 @@ int Palette::heightForWidth(int w) const
 
 QSize Palette::sizeHint() const
       {
-      int w = width();
-      int h = heightForWidth(w);
+      int h = heightForWidth(width());
       return QSize(hgrid, h);
       }
 
@@ -1103,8 +1105,8 @@ PaletteBoxButton::PaletteBoxButton(PaletteScrollArea* sa, Palette* p, QWidget* p
       setCheckable(true);
       setFocusPolicy(Qt::NoFocus);
       connect(this, SIGNAL(clicked(bool)), this, SLOT(showPalette(bool)));
-//      setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-      setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+      setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+//      setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
       QMenu* menu = new QMenu;
       connect(menu, SIGNAL(aboutToShow()), SLOT(beforePulldown()));
       setArrowType(Qt::RightArrow);
@@ -1173,9 +1175,7 @@ void PaletteBoxButton::showPalette(bool visible)
             emit closeAll();
             }
       scrollArea->setVisible(visible);
-      // this->setChecked(visible);
       setChecked(visible);
-//      palette->updateGeometry();
       setArrowType(visible ? Qt::DownArrow : Qt::RightArrow );
       }
 
@@ -1203,10 +1203,9 @@ PaletteScrollArea::PaletteScrollArea(QWidget* w, QWidget* parent)
       setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
       setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
       setWidget(w);
-      setWidgetResizable(true);
+      setWidgetResizable(false);
       _restrictHeight = true;
-      setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-      //setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+      setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
       }
 
 //---------------------------------------------------------
@@ -1215,13 +1214,14 @@ PaletteScrollArea::PaletteScrollArea(QWidget* w, QWidget* parent)
 
 void PaletteScrollArea::resizeEvent(QResizeEvent* re)
       {
+      QScrollArea::resizeEvent(re);       // necessary?
+
       Palette* palette = static_cast<Palette*>(widget());
       int h = palette->heightForWidth(width());
-      if (_restrictHeight)
-            // setMaximumHeight(h+8);
+      palette->resize(QSize(width(), h));
+      if (_restrictHeight) {
             setMaximumHeight(h+6);
-
-      QScrollArea::resizeEvent(re);
+            }
       }
 
 //---------------------------------------------------------
@@ -1234,9 +1234,8 @@ PaletteBox::PaletteBox(QWidget* parent)
       setObjectName("palette-box");
       setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
       QWidget* mainWidget = new QWidget;
-      mainWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding); //??
+      mainWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
       vbox = new QVBoxLayout;
-      vbox->setSizeConstraint(QLayout::SetNoConstraint);
       vbox->setMargin(0);
       vbox->setSpacing(1);    // 2
       vbox->addStretch();
