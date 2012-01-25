@@ -1514,12 +1514,14 @@ void InsertMeasure::undo()
       {
       measure->score()->remove(measure);
       measure->score()->addLayoutFlags(LAYOUT_FIX_TICKS);
+      measure->score()->setLayoutAll(true);
       }
 
 void InsertMeasure::redo()
       {
       measure->score()->addMeasure(measure, pos);
       measure->score()->addLayoutFlags(LAYOUT_FIX_TICKS);
+      measure->score()->setLayoutAll(true);
       }
 
 //---------------------------------------------------------

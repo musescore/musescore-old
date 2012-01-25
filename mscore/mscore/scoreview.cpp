@@ -40,6 +40,7 @@
 #include "libmscore/hairpin.h"
 #include "libmscore/image.h"
 #include "libmscore/part.h"
+#include "libmscore/icon.h"
 #include "editdrumset.h"
 #include "editstaff.h"
 #include "splitstaff.h"
@@ -2434,8 +2435,10 @@ void ScoreView::dropEvent(QDropEvent* event)
                                     }
                               }
                         if (!el) {
-                              qDebug("cannot drop here");
-                              delete dragElement;
+                              if (!dropCanvas(dragElement)) {
+                                    qDebug("cannot drop here");
+                                    delete dragElement;
+                                    }
                               break;
                               }
                         _score->addRefresh(el->canvasBoundingRect());
@@ -5718,3 +5721,36 @@ void ScoreView::layoutChanged()
       if (mscore->navigator())
             mscore->navigator()->layoutChanged();
       }
+
+//---------------------------------------------------------
+//   dropCanvas
+//---------------------------------------------------------
+
+bool ScoreView::dropCanvas(Element* e)
+      {
+      if (e->type() == ICON) {
+            switch(static_cast<Icon*>(e)->subtype()) {
+                  case ICON_VFRAME:
+                        score()->appendMeasure(VBOX);
+                        break;
+                  case ICON_HFRAME:
+                        score()->appendMeasure(HBOX);
+                        break;
+                  case ICON_TFRAME:
+                        score()->appendMeasure(TBOX);
+                        break;
+                  case ICON_FFRAME:
+                        score()->appendMeasure(FBOX);
+                        break;
+                  case ICON_MEASURE:
+                        score()->appendMeasure(MEASURE);
+                        break;
+                  default:
+                        return false;
+                  }
+            delete e;
+            return true;
+            }
+      return false;
+      }
+

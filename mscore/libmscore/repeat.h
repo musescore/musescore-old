@@ -74,13 +74,12 @@ class Marker : public Text {
       virtual void read(const QDomElement&);
       virtual void write(Xml& xml) const;
 
-
       QString label() const            { return _label; }
       void setLabel(const QString& s)  { _label = s; }
 
       virtual void layout();
-      virtual QPointF pagePos() const;
-      virtual QLineF dragAnchor() const;
+//      virtual QPointF pagePos() const;
+//      virtual QLineF dragAnchor() const;
       virtual void styleChanged();
       };
 
