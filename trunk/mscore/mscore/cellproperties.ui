@@ -120,10 +120,13 @@
         <item row="1" column="2">
          <widget class="QDoubleSpinBox" name="scale">
           <property name="minimum">
-           <double>1.000000000000000</double>
+           <double>0.010000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>10.000000000000000</double>
           </property>
           <property name="singleStep">
-           <double>2.000000000000000</double>
+           <double>0.100000000000000</double>
           </property>
          </widget>
         </item>

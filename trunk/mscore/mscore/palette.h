@@ -216,9 +216,9 @@ class Palette : public QWidget {
       Palette(QWidget* parent = 0);
       ~Palette();
 
-      void append(Element*, const QString& name, QString tag = QString(), qreal mag = 1.0);
-      void add(int idx, Element*, const QString& name, const QString tag = QString());
-      void append(int sym);
+      PaletteCell* append(Element*, const QString& name, QString tag = QString(), qreal mag = 1.0);
+      PaletteCell* add(int idx, Element*, const QString& name, const QString tag = QString());
+      PaletteCell* append(int sym);
 
       void setGrid(int, int);
       Element* element(int idx)      { return cells[idx]->element; }
