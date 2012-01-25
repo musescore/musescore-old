@@ -129,10 +129,8 @@ void Palette::contextMenuEvent(QContextMenuEvent* event)
             PaletteCell* c = cells[i];
             if (c == 0)
                   return;
-            PaletteCell cell(*c);
-            PaletteCellProperties props(&cell);
+            PaletteCellProperties props(c);
             if (props.exec()) {
-                  *cells[i] = cell;
                   update();
                   emit changed();
                   }
@@ -381,7 +379,7 @@ void Palette::leaveEvent(QEvent*)
 //    append element to palette
 //---------------------------------------------------------
 
-void Palette::append(Element* s, const QString& name, QString tag, qreal mag)
+PaletteCell* Palette::append(Element* s, const QString& name, QString tag, qreal mag)
       {
       s->layout();
       PaletteCell* cell = new PaletteCell;
@@ -400,22 +398,23 @@ void Palette::append(Element* s, const QString& name, QString tag, qreal mag)
             Icon* icon = static_cast<Icon*>(s);
             connect(getAction(icon->action()), SIGNAL(toggled(bool)), SLOT(actionToggled(bool)));
             }
+      return cell;
       }
 
-void Palette::append(int symIdx)
+PaletteCell* Palette::append(int symIdx)
       {
       if (!symbols[0][symIdx].isValid())
-            return;
+            0;
       Symbol* s = new Symbol(gscore);
       s->setSym(symIdx);
-      append(s, qApp->translate("symbol", ::symbols[0][symIdx].name()));
+      return append(s, qApp->translate("symbol", ::symbols[0][symIdx].name()));
       }
 
 //---------------------------------------------------------
 //   add
 //---------------------------------------------------------
 
-void Palette::add(int idx, Element* s, const QString& name, QString tag)
+PaletteCell* Palette::add(int idx, Element* s, const QString& name, QString tag)
       {
       PaletteCell* cell = new PaletteCell;
 
@@ -440,6 +439,7 @@ void Palette::add(int idx, Element* s, const QString& name, QString tag)
             Icon* icon = static_cast<Icon*>(s);
             connect(getAction(icon->action()), SIGNAL(toggled(bool)), SLOT(actionToggled(bool)));
             }
+      return cell;
       }
 
 //---------------------------------------------------------
@@ -599,10 +599,9 @@ void Palette::paintEvent(QPaintEvent* event)
 
 bool Palette::event(QEvent* ev)
       {
-      int rightBorder = width() % hgrid;
-      int hhgrid = hgrid + (rightBorder / columns());
-
-      if (ev->type() == QEvent::ToolTip) {
+      if (columns() && (ev->type() == QEvent::ToolTip)) {
+            int rightBorder = width() % hgrid;
+            int hhgrid = hgrid + (rightBorder / columns());
             QHelpEvent* he = (QHelpEvent*)ev;
             int x = he->pos().x();
             int y = he->pos().y();
