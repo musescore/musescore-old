@@ -1012,7 +1012,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">sol</translation>
     </message>
     <message>
         <source>alt. brevis</source>
@@ -3566,10 +3566,6 @@ Intenta usar el "Manual en Internet" desde el menu de "Ayuda".</translation>
         <translation>No agrupar</translation>
     </message>
     <message>
-        <source>Start subbeam</source>
-        <translation>Comienzo de subgrupo</translation>
-    </message>
-    <message>
         <source>Auto beam</source>
         <translation>Auto agrupar</translation>
     </message>
@@ -3672,10 +3668,6 @@ no es compatible con el interfaz actual</translation>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
         <translation>Archivos de Overture &lt;experimental&gt; (*.ove);;</translation>
-    </message>
-    <message>
-        <source>All Files (*)</source>
-        <translation>Todos los archivos (*)</translation>
     </message>
 </context>
 <context>
@@ -5201,6 +5193,14 @@ Intenta guardarlo en una localización distinta</translation>
         <source>Load failed: </source>
         <translation>Fallo al cargar </translation>
     </message>
+    <message>
+        <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Can't open file. File extension "%1" not supported.</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -6138,6 +6138,10 @@ y comprueba que la ruta al archivo es correcta.</translation>
     <message>
         <source>System Flag</source>
         <translation>Bandera del sistema</translation>
+    </message>
+    <message>
+        <source>center text vertical to text baseline</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9069,15 +9073,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Every 2 months</source>
         <translation>Cada 2 meses</translation>
-    </message>
-</context>
-<context>
-    <name>score</name>
-    <message>
-        <source>Cannot read this score:
-your version of MuseScore is too old.</source>
-        <translation>Esta partitura no puede ser leída:&#13;
-Su versión de MuseScore es muy antigua</translation>
     </message>
 </context>
 <context>

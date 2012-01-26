@@ -902,11 +902,11 @@ line break&#13;
     </message>
     <message>
         <source>velocity type</source>
-        <translation>Nopeuden tyyppi</translation>
+        <translation>Voimakkuuden tyyppi</translation>
     </message>
     <message>
         <source>velocity (0-127)</source>
-        <translation>Nopeus (0-127)</translation>
+        <translation>Voim. arvo (0-127)</translation>
     </message>
     <message>
         <source>user</source>
@@ -1116,7 +1116,7 @@ line break&#13;
     </message>
     <message>
         <source>Velocity:</source>
-        <translation>Nopeus:</translation>
+        <translation>Voimakkuus:</translation>
     </message>
     <message>
         <source>align left</source>
@@ -3387,7 +3387,7 @@ ennen sulkemista?</translation>
     </message>
     <message>
         <source>Go To: </source>
-        <translation>Siirry: </translation>
+        <translation>Siirry tahtiin: </translation>
     </message>
     <message>
         <source>Online Handbook</source>
@@ -3568,10 +3568,6 @@ Yritä sen sijaan valitsemalla "Ohje"-valikosta "Online-käsikirja".</translatio
         <translation>Ei palkkia</translation>
     </message>
     <message>
-        <source>Start subbeam</source>
-        <translation>Aloita alapalkki</translation>
-    </message>
-    <message>
         <source>Auto beam</source>
         <translation>Automaattinen palkki</translation>
     </message>
@@ -3684,10 +3680,6 @@ on ristiriidassa nykyisen rajapinnan kanssa</translation>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
         <translation>Overture tiedostot &lt;experimental&gt; (*.ove);;</translation>
-    </message>
-    <message>
-        <source>All Files (*)</source>
-        <translation>Kaikki tiedostot (*)</translation>
     </message>
 </context>
 <context>
@@ -4137,7 +4129,7 @@ on ristiriidassa nykyisen rajapinnan kanssa</translation>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation>Nopeus:</translation>
+        <translation>Voimakkuus:</translation>
     </message>
     <message>
         <source>auto</source>
@@ -4526,7 +4518,7 @@ on ristiriidassa nykyisen rajapinnan kanssa</translation>
     </message>
     <message>
         <source>screen shot function</source>
-        <translation>ruudunkaappaustoiminto</translation>
+        <translation>Ruudunkaappaustoiminto</translation>
     </message>
     <message>
         <source>Shortcuts</source>
@@ -5215,6 +5207,14 @@ Yritä tallentaa eri paikkaan.</translation>
     <message>
         <source>Load failed: </source>
         <translation>Lataaminen epäonnistui: </translation>
+    </message>
+    <message>
+        <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Can't open file. File extension "%1" not supported.</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -6153,6 +6153,10 @@ ja tarkista, että tiedoston sijainti on oikein.</translation>
     <message>
         <source>System Flag</source>
         <translation>Järjestelmälippu</translation>
+    </message>
+    <message>
+        <source>center text vertical to text baseline</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -7898,7 +7902,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Search</source>
-        <translation>Hae</translation>
+        <translation>Siirry tahtiin</translation>
     </message>
     <message>
         <source>Zoom In</source>
@@ -8378,7 +8382,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Parts...</source>
-        <translation>Osat ...</translation>
+        <translation>Luo stemma  ...</translation>
     </message>
     <message>
         <source>next score</source>
@@ -9052,7 +9056,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">alt. brevis</translation>
     </message>
 </context>
 <context>
@@ -9084,15 +9088,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Every 2 months</source>
         <translation>Joka 2. kuukausi</translation>
-    </message>
-</context>
-<context>
-    <name>score</name>
-    <message>
-        <source>Cannot read this score:
-your version of MuseScore is too old.</source>
-        <translation>Et voi lukea tätä partituuria:&#13;
-sinun MuseScore versio on liian vanha.</translation>
     </message>
 </context>
 <context>

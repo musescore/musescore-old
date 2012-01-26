@@ -3567,10 +3567,6 @@ Trong danh bạ "Giúp đỡ", chọn "Sách hướng dẫn trên mạng".</tran
         <translation>Không có nối kết</translation>
     </message>
     <message>
-        <source>Start subbeam</source>
-        <translation>Bắt đầu subbeam</translation>
-    </message>
-    <message>
         <source>Auto beam</source>
         <translation>Nối kết (các nốt nhạc) tự động</translation>
     </message>
@@ -3683,10 +3679,6 @@ không thích hợp với interface hiện có</translation>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
         <translation>Tài liệu nhạc Overture &lt;thử nghiệm&gt; (*.ove);;</translation>
-    </message>
-    <message>
-        <source>All Files (*)</source>
-        <translation>Tất cả tài liệu (*)</translation>
     </message>
 </context>
 <context>
@@ -5215,6 +5207,14 @@ Try saving to a different location.</translation>
         <source>Load failed: </source>
         <translation>Load failed: </translation>
     </message>
+    <message>
+        <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Can't open file. File extension "%1" not supported.</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -6152,6 +6152,10 @@ và kiểm tra xem file location có đúng hay không</translation>
     <message>
         <source>System Flag</source>
         <translation>Flag của dòng nhạc</translation>
+    </message>
+    <message>
+        <source>center text vertical to text baseline</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9083,15 +9087,6 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>Every 2 months</source>
         <translation>Mỗi 2 tháng</translation>
-    </message>
-</context>
-<context>
-    <name>score</name>
-    <message>
-        <source>Cannot read this score:
-your version of MuseScore is too old.</source>
-        <translation>Không đọc được bài nhạc này:&#13;
-Phiên bản MuseCrore của bạn quá cũ.</translation>
     </message>
 </context>
 <context>

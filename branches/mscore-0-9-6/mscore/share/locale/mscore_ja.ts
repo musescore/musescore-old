@@ -3565,10 +3565,6 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
         <translation>連桁なし</translation>
     </message>
     <message>
-        <source>Start subbeam</source>
-        <translation>副連桁</translation>
-    </message>
-    <message>
         <source>Auto beam</source>
         <translation>自動連桁</translation>
     </message>
@@ -3679,10 +3675,6 @@ is incompatible with current interface</source>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
         <translation>Overture ファイル &lt;※実験的&gt; (*.ove);;</translation>
-    </message>
-    <message>
-        <source>All Files (*)</source>
-        <translation>すべてのファイル(*)</translation>
     </message>
 </context>
 <context>
@@ -5210,6 +5202,14 @@ failed: </source>
         <source>Load failed: </source>
         <translation>読み込み失敗 </translation>
     </message>
+    <message>
+        <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
+        <translation>このスコアは読み込むことができません。:&lt;br&gt;最新のMuseScoreをインストールしてください。&lt;br&gt;&lt;a href="%1"&gt;今すぐ更新&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <source>Can't open file. File extension "%1" not supported.</source>
+        <translation>ファイルを開くことができません。ファイル拡張子 "%1" はサポートされていません。</translation>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -5991,7 +5991,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>align left edge of text to reference point</source>
-        <translation>テキストの左端をポイントに合わせる</translation>
+        <translation>左揃え</translation>
     </message>
     <message>
         <source>...</source>
@@ -5999,23 +5999,23 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>center text on reference point</source>
-        <translation>テキストの中心をポイントに合わせる</translation>
+        <translation>中央揃え</translation>
     </message>
     <message>
         <source>align right edge of text to reference point</source>
-        <translation>テキストの右端をポイントに合わせる</translation>
+        <translation>右揃え</translation>
     </message>
     <message>
         <source>align top edge of text to reference point</source>
-        <translation>テキストの上端をポイントに合わせる</translation>
+        <translation>垂直位置の上揃え</translation>
     </message>
     <message>
         <source>center text vertical to reference point</source>
-        <translation>テキストをポイントと水平の位置まで持っていく</translation>
+        <translation>垂直位置を中央揃え</translation>
     </message>
     <message>
         <source>align bottom edge of text to reference point</source>
-        <translation>テキストの下端をポイントに合わせる</translation>
+        <translation>垂直位置の下揃え</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -6146,6 +6146,10 @@ and check that the file location is correct</source>
     <message>
         <source>System Flag</source>
         <translation>五線のアンカーポイント</translation>
+    </message>
+    <message>
+        <source>center text vertical to text baseline</source>
+        <translation>垂直位置をベースラインに揃える</translation>
     </message>
 </context>
 <context>
@@ -9074,15 +9078,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Every 2 months</source>
         <translation>2ヶ月毎</translation>
-    </message>
-</context>
-<context>
-    <name>score</name>
-    <message>
-        <source>Cannot read this score:
-your version of MuseScore is too old.</source>
-        <translation>このスコアを読み込むことができませんでした。:&#13;
-ご使用中のMuseScoreのバージョンが古いようです。</translation>
     </message>
 </context>
 <context>

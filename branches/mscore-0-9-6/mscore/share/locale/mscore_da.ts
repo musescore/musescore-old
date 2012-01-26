@@ -3568,10 +3568,6 @@ Prøv at vælge "Online Håndbog" fra "Hjælp"-menuen i stedet.</translation>
         <translation>Ingen bjælke</translation>
     </message>
     <message>
-        <source>Start subbeam</source>
-        <translation>Start underbjælke</translation>
-    </message>
-    <message>
         <source>Auto beam</source>
         <translation>Auto bjælke</translation>
     </message>
@@ -3684,10 +3680,6 @@ er ikke kompatibelt med det nuværende interface</translation>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
         <translation>Overture filer&lt;eksperimentel funktion&gt; (*.ove);;</translation>
-    </message>
-    <message>
-        <source>All Files (*)</source>
-        <translation>Alle filer (*)</translation>
     </message>
 </context>
 <context>
@@ -5216,6 +5208,14 @@ Prøv af gemme den et andet sted.</translation>
         <source>Load failed: </source>
         <translation>Indlæsning fejlede: </translation>
     </message>
+    <message>
+        <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
+        <translation>Kan ikke indlæse denne fil:&lt;br/&gt;Din version af MuseScore er for gammel.&lt;br/&gt;&lt;a href="%1"&gt;Opgradér nu!&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <source>Can't open file. File extension "%1" not supported.</source>
+        <translation>Kan ikke åbne filen. Fil-typen "%1" understøttes ikke.</translation>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -6153,6 +6153,10 @@ og kontrollér at filplaceringen er korrekt.</translation>
     <message>
         <source>System Flag</source>
         <translation>System flag</translation>
+    </message>
+    <message>
+        <source>center text vertical to text baseline</source>
+        <translation>centrér tekst vertikalt til tekst bundlinie</translation>
     </message>
 </context>
 <context>
@@ -9085,15 +9089,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Every 2 months</source>
         <translation>Hver 2. måned</translation>
-    </message>
-</context>
-<context>
-    <name>score</name>
-    <message>
-        <source>Cannot read this score:
-your version of MuseScore is too old.</source>
-        <translation>Kan ikke læse dette stykke:&#13;
-din version af MuseScore er for gammel</translation>
     </message>
 </context>
 <context>

@@ -3568,10 +3568,6 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
         <translation>不相連音符</translation>
     </message>
     <message>
-        <source>Start subbeam</source>
-        <translation>次音符組開頭</translation>
-    </message>
-    <message>
         <source>Auto beam</source>
         <translation>自動設化音符組</translation>
     </message>
@@ -3680,10 +3676,6 @@ is incompatible with current interface</source>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
         <translation>Overture檔案＜實驗性＞（*.ove）;;</translation>
-    </message>
-    <message>
-        <source>All Files (*)</source>
-        <translation>所有的檔案（*）</translation>
     </message>
 </context>
 <context>
@@ -5211,6 +5203,14 @@ Try saving to a different location.</source>
         <source>Load failed: </source>
         <translation>載入失敗: </translation>
     </message>
+    <message>
+        <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Can't open file. File extension "%1" not supported.</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -6146,6 +6146,10 @@ and check that the file location is correct</source>
     <message>
         <source>System Flag</source>
         <translation>譜表組標</translation>
+    </message>
+    <message>
+        <source>center text vertical to text baseline</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9085,15 +9089,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Every 2 months</source>
         <translation>每兩個月</translation>
-    </message>
-</context>
-<context>
-    <name>score</name>
-    <message>
-        <source>Cannot read this score:
-your version of MuseScore is too old.</source>
-        <translation>無法讀取這個樂譜：&#13;
-您的MuseScore版本太舊。</translation>
     </message>
 </context>
 <context>

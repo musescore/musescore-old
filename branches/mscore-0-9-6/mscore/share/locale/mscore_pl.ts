@@ -3565,10 +3565,6 @@ Z menu "Pomoc" wybierz "Podręcznik online".</translation>
         <translation>Brak belki</translation>
     </message>
     <message>
-        <source>Start subbeam</source>
-        <translation>Początek podbelki</translation>
-    </message>
-    <message>
         <source>Auto beam</source>
         <translation>Autobelkowanie</translation>
     </message>
@@ -3679,10 +3675,6 @@ jest niekompatybilny z obecnym interfejsem.</translation>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
         <translation>Pliki Overture &lt;eksperymentalnie&gt; (*.ove);;</translation>
-    </message>
-    <message>
-        <source>All Files (*)</source>
-        <translation>Wszystkie pliki (*)</translation>
     </message>
 </context>
 <context>
@@ -5210,6 +5202,14 @@ Spróbuj zapisać w innym miejscu.</translation>
         <source>Load failed: </source>
         <translation>Wczytywanie nieudane: </translation>
     </message>
+    <message>
+        <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
+        <translation>Nie można odczytać tej parytury.&lt;br&gt;Twoja wersja MuseScore jest zbyt stara.&lt;br&gt;&lt;a href="%1"&gt;Uaktualnij teraz!&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <source>Can't open file. File extension "%1" not supported.</source>
+        <translation>Nie można otworzyć pliku. Rozszerzenie pliku "%1" jest nieobsługiwane.</translation>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -6146,6 +6146,10 @@ i sprawdź, czy położenie pliku jest właściwe.</translation>
     <message>
         <source>System Flag</source>
         <translation>Flaga systemowa</translation>
+    </message>
+    <message>
+        <source>center text vertical to text baseline</source>
+        <translation>Wyśrodkuj tekst pionowo do linii bazowej tekstu</translation>
     </message>
 </context>
 <context>
@@ -8450,11 +8454,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>reverseturn</source>
-        <translation>Odwrócony obiegnik</translation>
+        <translation>Dolny obiegnik</translation>
     </message>
     <message>
         <source>turn</source>
-        <translation>Obiegnik</translation>
+        <translation>Górny obiegnik</translation>
     </message>
     <message>
         <source>trill</source>
@@ -9080,15 +9084,6 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
 </context>
 <context>
-    <name>score</name>
-    <message>
-        <source>Cannot read this score:
-your version of MuseScore is too old.</source>
-        <translation>Nie można odczytać tej parytury.&#13;
-Twoja wersja MuseScore jest zbyt stara.</translation>
-    </message>
-</context>
-<context>
     <name>symbol</name>
     <message>
         <source>clef eight</source>
@@ -9604,11 +9599,11 @@ Twoja wersja MuseScore jest zbyt stara.</translation>
     </message>
     <message>
         <source>reverse turn</source>
-        <translation>Odwrócony obiegnik</translation>
+        <translation>Dolny obiegnik</translation>
     </message>
     <message>
         <source>turn</source>
-        <translation>Obiegnik</translation>
+        <translation>Górny obiegnik</translation>
     </message>
     <message>
         <source>trill</source>

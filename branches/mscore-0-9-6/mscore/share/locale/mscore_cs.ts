@@ -3568,10 +3568,6 @@ Z nabídky "Nápověda" zkuste místo toho vybrat "Příručka dostupná na inte
         <translation>Žádný trámec</translation>
     </message>
     <message>
-        <source>Start subbeam</source>
-        <translation>Začít podtrámec</translation>
-    </message>
-    <message>
         <source>Auto beam</source>
         <translation>Automatické trámce</translation>
     </message>
@@ -3682,10 +3678,6 @@ není slučitelný se současným rozhraním</translation>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
         <translation>Soubory Overture &lt;pokusně&gt; (*.ove);;</translation>
-    </message>
-    <message>
-        <source>All Files (*)</source>
-        <translation>Všechny soubory (*)</translation>
     </message>
 </context>
 <context>
@@ -5215,6 +5207,14 @@ Zkuste uložení do jiného umístění.</translation>
         <source>Load failed: </source>
         <translation>Nahrání se nezdařilo: </translation>
     </message>
+    <message>
+        <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Can't open file. File extension "%1" not supported.</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -6153,6 +6153,10 @@ a zaškrtněte, že umístění souboru je správné</translation>
     <message>
         <source>System Flag</source>
         <translation>Systémový příznak</translation>
+    </message>
+    <message>
+        <source>center text vertical to text baseline</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9084,15 +9088,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Every 2 months</source>
         <translation>Každé 2 měsíce</translation>
-    </message>
-</context>
-<context>
-    <name>score</name>
-    <message>
-        <source>Cannot read this score:
-your version of MuseScore is too old.</source>
-        <translation>Tento notový zápis nelze přečíst:&#13;
-vaše verze MuseScore je příliš stará.</translation>
     </message>
 </context>
 <context>

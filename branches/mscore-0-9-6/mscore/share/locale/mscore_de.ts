@@ -3568,10 +3568,6 @@ Versuche im "Hilfe"-Menü das "Online-Handbuch" aufzurufen.</translation>
         <translation>kein Balken</translation>
     </message>
     <message>
-        <source>Start subbeam</source>
-        <translation>Beginne Unterbalken</translation>
-    </message>
-    <message>
         <source>Auto beam</source>
         <translation>Automatische Balken</translation>
     </message>
@@ -3684,10 +3680,6 @@ inkompatibel mit derzeitiger Schnittstelle</translation>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
         <translation>Overture Dateien &lt;experimentell&gt; (*.ove);;</translation>
-    </message>
-    <message>
-        <source>All Files (*)</source>
-        <translation>Alle Dateien (*)</translation>
     </message>
 </context>
 <context>
@@ -5216,6 +5208,14 @@ Wählen Sie bitte einen anderen Ort zum Speichern.</translation>
         <source>Load failed: </source>
         <translation>Laden fehlgeschlagen: </translation>
     </message>
+    <message>
+        <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
+        <translation>Kann diese Partitur nicht lesen:&lt;br&gt;Diese Version von MuseScore ist zu alt.&lt;br&gt;&lt;a href="%1"&gt;Jetzt Upgraden!&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <source>Can't open file. File extension "%1" not supported.</source>
+        <translation>Kann Datei nicht öffnen, Dateityp "%1" wird nicht unterstützt.</translation>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -6152,6 +6152,10 @@ abgebrochen. Abspielen nicht möglich.&#13;
     <message>
         <source>System Flag</source>
         <translation>Systemschalter</translation>
+    </message>
+    <message>
+        <source>center text vertical to text baseline</source>
+        <translation>Text vertikal zur Textgrundlinie zentrieren</translation>
     </message>
 </context>
 <context>
@@ -9086,15 +9090,6 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
 </context>
 <context>
-    <name>score</name>
-    <message>
-        <source>Cannot read this score:
-your version of MuseScore is too old.</source>
-        <translation>Diese Noten können nicht gelesen werden:&#13;
-Du verwendest eine zu alte Programmversion.</translation>
-    </message>
-</context>
-<context>
     <name>symbol</name>
     <message>
         <source>clef eight</source>
@@ -9966,19 +9961,19 @@ Du verwendest eine zu alte Programmversion.</translation>
     </message>
     <message>
         <source>time sig C dot</source>
-        <translation type="unfinished"/>
+        <translation>Taktart C Punkt</translation>
     </message>
     <message>
         <source>time sig O</source>
-        <translation type="unfinished"/>
+        <translation>Taktart O</translation>
     </message>
     <message>
         <source>time sig O cut</source>
-        <translation type="unfinished"/>
+        <translation>Taktart O Strich</translation>
     </message>
     <message>
         <source>time sig O dot</source>
-        <translation type="unfinished"/>
+        <translation>Taktart O Punkt</translation>
     </message>
     <message>
         <source>sori</source>

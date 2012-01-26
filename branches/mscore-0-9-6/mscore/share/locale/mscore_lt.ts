@@ -35,17 +35,17 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>AboutBoxDialog</name>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2609"/>
+        <location filename="../../mscore/mscore.cpp" line="2629"/>
         <source>Unstable Prerelease for Version: </source>
         <translation>Nestabilioji išankstinė %1 laidos versija </translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2611"/>
+        <location filename="../../mscore/mscore.cpp" line="2631"/>
         <source>Version: </source>
         <translation>%1 versija </translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2613"/>
+        <location filename="../../mscore/mscore.cpp" line="2633"/>
         <source>Revision: %1</source>
         <translation>Pataisa: %1</translation>
     </message>
@@ -1057,7 +1057,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ChordList</name>
     <message>
-        <location filename="../../mscore/harmony.cpp" line="1173"/>
+        <location filename="../../mscore/harmony.cpp" line="1179"/>
         <source>Write Chord Description failed: </source>
         <translation>Akordo aprašo įrašyti nepavyko: </translation>
     </message>
@@ -1216,7 +1216,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/chordproperties.ui" line="396"/>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation>alt. brevis</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="411"/>
@@ -1331,7 +1331,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/chordrest.ui" line="182"/>
         <source>StaffMove:</source>
-        <translation type="unfinished"/>
+        <translation>Penklinės perkėlimas:</translation>
     </message>
 </context>
 <context>
@@ -1761,17 +1761,17 @@ nepavyko: </translation>
     <message>
         <location filename="../../mscore/editstaff.ui" line="277"/>
         <source>Perfect Unison</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Grynoji prima</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="282"/>
         <source>Augmented Unison</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Padidinta prima</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="287"/>
         <source>Diminished Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sumažinta sekunda</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="292"/>
@@ -1786,12 +1786,12 @@ nepavyko: </translation>
     <message>
         <location filename="../../mscore/editstaff.ui" line="302"/>
         <source>Augmented Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Padidinta sekunda</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="307"/>
         <source>Diminished Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sumažinta tercija</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="312"/>
@@ -1806,42 +1806,42 @@ nepavyko: </translation>
     <message>
         <location filename="../../mscore/editstaff.ui" line="322"/>
         <source>Augmented Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Padidinta tercija</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="327"/>
         <source>Diminished Fourth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sumažinta kvarta</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="332"/>
         <source>Perfect Fourth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Grynoji kvarta</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="337"/>
         <source>Augmented Fourth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Padidinta kvarta</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="342"/>
         <source>Diminished Fifth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sumažinta kvinta</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="347"/>
         <source>Perfect Fifth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Grynoji kvinta</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="352"/>
         <source>Augmented Fifth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Padidinta kvinta</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="357"/>
         <source>Diminished Sixth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sumažinta seksta</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="362"/>
@@ -1856,12 +1856,12 @@ nepavyko: </translation>
     <message>
         <location filename="../../mscore/editstaff.ui" line="372"/>
         <source>Augmented Sixth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Padidinta seksta</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="377"/>
         <source>Diminished Seventh</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sumažinta septima</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="382"/>
@@ -1876,17 +1876,17 @@ nepavyko: </translation>
     <message>
         <location filename="../../mscore/editstaff.ui" line="392"/>
         <source>Augmented Seventh</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Padidinta septima</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="397"/>
         <source>Diminished Octave</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sumažinta oktava</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="402"/>
         <source>Perfect Octave</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Grynoji oktava</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="410"/>
@@ -1906,7 +1906,7 @@ nepavyko: </translation>
     <message>
         <location filename="../../mscore/editstaff.ui" line="455"/>
         <source>Use Drumset</source>
-        <translation type="unfinished"/>
+        <translation>Naudoti mušamųjų komplektą</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="468"/>
@@ -1961,31 +1961,31 @@ nepavyko: </translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="52"/>
-        <location filename="../../mscore/editstyle.ui" line="686"/>
+        <location filename="../../mscore/editstyle.ui" line="692"/>
         <source>System</source>
         <translation>Sistema</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="57"/>
-        <location filename="../../mscore/editstyle.ui" line="758"/>
+        <location filename="../../mscore/editstyle.ui" line="764"/>
         <source>Measure</source>
         <translation>Taktas</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="62"/>
-        <location filename="../../mscore/editstyle.ui" line="1032"/>
+        <location filename="../../mscore/editstyle.ui" line="1038"/>
         <source>Barlines</source>
         <translation>Takto brūkšniai</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="67"/>
-        <location filename="../../mscore/editstyle.ui" line="1069"/>
+        <location filename="../../mscore/editstyle.ui" line="1075"/>
         <source>Notes</source>
         <translation>Natos</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="72"/>
-        <location filename="../../mscore/editstyle.ui" line="1292"/>
+        <location filename="../../mscore/editstyle.ui" line="1298"/>
         <source>Arpeggios</source>
         <translation>Arpedžio</translation>
     </message>
@@ -1996,7 +1996,7 @@ nepavyko: </translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="82"/>
-        <location filename="../../mscore/editstyle.ui" line="1496"/>
+        <location filename="../../mscore/editstyle.ui" line="1502"/>
         <source>Beams</source>
         <translation>Sijos</translation>
     </message>
@@ -2012,7 +2012,7 @@ nepavyko: </translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="97"/>
-        <location filename="../../mscore/editstyle.ui" line="1857"/>
+        <location filename="../../mscore/editstyle.ui" line="1863"/>
         <source>Chordnames</source>
         <translation>Akordų pavadinimai</translation>
     </message>
@@ -2049,36 +2049,36 @@ nepavyko: </translation>
         <location filename="../../mscore/editstyle.ui" line="355"/>
         <location filename="../../mscore/editstyle.ui" line="393"/>
         <location filename="../../mscore/editstyle.ui" line="428"/>
-        <location filename="../../mscore/editstyle.ui" line="473"/>
-        <location filename="../../mscore/editstyle.ui" line="505"/>
-        <location filename="../../mscore/editstyle.ui" line="669"/>
-        <location filename="../../mscore/editstyle.ui" line="713"/>
-        <location filename="../../mscore/editstyle.ui" line="817"/>
-        <location filename="../../mscore/editstyle.ui" line="843"/>
-        <location filename="../../mscore/editstyle.ui" line="869"/>
-        <location filename="../../mscore/editstyle.ui" line="895"/>
-        <location filename="../../mscore/editstyle.ui" line="921"/>
-        <location filename="../../mscore/editstyle.ui" line="947"/>
-        <location filename="../../mscore/editstyle.ui" line="973"/>
-        <location filename="../../mscore/editstyle.ui" line="993"/>
-        <location filename="../../mscore/editstyle.ui" line="1016"/>
-        <location filename="../../mscore/editstyle.ui" line="1102"/>
-        <location filename="../../mscore/editstyle.ui" line="1112"/>
-        <location filename="../../mscore/editstyle.ui" line="1171"/>
-        <location filename="../../mscore/editstyle.ui" line="1194"/>
-        <location filename="../../mscore/editstyle.ui" line="1217"/>
-        <location filename="../../mscore/editstyle.ui" line="1240"/>
-        <location filename="../../mscore/editstyle.ui" line="1263"/>
-        <location filename="../../mscore/editstyle.ui" line="1310"/>
-        <location filename="../../mscore/editstyle.ui" line="1330"/>
-        <location filename="../../mscore/editstyle.ui" line="1350"/>
+        <location filename="../../mscore/editstyle.ui" line="476"/>
+        <location filename="../../mscore/editstyle.ui" line="508"/>
+        <location filename="../../mscore/editstyle.ui" line="672"/>
+        <location filename="../../mscore/editstyle.ui" line="719"/>
+        <location filename="../../mscore/editstyle.ui" line="820"/>
+        <location filename="../../mscore/editstyle.ui" line="846"/>
+        <location filename="../../mscore/editstyle.ui" line="872"/>
+        <location filename="../../mscore/editstyle.ui" line="898"/>
+        <location filename="../../mscore/editstyle.ui" line="924"/>
+        <location filename="../../mscore/editstyle.ui" line="950"/>
+        <location filename="../../mscore/editstyle.ui" line="976"/>
+        <location filename="../../mscore/editstyle.ui" line="996"/>
+        <location filename="../../mscore/editstyle.ui" line="1022"/>
+        <location filename="../../mscore/editstyle.ui" line="1108"/>
+        <location filename="../../mscore/editstyle.ui" line="1118"/>
+        <location filename="../../mscore/editstyle.ui" line="1174"/>
+        <location filename="../../mscore/editstyle.ui" line="1197"/>
+        <location filename="../../mscore/editstyle.ui" line="1220"/>
+        <location filename="../../mscore/editstyle.ui" line="1243"/>
+        <location filename="../../mscore/editstyle.ui" line="1266"/>
+        <location filename="../../mscore/editstyle.ui" line="1316"/>
+        <location filename="../../mscore/editstyle.ui" line="1336"/>
+        <location filename="../../mscore/editstyle.ui" line="1356"/>
         <source>sp</source>
         <extracomment>spatium unit
 ----------
 space unit
 ----------
 space unit</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Atstumas tarp penklinių</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="189"/>
@@ -2091,101 +2091,101 @@ space unit</extracomment>
         <translation>Tuščių penklinių nerodyti</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="524"/>
+        <location filename="../../mscore/editstyle.ui" line="527"/>
         <source>Page fill threshold:</source>
         <translation>Lapo užpildymo slenkstis:</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="537"/>
-        <location filename="../../mscore/editstyle.ui" line="575"/>
-        <location filename="../../mscore/editstyle.ui" line="1641"/>
-        <location filename="../../mscore/editstyle.ui" line="1679"/>
-        <location filename="../../mscore/editstyle.ui" line="1714"/>
-        <location filename="../../mscore/editstyle.ui" line="1752"/>
+        <location filename="../../mscore/editstyle.ui" line="540"/>
+        <location filename="../../mscore/editstyle.ui" line="578"/>
+        <location filename="../../mscore/editstyle.ui" line="1647"/>
+        <location filename="../../mscore/editstyle.ui" line="1685"/>
+        <location filename="../../mscore/editstyle.ui" line="1720"/>
+        <location filename="../../mscore/editstyle.ui" line="1758"/>
         <source>%</source>
         <translation>%</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="562"/>
+        <location filename="../../mscore/editstyle.ui" line="565"/>
         <source>Last system fill threshold</source>
         <translation>Paskiausios sistemos užpildymo slenkstis</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="597"/>
+        <location filename="../../mscore/editstyle.ui" line="600"/>
         <source>Create clef for all systems</source>
         <translation>Raktas visoms sistemoms</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="636"/>
+        <location filename="../../mscore/editstyle.ui" line="639"/>
         <source>Create time signatures</source>
         <translation>Metras</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="610"/>
+        <location filename="../../mscore/editstyle.ui" line="613"/>
         <source>Create key sig for all systems</source>
         <translation>Tonacijos visoms sistemoms sudarymas</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="649"/>
+        <location filename="../../mscore/editstyle.ui" line="652"/>
         <source>Create courtesy time signatures</source>
-        <translation type="unfinished"/>
+        <translation>Įterpti metro pasikeitimo priminimus</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="700"/>
+        <location filename="../../mscore/editstyle.ui" line="706"/>
         <source>System Bracket Distance:</source>
         <translation>Atstumas tarp sistemos penklinių</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1078"/>
+        <location filename="../../mscore/editstyle.ui" line="1084"/>
         <source>shorten stems</source>
         <translation>trumpasis kotelis</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1391"/>
+        <location filename="../../mscore/editstyle.ui" line="1397"/>
         <source>Page Numbers</source>
         <translation>Lapo numeriai</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1403"/>
-        <location filename="../../mscore/editstyle.ui" line="1448"/>
+        <location filename="../../mscore/editstyle.ui" line="1409"/>
+        <location filename="../../mscore/editstyle.ui" line="1454"/>
         <source>show first</source>
         <translation>Rodyti pirmąjį</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1410"/>
+        <location filename="../../mscore/editstyle.ui" line="1416"/>
         <source>odd/even</source>
         <translation>Lyginiai/nelyginiai</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1433"/>
+        <location filename="../../mscore/editstyle.ui" line="1439"/>
         <source>Measure Numbers</source>
         <translation>Taktų numeriai</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1455"/>
+        <location filename="../../mscore/editstyle.ui" line="1461"/>
         <source>all staffs</source>
         <translation>visos penklinės</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1462"/>
+        <location filename="../../mscore/editstyle.ui" line="1468"/>
         <source>every system</source>
         <translation>kiekvienai sistemai</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1469"/>
+        <location filename="../../mscore/editstyle.ui" line="1475"/>
         <source>interval</source>
         <translation>intervalas</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1519"/>
-        <location filename="../../mscore/editstyle.ui" line="1561"/>
+        <location filename="../../mscore/editstyle.ui" line="1525"/>
+        <location filename="../../mscore/editstyle.ui" line="1567"/>
         <source>spaces</source>
         <translation>tarpai</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="656"/>
+        <location filename="../../mscore/editstyle.ui" line="659"/>
         <source>Create courtesy key signatures</source>
-        <translation type="unfinished"/>
+        <translation>Įterpti tonacijos pasikeitimo priminimus</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="234"/>
@@ -2218,282 +2218,282 @@ space unit</extracomment>
         <translation>Žodžių viršutinė paraštė</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="447"/>
+        <location filename="../../mscore/editstyle.ui" line="450"/>
         <source>Lyrics lower margin</source>
         <translation>Žodžių apatinė paraštė</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="460"/>
+        <location filename="../../mscore/editstyle.ui" line="463"/>
         <source>V-frame upper margin</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="492"/>
+        <location filename="../../mscore/editstyle.ui" line="495"/>
         <source>V-frame lower margin</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="732"/>
+        <location filename="../../mscore/editstyle.ui" line="738"/>
         <source>Fix Number of Measures/System:</source>
-        <translation type="unfinished"/>
+        <translation>Taktų sistemoje skaičius:</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="739"/>
+        <location filename="../../mscore/editstyle.ui" line="745"/>
         <source>Fix Measure Width</source>
         <translation>Pataisyti takto plotį</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="769"/>
+        <location filename="../../mscore/editstyle.ui" line="775"/>
         <source>Spacing (1=tight)</source>
         <translation>Tarpai (1=maži)</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="798"/>
+        <location filename="../../mscore/editstyle.ui" line="804"/>
         <source>Left margin</source>
         <translation>Kairioji paraštė</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="824"/>
+        <location filename="../../mscore/editstyle.ui" line="830"/>
         <source>Right margin</source>
         <translation>Dešinioji paraštė</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="850"/>
+        <location filename="../../mscore/editstyle.ui" line="856"/>
         <source>Min. note distance</source>
         <translation>Minimali distancija tarp natų</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="876"/>
+        <location filename="../../mscore/editstyle.ui" line="882"/>
         <source>Clef left margin</source>
         <translation>Rakto paraštė</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="902"/>
+        <location filename="../../mscore/editstyle.ui" line="908"/>
         <source>Key sig. left margin</source>
-        <translation type="unfinished"/>
+        <translation>Tonacijos kairioji paraštė</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="928"/>
+        <location filename="../../mscore/editstyle.ui" line="934"/>
         <source>Time sig. left margin</source>
-        <translation type="unfinished"/>
+        <translation>Metro kairioji paraštė</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="954"/>
+        <location filename="../../mscore/editstyle.ui" line="960"/>
         <source>Clef-key distance</source>
-        <translation type="unfinished"/>
+        <translation>Atstumas nuo rakto iki tonacjos</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="980"/>
+        <location filename="../../mscore/editstyle.ui" line="986"/>
         <source>Clef-barline distance</source>
         <translation>Distancija tarp rakto ir baro</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1000"/>
+        <location filename="../../mscore/editstyle.ui" line="1006"/>
         <source>Begin repeat left margin</source>
         <translation>Kartojimo pradžios kairioji paraštė</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1038"/>
+        <location filename="../../mscore/editstyle.ui" line="1044"/>
         <source>Show repeat bar tips ("winged" repeats)</source>
-        <translation type="unfinished"/>
+        <translation>Pakartojimus rodyti „gražiai“</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1045"/>
+        <location filename="../../mscore/editstyle.ui" line="1051"/>
         <source>Barline at start of single staff</source>
         <translation>Takto brūkšnys pavienės penklinės pradžioje</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1052"/>
+        <location filename="../../mscore/editstyle.ui" line="1058"/>
         <source>Barline at start of multiple staves</source>
         <translation>Baras penklinių pradžioje</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1095"/>
+        <location filename="../../mscore/editstyle.ui" line="1101"/>
         <source>Progression</source>
         <translation>Progresas</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1125"/>
+        <location filename="../../mscore/editstyle.ui" line="1131"/>
         <source>Shortest stem</source>
         <translation>Trumpiausias kotelis</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1155"/>
+        <location filename="../../mscore/editstyle.ui" line="1161"/>
         <source>Accidental note distance</source>
         <translation>Alteruotos natos distancija</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1178"/>
+        <location filename="../../mscore/editstyle.ui" line="1184"/>
         <source>Accidental distance</source>
         <translation>Alteracijos distancija</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1201"/>
+        <location filename="../../mscore/editstyle.ui" line="1207"/>
         <source>Note dot distance</source>
         <translation>Natos taško distancija</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1224"/>
+        <location filename="../../mscore/editstyle.ui" line="1230"/>
         <source>Dot dot distance</source>
-        <translation type="unfinished"/>
+        <translation>Atstumas tarp taškų</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1247"/>
+        <location filename="../../mscore/editstyle.ui" line="1253"/>
         <source>Ledger line width</source>
-        <translation type="unfinished"/>
+        <translation>Papildomos linijos plotis</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1303"/>
+        <location filename="../../mscore/editstyle.ui" line="1309"/>
         <source>Distance to note</source>
         <translation>Atstumas iki natos</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1826"/>
+        <location filename="../../mscore/editstyle.ui" line="1832"/>
         <source>Line break height</source>
-        <translation type="unfinished"/>
+        <translation>Lūžio aukštis</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1866"/>
+        <location filename="../../mscore/editstyle.ui" line="1872"/>
         <source>Use German names</source>
         <translation>Naudoti vokiškus pavadinimus</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1875"/>
+        <location filename="../../mscore/editstyle.ui" line="1881"/>
         <source>Chord description file</source>
         <translation>Akordą aprašantis failas</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1920"/>
+        <location filename="../../mscore/editstyle.ui" line="1926"/>
         <source>Articulation - note head distance</source>
-        <translation type="unfinished"/>
+        <translation>Artikuliavimas - atstumas iki natos galvutės</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1937"/>
+        <location filename="../../mscore/editstyle.ui" line="1943"/>
         <source>Articulation - note stem distance</source>
-        <translation type="unfinished"/>
+        <translation>Artikuliavimas -  natos kotelio atstumas</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1954"/>
+        <location filename="../../mscore/editstyle.ui" line="1960"/>
         <source>Articulation - articulation distance</source>
-        <translation type="unfinished"/>
+        <translation>Artikuliavimas - artikuliavimo ženklo atstumas</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="2030"/>
+        <location filename="../../mscore/editstyle.ui" line="2036"/>
         <source>Stem Direction in Multi Voice Context</source>
-        <translation type="unfinished"/>
+        <translation>Kotelio kryptis kai yra keletas balsų</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1540"/>
+        <location filename="../../mscore/editstyle.ui" line="1546"/>
         <source>beam width units</source>
-        <translation type="unfinished"/>
+        <translation>sijos pločio vnt.</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1323"/>
-        <location filename="../../mscore/editstyle.ui" line="1785"/>
+        <location filename="../../mscore/editstyle.ui" line="1329"/>
+        <location filename="../../mscore/editstyle.ui" line="1791"/>
         <source>Line width</source>
         <translation>Linijos plotis</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1343"/>
+        <location filename="../../mscore/editstyle.ui" line="1349"/>
         <source>Hook length</source>
-        <translation type="unfinished"/>
+        <translation>Vėliavėlės ilgis</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1505"/>
+        <location filename="../../mscore/editstyle.ui" line="1511"/>
         <source>Beam width</source>
         <translation>Sijos plotis</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1526"/>
+        <location filename="../../mscore/editstyle.ui" line="1532"/>
         <source>Beam distance</source>
         <translation>Sijos distancija</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1547"/>
+        <location filename="../../mscore/editstyle.ui" line="1553"/>
         <source>Minimum length</source>
         <translation>Minimalus ilgis</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1568"/>
+        <location filename="../../mscore/editstyle.ui" line="1574"/>
         <source>Minimum slope</source>
-        <translation type="unfinished"/>
+        <translation>Minimalus polinkis</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1585"/>
+        <location filename="../../mscore/editstyle.ui" line="1591"/>
         <source>Maximum slope</source>
-        <translation type="unfinished"/>
+        <translation>Maksimalus polinkis</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1628"/>
+        <location filename="../../mscore/editstyle.ui" line="1634"/>
         <source>Small staff size</source>
-        <translation type="unfinished"/>
+        <translation>Sumažinto dydžio penklinė</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1666"/>
+        <location filename="../../mscore/editstyle.ui" line="1672"/>
         <source>Small note size</source>
         <translation>Mažos natos dydis</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1701"/>
+        <location filename="../../mscore/editstyle.ui" line="1707"/>
         <source>Grace note size</source>
         <translation>Foršlago dydis</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1739"/>
+        <location filename="../../mscore/editstyle.ui" line="1745"/>
         <source>Small clef size</source>
         <translation>Mažo rakto dydis</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1812"/>
+        <location filename="../../mscore/editstyle.ui" line="1818"/>
         <source>Height</source>
         <translation>Aukštis</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1885"/>
+        <location filename="../../mscore/editstyle.ui" line="1891"/>
         <source>...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1927"/>
-        <location filename="../../mscore/editstyle.ui" line="1944"/>
-        <location filename="../../mscore/editstyle.ui" line="1961"/>
+        <location filename="../../mscore/editstyle.ui" line="1933"/>
+        <location filename="../../mscore/editstyle.ui" line="1950"/>
+        <location filename="../../mscore/editstyle.ui" line="1967"/>
         <source>sp</source>
         <comment>space unit</comment>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Atstumas tarp penklinių</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="2039"/>
+        <location filename="../../mscore/editstyle.ui" line="2045"/>
         <source>Voice 1</source>
         <translation>Balsas 1</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="2046"/>
-        <location filename="../../mscore/editstyle.ui" line="2067"/>
-        <location filename="../../mscore/editstyle.ui" line="2088"/>
-        <location filename="../../mscore/editstyle.ui" line="2109"/>
+        <location filename="../../mscore/editstyle.ui" line="2052"/>
+        <location filename="../../mscore/editstyle.ui" line="2073"/>
+        <location filename="../../mscore/editstyle.ui" line="2094"/>
+        <location filename="../../mscore/editstyle.ui" line="2115"/>
         <source>Up</source>
         <translation>Aukštyn</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="2053"/>
-        <location filename="../../mscore/editstyle.ui" line="2074"/>
-        <location filename="../../mscore/editstyle.ui" line="2095"/>
-        <location filename="../../mscore/editstyle.ui" line="2116"/>
+        <location filename="../../mscore/editstyle.ui" line="2059"/>
+        <location filename="../../mscore/editstyle.ui" line="2080"/>
+        <location filename="../../mscore/editstyle.ui" line="2101"/>
+        <location filename="../../mscore/editstyle.ui" line="2122"/>
         <source>Down</source>
         <translation>Žemyn</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="2060"/>
+        <location filename="../../mscore/editstyle.ui" line="2066"/>
         <source>Voice 2</source>
         <translation>Balsas 2</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="2081"/>
+        <location filename="../../mscore/editstyle.ui" line="2087"/>
         <source>Voice 3</source>
         <translation>Balsas 3</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="2102"/>
+        <location filename="../../mscore/editstyle.ui" line="2108"/>
         <source>Voice 4</source>
         <translation>Balsas 4</translation>
     </message>
@@ -2529,17 +2529,17 @@ space unit</extracomment>
 <context>
     <name>Element</name>
     <message>
-        <location filename="../../mscore/element.cpp" line="559"/>
+        <location filename="../../mscore/element.cpp" line="564"/>
         <source>Set Invisible</source>
         <translation>Nerodyti</translation>
     </message>
     <message>
-        <location filename="../../mscore/element.cpp" line="561"/>
+        <location filename="../../mscore/element.cpp" line="566"/>
         <source>Set Visible</source>
         <translation>Rodyti</translation>
     </message>
     <message>
-        <location filename="../../mscore/element.cpp" line="563"/>
+        <location filename="../../mscore/element.cpp" line="568"/>
         <source>Color...</source>
         <translation>Spalva...</translation>
     </message>
@@ -2554,17 +2554,17 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/element.ui" line="142"/>
         <source>selectable</source>
-        <translation type="unfinished"/>
+        <translation>žymėtina</translation>
     </message>
     <message>
         <location filename="../../mscore/element.ui" line="149"/>
         <source>droptarget</source>
-        <translation type="unfinished"/>
+        <translation>padėjimo vieta</translation>
     </message>
     <message>
         <location filename="../../mscore/element.ui" line="256"/>
         <source>invalid</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">netinkama</translation>
     </message>
 </context>
 <context>
@@ -2847,7 +2847,7 @@ space unit</extracomment>
         <location filename="../../mscore/instrdialog.ui" line="37"/>
         <location filename="../../mscore/instrdialog.ui" line="233"/>
         <source>0</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">0</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.ui" line="45"/>
@@ -2892,7 +2892,7 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/instrdialog.ui" line="238"/>
         <source>1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">1</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.ui" line="256"/>
@@ -2934,7 +2934,7 @@ space unit</extracomment>
         <location filename="../../mscore/instrwizard.ui" line="35"/>
         <location filename="../../mscore/instrwizard.ui" line="196"/>
         <source>0</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">0</translation>
     </message>
     <message>
         <location filename="../../mscore/instrwizard.ui" line="43"/>
@@ -2974,7 +2974,7 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/instrwizard.ui" line="201"/>
         <source>1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">1</translation>
     </message>
     <message>
         <location filename="../../mscore/newwizard.cpp" line="44"/>
@@ -3035,7 +3035,8 @@ space unit</extracomment>
         <location filename="../../mscore/instrdialog.cpp" line="1025"/>
         <source>
 failed: </source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">
+nepavyko: </translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.cpp" line="1027"/>
@@ -3135,12 +3136,12 @@ failed: </source>
     <message>
         <location filename="../../mscore/keysig.cpp" line="262"/>
         <source>Hide courtesy signature</source>
-        <translation type="unfinished"/>
+        <translation>Slėpti tonacijos priminimą</translation>
     </message>
     <message>
         <location filename="../../mscore/keysig.cpp" line="263"/>
         <source>Show courtesy signature</source>
-        <translation type="unfinished"/>
+        <translation>Rodyti tonacijos priminimą</translation>
     </message>
     <message>
         <location filename="../../mscore/keysig.cpp" line="266"/>
@@ -3181,7 +3182,7 @@ failed: </source>
         <location filename="../../mscore/lineproperties.ui" line="704"/>
         <location filename="../../mscore/lineproperties.ui" line="740"/>
         <source>sp</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Atstumas tarp penklinių</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="51"/>
@@ -3196,7 +3197,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="67"/>
         <source>dash</source>
-        <translation type="unfinished"/>
+        <translation>brūkšnelis</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="72"/>
@@ -3206,12 +3207,12 @@ failed: </source>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="77"/>
         <source>dash dot</source>
-        <translation type="unfinished"/>
+        <translation>brūkšnelis taškas</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="82"/>
         <source>dash dot dot</source>
-        <translation type="unfinished"/>
+        <translation>brūkšnelis taškas taškas</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="96"/>
@@ -3290,7 +3291,7 @@ failed: </source>
         <location filename="../../mscore/lineproperties.ui" line="336"/>
         <location filename="../../mscore/lineproperties.ui" line="725"/>
         <source>Hook</source>
-        <translation type="unfinished"/>
+        <translation>Vėliavėlė</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="361"/>
@@ -3329,7 +3330,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/linesegment.ui" line="39"/>
         <source>SINGLE</source>
-        <translation type="unfinished"/>
+        <translation>Atskira</translation>
     </message>
     <message>
         <location filename="../../mscore/linesegment.ui" line="44"/>
@@ -3349,12 +3350,12 @@ failed: </source>
     <message>
         <location filename="../../mscore/linesegment.ui" line="79"/>
         <source>Pos2</source>
-        <translation type="unfinished"/>
+        <translation>Pozicija2</translation>
     </message>
     <message>
         <location filename="../../mscore/linesegment.ui" line="95"/>
         <source>Offset2</source>
-        <translation type="unfinished"/>
+        <translation>Poslinkis2</translation>
     </message>
 </context>
 <context>
@@ -3402,7 +3403,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/lyrics.ui" line="83"/>
         <source>End Tick:</source>
-        <translation type="unfinished"/>
+        <translation>Pabaigos ženklas:</translation>
     </message>
 </context>
 <context>
@@ -3442,7 +3443,7 @@ failed: </source>
 <context>
     <name>Measure</name>
     <message>
-        <location filename="../../mscore/measure.cpp" line="1788"/>
+        <location filename="../../mscore/measure.cpp" line="1781"/>
         <source>Measure Properties...</source>
         <translation>Takto savybės...</translation>
     </message>
@@ -3503,7 +3504,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="86"/>
         <source>Stemless</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Be kotelio</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="91"/>
@@ -3513,7 +3514,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="102"/>
         <source>visible</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">matoma</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="110"/>
@@ -3569,7 +3570,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="319"/>
         <source>layout stretch</source>
-        <translation type="unfinished"/>
+        <translation>išplėsčiau</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="342"/>
@@ -3608,7 +3609,7 @@ failed: </source>
 <context>
     <name>MenuNotes</name>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="678"/>
+        <location filename="../../mscore/mscore.cpp" line="683"/>
         <source>&amp;Notes</source>
         <translation>&amp;Natos</translation>
     </message>
@@ -3633,12 +3634,12 @@ failed: </source>
     <message>
         <location filename="../../mscore/metaedit.ui" line="39"/>
         <source>Movement Title:</source>
-        <translation type="unfinished"/>
+        <translation>Dalies pavadinimas:</translation>
     </message>
     <message>
         <location filename="../../mscore/metaedit.ui" line="49"/>
         <source>Movement Number:</source>
-        <translation type="unfinished"/>
+        <translation>Dalies numeris:</translation>
     </message>
     <message>
         <location filename="../../mscore/metaedit.ui" line="59"/>
@@ -3695,23 +3696,23 @@ failed: </source>
         <translation>Skaitlinė</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="533"/>
+        <location filename="../../mscore/mscore.cpp" line="538"/>
         <source>Concert Pitch</source>
         <translation>A440</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="750"/>
+        <location filename="../../mscore/mscore.cpp" line="755"/>
         <source>Breaks &amp;&amp; Spacer...</source>
         <translation>Trūkiai ir tarpai...</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2415"/>
+        <location filename="../../mscore/mscore.cpp" line="2430"/>
         <source>Search</source>
         <translation>Ieškoti</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="146"/>
-        <location filename="../../mscore/mscore.cpp" line="2997"/>
+        <location filename="../../mscore/mscore.cpp" line="3017"/>
         <source>MuseScore</source>
         <translation>MuseScore</translation>
     </message>
@@ -3773,27 +3774,22 @@ prieš užbaigiant darbą?</translation>
         <translation>Overture failai &lt;bandomasis&gt; (*.ove);;</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="193"/>
-        <source>All Files (*)</source>
-        <translation>Visi failai (*)</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/file.cpp" line="548"/>
+        <location filename="../../mscore/file.cpp" line="552"/>
         <source>Untitled</source>
         <translation>Be pavadinimo</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="602"/>
+        <location filename="../../mscore/file.cpp" line="606"/>
         <source>MuseScore: failure</source>
         <translation>MuseScore: trikis</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="603"/>
+        <location filename="../../mscore/file.cpp" line="607"/>
         <source>Load template file </source>
         <translation>Įkelti šablono failą </translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="603"/>
+        <location filename="../../mscore/file.cpp" line="607"/>
         <source> failed</source>
         <translation> nepavyko</translation>
     </message>
@@ -3942,7 +3938,7 @@ prieš užbaigiant darbą?</translation>
         <location filename="../../mscore/menus.cpp" line="219"/>
         <location filename="../../mscore/menus.cpp" line="993"/>
         <source>Dashed</source>
-        <translation type="unfinished"/>
+        <translation>Punktyras</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="244"/>
@@ -4001,7 +3997,7 @@ prieš užbaigiant darbą?</translation>
         <location filename="../../mscore/menus.cpp" line="316"/>
         <location filename="../../mscore/menus.cpp" line="853"/>
         <source>Line</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Linija</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="325"/>
@@ -4038,7 +4034,7 @@ prieš užbaigiant darbą?</translation>
         <location filename="../../mscore/menus.cpp" line="458"/>
         <location filename="../../mscore/menus.cpp" line="1042"/>
         <source>String number %1</source>
-        <translation type="unfinished"/>
+        <translation>Stygos numeris %1</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="518"/>
@@ -4099,11 +4095,6 @@ prieš užbaigiant darbą?</translation>
         <translation>Be sijos</translation>
     </message>
     <message>
-        <location filename="../../mscore/menus.cpp" line="621"/>
-        <source>Start subbeam</source>
-        <translation>Pogrupio pradžia</translation>
-    </message>
-    <message>
         <location filename="../../mscore/menus.cpp" line="626"/>
         <source>Auto beam</source>
         <translation>Sija automatiškai</translation>
@@ -4137,13 +4128,13 @@ prieš užbaigiant darbą?</translation>
         <location filename="../../mscore/menus.cpp" line="220"/>
         <location filename="../../mscore/menus.cpp" line="994"/>
         <source>End Bar</source>
-        <translation type="unfinished"/>
+        <translation>Pabaigos brūkšnys</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="221"/>
         <location filename="../../mscore/menus.cpp" line="995"/>
         <source>Double Bar</source>
-        <translation type="unfinished"/>
+        <translation>Dvigubas brūkšnys</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="222"/>
@@ -4358,7 +4349,7 @@ prieš užbaigiant darbą?</translation>
     <message>
         <location filename="../../mscore/menus.cpp" line="682"/>
         <source>Text</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Tekstas</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="727"/>
@@ -4401,117 +4392,117 @@ prieš užbaigiant darbą?</translation>
         <translation>MuseScore: Trūkiai ir tarpai</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="491"/>
+        <location filename="../../mscore/mscore.cpp" line="496"/>
         <source>File Operations</source>
         <translation>Veiksmai su failais</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="512"/>
+        <location filename="../../mscore/mscore.cpp" line="517"/>
         <source>Transport Tools</source>
         <translation>Transportavimo įrankiai</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="541"/>
+        <location filename="../../mscore/mscore.cpp" line="546"/>
         <source>Note Entry</source>
         <translation>Natos rašymas</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="602"/>
+        <location filename="../../mscore/mscore.cpp" line="607"/>
         <source>&amp;File</source>
         <translation>&amp;Failas</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="607"/>
+        <location filename="../../mscore/mscore.cpp" line="612"/>
         <source>Open &amp;Recent</source>
         <translation>Atverti &amp;paskiausią</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="629"/>
+        <location filename="../../mscore/mscore.cpp" line="634"/>
         <source>&amp;Edit</source>
         <translation>&amp;Taisa</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="650"/>
+        <location filename="../../mscore/mscore.cpp" line="655"/>
         <source>Voices</source>
         <translation>Balsai</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="664"/>
+        <location filename="../../mscore/mscore.cpp" line="669"/>
         <source>Preferences...</source>
         <translation>Nuostatos</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="685"/>
+        <location filename="../../mscore/mscore.cpp" line="690"/>
         <source>Add Note</source>
         <translation>Pridėti natą</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="701"/>
+        <location filename="../../mscore/mscore.cpp" line="706"/>
         <source>Add Interval</source>
         <translation>Pridėti intervalą</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="717"/>
+        <location filename="../../mscore/mscore.cpp" line="722"/>
         <location filename="../../mscore/style.cpp" line="274"/>
         <source>Tuplets</source>
         <translation>Ritminės grupės</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="739"/>
+        <location filename="../../mscore/mscore.cpp" line="744"/>
         <source>&amp;Layout</source>
         <translation>&amp;Išdėstymas</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="742"/>
+        <location filename="../../mscore/mscore.cpp" line="747"/>
         <source>Page Settings...</source>
         <translation>Lapo nuostatos</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="846"/>
+        <location filename="../../mscore/mscore.cpp" line="851"/>
         <source>Check for Update</source>
         <translation>Atnaujinimų patikra</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2705"/>
+        <location filename="../../mscore/mscore.cpp" line="2725"/>
         <source>Bar %1 Beat %2.%3</source>
         <translation>Taktas %1 Dalis %2.%3</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2998"/>
+        <location filename="../../mscore/mscore.cpp" line="3018"/>
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
         <translation>Ankstesnė sesija netikėtai nutrūko. Ar ją grąžinti?</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="756"/>
+        <location filename="../../mscore/mscore.cpp" line="761"/>
         <source>&amp;Style</source>
         <translation>&amp;Stiliai</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="770"/>
+        <location filename="../../mscore/mscore.cpp" line="775"/>
         <source>&amp;Display</source>
         <translation>&amp;Ekranas</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="837"/>
+        <location filename="../../mscore/mscore.cpp" line="842"/>
         <source>&amp;Help</source>
         <translation>&amp;Žinynas</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="841"/>
+        <location filename="../../mscore/mscore.cpp" line="846"/>
         <source>Online Handbook</source>
         <translation>Žinynas internete</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="927"/>
+        <location filename="../../mscore/mscore.cpp" line="933"/>
         <source>MuseScore handbook not found at: 
 </source>
         <translation>„MuseScore“ žinyno nepavyko rasti. Ieškota štai čia: 
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="929"/>
+        <location filename="../../mscore/mscore.cpp" line="935"/>
         <source>
 
 From the "Help" menu try choosing "Online Handbook" instead.</source>
@@ -4520,42 +4511,42 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
 Atvėrę meniu „Žinynas“ pabandykite pasirinkti „Žinynas internete“.</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="843"/>
+        <location filename="../../mscore/mscore.cpp" line="848"/>
         <source>&amp;About</source>
         <translation>&amp;Apie</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="844"/>
+        <location filename="../../mscore/mscore.cpp" line="849"/>
         <source>About&amp;Qt</source>
         <translation>Apie Qt</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="930"/>
+        <location filename="../../mscore/mscore.cpp" line="936"/>
         <source>MuseScore: Open Help</source>
         <translation>MuseScore: Žinynas</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2363"/>
+        <location filename="../../mscore/mscore.cpp" line="2378"/>
         <source>no score</source>
         <translation>nėra natų sąsiuvinio</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2374"/>
+        <location filename="../../mscore/mscore.cpp" line="2389"/>
         <source>note entry mode</source>
         <translation>natų įrašymo veiksena</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2378"/>
+        <location filename="../../mscore/mscore.cpp" line="2393"/>
         <source>edit mode</source>
         <translation>redagavimas</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2382"/>
+        <location filename="../../mscore/mscore.cpp" line="2397"/>
         <source>play</source>
         <translation>groti</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2398"/>
+        <location filename="../../mscore/mscore.cpp" line="2413"/>
         <source>Go To: </source>
         <translation>Eiti į: </translation>
     </message>
@@ -4582,12 +4573,12 @@ Atvėrę meniu „Žinynas“ pabandykite pasirinkti „Žinynas internete“.</
     <message>
         <location filename="../../mscore/style.cpp" line="237"/>
         <source>InstrumentsLong</source>
-        <translation type="unfinished"/>
+        <translation>Instrumentai</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="240"/>
         <source>InstrumentsShort</source>
-        <translation type="unfinished"/>
+        <translation>Instrumentai trumpai</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="243"/>
@@ -4617,18 +4608,18 @@ Atvėrę meniu „Žinynas“ pabandykite pasirinkti „Žinynas internete“.</
     <message>
         <location filename="../../mscore/style.cpp" line="271"/>
         <source>Translator</source>
-        <translation type="unfinished"/>
+        <translation>Vertėjas</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2097"/>
+        <location filename="../../mscore/mscore.cpp" line="2112"/>
         <location filename="../../mscore/style.cpp" line="277"/>
         <source>System</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sistema</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="281"/>
         <source>Staff</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Penklinė</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="284"/>
@@ -4669,11 +4660,11 @@ Atvėrę meniu „Žinynas“ pabandykite pasirinkti „Žinynas internete“.</
     <message>
         <location filename="../../mscore/style.cpp" line="310"/>
         <source>Ottava</source>
-        <translation type="unfinished"/>
+        <translation>Oktava</translation>
     </message>
     <message>
         <location filename="../../mscore/plugins.cpp" line="88"/>
-        <location filename="../../mscore/plugins.cpp" line="422"/>
+        <location filename="../../mscore/plugins.cpp" line="450"/>
         <source>Error loading plugin
 "%1" line %2:
 %3</source>
@@ -4700,22 +4691,22 @@ su naudojama sąsaja nesuderinamas</translation>
 <context>
     <name>MyWebView</name>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="136"/>
+        <location filename="../../mscore/webpage.cpp" line="135"/>
         <source>Could not&lt;br /&gt; connect</source>
         <translation>Nepavyksta&lt;br /&gt; prisijungti</translation>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="137"/>
+        <location filename="../../mscore/webpage.cpp" line="136"/>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
         <translation>Tam, kad galėtumėte prisijungti prie programos naudotojų bendruomenės, &lt;br /&gt; Jūsų kompiuteris turėtų būti &lt;br /&gt; prijungtas prie Interneto</translation>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="138"/>
+        <location filename="../../mscore/webpage.cpp" line="137"/>
         <source>Retry</source>
         <translation>Pakartoti</translation>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="139"/>
+        <location filename="../../mscore/webpage.cpp" line="138"/>
         <source>Close this permanently</source>
         <translation>Užverti</translation>
     </message>
@@ -4876,12 +4867,12 @@ su naudojama sąsaja nesuderinamas</translation>
     <message>
         <location filename="../../mscore/note.ui" line="249"/>
         <source>OnTime:</source>
-        <translation type="unfinished"/>
+        <translation>Įjungimo momentas:</translation>
     </message>
     <message>
         <location filename="../../mscore/note.ui" line="313"/>
         <source>OffTime:</source>
-        <translation type="unfinished"/>
+        <translation>Išjungimo momentas:</translation>
     </message>
     <message>
         <location filename="../../mscore/note.ui" line="263"/>
@@ -5053,7 +5044,7 @@ su naudojama sąsaja nesuderinamas</translation>
 <context>
     <name>PaletteBox</name>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1120"/>
+        <location filename="../../mscore/palette.cpp" line="1122"/>
         <source>Palettes</source>
         <translation>Paletės</translation>
     </message>
@@ -5061,32 +5052,32 @@ su naudojama sąsaja nesuderinamas</translation>
 <context>
     <name>PaletteBoxButton</name>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1028"/>
+        <location filename="../../mscore/palette.cpp" line="1030"/>
         <source>Palette Properties</source>
         <translation>Paletės savybės</translation>
     </message>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1031"/>
+        <location filename="../../mscore/palette.cpp" line="1033"/>
         <source>Insert new Palette</source>
         <translation>Įterpti naują paletę</translation>
     </message>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1034"/>
+        <location filename="../../mscore/palette.cpp" line="1036"/>
         <source>Move Palette Up</source>
         <translation>Perkelti paletę aukštyn</translation>
     </message>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1037"/>
+        <location filename="../../mscore/palette.cpp" line="1039"/>
         <source>Move Palette Down</source>
         <translation>Perkelti paletę žemyn</translation>
     </message>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1040"/>
+        <location filename="../../mscore/palette.cpp" line="1042"/>
         <source>Enable Editing</source>
         <translation>Įgalinti redagavimą</translation>
     </message>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1045"/>
+        <location filename="../../mscore/palette.cpp" line="1047"/>
         <source>Delete Palette</source>
         <translation>Pašalinti paletę</translation>
     </message>
@@ -5111,12 +5102,12 @@ su naudojama sąsaja nesuderinamas</translation>
     <message>
         <location filename="../../mscore/cellproperties.ui" line="65"/>
         <source>x:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">x:</translation>
     </message>
     <message>
         <location filename="../../mscore/cellproperties.ui" line="85"/>
         <source>y:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">y:</translation>
     </message>
 </context>
 <context>
@@ -5374,48 +5365,48 @@ su naudojama sąsaja nesuderinamas</translation>
 <context>
     <name>PreferenceDialog</name>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="935"/>
+        <location filename="../../mscore/preferences.cpp" line="938"/>
         <source>Choose Working Directory</source>
         <translation>Pasirinkti darbinį failų sistemos aplanką</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="950"/>
+        <location filename="../../mscore/preferences.cpp" line="953"/>
         <source>Choose Instrument List</source>
         <translation>Pasirinkti instrumentų komplektą</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="952"/>
+        <location filename="../../mscore/preferences.cpp" line="955"/>
         <source>Instrument List (*.xml)</source>
         <translation>Instrumentų komplektas (*.xml)</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="966"/>
+        <location filename="../../mscore/preferences.cpp" line="969"/>
         <source>Choose Starting Score</source>
         <translation>Pasirinkti pradinę partitūrą</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="657"/>
+        <location filename="../../mscore/preferences.cpp" line="660"/>
         <source>default</source>
         <translation>numatytasis</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="903"/>
+        <location filename="../../mscore/preferences.cpp" line="906"/>
         <source>Choose Notepaper</source>
         <translation>Pasirinkti natų popierių</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="905"/>
-        <location filename="../../mscore/preferences.cpp" line="921"/>
+        <location filename="../../mscore/preferences.cpp" line="908"/>
+        <location filename="../../mscore/preferences.cpp" line="924"/>
         <source>Images (*.jpg *.gif *.png)</source>
         <translation>Paveikslai (*.jpg *.gif *.png)</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="919"/>
+        <location filename="../../mscore/preferences.cpp" line="922"/>
         <source>Choose Background Wallpaper</source>
         <translation>Pasirinkti fono paveisklą</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="968"/>
+        <location filename="../../mscore/preferences.cpp" line="971"/>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;All (*)</source>
         <translation>MuseScore failai (*.mscz *.mscx *.msc);;All (*)</translation>
     </message>
@@ -5574,7 +5565,7 @@ su naudojama sąsaja nesuderinamas</translation>
         <location filename="../../mscore/prefsdialog.ui" line="509"/>
         <location filename="../../mscore/prefsdialog.ui" line="1170"/>
         <source>Height</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Aukštis</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="457"/>
@@ -5646,7 +5637,7 @@ su naudojama sąsaja nesuderinamas</translation>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="784"/>
         <source>Text</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Tekstas</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="824"/>
@@ -5686,12 +5677,12 @@ su naudojama sąsaja nesuderinamas</translation>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="951"/>
         <source>Drop Target</source>
-        <translation type="unfinished"/>
+        <translation>Elemento vietos spalva</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="978"/>
         <source>Note Entry</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Natos rašymas</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="984"/>
@@ -5711,7 +5702,7 @@ su naudojama sąsaja nesuderinamas</translation>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1020"/>
         <source>ms</source>
-        <translation type="unfinished"/>
+        <translation>ms</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1054"/>
@@ -5873,7 +5864,7 @@ su naudojama sąsaja nesuderinamas</translation>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1486"/>
         <source>default</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">numatytasis</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1493"/>
@@ -6035,27 +6026,27 @@ su naudojama sąsaja nesuderinamas</translation>
 <context>
     <name>QComboBox</name>
     <message>
-        <location filename="../../mscore/textline.cpp" line="525"/>
+        <location filename="../../mscore/textline.cpp" line="532"/>
         <source>Ped (Pedal)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ped (Pedalas žemyn)</translation>
     </message>
     <message>
-        <location filename="../../mscore/textline.cpp" line="526"/>
+        <location filename="../../mscore/textline.cpp" line="533"/>
         <source>* (Pedal)</source>
         <translation>* (Pedalas aukštyn)</translation>
     </message>
     <message>
-        <location filename="../../mscore/textline.cpp" line="527"/>
+        <location filename="../../mscore/textline.cpp" line="534"/>
         <source>. (Pedal)</source>
         <translation>. (Pedalas)</translation>
     </message>
     <message>
-        <location filename="../../mscore/textline.cpp" line="528"/>
+        <location filename="../../mscore/textline.cpp" line="535"/>
         <source>dash (Pedal)</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/textline.cpp" line="529"/>
+        <location filename="../../mscore/textline.cpp" line="536"/>
         <source>tr (Trill)</source>
         <translation>tr (Trelė)</translation>
     </message>
@@ -6112,15 +6103,15 @@ Please select a single note or rest and retry operation
     <message>
         <location filename="../../mscore/capella.cpp" line="1347"/>
         <location filename="../../mscore/file.cpp" line="129"/>
-        <location filename="../../mscore/file.cpp" line="940"/>
-        <location filename="../../mscore/file.cpp" line="962"/>
-        <location filename="../../mscore/importmidi.cpp" line="1412"/>
+        <location filename="../../mscore/file.cpp" line="944"/>
+        <location filename="../../mscore/file.cpp" line="966"/>
+        <location filename="../../mscore/importmidi.cpp" line="1414"/>
         <location filename="../../mscore/instrdialog.cpp" line="1067"/>
-        <location filename="../../mscore/mscore.cpp" line="1611"/>
-        <location filename="../../mscore/mscore.cpp" line="2110"/>
-        <location filename="../../mscore/mscore.cpp" line="2153"/>
-        <location filename="../../mscore/palette.cpp" line="816"/>
-        <location filename="../../mscore/palette.cpp" line="1302"/>
+        <location filename="../../mscore/mscore.cpp" line="1617"/>
+        <location filename="../../mscore/mscore.cpp" line="2125"/>
+        <location filename="../../mscore/mscore.cpp" line="2168"/>
+        <location filename="../../mscore/palette.cpp" line="818"/>
+        <location filename="../../mscore/palette.cpp" line="1304"/>
         <location filename="../../mscore/sym.cpp" line="631"/>
         <source>Quit</source>
         <translation>Baigti darbą</translation>
@@ -6148,30 +6139,30 @@ Please select a single note or rest and retry operation
         <translation>MuseScore: įkėlimas nepavyko:</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="927"/>
-        <location filename="../../mscore/preferences.cpp" line="1393"/>
+        <location filename="../../mscore/file.cpp" line="931"/>
+        <location filename="../../mscore/preferences.cpp" line="1396"/>
         <source>MuseScore: Load Style</source>
         <translation>MuseScore: Atverti stilių</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="929"/>
-        <location filename="../../mscore/preferences.cpp" line="1395"/>
+        <location filename="../../mscore/file.cpp" line="933"/>
+        <location filename="../../mscore/preferences.cpp" line="1398"/>
         <source>MuseScore Styles (*.mss);;All Files (*)</source>
         <translation>MuseScore stiliai (*.mss);;Visi failai (*)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="938"/>
-        <location filename="../../mscore/file.cpp" line="960"/>
+        <location filename="../../mscore/file.cpp" line="942"/>
+        <location filename="../../mscore/file.cpp" line="964"/>
         <source>MuseScore: Load Style failed:</source>
         <translation>MuseScore: Stiliaus failo atverti nepavyko:</translation>
     </message>
     <message>
-        <location filename="../../mscore/harmony.cpp" line="1110"/>
+        <location filename="../../mscore/harmony.cpp" line="1115"/>
         <source>MuseScore: Load chord list failed:</source>
         <translation>MuseScore: Nepavyko įkelti akordų:</translation>
     </message>
     <message>
-        <location filename="../../mscore/importmidi.cpp" line="1410"/>
+        <location filename="../../mscore/importmidi.cpp" line="1412"/>
         <source>MuseScore: load midi</source>
         <translation>MuseScore: Atverti midi</translation>
     </message>
@@ -6181,37 +6172,37 @@ Please select a single note or rest and retry operation
         <translation>MuseScore: Nepavyko atverti stiliaus:</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1607"/>
+        <location filename="../../mscore/mscore.cpp" line="1613"/>
         <source>MuseScore</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1608"/>
+        <location filename="../../mscore/mscore.cpp" line="1614"/>
         <source>reading file &lt;</source>
         <translation>skaitomas failas &lt;</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2108"/>
+        <location filename="../../mscore/mscore.cpp" line="2123"/>
         <source>MuseScore: Load languages failed:</source>
         <translation>MuseScore: Kalbos įkėlimas nepavyko:</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2151"/>
+        <location filename="../../mscore/mscore.cpp" line="2166"/>
         <source>MuseScore: invalid command</source>
         <translation>MuseScore: neteisinga komanda</translation>
     </message>
     <message>
-        <location filename="../../mscore/palette.cpp" line="814"/>
+        <location filename="../../mscore/palette.cpp" line="816"/>
         <source>MuseScore: Load Palette failed:</source>
         <translation>MuseScore: Nepavyko atverti paletės:</translation>
     </message>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1300"/>
+        <location filename="../../mscore/palette.cpp" line="1302"/>
         <source>MuseScore: Load Palettes failed:</source>
         <translation>MuseScore: Nepavyko atverti palečių:</translation>
     </message>
     <message>
-        <location filename="../../mscore/harmony.cpp" line="1097"/>
+        <location filename="../../mscore/harmony.cpp" line="1101"/>
         <source>MuseScore: Open chord list failed:</source>
         <translation>MuseScore: Nepavyko atverti akordų:</translation>
     </message>
@@ -6255,7 +6246,7 @@ Please select a single note or rest and retry operation
     <message>
         <location filename="../../mscore/rest.cpp" line="429"/>
         <source>Tuplet...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ritminė grupė...</translation>
     </message>
     <message>
         <location filename="../../mscore/rest.cpp" line="430"/>
@@ -6293,19 +6284,19 @@ Please select a single note or rest and retry operation
     <message>
         <location filename="../../mscore/restproperties.ui" line="65"/>
         <source>additional leading space </source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">papildoma erdvė (prieš) </translation>
     </message>
     <message>
         <location filename="../../mscore/restproperties.ui" line="72"/>
         <location filename="../../mscore/restproperties.ui" line="92"/>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Atstumas tarp penklinių</translation>
     </message>
     <message>
         <location filename="../../mscore/restproperties.ui" line="85"/>
         <source>additional trailing space</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">papildoma erdvė (po)</translation>
     </message>
 </context>
 <context>
@@ -6318,7 +6309,7 @@ Please select a single note or rest and retry operation
     <message>
         <location filename="../../mscore/line.ui" line="20"/>
         <source>SLine</source>
-        <translation type="unfinished"/>
+        <translation>S-linija</translation>
     </message>
     <message>
         <location filename="../../mscore/line.ui" line="33"/>
@@ -6328,7 +6319,7 @@ Please select a single note or rest and retry operation
     <message>
         <location filename="../../mscore/line.ui" line="57"/>
         <source>Anchor:</source>
-        <translation type="unfinished"/>
+        <translation>Susiejimas:</translation>
     </message>
     <message>
         <location filename="../../mscore/line.ui" line="65"/>
@@ -6343,7 +6334,7 @@ Please select a single note or rest and retry operation
     <message>
         <location filename="../../mscore/line.ui" line="80"/>
         <source>digonal</source>
-        <translation type="unfinished"/>
+        <translation>diagonalė</translation>
     </message>
     <message>
         <location filename="../../mscore/line.ui" line="91"/>
@@ -6353,13 +6344,13 @@ Please select a single note or rest and retry operation
     <message>
         <location filename="../../mscore/line.ui" line="99"/>
         <source>1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">1</translation>
     </message>
 </context>
 <context>
     <name>Score</name>
     <message>
-        <location filename="../../mscore/file.cpp" line="278"/>
+        <location filename="../../mscore/file.cpp" line="282"/>
         <source>The following file is locked: 
 %1 
 
@@ -6380,220 +6371,226 @@ please select a measure and try again</source>
         <translation>Nepasirinkote metro: Prašom pasirinkti metrą ir bandymą pakartoti</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="248"/>
+        <location filename="../../mscore/file.cpp" line="252"/>
         <source>Compressed MuseScore File (*.mscz)</source>
         <translation>Suspaustas MuseScore Failas (*.mscz)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="249"/>
+        <location filename="../../mscore/file.cpp" line="253"/>
         <source>MuseScore File (*.mscx)</source>
         <translation>MuseScore failas (*.mscx)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="251"/>
+        <location filename="../../mscore/file.cpp" line="255"/>
         <source>MuseScore: Save Score</source>
         <translation>MuseScore: Partitūros įrašymas</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="279"/>
-        <location filename="../../mscore/file.cpp" line="294"/>
-        <location filename="../../mscore/file.cpp" line="312"/>
-        <location filename="../../mscore/file.cpp" line="337"/>
-        <location filename="../../mscore/file.cpp" line="349"/>
-        <location filename="../../mscore/file.cpp" line="360"/>
+        <location filename="../../mscore/file.cpp" line="283"/>
+        <location filename="../../mscore/file.cpp" line="298"/>
+        <location filename="../../mscore/file.cpp" line="316"/>
+        <location filename="../../mscore/file.cpp" line="341"/>
+        <location filename="../../mscore/file.cpp" line="353"/>
+        <location filename="../../mscore/file.cpp" line="364"/>
         <source>MuseScore: Save File</source>
         <translation>MuseScore: Failo įrašymas</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="310"/>
+        <location filename="../../mscore/file.cpp" line="314"/>
         <source>Open Temp File
 </source>
         <translation>Atverti laikiną failą
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="310"/>
-        <location filename="../../mscore/file.cpp" line="803"/>
-        <location filename="../../mscore/file.cpp" line="912"/>
-        <location filename="../../mscore/file.cpp" line="1019"/>
+        <location filename="../../mscore/file.cpp" line="314"/>
+        <location filename="../../mscore/file.cpp" line="807"/>
+        <location filename="../../mscore/file.cpp" line="916"/>
+        <location filename="../../mscore/file.cpp" line="1023"/>
         <source>
 failed: </source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">
+nepavyko: </translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="322"/>
         <location filename="../../mscore/file.cpp" line="326"/>
+        <location filename="../../mscore/file.cpp" line="330"/>
         <source>MuseScore: Save File failed: </source>
         <translation>MuseScore: failo įrašymas nepavyko: </translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="338"/>
+        <location filename="../../mscore/file.cpp" line="342"/>
         <source>removing old backup file </source>
         <translation>pašalinama sena atsarginė kopija </translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="338"/>
+        <location filename="../../mscore/file.cpp" line="342"/>
         <source> failed</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"> nepavyko</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="350"/>
+        <location filename="../../mscore/file.cpp" line="354"/>
         <source>renaming old file &lt;</source>
         <translation>pervardinamas senas failas &lt;</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="351"/>
+        <location filename="../../mscore/file.cpp" line="355"/>
         <source>&gt; to backup &lt;</source>
         <translation>&gt;į atsarginę kopiją&lt;</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="351"/>
+        <location filename="../../mscore/file.cpp" line="355"/>
         <source>&gt; failed</source>
         <translation>&gt;nepavyko</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="361"/>
+        <location filename="../../mscore/file.cpp" line="365"/>
         <source>renaming temp. file &lt;</source>
         <translation>pervardinamas laikinasis failas &lt;</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="361"/>
+        <location filename="../../mscore/file.cpp" line="365"/>
         <source>&gt; to &lt;</source>
         <translation>&gt; į &lt;</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="361"/>
+        <location filename="../../mscore/file.cpp" line="365"/>
         <source>&gt; failed:
 </source>
         <translation>&gt;nepavyko:
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="390"/>
+        <location filename="../../mscore/file.cpp" line="394"/>
         <source>Compressed MuseScore Format (*.mscz)</source>
         <translation>Suspaustas MuseScore Failas (*.mscz)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="391"/>
+        <location filename="../../mscore/file.cpp" line="395"/>
         <source>MuseScore Format (*.mscx)</source>
         <translation>MuseScore formatas (*.mscx)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="392"/>
+        <location filename="../../mscore/file.cpp" line="396"/>
         <source>MusicXML Format (*.xml)</source>
         <translation>MusicXML formatas (*.xml)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="393"/>
+        <location filename="../../mscore/file.cpp" line="397"/>
         <source>Compressed MusicXML Format (*.mxl)</source>
         <translation>Suspaustas MusicXML failas (*.mxl)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="394"/>
+        <location filename="../../mscore/file.cpp" line="398"/>
         <source>Standard MIDI File (*.mid)</source>
         <translation>Standartinis MIDI failas (*.mid)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="395"/>
+        <location filename="../../mscore/file.cpp" line="399"/>
         <source>PDF File (*.pdf)</source>
         <translation>PDF failas (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="396"/>
+        <location filename="../../mscore/file.cpp" line="400"/>
         <source>PostScript File (*.ps)</source>
         <translation>PostScript failas (*.ps)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="397"/>
+        <location filename="../../mscore/file.cpp" line="401"/>
         <source>PNG Bitmap Graphic (*.png)</source>
         <translation>PNG (*.png)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="398"/>
+        <location filename="../../mscore/file.cpp" line="402"/>
         <source>Scalable Vector Graphic (*.svg)</source>
         <translation>Vektorinė grafika (*.svg)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="399"/>
+        <location filename="../../mscore/file.cpp" line="403"/>
         <source>Lilypond Format (*.ly)</source>
         <translation>Lilypond formatas (*.ly)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="401"/>
+        <location filename="../../mscore/file.cpp" line="405"/>
         <source>Wave Audio (*.wav)</source>
         <translation>Wave Audio (*.wav)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="402"/>
+        <location filename="../../mscore/file.cpp" line="406"/>
         <source>Flac Audio (*.flac)</source>
         <translation>Flac Audio (*.flac)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="403"/>
+        <location filename="../../mscore/file.cpp" line="407"/>
         <source>Ogg Vorbis Audio (*.ogg)</source>
         <translation>Ogg Vorbis Audio (*.ogg)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="406"/>
+        <location filename="../../mscore/file.cpp" line="410"/>
         <source>MuseScore: Save a Copy</source>
         <translation>MuseScore: Įrašyti kopiją</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="407"/>
-        <location filename="../../mscore/file.cpp" line="454"/>
-        <location filename="../../mscore/file.cpp" line="486"/>
+        <location filename="../../mscore/file.cpp" line="411"/>
+        <location filename="../../mscore/file.cpp" line="458"/>
+        <location filename="../../mscore/file.cpp" line="490"/>
         <source>MuseScore: Save As</source>
         <translation>MuseScore: Įrašyti kaip</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="454"/>
+        <location filename="../../mscore/file.cpp" line="458"/>
         <source>cannot determine file type</source>
         <translation>nepavyksta nustatyti failo tipą</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="803"/>
-        <location filename="../../mscore/file.cpp" line="912"/>
+        <location filename="../../mscore/file.cpp" line="807"/>
+        <location filename="../../mscore/file.cpp" line="916"/>
         <source>Open File
 </source>
         <translation>Atverti failą
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="1006"/>
+        <location filename="../../mscore/file.cpp" line="1010"/>
         <source>MuseScore: Save Style</source>
         <translation>MuseScore: Įrašyti stilių</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="1008"/>
+        <location filename="../../mscore/file.cpp" line="1012"/>
         <source>MuseScore Style File (*.mss)</source>
         <translation>MuseScore stiliaus failas (*.mss)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="1019"/>
+        <location filename="../../mscore/file.cpp" line="1023"/>
         <source>Open Style File
 </source>
         <translation>Atverti stiliaus failą
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="1021"/>
+        <location filename="../../mscore/file.cpp" line="1025"/>
         <source>MuseScore: Open Style file</source>
         <translation>MuseScore: Atverti stiliaus failą</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="1034"/>
+        <location filename="../../mscore/file.cpp" line="1038"/>
         <source>Write Style failed: </source>
         <translation>Stiliaus įrašyti nepavyko: </translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="1035"/>
+        <location filename="../../mscore/file.cpp" line="1039"/>
         <source>MuseScore: Write Style</source>
         <translation>MuseScore: Stiliaus įrašymas</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="1185"/>
+        <location filename="../../mscore/file.cpp" line="1189"/>
         <source>MuseScore: Read File</source>
         <translation>MuseScore: Skaityti failą</translation>
+    </message>
+    <message>
+        <location filename="../../mscore/file.cpp" line="1215"/>
+        <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.cpp" line="154"/>
@@ -6607,9 +6604,10 @@ failed: </source>
     </message>
     <message>
         <location filename="../../mscore/edit.cpp" line="569"/>
-        <location filename="../../mscore/file.cpp" line="1210"/>
+        <location filename="../../mscore/file.cpp" line="1217"/>
+        <location filename="../../mscore/score.cpp" line="415"/>
         <source>MuseScore</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore</translation>
     </message>
     <message>
         <location filename="../../mscore/edit.cpp" line="570"/>
@@ -6617,9 +6615,14 @@ failed: </source>
         <translation>Pirmasis kūrinio metro ženklas negalės būti pašalintas.</translation>
     </message>
     <message>
-        <location filename="../../mscore/importmidi.cpp" line="1411"/>
+        <location filename="../../mscore/importmidi.cpp" line="1413"/>
         <source>Load failed: </source>
         <translation>Atvėrimas nepavyko: </translation>
+    </message>
+    <message>
+        <location filename="../../mscore/score.cpp" line="416"/>
+        <source>Can't open file. File extension "%1" not supported.</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -6643,7 +6646,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/scoreview.cpp" line="889"/>
         <source>Staff</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Penklinė</translation>
     </message>
     <message>
         <location filename="../../mscore/scoreview.cpp" line="890"/>
@@ -6814,7 +6817,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/selectinstr.ui" line="21"/>
         <source>0</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">0</translation>
     </message>
     <message>
         <location filename="../../mscore/selectinstr.ui" line="29"/>
@@ -6975,27 +6978,27 @@ patikrinkite ar kelias iki failo teisingas.</translation>
     <message>
         <location filename="../../mscore/inspector.cpp" line="1069"/>
         <source>beam begin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">sijos pradžia</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="1070"/>
         <source>beam mid</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">sijos vidurys</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="1071"/>
         <source>beam end</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">sijos pabaiga</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="1072"/>
         <source>no beam</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">be sijos</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="1073"/>
         <source>begin 1/32</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">pradžia 1/32</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="1088"/>
@@ -7051,7 +7054,7 @@ patikrinkite ar kelias iki failo teisingas.</translation>
     <message>
         <location filename="../../mscore/slurproperties.ui" line="47"/>
         <source>solid</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Riebi</translation>
     </message>
     <message>
         <location filename="../../mscore/slurproperties.ui" line="57"/>
@@ -7177,12 +7180,12 @@ patikrinkite ar kelias iki failo teisingas.</translation>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="38"/>
         <source>Rev</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Rev</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="68"/>
         <source>Cho</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Choras</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="82"/>
@@ -7199,7 +7202,7 @@ patikrinkite ar kelias iki failo teisingas.</translation>
         <location filename="../../mscore/synthcontrol.ui" line="318"/>
         <location filename="../../mscore/synthcontrol.ui" line="482"/>
         <source>...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="136"/>
@@ -7225,7 +7228,7 @@ patikrinkite ar kelias iki failo teisingas.</translation>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="191"/>
         <source>Reverb</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Reverb</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="203"/>
@@ -7235,7 +7238,7 @@ patikrinkite ar kelias iki failo teisingas.</translation>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="229"/>
         <source>Damp:</source>
-        <translation type="unfinished"/>
+        <translation>Slopinimas:</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="255"/>
@@ -7257,7 +7260,7 @@ patikrinkite ar kelias iki failo teisingas.</translation>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="362"/>
         <source>Chorus</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Choras</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="368"/>
@@ -7267,7 +7270,7 @@ patikrinkite ar kelias iki failo teisingas.</translation>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="376"/>
         <source>Sine</source>
-        <translation type="unfinished"/>
+        <translation>Sinusas</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="381"/>
@@ -7413,7 +7416,7 @@ patikrinkite ar kelias iki failo teisingas.</translation>
     <message>
         <location filename="../../mscore/text.cpp" line="1543"/>
         <source>Staff Properties...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Penklinės savybės...</translation>
     </message>
 </context>
 <context>
@@ -7426,7 +7429,7 @@ patikrinkite ar kelias iki failo teisingas.</translation>
     <message>
         <location filename="../../mscore/textline.ui" line="20"/>
         <source>TextLine</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Teksto eilutė</translation>
     </message>
     <message>
         <location filename="../../mscore/textline.ui" line="31"/>
@@ -7447,17 +7450,17 @@ patikrinkite ar kelias iki failo teisingas.</translation>
 <context>
     <name>TextLineSegment</name>
     <message>
-        <location filename="../../mscore/textline.cpp" line="484"/>
+        <location filename="../../mscore/textline.cpp" line="491"/>
         <source>Set Invisible</source>
         <translation>Nerodyti</translation>
     </message>
     <message>
-        <location filename="../../mscore/textline.cpp" line="486"/>
+        <location filename="../../mscore/textline.cpp" line="493"/>
         <source>Set Visible</source>
         <translation>Rodyti</translation>
     </message>
     <message>
-        <location filename="../../mscore/textline.cpp" line="488"/>
+        <location filename="../../mscore/textline.cpp" line="495"/>
         <source>Line Properties...</source>
         <translation>Linijos savybės...</translation>
     </message>
@@ -7478,16 +7481,16 @@ patikrinkite ar kelias iki failo teisingas.</translation>
 <context>
     <name>TextProp</name>
     <message>
-        <location filename="../../mscore/textproperties.cpp" line="55"/>
+        <location filename="../../mscore/textproperties.cpp" line="56"/>
         <source>mm</source>
         <comment>millimeter unit</comment>
         <translation>mm</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.cpp" line="55"/>
+        <location filename="../../mscore/textproperties.cpp" line="56"/>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Atstumas tarp penklinių</translation>
     </message>
 </context>
 <context>
@@ -7518,7 +7521,7 @@ patikrinkite ar kelias iki failo teisingas.</translation>
     <message>
         <location filename="../../mscore/textproperties.ui" line="35"/>
         <source>font face</source>
-        <translation type="unfinished"/>
+        <translation>Garnitūras</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="48"/>
@@ -7553,7 +7556,7 @@ patikrinkite ar kelias iki failo teisingas.</translation>
     <message>
         <location filename="../../mscore/textproperties.ui" line="147"/>
         <source>I</source>
-        <translation type="unfinished"/>
+        <translation>Kursyvas</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="174"/>
@@ -7563,7 +7566,7 @@ patikrinkite ar kelias iki failo teisingas.</translation>
     <message>
         <location filename="../../mscore/textproperties.ui" line="177"/>
         <source>U</source>
-        <translation type="unfinished"/>
+        <translation>Pabraukta</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="200"/>
@@ -7582,6 +7585,7 @@ patikrinkite ar kelias iki failo teisingas.</translation>
         <location filename="../../mscore/textproperties.ui" line="291"/>
         <location filename="../../mscore/textproperties.ui" line="314"/>
         <location filename="../../mscore/textproperties.ui" line="337"/>
+        <location filename="../../mscore/textproperties.ui" line="360"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -7607,171 +7611,176 @@ patikrinkite ar kelias iki failo teisingas.</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="334"/>
+        <source>center text vertical to text baseline</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/textproperties.ui" line="357"/>
         <source>align bottom edge of text to reference point</source>
         <translation>lygiuoti teksto apačią</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="361"/>
-        <location filename="../../mscore/textproperties.ui" line="696"/>
+        <location filename="../../mscore/textproperties.ui" line="384"/>
+        <location filename="../../mscore/textproperties.ui" line="719"/>
         <source>Color:</source>
         <translation>Spalva:</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="380"/>
+        <location filename="../../mscore/textproperties.ui" line="403"/>
         <source>text color</source>
         <translation>teksto spalva</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="401"/>
+        <location filename="../../mscore/textproperties.ui" line="424"/>
         <source>System Flag</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Taikyti penklinių sistemai</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="423"/>
+        <location filename="../../mscore/textproperties.ui" line="446"/>
         <source>Offset</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Poslinkis</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="443"/>
+        <location filename="../../mscore/textproperties.ui" line="466"/>
         <source>X:</source>
         <extracomment>coordinate</extracomment>
         <translation>X:</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="450"/>
+        <location filename="../../mscore/textproperties.ui" line="473"/>
         <source>horizontal offset to reference point</source>
         <translation>Horizontalus poslinkis nuo atskaitos taško</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="469"/>
+        <location filename="../../mscore/textproperties.ui" line="492"/>
         <source>relX:</source>
-        <translation type="unfinished"/>
+        <translation>relX:</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="476"/>
+        <location filename="../../mscore/textproperties.ui" line="499"/>
         <source>reference point offset in percent of parent width</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../../mscore/textproperties.ui" line="479"/>
-        <location filename="../../mscore/textproperties.ui" line="538"/>
-        <source>%</source>
-        <translation type="unfinished"/>
+        <translation>atskaitos taško poslinkis procentais (standartinio pločio atžvilgiu)</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="502"/>
+        <location filename="../../mscore/textproperties.ui" line="561"/>
+        <source>%</source>
+        <translation type="unfinished">%</translation>
+    </message>
+    <message>
+        <location filename="../../mscore/textproperties.ui" line="525"/>
         <source>Y:</source>
         <extracomment>coordinate</extracomment>
         <translation>Y:</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="509"/>
+        <location filename="../../mscore/textproperties.ui" line="532"/>
         <source>vertical offset to reference point</source>
         <translation>vertikalusis poslinkis</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="528"/>
+        <location filename="../../mscore/textproperties.ui" line="551"/>
         <source>relY:</source>
-        <translation type="unfinished"/>
+        <translation>relY:</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="535"/>
+        <location filename="../../mscore/textproperties.ui" line="558"/>
         <source>reference point offset in percent of parent height</source>
-        <translation type="unfinished"/>
+        <translation>atskaitos taško poslinkis procentais (standartinio aukščio atžvilgiu)</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="559"/>
+        <location filename="../../mscore/textproperties.ui" line="582"/>
         <source>Unit:</source>
         <translation>Vienetai:</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="572"/>
+        <location filename="../../mscore/textproperties.ui" line="595"/>
         <source>offset is absolute</source>
-        <translation type="unfinished"/>
+        <translation>absloliutinis poslinkis</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="575"/>
+        <location filename="../../mscore/textproperties.ui" line="598"/>
         <source>MM</source>
         <translation>mm</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="582"/>
+        <location filename="../../mscore/textproperties.ui" line="605"/>
         <source>offset in Space units</source>
-        <translation type="unfinished"/>
+        <translation>poslinkis tarpeliais</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="585"/>
+        <location filename="../../mscore/textproperties.ui" line="608"/>
         <source>Space</source>
         <translation>Tarpas</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="595"/>
+        <location filename="../../mscore/textproperties.ui" line="618"/>
         <source>enable text frame</source>
         <translation>Įjungti teksto rėmelį</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="598"/>
+        <location filename="../../mscore/textproperties.ui" line="621"/>
         <source>Frame</source>
         <translation>Rėmelis</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="615"/>
+        <location filename="../../mscore/textproperties.ui" line="638"/>
         <source>draw circled frame</source>
         <translation>brėžti apskritą rėmelį</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="618"/>
+        <location filename="../../mscore/textproperties.ui" line="641"/>
         <source>Circle</source>
         <translation>Apvalus</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="625"/>
+        <location filename="../../mscore/textproperties.ui" line="648"/>
         <source>draw boxed frame</source>
         <translation>brėžti stačiakampį rėmelį</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="628"/>
+        <location filename="../../mscore/textproperties.ui" line="651"/>
         <source>Box</source>
         <translation>Stačiakampis</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="639"/>
+        <location filename="../../mscore/textproperties.ui" line="662"/>
         <source>Width:</source>
         <translation>Plotis:</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="646"/>
+        <location filename="../../mscore/textproperties.ui" line="669"/>
         <source>frame line width</source>
         <translation>rėmelio linijos plotis</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="649"/>
-        <location filename="../../mscore/textproperties.ui" line="669"/>
+        <location filename="../../mscore/textproperties.ui" line="672"/>
+        <location filename="../../mscore/textproperties.ui" line="692"/>
         <source>mm</source>
         <translation>mm</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="659"/>
+        <location filename="../../mscore/textproperties.ui" line="682"/>
         <source>Margin:</source>
         <translation>Paraštė:</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="666"/>
+        <location filename="../../mscore/textproperties.ui" line="689"/>
         <source>frame inner margin</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="682"/>
+        <location filename="../../mscore/textproperties.ui" line="705"/>
         <source>Round:</source>
         <translation>Apskrita:</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="689"/>
+        <location filename="../../mscore/textproperties.ui" line="712"/>
         <source>corner round</source>
         <translation>kampo apvalumas</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="703"/>
+        <location filename="../../mscore/textproperties.ui" line="726"/>
         <source>frame color</source>
         <translation>rėmelio spalva</translation>
     </message>
@@ -7812,7 +7821,7 @@ patikrinkite ar kelias iki failo teisingas.</translation>
     <message>
         <location filename="../../mscore/timedialog.cpp" line="74"/>
         <source>2/2 alla breve</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">2/2 alla breve</translation>
     </message>
 </context>
 <context>
@@ -7825,14 +7834,14 @@ patikrinkite ar kelias iki failo teisingas.</translation>
     <message>
         <location filename="../../mscore/timedialog.ui" line="179"/>
         <source>Create Time Signature</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Metro aprašymas</translation>
     </message>
     <message>
         <location filename="../../mscore/timedialog.ui" line="237"/>
         <location filename="../../mscore/timedialog.ui" line="263"/>
         <location filename="../../mscore/timedialog.ui" line="289"/>
         <source>+</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">+</translation>
     </message>
     <message>
         <location filename="../../mscore/timedialog.ui" line="407"/>
@@ -7866,7 +7875,7 @@ patikrinkite ar kelias iki failo teisingas.</translation>
         <location filename="../../mscore/timesigwizard.ui" line="61"/>
         <location filename="../../mscore/timesigwizard.ui" line="135"/>
         <source>/</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">/</translation>
     </message>
     <message>
         <location filename="../../mscore/timesigwizard.ui" line="94"/>
@@ -8221,7 +8230,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/tupletdialog.ui" line="81"/>
         <source>/</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">/</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletdialog.ui" line="138"/>
@@ -8252,7 +8261,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/tupletdialog.ui" line="192"/>
         <source>Bracket</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Akoladė</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletdialog.ui" line="204"/>
@@ -8275,55 +8284,55 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/tupletproperties.ui" line="39"/>
         <source>Number</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Skaičius</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletproperties.ui" line="51"/>
         <source>number</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">skaičius</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletproperties.ui" line="58"/>
         <source>relation</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">susiję</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletproperties.ui" line="65"/>
         <location filename="../../mscore/tupletproperties.ui" line="101"/>
         <source>nothing</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">nieko</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletproperties.ui" line="75"/>
         <source>Bracket</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Akoladė</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletproperties.ui" line="87"/>
         <source>auto bracket</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Akoladė automatiškai</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletproperties.ui" line="94"/>
         <source>bracket</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">akoladė</translation>
     </message>
 </context>
 <context>
     <name>UpdateChecker</name>
     <message>
-        <location filename="../../mscore/updatechecker.cpp" line="79"/>
+        <location filename="../../mscore/updatechecker.cpp" line="82"/>
         <source>An update for MuseScore is available: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
         <translation>Programos atnaujinimo nuoroda: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../mscore/updatechecker.cpp" line="83"/>
+        <location filename="../../mscore/updatechecker.cpp" line="86"/>
         <source>Update Available</source>
         <translation>Yra atnaujinimų</translation>
     </message>
     <message>
-        <location filename="../../mscore/updatechecker.cpp" line="89"/>
-        <location filename="../../mscore/updatechecker.cpp" line="90"/>
+        <location filename="../../mscore/updatechecker.cpp" line="92"/>
+        <location filename="../../mscore/updatechecker.cpp" line="93"/>
         <source>No Update Available</source>
         <translation>Atnaujinimų nėra</translation>
     </message>
@@ -8331,12 +8340,12 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>VBox</name>
     <message>
-        <location filename="../../mscore/box.cpp" line="422"/>
+        <location filename="../../mscore/box.cpp" line="423"/>
         <source>Add</source>
         <translation>Pridėti</translation>
     </message>
     <message>
-        <location filename="../../mscore/box.cpp" line="444"/>
+        <location filename="../../mscore/box.cpp" line="445"/>
         <source>VBox Properties...</source>
         <translation>VBox savybės...</translation>
     </message>
@@ -8376,37 +8385,37 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>WebPageDockWidget</name>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="242"/>
+        <location filename="../../mscore/webpage.cpp" line="235"/>
         <source>Connect with the &lt;br /&gt; Community</source>
         <translation>Programos naudotojų &lt;br /&gt; bendruomenė</translation>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="243"/>
+        <location filename="../../mscore/webpage.cpp" line="236"/>
         <source>Find help</source>
         <translation>Pagalbos paieška</translation>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="244"/>
+        <location filename="../../mscore/webpage.cpp" line="237"/>
         <source>Improve your skills</source>
         <translation>Gebėjimų tobulinimas</translation>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="245"/>
+        <location filename="../../mscore/webpage.cpp" line="238"/>
         <source>Read the latest news</source>
         <translation>Naujienų skaitymas</translation>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="246"/>
+        <location filename="../../mscore/webpage.cpp" line="239"/>
         <source>Download free sheet music</source>
         <translation>Nemokamų gaidų parsisiuntimas</translation>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="247"/>
+        <location filename="../../mscore/webpage.cpp" line="240"/>
         <source>Start</source>
         <translation>Jungtis</translation>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="248"/>
+        <location filename="../../mscore/webpage.cpp" line="241"/>
         <source>Close this permanently</source>
         <translation>Užverti nuolatinai</translation>
     </message>
@@ -8511,7 +8520,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/accidental.cpp" line="63"/>
         <source>flat arrow up</source>
-        <translation type="unfinished"/>
+        <translation>bemolis rodykle aukštyn</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="64"/>
@@ -8867,7 +8876,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="427"/>
         <source>D</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">D</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="436"/>
@@ -9896,7 +9905,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/actions.cpp" line="1212"/>
         <location filename="../../mscore/actions.cpp" line="1213"/>
         <source>double flat</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Dvigubas bemolis</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1219"/>
@@ -9995,14 +10004,14 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/actions.cpp" line="1345"/>
         <location filename="../../mscore/actions.cpp" line="1346"/>
         <source>beam mid</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">sijos vidurys</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1352"/>
         <location filename="../../mscore/actions.cpp" line="1355"/>
         <location filename="../../mscore/actions.cpp" line="1356"/>
         <source>no beam</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">be sijos</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1362"/>
@@ -10084,7 +10093,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="1482"/>
         <source>Zoom Canvas</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Mastelis</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1488"/>
@@ -11214,7 +11223,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/element.cpp" line="81"/>
         <source>StemSlash</source>
-        <translation type="unfinished"/>
+        <translation>Perbrauktas kotelis</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="82"/>
@@ -11284,7 +11293,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/element.cpp" line="95"/>
         <source>Image</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Vaizdas</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="96"/>
@@ -11364,7 +11373,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/element.cpp" line="111"/>
         <source>OttavaSegment</source>
-        <translation type="unfinished"/>
+        <translation>Oktavos segmentas</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="112"/>
@@ -11379,7 +11388,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/element.cpp" line="114"/>
         <source>TextLineSegment</source>
-        <translation type="unfinished"/>
+        <translation>Teksto eilutės segmentas</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="115"/>
@@ -11394,12 +11403,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/element.cpp" line="117"/>
         <source>Spacer</source>
-        <translation type="unfinished"/>
+        <translation>Tarpas</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="118"/>
         <source>LedgerLine</source>
-        <translation type="unfinished"/>
+        <translation>Pridėtinė linija</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="119"/>
@@ -11439,12 +11448,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/element.cpp" line="126"/>
         <source>ShadowNote</source>
-        <translation type="unfinished"/>
+        <translation>Natos šešėlis</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="127"/>
         <source>RubberBand</source>
-        <translation type="unfinished"/>
+        <translation>Gumytė</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="128"/>
@@ -11469,7 +11478,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/element.cpp" line="132"/>
         <source>TextLine</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Teksto eilutė</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="133"/>
@@ -11565,37 +11574,37 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="36"/>
         <source>normal</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">normali</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="37"/>
         <source>cross</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kryželis</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="38"/>
         <source>diamond</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">rombas</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="39"/>
         <source>triangle</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">trikampis</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="40"/>
         <source>mi</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">mi</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="41"/>
         <source>slash</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">dešininis brūkšnys</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="42"/>
         <source>xcircle</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">x ratukas</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="43"/>
@@ -11672,30 +11681,21 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>score</name>
-    <message>
-        <location filename="../../mscore/file.cpp" line="1211"/>
-        <source>Cannot read this score:
-your version of MuseScore is too old.</source>
-        <translation>Jūsų programa jau per sena dėl to nepavyksta atverti partitūros.</translation>
-    </message>
-</context>
-<context>
     <name>symbol</name>
     <message>
         <location filename="../../mscore/sym.cpp" line="593"/>
         <source>clef eight</source>
-        <translation type="unfinished"/>
+        <translation>Raktas 8</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="594"/>
         <source>clef one</source>
-        <translation type="unfinished"/>
+        <translation>Raktas 1</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="595"/>
         <source>clef five</source>
-        <translation type="unfinished"/>
+        <translation>Raktas 5</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="264"/>
@@ -11707,7 +11707,7 @@ your version of MuseScore is too old.</source>
         <location filename="../../mscore/sym.cpp" line="267"/>
         <location filename="../../mscore/sym.cpp" line="597"/>
         <source>m</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">m</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="266"/>
@@ -11922,12 +11922,12 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="80"/>
         <source>right parenthesis</source>
-        <translation type="unfinished"/>
+        <translation>Dešinysis skliaustas</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="81"/>
         <source>left parenthesis</source>
-        <translation type="unfinished"/>
+        <translation>Kairysis skliaustas</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="92"/>
@@ -11937,12 +11937,12 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="93"/>
         <source>longa up</source>
-        <translation type="unfinished"/>
+        <translation>Longa aukštyn</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="94"/>
         <source>longa down</source>
-        <translation type="unfinished"/>
+        <translation>Longa žemyn</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="95"/>
@@ -11972,67 +11972,67 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="100"/>
         <source>whole diamond head</source>
-        <translation type="unfinished"/>
+        <translation>sveikoji rombas</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="101"/>
         <source>half diamond head</source>
-        <translation type="unfinished"/>
+        <translation>pusinė rombas</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="102"/>
         <source>diamond head</source>
-        <translation type="unfinished"/>
+        <translation>rombas</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="103"/>
         <source>whole triangle head</source>
-        <translation type="unfinished"/>
+        <translation>sveikoji trikampis</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="104"/>
         <source>down half triangle head</source>
-        <translation type="unfinished"/>
+        <translation>apatinė pusinės trikampė galvutė</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="105"/>
         <source>up half triangle head</source>
-        <translation type="unfinished"/>
+        <translation>viršutinė pusinės trikampė galvutė</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="106"/>
         <source>up quart triangle head</source>
-        <translation type="unfinished"/>
+        <translation>viršutinė trikampė ketvirtinės galvutė</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="107"/>
         <source>down quart triangle head</source>
-        <translation type="unfinished"/>
+        <translation>apatinė trikampė ketvirtinės galvutė</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="108"/>
         <source>whole slash head</source>
-        <translation type="unfinished"/>
+        <translation>sveikoji pasvirasis brūkšnelis</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="109"/>
         <source>half slash head</source>
-        <translation type="unfinished"/>
+        <translation>pusinė pasvirasis brūkšnelis</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="110"/>
         <source>quart slash head</source>
-        <translation type="unfinished"/>
+        <translation>ketvirtinė pasvirasis brūkšnelis</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="111"/>
         <source>whole cross head</source>
-        <translation type="unfinished"/>
+        <translation>sveikoji kryželis</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="112"/>
         <source>half cross head</source>
-        <translation type="unfinished"/>
+        <translation>pusinė kryželis</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="113"/>
@@ -12042,7 +12042,7 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="114"/>
         <source>x circle head</source>
-        <translation type="unfinished"/>
+        <translation>x ratukas</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="115"/>
@@ -12197,52 +12197,52 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="147"/>
         <source>ufermata</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">ufermata</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="148"/>
         <source>dfermata</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">dfermata</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="149"/>
         <source>snappizzicato</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">snappizzicato</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="150"/>
         <source>ushortfermata</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">ushortfermata</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="151"/>
         <source>dshortfermata</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">dshortfermata</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="152"/>
         <source>ulongfermata</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">ulongfermata</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="153"/>
         <source>dlongfermata</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">dlongfermata</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="154"/>
         <source>uverylongfermata</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">uverylongfermata</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="155"/>
         <source>dverylongfermata</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">dverylongfermata</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="156"/>
         <source>thumb</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">thumb</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="157"/>
@@ -12252,7 +12252,7 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="158"/>
         <source>espressivo</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">espressivo</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="159"/>
@@ -12262,42 +12262,42 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="160"/>
         <source>ustaccatissimo</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">ustaccatissimo</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="161"/>
         <source>dstaccatissimo</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">dstaccatissimo</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="162"/>
         <source>tenuto</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">tenuto</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="163"/>
         <source>uportato</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">uportato</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="164"/>
         <source>dportato</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">dportato</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="165"/>
         <source>umarcato</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">umarcato</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="166"/>
         <source>dmarcato</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">dmarcato</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="167"/>
         <source>ouvert</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">ouvert</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="168"/>
@@ -12307,12 +12307,12 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="169"/>
         <source>up bow</source>
-        <translation type="unfinished"/>
+        <translation>smičius aukštyn</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="170"/>
         <source>down bow</source>
-        <translation type="unfinished"/>
+        <translation>smičius žemyn</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="171"/>
@@ -12322,7 +12322,7 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="172"/>
         <source>turn</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">turn</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="173"/>
@@ -12407,7 +12407,7 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="191"/>
         <source>prall</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">prall</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="192"/>
@@ -12542,7 +12542,7 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="218"/>
         <source>bass clef</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">boso raktas</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="219"/>
