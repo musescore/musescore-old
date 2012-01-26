@@ -74,11 +74,13 @@ ExcerptsDialog::ExcerptsDialog(Score* s, QWidget* parent)
       createExcerpt->setEnabled(false);
 
       connect(newButton, SIGNAL(clicked()), SLOT(newClicked()));
+      connect(newAllButton, SIGNAL(clicked()), SLOT(newAllClicked()));
       connect(deleteButton, SIGNAL(clicked()), SLOT(deleteClicked()));
       connect(excerptList, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)),
          SLOT(excerptChanged(QListWidgetItem*, QListWidgetItem*)));
       connect(excerptList, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
          SLOT(createExcerptClicked(QListWidgetItem*)));
+      connect(createAllExcerpts, SIGNAL(clicked()), SLOT(createAllExcerptsClicked()));
       connect(partList, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
          SLOT(partDoubleClicked(QListWidgetItem*)));
       connect(partList, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(partClicked(QListWidgetItem*)));
@@ -127,17 +129,17 @@ void ExcerptsDialog::deleteClicked()
       }
 
 //---------------------------------------------------------
-//   newClicked
+//   createName
 //---------------------------------------------------------
 
-void ExcerptsDialog::newClicked()
+QString ExcerptsDialog::createName(const QString& partName)
       {
+      QString n = partName.simplified();
       QString name;
-      for (int i = 1;; ++i) {
-            name = tr("Part-%1").arg(i);
-            int n = excerptList->count();
-
+      for (int i = 0;; ++i) {
+            name = i ? QString("%1-%2").arg(n).arg(i) : QString("%1").arg(n);
             Excerpt* ee = 0;
+            int n = excerptList->count();
             for (int k = 0; k < n; ++k) {
                   ee = static_cast<ExcerptItem*>(excerptList->item(k))->excerpt();
                   if (ee->title() == name)
@@ -146,12 +148,44 @@ void ExcerptsDialog::newClicked()
             if ((ee == 0) || (ee->title() != name))
                   break;
             }
-      Excerpt* e = new Excerpt(0);
+      return name;
+      }
+
+//---------------------------------------------------------
+//   newClicked
+//---------------------------------------------------------
+
+void ExcerptsDialog::newClicked()
+      {
+      QString name = createName("Part");
+      Excerpt* e   = new Excerpt(0);
       e->setTitle(name);
       ExcerptItem* ei = new ExcerptItem(e);
       excerptList->addItem(ei);
       excerptList->selectionModel()->clearSelection();
       excerptList->setCurrentItem(ei, QItemSelectionModel::SelectCurrent);
+      }
+
+//---------------------------------------------------------
+//   newAllClicked
+//---------------------------------------------------------
+
+void ExcerptsDialog::newAllClicked()
+      {
+      int n = partList->count();
+      ExcerptItem* ei = 0;
+      for (int i = 0; i < n; ++i) {
+	      Excerpt* e   = new Excerpt(0);
+	      PartItem* pi = static_cast<PartItem*>(partList->item(i));
+            e->parts()->append(pi->part());
+	      QString name = createName(pi->part()->partName());
+	      e->setTitle(name);
+            excerptList->addItem(new ExcerptItem(e));
+            }
+      if (ei) {
+            excerptList->selectionModel()->clearSelection();
+            excerptList->setCurrentItem(ei, QItemSelectionModel::SelectCurrent);
+            }
       }
 
 //---------------------------------------------------------
@@ -242,6 +276,22 @@ qDebug("  already there %d %d\n", i, n);
                   continue;
                   }
             createExcerptClicked(item);
+            }
+      }
+
+//---------------------------------------------------------
+//   createAllExcerptsClicked
+//---------------------------------------------------------
+
+void ExcerptsDialog::createAllExcerptsClicked()
+      {
+      int n = excerptList->count();
+      for (int i = 0; i < n; ++i) {
+            excerptList->setCurrentRow(i);
+            QListWidgetItem* cur = excerptList->currentItem();
+            if (cur == 0)
+                  continue;
+            createExcerptClicked(cur);
             }
       }
 
