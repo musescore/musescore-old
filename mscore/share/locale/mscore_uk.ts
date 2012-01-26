@@ -3566,10 +3566,6 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
         <translation>Без в’язки</translation>
     </message>
     <message>
-        <source>Start subbeam</source>
-        <translation>Початок підв’язки</translation>
-    </message>
-    <message>
         <source>Auto beam</source>
         <translation>Автоматична в’язка</translation>
     </message>
@@ -3682,10 +3678,6 @@ is incompatible with current interface</source>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
         <translation>Файли Overture &lt;експериментально&gt; (*.ove);;</translation>
-    </message>
-    <message>
-        <source>All Files (*)</source>
-        <translation>Усі файли (*)</translation>
     </message>
 </context>
 <context>
@@ -5214,6 +5206,14 @@ Try saving to a different location.</source>
         <source>Load failed: </source>
         <translation>Завантажити не вдалося: </translation>
     </message>
+    <message>
+        <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Can't open file. File extension "%1" not supported.</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -6152,6 +6152,10 @@ and check that the file location is correct</source>
     <message>
         <source>System Flag</source>
         <translation>системний прапорець</translation>
+    </message>
+    <message>
+        <source>center text vertical to text baseline</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9087,15 +9091,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>score</name>
-    <message>
-        <source>Cannot read this score:
-your version of MuseScore is too old.</source>
-        <translation>Не вдається прочитати цю партитуру:&#13;
-Ваша версія MuseScore занадто давня.</translation>
-    </message>
-</context>
-<context>
     <name>symbol</name>
     <message>
         <source>clef eight</source>
@@ -9943,7 +9938,7 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>s0sol head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">головка „s1sol“ {0s?}</translation>
     </message>
     <message>
         <source>s1sol head</source>
@@ -9951,7 +9946,7 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>s2sol head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">головка „s1sol“ {2s?}</translation>
     </message>
     <message>
         <source>longa up alt</source>

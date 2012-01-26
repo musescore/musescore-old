@@ -145,11 +145,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Tremolo</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Tremolo</translation>
     </message>
     <message>
         <source>Glissando</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Glissando</translation>
     </message>
 </context>
 <context>
@@ -1323,7 +1323,7 @@ ebaõnnestus: </translation>
     </message>
     <message>
         <source>Pitch</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Häälestus</translation>
     </message>
 </context>
 <context>
@@ -3567,10 +3567,6 @@ Vali "Help" menüüst selle asemel "Online Käsiraamat".</translation>
         <translation>Taktijoonteta</translation>
     </message>
     <message>
-        <source>Start subbeam</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Auto beam</source>
         <translation>Automaatsed taktijooned</translation>
     </message>
@@ -3681,10 +3677,6 @@ is incompatible with current interface</source>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
         <translation type="unfinished"/>
     </message>
-    <message>
-        <source>All Files (*)</source>
-        <translation type="unfinished"/>
-    </message>
 </context>
 <context>
     <name>MyWebView</name>
@@ -3702,7 +3694,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sulge jäädavalt</translation>
     </message>
 </context>
 <context>
@@ -4008,7 +4000,7 @@ is incompatible with current interface</source>
     <name>PaletteCellProperties</name>
     <message>
         <source>Chord Properties</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Akordi sätted</translation>
     </message>
     <message>
         <source>Palette Cell Properties</source>
@@ -4141,11 +4133,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>user</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kasutaja</translation>
     </message>
     <message>
         <source>offset</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">offset</translation>
     </message>
     <message>
         <source>Pitch:</source>
@@ -4176,7 +4168,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>001.01</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">001.01</translation>
     </message>
     <message>
         <source>h:mm:s</source>
@@ -4184,7 +4176,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>0:00:00</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">0:00:00</translation>
     </message>
     <message>
         <source>actual tempo</source>
@@ -4200,7 +4192,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>100%</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">100%</translation>
     </message>
     <message>
         <source>Rewind</source>
@@ -4212,7 +4204,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Vol</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Vol</translation>
     </message>
     <message>
         <source>Tmp</source>
@@ -4982,7 +4974,7 @@ Valige vähemalt üks noot või paus ja korrake operatsiooni
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">1</translation>
     </message>
     <message>
         <source>Anchor:</source>
@@ -5192,7 +5184,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore</translation>
     </message>
     <message>
         <source>The first time signature of a piece can not be removed.</source>
@@ -5208,6 +5200,14 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Load failed: </source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Can't open file. File extension "%1" not supported.</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -5227,7 +5227,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Staff</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Koosseis</translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
@@ -5251,7 +5251,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Measure</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Takt</translation>
     </message>
     <message>
         <source>unknown drop format: formats %1:
@@ -5287,7 +5287,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Chord/Rest</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Akord/Paus</translation>
     </message>
     <message>
         <source>Breath Segment</source>
@@ -5338,7 +5338,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Action</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Tegevus</translation>
     </message>
     <message>
         <source>replace selection</source>
@@ -5361,11 +5361,11 @@ Try saving to a different location.</source>
     <name>SelectInstrument</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Dialoog</translation>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">0</translation>
     </message>
     <message>
         <source>show more</source>
@@ -5525,7 +5525,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Slur</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Legaato</translation>
     </message>
     <message>
         <source>Slur End</source>
@@ -5548,7 +5548,7 @@ and check that the file location is correct</source>
     <name>SlurPropertyBase</name>
     <message>
         <source>Volta Properties</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Voldi sätted</translation>
     </message>
     <message>
         <source>Slur Properties</source>
@@ -5621,7 +5621,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Channel</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kanal</translation>
     </message>
     <message>
         <source>Midi Action</source>
@@ -5674,11 +5674,11 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Vol</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Vol</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <source>Master Tuning</source>
@@ -5691,7 +5691,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Reverb</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kaja</translation>
     </message>
     <message>
         <source>Room Size:</source>
@@ -5703,7 +5703,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Laius:</translation>
     </message>
     <message>
         <source>Preset:</source>
@@ -5715,7 +5715,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Chorus</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Chorus</translation>
     </message>
     <message>
         <source>Type:</source>
@@ -5812,12 +5812,12 @@ and check that the file location is correct</source>
     <message>
         <source>Text</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Tekst</translation>
     </message>
     <message>
         <source>Text:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Tekst:</translation>
     </message>
     <message>
         <source>Offset:</source>
@@ -5901,7 +5901,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Tekst</translation>
     </message>
 </context>
 <context>
@@ -5909,19 +5909,19 @@ and check that the file location is correct</source>
     <message>
         <source>mm</source>
         <comment>millimeter unit</comment>
-        <translation type="unfinished"/>
+        <translation type="unfinished">mm</translation>
     </message>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation type="unfinished"/>
+        <translation type="unfinished">sp</translation>
     </message>
 </context>
 <context>
     <name>TextProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore: Teksti Omadused</translation>
     </message>
     <message>
         <source>apply to all elements of same type</source>
@@ -5960,7 +5960,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">B</translation>
     </message>
     <message>
         <source>italic</source>
@@ -5988,7 +5988,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <source>center text on reference point</source>
@@ -6012,7 +6012,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Värv:</translation>
     </message>
     <message>
         <source>text color</source>
@@ -6041,7 +6041,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>%</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">%</translation>
     </message>
     <message>
         <source>Y:</source>
@@ -6106,7 +6106,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Laius:</translation>
     </message>
     <message>
         <source>frame line width</source>
@@ -6114,7 +6114,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">mm</translation>
     </message>
     <message>
         <source>Margin:</source>
@@ -6138,6 +6138,10 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>System Flag</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>center text vertical to text baseline</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -6171,7 +6175,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>2/2 alla breve</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">2/2 alla breve</translation>
     </message>
 </context>
 <context>
@@ -6182,7 +6186,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>+</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">+</translation>
     </message>
     <message>
         <source>add time signature to palette</source>
@@ -6322,11 +6326,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Üles</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Alla</translation>
     </message>
     <message>
         <source>Closest</source>
@@ -7500,7 +7504,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Lahku</translation>
     </message>
     <message>
         <source>Mag</source>
@@ -7508,11 +7512,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Zoom Canvas</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Suurenda Lõuendit</translation>
     </message>
     <message>
         <source>Lyrics</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sõnad</translation>
     </message>
     <message>
         <source>Fingering Palette</source>
@@ -7524,7 +7528,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Fingering</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sõrmestus</translation>
     </message>
     <message>
         <source>Tempo Palette</source>
@@ -7536,11 +7540,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Tempo</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Tempo</translation>
     </message>
     <message>
         <source>Metronome</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Metronoom</translation>
     </message>
     <message>
         <source>Add System Text</source>
@@ -7572,7 +7576,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Pealkiri</translation>
     </message>
     <message>
         <source>Add Title Text</source>
@@ -7584,7 +7588,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Subtitle</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Alapealkiri</translation>
     </message>
     <message>
         <source>Add Subtitle Text</source>
@@ -7596,7 +7600,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Composer</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Helilooja</translation>
     </message>
     <message>
         <source>Add Composer Text</source>
@@ -7608,7 +7612,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Poet</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sõnade autor</translation>
     </message>
     <message>
         <source>Add Poet Text</source>
@@ -7620,7 +7624,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Copyright</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Copyright</translation>
     </message>
     <message>
         <source>Add Copyright Text</source>
@@ -7656,7 +7660,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Mängi</translation>
     </message>
     <message>
         <source>Start or stop playback</source>
@@ -7664,7 +7668,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Rewind</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Keri tagasi</translation>
     </message>
     <message>
         <source>Repeat</source>
@@ -7696,7 +7700,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Transpose</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Transponeeri</translation>
     </message>
     <message>
         <source>violin clef</source>
@@ -7884,7 +7888,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Otsi</translation>
     </message>
     <message>
         <source>Zoom In</source>
@@ -8156,7 +8160,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Üles</translation>
     </message>
     <message>
         <source>Pitch up octave</source>
@@ -8200,7 +8204,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Alla</translation>
     </message>
     <message>
         <source>Pitch down octave</source>
@@ -8990,47 +8994,47 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>cross</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">rist</translation>
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">teemant</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kolmnurk</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">mi</translation>
     </message>
     <message>
         <source>slash</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kaldkriips</translation>
     </message>
     <message>
         <source>xcircle</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">x-ring</translation>
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">do</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">re</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">fa</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">la</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">si</translation>
     </message>
     <message>
         <source>sol</source>
@@ -9073,14 +9077,6 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
 </context>
 <context>
-    <name>score</name>
-    <message>
-        <source>Cannot read this score:
-your version of MuseScore is too old.</source>
-        <translation type="unfinished"/>
-    </message>
-</context>
-<context>
     <name>symbol</name>
     <message>
         <source>clef eight</source>
@@ -9100,7 +9096,7 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>m</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">m</translation>
     </message>
     <message>
         <source>p</source>

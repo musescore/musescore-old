@@ -3568,10 +3568,6 @@ Dal menù "Aiuto" prova in alternativa a scegliere "Manuale online".</translatio
         <translation>Scollega gruppo</translation>
     </message>
     <message>
-        <source>Start subbeam</source>
-        <translation>Inizio sottogruppo</translation>
-    </message>
-    <message>
         <source>Auto beam</source>
         <translation>Gruppo automatico</translation>
     </message>
@@ -3682,10 +3678,6 @@ is incompatible with current interface</source>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
         <translation>File Overture &lt;sperimentale&gt; (*.ove);;</translation>
-    </message>
-    <message>
-        <source>All Files (*)</source>
-        <translation>Tutti i file (*)</translation>
     </message>
 </context>
 <context>
@@ -5214,6 +5206,14 @@ Prova a salvare in una posizione differente</translation>
         <source>Load failed: </source>
         <translation>Caricamento fallito: </translation>
     </message>
+    <message>
+        <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Can't open file. File extension "%1" not supported.</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -6150,6 +6150,10 @@ e verifica che la posizione del file sia corretta</translation>
     <message>
         <source>System Flag</source>
         <translation>Marcatore di accollatura</translation>
+    </message>
+    <message>
+        <source>center text vertical to text baseline</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9081,15 +9085,6 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>Every 2 months</source>
         <translation>Ogni 2mesi</translation>
-    </message>
-</context>
-<context>
-    <name>score</name>
-    <message>
-        <source>Cannot read this score:
-your version of MuseScore is too old.</source>
-        <translation>Impossibile leggere la partitura:&#13;
-la versione di MuseScore è troppo vecchia.</translation>
     </message>
 </context>
 <context>

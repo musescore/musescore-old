@@ -2924,10 +2924,6 @@ mislukt: </translation>
         <translation>afspelen</translation>
     </message>
     <message>
-        <source>Start subbeam</source>
-        <translation>Begin onderliggende waardestreep</translation>
-    </message>
-    <message>
         <source>MuseScore: Open Help</source>
         <translation>MuseScore: Open Help</translation>
     </message>
@@ -3684,10 +3680,6 @@ is niet compactibel met de huidige interface</translation>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
         <translation>Overture bestanden &lt;experimenteel&gt; (*.ove);;</translation>
-    </message>
-    <message>
-        <source>All Files (*)</source>
-        <translation>Alle bestanden (*)</translation>
     </message>
 </context>
 <context>
@@ -5217,6 +5209,14 @@ mislukt: </translation>
         <source>Load failed: </source>
         <translation>Laden mislukt: </translation>
     </message>
+    <message>
+        <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
+        <translation>Deze partituur kan niet gelezen worden:&lt;br&gt;Je MuseScore versie is verouderd.&lt;br&gt;&lt;a href="%1"&gt;Upgrade nu!&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <source>Can't open file. File extension "%1" not supported.</source>
+        <translation>Kan het bestand niet openen. Bestandstype "%1" wordt niet ondersteund.</translation>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -6154,6 +6154,10 @@ en controleer dat de bestandslocatie juist is.</translation>
     <message>
         <source>System Flag</source>
         <translation>Systeem Vlag</translation>
+    </message>
+    <message>
+        <source>center text vertical to text baseline</source>
+        <translation>centreer tekst verticaal tov de tekstbasis</translation>
     </message>
 </context>
 <context>
@@ -9085,15 +9089,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Every 2 months</source>
         <translation>Eens in de 2 maanden</translation>
-    </message>
-</context>
-<context>
-    <name>score</name>
-    <message>
-        <source>Cannot read this score:
-your version of MuseScore is too old.</source>
-        <translation>Partituur onleesbaar:&#13;
-uw Musescore versie is te oud.</translation>
     </message>
 </context>
 <context>

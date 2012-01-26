@@ -35,17 +35,17 @@ p, li { white-space: pre-wrap; }&#13;
 <context>
     <name>AboutBoxDialog</name>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2609"/>
+        <location filename="../../mscore/mscore.cpp" line="2629"/>
         <source>Unstable Prerelease for Version: </source>
         <translation>개발중의 불완전 프리릴리스 </translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2611"/>
+        <location filename="../../mscore/mscore.cpp" line="2631"/>
         <source>Version: </source>
-        <translation>버젼 </translation>
+        <translation>버전 </translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2613"/>
+        <location filename="../../mscore/mscore.cpp" line="2633"/>
         <source>Revision: %1</source>
         <translation>리비젼: %1</translation>
     </message>
@@ -56,7 +56,7 @@ p, li { white-space: pre-wrap; }&#13;
         <location filename="../../mscore/menus.cpp" line="411"/>
         <location filename="../../mscore/menus.cpp" line="934"/>
         <source>round bracket</source>
-        <translation>중괄호</translation>
+        <translation>괄호</translation>
     </message>
 </context>
 <context>
@@ -82,7 +82,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/articulation.ui" line="57"/>
         <source>Midi Action</source>
-        <translation>Midi 응답</translation>
+        <translation>미디 응답</translation>
     </message>
 </context>
 <context>
@@ -118,7 +118,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/beam.ui" line="62"/>
         <source>Chord/Rest</source>
-        <translation>코드/휴식</translation>
+        <translation>화음/쉼표</translation>
     </message>
 </context>
 <context>
@@ -200,7 +200,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordedit.ui" line="33"/>
         <source>Root</source>
-        <translation>Root</translation>
+        <translation>밑음</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="51"/>
@@ -215,7 +215,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordedit.ui" line="68"/>
         <source>bb (double flat)</source>
-        <translation>bb (더블프랫)</translation>
+        <translation>bb (더블 플랫)</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="75"/>
@@ -225,7 +225,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordedit.ui" line="82"/>
         <source>b (flat)</source>
-        <translation>b (프랫)</translation>
+        <translation>b (플랫)</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="89"/>
@@ -235,7 +235,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordedit.ui" line="96"/>
         <source>(no accidental)</source>
-        <translation>(임시기호 없음)</translation>
+        <translation>(임시표 없음)</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="103"/>
@@ -265,7 +265,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordedit.ui" line="151"/>
         <source>Extension</source>
-        <translation>확장</translation>
+        <translation>종류</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="166"/>
@@ -384,7 +384,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordedit.ui" line="299"/>
         <source>Other:</source>
-        <translation>기타</translation>
+        <translation>기타:</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="312"/>
@@ -960,7 +960,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordedit.ui" line="1025"/>
         <source>Bass Note / Inversion</source>
-        <translation>기본음/전도</translation>
+        <translation>기본음 / 자리바꿈</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1035"/>
@@ -1057,7 +1057,7 @@ p, li { white-space: pre-wrap; }&#13;
 <context>
     <name>ChordList</name>
     <message>
-        <location filename="../../mscore/harmony.cpp" line="1173"/>
+        <location filename="../../mscore/harmony.cpp" line="1179"/>
         <source>Write Chord Description failed: </source>
         <translation>코드정의 출력 실패 </translation>
     </message>
@@ -1130,7 +1130,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordproperties.ui" line="185"/>
         <source>tuning offset</source>
-        <translation>튜닝 오프셋</translation>
+        <translation>조율 오프셋</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="198"/>
@@ -1321,17 +1321,17 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordrest.ui" line="85"/>
         <source>SlurFor:</source>
-        <translation>슬러의 끝:</translation>
+        <translation>슬러 끝:</translation>
     </message>
     <message>
         <location filename="../../mscore/chordrest.ui" line="98"/>
         <source>SlurBack:</source>
-        <translation>슬러의 시작:</translation>
+        <translation>슬러 시작:</translation>
     </message>
     <message>
         <location filename="../../mscore/chordrest.ui" line="182"/>
         <source>StaffMove:</source>
-        <translation>보표의 이동:</translation>
+        <translation>보표 이동:</translation>
     </message>
 </context>
 <context>
@@ -1364,12 +1364,12 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/harmonyedit.ui" line="177"/>
         <source>Save As</source>
-        <translation>다른이름으로 저장</translation>
+        <translation>다른 이름으로 저장</translation>
     </message>
     <message>
         <location filename="../../mscore/harmonyedit.cpp" line="40"/>
         <source>MuseScore: Chord Style Editor</source>
-        <translation>MuseScore: 코드 스타일의 편집</translation>
+        <translation>MuseScore: 코드 스타일 편집</translation>
     </message>
 </context>
 <context>
@@ -1961,31 +1961,31 @@ failed: </source>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="52"/>
-        <location filename="../../mscore/editstyle.ui" line="686"/>
+        <location filename="../../mscore/editstyle.ui" line="692"/>
         <source>System</source>
         <translation>단</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="57"/>
-        <location filename="../../mscore/editstyle.ui" line="758"/>
+        <location filename="../../mscore/editstyle.ui" line="764"/>
         <source>Measure</source>
         <translation>마디</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="62"/>
-        <location filename="../../mscore/editstyle.ui" line="1032"/>
+        <location filename="../../mscore/editstyle.ui" line="1038"/>
         <source>Barlines</source>
         <translation>세로줄</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="67"/>
-        <location filename="../../mscore/editstyle.ui" line="1069"/>
+        <location filename="../../mscore/editstyle.ui" line="1075"/>
         <source>Notes</source>
         <translation>음표</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="72"/>
-        <location filename="../../mscore/editstyle.ui" line="1292"/>
+        <location filename="../../mscore/editstyle.ui" line="1298"/>
         <source>Arpeggios</source>
         <translation>아르페지오</translation>
     </message>
@@ -1996,7 +1996,7 @@ failed: </source>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="82"/>
-        <location filename="../../mscore/editstyle.ui" line="1496"/>
+        <location filename="../../mscore/editstyle.ui" line="1502"/>
         <source>Beams</source>
         <translation>꼬리표</translation>
     </message>
@@ -2012,7 +2012,7 @@ failed: </source>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="97"/>
-        <location filename="../../mscore/editstyle.ui" line="1857"/>
+        <location filename="../../mscore/editstyle.ui" line="1863"/>
         <source>Chordnames</source>
         <translation>코드명</translation>
     </message>
@@ -2049,29 +2049,29 @@ failed: </source>
         <location filename="../../mscore/editstyle.ui" line="355"/>
         <location filename="../../mscore/editstyle.ui" line="393"/>
         <location filename="../../mscore/editstyle.ui" line="428"/>
-        <location filename="../../mscore/editstyle.ui" line="473"/>
-        <location filename="../../mscore/editstyle.ui" line="505"/>
-        <location filename="../../mscore/editstyle.ui" line="669"/>
-        <location filename="../../mscore/editstyle.ui" line="713"/>
-        <location filename="../../mscore/editstyle.ui" line="817"/>
-        <location filename="../../mscore/editstyle.ui" line="843"/>
-        <location filename="../../mscore/editstyle.ui" line="869"/>
-        <location filename="../../mscore/editstyle.ui" line="895"/>
-        <location filename="../../mscore/editstyle.ui" line="921"/>
-        <location filename="../../mscore/editstyle.ui" line="947"/>
-        <location filename="../../mscore/editstyle.ui" line="973"/>
-        <location filename="../../mscore/editstyle.ui" line="993"/>
-        <location filename="../../mscore/editstyle.ui" line="1016"/>
-        <location filename="../../mscore/editstyle.ui" line="1102"/>
-        <location filename="../../mscore/editstyle.ui" line="1112"/>
-        <location filename="../../mscore/editstyle.ui" line="1171"/>
-        <location filename="../../mscore/editstyle.ui" line="1194"/>
-        <location filename="../../mscore/editstyle.ui" line="1217"/>
-        <location filename="../../mscore/editstyle.ui" line="1240"/>
-        <location filename="../../mscore/editstyle.ui" line="1263"/>
-        <location filename="../../mscore/editstyle.ui" line="1310"/>
-        <location filename="../../mscore/editstyle.ui" line="1330"/>
-        <location filename="../../mscore/editstyle.ui" line="1350"/>
+        <location filename="../../mscore/editstyle.ui" line="476"/>
+        <location filename="../../mscore/editstyle.ui" line="508"/>
+        <location filename="../../mscore/editstyle.ui" line="672"/>
+        <location filename="../../mscore/editstyle.ui" line="719"/>
+        <location filename="../../mscore/editstyle.ui" line="820"/>
+        <location filename="../../mscore/editstyle.ui" line="846"/>
+        <location filename="../../mscore/editstyle.ui" line="872"/>
+        <location filename="../../mscore/editstyle.ui" line="898"/>
+        <location filename="../../mscore/editstyle.ui" line="924"/>
+        <location filename="../../mscore/editstyle.ui" line="950"/>
+        <location filename="../../mscore/editstyle.ui" line="976"/>
+        <location filename="../../mscore/editstyle.ui" line="996"/>
+        <location filename="../../mscore/editstyle.ui" line="1022"/>
+        <location filename="../../mscore/editstyle.ui" line="1108"/>
+        <location filename="../../mscore/editstyle.ui" line="1118"/>
+        <location filename="../../mscore/editstyle.ui" line="1174"/>
+        <location filename="../../mscore/editstyle.ui" line="1197"/>
+        <location filename="../../mscore/editstyle.ui" line="1220"/>
+        <location filename="../../mscore/editstyle.ui" line="1243"/>
+        <location filename="../../mscore/editstyle.ui" line="1266"/>
+        <location filename="../../mscore/editstyle.ui" line="1316"/>
+        <location filename="../../mscore/editstyle.ui" line="1336"/>
+        <location filename="../../mscore/editstyle.ui" line="1356"/>
         <source>sp</source>
         <extracomment>spatium unit
 ----------
@@ -2121,379 +2121,379 @@ space unit</extracomment>
         <translation>가사의 상여백</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="447"/>
+        <location filename="../../mscore/editstyle.ui" line="450"/>
         <source>Lyrics lower margin</source>
         <translation>가사의 하여백</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="460"/>
+        <location filename="../../mscore/editstyle.ui" line="463"/>
         <source>V-frame upper margin</source>
         <translation>수직프레임의 상여백</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="492"/>
+        <location filename="../../mscore/editstyle.ui" line="495"/>
         <source>V-frame lower margin</source>
         <translation>수직프레임의 하여백</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="524"/>
+        <location filename="../../mscore/editstyle.ui" line="527"/>
         <source>Page fill threshold:</source>
         <translation>페이지의 한계값</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="537"/>
-        <location filename="../../mscore/editstyle.ui" line="575"/>
-        <location filename="../../mscore/editstyle.ui" line="1641"/>
-        <location filename="../../mscore/editstyle.ui" line="1679"/>
-        <location filename="../../mscore/editstyle.ui" line="1714"/>
-        <location filename="../../mscore/editstyle.ui" line="1752"/>
+        <location filename="../../mscore/editstyle.ui" line="540"/>
+        <location filename="../../mscore/editstyle.ui" line="578"/>
+        <location filename="../../mscore/editstyle.ui" line="1647"/>
+        <location filename="../../mscore/editstyle.ui" line="1685"/>
+        <location filename="../../mscore/editstyle.ui" line="1720"/>
+        <location filename="../../mscore/editstyle.ui" line="1758"/>
         <source>%</source>
         <translation>%</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="562"/>
+        <location filename="../../mscore/editstyle.ui" line="565"/>
         <source>Last system fill threshold</source>
         <translation>마지막 단 채우기의 한계값</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="597"/>
+        <location filename="../../mscore/editstyle.ui" line="600"/>
         <source>Create clef for all systems</source>
         <translation>모든 단의 음자리표 작성</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="610"/>
+        <location filename="../../mscore/editstyle.ui" line="613"/>
         <source>Create key sig for all systems</source>
         <translation>모든 단의 조 기호 작성</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="636"/>
+        <location filename="../../mscore/editstyle.ui" line="639"/>
         <source>Create time signatures</source>
         <translation>박자기호 작성</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="649"/>
+        <location filename="../../mscore/editstyle.ui" line="652"/>
         <source>Create courtesy time signatures</source>
         <translation>통산의 박자기호를 표시한다</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="656"/>
+        <location filename="../../mscore/editstyle.ui" line="659"/>
         <source>Create courtesy key signatures</source>
         <translation>통상의 조 기호 작성</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="700"/>
+        <location filename="../../mscore/editstyle.ui" line="706"/>
         <source>System Bracket Distance:</source>
         <translation>단과 괄호의 거리</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="732"/>
+        <location filename="../../mscore/editstyle.ui" line="738"/>
         <source>Fix Number of Measures/System:</source>
         <translation>단의 마디수 고정</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="739"/>
+        <location filename="../../mscore/editstyle.ui" line="745"/>
         <source>Fix Measure Width</source>
         <translation>마디의 폭 고정</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="769"/>
+        <location filename="../../mscore/editstyle.ui" line="775"/>
         <source>Spacing (1=tight)</source>
         <translation>간격 (1=tight)</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="798"/>
+        <location filename="../../mscore/editstyle.ui" line="804"/>
         <source>Left margin</source>
         <translation>좌여백</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="824"/>
+        <location filename="../../mscore/editstyle.ui" line="830"/>
         <source>Right margin</source>
         <translation>우여백</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="850"/>
+        <location filename="../../mscore/editstyle.ui" line="856"/>
         <source>Min. note distance</source>
         <translation>최소 음표간격</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="876"/>
+        <location filename="../../mscore/editstyle.ui" line="882"/>
         <source>Clef left margin</source>
         <translation>음자리표 좌여백</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="902"/>
+        <location filename="../../mscore/editstyle.ui" line="908"/>
         <source>Key sig. left margin</source>
         <translation>조 기호 좌여백</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="928"/>
+        <location filename="../../mscore/editstyle.ui" line="934"/>
         <source>Time sig. left margin</source>
         <translation>박자기호 좌여백</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="954"/>
+        <location filename="../../mscore/editstyle.ui" line="960"/>
         <source>Clef-key distance</source>
         <translation>음자리표-조기호 간격</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="980"/>
+        <location filename="../../mscore/editstyle.ui" line="986"/>
         <source>Clef-barline distance</source>
         <translation>음자리표-세로줄 간격</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1000"/>
+        <location filename="../../mscore/editstyle.ui" line="1006"/>
         <source>Begin repeat left margin</source>
         <translation>반복개시 좌여백</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1038"/>
+        <location filename="../../mscore/editstyle.ui" line="1044"/>
         <source>Show repeat bar tips ("winged" repeats)</source>
         <translation>반복 세로줄 표시  ("winged" 반복)</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1045"/>
+        <location filename="../../mscore/editstyle.ui" line="1051"/>
         <source>Barline at start of single staff</source>
         <translation>단일보표의 시작 세로줄</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1052"/>
+        <location filename="../../mscore/editstyle.ui" line="1058"/>
         <source>Barline at start of multiple staves</source>
         <translation>복수보표의 시작 세로줄</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1078"/>
+        <location filename="../../mscore/editstyle.ui" line="1084"/>
         <source>shorten stems</source>
         <translation>꼬리표의 단축</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1095"/>
+        <location filename="../../mscore/editstyle.ui" line="1101"/>
         <source>Progression</source>
         <translation>진행</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1125"/>
+        <location filename="../../mscore/editstyle.ui" line="1131"/>
         <source>Shortest stem</source>
         <translation>가장짧은 꼬리표</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1155"/>
+        <location filename="../../mscore/editstyle.ui" line="1161"/>
         <source>Accidental note distance</source>
         <translation>임시음표 간격</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1178"/>
+        <location filename="../../mscore/editstyle.ui" line="1184"/>
         <source>Accidental distance</source>
         <translation>임시부호 간격</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1201"/>
+        <location filename="../../mscore/editstyle.ui" line="1207"/>
         <source>Note dot distance</source>
         <translation>점음표 간격</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1224"/>
+        <location filename="../../mscore/editstyle.ui" line="1230"/>
         <source>Dot dot distance</source>
         <translation>점음표의 점과 점 간격</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1247"/>
+        <location filename="../../mscore/editstyle.ui" line="1253"/>
         <source>Ledger line width</source>
         <translation>덧줄의 폭</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1303"/>
+        <location filename="../../mscore/editstyle.ui" line="1309"/>
         <source>Distance to note</source>
         <translation>음표 간격</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1323"/>
-        <location filename="../../mscore/editstyle.ui" line="1785"/>
+        <location filename="../../mscore/editstyle.ui" line="1329"/>
+        <location filename="../../mscore/editstyle.ui" line="1791"/>
         <source>Line width</source>
         <translation>선폭</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1343"/>
+        <location filename="../../mscore/editstyle.ui" line="1349"/>
         <source>Hook length</source>
         <translation>훅크길이</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1391"/>
+        <location filename="../../mscore/editstyle.ui" line="1397"/>
         <source>Page Numbers</source>
         <translation>페이지 번호</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1403"/>
-        <location filename="../../mscore/editstyle.ui" line="1448"/>
+        <location filename="../../mscore/editstyle.ui" line="1409"/>
+        <location filename="../../mscore/editstyle.ui" line="1454"/>
         <source>show first</source>
         <translation>최초 페이지 표시</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1410"/>
+        <location filename="../../mscore/editstyle.ui" line="1416"/>
         <source>odd/even</source>
         <translation>홀수/짝수</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1433"/>
+        <location filename="../../mscore/editstyle.ui" line="1439"/>
         <source>Measure Numbers</source>
         <translation>마디번호</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1455"/>
+        <location filename="../../mscore/editstyle.ui" line="1461"/>
         <source>all staffs</source>
         <translation>모든 보표</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1462"/>
+        <location filename="../../mscore/editstyle.ui" line="1468"/>
         <source>every system</source>
         <translation>모든 단</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1469"/>
+        <location filename="../../mscore/editstyle.ui" line="1475"/>
         <source>interval</source>
         <translation>음정</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1505"/>
+        <location filename="../../mscore/editstyle.ui" line="1511"/>
         <source>Beam width</source>
         <translation>꼬리표두께</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1519"/>
-        <location filename="../../mscore/editstyle.ui" line="1561"/>
+        <location filename="../../mscore/editstyle.ui" line="1525"/>
+        <location filename="../../mscore/editstyle.ui" line="1567"/>
         <source>spaces</source>
         <translation>스페이스</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1526"/>
+        <location filename="../../mscore/editstyle.ui" line="1532"/>
         <source>Beam distance</source>
         <translation>꼬리표간격</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1540"/>
+        <location filename="../../mscore/editstyle.ui" line="1546"/>
         <source>beam width units</source>
         <translation>부호폭 단위</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1547"/>
+        <location filename="../../mscore/editstyle.ui" line="1553"/>
         <source>Minimum length</source>
         <translation>최소 길이</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1568"/>
+        <location filename="../../mscore/editstyle.ui" line="1574"/>
         <source>Minimum slope</source>
         <translation>최소 경사각</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1585"/>
+        <location filename="../../mscore/editstyle.ui" line="1591"/>
         <source>Maximum slope</source>
         <translation>최대 경사각</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1628"/>
+        <location filename="../../mscore/editstyle.ui" line="1634"/>
         <source>Small staff size</source>
         <translation>작은보표 사이즈</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1666"/>
+        <location filename="../../mscore/editstyle.ui" line="1672"/>
         <source>Small note size</source>
         <translation>작은음표 사이즈</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1701"/>
+        <location filename="../../mscore/editstyle.ui" line="1707"/>
         <source>Grace note size</source>
         <translation>장식음표 사이즈</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1739"/>
+        <location filename="../../mscore/editstyle.ui" line="1745"/>
         <source>Small clef size</source>
         <translation>작은 음자리표 사이즈</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1812"/>
+        <location filename="../../mscore/editstyle.ui" line="1818"/>
         <source>Height</source>
         <translation>높이</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1826"/>
+        <location filename="../../mscore/editstyle.ui" line="1832"/>
         <source>Line break height</source>
         <translation>개행기호의 높이</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1866"/>
+        <location filename="../../mscore/editstyle.ui" line="1872"/>
         <source>Use German names</source>
         <translation>독일어 명칭을 사용</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1875"/>
+        <location filename="../../mscore/editstyle.ui" line="1881"/>
         <source>Chord description file</source>
         <translation>코드 정의 파일</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1885"/>
+        <location filename="../../mscore/editstyle.ui" line="1891"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1920"/>
+        <location filename="../../mscore/editstyle.ui" line="1926"/>
         <source>Articulation - note head distance</source>
         <translation>아티큘레이션-음표머리간격</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1927"/>
-        <location filename="../../mscore/editstyle.ui" line="1944"/>
-        <location filename="../../mscore/editstyle.ui" line="1961"/>
+        <location filename="../../mscore/editstyle.ui" line="1933"/>
+        <location filename="../../mscore/editstyle.ui" line="1950"/>
+        <location filename="../../mscore/editstyle.ui" line="1967"/>
         <source>sp</source>
         <comment>space unit</comment>
         <translation>sp</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1937"/>
+        <location filename="../../mscore/editstyle.ui" line="1943"/>
         <source>Articulation - note stem distance</source>
         <translation>아티큘레이션-음표기둥간격</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1954"/>
+        <location filename="../../mscore/editstyle.ui" line="1960"/>
         <source>Articulation - articulation distance</source>
         <translation>아티큘레이션-아티큘레이션 간격</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="2030"/>
+        <location filename="../../mscore/editstyle.ui" line="2036"/>
         <source>Stem Direction in Multi Voice Context</source>
         <translation>다중 성부의 꼬리표 방향</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="2039"/>
+        <location filename="../../mscore/editstyle.ui" line="2045"/>
         <source>Voice 1</source>
         <translation>성부 1</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="2046"/>
-        <location filename="../../mscore/editstyle.ui" line="2067"/>
-        <location filename="../../mscore/editstyle.ui" line="2088"/>
-        <location filename="../../mscore/editstyle.ui" line="2109"/>
+        <location filename="../../mscore/editstyle.ui" line="2052"/>
+        <location filename="../../mscore/editstyle.ui" line="2073"/>
+        <location filename="../../mscore/editstyle.ui" line="2094"/>
+        <location filename="../../mscore/editstyle.ui" line="2115"/>
         <source>Up</source>
         <translation>상</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="2053"/>
-        <location filename="../../mscore/editstyle.ui" line="2074"/>
-        <location filename="../../mscore/editstyle.ui" line="2095"/>
-        <location filename="../../mscore/editstyle.ui" line="2116"/>
+        <location filename="../../mscore/editstyle.ui" line="2059"/>
+        <location filename="../../mscore/editstyle.ui" line="2080"/>
+        <location filename="../../mscore/editstyle.ui" line="2101"/>
+        <location filename="../../mscore/editstyle.ui" line="2122"/>
         <source>Down</source>
         <translation>하</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="2060"/>
+        <location filename="../../mscore/editstyle.ui" line="2066"/>
         <source>Voice 2</source>
         <translation>성부 2</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="2081"/>
+        <location filename="../../mscore/editstyle.ui" line="2087"/>
         <source>Voice 3</source>
         <translation>성부 3</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="2102"/>
+        <location filename="../../mscore/editstyle.ui" line="2108"/>
         <source>Voice 4</source>
         <translation>성부 4</translation>
     </message>
@@ -2529,17 +2529,17 @@ space unit</extracomment>
 <context>
     <name>Element</name>
     <message>
-        <location filename="../../mscore/element.cpp" line="559"/>
+        <location filename="../../mscore/element.cpp" line="564"/>
         <source>Set Invisible</source>
         <translation>비표시 설정</translation>
     </message>
     <message>
-        <location filename="../../mscore/element.cpp" line="561"/>
+        <location filename="../../mscore/element.cpp" line="566"/>
         <source>Set Visible</source>
         <translation>표시 설정</translation>
     </message>
     <message>
-        <location filename="../../mscore/element.cpp" line="563"/>
+        <location filename="../../mscore/element.cpp" line="568"/>
         <source>Color...</source>
         <translation>색...</translation>
     </message>
@@ -3443,7 +3443,7 @@ failed: </source>
 <context>
     <name>Measure</name>
     <message>
-        <location filename="../../mscore/measure.cpp" line="1788"/>
+        <location filename="../../mscore/measure.cpp" line="1781"/>
         <source>Measure Properties...</source>
         <translation>마디 속성</translation>
     </message>
@@ -3609,7 +3609,7 @@ failed: </source>
 <context>
     <name>MenuNotes</name>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="678"/>
+        <location filename="../../mscore/mscore.cpp" line="683"/>
         <source>&amp;Notes</source>
         <translation>&amp;음표</translation>
     </message>
@@ -3651,7 +3651,7 @@ failed: </source>
     <name>MuseScore</name>
     <message>
         <location filename="../../mscore/file.cpp" line="146"/>
-        <location filename="../../mscore/mscore.cpp" line="2997"/>
+        <location filename="../../mscore/mscore.cpp" line="3017"/>
         <source>MuseScore</source>
         <translation>MuseScore</translation>
     </message>
@@ -3713,27 +3713,22 @@ before closing?</source>
         <translation>Overture Files &lt;experimental&gt; (*.ove);;</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="193"/>
-        <source>All Files (*)</source>
-        <translation>모든파일 (*)</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/file.cpp" line="548"/>
+        <location filename="../../mscore/file.cpp" line="552"/>
         <source>Untitled</source>
         <translation>무제</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="602"/>
+        <location filename="../../mscore/file.cpp" line="606"/>
         <source>MuseScore: failure</source>
         <translation>MuseScore:실패</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="603"/>
+        <location filename="../../mscore/file.cpp" line="607"/>
         <source>Load template file </source>
         <translation>템프레트 파일 열기 </translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="603"/>
+        <location filename="../../mscore/file.cpp" line="607"/>
         <source> failed</source>
         <translation> 실패</translation>
     </message>
@@ -4248,11 +4243,6 @@ before closing?</source>
         <translation>음표꼬리연결없음</translation>
     </message>
     <message>
-        <location filename="../../mscore/menus.cpp" line="621"/>
-        <source>Start subbeam</source>
-        <translation>이중꼬리연결 사작</translation>
-    </message>
-    <message>
         <location filename="../../mscore/menus.cpp" line="626"/>
         <source>Auto beam</source>
         <translation>음표꼬리자동연결</translation>
@@ -4353,125 +4343,125 @@ before closing?</source>
         <translation>MuseScore: 구분 &amp; 여백</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="491"/>
+        <location filename="../../mscore/mscore.cpp" line="496"/>
         <source>File Operations</source>
         <translation>파일 조작</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="512"/>
+        <location filename="../../mscore/mscore.cpp" line="517"/>
         <source>Transport Tools</source>
         <translation>Transport Tools</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="533"/>
+        <location filename="../../mscore/mscore.cpp" line="538"/>
         <source>Concert Pitch</source>
         <translation>콘서트피치</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="541"/>
+        <location filename="../../mscore/mscore.cpp" line="546"/>
         <source>Note Entry</source>
         <translation>음표입력</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="602"/>
+        <location filename="../../mscore/mscore.cpp" line="607"/>
         <source>&amp;File</source>
         <translation>파일(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="607"/>
+        <location filename="../../mscore/mscore.cpp" line="612"/>
         <source>Open &amp;Recent</source>
         <translation>최근에 열어본 파일 (&amp;R)</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="629"/>
+        <location filename="../../mscore/mscore.cpp" line="634"/>
         <source>&amp;Edit</source>
         <translation>편집(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="650"/>
+        <location filename="../../mscore/mscore.cpp" line="655"/>
         <source>Voices</source>
         <translation>성부</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="664"/>
+        <location filename="../../mscore/mscore.cpp" line="669"/>
         <source>Preferences...</source>
         <translation>설정...</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="685"/>
+        <location filename="../../mscore/mscore.cpp" line="690"/>
         <source>Add Note</source>
         <translation>음표 추가</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="701"/>
+        <location filename="../../mscore/mscore.cpp" line="706"/>
         <source>Add Interval</source>
         <translation>음정 추가</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="717"/>
+        <location filename="../../mscore/mscore.cpp" line="722"/>
         <location filename="../../mscore/style.cpp" line="274"/>
         <source>Tuplets</source>
         <translation>잇단음표</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="739"/>
+        <location filename="../../mscore/mscore.cpp" line="744"/>
         <source>&amp;Layout</source>
         <translation>레이아웃(&amp;L)</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="742"/>
+        <location filename="../../mscore/mscore.cpp" line="747"/>
         <source>Page Settings...</source>
         <translation>페이지 설정...</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="750"/>
+        <location filename="../../mscore/mscore.cpp" line="755"/>
         <source>Breaks &amp;&amp; Spacer...</source>
         <translation>숨쉬기&amp;&amp;공간</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="756"/>
+        <location filename="../../mscore/mscore.cpp" line="761"/>
         <source>&amp;Style</source>
         <translation>스타일 (&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="770"/>
+        <location filename="../../mscore/mscore.cpp" line="775"/>
         <source>&amp;Display</source>
         <translation>표시(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="837"/>
+        <location filename="../../mscore/mscore.cpp" line="842"/>
         <source>&amp;Help</source>
         <translation>도움말(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="841"/>
+        <location filename="../../mscore/mscore.cpp" line="846"/>
         <source>Online Handbook</source>
         <translation>온라인 핸드북</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="843"/>
+        <location filename="../../mscore/mscore.cpp" line="848"/>
         <source>&amp;About</source>
         <translation>버젼정보(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="844"/>
+        <location filename="../../mscore/mscore.cpp" line="849"/>
         <source>About&amp;Qt</source>
         <translation>Qt에 대하여(&amp;Qt)</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="846"/>
+        <location filename="../../mscore/mscore.cpp" line="851"/>
         <source>Check for Update</source>
         <translation>갱신의 확인</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="927"/>
+        <location filename="../../mscore/mscore.cpp" line="933"/>
         <source>MuseScore handbook not found at: 
 </source>
         <translation>MuseScore 핸드북을 찾을수 없습니다: 
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="929"/>
+        <location filename="../../mscore/mscore.cpp" line="935"/>
         <source>
 
 From the "Help" menu try choosing "Online Handbook" instead.</source>
@@ -4480,53 +4470,53 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
 "도움말" 메뉴로 부터 "온라인 핸드북"을 선택해 보세요.</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="930"/>
+        <location filename="../../mscore/mscore.cpp" line="936"/>
         <source>MuseScore: Open Help</source>
         <translation>MuseScore: 도움말 열기</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2097"/>
+        <location filename="../../mscore/mscore.cpp" line="2112"/>
         <location filename="../../mscore/style.cpp" line="277"/>
         <source>System</source>
         <translation>시스템</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2363"/>
+        <location filename="../../mscore/mscore.cpp" line="2378"/>
         <source>no score</source>
         <translation>악보없음</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2374"/>
+        <location filename="../../mscore/mscore.cpp" line="2389"/>
         <source>note entry mode</source>
         <translation>음표입력모드</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2378"/>
+        <location filename="../../mscore/mscore.cpp" line="2393"/>
         <source>edit mode</source>
         <translation>편집모드</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2382"/>
+        <location filename="../../mscore/mscore.cpp" line="2397"/>
         <source>play</source>
         <translation>재생</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2398"/>
+        <location filename="../../mscore/mscore.cpp" line="2413"/>
         <source>Go To: </source>
         <translation>이동할 곳 </translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2415"/>
+        <location filename="../../mscore/mscore.cpp" line="2430"/>
         <source>Search</source>
         <translation>검색</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2705"/>
+        <location filename="../../mscore/mscore.cpp" line="2725"/>
         <source>Bar %1 Beat %2.%3</source>
         <translation>세로줄 %1 박 %2.%3</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2998"/>
+        <location filename="../../mscore/mscore.cpp" line="3018"/>
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
@@ -4536,7 +4526,7 @@ Restore session?</source>
     </message>
     <message>
         <location filename="../../mscore/plugins.cpp" line="88"/>
-        <location filename="../../mscore/plugins.cpp" line="422"/>
+        <location filename="../../mscore/plugins.cpp" line="450"/>
         <source>Error loading plugin
 "%1" line %2:
 %3</source>
@@ -4704,22 +4694,22 @@ is incompatible with current interface</translation>
 <context>
     <name>MyWebView</name>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="136"/>
+        <location filename="../../mscore/webpage.cpp" line="135"/>
         <source>Could not&lt;br /&gt; connect</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="137"/>
+        <location filename="../../mscore/webpage.cpp" line="136"/>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="138"/>
+        <location filename="../../mscore/webpage.cpp" line="137"/>
         <source>Retry</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="139"/>
+        <location filename="../../mscore/webpage.cpp" line="138"/>
         <source>Close this permanently</source>
         <translation type="unfinished"/>
     </message>
@@ -5057,7 +5047,7 @@ is incompatible with current interface</translation>
 <context>
     <name>PaletteBox</name>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1120"/>
+        <location filename="../../mscore/palette.cpp" line="1122"/>
         <source>Palettes</source>
         <translation>파레트</translation>
     </message>
@@ -5065,32 +5055,32 @@ is incompatible with current interface</translation>
 <context>
     <name>PaletteBoxButton</name>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1028"/>
+        <location filename="../../mscore/palette.cpp" line="1030"/>
         <source>Palette Properties</source>
         <translation>파레트 속성</translation>
     </message>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1031"/>
+        <location filename="../../mscore/palette.cpp" line="1033"/>
         <source>Insert new Palette</source>
         <translation>새로운 파레트 추가</translation>
     </message>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1034"/>
+        <location filename="../../mscore/palette.cpp" line="1036"/>
         <source>Move Palette Up</source>
         <translation>파레트를 위로 이동</translation>
     </message>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1037"/>
+        <location filename="../../mscore/palette.cpp" line="1039"/>
         <source>Move Palette Down</source>
         <translation>파레트를 아래로 이동</translation>
     </message>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1040"/>
+        <location filename="../../mscore/palette.cpp" line="1042"/>
         <source>Enable Editing</source>
         <translation>편집가능</translation>
     </message>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1045"/>
+        <location filename="../../mscore/palette.cpp" line="1047"/>
         <source>Delete Palette</source>
         <translation>파레트 삭제</translation>
     </message>
@@ -5378,48 +5368,48 @@ is incompatible with current interface</translation>
 <context>
     <name>PreferenceDialog</name>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="657"/>
+        <location filename="../../mscore/preferences.cpp" line="660"/>
         <source>default</source>
         <translation>기정치</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="903"/>
+        <location filename="../../mscore/preferences.cpp" line="906"/>
         <source>Choose Notepaper</source>
         <translation>보표의 선택</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="905"/>
-        <location filename="../../mscore/preferences.cpp" line="921"/>
+        <location filename="../../mscore/preferences.cpp" line="908"/>
+        <location filename="../../mscore/preferences.cpp" line="924"/>
         <source>Images (*.jpg *.gif *.png)</source>
         <translation>이미지 (*.jpg *.gif *.png)</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="919"/>
+        <location filename="../../mscore/preferences.cpp" line="922"/>
         <source>Choose Background Wallpaper</source>
         <translation>배경의 선택</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="935"/>
+        <location filename="../../mscore/preferences.cpp" line="938"/>
         <source>Choose Working Directory</source>
         <translation>작업디렉토리선택</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="950"/>
+        <location filename="../../mscore/preferences.cpp" line="953"/>
         <source>Choose Instrument List</source>
         <translation>악기리스트선택</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="952"/>
+        <location filename="../../mscore/preferences.cpp" line="955"/>
         <source>Instrument List (*.xml)</source>
         <translation>악기리스트 (*.xml)</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="966"/>
+        <location filename="../../mscore/preferences.cpp" line="969"/>
         <source>Choose Starting Score</source>
         <translation>시작보표선택</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="968"/>
+        <location filename="../../mscore/preferences.cpp" line="971"/>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;All (*)</source>
         <translation>MuseScore 파일들 (*.mscz *.mscx *.msc);;All (*)</translation>
     </message>
@@ -6039,27 +6029,27 @@ is incompatible with current interface</translation>
 <context>
     <name>QComboBox</name>
     <message>
-        <location filename="../../mscore/textline.cpp" line="525"/>
+        <location filename="../../mscore/textline.cpp" line="532"/>
         <source>Ped (Pedal)</source>
         <translation>페달</translation>
     </message>
     <message>
-        <location filename="../../mscore/textline.cpp" line="526"/>
+        <location filename="../../mscore/textline.cpp" line="533"/>
         <source>* (Pedal)</source>
         <translation>* (페달)</translation>
     </message>
     <message>
-        <location filename="../../mscore/textline.cpp" line="527"/>
+        <location filename="../../mscore/textline.cpp" line="534"/>
         <source>. (Pedal)</source>
         <translation>. (페달)</translation>
     </message>
     <message>
-        <location filename="../../mscore/textline.cpp" line="528"/>
+        <location filename="../../mscore/textline.cpp" line="535"/>
         <source>dash (Pedal)</source>
         <translation>dash (Pedal)</translation>
     </message>
     <message>
-        <location filename="../../mscore/textline.cpp" line="529"/>
+        <location filename="../../mscore/textline.cpp" line="536"/>
         <source>tr (Trill)</source>
         <translation>tr (Trill)</translation>
     </message>
@@ -6117,15 +6107,15 @@ Please select a single note or rest and retry operation
     <message>
         <location filename="../../mscore/capella.cpp" line="1347"/>
         <location filename="../../mscore/file.cpp" line="129"/>
-        <location filename="../../mscore/file.cpp" line="940"/>
-        <location filename="../../mscore/file.cpp" line="962"/>
-        <location filename="../../mscore/importmidi.cpp" line="1412"/>
+        <location filename="../../mscore/file.cpp" line="944"/>
+        <location filename="../../mscore/file.cpp" line="966"/>
+        <location filename="../../mscore/importmidi.cpp" line="1414"/>
         <location filename="../../mscore/instrdialog.cpp" line="1067"/>
-        <location filename="../../mscore/mscore.cpp" line="1611"/>
-        <location filename="../../mscore/mscore.cpp" line="2110"/>
-        <location filename="../../mscore/mscore.cpp" line="2153"/>
-        <location filename="../../mscore/palette.cpp" line="816"/>
-        <location filename="../../mscore/palette.cpp" line="1302"/>
+        <location filename="../../mscore/mscore.cpp" line="1617"/>
+        <location filename="../../mscore/mscore.cpp" line="2125"/>
+        <location filename="../../mscore/mscore.cpp" line="2168"/>
+        <location filename="../../mscore/palette.cpp" line="818"/>
+        <location filename="../../mscore/palette.cpp" line="1304"/>
         <location filename="../../mscore/sym.cpp" line="631"/>
         <source>Quit</source>
         <translation>종료</translation>
@@ -6153,30 +6143,30 @@ Please select a single note or rest and retry operation
         <translation>MuseScore: 읽어들이기 실패:</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="927"/>
-        <location filename="../../mscore/preferences.cpp" line="1393"/>
+        <location filename="../../mscore/file.cpp" line="931"/>
+        <location filename="../../mscore/preferences.cpp" line="1396"/>
         <source>MuseScore: Load Style</source>
         <translation>MuseScore: 스타일 읽기</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="929"/>
-        <location filename="../../mscore/preferences.cpp" line="1395"/>
+        <location filename="../../mscore/file.cpp" line="933"/>
+        <location filename="../../mscore/preferences.cpp" line="1398"/>
         <source>MuseScore Styles (*.mss);;All Files (*)</source>
         <translation>MuseScore Styles (*.mss);;All Files (*)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="938"/>
-        <location filename="../../mscore/file.cpp" line="960"/>
+        <location filename="../../mscore/file.cpp" line="942"/>
+        <location filename="../../mscore/file.cpp" line="964"/>
         <source>MuseScore: Load Style failed:</source>
         <translation>MuseScore: 스타일 읽기 실패:</translation>
     </message>
     <message>
-        <location filename="../../mscore/harmony.cpp" line="1097"/>
+        <location filename="../../mscore/harmony.cpp" line="1101"/>
         <source>MuseScore: Open chord list failed:</source>
         <translation>MuseScore: 코드리스트 열기 실패:</translation>
     </message>
     <message>
-        <location filename="../../mscore/harmony.cpp" line="1110"/>
+        <location filename="../../mscore/harmony.cpp" line="1115"/>
         <source>MuseScore: Load chord list failed:</source>
         <translation>MuseScore: 코드 리스트 불러오기 실패:</translation>
     </message>
@@ -6191,7 +6181,7 @@ Please select a single note or rest and retry operation
         <translation>MuseScore: 코드정의 파일 저장</translation>
     </message>
     <message>
-        <location filename="../../mscore/importmidi.cpp" line="1410"/>
+        <location filename="../../mscore/importmidi.cpp" line="1412"/>
         <source>MuseScore: load midi</source>
         <translation>MuseScore: MIDI 읽기</translation>
     </message>
@@ -6201,32 +6191,32 @@ Please select a single note or rest and retry operation
         <translation>MuseScore: 스타일 읽기 실패</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1607"/>
+        <location filename="../../mscore/mscore.cpp" line="1613"/>
         <source>MuseScore</source>
         <translation>MuseScore</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1608"/>
+        <location filename="../../mscore/mscore.cpp" line="1614"/>
         <source>reading file &lt;</source>
         <translation>파일 읽는중 &lt;</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2108"/>
+        <location filename="../../mscore/mscore.cpp" line="2123"/>
         <source>MuseScore: Load languages failed:</source>
         <translation>MuseScore: 언어설정 실패</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2151"/>
+        <location filename="../../mscore/mscore.cpp" line="2166"/>
         <source>MuseScore: invalid command</source>
         <translation>MuseScore: 알수없는 명령</translation>
     </message>
     <message>
-        <location filename="../../mscore/palette.cpp" line="814"/>
+        <location filename="../../mscore/palette.cpp" line="816"/>
         <source>MuseScore: Load Palette failed:</source>
         <translation>MuseScore: 파레트 읽기 실패</translation>
     </message>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1300"/>
+        <location filename="../../mscore/palette.cpp" line="1302"/>
         <source>MuseScore: Load Palettes failed:</source>
         <translation>MuseScore: Palettes 읽기 실패</translation>
     </message>
@@ -6381,7 +6371,8 @@ please select a measure and try again</source>
     </message>
     <message>
         <location filename="../../mscore/edit.cpp" line="569"/>
-        <location filename="../../mscore/file.cpp" line="1210"/>
+        <location filename="../../mscore/file.cpp" line="1217"/>
+        <location filename="../../mscore/score.cpp" line="415"/>
         <source>MuseScore</source>
         <translation>MuseScore</translation>
     </message>
@@ -6391,22 +6382,22 @@ please select a measure and try again</source>
         <translation>악보의 처음 속도기호는 지울수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="248"/>
+        <location filename="../../mscore/file.cpp" line="252"/>
         <source>Compressed MuseScore File (*.mscz)</source>
         <translation>압축된 MuseScore 파일 (*.mscz)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="249"/>
+        <location filename="../../mscore/file.cpp" line="253"/>
         <source>MuseScore File (*.mscx)</source>
         <translation>MuseScore 파일 (*.mscx)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="251"/>
+        <location filename="../../mscore/file.cpp" line="255"/>
         <source>MuseScore: Save Score</source>
         <translation>MuseScore: 악보저장</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="278"/>
+        <location filename="../../mscore/file.cpp" line="282"/>
         <source>The following file is locked: 
 %1 
 
@@ -6417,209 +6408,214 @@ Try saving to a different location.</source>
 다른장소에 저장하시기 바랍니다.</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="279"/>
-        <location filename="../../mscore/file.cpp" line="294"/>
-        <location filename="../../mscore/file.cpp" line="312"/>
-        <location filename="../../mscore/file.cpp" line="337"/>
-        <location filename="../../mscore/file.cpp" line="349"/>
-        <location filename="../../mscore/file.cpp" line="360"/>
+        <location filename="../../mscore/file.cpp" line="283"/>
+        <location filename="../../mscore/file.cpp" line="298"/>
+        <location filename="../../mscore/file.cpp" line="316"/>
+        <location filename="../../mscore/file.cpp" line="341"/>
+        <location filename="../../mscore/file.cpp" line="353"/>
+        <location filename="../../mscore/file.cpp" line="364"/>
         <source>MuseScore: Save File</source>
         <translation>MuseScore: 파일저장</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="310"/>
+        <location filename="../../mscore/file.cpp" line="314"/>
         <source>Open Temp File
 </source>
         <translation>임시파일 열기
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="310"/>
-        <location filename="../../mscore/file.cpp" line="803"/>
-        <location filename="../../mscore/file.cpp" line="912"/>
-        <location filename="../../mscore/file.cpp" line="1019"/>
+        <location filename="../../mscore/file.cpp" line="314"/>
+        <location filename="../../mscore/file.cpp" line="807"/>
+        <location filename="../../mscore/file.cpp" line="916"/>
+        <location filename="../../mscore/file.cpp" line="1023"/>
         <source>
 failed: </source>
         <translation>
 실패: </translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="322"/>
         <location filename="../../mscore/file.cpp" line="326"/>
+        <location filename="../../mscore/file.cpp" line="330"/>
         <source>MuseScore: Save File failed: </source>
         <translation>MuseScore: 파일저장 실패: </translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="338"/>
+        <location filename="../../mscore/file.cpp" line="342"/>
         <source>removing old backup file </source>
         <translation>이전의 백업파일을 지웁니다. </translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="338"/>
+        <location filename="../../mscore/file.cpp" line="342"/>
         <source> failed</source>
         <translation> 실패</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="350"/>
+        <location filename="../../mscore/file.cpp" line="354"/>
         <source>renaming old file &lt;</source>
         <translation>구 파일의 이름바꾸기 &lt;</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="351"/>
+        <location filename="../../mscore/file.cpp" line="355"/>
         <source>&gt; to backup &lt;</source>
         <translation>&gt; to backup &lt;</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="351"/>
+        <location filename="../../mscore/file.cpp" line="355"/>
         <source>&gt; failed</source>
         <translation>&gt; 실패</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="361"/>
+        <location filename="../../mscore/file.cpp" line="365"/>
         <source>renaming temp. file &lt;</source>
         <translation>renaming temp. file &lt;</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="361"/>
+        <location filename="../../mscore/file.cpp" line="365"/>
         <source>&gt; to &lt;</source>
         <translation>&gt; to &lt;</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="361"/>
+        <location filename="../../mscore/file.cpp" line="365"/>
         <source>&gt; failed:
 </source>
         <translation>&gt; 실패:
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="390"/>
+        <location filename="../../mscore/file.cpp" line="394"/>
         <source>Compressed MuseScore Format (*.mscz)</source>
         <translation>Compressed MuseScore Format (*.mscz)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="391"/>
+        <location filename="../../mscore/file.cpp" line="395"/>
         <source>MuseScore Format (*.mscx)</source>
         <translation>MuseScore Format (*.mscx)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="392"/>
+        <location filename="../../mscore/file.cpp" line="396"/>
         <source>MusicXML Format (*.xml)</source>
         <translation>MusicXML Format (*.xml)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="393"/>
+        <location filename="../../mscore/file.cpp" line="397"/>
         <source>Compressed MusicXML Format (*.mxl)</source>
         <translation>Compressed MusicXML Format (*.mxl)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="394"/>
+        <location filename="../../mscore/file.cpp" line="398"/>
         <source>Standard MIDI File (*.mid)</source>
         <translation>Standard MIDI File (*.mid)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="395"/>
+        <location filename="../../mscore/file.cpp" line="399"/>
         <source>PDF File (*.pdf)</source>
         <translation>PDF File (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="396"/>
+        <location filename="../../mscore/file.cpp" line="400"/>
         <source>PostScript File (*.ps)</source>
         <translation>PostScript File (*.ps)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="397"/>
+        <location filename="../../mscore/file.cpp" line="401"/>
         <source>PNG Bitmap Graphic (*.png)</source>
         <translation>PNG Bitmap Graphic (*.png)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="398"/>
+        <location filename="../../mscore/file.cpp" line="402"/>
         <source>Scalable Vector Graphic (*.svg)</source>
         <translation>Scalable Vector Graphic (*.svg)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="399"/>
+        <location filename="../../mscore/file.cpp" line="403"/>
         <source>Lilypond Format (*.ly)</source>
         <translation>Lilypond Format (*.ly)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="401"/>
+        <location filename="../../mscore/file.cpp" line="405"/>
         <source>Wave Audio (*.wav)</source>
         <translation>Wave Audio (*.wav)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="402"/>
+        <location filename="../../mscore/file.cpp" line="406"/>
         <source>Flac Audio (*.flac)</source>
         <translation>Flac Audio (*.flac)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="403"/>
+        <location filename="../../mscore/file.cpp" line="407"/>
         <source>Ogg Vorbis Audio (*.ogg)</source>
         <translation>Ogg Vorbis Audio (*.ogg)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="406"/>
+        <location filename="../../mscore/file.cpp" line="410"/>
         <source>MuseScore: Save a Copy</source>
         <translation>MuseScore: 사본을 저장</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="407"/>
-        <location filename="../../mscore/file.cpp" line="454"/>
-        <location filename="../../mscore/file.cpp" line="486"/>
+        <location filename="../../mscore/file.cpp" line="411"/>
+        <location filename="../../mscore/file.cpp" line="458"/>
+        <location filename="../../mscore/file.cpp" line="490"/>
         <source>MuseScore: Save As</source>
         <translation>MuseScore: 다른이름으로 저장</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="454"/>
+        <location filename="../../mscore/file.cpp" line="458"/>
         <source>cannot determine file type</source>
         <translation>파일타입을 지정할수 없습니다</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="803"/>
-        <location filename="../../mscore/file.cpp" line="912"/>
+        <location filename="../../mscore/file.cpp" line="807"/>
+        <location filename="../../mscore/file.cpp" line="916"/>
         <source>Open File
 </source>
         <translation>파일 열기
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="1006"/>
+        <location filename="../../mscore/file.cpp" line="1010"/>
         <source>MuseScore: Save Style</source>
         <translation>스타일 저장</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="1008"/>
+        <location filename="../../mscore/file.cpp" line="1012"/>
         <source>MuseScore Style File (*.mss)</source>
         <translation>MuseScore 스타일 파일 (*.mss)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="1019"/>
+        <location filename="../../mscore/file.cpp" line="1023"/>
         <source>Open Style File
 </source>
         <translation>스타일 파일 열기
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="1021"/>
+        <location filename="../../mscore/file.cpp" line="1025"/>
         <source>MuseScore: Open Style file</source>
         <translation>MuseScore: 스타일 파일 열기</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="1034"/>
+        <location filename="../../mscore/file.cpp" line="1038"/>
         <source>Write Style failed: </source>
         <translation>스타일쓰기 실패 </translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="1035"/>
+        <location filename="../../mscore/file.cpp" line="1039"/>
         <source>MuseScore: Write Style</source>
         <translation>MuseScore: 스타일 쓰기</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="1185"/>
+        <location filename="../../mscore/file.cpp" line="1189"/>
         <source>MuseScore: Read File</source>
         <translation>MuseScore: 파일 읽기</translation>
     </message>
     <message>
-        <location filename="../../mscore/importmidi.cpp" line="1411"/>
+        <location filename="../../mscore/file.cpp" line="1215"/>
+        <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/importmidi.cpp" line="1413"/>
         <source>Load failed: </source>
         <translation>불러오기 실패: </translation>
     </message>
@@ -6632,6 +6628,11 @@ failed: </source>
         <location filename="../../mscore/transposedialog.cpp" line="155"/>
         <source>There is nothing selected. Transpose whole score?</source>
         <translation>음표가 선택되지 않았습니다.  보표 전체를 조옮김 하시겠습니까?</translation>
+    </message>
+    <message>
+        <location filename="../../mscore/score.cpp" line="416"/>
+        <source>Can't open file. File extension "%1" not supported.</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -7460,17 +7461,17 @@ and check that the file location is correct</source>
 <context>
     <name>TextLineSegment</name>
     <message>
-        <location filename="../../mscore/textline.cpp" line="484"/>
+        <location filename="../../mscore/textline.cpp" line="491"/>
         <source>Set Invisible</source>
         <translation>비표시 설정</translation>
     </message>
     <message>
-        <location filename="../../mscore/textline.cpp" line="486"/>
+        <location filename="../../mscore/textline.cpp" line="493"/>
         <source>Set Visible</source>
         <translation>표시 설정</translation>
     </message>
     <message>
-        <location filename="../../mscore/textline.cpp" line="488"/>
+        <location filename="../../mscore/textline.cpp" line="495"/>
         <source>Line Properties...</source>
         <translation>선 속성...</translation>
     </message>
@@ -7491,13 +7492,13 @@ and check that the file location is correct</source>
 <context>
     <name>TextProp</name>
     <message>
-        <location filename="../../mscore/textproperties.cpp" line="55"/>
+        <location filename="../../mscore/textproperties.cpp" line="56"/>
         <source>mm</source>
         <comment>millimeter unit</comment>
         <translation>mm</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.cpp" line="55"/>
+        <location filename="../../mscore/textproperties.cpp" line="56"/>
         <source>sp</source>
         <comment>spatium unit</comment>
         <translation>sp</translation>
@@ -7595,6 +7596,7 @@ and check that the file location is correct</source>
         <location filename="../../mscore/textproperties.ui" line="291"/>
         <location filename="../../mscore/textproperties.ui" line="314"/>
         <location filename="../../mscore/textproperties.ui" line="337"/>
+        <location filename="../../mscore/textproperties.ui" line="360"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -7620,171 +7622,176 @@ and check that the file location is correct</source>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="334"/>
+        <source>center text vertical to text baseline</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/textproperties.ui" line="357"/>
         <source>align bottom edge of text to reference point</source>
         <translation>기준점에 텍스트의 하단 맞춤</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="361"/>
-        <location filename="../../mscore/textproperties.ui" line="696"/>
+        <location filename="../../mscore/textproperties.ui" line="384"/>
+        <location filename="../../mscore/textproperties.ui" line="719"/>
         <source>Color:</source>
         <translation>색갈</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="380"/>
+        <location filename="../../mscore/textproperties.ui" line="403"/>
         <source>text color</source>
         <translation>텍스트 색갈</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="401"/>
+        <location filename="../../mscore/textproperties.ui" line="424"/>
         <source>System Flag</source>
         <translation>시스템 프래그</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="423"/>
+        <location filename="../../mscore/textproperties.ui" line="446"/>
         <source>Offset</source>
         <translation>오프셋</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="443"/>
+        <location filename="../../mscore/textproperties.ui" line="466"/>
         <source>X:</source>
         <extracomment>coordinate</extracomment>
         <translation>X:</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="450"/>
+        <location filename="../../mscore/textproperties.ui" line="473"/>
         <source>horizontal offset to reference point</source>
         <translation>기준점의 수평 오프셋</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="469"/>
+        <location filename="../../mscore/textproperties.ui" line="492"/>
         <source>relX:</source>
         <translation>relX:</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="476"/>
+        <location filename="../../mscore/textproperties.ui" line="499"/>
         <source>reference point offset in percent of parent width</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="479"/>
-        <location filename="../../mscore/textproperties.ui" line="538"/>
+        <location filename="../../mscore/textproperties.ui" line="502"/>
+        <location filename="../../mscore/textproperties.ui" line="561"/>
         <source>%</source>
         <translation>%</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="502"/>
+        <location filename="../../mscore/textproperties.ui" line="525"/>
         <source>Y:</source>
         <extracomment>coordinate</extracomment>
         <translation>Y:</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="509"/>
+        <location filename="../../mscore/textproperties.ui" line="532"/>
         <source>vertical offset to reference point</source>
         <translation>기준점의 수직 오프셋</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="528"/>
+        <location filename="../../mscore/textproperties.ui" line="551"/>
         <source>relY:</source>
         <translation>relY:</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="535"/>
+        <location filename="../../mscore/textproperties.ui" line="558"/>
         <source>reference point offset in percent of parent height</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="559"/>
+        <location filename="../../mscore/textproperties.ui" line="582"/>
         <source>Unit:</source>
         <translation>단위:</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="572"/>
+        <location filename="../../mscore/textproperties.ui" line="595"/>
         <source>offset is absolute</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="575"/>
+        <location filename="../../mscore/textproperties.ui" line="598"/>
         <source>MM</source>
         <translation>MM</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="582"/>
+        <location filename="../../mscore/textproperties.ui" line="605"/>
         <source>offset in Space units</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="585"/>
+        <location filename="../../mscore/textproperties.ui" line="608"/>
         <source>Space</source>
         <translation>공백</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="595"/>
+        <location filename="../../mscore/textproperties.ui" line="618"/>
         <source>enable text frame</source>
         <translation>텍스트 프레임 유효화</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="598"/>
+        <location filename="../../mscore/textproperties.ui" line="621"/>
         <source>Frame</source>
         <translation>프레임</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="615"/>
+        <location filename="../../mscore/textproperties.ui" line="638"/>
         <source>draw circled frame</source>
         <translation>원형 프레임 그리기</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="618"/>
+        <location filename="../../mscore/textproperties.ui" line="641"/>
         <source>Circle</source>
         <translation>원</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="625"/>
+        <location filename="../../mscore/textproperties.ui" line="648"/>
         <source>draw boxed frame</source>
         <translation>박스 그리기</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="628"/>
+        <location filename="../../mscore/textproperties.ui" line="651"/>
         <source>Box</source>
         <translation>박스</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="639"/>
+        <location filename="../../mscore/textproperties.ui" line="662"/>
         <source>Width:</source>
         <translation>폭:</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="646"/>
+        <location filename="../../mscore/textproperties.ui" line="669"/>
         <source>frame line width</source>
         <translation>프레임 선 두께</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="649"/>
-        <location filename="../../mscore/textproperties.ui" line="669"/>
+        <location filename="../../mscore/textproperties.ui" line="672"/>
+        <location filename="../../mscore/textproperties.ui" line="692"/>
         <source>mm</source>
         <translation>mm</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="659"/>
+        <location filename="../../mscore/textproperties.ui" line="682"/>
         <source>Margin:</source>
         <translation>여백:</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="666"/>
+        <location filename="../../mscore/textproperties.ui" line="689"/>
         <source>frame inner margin</source>
         <translation>프레임의 안쪽여백</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="682"/>
+        <location filename="../../mscore/textproperties.ui" line="705"/>
         <source>Round:</source>
         <translation>둥글게</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="689"/>
+        <location filename="../../mscore/textproperties.ui" line="712"/>
         <source>corner round</source>
         <translation>모퉁이를 둥글게</translation>
     </message>
     <message>
-        <location filename="../../mscore/textproperties.ui" line="703"/>
+        <location filename="../../mscore/textproperties.ui" line="726"/>
         <source>frame color</source>
         <translation>프레임 색갈</translation>
     </message>
@@ -8325,18 +8332,18 @@ p, li { white-space: pre-wrap; }&#13;
 <context>
     <name>UpdateChecker</name>
     <message>
-        <location filename="../../mscore/updatechecker.cpp" line="79"/>
+        <location filename="../../mscore/updatechecker.cpp" line="82"/>
         <source>An update for MuseScore is available: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
         <translation>뮤즈스코어의 Update 가 가능합니다: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../mscore/updatechecker.cpp" line="83"/>
+        <location filename="../../mscore/updatechecker.cpp" line="86"/>
         <source>Update Available</source>
         <translation>Update 가 가능합니다</translation>
     </message>
     <message>
-        <location filename="../../mscore/updatechecker.cpp" line="89"/>
-        <location filename="../../mscore/updatechecker.cpp" line="90"/>
+        <location filename="../../mscore/updatechecker.cpp" line="92"/>
+        <location filename="../../mscore/updatechecker.cpp" line="93"/>
         <source>No Update Available</source>
         <translation>Update 가 없습니다</translation>
     </message>
@@ -8344,12 +8351,12 @@ p, li { white-space: pre-wrap; }&#13;
 <context>
     <name>VBox</name>
     <message>
-        <location filename="../../mscore/box.cpp" line="422"/>
+        <location filename="../../mscore/box.cpp" line="423"/>
         <source>Add</source>
         <translation>추가</translation>
     </message>
     <message>
-        <location filename="../../mscore/box.cpp" line="444"/>
+        <location filename="../../mscore/box.cpp" line="445"/>
         <source>VBox Properties...</source>
         <translation>VBox 속성...</translation>
     </message>
@@ -8389,37 +8396,37 @@ p, li { white-space: pre-wrap; }&#13;
 <context>
     <name>WebPageDockWidget</name>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="242"/>
+        <location filename="../../mscore/webpage.cpp" line="235"/>
         <source>Connect with the &lt;br /&gt; Community</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="243"/>
+        <location filename="../../mscore/webpage.cpp" line="236"/>
         <source>Find help</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="244"/>
+        <location filename="../../mscore/webpage.cpp" line="237"/>
         <source>Improve your skills</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="245"/>
+        <location filename="../../mscore/webpage.cpp" line="238"/>
         <source>Read the latest news</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="246"/>
+        <location filename="../../mscore/webpage.cpp" line="239"/>
         <source>Download free sheet music</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="247"/>
+        <location filename="../../mscore/webpage.cpp" line="240"/>
         <source>Start</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="248"/>
+        <location filename="../../mscore/webpage.cpp" line="241"/>
         <source>Close this permanently</source>
         <translation type="unfinished"/>
     </message>
@@ -11682,16 +11689,6 @@ p, li { white-space: pre-wrap; }&#13;
         <location filename="../../mscore/preferences.cpp" line="66"/>
         <source>Never</source>
         <translation>확인하지 않음</translation>
-    </message>
-</context>
-<context>
-    <name>score</name>
-    <message>
-        <location filename="../../mscore/file.cpp" line="1211"/>
-        <source>Cannot read this score:
-your version of MuseScore is too old.</source>
-        <translation>이 악보는 읽을수 없습니다:&#13;
-당신의 뮤즈스코어가 이전버젼 입니다.</translation>
     </message>
 </context>
 <context>

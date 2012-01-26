@@ -3564,10 +3564,6 @@ A "Súgó" menüben válaszd inkább az "Online kézikönyv" pontot.</translatio
         <translation>Nincs gerenda</translation>
     </message>
     <message>
-        <source>Start subbeam</source>
-        <translation>Újabb gerenda kezdete</translation>
-    </message>
-    <message>
         <source>Auto beam</source>
         <translation>Auto gerenda</translation>
     </message>
@@ -3681,10 +3677,6 @@ szkript futtatásához</translation>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
         <translation>Overture fájlok &lt;kísérleti&gt; (*.ove);;</translation>
-    </message>
-    <message>
-        <source>All Files (*)</source>
-        <translation>Minden fájl (*)</translation>
     </message>
 </context>
 <context>
@@ -5213,6 +5205,14 @@ Próbáld más helyre menteni.</translation>
         <source>Load failed: </source>
         <translation>Nem sikerült a betöltés: </translation>
     </message>
+    <message>
+        <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Can't open file. File extension "%1" not supported.</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -6150,6 +6150,10 @@ győződj meg arról, hogy helyes-e a SoundFont fájl elérési útja.</translat
     <message>
         <source>System Flag</source>
         <translation>Rendszer zászló</translation>
+    </message>
+    <message>
+        <source>center text vertical to text baseline</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9081,15 +9085,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Every 2 months</source>
         <translation>Kéthavonta</translation>
-    </message>
-</context>
-<context>
-    <name>score</name>
-    <message>
-        <source>Cannot read this score:
-your version of MuseScore is too old.</source>
-        <translation>Nem lehet olvasni a kottát:&#13;
-a MuseScore verziód túl régi.</translation>
     </message>
 </context>
 <context>

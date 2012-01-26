@@ -3567,10 +3567,6 @@ From the "Help" menu try choosing "Online Handbook" instead.</translation>
         <translation>No beam</translation>
     </message>
     <message>
-        <source>Start subbeam</source>
-        <translation>Start subbeam</translation>
-    </message>
-    <message>
         <source>Auto beam</source>
         <translation>Auto beam</translation>
     </message>
@@ -3624,14 +3620,14 @@ Restore session?</source>
         <source>Script
 %1
 is incompatible with current interface</source>
-        <translation>Script&#13;
-%1&#13;
+        <translation>Script
+%1
 is incompatible with current interface</translation>
     </message>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation>MuseScore version is too old to run script&#13;
+        <translation>MuseScore version is too old to run script
 %1</translation>
     </message>
     <message>
@@ -3642,8 +3638,8 @@ is incompatible with current interface</translation>
         <source>Error loading plugin
 "%1" line %2:
 %3</source>
-        <translation>Error loading plugin&#13;
-"%1" line %2:&#13;
+        <translation>Error loading plugin
+"%1" line %2:
 %3</translation>
     </message>
     <message>
@@ -3681,10 +3677,6 @@ is incompatible with current interface</translation>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
         <translation>Overture datoteke &lt;eksperimentalno&gt; (*.ove);;</translation>
-    </message>
-    <message>
-        <source>All Files (*)</source>
-        <translation>Sve datoteke (*)</translation>
     </message>
 </context>
 <context>
@@ -5183,8 +5175,8 @@ failed: </translation>
 %1 
 
 Try saving to a different location.</source>
-        <translation>The following file is locked:&#13;
-%1&#13;
+        <translation>The following file is locked:
+%1
 Try saving to a different location.</translation>
     </message>
     <message>
@@ -5206,6 +5198,14 @@ Try saving to a different location.</translation>
     <message>
         <source>Load failed: </source>
         <translation>Load failed: </translation>
+    </message>
+    <message>
+        <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Can't open file. File extension "%1" not supported.</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5375,7 +5375,7 @@ Try saving to a different location.</translation>
     <message>
         <source>Init audio driver failed.
 Sequencer will be disabled.</source>
-        <translation>Init audio driver failed.&#13;
+        <translation>Init audio driver failed.
 Sequencer will be disabled.</translation>
     </message>
     <message>
@@ -5385,7 +5385,7 @@ Sequencer will be disabled.</translation>
     <message>
         <source>No SoundFont configured
 Playback will be disabled.</source>
-        <translation>No SoundFont configured&#13;
+        <translation>No SoundFont configured
 Playback will be disabled.</translation>
     </message>
     <message>
@@ -5395,11 +5395,11 @@ failed. Playback will be disabled.
 
 Go to Display &gt; Synthesizer 
 and check that the file location is correct</source>
-        <translation>Loading SoundFont&#13;
-"%1"&#13;
-failed. Playback will be disabled.&#13;
-&#13;
-Go to Display &gt; Synthesizer &#13;
+        <translation>Loading SoundFont
+"%1"
+failed. Playback will be disabled.
+
+Go to Display &gt; Synthesizer 
 and check that the file location is correct</translation>
     </message>
 </context>
@@ -6144,6 +6144,10 @@ and check that the file location is correct</translation>
     <message>
         <source>System Flag</source>
         <translation>System Flag</translation>
+    </message>
+    <message>
+        <source>center text vertical to text baseline</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9075,15 +9079,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Every 2 months</source>
         <translation>Bimonthly</translation>
-    </message>
-</context>
-<context>
-    <name>score</name>
-    <message>
-        <source>Cannot read this score:
-your version of MuseScore is too old.</source>
-        <translation>Nemoguće je pročitati zapis:&#13;
-vaša inačica MuseScorea je prestara.</translation>
     </message>
 </context>
 <context>

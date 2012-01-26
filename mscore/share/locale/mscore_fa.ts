@@ -3566,10 +3566,6 @@ From the "Help" menu try choosing "Online Handbook" instead.</translation>
         <translation>No beam</translation>
     </message>
     <message>
-        <source>Start subbeam</source>
-        <translation>Start subbeam</translation>
-    </message>
-    <message>
         <source>Auto beam</source>
         <translation>Auto beam</translation>
     </message>
@@ -3680,10 +3676,6 @@ is incompatible with current interface</translation>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
         <translation>Overture Files &lt;experimental&gt; (*.ove);;</translation>
-    </message>
-    <message>
-        <source>All Files (*)</source>
-        <translation>All Files (*)</translation>
     </message>
 </context>
 <context>
@@ -3861,15 +3853,15 @@ is incompatible with current interface</translation>
     <name>PageBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>فرم</translation>
     </message>
     <message>
         <source>Page</source>
-        <translation>Page</translation>
+        <translation>صفحه</translation>
     </message>
     <message>
         <source>Page No.:</source>
-        <translation>Page No.:</translation>
+        <translation>شماره ی صفحه:</translation>
     </message>
 </context>
 <context>
@@ -5206,6 +5198,14 @@ Try saving to a different location.</translation>
         <source>Load failed: </source>
         <translation>Load failed: </translation>
     </message>
+    <message>
+        <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Can't open file. File extension "%1" not supported.</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -6143,6 +6143,10 @@ and check that the file location is correct</translation>
     <message>
         <source>System Flag</source>
         <translation>System Flag</translation>
+    </message>
+    <message>
+        <source>center text vertical to text baseline</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9074,15 +9078,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Every 2 months</source>
         <translation>Bimonthly</translation>
-    </message>
-</context>
-<context>
-    <name>score</name>
-    <message>
-        <source>Cannot read this score:
-your version of MuseScore is too old.</source>
-        <translation>Cannot read this score:
-this version of MuseScore is too old.</translation>
     </message>
 </context>
 <context>
