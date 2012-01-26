@@ -607,31 +607,28 @@ Note* searchTieNote(Note* note)
       Part* part   = chord->staff()->part();
       int strack   = part->staves()->front()->idx() * VOICES;
       int etrack   = strack + part->staves()->size() * VOICES;
-      int tick     = seg->tick() + chord->duration().ticks();
+      int tick     = seg->tick() + chord->globalDuration().ticks();
 
       while ((seg = seg->next1(SegChordRest))) {
             if (seg->tick() < tick)
                   continue;
             if (seg->tick() > tick)
                   break;
-            bool noteFound = false;
             for (int track = strack; track < etrack; ++track) {
                   ChordRest* cr = static_cast<ChordRest*>(seg->element(track));
                   if (cr == 0 || cr->type() != CHORD)
                         continue;
                   int staffIdx = cr->staffIdx() + cr->staffMove();
-                  if (staffIdx != chord->staffIdx())
+                  if (staffIdx != chord->staffIdx())  // cannot happen?
                         continue;
                   foreach(Note* n, static_cast<Chord*>(cr)->notes()) {
                         if (n->pitch() == note->pitch()) {
-                              if (note2 == 0 || note->chord()->track() == chord->track())
+                              if (note2 == 0 || cr->track() == chord->track())
                                     note2 = n;
                               }
-                        else if (cr->track() == chord->track())
-                              noteFound = true;
                         }
                   }
-            if (noteFound || note2)
+            if (note2)
                   break;
             }
       return note2;
