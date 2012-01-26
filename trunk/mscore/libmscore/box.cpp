@@ -205,10 +205,8 @@ void Box::read(const QDomElement& de)
       _leftMargin = _rightMargin = _topMargin = _bottomMargin = 0.0;
       bool keepMargins = false;        // whether original margins have to be kept when reading old file
 
-      qreal _spatium = spatium();
       for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
-            const QString& val(e.text());
             if (setProperty(tag, e))
                   ;
             else if (tag == "Text") {
@@ -272,12 +270,13 @@ void Box::read(const QDomElement& de)
                   add(vb);
                   keepMargins = true;     // in old file, box nesting used outer box margins
                   }
-            else if (!Element::readProperties(e))
+            else
                   domError(e);
             }
 
       // with .msc versions prior to 1.17, box margins were only used when nesting another box inside this box:
       // for backward compatibility set them to 0 in all other cases
+
       if (score()->mscVersion() < 117 && (type() == HBOX || type() == VBOX) && !keepMargins)  {
             _leftMargin = _rightMargin = _topMargin = _bottomMargin = 0.0;
             }

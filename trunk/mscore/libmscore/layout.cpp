@@ -1108,8 +1108,8 @@ void Score::connectTies()
                               continue;
                         Note* nnote = searchTieNote(n);
                         if (nnote == 0) {
-                              qDebug("next note at %d voice %d for tie not found",
-                                 s->tick(), i );
+                              qDebug("next note at %d track %d for tie not found, back: %p",
+                                 s->tick(), i, tie->endElement());
                               // n->setTieFor(0);  show short bow
                               // delete tie;
                               }

@@ -1932,6 +1932,8 @@ void Measure::read(const QDomElement& de, int staffIdx)
                      && segment
                      && segment->subtype() == SegChordRest
                      && segment->tick() == score()->curTick
+                     && segment->element(score()->curTrack)
+                     && segment->element(score()->curTrack)->type() == CHORD
                      )
                         {
                         //
