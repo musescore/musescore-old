@@ -38,13 +38,13 @@ InspectorBase::InspectorBase(QWidget* parent)
 //   getValue
 //---------------------------------------------------------
 
-QVariant InspectorBase::getValue(int idx, qreal _spatium) const
+QVariant InspectorBase::getValue(int idx) const
       {
       const InspectorItem& ii = item(idx);
-      QWidget* w        = ii.w;
+      QWidget* w              = ii.w;
 
       switch (propertyType(ii.t)) {
-            case T_SREAL:     return w->property("value").toDouble() * _spatium;
+            case T_SREAL:
             case T_REAL:      return w->property("value");
             case T_DIRECTION: return w->property("currentIndex");
             case T_BOOL:      return w->property("checked");
@@ -57,15 +57,13 @@ QVariant InspectorBase::getValue(int idx, qreal _spatium) const
 //   setValue
 //---------------------------------------------------------
 
-void InspectorBase::setValue(int idx, const QVariant& val, qreal _spatium)
+void InspectorBase::setValue(int idx, const QVariant& val)
       {
       const InspectorItem& ii = item(idx);
       QWidget* w        = ii.w;
 
       switch (propertyType(ii.t)) {
             case T_SREAL:
-                  static_cast<QDoubleSpinBox*>(w)->setValue(val.toDouble() / _spatium);
-                  break;
             case T_REAL:
                   static_cast<QDoubleSpinBox*>(w)->setValue(val.toDouble());
                   break;
@@ -90,7 +88,7 @@ bool InspectorBase::isDefault(int idx)
       const InspectorItem& ii = item(idx);
 
       P_ID id      = ii.t;
-      QVariant val = getValue(idx, e->spatium());
+      QVariant val = getValue(idx);
       void* def    = e->propertyDefault(id);
 
       switch (propertyType(id)) {
@@ -111,7 +109,7 @@ bool InspectorBase::dirty() const
       {
       Element* e = inspector->element();
       for (int i = 0; i < inspectorItems(); ++i) {
-            if (e->getProperty(item(i).t) != getValue(i, e->spatium()))
+            if (e->getProperty(item(i).t) != getValue(i))
                   return true;
             }
       return false;
@@ -141,7 +139,7 @@ void InspectorBase::setElement(Element* e)
             QVariant val   = e->getProperty(id);
 
             w->blockSignals(true);
-            setValue(i, val, e->spatium());
+            setValue(i, val);
             w->blockSignals(false);
 
             if (r)
@@ -161,7 +159,7 @@ void InspectorBase::apply()
       score->startCmd();
       for (int i = 0; i < inspectorItems(); ++i) {
             QVariant val1 = e->getProperty(item(i).t);
-            QVariant val2 = getValue(i, e->spatium());
+            QVariant val2 = getValue(i);
             if (val1 != val2)
                   score->undoChangeProperty(e, item(i).t, val2);
             }

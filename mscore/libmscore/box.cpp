@@ -209,30 +209,8 @@ void Box::read(const QDomElement& de)
       for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
-            if (tag == "height") {
-                  qreal v = val.toDouble();
-                  if (score()->mscVersion() <= 100)
-                        v /= _spatium;
-                  _boxHeight = Spatium(v);
-                  }
-            else if (tag == "width") {
-                  qreal v = val.toDouble();
-                  if (score()->mscVersion() <= 100)
-                        v /= _spatium;
-                  _boxWidth = Spatium(v);
-                  }
-            else if (tag == "leftMargin")
-                  _leftMargin = val.toDouble();
-            else if (tag == "rightMargin")
-                  _rightMargin = val.toDouble();
-            else if (tag == "topMargin")
-                  _topMargin = val.toDouble();
-            else if (tag == "bottomMargin")
-                  _bottomMargin = val.toDouble();
-            else if (tag == "topGap")
-                  _topGap = val.toDouble() * _spatium;
-            else if (tag == "bottomGap")
-                  _bottomGap = val.toDouble() * _spatium;
+            if (setProperty(tag, e))
+                  ;
             else if (tag == "Text") {
                   Text* t;
                   if (type() == TBOX) {

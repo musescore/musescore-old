@@ -33,6 +33,7 @@ class Part;
 
 class ExcerptItem : public QListWidgetItem {
       Excerpt* _excerpt;
+
    public:
       ExcerptItem(Excerpt*, QListWidget* parent = 0);
       Excerpt* excerpt() const { return _excerpt; }
@@ -44,6 +45,7 @@ class ExcerptItem : public QListWidgetItem {
 
 class PartItem : public QListWidgetItem {
       Part* _part;
+
    public:
       PartItem(Part*, QListWidget* parent = 0);
       Part* part() const { return _part; }
@@ -57,13 +59,17 @@ class ExcerptsDialog : public QDialog, private Ui::ExcerptsDialog {
       Q_OBJECT
       Score* score;
 
+      QString createName(const QString&);
+
    private slots:
       void deleteClicked();
       void newClicked();
+      void newAllClicked();
       void excerptChanged(QListWidgetItem* cur, QListWidgetItem* prev);
       void partDoubleClicked(QListWidgetItem*);
       void partClicked(QListWidgetItem*);
       void createExcerptClicked();
+      void createAllExcerptsClicked();
       void createExcerptClicked(QListWidgetItem*);
       void titleChanged(const QString&);
 

@@ -51,8 +51,8 @@ class InspectorBase : public QWidget {
 
       virtual const InspectorItem& item(int idx) const;
 
-      QVariant getValue(int idx, qreal spatium) const;
-      void setValue(int idx, const QVariant& val, qreal spatium);
+      QVariant getValue(int idx) const;
+      void setValue(int idx, const QVariant& val);
 
       bool isDefault(int idx);
       virtual int inspectorItems() const { return 0; }

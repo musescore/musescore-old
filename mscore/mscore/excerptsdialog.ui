@@ -53,6 +53,13 @@
          </spacer>
         </item>
         <item>
+         <widget class="QPushButton" name="newAllButton" >
+          <property name="text" >
+           <string>New All</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QPushButton" name="newButton">
           <property name="text">
            <string>New</string>
@@ -102,6 +109,13 @@
       <widget class="QPushButton" name="createExcerpt">
        <property name="text">
         <string>Create Part</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="createAllExcerpts" >
+       <property name="text" >
+        <string>Create All Parts</string>
        </property>
       </widget>
      </item>

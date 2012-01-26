@@ -693,7 +693,7 @@ bool BarLine::setProperty(const QString& name, const QDomElement& e)
       for (int i = 0; i < PROPERTIES; ++i) {
             if (propertyName(propertyList[i].id) == name) {
                   QVariant v = ::getProperty(propertyList[i].id, e);
-                  ::setProperty(propertyList[i].id, ((*this).*(propertyList[i].data))(), v);
+                  setVariant(propertyList[i].id, ((*this).*(propertyList[i].data))(), v);
                   setGenerated(false);
                   return true;
                   }

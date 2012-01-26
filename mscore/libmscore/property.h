@@ -92,9 +92,6 @@ enum P_TYPE {
       T_VALUE_TYPE,
       };
 
-extern void setProperty(P_ID, void*, const QString& value);
-extern void setProperty(P_ID, void*, const QVariant& value);
-
 extern QVariant getProperty(P_ID type, const QDomElement& e);
 
 extern P_TYPE propertyType(P_ID);
@@ -108,16 +105,8 @@ template <class T>
 class Property {
    public:
       P_ID id;
-//      P_TYPE type;
-//      const char* name;     // xml name of property
       void* (T::*data)();   // member function returns pointer to data
       void* defaultVal;     // pointer to default data
-
-/*      void setProperty(T* c, const QDomElement& e) {
-            QVariant v = ::getProperty(id, e);
-            ::setProperty(type, ((*c).*(data))(), v);
-            }
-      */
       };
 
 //---------------------------------------------------------
@@ -195,7 +184,7 @@ bool T::setProperty(P_ID propertyId, const QVariant& v)                         
       Property<T>* p = property(propertyId);                                     \
       bool rv = true;                                                            \
       if (p) {                                                                   \
-            ::setProperty(propertyId, ((*this).*(p->data))(), v);                \
+            setVariant(propertyId, ((*this).*(p->data))(), v);                   \
             setGenerated(false);                                                 \
             }                                                                    \
       else                                                                       \
@@ -211,7 +200,7 @@ bool T::setProperty(const QString& name, const QDomElement& e)                  
                   break;                                                         \
             if (propertyName(id) == name) {                                      \
                   QVariant v = ::getProperty(propertyList[i].id, e);             \
-                  ::setProperty(propertyList[i].id, ((*this).*(propertyList[i].data))(), v); \
+                  setVariant(propertyList[i].id, ((*this).*(propertyList[i].data))(), v); \
                   setGenerated(false);                                           \
                   return true;                                                   \
                   }                                                              \
