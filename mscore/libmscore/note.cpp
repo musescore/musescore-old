@@ -303,7 +303,7 @@ void Note::setTpcFromPitch()
 
 void Note::setTpc(int v)
       {
-      if (!tpcIsValid(_tpc)) {
+      if (!tpcIsValid(v)) {
             qDebug("Note::setTpc: bad tpc %d\n", v);
             abort();
             }
