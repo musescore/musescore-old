@@ -1,3 +1,5 @@
+27.1 (ws)
+      - fix #14659: Flipping stem direction on beamed notes causes a crash
 26.1 (ws)
       - patch #14620: Automatic Part Extraction (patch from emeraldimp)
 25.1 (ws)

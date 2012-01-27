@@ -1330,7 +1330,7 @@ void Beam::setBeamDirection(Direction d)
 void Beam::toDefault()
       {
       if (_direction != AUTO) {
-            score()->undoChangeProperty(this, P_DIRECTION, AUTO);
+            score()->undoChangeProperty(this, P_STEM_DIRECTION, AUTO);
             _up = -1;
             _userModified[0] = false;
             _userModified[1] = false;
