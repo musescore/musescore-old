@@ -1,4 +1,5 @@
 27.1 (ws)
+      - fix #14657: embedded SVG rendered as raster images
       - fix #14581: Unable to open ove files
       - fix #14659: Flipping stem direction on beamed notes causes a crash
 26.1 (ws)
