@@ -213,17 +213,30 @@ void SvgImage::draw(QPainter* painter) const
       {
       if (!doc)
             return;
-      QSize s = sz.toSize();
-
-      if (buffer.size() != s || _dirty) {
-            buffer = QPixmap(s);
-            buffer.fill();
-            QPainter pp(&buffer);
-            pp.setViewport(0, 0, s.width(), s.height());
-            doc->render(&pp);
-            _dirty = false;
+      painter->save();
+      QTransform t = painter->transform();
+      qreal xscale = t.m11();
+      qreal yscale = t.m22();
+      QSize s      = QSizeF(sz.width() * xscale, sz.height() * yscale).toSize();
+      t.setMatrix(1.0, t.m12(), t.m13(), t.m21(), 1.0, t.m23(), t.m31(), t.m32(), t.m33());
+      painter->setWorldTransform(t);
+      if (buffer.size() != s || _dirty || score()->printing()) {
+            if (score()->printing()) {
+                  QPointF pt(canvasPos());
+                  painter->setViewport(pt.x() * xscale, pt.y() * yscale, s.width(), s.height());
+                  doc->render(painter);
+                  }
+            else {
+                  buffer = QPixmap(s);
+                  buffer.fill();
+                  QPainter pp(&buffer);
+                  pp.setViewport(0, 0, s.width(), s.height());
+                  doc->render(&pp);
+                  _dirty = false;
+                  }
             }
       Image::draw(painter);
+      painter->restore();
       }
 
 //---------------------------------------------------------
