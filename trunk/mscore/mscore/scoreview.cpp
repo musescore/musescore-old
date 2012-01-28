@@ -4371,21 +4371,57 @@ void ScoreView::cmdAddSlur()
             is.slur = 0;
             return;
             }
-      QList<Note*> nl = _score->selection().noteList();
-      Note* firstNote = 0;
-      Note* lastNote  = 0;
-      foreach(Note* n, nl) {
-            if (firstNote == 0 || firstNote->chord()->tick() > n->chord()->tick())
-                  firstNote = n;
-            if (lastNote == 0 || lastNote->chord()->tick() < n->chord()->tick())
-                  lastNote = n;
+      if (_score->selection().state() == SEL_RANGE) {
+            _score->startCmd();
+            int startTrack = _score->selection().staffStart() * VOICES;
+            int endTrack   = _score->selection().staffEnd() * VOICES;
+printf("start-end %d %d\n", startTrack, endTrack);
+            for (int track = startTrack; track < endTrack; ++track) {
+                  QList<Note*> nl = _score->selection().noteList(track);
+                  Note* firstNote = 0;
+                  Note* lastNote  = 0;
+                  foreach(Note* n, nl) {
+                        if (firstNote == 0 || firstNote->chord()->tick() > n->chord()->tick())
+                              firstNote = n;
+                        if (lastNote == 0 || lastNote->chord()->tick() < n->chord()->tick())
+                              lastNote = n;
+                        }
+                  if (firstNote) {
+                        if (firstNote == lastNote)
+                              lastNote = 0;
+                        ChordRest* cr1 = firstNote->chord();
+                        ChordRest* cr2 = lastNote ? lastNote->chord() : nextChordRest(cr1);
+                        if (cr2 == 0)
+                              cr2 = cr1;
+
+                        Slur* slur = new Slur(_score);
+                        slur->setStartElement(cr1);
+                        slur->setEndElement(cr2);
+                        slur->setParent(0);
+                        _score->undoAddElement(slur);
+                        }
+                  }
+            _score->endCmd();
+            mscore->endCmd();
             }
-      if (!firstNote)
-            return;
-      _score->startCmd();
-      if (firstNote == lastNote)
-            lastNote = 0;
-      cmdAddSlur(firstNote, lastNote);
+      else {
+            _score->startCmd();
+            QList<Note*> nl = _score->selection().noteList();
+            Note* firstNote = 0;
+            Note* lastNote  = 0;
+            foreach(Note* n, nl) {
+                  if (firstNote == 0 || firstNote->chord()->tick() > n->chord()->tick())
+                        firstNote = n;
+                  if (lastNote == 0 || lastNote->chord()->tick() < n->chord()->tick())
+                        lastNote = n;
+                  }
+            if (!firstNote)
+                  return;
+            _score->startCmd();
+            if (firstNote == lastNote)
+                  lastNote = 0;
+            cmdAddSlur(firstNote, lastNote);
+            }
       }
 
 //---------------------------------------------------------

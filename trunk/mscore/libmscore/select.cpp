@@ -479,7 +479,7 @@ QByteArray Selection::staffMimeData() const
 //   noteList
 //---------------------------------------------------------
 
-QList<Note*> Selection::noteList() const
+QList<Note*> Selection::noteList(int selTrack) const
       {
       QList<Note*>nl;
 
@@ -498,7 +498,8 @@ QList<Note*> Selection::noteList() const
                               continue;
                         for (int track = startTrack; track < endTrack; ++track) {
                               Element* e = seg->element(track);
-                              if (e == 0 || e->type() != CHORD)
+                              if (e == 0 || e->type() != CHORD
+                                 || (selTrack != -1 && selTrack != track))
                                     continue;
                               Chord* c = static_cast<Chord*>(e);
                               nl.append(c->notes());
