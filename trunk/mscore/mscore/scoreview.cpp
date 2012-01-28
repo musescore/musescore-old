@@ -2086,7 +2086,8 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
             QDomElement e = doc.documentElement();
 
             dragOffset = QPoint();
-            ElementType type = Element::readType(e, &dragOffset);
+            Fraction duration;  // dummy
+            ElementType type = Element::readType(e, &dragOffset, &duration);
 
             Element* el = 0;
             if (type == IMAGE) {

@@ -99,6 +99,9 @@ struct DropData {
       QPointF dragOffset;
       Element* element;
       Qt::KeyboardModifiers modifiers;
+      Fraction duration;
+
+      DropData();
       };
 
 //---------------------------------------------------------
@@ -296,7 +299,7 @@ class Element {
       QColor curColor() const;
       void setColor(const QColor& c)   { _color = c;    }
 
-      static ElementType readType(QDomElement& node, QPointF*);
+      static ElementType readType(QDomElement& node, QPointF*, Fraction*);
 
       virtual QByteArray mimeData(const QPointF&) const;
 /**

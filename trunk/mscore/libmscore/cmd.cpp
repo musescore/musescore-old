@@ -1638,32 +1638,17 @@ void Score::cmdPaste(MuseScoreView* view)
             docName = "--";
             QDomElement e = doc.documentElement();
             QPointF dragOffset;
-            ElementType type    = Element::readType(e, &dragOffset);
+            Fraction duration(1, 4);
+            ElementType type = Element::readType(e, &dragOffset, &duration);
             if (type != INVALID) {
                   Element* el = Element::create(type, this);
                   if (el) {
                         el->read(e);
                         addRefresh(selection().element()->abbox());   // layout() ?!
-#if 0
-                        if (el->type() == NOTE) {
-                              Note* n = static_cast<Note*>(el);
-                              if (!styleB(ST_concertPitch) && part->transpose().chromatic) {
-                                    int npitch;
-                                    int ntpc;
-                                    Interval interval = part->transpose();
-                                    interval.flip();
-                                    transposeInterval(n->pitch(), n->tpc(), &npitch, &ntpc,
-                                      interval, true);
-                                    n->setPitch(npitch, ntpc);
-                                    }
-                              }
-#endif
                         DropData ddata;
                         ddata.view       = view;
-                        ddata.pos        = QPointF();
-                        ddata.dragOffset = QPointF();
                         ddata.element    = el;
-                        ddata.modifiers  = 0;
+                        ddata.duration   = duration;
                         selection().element()->drop(ddata);
                         if (selection().element())
                               addRefresh(selection().element()->abbox());

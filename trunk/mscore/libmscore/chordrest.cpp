@@ -774,7 +774,7 @@ Element* ChordRest::drop(const DropData& data)
                   NoteVal nval;
                   nval.pitch = note->pitch();
                   nval.headGroup = note->headGroup();
-                  score()->setNoteRest(segment(), track(), nval, Fraction(1, 4), AUTO);
+                  score()->setNoteRest(segment(), track(), nval, data.duration, AUTO);
                   delete e;
                   }
                   break;
