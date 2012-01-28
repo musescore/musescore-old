@@ -179,6 +179,7 @@ rwtestAllXml() {
       rwtestXml    musicxml/testTuplets.xml
       rwtestXmlRef musicxml/testTuplets2.xml
       rwtestXmlRef musicxml/testTuplets3.xml
+      rwtestXmlRef musicxml/testUnusualDurations.xml
       rwtestXmlRef musicxml/testVoiceMapper1.xml
       rwtestXml    musicxml/testVoicePiano1.xml
       rwtestXml    musicxml/testVolta1.xml
