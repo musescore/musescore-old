@@ -461,12 +461,15 @@ bool MuseScore::importCompressedMusicXml(Score* score, const QString& name)
 //        identification
 //---------------------------------------------------------
 
+static void tupletAssert();
+
 /**
  Parse the MusicXML file, which must be in score-partwise format.
  */
 
 void MusicXml::import(Score* s)
       {
+      tupletAssert();
       score  = s;
       tie    = 0;
       for (int i = 0; i < MAX_NUMBER_LEVEL; ++i)
@@ -712,9 +715,19 @@ static void determineMeasureLength(QDomElement e, QVector<int>& ml)
                         }
                   // determine length of this measure
                   int length = maxtick - prevmaxtick;
+#if 1 // change in 0.9.6 trunk revision 5241 for issue 14451, TODO verify if useful in trunk
+                  // if necessary, round up to an integral number of 1/32s,
+                  // to comply with MuseScores actual measure length constraints
+                  int correctedLength = length;
+                  if ((length % (MScore::division/8)) != 0) {
+                        correctedLength = ((length / (MScore::division/8)) + 1) * (MScore::division/8);
+                        }
 #ifdef DEBUG_TICK
-                  qDebug("measurelength measure %d tick %d maxtick %d length %d",
-                         measureNr + 1, tick, maxtick, length);
+                  // debug
+                  qDebug("measurelength measure %d tick %d maxtick %d length %d corr length %d\n",
+                         measureNr + 1, tick, maxtick, length, correctedLength);
+#endif
+                  length = correctedLength;
 #endif
                   // store the maximum measure length
                   if (ml.size() < measureNr + 1)
@@ -1359,12 +1372,11 @@ static void fillGap(Measure* measure, int track, int tstart, int tend)
       {
       int ctick = tstart;
       int restLen = tend - tstart;
-      /*
-      qDebug("\nfillGIFV     fillGap(measure %p track %d tstart %d tend %d) restLen %d len",
-             measure, track, tstart, tend, restLen);
-      */
-
-      while (restLen > 0) {
+      // qDebug("\nfillGIFV     fillGap(measure %p track %d tstart %d tend %d) restLen %d len",
+      //        measure, track, tstart, tend, restLen);
+      // note: as MScore::division (#ticks in a quarter note) equals 480
+      // MScore::division / 64 (#ticks in a 256th note) uequals 7.5 but is rounded down to 7
+      while (restLen > MScore::division / 64) {
             int len = restLen;
             TDuration d(TDuration::V_INVALID);
             if (measure->ticks() == restLen)
@@ -1378,7 +1390,7 @@ static void fillGap(Measure* measure, int track, int tstart, int tend)
             Segment* s = measure->getSegment(rest, tstart);
             s->add(rest);
             len = rest->globalDuration().ticks();
-            qDebug(" %d", len);
+            // qDebug(" %d", len);
             ctick   += len;
             restLen -= len;
             }
@@ -1754,46 +1766,56 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
             else
                   domError(e);
             }
-      staves         = part->nstaves();
 
 #ifdef DEBUG_TICK
       qDebug("end_of_measure measure->tick()=%d maxtick=%d lastMeasureLen=%d measureLen=%d",
              measure->tick(), maxtick, lastMeasureLen, measureLen);
 #endif
+
+#if 1 // previous code
       measure->setLen(Fraction::fromTicks(measureLen));
-
-      if (lastMeasureLen != measureLen) {
-#if 0 // TODOxx
-            TimeSigMap* sigmap = score->sigmap();
-            int tick        = measure->tick();
-            SigEvent se = sigmap->timesig(tick);
-
-            if (measureLen != sigmap->ticksMeasure(tick)) {
-                  SigEvent se = sigmap->timesig(tick);
-
-                  Fraction f = se.getNominal();
-                  // qDebug("Add Sig %d  len %d:  %s", tick, measureLen, qPrintable(f.print()));
-                  score->sigmap()->add(tick, measureLen, f);
-                  int tm = ticks_measure(se.fraction());
-                  if (tm != measureLen) {
-                        if (!measure->irregular()) {
-                              /* MusicXML's implicit means "don't print measure number",
-                                set it only if explicitly requested, not when the measure length
-                                is not what is expected. See MozartTrio.xml measures 12..13.
-                              */
-                              // measure->setIrregular(true);
-                              /*
-                                qDebug("irregular Measure %d Len %d at %d   lastLen: %d -> should be: %d (tm=%d)",
-                                   number, measure->tick(), maxtick,
-                                   lastMeasureLen, measureLen, tm);
-                                */
-                              }
-                        }
-                  }
-#endif
-            }
       lastMeasureLen = measureLen;
       tick = maxtick;
+#endif
+
+#if 0 // change in 0.9.6 trunk revision 5241 for issue 14451, TODO verify if useful in trunk
+      // if number of ticks in the measure does not match the nominal time signature
+      // set a different actual time signature
+
+      AL::TimeSigMap* sigmap = score->sigmap();
+      int mtick        = measure->tick();
+
+      if (measureLen != sigmap->ticksMeasure(mtick)) {
+
+            AL::SigEvent se = sigmap->timesig(mtick);
+            Fraction nominal = se.getNominal();
+#ifdef DEBUG_TICK
+            qDebug("measure %d actual len %d at %d -> nominal %d: %s",
+                   number+1, measureLen, mtick, sigmap->ticksMeasure(tick), qPrintable(nominal.print()));
+#endif
+
+            // determine actual duration as fraction
+            Fraction actual;
+            if ((measureLen % AL::division) == 0)
+                  actual = Fraction(measureLen / AL::division, 4);
+            else if ((measureLen % (AL::division/2)) == 0)
+                  actual = Fraction(measureLen / (AL::division/2), 8);
+            else if ((measureLen % (AL::division/4)) == 0)
+                  actual = Fraction(measureLen / (AL::division/4), 16);
+            else if ((measureLen % (AL::division/8)) == 0)
+                  actual = Fraction(measureLen / (AL::division/8), 32);
+            else {
+                  // this shouldn't happen
+                  qDebug("ImportXml: incorrect measure length calculated by determineMeasureLength()");
+                  }
+
+            // set time signature
+#ifdef DEBUG_TICK
+            qDebug("Add Sig %d  len %d:  %s", mtick, measureLen, qPrintable(actual.print()));
+#endif
+            score->sigmap()->add(mtick, actual, nominal);
+            }
+#endif
 
       // multi-measure rest handling:
       // the first measure in a multi-measure rest gets setBreakMultiMeasureRest(true)
@@ -2900,39 +2922,122 @@ static int nrOfGraceSegsReq(QDomNode n)
       }
 
 //---------------------------------------------------------
+//   tupletAssert -- check assertions for tuplet handling
+//---------------------------------------------------------
+
+static void tupletAssert()
+      {
+      if (!(TDuration::V_BREVE      == TDuration::V_LONG + 1
+            && TDuration::V_WHOLE   == TDuration::V_BREVE + 1
+            && TDuration::V_HALF    == TDuration::V_WHOLE + 1
+            && TDuration::V_QUARTER == TDuration::V_HALF + 1
+            && TDuration::V_EIGHT   == TDuration::V_QUARTER + 1
+            && TDuration::V_16TH    == TDuration::V_EIGHT + 1
+            && TDuration::V_32ND    == TDuration::V_16TH + 1
+            && TDuration::V_64TH    == TDuration::V_32ND + 1
+            && TDuration::V_128TH   == TDuration::V_64TH + 1
+            && TDuration::V_256TH   == TDuration::V_128TH + 1
+            )) {
+            printf("tupletAssert() failed\n");
+            abort();
+            }
+      }
+
+//---------------------------------------------------------
+//   smallestTypeAndCount
+//---------------------------------------------------------
+
+/**
+ Determine the smallest note type and the number of those
+ present in a ChordRest.
+ For a note without dots the type equals the note type
+ and count is one.
+ For a single dotted note the type equals half the note type
+ and count is three.
+ A double dotted note is similar.
+ Note: code assumes when duration().type() is incremented,
+ the note length is divided by two, checked by tupletAssert().
+ */
+
+static void smallestTypeAndCount(ChordRest const* const cr, int& type, int& count)
+      {
+      type = cr->durationType().type();
+      count = 1;
+      switch (cr->durationType().dots()) {
+            case 0:
+                  // nothing to do
+                  break;
+            case 1:
+                  type += 1; // next-smaller type
+                  count = 3;
+                  break;
+            case 2:
+                  type += 2; // next-next-smaller type
+                  count = 7;
+                  break;
+            default:
+                  qDebug("smallestTypeAndCount() does not support more than 2 dots");
+            }
+      }
+
+//---------------------------------------------------------
 //   isTupletFilled
 //---------------------------------------------------------
 
 /**
- Determine if the tuplet contains the required number of notes.
+ Determine if the tuplet contains the required number of notes,
+ i.e. the amount of the smallest notes in the tuplet equals
+ the actual notes.
 
- Note: for a "normal" (3:2) triplet t->ratio().numerator() equals 3,
- t->ratio().denominator() equals 2.
+ Example: a 3:2 tuplet with a 1/4 and a 1/8 note is filled.
 
- For a triplet containing quarter notes, the reduced total duration
- fraction numerator/denominator for one, two and three notes will be
- 1/6, 1/3, 1/2. This means the tuplet is filled when the total duration
- denominator cannot be divided by the tuplet ratio numerator (which
- equals the actual number of notes).
+ Use note types instead of duration to prevent errors due to rounding.
  */
 
 bool isTupletFilled(Tuplet* t)
       {
       if (!t) return false;
-      int totalDuration = 0;
+
+      int tupletType  = 0; // smallest note type in the tuplet
+      int tupletCount = 0; // number of smallest notes in the tuplet
+      int elemCount   = 0; // number of tuplet elements handled
+
       foreach (DurationElement* de, t->elements()) {
             if (de->type() == CHORD || de->type() == REST) {
-                  totalDuration+=de->globalDuration().ticks();
+                  ChordRest* cr = static_cast<ChordRest*>(de);
+                  if (elemCount == 0) {
+                        // first note: init variables
+                        smallestTypeAndCount(cr, tupletType, tupletCount);
+                        qDebug("isTupletFilled(%p) cr %p type %d count %d",
+                               t, de, tupletType, tupletCount);
+                        }
+                  else {
+                        int noteType = 0;
+                        int noteCount = 0;
+                        smallestTypeAndCount(cr, noteType, noteCount);
+                        qDebug("isTupletFilled(%p) cr %p type %d count %d",
+                               t, de, noteType, noteCount);
+                        // match the types
+                        while (tupletType < noteType) {
+                              tupletType++;
+                              tupletCount *= 2;
+                              }
+                        while (noteType < tupletType) {
+                              noteType++;
+                              noteCount *= 2;
+                              }
+                        tupletCount += noteCount;
+                        qDebug(" total type %d count %d",
+                               tupletType, tupletCount);
+                        }
                   }
+            elemCount++;
             }
-      Fraction totalDurFract = Fraction::fromTicks(totalDuration);
-      totalDurFract.reduce();
-      qDebug("isTupletFilled(%p) %d/%d totalDuration %d (%d/%d) done %d",
+
+      qDebug("isTupletFilled(%p) %d/%d tupletCount %d done %d",
              t, t->ratio().numerator(), t->ratio().denominator(),
-             totalDuration, totalDurFract.numerator(), totalDurFract.denominator(),
-             (totalDurFract.denominator() % t->ratio().numerator())
-             );
-      return totalDurFract.denominator() % t->ratio().numerator();
+             tupletCount, (tupletCount >= t->ratio().numerator()));
+      return tupletCount >= t->ratio().numerator();
       }
 
 //---------------------------------------------------------
