@@ -336,6 +336,7 @@ class Element {
               return type()  == TEXT
                 || type() == LYRICS
                 || type() == DYNAMIC
+                || type() == FINGERING
                 || type() == HARMONY
                 || type() == MARKER
                 || type() == JUMP

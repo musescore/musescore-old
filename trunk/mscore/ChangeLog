@@ -1,3 +1,5 @@
+28.1 (ws)
+      - fix #3352: Unable to paste symbol to rest
 27.1 (ws)
       - fix #14657: embedded SVG rendered as raster images
       - fix #14581: Unable to open ove files

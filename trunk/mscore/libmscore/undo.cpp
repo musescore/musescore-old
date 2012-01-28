@@ -1796,7 +1796,8 @@ void ChangeRepeatFlags::flip()
       {
       int tmp = measure->repeatFlags();
       measure->setRepeatFlags(flags);
-      measure->score()->setLayout(measure);
+//      measure->score()->setLayout(measure);
+      measure->score()->setLayoutAll(true);
       flags = tmp;
       }
 
