@@ -737,7 +737,8 @@ void Palette::dropEvent(QDropEvent* event)
             docName = "--";
             QDomElement el = doc.documentElement();
             QPointF dragOffset;
-            ElementType type = Element::readType(el, &dragOffset);
+            Fraction duration;
+            ElementType type = Element::readType(el, &dragOffset, &duration);
 
             if (type == IMAGE) {
                   // look ahead for image type
