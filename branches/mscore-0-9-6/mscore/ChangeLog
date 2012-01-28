@@ -1,3 +1,5 @@
+28.jan (lv)
+      - fix #14590: [MusicXML import] [1.2] import errors 23a-Tuplets.xml
 22.jan (lv)
       - fix #14451: [MusicXML import] [1.2] import errors 02a-Rests-Durations.xml
 10.jan (la)
