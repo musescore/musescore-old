@@ -435,12 +435,15 @@ bool Score::importCompressedMusicXml(const QString& name)
 //        identification
 //---------------------------------------------------------
 
+static void tupletAssert();
+
 /**
  Parse the MusicXML file, which must be in score-partwise format.
  */
 
 void MusicXml::import(Score* s)
       {
+      tupletAssert();
       score  = s;
       tie    = 0;
       for (int i = 0; i < MAX_NUMBER_LEVEL; ++i)
@@ -1293,7 +1296,9 @@ static void fillGap(Measure* measure, int track, int tstart, int tend)
       int restLen = tend - tstart;
       printf("\nfillGIFV     fillGap(measure %p track %d tstart %d tend %d) restLen %d len",
              measure, track, tstart, tend, restLen);
-      while (restLen > 0) {
+      // note: as AL::division (#ticks in a quarter note) equals 480
+      // AL::division / 64 (#ticks in a 256th note) uequals 7.5 but is rounded down to 7
+      while (restLen > AL::division / 64) {
             int len = restLen;
             Duration d;
             if (measure->tickLen() == restLen)
@@ -2749,39 +2754,123 @@ static int nrOfGraceSegsReq(QDomNode n)
       }
 
 //---------------------------------------------------------
+//   tupletAssert -- check assertions for tuplet handling
+//---------------------------------------------------------
+
+static void tupletAssert()
+      {
+      if (!(Duration::V_BREVE      == Duration::V_LONG + 1
+            && Duration::V_WHOLE   == Duration::V_BREVE + 1
+            && Duration::V_HALF    == Duration::V_WHOLE + 1
+            && Duration::V_QUARTER == Duration::V_HALF + 1
+            && Duration::V_EIGHT   == Duration::V_QUARTER + 1
+            && Duration::V_16TH    == Duration::V_EIGHT + 1
+            && Duration::V_32ND    == Duration::V_16TH + 1
+            && Duration::V_64TH    == Duration::V_32ND + 1
+            && Duration::V_128TH   == Duration::V_64TH + 1
+            && Duration::V_256TH   == Duration::V_128TH + 1
+            )) {
+            printf("tupletAssert() failed\n");
+            abort();
+            }
+      }
+
+//---------------------------------------------------------
+//   smallestTypeAndCount
+//---------------------------------------------------------
+
+
+/**
+ Determine the smallest note type and the number of those
+ present in a ChordRest.
+ For a note without dots the type equals the note type
+ and count is one.
+ For a single dotted note the type equals half the note type
+ and count is three.
+ A double dotted note is similar.
+ Note: code assumes when duration().type() is incremented,
+ the note length is divided by two, checked by tupletAssert().
+ */
+
+static void smallestTypeAndCount(ChordRest const* const cr, int& type, int& count)
+      {
+      type = cr->duration().type();
+      count = 1;
+      switch (cr->duration().dots()) {
+            case 0:
+                  // nothing to do
+                  break;
+            case 1:
+                  type += 1; // next-smaller type
+                  count = 3;
+                  break;
+            case 2:
+                  type += 2; // next-next-smaller type
+                  count = 7;
+                  break;
+            default:
+                  printf("smallestTypeAndCount() does not support more than 2 dots\n");
+            }
+      }
+
+//---------------------------------------------------------
 //   isTupletFilled
 //---------------------------------------------------------
 
 /**
- Determine if the tuplet contains the required number of notes.
+ Determine if the tuplet contains the required number of notes,
+ i.e. the amount of the smallest notes in the tuplet equals
+ the actual notes.
 
- Note: for a "normal" (3:2) triplet t->ratio().numerator() equals 3,
- t->ratio().denominator() equals 2.
+ Example: a 3:2 tuplet with a 1/4 and a 1/8 note is filled.
 
- For a triplet containing quarter notes, the reduced total duration
- fraction numerator/denominator for one, two and three notes will be
- 1/6, 1/3, 1/2. This means the tuplet is filled when the total duration
- denominator cannot be divided by the tuplet ratio numerator (which
- equals the actual number of notes).
+ Use note types instead of duration to prevent errors due to rounding.
  */
 
 bool isTupletFilled(Tuplet* t)
       {
       if (!t) return false;
-      int totalDuration = 0;
+
+      int tupletType  = 0; // smallest note type in the tuplet
+      int tupletCount = 0; // number of smallest notes in the tuplet
+      int elemCount   = 0; // number of tuplet elements handled
+
       foreach (DurationElement* de, t->elements()) {
             if (de->type() == CHORD || de->type() == REST) {
-                  totalDuration+=de->tickLen();
+                  ChordRest* cr = static_cast<ChordRest*>(de);
+                  if (elemCount == 0) {
+                        // first note: init variables
+                        smallestTypeAndCount(cr, tupletType, tupletCount);
+                        printf("isTupletFilled(%p) cr %p type %d count %d\n",
+                               t, de, tupletType, tupletCount);
+                        }
+                  else {
+                        int noteType = 0;
+                        int noteCount = 0;
+                        smallestTypeAndCount(cr, noteType, noteCount);
+                        printf("isTupletFilled(%p) cr %p type %d count %d",
+                               t, de, noteType, noteCount);
+                        // match the types
+                        while (tupletType < noteType) {
+                              tupletType++;
+                              tupletCount *= 2;
+                              }
+                        while (noteType < tupletType) {
+                              noteType++;
+                              noteCount *= 2;
+                              }
+                        tupletCount += noteCount;
+                        printf(" total type %d count %d\n",
+                               tupletType, tupletCount);
+                        }
                   }
+            elemCount++;
             }
-      Fraction totalDurFract = Fraction::fromTicks(totalDuration);
-      totalDurFract.reduce();
-      printf("isTupletFilled(%p) %d/%d totalDuration %d (%d/%d) done %d\n",
+
+      printf("isTupletFilled(%p) %d/%d tupletCount %d done %d\n",
              t, t->ratio().numerator(), t->ratio().denominator(),
-             totalDuration, totalDurFract.numerator(), totalDurFract.denominator(),
-             (totalDurFract.denominator() % t->ratio().numerator())
-             );
-      return totalDurFract.denominator() % t->ratio().numerator();
+             tupletCount, (tupletCount >= t->ratio().numerator()));
+      return tupletCount >= t->ratio().numerator();
       }
 
 //---------------------------------------------------------
