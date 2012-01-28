@@ -791,6 +791,13 @@ Element* ChordRest::drop(const DropData& data)
                   score()->undoAddElement(e);
                   return e;
 
+            case SYMBOL:
+            case IMAGE:
+                  e->setParent(segment());
+                  score()->select(e, SELECT_SINGLE, 0);
+                  score()->undoAddElement(e);
+                  return e;
+
             default:
                   qDebug("cannot drop %s", e->name());
                   delete e;

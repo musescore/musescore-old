@@ -23,7 +23,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Element</string>
+      <string>Vertical Frame</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
