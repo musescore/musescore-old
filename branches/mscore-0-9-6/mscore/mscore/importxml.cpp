@@ -622,19 +622,21 @@ void MusicXml::doCredits()
 //---------------------------------------------------------
 
 /**
- Determine the length in ticks of each measure in part e
+ Determine the length in ticks of each measure in part e.
+ Return false on error.
  */
 
-static void determineMeasureLength(QDomElement e, QVector<int>& ml)
+static bool determineMeasureLength(QDomElement e, QVector<int>& ml)
       {
       // debug
       printf("measurelength ml size %d\n", ml.size());
-      int divisions = 0;
+      int divisions = -1;
       int tick = 0;
       int maxtick = 0;
       int prevmaxtick = 0;
       int lastLen = 0;
       int measureNr = 0;
+      bool result = true;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             // handle all measures in this part
             if (e.tagName() == "measure") {
@@ -644,39 +646,42 @@ static void determineMeasureLength(QDomElement e, QVector<int>& ml)
                                     if (eee.tagName() == "divisions") {
                                           bool ok;
                                           divisions = stringToInt(eee.text(), &ok);
-                                          if (!ok) {
+                                          if (!ok || divisions <= 0)
                                                 printf("MusicXml-Import: bad divisions value: <%s>\n",
                                                        qPrintable(eee.text()));
-                                                divisions = 4;
-                                                }
                                           // debug
                                           printf("measurelength divisions %d\n", divisions);
                                           }
                                     }
                               }
-                        else if (ee.tagName() == "note") {
-                              bool chord = false;
-                              bool grace = false;
-                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                                    if (eee.tagName() == "chord") {
-                                          chord = true;
+                        // following tags can only be handled if duration is valid
+                        if (divisions > 0) {
+                              if (ee.tagName() == "note") {
+                                    bool chord = false;
+                                    bool grace = false;
+                                    for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                                          if (eee.tagName() == "chord") {
+                                                chord = true;
+                                                }
+                                          else if (eee.tagName() == "grace") {
+                                                grace = true;
+                                                }
                                           }
-                                    else if (eee.tagName() == "grace") {
-                                          grace = true;
-                                          }
+                                    if (chord && !grace)
+                                          // LVIFIX: use of lastLen for chord handling is abit of a hack
+                                          // TODO: replace by more elegant mechanism
+                                          tick -= lastLen;
+                                    moveTick(tick, maxtick, lastLen, divisions, ee);
                                     }
-                              if (chord && !grace)
-                                    // LVIFIX: use of lastLen for chord handling is abit of a hack
-                                    // TODO: replace by more elegant mechanism
-                                    tick -= lastLen;
-                              moveTick(tick, maxtick, lastLen, divisions, ee);
+                              else if (ee.tagName() == "backup") {
+                                    moveTick(tick, maxtick, lastLen, divisions, ee);
+                                    }
+                              else if (ee.tagName() == "forward") {
+                                    moveTick(tick, maxtick, lastLen, divisions, ee);
+                                    }
                               }
-                        else if (ee.tagName() == "backup") {
-                              moveTick(tick, maxtick, lastLen, divisions, ee);
-                              }
-                        else if (ee.tagName() == "forward") {
-                              moveTick(tick, maxtick, lastLen, divisions, ee);
-                              }
+                        else
+                              result = false;
                         }
                   // determine length of this measure
                   int length = maxtick - prevmaxtick;
@@ -708,9 +713,10 @@ static void determineMeasureLength(QDomElement e, QVector<int>& ml)
                   }
             }
       // debug
-      printf("measurelength ml size %d\n", ml.size());
+      printf("measurelength ml size %d res %d\n", ml.size(), result);
       for (int i = 0; i < ml.size(); i++)
             printf("measurelength ml[%d] %d\n", i + 1, ml.at(i));
+      return result;
       }
 
 
@@ -748,26 +754,35 @@ static void determineMeasureStart(const QVector<int>& ml, QVector<int>& ms)
 
 void MusicXml::scorePartwise(QDomElement ee)
       {
-      // In a first pass collect all Parts in case the part-list does not
+      // In a first pass collect all parts in case the part-list does not
       // list them all. Incomplete part-list's are generated by some versions
-      // of finale
+      // of Finale.
       // Furthermore, determine the length in ticks of each measure in the part
-
       for (QDomElement e = ee; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "part") {
                   QString id = e.attribute(QString("id"));
-                  Part* part = new Part(score);
-                  part->setId(id);
-                  score->appendPart(part);
-                  Staff* staff = new Staff(score, part, 0);
-                  part->staves()->push_back(staff);
-                  score->staves().push_back(staff);
-                  tuplets.resize(VOICES); // part now contains one staff, thus VOICES voices
-                  printf("measurelength part %s\n", qPrintable(id));
-                  determineMeasureLength(e, measureLength);
+                  if (id == "")
+                        printf("MusicXML import: part without id\n");
+                  else {
+                        Part* part = new Part(score);
+                        part->setId(id);
+                        score->appendPart(part);
+                        Staff* staff = new Staff(score, part, 0);
+                        part->staves()->push_back(staff);
+                        score->staves().push_back(staff);
+                        tuplets.resize(VOICES); // part now contains one staff, thus VOICES voices
+                        printf("measurelength part '%s'\n", qPrintable(id));
+                        if (!determineMeasureLength(e, measureLength))
+                              printf("MusicXML import: could not determine measure length for part '%s'\n",
+                                     qPrintable(id));
+                        }
                   }
             }
+
+      // Determine the start tick of each measure in the part
       determineMeasureStart(measureLength, measureStart);
+
+      // Read the score
       for (QDomElement e = ee; !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "part-list")
@@ -1374,6 +1389,11 @@ static void fillGapsInFirstVoices(Measure* measure, Part* part)
 
 void MusicXml::xmlPart(QDomElement e, QString id)
       {
+      printf("xmlPart(id='%s')\n", qPrintable(id));
+      if (id == "") {
+            printf("MusicXML import: part without id\n");
+            return;
+            }
       Part* part = 0;
       foreach(Part* p, *score->parts()) {
             if (p->id() == id) {
@@ -1383,7 +1403,7 @@ void MusicXml::xmlPart(QDomElement e, QString id)
             }
       if (part == 0) {
             printf("Import MusicXml:xmlPart: cannot find part %s\n", id.toLatin1().data());
-            exit(-1);
+            return;
             }
       tick                  = 0;
       maxtick               = 0;
@@ -3760,7 +3780,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             else
                   cr->setBeamMode(BEAM_NO);
             cr->setTrack(track);
-            ((Rest*)cr)->setStaffMove(move);
+            cr->setStaffMove(move);
             Segment* s = measure->getSegment(cr);
             s->add(cr);
             cr->setVisible(printObject == "yes");
