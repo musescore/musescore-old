@@ -1,3 +1,7 @@
+29.jan (lv)
+      - fix #14692: [MusicXML import] [1.2] import error: 41g-PartNoId.xml causes crash
+      - fix #14693: [MusicXML import] [1.2] import error: 41h-TooManyParts.xml causes crash
+        Note: fix prevents crashes but still need further investigation for side effects
 28.jan (lv)
       - fix #14590: [MusicXML import] [1.2] import errors 23a-Tuplets.xml
 22.jan (lv)
