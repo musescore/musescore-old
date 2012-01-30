@@ -203,6 +203,7 @@ void EditStyle::getValues()
       lstyle.set(ST_smallClefMag,            smallClefSize->value() * 0.01);
       lstyle.set(ST_pageFillLimit,           pageFillThreshold->value() * 0.01);
       lstyle.set(ST_lastSystemFillLimit,     lastSystemFillThreshold->value() * 0.01);
+      lstyle.set(ST_hairpinY,                Spatium(hairpinY->value()));
       lstyle.set(ST_hairpinWidth,            Spatium(hairpinLineWidth->value()));
       lstyle.set(ST_hairpinHeight,           Spatium(hairpinHeight->value()));
       lstyle.set(ST_hairpinContHeight,       Spatium(hairpinContinueHeight->value()));
@@ -389,6 +390,7 @@ void EditStyle::setValues()
       pageFillThreshold->setValue(lstyle.value(ST_pageFillLimit).toDouble() * 100.0);
       lastSystemFillThreshold->setValue(lstyle.value(ST_lastSystemFillLimit).toDouble() * 100.0);
 
+      hairpinY->setValue(lstyle.value(ST_hairpinY).toSpatium().val());
       hairpinLineWidth->setValue(lstyle.value(ST_hairpinWidth).toSpatium().val());
       hairpinHeight->setValue(lstyle.value(ST_hairpinHeight).toSpatium().val());
       hairpinContinueHeight->setValue(lstyle.value(ST_hairpinContHeight).toSpatium().val());

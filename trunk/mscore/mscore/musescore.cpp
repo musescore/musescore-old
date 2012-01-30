@@ -2864,6 +2864,10 @@ void MuseScore::setPos(int t)
 
 void MuseScore::undo()
       {
+      if (_sstate == STATE_EDIT) {
+            cv->postCmd("escape");
+            qApp->processEvents();
+            }
       if (cv)
             cv->startUndoRedo();
       if (cs)
@@ -2878,6 +2882,10 @@ void MuseScore::undo()
 
 void MuseScore::redo()
       {
+      if (_sstate == STATE_EDIT) {
+            cv->postCmd("escape");
+            qApp->processEvents();
+            }
       if (cv)
             cv->startUndoRedo();
       if (cs)

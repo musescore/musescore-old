@@ -197,9 +197,11 @@ enum StyleIdx {
       ST_pageFillLimit,
       ST_lastSystemFillLimit,
 
+      ST_hairpinY,
       ST_hairpinHeight,
       ST_hairpinContHeight,
       ST_hairpinWidth,
+
       ST_showPageNumber,
       ST_showPageNumberOne,
       ST_pageNumberOddEven,

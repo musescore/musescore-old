@@ -97,6 +97,8 @@ StyleType styleTypes[] = {
       StyleType("propertyDistance",        ST_SPATIUM),     // note property to note property
       StyleType("pageFillLimit",           ST_DOUBLE),      // 0-1.0
       StyleType("lastSystemFillLimit",     ST_DOUBLE),
+
+      StyleType("hairpinY",                ST_SPATIUM),
       StyleType("hairpinHeight",           ST_SPATIUM),
       StyleType("hairpinContHeight",       ST_SPATIUM),
       StyleType("hairpinWidth",            ST_SPATIUM),
@@ -405,6 +407,7 @@ StyleData::StyleData()
             StyleVal(ST_pageFillLimit,        qreal(0.7)),
             StyleVal(ST_lastSystemFillLimit,  qreal(0.3)),
 
+            StyleVal(ST_hairpinY, Spatium(8)),
             StyleVal(ST_hairpinHeight, Spatium(1.2)),
             StyleVal(ST_hairpinContHeight, Spatium(0.5)),
             StyleVal(ST_hairpinWidth, Spatium(0.13)),
