@@ -1,3 +1,5 @@
+30.1 (ws)
+      - fix #14704: Undo in slur edit mode causes crash
 28.1 (lv)
       - fix #14590: [MusicXML import] [1.2] import errors 23a-Tuplets.xml
 28.1 (ws)

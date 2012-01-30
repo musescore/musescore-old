@@ -4406,7 +4406,6 @@ printf("start-end %d %d\n", startTrack, endTrack);
             mscore->endCmd();
             }
       else {
-            _score->startCmd();
             QList<Note*> nl = _score->selection().noteList();
             Note* firstNote = 0;
             Note* lastNote  = 0;
@@ -4418,7 +4417,6 @@ printf("start-end %d %d\n", startTrack, endTrack);
                   }
             if (!firstNote)
                   return;
-            _score->startCmd();
             if (firstNote == lastNote)
                   lastNote = 0;
             cmdAddSlur(firstNote, lastNote);
@@ -4431,6 +4429,7 @@ printf("start-end %d %d\n", startTrack, endTrack);
 
 void ScoreView::cmdAddSlur(Note* firstNote, Note* lastNote)
       {
+      _score->startCmd();
       ChordRest* cr1 = firstNote->chord();
       ChordRest* cr2 = lastNote ? lastNote->chord() : nextChordRest(cr1);
 
@@ -4442,11 +4441,11 @@ void ScoreView::cmdAddSlur(Note* firstNote, Note* lastNote)
       slur->setEndElement(cr2);
       slur->setParent(0);
       _score->undoAddElement(slur);
+      slur->layout();
 
       _score->endCmd();
       _score->startCmd();
 
-      slur->layout();
       if (cr1 == cr2) {
             SlurSegment* ss = slur->frontSegment();
             ss->setSlurOffset(3, QPointF(3.0, 0.0));
