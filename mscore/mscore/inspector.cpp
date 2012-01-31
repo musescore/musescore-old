@@ -140,6 +140,7 @@ void Inspector::setElement(Element* e)
             }
       _element = e;
       ie->setElement(_element);
+      apply->setVisible(true);
       apply->setEnabled(false);
       }
 
@@ -154,6 +155,7 @@ void Inspector::setElementList(const QList<Element*>& el)
       layout->insertWidget(0, ie);
       _element = 0;
       _el = el;
+      apply->setVisible(false);
       apply->setEnabled(false);
       }
 
