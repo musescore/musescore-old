@@ -55,6 +55,7 @@ QT4_WRAP_UI (ui_headers
       inspector_articulation.ui inspector_spacer.ui inspector_hbox.ui keysig.ui
       inspector_segment.ui inspector_beam.ui inspector_note.ui
       rest.ui inspector_chord.ui omrpanel.ui startdialog.ui masterpalette.ui
+      inspector_group_element.ui
       )
 
 if (OMR)
@@ -82,6 +83,7 @@ QT4_WRAP_CPP (mocs
       drumtools.h texteditor.h texttools.h edittools.h pianotools.h editpitch.h
       editstringdata.h editraster.h mediadialog.h chordeditor.h chordview.h album.h layer.h
       webpage.h inspector.h inspectorBase.h inspectorBeam.h masterpalette.h
+      inspectorGroupElement.h
       ${OMR_MOCS}
       )
 
@@ -171,6 +173,7 @@ add_executable ( ${ExecutableName}
       propertymenu.cpp imageproperties.cpp shortcut.cpp bb.cpp
       midifile.cpp inspector.cpp dragelement.cpp svggenerator.cpp
       inspectorBase.cpp inspectorBeam.cpp masterpalette.cpp
+      inspectorGroupElement.cpp
       ${OMR_FILES}
       ${AUDIO}
       )
