@@ -320,6 +320,7 @@ class Inspector : public QDockWidget {
       InspectorBase* ie;
       QPushButton* apply;
       Element* _element;
+      QList<Element*> _el;
 
       virtual void closeEvent(QCloseEvent*);
 
@@ -336,7 +337,9 @@ class Inspector : public QDockWidget {
    public:
       Inspector(QWidget* parent = 0);
       void setElement(Element*);
+      void setElementList(const QList<Element*>&);
       Element* element() const { return _element; }
+      const QList<Element*>& el() const { return _el; }
       };
 
 #endif

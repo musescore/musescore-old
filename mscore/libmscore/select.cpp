@@ -396,10 +396,10 @@ void Selection::updateState()
 
 void Selection::setState(SelState s)
       {
-      if (_state != s) {
+//      if (_state != s) {
             _state = s;
             _score->setSelectionChanged(true);
-            }
+//            }
       }
 
 //---------------------------------------------------------

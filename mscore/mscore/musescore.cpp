@@ -1129,8 +1129,21 @@ void MuseScore::selectScore(QAction* action)
 
 void MuseScore::selectionChanged(int state)
       {
-      getAction("cut")->setEnabled(state);
-      getAction("copy")->setEnabled(state);
+      bool enable = state != SEL_NONE;
+      getAction("cut")->setEnabled(enable);
+      getAction("copy")->setEnabled(enable);
+      if (pianorollEditor)
+            pianorollEditor->changeSelection(state);
+      if (drumrollEditor)
+            drumrollEditor->changeSelection(state);
+      if (inspector) {
+            if (cs->selection().isSingle())
+                  inspector->setElement(cs->selection().element());
+            else if (cs->selection().state() == SEL_NONE)
+                  inspector->setElement(0);
+            else
+                  inspector->setElementList(cs->selection().elements());
+            }
       }
 
 //---------------------------------------------------------
@@ -3983,16 +3996,6 @@ void MuseScore::endCmd()
                   cs->setSelectionChanged(false);
                   SelState ss = cs->selection().state();
                   selectionChanged(ss);
-                  if (pianorollEditor)
-                        pianorollEditor->changeSelection(ss);
-                  if (drumrollEditor)
-                        drumrollEditor->changeSelection(ss);
-                  if (inspector) {
-                        if (cs->selection().isSingle())
-                              inspector->setElement(cs->selection().element());
-                        else
-                              inspector->setElement(0);
-                        }
                   }
             QAction* action = getAction("concert-pitch");
             action->setChecked(cs->styleB(ST_concertPitch));
@@ -4005,6 +4008,7 @@ void MuseScore::endCmd()
       else {
             if (inspector)
                   inspector->setElement(0);
+            selectionChanged(SEL_NONE);
             }
 
       enableInputToolbar(enableInput);

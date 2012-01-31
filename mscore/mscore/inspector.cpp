@@ -13,6 +13,7 @@
 
 #include "inspector.h"
 #include "inspectorBeam.h"
+#include "inspectorGroupElement.h"
 #include "musescore.h"
 #include "libmscore/element.h"
 #include "libmscore/score.h"
@@ -42,8 +43,8 @@ void MuseScore::showInspector(bool visible)
                   connect(inspector, SIGNAL(inspectorVisible(bool)), a, SLOT(setChecked(bool)));
                   addDockWidget(Qt::RightDockWidgetArea, inspector);
                   }
-            if (cs && cs->selection().element())
-                  inspector->setElement(cs->selection().element());
+            if (cs)
+                  selectionChanged(cs->selection().state());
             }
       if (inspector)
             inspector->setVisible(visible);
@@ -115,8 +116,7 @@ void Inspector::applyClicked()
 void Inspector::setElement(Element* e)
       {
       if (e == 0 || _element == 0 || (e->type() != _element->type())) {
-            if (ie)
-                  delete ie;
+            delete ie;
             ie = 0;
             _element = e;
             apply->setEnabled(_element != 0);
@@ -140,6 +140,20 @@ void Inspector::setElement(Element* e)
             }
       _element = e;
       ie->setElement(_element);
+      apply->setEnabled(false);
+      }
+
+//---------------------------------------------------------
+//   setElementList
+//---------------------------------------------------------
+
+void Inspector::setElementList(const QList<Element*>& el)
+      {
+      delete ie;
+      ie = new InspectorGroupElement(this);
+      layout->insertWidget(0, ie);
+      _element = 0;
+      _el = el;
       apply->setEnabled(false);
       }
 

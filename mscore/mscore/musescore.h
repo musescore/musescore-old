@@ -376,7 +376,6 @@ class MuseScore : public QMainWindow {
       void aboutQt();
       void openRecentMenu();
       void selectScore(QAction*);
-      void selectionChanged(int);
       void startPreferenceDialog();
       void preferencesChanged();
       void seqStarted();
@@ -440,6 +439,7 @@ class MuseScore : public QMainWindow {
       void midiNoteReceived(int pitch, bool ctrl);
       void instrumentChanged();
       void showMasterPalette();
+      void selectionChanged(int);
 
    public:
       MuseScore();
