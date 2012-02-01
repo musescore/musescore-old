@@ -111,9 +111,11 @@ Element* TimeSig::drop(const DropData& data)
             // for this one only
             score()->cmdAddTimeSig(measure(), staffIdx(), static_cast<TimeSig*>(e));
             }
-      else
+      else  {
             delete e;
-      return 0;
+            e = 0;
+            }
+      return e;
       }
 
 //---------------------------------------------------------

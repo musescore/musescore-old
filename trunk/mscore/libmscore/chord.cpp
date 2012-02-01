@@ -1687,7 +1687,6 @@ Element* Chord::drop(const DropData& data)
                   else {
                         atr->setParent(this);
                         atr->setTrack(track());
-                        score()->select(atr, SELECT_SINGLE, 0);
                         score()->undoAddElement(atr);
                         renderArticulation(atr->articulationType());
                         }

@@ -729,25 +729,21 @@ Element* ChordRest::drop(const DropData& data)
                   b->setParent(seg);
                   score()->undoAddElement(b);
                   }
-                  break;
+                  return e;
 
             case BAR_LINE:
                   {
                   BarLine* bl = static_cast<BarLine*>(e);
                   bl->setTrack(staffIdx() * VOICES);
 
-//??                  if ((bl->tick() == m->tick()) || (bl->tick() == m->tick() + m->ticks())) {
-//                        return m->drop(data);
-//                        }
-                  if (tick() == m->tick()) {
+                  if (tick() == m->tick())
                         return m->drop(data);
-                        }
 
                   Segment* seg = m->undoGetSegment(SegBarLine, tick());
                   bl->setParent(seg);
                   score()->undoAddElement(bl);
                   }
-                  break;
+                  return e;
 
             case CLEF:
                   score()->undoChangeClef(staff(), segment(), static_cast<Clef*>(e)->clefType());
@@ -760,7 +756,7 @@ Element* ChordRest::drop(const DropData& data)
                   tt->setParent(segment());
                   score()->undoAddElement(tt);
                   }
-                  break;
+                  return e;
 
             case DYNAMIC:
                   e->setTrack(track());
@@ -787,14 +783,12 @@ Element* ChordRest::drop(const DropData& data)
             case REHEARSAL_MARK:
                   e->setParent(segment());
                   e->setTrack((track() / VOICES) * VOICES);
-                  score()->select(e, SELECT_SINGLE, 0);
                   score()->undoAddElement(e);
                   return e;
 
             case SYMBOL:
             case IMAGE:
                   e->setParent(segment());
-                  score()->select(e, SELECT_SINGLE, 0);
                   score()->undoAddElement(e);
                   return e;
 

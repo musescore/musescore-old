@@ -446,7 +446,10 @@ Element* FretDiagram::drop(const DropData& data)
             _harmony = static_cast<Harmony*>(e);
             score()->setUpdateAll(true);
             }
-      else
+      else {
+            delete e;
+            e = 0;
+            }
             qWarning("FretDiagram: cannot drop <%s>\n", e->name());
       return e;
       }

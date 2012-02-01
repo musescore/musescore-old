@@ -287,10 +287,11 @@ bool Lyrics::acceptDrop(MuseScoreView*, const QPointF&, Element* e) const
 Element* Lyrics::drop(const DropData& data)
       {
       Text* e = static_cast<Text*>(data.element);
-      if (!(e->type() == TEXT && e->textStyle() == TEXT_STYLE_LYRICS_VERSE_NUMBER))
+      if (!(e->type() == TEXT && e->textStyle() == TEXT_STYLE_LYRICS_VERSE_NUMBER)) {
+            delete e;
             return 0;
+            }
       e->setParent(this);
-      score()->select(e, SELECT_SINGLE, 0);
       score()->undoAddElement(e);
       return e;
       }

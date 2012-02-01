@@ -128,9 +128,10 @@ Element* TrillSegment::drop(const DropData& data)
 
             default:
                   delete e;
+                  e = 0;
                   break;
             }
-      return 0;
+      return e;
       }
 
 //---------------------------------------------------------

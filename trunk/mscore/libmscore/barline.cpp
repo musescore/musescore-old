@@ -365,8 +365,8 @@ Element* BarLine::drop(const DropData& data)
             Articulation* atr = static_cast<Articulation*>(e);
             atr->setParent(this);
             atr->setTrack(track());
-            score()->select(atr, SELECT_SINGLE, 0);
             score()->undoAddElement(atr);
+            return atr;
             }
       return 0;
       }

@@ -179,7 +179,7 @@ Element* Stem::drop(const DropData& data)
                   e->setParent(ch);
                   score()->setLayout(ch->measure());
                   score()->undoAddElement(e);
-                  break;
+                  return e;
             default:
                   delete e;
                   break;
