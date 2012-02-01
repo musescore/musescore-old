@@ -904,10 +904,10 @@ bool Score::isSavable() const
 void Score::setInputState(const InputState& st)
       {
       _is = st;
-      printf("Score::setInputState:\n");
-      printf("  noteEntryMode %d\n", _is.noteEntryMode);
-      printf("  tick  %d\n", _is.tick());
-      printf("  track %d\n", _is.track());
+//      printf("Score::setInputState:\n");
+//      printf("  noteEntryMode %d\n", _is.noteEntryMode);
+//      printf("  tick  %d\n", _is.tick());
+//      printf("  track %d\n", _is.track());
       }
 
 //---------------------------------------------------------
