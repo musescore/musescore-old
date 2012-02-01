@@ -196,8 +196,12 @@ Element* Rest::drop(const DropData& data)
       switch (e->type()) {
             case ARTICULATION:
                   if (static_cast<Articulation*>(e)->subtype() == Articulation_Fermata)
-                        score()->addArticulation(this, (Articulation*)e);
-                  return 0;
+                        score()->addArticulation(this, static_cast<Articulation*>(e));
+                  else {
+                        delete e;
+                        e = 0;
+                        }
+                  return e;
             case ICON:
                   {
                   switch (static_cast<Icon*>(e)->subtype()) {
@@ -229,7 +233,7 @@ Element* Rest::drop(const DropData& data)
                   Chord* c      = static_cast<Chord*>(e);
                   Note* n       = c->upNote();
                   Direction dir = c->stemDirection();
-                  score()->select(0, SELECT_SINGLE, 0);
+                  // score()->select(0, SELECT_SINGLE, 0);
                   NoteVal nval;
                   nval.pitch = n->pitch();
                   nval.headGroup = n->headGroup();

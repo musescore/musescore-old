@@ -314,6 +314,9 @@ class Element {
 /**
  Handle a dropped element at canvas relative \a pos of given element
  \a type and \a subtype. Returns dropped element if any.
+ The ownership of element in DropData is transfered to the called
+ element (if not used, element has to be deleted).
+ The returned element will be selected if not in note edit mode.
 
  Reimplemented by elements that accept drops.
 */

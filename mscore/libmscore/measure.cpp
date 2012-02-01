@@ -1452,14 +1452,14 @@ qDebug("drop staffList");
                   e->setParent(seg);
                   e->setTrack(0);
                   score()->undoAddElement(e);
-                  break;
+                  return e;
 
             case DYNAMIC:
             case FRET_DIAGRAM:
                   e->setParent(seg);
                   e->setTrack(staffIdx * VOICES);
                   score()->undoAddElement(e);
-                  break;
+                  return e;
 
             case SYMBOL:
                   e->setParent(seg);
@@ -1470,14 +1470,14 @@ qDebug("drop staffList");
                   e->setUserOff(uo);
                   }
                   score()->undoAddElement(e);
-                  break;
+                  return e;
 
             case BRACKET:
                   e->setTrack(staffIdx * VOICES);
                   e->setParent(system());
                   static_cast<Bracket*>(e)->setLevel(-1);  // add bracket
                   score()->undoAddElement(e);
-                  break;
+                  return e;
 
             case CLEF:
                   score()->undoChangeClef(staff, first(), static_cast<Clef*>(e)->clefType());
@@ -1512,7 +1512,7 @@ qDebug("drop staffList");
 
             case TIMESIG:
                   score()->cmdAddTimeSig(this, staffIdx, static_cast<TimeSig*>(e));
-                  break;
+                  return e;
 
             case LAYOUT_BREAK:
                   {
@@ -1593,9 +1593,8 @@ qDebug("drop staffList");
                         if (el->type() == SLUR && el->staffIdx() == staffIdx)
                               _score->undoRemoveElement(el);
                         }
-                  _score->select(rm, SELECT_SINGLE, 0);
                   }
-                  break;
+                  return rm;
 
             case ICON:
                   switch(static_cast<Icon*>(e)->subtype()) {

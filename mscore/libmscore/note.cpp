@@ -1003,7 +1003,6 @@ Element* Note::drop(const DropData& data)
             case IMAGE:
             case FINGERING:
                   e->setParent(this);
-                  score()->select(e, SELECT_SINGLE, 0);
                   score()->undoAddElement(e);
                   if (e->type() == FINGERING)
                         score()->layoutFingering(static_cast<Fingering*>(e));
@@ -1017,14 +1016,13 @@ Element* Note::drop(const DropData& data)
             case LYRICS:
                   e->setParent(ch->segment());
                   e->setTrack((track() / VOICES) * VOICES);
-                  score()->select(e, SELECT_SINGLE, 0);
                   score()->undoAddElement(e);
                   return e;
 
             case ACCIDENTAL:
                   score()->changeAccidental(this, static_cast<Accidental*>(e)->subtype());
                   if (_accidental)
-                        score()->select(_accidental);
+                        return e;
                   break;
 
             case ARPEGGIO:
@@ -1034,7 +1032,7 @@ Element* Note::drop(const DropData& data)
                   a->setHeight(spatium() * 5);   //DEBUG
                   score()->undoAddElement(a);
                   }
-                  break;
+                  return e;
 
             case BEND:
                   {
@@ -1043,7 +1041,7 @@ Element* Note::drop(const DropData& data)
                   b->setTrack(track());
                   score()->undoAddElement(b);
                   }
-                  break;
+                  return e;
 
             case NOTEHEAD:
                   {

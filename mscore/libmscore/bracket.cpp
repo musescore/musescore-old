@@ -301,7 +301,7 @@ Element* Bracket::drop(const DropData& data)
       {
       Element* e = data.element;
       if (e->type() == BRACKET) {
-            Bracket* b = (Bracket*)e;
+            Bracket* b = static_cast<Bracket*>(e);
             b->setParent(parent());
             b->setTrack(track());
             b->setSpan(span());

@@ -644,7 +644,7 @@ class Score {
       int inputPos() const;
       int inputTrack() const                   { return _is.track(); }
       InputState& inputState()                 { return _is;         }
-      void setInputState(const InputState& st) { _is = st;           }
+      void setInputState(const InputState& st);
       void setInputTrack(int);
 
       void spatiumChanged(qreal oldValue, qreal newValue);

@@ -173,7 +173,7 @@ add_executable ( ${ExecutableName}
       propertymenu.cpp imageproperties.cpp shortcut.cpp bb.cpp
       midifile.cpp inspector.cpp dragelement.cpp svggenerator.cpp
       inspectorBase.cpp inspectorBeam.cpp masterpalette.cpp
-      inspectorGroupElement.cpp
+      inspectorGroupElement.cpp dragdrop.cpp
       ${OMR_FILES}
       ${AUDIO}
       )

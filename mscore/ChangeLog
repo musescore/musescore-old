@@ -1,3 +1,6 @@
+1.2 (ws)
+      - fixed #10441: Editing fingering text without unticking "Note Input"
+        button causes crash
 31.1 (ws)
       - inspector: added action panel for element groups
 30.1 (ws)

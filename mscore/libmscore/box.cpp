@@ -462,14 +462,13 @@ Element* Box::drop(const DropData& data)
                   text->setTextStyle(TEXT_STYLE_FRAME);
                   text->setParent(this);
                   text->setHtml(static_cast<StaffText*>(e)->getHtml());
-                  score()->select(text, SELECT_SINGLE, 0);
                   score()->undoAddElement(text);
+                  delete e;
                   return text;
                   }
 
             default:
                   e->setParent(this);
-                  score()->select(e, SELECT_SINGLE, 0);
                   score()->undoAddElement(e);
                   return e;
             }
