@@ -1500,6 +1500,10 @@ void Chord::layout()
 
 static void renderArpeggio(QList<Note*> notes, bool up)
       {
+
+      if (notes.isEmpty())
+            return;
+
       int minLen = 1000*1000;
 
       foreach(Note* note, notes) {
@@ -1573,7 +1577,8 @@ void Chord::layoutArpeggio2()
                   }
             }
       bool up = _arpeggio->subtype() != ARP_DOWN;
-      renderArpeggio(notes, up);
+      if (!notes.isEmpty())
+            renderArpeggio(notes, up);
       }
 
 //---------------------------------------------------------
