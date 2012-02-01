@@ -1593,8 +1593,8 @@ qDebug("drop staffList");
                         if (el->type() == SLUR && el->staffIdx() == staffIdx)
                               _score->undoRemoveElement(el);
                         }
-                  }
                   return rm;
+                  }
 
             case ICON:
                   switch(static_cast<Icon*>(e)->subtype()) {
