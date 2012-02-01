@@ -1,4 +1,6 @@
 1.2 (ws)
+      - patch #10577: Applying arpeggio to note with tie before it causes crash
+        (patch from jorgk3)
       - fixed #14734: Crash when opening score that contains tied 1/8
         note created in 1.1 (regression from fixing #14668)
       - fixed #14668: Crash when changing triplet duration after insertion
