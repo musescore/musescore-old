@@ -506,7 +506,8 @@ void Score::layoutStage2()
                               beam = 0;
                               }
                         else {
-                              cr->setBeam(0);
+                              //cr->setBeam(0);
+                              cr->removeDeleteBeam();
                               cr->layoutStem1();
                               }
                         }
