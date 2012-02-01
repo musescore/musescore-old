@@ -489,7 +489,7 @@ void SLine::layout()
                               break;
                               }
                         else {
-                              LineSegment* seg = takeLastSegment();
+                              // LineSegment* seg = takeLastSegment();
                               // TODO delete seg;
                               }
                         }
