@@ -1,4 +1,5 @@
 1.2 (ws)
+      - fixed #50894: Crash when changing triplet duration after insertion
       - fixed #10441: Editing fingering text without unticking "Note Input"
         button causes crash
 31.1 (ws)
