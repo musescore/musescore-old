@@ -876,10 +876,11 @@ QList<Fraction> Score::splitGapToMeasureBoundaries(ChordRest* cr, Fraction gap)
       Tuplet* tuplet = cr->tuplet();
       if (tuplet) {
             Fraction rest(tuplet->duration());
+
             if (rest < gap)
                   qDebug("does not fit in tuplet");
             else
-                  flist.append(rest);
+                  flist.append(gap);
             return flist;
             }
 

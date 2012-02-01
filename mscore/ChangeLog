@@ -1,4 +1,5 @@
 1.2 (ws)
+      - fixed #14733: triplet duration set incorrectly
       - patch #10577: Applying arpeggio to note with tie before it causes crash
         (patch from jorgk3)
       - fixed #14734: Crash when opening score that contains tied 1/8
