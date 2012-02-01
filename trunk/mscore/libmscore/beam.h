@@ -52,7 +52,7 @@ struct BeamFragment {
 //---------------------------------------------------------
 
 class Beam : public Element {
-      QList<ChordRest*> _elements;
+      QList<ChordRest*> _elements;        // must be sorted by tick
       QList<QLineF*> beamSegments;
       Direction _direction;
       int _up;                // -1: unknown  0: down   1: up

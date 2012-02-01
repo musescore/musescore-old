@@ -1147,23 +1147,13 @@ void Chord::layoutStem()
                   _stemSlash->layout();
                   }
 
-            if (hookIdx) {
-                  if (!up())
-                        hookIdx = -hookIdx;
-                  _hook->setSubtype(hookIdx);
+            if (_hook) {
                   qreal lw  = point(score()->styleS(ST_stemWidth)) * .5;
                   QPointF p = npos + QPointF(lw, _stem->stemLen());
                   _hook->setPos(p - pagePos());
                   _hook->adjustReadPos();
                   }
-            else {
-                  if (_hook)
-                        score()->undoRemoveElement(_hook);
-                  }
             }
-      else if (_hook)
-            score()->undoRemoveElement(_hook);
-
 
       //-----------------------------------------
       //    process tremolo

@@ -273,8 +273,17 @@ QPointF Beam::pagePos() const
 void Beam::add(ChordRest* a)
       {
       a->setBeam(this);
-      if (!_elements.contains(a))
+      if (!_elements.contains(a)) {
+            if (!_elements.isEmpty()) {
+                  for (int i = 0; i < _elements.size(); ++i) {
+                        if (_elements[i]->segment()->tick() >= a->segment()->tick()) {
+                              _elements.insert(i, a);
+                              return;
+                              }
+                        }
+                  }
             _elements.append(a);
+            }
       }
 
 //---------------------------------------------------------
