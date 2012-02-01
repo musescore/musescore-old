@@ -292,7 +292,8 @@ void Beam::add(ChordRest* a)
 
 void Beam::remove(ChordRest* a)
       {
-      _elements.removeOne(a);
+      if (!_elements.removeOne(a))
+            qDebug("Beam::remove(): cannot find ChordRest");
       a->setBeam(0);
       }
 
