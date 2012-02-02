@@ -273,7 +273,9 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
             if (ev.nominalEqualActual()   // not in pickup measure
                && (measure->tick() == tick)
                && (measure->fraction() == f)
-               && (f < Duration(Duration::V_BREVE).fraction())) {
+/*  removed to have measures >= 2/1 emptied to V_MEASURE instead of actual rest value
+               && (f < Duration(Duration::V_BREVE).fraction()) */
+                        ) {
                   Rest* rest = addRest(tick, track, Duration(Duration::V_MEASURE), tuplet);
                   tick += rest->ticks();
                   if (r == 0)
