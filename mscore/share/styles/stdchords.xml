@@ -37,7 +37,7 @@
   <font id="0">   <!-- use chord name text style font -->
     </font>
 
-  <font id="1" family="MScore1">
+  <font id="1" family="Mscore1">
     <mag>1.2</mag>
     <sym code="0xe10d" name="b"/>   <!-- use symbols for accidentals -->
     <sym code="0xe10c" name="#"/>
@@ -583,4 +583,11 @@
   <chord id="230">
     <render>7 b 9 # 9</render>
     </chord>
+  <chord id="240">
+    <render>sus # 4</render>
+    </chord>
+  <chord id="241">
+    <render>Maj 7 b 13</render>
+    </chord>
+
   </museScore>

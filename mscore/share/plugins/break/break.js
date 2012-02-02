@@ -3,9 +3,9 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Color notehead plugin
-//	Noteheads are colored according to pitch. User can change to color by
-//  modifying the colors array. First element is C, second C# etc...
+//  Break X measures plugin
+//	This plugin will add a line break every X measures in the selection or in 
+//  in the full score if no selection
 //
 //  Copyright (C)2008 Werner Schweer and others
 //

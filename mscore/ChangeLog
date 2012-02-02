@@ -1,3 +1,6 @@
+2.2 (la)
+      - fix #12300: Add european language characters in MuseJazz (by Marc Sabatella and Jorgk)
+      - add two more chordnames sus#4 & Maj7b13
 1.2 (ws)
       - fixed: changing triplet duration - strange effects after undo
       - fixed #14733: triplet duration set incorrectly
