@@ -1,4 +1,6 @@
-2.2 (la)
+2.2 (ws)
+      - enhanced compatibility with 1.x scores: Harmony, MeasureRepeat
+    (la)
       - fix #12300: Add european language characters in MuseJazz (by Marc Sabatella and Jorgk)
       - add two more chordnames sus#4 & Maj7b13
 1.2 (ws)
