@@ -273,7 +273,7 @@ bool ChordRest::readProperties(QDomElement e, QList<Tuplet*>& tuplets, Measure* 
                         }
                   }
             // DEBUG:
-            if (tuplet()->measure() != measure) {
+            if (measure && tuplet()->measure() != measure) {
                   if (tuplet()->measure())
                         tuplet()->measure()->remove(tuplet());
                   measure->add(tuplet());
