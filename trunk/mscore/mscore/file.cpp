@@ -1726,7 +1726,7 @@ void MuseScore::addImage(Score* score, Element* e)
       else
             return;
       s->setPath(fn);
-      s->setSize(QSizeF(200, 200));
+//      s->setSize(QSizeF(200, 200));
       s->setParent(e);
       score->undoAddElement(s);
       }
