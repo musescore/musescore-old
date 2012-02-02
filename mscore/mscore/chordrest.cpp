@@ -358,9 +358,6 @@ void ChordRest::layoutArticulations()
       if (parent() == 0)
             return;
       double _spatium  = spatium();
-      Measure* m       = measure();
-      System* s        = m->system();
-      int idx          = staff()->rstaff() + staffMove();   // DEBUG
 
       qreal x          = centerX();
 
@@ -382,6 +379,10 @@ void ChordRest::layoutArticulations()
       //
 
       foreach (Articulation* a, articulations) {
+            
+            // copy articulation mag value from the chordrest
+            a->setMag(mag());
+            
             ArticulationAnchor aa = a->anchor();
             if (aa != A_CHORD && aa != A_TOP_CHORD && aa != A_BOTTOM_CHORD)
                   continue;
