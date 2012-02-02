@@ -2177,9 +2177,9 @@ void Measure::read(const QDomElement& de, int staffIdx)
                ) {
                   Element* el = Element::name2Element(tag, score());
                   el->setTrack(score()->curTrack);
+                  el->read(e);
                   segment = getSegment(SegChordRest, score()->curTick);
                   segment->add(el);
-                  el->read(e);
                   }
             else if (tag == "Image") {
                   // look ahead for image type
@@ -2294,7 +2294,10 @@ void Measure::read(const QDomElement& de, int staffIdx)
             if (s->subtype() == SegChordRest) {
                   if (s->element(0)) {
                         ChordRest* cr = static_cast<ChordRest*>(s->element(0));
-                        endTick = cr->tick() + cr->actualTicks();
+                        if (cr->type() == REPEAT_MEASURE)
+                              endTick = tick() + ticks();
+                        else
+                              endTick = cr->tick() + cr->actualTicks();
                         break;
                         }
                   }

@@ -914,6 +914,7 @@ void ChordRest::add(Element* e)
                   break;
             default:
                   qDebug("ChordRest::add: unknown element %s", e->name());
+                  abort();
                   break;
             }
       }
