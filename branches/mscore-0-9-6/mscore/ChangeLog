@@ -1,6 +1,7 @@
 02.feb (la)
       - fix #12300: Add european language characters in MuseJazz (by Marc Sabatella and Jorgk)
       - add two more chordnames sus#4 & Maj7b13
+      - fix #14409: Crash on copying tuplets
 29.jan (lv)
       - fix #14692: [MusicXML import] [1.2] import error: 41g-PartNoId.xml causes crash
       - fix #14693: [MusicXML import] [1.2] import error: 41h-TooManyParts.xml causes crash
