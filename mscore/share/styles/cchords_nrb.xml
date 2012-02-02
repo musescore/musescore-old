@@ -240,6 +240,15 @@
     <sym code="0xe10c" name="#"/>
     <sym code="0xe10d" name="b"/>
 
+<!-- Italian / solfege chord names
+    <sym code="0xe201" name="C"/>
+    <sym code="0xe202" name="D"/>
+    <sym code="0xe203" name="E"/>
+    <sym code="0xe204" name="F"/>
+    <sym code="0xe205" name="G"/>
+    <sym code="0xe206" name="A"/>
+    <sym code="0xe207" name="B"/> -->
+
     </font>
 
   <font id="2" family="MuseJazz">
@@ -383,7 +392,7 @@
     </chord>
   <chord id="9">
     <name>&parse_major;13#11</name>
-    <render>&display_major; &thirteen; &d_alp; &alter_sharp; &seleven; &d_rpl;</render>
+    <render>&display_major; &thirteen; &d_alp; &alter_sharp; &seleven; &d_arp;</render>
     </chord>
   <chord id="10">
     <name>&parse_major;13</name>
@@ -1032,6 +1041,23 @@
     <degree>add#9</degree>
     <voicing>C E G Bb Db D#</voicing>
     <render>&seven; &d_alp; &alter_flat; &snine; &alter_sharp; &snine; &d_arp;</render>
+    </chord>
+
+  <chord id="240">
+    <name>&parse_suspended;#4</name>
+    <xml>major</xml>
+    <degree>sub3</degree>
+    <degree>add#4</degree>
+    <voicing>C F# G</voicing>
+    <render>&display_suspended; &alter_sharp; &sfour;</render>
+    </chord>
+
+  <chord id="241">
+    <name>&parse_major;7&p_alp;b13&p_arp;</name>
+    <xml>major-seventh</xml>
+    <degree>addb13</degree>
+    <voicing>C E G B Ab</voicing>
+    <render>&display_major; &mseven; &d_alp; &alter_flat; &sthirteen; &d_arp;</render>
     </chord>
 
   </museScore>
