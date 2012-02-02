@@ -595,5 +595,11 @@
   <chord id="230">
     <render>7 sb 9 s# 9</render>
     </chord>
+  <chord id="240">
+    <render>sus s# 4</render>
+    </chord>
+  <chord id="241">
+    <render>Maj 7 sb 13</render>
+    </chord>
 
   </museScore>
