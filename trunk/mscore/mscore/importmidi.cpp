@@ -21,6 +21,7 @@
 #include "midifile.h"
 #include "scoreview.h"
 #include "file.h"
+#include "importmidi.h"
 #include "libmscore/score.h"
 #include "libmscore/key.h"
 #include "libmscore/clef.h"
@@ -1332,6 +1333,59 @@ qDebug("unmapped drum note 0x%02x %d", mn.pitch(), mn.pitch());
 #endif
       }
 
+//---------------------------------------------------------	 
+ //   ImportMidiDialog	 
+ //---------------------------------------------------------	 
+ 	 
+ ImportMidiDialog::ImportMidiDialog(QWidget* parent)	 
+    : QDialog(parent)	 
+       {	 
+       setupUi(this);	 
+       }	 
+ 	 
+ //---------------------------------------------------------	 
+ //   shortestNote	 
+ //---------------------------------------------------------	 
+ 	 
+ int ImportMidiDialog::shortestNote() const	 
+       {	 
+       switch(shortestNoteCombo->currentIndex()) {	 
+             case 0:     return MScore::division;	 
+             case 1:     return MScore::division / 2;	 
+             case 2:     return MScore::division / 4;	 
+             case 3:     return MScore::division / 8;	 
+             case 4:     return MScore::division / 16;	 
+ 	 
+             default:	 
+             case 5:	 
+                   return MScore::division / 32;	 
+             }	 
+       }	 
+ 	 
+ //---------------------------------------------------------	 
+ //   setShortestNote	 
+ //---------------------------------------------------------	 
+ 	 
+ void ImportMidiDialog::setShortestNote(int val)	 
+       {	 
+       int idx;	 
+ 	 
+       if (val == MScore::division)	 
+             idx = 0;	 
+       else if (val == MScore::division/2)	 
+             idx = 1;	 
+       else if (val == MScore::division/4)	 
+             idx = 2;	 
+       else if (val == MScore::division/8)	 
+             idx = 3;	 
+       else if (val == MScore::division/16)	 
+             idx = 4;	 
+       else	 
+             idx = 5;	 
+ 	 
+       shortestNoteCombo->setCurrentIndex(idx);	 
+       }
+
 //---------------------------------------------------------
 //   importMidi
 //    return true on success
@@ -1359,6 +1413,16 @@ bool importMidi(Score* score, const QString& name)
             return false;
             }
       fp.close();
+
+      int shortestNote = preferences.shortestNote;
+      if (!noGui) {	 
+             ImportMidiDialog id(0);	 
+             QFileInfo fn(name);	 
+             id.setWindowTitle(fn.fileName() + " - "  + QWidget::tr("MIDI Import"));	 
+             id.setShortestNote(preferences.shortestNote);	 
+             id.exec();	 
+             shortestNote = id.shortestNote();	 
+             }
 
       mf.setShortestNote(preferences.shortestNote);
 
