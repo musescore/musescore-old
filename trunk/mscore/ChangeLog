@@ -1,5 +1,6 @@
 03.02 (mw)
       - removed hard-coded initial size for pictures in MuseScore::addImage() function (#14753)
+      - transparent background for SVG images (fix for #14754)
 2.2 (ws)
       - enhanced compatibility with 1.x scores: Harmony, MeasureRepeat
     (la)

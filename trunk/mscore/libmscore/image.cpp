@@ -228,7 +228,7 @@ void SvgImage::draw(QPainter* painter) const
                   }
             else {
                   buffer = QPixmap(s);
-                  buffer.fill();
+                  buffer.fill(Qt::transparent);
                   QPainter pp(&buffer);
                   pp.setViewport(0, 0, s.width(), s.height());
                   doc->render(&pp);
