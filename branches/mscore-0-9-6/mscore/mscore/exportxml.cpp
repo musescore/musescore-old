@@ -22,10 +22,6 @@
  MusicXML export.
  */
 
-// TODO: trill lines need to be handled the same way as slurs
-// in MuseScore they are measure level elements, while in MusicXML
-// they are attached to notes (as ornaments)
-
 //=========================================================
 //  LVI FIXME
 //
@@ -1559,23 +1555,51 @@ static void tupletStartStop(ChordRest* cr, Notations& notations, Xml& xml)
       }
 
 //---------------------------------------------------------
+//   findChordInLowestTrack
+//---------------------------------------------------------
+
+/**
+  Find the chord in the same staff and segment as chord, but in the lowest track
+ */
+
+static Chord* findChordInLowestTrack(Chord const* const chord)
+      {
+      int st = (chord->track() / VOICES) * VOICES;
+      Segment const* const seg = chord->segment();
+      for (int i = 0; i < VOICES; i++) {
+            Element* el = seg->element(st + i);
+            if (el && el->type() == CHORD)
+                  return static_cast<Chord*>(el);
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
 //   wavyLineStartStop
 //---------------------------------------------------------
 
+// for a trill, track() equals the first track in its staff.
+// in MusicXML, write it in the first track containing a chord
+
 static void wavyLineStartStop(Chord* chord, Notations& notations, Ornaments& ornaments, Xml& xml)
       {
+      // chord in lowest track in chords staff
+      Chord const* const lowestChord = findChordInLowestTrack(chord);
+      // first track in chords staff
+      int st = (chord->track() / VOICES) * VOICES;
       // search for trill starting at this chord
       foreach(Element* el, *(chord->score()->gel())) {
             if (el->type() == TRILL) {
                   Trill* t = (Trill*) el;
-                  if (t->tick() == chord->tick() && t->track() == chord->track()) {
+                  if (t->tick() == chord->tick() && t->track() == st && chord == lowestChord) {
                         notations.tag(xml);
                         ornaments.tag(xml);
                         // mscore only supports wavy-line with trill-mark
                         xml.tagE("trill-mark");
                         xml.tagE("wavy-line type=\"start\"");
                         }
-                  else if (t->tick2() == chord->tick()+chord->tickLen() && t->track() == chord->track()) {
+                  else if (t->tick2() == chord->tick() + chord->tickLen()
+                           && t->track() == st && chord == lowestChord) {
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tagE("wavy-line type=\"stop\"");
