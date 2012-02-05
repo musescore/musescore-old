@@ -1,3 +1,5 @@
+4.2 (ws)
+      - wrap inspector main widget with QScrollArea
 03.02 (mw)
       - removed hard-coded initial size for pictures in MuseScore::addImage() function (#14753)
       - transparent background for SVG images (fix for #14754)

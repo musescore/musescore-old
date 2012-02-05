@@ -50,12 +50,14 @@ TrackList::~TrackList()
                         delete sp;
                   foreach(Element* el, cr->annotations())
                         delete el;
+                  delete e;
                   }
             else if (e->type() == TUPLET) {
                   Tuplet* t = static_cast<Tuplet*>(e);
                   cleanupTuplet(t);
                   }
-            delete e;
+            else
+                  delete e;
             }
       }
 

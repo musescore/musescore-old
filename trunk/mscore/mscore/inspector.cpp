@@ -60,9 +60,13 @@ Inspector::Inspector(QWidget* parent)
       {
       setObjectName("inspector");
       setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+      QScrollArea* sa = new QScrollArea;
+      sa->setWidgetResizable(true);
       QWidget* mainWidget = new QWidget;
       mainWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding); //??
-      setWidget(mainWidget);
+      setWidget(sa);
+      sa->setWidget(mainWidget);
+
       layout = new QVBoxLayout;
       mainWidget->setLayout(layout);
       ie        = 0;
