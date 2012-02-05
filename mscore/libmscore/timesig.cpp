@@ -109,13 +109,12 @@ Element* TimeSig::drop(const DropData& data)
       if (e->type() == TIMESIG) {
             // change timesig applies to all staves, can't simply set subtype
             // for this one only
+            // ownership of e is transferred to cmdAddTimeSig
             score()->cmdAddTimeSig(measure(), staffIdx(), static_cast<TimeSig*>(e));
+            return 0;
             }
-      else  {
-            delete e;
-            e = 0;
-            }
-      return e;
+      delete e;
+      return 0;
       }
 
 //---------------------------------------------------------
