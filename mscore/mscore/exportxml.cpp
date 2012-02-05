@@ -3245,6 +3245,7 @@ static void measureStyle(Xml& xml, Attributes& attr, Measure* m)
 void ExportMusicXml::keysigTimesig(Measure* m, int strack, int etrack)
       {
       // search all staves for non-generated key signatures
+      // keysig at tick = 0 must be handled even if it is generated
       QMap<int, KeySig*> keysigs; // map staff to key signature
       for (Segment* seg = m->first(); seg; seg = seg->next()) {
             if (seg->tick() > m->tick())
@@ -3255,7 +3256,7 @@ void ExportMusicXml::keysigTimesig(Measure* m, int strack, int etrack)
                         continue;
                   if (el->type() == KEYSIG) {
                         int st = (t - strack) / VOICES;
-                        if (!el->generated())
+                        if (!el->generated() || el->tick() == 0)
                               keysigs[st] = static_cast<KeySig*>(el);
                         }
                   }
@@ -3290,7 +3291,7 @@ void ExportMusicXml::keysigTimesig(Measure* m, int strack, int etrack)
                   }
             }
       else {
-            // always write a keysig at tick = 0
+            // no keysig found, thus (implicitly) fifths equals 0
             if (m->tick() == 0)
                   keysig(0);
             }

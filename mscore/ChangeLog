@@ -1,4 +1,5 @@
 05.feb (lv)
+      - fix #14701: [MusicXML Export] [1.2] Key signature is not exported from a mscz saved with 1.1
       - fix #14244: [MusicXML] [1.2] Export of trill line fails
 02.feb (la)
       - fix #12300: Add european language characters in MuseJazz (by Marc Sabatella and Jorgk)
