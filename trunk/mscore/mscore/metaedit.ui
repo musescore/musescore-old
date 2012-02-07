@@ -11,100 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>MuseScore: Meta Tags</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="0">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Work Title:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QLineEdit" name="workTitle"/>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>Work Number:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QLineEdit" name="workNumber"/>
-   </item>
-   <item row="5" column="0">
-    <widget class="QLabel" name="label_5">
-     <property name="text">
-      <string>Source:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1">
-    <widget class="QLineEdit" name="source"/>
-   </item>
-   <item row="7" column="0">
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>136</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="label_3">
-     <property name="text">
-      <string>Movement Title:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QLineEdit" name="movementTitle"/>
-   </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="label_4">
-     <property name="text">
-      <string>Movement Number:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="1">
-    <widget class="QLineEdit" name="movementNumber"/>
-   </item>
-   <item row="8" column="1">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="0">
-    <widget class="QLabel" name="label_6">
-     <property name="text">
-      <string>Copyright:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="1">
-    <widget class="QLineEdit" name="copyright"/>
-   </item>
-   <item row="0" column="0" colspan="2">
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
-     <property name="topMargin">
-      <number>0</number>
-     </property>
-     <property name="bottomMargin">
-      <number>10</number>
-     </property>
      <item>
       <widget class="QLabel" name="label_7">
        <property name="text">
@@ -166,6 +77,43 @@
        </property>
        <property name="buttonSymbols">
         <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QGridLayout" name="grid"/>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QPushButton" name="newButton">
+       <property name="text">
+        <string>New</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDialogButtonBox" name="buttonBox">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
        </property>
       </widget>
      </item>

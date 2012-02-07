@@ -34,7 +34,7 @@ set(GCC_VISIBILITY TRUE)            # requires gcc 4.x?
 set(HAS_AUDIOFILE TRUE)             # requires libsndfile
 
 set(STATIC_SCRIPT_BINDINGS TRUE)
-set(BUILD_SCRIPTGEN   TRUE)         # Generate Qt script bindings. (collides with qtscriptgenerator project on several distrib)
+set(BUILD_SCRIPTGEN   FALSE)         # Generate Qt script bindings. (collides with qtscriptgenerator project on several distrib)
 set(USE_SSE           FALSE)
 set(SOUNDFONT3        TRUE)         # enable ogg vorbis compressed fonts, require ogg & vorbis
 set(AEOLUS            TRUE)         # pipe organ synthesizer

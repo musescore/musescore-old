@@ -268,6 +268,22 @@ void Score::init()
       _layerTags[0]   = "default";
 
       _creationDate   = QDate::currentDate();
+#ifdef Q_WS_WIN
+      _metaTags.insert("Platform", "WIN");
+#endif
+#ifdef Q_WS_MAC
+      _metaTags.insert("Platform", "MAC");
+#endif
+#ifdef Q_WS_X11
+      _metaTags.insert("Platform", "X11");
+#endif
+      _metaTags.insert("movementNumber", "");
+      _metaTags.insert("movementTitle", "");
+      _metaTags.insert("workNumber", "");
+      _metaTags.insert("workTitle", "");
+      _metaTags.insert("source", "");
+      _metaTags.insert("copyright", "");
+
       _revisions      = new Revisions;
       _symIdx         = 0;
       _pageNumberOffset = 0;

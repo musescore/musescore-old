@@ -1,3 +1,5 @@
+12.2 (ws)
+      - enable user defined meta tags for scores
 4.2 (ws)
       - wrap inspector main widget with QScrollArea
 03.02 (mw)
