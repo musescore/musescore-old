@@ -2017,11 +2017,44 @@ void StartDialog::loadScoreClicked()
       }
 
 //---------------------------------------------------------
+//   Message handler
+//---------------------------------------------------------
+
+#if defined(QT_DEBUG) && defined(Q_WS_WIN)
+static void mscoreMessageHandler(QtMsgType type, const char *msg)
+     {
+     QTextStream cout(stdout);
+
+     switch (type) {
+     case QtDebugMsg:
+         cout << "Debug: " << msg << endl;
+         break;
+     case QtWarningMsg:
+         cout << "Warning: " << msg << endl;
+         break;
+     case QtCriticalMsg:
+         cout << "Critical: " << msg << endl;
+         break;
+     case QtFatalMsg:
+         //
+         // set your breakpoint here, if you want to catch the abort
+         //
+         cout << "Fatal: " << msg << endl;
+         abort();
+         }
+     }
+#endif
+
+//---------------------------------------------------------
 //   main
 //---------------------------------------------------------
 
 int main(int argc, char* av[])
       {
+#if defined(QT_DEBUG) && defined(Q_WS_WIN)
+      qInstallMsgHandler(mscoreMessageHandler);
+#endif
+
       QFile f(":/revision.h");
       f.open(QIODevice::ReadOnly);
       revision = QString(f.readAll());

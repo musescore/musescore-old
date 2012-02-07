@@ -32,16 +32,44 @@ MetaEditDialog::MetaEditDialog(Score* s, QWidget* parent)
       setupUi(this);
       score = s;
 
-      movementNumber->setText(score->metaTag("movementNumber"));
-      movementTitle->setText(score->metaTag("movementTitle"));
-      workNumber->setText(score->metaTag("workNumber"));
-      workTitle->setText(score->metaTag("workTitle"));
-      source->setText(score->metaTag("source"));
-      copyright->setText(score->metaTag("copyright"));
       date->setDate(score->creationDate());
       level->setValue(score->mscVersion());
       version->setText(score->mscoreVersion());
       revision->setValue(score->mscoreRevision());
+
+      int idx = 0;
+      QMapIterator<QString, QString> i(s->metaTags());
+      while (i.hasNext()) {
+            i.next();
+            // xml.tag(QString("metaTag name=\"%1\"").arg(i.key()), i.value());
+            QLabel* label = new QLabel;
+            label->setText(i.key());
+            QLineEdit* text = new QLineEdit(i.value(), 0);
+            grid->addWidget(label, idx, 0);
+            grid->addWidget(text, idx, 1);
+            ++idx;
+            }
+      connect(newButton, SIGNAL(clicked()), SLOT(newClicked()));
+      }
+
+//---------------------------------------------------------
+//   newClicked
+//---------------------------------------------------------
+
+void MetaEditDialog::newClicked()
+      {
+      QString s = QInputDialog::getText(this,
+         tr("MuseScore: Input Tag Name"),
+         tr("New Tag Name:")
+         );
+      if (!s.isEmpty()) {
+            int idx = grid->rowCount();
+            QLabel* label = new QLabel;
+            label->setText(s);
+            QLineEdit* text = new QLineEdit;
+            grid->addWidget(label, idx, 0);
+            grid->addWidget(text, idx, 1);
+            }
       }
 
 //---------------------------------------------------------
@@ -50,16 +78,18 @@ MetaEditDialog::MetaEditDialog(Score* s, QWidget* parent)
 
 void MetaEditDialog::accept()
       {
-#define T(x, y) if (score->metaTag(x) != y->text()) \
-            score->undo(new ChangeMetaText(score, x, y->text()));
+      int idx = grid->rowCount();
 
-      T("movementNumber", movementNumber)
-      T("movementTitle", movementTitle)
-      T("workNumber", workNumber)
-      T("workTitle", workTitle)
-      T("source", source)
-      T("copyright", copyright)
+      QMap<QString, QString>& m(score->metaTags());
+      m.clear();
 
+      for (int i = 0; i < idx; ++i) {
+            QLayoutItem* labelItem = grid->itemAtPosition(i, 0);
+            QLayoutItem* dataItem  = grid->itemAtPosition(i, 1);
+            QLabel* label = static_cast<QLabel*>(labelItem->widget());
+            QLineEdit* le = static_cast<QLineEdit*>(dataItem->widget());
+            m.insert(label->text(), le->text());
+            }
       QDialog::accept();
       }
 
