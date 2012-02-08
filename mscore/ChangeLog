@@ -1,4 +1,7 @@
-12.2 (ws)
+8.2 (la)
+      - fix #14819: import error: 01f-Pitches-ParenthesizedMicrotoneAccidentals.xml imports without microtone accidentals
+      - fix #14818: import error: 01e-Pitches-ParenthesizedAccidentals.xml imports without double flat in parentheses
+7.2 (ws)
       - enable user defined meta tags for scores
 4.2 (ws)
       - wrap inspector main widget with QScrollArea

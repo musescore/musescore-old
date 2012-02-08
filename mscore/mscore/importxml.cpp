@@ -3255,17 +3255,30 @@ static AccidentalType convertAccidental(QString mxmlName)
       map["sharp"] = ACC_SHARP;
       map["double-sharp"] = ACC_SHARP2;
       map["sharp-sharp"] = ACC_SHARP2;
+      map["flat-flat"] = ACC_FLAT2;
+      map["double-flat"] = ACC_FLAT2;
       map["natural-flat"] = ACC_NONE;
-      // TODO check: following values are in 1.1, do not seem to match with 2.0
-      // map["quarter-flat"] = 19;
-      // map["quarter-sharp"] = 22;
-      // map["three-quarters-flat"] = 18;
-      // map["three-quarters-sharp"] = 25;
+
       map["quarter-flat"] = ACC_MIRRORED_FLAT;
       map["quarter-sharp"] = ACC_SHARP_SLASH;
       map["three-quarters-flat"] = ACC_MIRRORED_FLAT2;
       map["three-quarters-sharp"] = ACC_SHARP_SLASH4;
-      map["flat-flat"] = ACC_FLAT2;
+      
+      map["sharp-down"] = ACC_SHARP_ARROW_DOWN;
+      map["sharp-up"] = ACC_SHARP_ARROW_UP;
+      map["natural-down"] = ACC_NATURAL_ARROW_DOWN;
+      map["natural-up"] = ACC_NATURAL_ARROW_UP;
+      map["flat-down"] = ACC_FLAT_ARROW_DOWN;
+      map["flat-up"] = ACC_FLAT_ARROW_UP;
+      
+      map["slash-quarter-sharp"] = ACC_MIRRIRED_FLAT_SLASH;
+      map["slash-sharp"] = ACC_SHARP_SLASH;
+      map["slash-flat"] = ACC_FLAT_SLASH;
+      map["double-slash-flat"] = ACC_FLAT_SLASH2;
+      
+      map["sori"] = ACC_SORI;
+      map["koron"] = ACC_KORON;
+      
       map["natural-sharp"] = ACC_NONE;
 
       if (map.contains(mxmlName))
@@ -3720,6 +3733,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       int alter  = 0;
       int octave = 4;
       AccidentalType accidental = ACC_NONE;
+      bool cautionary = false;
       bool editorial = false;
       TDuration durationType(TDuration::V_INVALID);
       int headGroup = 0;
@@ -3893,6 +3907,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   ++dots;
             else if (tag == "accidental") {
                   accidental = convertAccidental(s);
+                  if (e.attribute(QString("cautionary")) == "yes")
+                        cautionary = true;
                   if (e.attribute(QString("editorial")) == "yes")
                         editorial = true;
                   }
@@ -4050,10 +4066,10 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             // qDebug("staff for new note: %p (staff=%d, relStaff=%d)",
             //        score->staff(staff + relStaff), staff, relStaff);
 
-            if (editorial) {
+            if (editorial || cautionary) {
                   Accidental* a = new Accidental(score);
                   a->setSubtype(accidental);
-                  a->setHasBracket(true);
+                  a->setHasBracket(cautionary);
                   a->setRole(ACC_USER);
                   note->add(a);
                   }
