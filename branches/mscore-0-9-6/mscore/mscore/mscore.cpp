@@ -1954,11 +1954,12 @@ int main(int argc, char* av[])
 #endif
       QLocale::setDefault(QLocale(QLocale::C));
 
-      pdev = new QPrinter(QPrinter::HighResolution);
+      //pdev = new QPrinter(QPrinter::HighResolution);
+      pdev = 0;
       QWidget wi(0);
 
       PDPI = wi.logicalDpiX();         // physical resolution
-      DPI  = pdev->logicalDpiX();      // logical drawing resolution
+      DPI  = 0; // pdev->logicalDpiX();      // logical drawing resolution
 
       // sanity check for DPI
       if (DPI == 0) {           // this happens on windows if there is no printer installed

@@ -1535,6 +1535,8 @@ void Score::checkTuplets()
 
 void Score::printFile()
       {
+      if(pdev == 0)
+            pdev = new QPrinter(QPrinter::HighResolution);
       QPrinter* printerDev = static_cast<QPrinter*>(pdev);
 
       if (paperSizes[pageFormat()->size].qtsize == QPrinter::Custom) {
