@@ -1222,7 +1222,7 @@ qreal TextB::baseLine() const
 
 double TextB::lineSpacing() const
       {
-      return QFontMetricsF(doc()->defaultFont(), pdev).lineSpacing();
+      return QFontMetricsF(doc()->defaultFont()).lineSpacing();
       }
 
 //---------------------------------------------------------
@@ -1232,7 +1232,7 @@ double TextB::lineSpacing() const
 
 double TextB::lineHeight() const
       {
-      QFontMetricsF fm(doc()->defaultFont(), pdev);
+      QFontMetricsF fm(doc()->defaultFont());
       return fm.height();
       }
 
