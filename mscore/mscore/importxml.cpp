@@ -3098,17 +3098,31 @@ static int convertAccidental(QString mxmlName)
       map["sharp"] = ACC_SHARP;
       map["double-sharp"] = ACC_SHARP2;
       map["sharp-sharp"] = ACC_SHARP2;
-      map["natural-flat"] = ACC_NONE;
-      map["quarter-flat"] = 19;
-      map["quarter-sharp"] = 22;
-      map["three-quarters-flat"] = 18;
-      map["three-quarters-sharp"] = 25;
-      // TODO check: following values are in 2.0, do not seem to match with 1.1
-      // map["quarter-flat"] = ACC_MIRRORED_FLAT;
-      // map["quarter-sharp"] = ACC_SHARP_SLASH;
-      // map["three-quarters-flat"] = ACC_MIRRORED_FLAT2;
-      // map["three-quarters-sharp"] = ACC_SHARP_SLASH4;
       map["flat-flat"] = ACC_FLAT2;
+      map["double-flat"] = ACC_FLAT2;
+      
+      map["natural-flat"] = ACC_NONE;
+      
+      map["quarter-flat"] = ACC_MIRRORED_FLAT;
+      map["quarter-sharp"] = ACC_SHARP_SLASH;
+      map["three-quarters-flat"] = ACC_MIRRORED_FLAT2;
+      map["three-quarters-sharp"] = ACC_SHARP_SLASH4;
+      
+      map["sharp-down"] = ACC_SHARP_ARROW_DOWN;
+      map["sharp-up"] = ACC_SHARP_ARROW_UP;
+      map["natural-down"] = ACC_NATURAL_ARROW_DOWN;
+      map["natural-up"] = ACC_NATURAL_ARROW_UP;
+      map["flat-down"] = ACC_FLAT_ARROW_DOWN;
+      map["flat-up"] = ACC_FLAT_ARROW_UP;
+      
+      map["slash-quarter-sharp"] = ACC_MIRRIRED_FLAT_SLASH;
+      map["slash-sharp"] = ACC_SHARP_SLASH;
+      map["slash-flat"] = ACC_FLAT_SLASH;
+      map["double-slash-flat"] = ACC_FLAT_SLASH2;
+      
+      map["sori"] = ACC_SORI;
+      map["koron"] = ACC_KORON;
+      
       map["natural-sharp"] = ACC_NONE;
 
       if (map.contains(mxmlName))
@@ -3582,6 +3596,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       int octave = 4;
       int accidental = 0;
       bool editorial = false;
+      bool cautionary = false;
       Duration durationType(Duration::V_INVALID);
       int headGroup = 0;
       bool noStem = false;
@@ -3754,6 +3769,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   ++dots;
             else if (tag == "accidental") {
                   accidental = convertAccidental(s);
+                  if (e.attribute(QString("cautionary")) == "yes")
+                        cautionary = true;
                   if (e.attribute(QString("editorial")) == "yes")
                         editorial = true;
                   }
@@ -3911,14 +3928,11 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             // printf("staff for new note: %p (staff=%d, relStaff=%d)\n",
             //        score->staff(staff + relStaff), staff, relStaff);
             // LVIFIX: accidental handling is ugly, replace magic numbers by constants
-            if (1 <= accidental && accidental <= 5 && editorial)
-                  note->setUserAccidental(accidental + 0x8000);
+            if (ACC_SHARP <= accidental && accidental <= ACC_NATURAL && (editorial || cautionary))
+                  note->setUserAccidental(accidental + (cautionary ? 0x8000 : 0));
             // LVIFIX: quarter tone accidentals support is "drawing only"
-            if (accidental == 18
-                || accidental == 19
-                || accidental == 22
-                || accidental == 25)
-                  note->setAccidentalType(accidental);
+            if (accidental > ACC_NATURAL && accidental < ACC_END)
+                  note->setUserAccidental(accidental + (cautionary ? 0x8000 : 0));
 
             if (cr->beamMode() == BEAM_NO)
                   cr->setBeamMode(bm);
