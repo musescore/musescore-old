@@ -1535,9 +1535,8 @@ void Score::checkTuplets()
 
 void Score::printFile()
       {
-      if(pdev == 0)
-            pdev = new QPrinter(QPrinter::HighResolution);
-      QPrinter* printerDev = static_cast<QPrinter*>(pdev);
+      QPrinter pPrinter(QPrinter::HighResolution);
+      QPrinter *printerDev = &pPrinter;
 
       if (paperSizes[pageFormat()->size].qtsize == QPrinter::Custom) {
             printerDev->setPaperSize(QSizeF(pageFormat()->_width, pageFormat()->_height),
@@ -1656,15 +1655,13 @@ bool Score::savePsPdf(const QString& saveName, QPrinter::OutputFormat format)
 bool Score::saveSvg(const QString& saveName)
       {
       QSvgGenerator printer;
-      QPaintDevice* opdev = pdev;
-      pdev = &printer;
 
       printer.setResolution(int(DPI));
       printer.setFileName(saveName);
 
       _printing = true;
 
-      QPainter p(pdev);
+      QPainter p(&printer);
       p.setRenderHint(QPainter::Antialiasing, true);
       p.setRenderHint(QPainter::TextAntialiasing, true);
       double mag = converterDpi / DPI;
@@ -1710,7 +1707,6 @@ bool Score::saveSvg(const QString& saveName)
 
       _printing = false;
       p.end();
-      pdev = opdev;
       return true;
       }
 

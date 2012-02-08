@@ -86,7 +86,6 @@ bool enableInspector    = true;
 #endif
 
 QString dataPath;
-QPaintDevice* pdev;
 qreal PDPI, DPI, DPMM;
 double SPATIUM;
 
@@ -1954,23 +1953,14 @@ int main(int argc, char* av[])
 #endif
       QLocale::setDefault(QLocale(QLocale::C));
 
-      //pdev = new QPrinter(QPrinter::HighResolution);
-      pdev = 0;
       QWidget wi(0);
-
       PDPI = wi.logicalDpiX();         // physical resolution
-      DPI  = 0; // pdev->logicalDpiX();      // logical drawing resolution
-
-      // sanity check for DPI
-      if (DPI == 0) {           // this happens on windows if there is no printer installed
-            DPI = PDPI;
-            pdev = &wi;   //pdev is used to draw text, if it's qprinter, text is tiny.
-            }
+      DPI = PDPI; // logical drawing resolution
       DPMM = DPI / INCH;      // dots/mm
 
       if (debugMode) {
             printf("printer DPI %f(%d) display PDPI %f(%d) DPMM %f\n",
-               DPI, pdev->physicalDpiX(),
+               DPI, wi.physicalDpiX(),
                PDPI, wi.physicalDpiX(),
                DPMM);
             QStringList sl(QCoreApplication::libraryPaths());
