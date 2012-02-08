@@ -1,5 +1,5 @@
 08.feb (lv)
-      - partial fix #14827: [MusicXML import] [1.2] import error: 32a-Notations.xml: missing notations
+      - fix #14827: [MusicXML import] [1.2] import error: 32a-Notations.xml: missing notations
         import more fermata types
        (la)
       - fix #14819: import error: 01f-Pitches-ParenthesizedMicrotoneAccidentals.xml imports without microtone accidentals
