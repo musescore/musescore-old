@@ -1,3 +1,6 @@
+08.feb (lv)
+      - partial fix #14827: [MusicXML import] [1.2] import error: 32a-Notations.xml: missing notations
+        import more fermata types
 05.feb (lv)
       - fix #14701: [MusicXML Export] [1.2] Key signature is not exported from a mscz saved with 1.1
       - fix #14244: [MusicXML] [1.2] Export of trill line fails
