@@ -78,6 +78,7 @@
 #include "navigate.h"
 #include "drumset.h"
 #include "preferences.h"
+#include "breath.h"
 
 static bool isTwoNoteTremolo(Chord* chord);
 
@@ -1225,14 +1226,14 @@ void ExportMusicXml::credits(Xml& xml)
 void ExportMusicXml::pitch2xml(Note* note, char& c, int& alter, int& octave)
       {
       static char table1[]  = "FEDCBAG";
-      
+
       Chord* chord = note->chord();
 
       int tick   = chord->tick();
-      
+
       int staffIdx = chord->staffIdx() + chord->staffMove();
       Staff* i   = note->score()->staff(staffIdx);
-      
+
       int clef   = i->clefList()->clef(tick);
       int offset = clefTable[clef].yOffset;
 
@@ -1617,11 +1618,14 @@ static void wavyLineStartStop(Chord* chord, Notations& notations, Ornaments& orn
 //   hasBreathMark - determine if chord has breath-mark
 //---------------------------------------------------------
 
-static bool hasBreathMark(Chord* ch)
+static Breath* hasBreathMark(Chord* ch)
       {
       Segment* s = ch->segment();
       s = s->next1();
-      return (s->subtype() == SegBreath && s->element(ch->track()));
+      Breath* b = 0;
+      if (s->subtype() == SegBreath)
+            b = static_cast<Breath*>(s->element(ch->track()));
+      return b;
       }
 
 //---------------------------------------------------------
@@ -1745,6 +1749,26 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                   notations.tag(xml);
                   xml.tagE("fermata type=\"inverted\"");
                   }
+            else if ((*ia)->subtype() == UshortfermataSym) {
+                  notations.tag(xml);
+                  xml.tag("fermata type=\"upright\"", "angled");
+                  }
+            else if ((*ia)->subtype() == DshortfermataSym) {
+                  notations.tag(xml);
+                  xml.tag("fermata type=\"inverted\"", "angled");
+                  }
+            // MusicXML does not support the very long fermata,
+            // export as long fermata (better than not exporting at all)
+            else if ((*ia)->subtype() == UlongfermataSym
+                     || (*ia)->subtype() == UverylongfermataSym) {
+                  notations.tag(xml);
+                  xml.tag("fermata type=\"upright\"", "square");
+                  }
+            else if ((*ia)->subtype() == DlongfermataSym
+                     || (*ia)->subtype() == DverylongfermataSym) {
+                  notations.tag(xml);
+                  xml.tag("fermata type=\"inverted\"", "square");
+                  }
             }
 
       // then the attributes whose elements are children of <articulations>
@@ -1753,6 +1777,12 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
             switch ((*ia)->subtype()) {
                   case UfermataSym:
                   case DfermataSym:
+                  case UshortfermataSym:
+                  case DshortfermataSym:
+                  case UlongfermataSym:
+                  case UverylongfermataSym:
+                  case DlongfermataSym:
+                  case DverylongfermataSym:
                         // ignore, already handled
                         break;
                   case SforzatoaccentSym:
@@ -1798,6 +1828,13 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                         xml.tagE("strong-accent type=\"up\"");
                         }
                         break;
+                  case DportatoSym:
+                        {
+                        notations.tag(xml);
+                        articulations.tag(xml);
+                        xml.tagE("detached-legato");
+                        }
+                        break;
                   case ReverseturnSym:
                   case TurnSym:
                   case TrillSym:
@@ -1808,6 +1845,7 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                   case PlusstopSym:
                   case UpbowSym:
                   case DownbowSym:
+                  case SnappizzicatoSym:
                         // ignore, handled with technical
                         break;
                   default:
@@ -1815,10 +1853,14 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                         break;
                   }
             }
-      if (hasBreathMark(chord)) {
+      if (Breath* b = hasBreathMark(chord)) {
             notations.tag(xml);
             articulations.tag(xml);
-            xml.tagE("breath-mark");
+            int st = b->subtype();
+            if (st == 0 || st == 1)
+                  xml.tagE("breath-mark");
+            else
+                  xml.tagE("caesura");
             }
       articulations.etag(xml);
 
@@ -1828,6 +1870,12 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
             switch ((*ia)->subtype()) {
                   case UfermataSym:
                   case DfermataSym:
+                  case UshortfermataSym:
+                  case DshortfermataSym:
+                  case UlongfermataSym:
+                  case UverylongfermataSym:
+                  case DlongfermataSym:
+                  case DverylongfermataSym:
                   case SforzatoaccentSym:
                   case StaccatoSym:
                   case UstaccatissimoSym:
@@ -1835,6 +1883,7 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                   case TenutoSym:
                   case DmarcatoSym:
                   case UmarcatoSym:
+                  case DportatoSym:
                         // ignore, already handled
                         break;
                   case ReverseturnSym:
@@ -1875,6 +1924,7 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                   case PlusstopSym:
                   case UpbowSym:
                   case DownbowSym:
+                  case SnappizzicatoSym:
                         // ignore, handled with technical
                         break;
                   default:
@@ -1908,6 +1958,13 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                         notations.tag(xml);
                         technical.tag(xml);
                         xml.tagE("down-bow");
+                        }
+                        break;
+                  case SnappizzicatoSym:
+                        {
+                        notations.tag(xml);
+                        technical.tag(xml);
+                        xml.tagE("snap-pizzicato");
                         }
                         break;
                   default:

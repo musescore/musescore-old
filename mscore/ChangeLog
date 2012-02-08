@@ -1,6 +1,6 @@
 08.feb (lv)
       - fix #14827: [MusicXML import] [1.2] import error: 32a-Notations.xml: missing notations
-        import more fermata types
+      - fix #14862: [MusicXML] [1.2] Export notations imported by issue 14827
        (la)
       - fix #14819: import error: 01f-Pitches-ParenthesizedMicrotoneAccidentals.xml imports without microtone accidentals
       - fix #14818: import error: 01e-Pitches-ParenthesizedAccidentals.xml imports without double flat in parentheses
