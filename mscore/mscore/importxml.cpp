@@ -1545,6 +1545,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                   QString barStyle;
                   QString endingNumber;
                   QString endingType;
+                  QString endingText;
                   QString repeat;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "bar-style")
@@ -1552,6 +1553,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                         else if (ee.tagName() == "ending") {
                               endingNumber = ee.attribute("number");
                               endingType   = ee.attribute("type");
+                              endingText = ee.text();
                               }
                         else if (ee.tagName() == "repeat")
                               repeat = ee.attribute("direction");
@@ -1615,8 +1617,19 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                         else if (endingType.isEmpty())
                               printf("ImportXml: warning: empty ending type\n");
                         else {
-                              int iEendingNumber = endingNumber.toInt();
-                              if (iEendingNumber <= 0)
+                              QStringList sl = endingNumber.split("," , QString::SkipEmptyParts);
+                              QList<int> iEndingNumbers;
+                              bool unsupported = false;
+                              foreach(const QString& s, sl) {
+                                    int iEndingNumber = s.toInt();
+                                    if(iEndingNumber <= 0) {
+                                          unsupported = true;
+                                          break;
+                                          }
+                                    iEndingNumbers.append(iEndingNumber);
+                                    }
+                              
+                              if (unsupported)
                                     printf("ImportXml: warning: unsupported ending number <%s>\n",
                                            endingNumber.toLatin1().data());
                               else {
@@ -1624,10 +1637,10 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                                           Volta* volta = new Volta(score);
                                           volta->setTrack(staff * VOICES);
                                           volta->setTick(tick);
-                                          volta->setText(endingNumber);
-                                          // LVIFIX TODO also support endings "1, 2" and "1 - 3"
+                                          volta->setText(endingText.isEmpty() ? endingNumber : endingText);
+                                          // LVIFIX TODO also support endings "1 - 3"
                                           volta->endings().clear();
-                                          volta->endings().append(iEendingNumber);
+                                          volta->endings().append(iEndingNumbers);
                                           lastVolta = volta;
                                           }
                                     else if (endingType == "stop") {
