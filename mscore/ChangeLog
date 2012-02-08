@@ -3,6 +3,7 @@
       - fix #14818: import error: 01e-Pitches-ParenthesizedAccidentals.xml imports without double flat in parentheses
       - fix #14832: import error: 41d-StaffGroups-Nested.xml: part-group symbol=line not supported
       - fix #14804: Bad pitch and alter exported for cross staff note
+      - fix #14418: Voltas lost when importing MusicXML
 7.2 (ws)
       - enable user defined meta tags for scores
 4.2 (ws)
