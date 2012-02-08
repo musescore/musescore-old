@@ -1043,6 +1043,8 @@ static void partGroupStart(MusicXmlPartGroup* (&pgs)[MAX_PART_GROUPS], int n, in
             bracketType = BRACKET_AKKOLADE;
       else if (s == "bracket")
             bracketType = BRACKET_NORMAL;
+      else if (s == "line")
+            bracketType = BRACKET_NORMAL;
       else {
             qDebug("part-group symbol=%s not supported", s.toLatin1().data());
             return;
