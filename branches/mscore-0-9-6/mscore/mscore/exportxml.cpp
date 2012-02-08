@@ -1225,9 +1225,14 @@ void ExportMusicXml::credits(Xml& xml)
 void ExportMusicXml::pitch2xml(Note* note, char& c, int& alter, int& octave)
       {
       static char table1[]  = "FEDCBAG";
+      
+      Chord* chord = note->chord();
 
-      int tick   = note->chord()->tick();
-      Staff* i   = note->staff();
+      int tick   = chord->tick();
+      
+      int staffIdx = chord->staffIdx() + chord->staffMove();
+      Staff* i   = note->score()->staff(staffIdx);
+      
       int clef   = i->clefList()->clef(tick);
       int offset = clefTable[clef].yOffset;
 
