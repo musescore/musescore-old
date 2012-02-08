@@ -3077,6 +3077,9 @@ static bool readArticulations(ChordRest* cr, QString mxmlName)
       map["stopped"]          = PlusstopSym;
       map["up-bow"]           = UpbowSym;
       map["down-bow"]         = DownbowSym;
+      map["detached-legato"]  = DportatoSym;
+      map["spiccato"]         = UstaccatissimoSym;
+      map["snap-pizzicato"]   = SnappizzicatoSym;
 
       if (map.contains(mxmlName)) {
             addArticulationToChord(cr, map.value(mxmlName));
@@ -3104,29 +3107,29 @@ static int convertAccidental(QString mxmlName)
       map["sharp-sharp"] = ACC_SHARP2;
       map["flat-flat"] = ACC_FLAT2;
       map["double-flat"] = ACC_FLAT2;
-      
+
       map["natural-flat"] = ACC_NONE;
-      
+
       map["quarter-flat"] = ACC_MIRRORED_FLAT;
       map["quarter-sharp"] = ACC_SHARP_SLASH;
       map["three-quarters-flat"] = ACC_MIRRORED_FLAT2;
       map["three-quarters-sharp"] = ACC_SHARP_SLASH4;
-      
+
       map["sharp-down"] = ACC_SHARP_ARROW_DOWN;
       map["sharp-up"] = ACC_SHARP_ARROW_UP;
       map["natural-down"] = ACC_NATURAL_ARROW_DOWN;
       map["natural-up"] = ACC_NATURAL_ARROW_UP;
       map["flat-down"] = ACC_FLAT_ARROW_DOWN;
       map["flat-up"] = ACC_FLAT_ARROW_UP;
-      
+
       map["slash-quarter-sharp"] = ACC_MIRRIRED_FLAT_SLASH;
       map["slash-sharp"] = ACC_SHARP_SLASH;
       map["slash-flat"] = ACC_FLAT_SLASH;
       map["double-slash-flat"] = ACC_FLAT_SLASH2;
-      
+
       map["sori"] = ACC_SORI;
       map["koron"] = ACC_KORON;
-      
+
       map["natural-sharp"] = ACC_NONE;
 
       if (map.contains(mxmlName))
@@ -3248,7 +3251,7 @@ void MusicXml::xmlNotations(Note* note, ChordRest* cr, int trk, int ticks, QDomE
       QString wavyLineType;
       QString arpeggioType;
       QString glissandoType;
-      bool breathmark = false;
+      int breath = -1;
       int tremolo = 0;
       QString tremoloType;
       QString placement;
@@ -3366,10 +3369,12 @@ void MusicXml::xmlNotations(Note* note, ChordRest* cr, int trk, int ticks, QDomE
                         if (readArticulations(cr, eee.tagName()))
                               continue;
                         else if (eee.tagName() == "breath-mark")
-                              breathmark = true;
+                              breath = 0;
+                        else if (eee.tagName() == "caesura")
+                              breath = 3;
                         else if (eee.tagName() == "strong-accent") {
                               QString strongAccentType = eee.attribute(QString("type"));
-                              if (strongAccentType == "up")
+                              if (strongAccentType == "up" || strongAccentType == "")
                                     addArticulationToChord(cr, UmarcatoSym);
                               else if (strongAccentType == "down")
                                     addArticulationToChord(cr, DmarcatoSym);
@@ -3399,7 +3404,8 @@ void MusicXml::xmlNotations(Note* note, ChordRest* cr, int trk, int ticks, QDomE
                         else if (eee.tagName() == "accidental-mark")
                               domNotImplemented(eee);
                         else if (eee.tagName() == "delayed-turn")
-                              domNotImplemented(eee);
+                              // TODO: actually this should be offset a bit to the right
+                              addArticulationToChord(cr, TurnSym);
                         else
                               domError(eee);
                         }
@@ -3514,10 +3520,11 @@ void MusicXml::xmlNotations(Note* note, ChordRest* cr, int trk, int ticks, QDomE
                   printf("unknown wavy-line type '%s'\n", wavyLineType.toLatin1().data());
             }
 
-      if (breathmark) {
+      if (breath >= 0) {
             Breath* b = new Breath(score);
             b->setTick(tick);
             b->setTrack(track);
+            b->setSubtype(breath);
             Segment* seg = measure->getSegment(SegBreath, tick);
             seg->add(b);
             }
