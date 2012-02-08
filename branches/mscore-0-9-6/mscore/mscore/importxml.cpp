@@ -3172,6 +3172,49 @@ static void addTextToNote(QString txt, int subtype, int style, Score* score, Not
       }
 
 //---------------------------------------------------------
+//   addFermata
+//---------------------------------------------------------
+
+/**
+ Add a MusicXML fermata.
+ Note: MusicXML common.mod: "The fermata type is upright if not specified."
+ */
+
+static void addFermata(ChordRest* cr, const QString type, const int articSymUp, const int articSymInv)
+      {
+      if (type == "upright" || type == "")
+            addArticulationToChord(cr, articSymUp);
+      else if (type == "inverted")
+            addArticulationToChord(cr, articSymInv);
+      else
+            printf("unknown fermata type '%s'\n", qPrintable(type));
+      }
+
+//---------------------------------------------------------
+//   xmlFermata
+//---------------------------------------------------------
+
+/**
+ Read a MusicXML fermata.
+ Note: MusicXML common.mod: "An empty fermata element represents a normal fermata."
+ */
+
+static void xmlFermata(ChordRest* cr, QDomElement e)
+      {
+      QString fermata     = e.text();
+      QString fermataType = e.attribute(QString("type"));
+
+      if (fermata == "normal" || fermata == "")
+            addFermata(cr, fermataType, UfermataSym, DfermataSym);
+      else if (fermata == "angled")
+            addFermata(cr, fermataType, UshortfermataSym, DshortfermataSym);
+      else if (fermata == "square")
+            addFermata(cr, fermataType, UlongfermataSym, DlongfermataSym);
+      else
+            printf("unknown fermata '%s'\n", qPrintable(fermata));
+      }
+
+//---------------------------------------------------------
 //   xmlNotations
 //---------------------------------------------------------
 
@@ -3319,15 +3362,8 @@ void MusicXml::xmlNotations(Note* note, ChordRest* cr, int trk, int ticks, QDomE
                               domError(eee);
                         }
                   }
-            else if (ee.tagName() == "fermata") {
-                  QString fermataType = ee.attribute(QString("type"));
-                  if (fermataType == "upright")
-                        addArticulationToChord(cr, UfermataSym);
-                  else if (fermataType == "inverted")
-                        addArticulationToChord(cr, DfermataSym);
-                  else
-                        printf("unknown fermata type '%s'\n", qPrintable(fermataType));
-                  }
+            else if (ee.tagName() == "fermata")
+                  xmlFermata(cr, ee);
             else if (ee.tagName() == "ornaments") {
                   bool trillMark = false;
                   // <trill-mark placement="above"/>
