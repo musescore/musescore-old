@@ -4,6 +4,7 @@
         (la))
       - fix #14819: import error: 01f-Pitches-ParenthesizedMicrotoneAccidentals.xml imports without microtone accidentals
       - fix #14818: import error: 01e-Pitches-ParenthesizedAccidentals.xml imports without double flat in parentheses
+      - fix #14832: import error: 41d-StaffGroups-Nested.xml: part-group symbol=line not supported
 05.feb (lv)
       - fix #14701: [MusicXML Export] [1.2] Key signature is not exported from a mscz saved with 1.1
       - fix #14244: [MusicXML] [1.2] Export of trill line fails
