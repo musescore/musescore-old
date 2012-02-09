@@ -272,9 +272,7 @@ TextLine::TextLine(Score* s)
       _beginSymbol       = -1;
       _continueSymbol    = -1;
       _endSymbol         = -1;
-
-      setLen(spatium() * 7);   // for use in palettes
-      _sp  = 0;
+      _sp                = 0;
       }
 
 TextLine::TextLine(const TextLine& e)

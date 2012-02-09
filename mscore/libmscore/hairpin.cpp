@@ -111,7 +111,6 @@ Hairpin::Hairpin(Score* s)
    : SLine(s)
       {
       _subtype    = 0;
-      setLen(spatium() * 7);   // for use in palettes
       _veloChange = 10;
       _dynType    = DYNAMIC_PART;
       setYoff(s->styleS(ST_hairpinY).val());

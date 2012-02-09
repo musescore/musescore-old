@@ -621,20 +621,25 @@ Palette* MuseScore::newLinesPalette()
       sp->setGrid(82, 23);
       sp->setDrawGrid(true);
 
+      qreal w = gscore->spatium() * 7;
       Slur* slur = new Slur(gscore);
+      slur->setLen(w);
       slur->setId(0);
       sp->append(slur, qApp->translate("lines", "Slur"));
 
       Hairpin* gabel0 = new Hairpin(gscore);
       gabel0->setSubtype(0);
+      gabel0->setLen(w);
       sp->append(gabel0, qApp->translate("lines", "Crescendo"));
 
       Hairpin* gabel1 = new Hairpin(gscore);
       gabel1->setSubtype(1);
+      gabel1->setLen(w);
       sp->append(gabel1, qApp->translate("lines", "Diminuendo"));
 
       Volta* volta = new Volta(gscore);
       volta->setSubtype(VOLTA_CLOSED);
+      volta->setLen(w);
       volta->setText("1.");
       QList<int> il;
       il.append(1);
@@ -643,6 +648,7 @@ Palette* MuseScore::newLinesPalette()
 
       volta = new Volta(gscore);
       volta->setSubtype(VOLTA_CLOSED);
+      volta->setLen(w);
       volta->setText("2.");
       il.clear();
       il.append(2);
@@ -651,6 +657,7 @@ Palette* MuseScore::newLinesPalette()
 
       volta = new Volta(gscore);
       volta->setSubtype(VOLTA_CLOSED);
+      volta->setLen(w);
       volta->setText("3.");
       il.clear();
       il.append(3);
@@ -659,6 +666,7 @@ Palette* MuseScore::newLinesPalette()
 
       volta = new Volta(gscore);
       volta->setSubtype(VOLTA_OPEN);
+      volta->setLen(w);
       volta->setText("2.");
       il.clear();
       il.append(2);
@@ -667,31 +675,35 @@ Palette* MuseScore::newLinesPalette()
 
       Ottava* ottava = new Ottava(gscore);
       ottava->setSubtype(0);
+      ottava->setLen(w);
       sp->append(ottava, qApp->translate("lines", "8va"));
 
       ottava = new Ottava(gscore);
       ottava->setSubtype(1);
+      ottava->setLen(w);
       sp->append(ottava, qApp->translate("lines", "15ma"));
 
       ottava = new Ottava(gscore);
       ottava->setSubtype(2);
+      ottava->setLen(w);
       sp->append(ottava, qApp->translate("lines", "8vb"));
 
       ottava = new Ottava(gscore);
       ottava->setSubtype(3);
+      ottava->setLen(w);
       sp->append(ottava, qApp->translate("lines", "15mb"));
 
       Pedal* pedal = new Pedal(gscore);
-      //pedal->setLen(l);
+      pedal->setLen(w);
       sp->append(pedal, qApp->translate("lines", "Pedal"));
 
       pedal = new Pedal(gscore);
-      //pedal->setLen(l);
+      pedal->setLen(w);
       pedal->setEndHookType(HOOK_45);
       sp->append(pedal, qApp->translate("lines", "Pedal"));
 
       pedal = new Pedal(gscore);
-      //pedal->setLen(l);
+      pedal->setLen(w);
       pedal->setBeginSymbol(-1);
       pedal->setBeginHook(true);
       pedal->setBeginHookType(HOOK_45);
@@ -699,33 +711,39 @@ Palette* MuseScore::newLinesPalette()
       sp->append(pedal, qApp->translate("lines", "Pedal"));
 
       pedal = new Pedal(gscore);
-      //pedal->setLen(l);
+      pedal->setLen(w);
       pedal->setBeginSymbol(-1);
       pedal->setBeginHook(true);
       pedal->setBeginHookType(HOOK_45);
       sp->append(pedal, qApp->translate("lines", "Pedal"));
 
       Trill* trill = new Trill(gscore);
+      trill->setLen(w);
       sp->append(trill, qApp->translate("lines", "Trill line"));
 
       trill = new Trill(gscore);
       trill->setSubtype("upprall");
+      trill->setLen(w);
       sp->append(trill, qApp->translate("lines", "Upprall line"));
 
       trill = new Trill(gscore);
       trill->setSubtype("downprall");
+      trill->setLen(w);
       sp->append(trill, qApp->translate("lines", "Downprall line"));
 
       trill = new Trill(gscore);
       trill->setSubtype("prallprall");
+      trill->setLen(w);
       sp->append(trill, qApp->translate("lines", "Prallprall line"));
 
       TextLine* textLine = new TextLine(gscore);
+      textLine->setLen(w);
       textLine->setBeginText("VII");
       textLine->setEndHook(true);
       sp->append(textLine, qApp->translate("lines", "Text line"));
 
       TextLine* line = new TextLine(gscore);
+      line->setLen(w);
       line->setDiagonal(true);
       sp->append(line, qApp->translate("lines", "Line"));
       return sp;
