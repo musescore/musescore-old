@@ -455,8 +455,8 @@ void MusicXml::import(Score* s)
       pedal = 0;
       tremStart = 0;
 
-      // TODO only if multi-measure rests used ???
-      score->style().set(ST_createMultiMeasureRests, true);
+      // TODO enable only if multi-measure rests used
+      // score->style().set(ST_createMultiMeasureRests, true);
 
       for (QDomElement e = doc->documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "score-partwise")
@@ -1628,7 +1628,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                                           }
                                     iEndingNumbers.append(iEndingNumber);
                                     }
-                              
+
                               if (unsupported)
                                     printf("ImportXml: warning: unsupported ending number <%s>\n",
                                            endingNumber.toLatin1().data());
