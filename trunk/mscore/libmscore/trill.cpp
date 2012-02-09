@@ -142,7 +142,6 @@ Trill::Trill(Score* s)
   : SLine(s)
       {
       _subtype = TRILL_LINE;
-      setLen(spatium() * 7);   // for use in palettes
       setYoff(-1.0);           // default position
       }
 
