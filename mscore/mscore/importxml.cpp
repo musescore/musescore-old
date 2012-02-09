@@ -1599,10 +1599,10 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                               printf("unsupported bar type <%s>\n", barStyle.toLatin1().data());
                         barLine->setTrack(staff * VOICES);
                         if (barLine->subtype() == START_REPEAT) {
-                              measure->setRepeatFlags(RepeatStart);
+                              measure->setRepeatFlags(measure->repeatFlags() | RepeatStart);
                               }
                         else if (barLine->subtype() == END_REPEAT) {
-                              measure->setRepeatFlags(RepeatEnd);
+                              measure->setRepeatFlags(measure->repeatFlags() | RepeatEnd);
                               }
                         else {
                               if (loc == "right")
