@@ -1,5 +1,6 @@
 09.feb (lv)
       - fix #14828: [MusicXML import] [1.2] import error: 46a-Barlines.xml: unexpected multi-measure rests
+      - fix #14834: [MusicXML import] [1.2] import error: 45e-Repeats-Nested-Alternatives.xml: repeat start missing
 08.feb (lv)
       - fix #14827: [MusicXML import] [1.2] import error: 32a-Notations.xml: missing notations
       - fix #14862: [MusicXML] [1.2] Export notations imported by issue 14827
