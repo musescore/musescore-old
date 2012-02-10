@@ -511,10 +511,11 @@ QList<Note*> Selection::noteList(int selTrack) const
       }
 
 //---------------------------------------------------------
-//   isInMiddleOfTuplet
+//   checkStart
+//    return true if start range crosses tuplet
 //---------------------------------------------------------
 
-static bool isInMiddleOfTuplet(Element* e)
+static bool checkStart(Element* e)
       {
       if (e == 0 || !e->isChordRest())
             return false;
@@ -525,6 +526,25 @@ static bool isInMiddleOfTuplet(Element* e)
       while (tuplet) {
             if (tuplet->elements().front() == e)
                   return false;
+            tuplet = tuplet->tuplet();
+            }
+      return true;
+      }
+
+//---------------------------------------------------------
+//   checkEnd
+//    return true if end range crosses tuplet
+//---------------------------------------------------------
+
+static bool checkEnd(Element* e)
+      {
+      if (e == 0 || !e->isChordRest())
+            return false;
+      ChordRest* cr = static_cast<ChordRest*>(e);
+      if (!cr->tuplet())
+            return false;
+      Tuplet* tuplet = cr->tuplet();
+      while (tuplet) {
             if (tuplet->elements().back() == e)
                   return false;
             tuplet = tuplet->tuplet();
@@ -543,9 +563,9 @@ bool Selection::canCopy() const
             return true;
 
       for (int staffIdx = _staffStart; staffIdx != _staffEnd; ++staffIdx) {
-            if (isInMiddleOfTuplet(_startSegment->element(staffIdx)))
+            if (checkStart(_startSegment->element(staffIdx)))
                   return false;
-            if (_endSegment && isInMiddleOfTuplet(_endSegment->element(staffIdx)))
+            if (_endSegment && checkEnd(_endSegment->element(staffIdx)))
                   return false;
             }
       return true;
