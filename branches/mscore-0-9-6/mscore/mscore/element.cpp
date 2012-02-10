@@ -1128,10 +1128,13 @@ void RubberBand::draw(QPainter& p) const
 
 QByteArray Element::mimeData(const QPointF& dragOffset) const
       {
-      QBuffer buffer;
+    const Element *e = this;
+    QBuffer buffer;
       buffer.open(QIODevice::WriteOnly);
       Xml xml(&buffer);
       xml.stag("Element");
+      if (e->type() == NOTE)
+            xml.fTag("duration", static_cast<const Note*>(e)->chord()->fraction());
       if (!dragOffset.isNull())
             xml.tag("dragOffset", dragOffset);
       write(xml);
@@ -1145,13 +1148,15 @@ QByteArray Element::mimeData(const QPointF& dragOffset) const
 //    return -1 if no valid type found
 //---------------------------------------------------------
 
-ElementType Element::readType(QDomElement& e, QPointF* dragOffset)
+ElementType Element::readType(QDomElement& e, QPointF* dragOffset, Fraction * duration)
       {
       ElementType type = INVALID;
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "dragOffset")
                   *dragOffset = readPoint(e);
+            else if (e.tagName() == "duration")
+                  *duration = readFraction(e);
             else if ((type = name2type(e.tagName())) == INVALID) {
                   domError(e);
                   break;

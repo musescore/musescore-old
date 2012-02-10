@@ -512,7 +512,7 @@ void ChordRest::removeSlurBack(Slur* s)
 //   drop
 //---------------------------------------------------------
 
-Element* ChordRest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Element* e)
+Element* ChordRest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Element* e, Fraction duration)
       {
       Measure* m  = measure();
       switch (e->type()) {
@@ -581,7 +581,7 @@ Element* ChordRest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, 
                   {
                   Note* note = static_cast<Note*>(e);
                   score()->setNoteRest(this, track(), note->pitch(),
-                     Fraction(1, 4), note->headGroup(), AUTO);
+                     duration, note->headGroup(), AUTO);
                   delete e;
                   }
                   break;
