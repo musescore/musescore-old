@@ -1116,7 +1116,7 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   break;
 
             default:
-                  return ch->drop(view, p1, p2, e);
+          return ch->drop(view, p1, p2, e, Fraction (1,4));
             }
       return 0;
       }

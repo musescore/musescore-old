@@ -60,7 +60,7 @@ MagBox::MagBox(QWidget* parent)
             if (i == startMag)
                   setCurrentIndex(i);
             }
-      addItem(QString("%1%").arg(freeMag * 100, MAG_FREE));
+      addItem(QString("%1%").arg(freeMag * 100), MAG_FREE);
       connect(this, SIGNAL(currentIndexChanged(int)), SLOT(indexChanged(int)));
       }
 

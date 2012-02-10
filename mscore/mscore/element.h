@@ -22,6 +22,7 @@
 #define __ELEMENT_H__
 
 #include "xml.h"
+#include "al/fraction.h"
 #include "globals.h"
 
 /**
@@ -282,7 +283,7 @@ class Element {
       QColor color() const            { return _color; }
       QColor curColor() const;
       void setColor(const QColor& c)  { _color = c;    }
-      static ElementType readType(QDomElement& node, QPointF*);
+      static ElementType readType(QDomElement& node, QPointF*, Fraction* duration);
 
       virtual QByteArray mimeData(const QPointF&) const;
 /**
@@ -301,6 +302,7 @@ class Element {
  Reimplemented by elements that accept drops.
 */
       virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*) { return 0;}
+      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*, Fraction) { return 0;}
 
 /**
  Return a name for a \a subtype. Used for outputting xml data.
