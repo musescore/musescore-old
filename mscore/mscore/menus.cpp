@@ -239,19 +239,25 @@ void MuseScore::showPalette(bool visible)
             sp->setMag(.8);
             sp->setGrid(84, 23);
 
+            double l = gscore->spatium() * 7;
+
             Slur* slur = new Slur(gscore);
+            slur->setLen(l);
             slur->setId(0);
             sp->append(slur, tr("Slur"));
 
-            Hairpin* gabel0 = new Hairpin(gscore);
-            gabel0->setSubtype(0);
-            sp->append(gabel0, tr("Crescendo"));
+            Hairpin* hairpin0 = new Hairpin(gscore);
+            hairpin0->setLen(l);
+            hairpin0->setSubtype(0);
+            sp->append(hairpin0, tr("Crescendo"));
 
-            Hairpin* gabel1 = new Hairpin(gscore);
-            gabel1->setSubtype(1);
-            sp->append(gabel1, tr("Diminuendo"));
+            Hairpin* hairpin1 = new Hairpin(gscore);
+            hairpin1->setLen(l);
+            hairpin1->setSubtype(1);
+            sp->append(hairpin1, tr("Diminuendo"));
 
             Volta* volta = new Volta(gscore);
+            volta->setLen(l);
             volta->setSubtype(Volta::VOLTA_CLOSED);
             volta->setText("1.");
             QList<int> il;
@@ -260,6 +266,7 @@ void MuseScore::showPalette(bool visible)
             sp->append(volta, tr("Prima volta"));
 
             volta = new Volta(gscore);
+            volta->setLen(l);
             volta->setSubtype(Volta::VOLTA_CLOSED);
             volta->setText("2.");
             il.clear();
@@ -268,6 +275,7 @@ void MuseScore::showPalette(bool visible)
             sp->append(volta, tr("Seconda volta"));
 
             volta = new Volta(gscore);
+            volta->setLen(l);
             volta->setSubtype(Volta::VOLTA_CLOSED);
             volta->setText("3.");
             il.clear();
@@ -276,6 +284,7 @@ void MuseScore::showPalette(bool visible)
             sp->append(volta, tr("Terza volta"));
 
             volta = new Volta(gscore);
+            volta->setLen(l);
             volta->setSubtype(Volta::VOLTA_OPEN);
             volta->setText("2.");
             il.clear();
@@ -284,34 +293,42 @@ void MuseScore::showPalette(bool visible)
             sp->append(volta, tr("Seconda volta 2"));
 
             Ottava* ottava = new Ottava(gscore);
+            ottava->setLen(l);
             ottava->setSubtype(0);
             sp->append(ottava, tr("8va"));
 
             ottava = new Ottava(gscore);
+            ottava->setLen(l);
             ottava->setSubtype(1);
             sp->append(ottava, tr("15ma"));
 
             ottava = new Ottava(gscore);
+            ottava->setLen(l);
             ottava->setSubtype(2);
             sp->append(ottava, tr("8vb"));
 
             ottava = new Ottava(gscore);
+            ottava->setLen(l);
             ottava->setSubtype(3);
             sp->append(ottava, tr("15mb"));
 
             Pedal* pedal = new Pedal(gscore);
+            pedal->setLen(l);
             sp->append(pedal, tr("pedal"));
 
             Trill* trill = new Trill(gscore);
+            trill->setLen(l);
             sp->append(trill, tr("Trill line"));
 
             TextLine* textLine = new TextLine(gscore);
+            textLine->setLen(l);
             textLine->setBeginText("VII");
             textLine->setEndHook(true);
             textLine->setEndHookHeight(Spatium(1.5));
             sp->append(textLine, tr("Text line"));
 
             TextLine* line = new TextLine(gscore);
+            line->setLen(l);
             line->setDiagonal(true);
             sp->append(line, tr("Line"));
 

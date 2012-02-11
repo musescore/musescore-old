@@ -61,7 +61,7 @@ QRectF TrillSegment::bbox() const
 Trill::Trill(Score* s)
   : SLine(s)
       {
-      setLen(spatium() * 7);   // for use in palettes
+      
       }
 
 //---------------------------------------------------------
