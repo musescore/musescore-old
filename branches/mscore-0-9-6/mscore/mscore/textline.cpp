@@ -27,6 +27,7 @@
 #include "preferences.h"
 #include "sym.h"
 #include "text.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   TextLineSegment
@@ -268,8 +269,6 @@ TextLine::TextLine(Score* s)
       _beginSymbol       = -1;
       _continueSymbol    = -1;
       _endSymbol         = -1;
-
-      setLen(spatium() * 7);   // for use in palettes
       }
 
 TextLine::TextLine(const TextLine& e)
@@ -466,8 +465,18 @@ bool TextLine::readProperties(QDomElement e)
 
 int TextLine::resolveSymCompatibility(int i)
       {
-      if(score()->programVersion() < 10100)
-          return i + 5;
+      if(score()->programVersion() < 10100 && score()->programVersion() != 0) {
+            //ugly fix : be sure we are not dragging a line, if yes don't resolve compatibility
+            bool resolve = false;
+            ScoreView* scoreView = mscore->currentScoreView();
+            if(scoreView)
+                  resolve = (scoreView->getDragElement() != this);
+            else
+                  resolve = true;
+            
+            if (resolve)
+                  return i + 5;
+            }
       return i;  
       }
 

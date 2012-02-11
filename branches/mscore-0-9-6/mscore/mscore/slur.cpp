@@ -863,7 +863,6 @@ void Slur::layout()
             // tick and tick2 has no meaning so no layout is
             // possible and needed
             //
-            setLen(_spatium * 7);
             SlurSegment* s;
             if (segments.isEmpty()) {
                   s = new SlurSegment(score());
