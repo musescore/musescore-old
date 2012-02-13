@@ -1,3 +1,15 @@
+13.2 (ws)
+      - class ImagePath() replaced by ImageStore()
+      - add "name" to palette cell properties dialog
+      - fix beaming for groups of grace notes
+      - show bounding box of lost/unloadable images
+      - fix regression in ChordLine() and Tremolo() class: subtype was not saved
+      - add .gif to supported image types
+      - switch to qt internal QZipReader QZipWriter
+      - fix crash in load drumset dialog
+      - experimental corner label for top right corner
+      - added Load/Store operations for single palettes
+      - fixed moving image to palette; images are now proper saved in the profiles
 10.02 (mw)
       - corrected wrongly scaled vert. offsets for tablature symbols.
 8.2 (la)

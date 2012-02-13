@@ -591,7 +591,11 @@ QString symToHtml(const Sym& s, int leftMargin, const TextStyle* ts, qreal _spat
             size = ts->font(_spatium).pointSizeF();
             }
       else {
+#ifdef USE_GLYPHS
             size = s.font().pointSizeF();
+#else
+            size = s.font().pixelSize();
+#endif
             }
 
       QString family = s.font().family();
@@ -617,7 +621,11 @@ QString symToHtml(const Sym& s, int leftMargin, const TextStyle* ts, qreal _spat
 QString symToHtml(const Sym& s1, const Sym& s2, int leftMargin)
       {
       QFont f        = s1.font();
-      qreal size     = s1.font().pointSizeF();
+#ifdef USE_GLYPHS
+      qreal size = s1.font().pointSizeF();
+#else
+      qreal size = s1.font().pixelSize();
+#endif
       QString family = f.family();
 
       return QString(

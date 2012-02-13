@@ -38,6 +38,7 @@
 #include "omr/omrpage.h"
 #include "sig.h"
 #include "undo.h"
+#include "imageStore.h"
 
 //---------------------------------------------------------
 //   write
@@ -387,16 +388,11 @@ void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool onlySelection
       xml.stag("rootfiles");
       xml.stag(QString("rootfile full-path=\"%1\"").arg(Xml::xmlString(fn)));
       xml.etag();
-      int idx = 1;
-      foreach(ImagePath* ip, imagePathList) {
-            if (!ip->isUsed())
+      foreach(ImageStoreItem* ip, imageStore) {
+            if (!ip->isUsed(this))
                   continue;
-            QString srcPath = ip->path();
-            QFileInfo fi(srcPath);
-            QString suffix = fi.suffix();
-            QString dstPath = QString("Pictures/pic%1.%2").arg(idx).arg(suffix);
-            xml.tag("file", dstPath);
-            ++idx;
+            QString path = QString("Pictures/") + ip->hashName();
+            xml.tag("file", path);
             }
 
       xml.etag();
@@ -407,32 +403,14 @@ void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool onlySelection
                + uz.errorString());
 
       // save images
-      idx = 1;
-      foreach(ImagePath* ip, imagePathList) {
-            if (!ip->isUsed())
+      foreach(ImageStoreItem* ip, imageStore) {
+            if (!ip->isUsed(this))
                   continue;
-            QString srcPath = ip->path();
-            QFileInfo fi(srcPath);
-            QString suffix = fi.suffix();
-            QString dstPath = QString("Pictures/pic%1.%2").arg(idx).arg(suffix);
-            QBuffer cbuf;
-            QByteArray ba;
-            if (!ip->loaded()) {
-                  QFile inFile(srcPath);
-                  if (!inFile.open(QIODevice::ReadOnly))
-                        throw(QString("cannot open picture file"));
-                  ip->buffer().setData(inFile.readAll());
-                  inFile.close();
-                  ip->setLoaded(true);
-                  }
-            cbuf.setBuffer(&(ip->buffer().buffer()));
-            if (!cbuf.open(QIODevice::ReadOnly))
-                  throw(QString("cannot open buffer cbuf"));
-            if (!uz.createEntry(dstPath, cbuf, dt, false, false, 0))
-                  throw(QString("Cannot add <%1> to zipfile as <%1>\n").arg(srcPath).arg(dstPath));
+            QString path = QString("Pictures/") + ip->hashName();
+            cbuf.setBuffer(&ip->buffer());
+            cbuf.open(QIODevice::ReadOnly);
+            uz.createEntry(path, cbuf, dt, false, false, 0);
             cbuf.close();
-            ip->setPath(dstPath);   // image now has local path
-            ++idx;
             }
 #ifdef OMR
       //
@@ -593,6 +571,7 @@ bool Score::loadCompressedMsc(QString name)
 
       // extract first rootfile
       QString rootfile = "";
+      QList<QString> images;
       for (QDomElement e = container.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() != "container") {
                   domError(e);
@@ -611,10 +590,8 @@ bool Score::loadCompressedMsc(QString name)
                               if (rootfile.isEmpty())
                                     rootfile = eee.attribute(QString("full-path"));
                               }
-                        else if (tag == "file") {
-                              ImagePath* ip = new ImagePath(val);
-                              imagePathList.append(ip);
-                              }
+                        else if (tag == "file")
+                              images.append(val);
                         else
                               domError(eee);
                         }
@@ -623,13 +600,13 @@ bool Score::loadCompressedMsc(QString name)
       //
       // load images
       //
-      foreach(ImagePath* ip, imagePathList) {
-            QBuffer& dbuf = ip->buffer();
+      foreach(const QString& s, images) {
+            QBuffer dbuf;
             dbuf.open(QIODevice::WriteOnly);
-            if (!uz.extractFile(ip->path(), &dbuf))
-                  qDebug("Cannot read <%s> from zipfile\n", qPrintable(ip->path()));
+            if (!uz.extractFile(s, &dbuf))
+                  qDebug("Cannot read <%s> from zipfile\n", qPrintable(s));
             else
-                  ip->setLoaded(true);
+                  imageStore.add(s, dbuf.data());
             }
       if (rootfile.isEmpty()) {
             qDebug("can't find rootfile in: %s\n", qPrintable(name));
@@ -1317,6 +1294,7 @@ QByteArray Score::readCompressedToBuffer()
 
       // extract first rootfile
       QString rootfile = "";
+      QList<QString> images;
       for (QDomElement e = container.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() != "container") {
                   domError(e);
@@ -1335,10 +1313,8 @@ QByteArray Score::readCompressedToBuffer()
                               if (rootfile.isEmpty())
                                     rootfile = eee.attribute(QString("full-path"));
                               }
-                        else if (tag == "file") {
-                              ImagePath* ip = new ImagePath(val);
-                              imagePathList.append(ip);
-                              }
+                        else if (tag == "file")
+                              images.append(val);
                         else
                               domError(eee);
                         }
@@ -1347,13 +1323,13 @@ QByteArray Score::readCompressedToBuffer()
       //
       // load images
       //
-      foreach(ImagePath* ip, imagePathList) {
-            QBuffer& dbuf = ip->buffer();
+      foreach(const QString& s, images) {
+            QBuffer dbuf;
             dbuf.open(QIODevice::WriteOnly);
-            if (!uz.extractFile(ip->path(), &dbuf))
-                  qDebug("Cannot read <%s> from zipfile\n", qPrintable(ip->path()));
+            if (!uz.extractFile(s, &dbuf))
+                  qDebug("Cannot read <%s> from zipfile\n", qPrintable(s));
             else
-                  ip->setLoaded(true);
+                  imageStore.add(s, dbuf.data());
             }
 
       if (rootfile.isEmpty()) {

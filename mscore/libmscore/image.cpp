@@ -16,6 +16,7 @@
 #include "score.h"
 #include "undo.h"
 #include "mscore.h"
+#include "imageStore.h"
 
 //---------------------------------------------------------
 //   Image
@@ -24,45 +25,68 @@
 Image::Image(Score* s)
    : BSymbol(s)
       {
-      _ip              = 0;
+      _storeItem       = 0;
       _dirty           = false;
       _lockAspectRatio = true;
       _autoScale       = false;
       setZ(IMAGE * 100);
       }
 
-//---------------------------------------------------------
-//   reference
-//---------------------------------------------------------
-
-void Image::reference()
+Image::Image(const Image& img)
+   : BSymbol(img)
       {
-      _ip->reference();
+      buffer           = img.buffer;
+      sz               = img.sz;
+      _lockAspectRatio = img._lockAspectRatio;
+      _autoScale       = img._autoScale;
+      _dirty           = img._dirty;
+      _storeItem       = img._storeItem;
+      _storeItem->reference(this);
       }
 
 //---------------------------------------------------------
-//   dereference
+//   Image
 //---------------------------------------------------------
 
-void Image::dereference()
+Image::~Image()
       {
-      _ip->dereference();
+      if (_storeItem)
+            _storeItem->dereference(this);
       }
 
 //---------------------------------------------------------
 //   draw
 //---------------------------------------------------------
 
-void Image::draw(QPainter* painter) const
+void Image::draw(QPainter* painter, QSize size) const
       {
-      painter->drawPixmap(QPointF(0.0, 0.0), buffer);
+      if (buffer.isNull()) {
+            painter->setBrush(Qt::NoBrush);
+            painter->setPen(Qt::black);
+            QPointF p[6];
+            qreal w = size.width();
+            qreal h = size.height();
+            p[0] = QPointF(0.0, 0.0);
+            p[1] = QPointF(w,   0.0);
+            p[2] = QPointF(w,   h);
+            p[3] = QPointF(0.0, 0.0);
+            p[4] = QPointF(0.0, h);
+            p[5] = QPointF(w,  0.0);
+            painter->drawPolyline(p, 6);
+            p[0] = QPointF(0.0, h);
+            p[1] = QPointF(w, h);
+            painter->drawPolyline(p, 2);
+            }
+      else
+            painter->drawPixmap(QPointF(0.0, 0.0), buffer);
       if (selected() && !(score() && score()->printing())) {
             painter->setBrush(Qt::NoBrush);
             painter->setPen(Qt::blue);
 
             QPointF p[5];
-            qreal w = buffer.size().width();
-            qreal h = buffer.size().height();
+            qreal w = size.width();
+            qreal h = size.height();
+
             p[0] = QPointF(0.0, 0.0);
             p[1] = QPointF(w,   0.0);
             p[2] = QPointF(w,   h);
@@ -80,13 +104,13 @@ void Image::write(Xml& xml) const
       {
       xml.stag("Image");
       Element::writeProperties(xml);
-      xml.tag("path", path());
-      if (!_autoScale)
-            xml.tag("size", sz / DPMM);
+      xml.tag("path", _storeItem->hashName());
       if (!_lockAspectRatio)
             xml.tag("lockAspectRatio", _lockAspectRatio);
       if (_autoScale)
             xml.tag("autoScale", _autoScale);
+      else
+            xml.tag("size", sz / DPMM);
       xml.etag();
       }
 
@@ -98,8 +122,11 @@ void Image::read(const QDomElement& de)
       {
       for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
-            if (tag == "path")
-                  setPath(e.text());
+            if (tag == "path") {
+                  _storeItem = imageStore.getImage(e.text());
+                  if (_storeItem)
+                        _storeItem->reference(this);
+                  }
             else if (tag == "size") {
                   sz = readSize(e);
                   if (score()->mscVersion() >= 109)
@@ -115,21 +142,21 @@ void Image::read(const QDomElement& de)
       }
 
 //---------------------------------------------------------
-//   setPath
+//   load
+//    load image from file and put into ImageStore
+//    return true on success
 //---------------------------------------------------------
 
-void Image::setPath(const QString& ss)
+bool Image::load(const QString& ss)
       {
-      _ip = score()->addImage(ss);
-      }
-
-//---------------------------------------------------------
-//   path
-//---------------------------------------------------------
-
-QString Image::path() const
-      {
-      return _ip->path();
+      QFile f(ss);
+      if (!f.open(QIODevice::ReadOnly))
+            return false;
+      QByteArray ba = f.readAll();
+      f.close();
+      _storeItem = imageStore.add(ss, ba);
+      _storeItem->reference(this);
+      return true;
       }
 
 //---------------------------------------------------------
@@ -235,27 +262,25 @@ void SvgImage::draw(QPainter* painter) const
                   _dirty = false;
                   }
             }
-      Image::draw(painter);
+      Image::draw(painter, s);
       painter->restore();
       }
 
 //---------------------------------------------------------
-//   setPath
+//   layout
 //---------------------------------------------------------
 
-void SvgImage::setPath(const QString& s)
+void SvgImage::layout()
       {
-      Image::setPath(s);
-      if (doc == 0)
-            doc = new QSvgRenderer;
-      if (_ip->loaded())
-            doc->load(_ip->buffer().buffer());
-      else
-            doc->load(path());
-      if (doc->isValid()) {
-            sz = doc->defaultSize();
-            _dirty = true;
+      if (!doc->isValid()) {
+            doc->load(_storeItem->buffer());
+            if (doc->isValid()) {
+                  if (sz.isNull())
+                        sz = doc->defaultSize();
+                  _dirty = true;
+                  }
             }
+      Image::layout();
       }
 
 //---------------------------------------------------------
@@ -297,30 +322,30 @@ void RasterImage::draw(QPainter* painter) const
             QSize s = QSizeF(sz.width() * t.m11(), sz.height() * t.m22()).toSize();
             t.setMatrix(1.0, t.m12(), t.m13(), t.m21(), 1.0, t.m23(), t.m31(), t.m32(), t.m33());
             painter->setWorldTransform(t);
-            if (buffer.size() != s || _dirty) {
+            if ((buffer.size() != s || _dirty) && !doc.isNull()) {
                   buffer = QPixmap::fromImage(doc.scaled(s, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
                   _dirty = false;
                   }
-            Image::draw(painter);
+            Image::draw(painter, s);
             }
       painter->restore();
       }
 
 //---------------------------------------------------------
-//   setPath
+//   layout
 //---------------------------------------------------------
 
-void RasterImage::setPath(const QString& s)
+void RasterImage::layout()
       {
-      Image::setPath(s);
-      if (_ip->loaded())
-            doc.loadFromData(_ip->buffer().buffer());
-      else
-            doc.load(path());
-      if (!doc.isNull()) {
-            sz = doc.size() * 0.4;
-            _dirty = true;
+      if (doc.isNull()) {
+            doc.loadFromData(_storeItem->buffer());
+            if (!doc.isNull()) {
+                  if (sz.isNull())
+                        sz = doc.size() * 0.4;
+                  _dirty = true;
+                  }
             }
+      Image::layout();
       }
 
 //---------------------------------------------------------

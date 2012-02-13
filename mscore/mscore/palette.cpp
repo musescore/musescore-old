@@ -33,6 +33,7 @@
 #include "libmscore/measure.h"
 #include "libmscore/icon.h"
 #include "libmscore/mscore.h"
+#include "libmscore/imageStore.h"
 
 //---------------------------------------------------------
 //   needsStaff
@@ -381,30 +382,15 @@ void Palette::leaveEvent(QEvent*)
 
 PaletteCell* Palette::append(Element* s, const QString& name, QString tag, qreal mag)
       {
-      s->layout();
       PaletteCell* cell = new PaletteCell;
-
       cells.append(cell);
-      cell->element   = s;
-      cell->name      = name;
-      cell->tag       = tag;
-      cell->drawStaff = needsStaff(s);
-      cell->xoffset   = 0;
-      cell->yoffset   = 0;
-      cell->mag       = mag;
-      cell->readOnly  = false;
-      update();
-      if (s && s->type() == ICON) {
-            Icon* icon = static_cast<Icon*>(s);
-            connect(getAction(icon->action()), SIGNAL(toggled(bool)), SLOT(actionToggled(bool)));
-            }
-      return cell;
+      return add(cells.size() - 1, s, name, tag, mag);
       }
 
 PaletteCell* Palette::append(int symIdx)
       {
       if (!symbols[0][symIdx].isValid())
-            0;
+            return 0;
       Symbol* s = new Symbol(gscore);
       s->setSym(symIdx);
       return append(s, qApp->translate("symbol", ::symbols[0][symIdx].name()));
@@ -414,10 +400,15 @@ PaletteCell* Palette::append(int symIdx)
 //   add
 //---------------------------------------------------------
 
-PaletteCell* Palette::add(int idx, Element* s, const QString& name, QString tag)
+PaletteCell* Palette::add(int idx, Element* s, const QString& name, QString tag, qreal mag)
       {
-      PaletteCell* cell = new PaletteCell;
+      if (s) {
+            s->setPos(0.0, 0.0);
+            s->setUserOff(QPointF());
+            s->setReadPos(QPointF());
+            }
 
+      PaletteCell* cell = new PaletteCell;
       if (idx < cells.size()) {
             delete cells[idx];
             }
@@ -432,7 +423,7 @@ PaletteCell* Palette::add(int idx, Element* s, const QString& name, QString tag)
       cell->drawStaff = needsStaff(s);
       cell->xoffset   = 0;
       cell->yoffset   = 0;
-      cell->mag       = 1.0;
+      cell->mag       = mag;
       cell->readOnly  = false;
       update();
       if (s && s->type() == ICON) {
@@ -521,12 +512,22 @@ void Palette::paintEvent(QPaintEvent* event)
             if (el == 0)
                   continue;
             bool drawStaff = cells[idx]->drawStaff;
-            if (el->type() != ICON) {
+            if (el->type() == ICON) {
+                  int x      = r.x();
+                  int y      = r.y();
+                  Icon* _icon = static_cast<Icon*>(el);
+                  QIcon icon = _icon->icon();
+                  static const int border = 2;
+                  int size   = (hhgrid < vgrid ? hhgrid : vgrid) - 2 * border;
+                  QPixmap pm(icon.pixmap(size, QIcon::Normal, QIcon::On));
+                  p.drawPixmap(x + (hhgrid - size) / 2, y + (vgrid - size) / 2, pm);
+                  }
+            else {
                   int row    = idx / columns();
                   int column = idx % columns();
 
                   el->layout();
-                  el->setPos(0.0, 0.0);   // HACK
+                  el->setPos(0.0, 0.0);
 
                   if (drawStaff) {
                         qreal y = r.y() + vgrid * .5 - dy + _yOffset;
@@ -559,7 +560,6 @@ void Palette::paintEvent(QPaintEvent* event)
                   sy += _yOffset / cellMag;
 
                   p.translate(QPointF(sx, sy));
-                  // el->setPos(sx, sy);
                   cells[idx]->x = sx;
                   cells[idx]->y = sy;
 
@@ -579,16 +579,6 @@ void Palette::paintEvent(QPaintEvent* event)
                   p.setPen(QPen(color));
                   el->scanElements(&p, paintPaletteElement);
                   p.restore();
-                  }
-            else {
-                  int x      = r.x();
-                  int y      = r.y();
-                  Icon* _icon = static_cast<Icon*>(el);
-                  QIcon icon = _icon->icon();
-                  static const int border = 2;
-                  int size   = (hhgrid < vgrid ? hhgrid : vgrid) - 2 * border;
-                  QPixmap pm(icon.pixmap(size, QIcon::Normal, QIcon::On));
-                  p.drawPixmap(x + (hhgrid - size) / 2, y + (vgrid - size) / 2, pm);
                   }
             }
       }
@@ -635,9 +625,8 @@ void Palette::dragEnterEvent(QDragEnterEvent* event)
             QList<QUrl>ul = event->mimeData()->urls();
             QUrl u = ul.front();
             if (debugMode) {
-                  qDebug("drag Url: %s\n", u.toString().toLatin1().data());
-                  qDebug("scheme <%s> path <%s>\n", u.scheme().toLatin1().data(),
-                     u.path().toLatin1().data());
+                  qDebug("dragEnterEvent: Url: %s\n", qPrintable(u.toString()));
+                  qDebug("   scheme <%s> path <%s>\n", qPrintable(u.scheme()), qPrintable(u.path()));
                   }
             if (u.scheme() == "file") {
                   QFileInfo fi(u.path());
@@ -719,10 +708,12 @@ void Palette::dropEvent(QDropEvent* event)
                   else
                         return;
                   qreal mag = PALETTE_SPATIUM * extraMag / gscore->spatium();
-                  s->setPath(u.toLocalFile());
+                  QString filePath(u.toLocalFile());
+                  s->load(filePath);
                   s->setSize(QSizeF(hhgrid / mag, hhgrid / mag));
                   e = s;
-                  name = s->path();
+                  QFileInfo f(filePath);
+                  name = f.baseName();
                   }
             }
       else if (data->hasFormat(mimeSymbolFormat)) {
@@ -757,11 +748,12 @@ void Palette::dropEvent(QDropEvent* event)
                   else
                         if (s.endsWith(".jpg")
                      || s.endsWith(".png")
+                     || s.endsWith(".gif")
                      || s.endsWith(".xpm")
                         )
                         image = new RasterImage(gscore);
                   else {
-                        qDebug("unknown image format <%s>\n", path.toLatin1().data());
+                        qDebug("Palette::dropEvent(): unknown image format <%s>", qPrintable(path));
                         }
                   if (image) {
                         image->read(el);
@@ -904,22 +896,179 @@ bool Palette::read(QFile* qf)
       }
 
 //---------------------------------------------------------
-//   write
+//   read
 //---------------------------------------------------------
 
-void Palette::write(const QString& path)
+void Palette::read(const QString& p)
       {
-      QFile f(path);
-      if (!f.open(QIODevice::WriteOnly)) {
-            qDebug("cannot write modified palettes\n");
+      QString path(p);
+      if (!path.endsWith(".pal"))
+            path += ".pal";
+
+      QZipReader f(path);
+      QByteArray ba = f.fileData("META-INF/container.xml");
+      QDomDocument doc;
+      int line, column;
+      QString err;
+      if (!doc.setContent(ba, false, &err, &line, &column)) {
+            QString error = QString("error reading palette container.xml at line %2 column %3: %4")
+               .arg(line).arg(column).arg(err);
+            QMessageBox::warning(0,
+                  QWidget::tr("MuseScore: Load Palette failed:"),
+                  error,
+                  QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
             return;
             }
-      Xml xml(&f);
+      // extract first rootfile
+      QString rootfile = "";
+      QList<QString> images;
+      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() != "container") {
+                  domError(e);
+                  continue;
+                  }
+            for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                  if (ee.tagName() != "rootfiles") {
+                        domError(ee);
+                        continue;
+                        }
+                  for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                        const QString& tag(eee.tagName());
+                        const QString& val(eee.text());
+
+                        if (tag == "rootfile") {
+                              if (rootfile.isEmpty())
+                                    rootfile = eee.attribute(QString("full-path"));
+                              }
+                        else if (tag == "file")
+                              images.append(val);
+                        else
+                              domError(eee);
+                        }
+                  }
+            }
+      //
+      // load images
+      //
+      foreach(const QString& s, images)
+            imageStore.add(s, f.fileData(s));
+
+      if (rootfile.isEmpty()) {
+            qDebug("can't find rootfile in: %s", qPrintable(path));
+            return;
+            }
+
+      ba = f.fileData(rootfile);
+      if (!doc.setContent(ba, false, &err, &line, &column)) {
+            QString error = QString("error reading profile %1 at line %2 column %3: %4")
+               .arg(path).arg(line).arg(column).arg(err);
+            QMessageBox::warning(0,
+                  QWidget::tr("MuseScore: Load Style failed:"),
+                  error,
+                  QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+            return;
+            }
+      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "museScore") {
+                  QString version = e.attribute(QString("version"));
+                  QStringList sl = version.split('.');
+                  int versionId = sl[0].toInt() * 100 + sl[1].toInt();
+                  gscore->setMscVersion(versionId);
+
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+                        if (tag == "Palette") {
+                              QString name = ee.attribute("name", "");
+                              setName(name);
+                              read(ee);
+                              }
+                        else
+                              domError(ee);
+                        }
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   writeFailed
+//---------------------------------------------------------
+
+static void writeFailed(const QString& path)
+      {
+      QString s = mscore->tr("Open Palette File\n") + path + mscore->tr("\nfailed: ");
+      QMessageBox::critical(mscore, mscore->tr("MuseScore: Writing Palette file"), s);
+      }
+
+//---------------------------------------------------------
+//   write
+//    write as compressed zip file and include
+//    images as needed
+//---------------------------------------------------------
+
+void Palette::write(const QString& p)
+      {
+      QSet<ImageStoreItem*> images;
+      int n = cells.size();
+      for (int i = 0; i < n; ++i) {
+            if (cells[i] == 0 || cells[i]->element == 0 || cells[i]->element->type() != IMAGE)
+                  continue;
+            images.insert(static_cast<Image*>(cells[i]->element)->storeItem());
+            }
+
+      QString path(p);
+      if (!path.endsWith(".pal"))
+            path += ".pal";
+
+      QZipWriter f(path);
+      // f.setCompressionPolicy(QZipWriter::NeverCompress);
+      f.setCreationPermissions(
+         QFile::ReadOwner | QFile::WriteOwner | QFile::ExeOwner
+         | QFile::ReadUser | QFile::WriteUser | QFile::ExeUser
+         | QFile::ReadGroup | QFile::WriteGroup | QFile::ExeGroup
+         | QFile::ReadOther | QFile::WriteOther | QFile::ExeOther);
+
+      if (f.status() != QZipWriter::NoError) {
+            writeFailed(path);
+            return;
+            }
+      QBuffer cbuf;
+      cbuf.open(QIODevice::ReadWrite);
+      Xml xml(&cbuf);
+      xml.header();
+      xml.stag("container");
+      xml.stag("rootfiles");
+      xml.stag(QString("rootfile full-path=\"%1\"").arg(Xml::xmlString("palette.xml")));
+      xml.etag();
+      foreach (ImageStoreItem* ip, images) {
+            QString path = QString("Pictures/") + ip->hashName();
+            xml.tag("file", path);
+            }
+      xml.etag();
+      xml.etag();
+      cbuf.seek(0);
+      f.addDirectory("META-INF");
+      f.addDirectory("Pictures");
+      f.addFile("META-INF/container.xml", cbuf.data());
+
+      // save images
+      foreach(ImageStoreItem* ip, images) {
+            QString path = QString("Pictures/") + ip->hashName();
+            f.addFile(path, ip->buffer());
+            }
+      {
+      QBuffer cbuf;
+      cbuf.open(QIODevice::ReadWrite);
+      Xml xml(&cbuf);
       xml.header();
       xml.stag("museScore version=\"" MSC_VERSION "\"");
       write(xml, name());
       xml.etag();
+      cbuf.close();
+      f.addFile("palette.xml", cbuf.data());
+      }
       f.close();
+      if (f.status() != QZipWriter::NoError)
+            writeFailed(path);
       }
 
 //---------------------------------------------------------
@@ -982,11 +1131,12 @@ void Palette::read(QDomElement e)
                                     else
                                           if (s.endsWith(".jpg")
                                        || s.endsWith(".png")
+                                       || s.endsWith(".gif")
                                        || s.endsWith(".xpm")
                                           )
                                           image = new RasterImage(gscore);
                                     else {
-                                          qDebug("unknown image format <%s>\n", path.toLatin1().data());
+                                          qDebug("Palette::read: unknown image format <%s>", path.toLatin1().data());
                                           }
                                     if (image) {
                                           image->read(ee);
@@ -1129,6 +1279,12 @@ PaletteBoxButton::PaletteBoxButton(PaletteScrollArea* sa, Palette* p, QWidget* p
       editAction = menu->addAction(tr("Enable Editing"));
       editAction->setCheckable(true);
       connect(editAction, SIGNAL(triggered(bool)), SLOT(enableEditing(bool)));
+
+      menu->addSeparator();
+      action = menu->addAction(tr("Save Palette"));
+      connect(action, SIGNAL(triggered()), SLOT(saveTriggered()));
+      action = menu->addAction(tr("Load Palette"));
+      connect(action, SIGNAL(triggered()), SLOT(loadTriggered()));
 
       menu->addSeparator();
       action = menu->addAction(tr("Delete Palette"));
@@ -1319,6 +1475,28 @@ void PaletteBox::addPalette(Palette* w)
       }
 
 //---------------------------------------------------------
+//   newPalette
+//---------------------------------------------------------
+
+Palette* PaletteBox::newPalette(const QString& name, int slot)
+      {
+      Palette* p = new Palette;
+      p->setReadOnly(false);
+      PaletteScrollArea* sa = new PaletteScrollArea(p);
+      PaletteBoxButton* b   = new PaletteBoxButton(sa, p);
+      sa->setVisible(false);
+      p->setName(name);
+      b->setText(p->name());
+      vbox->insertWidget(slot, b);
+      vbox->insertWidget(slot+1, sa, 1000);
+      connect(b, SIGNAL(paletteCmd(int,int)), SLOT(paletteCmd(int,int)));
+      connect(p, SIGNAL(changed()), SLOT(setDirty()));
+      for (int i = 0; i < (vbox->count() - 1) / 2; ++i)
+            static_cast<PaletteBoxButton*>(vbox->itemAt(i * 2)->widget())->setId(i*2);
+      return p;
+      }
+
+//---------------------------------------------------------
 //   paletteCmd
 //---------------------------------------------------------
 
@@ -1341,22 +1519,29 @@ void PaletteBox::paletteCmd(int cmd, int slot)
                         static_cast<PaletteBoxButton*>(vbox->itemAt(i * 2)->widget())->setId(i*2);
                   }
                   break;
-            case PALETTE_NEW:
+            case PALETTE_SAVE:
                   {
-                  Palette* p = new Palette;
-                  p->setReadOnly(false);
-                  PaletteScrollArea* sa = new PaletteScrollArea(p);
-                  PaletteBoxButton* b   = new PaletteBoxButton(sa, p);
-                  sa->setVisible(false);
-                  p->setName("new Palette");
-                  b->setText(p->name());
-                  vbox->insertWidget(slot, b);
-                  vbox->insertWidget(slot+1, sa, 1000);
-                  connect(b, SIGNAL(paletteCmd(int,int)), SLOT(paletteCmd(int,int)));
-                  connect(p, SIGNAL(changed()), SLOT(setDirty()));
-                  for (int i = 0; i < (vbox->count() - 1) / 2; ++i)
-                        static_cast<PaletteBoxButton*>(vbox->itemAt(i * 2)->widget())->setId(i*2);
+                  PaletteScrollArea* sa = static_cast<PaletteScrollArea*>(vbox->itemAt(slot+1)->widget());
+                  Palette* palette = static_cast<Palette*>(sa->widget());
+                  QString path = mscore->getPaletteFilename(false);
+                  if (!path.isEmpty())
+                        palette->write(path);
                   }
+                  break;
+
+            case PALETTE_LOAD:
+                  {
+                  QString path = mscore->getPaletteFilename(true);
+                  if (!path.isEmpty()) {
+                        QFileInfo fi(path);
+                        Palette* palette = newPalette(fi.baseName(), slot);
+                        palette->read(path);
+                        }
+                  }
+                  break;
+
+            case PALETTE_NEW:
+                  newPalette(tr("new Palette"), slot);
                   // fall through
 
             case PALETTE_EDIT:
@@ -1513,6 +1698,7 @@ PaletteCellProperties::PaletteCellProperties(PaletteCell* p, QWidget* parent)
       xoffset->setValue(cell->xoffset);
       yoffset->setValue(cell->yoffset);
       scale->setValue(cell->mag);
+      name->setText(p->name);
       }
 
 //---------------------------------------------------------
@@ -1524,5 +1710,6 @@ void PaletteCellProperties::accept()
       cell->xoffset = xoffset->value();
       cell->yoffset = yoffset->value();
       cell->mag     = scale->value();
+      cell->name    = name->text();
       QDialog::accept();
       }

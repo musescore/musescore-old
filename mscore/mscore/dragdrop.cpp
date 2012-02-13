@@ -540,20 +540,22 @@ void ScoreView::dropEvent(QDropEvent* event)
                   QString suffix = fi.suffix().toLower();
                   if (suffix == "svg")
                         s = new SvgImage(score());
-                  else
-                        if (suffix == "jpg"
+                  else if (suffix == "jpg"
                      || suffix == "png"
                      || suffix == "gif"
                      || suffix == "xpm"
-                        )
+                     )
                         s = new RasterImage(score());
-                  else
+                  else {
+                        if (debugMode)
+                              qDebug("drop: unknown suffix %s\n", qPrintable(suffix));
                         return;
+                        }
                   _score->startCmd();
                   QString str(u.toLocalFile());
-                  s->setPath(str);
+                  s->load(str);
 if (debugMode)
-      qDebug("drop image <%s> <%s>", qPrintable(str), qPrintable(s->path()));
+      qDebug("drop image <%s> <%s>", qPrintable(str), qPrintable(str));
 
                   Element* el = elementAt(pos);
                   if (el && (el->type() == NOTE || el->type() == REST)) {

@@ -297,6 +297,8 @@ class MuseScore : public QMainWindow {
       QFileDialog* loadScanDialog;
       QFileDialog* loadAudioDialog;
       QFileDialog* loadDrumsetDialog;
+      QFileDialog* loadPaletteDialog;
+      QFileDialog* savePaletteDialog;
       QFileDialog* saveDrumsetDialog;
 
       QDialog* editRasterDialog;
@@ -317,6 +319,8 @@ class MuseScore : public QMainWindow {
 
       QAction* metronomeAction;
       QAction* panAction;
+
+      QLabel* cornerLabel;
 
       //---------------------
 
@@ -368,6 +372,7 @@ class MuseScore : public QMainWindow {
       static void convertCapella(Score*, Capella* cap);
 //      int readCapVoice(Score*, CapVoice* cvoice, int staffIdx, int tick);
       void changeScore(int);
+      virtual void resizeEvent(QResizeEvent*);
 
    private slots:
       void autoSaveTimerTimeout();
@@ -529,6 +534,7 @@ class MuseScore : public QMainWindow {
       QString getScanFile(const QString&);
       QString getAudioFile(const QString&);
       QString getDrumsetFilename(bool open);
+      QString getPaletteFilename(bool open);
       QString getWallpaper(const QString& caption);
 
       bool hRaster() const { return hRasterAction->isChecked(); }

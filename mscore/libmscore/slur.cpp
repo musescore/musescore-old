@@ -1044,6 +1044,7 @@ void Slur::layout()
                   s = frontSegment();
                   }
             s->setSubtype(SEGMENT_SINGLE);
+            _len = _spatium * 6;
             s->layout(QPointF(0, 0), QPointF(_len, 0));
             setbbox(frontSegment()->bbox());
             return;
