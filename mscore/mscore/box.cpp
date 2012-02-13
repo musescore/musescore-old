@@ -437,6 +437,10 @@ bool VBox::genPropertyMenu(QMenu* popup) const
       a = getAction("poet-text");
       a->blockSignals(true);
       textMenu->addAction(a);
+      
+      a = getAction("frame-text");
+      a->blockSignals(true);
+      textMenu->addAction(a);
 
       a = getAction("insert-hbox");
       a->blockSignals(true);
@@ -481,6 +485,12 @@ void VBox::propertyAction(ScoreView* viewer, const QString& cmd)
             Text* t = new Text(score());
             t->setSubtype(TEXT_POET);
             t->setTextStyle(TEXT_STYLE_POET);
+            s = t;
+            }
+      else if (cmd == "frame-text") {
+            Text* t = new Text(score());
+            t->setSubtype(TEXT_FRAME);
+            t->setTextStyle(TEXT_STYLE_FRAME);
             s = t;
             }
       else if (cmd == "insert-hbox") {
