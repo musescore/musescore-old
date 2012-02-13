@@ -1,3 +1,6 @@
+13.feb (la)
+      - Add Frame Text to Vertical Frame
+      - MusicXML: minimal support of page relative text on first page in import and export
 10.feb (la)
       - fix #3482: pasting after copy/cut creates note with wrong duration (patch by Jorgk)
 09.feb (lv)

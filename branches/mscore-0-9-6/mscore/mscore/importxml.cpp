@@ -470,7 +470,7 @@ void MusicXml::import(Score* s)
 //   addText
 //---------------------------------------------------------
 
-static void addText(VBox*& vbx, Score* s, QString strTxt, int sbtp, int stl)
+static Text* addText(VBox*& vbx, Score* s, QString strTxt, int sbtp, int stl)
       {
       if (!strTxt.isEmpty()) {
             Text* text = new Text(s);
@@ -480,7 +480,9 @@ static void addText(VBox*& vbx, Score* s, QString strTxt, int sbtp, int stl)
             if (vbx == 0)
                   vbx = new VBox(s);
             vbx->add(text);
+            return text;
             }
+      return 0;
       }
 
 //---------------------------------------------------------
@@ -496,19 +498,23 @@ void MusicXml::doCredits()
       {
       // printf("MusicXml::doCredits()\n");
       PageFormat* pf = score->pageFormat();
-      // printf("page format w=%g h=%g spatium=%g DPMM=%g DPI=%g\n",
+      //printf("page format w=%g h=%g spatium=%g DPMM=%g DPI=%g\n",
       //        pf->width(), pf->height(), score->spatium(), DPMM, DPI);
       // page width and height in tenths
       const double pw  = pf->width() * 10 * DPI / score->spatium();
       const double ph  = pf->height() * 10 * DPI / score->spatium();
+      const double mgl  = pf->oddLeftMargin * 10 * DPI / score->spatium();
+      const double mgt  = pf->oddTopMargin * 10 * DPI / score->spatium();
+      const double mgb  = pf->oddBottomMargin * 10 * DPI / score->spatium();
+      
       const int pw1 = (int) (pw / 3);
       const int pw2 = (int) (pw * 2 / 3);
       const int ph2 = (int) (ph / 2);
       // printf("page format w=%g h=%g\n", pw, ph);
       // printf("page format pw1=%d pw2=%d ph2=%d\n", pw1, pw2, ph2);
       // dump the credits
-      /*
-      for (ciCreditWords ci = credits.begin(); ci != credits.end(); ++ci) {
+    
+      /*for (ciCreditWords ci = credits.begin(); ci != credits.end(); ++ci) {
             CreditWords* w = *ci;
             printf("credit-words defx=%g defy=%g just=%s hal=%s val=%s words=%s\n",
                   w->defaultX,
@@ -517,8 +523,8 @@ void MusicXml::doCredits()
                   w->hAlign.toUtf8().data(),
                   w->vAlign.toUtf8().data(),
                   w->words.toUtf8().data());
-            }
-      */
+            }*/
+      
       // apply simple heuristics using only default x and y
       // to recognize the meaning of credit words
       CreditWords* crwTitle = 0;
@@ -559,8 +565,8 @@ void MusicXml::doCredits()
                   // found poet
                   if (!crwPoet) crwPoet = w;
                   }
-            // copyright is below middle of the page and in the middle column
-            if (defy < ph2 && pw1 < defx && defx < pw2) {
+            // copyright is below (page height - margin bottom - 2 staves) of the page and in the middle column
+            if ((ph - defy) > ( ph - mgb - 80) && pw1 < defx && defx < pw2) {
                   // found copyright
                   if (!crwCopyRight) crwCopyRight = w;
                   }
@@ -610,11 +616,30 @@ void MusicXml::doCredits()
       addText(vbox, score, strComposer, TEXT_COMPOSER, TEXT_STYLE_COMPOSER);
       addText(vbox, score, strPoet, TEXT_POET, TEXT_STYLE_POET);
       addText(vbox, score, strTranslator, TEXT_TRANSLATOR, TEXT_STYLE_TRANSLATOR);
+
+      if (crwCopyRight) score->setCopyright(crwCopyRight->words);
+      
+      //deal with remaining credits on page 1
+      //TODO deal with other pages...
+      for (ciCreditWords ci = credits.begin(); ci != credits.end(); ++ci) {
+            CreditWords* w = *ci;
+            if(w != crwTitle && w != crwSubTitle && w != crwComposer 
+                  && w != crwPoet && w != crwCopyRight) {
+                  if (w->page == 1) {
+                        Text *t = addText(vbox, score, w->words, TEXT_FRAME, TEXT_STYLE_FRAME);
+                        //computation in tenths, get coordinates in the VBox system
+                        double x = w->defaultX - mgl;
+                        double y = ph - w->defaultY - mgt;
+                        //change tenths to spatium
+                        t->setUserOff(QPointF(x*0.1*score->spatium() , y*0.1*score->spatium()));
+                        }
+                  }
+            }
+      //add the vbox at top of page 1
       if (vbox) {
             vbox->setTick(0);
             score->measures()->add(vbox);
             }
-      if (crwCopyRight) score->setCopyright(crwCopyRight->words);
       }
 
 //---------------------------------------------------------
@@ -903,6 +928,8 @@ void MusicXml::scorePartwise(QDomElement ee)
             else if (tag == "movement-title")
                   score->setMovementTitle(e.text());
             else if (tag == "credit") {
+                  int p = e.attribute(QString("page"), "1").toInt();
+                  CreditWords* cw = 0;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
                         if (tag == "credit-words") {
@@ -912,8 +939,13 @@ void MusicXml::scorePartwise(QDomElement ee)
                               QString halign  = ee.attribute(QString("halign"));
                               QString valign  = ee.attribute(QString("valign"));
                               QString crwords = ee.text();
-                              CreditWords* cw = new CreditWords(defaultx, defaulty, justify, halign, valign, crwords);
-                              credits.append(cw);
+                              if(cw == 0) {
+                                    cw = new CreditWords(p, defaultx, defaulty, justify, halign, valign, crwords);
+                                    credits.append(cw);
+                                    }
+                              else {
+                                    cw->words += ee.text();
+                                    }
                               }
                         else
                               domError(ee);

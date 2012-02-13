@@ -1204,8 +1204,11 @@ void ExportMusicXml::credits(Xml& xml)
                         case TEXT_POET:
                               creditWords(xml, lm, ty, fs, "left", "top", text->getText());
                               break;
-                              // case TEXT_TRANSLATOR:
+                        case TEXT_FRAME: {
+                              const double tx = getTenthsFromDots(text->canvasPos().x());
+                              creditWords(xml, tx, ty, fs, "left", "top", text->getText());
                               break;
+                              }
                         default:
                               printf("credits: text subtype %s not supported\n",
                                      text->subtypeName().toUtf8().data());
