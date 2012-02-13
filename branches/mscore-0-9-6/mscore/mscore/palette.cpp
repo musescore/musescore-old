@@ -37,6 +37,7 @@
 #include "seq.h"
 #include "part.h"
 #include "textline.h"
+#include "slur.h"
 
 //---------------------------------------------------------
 //   needsStaff
@@ -936,6 +937,10 @@ void Palette::read(QDomElement e)
                                           }
                                     else {
                                           element->read(ee);
+                                          if(element->type() == SLUR) {
+                                                Slur* s = static_cast<Slur*>(element);
+                                                s->setLen(gscore->spatium() * 7);
+                                                }
                                           append(element, name);
                                           }
                                     }
