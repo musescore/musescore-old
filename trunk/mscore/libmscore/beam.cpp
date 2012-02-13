@@ -276,7 +276,7 @@ void Beam::add(ChordRest* a)
       if (!_elements.contains(a)) {
             if (a->segment() && !_elements.isEmpty()) {
                   for (int i = 0; i < _elements.size(); ++i) {
-                        if (_elements[i]->segment()->tick() >= a->segment()->tick()) {
+                        if (_elements[i]->segment()->tick() > a->segment()->tick()) {
                               _elements.insert(i, a);
                               return;
                               }

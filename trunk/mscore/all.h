@@ -157,5 +157,8 @@
 #include <QtScriptTools/QScriptEngineDebugger>
 #endif
 
+#include <QtGui/private/qzipreader_p.h>
+#include <QtGui/private/qzipwriter_p.h>
+
 #endif
 

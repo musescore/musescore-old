@@ -1353,6 +1353,7 @@ bool Measure::acceptDrop(MuseScoreView* viewer, const QPointF& p, Element* e) co
             case REPEAT_MEASURE:
             case MEASURE:
             case SPACER:
+            case IMAGE:
                   viewer->setDropRectangle(r);
                   return true;
 
@@ -1461,6 +1462,7 @@ qDebug("drop staffList");
                   score()->undoAddElement(e);
                   return e;
 
+            case IMAGE:
             case SYMBOL:
                   e->setParent(seg);
                   e->setTrack(staffIdx * VOICES);
@@ -2194,6 +2196,7 @@ void Measure::read(const QDomElement& de, int staffIdx)
                   else
                         if (s.endsWith(".jpg")
                      || s.endsWith(".png")
+                     || s.endsWith(".gif")
                      || s.endsWith(".xpm")
                         ) {
                         image = new RasterImage(score());

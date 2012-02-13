@@ -36,7 +36,7 @@ class PaletteScrollArea;
 
 struct PaletteCell {
       Element* element;
-      QString name;
+      QString name;           // used for tool tip
       QString tag;
       bool drawStaff;
       double x, y;
@@ -79,6 +79,8 @@ class PaletteCellProperties : public QDialog, private Ui::PaletteCellProperties 
 
 enum PaletteCommand {
       PALETTE_DELETE,
+      PALETTE_SAVE,
+      PALETTE_LOAD,
       PALETTE_EDIT,
       PALETTE_UP,
       PALETTE_DOWN,
@@ -101,6 +103,8 @@ class PaletteBoxButton : public QToolButton {
 
    private slots:
       void deleteTriggered()     { emit paletteCmd(PALETTE_DELETE, id);  }
+      void saveTriggered()       { emit paletteCmd(PALETTE_SAVE, id);    }
+      void loadTriggered()       { emit paletteCmd(PALETTE_LOAD, id);    }
       void propertiesTriggered() { emit paletteCmd(PALETTE_EDIT, id);    }
       void upTriggered()         { emit paletteCmd(PALETTE_UP, id);      }
       void downTriggered()       { emit paletteCmd(PALETTE_DOWN, id);    }
@@ -129,6 +133,7 @@ class PaletteBox : public QDockWidget {
       bool _dirty;
 
       virtual void closeEvent(QCloseEvent*);
+      Palette* newPalette(const QString& name, int slot);
 
    private slots:
       void paletteCmd(int, int);
@@ -216,17 +221,20 @@ class Palette : public QWidget {
       Palette(QWidget* parent = 0);
       ~Palette();
 
-      PaletteCell* append(Element*, const QString& name, QString tag = QString(), qreal mag = 1.0);
-      PaletteCell* add(int idx, Element*, const QString& name, const QString tag = QString());
+      PaletteCell* append(Element*, const QString& name, QString tag = QString(),
+         qreal mag = 1.0);
+      PaletteCell* add(int idx, Element*, const QString& name,
+         const QString tag = QString(), qreal mag = 1.0);
       PaletteCell* append(int sym);
 
       void setGrid(int, int);
       Element* element(int idx)      { return cells[idx]->element; }
       void setDrawGrid(bool val)     { _drawGrid = val; }
       bool drawGrid() const          { return _drawGrid; }
-      void write(Xml&, const QString& name) const;
-      void read(QDomElement);
+      void read(const QString& path);
       void write(const QString& path);
+      void read(QDomElement);
+      void write(Xml&, const QString& name) const;
       bool read(QFile*);
       void clear();
       void setSelectable(bool val)   { _selectable = val;  }

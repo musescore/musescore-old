@@ -61,7 +61,7 @@ void Tremolo::layout()
       qreal h   = sp * .8;
       qreal lw  = sp * .35;
       qreal d   = sp * 0.8;
-      path       = QPainterPath();
+      path      = QPainterPath();
 
       qreal y   = 0.0;
       int lines;
@@ -170,6 +170,7 @@ void Tremolo::layout()
 void Tremolo::write(Xml& xml) const
       {
       xml.stag(name());
+      xml.tag("subtype", subtypeName());
       Element::writeProperties(xml);
       xml.etag();
       }
@@ -181,7 +182,9 @@ void Tremolo::write(Xml& xml) const
 void Tremolo::read(const QDomElement& de)
       {
       for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (!Element::readProperties(e))
+            if (e.tagName() == "subtype")
+                  setSubtype(e.text());
+            else if (!Element::readProperties(e))
                   domError(e);
             }
       }
@@ -260,5 +263,4 @@ Fraction Tremolo::tremoloLen() const
                   return Fraction(1,64);
             }
       }
-
 

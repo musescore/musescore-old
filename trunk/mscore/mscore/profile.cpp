@@ -20,13 +20,16 @@
 
 #include "profile.h"
 #include "musescore.h"
+#include "libmscore/score.h"
+#include "libmscore/imageStore.h"
 #include "libmscore/xml.h"
+#include "libmscore/qzipreader_p.h"
+#include "libmscore/qzipwriter_p.h"
 #include "preferences.h"
 #include "palette.h"
 
 static bool profilesRead = false;
 static QList<Profile*> _profiles;
-static Profile* defaultProfile;
 Profile* profile;
 
 //---------------------------------------------------------
@@ -35,25 +38,26 @@ Profile* profile;
 
 void initProfile()
       {
-      defaultProfile = new Profile;
-      defaultProfile->setName("default");
-
       foreach(Profile* p, Profile::profiles()) {
             if (p->name() == preferences.profile) {
                   profile = p;
                   break;
                   }
             }
-      if (profile == 0)
-            profile = defaultProfile;
+      if (profile == 0) {
+            profile = new Profile;
+            profile->setName("default");
+            }
       }
 
 //---------------------------------------------------------
-//   Profile
+//   writeFailed
 //---------------------------------------------------------
 
-Profile::Profile()
+static void writeFailed(const QString& _path)
       {
+      QString s = mscore->tr("Open Profile File\n") + _path + mscore->tr("\nfailed: ");
+      QMessageBox::critical(mscore, mscore->tr("MuseScore: Writing Profile file"), s);
       }
 
 //---------------------------------------------------------
@@ -70,14 +74,51 @@ void Profile::write()
             dir.mkpath(_path);
             _path += "/" + _name + ext;
             }
-      QFile f(_path);
-      if (!f.open(QIODevice::WriteOnly)) {
-            QString s = mscore->tr("Open Profile File\n") + f.fileName() + mscore->tr("\nfailed: ")
-               + QString(strerror(errno));
-            QMessageBox::critical(mscore, mscore->tr("MuseScore: Open Profile file"), s);
+      QZipWriter f(_path);
+      f.setCompressionPolicy(QZipWriter::NeverCompress);
+      f.setCreationPermissions(
+         QFile::ReadOwner | QFile::WriteOwner | QFile::ExeOwner
+         | QFile::ReadUser | QFile::WriteUser | QFile::ExeUser
+         | QFile::ReadGroup | QFile::WriteGroup | QFile::ExeGroup
+         | QFile::ReadOther | QFile::WriteOther | QFile::ExeOther);
+
+      if (f.status() != QZipWriter::NoError) {
+            writeFailed(_path);
             return;
             }
-      Xml xml(&f);
+
+      QBuffer cbuf;
+      cbuf.open(QIODevice::ReadWrite);
+      Xml xml(&cbuf);
+      xml.header();
+      xml.stag("container");
+      xml.stag("rootfiles");
+      xml.stag(QString("rootfile full-path=\"%1\"").arg(Xml::xmlString("profile.xml")));
+      xml.etag();
+      foreach (ImageStoreItem* ip, imageStore) {
+            if (!ip->isUsed(gscore))
+                  continue;
+            QString dstPath = QString("Pictures/") + ip->hashName();
+            xml.tag("file", dstPath);
+            }
+      xml.etag();
+      xml.etag();
+      cbuf.seek(0);
+      f.addDirectory("META-INF");
+      f.addDirectory("Pictures");
+      f.addFile("META-INF/container.xml", cbuf.data());
+
+      // save images
+      foreach(ImageStoreItem* ip, imageStore) {
+            if (!ip->isUsed(gscore))
+                  continue;
+            QString dstPath = QString("Pictures/") + ip->hashName();
+            f.addFile(dstPath, ip->buffer());
+            }
+      {
+      QBuffer cbuf;
+      cbuf.open(QIODevice::ReadWrite);
+      Xml xml(&cbuf);
       xml.header();
       xml.stag("museScore version=\"" MSC_VERSION "\"");
       xml.stag("Profile");
@@ -86,10 +127,13 @@ void Profile::write()
       pb->write(xml);
       xml.etag();
       xml.etag();
-      if (f.error() != QFile::NoError) {
-            QString s = mscore->tr("Write Profile failed: ") + f.errorString();
-            QMessageBox::critical(0, mscore->tr("MuseScore: Write Style"), s);
-            }
+      f.addFile("profile.xml", cbuf.data());
+      cbuf.close();
+      }
+
+      f.close();
+      if (f.status() != QZipWriter::NoError)
+            writeFailed(_path);
       }
 
 //---------------------------------------------------------
@@ -98,48 +142,91 @@ void Profile::write()
 
 void Profile::read()
       {
-      if (_name == "default") {
+      QZipReader f(_path);
+      if (!f.exists()) {
             PaletteBox* paletteBox = mscore->getPaletteBox();
             paletteBox->clear();
             mscore->populatePalette();
             return;
             }
-      QFile f(_path);
-      if (f.open(QIODevice::ReadOnly)) {
-            QDomDocument doc;
-            int line, column;
-            QString err;
-            if (!doc.setContent(&f, false, &err, &line, &column)) {
-                  QString error = QString("error reading profile %1 at line %2 column %3: %4")
-                     .arg(f.fileName()).arg(line).arg(column).arg(err);
-                  QMessageBox::warning(0,
-                     QWidget::tr("MuseScore: Load Style failed:"),
-                     error,
-                     QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
-                  return;
+      QByteArray ba = f.fileData("META-INF/container.xml");
+      QDomDocument doc;
+      int line, column;
+      QString err;
+      if (!doc.setContent(ba, false, &err, &line, &column)) {
+            QString error = QString("error reading profile container.xml at line %2 column %3: %4")
+               .arg(line).arg(column).arg(err);
+            QMessageBox::warning(0,
+                  QWidget::tr("MuseScore: Load Style failed:"),
+                  error,
+                  QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+            return;
+            }
+      // extract first rootfile
+      QString rootfile = "";
+      QList<QString> images;
+      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() != "container") {
+                  domError(e);
+                  continue;
                   }
-            docName = _path;
-            for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
-                  if (e.tagName() == "museScore") {
-                        QString version = e.attribute(QString("version"));
-                        QStringList sl = version.split('.');
-                        // _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
-                        for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
-                              QString tag(ee.tagName());
-                              QString val(ee.text());
-                              if (tag == "Profile")
-                                    read(ee);
-                              else
-                                    domError(ee);
+            for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                  if (ee.tagName() != "rootfiles") {
+                        domError(ee);
+                        continue;
+                        }
+                  for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                        const QString& tag(eee.tagName());
+                        const QString& val(eee.text());
+
+                        if (tag == "rootfile") {
+                              if (rootfile.isEmpty())
+                                    rootfile = eee.attribute(QString("full-path"));
                               }
+                        else if (tag == "file")
+                              images.append(val);
+                        else
+                              domError(eee);
                         }
                   }
             }
-      else {
+      //
+      // load images
+      //
+      foreach(const QString& s, images)
+            imageStore.add(s, f.fileData(s));
+
+      if (rootfile.isEmpty()) {
+            qDebug("can't find rootfile in: %s", qPrintable(_path));
+            return;
+            }
+
+      ba = f.fileData(rootfile);
+      if (!doc.setContent(ba, false, &err, &line, &column)) {
+            QString error = QString("error reading profile %1 at line %2 column %3: %4")
+               .arg(_path).arg(line).arg(column).arg(err);
             QMessageBox::warning(0,
-               QWidget::tr("MuseScore: Load Profile failed:"),
-               QString(strerror(errno)),
-               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+                  QWidget::tr("MuseScore: Load Style failed:"),
+                  error,
+                  QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+            return;
+            }
+
+      docName = _path;
+      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "museScore") {
+                  QString version = e.attribute(QString("version"));
+                  QStringList sl = version.split('.');
+                  // _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+                        QString val(ee.text());
+                        if (tag == "Profile")
+                              read(ee);
+                        else
+                              domError(ee);
+                        }
+                  }
             }
       }
 
@@ -168,8 +255,7 @@ void Profile::read(QDomElement e)
 void Profile::save()
       {
       PaletteBox* pb = mscore->getPaletteBox();
-      bool d = pb && pb->dirty();
-      if (d && (profile->name() != "default"))
+      if (pb && pb->dirty())
             write();
       }
 
@@ -186,7 +272,7 @@ QList<Profile*>& Profile::profiles()
             nameFilters << "*.profile";
             QStringList pl = dir.entryList(nameFilters, QDir::Files, QDir::Name);
 
-            _profiles.append(defaultProfile);
+//            _profiles.append(defaultProfile);
             foreach (QString s, pl) {
                   Profile* p = new Profile;
                   p->setPath(dataPath + "/profiles/" + s);

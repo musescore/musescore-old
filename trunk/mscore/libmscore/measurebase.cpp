@@ -130,8 +130,6 @@ void MeasureBase::add(Element* e)
                   }
             }
       _el.append(e);
-      if (e->type() == IMAGE)
-            static_cast<Image*>(e)->reference();
       }
 
 //---------------------------------------------------------
@@ -161,8 +159,6 @@ void MeasureBase::remove(Element* el)
             }
       if (!_el.remove(el))
             qDebug("MeasureBase(%p)::remove(%s,%p) not found\n", this, el->name(), el);
-      if (el->type() == IMAGE)
-            static_cast<Image*>(el)->dereference();
       }
 
 

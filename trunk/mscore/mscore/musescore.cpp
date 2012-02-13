@@ -396,6 +396,8 @@ MuseScore::MuseScore()
       loadChordStyleDialog  = 0;
       saveChordStyleDialog  = 0;
       loadDrumsetDialog     = 0;
+      loadPaletteDialog     = 0;
+      savePaletteDialog     = 0;
       saveDrumsetDialog     = 0;
 
       editRasterDialog      = 0;
@@ -976,6 +978,23 @@ MuseScore::MuseScore()
       connect(autoSaveTimer, SIGNAL(timeout()), this, SLOT(autoSaveTimerTimeout()));
       initOsc();
       startAutoSave();
+      if (enableExperimental) {
+            cornerLabel = new QLabel(this);
+            cornerLabel->setScaledContents(true);
+            cornerLabel->setPixmap(QPixmap(":/data/mscore.png"));
+            cornerLabel->setGeometry(width() - 48, 0, 48, 48);
+            }
+      }
+
+//---------------------------------------------------------
+//   resizeEvent
+//---------------------------------------------------------
+
+void MuseScore::resizeEvent(QResizeEvent*)
+      {
+      if (enableExperimental) {
+            cornerLabel->setGeometry(width() - 48, 0, 48, 48);
+            }
       }
 
 //---------------------------------------------------------
@@ -2694,8 +2713,12 @@ void MuseScore::writeSettings()
             settings.setValue("loadAudioDialog", loadAudioDialog->saveState());
       if (loadDrumsetDialog)
             settings.setValue("loadDrumsetDialog", loadDrumsetDialog->saveState());
+      if (loadPaletteDialog)
+            settings.setValue("loadPaletteDialog", loadPaletteDialog->saveState());
       if (saveDrumsetDialog)
             settings.setValue("saveDrumsetDialog", saveDrumsetDialog->saveState());
+      if (savePaletteDialog)
+            settings.setValue("savePaletteDialog", savePaletteDialog->saveState());
       }
 
 //---------------------------------------------------------

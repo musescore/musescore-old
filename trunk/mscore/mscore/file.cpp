@@ -1090,6 +1090,88 @@ QString MuseScore::getFotoFilename()
       }
 
 //---------------------------------------------------------
+//   getPaletteFilename
+//---------------------------------------------------------
+
+QString MuseScore::getPaletteFilename(bool open)
+      {
+      QString title;
+      QString filter;
+      if (open) {
+            title  = tr("MuseScore: Load Palette");
+            filter = tr("MuseScore Palette (*.pal);;All Files (*)");
+            }
+      else {
+            title  = tr("MuseScore: Save Palette");
+            filter = tr("MuseScore Palette (*.pal)");
+
+            // create dataPath/profiles if it does not exist
+            QDir dir;
+            dir.mkpath(dataPath);
+            QString path = dataPath + "/profiles";
+            dir.mkpath(path);
+            }
+
+      QString currentPath(QDir::currentPath());
+      if (preferences.nativeDialogs) {
+            QString fn;
+            if (open)
+                  fn = QFileDialog::getOpenFileName(this, title, currentPath, filter);
+            else
+                  fn = QFileDialog::getSaveFileName(this, title, currentPath, filter);
+            return fn;
+            }
+
+      QFileInfo myPalettes(dataPath + "/profiles");
+      QFileDialog* dialog;
+      QList<QUrl> urls;
+      urls.append(QUrl::fromLocalFile(QDir::homePath()));
+      urls.append(QUrl::fromLocalFile(QDir::currentPath()));
+      urls.append(QUrl::fromLocalFile(myPalettes.absoluteFilePath()));
+
+      if (open) {
+            if (loadPaletteDialog == 0) {
+                  loadPaletteDialog = new QFileDialog(this);
+                  loadPaletteDialog->setFileMode(QFileDialog::ExistingFile);
+                  loadPaletteDialog->setOption(QFileDialog::DontUseNativeDialog, true);
+                  loadPaletteDialog->setDirectory(myPalettes.absoluteFilePath());
+
+                  QSettings settings;
+                  loadPaletteDialog->restoreState(settings.value("loadPaletteDialog").toByteArray());
+                  loadPaletteDialog->setAcceptMode(QFileDialog::AcceptOpen);
+                  }
+            urls.append(QUrl::fromLocalFile(mscoreGlobalShare+"/styles"));
+            dialog = loadPaletteDialog;
+            }
+      else {
+            if (savePaletteDialog == 0) {
+                  savePaletteDialog = new QFileDialog(this);
+                  savePaletteDialog->setAcceptMode(QFileDialog::AcceptSave);
+                  savePaletteDialog->setFileMode(QFileDialog::AnyFile);
+                  savePaletteDialog->setOption(QFileDialog::DontConfirmOverwrite, false);
+                  savePaletteDialog->setOption(QFileDialog::DontUseNativeDialog, true);
+                  savePaletteDialog->setDirectory(myPalettes.absoluteFilePath());
+
+                  QSettings settings;
+                  savePaletteDialog->restoreState(settings.value("savePaletteDialog").toByteArray());
+                  savePaletteDialog->setAcceptMode(QFileDialog::AcceptSave);
+                  }
+            dialog = savePaletteDialog;
+            }
+      dialog->setWindowTitle(title);
+      dialog->setNameFilter(filter);
+
+      // setup side bar urls
+      dialog->setSidebarUrls(urls);
+
+      if (dialog->exec()) {
+            QStringList result = dialog->selectedFiles();
+            return result.front();
+            }
+      return QString();
+      }
+
+//---------------------------------------------------------
 //   getDrumsetFilename
 //---------------------------------------------------------
 
@@ -1131,7 +1213,7 @@ QString MuseScore::getDrumsetFilename(bool open)
                   loadDrumsetDialog = new QFileDialog(this);
                   loadDrumsetDialog->setFileMode(QFileDialog::ExistingFile);
                   loadDrumsetDialog->setOption(QFileDialog::DontUseNativeDialog, true);
-                  saveDrumsetDialog->setDirectory(currentPath);
+                  loadDrumsetDialog->setDirectory(currentPath);
 
                   QSettings settings;
                   loadDrumsetDialog->restoreState(settings.value("loadDrumsetDialog").toByteArray());
@@ -1720,13 +1802,11 @@ void MuseScore::addImage(Score* score, Element* e)
 
       if (suffix == "svg")
             s = new SvgImage(score);
-      else
-            if (suffix == "jpg" || suffix == "png" || suffix == "xpm")
+      else if (suffix == "jpg" || suffix == "png" || suffix == "xpm")
             s = new RasterImage(score);
       else
             return;
-      s->setPath(fn);
-//      s->setSize(QSizeF(200, 200));
+      s->load(fn);
       s->setParent(e);
       score->undoAddElement(s);
       }

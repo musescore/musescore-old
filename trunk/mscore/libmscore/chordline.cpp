@@ -27,6 +27,7 @@ ChordLine::ChordLine(Score* s)
       {
       setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       modified = false;
+      _subtype = 0;
       }
 
 ChordLine::ChordLine(const ChordLine& cl)
@@ -34,6 +35,7 @@ ChordLine::ChordLine(const ChordLine& cl)
       {
       path     = cl.path;
       modified = cl.modified;
+      _subtype = cl._subtype;
       }
 
 //---------------------------------------------------------
@@ -132,6 +134,8 @@ void ChordLine::read(const QDomElement& de)
                   modified = true;
                   setSubtype(0);
                   }
+            else if (tag == "subtype")
+                  setSubtype(e.text().toInt());
             else if (!Element::readProperties(e))
                   domError(e);
             }
@@ -144,6 +148,7 @@ void ChordLine::read(const QDomElement& de)
 void ChordLine::write(Xml& xml) const
       {
       xml.stag(name());
+      xml.tag("subtype", _subtype);
       Element::writeProperties(xml);
       if (modified) {
             int n = path.elementCount();

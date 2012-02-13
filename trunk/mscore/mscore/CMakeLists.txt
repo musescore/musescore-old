@@ -41,7 +41,7 @@ QT4_WRAP_UI (ui_headers
       voltaproperties.ui timesigproperties.ui
       jumpproperties.ui markerproperties.ui boxproperties.ui
       instrwizard.ui timesigwizard.ui newwizard.ui aboutbox.ui
-      chordedit.ui transposedialog.ui tempoproperties.ui importmidi.ui
+      chordedit.ui transposedialog.ui tempoproperties.ui
       lineproperties.ui excerptsdialog.ui lyrics.ui stafftext.ui
       imageproperties.ui tupletdialog.ui tupletproperties.ui
       glissandoprop.ui articulation.ui metaedit.ui palette.ui
@@ -70,7 +70,7 @@ QT4_WRAP_CPP (mocs
       greendotbutton.h recordbutton.h editdrumset.h editstaff.h selinstrument.h
       voltaproperties.h timesigproperties.h
       jumpproperties.h markerproperties.h boxproperties.h newwizard.h
-      transposedialog.h chordedit.h tempoproperties.h importmidi.h lineproperties.h
+      transposedialog.h chordedit.h tempoproperties.h lineproperties.h
       excerptsdialog.h stafftextproperties.h imageproperties.h glissandoproperties.h
       script.h articulationprop.h metaedit.h magbox.h voiceselector.h
       textprop.h dynamicprop.h textproperties.h tupletdialog.h tupletproperties.h

@@ -1294,50 +1294,6 @@ bool Score::checkHasMeasures() const
       }
 
 //---------------------------------------------------------
-//   ImagePath
-//---------------------------------------------------------
-
-ImagePath::ImagePath(const QString& p)
-   : _path(p), _references(0), _loaded(false)
-      {
-      }
-
-//---------------------------------------------------------
-//   addImage
-//---------------------------------------------------------
-
-ImagePath* Score::addImage(const QString& s)
-      {
-      foreach(ImagePath* p, imagePathList) {
-            if (p->path() == s)
-                  return p;
-            }
-      ImagePath* p = new ImagePath(s);
-      imagePathList.append(p);
-      return p;
-      }
-
-//---------------------------------------------------------
-//   dereference
-//    decrement usage count of image in score
-//---------------------------------------------------------
-
-void ImagePath::dereference()
-      {
-      --_references;
-      }
-
-//---------------------------------------------------------
-//   reference
-//    increment usage count of image in score
-//---------------------------------------------------------
-
-void ImagePath::reference()
-      {
-      ++_references;
-      }
-
-//---------------------------------------------------------
 //   moveBracket
 //    columns are counted from right to left
 //---------------------------------------------------------

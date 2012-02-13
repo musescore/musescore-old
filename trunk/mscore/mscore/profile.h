@@ -31,7 +31,7 @@ class Profile {
       bool _dirty;
 
    public:
-      Profile();
+      Profile() {}
       QString path() const           { return _path;  }
       void setPath(const QString& s) { _path = s;     }
       QString name() const           { return _name;  }

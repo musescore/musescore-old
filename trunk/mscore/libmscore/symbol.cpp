@@ -274,6 +274,7 @@ void Symbol::read(const QDomElement& de)
                   else
                         if (s.endsWith(".jpg")
                      || s.endsWith(".png")
+                     || s.endsWith(".gif")
                      || s.endsWith(".xpm")
                         ) {
                         image = new RasterImage(score());

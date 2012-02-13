@@ -167,28 +167,6 @@ struct Position {
       };
 
 //---------------------------------------------------------
-//   ImagePath
-//---------------------------------------------------------
-
-class ImagePath {
-      QString _path;
-      int _references;  // > 0 if image is used in score
-      QBuffer _buffer;
-      bool _loaded;     // true if buffer contains image data
-
-   public:
-      ImagePath(const QString& p);
-      void dereference();
-      void reference();
-      const QString& path() const      { return _path;     }
-      QBuffer& buffer()                { return _buffer;   }
-      void setLoaded(bool val)         { _loaded = val;    }
-      bool loaded() const              { return _loaded;   }
-      void setPath(const QString& val) { _path = val;      }
-      bool isUsed() const              { return _references > 0;  }
-      };
-
-//---------------------------------------------------------
 //   LayoutFlag bits
 //---------------------------------------------------------
 
@@ -246,7 +224,6 @@ class Score {
       MeasureBase* curMeasure;
 
       UndoStack* _undo;
-      QList<ImagePath*> imagePathList;
 
       QQueue<MidiInputEvent> midiInputQueue;
       QList<MidiMapping> _midiMapping;
@@ -706,7 +683,6 @@ class Score {
 
       void cmdDeleteTuplet(Tuplet*, bool replaceWithRest);
 
-      ImagePath* addImage(const QString&);      // add image to imagePathList
       void moveBracket(int staffIdx, int srcCol, int dstCol);
       Measure* getCreateMeasure(int tick);
 

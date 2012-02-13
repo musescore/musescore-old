@@ -17,7 +17,7 @@
 #include "config.h"
 #include "bsymbol.h"
 
-class ImagePath;
+class ImageStoreItem;
 
 //---------------------------------------------------------
 //   Image
@@ -27,7 +27,7 @@ class Image : public BSymbol {
       Q_DECLARE_TR_FUNCTIONS(Image)
 
    protected:
-      ImagePath* _ip;
+      ImageStoreItem* _storeItem;
       mutable QPixmap buffer;        ///< cached rendering
       QSizeF sz;
       bool _lockAspectRatio;
@@ -37,28 +37,27 @@ class Image : public BSymbol {
       virtual bool isEditable() const { return true; }
       virtual void editDrag(const EditData&);
       virtual void endEdit();
-      virtual void draw(QPainter*) const;
+      void draw(QPainter*, QSize size) const;
       virtual void updateGrips(int*, QRectF*) const;
       virtual QPointF gripAnchor(int grip) const;
       virtual QSizeF imageSize() const = 0;
 
    public:
       Image(Score*);
+      Image(const Image&);
+      ~Image();
       virtual ElementType type() const { return IMAGE; }
       virtual void write(Xml& xml) const;
       virtual void read(const QDomElement&);
-      virtual void setPath(const QString& s);
+      bool load(const QString& s);
       virtual void layout();
 
-      QString path() const;
-      void setSize(QSizeF s)          { sz = s; }
-      bool lockAspectRatio() const    { return _lockAspectRatio; }
-      void setLockAspectRatio(bool v) { _lockAspectRatio = v; }
-      bool autoScale() const          { return _autoScale; }
-      void setAutoScale(bool v)       { _autoScale = v; }
-
-      void reference();
-      void dereference();
+      void setSize(QSizeF s)            { sz = s; }
+      bool lockAspectRatio() const      { return _lockAspectRatio; }
+      void setLockAspectRatio(bool v)   { _lockAspectRatio = v; }
+      bool autoScale() const            { return _autoScale; }
+      void setAutoScale(bool v)         { _autoScale = v; }
+      ImageStoreItem* storeItem() const { return _storeItem; }
       };
 
 //---------------------------------------------------------
@@ -73,8 +72,8 @@ class RasterImage : public Image {
       ~RasterImage();
       virtual RasterImage* clone() const;
       virtual void draw(QPainter*) const;
-      virtual void setPath(const QString& s);
       virtual QSizeF imageSize() const { return doc.size(); }
+      virtual void layout();
       };
 
 //---------------------------------------------------------
@@ -89,8 +88,8 @@ class SvgImage : public Image {
       ~SvgImage();
       virtual SvgImage* clone() const;
       virtual void draw(QPainter*) const;
-      virtual void setPath(const QString& s);
       virtual QSizeF imageSize() const { return doc->defaultSize(); }
+      virtual void layout();
       };
 
 #endif
