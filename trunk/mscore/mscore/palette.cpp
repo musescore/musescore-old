@@ -34,6 +34,8 @@
 #include "libmscore/icon.h"
 #include "libmscore/mscore.h"
 #include "libmscore/imageStore.h"
+#include "libmscore/qzipreader_p.h"
+#include "libmscore/qzipwriter_p.h"
 
 //---------------------------------------------------------
 //   needsStaff
