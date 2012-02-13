@@ -1266,10 +1266,10 @@ PaletteBoxButton::PaletteBoxButton(PaletteScrollArea* sa, Palette* p, QWidget* p
 
       QAction* action;
 
-      action = menu->addAction(tr("Palette Properties"));
+      action = menu->addAction(tr("Palette Properties..."));
       connect(action, SIGNAL(triggered()), SLOT(propertiesTriggered()));
 
-      action = menu->addAction(tr("Insert new Palette"));
+      action = menu->addAction(tr("Insert new Palette..."));
       connect(action, SIGNAL(triggered()), SLOT(newTriggered()));
 
       action = menu->addAction(tr("Move Palette Up"));

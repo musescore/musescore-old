@@ -104,7 +104,7 @@ void Image::write(Xml& xml) const
       {
       xml.stag("Image");
       Element::writeProperties(xml);
-      xml.tag("path", _storeItem->hashName());
+      xml.tag("path", _storeItem ? _storeItem->hashName() : _path);
       if (!_lockAspectRatio)
             xml.tag("lockAspectRatio", _lockAspectRatio);
       if (_autoScale)
@@ -123,7 +123,8 @@ void Image::read(const QDomElement& de)
       for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             if (tag == "path") {
-                  _storeItem = imageStore.getImage(e.text());
+                  _path = e.text();
+                  _storeItem = imageStore.getImage(_path);
                   if (_storeItem)
                         _storeItem->reference(this);
                   }
@@ -273,11 +274,13 @@ void SvgImage::draw(QPainter* painter) const
 void SvgImage::layout()
       {
       if (!doc->isValid()) {
-            doc->load(_storeItem->buffer());
-            if (doc->isValid()) {
-                  if (sz.isNull())
-                        sz = doc->defaultSize();
-                  _dirty = true;
+            if (_storeItem) {
+                  doc->load(_storeItem->buffer());
+                  if (doc->isValid()) {
+                        if (sz.isNull())
+                              sz = doc->defaultSize();
+                        _dirty = true;
+                        }
                   }
             }
       Image::layout();
@@ -338,11 +341,13 @@ void RasterImage::draw(QPainter* painter) const
 void RasterImage::layout()
       {
       if (doc.isNull()) {
-            doc.loadFromData(_storeItem->buffer());
-            if (!doc.isNull()) {
-                  if (sz.isNull())
-                        sz = doc.size() * 0.4;
-                  _dirty = true;
+            if (_storeItem) {
+                  doc.loadFromData(_storeItem->buffer());
+                  if (!doc.isNull()) {
+                        if (sz.isNull())
+                              sz = doc.size() * 0.4;
+                        _dirty = true;
+                        }
                   }
             }
       Image::layout();

@@ -28,6 +28,7 @@ class Image : public BSymbol {
 
    protected:
       ImageStoreItem* _storeItem;
+      QString _path;
       mutable QPixmap buffer;        ///< cached rendering
       QSizeF sz;
       bool _lockAspectRatio;

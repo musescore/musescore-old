@@ -272,7 +272,6 @@ QList<Profile*>& Profile::profiles()
             nameFilters << "*.profile";
             QStringList pl = dir.entryList(nameFilters, QDir::Files, QDir::Name);
 
-//            _profiles.append(defaultProfile);
             foreach (QString s, pl) {
                   Profile* p = new Profile;
                   p->setPath(dataPath + "/profiles/" + s);
