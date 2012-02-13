@@ -1,4 +1,6 @@
 13.2 (ws)
+      - patch #14940: SVG images printed twice on PDF 1st page and never on
+        following pages (patch from Miwarre)
       - class ImagePath() replaced by ImageStore()
       - add "name" to palette cell properties dialog
       - fix beaming for groups of grace notes

@@ -250,9 +250,11 @@ void SvgImage::draw(QPainter* painter) const
       painter->setWorldTransform(t);
       if (buffer.size() != s || _dirty || score()->printing()) {
             if (score()->printing()) {
-                  QPointF pt(canvasPos());
+                  QPointF pt(pagePos());
                   painter->setViewport(pt.x() * xscale, pt.y() * yscale, s.width(), s.height());
                   doc->render(painter);
+                  painter->restore();
+                  return;
                   }
             else {
                   buffer = QPixmap(s);
