@@ -522,7 +522,7 @@ void Score::undoChangeClef(Staff* ostaff, Segment* seg, ClefType st)
                   clef->setParent(segment);
                   score->undo(new AddElement(clef));
                   }
-            score->cmdUpdateNotes();
+//            score->cmdUpdateNotes();
             }
       }
 
@@ -896,17 +896,17 @@ void Score::undoAddElement(Element* element)
                   Note* n1       = tie->startNote();
                   Note* n2       = tie->endNote();
                   Chord* cr1     = n1->chord();
-                  Chord* cr2     = n2->chord();
+                  Chord* cr2     = n2 ? n2->chord() : 0;
                   Segment* s1    = cr1->segment();
-                  Segment* s2    = cr2->segment();
+                  Segment* s2    = cr2 ? cr2->segment() : 0;
                   Measure* nm1   = score->tick2measure(s1->tick());
-                  Measure* nm2   = score->tick2measure(s2->tick());
+                  Measure* nm2   = s2 ? score->tick2measure(s2->tick()) : 0;
                   Segment* ns1   = nm1->findSegment(s1->subtype(), s1->tick());
-                  Segment* ns2   = nm2->findSegment(s2->subtype(), s2->tick());
+                  Segment* ns2   = nm2 ? nm2->findSegment(s2->subtype(), s2->tick()) : 0;
                   Chord* c1      = static_cast<Chord*>(ns1->element((staffIdx - cr1->staffMove()) * VOICES + cr1->voice()));
-                  Chord* c2      = static_cast<Chord*>(ns2->element((staffIdx - cr2->staffMove()) * VOICES + cr2->voice()));
+                  Chord* c2      = ns2 ? static_cast<Chord*>(ns2->element((staffIdx - cr2->staffMove()) * VOICES + cr2->voice())) : 0;
                   Note* nn1      = c1->findNote(n1->pitch());
-                  Note* nn2      = c2->findNote(n2->pitch());
+                  Note* nn2      = c2 ? c2->findNote(n2->pitch()) : 0;
                   Tie* ntie      = static_cast<Tie*>(ne);
                   QList<SpannerSegment*>& segments = ntie->spannerSegments();
                   foreach(SpannerSegment* segment, segments)
@@ -916,9 +916,6 @@ void Score::undoAddElement(Element* element)
                   ntie->setStartNote(nn1);
                   ntie->setEndNote(nn2);
                   undo(new AddElement(ntie));
-//                  score->updateAccidentals(nm1, staffIdx);
-//                  if (nm1 != nm2)
-//                        score->updateAccidentals(nm2, staffIdx);
                   }
             else if (element->type() == INSTRUMENT_CHANGE) {
                   InstrumentChange* is = static_cast<InstrumentChange*>(element);
@@ -1233,9 +1230,9 @@ void AddElement::redo()
       if (element->type() == TIE) {
             Tie* tie = static_cast<Tie*>(element);
             Measure* m1 = tie->startNote()->chord()->measure();
-            Measure* m2 = tie->endNote()->chord()->measure();
+            Measure* m2 = tie->endNote() ? tie->endNote()->chord()->measure() : 0;
 
-            if (m1 != m2)
+            if (m2 && (m1 != m2))
                   tie->score()->updateNotes();
             else
                   tie->score()->updateAccidentals(m1, tie->staffIdx());
@@ -2952,13 +2949,12 @@ void ChangeClefType::flip()
       clef->setClefType(clef->score()->concertPitch() ? concertClef : transposingClef);
 
       Segment* segment = clef->segment();
-//      Staff* staff     = clef->staff();
-//      staff->setClef(segment->tick(), clef->clefTypeList());
       updateNoteLines(segment, clef->track());
       clef->score()->setLayoutAll(true);
 
       concertClef     = ocl;
       transposingClef = otc;
+      clef->score()->cmdUpdateNotes();
       }
 
 //---------------------------------------------------------

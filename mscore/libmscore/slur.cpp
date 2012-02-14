@@ -792,23 +792,19 @@ void Slur::slurPos(SlurPos* sp)
 
 //---------------------------------------------------------
 //   slurPos
-//    calculate position of start- and endpoint of slur
-//    relative to System() position
+//    Calculate position of start- and endpoint of slur
+//    relative to System() position.
 //---------------------------------------------------------
 
 void Tie::slurPos(SlurPos* sp)
       {
       Note* note1 = static_cast<Note*>(startElement());
-      Note* note2 = static_cast<Note*>(endElement());
-      Chord* sc   = note1->chord();
-      Chord* ec   = note2->chord();
-
-      sp->system1 = sc->measure()->system();
-      sp->system2 = ec->measure()->system();
-
       qreal hw   = note1->headWidth();
       qreal __up = _up ? -1.0 : 1.0;
       qreal _spatium = spatium();
+
+      Chord* sc   = note1->chord();
+      sp->system1 = sc->measure()->system();
 
       qreal xo;
       qreal yo;
@@ -825,6 +821,14 @@ void Tie::slurPos(SlurPos* sp)
       sp->p1 = sc->pagePos() - sp->system1->pagePos() + QPointF(xo, yo);
 
       //------p2
+      Note* note2 = static_cast<Note*>(endElement());
+      if (note2 == 0) {
+            sp->p2 = sp->p1 + QPointF(_spatium * 3, 0.0);
+            sp->system2 = sp->system1;
+            return;
+            }
+      Chord* ec   = note2->chord();
+      sp->system2 = ec->measure()->system();
       if ((ec->notes().size() > 1) || (ec->stem() && !ec->up() && !_up))
             xo = note2->x() - hw * 0.12;
       else
@@ -1128,28 +1132,7 @@ void Slur::layout()
             ++nsegs;
             }
 
-      unsigned onsegs = spannerSegments().size();
-      if (nsegs > onsegs) {
-            for (unsigned i = onsegs; i < nsegs; ++i) {
-                  SlurSegment* s;
-                  if (!delSegments.isEmpty()) {
-                        s = delSegments.dequeue();
-                        }
-                  else {
-                        s = new SlurSegment(score());
-                        }
-                  s->setTrack(track());
-                  add(s);
-                  }
-            }
-      else if (nsegs < onsegs) {
-            for (unsigned i = nsegs; i < onsegs; ++i) {
-                  SlurSegment* s = takeLastSegment();
-                  if (s->system())
-                        s->system()->remove(s);
-                  delSegments.enqueue(s);  // cannot delete: used in SlurSegment->edit()
-                  }
-            }
+      fixupSegments(nsegs);
 
       for (int i = 0; is != sl->end(); ++i, ++is) {
             System* system  = *is;
@@ -1271,21 +1254,71 @@ void Tie::read(const QDomElement& de)
       }
 
 //---------------------------------------------------------
+//   fixupSegments
+//---------------------------------------------------------
+
+void SlurTie::fixupSegments(unsigned nsegs)
+      {
+      unsigned onsegs = spannerSegments().size();
+      if (nsegs > onsegs) {
+            for (unsigned i = onsegs; i < nsegs; ++i) {
+                  SlurSegment* s;
+                  if (!delSegments.isEmpty()) {
+                        s = delSegments.dequeue();
+                        }
+                  else {
+                        s = new SlurSegment(score());
+                        }
+                  s->setTrack(track());
+                  add(s);
+                  }
+            }
+      else if (nsegs < onsegs) {
+            for (unsigned i = nsegs; i < onsegs; ++i) {
+                  SlurSegment* s = takeLastSegment();
+                  if (s->system())
+                        s->system()->remove(s);
+                  delSegments.enqueue(s);  // cannot delete: used in SlurSegment->edit()
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
 void Tie::layout()
       {
+      qreal _spatium = spatium();
+
       //
-      // TODO: if there is a startNote but no endNote
       //    show short bow
+      //
       if (startElement() == 0 || endElement() == 0) {
-            if (startElement() == 0)
+            if (startElement() == 0) {
                   qDebug("Tie::layout(): no start note");
+                  return;
+                  }
+            Chord* c1 = startNote()->chord();
+            if (_slurDirection == AUTO) {
+                  if (c1->measure()->mstaff(c1->staffIdx())->hasVoices) {
+                        // in polyphonic passage, ties go on the stem side
+                        _up = c1->up();
+                        }
+                  else
+                        _up = !c1->up();
+                  }
+            else
+                  _up = _slurDirection == UP ? true : false;
+            fixupSegments(1);
+            SlurSegment* segment = segmentAt(0);
+            segment->setSubtype(SEGMENT_SINGLE);
+            segment->setSystem(startNote()->chord()->segment()->measure()->system());
+            SlurPos sPos;
+            slurPos(&sPos);
+            segment->layout(sPos.p1, sPos.p2);
             return;
             }
-
-      qreal _spatium = spatium();
 
       Chord* c1   = startNote()->chord();
       Chord* c2   = endNote()->chord();
@@ -1308,7 +1341,7 @@ void Tie::layout()
                         _up = true;
                         }
                   else
-                        _up = !(c1->up());
+                        _up = !c1->up();
                   }
             else {
                   //
@@ -1373,29 +1406,8 @@ void Tie::layout()
 
       int sysIdx2     = systems->indexOf(sPos.system2, sysIdx1);
       unsigned nsegs  = sysIdx2 - sysIdx1 + 1;
-      unsigned onsegs = spannerSegments().size();
+      fixupSegments(nsegs);
 
-      if (nsegs > onsegs) {
-            for (unsigned i = onsegs; i < nsegs; ++i) {
-                  SlurSegment* s;
-                  if (!delSegments.isEmpty()) {
-                        s = delSegments.dequeue();
-                        }
-                  else {
-                        s = new SlurSegment(score());
-                        }
-                  s->setTrack(track());
-                  add(s);
-                  }
-            }
-      else if (nsegs < onsegs) {
-            for (unsigned i = nsegs; i < onsegs; ++i) {
-                  SlurSegment* s = takeLastSegment();
-                  if (s->system())
-                        s->system()->remove(s);
-                  delSegments.enqueue(s);  // cannot delete: used in SlurSegment->edit()
-                  }
-            }
       int i = 0;
       for (uint ii = 0; ii < nsegs; ++ii) {
             System* system = (*systems)[sysIdx1++];
