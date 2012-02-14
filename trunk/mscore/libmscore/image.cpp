@@ -239,34 +239,20 @@ SvgImage* SvgImage::clone() const
 
 void SvgImage::draw(QPainter* painter) const
       {
-      if (!doc)
-            return;
-      painter->save();
-      QTransform t = painter->transform();
-      qreal xscale = t.m11();
-      qreal yscale = t.m22();
-      QSize s      = QSizeF(sz.width() * xscale, sz.height() * yscale).toSize();
-      t.setMatrix(1.0, t.m12(), t.m13(), t.m21(), 1.0, t.m23(), t.m31(), t.m32(), t.m33());
-      painter->setWorldTransform(t);
-      if (buffer.size() != s || _dirty || score()->printing()) {
-            if (score()->printing()) {
-                  QPointF pt(pagePos());
-                  painter->setViewport(pt.x() * xscale, pt.y() * yscale, s.width(), s.height());
-                  doc->render(painter);
-                  painter->restore();
-                  return;
-                  }
-            else {
-                  buffer = QPixmap(s);
-                  buffer.fill(Qt::transparent);
-                  QPainter pp(&buffer);
-                  pp.setViewport(0, 0, s.width(), s.height());
-                  doc->render(&pp);
-                  _dirty = false;
-                  }
+      if (!doc) {
+            painter->setBrush(Qt::NoBrush);
+            painter->setPen(Qt::black);
+            painter->drawRect(bbox());
+            painter->drawLine(0.0, 0.0, bbox().width(), bbox().height());
+            painter->drawLine(bbox().width(), 0.0, 0.0, bbox().height());
             }
-      Image::draw(painter, s);
-      painter->restore();
+      else
+            doc->render(painter, bbox());
+      if (selected() && !(score() && score()->printing())) {
+            painter->setBrush(Qt::NoBrush);
+            painter->setPen(Qt::blue);
+            painter->drawRect(bbox());
+            }
       }
 
 //---------------------------------------------------------
@@ -275,9 +261,9 @@ void SvgImage::draw(QPainter* painter) const
 
 void SvgImage::layout()
       {
-      if (!doc->isValid()) {
+      if (!doc) {
             if (_storeItem) {
-                  doc->load(_storeItem->buffer());
+                  doc = new QSvgRenderer(_storeItem->buffer());
                   if (doc->isValid()) {
                         if (sz.isNull())
                               sz = doc->defaultSize();

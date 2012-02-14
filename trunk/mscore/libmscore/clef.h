@@ -77,6 +77,7 @@ class Clef : public Element {
 
       ClefTypeList _clefTypes;
       ClefType curClefType;
+      void layout1();
 
    public:
       Clef(Score*);
@@ -121,6 +122,7 @@ class Clef : public Element {
       void setConcertClef(ClefType val);
       void setTransposingClef(ClefType val);
       void setClefType(const ClefTypeList& ctl) { _clefTypes = ctl; }
+      virtual void spatiumChanged(qreal oldValue, qreal newValue);
       };
 
 #endif

@@ -112,7 +112,15 @@ void Clef::layout()
       {
       if (curClefType == clefType())
             return;
+      layout1();
+      }
 
+//---------------------------------------------------------
+//   layout1
+//---------------------------------------------------------
+
+void Clef::layout1()
+      {
       qreal smag     = _small ? score()->style(ST_smallClefMag).toDouble() : 1.0;
       qreal _spatium = spatium();
       qreal msp      = _spatium * smag;
@@ -543,3 +551,15 @@ bool Clef::setProperty(P_ID propertyId, const QVariant& v)
             }
       return true;
       }
+
+
+//---------------------------------------------------------
+//   spatiumChanged
+//---------------------------------------------------------
+
+void Clef::spatiumChanged(qreal oldValue, qreal newValue)
+      {
+      layout1();
+      Element::spatiumChanged(oldValue, newValue);
+      }
+
