@@ -1018,10 +1018,11 @@ void Score::selectElementDialog(Element* e)
       }
 
 //---------------------------------------------------------
-//   isInMiddleOfTuplet
+//   checkStart
+//     return true if element is NOT a tuplet or is start of a tuplet
 //---------------------------------------------------------
 
-static bool isInMiddleOfTuplet(Element* e)
+static bool checkStart(Element* e)
       {
       if (e == 0 || !e->isChordRest())
             return false;
@@ -1031,8 +1032,6 @@ static bool isInMiddleOfTuplet(Element* e)
       Tuplet* tuplet = cr->tuplet();
       while (tuplet) {
             if (tuplet->elements().front() == e)
-                  return false;
-            if (tuplet->elements().back() == e)
                   return false;
             tuplet = tuplet->tuplet();
             }
@@ -1050,11 +1049,13 @@ bool Selection::canCopy() const
             return true;
 
       for (int staffIdx = _staffStart; staffIdx != _staffEnd; ++staffIdx) {
-            if (isInMiddleOfTuplet(_startSegment->element(staffIdx)))
+            if (checkStart(_startSegment->element(staffIdx)))
                   return false;
-            if (_endSegment && isInMiddleOfTuplet(_endSegment->element(staffIdx)))
+            // _endSegment is the next segment after the selection,
+            // it must also be at the start of a tuplet so that the
+            // selected tuplet is fully contained in the selection
+            if (_endSegment && checkStart(_endSegment->element(staffIdx)))
                   return false;
             }
       return true;
       }
-
