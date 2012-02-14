@@ -359,7 +359,6 @@ void SLine::layout()
             }
 
       setPos(QPointF());
-      setUserOff(QPointF());
       System* s1;
       System* s2;
       int staffI = staffIdx();
