@@ -1,4 +1,7 @@
 14.2 (ws)
+      - do not use pixmap cache for svg's anymore as this does not work for redering
+        in a background task
+      - fix position of clefs after spatium change
       - allow ties without second note
 13.2 (ws)
       - fix clef drop target color
