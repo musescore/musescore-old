@@ -1731,7 +1731,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                                           }
                                     iEndingNumbers.append(iEndingNumber);
                                     }
-                              
+
                               if (unsupported)
                                     qDebug("ImportXml: warning: unsupported ending number <%s>",
                                            endingNumber.toLatin1().data());
@@ -1877,8 +1877,15 @@ static void setSLinePlacement(SLine* sli, float s, const QString pl, bool hasYof
             else
                   qDebug("setSLinePlacement invalid placement '%s'", qPrintable(pl));
             }
-      LineSegment* ls = (LineSegment*)sli->spannerSegments().front();
-      ls->setUserOff(QPointF(0, offs * s));
+
+// there is no line segment without calling layout();
+// layout() only works after SLine is inserted in the score.
+//      LineSegment* ls = (LineSegment*)sli->spannerSegments().front();
+//      ls->setUserOff(QPointF(0, offs * s));
+// alternative:
+
+      sli->setUserOff(QPointF(0, offs * s));
+
       qDebug(" -> offs*s=%g", offs * s);
       }
 
@@ -3280,22 +3287,22 @@ static AccidentalType convertAccidental(QString mxmlName)
       map["quarter-sharp"] = ACC_SHARP_SLASH;
       map["three-quarters-flat"] = ACC_MIRRORED_FLAT2;
       map["three-quarters-sharp"] = ACC_SHARP_SLASH4;
-      
+
       map["sharp-down"] = ACC_SHARP_ARROW_DOWN;
       map["sharp-up"] = ACC_SHARP_ARROW_UP;
       map["natural-down"] = ACC_NATURAL_ARROW_DOWN;
       map["natural-up"] = ACC_NATURAL_ARROW_UP;
       map["flat-down"] = ACC_FLAT_ARROW_DOWN;
       map["flat-up"] = ACC_FLAT_ARROW_UP;
-      
+
       map["slash-quarter-sharp"] = ACC_MIRRIRED_FLAT_SLASH;
       map["slash-sharp"] = ACC_SHARP_SLASH;
       map["slash-flat"] = ACC_FLAT_SLASH;
       map["double-slash-flat"] = ACC_FLAT_SLASH2;
-      
+
       map["sori"] = ACC_SORI;
       map["koron"] = ACC_KORON;
-      
+
       map["natural-sharp"] = ACC_NONE;
 
       if (map.contains(mxmlName))
