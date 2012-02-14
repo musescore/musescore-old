@@ -120,6 +120,7 @@ class SlurTie : public Spanner {
       QQueue<SlurSegment*> delSegments;   // "deleted" segments
       Direction _slurDirection;
       qreal firstNoteRestSegmentX(System* system);
+      void fixupSegments(unsigned nsegs);
 
    public:
       SlurTie(Score*);

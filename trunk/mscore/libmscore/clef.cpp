@@ -299,7 +299,9 @@ void Clef::draw(QPainter* painter) const
       {
       if (staff() && staff()->useTablature() && !staff()->staffType()->genClef())
 	      return;
+      QColor color(curColor());
       foreach(Element* e, elements) {
+            e->setColor(color);
             QPointF pt(e->pos());
             painter->translate(pt);
             e->draw(painter);

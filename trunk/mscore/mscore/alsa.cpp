@@ -676,6 +676,7 @@ void AlsaAudio::alsaLoop()
       int size = alsa->fsize();
       float lbuffer[size];
       float rbuffer[size];
+      runAlsa = 2;
       while (runAlsa == 2) {
             seq->process(size, lbuffer, rbuffer);
             alsa->write(size, lbuffer, rbuffer);
@@ -690,7 +691,6 @@ void AlsaAudio::alsaLoop()
 
 bool AlsaAudio::start()
       {
-      runAlsa = 2;
       pthread_attr_t* attributes = (pthread_attr_t*) malloc(sizeof(pthread_attr_t));
       pthread_attr_init(attributes);
       if (pthread_create(&thread, attributes, ::alsaLoop, this))
@@ -707,8 +707,12 @@ bool AlsaAudio::stop()
       {
       if (runAlsa == 2) {
             runAlsa = 1;
-            while (runAlsa != 0)
+            int i = 0;
+            for (;i < 4; ++i) {
+                  if (runAlsa == 0)
+                        break;
                   sleep(1);
+                  }
             pthread_cancel(thread);
             pthread_join(thread, 0);
             }

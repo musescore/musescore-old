@@ -932,7 +932,6 @@ void Score::cmdAddTie()
                   if (_is.cr() == 0)
                         break;
                   bool addFlag = _is.cr()->type() == CHORD;
-printf("====add %d\n", addFlag);
                   Note* n = addPitch(note->pitch(), addFlag);
                   if (n) {
                         n->setLine(note->line());
@@ -974,17 +973,18 @@ printf("====add %d\n", addFlag);
                   if (noteFound || note2)
                         break;
                   }
-            if (note2 == 0) {
+/*            if (note2 == 0) {
                   if (debugMode)
                         qDebug("cmdAddTie: next note for tie not found");
                   continue;
                   }
+*/
             Tie* tie = new Tie(this);
             tie->setStartNote(note);
             tie->setEndNote(note2);
             tie->setTrack(note->track());
             undoAddElement(tie);
-            select(note2, SELECT_SINGLE, 0);
+//            select(note2, SELECT_SINGLE, 0);
             }
       endCmd();
       }
