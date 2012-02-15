@@ -1,5 +1,7 @@
+15.feb (la)
+      - fix #14973: Transparent and truly vectorial embedded SVG (patch by Miwarre)
 14.feb (la)
-      -  fix #14648: Disallow copy of part of tuplets (patch by Jorgk)
+      - fix #14648: Disallow copy of part of tuplets (patch by Jorgk)
 13.feb (la)
       - Add Frame Text to Vertical Frame
       - MusicXML: minimal support of page relative text on first page in import and export

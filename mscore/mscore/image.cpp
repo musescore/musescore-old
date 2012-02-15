@@ -208,21 +208,20 @@ SvgImage* SvgImage::clone() const
 //   draw
 //---------------------------------------------------------
 
-void SvgImage::draw(QPainter& p) const
+void SvgImage::draw(QPainter& painter) const
       {
-      if (!doc)
-            return;
-      QSize s = sz.toSize();
-
-      if (buffer.size() != s || _dirty) {
-            buffer = QPixmap(s);
-            buffer.fill();
-            QPainter pp(&buffer);
-            pp.setViewport(0, 0, s.width(), s.height());
-            doc->render(&pp);
-            _dirty = false;
+      if (!doc) {
+            painter.setBrush(Qt::NoBrush);
+            painter.setPen(Qt::black);
+            painter.drawRect(bbox());
             }
-      Image::draw(p);
+      else
+            doc->render(&painter, bbox());
+      if( selected() && !(score() && score()->printing()) ) {
+            painter.setBrush(Qt::NoBrush);
+            painter.setPen(Qt::blue);
+            painter.drawRect(bbox());
+            }
       }
 
 //---------------------------------------------------------
