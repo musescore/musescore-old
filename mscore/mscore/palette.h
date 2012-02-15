@@ -40,7 +40,7 @@ struct PaletteCell {
       QString tag;
       bool drawStaff;
       double x, y;
-      int xoffset, yoffset;
+      double xoffset, yoffset;      // in spatium units of "gscore"
       qreal mag;
       bool readOnly;
       };
@@ -190,7 +190,7 @@ class Palette : public QWidget {
       bool _drawGrid;
       bool _selectable;
       bool _readOnly;
-      qreal _yOffset;
+      qreal _yOffset;         // in spatium units of "gscore"
 
       void redraw(const QRect&);
       virtual void paintEvent(QPaintEvent*);

@@ -531,8 +531,9 @@ void Palette::paintEvent(QPaintEvent* event)
                   el->layout();
                   el->setPos(0.0, 0.0);
 
+                  qreal cellMag = cells[idx]->mag * mag;
                   if (drawStaff) {
-                        qreal y = r.y() + vgrid * .5 - dy + _yOffset;
+                        qreal y = r.y() + vgrid * .5 - dy + _yOffset * _spatium * cellMag;
                         qreal x = r.x() + 3;
                         qreal w = hhgrid - 6;
                         for (int i = 0; i < 5; ++i) {
@@ -541,27 +542,26 @@ void Palette::paintEvent(QPaintEvent* event)
                               }
                         }
                   p.save();
-                  qreal cellMag = cells[idx]->mag * mag;
                   p.scale(cellMag, cellMag);
 
                   double gw = hhgrid / cellMag;
                   double gh = vgrid / cellMag;
-                  double gx = column * gw + cells[idx]->xoffset / cellMag;
-                  double gy = row    * gh + cells[idx]->yoffset / cellMag;
+                  double gx = column * gw + cells[idx]->xoffset * _spatium;
+                  double gy = row    * gh + cells[idx]->yoffset * _spatium;
 
                   double sw = el->width();
                   double sh = el->height();
                   double sy;
 
                   if (drawStaff)
-                        sy = gy + gh * .5 - 2.0 * gscore->spatium();
+                        sy = gy + gh * .5 - 2.0 * _spatium;
                   else
                         sy  = gy + (gh - sh) * .5 - el->bbox().y();
                   double sx  = gx + (gw - sw) * .5 - el->bbox().x();
 
-                  sy += _yOffset / cellMag;
+                  sy += _yOffset * _spatium;
 
-                  p.translate(QPointF(sx, sy));
+                  p.translate(sx, sy);
                   cells[idx]->x = sx;
                   cells[idx]->y = sy;
 
@@ -1101,17 +1101,17 @@ void Palette::read(QDomElement e)
                   else {
                         QString name = e.attribute("name", "");
                         bool drawStaff = false;
-                        int xoffset = 0;
-                        int yoffset = 0;
+                        double xoffset = 0.0;
+                        double yoffset = 0.0;
                         qreal mag   = 1.0;
                         for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                               QString tag(ee.tagName());
                               if (tag == "staff")
                                     drawStaff = ee.text().toInt();
                               else if (tag == "xoffset")
-                                    xoffset = ee.text().toInt();
+                                    xoffset = ee.text().toDouble();
                               else if (tag == "yoffset")
-                                    yoffset = ee.text().toInt();
+                                    yoffset = ee.text().toDouble();
                               else if (tag == "mag")
                                     mag = ee.text().toDouble();
                               else if (tag == "tag")

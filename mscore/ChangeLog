@@ -1,3 +1,5 @@
+15.2 (ws)
+      - palette offset and palette cell offset is now in spatium units
 14.2 (ws)
       - do not use pixmap cache for svg's anymore as this does not work for redering
         in a background task
