@@ -904,8 +904,8 @@ bool Palette::read(QFile* qf)
 void Palette::read(const QString& p)
       {
       QString path(p);
-      if (!path.endsWith(".pal"))
-            path += ".pal";
+      if (!path.endsWith(".mpal"))
+            path += ".mpal";
 
       QZipReader f(path);
       QByteArray ba = f.fileData("META-INF/container.xml");
@@ -1018,8 +1018,8 @@ void Palette::write(const QString& p)
             }
 
       QString path(p);
-      if (!path.endsWith(".pal"))
-            path += ".pal";
+      if (!path.endsWith(".mpal"))
+            path += ".mpal";
 
       QZipWriter f(path);
       // f.setCompressionPolicy(QZipWriter::NeverCompress);

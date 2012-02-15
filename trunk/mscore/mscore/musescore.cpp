@@ -3521,10 +3521,10 @@ void MuseScore::showProfileMenu()
             menuProfiles->addAction(a);
             }
       menuProfiles->addSeparator();
-      QAction* a = new QAction(tr("new Profile"), this);
+      QAction* a = new QAction(tr("New Profile"), this);
       connect(a, SIGNAL(triggered()), SLOT(createNewProfile()));
       menuProfiles->addAction(a);
-      deleteProfileAction = new QAction(tr("delete Profile"), this);
+      deleteProfileAction = new QAction(tr("Delete Profile"), this);
       connect(deleteProfileAction, SIGNAL(triggered()), SLOT(deleteProfile()));
       menuProfiles->addAction(deleteProfileAction);
       // default profile cannot be deleted

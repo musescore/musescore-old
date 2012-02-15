@@ -1099,11 +1099,11 @@ QString MuseScore::getPaletteFilename(bool open)
       QString filter;
       if (open) {
             title  = tr("MuseScore: Load Palette");
-            filter = tr("MuseScore Palette (*.pal);;All Files (*)");
+            filter = tr("MuseScore Palette (*.mpal);;All Files (*)");
             }
       else {
             title  = tr("MuseScore: Save Palette");
-            filter = tr("MuseScore Palette (*.pal)");
+            filter = tr("MuseScore Palette (*.mpal)");
 
             // create dataPath/profiles if it does not exist
             QDir dir;
