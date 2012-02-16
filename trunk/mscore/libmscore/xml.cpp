@@ -237,6 +237,10 @@ void Xml::tag(P_ID id, void* data, void* defaultVal)
                   if (compareProperty<QPointF>(data, defaultVal))
                         tag(name, QVariant(*(QPointF*)data));
                   break;
+            case T_SIZE:
+                  if (compareProperty<QSizeF>(data, defaultVal))
+                        tag(name, QVariant(*(QSizeF*)data));
+                  break;
             case T_COLOR:
                   if (compareProperty<QColor>(data, defaultVal))
                         tag(name, QVariant(*(QColor*)data));

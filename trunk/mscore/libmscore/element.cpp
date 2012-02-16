@@ -1606,6 +1606,8 @@ QVariant Element::getVariant(P_ID id, void* data) const
                         return QVariant(*(QColor*)data);
                   case T_POINT:
                         return QVariant(*(QPointF*)data);
+                  case T_SIZE:
+                        return QVariant(*(QSizeF*)data);
                   }
             }
       return QVariant();
@@ -1636,6 +1638,9 @@ void Element::setVariant(P_ID id, void* data, const QVariant& value)
                   break;
             case T_POINT:
                   *(QPointF*)data = value.toPointF();
+                  break;
+            case T_SIZE:
+                  *(QSizeF*)data = value.toSizeF();
                   break;
             case T_COLOR:
                   *(QColor*)data = value.value<QColor>();

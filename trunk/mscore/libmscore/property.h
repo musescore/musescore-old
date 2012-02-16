@@ -73,6 +73,10 @@ enum P_ID {
       P_TOP_MARGIN,
       P_BOTTOM_MARGIN,
       P_LAYOUT_BREAK,
+      P_AUTOSCALE,
+      P_SIZE,
+      P_LOCK_ASPECT_RATIO,
+      P_SIZE_IS_SPATIUM,
 
       P_END
       };
@@ -85,6 +89,7 @@ enum P_TYPE {
       T_SREAL,
       T_FRACTION,
       T_POINT,
+      T_SIZE,
       T_COLOR,
       T_DIRECTION,      // enum Direction
       T_DIRECTION_H,    // enum DirectionH

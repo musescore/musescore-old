@@ -112,14 +112,14 @@ void Palette::contextMenuEvent(QContextMenuEvent* event)
       if (i == -1)
             return;
       QMenu menu;
-      QAction* deleteAction = menu.addAction(tr("Delete Contents"));
+      QAction* clearAction = menu.addAction(tr("Clear"));
       QAction* contextAction = menu.addAction(tr("Properties..."));
       if (cells[i] && cells[i]->readOnly)
-            deleteAction->setEnabled(false);
+            clearAction->setEnabled(false);
 
       QAction* action = menu.exec(mapToGlobal(event->pos()));
 
-      if (action == deleteAction) {
+      if (action == clearAction) {
             PaletteCell* cell = cells[i];
             if (cell)
                   delete cell->element;
@@ -139,17 +139,14 @@ void Palette::contextMenuEvent(QContextMenuEvent* event)
                   }
             }
       bool sizeChanged = false;
-      while (cells.size() > 1) {
-            if (cells.back() == 0) {
-                  cells.removeLast();
-                  sizeChanged = true;
-                  }
-            else
-                  break;
+      while (!cells.isEmpty() && cells.back() == 0) {
+            cells.removeLast();
+            sizeChanged = true;
             }
       if (sizeChanged) {
             updateGeometry();
             static_cast<QWidget*>(parent())->updateGeometry();
+            update();
             }
       }
 
@@ -384,6 +381,10 @@ void Palette::leaveEvent(QEvent*)
 
 PaletteCell* Palette::append(Element* s, const QString& name, QString tag, qreal mag)
       {
+      if (s == 0) {
+            cells.append(0);
+            return 0;
+            }
       PaletteCell* cell = new PaletteCell;
       cells.append(cell);
       return add(cells.size() - 1, s, name, tag, mag);
@@ -688,9 +689,6 @@ void Palette::dropEvent(QDropEvent* event)
       Element* e = 0;
       QString name;
 
-      int rightBorder = width() - columns() * hgrid;
-      int hhgrid = hgrid + (rightBorder / columns());
-
       const QMimeData* data = event->mimeData();
       if (data->hasUrls()) {
             QList<QUrl>ul = event->mimeData()->urls();
@@ -701,18 +699,16 @@ void Palette::dropEvent(QDropEvent* event)
                   QString suffix(fi.suffix().toLower());
                   if (suffix == "svg")
                         s = new SvgImage(gscore);
-                  else
-                        if (suffix == "jpg"
+                  else if (suffix == "jpg"
                      || suffix == "png"
+                     || suffix == "gif"
                      || suffix == "xpm"
                         )
                         s = new RasterImage(gscore);
                   else
                         return;
-                  qreal mag = PALETTE_SPATIUM * extraMag / gscore->spatium();
                   QString filePath(u.toLocalFile());
                   s->load(filePath);
-                  s->setSize(QSizeF(hhgrid / mag, hhgrid / mag));
                   e = s;
                   QFileInfo f(filePath);
                   name = f.baseName();
@@ -799,12 +795,17 @@ void Palette::dropEvent(QDropEvent* event)
             event->setDropAction(Qt::MoveAction);
             }
       else {
-            append(e, name);
+            int i = idx(event->pos());
+            if (i == -1 || cells[i] != 0)
+                  append(e, name);
+            else
+                  add(i, e, name);
             ok = true;
             }
       if (ok) {
             event->acceptProposedAction();
             updateGeometry();
+            static_cast<QWidget*>(parent())->updateGeometry();
             update();
             emit changed();
             }

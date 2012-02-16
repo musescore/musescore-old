@@ -44,11 +44,13 @@ QVariant InspectorBase::getValue(int idx) const
       QWidget* w              = ii.w;
 
       switch (propertyType(ii.t)) {
+            case T_SIZE:
             case T_SREAL:
             case T_REAL:      return w->property("value");
             case T_DIRECTION: return w->property("currentIndex");
             case T_BOOL:      return w->property("checked");
-            default:          abort();
+            default:
+                  abort();
             }
       return QVariant();
       }
@@ -63,6 +65,7 @@ void InspectorBase::setValue(int idx, const QVariant& val)
       QWidget* w        = ii.w;
 
       switch (propertyType(ii.t)) {
+            case T_SIZE:
             case T_SREAL:
             case T_REAL:
                   static_cast<QDoubleSpinBox*>(w)->setValue(val.toDouble());
@@ -96,6 +99,10 @@ bool InspectorBase::isDefault(int idx)
             case T_REAL:      return val.toDouble() == *(qreal*)def;
             case T_DIRECTION: return val.toInt() == *(int*)def;
             case T_BOOL:      return val.toBool() == *(bool*)def;
+            case T_SIZE: {
+                  qreal v = ii.sv == 0 ? (*(QSizeF*)def).width() : (*(QSizeF*)def).height();
+                  return val.toDouble() == v;
+                  }
             default:          abort();
             }
       }
@@ -136,7 +143,17 @@ void InspectorBase::setElement(Element* e)
             QWidget*     w = item(i).w;
             QToolButton* r = item(i).r;
             P_ID id        = item(i).t;
-            QVariant val   = e->getProperty(id);
+            P_TYPE pt      = propertyType(id);
+            QVariant val;
+            if (pt == T_SIZE) {
+                  QSizeF sz = e->getProperty(id).toSizeF();
+                  if (item(i).sv == 0)
+                        val = QVariant(sz.width());
+                  else
+                        val = QVariant(sz.height());
+                  }
+            else
+                  val = e->getProperty(id);
 
             w->blockSignals(true);
             setValue(i, val);
@@ -158,10 +175,27 @@ void InspectorBase::apply()
 
       score->startCmd();
       for (int i = 0; i < inspectorItems(); ++i) {
-            QVariant val1 = e->getProperty(item(i).t);
-            QVariant val2 = getValue(i);
-            if (val1 != val2)
-                  score->undoChangeProperty(e, item(i).t, val2);
+            P_ID id   = item(i).t;
+            P_TYPE pt = propertyType(id);
+
+            QVariant val1 = e->getProperty(id);
+            if (pt == T_SIZE) {
+                  qreal v = getValue(i).toDouble();
+                  QSizeF sz = val1.toSizeF();
+                  if (item(i).sv == 0) {
+                        if (sz.width() != v)
+                              score->undoChangeProperty(e, id, QVariant(QSizeF(v, sz.height())));
+                        }
+                  else {
+                        if (sz.height() != v)
+                              score->undoChangeProperty(e, id, QVariant(QSizeF(sz.width(), v)));
+                        }
+                  }
+            else {
+                  QVariant val2 = getValue(i);
+                  if (val1 != val2)
+                        score->undoChangeProperty(e, id, val2);
+                  }
             }
       score->setLayoutAll(true);
       score->endCmd();
@@ -212,6 +246,7 @@ void InspectorBase::mapSignals()
             switch (propertyType(item(i).t)) {
                   case T_REAL:
                   case T_SREAL:
+                  case T_SIZE:
                         connect(w, SIGNAL(valueChanged(double)), valueMapper, SLOT(map()));
                         break;
                   case T_DIRECTION:

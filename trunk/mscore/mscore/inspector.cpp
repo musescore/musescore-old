@@ -13,6 +13,7 @@
 
 #include "inspector.h"
 #include "inspectorBeam.h"
+#include "inspectorImage.h"
 #include "inspectorGroupElement.h"
 #include "musescore.h"
 #include "libmscore/element.h"
@@ -138,6 +139,7 @@ void Inspector::setElement(Element* e)
                   case REST:         ie = new InspectorRest(this); break;
                   case CLEF:         ie = new InspectorClef(this); break;
                   case BEAM:         ie = new InspectorBeam(this); break;
+                  case IMAGE:        ie = new InspectorImage(this); break;
                   default:           ie = new InspectorElement(this); break;
                   }
             layout->insertWidget(0, ie);
