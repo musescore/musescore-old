@@ -1,4 +1,10 @@
 15.2 (ws)
+      - new image property to give size in spatium units (vs. metric mm)
+      - implement inspector panel for images
+      - fix implementation of "holes" in palette. They can be reused for new elements
+        dropped to the palette (see #14974)
+      - in palette element popup: renamed "Delete contents" to "Clear"
+15.2 (ws)
       - palette offset and palette cell offset is now in spatium units
 14.2 (ws)
       - do not use pixmap cache for svg's anymore as this does not work for redering

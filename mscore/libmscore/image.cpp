@@ -19,16 +19,34 @@
 #include "imageStore.h"
 
 //---------------------------------------------------------
+//   propertyList
+//---------------------------------------------------------
+
+static bool defaultAutoScale       = false;
+static bool defaultLockAspectRatio = true;
+static bool defaultSizeIsSpatium   = true;
+
+Property<Image> Image::propertyList[] = {
+      { P_AUTOSCALE,         &Image::pAutoScale,       &defaultAutoScale },
+      { P_SIZE,              &Image::pSize,            0 },
+      { P_LOCK_ASPECT_RATIO, &Image::pLockAspectRatio, &defaultLockAspectRatio },
+      { P_SIZE_IS_SPATIUM,   &Image::pSizeIsSpatium,   &defaultSizeIsSpatium   },
+      { P_END, 0, 0 },
+      };
+
+//---------------------------------------------------------
 //   Image
 //---------------------------------------------------------
 
 Image::Image(Score* s)
    : BSymbol(s)
       {
+      _size            = QSizeF(0, 0);
       _storeItem       = 0;
       _dirty           = false;
-      _lockAspectRatio = true;
-      _autoScale       = false;
+      _lockAspectRatio = defaultLockAspectRatio;
+      _autoScale       = defaultAutoScale;
+      _sizeIsSpatium   = defaultSizeIsSpatium;
       setZ(IMAGE * 100);
       }
 
@@ -36,11 +54,12 @@ Image::Image(const Image& img)
    : BSymbol(img)
       {
       buffer           = img.buffer;
-      sz               = img.sz;
+      _size            = img._size;
       _lockAspectRatio = img._lockAspectRatio;
       _autoScale       = img._autoScale;
       _dirty           = img._dirty;
       _storeItem       = img._storeItem;
+      _sizeIsSpatium   = img._sizeIsSpatium;
       _storeItem->reference(this);
       }
 
@@ -53,6 +72,8 @@ Image::~Image()
       if (_storeItem)
             _storeItem->dereference(this);
       }
+
+PROPERTY_FUNCTIONS(Image)
 
 //---------------------------------------------------------
 //   draw
@@ -105,12 +126,7 @@ void Image::write(Xml& xml) const
       xml.stag("Image");
       Element::writeProperties(xml);
       xml.tag("path", _storeItem ? _storeItem->hashName() : _path);
-      if (!_lockAspectRatio)
-            xml.tag("lockAspectRatio", _lockAspectRatio);
-      if (_autoScale)
-            xml.tag("autoScale", _autoScale);
-      else
-            xml.tag("size", sz / DPMM);
+      WRITE_PROPERTIES(Image)
       xml.etag();
       }
 
@@ -122,21 +138,14 @@ void Image::read(const QDomElement& de)
       {
       for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
-            if (tag == "path") {
+            if (setProperty(tag, e))
+                  ;
+            else if (tag == "path") {
                   _path = e.text();
                   _storeItem = imageStore.getImage(_path);
                   if (_storeItem)
                         _storeItem->reference(this);
                   }
-            else if (tag == "size") {
-                  sz = readSize(e);
-                  if (score()->mscVersion() >= 109)
-                        sz *= DPMM;
-                  }
-            else if (tag == "lockAspectRatio")
-                  _lockAspectRatio = e.text().toInt();
-            else if (tag == "autoScale")
-                  _autoScale = e.text().toInt();
             else if (!Element::readProperties(e))
                   domError(e);
             }
@@ -166,16 +175,27 @@ bool Image::load(const QString& ss)
 
 void Image::editDrag(const EditData& ed)
       {
-      qreal ratio = sz.width() / sz.height();
-      if (ed.curGrip == 0) {
-            sz.setWidth(sz.width() + ed.delta.x());
-            if (_lockAspectRatio)
-                  sz.setHeight(sz.width() / ratio);
+      qreal ratio = _size.width() / _size.height();
+      qreal dx = ed.delta.x();
+      qreal dy = ed.delta.y();
+      if (_sizeIsSpatium) {
+            qreal _spatium = spatium();
+            dx /= _spatium;
+            dy /= _spatium;
             }
       else {
-            sz.setHeight(sz.height() + ed.delta.y());
+            dx /= DPMM;
+            dy /= DPMM;
+            }
+      if (ed.curGrip == 0) {
+            _size.setWidth(_size.width() + dx);
             if (_lockAspectRatio)
-                  sz.setWidth(sz.height() * ratio);
+                  _size.setHeight(_size.width() / ratio);
+            }
+      else {
+            _size.setHeight(_size.height() + dy);
+            if (_lockAspectRatio)
+                  _size.setWidth(_size.height() * ratio);
             }
       layout();
       }
@@ -265,9 +285,11 @@ void SvgImage::layout()
             if (_storeItem) {
                   doc = new QSvgRenderer(_storeItem->buffer());
                   if (doc->isValid()) {
-                        if (sz.isNull())
-                              sz = doc->defaultSize();
-                        _dirty = true;
+                        if (_size.isNull()) {
+                              _size = doc->defaultSize();
+                              if (_sizeIsSpatium)
+                                    _size /= 10.0;    // by convention
+                              }
                         }
                   }
             }
@@ -303,14 +325,19 @@ RasterImage* RasterImage::clone() const
 void RasterImage::draw(QPainter* painter) const
       {
       painter->save();
+      QSizeF s;
+      if (_sizeIsSpatium)
+            s = _size * spatium();
+      else
+            s = _size * DPMM;
       if (score()->printing()) {
             // use original image size for printing
-            painter->scale(sz.width() / doc.width(), sz.height() / doc.height());
+            painter->scale(s.width() / doc.width(), s.height() / doc.height());
             painter->drawPixmap(QPointF(0, 0), QPixmap::fromImage(doc));
             }
       else {
             QTransform t = painter->transform();
-            QSize s = QSizeF(sz.width() * t.m11(), sz.height() * t.m22()).toSize();
+            QSize s = QSizeF(s.width() * t.m11(), s.height() * t.m22()).toSize();
             t.setMatrix(1.0, t.m12(), t.m13(), t.m21(), 1.0, t.m23(), t.m31(), t.m32(), t.m33());
             painter->setWorldTransform(t);
             if ((buffer.size() != s || _dirty) && !doc.isNull()) {
@@ -332,8 +359,13 @@ void RasterImage::layout()
             if (_storeItem) {
                   doc.loadFromData(_storeItem->buffer());
                   if (!doc.isNull()) {
-                        if (sz.isNull())
-                              sz = doc.size() * 0.4;
+                        if (_size.isNull()) {
+                              _size = doc.size() * 0.4;
+                              if (_sizeIsSpatium)
+                                    _size /= spatium();
+                              else
+                                    _size /= DPMM;
+                              }
                         _dirty = true;
                         }
                   }
@@ -347,6 +379,7 @@ void RasterImage::layout()
 
 void Image::layout()
       {
+      qreal f = _sizeIsSpatium ? spatium() : DPMM;
       // if autoscale && inside a box, scale to box relevant size
       if (autoScale() && parent() && ((parent()->type() == HBOX || parent()->type() == VBOX))) {
             if (_lockAspectRatio) {
@@ -355,20 +388,20 @@ void Image::layout()
                   qreal w = parent()->width();
                   qreal h = parent()->height();
                   if ((w / h) < ratio) {
-                        sz.setWidth(w);
-                        sz.setHeight(w / ratio);
+                        _size.setWidth(w / f);
+                        _size.setHeight((w / ratio) / f);
                         }
                   else {
-                        sz.setHeight(h);
-                        sz.setWidth(h * ratio);
+                        _size.setHeight(h / f);
+                        _size.setWidth(h * ratio / f);
                         }
                   }
             else
-                  sz = parent()->bbox().size();
+                  _size = parent()->bbox().size() / f;
             }
 
       // in any case, adjust position relative to parent
       adjustReadPos();
-      setbbox(QRectF(0.0, 0.0, sz.width(), sz.height()));
+      setbbox(QRectF(0.0, 0.0, _size.width() * f, _size.height() * f));
       }
 

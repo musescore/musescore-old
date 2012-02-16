@@ -80,6 +80,10 @@ static const PropertyData propertyList[] = {
       { P_TOP_MARGIN,          "topMargin",     T_REAL  },
       { P_BOTTOM_MARGIN,       "bottomMargin",  T_REAL  },
       { P_LAYOUT_BREAK,        "subtype",       T_LAYOUT_BREAK },
+      { P_AUTOSCALE,           "autoScale",     T_BOOL },
+      { P_SIZE,                "size",            T_SIZE },
+      { P_LOCK_ASPECT_RATIO,   "lockAspectRatio", T_BOOL },
+      { P_SIZE_IS_SPATIUM,     "sizeIsSpatium",   T_BOOL },
       { P_END,                 "",              T_INT   }
       };
 
@@ -123,6 +127,8 @@ QVariant getProperty(P_ID id, const QDomElement& e)
                   return QVariant(readColor(e));
             case T_POINT:
                   return QVariant(readPoint(e));
+            case T_SIZE:
+                  return QVariant(readSize(e));
             case T_DIRECTION:
                   {
                   if (value == "up")

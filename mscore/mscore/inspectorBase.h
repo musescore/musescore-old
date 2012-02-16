@@ -25,6 +25,7 @@ class Element;
 
 struct InspectorItem {
       P_ID   t;
+      int sv;           // subvalue; example for T_SIZE: 0 - width 1 - height
       QWidget* w;
       QToolButton* r;
       };
@@ -41,8 +42,8 @@ class InspectorBase : public QWidget {
 
       bool dirty() const;
 
-   private slots:
-      void valueChanged(int idx);
+   protected slots:
+      virtual void valueChanged(int idx);
       void resetClicked(int);
 
    protected:
@@ -50,9 +51,9 @@ class InspectorBase : public QWidget {
       Inspector* inspector;
 
       virtual const InspectorItem& item(int idx) const;
+      void setValue(int idx, const QVariant& val);
 
       QVariant getValue(int idx) const;
-      void setValue(int idx, const QVariant& val);
 
       bool isDefault(int idx);
       virtual int inspectorItems() const { return 0; }

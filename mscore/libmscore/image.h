@@ -29,10 +29,11 @@ class Image : public BSymbol {
    protected:
       ImageStoreItem* _storeItem;
       QString _path;
-      mutable QPixmap buffer;        ///< cached rendering
-      QSizeF sz;
+      mutable QPixmap buffer;       ///< cached rendering
+      QSizeF _size;                 // in mm or spatium units
       bool _lockAspectRatio;
       bool _autoScale;              ///< fill parent frame
+      bool _sizeIsSpatium;
       mutable bool _dirty;
 
       virtual bool isEditable() const { return true; }
@@ -42,6 +43,11 @@ class Image : public BSymbol {
       virtual void updateGrips(int*, QRectF*) const;
       virtual QPointF gripAnchor(int grip) const;
       virtual QSizeF imageSize() const = 0;
+
+      void* pAutoScale()       { return &_autoScale;       }
+      void* pSize()            { return &_size;            }
+      void* pLockAspectRatio() { return &_lockAspectRatio; }
+      void* pSizeIsSpatium()   { return &_sizeIsSpatium;   }
 
    public:
       Image(Score*);
@@ -53,12 +59,16 @@ class Image : public BSymbol {
       bool load(const QString& s);
       virtual void layout();
 
-      void setSize(QSizeF s)            { sz = s; }
+      void setSize(const QSizeF& s)     { _size = s;    }
+      QSizeF size() const               { return _size; }
       bool lockAspectRatio() const      { return _lockAspectRatio; }
       void setLockAspectRatio(bool v)   { _lockAspectRatio = v; }
       bool autoScale() const            { return _autoScale; }
       void setAutoScale(bool v)         { _autoScale = v; }
       ImageStoreItem* storeItem() const { return _storeItem; }
+      bool sizeIsSpatium() const        { return _sizeIsSpatium; }
+
+      PROPERTY_DECLARATIONS(Image)
       };
 
 //---------------------------------------------------------
