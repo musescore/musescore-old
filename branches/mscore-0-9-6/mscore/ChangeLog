@@ -1,3 +1,5 @@
+16.feb (la)
+      - fix #14992: Inserting measures corrupts score with tuplets
 15.feb (la)
       - fix #14973: Transparent and truly vectorial embedded SVG (patch by Miwarre)
 14.feb (la)

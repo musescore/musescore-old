@@ -1190,6 +1190,8 @@ void Measure::moveTicks(int diff)
       {
       foreach(Element* e, _el)
             e->setTick(e->tick() + diff);
+      foreach(Tuplet* t, _tuplets)
+            t->setTick(t->tick() + diff);
       setTick(tick() + diff);
       int staves = _score->nstaves();
       int tracks = staves * VOICES;
