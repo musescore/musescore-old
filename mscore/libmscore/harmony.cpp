@@ -103,7 +103,7 @@ qDebug("ResolveDegreeList: not found in table\n");
 Harmony::Harmony(Score* score)
    : Text(score)
       {
-      setSubtype(HARMONY);
+//      setSubtype(HARMONY);
       setTextStyle(TEXT_STYLE_HARMONY);
 
       _rootTpc   = INVALID_TPC;
@@ -538,7 +538,8 @@ void Harmony::layout()
 
             setPos(ipos() + QPointF(xx, yy));
             }
-
+      if (textList.isEmpty())
+            render();
       QRectF bb;
       foreach(const TextSegment* ts, textList)
             bb |= ts->boundingRect().translated(ts->x, ts->y);

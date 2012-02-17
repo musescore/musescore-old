@@ -39,6 +39,7 @@
 #include "stafftype.h"
 #include "undo.h"
 #include "stem.h"
+#include "harmony.h"
 
 //---------------------------------------------------------
 //   propertyList
@@ -775,9 +776,11 @@ Element* ChordRest::drop(const DropData& data)
                   }
                   break;
 
+            case HARMONY:
+                  static_cast<Harmony*>(e)->render();
+                  // fall through
             case TEXT:
             case STAFF_TEXT:
-            case HARMONY:
             case STAFF_STATE:
             case INSTRUMENT_CHANGE:
             case REHEARSAL_MARK:
