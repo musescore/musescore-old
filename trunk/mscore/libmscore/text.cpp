@@ -69,6 +69,7 @@ Text::Text(const Text& e)
       else
             _doc = 0;
       _styled     = e._styled;
+      _styleName  = e._styleName;
       _editMode   = false;
       _cursor     = 0;
       _localStyle = e._localStyle;
@@ -355,13 +356,14 @@ void Text::read(const QDomElement& de)
 
 void Text::writeProperties(Xml& xml, bool writeText) const
       {
+      Element::writeProperties(xml);
       if (_styled)
             xml.tag("style", score()->textStyle(textStyle()).name());
-      Element::writeProperties(xml);
-      if (!_styled)
+      else {
             _localStyle.writeProperties(xml);
-      if (!_styleName.isEmpty())
-            xml.tag("styleName", _styleName);
+            if (!_styleName.isEmpty())
+                  xml.tag("styleName", _styleName);
+            }
       if (writeText) {
             if (_styled)
                   xml.tag("text", getText());

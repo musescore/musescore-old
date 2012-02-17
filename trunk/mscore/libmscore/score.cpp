@@ -259,6 +259,7 @@ void MeasureBaseList::change(MeasureBase* ob, MeasureBase* nb)
 
 void Score::init()
       {
+      _testMode       = false;
       _parentScore    = 0;
       _currentLayer   = 0;
       Layer l;

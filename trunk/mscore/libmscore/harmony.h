@@ -59,7 +59,7 @@ class HDegree;
 
 class Harmony : public Text {
       Q_DECLARE_TR_FUNCTIONS(Harmony)
-      int _subtype;
+//      int _subtype;
       int _rootTpc;                       // root note for chord
       int _baseTpc;                       // bass note or chord base; used for "slash" chords
                                           // or notation of base note in chord
@@ -79,8 +79,8 @@ class Harmony : public Text {
       ~Harmony();
       virtual Harmony* clone() const           { return new Harmony(*this); }
       virtual ElementType type() const         { return HARMONY; }
-      int subtype() const    { return _subtype; }
-      void setSubtype(int v) { _subtype = v; }
+//      int subtype() const    { return _subtype; }
+//      void setSubtype(int v) { _subtype = v; }
       Segment* segment() const                 { return (Segment*)parent(); }
       Measure* measure() const                 { return (Measure*)(parent()->parent()); }
 

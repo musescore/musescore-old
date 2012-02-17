@@ -200,6 +200,7 @@ class Score {
       QDate _creationDate;
       QString _mscoreVersion;
       int _mscoreRevision;
+      bool _testMode;               // prepare for regression tests
 
       Revisions* _revisions;
       QList<Excerpt*> _excerpts;
@@ -849,6 +850,8 @@ class Score {
       void respace(QList<ChordRest*>* elements);
       void transposeSemitone(int semitone);
       MeasureBase* insertMeasure(ElementType type, MeasureBase*);
+      bool testMode() const      { return _testMode; }
+      void setTestMode(bool val) { _testMode = val;  }
       };
 
 extern Score* gscore;
