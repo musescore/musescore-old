@@ -1,6 +1,9 @@
 17.2 (mw)
       - instruments.xml: restored lost data, completed TAB data, fixed viols
       - Staff::init(): fixed init. from templates using tablatures
+      (la)
+      - MusicXML import export volume and pan for each instrument
+      - Change order of MusicXML tags to please Finale
 15.2 (ws)
       - new image property to give size in spatium units (vs. metric mm)
       - implement inspector panel for images
