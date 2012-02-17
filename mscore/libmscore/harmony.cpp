@@ -531,11 +531,13 @@ void Harmony::layout()
             return;
             }
       style().layout(this);
-      Measure* m = measure();
-      qreal yy = track() < 0 ? 0.0 : m->system()->staff(track() / VOICES)->y();
-      qreal xx = 0.0;  // (segment()->tick() < 0) ? 0.0 : m->tick2pos(segment()->tick());
+      if (parent()) {
+            Measure* m = measure();
+            qreal yy = track() < 0 ? 0.0 : m->system()->staff(track() / VOICES)->y();
+            qreal xx = 0.0;  // (segment()->tick() < 0) ? 0.0 : m->tick2pos(segment()->tick());
 
-      setPos(ipos() + QPointF(xx, yy));
+            setPos(ipos() + QPointF(xx, yy));
+            }
 
       QRectF bb;
       foreach(const TextSegment* ts, textList)
