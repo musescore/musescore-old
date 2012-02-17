@@ -2073,7 +2073,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Save style as default"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Save style as default..."),
+         QT_TRANSLATE_NOOP("action","Save Style As Default..."),
          QT_TRANSLATE_NOOP("action","Save style as default"),
           fileSave_ICON
          ),
@@ -2295,7 +2295,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Show unprintable"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Show unprintable"),
+         QT_TRANSLATE_NOOP("action","Show Unprintable"),
          QT_TRANSLATE_NOOP("action","Show unprintable")
          ),
       Shortcut(

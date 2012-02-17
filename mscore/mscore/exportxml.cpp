@@ -1833,14 +1833,14 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
             if (!grace)
                   xml.tag("duration", note->chord()->actualTicks() / (div * tremCorr));
 
-            //instrument for unpitched
-            if (useDrumset)
-                  xml.tagE(QString("instrument id=\"P%1-I%2\"").arg(score->parts()->indexOf(note->staff()->part()) + 1).arg(note->pitch() + 1));
-
             if (note->tieBack())
                   xml.tagE("tie type=\"stop\"");
             if (note->tieFor())
                   xml.tagE("tie type=\"start\"");
+                  
+            //instrument for unpitched
+            if (useDrumset)
+                  xml.tagE(QString("instrument id=\"P%1-I%2\"").arg(score->parts()->indexOf(note->staff()->part()) + 1).arg(note->pitch() + 1));
 
             // voice
             // for a single-staff part, staff is 0, which needs to be corrected
@@ -1938,6 +1938,12 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                         case ACC_SHARP_ARROW_UP:      // (alternate)
                               s = "three-quarters-sharp";
                               break;
+                        case ACC_SORI:                //sori    
+                              s = "sori";  
+                              break; 
+                        case ACC_KORON:               //koron   
+                              s = "koron";  
+                              break; 
                         default:
                               qDebug("unknown accidental %d\n", acc->subtype());
                         }
@@ -3451,6 +3457,8 @@ void ExportMusicXml::write(QIODevice* dev)
                               xml.tag("midi-channel", part->midiChannel() + 1);
                               xml.tag("midi-program", part->midiProgram() + 1);
                               xml.tag("midi-unpitched", i + 1);
+                              xml.tag("volume", (part->volume() / 127) * 100);  //percent
+                              xml.tag("pan", ((part->pan() - 63.5) / 63.5)  * 90); //-90 hard left, +90 hard right
                               xml.etag();
                               }
                         }
@@ -3463,6 +3471,8 @@ void ExportMusicXml::write(QIODevice* dev)
                   xml.stag(QString("midi-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
                   xml.tag("midi-channel", part->midiChannel() + 1);
                   xml.tag("midi-program", part->midiProgram() + 1);
+                  xml.tag("volume", (part->volume() / 127) * 100);  //percent
+                  xml.tag("pan", ((part->pan() - 63.5) / 63.5)  * 90); //-90 hard left, +90 hard right
                   xml.etag();
                   }
 
