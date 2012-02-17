@@ -650,6 +650,7 @@ void Staff::setStaffType(StaffType* st)
                   case PITCHED_STAFF:    ct = CLEF_G; break;      // TODO: use preferred clef for instrument
                   case PERCUSSION_STAFF: ct = CLEF_PERC; break;
                   }
+            setInitialClef(ct);
             }
       }
 
@@ -659,38 +660,43 @@ void Staff::setStaffType(StaffType* st)
 
 void Staff::init(const InstrumentTemplate* t, int cidx)
       {
+      // set staff-type-independent parameters
       if (cidx > MAX_STAVES) {
-            setLines(5);
             setSmall(false);
             setInitialClef(t->clefIdx[0]);
             }
       else {
-            if (useTablature())
-                  setLines(t->tablature->strings());
-            else
-                  setLines(t->staffLines[cidx]);
             setSmall(t->smallStaff[cidx]);
-            setInitialClef(t->clefIdx[cidx]);
+            setInitialClef(t->clefIdx[cidx]);         // initial clef will be fixed to staff-type clef by setStaffType()
             setBracket(0, t->bracket[cidx]);
             setBracketSpan(0, t->bracketSpan[cidx]);
             setBarLineSpan(t->barlineSpan[cidx]);
             }
 
+      // determine staff type and set number of lines accordingly
+      // set lines AFTER setting the staff type, so if lines are different, the right staff type is cloned
       StaffType* st;
-      if (t->useTablature && t->tablature)
-            st = score()->staffTypes().at(TAB_STAFF_TYPE);
-      else if (t->useDrumset)
-            st = score()->staffTypes().at(PERCUSSION_STAFF_TYPE);
-      else
-            st = score()->staffTypes().at(PITCHED_STAFF_TYPE);
-
-      if (t->staffLines[cidx] != st->lines()) {
-            // create new staff type:
-            st = st->clone();
-            st->setLines(t->staffLines[cidx]);
-            score()->staffTypes().append(st);
+      if (t->useTablature && t->tablature) {
+            setStaffType(score()->staffTypes().at(TAB_STAFF_TYPE));
+            setLines(t->tablature->strings());        // use number of lines from tablature definition:
             }
-      setStaffType(st);
+      else {
+            if (t->useDrumset)
+                  st = score()->staffTypes().at(PERCUSSION_STAFF_TYPE);
+            else
+                  st = score()->staffTypes().at(PITCHED_STAFF_TYPE);
+            setStaffType(st);
+            setLines(t->staffLines[cidx]);            // use number of lines from instr. template
+
+/* NO: setLines() already takes care of that
+            // if instr. template num. of lines doesn't match staff type num. of lines, create new staff type
+            if (t->staffLines[cidx] != st->lines()) {
+                  st = st->clone();
+                  st->setLines(t->staffLines[cidx]);
+                  score()->staffTypes().append(st);
+                  }
+*/
+            }
       }
 
 //---------------------------------------------------------
