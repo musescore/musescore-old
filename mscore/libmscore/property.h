@@ -136,7 +136,7 @@ Property<T>* property(Property<T>* list, const QString& name)
       for (int i = 0; ; ++i) {
             if (list[i].id == P_END)
                   break;
-            else if (propertyName(i) == name)
+            else if (propertyName((P_ID)i) == name)
                   return &list[i];
             }
       return 0;
