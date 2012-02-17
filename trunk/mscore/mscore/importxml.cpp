@@ -1190,6 +1190,16 @@ void MusicXml::xmlScorePart(QDomElement e, QString id, int& parts)
                               part->setMidiChannel(ee.text().toInt() - 1);
                         else if (ee.tagName() == "midi-program")
                               part->setMidiProgram(ee.text().toInt() - 1);
+                        else if (ee.tagName() == "volume") {
+                              double vol = ee.text().toDouble();
+                              if(vol >= 0 && vol <= 100)
+                                    part->setVolume(( vol / 100) * 127);
+                              }
+                        else if (ee.tagName() == "pan") {
+                              double pan = ee.text().toDouble();
+                              if(pan >= -90 && pan <= 90)
+                                    part->setPan( ((pan + 90) / 180) * 127 );
+                              }
                         else
                               domError(ee);
                         }

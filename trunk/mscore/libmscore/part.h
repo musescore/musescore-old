@@ -66,9 +66,11 @@ class Part {
       void setStaves(int);
 
       int volume() const;
+      void setVolume(int volume);
       int reverb() const;
       int chorus() const;
       int pan() const;
+      void setPan(int pan);
       int midiProgram() const;
       void setMidiProgram(int, int bank = 0);
 

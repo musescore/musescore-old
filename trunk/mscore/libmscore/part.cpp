@@ -283,6 +283,11 @@ int Part::volume() const
       {
       return instr(0)->channel(0).volume;
       }
+      
+void Part::setVolume(int volume)
+      { 
+      instr(0)->channel(0).volume = volume;
+      }
 
 int Part::reverb() const
       {
@@ -299,6 +304,11 @@ int Part::pan() const
       return instr(0)->channel(0).pan;
       }
 
+void Part::setPan(int pan)
+      { 
+      instr(0)->channel(0).pan = pan;
+      }
+      
 int Part::midiProgram() const
       {
       return instr(0)->channel(0).program;
