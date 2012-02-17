@@ -1,3 +1,6 @@
+17.feb (la)
+      - MusicXML import export volume and pan for each instrument
+      - Change order of MusicXML tags to please Finale
 16.feb (la)
       - fix #14992: Inserting measures corrupts score with tuplets
 15.feb (la)
