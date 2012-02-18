@@ -1,6 +1,8 @@
 18.feb (lv)
-      - Support parentheses attribute for accidentals (prefered as of MusicXML 1.1)
-      - Fix MusicXML regression test
+      - partial fix #15002: [MusicXML] [1.2] [Trunk] Export/import of uneven tuplets (16th, eighth, eighth, 16th)
+        (export only)
+      - support parentheses attribute for accidentals (prefered as of MusicXML 1.1)
+      - fix MusicXML regression test
 17.feb (la)
       - MusicXML import export volume and pan for each instrument
       - Change order of MusicXML tags to please Finale

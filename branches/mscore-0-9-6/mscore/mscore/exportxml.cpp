@@ -2042,6 +2042,28 @@ static Chord* nextChord(Chord* ch)
       }
 
 //---------------------------------------------------------
+//   determineTupletNormalTicks
+//---------------------------------------------------------
+
+/**
+ Determine the ticks in the normal type for the tuplet \a chord.
+ This is non-zero only if chord if part of a tuplet containing
+ different length duration elements.
+ TODO determine how to handle baselen with dots and verify correct behaviour.
+ */
+
+static int determineTupletNormalTicks(Chord const* const chord)
+      {
+      Tuplet const* const t = chord->tuplet();
+      if (!t)
+            return 0;
+      for (int i = 1; i < t->elements().size(); ++i)
+            if (t->elements().at(0)->ticks() != t->elements().at(i)->ticks())
+                  return t->baseLen().ticks();
+      return 0;
+      }
+
+//---------------------------------------------------------
 //   chord
 //---------------------------------------------------------
 
@@ -2166,9 +2188,11 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
             Tuplet* t = note->chord()->tuplet();
             int actNotes = 1;
             int nrmNotes = 1;
+            int nrmTicks = 0;
             if (t) {
                   actNotes = t->ratio().numerator();
                   nrmNotes = t->ratio().denominator();
+                  nrmTicks = determineTupletNormalTicks(chord);
                   }
 
             QString s = tick2xml(note->chord()->tickLen() * actNotes / (nrmNotes * tremCorr), &dots);
@@ -2223,6 +2247,17 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                   xml.stag("time-modification");
                   xml.tag("actual-notes", actNotes);
                   xml.tag("normal-notes", nrmNotes);
+                  if (nrmTicks > 0) {
+                        int nrmDots = 0;
+                        QString nrmType = tick2xml(nrmTicks, &nrmDots);
+                        if (nrmType.isEmpty())
+                              printf("no note type found for ticks %d\n", nrmTicks);
+                        else {
+                              xml.tag("normal-type", nrmType);
+                              for (int ni = nrmDots; ni > 0; ni--)
+                                    xml.tagE("normal-dot");
+                              }
+                        }
                   xml.etag();
                   }
 
