@@ -1,3 +1,5 @@
+18.2 (mw)
+      - clef.cpp/.h: fixed clef pos. for TAB and PERC staves (and in general staves with non-standard line num. and line dist.)
 17.2 (mw)
       - instruments.xml: restored lost data, completed TAB data, fixed viols
       - Staff::init(): fixed init. from templates using tablatures
