@@ -28,8 +28,8 @@
 #define TR(a)  QT_TRANSLATE_NOOP("clefTable", a)
 
 const ClefInfo clefTable[] = {
-//   MusicXml           octchng  pitchoffset
-// tag  xmlName     line   yoffs     |-lines for sharps--||--lines for flats--|   name
+//        |--MusicXml-| octchng  pitchoffset
+// tag    xmlName    line     yoffs     |-lines for sharps--||--lines for flats--|   name
 { "G",    "G",         2,  0,   0, 45, { 0, 3,-1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 }, TR("Treble clef"),            PITCHED_STAFF },
 { "G8va", "G",         2,  1,   7, 52, { 0, 3,-1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 }, TR("Treble clef 8va"),        PITCHED_STAFF },
 { "G15ma","G",         2,  2,  14, 59, { 0, 3,-1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 }, TR("Treble clef 15ma"),       PITCHED_STAFF },
@@ -110,8 +110,35 @@ void Clef::setSelected(bool f)
 
 void Clef::layout()
       {
-      if (curClefType == clefType())
+      // determine current number of lines and line distance
+      int lines      = 5;                             // assume a resonable default
+      qreal lineDist = 1.0;
+
+      StaffType* staffType;
+      if (staff() && staff()->staffType()) {
+            staffType = staff()->staffType();
+
+            // tablatures:
+            if (staffType->group() == TAB_STAFF) {
+                  if (!staffType->genClef())          // if no clef, do nothing
+                        return;
+                  // if current clef type not compatible with tablature,
+                  // set tab clef according to score style
+                  if (clefTable[clefType()].staffGroup != TAB_STAFF)
+                        setClefType( ClefType(score()->styleI(ST_tabClef)) );
+                  }
+            // all staff types: init values from staff type
+            lines = staffType->lines();
+            lineDist = staffType->lineDistance().val();
+            }
+
+      // if nothing changed since last layout, do nothing
+      if (curClefType == clefType() && curLines == lines && curLineDist == lineDist)
             return;
+      // if something has changed, cache new values and re-layout
+      curClefType = clefType();
+      curLines    = lines;
+      curLineDist = lineDist;
       layout1();
       }
 
@@ -129,164 +156,148 @@ void Clef::layout1()
       qDeleteAll(elements);
       elements.clear();
 
-      curClefType    = clefType();
-      int lines      = 5;
-      qreal lineDist = 1.0;
-#if 0       // TODO: does not work with caching of curClefType
-      if (staff() && staff()->staffType()) {
-            StaffType* staffType = staff()->staffType();
-
-            if (staffType->group() == TAB_STAFF) {
-                  if (!staffType->genClef())
-                        return;
-                  if (clefTable[st].staffGroup != TAB_STAFF)
-                        st = ClefType(score()->styleI(ST_tabClef));
-	            }
-            lines = staffType->lines();
-            lineDist = staffType->lineDistance().val();
-	      }
-#endif
       Symbol* symbol = new Symbol(score());
 
       switch (curClefType) {
-            case CLEF_G:
-                  symbol->setSym(trebleclefSym);
-                  yoff = 3.0;
-                  break;
-            case CLEF_G1:
-                  {
-                  symbol->setSym(trebleclefSym);
-                  yoff = 3.0;
-                  Symbol* number = new Symbol(score());
-                  number->setMag(smag);
-                  number->setSym(clefEightSym);
-                  addElement(number, 1.0 * msp, -5.0 * msp + yoff * _spatium);
-                  }
-                  break;
-            case CLEF_G2:
-                  {
-                  symbol->setSym(trebleclefSym);
-                  yoff = 3.0;
-                  Symbol* number = new Symbol(score());
-                  symbol->setMag(smag);
-                  number->setSym(clefOneSym);
-                  addElement(number, .6 * msp, -5.0 * msp + yoff * _spatium);
-                  number = new Symbol(score());
-                  number->setSym(clefFiveSym);
-                  addElement(number, 1.4 * msp, -5.0 * msp + yoff * _spatium);
-                  }
-                  break;
-            case CLEF_G3:
-                  {
-                  symbol->setSym(trebleclefSym);
-                  yoff = 3.0;
-                  Symbol* number = new Symbol(score());
-                  symbol->setMag(smag);
-                  number->setSym(clefEightSym);
-                  addElement(number, 1.0 * msp, 4.0 * msp + yoff * _spatium);
-                  }
-                  break;
-            case CLEF_F:
-                  symbol->setSym(bassclefSym);
-                  yoff = 1.0;
-                  break;
-            case CLEF_F8:
-                  {
-                  symbol->setSym(bassclefSym);
-                  yoff = 1.0;
-                  Symbol* number = new Symbol(score());
-                  symbol->setMag(smag);
-                  number->setSym(clefEightSym);
-                  addElement(number, .0, 4.5 * msp + yoff * _spatium);
-                  }
-                  break;
-            case CLEF_F15:
-                  {
-                  symbol->setSym(bassclefSym);
-                  yoff = 1.0;
-                  Symbol* number = new Symbol(score());
-                  symbol->setMag(smag);
-                  number->setSym(clefOneSym);
-                  addElement(number, .0, 4.5 * msp + yoff * _spatium);
-                  number = new Symbol(score());
-                  number->setSym(clefFiveSym);
-                  addElement(number, .8 * msp, 4.5 * msp + yoff * _spatium);
-                  }
-                  break;
-            case CLEF_F_B:                            // baritone clef
-                  symbol->setSym(bassclefSym);
-                  yoff = 2.0;
-                  break;
-            case CLEF_F_C:                            // subbass clef
-                  symbol->setSym(bassclefSym);
-                  yoff = 0.0;
-                  break;
-            case CLEF_C1:
-                  symbol->setSym(altoclefSym);
-                  yoff = 4.0;
-                  break;
-            case CLEF_C2:
-                  symbol->setSym(altoclefSym);
-                  yoff = 3.0;
-                  break;
-            case CLEF_C3:
-                  symbol->setSym(altoclefSym);
-                  yoff = 2.0;
-                  break;
-            case CLEF_C4:
-                  symbol->setSym(altoclefSym);
-                  yoff = 1.0;
-                  break;
-            case CLEF_C5:
-                  symbol->setSym(altoclefSym);
-                  yoff = 0.0;
-                  break;
-            case CLEF_TAB:
-                  symbol->setSym(tabclefSym);
-                  // on tablature, position clef at half the number of spaces * line distance
-                  yoff = lineDist * (lines - 1) * .5;
-                  break;
-            case CLEF_TAB2:
-                  symbol->setSym(tabclef2Sym);
-                  // on tablature, position clef at half the number of spaces * line distance
-                  yoff = lineDist * (lines - 1) * .5;
-                  break;
-            case CLEF_PERC:
-            case CLEF_PERC2:
-                  symbol->setSym(percussionclefSym);
-                  yoff = lineDist * (lines - 1) * 0.5;
-                  break;
-            case CLEF_G4:
-                  symbol->setSym(trebleclefSym);
-                  yoff = 4.0;
-                  break;
-            case CLEF_F_8VA:
-                  {
-                  symbol->setSym(bassclefSym);
-                  yoff = 1.0;
-                  Symbol* number = new Symbol(score());
-                  number->setMag(smag);
-                  number->setSym(clefEightSym);
-                  addElement(number, .5 * msp, -1.5 * msp + yoff * _spatium);
-                  }
-                  break;
-            case CLEF_F_15MA:
-                  {
-                  symbol->setSym(bassclefSym);
-                  yoff = 1.0;
-                  Symbol* number = new Symbol(score());
-                  symbol->setMag(smag);
-                  number->setSym(clefOneSym);
-                  addElement(number, .0 * msp, -1.5 * msp + yoff * _spatium);
-                  number = new Symbol(score());
-                  number->setSym(clefFiveSym);
-                  addElement(number, .8 * msp, -1.5 * msp + yoff * _spatium);
-                  }
-                  break;
-            case CLEF_INVALID:
-            case CLEF_MAX:
-                  return;
+      case CLEF_G:                              // G clef on 2nd line
+            symbol->setSym(trebleclefSym);
+            yoff = 3.0 * curLineDist;
+            break;
+      case CLEF_G1:                             // G clef 8va on 2nd line
+            {
+            symbol->setSym(trebleclefSym);
+            yoff = 3.0 * curLineDist;
+            Symbol* number = new Symbol(score());
+            number->setMag(smag);
+            number->setSym(clefEightSym);
+            addElement(number, 1.0 * msp, -5.0 * msp + yoff * _spatium);
             }
+            break;
+      case CLEF_G2:                             // G clef 15ma on 2nd line
+            {
+            symbol->setSym(trebleclefSym);
+            yoff = 3.0 * curLineDist;
+            Symbol* number = new Symbol(score());
+            symbol->setMag(smag);
+            number->setSym(clefOneSym);
+            addElement(number, .6 * msp, -5.0 * msp + yoff * _spatium);
+            number = new Symbol(score());
+            number->setSym(clefFiveSym);
+            addElement(number, 1.4 * msp, -5.0 * msp + yoff * _spatium);
+            }
+            break;
+      case CLEF_G3:                             // G clef 8va bassa on 2nd line
+            {
+            symbol->setSym(trebleclefSym);
+            yoff = 3.0 * curLineDist;
+            Symbol* number = new Symbol(score());
+            symbol->setMag(smag);
+            number->setSym(clefEightSym);
+            addElement(number, 1.0 * msp, 4.0 * msp + yoff * _spatium);
+            }
+            break;
+      case CLEF_F:                              // F clef on penultimate line
+            symbol->setSym(bassclefSym);
+            yoff = 1.0 * curLineDist;
+            break;
+      case CLEF_F8:                             // F clef 8va bassa on penultimate line
+            {
+            symbol->setSym(bassclefSym);
+            yoff = 1.0 * curLineDist;
+            Symbol* number = new Symbol(score());
+            symbol->setMag(smag);
+            number->setSym(clefEightSym);
+            addElement(number, .0, 4.5 * msp + yoff * _spatium);
+            }
+            break;
+      case CLEF_F15:                            // F clef 15ma bassa on penultimate line
+            {
+            symbol->setSym(bassclefSym);
+            yoff = 1.0 * curLineDist;
+            Symbol* number = new Symbol(score());
+            symbol->setMag(smag);
+            number->setSym(clefOneSym);
+            addElement(number, .0, 4.5 * msp + yoff * _spatium);
+            number = new Symbol(score());
+            number->setSym(clefFiveSym);
+            addElement(number, .8 * msp, 4.5 * msp + yoff * _spatium);
+            }
+            break;
+      case CLEF_F_B:                            // baritone clef
+            symbol->setSym(bassclefSym);
+            yoff = 2.0 * curLineDist;
+            break;
+      case CLEF_F_C:                            // subbass clef
+            symbol->setSym(bassclefSym);
+            yoff = 0.0;
+            break;
+      case CLEF_C1:                             // C clef in 1st line
+            symbol->setSym(altoclefSym);
+            yoff = 4.0 * curLineDist;
+            break;
+      case CLEF_C2:                             // C clef on 2nd line
+            symbol->setSym(altoclefSym);
+            yoff = 3.0 * curLineDist;
+            break;
+      case CLEF_C3:                             // C clef in 3rd line
+            symbol->setSym(altoclefSym);
+            yoff = 2.0 * curLineDist;
+            break;
+      case CLEF_C4:                             // C clef on 4th line
+            symbol->setSym(altoclefSym);
+            yoff = 1.0 * curLineDist;
+            break;
+      case CLEF_C5:                             // C clef on 5th line
+            symbol->setSym(altoclefSym);
+            yoff = 0.0;
+            break;
+      case CLEF_TAB:                            // TAB clef
+            symbol->setSym(tabclefSym);
+            // on tablature, position clef at half the number of spaces * line distance
+            yoff = curLineDist * (curLines - 1) * .5;
+            break;                              // TAB clef alternate style
+      case CLEF_TAB2:
+            symbol->setSym(tabclef2Sym);
+            // on tablature, position clef at half the number of spaces * line distance
+            yoff = curLineDist * (curLines - 1) * .5;
+            break;
+      case CLEF_PERC:                           // percussion clefs
+      case CLEF_PERC2:
+            symbol->setSym(percussionclefSym);
+            yoff = curLineDist * (curLines - 1) * 0.5;
+            break;
+      case CLEF_G4:                             // G clef in 1st line
+            symbol->setSym(trebleclefSym);
+            yoff = 4.0 * curLineDist;
+            break;
+      case CLEF_F_8VA:                          // F clef 8va on penultimate line
+            {
+            symbol->setSym(bassclefSym);
+            yoff = 1.0 * curLineDist;
+            Symbol* number = new Symbol(score());
+            number->setMag(smag);
+            number->setSym(clefEightSym);
+            addElement(number, .5 * msp, -1.5 * msp + yoff * _spatium);
+            }
+            break;
+      case CLEF_F_15MA:                         // F clef 15ma on penultimate line
+            {
+            symbol->setSym(bassclefSym);
+            yoff = 1.0 * curLineDist;
+            Symbol* number = new Symbol(score());
+            symbol->setMag(smag);
+            number->setSym(clefOneSym);
+            addElement(number, .0 * msp, -1.5 * msp + yoff * _spatium);
+            number = new Symbol(score());
+            number->setSym(clefFiveSym);
+            addElement(number, .8 * msp, -1.5 * msp + yoff * _spatium);
+            }
+            break;
+      case CLEF_INVALID:
+      case CLEF_MAX:
+            return;
+      }
+
       symbol->setMag(smag * mag());
       symbol->layout();
       addElement(symbol, .0, yoff * _spatium);

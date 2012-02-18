@@ -76,8 +76,10 @@ class Clef : public Element {
       bool _small;
 
       ClefTypeList _clefTypes;
-      ClefType curClefType;
-      void layout1();
+      ClefType    curClefType;      // cached value of cleg type (for re-laying out)
+      int         curLines;         // cached value of staff nm. of lines  ( " )
+      qreal       curLineDist;      // cached value of staff line distance ( " )
+      void        layout1();        // lays the element out, using cached values
 
    public:
       Clef(Score*);
