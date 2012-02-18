@@ -1,3 +1,6 @@
+18.feb (lv)
+      - Support parentheses attribute for accidentals (prefered as of MusicXML 1.1)
+      - Fix MusicXML regression test
 17.feb (la)
       - MusicXML import export volume and pan for each instrument
       - Change order of MusicXML tags to please Finale

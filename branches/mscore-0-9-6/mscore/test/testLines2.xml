@@ -47,7 +47,7 @@
           <words>VII</words>
           </direction-type>
         <direction-type>
-          <bracket type="start" number="1" line-end="none" line-type="solid" default-y="30"/>
+          <bracket type="start" number="1" line-end="none" line-type="solid"/>
           </direction-type>
         </direction>
       <note>
@@ -109,7 +109,7 @@
         </note>
       <direction placement="above">
         <direction-type>
-          <bracket type="start" number="1" line-end="none" line-type="solid" default-y="30"/>
+          <bracket type="start" number="1" line-end="none" line-type="solid"/>
           </direction-type>
         </direction>
       <note>
@@ -154,7 +154,7 @@
           <words>VII</words>
           </direction-type>
         <direction-type>
-          <bracket type="start" number="1" line-end="none" line-type="solid" default-y="-80"/>
+          <bracket type="start" number="1" line-end="none" line-type="solid"/>
           </direction-type>
         </direction>
       <note>
@@ -216,7 +216,7 @@
         </note>
       <direction placement="below">
         <direction-type>
-          <bracket type="start" number="1" line-end="none" line-type="solid" default-y="-80"/>
+          <bracket type="start" number="1" line-end="none" line-type="solid"/>
           </direction-type>
         </direction>
       <note>

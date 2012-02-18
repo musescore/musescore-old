@@ -2181,24 +2181,8 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                   xml.tagE("dot");
 
             // accidental
-            // Note: in Binchois.xml two accidentals have parentheses which are encoded
-            // as editorial="yes". Wikipedia calls this a cautionary accidental.
-            // Brackets/parenthese are controlled by the level-display entity (DTD 1.1)
-            bool editorial = false;
-            int acc        = note->accidentalType();
+            int acc = note->accidentalType();
             if (acc != ACC_NONE) {
-                  //printf("ACCIDENTAL %d\n", acc);
-                  /*if (6 <= acc && acc <= 10) {
-                        acc -= 5;
-                        editorial = true;
-                        }
-                  else if (11 <= acc && acc <= 15) {
-                        acc -= 10;
-                        editorial = true;
-                        }*/
-                  if (note->accidental()->hasBracket()) {
-                        editorial = true;
-                        }
                   /*
                         MusicXML accidental names include:
                         sharp,natural, flat, double-sharp, sharp-sharp, flat-flat,
@@ -2229,8 +2213,8 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                         default:
                               printf("unknown accidental %d\n", acc);
                         }
-                  if (editorial)
-                        xml.tag("accidental editorial=\"yes\"", s);
+                  if (note->accidental()->hasBracket())
+                        xml.tag("accidental parentheses=\"yes\"", s);
                   else
                         xml.tag("accidental", s);
                   }

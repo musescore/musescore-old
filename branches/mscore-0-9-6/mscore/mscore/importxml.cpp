@@ -3662,6 +3662,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       int alter  = 0;
       int octave = 4;
       int accidental = 0;
+      bool parentheses = false;
       bool editorial = false;
       bool cautionary = false;
       Duration durationType(Duration::V_INVALID);
@@ -3840,6 +3841,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         cautionary = true;
                   if (e.attribute(QString("editorial")) == "yes")
                         editorial = true;
+                  if (e.attribute(QString("parentheses")) == "yes")
+                        parentheses = true;
                   }
             else if (tag == "notations") {
                   // save the QDomElement representing <notations> for later
@@ -3994,12 +3997,15 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 
             // printf("staff for new note: %p (staff=%d, relStaff=%d)\n",
             //        score->staff(staff + relStaff), staff, relStaff);
-            // LVIFIX: accidental handling is ugly, replace magic numbers by constants
-            if (ACC_SHARP <= accidental && accidental <= ACC_NATURAL && (editorial || cautionary))
-                  note->setUserAccidental(accidental + (cautionary ? 0x8000 : 0));
-            // LVIFIX: quarter tone accidentals support is "drawing only"
+
+            // Add regular accidentals with attribute editorial or cautionary or parentheses
+            // as user accidental (force presence)
+            if (ACC_SHARP <= accidental && accidental <= ACC_NATURAL && (editorial || cautionary || parentheses))
+                  note->setUserAccidental(accidental + ((cautionary || parentheses) ? 0x8000 : 0));
+            // Similar for quarter tone accidentals
+            // Note: support is "drawing only"
             if (accidental > ACC_NATURAL && accidental < ACC_END)
-                  note->setUserAccidental(accidental + (cautionary ? 0x8000 : 0));
+                  note->setUserAccidental(accidental + ((cautionary || parentheses) ? 0x8000 : 0));
 
             if (cr->beamMode() == BEAM_NO)
                   cr->setBeamMode(bm);
