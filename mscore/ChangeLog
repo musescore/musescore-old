@@ -1,3 +1,5 @@
+19.feb (lv)
+      - fix #15033: [MusicXML] [1.2] Handle tuplet property "number"
 18.feb (lv)
       - partial fix #15002: [MusicXML] [1.2] [Trunk] Export/import of uneven tuplets (16th, eighth, eighth, 16th)
         (export only)
