@@ -22,10 +22,8 @@ extern Score* score;
 //   testHairpin
 //---------------------------------------------------------
 
-bool testHairpin()
+bool testHairpin(MTest*)
       {
-      printf("====test hairpin\n");
-
       bool passed = true;
 
       Hairpin* hp = new Hairpin(score);

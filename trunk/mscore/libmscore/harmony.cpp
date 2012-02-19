@@ -538,12 +538,13 @@ void Harmony::layout()
 
             setPos(ipos() + QPointF(xx, yy));
             }
-      if (textList.isEmpty())
-            render();
+//      if (textList.isEmpty())
+//            render();
       QRectF bb;
       foreach(const TextSegment* ts, textList)
             bb |= ts->boundingRect().translated(ts->x, ts->y);
       setbbox(bb);
+      adjustReadPos();
       }
 
 //---------------------------------------------------------

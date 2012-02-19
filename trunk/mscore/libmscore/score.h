@@ -541,7 +541,7 @@ class Score {
       bool loadMsc(QString name);
       bool loadCompressedMsc(QString name);
 
-      void saveFile(QFileInfo& info);
+      bool saveFile(QFileInfo& info);
       void saveFile(QIODevice* f, bool msczFormat, bool onlySelection = false);
       void saveCompressedFile(QFileInfo&, bool onlySelection);
       void saveCompressedFile(QIODevice*, QFileInfo&, bool onlySelection);

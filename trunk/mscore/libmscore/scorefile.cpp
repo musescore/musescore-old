@@ -449,7 +449,7 @@ void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool onlySelection
 //    return true on success
 //---------------------------------------------------------
 
-void Score::saveFile(QFileInfo& info)
+bool Score::saveFile(QFileInfo& info)
       {
       if (info.suffix().isEmpty())
             info.setFile(info.filePath() + ".mscx");
@@ -457,10 +457,11 @@ void Score::saveFile(QFileInfo& info)
       if (!fp.open(QIODevice::WriteOnly)) {
             QString s = QString("Open File\n") + info.filePath() + QString("\nfailed: ")
                + QString(strerror(errno));
-            throw(s);
+            return false;
             }
       saveFile(&fp, false);
       fp.close();
+      return true;
       }
 
 //---------------------------------------------------------

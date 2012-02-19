@@ -1,9 +1,9 @@
 //=============================================================================
 //  MuseScore
 //  Music Composition & Notation
-//  $Id: score.cpp 5149 2011-12-29 08:38:43Z wschweer $
+//  $Id:$
 //
-//  Copyright (C) 2002-2011 Werner Schweer
+//  Copyright (C) 2012 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2
@@ -11,6 +11,7 @@
 //  the file LICENCE.GPL
 //=============================================================================
 
+#include "mtest.h"
 #include "libmscore/mscore.h"
 #include "libmscore/score.h"
 #include "libmscore/durationtype.h"
@@ -273,10 +274,8 @@ static bool testMidi3()
 //   testMidi
 //---------------------------------------------------------
 
-bool testMidi()
+bool testMidi(MTest*)
       {
-      printf("====test midi\n");
-
       if (!testMidi1())
             return false;
       if (!testMidi2())

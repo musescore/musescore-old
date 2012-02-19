@@ -1,3 +1,8 @@
+19.2 (ws)
+      - fix #8990: Issues with Tuplets
+      - fix #8995: Tuplet bracket should appear if beam broken
+      - fix #14917: Nested triplets not working
+      - misc bugfixes for parts + regression tests
 18.2 (mw)
       - clef.cpp/.h: fixed clef pos. for TAB and PERC staves (and in general staves with non-standard line num. and line dist.)
 17.2 (mw)

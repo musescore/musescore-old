@@ -11,7 +11,7 @@
 #  the file LICENSE.GPL
 #=============================================================================
 
-set(CMAKE_VERBOSE_MAKEFILE OFF)
+set(CMAKE_VERBOSE_MAKEFILE ON)
 
 include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
 
@@ -21,6 +21,7 @@ include_directories(
       )
 
 QT4_ADD_RESOURCES(qrc_files mtest.qrc)
+
 
 add_executable(mtest
       ${PROJECT_BINARY_DIR}/all.h
@@ -34,6 +35,7 @@ add_executable(mtest
       testmidi.cpp
       mcursor.cpp
       testutils.cpp
+      testparts.cpp
       ../mscore/exportmidi.cpp
       ../mscore/importmidi.cpp
       ../mscore/midifile.cpp
@@ -51,7 +53,8 @@ target_link_libraries(mtest
 set_target_properties (
       mtest
       PROPERTIES
-      COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
+      COMPILE_FLAGS "-D TESTROOT=\\\"${PROJECT_SOURCE_DIR}\\\" -include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
+      LINK_FLAGS    "-g"
       )
 
 ADD_DEPENDENCIES(mtest mops1)

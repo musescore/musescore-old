@@ -73,8 +73,8 @@ void SymbolDialog::systemFlagChanged(int state)
             sysFlag = true;
       for (int i = 0; i < sp->size(); ++i) {
             Element* e = sp->element(i);
-            if(e)
-                  e->setSystemFlag(sysFlag);
+//            if (e)
+//                  e->setSystemFlag(sysFlag);
             }
       }
 

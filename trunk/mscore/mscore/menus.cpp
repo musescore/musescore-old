@@ -787,13 +787,11 @@ Palette* MuseScore::newTextPalette()
       sp->setDrawGrid(true);
 
       StaffText* st = new StaffText(gscore);
-      st->setSystemFlag(false);
       st->setTextStyle(TEXT_STYLE_STAFF);
       st->setText(tr("staff-text"));
       sp->append(st, tr("Staff Text"));
 
       st = new StaffText(gscore);
-      st->setSystemFlag(true);
       st->setTextStyle(TEXT_STYLE_SYSTEM);
       st->setText(tr("system-text"));
       sp->append(st, tr("System Text"));
@@ -811,7 +809,6 @@ Palette* MuseScore::newTextPalette()
       text->setTrack(0);
       text->setTextStyle(TEXT_STYLE_LYRICS_VERSE_NUMBER);
       text->setText(tr("1."));
-      text->setSystemFlag(true);
       sp->append(text, tr("Lyrics Verse Number"));
 
       static const TempoPattern tp[] = {

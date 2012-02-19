@@ -33,6 +33,135 @@ static QList<Profile*> _profiles;
 Profile* profile;
 
 //---------------------------------------------------------
+//   showProfileMenu
+//---------------------------------------------------------
+
+void MuseScore::showProfileMenu()
+      {
+      if (profiles == 0) {
+            profiles = new QActionGroup(this);
+            profiles->setExclusive(true);
+            connect(profiles, SIGNAL(triggered(QAction*)), SLOT(changeProfile(QAction*)));
+            }
+      else {
+            foreach(QAction* a, profiles->actions())
+                  profiles->removeAction(a);
+            }
+      menuProfiles->clear();
+
+      const QList<Profile*> pl = Profile::profiles();
+//      QAction* active = 0;
+      foreach (Profile* p, pl) {
+            QAction* a = profiles->addAction(p->name());
+            a->setCheckable(true);
+            a->setData(p->path());
+            if (a->text() == preferences.profile) {
+//                  active = a;
+                  a->setChecked(true);
+                  }
+            menuProfiles->addAction(a);
+            }
+      menuProfiles->addSeparator();
+      QAction* a = new QAction(tr("New Profile"), this);
+      connect(a, SIGNAL(triggered()), SLOT(createNewProfile()));
+      menuProfiles->addAction(a);
+      deleteProfileAction = new QAction(tr("Delete Profile"), this);
+      connect(deleteProfileAction, SIGNAL(triggered()), SLOT(deleteProfile()));
+      menuProfiles->addAction(deleteProfileAction);
+      }
+
+//---------------------------------------------------------
+//   createNewProfile
+//---------------------------------------------------------
+
+void MuseScore::createNewProfile()
+      {
+      QString s = QInputDialog::getText(this, tr("MuseScore: Read Profile Name"),
+         tr("Profile Name:"));
+      if (s.isEmpty())
+            return;
+      for (;;) {
+            bool notFound = true;
+            foreach(Profile* p, Profile::profiles()) {
+                  if (p->name() == s) {
+                        notFound = false;
+                        break;
+                        }
+                  }
+            if (!notFound) {
+                  s = QInputDialog::getText(this,
+                     tr("MuseScore: Read Profile Name"),
+                     QString(tr("'%1' does already exist,\nplease choose a different name:")).arg(s)
+                     );
+                  if (s.isEmpty())
+                        return;
+                  }
+            else
+                  break;
+            }
+      profile->save();
+      profile = Profile::createNewProfile(s);
+      preferences.profile = profile->name();
+      }
+
+//---------------------------------------------------------
+//   deleteProfile
+//---------------------------------------------------------
+
+void MuseScore::deleteProfile()
+      {
+      if (!profiles)
+            return;
+      QAction* a = profiles->checkedAction();
+      if (!a)
+            return;
+      preferences.dirty = true;
+      Profile* profile = 0;
+      foreach(Profile* p, Profile::profiles()) {
+            if (p->name() == a->text()) {
+                  profile = p;
+                  break;
+                  }
+            }
+      if (!profile)
+            return;
+      Profile::profiles().removeOne(profile);
+      QFile f(profile->path());
+      f.remove();
+//TODO:??      delete profile;
+      profile             = Profile::profiles().first();
+      preferences.profile = profile->name();
+      }
+
+//---------------------------------------------------------
+//   changeProfile
+//---------------------------------------------------------
+
+void MuseScore::changeProfile(QAction* a)
+      {
+      preferences.profile = a->text();
+      preferences.dirty = true;
+      foreach(Profile* p, Profile::profiles()) {
+            if (p->name() == a->text()) {
+                  changeProfile(p);
+                  return;
+                  }
+            }
+      qDebug("   profile not found");
+      }
+
+//---------------------------------------------------------
+//   changeProfile
+//---------------------------------------------------------
+
+void MuseScore::changeProfile(Profile* p)
+      {
+      profile->save();
+      p->read();
+      profile = p;
+      }
+
+//---------------------------------------------------------
 //   initProfile
 //---------------------------------------------------------
 

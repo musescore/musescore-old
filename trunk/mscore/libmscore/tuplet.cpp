@@ -188,8 +188,27 @@ void Tuplet::layout()
       //
       //   shall we draw a bracket?
       //
-      if (_bracketType == AUTO_BRACKET)
-            _hasBracket = !cr1->beam() || tupletContainsRest || cr1->type() == TUPLET;
+      if (_bracketType == AUTO_BRACKET) {
+            _hasBracket = tupletContainsRest;
+            if (!_hasBracket) {
+                  foreach(DurationElement* e, _elements) {
+                        if (e->type() == TUPLET) {
+                              _hasBracket = true;
+                              break;
+                              }
+                        else if (e->isChordRest()) {
+                              ChordRest* cr = static_cast<ChordRest*>(e);
+                              //
+                              // maybe we should check for more than one beam
+                              //
+                              if (cr->beam() == 0) {
+                                    _hasBracket = true;
+                                    break;
+                                    }
+                              }
+                        }
+                  }
+            }
       else
             _hasBracket = _bracketType != SHOW_NO_BRACKET;
 
@@ -574,6 +593,8 @@ void Tuplet::add(Element* e)
                   {
                   DurationElement* de = static_cast<DurationElement*>(e);
                   int tick = de->tick();
+                  if (tick == -1)
+                        tick = score()->curTick;
                   if (tick != -1) {
                         for (int i = 0; i < _elements.size(); ++i) {
                               if (_elements[i]->tick() > tick) {

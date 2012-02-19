@@ -652,8 +652,8 @@ void Element::writeProperties(Xml& xml, const Element* proto) const
             t = track() + xml.trackDiff;
             xml.tag("track", t);
             }
-      if (flag(ELEMENT_SYSTEM_FLAG) && (proto == 0 || proto->systemFlag() != flag(ELEMENT_SYSTEM_FLAG)))
-            xml.tag("systemFlag", flag(ELEMENT_SYSTEM_FLAG));
+//      if (flag(ELEMENT_SYSTEM_FLAG) && (proto == 0 || proto->systemFlag() != flag(ELEMENT_SYSTEM_FLAG)))
+//            xml.tag("systemFlag", flag(ELEMENT_SYSTEM_FLAG));
       if (_tag != 0x1) {
             for (int i = 1; i < MAX_TAGS; i++) {
                   if (_tag == ((unsigned)1 << i)) {
@@ -709,12 +709,13 @@ bool Element::readProperties(const QDomElement& e)
             setTrack((_track/VOICES)*VOICES + val.toInt());
       else if (tag == "track")
             setTrack(val.toInt());
-      else if (tag == "systemFlag") {
+/*      else if (tag == "systemFlag") {
             int i = val.toInt();
             setFlag(ELEMENT_SYSTEM_FLAG, i);
             if (i)
                   _track = 0;
             }
+*/
       else if (tag == "tag") {
             for (int i = 1; i < MAX_TAGS; i++) {
                   if (score()->layerTags()[i] == val) {

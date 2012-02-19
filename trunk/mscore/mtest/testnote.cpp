@@ -1,9 +1,9 @@
 //=============================================================================
 //  MuseScore
 //  Music Composition & Notation
-//  $Id: score.cpp 5149 2011-12-29 08:38:43Z wschweer $
+//  $Id:$
 //
-//  Copyright (C) 2011-2012 Werner Schweer
+//  Copyright (C) 2012 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2
@@ -24,10 +24,8 @@ extern Score* score;
 //    read write test of note
 //---------------------------------------------------------
 
-bool testNote()
+bool testNote(MTest*)
       {
-      printf("====test note\n");
-
       bool passed = true;
       Chord* chord = new Chord(score);
       Note* note = new Note(score);

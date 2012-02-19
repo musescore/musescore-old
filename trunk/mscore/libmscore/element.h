@@ -41,7 +41,6 @@ class QPainter;
 //---------------------------------------------------------
 
 enum ElementFlag {
-      ELEMENT_SYSTEM_FLAG = 0x1,
       ELEMENT_DROP_TARGET = 0x2,
       ELEMENT_SELECTABLE  = 0x4,
       ELEMENT_MOVABLE     = 0x8,
@@ -140,7 +139,6 @@ class Element {
       mutable ElementFlags _flags;
 
       int _track;                 ///< staffIdx * VOICES + voice
-                                  ///< -1 if this is a system element
       QColor _color;
       qreal _mag;                 ///< standard magnification (derived value)
 
@@ -377,8 +375,7 @@ class Element {
       bool flag(ElementFlag f) const   { return _flags & f; }
       void setFlags(ElementFlags f)    { _flags = f;    }
       ElementFlags flags() const       { return _flags; }
-      bool systemFlag() const          { return flag(ELEMENT_SYSTEM_FLAG); }
-      void setSystemFlag(bool f)       { setFlag(ELEMENT_SYSTEM_FLAG, f);  }
+      virtual bool systemFlag() const  { return false;  }
       bool selectable() const          { return flag(ELEMENT_SELECTABLE);  }
       void setSelectable(bool val)     { setFlag(ELEMENT_SELECTABLE, val); }
       bool dropTarget() const          { return flag(ELEMENT_DROP_TARGET); }
@@ -417,7 +414,6 @@ class ElementList : public QList<Element*> {
       void replace(Element* old, Element* n);
       void write(Xml&) const;
       void write(Xml&, const char* name) const;
-//      void read(const QDomElement&);
       };
 
 typedef ElementList::iterator iElement;
