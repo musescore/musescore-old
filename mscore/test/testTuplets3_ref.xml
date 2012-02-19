@@ -64,6 +64,7 @@
         <time-modification>
           <actual-notes>3</actual-notes>
           <normal-notes>2</normal-notes>
+          <normal-type>quarter</normal-type>
           </time-modification>
         <stem>up</stem>
         <notations>
@@ -81,6 +82,7 @@
         <time-modification>
           <actual-notes>3</actual-notes>
           <normal-notes>2</normal-notes>
+          <normal-type>quarter</normal-type>
           </time-modification>
         <stem>up</stem>
         <notations>
@@ -215,6 +217,7 @@
         <time-modification>
           <actual-notes>3</actual-notes>
           <normal-notes>2</normal-notes>
+          <normal-type>quarter</normal-type>
           </time-modification>
         <stem>up</stem>
         <staff>1</staff>
@@ -233,6 +236,7 @@
         <time-modification>
           <actual-notes>3</actual-notes>
           <normal-notes>2</normal-notes>
+          <normal-type>quarter</normal-type>
           </time-modification>
         <stem>up</stem>
         <staff>1</staff>
@@ -326,6 +330,7 @@
         <time-modification>
           <actual-notes>3</actual-notes>
           <normal-notes>2</normal-notes>
+          <normal-type>quarter</normal-type>
           </time-modification>
         <stem>up</stem>
         <staff>2</staff>
@@ -344,6 +349,7 @@
         <time-modification>
           <actual-notes>3</actual-notes>
           <normal-notes>2</normal-notes>
+          <normal-type>quarter</normal-type>
           </time-modification>
         <stem>up</stem>
         <staff>2</staff>
