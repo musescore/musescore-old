@@ -17,5 +17,25 @@
 #define TEST(a) if (!(a)) \
       printf("Test failed in <%s>: " #a "\n", __func__), passed = false;
 
+class MScore;
+class Score;
+
+//---------------------------------------------------------
+//   MTest
+//---------------------------------------------------------
+
+class MTest {
+   public:
+      MScore* mscore;
+      QString root;     // root path of test source
+
+      MTest();
+      Score* readScore(const QString& name);
+      bool saveScore(Score*, const QString& name);
+      bool saveCompareScore(Score*,
+         const QString& saveName, const QString& compareWith);
+      };
+
+extern MTest *mtest;
 #endif
 

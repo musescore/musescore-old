@@ -17,6 +17,5 @@
 class Element;
 
 extern Element* writeReadElement(Element* element);
-
 #endif
 

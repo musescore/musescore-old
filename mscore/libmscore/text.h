@@ -146,6 +146,8 @@ class Text : public SimpleText {
 
       QTextCursor* cursor()               { return _cursor; }
       QTextDocument* doc() const          { return _doc;    }
+
+      virtual bool systemFlag() const;
       };
 
 #endif

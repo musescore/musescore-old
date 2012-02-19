@@ -4774,12 +4774,10 @@ void ScoreView::cmdAddText(int type)
                   s = new StaffText(_score);
                   if (type == TEXT_SYSTEM) {
                         s->setTrack(0);
-                        s->setSystemFlag(true);
                         s->setTextStyle(TEXT_STYLE_SYSTEM);
                         }
                   else {
                         s->setTrack(cr->track());
-                        s->setSystemFlag(false);
                         s->setTextStyle(TEXT_STYLE_STAFF);
                         }
                   s->setParent(cr->segment());

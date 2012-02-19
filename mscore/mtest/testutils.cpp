@@ -1,7 +1,7 @@
 //=============================================================================
 //  MuseScore
 //  Music Composition & Notation
-//  $Id: score.cpp 5149 2011-12-29 08:38:43Z wschweer $
+//  $Id:$
 //
 //  Copyright (C) 2012 Werner Schweer
 //
@@ -58,5 +58,4 @@ Element* writeReadElement(Element* element)
       element->read(e);
       return element;
       }
-
 

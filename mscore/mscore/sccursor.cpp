@@ -451,10 +451,8 @@ void SCursor::putStaffText(Text* s)
       if (!cr() || !s)
             return;
       s->setTrack(cr()->track());
-      s->setSystemFlag(false);
       s->setTextStyle(TEXT_STYLE_STAFF);
       s->setParent(cr()->measure());
-//TODO1      s->setTick(cr()->tick());
       s->score()->undoAddElement(s);
       s->score()->setLayoutAll(true);
       }

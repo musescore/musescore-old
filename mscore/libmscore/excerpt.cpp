@@ -162,8 +162,6 @@ Score* createExcerpt(const QList<Part*>& parts)
 
 void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
       {
-printf("clone staves\n");
-      int tracks = score->nstaves() * VOICES;
       SlurMap slurMap;
       TieMap  tieMap;
       SpannerMap spannerMap;
@@ -216,41 +214,67 @@ printf("clone staves\n");
                         }
 
                   // Fraction ts = nm->len();
-                  for (int track = 0; track < tracks; ++track) {
+                  int tracks = oscore->nstaves() * VOICES;
+                  for (int srcTrack = 0; srcTrack < tracks; ++srcTrack) {
                         TupletMap tupletMap;    // tuplets cannot cross measure boundaries
-                        int srcTrack = map[track/VOICES] * VOICES + (track % VOICES);
+                        // int srcTrack = map[track/VOICES] * VOICES + (track % VOICES);
+                        int track = -1;
+                        int st = 0;
+                        foreach(int staff, map) {
+                              if (staff == srcTrack/VOICES) {
+                                    track = (st * VOICES) + srcTrack % VOICES;
+                                    break;
+                                    }
+                              ++st;
+                              }
                         for (Segment* oseg = m->first(); oseg; oseg = oseg->next()) {
                               Segment* ns = nm->getSegment(SegmentType(oseg->subtype()), oseg->tick());
 
                               foreach(Spanner* spanner, oseg->spannerFor()) {
-                                    if (spanner->track() != track)
-                                          continue;
-                                    Spanner* nspanner = static_cast<Spanner*>(spanner->linkedClone());
-                                    foreach(SpannerSegment* ss, nspanner->spannerSegments())
-                                          ss->setParent(0);
-                                    nspanner->setScore(score);
-                                    nspanner->setParent(ns);
-                                    if(spanner->anchor() == ANCHOR_SEGMENT)
-                                          nspanner->setStartElement(ns);
-                                    else //spanner->anchor() == ANCHOR_MEASURE
-                                          nspanner->setStartElement(nm);
-                                    ns->addSpannerFor(nspanner);
-                                    spannerMap.add(spanner, nspanner);
+                                    if ((spanner->track() == srcTrack) && (track != -1)) {
+                                          Spanner* nspanner = static_cast<Spanner*>(spanner->linkedClone());
+                                          foreach(SpannerSegment* ss, nspanner->spannerSegments())
+                                                ss->setParent(0);
+                                          nspanner->setScore(score);
+                                          nspanner->setParent(ns);
+                                          if (spanner->anchor() == ANCHOR_SEGMENT)
+                                                nspanner->setStartElement(ns);
+                                          else //spanner->anchor() == ANCHOR_MEASURE
+                                                nspanner->setStartElement(nm);
+                                          ns->addSpannerFor(nspanner);
+                                          spannerMap.add(spanner, nspanner);
+                                          }
                                     }
                               foreach(Spanner* spanner, oseg->spannerBack()) {
-                                    if (spanner->track() != track)
-                                          continue;
-                                    Spanner* nspanner = spannerMap.findNew(spanner);
-                                    if (nspanner) {
-                                          if(spanner->anchor() == ANCHOR_SEGMENT)
-                                                nspanner->setEndElement(ns);
-                                          else //spanner->anchor() == ANCHOR_MEASURE
-                                                nspanner->setEndElement(nm);
-                                          }
-                                    else {
-                                          qDebug("cloneSpanner(seg): cannot find spanner\n");
+                                    if ((spanner->track() == srcTrack) && (track != -1)) {
+                                          Spanner* nspanner = spannerMap.findNew(spanner);
+                                          if (nspanner) {
+                                                if (spanner->anchor() == ANCHOR_SEGMENT)
+                                                      nspanner->setEndElement(ns);
+                                                else //spanner->anchor() == ANCHOR_MEASURE
+                                                      nspanner->setEndElement(nm);
+                                                ns->addSpannerBack(nspanner);
+                                                }
+                                          else {
+                                                qDebug("cloneSpanner(seg): cannot find spanner\n");
+                                                }
                                           }
                                     }
+
+                              foreach(Element* e, oseg->annotations()) {
+                                    if (e->generated())
+                                          continue;
+                                    if ((e->track() == srcTrack && track != -1)
+                                       || (e->systemFlag() && srcTrack == 0)
+                                       ) {
+                                          Element* ne = e->clone();
+                                          ne->setTrack(track == -1 ? 0 : track);
+                                          ns->add(ne);
+                                          }
+                                    }
+
+                              if (track == -1)
+                                    continue;
 
                               Element* oe = oseg->element(srcTrack);
                               if (oe == 0)
@@ -300,16 +324,6 @@ printf("clone staves\n");
                                           else {
                                                 qDebug("cloneStave: cannot find slur\n");
                                                 }
-                                          }
-                                    foreach(Element* e, oseg->annotations()) {
-                                          if (e->generated())
-                                                continue;
-                                          // if ((e->track() != srcTrack) && !(e->systemFlag() && track == 0))
-                                          if (e->track() != srcTrack)
-                                                continue;
-                                          Element* ne = e->clone();
-                                          ne->setTrack(track);
-                                          ns->add(ne);
                                           }
 
                                     if (oe->type() == CHORD) {
