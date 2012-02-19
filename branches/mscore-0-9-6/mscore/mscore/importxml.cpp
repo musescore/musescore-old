@@ -2894,20 +2894,47 @@ static void smallestTypeAndCount(ChordRest const* const cr, int& type, int& coun
       }
 
 //---------------------------------------------------------
+//   matchTypeAndCount
+//---------------------------------------------------------
+
+/**
+ Given two note types and counts, if the types are not equal,
+ make them equal by successively doubling the count of the
+ largest type.
+ */
+
+static void matchTypeAndCount(int& type1, int& count1, int& type2, int& count2)
+      {
+      while (type1 < type2) {
+            type1++;
+            count1 *= 2;
+            }
+      while (type2 < type1) {
+            type2++;
+            count2 *= 2;
+            }
+      }
+
+//---------------------------------------------------------
 //   isTupletFilled
 //---------------------------------------------------------
 
 /**
  Determine if the tuplet contains the required number of notes,
- i.e. the amount of the smallest notes in the tuplet equals
- the actual notes.
+ either (1) of the specified normal type
+ or (2) the amount of the smallest notes in the tuplet equals
+ actual notes.
 
- Example: a 3:2 tuplet with a 1/4 and a 1/8 note is filled.
+ Example (1): a 3:2 tuplet with a 1/4 and a 1/8 note is filled
+              if normal type is 1/8, it is not filled if normal
+              type is 1/4.
+
+ Example (2): a 3:2 tuplet with a 1/4 and a 1/8 note is filled.
 
  Use note types instead of duration to prevent errors due to rounding.
  */
 
-bool isTupletFilled(Tuplet* t)
+bool isTupletFilled(Tuplet* t, Duration normalType)
       {
       if (!t) return false;
 
@@ -2915,6 +2942,7 @@ bool isTupletFilled(Tuplet* t)
       int tupletCount = 0; // number of smallest notes in the tuplet
       int elemCount   = 0; // number of tuplet elements handled
 
+      // first determine type and number of smallest notes in the tuplet
       foreach (DurationElement* de, t->elements()) {
             if (de->type() == CHORD || de->type() == REST) {
                   ChordRest* cr = static_cast<ChordRest*>(de);
@@ -2931,14 +2959,7 @@ bool isTupletFilled(Tuplet* t)
                         printf("isTupletFilled(%p) cr %p type %d count %d",
                                t, de, noteType, noteCount);
                         // match the types
-                        while (tupletType < noteType) {
-                              tupletType++;
-                              tupletCount *= 2;
-                              }
-                        while (noteType < tupletType) {
-                              noteType++;
-                              noteCount *= 2;
-                              }
+                        matchTypeAndCount(tupletType, tupletCount, noteType, noteCount);
                         tupletCount += noteCount;
                         printf(" total type %d count %d\n",
                                tupletType, tupletCount);
@@ -2947,10 +2968,25 @@ bool isTupletFilled(Tuplet* t)
             elemCount++;
             }
 
-      printf("isTupletFilled(%p) %d/%d tupletCount %d done %d\n",
-             t, t->ratio().numerator(), t->ratio().denominator(),
-             tupletCount, (tupletCount >= t->ratio().numerator()));
-      return tupletCount >= t->ratio().numerator();
+      // then compare ...
+      if (normalType.isValid()) {
+            int matchedNormalType  = normalType.type();
+            int matchedNormalCount = t->ratio().numerator();
+            // match the types
+            matchTypeAndCount(tupletType, tupletCount, matchedNormalType, matchedNormalCount);
+            printf("isTupletFilledWithNormalType(%p, %d) matched type/count %d/%d tuplet type/count %d/%d done %d\n",
+                   t, normalType.type(), matchedNormalType, matchedNormalCount,
+                   tupletType, tupletCount, (tupletCount >= matchedNormalCount));
+            // ... result scenario (1)
+            return tupletCount >= matchedNormalCount;
+            }
+      else {
+            printf("isTupletFilled(%p) %d/%d tupletCount %d done %d\n",
+                   t, t->ratio().numerator(), t->ratio().denominator(),
+                   tupletCount, (tupletCount >= t->ratio().numerator()));
+            // ... result scenario (2)
+            return tupletCount >= t->ratio().numerator();
+            }
       }
 
 //---------------------------------------------------------
@@ -2971,6 +3007,7 @@ void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, int ticks, QDomElement e)
       {
       int actualNotes = 1;
       int normalNotes = 1;
+      Duration normalType;
       bool rest = false;
       QString tupletType;
       QString tupletPlacement;
@@ -3000,8 +3037,12 @@ void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, int ticks, QDomElement e)
                               actualNotes = ee.text().toInt();
                         else if (ee.tagName() == "normal-notes")
                               normalNotes = ee.text().toInt();
-                        else if (ee.tagName() == "normal-type")
-                              domNotImplemented(ee);
+                        else if (ee.tagName() == "normal-type") {
+                              // "measure" is not a valid normal-type,
+                              // but would be accepted by setType()
+                              if (ee.text() != "measure")
+                                    normalType.setType(ee.text());
+                              }
                         else
                               domError(ee);
                         }
@@ -3074,10 +3115,13 @@ void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, int ticks, QDomElement e)
 
       // Tuplets are stopped by the tuplet stop
       // or when the tuplet is filled completely
+      // (either with knowledge of the normal type
+      // or as a last resort calculated based on
+      // actual and normal notes plus total duration)
       // or when the time-modification is not found.
       if (tuplet) {
             if (tupletType == "stop"
-                || isTupletFilled(tuplet)
+                || isTupletFilled(tuplet, normalType)
                 || (actualNotes == 1 && normalNotes == 1)) {
                   printf("stop tuplet %p last chordrest %p\n", tuplet, cr);
                   int totalDuration = 0;
