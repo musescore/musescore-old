@@ -506,14 +506,14 @@ void MusicXml::doCredits()
       const double mgl  = pf->oddLeftMargin * 10 * DPI / score->spatium();
       const double mgt  = pf->oddTopMargin * 10 * DPI / score->spatium();
       const double mgb  = pf->oddBottomMargin * 10 * DPI / score->spatium();
-      
+
       const int pw1 = (int) (pw / 3);
       const int pw2 = (int) (pw * 2 / 3);
       const int ph2 = (int) (ph / 2);
       // printf("page format w=%g h=%g\n", pw, ph);
       // printf("page format pw1=%d pw2=%d ph2=%d\n", pw1, pw2, ph2);
       // dump the credits
-    
+
       /*for (ciCreditWords ci = credits.begin(); ci != credits.end(); ++ci) {
             CreditWords* w = *ci;
             printf("credit-words defx=%g defy=%g just=%s hal=%s val=%s words=%s\n",
@@ -524,7 +524,7 @@ void MusicXml::doCredits()
                   w->vAlign.toUtf8().data(),
                   w->words.toUtf8().data());
             }*/
-      
+
       // apply simple heuristics using only default x and y
       // to recognize the meaning of credit words
       CreditWords* crwTitle = 0;
@@ -618,20 +618,20 @@ void MusicXml::doCredits()
       addText(vbox, score, strTranslator, TEXT_TRANSLATOR, TEXT_STYLE_TRANSLATOR);
 
       if (crwCopyRight) score->setCopyright(crwCopyRight->words);
-      
+
       //deal with remaining credits on page 1
       //TODO deal with other pages...
       for (ciCreditWords ci = credits.begin(); ci != credits.end(); ++ci) {
             CreditWords* w = *ci;
-            if(w != crwTitle && w != crwSubTitle && w != crwComposer 
-                  && w != crwPoet && w != crwCopyRight) {
+            if (w != crwTitle && w != crwSubTitle && w != crwComposer
+                && w != crwPoet && w != crwCopyRight) {
                   if (w->page == 1) {
-                        Text *t = addText(vbox, score, w->words, TEXT_FRAME, TEXT_STYLE_FRAME);
+                        Text* t = addText(vbox, score, w->words, TEXT_FRAME, TEXT_STYLE_FRAME);
                         //computation in tenths, get coordinates in the VBox system
                         double x = w->defaultX - mgl;
                         double y = ph - w->defaultY - mgt;
                         //change tenths to spatium
-                        t->setUserOff(QPointF(x*0.1*score->spatium() , y*0.1*score->spatium()));
+                        t->setUserOff(QPointF(x*0.1*score->spatium(), y*0.1*score->spatium()));
                         }
                   }
             }
@@ -939,7 +939,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                               QString halign  = ee.attribute(QString("halign"));
                               QString valign  = ee.attribute(QString("valign"));
                               QString crwords = ee.text();
-                              if(cw == 0) {
+                              if (cw == 0) {
                                     cw = new CreditWords(p, defaultx, defaulty, justify, halign, valign, crwords);
                                     credits.append(cw);
                                     }
@@ -1163,15 +1163,15 @@ void MusicXml::xmlScorePart(QDomElement e, QString id, int& parts)
                               part->setMidiProgram(ee.text().toInt() - 1);
                         else if (ee.tagName() == "volume") {
                               double vol = ee.text().toDouble();
-                              if(vol >= 0 && vol <= 100)
+                              if (vol >= 0 && vol <= 100)
                                     part->setVolume(( vol / 100) * 127);
                               }
                         else if (ee.tagName() == "pan") {
                               double pan = ee.text().toDouble();
-                              if(pan >= -90 && pan <= 90)
+                              if (pan >= -90 && pan <= 90)
                                     part->setPan( ((pan + 90) / 180) * 127 );
                               }
-                        else      
+                        else
                               domError(ee);
                         }
                   }
@@ -1659,12 +1659,12 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                         else if (endingType.isEmpty())
                               printf("ImportXml: warning: empty ending type\n");
                         else {
-                              QStringList sl = endingNumber.split("," , QString::SkipEmptyParts);
+                              QStringList sl = endingNumber.split(",", QString::SkipEmptyParts);
                               QList<int> iEndingNumbers;
                               bool unsupported = false;
-                              foreach(const QString& s, sl) {
+                              foreach(const QString &s, sl) {
                                     int iEndingNumber = s.toInt();
-                                    if(iEndingNumber <= 0) {
+                                    if (iEndingNumber <= 0) {
                                           unsupported = true;
                                           break;
                                           }
@@ -2975,6 +2975,7 @@ void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, int ticks, QDomElement e)
       QString tupletType;
       QString tupletPlacement;
       QString tupletBracket;
+      QString tupletShowNumber;
 
       // parse the elements required for tuplet handling
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
@@ -2983,9 +2984,10 @@ void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, int ticks, QDomElement e)
             if (tag == "notations") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "tuplet") {
-                              tupletType      = ee.attribute("type");
-                              tupletPlacement = ee.attribute("placement");
-                              tupletBracket   = ee.attribute("bracket");
+                              tupletType       = ee.attribute("type");
+                              tupletPlacement  = ee.attribute("placement");
+                              tupletBracket    = ee.attribute("bracket");
+                              tupletShowNumber = ee.attribute("show-number");
                               }
                         }
                   }
@@ -3044,7 +3046,19 @@ void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, int ticks, QDomElement e)
                   tuplet->setTrack(cr->track());
                   tuplet->setRatio(Fraction(actualNotes, normalNotes));
                   tuplet->setTick(cr->tick());
-                  // TODO type, placement, bracket
+                  // set bracket, leave at default if unspecified
+                  if (tupletBracket == "yes")
+                        tuplet->setBracketType(Tuplet::SHOW_BRACKET);
+                  else if (tupletBracket == "no")
+                        tuplet->setBracketType(Tuplet::SHOW_NO_BRACKET);
+                  // set number, default is "actual" (=SHOW_NUMBER)
+                  if (tupletShowNumber == "both")
+                        tuplet->setNumberType(Tuplet::SHOW_RELATION);
+                  else if (tupletShowNumber == "none")
+                        tuplet->setNumberType(Tuplet::NO_TEXT);
+                  else
+                        tuplet->setNumberType(Tuplet::SHOW_NUMBER);
+                  // TODO type, placement
                   cr->measure()->add(tuplet);
                   }
             }
