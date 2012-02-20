@@ -206,6 +206,7 @@ void ExportMidi::writeHeader()
       //--------------------------------------------
 
       TempoMap* tempomap = cs->tempomap();
+      int relTempo = tempomap->relTempo();      
       foreach(const RepeatSegment* rs, *cs->repeatList()) {
             int startTick  = rs->tick;
             int endTick    = startTick + rs->len;
@@ -219,7 +220,7 @@ void ExportMidi::writeHeader()
                   //
                   // compute midi tempo: microseconds / quarter note
                   //
-                  int tempo = lrint((1.0 / it->second.tempo) * 1000000.0);
+                  int tempo = lrint((1.0 / (it->second.tempo * relTempo * 0.01)) * 1000000.0);
 
                   ev.setMetaType(META_TEMPO);
                   ev.setLen(3);
