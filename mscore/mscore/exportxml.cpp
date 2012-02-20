@@ -2460,16 +2460,16 @@ void ExportMusicXml::rest(Rest* rest, int staff)
             xml.tag("normal-notes", t->ratio().denominator());
             int nrmTicks = determineTupletNormalTicks(rest);
             if (nrmTicks > 0) {
-                        int nrmDots = 0;
-                        QString nrmType = tick2xml(nrmTicks, &nrmDots);
-                        if (nrmType.isEmpty())
-                              printf("no note type found for ticks %d\n", nrmTicks);
-                        else {
-                              xml.tag("normal-type", nrmType);
-                              for (int ni = nrmDots; ni > 0; ni--)
-                                    xml.tagE("normal-dot");
-                              }
+                  int nrmDots = 0;
+                  QString nrmType = tick2xml(nrmTicks, &nrmDots);
+                  if (nrmType.isEmpty())
+                        printf("no note type found for ticks %d\n", nrmTicks);
+                  else {
+                        xml.tag("normal-type", nrmType);
+                        for (int ni = nrmDots; ni > 0; ni--)
+                              xml.tagE("normal-dot");
                         }
+                  }
             xml.etag();
             }
 
@@ -2917,45 +2917,55 @@ void ExportMusicXml::textLine(TextLine* tl, int staff, int tick)
       QString rest;
       QPointF p;
 
+      // special case: a dashed line w/o hooks is written as dashes
+      bool dashes = tl->lineStyle() == Qt::DashLine && !tl->beginHook() && !tl->endHook();
+
       QString lineEnd = "none";
       QString type;
+      bool hook = false;
+      double hookHeight = 0.0;
       int offs;
       int n = 0;
       if (tl->tick() == tick) {
-            QString lineType;
-            switch (tl->lineStyle()) {
-                  case Qt::SolidLine:
-                        lineType = "solid";
-                        break;
-                  case Qt::DashLine:
-                        lineType = "dashed";
-                        break;
-                  case Qt::DotLine:
-                        lineType = "dotted";
-                        break;
-                  default:
-                        lineType = "solid";
+            if (!dashes) {
+                  QString lineType;
+                  switch (tl->lineStyle()) {
+                        case Qt::SolidLine:
+                              lineType = "solid";
+                              break;
+                        case Qt::DashLine:
+                              lineType = "dashed";
+                              break;
+                        case Qt::DotLine:
+                              lineType = "dotted";
+                              break;
+                        default:
+                              lineType = "solid";
+                        }
+                  rest += QString(" line-type=\"%1\"").arg(lineType);
                   }
-            rest += QString(" line-type=\"%1\"").arg(lineType);
+            hook = tl->beginHook();
+            hookHeight = tl->beginHookHeight().val();
             p = tl->lineSegments().first()->userOff();
             offs = tl->mxmlOff();
             type = "start";
             }
       else {
-            if (tl->endHook()) {
-                  double h = tl->endHookHeight().val();
-                  if (h < 0.0) {
-                        lineEnd = "up";
-                        h *= -1.0;
-                        }
-                  else {
-                        lineEnd = "down";
-                        }
-                  rest += QString(" end-length=\"%1\"").arg(h * 10);
-                  }
+            hook = tl->endHook();
+            hookHeight = tl->endHookHeight().val();
             p = tl->lineSegments().last()->userOff2();
             offs = tl->mxmlOff2();
             type = "stop";
+            }
+
+      if (hook) {
+            if (hookHeight < 0.0) {
+                  lineEnd = "up";
+                  hookHeight *= -1.0;
+                  }
+            else
+                  lineEnd = "down";
+            rest += QString(" end-length=\"%1\"").arg(hookHeight * 10);
             }
 
       n = findBracket(tl);
@@ -2978,7 +2988,10 @@ void ExportMusicXml::textLine(TextLine* tl, int staff, int tick)
             xml.etag();
             }
       xml.stag("direction-type");
-      xml.tagE(QString("bracket type=\"%1\" number=\"%2\" line-end=\"%3\"%4").arg(type, QString::number(n + 1), lineEnd, rest));
+      if (dashes)
+            xml.tagE(QString("dashes type=\"%1\" number=\"%2\"").arg(type, QString::number(n + 1)));
+      else
+            xml.tagE(QString("bracket type=\"%1\" number=\"%2\" line-end=\"%3\"%4").arg(type, QString::number(n + 1), lineEnd, rest));
       xml.etag();
       if (offs)
             xml.tag("offset", offs);

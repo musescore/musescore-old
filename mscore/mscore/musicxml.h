@@ -75,6 +75,7 @@ const int MAX_LYRICS       = 8;
 const int MAX_PART_GROUPS  = 8;
 const int MAX_NUMBER_LEVEL = 6; // maximum number of overlapping MusicXML objects
 const int MAX_BRACKETS     = 8;
+const int MAX_DASHES       = 8;
 
 //---------------------------------------------------------
 //   CreditWords
@@ -162,8 +163,8 @@ class MusicXml {
       QVector<int> measureStart;                ///< Start tick of each measure
 
       Slur* slur[MAX_NUMBER_LEVEL];
-
       TextLine* bracket[MAX_BRACKETS];
+      TextLine* dashes[MAX_DASHES];
 
       Tie* tie;
       int voice;

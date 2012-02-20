@@ -266,6 +266,11 @@
         <type>quarter</type>
         <stem>up</stem>
         </note>
+      <direction placement="above">
+        <direction-type>
+          <bracket type="start" number="1" line-end="down" line-type="solid" end-length="15"/>
+          </direction-type>
+        </direction>
       <note>
         <pitch>
           <step>F</step>
@@ -286,6 +291,11 @@
         <type>quarter</type>
         <stem>up</stem>
         </note>
+      <direction placement="above">
+        <direction-type>
+          <bracket type="stop" number="1" line-end="down" end-length="15"/>
+          </direction-type>
+        </direction>
       <note>
         <pitch>
           <step>A</step>
@@ -308,6 +318,11 @@
         <type>quarter</type>
         <stem>down</stem>
         </note>
+      <direction placement="above">
+        <direction-type>
+          <dashes type="start" number="1"/>
+          </direction-type>
+        </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -328,6 +343,11 @@
         <type>quarter</type>
         <stem>down</stem>
         </note>
+      <direction placement="above">
+        <direction-type>
+          <dashes type="stop" number="1"/>
+          </direction-type>
+        </direction>
       <note>
         <pitch>
           <step>E</step>
