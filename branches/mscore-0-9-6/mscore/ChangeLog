@@ -1,3 +1,5 @@
+20.feb (lv)
+      - fix #14825: [MusicXML import] [1.2] import error: 31a-Directions.xml missing dashes and bracket
 19.feb (lv)
       - fix #15002: [MusicXML] [1.2] Export/import of uneven tuplets (16th, eighth, eighth, 16th)
       - fix #15033: [MusicXML] [1.2] Handle tuplet property "number"

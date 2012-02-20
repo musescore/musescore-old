@@ -450,6 +450,8 @@ void MusicXml::import(Score* s)
             slur[i] = 0;
       for (int i = 0; i < MAX_BRACKETS; ++i)
             bracket[i] = 0;
+      for (int i = 0; i < MAX_DASHES; ++i)
+            dashes[i] = 0;
       ottava = 0;
       trill = 0;
       pedal = 0;
@@ -1981,8 +1983,10 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               type   = ee.attribute(QString("type"));
                               // spread = ee.attribute(QString("spread"), "0").toInt();
                               }
-                        else if (dirType == "dashes")
-                              domNotImplemented(ee);
+                        else if (dirType == "dashes") {
+                              type      = ee.attribute(QString("type"));
+                              number    = ee.attribute(QString("number"), "1").toInt();
+                              }
                         else if (dirType == "bracket") {
                               type      = ee.attribute(QString("type"));
                               number    = ee.attribute(QString("number"), "1").toInt();
@@ -2309,7 +2313,9 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                                           score->spatium(), placement,
                                           hasYoffset, yoffset);
 
-                        // TODO: MuseScore doesn't support hooks at beginning of lines
+                        b->setBeginHook(lineEnd != "none");
+                        if (lineEnd == "up")
+                              b->setBeginHookHeight(-1 * b->beginHookHeight());
 
                         // hack: assume there was a words element before the bracket
                         if (!txt.isEmpty()) {
@@ -2355,6 +2361,66 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               b->setEndHookHeight(-1 * b->endHookHeight());
                         score->add(b);
                         bracket[n] = 0;
+                        }
+                  }
+            }
+      else if (dirType == "dashes") {
+            int n = number-1;
+            TextLine* b = dashes[n];
+            if (type == "start") {
+                  if (b) {
+                        printf("overlapping dashes with same number?\n");
+                        delete b;
+                        dashes[n] = 0;
+                        }
+                  else {
+                        b = new TextLine(score);
+
+                        // what does placement affect?
+                        //yoffset += (placement == "above" ? 0.0 : 5.0);
+                        // store for later to set in segment
+                        // b->setUserOff(QPointF(rx + xoffset, ry + yoffset));
+                        b->setMxmlOff(offset);
+                        if (placement == "") placement = "above";  // set default
+                        setSLinePlacement(b,
+                                          score->spatium(), placement,
+                                          hasYoffset, yoffset);
+
+                        // hack: assume there was a words element before the dashes
+                        if (!txt.isEmpty()) {
+                              b->setBeginText(txt);
+                              }
+
+                        b->setBeginHook(false);
+                        b->setLineStyle(Qt::DashLine);
+                        b->setTrack((staff + rstaff) * VOICES);
+                        b->setTick(tick);
+                        dashes[n] = b;
+                        }
+                  }
+            else if (type == "stop") {
+                  if (!b) {
+                        printf("dashes stop without start, number %d\n", number);
+                        }
+                  else {
+                        b->setTick2(tick);
+                        // TODO: MuseScore doesn't support lines which start and end on different staves
+                        /*
+                        QPointF userOff = b->userOff();
+                        b->add(b->createLineSegment());
+
+                        b->setUserOff(QPointF()); // restore the offset
+                        b->setMxmlOff2(offset);
+                        LineSegment* ls1 = b->lineSegments().front();
+                        LineSegment* ls2 = b->lineSegments().back();
+                        // what does placement affect?
+                        //yoffset += (placement == "above" ? 0.0 : 5.0);
+                        ls1->setUserOff(userOff);
+                        ls2->setUserOff2(QPointF(rx + xoffset, ry + yoffset));
+                        */
+                        b->setEndHook(false);
+                        score->add(b);
+                        dashes[n] = 0;
                         }
                   }
             }
