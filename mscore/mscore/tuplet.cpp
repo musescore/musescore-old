@@ -157,11 +157,26 @@ void Tuplet::layout()
       //
       //   shall we draw a bracket?
       //
-      if (cr1->beam() && !tupletContainsRest) {
-            if (_bracketType == AUTO_BRACKET)
-                  _hasBracket = false;
-            else
-                  _hasBracket = _bracketType == SHOW_BRACKET;
+      if (_bracketType == AUTO_BRACKET) {
+            _hasBracket = tupletContainsRest;
+            if (!_hasBracket) {
+                  foreach(DurationElement* e, _elements) {
+                        if (e->type() == TUPLET) {
+                              _hasBracket = true;
+                              break;
+                              }
+                        else if (e->isChordRest()) {
+                              ChordRest* cr = static_cast<ChordRest*>(e);
+                              //
+                              // maybe we should check for more than one beam
+                              //
+                              if (cr->beam() == 0) {
+                                    _hasBracket = true;
+                                    break;
+                                    }
+                              }
+                        }
+                  }
             }
       else
             _hasBracket = _bracketType != SHOW_NO_BRACKET;
