@@ -2059,7 +2059,7 @@ static Chord* nextChord(Chord* ch)
  TODO determine how to handle baselen with dots and verify correct behaviour.
  */
 
-static int determineTupletNormalTicks(Chord const* const chord)
+static int determineTupletNormalTicks(ChordRest const* const chord)
       {
       Tuplet const* const t = chord->tuplet();
       if (!t)
@@ -2458,6 +2458,18 @@ void ExportMusicXml::rest(Rest* rest, int staff)
             xml.stag("time-modification");
             xml.tag("actual-notes", t->ratio().numerator());
             xml.tag("normal-notes", t->ratio().denominator());
+            int nrmTicks = determineTupletNormalTicks(rest);
+            if (nrmTicks > 0) {
+                        int nrmDots = 0;
+                        QString nrmType = tick2xml(nrmTicks, &nrmDots);
+                        if (nrmType.isEmpty())
+                              printf("no note type found for ticks %d\n", nrmTicks);
+                        else {
+                              xml.tag("normal-type", nrmType);
+                              for (int ni = nrmDots; ni > 0; ni--)
+                                    xml.tagE("normal-dot");
+                              }
+                        }
             xml.etag();
             }
 
