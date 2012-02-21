@@ -445,6 +445,13 @@ MuseScore::MuseScore()
       layerSwitch->setToolTip(tr("switch layer"));
       connect(layerSwitch, SIGNAL(activated(const QString&)), SLOT(switchLayer(const QString&)));
 
+      playMode = new QComboBox(this);
+      playMode->addItem(tr("synthesizer"));
+      playMode->addItem(tr("audio track"));
+      playMode->setToolTip(tr("switch play mode"));
+      connect(playMode, SIGNAL(activated(int)), SLOT(switchPlayMode(int)));
+
+      _statusBar->addPermanentWidget(playMode);
       _statusBar->addPermanentWidget(layerSwitch);
       _statusBar->addPermanentWidget(_positionLabel, 0);
 
@@ -1334,6 +1341,7 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
       else
             cs = 0;
       updateLayer();
+      updatePlayMode();
       if (seq)
             seq->setScoreView(cv);
       if (playPanel)
@@ -3573,6 +3581,16 @@ void MuseScore::switchLayer(const QString& s)
       }
 
 //---------------------------------------------------------
+//   switchPlayMode
+//---------------------------------------------------------
+
+void MuseScore::switchPlayMode(int mode)
+      {
+      if (cs)
+            cs->setPlayMode(PlayMode(mode));
+      }
+
+//---------------------------------------------------------
 //   networkFinished
 //---------------------------------------------------------
 
@@ -4357,6 +4375,20 @@ void MuseScore::updateLayer()
       else
            enable = false;
       layerSwitch->setVisible(enable);
+      }
+
+//---------------------------------------------------------
+//   updatePlayMode
+//---------------------------------------------------------
+
+void MuseScore::updatePlayMode()
+      {
+      bool enable = false;
+      if (cs) {
+            enable = cs->audio() != 0;
+            playMode->setCurrentIndex(int(cs->playMode()));
+            }
+      playMode->setVisible(enable);
       }
 
 //---------------------------------------------------------

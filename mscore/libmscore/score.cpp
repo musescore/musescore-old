@@ -65,6 +65,7 @@
 #include "mscore.h"
 #include "omr/omr.h"
 #include "bracket.h"
+#include "audio.h"
 
 Score* gscore;                 ///< system score, used for palettes etc.
 QPoint scorePos(0,0);
@@ -262,6 +263,7 @@ void Score::init()
       _testMode       = false;
       _parentScore    = 0;
       _currentLayer   = 0;
+      _playMode       = PLAYMODE_SYNTHESIZER;
       Layer l;
       l.name          = "default";
       l.tags          = 1;
@@ -322,6 +324,7 @@ void Score::init()
       _creditsRead    = false;
       _defaultsRead   = false;
       _omr            = 0;
+      _audio          = 0;
       _showOmr        = false;
       _sigmap         = 0; // new TimeSigMap();
       _tempomap       = 0; // new TempoMap;
@@ -2158,6 +2161,16 @@ void Score::removeOmr()
       _showOmr = false;
       delete _omr;
       _omr = 0;
+      }
+
+//---------------------------------------------------------
+//   removeAudio
+//---------------------------------------------------------
+
+void Score::removeAudio()
+      {
+      delete _audio;
+      _audio = 0;
       }
 
 //---------------------------------------------------------

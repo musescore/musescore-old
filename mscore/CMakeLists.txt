@@ -18,12 +18,12 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
+# set (CMAKE_CXX_COMPILER   clang++)
+
 project(mscore)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.0)
 
 cmake_policy(SET CMP0003 NEW)
-
-# set (CMAKE_CXX_COMPILER   clang++)
 
 # for debugging the make system uncomment next line:
 # set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -34,14 +34,15 @@ set(GCC_VISIBILITY TRUE)            # requires gcc 4.x?
 set(HAS_AUDIOFILE TRUE)             # requires libsndfile
 
 set(STATIC_SCRIPT_BINDINGS TRUE)
-set(BUILD_SCRIPTGEN   TRUE)         # Generate Qt script bindings. (collides with qtscriptgenerator project on several distrib)
+# set(BUILD_SCRIPTGEN   TRUE)         # Generate Qt script bindings. (collides with qtscriptgenerator project on several distrib)
 set(USE_SSE           FALSE)
 set(SOUNDFONT3        TRUE)         # enable ogg vorbis compressed fonts, require ogg & vorbis
 set(AEOLUS            TRUE)         # pipe organ synthesizer
 set(EMBED_ICONS       FALSE)        # do not load icons from share/icons
 
-option (OSC "enable OSC remote control protocol" ON)         # osc remote control
-option (OMR "enable PDF import"  OFF)         # OMR - optical music recognition
+option (OSC "enable OSC remote control protocol" ON)        # osc remote control
+option (OMR "enable PDF import"  OFF)                       # OMR - optical music recognition
+option (BUILD_SCRIPTGEN "enable script bindings" ON)
 
 if (APPLE OR MINGW)
       set(GCC_VISIBILITY FALSE)     # warnings if not, with gcc4.4 from qt

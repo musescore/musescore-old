@@ -75,6 +75,7 @@ class Beam;
 class Lyrics;
 class Text;
 class Omr;
+class Audio;
 class Parameter;
 class StaffType;
 class Revisions;
@@ -178,6 +179,14 @@ enum LayoutFlag {
 typedef QFlags<LayoutFlag> LayoutFlags;
 Q_DECLARE_OPERATORS_FOR_FLAGS(LayoutFlags)
 
+//---------------------------------------------------------
+//   PlayMode
+//---------------------------------------------------------
+
+enum PlayMode {
+      PLAYMODE_SYNTHESIZER,
+      PLAYMODE_AUDIO
+      };
 
 //---------------------------------------------------------
 //   Layer
@@ -300,7 +309,9 @@ class Score {
       Selection _selection;
       QList<KeySig*> customKeysigs;
       Omr* _omr;
+      Audio* _audio;
       bool _showOmr;
+      PlayMode _playMode;
       bool _playRepeats;
 
       SyntiState _syntiState;
@@ -755,6 +766,7 @@ class Score {
       void removeOmr();
       bool showOmr() const                     { return _showOmr; }
       void setShowOmr(bool v)                  { _showOmr = v;    }
+      void removeAudio();
       void enqueueMidiEvent(MidiInputEvent ev) { midiInputQueue.enqueue(ev); }
 
       void doLayout();
@@ -851,8 +863,12 @@ class Score {
       void respace(QList<ChordRest*>* elements);
       void transposeSemitone(int semitone);
       MeasureBase* insertMeasure(ElementType type, MeasureBase*);
-      bool testMode() const      { return _testMode; }
-      void setTestMode(bool val) { _testMode = val;  }
+      bool testMode() const        { return _testMode; }
+      void setTestMode(bool val)   { _testMode = val;  }
+      Audio* audio() const         { return _audio; }
+      void setAudio(Audio* a)      { _audio = a;    }
+      PlayMode playMode() const    { return _playMode; }
+      void setPlayMode(PlayMode v) { _playMode = v; }
       };
 
 extern Score* gscore;

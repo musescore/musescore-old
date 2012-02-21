@@ -286,7 +286,7 @@ void FretDiagram::layout()
 void FretDiagram::write(Xml& xml) const
       {
       xml.stag("FretDiagram");
-      Element::writeProperties(xml, 0);
+      Element::writeProperties(xml);
 
       if (_strings != DEFAULT_STRINGS)
             xml.tag("strings", _strings);

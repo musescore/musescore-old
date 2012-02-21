@@ -43,7 +43,7 @@ add_library (
       dsp.cpp tempo.cpp sig.cpp pos.cpp fraction.cpp duration.cpp
       figuredbass.cpp simpletext.cpp rehearsalmark.cpp transpose.cpp
       property.cpp range.cpp elementmap.cpp notedot.cpp imageStore.cpp
-      qzip.cpp
+      qzip.cpp audio.cpp
       )
 set_target_properties (
       libmscore

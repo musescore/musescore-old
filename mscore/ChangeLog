@@ -1,3 +1,6 @@
+21.2 (ws)
+      - add "playmode" to Score()
+      - implement vorbis audio files as additional media
 20.2 (ws)
       - linked parts: tuplets
       - linked parts: implement add/insert measure/frame
