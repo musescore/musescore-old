@@ -547,7 +547,7 @@ void SLine::layout()
 
 void SLine::writeProperties(Xml& xml, const SLine* proto) const
       {
-      Element::writeProperties(xml, proto);
+      Element::writeProperties(xml);
       if (_diagonal && (proto == 0 || proto->diagonal() != _diagonal))
             xml.tag("diagonal", _diagonal);
       if (anchor() != ANCHOR_SEGMENT && (proto == 0 || proto->anchor() != anchor()))

@@ -247,7 +247,7 @@ class Element {
 
       virtual void draw(QPainter*) const {}
 
-      void writeProperties(Xml& xml, const Element* prototype = 0) const;
+      void writeProperties(Xml& xml) const;
       bool readProperties(const QDomElement&);
 
       virtual void write(Xml&) const;

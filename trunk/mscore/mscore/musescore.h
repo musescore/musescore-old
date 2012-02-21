@@ -312,6 +312,7 @@ class MuseScore : public QMainWindow {
       bool inChordEditor;
 
       QComboBox* layerSwitch;
+      QComboBox* playMode;
       QNetworkAccessManager* networkManager;
       QAction* lastCmd;
       Shortcut* lastShortcut;
@@ -421,6 +422,7 @@ class MuseScore : public QMainWindow {
       void changeProfile(QAction*);
       void changeProfile(Profile* p);
       void switchLayer(const QString&);
+      void switchPlayMode(int);
       void networkFinished(QNetworkReply*);
 
    public slots:
@@ -591,6 +593,7 @@ class MuseScore : public QMainWindow {
       Navigator* navigator() const;
       NScrollArea* navigatorScrollArea() const { return _navigator; }
       void updateLayer();
+      void updatePlayMode();
       bool metronome() const         { return metronomeAction->isChecked(); }
       bool panDuringPlayback() const { return panAction->isChecked(); }
       void noteTooShortForTupletDialog();

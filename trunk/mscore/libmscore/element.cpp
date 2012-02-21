@@ -641,7 +641,7 @@ bool Element::intersects(const QRectF& rr) const
 //   writeProperties
 //---------------------------------------------------------
 
-void Element::writeProperties(Xml& xml, const Element* proto) const
+void Element::writeProperties(Xml& xml) const
       {
       if (_links && (_links->size() > 1))
             xml.tag("lid", _links->lid());
@@ -652,8 +652,6 @@ void Element::writeProperties(Xml& xml, const Element* proto) const
             t = track() + xml.trackDiff;
             xml.tag("track", t);
             }
-//      if (flag(ELEMENT_SYSTEM_FLAG) && (proto == 0 || proto->systemFlag() != flag(ELEMENT_SYSTEM_FLAG)))
-//            xml.tag("systemFlag", flag(ELEMENT_SYSTEM_FLAG));
       if (_tag != 0x1) {
             for (int i = 1; i < MAX_TAGS; i++) {
                   if (_tag == ((unsigned)1 << i)) {

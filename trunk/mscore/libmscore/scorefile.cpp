@@ -39,6 +39,7 @@
 #include "sig.h"
 #include "undo.h"
 #include "imageStore.h"
+#include "audio.h"
 
 //---------------------------------------------------------
 //   write
@@ -53,6 +54,10 @@ void Score::write(Xml& xml, bool selectionOnly)
             _omr->write(xml);
       if (_showOmr && xml.writeOmr)
             xml.tag("showOmr", _showOmr);
+      if (_audio && xml.writeOmr) {
+            xml.tag("playMode", int(_playMode));
+            _audio->write(xml);
+            }
 
       for (int i = 0; i < 32; ++i) {
             if (!_layerTags[i].isEmpty()) {
@@ -433,6 +438,17 @@ void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool onlySelection
                   }
             }
 #endif
+      //
+      // save audio
+      //
+      if (_audio) {
+            QByteArray ba(_audio->data());
+            QBuffer dbuf(&ba);
+            dbuf.open(QIODevice::ReadOnly);
+            if (!uz.createEntry("audio.ogg", dbuf, dt, false, true))
+                  throw(QString("Cannot add <audio.ogg> to zipfile\n"));
+            dbuf.close();
+            }
 
       QBuffer dbuf;
       dbuf.open(QIODevice::ReadWrite);
@@ -626,7 +642,7 @@ bool Score::loadCompressedMsc(QString name)
             col.setNum(column);
             ln.setNum(line);
             QString error = err + "\n at line " + ln + " column " + col;
-            qDebug("error: %s\n", qPrintable(error));
+            qDebug("error: %s", qPrintable(error));
             return false;
             }
       dbuf.close();
@@ -644,7 +660,7 @@ bool Score::loadCompressedMsc(QString name)
                   dbuf.open(QIODevice::WriteOnly);
                   QString path = QString("OmrPages/page%1.png").arg(i+1);
                   if (!uz.extractFile(path, &dbuf))
-                        qDebug("Cannot read <%s> from zipfile\n", qPrintable(path));
+                        qDebug("Cannot read <%s> from zipfile", qPrintable(path));
                   else  {
                         OmrPage* page = _omr->page(i);
                         QImage image;
@@ -652,11 +668,22 @@ bool Score::loadCompressedMsc(QString name)
                               page->setImage(image);
                               }
                         else
-                              qDebug("load image failed\n");
+                              qDebug("load image failed");
                         }
                   }
             }
 #endif
+      //
+      //  read audio
+      //
+      if (_audio) {
+            QBuffer dbuf;
+            dbuf.open(QIODevice::WriteOnly);
+            if (!uz.extractFile("audio.ogg", &dbuf))
+                  qDebug("Cannot read <audio.ogg> from zipfile");
+            else
+                  _audio->setData(dbuf.data());
+            }
       return retval;
       }
 
@@ -871,8 +898,14 @@ bool Score::read(const QDomElement& de)
                   _omr->read(ee);
 #endif
                   }
+            else if (tag == "Audio") {
+                  _audio = new Audio;
+                  _audio->read(ee);
+                  }
             else if (tag == "showOmr")
                   _showOmr = i;
+            else if (tag == "playMode")
+                  _playMode = PlayMode(i);
             else if (tag == "LayerTag") {
                   int id = ee.attribute("id").toInt();
                   const QString& tag = ee.attribute("tag");

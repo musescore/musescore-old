@@ -22,6 +22,7 @@
 #include "icons.h"
 #include "musescore.h"
 #include "libmscore/score.h"
+#include "libmscore/audio.h"
 #include "scoreview.h"
 #include "omr/omr.h"
 
@@ -64,6 +65,19 @@ void MediaDialog::setScore(Score* s)
             addScan->setEnabled(true);
             removeScan->setEnabled(false);
             scanFileButton->setEnabled(true);
+            }
+      Audio* audio = score->audio();
+      if (audio) {
+            audioFile->setText(audio->path());
+            addAudio->setEnabled(false);
+            removeAudio->setEnabled(true);
+            audioFileButton->setEnabled(false);
+            }
+      else {
+            audioFile->setText(QString());
+            addAudio->setEnabled(true);
+            removeAudio->setEnabled(false);
+            audioFileButton->setEnabled(true);
             }
       }
 
@@ -108,6 +122,19 @@ void MediaDialog::removeScanPressed()
 
 void MediaDialog::addAudioPressed()
       {
+      QString path = audioFile->text();
+      if (score->audio() || path.isEmpty())
+            return;
+      QFile f(path);
+      if (!f.open(QIODevice::ReadOnly))
+            return;
+      QByteArray ba = f.readAll();
+      f.close();
+      Audio* audio = new Audio;
+      audio->setPath(path);
+      audio->setData(ba);
+      score->setAudio(audio);
+      score->setDirty(true);
       }
 
 //---------------------------------------------------------
@@ -116,6 +143,12 @@ void MediaDialog::addAudioPressed()
 
 void MediaDialog::removeAudioPressed()
       {
+      score->removeAudio();
+      score->setDirty(true);
+      audioFile->setText(QString());
+      addAudio->setEnabled(true);
+      removeAudio->setEnabled(false);
+      audioFileButton->setEnabled(true);
       }
 
 //---------------------------------------------------------
