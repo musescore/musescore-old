@@ -1,3 +1,6 @@
+20.2 (ws)
+      - linked parts: tuplets
+      - linked parts: implement add/insert measure/frame
 19.2 (ws)
       - fix #8990: Issues with Tuplets
       - fix #8995: Tuplet bracket should appear if beam broken

@@ -49,6 +49,7 @@
 #include "ui_articulationbase.h"
 #include "ui_keysig.h"
 #include "ui_rest.h"
+#include "ui_stem.h"
 
 #include "globals.h"
 #include "libmscore/mscore.h"
@@ -633,6 +634,20 @@ class KeySigView : public ShowElementBase {
 
    public:
       KeySigView();
+      virtual void setElement(Element*);
+      };
+
+//---------------------------------------------------------
+//   StemView
+//---------------------------------------------------------
+
+class StemView : public ShowElementBase {
+      Q_OBJECT;
+
+      Ui::StemBase stem;
+
+   public:
+      StemView();
       virtual void setElement(Element*);
       };
 

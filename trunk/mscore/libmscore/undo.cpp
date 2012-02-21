@@ -675,15 +675,6 @@ void Score::undoInsertPart(Part* part, int idx)
       }
 
 //---------------------------------------------------------
-//   undoInsertMeasure
-//---------------------------------------------------------
-
-void Score::undoInsertMeasure(MeasureBase* m, MeasureBase* pos)
-      {
-      undo(new InsertMeasure(m, pos));
-      }
-
-//---------------------------------------------------------
 //   undoRemoveStaff
 //---------------------------------------------------------
 
@@ -1088,6 +1079,7 @@ void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
             int ntrack = staffIdx * VOICES + cr->voice();
             newcr->setTrack(ntrack);
             newcr->setParent(seg);
+
             if (newcr->type() == CHORD) {
                   Chord* chord = static_cast<Chord*>(newcr);
                   // setTpcFromPitch needs to know the note tick position
@@ -1096,22 +1088,27 @@ void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
                               note->setTpcFromPitch();
                         }
                   }
-#if 0 //TODOxxx
             if (cr->tuplet()) {
-                  int tick = cr->tuplet()->tick();
                   Tuplet* nt = 0;
-                  foreach(Tuplet* t, *m->tuplets()) {
-                        if (t->tick() == tick && t->track() == ntrack) {
-                              nt = t;
-                              break;
+                  Tuplet* t = cr->tuplet();
+                  if (staff == ostaff)
+                        nt = t;
+                  else {
+                        //if (t->elements().isEmpty() || t->elements().front() == cr) {
+                        if (t->elements().front() == cr) {
+                              nt = static_cast<Tuplet*>(t->linkedClone());
+                              nt->setScore(score);
+                              }
+                        else {
+                              LinkedElements* le = cr->tuplet()->links();
+                              foreach(Element* e, *le) {
+                                    if (e->score() == score)
+                                          nt = static_cast<Tuplet*>(e);
+                                    }
                               }
                         }
-                  if (nt)
-                        newcr->setTuplet(nt);
-                  else
-                        qDebug("undoAddCR: Tuplet not found");
+                  newcr->setTuplet(nt);
                   }
-#endif
             undo(new AddElement(newcr));
             score->updateAccidentals(m, staffIdx);
             }
@@ -1509,16 +1506,18 @@ void RemoveMStaff::redo()
 
 void InsertMeasure::undo()
       {
-      measure->score()->remove(measure);
-      measure->score()->addLayoutFlags(LAYOUT_FIX_TICKS);
-      measure->score()->setLayoutAll(true);
+      Score* score = measure->score();
+      score->remove(measure);
+      score->addLayoutFlags(LAYOUT_FIX_TICKS);
+      score->setLayoutAll(true);
       }
 
 void InsertMeasure::redo()
       {
-      measure->score()->addMeasure(measure, pos);
-      measure->score()->addLayoutFlags(LAYOUT_FIX_TICKS);
-      measure->score()->setLayoutAll(true);
+      Score* score = measure->score();
+      score->addMeasure(measure, pos);
+      score->addLayoutFlags(LAYOUT_FIX_TICKS);
+      score->setLayoutAll(true);
       }
 
 //---------------------------------------------------------

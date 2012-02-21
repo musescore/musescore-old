@@ -75,6 +75,7 @@
 #include "libmscore/timesig.h"
 #include "libmscore/spanner.h"
 #include "libmscore/rehearsalmark.h"
+#include "libmscore/excerpt.h"
 
 #include "navigator.h"
 
@@ -3698,35 +3699,6 @@ void ScoreView::startUndoRedo()
       }
 
 //---------------------------------------------------------
-//   endUndoRedo
-///   Common handling for ending undo or redo
-//---------------------------------------------------------
-
-void ScoreView::endUndoRedo()
-      {
-      if (_score->inputState().segment())
-            mscore->setPos(_score->inputState().tick());
-      if (_score->noteEntryMode() && !noteEntryMode()) {
-            // enter note entry mode
-            postCmd("note-input");
-            }
-      else if (!_score->inputState().noteEntryMode && noteEntryMode()) {
-            // leave note entry mode
-            postCmd("escape");
-            }
-      _score->updateSelection();
-      mscore->updateInputState(_score);
-      if (_score->layoutAll()) {
-            _score->setUndoRedo(true);
-            _score->doLayout();           // TODO: does not really work
-            _score->setUndoRedo(false);
-            _score->setUpdateAll(true);
-            }
-      _score->end();
-      mscore->endCmd();
-      }
-
-//---------------------------------------------------------
 //   cmdAddSlur
 //    'S' typed on keyboard
 //---------------------------------------------------------
@@ -4739,10 +4711,8 @@ void ScoreView::cmdAddText(int type)
                   {
                   MeasureBase* measure = ml.front();
                   if (measure->type() != VBOX) {
-                        MeasureBase* mb = new VBox(_score);
-                        mb->setTick(0);
-                        _score->undoInsertMeasure(mb, measure);
-                        measure = mb;
+                        _score->insertMeasure(VBOX, measure);
+                        measure = ml.front();
                         }
                   s = new Text(_score);
                   switch(type) {
@@ -4819,7 +4789,7 @@ void ScoreView::cmdAppendMeasures(int n, ElementType type)
 MeasureBase* ScoreView::appendMeasure(ElementType type)
       {
       _score->startCmd();
-      MeasureBase* mb = _score->appendMeasure(type);
+      MeasureBase* mb = _score->insertMeasure(type, 0);
       _score->endCmd();
       return mb;
       }
@@ -4837,32 +4807,8 @@ void ScoreView::appendMeasures(int n, ElementType type)
                   "first create some staves"));
             return;
             }
-      bool createEndBar = false;
-      bool endBarGenerated = false;
-      if (type == MEASURE) {
-            Measure* lm = _score->lastMeasure();
-            if (lm && lm->endBarLineType() == END_BAR) {
-                  if (!lm->endBarLineGenerated()) {
-                        _score->undoChangeEndBarLineType(lm, NORMAL_BAR);
-                        createEndBar = true;
-                        // move end Bar to last Measure;
-                        }
-                  else {
-                        createEndBar    = true;
-                        endBarGenerated = true;
-                        lm->setEndBarLineType(NORMAL_BAR, endBarGenerated);
-                        }
-                  }
-            else if (lm == 0)
-                  createEndBar = true;
-            }
       for (int i = 0; i < n; ++i)
-            _score->appendMeasure(type);
-      if (createEndBar) {
-            Measure* lm = _score->lastMeasure();
-            if (lm)
-                  lm->setEndBarLineType(END_BAR, endBarGenerated);
-            }
+            _score->insertMeasure(type, 0);
       }
 
 //---------------------------------------------------------

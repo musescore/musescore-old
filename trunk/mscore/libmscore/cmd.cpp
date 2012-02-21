@@ -186,6 +186,34 @@ void Score::end1()
       }
 
 //---------------------------------------------------------
+//   endUndoRedo
+///   Common handling for ending undo or redo
+//---------------------------------------------------------
+
+void Score::endUndoRedo()
+      {
+      updateSelection();
+      Score* score = rootScore();
+      if (score->layoutAll()) {
+            score->setUndoRedo(true);
+            score->doLayout();           // TODO: does not really work
+            score->setUndoRedo(false);
+            score->setUpdateAll(true);
+            }
+      foreach(Excerpt* e, *score->excerpts()) {
+            Score* score = e->score();
+            if (score->layoutAll()) {
+                  score->setUndoRedo(true);
+                  score->doLayout();           // TODO: does not really work
+                  score->setUndoRedo(false);
+                  score->setUpdateAll(true);
+                  }
+            }
+      end();
+      }
+
+
+//---------------------------------------------------------
 //   moveCursor
 //---------------------------------------------------------
 
@@ -1182,6 +1210,7 @@ void Score::upDown(bool up, UpDownMode mode)
       _selection.updateState();     // accidentals may have changed
       }
 
+#if 0
 //---------------------------------------------------------
 //   appendMeasure
 //---------------------------------------------------------
@@ -1213,6 +1242,7 @@ MeasureBase* Score::appendMeasure(ElementType type)
       undoInsertMeasure(mb, 0);
       return mb;
       }
+#endif
 
 //---------------------------------------------------------
 //   appendMeasures
@@ -1220,6 +1250,7 @@ MeasureBase* Score::appendMeasure(ElementType type)
 
 void Score::appendMeasures(int n, ElementType type)
       {
+#if 0
       bool createEndBar    = false;
       bool endBarGenerated = false;
       if (type == MEASURE) {
@@ -1246,6 +1277,7 @@ void Score::appendMeasures(int n, ElementType type)
             if (lm)
                   lm->setEndBarLineType(END_BAR, endBarGenerated);
             }
+#endif
       }
 
 //---------------------------------------------------------

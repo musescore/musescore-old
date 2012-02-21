@@ -2941,8 +2941,21 @@ void MuseScore::undo()
             cv->startUndoRedo();
       if (cs)
             cs->undo()->undo();
-      if (cv)
-            cv->endUndoRedo();
+      if (cv) {
+            if (cs->inputState().segment())
+                  setPos(cs->inputState().tick());
+            if (cs->noteEntryMode() && !cv->noteEntryMode()) {
+                  // enter note entry mode
+                  cv->postCmd("note-input");
+                  }
+            else if (!cs->inputState().noteEntryMode && cv->noteEntryMode()) {
+                  // leave note entry mode
+                  cv->postCmd("escape");
+                  }
+            cs->endUndoRedo();
+            updateInputState(cs);
+            }
+      endCmd();
       }
 
 //---------------------------------------------------------
@@ -2959,8 +2972,21 @@ void MuseScore::redo()
             cv->startUndoRedo();
       if (cs)
             cs->undo()->redo();
-      if (cv)
-            cv->endUndoRedo();
+      if (cv) {
+            if (cs->inputState().segment())
+                  setPos(cs->inputState().tick());
+            if (cs->noteEntryMode() && !cv->noteEntryMode()) {
+                  // enter note entry mode
+                  cv->postCmd("note-input");
+                  }
+            else if (!cs->inputState().noteEntryMode && cv->noteEntryMode()) {
+                  // leave note entry mode
+                  cv->postCmd("escape");
+                  }
+            cs->endUndoRedo();
+            updateInputState(cs);
+            }
+      endCmd();
       }
 
 //---------------------------------------------------------

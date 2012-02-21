@@ -451,7 +451,6 @@ class Score {
       void undoInsertPart(Part* part, int idx);
       void undoRemoveStaff(Staff* staff, int idx);
       void undoInsertStaff(Staff* staff, int idx);
-      void undoInsertMeasure(MeasureBase*, MeasureBase*);
       void undoChangeInvisible(Element*, bool);
       void undoMove(Element* e, const QPointF& pt);
       void undoChangeBracketSpan(Staff* staff, int column, int span);
@@ -486,7 +485,6 @@ class Score {
       ChordRest* searchNote(int tick, int track) const;
 
       // undo/redo ops
-      void endUndoRedo(Undo*);
       void addArticulation(ArticulationType);
       void changeAccidental(AccidentalType);
       void changeAccidental(Note* oNote, AccidentalType);
@@ -717,6 +715,9 @@ class Score {
       MeasureBase* last()  const;
       Measure* firstMeasure() const;
       Measure* lastMeasure() const;
+      int measureIdx(MeasureBase*) const;
+      MeasureBase* measure(int idx) const;
+
       Segment* firstSegment(SegmentTypes s = SegAll) const;
       Segment* lastSegment() const;
 
@@ -797,7 +798,7 @@ class Score {
       void updateAccidentals(Measure* m, int staffIdx);
       QHash<int, LinkedElements*>& links();
       void appendMeasures(int, ElementType);
-      MeasureBase* appendMeasure(ElementType type);
+//      MeasureBase* appendMeasure(ElementType type);
       bool concertPitch() const { return styleB(ST_concertPitch); }
       void layoutFingering(Fingering*);
       void cmdSplitMeasure(ChordRest*);

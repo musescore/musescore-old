@@ -55,7 +55,7 @@ QT4_WRAP_UI (ui_headers
       inspector_articulation.ui inspector_spacer.ui inspector_hbox.ui keysig.ui
       inspector_segment.ui inspector_beam.ui inspector_note.ui
       rest.ui inspector_chord.ui omrpanel.ui startdialog.ui masterpalette.ui
-      inspector_group_element.ui inspector_image.ui
+      inspector_group_element.ui inspector_image.ui stem.ui
       )
 
 if (OMR)
