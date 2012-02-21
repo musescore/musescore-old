@@ -332,7 +332,6 @@ class ScoreView : public QWidget, public MuseScoreView {
       void cmd(const QAction* a);
 
       void startUndoRedo();
-      void endUndoRedo();
       void zoom(int step, const QPoint& pos);
       void zoom(qreal _mag, const QPointF& pos);
       void contextPopup(QMouseEvent* ev);

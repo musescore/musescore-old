@@ -397,6 +397,15 @@ void Beam::writeMusicXml(Xml& xml, ChordRest* cr) const
       }
 
 //---------------------------------------------------------
+//   crLessThan
+//---------------------------------------------------------
+
+static bool crLessThan(const ChordRest* cr1, const ChordRest* cr2)
+      {
+      return cr1->segment()->tick() <= cr2->segment()->tick();
+      }
+
+//---------------------------------------------------------
 //   layout1
 //---------------------------------------------------------
 
@@ -406,6 +415,8 @@ void Beam::layout1()
       foreach(QLineF* i, beamSegments)
             delete i;
       beamSegments.clear();
+
+      qSort(_elements.begin(), _elements.end(), crLessThan);
 
       maxDuration.setType(TDuration::V_INVALID);
       c1 = 0;
@@ -1160,7 +1171,9 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
 
                   qreal x2 = npos.x();
                   qreal y1 = npos.y();
-                  qreal y  = chordUp ? 1000000.0 : -1000000;
+                  qreal yMin  = 1000000;
+                  qreal yMax  = -1000000;
+
                   //  extend stem to farest beam segment
                   qreal x = x2 - parent()->pagePos().x();
                   foreach(QLineF* l, beamSegments) {
@@ -1169,16 +1182,12 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                               qreal dy = dx * slope;
                               qreal yy = l->y1() + dy;
 
-                              if (chordUp) {
-                                    if (yy < y)
-                                          y  = yy;
-                                    }
-                              else {
-                                    if (yy > y)
-                                          y = yy;
-                                    }
+                              yMin = qMin(yMin, yy);
+                              yMax = qMax(yMax, yy);
                               }
                         }
+                  qreal y = chordUp ? yMin : yMax;
+
                   stem->setLen(y + canvPos.y() - y1);
                   stem->setPos(npos - chord->pagePos());
                   }

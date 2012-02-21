@@ -1380,7 +1380,7 @@ Measure* Score::getCreateMeasure(int tick)
 void Score::addElement(Element* element)
       {
       if (debugMode) {
-            qDebug("   Score(%p)::addElement %p(%s) parent %p(%s)\n",
+            qDebug("   Score(%p)::addElement %p(%s) parent %p(%s)",
                this, element, element->name(), element->parent(),
                element->parent() ? element->parent()->name() : "");
             }
@@ -1508,7 +1508,7 @@ void Score::removeElement(Element* element)
       Element* parent = element->parent();
 
       if (debugMode) {
-            qDebug("   Score(%p)::removeElement %p(%s) parent %p(%s)\n",
+            qDebug("   Score(%p)::removeElement %p(%s) parent %p(%s)",
                this, element, element->name(), parent, parent ? parent->name() : "");
             }
 
@@ -1640,6 +1640,36 @@ Measure* Score::firstMeasure() const
       while (mb && mb->type() != MEASURE)
             mb = mb->next();
       return static_cast<Measure*>(mb);
+      }
+
+//---------------------------------------------------------
+//   measureIdx
+//---------------------------------------------------------
+
+int Score::measureIdx(MeasureBase* m) const
+      {
+      int idx = 0;
+      for (MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
+            if (mb == m)
+                  return idx;
+            ++idx;
+            }
+      return -1;
+      }
+
+//---------------------------------------------------------
+//   measure
+//---------------------------------------------------------
+
+MeasureBase* Score::measure(int idx) const
+      {
+      MeasureBase* mb = _measures.first();
+      for (int i = 0; i < idx; ++i) {
+            mb = mb->next();
+            if (mb == 0)
+                  return 0;
+            }
+      return mb;
       }
 
 //---------------------------------------------------------

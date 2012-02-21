@@ -3,7 +3,7 @@
 //  Music Composition & Notation
 //  $Id$
 //
-//  Copyright (C) 2002-2011 Werner Schweer
+//  Copyright (C) 2002-2012 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2
@@ -48,6 +48,7 @@
 #include "stem.h"
 #include "iname.h"
 #include "range.h"
+#include "excerpt.h"
 
 //---------------------------------------------------------
 //   getSelectedNote
@@ -1507,9 +1508,8 @@ qDebug("createTuplet at %d <%s> duration <%s> ratio <%s> baseLen <%s>",
       Measure* measure = ocr->measure();
       int tick         = ocr->tick();
 
-      if (ocr->tuplet()) {
+      if (ocr->tuplet())
             tuplet->setTuplet(ocr->tuplet());
-            }
       undoRemoveElement(ocr);
 
       ChordRest* cr;
@@ -1716,6 +1716,7 @@ void Score::nextInputPos(ChordRest* cr, bool doSelect)
 
 void Score::cmdSplitMeasure(ChordRest* cr)
       {
+#if 0 // TODO: cmdSplitMeasure
       Segment* segment = cr->segment();
       Measure* measure = segment->measure();
 
@@ -1739,8 +1740,6 @@ void Score::cmdSplitMeasure(ChordRest* cr)
       m2->setLen(Fraction::fromTicks(ticks2));
       int tracks = nstaves() * VOICES;
 
-//      m1->setNext(m2);
-//      m2->setNext(measure->next());
       undoInsertMeasure(m2, measure->next());
       undoInsertMeasure(m1, m2);
 
@@ -1835,6 +1834,7 @@ void Score::cmdSplitMeasure(ChordRest* cr)
       delete[] slurMap;
       delete[] tieMap;
       endCmd();
+#endif
       }
 
 //---------------------------------------------------------
@@ -1843,6 +1843,8 @@ void Score::cmdSplitMeasure(ChordRest* cr)
 
 void Score::cmdJoinMeasure(Measure* m1, Measure* m2)
       {
+#if 0 // TODO cmdJoinMeasure
+
       Measure* m = new Measure(this);
       m->setTick(m1->tick());
       m->setNext(m2);
@@ -1954,106 +1956,156 @@ void Score::cmdJoinMeasure(Measure* m1, Measure* m2)
       delete[] slurMap;
       delete[] tieMap;
       endCmd();
+#endif
       }
 
 //---------------------------------------------------------
 //   insertMeasure
+//    Create a new MeasureBase of type type and insert
+//    before measure.
+//    If measure is zero, append new MeasureBase.
 //---------------------------------------------------------
 
 MeasureBase* Score::insertMeasure(ElementType type, MeasureBase* measure)
       {
-      int tick = measure->tick();
-      MeasureBase* mb = static_cast<MeasureBase*>(Element::create(type, this));
-      mb->setTick(tick);
+      int tick;
+      int idx;
+      if (measure) {
+            tick = measure->tick();
+            idx  = measureIdx(measure);
+            }
+      else {
+            measure = last();
+            tick = measure->tick() + measure->ticks();
+            idx  = -1;
+            }
 
-      if (type == MEASURE) {
-            Measure* m = static_cast<Measure*>(mb);
-            // Fraction f(m->timesig());  TODO
-            Fraction f(4,4);
-	      int ticks = f.ticks();
+      Score* root = rootScore();
+      QList<Score*> scores;
+      foreach(Excerpt* ex, *root->excerpts())
+            scores.append(ex->score());
+      scores.append(root);
 
-            m->setTimesig(f);
-            m->setLen(f);
-	      for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-    	            Rest* rest = new Rest(this, TDuration(TDuration::V_MEASURE));
-                  rest->setDuration(m->len());
-              	rest->setTrack(staffIdx * VOICES);
-                    Segment* s = m->getSegment(SegChordRest, tick);
-              	s->add(rest);
-	            }
-            QList<TimeSig*> tsl;
-            QList<KeySig*>  ksl;
+      MeasureBase* omb = 0;
 
-            if (tick == 0) {
-                  //
-                  // remove time and key signatures
-                  //
-                  for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-                        for (Segment* s = firstSegment(); s && s->tick() == 0; s = s->next()) {
-                              if (s->subtype() == SegKeySig) {
-                                    KeySig* e = static_cast<KeySig*>(s->element(staffIdx * VOICES));
-                                    if (e) {
-                                          if (!e->generated())
-                                                ksl.append(static_cast<KeySig*>(e));
-                                          undoRemoveElement(e);
-                                          if (e->segment()->isEmpty())
-                                                undoRemoveElement(e->segment());
-                                          }
+      foreach(Score* score, scores) {
+            MeasureBase* mb = static_cast<MeasureBase*>(Element::create(type, score));
+            MeasureBase* im = idx != -1 ? score->measure(idx) : 0;
+            mb->setTick(tick);
+            if (score == this)
+                  omb = mb;
+
+            if (type == MEASURE) {
+                  bool createEndBar    = false;
+                  bool endBarGenerated = false;
+                  if (idx == -1) {
+                        Measure* lm = score->lastMeasure();
+                        if (lm && lm->endBarLineType() == END_BAR) {
+                              createEndBar = true;
+                              if (!lm->endBarLineGenerated()) {
+                                    score->undoChangeEndBarLineType(lm, NORMAL_BAR);
                                     }
-                              else if (s->subtype() == SegTimeSig) {
-                                    TimeSig* e = static_cast<TimeSig*>(s->element(staffIdx * VOICES));
-                                    if (e) {
-                                          if (!e->generated())
-                                                tsl.append(static_cast<TimeSig*>(e));
-                                          undoRemoveElement(e);
-                                          if (e->segment()->isEmpty())
-                                                undoRemoveElement(e->segment());
-                                          }
+                              else {
+                                    endBarGenerated = true;
+                                    lm->setEndBarLineType(NORMAL_BAR, true);
                                     }
-                              else if (s->subtype() == SegClef) {
+                              }
+                        else if (lm == 0)
+                              createEndBar = true;
+                        }
+                  Measure* m = static_cast<Measure*>(mb);
+                  // Fraction f(m->timesig());  TODO
+                  Fraction f(4,4);
+      	      int ticks = f.ticks();
+
+                  m->setTimesig(f);
+                  m->setLen(f);
+
+                  QList<TimeSig*> tsl;
+                  QList<KeySig*>  ksl;
+                  QList<Clef*>    cl;
+
+                  if (tick == 0) {
+                        //
+                        // remove time and key signatures
+                        //
+                        for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+                              for (Segment* s = score->firstSegment(); s && s->tick() == 0; s = s->next()) {
                                     Element* e = s->element(staffIdx * VOICES);
-                                    if (e) {
-                                          undoRemoveElement(e);
-                                          if (static_cast<Segment*>(e->parent())->isEmpty())
-                                                undoRemoveElement(e->parent());
+                                    if (e == 0)
+                                          continue;
+                                    if (e->type() == KEYSIG) {
+                                          KeySig* ks = static_cast<KeySig*>(e);
+                                          ksl.append(ks);
+                                          undo(new RemoveElement(ks));
+                                          if (ks->segment()->isEmpty())
+                                                undoRemoveElement(ks->segment());
+                                          }
+                                    else if (e->type() == TIMESIG) {
+                                          TimeSig* ts = static_cast<TimeSig*>(e);
+                                          tsl.append(ts);
+                                          undo(new RemoveElement(ts));
+                                          if (ts->segment()->isEmpty())
+                                                undoRemoveElement(ts->segment());
+                                          }
+                                    else if (e->type() == CLEF) {
+                                          Clef* clef = static_cast<Clef*>(e);
+                                          cl.append(clef);
+                                          undo(new RemoveElement(e));
+                                          if (clef->segment()->isEmpty())
+                                                undoRemoveElement(clef->segment());
                                           }
                                     }
                               }
                         }
-                  }
-            undoInsertMeasure(m, measure);
-            undoInsertTime(tick, ticks);
 
-            //
-            // if measure is inserted at tick zero,
-            // create key and time signature
-            //
-            foreach(TimeSig* ts, tsl) {
-                  TimeSig* nts = new TimeSig(*ts);
-                  SegmentType st = SegTimeSig;
-                  Segment* s = m->findSegment(st, 0);
-                  if (s == 0) {
-                        s = new Segment(m, st, 0);
-                        undoAddElement(s);
+                  undo(new InsertMeasure(m, im));
+                  undoInsertTime(tick, ticks);
+
+                  //
+                  // if measure is inserted at tick zero,
+                  // create key and time signature
+                  //
+                  foreach(TimeSig* ts, tsl) {
+                        TimeSig* nts = new TimeSig(*ts);
+                        Segment* s   = m->undoGetSegment(SegTimeSig, 0);
+                        nts->setParent(s);
+                        undoAddElement(nts);
                         }
-                  nts->setParent(s);
-                  undoAddElement(nts);
+                  foreach(KeySig* ks, ksl) {
+                        KeySig* nks = new KeySig(*ks);
+                        Segment* s  = m->undoGetSegment(SegKeySig, 0);
+                        nks->setParent(s);
+                        undoAddElement(nks);
+                        }
+                  foreach(Clef* clef, cl) {
+                        Clef* nClef = new Clef(*clef);
+                        Segment* s  = m->undoGetSegment(SegClef, 0);
+                        nClef->setParent(s);
+                        undoAddElement(nClef);
+                        }
+                  if (createEndBar) {
+                        Measure* lm = score->lastMeasure();
+                        if (lm)
+                              lm->setEndBarLineType(END_BAR, endBarGenerated);
+                        }
                   }
-            foreach(KeySig* ks, ksl) {
-                  KeySig* nks = new KeySig(*ks);
-                  SegmentType st = SegKeySig;
-                  Segment* s = m->findSegment(st, 0);
-                  if (s == 0) {
-                        s = new Segment(m, st, 0);
-                        undoAddElement(s);
-                        }
-                  nks->setParent(s);
-                  undoAddElement(nks);
+            else {
+                  undo(new InsertMeasure(mb, im));
                   }
             }
-      else {
-            undoInsertMeasure(mb, measure);
+      if (type == MEASURE) {
+            //
+            // fill measure with rest
+            //
+            for (int staffIdx = 0; staffIdx < root->nstaves(); ++staffIdx) {
+                  Rest* rest = new Rest(root, TDuration(TDuration::V_MEASURE));
+                  Measure* m = static_cast<Measure*>(omb);
+                  rest->setDuration(m->len());
+                  rest->setTrack(staffIdx * VOICES);
+                  undoAddCR(rest, m, m->tick());
+            	}
             }
-      return mb;
+      return omb;
       }
 

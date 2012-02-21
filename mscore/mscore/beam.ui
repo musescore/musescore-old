@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>374</width>
-    <height>118</height>
+    <height>128</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -66,6 +66,16 @@
         <column>
          <property name="text">
           <string>Chord/Rest</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Type</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Tick</string>
          </property>
         </column>
        </widget>

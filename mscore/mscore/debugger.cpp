@@ -544,6 +544,7 @@ void Debugger::updateElement(Element* el)
                   case SLUR_SEGMENT:  ew = new SlurSegmentView;   break;
                   case ACCIDENTAL:    ew = new AccidentalView;    break;
                   case ARTICULATION:  ew = new ArticulationView;  break;
+                  case STEM:          ew = new StemView;          break;
                   case FINGERING:
                   case MARKER:
                   case JUMP:
@@ -2131,6 +2132,7 @@ void BeamView::setElement(Element* e)
             item->setText(0, QString("%1").arg((unsigned long)cr, 8, 16));
             item->setData(0, Qt::UserRole, QVariant::fromValue<void*>((void*)cr));
             item->setText(1, cr->name());
+            item->setText(2, QString("%1").arg(cr->segment()->tick()));
             bb.elements->addTopLevelItem(item);
             }
       bb.grow1->setValue(b->growLeft());
@@ -2396,5 +2398,31 @@ void KeySigView::setElement(Element* e)
       keysig.customType->setValue(ks->keySigEvent().customType());
       keysig.custom->setChecked(ks->keySigEvent().custom());
       keysig.invalid->setChecked(ks->keySigEvent().invalid());
+      }
+
+//---------------------------------------------------------
+//   StemView
+//---------------------------------------------------------
+
+StemView::StemView()
+   : ShowElementBase()
+      {
+      QWidget* w = new QWidget;
+      stem.setupUi(w);
+      layout->addWidget(w);
+      layout->addStretch(10);
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void StemView::setElement(Element* e)
+      {
+      Stem* s = static_cast<Stem*>(e);
+      ShowElementBase::setElement(e);
+
+      stem.len->setValue(s->stemLen() - s->userLen());
+      stem.userLen->setValue(s->userLen());
       }
 
