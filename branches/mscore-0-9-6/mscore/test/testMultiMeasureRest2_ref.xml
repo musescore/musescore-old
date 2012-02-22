@@ -21,6 +21,8 @@
       <midi-instrument id="P1-I3">
         <midi-channel>1</midi-channel>
         <midi-program>1</midi-program>
+        <volume>78.7402</volume>
+        <pan>0</pan>
         </midi-instrument>
       </score-part>
     </part-list>
@@ -40,9 +42,6 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
-        <measure-style>
-          <multiple-rest>2</multiple-rest>
-          </measure-style>
         </attributes>
       <note>
         <rest/>
@@ -58,11 +57,6 @@
         </note>
       </measure>
     <measure number="3">
-      <attributes>
-        <measure-style>
-          <multiple-rest>3</multiple-rest>
-          </measure-style>
-        </attributes>
       <note>
         <rest/>
         <duration>4</duration>
@@ -84,11 +78,6 @@
         </note>
       </measure>
     <measure number="6">
-      <attributes>
-        <measure-style>
-          <multiple-rest>3</multiple-rest>
-          </measure-style>
-        </attributes>
       <note>
         <rest/>
         <duration>4</duration>
@@ -110,11 +99,6 @@
         </note>
       </measure>
     <measure number="9">
-      <attributes>
-        <measure-style>
-          <multiple-rest>3</multiple-rest>
-          </measure-style>
-        </attributes>
       <note>
         <rest/>
         <duration>4</duration>
@@ -136,11 +120,6 @@
         </note>
       </measure>
     <measure number="12">
-      <attributes>
-        <measure-style>
-          <multiple-rest>3</multiple-rest>
-          </measure-style>
-        </attributes>
       <note>
         <rest/>
         <duration>4</duration>

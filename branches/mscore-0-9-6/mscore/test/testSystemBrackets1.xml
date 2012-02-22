@@ -24,6 +24,8 @@
       <midi-instrument id="P1-I3">
         <midi-channel>1</midi-channel>
         <midi-program>1</midi-program>
+        <volume>0</volume>
+        <pan>0</pan>
         </midi-instrument>
       </score-part>
     <score-part id="P2">
@@ -34,6 +36,8 @@
       <midi-instrument id="P2-I3">
         <midi-channel>2</midi-channel>
         <midi-program>1</midi-program>
+        <volume>0</volume>
+        <pan>0</pan>
         </midi-instrument>
       </score-part>
     <part-group type="start" number="2">
@@ -47,6 +51,8 @@
       <midi-instrument id="P3-I3">
         <midi-channel>3</midi-channel>
         <midi-program>1</midi-program>
+        <volume>0</volume>
+        <pan>0</pan>
         </midi-instrument>
       </score-part>
     <score-part id="P4">
@@ -57,6 +63,8 @@
       <midi-instrument id="P4-I3">
         <midi-channel>4</midi-channel>
         <midi-program>1</midi-program>
+        <volume>0</volume>
+        <pan>0</pan>
         </midi-instrument>
       </score-part>
     <part-group type="stop" number="2"/>
@@ -72,6 +80,8 @@
       <midi-instrument id="P5-I3">
         <midi-channel>5</midi-channel>
         <midi-program>1</midi-program>
+        <volume>0</volume>
+        <pan>0</pan>
         </midi-instrument>
       </score-part>
     <score-part id="P6">
@@ -82,6 +92,8 @@
       <midi-instrument id="P6-I3">
         <midi-channel>6</midi-channel>
         <midi-program>1</midi-program>
+        <volume>0</volume>
+        <pan>0</pan>
         </midi-instrument>
       </score-part>
     <part-group type="stop" number="1"/>
