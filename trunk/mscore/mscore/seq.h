@@ -85,6 +85,8 @@ class Seq : public QObject, public Sequencer {
       bool running;                       // true if sequencer is available
       int state;                          // TRANSPORT_STOP, TRANSPORT_PLAY, TRANSPORT_STARTING=3
 
+      bool oggInit;
+
       bool playlistChanged;
 
       SeqMsgFifo toSeq;

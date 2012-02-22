@@ -239,6 +239,7 @@ if (MINGW)
       portaudio
       portmidi
       winmm
+      vorbisfile
       )
 
    if (HAS_AUDIOFILE)
@@ -311,6 +312,7 @@ else (MINGW)
       z
       dl
       pthread
+      vorbisfile
       )
 if (USE_PORTAUDIO)
       target_link_libraries(mscore portaudio)

@@ -45,6 +45,7 @@
 #include "libmscore/ottava.h"
 #include "libmscore/utils.h"
 #include "libmscore/repeatlist.h"
+#include "libmscore/audio.h"
 #include "synthcontrol.h"
 #include "pianoroll.h"
 
@@ -59,12 +60,83 @@
 #include "fluid.h"
 #include "click.h"
 
+#include <vorbis/vorbisfile.h>
+
 Seq* seq;
 MasterSynth* synti;
 
 static const int guiRefresh   = 10;       // Hz
 static const int peakHoldTime = 1400;     // msec
 static const int peakHold     = (peakHoldTime * guiRefresh) / 1000;
+static OggVorbis_File vf;
+
+//---------------------------------------------------------
+//   VorbisData
+//---------------------------------------------------------
+
+struct VorbisData {
+      int pos;          // current position in audio->data()
+      QByteArray data;
+      };
+
+VorbisData vorbisData;
+
+static size_t ovRead(void* ptr, size_t size, size_t nmemb, void* datasource);
+static int ovSeek(void* datasource, ogg_int64_t offset, int whence);
+static long ovTell(void* datasource);
+
+ov_callbacks ovCallbacks = {
+      ovRead, ovSeek, 0, ovTell
+      };
+
+//---------------------------------------------------------
+//   ovRead
+//---------------------------------------------------------
+
+static size_t ovRead(void* ptr, size_t size, size_t nmemb, void* datasource)
+      {
+      VorbisData* vd = (VorbisData*)datasource;
+      size_t n = size * nmemb;
+      if (vd->data.size() < int(vd->pos + n))
+            n = vd->data.size() - vd->pos;
+      if (n) {
+            const char* src = vd->data.data() + vd->pos;
+            memcpy(ptr, src, n);
+            vd->pos += n;
+            }
+      return n;
+      }
+
+//---------------------------------------------------------
+//   ovSeek
+//---------------------------------------------------------
+
+static int ovSeek(void* datasource, ogg_int64_t offset, int whence)
+      {
+      VorbisData* vd = (VorbisData*)datasource;
+      switch(whence) {
+            case SEEK_SET:
+                  vd->pos = offset;
+                  break;
+            case SEEK_CUR:
+                  vd->pos += offset;
+                  break;
+            case SEEK_END:
+                  vd->pos = vd->data.size() - offset;
+                  break;
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   ovTell
+//---------------------------------------------------------
+
+static long ovTell(void* datasource)
+      {
+      VorbisData* vd = (VorbisData*)datasource;
+      return vd->pos;
+      }
 
 //---------------------------------------------------------
 //   Seq
@@ -79,6 +151,7 @@ Seq::Seq()
 
       endTick  = 0;
       state    = TRANSPORT_STOP;
+      oggInit  = false;
       driver   = 0;
       playPos  = events.constBegin();
 
@@ -135,6 +208,10 @@ void Seq::stopWait()
 
 void Seq::setScoreView(ScoreView* v)
       {
+      if (oggInit) {
+            ov_clear(&vf);
+            oggInit = false;
+            }
       if (cv !=v && cs) {
             cs->setSyntiState(synti->state());
             markedNotes.clear();
@@ -318,6 +395,16 @@ void Seq::start()
       {
       if (events.empty() || cs->playlistDirty() || playlistChanged)
             collectEvents();
+      if (cs->playMode() == PLAYMODE_AUDIO) {
+            if (!oggInit) {
+                  vorbisData.pos  = 0;
+                  vorbisData.data = cs->audio()->data();
+                  int n = ov_open_callbacks(&vorbisData, &vf, 0, 0, ovCallbacks);
+                  if (n < 0) {
+                        printf("ogg open failed: %d\n", n);
+                        }
+                  }
+            }
       seek(cs->playPos());
       driver->startTransport();
       }
@@ -331,6 +418,10 @@ void Seq::stop()
       {
       if (state == TRANSPORT_STOP)
             return;
+      if (oggInit) {
+            ov_clear(&vf);
+            oggInit = false;
+            }
       if (!driver)
             return;
       driver->stopTransport();
@@ -592,16 +683,35 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
                   int n = f - playTime;
                   if (n < 0) {
                         qDebug("%d:  %d - %d\n", playPos.key(), f, playTime);
-				n = 0;
+      			n = 0;
                         }
                   if (n) {
-                        metronome(n, l, r);
-                        synti->process(n, l, r);
-                        l += n;
-                        r += n;
-                        playTime  += n;
-                        frames    -= n;
-                        framePos  += n;
+                        if (cs->playMode() == PLAYMODE_SYNTHESIZER) {
+                              metronome(n, l, r);
+                              synti->process(n, l, r);
+                              l += n;
+                              r += n;
+                              playTime  += n;
+                              frames    -= n;
+                              framePos  += n;
+                              }
+                        else {
+                              while (n > 0) {
+                                    int section;
+                                    float** pcm;
+                                    long rn = ov_read_float(&vf, &pcm, n, &section);
+                                    if (rn == 0)
+                                          break;
+                                    memcpy(l, pcm[0], rn * sizeof(float));
+                                    memcpy(r, pcm[1], rn * sizeof(float));
+                                    l        += rn;
+                                    r        += rn;
+                                    playTime += rn;
+                                    frames   -= rn;
+                                    framePos += rn;
+                                    n        -= rn;
+                                    }
+                              }
                         }
                   const Event& event = playPos.value();
                   playEvent(event);
@@ -611,9 +721,29 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
                         tackRest = tackLength;
                   }
             if (frames) {
-                  metronome(frames, l, r);
-                  synti->process(frames, l, r);
-                  playTime += frames;
+                  if (cs->playMode() == PLAYMODE_SYNTHESIZER) {
+                        metronome(frames, l, r);
+                        synti->process(frames, l, r);
+                        playTime += frames;
+                        }
+                  else {
+                        int n = frames;
+                        while (n > 0) {
+                              int section;
+                              float** pcm;
+                              long rn = ov_read_float(&vf, &pcm, n, &section);
+                              if (rn == 0)
+                                    break;
+                              memcpy(l, pcm[0], rn * sizeof(float));
+                              memcpy(r, pcm[1], rn * sizeof(float));
+                              l        += rn;
+                              r        += rn;
+                              playTime += rn;
+                              frames   -= rn;
+                              framePos += rn;
+                              n        -= rn;
+                              }
+                        }
                   }
             if (playPos == events.constEnd()) {
                   driver->stopTransport();
@@ -777,6 +907,10 @@ void Seq::seek(int tick)
       cs->end();
 
       tick = cs->repeatList()->tick2utick(tick);
+      if (cs->playMode() == PLAYMODE_AUDIO) {
+            ogg_int64_t sp = cs->utick2utime(tick) * MScore::sampleRate;
+            ov_pcm_seek(&vf, sp);
+            }
 
       SeqMsg msg;
       msg.data.intVal = tick;

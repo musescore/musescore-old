@@ -1,3 +1,5 @@
+22.2 (ws)
+      - implement playback of ogg vorbis audio file
 21.2 (ws)
       - add "playmode" to Score()
       - implement vorbis audio files as additional media
