@@ -3586,8 +3586,8 @@ void ExportMusicXml::write(QIODevice* dev)
                               xml.tag("midi-channel", part->midiChannel() + 1);
                               xml.tag("midi-program", part->midiProgram() + 1);
                               xml.tag("midi-unpitched", i + 1);
-                              xml.tag("volume", (part->volume() / 127) * 100);  //percent
-                              xml.tag("pan", ((part->pan() - 63.5) / 63.5)  * 90); //-90 hard left, +90 hard right
+                              xml.tag("volume", (part->volume() / 127.0) * 100);  //percent
+                              xml.tag("pan", ((int)((part->pan() - 63.5) / 63.5)) * 90); //-90 hard left, +90 hard right
                               xml.etag();
                               }
                         }
@@ -3596,12 +3596,11 @@ void ExportMusicXml::write(QIODevice* dev)
                   xml.stag(QString("score-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
                   xml.tag("instrument-name", part->longName()->getText());
                   xml.etag();
-
                   xml.stag(QString("midi-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
                   xml.tag("midi-channel", part->midiChannel() + 1);
                   xml.tag("midi-program", part->midiProgram() + 1);
-                  xml.tag("volume", (part->volume() / 127) * 100);  //percent
-                  xml.tag("pan", ((part->pan() - 63.5) / 63.5)  * 90); //-90 hard left, +90 hard right
+                  xml.tag("volume", (part->volume() / 127.0) * 100);  //percent
+                  xml.tag("pan", ((int)((part->pan() - 63.5) / 63.5))  * 90); //-90 hard left, +90 hard right
                   xml.etag();
                   }
             xml.etag();
