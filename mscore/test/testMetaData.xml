@@ -62,6 +62,8 @@
       <midi-instrument id="P1-I3">
         <midi-channel>1</midi-channel>
         <midi-program>53</midi-program>
+        <volume>0</volume>
+        <pan>0</pan>
         </midi-instrument>
       </score-part>
     </part-list>

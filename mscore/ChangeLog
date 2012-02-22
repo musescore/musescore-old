@@ -1,3 +1,7 @@
+22.feb (lv)
+      - update MusicXML regression test
+       (la)
+      - fix #15080: [MusicXML] [1.2] weird behaviour midi-instrument pan value
 20.feb (lv)
       - fix #14825: [MusicXML import] [1.2] import error: 31a-Directions.xml missing dashes and bracket
        (la)
