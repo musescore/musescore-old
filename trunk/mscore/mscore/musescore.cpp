@@ -1163,12 +1163,16 @@ void MuseScore::selectionChanged(int state)
       if (drumrollEditor)
             drumrollEditor->changeSelection(state);
       if (inspector) {
-            if (cs->selection().isSingle())
-                  inspector->setElement(cs->selection().element());
-            else if (cs->selection().state() == SEL_NONE)
-                  inspector->setElement(0);
+            if (cs) {
+                  if (cs->selection().isSingle())
+                        inspector->setElement(cs->selection().element());
+                  else if (cs->selection().state() == SEL_NONE)
+                        inspector->setElement(0);
+                  else
+                        inspector->setElementList(cs->selection().elements());
+                  }
             else
-                  inspector->setElementList(cs->selection().elements());
+                  inspector->setElement(0);
             }
       }
 
@@ -1363,8 +1367,11 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
             setWindowTitle("MuseScore");
             if (_navigator && _navigator->widget())
                   static_cast<Navigator*>(_navigator->widget())->setScore(0);
+            if (inspector)
+                  inspector->setElement(0);
             return;
             }
+      selectionChanged(cs->selection().state());
       changeState(view->mscoreState());
 
       view->setFocus(Qt::OtherFocusReason);

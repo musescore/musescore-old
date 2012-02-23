@@ -1,3 +1,6 @@
+23.2 (ws)
+      - init inspector when changing scores
+      - reset inspector when removing score (hopefully fixing #15100)
 22.2 (ws)
       - implement playback of ogg vorbis audio file
 21.2 (ws)
