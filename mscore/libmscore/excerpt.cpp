@@ -35,6 +35,7 @@
 #include "slurmap.h"
 #include "tiemap.h"
 #include "spannermap.h"
+#include "layoutbreak.h"
 
 //---------------------------------------------------------
 //   read
@@ -357,6 +358,11 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                         }
                   }
             foreach(Element* e, *mb->el()) {
+                  if (e->type() == LAYOUT_BREAK) {
+                        LayoutBreakType st = static_cast<LayoutBreak*>(e)->subtype();
+                        if (st == LAYOUT_BREAK_PAGE || st == LAYOUT_BREAK_LINE)
+                              continue;
+                        }
                   Element* ne = e->clone();
                   ne->setScore(score);
                   nmb->add(ne);
