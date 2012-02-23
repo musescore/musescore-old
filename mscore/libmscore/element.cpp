@@ -1553,6 +1553,7 @@ bool Element::setProperty(P_ID propertyId, const QVariant& v)
       if (p) {
             setVariant(propertyId, ((*this).*(p->data))(), v);
             setGenerated(false);
+            score()->addRefresh(canvasBoundingRect());
             return true;
             }
       qDebug("Element::setProperty: unknown id %d, data <%s>", propertyId, qPrintable(v.toString()));
@@ -1570,6 +1571,7 @@ bool Element::setProperty(const QString& name, const QDomElement& e)
                   QVariant v = ::getProperty(id, e);
                   setVariant(id, ((*this).*(propertyList[i].data))(), v);
                   setGenerated(false);
+                  score()->addRefresh(canvasBoundingRect());
                   return true;
                   }
             }
