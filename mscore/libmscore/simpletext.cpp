@@ -74,7 +74,9 @@ void SimpleText::drawFrame(QPainter* painter) const
       QColor color(frameColor());
       if (!visible())
             color = Qt::gray;
-      QPen pen(curColor(), frameWidth() * DPMM);
+      else if (selected())
+            color = Qt::blue;
+      QPen pen(color, frameWidth() * DPMM);
       painter->setPen(pen);
       painter->setBrush(Qt::NoBrush);
       if (circle())
