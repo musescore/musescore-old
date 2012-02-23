@@ -274,9 +274,16 @@ void Beam::add(ChordRest* a)
       {
       a->setBeam(this);
       if (!_elements.contains(a)) {
+            //
+            // insert element in same order as it appears
+            // in the score
+            //
             if (a->segment() && !_elements.isEmpty()) {
                   for (int i = 0; i < _elements.size(); ++i) {
-                        if (_elements[i]->segment()->tick() > a->segment()->tick()) {
+                        Segment* s = _elements[i]->segment();
+                        if ((s->tick() > a->segment()->tick())
+                           || ((s->tick() == a->segment()->tick()) && (a->segment()->next(SegChordRest) == s))
+                           )  {
                               _elements.insert(i, a);
                               return;
                               }
@@ -395,7 +402,7 @@ void Beam::writeMusicXml(Xml& xml, ChordRest* cr) const
                   xml.tag(QString("beam number=\"%1\"").arg(i), s);
             }
       }
-
+#if 0
 //---------------------------------------------------------
 //   crLessThan
 //---------------------------------------------------------
@@ -404,6 +411,7 @@ static bool crLessThan(const ChordRest* cr1, const ChordRest* cr2)
       {
       return cr1->segment()->tick() <= cr2->segment()->tick();
       }
+#endif
 
 //---------------------------------------------------------
 //   layout1
@@ -416,7 +424,7 @@ void Beam::layout1()
             delete i;
       beamSegments.clear();
 
-      qSort(_elements.begin(), _elements.end(), crLessThan);
+//      qSort(_elements.begin(), _elements.end(), crLessThan);
 
       maxDuration.setType(TDuration::V_INVALID);
       c1 = 0;
@@ -1348,12 +1356,20 @@ void Beam::setBeamDirection(Direction d)
 
 void Beam::toDefault()
       {
-      if (_direction != AUTO) {
-            score()->undoChangeProperty(this, P_STEM_DIRECTION, AUTO);
-            _up = -1;
-            _userModified[0] = false;
-            _userModified[1] = false;
+      for (int i = 0;; ++i) {
+            const Property<Beam>& p = propertyList[i];
+            P_ID id = p.id;
+            if (id == P_END)
+                  break;
+            if (p.defaultVal) {
+                  QVariant defaultVal = getVariant(id, p.defaultVal);
+                  if (getProperty(id) != defaultVal)
+                        score()->undoChangeProperty(this, id, defaultVal);
+                  }
             }
+
+      _userModified[0] = false;
+      _userModified[1] = false;
       setGenerated(true);
       }
 
