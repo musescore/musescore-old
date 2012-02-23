@@ -3487,9 +3487,11 @@ void MuseScore::showPianoKeyboard(bool on)
       {
       if (on) {
             if (_pianoTools == 0) {
+                  QAction* a = getAction("toogle-piano");
                   _pianoTools = new PianoTools(this);
                   addDockWidget(Qt::BottomDockWidgetArea, _pianoTools);
                   connect(_pianoTools, SIGNAL(keyPressed(int, bool)), SLOT(midiNoteReceived(int, bool)));
+                  connect(_pianoTools, SIGNAL(pianoVisible(bool)), a, SLOT(setChecked(bool)));
                   }
             _pianoTools->show();
             }
