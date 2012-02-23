@@ -1,4 +1,6 @@
 23.2 (ws)
+      - fix #14896: Entering two or more certain grace notes have
+        infinite stem height
       - init inspector when changing scores
       - reset inspector when removing score (hopefully fixing #15100)
 22.2 (ws)

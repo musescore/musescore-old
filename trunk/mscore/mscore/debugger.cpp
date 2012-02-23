@@ -280,9 +280,6 @@ void Debugger::updateList(Score* s)
       QTreeWidgetItem* li = new QTreeWidgetItem(list, INVALID);
       li->setText(0, "Global");
 
-//      foreach(Beam* beam, cs->beams())
-//	      new ElementItem(li, beam);
-
       int staves = cs->nstaves();
       int tracks = staves * VOICES;
       foreach(Page* page, cs->pages()) {
@@ -370,6 +367,8 @@ void Debugger::updateList(Score* s)
                                           }
                                     if (e->isChordRest()) {
                                           ChordRest* cr = static_cast<ChordRest*>(e);
+                                          if (cr->beam() && cr->beam()->elements().front() == cr)
+                                                new ElementItem(sei, cr->beam());
                                           foreach(Spanner* slur, cr->spannerFor()) {
                                                 ElementItem* sli = new ElementItem(sei, slur);
                                                 foreach(SpannerSegment* ss, slur->spannerSegments()) {
