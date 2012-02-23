@@ -1,4 +1,8 @@
 23.2 (ws)
+      - fix #15083: Inventio 6 looks strange.
+        Inventio6 was created with an old MuseScore version (file version 1.10).
+        MuseScore now warns that a file cannot be read if file version is < 1.14).
+        Proposed conversion is to read/save with MuseScore version 1.x.
       - fix #14896: Entering two or more certain grace notes have
         infinite stem height
       - init inspector when changing scores

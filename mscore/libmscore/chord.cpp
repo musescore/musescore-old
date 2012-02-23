@@ -43,6 +43,7 @@
 #include "mscore.h"
 #include "accidental.h"
 #include "noteevent.h"
+#include "pitchspelling.h"
 
 //---------------------------------------------------------
 //   StemSlash
@@ -679,15 +680,16 @@ void Chord::write(Xml& xml) const
 void Chord::readNote(const QDomElement& de, QList<Tuplet*>* tuplets, QList<Spanner*>* spanner)
       {
       Note* note = new Note(score());
-      int ptch   = de.attribute("pitch", "-1").toInt();
-      int ticks  = de.attribute("ticks", "-1").toInt();
-      int tpc    = de.attribute("tpc", "-1").toInt();
-
-      if (ticks != -1) {
+      note->setPitch(de.attribute("pitch").toInt());
+      if (de.hasAttribute("ticks")) {
+            int ticks  = de.attribute("ticks").toInt();
             TDuration d;
             d.setVal(ticks);
             setDurationType(d);
             }
+      int tpc = INVALID_TPC;
+      if (de.hasAttribute("tpc"))
+            tpc = de.attribute("tpc").toInt();
 
       for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
@@ -727,12 +729,10 @@ void Chord::readNote(const QDomElement& de, QList<Tuplet*>* tuplets, QList<Spann
             else if (!ChordRest::readProperties(e, tuplets, spanner))
                   domError(e);
             }
-      if (ptch != -1) {
-            note->setPitch(ptch);
-            note->setTpcFromPitch();
-            }
-      if (tpc != -1)
+      if (!tpcIsValid(tpc))
             note->setTpc(tpc);
+      else
+            note->setTpcFromPitch();
       add(note);
       }
 

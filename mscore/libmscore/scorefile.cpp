@@ -786,7 +786,7 @@ bool Score::read1(const QDomElement& de)
                   QStringList sl = version.split('.');
                   _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
                   if (_mscVersion > MSCVERSION) {
-                  // incompatible version
+                        // incompatible version
                         QString message = QT_TRANSLATE_NOOP("file", "Cannot read this score:<br>Your version of MuseScore is too old.<br><a href=\"http://musescore.org\">Upgrade now!</a>");
                         QMessageBox msgBox;
                         msgBox.setWindowTitle(QT_TRANSLATE_NOOP(file, "MuseScore"));
@@ -795,6 +795,20 @@ bool Score::read1(const QDomElement& de)
                         msgBox.setIcon(QMessageBox::Critical);
                         msgBox.exec();
                         return false;
+                        }
+                  if (_mscVersion < 114) {
+                        // incompatible version
+                        QString message = QT_TRANSLATE_NOOP("file",
+                           "Cannot read this score:<br>"
+                           "It is created with an too old version of MuseScore.<br>"
+                           "You can convert this score by reading and then saving with"
+                            " MuseScore version 1.x</a>");
+                        QMessageBox msgBox;
+                        msgBox.setWindowTitle(QT_TRANSLATE_NOOP(file, "MuseScore"));
+                        msgBox.setText(message);
+                        msgBox.setTextFormat(Qt::RichText);
+                        msgBox.setIcon(QMessageBox::Warning);
+                        msgBox.exec();
                         }
                   if (_mscVersion < 117) {
                         bool rv = read(e);
