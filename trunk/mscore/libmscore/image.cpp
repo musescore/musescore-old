@@ -136,6 +136,9 @@ void Image::write(Xml& xml) const
 
 void Image::read(const QDomElement& de)
       {
+      if (score()->mscVersion() <= 123)
+            _sizeIsSpatium = false;
+
       for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             if (setProperty(tag, e))
@@ -337,14 +340,14 @@ void RasterImage::draw(QPainter* painter) const
             }
       else {
             QTransform t = painter->transform();
-            QSize s = QSizeF(s.width() * t.m11(), s.height() * t.m22()).toSize();
+            QSize ss = QSizeF(s.width() * t.m11(), s.height() * t.m22()).toSize();
             t.setMatrix(1.0, t.m12(), t.m13(), t.m21(), 1.0, t.m23(), t.m31(), t.m32(), t.m33());
             painter->setWorldTransform(t);
-            if ((buffer.size() != s || _dirty) && !doc.isNull()) {
-                  buffer = QPixmap::fromImage(doc.scaled(s, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+            if ((buffer.size() != ss || _dirty) && !doc.isNull()) {
+                  buffer = QPixmap::fromImage(doc.scaled(ss, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
                   _dirty = false;
                   }
-            Image::draw(painter, s);
+            Image::draw(painter, ss);
             }
       painter->restore();
       }

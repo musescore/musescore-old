@@ -1,4 +1,6 @@
 23.2 (ws)
+      - fix #14112: If stem is selected, direction won't flip
+      - fix text frame color
       - fix #11782: Adding quarter grace note to note with existing set of
         beamed grace notes causes infinite stems.
       - fix #15083: Inventio 6 looks strange.

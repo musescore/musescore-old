@@ -16,6 +16,8 @@
 
 #include "symbol.h"
 
+class Chord;
+
 //---------------------------------------------------------
 //   Hook
 //---------------------------------------------------------
@@ -30,6 +32,7 @@ class Hook : public Symbol {
       void setSubtype(int v);
       int subtype() const { return _subtype; }
       virtual void layout();
+      Chord* chord() const            { return (Chord*)parent(); }
       };
 
 #endif

@@ -701,6 +701,7 @@ bool Element::readProperties(const QDomElement& e)
             }
       else if (tag == "pos") {
             float _spatium = spatium();
+            setUserOff(QPointF());
             _readPos = readPoint(e) * _spatium;
             }
       else if (tag == "voice")

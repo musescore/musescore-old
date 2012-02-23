@@ -14,8 +14,8 @@
 #ifndef __MSCORE_H__
 #define __MSCORE_H__
 
-#define MSC_VERSION     "1.23"
-static const int MSCVERSION = 123;
+#define MSC_VERSION     "1.24"
+static const int MSCVERSION = 124;
 
 // History:
 //      1.3   added staff->_barLineSpan
@@ -42,6 +42,7 @@ static const int MSCVERSION = 123;
 //    1.21  no cleflist anymore
 //    1.22  timesig changed
 //    1.23  measure property for actual length
+//    1.24  default image size is spatium dependent
 
 
 static const int VOICES = 4;

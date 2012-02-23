@@ -49,6 +49,7 @@
 #include "iname.h"
 #include "range.h"
 #include "excerpt.h"
+#include "hook.h"
 
 //---------------------------------------------------------
 //   getSelectedNote
@@ -393,6 +394,7 @@ static int addRemoveTimeSigDialog()
 //    return true on success
 //---------------------------------------------------------
 
+#if 0
 static bool addCR(int tick, ChordRest* cr, Measure* ml)
       {
       Measure* m = ml;
@@ -508,6 +510,7 @@ static bool addCR(int tick, ChordRest* cr, Measure* ml)
             }
       return true;
       }
+#endif
 
 //---------------------------------------------------------
 //   rewriteMeasures
@@ -1043,8 +1046,12 @@ void Score::cmdFlip()
             return;
             }
       foreach (Element* e, el) {
-            if (e->type() == NOTE) {
+            if (e->type() == NOTE || e->type() == STEM || e->type() == HOOK) {
                   Chord* chord = static_cast<Note*>(e)->chord();
+                  if (e->type() == STEM)
+                        chord = static_cast<Stem*>(e)->chord();
+                  else if (e->type() == HOOK)
+                        chord = static_cast<Hook*>(e)->chord();
                   if (chord->beam())
                         e = chord->beam();  // fall trough
                   else {
