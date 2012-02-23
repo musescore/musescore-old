@@ -1,4 +1,5 @@
 23.2 (ws)
+      - fix #13767: Problem of refresh in the display menu
       - fix #14110: Not enough space for dotted notes
       - fix #14112: If stem is selected, direction won't flip
       - fix text frame color

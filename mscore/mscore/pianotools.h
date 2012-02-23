@@ -72,7 +72,10 @@ class HPiano : public QGraphicsView {
 class PianoTools : public QDockWidget {
       Q_OBJECT
 
-   private slots:
+      virtual void closeEvent(QCloseEvent*);
+
+   signals:
+      void pianoVisible(bool);
 
    signals:
       void keyPressed(int pitch, bool ctrl);
