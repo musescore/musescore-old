@@ -1,4 +1,5 @@
 23.2 (ws)
+      - fix #14110: Not enough space for dotted notes
       - fix #14112: If stem is selected, direction won't flip
       - fix text frame color
       - fix #11782: Adding quarter grace note to note with existing set of

@@ -1439,9 +1439,11 @@ void Chord::layout()
                   setDotPosX(xx);
             }
       if (dots()) {
-            if (dotPosX() > rrr)
-                  rrr = dotPosX();
-            rrr += point(score()->styleS(ST_dotNoteDistance)) + (dots()-1) * point(score()->styleS(ST_dotDotDistance));
+            qreal x = dotPosX() + point(score()->styleS(ST_dotNoteDistance)
+               + (dots()-1) * score()->styleS(ST_dotDotDistance));
+            x += symbols[score()->symIdx()][dotSym].width(1.0);
+            if (x > rrr)
+                  rrr = x;
             }
 
 //      rrr += _extraTrailingSpace.val() * _spatium;
