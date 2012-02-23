@@ -270,8 +270,9 @@ if (MINGW)
       ${CROSS}/bin/libgcc_s_dw2-1.dll
       ${CROSS}/lib/portaudio.dll
       ${CROSS}/lib/libsndfile-1.dll
-      ${CROSS}/lib/libogg-0.dll
-      ${CROSS}/lib/libvorbis-0.dll
+      ${CROSS}/lib/libogg.dll
+      ${CROSS}/lib/libvorbis.dll
+      ${CROSS}/lib/libvorbisfile.dll
       ${CROSSQT}/bin/QtCore4.dll
       ${CROSSQT}/bin/QtGui4.dll
       ${CROSSQT}/bin/QtXml4.dll
