@@ -413,6 +413,7 @@ void Score::layoutStage2()
                         if (nseg
                            && nseg->subtype() == SegGrace
                            && nseg->element(track)
+                           && cr->durationType().hooks()
                            && static_cast<ChordRest*>(nseg->element(track))->durationType().hooks())
                               {
                               Beam* b = cr->beam();
@@ -427,13 +428,19 @@ void Score::layoutStage2()
                               for (;;) {
                                     nseg = s;
                                     ChordRest* cr = static_cast<ChordRest*>(nseg->element(track));
+                                    if (!cr->durationType().hooks())
+                                          break;
                                     b->add(cr);
                                     s = nseg->next();
                                     if (!s || (s->subtype() != SegGrace) || !s->element(track)
                                        || !static_cast<ChordRest*>(s->element(track))->durationType().hooks())
                                           break;
                                     }
-                              b->layout1();
+                              if (b->elements().size() < 2) {
+                                    b->elements().front()->removeDeleteBeam();
+                                    }
+                              else
+                                    b->layout1();
                               segment = nseg;
                               }
                         else {
