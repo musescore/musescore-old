@@ -673,6 +673,12 @@ void Note::read(const QDomElement& de)
       bool hasAccidental = false;                     // used for userAccidental backward compatibility
 
       _tpc = INVALID_TPC;
+
+      if (de.hasAttribute("pitch"))                   // obsolete
+            _pitch = de.attribute("pitch").toInt();
+      if (de.hasAttribute("tpc"))                     // obsolete
+            _tpc = de.attribute("tpc").toInt();
+
       for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
@@ -860,12 +866,9 @@ void Note::read(const QDomElement& de)
                   domError(e);
             }
       // ensure sane values:
-      if (_pitch < 0 || _pitch > 127)
-            _pitch = 60;
-      if (!tpcIsValid(_tpc)) {
-            printf("ReadNote: invalid tpc %d\n", _tpc);
+      _pitch = restrict(_pitch, 0, 127);
+      if (!tpcIsValid(_tpc))
             setTpcFromPitch();
-            }
       _ppitch = _pitch;
       }
 
