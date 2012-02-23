@@ -1,4 +1,6 @@
 23.2 (ws)
+      - fix #11782: Adding quarter grace note to note with existing set of
+        beamed grace notes causes infinite stems.
       - fix #15083: Inventio 6 looks strange.
         Inventio6 was created with an old MuseScore version (file version 1.10).
         MuseScore now warns that a file cannot be read if file version is < 1.14).
