@@ -429,7 +429,8 @@ void Score::layoutStage2()
                                     ChordRest* cr = static_cast<ChordRest*>(nseg->element(track));
                                     b->add(cr);
                                     s = nseg->next();
-                                    if (!s || (s->subtype() != SegGrace) || !s->element(track))
+                                    if (!s || (s->subtype() != SegGrace) || !s->element(track)
+                                       || !static_cast<ChordRest*>(s->element(track))->durationType().hooks())
                                           break;
                                     }
                               b->layout1();
