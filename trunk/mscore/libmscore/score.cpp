@@ -1468,8 +1468,6 @@ void Score::addElement(Element* element)
                   {
                   Clef* clef       = static_cast<Clef*>(element);
                   Segment* segment = clef->segment();
-                  // Staff* staff     = clef->staff();
-                  // staff->setClef(segment->tick(), clef->clefTypeList());
                   updateNoteLines(segment, clef->track());
                   }
                   break;

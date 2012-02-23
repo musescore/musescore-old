@@ -199,6 +199,7 @@ void Score::endUndoRedo()
             score->doLayout();           // TODO: does not really work
             score->setUndoRedo(false);
             score->setUpdateAll(true);
+            score->setPlaylistDirty(true);
             }
       foreach(Excerpt* e, *score->excerpts()) {
             Score* score = e->score();
@@ -208,6 +209,7 @@ void Score::endUndoRedo()
                   score->setUndoRedo(false);
                   score->setUpdateAll(true);
                   }
+            score->setPlaylistDirty(true);
             }
       end();
       }
@@ -1072,7 +1074,6 @@ void Score::upDown(bool up, UpDownMode mode)
       {
       QList<Note*> el;
       int tick = -1;
-//      bool playNotes = true;
       foreach (Note* note, selection().noteList()) {
             while (note->tieBack())
                   note = note->tieBack()->startNote();
@@ -1081,10 +1082,6 @@ void Score::upDown(bool up, UpDownMode mode)
                         el.append(note);
                         if (tick == -1)
                               tick = note->chord()->tick();
-                        else {
-//                              if (tick != note->chord()->tick())
-//                                    playNotes = false;      // don't scare the cat
-                              }
                         }
                   }
             }
