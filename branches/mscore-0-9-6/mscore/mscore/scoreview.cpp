@@ -1348,7 +1348,7 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
                   return;
             p.setBrush(Qt::NoBrush);
 
-            QPen pen(QColor(Qt::blue));
+            QPen pen(Qt::blue);
             pen.setWidthF(2.0 / p.matrix().m11());
 
             pen.setStyle(Qt::SolidLine);

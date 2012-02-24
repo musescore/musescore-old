@@ -44,9 +44,17 @@ endif (MINGW)
 if (APPLE)
       set(HAS_AUDIOFILE TRUE)            # requires libsndfile
       set(STATIC_SCRIPT_BINDINGS TRUE)
-      set(CMAKE_OSX_ARCHITECTURES i386 ppc)   # build universal library
-      set(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.4u.sdk)
-      set(CMAKE_OSX_DEPLOYMENT_TARGET 10.4) #min version required
+      
+      set (CMAKE_CXX_COMPILER   clang++) # use clang, comment for 10.4 & 10.5
+      set(CMAKE_OSX_ARCHITECTURES i386)   # build only i386 by default
+      set(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.6.sdk)
+      set(CMAKE_OSX_DEPLOYMENT_TARGET 10.6) #min version required
+      
+      #toggle the following for 10.4 & 10.5
+      #set(CMAKE_OSX_ARCHITECTURES i386 ppc)   # build universal binary
+      #set(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.4u.sdk)
+      #set(CMAKE_OSX_DEPLOYMENT_TARGET 10.4) #min version required
+      
       find_library(AudioToolboxFW NAMES AudioToolbox)
       find_library(AudioUnitFW NAMES AudioUnit)
       find_library(CoreAudioFW NAMES CoreAudio)
@@ -234,29 +242,62 @@ configure_file (
       ${PROJECT_BINARY_DIR}/config.h
       )
 
-
+#
+#  create precompiled header file
+#
 add_custom_command(
    OUTPUT ${PROJECT_BINARY_DIR}/all.h
-   COMMAND cp ${PROJECT_SOURCE_DIR}/all.h ${PROJECT_BINARY_DIR}/all.h
+   COMMAND ${CMAKE_COMMAND}
+   ARGS -E copy ${PROJECT_SOURCE_DIR}/all.h ${PROJECT_BINARY_DIR}/all.h
    DEPENDS ${PROJECT_SOURCE_DIR}/all.h
    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
    )
 
-add_custom_command(
-   OUTPUT ${PROJECT_BINARY_DIR}/all.h.pch
-   COMMAND ${CMAKE_CXX_COMPILER}
-     -g -Wextra -Wall
-     -I"${QT_INCLUDE_DIR}"
-     -o all.h.pch all.h
-   DEPENDS ${PROJECT_BINARY_DIR}/all.h
-   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-   )
+set(CMAKE_CXX_FLAGS_DEBUG   "")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
 
-set (PCH ${PROJECT_BINARY_DIR}/all.h.pch)
+if (CMAKE_BUILD_TYPE STREQUAL "DEBUG")
+      if (MINGW)
+            set(FLAGS -DQT_DEBUG -DQT_DLL)
+      else (MINGW)
+            set (FLAGS -DQT_DEBUG)
+      endif (MINGW)
+else (CMAKE_BUILD_TYPE STREQUAL "DEBUG")
+      if (MINGW)
+            set(FLAGS -O2 -DNDEBUG -DQT_DLL -DQT_NO_DEBUG)
+      else (MINGW)
+            set(FLAGS -O2 -DNDEBUG -DQT_NO_DEBUG)
+      endif (MINGW)
+endif (CMAKE_BUILD_TYPE STREQUAL "DEBUG")
+
+MESSAGE( STATUS "CMAKE_CXX_COMPILER_ID:" ${CMAKE_CXX_COMPILER_ID})
+
+if (${CMAKE_CXX_COMPILER_ID} EQUAL "Clang")
+      add_custom_command(
+         OUTPUT ${PROJECT_BINARY_DIR}/all.h.pch
+         COMMAND ${CMAKE_CXX_COMPILER}
+           -x c++-header -g ${FLAGS}
+           -I${QT_INCLUDE_DIR}
+           -o all.h.pch all.h
+         DEPENDS ${PROJECT_BINARY_DIR}/all.h
+         WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+         )
+      set (PCH ${PROJECT_BINARY_DIR}/all.h.pch)
+else (${CMAKE_CXX_COMPILER_ID} EQUAL "Clang")
+      add_custom_command(
+         OUTPUT ${PROJECT_BINARY_DIR}/all.h.gch
+         COMMAND ${CMAKE_CXX_COMPILER}
+           -x c++-header -g  ${FLAGS} -m32
+           -I${QT_HEADERS_DIR}
+           -o all.h.gch all.h
+         DEPENDS ${PROJECT_BINARY_DIR}/all.h
+         WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+         )
+      set (PCH ${PROJECT_BINARY_DIR}/all.h.gch)
+endif(${CMAKE_CXX_COMPILER_ID} EQUAL "Clang")
 
 ADD_CUSTOM_TARGET(mops1 DEPENDS ${PROJECT_BINARY_DIR}/all.h)
 ADD_CUSTOM_TARGET(mops2 DEPENDS ${PCH})
-
 
 
 if (NOT MINGW AND NOT APPLE)

@@ -18,16 +18,18 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
-set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
+include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
 
 add_library (fluid STATIC
+  ${PROJECT_BINARY_DIR}/all.h
+  ${PCH}
   dsp.cpp fluid.cpp voice.cpp chan.cpp sfont.cpp chorus.cpp
   conv.cpp gen.cpp mod.cpp rev.cpp tuning.cpp
   )
 
 set_target_properties( fluid
-   PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
+   PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
    )
 
+ADD_DEPENDENCIES(fluid mops1)
+ADD_DEPENDENCIES(fluid mops2)

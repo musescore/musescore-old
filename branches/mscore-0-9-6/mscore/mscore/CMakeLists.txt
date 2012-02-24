@@ -20,14 +20,6 @@
 
 include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
 
-if (GCC_VISIBILITY)
-set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -Winvalid-pch -fvisibility=hidden -fvisibility-inlines-hidden")
-else (GCC_VISIBILITY)
-set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -Winvalid-pch")
-endif (GCC_VISIBILITY)
-
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
-set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
 
 if (NOT MINGW)
 #
@@ -128,7 +120,7 @@ add_executable ( ${ExecutableName}
       ${ui_headers}
       ${mocs}
       ${PROJECT_BINARY_DIR}/all.h
-      ${PROJECT_BINARY_DIR}/all.h.pch
+      ${PCH}
       ${resource_file}
 
       actions.cpp accidental.cpp barline.cpp beam.cpp
@@ -356,4 +348,7 @@ if (NOT MINGW AND NOT APPLE)
       PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -I/usr/include/freetype2"
       )
 endif (NOT MINGW AND NOT APPLE)
+
+ADD_DEPENDENCIES(${ExecutableName} mops1)
+ADD_DEPENDENCIES(${ExecutableName} mops1)
 

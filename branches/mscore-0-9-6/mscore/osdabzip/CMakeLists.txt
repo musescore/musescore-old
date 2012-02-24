@@ -18,14 +18,19 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
+include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
+
 add_library (
   osdabzip STATIC
+  ${PROJECT_BINARY_DIR}/all.h
+  ${PCH}  
   zip.cpp
   unzip.cpp
   )
 
-
 set_target_properties( osdabzip
-   PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
+   PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
    )
 
+ADD_DEPENDENCIES(osdabzip mops1)
+ADD_DEPENDENCIES(osdabzip mops2)
