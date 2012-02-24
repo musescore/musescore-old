@@ -3421,10 +3421,9 @@ void ScoreView::pageNext()
       if (score()->pages().empty())
             return;
       if (score()->layoutMode() == LayoutLine) {
-            qreal x = xoffset() - width() * .7 / _matrix.m11();
-            Page* page = score()->pages().front();
-            MeasureBase* lm = page->systems()->front()->measures().last();
-            qreal lx = lm->pos().x() + lm->width() - width() * .7 / _matrix.m11();
+            qreal x = xoffset() - width() * .8;
+            MeasureBase* lm = score()->last();
+            qreal lx = (lm->pos().x() + lm->width()) * mag() - width() * .8;
             if (x < -lx)
                   x = -lx;
             setOffset(x, yoffset());
@@ -3450,7 +3449,7 @@ void ScoreView::pagePrev()
       if (score()->pages().empty())
             return;
       if (score()->layoutMode() == LayoutLine) {
-            qreal x = xoffset() + width() * .7 / _matrix.m11();
+            qreal x = xoffset() + width() * .8;
             if (x > 0.0)
                   x = 0;
             setOffset(x, yoffset());
@@ -3475,7 +3474,6 @@ void ScoreView::pageTop()
             setOffset(0.0, yoffset());
       else
             setOffset(10.0, 10.0);
-
       update();
       }
 
@@ -3488,10 +3486,9 @@ void ScoreView::pageEnd()
       if (score()->pages().empty())
             return;
       if (score()->layoutMode() == LayoutLine) {
-            Page* page = score()->pages().front();
-            MeasureBase* lm = page->systems()->front()->measures().last();
-            qreal lx = lm->pos().x() + lm->width();
-            lx -= width() * .7 / _matrix.m11();
+            MeasureBase* lm = score()->last();
+            qreal lx = (lm->canvasPos().x() + lm->width()) * mag();
+            lx -= width() * .8;
             setOffset(-lx, yoffset());
             }
       else {
@@ -3509,16 +3506,28 @@ void ScoreView::pageEnd()
 void ScoreView::adjustCanvasPosition(const Element* el, bool playBack)
       {
       if (score()->layoutMode() == LayoutLine) {
-            qreal x = el->canvasPos().x();
-            int ix = (x + xoffset()) * _matrix.m11();
+            qreal x1 = el->canvasPos().x();
+            qreal x2 = x1 + el->width();
+
+            int ix1 = (x1 + xoffset()) * mag();
+            int ix2 = (x2 + xoffset()) * mag();
             qreal xo;
-            if (ix >= width() || ix < 0) {
-                  xo = width() * .2 / _matrix.m11() - x;
-                  setOffset(xo, yoffset());
-                  update();
+            int dx = ix2 - ix1;
+            if (dx < width()) {
+                  if (ix2 >= width()) {
+                        xo = dx / mag() - x2;
+                        setOffset(xo, yoffset());
+                        update();
+                        }
+                  else if (ix1 < 0) {
+                        xo = (width() - dx) / mag() - x1;
+                        setOffset(xo, yoffset());
+                        update();
+                        }
                   }
             return;
             }
+
       const Measure* m;
       if (el->type() == NOTE)
             m = static_cast<const Note*>(el)->chord()->measure();
