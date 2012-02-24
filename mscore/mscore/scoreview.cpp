@@ -3508,6 +3508,17 @@ void ScoreView::pageEnd()
 
 void ScoreView::adjustCanvasPosition(const Element* el, bool playBack)
       {
+      if (score()->layoutMode() == LayoutLine) {
+            qreal x = el->canvasPos().x();
+            int ix = (x + xoffset()) * _matrix.m11();
+            qreal xo;
+            if (ix >= width() || ix < 0) {
+                  xo = width() * .2 / _matrix.m11() - x;
+                  setOffset(xo, yoffset());
+                  update();
+                  }
+            return;
+            }
       const Measure* m;
       if (el->type() == NOTE)
             m = static_cast<const Note*>(el)->chord()->measure();
