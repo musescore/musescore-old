@@ -655,8 +655,12 @@ void Score::doLayout()
       layoutStage2();   // beam notes, finally decide if chord is up/down
       layoutStage3();   // compute note head horizontal positions
 
-      layoutSystems();  // create list of systems
-      layoutPages();    // create list of pages
+      if (layoutMode() == LayoutLine)
+            layoutLinear();
+      else {
+            layoutSystems();  // create list of systems
+            layoutPages();    // create list of pages
+            }
 
       //---------------------------------------------------
       //   place Spanner & beams
@@ -1748,6 +1752,60 @@ void Score::layoutSystems()
       // TODO: make undoable:
       while (_systems.size() > curSystem)
             _systems.takeLast();
+      }
+
+//---------------------------------------------------------
+//   layoutLinear
+//---------------------------------------------------------
+
+void Score::layoutLinear()
+      {
+      curMeasure     = first();
+      System* system = getNextSystem(true, false);
+      system->setInstrumentNames(true);
+      qreal xo;
+      if (curMeasure->type() == HBOX)
+            xo = point(static_cast<Box*>(curMeasure)->boxWidth());
+      else
+            xo = 0.0;
+      system->layout(xo);
+      curPage = 0;
+      Page* page = getEmptyPage();
+      page->appendSystem(system);
+
+      for (MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
+            ElementType t = curMeasure->type();
+            if (t == VBOX || t == TBOX || t == FBOX) {
+                  curMeasure = curMeasure->next();
+                  continue;
+                  }
+            mb->setSystem(system);
+            system->measures().append(mb);
+            }
+      if (system->measures().isEmpty())
+            return;
+      processSystemHeader(firstMeasure(), true);
+      removeGeneratedElements(firstMeasure(), lastMeasure());
+
+      QPointF pos(system->leftMargin(), 0.0);
+      foreach(MeasureBase* mb, system->measures()) {
+            qreal w = 0.0;
+            if (mb->type() == MEASURE) {
+                  Measure* m = static_cast<Measure*>(mb);
+                  m->createEndBarLines();       // TODO: not set here
+                  m->layoutX(1.0, true);
+                  w = m->layoutWidth().stretchable * 1.5;
+                  m->layout(w);
+                  }
+            else
+                  w = mb->width();
+            mb->setPos(pos);
+            pos.rx() += w;
+            }
+      system->layout2();
+
+      while (_pages.size() > 1)
+            _pages.takeLast();
       }
 
 //---------------------------------------------------------

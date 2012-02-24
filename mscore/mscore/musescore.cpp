@@ -591,6 +591,11 @@ MuseScore::MuseScore()
       mag = new MagBox;
       connect(mag, SIGNAL(magChanged(int)), SLOT(magChanged(int)));
       fileTools->addWidget(mag);
+      viewModeCombo = new QComboBox(this);
+      viewModeCombo->addItem(tr("Page Mode"));
+      viewModeCombo->addItem(tr("Cont. Mode"));
+      connect(viewModeCombo, SIGNAL(activated(int)), SLOT(switchLayoutMode(int)));
+      fileTools->addWidget(viewModeCombo);
       addToolBarBreak();
 
       cpitchTools = addToolBar(tr("Concert Pitch"));
@@ -1369,8 +1374,15 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
                   static_cast<Navigator*>(_navigator->widget())->setScore(0);
             if (inspector)
                   inspector->setElement(0);
+            viewModeCombo->setEnabled(false);
             return;
             }
+      viewModeCombo->setEnabled(true);
+      if (cs->layoutMode() == LayoutPage)
+            viewModeCombo->setCurrentIndex(0);
+      else
+            viewModeCombo->setCurrentIndex(1);
+
       selectionChanged(cs->selection().state());
       changeState(view->mscoreState());
 
@@ -4268,6 +4280,18 @@ printf("set preferences to <%s>\n", qPrintable(name));
             changeScore(1);
       else if (cmd == "prev-score")
             changeScore(-1);
+      else if (cmd == "viewmode") {
+            if (cs) {
+                  if (cs->layoutMode() == LayoutPage) {
+                        cs->setLayoutMode(LayoutLine);
+                        viewModeCombo->setCurrentIndex(1);
+                        }
+                  else {
+                        cs->setLayoutMode(LayoutPage);
+                        viewModeCombo->setCurrentIndex(0);
+                        }
+                  }
+            }
       else {
             if (cv) {
                   cv->setFocus();
@@ -4473,5 +4497,20 @@ QPixmap sym2pixmap(const Sym* s, qreal mag)
       s->draw(&painter, mag, -bb.topLeft() + QPointF(2.0, 2.0));
       painter.end();
       return pm;
+      }
+
+//---------------------------------------------------------
+//   switchLayoutMode
+//---------------------------------------------------------
+
+void MuseScore::switchLayoutMode(int val)
+      {
+      if (cs) {
+            if (val == 0)
+                  cs->setLayoutMode(LayoutPage);
+            else
+                  cs->setLayoutMode(LayoutLine);
+            cv->update();
+            }
       }
 

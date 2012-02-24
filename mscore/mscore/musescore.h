@@ -208,6 +208,7 @@ class MuseScore : public QMainWindow {
       QMenu* openRecent;
 
       MagBox* mag;
+      QComboBox* viewModeCombo;
       QAction* playId;
 
       QProgressBar* _progressBar;
@@ -424,6 +425,7 @@ class MuseScore : public QMainWindow {
       void switchLayer(const QString&);
       void switchPlayMode(int);
       void networkFinished(QNetworkReply*);
+      void switchLayoutMode(int);
 
    public slots:
       void dirtyChanged(Score*);
