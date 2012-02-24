@@ -196,6 +196,8 @@ void Page::layout()
 
 void Page::draw(QPainter* painter) const
       {
+      if (score()->layoutMode() != LayoutPage)
+            return;
       extern QReadWriteLock docRenderLock;
       QWriteLocker locker(&docRenderLock);
       //
@@ -663,7 +665,14 @@ void Page::doRebuildBspTree()
       scanElements(&el, collectElements, false);
 
       int n = el.size();
-      bspTree.initialize(abbox(), n);
+      if (score()->layoutMode() == LayoutLine) {
+            qreal h = _systems.front()->height();
+            MeasureBase* mb = _systems.front()->measures().back();
+            qreal w = mb->x() + mb->width();
+            bspTree.initialize(QRectF(0.0, 0.0, w, h), n);
+            }
+      else
+            bspTree.initialize(abbox(), n);
       for (int i = 0; i < n; ++i)
             bspTree.insert(el.at(i));
       }

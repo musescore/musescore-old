@@ -106,6 +106,10 @@ enum {
       PAD_DOTDOT,
       };
 
+//---------------------------------------------------------
+//   LayoutMode
+//---------------------------------------------------------
+
 enum LayoutMode {
       LayoutPage, LayoutFloat, LayoutLine
       };
@@ -198,6 +202,15 @@ struct Layer {
       };
 
 //---------------------------------------------------------
+//   ViewMode
+//---------------------------------------------------------
+
+enum ViewMode {
+      PAGE_MODE,
+      CONTINUOUS_MODE
+      };
+
+//---------------------------------------------------------
 //   Score
 //---------------------------------------------------------
 
@@ -219,12 +232,13 @@ class Score {
       QList<Layer> _layer;
       int _currentLayer;
 
+      int _symIdx;                  // used symbol set, derived from style
       int _pageNumberOffset;        ///< Offset for page numbers.
 
+      MeasureBaseList _measures;          // here are the notes
       //
       // generated objects during layout:
       //
-      int _symIdx;                  // used symbol set, derived from style
       QList<Page*> _pages;          // pages are build from systems
       QList<System*> _systems;      // measures are akkumulated to systems
 
@@ -237,8 +251,6 @@ class Score {
 
       QQueue<MidiInputEvent> midiInputQueue;
       QList<MidiMapping> _midiMapping;
-
-      MeasureBaseList _measures;          // here are the notes
 
       RepeatList* _repeatList;
       TimeSigMap* _sigmap;
@@ -771,6 +783,7 @@ class Score {
 
       void doLayout();
       void layoutSystems();
+      void layoutLinear();
       void layoutPages();
       Page* getEmptyPage();
 
@@ -851,7 +864,7 @@ class Score {
       void setSelectionChanged(bool val)    { _selectionChanged = val;  }
 
       LayoutMode layoutMode() const         { return _layoutMode; }
-      void setLayoutMode(LayoutMode lm)     { _layoutMode = lm;   }
+      void setLayoutMode(LayoutMode lm);
 
       QReadWriteLock* layoutLock() { return &_layoutLock; }
       void doLayoutSystems();

@@ -2950,6 +2950,16 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Insert Measure"),
          measure_ICON
          ),
+      Shortcut(
+         STATE_NORMAL,
+         0,
+         "viewmode",
+         QT_TRANSLATE_NOOP("action","Toggle View Mode"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Toggle View Mode"),
+         QT_TRANSLATE_NOOP("action","Toggle View Mode")
+         ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, 0, QKeySequence::UnknownKey)
       };

@@ -1866,21 +1866,29 @@ void ScoreView::paint(const QRect& r, QPainter& p)
       QRectF fr = imatrix.mapRect(QRectF(r));
 
       QRegion r1(r);
-      foreach (Page* page, _score->pages()) {
-            if (!score()->printing())
-                  paintPageBorder(p, page);
-            QRectF pr(page->abbox().translated(page->pos()));
-            if (pr.right() < fr.left())
-                  continue;
-            if (pr.left() > fr.right())
-                  break;
-            QList<const Element*> ell = page->items(fr.translated(-page->pos()));
+      if (_score->layoutMode() == LayoutLine) {
+            Page* page = _score->pages().front();
+            QList<const Element*> ell = page->items(fr);
             qStableSort(ell.begin(), ell.end(), elementLessThan);
-            QPointF pos(page->pos());
-            p.translate(pos);
             drawElements(p, ell);
-            p.translate(-pos);
-            r1 -= _matrix.mapRect(pr).toAlignedRect();
+            }
+      else {
+            foreach (Page* page, _score->pages()) {
+                  if (!score()->printing())
+                        paintPageBorder(p, page);
+                  QRectF pr(page->abbox().translated(page->pos()));
+                  if (pr.right() < fr.left())
+                        continue;
+                  if (pr.left() > fr.right())
+                        break;
+                  QList<const Element*> ell = page->items(fr.translated(-page->pos()));
+                  qStableSort(ell.begin(), ell.end(), elementLessThan);
+                  QPointF pos(page->pos());
+                  p.translate(pos);
+                  drawElements(p, ell);
+                  p.translate(-pos);
+                  r1 -= _matrix.mapRect(pr).toAlignedRect();
+                  }
             }
       if (dropRectangle.isValid())
             p.fillRect(dropRectangle, QColor(80, 0, 0, 80));
@@ -1963,7 +1971,7 @@ void ScoreView::paint(const QRect& r, QPainter& p)
             p.drawLine(QLineF(x2, y1, x2, y2).translated(system2->page()->pos()));
             }
       p.setMatrixEnabled(false);
-      if (!r1.isEmpty()) {
+      if ((_score->layoutMode() != LayoutLine) && !r1.isEmpty()) {
             p.setClipRegion(r1);  // only background
             if (bgPixmap == 0 || bgPixmap->isNull())
                   p.fillRect(r, _bgColor);
