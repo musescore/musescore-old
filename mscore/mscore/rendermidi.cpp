@@ -551,7 +551,13 @@ void Score::toEList(EventMap* events)
 void Score::fixPpitch()
       {
       int ns = nstaves();
+      
+//ugly but clang cannot deal with 2/ while gcc4.6 can cope with 1/
+#ifdef Q_WS_MAC
       QList<OttavaShiftSegment>* osl = new QList<OttavaShiftSegment>[ns];
+#else
+      QList<OttavaShiftSegment> osl[ns];
+#endif
 
       //
       //    collect ottavas
@@ -569,8 +575,13 @@ void Score::fixPpitch()
       //
       //    collect Dynamics
       //
+//ugly but clang cannot deal with 2/ while gcc4.6 can cope with 1/
+#ifdef Q_WS_MAC
       VeloList *velo = new VeloList[ns];
-
+#else
+      VeloList velo[ns];
+#endif
+      
       for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
             velo[staffIdx].setVelo(0, 80);
             Part* prt      = part(staffIdx);
@@ -664,8 +675,10 @@ void Score::fixPpitch()
                         }
                   }
             }
+#ifdef Q_WS_MAC      
       delete velo;
       delete osl;
+#endif
       }
 
 
