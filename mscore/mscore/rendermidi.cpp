@@ -551,7 +551,7 @@ void Score::toEList(EventMap* events)
 void Score::fixPpitch()
       {
       int ns = nstaves();
-      QList<OttavaShiftSegment> osl[ns];
+      QList<OttavaShiftSegment>* osl = new QList<OttavaShiftSegment>[ns];
 
       //
       //    collect ottavas
@@ -569,7 +569,7 @@ void Score::fixPpitch()
       //
       //    collect Dynamics
       //
-      VeloList velo[ns];
+      VeloList *velo = new VeloList[ns];
 
       for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
             velo[staffIdx].setVelo(0, 80);
@@ -664,6 +664,8 @@ void Score::fixPpitch()
                         }
                   }
             }
+            delete velo;
+            delete osl;
       }
 
 

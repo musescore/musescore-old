@@ -20,10 +20,6 @@
 
 include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
 
-set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
-set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
-
 QT4_WRAP_CPP (mocs
       qoscclient.h
       qoscserver.h
@@ -31,14 +27,14 @@ QT4_WRAP_CPP (mocs
       )
 
 add_library(ofqf STATIC
-   ${mocs}
    ${PROJECT_BINARY_DIR}/all.h
-   ${PROJECT_BINARY_DIR}/all.h.pch
+   ${PCH}
+   ${mocs}
    qoscclient.cpp qoscserver.cpp qosctypes.cpp
    )
 
 set_target_properties( ofqf
-   PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
+   PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
    )
 
 ADD_DEPENDENCIES(ofqf mops1)
