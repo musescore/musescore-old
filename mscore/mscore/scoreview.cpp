@@ -3419,14 +3419,24 @@ void ScoreView::pageNext()
       {
       if (score()->pages().empty())
             return;
+      if (score()->layoutMode() == LayoutLine) {
+            qreal x = xoffset() - width() * .7 / _matrix.m11();
+            Page* page = score()->pages().front();
+            MeasureBase* lm = page->systems()->front()->measures().last();
+            qreal lx = lm->pos().x() + lm->width() - width() * .7 / _matrix.m11();
+            if (x < -lx)
+                  x = -lx;
+            setOffset(x, yoffset());
+            }
+      else {
+            Page* page = score()->pages().back();
+            qreal x    = xoffset() - (page->width() + 25.0) * mag();
+            qreal lx   = 10.0 - page->pos().x() * mag();
 
-      Page* page = score()->pages().back();
-      qreal x    = xoffset() - (page->width() + 25.0) * mag();
-      qreal lx   = 10.0 - page->pos().x() * mag();
-
-      if (x < lx)
-            x = lx;
-      setOffset(x, 10.0);
+            if (x < lx)
+                  x = lx;
+            setOffset(x, 10.0);
+            }
       update();
       }
 
@@ -3438,11 +3448,19 @@ void ScoreView::pagePrev()
       {
       if (score()->pages().empty())
             return;
-      Page* page = score()->pages().front();
-      qreal x    = xoffset() + (page->width() + 25.0) * mag();
-      if (x > 10.0)
-            x = 10.0;
-      setOffset(x, 10.0);
+      if (score()->layoutMode() == LayoutLine) {
+            qreal x = xoffset() + width() * .7 / _matrix.m11();
+            if (x > 0.0)
+                  x = 0;
+            setOffset(x, yoffset());
+            }
+      else {
+            Page* page = score()->pages().front();
+            qreal x    = xoffset() + (page->width() + 25.0) * mag();
+            if (x > 10.0)
+                  x = 10.0;
+            setOffset(x, 10.0);
+            }
       update();
       }
 
@@ -3452,7 +3470,11 @@ void ScoreView::pagePrev()
 
 void ScoreView::pageTop()
       {
-      setOffset(10.0, 10.0);
+      if (score()->layoutMode() == LayoutLine)
+            setOffset(0.0, yoffset());
+      else
+            setOffset(10.0, 10.0);
+
       update();
       }
 
@@ -3464,9 +3486,18 @@ void ScoreView::pageEnd()
       {
       if (score()->pages().empty())
             return;
-      Page* lastPage = score()->pages().back();
-      QPointF p(lastPage->pos());
-      setOffset(25.0 - p.x() * mag(), 25.0);
+      if (score()->layoutMode() == LayoutLine) {
+            Page* page = score()->pages().front();
+            MeasureBase* lm = page->systems()->front()->measures().last();
+            qreal lx = lm->pos().x() + lm->width();
+            lx -= width() * .7 / _matrix.m11();
+            setOffset(-lx, yoffset());
+            }
+      else {
+            Page* lastPage = score()->pages().back();
+            QPointF p(lastPage->pos());
+            setOffset(25.0 - p.x() * mag(), 25.0);
+            }
       update();
       }
 
