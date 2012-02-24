@@ -1802,6 +1802,7 @@ void Score::layoutLinear()
             mb->setPos(pos);
             pos.rx() += w;
             }
+      system->setWidth(pos.x());
       system->layout2();
 
       while (_pages.size() > 1)
