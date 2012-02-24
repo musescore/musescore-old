@@ -1769,6 +1769,7 @@ void Score::layoutLinear()
       else
             xo = 0.0;
       system->layout(xo);
+      system->setPos(0.0, spatium() * 10.0);
       curPage = 0;
       Page* page = getEmptyPage();
       page->appendSystem(system);
