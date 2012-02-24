@@ -222,6 +222,12 @@ void MuseScore::closeEvent(QCloseEvent* ev)
                         removeList.append(score);
                   }
             }
+      
+      // remove all new created/not save score so they are
+      // note saved as session data
+      foreach(Score* score, removeList)
+            scoreList.removeAll(score);      
+      
       writeSessionFile(true);
       foreach(Score* score, scoreList) {
             if (!score->tmpName().isEmpty()) {
@@ -229,12 +235,6 @@ void MuseScore::closeEvent(QCloseEvent* ev)
                   f.remove();
                   }
             }
-
-      // remove all new created/not save score so they are
-      // note saved as session data
-
-      foreach(Score* score, removeList)
-            scoreList.removeAll(score);
 
       // save score list
       QSettings settings;
@@ -1590,8 +1590,8 @@ static void loadScores(const QStringList& argv)
                                     delete score;
                                     Score* score = new Score(defaultStyle);
                                     scoreCreated = true;
-                                    if (score->read(":/data/Promenade_Example.mscx")){
-                                          preferences.startScore = ":/data/Promenade_Example.mscx";
+                                    if (score->read(":/data/Reunion_Example.mscz")){
+                                          preferences.startScore = ":/data/Reunion_Example.mscz";
                                           currentScoreView = mscore->appendScore(score);
                                           }
                                     }

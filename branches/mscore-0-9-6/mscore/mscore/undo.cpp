@@ -195,7 +195,8 @@ void UndoStack::push(UndoCommand* cmd)
 
 void UndoStack::setClean()
       {
-      if (cleanIdx != curIdx) {
+      // freshly created parts are dirty, but have no undo actions
+      if (cleanIdx != curIdx || (cleanIdx==0 && curIdx==0)) {
             cleanIdx = curIdx;
             emit cleanChanged(true);
             }
