@@ -2128,6 +2128,8 @@ static bool elementLower(const Element* e1, const Element* e2)
 
 Page* ScoreView::point2page(const QPointF& p)
       {
+      if (score()->layoutMode() == LayoutLine)
+            return score()->pages().front();
       foreach(Page* page, score()->pages()) {
             if (page->bbox().translated(page->pos()).contains(p))
                   return page;
@@ -2983,7 +2985,6 @@ void ScoreView::select(QMouseEvent* ev)
             cloneElement(curElement);
             return;
             }
-
       ElementType type = curElement->type();
       int dragStaffIdx = 0;
       if (type == MEASURE) {
@@ -3757,7 +3758,6 @@ void ScoreView::cmdAddSlur()
             _score->startCmd();
             int startTrack = _score->selection().staffStart() * VOICES;
             int endTrack   = _score->selection().staffEnd() * VOICES;
-printf("start-end %d %d\n", startTrack, endTrack);
             for (int track = startTrack; track < endTrack; ++track) {
                   QList<Note*> nl = _score->selection().noteList(track);
                   Note* firstNote = 0;
