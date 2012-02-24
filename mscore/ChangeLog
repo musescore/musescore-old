@@ -1,3 +1,9 @@
+24. feb (la)
+      - Change Moussorgski's Promenade by Marc Sabatella's Reunion !
+      - use english note name in Edit Drumset dialog
+      - fix #15123: Measure rest should be shown as breve if measure >= 4/2 (patch by Miwarre)
+      - fix #15059: save a newly created part don't remove the asterisk (patch by Jorgk)
+      - fix #15132: Create new score and quit/reopen presents incorrect dialog
 22.feb (lv)
       - update MusicXML regression test
        (la)

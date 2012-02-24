@@ -41,6 +41,7 @@ install(FILES
       sarabande-gfh.mscz
       All_Dudes.mscz
       Triumph.mscz
+      Reunion.mscz
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}demos
       )
 

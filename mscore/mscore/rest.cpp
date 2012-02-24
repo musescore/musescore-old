@@ -337,6 +337,11 @@ void Rest::layout()
                   _sym = breverestSym;
                   break;
             case Duration::V_MEASURE:
+                  if(measure() && measure()->fraction() >= Fraction(2, 1)) {  // breve symbol
+                        _sym = breverestSym;
+                        break;
+                        }
+                  //fall through
             case Duration::V_WHOLE:
                   _sym = (line <= -2 || line >= 4) ? outsidewholerestSym : wholerestSym;
                   if(lines != 1 && lines != 3)

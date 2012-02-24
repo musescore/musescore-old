@@ -163,7 +163,7 @@ void Preferences::init()
       layoutBreakColor         = Qt::green;
       antialiasedDrawing       = true;
       sessionStart             = SCORE_SESSION;
-      startScore               = ":/data/Promenade_Example.mscx";
+      startScore               = ":/data/Reunion_Example.mscz";
       workingDirectory         = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
       showSplashScreen         = true;
 
@@ -456,7 +456,9 @@ void Preferences::read()
       else if (ss == "empty")
             sessionStart = EMPTY_SESSION;
 
-      startScore     = s.value("startScore", ":/data/Promenade_Example.mscx").toString();
+      startScore     = s.value("startScore", ":/data/Reunion_Example.mscz").toString();
+      if(startScore == ":/data/Promenade_Example.mscx")
+            startScore = ":/data/Reunion_Example.mscz";
       instrumentList = s.value("instrumentList", ":/data/instruments.xml").toString();
 
       readShortcuts();

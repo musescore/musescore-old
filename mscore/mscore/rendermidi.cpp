@@ -664,8 +664,8 @@ void Score::fixPpitch()
                         }
                   }
             }
-            delete velo;
-            delete osl;
+      delete velo;
+      delete osl;
       }
 
 
