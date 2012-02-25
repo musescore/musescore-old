@@ -174,7 +174,7 @@ Palette* MuseScore::newKeySigPalette()
       sp->setName(qApp->translate("MuseScore", "Key Signatures"));
       sp->setMag(0.8);
       sp->setGrid(56, 45);
-      sp->setYOffset(6.0);
+      sp->setYOffset(1.0);
 
       for (int i = 0; i < 7; ++i) {
             KeySig* k = new KeySig(gscore);

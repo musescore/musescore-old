@@ -1,3 +1,7 @@
+25.2 (ws)
+      - fix creation of linked part in "new wizard"
+      - fix bar line creation of additional staff for part created in "new wizard"
+      - fix keysig palette offset in "new wizard"
 24.2 (ws)
       - add framework for "continuous view" (scrollview)
 23.2 (ws)

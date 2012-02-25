@@ -1804,6 +1804,7 @@ void Score::layoutLinear()
             pos.rx() += w;
             }
       system->setWidth(pos.x());
+      page->setWidth(pos.x());
       system->layout2();
 
       while (_pages.size() > 1)

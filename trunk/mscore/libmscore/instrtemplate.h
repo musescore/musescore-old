@@ -77,51 +77,6 @@ struct InstrumentGroup {
       QList<InstrumentTemplate*> instrumentTemplates;
       };
 
-enum { ITEM_KEEP, ITEM_DELETE, ITEM_ADD };
-enum { PART_LIST_ITEM = QTreeWidgetItem::UserType, STAFF_LIST_ITEM };
-
-//---------------------------------------------------------
-//   PartListItem
-//---------------------------------------------------------
-
-class PartListItem : public QTreeWidgetItem {
-
-   public:
-      int op;
-      Part* part;
-      const InstrumentTemplate* it;
-
-      PartListItem(Part* p, QTreeWidget* lv);
-      PartListItem(const InstrumentTemplate* i, QTreeWidget* lv);
-      };
-
-//---------------------------------------------------------
-//   StaffListItem
-//---------------------------------------------------------
-
-class StaffListItem : public QTreeWidgetItem {
-      ClefType _clef;
-      int _partIdx;
-      bool _linked;
-
-   public:
-      StaffListItem();
-      StaffListItem(PartListItem* li);
-
-      int op;
-      Staff* staff;
-      int partIdx() const      { return _partIdx; }
-      void setPartIdx(int val);
-      int staffIdx;
-
-      void setClef(ClefType val);
-      ClefType clef() const    { return _clef;    }
-      void setLinked(bool val);
-      bool linked() const      { return _linked;  }
-      bool visible() const;
-      void setVisible(bool val);
-      };
-
 extern QList<InstrumentGroup*> instrumentGroups;
 extern bool loadInstrumentTemplates(const QString& instrTemplates);
 extern InstrumentTemplate* searchTemplate(const QString& name);
