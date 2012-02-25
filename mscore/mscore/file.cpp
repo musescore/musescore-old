@@ -449,10 +449,7 @@ void MuseScore::newFile()
                         m->setLen(timesig - Fraction(pickupTimesigZ, pickupTimesigN));
                         }
                   }
-            if (i == (measures - 1))
-                  m->setEndBarLineType(END_BAR, false);
-            else
-                  m->setEndBarLineType(NORMAL_BAR, true);
+            m->setEndBarLineType(i == (measures - 1) ? END_BAR : NORMAL_BAR, false);
             }
 
       int tick = 0;

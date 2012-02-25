@@ -393,9 +393,9 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
 
 void cloneStaff(Staff* srcStaff, Staff* dstStaff)
       {
-printf("clone staff===\n");
+printf("clone staff=== %p %p\n", srcStaff, dstStaff);
       Score* score = srcStaff->score();
-      dstStaff->linkTo(srcStaff);
+//      dstStaff->linkTo(srcStaff);
 
 //      int tracks = score->nstaves() * VOICES;
       SlurMap slurMap;

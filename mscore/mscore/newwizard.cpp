@@ -362,11 +362,13 @@ void InstrumentWizard::createInstruments(Score* cs)
 
                   staff->init(t, cidx);
 
+                  if (sli->linked() && !part->staves()->isEmpty()) {
+                        Staff* linkedStaff = part->staves()->back();
+                        linkedStaff->linkTo(staff);
+                        }
                   part->staves()->push_back(staff);
                   cs->staves().insert(staffIdx + rstaff, staff);
                   }
-
-//            part->staves()->front()->setBarLineSpan(part->nstaves());
 
             // insert part
             cs->insertPart(part, staffIdx);
@@ -392,6 +394,23 @@ void InstrumentWizard::createInstruments(Score* cs)
                   dst.push_back(sli->staff);
                   }
             }
+#if 1
+      //
+      // check for bar lines
+      //
+      for (int staffIdx = 0; staffIdx < cs->nstaves();) {
+            Staff* staff = cs->staff(staffIdx);
+            int barLineSpan = staff->barLineSpan();
+            if (barLineSpan == 0)
+                  staff->setBarLineSpan(1);
+            int nstaffIdx = staffIdx + barLineSpan;
+
+            for (int idx = staffIdx+1; idx < nstaffIdx; ++idx)
+                  cs->staff(idx)->setBarLineSpan(0);
+
+            staffIdx = nstaffIdx;
+            }
+#endif
       cs->setLayoutAll(true);
       }
 
