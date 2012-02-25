@@ -1,4 +1,6 @@
-25.feb (la)
+25.feb (lv)
+      - fix #15129: [MusicXML] [1.2] empty measures are not imported
+       (la)
       - fix #15147: Style Page Nums "show first" not checked, 1st page > 1: 1st page number still shown (mi)
 24. feb (la)
       - Change Moussorgski's Promenade by Marc Sabatella's Reunion !
