@@ -208,9 +208,9 @@ void Preferences::init()
       twosided                = true;
       spatium                 = SPATIUM20;
       tuning                  = 440.0f;
-      masterGain              = 0.2;
-      chorusGain              = 0.5;
-      reverbGain              = 0.2;
+      masterGain              = 0.3;
+      chorusGain              = 0.0;
+      reverbGain              = 0.0;
       reverbRoomSize          = 0.5;
       reverbDamp              = 0.5;
       reverbWidth             = 1.0;
@@ -426,9 +426,9 @@ void Preferences::read()
       twosided               = s.value("twosided", true).toBool();
       spatium                = s.value("spatium", SPATIUM20).toDouble();
       tuning                 = s.value("tuning", 440.0).toDouble();
-      masterGain             = s.value("masterGain", 0.2).toDouble();
-      chorusGain             = s.value("chorusGain", 0.5).toDouble();
-      reverbGain             = s.value("reverbGain", 0.2).toDouble();
+      masterGain             = s.value("masterGain", 0.3).toDouble();
+      chorusGain             = s.value("chorusGain", 0.0).toDouble();
+      reverbGain             = s.value("reverbGain", 0.0).toDouble();
       reverbRoomSize         = s.value("reverbRoomSize", 0.5).toDouble();
       reverbDamp             = s.value("reverbDamp", 0.5).toDouble();
       reverbWidth            = s.value("reverbWidth", 1.0).toDouble();
