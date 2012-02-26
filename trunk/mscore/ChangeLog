@@ -2,6 +2,9 @@
       - fix creation of linked part in "new wizard"
       - fix bar line creation of additional staff for part created in "new wizard"
       - fix keysig palette offset in "new wizard"
+	 (db)
+	  - add alt keys for menu items
+	  - improve dialog text for incompatible files
 24.2 (ws)
       - add framework for "continuous view" (scrollview)
 23.2 (ws)

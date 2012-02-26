@@ -96,10 +96,10 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          A_SCORE,
          "file-export",
-         QT_TRANSLATE_NOOP("action","Export Score"),
+         QT_TRANSLATE_NOOP("action","Export score"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Export Score..."),
+         QT_TRANSLATE_NOOP("action","&Export..."),
          QT_TRANSLATE_NOOP("action","Save a copy of the score in various formats"),
           fileSave_ICON
          ),
@@ -207,7 +207,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Show instruments dialog"),
          Qt::Key_I,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Instruments..."),
+         QT_TRANSLATE_NOOP("action","&Instruments..."),
          QT_TRANSLATE_NOOP("action","Show instruments dialog")
          ),
       Shortcut(
@@ -217,7 +217,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Note input mode"),
          Qt::Key_N,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Note Input"),
+         QT_TRANSLATE_NOOP("action","&Note Input"),
          QT_TRANSLATE_NOOP("action","Note input mode"),
           noteEntry_ICON
          ),
@@ -225,11 +225,11 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          A_CMD,
          "pitch-spell",
-         QT_TRANSLATE_NOOP("action","Pitch spell"),
+         QT_TRANSLATE_NOOP("action","Respell pitches"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Pitch Spell"),
-         QT_TRANSLATE_NOOP("action","Pitch spell")
+         QT_TRANSLATE_NOOP("action","&Respell Pitches"),
+         QT_TRANSLATE_NOOP("action","Respell pitches")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -659,7 +659,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","More stretch"),
          Qt::Key_BraceRight,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Add More Stretch"),
+         QT_TRANSLATE_NOOP("action","Add &More Stretch"),
          QT_TRANSLATE_NOOP("action","Add more stretch to selected measure")
          ),
       Shortcut(
@@ -669,7 +669,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Less stretch"),
          Qt::Key_BraceLeft,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Add Less Stretch"),
+         QT_TRANSLATE_NOOP("action","Add &Less Stretch"),
          QT_TRANSLATE_NOOP("action","Add less stretch to selected measure")
          ),
       Shortcut(
@@ -679,7 +679,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Reset Beam Mode"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Reset Beam Mode"),
+         QT_TRANSLATE_NOOP("action","Reset &Beam Mode"),
          QT_TRANSLATE_NOOP("action","Reset beam mode of selected measures")
          ),
       Shortcut(
@@ -2051,7 +2051,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Load style"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Load Style..."),
+         QT_TRANSLATE_NOOP("action","&Load Style..."),
          QT_TRANSLATE_NOOP("action","Load style"),
           fileOpen_ICON
          ),
@@ -2062,7 +2062,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Save style"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Save Style..."),
+         QT_TRANSLATE_NOOP("action","&Save Style..."),
          QT_TRANSLATE_NOOP("action","Save style"),
           fileSave_ICON
          ),
@@ -2073,7 +2073,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Save style as default"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Save Style As Default..."),
+         QT_TRANSLATE_NOOP("action","Save Style As &Default..."),
          QT_TRANSLATE_NOOP("action","Save style as default"),
           fileSave_ICON
          ),
@@ -2184,7 +2184,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Display in concert pitch"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Concert Pitch"),
+         QT_TRANSLATE_NOOP("action","&Concert Pitch"),
          QT_TRANSLATE_NOOP("action","Display in concert pitch")
          ),
       Shortcut(
@@ -2205,7 +2205,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Edit score meta data"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Meta Data..."),
+         QT_TRANSLATE_NOOP("action","Meta &Data..."),
          QT_TRANSLATE_NOOP("action","Edit score meta data")
          ),
       Shortcut(
@@ -2255,7 +2255,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Reset user settings"),
          Qt::CTRL+Qt::Key_R,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Reset"),
+         QT_TRANSLATE_NOOP("action","&Reset"),
          QT_TRANSLATE_NOOP("action","Reset user settings")
          ),
       Shortcut(
@@ -2265,7 +2265,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Show debugger"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Debugger"),
+         QT_TRANSLATE_NOOP("action","De&bugger"),
          QT_TRANSLATE_NOOP("action","Show debugger")
          ),
       Shortcut(
@@ -2275,7 +2275,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Reset measure stretch"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Reset Stretch"),
+         QT_TRANSLATE_NOOP("action","Reset &Stretch"),
          QT_TRANSLATE_NOOP("action","Reset measure stretch")
          ),
       Shortcut(
@@ -2336,7 +2336,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Enable script debugger"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Enable Script Debugger"),
+         QT_TRANSLATE_NOOP("action","&Enable Script Debugger"),
          QT_TRANSLATE_NOOP("action","Enable script debugger")
          ),
       Shortcut(
@@ -2396,7 +2396,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Search"),
          QKeySequence::Find,        // Qt::CTRL + Qt::Key_F,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Search"),
+         QT_TRANSLATE_NOOP("action","&Search"),
          QT_TRANSLATE_NOOP("action","Search")
          ),
       Shortcut(
@@ -2438,7 +2438,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Edit general style"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Edit General Style..."),
+         QT_TRANSLATE_NOOP("action","&General..."),
          QT_TRANSLATE_NOOP("action","Edit general style")
          ),
       Shortcut(
@@ -2448,7 +2448,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Edit text style"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Edit Text Style..."),
+         QT_TRANSLATE_NOOP("action","&Text..."),
          QT_TRANSLATE_NOOP("action","Edit text style")
          ),
       Shortcut(
@@ -2458,7 +2458,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Edit chord style"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Edit Chord Style..."),
+         QT_TRANSLATE_NOOP("action","&Chords..."),
          QT_TRANSLATE_NOOP("action","Edit chord style")
          ),
       Shortcut(
@@ -2556,11 +2556,11 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          0,
          "parts",
-         QT_TRANSLATE_NOOP("action","Parts..."),
+         QT_TRANSLATE_NOOP("action","Parts"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Parts..."),
-         QT_TRANSLATE_NOOP("action","Parts...")
+         QT_TRANSLATE_NOOP("action","Par&ts..."),
+         QT_TRANSLATE_NOOP("action","Manage parts")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -2713,7 +2713,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Show media dialog"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Additional Media"),
+         QT_TRANSLATE_NOOP("action","Additional &Media..."),
          QT_TRANSLATE_NOOP("action","Show media dialog")
          ),
       Shortcut(
@@ -2743,7 +2743,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Page Settings"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Page Settings..."),
+         QT_TRANSLATE_NOOP("action","&Page Settings..."),
          QT_TRANSLATE_NOOP("action","Page Settings")
          ),
       Shortcut(
@@ -2753,7 +2753,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Album"),
          0,
          Qt::ApplicationShortcut,
-         QT_TRANSLATE_NOOP("action","Album..."),
+         QT_TRANSLATE_NOOP("action","&Album..."),
          QT_TRANSLATE_NOOP("action","Album")
          ),
       Shortcut(
@@ -2763,7 +2763,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Layer"),
          0,
          Qt::ApplicationShortcut,
-         QT_TRANSLATE_NOOP("action","Layer..."),
+         QT_TRANSLATE_NOOP("action","&Layer..."),
          QT_TRANSLATE_NOOP("action","Layer")
          ),
       Shortcut(

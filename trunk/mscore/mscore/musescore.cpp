@@ -592,8 +592,8 @@ MuseScore::MuseScore()
       connect(mag, SIGNAL(magChanged(int)), SLOT(magChanged(int)));
       fileTools->addWidget(mag);
       viewModeCombo = new QComboBox(this);
-      viewModeCombo->addItem(tr("Page Mode"));
-      viewModeCombo->addItem(tr("Cont. Mode"));
+      viewModeCombo->addItem(tr("Page View"));
+      viewModeCombo->addItem(tr("Continous View"));
       connect(viewModeCombo, SIGNAL(activated(int)), SLOT(switchLayoutMode(int)));
       fileTools->addWidget(viewModeCombo);
       addToolBarBreak();
@@ -724,7 +724,7 @@ MuseScore::MuseScore()
       menuEdit->addAction(getAction("find"));
       menuEdit->addSeparator();
 
-      QMenu* menuMeasure = new QMenu(tr("Measure"));
+      QMenu* menuMeasure = new QMenu(tr("&Measure"));
       menuMeasure->addAction(getAction("delete-measures"));
       menuMeasure->addAction(getAction("split-measure"));
       menuMeasure->addAction(getAction("join-measure"));
@@ -732,7 +732,7 @@ MuseScore::MuseScore()
 
       menuEdit->addSeparator();
 
-      QMenu* menuVoices = new QMenu(tr("Voices"));
+      QMenu* menuVoices = new QMenu(tr("&Voices"));
       menuVoices->addAction(getAction("voice-x12"));
       menuVoices->addAction(getAction("voice-x13"));
       menuVoices->addAction(getAction("voice-x14"));
@@ -747,11 +747,11 @@ MuseScore::MuseScore()
       menuEdit->addAction(getAction("debugger"));
       menuEdit->addSeparator();
 
-      menuProfiles = new QMenu(tr("Profiles"));
+      menuProfiles = new QMenu(tr("Pr&ofiles"));
       connect(menuProfiles, SIGNAL(aboutToShow()), SLOT(showProfileMenu()));
       menuEdit->addMenu(menuProfiles);
 
-      QAction* pref = menuEdit->addAction(tr("Preferences..."), this, SLOT(startPreferenceDialog()));
+      QAction* pref = menuEdit->addAction(tr("&Preferences..."), this, SLOT(startPreferenceDialog()));
       pref->setMenuRole(QAction::PreferencesRole);
 
       //---------------------
@@ -773,7 +773,7 @@ MuseScore::MuseScore()
       menuNotes->addAction(getAction("pitch-spell"));
       menuNotes->addSeparator();
 
-      QMenu* menuAddPitch = new QMenu(tr("Add Note"));
+      QMenu* menuAddPitch = new QMenu(tr("Add N&ote"));
       for (int i = 0; i < 7; ++i) {
             char buffer[8];
             sprintf(buffer, "note-%c", "cdefgab"[i]);
@@ -789,7 +789,7 @@ MuseScore::MuseScore()
             menuAddPitch->addAction(a);
             }
 
-      QMenu* menuAddInterval = new QMenu(tr("Add Interval"));
+      QMenu* menuAddInterval = new QMenu(tr("Add &Interval"));
       for (int i = 1; i < 10; ++i) {
             char buffer[16];
             sprintf(buffer, "interval%d", i);
@@ -805,7 +805,7 @@ MuseScore::MuseScore()
             }
       menuNotes->addMenu(menuAddInterval);
 
-      QMenu* menuNtole = new QMenu(tr("Tuplets"));
+      QMenu* menuNtole = new QMenu(tr("T&uplets"));
       menuNtole->addAction(getAction("duplet"));
       menuNtole->addAction(getAction("triplet"));
       menuNtole->addAction(getAction("quadruplet"));
@@ -954,13 +954,13 @@ MuseScore::MuseScore()
       menuHelp->setObjectName("Help");
 
       menuHelp->addAction(getAction("local-help"));
-      menuHelp->addAction(tr("Online Handbook"), this, SLOT(helpBrowser1()));
+      menuHelp->addAction(tr("&Online Handbook"), this, SLOT(helpBrowser1()));
 
       menuHelp->addSeparator();
       menuHelp->addAction(tr("&About"),   this, SLOT(about()));
-      menuHelp->addAction(tr("About&Qt"), this, SLOT(aboutQt()));
+      menuHelp->addAction(tr("About &Qt"), this, SLOT(aboutQt()));
 #if defined(Q_WS_MAC) || defined(Q_WS_WIN)
-      menuHelp->addAction(tr("Check for Update"), this, SLOT(checkForUpdate()));
+      menuHelp->addAction(tr("Check for &Update"), this, SLOT(checkForUpdate()));
 #endif
       menuHelp->addSeparator();
 
@@ -1927,7 +1927,7 @@ static void loadScores(const QStringList& argv)
                               QWidget::tr("reading file <")
                                  + name + QWidget::tr("> failed: ") +
                               QString(strerror(errno)),
-                              QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+                              QString::null, QWidget::tr("&Quit"), QString::null, 0, 1);
                         delete score;
                         }
                   else {

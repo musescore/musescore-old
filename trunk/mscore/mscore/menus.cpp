@@ -962,21 +962,23 @@ QMenu* MuseScore::genCreateMenu(QWidget* parent)
 
       popup->addAction(getAction("instruments"));
 
-      QMenu* measures = popup->addMenu(tr("Measures"));
+      QMenu* measures = popup->addMenu(tr("&Measures"));
+	  measures->addAction(getAction("insert-measure"));
+      measures->addAction(getAction("insert-measures"));
       measures->addAction(getAction("append-measure"));
       measures->addAction(getAction("append-measures"));
-      measures->addAction(getAction("insert-measure"));
-      measures->addAction(getAction("insert-measures"));
-      QMenu* frames = popup->addMenu(tr("Frames"));
-      frames->addAction(getAction("insert-hbox"));
-      frames->addAction(getAction("insert-vbox"));
-      frames->addAction(getAction("append-hbox"));
-      frames->addAction(getAction("append-vbox"));
-      frames->addAction(getAction("insert-textframe"));
-      frames->addAction(getAction("append-textframe"));
-      frames->addAction(getAction("insert-fretframe"));
 
-      QMenu* text = popup->addMenu(tr("Text"));
+      QMenu* frames = popup->addMenu(tr("&Frames"));
+      frames->addAction(getAction("insert-hbox"));
+	  frames->addAction(getAction("insert-vbox"));
+      frames->addAction(getAction("insert-textframe"));
+      frames->addAction(getAction("insert-fretframe"));
+	  text->addSeparator();
+	  frames->addAction(getAction("append-hbox"));
+      frames->addAction(getAction("append-vbox"));
+      frames->addAction(getAction("append-textframe"));
+
+      QMenu* text = popup->addMenu(tr("&Text"));
       text->addAction(getAction("title-text"));
       text->addAction(getAction("subtitle-text"));
       text->addAction(getAction("composer-text"));
