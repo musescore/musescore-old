@@ -963,18 +963,18 @@ QMenu* MuseScore::genCreateMenu(QWidget* parent)
       popup->addAction(getAction("instruments"));
 
       QMenu* measures = popup->addMenu(tr("&Measures"));
-	  measures->addAction(getAction("insert-measure"));
+      measures->addAction(getAction("insert-measure"));
       measures->addAction(getAction("insert-measures"));
       measures->addAction(getAction("append-measure"));
       measures->addAction(getAction("append-measures"));
 
       QMenu* frames = popup->addMenu(tr("&Frames"));
       frames->addAction(getAction("insert-hbox"));
-	  frames->addAction(getAction("insert-vbox"));
+      frames->addAction(getAction("insert-vbox"));
       frames->addAction(getAction("insert-textframe"));
       frames->addAction(getAction("insert-fretframe"));
-	  text->addSeparator();
-	  frames->addAction(getAction("append-hbox"));
+      frames->addSeparator();
+      frames->addAction(getAction("append-hbox"));
       frames->addAction(getAction("append-vbox"));
       frames->addAction(getAction("append-textframe"));
 
