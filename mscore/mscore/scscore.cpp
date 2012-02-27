@@ -48,14 +48,16 @@ static const char* const function_names_score[] = {
       "load", "save", "close",
       "setExpandRepeat", "appendPart", "appendMeasures",
       "pages", "measures", "parts", "part", "startUndo", "endUndo", "setStyle", "hasLyrics", "hasHarmonies",
-      "staves", "keysig", "duration", "pageFormat", "source", "timesig"
+      "staves", "keysig", "duration", "pageFormat", "source", "timesig",
+      "version", "fileVersion"
       };
 static const int function_lengths_score[] = {
       1, 1, 1, 1,
       1, 6, 1,
       1, 1, 1,
       0, 0, 0, 1, 0, 0, 2, 0, 0,
-      0, 1, 0, 0, 1, 1
+      0, 1, 0, 0, 1, 1,
+      0, 0
       };
 
 static const QScriptValue::PropertyFlags flags_score[] = {
@@ -87,7 +89,9 @@ static const QScriptValue::PropertyFlags flags_score[] = {
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
-      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter
       };
 
 ScriptInterface scoreInterface = {
@@ -468,7 +472,18 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                   }
 
                   break;
-
+            case 25:   //version
+                  if (argc == 0) {           
+                        return qScriptValueFromValue(context->engine(), score->programVersion());
+                        }
+                  else
+                  break;
+            case 26:   //fileVersion
+                  if (argc == 0) {           
+                        return qScriptValueFromValue(context->engine(), score->mscVersion());
+                        }
+                  else
+                  break;                  
             }
       return context->throwError(QScriptContext::TypeError,
          QString::fromLatin1("Score.%0(): bad argument count or value")
