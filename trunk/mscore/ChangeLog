@@ -1,4 +1,7 @@
 27.2 (ws)
+      - center string names in tablature staff
+      - setting cross note head group sets ghost note "X" in linked tablature staff
+      - new function: Shift+X change tablature string number to "X" (ghost note)
       - fix layout of ledger lines in case of manually tweaked top note (unison)
 25.2 (ws)
       - fix creation of linked part in "new wizard"

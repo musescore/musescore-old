@@ -164,6 +164,11 @@ Property<T>* property(Property<T>* list, const QString& name)
       virtual void* propertyDefault(P_ID) const;                                 \
       static Property<T> propertyList[];
 
+
+//---------------------------------------------------------
+//   PROPERTY_FUNCTIONS
+//---------------------------------------------------------
+
 #define PROPERTY_FUNCTIONS(T)                                                    \
                                                                                  \
 Property<T>* T::property(P_ID id) const                                          \
