@@ -1447,6 +1447,8 @@ void ScoreView::endEdit()
             lyricsEndEdit();
       else if (tp == HARMONY)
             harmonyEndEdit();
+      else if (tp == FIGURED_BASS)
+            figuredBassEndEdit();
       _score->endCmd();
       mscore->endCmd();
       _score->deselect(origEditObject);

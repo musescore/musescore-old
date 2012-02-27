@@ -625,6 +625,7 @@ if (APPLE)
       ../fonts/mscore_tab_renaiss.ttf
       ../fonts/mscore_tab_renaiss2.ttf
       ../fonts/FiguredBassMHGPL.otf
+      ../fonts/mscore-BC.ttf
      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}fonts
      )
 endif (APPLE)

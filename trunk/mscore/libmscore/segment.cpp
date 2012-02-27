@@ -449,6 +449,7 @@ void Segment::add(Element* el)
             case IMAGE:
             case TEXT:
             case TAB_DURATION_SYMBOL:
+            case FIGURED_BASS:
                   _annotations.append(el);
                   break;
             case JUMP:
@@ -572,6 +573,7 @@ void Segment::remove(Element* el)
             case IMAGE:
             case TEXT:
             case TAB_DURATION_SYMBOL:
+            case FIGURED_BASS:
                   _annotations.removeOne(el);
                   break;
 

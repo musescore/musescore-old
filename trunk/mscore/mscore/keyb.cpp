@@ -64,7 +64,7 @@ void ScoreView::editKey(QKeyEvent* ev)
       if (!editObject)
             return;
 
-      if (editObject->type() == LYRICS || editObject->type() == FIGURED_BASS) {
+      if (editObject->type() == LYRICS /*|| editObject->type() == FIGURED_BASS*/) {
             int found = false;
 		if (key == Qt::Key_Space && !(modifiers & CONTROL_MODIFIER)) {
                   // TODO: shift+tab events are filtered by qt
@@ -127,6 +127,18 @@ void ScoreView::editKey(QKeyEvent* ev)
                   return;
                   }
             }
+      if (editObject->type() == FIGURED_BASS) {
+            int found = false;
+            if (key == Qt::Key_Space && !(modifiers & CONTROL_MODIFIER)) {
+                  // TODO: shift+tab events are filtered by qt
+                  figuredBassTab(modifiers & Qt::ShiftModifier);
+                  found = true;
+                  }
+            if (found) {
+                  ev->accept();
+                  return;
+                  }
+      }
       if (!((modifiers & Qt::ShiftModifier) && (key == Qt::Key_Backtab))) {
             if (editObject->edit(this, curGrip, key, modifiers, s)) {
                   updateGrips();

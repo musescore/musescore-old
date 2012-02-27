@@ -323,8 +323,8 @@ void initStyle(MStyle* s)
       AS(TextStyle(TR("Lyrics Verse"), ff, 11, false, false, false,
          ALIGN_RIGHT | ALIGN_TOP, QPointF(), OS, QPointF(), true));
 
-      AS(TextStyle(TR("Figured Bass"), "FiguredBassMH GPL", 11, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, QPointF(0, 7), OS, QPointF(), true));
+      AS(TextStyle(TR("Figured Bass"), "MScoreBC", 9, false, false, false,
+         ALIGN_LEFT | ALIGN_TOP, QPointF(0, 7), OS, QPointF(), true));
 
 #undef MM
 #undef OA
@@ -350,7 +350,7 @@ StyleData::StyleData()
             StyleVal(ST_figuredBassDistance, Spatium(2)),
             StyleVal(ST_lyricsMinBottomDistance, Spatium(2)),
             StyleVal(ST_lyricsLineHeight, qreal(1.0)),
-            StyleVal(ST_figuredBassLineHeight, qreal(.7)),
+            StyleVal(ST_figuredBassLineHeight, qreal(1.0)),
             StyleVal(ST_systemFrameDistance, Spatium(7.0)),
             StyleVal(ST_frameSystemDistance, Spatium(7.0)),
             StyleVal(ST_minMeasureWidth, Spatium(5.0)),
