@@ -339,7 +339,7 @@ bool ChordRest::readProperties(const QDomElement& e, QList<Tuplet*>* tuplets, QL
             setDots(val.toInt());
       else if (tag == "move")
             _staffMove = val.toInt();
-      else if (tag == "Lyrics" || tag == "FiguredBass") {
+      else if (tag == "Lyrics" /*|| tag == "FiguredBass"*/) {
             Element* element = Element::name2Element(tag, score());
             element->setTrack(score()->curTrack);
             element->read(e);
@@ -903,7 +903,7 @@ void ChordRest::add(Element* e)
                         }
                   }
                   break;
-            case FIGURED_BASS:
+//            case FIGURED_BASS:
             case LYRICS:
                   {
                   Lyrics* l = static_cast<Lyrics*>(e);
@@ -940,7 +940,7 @@ void ChordRest::remove(Element* e)
                         }
                   }
                   break;
-            case FIGURED_BASS:
+//            case FIGURED_BASS:
             case LYRICS:
                   {
                   for (int i = 0; i < _lyricsList.size(); ++i) {

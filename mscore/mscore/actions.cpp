@@ -2840,7 +2840,7 @@ Shortcut MuseScore::sc[] = {
          A_CMD,
          "figured-bass",
          QT_TRANSLATE_NOOP("action","Figured Bass"),
-         Qt::SHIFT + Qt::Key_L,
+         Qt::CTRL + Qt::Key_G,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Figured Bass"),
          QT_TRANSLATE_NOOP("action","Figured Bass")

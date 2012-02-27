@@ -2176,6 +2176,7 @@ void Measure::read(const QDomElement& de, int staffIdx)
                || tag == "Marker"
                || tag == "Jump"
                || tag == "StaffState"
+               || tag == "FiguredBass"
                ) {
                   Element* el = Element::name2Element(tag, score());
                   el->setTrack(score()->curTrack);
