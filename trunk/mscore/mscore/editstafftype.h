@@ -23,6 +23,11 @@
 
 #include "ui_stafftype.h"
 
+// uncomment to use Navigator for tabulature preview; comment to use ScoreView
+//#define _USE_NAVIGATOR_PREVIEW_
+
+class Navigator;
+class ScoreView;
 class StaffType;
 class Staff;
 
@@ -36,6 +41,13 @@ class EditStaffType : public QDialog, private Ui::EditStaffType {
       Staff* staff;
       QList<StaffType*> staffTypes;
       bool modified;
+#ifdef _USE_NAVIGATOR_PREVIEW_
+      Navigator* tabPreview;
+#else
+      ScoreView* tabPreview;
+#endif
+
+      void blockTabPreviewSignals(bool block);
       void saveCurrent(QListWidgetItem*);
 
    private slots:
@@ -43,8 +55,11 @@ class EditStaffType : public QDialog, private Ui::EditStaffType {
       void createNewType();
       void nameEdited(const QString&);
       void presetTablatureClicked();
+      void on_pushFullConfig_clicked();
+      void on_pushQuickConfig_clicked();
+      void updateTabPreview();
 
-   public slots:
+public slots:
       virtual void accept();
 
    public:
