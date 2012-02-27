@@ -1297,7 +1297,6 @@ bool Score::read(const QDomElement& de)
 void Score::print(QPainter* painter, int pageNo)
       {
       _printing  = true;
-//      int offset = pageNumberOffset();
       Page* page = pages().at(pageNo);
       QRectF fr  = page->abbox();
 
@@ -1308,7 +1307,6 @@ void Score::print(QPainter* painter, int pageNo)
             if (!e->visible())
                   continue;
             painter->save();
-//            painter->translate(e->pagePos() - page->pos());
             painter->translate(e->pagePos());
             e->draw(painter);
             painter->restore();
