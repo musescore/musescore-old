@@ -22,6 +22,9 @@
 #include "libmscore/stafftype.h"
 #include "libmscore/score.h"
 #include "libmscore/staff.h"
+#include "musescore.h"
+#include "navigator.h"
+#include "scoreview.h"
 
 //---------------------------------------------------------
 //   EditStaffType
@@ -44,15 +47,53 @@ EditStaffType::EditStaffType(QWidget* parent, Staff* st)
             staffTypeList->addItem(item);
             ++idx;
             }
+
+      // tab page configuration
+      tabDetails->hide();                       // start tabulature page in simple mode
+      // load a sample tabulature score in preview
+      Score* sc = new Score(MScore::defaultStyle());
+      tabPreview = 0;
+      if(mscore->readScore(sc, QString(":/data/tab_sample.mscx"))) {
+            // add a preview widget to tabulature page
+#ifdef _USE_NAVIGATOR_PREVIEW_
+            NScrollArea* sa = new NScrollArea;
+            tabPreview = new Navigator(sa, this);
+            static_cast<QVBoxLayout*>(groupPreview->layout())->insertWidget(0, sa);
+#else
+            tabPreview = new ScoreView(this);
+            static_cast<QVBoxLayout*>(groupPreview->layout())->insertWidget(0, tabPreview);
+#endif
+            tabPreview->setScore(sc);
+            }
+
       connect(staffTypeList, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)),
          SLOT(typeChanged(QListWidgetItem*, QListWidgetItem*)));
-      connect(newTypePitched,    SIGNAL(clicked()), SLOT(createNewType()));
-      connect(newTypeTablature,  SIGNAL(clicked()), SLOT(createNewType()));
-      connect(newTypePercussion, SIGNAL(clicked()), SLOT(createNewType()));
-      connect(name, SIGNAL(textEdited(const QString&)), SLOT(nameEdited(const QString&)));
-      connect(presetTablature,   SIGNAL(clicked()), SLOT(presetTablatureClicked()));
+      connect(newTypePitched,       SIGNAL(clicked()),            SLOT(createNewType()));
+      connect(newTypeTablature,     SIGNAL(clicked()),            SLOT(createNewType()));
+      connect(newTypePercussion,    SIGNAL(clicked()),            SLOT(createNewType()));
+      connect(name,           SIGNAL(textEdited(const QString&)), SLOT(nameEdited(const QString&)));
+      connect(presetTablature,      SIGNAL(clicked()),            SLOT(presetTablatureClicked()));
+
       if (ci)
             staffTypeList->setCurrentItem(ci);
+
+      connect(lineDistance,   SIGNAL(valueChanged(double)),       SLOT(updateTabPreview()));
+      connect(showBarlines,   SIGNAL(toggled(bool)),              SLOT(updateTabPreview()));
+      connect(genClef,        SIGNAL(toggled(bool)),              SLOT(updateTabPreview()));
+      connect(genTimesig,     SIGNAL(toggled(bool)),              SLOT(updateTabPreview()));
+      connect(noteValues1,    SIGNAL(toggled(bool)),              SLOT(updateTabPreview()));
+      connect(noteValues2,    SIGNAL(toggled(bool)),              SLOT(updateTabPreview()));
+      connect(durFontName,    SIGNAL(editTextChanged(QString)),   SLOT(updateTabPreview()));
+      connect(durFontSize,    SIGNAL(valueChanged(double)),       SLOT(updateTabPreview()));
+      connect(durY,           SIGNAL(valueChanged(double)),       SLOT(updateTabPreview()));
+      connect(fretFontName,   SIGNAL(editTextChanged(QString)),   SLOT(updateTabPreview()));
+      connect(fretFontSize,   SIGNAL(valueChanged(double)),       SLOT(updateTabPreview()));
+      connect(fretY,          SIGNAL(valueChanged(double)),       SLOT(updateTabPreview()));
+      connect(linesThroughRadio, SIGNAL(toggled(bool)),           SLOT(updateTabPreview()));
+      connect(onLinesRadio,   SIGNAL(toggled(bool)),              SLOT(updateTabPreview()));
+      connect(upsideDown,     SIGNAL(toggled(bool)),              SLOT(updateTabPreview()));
+      connect(numbersRadio,   SIGNAL(toggled(bool)),              SLOT(updateTabPreview()));
+
       modified = false;
       }
 
@@ -193,6 +234,7 @@ void EditStaffType::typeChanged(QListWidgetItem* n, QListWidgetItem* o)
       StaffType* st = staffTypes[idx];
 
       // set properties common to all groups (some props appears in multiple group pages)
+      blockTabPreviewSignals(true);
       name->setText(st->name());
       lines->setValue(st->lines());
       lineDistance->setValue(st->lineDistance().val());
@@ -254,6 +296,7 @@ void EditStaffType::typeChanged(QListWidgetItem* n, QListWidgetItem* o)
                               noteValues2->setChecked(true);
                               }
                         }
+                  updateTabPreview();
                   }
                   break;
 
@@ -267,6 +310,7 @@ void EditStaffType::typeChanged(QListWidgetItem* n, QListWidgetItem* o)
                   }
                   break;
             }
+      blockTabPreviewSignals(false);
       }
 
 //---------------------------------------------------------
@@ -315,7 +359,7 @@ void EditStaffType::nameEdited(const QString& s)
       }
 
 //---------------------------------------------------------
-//   presetClicked
+//   Tabulature preset clicked
 //---------------------------------------------------------
 
 void EditStaffType::presetTablatureClicked()
@@ -324,117 +368,148 @@ void EditStaffType::presetTablatureClicked()
 
       // retrieve item currently selected in preset combo
       int idx       = presetTablatureCombo->currentIndex();
+      blockTabPreviewSignals(true);                   // do not redraw preview for every value we change!
       switch(idx)
       {
-            case 0:                             // guitar
-                  lines->setValue(6);
-                  lineDistance->setValue(1.5);
-                  genClef->setChecked(true);
-                  showBarlines->setChecked(true);
-                  genTimesig->setChecked(false);
-                  upsideDown->setChecked(false);
-                  f.setFamily("MScoreTabulatureModern");
-                  f.setPointSizeF(10);
-                  fretFontName->setCurrentFont(f);
-                  fretFontSize->setValue(10);
-                  fretY->setValue(0);
-                  numbersRadio->setChecked(true);
-                  lettersRadio->setChecked(false);
-                  onLinesRadio->setChecked(true);
-                  aboveLinesRadio->setChecked(false);
-                  linesThroughRadio->setChecked(false);
-                  linesBrokenRadio->setChecked(true);
-                  f.setFamily("MScoreTabulatureModern");
-                  f.setPointSizeF(0);
-                  durFontName->setCurrentFont(f);
-                  durFontSize->setValue(15);
-                  durY->setValue(0);
-                  noteValues0->setChecked(false);
-                  noteValues1->setChecked(false);
-                  noteValues2->setChecked(true);
-                  break;
-            case 1:                             // bass
-                  lines->setValue(4);
-                  lineDistance->setValue(1.5);
-                  genClef->setChecked(true);
-                  showBarlines->setChecked(true);
-                  genTimesig->setChecked(false);
-                  upsideDown->setChecked(false);
-                  f.setFamily("MScoreTabulatureModern");
-                  f.setPointSizeF(10);
-                  fretFontName->setCurrentFont(f);
-                  fretFontSize->setValue(10);
-                  fretY->setValue(0);
-                  numbersRadio->setChecked(true);
-                  lettersRadio->setChecked(false);
-                  onLinesRadio->setChecked(true);
-                  aboveLinesRadio->setChecked(false);
-                  linesThroughRadio->setChecked(false);
-                  linesBrokenRadio->setChecked(true);
-                  f.setFamily("MScoreTabulatureModern");
-                  f.setPointSizeF(0);
-                  durFontName->setCurrentFont(f);
-                  durFontSize->setValue(15);
-                  durY->setValue(0);
-                  noteValues0->setChecked(false);
-                  noteValues1->setChecked(false);
-                  noteValues2->setChecked(true);
-                  break;
-            case 2:                             // Italian
-                  lines->setValue(6);
-                  lineDistance->setValue(1.5);
-                  genClef->setChecked(false);
-                  showBarlines->setChecked(true);
-                  genTimesig->setChecked(true);
-                  upsideDown->setChecked(true);
-                  f.setFamily("MScoreTabulatureRenaiss");
-                  f.setPointSizeF(10);
-                  fretFontName->setCurrentFont(f);
-                  fretFontSize->setValue(10);
-                  fretY->setValue(0);
-                  numbersRadio->setChecked(true);
-                  lettersRadio->setChecked(false);
-                  onLinesRadio->setChecked(true);
-                  aboveLinesRadio->setChecked(false);
-                  linesThroughRadio->setChecked(true);
-                  linesBrokenRadio->setChecked(false);
-                  f.setFamily("MScoreTabulatureRenaiss");
-                  f.setPointSizeF(15);
-                  durFontName->setCurrentFont(f);
-                  durFontSize->setValue(15);
-                  durY->setValue(0);
-                  noteValues0->setChecked(false);
-                  noteValues1->setChecked(true);
-                  noteValues2->setChecked(false);
-                  break;
-            case 3:                             // French
-                  lines->setValue(6);
-                  lineDistance->setValue(1.5);
-                  genClef->setChecked(false);
-                  showBarlines->setChecked(true);
-                  genTimesig->setChecked(true);
-                  upsideDown->setChecked(false);
-                  f.setFamily("MScoreTabulatureRenaiss");
-                  f.setPointSizeF(10);
-                  fretFontName->setCurrentFont(f);
-                  fretFontSize->setValue(10);
-                  fretY->setValue(0);
-                  numbersRadio->setChecked(false);
-                  lettersRadio->setChecked(true);
-                  onLinesRadio->setChecked(false);
-                  aboveLinesRadio->setChecked(true);
-                  linesThroughRadio->setChecked(true);
-                  linesBrokenRadio->setChecked(false);
-                  f.setFamily("MScoreTabulatureRenaiss");
-                  f.setPointSizeF(15);
-                  durFontName->setCurrentFont(f);
-                  durFontSize->setValue(15);
-                  durY->setValue(0);
-                  noteValues0->setChecked(false);
-                  noteValues1->setChecked(true);
-                  noteValues2->setChecked(false);
-                  break;
-            }
+      case 0:                             // guitar
+      case 1:                             // bass
+            lines->setValue(idx == 0 ? 6 : 4);
+            lineDistance->setValue(1.5);
+            genClef->setChecked(true);
+            showBarlines->setChecked(true);
+            genTimesig->setChecked(false);
+            upsideDown->setChecked(false);
+            f.setFamily("MScoreTabulatureModern");
+            f.setPointSizeF(10);
+            fretFontName->setCurrentFont(f);
+            fretFontSize->setValue(10);
+            fretY->setValue(0);
+            numbersRadio->setChecked(true);
+            lettersRadio->setChecked(false);
+            onLinesRadio->setChecked(true);
+            aboveLinesRadio->setChecked(false);
+            linesThroughRadio->setChecked(false);
+            linesBrokenRadio->setChecked(true);
+            f.setFamily("MScoreTabulatureModern");
+            f.setPointSizeF(0);
+            durFontName->setCurrentFont(f);
+            durFontSize->setValue(15);
+            durY->setValue(0);
+            noteValues0->setChecked(false);
+            noteValues1->setChecked(false);
+            noteValues2->setChecked(true);
+            break;
+      case 2:                             // Italian
+      case 3:                             // French
+            lines->setValue(6);
+            lineDistance->setValue(1.5);
+            genClef->setChecked(false);
+            showBarlines->setChecked(true);
+            genTimesig->setChecked(true);
+            upsideDown->setChecked(idx == 2 ? true : false);
+            f.setFamily("MScoreTabulatureRenaiss");
+            f.setPointSizeF(10);
+            fretFontName->setCurrentFont(f);
+            fretFontSize->setValue(10);
+            fretY->setValue(0);
+            numbersRadio->setChecked(idx == 2 ? true : false);
+            lettersRadio->setChecked(idx == 2 ? false : true);
+            onLinesRadio->setChecked(idx == 2 ? true : false);
+            aboveLinesRadio->setChecked(idx == 2 ? false : true);
+            linesThroughRadio->setChecked(true);
+            linesBrokenRadio->setChecked(false);
+            f.setFamily("MScoreTabulatureRenaiss");
+            f.setPointSizeF(15);
+            durFontName->setCurrentFont(f);
+            durFontSize->setValue(15);
+            durY->setValue(0);
+            noteValues0->setChecked(false);
+            noteValues1->setChecked(true);
+            noteValues2->setChecked(false);
+            break;
+      }
+      updateTabPreview();
+      blockTabPreviewSignals(false);
+      }
+
+//---------------------------------------------------------
+//   Tabulature FullCong/QuickConfig clicked
+//---------------------------------------------------------
+
+void EditStaffType::on_pushFullConfig_clicked()
+      {
+      tabPresets->hide();
+      tabDetails->show();
+      }
+
+void EditStaffType::on_pushQuickConfig_clicked()
+      {
+      tabDetails->hide();
+      tabPresets->show();
+      }
+
+//---------------------------------------------------------
+//   Block tabulature rpreview signals
+//---------------------------------------------------------
+
+void EditStaffType::blockTabPreviewSignals(bool block)
+{
+      lineDistance->blockSignals(block);
+      showBarlines->blockSignals(block);
+      genClef->blockSignals(block);
+      genTimesig->blockSignals(block);
+      noteValues1->blockSignals(block);
+      noteValues2->blockSignals(block);
+      durFontName->blockSignals(block);
+      durFontSize->blockSignals(block);
+      durY->blockSignals(block);
+      fretFontName->blockSignals(block);
+      fretFontSize->blockSignals(block);
+      fretY->blockSignals(block);
+      linesThroughRadio->blockSignals(block);
+      onLinesRadio->blockSignals(block);
+      upsideDown->blockSignals(block);
+      numbersRadio->blockSignals(block);
+}
+
+//---------------------------------------------------------
+//   Update tabulature preview
+//---------------------------------------------------------
+
+void EditStaffType::updateTabPreview()
+      {
+      // update tabulature staff type in preview score
+      if(!tabPreview)
+            return;
+      StaffTypeTablature*  stt = static_cast<StaffTypeTablature*>(tabPreview->score()->staffTypes()[1]);
+//      stt->setName(o->text());
+//      stt->setLines(lines->value());          // do not change num of lines: sample requires 6 lines
+      stt->setLineDistance(Spatium(lineDistance->value()));
+      stt->setShowBarlines(showBarlines->isChecked());
+      stt->setGenClef(genClef->isChecked());
+      stt->setGenTimesig(genTimesig->isChecked());
+      stt->setSlashStyle(true);                 // assume no note values
+      stt->setGenDurations(false);
+      if (noteValues1->isChecked())
+            stt->setGenDurations(true);
+      if (noteValues2->isChecked())
+            stt->setSlashStyle(false);
+      stt->setDurationFontName(durFontName->currentText());
+      stt->setDurationFontSize(durFontSize->value());
+      stt->setDurationFontUserY(durY->value());
+      stt->setFretFontName(fretFontName->currentText());
+      stt->setFretFontSize(fretFontSize->value());
+      stt->setFretFontUserY(fretY->value());
+      stt->setLinesThrough(linesThroughRadio->isChecked());
+      stt->setOnLines(onLinesRadio->isChecked());
+      stt->setUpsideDown(upsideDown->isChecked());
+      stt->setUseNumbers(numbersRadio->isChecked());
+
+      tabPreview->score()->doLayout();
+#ifdef _USE_NAVIGATOR_PREVIEW_
+      tabPreview->layoutChanged();
+#endif
+      tabPreview->updateAll();
       }
 
 //---------------------------------------------------------
@@ -448,5 +523,4 @@ void EditStaffType::accept()
             saveCurrent(item);
       QDialog::accept();
       }
-
 
