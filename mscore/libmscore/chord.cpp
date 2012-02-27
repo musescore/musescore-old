@@ -1380,13 +1380,9 @@ void Chord::layout()
                         lx = x;
                   }
 
-            //---------------------------------------------------
-            //    create ledger lines for notes moved to
-            //    upper staff
-            //---------------------------------------------------
+            qreal x  = upnote->ipos().x();
 
-            qreal x  = upnote->pos().x();
-            if ((up() && !upnote->mirror()) || (!up() && upnote->mirror()))
+            if (up() ^ upnote->mirror())
                   x += headWidth;
 
             addLedgerLines(x, staffMove());

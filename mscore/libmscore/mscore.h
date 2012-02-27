@@ -210,7 +210,8 @@ enum NoteHeadGroup {
       HEAD_SLASH, HEAD_XCIRCLE, HEAD_DO, HEAD_RE, HEAD_FA, HEAD_LA, HEAD_TI,
       HEAD_SOL,
       HEAD_BREVIS_ALT,
-      HEAD_GROUPS
+      HEAD_GROUPS,
+      HEAD_INVALID = -1
       };
 
 static const int HEAD_TYPES = 4;
@@ -541,8 +542,8 @@ struct NoteVal {
       int pitch;
       int fret;
       int string;
-      int headGroup;
-      NoteVal() { pitch = -1; fret = -1; string = -1; headGroup = 0; }
+      NoteHeadGroup headGroup;
+      NoteVal() { pitch = -1; fret = -1; string = -1; headGroup = HEAD_NORMAL; }
       };
 
 // Icon() subtypes

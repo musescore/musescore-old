@@ -211,7 +211,7 @@ void EditDrumset::itemChanged(QTreeWidgetItem* current, QTreeWidgetItem* previou
       if (previous) {
             int pitch = previous->data(0, Qt::UserRole).toInt();
             nDrumset.drum(pitch).name          = name->text();
-            nDrumset.drum(pitch).notehead      = noteHead->currentIndex() - 1;
+            nDrumset.drum(pitch).notehead      = NoteHeadGroup(noteHead->currentIndex() - 1);
             nDrumset.drum(pitch).line          = staffLine->value();
             nDrumset.drum(pitch).voice         = voice->value() - 1;
             if (shortcut->currentIndex() == 7)
@@ -258,7 +258,7 @@ void EditDrumset::valueChanged()
       {
       int pitch = pitchList->currentItem()->data(COL_PITCH, Qt::UserRole).toInt();
       nDrumset.drum(pitch).name          = name->text();
-      nDrumset.drum(pitch).notehead      = noteHead->currentIndex() - 1;
+      nDrumset.drum(pitch).notehead      = NoteHeadGroup(noteHead->currentIndex() - 1);
       nDrumset.drum(pitch).line          = staffLine->value();
       nDrumset.drum(pitch).voice         = voice->value() - 1;
       nDrumset.drum(pitch).stemDirection = Direction(stemDirection->currentIndex());
@@ -283,7 +283,7 @@ void EditDrumset::updateExample()
             return;
             }
       int line      = nDrumset.line(pitch);
-      int noteHead  = nDrumset.noteHead(pitch);
+      NoteHeadGroup noteHead = nDrumset.noteHead(pitch);
       int voice     = nDrumset.voice(pitch);
       Direction dir = nDrumset.stemDirection(pitch);
       bool up;

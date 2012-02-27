@@ -75,7 +75,7 @@ void Drumset::load(const QDomElement& de)
             int i = val.toInt(&isNum);
 
             if (tag == "head")
-                  _drum[pitch].notehead = i;
+                  _drum[pitch].notehead = NoteHeadGroup(i);
             else if (tag == "line")
                   _drum[pitch].line = i;
             else if (tag == "voice")
@@ -99,7 +99,7 @@ void Drumset::clear()
       {
       for (int i = 0; i < 128; ++i) {
             _drum[i].name = "";
-            _drum[i].notehead = -1;
+            _drum[i].notehead = HEAD_INVALID;
             _drum[i].shortcut = 0;
             }
       }
@@ -147,7 +147,7 @@ void initDrumset()
       {
       smDrumset = new Drumset;
       for (int i = 0; i < 128; ++i) {
-            smDrumset->drum(i).notehead = -1;   // invalid entry
+            smDrumset->drum(i).notehead = HEAD_INVALID;
             smDrumset->drum(i).line     = 0;
             smDrumset->drum(i).shortcut = 0;
             smDrumset->drum(i).voice    = 0;

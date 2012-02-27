@@ -68,7 +68,7 @@ class Note : public Element {
       int _line;              ///< y-Position; 0 - top line.
       int _fret;              ///< for tablature view
       int _string;
-      int _headGroup;
+      NoteHeadGroup _headGroup;
       mutable int _tpc;       ///< tonal pitch class
       mutable int _pitch;     ///< Note pitch as midi value (0 - 127).
       int  _ppitch;           ///< played pitch (honor voltas etc.); cached value
@@ -150,9 +150,9 @@ class Note : public Element {
       qreal headWidth() const;
       qreal headHeight() const;
       int noteHead() const;
-      int headGroup() const            { return _headGroup; }
+      NoteHeadGroup headGroup() const  { return _headGroup; }
       NoteHeadType headType() const    { return _headType;  }
-      void setHeadGroup(int val);
+      void setHeadGroup(NoteHeadGroup val);
       void setHeadType(NoteHeadType t) { _headType = t;     }
 
       int pitch() const               { return _pitch;    }

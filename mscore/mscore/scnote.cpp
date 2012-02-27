@@ -200,9 +200,9 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                       if(v < HEAD_GROUPS) {
                             Score* score = note->score();
                             if (score)
-                                  score->undo(new ChangeNoteHead(note, v, note->headType()));
+                                  score->undoChangeProperty(note, P_HEAD_GROUP, v);
                             else
-                                  note->setHeadGroup(v);
+                                  note->setHeadGroup(NoteHeadGroup(v));
                             }
                       return context->engine()->undefinedValue();
                       }
