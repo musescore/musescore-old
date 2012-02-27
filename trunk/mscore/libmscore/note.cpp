@@ -47,7 +47,6 @@
 #include "harmony.h"
 #include "fingering.h"
 #include "bend.h"
-#include "bend.h"
 #include "noteevent.h"
 #include "mscore.h"
 #include "accidental.h"
@@ -192,7 +191,6 @@ Note::Note(Score* s)
 
       _offTimeOffset     = 0;
       _offTimeUserOffset = 0;
-      _bend              = 0;
       _dots[0]           = 0;
       _dots[1]           = 0;
       _dots[2]           = 0;
@@ -206,7 +204,6 @@ Note::~Note()
       foreach(NoteEvent* e, _playEvents)
             delete e;
       delete _tieFor;
-      delete _bend;
       delete _dots[0];
       delete _dots[1];
       delete _dots[2];
@@ -251,9 +248,6 @@ Note::Note(const Note& n)
 
       _tieFor   = n._tieFor;
       _tieBack  = n._tieBack;
-      _bend     = 0;
-      if (n._bend)
-            add(new Bend(*n._bend));
       for (int i = 0; i < 3; ++i) {
             _dots[i] = 0;
             if (n._dots[i])
@@ -398,6 +392,7 @@ void Note::add(Element* e)
             case IMAGE:
             case FINGERING:
             case TEXT:
+            case BEND:
                   _el.append(e);
                   break;
             case TIE:
@@ -416,9 +411,6 @@ void Note::add(Element* e)
                   break;
             case ACCIDENTAL:
                   _accidental = static_cast<Accidental*>(e);
-                  break;
-            case BEND:
-                  _bend = static_cast<Bend*>(e);
                   break;
             default:
                   qDebug("Note::add() not impl. %s\n", e->name());
@@ -446,6 +438,7 @@ void Note::remove(Element* e)
             case SYMBOL:
             case IMAGE:
             case FINGERING:
+            case BEND:
                   if (!_el.remove(e))
                         qDebug("Note::remove(): cannot find %s\n", e->name());
                   break;
@@ -465,10 +458,6 @@ void Note::remove(Element* e)
 
             case ACCIDENTAL:
                   _accidental = 0;
-                  break;
-
-            case BEND:
-                  _bend = 0;
                   break;
 
             default:
@@ -656,8 +645,6 @@ void Note::write(Xml& xml) const
                   e->write(xml);
             xml.etag();
             }
-      if (_bend)
-            _bend->write(xml);
       WRITE_PROPERTIES(Note)
       _pitch = rpitch;
       _tpc   = rtpc;
@@ -820,10 +807,10 @@ void Note::read(const QDomElement& de)
             else if (tag == "move")             // obsolete
                   chord()->setStaffMove(val.toInt());
             else if (tag == "Bend") {
-                  _bend = new Bend(score());
-                  _bend->setTrack(track());
-                  _bend->read(e);
-                  _bend->setParent(this);
+                  Bend* b = new Bend(score());
+                  b->setTrack(track());
+                  b->read(e);
+                  add(b);
                   }
             else if (tag == "NoteDot") {
                   NoteDot* dot = new NoteDot(score());
@@ -1229,16 +1216,6 @@ void Note::layout()
             setbbox(symbols[score()->symIdx()][noteHead()].bbox(magS()));
       if (parent() == 0)
             return;
-      foreach (Element* e, _el) {
-            if (!score()->tagIsValid(e->tag()))
-                  continue;
-            e->setMag(mag());
-            e->layout();
-            if (e->type() == SYMBOL && static_cast<Symbol*>(e)->sym() == rightparenSym)
-                  e->setPos(headWidth(), 0.0);
-            }
-      if (_bend)
-            _bend->layout();
 
       // for tablature, dots are hidden: do not spend time with them!
       if (!useTablature) {
@@ -1282,6 +1259,14 @@ void Note::layout()
                         _dots[i]->adjustReadPos();
                         }
                   }
+            }
+      foreach (Element* e, _el) {
+            if (!score()->tagIsValid(e->tag()))
+                  continue;
+            e->setMag(mag());
+            e->layout();
+            if (e->type() == SYMBOL && static_cast<Symbol*>(e)->sym() == rightparenSym)
+                  e->setPos(headWidth(), 0.0);
             }
       }
 
@@ -1417,8 +1402,6 @@ void Note::scanElements(void* data, void (*func)(void*, Element*), bool all)
             }
       if (!dragMode && _accidental)
             func(data, _accidental);
-      if (_bend)
-            func(data, _bend);
       if (chord()) {
             for (int i = 0; i < chord()->dots(); ++i) {
                   if (_dots[i])
@@ -1443,8 +1426,6 @@ void Note::setTrack(int val)
             e->setTrack(val);
       if (_accidental)
             _accidental->setTrack(val);
-      if (_bend)
-            _bend->setTrack(val);
       if (!chord())     // if note is dragged with shift+ctrl
             return;
       for (int i = 0; i < chord()->dots(); ++i) {
@@ -1473,8 +1454,8 @@ void Note::setMag(qreal val)
       Element::setMag(val);
       if (_accidental)
             _accidental->setMag(val);
-      if (_bend)
-            _bend->setMag(val);
+      foreach(Element* e, _el)
+            e->setMag(val);
       }
 
 //---------------------------------------------------------

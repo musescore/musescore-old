@@ -1526,7 +1526,7 @@ void ScoreView::moveCursor(int tick)
 
       qreal mag = _spatium / (DPI * SPATIUM20);
       double w  = _spatium * 2.0 + symbols[score()->symIdx()][quartheadSym].width(mag);
-      double h  = 10 * _spatium;
+      double h  = 6 * _spatium;
       //
       // set cursor height for whole system
       //
@@ -1535,7 +1535,7 @@ void ScoreView::moveCursor(int tick)
             SysStaff* ss = system->staff(i);
             if (!ss->show())
                   continue;
-            y2 = ss->y();
+            y2 = ss->y() + ss->bbox().height();
             }
       h += y2;
       x -= _spatium;
