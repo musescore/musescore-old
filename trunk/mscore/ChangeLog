@@ -1,3 +1,5 @@
+27.2 (ws)
+      - fix layout of ledger lines in case of manually tweaked top note (unison)
 25.2 (ws)
       - fix creation of linked part in "new wizard"
       - fix bar line creation of additional staff for part created in "new wizard"

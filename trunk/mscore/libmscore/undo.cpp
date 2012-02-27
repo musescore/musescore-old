@@ -1324,38 +1324,6 @@ const char* RemoveElement::name() const
       }
 #endif
 
-//---------------------------------------------------------
-//   ChangeNoteHead
-//---------------------------------------------------------
-
-ChangeNoteHead::ChangeNoteHead(Note* n, int g, NoteHeadType t)
-   : UndoCommand(), note(n), group(g), type(t)
-      {
-      }
-
-//---------------------------------------------------------
-//   flip
-//---------------------------------------------------------
-
-void ChangeNoteHead::flip()
-      {
-      int headGroup = note->headGroup();
-      NoteHeadType t = note->headType();
-      QRectF r = note->canvasBoundingRect();
-      note->setHeadGroup(group);
-      note->setHeadType(type);
-      if(note->noteHead() != -1){
-        r |= note->canvasBoundingRect();
-        group = headGroup;
-        type  = t;
-        note->score()->addRefresh(r);
-        }
-      else{
-          note->setHeadGroup(headGroup);
-          note->setHeadType(t);
-          }
-//      note->score()->end();
-      }
 
 //---------------------------------------------------------
 //   ChangeConcertPitch

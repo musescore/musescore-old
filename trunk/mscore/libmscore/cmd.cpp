@@ -397,7 +397,7 @@ qDebug("add pitch %d %d", pitch, addFlag);
 
       // insert note
       Direction stemDirection = AUTO;
-      int headGroup           = 0;
+      NoteHeadGroup headGroup = HEAD_NORMAL;
       int track               = _is.track();
       if (_is.drumNote() != -1) {
             pitch         = _is.drumNote();
@@ -1245,7 +1245,7 @@ MeasureBase* Score::appendMeasure(ElementType type)
 //   appendMeasures
 //---------------------------------------------------------
 
-void Score::appendMeasures(int n, ElementType type)
+void Score::appendMeasures(int /*n*/, ElementType /*type*/)
       {
 #if 0
       bool createEndBar    = false;

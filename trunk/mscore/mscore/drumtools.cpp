@@ -123,7 +123,7 @@ void DrumTools::setDrumset(Score* s, Staff* st, Drumset* ds)
                   continue;
             bool up;
             int line      = ds->line(pitch);
-            int noteHead  = ds->noteHead(pitch);
+            NoteHeadGroup noteHead  = ds->noteHead(pitch);
             int voice     = ds->voice(pitch);
             Direction dir = ds->stemDirection(pitch);
             if (dir == UP)

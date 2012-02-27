@@ -177,7 +177,7 @@ Note::Note(Score* s)
       _tieFor            = 0;
       _tieBack           = 0;
       _tpc               = INVALID_TPC;
-      _headGroup         = 0;
+      _headGroup         = HEAD_NORMAL;
       _headType          = HEAD_AUTO;
 
       _hidden            = false;
@@ -1037,21 +1037,21 @@ Element* Note::drop(const DropData& data)
             case NOTEHEAD:
                   {
                   Symbol* s = (Symbol*)e;
-                  int group = -1;
+                  NoteHeadGroup group = HEAD_GROUPS;
 
                   for (int i = 0; i < HEAD_GROUPS; ++i) {
                         if (noteHeads[0][i][1] == s->sym() || noteHeads[0][i][3] == s->sym()) {
-                              group = i;
+                              group = (NoteHeadGroup)i;
                               break;
                               }
                         }
-                  if (group == -1) {
+                  if (group == HEAD_GROUPS) {
                         qDebug("unknown note head\n");
-                        group = 0;
+                        group = HEAD_NORMAL;
                         }
                   delete s;
                   if (group != _headGroup) {
-                        score()->undo(new ChangeNoteHead(this, group, _headType));
+                        score()->undoChangeProperty(this, P_HEAD_GROUP, group);
                         score()->select(this);
                         }
                   }
@@ -1482,10 +1482,13 @@ void Note::setString(int val)
 //   setHeadGroup
 //---------------------------------------------------------
 
-void Note::setHeadGroup(int val)
+void Note::setHeadGroup(NoteHeadGroup val)
       {
       Q_ASSERT(val >= 0 && val < HEAD_GROUPS);
       _headGroup = val;
+      bool tablature = staff() && staff()->useTablature();
+      if (_headGroup == HEAD_CROSS && tablature)
+            setGhost(true);
       }
 
 //---------------------------------------------------------

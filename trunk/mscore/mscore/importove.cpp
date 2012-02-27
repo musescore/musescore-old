@@ -460,8 +460,8 @@ ClefType OveClefToClef(OVE::ClefType type){
 	return clef;
 }
 
-int getHeadGroup(OVE::NoteHeadType type) {
-    int headGroup = HEAD_NORMAL;
+NoteHeadGroup getHeadGroup(OVE::NoteHeadType type) {
+    NoteHeadGroup headGroup = HEAD_NORMAL;
 	switch (type) {
 	case OVE::NoteHead_Standard: {
 		headGroup = HEAD_NORMAL;

@@ -756,23 +756,6 @@ class RemoveElement : public UndoCommand {
       };
 
 //---------------------------------------------------------
-//   ChangeNoteHead
-//---------------------------------------------------------
-
-class ChangeNoteHead : public UndoCommand {
-      Note* note;
-      int group;
-      NoteHeadType type;
-      void flip();
-
-   public:
-      ChangeNoteHead(Note* note, int group, NoteHeadType type);
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      UNDO_NAME("ChangeNoteHead");
-      };
-
-//---------------------------------------------------------
 //   ChangeConcertPitch
 //---------------------------------------------------------
 
