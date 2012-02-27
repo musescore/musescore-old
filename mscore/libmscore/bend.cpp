@@ -71,7 +71,6 @@ void Bend::layout()
       QFontMetricsF fm(f);
 
       int n    = _points.size();
-//      int pt   = 0;
       qreal x = noteWidth;
       qreal y = -_spatium * .8;
       qreal x2, y2;
@@ -167,9 +166,8 @@ void Bend::draw(QPainter* painter) const
       painter->setFont(f);
 
       int n    = _points.size();
-//      int pt   = 0;
-      qreal x = noteWidth;
-      qreal y = -_spatium * .8;
+      qreal x  = noteWidth;
+      qreal y  = -_spatium * .8;
       qreal x2, y2;
 
       qreal aw = _spatium * .5;
@@ -221,7 +219,9 @@ void Bend::draw(QPainter* painter) const
 
                   int idx = (_points[pt+1].pitch + 12)/25;
                   const char* l = label[idx];
-                  painter->drawText(QRectF(x2, y2, .0, .0), Qt::AlignHCenter|Qt::TextDontClip, QString(l));
+                  qreal ty = y2; // - _spatium;
+                  painter->drawText(QRectF(x2, ty, .0, .0),
+                     Qt::AlignHCenter | Qt::AlignBottom | Qt::TextDontClip, QString(l));
                   }
             else {
                   // down

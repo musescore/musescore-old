@@ -250,7 +250,6 @@ class ShowNoteWidget : public ShowElementBase {
       void tieForClicked();
       void tieBackClicked();
       void accidentalClicked();
-      void bendClicked();
       void tpcChanged(int);
       void dot1Clicked();
       void dot2Clicked();

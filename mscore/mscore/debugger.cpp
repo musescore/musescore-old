@@ -1042,7 +1042,6 @@ ShowNoteWidget::ShowNoteWidget()
       connect(nb.tieFor,     SIGNAL(clicked()), SLOT(tieForClicked()));
       connect(nb.tieBack,    SIGNAL(clicked()), SLOT(tieBackClicked()));
       connect(nb.accidental, SIGNAL(clicked()), SLOT(accidentalClicked()));
-      connect(nb.bend,       SIGNAL(clicked()), SLOT(bendClicked()));
       connect(nb.fingering,  SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
       connect(nb.tpc,        SIGNAL(valueChanged(int)), SLOT(tpcChanged(int)));
       connect(nb.dot1,       SIGNAL(clicked()), SLOT(dot1Clicked()));
@@ -1074,7 +1073,6 @@ void ShowNoteWidget::setElement(Element* e)
       nb.tieFor->setEnabled(note->tieFor());
       nb.tieBack->setEnabled(note->tieBack());
       nb.accidental->setEnabled(note->accidental());
-      nb.bend->setEnabled(note->bend());
       nb.dot1->setEnabled(note->dot(0));
       nb.dot2->setEnabled(note->dot(1));
       nb.dot3->setEnabled(note->dot(2));
@@ -1155,15 +1153,6 @@ void ShowNoteWidget::tieBackClicked()
 void ShowNoteWidget::accidentalClicked()
       {
       emit elementChanged(((Note*)element())->accidental());
-      }
-
-//---------------------------------------------------------
-//   bendClicked
-//---------------------------------------------------------
-
-void ShowNoteWidget::bendClicked()
-      {
-      emit elementChanged(((Note*)element())->bend());
       }
 
 //---------------------------------------------------------
