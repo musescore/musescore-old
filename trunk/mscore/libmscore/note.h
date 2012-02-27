@@ -141,6 +141,7 @@ class Note : public Element {
       QPointF pagePos() const;      ///< position in page coordinates
       QPointF canvasPos() const;    ///< position in page coordinates
       void layout();
+      void layout2();
       void layout10(AccidentalState*);
       void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
       void setTrack(int val);
@@ -246,7 +247,6 @@ class Note : public Element {
       int offTimeUserOffset() const    { return _offTimeUserOffset; }
       void setOffTimeUserOffset(int v) { _offTimeUserOffset = v;    }
 
-//      Bend* bend() const               { return _bend; }
       void setBend(Bend* b)            { _bend = b;    }
       int customizeVelocity(int velo) const;
       NoteDot* dot(int n)              { return _dots[n];           }

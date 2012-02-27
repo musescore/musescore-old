@@ -1082,6 +1082,7 @@ void ShowNoteWidget::setElement(Element* e)
       nb.onTimeUserOffset->setValue(note->onTimeUserOffset());
       nb.offTimeUserOffset->setValue(note->offTimeUserOffset());
 
+      note->el()->clear();
       foreach(Element* text, *note->el()) {
             QString s;
             s.setNum(long(text), 16);

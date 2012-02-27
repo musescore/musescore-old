@@ -1,4 +1,5 @@
 27.2 (ws)
+      - fix layout of bend symbol
       - center string names in tablature staff
       - setting cross note head group sets ghost note "X" in linked tablature staff
       - new function: Shift+X change tablature string number to "X" (ghost note)

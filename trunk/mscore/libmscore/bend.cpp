@@ -66,8 +66,6 @@ void Bend::layout()
             }
       QRectF bb;
 
-printf("bend: %p pos %f %f\n", this, notePos.x(), notePos.y());
-
       const TextStyle* st = &score()->textStyle(TEXT_STYLE_BENCH);
       QFont f = st->fontPx(_spatium);
       QFontMetricsF fm(f);

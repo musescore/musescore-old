@@ -576,7 +576,6 @@ void Note::draw(QPainter* painter) const
                         }
                   painter->setPen(curColor());
                   painter->drawText(QPointF(bbox().x(), tab->fretFontYOffset()), s);
-                  // painter->drawText(bb, Qt::AlignHCenter | Qt::AlignVCenter, s);
                   painter->scale(imag, imag);
                   }
             else {                        // if not tablature
@@ -1276,6 +1275,18 @@ void Note::layout()
                         }
                   }
             }
+// layout2();
+      }
+
+//---------------------------------------------------------
+//   layout2
+//    called after final position of note is set
+//---------------------------------------------------------
+
+void Note::layout2()
+      {
+      adjustReadPos();
+
       foreach (Element* e, _el) {
             if (!score()->tagIsValid(e->tag()))
                   continue;

@@ -1277,6 +1277,7 @@ void Chord::layout()
             foreach(Note* note, _notes) {
                   note->layout();
                   note->setPos(0.0, _spatium * (tab->upsideDown() ? tab->lines()-note->string()-1 : note->string()) * lineDist);
+                  note->layout2();
                   }
             // if tab type is stemless or duration longer than crochet
             // remove stems
@@ -1372,7 +1373,7 @@ void Chord::layout()
                         x += (headWidth - note->headWidth());
 
                   note->setPos(x, (note->line() + stepOffset) * stepDistance);
-                  note->adjustReadPos();
+                  note->layout2();
                   Accidental* accidental = note->accidental();
                   if (accidental)
                         x = accidental->x() + note->x() - minNoteDistance;
