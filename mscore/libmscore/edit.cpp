@@ -1721,7 +1721,7 @@ void Score::nextInputPos(ChordRest* cr, bool doSelect)
 //   cmdSplitMeasure
 //---------------------------------------------------------
 
-void Score::cmdSplitMeasure(ChordRest* cr)
+void Score::cmdSplitMeasure(ChordRest* /*cr*/)
       {
 #if 0 // TODO: cmdSplitMeasure
       Segment* segment = cr->segment();
@@ -1848,7 +1848,7 @@ void Score::cmdSplitMeasure(ChordRest* cr)
 //   cmdJoinMeasure
 //---------------------------------------------------------
 
-void Score::cmdJoinMeasure(Measure* m1, Measure* m2)
+void Score::cmdJoinMeasure(Measure* /*m1*/, Measure* /*m2*/)
       {
 #if 0 // TODO cmdJoinMeasure
 

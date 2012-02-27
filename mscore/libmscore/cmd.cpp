@@ -2365,12 +2365,16 @@ void Score::cmdMirrorNoteHead()
       foreach(Element* e, el) {
             if (e->type() == NOTE) {
                   Note* note = static_cast<Note*>(e);
-                  DirectionH d = note->userMirror();
-                  if (d == DH_AUTO)
-                        d = note->chord()->up() ? DH_RIGHT : DH_LEFT;
-                  else
-                        d = d == DH_LEFT ? DH_RIGHT : DH_LEFT;
-                  undoChangeUserMirror(note, d);
+                  if (note->staff() && note->staff()->useTablature())
+                        note->score()->undoChangeProperty(e, P_GHOST, true);
+                  else {
+                        DirectionH d = note->userMirror();
+                        if (d == DH_AUTO)
+                              d = note->chord()->up() ? DH_RIGHT : DH_LEFT;
+                        else
+                              d = d == DH_LEFT ? DH_RIGHT : DH_LEFT;
+                        undoChangeUserMirror(note, d);
+                        }
                   }
             }
       }

@@ -554,12 +554,13 @@ void Note::draw(QPainter* painter) const
                   // when using letters, "+(_fret > 8)" skips 'j'
                   QString s = _ghost ? "X" :
                           ( tab->useNumbers() ? QString::number(_fret) : QString('a' + _fret + (_fret > 8)) );
+
+                  qreal currSpatium = spatium();
+                  qreal d  = currSpatium * .2;
+                  QRectF bb = bbox().adjusted(-d, 2*d, d, -2*d);
+
                   // draw background, if required
                   if (!tab->linesThrough() || fretConflict()) {
-                        qreal currSpatium = spatium();
-                        qreal d  = currSpatium * .2;
-                        QRectF bb = bbox().adjusted(-d, d, d, -d);
-
                         // we do not know which viewer did this draw() call
                         // so update all:
                         foreach(MuseScoreView* view, score()->getViewer())
@@ -575,6 +576,7 @@ void Note::draw(QPainter* painter) const
                         }
                   painter->setPen(curColor());
                   painter->drawText(QPointF(bbox().x(), tab->fretFontYOffset()), s);
+                  // painter->drawText(bb, Qt::AlignHCenter | Qt::AlignVCenter, s);
                   painter->scale(imag, imag);
                   }
             else {                        // if not tablature
@@ -1037,7 +1039,7 @@ Element* Note::drop(const DropData& data)
             case NOTEHEAD:
                   {
                   Symbol* s = (Symbol*)e;
-                  NoteHeadGroup group = HEAD_GROUPS;
+                  NoteHeadGroup group = HEAD_INVALID;
 
                   for (int i = 0; i < HEAD_GROUPS; ++i) {
                         if (noteHeads[0][i][1] == s->sym() || noteHeads[0][i][3] == s->sym()) {
@@ -1045,13 +1047,25 @@ Element* Note::drop(const DropData& data)
                               break;
                               }
                         }
-                  if (group == HEAD_GROUPS) {
+                  if (group == HEAD_INVALID) {
                         qDebug("unknown note head\n");
                         group = HEAD_NORMAL;
                         }
                   delete s;
+
                   if (group != _headGroup) {
-                        score()->undoChangeProperty(this, P_HEAD_GROUP, group);
+                        if (links()) {
+                              foreach(Element* e, *links()) {
+                                    e->score()->undoChangeProperty(e, P_HEAD_GROUP, group);
+                                    Note* note = static_cast<Note*>(e);
+                                    if (note->staff() && note->staff()->useTablature()
+                                       && group == HEAD_CROSS) {
+                                          e->score()->undoChangeProperty(e, P_GHOST, true);
+                                          }
+                                    }
+                              }
+                        else
+                              score()->undoChangeProperty(this, P_HEAD_GROUP, group);
                         score()->select(this);
                         }
                   }
@@ -1209,8 +1223,10 @@ void Note::layout()
             // when using letters, "+(_fret > 8)" skips 'j'
             QString s = _ghost ? "X" :
                         ( tab->useNumbers() ? QString::number(_fret) : QString('a' + _fret + (_fret > 8)) );
-            qreal w = fm.width(s) * mags;
-            setbbox(QRectF(0.0, tab->fretBoxY() * mags, w, tab->fretBoxH() * mags));
+            qreal w  = fm.width(s) * mags;
+            // center string name to note head
+            qreal xo = (headWidth() - w) * .5;
+            setbbox(QRectF(xo, tab->fretBoxY() * mags, w, tab->fretBoxH() * mags));
             }
       else
             setbbox(symbols[score()->symIdx()][noteHead()].bbox(magS()));
@@ -1486,9 +1502,6 @@ void Note::setHeadGroup(NoteHeadGroup val)
       {
       Q_ASSERT(val >= 0 && val < HEAD_GROUPS);
       _headGroup = val;
-      bool tablature = staff() && staff()->useTablature();
-      if (_headGroup == HEAD_CROSS && tablature)
-            setGhost(true);
       }
 
 //---------------------------------------------------------

@@ -54,23 +54,25 @@ void Bend::layout()
                   }
             }
 
-      _lw        = _spatium * 0.1;
+      _lw        = _spatium * 0.15;
       Note* note = static_cast<Note*>(parent());
       if (note == 0) {
             noteWidth = 0.0;
             notePos = QPointF();
             }
       else {
-            notePos = note->pos();
+            notePos   = note->pos();
             noteWidth = note->width();
             }
       QRectF bb;
+
+printf("bend: %p pos %f %f\n", this, notePos.x(), notePos.y());
 
       const TextStyle* st = &score()->textStyle(TEXT_STYLE_BENCH);
       QFont f = st->fontPx(_spatium);
       QFontMetricsF fm(f);
 
-      int n    = _points.size();
+      int n   = _points.size();
       qreal x = noteWidth;
       qreal y = -_spatium * .8;
       qreal x2, y2;
