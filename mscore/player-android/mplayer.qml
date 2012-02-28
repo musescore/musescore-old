@@ -13,7 +13,7 @@
 
 import QtQuick 1.1
 import MuseScore 1.0
-import Qt.labs.gestures 1.0
+//import Qt.labs.gestures 1.0
 import "mobile" as Mobile
 
 Item {

@@ -43,6 +43,7 @@ RESOURCES += mplayer.qrc
 
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += main.cpp                              \
+    ../libmscore/audio.cpp                       \
     ../libmscore/accidental.cpp                  \
     ../libmscore/arpeggio.cpp                    \
     ../libmscore/articulation.cpp                \
@@ -68,6 +69,7 @@ SOURCES += main.cpp                              \
     ../libmscore/edit.cpp                        \
     ../libmscore/element.cpp                     \
     ../libmscore/elementlayout.cpp               \
+    ../libmscore/elementmap.cpp                  \
     ../libmscore/excerpt.cpp                     \
     ../libmscore/fifo.cpp                        \
     ../libmscore/fingering.cpp                   \
@@ -79,6 +81,7 @@ SOURCES += main.cpp                              \
     ../libmscore/hook.cpp                        \
     ../libmscore/icon.cpp                        \
     ../libmscore/image.cpp                       \
+    ../libmscore/imageStore.cpp                  \
     ../libmscore/iname.cpp                       \
     ../libmscore/input.cpp                       \
     ../libmscore/instrchange.cpp                 \
@@ -98,6 +101,7 @@ SOURCES += main.cpp                              \
     ../libmscore/mscore.cpp                      \
     ../libmscore/navigate.cpp                    \
     ../libmscore/note.cpp                        \
+    ../libmscore/notedot.cpp                     \
     ../libmscore/noteevent.cpp                   \
     ../libmscore/ossia.cpp                       \
     ../libmscore/ottava.cpp                      \
@@ -107,6 +111,8 @@ SOURCES += main.cpp                              \
     ../libmscore/pitch.cpp                       \
     ../libmscore/pitchspelling.cpp               \
     ../libmscore/pos.cpp                         \
+    ../libmscore/property.cpp                    \
+    ../libmscore/range.cpp                       \
     ../libmscore/rendermidi.cpp                  \
     ../libmscore/repeat.cpp                      \
     ../libmscore/repeatlist.cpp                  \
@@ -138,6 +144,7 @@ SOURCES += main.cpp                              \
     ../libmscore/textframe.cpp                   \
     ../libmscore/textline.cpp                    \
     ../libmscore/timesig.cpp                     \
+    ../libmscore/transpose.cpp                   \
     ../libmscore/tremolobar.cpp                  \
     ../libmscore/tremolo.cpp                     \
     ../libmscore/trill.cpp                       \
@@ -193,9 +200,35 @@ OTHER_FILES += \
     android/res/drawable-hdpi/icon.png \
     android/res/drawable-mdpi/icon.png \
     android/AndroidManifest.xml \
-    mplayer.qml
+    mplayer.qml \
+    android/version.xml \
+    android/res/values-ro/strings.xml \
+    android/res/values-es/strings.xml \
+    android/res/values-fa/strings.xml \
+    android/res/values-et/strings.xml \
+    android/res/values-nl/strings.xml \
+    android/res/values-zh-rCN/strings.xml \
+    android/res/values-ms/strings.xml \
+    android/res/values-pt-rBR/strings.xml \
+    android/res/values-pl/strings.xml \
+    android/res/layout/splash.xml \
+    android/res/values-nb/strings.xml \
+    android/res/values-ru/strings.xml \
+    android/res/values-it/strings.xml \
+    android/res/values-de/strings.xml \
+    android/res/values-el/strings.xml \
+    android/res/values-zh-rTW/strings.xml \
+    android/res/values-id/strings.xml \
+    android/res/values-rs/strings.xml \
+    android/res/values-fr/strings.xml \
+    android/res/values-ja/strings.xml \
+    android/src/org/kde/necessitas/ministro/IMinistro.aidl \
+    android/src/org/kde/necessitas/ministro/IMinistroCallback.aidl \
+    android/src/org/kde/necessitas/origo/QtApplication.java \
+    android/src/org/kde/necessitas/origo/QtActivity.java
 
 HEADERS += \
     scoreview.h \
     seq.h
+
 
