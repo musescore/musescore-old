@@ -278,7 +278,7 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
 int Palette::idx(const QPoint& p) const
       {
       int rightBorder = width() % hgrid;
-      int hhgrid = hgrid + (rightBorder / columns());
+      int hhgrid      = hgrid + (rightBorder / columns());
 
       int x = p.x();
       int y = p.y();
@@ -291,7 +291,7 @@ int Palette::idx(const QPoint& p) const
             return -1;
 
       int idx = row * nc + col;
-      if (idx >= cells.size())
+      if (idx < 0 || idx >= cells.size())
             return -1;
       return idx;
       }

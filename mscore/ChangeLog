@@ -1,4 +1,5 @@
-28.2 (mw)
+28.2  - fix crash when dragging custom lines to palette
+      (mw)
       - Tabulatures: string data can be in non-sequential order (banjo, theorbo, fix for #15208)
       - Instruments.xml: added tuning data for banjo
 27.2 (mw)

@@ -1307,6 +1307,8 @@ Element* Element::create(ElementType type, Score* score)
             case TAB_DURATION_SYMBOL: return new TabDurationSymbol(score);
             case OSSIA:               return new Ossia(score);
 
+            case TEXTLINE_SEGMENT:    // return new TextLineSegment(score);
+
             case SLUR_SEGMENT:
             case STEM_SLASH:
             case LINE:
@@ -1319,7 +1321,6 @@ Element* Element::create(ElementType type, Score* score)
             case HAIRPIN_SEGMENT:
             case OTTAVA_SEGMENT:
             case TRILL_SEGMENT:
-            case TEXTLINE_SEGMENT:
             case VOLTA_SEGMENT:
             case LEDGER_LINE:
             case STAFF_LINES:
