@@ -36,6 +36,7 @@
 #include "libmscore/imageStore.h"
 #include "libmscore/qzipreader_p.h"
 #include "libmscore/qzipwriter_p.h"
+#include "libmscore/slur.h"
 
 //---------------------------------------------------------
 //   needsStaff
@@ -125,7 +126,6 @@ void Palette::contextMenuEvent(QContextMenuEvent* event)
                   delete cell->element;
             delete cell;
             cells[i] = 0;
-            update();
             emit changed();
             }
       else if (action == contextAction) {
@@ -144,8 +144,8 @@ void Palette::contextMenuEvent(QContextMenuEvent* event)
             sizeChanged = true;
             }
       if (sizeChanged) {
-            updateGeometry();
-            static_cast<QWidget*>(parent())->updateGeometry();
+            resize(QSize(width(), heightForWidth(width())));
+            ((QWidget*)parent())->updateGeometry();
             update();
             }
       }
@@ -767,10 +767,21 @@ void Palette::dropEvent(QDropEvent* event)
                   e = Element::create(type, gscore);
                   if (e)
                         e->read(el);
-                  if (e->type() == TEXTLINE) {
-                        TextLine* tl = static_cast<TextLine*>(e);
+                  if (e->type() == TEXTLINE
+                     || e->type() == HAIRPIN
+                     || e->type() == VOLTA
+                     || e->type() == OTTAVA
+                     || e->type() == PEDAL
+                     || e->type() == TRILL
+                     ) {
+                        SLine* tl = static_cast<SLine*>(e);
                         tl->setLen(gscore->spatium() * 7);
                         tl->setTrack(0);
+                        }
+                  else if (e->type() == SLUR || e->type() == TIE) {
+                        SlurTie* st = static_cast<SlurTie*>(e);
+                        st->setLen(gscore->spatium() * 7);
+                        st->setTrack(0);
                         }
                   }
             }
@@ -804,9 +815,7 @@ void Palette::dropEvent(QDropEvent* event)
             }
       if (ok) {
             event->acceptProposedAction();
-            updateGeometry();
-            static_cast<QWidget*>(parent())->updateGeometry();
-            update();
+            resize(QSize(width(), heightForWidth(width())));
             emit changed();
             }
       }
@@ -1356,7 +1365,7 @@ void PaletteBoxButton::paintEvent(QPaintEvent*)
 //   PaletteScrollArea
 //---------------------------------------------------------
 
-PaletteScrollArea::PaletteScrollArea(QWidget* w, QWidget* parent)
+PaletteScrollArea::PaletteScrollArea(Palette* w, QWidget* parent)
    : QScrollArea(parent)
       {
       setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);

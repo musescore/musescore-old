@@ -1,4 +1,7 @@
-28.2  - fix crash when dragging custom lines to palette
+28.2  (ws)
+      - set standard width of line elements when dropped to palette
+      - resize palette after drop of element
+      - fix crash when dragging custom lines to palette
       (mw)
       - Tabulatures: string data can be in non-sequential order (banjo, theorbo, fix for #15208)
       - Instruments.xml: added tuning data for banjo

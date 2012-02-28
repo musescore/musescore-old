@@ -164,7 +164,7 @@ class PaletteScrollArea : public QScrollArea {
       virtual void resizeEvent(QResizeEvent*);
 
    public:
-      PaletteScrollArea(QWidget* w, QWidget* parent = 0);
+      PaletteScrollArea(Palette* w, QWidget* parent = 0);
       bool restrictHeight() const      { return _restrictHeight; }
       void setRestrictHeight(bool val) { _restrictHeight = val;  }
       };
