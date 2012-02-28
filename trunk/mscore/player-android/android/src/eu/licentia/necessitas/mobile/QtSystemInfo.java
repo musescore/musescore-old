@@ -430,16 +430,16 @@ public class QtSystemInfo
         Configuration configuration=new Configuration();
         int inputMethod=0x0000001;//by default the keys will have a key and buttons
 //@ANDROID-8
-    PackageManager pm=QtApplication.mainActivity().getPackageManager();
-        if(pm.hasSystemFeature(PackageManager.FEATURE_TOUCHSCREEN))
-        {
-            inputMethod|=0x0000008;
-        }
-        if((pm.hasSystemFeature(PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH)) ||
-                (pm.hasSystemFeature(PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH_DISTINCT)))
-        {
-            inputMethod|=0x0000010;
-        }
+//QtCreator     PackageManager pm=QtApplication.mainActivity().getPackageManager();
+//QtCreator         if(pm.hasSystemFeature(PackageManager.FEATURE_TOUCHSCREEN))
+//QtCreator         {
+//QtCreator             inputMethod|=0x0000008;
+//QtCreator         }
+//QtCreator         if((pm.hasSystemFeature(PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH)) ||
+//QtCreator                 (pm.hasSystemFeature(PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH_DISTINCT)))
+//QtCreator         {
+//QtCreator             inputMethod|=0x0000010;
+//QtCreator         }
 //@ANDROID-8
         if(configuration.keyboard==Configuration.KEYBOARD_QWERTY)
         {
@@ -525,35 +525,35 @@ public class QtSystemInfo
     private void createDisplayInfoBroadcastReceiver ()
     {
 //@ANDROID-8
-        m_displayInfoBroadcastReceiver=new BroadcastReceiver() {
-
-            @Override
-            public void onReceive(Context context, Intent intent)
-            {
-                if((intent.getAction().equals(Intent.ACTION_CONFIGURATION_CHANGED)))
-                {
-                    Log.i("QtSystemInfo", "orientationchage wont be called");
-                    int orientation; /// ?!?!?!
-
-                    switch(m_display.getRotation())
-                    {
-                        case Surface.ROTATION_270:
-                        case Surface.ROTATION_90:
-                            orientation= 1;
-                            break;
-
-                        case Surface.ROTATION_0:
-                        case Surface.ROTATION_180:
-                            orientation= 2;
-                            break;
-
-                        default:
-                            orientation=0;
-                            break;
-                    }
-                }
-            }
-        };
+//QtCreator         m_displayInfoBroadcastReceiver=new BroadcastReceiver() {
+//QtCreator 
+//QtCreator             @Override
+//QtCreator             public void onReceive(Context context, Intent intent)
+//QtCreator             {
+//QtCreator                 if((intent.getAction().equals(Intent.ACTION_CONFIGURATION_CHANGED)))
+//QtCreator                 {
+//QtCreator                     Log.i("QtSystemInfo", "orientationchage wont be called");
+//QtCreator                     int orientation; /// ?!?!?!
+//QtCreator 
+//QtCreator                     switch(m_display.getRotation())
+//QtCreator                     {
+//QtCreator                         case Surface.ROTATION_270:
+//QtCreator                         case Surface.ROTATION_90:
+//QtCreator                             orientation= 1;
+//QtCreator                             break;
+//QtCreator 
+//QtCreator                         case Surface.ROTATION_0:
+//QtCreator                         case Surface.ROTATION_180:
+//QtCreator                             orientation= 2;
+//QtCreator                             break;
+//QtCreator 
+//QtCreator                         default:
+//QtCreator                             orientation=0;
+//QtCreator                             break;
+//QtCreator                     }
+//QtCreator                 }
+//QtCreator             }
+//QtCreator         };
 //@ANDROID-8
     }
 
@@ -582,21 +582,21 @@ public class QtSystemInfo
     public int orientation ()
     {
 //@ANDROID-8
-        switch(m_display.getRotation())
-        {
-            case Surface.ROTATION_270:
-            case Surface.ROTATION_90:
-                return 1;
-
-            case Surface.ROTATION_0:
-            case Surface.ROTATION_180:
-                return 2;
-
-            default:
+//QtCreator         switch(m_display.getRotation())
+//QtCreator         {
+//QtCreator             case Surface.ROTATION_270:
+//QtCreator             case Surface.ROTATION_90:
+//QtCreator                 return 1;
+//QtCreator 
+//QtCreator             case Surface.ROTATION_0:
+//QtCreator             case Surface.ROTATION_180:
+//QtCreator                 return 2;
+//QtCreator 
+//QtCreator             default:
 //@ANDROID-8
                 return -1;
 //@ANDROID-8
-        }
+//QtCreator         }
 //@ANDROID-8
     }
 
@@ -709,19 +709,19 @@ public class QtSystemInfo
         }
 //@ANDROID-5
 //@ANDROID-8
-        if(pm.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH))
-        {
-            features[0]=0;
-        }
-        if((pm.hasSystemFeature(PackageManager.FEATURE_LOCATION_GPS))||
-                (pm.hasSystemFeature(PackageManager.FEATURE_LOCATION_NETWORK)))
-        {
-            features[2]=10;
-        }
-        if(pm.hasSystemFeature(PackageManager.FEATURE_WIFI))
-        {
-            features[7]=8;
-        }
+//QtCreator         if(pm.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH))
+//QtCreator         {
+//QtCreator             features[0]=0;
+//QtCreator         }
+//QtCreator         if((pm.hasSystemFeature(PackageManager.FEATURE_LOCATION_GPS))||
+//QtCreator                 (pm.hasSystemFeature(PackageManager.FEATURE_LOCATION_NETWORK)))
+//QtCreator         {
+//QtCreator             features[2]=10;
+//QtCreator         }
+//QtCreator         if(pm.hasSystemFeature(PackageManager.FEATURE_WIFI))
+//QtCreator         {
+//QtCreator             features[7]=8;
+//QtCreator         }
 //@ANDROID-8
         if(sdcardFeatureAvailable ())
         {
@@ -1228,10 +1228,10 @@ public class QtSystemInfo
             return 2;
         }
 //@ANDROID-8
-        else if (pm.hasSystemFeature(PackageManager.FEATURE_WIFI))
-        {
-            return 4;
-        }
+//QtCreator         else if (pm.hasSystemFeature(PackageManager.FEATURE_WIFI))
+//QtCreator         {
+//QtCreator             return 4;
+//QtCreator         }
 //@ANDROID-8
         else
         {
