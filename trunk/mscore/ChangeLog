@@ -1,3 +1,6 @@
+28.2 (mw)
+      - Tabulatures: string data can be in non-sequential order (banjo, theorbo, fix for #15208)
+      - Instruments.xml: added tuning data for banjo
 27.2 (mw)
       - Work In Progress for figured bass
       - Staff Type Editor - Tabulature: uncluttered layout, added tabulature preview (WIP)

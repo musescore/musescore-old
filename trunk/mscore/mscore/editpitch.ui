@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>635</width>
+    <width>680</width>
     <height>420</height>
    </rect>
   </property>
@@ -41,16 +41,13 @@
       <number>12</number>
      </property>
      <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>45</number>
+      <number>50</number>
      </attribute>
      <attribute name="horizontalHeaderMinimumSectionSize">
       <number>20</number>
      </attribute>
-     <attribute name="horizontalHeaderMinimumSectionSize">
-      <number>20</number>
-     </attribute>
-     <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>45</number>
+     <attribute name="verticalHeaderDefaultSectionSize">
+      <number>32</number>
      </attribute>
      <row>
       <property name="text">

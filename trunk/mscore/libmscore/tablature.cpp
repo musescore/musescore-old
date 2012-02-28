@@ -29,28 +29,17 @@ Tablature guitarTablature(13, 6, guitarStrings);
 Tablature::Tablature(int numFrets, int numStrings, int strings[])
       {
       _frets = numFrets;
-      int   i, j;
 
-      // insert string pitches into member variable in increasing pitch value
-      for (i = 0; i < numStrings; i++) {
-            for(j=0; j < stringTable.size() && stringTable.at(j) < strings[i]; j++)
-                  ;
-            stringTable.insert(j, strings[i]);
-            }
+      for (int i = 0; i < numStrings; i++)
+            stringTable.append(strings[i]);
       }
 
 Tablature::Tablature(int numFrets, QList<int>& strings)
       {
       _frets = numFrets;
-      int   i, j;
 
-      // insert string pitches into member variable in increasing pitch value
-      // DEEP COPY!
-      foreach(i, strings) {
-            for(j=0; j < stringTable.size() && stringTable.at(j) < i; j++)
-                  ;
-            stringTable.insert(j, i);
-            }
+      foreach(int i, strings)
+            stringTable.append( i);
       }
 
 //---------------------------------------------------------
@@ -59,24 +48,15 @@ Tablature::Tablature(int numFrets, QList<int>& strings)
 
 void Tablature::read(const QDomElement& de)
       {
-      int   i, j;
-      QList<int> stringsLoc;
 
       for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             if (tag == "frets")
                   _frets = e.text().toInt();
             else if (tag == "string")
-                  stringsLoc.append(e.text().toInt());      // accumulate string pitches in local variable
+                  stringTable.append(e.text().toInt());
             else
                   domError(e);
-            }
-      // copy string pitches to member variable in increasing pitch order
-      // DEEP COPY!
-      foreach (i, stringsLoc) {
-            for(j=0; j < stringTable.size() && stringTable.at(j) < i; j++)
-                  ;
-            stringTable.insert(j, i);
             }
       }
 
