@@ -216,44 +216,60 @@ void TrackList::read(int track, const Segment* fs, const Segment* es, QHash<Span
       const Segment* s;
       for (s = fs; s; s = s->next1()) {
             Element* e = s->element(track);
-            if (!e || e->generated())
-                  continue;
-            if (e->isChordRest()) {
-                  DurationElement* de = static_cast<DurationElement*>(e);
-                  gap = s->tick() - tick;
-                  if (de->tuplet()) {
-                        Tuplet* tuplet = de->tuplet();
-                        if (tuplet->elements().front() != de) {
-                              qDebug("TrackList::read: cannot start in middle of tuplet");
-                              abort();
-                              }
-                        de = tuplet;
+            if (e && !e->generated()) {
+                  if (e->isChordRest()) {
+                        DurationElement* de = static_cast<DurationElement*>(e);
+                        gap = s->tick() - tick;
+                        if (de->tuplet()) {
+                              Tuplet* tuplet = de->tuplet();
+                              if (tuplet->elements().front() != de) {
+                                    qDebug("TrackList::read: cannot start in middle of tuplet");
+                                    abort();
+                                    }
+                              de = tuplet;
 
-                        // find last chord/rest in (possibly nested) tuplet:
-                        DurationElement* nde = tuplet;
-                        while (nde) {
-                              nde = tuplet->elements().back();
-                              if (nde->type() != TUPLET)
-                                    break;
+                              // find last chord/rest in (possibly nested) tuplet:
+                              DurationElement* nde = tuplet;
+                              while (nde) {
+                                    nde = tuplet->elements().back();
+                                    if (nde->type() != TUPLET)
+                                          break;
+                                    }
+                              s = static_cast<ChordRest*>(nde)->segment();
+                              // continue with first chord/rest after tuplet
                               }
-                        s = static_cast<ChordRest*>(nde)->segment();
-                        // continue with first chord/rest after tuplet
+                        if (gap)
+                              appendGap(Fraction::fromTicks(gap));
+                        append(de, map);
+                        // add duration to ticks if not grace note
+                        if (!(de->type() == CHORD && static_cast<Chord*>(de)->isGrace()))
+                              tick += de->duration().ticks();;
                         }
-                  if (gap)
-                        appendGap(Fraction::fromTicks(gap));
-                  append(de, map);
-                  // add duration to ticks if not grace note
-                  if (!(de->type() == CHORD && static_cast<Chord*>(de)->isGrace()))
-                        tick += de->duration().ticks();;
+                  else
+                        append(e, map);
                   }
-            else
-                  append(e, map);
             if (s == es)
                   break;
             }
       gap = es->tick() - tick;
       if (gap)
             appendGap(Fraction::fromTicks(gap));
+#if 0
+      //
+      // TODO: connect ties
+      //
+      foreach(Element* e, *this) {
+            if (e->type() != CHORD)
+                  continue;
+printf("==%s\n", e->name());
+            Chord* chord = static_cast<Chord*>(e);
+            foreach(Note* n, chord->notes()) {
+                  if (n->tieFor()) {
+                        printf("  ======tie for\n");
+                        }
+                  }
+            }
+#endif
       }
 
 //---------------------------------------------------------
@@ -449,6 +465,8 @@ bool TrackList::write(int track, Measure* measure, QHash<Spanner*, Spanner*>* ma
             else if (e->type() == BAR_LINE)
                   ;
             else {
+                  if (m == 0)
+                        break;
                   segment = m->getSegment(e, m->tick() + pos.ticks());
                   Element* ne = e->clone();
                   ne->setScore(score);
@@ -527,7 +545,7 @@ printf("ScoreRange::read(%s %d %s %d)\n", first->subTypeName(), first->tick(),
                   printf("  <%s>\n", s->name());
                   }
             }
-      printf("ScoreRange::read: duration %d/%d\n", duration().numerator(), duration().denominator());
+printf("ScoreRange::read: duration %d/%d\n", duration().numerator(), duration().denominator());
       }
 
 //---------------------------------------------------------

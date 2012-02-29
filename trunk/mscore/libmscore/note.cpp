@@ -246,8 +246,17 @@ Note::Note(const Note& n)
       foreach(NoteEvent* e, n._playEvents)
             _playEvents.append(new NoteEvent(*e));
 
-      _tieFor   = n._tieFor;
-      _tieBack  = n._tieBack;
+#if 0
+      if (n._tieFor) {
+printf(" +clone tieFor\n");
+            _tieFor = new Tie(*n._tieFor);
+            _tieFor->setStartNote(this);
+            _tieFor->setEndNote(0);
+            }
+      else
+#endif
+            _tieFor = 0;
+      _tieBack  = 0;    // n._tieBack;
       for (int i = 0; i < 3; ++i) {
             _dots[i] = 0;
             if (n._dots[i])

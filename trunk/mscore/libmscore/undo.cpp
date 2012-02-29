@@ -330,7 +330,7 @@ void Score::undoInsertTime(int tick, int len)
 //   undoChangeMeasureLen
 //---------------------------------------------------------
 
-void Score::undoChangeMeasureLen(Measure* m, int oldTicks, int newTicks)
+void Score::undoChangeMeasureLen(Measure* m, Fraction oldTicks, Fraction newTicks)
       {
       undo(new ChangeMeasureLen(m, oldTicks, newTicks));
       }
@@ -1701,32 +1701,33 @@ void ChangeKeySig::flip()
 //   ChangeMeasureLen
 //---------------------------------------------------------
 
-ChangeMeasureLen::ChangeMeasureLen(Measure* m, int ot, int nt)
+ChangeMeasureLen::ChangeMeasureLen(Measure* m, Fraction of, Fraction nf)
       {
-      measure  = m;
-      oldTicks = ot;
-      newTicks = nt;
+      measure     = m;
+      oldDuration = of;
+      newDuration = nf;
       }
 
 void ChangeMeasureLen::flip()
       {
-      int ol = newTicks;
-      int nl = oldTicks;
+      Fraction of = newDuration;
+      Fraction nf = oldDuration;
 
       //
       // move EndBarLine and TimeSigAnnounce
       // to end of measure:
       //
-      int endTick = measure->tick() + nl;
+      int endTick = measure->tick() + nf.ticks();
       for (Segment* segment = measure->first(); segment; segment = segment->next()) {
             if (segment->subtype() != SegEndBarLine
                && segment->subtype() != SegTimeSigAnnounce)
                   continue;
             segment->setTick(endTick);
             }
+      measure->setLen(nf);
       measure->score()->addLayoutFlags(LAYOUT_FIX_TICKS);
-      oldTicks = ol;
-      newTicks = nl;
+      oldDuration = of;
+      newDuration = nf;
       }
 
 //---------------------------------------------------------

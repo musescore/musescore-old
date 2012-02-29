@@ -238,7 +238,7 @@ class Measure : public MeasureBase {
       void cmdRemoveEmptySegment(Segment* s);
       virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
       void createVoice(int track);
-      void adjustToLen(int, int);
+      void adjustToLen(Fraction, Fraction);
       int repeatFlags() const                   { return _repeatFlags; }
       void setRepeatFlags(int val);
       int findAccidental(Note*) const;

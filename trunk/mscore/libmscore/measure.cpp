@@ -1514,7 +1514,7 @@ qDebug("drop staffList");
 
             case TIMESIG:
                   score()->cmdAddTimeSig(this, staffIdx, static_cast<TimeSig*>(e));
-                  return e;
+                  return 0;
 
             case LAYOUT_BREAK:
                   {
@@ -1642,8 +1642,11 @@ void Measure::cmdRemoveEmptySegment(Segment* s)
 //    new len
 //---------------------------------------------------------
 
-void Measure::adjustToLen(int ol, int nl)
+void Measure::adjustToLen(Fraction of, Fraction nf)
       {
+      int ol = of.ticks();
+      int nl = nf.ticks();
+
       int staves = score()->nstaves();
       int diff   = nl - ol;
 
@@ -1723,7 +1726,7 @@ void Measure::adjustToLen(int ol, int nl)
                         }
                   }
             }
-      score()->undoChangeMeasureLen(this, ol, nl);
+      score()->undoChangeMeasureLen(this, of, nf);
       if (diff < 0) {
             //
             //  CHECK: do not remove all slurs
