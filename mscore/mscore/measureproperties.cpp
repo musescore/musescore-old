@@ -212,7 +212,7 @@ void MeasureProperties::apply()
                isIrregular())
                );
             if (oLen != len()) {
-                  m->adjustToLen(oLen.ticks(), len().ticks());
+                  m->adjustToLen(oLen, len());
                   score->select(m, SELECT_RANGE, 0);
                   }
             }

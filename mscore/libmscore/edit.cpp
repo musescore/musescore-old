@@ -628,6 +628,7 @@ void Score::cmdAddTimeSig(Measure* fm, int staffIdx, TimeSig* ts)
       TimeSig* lts = staff(staffIdx)->timeSig(tick);
       Fraction stretch, lsig;
       if (lts) {
+printf("lts===\n");
             stretch = lts->stretch();
             lsig    = lts->sig();
             }
@@ -656,11 +657,12 @@ void Score::cmdAddTimeSig(Measure* fm, int staffIdx, TimeSig* ts)
             //  check for local timesig (only staff value changes)
             //  or redundant time signature
             //
+printf("lsig == ts->sig()\n");
             if (lsig == ts->sig()) {
                   ts->setParent(seg);
                   ts->setTrack(track);
                   undoAddElement(ts);
-                  timesigStretchChanged(ts, fm, staffIdx);
+//TODO                  timesigStretchChanged(ts, fm, staffIdx);
                   return;
                   }
             }

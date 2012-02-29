@@ -361,12 +361,12 @@ class FlipNoteDotDirection : public UndoCommand {
 
 class ChangeMeasureLen : public UndoCommand {
       Measure* measure;
-      int oldTicks;
-      int newTicks;
+      Fraction oldDuration;
+      Fraction newDuration;
       void flip();
 
    public:
-      ChangeMeasureLen(Measure*, int oldTicks, int newTicks);
+      ChangeMeasureLen(Measure*, Fraction, Fraction);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeMeasureLen");

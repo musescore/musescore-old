@@ -1,3 +1,5 @@
+29.2 (ws)
+      - some fixes for TimeSig changes
 28.2  (ws)
       - set standard width of line elements when dropped to palette
       - resize palette after drop of element

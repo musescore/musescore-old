@@ -2805,6 +2805,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                   Measure* m = static_cast<Measure*>(e);
                   int tick  = m->tick();
                   int etick = tick + m->ticks();
+printf("1select range==== state %d ticks %d\n", _selection.state(), m->ticks());
                   activeTrack = staffIdx * VOICES;
                   if (_selection.state() == SEL_NONE) {
                         _selection.setStaffStart(staffIdx);
