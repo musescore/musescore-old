@@ -1,3 +1,7 @@
+01.mar (la)
+      - #15228 change behavior of add octave up/down to perfect octave
+26.feb (la)
+      - default reverb/chorus to minimum
 25.feb (lv)
       - fix #15129: [MusicXML] [1.2] empty measures are not imported
        (la)
