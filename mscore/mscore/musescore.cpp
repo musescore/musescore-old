@@ -223,6 +223,12 @@ void MuseScore::closeEvent(QCloseEvent* ev)
                         removeList.append(score);
                   }
             }
+      
+      // remove all new created/not save score so they are
+      // note saved as session data
+      foreach(Score* score, removeList)
+            scoreList.removeAll(score);
+      
       writeSessionFile(true);
       foreach(Score* score, scoreList) {
             if (!score->tmpName().isEmpty()) {
@@ -230,12 +236,6 @@ void MuseScore::closeEvent(QCloseEvent* ev)
                   f.remove();
                   }
             }
-
-      // remove all new created/not save score so they are
-      // note saved as session data
-
-      foreach(Score* score, removeList)
-            scoreList.removeAll(score);
 
       // save score list
       QSettings settings;

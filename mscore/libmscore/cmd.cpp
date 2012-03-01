@@ -466,14 +466,25 @@ void Score::cmdAddInterval(int val, const QList<Note*>& nl)
             Chord* chord = on->chord();
             note->setParent(chord);
             int valTmp = val < 0 ? val+1 : val-1;
-            int line = on->line() - valTmp;
-
-            int tick   = chord->tick();
-            Staff* estaff = staff(on->staffIdx() + chord->staffMove());
-            int clef   = estaff->clef(tick);
-            int key    = estaff->key(tick).accidentalType();
-            int npitch = line2pitch(line, clef, key);
-            int ntpc   = pitch2tpc(npitch, key);
+            
+            int npitch;
+            int ntpc;
+            if( abs(valTmp) != 7 ) {
+                  int line = on->line() - valTmp;
+                  int tick   = chord->tick();
+                  Staff* estaff = staff(on->staffIdx() + chord->staffMove());
+                  int clef   = estaff->clef(tick);
+                  int key    = estaff->key(tick).accidentalType();
+                  npitch = line2pitch(line, clef, key);
+                  ntpc   = pitch2tpc(npitch, key);
+                  }
+            else { //special case for octave
+                  Interval interval(7, 12);
+                  if(val < 0) {
+                        interval.flip();
+                        }                                    
+                  transposeInterval(on->pitch(), on->tpc(), &npitch, &ntpc, interval, false);
+                  }
             note->setPitch(npitch, ntpc);
 
             undoAddElement(note);
