@@ -871,11 +871,16 @@ void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
             QByteArray ba;
             if (!ip->loaded()) {
                   QFile inFile(srcPath);
-                  if (!inFile.open(QIODevice::ReadOnly))
-                        throw(QString("cannot open picture file"));
-                  ip->buffer().setData(inFile.readAll());
-                  inFile.close();
-                  ip->setLoaded(true);
+                  if (!inFile.open(QIODevice::ReadOnly)) {
+                        QMessageBox::warning(0, tr("Internal error"),
+                             tr("Cannot load picture file %1").arg(srcPath),
+                             QMessageBox::Ok, QMessageBox::NoButton);
+                        qDebug ("Cannot load picture file %s", qPrintable(srcPath));
+                        continue;
+                        }
+                   ip->buffer().setData(inFile.readAll());
+                   inFile.close();
+                   ip->setLoaded(true);
                   }
             cbuf.setBuffer(&(ip->buffer().buffer()));
             if (!cbuf.open(QIODevice::ReadOnly))
