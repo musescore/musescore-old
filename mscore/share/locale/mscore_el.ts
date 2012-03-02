@@ -5235,11 +5235,11 @@ failed: </source>
     </message>
     <message>
         <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
-        <translation type="unfinished"/>
+        <translation>Αδυναμία ανάγνωσης αυτού του μουσικού κειμένου:&lt;br&gt;Η έκδοση του MuseScore που έχετε είναι πολύ παλιά.&lt;br&gt;&lt;a href="%1"&gt;Αναβαθμίστε την τώρα!&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Can't open file. File extension "%1" not supported.</source>
-        <translation type="unfinished"/>
+        <translation>Αδυναμία ανοίγματος αρχείου. Ο τύπος Αρχείου "%1" δεν υποστηρίζεται.</translation>
     </message>
 </context>
 <context>
@@ -6183,7 +6183,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>center text vertical to text baseline</source>
-        <translation type="unfinished"/>
+        <translation>Ευθυγράμμιση κειμένου στο κέντρο κάθετα με τη βασική γραμμή κειμένου</translation>
     </message>
 </context>
 <context>

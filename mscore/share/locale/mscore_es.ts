@@ -3188,7 +3188,7 @@ fallido: </translation>
     </message>
     <message>
         <source>Page Number Odd</source>
-        <translation>Números Impares de Página</translation>
+        <translation>Números de Página Impares</translation>
     </message>
     <message>
         <source>Page Number Even</source>
@@ -3249,7 +3249,8 @@ fallido: </translation>
     <message>
         <source>Save changes to the score "%1"
 before closing?</source>
-        <translation>¿Desea guardar los cambios en la partitura "%1" antes de cerrar?</translation>
+        <translation>¿Desea guardar los cambios en la partitura "%1"&#13;
+antes de cerrar?</translation>
     </message>
     <message>
         <source>Untitled</source>
@@ -3285,7 +3286,7 @@ before closing?</source>
     </message>
     <message>
         <source>Lyrics even lines</source>
-        <translation>Lineas niveladas de la Letra</translation>
+        <translation>Lineas pares de la Letra</translation>
     </message>
     <message>
         <source>End Bar</source>
@@ -3491,7 +3492,7 @@ Intenta usar el "Manual en Internet" desde el menu de "Ayuda".</translation>
     </message>
     <message>
         <source>Arpeggio</source>
-        <translation>Arpeggio</translation>
+        <translation>Arpegio</translation>
     </message>
     <message>
         <source>Breath &amp;&amp; Pauses</source>
@@ -3601,7 +3602,9 @@ Intenta usar el "Manual en Internet" desde el menu de "Ayuda".</translation>
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
-        <translation>La sesión anterior finalizó de manera inesperada. ¿Restaurar sesión?</translation>
+        <translation>La sesión anterior finalizó de manera inesperada.&#13;
+&#13;
+¿Restaurar sesión?</translation>
     </message>
     <message>
         <source>Check for Update</source>
@@ -3686,7 +3689,7 @@ no es compatible con el interfaz actual</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation>Cerrar permanéntemente</translation>
+        <translation>Cerrar permanentemente</translation>
     </message>
 </context>
 <context>
@@ -5195,11 +5198,11 @@ Intenta guardarlo en una localización distinta</translation>
     </message>
     <message>
         <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
-        <translation type="unfinished"/>
+        <translation>No se puede leer la partitura: &lt;br&gt;Tu versión de MuseScore es demasiado antigua.&lt;br&gt;&lt;a=href="%1"&gt;¡Actualizar ahora!&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Can't open file. File extension "%1" not supported.</source>
-        <translation type="unfinished"/>
+        <translation>No es posible abrir el archivo. La extensión de archivo "%1" no está soportada.</translation>
     </message>
 </context>
 <context>
@@ -6653,7 +6656,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation>Cerrar permanéntemente</translation>
+        <translation>Cerrar permanentemente</translation>
     </message>
 </context>
 <context>
@@ -6851,7 +6854,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Pitch Spell</source>
-        <translation type="unfinished"/>
+        <translation>Corregir Altura</translation>
     </message>
     <message>
         <source>Unison Above</source>
@@ -8091,7 +8094,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Pitch spell</source>
-        <translation type="unfinished"/>
+        <translation>Corregir altura</translation>
     </message>
     <message>
         <source>Enter note A</source>
@@ -9009,7 +9012,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>slash</source>
-        <translation type="unfinished">barra inclinada</translation>
+        <translation>barra inclinada</translation>
     </message>
     <message>
         <source>xcircle</source>

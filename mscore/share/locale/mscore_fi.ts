@@ -2582,7 +2582,7 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>Above</source>
-        <translation>Yllä</translation>
+        <translation>Yläpuolella</translation>
     </message>
     <message>
         <source>Symb.</source>
@@ -3453,7 +3453,7 @@ Yritä sen sijaan valitsemalla "Ohje"-valikosta "Online-käsikirja".</translatio
     </message>
     <message>
         <source>Dashed</source>
-        <translation>Poikkiviiva</translation>
+        <translation>katkoviiva</translation>
     </message>
     <message>
         <source>Slur</source>
@@ -4220,7 +4220,7 @@ on ristiriidassa nykyisen rajapinnan kanssa</translation>
     </message>
     <message>
         <source>Swing</source>
-        <translation>Svengi</translation>
+        <translation>Swing</translation>
     </message>
     <message>
         <source>Shuffle</source>
@@ -5214,7 +5214,7 @@ Yritä tallentaa eri paikkaan.</translation>
     </message>
     <message>
         <source>Can't open file. File extension "%1" not supported.</source>
-        <translation type="unfinished"/>
+        <translation>Tiedostoa ei voi avata. Tiedosto tunnus "%1" ei ole tuettu.</translation>
     </message>
 </context>
 <context>
@@ -8382,7 +8382,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Parts...</source>
-        <translation>Luo stemma  ...</translation>
+        <translation>Erilliset stemmat  ...</translation>
     </message>
     <message>
         <source>next score</source>

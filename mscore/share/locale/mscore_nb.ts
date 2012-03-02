@@ -5206,11 +5206,11 @@ Prøv å lagre en annen plass.</translation>
     </message>
     <message>
         <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
-        <translation type="unfinished"/>
+        <translation>Kan ikke lese dette notearket:&lt;br&gt;Din versjon av MuseScore er for gammel.&lt;br&gt;&lt;a href="%1"&gt;Oppdater nå!&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Can't open file. File extension "%1" not supported.</source>
-        <translation type="unfinished"/>
+        <translation>Kan ikke åpne denne fila. Filendelsen "%1" er ikke støttet.</translation>
     </message>
 </context>
 <context>
