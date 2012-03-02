@@ -2837,7 +2837,7 @@ nieudane: </translation>
     <name>MenuNotes</name>
     <message>
         <source>&amp;Notes</source>
-        <translation>&amp;Nuty</translation>
+        <translation>Nuty</translation>
     </message>
 </context>
 <context>
@@ -3084,7 +3084,7 @@ before closing?</source>
     </message>
     <message>
         <source>Tremolo</source>
-        <translation>Tremolo</translation>
+        <translation>Tremola</translation>
     </message>
     <message>
         <source>1 through stem</source>
@@ -3156,7 +3156,7 @@ before closing?</source>
     </message>
     <message>
         <source>&amp;Create</source>
-        <translation>&amp;Utwórz</translation>
+        <translation>Utwórz</translation>
     </message>
     <message>
         <source>Measures</source>
@@ -3168,7 +3168,7 @@ before closing?</source>
     </message>
     <message>
         <source>&amp;Lines...</source>
-        <translation>&amp;Linie...</translation>
+        <translation>Linie...</translation>
     </message>
     <message>
         <source>Accidentals...</source>
@@ -3216,15 +3216,15 @@ before closing?</source>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation>&amp;Plik</translation>
+        <translation>Plik</translation>
     </message>
     <message>
         <source>Open &amp;Recent</source>
-        <translation>Otwórz osta&amp;tnie</translation>
+        <translation>Otwórz ostatnie</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>&amp;Edytuj</translation>
+        <translation>Edytuj</translation>
     </message>
     <message>
         <source>Voices</source>
@@ -3248,7 +3248,7 @@ before closing?</source>
     </message>
     <message>
         <source>&amp;Layout</source>
-        <translation>&amp;Układ</translation>
+        <translation>Układ</translation>
     </message>
     <message>
         <source>Page Settings...</source>
@@ -3256,23 +3256,23 @@ before closing?</source>
     </message>
     <message>
         <source>&amp;Style</source>
-        <translation>&amp;Styl</translation>
+        <translation>Styl</translation>
     </message>
     <message>
         <source>&amp;Display</source>
-        <translation>&amp;Widok</translation>
+        <translation>Widok</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation>Pomo&amp;c</translation>
+        <translation>Pomoc</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation>&amp;O programie</translation>
+        <translation>O programie</translation>
     </message>
     <message>
         <source>About&amp;Qt</source>
-        <translation>O &amp;Qt</translation>
+        <translation>O Qt</translation>
     </message>
     <message>
         <source>MuseScore: Open Help</source>
@@ -3494,7 +3494,7 @@ Z menu "Pomoc" wybierz "Podręcznik online".</translation>
     </message>
     <message>
         <source>Arpeggio &amp;&amp; Glissando</source>
-        <translation>Arpeggio &amp;i glissando</translation>
+        <translation>Arpeggia i glissanda</translation>
     </message>
     <message>
         <source>Arpeggio</source>
@@ -3502,7 +3502,7 @@ Z menu "Pomoc" wybierz "Podręcznik online".</translation>
     </message>
     <message>
         <source>Breath &amp;&amp; Pauses</source>
-        <translation>Oddechy &amp;i pauzy</translation>
+        <translation>Oddechy i pauzy</translation>
     </message>
     <message>
         <source>Caesura</source>
@@ -3510,7 +3510,7 @@ Z menu "Pomoc" wybierz "Podręcznik online".</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments</source>
-        <translation>Artykulacje &amp;i ozdobniki</translation>
+        <translation>Artykulacje i ozdobniki</translation>
     </message>
     <message>
         <source>Fingering %1</source>
@@ -3538,7 +3538,7 @@ Z menu "Pomoc" wybierz "Podręcznik online".</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer</source>
-        <translation>Łamania &amp;i odstępy</translation>
+        <translation>Łamania i odstępy</translation>
     </message>
     <message>
         <source>Line break</source>
@@ -3574,7 +3574,7 @@ Z menu "Pomoc" wybierz "Podręcznik online".</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments...</source>
-        <translation>Artykulacje &amp;i ozdobniki...</translation>
+        <translation>Artykulacje i ozdobniki...</translation>
     </message>
     <message>
         <source>Pedal</source>
@@ -3586,7 +3586,7 @@ Z menu "Pomoc" wybierz "Podręcznik online".</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer...</source>
-        <translation>Łamania &amp;i odstępy...</translation>
+        <translation>Łamania i odstępy...</translation>
     </message>
     <message>
         <source>The previous session quit unexpectedly.
@@ -6779,7 +6779,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>action</name>
     <message>
         <source>Local &amp;Handbook...</source>
-        <translation>Podręcznik &amp;lokalny...</translation>
+        <translation>Podręcznik lokalny...</translation>
     </message>
     <message>
         <source>Open...</source>
@@ -9123,27 +9123,27 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>note 1/2</source>
-        <translation>Nuta 1/2</translation>
+        <translation>Półnuta</translation>
     </message>
     <message>
         <source>note 1/4</source>
-        <translation>Nuta 1/4</translation>
+        <translation>Ćwierćnuta</translation>
     </message>
     <message>
         <source>note 1/8</source>
-        <translation>Nuta 1/8</translation>
+        <translation>Ósemka</translation>
     </message>
     <message>
         <source>note 1/16</source>
-        <translation>Nuta 1/16</translation>
+        <translation>Szesnastka</translation>
     </message>
     <message>
         <source>note 1/32</source>
-        <translation>Nuta 1/32</translation>
+        <translation>Trzydziestodwójka</translation>
     </message>
     <message>
         <source>note 1/64</source>
-        <translation>Nuta 1/64</translation>
+        <translation>Sześćdziesięcioczwórka</translation>
     </message>
     <message>
         <source>dot dot</source>

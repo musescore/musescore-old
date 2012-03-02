@@ -901,11 +901,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>velocity type</source>
-        <translation>velocity type</translation>
+        <translation>loại tốc độ</translation>
     </message>
     <message>
         <source>velocity (0-127)</source>
-        <translation>velocity (0-127)</translation>
+        <translation>tốc độ (0-127)</translation>
     </message>
     <message>
         <source>user</source>
@@ -1115,7 +1115,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Velocity:</source>
-        <translation>Velocity:</translation>
+        <translation>Tốc độ:</translation>
     </message>
     <message>
         <source>align left</source>
@@ -4128,7 +4128,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation>Velocity:</translation>
+        <translation>Tốc độ:</translation>
     </message>
     <message>
         <source>auto</source>
@@ -5209,11 +5209,11 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
-        <translation type="unfinished"/>
+        <translation>Không thể đọc được nốt nhạc này:&lt;br&gt;Phiên bản MuseScore của bạn quá cũ.&lt;br&gt;&lt;a href="%1"&gt;Hãy cập nhật hóa ngay!&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Can't open file. File extension "%1" not supported.</source>
-        <translation type="unfinished"/>
+        <translation>Không thể mở tài liệu theo yêu cầu. MuseScore không hỗ trợ extension "%1".</translation>
     </message>
 </context>
 <context>
@@ -5407,7 +5407,7 @@ and check that the file location is correct</source>
 "%1"&#13;
 không thành công. Playback sẽ bị ngưng hoạt động.&#13;
 &#13;
-Đến phần Display &gt; Synthesizer &#13;
+Đến phần Trình Bày &gt; Synthesizer &#13;
 và kiểm tra xem file location có đúng hay không</translation>
     </message>
 </context>

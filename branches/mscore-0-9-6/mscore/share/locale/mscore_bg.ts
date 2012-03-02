@@ -945,7 +945,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordedit.ui" line="993"/>
         <source>Degrees</source>
-        <translation type="unfinished"/>
+        <translation>Степени</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1008"/>
@@ -5454,17 +5454,17 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="284"/>
         <source>Show Play Panel</source>
-        <translation type="unfinished"/>
+        <translation>Покажи панел възпроизвеждане</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="291"/>
         <source>Show Navigator</source>
-        <translation type="unfinished"/>
+        <translation>Покажи Навигатор</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="298"/>
         <source>Show MuseScore Connect</source>
-        <translation type="unfinished"/>
+        <translation>Покажи MuseScore Connect</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1085"/>
@@ -6600,7 +6600,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/file.cpp" line="1215"/>
         <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
-        <translation type="unfinished"/>
+        <translation>Не може да се разчете партитурата: &lt;br&gt;Вашата версия на MuseScore е много стара.&lt;br&gt;&lt;a href="%1"&gt;Моля обновете!&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.cpp" line="154"/>
@@ -7110,7 +7110,7 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/splitstaff.ui" line="20"/>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation type="unfinished">MuseScore: Редактиране на петолиние/Свойства на партиите</translation>
+        <translation>MuseScore: Редактиране свойства на петолиние/партия</translation>
     </message>
     <message>
         <location filename="../../mscore/splitstaff.ui" line="52"/>
@@ -10098,7 +10098,7 @@ p, li { white-space: pre-wrap; }&#13;
         <location filename="../../mscore/actions.cpp" line="1478"/>
         <location filename="../../mscore/actions.cpp" line="1481"/>
         <source>Mag</source>
-        <translation type="unfinished"/>
+        <translation>Лупа</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1482"/>
@@ -10357,14 +10357,14 @@ p, li { white-space: pre-wrap; }&#13;
         <location filename="../../mscore/actions.cpp" line="2142"/>
         <location filename="../../mscore/actions.cpp" line="2143"/>
         <source>next score</source>
-        <translation type="unfinished"/>
+        <translation>следваща партитура</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2148"/>
         <location filename="../../mscore/actions.cpp" line="2156"/>
         <location filename="../../mscore/actions.cpp" line="2157"/>
         <source>previous score</source>
-        <translation type="unfinished"/>
+        <translation>предишна партитура</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1738"/>

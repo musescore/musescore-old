@@ -798,7 +798,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Bass Note / Inversion</source>
-        <translation>Bass Note / Invertierung</translation>
+        <translation>Bassnote / Invertierung</translation>
     </message>
     <message>
         <source>1</source>
@@ -7869,7 +7869,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>enter 1/2 rest</source>
-        <translation>Galbe Pause einfügen</translation>
+        <translation>Halbe Pause einfügen</translation>
     </message>
     <message>
         <source>1/2 rest</source>

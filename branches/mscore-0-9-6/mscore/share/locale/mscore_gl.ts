@@ -3302,7 +3302,7 @@ fallou: </translation>
     <message>
         <source>Save changes to the score "%1"
 before closing?</source>
-        <translation>Gardar as modificacións da partitura "%1"
+        <translation>Gardar as modificacións da partitura «%1»&#13;
 antes de fechar?</translation>
     </message>
     <message>
@@ -3405,7 +3405,7 @@ antes de fechar?</translation>
 From the "Help" menu try choosing "Online Handbook" instead.</source>
         <translation>
 
-No canto disto, escoller "Manual en liña" no menú "Axuda".</translation>
+No canto disto, escoller «Manual en liña» no menú «Axuda».</translation>
     </message>
     <message>
         <source>Grace Notes</source>
@@ -3642,7 +3642,7 @@ is incompatible with current interface</source>
 "%1" line %2:
 %3</source>
         <translation>Houbo un fallo ao cargar o engadido&#13;
-"%1" liña %2:&#13;
+«%1» liña %2:&#13;
 %3</translation>
     </message>
     <message>
@@ -5210,11 +5210,11 @@ Tente gardar nun sitio diferente.</translation>
     </message>
     <message>
         <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
-        <translation type="unfinished"/>
+        <translation>Non é posíbel ler esta partitura:&lt;br&gt;Esta versión do MuseScore é vella de máis.&lt;br&gt;&lt;a href="%1"&gt;Actualícea agora!&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Can't open file. File extension "%1" not supported.</source>
-        <translation type="unfinished"/>
+        <translation>Non é posíbel abrir este ficheiro. Non se admite a extensión de ficheiro «%1».</translation>
     </message>
 </context>
 <context>
@@ -5405,7 +5405,7 @@ failed. Playback will be disabled.
 Go to Display &gt; Synthesizer 
 and check that the file location is correct</source>
         <translation>Fallou a carga da fonte de son&#13;
-"%1"&#13;
+«%1»&#13;
 Desactívase a reprodución.&#13;
 &#13;
 Vaia a Mostrar &gt; Sintetizador&#13;
@@ -6156,7 +6156,7 @@ e verifique que a localización do ficheiro é a correcta</translation>
     </message>
     <message>
         <source>center text vertical to text baseline</source>
-        <translation type="unfinished"/>
+        <translation>centrar o texto verticalmente á liña de base do texto</translation>
     </message>
 </context>
 <context>
@@ -6772,11 +6772,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation>sori</translation>
     </message>
     <message>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation>koron</translation>
     </message>
 </context>
 <context>
@@ -6815,7 +6815,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>New...</source>
-        <translation>Novo...</translation>
+        <translation>Nova...</translation>
     </message>
     <message>
         <source>Create new score</source>
@@ -8636,7 +8636,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tom 5</source>
-        <translation type="unfinished"/>
+        <translation>Tom 5</translation>
     </message>
     <message>
         <source>Hi-Hat Closed</source>
@@ -8644,7 +8644,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tom 4</source>
-        <translation type="unfinished"/>
+        <translation>Tom 4</translation>
     </message>
     <message>
         <source>Hi-Hat Pedal</source>
@@ -8652,7 +8652,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tom 3</source>
-        <translation type="unfinished"/>
+        <translation>Tom 3</translation>
     </message>
     <message>
         <source>Hi-Hat Open</source>
@@ -8660,23 +8660,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tom 2</source>
-        <translation type="unfinished"/>
+        <translation>Tom 2</translation>
     </message>
     <message>
         <source>Tom 1</source>
-        <translation type="unfinished"/>
+        <translation>Tom 1</translation>
     </message>
     <message>
         <source>Crash 1</source>
-        <translation type="unfinished"/>
+        <translation>Crash 1</translation>
     </message>
     <message>
         <source>Tom</source>
-        <translation type="unfinished"/>
+        <translation>Tom</translation>
     </message>
     <message>
         <source>Ride</source>
-        <translation type="unfinished"/>
+        <translation>Ride</translation>
     </message>
     <message>
         <source>China</source>
@@ -9975,11 +9975,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation>sori</translation>
     </message>
     <message>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation>koron</translation>
     </message>
 </context>
 </TS>

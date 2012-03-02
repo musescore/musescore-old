@@ -5209,11 +5209,11 @@ Zkuste uložení do jiného umístění.</translation>
     </message>
     <message>
         <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
-        <translation type="unfinished"/>
+        <translation>Tento notový zápis nelze přečíst:&lt;br&gt;Vaše verze MuseScore je příliš stará.&lt;br&gt;&lt;a href="%1"&gt;Povyšte ji nyní!&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Can't open file. File extension "%1" not supported.</source>
-        <translation type="unfinished"/>
+        <translation>Nelze otevřít soubor. Souborová přípona "%1" není podporována.</translation>
     </message>
 </context>
 <context>
@@ -6156,7 +6156,7 @@ a zaškrtněte, že umístění souboru je správné</translation>
     </message>
     <message>
         <source>center text vertical to text baseline</source>
-        <translation type="unfinished"/>
+        <translation>Vystředit text svisle vůči základní čáře textu</translation>
     </message>
 </context>
 <context>
