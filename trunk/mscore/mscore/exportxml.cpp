@@ -88,6 +88,7 @@
 #include "preferences.h"
 #include "libmscore/mscore.h"
 #include "libmscore/accidental.h"
+#include "libmscore/breath.h"
 
 //---------------------------------------------------------
 //   local defines for debug output
@@ -1011,12 +1012,12 @@ void ExportMusicXml::pitch2xml(Note* note, char& c, int& alter, int& octave)
       static char table1[]  = "FEDCBAG";
 
       Chord* chord = note->chord();
-      
+
       int tick   = chord->tick();
-      
+
       int staffIdx = chord->staffIdx() + chord->staffMove();
       Staff* i   = note->score()->staff(staffIdx);
-      
+
       ClefType clef   = i->clef(tick);
       int offset = clefTable[clef].yOffset;
 
@@ -1364,11 +1365,14 @@ static void wavyLineStartStop(Chord* chord, Notations& notations, Ornaments& orn
 //   hasBreathMark - determine if chord has breath-mark
 //---------------------------------------------------------
 
-static bool hasBreathMark(Chord* ch)
+static Breath* hasBreathMark(Chord* ch)
       {
       Segment* s = ch->segment();
       s = s->next1();
-      return (s->subtype() == SegBreath && s->element(ch->track()));
+      Breath* b = 0;
+      if (s->subtype() == SegBreath)
+            b = static_cast<Breath*>(s->element(ch->track()));
+      return b;
       }
 
 //---------------------------------------------------------
@@ -1500,12 +1504,21 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
       QList<Articulation*>* na = chord->getArticulations();
       // first output the fermatas
       foreach (const Articulation* a, *na) {
-            if (a->subtype() == Articulation_Fermata) {
+            if (a->subtype() == Articulation_Fermata
+                || a->subtype() == Articulation_Shortfermata
+                || a->subtype() == Articulation_Longfermata
+                || a->subtype() == Articulation_Verylongfermata) {
                   notations.tag(xml);
-                  if (a->up())
-                        xml.tagE("fermata type=\"upright\"");
-                  else
-                        xml.tagE("fermata type=\"inverted\"");
+                  QString type = a->up() ? "upright" : "inverted";
+                  if (a->subtype() == Articulation_Fermata)
+                        xml.tagE(QString("fermata type=\"%1\"").arg(type));
+                  else if (a->subtype() == Articulation_Shortfermata)
+                        xml.tag(QString("fermata type=\"%1\"").arg(type), "angled");
+                  // MusicXML does not support the very long fermata,
+                  // export as long fermata (better than not exporting at all)
+                  else if (a->subtype() == Articulation_Longfermata
+                           || a->subtype() == Articulation_Verylongfermata)
+                        xml.tag(QString("fermata type=\"%1\"").arg(type), "square");
                   }
             }
 
@@ -1514,6 +1527,9 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
       foreach (const Articulation* a, *na) {
             switch (a->subtype()) {
                   case Articulation_Fermata:
+                  case Articulation_Shortfermata:
+                  case Articulation_Longfermata:
+                  case Articulation_Verylongfermata:
                         // ignore, already handled
                         break;
                   case Articulation_Sforzatoaccent:
@@ -1554,6 +1570,13 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                               xml.tagE("strong-accent type=\"down\"");
                         }
                         break;
+                  case Articulation_Portato:
+                        {
+                        notations.tag(xml);
+                        articulations.tag(xml);
+                        xml.tagE("detached-legato");
+                        }
+                        break;
                   case Articulation_Reverseturn:
                   case Articulation_Turn:
                   case Articulation_Trill:
@@ -1564,6 +1587,7 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                   case Articulation_Plusstop:
                   case Articulation_Upbow:
                   case Articulation_Downbow:
+                  case Articulation_Snappizzicato:
                         // ignore, handled with technical
                         break;
                   default:
@@ -1571,10 +1595,14 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                         break;
                   }
             }
-      if (hasBreathMark(chord)) {
+      if (Breath* b = hasBreathMark(chord)) {
             notations.tag(xml);
             articulations.tag(xml);
-            xml.tagE("breath-mark");
+            int st = b->subtype();
+            if (st == 0 || st == 1)
+                  xml.tagE("breath-mark");
+            else
+                  xml.tagE("caesura");
             }
       articulations.etag(xml);
 
@@ -1583,11 +1611,15 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
       foreach (const Articulation* a, *na) {
             switch (a->subtype()) {
                   case Articulation_Fermata:
+                  case Articulation_Shortfermata:
+                  case Articulation_Longfermata:
+                  case Articulation_Verylongfermata:
                   case Articulation_Sforzatoaccent:
                   case Articulation_Staccato:
                   case Articulation_Staccatissimo:
                   case Articulation_Tenuto:
                   case Articulation_Marcato:
+                  case Articulation_Portato:
                         // ignore, already handled
                         break;
                   case Articulation_Reverseturn:
@@ -1625,9 +1657,17 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                         xml.tagE("mordent");
                         }
                         break;
+                  case Articulation_Schleifer:
+                        {
+                        notations.tag(xml);
+                        ornaments.tag(xml);
+                        xml.tagE("schleifer");
+                        }
+                        break;
                   case Articulation_Plusstop:
                   case Articulation_Upbow:
                   case Articulation_Downbow:
+                  case Articulation_Snappizzicato:
                         // ignore, handled with technical
                         break;
                   default:
@@ -1661,6 +1701,27 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                         notations.tag(xml);
                         technical.tag(xml);
                         xml.tagE("down-bow");
+                        }
+                        break;
+                  case Articulation_Snappizzicato:
+                        {
+                        notations.tag(xml);
+                        technical.tag(xml);
+                        xml.tagE("snap-pizzicato");
+                        }
+                        break;
+                  case Articulation_Ouvert:
+                        {
+                        notations.tag(xml);
+                        technical.tag(xml);
+                        xml.tagE("open-string");
+                        }
+                        break;
+                  case Articulation_Thumb:
+                        {
+                        notations.tag(xml);
+                        technical.tag(xml);
+                        xml.tagE("thumb-position");
                         }
                         break;
                   default:
@@ -1837,7 +1898,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                   xml.tagE("tie type=\"stop\"");
             if (note->tieFor())
                   xml.tagE("tie type=\"start\"");
-                  
+
             //instrument for unpitched
             if (useDrumset)
                   xml.tagE(QString("instrument id=\"P%1-I%2\"").arg(score->parts()->indexOf(note->staff()->part()) + 1).arg(note->pitch() + 1));
@@ -1938,12 +1999,12 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                         case ACC_SHARP_ARROW_UP:      // (alternate)
                               s = "three-quarters-sharp";
                               break;
-                        case ACC_SORI:                //sori    
-                              s = "sori";  
-                              break; 
-                        case ACC_KORON:               //koron   
-                              s = "koron";  
-                              break; 
+                        case ACC_SORI:                //sori
+                              s = "sori";
+                              break;
+                        case ACC_KORON:               //koron
+                              s = "koron";
+                              break;
                         default:
                               qDebug("unknown accidental %d\n", acc->subtype());
                         }

@@ -3,7 +3,7 @@
 <score-partwise>
   <work>
     <work-number>MuseScore testfile</work-number>
-    <work-title>Multi-Measure Rests 2</work-title>
+    <work-title>Multi-Measure Rests 1</work-title>
     </work>
   <identification>
     <creator type="composer">Leon Vinken</creator>
@@ -11,6 +11,12 @@
       <software>MuseScore 0.7.0</software>
       <encoding-date>2007-09-10</encoding-date>
       </encoding>
+    <miscellaneous>
+      <miscellaneous-field name="description">
+        Test multi-measure rest handling. When exporting to MusicXML, the global
+        "create multi-measure rest" flag must be set.
+        </miscellaneous-field>
+      </miscellaneous>
     </identification>
   <part-list>
     <score-part id="P1">
@@ -21,7 +27,7 @@
       <midi-instrument id="P1-I3">
         <midi-channel>1</midi-channel>
         <midi-program>1</midi-program>
-        <volume>78.7402</volume>
+        <volume>0</volume>
         <pan>0</pan>
         </midi-instrument>
       </score-part>
@@ -31,7 +37,7 @@
       <attributes>
         <divisions>1</divisions>
         <key>
-          <fifths>0</fifths>
+          <fifths>-7</fifths>
           <mode>major</mode>
           </key>
         <time symbol="common">
@@ -42,6 +48,9 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <measure-style>
+          <multiple-rest>3</multiple-rest>
+          </measure-style>
         </attributes>
       <note>
         <rest/>
@@ -71,6 +80,11 @@
         </note>
       </measure>
     <measure number="5">
+      <attributes>
+        <measure-style>
+          <multiple-rest>2</multiple-rest>
+          </measure-style>
+        </attributes>
       <note>
         <rest/>
         <duration>4</duration>
@@ -78,62 +92,6 @@
         </note>
       </measure>
     <measure number="6">
-      <note>
-        <rest/>
-        <duration>4</duration>
-        <voice>1</voice>
-        </note>
-      </measure>
-    <measure number="7">
-      <note>
-        <rest/>
-        <duration>4</duration>
-        <voice>1</voice>
-        </note>
-      </measure>
-    <measure number="8">
-      <note>
-        <rest/>
-        <duration>4</duration>
-        <voice>1</voice>
-        </note>
-      </measure>
-    <measure number="9">
-      <note>
-        <rest/>
-        <duration>4</duration>
-        <voice>1</voice>
-        </note>
-      </measure>
-    <measure number="10">
-      <note>
-        <rest/>
-        <duration>4</duration>
-        <voice>1</voice>
-        </note>
-      </measure>
-    <measure number="11">
-      <note>
-        <rest/>
-        <duration>4</duration>
-        <voice>1</voice>
-        </note>
-      </measure>
-    <measure number="12">
-      <note>
-        <rest/>
-        <duration>4</duration>
-        <voice>1</voice>
-        </note>
-      </measure>
-    <measure number="13">
-      <note>
-        <rest/>
-        <duration>4</duration>
-        <voice>1</voice>
-        </note>
-      </measure>
-    <measure number="14">
       <note>
         <rest/>
         <duration>4</duration>
