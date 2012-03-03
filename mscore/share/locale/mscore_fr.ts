@@ -5217,6 +5217,14 @@ Essayez de sauvegarder à un autre emplacement.</translation>
         <source>Can't open file. File extension "%1" not supported.</source>
         <translation>Impossible d'ouvrir le fichier. L'extension "%1" n'est pas prise en charge.</translation>
     </message>
+    <message>
+        <source>Internal error</source>
+        <translation>Erreur interne</translation>
+    </message>
+    <message>
+        <source>Cannot load picture file %1</source>
+        <translation>Impossible de charger l'image %1</translation>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>

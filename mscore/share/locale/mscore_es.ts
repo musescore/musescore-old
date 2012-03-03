@@ -3136,7 +3136,7 @@ fallido: </translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation>&amp;Acerca de</translation>
+        <translation>&amp;Acerca de MuseScore</translation>
     </message>
     <message>
         <source>About&amp;Qt</source>
@@ -5203,6 +5203,14 @@ Intenta guardarlo en una localización distinta</translation>
     <message>
         <source>Can't open file. File extension "%1" not supported.</source>
         <translation>No es posible abrir el archivo. La extensión de archivo "%1" no está soportada.</translation>
+    </message>
+    <message>
+        <source>Internal error</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cannot load picture file %1</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -8210,7 +8218,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Move up</source>
-        <translation>Pasar al pentagrama inferior</translation>
+        <translation>Pasar al pentagrama superior</translation>
     </message>
     <message>
         <source>Pitch down</source>
@@ -8254,7 +8262,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Move down</source>
-        <translation>Pasar al pentagrama superior</translation>
+        <translation>Pasar al pentagrama inferior</translation>
     </message>
     <message>
         <source>Previous chord</source>
@@ -8358,7 +8366,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Delete contents of the selected measures</source>
-        <translation>Eliminar los contenidos de los compases seleccionados</translation>
+        <translation>Eliminar el contenido de los compases seleccionados</translation>
     </message>
     <message>
         <source>Timewise Delete</source>

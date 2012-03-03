@@ -5216,6 +5216,14 @@ Tente salvar em um local diferente.</translation>
         <source>Can't open file. File extension "%1" not supported.</source>
         <translation type="unfinished"/>
     </message>
+    <message>
+        <source>Internal error</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cannot load picture file %1</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>

@@ -5215,6 +5215,14 @@ Try saving to a different location.</translation>
         <source>Can't open file. File extension "%1" not supported.</source>
         <translation>Không thể mở tài liệu theo yêu cầu. MuseScore không hỗ trợ extension "%1".</translation>
     </message>
+    <message>
+        <source>Internal error</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cannot load picture file %1</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
