@@ -15,6 +15,7 @@
 #include "style.h"
 #include "mscore.h"
 #include "sequencer.h"
+#include "figuredbass.h"
 
 qreal PDPI;
 qreal DPI;
@@ -131,6 +132,7 @@ void MScore::init()
       initSymbols(0);   // init emmentaler symbols
       initStaffTypes();
       initDrumset();
+      FiguredBass::readConfigFile(0);
       }
 
 //---------------------------------------------------------

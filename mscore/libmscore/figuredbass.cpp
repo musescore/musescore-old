@@ -18,33 +18,16 @@
 #include "system.h"
 #include "segment.h"
 
-// !! TO DO !! This table should come from a configuration file
-
 #define FBIDigitNone    0
 
-static QChar g_CombinedForm[2][2][10] =
-{ //    0          1          2          3          4          5          6          7         8         9
-  // modern forms
-{ { L'\xE20B', L'\xE20C', L'\xE20D', L'\xE20E', L'\xE20F', L'\xE211', L'\xE212', L'\xE213', L'\xE214', L'\xE215' },   // plus & backsl.
-  {    '?',       '?',       '?',       '?',       '?',    L'\xE210',    '?',       '?',      '?',      '?' },   // slash
-},
-  // historic forms
-{ { L'\xE200', L'\xE201', L'\xE202', L'\xE203', L'\xE204', L'\xE206', L'\xE207', L'\xE208', L'\xE209', L'\xE20A' },   // plus & backsl.
-  {    '?',       '?',       '?',       '?',       '?',    L'\xE205',    '?',       '?',      '?',      '?' },   // slash
-}
-};
+// the array of configured fonts
+static QList<FiguredBassFont> g_FBFonts;
 
 //---------------------------------------------------------
 //   FiguredBassItem
 //---------------------------------------------------------
 
-// used for formatted display (also should go into configuration files)
-const QChar FiguredBassItem::accidToChar[FBINumOfAccid] =
-{ 0, L'\xE114', L'\xE113', L'\xE10E', '+', '\\', '/', L'\xE11A', L'\xE11C'};
-const QChar FiguredBassItem::parenthToChar[FBINumOfParenth] =
-{ 0, '(', ')', '[', ']'};
-
-// used for normalized display (in principle, might be different from formatted forms)
+// used for indexed access to parenthesis chars
 // (these is no normAccidToChar[], as accidentals may use mult. chars in normalized display):
 const QChar FiguredBassItem::normParenthToChar[FBINumOfParenth] =
 { 0, '(', ')', '[', ']'};
@@ -448,23 +431,25 @@ void FiguredBassItem::layout()
       x1 = x2 = 0.0;
 
       // create display text
+      int font = 0;
+      int style = score()->styleI(ST_figuredBassStyle);
 
       if(parenth[0] != FBIParenthNone)
-            str.append(parenthToChar[parenth[0]]);
+            str.append(g_FBFonts.at(font).displayParenthesis[parenth[0]]);
 
       // prefix
       if(prefix != FBIAccidNone) {
             // if no digit, the string created so far 'hangs' to the left of the note
             if(digit == FBIDigitNone)
                   x1 = fm.width(str);
-            str.append(accidToChar[prefix]);
+            str.append(g_FBFonts.at(font).displayAccidental[prefix]);
             // if no digit, the string from here onward 'hangs' to the right of the note
             if(digit == FBIDigitNone)
                   x2 = fm.width(str);
             }
 
       if(parenth[1] != FBIParenthNone)
-            str.append(parenthToChar[parenth[1]]);
+            str.append(g_FBFonts.at(font).displayParenthesis[parenth[1]]);
 
       // digit
       if(digit != FBIDigitNone) {
@@ -473,18 +458,16 @@ void FiguredBassItem::layout()
             // if suffix is a combining shape, combine it with digit
             // unless there is a parenthesis in between
             if( (suffix == FBIAccidPlus || suffix == FBIAccidBackslash || suffix == FBIAccidSlash)
-                        && parenth[2] == FBIParenthNone) {
-                  int sel = (suffix == FBIAccidPlus || suffix == FBIAccidBackslash) ? 0 : 1;
-                  str.append(g_CombinedForm[0][sel][digit]);
-            }
+                        && parenth[2] == FBIParenthNone)
+                  str.append(g_FBFonts.at(font).displayDigit[style][digit][suffix-(FBIAccidPlus-1)]);
             else
-                  str.append('0' + digit);
+                  str.append(g_FBFonts.at(font).displayDigit[style][digit][0]);
             // if some digit, the string from here onward 'hangs' to the right of the note
             x2 = fm.width(str);
             }
 
       if(parenth[2] != FBIParenthNone)
-            str.append(parenthToChar[parenth[2]]);
+            str.append(g_FBFonts.at(font).displayParenthesis[parenth[2]]);
 
       // suffix
       // append only if non-combining shape or cannot combine (no digit or parenthesis in between)
@@ -492,16 +475,16 @@ void FiguredBassItem::layout()
                         && suffix != FBIAccidBackslash && suffix != FBIAccidSlash)
                   || digit == FBIDigitNone
                   || parenth[2] != FBIParenthNone)
-            str.append(accidToChar[suffix]);
+            str.append(g_FBFonts.at(font).displayAccidental[suffix]);
 
       if(parenth[3] != FBIParenthNone)
-            str.append(parenthToChar[parenth[3]]);
+            str.append(g_FBFonts.at(font).displayParenthesis[parenth[3]]);
 
       // !! TO DO !! INSERT HERE PROPER CONT. LINE FORMATTING
       if(contLine)                              // currently, only a token representation is provided
             str.append("___");
       if(parenth[4] != FBIParenthNone)
-            str.append(parenthToChar[parenth[4]]);
+            str.append(g_FBFonts.at(font).displayParenthesis[parenth[4]]);
 
       setText(str);                             // this text will be displayed
 
@@ -591,7 +574,7 @@ void FiguredBass::read(const QDomElement& de)
 //---------------------------------------------------------
 
 // uncomment for using built-in edit Text layout
-#define _USE_EDIT_TEXT_LAYOUT_
+//#define _USE_EDIT_TEXT_LAYOUT_
 
 void FiguredBass::layout()
       {
@@ -608,19 +591,20 @@ void FiguredBass::layout()
 
       // vertical position
       y = 0;                                          // default vert. pos.
-      qreal staffHeight = 4 * spatium();              // assume a standard staff height
+//      qreal staffHeight = 4 * spatium();              // assume a standard staff height
       if(parent() && track() >= 0) {
             System* sys = ((Segment*)parent())->measure()->system();
             if (sys == 0)
                   qDebug("FiguredBass layout: no system!");
             else {
                   SysStaff* staff = sys->staff(staffIdx());
-                  staffHeight = staff->bbox().height();
+//                  staffHeight = staff->bbox().height();
                   y = staff->y();
                   }
             }
-      y += point(score()->styleS(ST_figuredBassDistance));
-      y += staffHeight;
+//      y += point(score()->styleS(ST_figuredBassDistance));
+//      y += staffHeight;
+      y += point(score()->styleS(ST_figuredBassYOffset));
 
       // bounding box
 #ifndef _USE_EDIT_TEXT_LAYOUT_
@@ -736,8 +720,8 @@ void FiguredBass::setVisible(bool flag)
 //   STATIC FUNCTION
 //    adding a new FiguredBass to a Segment;
 //    the main purpose of this function is to ensure that ONLY ONE F.b. element exists for each Segment/track;
-//    they either re-use an existing FiguredBass or create a new one if none if found;
-//    they return the FiguredBass and set pNew to true if it has been newly created.
+//    it either re-uses an existing FiguredBass or creates a new one if none if found;
+//    returns the FiguredBass and sets pNew to true if it has been newly created.
 //
 //    As the F.b. very concept requires the underlying chord to have ONLY ONE note, 
 //    it might make sense to drop the checking / setting of Track and unconditionally
@@ -768,6 +752,181 @@ FiguredBass * FiguredBass::addFiguredBassToSegment(Segment * seg, int track, int
             }
       return fb;
       }
+
+//---------------------------------------------------------
+//   STATIC FUNCTIONS FOR FONT CONFIGURATION MANAGEMENT
+//---------------------------------------------------------
+
+bool FiguredBassFont::read(const QDomElement &de)
+{
+      for (QDomElement e = de.firstChildElement(); !e.isNull();  e = e.nextSiblingElement()) {
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
+            if(val.size() < 1)
+                  return false;
+
+            if (tag == "family")
+                  family = val;
+            else if(tag == "displayName")
+                  displayName = val;
+            else if(tag == "defaultPitch")
+                  defPitch = val.toDouble();
+            else if(tag == "defaultLineHeight")
+                  defLineHeight = val.toDouble();
+            else if(tag == "parenthesisRoundOpen")
+                  displayParenthesis[1] = val[0];
+            else if(tag == "parenthesisRoundClosed")
+                  displayParenthesis[2] = val[0];
+            else if(tag == "parenthesisSquareOpen")
+                  displayParenthesis[3] = val[0];
+            else if(tag == "parenthesisSquareClosed")
+                  displayParenthesis[4] = val[0];
+            else if(tag == "doubleflat")
+                  displayAccidental[1] = val[0];
+            else if(tag == "flat")
+                  displayAccidental[2] = val[0];
+            else if(tag == "natural")
+                  displayAccidental[3] = val[0];
+            else if(tag == "sharp")
+                  displayAccidental[4] = val[0];
+            else if(tag == "doublesharp")
+                  displayAccidental[5] = val[0];
+            else if(tag == "digit") {
+                  int digit = e.attribute("value").toInt();
+                  if(digit < 1 || digit > 9)
+                        return false;
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
+                        const QString& tag(ee.tagName());
+                        const QString& val(ee.text());
+                        if(val.size() < 1)
+                              return false;
+                        if (tag == "simple")
+                              displayDigit[0][digit][0] = val[0];
+                        else if (tag == "crossed")
+                              displayDigit[0][digit][1] = val[0];
+                        else if (tag == "backslashed")
+                              displayDigit[0][digit][2] = val[0];
+                        else if (tag == "slashed")
+                              displayDigit[0][digit][3] = val[0];
+                        else if (tag == "simpleHistoric")
+                              displayDigit[1][digit][0] = val[0];
+                        else if (tag == "crossedHistoric")
+                              displayDigit[1][digit][1] = val[0];
+                        else if (tag == "backslashedHistoric")
+                              displayDigit[1][digit][2] = val[0];
+                        else if (tag == "slashedHistoric")
+                              displayDigit[1][digit][3] = val[0];
+                        else {
+                              domError(ee);
+                              return false;
+                              }
+                        }
+                  }
+            else {
+                  domError(e);
+                  return false;
+                  }
+            }
+      return true;
+}
+
+//---------------------------------------------------------
+//   Read Configuration File
+//
+//    reads a confoiguration and appends read data to g_FBFonts
+//    resets everythings and reads the built-in config file if fileName is null or empty
+//---------------------------------------------------------
+
+bool FiguredBass::readConfigFile(const QString& fileName)
+{
+      QString     path;
+
+      if(fileName == 0 || fileName.isEmpty()) {       // defaults to built-in xml
+            path = ":/fonts/fonts_figuredbass.xml";
+            g_FBFonts.clear();
+            }
+      else
+            path = fileName;
+
+      QFileInfo fi(path);
+      QFile f(path);
+
+      if (!fi.exists() || !f.open(QIODevice::ReadOnly)) {
+            QString s = QT_TRANSLATE_NOOP("file", "cannot open chord description:\n%1\n%2");
+            MScore::lastError = s.arg(f.fileName()).arg(f.errorString());
+qDebug("ChordList::read failed: <%s>\n", qPrintable(path));
+            return false;
+            }
+      QDomDocument doc;
+      int line, column;
+      QString err;
+      if (!doc.setContent(&f, false, &err, &line, &column)) {
+            QString s = QT_TRANSLATE_NOOP("file", "error reading figured bass font description %1 at line %2 column %3: %4\n");
+            MScore::lastError = s.arg(f.fileName()).arg(line).arg(column).arg(err);
+            return false;
+            }
+      docName = f.fileName();
+
+      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "museScore") {
+                  // QString version = e.attribute(QString("version"));
+                  // QStringList sl = version.split('.');
+                  // int _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
+
+                  for (QDomElement de = e.firstChildElement(); !de.isNull();  de = de.nextSiblingElement()) {
+                        const QString& tag(de.tagName());
+                        if (tag == "font") {
+                              FiguredBassFont f;
+                              if(f.read(de))
+                                    g_FBFonts.append(f);
+                              else
+                                    return false;
+                              }
+                        else
+                              domError(de);
+                        }
+                  return true;
+                  }
+            }
+      return false;
+}
+
+//---------------------------------------------------------
+//   Get Font Names
+//
+//    returns a list of display names for the fonts  configured to work with Figured Bass;
+//    the index of a name in the list can be used to retrieve the font data with fontData()
+//---------------------------------------------------------
+
+QList<const QString*> FiguredBass::fontNames()
+{
+      QList<const QString*> names = QList<const QString*>();
+      foreach(FiguredBassFont f, g_FBFonts)
+            names.append(&f.displayName);
+      return names;
+}
+
+//---------------------------------------------------------
+//   Get Font Data
+//
+//    retrieves data about a Figured Bass font.
+//    returns: true if idx is valid | false if it is not
+// any of the pointer parameter can be null, if that datum is not needed
+//---------------------------------------------------------
+
+bool FiguredBass::fontData(int nIdx, QString * pFamily, QString * pDisplayName,
+            qreal * pSize, qreal * pLineHeight)
+{
+      if(nIdx >= 0 && nIdx < g_FBFonts.size()) {
+            FiguredBassFont f = g_FBFonts.at(nIdx);
+            if(pFamily)       *pFamily          = f.family;
+            if(pDisplayName)  *pDisplayName     = f.displayName;
+            if(pSize)         *pSize            = f.defPitch;
+            if(pLineHeight)   *pLineHeight      = f.defLineHeight;
+            return true;
+      }
+      return false;
+}
 
 //---------------------------------------------------------
 //
