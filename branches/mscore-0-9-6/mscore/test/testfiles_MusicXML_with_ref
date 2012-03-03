@@ -3,7 +3,9 @@ testEmptyMeasure.xml
 testEmptyVoice1.xml
 testLyricsVoice2b.xml
 testMeasureLength.xml
+testMultiMeasureRest1.xml
 testMultiMeasureRest2.xml
+testMultiMeasureRest3.xml
 testNonUniqueThings.xml
 testNumberedLyrics.xml
 testPartsSpecialCases.xml
