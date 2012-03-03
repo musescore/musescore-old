@@ -1725,9 +1725,10 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
                   default:
                         break;
                   }
-            score()->addRefresh(dragElement->abbox());
+            qreal w = 8.0 / matrix().m11();
+            score()->addRefresh(dragElement->abbox().adjusted(-w, -w, w, w));
             dragElement->setPos(pos - dragOffset);
-            score()->addRefresh(dragElement->abbox());
+            score()->addRefresh(dragElement->abbox().adjusted(-w, -w, w, w));
             _score->end();
             return;
             }
@@ -2354,6 +2355,9 @@ void ScoreView::editCopy()
 void ScoreView::normalCopy()
       {
       if (!_score->selection().canCopy()) {
+            QMessageBox::information(0, tr("MuseScore:"),
+                  tr("Please select the complete tuplet and retry the copy operation"),
+                  QMessageBox::Ok, QMessageBox::NoButton);
             printf("cannot copy selection: intersects a tuplet\n");
             return;
             }
@@ -2374,6 +2378,9 @@ void ScoreView::normalCopy()
 void ScoreView::normalCut()
       {
       if (!_score->selection().canCopy()) {
+            QMessageBox::information(0, tr("MuseScore:"),
+                  tr("Please select the complete tuplet and retry the cut operation"),
+                  QMessageBox::Ok, QMessageBox::NoButton);
             printf("cannot copy selection: intersects a tuplet\n");
             return;
             }

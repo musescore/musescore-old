@@ -139,25 +139,25 @@ void Marker::setMarkerType(int t)
       {
       switch(t) {
             case MARKER_SEGNO:
-                  setHtml(symToHtml(symbols[segnoSym], 80));
+                  setHtml(symToHtml(symbols[segnoSym], 0));
                   setLabel("segno");
                   _reloff.rx() = 0.0;           // move to start of measure
                   break;
 
             case MARKER_CODA:
-                  setHtml(symToHtml(symbols[codaSym], 80));
+                  setHtml(symToHtml(symbols[codaSym], 0));
                   setLabel("codab");
                   _reloff.rx() = 0.0;           // move to start of measure
                   break;
 
             case MARKER_VARCODA:
-                  setHtml(symToHtml(symbols[varcodaSym], 80));
+                  setHtml(symToHtml(symbols[varcodaSym], 0));
                   setLabel("varcoda");
                   _reloff.rx() = 0.0;           // move to start of measure
                   break;
 
             case MARKER_CODETTA:
-                  setHtml(symToHtml(symbols[codaSym], symbols[codaSym], 80));
+                  setHtml(symToHtml(symbols[codaSym], symbols[codaSym], 0));
                   setLabel("codetta");
                   _reloff.rx() = 0.0;           // move to start of measure
                   break;

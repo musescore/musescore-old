@@ -165,20 +165,6 @@ bool Seq::init()
       bool useAlsaFlag      = preferences.useAlsaAudio;
       bool usePortaudioFlag = preferences.usePortaudioAudio;
 
-#ifdef USE_JACK
-      if (useJackFlag) {
-            useAlsaFlag      = false;
-            usePortaudioFlag = false;
-            driver = new JackAudio(this);
-            if (!driver->init()) {
-                  printf("no JACK server found\n");
-                  delete driver;
-                  driver = 0;
-                  }
-            else
-                  useJACK = true;
-            }
-#endif
 #ifdef USE_ALSA
       if (driver == 0 && useAlsaFlag) {
             driver = new AlsaAudio(this);
@@ -193,7 +179,7 @@ bool Seq::init()
             }
 #endif
 #ifdef USE_PORTAUDIO
-      if (usePortaudioFlag) {
+      if (driver == 0 && usePortaudioFlag) {
             driver = new Portaudio(this);
             if (!driver->init()) {
                   printf("no audio output found\n");
@@ -204,6 +190,21 @@ bool Seq::init()
                   usePortaudio = true;
             }
 #endif
+#ifdef USE_JACK
+      if (driver == 0 && useJackFlag) {
+            useAlsaFlag      = false;
+            usePortaudioFlag = false;
+            driver = new JackAudio(this);
+            if (!driver->init()) {
+                  printf("no JACK server found\n");
+                  delete driver;
+                  driver = 0;
+                  }
+            else
+                  useJACK = true;
+            }
+#endif
+
       if (driver == 0) {
 #if 0
             QString s = tr("Init audio driver failed.\n"
