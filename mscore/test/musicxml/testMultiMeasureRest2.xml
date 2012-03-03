@@ -11,6 +11,12 @@
       <software>MuseScore 0.7.0</software>
       <encoding-date>2007-09-10</encoding-date>
       </encoding>
+    <miscellaneous>
+      <miscellaneous-field name="description">
+        Test multi-measure rest handling. When exporting to MusicXML, the global
+        "create multi-measure rest" flag must be set.
+        </miscellaneous-field>
+      </miscellaneous>
     </identification>
   <part-list>
     <score-part id="P1">

@@ -12,11 +12,6 @@
       <software>MuseScore 0.7.0</software>
       <encoding-date>2007-09-10</encoding-date>
       </encoding>
-    <miscellaneous>
-      <miscellaneous-field name="description">
-        Note: both staccatissimo and spiccato are imported as staccatissimo.
-        </miscellaneous-field>
-      </miscellaneous>
     </identification>
   <part-list>
     <score-part id="P1">
@@ -460,7 +455,7 @@
         <stem>up</stem>
         <notations>
           <articulations>
-            <spiccato/>
+            <staccatissimo/>
             </articulations>
           </notations>
         </note>

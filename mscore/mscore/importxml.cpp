@@ -484,7 +484,7 @@ void MusicXml::import(Score* s)
       hairpin = 0;
 
       // TODO only if multi-measure rests used ???
-      score->style()->set(ST_createMultiMeasureRests, true);
+      // score->style()->set(ST_createMultiMeasureRests, true);
 
       for (QDomElement e = doc->documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "score-partwise")
@@ -1192,12 +1192,12 @@ void MusicXml::xmlScorePart(QDomElement e, QString id, int& parts)
                               part->setMidiProgram(ee.text().toInt() - 1);
                         else if (ee.tagName() == "volume") {
                               double vol = ee.text().toDouble();
-                              if(vol >= 0 && vol <= 100)
+                              if (vol >= 0 && vol <= 100)
                                     part->setVolume(( vol / 100) * 127);
                               }
                         else if (ee.tagName() == "pan") {
                               double pan = ee.text().toDouble();
-                              if(pan >= -90 && pan <= 90)
+                              if (pan >= -90 && pan <= 90)
                                     part->setPan( ((pan + 90) / 180) * 127 );
                               }
                         else
@@ -1730,12 +1730,12 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                         else if (endingType.isEmpty())
                               qDebug("ImportXml: warning: empty ending type");
                         else {
-                              QStringList sl = endingNumber.split("," , QString::SkipEmptyParts);
+                              QStringList sl = endingNumber.split(",", QString::SkipEmptyParts);
                               QList<int> iEndingNumbers;
                               bool unsupported = false;
-                              foreach(const QString& s, sl) {
+                              foreach(const QString &s, sl) {
                                     int iEndingNumber = s.toInt();
-                                    if(iEndingNumber <= 0) {
+                                    if (iEndingNumber <= 0) {
                                           unsupported = true;
                                           break;
                                           }
@@ -1888,11 +1888,11 @@ static void setSLinePlacement(SLine* sli, float s, const QString pl, bool hasYof
                   qDebug("setSLinePlacement invalid placement '%s'", qPrintable(pl));
             }
 
-// there is no line segment without calling layout();
-// layout() only works after SLine is inserted in the score.
-//      LineSegment* ls = (LineSegment*)sli->spannerSegments().front();
-//      ls->setUserOff(QPointF(0, offs * s));
-// alternative:
+      // there is no line segment without calling layout();
+      // layout() only works after SLine is inserted in the score.
+      //      LineSegment* ls = (LineSegment*)sli->spannerSegments().front();
+      //      ls->setUserOff(QPointF(0, offs * s));
+      // alternative:
 
       sli->setUserOff(QPointF(0, offs * s));
 
@@ -3264,6 +3264,12 @@ static bool readArticulations(ChordRest* cr, QString mxmlName)
       map["stopped"]          = Articulation_Plusstop;
       map["up-bow"]           = Articulation_Upbow;
       map["down-bow"]         = Articulation_Downbow;
+      map["detached-legato"]  = Articulation_Portato;
+      map["spiccato"]         = Articulation_Staccatissimo;
+      map["snap-pizzicato"]   = Articulation_Snappizzicato;
+      map["schleifer"]        = Articulation_Schleifer;
+      map["open-string"]      = Articulation_Ouvert;
+      map["thumb-position"]   = Articulation_Thumb;
 
       if (map.contains(mxmlName)) {
             addArticulationToChord(cr, map.value(mxmlName), "");
@@ -3375,6 +3381,49 @@ static void addTextToNote(QString txt, TextStyleType style, Score* score, Note* 
       }
 
 //---------------------------------------------------------
+//   addFermata
+//---------------------------------------------------------
+
+/**
+ Add a MusicXML fermata.
+ Note: MusicXML common.mod: "The fermata type is upright if not specified."
+ */
+
+static void addFermata(ChordRest* cr, const QString type, const ArticulationType articSym)
+      {
+      if (type == "upright" || type == "")
+            addArticulationToChord(cr, articSym, "up");
+      else if (type == "inverted")
+            addArticulationToChord(cr, articSym, "down");
+      else
+            qDebug("unknown fermata type '%s'", qPrintable(type));
+      }
+
+//---------------------------------------------------------
+//   xmlFermata
+//---------------------------------------------------------
+
+/**
+ Read a MusicXML fermata.
+ Note: MusicXML common.mod: "An empty fermata element represents a normal fermata."
+ */
+
+static void xmlFermata(ChordRest* cr, QDomElement e)
+      {
+      QString fermata     = e.text();
+      QString fermataType = e.attribute(QString("type"));
+
+      if (fermata == "normal" || fermata == "")
+            addFermata(cr, fermataType, Articulation_Fermata);
+      else if (fermata == "angled")
+            addFermata(cr, fermataType, Articulation_Shortfermata);
+      else if (fermata == "square")
+            addFermata(cr, fermataType, Articulation_Longfermata);
+      else
+            qDebug("unknown fermata '%s'\n", qPrintable(fermata));
+      }
+
+//---------------------------------------------------------
 //   xmlNotations
 //---------------------------------------------------------
 
@@ -3390,7 +3439,7 @@ void MusicXml::xmlNotations(Note* note, ChordRest* cr, int trk, int ticks, QDomE
       QString wavyLineType;
       QString arpeggioType;
       QString glissandoType;
-      bool breathmark = false;
+      int breath = -1;
       int tremolo = 0;
       QString tremoloType;
       QString placement;
@@ -3515,33 +3564,24 @@ void MusicXml::xmlNotations(Note* note, ChordRest* cr, int trk, int ticks, QDomE
                         if (readArticulations(cr, eee.tagName()))
                               continue;
                         else if (eee.tagName() == "breath-mark")
-                              breathmark = true;
+                              breath = 0;
+                        else if (eee.tagName() == "caesura")
+                              breath = 3;
                         else if (eee.tagName() == "strong-accent") {
                               QString strongAccentType = eee.attribute(QString("type"));
-                              if (!strongAccentType.isEmpty()) {
-                                    if (strongAccentType == "up")
-                                          addArticulationToChord(cr, Articulation_Marcato, "up");
-                                    else if (strongAccentType == "down")
-                                          addArticulationToChord(cr, Articulation_Marcato, "down");
-                                    else
-                                          qDebug("unknown mercato type %s", strongAccentType.toLatin1().data());
-                                    }
+                              if (strongAccentType == "up" || strongAccentType == "")
+                                    addArticulationToChord(cr, Articulation_Marcato, "up");
+                              else if (strongAccentType == "down")
+                                    addArticulationToChord(cr, Articulation_Marcato, "down");
+                              else
+                                    qDebug("unknown mercato type %s", strongAccentType.toLatin1().data());
                               }
                         else
                               domError(eee);
                         }
                   }
-            else if (ee.tagName() == "fermata") {
-                  QString fermataType = ee.attribute(QString("type"));
-                  if (!fermataType.isEmpty()) {
-                        if (fermataType == "upright")
-                              addArticulationToChord(cr, Articulation_Fermata, "up");
-                        else if (fermataType == "inverted")
-                              addArticulationToChord(cr, Articulation_Fermata, "down");
-                        else
-                              qDebug("unknown fermata type %s", fermataType.toLatin1().data());
-                        }
-                  }
+            else if (ee.tagName() == "fermata")
+                  xmlFermata(cr, ee);
             else if (ee.tagName() == "ornaments") {
                   bool trillMark = false;
                   // <trill-mark placement="above"/>
@@ -3559,7 +3599,8 @@ void MusicXml::xmlNotations(Note* note, ChordRest* cr, int trk, int ticks, QDomE
                         else if (eee.tagName() == "accidental-mark")
                               domNotImplemented(eee);
                         else if (eee.tagName() == "delayed-turn")
-                              domNotImplemented(eee);
+                              // TODO: actually this should be offset a bit to the right
+                              addArticulationToChord(cr, Articulation_Turn, "");
                         else
                               domError(eee);
                         }
@@ -3675,10 +3716,11 @@ void MusicXml::xmlNotations(Note* note, ChordRest* cr, int trk, int ticks, QDomE
                   qDebug("unknown wavy-line type %s", wavyLineType.toLatin1().data());
             }
 
-      if (breathmark) {
+      if (breath >= 0) {
             Breath* b = new Breath(score);
             // b->setTrack(trk + voice); TODO check next line
             b->setTrack(track);
+            b->setSubtype(breath);
             Segment* seg = measure->getSegment(SegBreath, tick);
             seg->add(b);
             }

@@ -3,7 +3,7 @@
 <score-partwise>
   <work>
     <work-number>MuseScore testfile</work-number>
-    <work-title>Multi-Measure Rests</work-title>
+    <work-title>Multi-Measure Rests 1</work-title>
     </work>
   <identification>
     <creator type="composer">Leon Vinken</creator>
@@ -21,7 +21,7 @@
       <midi-instrument id="P1-I3">
         <midi-channel>1</midi-channel>
         <midi-program>1</midi-program>
-        <volume>78.7402</volume>
+        <volume>0</volume>
         <pan>0</pan>
         </midi-instrument>
       </score-part>
@@ -42,9 +42,6 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
-        <measure-style>
-          <multiple-rest>3</multiple-rest>
-          </measure-style>
         </attributes>
       <note>
         <rest/>
@@ -74,11 +71,6 @@
         </note>
       </measure>
     <measure number="5">
-      <attributes>
-        <measure-style>
-          <multiple-rest>2</multiple-rest>
-          </measure-style>
-        </attributes>
       <note>
         <rest/>
         <duration>4</duration>

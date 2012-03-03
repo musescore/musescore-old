@@ -1,4 +1,7 @@
 03.3 (lv)
+      - fix #14861: [MusicXML import] [trunk] import error: 32a-Notations.xml: missing notations
+      - fix #14863: [MusicXML] [trunk] Export notations imported by issue 14861
+      - fix #14882: [MusicXML import] [trunk] import error: 46a-Barlines.xml: unexpected multi-measure rests
       - update MusicXML regression test
      (mw)
       - Figured Bass: added style param. to "Style | General" dlg box

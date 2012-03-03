@@ -4,8 +4,11 @@ testLines1.xml
 testLines2.xml
 testLyricsVoice2b.xml
 testMeasureLength.xml
+testMultiMeasureRest1.xml
 testMultiMeasureRest2.xml
+testMultiMeasureRest3.xml
 testNonUniqueThings.xml
+testNoteAttributes2.xml
 testNumberedLyrics.xml
 testPartsSpecialCases.xml
 testTuplets2.xml
