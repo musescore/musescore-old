@@ -412,7 +412,7 @@ bool Score::read(QString name)
             else {
                   printf("unknown file suffix <%s>, name <%s>\n", qPrintable(cs), qPrintable(name));
                   if(!noGui) {
-                        QMessageBox::critical(0, tr("MuseScore"),
+                        QMessageBox::critical(0, "MuseScore",
                            tr("Can't open file. File extension \"%1\" not supported.").arg(cs)
                            );
                         }

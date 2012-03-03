@@ -143,7 +143,7 @@ bool LoadFile::load(const QString& name)
 bool MuseScore::checkDirty(Score* s)
       {
       if (s->dirty()) {
-            QMessageBox::StandardButton n = QMessageBox::warning(this, tr("MuseScore"),
+            QMessageBox::StandardButton n = QMessageBox::warning(this, "MuseScore",
                tr("Save changes to the score \"%1\"\n"
                "before closing?").arg(s->name()),
                QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel,
@@ -1219,7 +1219,7 @@ bool Score::read(QDomElement e)
                   if(!noGui) {
                         QString message = tr("Cannot read this score:<br>Your version of MuseScore is too old.<br><a href=\"%1\">Upgrade now!</a>").arg("http://musescore.org");
                         QMessageBox msgBox;
-                        msgBox.setWindowTitle(tr("MuseScore"));
+                        msgBox.setWindowTitle("MuseScore");
                         msgBox.setText(message);
                         msgBox.setTextFormat(Qt::RichText);
                         msgBox.setIcon(QMessageBox::Critical);

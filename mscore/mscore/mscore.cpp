@@ -1609,7 +1609,7 @@ static void loadScores(const QStringList& argv)
                         if(errno != 0 && errno != ERANGE && !noGui) {// display an error if it's worth
                               printf("errno %d\n", errno);
                               QMessageBox::warning(0,
-                                    QWidget::tr("MuseScore"),
+                                    "MuseScore",
                                     QWidget::tr("reading file <")
                                        + name + "> failed: " +
                                     QString(strerror(errno)),
@@ -3005,7 +3005,7 @@ bool MuseScore::restoreSession(bool always)
                               }
                         else if (tag == "dirty") {
                               QMessageBox::StandardButton b = QMessageBox::question(0,
-                                 tr("MuseScore"),
+                                 "MuseScore",
                                  tr("The previous session quit unexpectedly.\n\nRestore session?"),
                                  QMessageBox::Yes | QMessageBox::No,
                                  QMessageBox::Yes

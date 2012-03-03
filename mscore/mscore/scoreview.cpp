@@ -2355,7 +2355,7 @@ void ScoreView::editCopy()
 void ScoreView::normalCopy()
       {
       if (!_score->selection().canCopy()) {
-            QMessageBox::information(0, tr("MuseScore:"),
+            QMessageBox::information(0, "MuseScore",
                   tr("Please select the complete tuplet and retry the copy operation"),
                   QMessageBox::Ok, QMessageBox::NoButton);
             printf("cannot copy selection: intersects a tuplet\n");
@@ -2378,7 +2378,7 @@ void ScoreView::normalCopy()
 void ScoreView::normalCut()
       {
       if (!_score->selection().canCopy()) {
-            QMessageBox::information(0, tr("MuseScore:"),
+            QMessageBox::information(0, "MuseScore",
                   tr("Please select the complete tuplet and retry the cut operation"),
                   QMessageBox::Ok, QMessageBox::NoButton);
             printf("cannot copy selection: intersects a tuplet\n");
