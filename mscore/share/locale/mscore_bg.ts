@@ -6704,6 +6704,22 @@ failed: </source>
 </source>
         <translation type="unfinished"/>
     </message>
+    <message>
+        <location filename="../../mscore/scoreview.cpp" line="2358"/>
+        <location filename="../../mscore/scoreview.cpp" line="2381"/>
+        <source>MuseScore:</source>
+        <translation type="unfinished">MuseScore:</translation>
+    </message>
+    <message>
+        <location filename="../../mscore/scoreview.cpp" line="2359"/>
+        <source>Please select the complete tuplet and retry the copy operation</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/scoreview.cpp" line="2382"/>
+        <source>Please select the complete tuplet and retry the cut operation</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>SegmentBase</name>
@@ -6847,26 +6863,26 @@ failed: </source>
 <context>
     <name>Seq</name>
     <message>
-        <location filename="../../mscore/seq.cpp" line="209"/>
+        <location filename="../../mscore/seq.cpp" line="210"/>
         <source>Init audio driver failed.
 Sequencer will be disabled.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/seq.cpp" line="225"/>
-        <location filename="../../mscore/seq.cpp" line="243"/>
+        <location filename="../../mscore/seq.cpp" line="226"/>
+        <location filename="../../mscore/seq.cpp" line="244"/>
         <source>MuseScore: Load SoundFont</source>
         <translation>MuseScore: Зареждане на SoundFont</translation>
     </message>
     <message>
-        <location filename="../../mscore/seq.cpp" line="226"/>
+        <location filename="../../mscore/seq.cpp" line="227"/>
         <source>No SoundFont configured
 Playback will be disabled.</source>
         <translation>Няма избран SoundFont&#13;
 Възпроизвеждането ще бъде  невъзможно.</translation>
     </message>
     <message>
-        <location filename="../../mscore/seq.cpp" line="238"/>
+        <location filename="../../mscore/seq.cpp" line="239"/>
         <source>Loading SoundFont
 "%1"
 failed. Playback will be disabled.

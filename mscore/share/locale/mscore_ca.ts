@@ -5274,6 +5274,18 @@ Prova a desar-ho en una localització diferent.</translation>
         <translation>Format de caiguda desconegut: Formats %1:
 </translation>
     </message>
+    <message>
+        <source>MuseScore:</source>
+        <translation type="unfinished">MuseScore:</translation>
+    </message>
+    <message>
+        <source>Please select the complete tuplet and retry the copy operation</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Please select the complete tuplet and retry the cut operation</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>SegmentBase</name>
