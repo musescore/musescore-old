@@ -8,26 +8,26 @@
         <translation>Névjegy</translation>
     </message>
     <message utf8="true">
-        <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visit &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Support MuseScore with &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE  HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;&#13;
-&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
-p, li { white-space: pre-wrap; }&#13;
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Látogasd meg a &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; oldalt új verziókért és további információért.&lt;/span&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Támogasd a MuseScore-t &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;adománnyal&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
-&#13;
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2011 Werner Schweer és mások. &lt;/span&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;A GNU General Public License feltételeinek megfelelő kiadás&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;!DOCTYPE  HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Látogasd meg a &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; oldalt új verziókért és további információért.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Támogasd a MuseScore-t &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;adománnyal&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2011 Werner Schweer és mások. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;A GNU General Public License feltételeinek megfelelő kiadás&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -1025,7 +1025,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1839,8 +1839,8 @@ space unit</extracomment>
         <translation>Kezdő ismétlőjel bal margója</translation>
     </message>
     <message>
-        <source>Show repeat bar tips ("winged" repeats)</source>
-        <translation>Az ismétlőjelek végein "fülek" megjelenítése</translation>
+        <source>Show repeat bar tips (&quot;winged&quot; repeats)</source>
+        <translation>Az ismétlőjelek végein &quot;fülek&quot; megjelenítése</translation>
     </message>
     <message>
         <source>Progression</source>
@@ -1916,7 +1916,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Line break height</source>
-        <translation>Új 'bekezdés' utáni üres rész magassága</translation>
+        <translation>Új &apos;bekezdés&apos; utáni üres rész magassága</translation>
     </message>
     <message>
         <source>Use German names</source>
@@ -2916,9 +2916,9 @@ sikertelen: </translation>
         <translation>MuseScore</translation>
     </message>
     <message>
-        <source>Save changes to the score "%1"
+        <source>Save changes to the score &quot;%1&quot;
 before closing?</source>
-        <translation>Menti a(z) "%1" kotta
+        <translation>Menti a(z) &quot;%1&quot; kotta
 módosításait bezárás előtt?</translation>
     </message>
     <message>
@@ -3398,10 +3398,10 @@ módosításait bezárás előtt?</translation>
     <message>
         <source>
 
-From the "Help" menu try choosing "Online Handbook" instead.</source>
+From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
         <translation>
 
-A "Súgó" menüben válaszd inkább az "Online kézikönyv" pontot.</translation>
+A &quot;Súgó&quot; menüben válaszd inkább az &quot;Online kézikönyv&quot; pontot.</translation>
     </message>
     <message>
         <source>Grace Notes</source>
@@ -3591,8 +3591,8 @@ A "Súgó" menüben válaszd inkább az "Online kézikönyv" pontot.</translatio
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
-        <translation>Az előző munkamenet váratlanul ért véget.&#13;
-&#13;
+        <translation>Az előző munkamenet váratlanul ért véget.
+
 Helyreállítsa a munkamenetet?</translation>
     </message>
     <message>
@@ -3619,15 +3619,15 @@ Helyreállítsa a munkamenetet?</translation>
         <source>Script
 %1
 is incompatible with current interface</source>
-        <translation>A&#13;
-%1&#13;
+        <translation>A
+%1
 szkript nem kompatibilis a jelenlegi interfésszel.</translation>
     </message>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation>A MuseScore túl régi a&#13;
-%1&#13;
+        <translation>A MuseScore túl régi a
+%1
 szkript futtatásához</translation>
     </message>
     <message>
@@ -3636,10 +3636,10 @@ szkript futtatásához</translation>
     </message>
     <message>
         <source>Error loading plugin
-"%1" line %2:
+&quot;%1&quot; line %2:
 %3</source>
-        <translation>Hiba a(z)&#13;
-"%1" beépülő modul betöltése közben a(z) %2. sorban:&#13;
+        <translation>Hiba a(z)
+&quot;%1&quot; beépülő modul betöltése közben a(z) %2. sorban:
 %3</translation>
     </message>
     <message>
@@ -4999,8 +4999,8 @@ Válassz ki egyetlen hangjegyet vagy szünetet és próbáld újra
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
-        <translation>Nem található kottasor:&#13;
-a Hangszerek ablak segítségével&#13;
+        <translation>Nem található kottasor:
+a Hangszerek ablak segítségével
 hozz létre először néhány kottasort</translation>
     </message>
     <message>
@@ -5180,9 +5180,9 @@ sikertelen: </translation>
 %1 
 
 Try saving to a different location.</source>
-        <translation>A következő fájl zárolva van:&#13;
-%1&#13;
-&#13;
+        <translation>A következő fájl zárolva van:
+%1
+
 Próbáld más helyre menteni.</translation>
     </message>
     <message>
@@ -5206,20 +5206,20 @@ Próbáld más helyre menteni.</translation>
         <translation>Nem sikerült a betöltés: </translation>
     </message>
     <message>
-        <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
-        <translation type="unfinished"/>
+        <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href=&quot;%1&quot;&gt;Upgrade now!&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Can't open file. File extension "%1" not supported.</source>
-        <translation type="unfinished"/>
+        <source>Can&apos;t open file. File extension &quot;%1&quot; not supported.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Internal error</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cannot load picture file %1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5269,6 +5269,18 @@ Próbáld más helyre menteni.</translation>
 </source>
         <translation>ismeretlen célformátum: %1 formátumok:
 </translation>
+    </message>
+    <message>
+        <source>MuseScore:</source>
+        <translation type="unfinished">MuseScore:</translation>
+    </message>
+    <message>
+        <source>Please select the complete tuplet and retry the copy operation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select the complete tuplet and retry the cut operation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5389,7 +5401,7 @@ Próbáld más helyre menteni.</translation>
     <message>
         <source>Init audio driver failed.
 Sequencer will be disabled.</source>
-        <translation>Az audiodriver inicializálása sikertelen.&#13;
+        <translation>Az audiodriver inicializálása sikertelen.
 A sequencer le lesz tiltva.</translation>
     </message>
     <message>
@@ -5399,21 +5411,21 @@ A sequencer le lesz tiltva.</translation>
     <message>
         <source>No SoundFont configured
 Playback will be disabled.</source>
-        <translation>Nincs SoundFont beállítva.&#13;
+        <translation>Nincs SoundFont beállítva.
 Lejátszás letiltva.</translation>
     </message>
     <message>
         <source>Loading SoundFont
-"%1"
+&quot;%1&quot;
 failed. Playback will be disabled.
 
 Go to Display &gt; Synthesizer 
 and check that the file location is correct</source>
-        <translation>A(z)&#13;
-"%1"&#13;
-SoundFont betöltése nem sikerült. Lejátszás letiltva.&#13;
-&#13;
-A szintetizátorban (Megjelenés &gt; Szintetizátor menüpont)&#13;
+        <translation>A(z)
+&quot;%1&quot;
+SoundFont betöltése nem sikerült. Lejátszás letiltva.
+
+A szintetizátorban (Megjelenés &gt; Szintetizátor menüpont)
 győződj meg arról, hogy helyes-e a SoundFont fájl elérési útja.</translation>
     </message>
 </context>
@@ -6161,7 +6173,7 @@ győződj meg arról, hogy helyes-e a SoundFont fájl elérési útja.</translat
     </message>
     <message>
         <source>center text vertical to text baseline</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6255,14 +6267,14 @@ győződj meg arról, hogy helyes-e a SoundFont fájl elérési útja.</translat
         <translation>Ütemek:</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Tipp: a kotta létrehozása után is hozhatsz létre vagy törölhetsz ütemeket.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Tipp: a kotta létrehozása után is hozhatsz létre vagy törölhetsz ütemeket.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -6596,8 +6608,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>UpdateChecker</name>
     <message>
-        <source>An update for MuseScore is available: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
-        <translation>Új frissítés érhető el a MuseScore-hoz: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
+        <source>An update for MuseScore is available: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
+        <translation>Új frissítés érhető el a MuseScore-hoz: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Update Available</source>
@@ -6780,11 +6792,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8648,7 +8660,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Hi-Hat Closed</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tom 4</source>
@@ -8656,7 +8668,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Hi-Hat Pedal</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tom 3</source>
@@ -8664,7 +8676,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Hi-Hat Open</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tom 2</source>
@@ -8676,7 +8688,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Crash 1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tom</source>
@@ -8684,7 +8696,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ride</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>China</source>
@@ -8692,7 +8704,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ride (Bell)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tambourine</source>
@@ -8700,11 +8712,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>open high conga</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>low conga</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9061,7 +9073,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9202,19 +9214,19 @@ p, li { white-space: pre-wrap; }
         <translation>nyolcad szünet</translation>
     </message>
     <message>
-        <source>16' rest</source>
+        <source>16&apos; rest</source>
         <translation>tizenhatod szünet</translation>
     </message>
     <message>
-        <source>32' rest</source>
+        <source>32&apos; rest</source>
         <translation>1/32 szünet</translation>
     </message>
     <message>
-        <source>64' rest</source>
+        <source>64&apos; rest</source>
         <translation>1/64 szünet</translation>
     </message>
     <message>
-        <source>128' rest</source>
+        <source>128&apos; rest</source>
         <translation>1/128 szünet</translation>
     </message>
     <message>
@@ -9943,51 +9955,51 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>s0sol head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>s1sol head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>s2sol head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>longa up alt</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>longa down alt</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>brevis head alt</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>time sig C dot</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>time sig O</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>time sig O cut</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>time sig O dot</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
