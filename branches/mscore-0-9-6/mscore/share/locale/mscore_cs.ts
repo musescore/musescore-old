@@ -5215,6 +5215,14 @@ Zkuste uložení do jiného umístění.</translation>
         <source>Can't open file. File extension "%1" not supported.</source>
         <translation>Nelze otevřít soubor. Souborová přípona "%1" není podporována.</translation>
     </message>
+    <message>
+        <source>Internal error</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cannot load picture file %1</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>

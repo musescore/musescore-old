@@ -5216,6 +5216,14 @@ Wählen Sie bitte einen anderen Ort zum Speichern.</translation>
         <source>Can't open file. File extension "%1" not supported.</source>
         <translation>Kann Datei nicht öffnen, Dateityp "%1" wird nicht unterstützt.</translation>
     </message>
+    <message>
+        <source>Internal error</source>
+        <translation>Interner Fehler</translation>
+    </message>
+    <message>
+        <source>Cannot load picture file %1</source>
+        <translation>Kann Bilddatei %1 nicht laden</translation>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>

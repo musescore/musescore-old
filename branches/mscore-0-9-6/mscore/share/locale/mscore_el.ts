@@ -5241,6 +5241,14 @@ failed: </source>
         <source>Can't open file. File extension "%1" not supported.</source>
         <translation>Αδυναμία ανοίγματος αρχείου. Ο τύπος Αρχείου "%1" δεν υποστηρίζεται.</translation>
     </message>
+    <message>
+        <source>Internal error</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cannot load picture file %1</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>

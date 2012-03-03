@@ -5210,6 +5210,14 @@ Spróbuj zapisać w innym miejscu.</translation>
         <source>Can't open file. File extension "%1" not supported.</source>
         <translation>Nie można otworzyć pliku. Rozszerzenie pliku "%1" jest nieobsługiwane.</translation>
     </message>
+    <message>
+        <source>Internal error</source>
+        <translation>Błąd wewnętrzny</translation>
+    </message>
+    <message>
+        <source>Cannot load picture file %1</source>
+        <translation>Nie można wczytać pliku zdjęcia %1</translation>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>

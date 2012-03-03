@@ -5216,6 +5216,14 @@ Yritä tallentaa eri paikkaan.</translation>
         <source>Can't open file. File extension "%1" not supported.</source>
         <translation>Tiedostoa ei voi avata. Tiedosto tunnus "%1" ei ole tuettu.</translation>
     </message>
+    <message>
+        <source>Internal error</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cannot load picture file %1</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>

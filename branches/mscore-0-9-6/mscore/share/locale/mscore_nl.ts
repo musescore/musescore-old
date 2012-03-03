@@ -23,7 +23,7 @@ p, li { white-space: pre-wrap; }&#13;
 &#13;
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2011 Werner Schweer en Anderen. &lt;/span&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Gepubliseerd onder de GNU Generale Publieke Licensie&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Gepubliceerd onder de GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>AboutBox</source>
@@ -5216,6 +5216,14 @@ mislukt: </translation>
     <message>
         <source>Can't open file. File extension "%1" not supported.</source>
         <translation>Kan het bestand niet openen. Bestandstype "%1" wordt niet ondersteund.</translation>
+    </message>
+    <message>
+        <source>Internal error</source>
+        <translation>Interne fout</translation>
+    </message>
+    <message>
+        <source>Cannot load picture file %1</source>
+        <translation>Kan fotobestand %1 niet laden</translation>
     </message>
 </context>
 <context>
