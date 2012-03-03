@@ -129,63 +129,20 @@ rwtestAllMsc() {
       }
 
 rwtestAllXml() {
-      rwtestXml    musicxml/testAccidentals1.xml
-      rwtestXml    musicxml/testAccidentals2.xml
-      rwtestXml    musicxml/testArpGliss1.xml
-      rwtestXml    musicxml/testArpGliss2.xml
-      rwtestXml    musicxml/testBarStyles.xml
-      rwtestXml    musicxml/testClefs1.xml
-      rwtestXml    musicxml/testDalSegno.xml
-      rwtestXml    musicxml/testDCalCoda.xml
-      rwtestXml    musicxml/testDCalFine.xml
-      rwtestXml    musicxml/testDirections1.xml
-      rwtestXml    musicxml/testDynamics1.xml
-      rwtestXml    musicxml/testDynamics2.xml
-      rwtestXmlRef musicxml/testDynamics3.xml
-      rwtestXmlRef musicxml/testEmptyVoice1.xml
-      rwtestXml    musicxml/testGrace1.xml
-      rwtestXml    musicxml/testGrace2.xml
-      rwtestXml    musicxml/testHarmony1.xml
-      rwtestXml    musicxml/testHarmony2.xml
-      rwtestXml    musicxml/testHello.xml
-      rwtestXml    musicxml/testImplicitMeasure1.xml
-      rwtestXml    musicxml/testInvisibleElements.xml
-      rwtestXml    musicxml/testKeysig1.xml
-      rwtestXmlRef musicxml/testLines1.xml
-      rwtestXmlRef musicxml/testLines2.xml
-      rwtestXml    musicxml/testLyricsVoice2a.xml
-      rwtestXmlRef musicxml/testLyricsVoice2b.xml
-      rwtestXmlRef musicxml/testMeasureLength.xml
-      rwtestXml    musicxml/testManualBreaks.xml
-      rwtestXml    musicxml/testMetaData.xml
-      rwtestXml    musicxml/testMultiMeasureRest.xml
-      rwtestXmlRef musicxml/testMultiMeasureRest2.xml
-      rwtestXmlRef musicxml/testNonUniqueThings.xml
-      rwtestXml    musicxml/testNoteAttributes1.xml
-      rwtestXml    musicxml/testNoteAttributes2.xml
-      rwtestXml    musicxml/testNoteheads.xml
-      rwtestXml    musicxml/testNotesRests1.xml
-      rwtestXml    musicxml/testNotesRests2.xml
-      rwtestXmlRef musicxml/testNumberedLyrics.xml
-      rwtestXmlRef musicxml/testPartsSpecialCases.xml
-      rwtestXml    musicxml/testSlurs.xml
-      rwtestXml    musicxml/testStaffTwoKeySigs.xml
-      rwtestXml    musicxml/testSystemBrackets1.xml
-      rwtestXml    musicxml/testSystemBrackets2.xml
-      rwtestXml    musicxml/testTempo1.xml
-      rwtestXml    musicxml/testTimesig1.xml
-      rwtestXml    musicxml/testTimesig3.xml
-      rwtestXml    musicxml/testTremolo.xml
-      rwtestXml    musicxml/testTuplets.xml
-      rwtestXmlRef musicxml/testTuplets2.xml
-      rwtestXmlRef musicxml/testTuplets3.xml
-      rwtestXmlRef musicxml/testUnusualDurations.xml
-      rwtestXmlRef musicxml/testVoiceMapper1.xml
-      rwtestXml    musicxml/testVoicePiano1.xml
-      rwtestXml    musicxml/testVolta1.xml
-      rwtestXml    musicxml/testWedge1.xml
-      rwtestXmlRef musicxml/testWedge2.xml
-      rwtestXml    musicxml/testWords1.xml
+      # The set of MusicXML files to test are available in files testfiles_MusicXML_regular
+      # (these should be unchanged after a roundtrip through MuseScore) and
+      # testfiles_MusicXML_with_ref (expected to be changed, to be tested against
+      # a reference file).
+      # This also enable easy regeneration of testfiles in case MuseScores output changes.
+      for f in `cat musicxml/testfiles_MusicXML_regular musicxml/testfiles_MusicXML_with_ref | sort`; do
+            if [ -f musicxml/`basename $f .xml`_ref.xml ]; then
+                  # reference file exists, test against it
+                  rwtestXmlRef musicxml/$f
+            else
+                  # reference file does not exist: use regular test
+                  rwtestXml musicxml/$f
+            fi
+      done
       }
 
 usage() {
