@@ -40,10 +40,14 @@ StyleType styleTypes[] = {
       StyleType("akkoladeDistance",        ST_SPATIUM),
       StyleType("systemDistance",          ST_SPATIUM),
       StyleType("lyricsDistance",          ST_SPATIUM),
-      StyleType("figuredBassDistance",     ST_SPATIUM),
+//      StyleType("figuredBassDistance",     ST_SPATIUM),
       StyleType("lyricsMinBottomDistance", ST_SPATIUM),
       StyleType("lyricsLineHeight",        ST_DOUBLE),      // in % of normal height (default: 1.0)
+      StyleType("figuredBassFontFamily",   ST_STRING),
+      StyleType("figuredBassFontSize",     ST_DOUBLE),      // in pt
+      StyleType("figuredBassYOffset",      ST_DOUBLE),      // in sp
       StyleType("figuredBassLineHeight",   ST_DOUBLE),      // in % of normal height
+      StyleType("figuredBassStyle" ,       ST_INT),         // 0=modern, 1=historic
       StyleType("systemFrameDistance",     ST_SPATIUM),     // dist. between staff and vertical box
       StyleType("frameSystemDistance",     ST_SPATIUM),     // dist. between vertical box and next system
       StyleType("minMeasureWidth",         ST_SPATIUM),
@@ -323,8 +327,8 @@ void initStyle(MStyle* s)
       AS(TextStyle(TR("Lyrics Verse"), ff, 11, false, false, false,
          ALIGN_RIGHT | ALIGN_TOP, QPointF(), OS, QPointF(), true));
 
-      AS(TextStyle(TR("Figured Bass"), "MScoreBC", 9, false, false, false,
-         ALIGN_LEFT | ALIGN_TOP, QPointF(0, 7), OS, QPointF(), true));
+      AS(TextStyle(TR("Figured Bass"), "MScoreBC", 8, false, false, false,
+         ALIGN_LEFT | ALIGN_TOP, QPointF(0, 6), OS, QPointF(), true));
 
 #undef MM
 #undef OA
@@ -347,10 +351,14 @@ StyleData::StyleData()
             StyleVal(ST_akkoladeDistance, Spatium(6.5)),
             StyleVal(ST_systemDistance, Spatium(9.25)),
             StyleVal(ST_lyricsDistance, Spatium(2)),
-            StyleVal(ST_figuredBassDistance, Spatium(2)),
+//            StyleVal(ST_figuredBassDistance, Spatium(2)),
             StyleVal(ST_lyricsMinBottomDistance, Spatium(2)),
             StyleVal(ST_lyricsLineHeight, qreal(1.0)),
+            StyleVal(ST_figuredBassFontFamily, QString("MScoreBC")),
+            StyleVal(ST_figuredBassFontSize, qreal(8.0)),
+            StyleVal(ST_figuredBassYOffset, Spatium(6.0)),
             StyleVal(ST_figuredBassLineHeight, qreal(1.0)),
+            StyleVal(ST_figuredBassStyle, 0),
             StyleVal(ST_systemFrameDistance, Spatium(7.0)),
             StyleVal(ST_frameSystemDistance, Spatium(7.0)),
             StyleVal(ST_minMeasureWidth, Spatium(5.0)),
@@ -645,7 +653,7 @@ TextStyleData::TextStyleData(
    foregroundColor(fg)
       {
       hasFrame = fw != 0.0;
-	family = _family;
+    family = _family;
       }
 
 //---------------------------------------------------------

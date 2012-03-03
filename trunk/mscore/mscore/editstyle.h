@@ -49,7 +49,9 @@ class EditStyle : public QDialog, private Ui::EditStyleBase {
       void buttonClicked(QAbstractButton*);
       void editTextClicked(int id);
 
-   public:
+      void on_comboFBFont_currentIndexChanged(int index);
+      
+public:
       enum { PAGE_NOTE = 6 };
       EditStyle(Score*, QWidget*);
       void setPage(int no);

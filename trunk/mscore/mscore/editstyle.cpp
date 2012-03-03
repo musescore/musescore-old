@@ -30,6 +30,7 @@
 #include "texteditor.h"
 #include "libmscore/harmony.h"
 #include "libmscore/chordlist.h"
+#include "libmscore/figuredbass.h"
 
 extern QString iconPath, iconGroup;
 
@@ -104,6 +105,13 @@ EditStyle::EditStyle(Score* s, QWidget* parent)
       bg->addButton(editOddFooterC, 10);
       bg->addButton(editOddFooterR, 11);
 
+      // figured bass init
+      QList<const QString*> fbFontNames = FiguredBass::fontNames();
+      foreach(const QString * family, fbFontNames)
+            comboFBFont->addItem(*family);
+      comboFBFont->setCurrentIndex(0);
+      connect(comboFBFont, SIGNAL(currentIndexChanged(int)), SLOT(on_comboFBFont_currentIndexChanged(int)));
+
       setValues();
       connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(buttonClicked(QAbstractButton*)));
       connect(chordDescriptionFileButton, SIGNAL(clicked()), SLOT(selectChordDescriptionFile()));
@@ -135,6 +143,19 @@ void EditStyle::buttonClicked(QAbstractButton* b)
             }
       }
 
+//---------------------------------------------------------
+//   On comboFBFont currentIndex changed
+//---------------------------------------------------------
+
+void EditStyle::on_comboFBFont_currentIndexChanged(int index)
+{
+      qreal       size, lineHeight;
+
+      if(FiguredBass::fontData(index, 0, 0, &size, &lineHeight)) {
+            doubleSpinFBSize->setValue(size);
+            spinFBLineHeight->setValue((int)(lineHeight * 100.0));
+      }
+}
 //---------------------------------------------------------
 //   apply
 //---------------------------------------------------------
@@ -311,6 +332,26 @@ void EditStyle::getValues()
             lstyle.set(ST_oddFooterR,  oddFooterR->toHtml());
             }
 
+      // figured bass
+      int         idx = comboFBFont->currentIndex();
+      QString     family;
+      if(FiguredBass::fontData(idx, &family, 0, 0, 0))
+            lstyle.set(ST_figuredBassFontFamily, family);
+      qreal size = doubleSpinFBSize->value();
+      lstyle.set(ST_figuredBassFontSize,   size);
+      lstyle.set(ST_figuredBassYOffset,    doubleSpinFBVertPos->value());
+      lstyle.set(ST_figuredBassLineHeight, ((double)spinFBLineHeight->value()) / 100.0);
+      lstyle.set(ST_figuredBassStyle,      radioFBModern->isChecked() ? 0 : 1);
+      // copy to text style data relevant to it (LineHeight and Style are not in
+      // text style, and text style YOffset is not used by FB layout)
+      const TextStyle fbOld = lstyle.textStyle(TEXT_STYLE_FIGURED_BASS);
+      if(family != fbOld.family() || size != fbOld.size()) {
+            TextStyle fbNew(fbOld);
+            fbNew.setFamily(family);
+            fbNew.setSize(size);
+            lstyle.setTextStyle(fbNew);
+      }
+
       for (int i = 0; i < ARTICULATIONS; ++i) {
             QComboBox* cb = static_cast<QComboBox*>(articulationTable->cellWidget(i, 1));
             lstyle.setArticulationAnchor(i, ArticulationAnchor(cb->itemData(cb->currentIndex()).toInt()));
@@ -445,6 +486,18 @@ void EditStyle::setValues()
       arpeggioNoteDistance->setValue(lstyle.value(ST_ArpeggioNoteDistance).toSpatium().val());
       arpeggioLineWidth->setValue(lstyle.value(ST_ArpeggioLineWidth).toSpatium().val());
       arpeggioHookLen->setValue(lstyle.value(ST_ArpeggioHookLen).toSpatium().val());
+
+      // figured bass
+      for(int i = 0; i < comboFBFont->count(); i++)
+            if(comboFBFont->itemText(i) == lstyle.value(ST_figuredBassFontFamily).toString()) {
+                  comboFBFont->setCurrentIndex(i);
+                  break;
+            }
+      doubleSpinFBSize->setValue(lstyle.value(ST_figuredBassFontSize).toDouble());
+      doubleSpinFBVertPos->setValue(lstyle.value(ST_figuredBassYOffset).toDouble());
+      spinFBLineHeight->setValue(lstyle.value(ST_figuredBassLineHeight).toSpatium().val() * 100.0);
+      radioFBModern->setChecked(lstyle.value(ST_figuredBassStyle).toInt() == 0);
+      radioFBHistoric->setChecked(lstyle.value(ST_figuredBassStyle).toInt() == 1);
 
       for (int i = 0; i < ARTICULATIONS; ++i) {
             QComboBox* cb = static_cast<QComboBox*>(articulationTable->cellWidget(i, 1));

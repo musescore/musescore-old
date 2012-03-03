@@ -64,14 +64,14 @@ class FiguredBassItem : public SimpleText {
 
       enum FBIAccidental {
             FBIAccidNone = 0,
+            FBIAccidDoubleFlat,
             FBIAccidFlat,
             FBIAccidNatural,
             FBIAccidSharp,
+            FBIAccidDoubleSharp,
             FBIAccidPlus,
             FBIAccidBackslash,
             FBIAccidSlash,
-            FBIAccidDoubleFlat,
-            FBIAccidDoubleSharp,
                   FBINumOfAccid
       };
       enum FBIParenthesis {
@@ -84,9 +84,9 @@ class FiguredBassItem : public SimpleText {
       };
 
       // configuration tables: to be moved to configuration files?
-      static const QChar accidToChar[FBINumOfAccid];
+//      static const QChar accidToChar[FBINumOfAccid];
       static const QChar normParenthToChar[FBINumOfParenth];
-      static const QChar parenthToChar[FBINumOfParenth];
+//      static const QChar parenthToChar[FBINumOfParenth];
 
       int               ord;                    // the line ordinal of this element in the FB stack
       // the parts making a FiguredBassItem up
@@ -121,6 +121,22 @@ protected:
 };
 
 //---------------------------------------------------------
+//   FiguredBassFont
+//---------------------------------------------------------
+
+struct FiguredBassFont {
+      QString           family;
+      QString           displayName;
+      qreal             defPitch;
+      qreal             defLineHeight;
+      QChar             displayAccidental[6];
+      QChar             displayParenthesis[5];
+      QChar             displayDigit[2][10][4];
+
+      bool read(const QDomElement&);
+};
+
+//---------------------------------------------------------
 //   FiguredBassItem
 //---------------------------------------------------------
 
@@ -136,6 +152,12 @@ class FiguredBass : public Text {
 
       // a convenience static function to create/retrieve a new FiguredBass into/from its intended parent
       static FiguredBass * addFiguredBassToSegment(Segment *seg, int track, int ticks, bool *pNew);
+
+      // static functions for font config files
+      static bool       readConfigFile(const QString& fileName);
+      static QList<const QString*>  fontNames();
+      static bool       fontData(int nIdx, QString *pFamily, QString *pDisplayName,
+                              qreal * pSize, qreal * pLineHeight);
 
       // standard re-implemented virtual functions
       virtual FiguredBass*    clone() const     { return new FiguredBass(*this); }

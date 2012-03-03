@@ -1,3 +1,6 @@
+03.3 (mw)
+      - Figured Bass: added style param. to "Style | General" dlg box
+      - Figured Bass: added font config. file
 29.2 (ws)
       - some fixes for TimeSig changes
 28.2  (ws)
