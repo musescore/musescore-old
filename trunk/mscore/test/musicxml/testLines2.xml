@@ -28,6 +28,8 @@
       <midi-instrument id="P1-I3">
         <midi-channel>1</midi-channel>
         <midi-program>1</midi-program>
+        <volume>0</volume>
+        <pan>0</pan>
         </midi-instrument>
       </score-part>
     </part-list>
@@ -53,7 +55,7 @@
           <words>VII</words>
           </direction-type>
         <direction-type>
-          <bracket type="start" number="1" line-end="none" line-type="solid" default-y="30"/>
+          <bracket type="start" number="1" line-end="none" line-type="solid"/>
           </direction-type>
         </direction>
       <note>
@@ -115,7 +117,7 @@
         </note>
       <direction placement="above">
         <direction-type>
-          <bracket type="start" number="1" line-end="none" line-type="solid" default-y="30"/>
+          <bracket type="start" number="1" line-end="none" line-type="solid"/>
           </direction-type>
         </direction>
       <note>
@@ -160,7 +162,7 @@
           <words>VII</words>
           </direction-type>
         <direction-type>
-          <bracket type="start" number="1" line-end="none" line-type="solid" default-y="-80"/>
+          <bracket type="start" number="1" line-end="none" line-type="solid"/>
           </direction-type>
         </direction>
       <note>
@@ -222,7 +224,7 @@
         </note>
       <direction placement="below">
         <direction-type>
-          <bracket type="start" number="1" line-end="none" line-type="solid" default-y="-80"/>
+          <bracket type="start" number="1" line-end="none" line-type="solid"/>
           </direction-type>
         </direction>
       <note>
@@ -272,6 +274,11 @@
         <type>quarter</type>
         <stem>up</stem>
         </note>
+      <direction placement="above">
+        <direction-type>
+          <bracket type="start" number="1" line-end="down" line-type="solid" end-length="15"/>
+          </direction-type>
+        </direction>
       <note>
         <pitch>
           <step>F</step>
@@ -292,6 +299,11 @@
         <type>quarter</type>
         <stem>up</stem>
         </note>
+      <direction placement="above">
+        <direction-type>
+          <bracket type="stop" number="1" line-end="down" end-length="15"/>
+          </direction-type>
+        </direction>
       <note>
         <pitch>
           <step>A</step>
@@ -314,6 +326,11 @@
         <type>quarter</type>
         <stem>down</stem>
         </note>
+      <direction placement="above">
+        <direction-type>
+          <dashes type="start" number="1"/>
+          </direction-type>
+        </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -334,6 +351,11 @@
         <type>quarter</type>
         <stem>down</stem>
         </note>
+      <direction placement="above">
+        <direction-type>
+          <dashes type="stop" number="1"/>
+          </direction-type>
+        </direction>
       <note>
         <pitch>
           <step>E</step>
