@@ -21,6 +21,17 @@
       <encoding-date>2007-09-10</encoding-date>
       </encoding>
     <source>MetaSource</source>
+    <miscellaneous>
+      <miscellaneous-field name="description">
+        Test meta data and layout.
+
+        Requires setting preferences:
+        - Import / Import layout: true
+        - Import / Import system and page breaks: true
+        - Export / Export layout: true
+        - Export / Export system and page breaks: all
+        </miscellaneous-field>
+      </miscellaneous>
     </identification>
   <defaults>
     <scaling>

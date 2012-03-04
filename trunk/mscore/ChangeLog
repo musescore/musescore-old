@@ -1,6 +1,7 @@
 04.3 (lv)
       - fix #14811: [MusicXML import] [trunk] import error: 41h-TooManyParts.xml causes crash
       - fix #14812: [MusicXML import] [trunk] import error: 41g-PartNoId.xml causes crash
+      - fix #15156: [MusicXML] [trunk] empty measures are not imported
 03.3 (lv)
       - fix #14861: [MusicXML import] [trunk] import error: 32a-Notations.xml: missing notations
       - fix #14863: [MusicXML] [trunk] Export notations imported by issue 14861
