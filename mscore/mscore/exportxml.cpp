@@ -1329,7 +1329,14 @@ static void tupletStartStop(ChordRest* cr, Notations& notations, Xml& xml)
       if (!t) return;
       if (cr == t->elements().front()) {
             notations.tag(xml);
-            xml.tagE("tuplet type=\"start\" bracket=\"%s\"", t->hasBracket() ? "yes" : "no");
+            QString tupletTag = "tuplet type=\"start\"";
+            tupletTag += " bracket=";
+            tupletTag += t->hasBracket() ? "\"yes\"" : "\"no\"";
+            if (t->numberType() == Tuplet::SHOW_RELATION)
+                  tupletTag += " show-number=\"both\"";
+            if (t->numberType() == Tuplet::NO_TEXT)
+                  tupletTag += " show-number=\"none\"";
+            xml.tagE(tupletTag);
             }
       if (cr == t->elements().back()) {
             notations.tag(xml);
@@ -1796,6 +1803,33 @@ static Chord* nextChord(Chord* ch)
       }
 
 //---------------------------------------------------------
+//   determineTupletNormalTicks
+//---------------------------------------------------------
+
+/**
+ Determine the ticks in the normal type for the tuplet \a chord.
+ This is non-zero only if chord if part of a tuplet containing
+ different length duration elements.
+ TODO determine how to handle baselen with dots and verify correct behaviour.
+ TODO verify if baseLen should always be correctly set
+      (it seems after MusicXMLimport this is not the case)
+ */
+
+static int determineTupletNormalTicks(ChordRest const* const chord)
+      {
+      Tuplet const* const t = chord->tuplet();
+      if (!t)
+            return 0;
+      qDebug("determineTupletNormalTicks t %p baselen %d", t, t->baseLen().ticks());
+      for (int i = 0; i < t->elements().size(); ++i)
+            qDebug("determineTupletNormalTicks t %p i %d ticks %d", t, i, t->elements().at(i)->duration().ticks());
+      for (int i = 1; i < t->elements().size(); ++i)
+            if (t->elements().at(0)->duration().ticks() != t->elements().at(i)->duration().ticks())
+                  return t->baseLen().ticks();
+      return 0;
+      }
+
+//---------------------------------------------------------
 //   chord
 //---------------------------------------------------------
 
@@ -1917,9 +1951,11 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
             Tuplet* t = note->chord()->tuplet();
             int actNotes = 1;
             int nrmNotes = 1;
+            int nrmTicks = 0;
             if (t) {
                   actNotes = t->ratio().numerator();
                   nrmNotes = t->ratio().denominator();
+                  nrmTicks = determineTupletNormalTicks(chord);
                   }
 
             QString s = tick2xml(note->chord()->actualTicks() * actNotes / (nrmNotes * tremCorr), &dots);
@@ -1973,9 +2009,22 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                   }
 
             if (t) {
+                  // TODO: remove following duplicated code (present for both notes and rests)
                   xml.stag("time-modification");
                   xml.tag("actual-notes", actNotes);
                   xml.tag("normal-notes", nrmNotes);
+                  qDebug("nrmTicks %d", nrmTicks);
+                  if (nrmTicks > 0) {
+                        int nrmDots = 0;
+                        QString nrmType = tick2xml(nrmTicks, &nrmDots);
+                        if (nrmType.isEmpty())
+                              qDebug("no note type found for ticks %d", nrmTicks);
+                        else {
+                              xml.tag("normal-type", nrmType);
+                              for (int ni = nrmDots; ni > 0; ni--)
+                                    xml.tagE("normal-dot");
+                              }
+                        }
                   xml.etag();
                   }
 
@@ -2168,6 +2217,18 @@ void ExportMusicXml::rest(Rest* rest, int staff)
             xml.stag("time-modification");
             xml.tag("actual-notes", t->ratio().numerator());
             xml.tag("normal-notes", t->ratio().denominator());
+            int nrmTicks = determineTupletNormalTicks(rest);
+            if (nrmTicks > 0) {
+                  int nrmDots = 0;
+                  QString nrmType = tick2xml(nrmTicks, &nrmDots);
+                  if (nrmType.isEmpty())
+                        qDebug("no note type found for ticks %d", nrmTicks);
+                  else {
+                        xml.tag("normal-type", nrmType);
+                        for (int ni = nrmDots; ni > 0; ni--)
+                              xml.tagE("normal-dot");
+                        }
+                  }
             xml.etag();
             }
 
