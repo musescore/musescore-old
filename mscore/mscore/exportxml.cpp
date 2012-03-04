@@ -1932,14 +1932,8 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                   xml.tagE("dot");
 
             // accidental
-            // Note: in Binchois.xml two accidentals have parentheses which are encoded
-            // as editorial="yes". Wikipedia calls this a cautionary accidental.
-            // Brackets/parenthese are controlled by the level-display entity (DTD 1.1)
-
-            bool editorial = false;
             Accidental* acc = note->accidental();
             if (acc) {
-                  editorial = acc->hasBracket();
                   /*
                         MusicXML accidental names include:
                         sharp,natural, flat, double-sharp, sharp-sharp, flat-flat,
@@ -1948,70 +1942,34 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                     */
                   QString s;
                   switch (acc->subtype()) {
-                        case ACC_SHARP:
-                              s = "sharp";
-                              break;
-                        case ACC_FLAT:
-                              s = "flat";
-                              break;
-                        case ACC_SHARP2:
-                              s = "double-sharp";
-                              break;
-                        case ACC_FLAT2:
-                              s = "flat-flat";
-                              break;
-                        case ACC_NATURAL:
-                              s = "natural";
-                              break;
-                        case ACC_FLAT_SLASH:          // (alternative)
-                              s = "quarter-flat";
-                              break;
-                        case ACC_MIRRORED_FLAT:       // (recommended by Michael)
-                              s = "quarter-flat";
-                              break;
-                        case ACC_FLAT_ARROW_UP:       // (alternative)
-                              s = "quarter-flat";
-                              break;
-                        case ACC_NATURAL_ARROW_DOWN:  // (alternative)
-                              s = "quarter-flat";
-                              break;
-                        case ACC_SHARP_SLASH:         // (recommended by Michael)
-                              s = "quarter-sharp";
-                              break;
-                        case ACC_SHARP_ARROW_DOWN:    // (alternative)
-                              s = "quarter-sharp";
-                              break;
-                        case ACC_NATURAL_ARROW_UP:    // (alternative)
-                              s = "quarter-sharp";
-                              break;
-                        case ACC_MIRRORED_FLAT2:      // (recommended by Michael)
-                              s = "three-quarters-flat";
-                              break;
-                        case ACC_FLAT_FLAT_SLASH:     // (alternative)
-                              s = "three-quarters-flat";
-                              break;
-                        case ACC_FLAT_ARROW_DOWN:     // (alternative)
-                              s = "three-quarters-flat";
-                              break;
-                        case ACC_SHARP_SLASH4:        // (recommended by Michael)
-                              s = "three-quarters-sharp";
-                              break;
-                        case ACC_SHARP_ARROW_UP:      // (alternate)
-                              s = "three-quarters-sharp";
-                              break;
-                        case ACC_SORI:                //sori
-                              s = "sori";
-                              break;
-                        case ACC_KORON:               //koron
-                              s = "koron";
-                              break;
+                        case ACC_SHARP:              s = "sharp";                break;
+                        case ACC_FLAT:               s = "flat";                 break;
+                        case ACC_SHARP2:             s = "double-sharp";         break;
+                        case ACC_FLAT2:              s = "flat-flat";            break;
+                        case ACC_NATURAL:            s = "natural";              break;
+                        case ACC_FLAT_SLASH:         s = "quarter-flat";         break; // (alternative)
+                        case ACC_MIRRORED_FLAT:      s = "quarter-flat";         break; // (recommended by Michael)
+                        case ACC_FLAT_ARROW_UP:      s = "quarter-flat";         break; // (alternative)
+                        case ACC_NATURAL_ARROW_DOWN: s = "quarter-flat";         break; // (alternative)
+                        case ACC_SHARP_SLASH:        s = "quarter-sharp";        break; // (recommended by Michael)
+                        case ACC_SHARP_ARROW_DOWN:   s = "quarter-sharp";        break; // (alternative)
+                        case ACC_NATURAL_ARROW_UP:   s = "quarter-sharp";        break; // (alternative)
+                        case ACC_MIRRORED_FLAT2:     s = "three-quarters-flat";  break; // (recommended by Michael)
+                        case ACC_FLAT_FLAT_SLASH:    s = "three-quarters-flat";  break; // (alternative)
+                        case ACC_FLAT_ARROW_DOWN:    s = "three-quarters-flat";  break; // (alternative)
+                        case ACC_SHARP_SLASH4:       s = "three-quarters-sharp"; break; // (recommended by Michael)
+                        case ACC_SHARP_ARROW_UP:     s = "three-quarters-sharp"; break; // (alternate)
+                        case ACC_SORI:               s = "sori";                 break; //sori
+                        case ACC_KORON:              s = "koron";                break; //koron
                         default:
                               qDebug("unknown accidental %d\n", acc->subtype());
                         }
-                  if (editorial)
-                        xml.tag("accidental editorial=\"yes\"", s);
-                  else
-                        xml.tag("accidental", s);
+                  if (s != "") {
+                        if (note->accidental()->hasBracket())
+                              xml.tag("accidental parentheses=\"yes\"", s);
+                        else
+                              xml.tag("accidental", s);
+                        }
                   }
 
             if (t) {
@@ -2667,45 +2625,55 @@ void ExportMusicXml::textLine(TextLine* tl, int staff, int tick)
       QString rest;
       QPointF p;
 
+      // special case: a dashed line w/o hooks is written as dashes
+      bool dashes = tl->lineStyle() == Qt::DashLine && !tl->beginHook() && !tl->endHook();
+
       QString lineEnd = "none";
       QString type;
+      bool hook = false;
+      double hookHeight = 0.0;
       int offs;
       int n = 0;
       if (tl->tick() == tick) {
-            QString lineType;
-            switch (tl->lineStyle()) {
-                  case Qt::SolidLine:
-                        lineType = "solid";
-                        break;
-                  case Qt::DashLine:
-                        lineType = "dashed";
-                        break;
-                  case Qt::DotLine:
-                        lineType = "dotted";
-                        break;
-                  default:
-                        lineType = "solid";
+            if (!dashes) {
+                  QString lineType;
+                  switch (tl->lineStyle()) {
+                        case Qt::SolidLine:
+                              lineType = "solid";
+                              break;
+                        case Qt::DashLine:
+                              lineType = "dashed";
+                              break;
+                        case Qt::DotLine:
+                              lineType = "dotted";
+                              break;
+                        default:
+                              lineType = "solid";
+                        }
+                  rest += QString(" line-type=\"%1\"").arg(lineType);
                   }
-            rest += QString(" line-type=\"%1\"").arg(lineType);
+            hook = tl->beginHook();
+            hookHeight = tl->beginHookHeight().val();
             p = tl->spannerSegments().first()->userOff();
             offs = tl->mxmlOff();
             type = "start";
             }
       else {
-            if (tl->endHook()) {
-                  double h = tl->endHookHeight().val();
-                  if (h < 0.0) {
-                        lineEnd = "up";
-                        h *= -1.0;
-                        }
-                  else {
-                        lineEnd = "down";
-                        }
-                  rest += QString(" end-length=\"%1\"").arg(h * 10);
-                  }
+            hook = tl->endHook();
+            hookHeight = tl->endHookHeight().val();
             p = ((LineSegment*)tl->spannerSegments().last())->userOff2();
             offs = tl->mxmlOff2();
             type = "stop";
+            }
+
+      if (hook) {
+            if (hookHeight < 0.0) {
+                  lineEnd = "up";
+                  hookHeight *= -1.0;
+                  }
+            else
+                  lineEnd = "down";
+            rest += QString(" end-length=\"%1\"").arg(hookHeight * 10);
             }
 
       n = findBracket(tl);
@@ -2728,7 +2696,10 @@ void ExportMusicXml::textLine(TextLine* tl, int staff, int tick)
             xml.etag();
             }
       xml.stag("direction-type");
-      xml.tagE(QString("bracket type=\"%1\" number=\"%2\" line-end=\"%3\"%4").arg(type, QString::number(n + 1), lineEnd, rest));
+      if (dashes)
+            xml.tagE(QString("dashes type=\"%1\" number=\"%2\"").arg(type, QString::number(n + 1)));
+      else
+            xml.tagE(QString("bracket type=\"%1\" number=\"%2\" line-end=\"%3\"%4").arg(type, QString::number(n + 1), lineEnd, rest));
       xml.etag();
       if (offs)
             xml.tag("offset", offs);

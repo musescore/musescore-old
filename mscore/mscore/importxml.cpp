@@ -476,6 +476,8 @@ void MusicXml::import(Score* s)
             slur[i] = 0;
       for (int i = 0; i < MAX_BRACKETS; ++i)
             bracket[i] = 0;
+      for (int i = 0; i < MAX_DASHES; ++i)
+            dashes[i] = 0;
       ottava = 0;
       trill = 0;
       pedal = 0;
@@ -2213,8 +2215,10 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               type   = ee.attribute(QString("type"));
                               // spread = ee.attribute(QString("spread"), "0").toInt();
                               }
-                        else if (dirType == "dashes")
-                              domNotImplemented(ee);
+                        else if (dirType == "dashes") {
+                              type      = ee.attribute(QString("type"));
+                              number    = ee.attribute(QString("number"), "1").toInt();
+                              }
                         else if (dirType == "bracket") {
                               type      = ee.attribute(QString("type"));
                               number    = ee.attribute(QString("number"), "1").toInt();
@@ -2583,7 +2587,9 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                                           score->spatium(), placement,
                                           hasYoffset, yoffset);
 
-                        // TODO: MuseScore doesn't support hooks at beginning of lines
+                        b->setBeginHook(lineEnd != "none");
+                        if (lineEnd == "up")
+                              b->setBeginHookHeight(-1 * b->beginHookHeight());
 
                         // hack: assume there was a words element before the bracket
                         if (!txt.isEmpty()) {
@@ -2601,14 +2607,13 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
 
                         b->setTrack((staff + rstaff) * VOICES);
                         spanners[b] = QPair<int, int>(tick, -1);
-                        qDebug("wedge bracket=%p inserted at first tick %d", b, tick);
+                        qDebug("bracket=%p inserted at first tick %d", b, tick);
                         bracket[n] = b;
                         }
                   }
             else if (type == "stop") {
-                  if (!b) {
+                  if (!b)
                         qDebug("bracket stop without start, number %d", number);
-                        }
                   else {
                         // TODO: MuseScore doesn't support lines which start and end on different staves
                         /*
@@ -2628,8 +2633,72 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         if (lineEnd == "up")
                               b->setEndHookHeight(-1 * b->endHookHeight());
                         spanners[b].second = tick;
-                        qDebug("wedge bracket=%p second tick %d", b, tick);
+                        qDebug("bracket=%p second tick %d", b, tick);
                         bracket[n] = 0;
+                        }
+                  }
+            }
+      else if (dirType == "dashes") {
+            int n = number-1;
+            TextLine* b = dashes[n];
+            if (type == "start") {
+                  if (b) {
+                        printf("overlapping dashes with same number?\n");
+                        delete b;
+                        dashes[n] = 0;
+                        }
+                  else {
+                        b = new TextLine(score);
+
+                        // what does placement affect?
+                        //yoffset += (placement == "above" ? 0.0 : 5.0);
+                        // store for later to set in segment
+                        // b->setUserOff(QPointF(rx + xoffset, ry + yoffset));
+                        b->setMxmlOff(offset);
+                        if (placement == "") placement = "above";  // set default
+                        setSLinePlacement(b,
+                                          score->spatium(), placement,
+                                          hasYoffset, yoffset);
+
+                        // hack: assume there was a words element before the dashes
+                        if (!txt.isEmpty()) {
+                              b->setBeginText(txt);
+                              }
+
+                        b->setBeginHook(false);
+                        b->setLineStyle(Qt::DashLine);
+                        b->setTrack((staff + rstaff) * VOICES);
+                        spanners[b] = QPair<int, int>(tick, -1);
+                        qDebug("bracket=%p inserted at first tick %d", b, tick);
+                        // b->setTick(tick);
+                        dashes[n] = b;
+                        }
+                  }
+            else if (type == "stop") {
+                  if (!b) {
+                        printf("dashes stop without start, number %d\n", number);
+                        }
+                  else {
+                        // b->setTick2(tick);
+                        // TODO: MuseScore doesn't support lines which start and end on different staves
+                        /*
+                        QPointF userOff = b->userOff();
+                        b->add(b->createLineSegment());
+
+                        b->setUserOff(QPointF()); // restore the offset
+                        b->setMxmlOff2(offset);
+                        LineSegment* ls1 = b->lineSegments().front();
+                        LineSegment* ls2 = b->lineSegments().back();
+                        // what does placement affect?
+                        //yoffset += (placement == "above" ? 0.0 : 5.0);
+                        ls1->setUserOff(userOff);
+                        ls2->setUserOff2(QPointF(rx + xoffset, ry + yoffset));
+                        */
+                        b->setEndHook(false);
+                        // score->add(b);
+                        spanners[b].second = tick;
+                        qDebug("bracket=%p second tick %d", b, tick);
+                        dashes[n] = 0;
                         }
                   }
             }
@@ -3891,8 +3960,9 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       int alter  = 0;
       int octave = 4;
       AccidentalType accidental = ACC_NONE;
-      bool cautionary = false;
+      bool parentheses = false;
       bool editorial = false;
+      bool cautionary = false;
       TDuration durationType(TDuration::V_INVALID);
       NoteHeadGroup headGroup = HEAD_NORMAL;
       bool noStem = false;
@@ -4069,6 +4139,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         cautionary = true;
                   if (e.attribute(QString("editorial")) == "yes")
                         editorial = true;
+                  if (e.attribute(QString("parentheses")) == "yes")
+                        parentheses = true;
                   }
             else if (tag == "notations") {
                   // save the QDomElement representing <notations> for later
@@ -4224,10 +4296,10 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             // qDebug("staff for new note: %p (staff=%d, relStaff=%d)",
             //        score->staff(staff + relStaff), staff, relStaff);
 
-            if (editorial || cautionary) {
+            if (editorial || cautionary || parentheses) {
                   Accidental* a = new Accidental(score);
                   a->setSubtype(accidental);
-                  a->setHasBracket(cautionary);
+                  a->setHasBracket(cautionary || parentheses);
                   a->setRole(ACC_USER);
                   note->add(a);
                   }
