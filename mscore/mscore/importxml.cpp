@@ -651,6 +651,63 @@ void MusicXml::doCredits()
 
 
 //---------------------------------------------------------
+//   determineTimeSig
+//---------------------------------------------------------
+
+/**
+ Determine the time signature based on \a beats, \a beatType and \a timeSymbol.
+ Sets return parameters \a st, \a bts, \a btp.
+ Return true if OK, false on error.
+ */
+
+static bool determineTimeSig(const QString beats, const QString beatType, const QString timeSymbol,
+                             TimeSigType& st, int& bts, int& btp)
+      {
+      // initialize
+      st  = TSIG_NORMAL;
+      bts = 0;       // the beats (max 4 separated by "+") as integer
+      btp = 0;       // beat-type as integer
+      // determine if timesig is valid
+      if (beats == "2" && beatType == "2" && timeSymbol == "cut") {
+            st = TSIG_ALLA_BREVE;
+            bts = 2;
+            btp = 2;
+            return true;
+            }
+      else if (beats == "4" && beatType == "4" && timeSymbol == "common") {
+            st = TSIG_FOUR_FOUR;
+            bts = 4;
+            btp = 4;
+            return true;
+            }
+      else {
+            if (!timeSymbol.isEmpty()) {
+                  qDebug("ImportMusicXml: time symbol <%s> not recognized with beats=%s and beat-type=%s",
+                         qPrintable(timeSymbol), qPrintable(beats), qPrintable(beatType));
+                  return false;
+                  }
+
+            btp = beatType.toInt();
+            QStringList list = beats.split("+");
+#if 0 // TODO TS
+            for (int i = 0; i < 4; i++)
+                  bts[i] = 0;
+            for (int i = 0; i < list.size() && i < 4; i++)
+                  bts[i] = list.at(i).toInt();
+            // the beat type and at least one beat must be non-zero
+            if (btp && (bts[0] || bts[1] || bts[2] || bts[3])) {
+                  TimeSig ts = TimeSig(score, btp, bts[0], bts[1], bts[2], bts[3]);
+                  st = ts.subtype();
+                  }
+#endif
+            for (int i = 0; i < list.size() && i < 4; i++)
+                  bts += list.at(i).toInt();
+            }
+      return true;
+      }
+
+
+//---------------------------------------------------------
 //   determineMeasureLength
 //---------------------------------------------------------
 
@@ -671,6 +728,9 @@ static bool determineMeasureLength(QDomElement e, QVector<int>& ml)
       int lastLen = 0;
       int measureNr = 0;
       bool result = true;
+      QString beats = "";
+      QString beatType = "";
+      int timeSigLen = -1; // measure length in ticks according to the last timesig read
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             // handle all measures in this part
@@ -687,6 +747,36 @@ static bool determineMeasureLength(QDomElement e, QVector<int>& ml)
 #ifdef DEBUG_TICK
                                           qDebug("measurelength divisions %d", divisions);
 #endif
+                                          }
+                                    else if (eee.tagName() == "time") {
+                                          for (QDomElement eeee = eee.firstChildElement(); !eeee.isNull(); eeee = eeee.nextSiblingElement()) {
+                                                if (eeee.tagName() == "beats")
+                                                      beats = eeee.text();
+                                                else if (eeee.tagName() == "beat-type") {
+                                                      beatType = eeee.text();
+                                                      }
+                                                else if (eeee.tagName() == "senza-misura")
+                                                      ;
+                                                else
+                                                      domError(eeee);
+                                                }
+                                          if (beats != "" && beatType != "") {
+                                                TimeSigType st = TSIG_NORMAL;
+                                                int bts        = 0; // the beats (max 4 separated by "+") as integer
+                                                int btp        = 0; // beat-type as integer
+#ifdef DEBUG_TICK
+                                                qDebug("measurelength beats %s beattype %s",
+                                                       qPrintable(beats), qPrintable(beatType));
+#endif
+                                                if (determineTimeSig(beats, beatType, "", st, bts, btp)) {
+                                                      Fraction f(bts, btp);
+                                                      timeSigLen = f.ticks();
+#ifdef DEBUG_TICK
+                                                      qDebug("fraction %s len %d",
+                                                             qPrintable(f.print()), timeSigLen);
+#endif
+                                                      }
+                                                }
                                           }
                                     }
                               }
@@ -720,20 +810,25 @@ static bool determineMeasureLength(QDomElement e, QVector<int>& ml)
 
                   // measure has been read, determine length
                   int length = maxtick - prevmaxtick;
+                  int correctedLength = length;
 #if 1 // change in 0.9.6 trunk revision 5241 for issue 14451, TODO verify if useful in trunk
                   // if necessary, round up to an integral number of 1/32s,
                   // to comply with MuseScores actual measure length constraints
-                  int correctedLength = length;
                   if ((length % (MScore::division/8)) != 0) {
                         correctedLength = ((length / (MScore::division/8)) + 1) * (MScore::division/8);
                         }
+#endif
+                  // fix for PDFtoMusic Pro v1.3.0d Build BF4E (which sometimes generates empty measures)
+                  // if no valid length found and length according to time signature is known,
+                  // use length according to time signature
+                  if (correctedLength <= 0 && timeSigLen > 0)
+                        correctedLength = timeSigLen;
 #ifdef DEBUG_TICK
                   // debug
                   qDebug("measurelength measure %d tick %d maxtick %d length %d corr length %d\n",
                          measureNr + 1, tick, maxtick, length, correctedLength);
 #endif
                   length = correctedLength;
-#endif
                   // store the maximum measure length
                   if (ml.size() < measureNr + 1)
                         // as we loop over the measures one by one
@@ -2755,41 +2850,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
             TimeSigType st  = TSIG_NORMAL;
             int bts = 0; // the beats (max 4 separated by "+") as integer
             int btp = 0; // beat-type as integer
-            if (beats == "2" && beatType == "2" && timeSymbol == "cut") {
-                  st = TSIG_ALLA_BREVE;
-                  bts = 2;
-                  btp = 2;
-                  }
-            else if (beats == "4" && beatType == "4" && timeSymbol == "common") {
-                  st = TSIG_FOUR_FOUR;
-                  bts = 4;
-                  btp = 4;
-                  }
-            else {
-                  if (!timeSymbol.isEmpty()) {
-                        qDebug("ImportMusicXml: time symbol <%s> not recognized with beats=%s and beat-type=%s",
-                               qPrintable(timeSymbol), qPrintable(beats), qPrintable(beatType));
-                        }
-
-                  btp = beatType.toInt();
-                  QStringList list = beats.split("+");
-#if 0 // TODO TS
-                  for (int i = 0; i < 4; i++)
-                        bts[i] = 0;
-                  for (int i = 0; i < list.size() && i < 4; i++) {
-                        bts[i] = list.at(i).toInt();
-                        }
-                  // the beat type and at least one beat must be non-zero
-                  if (btp && (bts[0] || bts[1] || bts[2] || bts[3])) {
-                        TimeSig ts = TimeSig(score, btp, bts[0], bts[1], bts[2], bts[3]);
-                        st = ts.subtype();
-                        }
-#endif
-                  for (int i = 0; i < list.size() && i < 4; i++)
-                        bts += list.at(i).toInt();
-                  }
-            // if (st) {
-            if (btp) {
+            if (determineTimeSig(beats, beatType, timeSymbol, st, bts, btp)) {
                   // add timesig to all staves
                   //ws score->sigmap()->add(tick, TimeSig::getSig(st));
                   Part* part = score->part(staff);
@@ -2803,10 +2864,6 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                         s->add(timesig);
                         }
                   }
-            else
-                  qDebug("unknown time signature, beats=<%s> beat-type=<%s> symbol=<%s>",
-                         beats.toLatin1().data(), beatType.toLatin1().data(),
-                         timeSymbol.toLatin1().data());
             }
       }
 
