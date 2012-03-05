@@ -80,6 +80,14 @@ QObject* MyWebPage::createPlugin(
       /*QUiLoader loader;
       return loader.createWidget(classid, view());*/
       }
+      
+//---------------------------------------------------------
+//   userAgentForUrl
+//---------------------------------------------------------
+
+QString MyWebPage::userAgentForUrl(const QUrl &url) const {
+      return QString("MuseScore %1").arg(VERSION).toAscii();
+      }
 
 //---------------------------------------------------------
 //   MyWebView
@@ -192,6 +200,8 @@ void MyWebView::link(const QUrl& url)
       QFileInfo fi(path);
       if (fi.suffix() == "mscz")
             mscore->loadFile(url);
+      else if(url.host().startsWith("connect."))
+            load(QNetworkRequest(url));
       else
             QDesktopServices::openUrl(url);
       }
@@ -203,6 +213,18 @@ void MyWebView::link(const QUrl& url)
 QSize	MyWebView::sizeHint() const
       {
       return QSize(300 , 300);
+      }
+
+//---------------------------------------------------------
+//   load
+//---------------------------------------------------------
+
+void	MyWebView::load(const QNetworkRequest & request, QNetworkAccessManager::Operation operation, const QByteArray & body) 
+      {
+      QNetworkRequest new_req(request);  
+      new_req.setRawHeader("User-Agent",  QString("MuseScore %1").arg(VERSION).toAscii());  
+      new_req.setRawHeader("Accept-Language",  QString("%1;q=0.8,en-US;q=0.6,en;q=0.4").arg(mscore->getLocaleISOCode()).toAscii());   
+      QWebView::load( new_req, operation, body);
       }
 
 //---------------------------------------------------------
@@ -256,7 +278,7 @@ WebPageDockWidget::WebPageDockWidget(MuseScore* mscore, QWidget* parent)
             //And not load !
             connect(web, SIGNAL(loadFinished(bool)), web, SLOT(stopBusyAndClose(bool)));
             web->setBusy();
-            web->load(QUrl(webUrl()));
+            web->load(QNetworkRequest(webUrl()));
             }
       setWidget(web);
       }
@@ -280,17 +302,16 @@ void WebPageDockWidget::load()
       {
       connect(web, SIGNAL(loadFinished(bool)), web, SLOT(stopBusyAndFirst(bool)));
       web->setBusy();
-      web->load(QUrl(webUrl()));
+      web->load(QNetworkRequest(webUrl()));
       }
 
 //---------------------------------------------------------
-//   load
+//   webUrl
 //---------------------------------------------------------
-QString WebPageDockWidget::webUrl()
+QUrl WebPageDockWidget::webUrl()
     {
-    return QString("%1?language=%2").arg(staticUrl).arg(mscore->getLocaleISOCode());
+    return QUrl(staticUrl);
     }
-
 
 //---------------------------------------------------------
 //   CookieJar
