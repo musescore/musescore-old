@@ -119,6 +119,12 @@
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 #include <QtNetwork/QNetworkCookieJar>
+#include <QtNetwork/QNetworkRequest>
+
+#if QT_VERSION >= 0x040800
+#include <QtNetwork/QHttpPart>
+#include <QtNetwork/QHttpMultiPart>
+#endif
 
 #include <QtWebKit/QWebView>
 #include <QtWebKit/QWebFrame>
