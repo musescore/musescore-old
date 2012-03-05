@@ -43,6 +43,7 @@ class MyWebPage: public QWebPage
          const QUrl &url,
          const QStringList &paramNames,
          const QStringList & paramValues);
+      QString userAgentForUrl(const QUrl &url) const;
 
    public:
       MyWebPage(QObject *parent = 0);
@@ -78,6 +79,7 @@ class MyWebView: public QWebView
       ~MyWebView();
       MyWebPage* webPage() {return &m_page;}
       virtual QSize	sizeHint () const;
+      void load (const QNetworkRequest & request, QNetworkAccessManager::Operation operation = QNetworkAccessManager::GetOperation, const QByteArray & body = QByteArray() );
       };
 
 //---------------------------------------------------------
@@ -92,11 +94,16 @@ class WebPageDockWidget : public QDockWidget
    
    public slots:
       void addToJavascript();
+      void saveOnlineFinished();
       
    public:
       WebPageDockWidget(MuseScore* mscore, QWidget* parent = 0);
       Q_INVOKABLE void load();
-      QString webUrl();
+#if QT_VERSION >= 0x040800
+      Q_INVOKABLE bool saveCurrentScoreOnline(QString action, QVariantMap parameters, QString fileFieldName);
+#endif      
+      Q_INVOKABLE bool setCurrentScoreSource(QString source);
+      QUrl webUrl();
       };
       
 class CookieJar : public QNetworkCookieJar 

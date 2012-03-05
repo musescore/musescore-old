@@ -30,6 +30,7 @@
 #include "preferences.h"
 #include "score.h"
 
+static const char* staticUrl = "http://connect.musescore.com";
 
 //---------------------------------------------------------
 //   MyWebPage
@@ -77,6 +78,14 @@ QObject* MyWebPage::createPlugin(
       /*QUiLoader loader;
       return loader.createWidget(classid, view());*/
       }
+      
+//---------------------------------------------------------
+//   userAgentForUrl
+//---------------------------------------------------------
+
+QString MyWebPage::userAgentForUrl(const QUrl &url) const {
+      return QString("MuseScore %1").arg(VERSION).toAscii();
+      }
 
 //---------------------------------------------------------
 //   MyWebView
@@ -109,6 +118,14 @@ MyWebView::~MyWebView()
       disconnect(this, SIGNAL(loadFinished(bool)), this, SLOT(stopBusyAndClose(bool)));
       disconnect(this, SIGNAL(loadFinished(bool)), this, SLOT(stopBusyAndFirst(bool)));
       disconnect(this, SIGNAL(loadFinished(bool)), this, SLOT(stopBusyStatic(bool)));
+      }
+
+void MyWebView::load ( const QNetworkRequest & request, QNetworkAccessManager::Operation operation, const QByteArray & body) 
+      {
+      QNetworkRequest new_req(request);  
+      new_req.setRawHeader("User-Agent",  QString("MuseScore %1").arg(VERSION).toAscii());  
+      new_req.setRawHeader("Accept-Language",  QString("%1;q=0.8,en-US;q=0.6,en;q=0.4").arg(mscore->getLocaleISOCode()).toAscii());   
+      QWebView::load( new_req, operation, body);
       }
 
 //---------------------------------------------------------
@@ -181,6 +198,8 @@ void MyWebView::link(const QUrl& url)
       QFileInfo fi(path);
       if (fi.suffix() == "mscz")
             mscore->loadFile(url);
+      else if(url.host().startsWith("connect."))
+            load(QNetworkRequest(url));
       else
             QDesktopServices::openUrl(url);
       }
@@ -245,7 +264,7 @@ WebPageDockWidget::WebPageDockWidget(MuseScore* mscore, QWidget* parent)
             //And not load ! 
             connect(web, SIGNAL(loadFinished(bool)), web, SLOT(stopBusyAndClose(bool)));
             web->setBusy();
-            web->load(QUrl(webUrl()));
+            web->load(QNetworkRequest(webUrl()));
             }
 
       setWidget(web);
@@ -270,18 +289,107 @@ void WebPageDockWidget::load()
       {
       connect(web, SIGNAL(loadFinished(bool)), web, SLOT(stopBusyAndFirst(bool)));
       web->setBusy();
-      web->load(QUrl(webUrl()));
+      web->load(QNetworkRequest(webUrl()));
+      }
+
+#if QT_VERSION >= 0x040800
+bool WebPageDockWidget::saveCurrentScoreOnline(QString action, QVariantMap parameters, QString fileFieldName)
+      {
+      QWebPage * page = web->webPage();
+      QNetworkAccessManager* manager = page->networkAccessManager();
+      
+      QHttpMultiPart *multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);
+
+      QMap<QString, QVariant>::const_iterator i = parameters.constBegin();
+      while (i != parameters.constEnd()) {
+            QHttpPart part;
+            part.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant(QString("form-data; name=\"%1\"").arg(i.key())));
+            part.setBody(i.value().toString().toAscii());
+            multiPart->append(part);
+            //printf("%s \n", qPrintable(i.key()));
+            //printf("%s \n", qPrintable(i.value().toString()));
+            ++i;
+            }
+
+      if(!fileFieldName.isEmpty()) {
+            QDir dir;
+            QFile *file = new QFile(dir.tempPath() + "/temp.mscz");
+            Score* score = mscore->currentScore();
+            if(score) {
+                  score->saveAs(true, file->fileName(), "mscz");
+                  }
+            else {
+                  delete multiPart;
+                  return false;
+                  }
+            QHttpPart filePart;
+            filePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("application/octet-stream"));
+            filePart.setRawHeader("Content-Transfer-Encoding", "binary");
+            filePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant(QString("form-data; name=\"%1\"; filename=\"temp.mscz\"").arg(fileFieldName)));
+            file->open(QIODevice::ReadOnly);
+            filePart.setBodyDevice(file);
+            file->setParent(multiPart); // we cannot delete the file now, so delete it with the multiPart
+            multiPart->append(filePart);
+            }
+      
+      QUrl url(action);
+      QNetworkRequest request(url);
+      
+      //QNetworkAccessManager manager;
+      QNetworkReply *reply = manager->post(request, multiPart);
+      multiPart->setParent(reply); // delete the multiPart with the reply
+      // here connect signals etc.
+      connect(reply, SIGNAL(finished()),
+         this, SLOT(saveOnlineFinished()));
+
+      return true;
+      }      
+      
+void WebPageDockWidget::saveOnlineFinished() {
+      // delete file
+      QDir dir;
+      QFile file(dir.tempPath() + "/temp.mscz");
+      file.remove();
+      
+      QNetworkReply *reply = (QNetworkReply *)sender();
+      // Reading attributes of the reply
+      // e.g. the HTTP status code
+      QVariant statusCodeV = 
+      reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+   
+      // no error received?
+      if (reply->error() == QNetworkReply::NoError) {
+            //Reading bytes form the reply
+            QByteArray bytes = reply->readAll();  // bytes
+            QString string(bytes); // string
+            web->setHtml(string);
+            }
+      else {
+            // handle errors here
+            }
+      reply->deleteLater();
+      }      
+#endif
+
+bool WebPageDockWidget::setCurrentScoreSource(QString source) 
+      {
+      Score* score = mscore->currentScore();
+      if(score) {
+            score->setSource(source);
+            return true;
+            }
+      else {
+            return false;
+            }
       }
 
 //---------------------------------------------------------
-//   load
+//   webUrl
 //---------------------------------------------------------
-QString WebPageDockWidget::webUrl()
-    { 
-    static const char* staticUrl = "http://cdn.musescore.com/connect.html";
-    return QString("%1?language=%2").arg(staticUrl).arg(mscore->getLocaleISOCode()); 
-    }      
-
+QUrl WebPageDockWidget::webUrl()
+      { 
+      return QUrl(staticUrl); 
+      }      
 
 //---------------------------------------------------------
 //   CookieJar
@@ -406,5 +514,3 @@ void WebScoreView::networkFinished(QNetworkReply* reply)
       ScoreView::setScore(score);
       update();
       }
-
-

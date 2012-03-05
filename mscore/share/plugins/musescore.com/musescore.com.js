@@ -1376,8 +1376,10 @@ function processAnswerUpload(id ,error){
          if(array['base'])
             base = array['base'];
          
-         if (array["score_id"])
-            QMessageBox.about(0, "Success", "<a href=\""+base+"/my_scores\">Finished! Go to my scores.</a>"); 
+         if (array["score_id"]) {
+            curScore.source = array["permalink"]; //store source for next time
+            QMessageBox.about(0, "Success", "<a href=\""+base+"/my_scores\">Finished! Go to my scores.</a>");
+            } 
       } 
      }else{
         //message error
