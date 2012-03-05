@@ -22,6 +22,7 @@ install(FILES
       mscore_af.qm
       mscore_ar.qm
       mscore_ast.qm
+      mscore_be.qm      
       mscore_bg.qm
       mscore_ca.qm
       mscore_cs.qm
