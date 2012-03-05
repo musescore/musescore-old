@@ -2908,10 +2908,6 @@ failed: </translation>
         <translation>音乐会音高</translation>
     </message>
     <message>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
-    </message>
-    <message>
         <source>MuseScore: Load Score</source>
         <translation>MuseScore：加载乐谱</translation>
     </message>
@@ -4773,10 +4769,6 @@ is incompatible with current interface</source>
 <context>
     <name>QMessageBox</name>
     <message>
-        <source>MuseScore:</source>
-        <translation>MuseScore：</translation>
-    </message>
-    <message>
         <source>No note selected:
 Please select a single note and retry operation
 </source>
@@ -4834,10 +4826,6 @@ Please select a single note or rest and retry operation
     <message>
         <source>MuseScore: Load Palettes failed:</source>
         <translation>MuseScore：加载元素符号面板失败：</translation>
-    </message>
-    <message>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
     </message>
     <message>
         <source>reading file &lt;</source>
@@ -5189,10 +5177,6 @@ Try saving to a different location.</source>
 请尝试保存成其它文件或其它位置。</translation>
     </message>
     <message>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
-    </message>
-    <message>
         <source>The first time signature of a piece can not be removed.</source>
         <translation>不能移除乐曲的首个拍号。</translation>
     </message>
@@ -5272,10 +5256,6 @@ Try saving to a different location.</source>
 </source>
         <translation>未知的拖拽元素格式: %1:
 </translation>
-    </message>
-    <message>
-        <source>MuseScore:</source>
-        <translation type="unfinished">MuseScore：</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the copy operation</source>

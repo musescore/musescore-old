@@ -2904,10 +2904,6 @@ Fallada: </translation>
         <translation>Marca d'assaig</translation>
     </message>
     <message>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
-    </message>
-    <message>
         <source>MuseScore: Load Score</source>
         <translation>MuseScore: Carrega partitura</translation>
     </message>
@@ -4773,10 +4769,6 @@ Si habilites el mètode d'entrada alternatiu llavors l'armadura actual és irrel
 <context>
     <name>QMessageBox</name>
     <message>
-        <source>MuseScore:</source>
-        <translation>MuseScore:</translation>
-    </message>
-    <message>
         <source>No note selected:
 Please select a single note and retry operation
 </source>
@@ -4830,10 +4822,6 @@ Tria una nota o silenci i torna-ho a intentar
     <message>
         <source>MuseScore: Load Palettes failed:</source>
         <translation>MuseScore: Fallada en la càrrega de paletes:</translation>
-    </message>
-    <message>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
     </message>
     <message>
         <source>reading file &lt;</source>
@@ -5190,10 +5178,6 @@ Prova a desar-ho en una localització diferent.</translation>
         <translation>MuseScore: Desa una còpia</translation>
     </message>
     <message>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
-    </message>
-    <message>
         <source>The first time signature of a piece can not be removed.</source>
         <translation>La primera indicació de compàs d'una partitura no es pot eliminar.</translation>
     </message>
@@ -5273,10 +5257,6 @@ Prova a desar-ho en una localització diferent.</translation>
 </source>
         <translation>Format de caiguda desconegut: Formats %1:
 </translation>
-    </message>
-    <message>
-        <source>MuseScore:</source>
-        <translation type="unfinished">MuseScore:</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the copy operation</source>

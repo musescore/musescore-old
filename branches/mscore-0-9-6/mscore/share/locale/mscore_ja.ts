@@ -8,26 +8,26 @@
         <translation>MuseScore について</translation>
     </message>
     <message utf8="true">
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visit &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Support MuseScore with &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visit &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Support MuseScore with &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2011 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;&#13;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
+p, li { white-space: pre-wrap; }&#13;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
+&#13;
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2011 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -56,14 +56,14 @@ p, li { white-space: pre-wrap; }
     <name>Articulation</name>
     <message>
         <source>Articulation Properties...</source>
-        <translation>アーティキュレーション プロパティ...</translation>
+        <translation>アーティキュレーションのプロパティ...</translation>
     </message>
 </context>
 <context>
     <name>ArticulationProperties</name>
     <message>
         <source>MuseScore: Articulations Properties</source>
-        <translation>MuseScore: アーティキュレーション プロパティ</translation>
+        <translation>MuseScore: アーティキュレーションのプロパティ</translation>
     </message>
     <message>
         <source>Channel</source>
@@ -158,7 +158,7 @@ p, li { white-space: pre-wrap; }
     <name>ChordEdit</name>
     <message>
         <source>MuseScore: Harmony Properties</source>
-        <translation>MuseScore: 和音のプロパティ</translation>
+        <translation>MuseScore: 音符のプロパティ</translation>
     </message>
     <message>
         <source>TextLabel</source>
@@ -840,7 +840,7 @@ p, li { white-space: pre-wrap; }
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
-        <translation>和音のプロパティ</translation>
+        <translation>音符のプロパティ</translation>
     </message>
     <message>
         <source>small</source>
@@ -941,7 +941,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> ticks</source>
-        <translation> 拍</translation>
+        <translation> ティック</translation>
     </message>
     <message>
         <source>Note Head Group</source>
@@ -1290,11 +1290,11 @@ failed: </source>
     <name>EditInstrumentBase</name>
     <message>
         <source>MuseScore: Edit Instrument Properties</source>
-        <translation>MuseScore: 楽器プロパティを編集</translation>
+        <translation>MuseScore: 楽器のプロパティを編集</translation>
     </message>
     <message>
         <source>Instrument Properties</source>
-        <translation>楽器プロパティ</translation>
+        <translation>楽器のプロパティ</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1337,7 +1337,7 @@ failed: </source>
     </message>
     <message>
         <source>Staff Properties</source>
-        <translation>譜表プロパティ</translation>
+        <translation>譜表のプロパティ</translation>
     </message>
     <message>
         <source>Lines:</source>
@@ -1357,7 +1357,7 @@ failed: </source>
     </message>
     <message>
         <source>Part Properties</source>
-        <translation>パートプロパティ</translation>
+        <translation>パートのプロパティ</translation>
     </message>
     <message>
         <source>Long Instrument Name:</source>
@@ -1840,7 +1840,7 @@ space unit</extracomment>
         <translation>反復開始記号の左余白</translation>
     </message>
     <message>
-        <source>Show repeat bar tips (&quot;winged&quot; repeats)</source>
+        <source>Show repeat bar tips ("winged" repeats)</source>
         <translation>反復線に先端を付ける</translation>
     </message>
     <message>
@@ -2059,7 +2059,7 @@ space unit</extracomment>
     <name>GlissandoProperties</name>
     <message>
         <source>MuseScore: Glissando Properties</source>
-        <translation>MuseScore: グリッサンドプロパティ</translation>
+        <translation>MuseScore: グリッサンドのプロパティ</translation>
     </message>
     <message>
         <source>Show Text</source>
@@ -2085,7 +2085,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>HBox Properties...</source>
-        <translation>水平枠プロパティ</translation>
+        <translation>水平枠のプロパティ</translation>
     </message>
 </context>
 <context>
@@ -2100,7 +2100,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Tick1:</source>
-        <translation>ティック 1:</translation>
+        <translation>ティック1:</translation>
     </message>
     <message>
         <source>Tick2:</source>
@@ -2126,14 +2126,14 @@ space unit</extracomment>
     </message>
     <message>
         <source>Image Properties...</source>
-        <translation>イメージプロパティ...</translation>
+        <translation>イメージのプロパティ...</translation>
     </message>
 </context>
 <context>
     <name>ImageProperties</name>
     <message>
         <source>Image Properties</source>
-        <translation>イメージプロパティ</translation>
+        <translation>イメージのプロパティ</translation>
     </message>
     <message>
         <source>lock aspect ratio</source>
@@ -2412,14 +2412,14 @@ failed: </source>
     <name>Jump</name>
     <message>
         <source>Jump Properties...</source>
-        <translation>ジャンププロパティ...</translation>
+        <translation>ジャンプのプロパティ...</translation>
     </message>
 </context>
 <context>
     <name>JumpPropertyBase</name>
     <message>
         <source>Jump Properties</source>
-        <translation>ジャンププロパティ</translation>
+        <translation>ジャンプのプロパティ</translation>
     </message>
     <message>
         <source>Jump to:</source>
@@ -2683,14 +2683,14 @@ failed: </source>
     <name>Marker</name>
     <message>
         <source>Marker Properties...</source>
-        <translation>マーカープロパティ...</translation>
+        <translation>マーカーのプロパティ...</translation>
     </message>
 </context>
 <context>
     <name>MarkerPropertyBase</name>
     <message>
         <source>Marker Properties</source>
-        <translation>マーカープロパティ</translation>
+        <translation>マーカーのプロパティ</translation>
     </message>
     <message>
         <source>Label:</source>
@@ -2701,7 +2701,7 @@ failed: </source>
     <name>Measure</name>
     <message>
         <source>Measure Properties...</source>
-        <translation>小節プロパティ...</translation>
+        <translation>小節のプロパティ...</translation>
     </message>
 </context>
 <context>
@@ -2730,7 +2730,7 @@ failed: </source>
     <name>MeasurePropertiesBase</name>
     <message>
         <source>MuseScore: Measure Properties</source>
-        <translation>MuseScore: 小節プロパティ</translation>
+        <translation>MuseScore: 小節のプロパティ</translation>
     </message>
     <message>
         <source>Staves</source>
@@ -2913,13 +2913,9 @@ failed: </source>
         <translation>小節を検索</translation>
     </message>
     <message>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
-    </message>
-    <message>
-        <source>Save changes to the score &quot;%1&quot;
+        <source>Save changes to the score "%1"
 before closing?</source>
-        <translation>閉じる前にスコア &quot;%1&quot;
+        <translation>閉じる前にスコア "%1"
 を保存しますか?</translation>
     </message>
     <message>
@@ -3287,7 +3283,7 @@ before closing?</source>
     <message>
         <source>
 
-From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
+From the "Help" menu try choosing "Online Handbook" instead.</source>
         <translation>
 
 ヘルプメニューからオンラインハンドブックを試してみてください</translation>
@@ -3592,8 +3588,8 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
-        <translation>前回、MuseScore は正しく終了できませんでした。
-
+        <translation>前回、MuseScore は正しく終了できませんでした。&#13;
+&#13;
 状態を元に戻しますか？</translation>
     </message>
     <message>
@@ -3625,7 +3621,7 @@ is incompatible with current interface</source>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation>このスクリプトを実行するには新しいバージョンのMuseScoreが必要です。
+        <translation>このスクリプトを実行するには新しいバージョンのMuseScoreが必要です。&#13;
 %1</translation>
     </message>
     <message>
@@ -3634,10 +3630,10 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Error loading plugin
-&quot;%1&quot; line %2:
+"%1" line %2:
 %3</source>
-        <translation>プラグインの読み込みに失敗しました
-&quot;%1&quot; line %2:
+        <translation>プラグインの読み込みに失敗しました&#13;
+"%1" line %2:&#13;
 %3</translation>
     </message>
     <message>
@@ -3947,7 +3943,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>First page no.</source>
-        <translation>First page no.</translation>
+        <translation>最初のページ番号</translation>
     </message>
 </context>
 <context>
@@ -4465,7 +4461,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</source>
-        <translation>普通に音符を入力した場合、音高は現在の調号によって決まります。例えば、ト長調で F を入力すると自動的に F♯ になります。
+        <translation>普通に音符を入力した場合、音高は現在の調号によって決まります。例えば、ト長調で F を入力すると自動的に F♯ になります。&#13;
 オルタネート入力方式が有効である場合は、現在の調号とは無関係になります。例えば、ト長調で F を入力しても Fナチュラル になります。</translation>
     </message>
     <message>
@@ -4723,7 +4719,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
-        <translation>Character Set used when import non-unicode strings. (For binary file import)</translation>
+        <translation>UNICODEでない文字列の取り込みに使用する文字コード (バイナリファイルの取り込み)</translation>
     </message>
     <message>
         <source>Character Set</source>
@@ -4768,14 +4764,10 @@ is incompatible with current interface</source>
 <context>
     <name>QMessageBox</name>
     <message>
-        <source>MuseScore:</source>
-        <translation>MuseScore:</translation>
-    </message>
-    <message>
         <source>No note selected:
 Please select a single note and retry operation
 </source>
-        <translation>音符が選択されていません:
+        <translation>音符が選択されていません:&#13;
 ひとつの音符を選択してからもう一度実行してください。
 </translation>
     </message>
@@ -4783,7 +4775,7 @@ Please select a single note and retry operation
         <source>No note or rest selected:
 Please select a single note or rest and retry operation
 </source>
-        <translation>音符または休符が選択されていません:
+        <translation>音符または休符が選択されていません:&#13;
 ひとつの音符か休符を選択してからもう一度実行してください。
 </translation>
     </message>
@@ -4853,10 +4845,6 @@ Please select a single note or rest and retry operation
     <message>
         <source>MuseScore: load Style failed:</source>
         <translation>MuseScore: スタイルの読み込み失敗</translation>
-    </message>
-    <message>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
     </message>
     <message>
         <source>reading file &lt;</source>
@@ -4998,13 +4986,13 @@ Please select a single note or rest and retry operation
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
-        <translation>譜表が見つかりません:
+        <translation>譜表が見つかりません:&#13;
 楽器ダイアログを使って先に譜表を作成してください。</translation>
     </message>
     <message>
         <source>No Measure selected:
 please select a measure and try again</source>
-        <translation>小節が選択されていません:
+        <translation>小節が選択されていません:&#13;
 小節を選択してから実行してください。</translation>
     </message>
     <message>
@@ -5024,8 +5012,8 @@ please select a measure and try again</source>
 %1 
 
 Try saving to a different location.</source>
-        <translation>以下のファイルはロックされています。
-
+        <translation>以下のファイルはロックされています。&#13;
+&#13;
 別の場所への保存を試みてください。</translation>
     </message>
     <message>
@@ -5183,10 +5171,6 @@ failed: </source>
         <translation>何も選択されていません。スコア全体を移調しますか？</translation>
     </message>
     <message>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
-    </message>
-    <message>
         <source>The first time signature of a piece can not be removed.</source>
         <translation>曲の始めの拍子記号は削除することができません。</translation>
     </message>
@@ -5203,20 +5187,20 @@ failed: </source>
         <translation>読み込み失敗 </translation>
     </message>
     <message>
-        <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href=&quot;%1&quot;&gt;Upgrade now!&lt;/a&gt;</source>
-        <translation>このスコアは読み込むことができません。:&lt;br&gt;最新のMuseScoreをインストールしてください。&lt;br&gt;&lt;a href=&quot;%1&quot;&gt;今すぐ更新&lt;/a&gt;</translation>
+        <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
+        <translation>このスコアは読み込むことができません。:&lt;br&gt;最新のMuseScoreをインストールしてください。&lt;br&gt;&lt;a href="%1"&gt;今すぐ更新&lt;/a&gt;</translation>
     </message>
     <message>
-        <source>Can&apos;t open file. File extension &quot;%1&quot; not supported.</source>
-        <translation>ファイルを開くことができません。ファイル拡張子 &quot;%1&quot; はサポートされていません。</translation>
+        <source>Can't open file. File extension "%1" not supported.</source>
+        <translation>ファイルを開くことができません。ファイル拡張子 "%1" はサポートされていません。</translation>
     </message>
     <message>
         <source>Internal error</source>
-        <translation type="unfinished"></translation>
+        <translation>内部エラー</translation>
     </message>
     <message>
         <source>Cannot load picture file %1</source>
-        <translation type="unfinished"></translation>
+        <translation>次の画像ファイルを読み込むことができません： %1</translation>
     </message>
 </context>
 <context>
@@ -5268,16 +5252,12 @@ failed: </source>
 </translation>
     </message>
     <message>
-        <source>MuseScore:</source>
-        <translation type="unfinished">MuseScore:</translation>
-    </message>
-    <message>
         <source>Please select the complete tuplet and retry the copy operation</source>
-        <translation type="unfinished"></translation>
+        <translation>連符のすべての要素を選択した上でコピー操作を再試行してください</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the cut operation</source>
-        <translation type="unfinished"></translation>
+        <translation>連符のすべての要素を選択した上でコピー操作を再試行してください</translation>
     </message>
 </context>
 <context>
@@ -5398,7 +5378,7 @@ failed: </source>
     <message>
         <source>Init audio driver failed.
 Sequencer will be disabled.</source>
-        <translation>オーディオドライバの初期化に失敗しました。
+        <translation>オーディオドライバの初期化に失敗しました。&#13;
 このままではシーケンサーは使用できません。</translation>
     </message>
     <message>
@@ -5408,20 +5388,20 @@ Sequencer will be disabled.</source>
     <message>
         <source>No SoundFont configured
 Playback will be disabled.</source>
-        <translation>SoundFontが設定されていません。
+        <translation>SoundFontが設定されていません。&#13;
 このままでは再生できません。</translation>
     </message>
     <message>
         <source>Loading SoundFont
-&quot;%1&quot;
+"%1"
 failed. Playback will be disabled.
 
 Go to Display &gt; Synthesizer 
 and check that the file location is correct</source>
-        <translation>以下のSoundFontの読み込みに失敗しました。
-&quot;%1&quot;
-このままでは再生できません。
-
+        <translation>以下のSoundFontの読み込みに失敗しました。&#13;
+"%1"&#13;
+このままでは再生できません。&#13;
+&#13;
 メニューバーの表示からシンセサイザーを選び、ファイルの場所が正しいか確認してください。</translation>
     </message>
 </context>
@@ -5575,7 +5555,7 @@ and check that the file location is correct</source>
     <name>SlurPropertyBase</name>
     <message>
         <source>Volta Properties</source>
-        <translation>反復記号プロパティ</translation>
+        <translation>反復記号のプロパティ</translation>
     </message>
     <message>
         <source>Slur Properties</source>
@@ -5622,7 +5602,7 @@ and check that the file location is correct</source>
     <name>SplitStaff</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: 譜表とパートのプロパティを編集</translation>
+        <translation>MuseScore: 譜表とパートのプロパティ編集</translation>
     </message>
     <message>
         <source>Split Staff</source>
@@ -6263,11 +6243,11 @@ and check that the file location is correct</source>
         <translation>小節数:</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt; p, li { white-space: pre-wrap; } &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt; &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;ヒント: 小節数は、ウィザード終了後でも追加・削除できます。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt; p, li { white-space: pre-wrap; } &lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt; &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;ヒント: 小節数は、ウィザード終了後でも追加・削除できます。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -6601,8 +6581,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>UpdateChecker</name>
     <message>
-        <source>An update for MuseScore is available: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
-        <translation>MuseScoreはアップデートが利用可能になりました。: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
+        <source>An update for MuseScore is available: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
+        <translation>MuseScoreはアップデートが利用可能になりました。: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Update Available</source>
@@ -9207,19 +9187,19 @@ p, li { white-space: pre-wrap; }
         <translation>8分休符</translation>
     </message>
     <message>
-        <source>16&apos; rest</source>
+        <source>16' rest</source>
         <translation>16分休符</translation>
     </message>
     <message>
-        <source>32&apos; rest</source>
+        <source>32' rest</source>
         <translation>32分休符</translation>
     </message>
     <message>
-        <source>64&apos; rest</source>
+        <source>64' rest</source>
         <translation>64分休符</translation>
     </message>
     <message>
-        <source>128&apos; rest</source>
+        <source>128' rest</source>
         <translation>128分休符</translation>
     </message>
     <message>

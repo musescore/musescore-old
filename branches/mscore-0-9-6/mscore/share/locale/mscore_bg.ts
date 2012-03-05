@@ -3711,12 +3711,6 @@ failed: </source>
         <translation>Търсене</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="146"/>
-        <location filename="../../mscore/mscore.cpp" line="3008"/>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
-    </message>
-    <message>
         <location filename="../../mscore/file.cpp" line="147"/>
         <source>Save changes to the score "%1"
 before closing?</source>
@@ -6057,14 +6051,6 @@ is incompatible with current interface</source>
 <context>
     <name>QMessageBox</name>
     <message>
-        <location filename="../../mscore/utils.cpp" line="374"/>
-        <location filename="../../mscore/utils.cpp" line="383"/>
-        <location filename="../../mscore/utils.cpp" line="392"/>
-        <location filename="../../mscore/utils.cpp" line="400"/>
-        <source>MuseScore:</source>
-        <translation>MuseScore:</translation>
-    </message>
-    <message>
         <location filename="../../mscore/utils.cpp" line="375"/>
         <source>No note selected:
 Please select a single note and retry operation
@@ -6174,11 +6160,6 @@ Please select a single note or rest and retry operation
         <location filename="../../mscore/instrdialog.cpp" line="1065"/>
         <source>MuseScore: load Style failed:</source>
         <translation>MuseScore: Зареждането на стил е неуспешно:</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/mscore.cpp" line="1612"/>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="1613"/>
@@ -6623,13 +6604,6 @@ failed: </source>
         <translation>Нищо не е маркирано. Транспониране на цялата партитура?</translation>
     </message>
     <message>
-        <location filename="../../mscore/edit.cpp" line="571"/>
-        <location filename="../../mscore/file.cpp" line="1222"/>
-        <location filename="../../mscore/score.cpp" line="415"/>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
-    </message>
-    <message>
         <location filename="../../mscore/edit.cpp" line="572"/>
         <source>The first time signature of a piece can not be removed.</source>
         <translation>Началният размер на музикалната пиеса не може да бъде премахван.</translation>
@@ -6703,12 +6677,6 @@ failed: </source>
         <source>unknown drop format: formats %1:
 </source>
         <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../../mscore/scoreview.cpp" line="2358"/>
-        <location filename="../../mscore/scoreview.cpp" line="2381"/>
-        <source>MuseScore:</source>
-        <translation type="unfinished">MuseScore:</translation>
     </message>
     <message>
         <location filename="../../mscore/scoreview.cpp" line="2359"/>
