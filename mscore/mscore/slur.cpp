@@ -353,8 +353,8 @@ void SlurSegment::layout(const QPointF& p1, const QPointF& p2, qreal b)
 
       qreal xdelta = x3 - x0;
       if (xdelta == 0.0) {
-            printf("warning: slur has zero width at %d-%d\n",
-               slurTie()->startElement()->tick(), slurTie()->endElement()->tick());
+            if(debugMode)
+                  printf("warning: slur has zero width\n");
             return;
             }
       if (x0 > x3) {
