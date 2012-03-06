@@ -614,10 +614,9 @@ class Capella {
       unsigned btmPageMargins;
 
       QList<QFont> fonts;
-      QList<CapStaffLayout*> staves;      // staff layout
+      QList<CapStaffLayout*> _staves;      // staff layout
 
-      int smallLineDist;            // layout
-      int normalLineDist;
+
       int topDist;
       int interDist;
       unsigned char txtAlign;       // Stimmenbezeichnungen 0=links, 1=zentriert, 2=rechts
@@ -664,6 +663,11 @@ class Capella {
       QList<CapSystem*> systems;
       QList<CapBracket> brackets;
       ChordObj* backgroundChord;
+      CapStaffLayout* staff(int idx)               { return _staves[idx]; }
+      const QList<CapStaffLayout*>& staves() const { return _staves; }
+      
+      double smallLineDist;            // layout
+      double normalLineDist;
       };
 
 #endif

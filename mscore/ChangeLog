@@ -1,6 +1,7 @@
 06.mar (la)
       - fix #4893: Non-removable courtesy clef appears after insert measure before first one
       - fix #15347: Dragging slur from Lines palette causes crash
+      - fix #14064: Opening capella files causes crash
 05.mar (la)
       - add Belarusian translation
 03.mar (lv)

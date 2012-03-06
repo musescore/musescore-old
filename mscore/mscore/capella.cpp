@@ -904,8 +904,8 @@ void Capella::readStaveLayout(CapStaffLayout* sl, int /*idx*/)
 
 void Capella::readLayout()
       {
-      smallLineDist  = readInt();
-      normalLineDist = readInt();
+      smallLineDist  = double(readInt()) / 100;
+      normalLineDist = double(readInt()) / 100;
       topDist        = readInt();
       interDist      = readInt();
 
@@ -930,7 +930,7 @@ void Capella::readLayout()
       for (unsigned iStave = 0; iStave < nStaveLayouts; iStave++) {
             CapStaffLayout* sl = new CapStaffLayout;
             readStaveLayout(sl, iStave);
-            staves.append(sl);
+            _staves.append(sl);
             }
 
       // system brackets:
@@ -1663,8 +1663,42 @@ void Score::convertCapella(Capella* cap)
       {
       if (cap->systems.isEmpty())
             return;
+qDebug("==================convert-capella\n");
 
-      int staves   = cap->systems[0]->staves.size();
+      style().set(ST_measureSpacing, 1.0);
+      setSpatium(cap->normalLineDist * DPMM);
+      style().set(ST_smallStaffMag, cap->smallLineDist / cap->normalLineDist);
+      style().set(ST_systemDistance, Spatium(8));
+//      score->style()->set(ST_hideEmptyStaves, true);
+
+#if 1
+      foreach(CapSystem* csys, cap->systems) {
+            qDebug("System:\n");
+            foreach(CapStaff* cstaff, csys->staves) {
+                  CapStaffLayout* cl = cap->staff(cstaff->iLayout);
+                  qDebug("  Staff layout <%s><%s><%s><%s><%s> %d  barline %d-%d mode %d\n",
+                     cl->descr, cl->name, cl->abbrev, cl->intermediateName,
+                     cl->intermediateAbbrev,
+                     cstaff->iLayout, cl->barlineFrom, cl->barlineTo, cl->barlineMode);
+                  }
+            }
+#endif
+
+      //
+      // find out the maximum number of staves
+      //
+      int staves = 0;
+      foreach(CapSystem* csys, cap->systems)
+            staves = qMax(staves, csys->staves.size());
+      //
+      // check the assumption that every stave should be
+      // associated with a CapStaffLayout
+      //
+      if (staves != cap->staves().size()) {
+            qDebug("Capella: max number of staves != number of staff layouts (%d, %d)\n",
+               staves, cap->staves().size());
+            staves = qMax(staves, cap->staves().size());
+            }
       CapStaff* cs = cap->systems[0]->staves[0];
       if (cs->log2Denom <= 7)
             sigmap()->add(0, Fraction(cs->numerator, 1 << cs->log2Denom));
