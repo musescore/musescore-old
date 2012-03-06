@@ -1,3 +1,5 @@
+04.5 (db)
+      - Minor spelling and javascript corrections for test plugin
 04.3 (lv)
       - fix #14811: [MusicXML import] [trunk] import error: 41h-TooManyParts.xml causes crash
       - fix #14812: [MusicXML import] [trunk] import error: 41g-PartNoId.xml causes crash
