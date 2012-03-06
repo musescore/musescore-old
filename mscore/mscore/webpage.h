@@ -94,7 +94,9 @@ class WebPageDockWidget : public QDockWidget
    
    public slots:
       void addToJavascript();
+#if QT_VERSION >= 0x040800
       void saveOnlineFinished();
+#endif      
       
    public:
       WebPageDockWidget(MuseScore* mscore, QWidget* parent = 0);
