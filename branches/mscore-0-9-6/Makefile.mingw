@@ -20,7 +20,7 @@
 
 
 REVISION  = $(shell type mscore\mscore\revision.h)
-VERSION   = 1.1r${REVISION}
+VERSION   = 1.2r${REVISION}
 MINGW_DIR = C:\QtSDK\mingw
 
 release:

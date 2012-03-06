@@ -1,5 +1,7 @@
 05.mar (la)
       - add Belarusian translation
+06.mar (la)
+      - fix #4893: Non-removable courtesy clef appears after insert measure before first one
 03.mar (lv)
       - update MusicXML regression test
 01.mar (la)

@@ -1559,6 +1559,7 @@ void Score::insertMeasures(int n, int type)
 
                   QList<TimeSig*> tsl;
                   QList<KeySig*>  ksl;
+                  QList<Clef*>    csl;
 
                   if (tick == 0) {
                         //
@@ -1582,6 +1583,18 @@ void Score::insertMeasures(int n, int type)
                                           TimeSig* e = static_cast<TimeSig*>(s->element(staffIdx * VOICES));
                                           if (e && !e->generated()) {
                                                 tsl.append(static_cast<TimeSig*>(e));
+                                                undoRemoveElement(e);
+                                                if (e->segment()->isEmpty()) {
+                                                      undoRemoveElement(e->segment());
+                                                      }
+                                                }
+                                          }
+                                    }
+                              else if (s->subtype() == SegClef) {
+                                    for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+                                          Clef* e = static_cast<Clef*>(s->element(staffIdx * VOICES));
+                                          if (e && !e->generated()) {
+                                                csl.append(static_cast<Clef*>(e));
                                                 undoRemoveElement(e);
                                                 if (e->segment()->isEmpty()) {
                                                       undoRemoveElement(e->segment());
@@ -1621,6 +1634,17 @@ void Score::insertMeasures(int n, int type)
                               }
                         nks->setParent(s);
                         undoAddElement(nks);
+                        }
+                  foreach(Clef* clef, csl) {
+                        Clef* nClef = new Clef(*clef);
+                        SegmentType st = SegClef;
+                        Segment* s = measure->findSegment(st, 0);
+                        if (s == 0) {
+                              s = measure->createSegment(st, 0);
+                              undoAddElement(s);
+                              }
+                        nClef->setParent(s);
+                        undoAddElement(nClef);
                         }
                   }
             else
