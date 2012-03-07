@@ -143,15 +143,19 @@ struct FiguredBassFont {
 class FiguredBass : public Text {
 
       QList<FiguredBassItem>  items;            // the individual lines of the F.B.
+      bool              _onNote;                // true if this element is on a staff note | false if it is betweee notes
       int               _ticks;                 // the duration (used for cont. lines and for multiple F.B.
                                                 // under the same note)
+      static FiguredBass*     prevFB;           // the previous FiguredBass element; used while 'tabbing' during editing
+
    public:
       FiguredBass(Score*);
       FiguredBass(const FiguredBass&);
       ~FiguredBass();
 
       // a convenience static function to create/retrieve a new FiguredBass into/from its intended parent
-      static FiguredBass * addFiguredBassToSegment(Segment *seg, int track, int ticks, bool *pNew);
+      static FiguredBass *    addFiguredBassToSegment(Segment *seg, int track, int ticks, bool *pNew);
+      static void             setPrevFB(FiguredBass* fb)    { prevFB = fb;    }
 
       // static functions for font config files
       static bool       readConfigFile(const QString& fileName);
@@ -171,9 +175,14 @@ class FiguredBass : public Text {
       virtual void      write(Xml& xml) const;
 
       // getter /setters
-      Segment *         segment() const   { return static_cast<Segment*>(parent()); }
-      int               ticks() const     { return _ticks;   }
-      void              setTicks(int val) { _ticks = val;    }
+      bool              onNote() const          { return _onNote; }
+      void              setOnNote(bool val)     { _onNote = val;  }
+      Segment *         segment() const         { return static_cast<Segment*>(parent()); }
+      int               ticks() const           { return _ticks;  }
+      void              setTicks(int val)       { _ticks = val;   }
+
+      // other methods
+      void              adjustDuration();
       };
 
 #endif

@@ -2,6 +2,7 @@
       - updated text style implementation for styled/unstyled text
       (mw)
       - Changed FiguredBass to displays text which cannot be parsed
+      - FiguredBass: implemented _ticks and_onNote values
 05.3 (db)
       - Minor spelling and javascript corrections for test plugin
 04.3 (lv)
