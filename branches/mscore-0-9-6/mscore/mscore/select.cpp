@@ -814,8 +814,8 @@ QByteArray Selection::staffMimeData() const
                                           }
                                     foreach(Tuplet* t, tl) {
                                           if (t->id() == -1) {
-                                                tuplet->setId(xml.tupletId++);
-                                                tuplet->write(xml);
+                                                t->setId(xml.tupletId++);
+                                                t->write(xml);
                                                 }
                                           }
                                     }
