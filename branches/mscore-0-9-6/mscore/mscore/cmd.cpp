@@ -2701,12 +2701,13 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                   Segment* s2 = tick2segment(dstTick + tickLen);
                   _selection.setRange(s1, s2, dstStaffStart, dstStaffStart+staves);
                   updateSelectedElements();
-
-                  ChordRest* cr = s1->nextChordRest(dstStaffStart * VOICES);
-                  if(cr)
-                        mscore->currentScoreView()->adjustCanvasPosition(cr, false);
-                  else
-                        mscore->currentScoreView()->adjustCanvasPosition(s1, false);
+                  if(s1) {
+                        ChordRest* cr = s1->nextChordRest(dstStaffStart * VOICES);
+                        if(cr)
+                              mscore->currentScoreView()->adjustCanvasPosition(cr, false);
+                        else
+                              mscore->currentScoreView()->adjustCanvasPosition(s1, false);
+                        }
 
                   if (selection().state() != SEL_RANGE) {
                         _selection.setState(SEL_RANGE);
