@@ -719,7 +719,7 @@ void Chord::readNote(const QDomElement& de, QList<Tuplet*>* tuplets, QList<Spann
                   }
             else if (tag == "Text") {
                   Text* f = new Text(score());
-                  f->setTextStyle(TEXT_STYLE_FINGERING);
+                  f->setTextStyle(score()->textStyle(TEXT_STYLE_FINGERING));
                   f->read(e);
                   f->setParent(this);
                   note->add(f);

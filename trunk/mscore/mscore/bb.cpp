@@ -452,7 +452,7 @@ bool MuseScore::importBB(Score* score, const QString& name)
 
       Text* text = new Text(score);
 //      text->setSubtype(TEXT_TITLE);
-      text->setTextStyle(TEXT_STYLE_TITLE);
+      text->setTextStyleType(TEXT_STYLE_TITLE);
       text->setText(bb.title());
 
       MeasureBase* measure = score->first();

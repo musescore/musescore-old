@@ -316,10 +316,10 @@ OVE::Staff* getStaff(const OVE::OveSong* ove, int track) {
 	return 0;
 }
 
-void addText(VBox* & vbox, Score* s, QString strTxt, TextStyleType stl) {
+void addText(VBox* & vbox, Score* s, QString strTxt, int stl) {
 	if (!strTxt.isEmpty()) {
 		Text* text = new Text(s);
-		text->setTextStyle(stl);
+		text->setTextStyleType(stl);
 		text->setText(strTxt);
 		if(vbox == 0) {
 			vbox = new VBox(s);
@@ -2308,7 +2308,7 @@ void OveToMScore::convertExpressions(Measure* measure, int part, int staff, int 
 		int absTick = mtt_->getTick(measure->no(), expressionPtr->getTick());
 		Text* t = new Text(score_);
 
-		t->setTextStyle(TEXT_STYLE_TECHNIK);
+		t->setTextStyleType(TEXT_STYLE_TECHNIK);
 		t->setText(expressionPtr->getText());
 		t->setTrack(track);
 

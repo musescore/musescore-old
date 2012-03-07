@@ -52,11 +52,11 @@
 //   TODO: remove duplicate code
 //---------------------------------------------------------
 
-static void addText(VBox*& vbx, Score* s, QString strTxt, TextStyleType stl)
+static void addText(VBox*& vbx, Score* s, QString strTxt, int stl)
       {
       if (!strTxt.isEmpty()) {
             Text* text = new Text(s);
-            text->setTextStyle(stl);
+            text->setTextStyleType(stl);
             text->setText(strTxt);
             if (vbx == 0)
                   vbx = new VBox(s);

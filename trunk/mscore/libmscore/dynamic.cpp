@@ -68,10 +68,9 @@ Dynamic::Dynamic(Score* s)
       {
       setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       _velocity = -1;
-      setTextStyle(TEXT_STYLE_DYNAMICS);
       setSubtype(0);
       _dynType  = DYNAMIC_PART;
-      setStyled(false);
+      setTextStyleType(TEXT_STYLE_DYNAMICS);
       }
 
 Dynamic::Dynamic(const Dynamic& d)
@@ -80,7 +79,6 @@ Dynamic::Dynamic(const Dynamic& d)
       setSubtype(d._subtype);
       _velocity = d._velocity;
       _dynType  = d._dynType;
-      setStyled(false);
       }
 
 //---------------------------------------------------------
@@ -133,10 +131,8 @@ void Dynamic::read(const QDomElement& de)
             else if (!Text::readProperties(e))
                   domError(e);
             }
-      if (score()->mscVersion() < 118) {
-            setTextStyle(TEXT_STYLE_DYNAMICS);
-            setStyled(true);
-            }
+      if (score()->mscVersion() < 118)
+            setTextStyleType(TEXT_STYLE_DYNAMICS);
       }
 
 //---------------------------------------------------------
@@ -151,7 +147,7 @@ void Dynamic::setSubtype(int idx)
                   qDebug("Dynamic::setSubtype: bad type %d\n", idx);
                   idx = 1;
                   }
-            setStyled(false);
+            setUnstyled();
             clear();
             QTextCursor* cursor = startCursorEdit();
             cursor->movePosition(QTextCursor::Start);
@@ -244,7 +240,7 @@ void Dynamic::toDefault()
                   }
             }
       Text::toDefault();
-      setTextStyle(TEXT_STYLE_DYNAMICS);
+      setTextStyle(score()->textStyle(TEXT_STYLE_DYNAMICS));
       setSubtype(idx);
       }
 

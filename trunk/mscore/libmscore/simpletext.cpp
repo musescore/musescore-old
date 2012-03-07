@@ -24,7 +24,7 @@
 SimpleText::SimpleText(Score* s)
    : Element(s)
       {
-      _textStyle           = TEXT_STYLE_STAFF;
+      _textStyle           = s->textStyle(TEXT_STYLE_DEFAULT);
       _layoutToParentWidth = false;
       }
 
@@ -42,22 +42,13 @@ SimpleText::~SimpleText()
       }
 
 //---------------------------------------------------------
-//   style
-//---------------------------------------------------------
-
-const TextStyle& SimpleText::style() const
-      {
-      return score()->textStyle(_textStyle);
-      }
-
-//---------------------------------------------------------
 //   draw
 //---------------------------------------------------------
 
 void SimpleText::draw(QPainter* p) const
       {
       p->setPen(textColor());
-      p->setFont(style().fontPx(spatium()));
+      p->setFont(textStyle().fontPx(spatium()));
       p->drawText(drawingRect, alignFlags(), _text);
       drawFrame(p);
       }
@@ -68,7 +59,7 @@ void SimpleText::draw(QPainter* p) const
 
 void SimpleText::drawFrame(QPainter* painter) const
       {
-      if (!style().hasFrame())
+      if (!textStyle().hasFrame())
             return;
 
       QColor color(frameColor());
@@ -100,7 +91,7 @@ QColor SimpleText::textColor() const
             return MScore::selectColor[0];
       if (!visible())
             return Qt::gray;
-      return style().foregroundColor();
+      return textStyle().foregroundColor();
       }
 
 //---------------------------------------------------------
@@ -110,7 +101,7 @@ QColor SimpleText::textColor() const
 int SimpleText::alignFlags() const
       {
       int flags = Qt::TextDontClip;
-      Align align = style().align();
+      Align align = textStyle().align();
       if (align & ALIGN_HCENTER)
             flags |= Qt::AlignHCenter;
       else if (align & ALIGN_RIGHT)
@@ -139,7 +130,7 @@ void SimpleText::layout()
       if (_text.isEmpty())
             return;
 
-      const TextStyle& s(style());
+      const TextStyle& s(textStyle());
 
       QPointF o(s.offset(spatium()));
       if (_layoutToParentWidth && parent()) {
@@ -193,7 +184,7 @@ void SimpleText::layoutFrame()
 
 qreal SimpleText::lineSpacing() const
       {
-      return QFontMetricsF(style().font(spatium())).lineSpacing();
+      return QFontMetricsF(textStyle().font(spatium())).lineSpacing();
       }
 
 //---------------------------------------------------------
@@ -202,7 +193,7 @@ qreal SimpleText::lineSpacing() const
 
 qreal SimpleText::lineHeight() const
       {
-      return QFontMetricsF(style().font(spatium())).height();
+      return QFontMetricsF(textStyle().font(spatium())).height();
       }
 
 //---------------------------------------------------------
@@ -211,7 +202,7 @@ qreal SimpleText::lineHeight() const
 
 qreal SimpleText::baseLine() const
       {
-      return QFontMetricsF(style().font(spatium())).ascent();
+      return QFontMetricsF(textStyle().font(spatium())).ascent();
       }
 
 //---------------------------------------------------------
@@ -220,7 +211,7 @@ qreal SimpleText::baseLine() const
 
 qreal SimpleText::frameWidth() const
       {
-      return style().frameWidth();
+      return textStyle().frameWidth();
       }
 
 //---------------------------------------------------------
@@ -229,7 +220,7 @@ qreal SimpleText::frameWidth() const
 
 bool SimpleText::hasFrame() const
       {
-      return style().hasFrame();
+      return textStyle().hasFrame();
       }
 
 //---------------------------------------------------------
@@ -238,7 +229,7 @@ bool SimpleText::hasFrame() const
 
 qreal SimpleText::paddingWidth() const
       {
-      return style().paddingWidth();
+      return textStyle().paddingWidth();
       }
 
 //---------------------------------------------------------
@@ -247,7 +238,7 @@ qreal SimpleText::paddingWidth() const
 
 QColor SimpleText::frameColor() const
       {
-      return style().frameColor();
+      return textStyle().frameColor();
       }
 
 //---------------------------------------------------------
@@ -256,7 +247,7 @@ QColor SimpleText::frameColor() const
 
 int SimpleText::frameRound() const
       {
-      return style().frameRound();
+      return textStyle().frameRound();
       }
 
 //---------------------------------------------------------
@@ -265,5 +256,5 @@ int SimpleText::frameRound() const
 
 bool SimpleText::circle() const
       {
-      return style().circle();
+      return textStyle().circle();
       }

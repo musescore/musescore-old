@@ -121,7 +121,7 @@ void Tuplet::layout()
       if (_numberType != NO_TEXT) {
             if (_number == 0) {
                   _number = new Text(score());
-                  _number->setTextStyle(TEXT_STYLE_TUPLET);
+                  _number->setTextStyle(score()->textStyle(TEXT_STYLE_TUPLET));
                   _number->setParent(this);
                   }
             if (_numberType == SHOW_NUMBER)
@@ -540,7 +540,7 @@ void Tuplet::read(const QDomElement& de, QList<Tuplet*>* tuplets, const QList<Sp
                   _number = new Text(score());
                   _number->setParent(this);
                   _number->read(e);
-                  _number->setTextStyle(TEXT_STYLE_TUPLET);
+                  _number->setTextStyle(score()->textStyle(TEXT_STYLE_TUPLET));
                   }
             else if (tag == "subtype")    // obsolete
                   ;

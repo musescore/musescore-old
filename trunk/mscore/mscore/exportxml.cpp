@@ -2104,14 +2104,14 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                         notations.tag(xml);
                         technical.tag(xml);
                         QString t = f->getText();
-                        if (f->textStyle() == TEXT_STYLE_FINGERING) {
+                        if (f->textStyleType() == TEXT_STYLE_FINGERING) {
                               // p, i, m, a, c represent the plucking finger
                               if (t == "p" || t == "i" || t == "m" || t == "a" || t == "c")
                                     xml.tag("pluck", t);
                               else
                                     xml.tag("fingering", t);
                               }
-                        else if (f->textStyle() == TEXT_STYLE_STRING_NUMBER) {
+                        else if (f->textStyleType() == TEXT_STYLE_STRING_NUMBER) {
                               xml.tag("string", t);
                               }
                         else

@@ -1341,7 +1341,7 @@ void TextView::setElement(Element* e)
       tb.textStyle->clear();
 
       for (int i = 0; i < TEXT_STYLES; ++i)
-            tb.textStyle->addItem(e->score()->textStyle(TextStyleType(i)).name());
+            tb.textStyle->addItem(e->score()->textStyle(i).name());
 
       ShowElementBase::setElement(e);
       tb.text->setPlainText(te->getText());
@@ -1350,7 +1350,7 @@ void TextView::setElement(Element* e)
       tb.rxoffset->setValue(te->reloff().x());
       tb.ryoffset->setValue(te->reloff().y());
       tb.offsetType->setCurrentIndex(int(te->offsetType()));
-      tb.textStyle->setCurrentIndex(te->textStyle());
+      tb.textStyle->setCurrentIndex(te->textStyleType());
       tb.styled->setChecked(te->styled());
       }
 

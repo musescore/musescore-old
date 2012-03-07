@@ -616,7 +616,6 @@ ScoreView::ScoreView(QWidget* parent)
       _score      = 0;
       _omrView    = 0;
       dropTarget  = 0;
-      _editText   = 0;
 
       setContextMenuPolicy(Qt::DefaultContextMenu);
 
@@ -1157,7 +1156,8 @@ void ScoreView::updateGrips()
             curGrip = grips-1;
 
       QPointF pt(editObject->getGrip(curGrip));
-      mscore->editTools()->setEditPos(pt);
+      if (!editObject->isText())
+            mscore->editTools()->setEditPos(pt);
 
 #if 0
       double x, y;
@@ -1288,18 +1288,8 @@ void ScoreView::startEdit()
       setFocus();
       if (!score()->undo()->active())
             score()->startCmd();
-      if (origEditObject->isText()) {
-            editObject = origEditObject;
-            editObject->startEdit(this, startMove);
-            Text* t = static_cast<Text*>(editObject);
-            _editText = t;
-            mscore->textTools()->setText(t);
-            mscore->textTools()->updateTools();
-            mscore->textTools()->show();
-            textUndoLevel = 0;
-//TODOst            connect(t->doc(), SIGNAL(undoCommandAdded()), SLOT(textUndoLevelAdded()));
-            }
-      else if (origEditObject->isSegment()) {
+
+      if (origEditObject->isSegment()) {
             SpannerSegment* ss = (SpannerSegment*)origEditObject;
             Spanner* spanner   = ss->spanner();
             Spanner* clone     = static_cast<Spanner*>(spanner->clone());
@@ -1308,10 +1298,6 @@ void ScoreView::startEdit()
             editObject         = clone->spannerSegments()[idx];
             editObject->startEdit(this, startMove);
             _score->undoChangeElement(spanner, clone);
-
-            mscore->editTools()->setElement(editObject);
-            mscore->editTools()->updateTools();
-            mscore->editTools()->show();
             }
       else {
             foreach(Element* e, origEditObject->linkList()) {
@@ -1324,7 +1310,14 @@ void ScoreView::startEdit()
                   }
             editObject->layout();
             editObject->startEdit(this, startMove);
-
+            }
+      if (origEditObject->isText()) {
+            Text* t = static_cast<Text*>(editObject);
+            mscore->textTools()->setText(t);
+            mscore->textTools()->updateTools();
+            mscore->textTools()->show();
+            }
+      else {
             mscore->editTools()->setElement(editObject);
             mscore->editTools()->updateTools();
             mscore->editTools()->show();
@@ -1341,9 +1334,9 @@ void ScoreView::startEdit()
 void ScoreView::endEdit()
       {
       mscore->editTools()->hide();
+      mscore->textTools()->hide();
 
       setDropTarget(0);
-      setEditText(0);
       if (!editObject) {
             origEditObject = 0;
 	      return;
@@ -1354,17 +1347,12 @@ void ScoreView::endEdit()
             score()->addRefresh(grip[i]);
 
       editObject->endEdit();
+
       if (editObject->isText()) {
             if (textPalette) {
                   textPalette->hide();
                   mscore->textTools()->kbAction()->setChecked(false);
                   }
-            mscore->textTools()->hide();
-
-            Text* t = static_cast<Text*>(editObject);
-            if (textUndoLevel)
-                  _score->undo(new EditText(t, textUndoLevel));
-//TODOst            disconnect(t->doc(), SIGNAL(undoCommandAdded()), this, SLOT(textUndoLevelAdded()));
             }
       else if (editObject->isSegment()) {
             Spanner* spanner  = static_cast<SpannerSegment*>(editObject)->spanner();
@@ -1898,11 +1886,13 @@ void ScoreView::paint(const QRect& r, QPainter& p)
       //
       // frame text in edit mode, except for text in a text frame
       //
-      if (_editText && !(_editText->parent() && _editText->parent()->type() == TBOX)) {
-            Element* e = _editText;
+      if (editObject && editObject->isText()
+         && !(editObject->parent() && editObject->parent()->type() == TBOX)) {
+            Element* e = editObject;
             while (e->parent())
                   e = e->parent();
-            QRectF r = _editText->pageRectangle().translated(e->pos()); // abbox();
+            Text* text = static_cast<Text*>(editObject);
+            QRectF r = text->pageRectangle().translated(e->pos()); // abbox();
             p.setPen(QPen(QBrush(Qt::blue), 2.0 / matrix().m11()));  // 2 pixel pen size
             p.setBrush(QBrush(Qt::NoBrush));
             p.drawRect(r);
@@ -2817,15 +2807,6 @@ void ScoreView::showOmr(bool flag)
             t->setCurrent(t->currentIndex());
       else
             qDebug("view not found");
-      }
-
-//---------------------------------------------------------
-//   textUndoLevelAdded
-//---------------------------------------------------------
-
-void ScoreView::textUndoLevelAdded()
-      {
-      ++textUndoLevel;
       }
 
 //---------------------------------------------------------
@@ -4779,10 +4760,10 @@ void ScoreView::cmdAddText(int type)
                         }
                   s = new Text(_score);
                   switch(type) {
-                        case TEXT_TITLE:    s->setTextStyle(TEXT_STYLE_TITLE);    break;
-                        case TEXT_SUBTITLE: s->setTextStyle(TEXT_STYLE_SUBTITLE); break;
-                        case TEXT_COMPOSER: s->setTextStyle(TEXT_STYLE_COMPOSER); break;
-                        case TEXT_POET:     s->setTextStyle(TEXT_STYLE_POET);     break;
+                        case TEXT_TITLE:    s->setTextStyle(_score->textStyle(TEXT_STYLE_TITLE));    break;
+                        case TEXT_SUBTITLE: s->setTextStyle(_score->textStyle(TEXT_STYLE_SUBTITLE)); break;
+                        case TEXT_COMPOSER: s->setTextStyle(_score->textStyle(TEXT_STYLE_COMPOSER)); break;
+                        case TEXT_POET:     s->setTextStyle(_score->textStyle(TEXT_STYLE_POET));     break;
                         }
                   s->setParent(measure);
                   }
@@ -4807,11 +4788,11 @@ void ScoreView::cmdAddText(int type)
                   s = new StaffText(_score);
                   if (type == TEXT_SYSTEM) {
                         s->setTrack(0);
-                        s->setTextStyle(TEXT_STYLE_SYSTEM);
+                        s->setTextStyle(_score->textStyle(TEXT_STYLE_SYSTEM));
                         }
                   else {
                         s->setTrack(cr->track());
-                        s->setTextStyle(TEXT_STYLE_STAFF);
+                        s->setTextStyleType(TEXT_STYLE_STAFF);
                         }
                   s->setParent(cr->segment());
                   }

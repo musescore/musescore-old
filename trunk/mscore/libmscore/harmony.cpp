@@ -100,11 +100,10 @@ qDebug("ResolveDegreeList: not found in table\n");
 //   Harmony
 //---------------------------------------------------------
 
-Harmony::Harmony(Score* score)
-   : Text(score)
+Harmony::Harmony(Score* s)
+   : Text(s)
       {
-//      setSubtype(HARMONY);
-      setTextStyle(TEXT_STYLE_HARMONY);
+      setTextStyle(s->textStyle(TEXT_STYLE_HARMONY));
 
       _rootTpc   = INVALID_TPC;
       _baseTpc   = INVALID_TPC;
@@ -530,7 +529,7 @@ void Harmony::layout()
             Text::layout();
             return;
             }
-      style().layout(this);
+      textStyle().layout(this);
       if (parent()) {
             Measure* m = measure();
             qreal yy = track() < 0 ? 0.0 : m->system()->staff(track() / VOICES)->y();
@@ -715,7 +714,7 @@ void Harmony::render(const TextStyle* st)
             return;
 
       if (st == 0)
-            st = &score()->textStyle(textStyle());
+            st = &textStyle();
       ChordList* chordList = score()->style()->chordList();
 
       fontList.clear();

@@ -32,8 +32,8 @@ class ChordList;
 
 class TextStyleData : public QSharedData, public ElementLayout {
    protected:
-      QString name;
-      QString family;
+      QString name;                 // style name
+      QString family;               // font face
       qreal size;
       bool bold;
       bool italic;
@@ -92,9 +92,9 @@ class StyleData : public QSharedData {
 
       void set(const StyleVal& v)                         { _values[v.getIdx()] = v; }
       StyleVal value(StyleIdx idx) const                  { return _values[idx];     }
-      const TextStyle& textStyle(TextStyleType idx) const;
+      const TextStyle& textStyle(int idx) const;
       const TextStyle& textStyle(const QString&) const;
-      TextStyleType textStyleType(const QString&) const;
+      int textStyleType(const QString&) const;
       void setTextStyle(const TextStyle& ts);
 
    public:

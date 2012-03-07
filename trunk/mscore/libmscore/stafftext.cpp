@@ -23,7 +23,7 @@
 StaffText::StaffText(Score* s)
    : Text(s)
       {
-      setTextStyle(TEXT_STYLE_STAFF);
+      setTextStyle(s->textStyle(TEXT_STYLE_STAFF));
       _setAeolusStops = false;
       clearAeolusStops();
       }

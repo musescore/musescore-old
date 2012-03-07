@@ -777,10 +777,13 @@ class ChangeConcertPitch : public UndoCommand {
 
 class EditText : public UndoCommand {
       Text* text;
+      QString oldText;
       int undoLevel;
 
+      void undoRedo();
+
    public:
-      EditText(Text* t, int l) : text(t), undoLevel(l) {}
+      EditText(Text* t, const QString& ot, int l) : text(t), oldText(ot), undoLevel(l) {}
       virtual void undo();
       virtual void redo();
       UNDO_NAME("EditText");

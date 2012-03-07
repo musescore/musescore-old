@@ -27,7 +27,6 @@ struct SymCode;
 
 class SimpleText : public Element {
       QString _text;
-      TextStyleType _textStyle;
       bool _layoutToParentWidth;
       QRectF drawingRect;
       QRectF frame;           // set by layout()
@@ -35,6 +34,8 @@ class SimpleText : public Element {
       int alignFlags() const;
 
    protected:
+      TextStyle _textStyle;
+
       void drawFrame(QPainter* painter) const;
       QColor textColor() const;
       void layoutFrame();
@@ -46,9 +47,9 @@ class SimpleText : public Element {
 
       SimpleText &operator=(const SimpleText&);
 
-      virtual void setTextStyle(TextStyleType st) { _textStyle = st; }
-      TextStyleType textStyle() const             { return _textStyle; }
-      virtual const TextStyle& style() const;
+      void setTextStyle(const TextStyle& st)  { _textStyle = st;   }
+      const TextStyle& textStyle() const      { return _textStyle; }
+      TextStyle& textStyle()                  { return _textStyle; }
 
       void setText(const QString& s)        { _text = s;    }
       QString getText() const               { return _text; }

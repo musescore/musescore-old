@@ -55,11 +55,9 @@ TextTools::TextTools(QWidget* parent)
       setAllowedAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
 
       QToolBar* tb = new QToolBar(tr("Text Edit"));
-      // tb->setObjectName("text-tools");
 
-      toggleStyled = getAction("toggle-styled");
-      tb->addAction(toggleStyled);
-      toggleStyled->setCheckable(true);
+      textStyles = new QComboBox;
+      tb->addWidget(textStyles);
 
       showKeyboard = getAction("show-keys");
       tb->addAction(showKeyboard);
@@ -150,7 +148,7 @@ TextTools::TextTools(QWidget* parent)
       connect(bottomAlign,         SIGNAL(triggered()),     SLOT(setBottomAlign()));
       connect(vcenterAlign,        SIGNAL(triggered()),     SLOT(setVCenterAlign()));
       connect(showKeyboard,        SIGNAL(triggered(bool)), SLOT(showKeyboardClicked(bool)));
-      connect(toggleStyled,        SIGNAL(triggered(bool)), SLOT(styledChanged(bool)));
+      connect(textStyles,          SIGNAL(currentIndexChanged(int)), SLOT(styleChanged(int)));
       connect(unorderedList,       SIGNAL(triggered()),     SLOT(unorderedListClicked()));
       connect(orderedList,         SIGNAL(triggered()),     SLOT(orderedListClicked()));
       connect(indentLess,          SIGNAL(triggered()),     SLOT(indentLessClicked()));
@@ -163,8 +161,17 @@ TextTools::TextTools(QWidget* parent)
 
 void TextTools::setText(Text* te)
       {
+      textStyles->blockSignals(true);
       _textElement = te;
-      styledChanged(te->styled());
+      textStyles->clear();
+      textStyles->addItem(tr("unstyled"));
+      foreach(const TextStyle& st, te->score()->style()->textStyles())
+            textStyles->addItem(st.name());
+      if (te->styled())
+            textStyles->setCurrentIndex(te->textStyleType() + 1);
+      else
+            textStyles->setCurrentIndex(0);
+      textStyles->blockSignals(false);
       }
 
 //---------------------------------------------------------
@@ -188,7 +195,7 @@ void TextTools::blockAllSignals(bool val)
       bottomAlign->blockSignals(val);
       vcenterAlign->blockSignals(val);
       showKeyboard->blockSignals(val);
-      toggleStyled->blockSignals(val);
+      textStyles->blockSignals(val);
       }
 
 //---------------------------------------------------------
@@ -523,13 +530,18 @@ void TextTools::superscriptClicked(bool val)
       }
 
 //---------------------------------------------------------
-//   styledChanged
+//   styleChanged
 //---------------------------------------------------------
 
-void TextTools::styledChanged(bool styled)
+void TextTools::styleChanged(int idx)
       {
       blockAllSignals(true);
-      _textElement->setStyled(styled);
+      bool styled = idx != 0;
+
+      if (styled)
+            _textElement->setTextStyleType(idx - 1);
+      else
+            _textElement->setUnstyled();
       bool unstyled = !styled;
       typefaceSize->setEnabled(unstyled);
       typefaceFamily->setEnabled(unstyled);
@@ -545,7 +557,7 @@ void TextTools::styledChanged(bool styled)
       topAlign->setEnabled(unstyled);
       bottomAlign->setEnabled(unstyled);
       vcenterAlign->setEnabled(unstyled);
-      toggleStyled->setChecked(styled);
+
       blockAllSignals(false);
       }
 

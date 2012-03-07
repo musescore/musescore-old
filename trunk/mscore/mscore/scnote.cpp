@@ -97,11 +97,12 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                         Score* score = note->score();
                         if (score) {
                               //TODO fix this for trunk
-                              /*Note* tmp = note->clone();
+/*                            Note* tmp = note->clone();
                               tmp->setPitch(pitch);
                               tmp->setTpcFromPitch();
                               score->undoChangePitch(note, pitch, tmp->tpc(), note->userAccidental());
-                              delete tmp;*/
+                              delete tmp;
+*/
                               note->setPitch(pitch);
                               note->setTpcFromPitch();
                               }

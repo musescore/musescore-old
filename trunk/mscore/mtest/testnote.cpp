@@ -104,7 +104,7 @@ bool testNote(MTest*)
   // headGroup
       printf("  -headGroup\n");
       for (int i = 0; i < HEAD_GROUPS; ++i) {
-            note->setHeadGroup(i);
+            note->setHeadGroup(NoteHeadGroup(i));
             n = static_cast<Note*>(writeReadElement(note));
             TEST(n->headGroup() == i);
             delete n;

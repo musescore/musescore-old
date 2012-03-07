@@ -459,7 +459,7 @@ Element* Box::drop(const DropData& data)
             case STAFF_TEXT:
                   {
                   Text* text = new Text(score());
-                  text->setTextStyle(TEXT_STYLE_FRAME);
+                  text->setTextStyle(score()->textStyle(TEXT_STYLE_FRAME));
                   text->setParent(this);
                   text->setHtml(static_cast<StaffText*>(e)->getHtml());
                   score()->undoAddElement(text);

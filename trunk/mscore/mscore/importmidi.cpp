@@ -696,19 +696,19 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, const Event& mm)
                   switch(mm.metaType()) {
                         case META_COMPOSER:
                         case TEXT_TITLE:
-                              text->setTextStyle(TEXT_STYLE_COMPOSER);
+                              text->setTextStyleType(TEXT_STYLE_COMPOSER);
                               break;
                         case META_TRANSLATOR:
-                              text->setTextStyle(TEXT_STYLE_TRANSLATOR);
+                              text->setTextStyleType(TEXT_STYLE_TRANSLATOR);
                               break;
                         case META_POET:
-                              text->setTextStyle(TEXT_STYLE_POET);
+                              text->setTextStyleType(TEXT_STYLE_POET);
                               break;
                         case META_SUBTITLE:
-                              text->setTextStyle(TEXT_STYLE_SUBTITLE);
+                              text->setTextStyleType(TEXT_STYLE_SUBTITLE);
                               break;
                         case META_TITLE:
-                              text->setTextStyle(TEXT_STYLE_TITLE);
+                              text->setTextStyleType(TEXT_STYLE_TITLE);
                               break;
                         }
 

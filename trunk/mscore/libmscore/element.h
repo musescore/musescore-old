@@ -299,7 +299,7 @@ class Element {
 
       static ElementType readType(QDomElement& node, QPointF*, Fraction*);
 
-      virtual QByteArray mimeData(const QPointF&) const;
+      QByteArray mimeData(const QPointF&) const;
 /**
  Return true if this element accepts a drop at canvas relative \a pos
  of given element \a type and \a subtype.

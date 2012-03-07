@@ -26,7 +26,7 @@ TempoText::TempoText(Score* s)
       {
       _tempo      = 2.0;
       _followText = false;
-      setTextStyle(TEXT_STYLE_TEMPO);
+      setTextStyle(s->textStyle(TEXT_STYLE_TEMPO));
       }
 
 //---------------------------------------------------------
@@ -63,10 +63,10 @@ void TempoText::read(const QDomElement& de)
             // Reset text in old version to
             // style.
             //
-            if (textStyle() != TEXT_STYLE_INVALID) {
-                  setStyled(true);
-                  styleChanged();
-                  }
+//TODO            if (textStyle() != TEXT_STYLE_INVALID) {
+//                  setStyled(true);
+//                  styleChanged();
+//                  }
             }
       }
 
