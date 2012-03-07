@@ -1017,7 +1017,7 @@ bool TextB::edit(ScoreView* view, int /*grip*/, int key, Qt::KeyboardModifiers m
                         break;
                   }
 #ifndef Q_WS_MAC
-            if (key != Qt::Key_Space && key != Qt::Key_Minus)
+            if (key != Qt::Key_Space && key != Qt::Key_Minus && key != Qt::Key_Right && key != Qt::Key_Left)
                   return true;
 #endif
             }

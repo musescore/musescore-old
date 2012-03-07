@@ -1,6 +1,8 @@
 07.mar (la)
       - fix #15283: Paste and undo causes crash
       - fix #15376: Copy paste of nested tuplets causes corruption
+      - see #15351: ability to nudge element by space, 1/10 and 1/100 space
+      - Texts can be nudge left and right in edit mode by 1/10 sp 
 06.mar (la)
       - fix #4893: Non-removable courtesy clef appears after insert measure before first one
       - fix #15347: Dragging slur from Lines palette causes crash

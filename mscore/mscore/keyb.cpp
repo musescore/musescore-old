@@ -133,18 +133,20 @@ void ScoreView::editKey(QKeyEvent* ev)
                   _score->end();
                   return;
                   }
-            if (e->isTextB() && (ev->key() == Qt::Key_Left || ev->key() == Qt::Key_Right)) {
+            if (e->isTextB() && (ev->key() == Qt::Key_Left || ev->key() == Qt::Key_Right) && !(modifiers & CONTROL_MODIFIER)) {
                   ev->accept();
                   _score->end();
                   //return;
                   }
             }
+            
       QPointF delta;
-      qreal val = 10.0;
+      qreal _spatium = editObject->spatium();
+      qreal val = 1.0 * _spatium;
       if (modifiers & Qt::ControlModifier)
-            val = 1.0;
+            val = 0.1 * _spatium;
       else if (modifiers & Qt::AltModifier)
-            val = 0.1;
+            val = 0.01 * _spatium;
       switch (ev->key()) {
             case Qt::Key_Left:
                   delta = QPointF(-val, 0);
@@ -163,6 +165,7 @@ void ScoreView::editKey(QKeyEvent* ev)
                   return;
             }
       e->editDrag(curGrip, delta);
+      _score->addRefresh(e->abbox().adjusted(-val, -val, 2*val, 2*val));
       updateGrips();
       _score->end();
       ev->accept();
