@@ -1,4 +1,6 @@
-04.5 (db)
+07.3 (mw)
+      - Changed FiguredBass to displays text which cannot be parsed
+05.3 (db)
       - Minor spelling and javascript corrections for test plugin
 04.3 (lv)
       - fix #14811: [MusicXML import] [trunk] import error: 41h-TooManyParts.xml causes crash
