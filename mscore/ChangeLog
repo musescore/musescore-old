@@ -1,5 +1,6 @@
 07.mar (la)
       - fix #15283: Paste and undo causes crash
+      - fix #15376: Copy paste of nested tuplets causes corruption
 06.mar (la)
       - fix #4893: Non-removable courtesy clef appears after insert measure before first one
       - fix #15347: Dragging slur from Lines palette causes crash
