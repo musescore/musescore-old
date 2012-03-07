@@ -18,10 +18,10 @@
 //   RehearsalMark
 //---------------------------------------------------------
 
-RehearsalMark::RehearsalMark(Score* score)
-   : Text(score)
+RehearsalMark::RehearsalMark(Score* s)
+   : Text(s)
       {
-      setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
+      setTextStyle(s->textStyle(TEXT_STYLE_REHEARSAL_MARK));
 //      setSystemFlag(true);  set in text style
       }
 

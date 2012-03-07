@@ -2697,14 +2697,14 @@ bool MuseScore::importGTP(Score* score, const QString& name)
       if (!gp->title.isEmpty()) {
             Text* s = new Text(score);
             // s->setSubtype(TEXT_TITLE);
-            s->setTextStyle(TEXT_STYLE_TITLE);
+            s->setTextStyleType(TEXT_STYLE_TITLE);
             s->setText(gp->title);
             m->add(s);
             }
       if (!gp->subtitle.isEmpty() && !gp->artist.isEmpty() && !gp->album.isEmpty()) {
             Text* s = new Text(score);
             // s->setSubtype(TEXT_SUBTITLE);
-            s->setTextStyle(TEXT_STYLE_SUBTITLE);
+            s->setTextStyleType(TEXT_STYLE_SUBTITLE);
             QString str;
             if (!gp->subtitle.isEmpty())
                   str.append(gp->subtitle);
@@ -2724,7 +2724,7 @@ bool MuseScore::importGTP(Score* score, const QString& name)
       if (!gp->composer.isEmpty()) {
             Text* s = new Text(score);
             // s->setSubtype(TEXT_COMPOSER);
-            s->setTextStyle(TEXT_STYLE_COMPOSER);
+            s->setTextStyleType(TEXT_STYLE_COMPOSER);
             s->setText(gp->composer);
             m->add(s);
             }
@@ -2801,8 +2801,7 @@ bool MuseScore::importGTP(Score* score, const QString& name)
                   measure = mb;
                   }
             Text* txt = new Text(pscore);
-//            txt->setSubtype(TEXT_INSTRUMENT_EXCERPT);
-            txt->setTextStyle(TEXT_STYLE_INSTRUMENT_EXCERPT);
+            txt->setTextStyleType(TEXT_STYLE_INSTRUMENT_EXCERPT);
             txt->setText(part->longName().toPlainText());
             measure->add(txt);
 

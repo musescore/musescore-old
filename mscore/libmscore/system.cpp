@@ -510,11 +510,11 @@ void System::setInstrumentNames(bool longName)
                         iname->setTrack(staffIdx * VOICES);
                         if (longName) {
                               iname->setSubtype(INSTRUMENT_NAME_LONG);
-                              iname->setTextStyle(TEXT_STYLE_INSTRUMENT_LONG);
+                              iname->setTextStyle(score()->textStyle(TEXT_STYLE_INSTRUMENT_LONG));
                               }
                         else {
                               iname->setSubtype(INSTRUMENT_NAME_SHORT);
-                              iname->setTextStyle(TEXT_STYLE_INSTRUMENT_SHORT);
+                              iname->setTextStyle(score()->textStyle(TEXT_STYLE_INSTRUMENT_SHORT));
                               }
                         score()->undoAddElement(iname);
                         }
@@ -821,7 +821,7 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
             }
       qreal _spatium = spatium();
 
-      const TextStyle& ts = score()->textStyle(l->textStyle());
+      const TextStyle& ts = l->textStyle();
       qreal lmag          = qreal(ts.size()) / 11.0;
 
       if (l->ticks()) {

@@ -73,7 +73,7 @@ Marker::Marker(Score* s)
    : Text(s)
       {
       setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
-      setTextStyle(TEXT_STYLE_REPEAT);
+      setTextStyle(s->textStyle(TEXT_STYLE_REPEAT));
       }
 
 //---------------------------------------------------------
@@ -85,17 +85,17 @@ void Marker::setMarkerType(MarkerType t)
       _markerType = t;
       switch(t) {
             case MARKER_SEGNO:
-                  setHtml(symToHtml(symbols[score()->symIdx()][segnoSym], 8, &style()));
+                  setHtml(symToHtml(symbols[score()->symIdx()][segnoSym], 8, &textStyle()));
                   setLabel("segno");
                   break;
 
             case MARKER_VARSEGNO:
-                  setHtml(symToHtml(symbols[score()->symIdx()][varsegnoSym], 8, &style()));
+                  setHtml(symToHtml(symbols[score()->symIdx()][varsegnoSym], 8, &textStyle()));
                   setLabel("varsegno");
                   break;
 
             case MARKER_CODA:
-                  setHtml(symToHtml(symbols[score()->symIdx()][codaSym], 8, &style()));
+                  setHtml(symToHtml(symbols[score()->symIdx()][codaSym], 8, &textStyle()));
                   setLabel("codab");
                   break;
 
@@ -205,16 +205,16 @@ void Marker::read(const QDomElement& de)
             case MARKER_CODA:
             case MARKER_VARCODA:
             case MARKER_CODETTA:
-                  setTextStyle(TEXT_STYLE_REPEAT_LEFT);
+                  setTextStyle(score()->textStyle(TEXT_STYLE_REPEAT_LEFT));
                   break;
 
             case MARKER_FINE:
             case MARKER_TOCODA:
-                  setTextStyle(TEXT_STYLE_REPEAT_RIGHT);
+                  setTextStyle(score()->textStyle(TEXT_STYLE_REPEAT_RIGHT));
                   break;
 
             case MARKER_USER:
-                  setTextStyle(TEXT_STYLE_REPEAT);
+                  setTextStyle(score()->textStyle(TEXT_STYLE_REPEAT));
                   break;
             }
       setMarkerType(mt);
@@ -251,7 +251,7 @@ Jump::Jump(Score* s)
    : Text(s)
       {
       setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
-      setTextStyle(TEXT_STYLE_REPEAT);
+      setTextStyle(s->textStyle(TEXT_STYLE_REPEAT));
       }
 
 //---------------------------------------------------------
@@ -346,7 +346,7 @@ void Jump::read(const QDomElement& de)
             else if (!Text::readProperties(e))
                   domError(e);
             }
-      setTextStyle(TEXT_STYLE_REPEAT_RIGHT);
+      setTextStyle(score()->textStyle(TEXT_STYLE_REPEAT_RIGHT));
       }
 
 //---------------------------------------------------------

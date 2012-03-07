@@ -1894,7 +1894,7 @@ qDebug("readCapVoice 2\n");
                                     mb->setTick(0);
                                     score->addMeasure(mb, measure);
                                     }
-                              s->setTextStyle(TEXT_STYLE_TITLE);
+                              s->setTextStyleType(TEXT_STYLE_TITLE);
                               measure->add(s);
                               }
                               break;
@@ -2024,7 +2024,7 @@ qDebug("==================convert-capella\n");
                         {
                         SimpleTextObj* to = static_cast<SimpleTextObj*>(o);
                         Text* s = new Text(score);
-                        s->setTextStyle(TEXT_STYLE_TITLE);
+                        s->setTextStyleType(TEXT_STYLE_TITLE);
                         QFont f(to->font());
                         s->setItalic(f.italic());
 //                        s->setUnderline(f.underline());

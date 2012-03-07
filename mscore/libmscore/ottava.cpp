@@ -55,28 +55,30 @@ void Ottava::setSubtype(int val)
 
       Spatium hook(score()->styleS(ST_ottavaHook));
 
+      const TextStyle& ts = score()->textStyle(TEXT_STYLE_OTTAVA);
+
       switch(val) {
             case 0:
-                  setBeginText("8va", TEXT_STYLE_OTTAVA);
-                  setContinueText("(8va)", TEXT_STYLE_OTTAVA);
+                  setBeginText("8va", ts);
+                  setContinueText("(8va)", ts);
                   setEndHookHeight(hook);
                   _pitchShift = 12;
                   break;
             case 1:
-                  setBeginText("15ma", TEXT_STYLE_OTTAVA);
-                  setContinueText("(15ma)", TEXT_STYLE_OTTAVA);
+                  setBeginText("15ma", ts);
+                  setContinueText("(15ma)", ts);
                   setEndHookHeight(hook);
                   _pitchShift = 24;
                   break;
             case 2:
-                  setBeginText("8vb", TEXT_STYLE_OTTAVA);
-                  setContinueText("(8vb)", TEXT_STYLE_OTTAVA);
+                  setBeginText("8vb", ts);
+                  setContinueText("(8vb)", ts);
                   _pitchShift = -12;
                   setEndHookHeight(-hook);
                   break;
             case 3:
-                  setBeginText("15mb", TEXT_STYLE_OTTAVA);
-                  setContinueText("(15mb)", TEXT_STYLE_OTTAVA);
+                  setBeginText("15mb", ts);
+                  setContinueText("(15mb)", ts);
                   _pitchShift = -24;
                   setEndHookHeight(-hook);
                   break;

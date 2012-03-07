@@ -40,7 +40,7 @@ FiguredBassItem::FiguredBassItem(Score* s, int l)
       digit       = FBIDigitNone;
       parenth[0]  = parenth[1] = parenth[2] = parenth[3] = parenth[4] = FBIParenthNone;
       contLine    = false;
-      setTextStyle(TEXT_STYLE_FIGURED_BASS);
+      setTextStyle(s->textStyle(TEXT_STYLE_FIGURED_BASS));
       }
 
 FiguredBassItem::FiguredBassItem(const FiguredBassItem& item)
@@ -423,9 +423,9 @@ void FiguredBassItem::layout()
       {
       qreal             h, w, x, x1, x2, y;
 
-      if (textStyle() == TEXT_STYLE_INVALID)
-            setTextStyle(TEXT_STYLE_FIGURED_BASS);
-      QFontMetricsF     fm(style().font(spatium()));
+      setTextStyle(score()->textStyle(TEXT_STYLE_FIGURED_BASS));    // needed?
+
+      QFontMetricsF     fm(textStyle().font(spatium()));
       QString           str = QString();
       x = symbols[score()->symIdx()][quartheadSym].width(magS()) * .5;
       x1 = x2 = 0.0;
@@ -507,7 +507,7 @@ void FiguredBassItem::layout()
 FiguredBass::FiguredBass(Score* s)
    : Text(s)
       {
-      setTextStyle(TEXT_STYLE_FIGURED_BASS);
+      setTextStyle(s->textStyle(TEXT_STYLE_FIGURED_BASS));
       setTicks(0);
       items.clear();
       }
@@ -579,7 +579,7 @@ void FiguredBass::read(const QDomElement& de)
 void FiguredBass::layout()
       {
       if (!styled())
-            setTextStyle(TEXT_STYLE_FIGURED_BASS);
+            setTextStyle(score()->textStyle(TEXT_STYLE_FIGURED_BASS));
       qreal             y;
 
 #ifdef _USE_EDIT_TEXT_LAYOUT_
@@ -608,7 +608,7 @@ void FiguredBass::layout()
       qreal             h, w, w1;
 
       if(editMode()) {
-            QFontMetricsF     fm(style().font(spatium()));
+            QFontMetricsF     fm(textStyle().font(spatium()));
             // box width
             w = 0;
             QStringList list = getText().split('\n');
@@ -732,7 +732,7 @@ void FiguredBass::setVisible(bool flag)
 //    it either re-uses an existing FiguredBass or creates a new one if none if found;
 //    returns the FiguredBass and sets pNew to true if it has been newly created.
 //
-//    As the F.b. very concept requires the underlying chord to have ONLY ONE note, 
+//    As the F.b. very concept requires the underlying chord to have ONLY ONE note,
 //    it might make sense to drop the checking / setting of Track and unconditionally
 //    always use track 0 for FiguredBass elements.
 //---------------------------------------------------------

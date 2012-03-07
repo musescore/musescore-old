@@ -2604,16 +2604,6 @@ Shortcut MuseScore::sc[] = {
          fotomode_ICON
          ),
       Shortcut(
-         STATE_EDIT,
-         0,
-         "toggle-styled",
-         QT_TRANSLATE_NOOP("action","Toggle styled"),
-	   0,
-         Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Styled"),
-         QT_TRANSLATE_NOOP("action","Toggle styled")
-         ),
-      Shortcut(
          STATE_ALL,
          A_CMD,
          "add-audio",

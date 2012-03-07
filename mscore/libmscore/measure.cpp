@@ -545,7 +545,7 @@ void Measure::layout2()
             if (_noText == 0) {
                   _noText = new Text(score());
                   _noText->setGenerated(true);
-                  _noText->setTextStyle(TEXT_STYLE_MEASURE_NUMBER);
+                  _noText->setTextStyle(score()->textStyle(TEXT_STYLE_MEASURE_NUMBER));
                   _noText->setParent(this);
                   _noText->setSelectable(false);
                   }

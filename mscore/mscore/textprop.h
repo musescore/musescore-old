@@ -49,8 +49,8 @@ class TextProp : public QWidget, public Ui::TextProperties {
       TextStyle textStyle() const;
       bool isStyled() const;
       void setStyled(bool val);
-      void setTextStyleType(TextStyleType);
-      TextStyleType textStyleType() const;
+      void setTextStyleType(int);
+      int textStyleType() const;
       };
 
 #endif

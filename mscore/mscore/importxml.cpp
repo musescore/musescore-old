@@ -500,11 +500,11 @@ void MusicXml::import(Score* s)
 //   addText
 //---------------------------------------------------------
 
-static void addText(VBox*& vbx, Score* s, QString strTxt, TextStyleType stl)
+static void addText(VBox*& vbx, Score* s, QString strTxt, int stl)
       {
       if (!strTxt.isEmpty()) {
             Text* text = new Text(s);
-            text->setTextStyle(stl);
+            text->setTextStyleType(stl);
             text->setText(strTxt);
             if (vbx == 0)
                   vbx = new VBox(s);
@@ -2327,53 +2327,53 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   m = new Marker(score);
                   // note: Marker::read() also contains code to set text style based on type
                   // avoid duplicated code
-                  m->setTextStyle(TEXT_STYLE_REPEAT_LEFT);
+                  m->setTextStyleType(TEXT_STYLE_REPEAT_LEFT);
                   // apparently this MUST be after setTextStyle
                   m->setMarkerType(MARKER_SEGNO);
                   }
             else if (repeat == "coda") {
                   m = new Marker(score);
-                  m->setTextStyle(TEXT_STYLE_REPEAT_LEFT);
+                  m->setTextStyleType(TEXT_STYLE_REPEAT_LEFT);
                   m->setMarkerType(MARKER_CODA);
                   }
             else if (repeat == "fine") {
                   m = new Marker(score);
-                  m->setTextStyle(TEXT_STYLE_REPEAT_RIGHT);
+                  m->setTextStyleType(TEXT_STYLE_REPEAT_RIGHT);
                   m->setMarkerType(MARKER_FINE);
                   }
             else if (repeat == "toCoda") {
                   m = new Marker(score);
-                  m->setTextStyle(TEXT_STYLE_REPEAT_RIGHT);
+                  m->setTextStyleType(TEXT_STYLE_REPEAT_RIGHT);
                   m->setMarkerType(MARKER_TOCODA);
                   }
             else if (repeat == "daCapo") {
                   jp = new Jump(score);
-                  jp->setTextStyle(TEXT_STYLE_REPEAT_RIGHT);
+                  jp->setTextStyleType(TEXT_STYLE_REPEAT_RIGHT);
                   jp->setJumpType(JUMP_DC);
                   }
             else if (repeat == "daCapoAlCoda") {
                   jp = new Jump(score);
-                  jp->setTextStyle(TEXT_STYLE_REPEAT_RIGHT);
+                  jp->setTextStyleType(TEXT_STYLE_REPEAT_RIGHT);
                   jp->setJumpType(JUMP_DC_AL_CODA);
                   }
             else if (repeat == "daCapoAlFine") {
                   jp = new Jump(score);
-                  jp->setTextStyle(TEXT_STYLE_REPEAT_RIGHT);
+                  jp->setTextStyleType(TEXT_STYLE_REPEAT_RIGHT);
                   jp->setJumpType(JUMP_DC_AL_FINE);
                   }
             else if (repeat == "dalSegno") {
                   jp = new Jump(score);
-                  jp->setTextStyle(TEXT_STYLE_REPEAT_RIGHT);
+                  jp->setTextStyleType(TEXT_STYLE_REPEAT_RIGHT);
                   jp->setJumpType(JUMP_DS);
                   }
             else if (repeat == "dalSegnoAlCoda") {
                   jp = new Jump(score);
-                  jp->setTextStyle(TEXT_STYLE_REPEAT_RIGHT);
+                  jp->setTextStyleType(TEXT_STYLE_REPEAT_RIGHT);
                   jp->setJumpType(JUMP_DS_AL_CODA);
                   }
             else if (repeat == "dalSegnoAlFine") {
                   jp = new Jump(score);
-                  jp->setTextStyle(TEXT_STYLE_REPEAT_RIGHT);
+                  jp->setTextStyleType(TEXT_STYLE_REPEAT_RIGHT);
                   jp->setJumpType(JUMP_DS_AL_FINE);
                   }
             if (jp) {
@@ -2410,7 +2410,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   }
             else {
                   t = new Text(score);
-                  t->setTextStyle(TEXT_STYLE_TECHNIK);
+                  t->setTextStyleType(TEXT_STYLE_TECHNIK);
                   }
             if (!fontSize.isEmpty() || !fontStyle.isEmpty() || !fontWeight.isEmpty()) {
                   if (!fontSize.isEmpty()) {
@@ -2593,7 +2593,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
 
                         // hack: assume there was a words element before the bracket
                         if (!txt.isEmpty()) {
-                              b->setBeginText(txt);
+                              b->setBeginText(txt, score->textStyle(TEXT_STYLE_TEXTLINE));
                               }
 
                         if (lineType == "solid")
@@ -2662,7 +2662,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
 
                         // hack: assume there was a words element before the dashes
                         if (!txt.isEmpty()) {
-                              b->setBeginText(txt);
+                              b->setBeginText(txt, score->textStyle(TEXT_STYLE_TEXTLINE));
                               }
 
                         b->setBeginHook(false);
@@ -3581,11 +3581,11 @@ static NoteHeadGroup convertNotehead(QString mxmlName)
  Add Text to Note.
  */
 
-static void addTextToNote(QString txt, TextStyleType style, Score* score, Note* note)
+static void addTextToNote(QString txt, int style, Score* score, Note* note)
       {
       if (!txt.isEmpty()) {
             Text* t = new Fingering(score);
-            t->setTextStyle(style);
+            t->setTextStyleType(style);
             t->setText(txt);
             note->add(t);
             }

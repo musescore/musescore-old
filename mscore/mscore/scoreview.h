@@ -151,9 +151,6 @@ class ScoreView : public QWidget, public MuseScoreView {
       QRectF dropRectangle;         ///< current drop rectangle during dragMove
       QLineF dropAnchor;            ///< line to current anchor point during dragMove
 
-      // in text edit mode text is framed
-      Text* _editText;
-
       QTransform _matrix, imatrix;
       int _magIdx;
 
@@ -175,11 +172,11 @@ class ScoreView : public QWidget, public MuseScoreView {
 
       // editing mode
       int curGrip;
-      QRectF grip[8];         // edit "grips"
-      int grips;              // number of used grips
+      QRectF grip[MAX_GRIPS];       // edit "grips"
+      int grips;                    // number of used grips
       Element* origEditObject;
       Element* editObject;         ///< Valid in edit mode
-      int textUndoLevel;
+      Text* _editText;
 
       //--input state:
       Cursor* _cursor;
@@ -264,7 +261,6 @@ class ScoreView : public QWidget, public MuseScoreView {
       bool dropCanvas(Element*);
 
    private slots:
-      void textUndoLevelAdded();
       void enterState();
       void exitState();
       void startFotomode();
@@ -368,8 +364,6 @@ class ScoreView : public QWidget, public MuseScoreView {
       void setDropTarget(const Element*);
       void setDropAnchor(const QLineF&);
       const QTransform& matrix() const  { return _matrix; }
-      void setEditText(Text* t)                 { _editText = t;      }
-      Text* editText() const                    { return _editText;   }
       qreal mag() const;
       int magIdx() const                         { return _magIdx; }
       void setMag(int idx, double mag);

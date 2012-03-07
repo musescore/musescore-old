@@ -102,8 +102,8 @@ class TextLine : public SLine {
       void setBeginHookType(HookType val)     { _beginHookType = val;         }
       void setEndHookType(HookType val)       { _endHookType = val;           }
 
-      void setBeginText(const QString& s, TextStyleType textStyle = TEXT_STYLE_TEXTLINE);
-      void setContinueText(const QString& s, TextStyleType textStyle = TEXT_STYLE_TEXTLINE);
+      void setBeginText(const QString& s, const TextStyle& textStyle);
+      void setContinueText(const QString& s, const TextStyle& textStyle);
       Text* beginText() const                { return _beginText;            }
       void setBeginText(Text* v);
       Text* continueText() const             { return _continueText;         }

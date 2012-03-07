@@ -632,7 +632,8 @@ class Score {
       bool    styleB(StyleIdx idx) const       { return _style.valueB(idx);  }
       qreal  styleD(StyleIdx idx) const       { return _style.valueD(idx);  }
       int     styleI(StyleIdx idx) const       { return _style.valueI(idx);  }
-      const TextStyle& textStyle(TextStyleType idx) const { return _style.textStyle(idx); }
+      const TextStyle& textStyle(int idx) const { return _style.textStyle(idx); }
+      const TextStyle& textStyle(const QString& s) const  { return _style.textStyle(s); }
 
       void insertTime(int tick, int len);
       void cmdRemoveTime(int tick, int len);

@@ -188,7 +188,7 @@ void LineProperties::accept()
                   tl->setBeginText(_beginText);
                   }
             else
-                  tl->setBeginText(beginText->text());
+                  tl->setBeginText(beginText->text(), tl->score()->textStyle(TEXT_STYLE_TEXTLINE));
             }
       else
             tl->setBeginText(0);
@@ -199,7 +199,7 @@ void LineProperties::accept()
                   tl->setContinueText(_continueText);
                   }
             else {
-                  tl->setContinueText(continueText->text());
+                  tl->setContinueText(continueText->text(), tl->score()->textStyle(TEXT_STYLE_TEXTLINE));
                   }
             }
       else
@@ -298,8 +298,7 @@ void LineProperties::beginTextProperties()
       {
       if (!_beginText) {
             _beginText = new Text(tl->score());
-//            _beginText->setSubtype(TEXT_TEXTLINE);
-            _beginText->setTextStyle(TEXT_STYLE_TEXTLINE);
+            _beginText->setTextStyleType(TEXT_STYLE_TEXTLINE);
             }
       _beginText->setText(beginText->text());
       TextProperties t(_beginText, this);
@@ -325,8 +324,7 @@ void LineProperties::continueTextProperties()
       {
       if (!_continueText) {
             _continueText = new Text(tl->score());
-//            _continueText->setSubtype(TEXT_TEXTLINE);
-            _continueText->setTextStyle(TEXT_STYLE_TEXTLINE);
+            _continueText->setTextStyleType(TEXT_STYLE_TEXTLINE);
             }
       _continueText->setText(continueText->text());
       TextProperties t(_continueText, this);

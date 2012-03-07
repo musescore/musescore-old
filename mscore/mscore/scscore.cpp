@@ -50,7 +50,7 @@ static const char* const function_names_score[] = {
       "setExpandRepeat", "appendPart", "appendMeasures",
       "pages", "measures", "parts", "part", "startUndo", "endUndo", "setStyle", "hasLyrics", "hasHarmonies",
       "staves", "keysig", "duration", "pageFormat", "metatag", "fileName", "path",
-      "version", "fileVersion"      
+      "version", "fileVersion"
       };
 static const int function_lengths_score[] = {
       1, 1, 1, 1,
@@ -116,10 +116,10 @@ static void addText(Score* score, int subtype, const QString& s)
             }
       Text* text = new Text(score);
       switch(subtype) {
-            case TEXT_TITLE:    text->setTextStyle(TEXT_STYLE_TITLE);    break;
-            case TEXT_SUBTITLE: text->setTextStyle(TEXT_STYLE_SUBTITLE); break;
-            case TEXT_COMPOSER: text->setTextStyle(TEXT_STYLE_COMPOSER); break;
-            case TEXT_POET:     text->setTextStyle(TEXT_STYLE_POET);     break;
+            case TEXT_TITLE:    text->setTextStyleType(TEXT_STYLE_TITLE);    break;
+            case TEXT_SUBTITLE: text->setTextStyleType(TEXT_STYLE_SUBTITLE); break;
+            case TEXT_COMPOSER: text->setTextStyleType(TEXT_STYLE_COMPOSER); break;
+            case TEXT_POET:     text->setTextStyleType(TEXT_STYLE_POET);     break;
             }
       text->setParent(measure);
       text->setText(s);
@@ -461,17 +461,17 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                   }
                   break;
             case 26:   //version
-                  if (argc == 0) {           
+                  if (argc == 0) {
                         return qScriptValueFromValue(context->engine(), score->mscoreVersion());
                         }
                   else
                   break;
             case 27:   //fileVersion
-                  if (argc == 0) {           
+                  if (argc == 0) {
                         return qScriptValueFromValue(context->engine(), score->mscVersion());
                         }
                   else
-                  break;    
+                  break;
             }
       return context->throwError(QScriptContext::TypeError,
          QString::fromLatin1("Score.%0(): bad argument count or value")
@@ -532,7 +532,7 @@ void ScScorePrototype::setTitle(const QString& text)
       else
             measure = ml->first();
       Text* s = new Text(thisScore());
-      s->setTextStyle(TEXT_STYLE_TITLE);
+      s->setTextStyleType(TEXT_STYLE_TITLE);
       s->setSubtype(TEXT_TITLE);
       s->setParent(measure);
       s->setText(text);

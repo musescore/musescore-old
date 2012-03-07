@@ -26,7 +26,7 @@
 Lyrics::Lyrics(Score* s)
    : Text(s)
       {
-      setTextStyle(TEXT_STYLE_LYRIC1);
+      setTextStyle(s->textStyle(TEXT_STYLE_LYRIC1));
       _no          = 0;
       _ticks       = 0;
       _syllabic    = SINGLE;
@@ -207,7 +207,7 @@ QPointF Lyrics::pagePos() const
 void Lyrics::layout()
       {
       if (styled())
-            setTextStyle((_no % 2) ? TEXT_STYLE_LYRIC2 : TEXT_STYLE_LYRIC1);
+            setTextStyle(score()->textStyle((_no % 2) ? TEXT_STYLE_LYRIC2 : TEXT_STYLE_LYRIC1));
       Text::layout();
       qreal lh = lineSpacing() * score()->styleD(ST_lyricsLineHeight);
 
@@ -225,9 +225,9 @@ void Lyrics::layout()
       //
       // left align if syllable has a number or is a melisma
       //
-      if (_ticks == 0 && (style().align() & ALIGN_HCENTER) && !_verseNumber)
+      if (_ticks == 0 && (textStyle().align() & ALIGN_HCENTER) && !_verseNumber)
             x += symbols[score()->symIdx()][quartheadSym].width(magS()) * .5;
-      else if (_ticks || ((style().align() & ALIGN_HCENTER) && _verseNumber))
+      else if (_ticks || ((textStyle().align() & ALIGN_HCENTER) && _verseNumber))
             x += width() * .5;
       setPos(x, y);
       if (_verseNumber) {
@@ -287,7 +287,7 @@ bool Lyrics::acceptDrop(MuseScoreView*, const QPointF&, Element* e) const
 Element* Lyrics::drop(const DropData& data)
       {
       Text* e = static_cast<Text*>(data.element);
-      if (!(e->type() == TEXT && e->textStyle() == TEXT_STYLE_LYRICS_VERSE_NUMBER)) {
+      if (!(e->type() == TEXT && e->textStyle().name() == "Lyrics Verse")) {
             delete e;
             return 0;
             }
@@ -304,6 +304,6 @@ void Lyrics::setNo(int n)
       {
       _no = n;
       if (type() == LYRICS)
-            setTextStyle((_no % 2) ? TEXT_STYLE_LYRIC2 : TEXT_STYLE_LYRIC1);
+            setTextStyle(score()->textStyle((_no % 2) ? TEXT_STYLE_LYRIC2 : TEXT_STYLE_LYRIC1));
       }
 

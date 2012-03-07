@@ -352,9 +352,9 @@ class MStyle {
       ChordList* chordList() const;
       void setChordList(ChordList*);      // Style gets ownership of ChordList
 
-      const TextStyle& textStyle(TextStyleType idx) const;
+      const TextStyle& textStyle(int) const;
       const TextStyle& textStyle(const QString& name) const;
-      TextStyleType textStyleType(const QString& name) const;
+      int textStyleType(const QString& name) const;
       void setTextStyle(const TextStyle& ts);
       void addTextStyle(const TextStyle& ts);
       void removeTextStyle(const TextStyle& ts);

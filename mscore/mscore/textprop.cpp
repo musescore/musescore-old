@@ -97,9 +97,9 @@ void TextProp::setStyled(bool val)
 //   setTextStyleType
 //---------------------------------------------------------
 
-void TextProp::setTextStyleType(TextStyleType st)
+void TextProp::setTextStyleType(int st)
       {
-      if (st == TEXT_STYLE_INVALID)
+      if (st == TEXT_STYLE_UNKNOWN || st == TEXT_STYLE_UNSTYLED)
             st = TEXT_STYLE_TITLE;
       styles->setCurrentIndex(st);
       }
@@ -108,9 +108,9 @@ void TextProp::setTextStyleType(TextStyleType st)
 //   textStyleType
 //---------------------------------------------------------
 
-TextStyleType TextProp::textStyleType() const
+int TextProp::textStyleType() const
       {
-      return TextStyleType(styles->currentIndex());
+      return styles->currentIndex();
       }
 
 //---------------------------------------------------------

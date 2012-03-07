@@ -771,6 +771,14 @@ void Score::undoChangeInvisible(Element* e, bool v)
 
 void Score::undoAddElement(Element* element)
       {
+      if (element->isText()) {
+            Text* text = static_cast<Text*>(element);
+            QString s = text->textStyle().name();
+            int idx = _style.textStyleType(s);
+            if (idx < 0) {
+                  printf("unknown text style <%s> type %d\n", qPrintable(s), text->textStyleType());
+                  }
+            }
       QList<Staff*> staffList;
       Staff* ostaff;
       if (element->type() == SLUR)
@@ -2062,29 +2070,50 @@ void ChangeBracketSpan::flip()
       }
 
 //---------------------------------------------------------
-//   EditText
+//   EditText::undo
 //---------------------------------------------------------
 
 void EditText::undo()
       {
-//TODOst      for (int i = 0; i < undoLevel; ++i) {
-//            text->doc()->undo();
-      text->textChanged();
-      if (text->type() == TEMPO_TEXT) {
-            TempoText* tt = static_cast<TempoText*>(text);
-            tt->score()->setTempo(tt->segment(), tt->tempo());
+      if (!text->styled()) {
+            for (int i = 0; i < undoLevel; ++i)
+                  text->doc()->undo();
             }
+      undoRedo();
       }
+
+//---------------------------------------------------------
+//   EditText::redo
+//---------------------------------------------------------
 
 void EditText::redo()
       {
-//TODOst      for (int i = 0; i < undoLevel; ++i)
-//            text->doc()->redo();
-      text->textChanged();
-      if (text->type() == TEMPO_TEXT) {
-            TempoText* tt = static_cast<TempoText*>(text);
-            tt->score()->setTempo(tt->segment(), tt->tempo());
+      if (!text->styled()) {
+            for (int i = 0; i < undoLevel; ++i)
+                  text->doc()->redo();
             }
+      undoRedo();
+      }
+
+//---------------------------------------------------------
+//   EditText::undoRedo
+//---------------------------------------------------------
+
+void EditText::undoRedo()
+      {
+      if (text->styled()) {
+            QString s = text->getText();
+            text->setText(oldText);
+            oldText = s;
+            }
+      else {
+            text->textChanged();
+            if (text->type() == TEMPO_TEXT) {
+                  TempoText* tt = static_cast<TempoText*>(text);
+                  tt->score()->setTempo(tt->segment(), tt->tempo());
+                  }
+            }
+      text->score()->setLayoutAll(true);
       }
 
 //---------------------------------------------------------
@@ -2259,11 +2288,13 @@ ChangeTextStyle::ChangeTextStyle(Score* s, const TextStyle& st)
 
 static void updateTextStyle(void* a, Element* e)
       {
-      TextStyleType ts = *(TextStyleType*)a;
+      QString s = *(QString*)a;
       if (e->isText()) {
             Text* text = static_cast<Text*>(e);
-            if ((text->textStyle() == ts) && text->styled())
+            if (text->styled() && text->textStyle().name() == s) {
+                  text->setTextStyle(text->score()->textStyle(s));
                   text->styleChanged();
+                  }
             }
       }
 
@@ -2275,9 +2306,9 @@ void ChangeTextStyle::flip()
       {
       TextStyle os = score->style()->textStyle(style.name());
       score->style()->setTextStyle(style);
+      QString s(style.name());
+      score->scanElements(&s, updateTextStyle);
       style = os;
-      TextStyleType ts = score->style()->textStyleType(style.name());
-      score->scanElements(&ts, updateTextStyle);
       score->setLayoutAll(true);
       }
 
@@ -2331,26 +2362,29 @@ ChangeStyle::ChangeStyle(Score* s, const MStyle& st)
 
 static void updateTextStyle2(void*, Element* e)
       {
-      if (e->isText()) {
-            if (e->type() == HARMONY)
-                  static_cast<Harmony*>(e)->render();
-            else {
-                  Text* text = static_cast<Text*>(e);
-                  if (text->styled()) {
-                        QString sn = text->styleName();
-                        TextStyleType st = text->score()->style()->textStyleType(sn);
-                        if (st == TEXT_STYLE_INVALID) {
-                              //
-                              // this was probably a user defined text style
-                              // which is not part of the new style file
-                              //
-                              text->setStyled(false);
-                              }
-                        else {
-                              text->setText(text->getText());     // destroy formatting
-                              }
+      if (!e->isText())
+            return;
+
+      if (e->type() == HARMONY)
+            static_cast<Harmony*>(e)->render();
+      else {
+#if 0 // TODO?
+            Text* text = static_cast<Text*>(e);
+            if (text->styled()) {
+                  QString sn = text->styleName();
+                  int st = text->score()->style()->textStyleType(sn);
+                  if (st == TEXT_STYLE_INVALID) {
+                        //
+                        // this was probably a user defined text style
+                        // which is not part of the new style file
+                        //
+                        text->setStyled(false);
+                        }
+                  else {
+                        text->setText(text->getText());     // destroy formatting
                         }
                   }
+#endif
             }
       }
 

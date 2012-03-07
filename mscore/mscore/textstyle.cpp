@@ -24,6 +24,7 @@
 #include "libmscore/score.h"
 #include "scoreview.h"
 #include "textprop.h"
+#include "musescore.h"
 #include "libmscore/undo.h"
 
 //---------------------------------------------------------
@@ -122,7 +123,7 @@ void TextStyleDialog::apply()
 
       int n = cs->style()->textStyles().size();
       for (int i = 0; i < n; ++i) {
-            const TextStyle& os = cs->textStyle(TextStyleType(i));
+            const TextStyle& os = cs->textStyle(i);
             const TextStyle& ns = styles[i];
             if (os != ns) {
                   cs->undo(new ChangeTextStyle(cs, ns));
@@ -164,9 +165,17 @@ void TextStyleDialog::newClicked()
             else
                   break;
             }
+      //
+      // use current selected style as template
+      //
+      QString name = textNames->currentItem()->text();
+      TextStyle newStyle = cs->textStyle(name);
+
       textNames->addItem(s);
-      TextStyle newStyle;
       newStyle.setName(s);
       styles.append(newStyle);
+      textNames->setCurrentItem(textNames->item(textNames->count()-1));
+      cs->setDirty(true);
+      mscore->endCmd();
       }
 

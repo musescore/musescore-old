@@ -84,6 +84,7 @@ static const PropertyData propertyList[] = {
       { P_SIZE,                "size",            T_SIZE },
       { P_LOCK_ASPECT_RATIO,   "lockAspectRatio", T_BOOL },
       { P_SIZE_IS_SPATIUM,     "sizeIsSpatium",   T_BOOL },
+      { P_TEXT_STYLE,          "textStyle",       T_INT  },
       { P_END,                 "",              T_INT   }
       };
 

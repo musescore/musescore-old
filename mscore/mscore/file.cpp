@@ -559,26 +559,26 @@ void MuseScore::newFile()
                   }
             if (!title.isEmpty()) {
                   Text* s = new Text(score);
-                  s->setTextStyle(TEXT_STYLE_TITLE);
+                  s->setTextStyleType(TEXT_STYLE_TITLE);
                   s->setText(title);
                   measure->add(s);
                   score->setMetaTag("workTitle", title);
                   }
             if (!subtitle.isEmpty()) {
                   Text* s = new Text(score);
-                  s->setTextStyle(TEXT_STYLE_SUBTITLE);
+                  s->setTextStyleType(TEXT_STYLE_SUBTITLE);
                   s->setText(subtitle);
                   measure->add(s);
                   }
             if (!composer.isEmpty()) {
                   Text* s = new Text(score);
-                  s->setTextStyle(TEXT_STYLE_COMPOSER);
+                  s->setTextStyleType(TEXT_STYLE_COMPOSER);
                   s->setText(composer);
                   measure->add(s);
                   }
             if (!poet.isEmpty()) {
                   Text* s = new Text(score);
-                  s->setTextStyle(TEXT_STYLE_POET);
+                  s->setTextStyleType(TEXT_STYLE_POET);
                   s->setText(poet);
                   measure->add(s);
                   }

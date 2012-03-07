@@ -454,14 +454,17 @@ enum ClefType {
       };
 
 //---------------------------------------------------------
-//   TextStyleType
-//    must be in sync with list in setDefaultStyle()
+//   Text Style Type
+//    Enumerate the list of build in text styles.
+//    Must be in sync with list in setDefaultStyle().
 //---------------------------------------------------------
 
-enum TextStyleType {
-      TEXT_STYLE_INVALID = -1,      // unstyled
+enum {
+      TEXT_STYLE_UNSTYLED = -1,
+      TEXT_STYLE_UNKNOWN = -2,
 
-      TEXT_STYLE_TITLE = 0,
+      TEXT_STYLE_DEFAULT = 0,
+      TEXT_STYLE_TITLE,
       TEXT_STYLE_SUBTITLE,
       TEXT_STYLE_COMPOSER,
       TEXT_STYLE_POET,

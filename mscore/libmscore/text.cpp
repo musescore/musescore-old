@@ -29,6 +29,15 @@
 QReadWriteLock docRenderLock;
 
 //---------------------------------------------------------
+//   propertyList
+//---------------------------------------------------------
+
+Property<Text> Text::propertyList[] = {
+      { P_TEXT_STYLE,  &Text::pStyleIndex, 0 },
+      { P_END, 0, 0 }
+      };
+
+//---------------------------------------------------------
 //   createDoc
 //---------------------------------------------------------
 
@@ -43,7 +52,7 @@ void Text::createDoc()
       to.setUseDesignMetrics(true);
       to.setWrapMode(QTextOption::NoWrap);
       _doc->setDefaultTextOption(to);
-      _doc->setDefaultFont(style().font(spatium()));
+      _doc->setDefaultFont(textStyle().font(spatium()));
       }
 
 //---------------------------------------------------------
@@ -57,8 +66,7 @@ Text::Text(Score* s)
       _doc       = 0;
       _editMode  = false;
       _cursor    = 0;
-      _styled    = true;
-//      setSubtype(0);
+      _styleIndex = TEXT_STYLE_DEFAULT;
       }
 
 Text::Text(const Text& e)
@@ -68,11 +76,9 @@ Text::Text(const Text& e)
             _doc = e._doc->clone();
       else
             _doc = 0;
-      _styled     = e._styled;
-      _styleName  = e._styleName;
+      _styleIndex = e._styleIndex;
       _editMode   = false;
       _cursor     = 0;
-      _localStyle = e._localStyle;
       }
 
 Text::~Text()
@@ -88,7 +94,7 @@ void Text::setText(const QString& s)
       {
       if (s.isEmpty())
             return;
-      if (_styled)
+      if (styled())
             SimpleText::setText(s);
       else
             setUnstyledText(s);
@@ -101,7 +107,7 @@ void Text::setText(const QString& s)
 
 void Text::setUnstyledText(const QString& s)
       {
-      Align align = style().align();
+      Align align = textStyle().align();
       _doc->clear();
 
       QTextCursor c(_doc);
@@ -119,7 +125,7 @@ void Text::setUnstyledText(const QString& s)
       c.setBlockFormat(bf);
 
       QTextCharFormat tf = c.charFormat();
-      tf.setFont(style().font(spatium()));
+      tf.setFont(textStyle().font(spatium()));
       c.setBlockCharFormat(tf);
       c.insertText(s);
       textChanged();
@@ -140,7 +146,7 @@ void Text::setText(const QTextDocumentFragment& f)
 
 void Text::setHtml(const QString& s)
       {
-      setStyled(false);
+      setUnstyled();
       _doc->clear();
       _doc->setHtml(s);
       textChanged();
@@ -152,7 +158,7 @@ void Text::setHtml(const QString& s)
 
 QString Text::getText() const
       {
-      return (_styled && !_editMode) ? SimpleText::getText() : _doc->toPlainText();
+      return (styled() && !_editMode) ? SimpleText::getText() : _doc->toPlainText();
       }
 
 //---------------------------------------------------------
@@ -161,7 +167,7 @@ QString Text::getText() const
 
 QString Text::getHtml() const
       {
-      return _styled ? "" : _doc->toHtml("utf-8");
+      return styled() ? "" : _doc->toHtml("utf-8");
       }
 
 //---------------------------------------------------------
@@ -170,7 +176,7 @@ QString Text::getHtml() const
 
 bool Text::systemFlag() const
       {
-      return _styled ? style().systemFlag() : _localStyle.systemFlag();
+      return textStyle().systemFlag();
       }
 
 //---------------------------------------------------------
@@ -188,11 +194,11 @@ void Text::setAbove(bool val)
 
 void Text::layout()
       {
-      if (_styled && !_editMode) {
+      if (styled() && !_editMode) {
             SimpleText::layout();
             }
       else {
-            _doc->setDefaultFont(style().font(spatium()));
+            _doc->setDefaultFont(textStyle().font(spatium()));
             qreal w = -1.0;
             qreal x = 0.0;
             qreal y = 0.0;
@@ -219,9 +225,10 @@ void Text::layout()
             if (hasFrame())
                   layoutFrame();
             _doc->setModified(false);
-            style().layout(this);      // process alignment
+            textStyle().layout(this);      // process alignment
 
-            if ((style().align() & ALIGN_VCENTER) && (textStyle() == TEXT_STYLE_TEXTLINE)) {
+#if 0 // TODO  TEXT_STYLE_TEXTLINE
+            if ((textStyle().align() & ALIGN_VCENTER) && (textStyle() == TEXT_STYLE_TEXTLINE)) {
                   // special case: vertically centered text with TextLine needs to
                   // take into account the line width
                   TextLineSegment* tls = static_cast<TextLineSegment*>(parent());
@@ -231,6 +238,7 @@ void Text::layout()
                         rypos() -= textlineLineWidth * .5;
                         }
                   }
+#endif
             rxpos() += x;
             rypos() += y;
             }
@@ -270,7 +278,7 @@ QRectF Text::pageRectangle() const
 
 void Text::draw(QPainter* painter) const
       {
-      if (_styled && !_editMode) {
+      if (styled() && !_editMode) {
             SimpleText::draw(painter);
             return;
             }
@@ -306,25 +314,6 @@ void Text::draw(QPainter* painter) const
       }
 
 //---------------------------------------------------------
-//   setTextStyle
-//---------------------------------------------------------
-
-void Text::setTextStyle(TextStyleType idx)
-      {
-      SimpleText::setTextStyle(idx);
-      if (idx != TEXT_STYLE_INVALID) {
-            _localStyle = score()->textStyle(textStyle());
-            if (!styled()) {
-                  QString s(getText());
-                  setStyled(true);
-                  setText(s);
-                  }
-            }
-      else
-            setStyled(false);
-      }
-
-//---------------------------------------------------------
 //   write
 //---------------------------------------------------------
 
@@ -347,16 +336,6 @@ void Text::read(const QDomElement& de)
             if (!readProperties(e))
                   domError(e);
             }
-      if (score()->mscVersion() < 119) {
-            //
-            // Reset text in old version to
-            // style.
-            //
-            if (textStyle() != TEXT_STYLE_INVALID) {
-                  setStyled(true);
-                  styleChanged();
-                  }
-            }
       }
 
 //---------------------------------------------------------
@@ -366,15 +345,12 @@ void Text::read(const QDomElement& de)
 void Text::writeProperties(Xml& xml, bool writeText) const
       {
       Element::writeProperties(xml);
-      if (_styled)
-            xml.tag("style", score()->textStyle(textStyle()).name());
-      else {
-            _localStyle.writeProperties(xml);
-            if (!_styleName.isEmpty())
-                  xml.tag("styleName", _styleName);
-            }
+      if (styled())
+            xml.tag("style", textStyle().name());
+      if (xml.clipboardmode || !styled())
+            _textStyle.writeProperties(xml);
       if (writeText) {
-            if (_styled)
+            if (styled())
                   xml.tag("text", getText());
             else {
                   xml.stag("html-data");
@@ -394,13 +370,13 @@ bool Text::readProperties(const QDomElement& e)
       const QString& val(e.text());
 
       if (tag == "style") {
-            TextStyleType st;
+            int st;
             bool ok;
             int i = val.toInt(&ok);
             if (ok) {
                   // obsolete old text styles
                   switch (i) {
-                        case 1:  i = TEXT_STYLE_INVALID;   break;
+                        case 1:  i = TEXT_STYLE_UNSTYLED;  break;
                         case 2:  i = TEXT_STYLE_TITLE;     break;
                         case 3:  i = TEXT_STYLE_SUBTITLE;  break;
                         case 4:  i = TEXT_STYLE_COMPOSER;  break;
@@ -441,33 +417,23 @@ bool Text::readProperties(const QDomElement& e)
                         case 0:
                         default:
                               qDebug("Text:readProperties: style %d<%s> invalid", i, qPrintable(val));
-                              i = TEXT_STYLE_INVALID;
+                              i = TEXT_STYLE_UNSTYLED;
                               break;
                         }
-                  st = TextStyleType(i);
+                  st = i;
                   }
             else {
                   st = score()->style()->textStyleType(val);
-                  _styleName = val;       // name of local style
                   }
-            setTextStyle(st);
+            if (st != TEXT_STYLE_UNSTYLED)
+                  setTextStyleType(st);
+            else
+                  setUnstyled();
             }
-      else if (tag == "styleName")
-            _styleName = val;
-      else if (tag == "align") {            // obsolete
-            _localStyle.setAlign(Align(val.toInt()));
-            setStyled(false);
-            }
-      else if (tag == "spatiumSizeDependent") {
-            setSizeIsSpatiumDependent(val.toInt());
-            setStyled(false);
-            }
+      else if (tag == "styleName")          // obsolete, unstyled text
+            ; // _styleName = val;
       else if (tag == "data")                  // obsolete
             _doc->setHtml(val);
-      else if (tag == "frame") {
-            setHasFrame(val.toInt());
-            setStyled(false);
-            }
       else if (tag == "html") {
             QString s = Xml::htmlToString(e);
             setHtml(s);
@@ -478,33 +444,10 @@ bool Text::readProperties(const QDomElement& e)
             QString s = Xml::htmlToString(e.firstChildElement());
             setHtml(s);
             }
-      else if (tag == "frameWidth") {
-            setFrameWidth(val.toDouble());
-            setHasFrame(true);
-            setStyled(false);
-            }
-      else if (tag == "paddingWidth") {
-            setPaddingWidth(val.toDouble());
-            setStyled(false);
-            }
-      else if (tag == "frameColor") {
-            setFrameColor(readColor(e));
-            setStyled(false);
-            }
-      else if (tag == "frameRound") {
-            setFrameRound(val.toInt());
-            setStyled(false);
-            }
-      else if (tag == "circle") {
-            setCircle(val.toInt());
-            setStyled(false);
-            }
-      else if (tag == "systemFlag")       // prevent setting "styled"
-            _localStyle.setSystemFlag(val.toInt());
       else if (tag == "subtype")          // obsolete
             ;
-      else if (_localStyle.readProperties(e))
-            setStyled(false);
+      else if (_textStyle.readProperties(e))
+            ; // setUnstyled();
       else if (!Element::readProperties(e))
             return false;
       return true;
@@ -521,7 +464,7 @@ void Text::spatiumChanged(qreal oldVal, qreal newVal)
 qDebug("Text::spatiumChanged %d  -- %s %s %p %f\n",
       sizeIsSpatiumDependent(), name(), parent() ? parent()->name() : "?", this, newVal);
 #endif
-      if (!sizeIsSpatiumDependent() || _styled)
+      if (!sizeIsSpatiumDependent() || styled())
             return;
       qreal v = newVal / oldVal;
       QTextCursor c(_doc);
@@ -545,7 +488,7 @@ qDebug("Text::spatiumChanged %d  -- %s %s %p %f\n",
 void Text::startEdit(MuseScoreView*, const QPointF& p)
       {
       _editMode = true;
-      if (_styled) {
+      if (styled()) {
             createDoc();
             setUnstyledText(SimpleText::getText());
             layout();
@@ -785,7 +728,7 @@ void Text::moveCursor(int col)
 
 QPainterPath Text::shape() const
       {
-      if (_styled)
+      if (styled())
             return SimpleText::shape();
       QPainterPath pp;
 
@@ -809,7 +752,7 @@ QPainterPath Text::shape() const
 
 qreal Text::baseLine() const
       {
-      if (_styled)
+      if (styled())
             return SimpleText::baseLine();
       for (QTextBlock tb = _doc->begin(); tb.isValid(); tb = tb.next()) {
             const QTextLayout* tl = tb.layout();
@@ -825,7 +768,7 @@ qreal Text::baseLine() const
 
 qreal Text::lineSpacing() const
       {
-      return QFontMetricsF(style().font(spatium())).lineSpacing();
+      return QFontMetricsF(textStyle().font(spatium())).lineSpacing();
       }
 
 //---------------------------------------------------------
@@ -835,7 +778,7 @@ qreal Text::lineSpacing() const
 
 qreal Text::lineHeight() const
       {
-      return QFontMetricsF(style().font(spatium())).height();
+      return QFontMetricsF(textStyle().font(spatium())).height();
       }
 
 //---------------------------------------------------------
@@ -1001,21 +944,12 @@ void Text::dragTo(const QPointF& p)
       }
 
 //---------------------------------------------------------
-//   style
-//---------------------------------------------------------
-
-const TextStyle& Text::style() const
-      {
-      return _styled ? score()->textStyle(textStyle()) : _localStyle;
-      }
-
-//---------------------------------------------------------
 //   sizeIsSpatiumDependent
 //---------------------------------------------------------
 
 bool Text::sizeIsSpatiumDependent() const
       {
-      return style().sizeIsSpatiumDependent();
+      return textStyle().sizeIsSpatiumDependent();
       }
 
 //---------------------------------------------------------
@@ -1024,7 +958,7 @@ bool Text::sizeIsSpatiumDependent() const
 
 void Text::setSizeIsSpatiumDependent(int v)
       {
-      _localStyle.setSizeIsSpatiumDependent(v);
+      _textStyle.setSizeIsSpatiumDependent(v);
       }
 
 //---------------------------------------------------------
@@ -1033,7 +967,7 @@ void Text::setSizeIsSpatiumDependent(int v)
 
 qreal Text::xoff() const
       {
-      return style().offset().x();
+      return textStyle().offset().x();
       }
 
 //---------------------------------------------------------
@@ -1042,7 +976,7 @@ qreal Text::xoff() const
 
 Align Text::align() const
       {
-      return style().align();
+      return textStyle().align();
       }
 
 //---------------------------------------------------------
@@ -1051,7 +985,7 @@ Align Text::align() const
 
 OffsetType Text::offsetType() const
       {
-      return style().offsetType();
+      return textStyle().offsetType();
       }
 
 //---------------------------------------------------------
@@ -1060,7 +994,7 @@ OffsetType Text::offsetType() const
 
 QPointF Text::reloff() const
       {
-      return style().reloff();
+      return textStyle().reloff();
       }
 
 //---------------------------------------------------------
@@ -1069,7 +1003,7 @@ QPointF Text::reloff() const
 
 void Text::setAlign(Align val)
       {
-      _localStyle.setAlign(val);
+      _textStyle.setAlign(val);
       }
 
 //---------------------------------------------------------
@@ -1078,7 +1012,7 @@ void Text::setAlign(Align val)
 
 void Text::setXoff(qreal val)
       {
-      _localStyle.setXoff(val);
+      _textStyle.setXoff(val);
       }
 
 //---------------------------------------------------------
@@ -1087,7 +1021,7 @@ void Text::setXoff(qreal val)
 
 void Text::setYoff(qreal val)
       {
-      _localStyle.setYoff(val);
+      _textStyle.setYoff(val);
       }
 
 //---------------------------------------------------------
@@ -1096,7 +1030,7 @@ void Text::setYoff(qreal val)
 
 void Text::setOffsetType(OffsetType val)
       {
-      _localStyle.setOffsetType(val);
+      _textStyle.setOffsetType(val);
       }
 
 //---------------------------------------------------------
@@ -1105,7 +1039,7 @@ void Text::setOffsetType(OffsetType val)
 
 void Text::setRxoff(qreal v)
       {
-      _localStyle.setRxoff(v);
+      _textStyle.setRxoff(v);
       }
 
 //---------------------------------------------------------
@@ -1114,7 +1048,7 @@ void Text::setRxoff(qreal v)
 
 void Text::setRyoff(qreal v)
       {
-      _localStyle.setRyoff(v);
+      _textStyle.setRyoff(v);
       }
 
 //---------------------------------------------------------
@@ -1123,7 +1057,7 @@ void Text::setRyoff(qreal v)
 
 void Text::setReloff(const QPointF& p)
       {
-      _localStyle.setReloff(p);
+      _textStyle.setReloff(p);
       }
 
 //---------------------------------------------------------
@@ -1132,7 +1066,7 @@ void Text::setReloff(const QPointF& p)
 
 qreal Text::yoff() const
       {
-      return style().offset().y();
+      return textStyle().offset().y();
       }
 
 //---------------------------------------------------------
@@ -1141,7 +1075,7 @@ qreal Text::yoff() const
 
 void Text::setFrameWidth(qreal val)
       {
-      _localStyle.setFrameWidth(val);
+      _textStyle.setFrameWidth(val);
       }
 
 //---------------------------------------------------------
@@ -1150,7 +1084,7 @@ void Text::setFrameWidth(qreal val)
 
 void Text::setPaddingWidth(qreal val)
       {
-      _localStyle.setPaddingWidth(val);
+      _textStyle.setPaddingWidth(val);
       }
 
 //---------------------------------------------------------
@@ -1159,7 +1093,7 @@ void Text::setPaddingWidth(qreal val)
 
 void Text::setFrameColor(const QColor& val)
       {
-      _localStyle.setFrameColor(val);
+      _textStyle.setFrameColor(val);
       }
 
 //---------------------------------------------------------
@@ -1168,7 +1102,7 @@ void Text::setFrameColor(const QColor& val)
 
 void Text::setFrameRound(int val)
       {
-      _localStyle.setFrameRound(val);
+      _textStyle.setFrameRound(val);
       }
 
 //---------------------------------------------------------
@@ -1177,7 +1111,7 @@ void Text::setFrameRound(int val)
 
 void Text::setCircle(bool val)
       {
-      _localStyle.setCircle(val);
+      _textStyle.setCircle(val);
       }
 
 //---------------------------------------------------------
@@ -1186,7 +1120,7 @@ void Text::setCircle(bool val)
 
 void Text::setItalic(bool val)
       {
-      _localStyle.setItalic(val);
+      _textStyle.setItalic(val);
       }
 
 //---------------------------------------------------------
@@ -1195,7 +1129,7 @@ void Text::setItalic(bool val)
 
 void Text::setBold(bool val)
       {
-      _localStyle.setBold(val);
+      _textStyle.setBold(val);
       }
 
 //---------------------------------------------------------
@@ -1204,7 +1138,7 @@ void Text::setBold(bool val)
 
 void Text::setSize(qreal v)
       {
-      _localStyle.setSize(v);
+      _textStyle.setSize(v);
       }
 
 //---------------------------------------------------------
@@ -1213,7 +1147,7 @@ void Text::setSize(qreal v)
 
 void Text::setHasFrame(bool val)
       {
-      _localStyle.setHasFrame(val);
+      _textStyle.setHasFrame(val);
       }
 
 //---------------------------------------------------------
@@ -1222,7 +1156,7 @@ void Text::setHasFrame(bool val)
 
 QFont Text::font() const
       {
-      return style().font(spatium());
+      return _textStyle.font(spatium());
       }
 
 //---------------------------------------------------------
@@ -1231,7 +1165,8 @@ QFont Text::font() const
 
 void Text::styleChanged()
       {
-      if (_styled) {
+      if (styled()) {
+            setTextStyle(score()->textStyle(_styleIndex));
             setText(getText());     // destroy formatting
             score()->setLayoutAll(true);
             }
@@ -1243,7 +1178,10 @@ void Text::styleChanged()
 
 void Text::setScore(Score* s)
       {
+      if (s == score())
+            return;
       Element::setScore(s);
+      // TODO: handle custom text styles
       styleChanged();
       }
 
@@ -1253,7 +1191,7 @@ void Text::setScore(Score* s)
 
 void Text::setFont(const QFont& f)
       {
-      _localStyle.setFont(f);
+      _textStyle.setFont(f);
       }
 
 //---------------------------------------------------------
@@ -1262,35 +1200,44 @@ void Text::setFont(const QFont& f)
 
 void Text::clear()
       {
-      if (_styled)
+      if (styled())
             SimpleText::clear();
       else
             _doc->clear();
       }
 
 //---------------------------------------------------------
-//   setStyled
+//   setTextStyleType
 //---------------------------------------------------------
 
-void Text::setStyled(bool val)
+void Text::setTextStyleType(int st)
       {
-      if (val == _styled)
+      if (st == _styleIndex)
             return;
-      if (_styled) {
-            // change to unstyled
-            createDoc();
-//            _localStyle = score()->textStyle(textStyle());
-            if (!SimpleText::isEmpty())
-                  setUnstyledText(SimpleText::getText());
-            }
-      else {
-            // change to styled
-            if (!_doc->isEmpty())
-                  SimpleText::setText(_doc->toPlainText());
+      _styleIndex = st;
+      if (st != TEXT_STYLE_UNKNOWN)
+            setTextStyle(score()->textStyle(st));
+      if (_doc && !_doc->isEmpty() && !_editMode) {
+            SimpleText::setText(_doc->toPlainText());
             delete _doc;
             _doc = 0;
             }
-      _styled = val;
+      }
+
+//---------------------------------------------------------
+//   setUnstyled
+//---------------------------------------------------------
+
+void Text::setUnstyled()
+      {
+      if (!styled())
+            return;
+      _styleIndex = -1;
+      if (_editMode)
+            return;
+      createDoc();
+      if (!SimpleText::isEmpty())
+            setUnstyledText(SimpleText::getText());
       }
 
 //---------------------------------------------------------
@@ -1299,7 +1246,7 @@ void Text::setStyled(bool val)
 
 QTextCursor* Text::startCursorEdit()
       {
-      if (_styled) {
+      if (styled()) {
             qDebug("Text::startCursorEdit(): edit styled text\n");
             return 0;
             }
@@ -1335,7 +1282,7 @@ void Text::endCursorEdit()
       {
       delete _cursor;
       _cursor = 0;
-      if (_styled) {
+      if (styled()) {
             SimpleText::setText(_doc->toPlainText());
             delete _doc;
             _doc = 0;
@@ -1348,7 +1295,7 @@ void Text::endCursorEdit()
 
 bool Text::isEmpty() const
       {
-      return _styled ? SimpleText::getText().isEmpty() : _doc->isEmpty();
+      return styled() ? SimpleText::getText().isEmpty() : _doc->isEmpty();
       }
 
 //---------------------------------------------------------
@@ -1357,7 +1304,7 @@ bool Text::isEmpty() const
 
 void Text::setModified(bool v)
       {
-      if (!_styled)
+      if (!styled())
             _doc->setModified(v);
       }
 
@@ -1367,9 +1314,43 @@ void Text::setModified(bool v)
 
 QTextDocumentFragment Text::getFragment() const
       {
-      if (_styled)
+      if (styled())
             return QTextDocumentFragment::fromPlainText(getText());
       else
             return QTextDocumentFragment(_doc);
+      }
+
+Property<Text>* Text::property(P_ID id) const
+      {
+      for (int i = 0;; ++i) {
+            if (propertyList[i].id == P_END)
+                  break;
+            if (propertyList[i].id == id)
+                  return &propertyList[i];
+            }
+      return 0;
+      }
+
+QVariant Text::getProperty(P_ID propertyId) const
+      {
+      Property<Text>* p = property(propertyId);
+      if (p)
+            return getVariant(propertyId, ((*(Text*)this).*(p->data))());
+      return Element::getProperty(propertyId);
+      }
+
+bool Text::setProperty(P_ID propertyId, const QVariant& v)
+      {
+      score()->addRefresh(canvasBoundingRect());
+      Property<Text>* p = property(propertyId);
+      bool rv = true;
+      if (p) {
+            setVariant(propertyId, ((*this).*(p->data))(), v);
+            setGenerated(false);
+            }
+      else
+            rv = Element::setProperty(propertyId, v);
+      score()->setLayoutAll(true);
+      return rv;
       }
 

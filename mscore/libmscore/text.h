@@ -14,7 +14,6 @@
 #ifndef __TEXT_H__
 #define __TEXT_H__
 
-#include "style.h"
 #include "elementlayout.h"
 #include "simpletext.h"
 
@@ -29,7 +28,7 @@ struct SymCode;
 
 class Text : public SimpleText {
       QTextDocument* _doc;
-      bool _styled;
+      int _styleIndex;
 
       Q_DECLARE_TR_FUNCTIONS(Text)
 
@@ -37,13 +36,11 @@ class Text : public SimpleText {
       void setUnstyledText(const QString& s);
       void layoutEdit();
 
+      void* pStyleIndex() { return &_styleIndex; }
+
    protected:
       bool _editMode;
       QTextCursor* _cursor;
-
-      TextStyle  _localStyle;       // use this properties if _styled is false
-      QString _styleName;           // style name of _localStyle (or "")
-
       bool setCursor(const QPointF& p, QTextCursor::MoveMode mm = QTextCursor::MoveAnchor);
 
    public:
@@ -120,17 +117,13 @@ class Text : public SimpleText {
       bool replaceSpecialChars();
       virtual void spatiumChanged(qreal oldValue, qreal newValue);
 
-      virtual void setTextStyle(TextStyleType);
-      virtual const TextStyle& style() const;
-      const TextStyle& localStyle() const    { return _localStyle; }
-      TextStyle& localStyle()                { return _localStyle; }
-      void setLocalStyle(const TextStyle& s) { _localStyle = s; }
-
       void dragTo(const QPointF&p);
       bool editMode() const               { return _editMode; }
 
-      bool styled() const                 { return _styled; }
-      void setStyled(bool v);
+      bool styled() const                 { return _styleIndex != -1; }
+      int textStyleType() const           { return _styleIndex; }
+      void setTextStyleType(int);
+      void setUnstyled();
 
       bool isEmpty() const;
       void setModified(bool v);
@@ -141,13 +134,17 @@ class Text : public SimpleText {
       friend class TextProperties;
 
       virtual void textChanged()          {}
-      QString styleName() const           { return _styleName; }
-      void setStyleName(const QString& v) { _styleName = v;    }
 
       QTextCursor* cursor()               { return _cursor; }
       QTextDocument* doc() const          { return _doc;    }
 
       virtual bool systemFlag() const;
+
+      static Property<Text> propertyList[];
+
+      Property<Text>* property(P_ID id) const;
+      QVariant getProperty(P_ID propertyId) const;
+      bool setProperty(P_ID propertyId, const QVariant& v);
       };
 
 #endif

@@ -689,15 +689,9 @@ void Note::read(const QDomElement& de)
                   _tieFor->read(e);
                   _tieFor->setStartNote(this);
                   }
-            else if (tag == "Text") {                       // obsolete
+            else if (tag == "Fingering" || tag == "Text") {       // Text is obsolete
                   Fingering* f = new Fingering(score());
-                  f->setTextStyle(TEXT_STYLE_FINGERING);
-                  f->read(e);
-                  add(f);
-                  }
-            else if (tag == "Fingering") {
-                  Fingering* f = new Fingering(score());
-                  f->setTextStyle(TEXT_STYLE_FINGERING);
+                  f->setTextStyle(score()->textStyle(TEXT_STYLE_FINGERING));
                   f->read(e);
                   add(f);
                   }
