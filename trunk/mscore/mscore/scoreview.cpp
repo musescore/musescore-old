@@ -5160,15 +5160,8 @@ void ScoreView::figuredBassTab(bool back)
       endEdit();
       _score->startCmd();
 
-      // !! TODO !! Detect correct ticks for new fb
       bool bNew;
       FiguredBass * fbNew = FiguredBass::addFiguredBassToSegment(nextSeg, track, 0, &bNew);
-      // if the next segment is at a tick distance from the prev. other than prev. fb duration
-      // update prev. fb duration
-//      if( (nextSeg->tick() - segment->tick()) != fb->ticks())   NOT YET!
-//            fb->setTicks(nextSeg->tick() - segment->tick());
-
-//      _score->startCmd();                     // used by lyricsTab() but not by chordTab(): needed or not?
       if(bNew)
             _score->undoAddElement(fbNew);
       _score->select(fbNew, SELECT_SINGLE, 0);

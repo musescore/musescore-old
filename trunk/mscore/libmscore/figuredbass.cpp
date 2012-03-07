@@ -24,7 +24,7 @@
 static QList<FiguredBassFont> g_FBFonts;
 
 //---------------------------------------------------------
-//   FiguredBassItem
+//   F I G U R E D   B A S S   I T E M
 //---------------------------------------------------------
 
 // used for indexed access to parenthesis chars
@@ -471,10 +471,10 @@ void FiguredBassItem::layout()
 
       // suffix
       // append only if non-combining shape or cannot combine (no digit or parenthesis in between)
-      if( (suffix != FBIAccidNone && suffix != FBIAccidPlus
-                        && suffix != FBIAccidBackslash && suffix != FBIAccidSlash)
-                  || digit == FBIDigitNone
-                  || parenth[2] != FBIParenthNone)
+      if( suffix != FBIAccidNone
+                  && ( (suffix != FBIAccidPlus && suffix != FBIAccidBackslash && suffix != FBIAccidSlash)
+                        || digit == FBIDigitNone
+                        || parenth[2] != FBIParenthNone) )
             str.append(g_FBFonts.at(font).displayAccidental[suffix]);
 
       if(parenth[3] != FBIParenthNone)
@@ -499,14 +499,18 @@ void FiguredBassItem::layout()
 }
 
 //---------------------------------------------------------
-//   FiguredBass
+//   F I G U R E D   B A S S
 //---------------------------------------------------------
 
 #include "chord.h"
+#include "rest.h"
+
+FiguredBass * FiguredBass::prevFB = 0;
 
 FiguredBass::FiguredBass(Score* s)
    : Text(s)
       {
+      setOnNote(true);
       setTextStyle(s->textStyle(TEXT_STYLE_FIGURED_BASS));
       setTicks(0);
       items.clear();
@@ -515,6 +519,7 @@ FiguredBass::FiguredBass(Score* s)
 FiguredBass::FiguredBass(const FiguredBass& fb)
    : Text(fb)
       {
+      setOnNote(fb.onNote());
       setTicks(fb.ticks());
       items = fb.items;
       }
@@ -530,9 +535,10 @@ FiguredBass::~FiguredBass()
 void FiguredBass::write(Xml& xml) const
       {
       xml.stag("FiguredBass");
-      if (ticks() > 0) {
+      if(!onNote())
+            xml.tag("onNote", onNote());
+      if (ticks() > 0)
             xml.tag("ticks", ticks());
-            }
       foreach(FiguredBassItem item, items)
             item.write(xml);
       Element::writeProperties(xml);
@@ -552,6 +558,8 @@ void FiguredBass::read(const QDomElement& de)
             const QString& val(e.text());
             if(tag == "ticks")
                   setTicks(val.toInt());
+            else if(tag == "onNote")
+                  setOnNote(val.toInt() != 0l);
             else if (tag == "FiguredBassItem") {
                   FiguredBassItem * pItem = new FiguredBassItem(score(), idx++);
                   pItem->setTrack(track());
@@ -663,6 +671,11 @@ void FiguredBass::draw(QPainter* painter) const
                         painter->translate(-item.pos());
                         }
             }
+/* DEBUG
+      QString str = QString();
+      str.setNum(_ticks);
+      painter->drawText(pos().x(), pos().y() - (_onNote ?  150 : 130), str);
+*/
       }
 
 //---------------------------------------------------------
@@ -677,6 +690,7 @@ void FiguredBass::endEdit()
       QString txt = getText();
       if(txt.isEmpty())
             return;
+      adjustDuration();
 
       // split text into lines and create an item for each line
       QStringList list = txt.split('\n', QString::SkipEmptyParts);
@@ -722,6 +736,48 @@ void FiguredBass::setVisible(bool flag)
       Element::setVisible(flag);
       for(int i=0; i < items.size(); i++) {
             items[i].setVisible(flag);
+            }
+      }
+
+//---------------------------------------------------------
+//   adjustDuration
+//---------------------------------------------------------
+
+void FiguredBass::adjustDuration()
+      {
+      if(_ticks != 0 || prevFB == 0)            // if duration already set or no previous FB
+            return;                             // do nothing
+
+      // compute the distance between this and the previous FB
+      int delta = segment()->tick() - prevFB->segment()->tick();
+      // if this is before the current end of previous FB
+      if(delta < prevFB->ticks()) {
+            setOnNote(false);                   // tis is not on a note
+            setTicks(prevFB->ticks() - delta);  // this' duration is the remaining part of previous FB
+            prevFB->setTicks(delta);            // prev FB duration is the delta
+            }
+      // if this is at (or after) the end of previous FB
+      else {
+            prevFB = this;                      // this is the new previous
+            // check this is placed at a chord of this track
+            Element * e = segment()->element(track());
+            if(e && e->type() == CHORD) {
+                  setOnNote(true);
+                  setTicks( static_cast<Chord*>(e)->duration().ticks() );
+                  }
+            // no chord here (not standard in FB notation, but should be dealt with anyway)
+            else {
+                  int   dur;
+                  setOnNote(false);
+                  // locate previous ChordRest in this track
+                  ChordRest * cr = segment()->nextChordRest(track(), true);
+                  if(cr) {
+                        // duration of this is the remaining part of the previous ChordRest
+                        delta = segment()->tick() - cr->segment()->tick();
+                        dur = delta - cr->duration().ticks();
+                        setTicks(dur);
+                        }
+                  }
             }
       }
 
@@ -971,6 +1027,10 @@ FiguredBass* Score::addFiguredBass()
             ChordRest * cr = static_cast<Note*>(el)->chord();
             fb = FiguredBass::addFiguredBassToSegment(cr->segment(),
                         cr->track(), cr->duration().ticks(), &bNew);
+            if(bNew) {
+                  fb->setOnNote(true);
+//                  FiguredBass::setPrevFB(fb);
+                  }
             }
       else if (el->type() == FIGURED_BASS) {
             fb = static_cast<FiguredBass*>(el);
@@ -984,6 +1044,7 @@ FiguredBass* Score::addFiguredBass()
 
       if(bNew)
             undoAddElement(fb);
+      FiguredBass::setPrevFB(fb);
       select(fb, SELECT_SINGLE, 0);
       return fb;
       }
