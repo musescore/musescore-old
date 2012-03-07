@@ -591,19 +591,16 @@ void FiguredBass::layout()
 
       // vertical position
       y = 0;                                          // default vert. pos.
-//      qreal staffHeight = 4 * spatium();              // assume a standard staff height
+      // if a staff exists for this F.B., use its y position
       if(parent() && track() >= 0) {
             System* sys = ((Segment*)parent())->measure()->system();
             if (sys == 0)
                   qDebug("FiguredBass layout: no system!");
             else {
                   SysStaff* staff = sys->staff(staffIdx());
-//                  staffHeight = staff->bbox().height();
                   y = staff->y();
                   }
             }
-//      y += point(score()->styleS(ST_figuredBassDistance));
-//      y += staffHeight;
       y += point(score()->styleS(ST_figuredBassYOffset));
 
       // bounding box
@@ -631,13 +628,19 @@ void FiguredBass::layout()
       else
 #endif
             {
-            setPos(0, y);
-            setbbox(QRect());
-            // layout each item and enlarge bbox to include items bboxes
-            for(int i=0; i < items.size(); i++) {
-                  items[i].layout();
-                  addbbox(items[i].bbox().translated(items[i].pos()));
+            // if element could be parsed into items, layout each element
+            if(items.size() > 0) {
+                  setPos(0, y);
+                  setbbox(QRect());
+                  // layout each item and enlarge bbox to include items bboxes
+                  for(int i=0; i < items.size(); i++) {
+                        items[i].layout();
+                        addbbox(items[i].bbox().translated(items[i].pos()));
+                        }
                   }
+            else
+                  // if not, fall back to standard Text layout
+                  Text::layout();
             }
       adjustReadPos();
       }
@@ -651,11 +654,14 @@ void FiguredBass::draw(QPainter* painter) const
       if(editMode())
             Text::draw(painter);
       else {
-            foreach(FiguredBassItem item, items) {
-                  painter->translate(item.pos());
-                  item.draw(painter);
-                  painter->translate(-item.pos());
-                  }
+            if(items.size() < 1)
+                  Text::draw(painter);
+            else
+                  foreach(FiguredBassItem item, items) {
+                        painter->translate(item.pos());
+                        item.draw(painter);
+                        painter->translate(-item.pos());
+                        }
             }
       }
 
@@ -679,8 +685,11 @@ void FiguredBass::endEdit()
       idx = 0;
       foreach(QString str, list) {
             FiguredBassItem* pItem = new FiguredBassItem(score(), idx++);
-            if(!pItem->parse(str))
+            if(!pItem->parse(str)) {            // if any item fails parsing
+                  items.clear();                // clear item list
+                  Text::layout();               // keeping text as entered by user
                   return;
+                  }
             pItem->setTrack(track());
             pItem->setParent(this);
             items.append(*pItem);
@@ -690,7 +699,7 @@ void FiguredBass::endEdit()
                   normalizedText.append('\n');
             normalizedText.append(pItem->normalizedText());
             }
-      setText(normalizedText);
+      setText(normalizedText);                  // if all items parsed, replaced entered text with normal. text
       layout();
       }
 
