@@ -259,6 +259,10 @@ void initStyle(MStyle* s)
          TR( "Dynamics"), ff, 12, false, true, false,
          ALIGN_LEFT | ALIGN_BASELINE, QPointF(0.0, 8.0), OS, QPointF(), true));
 
+      AS(TextStyle(           // internal style
+         TR( "Dynamics2"), "MScore1", 12, false, false, false,
+         ALIGN_LEFT | ALIGN_BASELINE, QPointF(0.0, 8.0), OS, QPointF(), true));
+
       AS(TextStyle(
          TR( "Technik"), ff, 12, false, true, false,
          ALIGN_LEFT | ALIGN_BASELINE, QPointF(0.0, -2.0), OS));
@@ -1377,7 +1381,6 @@ void MStyle::setTextStyle(const TextStyle& ts)
 
 void MStyle::addTextStyle(const TextStyle& ts)
       {
-printf("addTExtStyle <%s>\n", qPrintable(ts.name()));
       d->_textStyles.append(ts);
       }
 

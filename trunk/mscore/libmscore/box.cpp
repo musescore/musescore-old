@@ -307,6 +307,7 @@ Property<Box>* Box::property(P_ID id) const
                   return &propertyList[i];
             }
       qFatal("Box: property %d not found\n", id);
+      return 0;
       }
 
 //---------------------------------------------------------

@@ -54,8 +54,6 @@ class Dynamic : public Text {
       Segment* segment() const         { return (Segment*)parent(); }
       Measure* measure() const         { return (Measure*)parent()->parent(); }
 
-      virtual void layout();
-
       void setSubtype(int val);
       void setSubtype(const QString&);
       QString subtypeName() const;
