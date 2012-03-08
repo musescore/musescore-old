@@ -38,6 +38,7 @@
 #include "slur.h"
 #include "box.h"
 #include "measure.h"
+#include "tuplet.h"
 #include "al/sig.h"
 
 //---------------------------------------------------------
@@ -485,8 +486,8 @@ void BasicDurationalObj::read()
       if (c & 0x20) {
             unsigned char tuplet = cap->readByte();
             count        = tuplet & 0x0f;
-            tripartite   = tuplet & 0x10;
-            isProlonging = tuplet & 0x20;
+            tripartite   = (tuplet & 0x10) != 0;
+            isProlonging = (tuplet & 0x20) != 0;
             if (tuplet & 0xc0)
                   printf("bad tuplet value 0x%02x\n", tuplet);
             }
@@ -1371,6 +1372,11 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
       //
       int startTick = tick;
 // printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick);
+      
+      Tuplet* tuplet = 0;
+      int tupletCount = 0;
+      int nTuplet = 0;
+      int tupletTick = 0;
 
       foreach(NoteObj* no, cvoice->objects) {
             switch(no->type()) {
@@ -1379,6 +1385,29 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         Measure* m = getCreateMeasure(tick);
                         RestObj* o = static_cast<RestObj*>(no);
                         int ticks  = o->ticks();
+                        Duration d;
+                        d.setVal(ticks);
+                        if (o->count) {
+                              if (tuplet == 0) {
+                                    tupletCount = o->count;
+                                    nTuplet     = 0;
+                                    tupletTick  = tick;
+                                    tuplet      = new Tuplet(this);
+                                    Fraction f(3,2);
+                                    if (tupletCount == 3)
+                                          f = Fraction(3,2);
+                                    else
+                                          qDebug("Capella: unknown tuplet\n");
+                                    tuplet->setRatio(f);
+                                    tuplet->setBaseLen(d);
+                                    tuplet->setTrack(track);
+                                    tuplet->setTick(tick);
+                                    int nn = ((tupletCount * ticks) * f.denominator()) / f.numerator();
+                                    tuplet->setFraction(Fraction::fromTicks(nn));
+                                    m->add(tuplet);
+                                    }
+                              }
+                        
                         int ft     = m->tickLen();
                         if (o->fullMeasures) {
 // printf("full measure rests %d, invisible %d len %d %d\n",
@@ -1399,6 +1428,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         if (!o->invisible) {
                               Segment* s = m->getSegment(SegChordRest, tick);
                               Rest* rest = new Rest(this);
+                              rest->setTuplet(tuplet);
                               rest->setTick(tick);
                               Duration d;
                               if (o->fullMeasures)
@@ -1409,7 +1439,17 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                               rest->setTrack(track);
                               s->add(rest);
                               }
-                        tick += ticks;
+                        if (tuplet) {
+                              if (++nTuplet >= tupletCount) {
+                                    tick = tupletTick + tuplet->ticks();
+                                    tuplet = 0;
+                                    }
+                              else {
+                                    tick += (ticks * tuplet->ratio().denominator()) / tuplet->ratio().numerator();
+                                    }
+                              }
+                        else
+                              tick += ticks;
                         }
                         break;
                   case T_CHORD:
@@ -1418,10 +1458,33 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         int ticks = o->ticks();
                         Measure* m = getCreateMeasure(tick);
                         Segment* s = m->getSegment(SegChordRest, tick);
-                        Chord* chord = new Chord(this);
-                        chord->setTick(tick);
+                        
                         Duration d;
                         d.setVal(ticks);
+                        if (o->count) {
+                              if (tuplet == 0) {
+                                    tupletCount = o->count;
+                                    nTuplet     = 0;
+                                    tupletTick  = tick;
+                                    tuplet      = new Tuplet(this);
+                                    Fraction f(3,2);
+                                    if (tupletCount == 3)
+                                          f = Fraction(3,2);
+                                    else
+                                          qDebug("Capella: unknown tuplet\n");
+                                    tuplet->setRatio(f);
+                                    tuplet->setBaseLen(d);
+                                    tuplet->setTrack(track);
+                                    tuplet->setTick(tick);
+                                    int nn = ((tupletCount * ticks) * f.denominator()) / f.numerator();
+                                    tuplet->setFraction(Fraction::fromTicks(nn));
+                                    m->add(tuplet);
+                                    }
+                              }
+                        
+                        Chord* chord = new Chord(this);
+                        chord->setTuplet(tuplet);
+                        chord->setTick(tick);
                         chord->setDuration(d);
                         chord->setTrack(track);
                         switch (o->stemDir) {
@@ -1506,7 +1569,17 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                               l->setNo(v.num);
                               s->add(l);
                               }
-                        tick += ticks;
+                        if (tuplet) {
+                              if (++nTuplet >= tupletCount) {
+                                    tick = tupletTick + tuplet->ticks();
+                                    tuplet = 0;
+                                    }
+                              else {
+                                    tick += (ticks * tuplet->ratio().denominator()) / tuplet->ratio().numerator();
+                                    }
+                              }
+                        else
+                              tick += ticks;
                         }
                         break;
                   case T_CLEF:
@@ -1574,6 +1647,28 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                   d = static_cast<BasicDurationalObj*>(static_cast<ChordObj*>(no));
             if (!d)
                   continue;
+            if (d->count) {
+                  if (tuplet == 0) {
+                      int ticks = d->ticks();
+                      Duration dur;
+                      dur.setVal(ticks);
+                      tupletCount = d->count;
+                      nTuplet     = 0;
+                      tupletTick  = tick;
+                      tuplet      = new Tuplet(this);
+                      Fraction f(3,2);
+                      if (tupletCount == 3)
+                            f = Fraction(3,2);
+                      else
+                            qDebug("Capella: unknown tuplet\n");
+                      tuplet->setRatio(f);
+                      tuplet->setBaseLen(dur);
+                      tuplet->setTrack(track);
+                      int nn = ((tupletCount * ticks) * f.denominator()) / f.numerator();
+                      tuplet->setFraction(Fraction::fromTicks(nn));
+                      }
+                  }
+            
             foreach(BasicDrawObj* o, d->objects) {
                   switch (o->type) {
                         case CAP_SIMPLE_TEXT:
@@ -1650,7 +1745,18 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         ticks = ft * o->fullMeasures;
                         }
                   }
-            tick += ticks;
+            if (tuplet) {
+                  if (++nTuplet >= tupletCount) {
+                        tick = tupletTick + tuplet->ticks();
+                        delete tuplet;
+                        tuplet = 0;
+                        }
+                  else {
+                        tick += (ticks * tuplet->ratio().denominator()) / tuplet->ratio().numerator();
+                        }
+                  }
+            else
+                  tick += ticks;
             }
       return tick;
       }

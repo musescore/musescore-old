@@ -1,3 +1,5 @@
+08.mar (la)
+      - basic support of tuplets in capella import
 07.mar (la)
       - fix #15283: Paste and undo causes crash
       - fix #15376: Copy paste of nested tuplets causes corruption

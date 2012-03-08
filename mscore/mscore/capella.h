@@ -480,7 +480,7 @@ class WedgeObj : public LineObj {
 //---------------------------------------------------------
 
 class BasicDurationalObj : public CapellaObj {
-   protected:
+   public:
       int nDots;
       bool noDuration;
       bool postGrace;
@@ -493,7 +493,7 @@ class BasicDurationalObj : public CapellaObj {
       bool tripartite;
       bool isProlonging;
 
-   public:
+
       BasicDurationalObj(Capella* c) : CapellaObj(c) {}
       void read();
       int ticks() const;
