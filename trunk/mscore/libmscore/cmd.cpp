@@ -122,8 +122,6 @@ void Score::endCmd()
       if (!noUndo)
             setDirty(!noUndo);
       undo()->endMacro(noUndo);
-      if (debugMode)
-            qDebug("===endCmd");
       end();      // DEBUG
       }
 
@@ -134,8 +132,6 @@ void Score::endCmd()
 
 void Score::end()
       {
-      if (debugMode)
-            qDebug("===end");
       Score* score = parentScore() ? parentScore() : this;
       score->end1();
       foreach(Excerpt* e, score->_excerpts)
@@ -466,7 +462,7 @@ void Score::cmdAddInterval(int val, const QList<Note*>& nl)
             Chord* chord = on->chord();
             note->setParent(chord);
             int valTmp = val < 0 ? val+1 : val-1;
-            
+
             int npitch;
             int ntpc;
             if( abs(valTmp) != 7 ) {
@@ -482,7 +478,7 @@ void Score::cmdAddInterval(int val, const QList<Note*>& nl)
                   Interval interval(7, 12);
                   if(val < 0) {
                         interval.flip();
-                        }                                    
+                        }
                   transposeInterval(on->pitch(), on->tpc(), &npitch, &ntpc, interval, false);
                   }
             note->setPitch(npitch, ntpc);
