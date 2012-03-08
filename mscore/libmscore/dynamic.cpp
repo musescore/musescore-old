@@ -68,15 +68,15 @@ Dynamic::Dynamic(Score* s)
       {
       setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       _velocity = -1;
-      setSubtype(0);
       _dynType  = DYNAMIC_PART;
+      setSubtype(0);
       setTextStyleType(TEXT_STYLE_DYNAMICS);
       }
 
 Dynamic::Dynamic(const Dynamic& d)
    : Text(d)
       {
-      setSubtype(d._subtype);
+      _subtype  = d._subtype;
       _velocity = d._velocity;
       _dynType  = d._dynType;
       }
@@ -111,7 +111,8 @@ void Dynamic::write(Xml& xml) const
             xml.tag("velocity", _velocity);
       if (_dynType != DYNAMIC_PART)
             xml.tag("dynType", _dynType);
-      Text::writeProperties(xml, subtype() == 0);
+      if (_subtype == 0)
+            Text::writeProperties(xml, subtype() == 0);
       xml.etag();
       }
 
@@ -132,7 +133,7 @@ void Dynamic::read(const QDomElement& de)
                   domError(e);
             }
       if (score()->mscVersion() < 118)
-            setTextStyleType(TEXT_STYLE_DYNAMICS);
+            setTextStyleType(TEXT_STYLE_DYNAMICS2);
       }
 
 //---------------------------------------------------------
@@ -142,33 +143,6 @@ void Dynamic::read(const QDomElement& de)
 void Dynamic::setSubtype(int idx)
       {
       _subtype = idx;
-      if (idx > 0) {
-            if ((unsigned)idx >= sizeof(dynList)/sizeof(*dynList)) {
-                  qDebug("Dynamic::setSubtype: bad type %d\n", idx);
-                  idx = 1;
-                  }
-            setUnstyled();
-            clear();
-            QTextCursor* cursor = startCursorEdit();
-            cursor->movePosition(QTextCursor::Start);
-            QTextCharFormat tf = cursor->charFormat();
-            const TextStyle& ts = score()->textStyle(TEXT_STYLE_DYNAMICS);
-            qreal size = ts.size();
-            qreal m = size;
-            if (ts.sizeIsSpatiumDependent())
-                  m *= (score()->spatium() / (SPATIUM20 * DPI));
-            m *= mag();
-
-            QFont font("MScore1");
-            font.setPointSizeF(m);
-            font.setKerning(true);
-            font.setStyleStrategy(QFont::NoFontMerging);
-            tf.setFont(font);
-            tf.setProperty(QTextFormat::FontKerning, true);
-            cursor->setBlockCharFormat(tf);
-            cursor->insertText(dynList[idx].tag);
-            endCursorEdit();
-            }
       }
 
 //---------------------------------------------------------
@@ -178,14 +152,16 @@ void Dynamic::setSubtype(int idx)
 void Dynamic::setSubtype(const QString& tag)
       {
       int n = sizeof(dynList)/sizeof(*dynList);
-      for (int i = 0; i < n; ++i) {
+      for (int i = 1; i < n; ++i) {
             if (dynList[i].tag == tag) {
                   _subtype = i;
+                  setTextStyleType(TEXT_STYLE_DYNAMICS2);
+                  setText(dynList[i].tag);
                   return;
                   }
             }
-      qDebug("Dynamic: subtype not found <%s>\n", qPrintable(tag));
       _subtype = 0;
+      setTextStyleType(TEXT_STYLE_DYNAMICS);
       setText(tag);
       }
 
@@ -214,14 +190,7 @@ void Dynamic::startEdit(MuseScoreView* v, const QPointF& p)
 
 void Dynamic::resetType()
       {
-      QString tag = getText();
-      int n = sizeof(dynList)/sizeof(*dynList);
-      for (int i = 0; i < n; ++i) {
-            if (dynList[i].tag == tag) {
-                  setSubtype(i);
-                  return;
-                  }
-            }
+      setSubtype(getText());
       }
 
 //---------------------------------------------------------
@@ -230,28 +199,8 @@ void Dynamic::resetType()
 
 void Dynamic::toDefault()
       {
-      QString tag = getText();
-      int n = sizeof(dynList)/sizeof(*dynList);
-      int idx = 0;
-      for (int i = 0; i < n; ++i) {
-            if (dynList[i].tag == tag) {
-                  idx = i;
-                  break;
-                  }
-            }
+      resetType();
       Text::toDefault();
-      setTextStyle(score()->textStyle(TEXT_STYLE_DYNAMICS));
-      setSubtype(idx);
-      }
-
-//---------------------------------------------------------
-//   layout
-//---------------------------------------------------------
-
-void Dynamic::layout()
-      {
-      setSubtype(subtype());  // re-apply style
-      Text::layout();
       }
 
 //---------------------------------------------------------

@@ -178,16 +178,6 @@ p, li { white-space: pre-wrap; }
           </Tempo>
         <Dynamic>
           <subtype>pp</subtype>
-          <pos x="-0.154839" y="5.2129"/>
-          <halign>left</halign>
-          <valign>baseline</valign>
-          <xoffset>0</xoffset>
-          <yoffset>8</yoffset>
-          <offsetType>spatium</offsetType>
-          <family>FreeSerifMscore</family>
-          <size>12</size>
-          <italic>1</italic>
-          <sizeIsSpatiumDependent>1</sizeIsSpatiumDependent>
           </Dynamic>
         <Chord>
           <lid>83</lid>
@@ -1092,16 +1082,6 @@ p, li { white-space: pre-wrap; }
             </Tempo>
           <Dynamic>
             <subtype>pp</subtype>
-            <pos x="-0.154839" y="4.7329"/>
-            <halign>left</halign>
-            <valign>baseline</valign>
-            <xoffset>0</xoffset>
-            <yoffset>8</yoffset>
-            <offsetType>spatium</offsetType>
-            <family>FreeSerifMscore</family>
-            <size>12</size>
-            <italic>1</italic>
-            <sizeIsSpatiumDependent>1</sizeIsSpatiumDependent>
             </Dynamic>
           <Chord>
             <lid>83</lid>

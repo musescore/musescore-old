@@ -1,3 +1,5 @@
+8.3   (ws)
+      - Dynamic: normal dynamics are now styled (new text style TEXT_STYLE_DYNAMICS2)
 07.3  (ws)
       - updated text style implementation for styled/unstyled text
       (mw)
