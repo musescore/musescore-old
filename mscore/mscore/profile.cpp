@@ -248,6 +248,7 @@ void Profile::write()
       QBuffer cbuf;
       cbuf.open(QIODevice::ReadWrite);
       Xml xml(&cbuf);
+      xml.clipboardmode = true;
       xml.header();
       xml.stag("museScore version=\"" MSC_VERSION "\"");
       xml.stag("Profile");

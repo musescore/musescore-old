@@ -773,10 +773,9 @@ void Score::undoAddElement(Element* element)
       {
       if (element->isText()) {
             Text* text = static_cast<Text*>(element);
-            QString s = text->textStyle().name();
-            int idx = _style.textStyleType(s);
-            if (idx < 0) {
-                  printf("unknown text style <%s> type %d\n", qPrintable(s), text->textStyleType());
+            if (text->textStyleType() == TEXT_STYLE_UNKNOWN) {
+                  style()->addTextStyle(text->textStyle());
+                  text->setTextStyleType(style()->textStyleType(text->textStyle().name()));
                   }
             }
       QList<Staff*> staffList;

@@ -1189,6 +1189,7 @@ const TextStyle& StyleData::textStyle(const QString& name) const
                   return s;
             }
       qDebug("TextStyle <%s> not found", qPrintable(name));
+      abort();
       return _textStyles[0];
       }
 
@@ -1202,7 +1203,7 @@ int StyleData::textStyleType(const QString& name) const
             if (_textStyles[i].name() == name)
                   return i;
             }
-      qDebug("TextStyle <%s> not found\n", qPrintable(name));
+      qDebug("TextStyleType <%s> not found", qPrintable(name));
       return TEXT_STYLE_UNKNOWN;
       }
 
@@ -1376,6 +1377,7 @@ void MStyle::setTextStyle(const TextStyle& ts)
 
 void MStyle::addTextStyle(const TextStyle& ts)
       {
+printf("addTExtStyle <%s>\n", qPrintable(ts.name()));
       d->_textStyles.append(ts);
       }
 

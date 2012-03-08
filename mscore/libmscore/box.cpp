@@ -306,8 +306,7 @@ Property<Box>* Box::property(P_ID id) const
             if (propertyList[i].id == id)
                   return &propertyList[i];
             }
-      printf("Box: property %d not found\n", id);
-      abort();
+      qFatal("Box: property %d not found\n", id);
       }
 
 //---------------------------------------------------------

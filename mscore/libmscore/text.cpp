@@ -92,8 +92,6 @@ Text::~Text()
 
 void Text::setText(const QString& s)
       {
-      if (s.isEmpty())
-            return;
       if (styled())
             SimpleText::setText(s);
       else
@@ -345,7 +343,7 @@ void Text::read(const QDomElement& de)
 void Text::writeProperties(Xml& xml, bool writeText) const
       {
       Element::writeProperties(xml);
-      if (styled())
+      if (xml.clipboardmode || styled())
             xml.tag("style", textStyle().name());
       if (xml.clipboardmode || !styled())
             _textStyle.writeProperties(xml);
@@ -422,13 +420,15 @@ bool Text::readProperties(const QDomElement& e)
                         }
                   st = i;
                   }
-            else {
-                  st = score()->style()->textStyleType(val);
-                  }
-            if (st != TEXT_STYLE_UNSTYLED)
-                  setTextStyleType(st);
             else
+                  st = score()->style()->textStyleType(val);
+
+            if (st == TEXT_STYLE_UNSTYLED)
                   setUnstyled();
+            else if (st == TEXT_STYLE_UNKNOWN)
+                  _styleIndex = st;
+            else
+                  setTextStyleType(st);
             }
       else if (tag == "styleName")          // obsolete, unstyled text
             ; // _styleName = val;
@@ -1166,7 +1166,8 @@ QFont Text::font() const
 void Text::styleChanged()
       {
       if (styled()) {
-            setTextStyle(score()->textStyle(_styleIndex));
+            if (_styleIndex != TEXT_STYLE_UNKNOWN)
+                  setTextStyle(score()->textStyle(_styleIndex));
             setText(getText());     // destroy formatting
             score()->setLayoutAll(true);
             }
@@ -1232,7 +1233,7 @@ void Text::setUnstyled()
       {
       if (!styled())
             return;
-      _styleIndex = -1;
+      _styleIndex = TEXT_STYLE_UNSTYLED;
       if (_editMode)
             return;
       createDoc();
