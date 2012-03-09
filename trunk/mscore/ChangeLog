@@ -1,3 +1,6 @@
+09.3  (mw)
+      - fix #15191: Tablature doesn't like unisons
+      - added undoChangeFret() to undo
 8.3   (ws)
       - Dynamic: normal dynamics are now styled (new text style TEXT_STYLE_DYNAMICS2)
 07.3  (ws)

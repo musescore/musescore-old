@@ -25,6 +25,7 @@ Tablature guitarTablature(13, 6, guitarStrings);
 //   Tablature
 //---------------------------------------------------------
 
+bool Tablature::bFretting = false;
 
 Tablature::Tablature(int numFrets, int numStrings, int strings[])
       {
@@ -155,15 +156,24 @@ int Tablature::fret(int pitch, int string) const
 
 void Tablature::fretChord(Chord * chord) const
       {
-      int nCount, nCount2;
-      Note * note, * note2;
       int nFret, nNewFret, nTempFret;
-      int nString, nNewString;
-      int nNextFreeString = 0;                  // initially all strings are available
+      int nString, nNewString, nTempString;
+
+      if(bFretting)
+            return;
+      bFretting = true;
+
+      // we need to keep track of each string we allocate ourselves within this algorithm
+      bool bUsed[strings()];                    // initially all strings are available
+      for(nString=0; nString<strings(); nString++)
+            bUsed[nString] = false;
+      // we also need the notes sorted in order of string (from highest to lowest) and then pitch
+      QMap<int, Note *> sortedNotes;
+      foreach(Note * note, chord->notes())
+            sortedNotes.insert(note->string()*1000 - note->pitch(), note);
 
       // scan chord notes from highest, matching with strings from the highest
-      for(nCount=chord->notes().size()-1; nCount >= 0; nCount--) {
-            note                    = chord->notes().at(nCount);
+      foreach(Note * note, sortedNotes) {
             nString = nNewString    = note->string();
             nFret   = nNewFret      = note->fret();
             note->setFretConflict(false);       // assume no conflicts on this note
@@ -174,41 +184,60 @@ void Tablature::fretChord(Chord * chord) const
                         // no way to fit this note in this tab:
                         // mark as fretting conflict
                         note->setFretConflict(true);
-                        // store pitch change without affecting chord context
-                        chord->score()->undo(new ChangePitch(note, note->pitch(), note->tpc(),
-                           note->line(), nNewFret, nNewString));
+//                        // store pitch change without affecting chord context
+//                        chord->score()->undo(new ChangePitch(note, note->pitch(), note->tpc(),
+//                           note->line(), nNewFret, nNewString));
                         continue;
                         }
-                  }
-            // if fretting falls in an already used string...
-            if(nNewString < nNextFreeString) {
-                  // ...try with each next available string
-                  for( ; nNextFreeString < strings(); nNextFreeString++) {
-                        if( (nTempFret=fret(note->pitch(), nNextFreeString)) != -1) {
-                              // suitable string found
-                              nNewFret    = nTempFret;
-                              nNewString  = nNextFreeString;
+
+                  // check this note is not using the same string of another note of this chord
+                  foreach(Note * note2, sortedNotes) {
+                        // if same string...
+                        if(note2 != note && note2->string() == nNewString) {
+                              // ...attempt to fret this note on its old string
+                              if( (nTempFret=fret(note->pitch(), nString)) != -1) {
+                                    nNewFret   = nTempFret;
+                                    nNewString = nString;
+                                    }
                               break;
                               }
                         }
-                  if(nNextFreeString >= strings()) {
+                  }
+
+            // check we are not reusing a string we already used
+            if(bUsed[nNewString]) {
+                  // ...try with each other string, from the highest
+                  for(nTempString=0; nTempString < strings(); nTempString++) {
+                        if(bUsed[nTempString])
+                              continue;
+                        if( (nTempFret=fret(note->pitch(), nTempString)) != -1) {
+                              // suitable string found
+                              nNewFret    = nTempFret;
+                              nNewString  = nTempString;
+                              break;
+                              }
+                        }
+                  // if we run out of strings
+                  if(nTempString >= strings()) {
                         // no way to fit this chord in this tab:
                         // mark as fretting conflict this note...
                         note->setFretConflict(true);
-                        // and any note already scanned and set on the same string
-                        for(nCount2=chord->notes().size()-1; nCount2 > nCount; nCount2--) {
-                              note2 = chord->notes().at(nCount2);
-                              if(note2->string() == nNewString)
-                                    note2->setFretConflict(true);
-                              }
+//                        // and any note already scanned and set on the same string
+//                        for(nCount2=chord->notes().size()-1; nCount2 > nCount; nCount2--) {
+//                              note2 = chord->notes().at(nCount2);
+//                              if(note2->string() == nNewString)
+//                                    note2->setFretConflict(true);
+//                              }
+                        continue;
                         }
                   }
-            // if fretting did change, store as a pitch change
-            if(nString != nNewString || nFret != nNewFret) {
-                  chord->score()->undo(new ChangePitch(note, note->pitch(), note->tpc(),
-                     note->line(), nNewFret, nNewString));
-                  }
-            nNextFreeString = nNewString+1;     // string is used
+
+            // if fretting did change, store as a fret change
+            if(nString != nNewString || nFret != nNewFret)
+                  chord->score()->undo(new ChangeFret(note, nNewFret, nNewString));
+
+            bUsed[nNewString] = true;           // string is used
             }
+      bFretting = false;
       }
 

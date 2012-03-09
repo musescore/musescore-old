@@ -540,7 +540,7 @@ Segment* Score::setNoteRest(Segment* segment, int track, NoteVal nval, Fraction 
                   Note* note = chord->upNote();
                   int tpc = pitch2tpc2(nval.pitch, true);
                   int line = note->line();
-                  undoChangePitch(note, nval.pitch, tpc, line, nval.fret, nval.string);
+                  undoChangePitch(note, nval.pitch, tpc, line/*, nval.fret, nval.string*/);
                   }
             return segment;
             }
@@ -1138,7 +1138,8 @@ void Score::upDown(bool up, UpDownMode mode)
                                     }
                                     break;
 
-                              case UP_DOWN_CHROMATIC:
+                              case UP_DOWN_CHROMATIC:       // increase / decrease the pitch, 
+                                                            // letting the algorithm to choose fret & string
                                     newPitch = up ? pitch+1 : pitch-1;
                                     if (newPitch < 0)
                                           newPitch = 0;
@@ -1147,18 +1148,22 @@ void Score::upDown(bool up, UpDownMode mode)
                                     newTpc = pitch2tpc2(newPitch, up);
                                     break;
 
-                              case UP_DOWN_DIATONIC:
-                                    {
+                              case UP_DOWN_DIATONIC:        // increase / decrease the fret
+                                    {                       // without changing the string
                                     fret += (up ? 1 : -1);
                                     if (fret < 0)
                                           fret = 0;
                                     else if (fret >= tab->frets())
                                           fret = tab->frets() - 1;
                                     newPitch      = tab->getPitch(string, fret);
-                                    Chord* chord  = oNote->chord();
-                                    Staff* estaff = staff(chord->staffIdx() + chord->staffMove());
-                                    KeySigEvent ks = estaff->key(chord->tick());
-                                    newTpc         = pitch2tpc(newPitch, ks.accidentalType());
+//                                    Chord* chord  = oNote->chord();
+//                                    Staff* estaff = staff(chord->staffIdx() + chord->staffMove());
+//                                    KeySigEvent ks = estaff->key(chord->tick());
+//                                    newTpc         = pitch2tpc(newPitch, ks.accidentalType());
+                                    newTpc = pitch2tpc2(newPitch, up);
+                                    // store the fretting change before undoChangePitch() chooses
+                                    // a fretting of its own liking!
+                                    undoChangeFret(oNote, fret, string);
                                     }
                                     break;
                               }
@@ -1203,10 +1208,13 @@ void Score::upDown(bool up, UpDownMode mode)
                   }
             _is.pitch = newPitch;
 
-            if ((oNote->pitch() != newPitch) || (oNote->tpc() != newTpc)
-               || oNote->string() != string || oNote->fret() != fret) {
-                  undoChangePitch(oNote, newPitch, newTpc, oNote->line(), fret, string);
-                  }
+            if ( (oNote->pitch() != newPitch) || (oNote->tpc() != newTpc) )
+                  undoChangePitch(oNote, newPitch, newTpc, oNote->line()/*, fret, string*/);
+            // store fret change only if undoChangePitch has not been called,
+            // as undoChangePitch() already manages fret changes, if necessary
+            else if( oNote->staff()->staffType()->group() == TAB_STAFF
+                        && (oNote->string() != string || oNote->fret() != fret) )
+                  undoChangeFret(oNote, fret, string);
 
             // play new note with velocity 80 for 0.3 sec:
             _playNote = true;
@@ -1414,7 +1422,7 @@ void Score::changeAccidental(Note* note, AccidentalType accidental)
                               tab->convertPitch(pitch, &string, &fret);
                         }
                   }
-            undo(new ChangePitch(n, pitch, tpc, n->line(), fret, string));
+            undo(new ChangePitch(n, pitch, tpc, n->line()/*, fret, string*/));
             if (!st->useTablature()) {
                   //
                   // handle ties
@@ -1428,7 +1436,7 @@ void Score::changeAccidental(Note* note, AccidentalType accidental)
                         Note* nn = n;
                         while (nn->tieFor()) {
                               nn = nn->tieFor()->endNote();
-                              undo(new ChangePitch(nn, pitch, tpc, nn->line(), fret, string));
+                              undo(new ChangePitch(nn, pitch, tpc, nn->line()/*, fret, string*/));
                               }
                         }
                   }
