@@ -3878,7 +3878,8 @@ void ScoreView::cmdChangeEnharmonic(bool up)
                   int string = n->line() + (up ? 1 : -1);
                   int fret = staff->part()->instr()->tablature()->fret(n->pitch(), string);
                   if (fret != -1) {
-                        _score->undoChangePitch(n, n->pitch(), n->tpc(), n->line(), fret, string);
+//                        _score->undoChangePitch(n, n->pitch(), n->tpc(), n->line(), fret, string);
+                        _score->undoChangeFret(n, fret, string);
                         }
                   }
             else {
@@ -3925,7 +3926,7 @@ void ScoreView::cmdChangeEnharmonic(bool up)
                   if (i == 36)
                         qDebug("tpc %d not found", tpc);
                   else if (tpc != n->tpc()) {
-                        _score->undoChangePitch(n, n->pitch(), tpc, line, n->fret(), n->string());
+                        _score->undoChangePitch(n, n->pitch(), tpc, line/*, n->fret(), n->string()*/);
                         }
                   }
             }
@@ -5100,7 +5101,7 @@ void ScoreView::cmdAddPitch1(int pitch, bool addFlag)
                   Chord* chord = note->chord();
                   int key = _score->staff(chord->staffIdx())->key(chord->segment()->tick()).accidentalType();
                   int newTpc = pitch2tpc(pitch, key);
-                  _score->undoChangePitch(note, pitch, newTpc, note->line(), note->fret(), note->string());
+                  _score->undoChangePitch(note, pitch, newTpc, note->line()/*, note->fret(), note->string()*/);
                   }
             }
       _score->endCmd();

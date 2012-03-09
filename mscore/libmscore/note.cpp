@@ -900,17 +900,18 @@ void Note::endDrag()
       if (staff->useTablature()) {
             // on TABLATURE staves, dragging a note keeps same pitch on a different string (if possible)
             // determine new string of dragged note (if tablature is upside down, invert _lineOffset)
-            nString     = _string +
-                       (static_cast<StaffTypeTablature*>(staff->staffType())->upsideDown() ? -_lineOffset : _lineOffset);
+            nString = _string + (static_cast<StaffTypeTablature*>(staff->staffType())->upsideDown() ?
+                        -_lineOffset : _lineOffset);
             _lineOffset = 0;
             // get a fret number for same pitch on new string
             nFret       = staff->part()->instr()->tablature()->fret(_pitch, nString);
             if(nFret < 0)                       // no fret?
                   return;                       // no party!
             // these values do not change
-            nLine       = _line;
-            nPitch      = _pitch;
-            tpc         = _tpc;
+//            nLine       = _line;
+//            nPitch      = _pitch;
+//            tpc         = _tpc;
+            score()->undoChangeFret(this, /*nPitch, tpc, nLine,*/ nFret, nString);
             }
       else {
             // on PITCHED / PERCUSSION staves, dragging a note changes the note pitch
@@ -926,12 +927,13 @@ void Note::endDrag()
             // undefined for non-tablature staves
             nString     = -1;
             nFret       = -1;
-            }
+//            }
       Note* n = this;
       while (n->tieBack())
             n = n->tieBack()->startNote();
       for (; n; n = n->tieFor() ? n->tieFor()->endNote() : 0)
-            score()->undoChangePitch(n, nPitch, tpc, nLine, nFret, nString);
+            score()->undoChangePitch(n, nPitch, tpc, nLine/*, nFret, nString*/);
+            }
       score()->select(this, SELECT_SINGLE, 0);
       }
 
