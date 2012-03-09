@@ -1,3 +1,5 @@
+09.mar (la)
+      - fix #15353: 'start with score' box too narrow on Mac OSX
 08.mar (la)
       - basic support of tuplets in capella import
 07.mar (la)

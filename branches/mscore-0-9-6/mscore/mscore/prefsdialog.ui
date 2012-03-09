@@ -48,6 +48,9 @@
           <bool>false</bool>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
+          <property name="spacing">
+           <number>1</number>
+          </property>
           <item>
            <widget class="QRadioButton" name="emptySession">
             <property name="text">
