@@ -159,7 +159,7 @@ void PageSettings::updateValues()
                   }
             }
       pageGroup->setCurrentIndex(index);
-      QString s;
+//      QString s;
 
       //qreal printableWidthValue = pf->printableWidth();
       qreal widthValue = pf->size().width();
@@ -462,7 +462,7 @@ void PageSettings::spatiumChanged(double val)
 
 void PageSettings::pageOffsetChanged(int val)
       {
-      preview->score()->setPageNumberOffset(val);
+      preview->score()->setPageNumberOffset(val-1);
       updatePreview(0);
       }
 
