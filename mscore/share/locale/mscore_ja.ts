@@ -822,7 +822,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Value</source>
-        <translation>バリュー</translation>
+        <translation>値</translation>
     </message>
     <message>
         <source>Alter</source>
@@ -1188,7 +1188,7 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore: Write Drumset</source>
-        <translation>MuseScore: ドラムセットを書き込む</translation>
+        <translation>MuseScore: ドラムセットの書き込み</translation>
     </message>
     <message>
         <source>Write File failed: </source>
@@ -1199,7 +1199,7 @@ failed: </source>
     <name>EditDrumsetBase</name>
     <message>
         <source>MuseScore: Edit Drumset</source>
-        <translation>MuseScore: ドラムセット編集</translation>
+        <translation>MuseScore: ドラムセットの編集</translation>
     </message>
     <message>
         <source>Pitch</source>
@@ -1543,7 +1543,7 @@ failed: </source>
     <name>EditStyleBase</name>
     <message>
         <source>MuseScore: Edit Style</source>
-        <translation>MuseScore: スタイルを編集</translation>
+        <translation>MuseScore: スタイルの編集</translation>
     </message>
     <message>
         <source>Score</source>
@@ -2033,11 +2033,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>File Name:</source>
-        <translation>ファイル名</translation>
+        <translation>ファイル名:</translation>
     </message>
     <message>
         <source>Part Title:</source>
-        <translation>パートタイトル</translation>
+        <translation>パートタイトル:</translation>
     </message>
     <message>
         <source>Close</source>
@@ -2115,7 +2115,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation>テキストのプロパティ</translation>
+        <translation>テキストのプロパティ...</translation>
     </message>
 </context>
 <context>
@@ -2144,7 +2144,7 @@ space unit</extracomment>
     <name>ImportMidiDialog</name>
     <message>
         <source>MuseScore: Midi Import</source>
-        <translation>MuseScore: MIDIインポート</translation>
+        <translation>MuseScore: MIDIのインポート</translation>
     </message>
     <message>
         <source>Shortest note on import:</source>
@@ -2179,7 +2179,7 @@ space unit</extracomment>
     <name>InsertMeasuresDialogBase</name>
     <message>
         <source>Mscore: Insert Measures</source>
-        <translation>Mscore: 小節を挿入</translation>
+        <translation>Mscore: 小節の挿入</translation>
     </message>
     <message>
         <source>Insert empty measures:</source>
@@ -2291,7 +2291,7 @@ space unit</extracomment>
     <name>InstrumentListEditor</name>
     <message>
         <source>MuseScore: Part List</source>
-        <translation>MuseScore: パート一覧</translation>
+        <translation>MuseScore: パートリスト</translation>
     </message>
 </context>
 <context>
@@ -2369,7 +2369,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>MuseScore: Save Instrument List</source>
-        <translation>MuseScore: 楽器一覧を保存</translation>
+        <translation>MuseScore: 楽器リストの保存</translation>
     </message>
     <message>
         <source>MuseScore Instruments (*.xml);;</source>
@@ -2397,7 +2397,7 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore: Load Instrument List</source>
-        <translation>MuseScore: 楽器一覧の読み込み</translation>
+        <translation>MuseScore: 楽器リストの読み込み</translation>
     </message>
     <message>
         <source>MuseScore Instruments (*.xml);;All files (*)</source>
@@ -2813,7 +2813,7 @@ failed: </source>
     <name>MeasuresDialogBase</name>
     <message>
         <source>Mscore: Append Measures</source>
-        <translation>Mscore: 小節を追加</translation>
+        <translation>Mscore: 小節の追加</translation>
     </message>
     <message>
         <source>Append empty measures:</source>
@@ -4567,11 +4567,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Fragments:</source>
-        <translation>断片</translation>
+        <translation>断片:</translation>
     </message>
     <message>
         <source>Period Size:</source>
-        <translation>ピリオド サイズ</translation>
+        <translation>ピリオド サイズ:</translation>
     </message>
     <message>
         <source>4096</source>
@@ -4719,7 +4719,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
-        <translation>UNICODEでない文字列の取り込みに使用する文字コード (バイナリファイルの取り込み)</translation>
+        <translation>UNICODEでない文字列のインポートに使用する文字コード (バイナリファイルの取り込み)</translation>
     </message>
     <message>
         <source>Character Set</source>
@@ -4796,7 +4796,7 @@ Please select a single note or rest and retry operation
     <name>QWidget</name>
     <message>
         <source>MuseScore: Import Capella</source>
-        <translation>MuseScore: Capella をインポートする</translation>
+        <translation>MuseScore: Capella のインポートする</translation>
     </message>
     <message>
         <source>Quit</source>
@@ -4969,7 +4969,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>digonal</source>
-        <translation>斜め線</translation>
+        <translation>斜線</translation>
     </message>
     <message>
         <source>LineSegments</source>
@@ -5424,7 +5424,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Press up to 4 keys to enter shortcut sequence!</source>
-        <translation>キーを４つまで使ってショートカットを作成できます。</translation>
+        <translation>キーを４つまで使ってショートカットキーを作成できます。</translation>
     </message>
     <message>
         <source>Old shortcut:</source>
@@ -5726,7 +5726,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Type:</source>
-        <translation>タイプ</translation>
+        <translation>タイプ:</translation>
     </message>
     <message>
         <source>Sine</source>
@@ -5826,7 +5826,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Type:</source>
-        <translation>タイプ</translation>
+        <translation>タイプ:</translation>
     </message>
     <message>
         <source>MM</source>
@@ -7024,59 +7024,59 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add A</source>
-        <translation>ラ を加える</translation>
+        <translation>A を加える</translation>
     </message>
     <message>
         <source>Add note A to chord</source>
-        <translation>ラ を加える</translation>
+        <translation>A を加える</translation>
     </message>
     <message>
         <source>Add B</source>
-        <translation>シ を加える</translation>
+        <translation>B を加える</translation>
     </message>
     <message>
         <source>Add note B to chord</source>
-        <translation>シ を加える</translation>
+        <translation>B を加える</translation>
     </message>
     <message>
         <source>Add C</source>
-        <translation>ド を加える</translation>
+        <translation>C を加える</translation>
     </message>
     <message>
         <source>Add note C to chord</source>
-        <translation>ド を加える</translation>
+        <translation>C を加える</translation>
     </message>
     <message>
         <source>Add D</source>
-        <translation>レ を加える</translation>
+        <translation>D を加える</translation>
     </message>
     <message>
         <source>Add note D to chord</source>
-        <translation>レ を加える</translation>
+        <translation>D を加える</translation>
     </message>
     <message>
         <source>Add E</source>
-        <translation>ミ を加える</translation>
+        <translation>Eを加える</translation>
     </message>
     <message>
         <source>Add note E to chord</source>
-        <translation>ミ を加える</translation>
+        <translation>E を加える</translation>
     </message>
     <message>
         <source>Add F</source>
-        <translation>ファ を加える</translation>
+        <translation>F を加える</translation>
     </message>
     <message>
         <source>Add note F to chord</source>
-        <translation>ファ を加える</translation>
+        <translation>F を加える</translation>
     </message>
     <message>
         <source>Add G</source>
-        <translation>ソ を加える</translation>
+        <translation>G を加える</translation>
     </message>
     <message>
         <source>Add note G to chord</source>
-        <translation>ソ を加える</translation>
+        <translation>G を加える</translation>
     </message>
     <message>
         <source>rest</source>
@@ -8084,11 +8084,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Enter note A</source>
-        <translation>ラ を入力</translation>
+        <translation>A を入力</translation>
     </message>
     <message>
         <source>Enter note B</source>
-        <translation>シ を入力</translation>
+        <translation>B を入力</translation>
     </message>
     <message>
         <source>Enter note C</source>
@@ -8096,19 +8096,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Enter note D</source>
-        <translation>レ を入力</translation>
+        <translation>D を入力</translation>
     </message>
     <message>
         <source>Enter note E</source>
-        <translation>ミ を入力</translation>
+        <translation>E を入力</translation>
     </message>
     <message>
         <source>Enter note F</source>
-        <translation>ファ を入力</translation>
+        <translation>F を入力</translation>
     </message>
     <message>
         <source>Enter note G</source>
-        <translation>ソ を入力</translation>
+        <translation>G を入力</translation>
     </message>
     <message>
         <source>Enter rest</source>
@@ -9756,7 +9756,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dthirtysecond flag</source>
-        <translation>32分音符の旗 ()</translation>
+        <translation>32分音符の旗 (下向き)</translation>
     </message>
     <message>
         <source>dsixtyfourth flag</source>

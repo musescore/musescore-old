@@ -7641,7 +7641,7 @@ in preverite pot do datoteke</translation>
     <message>
         <location filename="../../mscore/textproperties.ui" line="446"/>
         <source>Offset</source>
-        <translation type="unfinished">Odmik</translation>
+        <translation>Odmik</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="466"/>
@@ -7668,7 +7668,7 @@ in preverite pot do datoteke</translation>
         <location filename="../../mscore/textproperties.ui" line="502"/>
         <location filename="../../mscore/textproperties.ui" line="561"/>
         <source>%</source>
-        <translation type="unfinished">%</translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="525"/>
@@ -7704,7 +7704,7 @@ in preverite pot do datoteke</translation>
     <message>
         <location filename="../../mscore/textproperties.ui" line="598"/>
         <source>MM</source>
-        <translation type="unfinished">mm</translation>
+        <translation>MM</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="605"/>
@@ -7714,7 +7714,7 @@ in preverite pot do datoteke</translation>
     <message>
         <location filename="../../mscore/textproperties.ui" line="608"/>
         <source>Space</source>
-        <translation type="unfinished">Razmik</translation>
+        <translation>Prostor</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="618"/>
@@ -7724,7 +7724,7 @@ in preverite pot do datoteke</translation>
     <message>
         <location filename="../../mscore/textproperties.ui" line="621"/>
         <source>Frame</source>
-        <translation type="unfinished">Okvir</translation>
+        <translation>Okvir</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="638"/>
@@ -7749,7 +7749,7 @@ in preverite pot do datoteke</translation>
     <message>
         <location filename="../../mscore/textproperties.ui" line="662"/>
         <source>Width:</source>
-        <translation type="unfinished">Debelina:</translation>
+        <translation>Širina</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="669"/>
@@ -7760,7 +7760,7 @@ in preverite pot do datoteke</translation>
         <location filename="../../mscore/textproperties.ui" line="672"/>
         <location filename="../../mscore/textproperties.ui" line="692"/>
         <source>mm</source>
-        <translation type="unfinished">mm</translation>
+        <translation>mm</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="682"/>
@@ -7837,24 +7837,24 @@ in preverite pot do datoteke</translation>
     <message>
         <location filename="../../mscore/timedialog.ui" line="179"/>
         <source>Create Time Signature</source>
-        <translation type="unfinished">Ustvari taktovski način</translation>
+        <translation>Ustvari taktovski način</translation>
     </message>
     <message>
         <location filename="../../mscore/timedialog.ui" line="237"/>
         <location filename="../../mscore/timedialog.ui" line="263"/>
         <location filename="../../mscore/timedialog.ui" line="289"/>
         <source>+</source>
-        <translation type="unfinished">+</translation>
+        <translation>+</translation>
     </message>
     <message>
         <location filename="../../mscore/timedialog.ui" line="407"/>
         <source>add time signature to palette</source>
-        <translation type="unfinished">dodaj taktovski način v paleto</translation>
+        <translation>dodaj taktovski način v paleto</translation>
     </message>
     <message>
         <location filename="../../mscore/timedialog.ui" line="410"/>
         <source>Add</source>
-        <translation type="unfinished">Dodaj</translation>
+        <translation>Dodaj</translation>
     </message>
 </context>
 <context>
@@ -7888,7 +7888,7 @@ in preverite pot do datoteke</translation>
     <message>
         <location filename="../../mscore/timesigwizard.ui" line="109"/>
         <source>Time Signature</source>
-        <translation type="unfinished">Taktovski način</translation>
+        <translation>Taktovski način</translation>
     </message>
     <message>
         <location filename="../../mscore/timesigwizard.ui" line="168"/>
@@ -8003,13 +8003,13 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/transposedialog.ui" line="145"/>
         <location filename="../../mscore/transposedialog.ui" line="196"/>
         <source>Up</source>
-        <translation type="unfinished">Gor</translation>
+        <translation>Gor</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="152"/>
         <location filename="../../mscore/transposedialog.ui" line="340"/>
         <source>Down</source>
-        <translation type="unfinished">Dol</translation>
+        <translation>Dol</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="159"/>
@@ -8202,7 +8202,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/tuplet.cpp" line="578"/>
         <source>Tuplet Properties...</source>
-        <translation type="unfinished">Lastnosti triole ...</translation>
+        <translation>Lastnosti poddelitve</translation>
     </message>
 </context>
 <context>
@@ -8287,23 +8287,23 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/tupletproperties.ui" line="39"/>
         <source>Number</source>
-        <translation type="unfinished">Številka</translation>
+        <translation>Številka</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletproperties.ui" line="51"/>
         <source>number</source>
-        <translation type="unfinished">številka</translation>
+        <translation>številka</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletproperties.ui" line="58"/>
         <source>relation</source>
-        <translation type="unfinished">razmerje</translation>
+        <translation>relacija</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletproperties.ui" line="65"/>
         <location filename="../../mscore/tupletproperties.ui" line="101"/>
         <source>nothing</source>
-        <translation type="unfinished">prazno</translation>
+        <translation>ni</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletproperties.ui" line="75"/>
@@ -8345,7 +8345,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/box.cpp" line="423"/>
         <source>Add</source>
-        <translation type="unfinished">Dodaj</translation>
+        <translation>Dodaj</translation>
     </message>
     <message>
         <location filename="../../mscore/box.cpp" line="449"/>
@@ -8382,7 +8382,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/volta.cpp" line="177"/>
         <source>Line Properties...</source>
-        <translation type="unfinished">Lastnosti črte ...</translation>
+        <translation>Lastnosti črte ...</translation>
     </message>
 </context>
 <context>
@@ -8428,7 +8428,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/accidental.cpp" line="41"/>
         <source>none</source>
-        <translation type="unfinished">brez</translation>
+        <translation>brez</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="42"/>
@@ -8601,7 +8601,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="55"/>
         <source>Save</source>
-        <translation type="unfinished">Shrani</translation>
+        <translation>Shrani</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="56"/>
@@ -8661,7 +8661,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="93"/>
         <source>Close</source>
-        <translation type="unfinished">Zapri</translation>
+        <translation>Zapri</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="94"/>
@@ -9027,7 +9027,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="400"/>
         <source>A</source>
-        <translation type="unfinished">A</translation>
+        <translation>A</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="406"/>
@@ -9038,7 +9038,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="409"/>
         <source>B</source>
-        <translation type="unfinished">H</translation>
+        <translation>H</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="415"/>
@@ -9049,7 +9049,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="418"/>
         <source>C</source>
-        <translation type="unfinished">C</translation>
+        <translation>C</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="424"/>
@@ -9060,7 +9060,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="427"/>
         <source>D</source>
-        <translation type="unfinished">D</translation>
+        <translation>D</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="433"/>
@@ -9071,7 +9071,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="436"/>
         <source>E</source>
-        <translation type="unfinished">E</translation>
+        <translation>E</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="442"/>
@@ -9082,7 +9082,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="445"/>
         <source>F</source>
-        <translation type="unfinished">F</translation>
+        <translation>F</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="451"/>
@@ -9093,7 +9093,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="454"/>
         <source>G</source>
-        <translation type="unfinished">G</translation>
+        <translation>G</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="460"/>
@@ -9181,7 +9181,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="526"/>
         <source>Rest</source>
-        <translation type="unfinished">Pavza</translation>
+        <translation>Pavza</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="533"/>
@@ -9266,7 +9266,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="591"/>
         <source>Up</source>
-        <translation type="unfinished">Gor</translation>
+        <translation>Gor</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="597"/>
@@ -9329,7 +9329,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="636"/>
         <source>Down</source>
-        <translation type="unfinished">Dol</translation>
+        <translation>Dol</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="642"/>
@@ -9585,7 +9585,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/actions.cpp" line="876"/>
         <location filename="../../mscore/actions.cpp" line="879"/>
         <source>Delete</source>
-        <translation type="unfinished">Odstrani</translation>
+        <translation>Zbriši</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="880"/>
@@ -9712,19 +9712,19 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/actions.cpp" line="1007"/>
         <location filename="../../mscore/actions.cpp" line="1010"/>
         <source>Septuplet</source>
-        <translation type="unfinished"/>
+        <translation>Septiola</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1015"/>
         <location filename="../../mscore/actions.cpp" line="1018"/>
         <source>Octuplet</source>
-        <translation type="unfinished"/>
+        <translation>Oktiola</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1023"/>
         <location filename="../../mscore/actions.cpp" line="1026"/>
         <source>Nonuplet</source>
-        <translation type="unfinished"/>
+        <translation>Noniola</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1031"/>
@@ -9880,21 +9880,21 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/actions.cpp" line="1172"/>
         <location filename="../../mscore/actions.cpp" line="1173"/>
         <source>double sharp</source>
-        <translation type="unfinished">Dvojni višaj</translation>
+        <translation>dvojni višaj</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1179"/>
         <location filename="../../mscore/actions.cpp" line="1182"/>
         <location filename="../../mscore/actions.cpp" line="1183"/>
         <source>sharp</source>
-        <translation type="unfinished">Višaj</translation>
+        <translation>višaj</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1189"/>
         <location filename="../../mscore/actions.cpp" line="1192"/>
         <location filename="../../mscore/actions.cpp" line="1193"/>
         <source>natural</source>
-        <translation type="unfinished">Razveznik</translation>
+        <translation>razveznik</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1199"/>
@@ -9908,7 +9908,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/actions.cpp" line="1212"/>
         <location filename="../../mscore/actions.cpp" line="1213"/>
         <source>double flat</source>
-        <translation type="unfinished">Dvojni nižaj</translation>
+        <translation>dvojni nižaj</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1219"/>
@@ -10014,7 +10014,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/actions.cpp" line="1355"/>
         <location filename="../../mscore/actions.cpp" line="1356"/>
         <source>no beam</source>
-        <translation type="unfinished">brez prečke</translation>
+        <translation>brez loka</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1362"/>
@@ -10085,7 +10085,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/actions.cpp" line="1471"/>
         <location filename="../../mscore/actions.cpp" line="1472"/>
         <source>Quit</source>
-        <translation type="unfinished">Izhod</translation>
+        <translation>Zaključi</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1478"/>
@@ -10096,14 +10096,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="1482"/>
         <source>Zoom Canvas</source>
-        <translation type="unfinished">Povečaj</translation>
+        <translation>Povečava</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1488"/>
         <location filename="../../mscore/actions.cpp" line="1491"/>
         <location filename="../../mscore/actions.cpp" line="1492"/>
         <source>Lyrics</source>
-        <translation type="unfinished">Besedilo</translation>
+        <translation>Besedilo</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1497"/>
@@ -10118,7 +10118,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="1501"/>
         <source>Fingering</source>
-        <translation type="unfinished">Prstni red</translation>
+        <translation>Prstni red</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1506"/>
@@ -10133,14 +10133,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="1510"/>
         <source>Tempo</source>
-        <translation type="unfinished">Tempo</translation>
+        <translation>Tempo</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1516"/>
         <location filename="../../mscore/actions.cpp" line="1519"/>
         <location filename="../../mscore/actions.cpp" line="1520"/>
         <source>Metronome</source>
-        <translation type="unfinished">Metronom</translation>
+        <translation>Metronom</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1526"/>
@@ -10168,7 +10168,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/actions.cpp" line="1544"/>
         <location filename="../../mscore/actions.cpp" line="1548"/>
         <source>Add Text</source>
-        <translation type="unfinished">Dodaj besedilo</translation>
+        <translation>Dodaj napis</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1547"/>
@@ -10183,7 +10183,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="1556"/>
         <source>Title</source>
-        <translation type="unfinished">Naslov</translation>
+        <translation>Naslov</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1557"/>
@@ -10198,7 +10198,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="1565"/>
         <source>Subtitle</source>
-        <translation type="unfinished">Podnaslov</translation>
+        <translation>Podnaslov</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1566"/>
@@ -10213,7 +10213,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="1574"/>
         <source>Composer</source>
-        <translation type="unfinished">Skladatelj</translation>
+        <translation>Skladatelj</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1575"/>
@@ -10228,7 +10228,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="1583"/>
         <source>Poet</source>
-        <translation type="unfinished">Avtor besedila</translation>
+        <translation>Pesnik</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1584"/>
@@ -10243,7 +10243,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="1592"/>
         <source>Copyright</source>
-        <translation type="unfinished">Copyright</translation>
+        <translation>Avtorske pravice</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1593"/>
@@ -10285,7 +10285,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="1619"/>
         <source>Rehearsal Mark</source>
-        <translation type="unfinished">Oznake za vajo</translation>
+        <translation>Vadbene oznake</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1625"/>
@@ -10295,7 +10295,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="1628"/>
         <source>Play</source>
-        <translation type="unfinished">Predvajaj</translation>
+        <translation>Zaigraj</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1629"/>
@@ -10315,7 +10315,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="1683"/>
         <source>Rewind</source>
-        <translation type="unfinished">Prevrti</translation>
+        <translation>Previj</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1684"/>
@@ -10383,7 +10383,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/actions.cpp" line="1738"/>
         <location filename="../../mscore/actions.cpp" line="1742"/>
         <source>Transpose</source>
-        <translation type="unfinished">Transpozicija</translation>
+        <translation>Transponiraj</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1741"/>
@@ -10454,12 +10454,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="1822"/>
         <source>Concert Pitch</source>
-        <translation type="unfinished">Koncertna intonacija</translation>
+        <translation>Koncertna višina</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1823"/>
         <source>Display in Concert Pitch</source>
-        <translation type="unfinished">Prikaži v koncertni intonaciji</translation>
+        <translation>Prikaži v koncertni višini</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1828"/>
@@ -10657,7 +10657,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/actions.cpp" line="1986"/>
         <location filename="../../mscore/actions.cpp" line="1987"/>
         <source>Search</source>
-        <translation type="unfinished">Iskanje</translation>
+        <translation>Išči</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1992"/>
@@ -10725,7 +10725,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/actions.cpp" line="2066"/>
         <location filename="../../mscore/actions.cpp" line="2069"/>
         <source>Synthesizer</source>
-        <translation type="unfinished">Sintetizator</translation>
+        <translation>Sintetizator</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2070"/>
@@ -10912,12 +10912,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/articulation.cpp" line="52"/>
         <source>ouvert</source>
-        <translation type="unfinished"/>
+        <translation>ouvert</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="53"/>
         <source>plusstop</source>
-        <translation type="unfinished"/>
+        <translation>plusstop</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="54"/>
@@ -11206,12 +11206,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/element.cpp" line="77"/>
         <source>Symbol</source>
-        <translation type="unfinished">Simbol</translation>
+        <translation>Simbol</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="78"/>
         <source>Text</source>
-        <translation type="unfinished">Besedilo</translation>
+        <translation>Napis</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="79"/>
@@ -11221,7 +11221,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/element.cpp" line="80"/>
         <source>BarLine</source>
-        <translation type="unfinished">Taktnica</translation>
+        <translation>Taktnica</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="81"/>
@@ -11231,17 +11231,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/element.cpp" line="82"/>
         <source>Line</source>
-        <translation type="unfinished">Črta</translation>
+        <translation>Črta</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="83"/>
         <source>Bracket</source>
-        <translation type="unfinished">Prečka</translation>
+        <translation>Prečka</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="84"/>
         <source>Arpeggio</source>
-        <translation type="unfinished">Arpeggio</translation>
+        <translation>Arpeggio</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="85"/>
@@ -11251,7 +11251,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/element.cpp" line="86"/>
         <source>Note</source>
-        <translation type="unfinished">Nota</translation>
+        <translation>Nota</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="87"/>
@@ -11261,7 +11261,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/element.cpp" line="88"/>
         <source>Clef</source>
-        <translation type="unfinished">Ključi</translation>
+        <translation>Ključ</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="89"/>
@@ -11276,17 +11276,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/element.cpp" line="91"/>
         <source>Rest</source>
-        <translation type="unfinished">Pavza</translation>
+        <translation>Pavza</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="92"/>
         <source>Breath</source>
-        <translation type="unfinished">Dih</translation>
+        <translation>Vdih</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="93"/>
         <source>Glissando</source>
-        <translation type="unfinished">Glissando</translation>
+        <translation>Glissando</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="94"/>
@@ -11296,7 +11296,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/element.cpp" line="95"/>
         <source>Image</source>
-        <translation type="unfinished">Slika</translation>
+        <translation>Slika</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="96"/>
@@ -11316,7 +11316,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/element.cpp" line="99"/>
         <source>Page</source>
-        <translation type="unfinished">Stran</translation>
+        <translation>Stran</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="100"/>
@@ -11331,7 +11331,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/element.cpp" line="102"/>
         <source>Lyrics</source>
-        <translation type="unfinished">Besedilo</translation>
+        <translation>Besedilo</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="103"/>
@@ -11351,7 +11351,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/element.cpp" line="106"/>
         <source>Tempo</source>
-        <translation type="unfinished">Tempo</translation>
+        <translation>Tempo</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="107"/>
@@ -11366,7 +11366,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/element.cpp" line="109"/>
         <source>Volta</source>
-        <translation type="unfinished">Volta</translation>
+        <translation>Volta</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="110"/>
@@ -11421,12 +11421,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/element.cpp" line="120"/>
         <source>Tremolo</source>
-        <translation type="unfinished">Tremolo</translation>
+        <translation>Tremolo</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="121"/>
         <source>Measure</source>
-        <translation type="unfinished">Takt</translation>
+        <translation>Takt</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="122"/>
@@ -11446,7 +11446,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/element.cpp" line="125"/>
         <source>Lasso</source>
-        <translation type="unfinished"/>
+        <translation>Lasso</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="126"/>
@@ -11471,27 +11471,27 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/element.cpp" line="130"/>
         <source>Pedal</source>
-        <translation type="unfinished">Pedal</translation>
+        <translation>Pedal</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="131"/>
         <source>Trill</source>
-        <translation type="unfinished">Trilček</translation>
+        <translation>Trilček</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="132"/>
         <source>TextLine</source>
-        <translation type="unfinished">Napis</translation>
+        <translation>Besedilna črta</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="133"/>
         <source>Segment</source>
-        <translation type="unfinished"/>
+        <translation>Segment</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="134"/>
         <source>System</source>
-        <translation type="unfinished">Sistem</translation>
+        <translation>Sistem</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="135"/>

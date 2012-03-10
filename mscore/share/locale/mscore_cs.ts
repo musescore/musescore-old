@@ -5201,11 +5201,11 @@ Zkuste uložení do jiného umístění.</translation>
     </message>
     <message>
         <source>Internal error</source>
-        <translation type="unfinished"/>
+        <translation>Vnitřní chyba</translation>
     </message>
     <message>
         <source>Cannot load picture file %1</source>
-        <translation type="unfinished"/>
+        <translation>Nelze nahrát soubor s obrázkem %1</translation>
     </message>
 </context>
 <context>
@@ -5258,11 +5258,11 @@ Zkuste uložení do jiného umístění.</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the copy operation</source>
-        <translation type="unfinished"/>
+        <translation>Vyberte, prosím, celou rytmickou notovou skupinu a zkuste operaci kopírování ještě jednou</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the cut operation</source>
-        <translation type="unfinished"/>
+        <translation>Vyberte, prosím, celou rytmickou notovou skupinu a zkuste operaci vyjmutí ještě jednou</translation>
     </message>
 </context>
 <context>

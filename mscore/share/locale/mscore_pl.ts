@@ -4349,7 +4349,7 @@ jest niekompatybilny z obecnym interfejsem.</translation>
     </message>
     <message>
         <source>Note Entry:</source>
-        <translation>Zapisywanie nut:</translation>
+        <translation>Wpisywanie nut:</translation>
     </message>
     <message>
         <source>Application Font</source>
@@ -4437,7 +4437,7 @@ jest niekompatybilny z obecnym interfejsem.</translation>
     </message>
     <message>
         <source>Note Entry</source>
-        <translation>Zapisywanie nut</translation>
+        <translation>Wpisywanie nut</translation>
     </message>
     <message>
         <source>Enable midi input</source>
