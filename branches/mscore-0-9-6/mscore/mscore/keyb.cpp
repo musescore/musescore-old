@@ -70,18 +70,22 @@ void ScoreView::editKey(QKeyEvent* ev)
                   found = true;
                   }
             else if (ev->key() == Qt::Key_Left) {
-                  if (!ctrl && e->edit(this, curGrip, key, modifiers, s))
+                  if (!ctrl && e->edit(this, curGrip, key, modifiers, s)) {
                         _score->end();
-                  else
+                        found = true;
+                        }
+                  /*else
                         lyricsTab(true, true, true);      // go to previous lyrics
-                  found = true;
+                  found = true;*/
                   }
             else if (ev->key() == Qt::Key_Right) {
-                  if (!ctrl && e->edit(this, curGrip, key, modifiers, s))
+                  if (!ctrl && e->edit(this, curGrip, key, modifiers, s)) {
                         _score->end();
-                  else
+                        found = true;
+                        }
+                  /*else
                         lyricsTab(false, false, true);    // go to next lyrics
-                  found = true;
+                  found = true;*/
                   }
             else if (ev->key() == Qt::Key_Up) {
                   lyricsUpDown(true, true);
