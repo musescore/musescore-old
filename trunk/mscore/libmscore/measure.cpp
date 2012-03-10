@@ -3085,7 +3085,6 @@ void Measure::layoutX(qreal stretch, bool firstPass)
                   continue;
                   }
             s->setPos(xpos[seg], 0.0);
-//            s->setWidth(0.0);
 
             for (int track = 0; track < tracks; ++track) {
                   Element* e = s->element(track);

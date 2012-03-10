@@ -24,6 +24,10 @@
 #include "gen.h"
 #include "voice.h"
 
+#ifndef Q_UNLIKELY
+#define Q_UNLIKELY(x) x
+#endif
+
 namespace FluidS {
 
 #define FLUID_SAMPLESANITY_CHECK (1 << 0)

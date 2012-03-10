@@ -51,10 +51,6 @@ p, li { white-space: pre-wrap; }
         <source>Form</source>
         <translation type="unfinished">Форма</translation>
     </message>
-    <message>
-        <source>small</source>
-        <translation type="unfinished">маленька головка ноти</translation>
-    </message>
 </context>
 <context>
     <name>AlbumManager</name>
@@ -245,6 +241,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Chord/Rest</source>
         <translation>Акорд/пауза</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">Тип</translation>
+    </message>
+    <message>
+        <source>Tick</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1035,190 +1039,6 @@ spatium unit</extracomment>
     </message>
 </context>
 <context>
-    <name>ChordPropertyBase</name>
-    <message>
-        <source>Chord Properties</source>
-        <translation>Властивості акорду</translation>
-    </message>
-    <message>
-        <source>small</source>
-        <translation>маленька головка ноти</translation>
-    </message>
-    <message>
-        <source>additional leading space </source>
-        <translation>додатковий передуючий пробіл </translation>
-    </message>
-    <message>
-        <source>sp</source>
-        <comment>spatium unit</comment>
-        <translation>пр</translation>
-    </message>
-    <message>
-        <source>additional trailing space</source>
-        <translation>додатковий завершуючий пробіл</translation>
-    </message>
-    <message>
-        <source>stem direction</source>
-        <translation>напрям штилю</translation>
-    </message>
-    <message>
-        <source>auto</source>
-        <extracomment>velocity type</extracomment>
-        <translation>автоматично</translation>
-    </message>
-    <message>
-        <source>up</source>
-        <translation>вгору</translation>
-    </message>
-    <message>
-        <source>down</source>
-        <translation>вниз</translation>
-    </message>
-    <message>
-        <source>Note Properties</source>
-        <translation>Властивості ноти</translation>
-    </message>
-    <message>
-        <source>tuning offset</source>
-        <translation>коректування зміщення</translation>
-    </message>
-    <message>
-        <source>note head positon </source>
-        <translation>положення головки ноти </translation>
-    </message>
-    <message>
-        <source>left of stem</source>
-        <translation>зліва від штилю</translation>
-    </message>
-    <message>
-        <source>right of stem</source>
-        <translation>справа від штилю</translation>
-    </message>
-    <message>
-        <source>stemless</source>
-        <translation>без штилів</translation>
-    </message>
-    <message>
-        <source>velocity type</source>
-        <translation>тип швидкості</translation>
-    </message>
-    <message>
-        <source>velocity (0-127)</source>
-        <translation>швидкість (0-127)</translation>
-    </message>
-    <message>
-        <source>user</source>
-        <extracomment>velocity type</extracomment>
-        <translation>користувач</translation>
-    </message>
-    <message>
-        <source>offset</source>
-        <extracomment>velocity type</extracomment>
-        <translation>зміщення</translation>
-    </message>
-    <message>
-        <source>ontime offset</source>
-        <translation>зсув часу включення</translation>
-    </message>
-    <message>
-        <source>offtime</source>
-        <translation>час_виключення</translation>
-    </message>
-    <message>
-        <source> cent</source>
-        <extracomment>100 cent = 1 semitone intervall</extracomment>
-        <translation> відсотка</translation>
-    </message>
-    <message>
-        <source> ticks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Note Head Group</source>
-        <translation>Група нотної головки</translation>
-    </message>
-    <message>
-        <source>Note Head Type</source>
-        <translation>Тип головки ноти</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>стандартний</translation>
-    </message>
-    <message>
-        <source>cross</source>
-        <translation>хрест</translation>
-    </message>
-    <message>
-        <source>diamond</source>
-        <translation>ромб</translation>
-    </message>
-    <message>
-        <source>triangle</source>
-        <translation>трикутник</translation>
-    </message>
-    <message>
-        <source>slash</source>
-        <translation>слеш (/)</translation>
-    </message>
-    <message>
-        <source>xcircle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>do</source>
-        <translation>до</translation>
-    </message>
-    <message>
-        <source>re</source>
-        <translation>ре</translation>
-    </message>
-    <message>
-        <source>mi</source>
-        <translation>мі</translation>
-    </message>
-    <message>
-        <source>fa</source>
-        <translation>фа</translation>
-    </message>
-    <message>
-        <source>la</source>
-        <translation>ля</translation>
-    </message>
-    <message>
-        <source>ti</source>
-        <translation>сі</translation>
-    </message>
-    <message>
-        <source>Auto</source>
-        <translation>автоматично</translation>
-    </message>
-    <message>
-        <source>whole</source>
-        <translation>ціла</translation>
-    </message>
-    <message>
-        <source>half</source>
-        <translation>половинна</translation>
-    </message>
-    <message>
-        <source>quarter</source>
-        <translation>четвертна</translation>
-    </message>
-    <message>
-        <source>breve</source>
-        <translation>бревіс</translation>
-    </message>
-    <message>
-        <source>sol</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>alt. brevis</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>ChordRestBase</name>
     <message>
         <source>Form</source>
@@ -1292,17 +1112,18 @@ spatium unit</extracomment>
     </message>
 </context>
 <context>
-    <name>Debugger</name>
-    <message>
-        <source>MuseScore: Debugger</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>DebuggerBase</name>
     <message>
         <source>Form</source>
         <translation type="unfinished">Форма</translation>
+    </message>
+    <message>
+        <source>Select</source>
+        <translation type="unfinished">Позначити</translation>
+    </message>
+    <message>
+        <source>Layout</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1337,10 +1158,6 @@ spatium unit</extracomment>
     <message>
         <source>Velocity:</source>
         <translation type="unfinished">Швидкість:</translation>
-    </message>
-    <message>
-        <source>auto</source>
-        <translation type="unfinished">автоматично</translation>
     </message>
     <message>
         <source>user</source>
@@ -2366,6 +2183,14 @@ failed: </source>
         <source>Edit string data...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Instrument:</source>
+        <translation type="unfinished">Інструмент:</translation>
+    </message>
+    <message>
+        <source>Part Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditStaffType</name>
@@ -2561,6 +2386,18 @@ failed: </source>
         <source>Load</source>
         <translation type="unfinished">Завантажити</translation>
     </message>
+    <message utf8="true">
+        <source>« Full Configur. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Quick Presets »</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preview</source>
+        <translation type="unfinished">Попередній перегляд</translation>
+    </message>
 </context>
 <context>
     <name>EditStringDataBase</name>
@@ -2677,9 +2514,19 @@ failed: </source>
 ----------
 spatium unit
 ----------
+spatium unit
+----------
+spatium unit
+----------
+spatium unit
+----------
+spatium unit
+----------
 space unit
 ----------
 space unit
+----------
+spatium unit
 ----------
 spatium unit
 ----------
@@ -3032,15 +2879,7 @@ spatium unit</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>even page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>edit even page header</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>odd page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3065,16 +2904,6 @@ spatium unit</extracomment>
     </message>
     <message>
         <source>edit odd page header</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Special symbols in header/footer:&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;$p &lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-style:italic;&quot;&gt;- page number        &lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;$n&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-style:italic;&quot;&gt; - number of last page&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;$$&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-style:italic;&quot;&gt; - the character $&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3221,6 +3050,82 @@ p, li { white-space: pre-wrap; }
         <source>cents offset</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Figured Bass</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>styled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>even</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>odd</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:8pt; font-weight:600;&quot;&gt;Special symbols in header/footer:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:8pt;&quot;&gt;$p &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:8pt; font-style:italic;&quot;&gt;- page number    	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:8pt;&quot;&gt;$n&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:8pt; font-style:italic;&quot;&gt; - number of last page	&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:8pt;&quot;&gt;$$&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:8pt; font-style:italic;&quot;&gt; - the character $&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:8pt;&quot;&gt;     	$f - &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:8pt; font-style:italic;&quot;&gt;score name&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:8pt;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:8pt; font-style:italic;&quot;&gt; 	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:8pt;&quot;&gt;$F - &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:8pt; font-style:italic;&quot;&gt;file path&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:8pt;&quot;&gt;$d - &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:8pt; font-style:italic;&quot;&gt;current date	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:8pt;&quot;&gt;$D - &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:8pt; font-style:italic;&quot;&gt;creation date&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:8pt;&quot;&gt;$:tag: - &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:8pt; font-style:italic;&quot;&gt;meta tag (copyright etc.)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Akkolade Distance:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System Bracket Width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Akkolade Width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>minimum Measure width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font:</source>
+        <translation type="unfinished">Шрифт:</translation>
+    </message>
+    <message>
+        <source>Size:</source>
+        <translation type="unfinished">Кегль:</translation>
+    </message>
+    <message>
+        <source>pt</source>
+        <translation type="unfinished">пунктів</translation>
+    </message>
+    <message>
+        <source>Vertical position:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Style</source>
+        <translation type="unfinished">Стиль</translation>
+    </message>
+    <message>
+        <source>Modern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Historic</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -3243,6 +3148,25 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>MuseScore: Tempo Text</source>
         <translation>MuseScore: текст темпу</translation>
+    </message>
+</context>
+<context>
+    <name>EditTools</name>
+    <message>
+        <source>Edit Mode Tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <translation type="unfinished">пр</translation>
+    </message>
+    <message>
+        <source>x:</source>
+        <translation type="unfinished">X:</translation>
+    </message>
+    <message>
+        <source>y:</source>
+        <translation type="unfinished">Y:</translation>
     </message>
 </context>
 <context>
@@ -3291,7 +3215,11 @@ p, li { white-space: pre-wrap; }
         <translation>Зачинити</translation>
     </message>
     <message>
-        <source>Part-%1</source>
+        <source>New All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create All Parts</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3406,41 +3334,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>ImportMidiDialog</name>
-    <message>
-        <source>MuseScore: Midi Import</source>
-        <translation>MuseScore: імпорування Midi</translation>
-    </message>
-    <message>
-        <source>Shortest note on import:</source>
-        <translation>Тривалість найкоротшої ноти при імпорті:</translation>
-    </message>
-    <message>
-        <source>1/4</source>
-        <translation>1/4</translation>
-    </message>
-    <message>
-        <source>1/8</source>
-        <translation>1/8</translation>
-    </message>
-    <message>
-        <source>1/16</source>
-        <translation>1/16</translation>
-    </message>
-    <message>
-        <source>1/32</source>
-        <translation>1/32</translation>
-    </message>
-    <message>
-        <source>1/64</source>
-        <translation>1/64</translation>
-    </message>
-    <message>
-        <source>1/128</source>
-        <translation>1/128</translation>
-    </message>
-</context>
-<context>
     <name>InsertMeasuresDialogBase</name>
     <message>
         <source>Mscore: Insert Measures</source>
@@ -3541,6 +3434,92 @@ spatium unit</extracomment>
     </message>
 </context>
 <context>
+    <name>InspectorBeam</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Форма</translation>
+    </message>
+    <message>
+        <source>Beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grow Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">…</translation>
+    </message>
+    <message>
+        <source>Auto</source>
+        <translation type="unfinished">автоматично</translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished">Догори</translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation type="unfinished">Вниз</translation>
+    </message>
+    <message>
+        <source>Direction:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Local Relayout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grow Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>InspectorChord</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Форма</translation>
+    </message>
+    <message>
+        <source>Chord</source>
+        <translation type="unfinished">Акорд</translation>
+    </message>
+    <message>
+        <source>reset value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">…</translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stemless</source>
+        <translation type="unfinished">Без штилів</translation>
+    </message>
+    <message>
+        <source>Stem direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto</source>
+        <translation type="unfinished">автоматично</translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished">Догори</translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation type="unfinished">Вниз</translation>
+    </message>
+</context>
+<context>
     <name>InspectorElement</name>
     <message>
         <source>Form</source>
@@ -3564,6 +3543,41 @@ spatium unit</extracomment>
     <message>
         <source>Offset Y:</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Колір:</translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">…</translation>
+    </message>
+    <message>
+        <source>Visible</source>
+        <translation type="unfinished">Видимий</translation>
+    </message>
+</context>
+<context>
+    <name>InspectorGroupElement</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Форма</translation>
+    </message>
+    <message>
+        <source>Element Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set Visible</source>
+        <translation type="unfinished">Зробити видимою</translation>
+    </message>
+    <message>
+        <source>Set Invisible</source>
+        <translation type="unfinished">Зробити невидимою</translation>
     </message>
 </context>
 <context>
@@ -3595,6 +3609,265 @@ spatium unit</extracomment>
         <source>Width:</source>
         <translation type="unfinished">Ширина:</translation>
     </message>
+    <message>
+        <source>reset value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">…</translation>
+    </message>
+</context>
+<context>
+    <name>InspectorImage</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Форма</translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="unfinished">Зображення</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">…</translation>
+    </message>
+    <message>
+        <source>Lock Aspect Ratio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size in Spatium Units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale to Frame Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>InspectorNote</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Форма</translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mirror Head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Offtime Offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto</source>
+        <translation type="unfinished">автоматично</translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>reset value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">…</translation>
+    </message>
+    <message>
+        <source>Ontime Offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation type="unfinished">Вліво</translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dot Position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note Head Group</source>
+        <translation type="unfinished">Група нотної головки</translation>
+    </message>
+    <message>
+        <source>Tuning Offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note Head Type</source>
+        <translation type="unfinished">Тип головки ноти</translation>
+    </message>
+    <message>
+        <source>Velocity Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Whole</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Half</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quarter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Breve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Velocity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Offset</source>
+        <translation type="unfinished">Відступ</translation>
+    </message>
+    <message>
+        <source>User</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>normal</source>
+        <translation type="unfinished">стандартний</translation>
+    </message>
+    <message>
+        <source>cross</source>
+        <translation type="unfinished">хрест</translation>
+    </message>
+    <message>
+        <source>diamond</source>
+        <translation type="unfinished">ромб</translation>
+    </message>
+    <message>
+        <source>triangle</source>
+        <translation type="unfinished">трикутник</translation>
+    </message>
+    <message>
+        <source>slash</source>
+        <translation type="unfinished">слеш (/)</translation>
+    </message>
+    <message>
+        <source>xcircle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>do</source>
+        <translation type="unfinished">до</translation>
+    </message>
+    <message>
+        <source>re</source>
+        <translation type="unfinished">ре</translation>
+    </message>
+    <message>
+        <source>mi</source>
+        <translation type="unfinished">мі</translation>
+    </message>
+    <message>
+        <source>fa</source>
+        <translation type="unfinished">фа</translation>
+    </message>
+    <message>
+        <source>sol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>la</source>
+        <translation type="unfinished">ля</translation>
+    </message>
+    <message>
+        <source>ti</source>
+        <translation type="unfinished">сі</translation>
+    </message>
+    <message>
+        <source>alt. brevis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select</source>
+        <translation type="unfinished">Позначити</translation>
+    </message>
+    <message>
+        <source>Dot1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dot2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dot3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hook</source>
+        <translation type="unfinished">Хвостик</translation>
+    </message>
+    <message>
+        <source>Stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>InspectorRest</name>
+    <message>
+        <source>Small</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>InspectorSegment</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Форма</translation>
+    </message>
+    <message>
+        <source>Segment</source>
+        <translation type="unfinished">Сегмент</translation>
+    </message>
+    <message>
+        <source>Trailing space:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <extracomment>spatium unit
+----------
+spatium unit</extracomment>
+        <translation type="unfinished">пр</translation>
+    </message>
+    <message>
+        <source>Leading space:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>reset value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">…</translation>
+    </message>
 </context>
 <context>
     <name>InspectorSpacer</name>
@@ -3623,10 +3896,6 @@ spatium unit</extracomment>
         <translation type="unfinished">Форма</translation>
     </message>
     <message>
-        <source>Element</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Top Gap:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3643,6 +3912,38 @@ spatium unit</extracomment>
     </message>
     <message>
         <source>Height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right Margin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>reset value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">…</translation>
+    </message>
+    <message>
+        <source>Bottom Margin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mm</source>
+        <translation type="unfinished">мм</translation>
+    </message>
+    <message>
+        <source>Top Margin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left Margin:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3782,6 +4083,10 @@ spatium unit</extracomment>
         <source>Add linked Staff</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Visible</source>
+        <translation type="unfinished">Видимий</translation>
+    </message>
 </context>
 <context>
     <name>InstrumentsDialog</name>
@@ -3899,6 +4204,38 @@ failed: </source>
     </message>
     <message>
         <source>Show Naturals</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Форма</translation>
+    </message>
+    <message>
+        <source>accidentalType</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>customType</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>invalid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>naturalType</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>showCourtesySig</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>showNaturals</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4188,6 +4525,10 @@ failed: </source>
         <source>45°</source>
         <translation type="unfinished">45°</translation>
     </message>
+    <message>
+        <source>Below</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LineSegmentBase</name>
@@ -4271,6 +4612,101 @@ Would you like to locate %2 now?</source>
     <message>
         <source>Label:</source>
         <translation>Мітка:</translation>
+    </message>
+</context>
+<context>
+    <name>MasterPalette</name>
+    <message>
+        <source>MuseScore: Master Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grace Notes</source>
+        <translation type="unfinished">Форшлаґи</translation>
+    </message>
+    <message>
+        <source>Clefs</source>
+        <translation type="unfinished">Ключі</translation>
+    </message>
+    <message>
+        <source>Key Signatures</source>
+        <translation type="unfinished">Тональності</translation>
+    </message>
+    <message>
+        <source>Time Signatures</source>
+        <translation type="unfinished">Тактові розміри</translation>
+    </message>
+    <message>
+        <source>Barlines</source>
+        <translation type="unfinished">Тактові риски</translation>
+    </message>
+    <message>
+        <source>Lines</source>
+        <translation type="unfinished">Штрихи</translation>
+    </message>
+    <message>
+        <source>Arpeggio &amp; Glissando</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Breath &amp; Pauses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Brackets</source>
+        <translation type="unfinished">Аколади</translation>
+    </message>
+    <message>
+        <source>Articulations &amp; Ornaments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accidentals</source>
+        <translation type="unfinished">Знаки альтерації</translation>
+    </message>
+    <message>
+        <source>Dynamics</source>
+        <translation type="unfinished">Динаміка</translation>
+    </message>
+    <message>
+        <source>Fingering</source>
+        <translation type="unfinished">Аплікатура</translation>
+    </message>
+    <message>
+        <source>Note Heads</source>
+        <translation type="unfinished">Головки нот</translation>
+    </message>
+    <message>
+        <source>Tremolo</source>
+        <translation type="unfinished">Тремоло</translation>
+    </message>
+    <message>
+        <source>Fall/Doit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeats</source>
+        <translation type="unfinished">Знаки повтору</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished">Текст</translation>
+    </message>
+    <message>
+        <source>Breaks &amp; Spacer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beam Properties</source>
+        <translation type="unfinished">Властивості в’язки</translation>
+    </message>
+    <message>
+        <source>Frames &amp; Measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbols</source>
+        <translation type="unfinished">Символи</translation>
     </message>
 </context>
 <context>
@@ -4482,32 +4918,36 @@ Would you like to locate %2 now?</source>
 <context>
     <name>MetaEditDialog</name>
     <message>
-        <source>Dialog</source>
-        <translation>Метадані</translation>
+        <source>MuseScore: Meta Tags</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Work Title:</source>
-        <translation>Назва роботи:</translation>
+        <source>MuseScore Version:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Work Number:</source>
-        <translation>Номер роботи:</translation>
+        <source>Revision:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Movement Title:</source>
-        <translation>Назва частини:</translation>
+        <source>API-Level:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Movement Number:</source>
-        <translation>Номер частини:</translation>
+        <source>Creation Date:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Source:</source>
-        <translation>Джерело:</translation>
+        <source>New</source>
+        <translation type="unfinished">Нова</translation>
     </message>
     <message>
-        <source>Copyright:</source>
-        <translation type="unfinished">Авторське право:</translation>
+        <source>MuseScore: Input Tag Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Tag Name:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4515,10 +4955,6 @@ Would you like to locate %2 now?</source>
     <message>
         <source>MuseScore</source>
         <translation>MuseScore</translation>
-    </message>
-    <message>
-        <source>&amp;Lines...</source>
-        <translation>&amp;Штрихи...</translation>
     </message>
     <message>
         <source>File Operations</source>
@@ -4539,10 +4975,6 @@ Would you like to locate %2 now?</source>
     <message>
         <source>&amp;Edit</source>
         <translation>&amp;Редагування</translation>
-    </message>
-    <message>
-        <source>Preferences...</source>
-        <translation>Налаштування...</translation>
     </message>
     <message>
         <source>&amp;Create</source>
@@ -4569,60 +5001,12 @@ Would you like to locate %2 now?</source>
         <translation>Про &amp;програму</translation>
     </message>
     <message>
-        <source>About&amp;Qt</source>
-        <translation>&amp;Про Qt</translation>
-    </message>
-    <message>
         <source>MuseScore: Open Help</source>
         <translation>MuseScore: відкрити файл довідки</translation>
     </message>
     <message>
         <source>MuseScore: Load Score</source>
         <translation>MuseScore: вибір партитури</translation>
-    </message>
-    <message>
-        <source>Accidentals...</source>
-        <translation>Знаки альтерації...</translation>
-    </message>
-    <message>
-        <source>MuseScore: Clefs</source>
-        <translation>MuseScore: ключі</translation>
-    </message>
-    <message>
-        <source>MuseScore: Lines</source>
-        <translation>MuseScore: штрихи</translation>
-    </message>
-    <message>
-        <source>MuseScore: Accidentals</source>
-        <translation>MuseScore: знаки альтерації</translation>
-    </message>
-    <message>
-        <source>MuseScore: Dynamics</source>
-        <translation>MuseScore: динамічні позначення</translation>
-    </message>
-    <message>
-        <source>Barlines...</source>
-        <translation>Тактові риски...</translation>
-    </message>
-    <message>
-        <source>8va</source>
-        <translation>октовою вище</translation>
-    </message>
-    <message>
-        <source>8vb</source>
-        <translation>октавою нище</translation>
-    </message>
-    <message>
-        <source>MuseScore: Barlines</source>
-        <translation>MuseScore: тактові риски</translation>
-    </message>
-    <message>
-        <source>MuseScore: Fingering</source>
-        <translation>MuseScore: аплікатура</translation>
-    </message>
-    <message>
-        <source>Add Note</source>
-        <translation>Додати ноту</translation>
     </message>
     <message>
         <source>note entry mode</source>
@@ -4637,20 +5021,8 @@ Would you like to locate %2 now?</source>
         <translation>Аплікатура</translation>
     </message>
     <message>
-        <source>Add Interval</source>
-        <translation>Додати інтервал</translation>
-    </message>
-    <message>
-        <source>Tuplets</source>
-        <translation>Тріольоподібні фігури</translation>
-    </message>
-    <message>
         <source>Clefs</source>
         <translation>Ключі</translation>
-    </message>
-    <message>
-        <source>Lines</source>
-        <translation>Штрихи</translation>
     </message>
     <message>
         <source>Brackets</source>
@@ -4721,14 +5093,6 @@ Would you like to locate %2 now?</source>
         <translation>4/4 звичайний розмір</translation>
     </message>
     <message>
-        <source>15ma</source>
-        <translation>вище на дві октави</translation>
-    </message>
-    <message>
-        <source>15mb</source>
-        <translation>нище на дві октави</translation>
-    </message>
-    <message>
         <source>Concert Pitch</source>
         <translation>Концертний стрій</translation>
     </message>
@@ -4767,20 +5131,8 @@ before closing?</source>
         <translation>Кінець-початок репризи</translation>
     </message>
     <message>
-        <source>Bracket</source>
-        <translation>Аколада</translation>
-    </message>
-    <message>
-        <source>Akkolade</source>
-        <translation>Аколада</translation>
-    </message>
-    <message>
         <source>Beam Properties</source>
         <translation>Властивості в’язки</translation>
-    </message>
-    <message>
-        <source>Measures</source>
-        <translation>Такти</translation>
     </message>
     <message>
         <source>Text</source>
@@ -4789,10 +5141,6 @@ before closing?</source>
     <message>
         <source>&amp;File</source>
         <translation>&amp;Файл</translation>
-    </message>
-    <message>
-        <source>Voices</source>
-        <translation>Голоси</translation>
     </message>
     <message>
         <source>no score</source>
@@ -4813,10 +5161,6 @@ before closing?</source>
     <message>
         <source>Grace Notes</source>
         <translation>Форшлаґи</translation>
-    </message>
-    <message>
-        <source>Online Handbook</source>
-        <translation>Підручник в Інтернеті</translation>
     </message>
     <message>
         <source>MuseScore handbook not found at: 
@@ -4845,56 +5189,12 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation>2/2 алла бреве</translation>
     </message>
     <message>
-        <source>Barlines</source>
-        <translation>Тактові риски</translation>
-    </message>
-    <message>
         <source>Normal</source>
         <translation>Тактова риска (звичайна)</translation>
     </message>
     <message>
         <source>Dashed</source>
         <translation>Пунктирна тактова риска</translation>
-    </message>
-    <message>
-        <source>Slur</source>
-        <translation>Ліга</translation>
-    </message>
-    <message>
-        <source>Crescendo</source>
-        <translation>Крещендо</translation>
-    </message>
-    <message>
-        <source>Diminuendo</source>
-        <translation>Димінуе́ндо</translation>
-    </message>
-    <message>
-        <source>Prima volta</source>
-        <translation>Пріма вольта</translation>
-    </message>
-    <message>
-        <source>Seconda volta</source>
-        <translation>Секонда вольта</translation>
-    </message>
-    <message>
-        <source>Terza volta</source>
-        <translation>Терца (третя) вольта</translation>
-    </message>
-    <message>
-        <source>Seconda volta 2</source>
-        <translation>Секонда вольта 2</translation>
-    </message>
-    <message>
-        <source>Trill line</source>
-        <translation>Лінія трелі</translation>
-    </message>
-    <message>
-        <source>Text line</source>
-        <translation>Текстовий рядок</translation>
-    </message>
-    <message>
-        <source>Line</source>
-        <translation type="unfinished">Лінія</translation>
     </message>
     <message>
         <source>Arpeggio &amp;&amp; Glissando</source>
@@ -4953,30 +5253,6 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation>Розрив сторінки</translation>
     </message>
     <message>
-        <source>Staff spacer</source>
-        <translation>Розпірка для нотоносця</translation>
-    </message>
-    <message>
-        <source>Brackets...</source>
-        <translation>Аколади…</translation>
-    </message>
-    <message>
-        <source>Articulations &amp;&amp; Ornaments...</source>
-        <translation>Артикуляція та орнаментика…</translation>
-    </message>
-    <message>
-        <source>Pedal</source>
-        <translation>Педаль</translation>
-    </message>
-    <message>
-        <source>MuseScore: Brackets</source>
-        <translation>MuseScore: аколади</translation>
-    </message>
-    <message>
-        <source>Breaks &amp;&amp; Spacer...</source>
-        <translation>Розриви та розпірки…</translation>
-    </message>
-    <message>
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
@@ -4991,18 +5267,6 @@ Restore session?</source>
     <message>
         <source>Varied coda</source>
         <translation>Змінна кода</translation>
-    </message>
-    <message>
-        <source>MuseScore: Articulations &amp; Ornaments</source>
-        <translation>MuseScore: артикуляція та орнаментика</translation>
-    </message>
-    <message>
-        <source>MuseScore: Breaks &amp; Spacer</source>
-        <translation>MuseScore: розриви та розпірки…</translation>
-    </message>
-    <message>
-        <source>Check for Update</source>
-        <translation>Перевірка оновлень</translation>
     </message>
     <message>
         <source>Script
@@ -5029,10 +5293,6 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>MuseScore: Load error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5212,10 +5472,6 @@ is incompatible with current interface</source>
         <translation type="unfinished">Текст системи</translation>
     </message>
     <message>
-        <source>B1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Instrument</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5324,22 +5580,6 @@ is incompatible with current interface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Measure</source>
-        <translation type="unfinished">Такт</translation>
-    </message>
-    <message>
-        <source>Profiles</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>new Profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>delete Profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>MuseScore: Read Profile Name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5357,14 +5597,6 @@ please choose a different name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.pdf *.ove *.scw *.bww *.GTP *.GP3 *.GP4);;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.scw *.bww *.GTP *.GP3 *.GP4);;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Overture / Score Writer Files &lt;experimental&gt; (*.ove *.scw);;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5375,18 +5607,6 @@ please choose a different name:</source>
     <message>
         <source>switch layer</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sp</source>
-        <translation type="unfinished">пр</translation>
-    </message>
-    <message>
-        <source>x:</source>
-        <translation type="unfinished">X:</translation>
-    </message>
-    <message>
-        <source>y:</source>
-        <translation type="unfinished">Y:</translation>
     </message>
     <message>
         <source>Compressed MuseScore File (*.mscz)</source>
@@ -5481,10 +5701,6 @@ please choose a different name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Load failed: </source>
-        <translation type="unfinished">Завантажити не вдалося: </translation>
-    </message>
-    <message>
         <source>MuseScore: transpose</source>
         <translation type="unfinished">MuseScore: транспозиція</translation>
     </message>
@@ -5530,6 +5746,142 @@ please choose a different name:</source>
     </message>
     <message>
         <source>Images (*.jpg *.gif *.png);;All (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.pdf *.ove *.scw *.bww *.GTP *.GP3 *.GP4 *.GP5);;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.scw *.bww *.GTP *.GP3 *.GP4 *.GP5);;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Files (*.mscz *.mscx);;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Load Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Palette (*.mpal);;All Files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Palette (*.mpal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Format (*.mscx)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save Selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save Selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chord Name</source>
+        <translation type="unfinished">Назва акорду</translation>
+    </message>
+    <message>
+        <source>&amp;Measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Frames</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>synthesizer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>audio track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>switch play mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continous View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Voices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pr&amp;ofiles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Preferences...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add N&amp;ote</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add &amp;Interval</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T&amp;uplets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Online Handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About &amp;Qt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check for &amp;Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot create tuplet: note value too short</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Profile</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5706,6 +6058,45 @@ please choose a different name:</source>
     </message>
 </context>
 <context>
+    <name>OmrPanel</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Форма</translation>
+    </message>
+    <message>
+        <source>mm</source>
+        <translation type="unfinished">мм</translation>
+    </message>
+    <message>
+        <source>Spatium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Process</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MarkStaves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MarkSlices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mark Barlines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Omr Panel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PageBase</name>
     <message>
         <source>Form</source>
@@ -5795,35 +6186,19 @@ please choose a different name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Bottom margin:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Top margin:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Right margin:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Left margin:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page:</source>
+        <source>Printable Area</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Palette</name>
     <message>
-        <source>Delete Contents</source>
+        <source>Properties...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Properties...</source>
-        <translation type="unfinished"></translation>
+        <source>Clear</source>
+        <translation type="unfinished">Очистити</translation>
     </message>
 </context>
 <context>
@@ -5844,17 +6219,13 @@ please choose a different name:</source>
         <source>Reset to factory defaults</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>new Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PaletteBoxButton</name>
-    <message>
-        <source>Palette Properties</source>
-        <translation>Властивості палітри</translation>
-    </message>
-    <message>
-        <source>Insert new Palette</source>
-        <translation>Вставити нову палітру</translation>
-    </message>
     <message>
         <source>Move Palette Up</source>
         <translation>Підняти палітру</translation>
@@ -5870,6 +6241,22 @@ please choose a different name:</source>
     <message>
         <source>Delete Palette</source>
         <translation>Вилучити палітру</translation>
+    </message>
+    <message>
+        <source>Palette Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert new Palette...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Palette</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5897,6 +6284,14 @@ please choose a different name:</source>
     <message>
         <source>Content scale</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">І’мя:</translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <translation type="unfinished">пр</translation>
     </message>
 </context>
 <context>
@@ -5932,6 +6327,10 @@ please choose a different name:</source>
     <message>
         <source>Scale:</source>
         <translation>Масштаб:</translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <translation type="unfinished">пр</translation>
     </message>
 </context>
 <context>
@@ -6015,10 +6414,6 @@ please choose a different name:</source>
         <translation>Швидкість:</translation>
     </message>
     <message>
-        <source>auto</source>
-        <translation>автоматично</translation>
-    </message>
-    <message>
         <source>user</source>
         <translation type="unfinished">користувач</translation>
     </message>
@@ -6050,14 +6445,6 @@ please choose a different name:</source>
         <translation>001.01</translation>
     </message>
     <message>
-        <source>Rewind</source>
-        <translation>Перемотати назад</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Відтворити</translation>
-    </message>
-    <message>
         <source>MuseScore: Play Panel</source>
         <translation>MuseScore: пульт програвання</translation>
     </message>
@@ -6068,16 +6455,6 @@ please choose a different name:</source>
     <message>
         <source>100%</source>
         <translation>100%</translation>
-    </message>
-    <message>
-        <source>Vol</source>
-        <extracomment>short text for volume slider</extracomment>
-        <translation>Рівень</translation>
-    </message>
-    <message>
-        <source>Tmp</source>
-        <extracomment>short text for tempo slider</extracomment>
-        <translation>ТМП</translation>
     </message>
     <message>
         <source>measure.beat</source>
@@ -6115,6 +6492,16 @@ please choose a different name:</source>
         <source>master volume</source>
         <translation type="unfinished">загальна гучність</translation>
     </message>
+    <message>
+        <source>Vol.</source>
+        <extracomment>short text for volume slider</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tmp.</source>
+        <extracomment>short text for tempo slider</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PreferenceDialog</name>
@@ -6125,10 +6512,6 @@ please choose a different name:</source>
     <message>
         <source>Choose Background Wallpaper</source>
         <translation>Виберіть фон робочого поля</translation>
-    </message>
-    <message>
-        <source>Choose Working Directory</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Choose Instrument List</source>
@@ -6151,31 +6534,39 @@ please choose a different name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Choose MyScores Directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose MyStyles Directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose MyTemplates Directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose MyPlugins Directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose MySoundFonts Directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose MyImages Directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Choose Default Style for Parts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>load</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plugin Path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose Scores Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose Styles Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose Templates Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose Plugins Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose SoundFonts Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose Images Directory</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6334,10 +6725,6 @@ please choose a different name:</source>
         <translation>Розташування</translation>
     </message>
     <message>
-        <source>enable midi remote control</source>
-        <translation>Увімкнути віддалене керування MIDI</translation>
-    </message>
-    <message>
         <source>is active</source>
         <translation>активне</translation>
     </message>
@@ -6402,10 +6789,6 @@ please choose a different name:</source>
         <translation>Правий порт:</translation>
     </message>
     <message>
-        <source>Working Directory:</source>
-        <translation>Робоча тека:</translation>
-    </message>
-    <message>
         <source>Proximity for selecting elements</source>
         <translation>Близькість елементів, що позначаються</translation>
     </message>
@@ -6442,14 +6825,6 @@ please choose a different name:</source>
         <translation>хвилин(и)</translation>
     </message>
     <message>
-        <source>Width</source>
-        <translation>Ширина</translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation>Висота</translation>
-    </message>
-    <message>
         <source>Text</source>
         <translation>Текст</translation>
     </message>
@@ -6460,27 +6835,6 @@ please choose a different name:</source>
     <message>
         <source>Score</source>
         <translation>Партитура</translation>
-    </message>
-    <message>
-        <source>Default Paper Size</source>
-        <translation>Формат листка за умовчанням</translation>
-    </message>
-    <message>
-        <source>Landscape</source>
-        <translation>альбомне розташування</translation>
-    </message>
-    <message>
-        <source>Scaling</source>
-        <translation>Масштабування</translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation>пробіл</translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <extracomment>millimeter</extracomment>
-        <translation>мм</translation>
     </message>
     <message>
         <source>Import</source>
@@ -6545,30 +6899,6 @@ please choose a different name:</source>
     <message>
         <source>Check for new versions of MuseScore on startup</source>
         <translation>Перевіряти наявність нової версії MuseScore при запуску</translation>
-    </message>
-    <message>
-        <source>Choose PortMidi input interface</source>
-        <translation>Вибір інтерфейсу вводу з PortMidi</translation>
-    </message>
-    <message>
-        <source>MyScores Directory:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MyStyles Directory:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MyTemplates Directory:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MyPlugins Directory:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MySoundFonts Directory:</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>OSC remote control</source>
@@ -6679,10 +7009,6 @@ please choose a different name:</source>
         <translation type="unfinished">Стиль:</translation>
     </message>
     <message>
-        <source>Two sided</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>View</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6735,10 +7061,6 @@ please choose a different name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>MyImages Directory:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>native</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6770,31 +7092,100 @@ please choose a different name:</source>
         <source>Show MuseScore Connect</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Scores Directory:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Styles Directory:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Templates Directory:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plugins Directory:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SoundFonts Directory:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Images Directory:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enable MIDI remote control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose MIDI input interface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MusicXML</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import system and page breaks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shortest Note:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1/4</source>
+        <translation type="unfinished">1/4</translation>
+    </message>
+    <message>
+        <source>1/8</source>
+        <translation type="unfinished">1/8</translation>
+    </message>
+    <message>
+        <source>1/16</source>
+        <translation type="unfinished">1/16</translation>
+    </message>
+    <message>
+        <source>1/32</source>
+        <translation type="unfinished">1/32</translation>
+    </message>
+    <message>
+        <source>1/64</source>
+        <translation type="unfinished">1/64</translation>
+    </message>
+    <message>
+        <source>Export layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export all system and page breaks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export manually added system and page breaks only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not export system or page breaks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plugins</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
-    <name>Profile</name>
+    <name>Properties</name>
     <message>
-        <source>Open Profile File
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>
-failed: </source>
-        <translation type="unfinished">
-не вдалося: </translation>
-    </message>
-    <message>
-        <source>MuseScore: Open Profile file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Write Profile failed: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Write Style</source>
-        <translation type="unfinished">MuseScore: запис стилю</translation>
+        <source>small</source>
+        <translation type="unfinished">маленька головка ноти</translation>
     </message>
 </context>
 <context>
@@ -6918,10 +7309,6 @@ failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>MuseScore: Load Profile failed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Compressed MuseScore File (*.mscz);;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6937,6 +7324,14 @@ failed: </source>
         <source>&gt; failed: </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Load failed: </source>
+        <translation type="unfinished">Завантажити не вдалося: </translation>
+    </message>
+    <message>
+        <source>&amp;Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
@@ -6946,27 +7341,10 @@ failed: </source>
     </message>
 </context>
 <context>
-    <name>RestPropertyBase</name>
+    <name>Rest</name>
     <message>
-        <source>Rest Properties</source>
-        <translation>Властивості паузи</translation>
-    </message>
-    <message>
-        <source>small</source>
-        <translation type="unfinished">маленька головка ноти</translation>
-    </message>
-    <message>
-        <source>additional leading space </source>
-        <translation>додатковий передуючий пробіл </translation>
-    </message>
-    <message>
-        <source>sp</source>
-        <comment>spatium unit</comment>
-        <translation>пр</translation>
-    </message>
-    <message>
-        <source>additional trailing space</source>
-        <translation>додатковий завершуючий пробіл</translation>
+        <source>Form</source>
+        <translation type="unfinished">Форма</translation>
     </message>
 </context>
 <context>
@@ -7153,14 +7531,6 @@ please select a measure and try again</source>
         <translation type="unfinished">Видучити тріолеподібну групу</translation>
     </message>
     <message>
-        <source>Rest Properties...</source>
-        <translation type="unfinished">Властивості паузи...</translation>
-    </message>
-    <message>
-        <source>Note Properties...</source>
-        <translation type="unfinished">Властивості ноти...</translation>
-    </message>
-    <message>
         <source>Style...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7305,10 +7675,6 @@ please select range of measures to join and try again</source>
         <translation>Оголошення тактового розміру</translation>
     </message>
     <message>
-        <source>tick:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>SpannerFor:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7318,6 +7684,22 @@ please select range of measures to join and try again</source>
     </message>
     <message>
         <source>Annotations:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ticks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tick:</source>
+        <translation type="unfinished">Тік:</translation>
+    </message>
+    <message>
+        <source>Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beat</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7366,6 +7748,10 @@ please select range of measures to join and try again</source>
     <message>
         <source>subtract from selection</source>
         <translation>відняти від позначеного</translation>
+    </message>
+    <message>
+        <source>same subtype</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7435,76 +7821,6 @@ Sequencer will be disabled.</source>
     <message>
         <source>Cancel</source>
         <translation>Відміна</translation>
-    </message>
-</context>
-<context>
-    <name>ShowChordWidget</name>
-    <message>
-        <source>auto</source>
-        <translation>автоматично</translation>
-    </message>
-    <message>
-        <source>beam begin</source>
-        <translation>початок в’язки</translation>
-    </message>
-    <message>
-        <source>beam mid</source>
-        <translation>середина в’язка</translation>
-    </message>
-    <message>
-        <source>beam end</source>
-        <translation>завершення в’язки</translation>
-    </message>
-    <message>
-        <source>no beam</source>
-        <translation>без в’язки</translation>
-    </message>
-    <message>
-        <source>begin 1/32</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Auto</source>
-        <translation>автоматично</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation>Догори</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation>Вниз</translation>
-    </message>
-</context>
-<context>
-    <name>ShowRestWidget</name>
-    <message>
-        <source>Segment:</source>
-        <translation>Сегмент:</translation>
-    </message>
-    <message>
-        <source>auto</source>
-        <translation>автоматично</translation>
-    </message>
-    <message>
-        <source>beam begin</source>
-        <translation>початок в’язки</translation>
-    </message>
-    <message>
-        <source>beam mid</source>
-        <translation>середина в’язка</translation>
-    </message>
-    <message>
-        <source>beam end</source>
-        <translation>завершення в’язки</translation>
-    </message>
-    <message>
-        <source>no beam</source>
-        <translation>без в’язки</translation>
-    </message>
-    <message>
-        <source>begin 1/32</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7934,6 +8250,36 @@ altera</source>
     </message>
 </context>
 <context>
+    <name>StartDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Метадані</translation>
+    </message>
+    <message>
+        <source>Create New Score</source>
+        <translation type="unfinished">Створення нової партитури</translation>
+    </message>
+    <message>
+        <source>Load Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Startup Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Startup Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StemBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Форма</translation>
+    </message>
+</context>
+<context>
     <name>SymbolDialog</name>
     <message>
         <source>MuseScore: Symbols</source>
@@ -7972,10 +8318,6 @@ altera</source>
     <message>
         <source>Vol</source>
         <translation type="unfinished">Рівень</translation>
-    </message>
-    <message>
-        <source>Loaded SoundFont</source>
-        <translation>Завантажено SoundFont</translation>
     </message>
     <message>
         <source>...</source>
@@ -8123,11 +8465,11 @@ altera</source>
         <translation type="unfinished">MuseScore</translation>
     </message>
     <message>
-        <source>Soundfont already loaded</source>
+        <source>Soundfont already loaded %s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>cannot load soundfont</source>
+        <source>cannot load soundfont %s</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8203,6 +8545,10 @@ altera</source>
     <message>
         <source>TextStyle:</source>
         <comment>do not translate</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>styled</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8631,6 +8977,10 @@ please choose a different name:</source>
         <source>indent less</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>unstyled</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TimeDialog</name>
@@ -8733,10 +9083,6 @@ please choose a different name:</source>
     <message>
         <source>Enter Time Signature:</source>
         <translation>Вкажіть тактовий розмір:</translation>
-    </message>
-    <message>
-        <source>Time Signature: </source>
-        <translation>Тактовий розмір: </translation>
     </message>
     <message>
         <source>/</source>
@@ -9130,21 +9476,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>TupletView</name>
-    <message>
-        <source>Auto</source>
-        <translation type="unfinished">автоматично</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation type="unfinished">Догори</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation type="unfinished">Вниз</translation>
-    </message>
-</context>
-<context>
     <name>UpdateChecker</name>
     <message>
         <source>An update for MuseScore is available: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
@@ -9255,24 +9586,8 @@ p, li { white-space: pre-wrap; }
         <translation>Вставити</translation>
     </message>
     <message>
-        <source>Instruments...</source>
-        <translation>Інструменти...</translation>
-    </message>
-    <message>
-        <source>Symbols...</source>
-        <translation>Символи...</translation>
-    </message>
-    <message>
-        <source>Dynamics...</source>
-        <translation>Динаміка...</translation>
-    </message>
-    <message>
         <source>Note Input</source>
         <translation>Введення нот</translation>
-    </message>
-    <message>
-        <source>Pitch Spell</source>
-        <translation>Виправлення висот (знаки альтерації)</translation>
     </message>
     <message>
         <source>Unison Above</source>
@@ -9495,16 +9810,8 @@ p, li { white-space: pre-wrap; }
         <translation>Додати ноту Соль в акорд</translation>
     </message>
     <message>
-        <source>Add More Stretch</source>
-        <translation>Збільшити розтягнення</translation>
-    </message>
-    <message>
         <source>Add more stretch to selected measure</source>
         <translation>Збільшити розтягнення у виділеному такті</translation>
-    </message>
-    <message>
-        <source>Add Less Stretch</source>
-        <translation>Зменшити розтягнення</translation>
     </message>
     <message>
         <source>Add less stretch to selected measure</source>
@@ -9687,10 +9994,6 @@ p, li { white-space: pre-wrap; }
         <translation>Текст пісні</translation>
     </message>
     <message>
-        <source>Fingering...</source>
-        <translation>Аплікатура…</translation>
-    </message>
-    <message>
         <source>Tempo...</source>
         <translation>Темп...</translation>
     </message>
@@ -9755,14 +10058,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Load Style...</source>
-        <translation>Завантажити стиль...</translation>
-    </message>
-    <message>
-        <source>Save Style...</source>
-        <translation>Зберегти стиль...</translation>
-    </message>
-    <message>
         <source>Transpose</source>
         <translation type="unfinished">Транспозиція</translation>
     </message>
@@ -9791,16 +10086,8 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Поміняти місцями голоси 3 та 4</translation>
     </message>
     <message>
-        <source>Concert Pitch</source>
-        <translation>Концертний стрій</translation>
-    </message>
-    <message>
         <source>Repeat last command</source>
         <translation type="unfinished">Повторити останню команду</translation>
-    </message>
-    <message>
-        <source>Meta Data...</source>
-        <translation type="unfinished">Метадані...</translation>
     </message>
     <message>
         <source>Toggle System Break</source>
@@ -9815,20 +10102,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Змінтит елемент</translation>
     </message>
     <message>
-        <source>Reset Stretch</source>
-        <translation>Скинути розтягнення</translation>
-    </message>
-    <message>
         <source>Show Invisible</source>
         <translation type="unfinished">Показувати невидиме</translation>
     </message>
     <message>
         <source>Show Frames</source>
         <translation type="unfinished">Показувати рамки</translation>
-    </message>
-    <message>
-        <source>Enable Script Debugger</source>
-        <translation type="unfinished">Задіяти налагоджувач сценаріїв</translation>
     </message>
     <message>
         <source>Search</source>
@@ -9841,14 +10120,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Zoom Out</source>
         <translation>Зменшити</translation>
-    </message>
-    <message>
-        <source>Edit General Style...</source>
-        <translation>Змінити загальний стиль…</translation>
-    </message>
-    <message>
-        <source>Edit Text Style...</source>
-        <translation>Зміна стилів тексту…</translation>
     </message>
     <message>
         <source>Select all similar elements</source>
@@ -9955,44 +10226,8 @@ p, li { white-space: pre-wrap; }
         <translation>Показати діалог інструментів</translation>
     </message>
     <message>
-        <source>Show clefs palette</source>
-        <translation>Показати палітру ключів</translation>
-    </message>
-    <message>
-        <source>Clefs...</source>
-        <translation>Ключі…</translation>
-    </message>
-    <message>
-        <source>Key Signatures...</source>
-        <translation>Тональності…</translation>
-    </message>
-    <message>
-        <source>Show key signatures palette</source>
-        <translation>Показати палітру тональностей</translation>
-    </message>
-    <message>
-        <source>Show symbols palette</source>
-        <translation>Показати палітру символів</translation>
-    </message>
-    <message>
-        <source>Show time signatures palette</source>
-        <translation>Показати палітру тактових розмірів</translation>
-    </message>
-    <message>
-        <source>Time Signatures...</source>
-        <translation>Тактові розміри…</translation>
-    </message>
-    <message>
-        <source>Show dynamics palette</source>
-        <translation>Показати палітру динамічних позначень</translation>
-    </message>
-    <message>
         <source>Note input mode</source>
         <translation>Режим введення нот</translation>
-    </message>
-    <message>
-        <source>Pitch spell</source>
-        <translation>Виправлення висот (знаки альтерації)</translation>
     </message>
     <message>
         <source>Enter note A</source>
@@ -10231,10 +10466,6 @@ p, li { white-space: pre-wrap; }
         <translation>Позначити усе</translation>
     </message>
     <message>
-        <source>Edit Chord Style...</source>
-        <translation>Змінити стиль акорду…</translation>
-    </message>
-    <message>
         <source>Delete</source>
         <translation>Вилучити</translation>
     </message>
@@ -10249,10 +10480,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Delete element and duration</source>
         <translation>Вилучити елемент та тривалість</translation>
-    </message>
-    <message>
-        <source>Parts...</source>
-        <translation>Партії...</translation>
     </message>
     <message>
         <source>&amp;Open...</source>
@@ -10300,10 +10527,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Paste</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show keys signatures palette</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10739,10 +10962,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fingering palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Add system text</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11019,14 +11238,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Toggle styled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Styled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Add audio track</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11079,18 +11290,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Additional Media</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Export Score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Export Score...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save a copy of the score in various formats</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11119,23 +11318,11 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Page Settings...</source>
-        <translation type="unfinished">Параметри сторінки...</translation>
-    </message>
-    <message>
         <source>Album</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Album...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Layer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Layer...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -11159,15 +11346,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Reset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Show debugger</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Debugger</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -11179,7 +11358,219 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>inspector</source>
+        <source>Save Selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Selection...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save current selection as new score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Export...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Instruments...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Note Input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Respell pitches</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Respell Pitches</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add &amp;More Stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add &amp;Less Stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset &amp;Beam Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grace: 8nd after</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pan score while playing on/off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pan</source>
+        <translation type="unfinished">Пан</translation>
+    </message>
+    <message>
+        <source>&amp;Load Style...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save Style...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save style as default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Style As &amp;Default...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Concert Pitch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Meta &amp;Data...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>De&amp;bugger</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset &amp;Stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Unprintable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Page Margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Enable Script Debugger</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;General...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Text...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Chords...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Par&amp;ts...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manage parts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Additional &amp;Media...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Page Settings...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Album...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Layer...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inspector</source>
+        <translation type="unfinished">Інспектор</translation>
+    </message>
+    <message>
+        <source>Show OMR Panel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OmrPanel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show OMR PAnel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>metronome</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>toggle metronome</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Figured Bass</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Previous Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transpose Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transpose Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show master palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Master Palette...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert Measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggle View Mode</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11192,6 +11583,99 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Tremolo Bar</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>barlines</name>
+    <message>
+        <source>Barlines</source>
+        <translation type="unfinished">Тактові риски</translation>
+    </message>
+</context>
+<context>
+    <name>images_directory</name>
+    <message>
+        <source>Images</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>lines</name>
+    <message>
+        <source>Lines</source>
+        <translation type="unfinished">Штрихи</translation>
+    </message>
+    <message>
+        <source>Slur</source>
+        <translation type="unfinished">Ліга</translation>
+    </message>
+    <message>
+        <source>Crescendo</source>
+        <translation type="unfinished">Крещендо</translation>
+    </message>
+    <message>
+        <source>Diminuendo</source>
+        <translation type="unfinished">Димінуе́ндо</translation>
+    </message>
+    <message>
+        <source>Prima volta</source>
+        <translation type="unfinished">Пріма вольта</translation>
+    </message>
+    <message>
+        <source>Seconda volta</source>
+        <translation type="unfinished">Секонда вольта</translation>
+    </message>
+    <message>
+        <source>Terza volta</source>
+        <translation type="unfinished">Терца (третя) вольта</translation>
+    </message>
+    <message>
+        <source>Seconda volta 2</source>
+        <translation type="unfinished">Секонда вольта 2</translation>
+    </message>
+    <message>
+        <source>8va</source>
+        <translation type="unfinished">октовою вище</translation>
+    </message>
+    <message>
+        <source>15ma</source>
+        <translation type="unfinished">вище на дві октави</translation>
+    </message>
+    <message>
+        <source>8vb</source>
+        <translation type="unfinished">октавою нище</translation>
+    </message>
+    <message>
+        <source>15mb</source>
+        <translation type="unfinished">нище на дві октави</translation>
+    </message>
+    <message>
+        <source>Pedal</source>
+        <translation type="unfinished">Педаль</translation>
+    </message>
+    <message>
+        <source>Trill line</source>
+        <translation type="unfinished">Лінія трелі</translation>
+    </message>
+    <message>
+        <source>Upprall line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Downprall line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prallprall line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text line</source>
+        <translation type="unfinished">Текстовий рядок</translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <translation type="unfinished">Лінія</translation>
     </message>
 </context>
 <context>
@@ -11261,6 +11745,13 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>plugins_directory</name>
+    <message>
+        <source>Plugins</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>preferences</name>
     <message>
         <source>Never</source>
@@ -11289,6 +11780,34 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Every 2 months</source>
         <translation>кожні 2 місяці</translation>
+    </message>
+</context>
+<context>
+    <name>scores_directory</name>
+    <message>
+        <source>Scores</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>soundfonts_directory</name>
+    <message>
+        <source>Soundfonts</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>styles_directory</name>
+    <message>
+        <source>Styles</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>templates_directory</name>
+    <message>
+        <source>Templates</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

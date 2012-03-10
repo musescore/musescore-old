@@ -568,7 +568,7 @@ void Score::layoutStage3()
       {
       for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
             for (Segment* segment = firstSegment(); segment; segment = segment->next1()) {
-                  if ((segment->subtype() == SegChordRest) || (segment->subtype() == SegGrace)) {
+                  if (segment->subtype() & (SegChordRest | SegGrace)) {
                         layoutChords1(segment, staffIdx);
                         }
                   }

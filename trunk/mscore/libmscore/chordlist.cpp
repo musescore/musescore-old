@@ -537,12 +537,16 @@ qDebug("ChordList::read failed: <%s>\n", qPrintable(path));
 
 bool ChordList::write(const QString& name)
       {
-      QString ext(".xml");
       QFileInfo info(name);
 
-      if (info.suffix().isEmpty())
-            info.setFile(info.filePath() + ext);
+      if (info.suffix().isEmpty()) {
+            QString path = info.filePath();
+            path += QString(".xml");
+            info.setFile(path);
+            }
+
       QFile f(info.filePath());
+
       if (!f.open(QIODevice::WriteOnly)) {
             QString s = QT_TRANSLATE_NOOP("file", "Open Chord Description\n%1\nfailed: %2");
             MScore::lastError = s.arg(f.fileName()).arg(f.errorString());
@@ -561,6 +565,7 @@ bool ChordList::write(const QString& name)
             }
       return true;
       }
+
 
 
 

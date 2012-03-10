@@ -1256,14 +1256,7 @@ void MuseScore::printFile()
       QPrinter printerDev(QPrinter::HighResolution);
       const PageFormat* pf = cs->pageFormat();
 
-      const PaperSize* paperSize = pf->paperSize();
-      if (paperSize->qtsize >= QPrinter::Custom)
-            printerDev.setPaperSize(pf->size(), QPrinter::Inch);
-      else {
-            printerDev.setPaperSize(paperSize->qtsize);
-            bool landscape = pf->width() > pf->height();
-            printerDev.setOrientation(landscape ? QPrinter::Landscape : QPrinter::Portrait);
-            }
+      printerDev.setPaperSize(pf->size(), QPrinter::Inch);
 
       printerDev.setCreator("MuseScore Version: " VERSION);
       printerDev.setFullPage(true);
@@ -1479,14 +1472,7 @@ bool MuseScore::savePsPdf(const QString& saveName, QPrinter::OutputFormat format
       const PageFormat* pf = cs->pageFormat();
       QPrinter printerDev(QPrinter::HighResolution);
 
-      const PaperSize* paperSize = pf->paperSize();
-      if (paperSize->qtsize >= QPrinter::Custom)
-            printerDev.setPaperSize(pf->size(), QPrinter::Inch);
-      else {
-            printerDev.setPaperSize(paperSize->qtsize);
-            bool landscape = pf->width() > pf->height();
-            printerDev.setOrientation(landscape ? QPrinter::Landscape : QPrinter::Portrait);
-            }
+      printerDev.setPaperSize(pf->size(), QPrinter::Inch);
 
       printerDev.setCreator("MuseScore Version: " VERSION);
       printerDev.setFullPage(true);

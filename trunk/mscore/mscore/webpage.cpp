@@ -30,7 +30,7 @@
 #include "preferences.h"
 #include "libmscore/score.h"
 
-static const char* staticUrl = "http://cdn.musescore.com/connect.html";
+static const char* staticUrl = "http://connect.musescore.com";
 
 //---------------------------------------------------------
 //   MyWebPage
@@ -80,7 +80,7 @@ QObject* MyWebPage::createPlugin(
       /*QUiLoader loader;
       return loader.createWidget(classid, view());*/
       }
-      
+
 //---------------------------------------------------------
 //   userAgentForUrl
 //---------------------------------------------------------
@@ -219,11 +219,11 @@ QSize	MyWebView::sizeHint() const
 //   load
 //---------------------------------------------------------
 
-void	MyWebView::load(const QNetworkRequest & request, QNetworkAccessManager::Operation operation, const QByteArray & body) 
+void	MyWebView::load(const QNetworkRequest & request, QNetworkAccessManager::Operation operation, const QByteArray & body)
       {
-      QNetworkRequest new_req(request);  
-      new_req.setRawHeader("User-Agent",  QString("MuseScore %1").arg(VERSION).toAscii());  
-      new_req.setRawHeader("Accept-Language",  QString("%1;q=0.8,en-US;q=0.6,en;q=0.4").arg(mscore->getLocaleISOCode()).toAscii());   
+      QNetworkRequest new_req(request);
+      new_req.setRawHeader("User-Agent",  QString("MuseScore %1").arg(VERSION).toAscii());
+      new_req.setRawHeader("Accept-Language",  QString("%1;q=0.8,en-US;q=0.6,en;q=0.4").arg(mscore->getLocaleISOCode()).toAscii());
       QWebView::load( new_req, operation, body);
       }
 

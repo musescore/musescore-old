@@ -46,7 +46,7 @@
 //---------------------------------------------------------
 
 Property<ChordRest> ChordRest::propertyList[] = {
-      { P_SMALL, &ChordRest::pSmall, false },
+      { P_SMALL, &ChordRest::pSmall, 0 },
       };
 
 static const int PROPERTIES = sizeof(ChordRest::propertyList)/sizeof(*ChordRest::propertyList);

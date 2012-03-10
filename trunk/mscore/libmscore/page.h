@@ -23,7 +23,6 @@ class Text;
 class Measure;
 class Xml;
 class Score;
-class QPainter;
 class MeasureBase;
 
 //---------------------------------------------------------
@@ -31,11 +30,11 @@ class MeasureBase;
 //---------------------------------------------------------
 
 struct PaperSize {
-      QPrinter::PageSize qtsize;
+//      QPrinter::PaperSize qtsize;
       const char* name;
       qreal w, h;            // size in inch
-      PaperSize(QPrinter::PageSize s, const char* n, qreal wi, qreal hi)
-         : qtsize(s), name(n), w(wi), h(hi) {}
+      PaperSize(/*QPrinter::PaperSize s,*/ const char* n, qreal wi, qreal hi)
+         : /*qtsize(s),*/ name(n), w(wi), h(hi) {}
       };
 
 extern const PaperSize* getPaperSize(const QString&);
