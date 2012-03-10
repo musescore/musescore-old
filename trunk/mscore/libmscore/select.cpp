@@ -512,7 +512,7 @@ QList<Note*> Selection::noteList(int selTrack) const
 
 //---------------------------------------------------------
 //   checkStart
-//    return true if start range crosses tuplet
+//     return true if element is NOT a tuplet or is start of a tuplet
 //---------------------------------------------------------
 
 static bool checkStart(Element* e)
@@ -532,27 +532,6 @@ static bool checkStart(Element* e)
       }
 
 //---------------------------------------------------------
-//   checkEnd
-//    return true if end range crosses tuplet
-//---------------------------------------------------------
-
-static bool checkEnd(Element* e)
-      {
-      if (e == 0 || !e->isChordRest())
-            return false;
-      ChordRest* cr = static_cast<ChordRest*>(e);
-      if (!cr->tuplet())
-            return false;
-      Tuplet* tuplet = cr->tuplet();
-      while (tuplet) {
-            if (tuplet->elements().back() == e)
-                  return false;
-            tuplet = tuplet->tuplet();
-            }
-      return true;
-      }
-
-//---------------------------------------------------------
 //   canCopy
 //    return false if range selection intersects a tuplet
 //---------------------------------------------------------
@@ -565,7 +544,10 @@ bool Selection::canCopy() const
       for (int staffIdx = _staffStart; staffIdx != _staffEnd; ++staffIdx) {
             if (checkStart(_startSegment->element(staffIdx)))
                   return false;
-            if (_endSegment && checkEnd(_endSegment->element(staffIdx)))
+            // _endSegment is the next segment after the selection,
+            // it must also be at the start of a tuplet so that the
+            // selected tuplet is fully contained in the selection
+            if (_endSegment && checkStart(_endSegment->element(staffIdx)))
                   return false;
             }
       return true;

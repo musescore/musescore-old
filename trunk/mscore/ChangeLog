@@ -1,4 +1,5 @@
 10.3  (ws)
+      - #14648: applied patch from jorgk
       - fix import of 1.1 chord name position offsets
       (la)
       - fix DMG icon layout on Mac OSX 10.6 see http://openradar.appspot.com/7186342
