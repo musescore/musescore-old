@@ -480,7 +480,7 @@ void PageSettings::pageHeightChanged(double val)
       pageGroup->setCurrentIndex(0);      // custom
 
       PageFormat f(*preview->score()->pageFormat());
-      f.setSize(QSizeF(val, val2));
+      f.setSize(QSizeF(val2, val));
       preview->score()->setPageFormat(f);
 
       updatePreview(1);
