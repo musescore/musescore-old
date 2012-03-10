@@ -1,4 +1,6 @@
 10.3  (ws)
+      - fix #15155: Page Seggings dlg box: first page num and page height weird
+        behaviour (patch from Miwarre)
       - #14648: applied patch from jorgk
       - fix import of 1.1 chord name position offsets
       (la)
