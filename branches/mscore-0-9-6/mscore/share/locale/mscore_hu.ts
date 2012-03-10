@@ -1776,7 +1776,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Akkolade distance</source>
-        <translation>Kapcsolódó kották közti távolság</translation>
+        <translation>Kapcsolódó sorok közti távolság</translation>
     </message>
     <message>
         <source>System distance</source>

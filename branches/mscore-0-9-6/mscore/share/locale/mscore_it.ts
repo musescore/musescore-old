@@ -1772,7 +1772,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Staff distance</source>
-        <translation>Distanza pentagramma</translation>
+        <translation>Distanza tra pentagrammi</translation>
     </message>
     <message>
         <source>Akkolade distance</source>
@@ -1780,7 +1780,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>System distance</source>
-        <translation>Distanza accollatura</translation>
+        <translation>Distanza tra accollature</translation>
     </message>
     <message>
         <source>Lyrics upper margin</source>
@@ -3017,7 +3017,7 @@ fallito: </translation>
     </message>
     <message>
         <source>Brackets</source>
-        <translation>Accollature</translation>
+        <translation>Graffe accollature</translation>
     </message>
     <message>
         <source>Accidentals</source>
@@ -3569,7 +3569,7 @@ Dal menù "Aiuto" prova in alternativa a scegliere "Manuale online".</translatio
     </message>
     <message>
         <source>Brackets...</source>
-        <translation>Accollature...</translation>
+        <translation>Graffe accollature...</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments...</source>
@@ -3581,7 +3581,7 @@ Dal menù "Aiuto" prova in alternativa a scegliere "Manuale online".</translatio
     </message>
     <message>
         <source>MuseScore: Brackets</source>
-        <translation>MuseScore: Accollature</translation>
+        <translation>MuseScore: Graffe accollature</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer...</source>
@@ -3906,7 +3906,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Scaling</source>
-        <translation>Grandezza elementi partitura</translation>
+        <translation>Ampiezza spazi pentagramma</translation>
     </message>
     <message>
         <source>Space</source>
@@ -4644,7 +4644,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Scaling</source>
-        <translation>Grandezza elementi partitura</translation>
+        <translation>Ampiezza spazi pentagramma</translation>
     </message>
     <message>
         <source>Space</source>
@@ -8616,11 +8616,11 @@ p, li { white-space: pre-wrap; }&#13;
     <name>drumset</name>
     <message>
         <source>Acoustic Bass Drum</source>
-        <translation type="unfinished"/>
+        <translation>Grancassa (acustica)</translation>
     </message>
     <message>
         <source>Bass Drum</source>
-        <translation type="unfinished"/>
+        <translation>Grancassa</translation>
     </message>
     <message>
         <source>Side Stick</source>
@@ -8628,11 +8628,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Snare (Acoustic)</source>
-        <translation type="unfinished"/>
+        <translation>Rullante (acustico)</translation>
     </message>
     <message>
         <source>Snare (Electric)</source>
-        <translation type="unfinished"/>
+        <translation>Rullante (elettrico)</translation>
     </message>
     <message>
         <source>Tom 5</source>

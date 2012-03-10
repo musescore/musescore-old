@@ -5198,11 +5198,11 @@ Prøv å lagre en annen plass.</translation>
     </message>
     <message>
         <source>Internal error</source>
-        <translation type="unfinished"/>
+        <translation>Intern feil</translation>
     </message>
     <message>
         <source>Cannot load picture file %1</source>
-        <translation type="unfinished"/>
+        <translation>Kan ikke lese bildefilen %1</translation>
     </message>
 </context>
 <context>
@@ -5255,11 +5255,11 @@ Prøv å lagre en annen plass.</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the copy operation</source>
-        <translation type="unfinished"/>
+        <translation>Vennligst velg hele noteoppdelingen og prøv kopier igjen</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the cut operation</source>
-        <translation type="unfinished"/>
+        <translation>Vennligst velg hele noteoppdelingen og prøv klipp ut igjen</translation>
     </message>
 </context>
 <context>
