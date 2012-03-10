@@ -443,19 +443,24 @@ QString HDegree::text() const
       {
       if (_type == UNDEF)
             return QString();
-      QString degree;
+      const char* d;
       switch(_type) {
             case UNDEF: break;
-            case ADD:         degree += "add"; break;
-            case ALTER:       degree += "alt"; break;
-            case SUBTRACT:    degree += "sub"; break;
+            case ADD:         d= "add"; break;
+            case ALTER:       d= "alt"; break;
+            case SUBTRACT:    d= "sub"; break;
             }
+      QString degree(d);
       switch(_alter) {
             case -1:          degree += "b"; break;
             case 1:           degree += "#"; break;
             default:          break;
             }
-      return degree + QString("%1").arg(_value);
+/*      QString s = QString("%1").arg(_value);
+      QString ss; //  = degree + s;
+      return ss;
+      */
+      return QString();
       }
 
 //---------------------------------------------------------
@@ -533,17 +538,20 @@ void Harmony::layout()
       if (parent()) {
             Measure* m = measure();
             qreal yy = track() < 0 ? 0.0 : m->system()->staff(track() / VOICES)->y();
-            qreal xx = 0.0;  // (segment()->tick() < 0) ? 0.0 : m->tick2pos(segment()->tick());
-
-            setPos(ipos() + QPointF(xx, yy));
+            setPos(ipos() + QPointF(0.0, yy));
             }
-//      if (textList.isEmpty())
-//            render();
       QRectF bb;
       foreach(const TextSegment* ts, textList)
             bb |= ts->boundingRect().translated(ts->x, ts->y);
       setbbox(bb);
-      adjustReadPos();
+      if (!readPos().isNull()) {
+            // version 114 is measure based
+            // rebase to segment
+            if (score()->mscVersion() == 114)
+                  setReadPos(readPos() - segment()->pos());
+            setUserOff(readPos() - ipos());
+            setReadPos(QPointF());
+            }
       }
 
 //---------------------------------------------------------

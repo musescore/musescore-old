@@ -1,4 +1,6 @@
-10.3  (la)
+10.3  (ws)
+      - fix import of 1.1 chord name position offsets
+      (la)
       - fix DMG icon layout on Mac OSX 10.6 see http://openradar.appspot.com/7186342
 09.3  (mw)
       - fix #15191: Tablature doesn't like unisons

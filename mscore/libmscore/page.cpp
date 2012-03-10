@@ -35,38 +35,38 @@
 #define MM(x) ((x)/INCH)
 
 const PaperSize paperSizes[] = {
-      PaperSize(QPrinter::A4,      "A4",        MM(210),  MM(297)),
-      PaperSize(QPrinter::B5,      "B5",        MM(176),  MM(250)),
-      PaperSize(QPrinter::Letter,  "Letter",    8.5,      11),
-      PaperSize(QPrinter::Legal,   "Legal",     8.5,      14),
-      PaperSize(QPrinter::Executive,"Executive",7.5,      10),
-      PaperSize(QPrinter::A0,      "A0",        MM(841),  MM(1189)),
-      PaperSize(QPrinter::A1,      "A1",        MM(594),  MM(841)),
-      PaperSize(QPrinter::A2,      "A2",        MM(420),  MM(594)),
-      PaperSize(QPrinter::A3,      "A3",        MM(297),  MM(420)),
-      PaperSize(QPrinter::A5,      "A5",        MM(148),  MM(210)),
-      PaperSize(QPrinter::A6,      "A6",        MM(105),  MM(148)),
-      PaperSize(QPrinter::A7,      "A7",        MM(74),   MM(105)),
-      PaperSize(QPrinter::A8,      "A8",        MM(52),   MM(74)),
-      PaperSize(QPrinter::A9,      "A9",        MM(37),   MM(52)),
-      PaperSize(QPrinter::B0,      "B0",        MM(1000), MM(1414)),
-      PaperSize(QPrinter::B1,      "B1",        MM(707),  MM(1000)),
-      PaperSize(QPrinter::B10,     "B10",       MM(31),   MM(44)),
-      PaperSize(QPrinter::B2,      "B2",        MM(500),  MM(707)),
-      PaperSize(QPrinter::B3,      "B3",        MM(353),  MM(500)),
-      PaperSize(QPrinter::B4,      "B4",        MM(250),  MM(353)),
-      PaperSize(QPrinter::B5,      "B5",        MM(125),  MM(176)),
-      PaperSize(QPrinter::B6,      "B6",        MM(88),   MM(125)),
-      PaperSize(QPrinter::B7,      "B7",        MM(62),   MM(88)),
-      PaperSize(QPrinter::B8,      "B8",        MM(44),   MM(62)),
-      PaperSize(QPrinter::B9,      "B9",        MM(163),  MM(229)),
-      PaperSize(QPrinter::Comm10E, "Comm10E",   MM(105),  MM(241)),
-      PaperSize(QPrinter::DLE,     "DLE",       MM(110),  MM(220)),
-      PaperSize(QPrinter::Folio,   "Folio",     MM(210),  MM(330)),
-      PaperSize(QPrinter::Ledger,  "Ledger",    MM(432),  MM(279)),
-      PaperSize(QPrinter::Tabloid, "Tabloid",   MM(279),  MM(432)),
-      PaperSize(QPrinter::Custom,  "Custom",    MM(1),    MM(1)),
-      PaperSize(QPrinter::Custom,  0,    MM(1),    MM(1))   // mark end of list
+      PaperSize("A4",        MM(210),  MM(297)),
+      PaperSize("B5",        MM(176),  MM(250)),
+      PaperSize("Letter",    8.5,      11),
+      PaperSize("Legal",     8.5,      14),
+      PaperSize("Executive", 7.5,      10),
+      PaperSize("A0",        MM(841),  MM(1189)),
+      PaperSize("A1",        MM(594),  MM(841)),
+      PaperSize("A2",        MM(420),  MM(594)),
+      PaperSize("A3",        MM(297),  MM(420)),
+      PaperSize("A5",        MM(148),  MM(210)),
+      PaperSize("A6",        MM(105),  MM(148)),
+      PaperSize("A7",        MM(74),   MM(105)),
+      PaperSize("A8",        MM(52),   MM(74)),
+      PaperSize("A9",        MM(37),   MM(52)),
+      PaperSize("B0",        MM(1000), MM(1414)),
+      PaperSize("B1",        MM(707),  MM(1000)),
+      PaperSize("B10",       MM(31),   MM(44)),
+      PaperSize("B2",        MM(500),  MM(707)),
+      PaperSize("B3",        MM(353),  MM(500)),
+      PaperSize("B4",        MM(250),  MM(353)),
+      PaperSize("B5",        MM(125),  MM(176)),
+      PaperSize("B6",        MM(88),   MM(125)),
+      PaperSize("B7",        MM(62),   MM(88)),
+      PaperSize("B8",        MM(44),   MM(62)),
+      PaperSize("B9",        MM(163),  MM(229)),
+      PaperSize("Comm10E",   MM(105),  MM(241)),
+      PaperSize("DLE",       MM(110),  MM(220)),
+      PaperSize("Folio",     MM(210),  MM(330)),
+      PaperSize("Ledger",    MM(432),  MM(279)),
+      PaperSize("Tabloid",   MM(279),  MM(432)),
+      PaperSize("Custom",    MM(1),    MM(1)),
+      PaperSize(0,           MM(1),    MM(1))   // mark end of list
       };
 
 //---------------------------------------------------------
@@ -419,8 +419,6 @@ PageFormat::PageFormat()
 
 void PageFormat::setSize(const PaperSize* size)
       {
-      if (size->qtsize == QPrinter::Custom)
-            return;
       _size = QSizeF(size->w, size->h);
       }
 
