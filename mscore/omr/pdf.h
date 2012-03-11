@@ -21,7 +21,9 @@
 #ifndef __PDF_H__
 #define __PDF_H__
 
-typedef struct pdf_xref_s pdf_xref;
+// typedef struct pdf_xref_ pdf_document;
+
+typedef struct fz_document_s fz_document;
 
 //---------------------------------------------------------
 //   Pdf
@@ -29,7 +31,7 @@ typedef struct pdf_xref_s pdf_xref;
 
 class Pdf {
       static int references;
-      pdf_xref* xref;
+      fz_document* doc;
 
    public:
       Pdf();

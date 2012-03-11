@@ -826,7 +826,8 @@ void Voice::update_param(int _gen)
       float y;
       unsigned int count;
 
-      float gain = 4.0 / 32768.0f;
+      // float gain = 4.0 / 32768.0f;
+      float gain = 2.0 / 32768.0f;
       switch (_gen) {
             case GEN_PAN:
                   /* range checking is done in the fluid_pan function */

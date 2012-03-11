@@ -83,7 +83,7 @@ QT4_WRAP_CPP (mocs
       drumtools.h texteditor.h texttools.h edittools.h pianotools.h editpitch.h
       editstringdata.h editraster.h mediadialog.h chordeditor.h chordview.h album.h layer.h
       webpage.h inspector.h inspectorBase.h inspectorBeam.h masterpalette.h
-      inspectorGroupElement.h inspectorImage.h
+      inspectorGroupElement.h inspectorImage.h waveview.h
       ${OMR_MOCS}
       )
 
@@ -174,6 +174,7 @@ add_executable ( ${ExecutableName}
       midifile.cpp inspector.cpp dragelement.cpp svggenerator.cpp
       inspectorBase.cpp inspectorBeam.cpp masterpalette.cpp
       inspectorGroupElement.cpp dragdrop.cpp inspectorImage.cpp
+      waveview.cpp
       ${OMR_FILES}
       ${AUDIO}
       )
@@ -255,7 +256,7 @@ if (MINGW)
    endif (AEOLUS)
 
 	if (OMR)
-      target_link_libraries(mscore omr mupdf fitz openjpeg jbig2dec jpeg)
+      target_link_libraries(mscore omr fitz openjpeg jbig2dec jpeg)
       if (OCR)
             target_link_libraries(mscore tesseract_api)
       endif (OCR)
@@ -337,7 +338,7 @@ endif (USE_PORTAUDIO)
    endif (AEOLUS)
 
    if (OMR)
-      target_link_libraries(mscore omr mupdf fitz jbig2dec jpeg openjpeg fontconfig freetype)
+      target_link_libraries(mscore omr fitz jbig2dec jpeg openjpeg fontconfig freetype)
       if (OCR)
             target_link_libraries(mscore tesseract_api)
       endif (OCR)
