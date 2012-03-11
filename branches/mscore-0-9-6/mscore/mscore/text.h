@@ -234,6 +234,7 @@ class Text : public TextB {
 //---------------------------------------------------------
 
 class TextC : public TextB {
+      Q_DECLARE_TR_FUNCTIONS(TextC)
       TextBase*  _tb;
 
    public:
