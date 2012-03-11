@@ -3,7 +3,7 @@
 #  Linux Music Score Editor
 #  $Id:$
 #
-#  Copyright (C) 2002-2007 by Werner Schweer and others
+#  Copyright (C) 2002-2012 by Werner Schweer and others
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License version 2.
@@ -154,7 +154,7 @@ add_executable ( ${ExecutableName}
       screst.cpp scharmony.cpp slurproperties.cpp synthcontrol.cpp
       canonical.cpp drumroll.cpp pianoroll.cpp piano.cpp ruler.cpp pianoscene.cpp
       splitstaff.cpp scoretab.cpp keyedit.cpp harmonyedit.cpp updatechecker.cpp
-      importove.cpp ove.cpp interval.cpp sctimesig.cpp
+      importove.cpp ove.cpp interval.cpp sctimesig.cpp musicxmlsupport.cpp
       ${AUDIO}
       )
 

@@ -69,6 +69,7 @@
 #include "glissando.h"
 #include "breath.h"
 #include "al/tempo.h"
+#include "musicxmlsupport.h"
 
 //---------------------------------------------------------
 //   xmlSetPitch
@@ -168,7 +169,7 @@ static void moveTick(int& tick, int& maxtick, int& lastLen, int divisions, QDomE
             for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                   if (ee.tagName() == "duration") {
                         int val = calcTicks(ee.text(), divisions);
-                        printf("forward %d\n", val);
+                        // printf("forward %d\n", val);
                         tick += val;
                         if (tick > maxtick)
                               maxtick = tick;
@@ -186,7 +187,7 @@ static void moveTick(int& tick, int& maxtick, int& lastLen, int divisions, QDomE
             for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                   if (ee.tagName() == "duration") {
                         int val = calcTicks(ee.text(), divisions);
-                        printf("backup %d\n", val);
+                        // printf("backup %d\n", val);
                         tick -= val;
                         lastLen = val;    // ?
                         }
@@ -761,12 +762,10 @@ static bool determineMeasureLength(QDomElement e, QVector<int>& ml)
                                     bool chord = false;
                                     bool grace = false;
                                     for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                                          if (eee.tagName() == "chord") {
+                                          if (eee.tagName() == "chord")
                                                 chord = true;
-                                                }
-                                          else if (eee.tagName() == "grace") {
+                                          else if (eee.tagName() == "grace")
                                                 grace = true;
-                                                }
                                           }
                                     if (chord && !grace)
                                           // LVIFIX: use of lastLen for chord handling is abit of a hack
@@ -774,12 +773,10 @@ static bool determineMeasureLength(QDomElement e, QVector<int>& ml)
                                           tick -= lastLen;
                                     moveTick(tick, maxtick, lastLen, divisions, ee);
                                     }
-                              else if (ee.tagName() == "backup") {
+                              else if (ee.tagName() == "backup")
                                     moveTick(tick, maxtick, lastLen, divisions, ee);
-                                    }
-                              else if (ee.tagName() == "forward") {
+                              else if (ee.tagName() == "forward")
                                     moveTick(tick, maxtick, lastLen, divisions, ee);
-                                    }
                               }
                         else
                               result = false;
@@ -1272,10 +1269,13 @@ void MusicXml::xmlScorePart(QDomElement e, QString id, int& parts)
 //   VoiceDesc
 //---------------------------------------------------------
 
-VoiceDesc::VoiceDesc() : _staff(-1), _voice(-1)
+VoiceDesc::VoiceDesc() : _staff(-1), _voice(-1), _overlaps(false)
       {
-      for (int i = 0; i < MAX_STAVES; ++i)
-            _chordRests[i] = 0;
+      for (int i = 0; i < MAX_STAVES; ++i) {
+            _chordRests[i] =  0;
+            _staffAlloc[i] = -1;
+            _voices[i]     = -1;
+            }
       }
 
 void VoiceDesc::incrChordRests(int s)
@@ -1309,27 +1309,51 @@ QString VoiceDesc::toString() const
       QString res = "[";
       for (int i = 0; i < MAX_STAVES; ++i)
             res += QString(" %1").arg(_chordRests[i]);
-      res += QString(" ] staff %1 voice %2").arg(_staff + 1).arg(_voice + 1);
+      res += QString(" ] overlaps %1").arg(_overlaps);
+      if (_overlaps) {
+            res += " staffAlloc [";
+            for (int i = 0; i < MAX_STAVES; ++i)
+                  res += QString(" %1").arg(_staffAlloc[i]);
+            res += " ] voices [";
+            for (int i = 0; i < MAX_STAVES; ++i)
+                  res += QString(" %1").arg(_voices[i]);
+            res += " ]";
+            }
+      else
+            res += QString(" staff %1 voice %2").arg(_staff + 1).arg(_voice + 1);
       return res;
       }
 
 
 // allocate MuseScore staff to MusicXML voices
 // for each staff, allocate at most VOICES voices to the staff
+//
+// for regular (non-overlapping) voices:
+// 1) assign voice to a staff (allocateStaves)
+// 2) assign voice numbers (allocateVoices)
+// due to cross-staving, it is not a priori clear to which staff
+// a voice has to be assigned
 // allocate ordered by number of chordrests in the MusicXML voice
+//
+// for overlapping voices:
+// 1) assign voice to staves it is found in (allocateStaves)
+// 2) assign voice numbers (allocateVoices)
 
 static void allocateStaves(QMap<int, VoiceDesc>& voicelist)
       {
+      // initialize
       int voicesAllocated[MAX_STAVES]; // number of voices allocated on each staff
       for (int i = 0; i < MAX_STAVES; ++i)
             voicesAllocated[i] = 0;
-      // outer loop executed voicelist.size() times, as each inner loop handles exactly one item
+
+      // handle regular (non-overlapping) voices
+      // note: outer loop executed voicelist.size() times, as each inner loop handles exactly one item
       for (int i = 0; i < voicelist.size(); ++i) {
-            // find the voice containing the highest number of chords and rests that has not been handled yet
+            // find the regular voice containing the highest number of chords and rests that has not been handled yet
             int max = 0;
             int key = -1;
             for (QMap<int, VoiceDesc>::const_iterator j = voicelist.constBegin(); j != voicelist.constEnd(); ++j) {
-                  if (j.value().numberChordRests() > max && j.value().staff() == -1) {
+                  if (!j.value().overlaps() && j.value().numberChordRests() > max && j.value().staff() == -1) {
                         max = j.value().numberChordRests();
                         key = j.key();
                         }
@@ -1341,7 +1365,36 @@ static void allocateStaves(QMap<int, VoiceDesc>& voicelist)
                         voicesAllocated[prefSt]++;
                         }
                   else
-                        voicelist[key].setStaff(-2);  // mark as used but not allocated
+                        // out of voices: mark as used but not allocated
+                        voicelist[key].setStaff(-2);
+                  }
+            }
+
+      // handle overlapping voices
+      // for every staff allocate remaining voices (if space allows)
+      // the ones with the highest number of chords and rests get allocated first
+      for (int h = 0; h < MAX_STAVES; ++h) {
+            // note: middle loop executed voicelist.size() times, as each inner loop handles exactly one item
+            for (int i = 0; i < voicelist.size(); ++i) {
+                  // find the overlapping voice containing the highest number of chords and rests that has not been handled yet
+                  int max = 0;
+                  int key = -1;
+                  for (QMap<int, VoiceDesc>::const_iterator j = voicelist.constBegin(); j != voicelist.constEnd(); ++j) {
+                        if (j.value().overlaps() && j.value().numberChordRests(h) > max && j.value().staffAlloc(h) == -1) {
+                              max = j.value().numberChordRests(h);
+                              key = j.key();
+                              }
+                        }
+                  if (key >= 0) {
+                        int prefSt = h;
+                        if (voicesAllocated[prefSt] < VOICES) {
+                              voicelist[key].setStaffAlloc(prefSt, 1);
+                              voicesAllocated[prefSt]++;
+                              }
+                        else
+                              // out of voices: mark as used but not allocated
+                              voicelist[key].setStaffAlloc(prefSt, -2);
+                        }
                   }
             }
       }
@@ -1356,6 +1409,8 @@ static void allocateVoices(QMap<int, VoiceDesc>& voicelist)
       int nextVoice[MAX_STAVES]; // number of voices allocated on each staff
       for (int i = 0; i < MAX_STAVES; ++i)
             nextVoice[i] = 0;
+      // handle regular (non-overlapping) voices
+      // a voice is allocated on one specific staff
       for (QMap<int, VoiceDesc>::const_iterator i = voicelist.constBegin(); i != voicelist.constEnd(); ++i) {
             int staff = i.value().staff();
             int key   = i.key();
@@ -1364,6 +1419,32 @@ static void allocateVoices(QMap<int, VoiceDesc>& voicelist)
                   nextVoice[staff]++;
                   }
             }
+      // handle overlapping voices
+      // each voice may be in every staff
+      for (QMap<int, VoiceDesc>::const_iterator i = voicelist.constBegin(); i != voicelist.constEnd(); ++i) {
+            for (int j = 0; j < MAX_STAVES; ++j) {
+                  int staffAlloc = i.value().staffAlloc(j);
+                  int key   = i.key();
+                  if (staffAlloc >= 0) {
+                        voicelist[key].setVoice(j, nextVoice[j]);
+                        nextVoice[j]++;
+                        }
+                  }
+            }
+      }
+
+//  copy the overlap data from the overlap detector to the voice list
+
+static void copyOverlapData(VoiceOverlapDetector& vod, QMap<int, VoiceDesc>& voicelist)
+      {
+      // printf("copyOverlapData voices found:");
+      for (QMap<int, VoiceDesc>::const_iterator i = voicelist.constBegin(); i != voicelist.constEnd(); ++i) {
+            int key = i.key();
+            // printf(" %d", key + 1);
+            if (vod.stavesOverlap(key))
+                  voicelist[key].setOverlap(true);
+            }
+      // printf("\n");
       }
 
 //---------------------------------------------------------
@@ -1377,42 +1458,82 @@ static void allocateVoices(QMap<int, VoiceDesc>& voicelist)
 
 void MusicXml::initVoiceMapperAndMapVoices(QDomElement e)
       {
+      VoiceOverlapDetector vod;
+      int loc_divisions = -1;
+      int loc_tick      =  0;
+      int loc_maxtick   =  0;
+      int loc_lastLen   =  0;
       // init
       voicelist.clear();
       // count number of chordrests on each MusicXML staff
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "measure") {
+                  vod.newMeasure();
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        if (ee.tagName() == "note") {
-                              bool chord = false;
-                              int voice = -1;
-                              int staff = -1;
+                        if (ee.tagName() == "attributes") {
                               for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                                    QString tag(eee.tagName());
-                                    QString s(eee.text());
-                                    if (tag == "chord")
-                                          chord = true;
-                                    else if (tag == "voice")
-                                          voice = s.toInt() - 1;
-                                    else if (tag == "staff")
-                                          staff = s.toInt() - 1;
-                                    }
-                              // set correct defaults for missing elements
-                              if (voice == -1) voice = 0;
-                              if (staff == -1) staff = 0;
-                              // count the chords (only the first note in a chord is counted)
-                              if (!chord) {
-                                    if (0 <= staff && staff < MAX_STAVES) {
-                                          if (!voicelist.contains(voice)) {
-                                                VoiceDesc vs;
-                                                voicelist.insert(voice, vs);
-                                                }
-                                          voicelist[voice].incrChordRests(staff);
+                                    if (eee.tagName() == "divisions") {
+                                          bool ok;
+                                          loc_divisions = stringToInt(eee.text(), &ok);
+                                          if (!ok || loc_divisions <= 0)
+                                                printf("MusicXml-Import: bad divisions value: <%s>\n",
+                                                       qPrintable(eee.text()));
+                                          // debug
+                                          printf("measurelength loc_divisions %d\n", loc_divisions);
                                           }
                                     }
                               }
+                        // following tags can only be handled if duration is valid
+                        if (loc_divisions > 0) {
+                              if (ee.tagName() == "note") {
+                                    bool chord = false;
+                                    bool grace = false;
+                                    int voice = -1;
+                                    int staff = -1;
+                                    for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                                          QString tag(eee.tagName());
+                                          QString s(eee.text());
+                                          if (tag == "chord")
+                                                chord = true;
+                                          if (tag == "grace")
+                                                grace = true;
+                                          else if (tag == "voice")
+                                                voice = s.toInt() - 1;
+                                          else if (tag == "staff")
+                                                staff = s.toInt() - 1;
+                                          }
+                                    // set correct defaults for missing elements
+                                    if (voice == -1) voice = 0;
+                                    if (staff == -1) staff = 0;
+                                    if (!chord) {
+                                          // count the chords (only the first note in a chord is counted)
+                                          if (0 <= staff && staff < MAX_STAVES) {
+                                                if (!voicelist.contains(voice)) {
+                                                      VoiceDesc vs;
+                                                      voicelist.insert(voice, vs);
+                                                      }
+                                                voicelist[voice].incrChordRests(staff);
+                                                }
+                                          // determine note length for voice oberlap detection
+                                          if (!grace) {
+                                                int startTick = loc_tick; // start tick for the last note
+                                                moveTick(loc_tick, loc_maxtick, loc_lastLen, loc_divisions, ee);
+                                                // printf(" endtick %d\n", tick);
+                                                vod.addNote(startTick, loc_tick, voice, staff);
+                                                }
+                                          }
+                                    }
+                              else if (ee.tagName() == "backup")
+                                    moveTick(loc_tick, loc_maxtick, loc_lastLen, loc_divisions, ee);
+                              else if (ee.tagName() == "forward")
+                                    moveTick(loc_tick, loc_maxtick, loc_lastLen, loc_divisions, ee);
+                              }
                         }
-                  }
+                  // debug vod
+                  // vod.dump();
+                  // copy overlap data from vod to voicelist
+                  copyOverlapData(vod, voicelist);
+                  } // e.tagName() == "measure"
             }
 
       // allocate MuseScore staff to MusicXML voices
@@ -1423,7 +1544,7 @@ void MusicXml::initVoiceMapperAndMapVoices(QDomElement e)
       // debug: print results
       printf("voiceMapperStats: new staff\n");
       for (QMap<int, VoiceDesc>::const_iterator i = voicelist.constBegin(); i != voicelist.constEnd(); ++i) {
-            printf("voiceMapperStats: voice %d staff data %s \n",
+            printf("voiceMapperStats: voice %d staff count %s \n",
                    i.key() + 1, qPrintable(i.value().toString()));
             }
       }
@@ -1436,8 +1557,6 @@ static void fillGap(Measure* measure, int track, int tstart, int tend)
       {
       int ctick = tstart;
       int restLen = tend - tstart;
-      printf("\nfillGIFV     fillGap(measure %p track %d tstart %d tend %d) restLen %d len",
-             measure, track, tstart, tend, restLen);
       // note: as AL::division (#ticks in a quarter note) equals 480
       // AL::division / 64 (#ticks in a 256th note) uequals 7.5 but is rounded down to 7
       while (restLen > AL::division / 64) {
@@ -1453,11 +1572,9 @@ static void fillGap(Measure* measure, int track, int tstart, int tend)
             Segment* s = measure->getSegment(rest);
             s->add(rest);
             len = rest->tickLen();
-            printf(" %d", len);
             ctick   += len;
             restLen -= len;
             }
-      printf("\n");
       }
 
 //---------------------------------------------------------
@@ -1470,39 +1587,25 @@ static void fillGapsInFirstVoices(Measure* measure, Part* part)
       int measLen      = measure->tickLen();
       int nextMeasTick = measTick + measLen;
       int staffIdx = part->score()->staffIdx(part);
-      printf("fillGIFV measure %p part %p idx %d nstaves %d tick %d - %d (len %d)\n",
-             measure, part, staffIdx, part->nstaves(),
-             measTick, nextMeasTick, measLen);
       for (int st = 0; st < part->nstaves(); ++st) {
             int track = (staffIdx + st) * VOICES;
             int endOfLastCR = measTick;
             for (Segment* s = measure->first(); s; s = s->next()) {
-                  printf("fillGIFV   segment %p tp %s", s, s->subTypeName());
                   Element* el = s->element(track);
                   if (el) {
-                        printf(" el[%d] %p", track, el);
                         if (s->isChordRest()) {
                               ChordRest* cr  = static_cast<ChordRest*>(el);
                               int crTick     = cr->tick();
                               int crLen      = cr->tickLen();
                               int nextCrTick = crTick + crLen;
-                              printf(" chord/rest tick %d - %d (len %d)",
-                                     crTick, nextCrTick, crLen);
-                              if (crTick > endOfLastCR) {
-                                    printf(" GAP: track %d tick %d - %d",
-                                           track, endOfLastCR, crTick);
+                              if (crTick > endOfLastCR)
                                     fillGap(measure, track, endOfLastCR, crTick);
-                                    }
                               endOfLastCR = nextCrTick;
                               }
                         }
-                  printf("\n");
                   }
-            if (nextMeasTick > endOfLastCR) {
-                  printf("fillGIFV   measure end GAP: track %d tick %d - %d\n",
-                         track, endOfLastCR, nextMeasTick);
+            if (nextMeasTick > endOfLastCR)
                   fillGap(measure, track, endOfLastCR, nextMeasTick);
-                  }
             }
       }
 
@@ -1568,7 +1671,7 @@ void MusicXml::xmlPart(QDomElement e, QString id)
 
 Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measureLen)
       {
-      printf("xmlMeasure %d begin\n", number);
+      // printf("xmlMeasure %d begin\n", number);
       int staves = score->nstaves();
       int staff = score->staffIdx(part);
 
@@ -1624,7 +1727,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
             else if (e.tagName() == "note") {
                   xmlNote(measure, staff, e);
                   moveTick(tick, maxtick, lastLen, divisions, e);
-                  printf(" after inserting note tick=%d\n", tick);
+                  // printf(" after inserting note tick=%d\n", tick);
                   }
             else if (e.tagName() == "backup") {
                   moveTick(tick, maxtick, lastLen, divisions, e);
@@ -1813,8 +1916,8 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
 
             AL::SigEvent se = sigmap->timesig(mtick);
             Fraction nominal = se.getNominal();
-            printf("measure %d actual len %d at %d -> nominal %d: %s\n",
-                   number+1, measureLen, mtick, sigmap->ticksMeasure(tick), qPrintable(nominal.print()));
+            // printf("measure %d actual len %d at %d -> nominal %d: %s\n",
+            //        number+1, measureLen, mtick, sigmap->ticksMeasure(tick), qPrintable(nominal.print()));
 
             // determine actual duration as fraction
             Fraction actual;
@@ -1832,7 +1935,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                   }
 
             // set time signature
-            printf("Add Sig %d  len %d:  %s\n", mtick, measureLen, qPrintable(actual.print()));
+            // printf("Add Sig %d  len %d:  %s\n", mtick, measureLen, qPrintable(actual.print()));
             score->sigmap()->add(mtick, actual, nominal);
             }
 
@@ -1858,7 +1961,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                   }
             }
 
-      printf("xmlMeasure %d end maxtick=%d\n", number, maxtick);
+      // printf("xmlMeasure %d end maxtick=%d\n", number, maxtick);
       return measure;
       }
 
@@ -3064,23 +3167,16 @@ bool isTupletFilled(Tuplet* t, Duration normalType)
       foreach (DurationElement* de, t->elements()) {
             if (de->type() == CHORD || de->type() == REST) {
                   ChordRest* cr = static_cast<ChordRest*>(de);
-                  if (elemCount == 0) {
+                  if (elemCount == 0)
                         // first note: init variables
                         smallestTypeAndCount(cr, tupletType, tupletCount);
-                        printf("isTupletFilled(%p) cr %p type %d count %d\n",
-                               t, de, tupletType, tupletCount);
-                        }
                   else {
                         int noteType = 0;
                         int noteCount = 0;
                         smallestTypeAndCount(cr, noteType, noteCount);
-                        printf("isTupletFilled(%p) cr %p type %d count %d",
-                               t, de, noteType, noteCount);
                         // match the types
                         matchTypeAndCount(tupletType, tupletCount, noteType, noteCount);
                         tupletCount += noteCount;
-                        printf(" total type %d count %d\n",
-                               tupletType, tupletCount);
                         }
                   }
             elemCount++;
@@ -3092,19 +3188,12 @@ bool isTupletFilled(Tuplet* t, Duration normalType)
             int matchedNormalCount = t->ratio().numerator();
             // match the types
             matchTypeAndCount(tupletType, tupletCount, matchedNormalType, matchedNormalCount);
-            printf("isTupletFilledWithNormalType(%p, %d) matched type/count %d/%d tuplet type/count %d/%d done %d\n",
-                   t, normalType.type(), matchedNormalType, matchedNormalCount,
-                   tupletType, tupletCount, (tupletCount >= matchedNormalCount));
             // ... result scenario (1)
             return tupletCount >= matchedNormalCount;
             }
-      else {
-            printf("isTupletFilled(%p) %d/%d tupletCount %d done %d\n",
-                   t, t->ratio().numerator(), t->ratio().denominator(),
-                   tupletCount, (tupletCount >= t->ratio().numerator()));
+      else
             // ... result scenario (2)
             return tupletCount >= t->ratio().numerator();
-            }
       }
 
 //---------------------------------------------------------
@@ -3172,14 +3261,12 @@ void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, int ticks, QDomElement e)
       // Detect this by comparing the actual duration with the expected duration
       // based on note type. If actual is 2/3 of expected, the rest is part
       // of a tuplet.
-      printf("xmlTuplet(tuplet %p cr %p len %d ticks %d) rest %d\n", tuplet, cr, cr->tickLen(), ticks, rest);
       if (rest && actualNotes == 1 && normalNotes == 1 && cr->tickLen() != ticks) {
-            printf("xmlTuplet --> found one !\n");
+            printf("xmlTuplet --> found tuplets w/o <tuplet> or <time-modification> !\n");
             if (2 * cr->tickLen() == 3 * ticks) {
                   actualNotes = 3;
                   normalNotes = 2;
                   }
-            printf("xmlTuplet --> actualNotes %d normalNotes %d\n", actualNotes, normalNotes);
             }
 
       // check for obvious errors
@@ -3201,7 +3288,6 @@ void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, int ticks, QDomElement e)
             if (tupletType == "start"
                 || (!tuplet && (actualNotes != 1 || normalNotes != 1))) {
                   tuplet = new Tuplet(cr->score());
-                  printf("tuplet start new tuplet %p\n", tuplet);
                   tuplet->setTrack(cr->track());
                   tuplet->setRatio(Fraction(actualNotes, normalNotes));
                   tuplet->setTick(cr->tick());
@@ -3226,7 +3312,6 @@ void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, int ticks, QDomElement e)
       // Must also check for actual/normal notes to prevent
       // adding one chord too much if tuplet stop is missing.
       if (tuplet && !(actualNotes == 1 && normalNotes == 1)) {
-            printf("tuplet add cr %p to tuplet %p\n", cr, tuplet);
             cr->setTuplet(tuplet);
             tuplet->add(cr);
             }
@@ -3241,7 +3326,6 @@ void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, int ticks, QDomElement e)
             if (tupletType == "stop"
                 || isTupletFilled(tuplet, normalType)
                 || (actualNotes == 1 && normalNotes == 1)) {
-                  printf("stop tuplet %p last chordrest %p\n", tuplet, cr);
                   int totalDuration = 0;
                   foreach (DurationElement* de, tuplet->elements()) {
                         if (de->type() == CHORD || de->type() == REST) {
@@ -3255,7 +3339,6 @@ void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, int ticks, QDomElement e)
                         Duration d2;
                         d2.setVal(totalDuration/normalNotes);
                         tuplet->setBaseLen(d2.fraction());
-                        printf("tuplet stop, duration OK, tuplet 0\n");
                         tuplet = 0;
                         }
                   else {
@@ -3821,7 +3904,7 @@ void MusicXml::xmlNotations(Note* note, ChordRest* cr, int trk, int ticks, QDomE
 void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       {
       int ticks = 0;
-      printf("xmlNote start tick=%d (%d div) divisions=%d\n", tick, tick * divisions / AL::division, divisions);
+      // printf("xmlNote start tick=%d (%d div) divisions=%d\n", tick, tick * divisions / AL::division, divisions);
       QDomNode pn = e; // TODO remove pn
       QDomElement org_e = e; // save e for later
       QDomElement domElemNotations;
@@ -3880,9 +3963,23 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 
       // Musicxml voices are unique within a part, but not across parts.
 
-      int s = voicelist.value(voice).staff();
-      int v = voicelist.value(voice).voice();
-      // printf("voice mapper before: relStaff=%d voice=%d s=%d v=%d\n", relStaff, voice, s, v);
+      // printf("voice mapper before: relStaff=%d voice=%d staff=%d\n", relStaff, voice, staff);
+      int s; // staff mapped by voice mapper
+      int v; // voice mapped by voice mapper
+      if (voicelist.value(voice).overlaps()) {
+            // for overlapping voices, the staff does not change
+            // and the voice is mapped and staff-dependent
+            s = relStaff;
+            v = voicelist.value(voice).voice(s);
+            }
+      else {
+            // for non-overlapping voices, both staff and voice are
+            // set by the voice mapper
+            s = voicelist.value(voice).staff();
+            v = voicelist.value(voice).voice();
+            }
+
+      // printf("voice mapper midway: relStaff=%d voice=%d s=%d v=%d\n", relStaff, voice, s, v);
       if (s < 0 || v < 0) {
             printf("ImportMusicXml: too many voices (staff %d, relStaff %d, voice %d at line %d col %d)\n",
                    staff + 1, relStaff, voice + 1, e.lineNumber(), e.columnNumber());
@@ -4063,7 +4160,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       //        rest ? "Rest" : "Note", tick, voice, duration, beats, beatType,
       //        divisions, 0 /* pitch */, ticks);
 
-      printf("step/alter/oct %s/%d/%d\n", qPrintable(step), alter, octave);
+      // printf("step/alter/oct %s/%d/%d\n", qPrintable(step), alter, octave);
 
       ChordRest* cr = 0;
       Note* note = 0;

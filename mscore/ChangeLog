@@ -1,3 +1,6 @@
+11.mar (lv)
+      - fix #15325: [MusicXML import] [1.2] Notes are interpreted as rests, wrong lengths, strange results
+      - disable several debug printf in importxml.cpp
 10.mar (la)
       - fix DMG icon layout on Mac OSX 10.6 see http://openradar.appspot.com/7186342
       - Ability to nudge lyrics with left and right arrows
