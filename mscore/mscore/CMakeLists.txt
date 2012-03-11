@@ -174,7 +174,7 @@ add_executable ( ${ExecutableName}
       midifile.cpp inspector.cpp dragelement.cpp svggenerator.cpp
       inspectorBase.cpp inspectorBeam.cpp masterpalette.cpp
       inspectorGroupElement.cpp dragdrop.cpp inspectorImage.cpp
-      waveview.cpp
+      waveview.cpp musicxmlsupport.cpp
       ${OMR_FILES}
       ${AUDIO}
       )
