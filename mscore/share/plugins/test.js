@@ -47,6 +47,8 @@ function init()
 
 function run()
       {
+      if(typeof curScore === 'undefined')
+            return;
       print("version:        ", mscoreVersion);
       print("major version:  ", mscoreMajorVersion);
       print("minor version:  ", mscoreMinorVersion);

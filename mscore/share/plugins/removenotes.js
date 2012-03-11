@@ -42,6 +42,8 @@ var form;
 
 function run()
       {
+      if (typeof curScore === 'undefined')
+            return;
       var loader = new QUiLoader(null);
       var file   = new QFile(pluginPath + "/removenotes.ui");
       file.open(QIODevice.OpenMode(QIODevice.ReadOnly, QIODevice.Text));
