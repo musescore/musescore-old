@@ -33,7 +33,7 @@
         </score-instrument>
       <midi-instrument id="P2-I3">
         <midi-channel>2</midi-channel>
-        <midi-program>0</midi-program>
+        <midi-program>53</midi-program>
         <volume>78.7402</volume>
         <pan>0</pan>
         </midi-instrument>
