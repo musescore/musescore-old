@@ -1,21 +1,13 @@
 //=============================================================================
-//  MusE Score
-//  Linux Music Score Editor
-//  $Id:$
+//  MuseScore
+//  Music Composition & Notation
 //
-//  Copyright (C) 2009 Werner Schweer and others
+//  Copyright (C) 2009-2011 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License version 2.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with this program; if not, write to the Free Software
-//  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+//  it under the terms of the GNU General Public License version 2
+//  as published by the Free Software Foundation and appearing in
+//  the file LICENCE.GPL
 //=============================================================================
 
 #include "config.h"
@@ -38,6 +30,7 @@
 #include "seq.h"
 #include "preferences.h"
 #include "seq.h"
+#include "waveview.h"
 
 //---------------------------------------------------------
 //   PianorollEditor
@@ -48,13 +41,11 @@ PianorollEditor::PianorollEditor(QWidget* parent)
       {
       setWindowTitle(QString("MuseScore"));
 
+      waveView = 0;
       _score = 0;
       staff  = 0;
 
       QWidget* mainWidget = new QWidget;
-      QGridLayout* layout = new QGridLayout;
-      mainWidget->setLayout(layout);
-      layout->setSpacing(0);
 
       QToolBar* tb = addToolBar(tr("toolbar1"));
       tb->addAction(getAction("undo"));
@@ -74,10 +65,15 @@ PianorollEditor::PianorollEditor(QWidget* parent)
       tb->addAction(getAction("rewind"));
       tb->addAction(getAction("play"));
       tb->addSeparator();
+      showWave = new QAction(tr("Wave"), tb);
+      showWave->setToolTip(tr("show wave display"));
+      showWave->setCheckable(true);
+      showWave->setChecked(false);
+      connect(showWave, SIGNAL(toggled(bool)), SLOT(showWaveView(bool)));
+      tb->addAction(showWave);
 
       //-------------
       tb = addToolBar(tr("toolbar2"));
-      layout->addWidget(tb, 1, 0, 1, 2);
       VoiceSelector* vs = new VoiceSelector;
       tb->addWidget(vs);
 
@@ -106,42 +102,62 @@ PianorollEditor::PianorollEditor(QWidget* parent)
       pitch->setReadOnly(true);
       tb->addWidget(pitch);
 
-      double xmag = .1;
-      gv  = new PianoView;
-      gv->scale(xmag, 1.0);
-      layout->addWidget(gv, 3, 1);
-
+      //-------------
+      qreal xmag = .1;
       ruler = new Ruler;
       ruler->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
       ruler->setFixedHeight(rulerHeight);
       ruler->setMag(xmag, 1.0);
 
-      layout->addWidget(ruler, 2, 1);
-
       Piano* piano = new Piano;
       piano->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
       piano->setFixedWidth(pianoWidth);
-      layout->addWidget(piano, 3, 0);
+
+      gv  = new PianoView;
+      gv->scale(xmag, 1.0);
+      gv->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+      hsb = new QScrollBar(Qt::Horizontal);
+      connect(gv->horizontalScrollBar(), SIGNAL(rangeChanged(int,int)),
+         SLOT(rangeChanged(int,int)));
+
+      // layout
+      QHBoxLayout* hbox = new QHBoxLayout;
+      hbox->addWidget(piano);
+      hbox->addWidget(gv);
+
+      split = new QSplitter;
+      QWidget* split1 = new QWidget;
+      split1->setLayout(hbox);
+      split->addWidget(split1);
+
+      QGridLayout* layout = new QGridLayout;
+      mainWidget->setLayout(layout);
+      layout->setColumnMinimumWidth(0, pianoWidth);
+      layout->setSpacing(0);
+      layout->addWidget(tb,    1, 0, 1, 2);
+      layout->addWidget(ruler, 1, 1);
+      layout->addWidget(split, 2, 1, 0, 2);
+      layout->addWidget(hsb,   3, 1);
 
       setCentralWidget(mainWidget);
 
       connect(gv->verticalScrollBar(), SIGNAL(valueChanged(int)), piano, SLOT(setYpos(int)));
-      connect(gv->horizontalScrollBar(), SIGNAL(valueChanged(int)), ruler, SLOT(setXpos(int)));
-      connect(gv,          SIGNAL(xposChanged(int)),           ruler,       SLOT(setXpos(int)));
-      connect(gv,          SIGNAL(magChanged(double,double)),  ruler,       SLOT(setMag(double,double)));
-      connect(gv,          SIGNAL(magChanged(double,double)),  piano,       SLOT(setMag(double,double)));
-      connect(gv,          SIGNAL(pitchChanged(int)),          pl,          SLOT(setPitch(int)));
-      connect(gv,          SIGNAL(pitchChanged(int)),          piano,       SLOT(setPitch(int)));
-      connect(piano,       SIGNAL(pitchChanged(int)),          pl,          SLOT(setPitch(int)));
-      connect(gv,          SIGNAL(posChanged(const Pos&)), pos,         SLOT(setValue(const Pos&)));
-      connect(gv,          SIGNAL(posChanged(const Pos&)), ruler,       SLOT(setPos(const Pos&)));
-      connect(ruler,       SIGNAL(posChanged(const Pos&)), pos,         SLOT(setValue(const Pos&)));
-      connect(ruler,       SIGNAL(locatorMoved(int)),                       SLOT(moveLocator(int)));
-      connect(veloType,    SIGNAL(activated(int)),                          SLOT(veloTypeChanged(int)));
-      connect(velocity,    SIGNAL(valueChanged(int)),                       SLOT(velocityChanged(int)));
-      connect(gv->scene(), SIGNAL(selectionChanged()),                      SLOT(selectionChanged()));
-      connect(piano,       SIGNAL(keyPressed(int)),                         SLOT(keyPressed(int)));
-      connect(piano,       SIGNAL(keyReleased(int)),                        SLOT(keyReleased(int)));
+      connect(hsb,         SIGNAL(valueChanged(int)), SLOT(setXpos(int)));
+      connect(gv,          SIGNAL(magChanged(double,double)),  ruler, SLOT(setMag(double,double)));
+      connect(gv,          SIGNAL(magChanged(double,double)),  piano, SLOT(setMag(double,double)));
+      connect(gv,          SIGNAL(pitchChanged(int)),          pl,    SLOT(setPitch(int)));
+      connect(gv,          SIGNAL(pitchChanged(int)),          piano, SLOT(setPitch(int)));
+      connect(piano,       SIGNAL(pitchChanged(int)),          pl,    SLOT(setPitch(int)));
+      connect(gv,          SIGNAL(posChanged(const Pos&)), pos,   SLOT(setValue(const Pos&)));
+      connect(gv,          SIGNAL(posChanged(const Pos&)), ruler, SLOT(setPos(const Pos&)));
+      connect(ruler,       SIGNAL(posChanged(const Pos&)), pos,   SLOT(setValue(const Pos&)));
+      connect(ruler,       SIGNAL(locatorMoved(int)),  SLOT(moveLocator(int)));
+      connect(veloType,    SIGNAL(activated(int)),     SLOT(veloTypeChanged(int)));
+      connect(velocity,    SIGNAL(valueChanged(int)),  SLOT(velocityChanged(int)));
+      connect(gv->scene(), SIGNAL(selectionChanged()), SLOT(selectionChanged()));
+      connect(piano,       SIGNAL(keyPressed(int)),    SLOT(keyPressed(int)));
+      connect(piano,       SIGNAL(keyReleased(int)),   SLOT(keyReleased(int)));
       resize(800, 400);
 
       QActionGroup* ag = new QActionGroup(this);
@@ -151,6 +167,24 @@ PianorollEditor::PianorollEditor(QWidget* parent)
       ag->addAction(a);
       addActions(ag->actions());
       connect(ag, SIGNAL(triggered(QAction*)), SLOT(cmd(QAction*)));
+      }
+
+//---------------------------------------------------------
+//   setXpos
+//---------------------------------------------------------
+
+void PianorollEditor::setXpos(int x)
+      {
+      gv->horizontalScrollBar()->setValue(x);
+      }
+
+//---------------------------------------------------------
+//   rangeChanged
+//---------------------------------------------------------
+
+void PianorollEditor::rangeChanged(int min, int max)
+      {
+      hsb->setRange(min, max);
       }
 
 //---------------------------------------------------------
@@ -185,6 +219,7 @@ void PianorollEditor::setStaff(Staff* st)
       ruler->setScore(_score, locator);
       pos->setContext(tl, sl);
       updateSelection();
+      showWave->setEnabled(_score->audio() != 0);
       }
 
 //---------------------------------------------------------
@@ -562,4 +597,23 @@ void PianorollEditor::updateAll()
       // printf("PianorollEditor::updateAll()\n");
       }
 
+//---------------------------------------------------------
+//   showWavView
+//---------------------------------------------------------
+
+void PianorollEditor::showWaveView(bool val)
+      {
+      if (val) {
+            if (waveView == 0) {
+                  waveView = new WaveView;
+                  waveView->setAudio(_score->audio());
+                  split->addWidget(waveView);
+                  }
+            waveView->setVisible(true);
+            }
+      else {
+            if (waveView)
+                  waveView->setVisible(false);
+            }
+      }
 

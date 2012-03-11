@@ -1,3 +1,5 @@
+11.3 (ws)
+      - update OMR to latest mupdf
 10.3  (ws)
       - fix #15155: Page Seggings dlg box: first page num and page height weird
         behaviour (patch from Miwarre)

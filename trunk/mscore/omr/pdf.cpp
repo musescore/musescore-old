@@ -26,7 +26,7 @@ extern "C" {
 
 int Pdf::references;
 static fz_context* ctx;
-static fz_glyph_cache* cache;
+// static fz_glyph_cache* cache;
 
 //---------------------------------------------------------
 //   numPages
@@ -34,7 +34,7 @@ static fz_glyph_cache* cache;
 
 int Pdf::numPages() const
       {
-      return pdf_count_pages(xref);
+      return fz_count_pages(doc);
       }
 
 //---------------------------------------------------------
@@ -44,11 +44,12 @@ int Pdf::numPages() const
 Pdf::Pdf()
       {
       if (references == 0) {
-            ctx = fz_new_context(&fz_alloc_default, 256 << 20);  // 256MB cache
-            cache = fz_new_glyph_cache(ctx);
+            // ctx = fz_new_context(&fz_alloc_default, 256 << 20);  // 256MB cache
+            ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);  // 256MB cache
+//            cache = fz_new_glyph_cache(ctx);
             }
       ++references;
-      xref = 0;
+      doc = 0;
       }
 
 //---------------------------------------------------------
@@ -59,12 +60,13 @@ bool Pdf::open(const QString& path)
       {
       char* name = path.toAscii().data();
       fz_try(ctx) {
-            xref = pdf_open_xref(ctx, name, 0);
-            pdf_load_page_tree(xref);
+            doc = fz_open_document(ctx, name);
+            // pdf_load_page_tree(xref);
             }
       fz_catch(ctx) {
-            pdf_free_xref(xref);
-            xref = 0;
+            fz_close_document(doc);
+            doc = 0;
+            return false;
             }
       return true;
       }
@@ -75,11 +77,13 @@ bool Pdf::open(const QString& path)
 
 Pdf::~Pdf()
       {
-      pdf_free_xref(xref);
+      if (doc)
+            fz_close_document(doc);
+      doc = 0;
       --references;
       if (references == 0) {
-            fz_free_glyph_cache(ctx, cache);
-            cache = 0;
+//            fz_free_glyph_cache(ctx, cache);
+//            cache = 0;
             fz_free_context(ctx);
             ctx = 0;
             }
@@ -91,7 +95,7 @@ Pdf::~Pdf()
 
 QImage Pdf::page(int i)
       {
-      pdf_page* page = pdf_load_page(xref, i);
+      fz_page* page = fz_load_page(doc, i);
       if (page == 0) {
             printf("cannot load page %d\n", i);
             return QImage();
@@ -99,17 +103,16 @@ QImage Pdf::page(int i)
       static const float resolution = 300.0;
       const float zoom = resolution / 72.0;
 
-      fz_matrix ctm  = fz_translate(0, -page->mediabox.y1);
-      ctm            = fz_concat(ctm, fz_scale(zoom, -zoom));
-      ctm            = fz_concat(ctm, fz_rotate(page->rotate));
-      fz_bbox bbox   = fz_round_rect(fz_transform_rect(ctm, page->mediabox));
+      fz_rect bounds = fz_bound_page(doc, page);
+      fz_matrix ctm  = fz_scale(zoom, zoom);
+      fz_bbox bbox   = fz_round_rect(fz_transform_rect(ctm, bounds));
       fz_pixmap* pix = fz_new_pixmap_with_rect(ctx, fz_device_gray, bbox);
 
-      fz_clear_pixmap_with_color(pix, 255);
-
-      fz_device* dev = fz_new_draw_device(ctx, cache, pix);
-      pdf_run_page(xref, page, dev, ctm);
+      fz_clear_pixmap_with_value(ctx, pix, 255);
+      fz_device* dev = fz_new_draw_device(ctx, pix);
+      fz_run_page(doc, page, dev, ctm, NULL);
       fz_free_device(dev);
+      dev = NULL;
 
       int w = pix->w;
       int h = pix->h;
@@ -138,7 +141,7 @@ QImage Pdf::page(int i)
                   }
             }
       fz_drop_pixmap(ctx, pix);
-      pdf_free_page(ctx, page);
+      // fz_free_page(ctx, page);
       return image;
       }
 

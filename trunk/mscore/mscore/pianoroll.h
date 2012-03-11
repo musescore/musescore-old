@@ -1,21 +1,13 @@
 //=============================================================================
-//  MusE Score
-//  Linux Music Score Editor
-//  $Id:$
+//  MuseScore
+//  Music Composition & Notation
 //
-//  Copyright (C) 2009 Werner Schweer and others
+//  Copyright (C) 2009-2011 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License version 2.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with this program; if not, write to the Free Software
-//  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+//  it under the terms of the GNU General Public License version 2
+//  as published by the Free Software Foundation and appearing in
+//  the file LICENCE.GPL
 //=============================================================================
 
 #ifndef __PIANOROLL_H__
@@ -27,6 +19,7 @@ class PianoView;
 class Note;
 class Ruler;
 class Seq;
+class WaveView;
 
 #include "libmscore/mscoreview.h"
 #include "libmscore/pos.h"
@@ -44,6 +37,7 @@ class PianorollEditor : public QMainWindow, public MuseScoreView {
       Q_OBJECT
 
       PianoView* gv;
+      QScrollBar* hsb;  // horizontal scroll bar for pianoView
       Score* _score;
       Staff* staff;
       Awl::PitchEdit* pitch;
@@ -52,6 +46,9 @@ class PianorollEditor : public QMainWindow, public MuseScoreView {
       QComboBox* veloType;
       Awl::PosLabel* pos;
       Ruler* ruler;
+      QAction* showWave;
+      WaveView* waveView;
+      QSplitter* split;
 
       void updateVelocity(Note* note);
       void updateSelection();
@@ -64,6 +61,9 @@ class PianorollEditor : public QMainWindow, public MuseScoreView {
       void keyReleased(int);
       void moveLocator(int);
       void cmd(QAction*);
+      void rangeChanged(int min, int max);
+      void setXpos(int x);
+      void showWaveView(bool);
 
    public slots:
       void changeSelection(int);
