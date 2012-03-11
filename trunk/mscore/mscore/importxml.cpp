@@ -82,6 +82,7 @@
 #include "libmscore/rehearsalmark.h"
 #include "libmscore/fingering.h"
 #include "preferences.h"
+#include "musicxmlsupport.h"
 
 //---------------------------------------------------------
 //   local defines for debug output
@@ -1333,10 +1334,13 @@ void MusicXml::xmlScorePart(QDomElement e, QString id, int& parts)
 //   VoiceDesc
 //---------------------------------------------------------
 
-VoiceDesc::VoiceDesc() : _staff(-1), _voice(-1)
+VoiceDesc::VoiceDesc() : _staff(-1), _voice(-1), _overlaps(false)
       {
-      for (int i = 0; i < MAX_STAVES; ++i)
-            _chordRests[i] = 0;
+      for (int i = 0; i < MAX_STAVES; ++i) {
+            _chordRests[i] =  0;
+            _staffAlloc[i] = -1;
+            _voices[i]     = -1;
+            }
       }
 
 void VoiceDesc::incrChordRests(int s)
@@ -1370,27 +1374,51 @@ QString VoiceDesc::toString() const
       QString res = "[";
       for (int i = 0; i < MAX_STAVES; ++i)
             res += QString(" %1").arg(_chordRests[i]);
-      res += QString(" ] staff %1 voice %2").arg(_staff + 1).arg(_voice + 1);
+      res += QString(" ] overlaps %1").arg(_overlaps);
+      if (_overlaps) {
+            res += " staffAlloc [";
+            for (int i = 0; i < MAX_STAVES; ++i)
+                  res += QString(" %1").arg(_staffAlloc[i]);
+            res += " ] voices [";
+            for (int i = 0; i < MAX_STAVES; ++i)
+                  res += QString(" %1").arg(_voices[i]);
+            res += " ]";
+            }
+      else
+            res += QString(" staff %1 voice %2").arg(_staff + 1).arg(_voice + 1);
       return res;
       }
 
 
 // allocate MuseScore staff to MusicXML voices
 // for each staff, allocate at most VOICES voices to the staff
+//
+// for regular (non-overlapping) voices:
+// 1) assign voice to a staff (allocateStaves)
+// 2) assign voice numbers (allocateVoices)
+// due to cross-staving, it is not a priori clear to which staff
+// a voice has to be assigned
 // allocate ordered by number of chordrests in the MusicXML voice
+//
+// for overlapping voices:
+// 1) assign voice to staves it is found in (allocateStaves)
+// 2) assign voice numbers (allocateVoices)
 
 static void allocateStaves(QMap<int, VoiceDesc>& voicelist)
       {
+      // initialize
       int voicesAllocated[MAX_STAVES]; // number of voices allocated on each staff
       for (int i = 0; i < MAX_STAVES; ++i)
             voicesAllocated[i] = 0;
-      // outer loop executed voicelist.size() times, as each inner loop handles exactly one item
+
+      // handle regular (non-overlapping) voices
+      // note: outer loop executed voicelist.size() times, as each inner loop handles exactly one item
       for (int i = 0; i < voicelist.size(); ++i) {
-            // find the voice containing the highest number of chords and rests that has not been handled yet
+            // find the regular voice containing the highest number of chords and rests that has not been handled yet
             int max = 0;
             int key = -1;
             for (QMap<int, VoiceDesc>::const_iterator j = voicelist.constBegin(); j != voicelist.constEnd(); ++j) {
-                  if (j.value().numberChordRests() > max && j.value().staff() == -1) {
+                  if (!j.value().overlaps() && j.value().numberChordRests() > max && j.value().staff() == -1) {
                         max = j.value().numberChordRests();
                         key = j.key();
                         }
@@ -1402,7 +1430,36 @@ static void allocateStaves(QMap<int, VoiceDesc>& voicelist)
                         voicesAllocated[prefSt]++;
                         }
                   else
-                        voicelist[key].setStaff(-2);  // mark as used but not allocated
+                        // out of voices: mark as used but not allocated
+                        voicelist[key].setStaff(-2);
+                  }
+            }
+
+      // handle overlapping voices
+      // for every staff allocate remaining voices (if space allows)
+      // the ones with the highest number of chords and rests get allocated first
+      for (int h = 0; h < MAX_STAVES; ++h) {
+            // note: middle loop executed voicelist.size() times, as each inner loop handles exactly one item
+            for (int i = 0; i < voicelist.size(); ++i) {
+                  // find the overlapping voice containing the highest number of chords and rests that has not been handled yet
+                  int max = 0;
+                  int key = -1;
+                  for (QMap<int, VoiceDesc>::const_iterator j = voicelist.constBegin(); j != voicelist.constEnd(); ++j) {
+                        if (j.value().overlaps() && j.value().numberChordRests(h) > max && j.value().staffAlloc(h) == -1) {
+                              max = j.value().numberChordRests(h);
+                              key = j.key();
+                              }
+                        }
+                  if (key >= 0) {
+                        int prefSt = h;
+                        if (voicesAllocated[prefSt] < VOICES) {
+                              voicelist[key].setStaffAlloc(prefSt, 1);
+                              voicesAllocated[prefSt]++;
+                              }
+                        else
+                              // out of voices: mark as used but not allocated
+                              voicelist[key].setStaffAlloc(prefSt, -2);
+                        }
                   }
             }
       }
@@ -1417,6 +1474,8 @@ static void allocateVoices(QMap<int, VoiceDesc>& voicelist)
       int nextVoice[MAX_STAVES]; // number of voices allocated on each staff
       for (int i = 0; i < MAX_STAVES; ++i)
             nextVoice[i] = 0;
+      // handle regular (non-overlapping) voices
+      // a voice is allocated on one specific staff
       for (QMap<int, VoiceDesc>::const_iterator i = voicelist.constBegin(); i != voicelist.constEnd(); ++i) {
             int staff = i.value().staff();
             int key   = i.key();
@@ -1424,6 +1483,29 @@ static void allocateVoices(QMap<int, VoiceDesc>& voicelist)
                   voicelist[key].setVoice(nextVoice[staff]);
                   nextVoice[staff]++;
                   }
+            }
+      // handle overlapping voices
+      // each voice may be in every staff
+      for (QMap<int, VoiceDesc>::const_iterator i = voicelist.constBegin(); i != voicelist.constEnd(); ++i) {
+            for (int j = 0; j < MAX_STAVES; ++j) {
+                  int staffAlloc = i.value().staffAlloc(j);
+                  int key   = i.key();
+                  if (staffAlloc >= 0) {
+                        voicelist[key].setVoice(j, nextVoice[j]);
+                        nextVoice[j]++;
+                        }
+                  }
+            }
+      }
+
+//  copy the overlap data from the overlap detector to the voice list
+
+static void copyOverlapData(VoiceOverlapDetector& vod, QMap<int, VoiceDesc>& voicelist)
+      {
+      for (QMap<int, VoiceDesc>::const_iterator i = voicelist.constBegin(); i != voicelist.constEnd(); ++i) {
+            int key = i.key();
+            if (vod.stavesOverlap(key))
+                  voicelist[key].setOverlap(true);
             }
       }
 
@@ -1438,42 +1520,82 @@ static void allocateVoices(QMap<int, VoiceDesc>& voicelist)
 
 void MusicXml::initVoiceMapperAndMapVoices(QDomElement e)
       {
+      VoiceOverlapDetector vod;
+      int loc_divisions = -1;
+      int loc_tick      =  0;
+      int loc_maxtick   =  0;
+      int loc_lastLen   =  0;
       // init
       voicelist.clear();
       // count number of chordrests on each MusicXML staff
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "measure") {
+                  vod.newMeasure();
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        if (ee.tagName() == "note") {
-                              bool chord = false;
-                              int voice = -1;
-                              int staff = -1;
+                        if (ee.tagName() == "attributes") {
                               for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                                    QString tag(eee.tagName());
-                                    QString s(eee.text());
-                                    if (tag == "chord")
-                                          chord = true;
-                                    else if (tag == "voice")
-                                          voice = s.toInt() - 1;
-                                    else if (tag == "staff")
-                                          staff = s.toInt() - 1;
-                                    }
-                              // set correct defaults for missing elements
-                              if (voice == -1) voice = 0;
-                              if (staff == -1) staff = 0;
-                              // count the chords (only the first note in a chord is counted)
-                              if (!chord) {
-                                    if (0 <= staff && staff < MAX_STAVES) {
-                                          if (!voicelist.contains(voice)) {
-                                                VoiceDesc vs;
-                                                voicelist.insert(voice, vs);
-                                                }
-                                          voicelist[voice].incrChordRests(staff);
+                                    if (eee.tagName() == "divisions") {
+                                          bool ok;
+                                          loc_divisions = stringToInt(eee.text(), &ok);
+                                          if (!ok || loc_divisions <= 0)
+                                                qDebug("MusicXml-Import: bad divisions value: <%s>",
+                                                       qPrintable(eee.text()));
+                                          // debug
+                                          qDebug("measurelength loc_divisions %d", loc_divisions);
                                           }
                                     }
                               }
+                        // following tags can only be handled if duration is valid
+                        if (loc_divisions > 0) {
+                              if (ee.tagName() == "note") {
+                                    bool chord = false;
+                                    bool grace = false;
+                                    int voice = -1;
+                                    int staff = -1;
+                                    for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                                          QString tag(eee.tagName());
+                                          QString s(eee.text());
+                                          if (tag == "chord")
+                                                chord = true;
+                                          if (tag == "grace")
+                                                grace = true;
+                                          else if (tag == "voice")
+                                                voice = s.toInt() - 1;
+                                          else if (tag == "staff")
+                                                staff = s.toInt() - 1;
+                                          }
+                                    // set correct defaults for missing elements
+                                    if (voice == -1) voice = 0;
+                                    if (staff == -1) staff = 0;
+                                    if (!chord) {
+                                          // count the chords (only the first note in a chord is counted)
+                                          if (0 <= staff && staff < MAX_STAVES) {
+                                                if (!voicelist.contains(voice)) {
+                                                      VoiceDesc vs;
+                                                      voicelist.insert(voice, vs);
+                                                      }
+                                                voicelist[voice].incrChordRests(staff);
+                                                }
+                                          // determine note length for voice oberlap detection
+                                          if (!grace) {
+                                                int startTick = loc_tick; // start tick for the last note
+                                                moveTick(loc_tick, loc_maxtick, loc_lastLen, loc_divisions, ee);
+                                                // printf(" endtick %d\n", tick);
+                                                vod.addNote(startTick, loc_tick, voice, staff);
+                                                }
+                                          }
+                                    }
+                              else if (ee.tagName() == "backup")
+                                    moveTick(loc_tick, loc_maxtick, loc_lastLen, loc_divisions, ee);
+                              else if (ee.tagName() == "forward")
+                                    moveTick(loc_tick, loc_maxtick, loc_lastLen, loc_divisions, ee);
+                              }
                         }
-                  }
+                  // debug vod
+                  // vod.dump();
+                  // copy overlap data from vod to voicelist
+                  copyOverlapData(vod, voicelist);
+                  } // e.tagName() == "measure"
             }
 
       // allocate MuseScore staff to MusicXML voices
@@ -4061,8 +4183,22 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 
       // Musicxml voices are unique within a part, but not across parts.
 
-      int s = voicelist.value(voice).staff();
-      int v = voicelist.value(voice).voice();
+      // qDebug("voice mapper before: relStaff=%d voice=%d staff=%d\n", relStaff, voice, staff);
+      int s; // staff mapped by voice mapper
+      int v; // voice mapped by voice mapper
+      if (voicelist.value(voice).overlaps()) {
+            // for overlapping voices, the staff does not change
+            // and the voice is mapped and staff-dependent
+            s = relStaff;
+            v = voicelist.value(voice).voice(s);
+            }
+      else {
+            // for non-overlapping voices, both staff and voice are
+            // set by the voice mapper
+            s = voicelist.value(voice).staff();
+            v = voicelist.value(voice).voice();
+            }
+
       // qDebug("voice mapper before: relStaff=%d voice=%d s=%d v=%d", relStaff, voice, s, v);
       if (s < 0 || v < 0) {
             qDebug("ImportMusicXml: too many voices (staff %d, relStaff %d, voice %d at line %d col %d)",
@@ -4076,7 +4212,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             voice = v;
             }
 
-      // qDebug("after: relStaff=%d move=%d voice=%d", relStaff, move, voice);
+      // qDebug("voice mapper after: relStaff=%d move=%d voice=%d", relStaff, move, voice);
       // note: relStaff is the staff number relative to the parts first staff
       //       voice is the voice number in the staff
 

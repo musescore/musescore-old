@@ -1,4 +1,6 @@
-11.3 (ws)
+11.3 (lv)
+      - fix #15452: [MusicXML import] [trunk] Notes are interpreted as rests, wrong lengths, strange results
+     (ws)
       - update OMR to latest mupdf
 10.3  (ws)
       - fix #15155: Page Seggings dlg box: first page num and page height weird

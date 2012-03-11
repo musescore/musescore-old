@@ -137,16 +137,26 @@ class VoiceDesc {
       VoiceDesc();
       void incrChordRests(int s);
       int numberChordRests() const;
-      int preferredStaff() const;               ///< Determine preferred staff for this voice
-      void setStaff(int s) { if (s >= 0) _staff = s; }
-      int staff() const    { return _staff; }
-      void setVoice(int v) { if (v >= 0) _voice = v; }
-      int voice() const    { return _voice; }
+      int numberChordRests(int s) const { return (s >= 0 && s < MAX_STAVES) ? _chordRests[s] : 0; }
+      int preferredStaff() const;       ///< Determine preferred staff for this voice
+      void setStaff(int s)              { if (s >= 0) _staff = s; }
+      int staff() const                 { return _staff; }
+      void setVoice(int v)              { if (v >= 0) _voice = v; }
+      int voice() const                 { return _voice; }
+      void setVoice(int s, int v)       { if (s >= 0 && s < MAX_STAVES) _voices[s] = v; }
+      int voice(int s) const            { return (s >= 0 && s < MAX_STAVES) ? _voices[s] : -1; }
+      void setOverlap(bool b)           { _overlaps = b; }
+      bool overlaps() const             { return _overlaps; }
+      void setStaffAlloc(int s, int i)  { if (s >= 0 && s < MAX_STAVES) _staffAlloc[s] = i; }
+      int staffAlloc(int s) const       { return (s >= 0 && s < MAX_STAVES) ? _staffAlloc[s] : -1; }
       QString toString() const;
    private:
-      int _chordRests[MAX_STAVES];              ///< The number of chordrests on each MusicXML staff
-      int _staff;                               ///< The MuseScore staff allocated
-      int _voice;                               ///< The MuseScore voice allocated
+      int _chordRests[MAX_STAVES];      ///< The number of chordrests on each MusicXML staff
+      int _staff;                       ///< The MuseScore staff allocated
+      int _voice;                       ///< The MuseScore voice allocated
+      bool _overlaps;                   ///< This voice contains active notes in multiple staves at the same time
+      int _staffAlloc[MAX_STAVES];      ///< For overlapping voices: voice is allocated on these staves (note: -2=unalloc -1=undef 1=alloc)
+      int _voices[MAX_STAVES];          ///< For every voice allocated on the staff, the voice number
       };
 
 //---------------------------------------------------------
