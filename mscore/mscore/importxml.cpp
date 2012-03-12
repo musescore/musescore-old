@@ -2341,7 +2341,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   );
             */
             Text* t;
-            if (tempo != "") {
+            if (tempo != "" && tempo.toDouble() > 0) {
                   t = new TempoText(score);
                   double tpo = tempo.toDouble()/60.0;
                   ((TempoText*) t)->setTempo(tpo);
