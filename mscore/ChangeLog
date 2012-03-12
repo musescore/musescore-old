@@ -3,6 +3,7 @@
       - make musescore.com plugin translatable
       - french, german and spanish translations added for m.c plugin
       - MusicXML: don't import tempo 0 as tempo text
+      - remove mscore-palette.xml on first start of 1.2
 11.mar (lv)
       - fix #15325: [MusicXML import] [1.2] Notes are interpreted as rests, wrong lengths, strange results
       - disable several debug printf in importxml.cpp

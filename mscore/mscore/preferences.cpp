@@ -227,6 +227,7 @@ void Preferences::init()
       checkUpdateStartup      = 0;
       
       firstStartWeb = true;
+      firstStart12 = true;
       };
 
 //---------------------------------------------------------
@@ -330,6 +331,7 @@ void Preferences::write()
       s.setValue("followSong", followSong);
       
       s.setValue("firstStartWeb", firstStartWeb);
+      s.setValue("firstStart12", false);
 
       //update
       s.setValue("checkUpdateStartup", checkUpdateStartup);
@@ -440,6 +442,7 @@ void Preferences::read()
       followSong             = s.value("followSong", true).toBool();
       
       firstStartWeb = s.value("firstStartWeb", true).toBool();
+      firstStart12 = s.value("firstStart12", true).toBool();
 
       checkUpdateStartup = s.value("checkUpdateStartup", UpdateChecker::defaultPeriod()).toInt();
       if (checkUpdateStartup == 0){
