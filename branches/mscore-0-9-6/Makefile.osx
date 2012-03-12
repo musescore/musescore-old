@@ -36,7 +36,6 @@ release:
             cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
             	   ../mscore -G Xcode; 			       \
             xcodebuild -project mscore.xcodeproj -target lrelease;                             \
-            xcodebuild -project mscore.xcodeproj -target lreleasemcom;                         \
 	          xcodebuild -project mscore.xcodeproj -configuration Release -target ALL_BUILD;     \
          else                                                                                  \
             echo "build directory does already exist, please remove first with 'make clean'";  \
@@ -49,8 +48,7 @@ debug:
             cd build;                                  \
             cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
                    ../mscore -G Xcode;                         \
-            xcodebuild -project mscore.xcodeproj -target lrelease;                            \
-            xcodebuild -project mscore.xcodeproj -target lreleasemcom;                        \            
+            xcodebuild -project mscore.xcodeproj -target lrelease;                            \        
             xcodebuild -project mscore.xcodeproj -configuration Debug -target ALL_BUILD;      \
          else                                                                                 \
             echo "build directory does already exist, please remove first with 'make clean'"; \

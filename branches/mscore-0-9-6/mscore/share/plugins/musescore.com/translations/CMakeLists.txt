@@ -18,11 +18,6 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-add_custom_target(lreleasemcom
-   COMMAND lrelease ${PROJECT_SOURCE_DIR}/share/plugins/musescore.com/translations/*.ts
-   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-   )
-
 install(FILES
       locale_de.qm
       locale_fr.qm
