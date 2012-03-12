@@ -36,6 +36,7 @@ release:
             	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
             	   ../mscore; 			       \
             make lrelease;                             \
+            make lreleasemcom;                         \
             make -j ${CPUS};                           \
          else                                          \
             echo "build directory does already exist, please remove first with 'make clean'"; \
@@ -50,6 +51,7 @@ debug:
             	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
             	   ../mscore; 			       \
             make lrelease;                             \
+            make lreleasemcom;                         \
             make -j ${CPUS};                           \
          else                                          \
             echo "build directory does already exist, please remove first with 'make clean'";       \
