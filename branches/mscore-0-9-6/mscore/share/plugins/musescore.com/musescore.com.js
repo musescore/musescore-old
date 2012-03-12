@@ -5,7 +5,7 @@
 //
 //  Test plugin
 //
-//  Copyright (C)2008 Werner Schweer and others
+//  Copyright (C)2008-2012 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -773,7 +773,7 @@ function binb2b64(binarray)
 function init()
       {
       // print("test script init");
-      var action = new QAction(new QIcon(pluginPath+"/icons/filesaveonline.svg"), "Save Online...", mscore);
+      var action = new QAction(new QIcon(pluginPath+"/icons/filesaveonline.svg"), qsTr("Save Online..."), mscore);
       var menu = mscore.fileMenu();
       var actionList = menu.actions();
       menu.insertAction(actionList[7], action);
@@ -1045,6 +1045,8 @@ var username;
 
 function run()
   {  
+    if (typeof curScore === 'undefined')
+          return;
     loadPreferences();
     if(loadSettings()){
       getUser();
@@ -1111,7 +1113,7 @@ function processAnswerRequestToken(id ,error){
         form.show();  
     }else{
          //message error
-        QMessageBox.critical(0, "Error", "Cannot get request token [" + http.errorString() + "]" );
+        QMessageBox.critical(0, qsTr("Error"), qsTr("Cannot get request token [%1]").arg(http.errorString()));
     }
   }
 }
@@ -1201,7 +1203,7 @@ function processAnswerAccessToken(id ,error){
         getUser();
     }else{
         //message error
-        QMessageBox.critical(0, "Error", "Cannot get access token [" + http.errorString()+ "]");
+        QMessageBox.critical(0, qsTr("Error"), qsTr("Cannot get access token [%1]").arg(http.errorString()));
     }      
   }
 }
@@ -1213,15 +1215,15 @@ function formBeforeUpload(){
       form = loader.load(file, null);
       form.setWindowFlags(Qt.WindowSystemMenuHint); //remove the what's this button
       form.verticalLayoutWidget.title.text = curScore.title;
-      form.verticalLayoutWidget.license.addItem("All Rights reserved", "all-rights-reserved");
-      form.verticalLayoutWidget.license.addItem("Creative Commons Attribution", "cc-by");
-	    form.verticalLayoutWidget.license.addItem("Creative Commons Attribution Share Alike", "cc-by-sa");
-      form.verticalLayoutWidget.license.addItem("Creative Commons Attribution No Derivative Works", "cc-by-nd");
-      form.verticalLayoutWidget.license.addItem("Creative Commons Attribution Noncommercial", "cc-by-nc");
-      form.verticalLayoutWidget.license.addItem("Creative Commons Attribution Noncommercial Share Alike", "cc-by-nc-sa");
-	    form.verticalLayoutWidget.license.addItem("Creative Commons Attribution Noncommercial Non Derivate Works", "cc-by-nc-nd");
-      form.verticalLayoutWidget.license.addItem("Public Domain", "publicdomain");
-      form.verticalLayoutWidget.license.addItem("Creative Commons Zero", "cc-zero");
+      form.verticalLayoutWidget.license.addItem(qsTr("All Rights reserved"), "all-rights-reserved");
+      form.verticalLayoutWidget.license.addItem(qsTr("Creative Commons Attribution"), "cc-by");
+	    form.verticalLayoutWidget.license.addItem(qsTr("Creative Commons Attribution Share Alike"), "cc-by-sa");
+      form.verticalLayoutWidget.license.addItem(qsTr("Creative Commons Attribution No Derivative Works"), "cc-by-nd");
+      form.verticalLayoutWidget.license.addItem(qsTr("Creative Commons Attribution Noncommercial"), "cc-by-nc");
+      form.verticalLayoutWidget.license.addItem(qsTr("Creative Commons Attribution Noncommercial Share Alike"), "cc-by-nc-sa");
+	    form.verticalLayoutWidget.license.addItem(qsTr("Creative Commons Attribution Noncommercial Non Derivate Works"), "cc-by-nc-nd");
+      form.verticalLayoutWidget.license.addItem(qsTr("Public Domain"), "publicdomain");
+      form.verticalLayoutWidget.license.addItem(qsTr("Creative Commons Zero"), "cc-zero");
       form.horizontalLayoutWidget.lblUsername.text = username;
       form.buttonBox.accepted.connect(saveAndUpload);
       form.horizontalLayoutWidget.btnSignout.pressed.connect(signout);
@@ -1378,12 +1380,12 @@ function processAnswerUpload(id ,error){
          
          if (array["score_id"]) {
             curScore.source = array["permalink"]; //store source for next time
-            QMessageBox.about(0, "Success", "<a href=\""+base+"/my_scores\">Finished! Go to my scores.</a>");
+            QMessageBox.about(0, qsTr("Success"), qsTr('<a href="%1/my_scores\">Finished! Go to my scores.</a>').arg(base));
             } 
       } 
      }else{
         //message error
-        QMessageBox.critical(0, "Error", "Cannot upload [" + http.errorString()+ "]");
+        QMessageBox.critical(0, qsTr("Error"), qsTr("Cannot upload [%1]").arg(http.errorString()));
      }
   }
 }
@@ -1529,10 +1531,10 @@ function saveSettings(){
         settingsFile.flush();
         settingsFile.close();
       }else{
-        QMessageBox.critical(0, "Error", "Cannot write settings.");
+        QMessageBox.critical(0, qsTr("Error"), qsTr("Cannot write settings."));
       }
     }else{
-      QMessageBox.critical(0, "Error", "Cannot create settings directory.");
+      QMessageBox.critical(0, qsTr("Error"), qsTr("Cannot create settings directory."));
     }
 }
 
@@ -1575,10 +1577,10 @@ function savePreferences(){
         preferencesFile.flush();
         preferencesFile.close();
       }else{
-        QMessageBox.critical(0, "Error", "Cannot write preferences.");
+        QMessageBox.critical(0, qsTr("Error"), qsTr("Cannot write preferences."));
       }
     }else{
-      QMessageBox.critical(0, "Error", "Cannot create preferences directory.");
+      QMessageBox.critical(0, qsTr("Error"), qsTr("Cannot create preferences directory."));
     }
 }
 
