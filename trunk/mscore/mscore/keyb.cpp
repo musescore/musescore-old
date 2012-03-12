@@ -130,8 +130,11 @@ void ScoreView::editKey(QKeyEvent* ev)
       if (editObject->type() == FIGURED_BASS) {
             int found = false;
             if (key == Qt::Key_Space && !(modifiers & CONTROL_MODIFIER)) {
-                  // TODO: shift+tab events are filtered by qt
-                  figuredBassTab(modifiers & Qt::ShiftModifier);
+                  figuredBassTab(false, modifiers & Qt::ShiftModifier);
+                  found = true;
+                  }
+            if (key == Qt::Key_Tab || key == Qt::Key_Backtab) {
+                  figuredBassTab(true, key == Qt::Key_Backtab ? true : (modifiers & Qt::ShiftModifier) );
                   found = true;
                   }
             if (found) {
