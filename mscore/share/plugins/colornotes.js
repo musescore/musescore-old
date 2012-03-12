@@ -54,6 +54,8 @@ function init()
 
 function run()
       {
+      if (typeof curScore === 'undefined')
+            return;
       var cursor = new Cursor(curScore);
       for (var staff = 0; staff < curScore.staves; ++staff) {
             cursor.staff = staff;

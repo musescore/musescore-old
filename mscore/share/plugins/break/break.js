@@ -49,6 +49,8 @@ function init()
 
 function run()
       {
+      if (typeof curScore === 'undefined')
+            return;
       var loader = new QUiLoader(null);
       var file   = new QFile(pluginPath + "/break.ui");
       file.open(QIODevice.OpenMode(QIODevice.ReadOnly, QIODevice.Text));

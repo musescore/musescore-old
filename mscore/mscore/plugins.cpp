@@ -422,7 +422,8 @@ void MuseScore::pluginExecuteFunction(int idx, const char* functionName)
             scriptDebugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
             }
 
-      se->globalObject().setProperty("curScore", se->newVariant(qVariantFromValue(cs)));
+      if (cs)
+            se->globalObject().setProperty("curScore", se->newVariant(qVariantFromValue(cs)));
 
       QFileInfo fi(f);
       pluginPath = fi.absolutePath();
