@@ -129,6 +129,7 @@ struct Preferences {
       bool followSong;
 
       bool firstStartWeb;
+      bool firstStart12;
 
       bool dirty;
       

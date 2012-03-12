@@ -58,6 +58,7 @@
 #include "drumset.h"
 #include "spacer.h"
 #include "measure.h"
+#include "preferences.h"
 
 extern bool useFactorySettings;
 
@@ -74,8 +75,14 @@ void MuseScore::showPalette(bool visible)
             connect(paletteBox, SIGNAL(paletteVisible(bool)), a, SLOT(setChecked(bool)));
             addDockWidget(Qt::LeftDockWidgetArea, paletteBox);
 
+            QFile f(dataPath + "/" + "mscore-palette.xml");
+            if(preferences.firstStart12) {//delete palette file on very first startup with 1.2
+                  f.remove();
+                  preferences.firstStart12 = false;
+                  preferences.dirty  = true;      
+                  }
+            
             if (!useFactorySettings) {
-                  QFile f(dataPath + "/" + "mscore-palette.xml");
                   if (f.exists()) {
                         if (paletteBox->read(&f)) {
                               paletteBox->setShown(visible);
