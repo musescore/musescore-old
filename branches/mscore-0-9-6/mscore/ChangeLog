@@ -1,3 +1,8 @@
+12.mar (la)
+      - fix #15457: Undo Insert Measure after changing clef causes crash
+      - make musescore.com plugin translatable
+      - french, german and spanish translations added for m.c plugin
+      - MusicXML: don't import tempo 0 as tempo text
 11.mar (lv)
       - fix #15325: [MusicXML import] [1.2] Notes are interpreted as rests, wrong lengths, strange results
       - disable several debug printf in importxml.cpp
