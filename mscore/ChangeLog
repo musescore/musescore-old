@@ -1,4 +1,6 @@
-12.3 (mw)
+12.3 (ws)
+      - added player app for meego (tested on nokia N9)
+      (mw)
       - Copying FiguredBass from a note/chord to another
 11.3 (lv)
       - fix #15452: [MusicXML import] [trunk] Notes are interpreted as rests, wrong lengths, strange results

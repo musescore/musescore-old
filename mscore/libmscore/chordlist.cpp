@@ -213,7 +213,6 @@ void HChord::print() const
             if (contains(i))
                   qDebug(" %s", names[i]);
             }
-      qDebug("\n");
       }
 
 //---------------------------------------------------------
@@ -264,7 +263,7 @@ void HChord::add(const QList<HDegree>& degreeList)
                         }
                   }
             else
-                  qDebug("degree type %d not supported\n", d.type());
+                  qDebug("degree type %d not supported", d.type());
 
 // qDebug("  HCHord::added  "); print();
             }
@@ -506,7 +505,7 @@ bool ChordList::read(const QString& name)
       if (!f.open(QIODevice::ReadOnly)) {
             QString s = QT_TRANSLATE_NOOP("file", "cannot open chord description:\n%1\n%2");
             MScore::lastError = s.arg(f.fileName()).arg(f.errorString());
-qDebug("ChordList::read failed: <%s>\n", qPrintable(path));
+qDebug("ChordList::read failed: <%s>", qPrintable(path));
             return false;
             }
       QDomDocument doc;

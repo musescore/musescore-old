@@ -126,18 +126,18 @@ PianorollEditor::PianorollEditor(QWidget* parent)
       hbox->addWidget(piano);
       hbox->addWidget(gv);
 
-      split = new QSplitter;
+      split = new QSplitter(Qt::Vertical);
       QWidget* split1 = new QWidget;
       split1->setLayout(hbox);
       split->addWidget(split1);
 
       QGridLayout* layout = new QGridLayout;
       mainWidget->setLayout(layout);
-      layout->setColumnMinimumWidth(0, pianoWidth);
+      layout->setColumnMinimumWidth(0, pianoWidth + 5);
       layout->setSpacing(0);
-      layout->addWidget(tb,    1, 0, 1, 2);
+      layout->addWidget(tb,    0, 1, 1, 1);
       layout->addWidget(ruler, 1, 1);
-      layout->addWidget(split, 2, 1, 0, 2);
+      layout->addWidget(split, 2, 0, 1, 2);
       layout->addWidget(hsb,   3, 1);
 
       setCentralWidget(mainWidget);
@@ -176,6 +176,9 @@ PianorollEditor::PianorollEditor(QWidget* parent)
 void PianorollEditor::setXpos(int x)
       {
       gv->horizontalScrollBar()->setValue(x);
+      ruler->setXpos(x);
+      if (waveView && showWave->isChecked())
+            waveView->setXpos(x);
       }
 
 //---------------------------------------------------------
@@ -217,6 +220,8 @@ void PianorollEditor::setStaff(Staff* st)
 
       gv->setStaff(staff, locator);
       ruler->setScore(_score, locator);
+      if (waveView)
+            waveView->setScore(_score, locator);
       pos->setContext(tl, sl);
       updateSelection();
       showWave->setEnabled(_score->audio() != 0);
@@ -606,7 +611,11 @@ void PianorollEditor::showWaveView(bool val)
       if (val) {
             if (waveView == 0) {
                   waveView = new WaveView;
+                  connect(gv, SIGNAL(posChanged(const Pos&)),    waveView, SLOT(setPos(const Pos&)));
+                  connect(gv, SIGNAL(magChanged(double,double)), waveView, SLOT(setMag(double,double)));
+                  connect(ruler, SIGNAL(locatorMoved(int)),      waveView, SLOT(moveLocator(int)));
                   waveView->setAudio(_score->audio());
+                  waveView->setScore(_score, locator);
                   split->addWidget(waveView);
                   }
             waveView->setVisible(true);

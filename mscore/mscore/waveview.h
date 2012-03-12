@@ -13,7 +13,10 @@
 #ifndef __WAVEVIEW_H__
 #define __WAVEVIEW_H__
 
+#include "libmscore/pos.h"
+
 class Audio;
+class Score;
 
 //---------------------------------------------------------
 //   WaveView
@@ -22,10 +25,28 @@ class Audio;
 class WaveView : public QWidget
       {
       Q_OBJECT
+      Pos _cursor;
+      Pos* _locator;
+      Score* _score;
+
+      TType _timeType;
+      int magStep;
+      double _xmag;
+      int _xpos;
+
+      int pos2pix(const Pos& p) const;
+      virtual void paintEvent(QPaintEvent*);
+      virtual QSize sizeHint() const { return QSize(50, 50); }
+
+   public slots:
+      void setMag(double,double);
+      void moveLocator(int);
 
    public:
       WaveView(QWidget* parent = 0);
       void setAudio(Audio*);
+      void setXpos(int);
+      void setScore(Score* s, Pos* lc);
       };
 #endif
 

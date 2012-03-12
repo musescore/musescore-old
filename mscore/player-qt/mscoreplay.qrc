@@ -18,11 +18,11 @@
       <file alias="fonts/mscore-BC.ttf">../fonts/mscore-BC.ttf</file>
 
       <file alias="scores/promenade.mscz">../demos/promenade.mscz</file>
-      <file alias="scores/promenade.png">promenade.png</file>
+      <file alias="scores/promenade.png">../demos/promenade.png</file>
       <file alias="scores/schnee.mscz">../demos/schnee.mscz</file>
-      <file alias="scores/schnee.png">schnee.png</file>
+      <file alias="scores/schnee.png">../demos/schnee.png</file>
       <file alias="scores/italian-1.mscz">../demos/italian-1.mscz</file>
-      <file alias="scores/italian-1.png">italian-1.png</file>
+      <file alias="scores/italian-1.png">../demos/italian-1.png</file>
 
       <file>mplayer.qml</file>
       <file>mobile/ToolBar.qml</file>
