@@ -69,6 +69,5 @@ class Ruler : public QWidget {
       void setScore(Score*, Pos* locator);
       };
 
-
 #endif
 

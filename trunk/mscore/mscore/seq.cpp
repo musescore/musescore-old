@@ -79,13 +79,13 @@ struct VorbisData {
       QByteArray data;
       };
 
-VorbisData vorbisData;
+static VorbisData vorbisData;
 
 static size_t ovRead(void* ptr, size_t size, size_t nmemb, void* datasource);
 static int ovSeek(void* datasource, ogg_int64_t offset, int whence);
 static long ovTell(void* datasource);
 
-ov_callbacks ovCallbacks = {
+static ov_callbacks ovCallbacks = {
       ovRead, ovSeek, 0, ovTell
       };
 
@@ -221,7 +221,7 @@ void Seq::setScoreView(ScoreView* v)
       cs = cv ? cv->score() : 0;
 
       if (!heartBeatTimer->isActive())
-            heartBeatTimer->start(1000/guiRefresh);
+            heartBeatTimer->start(20);    // msec
 
       playlistChanged = true;
       synti->reset();
@@ -403,6 +403,7 @@ void Seq::start()
                   if (n < 0) {
                         printf("ogg open failed: %d\n", n);
                         }
+                  oggInit = true;
                   }
             }
       seek(cs->playPos());
