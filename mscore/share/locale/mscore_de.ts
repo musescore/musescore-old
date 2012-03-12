@@ -3395,7 +3395,7 @@ before closing?</source>
 From the "Help" menu try choosing "Online Handbook" instead.</source>
         <translation>
 
-Statt dessen bitte versuchen im "Hilfe"-Menü das "Online-Handbuch" aufrufen.</translation>
+Statt dessen bitte versuchen im "Hilfe"-Menü das "Online-Handbuch" aufzurufen.</translation>
     </message>
     <message>
         <source>MuseScore handbook not found at: 
@@ -3626,7 +3626,7 @@ inkompatibel mit derzeitiger Schnittstelle</translation>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation>MuseScore ist zu alt um Skript&#13;
+        <translation>MuseScore ist zu alt, um Skript&#13;
 %1&#13;
 ausführen zu können</translation>
     </message>

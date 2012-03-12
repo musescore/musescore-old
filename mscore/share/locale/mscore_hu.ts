@@ -5191,19 +5191,19 @@ Próbáld más helyre menteni.</translation>
     </message>
     <message>
         <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
-        <translation type="unfinished"/>
+        <translation>A kotta nem olvasható:&lt;br&gt;A MuseScore verziód túl régi.&lt;br&gt;&lt;a href="%1"&gt;Frissítsd most!&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Can't open file. File extension "%1" not supported.</source>
-        <translation type="unfinished"/>
+        <translation>A fájlt nem lehet megnyitni. A "%1" kiterjesztés nem támogatott.</translation>
     </message>
     <message>
         <source>Internal error</source>
-        <translation type="unfinished"/>
+        <translation>Belső hiba</translation>
     </message>
     <message>
         <source>Cannot load picture file %1</source>
-        <translation type="unfinished"/>
+        <translation>A %1 képfájlt nem sikerült betölteni</translation>
     </message>
 </context>
 <context>
@@ -5256,11 +5256,11 @@ Próbáld más helyre menteni.</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the copy operation</source>
-        <translation type="unfinished"/>
+        <translation>Jelöld ki az egész hangjegycsoportot és próbáld újra a másolást</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the cut operation</source>
-        <translation type="unfinished"/>
+        <translation>Jelöld ki az egész hangjegycsoportot és próbáld újra a kivágást</translation>
     </message>
 </context>
 <context>
@@ -6015,7 +6015,7 @@ győződj meg arról, hogy helyes-e a SoundFont fájl elérési útja.</translat
     </message>
     <message>
         <source>center text vertical to reference point</source>
-        <translation>a szöveget ˘függőlegesen középre zárja a referenciaponthoz</translation>
+        <translation>a szöveget függőlegesen középre zárja a referenciaponthoz</translation>
     </message>
     <message>
         <source>align bottom edge of text to reference point</source>
@@ -6153,7 +6153,7 @@ győződj meg arról, hogy helyes-e a SoundFont fájl elérési útja.</translat
     </message>
     <message>
         <source>center text vertical to text baseline</source>
-        <translation type="unfinished"/>
+        <translation>szöveg igazítása függőlegesen a középvonalhoz</translation>
     </message>
 </context>
 <context>

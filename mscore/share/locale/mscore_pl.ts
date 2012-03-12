@@ -3240,7 +3240,7 @@ before closing?</source>
     </message>
     <message>
         <source>Tuplets</source>
-        <translation>Grupy niemiarowe</translation>
+        <translation>Grupa niemiarowa</translation>
     </message>
     <message>
         <source>&amp;Layout</source>
