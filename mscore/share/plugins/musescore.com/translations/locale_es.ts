@@ -97,8 +97,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/musescore_dialog.ui" line="284"/>
         <source>USERNAME</source>
-        <translatorcomment>Nombre de usuario</translatorcomment>
-        <translation></translation>
+        <translation>Nombre de usuario</translation>
     </message>
     <message>
         <location filename="../ui/musescore_dialog.ui" line="291"/>
@@ -151,7 +150,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../musescore.com.js" line="776"/>
         <source>Save Online...</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar en linea...</translation>
     </message>
     <message>
         <location filename="../musescore.com.js" line="1114"/>
@@ -162,97 +161,97 @@ p, li { white-space: pre-wrap; }
         <location filename="../musescore.com.js" line="1578"/>
         <location filename="../musescore.com.js" line="1581"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error</translation>
     </message>
     <message>
         <location filename="../musescore.com.js" line="1114"/>
         <source>Cannot get request token [%1]</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede obtener el token de solicitud [%1]</translation>
     </message>
     <message>
         <location filename="../musescore.com.js" line="1204"/>
         <source>Cannot get access token [%1]</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede obtener el token de acceso [%1]</translation>
     </message>
     <message>
         <location filename="../musescore.com.js" line="1216"/>
         <source>All Rights reserved</source>
-        <translation type="unfinished"></translation>
+        <translation>Todos los derechos reservados</translation>
     </message>
     <message>
         <location filename="../musescore.com.js" line="1217"/>
         <source>Creative Commons Attribution</source>
-        <translation type="unfinished"></translation>
+        <translation>Creative Commons Reconocimiento</translation>
     </message>
     <message>
         <location filename="../musescore.com.js" line="1218"/>
         <source>Creative Commons Attribution Share Alike</source>
-        <translation type="unfinished"></translation>
+        <translation>Creative Commons Reconocimiento Compartir igual</translation>
     </message>
     <message>
         <location filename="../musescore.com.js" line="1219"/>
         <source>Creative Commons Attribution No Derivative Works</source>
-        <translation type="unfinished"></translation>
+        <translation>Creative Commons Reconocimiento Sin Derivar</translation>
     </message>
     <message>
         <location filename="../musescore.com.js" line="1220"/>
         <source>Creative Commons Attribution Noncommercial</source>
-        <translation type="unfinished"></translation>
+        <translation>Creative Commons Reconocimiento No comercial</translation>
     </message>
     <message>
         <location filename="../musescore.com.js" line="1221"/>
         <source>Creative Commons Attribution Noncommercial Share Alike</source>
-        <translation type="unfinished"></translation>
+        <translation>Creative Commons Reconocimiento No comercial Compartir igual</translation>
     </message>
     <message>
         <location filename="../musescore.com.js" line="1222"/>
         <source>Creative Commons Attribution Noncommercial Non Derivate Works</source>
-        <translation type="unfinished"></translation>
+        <translation>Creative Commons Reconocimiento No comercial Sin Derivar</translation>
     </message>
     <message>
         <location filename="../musescore.com.js" line="1223"/>
         <source>Public Domain</source>
-        <translation type="unfinished"></translation>
+        <translation>Dominio público</translation>
     </message>
     <message>
         <location filename="../musescore.com.js" line="1224"/>
         <source>Creative Commons Zero</source>
-        <translation type="unfinished"></translation>
+        <translation>Creative Commons Cero</translation>
     </message>
     <message>
         <location filename="../musescore.com.js" line="1381"/>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>Finalizado con éxito</translation>
     </message>
     <message>
         <location filename="../musescore.com.js" line="1381"/>
         <source>&lt;a href=&quot;%1/my_scores&quot;&gt;Finished! Go to my scores.&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;%1/my_scores&quot;&gt;¡Finalizado! Ir a mis partituras.&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../musescore.com.js" line="1386"/>
         <source>Cannot upload [%1]</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede subir [%1]</translation>
     </message>
     <message>
         <location filename="../musescore.com.js" line="1532"/>
         <source>Cannot write settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pueden guardar las propiedades.</translation>
     </message>
     <message>
         <location filename="../musescore.com.js" line="1535"/>
         <source>Cannot create settings directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede crear carpeta de propiedades.</translation>
     </message>
     <message>
         <location filename="../musescore.com.js" line="1578"/>
         <source>Cannot write preferences.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pueden guardar las preferencias.</translation>
     </message>
     <message>
         <location filename="../musescore.com.js" line="1581"/>
         <source>Cannot create preferences directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede crear carpeta de preferencias.</translation>
     </message>
 </context>
 </TS>
