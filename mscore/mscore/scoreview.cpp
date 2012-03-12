@@ -5136,28 +5136,53 @@ void ScoreView::figuredBassEndEdit()
 //   ScoreView::figuredBassTab
 //    derived from chordTab() (for Harmony)
 //    manages [Space] / [Shift][Space] keys, moving editing to FB of next/prev ChordRest
+//    and [Tab] / [Shift][Tab] keys, moving to FB of next/ptrev measure
 //---------------------------------------------------------
 
-void ScoreView::figuredBassTab(bool back)
+void ScoreView::figuredBassTab(bool bMeas, bool bBack)
       {
       FiguredBass* fb  = (FiguredBass*)editObject;
+      Segment* nextSeg;
       Segment* segment = fb->segment();
       int track        = fb->track();
+
       if (segment == 0) {
             qDebug("figuredBassTab: no segment");
             return;
             }
 
-      // search next chord
-      Segment * nextSeg;
-      if (back)
-            nextSeg = segment->prev1(SegChordRest);
-      else
-            nextSeg = segment->next1(SegChordRest);
-      if (nextSeg == 0) {
-            qDebug("figuredBassTab: no prev/next segment");
-            return;
+      if(bMeas) {                               // if moving to next/prev measure
+            Measure * meas = segment->measure();
+            if(meas) {
+                  if(bBack)
+                        meas = meas->prevMeasure();
+                  else
+                        meas = meas->nextMeasure();
+                  }
+            if(!meas) {
+                  qDebug("figuredBassTab: no prev/next measure");
+                  return;
+                  }
+            // find initial ChordRest segment
+            nextSeg = meas->findSegment(SegChordRest, meas->tick());
+            if (nextSeg == 0) {
+                  qDebug("figuredBassTab: no ChordRest segment at measure");
+                  return;
+                  }
             }
+
+      else {                                    // if moving to next/prev chord segment
+            // search next chord segment
+            if (bBack)
+                  nextSeg = segment->prev1(SegChordRest);
+            else
+                  nextSeg = segment->next1(SegChordRest);
+            if (nextSeg == 0) {
+                  qDebug("figuredBassTab: no prev/next segment");
+                  return;
+                  }
+            }
+
       endEdit();
       _score->startCmd();
 
