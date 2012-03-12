@@ -47,6 +47,8 @@ function init()
 
 function run()
       {
+      if (typeof curScore === 'undefined')
+            return;
       print("version:        ", mscoreVersion);
 	  // print statements appear in the "Debug Output" tab
 	  // when the Script Debugger is enabled in MuseScore:
