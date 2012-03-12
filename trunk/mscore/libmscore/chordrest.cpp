@@ -40,6 +40,7 @@
 #include "undo.h"
 #include "stem.h"
 #include "harmony.h"
+#include "figuredbass.h"
 
 //---------------------------------------------------------
 //   propertyList
@@ -788,6 +789,22 @@ Element* ChordRest::drop(const DropData& data)
                   e->setTrack((track() / VOICES) * VOICES);
                   score()->undoAddElement(e);
                   return e;
+
+            case FIGURED_BASS:
+                  {
+                  bool bNew;
+                  FiguredBass * fb = static_cast<FiguredBass *>(e);
+                  fb->setParent( segment() );
+                  fb->setTrack( (track() / VOICES) * VOICES );
+                  fb->setTicks( duration().ticks() );
+                  fb->setOnNote(true);
+                  FiguredBass * fbNew = FiguredBass::addFiguredBassToSegment(segment(),
+                        fb->track(), fb->ticks(), &bNew);
+                  fbNew = fb;
+                  if(bNew)
+                        score()->undoAddElement(e);
+                  return e;
+                  }
 
             case SYMBOL:
             case IMAGE:
