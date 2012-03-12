@@ -1038,6 +1038,8 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   e->setParent(ch);
                   score()->undoRemoveElement(this);
                   score()->undoAddElement(e);
+                  if(selected())
+                        score()->select(e, SELECT_SINGLE, 0);
                   }
                   break;
 
