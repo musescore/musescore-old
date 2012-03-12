@@ -1623,7 +1623,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Last system fill threshold</source>
-        <translation>Soglia riem. ultima accollatura</translation>
+        <translation>Soglia riemp. ultima riga</translation>
     </message>
     <message>
         <source>Line width</source>
@@ -8640,7 +8640,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Hi-Hat Closed</source>
-        <translation type="unfinished"/>
+        <translation>Hi-Hat chiuso</translation>
     </message>
     <message>
         <source>Tom 4</source>
