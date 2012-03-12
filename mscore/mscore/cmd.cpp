@@ -2341,12 +2341,12 @@ void Score::cmdPaste(ScoreView* view)
                   if (el) {
                         el->read(e);
                         addRefresh(selection().element()->abbox());   // layout() ?!
-                        if(type == NOTE) {
+                        
+                        if(type == NOTE && selection().element()->isChordRest())
                               selection().element()->drop(view, QPointF(), QPointF(), el, duration);
-                              }
-                        else {
+                        else 
                               selection().element()->drop(view, QPointF(), QPointF(), el);
-                              }
+                              
                         if (selection().element())
                               addRefresh(selection().element()->abbox());
                         }
