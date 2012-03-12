@@ -949,6 +949,14 @@ Compound::Compound(Score* s)
       {
       }
 
+Compound::Compound(const Compound& c)
+   : Element(c)
+      {
+      elemente.clear();
+      foreach(Element* e, c.elemente)
+            elemente.append(e->clone());
+      }
+
 //---------------------------------------------------------
 //   draw
 //---------------------------------------------------------
