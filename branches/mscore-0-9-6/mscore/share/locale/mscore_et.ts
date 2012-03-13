@@ -999,7 +999,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Auto</source>
-        <translation>AutoAutomaatne</translation>
+        <translation>Automaatne</translation>
     </message>
     <message>
         <source>whole</source>

@@ -3638,7 +3638,7 @@ ausführen zu können</translation>
         <source>Error loading plugin
 "%1" line %2:
 %3</source>
-        <translation>Fehler beim Laden des Plugins&#13;
+        <translation>Fehler beim Laden des Plug-Ins&#13;
 "%1" Zeile %2:&#13;
 %3</translation>
     </message>
