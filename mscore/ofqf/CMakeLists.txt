@@ -33,12 +33,9 @@ add_library(ofqf STATIC
    qoscclient.cpp qoscserver.cpp qosctypes.cpp
    )
 
-set_target_properties (
-      ofqf
-      PROPERTIES
-         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
-      )
+set_target_properties( ofqf
+   PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
+   )
 
 ADD_DEPENDENCIES(ofqf mops1)
 ADD_DEPENDENCIES(ofqf mops2)
-

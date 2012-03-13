@@ -27,7 +27,7 @@
 
 // #define DEBUG_SFONT
 
-#include "libmscore/xml.h"
+#include "xml.h"
 
 extern bool debugMode;
 
@@ -135,7 +135,6 @@ Preset::~Preset()
 
 void Preset::loadSamples()
       {
-//      sfont->synth->mutex.lock();
       if (_global_zone && _global_zone->instrument) {
             Instrument* i = _global_zone->instrument;
             if (i->global_zone && i->global_zone->sample)
@@ -151,7 +150,6 @@ void Preset::loadSamples()
             foreach(Zone* iz, i->zones)
                   iz->sample->load();
             }
-//      sfont->synth->mutex.unlock();
       }
 
 //---------------------------------------------------------
@@ -160,9 +158,6 @@ void Preset::loadSamples()
 
 bool Preset::noteon(Fluid* synth, unsigned id, int chan, int key, int vel, double nt)
       {
-      Mod* mod;
-      Mod* mod_list[FLUID_NUM_MOD]; /* list for 'sorting' preset modulators */
-
       Zone* global_preset_zone = global_zone();
 
       /* run thru all the zones of this preset */
@@ -202,7 +197,7 @@ bool Preset::noteon(Fluid* synth, unsigned id, int chan, int key, int vel, doubl
 
 	                              if (inst_zone->genlist[i].flags)
                                           voice->gen_set(i, inst_zone->genlist[i].val);
-                                    else if ((global_inst_zone != 0) && (global_inst_zone->genlist[i].flags))
+                                    else if ((global_inst_zone) && (global_inst_zone->genlist[i].flags))
                                           voice->gen_set(i, global_inst_zone->genlist[i].val);
                                     else {
                                           /* The generator has not been defined in this instrument.
@@ -215,9 +210,10 @@ bool Preset::noteon(Fluid* synth, unsigned id, int chan, int key, int vel, doubl
                               /* global instrument zone, modulators: Put them all into a
                                  * list. */
 
+                              Mod* mod_list[FLUID_NUM_MOD]; /* list for 'sorting' preset modulators */
                               int mod_list_count = 0;
 
-                              if (global_inst_zone){
+                              if (global_inst_zone) {
                                     foreach(Mod* mod, global_inst_zone->modlist)
                                           mod_list[mod_list_count++] = mod;
                                     }
@@ -244,7 +240,7 @@ bool Preset::noteon(Fluid* synth, unsigned id, int chan, int key, int vel, doubl
 
                               /* Add instrument modulators (global / local) to the voice. */
                               for (int i = 0; i < mod_list_count; i++){
-                                    mod = mod_list[i];
+                                    Mod* mod = mod_list[i];
                                     if (mod) {  // disabled modulators CANNOT be skipped.
                                           /* Instrumentrument modulators -supersede- existing (default)
 	                                     * modulators.  SF 2.01 page 69, 'bullet' 6 */
@@ -314,7 +310,7 @@ bool Preset::noteon(Fluid* synth, unsigned id, int chan, int key, int vel, doubl
 
                               /* Add preset modulators (global / local) to the voice. */
                               for (int i = 0; i < mod_list_count; i++){
-                                    mod = mod_list[i];
+                                    Mod* mod = mod_list[i];
                                     if ((mod != 0) && (mod->amount != 0)) { /* disabled modulators can be skipped. */
                                           /* Preset modulators -add- to existing instrument /
 	                                     * default modulators.  SF2.01 page 70 first bullet on
@@ -458,41 +454,32 @@ bool Zone::importZone()
                         break;
                   }
             }
-
       // Import the modulators (only SF2.1 and higher)
       foreach(SFMod* mod_src, mod) {
             Mod* mod_dest = new Mod;
-            int type;
-            // mod_dest->next = 0; /* pointer to next modulator, this is the end of the list now.*/
 
             /* *** Amount *** */
             mod_dest->amount = mod_src->amount;
 
             /* *** Source *** */
-            mod_dest->src1 = mod_src->src & 127; /* index of source 1, seven-bit value, SF2.01 section 8.2, page 50 */
+            mod_dest->src1 = mod_src->src & 0x7f; /* index of source 1, seven-bit value, SF2.01 section 8.2, page 50 */
             mod_dest->flags1 = 0;
 
             /* Bit 7: CC flag SF 2.01 section 8.2.1 page 50*/
             if (mod_src->src & (1<<7))
                   mod_dest->flags1 |= FLUID_MOD_CC;
-            else
-                  mod_dest->flags1 |= FLUID_MOD_GC;
 
             /* Bit 8: D flag SF 2.01 section 8.2.2 page 51*/
             if (mod_src->src & (1<<8))
                   mod_dest->flags1 |= FLUID_MOD_NEGATIVE;
-            else
-                  mod_dest->flags1 |= FLUID_MOD_POSITIVE;
 
             /* Bit 9: P flag SF 2.01 section 8.2.3 page 51*/
             if (mod_src->src & (1<<9))
                   mod_dest->flags1 |= FLUID_MOD_BIPOLAR;
-            else
-                  mod_dest->flags1 |= FLUID_MOD_UNIPOLAR;
 
             /* modulator source types: SF2.01 section 8.2.1 page 52 */
-            type = (mod_src->src) >> 10;
-            type &= 63; /* type is a 6-bit value */
+            int type = (mod_src->src) >> 10;
+            type &= 0x3f; /* type is a 6-bit value */
             if (type == 0)
                   mod_dest->flags1 |= FLUID_MOD_LINEAR;
             else if (type == 1)
@@ -505,6 +492,7 @@ bool Zone::importZone()
                   /* This shouldn't happen - unknown type!
                    * Deactivate the modulator by setting the amount to 0.
                    */
+                  // printf("unknown mod type\n");
                   mod_dest->amount=0;
                   }
 
@@ -518,20 +506,14 @@ bool Zone::importZone()
             /* Bit 7: CC flag SF 2.01 section 8.2.1 page 50*/
             if (mod_src->amtsrc & (1<<7))
                   mod_dest->flags2 |= FLUID_MOD_CC;
-            else
-                  mod_dest->flags2 |= FLUID_MOD_GC;
 
             /* Bit 8: D flag SF 2.01 section 8.2.2 page 51*/
             if (mod_src->amtsrc & (1<<8))
                   mod_dest->flags2 |= FLUID_MOD_NEGATIVE;
-            else
-                  mod_dest->flags2 |= FLUID_MOD_POSITIVE;
 
             /* Bit 9: P flag SF 2.01 section 8.2.3 page 51*/
             if (mod_src->amtsrc & (1<<9))
                   mod_dest->flags2 |= FLUID_MOD_BIPOLAR;
-            else
-                  mod_dest->flags2 |= FLUID_MOD_UNIPOLAR;
 
             /* modulator source types: SF2.01 section 8.2.1 page 52 */
             type = (mod_src->amtsrc) >> 10;
@@ -547,6 +529,7 @@ bool Zone::importZone()
             else {
                   /* This shouldn't happen - unknown type!
                    * Deactivate the modulator by setting the amount to 0. */
+                  // printf("unknown mod type\n");
                   mod_dest->amount=0;
                   }
 
@@ -554,7 +537,7 @@ bool Zone::importZone()
             /* SF2.01 only uses the 'linear' transform (0).
              * Deactivate the modulator by setting the amount to 0 in any other case.
              */
-            if (mod_src->trans !=0)
+            if (mod_src->trans != 0)
                   mod_dest->amount = 0;
 
             /* Store the new modulator in the zone The order of modulators
@@ -608,51 +591,31 @@ void Sample::load()
       QFile fd(sf->get_name());
       if (!fd.open(QIODevice::ReadOnly))
             return;
-      if (sampletype & FLUID_SAMPLETYPE_OGG_VORBIS) {
-            if (!fd.seek(sf->samplePos() + start))
-                  return;
-            }
-      else {
-            if (!fd.seek(sf->samplePos() + start * sizeof(short)))
-                  return;
-            }
+      if (!fd.seek(sf->samplePos() + start * sizeof(short)))
+            return;
       unsigned int size = end - start;
+      data              = new short[size];
+      size              *= sizeof(short);
 
-      if (sampletype & FLUID_SAMPLETYPE_OGG_VORBIS) {
-#ifdef SOUNDFONT3
-            char* p = new char[size];
-            if (fd.read(p, size) != size) {
-                  printf("  read %d failed\n", size);
-                  return;
+      if (fd.read((char*)data, size) != size)
+            return;
+
+      if (QSysInfo::ByteOrder == QSysInfo::BigEndian) {
+            unsigned char hi, lo;
+            unsigned int i, j;
+            short s;
+            unsigned char* cbuf = (unsigned char*) data;
+            for (i = 0, j = 0; j < size; i++) {
+                  lo = cbuf[j++];
+                  hi = cbuf[j++];
+                  s = (hi << 8) | lo;
+                  data[i] = s;
                   }
-            decompressOggVorbis(p, size);
-            delete[] p;
-#endif
             }
-      else {
-            data = new short[size];
-            size *= sizeof(short);
-
-            if (fd.read((char*)data, size) != size)
-                  return;
-
-            if (QSysInfo::ByteOrder == QSysInfo::BigEndian) {
-                  unsigned char hi, lo;
-                  unsigned int i, j;
-                  short s;
-                  uchar* cbuf = (uchar*) data;
-                  for (i = 0, j = 0; j < size; i++) {
-                        lo = cbuf[j++];
-                        hi = cbuf[j++];
-                        s = (hi << 8) | lo;
-                        data[i] = s;
-                        }
-                  }
-            end       -= (start + 1);       // marks last sample, contrary to SF spec.
-            loopstart -= start;
-            loopend   -= start;
-            start      = 0;
-            }
+      end       -= start - 1;       // marks last sample, contrary to SF spec.
+      loopstart -= start;
+      loopend   -= start;
+      start      = 0;
       optimize();
       }
 
@@ -859,11 +822,11 @@ void SFont::process_info(int size)
                   if (chunk.size != 4)
                         throw(QString("Sound font version info chunk has invalid size"));
 
-                  _version.major = READW();
-                  _version.minor = READW();
+                  version.major = READW();
+                  version.minor = READW();
 
-                  if (_version.major < 2 || _version.major > 3)
-                        throw(QString("Bad Sound font version %1.%2").arg(_version.major).arg(_version.minor));
+                  if (version.major < 2 || version.major > 2)
+                        throw(QString("Bad Sound font version"));
                   }
             else if (id == IVER_ID) {   /* ROM version chunk? */
                   if (chunk.size != 4)
@@ -1108,8 +1071,9 @@ void SFont::load_pmod (int size)
      If there isn't even a terminal record
      Hmmm, the specs say there should be one, but..
    */
-      if (size == 0)
+      if (size == 0) {
             return;
+            }
 
       size -= SFMODSIZE;
       if (size != 0)
@@ -1439,8 +1403,9 @@ void SFont::load_imod(int size)
         If there isn't even a terminal record
         Hmmm, the specs say there should be one, but..
       */
-      if (size == 0)
+      if (size == 0) {
             return;
+            }
       size -= SFMODSIZE;
       if (size != 0)
             throw(QString("Instrumentrument modulator chunk size mismatch"));
@@ -1614,24 +1579,19 @@ void SFont::load_shdr (int size)
                   continue;
                   }
             p->setValid(true);
-            if (p->sampletype & FLUID_SAMPLETYPE_OGG_VORBIS) {
-                  }
-            else {
-                  // loop is fowled?? (cluck cluck :)
-                  if (p->loopend > p->end || p->loopstart >= p->loopend || p->loopstart <= p->start) {
-                        /* can pad loop by 8 samples and ensure at least 4 for loop (2*8+4) */
-                        if ((p->end - p->start) >= 20) {
-                              p->loopstart = p->start + 8;
-                              p->loopend   = p->end - 8;
-                              }
-                        else {      // loop is fowled, sample is tiny (can't pad 8 samples)
-                              p->loopstart = p->start + 1;
-                              p->loopend   = p->end - 1;
-                              }
+            if (p->loopend > p->end || p->loopstart >= p->loopend || p->loopstart <= p->start) {	 /* loop is fowled?? (cluck cluck :) */
+                  /* can pad loop by 8 samples and ensure at least 4 for loop (2*8+4) */
+                  if ((p->end - p->start) >= 20) {
+                        p->loopstart = p->start + 8;
+                        p->loopend   = p->end - 8;
                         }
-                  if ((p->end - p->start) < 8)
-                        p->setValid(false);
+                  else {      // loop is fowled, sample is tiny (can't pad 8 samples)
+                        p->loopstart = p->start + 1;
+                        p->loopend   = p->end - 1;
+                        }
                   }
+            if (p->end - p->start < 8)
+                  p->setValid(false);
             }
       FSKIP (SFSHDRSIZE);	/* skip terminal shdr */
       }

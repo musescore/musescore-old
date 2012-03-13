@@ -3,8 +3,8 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  The webview is shown on startup with a local file inviting user
-//  to start connecting with the community. They can press start and
+//  The webview is shown on startup with a local file inviting user 
+//  to start connecting with the community. They can press start and 
 //  MuseScore will go online. If no connection, display a can't connect message
 //  On next startup, if no connection, the panel is closed. If connection, the
 //  MuseScore goes online directly. If the autoclose panel is reopen, the user
@@ -26,9 +26,9 @@
 //=============================================================================
 
 #include "webpage.h"
-#include "musescore.h"
+#include "mscore.h"
 #include "preferences.h"
-#include "libmscore/score.h"
+#include "score.h"
 
 static const char* staticUrl = "http://connect.musescore.com";
 
@@ -60,7 +60,6 @@ QObject* MyWebPage::createPlugin(
       // way. When we'd like to create non-visual objects in
       // Html to use them via JavaScript, we'd use a different
       // mechanism than this.
-#if 0
       if (classid == "WebScoreView") {
             WebScoreView* sv = new WebScoreView(view());
             int idx = paramNames.indexOf("score");
@@ -69,18 +68,17 @@ QObject* MyWebPage::createPlugin(
                   sv->setScore(paramValues[idx]);
                   }
             else {
-                  qDebug("create WebScoreView: property score not found(%d)\n",
+                  printf("create WebScoreView: property score not found(%d)\n",
                      paramNames.size());
                   }
             return sv;
             }
-#endif
       return 0;
 
       /*QUiLoader loader;
       return loader.createWidget(classid, view());*/
       }
-
+      
 //---------------------------------------------------------
 //   userAgentForUrl
 //---------------------------------------------------------
@@ -103,12 +101,11 @@ MyWebView::MyWebView(QWidget *parent):
 
       m_page.setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
       setPage(&m_page);
-
+      
       //set cookie jar for persistent cookies
       CookieJar* jar = new CookieJar(QString(dataPath + "/cookies.txt"));
       page()->networkAccessManager()->setCookieJar(jar);
 
-      progressBar = 0;
       connect(this, SIGNAL(linkClicked(const QUrl&)), SLOT(link(const QUrl&)));
       }
 
@@ -116,11 +113,19 @@ MyWebView::MyWebView(QWidget *parent):
 //   ~MyWebView
 //---------------------------------------------------------
 
-MyWebView::~MyWebView()
+MyWebView::~MyWebView() 
       {
       disconnect(this, SIGNAL(loadFinished(bool)), this, SLOT(stopBusyAndClose(bool)));
       disconnect(this, SIGNAL(loadFinished(bool)), this, SLOT(stopBusyAndFirst(bool)));
       disconnect(this, SIGNAL(loadFinished(bool)), this, SLOT(stopBusyStatic(bool)));
+      }
+
+void MyWebView::load ( const QNetworkRequest & request, QNetworkAccessManager::Operation operation, const QByteArray & body) 
+      {
+      QNetworkRequest new_req(request);  
+      new_req.setRawHeader("User-Agent",  QString("MuseScore %1").arg(VERSION).toAscii());  
+      new_req.setRawHeader("Accept-Language",  QString("%1;q=0.8,en-US;q=0.6,en;q=0.4").arg(mscore->getLocaleISOCode()).toAscii());   
+      QWebView::load( new_req, operation, body);
       }
 
 //---------------------------------------------------------
@@ -152,8 +157,6 @@ void MyWebView::stopBusy(bool val, bool close)
             if(!preferences.firstStartWeb && close)
                   mscore->showWebPanel(false);
             }
-//      disconnect(this, SIGNAL(loadProgress(int)), progressBar, SLOT(setValue(int)));
-      mscore->hideProgressBar();
       setCursor(Qt::ArrowCursor);
       }
 
@@ -171,7 +174,7 @@ void MyWebView::stopBusyAndFirst(bool val)
             }
       }
 
-void MyWebView::stopBusyStatic(bool val)
+void MyWebView::stopBusyStatic(bool val) 
       {
       stopBusy(val, false);
       }
@@ -182,11 +185,6 @@ void MyWebView::stopBusyStatic(bool val)
 
 void MyWebView::setBusy()
       {
-/*      progressBar = mscore->showProgressBar();
-      progressBar->setRange(0, 100);
-      progressBar->setValue(0);
-      connect(this, SIGNAL(loadProgress(int)), progressBar, SLOT(setValue(int)));
-*/
       setCursor(Qt::WaitCursor);
       }
 
@@ -209,22 +207,10 @@ void MyWebView::link(const QUrl& url)
 //---------------------------------------------------------
 //   sizeHint
 //---------------------------------------------------------
-
-QSize	MyWebView::sizeHint() const
+      
+QSize	MyWebView::sizeHint() const 
       {
       return QSize(300 , 300);
-      }
-
-//---------------------------------------------------------
-//   load
-//---------------------------------------------------------
-
-void	MyWebView::load(const QNetworkRequest & request, QNetworkAccessManager::Operation operation, const QByteArray & body)
-      {
-      QNetworkRequest new_req(request);
-      new_req.setRawHeader("User-Agent",  QString("MuseScore %1").arg(VERSION).toAscii());
-      new_req.setRawHeader("Accept-Language",  QString("%1;q=0.8,en-US;q=0.6,en;q=0.4").arg(mscore->getLocaleISOCode()).toAscii());
-      QWebView::load( new_req, operation, body);
       }
 
 //---------------------------------------------------------
@@ -237,7 +223,7 @@ WebPageDockWidget::WebPageDockWidget(MuseScore* mscore, QWidget* parent)
       setWindowTitle("MuseScore Connect");
       setFloating(false);
       setFeatures(QDockWidget::DockWidgetClosable);
-
+      
       setObjectName("webpage");
       setAllowedAreas(Qt::LeftDockWidgetArea);
 
@@ -245,7 +231,7 @@ WebPageDockWidget::WebPageDockWidget(MuseScore* mscore, QWidget* parent)
       web->setContextMenuPolicy(Qt::PreventContextMenu);
       QWebFrame* frame = web->webPage()->mainFrame();
       connect(frame, SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(addToJavascript()));
-
+            
       if(preferences.firstStartWeb) {
             connect(web, SIGNAL(loadFinished(bool)), web, SLOT(stopBusyStatic(bool)));
             web->setBusy();
@@ -275,11 +261,12 @@ WebPageDockWidget::WebPageDockWidget(MuseScore* mscore, QWidget* parent)
                   , QUrl("qrc:/"));
             }
       else{
-            //And not load !
+            //And not load ! 
             connect(web, SIGNAL(loadFinished(bool)), web, SLOT(stopBusyAndClose(bool)));
             web->setBusy();
             web->load(QNetworkRequest(webUrl()));
             }
+
       setWidget(web);
       }
 
@@ -287,7 +274,7 @@ WebPageDockWidget::WebPageDockWidget(MuseScore* mscore, QWidget* parent)
 //   addToJavascript
 //---------------------------------------------------------
 
-void WebPageDockWidget::addToJavascript()
+void WebPageDockWidget::addToJavascript() 
       {
       QWebFrame* frame = web->webPage()->mainFrame();
       frame->addToJavaScriptWindowObject("panel", this);
@@ -305,24 +292,115 @@ void WebPageDockWidget::load()
       web->load(QNetworkRequest(webUrl()));
       }
 
+#if QT_VERSION >= 0x040800
+bool WebPageDockWidget::saveCurrentScoreOnline(QString action, QVariantMap parameters, QString fileFieldName)
+      {
+      QWebPage * page = web->webPage();
+      QNetworkAccessManager* manager = page->networkAccessManager();
+      
+      QHttpMultiPart *multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);
+
+      QMap<QString, QVariant>::const_iterator i = parameters.constBegin();
+      while (i != parameters.constEnd()) {
+            QHttpPart part;
+            part.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant(QString("form-data; name=\"%1\"").arg(i.key())));
+            part.setBody(i.value().toString().toAscii());
+            multiPart->append(part);
+            //printf("%s \n", qPrintable(i.key()));
+            //printf("%s \n", qPrintable(i.value().toString()));
+            ++i;
+            }
+
+      if(!fileFieldName.isEmpty()) {
+            QDir dir;
+            QFile *file = new QFile(dir.tempPath() + "/temp.mscz");
+            Score* score = mscore->currentScore();
+            if(score) {
+                  score->saveAs(true, file->fileName(), "mscz");
+                  }
+            else {
+                  delete multiPart;
+                  return false;
+                  }
+            QHttpPart filePart;
+            filePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("application/octet-stream"));
+            filePart.setRawHeader("Content-Transfer-Encoding", "binary");
+            filePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant(QString("form-data; name=\"%1\"; filename=\"temp.mscz\"").arg(fileFieldName)));
+            file->open(QIODevice::ReadOnly);
+            filePart.setBodyDevice(file);
+            file->setParent(multiPart); // we cannot delete the file now, so delete it with the multiPart
+            multiPart->append(filePart);
+            }
+      
+      QUrl url(action);
+      QNetworkRequest request(url);
+      
+      //QNetworkAccessManager manager;
+      QNetworkReply *reply = manager->post(request, multiPart);
+      multiPart->setParent(reply); // delete the multiPart with the reply
+      // here connect signals etc.
+      connect(reply, SIGNAL(finished()),
+         this, SLOT(saveOnlineFinished()));
+
+      return true;
+      }      
+      
+void WebPageDockWidget::saveOnlineFinished() {
+      // delete file
+      QDir dir;
+      QFile file(dir.tempPath() + "/temp.mscz");
+      file.remove();
+      
+      QNetworkReply *reply = (QNetworkReply *)sender();
+      // Reading attributes of the reply
+      // e.g. the HTTP status code
+      QVariant statusCodeV = 
+      reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+   
+      // no error received?
+      if (reply->error() == QNetworkReply::NoError) {
+            //Reading bytes form the reply
+            QByteArray bytes = reply->readAll();  // bytes
+            QString string(bytes); // string
+            web->setHtml(string);
+            }
+      else {
+            // handle errors here
+            }
+      reply->deleteLater();
+      }      
+#endif
+
+bool WebPageDockWidget::setCurrentScoreSource(QString source) 
+      {
+      Score* score = mscore->currentScore();
+      if(score) {
+            score->setSource(source);
+            return true;
+            }
+      else {
+            return false;
+            }
+      }
+
 //---------------------------------------------------------
 //   webUrl
 //---------------------------------------------------------
 QUrl WebPageDockWidget::webUrl()
-    {
-    return QUrl(staticUrl);
-    }
+      { 
+      return QUrl(staticUrl); 
+      }      
 
 //---------------------------------------------------------
 //   CookieJar
 //
-//   Once the QNetworkCookieJar object is deleted, all cookies it held will be
-//   discarded as well. If you want to save the cookies, you should derive from
-//   this class and implement the saving to disk to your own storage format.
+//   Once the QNetworkCookieJar object is deleted, all cookies it held will be 
+//   discarded as well. If you want to save the cookies, you should derive from 
+//   this class and implement the saving to disk to your own storage format. 
 //   (From QNetworkCookieJar documentation.)
 //---------------------------------------------------------
 
-CookieJar::CookieJar(QString path, QObject *parent)
+CookieJar::CookieJar(QString path, QObject *parent) 
     : QNetworkCookieJar(parent)
       {
       file = path;
@@ -335,11 +413,10 @@ CookieJar::CookieJar(QString path, QObject *parent)
             while(!(line = cookieFile.readLine()).isNull()) {
                   list.append(QNetworkCookie::parseCookies(line));
                   }
-            setAllCookies(list);
+            setAllCookies(list); 
             }
       else {
-            if (debugMode)
-                  qDebug() << "Can't open "<< this->file << " to read cookies";
+            qWarning() << "Can't open "<< this->file << " to read cookies"; 
             }
       }
 
@@ -349,17 +426,16 @@ CookieJar::CookieJar(QString path, QObject *parent)
 
 CookieJar::~CookieJar()
       {
-      QList <QNetworkCookie> cookieList;
+      QList <QNetworkCookie> cookieList; 
       cookieList = allCookies();
-
+      
       QFile file(this->file);
 
       if(!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-            if (debugMode)
-                  qDebug() << "Can't open "<< this->file << " to save cookies";
+            qWarning() << "Can't open "<< this->file << " to save cookies";
             return;
             }
-
+                  
       QTextStream out(&file);
       for(int i = 0 ; i < cookieList.size() ; i++) {
                 //get cookie data
@@ -372,7 +448,6 @@ CookieJar::~CookieJar()
       file.close();
       }
 
-#if 0
 //---------------------------------------------------------
 //   WebScoreView
 //---------------------------------------------------------
@@ -410,8 +485,7 @@ void WebScoreView::setScore(const QString& url)
 void WebScoreView::networkFinished(QNetworkReply* reply)
       {
       if (reply->error() != QNetworkReply::NoError) {
-            if (debugMode)
-                  qDebug("Error while checking update [%s]\n", qPrintable(reply->errorString()));
+            printf("Error while checking update [%s]\n", qPrintable(reply->errorString()));
             return;
             }
       QByteArray ha = reply->rawHeader("Content-Disposition");
@@ -424,20 +498,19 @@ void WebScoreView::networkFinished(QNetworkReply* reply)
             name = re.cap(1);
 
       QByteArray data = reply->readAll();
-      QString tmpName = QDir::tempPath () + "/"+ name;
+      QString tmpName = "/tmp/" + name;
       QFile f(tmpName);
       f.open(QIODevice::WriteOnly);
       f.write(data);
       f.close();
-
-      Score* score = mscore->readScore(tmpName);
-      if (!score) {
-            qDebug("readScore failed\n");
+      
+      Score* score = new Score(defaultStyle);
+      if(!score->read(tmpName)) {
+            printf("readScore failed\n");
+            delete score;
             return;
             }
+
       ScoreView::setScore(score);
       update();
       }
-
-#endif
-

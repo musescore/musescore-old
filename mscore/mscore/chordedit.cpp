@@ -21,10 +21,9 @@
 #include <iostream>
 
 #include "chordedit.h"
-#include "libmscore/harmony.h"
-#include "libmscore/pitchspelling.h"
-#include "libmscore/score.h"
-#include "libmscore/chordlist.h"
+#include "harmony.h"
+#include "pitchspelling.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   ChordEdit
@@ -81,13 +80,9 @@ ChordEdit::ChordEdit(Score* s, QWidget* parent)
       extensionGroup->addButton(extOther,  0);
 
       extOtherCombo->clear();
-      ChordList* cl = score->style()->chordList();
+      ChordList* cl = score->style().chordList();
       foreach (const ChordDescription* cd, *cl) {
-            QString p;
-            if (cd->names.isEmpty())
-                  p = "?";
-            else
-                  p = cd->names.front();
+            QString p(cd->name);
             extOtherCombo->addItem(p, cd->id);
             }
       connect(rootGroup, SIGNAL(buttonClicked(int)), SLOT(chordChanged()));
@@ -150,7 +145,7 @@ void ChordEdit::setHarmony(const Harmony* h)
 
 void ChordEdit::setRoot(int val)
       {
-//      qDebug("ChordEdit::setRoot(val=%d) tpc2step=%d tpc2stepname=%s tpc2alter=%d\n",
+//      printf("ChordEdit::setRoot(val=%d) tpc2step=%d tpc2stepname=%s tpc2alter=%d\n",
 //             val, tpc2step(val), qPrintable(tpc2stepName(val)), tpc2alter(val));
 
       QAbstractButton* button = NULL;
@@ -158,7 +153,7 @@ void ChordEdit::setRoot(int val)
 
       // catch INVALID_TPC
       if (val == INVALID_TPC) {
-            qDebug("ChordEdit::setRoot(val=INVALID_TPC)\n");
+            printf("ChordEdit::setRoot(val=INVALID_TPC)\n");
             // default to C, no accidentals
             button = rootGroup->button(0);
             button->setChecked(true);
@@ -173,14 +168,14 @@ void ChordEdit::setRoot(int val)
       if (button)
             button->setChecked(true);
       else
-            qDebug("root button %d not found\n", val);
+            printf("root button %d not found\n", val);
 
       id = tpc2alter(val);
       button = accidentalsGroup->button(id + 3);
       if (button)
             button->setChecked(true);
       else
-            qDebug("root button %d not found\n", id);
+            printf("root button %d not found\n", id);
 
       chordChanged();
       }
@@ -229,10 +224,10 @@ const ChordDescription* ChordEdit::extension()
             return 0;
       else if (id == 0) {
             int idx = extOtherCombo->currentIndex();
-            return score->style()->chordDescription(extOtherCombo->itemData(idx).toInt());
+            return score->style().chordDescription(extOtherCombo->itemData(idx).toInt());
             }
       else
-            return score->style()->chordDescription(id);
+            return score->style().chordDescription(id);
       }
 
 //---------------------------------------------------------
@@ -244,7 +239,7 @@ const ChordDescription* ChordEdit::extension()
 int ChordEdit::root()
       {
       int tpc = step2tpc(rootGroup->checkedId(), accidentalsGroup->checkedId() - 3);
-//      qDebug("ChordEdit::root() rootid=%d accid=%d -> tpc=%d\n",
+//      printf("ChordEdit::root() rootid=%d accid=%d -> tpc=%d\n",
 //             rootGroup->checkedId(), accidentalsGroup->checkedId() - 3, tpc);
       return tpc;
       }
@@ -295,7 +290,7 @@ void ChordEdit::otherToggled(bool val)
 
 void ChordEdit::chordChanged()
       {
-//      qDebug("ChordEdit::chordChanged() root=%d ext=%d base=%d ndeg=%d\n",
+//      printf("ChordEdit::chordChanged() root=%d ext=%d base=%d ndeg=%d\n",
 //             root(), extension(), base(), numberOfDegrees());
       _harmony->clearDegrees();
       for (int i = 0; i < numberOfDegrees(); i++)

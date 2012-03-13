@@ -18,13 +18,13 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "musescore.h"
-#include "libmscore/rest.h"
-#include "libmscore/chord.h"
-#include "libmscore/chordrest.h"
-#include "libmscore/harmony.h"
-#include "libmscore/measure.h"
-#include "libmscore/note.h"
+#include "mscore.h"
+#include "rest.h"
+#include "chord.h"
+#include "chordrest.h"
+#include "harmony.h"
+#include "measure.h"
+#include "note.h"
 #include "script.h"
 
 Q_DECLARE_METATYPE(Rest);
@@ -71,12 +71,12 @@ static QScriptValue prototype_Rest_call(QScriptContext* context, QScriptEngine*)
       switch(_id) {
             case 0:
                   if (context->argumentCount() == 0)
-                        return qScriptValueFromValue(context->engine(), rest->actualTicks());
+                        return qScriptValueFromValue(context->engine(), rest->tickLen());
                   else if (context->argumentCount() == 1) {
                         int ticks = context->argument(0).toInt32();
                         if (ticks < 1)
                               break;
-                        rest->setDurationType(ticks);
+                        rest->setDurationVal(ticks);
                         return context->engine()->undefinedValue();
                         }
                   break;
@@ -86,7 +86,7 @@ static QScriptValue prototype_Rest_call(QScriptContext* context, QScriptEngine*)
                         if (!h)
                               break;
                         h->setParent(rest->measure());
-//TODO1                        h->setTick(rest->tick());
+                        h->setTick(rest->tick());
                         Score* score = rest->score();
                         if (score) {
                               h->setScore(score);

@@ -45,6 +45,8 @@ function init()
 
 function run()
       {
+      if(typeof curScore === 'undefined')
+            return;
       print("script: note names");
       var cursor = new Cursor(curScore);
       cursor.staff = 0;

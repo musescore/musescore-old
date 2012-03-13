@@ -22,9 +22,9 @@
      <colorrole role="WindowText">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
        </color>
       </brush>
      </colorrole>
@@ -76,9 +76,9 @@
      <colorrole role="Text">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
        </color>
       </brush>
      </colorrole>
@@ -103,18 +103,18 @@
      <colorrole role="Base">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>80</red>
-        <green>80</green>
-        <blue>80</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>80</red>
-        <green>80</green>
-        <blue>80</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -177,9 +177,9 @@
      <colorrole role="WindowText">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
        </color>
       </brush>
      </colorrole>
@@ -231,9 +231,9 @@
      <colorrole role="Text">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
        </color>
       </brush>
      </colorrole>
@@ -258,18 +258,18 @@
      <colorrole role="Base">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>80</red>
-        <green>80</green>
-        <blue>80</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>80</red>
-        <green>80</green>
-        <blue>80</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -413,18 +413,18 @@
      <colorrole role="Base">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>80</red>
-        <green>80</green>
-        <blue>80</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>80</red>
-        <green>80</green>
-        <blue>80</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -488,9 +488,6 @@
   <property name="windowTitle">
    <string>AboutBox</string>
   </property>
-  <property name="autoFillBackground">
-   <bool>true</bool>
-  </property>
   <layout class="QVBoxLayout">
    <item>
     <layout class="QVBoxLayout">
@@ -545,7 +542,7 @@
             <enum>Qt::PlainText</enum>
            </property>
            <property name="pixmap">
-            <pixmap resource="musescore.qrc">:/data/musescore_logo_full1.png</pixmap>
+            <pixmap resource="mscore.qrc">:/data/musescore_logo_full.png</pixmap>
            </property>
            <property name="margin">
             <number>0</number>
@@ -574,14 +571,14 @@
          <item>
           <widget class="QLabel" name="versionLabel">
            <property name="text">
-            <string notr="true" comment="do not translate">Version: 0.9.0</string>
+            <string notr="true">Version: 0.9.0</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QLabel" name="revisionLabel">
            <property name="text">
-            <string notr="true" comment="do not translate">Revision: 628</string>
+            <string notr="true">Revision: 628</string>
            </property>
           </widget>
          </item>
@@ -630,7 +627,7 @@ p, li { white-space: pre-wrap; }
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="musescore.qrc"/>
+  <include location="mscore.qrc"/>
  </resources>
  <connections>
   <connection>

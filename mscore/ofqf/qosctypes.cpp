@@ -151,6 +151,7 @@ void PathObject::send() { send( QVariant() ); }
 
 void PathObject::signalData( QVariant v ) {
 	if ( v.type() == _type || (v.type() == QMetaType::Float && _type == QVariant::Double) ) {
+	printf("signalData\n");
 		if ( _type == QVariant::Invalid )
 			emit data();
 		if ( _type == QVariant::Int )

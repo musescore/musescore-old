@@ -187,6 +187,7 @@ double AbstractSlider::value() const
       return _log ? pow(10.0, _value*0.05f) : _value;
       }
 
+
 //---------------------------------------------------------
 //   minLogValue
 //---------------------------------------------------------
@@ -199,17 +200,13 @@ double AbstractSlider::value() const
 //   setMinLogValue
 //---------------------------------------------------------
 
-void AbstractSlider::setMinLogValue(double val)
-      {
-      if (_log) {
-            if (val == 0.0f)
-                  _minValue = -100;
-            else
-                  _minValue = fast_log10(val) * 20.0f;
-            }
-      else
-            _minValue = val;
-      }
+void AbstractSlider::setMinLogValue(double val) {
+  if (_log) {
+    if (val == 0.0f) _minValue = -100;
+    else _minValue = fast_log10(val) * 20.0f;
+  }
+  else _minValue = val;
+}
 
 //---------------------------------------------------------
 //   maxLogValue
@@ -223,26 +220,11 @@ void AbstractSlider::setMinLogValue(double val)
 //   setMaxLogValue
 //---------------------------------------------------------
 
-void AbstractSlider::setMaxLogValue(double val)
-      {
-      if (_log) {
-            _maxValue = fast_log10(val) * 20.0f;
-            }
-      else
-            _maxValue = val;
-      }
-
-//---------------------------------------------------------
-//   init
-//---------------------------------------------------------
-
-void AbstractSlider::init(const SyntiParameter& f)
-      {
-      _minValue = f.min();
-      _maxValue = f.max();
-      _value    = f.fval();
-      _lineStep   = (_maxValue - _minValue) * 0.1;
-      _pageStep   = _lineStep * 2.0;
-      }
+void AbstractSlider::setMaxLogValue(double val) {
+  if (_log) {
+    _maxValue = fast_log10(val) * 20.0f;
+  }
+  else _maxValue = val;
+}
 
 }

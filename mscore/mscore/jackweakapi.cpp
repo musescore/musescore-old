@@ -72,7 +72,7 @@ void *load_jack_function(const char *fn_name)
 {
     void *fn = 0;
     if (!libjack_handle) {
-        qDebug("libjack not found, so do not try to load  %s ffs  !\n", fn_name);
+        fprintf (stderr, "libjack not found, so do not try to load  %s ffs  !\n", fn_name);
         return 0;
     }
 #ifdef WIN32
@@ -84,9 +84,9 @@ void *load_jack_function(const char *fn_name)
 #ifdef WIN32
         char* lpMsgBuf;
         FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,NULL,GetLastError(),MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),(LPTSTR) &lpMsgBuf,0,NULL );
-        qDebug("could not GetProcAddress( %s ), %s \n", fn_name, lpMsgBuf) ;
+        fprintf (stderr, "could not GetProcAddress( %s ), %s \n", fn_name, lpMsgBuf) ;
 #else
-        qDebug ("could not dlsym( %s ), %s \n", fn_name, dlerror()) ;
+        fprintf (stderr, "could not dlsym( %s ), %s \n", fn_name, dlerror()) ;
 #endif
     }
     return fn;
@@ -252,8 +252,8 @@ DECL_FUNCTION(jack_nframes_t, jack_get_current_transport_frame, (const jack_clie
 DECL_FUNCTION(int, jack_transport_reposition, (jack_client_t *client, jack_position_t *pos), (client, pos));
 DECL_VOID_FUNCTION(jack_transport_start, (jack_client_t *client), (client));
 DECL_VOID_FUNCTION(jack_transport_stop, (jack_client_t *client), (client));
-// DECL_VOID_FUNCTION(jack_get_transport_info, (jack_client_t *client, jack_transport_info_t *tinfo), (client,tinfo));
-// DECL_VOID_FUNCTION(jack_set_transport_info, (jack_client_t *client, jack_transport_info_t *tinfo), (client,tinfo));
+DECL_VOID_FUNCTION(jack_get_transport_info, (jack_client_t *client, jack_transport_info_t *tinfo), (client,tinfo));
+DECL_VOID_FUNCTION(jack_set_transport_info, (jack_client_t *client, jack_transport_info_t *tinfo), (client,tinfo));
 
 DECL_FUNCTION(int, jack_client_real_time_priority, (jack_client_t* client), (client));
 DECL_FUNCTION(int, jack_client_max_real_time_priority, (jack_client_t* client), (client));

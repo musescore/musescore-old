@@ -164,8 +164,11 @@ bool QtLocalPeer::sendMessage(const QString &message, int timeout)
     QDataStream ds(&socket);
     ds.writeBytes(uMsg.constData(), uMsg.size());
     bool res = socket.waitForBytesWritten(timeout);
-    res &= socket.waitForReadyRead(timeout);   // wait for ack
-    res &= (socket.read(qstrlen(ack)) == ack);
+    if (res) {
+        res &= socket.waitForReadyRead(timeout);   // wait for ack
+        if (res)
+            res &= (socket.read(qstrlen(ack)) == ack);
+    }
     return res;
 }
 
@@ -175,7 +178,8 @@ void QtLocalPeer::receiveConnection()
     QLocalSocket* socket = server->nextPendingConnection();
     if (!socket)
         return;
-
+    if (!socket->isValid())
+        return;
     while (socket->bytesAvailable() < (int)sizeof(quint32))
         socket->waitForReadyRead();
     QDataStream ds(socket);

@@ -21,8 +21,6 @@
 #ifndef __MUSICXMLSUPPORT_H__
 #define __MUSICXMLSUPPORT_H__
 
-#include "libmscore/mscore.h"
-
 //---------------------------------------------------------
 //   NoteList
 //---------------------------------------------------------

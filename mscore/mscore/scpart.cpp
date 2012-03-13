@@ -18,15 +18,15 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "musescore.h"
-#include "libmscore/part.h"
-#include "libmscore/utils.h"
-#include "libmscore/undo.h"
+#include "mscore.h"
+#include "part.h"
+#include "utils.h"
+#include "undo.h"
 #include "script.h"
 
 Q_DECLARE_METATYPE(Part*);
 Q_DECLARE_METATYPE(Score*);
-Q_DECLARE_METATYPE(Text*);
+Q_DECLARE_METATYPE(TextC*);
 
 static const char* const function_names_part[] = {
       "longName", "shortName", "midiProgram", "midiChannel", "staves"
@@ -69,7 +69,7 @@ static QScriptValue prototype_Part_call(QScriptContext* context, QScriptEngine*)
       switch(_id) {
             case 0:     // "longName",
                   if (context->argumentCount() == 0)
-                        return qScriptValueFromValue(context->engine(), part->longName().toPlainText().replace(QString(0xe10d), QString(0x266D)));
+                        return qScriptValueFromValue(context->engine(), part->longName()->getText().replace(QString(0xe10d), QString(0x266D)));
                   else if (context->argumentCount() == 1) {
                         QString s = qscriptvalue_cast<QString>(context->argument(0));
                         part->setLongName(s);
@@ -78,7 +78,7 @@ static QScriptValue prototype_Part_call(QScriptContext* context, QScriptEngine*)
                   break;
             case 1:     // "shortName",
                   if (context->argumentCount() == 0)
-                        return qScriptValueFromValue(context->engine(), part->shortName().toPlainText().replace(QString(0xe10d), QString(0x266D)));
+                        return qScriptValueFromValue(context->engine(), part->shortName()->getText().replace(QString(0xe10d), QString(0x266D)));
                   else if (context->argumentCount() == 1) {
                         QString s = qscriptvalue_cast<QString>(context->argument(0));
                         part->setShortName(s);

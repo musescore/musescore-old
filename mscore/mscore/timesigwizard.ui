@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>613</width>
-    <height>322</height>
+    <width>530</width>
+    <height>321</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,88 +26,64 @@
       <string>Enter Time Signature:</string>
      </property>
      <property name="flat">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QHBoxLayout">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QRadioButton" name="tsFraction">
-          <property name="text">
-           <string notr="true"/>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="timesigZ">
-          <property name="minimum">
-           <number>1</number>
-          </property>
-          <property name="maximum">
-           <number>63</number>
-          </property>
-          <property name="value">
-           <number>4</number>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>/</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="Awl::DenominatorSpinBox" name="timesigN">
-          <property name="maximum">
-           <number>32</number>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="tsCutTime">
+       <widget class="QLabel" name="label_3">
         <property name="text">
-         <string notr="true">cut time</string>
+         <string>Time Signature: </string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="tsCommonTime">
-        <property name="text">
-         <string notr="true">common time</string>
+       <widget class="QSpinBox" name="timesigZ">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>63</number>
+        </property>
+        <property name="value">
+         <number>4</number>
         </property>
        </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>/</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Awl::DenominatorSpinBox" name="timesigN">
+        <property name="maximum">
+         <number>32</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </widget>
@@ -118,7 +94,7 @@
       <string>Pickup Measure</string>
      </property>
      <property name="flat">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -192,7 +168,7 @@
       <string>Enter Number of Measures:</string>
      </property>
      <property name="flat">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <layout class="QGridLayout">
       <property name="topMargin">

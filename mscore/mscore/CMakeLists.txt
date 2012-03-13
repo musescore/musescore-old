@@ -3,7 +3,7 @@
 #  Linux Music Score Editor
 #  $Id:$
 #
-#  Copyright (C) 2002-2010 by Werner Schweer and others
+#  Copyright (C) 2002-2012 by Werner Schweer and others
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License version 2.
@@ -20,79 +20,64 @@
 
 include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
 
+
+if (NOT MINGW)
+#
+#     set library search path for runtime linker to load the same
+#     qt libraries as we used at compile time
+#
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,-rpath,${QT_LIBRARY_DIR}")
+endif (NOT MINGW)
+
+
 SET_SOURCE_FILES_PROPERTIES(revision.h PROPERTIES GENERATED TRUE)
 
 include_directories(
       ${CMAKE_CURRENT_BINARY_DIR}
       ${PROJECT_SOURCE_DIR}
       ${PROJECT_SOURCE_DIR}/scriptdebug
-      ${PROJECT_SOURCE_DIR}/zarchive
+      ${PROJECT_SOURCE_DIR}/osdabzip
       ${PROJECT_SOURCE_DIR}/fluid
-      ${QTSINGLEAPPLICATION_INCLUDE_DIRS}
+      ${PROJECT_SOURCE_DIR}/bww2mxml
       )
 
 QT4_WRAP_UI (ui_headers
       insertmeasuresdialog.ui barline.ui chord.ui chordrest.ui editinstrument.ui editstyle.ui
       edittempo.ui element.ui hairpin.ui instrdialog.ui measure.ui measuresdialog.ui
-      note.ui page.ui pagesettings.ui mixer.ui playpanel.ui prefsdialog.ui
+      note.ui page.ui pagesettings.ui partedit.ui playpanel.ui prefsdialog.ui
       measureproperties.ui segment.ui text.ui textpalette.ui timedialog.ui
       symboldialog.ui dynamic.ui tuplet.ui shortcutcapturedialog.ui slurtie.ui
       slur.ui editdrumset.ui editstaff.ui line.ui linesegment.ui
-      voltaproperties.ui timesigproperties.ui
+      voltaproperties.ui chordproperties.ui restproperties.ui
       jumpproperties.ui markerproperties.ui boxproperties.ui
       instrwizard.ui timesigwizard.ui newwizard.ui aboutbox.ui
-      chordedit.ui transposedialog.ui tempoproperties.ui
+      chordedit.ui transposedialog.ui tempoproperties.ui importmidi.ui
       lineproperties.ui excerptsdialog.ui lyrics.ui stafftext.ui
       imageproperties.ui tupletdialog.ui tupletproperties.ui
-      glissandoprop.ui articulation.ui metaedit.ui palette.ui
-      dynamicproperties.ui textline.ui slurproperties.ui debugger.ui
+      glissandoprop.ui articulation.ui metaedit.ui palette.ui textproperties.ui
+      dynamicproperties.ui textline.ui slurproperties.ui inspector.ui
       select.ui synthcontrol.ui splitstaff.ui cellproperties.ui beam.ui keyedit.ui
-      harmonyedit.ui selectinstr.ui tremolo.ui fretdprops.ui stafftype.ui
-      sectionbreak.ui hairpinproperties.ui spanner.ui bend.ui tremolobar.ui
-      textproperties.ui editpitch.ui editstringdata.ui slursegment.ui
-      accidental.ui clef.ui editraster.ui mediadialog.ui textstyle.ui
-      album.ui layer.ui articulationbase.ui inspector_element.ui inspector_vbox.ui
-      inspector_articulation.ui inspector_spacer.ui inspector_hbox.ui keysig.ui
-      inspector_segment.ui inspector_beam.ui inspector_note.ui
-      rest.ui inspector_chord.ui omrpanel.ui startdialog.ui masterpalette.ui
-      inspector_group_element.ui inspector_image.ui stem.ui
+      harmonyedit.ui selectinstr.ui tremolo.ui
       )
-
-if (OMR)
-      set(OMR_MOCS omrpanel.h)
-endif (OMR)
 
 QT4_WRAP_CPP (mocs
-      scoreview.h editinstrument.h editstyle.h edittempo.h instrdialog.h debugger.h
-      musescore.h navigator.h pagesettings.h palette.h mixer.h playpanel.h
-      measureproperties.h seq.h textpalette.h textstyle.h
+      scoreview.h editinstrument.h editstyle.h edittempo.h instrdialog.h inspector.h
+      mscore.h navigator.h pagesettings.h palette.h partedit.h playpanel.h
+      preferences.h measureproperties.h preview.h score.h seq.h textpalette.h textstyle.h
       timedialog.h symboldialog.h shortcutcapturedialog.h simplebutton.h
-      greendotbutton.h recordbutton.h editdrumset.h editstaff.h selinstrument.h
-      voltaproperties.h timesigproperties.h
+      greendotbutton.h recordbutton.h editdrumset.h editstaff.h
+      voltaproperties.h chordproperties.h restproperties.h
       jumpproperties.h markerproperties.h boxproperties.h newwizard.h
-      transposedialog.h chordedit.h tempoproperties.h lineproperties.h
-      excerptsdialog.h stafftextproperties.h imageproperties.h glissandoproperties.h
-      script.h articulationprop.h metaedit.h magbox.h voiceselector.h
-      textprop.h dynamicprop.h textproperties.h tupletdialog.h tupletproperties.h
-      slurproperties.h selectdialog.h synthcontrol.h drumroll.h pianoroll.h
-      piano.h ruler.h file.h
-      pianoview.h drumview.h splitstaff.h scoretab.h keyedit.h keycanvas.h harmonyedit.h
-      harmonycanvas.h updatechecker.h fretproperties.h fretcanvas.h editstafftype.h
-      prefsdialog.h sectionbreakprop.h hairpinprop.h bendproperties.h
-      bendcanvas.h tremolobarprop.h tremolobarcanvas.h
-      drumtools.h texteditor.h texttools.h edittools.h pianotools.h editpitch.h
-      editstringdata.h editraster.h mediadialog.h chordeditor.h chordview.h album.h layer.h
-      webpage.h inspector.h inspectorBase.h inspectorBeam.h masterpalette.h
-      inspectorGroupElement.h inspectorImage.h waveview.h
-      ${OMR_MOCS}
+      transposedialog.h chordedit.h tempotext.h importmidi.h textline.h
+      excerptsdialog.h stafftext.h image.h tuplet.h glissando.h
+      script.h articulation.h metaedit.h magbox.h voiceselector.h
+      text.h sccursor.h dynamics.h undo.h textproperties.h
+      slurproperties.h select.h synthcontrol.h drumroll.h pianoroll.h piano.h ruler.h
+      pianoscene.h splitstaff.h scoretab.h keyedit.h keycanvas.h harmonyedit.h
+      harmonycanvas.h updatechecker.h webpage.h
       )
 
-if (APPLE)
-      QT4_ADD_RESOURCES (qrc_files musescore-apple.qrc)
-else (APPLE)
-      QT4_ADD_RESOURCES (qrc_files musescore.qrc)
-endif (APPLE)
-
+QT4_ADD_RESOURCES (qrc_files mscore.qrc)
 
 set (AUDIO "")
 if (MINGW)
@@ -118,7 +103,7 @@ endif (USE_JACK)
 if (APPLE)
 	set (ExecutableName mscore MACOSX_BUNDLE)
 	set (MACOSX_BUNDLE_INFO_STRING MuseScore prerelease for Mac OSX)
-	set (MACOSX_BUNDLE_ICON_FILE      mscore.icns)
+	set (MACOSX_BUNDLE_ICON_FILE mscore.icns)
 	set (MACOSX_BUNDLE_GUI_IDENTIFIER net.sourceforge.mscore)
 	set (MACOSX_BUNDLE_LONG_VERSION_STRING ${Mscore_VERSION_FULL})
 	set (MACOSX_BUNDLE_BUNDLE_NAME MuseScore)
@@ -129,9 +114,6 @@ else (APPLE)
 	set (ExecutableName mscore)
 endif (APPLE)
 
-if (OMR)
-      set(OMR_FILES importpdf.cpp omrpanel.cpp)
-endif (OMR)
 
 add_executable ( ${ExecutableName}
       ${qrc_files}
@@ -141,58 +123,60 @@ add_executable ( ${ExecutableName}
       ${PCH}
       ${resource_file}
 
-      actions.cpp scoreview.cpp editinstrument.cpp editstyle.cpp
-      edittempo.cpp exportxml.cpp icons.cpp importbww.cpp importxml.cpp
-      instrdialog.cpp debugger.cpp menus.cpp importmidi.cpp
-      musescore.cpp navigator.cpp pagesettings.cpp palette.cpp
-      mixer.cpp playpanel.cpp preferences.cpp measureproperties.cpp
-      seq.cpp boxproperties.cpp textpalette.cpp
-      timedialog.cpp symboldialog.cpp shortcutcapturedialog.cpp
-      simplebutton.cpp musedata.cpp exportly.cpp
-      editdrumset.cpp editstaff.cpp voltaproperties.cpp
-      timesigproperties.cpp newwizard.cpp transposedialog.cpp
-      chordedit.cpp plugins.cpp excerptsdialog.cpp
-      metaedit.cpp magbox.cpp voiceselector.cpp capella.cpp
-      scscore.cpp sccursor.cpp scchord.cpp scnote.cpp scpart.cpp sctext.cpp
-      scmeasure.cpp scpageformat.cpp exportaudio.cpp exportmidi.cpp
-      textproperties.cpp screst.cpp scharmony.cpp slurproperties.cpp
-      synthcontrol.cpp drumroll.cpp pianoroll.cpp piano.cpp
-      pianoview.cpp drumview.cpp scoretab.cpp keyedit.cpp harmonyedit.cpp
-      updatechecker.cpp importove.cpp ove.cpp ruler.cpp
-      importgtp.cpp fotomode.cpp drumtools.cpp
-      selinstrument.cpp texteditor.cpp editstafftype.cpp texttools.cpp edittools.cpp
-      editpitch.cpp editstringdata.cpp editraster.cpp pianotools.cpp mediadialog.cpp
-      profile.cpp exportmp3.cpp chordeditor.cpp chordview.cpp
-      album.cpp webpage.cpp textstyle.cpp tempoproperties.cpp
-      lineproperties.cpp stafftextproperties.cpp splitstaff.cpp
-      tupletdialog.cpp tupletproperties.cpp glissandoproperties.cpp
-      articulationprop.cpp textprop.cpp dynamicprop.cpp
-      fretproperties.cpp sectionbreakprop.cpp hairpinprop.cpp
-      bendproperties.cpp tremolobarprop.cpp file.cpp keyb.cpp osc.cpp
-      layer.cpp jumpproperties.cpp selectdialog.cpp
-      propertymenu.cpp imageproperties.cpp shortcut.cpp bb.cpp
-      midifile.cpp inspector.cpp dragelement.cpp svggenerator.cpp
-      inspectorBase.cpp inspectorBeam.cpp masterpalette.cpp
-      inspectorGroupElement.cpp dragdrop.cpp inspectorImage.cpp
-      waveview.cpp musicxmlsupport.cpp
-      ${OMR_FILES}
+      actions.cpp accidental.cpp barline.cpp beam.cpp
+      bracket.cpp scoreview.cpp chord.cpp chordrest.cpp clef.cpp
+      cmd.cpp dynamics.cpp edit.cpp editinstrument.cpp editstyle.cpp
+      edittempo.cpp element.cpp exportxml.cpp file.cpp osc.cpp
+      hairpin.cpp icons.cpp importbww.cpp importxml.cpp instrdialog.cpp
+      key.cpp keyb.cpp layout.cpp layoutbreak.cpp line.cpp inspector.cpp
+      measure.cpp menus.cpp midifile.cpp importmidi.cpp mscore.cpp
+      navigate.cpp navigator.cpp note.cpp ottava.cpp
+      page.cpp pagesettings.cpp palette.cpp part.cpp
+      partedit.cpp pedal.cpp playpanel.cpp preferences.cpp measureproperties.cpp
+      preview.cpp rest.cpp score.cpp segment.cpp select.cpp
+      seq.cpp slur.cpp staff.cpp style.cpp instrtemplate.cpp boxproperties.cpp
+      sym.cpp sym.h symbol.cpp symbol.h hook.cpp hook.h
+      system.cpp text.cpp textline.cpp textpalette.cpp textstyle.cpp
+      timedialog.cpp symboldialog.cpp trill.cpp tuplet.cpp shortcutcapturedialog.cpp
+      undo.cpp utils.cpp xml.cpp timesig.cpp lyrics.cpp bsp.cpp
+      volta.cpp simplebutton.cpp image.cpp keyfinder.cpp
+      pitchspelling.cpp musedata.cpp keysig.cpp arpeggio.cpp breath.cpp
+      glissando.cpp lilypond.cpp exportly.cpp box.cpp measurebase.cpp
+      editdrumset.cpp editstaff.cpp drumset.cpp tremolo.cpp repeat.cpp
+      voltaproperties.cpp chordproperties.cpp restproperties.cpp
+      newwizard.cpp transposedialog.cpp bb.cpp
+      harmony.cpp chordedit.cpp plugins.cpp tempotext.cpp
+      excerptsdialog.cpp excerpt.cpp stafftext.cpp instrument.cpp durationtype.cpp
+      event.cpp rendermidi.cpp articulation.cpp metaedit.cpp
+      fifo.cpp spacer.cpp magbox.cpp voiceselector.cpp capella.cpp webpage.cpp
+      scscore.cpp sccursor.cpp scchord.cpp scnote.cpp scpart.cpp sctext.cpp scmeasure.cpp scpageformat.cpp
+      exportaudio.cpp repeatlist.cpp velo.cpp exportmidi.cpp textproperties.cpp
+      screst.cpp scharmony.cpp slurproperties.cpp synthcontrol.cpp
+      canonical.cpp drumroll.cpp pianoroll.cpp piano.cpp ruler.cpp pianoscene.cpp
+      splitstaff.cpp scoretab.cpp keyedit.cpp harmonyedit.cpp updatechecker.cpp
+      importove.cpp ove.cpp interval.cpp sctimesig.cpp musicxmlsupport.cpp
       ${AUDIO}
       )
 
-if (STATIC_SCRIPT_BINDINGS AND BUILD_SCRIPTGEN)
+# gold does not use indirect shared libraries for symbol resolution, Linux only
+if (NOT MINGW AND NOT APPLE)
+      if(USE_JACK)
+        target_link_libraries(mscore dl)  
+      endif(USE_JACK)
+      target_link_libraries(mscore rt)
+endif (NOT MINGW AND NOT APPLE)
+
+if (STATIC_SCRIPT_BINDINGS)
       target_link_libraries(mscore
             qtscript_core
             qtscript_gui
             qtscript_network
             qtscript_uitools
-            qtscript_xml
-            qtscript_webkit)
-endif (STATIC_SCRIPT_BINDINGS AND BUILD_SCRIPTGEN)
+            qtscript_xml)
+endif (STATIC_SCRIPT_BINDINGS)
 
 if (APPLE)
-      set_target_properties (mscore
-         PROPERTIES
-            MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/packaging/MacOSXBundleInfo.plist.in)
+      set_target_properties (mscore PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/packaging/MacOSXBundleInfo.plist.in)
 endif(APPLE)
 
 if (OSC)
@@ -227,42 +211,22 @@ if (MINGW)
    endif(CMAKE_BUILD_TYPE MATCHES "DEBUG")
 
    target_link_libraries(mscore
-      libmscore
-      awl
-      mstyle
-      diff_match_patch
-      msynth
-      bww
-      zarchive
-      rtf2html
-      ${QTSINGLEAPPLICATION_LIBRARIES}
       fluid
+      al
+      awl
+      bww
+      osdabzip
+      rtf2html
+      qtsingleapp
+      ${QT_mingw_LIBRARIES}
       portaudio
       portmidi
       winmm
-      vorbisfile
       )
 
    if (HAS_AUDIOFILE)
       target_link_libraries(mscore libsndfile-1)
    endif (HAS_AUDIOFILE)
-
-   if (OGGVORBIS)
-      target_link_libraries(mscore vorbis ogg)
-   endif (OGGVORBIS)
-
-   if (AEOLUS)
-      target_link_libraries(mscore aeolus)
-   endif (AEOLUS)
-
-	if (OMR)
-      target_link_libraries(mscore omr fitz openjpeg jbig2dec jpeg)
-      if (OCR)
-            target_link_libraries(mscore tesseract_api)
-      endif (OCR)
-   endif (OMR)
-
-   target_link_libraries(mscore ${QT_mingw_LIBRARIES})
 
    install( TARGETS mscore RUNTIME DESTINATION bin )
 
@@ -271,9 +235,6 @@ if (MINGW)
       ${CROSS}/bin/libgcc_s_dw2-1.dll
       ${CROSS}/lib/portaudio.dll
       ${CROSS}/lib/libsndfile-1.dll
-      ${CROSS}/lib/libogg.dll
-      ${CROSS}/lib/libvorbis.dll
-      ${CROSS}/lib/libvorbisfile.dll
       ${CROSSQT}/bin/QtCore4.dll
       ${CROSSQT}/bin/QtGui4.dll
       ${CROSSQT}/bin/QtXml4.dll
@@ -295,71 +256,36 @@ if (MINGW)
       )
 
 else (MINGW)
+   set_target_properties( mscore
+      PROPERTIES
+         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS}"
+      )
    target_link_libraries(mscore
-      ${ALSA_LIB}
       ${QT_LIBRARIES}
       ${QT_QTSCRIPT_LIBRARY_RELEASE}
       ${QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE}
+      ${ALSA_LIB}
       ${PORTAUDIO_LIB}
-      diff_match_patch
-      libmscore
+      al
       awl
-      mstyle
-      msynth
       bww
-      zarchive
+      osdabzip
       rtf2html
-      ${QTSINGLEAPPLICATION_LIBRARIES}
+      qtsingleapp
       fluid
       z
-      dl
-      pthread
-      vorbisfile
       )
-if (USE_PORTAUDIO)
-      target_link_libraries(mscore portaudio)
-endif (USE_PORTAUDIO)
 
-   set_target_properties (
-      mscore
-      PROPERTIES
-         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wno-overloaded-virtual -Winvalid-pch"
-      )
    if (HAS_AUDIOFILE)
        target_link_libraries(mscore sndfile)
    endif (HAS_AUDIOFILE)
-
-   if (OGGVORBIS)
-      target_link_libraries(mscore vorbis ogg)
-   endif (OGGVORBIS)
-
-   if (AEOLUS)
-      target_link_libraries(mscore aeolus)
-   endif (AEOLUS)
-
-   if (OMR)
-      target_link_libraries(mscore omr fitz jbig2dec jpeg openjpeg fontconfig freetype)
-      if (OCR)
-            target_link_libraries(mscore tesseract_api)
-      endif (OCR)
-   endif (OMR)
 
    if (APPLE)
      if (USE_PORTMIDI)
        target_link_libraries(mscore portmidi)
      endif (USE_PORTMIDI)
      target_link_libraries(mscore ${OsxFrameworks})
-   else (APPLE)
-       target_link_libraries(mscore rt)
    endif (APPLE)
-
-   # gold does not use indirect shared libraries for symbol resolution, Linux only
-   if (NOT MINGW AND NOT APPLE)
-      if(USE_JACK)
-         target_link_libraries(mscore dl)
-      endif(USE_JACK)
-      target_link_libraries(mscore rt)
-   endif (NOT MINGW AND NOT APPLE)
 
    if (QT45)
      target_link_libraries(mscore ${QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE} )
@@ -372,265 +298,57 @@ endif (USE_PORTAUDIO)
    else (APPLE)
      install( TARGETS mscore RUNTIME DESTINATION bin )
      install( FILES   data/mscore.png DESTINATION share/pixmaps)
+     install( FILES   data/mscore.xpm DESTINATION share/pixmaps)
    endif (APPLE)
 endif (MINGW)
 
+if (NOT MINGW AND NOT APPLE)
+# command line utilities are not build for windows
+#
 #======================================
-#     install icons if not embedded
+#     target smf2xml
 #======================================
 
-# if (NOT EMBED_ICONS)
-   install (FILES
-      data/greendot.svg
-      data/darkgreendot.svg
-      data/recordOn.svg
-      data/recordOff.svg
-      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}/icons
+   add_executable(
+      smf2xml
+      ${ui_headers}
+      smf2xml.cpp midifile.cpp event.cpp drumset.cpp xml.cpp
       )
-   install (FILES
-      data/icons/text_top.svg
-      data/icons/text_bottom.svg
-      data/icons/text_vcenter.svg
-      data/icons/minus.svg
-      data/icons/flip.svg
-      data/icons/undo.svg
-      data/icons/redo.svg
-      data/icons/midiin.svg
-      data/icons/speaker.svg
-      data/icons/start.svg
-      data/icons/play.svg
-      data/icons/sbeam.svg
-      data/icons/mbeam.svg
-      data/icons/nbeam.svg
-      data/icons/beam32.svg
-      data/icons/beam64.svg
-      data/icons/abeam.svg
-      data/icons/fbeam1.svg
-      data/icons/fbeam2.svg
-      data/icons/fileopen.svg
-      data/icons/filenew.svg
-      data/icons/filesave.svg
-      data/icons/filesaveas.svg
-      data/icons/exit.svg
-      data/icons/viewmag.svg
-      data/icons/repeat.svg
-      data/icons/pan.svg
-      data/icons/noteentry.svg
-      data/icons/grace4.svg
-      data/icons/grace16.svg
-      data/icons/grace32.svg
-      data/icons/keyboard.svg
-      data/icons/tie.svg
-      data/icons/acciaccatura.svg
-      data/icons/appoggiatura.svg
-      data/icons/brevis.svg
-      data/icons/clef.svg
-      data/icons/dfermata.svg
-      data/icons/dlongfermata.svg
-      data/icons/dmarcato.svg
-      data/icons/dotdot.svg
-      data/icons/dot.svg
-      data/icons/downbow.svg
-      data/icons/downmordent.svg
-      data/icons/downprall.svg
-      data/icons/dportato.svg
-      data/icons/dshortfermata.svg
-      data/icons/dstaccatissimo.svg
-      data/icons/dverylongfermata.svg
-      data/icons/espressivo.svg
-      data/icons/flatflat.svg
-      data/icons/flat.svg
-      data/icons/longaUp.svg
-      data/icons/mordent.svg
-      data/icons/natural.svg
-      data/icons/note16.svg
-      data/icons/note2.svg
-      data/icons/note32.svg
-      data/icons/note4.svg
-      data/icons/note64.svg
-      data/icons/note8.svg
-      data/icons/note.svg
-      data/icons/ouvert.svg
-      data/icons/plus.svg
-      data/icons/plusstop.svg
-      data/icons/popping.svg
-      data/icons/prallmordent.svg
-      data/icons/prall.svg
-      data/icons/prallprall.svg
-      data/icons/quartrest.svg
-      data/icons/reverseturn.svg
-      data/icons/sforzatoaccent.svg
-      data/icons/sforzato.svg
-      data/icons/sharp.svg
-      data/icons/sharpsharp.svg
-      data/icons/slapping.svg
-      data/icons/snappizzicato.svg
-      data/icons/staccato.svg
-      data/icons/tapping.svg
-      data/icons/tenuto.svg
-      data/icons/thumb.svg
-      data/icons/trill.svg
-      data/icons/turn.svg
-      data/icons/ufermata.svg
-      data/icons/ulongfermata.svg
-      data/icons/umarcato.svg
-      data/icons/upbow.svg
-      data/icons/upmordent.svg
-      data/icons/uportato.svg
-      data/icons/upprall.svg
-      data/icons/ushortfermata.svg
-      data/icons/ustaccatissimo.svg
-      data/icons/uverylongfermata.svg
-      data/icons/editcut.svg
-      data/icons/editcopy.svg
-      data/icons/editpaste.svg
-      data/icons/fileprint.svg
-      data/icons/text_bold.svg
-      data/icons/text_italic.svg
-      data/icons/text_under.svg
-      data/icons/text_left.svg
-      data/icons/text_center.svg
-      data/icons/text_right.svg
-      data/icons/subscript.svg
-      data/icons/superscript.svg
-      data/icons/fotomode.svg
-      data/icons/hraster.svg
-      data/icons/vraster.svg
-      data/icons/repitch.svg
-      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}/icons/icons
+   target_link_libraries(smf2xml al ${QT_LIBRARIES} )
+   set_target_properties( smf2xml
+      PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
       )
-   install (FILES
-      data/icons-dark/text_top.svg
-      data/icons-dark/text_bottom.svg
-      data/icons-dark/text_vcenter.svg
-      data/icons-dark/minus.svg
-      data/icons-dark/flip.svg
-      data/icons-dark/undo.svg
-      data/icons-dark/redo.svg
-      data/icons-dark/midiin.svg
-      data/icons-dark/speaker.svg
-      data/icons-dark/start.svg
-      data/icons-dark/play.svg
-      data/icons-dark/sbeam.svg
-      data/icons-dark/mbeam.svg
-      data/icons-dark/nbeam.svg
-      data/icons-dark/beam32.svg
-      data/icons-dark/beam64.svg
-      data/icons-dark/abeam.svg
-      data/icons-dark/fbeam1.svg
-      data/icons-dark/fbeam2.svg
-      data/icons-dark/fileopen.svg
-      data/icons-dark/filenew.svg
-      data/icons-dark/filesave.svg
-      data/icons-dark/filesaveas.svg
-      data/icons-dark/exit.svg
-      data/icons-dark/viewmag.svg
-      data/icons-dark/repeat.svg
-      data/icons-dark/pan.svg
-      data/icons-dark/noteentry.svg
-      data/icons-dark/grace4.svg
-      data/icons-dark/grace16.svg
-      data/icons-dark/grace32.svg
-      data/icons-dark/keyboard.svg
-      data/icons-dark/tie.svg
-      data/icons-dark/acciaccatura.svg
-      data/icons-dark/appoggiatura.svg
-      data/icons-dark/brevis.svg
-      data/icons-dark/clef.svg
-      data/icons-dark/dfermata.svg
-      data/icons-dark/dlongfermata.svg
-      data/icons-dark/dmarcato.svg
-      data/icons-dark/dotdot.svg
-      data/icons-dark/dot.svg
-      data/icons-dark/downbow.svg
-      data/icons-dark/downmordent.svg
-      data/icons-dark/downprall.svg
-      data/icons-dark/dportato.svg
-      data/icons-dark/dshortfermata.svg
-      data/icons-dark/dstaccatissimo.svg
-      data/icons-dark/dverylongfermata.svg
-      data/icons-dark/espressivo.svg
-      data/icons-dark/flatflat.svg
-      data/icons-dark/flat.svg
-      data/icons-dark/longaUp.svg
-      data/icons-dark/mordent.svg
-      data/icons-dark/natural.svg
-      data/icons-dark/note16.svg
-      data/icons-dark/note2.svg
-      data/icons-dark/note32.svg
-      data/icons-dark/note4.svg
-      data/icons-dark/note64.svg
-      data/icons-dark/note8.svg
-      data/icons-dark/note.svg
-      data/icons-dark/ouvert.svg
-      data/icons-dark/plus.svg
-      data/icons-dark/plusstop.svg
-      data/icons-dark/popping.svg
-      data/icons-dark/prallmordent.svg
-      data/icons-dark/prall.svg
-      data/icons-dark/prallprall.svg
-      data/icons-dark/quartrest.svg
-      data/icons-dark/reverseturn.svg
-      data/icons-dark/sforzatoaccent.svg
-      data/icons-dark/sforzato.svg
-      data/icons-dark/sharp.svg
-      data/icons-dark/sharpsharp.svg
-      data/icons-dark/slapping.svg
-      data/icons-dark/snappizzicato.svg
-      data/icons-dark/staccato.svg
-      data/icons-dark/tapping.svg
-      data/icons-dark/tenuto.svg
-      data/icons-dark/thumb.svg
-      data/icons-dark/trill.svg
-      data/icons-dark/turn.svg
-      data/icons-dark/ufermata.svg
-      data/icons-dark/ulongfermata.svg
-      data/icons-dark/umarcato.svg
-      data/icons-dark/upbow.svg
-      data/icons-dark/upmordent.svg
-      data/icons-dark/uportato.svg
-      data/icons-dark/upprall.svg
-      data/icons-dark/ushortfermata.svg
-      data/icons-dark/ustaccatissimo.svg
-      data/icons-dark/uverylongfermata.svg
-      data/icons-dark/editcut.svg
-      data/icons-dark/editcopy.svg
-      data/icons-dark/editpaste.svg
-      data/icons-dark/fileprint.svg
-      data/icons-dark/text_bold.svg
-      data/icons-dark/text_italic.svg
-      data/icons-dark/text_under.svg
-      data/icons-dark/text_left.svg
-      data/icons-dark/text_center.svg
-      data/icons-dark/text_right.svg
-      data/icons-dark/subscript.svg
-      data/icons-dark/superscript.svg
-      data/icons-dark/fotomode.svg
-      data/icons-dark/hraster.svg
-      data/icons-dark/vraster.svg
-      data/icons-dark/repitch.svg
-      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}/icons/icons-dark
-      )
-# endif (NOT EMBED_ICONS)
 
-if (APPLE)
-     install (FILES
-      ../fonts/gonville-20.otf
-      ../fonts/mscore-20.otf
-      ../fonts/mscore1-20.ttf
-      ../fonts/MuseJazz.ttf
-      ../fonts/FreeSerifMscore.ttf
-      ../fonts/FreeSans.ttf
-      ../fonts/mscore_tab_baroque.ttf
-      ../fonts/mscore_tab_modern.ttf
-      ../fonts/mscore_tab_renaiss.ttf
-      ../fonts/mscore_tab_renaiss2.ttf
-      ../fonts/FiguredBassMHGPL.otf
-      ../fonts/mscore-BC.ttf
-     DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}fonts
-     )
-endif (APPLE)
+#======================================
+#     target xml2smf
+#======================================
+
+   add_executable(
+      xml2smf
+      ${ui_headers}
+      xml2smf.cpp midifile.cpp event.cpp drumset.cpp
+      )
+   target_link_libraries(xml2smf al ${QT_LIBRARIES} )
+   set_target_properties( xml2smf
+      PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
+      )
+
+#======================================
+#     target genft
+#     create font table
+#======================================
+
+   add_executable(
+      genft
+      ${ui_headers}
+      genft.cpp
+      )
+   target_link_libraries(genft al ${QT_LIBRARIES} -lfreetype )
+   set_target_properties(genft
+      PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -I/usr/include/freetype2"
+      )
+endif (NOT MINGW AND NOT APPLE)
 
 ADD_DEPENDENCIES(${ExecutableName} mops1)
-ADD_DEPENDENCIES(${ExecutableName} mops2)
+ADD_DEPENDENCIES(${ExecutableName} mops1)
 

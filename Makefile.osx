@@ -21,8 +21,8 @@
 REVISION  = `cat mscore/mscore/revision.h`
 CPUS      = `grep -c processor /proc/cpuinfo`
 
-VERSION   = "2.0b${REVISION}"
-#VERSION   = 2.0
+VERSION   = "1.2r${REVISION}"
+#VERSION   = 1.1
 
 PREFIX=../applebuild
 
@@ -30,26 +30,30 @@ ROOT=`pwd`
 
 release:
 	if test ! -d build;                              \
-    then                                          \
-          mkdir build;                               \
-    fi;                                        \
-    cd build;                                  \
-    cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}" -DCMAKE_BUILD_TYPE=RELEASE \
-          ../mscore -G Xcode; 			       \
-    xcodebuild -project mscore.xcodeproj -target lrelease;                             \
-	xcodebuild -project mscore.xcodeproj -configuration Release -target ALL_BUILD;                            \
-
+         then                                          \
+            mkdir build;                               \
+            cd build;                                  \
+            cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
+            	   ../mscore -G Xcode; 			       \
+              xcodebuild -project mscore.xcodeproj -target lrelease;                             \
+	          xcodebuild -project mscore.xcodeproj -configuration Release -target ALL_BUILD;     \
+         else                                                                                  \
+            echo "build directory does already exist, please remove first with 'make clean'";  \
+         fi;
 
 debug:
 	if test ! -d build;                              \
-    then                                          \
-          mkdir build;              \
-    fi;                             \
-    cd build;                                  \
-    cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}" -DCMAKE_BUILD_TYPE=DEBUG \
-          ../mscore -G Xcode;                         \
-    xcodebuild -project mscore.xcodeproj -target lrelease;                             \
-    xcodebuild -project mscore.xcodeproj -configuration Debug -target ALL_BUILD;                            \
+         then                                          \
+            mkdir build;                               \
+            cd build;                                  \
+            cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
+                   ../mscore -G Xcode;                         \
+            xcodebuild -project mscore.xcodeproj -target lrelease;                            \        
+			xcodebuild -project mscore.xcodeproj -configuration Debug -target ALL_BUILD;      \
+         else                                                                                 \
+            echo "build directory does already exist, please remove first with 'make clean'"; \
+         fi;
+
 
 #
 # clean out of source build
@@ -57,7 +61,6 @@ debug:
 
 clean:
 	-rm -rf build
-	-rm -rf applebuild
 
 lupdate:
 	cd build;xcodebuild -project mscore.xcodeproj -target lupdate;

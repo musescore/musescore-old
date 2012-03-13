@@ -21,13 +21,13 @@
 //=============================================================================
 
 //
-//    This is ECMAScript code (ECMA-262 aka "JavaScript")
+//    This is ECMAScript code (ECMA-262 aka "Java Script")
 //
 
 //---------------------------------------------------------
 //    init
 //    this function will be called on startup of
-//    MuseScore
+//    mscore
 //---------------------------------------------------------
 
 function init()
@@ -47,12 +47,9 @@ function init()
 
 function run()
       {
-      if (typeof curScore === 'undefined')
+      if(typeof curScore === 'undefined')
             return;
       print("version:        ", mscoreVersion);
-	  // print statements appear in the "Debug Output" tab
-	  // when the Script Debugger is enabled in MuseScore:
-	  // Help > Enable Script Debugger
       print("major version:  ", mscoreMajorVersion);
       print("minor version:  ", mscoreMinorVersion);
       print("update version: ", mscoreUpdateVersion);
@@ -60,14 +57,14 @@ function run()
       print("plugin path: ", pluginPath);
       print("score name:  ", curScore.name);
       print("staves:      ", curScore.staves);
-      var mb = new QMessageBox();
+      mb = new QMessageBox();
       mb.setWindowTitle("MuseScore: Test Plugin");
       mb.text = "Hello MuseScore!";
       mb.exec();
       }
 
 //---------------------------------------------------------
-//    menu:  defines where the function will be placed
+//    menu:  defines were the function will be placed
 //           in the menu structure
 //---------------------------------------------------------
 

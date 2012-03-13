@@ -40,11 +40,10 @@ add_library(al STATIC
    ${al_src}
    )
 
-set_target_properties (
-      al
-      PROPERTIES
-         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
-      )
+set_source_files_properties(
+   dsp.cpp xml.cpp tempo.cpp sig.cpp pos.cpp fraction.cpp
+   PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
+   )
 
 set_source_files_properties(dspSSE.cpp
    PROPERTIES COMPILE_FLAGS "-msse -x assembler"

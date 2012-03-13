@@ -22,7 +22,7 @@
 #define __DRIVER_H__
 
 class Seq;
-struct MidiPatch;
+class MidiPatch;
 class Synth;
 class Event;
 
@@ -34,9 +34,10 @@ class Driver {
 
    protected:
       Seq* seq;
+      Synth* synth;
 
    public:
-      Driver(Seq* s)    { seq = s; }
+      Driver(Seq* s)    { seq = s; synth = 0; }
       virtual ~Driver() {}
       virtual bool init() = 0;
       virtual bool start() = 0;
@@ -46,10 +47,13 @@ class Driver {
       virtual void startTransport() = 0;
       virtual int getState() = 0;
       virtual int sampleRate() const = 0;
-      virtual void registerPort(const QString& name, bool input, bool midi) = 0;
+      virtual int registerPort(const QString& name, bool input, bool midi) = 0;
       virtual void unregisterPort(int) = 0;
-      virtual void putEvent(const Event&, unsigned /*framePos*/) {}
+      virtual void putEvent(const Event&, unsigned framePos) = 0;
+      virtual void process(int, float*, float*, int) = 0;
       virtual void midiRead() {}
+
+      Synth* getSynth() const { return synth; }
       };
 
 #endif

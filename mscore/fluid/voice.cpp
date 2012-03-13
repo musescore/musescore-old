@@ -160,8 +160,11 @@ void Voice::init(Sample* _sample, Channel* _channel, int _key, int _vel,
       * This value can be kept, it is a worst-case estimate.
       */
 
-      amplitude_that_reaches_noise_floor_nonloop = FLUID_NOISE_FLOOR;
-      amplitude_that_reaches_noise_floor_loop    = FLUID_NOISE_FLOOR;
+      double g = _fluid->masterGain();
+      if (g == 0.0)
+            g = 0.0000001;
+      amplitude_that_reaches_noise_floor_nonloop = FLUID_NOISE_FLOOR / g;
+      amplitude_that_reaches_noise_floor_loop    = FLUID_NOISE_FLOOR / g;
       }
 
 //---------------------------------------------------------
@@ -764,7 +767,7 @@ void Voice::update_param(int _gen)
       float y;
       unsigned int count;
 
-      double gain = 1.0 / 32768.0f;
+      double gain = _fluid->masterGain() / 32768.0f;
       switch (_gen) {
             case GEN_PAN:
                   /* range checking is done in the fluid_pan function */
@@ -798,6 +801,7 @@ void Voice::update_param(int _gen)
                   // reverb_send = GEN(GEN_REVERBSEND) / 1000.0f;
                   reverb_send = float(channel->cc[EFFECTS_DEPTH1]) / 128.0;
                   // fluid_clip(reverb_send, 0.0, 1.0);
+                  // amp_reverb = reverb_send * _fluid->masterGain();
                   amp_reverb = reverb_send * gain;
                   break;
 
@@ -1202,7 +1206,7 @@ void Voice::modulate(bool _cc, int _ctrl)
                    * value of its associated generator
                    */
                   for (int k = 0; k < mod_count; k++) {
-                        if (fluid_mod_has_dest(&mod[k], g)) {
+                        if (mod[k].has_dest(g)) {
                               modval += mod[k].get_value(channel, this);
                               }
                         }
@@ -1243,7 +1247,7 @@ void Voice::modulate_all()
              * destination generator 'gen'
              */
             for (int k = 0; k < mod_count; k++) {
-                  if (fluid_mod_has_dest(&mod[k], g))
+                  if (mod[k].has_dest(g))
                         modval += mod[k].get_value(channel, this);
                   }
 
@@ -1378,7 +1382,6 @@ void Voice::add_mod(const Mod* _mod, int mode)
             /* if identical modulator exists, add them */
             for (int i = 0; i < mod_count; i++) {
                   if (test_identity(&mod[i], _mod)) {
-                        //		printf("Adding modulator...\n");
                         mod[i].amount += _mod->amount;
                         return;
                         }
@@ -1388,7 +1391,6 @@ void Voice::add_mod(const Mod* _mod, int mode)
             /* if identical modulator exists, replace it (only the amount has to be changed) */
             for (int i = 0; i < mod_count; i++) {
                   if (test_identity(&mod[i], _mod)) {
-                        //  printf("Replacing modulator...amount is %f\n",mod->amount);
                         mod[i].amount = _mod->amount;
                         return;
                         }
@@ -1399,7 +1401,7 @@ void Voice::add_mod(const Mod* _mod, int mode)
          checking, if the same modulator already exists.
          */
       if (mod_count < FLUID_NUM_MOD)
-            _mod->clone(&mod[mod_count++]);
+            mod[mod_count++] = *_mod;
       }
 
 /*
@@ -1537,7 +1539,10 @@ void Voice::check_sample_sanity()
             if ((int)loopstart >= (int)sample->loopstart && (int)loopend <= (int)sample->loopend){
 	            /* Is there a valid peak amplitude available for the loop? */
 	            if (sample->amplitude_that_reaches_noise_floor_is_valid) {
-	                  amplitude_that_reaches_noise_floor_loop = sample->amplitude_that_reaches_noise_floor;
+                        double g = _fluid->masterGain();
+                        if (g == 0.0)
+                              g = 0.0000001;
+	                  amplitude_that_reaches_noise_floor_loop = sample->amplitude_that_reaches_noise_floor / g;
                         }
                   else
 	                  /* Worst case */
@@ -1640,10 +1645,10 @@ void Sample::optimize()
                   }
 
             /* Determine the peak level */
-            if (peak_max > -peak_min)
+            if (peak_max >- peak_min)
                   peak = peak_max;
             else
-                  peak = -peak_min;
+                  peak =- peak_min;
             if (peak == 0)    /* Avoid division by zero */
                   peak = 1;
 

@@ -26,7 +26,7 @@
       <string notr="true">SlurTie</string>
      </property>
      <property name="flat">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0">

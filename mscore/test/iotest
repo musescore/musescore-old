@@ -63,7 +63,7 @@ rwtestXml() {
 
 rwtestXmlRef() {
       echo -n "testing load/save $1";
-      REF=musicxml/`basename $1 .xml`_ref.xml
+      REF=`basename $1 .xml`_ref.xml
       $MSCORE $1 -d -o mops.xml &> /dev/null
       if diff -q $REF mops.xml &> /dev/null; then
             echo -e "\r\t\t\t\t\t\t...OK";
@@ -110,22 +110,22 @@ rwtestAllDemos() {
       }
 
 rwtestAllMsc() {
-      rwtest msc/accidental1.msc
-      rwtest msc/accidental2.msc
-      rwtest msc/chromatic.msc
-      rwtest msc/coda.msc
-      rwtest msc/crossbeams.msc
-      rwtest msc/RepeatTest6.msc
-      rwtest msc/RepeatTest7.msc
-      rwtest msc/scales1.msc
-      rwtest msc/slur2.msc
-      rwtest msc/test1.msc
-      rwtest msc/test2.msc
-      rwtest msc/test7.msc
-      rwtest msc/testKeysig2.msc
-      rwtest msc/testsmall.msc
-      rwtest msc/testTimesig2.msc
-      rwtest msc/tuplets.msc
+      rwtest accidental1.msc
+      rwtest accidental2.msc
+      rwtest chromatic.msc
+      rwtest coda.msc
+      rwtest crossbeams.msc
+      rwtest RepeatTest6.msc
+      rwtest RepeatTest7.msc
+      rwtest scales1.msc
+      rwtest slur2.msc
+      rwtest test1.msc
+      rwtest test2.msc
+      rwtest test7.msc
+      rwtest testKeysig2.msc
+      rwtest testsmall.msc
+      rwtest testTimesig2.msc
+      rwtest tuplets.msc
       }
 
 rwtestAllXml() {
@@ -134,13 +134,13 @@ rwtestAllXml() {
       # testfiles_MusicXML_with_ref (expected to be changed, to be tested against
       # a reference file).
       # This also enable easy regeneration of testfiles in case MuseScores output changes.
-      for f in `cat musicxml/testfiles_MusicXML_regular musicxml/testfiles_MusicXML_with_ref | sort`; do
-            if [ -f musicxml/`basename $f .xml`_ref.xml ]; then
+      for f in `cat testfiles_MusicXML_regular testfiles_MusicXML_with_ref | sort`; do
+            if [ -f `basename $f .xml`_ref.xml ]; then
                   # reference file exists, test against it
-                  rwtestXmlRef musicxml/$f
+                  rwtestXmlRef $f
             else
                   # reference file does not exist: use regular test
-                  rwtestXml musicxml/$f
+                  rwtestXml $f
             fi
       done
       }

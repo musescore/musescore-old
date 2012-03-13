@@ -21,9 +21,11 @@
 #ifndef __POSEDIT_H__
 #define __POSEDIT_H__
 
-#include "libmscore/pos.h"
+#include "al/pos.h"
 
 namespace Awl {
+
+      using AL::Pos;
 
 //---------------------------------------------------------
 //   PosEdit

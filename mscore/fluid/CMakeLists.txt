@@ -20,26 +20,16 @@
 
 include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
 
-set(SRC
+add_library (fluid STATIC
+  ${PROJECT_BINARY_DIR}/all.h
+  ${PCH}
   dsp.cpp fluid.cpp voice.cpp chan.cpp sfont.cpp chorus.cpp
   conv.cpp gen.cpp mod.cpp rev.cpp tuning.cpp
   )
 
-if (SOUNDFONT3)
-      set(SRC ${SRC} sfont3.cpp)
-endif (SOUNDFONT3)
-
-add_library (fluid STATIC
-      ${PROJECT_BINARY_DIR}/all.h
-      ${PCH}
-      ${SRC}
-      )
-set_target_properties (
-      fluid
-      PROPERTIES
-         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
-      )
+set_target_properties( fluid
+   PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
+   )
 
 ADD_DEPENDENCIES(fluid mops1)
 ADD_DEPENDENCIES(fluid mops2)
-

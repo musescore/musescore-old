@@ -21,7 +21,7 @@
 #ifndef __RULER_H__
 #define __RULER_H__
 
-#include "libmscore/pos.h"
+#include "al/pos.h"
 
 class Score;
 
@@ -35,13 +35,13 @@ class Ruler : public QWidget {
       Q_OBJECT
 
       Score* _score;
-      Pos _cursor;
-      Pos* _locator;
+      AL::Pos _cursor;
+      AL::Pos* _locator;
 
       int magStep;
       double _xmag;
       int _xpos;
-      TType _timeType;
+      AL::TType _timeType;
       QFont _font1, _font2;
 
       static QPixmap* markIcon[3];
@@ -52,22 +52,23 @@ class Ruler : public QWidget {
       virtual void mouseMoveEvent(QMouseEvent* event);
       virtual void leaveEvent(QEvent*);
 
-      Pos pix2pos(int x) const;
-      int pos2pix(const Pos& p) const;
+      AL::Pos pix2pos(int x) const;
+      int pos2pix(const AL::Pos& p) const;
 
    signals:
-      void posChanged(const Pos&);
+      void posChanged(const AL::Pos&);
       void locatorMoved(int);
 
    public slots:
       void setXpos(int);
       void setMag(double xmag, double ymag);
-      void setPos(const Pos&);
+      void setPos(const AL::Pos&);
 
    public:
       Ruler(QWidget* parent = 0);
-      void setScore(Score*, Pos* locator);
+      void setScore(Score*, AL::Pos* locator);
       };
+
 
 #endif
 

@@ -18,10 +18,10 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "musescore.h"
-#include "libmscore/harmony.h"
-#include "libmscore/utils.h"
-#include "libmscore/undo.h"
+#include "mscore.h"
+#include "harmony.h"
+#include "utils.h"
+#include "undo.h"
 #include "script.h"
 
 Q_DECLARE_METATYPE(Harmony*);

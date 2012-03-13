@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2011 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -25,7 +25,6 @@ class Element;
 class Sym;
 class Xml;
 class Palette;
-class PaletteScrollArea;
 
 #include "ui_palette.h"
 #include "ui_cellproperties.h"
@@ -36,13 +35,10 @@ class PaletteScrollArea;
 
 struct PaletteCell {
       Element* element;
-      QString name;           // used for tool tip
-      QString tag;
+      QString name;
       bool drawStaff;
       double x, y;
-      double xoffset, yoffset;      // in spatium units of "gscore"
-      qreal mag;
-      bool readOnly;
+      int xoffset, yoffset;
       };
 
 //---------------------------------------------------------
@@ -79,8 +75,6 @@ class PaletteCellProperties : public QDialog, private Ui::PaletteCellProperties 
 
 enum PaletteCommand {
       PALETTE_DELETE,
-      PALETTE_SAVE,
-      PALETTE_LOAD,
       PALETTE_EDIT,
       PALETTE_UP,
       PALETTE_DOWN,
@@ -90,35 +84,28 @@ enum PaletteCommand {
 class PaletteBoxButton : public QToolButton {
       Q_OBJECT
 
-      friend class PaletteBox;
-
       Palette* palette;
-      PaletteScrollArea* scrollArea;
       QAction* editAction;
 
       int id;
 
+//      virtual void paintEvent(QPaintEvent*);
       virtual void changeEvent(QEvent*);
-      virtual void paintEvent( QPaintEvent * );
 
    private slots:
       void deleteTriggered()     { emit paletteCmd(PALETTE_DELETE, id);  }
-      void saveTriggered()       { emit paletteCmd(PALETTE_SAVE, id);    }
-      void loadTriggered()       { emit paletteCmd(PALETTE_LOAD, id);    }
       void propertiesTriggered() { emit paletteCmd(PALETTE_EDIT, id);    }
       void upTriggered()         { emit paletteCmd(PALETTE_UP, id);      }
       void downTriggered()       { emit paletteCmd(PALETTE_DOWN, id);    }
       void newTriggered()        { emit paletteCmd(PALETTE_NEW, id);     }
       void beforePulldown();
       void enableEditing(bool);
-      void showPalette(bool);
 
    signals:
       void paletteCmd(int, int);
-      void closeAll();
 
    public:
-      PaletteBoxButton(PaletteScrollArea*, Palette*, QWidget* parent = 0);
+      PaletteBoxButton(QWidget*, Palette*, QWidget* parent = 0);
       void setId(int v) { id = v; }
       };
 
@@ -133,13 +120,10 @@ class PaletteBox : public QDockWidget {
       bool _dirty;
 
       virtual void closeEvent(QCloseEvent*);
-      Palette* newPalette(const QString& name, int slot);
 
    private slots:
       void paletteCmd(int, int);
       void setDirty() { _dirty = true; }
-      void contextMenu(const QPoint&);
-      void closeAll();
 
    signals:
       void paletteVisible(bool);
@@ -148,9 +132,8 @@ class PaletteBox : public QDockWidget {
       PaletteBox(QWidget* parent = 0);
       void addPalette(Palette*);
       bool dirty() const      { return _dirty; }
-      void write(Xml&);
-      bool read(QDomElement);
-      void clear();
+      void write(const QString& path);
+      bool read(QFile*);
       };
 
 //---------------------------------------------------------
@@ -164,7 +147,7 @@ class PaletteScrollArea : public QScrollArea {
       virtual void resizeEvent(QResizeEvent*);
 
    public:
-      PaletteScrollArea(Palette* w, QWidget* parent = 0);
+      PaletteScrollArea(QWidget* w, QWidget* parent = 0);
       bool restrictHeight() const      { return _restrictHeight; }
       void setRestrictHeight(bool val) { _restrictHeight = val;  }
       };
@@ -177,7 +160,6 @@ class Palette : public QWidget {
       Q_OBJECT
 
       QString _name;
-      QString _tag;
       QList<PaletteCell*> cells;
 
       int hgrid, vgrid;
@@ -190,7 +172,8 @@ class Palette : public QWidget {
       bool _drawGrid;
       bool _selectable;
       bool _readOnly;
-      qreal _yOffset;         // in spatium units of "gscore"
+      qreal _yOffset;
+      bool _drumPalette;
 
       void redraw(const QRect&);
       virtual void paintEvent(QPaintEvent*);
@@ -221,20 +204,17 @@ class Palette : public QWidget {
       Palette(QWidget* parent = 0);
       ~Palette();
 
-      PaletteCell* append(Element*, const QString& name, QString tag = QString(),
-         qreal mag = 1.0);
-      PaletteCell* add(int idx, Element*, const QString& name,
-         const QString tag = QString(), qreal mag = 1.0);
-      PaletteCell* append(int sym);
+      void append(Element*, const QString& name);
+      void add(int idx, Element*, const QString& name);
+      void append(int sym);
 
       void setGrid(int, int);
       Element* element(int idx)      { return cells[idx]->element; }
       void setDrawGrid(bool val)     { _drawGrid = val; }
       bool drawGrid() const          { return _drawGrid; }
-      void read(const QString& path);
-      void write(const QString& path);
-      void read(QDomElement);
       void write(Xml&, const QString& name) const;
+      void read(QDomElement);
+      void write(const QString& path);
       bool read(QFile*);
       void clear();
       void setSelectable(bool val)   { _selectable = val;  }
@@ -250,13 +230,13 @@ class Palette : public QWidget {
       int columns() const            { return width() / hgrid; }
       int rows() const;
       int size() const               { return cells.size(); }
-      void setCellReadOnly(int c, bool v) { cells[c]->readOnly = v; }
-      int heightForWidth(int) const;
+      int resizeWidth(int);
+      bool drumPalette() const       { return _drumPalette; }
+      void setDrumPalette(bool val)  { _drumPalette = val;  }
       QString name() const           { return _name;        }
       void setName(const QString& s) { _name = s;           }
       int gridWidth() const          { return hgrid;        }
       int gridHeight() const         { return vgrid;        }
-      virtual QSize sizeHint() const;
       };
 
 #endif

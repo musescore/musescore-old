@@ -1,21 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>ChordStyleEditor</class>
- <widget class="QDialog" name="ChordStyleEditor">
+ <widget class="QWidget" name="ChordStyleEditor">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>662</width>
-    <height>437</height>
+    <width>545</width>
+    <height>407</height>
    </rect>
+  </property>
+  <property name="palette">
+   <palette>
+    <active>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>176</red>
+        <green>190</green>
+        <blue>242</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </active>
+    <inactive>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>176</red>
+        <green>190</green>
+        <blue>242</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </inactive>
+    <disabled>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>176</red>
+        <green>190</green>
+        <blue>242</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>176</red>
+        <green>190</green>
+        <blue>242</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </disabled>
+   </palette>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QSplitter" name="splitter1">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Chord Description File:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="descriptionFile"/>
+     </item>
+     <item>
+      <widget class="QToolButton" name="fileButton">
+       <property name="text">
+        <string>...</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QSplitter" name="splitter2">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
@@ -49,7 +134,13 @@
        </property>
       </column>
      </widget>
-     <widget class="QSplitter" name="splitter2">
+     <widget class="QSplitter" name="splitter1">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="orientation">
        <enum>Qt::Vertical</enum>
       </property>
@@ -67,23 +158,13 @@
         </size>
        </property>
       </widget>
-      <widget class="QTabWidget" name="paletteTab">
-       <property name="currentIndex">
-        <number>0</number>
+      <widget class="QFrame" name="paletteFrame">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
-       <property name="tabsClosable">
-        <bool>true</bool>
-       </property>
-       <widget class="QWidget" name="tab1">
-        <attribute name="title">
-         <string>Tab 1</string>
-        </attribute>
-       </widget>
-       <widget class="QWidget" name="tab_2">
-        <attribute name="title">
-         <string>Tab 2</string>
-        </attribute>
-       </widget>
       </widget>
      </widget>
     </widget>
@@ -94,13 +175,6 @@
       <widget class="QPushButton" name="saveButton">
        <property name="text">
         <string>Save As</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="fileButton">
-       <property name="text">
-        <string>Load</string>
        </property>
       </widget>
      </item>
@@ -117,13 +191,6 @@
        </property>
       </spacer>
      </item>
-     <item>
-      <widget class="QDialogButtonBox" name="buttonBox">
-       <property name="standardButtons">
-        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
   </layout>
@@ -137,38 +204,5 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>ChordStyleEditor</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>466</x>
-     <y>418</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>270</x>
-     <y>414</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>ChordStyleEditor</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>466</x>
-     <y>425</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>350</x>
-     <y>427</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

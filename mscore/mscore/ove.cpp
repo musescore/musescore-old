@@ -1,7 +1,7 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id: importove.cpp 4287 2011-05-17 14:50:09Z vanferry $
+//  $Id: importove.cpp 3763 2010-12-15 15:51:09Z vanferry $
 //
 //  Copyright (C) 2002-2009 Werner Schweer and others
 //
@@ -19,6 +19,10 @@
 //=============================================================================
 
 #include "ove.h"
+
+#include <algorithm>
+#include <cmath>
+#include <sstream>
 
 namespace OVE {
 
@@ -638,7 +642,6 @@ QString OveSong::getCodecString(const QByteArray& text) {
     else
         s = codec_->toUnicode(text);
 
-    s = s.trimmed();
     return s;
 }
 
@@ -1301,11 +1304,11 @@ bool Note::getIsRest() const {
 	return rest_;
 }
 
-void Note::setNote(unsigned int note) {
+void Note::setNote(int note) {
 	note_ = note;
 }
 
-unsigned int Note::getNote() const {
+int Note::getNote() const {
 	return note_;
 }
 
@@ -3382,7 +3385,7 @@ unsigned char* Block::data() {
 	return &data_.front();
 }
 
-int Block::size() const {
+unsigned int Block::size() const {
 	return data_.size();
 }
 
@@ -3399,9 +3402,10 @@ unsigned int Block::toUnsignedInt() const {
 		return 0;
 	}
 
-	int num = 0;
+	unsigned int i;
+	unsigned int num(0);
 
-	for (int i = 0; i < (int)sizeof(int) && i < size(); ++i) {
+	for (i = 0; i < sizeof(unsigned int) && i < size(); ++i) {
 		num = (num << 8) + *(data() + i);
 	}
 
@@ -3413,15 +3417,15 @@ int Block::toInt() const {
 		return 0;
 	}
 
-	int i;
+	unsigned int i;
 	int num = 0;
 
-	for (i = 0; i < (int)sizeof(int) && i < size(); ++i) {
+	for (i = 0; i < sizeof(unsigned int) && i < size(); ++i) {
 		num = (num << 8) + (int) *(data() + i);
 	}
 
-	std::size_t minSize = sizeof(int);
-	if (size() < (int)minSize) {
+	std::size_t minSize = sizeof(unsigned int);
+	if (size() < minSize) {
 		minSize = size();
 	}
 
@@ -3445,9 +3449,10 @@ QByteArray Block::toStrByteArray() const {
 }
 
 QByteArray Block::fixedSizeBufferToStrByteArray() const {
+	unsigned int i;
 	QByteArray str;
 
-	for (int i = 0; i < size(); ++i) {
+	for (i = 0; i < size(); ++i) {
 		if (*(data() + i) == '\0') {
 			break;
 		}
@@ -3459,11 +3464,13 @@ QByteArray Block::fixedSizeBufferToStrByteArray() const {
 }
 
 bool Block::operator ==(const Block& block) const {
+	unsigned int i;
+
 	if (size() != block.size()) {
 		return false;
 	}
 
-	for (int i = 0; i < size() && i < block.size(); ++i) {
+	for (i = 0; i < size() && i < block.size(); ++i) {
 		if (*(data() + i) != *(block.data() + i)) {
 			return false;
 		}
@@ -3526,14 +3533,15 @@ NameBlock::NameBlock() :
  }
  }*/
 
-bool NameBlock::isEqual(const QString& name) const {
-	int nsize = name.size();
+bool NameBlock::isEqual(const QString& name) const
+{
+	unsigned int i, nsize = static_cast<unsigned>(name.size());
 
 	if (nsize != size()) {
 		return false;
 	}
 
-	for (int i = 0; i < size() && nsize; ++i) {
+	for (i = 0; i < size() && nsize; ++i) {
 		if (data()[i] != name[i]) {
 			return false;
 		}
@@ -3560,9 +3568,10 @@ CountBlock::CountBlock() :
  }*/
 
 unsigned short CountBlock::toCount() const {
+	unsigned int i;
 	unsigned short num = 0;
 
-	for (int i = 0; i < size() && i < (int)sizeof(unsigned short); ++i) {
+	for (i = 0; i < size() && i < sizeof(unsigned short); ++i) {
 		num = (num << 8) + *(data() + i);
 	}
 
@@ -3668,7 +3677,7 @@ bool BasicParse::parse() {
 	return false;
 }
 
-bool BasicParse::readBuffer(Block& placeHolder, int size) {
+bool BasicParse::readBuffer(Block& placeHolder, unsigned int size) {
 	if (handle_ == NULL) {
 		return false;
 	}
@@ -3728,7 +3737,7 @@ bool OvscParse::parse() {
 	bool version4 = placeHolder.toUnsignedInt() == 4;
 	ove_->setIsVersion4(version4);
 
-	QString str = QString("This file is created by Overture ") + (version4 ? "4" : "3") + "\n";
+	QString str = QString("This file is created by Overture ") + (version4 ? "4" : "3");
 	messageOut(str);
 
 	if( !jump(6) ) { return false; }
@@ -3785,7 +3794,8 @@ void TrackParse::setTrack(SizeChunk* chunk) {
 	chunk_ = chunk;
 }
 
-bool TrackParse::parse() {
+bool TrackParse::parse()
+{
 	Block* dataBlock = chunk_->getDataBlock();
 	unsigned int blockSize = ove_->getIsVersion4() ? chunk_->getSizeBlock()->toSize() : SizeChunk::version3TrackSize;
 	StreamHandle handle(dataBlock->data(), blockSize);
@@ -4020,7 +4030,7 @@ void PageGroupParse::addPage(SizeChunk* chunk) {
 }
 
 bool PageGroupParse::parse() {
-    if( pageChunks_.isEmpty() ) {
+	if( pageChunks_.empty() ) {
 	    return false;
 	}
 
@@ -4141,8 +4151,9 @@ void LineGroupParse::addStaff(SizeChunk* chunk) {
 	staffChunks_.push_back(chunk);
 }
 
-bool LineGroupParse::parse() {
-    if( lineChunks_.isEmpty() || staffChunks_.size() % lineChunks_.size() != 0 ) { return false; }
+bool LineGroupParse::parse()
+{
+	if( lineChunks_.empty() || staffChunks_.size() % lineChunks_.size() != 0 ) { return false; }
 
 	int i;
 	unsigned int j;
@@ -4287,7 +4298,7 @@ bool BarsParse::parse() {
 	QList<Measure*> measures;
 	QList<MeasureData*> measureDatas;
 
-    if( measureChunks_.isEmpty() ||
+	if( measureChunks_.empty() ||
 		measureChunks_.size() != conductChunks_.size() ||
 		(int)bdatChunks_.size() != measureDataCount ) {
 		return false;
@@ -4313,7 +4324,7 @@ bool BarsParse::parse() {
 
 		// MEAS
 		if( !parseMeas(measure, measureChunks_[i]) ) {
-			QString ss = "failed in parse MEAS " + i + '\n';
+			QString ss = "failed in parse MEAS " + i;
 			messageOut(ss);
 
 			return false;
@@ -4323,7 +4334,7 @@ bool BarsParse::parse() {
 	for( i=0; i<(int)conductChunks_.size(); ++i ) {
 		// COND
 		if( !parseCond(measures[i], measureDatas[i], conductChunks_[i]) ) {
-			QString ss = "failed in parse COND " + i + '\n';
+			QString ss = "failed in parse COND " + i;
 			messageOut(ss);
 
 			return false;
@@ -4335,7 +4346,7 @@ bool BarsParse::parse() {
 
 		// BDAT
 		if( !parseBdat(measures[measId], measureDatas[i], bdatChunks_[i]) ) {
-			QString ss = "failed in parse BDAT " + i + '\n';
+			QString ss = "failed in parse BDAT " + i;
 			messageOut(ss);
 
 			return false;
@@ -5269,8 +5280,8 @@ bool BarsParse::parseNoteRest(MeasureData* measureData, int length, BdatType typ
 
 			// note
 			if( !readBuffer(placeHolder, 1) ) { return false; }
-			unsigned int note = placeHolder.toUnsignedInt();
-			notePtr->setNote(note);
+			int note = placeHolder.toInt();
+			notePtr->setNote(note); // change from unsigned int to int, for invalid drum note
 
 			// note on velocity
 			if( !readBuffer(placeHolder, 1) ) { return false; }
@@ -7168,7 +7179,7 @@ void LyricChunkParse::processLyricInfo(const LyricInfo& info) {
 			}
 
 			for( j=0; j<lyrics.size(); ++j ) {
-				Lyric* lyric = dynamic_cast<Lyric*>(lyrics[j]);
+				Lyric* lyric = static_cast<Lyric*>(lyrics[j]);
 
 				if( containers[i]->start()->getOffset() == lyric->start()->getOffset() &&
 					(int)containers[i]->getVoice() == info.voice_ &&
@@ -7205,14 +7216,6 @@ void TitleChunkParse::setTitleChunk(SizeChunk* chunk) {
 	chunk_ = chunk;
 }
 
-QByteArray getByteArray(const Block& block) {
-    QByteArray array((char*)block.data(), block.size());
-    int index0 = array.indexOf('\0');
-    array = array.left(index0);
-
-    return array;
-}
-
 bool TitleChunkParse::parse() {
 	Block* dataBlock = chunk_->getDataBlock();
 	unsigned int blockSize = chunk_->getSizeBlock()->toSize();
@@ -7247,10 +7250,8 @@ bool TitleChunkParse::parse() {
 			Block dataBlock;
 			if( !readBuffer(dataBlock, titleSize) ) { return false; }
 
-			QByteArray array = getByteArray(dataBlock);
-            if(!array.isEmpty()) {
-                addToOve(ove_->getCodecString(array), titleType);
-            }
+			QByteArray array((char*)dataBlock.data(), dataBlock.size());
+			addToOve(ove_->getCodecString(array), titleType);
 		}
 
 		return true;
@@ -7266,8 +7267,8 @@ bool TitleChunkParse::parse() {
 		Block dataBlock;
 		if( !readBuffer(dataBlock, titleSize) ) { return false; }
 
-		QByteArray array = getByteArray(dataBlock);
-        addToOve(ove_->getCodecString(array), titleType);
+		QByteArray array((char*)dataBlock.data(), dataBlock.size());
+		addToOve(ove_->getCodecString(array), titleType);
 
 		//0x 00 AB 00 0C 00 00
 		if( !jump(6) ) { return false; }
@@ -7386,7 +7387,7 @@ void OveOrganizer::organizeAttributes() {
 						const QList<MusicData*>& clefs = measureData->getMusicDatas(MusicData_Clef);
 
 						for( k=0; k<clefs.size(); ++k ) {
-							Clef* clef = dynamic_cast<Clef*>(clefs[k]);
+							Clef* clef = static_cast<Clef*>(clefs[k]);
 							lastClefType = clef->getClefType();
 						}
 					}
@@ -7552,12 +7553,12 @@ void OveOrganizer::organizeCrossMeasureElements(int part, int track, Measure* me
 				break;
 			}
 		case MusicData_OctaveShift : {
-				OctaveShift* octave = dynamic_cast<OctaveShift*>(pair);
+				OctaveShift* octave = static_cast<OctaveShift*>(pair);
 				organizeOctaveShift(octave, measure, measureData);
 				break;
 			}
 		case MusicData_Wedge : {
-				Wedge* wedge = dynamic_cast<Wedge*>(pair);
+				Wedge* wedge = static_cast<Wedge*>(pair);
 				organizeWedge(wedge, part, track, measure, measureData);
 				break;
 			}
@@ -7584,7 +7585,7 @@ void OveOrganizer::organizePairElement(
 	}
 
 	if( data->getMusicDataType() == MusicData_Tuplet ){
-		Tuplet* tuplet = dynamic_cast<Tuplet*>(data);
+		Tuplet* tuplet = static_cast<Tuplet*>(data);
 		const QList<NoteContainer*> containers = measureData->getNoteContainers();
 
 		for(int i=0; i<containers.size(); ++i){
@@ -7945,7 +7946,7 @@ bool OveSerialize::load(void) {
 		int maxTime = chunkTypeToMaxTimes(chunkType);
 
 		if( maxTime > 0 && chunkTimes[chunkType] > maxTime ) {
-			messageOut("format not support, chunk appear more than accept.\n");
+			messageOut("format not support, chunk appear more than accept.");
 			return false;
 		}
 
@@ -8047,7 +8048,7 @@ bool OveSerialize::load(void) {
 		default:
 			/*if( firstEnter )
 			 {
-			 QString info = "Not compatible file, try to load and save with newer version, Overture 4 is recommended.\n";
+			 QString info = "Not compatible file, try to load and save with newer version, Overture 4 is recommended.";
 			 messageOut(info);
 			 messageOutError();
 
@@ -8092,7 +8093,7 @@ bool OveSerialize::readHeader() {
 		}
 	}
 
-	QString info = "Not compatible file, try to load and save with newer version, Overture 4 is recommended.\n";
+	QString info = "Not compatible file, try to load and save with newer version, Overture 4 is recommended.";
 	messageOut(info);
 
 	return false;

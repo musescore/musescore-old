@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "poslabel.h"
-#include "libmscore/pos.h"
+#include "al/pos.h"
 
 namespace Awl {
 
@@ -27,7 +27,7 @@ namespace Awl {
 //   PosLabel
 //---------------------------------------------------------
 
-PosLabel::PosLabel(TempoMap* tl, TimeSigMap* sl, QWidget* parent)
+PosLabel::PosLabel(AL::TempoMap* tl, AL::TimeSigMap* sl, QWidget* parent)
    : 	QLabel(parent), pos(tl, sl)
       {
       _smpte = false;
@@ -55,7 +55,7 @@ PosLabel::PosLabel(QWidget* parent)
 //   setContext
 //---------------------------------------------------------
 
-void PosLabel::setContext(TempoMap* tl, TimeSigMap* sl)
+void PosLabel::setContext(AL::TempoMap* tl, AL::TimeSigMap* sl)
       {
       pos.setContext(tl, sl);
       }
@@ -103,7 +103,7 @@ void PosLabel::updateValue()
 //   setValue
 //---------------------------------------------------------
 
-void PosLabel::setValue(const Pos& val)
+void PosLabel::setValue(const AL::Pos& val)
       {
       pos = val;
       setEnabled(pos.valid());

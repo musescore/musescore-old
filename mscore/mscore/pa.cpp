@@ -1,9 +1,9 @@
-//=============================================================================
+//==========
 //  MusE Score
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2007 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -19,11 +19,12 @@
 //=============================================================================
 
 #include "preferences.h"
-#include "msynth/synti.h"
-#include "libmscore/score.h"
-#include "musescore.h"
+#include "synti.h"
+#include "score.h"
+#include "mscore.h"
 #include "seq.h"
 #include "pa.h"
+#include "fluid.h"
 
 #ifdef USE_ALSA
 #include "alsa.h"
@@ -34,10 +35,6 @@
 #include "mididriver.h"
 #include "pm.h"
 
-#ifdef Q_WS_MAC // mac does not support non interleaved
-#define INTERLEAVED_AUDIO
-#endif
-
 static PaStream* stream;
 
 //---------------------------------------------------------
@@ -47,20 +44,8 @@ static PaStream* stream;
 int paCallback(const void*, void* out, long unsigned frames,
    const PaStreamCallbackTimeInfo*, PaStreamCallbackFlags, void *)
       {
-#ifdef INTERLEAVED_AUDIO
-      float lb[frames];
-      float rb[frames];
-      seq->process((unsigned)frames, lb, rb);
       float* op = (float*)out;
-      for (int i = 0; i < frames; ++i) {
-            *op++ = lb[i];
-            *op++ = rb[i];
-            }
-#else
-      float* o1 = ((float**)out)[0];
-      float* o2 = ((float**)out)[1];
-      seq->process((unsigned)frames, o1, o2);
-#endif
+      seq->process((unsigned)frames, op, op+1, 2);
       return 0;
       }
 
@@ -71,9 +56,9 @@ int paCallback(const void*, void* out, long unsigned frames,
 Portaudio::Portaudio(Seq* s)
    : Driver(s)
       {
-      _sampleRate = 48000;
+      _sampleRate = 44100;
       initialized = false;
-      state       = Seq::TRANSPORT_STOP;
+      state       = Seq::STOP;
       seekflag    = false;
       midiDriver  = 0;
       }
@@ -87,7 +72,7 @@ Portaudio::~Portaudio()
       if (initialized) {
             PaError err = Pa_CloseStream(stream);
             if (err != paNoError)
-                  qDebug("Portaudio close stream failed: %s\n", Pa_GetErrorText(err));
+                  printf("Portaudio close stream failed: %s\n", Pa_GetErrorText(err));
             Pa_Terminate();
             }
       }
@@ -101,12 +86,12 @@ bool Portaudio::init()
       {
       PaError err = Pa_Initialize();
       if (err != paNoError) {
-            qDebug("Portaudio initialize failed: %s\n", Pa_GetErrorText(err));
+            printf("Portaudio initialize failed: %s\n", Pa_GetErrorText(err));
             return false;
             }
       initialized = true;
       if (debugMode)
-            qDebug("using PortAudio Version: %s\n", Pa_GetVersionText());
+            printf("using PortAudio Version: %s\n", Pa_GetVersionText());
 
       PaDeviceIndex idx = preferences.portaudioDevice;
 
@@ -119,11 +104,7 @@ bool Portaudio::init()
 
       out.device           = idx;
       out.channelCount     = 2;
-#ifdef INTERLEAVED_AUDIO
       out.sampleFormat     = paFloat32;
-#else
-      out.sampleFormat     = paFloat32 | paNonInterleaved;
-#endif
       out.suggestedLatency = 0.100;
       out.hostApiSpecificStreamInfo = 0;
 
@@ -133,10 +114,13 @@ bool Portaudio::init()
             out.device = Pa_GetDefaultOutputDevice();
             err = Pa_OpenStream(&stream, 0, &out, double(_sampleRate), 0, 0, paCallback, (void*)this);
             if (err != paNoError) {
-                  qDebug("Portaudio open stream %d failed: %s\n", idx, Pa_GetErrorText(err));
+                  printf("Portaudio open stream %d failed: %s\n", idx, Pa_GetErrorText(err));
                   return false;
                   }
             }
+      synth = new FluidS::Fluid();
+      synth->init(_sampleRate);
+
 #ifdef USE_ALSA
       midiDriver = new AlsaMidiDriver(seq);
 #endif
@@ -144,7 +128,7 @@ bool Portaudio::init()
       midiDriver = new PortMidiDriver(seq);
 #endif
       if (midiDriver && !midiDriver->init()) {
-            qDebug("Init midi driver failed\n");
+            printf("Init midi driver failed\n");
             delete midiDriver;
             midiDriver = 0;
 #ifdef USE_PORTMIDI
@@ -205,8 +189,9 @@ int Portaudio::deviceIndex(int apiIdx, int apiDevIdx)
 //   registerPort
 //---------------------------------------------------------
 
-void Portaudio::registerPort(const QString&, bool, bool)
+int Portaudio::registerPort(const QString&, bool, bool)
       {
+      return -1;
       }
 
 //---------------------------------------------------------
@@ -251,7 +236,7 @@ bool Portaudio::start()
       {
       PaError err = Pa_StartStream(stream);
       if (err != paNoError) {
-            qDebug("Portaudio: start stream failed: %s\n", Pa_GetErrorText(err));
+            printf("Portaudio: start stream failed: %s\n", Pa_GetErrorText(err));
             return false;
             }
       return true;
@@ -265,7 +250,7 @@ bool Portaudio::stop()
       {
       PaError err = Pa_StopStream(stream);      // sometimes the program hangs here on exit
       if (err != paNoError) {
-            qDebug("Portaudio: stop failed: %s\n", Pa_GetErrorText(err));
+            printf("Portaudio: stop failed: %s\n", Pa_GetErrorText(err));
             return false;
             }
       return true;
@@ -286,7 +271,7 @@ int Portaudio::framePos() const
 
 void Portaudio::startTransport()
       {
-      state = Seq::TRANSPORT_PLAY;
+      state = Seq::PLAY;
       }
 
 //---------------------------------------------------------
@@ -295,7 +280,7 @@ void Portaudio::startTransport()
 
 void Portaudio::stopTransport()
       {
-      state = Seq::TRANSPORT_STOP;
+      state = Seq::STOP;
       }
 
 //---------------------------------------------------------
@@ -305,6 +290,24 @@ void Portaudio::stopTransport()
 int Portaudio::getState()
       {
       return state;
+      }
+
+//---------------------------------------------------------
+//   putEvent
+//---------------------------------------------------------
+
+void Portaudio::putEvent(const Event& e, unsigned /* framePos*/)
+      {
+      synth->play(e);
+      }
+
+//---------------------------------------------------------
+//   process
+//---------------------------------------------------------
+
+void Portaudio::process(int n, float* l, float* r, int stride)
+      {
+      synth->process(n, l, r, stride);
       }
 
 //---------------------------------------------------------
@@ -337,7 +340,7 @@ int Portaudio::currentApi() const
                         }
                   }
             }
-      qDebug("Portaudio: no current api found for device %d\n", idx);
+      printf("Portaudio: no current api found for device %d\n", idx);
       return -1;
       }
 
@@ -361,7 +364,7 @@ int Portaudio::currentDevice() const
                         }
                   }
             }
-      qDebug("Portaudio: no current ApiDevice found for device %d\n", idx);
+      printf("Portaudio: no current ApiDevice found for device %d\n", idx);
       return -1;
       }
 

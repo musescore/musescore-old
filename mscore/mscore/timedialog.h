@@ -38,8 +38,6 @@ class TimeDialog : public QWidget, Ui::TimeDialogBase {
 
    private slots:
       void addClicked();
-      void zChanged(int);
-      void nChanged(int);
 
    public:
       TimeDialog(QWidget* parent = 0);

@@ -19,11 +19,11 @@
 //=============================================================================
 
 #include "playpanel.h"
-#include "libmscore/sig.h"
-#include "libmscore/score.h"
+#include "al/sig.h"
+#include "score.h"
 #include "seq.h"
-#include "musescore.h"
-#include "libmscore/measure.h"
+#include "mscore.h"
+#include "measure.h"
 
 const int MIN_VOL = -60;
 const int MAX_VOL = 10;
@@ -43,21 +43,11 @@ PlayPanel::PlayPanel(QWidget* parent)
 
       playButton->setDefaultAction(getAction("play"));
       rewindButton->setDefaultAction(getAction("rewind"));
-      metronomeButton->setDefaultAction(getAction("metronome"));
 
       connect(volumeSlider, SIGNAL(valueChanged(double,int)), SLOT(volumeChanged(double,int)));
       connect(posSlider,    SIGNAL(sliderMoved(int)),         SLOT(setPos(int)));
-      connect(tempoSlider,  SIGNAL(valueChanged(double,int)), SLOT(relTempoChanged(double,int)));
+      connect(tempoSlider,  SIGNAL(valueChanged(double,int)), SIGNAL(relTempoChanged(double,int)));
       connect(swingStyle,   SIGNAL(currentIndexChanged(int)), SLOT(swingStyleChanged(int)));
-      }
-
-//---------------------------------------------------------
-//   relTempoChanged
-//---------------------------------------------------------
-
-void PlayPanel::relTempoChanged(double d, int)
-      {
-      emit relTempoChanged(d * .01);
       }
 
 //---------------------------------------------------------
@@ -78,13 +68,17 @@ void PlayPanel::setScore(Score* s)
       {
       if (cs != 0 && cs == s)
             return;
+      if (cs)
+            disconnect(cs, SIGNAL(posChanged(int)), this, SLOT(setPos(int)));
       cs = s;
+      if (cs)
+            connect(cs, SIGNAL(posChanged(int)), this, SLOT(setPos(int)));
       if (cs) {
             MeasureBase* lm = cs->last();
             if (lm)
-                  setEndpos(lm->tick() + lm->ticks());
+                  setEndpos(lm->tick() + lm->tickLen());
             }
-      bool enable = cs != 0;
+      bool enable = (cs != 0);
       volumeSlider->setEnabled(enable);
       posSlider->setEnabled(enable);
       tempoSlider->setEnabled(enable);
@@ -93,21 +87,18 @@ void PlayPanel::setScore(Score* s)
             setTempo(cs->tempomap()->tempo(0));
             setRelTempo(cs->tempomap()->relTempo());
             Measure* m = cs->lastMeasure();
-            if (m)
-                  setEndpos(m ? m->tick() + m->ticks() : 0);
-            int tick = cs->playPos();
-            heartBeat(tick, tick);
+            if (m)      
+                  setEndpos(m ? m->tick() + m->tickLen() : 0);
             }
       else {
             setTempo(120.0);
-            setRelTempo(1.0);
+            setRelTempo(100);
             setEndpos(0);
-            heartBeat(0, 0);
             }
-//      heartBeat2(seq->getCurTime());
-//      int tick, utick;
-//      seq->getCurTick(&tick, &utick);
-//      heartBeat(tick, utick);
+      heartBeat2(seq->getCurTime());
+      int tick, utick;
+      seq->getCurTick(&tick, &utick);
+      heartBeat(tick, utick);
       update();
       }
 
@@ -127,25 +118,24 @@ void PlayPanel::setEndpos(int val)
 void PlayPanel::setTempo(double val)
       {
       int tempo = lrint(val * 60.0);
-      tempoLabel->setText(QString("%1 bpm").arg(tempo, 3, 10, QLatin1Char(' ')));
+      tempoLabel->setText(QString("%1 bpm").arg(tempo, 3));
       }
 
 //---------------------------------------------------------
 //   setRelTempo
 //---------------------------------------------------------
 
-void PlayPanel::setRelTempo(qreal val)
+void PlayPanel::setRelTempo(int val)
       {
-      val *= 100;
-      relTempo->setText(QString("%1 %").arg(val, 3, 'f', 0));
+      relTempo->setText(QString("%1 %").arg(val, 3));
       tempoSlider->setValue(val);
       }
 
 //---------------------------------------------------------
-//   setGain
+//   setVolume
 //---------------------------------------------------------
 
-void PlayPanel::setGain(float val)
+void PlayPanel::setVolume(float val)
       {
       volumeSlider->setValue(val);
       }
@@ -156,11 +146,11 @@ void PlayPanel::setGain(float val)
 
 void PlayPanel::volumeChanged(double val, int)
       {
-      emit gainChange(val);
+      emit volChange(val);
       }
 
 //---------------------------------------------------------
-//    setPos
+//   setPos
 //---------------------------------------------------------
 
 void PlayPanel::setPos(int tick)
@@ -225,9 +215,8 @@ void PlayPanel::heartBeat(int tick, int utick)
 //   heartBeat2
 //---------------------------------------------------------
 
-void PlayPanel::heartBeat2(int samples)
+void PlayPanel::heartBeat2(int sec)
       {
-      int sec = samples/MScore::sampleRate;
       if (sec == cachedTimePosition)
             return;
       cachedTimePosition = sec;

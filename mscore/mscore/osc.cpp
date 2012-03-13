@@ -1,7 +1,7 @@
 //=============================================================================
 //  MuseScore
 //  Music Composition & Notation
-//  $Id: musescore.cpp 4961 2011-11-11 16:24:17Z lasconic $
+//  $Id: osc.cpp 4961 2011-11-11 16:24:17Z lasconic $
 //
 //  Copyright (C) 2002-2011 Werner Schweer and others
 //
@@ -20,16 +20,10 @@
 
 #include <fenv.h>
 
-#include "musescore.h"
-#include "libmscore/score.h"
-#include "libmscore/instrument.h"
-#include "libmscore/measure.h"
-#include "libmscore/segment.h"
-#include "libmscore/chordrest.h"
-#include "libmscore/chord.h"
-#include "libmscore/note.h"
-#include "libmscore/undo.h"
-#include "mixer.h"
+#include "mscore.h"
+#include "score.h"
+#include "instrument.h"
+#include "partedit.h"
 #include "scoreview.h"
 #include "playpanel.h"
 #include "seq.h"
@@ -47,6 +41,7 @@ static int oscPort = 5282;
 #ifndef OSC
 void MuseScore::initOsc()
       {
+      
       }
 
 #else // #ifndef OSC
@@ -101,10 +96,6 @@ void MuseScore::initOsc()
       QObject::connect(oo, SIGNAL(data(int)), SLOT(oscCloseAll()));
       oo = new PathObject( "/plugin", QVariant::String, osc);
       QObject::connect(oo, SIGNAL(data(QString)), SLOT(oscTriggerPlugin(QString)));
-
-      oo = new PathObject( "/color-note", QVariant::String, osc);
-      QObject::connect(oo, SIGNAL(data(QString)), SLOT(oscColorNote(QString)));
-
       }
 
 //---------------------------------------------------------
@@ -114,9 +105,7 @@ void MuseScore::initOsc()
 void MuseScore::oscIntMessage(int val)
       {
       if (val < 128)
-            midiNoteReceived(0, val, false);
-      else
-            midiCtrlReceived(val-128, 22);
+            midiNoteReceived(val, false);
       }
 
 void MuseScore::oscPlay()
@@ -151,7 +140,7 @@ void MuseScore::oscGoto(int m)
       qDebug("GOTO %d", m);
       if (cv == 0)
             return;
-      cv->search(m);
+      cv->search(QString::number(m));
       }
 
 void MuseScore::oscSelectMeasure(int m)
@@ -168,8 +157,8 @@ void MuseScore::oscOpen(QString path)
       qDebug("Open %s", qPrintable(path));
       openScore(path);
       }
-
-
+      
+      
 void MuseScore::oscCloseAll()
       {
       qDebug("CloseAll");
@@ -196,10 +185,11 @@ void MuseScore::oscTempo(int val)
 
 //---------------------------------------------------------
 //   oscTriggerPlugin
-//---------------------------------------------------------
+//---------------------------------------------------------        
 void MuseScore::oscTriggerPlugin(QString s)
       {
       QStringList args = s.split(",");
+      printf("here\n");
       if(args.length() > 0) {
             int idx = pluginIdxFromPath(args.at(0));
             if(idx != -1) {
@@ -213,54 +203,14 @@ void MuseScore::oscTriggerPlugin(QString s)
       }
 
 //---------------------------------------------------------
-//   oscColorNote
-//---------------------------------------------------------
-void MuseScore::oscColorNote(QString s)
-      {
-      if(!cs)
-            return;
-      QStringList args = s.split(",");
-      if(args.length() == 2) {
-            int tick = args[0].toInt();
-            int pitch = args[1].toInt();
-            Measure* measure = cs->tick2measure(tick);
-            if(!measure)
-                  return;
-            Segment* s = measure->findSegment(SegChordRest, tick);
-            if (!s)
-                  return;
-            //get all chords in segment...
-            int n = cs->nstaves() * VOICES;
-            for (int i = 0; i < n; i++) {
-                  Element* e = s->element(i);
-                  if (e && e->isChordRest()) {
-                        ChordRest* cr = static_cast<ChordRest*>(e);
-                        if(cr->type() == CHORD) {
-                              Chord* chord = static_cast<Chord*>(cr);
-                              for (int idx = 0; idx < chord->notes().length(); idx++) {
-                                    Note* note = chord->notes()[idx];
-                                    if (note->pitch() == pitch) {
-                                          cs->startCmd();
-                                          cs->undo(new ChangeProperty(note, P_COLOR, QColor("red")));
-                                          cs->endCmd();
-                                          cs->end();
-                                          return;
-                                          }
-                                    }
-                              }
-                        }
-                  }
-            }
-      }
-//---------------------------------------------------------
 //   oscVolume
 //---------------------------------------------------------
 
 void MuseScore::oscVolume(int val)
       {
-      double v = val / 128.0;
+      /*double v = val / 128.0;
       if (seq)
-            seq->setGain(v);
+            seq->setGain(v);*/
       }
 
 //---------------------------------------------------------
@@ -269,7 +219,7 @@ void MuseScore::oscVolume(int val)
 
 void MuseScore::oscVolChannel(double val)
       {
-      if(!cs)
+      /*if(!cs)
             return;
       PathObject* po = (PathObject*) sender();
 
@@ -283,7 +233,7 @@ void MuseScore::oscVolChannel(double val)
             channel->volume = iv;
             if (iledit)
                   iledit->partEdit(i)->volume->setValue(iv);
-            }
+            }*/
       }
 
 //---------------------------------------------------------
@@ -292,7 +242,7 @@ void MuseScore::oscVolChannel(double val)
 
 void MuseScore::oscPanChannel(double val)
       {
-      if(!cs)
+      /*if(!cs)
             return;
       PathObject* po = (PathObject*) sender();
 
@@ -306,7 +256,7 @@ void MuseScore::oscPanChannel(double val)
             channel->volume = iv;
             if (iledit)
                   iledit->partEdit(i)->pan->setValue(iv);
-            }
+            }*/
       }
 
 //---------------------------------------------------------
@@ -315,7 +265,7 @@ void MuseScore::oscPanChannel(double val)
 
 void MuseScore::oscMuteChannel(double val)
       {
-      if(!cs)
+      /*if(!cs)
             return;
       PathObject* po = (PathObject*) sender();
 
@@ -327,6 +277,6 @@ void MuseScore::oscMuteChannel(double val)
             channel->mute = (val==0.0f ? false : true);
             if (iledit)
                   iledit->partEdit(i)->mute->setCheckState(val==0.0f ? Qt::Unchecked:Qt::Checked);
-            }
+            }*/
       }
 #endif // #ifndef OSC
