@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Subs" script:language="StarBasic">&apos;Option Explicit
+
+function ApplyTemplate(sCode As String, sTemplate As String, sLilyPondCode As String) As Boolean
+	sLilyPondCode = sLilyPondCode &amp; sCode
+	&apos; Do nothing here...
+	ApplyTemplate=True
+End Function
+
+Function CallLilyPond() As Boolean
+	Dim sCommand As String
+
+	If sOSType = &quot;Windows&quot; Then
+		&apos;MuseScore
+		sCommand = &quot;cd /d &quot; &amp; Chr(34) &amp; ConvertFromURL(sTmpPath) &amp; Chr(34) &amp; Chr(10) _
+		&amp; Chr(34) &amp; sLilyPondExecutable &amp; Chr(34)
+		sCommand = sCommand &amp;  &quot; tempMScore.msc -o tempMScore.pdf&quot;
+		WindowsCommand(sCommand)
+
+		&apos;ImageMagick Convert
+		sCommand = &quot;cd /d &quot; &amp; Chr(34) &amp; ConvertFromURL(sTmpPath) &amp; Chr(34) &amp; Chr(10) &amp; Chr(34) &amp;  sImageMagicExecutable &amp; &quot;\convert&quot; &amp; Chr(34)
+		sCommand = sCommand &amp;  &quot; -trim -density &quot; &amp; iGraphicDPI &amp; &quot;  tempMScore.pdf tempMScore.png&quot; &apos;&quot; &amp; iGraphicDPI &amp; &quot;
+		WindowsCommand(sCommand)
+		
+	ElseIf sOSType = &quot;Unix&quot; Then
+		sCommand=&quot;cd &quot; &amp; Chr(34) &amp; ConvertFromURL(sTmpPath) &amp; Chr(34) &amp; &quot;; &quot; _
+		&amp; Chr(34) &amp; sLilyPondExecutable &amp; Chr(34) &amp; &quot; tempMScore.msc -o tempMScore1.png -r &quot; &amp; iGraphicDPI
+		BashCommand(sCommand)
+		sCommand = &quot;cd &quot; &amp; Chr(34) &amp; ConvertFromURL(sTmpPath) &amp; Chr(34) &amp; &quot;; &quot; _
+		   &amp; sImageMagicExecutable &amp; &quot;/convert tempMScore1.png -trim tempMScore.png&quot;
+		BashCommand(sCommand)
+		End If
+
+		CallLilyPond=True &apos;lilypond was executed
+
+End Function
+
+Sub CleanUp()
+	If 	FileExists(sTmpPath &amp; &quot;LilyPond-version.out&quot;) Then Kill(sTmpPath &amp; &quot;LilyPond-version.out&quot;)
+	If 	FileExists(sTmpPath &amp; &quot;LilyPond-cannot_execute&quot;) Then Kill(sTmpPath &amp; &quot;LilyPond-cannot_execute&quot;)
+	If 	FileExists(sTmpPath &amp; &quot;OOoLilyPond.out&quot;) Then Kill(sTmpPath &amp; &quot;OOoLilyPond.out&quot;)
+	If 	FileExists(sTmpPath &amp; &quot;OOoLilyPond.eps&quot;) Then Kill(sTmpPath &amp; &quot;OOoLilyPond.eps&quot;)
+	If 	FileExists(sTmpPath &amp; &quot;OOoLilyPond-1.eps&quot;) Then Kill(sTmpPath &amp; &quot;OOoLilyPond-1.eps&quot;)
+	If 	FileExists(sTmpPath &amp; &quot;OOoLilyPond-systems.tex&quot;) Then Kill(sTmpPath &amp; &quot;OOoLilyPond-systems.tex&quot;)
+	If 	FileExists(sTmpPath &amp; &quot;OOoLilyPond-systems.texi&quot;) Then Kill(sTmpPath &amp; &quot;OOoLilyPond-systems.texi&quot;)
+	If 	FileExists(sTmpPath &amp; &quot;OOoLilyPond.ly&quot;) Then Kill(sTmpPath &amp; &quot;OOoLilyPond.ly&quot;)
+	If 	FileExists(sTmpPath &amp; &quot;OOoLilyPond.png&quot;) Then Kill(sTmpPath &amp; &quot;OOoLilyPond.png&quot;)
+End Sub
+
+Sub InsertAttribute(oGraphic As Object, sName, sValue As String)
+	&apos;MsgBox &quot;InsertAttribute&quot;
+	Dim oAttributes, oLilyPondAttribute As Object
+	&apos; Add a user defined attribute to the image.
+	oAttributes = oGraphic.UserDefinedAttributes
+    oLilyPondAttribute = createUnoStruct( &quot;com.sun.star.xml.AttributeData&quot; )
+   	oLilyPondAttribute.Type = &quot;CDATA&quot;      		
+    oLilyPondAttribute.Value = sValue
+    oAttributes.insertByName(sName, oLilyPondAttribute )
+	oGraphic.UserDefinedAttributes = oAttributes
+End Sub
+	
+Sub InsertMusic(sCode, sTemplate As String, iAnchor, iWrap As Integer)
+	&apos;MsgBox &quot;InsertMusic&quot;
+	Dim oDoc, oDocCtrl, oDispatcher, oAttributes, oViewCursor, oGraphic, oLilyPondAttribute As Object
+
+	Dim oBitmapInfo As Object
+	Dim oGraph As Object	
+	Dim oSize As Object	
+	Dim iSizeW, iSizeH As Integer
+
+	&apos; Create the Controller and dispatcher for current document...
+	oDoc = StarDesktop.CurrentComponent
+	oDocCtrl = oDoc.getCurrentController()
+	oDispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;)
+
+	if bInWriter then
+
+		if bShapeIsSelected then
+			&apos;Remove the old image...
+			oDispatcher.executeDispatch( oDocCtrl.Frame, &quot;.uno:Cut&quot;, &quot;&quot;, 0, Array())
+		else
+			&apos;Get the cursor position...
+			Dim oCursor, oText as Object
+			oViewCursor =  oDocCtrl.ViewCursor
+			oText = oDoc.Text
+			oCursor = oViewCursor.Text.createTextCursorByRange(oViewCursor)
+		end if
+
+		&apos;Import the new image to the clipboard and paste it...
+   		&apos;ImportGraphicIntoClipboard(ConvertToURL( sTmpPath &amp; &quot;OOoLilyPond.&quot;&amp; sFormat))	
+		
+		ImportGraphicIntoClipboard(ConvertToURL(ConvertFromURL(sTmpPath) &amp; &quot;tempMScore.png&quot;))	
+		oDispatcher.executeDispatch( oDocCtrl.Frame, &quot;.uno:Paste&quot;, &quot;&quot;, 0, Array())
+	  	oGraphic = oDocCtrl.getSelection().GetByIndex(0)
+		&apos; set image properties
+		oGraphic.AnchorType = iAnchor
+		oGraphic.Surround = iWrap			
+
+		oGraphic.TopMargin = 0
+		oGraphic.BottomMargin = 0
+		oGraphic.VertOrient = 0
+
+		oBitmapInfo = oGraphic.GraphicObjectFillBitmap 
+		oSize = oBitmapInfo.getSize() 		
+		&apos;MsgBox(oSize.Width)
+		&apos;MsgBox(oSize.Height)
+	
+		iSizeW = oSize.Width
+		iSizeH = oSize.Height
+		
+		oSize.width = iSizeW * 8.4
+  		oSize.height = iSizeH * 8.4
+ 		oGraphic.setSize(oSize)
+	
+		
+		if not bShapeIsSelected then
+			&apos; Show cursor...
+			oDispatcher.executeDispatch(oDocCtrl.Frame, &quot;.uno:Escape&quot;, &quot;&quot;, 0, Array())
+			oCursor.goRight(0,false)
+			oViewCursor.gotoRange(oCursor, False)
+		end if
+
+	else &apos;We are in Impress
+		
+		if  bShapeIsSelected then
+			&apos; Remove the old image...
+			oDispatcher.executeDispatch(oDocCtrl.Frame,&quot;.uno:Cut&quot;,&quot;&quot;, 0, Array() )
+		end if
+		
+		&apos;Import the new image to the clipboard and paste it...
+   		ImportGraphicIntoClipboard(ConvertToURL( sTmpPath &amp; &quot;tempMScore.png&quot;))	
+		oDispatcher.executeDispatch( oDocCtrl.Frame, &quot;.uno:Paste&quot;, &quot;&quot;, 0, Array())
+	  	oGraphic = oDocCtrl.getSelection().getByIndex(0)
+
+		if bShapeIsSelected then oGraphic.position = oShapePosition
+
+	end if
+
+	InsertAttribute(oGraphic, &quot;OOoLilyPondCode&quot;, sCode)
+	InsertAttribute(oGraphic, &quot;OOoLilyPondTemplate&quot;, sTemplate)
+
+End Sub
+
+&apos; Fills the ComboBox with the list of Templates
+sub ListOfTemplates(oComboBox, bSilent)
+	Dim sTemplate(1000) As String
+	Dim t As String
+	Dim i As Integer
+
+	&apos;Liste leeren
+	oComboBox.removeItems(0, oComboBox.getItemCount)
+	If Not FileExists(sTemplatePath) Then
+		If Not bSilent Then MsgBox(&quot;The specified path for templates does not exist: &quot; &amp; Chr(10) &amp; Chr(34) &amp; ConvertFromURL(sTemplatePath) &amp; Chr(34) &amp; &quot;.&quot; &amp; Chr(10) &amp; &quot;Please adjust the path in the configuration dialog.&quot;)
+	Else
+		i=0
+		t=Dir(sTemplatePath)
+		do while t&lt;&gt;&quot;&quot;
+			If Right(t,4)=&quot;.msc&quot; Then
+				sTemplate(i)=Left(t, Len(t)-4)
+				i=i+1
+			End If
+			t=Dir
+		loop
+		If i=0 Then
+			If Not bSilent Then MsgBox(&quot;No templates are found at the path: &quot; &amp;  Chr(10) &amp; Chr(34) &amp; ConvertFromURL(sTemplatePath) &amp; Chr(34) &amp; &quot;.&quot; &amp; Chr(10) &amp; &quot;OOoLilyPond will not work without a template.&quot;)
+		Else
+			ReDim Preserve sTemplate(i-1) As String
+			SortStringArray(sTemplate)
+			oComboBox.addItems(sTemplate,0)
+		End If
+	EndIf
+end sub
+
+&apos; args: 0:Template, 1:Anchor, 2:Wrap, 3:Code
+&apos;*********************************************************
+Function ReadAttributes( oShape As Object, sCode, sTemplate As String, iAnchor, iWrap As Integer) As Boolean
+	&apos;MsgBox(&quot;ReadAttributes&quot;)
+	Dim sLyAttributes As Variant
+	Dim control As Variant
+
+	If oShape.UserDefinedAttributes().hasByName(&quot;OOoLilyPondArgs&quot;) Then
+		&apos;Object created by OOoLilyPond Versions &lt;= 0.2.1
+		sLyAttributes=oShape.UserDefinedAttributes().getByName(&quot;OOoLilyPondArgs&quot;).Value
+		sLyAttributes=Split(oShape.UserDefinedAttributes().getByName(&quot;OOoLilyPondArgs&quot;).Value, &quot;§&quot;, 4)
+		sTemplate=sLyAttributes(0)
+		sCode=sLyAttributes(3)
+    ElseIf oShape.UserDefinedAttributes().hasByName(&quot;OOoLilyPondCode&quot;) Then
+		&apos;Object created by OOoLilyPond Versions &gt;= 0.3
+		sCode=oShape.UserDefinedAttributes().getByName(&quot;OOoLilyPondCode&quot;).Value
+		sTemplate=oShape.UserDefinedAttributes().getByName(&quot;OOoLilyPondTemplate&quot;).Value
+	Else
+		&apos;The selected Object is not a OOoLilyPond Object
+		Msgbox (&quot;The selected object is not an OOoLilyPond object ...&quot;, 0, &quot;Error&quot;)
+		ReadAttributes = False
+		Exit Function
+	End If
+	
+	If bInWriter Then
+		iAnchor=oShape.AnchorType
+		iWrap=oShape.Surround
+	Else
+		iAnchor=-1
+		iWrap=-1
+	End IF
+	
+	if sCode &gt; &quot;&quot; then
+		&apos;Disable template control
+	End If
+	
+	
+    ReadAttributes=True
+    Exit Function    
+End Function
+
+
+Function WriteLyFile(sLilyPondCode) As Boolean
+	Dim sLyFile As String
+	Dim iNumber As Integer
+
+	&apos;On Error Goto ErrorHandler
+	sLyFile=ConvertFromURL(sTmpPath &amp; &quot;tempMScore.msc&quot;)
+	iNumber = Freefile
+	Open sLyFile For Output As #iNumber
+	&apos;Print #iNumber, sLilyPondCode
+	Print #iNumber, sLilyPondCode	
+	Close #iNumber
+
+	WriteLyFile=True	
+End Function
+
+</script:module>

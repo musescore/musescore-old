@@ -1,0 +1,1002 @@
+%
+% mscore
+%     MuseScore extensions
+%
+% source file of LilyPond's pretty-but-neat music font
+%
+% (c) 1997--2007 Jan Nieuwenhuizen <janneke@gnu.org>
+% & Han-Wen Nienhuys <hanwen@xs4all.nl>
+% & Juergen Reuter <reuter@ipd.uka.de>
+% & Werner Schweer <ws@seh.de>
+%
+
+fet_begingroup ("mscore");
+
+save outer_path;
+path outer_path;
+
+save black_notehead_width;
+save stemHeight;
+stemHeight := 3 staff_space;
+
+%----------------------------------------------------------
+%     half note with stem
+%----------------------------------------------------------
+
+fet_beginchar ("Half note", "no1");
+      %
+      %     draw note head
+      %
+
+	draw_outside_ellipse (1.53 - puff_up_factor / 3.0, 34, 0.66, 0.17);
+	undraw_inside_ellipse (3.25, 33, 0.81, 2.5 stafflinethickness#);
+	draw_staff (-2, 2, 0);
+
+      %
+      % draw stem
+      %
+
+      pickup pencircle scaled stemthickness;
+      hw := width - .5 stemthickness;
+
+      pair unten;
+      pair oben;
+	unten := directionpoint up of pat + (-.5 stemthickness, 0);
+      oben  := unten + (0, stemHeight);
+      draw unten -- oben;
+      currentpicture := currentpicture shifted (0, .5 staff_space);
+      fet_endchar;
+
+%----------------------------------------------------------
+%     quarter note with stem
+%----------------------------------------------------------
+
+fet_beginchar ("Quart note", "no2");
+      %
+      %     draw note head
+      %
+
+	draw_outside_ellipse (1.49 - puff_up_factor / 3.0, 31, 0.707, 0);
+	black_notehead_width# := charwd;
+
+      %
+      % draw stem
+      %
+
+      pickup pencircle scaled stemthickness;
+
+      hw := width - .5 stemthickness;
+
+      pair unten;
+      pair oben;
+	unten := directionpoint up of pat + (-.5 stemthickness, 0);
+      oben  := unten + (0, stemHeight);
+      draw unten -- oben;
+      currentpicture := currentpicture shifted (0, .5 staff_space);
+      fet_endchar;
+
+
+save upflag_width, downflag_width, right_upflag_space, right_downflag_space;
+save hip_thickness, foot_thickness;
+
+upflag_width#         = .65 black_notehead_width# + stemthickness# / 2;
+downflag_width#       = .833 black_notehead_width# + stemthickness# / 2;
+right_upflag_space#   = .0 upflag_width#;
+right_downflag_space# = .0 downflag_width#;
+hip_thickness#        = 1.0 linethickness# + 0.069 staff_space#;
+foot_thickness#       = 1.2055 linethickness# + 0.06 staff_space#;
+
+define_pixels (hip_thickness, foot_thickness);
+
+%----------------------------------------------------------
+%     draw_flag
+%----------------------------------------------------------
+
+def draw_flag (expr center, flare, dims, hip_depth, foot_wid, hip_thickness,
+   foot_thickness, show_labels) =
+
+	save c;
+	clearxy;
+	c = 0.7;
+
+	penpos1 (flare, 90);
+	penpos2 (whatever, 0);
+	x2r - x2l = hround (hip_thickness);
+	penpos3 (foot_thickness, -20.0);
+
+	z1r = center;
+	z2r = center + (xpart (dims), -ypart (dims) * hip_depth);
+	z3r = center + (xpart (dims) * foot_wid, -ypart (dims));
+
+	x2r := hround x2r;
+	y2r := vround y2r;
+
+	outer_path := z3r{curl c}
+		      .. z2r{up}
+		      .. {up}z1r;
+
+	if show_labels = 1:
+		penlabels (1, 2, 3);
+	fi;
+
+	fill z1l{curl 0}
+	     ..tension 1.1.. z2l{down}
+	     ..	{curl c}simple_serif (z3l, z3r, 80)
+	     & outer_path
+	     & z1r
+	     -- cycle;
+      enddef;
+
+%----------------------------------------------------------
+%     add_flag
+%----------------------------------------------------------
+
+def add_flag (expr yoff, flare, hip_wid_multiplier, hip_dep_multiplier,
+   intersectpoint, hip_thickness, foot_thickness) =
+      begingroup
+	save prev_center, prev_xextreme, prev_yextreme;
+	save rel_foot, ip, center, incision_depth;
+	save prev_hipwid, prev_footdep, prev_hipdep, wid, dep, hip_dep;
+	save hip_dep_ratio, foot_wid_ratio;
+	pair prev_center, center, foot, prev_xextreme, prev_yextreme;
+	pair ip, rel_foot;
+
+	incision_depth = 1.013;
+	prev_center = point 2 of outer_path;
+	prev_xextreme = point 1 of outer_path;
+	prev_yextreme = point 0 of outer_path;
+	prev_hipwid = xpart (prev_xextreme - prev_center);
+	prev_footdep = -ypart (prev_yextreme - prev_center);
+	prev_hipdep = -ypart (prev_xextreme - prev_center);
+	ip = point intersectpoint of outer_path;
+
+	wid = prev_hipwid * hip_wid_multiplier;
+	hip_dep = prev_hipdep * hip_dep_multiplier;
+
+	center = prev_center + (0, yoff);
+	rel_foot = incision_depth [(wid, hip_dep), ip - center];
+	dep = -ypart (rel_foot);
+	foot_wid_ratio = xpart (rel_foot) / wid;
+	hip_dep_ratio = hip_dep / dep;
+
+	draw_flag (center, flare, (wid, dep),
+		   hip_dep_ratio, foot_wid_ratio,
+		   hip_thickness, foot_thickness, 0);
+      endgroup
+      enddef;
+
+
+%----------------------------------------------------------
+%     1/8 note with stem and flag
+%----------------------------------------------------------
+
+fet_beginchar ("Quart note", "no4");
+	draw_outside_ellipse (1.49 - puff_up_factor / 3.0, 31, 0.707, 0);
+	black_notehead_width# := charwd;
+
+	pickup pencircle scaled stafflinethickness;
+
+      % draw stem
+
+      pickup pencircle scaled stemthickness;
+      hw := width - .5 stemthickness;
+
+      pair unten;
+      pair oben;
+	unten := directionpoint up of pat + (-.5 stemthickness, 0);
+      oben  := unten + (0, stemHeight);
+      draw unten -- oben;
+
+
+      % draw flag
+
+	save flare, hip_depth_ratio, hip_width, foot_depth, foot_width_ratio;
+
+	flare            = staff_space;
+	hip_depth_ratio  = .72;
+	foot_width_ratio = .8;
+
+	hip_width#       = upflag_width# - hip_thickness# / 2;
+	foot_depth#      = 3 staff_space#; % - blot_diameter# / 2;
+	define_pixels (hip_width, foot_depth);
+
+      save aaa, bbb, ccc;
+      aaa = hip_width# + stemthickness# / 2 + right_upflag_space#;
+      bbb = foot_depth# + foot_thickness# / 2;
+      ccc = stemthickness# / 2;
+
+%	set_char_box (
+%	   black_notehead_width#,
+%         aaa, bbb, ccc);
+
+	draw_flag (oben, flare, (hip_width, foot_depth),
+		   hip_depth_ratio, foot_width_ratio,
+		   hip_thickness, foot_thickness, 1);
+
+      currentpicture := currentpicture shifted (0, .5 staff_space);
+      fet_endchar;
+
+%----------------------------------------------------------
+%     1/16 note with stem and flag
+%----------------------------------------------------------
+
+fet_beginchar ("1/16 note", "no8");
+	draw_outside_ellipse (1.49 - puff_up_factor / 3.0, 31, 0.707, 0);
+	black_notehead_width# := charwd;
+
+	pickup pencircle scaled stafflinethickness;
+
+      % draw stem
+
+      pickup pencircle scaled stemthickness;
+      hw := width - .5 stemthickness;
+
+      pair unten;
+      pair oben;
+	unten := directionpoint up of pat + (-.5 stemthickness, 0);
+      oben  := unten + (0, stemHeight);
+      draw unten -- oben;
+
+
+      % draw flags
+
+	save flare, hip_depth_ratio, hip_width, foot_depth, foot_width_ratio;
+	save flagspace, total_depth, flag_count;
+
+	total_depth# = 3.5 staff_space# - blot_diameter# / 2;
+	flag_count = 2;
+	flare = .85 staff_space;
+	flagspace# = .85 staff_space#;
+	hip_depth_ratio = .72;
+	hip_width# = upflag_width# - hip_thickness# / 2;
+	flagspace# + foot_depth# = total_depth#;
+	foot_width_ratio = .8;
+	define_pixels (hip_width, foot_depth);
+	define_whole_vertical_pixels (flagspace);
+
+%	set_char_box (0,
+%		      hip_width# + stemthickness# / 2 + right_upflag_space#,
+%		      total_depth# + foot_thickness# / 2, stemthickness# / 2);
+
+	draw_flag (oben + (0, -flagspace), flare, (hip_width, foot_depth),
+		   hip_depth_ratio, foot_width_ratio,
+		   hip_thickness, foot_thickness, 1);
+
+	add_flag (flagspace, flare, .97, 1.00, 1.25,
+		  hip_thickness, foot_thickness);
+
+      currentpicture := currentpicture shifted (0, .5 staff_space);
+      fet_endchar;
+
+%----------------------------------------------------------
+%     1/32 note with stem and flag
+%----------------------------------------------------------
+
+fet_beginchar ("1/32 note", "no16");
+	draw_outside_ellipse (1.49 - puff_up_factor / 3.0, 31, 0.707, 0);
+	black_notehead_width# := charwd;
+
+	pickup pencircle scaled stafflinethickness;
+
+      % draw stem
+
+      pickup pencircle scaled stemthickness;
+      hw := width - .5 stemthickness;
+
+      pair unten;
+      pair oben;
+	unten := directionpoint up of pat + (-.5 stemthickness, 0);
+      oben  := unten + (0, stemHeight);
+      draw unten -- oben;
+
+
+      % draw flags
+
+	save flare, hip_depth_ratio, hip_width, foot_depth, foot_width_ratio;
+	save flagspace, total_depth, flag_count;
+
+	flag_count = 3;
+	total_depth# = 4.25 staff_space#;
+	flare = .85 staff_space;
+	flagspace# = .87 staff_space#;
+	hip_depth_ratio = .72;
+	hip_width# = upflag_width# - hip_thickness# / 2;
+	foot_width_ratio = .8;
+
+	(flag_count - 1) * flagspace# + foot_depth# = total_depth#;
+
+	define_pixels (hip_width, foot_depth);
+	define_whole_vertical_pixels (flagspace);
+
+%	set_char_box (0, hip_width# + right_upflag_space#,
+%		      total_depth# + foot_thickness# / 2, stemthickness# / 2);
+
+	draw_flag (oben + (0, -2 flagspace), flare, (hip_width, foot_depth),
+		   hip_depth_ratio, foot_width_ratio,
+		   hip_thickness, foot_thickness, 1);
+
+	add_flag (flagspace, flare, .97, 1.00, 1.25,
+		  hip_thickness, foot_thickness);
+	add_flag (flagspace, flare, .95, 1.05, 1.25,
+		  hip_thickness, foot_thickness);
+
+      currentpicture := currentpicture shifted (0, .5 staff_space);
+      fet_endchar;
+
+%----------------------------------------------------------
+%     1/64 note with stem and flags
+%----------------------------------------------------------
+
+fet_beginchar ("1/64 note", "no32");
+	draw_outside_ellipse (1.49 - puff_up_factor / 3.0, 31, 0.707, 0);
+	black_notehead_width# := charwd;
+
+	pickup pencircle scaled stafflinethickness;
+
+      % draw stem
+
+      pickup pencircle scaled stemthickness;
+      hw := width - .5 stemthickness;
+
+      pair unten;
+      pair oben;
+	unten := directionpoint up of pat + (-.5 stemthickness, 0);
+      oben  := unten + (0, 4 staff_space);
+      draw unten -- oben;
+
+
+      % draw flags
+
+	save flare, hip_depth_ratio, hip_width, foot_depth, foot_width_ratio;
+	save flagspace, total_depth, flag_count;
+
+	flag_count = 4;
+	flare = .85 staff_space;
+	flagspace# = .9 staff_space#;
+	hip_depth_ratio = .72;
+	hip_width# = upflag_width# - hip_thickness# / 2;
+	total_depth# = 5.25 staff_space#;
+	foot_width_ratio = .8;
+
+	(flag_count - 1) * flagspace# + foot_depth# = total_depth#;
+
+	define_pixels (hip_width, foot_depth);
+	define_whole_vertical_pixels (flagspace);
+
+%	set_char_box (0, hip_width# + right_upflag_space#,
+%		      total_depth# + foot_thickness# / 2, stemthickness# / 2);
+
+	draw_flag (oben + (0, -(flag_count - 1) * flagspace), flare,
+		   (hip_width, foot_depth),
+		   hip_depth_ratio, foot_width_ratio,
+		   hip_thickness, foot_thickness, 1);
+
+	add_flag (flagspace, flare, .97, 1.00, 1.3,
+		  hip_thickness, foot_thickness);
+	add_flag (flagspace, flare, 1.00, 1.00, 1.25,
+		  hip_thickness, foot_thickness);
+	add_flag (flagspace, flare, .95, 1.05, 1.25,
+		  hip_thickness, foot_thickness);
+
+      currentpicture := currentpicture shifted (0, .5 staff_space);
+      fet_endchar;
+
+if 1 = 2:
+
+%----------------------------------------------------------
+%     128th Flag (up)
+%----------------------------------------------------------
+
+fet_beginchar ("128th Flag (up)", "u7");
+	save flare, hip_depth_ratio, hip_width, foot_depth, foot_width_ratio;
+	save flagspace, total_depth, flag_count;
+
+	flag_count = 5;
+	flare = .85 staff_space;
+	flagspace# = .94 staff_space#;
+	hip_depth_ratio = .72;
+	hip_width# = upflag_width# - hip_thickness# / 2;
+	total_depth# = 6.25 staff_space#;
+	foot_width_ratio = .8;
+
+	(flag_count - 1) * flagspace# + foot_depth# = total_depth#;
+
+	define_pixels (hip_width, foot_depth);
+	define_whole_vertical_pixels (flagspace);
+
+	set_char_box (0, hip_width# + right_upflag_space#,
+		      total_depth# + foot_thickness# / 2, stemthickness# / 2);
+
+	draw_flag ((0, -(flag_count - 1) * flagspace), flare,
+		   (hip_width, foot_depth),
+		   hip_depth_ratio, foot_width_ratio,
+		   hip_thickness, foot_thickness, 1);
+
+	add_flag (flagspace, flare, .97, 1.00, 1.3,
+		  hip_thickness, foot_thickness);
+	add_flag (flagspace, flare, 1.00, 1.00, 1.25,
+		  hip_thickness, foot_thickness);
+	add_flag (flagspace, flare, .95, 1.05, 1.25,
+		  hip_thickness, foot_thickness);
+	add_flag (flagspace, flare, .92, 1.08, 1.25,
+		  hip_thickness, foot_thickness);
+
+	draw_square_block ((-0.5 stemthickness_rounded, 0),
+			   (0, -5 staff_space_rounded));
+fet_endchar;
+
+%----------------------------------------------------------
+%     128th Flag (down)
+%----------------------------------------------------------
+
+fet_beginchar ("128th (down)", "d7");
+	save flare, hip_depth_ratio, hip_width, foot_depth, foot_width_ratio;
+	save flagspace, total_depth, flag_count;
+
+	flag_count = 5;
+	flare = .8 staff_space;
+	flagspace# = .9 staff_space#;
+	hip_depth_ratio = .85;
+	hip_width# = downflag_width# - hip_thickness# / 2;
+	total_depth# = 5.00 staff_space#;
+	foot_width_ratio = .98;
+
+	(flag_count - 1) * flagspace# + foot_depth# = total_depth#;
+
+	define_pixels (hip_width, foot_depth);
+	define_whole_vertical_pixels (flagspace);
+
+	set_char_box (0, hip_width# + right_downflag_space#,
+		      total_depth# + foot_thickness# / 2, stemthickness# / 2);
+
+	draw_flag ((0, -(flag_count - 1) * flagspace), flare,
+		   (hip_width, foot_depth),
+		   hip_depth_ratio, foot_width_ratio,
+		   hip_thickness, foot_thickness, 0);
+
+	add_flag (flagspace, flare, .97, 1.25, 1.175,
+		  hip_thickness, foot_thickness);
+	add_flag (flagspace, flare, .97, 1.20, 1.175,
+		  hip_thickness, foot_thickness);
+	add_flag (.98 flagspace, flare, .91, 1.1, 1.2,
+		  hip_thickness, foot_thickness);
+	add_flag (.98 flagspace, flare, .89, 1.05, 1.22,
+		  hip_thickness, foot_thickness);
+
+	draw_square_block ((-0.5 stemthickness_rounded, 0),
+			   (0, -5 staff_space_rounded));
+
+	y_mirror_char;
+fet_endchar;
+
+fi;
+
+%----------------------------------------------------------
+%     duration dot
+%----------------------------------------------------------
+
+save dot_diam;
+2 dot_diam# = staff_space# - stafflinethickness#;
+define_whole_blacker_pixels (dot_diam);
+
+fet_beginchar ("duration dot", "dot");
+	pickup pencircle scaled dot_diam;
+
+	lft x0 = 0;
+	top y0 = vround (.5 dot_diam);
+
+	drawdot z0 + (0, staff_space / 2);
+
+	set_char_box (0, dot_diam#, .5 dot_diam#, .5 dot_diam#);
+fet_endchar;
+
+
+%----------------------------------------------------------
+%     duration dot dot
+%----------------------------------------------------------
+
+define_whole_blacker_pixels (dot_diam);
+
+fet_beginchar ("duration dot dot", "dotdot");
+	pickup pencircle scaled dot_diam;
+
+	lft x0 = 0;
+	top y0 = vround (.5 dot_diam);
+
+	drawdot z0 + (0, staff_space / 2);
+	drawdot z0 + (2 staff_space / 2, staff_space / 2);
+
+	set_char_box (0, dot_diam# * 2 + staff_space# / 2, .5 dot_diam#, .5 dot_diam#);
+fet_endchar;
+
+
+%----------------------------------------------------------
+%     accidentals
+%----------------------------------------------------------
+
+save sharp_beamheight;
+sharp_beamheight# := 0.3 staff_space# + stafflinethickness#;
+
+%
+% The beams of most sharps have horizontal endings (as if drawn with
+% a square pen).  [Wanske] does not mention this, so we'll just ignore
+% this fact.
+%
+
+def draw_meta_sharp (expr width, offset) =
+	save beamwidth, beamslope;
+	save ne, nw_dist;
+	pair ne, nw_dist;
+
+	beamwidth := width;
+
+	define_whole_vertical_blacker_pixels (sharp_beamheight);
+
+	clearxy;
+
+	beamslope = sharp_beamheight / beamwidth;
+
+	pickup pencircle scaled 2 blot_diameter;
+
+	rt x2 - lft x1 = beamwidth;
+	z2 = z1 + whatever * (beamwidth, sharp_beamheight);
+	.5 [z1, z3] = (.5 w, offset);
+	x3 = x2;
+	top y2 - bot y3 = sharp_beamheight;
+	x4 = x1;
+	top y1 - bot y4 = sharp_beamheight;
+
+	ne = unitvector (z2 - z1);
+	nw_dist = (ne rotated 90) * blot_diameter;
+
+	fill lft z1{up}
+	     ... (z1 + nw_dist){ne}
+	     -- (z2 + nw_dist){ne}
+	     ... rt z2{down}
+	     -- rt z3{down}
+	     ... (z3 - nw_dist){-ne}
+	     -- (z4 - nw_dist){-ne}
+	     ... lft z4{up}
+	     -- cycle;
+
+	labels (1, 2, 3, 4);
+enddef;
+
+%
+% Dedicated to my mom.    (3/10/97)
+%
+% Mamma, ik hou van je; kom je alsjeblieft terug?
+%    -- HW
+%
+%
+% TODO: remove crook_fatness
+% TODO: document, simplify!
+%
+
+def draw_meta_flat (expr xcenter, w, crook_fatness) =
+	save crook_thinness;
+	save bottom_overshoot, bot_crook_dir;
+	save top_stem_thick, bottom_stem_thick, hair, smaller_hole;
+	save top_crook_thinness;
+	save zwiep;
+	save center;
+	pair center, bot_crook_dir;
+	save clearing;
+
+	clearxy;
+
+	% the stem shouldn't reach the top staff line.
+	%% TODO: should take from height.
+	%
+	% TODO: parameterize this
+	%
+	if w >= 0.75 staff_space:
+		smaller_hole = 0.35 stafflinethickness;
+	else:
+		smaller_hole = 0;
+	fi;
+	clearing = 1.7 stafflinethickness;
+	crook_thinness = .7 stafflinethickness + .06 staff_space;
+	top_crook_thinness = 1 stafflinethickness + .065 staff_space;
+	bottom_overshoot = stafflinethickness;
+
+	bottom_stem_thick# = 0.06 staff_space# + 0.6 stafflinethickness#;
+	top_stem_thick# = 0.1 staff_space# + 1.2 stafflinethickness#;
+	define_whole_blacker_pixels (bottom_stem_thick, top_stem_thick);
+
+	if odd (top_stem_thick - bottom_stem_thick):
+		top_stem_thick := top_stem_thick - 1;
+	fi;
+
+	center = (xcenter, 0);
+
+	x1l = hround (xcenter - .5 top_stem_thick);
+	y1 = vround (2 staff_space - clearing);
+	x2l = hround (xcenter - .5 bottom_stem_thick);
+	y2 = -.5 staff_space - .5 stafflinethickness;
+
+	penpos1 (top_stem_thick, 0);
+	penpos2 (bottom_stem_thick, 0);
+
+	y3l = vfloor ((staff_space - stafflinethickness) / 2);
+	z3l = whatever [z2r, z1r];
+	z3r = .3 [z2r, z1r] + (smaller_hole, 0);
+	x3r := hceiling x3r;
+
+	% we insert z3l to get better conversion with mf2pt1
+	fill simple_serif (z1r, z1l, 30)
+	     -- z2l
+	     -- z2r
+	     -- z3l
+	     -- cycle;
+
+	z10 = whatever [z2r, z1r] + (smaller_hole, 0);
+	y10 = -1/10 staff_space;
+	x10 := hceiling x10;
+
+	x11 = xcenter + bottom_overshoot / 3;
+	y11 = -vround (.5 (staff_space + stafflinethickness)
+		       + bottom_overshoot);
+
+	penpos4 (whatever, 53);
+
+	y4l - y4r = top_crook_thinness;
+	y5r = .15 staff_space;
+	x5l = hround (w + xcenter);
+	y4 = staff_space / 2;
+	x4r = .45 [x5r, x3r];
+	y4l := vround y4l;
+
+	penpos5 (crook_fatness, -175);
+
+	bot_crook_dir = unitvector ((x5l, 0) - z11);
+	z8 = z11 + whatever * bot_crook_dir;
+	y8 = -staff_space / 2;
+
+	z7 = z8
+	     + whatever * bot_crook_dir
+	     + crook_thinness * (bot_crook_dir rotated 90);
+	x7 = .1 [x3r, x8];
+
+	unfill z3r{z3r - z10}
+	       .. z4r{right}
+	       .. z5r{down}
+	       .. z7{-bot_crook_dir}
+	       & z7
+	       .. z10{z3r - z10}
+	       -- cycle;
+
+	fill z2l{down}
+	     .. z11{right}
+	     .. z8{bot_crook_dir}
+	     .. z5l{up}
+	     .. z4l{left}
+	     .. z3l
+	     -- cycle;
+      enddef;
+
+%----------------------------------------------------------
+%     sharp
+%----------------------------------------------------------
+
+fet_beginchar ("Sharp", "sharp");
+	save stem, stemx, stemwidth;
+	save outer_space, interbeam;
+
+      save moveUp;
+      moveUp := .5 staff_space;
+
+	stemwidth# := stafflinethickness# + .05 staff_space#;
+	define_whole_blacker_pixels (stemwidth);
+
+	interbeam := 1.05 staff_space_rounded;
+
+	set_char_box (0, 1.1 staff_space#,
+		      1.5 staff_space#, 1.5 staff_space#);
+
+	stem := 7 / 16 * w;
+	stemx := hround stem;
+	outer_space := hround ((w - stemx - stemwidth) / 2);
+
+	w := 2 outer_space + stemx + stemwidth;
+	d := d - feta_space_shift;
+
+	draw_meta_sharp (w, -.5 interbeam + moveUp);
+	draw_meta_sharp (w, -.5 interbeam + vround interbeam + moveUp);
+
+	pickup pencircle scaled stemwidth;
+
+	lft x5 = lft x6 = outer_space;
+	lft x7 = lft x8 = outer_space + stemx;
+	bot y5 = -d + moveUp;
+	top y6 = vround (1.5 staff_space - stem * beamslope) + moveUp;
+	bot y7 = -top y6 + feta_space_shift + 2* moveUp;
+	top y8 = h + moveUp;
+
+	labels (5, 6, 7, 8);
+
+	draw_gridline (z5, z6, stemwidth);
+	draw_gridline (z7, z8, stemwidth);
+
+      currentpicture := currentpicture shifted (0, .5 staff_space);
+      fet_endchar;
+
+%----------------------------------------------------------
+%     flat
+%----------------------------------------------------------
+
+fet_beginchar ("Flat", "flat");
+	set_char_box (1.2 stafflinethickness#, .8 staff_space#,
+		      0.6 staff_space#, 1.9 staff_space#);
+
+	draw_meta_flat (0, w, 0.31 staff_space);
+	penlabels (range 0 thru 11);
+      currentpicture := currentpicture shifted (0, .5 staff_space);
+      fet_endchar;
+
+%----------------------------------------------------------
+%     natural
+%----------------------------------------------------------
+
+fet_beginchar ("Natural", "natural");
+	save stemwidth, top_stem_thick;
+	save ne, pat_top, pat_bottom;
+	pair ne;
+	path pat_top, pat_bottom;
+
+	top_stem_thick# = stafflinethickness# + .10 staff_space#;
+	stemwidth# = 0.09 staff_space# + .5 stafflinethickness#;
+	define_whole_blacker_pixels (top_stem_thick, stemwidth);
+
+	set_char_box (0, 2/3 staff_space#,
+		      1.5 staff_space#, 1.5 staff_space#);
+
+	d := d - feta_space_shift;
+
+	pickup pencircle scaled stemwidth;
+
+	penpos1 (top_stem_thick, 0);
+	penpos3 (top_stem_thick, 0);
+	penpos2 (stemwidth, 0);
+	penpos4 (stemwidth, 0);
+
+	x2r = w;
+	x4l = 0;
+	x3 = x2;
+	x1 = x4;
+
+	y1 = h;
+	y3 = -d;
+	top y2 = vround (staff_space - 3/2 stafflinethickness);
+	y4 = -y2 + feta_space_shift;
+
+	pat_bottom := z4r{z4r - z1r}
+		      .. bot z4
+		      .. z4l{z1l - z4l};
+	fill simple_serif (z1l, z1r, -30)
+	     -- pat_bottom
+	     -- cycle;
+
+	pat_top := z2r{z2r - z3r}
+		   .. top z2
+		   .. z2l{z3l - z2l};
+	fill simple_serif (z3l, z3r, 30)
+	     -- pat_top
+	     -- cycle;
+
+	ne = (x2 - x4, stafflinethickness);
+
+	z11' = z3l + whatever * (z2l - z3l);
+	y11' = vround (.5 (staff_space - stafflinethickness));
+	z11 = z11' + whatever * ne;
+	x11 = x12;
+	z12 = directionpoint -ne of pat_top;
+	z13 = z12 + whatever * ne;
+	x13 = x1;
+	z14 = z11 + whatever * ne;
+	x14 = x1;
+
+	z21' = z4r + whatever * (z1r - z4r);
+	y21' = -y11' + feta_space_shift;
+	z21 = z21' + whatever * ne;
+	x21 = x22;
+	z22 = directionpoint -ne of pat_bottom;
+	z23 = z22 + whatever * ne;
+	x23 = x3;
+	z24 = z21 + whatever * ne;
+	x24 = x3;
+
+	fill z11
+	     -- z12
+	     -- z13
+	     -- z14
+	     -- cycle;
+	fill z21
+	     -- z22
+	     -- z23
+	     -- z24
+	     -- cycle;
+
+	penlabels (1, 2, 3, 4);
+	labels (11, 11', 12, 13, 14, 21, 21', 22, 23, 24);
+
+      currentpicture := currentpicture shifted (0, .5 staff_space);
+fet_endchar;
+
+
+%----------------------------------------------------------
+%     segno
+%----------------------------------------------------------
+
+fet_beginchar ("Segno", "segno");
+	save thin, thick, ball_diam, darkness, pointheight;
+	save wd, ht, thick_nibangle, ball_nib_thick;
+	save turndir;
+	pair turndir;
+
+	ht# = 3 staff_space#;
+	wd# = 2 staff_space#;
+	darkness = .08 staff_space + 0.4 linethickness;
+
+	set_char_box (wd# / 2, wd# / 2, ht# / 2, ht# / 2);
+
+	thick_nibangle = 30;
+	thick = 3 darkness;
+	thin = darkness;
+	ball_nib_thick = 2.7 darkness;
+	ball_diam = ball_nib_thick + (w - ball_nib_thick) / 10;
+	pointheight = 2 linethickness;
+
+	y3l = h;
+	2 x3 = x2 + x4;
+	x4 = 0;
+	y4 = y2;
+	y2l = .6 h;
+	x2l = -b;
+	z1 = (0, 0);
+
+	penpos1 (thick, 2 thick_nibangle);
+	penpos2 (thick, thick_nibangle);
+	penpos3 (thin, -90);
+	penpos4 (ball_nib_thick, 180 - thick_nibangle);
+
+	save swoosh, ploop;
+	path swoosh, ploop;
+
+	swoosh := z1l{curl 0}
+		  .. z2l
+		  .. z3l{right}
+		  .. {down}z4l
+		  -- z4r
+		  .. z3r{left}
+		  .. z2r{down};
+	fill swoosh
+	     .. (swoosh scaled -1)
+	     .. cycle;
+
+	y5r = y4;
+	x5r = x4l - ball_diam / 2;
+	z6r = z5r;
+
+	penpos5 (1.6 ball_diam / 2, 100);
+	penpos6 (ball_diam / 2, 240);
+
+	ploop := z4l{down}
+		 .. z5l
+		 .. z6l
+		 -- cycle;
+	fill ploop;
+	fill ploop scaled -1;
+
+	penpos7 (2 thin, 0);
+	z7l = (-b, -d);
+	penpos8 (2 thin, 0);
+	z8r = (w, h);
+
+	penstroke z7e
+		  -- z8e;
+
+	pickup pencircle scaled 2 thin;
+	drawdot (-x2r, pointheight);
+	drawdot (x2r, -pointheight);
+
+	penlabels (range 1 thru 8);
+
+      currentpicture := currentpicture shifted (0, 1.5 staff_space);
+      fet_endchar;
+
+%----------------------------------------------------------
+%     coda
+%----------------------------------------------------------
+
+fet_beginchar ("Coda", "coda");
+	save stickout, thin, thick, codawidth, codaheight;
+
+	stickout# = 0.35 staff_space#;
+	codawidth# = 2/3 staff_space#;
+	codaheight# = staff_space#;
+	define_pixels (codawidth, codaheight);
+
+	set_char_box (codawidth# + stickout#, codawidth# + stickout#,
+		      codaheight# + stickout#, codaheight# + stickout#);
+
+	thin = 1.2 linethickness;
+	0.1 (codaheight - 2 thin) = (codawidth - 2 thick);
+
+	penpos1 (thick, 0);
+	penpos2 (thin, -90);
+	penpos3 (thick, -180);
+	penpos4 (thin, -270);
+
+	x1l = -codawidth;
+	y2l = codaheight;
+	y1 = 0;
+	x2 = 0;
+	z3 = -z1;
+	z4 = -z2;
+
+	penlabels (1, 2, 3, 4);
+
+	fill z1l{up}
+	     .. z2l{right}
+	     .. z3l{down}
+	     .. z4l{left}
+	     .. cycle;
+	unfill z1r{up}
+	       .. z2r{right}
+	       .. z3r{down}
+	       .. z4r{left}
+	       .. cycle;
+
+	draw_gridline ((0, -h), (0, h), thin);
+	draw_gridline ((-w, 0), (w, 0), thin);
+
+      currentpicture := currentpicture shifted (0, 1 staff_space);
+fet_endchar;
+
+
+%----------------------------------------------------------
+%     varied coda
+%----------------------------------------------------------
+
+fet_beginchar ("Varied Coda", "varcoda");
+	save thin, thick, codawidth, codaheight;
+	thin# = 1.2 linethickness#;
+	thick# = 1.0 linethickness# + 0.25 staff_space#;
+	codawidth# = 2/3 staff_space#;
+	codaheight# = staff_space#;
+	define_pixels (thin, thick, codawidth, codaheight);
+
+	set_char_box (codawidth# + thick#, codawidth# + thick#,
+		      codaheight# + thick#, codaheight# + thick#);
+
+      save moveUp;
+      moveUp := 1.5 staff_space;
+
+	x1 = -codawidth + thick - .5 blot_diameter;
+	y1 = y2 - thin;
+	x2 = codawidth - thick + .5 blot_diameter;
+	y2 = codaheight;
+	draw_square_block (z1, z2);
+
+	x3 = -codawidth;
+	y3 = -codaheight;
+	x4 = x3 + thick;
+	y4 = y2;
+	draw_block (z3, z4);
+
+	labels (1, 2, 3, 4);
+
+	addto currentpicture also currentpicture scaled -1;
+
+	draw_gridline ((0, -h), (0, h), thin);
+	draw_gridline ((-w, 0), (w, 0), thin);
+
+      save moveUp;
+      moveUp := 1 staff_space;
+      currentpicture := currentpicture shifted (0, moveUp);
+      fet_endchar;
+
+
+fet_endgroup ("mscore");
+

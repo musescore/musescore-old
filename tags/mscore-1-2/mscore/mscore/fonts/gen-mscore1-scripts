@@ -1,0 +1,103 @@
+#!/usr/bin/python
+import sys
+import getopt
+import re
+import os
+
+(options, files) = \
+ getopt.getopt (sys.argv[1:],
+        '',
+        ['dir='])
+
+
+outdir = ''
+for opt in options:
+    o = opt[0]
+    a = opt[1]
+    if o == '--dir':
+        outdir = a
+    else:
+        print o
+        raise getopt.error
+
+# Ugh
+# for design_size in [11,13,14,16,18,20,23,26]:
+for design_size in [20]:
+    name = 'MScore1'
+    filename = name.lower ()
+    script = '''#!/usr/bin/fontforge
+
+New();
+
+# Separate Feta versioning?
+#         *  using 20 as Weight works for gnome-font-select widget: gfs
+
+notice = "";
+notice += "This font is distributed under the GNU General Public License. ";
+notice += "As a special exception, if you create a document which uses ";
+notice += "this font, and embed this font or unaltered portions of this ";
+notice += "font into the document, this font does not by itself cause the ";
+notice += "resulting document to be covered by the GNU General Public License.";;
+
+# SetFontNames("%(name)s-%(design_size)d", "%(name)s", "%(name)s %(design_size)d", "%(design_size)d", notice, "2.11.65");
+  SetFontNames("%(name)s-%(design_size)d", "%(name)s", "%(name)s", "%(design_size)d", notice, "2.11.65");
+
+MergeFonts("mscore1-%(design_size)d.pfb");
+# MergeFonts("parmesan%(design_size)d.pfb");
+
+# load nummer/din after setting PUA.
+# 256 + 14 - Segno
+# 256 + 15 - Coda
+# 256 + 16 - VarCoda
+
+i = 0;
+while (i < CharCnt())
+      Select(i);
+      if (i == 0x10f)
+            SetUnicodeValue(0xE167, 0);
+      elseif (i == 0x110)
+            SetUnicodeValue(0xE168, 0);
+      elseif (i == 0x111)
+            SetUnicodeValue(0xE169, 0);
+      else
+            SetUnicodeValue(i + 0xE000, 0);
+      endif
+      ++i;
+endloop
+
+
+MergeFonts("feta-alphabet%(design_size)d.pfb");
+MergeKern("feta-alphabet%(design_size)d.tfm");
+
+# LoadTableFromFile("LILF", "%(filename)s-%(design_size)d.subfonts");
+# LoadTableFromFile("LILC", "feta%(design_size)d.otf-table");
+# LoadTableFromFile("LILY", "feta%(design_size)d.otf-gtable");
+
+Generate("%(filename)s-%(design_size)d.ttf");
+# Generate("%(filename)s-%(design_size)d.otf");
+# Generate("%(filename)s-%(design_size)d.svg");
+''' % vars()
+
+    basename = '%s-%d' % (filename, design_size)
+    path = os.path.join (outdir, basename + '.pe')
+    open (path, 'w').write (script)
+
+    subfonts = ['mscore1-%(design_size)d', 'feta-alphabet%(design_size)d']
+
+    ns = []
+    for s in subfonts:
+        ns.append ('%s' % (s % vars()))
+
+    subfonts_str = ' '.join (ns)
+
+    open (os.path.join (outdir, '%(filename)s-%(design_size)d.subfonts' % vars()), 'w').write (subfonts_str)
+
+    path = os.path.join (outdir, '%s-%d.dep' % (filename, design_size))
+
+    deps = r'''%(filename)s-%(design_size)d.otf: \
+ $(outdir)/feta-alphabet%(design_size)d.pfa  \
+ $(outdir)/feta-alphabet%(design_size)d.pfa
+''' % vars()
+    open (path, 'w').write (deps)
+
+    open (os.path.join (outdir, basename + '.fontname'), 'w').write ("%s-%d" % (name, design_size))
