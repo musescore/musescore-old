@@ -1,3 +1,6 @@
+======== MuseScore 1.2 released ==============
+13.mar (la)
+      - change splash screen
 12.mar (la)
       - fix #15457: Undo Insert Measure after changing clef causes crash
       - make musescore.com plugin translatable
