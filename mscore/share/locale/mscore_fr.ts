@@ -5260,11 +5260,11 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the copy operation</source>
-        <translation type="unfinished"/>
+        <translation>Veuillez sélectionner un tuplet complet avant de copier</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the cut operation</source>
-        <translation type="unfinished"/>
+        <translation>Veuillez sélectionner un tuplet complet avant de couper</translation>
     </message>
 </context>
 <context>
