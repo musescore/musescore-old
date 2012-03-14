@@ -11,7 +11,8 @@
 //  the file LICENCE.GPL
 //=============================================================================
 
-#include "mtest.h"
+#include <QtTest/QtTest>
+
 #include "libmscore/mscore.h"
 #include "libmscore/score.h"
 #include "libmscore/durationtype.h"
@@ -20,11 +21,36 @@
 #include "libmscore/chord.h"
 #include "libmscore/note.h"
 #include "libmscore/keysig.h"
-#include "mcursor.h"
+
+#include "mtest/mcursor.h"
+#include "mtest/testutils.h"
 
 extern bool saveMidi(Score*, const QString&);
 extern bool importMidi(Score*, const QString&);
-extern MScore* mscore;
+
+//---------------------------------------------------------
+//   TestMidi
+//---------------------------------------------------------
+
+class TestMidi : public QObject, public MTest
+      {
+      Q_OBJECT
+
+   private slots:
+      void initTestCase();
+      void midi1();
+      void midi2();
+      void midi3();
+      };
+
+//---------------------------------------------------------
+//   initTestCase
+//---------------------------------------------------------
+
+void TestMidi::initTestCase()
+      {
+      initMTest();
+      }
 
 //---------------------------------------------------------
 //   compareElements
@@ -127,13 +153,11 @@ bool compareScores(Score* score1, Score* score2)
       }
 
 //---------------------------------------------------------
-//   testMidi1
+//   midi1
 //---------------------------------------------------------
 
-static bool testMidi1()
+void TestMidi::midi1()
       {
-      printf("  -read/write\n");
-
       MCursor c;
       c.createScore("test1a");
       c.addPart("Voice");
@@ -154,35 +178,26 @@ static bool testMidi1()
 
       Score* score2 = new Score(mscore->baseStyle());
       score2->setName("test1b");
-      if (!importMidi(score2, "test1.mid")) {
-            printf("import midi failed\n");
-            abort();
-            }
+      QVERIFY(importMidi(score2, "test1.mid"));
+
       score2->doLayout();
       score2->rebuildMidiMapping();
       MCursor c2(score2);
       c2.saveScore();
 
-      bool rv = true;
-      // compare
-      if (!compareScores(score, score2)) {
-            printf("   failed: readback midi file is different\n");
-            rv = false;
-            }
+      QVERIFY(compareScores(score, score2));
+
       delete score;
       delete score2;
-      return rv;
       }
 
 //---------------------------------------------------------
-//   testMid2
+//   midi2
 //    write/read midi file with timesig 3/4
 //---------------------------------------------------------
 
-static bool testMidi2()
+void TestMidi::midi2()
       {
-      printf("  -timesig\n");
-
       MCursor c;
       c.createScore("test2a");
       c.addPart("Voice");
@@ -202,34 +217,26 @@ static bool testMidi2()
 
       Score* score2 = new Score(mscore->baseStyle());
       score2->setName("test2b");
-      if (!importMidi(score2, "test2.mid")) {
-            printf("import midi failed\n");
-            abort();
-            }
+
+      QVERIFY(importMidi(score2, "test2.mid"));
+
       score2->doLayout();
       score2->rebuildMidiMapping();
       MCursor c2(score2);
       c2.saveScore();
 
-      bool rv = true;
-      // compare
-      if (!compareScores(score, score2)) {
-            printf("   failed: readback midi file is different\n");
-            rv = false;
-            }
+      QVERIFY(compareScores(score, score2));
+
       delete score;
       delete score2;
-      return rv;
       }
 
 //---------------------------------------------------------
-//   testMidi3
+//   midi3
 //---------------------------------------------------------
 
-static bool testMidi3()
+void TestMidi::midi3()
       {
-      printf("  -keysig\n");
-
       MCursor c;
       c.createScore("test3a");
       c.addPart("Voice");
@@ -250,38 +257,20 @@ static bool testMidi3()
 
       Score* score2 = new Score(mscore->baseStyle());
       score2->setName("test3b");
-      if (!importMidi(score2, "test3.mid")) {
-            printf("import midi failed\n");
-            abort();
-            }
+      QVERIFY(importMidi(score2, "test3.mid"));
+
       score2->doLayout();
       score2->rebuildMidiMapping();
       MCursor c2(score2);
       c2.saveScore();
 
-      bool rv = true;
-      // compare
-      if (!compareScores(score, score2)) {
-            printf("   failed: readback midi file is different\n");
-            rv = false;
-            }
+      QVERIFY(compareScores(score, score2));
+
       delete score;
       delete score2;
-      return rv;
       }
 
-//---------------------------------------------------------
-//   testMidi
-//---------------------------------------------------------
+QTEST_MAIN(TestMidi)
 
-bool testMidi(MTest*)
-      {
-      if (!testMidi1())
-            return false;
-      if (!testMidi2())
-            return false;
-      if (!testMidi3())
-            return false;
-      return true;
-      }
+#include "tst_midi.moc"
 

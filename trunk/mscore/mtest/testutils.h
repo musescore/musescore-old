@@ -16,6 +16,26 @@
 
 class Element;
 
-extern Element* writeReadElement(Element* element);
+class MScore;
+class Score;
+
+//---------------------------------------------------------
+//   MTest
+//---------------------------------------------------------
+
+class MTest {
+   protected:
+      MScore* mscore;
+      QString root;     // root path of test source
+      Score* score;
+
+      MTest();
+      Score* readScore(const QString& name);
+      bool saveScore(Score*, const QString& name);
+      bool saveCompareScore(Score*, const QString& saveName, const QString& compareWith);
+      Element* writeReadElement(Element* element);
+      void initMTest();
+      };
+
 #endif
 
