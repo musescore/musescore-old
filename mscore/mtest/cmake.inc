@@ -11,27 +11,32 @@
 #  the file LICENSE.GPL
 #=============================================================================
 
-set(CMAKE_VERBOSE_MAKEFILE ON)
+QT4_ADD_RESOURCES(qrc_files ${PROJECT_SOURCE_DIR}/mtest/mtest.qrc)
 
-include_directories(
-      ${PROJECT_BINARY_DIR}
-      ${PROJECT_SOURCE_DIR}
+add_executable(
+      ${TARGET}
+      ${qrc_files}
+      ${mocs}
+      ${TARGET}.cpp
       )
 
-add_library(
-      testutils STATIC
-      testutils.cpp
-      mcursor.cpp
-      ${PROJECT_SOURCE_DIR}/mscore/importmidi.cpp
-      ${PROJECT_SOURCE_DIR}/mscore/midifile.cpp
-      ${PROJECT_SOURCE_DIR}/mscore/exportmidi.cpp
+target_link_libraries(
+      ${TARGET}
+      testutils
+      libmscore
+      msynth
+      ${QT_LIBRARIES}
+      QtTest
+      zarchive
+      z
+      rt
       )
 
 set_target_properties (
-      testutils
+      ${TARGET}
       PROPERTIES
+      AUTOMOC true
       COMPILE_FLAGS "-include all.h -D TESTROOT=\\\"${PROJECT_SOURCE_DIR}\\\" -g -Wall -Wextra"
+      LINK_FLAGS    "-g"
       )
-subdirs(libmscore)
-
 

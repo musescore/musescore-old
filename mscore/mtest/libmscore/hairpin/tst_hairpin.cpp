@@ -11,35 +11,55 @@
 //  the file LICENCE.GPL
 //=============================================================================
 
+#include <QtTest/QtTest>
+
 #include "libmscore/score.h"
 #include "libmscore/hairpin.h"
-#include "mtest.h"
-#include "testutils.h"
-
-extern Score* score;
+#include "mtest/testutils.h"
 
 //---------------------------------------------------------
-//   testHairpin
+//   TestHairpin
 //---------------------------------------------------------
 
-bool testHairpin(MTest*)
+class TestHairpin : public QObject, public MTest
       {
-      bool passed = true;
+      Q_OBJECT
 
+   private slots:
+      void initTestCase();
+      void hairpin();
+      };
+
+//---------------------------------------------------------
+//   initTestCase
+//---------------------------------------------------------
+
+void TestHairpin::initTestCase()
+      {
+      initMTest();
+      }
+
+//---------------------------------------------------------
+//   hairpin
+//---------------------------------------------------------
+
+void TestHairpin::hairpin()
+      {
       Hairpin* hp = new Hairpin(score);
 
    // subtype
-      printf("  -subtype\n");
       hp->setSubtype(1);
       Hairpin* hp2 = static_cast<Hairpin*>(writeReadElement(hp));
-      TEST(hp2->subtype() == 1);
+      QCOMPARE(hp2->subtype(), 1);
       delete hp2;
 
       hp->setSubtype(0);
       hp2 = static_cast<Hairpin*>(writeReadElement(hp));
-      TEST(hp2->subtype() == 0);
+      QCOMPARE(hp2->subtype(), 0);
       delete hp2;
-
-      return passed;
       }
+
+QTEST_MAIN(TestHairpin)
+
+#include "tst_hairpin.moc"
 
