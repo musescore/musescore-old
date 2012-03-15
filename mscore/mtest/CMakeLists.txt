@@ -12,6 +12,7 @@
 #=============================================================================
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
+enable_testing()
 
 include_directories(
       ${PROJECT_BINARY_DIR}

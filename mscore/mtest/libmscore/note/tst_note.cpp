@@ -309,4 +309,3 @@ QTEST_MAIN(TestNote)
 
 #include "tst_note.moc"
 
-
