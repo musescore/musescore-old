@@ -32,6 +32,7 @@ set_target_properties (
       PROPERTIES
       COMPILE_FLAGS "-include all.h -D TESTROOT=\\\"${PROJECT_SOURCE_DIR}\\\" -g -Wall -Wextra"
       )
+
 subdirs(libmscore)
 
 

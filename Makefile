@@ -55,6 +55,20 @@ debug:
             echo "build directory does already exist, please remove first with 'make clean'";       \
          fi
 
+qt5:
+	if test ! -d qt5;                        \
+         then                                          \
+            mkdir qt5;                         \
+            cd qt5;                            \
+            export PATH=/home/ws/qt/qt5/qtbase/bin:${PATH};        \
+            cmake -DCMAKE_BUILD_TYPE=DEBUG -DBUILD_SCRIPTGEN=NO        \
+            	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
+            	   ../mscore; 		             \
+            make -j ${CPUS};                           \
+         else                                          \
+            echo "build directory does already exist, please remove first with 'make clean'";       \
+         fi
+
 #
 #  win32
 #     cross compile windows package
