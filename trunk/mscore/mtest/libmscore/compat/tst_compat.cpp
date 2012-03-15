@@ -1,27 +1,74 @@
-
+//=============================================================================
+//  MuseScore
+//  Music Composition & Notation
+//  $Id:$
+//
+//  Copyright (C) 2012 Werner Schweer
+//
+//  This program is free software; you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License version 2
+//  as published by the Free Software Foundation and appearing in
+//  the file LICENCE.GPL
+//=============================================================================
 
 #include <QtTest/QtTest>
+#include "mtest/testutils.h"
+
+#define DIR QString("libmscore/compat/")
 
 
-class tst_Compat : public QObject
+//---------------------------------------------------------
+//   TestCompat
+//---------------------------------------------------------
+
+class TestCompat : public QObject, public MTest
       {
       Q_OBJECT
 
    private slots:
+      void initTestCase();
+      void compat_data();
       void compat();
       };
 
+//---------------------------------------------------------
+//   initTestCase
+//---------------------------------------------------------
+
+void TestCompat::initTestCase()
+      {
+      initMTest();
+      }
+
+//---------------------------------------------------------
+//   compat_data
+//---------------------------------------------------------
+
+void TestCompat::compat_data()
+      {
+      QTest::addColumn<QString>("file");
+
+      QTest::newRow("notes") <<  "notes";
+      QTest::newRow("keysig") << "keysig";
+      }
 
 //---------------------------------------------------------
 //   compat
 //---------------------------------------------------------
 
-void tst_Compat::compat()
+void TestCompat::compat()
       {
-      int a = 5;
-      QCOMPARE(a, 4);
+      QFETCH(QString, file);
+
+      QString readFile(DIR   + file + ".mscx");
+      QString writeFile(file + "-test.mscx");
+      QString reference(DIR  + file + "-ref.mscx");
+
+      Score* score = readScore(readFile);
+      QVERIFY(score);
+      QVERIFY(saveCompareScore(score, writeFile, reference));
       }
 
-QTEST_MAIN(tst_Compat)
+QTEST_MAIN(TestCompat)
 #include "tst_compat.moc"
 
