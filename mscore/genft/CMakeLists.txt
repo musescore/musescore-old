@@ -32,6 +32,6 @@ target_link_libraries(genft ${QT_LIBRARIES} -lfreetype)
 set_target_properties(genft PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -I/usr/include/freetype2 -g -Wall -Wextra -Winvalid-pch")
 
 
-ADD_DEPENDENCIES(mtest mops1)
-ADD_DEPENDENCIES(mtest mops2)
+ADD_DEPENDENCIES(genft mops1)
+ADD_DEPENDENCIES(genft mops2)
 
