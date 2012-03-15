@@ -10,6 +10,7 @@
 //  the file LICENCE.GPL
 //=============================================================================
 
+#include <QtTest/QtTest>
 #include "libmscore/score.h"
 #include "libmscore/note.h"
 #include "libmscore/chord.h"
