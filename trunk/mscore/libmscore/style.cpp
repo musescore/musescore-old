@@ -865,6 +865,8 @@ bool TextStyleData::readProperties(const QDomElement& e)
             frameWidth = val.toDouble();
             hasFrame = frameWidth != 0.0;
             }
+      else if (tag == "frame")                  // obsolete
+            hasFrame = i;
       else if (tag == "paddingWidth")
             paddingWidth = val.toDouble();
       else if (tag == "frameRound")

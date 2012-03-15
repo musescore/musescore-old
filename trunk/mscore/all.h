@@ -157,5 +157,7 @@
 #include <QtScriptTools/QScriptEngineDebugger>
 #endif
 
+#include <QtTest/QtTest>
+
 #endif
 

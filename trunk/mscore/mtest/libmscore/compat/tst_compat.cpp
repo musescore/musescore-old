@@ -42,13 +42,17 @@ void TestCompat::initTestCase()
 
 //---------------------------------------------------------
 //   compat_data
+//    every "xxx" test requires two *.mscx files:
+//          xxx.mscx     is the mscore 1.2 file
+//          xxx-ref.mscx is the corresponding (correct)
+//                       mscore 2.0 file
 //---------------------------------------------------------
 
 void TestCompat::compat_data()
       {
       QTest::addColumn<QString>("file");
 
-      QTest::newRow("notes") <<  "notes";
+      QTest::newRow("notes") <<  "notes";       // notes.mscx notes-ref.mscx
       QTest::newRow("keysig") << "keysig";
       }
 
