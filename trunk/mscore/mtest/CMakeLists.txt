@@ -33,6 +33,17 @@ set_target_properties (
       COMPILE_FLAGS "-include all.h -D TESTROOT=\\\"${PROJECT_SOURCE_DIR}\\\" -g -Wall -Wextra"
       )
 
+add_executable(
+      mtest
+      mtest.cpp
+      )
+target_link_libraries(
+      mtest
+      ${QT_LIBRARIES}
+      QtTest
+      )
+
+
 subdirs(libmscore)
 
 
