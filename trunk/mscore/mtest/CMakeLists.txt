@@ -31,19 +31,8 @@ add_library(
 set_target_properties (
       testutils
       PROPERTIES
-      COMPILE_FLAGS "-include all.h -D TESTROOT=\\\"${PROJECT_SOURCE_DIR}\\\" -g -Wall -Wextra"
+      COMPILE_FLAGS "-include all.h -I${QT_HEADERS_DIR} -D TESTROOT=\\\"${PROJECT_SOURCE_DIR}\\\" -g -Wall -Wextra"
       )
-
-add_executable(
-      mtest
-      mtest.cpp
-      )
-target_link_libraries(
-      mtest
-      ${QT_LIBRARIES}
-      QtTest
-      )
-
 
 subdirs(libmscore)
 
