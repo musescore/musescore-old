@@ -28,7 +28,7 @@ VERSION   = "2.0b${REVISION}"
 ROOT=`pwd`
 
 release:
-  mkdir build.release;                       \
+	mkdir build.release;                       \
   cd build.release;                          \
   cmake -DCMAKE_BUILD_TYPE=RELEASE	       \
   	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
@@ -38,7 +38,7 @@ release:
 
 
 debug:
-  mkdir build.debug;                         \
+	mkdir build.debug;                         \
   cd build.debug;                            \
   cmake -DCMAKE_BUILD_TYPE=DEBUG	       \
   	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
