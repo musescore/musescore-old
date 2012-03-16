@@ -113,14 +113,14 @@ bool FiguredBassItem::parse(QString& str)
             }
 
       // some checks:
-      // if some extra input, str is not conformat
+      // if some extra input, str is not conformant
       if(str.size())
             return false;
-      // prefix and suffix cannot be both non-empty
-      // prefix, digit and suffix cannot be ALL empty
+      // can't have BOTH prefix and suffix
+      // prefix, digit, suffix and cont.line cannot be ALL empty
       // suffix cannot combine with empty digit
       if( (prefix != FBIAccidNone && suffix != FBIAccidNone)
-            || (prefix == FBIAccidNone && digit == FBIDigitNone && suffix == FBIAccidNone)
+            || (prefix == FBIAccidNone && digit == FBIDigitNone && suffix == FBIAccidNone && !contLine)
             || ( (suffix == FBIAccidPlus || suffix == FBIAccidBackslash || suffix == FBIAccidSlash)
                   && digit == FBIDigitNone) )
             return false;
