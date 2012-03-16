@@ -39,4 +39,4 @@ set_target_properties (
       COMPILE_FLAGS "-include all.h -D TESTROOT=\\\"${PROJECT_SOURCE_DIR}\\\" -g -Wall -Wextra"
       LINK_FLAGS    "-g"
       )
-add_test(${TARGET} ${CMAKE_CURRENT_BINARY_DIR}/${TARGET})
+add_test(${TARGET} ${CMAKE_CURRENT_BINARY_DIR}/${TARGET}  -xunitxml -o result.xml)

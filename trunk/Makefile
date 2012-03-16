@@ -28,32 +28,24 @@ VERSION   = "2.0b${REVISION}"
 ROOT=`pwd`
 
 release:
-	if test ! -d build.release;                      \
-         then                                          \
-            mkdir build.release;                       \
-            cd build.release;                          \
-            cmake -DCMAKE_BUILD_TYPE=RELEASE	       \
-            	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
-            	   ../mscore; 			       \
-            make lrelease;                             \
-            make -j ${CPUS};                           \
-         else                                          \
-            echo "build directory does already exist, please remove first with 'make clean'"; \
-         fi;
+  mkdir build.release;                       \
+  cd build.release;                          \
+  cmake -DCMAKE_BUILD_TYPE=RELEASE	       \
+  	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
+  	   ../mscore; 			       \
+  make lrelease;                             \
+  make -j ${CPUS};                           \
+
 
 debug:
-	if test ! -d build.debug;                        \
-         then                                          \
-            mkdir build.debug;                         \
-            cd build.debug;                            \
-            cmake -DCMAKE_BUILD_TYPE=DEBUG	       \
-            	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
-            	   ../mscore; 		             \
-            make lrelease;                             \
-            make -j ${CPUS};                           \
-         else                                          \
-            echo "build directory does already exist, please remove first with 'make clean'";       \
-         fi
+  mkdir build.debug;                         \
+  cd build.debug;                            \
+  cmake -DCMAKE_BUILD_TYPE=DEBUG	       \
+  	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
+  	   ../mscore; 		             \
+  make lrelease;                             \
+  make -j ${CPUS};                           \
+
 
 qt5:
 	if test ! -d qt5;                        \
