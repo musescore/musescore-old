@@ -1,0 +1,28 @@
+<project>
+  <!-- Create xml report -->
+  <target name="report">
+    <mkdir dir="report"/>
+    <junitreport todir="./report">
+      <fileset dir=".">
+        <include name="**/result.xml"/>
+      </fileset>
+    </junitreport>
+  </target>
+  
+  <!-- Create HTML report -->
+  <target name="reporthtml">
+    <mkdir dir="report"/>
+    <junitreport todir="./report">
+      <fileset dir=".">
+        <include name="**/result.xml"/>
+      </fileset>
+    <report format="frames" todir="./report/html"/>
+    </junitreport>
+  </target>
+  
+  <!-- Clean reports -->
+  <target name="clean">
+    <delete dir="report"/>
+  </target>
+
+</project>
