@@ -34,6 +34,15 @@ set_target_properties (
       COMPILE_FLAGS "-include all.h -I${QT_HEADERS_DIR} -D TESTROOT=\\\"${PROJECT_SOURCE_DIR}\\\" -g -Wall -Wextra"
       )
 
+add_custom_target(report
+      COMMAND ant -f ${PROJECT_SOURCE_DIR}/mtest/build.xml report
+      WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+      )
+add_custom_target(reporthtml
+      COMMAND ant -f ${PROJECT_SOURCE_DIR}/mtest/build.xml reporthtml
+      WORKING_DIRECTORY "${PROJECT_BINARY_DIR}/mtest"
+      )
+
 subdirs(libmscore)
 
 
