@@ -911,38 +911,18 @@ void ExportMusicXml::credits(Xml& xml)
       // debug
       qDebug("credits:");
       const MeasureBase* measure = score->measures()->first();
-#if 0 // no subtypes for strings
       foreach(const Element* element, *measure->el()) {
             if (element->type() == TEXT) {
                   const Text* text = (const Text*)element;
                   bool mustPrint = true;
-                  switch (text->subtype()) {
-                        case TEXT_TITLE:
-                              qDebug("title");
-                              break;
-                        case TEXT_SUBTITLE:
-                              qDebug("subtitle");
-                              break;
-                        case TEXT_COMPOSER:
-                              qDebug("composer");
-                              break;
-                        case TEXT_POET:
-                              qDebug("poet");
-                              break;
-                        case TEXT_TRANSLATOR:
-                              qDebug("translator");
-                              break;
-                        default:
-                              mustPrint = false;
-                        }
-                  if (mustPrint) qDebug(" '%s at %f,%f'",
-                                        text->getText().toUtf8().data(),
+                  if (mustPrint) qDebug("text style %d '%s' at %f,%f",
+                                        text->textStyleType(),
+                                        qPrintable(text->getText()),
                                         text->pagePos().x(),
                                         text->pagePos().y()
                                         );
                   }
             }
-#endif
       QString rights = score->metaTag("copyright");
       if (!rights.isEmpty())
             qDebug("copyright '%s'", qPrintable(rights));
@@ -970,30 +950,27 @@ void ExportMusicXml::credits(Xml& xml)
                          h - text->pagePos().y(),
                          text->font().pointSize()
                          );
-#if 0
                   const double ty = h - getTenthsFromDots(text->pagePos().y());
                   const int fs = text->font().pointSize();
                   // parameters should be extracted from text layout
-                  switch (text->subtype()) {
-                        case TEXT_TITLE:
+                  switch (text->textStyleType()) {
+                        case TEXT_STYLE_TITLE:
                               creditWords(xml, w / 2, ty, fs, "center", "top", text->getText());
                               break;
-                        case TEXT_SUBTITLE:
+                        case TEXT_STYLE_SUBTITLE:
                               creditWords(xml, w / 2, ty, fs, "center", "top", text->getText());
                               break;
-                        case TEXT_COMPOSER:
+                        case TEXT_STYLE_COMPOSER:
                               creditWords(xml, w - rm, ty, fs, "right", "top", text->getText());
                               break;
-                        case TEXT_POET:
+                        case TEXT_STYLE_POET:
                               creditWords(xml, lm, ty, fs, "left", "top", text->getText());
                               break;
                               // case TEXT_TRANSLATOR:
                               break;
                         default:
-                              qDebug("credits: text subtype %s not supported",
-                                     text->subtypeName().toUtf8().data());
+                              qDebug("credits: text style %d not supported", text->textStyleType());
                         }
-#endif
                   }
             }
       if (!rights.isEmpty()) {
@@ -1300,6 +1277,9 @@ void ExportMusicXml::keysig(int key, int staff, bool visible)
 
 void ExportMusicXml::clef(int staff, int clef)
       {
+#ifdef DEBUG_CLEF
+      qDebug("ExportMusicXml::clef(staff %d, clef %d)", staff, clef);
+#endif
       attr.doAttr(xml, true);
       if (staff)
             xml.stag(QString("clef number=\"%1\"").arg(staff));
@@ -3764,16 +3744,20 @@ void ExportMusicXml::write(QIODevice* dev)
 
                                     el = seg->element(st);
                                     if (el && el->type() == CLEF) {
-                                          // output only clef changes, not generated clefs
-                                          // at line beginning
                                           Clef* cle = static_cast<Clef*>(el);
                                           int ct = cle->clefType();
-#ifdef DEBUG_CLEF
                                           int ti = cle->segment()->tick();
+#ifdef DEBUG_CLEF
                                           qDebug("exportxml: clef at start measure ti=%d ct=%d gen=%d", ti, ct, el->generated());
 #endif
-                                          if (!cle->generated())
+                                          // output only clef changes, not generated clefs at line beginning
+                                          // exception: at tick=0, export clef anyway
+                                          if (ti == 0 || !cle->generated()) {
+#ifdef DEBUG_CLEF
+                                                qDebug("exportxml: clef exported");
+#endif
                                                 clef(sstaff, ct);
+                                                }
                                           else {
 #ifdef DEBUG_CLEF
                                                 qDebug("exportxml: clef not exported");
