@@ -1,4 +1,7 @@
-17.3 (la)
+17.3 (lv)
+      - fix #11226 MusicXML exports treble clefs only (again ...)
+      - fix #14143 [MusicXML] [Trunk] Title, Subtitle, Composer and Lyricist not exported
+     (la)
       - fix #15168: Meta data for SVG export : title and description
       - fix #15181: Move "Meta Data" to File menu, rename to file > info...
       - fix #15567: Check for plugin minor version gives wrong output in case it is greater than SCRIPT_MINOR_VERSION
