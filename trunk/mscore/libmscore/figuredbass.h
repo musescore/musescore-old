@@ -106,6 +106,8 @@ class FiguredBassItem : public SimpleText {
       FiguredBassItem(const FiguredBassItem&);
       ~FiguredBassItem();
 
+      FiguredBassItem &operator=(const FiguredBassItem&);
+
       // standard re-implemented virtual functions
       virtual FiguredBassItem*      clone() const     { return new FiguredBassItem(*this); }
       virtual ElementType           type() const      { return INVALID; }

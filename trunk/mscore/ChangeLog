@@ -9,6 +9,7 @@
       - fix various issue detected by CppCheck
       - generate test report in build directory
       - fix #10983: Synthesizer chorus setting increment
+      - fix #15547: curScore.version not updated after File > Save
 16.3 (mw)
       - FiguredBass: accepted contin.line alone
 12.3 (ws)

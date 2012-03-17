@@ -551,6 +551,12 @@ void Score::saveFile(QIODevice* f, bool msczFormat, bool onlySelection)
       xml.etag();
       if (!parentScore())
             _revisions->write(xml);
+      if(!onlySelection) {
+            //update version values for i.e. plugin access
+            _mscoreVersion = VERSION;
+            _mscoreRevision = revision.toInt();
+            _mscVersion = MSCVERSION;
+            }
       }
 
 //---------------------------------------------------------
