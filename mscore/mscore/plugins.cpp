@@ -119,7 +119,7 @@ void MuseScore::registerPlugin(const QString& pluginPath)
                   }
             else if (minorVersion > SCRIPT_MINOR_VERSION) {
                   qDebug("Your MuseScore version may be too old to run script <%s> (minor version %d > %d)\n",
-                     qPrintable(pluginPath), minorVersion, SCRIPT_MAJOR_VERSION);
+                     qPrintable(pluginPath), minorVersion, SCRIPT_MINOR_VERSION);
                   QString s = tr("MuseScore is too old to run script\n%1");
                   QMessageBox::warning(0,
                      QWidget::tr("MuseScore: register script plugin:"),

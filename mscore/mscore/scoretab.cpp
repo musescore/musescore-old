@@ -221,10 +221,12 @@ void ScoreTab::updateExcerpts()
       if (idx == -1)
             return;
       ScoreView* v = view(idx);
+      if(!v)
+            return;
       Score* score = v->score()->rootScore();
       clearTab2();
       QList<Excerpt*>* excerpts = score->excerpts();
-      if (v && excerpts && !excerpts->isEmpty()) {
+      if (excerpts && !excerpts->isEmpty()) {
             tab2->blockSignals(true);
             tab2->addTab(score->name());
             foreach(Excerpt* excerpt, *excerpts)
