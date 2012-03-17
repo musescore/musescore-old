@@ -674,6 +674,7 @@ bool MuseScore::saveMp3(Score* score, const QString& name)
                          tr("Encoding error"),
                          tr("Unable to open target file for writing"),
                          QString::null, QString::null);
+            delete bufferOut;
             return false;
             }
 
@@ -808,6 +809,7 @@ bool MuseScore::saveMp3(Score* score, const QString& name)
 
       hideProgressBar();
       delete synti;
+      delete bufferOut;
       file.close();
       return true;
       }

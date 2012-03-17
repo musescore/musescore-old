@@ -696,8 +696,12 @@ MuseScore::MuseScore()
       _fileMenu->addAction(getAction("parts"));
       _fileMenu->addAction(getAction("album"));
       _fileMenu->addAction(getAction("layer"));
-      if (enableExperimental)
-            _fileMenu->addAction(getAction("add-audio"));
+      
+      _fileMenu->addSeparator();
+      _fileMenu->addAction(getAction("edit-info"));
+      _fileMenu->addAction(getAction("media"));
+      
+      _fileMenu->addSeparator();
       _fileMenu->addAction(getAction("print"));
       _fileMenu->addSeparator();
       _fileMenu->addAction(getAction("quit"));
@@ -742,8 +746,6 @@ MuseScore::MuseScore()
       menuEdit->addMenu(menuVoices);
 
       menuEdit->addSeparator();
-      menuEdit->addAction(getAction("edit-meta"));
-      menuEdit->addAction(getAction("media"));
       menuEdit->addAction(getAction("debugger"));
       menuEdit->addSeparator();
 
@@ -4250,7 +4252,7 @@ printf("set preferences to <%s>\n", qPrintable(name));
             TextStyleDialog es(0, cs);
             es.exec();
             }
-      else if (cmd == "edit-meta") {
+      else if (cmd == "edit-info") {
             MetaEditDialog med(cs, 0);
             med.exec();
             }

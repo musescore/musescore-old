@@ -35,11 +35,11 @@ set_target_properties (
       )
 
 add_custom_target(report
-      COMMAND ant -f ${PROJECT_SOURCE_DIR}/mtest/build.xml report
-      WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+      COMMAND ant -f ${PROJECT_SOURCE_DIR}/mtest/build.xml -Droot.dir=${PROJECT_BINARY_DIR}/mtest report
+      WORKING_DIRECTORY "${PROJECT_BINARY_DIR}/mtest"
       )
 add_custom_target(reporthtml
-      COMMAND ant -f ${PROJECT_SOURCE_DIR}/mtest/build.xml reporthtml
+      COMMAND ant -f ${PROJECT_SOURCE_DIR}/mtest/build.xml -Droot.dir=${PROJECT_BINARY_DIR}/mtest reporthtml
       WORKING_DIRECTORY "${PROJECT_BINARY_DIR}/mtest"
       )
 

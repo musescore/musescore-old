@@ -1191,11 +1191,10 @@ void Capella::readStaff(CapSystem* system)
 
 void Capella::readSystem()
       {
-      CapSystem* s = new CapSystem;
-
       if (readChar() != 'S')
             throw CAP_BAD_SYSTEM_SIG;
 
+      CapSystem* s = new CapSystem;
       s->nAddBarCount   = readInt();
       s->bBarCountReset = readByte();
       s->explLeftIndent = readByte();

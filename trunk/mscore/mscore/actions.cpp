@@ -2201,12 +2201,12 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          A_CMD,
-         "edit-meta",
-         QT_TRANSLATE_NOOP("action","Edit score meta data"),
+         "edit-info",
+         QT_TRANSLATE_NOOP("action","Edit score info"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Meta &Data..."),
-         QT_TRANSLATE_NOOP("action","Edit score meta data")
+         QT_TRANSLATE_NOOP("action","&Info..."),
+         QT_TRANSLATE_NOOP("action","Edit score info")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -2602,16 +2602,6 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Toggle foto mode"),
          QT_TRANSLATE_NOOP("action","Toggle foto mode"),
          fotomode_ICON
-         ),
-      Shortcut(
-         STATE_ALL,
-         A_CMD,
-         "add-audio",
-         QT_TRANSLATE_NOOP("action","Add audio track"),
-	   0,
-         Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Add Audio Track"),
-         QT_TRANSLATE_NOOP("action","Add audio track")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
