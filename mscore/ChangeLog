@@ -7,6 +7,7 @@
       - fix #15567: Check for plugin minor version gives wrong output in case it is greater than SCRIPT_MINOR_VERSION
       - fix various issue detected by CppCheck
       - generate test report in build directory
+      - fix #10983: Synthesizer chorus setting increment
 16.3 (mw)
       - FiguredBass: accepted contin.line alone
 12.3 (ws)
