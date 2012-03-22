@@ -398,11 +398,11 @@ Palette* MuseScore::newFallDoitPalette()
             };
 
       ChordLine* cl = new ChordLine(gscore);
-      cl->setSubtype(1);
+      cl->setSubtype(CHORDLINE_FALL);
       sp->append(cl, tr(scorelineNames[0]));
 
       cl = new ChordLine(gscore);
-      cl->setSubtype(2);
+      cl->setSubtype(CHORDLINE_DOIT);
       sp->append(cl, tr(scorelineNames[1]));
       return sp;
       }

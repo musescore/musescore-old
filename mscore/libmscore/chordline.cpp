@@ -1,9 +1,9 @@
 //=============================================================================
 //  MuseScore
 //  Music Composition & Notation
-//  $Id:$
+//  $Id$
 //
-//  Copyright (C) 2010-2011 Werner Schweer
+//  Copyright (C) 2010-2012 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2
@@ -27,7 +27,7 @@ ChordLine::ChordLine(Score* s)
       {
       setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       modified = false;
-      _subtype = 0;
+      _subtype = CHORDLINE_NOTYPE;
       }
 
 ChordLine::ChordLine(const ChordLine& cl)
@@ -42,18 +42,19 @@ ChordLine::ChordLine(const ChordLine& cl)
 //   setSubtype
 //---------------------------------------------------------
 
-void ChordLine::setSubtype(int st)
+void ChordLine::setSubtype(ChordLineType st)
       {
-      qreal x2, y2;
+      qreal x2 = 0;
+      qreal y2 = 0;
       switch(st) {
-            case 0:
+            case CHORDLINE_NOTYPE:
                   break;
-            case 1:                 // fall
+            case CHORDLINE_FALL:
                   x2 = 2;
                   y2 = 2;
                   break;
             default:
-            case 2:                 // doit
+            case CHORDLINE_DOIT:
                   x2 = 2;
                   y2 = -2;
                   break;
@@ -132,10 +133,10 @@ void ChordLine::read(const QDomElement& de)
                               domError(ee);
                         }
                   modified = true;
-                  setSubtype(0);
+                  setSubtype(ChordLineType(0));
                   }
             else if (tag == "subtype")
-                  setSubtype(e.text().toInt());
+                  setSubtype(ChordLineType(e.text().toInt()));
             else if (!Element::readProperties(e))
                   domError(e);
             }
@@ -227,7 +228,7 @@ void ChordLine::editDrag(const EditData& ed)
             }
       path = p;
       modified = true;
-      setSubtype(0);
+      setSubtype(ChordLineType(0));
       }
 
 //---------------------------------------------------------

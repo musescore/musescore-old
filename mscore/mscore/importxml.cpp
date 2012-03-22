@@ -83,6 +83,7 @@
 #include "libmscore/fingering.h"
 #include "preferences.h"
 #include "musicxmlsupport.h"
+#include "libmscore/chordline.h"
 
 //---------------------------------------------------------
 //   local defines for debug output
@@ -3783,6 +3784,7 @@ void MusicXml::xmlNotations(Note* note, ChordRest* cr, int trk, int ticks, QDomE
       // qreal xoffset = 0.0; // not used
       bool hasYoffset = false;
       QSet<QString> slurIds;             // combination start/stop and number must be unique within a note
+      QString chordLineType;
 
       for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
             if (ee.tagName() == "slur") {
@@ -3900,6 +3902,9 @@ void MusicXml::xmlNotations(Note* note, ChordRest* cr, int trk, int ticks, QDomE
                               breath = 0;
                         else if (eee.tagName() == "caesura")
                               breath = 3;
+                        else if (eee.tagName() == "doit"
+                                 || eee.tagName() == "falloff")
+                              chordLineType = eee.tagName();
                         else if (eee.tagName() == "strong-accent") {
                               QString strongAccentType = eee.attribute(QString("type"));
                               if (strongAccentType == "up" || strongAccentType == "")
@@ -4093,6 +4098,15 @@ void MusicXml::xmlNotations(Note* note, ChordRest* cr, int trk, int ticks, QDomE
                   }
             else
                   qDebug("unknown tremolo type %d", tremolo);
+            }
+
+      if (chordLineType != "") {
+            ChordLine* cl = new ChordLine(score);
+            if (chordLineType == "falloff")
+                  cl->setSubtype(CHORDLINE_FALL);
+            if (chordLineType == "doit")
+                  cl->setSubtype(CHORDLINE_DOIT);
+            note->chord()->add(cl);
             }
 
       // more than one dynamic ???
