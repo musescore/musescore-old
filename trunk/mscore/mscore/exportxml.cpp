@@ -89,6 +89,7 @@
 #include "libmscore/mscore.h"
 #include "libmscore/accidental.h"
 #include "libmscore/breath.h"
+#include "libmscore/chordline.h"
 
 //---------------------------------------------------------
 //   local defines for debug output
@@ -1578,10 +1579,11 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                         // ignore, handled with technical
                         break;
                   default:
-                        qDebug("unknown chord attribute %s\n", qPrintable(a->subtypeUserName()));
+                        qDebug("unknown chord attribute %s", qPrintable(a->subtypeUserName()));
                         break;
                   }
             }
+
       if (Breath* b = hasBreathMark(chord)) {
             notations.tag(xml);
             articulations.tag(xml);
@@ -1591,6 +1593,30 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
             else
                   xml.tagE("caesura");
             }
+
+      foreach(Element* e, chord->el()) {
+            qDebug("chordAttributes: el %p type %d (%s)", e, e->type(), e->name());
+            if (e->type() == CHORDLINE) {
+                  ChordLine const* const cl = static_cast<ChordLine const* const>(e);
+                  QString subtype;
+                  switch (cl->subtype()) {
+                        case CHORDLINE_FALL:
+                              subtype = "falloff";
+                              break;
+                        case CHORDLINE_DOIT:
+                              subtype = "doit";
+                              break;
+                        default:
+                              qDebug("unknown ChordLine subtype %d", cl->subtype());
+                        }
+                  if (subtype != "") {
+                        notations.tag(xml);
+                        articulations.tag(xml);
+                        xml.tagE(subtype);
+                        }
+                  }
+            }
+
       articulations.etag(xml);
 
       // then the attributes whose elements are children of <ornaments>

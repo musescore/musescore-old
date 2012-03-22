@@ -1,9 +1,9 @@
 //=============================================================================
 //  MuseScore
 //  Music Composition & Notation
-//  $Id:$
+//  $Id$
 //
-//  Copyright (C) 2002-2011 Werner Schweer
+//  Copyright (C) 2002-2012 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2
@@ -19,6 +19,11 @@
 class Chord;
 class QPainter;
 
+// subtypes:
+enum ChordLineType {
+      CHORDLINE_NOTYPE, CHORDLINE_FALL, CHORDLINE_DOIT
+      };
+
 //---------------------------------------------------------
 //   ChordLine
 //    bezier line attached to top note of a chord
@@ -26,7 +31,7 @@ class QPainter;
 //---------------------------------------------------------
 
 class ChordLine : public Element {
-      int _subtype;
+      ChordLineType _subtype;
       QPainterPath path;
       bool modified;
 
@@ -36,7 +41,8 @@ class ChordLine : public Element {
 
       virtual ChordLine* clone() const { return new ChordLine(*this); }
       virtual ElementType type() const { return CHORDLINE; }
-      virtual void setSubtype(int);
+      virtual void setSubtype(ChordLineType);
+      ChordLineType subtype() const    { return _subtype; }
       Chord* chord() const             { return (Chord*)(parent()); }
 
       virtual void read(const QDomElement&);

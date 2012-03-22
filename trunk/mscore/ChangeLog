@@ -1,3 +1,5 @@
+22.3 (lv)
+      - partial fix #14895: MusicXML import/export of doit and falloff
 21.3 (lv)
       - update MusicXML regression test for #14895
 17.3 (lv)
