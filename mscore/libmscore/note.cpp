@@ -1345,8 +1345,23 @@ void Note::layout10(AccidentalState* as)
             // calculate accidental
 
             AccidentalType acci = ACC_NONE;
-            if (_accidental && _accidental->role() == ACC_USER)
+            if (_accidental && _accidental->role() == ACC_USER) {
                   acci = _accidental->subtype();
+                  if (acci == ACC_SHARP || acci == ACC_FLAT) {
+                        int ntpc = pitch2tpc2(_pitch, acci == ACC_SHARP);
+                        if (ntpc != _tpc) {
+                              qDebug("note has wrong tpc: %d, expected %d", _tpc, ntpc);
+                              setColor(QColor(255, 0, 0));
+                              _tpc = ntpc;
+                              _line          = tpc2step(_tpc) + (_pitch/12) * 7;
+                              int tpcPitch   = tpc2pitch(_tpc);
+                              if (tpcPitch < 0)
+                                    _line += 7;
+                              else
+                                    _line -= (tpcPitch/12)*7;
+                              }
+                        }
+                  }
             else  {
                   int accVal = tpc2alter(_tpc);
 
@@ -1376,13 +1391,17 @@ void Note::layout10(AccidentalState* as)
                         _accidental = 0;
                         }
                   }
-            //
-            // calculate the real note line depending on clef
-            //
-            Staff* s = score()->staff(staffIdx() + chord()->staffMove());
-            int tick = chord()->tick();
-            int clef = s->clef(tick);
-            _line    = 127 - _line - 82 + clefTable[clef].yOffset;
+            if (tieBack())
+                  _line = tieBack()->startNote()->line();
+            else {
+                  //
+                  // calculate the real note line depending on clef
+                  //
+                  Staff* s = score()->staff(staffIdx() + chord()->staffMove());
+                  int tick = chord()->tick();
+                  int clef = s->clef(tick);
+                  _line    = 127 - _line - 82 + clefTable[clef].yOffset;
+                  }
             }
       }
 

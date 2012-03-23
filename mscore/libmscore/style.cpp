@@ -211,9 +211,9 @@ static const QString ff("FreeSerifMscore");
 
 void initStyle(MStyle* s)
       {
-      // "default" is an empty style, especially no offsets are allowed
+      // this is an empty style, no offsets are allowed
       AS(TextStyle(
-         "default", ff, 10, false, false, false, ALIGN_LEFT | ALIGN_BASELINE));
+         "", ff, 10, false, false, false, ALIGN_LEFT | ALIGN_BASELINE));
 
       AS(TextStyle(
          TR("Title"), ff, 24, false, false, false,
@@ -664,7 +664,6 @@ TextStyle& TextStyle::operator=(const TextStyle& s)
 
 TextStyleData::TextStyleData()
       {
-      name                   = "default";
       family                 = "FreeSerif";
       size                   = 10.0;
       bold                   = false;
@@ -790,7 +789,8 @@ void TextStyleData::write(Xml& xml) const
 void TextStyleData::writeProperties(Xml& xml) const
       {
       ElementLayout::writeProperties(xml);
-      xml.tag("name", name);
+      if (!name.isEmpty())
+            xml.tag("name", name);
       xml.tag("family", family);
       xml.tag("size", size);
       if (bold)

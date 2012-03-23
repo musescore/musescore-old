@@ -35,8 +35,8 @@ Property<Tuplet> Tuplet::propertyList[] = {
       { P_DIRECTION,    &Tuplet::pDirection,   &defaultDirection },
       { P_NUMBER_TYPE,  &Tuplet::pNumberType,  &defaultNumberType },
       { P_BRACKET_TYPE, &Tuplet::pBracketType, &defaultBracketType },
-      { P_NORMAL_NOTES, &Tuplet::pNormalNotes, 0 },
-      { P_ACTUAL_NOTES, &Tuplet::pActualNotes, 0 },
+      { P_NORMAL_NOTES, &Tuplet::pNormalNotes, 0                  },
+      { P_ACTUAL_NOTES, &Tuplet::pActualNotes, 0                  },
       { P_P1,           &Tuplet::pP1,          &zeroPoint },
       { P_P2,           &Tuplet::pP2,          &zeroPoint },
       { P_END, 0, 0 }
@@ -108,6 +108,17 @@ void Tuplet::setSelected(bool f)
       }
 
 //---------------------------------------------------------
+//   setVisible
+//---------------------------------------------------------
+
+void Tuplet::setVisible(bool f)
+      {
+      Element::setVisible(f);
+      if (_number)
+            _number->setVisible(f);
+      }
+
+//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
@@ -123,6 +134,7 @@ void Tuplet::layout()
                   _number = new Text(score());
                   _number->setTextStyle(score()->textStyle(TEXT_STYLE_TUPLET));
                   _number->setParent(this);
+                  _number->setVisible(visible());
                   }
             if (_numberType == SHOW_NUMBER)
                   _number->setText(QString("%1").arg(_ratio.numerator()));
@@ -485,7 +497,6 @@ void Tuplet::draw(QPainter* painter) const
             painter->translate(-pos);
             }
       if (_hasBracket) {
-            QPen pen(color, spatium() * .1);
             painter->setPen(QPen(color, spatium() * .1));
             if (!_number)
                   painter->drawPolyline(bracketL, 4);
@@ -541,6 +552,7 @@ void Tuplet::read(const QDomElement& de, QList<Tuplet*>* tuplets, const QList<Sp
                   _number->setParent(this);
                   _number->read(e);
                   _number->setTextStyle(score()->textStyle(TEXT_STYLE_TUPLET));
+                  _number->setVisible(visible());     //?? override saved property
                   }
             else if (tag == "subtype")    // obsolete
                   ;
@@ -732,5 +744,56 @@ void Tuplet::sortElements()
       qSort(_elements.begin(), _elements.end(), tickGreater);
       }
 
-PROPERTY_FUNCTIONS(Tuplet)
+Property<Tuplet>* Tuplet::property(P_ID id) const
+      {
+      for (int i = 0;; ++i) {
+            if (propertyList[i].id == P_END)
+                  break;
+            if (propertyList[i].id == id)
+                  return &propertyList[i];
+            }
+      return 0;
+      }
+QVariant Tuplet::getProperty(P_ID propertyId) const
+      {
+      Property<Tuplet>* p = property(propertyId);
+      if (p)
+            return getVariant(propertyId, ((*(Tuplet*)this).*(p->data))());
+      return Element::getProperty(propertyId);
+      }
+bool Tuplet::setProperty(P_ID propertyId, const QVariant& v)
+      {
+      score()->addRefresh(canvasBoundingRect());
+      Property<Tuplet>* p = property(propertyId);
+      bool rv = true;
+      if (p) {
+            setVariant(propertyId, ((*this).*(p->data))(), v);
+            setGenerated(false);
+            }
+      else
+            rv = Element::setProperty(propertyId, v);
+      score()->setLayoutAll(true);
+      return rv;
+      }
+bool Tuplet::setProperty(const QString& name, const QDomElement& e)
+      {
+      for (int i = 0;; ++i) {
+            P_ID id = propertyList[i].id;
+            if (id == P_END)
+                  break;
+            if (propertyName(id) == name) {
+                  QVariant v = ::getProperty(propertyList[i].id, e);
+                  setVariant(propertyList[i].id, ((*this).*(propertyList[i].data))(), v);
+                  setGenerated(false);
+                  return true;
+                  }
+            }
+      return Element::setProperty(name, e);
+      }
+void*  Tuplet::propertyDefault(P_ID id) const
+      {
+      Property<Tuplet>* p = property(id);
+      return p->defaultVal;
+      }
+
 
