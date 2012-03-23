@@ -123,6 +123,8 @@ class Tuplet : public DurationElement {
       void setTick(int val)                { _tick = val; }
       void sortElements();
 
+      virtual void setVisible(bool f);
+
       PROPERTY_DECLARATIONS(Tuplet)
       };
 

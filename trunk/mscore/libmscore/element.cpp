@@ -1609,6 +1609,10 @@ QVariant Element::getVariant(P_ID id, void* data) const
 
 void Element::setVariant(P_ID id, void* data, const QVariant& value)
       {
+      if (id == P_VISIBLE) {
+            setVisible(value.toBool());
+            return;
+            }
       switch(propertyType(id)) {
             case T_BOOL:
                   *(bool*)data = value.toBool();
