@@ -872,6 +872,7 @@ class Score {
       void doLayoutPages();
       Tuplet* searchTuplet(const QDomElement& e, int id);
       void cmdSelectAll();
+      void cmdSelectSection();
       void setUndoRedo(bool val)            { _undoRedo = val; }
       bool undoRedo() const                 { return _undoRedo; }
       void respace(QList<ChordRest*>* elements);

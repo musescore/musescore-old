@@ -223,12 +223,12 @@ void MuseScore::closeEvent(QCloseEvent* ev)
                         removeList.append(score);
                   }
             }
-      
+
       // remove all new created/not save score so they are
       // note saved as session data
       foreach(Score* score, removeList)
             scoreList.removeAll(score);
-      
+
       writeSessionFile(true);
       foreach(Score* score, scoreList) {
             if (!score->tmpName().isEmpty()) {
@@ -696,11 +696,11 @@ MuseScore::MuseScore()
       _fileMenu->addAction(getAction("parts"));
       _fileMenu->addAction(getAction("album"));
       _fileMenu->addAction(getAction("layer"));
-      
+
       _fileMenu->addSeparator();
       _fileMenu->addAction(getAction("edit-info"));
       _fileMenu->addAction(getAction("media"));
-      
+
       _fileMenu->addSeparator();
       _fileMenu->addAction(getAction("print"));
       _fileMenu->addSeparator();
@@ -725,6 +725,7 @@ MuseScore::MuseScore()
       selectionChanged(SEL_NONE);
       menuEdit->addSeparator();
       menuEdit->addAction(getAction("select-all"));
+      menuEdit->addAction(getAction("select-section"));
       menuEdit->addAction(getAction("find"));
       menuEdit->addSeparator();
 
@@ -4238,10 +4239,13 @@ printf("set preferences to <%s>\n", qPrintable(name));
       else if (cmd == "load-style") {
             QString name = mscore->getStyleFilename(true);
             if (!name.isEmpty()) {
+                  cs->startCmd();
                   if (!cs->loadStyle(name)) {
                         QMessageBox::critical(this,
                            tr("MuseScore: load style"), MScore::lastError);
                         }
+                  cs->endCmd();
+                  endCmd();
                   }
             }
       else if (cmd == "edit-style") {

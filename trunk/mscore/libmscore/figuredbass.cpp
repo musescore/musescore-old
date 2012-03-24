@@ -963,13 +963,13 @@ qDebug("ChordList::read failed: <%s>\n", qPrintable(path));
 //    the index of a name in the list can be used to retrieve the font data with fontData()
 //---------------------------------------------------------
 
-QList<const QString*> FiguredBass::fontNames()
-{
-      QList<const QString*> names = QList<const QString*>();
-      foreach(FiguredBassFont f, g_FBFonts)
-            names.append(&f.displayName);
+QList<QString> FiguredBass::fontNames()
+      {
+      QList<QString> names;
+      foreach(const FiguredBassFont& f, g_FBFonts)
+            names.append(f.displayName);
       return names;
-}
+      }
 
 //---------------------------------------------------------
 //   Get Font Data

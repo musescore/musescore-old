@@ -3180,6 +3180,38 @@ void Score::cmdSelectAll()
       }
 
 //---------------------------------------------------------
+//   cmdSelectSection
+//---------------------------------------------------------
+
+void Score::cmdSelectSection()
+      {
+      Segment* s = _selection.startSegment();
+      if (s == 0)
+            return;
+      MeasureBase* sm = s->measure();
+      MeasureBase* em = sm;
+      while (sm->prev()) {
+            if (sm->prev()->sectionBreak())
+                  break;
+            sm = sm->prev();
+            }
+      while (em->next()) {
+            if (em->sectionBreak())
+                  break;
+            em = em->next();
+            }
+      while (sm && sm->type() != MEASURE)
+            sm = sm->next();
+      while (em && em->type() != MEASURE)
+            em = em->next();
+      if (sm == 0 || em == 0)
+            return;
+
+      _selection.setRange(static_cast<Measure*>(sm)->first(),
+         static_cast<Measure*>(em)->last(), 0, nstaves());
+      }
+
+//---------------------------------------------------------
 //   undo
 //---------------------------------------------------------
 

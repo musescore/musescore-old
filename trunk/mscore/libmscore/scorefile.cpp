@@ -93,7 +93,7 @@ void Score::write(Xml& xml, bool selectionOnly)
       xml.tag("showUnprintable", _showUnprintable);
       xml.tag("showFrames", _showFrames);
       xml.tag("showMargins", _showPageborders);
-      pageFormat()->write(xml);
+      // pageFormat()->write(xml);  // saved with style
 
       QMapIterator<QString, QString> i(_metaTags);
       while (i.hasNext()) {
@@ -115,17 +115,26 @@ void Score::write(Xml& xml, bool selectionOnly)
       foreach(const Part* part, _parts)
             part->write(xml);
 
-      xml.curTrack              = 0;
-      int staffStart            = 0;
-      int staffEnd              = _staves.size();
-      MeasureBase* measureStart = first();
-      MeasureBase* measureEnd   = 0;
+      xml.curTrack = 0;
+      int staffStart;
+      int staffEnd;
+      MeasureBase* measureStart;
+      MeasureBase* measureEnd;
 
       if (selectionOnly) {
             staffStart   = _selection.staffStart();
             staffEnd     = _selection.staffEnd();
             measureStart = _selection.startSegment()->measure();
-            measureEnd   = _selection.endSegment()->measure();
+            // include title frames:
+            while (measureStart->prev() && !measureStart->prev()->sectionBreak())
+                  measureStart = measureStart->prev();
+            measureEnd   = _selection.endSegment()->measure()->next();
+            }
+      else {
+            staffStart   = 0;
+            staffEnd     = nstaves();
+            measureStart = first();
+            measureEnd   = 0;
             }
 
       xml.trackDiff = -staffStart * VOICES;
@@ -979,10 +988,10 @@ bool Score::read(const QDomElement& de)
                   s.setRyoff(0);
                   _style.setTextStyle(s);
                   }
-            else if (tag == "page-layout") {
+            else if (tag == "page-layout") {          // obsolete
                   if (_layoutMode != LayoutFloat) {
                         PageFormat pf = *pageFormat();
-                        pf.read(ee, this);
+                        pf.read(ee);
                         setPageFormat(pf);
                         }
                   }

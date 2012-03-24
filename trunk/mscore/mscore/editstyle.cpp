@@ -106,9 +106,9 @@ EditStyle::EditStyle(Score* s, QWidget* parent)
       bg->addButton(editOddFooterR, 11);
 
       // figured bass init
-      QList<const QString*> fbFontNames = FiguredBass::fontNames();
-      foreach(const QString * family, fbFontNames)
-            comboFBFont->addItem(*family);
+      QList<QString> fbFontNames = FiguredBass::fontNames();
+      foreach(const QString& family, fbFontNames)
+            comboFBFont->addItem(family);
       comboFBFont->setCurrentIndex(0);
       connect(comboFBFont, SIGNAL(currentIndexChanged(int)), SLOT(on_comboFBFont_currentIndexChanged(int)));
 

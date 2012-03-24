@@ -901,9 +901,10 @@ void StyleData::load(const QDomElement& de)
                   }
             else if (tag == "Spatium")
                   setSpatium (val.toDouble() * DPMM);
-            else if (tag == "displayInConcertPitch") {
+            else if (tag == "page-layout")
+                  _pageFormat.read(e);
+            else if (tag == "displayInConcertPitch")
                   set(StyleVal(ST_concertPitch, bool(val.toInt())));
-                  }
             else if (tag == "ChordList") {
                   delete _chordList;
                   _chordList = new ChordList;
@@ -1027,7 +1028,7 @@ void StyleData::save(Xml& xml, bool optimize) const
             const ArticulationInfo& ai = Articulation::articulationList[i];
             xml.tag(ai.name + "Anchor", int(_articulationAnchor[i]));
             }
-
+      _pageFormat.write(xml);
       xml.tag("Spatium", _spatium / DPMM);
       xml.etag();
       }

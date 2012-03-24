@@ -22,7 +22,7 @@ Licence:
       details.
 
 Requirements:
-      - qt4 gui lib version >= qt4.6.x
+      - qt4 gui lib version >= qt4.8.x
 
         Note that many linux distributions split packages into a user
         and developer package and that you need to install both.
@@ -77,15 +77,6 @@ Test:
       (Modeste Moussorgsky: Pictures of an exhibition: Promenade)
       is shown. You probably want to change that in the
       "preferences" dialog.
-
-=================================================================
-      Status
-=================================================================
-
-      MuseScore is in beta state. That means you should not use
-      it for any mission critical work. It is incomplete and surely has
-      a lot of bugs. Also the save format (*.mscx and *.mscz files) will
-      most likely change in future versions.
 
 =================================================================
       Help needed
