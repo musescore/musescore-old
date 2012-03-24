@@ -64,7 +64,7 @@ class PageFormat {
       void setSize(const QSizeF& s) { _size = s;             }
 
       QString name() const;
-      void read(const QDomElement&,  Score*);
+      void read(const QDomElement&);
       void readMusicXML(const QDomElement&, qreal);
       void write(Xml&) const;
       void writeMusicXML(Xml&, qreal) const;

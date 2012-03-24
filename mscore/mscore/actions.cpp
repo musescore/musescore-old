@@ -884,6 +884,16 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","right+shift")
          ),
       Shortcut(
+         STATE_NORMAL,
+         0,
+         "select-section",
+         QT_TRANSLATE_NOOP("action","Select Section"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Select Section"),
+         QT_TRANSLATE_NOOP("action","select section")
+         ),
+      Shortcut(
          STATE_NOTE_ENTRY,
          0,
          "move-right",

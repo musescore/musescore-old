@@ -161,7 +161,7 @@ class FiguredBass : public Text {
 
       // static functions for font config files
       static bool       readConfigFile(const QString& fileName);
-      static QList<const QString*>  fontNames();
+      static QList<QString>  fontNames();
       static bool       fontData(int nIdx, QString *pFamily, QString *pDisplayName,
                               qreal * pSize, qreal * pLineHeight);
 

@@ -1138,7 +1138,7 @@ void Score::upDown(bool up, UpDownMode mode)
                                     }
                                     break;
 
-                              case UP_DOWN_CHROMATIC:       // increase / decrease the pitch, 
+                              case UP_DOWN_CHROMATIC:       // increase / decrease the pitch,
                                                             // letting the algorithm to choose fret & string
                                     newPitch = up ? pitch+1 : pitch-1;
                                     if (newPitch < 0)
@@ -2688,6 +2688,8 @@ void Score::cmd(const QAction* a)
             spell();
       else if (cmd == "select-all")
             cmdSelectAll();
+      else if (cmd == "select-section")
+            cmdSelectSection();
       else if (cmd == "concert-pitch") {
             if (styleB(ST_concertPitch) != a->isChecked())
                   cmdConcertPitchChanged(a->isChecked(), true);

@@ -449,7 +449,7 @@ QString PageFormat::name() const
 //    sizes are given in units of 1/10 spatium;
 //---------------------------------------------------------
 
-void PageFormat::read(const QDomElement& de, Score* score)
+void PageFormat::read(const QDomElement& de)
       {
       qreal _oddRightMargin  = 0.0;
       qreal _evenRightMargin = 0.0;
@@ -498,8 +498,8 @@ void PageFormat::read(const QDomElement& de, Score* score)
                   _size.rheight() = val.toDouble() * 0.5 / PPI;
             else if (tag == "page-width")
                   _size.rwidth() = val.toDouble() * .5 / PPI;
-            else if (tag == "page-offset")            // obsolete, moved to Score
-                  score->setPageNumberOffset(val.toInt());
+//            else if (tag == "page-offset")            // obsolete, moved to Score
+//                  score->setPageNumberOffset(val.toInt());
             else
                   domError(e);
             }
