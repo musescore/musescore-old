@@ -63,7 +63,7 @@ ExcerptsDialog::ExcerptsDialog(Score* s, QWidget* parent)
       if (score->parentScore())
             score = score->parentScore();
 
-      foreach(Excerpt* e, *score->excerpts()) {
+      foreach(Excerpt* e, score->excerpts()) {
             ExcerptItem* ei = new ExcerptItem(e);
             excerptList->addItem(ei);
             }

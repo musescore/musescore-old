@@ -197,7 +197,7 @@ void Score::endUndoRedo()
             score->setUpdateAll(true);
             score->setPlaylistDirty(true);
             }
-      foreach(Excerpt* e, *score->excerpts()) {
+      foreach(const Excerpt* e, score->excerpts()) {
             Score* score = e->score();
             if (score->layoutAll()) {
                   score->setUndoRedo(true);

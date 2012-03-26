@@ -94,9 +94,9 @@ QSplitter* ScoreTab::viewSplitter(int n) const
             }
       Score* score = tsv->score;
       if (tsv->part) {
-            QList<Excerpt*>* excerpts = score->excerpts();
-            if (excerpts && !excerpts->isEmpty())
-                  score = excerpts->at(tsv->part - 1)->score();
+            QList<Excerpt*>& excerpts = score->excerpts();
+            if (!excerpts.isEmpty())
+                  score = excerpts.at(tsv->part - 1)->score();
             }
 
       int nn = stack->count();
@@ -189,11 +189,11 @@ void ScoreTab::setCurrent(int n)
             Score* score = v->score();
             if (score->parentScore())
                   score = score->parentScore();
-            QList<Excerpt*>* excerpts = score->excerpts();
-            if (excerpts && !excerpts->isEmpty()) {
+            QList<Excerpt*>& excerpts = score->excerpts();
+            if (!excerpts.isEmpty()) {
                   tab2->blockSignals(true);
                   tab2->addTab(score->name());
-                  foreach(Excerpt* excerpt, *excerpts) {
+                  foreach(const Excerpt* excerpt, excerpts) {
                         tab2->addTab(excerpt->score()->name());
                         }
                   tab2->setCurrentIndex(tsv->part);
@@ -225,11 +225,11 @@ void ScoreTab::updateExcerpts()
             return;
       Score* score = v->score()->rootScore();
       clearTab2();
-      QList<Excerpt*>* excerpts = score->excerpts();
-      if (excerpts && !excerpts->isEmpty()) {
+      QList<Excerpt*>& excerpts = score->excerpts();
+      if (!excerpts.isEmpty()) {
             tab2->blockSignals(true);
             tab2->addTab(score->name());
-            foreach(Excerpt* excerpt, *excerpts)
+            foreach(const Excerpt* excerpt, excerpts)
                   tab2->addTab(excerpt->score()->name());
             tab2->blockSignals(false);
             tab2->setVisible(true);
@@ -256,9 +256,9 @@ void ScoreTab::setExcerpt(int n)
       ScoreView* v;
       Score* score = tsv->score;
       if (n) {
-            QList<Excerpt*>* excerpts = score->excerpts();
-            if (!excerpts->isEmpty()) {
-                  score = excerpts->at(n - 1)->score();
+            QList<Excerpt*>& excerpts = score->excerpts();
+            if (!excerpts.isEmpty()) {
+                  score = excerpts.at(n - 1)->score();
                   }
             }
       if (!vs) {
@@ -336,7 +336,7 @@ void ScoreTab::removeTab(int idx)
                   break;
                   }
             }
-      foreach(Excerpt* excerpt, *score->excerpts()) {
+      foreach(Excerpt* excerpt, score->excerpts()) {
             Score* sc = excerpt->score();
             for (int i = 0; i < stack->count(); ++i) {
                   QSplitter* vs = static_cast<QSplitter*>(stack->widget(i));

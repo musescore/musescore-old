@@ -1949,7 +1949,7 @@ void Score::addExcerpt(Score* score)
       {
       score->setParentScore(this);
       Excerpt* ex = new Excerpt(score);
-      excerpts()->append(ex);
+      excerpts().append(ex);
       ex->setTitle(score->name());
       foreach(Staff* s, score->staves()) {
             LinkedStaves* ls = s->linkedStaves();
@@ -1971,9 +1971,9 @@ void Score::addExcerpt(Score* score)
 
 void Score::removeExcerpt(Score* score)
       {
-      foreach (Excerpt* ex, *excerpts()) {
+      foreach (Excerpt* ex, excerpts()) {
             if (ex->score() == score) {
-                  if (excerpts()->removeOne(ex)) {
+                  if (excerpts().removeOne(ex)) {
                         delete ex;
                         return;
                         }

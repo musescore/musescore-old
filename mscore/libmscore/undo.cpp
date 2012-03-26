@@ -2884,7 +2884,7 @@ void Score::undoChangeBarLine(Measure* m, BarLineType barType)
       Score* s = parentScore() ? parentScore() : this;
       QList<Score*> scores;
       scores.append(s);
-      foreach (Excerpt* ex, *s->excerpts())
+      foreach (const Excerpt* ex, s->excerpts())
             scores.append(ex->score());
       foreach(Score* score, scores) {
             Measure* measure = score->tick2measure(m->tick());

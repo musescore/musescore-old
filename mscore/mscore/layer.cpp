@@ -39,9 +39,9 @@ LayerManager::LayerManager(Score* s, QWidget* parent)
             tags->setItem(i, 1, item);
             }
 
-      layers->setRowCount(score->layer()->size());
+      layers->setRowCount(score->layer().size());
       int row = 0;
-      foreach(const Layer& l, *score->layer()) {
+      foreach(const Layer& l, score->layer()) {
             QTableWidgetItem* item = new QTableWidgetItem(l.name);
             layers->setItem(row, 0, item);
             QString tagString;
@@ -182,8 +182,8 @@ void LayerManager:: accept()
       if (row != -1)
             score->setCurrentLayer(row);
 
-      QList<Layer>* layer = score->layer();
-      layer->clear();
+      QList<Layer>& layer = score->layer();
+      layer.clear();
 
       int n = layers->rowCount();
       for (int i = 0; i < n; ++i) {
@@ -202,7 +202,7 @@ void LayerManager:: accept()
                   }
             if (i == 0)             // hardwired default tag
                   l.tags |= 1;
-            layer->append(l);
+            layer.append(l);
             }
       score->setDirty(true);
       score->setLayoutAll(true);

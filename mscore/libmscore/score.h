@@ -657,8 +657,9 @@ class Score {
 
       void addLyrics(int tick, int staffIdx, const QString&);
 
-      QList<Excerpt*>* excerpts()  { return &_excerpts; }
-      MeasureBaseList* measures()  { return &_measures; }
+      QList<Excerpt*>& excerpts()             { return _excerpts; }
+      const QList<Excerpt*>& excerpts() const { return _excerpts; }
+      MeasureBaseList* measures()             { return &_measures; }
 
       bool checkHasMeasures() const;
 
@@ -844,7 +845,8 @@ class Score {
       int currentLayer() const              { return _currentLayer; }
       QString* layerTags()                  { return _layerTags;    }
       QString* layerTagComments()           { return _layerTagComments;    }
-      QList<Layer>* layer()                 { return &_layer;       }
+      QList<Layer>& layer()                 { return _layer;       }
+      const QList<Layer>& layer() const     { return _layer;       }
       bool tagIsValid(uint tag) const       { return tag & _layer[_currentLayer].tags; }
 
       void transpose(int mode, TransposeDirection, int transposeKey, int transposeInterval,

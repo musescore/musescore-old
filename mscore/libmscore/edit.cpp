@@ -1991,7 +1991,7 @@ MeasureBase* Score::insertMeasure(ElementType type, MeasureBase* measure)
 
       Score* root = rootScore();
       QList<Score*> scores;
-      foreach(Excerpt* ex, *root->excerpts())
+      foreach(const Excerpt* ex, root->excerpts())
             scores.append(ex->score());
       scores.append(root);
 
