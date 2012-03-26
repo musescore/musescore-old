@@ -2783,7 +2783,7 @@ bool MuseScore::importGTP(Score* score, const QString& name)
             Excerpt* excerpt = new Excerpt(pscore);
             excerpt->setTitle(part->partName());
             excerpt->parts()->append(part);
-            score->excerpts()->append(excerpt);
+            score->excerpts().append(excerpt);
 
             if (part->staves()->front()->staffType()->group() == PITCHED_STAFF) {
                   Staff* staff2 = pscore->staff(1);

@@ -106,9 +106,9 @@ Score* createExcerpt(const QList<Part*>& parts)
             score->layerTagComments()[i] = oscore->layerTagComments()[i];
             }
       score->setCurrentLayer(oscore->currentLayer());
-      score->layer()->clear();
-      foreach(const Layer& l, *oscore->layer())
-            score->layer()->append(l);
+      score->layer().clear();
+      foreach(const Layer& l, oscore->layer())
+            score->layer().append(l);
 
       score->setPageNumberOffset(oscore->pageNumberOffset());
 

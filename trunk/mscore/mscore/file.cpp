@@ -1624,7 +1624,7 @@ bool MuseScore::readScore(Score* score, QString name)
       score->updateNotes();
 //      score->doLayout();            // DEBUG
       score->doLayout();
-      foreach (Excerpt* ex, *score->excerpts()) {
+      foreach (const Excerpt* ex, score->excerpts()) {
             ex->score()->doLayout();
             }
       return true;

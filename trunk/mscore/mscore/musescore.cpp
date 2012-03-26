@@ -3592,7 +3592,7 @@ void MuseScore::midiNoteReceived(int pitch, bool ctrl)
 void MuseScore::switchLayer(const QString& s)
       {
       int layer = 0;
-      foreach(const Layer& l, *cs->layer()) {
+      foreach(const Layer& l, cs->layer()) {
             if (s == l.name) {
                   cs->setCurrentLayer(layer);
                   cs->setDirty(true);
@@ -4404,9 +4404,9 @@ void MuseScore::updateLayer()
       layerSwitch->clear();
       bool enable;
       if (cs) {
-            enable = cs->layer()->size() > 1;
+            enable = cs->layer().size() > 1;
             if (enable) {
-                  foreach(const Layer& l, *cs->layer())
+                  foreach(const Layer& l, cs->layer())
                         layerSwitch->addItem(l.name);
                   layerSwitch->setCurrentIndex(cs->currentLayer());
                   }
