@@ -274,7 +274,7 @@ void System::layout(qreal xo1)
       //---------------------------------------------------
 
       int idx = 0;
-      foreach (Part* p, *score()->parts()) {
+      foreach (Part* p, score()->parts()) {
             SysStaff* s = staff(idx);
             int nstaves = p->nstaves();
             foreach(InstrumentName* t, s->instrumentNames) {
@@ -409,7 +409,7 @@ void System::layout2()
       //---------------------------------------------------
 
       int staffIdx = 0;
-      foreach(Part* p, *score()->parts()) {
+      foreach(Part* p, score()->parts()) {
             SysStaff* s = staff(staffIdx);
             int nstaves = p->nstaves();
             foreach(InstrumentName* t, s->instrumentNames) {

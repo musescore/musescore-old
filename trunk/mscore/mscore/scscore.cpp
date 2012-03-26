@@ -324,13 +324,13 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                   break;
             case 12:    // "parts",
                   if (argc == 0)
-                        return qScriptValueFromValue(context->engine(), score->parts()->size());
+                        return qScriptValueFromValue(context->engine(), score->parts().size());
                   break;
             case 13:    // "part",
                   if (argc == 1) {
                         int n = context->argument(0).toInt32();
-                        if(n >= 0 && n < score->parts()->size()){
-                            Part* part = score->parts()->at(n);
+                        if(n >= 0 && n < score->parts().size()){
+                            Part* part = score->parts().at(n);
                             return qScriptValueFromValue(context->engine(), part);
                             }
                         }

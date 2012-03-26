@@ -544,7 +544,8 @@ class Score {
       void changeVoice(int);
 
       void colorItem(Element*);
-      const QList<Part*>* parts() const  { return &_parts; }
+      QList<Part*>& parts()                { return _parts; }
+      const QList<Part*>& parts() const    { return _parts; }
       Part* part(int n) const            { return _parts[n]; }
       void appendPart(Part* p);
       void updateStaffIndex();

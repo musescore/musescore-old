@@ -432,11 +432,11 @@ void ExportLy::findBrackets()
   initBrackets();
   char groupnumber;
   groupnumber=1;
-  const QList<Part*>* il = score->parts();  //list of parts
+  const QList<Part*>& il = score->parts();  //list of parts
 
-  for (int partnumber = 0; partnumber < il->size(); ++partnumber)  //run thru list of parts
+  for (int partnumber = 0; partnumber < il.size(); ++partnumber)  //run thru list of parts
     {
-      Part* part = il->at(partnumber);
+      Part* part = il.at(partnumber);
       if (part->nstaves() == 2) pianostaff=true;
       for (int stavno = 0; stavno < part->nstaves(); stavno++) //run thru list of staves in part.
 	{
@@ -4117,7 +4117,7 @@ void ExportLy::writeScore()
   privateRehearsalMark='A';
 
 
-  foreach(Part* part, *score->parts())
+  foreach(Part* part, score->parts())
     {
       nextAnchor=0;
       initAnchors();

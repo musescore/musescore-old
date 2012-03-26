@@ -43,7 +43,7 @@
 
 void Excerpt::read(const QDomElement& de)
       {
-      const QList<Part*>* pl = _score->parts();
+      const QList<Part*>& pl = _score->parts();
       QString name;
       for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag = e.tagName();
@@ -53,10 +53,10 @@ void Excerpt::read(const QDomElement& de)
                   _title = e.text().trimmed();
             else if (tag == "part") {
                   int partIdx = e.text().toInt();
-                  if (partIdx < 0 || partIdx >= pl->size())
+                  if (partIdx < 0 || partIdx >= pl.size())
                         qDebug("Excerpt::read: bad part index\n");
                   else
-                        _parts.append(pl->at(partIdx));
+                        _parts.append(pl.at(partIdx));
                   }
             }
       if (_title.isEmpty())
