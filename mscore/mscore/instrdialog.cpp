@@ -243,7 +243,7 @@ void InstrumentsDialog::genPartList()
       {
       partiturList->clear();
 
-      foreach(Part* p, *cs->parts()) {
+      foreach(Part* p, cs->parts()) {
             PartListItem* pli = new PartListItem(p, partiturList);
             foreach(Staff* s, *p->staves()) {
                   StaffListItem* sli = new StaffListItem(pli);

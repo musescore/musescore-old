@@ -794,11 +794,11 @@ void ExportMusicXml::calcDivisions()
       primes.append(3);
       primes.append(5);
 
-      const QList<Part*>* il = score->parts();
+      const QList<Part*>& il = score->parts();
 
-      for (int idx = 0; idx < il->size(); ++idx) {
+      for (int idx = 0; idx < il.size(); ++idx) {
 
-            Part* part = il->at(idx);
+            Part* part = il.at(idx);
             tick = 0;
 
             int staves = part->nstaves();
@@ -1960,7 +1960,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
 
             //instrument for unpitched
             if (useDrumset)
-                  xml.tagE(QString("instrument id=\"P%1-I%2\"").arg(score->parts()->indexOf(note->staff()->part()) + 1).arg(note->pitch() + 1));
+                  xml.tagE(QString("instrument id=\"P%1-I%2\"").arg(score->parts().indexOf(note->staff()->part()) + 1).arg(note->pitch() + 1));
 
             // voice
             // for a single-staff part, staff is 0, which needs to be corrected
@@ -3515,13 +3515,13 @@ void ExportMusicXml::write(QIODevice* dev)
             }
 
       xml.stag("part-list");
-      const QList<Part*>* il = score->parts();
+      const QList<Part*>& il = score->parts();
       int staffCount = 0;                       // count sum of # staves in parts
       int partGroupEnd[MAX_PART_GROUPS];        // staff where part group ends
       for (int i = 0; i < MAX_PART_GROUPS; i++)
             partGroupEnd[i] = -1;
-      for (int idx = 0; idx < il->size(); ++idx) {
-            Part* part = il->at(idx);
+      for (int idx = 0; idx < il.size(); ++idx) {
+            Part* part = il.at(idx);
             for (int i = 0; i < part->nstaves(); i++) {
                   Staff* st = part->staff(i);
                   if (st) {
@@ -3610,8 +3610,8 @@ void ExportMusicXml::write(QIODevice* dev)
 
       staffCount = 0;
 
-      for (int idx = 0; idx < il->size(); ++idx) {
-            Part* part = il->at(idx);
+      for (int idx = 0; idx < il.size(); ++idx) {
+            Part* part = il.at(idx);
             tick = 0;
             xml.stag(QString("part id=\"P%1\"").arg(idx+1));
 

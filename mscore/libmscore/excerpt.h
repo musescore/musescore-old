@@ -30,7 +30,7 @@ class Excerpt {
 
    public:
       Excerpt(Score* s)               { _score = s; }
-      QList<Part*>* parts()           { return &_parts; }
+      QList<Part*>& parts()           { return _parts; }
       Score* score() const            { return _score;  }
       void setScore(Score* s)         { _score = s; }
 

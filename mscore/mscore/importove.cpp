@@ -357,12 +357,12 @@ void OveToMScore::convertHeader() {
 void OveToMScore::convertGroups() {
 	int i;
 	int staffCount = 0;
-	const QList<Part*>* parts = score_->parts();
+	const QList<Part*>& parts = score_->parts();
 	for(i=0; i<ove_->getPartCount(); ++i ){
 		int partStaffCount = ove_->getStaffCount(i);
-		if(parts == 0)
-			continue;
-		Part* part = parts->at(i);
+		//if(parts == 0)
+		//	continue;
+		Part* part = parts.at(i);
 		if(part == 0)
 			continue;
 

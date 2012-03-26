@@ -709,7 +709,7 @@ bool MuseData::read(const QString& name)
 void MuseData::convert()
       {
       for (int pn = 0; pn < parts.size(); ++pn) {
-            Part* part = (*score->parts())[pn];
+            Part* part = (score->parts())[pn];
             readPart(parts[pn], part);
             }
 #if 0

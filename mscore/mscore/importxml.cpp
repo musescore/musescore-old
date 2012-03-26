@@ -1087,11 +1087,11 @@ void MusicXml::scorePartwise(QDomElement ee)
             }
 
       // add bracket where required
-      const QList<Part*>* il = score->parts();
+      const QList<Part*>& il = score->parts();
       // add bracket to multi-staff parts
       /* LVIFIX TODO is this necessary ?
-      for (int idx = 0; idx < il->size(); ++idx) {
-            Part* part = il->at(idx);
+      for (int idx = 0; idx < il.size(); ++idx) {
+            Part* part = il.at(idx);
             qDebug("part %d staves=%d", idx, part->nstaves());
             if (part->nstaves() > 1)
                   part->staff(0)->addBracket(BracketItem(BRACKET_AKKOLADE, part->nstaves()));
@@ -1102,11 +1102,11 @@ void MusicXml::scorePartwise(QDomElement ee)
             // determine span in staves
             int stavesSpan = 0;
             for (int j = 0; j < pg->span; j++)
-                  stavesSpan += il->at(pg->start + j)->nstaves();
+                  stavesSpan += il.at(pg->start + j)->nstaves();
             // and add bracket
-            il->at(pg->start)->staff(0)->addBracket(BracketItem(pg->type, stavesSpan));
+            il.at(pg->start)->staff(0)->addBracket(BracketItem(pg->type, stavesSpan));
             if (pg->barlineSpan)
-                  il->at(pg->start)->staff(0)->setBarLineSpan(pg->span);
+                  il.at(pg->start)->staff(0)->setBarLineSpan(pg->span);
             }
 
       // having read all parts (meaning all segments have been created),
@@ -1263,7 +1263,7 @@ void MusicXml::xmlPartList(QDomElement e)
 void MusicXml::xmlScorePart(QDomElement e, QString id, int& parts)
       {
       Part* part = 0;
-      foreach(Part* p, *score->parts()) {
+      foreach(Part* p, score->parts()) {
             if (p->id() == id) {
                   part = p;
                   parts++;
@@ -1323,7 +1323,7 @@ void MusicXml::xmlScorePart(QDomElement e, QString id, int& parts)
                   domError(e);
             }
       /*
-      score->parts()->push_back(part);
+      score->parts().push_back(part);
       Staff* staff = new Staff(score, part, 0);
       part->staves()->push_back(staff);
       score->staves().push_back(staff);
@@ -1715,7 +1715,7 @@ void MusicXml::xmlPart(QDomElement e, QString id)
             return;
             }
       Part* part = 0;
-      foreach(Part* p, *score->parts()) {
+      foreach(Part* p, score->parts()) {
             if (p->id() == id) {
                   part = p;
                   break;

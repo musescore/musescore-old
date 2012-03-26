@@ -87,7 +87,7 @@ bool MuseScore::saveAudio(Score* score, const QString& name, const QString& ext)
             //
             // init instruments
             //
-            foreach(const Part* part, *score->parts()) {
+            foreach(const Part* part, score->parts()) {
                   foreach(const Channel& a, part->instr()->channel()) {
                         a.updateInitList();
                         foreach(Event e, a.init) {

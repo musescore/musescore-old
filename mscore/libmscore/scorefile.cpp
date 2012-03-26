@@ -1268,7 +1268,7 @@ bool Score::read(const QDomElement& de)
       if (_mscVersion < 117) {
             // create excerpts
             foreach(Excerpt* excerpt, _excerpts) {
-                  Score* nscore = ::createExcerpt(*excerpt->parts());
+                  Score* nscore = ::createExcerpt(excerpt->parts());
                   if (nscore) {
                         nscore->setParentScore(this);
                         nscore->setName(excerpt->title());

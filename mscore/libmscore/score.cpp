@@ -1957,7 +1957,7 @@ void Score::addExcerpt(Score* score)
                   continue;
             foreach(Staff* ps, ls->staves()) {
                   if (ps->score() == this) {
-                        ex->parts()->append(ps->part());
+                        ex->parts().append(ps->part());
                         break;
                         }
                   }

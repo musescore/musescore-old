@@ -2740,7 +2740,7 @@ bool MuseScore::importGTP(Score* score, const QString& name)
       //
       // create parts (excerpts)
       //
-      foreach(Part* part, *score->parts()) {
+      foreach(Part* part, score->parts()) {
             Score* pscore = new Score(score);
             pscore->syntiState().append(SyntiParameter("soundfont", MScore::soundFont));
             pscore->style()->set(ST_createMultiMeasureRests, true);
@@ -2782,7 +2782,7 @@ bool MuseScore::importGTP(Score* score, const QString& name)
             pscore->setName(part->partName());
             Excerpt* excerpt = new Excerpt(pscore);
             excerpt->setTitle(part->partName());
-            excerpt->parts()->append(part);
+            excerpt->parts().append(part);
             score->excerpts().append(excerpt);
 
             if (part->staves()->front()->staffType()->group() == PITCHED_STAFF) {
