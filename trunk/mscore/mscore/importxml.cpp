@@ -3312,6 +3312,44 @@ static void matchTypeAndCount(int& type1, int& count1, int& type2, int& count2)
       }
 
 //---------------------------------------------------------
+//   determineTupletTypeAndCount
+//---------------------------------------------------------
+
+/**
+ Determine type and number of smallest notes in the tuplet
+ */
+
+static void determineTupletTypeAndCount(Tuplet* t, int& tupletType, int& tupletCount)
+      {
+      int elemCount   = 0; // number of tuplet elements handled
+
+      foreach (DurationElement* de, t->elements()) {
+            if (de->type() == CHORD || de->type() == REST) {
+                  ChordRest* cr = static_cast<ChordRest*>(de);
+                  if (elemCount == 0) {
+                        // first note: init variables
+                        smallestTypeAndCount(cr, tupletType, tupletCount);
+                        qDebug("determineTupletTypeAndCount(%p) cr %p type %d count %d",
+                               t, de, tupletType, tupletCount);
+                        }
+                  else {
+                        int noteType = 0;
+                        int noteCount = 0;
+                        smallestTypeAndCount(cr, noteType, noteCount);
+                        qDebug("determineTupletTypeAndCount(%p) cr %p type %d count %d",
+                               t, de, noteType, noteCount);
+                        // match the types
+                        matchTypeAndCount(tupletType, tupletCount, noteType, noteCount);
+                        tupletCount += noteCount;
+                        qDebug("determineTupletTypeAndCount(%p) total type %d count %d",
+                               t, tupletType, tupletCount);
+                        }
+                  }
+            elemCount++;
+            }
+      }
+
+//---------------------------------------------------------
 //   isTupletFilled
 //---------------------------------------------------------
 
@@ -3336,33 +3374,9 @@ bool isTupletFilled(Tuplet* t, TDuration normalType)
 
       int tupletType  = 0; // smallest note type in the tuplet
       int tupletCount = 0; // number of smallest notes in the tuplet
-      int elemCount   = 0; // number of tuplet elements handled
 
       // first determine type and number of smallest notes in the tuplet
-      foreach (DurationElement* de, t->elements()) {
-            if (de->type() == CHORD || de->type() == REST) {
-                  ChordRest* cr = static_cast<ChordRest*>(de);
-                  if (elemCount == 0) {
-                        // first note: init variables
-                        smallestTypeAndCount(cr, tupletType, tupletCount);
-                        qDebug("isTupletFilled(%p) cr %p type %d count %d",
-                               t, de, tupletType, tupletCount);
-                        }
-                  else {
-                        int noteType = 0;
-                        int noteCount = 0;
-                        smallestTypeAndCount(cr, noteType, noteCount);
-                        qDebug("isTupletFilled(%p) cr %p type %d count %d",
-                               t, de, noteType, noteCount);
-                        // match the types
-                        matchTypeAndCount(tupletType, tupletCount, noteType, noteCount);
-                        tupletCount += noteCount;
-                        qDebug(" total type %d count %d",
-                               tupletType, tupletCount);
-                        }
-                  }
-            elemCount++;
-            }
+      determineTupletTypeAndCount(t, tupletType, tupletCount);
 
       // then compare ...
       if (normalType.isValid()) {
@@ -3520,6 +3534,13 @@ void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, int ticks, QDomElement e)
                 || isTupletFilled(tuplet, normalType)
                 || (actualNotes == 1 && normalNotes == 1)) {
                   qDebug("stop tuplet %p last chordrest %p", tuplet, cr);
+                  // set baselen
+                  int tupletType  = 0; // smallest note type in the tuplet
+                  int tupletCount = 0; // number of smallest notes in the tuplet
+                  determineTupletTypeAndCount(tuplet, tupletType, tupletCount);
+                  qDebug("stop tuplet %p basetype %d", tuplet, tupletType);
+                  tuplet->setBaseLen(TDuration(TDuration::DurationType(tupletType)));
+                  // TODO determine usefulness of following check
                   int totalDuration = 0;
                   foreach (DurationElement* de, tuplet->elements()) {
                         if (de->type() == CHORD || de->type() == REST) {
