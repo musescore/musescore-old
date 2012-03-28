@@ -233,6 +233,7 @@ void Xml::tag(P_ID id, void* data, void* defaultVal)
                   if (compareProperty<Fraction>(data, defaultVal))
                         fTag(name, *(Fraction*)data);
                   break;
+            case T_SCALE:
             case T_POINT:
                   if (compareProperty<QPointF>(data, defaultVal))
                         tag(name, QVariant(*(QPointF*)data));
@@ -307,6 +308,12 @@ void Xml::tag(P_ID id, void* data, void* defaultVal)
 //   tag
 //    <mops>value</mops>
 //---------------------------------------------------------
+
+void Xml::tag(const char* name, QVariant data, QVariant defaultData)
+      {
+      if (data != defaultData)
+            tag(QString(name), data);
+      }
 
 void Xml::tag(const QString& name, QVariant data)
       {

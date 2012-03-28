@@ -1567,43 +1567,6 @@ bool Element::setProperty(const QString& name, const QDomElement& e)
       }
 
 //---------------------------------------------------------
-//   getVariant
-//    Return QVariant from void* to property.
-//    The external representation of the property is
-//    returned, suitable for writing to xml.
-//---------------------------------------------------------
-
-QVariant Element::getVariant(P_ID id, void* data) const
-      {
-      if (data) {
-            switch(propertyType(id)) {
-                  case T_BOOL:
-                        return QVariant(*(bool*)data);
-                  case T_SUBTYPE:
-                  case T_INT:
-                  case T_DIRECTION:
-                  case T_DIRECTION_H:
-                  case T_LAYOUT_BREAK:
-                  case T_VALUE_TYPE:
-                        return QVariant(*(int*)data);
-                  case T_FRACTION:
-                        return QVariant::fromValue(*(Fraction*)data);
-                  case T_SREAL:
-                        return QVariant((*(qreal*)data) / spatium());
-                  case T_REAL:
-                        return QVariant(*(qreal*)data);
-                  case T_COLOR:
-                        return QVariant(*(QColor*)data);
-                  case T_POINT:
-                        return QVariant(*(QPointF*)data);
-                  case T_SIZE:
-                        return QVariant(*(QSizeF*)data);
-                  }
-            }
-      return QVariant();
-      }
-
-//---------------------------------------------------------
 //   setVariant
 //---------------------------------------------------------
 
@@ -1647,4 +1610,42 @@ void Element::setVariant(P_ID id, void* data, const QVariant& value)
                   break;
             }
       }
+
+//---------------------------------------------------------
+//   getVariant
+//    Return QVariant from void* to property.
+//    The external representation of the property is
+//    returned, suitable for writing to xml.
+//---------------------------------------------------------
+
+QVariant Element::getVariant(P_ID id, void* data) const
+      {
+      if (data) {
+            switch(propertyType(id)) {
+                  case T_BOOL:
+                        return QVariant(*(bool*)data);
+                  case T_SUBTYPE:
+                  case T_INT:
+                  case T_DIRECTION:
+                  case T_DIRECTION_H:
+                  case T_LAYOUT_BREAK:
+                  case T_VALUE_TYPE:
+                        return QVariant(*(int*)data);
+                  case T_FRACTION:
+                        return QVariant::fromValue(*(Fraction*)data);
+                  case T_SREAL:
+                        return QVariant((*(qreal*)data) / spatium());
+                  case T_REAL:
+                        return QVariant(*(qreal*)data);
+                  case T_COLOR:
+                        return QVariant(*(QColor*)data);
+                  case T_POINT:
+                        return QVariant(*(QPointF*)data);
+                  case T_SIZE:
+                        return QVariant(*(QSizeF*)data);
+                  }
+            }
+      return QVariant();
+      }
+
 

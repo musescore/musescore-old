@@ -27,8 +27,11 @@ class InspectorImage : public InspectorBase {
 
       Ui::InspectorImage b;
 
-      static const int _inspectorItems = 5;
+      static const int _inspectorItems = 7;
       InspectorItem iList[_inspectorItems];
+
+      void updateScaleFromSize(const QSizeF&);
+      void updateSizeFromScale(const QSizeF&);
 
    protected slots:
       virtual void valueChanged(int idx);

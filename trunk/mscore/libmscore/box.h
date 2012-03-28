@@ -91,7 +91,7 @@ class Box : public MeasureBase {
 
       static Property<Box> propertyList[];
       Property<Box>* property(P_ID) const;
-      virtual void* propertyDefault(P_ID) const;
+      virtual QVariant propertyDefault(P_ID) const;
       };
 
 //---------------------------------------------------------

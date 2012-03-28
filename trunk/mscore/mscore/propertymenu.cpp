@@ -30,7 +30,6 @@
 #include "timesigproperties.h"
 #include "textproperties.h"
 #include "tempoproperties.h"
-#include "imageproperties.h"
 #include "dynamicprop.h"
 #include "hairpinprop.h"
 #include "sectionbreakprop.h"
@@ -352,12 +351,6 @@ void ScoreView::createElementPropertyMenu(Element* e, QMenu* popup)
             popup->addSeparator();
             popup->addAction(tr("Harmony Properties..."))->setData("ha-props");
             popup->addAction(tr("Text Properties..."))->setData("text-props");
-            }
-      else if (e->type() == IMAGE) {
-            genPropertyMenu1(e, popup);
-            QAction* a = popup->addSeparator();
-            a->setText(tr("Image"));
-            popup->addAction(tr("Image Properties..."))->setData("img-props");
             }
       else if (e->type() == INSTRUMENT_NAME) {
             popup->addAction(tr("Staff Properties..."))->setData("staff-props");
@@ -757,18 +750,6 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
                   Harmony* h = ce.harmony()->clone();
                   h->render();
                   score()->undoChangeElement(ha, h);
-                  }
-            }
-      else if (cmd == "img-props") {
-            Image* img = static_cast<Image*>(e);
-            ImageProperties vp(img);
-            int rv = vp.exec();
-            if (rv) {
-                  if (vp.getLockAspectRatio() != img->lockAspectRatio()
-                     || vp.getAutoScale() != img->autoScale() || vp.getZ() != img->z()) {
-                        score()->undo(new ChangeImage(img,
-                           vp.getLockAspectRatio(), vp.getAutoScale(), vp.getZ()));
-                        }
                   }
             }
       else if (cmd == "staff-props") {

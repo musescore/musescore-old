@@ -68,7 +68,7 @@ class LayoutBreak : public Element {
       virtual bool setProperty(P_ID propertyId, const QVariant&);
       virtual bool setProperty(const QString&, const QDomElement&);
       Property<LayoutBreak>* property(P_ID id) const;
-      virtual void* propertyDefault(P_ID) const;
+      virtual QVariant propertyDefault(P_ID) const;
 
       static Property<LayoutBreak> propertyList[];
       };

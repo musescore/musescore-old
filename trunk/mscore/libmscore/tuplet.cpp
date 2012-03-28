@@ -790,10 +790,10 @@ bool Tuplet::setProperty(const QString& name, const QDomElement& e)
             }
       return Element::setProperty(name, e);
       }
-void*  Tuplet::propertyDefault(P_ID id) const
+QVariant  Tuplet::propertyDefault(P_ID id) const
       {
       Property<Tuplet>* p = property(id);
-      return p->defaultVal;
+      return getVariant(id, p->defaultVal);
       }
 
 

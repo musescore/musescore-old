@@ -61,11 +61,11 @@ class Xml : public QTextStream {
       void netag(const char* name);
 
       void tag(P_ID id, void* data, void* defaultVal);
-      void tag(const QString& name, QVariant data);
+      void tag(const char* name, QVariant data, QVariant defaultData = QVariant());
+      void tag(const QString&, QVariant data);
       void tag(const char* name, const char* s)    { tag(name, QVariant(s)); }
       void tag(const char* name, const QString& s) { tag(name, QVariant(s)); }
       void tag(const char* name, const QWidget*);
-//      void tag(const char* name, P_TYPE type, void* data, void* defaultVal);
 
       void writeHtml(const QString& s);
       void dump(int len, const unsigned char* p);

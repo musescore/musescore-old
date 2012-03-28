@@ -43,7 +43,7 @@ QT4_WRAP_UI (ui_headers
       instrwizard.ui timesigwizard.ui newwizard.ui aboutbox.ui
       chordedit.ui transposedialog.ui tempoproperties.ui
       lineproperties.ui excerptsdialog.ui lyrics.ui stafftext.ui
-      imageproperties.ui tupletdialog.ui tupletproperties.ui
+      tupletdialog.ui tupletproperties.ui
       glissandoprop.ui articulation.ui metaedit.ui palette.ui
       dynamicproperties.ui textline.ui slurproperties.ui debugger.ui
       select.ui synthcontrol.ui splitstaff.ui cellproperties.ui beam.ui keyedit.ui
@@ -71,7 +71,7 @@ QT4_WRAP_CPP (mocs
       voltaproperties.h timesigproperties.h
       jumpproperties.h markerproperties.h boxproperties.h newwizard.h
       transposedialog.h chordedit.h tempoproperties.h lineproperties.h
-      excerptsdialog.h stafftextproperties.h imageproperties.h glissandoproperties.h
+      excerptsdialog.h stafftextproperties.h glissandoproperties.h
       script.h articulationprop.h metaedit.h magbox.h voiceselector.h
       textprop.h dynamicprop.h textproperties.h tupletdialog.h tupletproperties.h
       slurproperties.h selectdialog.h synthcontrol.h drumroll.h pianoroll.h
@@ -170,7 +170,7 @@ add_executable ( ${ExecutableName}
       fretproperties.cpp sectionbreakprop.cpp hairpinprop.cpp
       bendproperties.cpp tremolobarprop.cpp file.cpp keyb.cpp osc.cpp
       layer.cpp jumpproperties.cpp selectdialog.cpp
-      propertymenu.cpp imageproperties.cpp shortcut.cpp bb.cpp
+      propertymenu.cpp shortcut.cpp bb.cpp
       midifile.cpp inspector.cpp dragelement.cpp svggenerator.cpp
       inspectorBase.cpp inspectorBeam.cpp masterpalette.cpp
       inspectorGroupElement.cpp dragdrop.cpp inspectorImage.cpp

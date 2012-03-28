@@ -16,6 +16,11 @@
 #include "libmscore/image.h"
 #include "libmscore/score.h"
 
+enum {
+      AUTOSCALE, SIZE_W, SIZE_H, SCALE_W, SCALE_H,
+      LOCK_RATIO, SIZE_IS_SPATIUM
+      };
+
 //---------------------------------------------------------
 //   InspectorImage
 //---------------------------------------------------------
@@ -27,29 +32,77 @@ InspectorImage::InspectorImage(QWidget* parent)
       b.setupUi(w);
       layout->addWidget(w);
 
-      iList[0].t = P_AUTOSCALE;
-      iList[0].w = b.autoscale;
-      iList[0].r = b.resetAutoscale;
+      iList[AUTOSCALE].t = P_AUTOSCALE;
+      iList[AUTOSCALE].w = b.autoscale;
+      iList[AUTOSCALE].r = b.resetAutoscale;
 
-      iList[1].t  = P_SIZE;
-      iList[1].sv = 0;
-      iList[1].w  = b.sizeWidth;
-      iList[1].r  = 0;
+      iList[SIZE_W].t  = P_SIZE;
+      iList[SIZE_W].sv = 0;
+      iList[SIZE_W].w  = b.sizeWidth;
+      iList[SIZE_W].r  = 0;
 
-      iList[2].t  = P_SIZE;
-      iList[2].sv = 1;
-      iList[2].w  = b.sizeHeight;
-      iList[2].r  = 0;
+      iList[SIZE_H].t  = P_SIZE;
+      iList[SIZE_H].sv = 1;
+      iList[SIZE_H].w  = b.sizeHeight;
+      iList[SIZE_H].r  = 0;
 
-      iList[3].t = P_LOCK_ASPECT_RATIO;
-      iList[3].w = b.lockAspectRatio;
-      iList[3].r = b.resetLockAspectRatio;
+      iList[SCALE_W].t  = P_SCALE;
+      iList[SCALE_W].sv = 0;
+      iList[SCALE_W].w  = b.scaleWidth;
+      iList[SCALE_W].r  = 0;
 
-      iList[4].t = P_SIZE_IS_SPATIUM;
-      iList[4].w = b.sizeIsSpatium;
-      iList[4].r = b.resetSizeIsSpatium;
+      iList[SCALE_H].t  = P_SCALE;
+      iList[SCALE_H].sv = 1;
+      iList[SCALE_H].w  = b.scaleHeight;
+      iList[SCALE_H].r  = 0;
+
+      iList[LOCK_RATIO].t = P_LOCK_ASPECT_RATIO;
+      iList[LOCK_RATIO].w = b.lockAspectRatio;
+      iList[LOCK_RATIO].r = b.resetLockAspectRatio;
+
+      iList[SIZE_IS_SPATIUM].t = P_SIZE_IS_SPATIUM;
+      iList[SIZE_IS_SPATIUM].w = b.sizeIsSpatium;
+      iList[SIZE_IS_SPATIUM].r = b.resetSizeIsSpatium;
 
       mapSignals();
+      }
+
+//---------------------------------------------------------
+//   updateScaleFromSize
+//---------------------------------------------------------
+
+void InspectorImage::updateScaleFromSize(const QSizeF& sz)
+      {
+      Image* image = static_cast<Image*>(inspector->element());
+      QSizeF scale = image->scaleForSize(sz);
+
+      QDoubleSpinBox* b1 = b.scaleWidth;
+      QDoubleSpinBox* b2 = b.scaleHeight;
+      b1->blockSignals(true);
+      b2->blockSignals(true);
+      b1->setValue(scale.width());
+      b2->setValue(scale.height());
+      b1->blockSignals(false);
+      b2->blockSignals(false);
+      }
+
+//---------------------------------------------------------
+//   updateSizeFromScale
+//---------------------------------------------------------
+
+void InspectorImage::updateSizeFromScale(const QSizeF& scale)
+      {
+      Image* image = static_cast<Image*>(inspector->element());
+      QSizeF size = image->sizeForScale(scale);
+
+      QDoubleSpinBox* b1 = b.sizeWidth;
+      QDoubleSpinBox* b2 = b.sizeHeight;
+      b1->blockSignals(true);
+      b2->blockSignals(true);
+      b1->setValue(size.width());
+      b2->setValue(size.height());
+      b1->blockSignals(false);
+      b2->blockSignals(false);
       }
 
 //---------------------------------------------------------
@@ -60,25 +113,65 @@ void InspectorImage::valueChanged(int idx)
       {
       QDoubleSpinBox* b1 = b.sizeWidth;
       QDoubleSpinBox* b2 = b.sizeHeight;
-      if (idx == 1 && b.lockAspectRatio->isChecked()) {
-            // width was changed, fix height
-            QSizeF sz   = inspector->element()->getProperty(P_SIZE).toSizeF();
-            qreal ratio = sz.width() / sz.height();
-            qreal h     = b1->value() / ratio;
-            b2->blockSignals(true);
-            b2->setValue(h);
-            b2->blockSignals(false);
+      QDoubleSpinBox* b3 = b.scaleWidth;
+      QDoubleSpinBox* b4 = b.scaleHeight;
+      Image* image = static_cast<Image*>(inspector->element());
+      if (idx == AUTOSCALE) {
+            bool v = !b.autoscale->isChecked();
+            b1->setEnabled(v);
+            b2->setEnabled(v);
+            b.scaleWidth->setEnabled(v);
+            b.scaleHeight->setEnabled(v);
             }
-      else if (idx == 2 && b.lockAspectRatio->isChecked()) {
-            // height was changed, fix width
-            QSizeF sz   = inspector->element()->getProperty(P_SIZE).toSizeF();
-            qreal ratio = sz.width() / sz.height();
-            qreal w     = b2->value() * ratio;
-            b1->blockSignals(true);
-            b1->setValue(w);
-            b1->blockSignals(false);
+      if (idx == SIZE_W) {
+            if (b.lockAspectRatio->isChecked()) {
+                  QSizeF sz = image->getProperty(P_SIZE).toSizeF();
+                  qreal ratio = sz.width() / sz.height();
+                  qreal h     = b1->value() / ratio;
+                  b2->blockSignals(true);
+                  b2->setValue(h);
+                  b2->blockSignals(false);
+                  }
+            updateScaleFromSize(QSizeF(b1->value(), b2->value()));
             }
-      else if (idx == 4) {
+      else if (idx == SIZE_H) {
+            if (b.lockAspectRatio->isChecked()) {
+                  QSizeF sz   = image->getProperty(P_SIZE).toSizeF();
+                  qreal ratio = sz.width() / sz.height();
+                  qreal w     = b2->value() * ratio;
+                  b1->blockSignals(true);
+                  b1->setValue(w);
+                  b1->blockSignals(false);
+                  }
+            updateScaleFromSize(QSizeF(b1->value(), b2->value()));
+            }
+      else if (idx == SCALE_W) {
+            if (b.lockAspectRatio->isChecked()) {
+                  // scale width was changed, fix scale height
+                  QSizeF sz   = inspector->element()->getProperty(P_SIZE).toSizeF();
+                  qreal ratio = sz.width() / sz.height();
+
+                  qreal h     = b.scaleWidth->value() / ratio;
+                  b.scaleHeight->blockSignals(true);
+                  b.scaleHeight->setValue(h);
+                  b.scaleHeight->blockSignals(false);
+                  }
+            updateSizeFromScale(QSizeF(b3->value(), b4->value()));
+            }
+      else if (idx == SCALE_H) {
+            if (b.lockAspectRatio->isChecked()) {
+                  // scale height was changed, fix scale width
+                  QSizeF sz   = inspector->element()->getProperty(P_SIZE).toSizeF();
+                  qreal ratio = sz.width() / sz.height();
+
+                  qreal w     = b.scaleHeight->value() * ratio;
+                  b.scaleWidth->blockSignals(true);
+                  b.scaleWidth->setValue(w);
+                  b.scaleWidth->blockSignals(false);
+                  }
+            updateSizeFromScale(QSizeF(b3->value(), b4->value()));
+            }
+      else if (idx == SIZE_IS_SPATIUM) {
             QCheckBox* cb = static_cast<QCheckBox*>(iList[idx].w);
             qreal _spatium = inspector->element()->spatium();
             if (cb->isChecked()) {
@@ -104,8 +197,8 @@ void InspectorImage::valueChanged(int idx)
 void InspectorImage::setElement(Element* e)
       {
       Image* image = static_cast<Image*>(e);
-      QDoubleSpinBox* b1 = static_cast<QDoubleSpinBox*>(iList[1].w);
-      QDoubleSpinBox* b2 = static_cast<QDoubleSpinBox*>(iList[2].w);
+      QDoubleSpinBox* b1 = static_cast<QDoubleSpinBox*>(iList[SIZE_W].w);
+      QDoubleSpinBox* b2 = static_cast<QDoubleSpinBox*>(iList[SIZE_H].w);
       if (image->sizeIsSpatium()) {
             b1->setSuffix("sp");
             b2->setSuffix("sp");
@@ -114,6 +207,12 @@ void InspectorImage::setElement(Element* e)
             b1->setSuffix("mm");
             b2->setSuffix("mm");
             }
+      bool v = !image->autoScale();
+      b1->setEnabled(v);
+      b2->setEnabled(v);
+      iList[SCALE_H].w->setEnabled(v);
+      iList[SCALE_W].w->setEnabled(v);
+
       InspectorBase::setElement(e);
       }
 

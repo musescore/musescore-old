@@ -45,6 +45,7 @@ QVariant InspectorBase::getValue(int idx) const
 
       switch (propertyType(ii.t)) {
             case T_SIZE:
+            case T_SCALE:
             case T_SREAL:
             case T_REAL:      return w->property("value");
             case T_DIRECTION: return w->property("currentIndex");
@@ -66,6 +67,7 @@ void InspectorBase::setValue(int idx, const QVariant& val)
 
       switch (propertyType(ii.t)) {
             case T_SIZE:
+            case T_SCALE:
             case T_SREAL:
             case T_REAL:
                   static_cast<QDoubleSpinBox*>(w)->setValue(val.toDouble());
@@ -91,20 +93,15 @@ bool InspectorBase::isDefault(int idx)
       const InspectorItem& ii = item(idx);
 
       P_ID id      = ii.t;
+      P_TYPE t     = propertyType(id);
       QVariant val = getValue(idx);
-      void* def    = e->propertyDefault(id);
-
-      switch (propertyType(id)) {
-            case T_SREAL:
-            case T_REAL:      return val.toDouble() == *(qreal*)def;
-            case T_DIRECTION: return val.toInt() == *(int*)def;
-            case T_BOOL:      return val.toBool() == *(bool*)def;
-            case T_SIZE: {
-                  qreal v = ii.sv == 0 ? (*(QSizeF*)def).width() : (*(QSizeF*)def).height();
-                  return val.toDouble() == v;
-                  }
-            default:          abort();
+      QVariant def = e->propertyDefault(id);
+      if (t == T_SIZE || t == T_SCALE) {
+            QSizeF sz = def.toSizeF();
+            qreal v = ii.sv == 0 ? sz.width() : sz.height();
+            return val.toDouble() == v;
             }
+      return val == def;
       }
 
 //---------------------------------------------------------
@@ -145,7 +142,7 @@ void InspectorBase::setElement(Element* e)
             P_ID id        = item(i).t;
             P_TYPE pt      = propertyType(id);
             QVariant val;
-            if (pt == T_SIZE) {
+            if (pt == T_SIZE || pt == T_SCALE) {
                   QSizeF sz = e->getProperty(id).toSizeF();
                   if (item(i).sv == 0)
                         val = QVariant(sz.width());
@@ -179,7 +176,7 @@ void InspectorBase::apply()
             P_TYPE pt = propertyType(id);
 
             QVariant val1 = e->getProperty(id);
-            if (pt == T_SIZE) {
+            if (pt == T_SIZE || pt == T_SCALE) {
                   qreal v = getValue(i).toDouble();
                   QSizeF sz = val1.toSizeF();
                   if (item(i).sv == 0) {
@@ -208,21 +205,21 @@ void InspectorBase::apply()
 
 void InspectorBase::resetClicked(int i)
       {
-      Element* e = inspector->element();
-      P_ID id    = item(i).t;
-      void* def  = e->propertyDefault(id);
-      QWidget* w = item(i).w;
+      Element* e   = inspector->element();
+      P_ID id      = item(i).t;
+      QVariant def = e->propertyDefault(id);
+      QWidget* w   = item(i).w;
 
        switch (propertyType(id)) {
             case T_SREAL:
             case T_REAL:
-                  static_cast<QDoubleSpinBox*>(w)->setValue(*(qreal*)def);
+                  static_cast<QDoubleSpinBox*>(w)->setValue(def.toDouble());
                   break;
             case T_DIRECTION:
-                  static_cast<QComboBox*>(w)->setCurrentIndex(*(int*)def);
+                  static_cast<QComboBox*>(w)->setCurrentIndex(def.toInt());
                   break;
             case T_BOOL:
-                  static_cast<QCheckBox*>(w)->setChecked(*(bool*)def);
+                  static_cast<QCheckBox*>(w)->setChecked(def.toBool());
                   break;
             default:
                   abort();
@@ -247,6 +244,7 @@ void InspectorBase::mapSignals()
                   case T_REAL:
                   case T_SREAL:
                   case T_SIZE:
+                  case T_SCALE:
                         connect(w, SIGNAL(valueChanged(double)), valueMapper, SLOT(map()));
                         break;
                   case T_DIRECTION:
