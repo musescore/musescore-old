@@ -26,7 +26,7 @@ target_link_libraries(
       libmscore
       msynth
       ${QT_LIBRARIES}
-      QtTest
+      ${QT_QTTEST_LIBRARY}
       zarchive
       z
       rt

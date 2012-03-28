@@ -28,6 +28,15 @@ add_library(
       ${PROJECT_SOURCE_DIR}/mscore/exportmidi.cpp
       )
 
+add_executable(
+      mtest
+      mtest.cpp
+      )
+target_link_libraries(
+      mtest
+      ${QT_LIBRARIES}
+      )
+
 set_target_properties (
       testutils
       PROPERTIES
