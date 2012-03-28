@@ -3350,6 +3350,49 @@ static void determineTupletTypeAndCount(Tuplet* t, int& tupletType, int& tupletC
       }
 
 //---------------------------------------------------------
+//   determineTupletBaseLen
+//---------------------------------------------------------
+
+/**
+ Determine tuplet baseLen as determined by the tuplet ratio,
+ and type and number of smallest notes in the tuplet.
+
+ Example: baselen of a 3:2 tuplet with 1/16, 1/8, 1/8 and 1/16
+ is 1/8. For this tuplet smalles note is 1/16, count is 6.
+ */
+
+TDuration determineTupletBaseLen(Tuplet* t)
+      {
+      int tupletType  = 0; // smallest note type in the tuplet
+      int tupletCount = 0; // number of smallest notes in the tuplet
+
+      // first determine type and number of smallest notes in the tuplet
+      determineTupletTypeAndCount(t, tupletType, tupletCount);
+      qDebug("determineTupletBaseLen(%p) num/denom %d/%d smallest type %d count %d",
+             t, t->ratio().numerator(), t->ratio().denominator(), tupletType, tupletCount);
+
+      // sanity check:
+      // for a 3:2 tuplet, count must be a multiple of 3
+      if (tupletCount % t->ratio().numerator()) {
+            qDebug("determineTupletBaseLen(%p) cannot divide count %d by %d", t, tupletCount, t->ratio().numerator());
+            return TDuration();
+            }
+
+      // calculate baselen in smallest notes
+      tupletCount /= t->ratio().numerator();
+      qDebug("determineTupletBaseLen(%p) baselen type %d count %d", t, tupletType, tupletCount);
+
+      // normalize
+      while (tupletCount > 1 && (tupletCount % 2) == 0) {
+            tupletCount /= 2;
+            tupletType  -= 1;
+            }
+      qDebug("determineTupletBaseLen(%p) normalized baselen type %d count %d", t, tupletType, tupletCount);
+
+      return TDuration(TDuration::DurationType(tupletType));
+      }
+
+//---------------------------------------------------------
 //   isTupletFilled
 //---------------------------------------------------------
 
@@ -3535,11 +3578,10 @@ void xmlTuplet(Tuplet*& tuplet, ChordRest* cr, int ticks, QDomElement e)
                 || (actualNotes == 1 && normalNotes == 1)) {
                   qDebug("stop tuplet %p last chordrest %p", tuplet, cr);
                   // set baselen
-                  int tupletType  = 0; // smallest note type in the tuplet
-                  int tupletCount = 0; // number of smallest notes in the tuplet
-                  determineTupletTypeAndCount(tuplet, tupletType, tupletCount);
-                  qDebug("stop tuplet %p basetype %d", tuplet, tupletType);
-                  tuplet->setBaseLen(TDuration(TDuration::DurationType(tupletType)));
+                  TDuration td = determineTupletBaseLen(tuplet);
+                  td.print();
+                  // qDebug("stop tuplet %p basetype %d", tuplet, tupletType);
+                  tuplet->setBaseLen(td);
                   // TODO determine usefulness of following check
                   int totalDuration = 0;
                   foreach (DurationElement* de, tuplet->elements()) {
