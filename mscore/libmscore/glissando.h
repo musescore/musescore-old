@@ -23,7 +23,6 @@ class Note;
 //---------------------------------------------------------
 
 class Glissando : public Element {
-      Q_DECLARE_TR_FUNCTIONS(Glissando)
       int _subtype;
       QLineF line;
       QString _text;

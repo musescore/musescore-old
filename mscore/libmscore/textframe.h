@@ -21,8 +21,6 @@
 //---------------------------------------------------------
 
 class TBox : public VBox {
-      Q_DECLARE_TR_FUNCTIONS(TBox)
-
    public:
       TBox(Score* score);
       ~TBox() {}

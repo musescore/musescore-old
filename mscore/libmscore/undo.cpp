@@ -456,7 +456,7 @@ void Score::undoChangeKeySig(Staff* ostaff, int tick, KeySigEvent st)
             nks->changeKeySigEvent(st);
             nks->setParent(s);
             if (links == 0)
-                  links = new LinkedElements;
+                  links = new LinkedElements(score);
             links->append(nks);
             nks->setLinks(links);
 

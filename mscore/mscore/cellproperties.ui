@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>406</width>
+    <width>413</width>
     <height>161</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Chord Properties</string>
+   <string>Cell Properties</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <property name="spacing">

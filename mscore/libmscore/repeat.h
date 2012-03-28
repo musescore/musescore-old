@@ -52,8 +52,6 @@ enum MarkerType {
 //---------------------------------------------------------
 
 class Marker : public Text {
-      Q_DECLARE_TR_FUNCTIONS(Marker)
-
       MarkerType _markerType;
       QString _label;               ///< referenced from Jump() element
 
@@ -98,8 +96,6 @@ enum {
 //---------------------------------------------------------
 
 class Jump : public Text {
-      Q_DECLARE_TR_FUNCTIONS(Jump)
-
       QString _jumpTo;
       QString _playUntil;
       QString _continueAt;

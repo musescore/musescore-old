@@ -62,8 +62,6 @@ class NoteHead : public Symbol {
 */
 
 class Note : public Element {
-      Q_DECLARE_TR_FUNCTIONS(Note)
-
       int _subchannel;        ///< articulation
       int _line;              ///< y-Position; 0 - top line.
       int _fret;              ///< for tablature view

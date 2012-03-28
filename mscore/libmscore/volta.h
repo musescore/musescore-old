@@ -30,9 +30,6 @@ enum VoltaType {
 //---------------------------------------------------------
 
 class VoltaSegment : public TextLineSegment {
-      Q_DECLARE_TR_FUNCTIONS(VoltaSegment)
-
-   protected:
 
    public:
       VoltaSegment(Score* s) : TextLineSegment(s) {}

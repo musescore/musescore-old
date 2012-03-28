@@ -3,7 +3,7 @@
 //  Music Composition & Notation
 //  $Id$
 //
-//  Copyright (C) 2007-2011 Werner Schweer
+//  Copyright (C) 2007-2012 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2
@@ -165,36 +165,17 @@ bool Image::setProperty(P_ID propertyId, const QVariant& v)
       }
 
 //---------------------------------------------------------
-//   setProperty
-//---------------------------------------------------------
-
-bool Image::setProperty(const QString& name, const QDomElement& e)
-      {
-      if (name == "autoScale")
-            setProperty(P_AUTOSCALE, ::getProperty(P_AUTOSCALE, e));
-      else if (name == "size")
-            setProperty(P_SIZE, ::getProperty(P_SIZE, e));
-      else if (name == "lockAspectRatio")
-            setProperty(P_LOCK_ASPECT_RATIO, ::getProperty(P_LOCK_ASPECT_RATIO, e));
-      else if (name == "sizeIsSpatium")
-            setProperty(P_SIZE_IS_SPATIUM, ::getProperty(P_SIZE_IS_SPATIUM, e));
-      else
-            return Element::setProperty(name, e);
-      return true;
-      }
-
-//---------------------------------------------------------
 //   propertyDefault
 //---------------------------------------------------------
 
 QVariant Image::propertyDefault(P_ID id) const
       {
       switch(id) {
-            case P_AUTOSCALE:             return defaultAutoScale;
-            case P_SIZE:                  break;
-            case P_LOCK_ASPECT_RATIO:     return defaultLockAspectRatio;
-            case P_SIZE_IS_SPATIUM:       return defaultSizeIsSpatium;
-            default:                      return Element::propertyDefault(id);
+            case P_AUTOSCALE:         return defaultAutoScale;
+            case P_SIZE:              break;
+            case P_LOCK_ASPECT_RATIO: return defaultLockAspectRatio;
+            case P_SIZE_IS_SPATIUM:   return defaultSizeIsSpatium;
+            default:                  return Element::propertyDefault(id);
             }
       return QVariant();
       }
@@ -279,8 +260,14 @@ void Image::read(const QDomElement& de)
 
       for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
-            if (setProperty(tag, e))
-                  ;
+            if (tag == "autoScale")
+                  setProperty(P_AUTOSCALE, ::getProperty(P_AUTOSCALE, e));
+            else if (tag == "size")
+                  setProperty(P_SIZE, ::getProperty(P_SIZE, e));
+            else if (tag == "lockAspectRatio")
+                  setProperty(P_LOCK_ASPECT_RATIO, ::getProperty(P_LOCK_ASPECT_RATIO, e));
+            else if (tag == "sizeIsSpatium")
+                  setProperty(P_SIZE_IS_SPATIUM, ::getProperty(P_SIZE_IS_SPATIUM, e));
             else if (tag == "path") {
                   _path = e.text();
                   _storeItem = imageStore.getImage(_path);
@@ -354,23 +341,6 @@ void Image::updateGrips(int* grips, QRectF* grip) const
       }
 
 //---------------------------------------------------------
-//   gripAnchor
-//---------------------------------------------------------
-
-QPointF Image::gripAnchor(int) const
-      {
-      return QPointF();
-      }
-
-//---------------------------------------------------------
-//   endEdit
-//---------------------------------------------------------
-
-void Image::endEdit()
-      {
-      }
-
-//---------------------------------------------------------
 //   SvgImage
 //---------------------------------------------------------
 
@@ -435,32 +405,6 @@ void SvgImage::layout()
                   }
             }
       Image::layout();
-      }
-
-//---------------------------------------------------------
-//   RasterImage
-//---------------------------------------------------------
-
-RasterImage::RasterImage(Score* s)
-   : Image(s)
-      {
-      }
-
-//---------------------------------------------------------
-//   RasterImage
-//---------------------------------------------------------
-
-RasterImage::~RasterImage()
-      {
-      }
-
-//---------------------------------------------------------
-//   clone
-//---------------------------------------------------------
-
-RasterImage* RasterImage::clone() const
-      {
-      return new RasterImage(*this);
       }
 
 //---------------------------------------------------------

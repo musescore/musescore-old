@@ -26,8 +26,6 @@ class TDuration;
 //---------------------------------------------------------
 
 class Rest : public ChordRest {
-      Q_DECLARE_TR_FUNCTIONS(Rest)
-
       // values calculated by layout:
       int _sym;
       int dotline;            // depends on rest symbol

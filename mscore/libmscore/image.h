@@ -3,7 +3,7 @@
 //  Music Composition & Notation
 //  $Id$
 //
-//  Copyright (C) 2002-2011 Werner Schweer
+//  Copyright (C) 2002-2012 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2
@@ -24,8 +24,6 @@ class ImageStoreItem;
 //---------------------------------------------------------
 
 class Image : public BSymbol {
-      Q_DECLARE_TR_FUNCTIONS(Image)
-
       void write(Xml& xml, P_ID id) const;
 
    protected:
@@ -40,10 +38,9 @@ class Image : public BSymbol {
 
       virtual bool isEditable() const { return true; }
       virtual void editDrag(const EditData&);
-      virtual void endEdit();
       void draw(QPainter*, QSize size) const;
       virtual void updateGrips(int*, QRectF*) const;
-      virtual QPointF gripAnchor(int grip) const;
+      virtual QPointF gripAnchor(int grip) const { return QPointF(); }
       virtual QSizeF imageSize() const = 0;
 
    public:
@@ -73,7 +70,6 @@ class Image : public BSymbol {
 
       QVariant getProperty(P_ID ) const;
       bool setProperty(P_ID propertyId, const QVariant&);
-      bool setProperty(const QString& name, const QDomElement&);
       QVariant propertyDefault(P_ID id) const;
       };
 
@@ -85,9 +81,9 @@ class RasterImage : public Image {
       QImage doc;
 
    public:
-      RasterImage(Score*);
-      ~RasterImage();
-      virtual RasterImage* clone() const;
+      RasterImage(Score* s) : Image(s) {}
+      ~RasterImage() {}
+      virtual RasterImage* clone() const { return new RasterImage(*this); }
       virtual void draw(QPainter*) const;
       virtual QSizeF imageSize() const { return doc.size(); }
       virtual void layout();

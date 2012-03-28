@@ -83,8 +83,6 @@ enum {
 //---------------------------------------------------------
 
 class Measure : public MeasureBase {
-      Q_DECLARE_TR_FUNCTIONS(Measure)
-
       SegmentList _segments;
 
       Fraction _timesig;

@@ -50,8 +50,6 @@ enum {
 //---------------------------------------------------------
 
 class SlurSegment : public SpannerSegment {
-      Q_DECLARE_TR_FUNCTIONS(SlurSegment)
-
    protected:
       struct UP ups[SLUR_GRIPS];
       QPainterPath path;
