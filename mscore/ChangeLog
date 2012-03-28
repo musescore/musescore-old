@@ -1,3 +1,7 @@
+28.3 (ws)
+      - removed image property popup
+      - added image scale to inspector panel. This implementation replaces
+        the patch from Miwarre (#14900)
 24.3 (lv)
       - fix #14143 [MusicXML] [Trunk] Title, Subtitle, Composer and Lyricist not exported
         now also works for text created by menu Create / Text

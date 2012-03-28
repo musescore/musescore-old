@@ -26,14 +26,6 @@ static bool defaultAutoScale       = false;
 static bool defaultLockAspectRatio = true;
 static bool defaultSizeIsSpatium   = true;
 
-Property<Image> Image::propertyList[] = {
-      { P_AUTOSCALE,         &Image::pAutoScale,       &defaultAutoScale },
-      { P_SIZE,              &Image::pSize,            0 },
-      { P_LOCK_ASPECT_RATIO, &Image::pLockAspectRatio, &defaultLockAspectRatio },
-      { P_SIZE_IS_SPATIUM,   &Image::pSizeIsSpatium,   &defaultSizeIsSpatium   },
-      { P_END, 0, 0 },
-      };
-
 //---------------------------------------------------------
 //   Image
 //---------------------------------------------------------
@@ -73,7 +65,139 @@ Image::~Image()
             _storeItem->dereference(this);
       }
 
-PROPERTY_FUNCTIONS(Image)
+//---------------------------------------------------------
+//   scale
+//    return image scale in percent
+//---------------------------------------------------------
+
+QSizeF Image::scale() const
+      {
+      return scaleForSize(size());
+      }
+
+//---------------------------------------------------------
+//   setScale
+//---------------------------------------------------------
+
+void Image::setScale(const QSizeF& scale)
+      {
+      setSize(sizeForScale(scale));
+      }
+
+//---------------------------------------------------------
+//   scaleForSize
+//---------------------------------------------------------
+
+QSizeF Image::scaleForSize(const QSizeF& s) const
+      {
+      QSizeF sz = s * (_sizeIsSpatium ? spatium() : DPMM);
+      return QSizeF(
+         (sz.width()  * 100.0)/ imageSize().width(),
+         (sz.height() * 100.0)/ imageSize().height()
+         );
+      }
+
+//---------------------------------------------------------
+//   sizeForScale
+//---------------------------------------------------------
+
+QSizeF Image::sizeForScale(const QSizeF& scale) const
+      {
+      QSizeF s = scale / 100.0;
+      qreal sz = _sizeIsSpatium ? spatium() : DPMM;
+      QSizeF oSize = imageSize() / sz;
+      return QSizeF(s.width() * oSize.width(), s.height() * oSize.height());
+      }
+
+//---------------------------------------------------------
+//   getProperty
+//---------------------------------------------------------
+
+QVariant Image::getProperty(P_ID propertyId) const
+      {
+      switch(propertyId) {
+            case P_AUTOSCALE:
+                  return autoScale();
+            case P_SIZE:
+                  return size();
+            case P_SCALE:
+                  return scale();
+            case P_LOCK_ASPECT_RATIO:
+                  return lockAspectRatio();
+            case P_SIZE_IS_SPATIUM:
+                  return sizeIsSpatium();
+            default:
+                  return Element::getProperty(propertyId);
+            }
+      }
+
+//---------------------------------------------------------
+//   setProperty
+//---------------------------------------------------------
+
+bool Image::setProperty(P_ID propertyId, const QVariant& v)
+      {
+      bool rv = true;
+      score()->addRefresh(canvasBoundingRect());
+      switch(propertyId) {
+            case P_AUTOSCALE:
+                  setAutoScale(v.toBool());
+                  break;
+            case P_SIZE:
+                  setSize(v.toSize());
+                  break;
+            case P_SCALE:
+                  setScale(v.toSize());
+                  break;
+            case P_LOCK_ASPECT_RATIO:
+                  setLockAspectRatio(v.toBool());
+                  break;
+            case P_SIZE_IS_SPATIUM:
+                  setSizeIsSpatium(v.toBool());
+                  break;
+            default:
+                  rv = Element::setProperty(propertyId, v);
+                  break;
+            }
+      setGenerated(false);
+      score()->setLayoutAll(true);
+      return rv;
+      }
+
+//---------------------------------------------------------
+//   setProperty
+//---------------------------------------------------------
+
+bool Image::setProperty(const QString& name, const QDomElement& e)
+      {
+      if (name == "autoScale")
+            setProperty(P_AUTOSCALE, ::getProperty(P_AUTOSCALE, e));
+      else if (name == "size")
+            setProperty(P_SIZE, ::getProperty(P_SIZE, e));
+      else if (name == "lockAspectRatio")
+            setProperty(P_LOCK_ASPECT_RATIO, ::getProperty(P_LOCK_ASPECT_RATIO, e));
+      else if (name == "sizeIsSpatium")
+            setProperty(P_SIZE_IS_SPATIUM, ::getProperty(P_SIZE_IS_SPATIUM, e));
+      else
+            return Element::setProperty(name, e);
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyDefault
+//---------------------------------------------------------
+
+QVariant Image::propertyDefault(P_ID id) const
+      {
+      switch(id) {
+            case P_AUTOSCALE:             return defaultAutoScale;
+            case P_SIZE:                  break;
+            case P_LOCK_ASPECT_RATIO:     return defaultLockAspectRatio;
+            case P_SIZE_IS_SPATIUM:       return defaultSizeIsSpatium;
+            default:                      return Element::propertyDefault(id);
+            }
+      return QVariant();
+      }
 
 //---------------------------------------------------------
 //   draw
@@ -121,12 +245,26 @@ void Image::draw(QPainter* painter, QSize size) const
 //   write
 //---------------------------------------------------------
 
+void Image::write(Xml& xml, P_ID id) const
+      {
+      xml.tag(propertyName(id), getProperty(id), propertyDefault(id));
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
 void Image::write(Xml& xml) const
       {
       xml.stag("Image");
       Element::writeProperties(xml);
       xml.tag("path", _storeItem ? _storeItem->hashName() : _path);
-      WRITE_PROPERTIES(Image)
+
+      write(xml, P_AUTOSCALE);
+      write(xml, P_SIZE);
+      write(xml, P_LOCK_ASPECT_RATIO);
+      write(xml, P_SIZE_IS_SPATIUM);
+
       xml.etag();
       }
 
@@ -315,6 +453,10 @@ RasterImage::RasterImage(Score* s)
 RasterImage::~RasterImage()
       {
       }
+
+//---------------------------------------------------------
+//   clone
+//---------------------------------------------------------
 
 RasterImage* RasterImage::clone() const
       {

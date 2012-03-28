@@ -75,6 +75,7 @@ enum P_ID {
       P_LAYOUT_BREAK,
       P_AUTOSCALE,
       P_SIZE,
+      P_SCALE,
       P_LOCK_ASPECT_RATIO,
       P_SIZE_IS_SPATIUM,
       P_TEXT_STYLE,
@@ -91,6 +92,7 @@ enum P_TYPE {
       T_FRACTION,
       T_POINT,
       T_SIZE,
+      T_SCALE,
       T_COLOR,
       T_DIRECTION,      // enum Direction
       T_DIRECTION_H,    // enum DirectionH
@@ -99,9 +101,8 @@ enum P_TYPE {
       };
 
 extern QVariant getProperty(P_ID type, const QDomElement& e);
-
 extern P_TYPE propertyType(P_ID);
-const char* propertyName(P_ID);
+extern const char* propertyName(P_ID);
 
 //---------------------------------------------------------
 //   template Property
@@ -162,7 +163,7 @@ Property<T>* property(Property<T>* list, const QString& name)
       virtual bool setProperty(P_ID propertyId, const QVariant&);                \
       virtual bool setProperty(const QString&, const QDomElement&);              \
       Property<T>* property(P_ID id) const;                                      \
-      virtual void* propertyDefault(P_ID) const;                                 \
+      virtual QVariant propertyDefault(P_ID) const;                              \
       static Property<T> propertyList[];
 
 
@@ -210,18 +211,18 @@ bool T::setProperty(const QString& name, const QDomElement& e)                  
             if (id == P_END)                                                     \
                   break;                                                         \
             if (propertyName(id) == name) {                                      \
-                  QVariant v = ::getProperty(propertyList[i].id, e);             \
-                  setVariant(propertyList[i].id, ((*this).*(propertyList[i].data))(), v); \
+                  QVariant v = ::getProperty(id, e);                             \
+                  setVariant(id, ((*this).*(propertyList[i].data))(), v);        \
                   setGenerated(false);                                           \
                   return true;                                                   \
                   }                                                              \
             }                                                                    \
       return Element::setProperty(name, e);                                      \
       }                                                                          \
-void*  T::propertyDefault(P_ID id) const                                         \
+QVariant T::propertyDefault(P_ID id) const                                       \
       {                                                                          \
       Property<T>* p = property(id);                                             \
-      return p->defaultVal;                                                      \
+      return getVariant(id, p->defaultVal);                                      \
       }
 
 #endif

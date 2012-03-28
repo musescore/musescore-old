@@ -361,9 +361,9 @@ bool Box::setProperty(const QString& name, const QDomElement& e)
 //   propertyDefault
 //---------------------------------------------------------
 
-void* Box::propertyDefault(P_ID id) const
+QVariant Box::propertyDefault(P_ID id) const
       {
-      return property(id)->defaultVal;
+      return getVariant(id, property(id)->defaultVal);
       }
 
 //---------------------------------------------------------

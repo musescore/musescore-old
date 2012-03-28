@@ -26,6 +26,8 @@ class ImageStoreItem;
 class Image : public BSymbol {
       Q_DECLARE_TR_FUNCTIONS(Image)
 
+      void write(Xml& xml, P_ID id) const;
+
    protected:
       ImageStoreItem* _storeItem;
       QString _path;
@@ -44,11 +46,6 @@ class Image : public BSymbol {
       virtual QPointF gripAnchor(int grip) const;
       virtual QSizeF imageSize() const = 0;
 
-      void* pAutoScale()       { return &_autoScale;       }
-      void* pSize()            { return &_size;            }
-      void* pLockAspectRatio() { return &_lockAspectRatio; }
-      void* pSizeIsSpatium()   { return &_sizeIsSpatium;   }
-
    public:
       Image(Score*);
       Image(const Image&);
@@ -62,13 +59,22 @@ class Image : public BSymbol {
       void setSize(const QSizeF& s)     { _size = s;    }
       QSizeF size() const               { return _size; }
       bool lockAspectRatio() const      { return _lockAspectRatio; }
-      void setLockAspectRatio(bool v)   { _lockAspectRatio = v; }
-      bool autoScale() const            { return _autoScale; }
-      void setAutoScale(bool v)         { _autoScale = v; }
-      ImageStoreItem* storeItem() const { return _storeItem; }
+      void setLockAspectRatio(bool v)   { _lockAspectRatio = v;  }
+      bool autoScale() const            { return _autoScale;     }
+      void setAutoScale(bool v)         { _autoScale = v;        }
+      ImageStoreItem* storeItem() const { return _storeItem;     }
       bool sizeIsSpatium() const        { return _sizeIsSpatium; }
+      void setSizeIsSpatium(bool val)   { _sizeIsSpatium = val;  }
 
-      PROPERTY_DECLARATIONS(Image)
+      QSizeF scale() const;
+      void setScale(const QSizeF&);
+      QSizeF scaleForSize(const QSizeF&) const;
+      QSizeF sizeForScale(const QSizeF&) const;
+
+      QVariant getProperty(P_ID ) const;
+      bool setProperty(P_ID propertyId, const QVariant&);
+      bool setProperty(const QString& name, const QDomElement&);
+      QVariant propertyDefault(P_ID id) const;
       };
 
 //---------------------------------------------------------
