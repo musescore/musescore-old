@@ -1847,7 +1847,7 @@ Text* Score::getText(int /*subtype*/)
 //   rootScore
 //---------------------------------------------------------
 
-inline Score* Score::rootScore()
+Score* Score::rootScore()
       {
       Score* score = this;
       while (score->parentScore())
@@ -1855,7 +1855,7 @@ inline Score* Score::rootScore()
       return score;
       }
 
-inline const Score* Score::rootScore() const
+const Score* Score::rootScore() const
       {
       const Score* score = this;
       while (score->parentScore())
