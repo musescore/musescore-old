@@ -1,4 +1,8 @@
 28.3 (ws)
+      - fix #14855: Properties windows of objects in palette are all
+        titled 'Chord Properties'
+      - Do linkId counting on a per score instance base. Hopefully this eases
+        regression testing.
       - removed image property popup
       - added image scale to inspector panel. This implementation replaces
         the patch from Miwarre (#14900)

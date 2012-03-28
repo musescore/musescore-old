@@ -27,11 +27,7 @@ class Text;
 //---------------------------------------------------------
 
 class TextLineSegment : public LineSegment {
-   Q_DECLARE_TR_FUNCTIONS(TextLineSegment)
-
-   Text* _text;
-
-   protected:
+      Text* _text;
 
    public:
       TextLineSegment(Score* s);

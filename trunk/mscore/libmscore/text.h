@@ -30,8 +30,6 @@ class Text : public SimpleText {
       QTextDocument* _doc;
       int _styleIndex;
 
-      Q_DECLARE_TR_FUNCTIONS(Text)
-
       void createDoc();
       void setUnstyledText(const QString& s);
       void layoutEdit();

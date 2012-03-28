@@ -214,6 +214,7 @@ enum ViewMode {
 //---------------------------------------------------------
 
 class Score {
+      int _linkId;
       Score* _parentScore;          // set if score is an excerpt (part)
       QReadWriteLock _layoutLock;
       QList<MuseScoreView*> viewer;
@@ -883,10 +884,12 @@ class Score {
       MeasureBase* insertMeasure(ElementType type, MeasureBase*);
       bool testMode() const        { return _testMode; }
       void setTestMode(bool val)   { _testMode = val;  }
-      Audio* audio() const         { return _audio; }
-      void setAudio(Audio* a)      { _audio = a;    }
+      Audio* audio() const         { return _audio;    }
+      void setAudio(Audio* a)      { _audio = a;       }
       PlayMode playMode() const    { return _playMode; }
-      void setPlayMode(PlayMode v) { _playMode = v; }
+      void setPlayMode(PlayMode v) { _playMode = v;    }
+      int linkId();
+      void linkId(int);
       };
 
 extern Score* gscore;

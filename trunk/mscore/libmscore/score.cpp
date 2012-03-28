@@ -260,6 +260,7 @@ void MeasureBaseList::change(MeasureBase* ob, MeasureBase* nb)
 
 void Score::init()
       {
+      _linkId         = 0;
       _testMode       = false;
       _parentScore    = 0;
       _currentLayer   = 0;
@@ -1846,7 +1847,7 @@ Text* Score::getText(int /*subtype*/)
 //   rootScore
 //---------------------------------------------------------
 
-Score* Score::rootScore()
+inline Score* Score::rootScore()
       {
       Score* score = this;
       while (score->parentScore())
@@ -1854,7 +1855,7 @@ Score* Score::rootScore()
       return score;
       }
 
-const Score* Score::rootScore() const
+inline const Score* Score::rootScore() const
       {
       const Score* score = this;
       while (score->parentScore())
@@ -3231,3 +3232,17 @@ void Score::setLayoutMode(LayoutMode lm)
       setUpdateAll(true);
       }
 
+//---------------------------------------------------------
+//   linkId
+//---------------------------------------------------------
+
+int Score::linkId()
+      {
+      return rootScore()->_linkId++;
+      }
+
+void Score::linkId(int val)
+      {
+      if (val > rootScore()->_linkId)
+            rootScore()->_linkId = val;
+      }

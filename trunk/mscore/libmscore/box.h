@@ -99,8 +99,6 @@ class Box : public MeasureBase {
 //---------------------------------------------------------
 
 class HBox : public Box {
-      Q_DECLARE_TR_FUNCTIONS(HBox)
-
    public:
       HBox(Score* score);
       ~HBox() {}
@@ -120,8 +118,6 @@ class HBox : public Box {
 //---------------------------------------------------------
 
 class VBox : public Box {
-      Q_DECLARE_TR_FUNCTIONS(VBox)
-
    public:
       VBox(Score* score);
       ~VBox() {}
@@ -139,8 +135,6 @@ class VBox : public Box {
 //---------------------------------------------------------
 
 class TBox : public VBox {
-      Q_DECLARE_TR_FUNCTIONS(TBox)
-
    public:
       TBox(Score* score);
       ~TBox() {}
@@ -158,8 +152,6 @@ class TBox : public VBox {
 //---------------------------------------------------------
 
 class FBox : public VBox {
-      Q_DECLARE_TR_FUNCTIONS(FBox)
-
    public:
       FBox(Score* score) : VBox(score) {}
       ~FBox() {}

@@ -856,7 +856,7 @@ bool Score::read1(const QDomElement& de)
             }
       int id = 1;
       foreach(LinkedElements* le, _elinks)
-            le->setLid(id++);
+            le->setLid(this, id++);
       _elinks.clear();
       _mscVersion = MSCVERSION;     // for later drag & drop usage
       return true;

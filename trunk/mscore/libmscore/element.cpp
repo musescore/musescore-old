@@ -172,8 +172,6 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "Ossia")
       };
 
-int LinkedElements::_linkId = 0;    // highest id in use
-
 static bool defaultVisible = true;
 static bool defaultSelected = false;
 
@@ -206,27 +204,25 @@ Property<Element> Element::propertyList[] = {
 //   LinkedElements
 //---------------------------------------------------------
 
-LinkedElements::LinkedElements()
+LinkedElements::LinkedElements(Score* score)
       {
-      _lid = ++_linkId; // create new unique id
+      _lid = score->linkId(); // create new unique id
       }
 
-LinkedElements::LinkedElements(int id)
+LinkedElements::LinkedElements(Score* score, int id)
       {
       _lid = id;
-      if (_linkId <= id)
-            _linkId = id;
+      score->linkId(id);
       }
 
 //---------------------------------------------------------
 //   setLid
 //---------------------------------------------------------
 
-void LinkedElements::setLid(int id)
+void LinkedElements::setLid(Score* score, int id)
       {
       _lid = id;
-      if (_linkId <= id)
-            _linkId = id;
+      score->linkId(id);
       }
 
 //---------------------------------------------------------
@@ -360,7 +356,7 @@ void Element::linkTo(Element* element)
                   Q_ASSERT(_links->contains(element));
                   }
             else {
-                  _links = new LinkedElements;
+                  _links = new LinkedElements(score());
                   _links->append(element);
                   element->setLinks(_links);
                   }
@@ -686,7 +682,7 @@ bool Element::readProperties(const QDomElement& e)
                   int i = val.toInt();
                   if (score()->parentScore())   // DEBUG
                         qDebug("---link %d not found (%d)\n", i, score()->links().size());
-                  _links = new LinkedElements(i);
+                  _links = new LinkedElements(score(), i);
                   score()->links().insert(i, _links);
                   }
             _links->append(this);

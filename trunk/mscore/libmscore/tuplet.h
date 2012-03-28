@@ -39,8 +39,6 @@ class Tuplet : public DurationElement {
       enum { AUTO_BRACKET, SHOW_BRACKET, SHOW_NO_BRACKET };
 
    private:
-      Q_DECLARE_TR_FUNCTIONS(Tuplet)
-
       QList<DurationElement*> _elements;
       int _numberType;
       int _bracketType;

@@ -21,7 +21,6 @@
 //---------------------------------------------------------
 
 class TempoText : public Text  {
-      Q_DECLARE_TR_FUNCTIONS(TempoText)
       qreal _tempo;          // beats per second
       bool _followText;       // parse text to determine tempo
 

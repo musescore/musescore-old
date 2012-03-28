@@ -38,8 +38,6 @@ struct Dyn {
 //---------------------------------------------------------
 
 class Dynamic : public Text {
-      Q_DECLARE_TR_FUNCTIONS(Dynamic)
-
       int _subtype;
 
       mutable QPointF dragOffset;

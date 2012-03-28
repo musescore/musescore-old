@@ -78,13 +78,12 @@ class Space {
 //---------------------------------------------------------
 
 class LinkedElements : public QList<Element*> {
-      static int _linkId;
       int _lid;                     // unique id for every linked list
 
    public:
-      LinkedElements();
-      LinkedElements(int id);
-      void setLid(int val);
+      LinkedElements(Score*);
+      LinkedElements(Score*, int id);
+      void setLid(Score*, int val);
       int lid() const                         { return _lid;                }
       };
 
@@ -127,8 +126,6 @@ struct EditData {
 //---------------------------------------------------------
 
 class Element {
-      Q_DECLARE_TR_FUNCTIONS(Element)
-
       LinkedElements* _links;
       Element* _parent;
 
