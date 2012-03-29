@@ -13,6 +13,7 @@
 
 #include "segmentlist.h"
 #include "segment.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   clone
@@ -63,7 +64,7 @@ void SegmentList::check()
             qFatal("SegmentList::check: bad last");
             }
       if (n != _size) {
-            qDebug("SegmentList::check: count %d but _size is %d", n, _size);
+            qDebug("SegmentList::check: counted %d but _size is %d", n, _size);
             _size = n;
             abort();
             }
@@ -80,6 +81,8 @@ void SegmentList::check()
 
 void SegmentList::insert(Segment* e, Segment* el)
       {
+      if (e->score()->undoRedo())
+            qFatal("SegmentList:insert in undo/redo");
       if (el == 0)
             push_back(e);
       else if (el == first())
@@ -100,6 +103,8 @@ void SegmentList::insert(Segment* e, Segment* el)
 
 void SegmentList::remove(Segment* el)
       {
+      if (el->score()->undoRedo())
+            qFatal("SegmentList:remove in undo/redo");
       --_size;
       if (el == _first) {
             _first = _first->next();

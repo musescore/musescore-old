@@ -2492,8 +2492,6 @@ bool Measure::createEndBarLines()
                         BarLine* bl1 = seg ? static_cast<BarLine*>(seg->element(track)) : 0;
                         if (bl1) {
                               score()->undoRemoveElement(bl1);
-                              // seg->setElement(track, 0);
-                              // delete bl1;
                               changed = true;
                               }
                         continue;
@@ -2521,11 +2519,10 @@ bool Measure::createEndBarLines()
                         aspan = 0;
                         }
                   else {
+                        // remove unecessary barlines
                         BarLine* bl1 = seg ? static_cast<BarLine*>(seg->element(track)) : 0;
                         if (bl1) {
                               score()->undoRemoveElement(bl1);
-                              // seg->setElement(track, 0);
-                              // delete bl1;
                               changed = true;
                               }
                         }

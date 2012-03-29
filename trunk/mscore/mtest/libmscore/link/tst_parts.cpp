@@ -42,6 +42,8 @@ class TestParts : public QObject, public MTest
       void createPart2();
       void createPartBreath();
       void addBreath();
+      void undoAddBreath();
+      void undoRedoAddBreath();
       void appendMeasure();
       void insertMeasure();
       };
@@ -195,6 +197,72 @@ void TestParts::addBreath()
 
       QVERIFY(saveCompareScore(score, "part4.mscx", DIR + "part4o.mscx"));
       }
+
+//---------------------------------------------------------
+//   undoAddBreath
+//---------------------------------------------------------
+
+void TestParts::undoAddBreath()
+      {
+      Score* score = readScore(DIR + "part1-2o.mscx");
+      score->doLayout();
+      foreach(Excerpt* e, score->excerpts())
+            e->score()->doLayout();
+
+      Measure* m = score->firstMeasure();
+      Segment* s = m->tick2segment(480, false);
+      Chord* chord = static_cast<Chord*>(s->element(0));
+      Note* note   = chord->upNote();
+      DropData dd;
+      dd.view = 0;
+      Breath* b = new Breath(score);
+      b->setSubtype(0);
+      dd.element = b;
+      score->startCmd();
+      note->drop(dd);
+      score->setLayoutAll(true);
+      score->endCmd();        // does layout
+
+      score->undo()->undo();
+      score->endUndoRedo();
+
+      QVERIFY(saveCompareScore(score, "part5.mscx", DIR + "part5o.mscx"));
+      }
+
+//---------------------------------------------------------
+//   undoRedoAddBreath
+//---------------------------------------------------------
+
+void TestParts::undoRedoAddBreath()
+      {
+      Score* score = readScore(DIR + "part1-2o.mscx");
+      score->doLayout();
+      foreach(Excerpt* e, score->excerpts())
+            e->score()->doLayout();
+
+      Measure* m = score->firstMeasure();
+      Segment* s = m->tick2segment(480, false);
+      Chord* chord = static_cast<Chord*>(s->element(0));
+      Note* note   = chord->upNote();
+      DropData dd;
+      dd.view = 0;
+      Breath* b = new Breath(score);
+      b->setSubtype(0);
+      dd.element = b;
+      score->startCmd();
+      note->drop(dd);
+      score->setLayoutAll(true);
+      score->endCmd();
+
+      score->undo()->undo();
+      score->endUndoRedo();
+
+      score->undo()->redo();
+      score->endUndoRedo();
+
+      QVERIFY(saveCompareScore(score, "part6.mscx", DIR + "part6o.mscx"));
+      }
+
 
 QTEST_MAIN(TestParts)
 
