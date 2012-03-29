@@ -1,6 +1,8 @@
 29.3 (ws)
       - linked parts: implement add/remove Breath
-28.3 (ws)
+28.3 (lv)
+      - fix #15042: [MusicXML] [trunk] Export/import of uneven tuplets (16th, eighth, eighth, 16th)
+     (ws)
       - fix #14855: Properties windows of objects in palette are all
         titled 'Chord Properties'
       - Do linkId counting on a per score instance base. Hopefully this eases
