@@ -1020,14 +1020,9 @@ void Score::undoAddElement(Element* element)
                   }
             else if (element->type() == BREATH) {
                   Breath* breath   = static_cast<Breath*>(element);
-                  Segment* segment = breath->segment();
-                  int tick         = segment->tick();
+                  int tick         = breath->segment()->tick();
                   Measure* m       = score->tick2measure(tick);
-                  Segment* seg     = m->findSegment(SegBreath, tick);
-                  if (seg == 0) {
-                        seg = new Segment(m, SegBreath, tick);
-                        score->undoAddElement(seg);
-                        }
+                  Segment* seg     = m->undoGetSegment(SegBreath, tick);
                   Breath* nbreath  = static_cast<Breath*>(ne);
                   int ntrack       = staffIdx * VOICES + nbreath->voice();
                   nbreath->setScore(score);

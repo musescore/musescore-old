@@ -192,7 +192,7 @@ void Score::endUndoRedo()
       Score* score = rootScore();
       if (score->layoutAll()) {
             score->setUndoRedo(true);
-            score->doLayout();           // TODO: does not really work
+            score->doLayout();                  // TODO: does not really work
             score->setUndoRedo(false);
             score->setUpdateAll(true);
             score->setPlaylistDirty(true);
@@ -202,6 +202,7 @@ void Score::endUndoRedo()
             if (score->layoutAll()) {
                   score->setUndoRedo(true);
                   score->doLayout();           // TODO: does not really work
+                                               // creation/deletion of elements are not allowed
                   score->setUndoRedo(false);
                   score->setUpdateAll(true);
                   }
