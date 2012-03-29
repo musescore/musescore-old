@@ -17,6 +17,10 @@
 #include "libmscore/part.h"
 #include "libmscore/undo.h"
 #include "libmscore/measure.h"
+#include "libmscore/chord.h"
+#include "libmscore/note.h"
+#include "libmscore/breath.h"
+#include "libmscore/segment.h"
 #include "mtest/testutils.h"
 
 #define DIR QString("libmscore/link/")
@@ -36,6 +40,8 @@ class TestParts : public QObject, public MTest
       void initTestCase();
       void createPart1();
       void createPart2();
+      void createPartBreath();
+      void addBreath();
       void appendMeasure();
       void insertMeasure();
       };
@@ -144,7 +150,7 @@ void TestParts::insertMeasure()
       }
 
 //---------------------------------------------------------
-//   createPart1
+//   test part creation
 //---------------------------------------------------------
 
 void TestParts::createPart1()
@@ -152,17 +158,44 @@ void TestParts::createPart1()
       testPartCreation("part1");
       }
 
-//---------------------------------------------------------
-//   createPart2
-//---------------------------------------------------------
-
 void TestParts::createPart2()
       {
       testPartCreation("part2");
       }
 
+void TestParts::createPartBreath()
+      {
+      testPartCreation("part3");
+      }
+
+//---------------------------------------------------------
+//   test creation of elements
+//---------------------------------------------------------
+
+void TestParts::addBreath()
+      {
+      Score* score = readScore(DIR + "part1-2o.mscx");
+      Measure* m = score->firstMeasure();
+      Segment* s = m->tick2segment(480, false);
+      Chord* chord = static_cast<Chord*>(s->element(0));
+      Note* note   = chord->upNote();
+      DropData dd;
+      dd.view = 0;
+      Breath* b = new Breath(score);
+      b->setSubtype(0);
+      dd.element = b;
+      note->drop(dd);
+
+      chord = static_cast<Chord*>(s->element(4));
+      note   = chord->upNote();
+      b = new Breath(score);
+      b->setSubtype(0);
+      dd.element = b;
+      note->drop(dd);
+
+      QVERIFY(saveCompareScore(score, "part4.mscx", DIR + "part4o.mscx"));
+      }
+
 QTEST_MAIN(TestParts)
 
 #include "tst_parts.moc"
-
-

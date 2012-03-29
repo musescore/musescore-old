@@ -498,8 +498,8 @@ void PageFormat::read(const QDomElement& de)
                   _size.rheight() = val.toDouble() * 0.5 / PPI;
             else if (tag == "page-width")
                   _size.rwidth() = val.toDouble() * .5 / PPI;
-//            else if (tag == "page-offset")            // obsolete, moved to Score
-//                  score->setPageNumberOffset(val.toInt());
+            else if (tag == "page-offset")            // obsolete, moved to Score
+                  ; // score->setPageNumberOffset(val.toInt());
             else
                   domError(e);
             }

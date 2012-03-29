@@ -28,8 +28,6 @@ class Breath : public Element {
       static const int breathSymbols = 4;
       static int symList[breathSymbols];
 
-      Segment* segment() const         { return (Segment*)parent(); }
-
    public:
       Breath(Score* s);
       virtual Breath* clone() const { return new Breath(*this); }
@@ -38,6 +36,7 @@ class Breath : public Element {
       int subtype() const { return _subtype; }
       void setSubtype(int v) { _subtype = v; }
 
+      Segment* segment() const         { return (Segment*)parent(); }
       virtual Space space() const;
 
       virtual void draw(QPainter*) const;

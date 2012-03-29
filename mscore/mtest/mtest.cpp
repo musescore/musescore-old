@@ -13,6 +13,10 @@
 #include <stdio.h>
 #include "all.h"
 
+// static QFile log;
+static int processed = 0;
+static int failed = 0;
+
 //---------------------------------------------------------
 //   process
 //---------------------------------------------------------
@@ -20,7 +24,10 @@
 static void process(const QString& cmd)
       {
       QStringList args;
-      QProcess::execute(cmd, args);
+      int rv = QProcess::execute(cmd, args);
+      if (rv != 0)
+            failed++;
+      processed++;
       }
 
 //---------------------------------------------------------
@@ -48,8 +55,19 @@ static void scanDir(QDir d)
 
 int main(int argc, char* argv[])
       {
+#if 0
+      log.setFileName("mtest.log");
+      if (!log.open(QIODevice::WriteOnly)) {
+            printf("mtest: cannot open log file <mtest.log>\n");
+            exit(-1);
+            }
+#endif
       QDir wd(QDir::current());
       scanDir(wd);
+      printf("\n");
+      printf("================\n");
+      printf("  processed %d  -- failed %d\n", processed, failed);
+      printf("================\n");
       return 0;
       }
 
