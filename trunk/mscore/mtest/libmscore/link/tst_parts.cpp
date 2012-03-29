@@ -267,3 +267,5 @@ void TestParts::undoRedoAddBreath()
 QTEST_MAIN(TestParts)
 
 #include "tst_parts.moc"
+#include "mops.ui"
+
