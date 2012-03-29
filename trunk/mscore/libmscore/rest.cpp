@@ -341,7 +341,6 @@ void Rest::layout()
                   break;
             }
       qreal _spatium = spatium();
-//      qreal stepDistance = _spatium * .5;
       int stepOffset     = 0;
       if (staff()) {
             stepOffset = staff()->staffType()->stepOffset();
@@ -443,8 +442,6 @@ void Rest::layout()
                   }
             setbbox(symbols[score()->symIdx()][_sym].bbox(magS()));
             }
-//      _space.setLw(point(_extraLeadingSpace));
-//      _space.setRw(width() + point(_extraTrailingSpace + rs));
       _space.setLw(0.0);
       _space.setRw(width() + point(rs));
       }

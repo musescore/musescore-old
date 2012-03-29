@@ -1,3 +1,5 @@
+29.3 (ws)
+      - linked parts: implement add/remove Breath
 28.3 (ws)
       - fix #14855: Properties windows of objects in palette are all
         titled 'Chord Properties'

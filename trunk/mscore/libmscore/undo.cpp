@@ -65,6 +65,7 @@
 #include "layoutbreak.h"
 #include "spanner.h"
 #include "sequencer.h"
+#include "breath.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -837,8 +838,8 @@ void Score::undoAddElement(Element* element)
          && element->type() != TRILL
          && element->type() != TEXTLINE
          && element->type() != VOLTA
+         && element->type() != BREATH
          && element->type() != DYNAMIC)
-//         && element->type() != TUPLET)
             ) {
             undo(new AddElement(element));
             return;
@@ -1017,16 +1018,23 @@ void Score::undoAddElement(Element* element)
                   score->updateAccidentals(m, staffIdx);
                   score->setLayout(m);
                   }
-/*            else if (element->type() == TUPLET) {
-                  Tuplet* t      = static_cast<Tuplet*>(element);
-                  Tuplet* nt     = static_cast<Tuplet*>(ne);
-                  int ntrack     = staffIdx * VOICES + t->voice();
-                  Measure* m     = score->tick2measure(t->tick());
-                  nt->setTrack(ntrack);
-                  nt->setParent(m);
-                  undo(new AddElement(nt));
+            else if (element->type() == BREATH) {
+                  Breath* breath   = static_cast<Breath*>(element);
+                  Segment* segment = breath->segment();
+                  int tick         = segment->tick();
+                  Measure* m       = score->tick2measure(tick);
+                  Segment* seg     = m->findSegment(SegBreath, tick);
+                  if (seg == 0) {
+                        seg = new Segment(m, SegBreath, tick);
+                        score->undoAddElement(seg);
+                        }
+                  Breath* nbreath  = static_cast<Breath*>(ne);
+                  int ntrack       = staffIdx * VOICES + nbreath->voice();
+                  nbreath->setScore(score);
+                  nbreath->setTrack(ntrack);
+                  nbreath->setParent(seg);
+                  undo(new AddElement(nbreath));
                   }
- */
             else
                   qDebug("undoAddElement: unhandled: <%s>", element->name());
             }
