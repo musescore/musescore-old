@@ -194,12 +194,6 @@ p, li { white-space: pre-wrap; }
             <tpc>16</tpc>
             </Note>
           </Chord>
-        <tick>480</tick>
-        <Breath>
-          <subtype>0</subtype>
-          <lid>81</lid>
-          </Breath>
-        <tick>960</tick>
         <Chord>
           <lid>6</lid>
           <durationType>quarter</durationType>
@@ -481,7 +475,6 @@ p, li { white-space: pre-wrap; }
           <durationType>quarter</durationType>
           <Note>
             <lid>49</lid>
-            <selected>1</selected>
             <pitch>60</pitch>
             <tpc>14</tpc>
             </Note>
@@ -706,11 +699,10 @@ p, li { white-space: pre-wrap; }
         <BarLine>
           <subtype>end</subtype>
           <span>1</span>
-          <lid>81</lid>
           </BarLine>
         </Measure>
       </Staff>
-    <cursorTrack>4</cursorTrack>
+    <cursorTrack>0</cursorTrack>
     <Score>
       <LayerTag id="0" tag="default"></LayerTag>
       <currentLayer>0</currentLayer>
@@ -861,12 +853,6 @@ p, li { white-space: pre-wrap; }
               <tpc>16</tpc>
               </Note>
             </Chord>
-          <tick>480</tick>
-          <Breath>
-            <subtype>0</subtype>
-            <lid>81</lid>
-            </Breath>
-          <tick>960</tick>
           <Chord>
             <lid>6</lid>
             <durationType>quarter</durationType>
@@ -1496,7 +1482,6 @@ p, li { white-space: pre-wrap; }
           <BarLine>
             <subtype>end</subtype>
             <span>1</span>
-            <lid>81</lid>
             </BarLine>
           </Measure>
         </Staff>

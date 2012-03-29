@@ -36,6 +36,9 @@ class TestParts : public QObject, public MTest
       void createParts(Score* score);
       void testPartCreation(const QString& test);
 
+      Score* doRemoveBreath();
+      Score* doAddBreath();
+
    private slots:
       void initTestCase();
       void createPart1();
@@ -44,6 +47,10 @@ class TestParts : public QObject, public MTest
       void addBreath();
       void undoAddBreath();
       void undoRedoAddBreath();
+      void removeBreath();
+      void undoRemoveBreath();
+      void undoRedoRemoveBreath();
+
       void appendMeasure();
       void insertMeasure();
       };
@@ -171,14 +178,18 @@ void TestParts::createPartBreath()
       }
 
 //---------------------------------------------------------
-//   test creation of elements
+//    doAddBreath
 //---------------------------------------------------------
 
-void TestParts::addBreath()
+Score* TestParts::doAddBreath()
       {
       Score* score = readScore(DIR + "part1-2o.mscx");
-      Measure* m = score->firstMeasure();
-      Segment* s = m->tick2segment(480, false);
+      score->doLayout();
+      foreach(Excerpt* e, score->excerpts())
+            e->score()->doLayout();
+
+      Measure* m   = score->firstMeasure();
+      Segment* s   = m->tick2segment(480, false);
       Chord* chord = static_cast<Chord*>(s->element(0));
       Note* note   = chord->upNote();
       DropData dd;
@@ -188,14 +199,21 @@ void TestParts::addBreath()
       dd.element = b;
       note->drop(dd);
 
-      chord = static_cast<Chord*>(s->element(4));
-      note   = chord->upNote();
-      b = new Breath(score);
-      b->setSubtype(0);
-      dd.element = b;
+      score->startCmd();
       note->drop(dd);
+      score->endCmd();        // does layout
+      return score;
+      }
 
+//---------------------------------------------------------
+//   addBreath
+//---------------------------------------------------------
+
+void TestParts::addBreath()
+      {
+      Score* score = doAddBreath();
       QVERIFY(saveCompareScore(score, "part4.mscx", DIR + "part4o.mscx"));
+      delete score;
       }
 
 //---------------------------------------------------------
@@ -204,29 +222,13 @@ void TestParts::addBreath()
 
 void TestParts::undoAddBreath()
       {
-      Score* score = readScore(DIR + "part1-2o.mscx");
-      score->doLayout();
-      foreach(Excerpt* e, score->excerpts())
-            e->score()->doLayout();
-
-      Measure* m = score->firstMeasure();
-      Segment* s = m->tick2segment(480, false);
-      Chord* chord = static_cast<Chord*>(s->element(0));
-      Note* note   = chord->upNote();
-      DropData dd;
-      dd.view = 0;
-      Breath* b = new Breath(score);
-      b->setSubtype(0);
-      dd.element = b;
-      score->startCmd();
-      note->drop(dd);
-      score->setLayoutAll(true);
-      score->endCmd();        // does layout
+      Score* score = doAddBreath();
 
       score->undo()->undo();
       score->endUndoRedo();
 
       QVERIFY(saveCompareScore(score, "part5.mscx", DIR + "part5o.mscx"));
+      delete score;
       }
 
 //---------------------------------------------------------
@@ -235,24 +237,7 @@ void TestParts::undoAddBreath()
 
 void TestParts::undoRedoAddBreath()
       {
-      Score* score = readScore(DIR + "part1-2o.mscx");
-      score->doLayout();
-      foreach(Excerpt* e, score->excerpts())
-            e->score()->doLayout();
-
-      Measure* m = score->firstMeasure();
-      Segment* s = m->tick2segment(480, false);
-      Chord* chord = static_cast<Chord*>(s->element(0));
-      Note* note   = chord->upNote();
-      DropData dd;
-      dd.view = 0;
-      Breath* b = new Breath(score);
-      b->setSubtype(0);
-      dd.element = b;
-      score->startCmd();
-      note->drop(dd);
-      score->setLayoutAll(true);
-      score->endCmd();
+      Score* score = doAddBreath();
 
       score->undo()->undo();
       score->endUndoRedo();
@@ -261,6 +246,71 @@ void TestParts::undoRedoAddBreath()
       score->endUndoRedo();
 
       QVERIFY(saveCompareScore(score, "part6.mscx", DIR + "part6o.mscx"));
+      delete score;
+      }
+
+//---------------------------------------------------------
+//   doRemoveBreath
+//---------------------------------------------------------
+
+Score* TestParts::doRemoveBreath()
+      {
+      Score* score = readScore(DIR + "part4o.mscx");
+      score->doLayout();
+      foreach(Excerpt* e, score->excerpts())
+            e->score()->doLayout();
+
+      Measure* m   = score->firstMeasure();
+      Segment* s   = m->first()->next(SegBreath);
+      Breath*  b   = static_cast<Breath*>(s->element(0));
+
+      score->select(b);
+      score->startCmd();
+      score->cmdDeleteSelection();
+      score->setLayoutAll(true);
+      score->endCmd();
+      return score;
+      }
+
+//---------------------------------------------------------
+//   removeBreath
+//---------------------------------------------------------
+
+void TestParts::removeBreath()
+      {
+      Score* score = doRemoveBreath();
+      QVERIFY(saveCompareScore(score, "part7.mscx", DIR + "part7o.mscx"));
+      delete score;
+      }
+
+//---------------------------------------------------------
+//   undoRemoveBreath
+//---------------------------------------------------------
+
+void TestParts::undoRemoveBreath()
+      {
+      Score* score = doRemoveBreath();
+      score->undo()->undo();
+      score->endUndoRedo();
+      QVERIFY(saveCompareScore(score, "part8.mscx", DIR + "part8o.mscx"));
+      delete score;
+      }
+
+//---------------------------------------------------------
+//   undoRedoRemoveBreath
+//---------------------------------------------------------
+
+void TestParts::undoRedoRemoveBreath()
+      {
+      Score* score = doRemoveBreath();
+      score->undo()->undo();
+      score->endUndoRedo();
+
+      score->undo()->redo();
+      score->endUndoRedo();
+
+      QVERIFY(saveCompareScore(score, "part9.mscx", DIR + "part9o.mscx"));
+      delete score;
       }
 
 
