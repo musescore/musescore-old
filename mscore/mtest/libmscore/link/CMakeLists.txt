@@ -13,5 +13,7 @@
 
 set(TARGET tst_parts)
 
+# QT4_WRAP_UI(ui_headers mops.ui)
+
 include(${PROJECT_SOURCE_DIR}/mtest/cmake.inc)
 

@@ -15,6 +15,7 @@ QT4_ADD_RESOURCES(qrc_files ${PROJECT_SOURCE_DIR}/mtest/mtest.qrc)
 
 add_executable(
       ${TARGET}
+      ${ui_headers}
       ${qrc_files}
       ${mocs}
       ${TARGET}.cpp
