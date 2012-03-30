@@ -451,6 +451,5 @@ p, li { white-space: pre-wrap; }
           </BarLine>
         </Measure>
       </Staff>
-    <cursorTrack>0</cursorTrack>
     </Score>
   </museScore>
