@@ -178,6 +178,10 @@ p, li { white-space: pre-wrap; }
         <Chord>
           <durationType>quarter</durationType>
           <Note>
+            <Symbol>
+              <name>accordeon stdbase</name>
+              <selected>1</selected>
+              </Symbol>
             <pitch>72</pitch>
             <tpc>14</tpc>
             </Note>
@@ -426,7 +430,6 @@ p, li { white-space: pre-wrap; }
         <Chord>
           <durationType>quarter</durationType>
           <Note>
-            <selected>1</selected>
             <pitch>60</pitch>
             <tpc>14</tpc>
             </Note>

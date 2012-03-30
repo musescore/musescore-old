@@ -2720,7 +2720,7 @@ void ExportLy::writeTremolo(Chord * chord)
 
 void ExportLy::findFingerAndStringno(Note* note, int &fingix, int &stringix, QString (&fingarray)[5], QString (&stringarray)[10])
       {
-      foreach (const Element* e, *note->el()) {
+      foreach (const Element* e, note->el()) {
             if (e->type() == FINGERING) {
                   const Text* text = static_cast<const Text*>(e);
                   if (text->textStyleType() == TEXT_STYLE_FINGERING) {
@@ -2915,29 +2915,19 @@ bool ExportLy::glissandotest(Chord* chord)
 // Find symbols attached to note.
 //------------------------------------------------------------
 
-bool ExportLy::findNoteSymbol(Note* n, QString &symbolname)
-{
-  bool found = false;
-  ElementList* notelmlist;
-  symbolname="";
+bool ExportLy::findNoteSymbol(Note* n, QString& symbolname)
+      {
+      symbolname = "";
 
-  notelmlist = n->el();
-  for (ciElement ci = notelmlist->begin(); ci != notelmlist->end(); ++ci)
-    {
-      Element* symbol = *ci;
-      int elementtype = symbol->type();
-
-      if (elementtype == SYMBOL)
-	{
-	  found = true;
-	  Symbol * symb = (Symbol*) symbol;
-	  symbolname = symbols[0][symb->sym()].name();
-	  break; // what about more symbols connected to one note? Return array of names?
-	}
-    }
-  return found;
-}//end findNoteSymbol
-
+      foreach(const Element* symbol, n->el()) {
+            if (symbol->type() == SYMBOL) {
+                  const Symbol* symb = static_cast<const Symbol*>(symbol);
+                  symbolname = symbols[0][symb->sym()].name();
+                  return true; // what about more symbols connected to one note? Return array of names?
+                  }
+            }
+      return false;
+      }//end findNoteSymbol
 
 //---------------------------------------------------------
 //   writeChord

@@ -40,7 +40,7 @@ class Image : public BSymbol {
       virtual void editDrag(const EditData&);
       void draw(QPainter*, QSize size) const;
       virtual void updateGrips(int*, QRectF*) const;
-      virtual QPointF gripAnchor(int grip) const { return QPointF(); }
+      virtual QPointF gripAnchor(int /*grip*/) const { return QPointF(); }
       virtual QSizeF imageSize() const = 0;
 
    public:

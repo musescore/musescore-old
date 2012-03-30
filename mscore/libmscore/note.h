@@ -214,8 +214,8 @@ class Note : public Element {
 
       NoteType noteType() const;
 
-      ElementList* el()                { return &_el; }
-      const ElementList* el() const    { return &_el; }
+      ElementList el()                 { return _el; }
+      const ElementList el() const     { return _el; }
 
       int subchannel() const           { return _subchannel; }
       void setSubchannel(int val)      { _subchannel = val;  }

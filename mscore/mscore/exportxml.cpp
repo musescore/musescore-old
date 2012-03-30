@@ -2123,7 +2123,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                   sh.doSlurStart(chord, notations, xml);
                   chordAttributes(chord, notations, technical, xml, trillStart, trillStop);
                   }
-            foreach (const Element* e, *note->el()) {
+            foreach (const Element* e, note->el()) {
                   if (e->type() == FINGERING) {
                         Text* f = (Text*)e;
                         notations.tag(xml);

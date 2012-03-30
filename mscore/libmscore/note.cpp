@@ -1001,8 +1001,6 @@ Element* Note::drop(const DropData& data)
             case FINGERING:
                   e->setParent(this);
                   score()->undoAddElement(e);
-                  if (e->type() == FINGERING)
-                        score()->layoutFingering(static_cast<Fingering*>(e));
                   return e;
 
             case SLUR:

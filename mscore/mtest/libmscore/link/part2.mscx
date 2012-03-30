@@ -819,6 +819,5 @@ p, li { white-space: pre-wrap; }
           </BarLine>
         </Measure>
       </Staff>
-    <cursorTrack>4</cursorTrack>
     </Score>
   </museScore>

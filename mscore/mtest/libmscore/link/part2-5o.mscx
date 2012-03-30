@@ -959,7 +959,6 @@ p, li { white-space: pre-wrap; }
           </BarLine>
         </Measure>
       </Staff>
-    <cursorTrack>4</cursorTrack>
     <Score>
       <LayerTag id="0" tag="default"></LayerTag>
       <currentLayer>0</currentLayer>
@@ -1535,7 +1534,6 @@ p, li { white-space: pre-wrap; }
             </BarLine>
           </Measure>
         </Staff>
-      <cursorTrack>0</cursorTrack>
       <name>Alto</name>
       </Score>
     <Score>
@@ -1998,7 +1996,6 @@ p, li { white-space: pre-wrap; }
             </BarLine>
           </Measure>
         </Staff>
-      <cursorTrack>0</cursorTrack>
       <name>Tenor</name>
       </Score>
     </Score>
