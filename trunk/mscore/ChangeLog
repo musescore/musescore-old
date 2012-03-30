@@ -1,3 +1,6 @@
+30.3 (ws)
+      - linked parts: implement add/remove Fingering, Symbol, Image
+        (including regression tests)
 29.3 (ws)
       - linked parts: implement add/remove Breath
 28.3 (lv)

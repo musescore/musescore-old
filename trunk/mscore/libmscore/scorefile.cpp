@@ -152,7 +152,7 @@ void Score::write(Xml& xml, bool selectionOnly)
             xml.etag();
             }
       xml.curTrack = -1;
-      xml.tag("cursorTrack", _is.track());
+//      xml.tag("cursorTrack", _is.track());
       if (!selectionOnly) {
             foreach(Excerpt* excerpt, _excerpts)
                   excerpt->score()->write(xml, false);       // recursion
@@ -1020,12 +1020,10 @@ bool Score::read(const QDomElement& de)
                   part->read(ee);
                   _parts.push_back(part);
                   }
-            else if (tag == "Symbols")    // obsolete
+            else if (tag == "Symbols")          // obsolete
                   ;
-            else if (tag == "cursorTrack") {
-                  if (i >= 0)
-                        setInputTrack(i);
-                  }
+            else if (tag == "cursorTrack")      // obsolete
+                  ;
             else if (tag == "Slur") {
                   Slur* slur = new Slur(this);
                   slur->read(ee);

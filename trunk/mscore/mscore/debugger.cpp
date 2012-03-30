@@ -342,7 +342,7 @@ void Debugger::updateList(Score* s)
                                                 if (note->accidental()) {
                                                       new ElementItem(ni, note->accidental());
                                                       }
-                                                foreach(Element* f, *note->el()) {
+                                                foreach(Element* f, note->el()) {
                                                       if (f->type() == SYMBOL || f->type() == IMAGE) {
                                                             BSymbol* bs = static_cast<BSymbol*>(f);
                                                             addSymbol(ni, bs);
@@ -1082,8 +1082,8 @@ void ShowNoteWidget::setElement(Element* e)
       nb.onTimeUserOffset->setValue(note->onTimeUserOffset());
       nb.offTimeUserOffset->setValue(note->offTimeUserOffset());
 
-      note->el()->clear();
-      foreach(Element* text, *note->el()) {
+      note->el().clear();     // ??
+      foreach(Element* text, note->el()) {
             QString s;
             s.setNum(long(text), 16);
             QListWidgetItem* item = new QListWidgetItem(s);

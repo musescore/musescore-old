@@ -66,6 +66,7 @@
 #include "spanner.h"
 #include "sequencer.h"
 #include "breath.h"
+#include "fingering.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -828,6 +829,29 @@ void Score::undoAddElement(Element* element)
             ostaff = static_cast<Slur*>(element)->startElement()->staff();
       else
             ostaff = element->staff();
+
+      if (element->type() == FINGERING || element->type() == IMAGE
+         || element->type() == SYMBOL) {
+            Element* parent       = element->parent();
+            LinkedElements* links = parent->links();
+            if (links == 0) {
+                  undo(new AddElement(element));
+                  if (element->type() == FINGERING)
+                        element->score()->layoutFingering(static_cast<Fingering*>(element));
+                  return;
+                  }
+            foreach(Element* e, *links) {
+                  Element* ne = (e == parent) ? element : element->linkedClone();
+                  ne->setScore(e->score());
+                  ne->setSelected(false);
+                  ne->setParent(e);
+                  undo(new AddElement(ne));
+                  if (ne->type() == FINGERING)
+                        e->score()->layoutFingering(static_cast<Fingering*>(ne));
+                  }
+            return;
+            }
+
       if (ostaff == 0 || (element->type() != ARTICULATION
          && element->type() != SLUR
          && element->type() != TIE

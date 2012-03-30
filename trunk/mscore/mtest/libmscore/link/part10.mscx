@@ -157,7 +157,11 @@ p, li { white-space: pre-wrap; }
         <height>10</height>
         <Text>
           <style>Title</style>
-          <text>testpart1</text>
+          <text>test-part</text>
+          </Text>
+        <Text>
+          <style>Subtitle</style>
+          <text>fingering</text>
           </Text>
         </VBox>
       <Measure number="1">
@@ -178,6 +182,12 @@ p, li { white-space: pre-wrap; }
         <Chord>
           <durationType>quarter</durationType>
           <Note>
+            <Fingering>
+              <pos x="0.658089" y="-1.50001"/>
+              <selected>1</selected>
+              <style>Fingering</style>
+              <text>3</text>
+              </Fingering>
             <pitch>72</pitch>
             <tpc>14</tpc>
             </Note>
@@ -426,7 +436,6 @@ p, li { white-space: pre-wrap; }
         <Chord>
           <durationType>quarter</durationType>
           <Note>
-            <selected>1</selected>
             <pitch>60</pitch>
             <tpc>14</tpc>
             </Note>
