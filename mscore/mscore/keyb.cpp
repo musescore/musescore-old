@@ -137,6 +137,11 @@ void ScoreView::editKey(QKeyEvent* ev)
                   figuredBassTab(true, key == Qt::Key_Backtab ? true : (modifiers & Qt::ShiftModifier) );
                   found = true;
                   }
+            if (key >= Qt::Key_1 && key <= Qt::Key_9 && (modifiers & CONTROL_MODIFIER)) {
+                  int ticks = (MScore::division >> 4) << (key - Qt::Key_1);
+                  figuredBassTicksTab(ticks);
+                  found = true;
+                  }
             if (found) {
                   ev->accept();
                   return;
