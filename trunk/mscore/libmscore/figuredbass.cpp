@@ -46,16 +46,17 @@ FiguredBassItem::FiguredBassItem(Score* s, int l)
 FiguredBassItem::FiguredBassItem(const FiguredBassItem& item)
    : SimpleText(item)
       {
-      ord               = item.ord;
-      prefix            = item.prefix;
-      digit             = item.digit;
-      suffix            = item.suffix;
-      parenth[0]        = item.parenth[0];
-      parenth[1]        = item.parenth[1];
-      parenth[2]        = item.parenth[2];
-      parenth[3]        = item.parenth[3];
-      parenth[4]        = item.parenth[4];
-      contLine          = item.contLine;
+      ord         = item.ord;
+      prefix      = item.prefix;
+      digit       = item.digit;
+      suffix      = item.suffix;
+      parenth[0]  = item.parenth[0];
+      parenth[1]  = item.parenth[1];
+      parenth[2]  = item.parenth[2];
+      parenth[3]  = item.parenth[3];
+      parenth[4]  = item.parenth[4];
+      contLine    = item.contLine;
+      textWidth   = item.textWidth;
       }
 
 FiguredBassItem::~FiguredBassItem()
@@ -400,7 +401,7 @@ void FiguredBassItem::read(const QDomElement& de)
                   parenth[3] = (FBIParenthesis)e.attribute("b3").toInt();
                   parenth[4] = (FBIParenthesis)e.attribute("b4").toInt();
                   }
-            if(tag == "prefix")
+            else if(tag == "prefix")
                   prefix = (FBIAccidental)iVal;
             else if(tag == "digit")
                   digit = iVal;
@@ -480,23 +481,47 @@ void FiguredBassItem::layout()
       if(parenth[3] != FBIParenthNone)
             str.append(g_FBFonts.at(font).displayParenthesis[parenth[3]]);
 
-      // !! TO DO !! INSERT HERE PROPER CONT. LINE FORMATTING
-      if(contLine)                              // currently, only a token representation is provided
-            str.append("___");
-      if(parenth[4] != FBIParenthNone)
-            str.append(g_FBFonts.at(font).displayParenthesis[parenth[4]]);
-
       setText(str);                             // this text will be displayed
 
-      // position the text so that [x1...x2] is centered below the note
+      // position the text so that [x1<-->x2] is centered below the note
       x = x - (x1+x2) * 0.5;
       h = fm.lineSpacing();
       h *= score()->styleD(ST_figuredBassLineHeight);
       w = fm.width(str);
+      textWidth = w;
+      int lineLen;
+      if(contLine && (lineLen=figuredBass()->lineLength(0)) > w)
+            w = lineLen;
       y = h * ord;
       setPos(x, y);
       setbbox(QRect(0, 0, w, h));
 }
+
+//---------------------------------------------------------
+//   FiguredBassItem draw()
+//---------------------------------------------------------
+
+void FiguredBassItem::draw(QPainter* painter) const
+      {
+      SimpleText::draw(painter);
+      // continuation line
+      qreal len = 0.0;
+      if(contLine) {
+            len = figuredBass()->lineLength(0);
+            if(len > 0.0) {
+                  qreal h = bbox().height() * 0.75;
+                  painter->setPen((QPen(curColor(), 1)));
+                  painter->drawLine(textWidth, h, len - ipos().x(), h);
+                  }
+            }
+      // closing cont.line parenthesis
+      if(parenth[4] != FBIParenthNone) {
+            int font = 0;
+            int x = len > 0.0 ? len : textWidth;
+            painter->drawText(QRectF(x, 0, bbox().width(), bbox().height()), Qt::AlignLeft | Qt::AlignTop,
+                  g_FBFonts.at(font).displayParenthesis[parenth[4]]);
+            }
+      }
 
 //---------------------------------------------------------
 //   F I G U R E D   B A S S
@@ -504,8 +529,6 @@ void FiguredBassItem::layout()
 
 #include "chord.h"
 #include "rest.h"
-
-FiguredBass * FiguredBass::prevFB = 0;
 
 FiguredBass::FiguredBass(Score* s)
    : Text(s)
@@ -581,14 +604,16 @@ void FiguredBass::read(const QDomElement& de)
 //   layout
 //---------------------------------------------------------
 
-// uncomment for using built-in edit Text layout
+// uncomment to use stadard, built-in Text layout during editing
 //#define _USE_EDIT_TEXT_LAYOUT_
 
 void FiguredBass::layout()
       {
       if (!styled())
             setTextStyle(score()->textStyle(TEXT_STYLE_FIGURED_BASS));
-      qreal             y;
+      qreal       y;
+
+      layoutLines();
 
 #ifdef _USE_EDIT_TEXT_LAYOUT_
       if (_editMode) {
@@ -613,9 +638,8 @@ void FiguredBass::layout()
 
       // bounding box
 #ifndef _USE_EDIT_TEXT_LAYOUT_
-      qreal             h, w, w1;
-
       if(editMode()) {
+            qreal             h, w, w1;
             QFontMetricsF     fm(textStyle().font(spatium()));
             // box width
             w = 0;
@@ -631,15 +655,15 @@ void FiguredBass::layout()
             h *= (list.size() > 1 ? list.size() : 1);      // at least 1 line
             // ready to set position and bbox
             setPos(0, y);
-            setbbox(QRectF(0, 0, w, h));
+            setbbox(QRectF(0-2, 0-2, w+4, h+4));
             }
       else
 #endif
             {
+            setPos(0, y);
+            setbbox(QRectF(0, 0, _lineLenghts.at(0), 0));
             // if element could be parsed into items, layout each element
             if(items.size() > 0) {
-                  setPos(0, y);
-                  setbbox(QRect());
                   // layout each item and enlarge bbox to include items bboxes
                   for(int i=0; i < items.size(); i++) {
                         items[i].layout();
@@ -650,7 +674,83 @@ void FiguredBass::layout()
                   // if not, fall back to standard Text layout
                   Text::layout();
             }
+
       adjustReadPos();
+      }
+
+//---------------------------------------------------------
+//   layoutLines
+//
+//    lays out the duration indicator line(s), filling the _lineLengths array
+//---------------------------------------------------------
+
+void FiguredBass::layoutLines()
+      {
+      if(_ticks <= 0) {
+NoLen:
+            _lineLenghts.resize(1);
+            _lineLenghts[0] = 0;
+            return;
+            }
+// Adapted from System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx) (system.cpp, line 829 and foll)
+      Segment *   nextSegm;                                 // the Segment beyond this' segment
+      int         nextTick = segment()->tick() + _ticks;    // the tick beyond this' duration
+
+      // locate the measure containing the last tick of this; it is either:
+      // the same measure containing nextTick, if nextTick is not the first tick of a measure
+      //    (and line should stop right before it)
+      // or the previous measure, if nextTick is the first tick of a measure
+      //    (and line should stop before any measure terminal segment (bar, clef, ...) )
+      Measure* m = score()->tick2measure(nextTick-1);
+      if (m != 0) {
+            // locate the first segment (of ANY type) right after this' last tick
+            for (nextSegm = m->first(SegAll); nextSegm; ) {
+                  if(nextSegm->tick() >= nextTick)
+                        break;
+                  nextSegm = nextSegm->next(SegAll);
+                  }
+            }
+      if (m == 0 || nextSegm == 0) {
+            qDebug("FiguredBass layout: no segment found for tick %d\n", nextTick);
+            goto NoLen;
+            }
+
+      QList<System*>* systems = score()->systems();
+      System* s1  = segment()->measure()->system();
+      System* s2  = nextSegm->measure()->system();
+      int sysIdx1 = systems->indexOf(s1);
+      int sysIdx2 = systems->indexOf(s2);
+
+      int i, len ,segIdx;
+      for (i = sysIdx1, segIdx = 0; i <= sysIdx2; ++i, ++segIdx) {
+            len = 0;
+            if (sysIdx1 == sysIdx2 || i == sysIdx1) {
+                  // single line
+                  len = nextSegm->pageX() - pageX() - 4;         // stop 4 raster units before next segm
+                  }
+            else if (i == sysIdx1) {
+                  // initial line
+                  qreal w   = s1->staff(staffIdx())->right();
+                  qreal x   = s1->pageX() + w;
+                  len = x - pageX();
+                  }
+            else if (i > 0 && i != sysIdx2) {
+                  // middle line
+qDebug("FiguredBass: duration indicator middle line not implemented");
+                  }
+            else if (i == sysIdx2) {
+                  // end line
+qDebug("FiguredBass: duration indicator end line not implemented");
+                  }
+            // store length item, reusing array items if already present
+            if (_lineLenghts.size() <= segIdx)
+                  _lineLenghts.append(len);
+            else
+                  _lineLenghts[segIdx] = len;
+            }
+      // if more array items than needed, truncate array
+      if(_lineLenghts.size() > segIdx)
+            _lineLenghts.resize(segIdx);
       }
 
 //---------------------------------------------------------
@@ -659,6 +759,14 @@ void FiguredBass::layout()
 
 void FiguredBass::draw(QPainter* painter) const
       {
+      // if not printing, draw duration line(s)
+      if( !score()->printing() ) {
+            foreach(qreal len, _lineLenghts)
+                  if(len > 0) {
+                        painter->setPen(QPen(Qt::lightGray, 1));
+                        painter->drawLine(0.0, -2, len, -2);      // -2: 2 rast. un. above digits
+                        }
+            }
       if(editMode())
             Text::draw(painter);
       else {
@@ -674,7 +782,7 @@ void FiguredBass::draw(QPainter* painter) const
 /* DEBUG
       QString str = QString();
       str.setNum(_ticks);
-      painter->drawText(pos().x(), pos().y() - (_onNote ?  150 : 130), str);
+      painter->drawText(0, (_onNote ? 40 : 30), str);
 */
       }
 
@@ -688,9 +796,9 @@ void FiguredBass::endEdit()
 
       Text::endEdit();
       QString txt = getText();
-      if(txt.isEmpty())
+      if(txt.isEmpty()) {                       // if no text, nothing to do
             return;
-      adjustDuration();
+            }
 
       // split text into lines and create an item for each line
       QStringList list = txt.split('\n', QString::SkipEmptyParts);
@@ -740,71 +848,35 @@ void FiguredBass::setVisible(bool flag)
       }
 
 //---------------------------------------------------------
-//   adjustDuration
-//---------------------------------------------------------
-
-void FiguredBass::adjustDuration()
-      {
-      if(_ticks != 0 || prevFB == 0)            // if duration already set or no previous FB
-            return;                             // do nothing
-
-      // compute the distance between this and the previous FB
-      int delta = segment()->tick() - prevFB->segment()->tick();
-      // if this is before the current end of previous FB
-      if(delta < prevFB->ticks()) {
-            setOnNote(false);                   // tis is not on a note
-            setTicks(prevFB->ticks() - delta);  // this' duration is the remaining part of previous FB
-            prevFB->setTicks(delta);            // prev FB duration is the delta
-            }
-      // if this is at (or after) the end of previous FB
-      else {
-            prevFB = this;                      // this is the new previous
-            // check this is placed at a chord of this track
-            Element * e = segment()->element(track());
-            if(e && e->type() == CHORD) {
-                  setOnNote(true);
-                  setTicks( static_cast<Chord*>(e)->duration().ticks() );
-                  }
-            // no chord here (not standard in FB notation, but should be dealt with anyway)
-            else {
-                  int   dur;
-                  setOnNote(false);
-                  // locate previous ChordRest in this track
-                  ChordRest * cr = segment()->nextChordRest(track(), true);
-                  if(cr) {
-                        // duration of this is the remaining part of the previous ChordRest
-                        delta = segment()->tick() - cr->segment()->tick();
-                        dur = delta - cr->duration().ticks();
-                        setTicks(dur);
-                        }
-                  }
-            }
-      }
-
-//---------------------------------------------------------
 //   STATIC FUNCTION
 //    adding a new FiguredBass to a Segment;
-//    the main purpose of this function is to ensure that ONLY ONE F.b. element exists for each Segment/track;
+//    the main purpose of this function is to ensure that ONLY ONE F.b. element exists for each Segment/staff;
 //    it either re-uses an existing FiguredBass or creates a new one if none if found;
 //    returns the FiguredBass and sets pNew to true if it has been newly created.
 //
-//    As the F.b. very concept requires the underlying chord to have ONLY ONE note,
-//    it might make sense to drop the checking / setting of Track and unconditionally
-//    always use track 0 for FiguredBass elements.
+//    Sets an initial duration of the element up to the next ChordRest of the same staff.
+//
+//    As the F.b. very concept requires the base chord to have ONLY ONE note,
+//    FiguredBass elements are created and looked for only in the first track of the staff.
 //---------------------------------------------------------
 
-FiguredBass * FiguredBass::addFiguredBassToSegment(Segment * seg, int track, int ticks, bool * pNew)
+FiguredBass * FiguredBass::addFiguredBassToSegment(Segment * seg, int track, int extTicks, bool * pNew)
       {
-      // scan segment annotations for an existing FB element
+      int         endTick;                      // where this FB is initially assumed to end
+      int         staff = track / VOICES;       // convert track to staff
+      track = staff * VOICES;                   // first track for this staff
+
+      // scan segment annotations for an existing FB element in the same staff
       const QList<Element*>& annot = seg->annotations();
       int i;
       int count = annot.size();
       FiguredBass* fb;
       for(i = 0; i < count; i++) {
-            if(annot.at(i)->type() == FIGURED_BASS && annot.at(i)->track() == track) {
+            if(annot.at(i)->type() == FIGURED_BASS && (annot.at(i)->track() / VOICES) == staff) {
                   // an FB already exists in segment: re-use it
                   fb = static_cast<FiguredBass*>(annot.at(i));
                   *pNew = false;
+                  endTick = seg->tick() + fb->ticks();
                   break;
                   }
             }
@@ -812,8 +884,53 @@ FiguredBass * FiguredBass::addFiguredBassToSegment(Segment * seg, int track, int
             fb = new FiguredBass(seg->score());
             fb->setTrack(track);
             fb->setParent(seg);
-            fb->setTicks(ticks);
+
+            // locate next SegChordRest in the same staff to estimate presumed duration of element
+            endTick = INT_MAX;
+            Segment *   nextSegm;
+            for (int iVoice = 0; iVoice < VOICES; iVoice++) {
+                  nextSegm = seg->nextCR(track + iVoice);
+                  if(nextSegm && nextSegm->tick() < endTick)
+                        endTick = nextSegm->tick();
+                  }
+            if(endTick == INT_MAX) {            // no next segment: set up to score end
+                  Measure * meas = seg->score()->lastMeasure();
+                  endTick = meas->tick() + meas->ticks();
+                  }
+            fb->setTicks(endTick - seg->tick());
+
+            // set onNote status
+            fb->setOnNote(false);               // assume not onNote
+            for(i = track; i < track + VOICES; i++)         // if segment has chord in staff, set onNote
+                  if(seg->element(i) && seg->element(i)->type() == CHORD) {
+                        fb->setOnNote(true);
+                        break;
+                  }
             *pNew = true;
+            }
+
+      // if we are extending a previous FB
+      if(extTicks > 0) {
+            // locate previous FB for same staff
+            Segment *         prevSegm;
+            FiguredBass*      prevFB = 0;
+            for(prevSegm = seg->prev1(SegChordRest); prevSegm; prevSegm = prevSegm->prev1(SegChordRest)) {
+                  const QList<Element*>& annot = prevSegm->annotations();
+                  count = annot.size();
+                  for(i = 0; i < count; i++) {
+                        if(annot.at(i)->type() == FIGURED_BASS && (annot.at(i)->track() ) == track) {
+                              prevFB = static_cast<FiguredBass*>(annot[i]);   // previous FB found
+                              break;
+                              }
+                        }
+                  if(prevFB) {
+                        // if previous FB did not stop more than extTicks before this FB...
+                        int delta = seg->tick() - prevFB->segment()->tick();
+                        if(prevFB->ticks() + extTicks >= delta)
+                              prevFB->setTicks(delta);      // update prev FB ticks to last up to this FB
+                        break;
+                        }
+                  }
             }
       return fb;
       }
@@ -1026,11 +1143,7 @@ FiguredBass* Score::addFiguredBass()
       if (el->type() == NOTE) {
             ChordRest * cr = static_cast<Note*>(el)->chord();
             fb = FiguredBass::addFiguredBassToSegment(cr->segment(),
-                        cr->track(), cr->duration().ticks(), &bNew);
-            if(bNew) {
-                  fb->setOnNote(true);
-//                  FiguredBass::setPrevFB(fb);
-                  }
+                        (cr->track() / VOICES) * VOICES, 0, &bNew);
             }
       else if (el->type() == FIGURED_BASS) {
             fb = static_cast<FiguredBass*>(el);
@@ -1044,7 +1157,6 @@ FiguredBass* Score::addFiguredBass()
 
       if(bNew)
             undoAddElement(fb);
-      FiguredBass::setPrevFB(fb);
       select(fb, SELECT_SINGLE, 0);
       return fb;
       }

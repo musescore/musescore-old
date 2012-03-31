@@ -1,3 +1,5 @@
+31.3 (mw)
+      - FiguredBass: duration input and indicator, continuation lines
 30.3 (ws)
       - linked parts: implement add/remove Fingering, Symbol, Image
         (including regression tests)
