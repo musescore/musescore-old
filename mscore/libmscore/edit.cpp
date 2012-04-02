@@ -1315,18 +1315,32 @@ void Score::cmdDeleteSelectedMeasures()
 
       MeasureBase* is   = selection().startSegment()->measure();
       int startIdx      = measureIdx(is);
-      bool createEndBar = false;
       Segment* seg      = selection().endSegment();
       MeasureBase* ie   = seg ? seg->measure() : lastMeasure();
       int endIdx        = measureIdx(ie);
+      if (ie != is)
+            ie = ie->prev();
+
+      // createEndBar if last measure is deleted
+      bool createEndBar = true;
+      for (MeasureBase* mb = ie->next(); mb; mb = mb->next()) {
+            if (mb->type() == MEASURE) {
+                  createEndBar = false;
+                  break;
+                  }
+            }
 
       foreach(Score* score, scores) {
             MeasureBase* is = score->measure(startIdx);
             MeasureBase* ie = score->measure(endIdx);
-            do {
+            for (;;) {
                   deleteItem(ie);
+                  if (ie == is)
+                        break;
                   ie = ie->prev();
-                  } while (ie && (ie != is));
+                  if (ie == 0)
+                        break;
+                  }
             }
 
       if (createEndBar) {

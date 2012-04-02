@@ -830,8 +830,12 @@ void Score::undoAddElement(Element* element)
       else
             ostaff = element->staff();
 
-      if (element->type() == FINGERING || element->type() == IMAGE
-         || element->type() == SYMBOL) {
+      ElementType et = element->type();
+
+      if (et == FINGERING
+         || et == IMAGE
+         || et == SYMBOL
+            ) {
             Element* parent       = element->parent();
             LinkedElements* links = parent->links();
             if (links == 0) {
@@ -851,19 +855,46 @@ void Score::undoAddElement(Element* element)
                   }
             return;
             }
+#if 0
+      if (element->systemFlag() && (et == TEXT
+         || et == STAFF_TEXT
+         || et == STAFF_STATE
+         || et == INSTRUMENT_CHANGE
+         || et == REHEARSAL_MARK)
+            ) {
+            Element* parent       = element->parent();
+            LinkedElements* links = parent->links();
+            if (links == 0) {
+                  undo(new AddElement(element));
+                  if (element->type() == FINGERING)
+                        element->score()->layoutFingering(static_cast<Fingering*>(element));
+                  return;
+                  }
+            foreach(Element* e, *links) {
+                  Element* ne = (e == parent) ? element : element->linkedClone();
+                  ne->setScore(e->score());
+                  ne->setSelected(false);
+                  ne->setParent(e);
+                  undo(new AddElement(ne));
+                  if (ne->type() == FINGERING)
+                        e->score()->layoutFingering(static_cast<Fingering*>(ne));
+                  }
+            return;
+            }
+#endif
 
-      if (ostaff == 0 || (element->type() != ARTICULATION
-         && element->type() != SLUR
-         && element->type() != TIE
-         && element->type() != NOTE
-         && element->type() != INSTRUMENT_CHANGE
-         && element->type() != HAIRPIN
-         && element->type() != OTTAVA
-         && element->type() != TRILL
-         && element->type() != TEXTLINE
-         && element->type() != VOLTA
-         && element->type() != BREATH
-         && element->type() != DYNAMIC)
+      if (ostaff == 0 || (et != ARTICULATION
+         && et != SLUR
+         && et != TIE
+         && et != NOTE
+         && et != INSTRUMENT_CHANGE
+         && et != HAIRPIN
+         && et != OTTAVA
+         && et != TRILL
+         && et != TEXTLINE
+         && et != VOLTA
+         && et != BREATH
+         && et != DYNAMIC)
             ) {
             undo(new AddElement(element));
             return;
@@ -2754,6 +2785,7 @@ RemoveMeasures::RemoveMeasures(Measure* m1, Measure* m2)
 void RemoveMeasures::undo()
       {
       fm->score()->measures()->insert(fm, lm);
+      fm->score()->fixTicks();
       }
 
 //---------------------------------------------------------
@@ -2764,6 +2796,7 @@ void RemoveMeasures::undo()
 void RemoveMeasures::redo()
       {
       fm->score()->measures()->remove(fm, lm);
+      fm->score()->fixTicks();
       }
 
 //---------------------------------------------------------
@@ -2774,6 +2807,7 @@ void RemoveMeasures::redo()
 void InsertMeasures::undo()
       {
       fm->score()->measures()->remove(fm, lm);
+      fm->score()->fixTicks();
       }
 
 //---------------------------------------------------------
@@ -2784,6 +2818,7 @@ void InsertMeasures::undo()
 void InsertMeasures::redo()
       {
       fm->score()->measures()->insert(fm, lm);
+      fm->score()->fixTicks();
       }
 
 //---------------------------------------------------------

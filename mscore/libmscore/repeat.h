@@ -76,9 +76,8 @@ class Marker : public Text {
       void setLabel(const QString& s)  { _label = s; }
 
       virtual void layout();
-//      virtual QPointF pagePos() const;
-//      virtual QLineF dragAnchor() const;
       virtual void styleChanged();
+      virtual bool systemFlag() const  { return true;        }
       };
 
 enum {
@@ -118,6 +117,7 @@ class Jump : public Text {
       void setJumpTo(const QString& s)     { _jumpTo = s;        }
       void setPlayUntil(const QString& s)  { _playUntil = s;     }
       void setContinueAt(const QString& s) { _continueAt = s;    }
+      virtual bool systemFlag() const      { return true;        }
       };
 
 #endif
