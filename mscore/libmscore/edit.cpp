@@ -2000,6 +2000,8 @@ MeasureBase* Score::insertMeasure(ElementType type, MeasureBase* measure)
       foreach(Score* score, scores) {
             MeasureBase* mb = static_cast<MeasureBase*>(Element::create(type, score));
             MeasureBase* im = idx != -1 ? score->measure(idx) : 0;
+            // insert before im, append if im = 0
+
             mb->setTick(tick);
             if (score == this)
                   omb = mb;
@@ -2022,11 +2024,11 @@ MeasureBase* Score::insertMeasure(ElementType type, MeasureBase* measure)
                         else if (lm == 0)
                               createEndBar = true;
                         }
-                  Measure* m = static_cast<Measure*>(mb);
-                  // Fraction f(m->timesig());  TODO
-                  Fraction f(4,4);
+
+                  Fraction f = score->sigmap()->timesig(tick).timesig();
       	      int ticks = f.ticks();
 
+                  Measure* m = static_cast<Measure*>(mb);
                   m->setTimesig(f);
                   m->setLen(f);
 

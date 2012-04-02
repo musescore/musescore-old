@@ -1,4 +1,5 @@
 2.4. (ws)
+      - added the enhanced mscore-20 (Emmentaler) font from Gootector
       - fix #15847: Typo in dialogue box after adding soundfont already loaded
 31.3 (mw)
       - FiguredBass: duration input and indicator, continuation lines
