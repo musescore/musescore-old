@@ -280,7 +280,7 @@ void SynthControl::sfAddClicked()
                   if (sl.contains(s)) {
                         QMessageBox::warning(this,
                            tr("MuseScore"),
-                           tr("Soundfont already loaded %s", qPrintable(s)));
+                           QString(tr("Soundfont %1 already loaded")).arg(s));
                         }
                   else {
                         Synth* sy = synti->synth("Fluid");
@@ -289,7 +289,7 @@ void SynthControl::sfAddClicked()
                               if (!loaded) {
                                     QMessageBox::warning(this,
                                        tr("MuseScore"),
-                                       tr("cannot load soundfont %s", qPrintable(s)));
+                                       QString(tr("cannot load soundfont %1")).arg(s));
                                     }
                               else {
                                     soundFonts->insertItem(0, s);
