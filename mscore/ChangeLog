@@ -1,3 +1,5 @@
+2.4. (ws)
+      - fix #15847: Typo in dialogue box after adding soundfont already loaded
 31.3 (mw)
       - FiguredBass: duration input and indicator, continuation lines
 30.3 (ws)
