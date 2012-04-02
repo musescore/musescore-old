@@ -11,7 +11,7 @@
 #  the file LICENSE.GPL
 #=============================================================================
 
-subdirs(
-      hairpin note midi compat link measure
-      )
+set(TARGET tst_measure)
+
+include(${PROJECT_SOURCE_DIR}/mtest/cmake.inc)
 

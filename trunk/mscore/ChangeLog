@@ -1,4 +1,5 @@
 2.4. (ws)
+      - linked parts: implement insert/delete measures
       - added the enhanced mscore-20 (Emmentaler) font from Gootector
       - fix #15847: Typo in dialogue box after adding soundfont already loaded
 31.3 (mw)

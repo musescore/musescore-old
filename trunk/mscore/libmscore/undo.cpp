@@ -1375,6 +1375,8 @@ void RemoveElement::undo()
                   }
             undoAddTuplet(static_cast<ChordRest*>(element));
             }
+      if (element->type() == MEASURE)
+            element->score()->setLayoutAll(true);    //DEBUG
       }
 
 //---------------------------------------------------------
@@ -1386,6 +1388,8 @@ void RemoveElement::redo()
       element->score()->removeElement(element);
       if (element->isChordRest())
             undoRemoveTuplet(static_cast<ChordRest*>(element));
+      if (element->type() == MEASURE)
+            element->score()->setLayoutAll(true);    //DEBUG
       }
 
 //---------------------------------------------------------
