@@ -516,6 +516,9 @@ void System::setInstrumentNames(bool longName)
                               iname->setSubtype(INSTRUMENT_NAME_SHORT);
                               iname->setTextStyle(score()->textStyle(TEXT_STYLE_INSTRUMENT_SHORT));
                               }
+//                        if (score()->undoRedo())
+//                              qFatal("System::setInstrumentNames <%s> in undo/redo",
+//                                 qPrintable(sn.name.toPlainText()));
                         score()->undoAddElement(iname);
                         }
                   iname->setText(sn.name);

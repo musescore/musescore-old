@@ -1240,7 +1240,7 @@ void Score::deleteItem(Element* el)
             case MEASURE:
                   {
                   Measure* measure = static_cast<Measure*>(el);
-                  undoRemoveElement(el);
+                  undo(new RemoveElement(measure));
                   cmdRemoveTime(measure->tick(), measure->ticks());
                   }
                   break;
@@ -1307,33 +1307,26 @@ void Score::cmdDeleteSelectedMeasures()
       {
       if (selection().state() != SEL_RANGE)
             return;
-      MeasureBase* is = selection().startSegment()->measure();
+      Score* root = rootScore();
+      QList<Score*> scores;
+      foreach(const Excerpt* ex, root->excerpts())
+            scores.append(ex->score());
+      scores.append(root);
+
+      MeasureBase* is   = selection().startSegment()->measure();
+      int startIdx      = measureIdx(is);
       bool createEndBar = false;
-      if (is->next()) {
-            Segment* seg = selection().endSegment();
-            MeasureBase* ie = seg ? seg->measure() : lastMeasure();
-//qDebug("cmdDEleteSelectedMeasures %p - %p", is, ie);
-//qDebug("  seg %s", seg->subTypeName());
-            if (ie) {
-                  if ((seg == 0) || (ie->tick() < selection().tickEnd())) {
-                        // if last measure is selected
-                        if (ie->type() == MEASURE)
-                              createEndBar = static_cast<Measure*>(ie)->endBarLineType() == END_BAR;
-                        deleteItem(ie);
-                        }
-                  if (ie != is) {
-                        do {
-                              ie = ie->prev();
-                              if (ie == 0)
-                                    break;
-                              deleteItem(ie);
-                              } while (ie != is);
-                        }
-                  }
-            }
-      else {
-            createEndBar = true;
-            deleteItem(is);
+      Segment* seg      = selection().endSegment();
+      MeasureBase* ie   = seg ? seg->measure() : lastMeasure();
+      int endIdx        = measureIdx(ie);
+
+      foreach(Score* score, scores) {
+            MeasureBase* is = score->measure(startIdx);
+            MeasureBase* ie = score->measure(endIdx);
+            do {
+                  deleteItem(ie);
+                  ie = ie->prev();
+                  } while (ie && (ie != is));
             }
 
       if (createEndBar) {
@@ -1347,10 +1340,8 @@ void Score::cmdDeleteSelectedMeasures()
                         }
                   }
             }
-//      selection().clearElements();
       select(0, SELECT_SINGLE, 0);
       _is.setSegment(0);        // invalidate position
-      _layoutAll = true;
       }
 
 //---------------------------------------------------------
