@@ -84,6 +84,7 @@ class Beam : public Element {
       void* pGrowRight()      { return &_grow2; }
 
       void layout2(QList<ChordRest*>, SpannerSegmentType, int frag);
+      bool twoBeamedNotes();
 
    public:
       Beam(Score* s);

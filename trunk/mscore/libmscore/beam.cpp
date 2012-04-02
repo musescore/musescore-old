@@ -414,6 +414,42 @@ static bool crLessThan(const ChordRest* cr1, const ChordRest* cr2)
 #endif
 
 //---------------------------------------------------------
+//   twoBeamedNotes
+//    calculate stem direction of two beamed notes
+//    return true if two beamed notes found
+//---------------------------------------------------------
+
+bool Beam::twoBeamedNotes()
+      {
+      if ((_elements.size() != 2)
+         || (_elements[0]->type() != CHORD)
+         || _elements[1]->type() != CHORD) {
+            return false;
+            }
+      const Chord* c1 = static_cast<const Chord*>(_elements[0]);
+      const Chord* c2 = static_cast<const Chord*>(_elements[1]);
+      if (c1->notes().size() != 1 || c2->notes().size() != 1)
+            return false;
+      int dist1 = c1->upNote()->line() - 4;
+      int dist2 = c2->upNote()->line() - 4;
+      if (qAbs(dist1) == qAbs(dist2)) {
+            _up = false;
+            Segment* s = c1->segment();
+            s = s->prev1(SegChordRest);
+            if (s && s->element(c1->track())) {
+                  Chord* c = static_cast<Chord*>(s->element(c1->track()));
+                  if (c->beam())
+                        _up = c->beam()->up();
+                  }
+            }
+      else if (qAbs(dist1) > qAbs(dist2))
+            _up = dist1 > 0;
+      else
+            _up = dist2 > 0;
+      return true;
+      }
+
+//---------------------------------------------------------
 //   layout1
 //---------------------------------------------------------
 
@@ -453,7 +489,10 @@ void Beam::layout1()
             minMove = 1000;
             maxMove = -1000;
             isGrace = false;
+
             int upCount = 0;
+            int mUp     = 0;
+            int mDown   = 0;
             foreach(ChordRest* cr, _elements) {
                   if (cr->type() == CHORD) {
                         c2 = static_cast<Chord*>(cr);
@@ -475,12 +514,34 @@ void Beam::layout1()
                               minMove = i;
                         if (i > maxMove)
                               maxMove = i;
+                        if (c2->notes().size() == 1) {
+                              int line = c2->upNote()->line();
+                              if ((line - 4) > mUp)
+                                    mUp = line - 4;
+                              if (4 - line > mDown)
+                                    mDown = 4 - line;
+                              }
                         }
                   if (!maxDuration.isValid() || (maxDuration < cr->durationType()))
                         maxDuration = cr->durationType();
                   }
+            if (_direction != AUTO)
+                  _up = _direction == UP;
+            else {
+                  if (!twoBeamedNotes()) {
+                        if (upCount == 0) {
+                              // highest or lowest note determines stem direction
+                              // down-stems is preferred if equal
+                              _up = mUp > mDown;
+                              }
+                        else {
+                              // the number of notes above/below the middle line
+                              // determines stem direction
+                              _up = upCount > 0;
+                              }
+                        }
+                  }
 
-            _up     = (_direction == AUTO) ? (upCount >= 0) : (_direction == UP);
             cross   = minMove < maxMove;
             int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
             slope   = 0.0;
