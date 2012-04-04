@@ -3632,6 +3632,19 @@ void MuseScore::networkFinished(QNetworkReply* reply)
             name = "unknown.mscz";
       else
             name = re.cap(1);
+            
+      if (!s.isEmpty() && re.indexIn(s) != -1) {
+            name = re.cap(1);
+             }
+      else {
+            QUrl url = reply->url();
+            QString path = url.path();
+            qDebug("Path <%s>", qPrintable(path));
+            if(path.endsWith(".pdf") || path.endsWith(".mscz"))
+                  name = path.section('/',-1);
+        	  else 
+                  name = "unknown.mscz";
+            }
 
       // attachment; filename="Bilder_einer_Ausstellung.mscz"
 
