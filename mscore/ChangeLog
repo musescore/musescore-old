@@ -1,3 +1,5 @@
+5.4 (lv)
+      - partial and very preliminary fix for #15899: MusicXML: support figured bass
 2.4. (ws)
       - extend rules for beam stem direction
       - linked parts: implement insert/delete measures

@@ -415,6 +415,33 @@ void FiguredBassItem::read(const QDomElement& de)
 }
 
 //---------------------------------------------------------
+//   Read MusicXML
+//---------------------------------------------------------
+
+void FiguredBassItem::readMusicXML(const QDomElement& de)
+      {
+      qDebug("FiguredBassItem::readMusicXML");
+      for (QDomElement e = de.firstChildElement(); !e.isNull();  e = e.nextSiblingElement()) {
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
+            int   iVal = val.toInt();
+            if (tag == "figure-number") {
+                  qDebug("FiguredBassItem::readMusicXML figure-number %d", iVal);
+                  digit = iVal;
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   Write MusicXML
+//---------------------------------------------------------
+
+void FiguredBassItem::writeMusicXML(Xml&) const
+      {
+      // TODO
+      }
+
+//---------------------------------------------------------
 //   FiguredBassItem layout()
 //    creates the display text (set as element text) and computes
 //    the horiz. offset needed to align the right part as well as the vert. offset
@@ -1109,6 +1136,42 @@ bool FiguredBass::fontData(int nIdx, QString * pFamily, QString * pDisplayName,
       }
       return false;
 }
+
+//---------------------------------------------------------
+//   Read MusicXML
+//---------------------------------------------------------
+
+void FiguredBass::readMusicXML(const QDomElement& de)
+      {
+      qDebug("FiguredBass::readMusicXML");
+      QString normalizedText = QString();
+      int idx = 0;
+      for (QDomElement e = de.firstChildElement(); !e.isNull();  e = e.nextSiblingElement()) {
+            const QString& tag(e.tagName());
+            const QString& val(e.text());
+            if (tag == "figure") {
+                  FiguredBassItem * pItem = new FiguredBassItem(score(), idx++);
+                  pItem->setTrack(track());
+                  pItem->setParent(this);
+                  pItem->readMusicXML(e);
+                  items.append(*pItem);
+                  // add item normalized text
+                  if(!normalizedText.isEmpty())
+                        normalizedText.append('\n');
+                  normalizedText.append(pItem->normalizedText());
+                  }
+            }
+      setText(normalizedText);                  // this is the text to show while editing
+      }
+
+//---------------------------------------------------------
+//   Write MusicXML
+//---------------------------------------------------------
+
+void FiguredBass::writeMusicXML(Xml&) const
+      {
+      // TODO
+      }
 
 //---------------------------------------------------------
 //

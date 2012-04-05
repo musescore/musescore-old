@@ -84,6 +84,7 @@
 #include "preferences.h"
 #include "musicxmlsupport.h"
 #include "libmscore/chordline.h"
+#include "libmscore/figuredbass.h"
 
 //---------------------------------------------------------
 //   local defines for debug output
@@ -2031,6 +2032,15 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                   domNotImplemented(e);
             else if (e.tagName() == "harmony")
                   xmlHarmony(e, tick, measure, staff);
+            else if (e.tagName() == "figured-bass") {
+                  qDebug("found figured-bass");
+                  FiguredBass* fb = new FiguredBass(score);
+                  fb->setTrack(staff * VOICES);
+                  fb->readMusicXML(e);
+                  // TODO: use addelement ?
+                  Segment* s = measure->getSegment(SegChordRest, tick);
+                  s->add(fb);
+                  }
             else
                   domError(e);
             }
@@ -2215,7 +2225,7 @@ static void metronome(QDomElement e, Text* t)
       }
 
 //---------------------------------------------------------
-//   direction
+//   addElement
 //---------------------------------------------------------
 
 static void addElement(Element* el, bool hasYoffset, int staff, int rstaff, Score* score, QString& placement,

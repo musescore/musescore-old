@@ -117,6 +117,10 @@ class FiguredBassItem : public SimpleText {
       virtual void      read(const QDomElement&);
       virtual void      write(Xml& xml) const;
 
+      // read / write MusicXML
+      void              readMusicXML(const QDomElement& de);
+      void              writeMusicXML(Xml&) const;
+
       // specific API
       const FiguredBass *    figuredBass() const      { return (FiguredBass*)(parent()); }
       bool              parse(QString& text);
@@ -186,6 +190,10 @@ class FiguredBass : public Text {
       virtual void      setSelected(bool f);
       virtual void      setVisible(bool f);
       virtual void      write(Xml& xml) const;
+
+      // read / write MusicXML
+      void              readMusicXML(const QDomElement& de);
+      void              writeMusicXML(Xml&) const;
 
       // getter /setters
       qreal             lineLength(int idx) const {   if(_lineLenghts.size() > idx)
