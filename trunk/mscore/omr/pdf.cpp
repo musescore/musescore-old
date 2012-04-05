@@ -26,7 +26,6 @@ extern "C" {
 
 int Pdf::references;
 static fz_context* ctx;
-// static fz_glyph_cache* cache;
 
 //---------------------------------------------------------
 //   numPages
@@ -43,11 +42,8 @@ int Pdf::numPages() const
 
 Pdf::Pdf()
       {
-      if (references == 0) {
-            // ctx = fz_new_context(&fz_alloc_default, 256 << 20);  // 256MB cache
+      if (references == 0)
             ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);  // 256MB cache
-//            cache = fz_new_glyph_cache(ctx);
-            }
       ++references;
       doc = 0;
       }
@@ -61,7 +57,6 @@ bool Pdf::open(const QString& path)
       char* name = path.toAscii().data();
       fz_try(ctx) {
             doc = fz_open_document(ctx, name);
-            // pdf_load_page_tree(xref);
             }
       fz_catch(ctx) {
             fz_close_document(doc);
@@ -82,8 +77,6 @@ Pdf::~Pdf()
       doc = 0;
       --references;
       if (references == 0) {
-//            fz_free_glyph_cache(ctx, cache);
-//            cache = 0;
             fz_free_context(ctx);
             ctx = 0;
             }
@@ -116,6 +109,10 @@ QImage Pdf::page(int i)
 
       int w = pix->w;
       int h = pix->h;
+      if (pix->n != 2) {
+            printf("omg: pixmap not bw? %d\n", pix->n);
+            return QImage();
+            }
 
       QImage image(w, h, QImage::Format_MonoLSB);
       QVector<QRgb> ct(2);
@@ -124,24 +121,32 @@ QImage Pdf::page(int i)
       image.setColorTable(ct);
 
       uchar* s   = pix->samples;
-      int stride = image.bytesPerLine();
-      int bytes  = w >> 3;
+      int bytes  = w / 8;
+      int bits   = w % 8;
       for (int line = 0; line < h; ++line) {
-            uchar* d = image.bits() + stride * line;
+            uchar* d = image.scanLine(line);
             for (int col = 0; col < bytes; ++col) {
                   uchar data = 0;
                   for (int i = 0; i < 8; ++i) {
-                        uchar v = *s++;
-                        s++;
+                        uchar v = *s;
+                        s += 2;
                         data >>= 1;
-                        if (v < 128)
+                        if (v < 128) {            // convert grayscale to bw
                               data |= 0x80;
+                              }
                         }
                   *d++ = data;
                   }
+            uchar data = 0;
+            for (int col = 0; col < bits; ++col) {
+                  uchar v = *s;
+                  s += 2;
+                  data >>= 1;
+                  if (v < 128)
+                        data |= 0x80;
+                  }
             }
       fz_drop_pixmap(ctx, pix);
-      // fz_free_page(ctx, page);
       return image;
       }
 
