@@ -3572,8 +3572,10 @@ void ExportMusicXml::write(QIODevice* dev)
                         DrumInstrument di = drumset->drum(i);
                         if (di.notehead >= 0) {
                               xml.stag(QString("midi-instrument id=\"P%1-I%2\"").arg(idx+1).arg(i + 1));
-                              xml.tag("midi-channel", part->midiChannel() + 1);
-                              xml.tag("midi-program", part->midiProgram() + 1);
+                              if(part->midiChannel() >= 0) // <0 is not valid
+                                    xml.tag("midi-channel", part->midiChannel() + 1);
+                              if(part->midiProgram() >= 0) // <0 is not valid
+                                    xml.tag("midi-program", part->midiProgram() + 1);
                               xml.tag("midi-unpitched", i + 1);
                               xml.tag("volume", (part->volume() / 127.0) * 100);  //percent
                               xml.tag("pan", ((int)((part->pan() - 63.5) / 63.5)) * 90); //-90 hard left, +90 hard right
@@ -3587,8 +3589,10 @@ void ExportMusicXml::write(QIODevice* dev)
                   xml.etag();
 
                   xml.stag(QString("midi-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
-                  xml.tag("midi-channel", part->midiChannel() + 1);
-                  xml.tag("midi-program", part->midiProgram() + 1);
+                  if(part->midiChannel() >= 0) // <0 is not valid
+                        xml.tag("midi-channel", part->midiChannel() + 1);
+                  if(part->midiProgram() >= 0) // <0 is not valid
+                        xml.tag("midi-program", part->midiProgram() + 1);
                   xml.tag("volume", (part->volume() / 127.0) * 100);  //percent
                   xml.tag("pan", ((int)((part->pan() - 63.5) / 63.5)) * 90); //-90 hard left, +90 hard right
                   xml.etag();
