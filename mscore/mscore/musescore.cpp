@@ -3628,11 +3628,7 @@ void MuseScore::networkFinished(QNetworkReply* reply)
       QString s(ha);
       QString name;
       QRegExp re(".*filename=\"(.*)\"");
-      if (s.isEmpty() || re.indexIn(s) == -1)
-            name = "unknown.mscz";
-      else
-            name = re.cap(1);
-            
+                  
       if (!s.isEmpty() && re.indexIn(s) != -1) {
             name = re.cap(1);
              }
