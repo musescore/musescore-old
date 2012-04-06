@@ -119,7 +119,7 @@ class FiguredBassItem : public SimpleText {
 
       // read / write MusicXML
       void              readMusicXML(const QDomElement& de);
-      void              writeMusicXML(Xml&) const;
+      void              writeMusicXML(Xml& xml) const;
 
       // specific API
       const FiguredBass *    figuredBass() const      { return (FiguredBass*)(parent()); }
@@ -193,7 +193,7 @@ class FiguredBass : public Text {
 
       // read / write MusicXML
       void              readMusicXML(const QDomElement& de);
-      void              writeMusicXML(Xml&) const;
+      void              writeMusicXML(Xml& xml) const;
 
       // getter /setters
       qreal             lineLength(int idx) const {   if(_lineLenghts.size() > idx)
