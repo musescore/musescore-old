@@ -420,15 +420,12 @@ void FiguredBassItem::read(const QDomElement& de)
 
 void FiguredBassItem::readMusicXML(const QDomElement& de)
       {
-      qDebug("FiguredBassItem::readMusicXML");
       for (QDomElement e = de.firstChildElement(); !e.isNull();  e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
             int   iVal = val.toInt();
-            if (tag == "figure-number") {
-                  qDebug("FiguredBassItem::readMusicXML figure-number %d", iVal);
+            if (tag == "figure-number")
                   digit = iVal;
-                  }
             }
       }
 
@@ -436,9 +433,12 @@ void FiguredBassItem::readMusicXML(const QDomElement& de)
 //   Write MusicXML
 //---------------------------------------------------------
 
-void FiguredBassItem::writeMusicXML(Xml&) const
+void FiguredBassItem::writeMusicXML(Xml& xml) const
       {
-      // TODO
+      xml.stag("figure");
+      if(digit != FBIDigitNone)
+            xml.tag("figure-number", digit);
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -1143,7 +1143,6 @@ bool FiguredBass::fontData(int nIdx, QString * pFamily, QString * pDisplayName,
 
 void FiguredBass::readMusicXML(const QDomElement& de)
       {
-      qDebug("FiguredBass::readMusicXML");
       QString normalizedText = QString();
       int idx = 0;
       for (QDomElement e = de.firstChildElement(); !e.isNull();  e = e.nextSiblingElement()) {
@@ -1168,9 +1167,12 @@ void FiguredBass::readMusicXML(const QDomElement& de)
 //   Write MusicXML
 //---------------------------------------------------------
 
-void FiguredBass::writeMusicXML(Xml&) const
+void FiguredBass::writeMusicXML(Xml& xml) const
       {
-      // TODO
+      xml.stag("figured-bass");
+      foreach(FiguredBassItem item, items)
+            item.writeMusicXML(xml);
+      xml.etag();
       }
 
 //---------------------------------------------------------

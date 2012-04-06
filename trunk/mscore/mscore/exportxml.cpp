@@ -90,6 +90,7 @@
 #include "libmscore/accidental.h"
 #include "libmscore/breath.h"
 #include "libmscore/chordline.h"
+#include "libmscore/figuredbass.h"
 
 //---------------------------------------------------------
 //   local defines for debug output
@@ -245,7 +246,7 @@ class ExportMusicXml {
       GlissandoHandler gh;
       int tick;
       Attributes attr;
-      TextLine* bracket[MAX_BRACKETS];
+      TextLine const* bracket[MAX_BRACKETS];
       int div;
       double millimeters;
       int tenths;
@@ -279,15 +280,16 @@ public:
       void write(QIODevice* dev);
       void credits(Xml& xml);
       void moveToTick(int t);
-      void words(Text* text, int staff);
-      void hairpin(Hairpin* hp, int staff, int tick);
-      void ottava(Ottava* ot, int staff, int tick);
-      void pedal(Pedal* pd, int staff, int tick);
-      void textLine(TextLine* tl, int staff, int tick);
-      void dynamic(Dynamic* dyn, int staff);
-      void symbol(Symbol* sym, int staff);
-      void tempoText(TempoText* text, int staff);
-      void harmony(Harmony*);
+      void words(Text const* const text, int staff);
+      void hairpin(Hairpin const* const hp, int staff, int tick);
+      void ottava(Ottava const* const ot, int staff, int tick);
+      void pedal(Pedal const* const pd, int staff, int tick);
+      void textLine(TextLine const* const tl, int staff, int tick);
+      void dynamic(Dynamic const* const dyn, int staff);
+      void symbol(Symbol const* const sym, int staff);
+      void tempoText(TempoText const* const text, int staff);
+      void harmony(Harmony const* const);
+      void figuredBass(FiguredBass const* const);
       };
 
 //---------------------------------------------------------
@@ -942,7 +944,7 @@ void ExportMusicXml::credits(Xml& xml)
       const double tm = getTenthsFromInches(pf->oddTopMargin());
       const double bm = getTenthsFromInches(pf->oddBottomMargin());
       qDebug(" h=%g w=%g lm=%g rm=%g tm=%g bm=%g", h, w, lm, rm, tm, bm);
-      /**/
+
       // write the credits
       // TODO add real font size
       foreach(const Element* element, *measure->el()) {
@@ -958,26 +960,6 @@ void ExportMusicXml::credits(Xml& xml)
                   // MusicXML credit-words are untyped and simple list position and font info.
                   // TODO: these parameters should be extracted from text layout and style
                   //       instead of relying on the style name
-/*
-                  switch (text->textStyleType()) {
-                        case TEXT_STYLE_TITLE:
-                              creditWords(xml, w / 2, ty, fs, "center", "top", text->getText());
-                              break;
-                        case TEXT_STYLE_SUBTITLE:
-                              creditWords(xml, w / 2, ty, fs, "center", "top", text->getText());
-                              break;
-                        case TEXT_STYLE_COMPOSER:
-                              creditWords(xml, w - rm, ty, fs, "right", "top", text->getText());
-                              break;
-                        case TEXT_STYLE_POET:
-                              creditWords(xml, lm, ty, fs, "left", "top", text->getText());
-                              break;
-                              // case TEXT_TRANSLATOR:
-                              break;
-                        default:
-                              qDebug("credits: text style %d not supported", text->textStyleType());
-                        }
-*/
                   if (text->styled()) {
                         QString styleName = text->textStyle().name();
                         if (styleName == "Title")
@@ -997,7 +979,6 @@ void ExportMusicXml::credits(Xml& xml)
             const int fs = 8; // score->copyright()->font().pointSize();
             creditWords(xml, w / 2, bm, fs, "center", "bottom", rights);
             }
-      /**/
       }
 
 //---------------------------------------------------------
@@ -2271,7 +2252,7 @@ void ExportMusicXml::rest(Rest* rest, int staff)
 //   directionTag
 //---------------------------------------------------------
 
-static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
+static void directionTag(Xml& xml, Attributes& attr, Element const* const el = 0)
       {
       attr.doAttr(xml, false);
       QString tagname = QString("direction");
@@ -2337,7 +2318,7 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
                   qDebug("directionTag()  center diff=%g", el->y() + el->height() / 2 - bb.y() - bb.height() / 2);
                   */
                   if (el->type() == HAIRPIN || el->type() == OTTAVA || el->type() == PEDAL || el->type() == TEXTLINE) {
-                        SLine* sl = static_cast<SLine*>(el);
+                        SLine const* const sl = static_cast<SLine const* const>(el);
                         if (sl->spannerSegments().size() > 0) {
                               LineSegment* seg = (LineSegment*)sl->spannerSegments().at(0);
                               // for the line type elements the reference point is vertically centered
@@ -2523,7 +2504,7 @@ static bool findMetronome(QString words,
       return false;
       }
 
-static void wordsMetrome(Xml& xml, Text* text)
+static void wordsMetrome(Xml& xml, Text const* const text)
       {
       QString wordsLeft;  // words left of metronome
       bool hasParen;      // parenthesis
@@ -2570,7 +2551,7 @@ static void wordsMetrome(Xml& xml, Text* text)
             }
       }
 
-void ExportMusicXml::tempoText(TempoText* text, int staff)
+void ExportMusicXml::tempoText(TempoText const* const text, int staff)
       {
       /*
       qDebug("ExportMusicXml::tempoText(TempoText='%s')", qPrintable(text->getText()));
@@ -2591,7 +2572,7 @@ void ExportMusicXml::tempoText(TempoText* text, int staff)
 //   words
 //---------------------------------------------------------
 
-void ExportMusicXml::words(Text* text, int staff)
+void ExportMusicXml::words(Text const* const text, int staff)
       {
       /*
       qDebug("ExportMusicXml::words userOff.x=%f userOff.y=%f xoff=%g yoff=%g text='%s'",
@@ -2613,7 +2594,7 @@ void ExportMusicXml::words(Text* text, int staff)
 //   hairpin
 //---------------------------------------------------------
 
-void ExportMusicXml::hairpin(Hairpin* hp, int staff, int tick)
+void ExportMusicXml::hairpin(Hairpin const* const hp, int staff, int tick)
       {
       directionTag(xml, attr, hp);
       xml.stag("direction-type");
@@ -2631,7 +2612,7 @@ void ExportMusicXml::hairpin(Hairpin* hp, int staff, int tick)
 // <octave-shift type="stop" size="8"/>
 //---------------------------------------------------------
 
-void ExportMusicXml::ottava(Ottava* ot, int staff, int tick)
+void ExportMusicXml::ottava(Ottava const* const ot, int staff, int tick)
       {
       int st = ot->subtype();
       directionTag(xml, attr, ot);
@@ -2678,7 +2659,7 @@ void ExportMusicXml::ottava(Ottava* ot, int staff, int tick)
 //   pedal
 //---------------------------------------------------------
 
-void ExportMusicXml::pedal(Pedal* pd, int staff, int tick)
+void ExportMusicXml::pedal(Pedal const* const pd, int staff, int tick)
       {
       directionTag(xml, attr, pd);
       xml.stag("direction-type");
@@ -2706,7 +2687,7 @@ int ExportMusicXml::findBracket(const TextLine* tl) const
 //   textLine
 //---------------------------------------------------------
 
-void ExportMusicXml::textLine(TextLine* tl, int staff, int tick)
+void ExportMusicXml::textLine(TextLine const* const tl, int staff, int tick)
       {
       QString rest;
       QPointF p;
@@ -2802,7 +2783,7 @@ void ExportMusicXml::textLine(TextLine* tl, int staff, int tick)
 // supported by MusicXML need to be filtered out. Everything not recognized
 // as MusicXML dynamics is written as words.
 
-void ExportMusicXml::dynamic(Dynamic* dyn, int staff)
+void ExportMusicXml::dynamic(Dynamic const* const dyn, int staff)
       {
       QString t = dyn->getText();
       directionTag(xml, attr, dyn);
@@ -2840,7 +2821,7 @@ void ExportMusicXml::dynamic(Dynamic* dyn, int staff)
 // TODO: remove dependency on symbol name and replace by a more stable interface
 // changes in sym.cpp r2494 broke MusicXML export of pedals (again)
 
-void ExportMusicXml::symbol(Symbol* sym, int staff)
+void ExportMusicXml::symbol(Symbol const* const sym, int staff)
       {
       QString name = symbols[score->symIdx()][sym->sym()].name();
       const char* mxmlName = "";
@@ -3068,6 +3049,7 @@ static void repeatAtMeasureStart(Xml& xml, Attributes& attr, Measure* m, int str
                                     case TEXT:
                                     case DYNAMIC:
                                     case HARMONY:
+                                    case FIGURED_BASS:
                                     case JUMP: // note: all jumps are handled at measure stop
                                           break;
                                     case MARKER:
@@ -3264,20 +3246,23 @@ static void annotations(ExportMusicXml* exp, int strack, int etrack, int track, 
                   if (track == wtrack) {
                         switch (e->type()) {
                               case SYMBOL:
-                                    exp->symbol((Symbol*) e, sstaff);
+                                    exp->symbol(static_cast<const Symbol*>(e), sstaff);
                                     break;
                               case TEMPO_TEXT:
-                                    exp->tempoText((TempoText*) e, sstaff);
+                                    exp->tempoText(static_cast<const TempoText*>(e), sstaff);
                                     break;
                               case STAFF_TEXT:
                               case TEXT:
-                                    exp->words((Text*) e, sstaff);
+                                    exp->words(static_cast<const Text*>(e), sstaff);
                                     break;
                               case DYNAMIC:
-                                    exp->dynamic((Dynamic*) e, sstaff);
+                                    exp->dynamic(static_cast<const Dynamic*>(e), sstaff);
                                     break;
                               case HARMONY:
-                                    exp->harmony((Harmony*) e /*, sstaff */);
+                                    exp->harmony(static_cast<const Harmony*>(e) /*, sstaff */);
+                                    break;
+                              case FIGURED_BASS:
+                                    exp->figuredBass(static_cast<const FiguredBass*>(e) /*, sstaff */);
                                     break;
                               case JUMP:
                                     // ignore
@@ -3318,16 +3303,16 @@ static void spannerStart(ExportMusicXml* exp, int strack, int etrack, int track,
                   if (track == wtrack) {
                         switch (e->type()) {
                               case HAIRPIN:
-                                    exp->hairpin((Hairpin*) e, sstaff, seg->tick());
+                                    exp->hairpin(static_cast<const Hairpin*>(e), sstaff, seg->tick());
                                     break;
                               case OTTAVA:
-                                    exp->ottava((Ottava*) e, sstaff, seg->tick());
+                                    exp->ottava(static_cast<const Ottava*>(e), sstaff, seg->tick());
                                     break;
                               case PEDAL:
-                                    exp->pedal((Pedal*) e, sstaff, seg->tick());
+                                    exp->pedal(static_cast<const Pedal*>(e), sstaff, seg->tick());
                                     break;
                               case TEXTLINE:
-                                    exp->textLine((TextLine*) e, sstaff, seg->tick());
+                                    exp->textLine(static_cast<const TextLine*>(e), sstaff, seg->tick());
                                     break;
                               case TRILL:
                                     // ignore (written as <note><notations><ornaments><wavy-line>
@@ -3361,16 +3346,16 @@ static void spannerStop(ExportMusicXml* exp, int strack, int etrack, int track, 
                   if (track == wtrack) {
                         switch (e->type()) {
                               case HAIRPIN:
-                                    exp->hairpin((Hairpin*) e, sstaff, -1);
+                                    exp->hairpin(static_cast<const Hairpin*>(e), sstaff, -1);
                                     break;
                               case OTTAVA:
-                                    exp->ottava((Ottava*) e, sstaff, -1);
+                                    exp->ottava(static_cast<const Ottava*>(e), sstaff, -1);
                                     break;
                               case PEDAL:
-                                    exp->pedal((Pedal*) e, sstaff, -1);
+                                    exp->pedal(static_cast<const Pedal*>(e), sstaff, -1);
                                     break;
                               case TEXTLINE:
-                                    exp->textLine((TextLine*) e, sstaff, -1);
+                                    exp->textLine(static_cast<const TextLine*>(e), sstaff, -1);
                                     break;
                               case TRILL:
                                     // ignore (written as <note><notations><ornaments><wavy-line>
@@ -3572,9 +3557,9 @@ void ExportMusicXml::write(QIODevice* dev)
                         DrumInstrument di = drumset->drum(i);
                         if (di.notehead >= 0) {
                               xml.stag(QString("midi-instrument id=\"P%1-I%2\"").arg(idx+1).arg(i + 1));
-                              if(part->midiChannel() >= 0) // <0 is not valid
+                              if (part->midiChannel() >= 0) // <0 is not valid
                                     xml.tag("midi-channel", part->midiChannel() + 1);
-                              if(part->midiProgram() >= 0) // <0 is not valid
+                              if (part->midiProgram() >= 0) // <0 is not valid
                                     xml.tag("midi-program", part->midiProgram() + 1);
                               xml.tag("midi-unpitched", i + 1);
                               xml.tag("volume", (part->volume() / 127.0) * 100);  //percent
@@ -3589,9 +3574,9 @@ void ExportMusicXml::write(QIODevice* dev)
                   xml.etag();
 
                   xml.stag(QString("midi-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
-                  if(part->midiChannel() >= 0) // <0 is not valid
+                  if (part->midiChannel() >= 0) // <0 is not valid
                         xml.tag("midi-channel", part->midiChannel() + 1);
-                  if(part->midiProgram() >= 0) // <0 is not valid
+                  if (part->midiProgram() >= 0) // <0 is not valid
                         xml.tag("midi-program", part->midiProgram() + 1);
                   xml.tag("volume", (part->volume() / 127.0) * 100);  //percent
                   xml.tag("pan", ((int)((part->pan() - 63.5) / 63.5)) * 90); //-90 hard left, +90 hard right
@@ -4092,10 +4077,20 @@ double ExportMusicXml::getTenthsFromDots(double dots)
 
 
 //---------------------------------------------------------
+//   figuredBass
+//---------------------------------------------------------
+
+void ExportMusicXml::figuredBass(FiguredBass const* const fb)
+      {
+      fb->writeMusicXML(xml);
+      }
+
+
+//---------------------------------------------------------
 //   harmony
 //---------------------------------------------------------
 
-void ExportMusicXml::harmony(Harmony* h)
+void ExportMusicXml::harmony(Harmony const* const h)
       {
       int rootTpc = h->rootTpc();
       if (rootTpc != INVALID_TPC) {
