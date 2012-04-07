@@ -415,8 +415,59 @@ void FiguredBassItem::read(const QDomElement& de)
 }
 
 //---------------------------------------------------------
-//   Read MusicXML
+//   Convert MusicXML prefix/suffix to FBIAccidental
 //---------------------------------------------------------
+
+// TODO add non-accidental types
+
+FiguredBassItem::FBIAccidental FiguredBassItem::MusicXML2FBIAccidental(const QString prefix) const
+      {
+      if (prefix == "sharp")
+            return FBIAccidSharp;
+      else if (prefix == "flat")
+            return FBIAccidFlat;
+      else if (prefix == "natural")
+            return FBIAccidNatural;
+      else if (prefix == "double-sharp")
+            return FBIAccidDoubleSharp;
+      else if (prefix == "flat-flat")
+            return FBIAccidDoubleFlat;
+      else if (prefix == "sharp-sharp")
+            return FBIAccidDoubleSharp;
+      else
+            return FBIAccidNone;
+      }
+
+//---------------------------------------------------------
+//   Convert FBIAccidental to MusicXML prefix/suffix
+//---------------------------------------------------------
+
+// TODO add non-accidental types
+
+QString FiguredBassItem::FBIAccidental2MusicXML(FiguredBassItem::FBIAccidental prefix) const
+      {
+      switch (prefix) {
+            case FBIAccidNone:        return "";
+            case FBIAccidDoubleFlat:  return "flat-flat";
+            case FBIAccidFlat:        return "flat";
+            case FBIAccidNatural:     return "natural";
+            case FBIAccidSharp:       return "sharp";
+            case FBIAccidDoubleSharp: return "double-sharp";
+            case FBIAccidPlus:        return "";
+            case FBIAccidBackslash:   return "";
+            case FBIAccidSlash:       return "";
+            case FBINumOfAccid:       return ""; // prevent gcc "‘FBINumOfAccid’ not handled in switch" warning
+            }
+      return "";
+      }
+
+//---------------------------------------------------------
+//   Read MusicXML
+//
+// Set the FiguredBassItem state based on the MusicXML <figure> node de.
+//---------------------------------------------------------
+
+// TODO support slashed and parenthesized figures
 
 void FiguredBassItem::readMusicXML(const QDomElement& de)
       {
@@ -424,8 +475,16 @@ void FiguredBassItem::readMusicXML(const QDomElement& de)
             const QString& tag(e.tagName());
             const QString& val(e.text());
             int   iVal = val.toInt();
-            if (tag == "figure-number")
+            if (tag == "extend")
+                  ; // TODO
+            else if (tag == "figure-number")
                   digit = iVal;
+            else if (tag == "prefix")
+                  prefix = MusicXML2FBIAccidental(val);
+            else if (tag == "suffix")
+                  suffix = MusicXML2FBIAccidental(val);
+            else
+                  domError(e);
             }
       }
 
@@ -433,11 +492,19 @@ void FiguredBassItem::readMusicXML(const QDomElement& de)
 //   Write MusicXML
 //---------------------------------------------------------
 
+// TODO support slashed and parenthesized figures
+
 void FiguredBassItem::writeMusicXML(Xml& xml) const
       {
       xml.stag("figure");
-      if(digit != FBIDigitNone)
+      QString strPrefix = FBIAccidental2MusicXML(prefix);
+      if (strPrefix != "")
+            xml.tag("prefix", strPrefix);
+      if (digit != FBIDigitNone)
             xml.tag("figure-number", digit);
+      QString strSuffix = FBIAccidental2MusicXML(suffix);
+      if (strSuffix != "")
+            xml.tag("suffix", strSuffix);
       xml.etag();
       }
 
@@ -1139,7 +1206,13 @@ bool FiguredBass::fontData(int nIdx, QString * pFamily, QString * pDisplayName,
 
 //---------------------------------------------------------
 //   Read MusicXML
+//
+// Set the FiguredBass state based on the MusicXML <figured-bass> node de.
+// Note that onNote and ticks must be set by the MusicXML importer,
+// as the required context is not present in the items DOM tree.
 //---------------------------------------------------------
+
+// TODO support parenthesized figures
 
 void FiguredBass::readMusicXML(const QDomElement& de)
       {
@@ -1159,6 +1232,8 @@ void FiguredBass::readMusicXML(const QDomElement& de)
                         normalizedText.append('\n');
                   normalizedText.append(pItem->normalizedText());
                   }
+            else
+                  domError(e);
             }
       setText(normalizedText);                  // this is the text to show while editing
       }
@@ -1166,6 +1241,8 @@ void FiguredBass::readMusicXML(const QDomElement& de)
 //---------------------------------------------------------
 //   Write MusicXML
 //---------------------------------------------------------
+
+// TODO support parenthesized figures
 
 void FiguredBass::writeMusicXML(Xml& xml) const
       {

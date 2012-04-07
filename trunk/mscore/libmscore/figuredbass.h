@@ -127,6 +127,11 @@ class FiguredBassItem : public SimpleText {
       QString           normalizedText() const;
 
 protected:
+
+private:
+      // read / write MusicXML support
+      FiguredBassItem::FBIAccidental MusicXML2FBIAccidental(const QString prefix) const;
+      QString                        FBIAccidental2MusicXML(FiguredBassItem::FBIAccidental prefix) const;
 };
 
 //---------------------------------------------------------

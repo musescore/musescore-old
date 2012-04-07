@@ -81,6 +81,72 @@
         <voice>1</voice>
         <type>whole</type>
         </note>
+      </measure>
+    <measure number="3">
+      <figured-bass>
+        <figure>
+          <prefix>flat-flat</prefix>
+          <figure-number>1</figure-number>
+          </figure>
+        <figure>
+          <prefix>flat</prefix>
+          <figure-number>2</figure-number>
+          </figure>
+        <figure>
+          <prefix>natural</prefix>
+          <figure-number>3</figure-number>
+          </figure>
+        <figure>
+          <prefix>sharp</prefix>
+          <figure-number>4</figure-number>
+          </figure>
+        <figure>
+          <prefix>double-shapr</prefix>
+          <figure-number>5</figure-number>
+          </figure>
+        </figured-bass>
+      <note>
+        <pitch>
+          <step>C</step>
+          <octave>2</octave>
+          </pitch>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>whole</type>
+        </note>
+      </measure>
+    <measure number="4">
+      <figured-bass>
+        <figure>
+          <figure-number>1</figure-number>
+          <suffix>flat-flat</suffix>
+          </figure>
+        <figure>
+          <figure-number>2</figure-number>
+          <suffix>flat</suffix>
+          </figure>
+        <figure>
+          <figure-number>3</figure-number>
+          <suffix>natural</suffix>
+          </figure>
+        <figure>
+          <figure-number>4</figure-number>
+          <suffix>sharp</suffix>
+          </figure>
+        <figure>
+          <figure-number>5</figure-number>
+          <suffix>double-shapr</suffix>
+          </figure>
+        </figured-bass>
+      <note>
+        <pitch>
+          <step>C</step>
+          <octave>2</octave>
+          </pitch>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>whole</type>
+        </note>
       <barline location="right">
         <bar-style>light-heavy</bar-style>
         </barline>

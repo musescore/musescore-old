@@ -2033,12 +2033,15 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
             else if (e.tagName() == "harmony")
                   xmlHarmony(e, tick, measure, staff);
             else if (e.tagName() == "figured-bass") {
-                  qDebug("found figured-bass");
                   FiguredBass* fb = new FiguredBass(score);
                   fb->setTrack(staff * VOICES);
                   fb->readMusicXML(e);
-                  // TODO: use addelement ?
                   Segment* s = measure->getSegment(SegChordRest, tick);
+                  // TODO: use addelement() instead of Segment::add() ?
+                  //       or FiguredBass::addFiguredBassToSegment() ?
+                  // TODO: set correct ticks value (typically same as note attached to,
+                  //       which is unknown now because it has not been read yet)
+                  // TODO: set correct onNote value
                   s->add(fb);
                   }
             else
