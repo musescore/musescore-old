@@ -118,8 +118,9 @@ class FiguredBassItem : public SimpleText {
       virtual void      write(Xml& xml) const;
 
       // read / write MusicXML
-      void              readMusicXML(const QDomElement& de);
+      void              readMusicXML(const QDomElement& de, bool paren);
       void              writeMusicXML(Xml& xml) const;
+      bool              startsWithParenthesis() const;
 
       // specific API
       const FiguredBass *    figuredBass() const      { return (FiguredBass*)(parent()); }
@@ -212,6 +213,10 @@ class FiguredBass : public Text {
 
       // other methods
 //      void              adjustDuration();
+
+private:
+      // read / write MusicXML support
+      bool              hasParentheses() const;
       };
 
 #endif
