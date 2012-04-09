@@ -101,7 +101,7 @@
           <figure-number>4</figure-number>
           </figure>
         <figure>
-          <prefix>double-shapr</prefix>
+          <prefix>double-sharp</prefix>
           <figure-number>5</figure-number>
           </figure>
         </figured-bass>
@@ -135,7 +135,49 @@
           </figure>
         <figure>
           <figure-number>5</figure-number>
-          <suffix>double-shapr</suffix>
+          <suffix>double-sharp</suffix>
+          </figure>
+        </figured-bass>
+      <note>
+        <pitch>
+          <step>C</step>
+          <octave>2</octave>
+          </pitch>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>whole</type>
+        </note>
+      </measure>
+    <measure number="5">
+      <figured-bass parentheses="yes">
+        <figure>
+          <figure-number>1</figure-number>
+          </figure>
+        <figure>
+          <figure-number>2</figure-number>
+          </figure>
+        </figured-bass>
+      <note>
+        <pitch>
+          <step>C</step>
+          <octave>2</octave>
+          </pitch>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>whole</type>
+        </note>
+      </measure>
+    <measure number="6">
+      <figured-bass>
+        <figure>
+          <figure-number>4</figure-number>
+          </figure>
+        <figure>
+          <figure-number>5</figure-number>
+          <suffix>slash</suffix>
+          </figure>
+        <figure>
+          <figure-number>6</figure-number>
           </figure>
         </figured-bass>
       <note>

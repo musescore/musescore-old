@@ -1247,11 +1247,10 @@ bool FiguredBass::fontData(int nIdx, QString * pFamily, QString * pDisplayName,
 // Set the FiguredBass state based on the MusicXML <figured-bass> node de.
 // Note that onNote and ticks must be set by the MusicXML importer,
 // as the required context is not present in the items DOM tree.
+// Exception: if a <duration> element is present, tick can be set.
 //---------------------------------------------------------
 
-// TODO support parenthesized figures
-
-void FiguredBass::readMusicXML(const QDomElement& de)
+void FiguredBass::readMusicXML(const QDomElement& de, int divisions)
       {
       bool parentheses = (de.attribute("parentheses") == "yes");
       QString normalizedText;
@@ -1259,7 +1258,19 @@ void FiguredBass::readMusicXML(const QDomElement& de)
       for (QDomElement e = de.firstChildElement(); !e.isNull();  e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             const QString& val(e.text());
-            if (tag == "figure") {
+            if (tag == "duration") {
+                  bool ok = true;
+                  int duration = val.toInt(&ok);
+                  if (ok) {
+                        duration *= MScore::division;
+                        duration /= divisions;
+                        setTicks(duration);
+                        }
+                  else
+                        qDebug("MusicXml-Import: bad duration value: <%s>",
+                               qPrintable(val));
+                  }
+            else if (tag == "figure") {
                   FiguredBassItem * pItem = new FiguredBassItem(score(), idx++);
                   pItem->setTrack(track());
                   pItem->setParent(this);

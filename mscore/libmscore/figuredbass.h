@@ -198,7 +198,7 @@ class FiguredBass : public Text {
       virtual void      write(Xml& xml) const;
 
       // read / write MusicXML
-      void              readMusicXML(const QDomElement& de);
+      void              readMusicXML(const QDomElement& de, int divisions);
       void              writeMusicXML(Xml& xml) const;
 
       // getter /setters
