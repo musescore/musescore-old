@@ -3124,6 +3124,7 @@ static void repeatAtMeasureStop(Xml& xml, Measure* m, int strack, int etrack, in
                                     case TEXT:
                                     case DYNAMIC:
                                     case HARMONY:
+                                    case FIGURED_BASS:
                                           break;
                                     case MARKER:
                                           {
