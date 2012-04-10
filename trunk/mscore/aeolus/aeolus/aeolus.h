@@ -115,6 +115,9 @@ class Aeolus : public Synth {
       virtual SyntiState state() const;
       virtual void setState(const SyntiState&);
 
+      virtual void allSoundsOff(int);
+      virtual void allNotesOff(int);
+
       friend class Model;
       };
 

@@ -858,7 +858,6 @@ void StaffLines::draw(QPainter* painter) const
       {
       QPointF _pos(0.0, 0.0);
 
-      painter->setPen(QPen(curColor(), lw, Qt::SolidLine, Qt::FlatCap));
       qreal x1 = _pos.x();
       qreal x2 = x1 + width();
 
@@ -868,6 +867,22 @@ void StaffLines::draw(QPainter* painter) const
             ll[i].setLine(x1, y, x2, y);
             y += dist;
             }
+      if (debugMode) {
+            painter->setPen(QPen(Qt::lightGray, lw, Qt::SolidLine, Qt::FlatCap));
+            y = _pos.y() - 3 * dist;
+            painter->drawLine(QLineF(x1, y, x2, y));
+            y = _pos.y() - 2 * dist;
+            painter->drawLine(QLineF(x1, y, x2, y));
+            y = _pos.y() - dist;
+            painter->drawLine(QLineF(x1, y, x2, y));
+            y = _pos.y() + lines * dist;
+            painter->drawLine(QLineF(x1, y, x2, y));
+            y = _pos.y() + (lines+1) * dist;
+            painter->drawLine(QLineF(x1, y, x2, y));
+            y = _pos.y() + (lines+2) * dist;
+            painter->drawLine(QLineF(x1, y, x2, y));
+            }
+      painter->setPen(QPen(curColor(), lw, Qt::SolidLine, Qt::FlatCap));
       painter->drawLines(ll);
       }
 

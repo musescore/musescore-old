@@ -287,3 +287,14 @@ void Aeolus::setState(const SyntiState&)
       {
       }
 
+void Aeolus::allSoundsOff(int)
+      {
+      memset(_keymap, 0, sizeof(_keymap));
+      }
+
+void Aeolus::allNotesOff(int)
+      {
+      memset(_keymap, 0, sizeof(_keymap));
+      }
+
+

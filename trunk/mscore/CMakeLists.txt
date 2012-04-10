@@ -34,15 +34,14 @@ set(GCC_VISIBILITY TRUE)            # requires gcc 4.x?
 set(HAS_AUDIOFILE TRUE)             # requires libsndfile
 
 set(STATIC_SCRIPT_BINDINGS TRUE)
-# set(BUILD_SCRIPTGEN   TRUE)         # Generate Qt script bindings. (collides with qtscriptgenerator project on several distrib)
 set(USE_SSE           FALSE)
 set(SOUNDFONT3        TRUE)         # enable ogg vorbis compressed fonts, require ogg & vorbis
 set(AEOLUS            TRUE)         # pipe organ synthesizer
 set(EMBED_ICONS       FALSE)        # do not load icons from share/icons
 
 option (OSC "enable OSC remote control protocol" ON)        # osc remote control
-option (OMR "enable PDF import"  OFF)                       # OMR - optical music recognition
-option (BUILD_SCRIPTGEN "enable script bindings" ON)
+option (OMR "enable PDF import"  ON)                       # OMR - optical music recognition
+option (BUILD_SCRIPTGEN "enable script bindings" OFF)
 
 if (APPLE OR MINGW)
       set(GCC_VISIBILITY FALSE)     # warnings if not, with gcc4.4 from qt

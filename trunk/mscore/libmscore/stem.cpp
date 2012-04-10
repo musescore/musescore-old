@@ -18,6 +18,7 @@
 #include "stafftype.h"
 #include "hook.h"
 #include "tremolo.h"
+#include "note.h"
 
 // TEMPORARY HACK!!
 #include "sym.h"
@@ -37,13 +38,64 @@ Stem::Stem(Score* s)
       }
 
 //---------------------------------------------------------
+//   up
+//---------------------------------------------------------
+
+bool Stem::up() const
+      {
+      return chord() ? chord()->up() : true;
+      }
+
+//---------------------------------------------------------
+//   hookPos
+//---------------------------------------------------------
+
+QPointF Stem::hookPos() const
+      {
+      QPointF p(pos());
+      if (up()) {
+            p.ry() -= _len + _userLen;
+            }
+      else {
+            p.rx() += score()->styleP(ST_stemWidth);
+            p.ry() += _len + _userLen;
+            }
+      return p;
+      }
+
+//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
 void Stem::layout()
       {
-      qreal lw = point(score()->styleS(ST_stemWidth));
-      qreal l  = stemLen();
+      qreal l = _len + _userLen;
+      if (up())
+            l = -l;
+      Staff* st = staff();
+      qreal lw  = point(score()->styleS(ST_stemWidth));
+      QPointF p1(0.0, 0.0);
+      QPointF p2(0.0, l);
+      if (st && !st->useTablature() && chord()) {
+            // adjust P1 for note head
+            Chord* c = chord();
+            if (c->up()) {
+                  Note* n   = c->downNote();
+                  p1 = symbols[score()->symIdx()][n->noteHead()].attach(n->magS());
+                  p1.rx() = -lw * .5;
+                  p2.rx() = -lw * .5;
+                  }
+            else {
+                  Note* n = c->upNote();
+                  p1 = -symbols[score()->symIdx()][n->noteHead()].attach(n->magS());
+                  p1.rx() = lw * .5;
+                  p2.rx() = lw * .5;
+                  }
+            }
+      line.setP1(p1);
+      line.setP2(p2);
+
+      // compute bounding rectangle
       setbbox(QRectF(-lw * .5, 0, lw, l).normalized());
       }
 
@@ -53,6 +105,8 @@ void Stem::layout()
 
 void Stem::setLen(qreal v)
       {
+      if (v < 0.0)
+            v = -v;
       _len = v;
       layout();
       }
@@ -64,6 +118,7 @@ void Stem::setLen(qreal v)
 void Stem::spatiumChanged(qreal oldValue, qreal newValue)
       {
       _userLen = (_userLen / oldValue) * newValue;
+      layout();
       }
 
 //---------------------------------------------------------
@@ -80,11 +135,12 @@ void Stem::draw(QPainter* painter) const
             useTab = true;
             }
       qreal lw = point(score()->styleS(ST_stemWidth));
-      painter->setPen(QPen(curColor(), lw, Qt::SolidLine, Qt::RoundCap));
-      painter->drawLine(QLineF(0.0, 0.0, 0.0, stemLen()));
+      painter->setPen(QPen(curColor(), lw, Qt::SolidLine, Qt::FlatCap));
+      painter->drawLine(line);
 
       // NOT THE BEST PLACE FOR THIS?
       // with tablatures, dots are not drawn near 'notes', but near stems
+      // TODO: adjust bounding rectangle in layout()
       if (useTab) {
             int nDots = chord()->dots();
             if (nDots > 0)

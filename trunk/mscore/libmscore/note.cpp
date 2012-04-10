@@ -496,32 +496,31 @@ qreal Note::yPos() const
 
 QPointF Note::stemPos(bool upFlag) const
       {
-      QPointF pt(pos());
-/*      if (chord()->staffMove()) {
-            System* system = chord()->measure()->system();
-            pt.ry() += system->staff(staffIdx() + chord()->staffMove())->y() - system->staff(staffIdx())->y();
-            }
-      */
+      QPointF pt(pos() + chord()->pagePos());
       if (_mirror)
             upFlag = !upFlag;
 
       qreal sw   = point(score()->styleS(ST_stemWidth)) * .5;
-      if (chord() && chord()->staff() && chord()->staff()->useTablature()) {
+      if (chord()->staff() && chord()->staff()->useTablature()) {
             qreal xoffset = (sw + bbox().width() + bbox().x()) * .5;
             pt += QPointF(xoffset, (bbox().height() * .5 + spatium() * .5) * (upFlag ? -1.0 : 1.0));
             }
       else {
+#if 0
             QPointF off = symbols[score()->symIdx()][noteHead()].attach(magS());
             if (upFlag) {
-                  pt.rx() += off.x() - sw;
-                  pt.ry() += off.y();
+                  pt      += off;
+                  pt.rx() -= sw;
                   }
             else {
-                  pt.rx() += symbols[score()->symIdx()][noteHead()].width(magS()) - off.x() + sw;
-                  pt.ry() -= off.y();
+                  pt      -= off;
+                  pt.rx() += symbols[score()->symIdx()][noteHead()].width(magS()) + sw;
                   }
+#endif
+            if (upFlag)
+                  pt.rx() += headWidth();
             }
-      return pt + chord()->pagePos();
+      return pt;
       }
 
 //---------------------------------------------------------

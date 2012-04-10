@@ -1070,17 +1070,18 @@ void Chord::layoutStem()
             return;
 
       if (_stem) {
-            Spatium stemLen;
+            qreal _spatium   = spatium();
+            qreal stemLen;
             int hookIdx      = durationType().hooks();
             Note* upnote     = upNote();
             Note* downnote   = downNote();
-            qreal ul        = upnote->line() * .5;
-            qreal dl        = downnote->line() * .5;
+            int ul           = upnote->line();
+            int dl           = downnote->line();
             bool shortenStem = score()->styleB(ST_shortenStem);
 
 
             Spatium progression(score()->styleS(ST_shortStemProgression));
-            Spatium shortest(score()->styleS(ST_shortestStem));
+            qreal shortest(score()->styleS(ST_shortestStem).val());
 
             qreal normalStemLen = small() ? 2.5 : 3.5;
             switch(hookIdx) {
@@ -1093,7 +1094,7 @@ void Chord::layoutStem()
                         //
                         // avoid collision of dot with hook
                         //
-                        if (!(upnote->line() & 1))
+                        if (!(ul & 1))
                               normalStemLen += .5;
                         shortenStem = false;
                         }
@@ -1104,42 +1105,40 @@ void Chord::layoutStem()
             if (_noteType != NOTE_NORMAL) {
                   // grace notes stems are not subject to normal
                   // stem rules
-                  stemLen = Spatium(qAbs(ul - dl));
-                  stemLen += Spatium(normalStemLen * score()->style(ST_graceNoteMag).toDouble());
+                  stemLen =  qAbs(ul - dl) * .5;
+                  stemLen += normalStemLen * score()->styleD(ST_graceNoteMag);
                   if (up())
                         stemLen *= -1;
                   }
             else {
                   if (up()) {
-                        qreal dy  = dl + downnote->stemYoff(true);
-                        qreal sel = ul - normalStemLen;
+                        qreal dy  = dl * .5;
+                        qreal sel = ul * .5 - normalStemLen;
 
                         if (shortenStem && (sel < 0.0) && (hookIdx == 0 || !downnote->mirror()))
                               sel -= sel  * progression.val();
                         if (sel > 2.0)
                               sel = 2.0;
-                        stemLen = Spatium(sel - dy);
+                        stemLen = sel - dy;
                         if (-stemLen < shortest)
                               stemLen = -shortest;
                         }
                   else {
-                        qreal uy  = ul + upnote->stemYoff(false);
-                        qreal sel = dl + normalStemLen;
+                        qreal uy  = ul * .5;
+                        qreal sel = dl * .5 + normalStemLen;
 
                         if (shortenStem && (sel > 4.0) && (hookIdx == 0 || downnote->mirror()))
                               sel -= (sel - 4.0)  * progression.val();
                         if (sel < 2.0)
                               sel = 2.0;
-                        stemLen    = Spatium(sel - uy);
+                        stemLen = sel - uy;
                         if (stemLen < shortest)
                               stemLen = shortest;
                         }
                   }
 
             QPointF npos(stemPos(_up, false));
-
-            qreal sl = point(stemLen);
-            _stem->setLen(sl);
+            _stem->setLen(stemLen * _spatium);
             _stem->setPos(npos - pagePos());
 
             if (_stemSlash) {
@@ -1148,9 +1147,7 @@ void Chord::layoutStem()
                   }
 
             if (_hook) {
-                  qreal lw  = point(score()->styleS(ST_stemWidth)) * .5;
-                  QPointF p = npos + QPointF(lw, _stem->stemLen());
-                  _hook->setPos(p - pagePos());
+                  _hook->setPos(_stem->hookPos());
                   _hook->adjustReadPos();
                   }
             }

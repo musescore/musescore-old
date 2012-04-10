@@ -138,8 +138,12 @@ class Chord : public ChordRest {
 
       QList<Note*>& notes()                  { return _notes; }
       const QList<Note*>& notes() const      { return _notes; }
+
       Note* upNote() const                   { return _notes.back(); }
       Note* downNote() const                 { return _notes.front(); }
+      virtual int upLine() const;
+      virtual int downLine() const;
+
       Note* findNote(int pitch) const;
 
       Stem* stem() const                     { return _stem; }
@@ -162,8 +166,6 @@ class Chord : public ChordRest {
       virtual void layout();
       void layout2();
 
-      virtual int upLine() const;
-      virtual int downLine() const;
       void readNote(const QDomElement& node, QList<Tuplet*>*, QList<Spanner*>*);
 
       NoteType noteType() const         { return _noteType; }

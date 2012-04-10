@@ -29,8 +29,9 @@ class QPainter;
 */
 
 class Stem : public Element {
-      qreal _len;
+      QLineF line;            // p1 is attached to note head
       qreal _userLen;
+      qreal _len;             // allways positive
 
    public:
       Stem(Score*);
@@ -39,8 +40,6 @@ class Stem : public Element {
       virtual Stem* clone() const      { return new Stem(*this); }
       virtual ElementType type() const { return STEM; }
       virtual void draw(QPainter*) const;
-      void setLen(qreal v);
-      qreal stemLen() const            { return _len + _userLen; }
       virtual bool isEditable() const  { return true; }
       virtual void layout();
       virtual void spatiumChanged(qreal /*oldValue*/, qreal /*newValue*/);
@@ -50,10 +49,15 @@ class Stem : public Element {
       virtual void write(Xml& xml) const;
       virtual void read(const QDomElement& e);
       virtual void toDefault();
-      qreal userLen() const         { return _userLen; }
       virtual bool acceptDrop(MuseScoreView*, const QPointF&, Element*) const;
       virtual Element* drop(const DropData&);
       Chord* chord() const            { return (Chord*)parent(); }
+      bool up() const;
+      qreal userLen() const           { return _userLen; }
+      QPointF hookPos() const;
+      void setLen(qreal l);
+      qreal len() const               { return _len; }
+      qreal stemLen() const           { return _len; }
       };
 
 #endif
