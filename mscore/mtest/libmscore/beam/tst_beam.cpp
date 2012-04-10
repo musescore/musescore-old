@@ -36,6 +36,7 @@ class TestBeam : public QObject, public MTest
       void beamE() { beam("Beam-E.mscx"); }
       void beamF() { beam("Beam-F.mscx"); }
       void beamG() { beam("Beam-G.mscx"); }
+      void beam2() { beam("Beam-2.mscx"); }
       };
 
 //---------------------------------------------------------

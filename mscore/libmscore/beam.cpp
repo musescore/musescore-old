@@ -1318,6 +1318,7 @@ static Bm beamMetric2(bool up, char l1, char l2)
 
 //---------------------------------------------------------
 //   adjust
+//    adjust stem len for notes between start-end
 //---------------------------------------------------------
 
 static int adjust(qreal _spatium4, Bm& bm, const QList<ChordRest*>& crl)
@@ -1380,6 +1381,49 @@ static void adjust2(int /*ml*/, Bm& bm, Chord* c1)
       }
 
 //---------------------------------------------------------
+//   adjust3
+//---------------------------------------------------------
+
+static void adjust3(int /*ml*/, Bm& bm, Chord* c1)
+      {
+      static const int dd[4][4] = {
+            // St   H  --   S
+            {0,  0,  1,  0},     // St
+            {0,  0, -1,  0},     // S
+            {1,  1,  1, -1},     // --
+            {0,  0, -1,  0}      // H
+            };
+      int ys = bm.l + c1->line() * 2;
+      int e1 = qAbs((ys  + 1000) % 4);
+      int e2 = qAbs((ys + 1000 + bm.s) % 4);
+      bm.l  -= dd[e1][e2];
+      }
+
+//---------------------------------------------------------
+//   minSlant
+//---------------------------------------------------------
+
+static int minSlant(uint interval)
+      {
+      static const int minSlantTable[] = { 0, 1, 2, 4, 5 };
+      if (interval > 4)
+            return 5;
+      return minSlantTable[interval];
+      }
+
+//---------------------------------------------------------
+//   maxSlant
+//---------------------------------------------------------
+
+static int maxSlant(uint interval)
+      {
+      static const int maxSlantTable[] = { 0, 1, 4, 5, 5, 6, 7, 8 };
+      if (interval > 7)
+            return 8;
+      return maxSlantTable[interval];
+      }
+
+//---------------------------------------------------------
 //   computeStemLen
 //---------------------------------------------------------
 
@@ -1392,13 +1436,135 @@ void Beam::computeStemLen(const QList<ChordRest*>& crl, QPointF& p1, QPointF& /*
       qreal _spatium4 = _spatium * .25;
       qreal dx = c2->pagePos().x() - c1->pagePos().x();
 
-      if (crl.size() > 2 && noSlope(crl, c1, c2)) {
-            }
-      Bm bm = beamMetric1(_up, c1->line(_up), c2->line(_up));
-      if (bm.s == 0 && bm.l == 0)
-            bm = beamMetric2(_up, c1->line(_up), c2->line(_up));
+      int l1 = c1->line();
+      int l2 = c2->line();
 
-      if (crl.size() > 2) {
+      Bm bm = beamMetric1(_up, l1, l2);
+      if (bm.s == 0 && bm.l == 0)
+            bm = beamMetric2(_up, l1, l2);
+      if (beamLevels == 2 && crl.size() == 2) {
+            uint interval = qAbs(l2 - l1);
+            int minS      = minSlant(interval);
+            int maxS      = maxSlant(interval);
+            l1           *= 2;
+            l2           *= 2;
+
+            if (_up) {
+                  //
+                  // extend to middle line, slant is always 1
+                  //
+                  if ((l1 > 20) && (l2 > 20)) {
+                        if (l1 > l2) {
+                              bm.l = 9 - l1;
+                              bm.s = -1;
+                              }
+                        else if (l1 == l2) {
+                              bm.l = 9 - l1;
+                              bm.s = 0;
+                              }
+                        else {
+                              bm.l = 8 - l1;
+                              bm.s = 1;
+                              }
+                        }
+                  else {
+                        int ll1 = l1 - 12;     // sp minimum to primary beam
+                        // ll % 4:
+                        //    0 straddle
+                        //    1 hang
+                        //    2 --
+                        //    3 sit
+                        if (l1 == l2) {
+                              bm.l = ll1 - l1;
+                              bm.s = 0;
+                              if (l1 & 2)
+                                    bm.l -= 1;
+                              }
+                        else {
+                              int n = 0;
+                              for (;;ll1--) {
+                                    int i;
+                                    for (i = minS; i <= maxS; ++i) {
+                                          int e1  = ll1 & 3;
+                                          int ll2 = ll1 + ((l2 > l1) ? i : -i);
+                                          if ((l2 - ll2) < 12)
+                                                continue;
+                                          int e2  = ll2 & 3;
+                                          if ((e1 == 0 && e2 == 1) || (e1 == 1 && e2 == 0))
+                                                break;
+                                          }
+                                    if (i <= maxS) {
+                                          bm.l = ll1 - l1;
+                                          bm.s = l2 > l1 ? i : -i;
+                                          break;
+                                          }
+                                    if (++n > 10) {
+                                          printf("beam note found\n");
+                                          break;
+                                          }
+                                    }
+                              }
+                        }
+                  }
+            else {
+                  //
+                  // extend to middle line, slant is always 1
+                  //
+                  if ((l1 < -4) && (l2 < -4)) {
+                        if (l1 > l2) {
+                              bm.l = 8 - l1;
+                              bm.s = -1;
+                              }
+                        else if (l1 == l2) {
+                              bm.l = 7 - l1;
+                              bm.s = 0;
+                              }
+                        else {
+                              bm.l = 7 - l1;
+                              bm.s = 1;
+                              }
+                        }
+                  else {
+                        int ll1 = 12 + l1;     // sp minimum to primary beam
+                        if (l1 == l2) {
+                              bm.l = ll1 - l1;
+                              bm.s = 0;
+                              if (l1 & 2)
+                                    bm.l += 1;
+                              }
+                        else {
+                              int n = 0;
+                              for (;;ll1++) {
+                                    int i;
+                                    for (i = minS; i <= maxS; ++i) {
+                                          int e1  = ll1 & 3;
+                                          int ll2 = ll1 + ((l2 > l1) ? i : -i);
+                                          if ((ll2 - l2) < 12)
+                                                continue;
+                                          int e2  = ll2 & 3;
+                                          if ((e1 == 0 && e2 == 3) || (e1 == 3 && e2 == 0))
+                                                break;
+                                          }
+                                    if (i <= maxS) {
+                                          bm.l = ll1 - l1;
+                                          bm.s = l2 > l1 ? i : -i;
+                                          break;
+                                          }
+                                    if (++n > 10) {
+                                          printf("beam note found\n");
+                                          break;
+                                          }
+                                    }
+                              }
+                        }
+                  }
+            }
+      else if (beamLevels > 1 && crl.size() == 2) {
+            static const int t[] = { 0, 0, 4, 4, 8, 12, 16 }; // spatium4 added to stem len
+            int n = t[beamLevels];
+            bm.l += _up ? -n : n;
+            }
+      else if (crl.size() > 2) {
             if (noSlope(crl, c1, c2))
                   bm.s = 0;
             int ml = adjust(_spatium4, bm, crl);
@@ -1412,10 +1578,10 @@ void Beam::computeStemLen(const QList<ChordRest*>& crl, QPointF& p1, QPointF& /*
                         adjust2(ml, bm, c1);
                   }
             if (beamLevels > 1)
-                  adjust2(ml, bm, c1);
+                  adjust3(ml, bm, c1);
             }
       slope   = (bm.s * _spatium4) / dx;
-      p1.ry() += bm.l * _spatium4;
+      p1.ry() += ((c1->line(_up) - c1->line(!_up)) * 2 + bm.l) * _spatium4;
       }
 
 //---------------------------------------------------------
