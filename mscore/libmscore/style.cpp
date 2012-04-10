@@ -87,8 +87,8 @@ StyleType styleTypes[] = {
       StyleType("accidentalNoteDistance",  ST_SPATIUM),
       StyleType("beamWidth",               ST_SPATIUM),
 
-      StyleType("beamDistance",            ST_DOUBLE),        // in beamWidth units
-      StyleType("beamMinLen",              ST_SPATIUM),           // len for broken beams
+      StyleType("beamDistance",            ST_DOUBLE),      // in beamWidth units
+      StyleType("beamMinLen",              ST_SPATIUM),     // len for broken beams
       StyleType("beamMinSlope",            ST_DOUBLE),
       StyleType("beamMaxSlope",            ST_DOUBLE),
       StyleType("maxBeamTicks",            ST_INT),
@@ -444,9 +444,9 @@ StyleData::StyleData()
             StyleVal(ST_ledgerLineLength, Spatium(.6)),
             StyleVal(ST_accidentalDistance,Spatium(0.22)),
             StyleVal(ST_accidentalNoteDistance,Spatium(0.22)),
-            StyleVal(ST_beamWidth,Spatium(0.5)),            // was 0.48
+            StyleVal(ST_beamWidth, Spatium(0.5)),           // was 0.48
             StyleVal(ST_beamDistance, qreal(0.5)),
-            StyleVal(ST_beamMinLen,Spatium(1.25)),
+            StyleVal(ST_beamMinLen,Spatium(1.316178)),      // exactly note head width
             StyleVal(ST_beamMinSlope, qreal(0.05)),
 
             StyleVal(ST_beamMaxSlope,         qreal(0.2)),

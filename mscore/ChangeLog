@@ -1,3 +1,5 @@
+10.4 (ws)
+      - new implementation for beam layout: slant & stemLen
 9.4 (lv)
       - more work on #15899: MusicXML: support figured bass
 8.4 (lv)
@@ -8,6 +10,8 @@
       - more work on #15899: MusicXML: support figured bass
 5.4 (lv)
       - partial and very preliminary fix for #15899: MusicXML: support figured bass
+3.4. (ws)
+      - style change: set fractional beam width to note head width
 2.4. (ws)
       - extend rules for beam stem direction
       - linked parts: implement insert/delete measures

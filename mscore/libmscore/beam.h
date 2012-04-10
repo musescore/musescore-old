@@ -23,28 +23,7 @@ class MuseScoreView;
 class Chord;
 class QPainter;
 
-//---------------------------------------------------------
-//   BeamHint
-//    beam hint for autobeamer
-//---------------------------------------------------------
-
-struct BeamHint {
-      Fraction noteLen;
-      Fraction prevNoteLen; // zero = all notes
-      Fraction timeSig;     // valid for this timesig; zero = valid for all
-      Fraction pos;
-
-      BeamHint(Fraction sig, Fraction p, Fraction len, Fraction prevLen)
-         : noteLen(len), prevNoteLen(prevLen), timeSig(sig), pos(p) {}
-      };
-
-//
-// user offsets for beam or beam fragment
-//
-struct BeamFragment {
-      QPointF p1[2];
-      QPointF p2[2];
-      };
+struct BeamFragment;
 
 //---------------------------------------------------------
 //   Beam
@@ -85,6 +64,10 @@ class Beam : public Element {
 
       void layout2(QList<ChordRest*>, SpannerSegmentType, int frag);
       bool twoBeamedNotes();
+      void computeSlope(const QList<ChordRest*>& crl, Chord* c1, Chord* c2);
+      void computeStemLen(const QList<ChordRest*>& crl, QPointF& p1, QPointF& p2,
+         Chord* c1, Chord* c2, int beamLevels);
+      bool noSlope(const QList<ChordRest*>& crl, Chord* c1, Chord* c2);
 
    public:
       Beam(Score* s);

@@ -80,7 +80,8 @@ class ChordRest : public DurationElement {
       virtual void layoutStem()                 {}
       virtual int upLine() const                { return 0;}
       virtual int downLine() const              { return 8;}
-      virtual int line(bool up) const           { return up ? upLine() : downLine(); }
+      int line(bool up) const                   { return up ? upLine() : downLine(); }
+      int line() const                          { return _up ? upLine() : downLine(); }
       virtual QPointF stemPos(bool, bool) const { return pagePos(); }    // point to connect stem
       bool up() const                           { return _up;   }
       void setUp(bool val)                      { _up = val; }
