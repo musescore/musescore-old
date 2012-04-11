@@ -1292,6 +1292,7 @@ static int adjust(qreal _spatium4, Bm& bm, const QList<const Chord*>& cl)
 
 //---------------------------------------------------------
 //   adjust2
+//    adjust stem position for single beams
 //---------------------------------------------------------
 
 static void adjust2(int /*ml*/, Bm& bm, const Chord* c1)
@@ -1311,6 +1312,7 @@ static void adjust2(int /*ml*/, Bm& bm, const Chord* c1)
 
 //---------------------------------------------------------
 //   adjust3
+//    adjust stem position for multiple beams
 //---------------------------------------------------------
 
 static void adjust3(int /*ml*/, Bm& bm, const Chord* c1)
@@ -1522,8 +1524,12 @@ void Beam::computeStemLen(const QList<const Chord*>& cl, QPointF& p1, int beamLe
                   if (beamLevels == 1)
                         adjust2(ml, bm, c1);
                   }
-            if (beamLevels > 1)
+            if (beamLevels > 1) {
+                  static const int t[] = { 0, 0, 4, 4, 8, 12, 16 }; // spatium4 added to stem len
+                  int n = t[beamLevels];
+                  bm.l += _up ? -n : n;
                   adjust3(ml, bm, c1);
+                  }
             }
       slope   = (bm.s * _spatium4) / dx;
       p1.ry() += ((c1->line(_up) - c1->line(!_up)) * 2 + bm.l) * _spatium4;
