@@ -593,7 +593,7 @@ MuseScore::MuseScore()
       fileTools->addWidget(mag);
       viewModeCombo = new QComboBox(this);
       viewModeCombo->addItem(tr("Page View"));
-      viewModeCombo->addItem(tr("Continous View"));
+      viewModeCombo->addItem(tr("Continuous View"));
       connect(viewModeCombo, SIGNAL(activated(int)), SLOT(switchLayoutMode(int)));
       fileTools->addWidget(viewModeCombo);
       addToolBarBreak();
@@ -3931,8 +3931,7 @@ void MuseScore::cmd(QAction* a)
       if (cs && (sc->state & _sstate) == 0) {
             QMessageBox::warning(0,
                QWidget::tr("MuseScore: invalid command"),
-               QString("command %1 not valid in current state").arg(cmdn),
-               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+               QString("Command %1 not valid in current state").arg(cmdn));
             return;
             }
       if (cmdn == "repeat-cmd") {

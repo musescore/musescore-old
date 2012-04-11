@@ -1,3 +1,9 @@
+11.4 (la)
+      - Add ukulele tablature instrument with default tuning
+      - fix #15991
+      - fix #15999: Change Abort to Cancel in Layer dialog
+      - fix #15993: Typo in Continuous View
+      - Capitalize letter in instrument dialog (#11515)
 10.4 (ws)
       - new implementation for beam layout: slant & stemLen
 9.4 (lv)

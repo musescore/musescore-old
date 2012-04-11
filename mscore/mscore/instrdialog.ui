@@ -175,7 +175,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>Add linked Staff</string>
+          <string>Add Linked Staff</string>
          </property>
         </widget>
        </item>
