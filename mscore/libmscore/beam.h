@@ -64,10 +64,8 @@ class Beam : public Element {
 
       void layout2(QList<ChordRest*>, SpannerSegmentType, int frag);
       bool twoBeamedNotes();
-      void computeSlope(const QList<ChordRest*>& crl, Chord* c1, Chord* c2);
-      void computeStemLen(const QList<ChordRest*>& crl, QPointF& p1, QPointF& p2,
-         Chord* c1, Chord* c2, int beamLevels);
-      bool noSlope(const QList<ChordRest*>& crl, Chord* c1, Chord* c2);
+      void computeStemLen(const QList<const Chord*>& crl, QPointF& p1, int beamLevels);
+      bool noSlope(const QList<const Chord*>& crl);
 
    public:
       Beam(Score* s);
