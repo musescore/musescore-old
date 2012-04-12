@@ -1019,6 +1019,11 @@ InspectorNote::InspectorNote(QWidget* parent)
       stem->setText(tr("Stem"));
       stem->setEnabled(false);
       hbox->addWidget(stem);
+      beam = new QToolButton(this);
+      beam->setText(tr("Beam"));
+      beam->setEnabled(false);
+      hbox->addWidget(beam);
+
 
       layout->addLayout(hbox);
 
@@ -1031,6 +1036,7 @@ InspectorNote::InspectorNote(QWidget* parent)
       connect(dot3,     SIGNAL(clicked()),     SLOT(dot3Clicked()));
       connect(hook,     SIGNAL(clicked()),     SLOT(hookClicked()));
       connect(stem,     SIGNAL(clicked()),     SLOT(stemClicked()));
+      connect(beam,     SIGNAL(clicked()),     SLOT(beamClicked()));
       }
 
 //---------------------------------------------------------
@@ -1060,6 +1066,7 @@ void InspectorNote::setElement(Element* e)
       dot3->setEnabled(note->dot(2));
       stem->setEnabled(note->chord()->stem());
       hook->setEnabled(note->chord()->hook());
+      beam->setEnabled(note->chord()->beam());
       }
 
 //---------------------------------------------------------
@@ -1163,6 +1170,23 @@ void InspectorNote::stemClicked()
       if (stem) {
             note->score()->select(stem);
             inspector->setElement(stem);
+            note->score()->end();
+            }
+      }
+
+//---------------------------------------------------------
+//   beamClicked
+//---------------------------------------------------------
+
+void InspectorNote::beamClicked()
+      {
+      Note* note = static_cast<Note*>(inspector->element());
+      if (note == 0)
+            return;
+      Beam* beam = note->chord()->beam();
+      if (beam) {
+            note->score()->select(beam);
+            inspector->setElement(beam);
             note->score()->end();
             }
       }

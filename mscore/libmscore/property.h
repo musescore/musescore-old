@@ -79,6 +79,9 @@ enum P_ID {
       P_LOCK_ASPECT_RATIO,
       P_SIZE_IS_SPATIUM,
       P_TEXT_STYLE,
+      P_USER_MODIFIED,
+      P_Y1,
+      P_Y2,
 
       P_END
       };

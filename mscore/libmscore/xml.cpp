@@ -209,6 +209,87 @@ void Xml::netag(const char* s)
 //   tag
 //---------------------------------------------------------
 
+void Xml::tag(P_ID id, QVariant data, QVariant defaultData)
+      {
+      if (data == defaultData)
+            return;
+      const char* name = propertyName(id);
+      if (name == 0)
+            return;
+
+      switch(propertyType(id)) {
+            case T_BOOL:
+            case T_SUBTYPE:
+            case T_INT:
+            case T_SREAL:
+            case T_REAL:
+            case T_SCALE:
+            case T_POINT:
+            case T_SIZE:
+            case T_COLOR:
+                  tag(name, data);
+                  break;
+#if 0
+            case T_FRACTION:
+                  fTag(name, *(Fraction*)data);
+                  break;
+#endif
+            case T_DIRECTION:
+                  switch(Direction(data.toInt())) {
+                        case UP:
+                              tag(name, QVariant("up"));
+                              break;
+                        case DOWN:
+                              tag(name, QVariant("down"));
+                              break;
+                        case AUTO:
+                              break;
+                        }
+                  break;
+            case T_DIRECTION_H:
+                  switch(DirectionH(data.toInt())) {
+                        case DH_LEFT:
+                              tag(name, QVariant("left"));
+                              break;
+                        case DH_RIGHT:
+                              tag(name, QVariant("right"));
+                              break;
+                        case DH_AUTO:
+                              break;
+                        }
+                  break;
+            case T_LAYOUT_BREAK:
+                  switch(LayoutBreakType(data.toInt())) {
+                        case LAYOUT_BREAK_LINE:
+                              tag(name, QVariant("line"));
+                              break;
+                        case LAYOUT_BREAK_PAGE:
+                              tag(name, QVariant("page"));
+                              break;
+                        case LAYOUT_BREAK_SECTION:
+                              tag(name, QVariant("section"));
+                              break;
+                        }
+                  break;
+            case T_VALUE_TYPE:
+                  switch(ValueType(data.toInt())) {
+                        case OFFSET_VAL:
+                              tag(name, QVariant("offset"));
+                              break;
+                        case USER_VAL:
+                              tag(name, QVariant("user"));
+                              break;
+                        }
+                  break;
+            default:
+                  abort();
+            }
+      }
+
+//---------------------------------------------------------
+//   tag
+//---------------------------------------------------------
+
 void Xml::tag(P_ID id, void* data, void* defaultVal)
       {
       const char* name = propertyName(id);

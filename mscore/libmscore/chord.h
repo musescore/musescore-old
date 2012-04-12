@@ -155,7 +155,7 @@ class Chord : public ChordRest {
       StemSlash* stemSlash() const           { return _stemSlash; }
       void setStemSlash(StemSlash* s)        { delete _stemSlash; _stemSlash = s; }
 
-      virtual QPointF stemPos(bool, bool) const;
+      virtual QPointF stemPos() const;
 
       Hook* hook() const                     { return _hook; }
 

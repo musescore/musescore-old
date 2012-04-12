@@ -3,7 +3,7 @@
 //  Music Composition & Notation
 //  $Id$
 //
-//  Copyright (C) 2002-2011 Werner Schweer
+//  Copyright (C) 2002-2012 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2
@@ -47,25 +47,18 @@ class Beam : public Element {
 
       int minMove;              // set in layout1()
       int maxMove;
-      Chord* c1;
-      Chord* c2;
       bool isGrace;
       bool cross;
       TDuration maxDuration;
       qreal slope;
-      int cut;
 
       int editFragment;       // valid in edit mode
 
-      void* pDistribute()     { return &_distribute; }
-      void* pBeamDirection()  { return &_direction; }
-      void* pGrowLeft()       { return &_grow1; }
-      void* pGrowRight()      { return &_grow2; }
-
       void layout2(QList<ChordRest*>, SpannerSegmentType, int frag);
       bool twoBeamedNotes();
-      void computeStemLen(const QList<const Chord*>& crl, QPointF& p1, int beamLevels);
-      bool noSlope(const QList<const Chord*>& crl);
+      void computeStemLen(const QList<Chord*>& crl, qreal& py1, int beamLevels);
+      bool noSlope(const QList<Chord*>& crl);
+      void write(Xml& xml, P_ID id) const;
 
    public:
       Beam(Score* s);
@@ -99,8 +92,8 @@ class Beam : public Element {
       virtual void move(qreal, qreal);
       virtual void draw(QPainter*) const;
       int up() const                      { return _up; }
-      void setUp(int v)                   { _up = v; }
-      void setId(int i) const             { _id = i; }
+      void setUp(int v)                   { _up = v;    }
+      void setId(int i) const             { _id = i;    }
       int id() const                      { return _id; }
       bool isUp() const                   { return _up; }
 
@@ -120,7 +113,18 @@ class Beam : public Element {
       bool distribute() const             { return _distribute; }
       void setDistribute(bool val)        { _distribute = val;  }
 
-      PROPERTY_DECLARATIONS(Beam)
+      bool userModified() const;
+      void setUserModified(bool);
+
+      qreal y1() const;
+      void setY1(qreal);
+
+      qreal y2() const;
+      void setY2(qreal);
+
+      QVariant getProperty(P_ID propertyId) const;
+      bool setProperty(P_ID propertyId, const QVariant&);
+      QVariant propertyDefault(P_ID id) const;
       };
 
 extern bool endBeam(const Fraction&, ChordRest* cr, ChordRest* prevCr);

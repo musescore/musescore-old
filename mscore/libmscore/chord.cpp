@@ -254,15 +254,14 @@ void Chord::setStem(Stem* s)
 //    return canvas coordinates
 //---------------------------------------------------------
 
-QPointF Chord::stemPos(bool upFlag, bool top) const
+QPointF Chord::stemPos() const
       {
       if (staff() && staff()->useTablature()) {
             qreal sp = spatium();
             return QPointF(STAFFTYPE_TAB_DEFAULTSTEMPOSX*sp, STAFFTYPE_TAB_DEFAULTSTEMPOSY*sp) +
-                        pagePos();
+               pagePos();
             }
-      const Note* note = (top ? !upFlag : upFlag) ? downNote() : upNote();
-      return note->stemPos(upFlag);
+      return (_up ? downNote() : upNote())->stemPos(_up);
       }
 
 //---------------------------------------------------------
@@ -1137,7 +1136,7 @@ void Chord::layoutStem()
                         }
                   }
 
-            QPointF npos(stemPos(_up, false));
+            QPointF npos(stemPos());
             _stem->setLen(stemLen * _spatium);
             _stem->setPos(npos - pagePos());
 
