@@ -209,7 +209,7 @@ Beam::Beam(Score* s)
       {
       setFlags(ELEMENT_SELECTABLE);
       _direction       = AUTO;
-      _up              = -1;
+      _up              = true;
       _distribute      = false;
       _userModified[0] = false;
       _userModified[1] = false;
@@ -238,8 +238,6 @@ Beam::Beam(const Beam& b)
             fragments.append(new BeamFragment(*f));
       minMove          = b.minMove;
       maxMove          = b.maxMove;
-//      c1               = b.c1;
-//      c2               = b.c2;
       isGrace          = b.isGrace;
       cross            = b.cross;
       maxDuration      = b.maxDuration;
@@ -469,9 +467,9 @@ void Beam::layout1()
 
       if (staff()->useTablature()) {
             //TABULATURES: all beams (and related chords) are UP at slope 0
-            _up = 1;
-            cross = isGrace = false;
+            _up   = true;
             slope = 0.0;
+            cross = isGrace = false;
             foreach(ChordRest* cr, _elements) {
                   if (cr->type() == CHORD) {
                         // set members maxDuration, c1, c2
@@ -520,8 +518,9 @@ void Beam::layout1()
             //
             // determine beam stem direction
             //
-            if (_direction != AUTO)
+            if (_direction != AUTO) {
                   _up = _direction == UP;
+                  }
             else {
                   ChordRest* cr = _elements[0];
                   Measure* m = cr->measure();
@@ -567,7 +566,6 @@ void Beam::layout1()
                         else if (move < 0)
                               c->setUp(false);
                         }
-                  _up = -1;
                   }
             else {
                   foreach(ChordRest* cr, _elements)
@@ -1332,8 +1330,6 @@ static int maxSlant(uint interval)
 
 void Beam::computeStemLen(const QList<Chord*>& cl, qreal& py1, int beamLevels)
       {
-      if (_up == -1)
-            return;
       qreal _spatium  = spatium();
       qreal _spatium4 = _spatium * .25;
       const Chord* c1 = cl.front();
@@ -1548,10 +1544,6 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
       qreal beamMinLen = point(score()->styleS(ST_beamMinLen));
       qreal graceMag   = score()->styleD(ST_graceNoteMag);
 
-      // TODO: what about undefined direction (_up = -1)?
-      if (_up == -1)
-            _up = 1;
-
       qreal beamDist = bd * bw + bw;      // 0.75 spatium
 
       if (isGrace) {
@@ -1591,7 +1583,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                               score()->layoutChords1(c->segment(), c->staffIdx());
                               }
                         }
-                  _up = cl.front()->up();
+                  // _up = cl.front()->up();
                   }
             else if (cross) {
                   qreal beamY   = 0.0;  // y position of main beam start
@@ -1620,7 +1612,6 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                               score()->layoutChords1(c->segment(), c->staffIdx());
                               }
                         }
-                  _up = -1;
 
                   qreal yDownMax = -300000;
                   qreal yUpMin   = 300000;
@@ -2035,8 +2026,6 @@ void Beam::setBeamDirection(Direction d)
 
 void Beam::toDefault()
       {
-      if (beamDirection() != AUTO)
-            score()->undoChangeProperty(this, P_STEM_DIRECTION, int(AUTO));
       if (distribute())
             score()->undoChangeProperty(this, P_DISTRIBUTE, false);
       if (growLeft() != 1.0)
@@ -2048,6 +2037,8 @@ void Beam::toDefault()
             score()->undoChangeProperty(this, P_Y2, 0.0);
             score()->undoChangeProperty(this, P_USER_MODIFIED, false);
             }
+      if (beamDirection() != AUTO)
+            score()->undoChangeProperty(this, P_STEM_DIRECTION, int(AUTO));
       }
 
 //---------------------------------------------------------

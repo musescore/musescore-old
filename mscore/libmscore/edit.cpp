@@ -1063,7 +1063,7 @@ void Score::cmdFlip()
                   }
             if (e->type() == BEAM) {
                   Beam* beam = static_cast<Beam*>(e);
-                  Direction dir = beam->isUp() ? DOWN : UP;
+                  Direction dir = beam->up() ? DOWN : UP;
                   undoChangeProperty(beam, P_STEM_DIRECTION, dir);
                   }
             else if (e->type() == SLUR_SEGMENT) {

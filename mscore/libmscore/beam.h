@@ -34,7 +34,7 @@ class Beam : public Element {
       QList<ChordRest*> _elements;        // must be sorted by tick
       QList<QLineF*> beamSegments;
       Direction _direction;
-      int _up;                // -1: unknown  0: down   1: up
+      bool _up;
       bool _distribute;       // equal spacing of elements
       qreal _grow1;           // define "feather" beams
       qreal _grow2;
@@ -91,11 +91,10 @@ class Beam : public Element {
       void writeMusicXml(Xml& xml, ChordRest* cr) const;
       virtual void move(qreal, qreal);
       virtual void draw(QPainter*) const;
-      int up() const                      { return _up; }
-      void setUp(int v)                   { _up = v;    }
+      bool up() const                     { return _up; }
+      void setUp(bool v)                  { _up = v;    }
       void setId(int i) const             { _id = i;    }
       int id() const                      { return _id; }
-      bool isUp() const                   { return _up; }
 
       void setBeamDirection(Direction d);
       Direction beamDirection() const     { return _direction; }
