@@ -92,6 +92,10 @@ void Stem::layout()
                   p2.rx() = lw * .5;
                   }
             }
+      else if (st->useTablature()) {
+            p1.rx() = -lw * .5;
+            p2.rx() = -lw * .5;
+            }
       line.setP1(p1);
       line.setP2(p2);
 

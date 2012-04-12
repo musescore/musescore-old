@@ -482,10 +482,10 @@ void Note::remove(Element* e)
 qreal Note::yPos() const
       {
       qreal y = pos().y();
-      if (chord()->staffMove()) {
+//      if (chord()->staffMove()) {
 //            System* system = chord()->measure()->system();
 //          y += system->staff(staffIdx() + chord()->staffMove())->y() - system->staff(staffIdx())->y();
-            }
+//            }
       return y;
       }
 
@@ -499,45 +499,9 @@ QPointF Note::stemPos(bool upFlag) const
       QPointF pt(pos() + chord()->pagePos());
       if (_mirror)
             upFlag = !upFlag;
-
-      qreal sw   = point(score()->styleS(ST_stemWidth)) * .5;
-      if (chord()->staff() && chord()->staff()->useTablature()) {
-            qreal xoffset = (sw + bbox().width() + bbox().x()) * .5;
-            pt += QPointF(xoffset, (bbox().height() * .5 + spatium() * .5) * (upFlag ? -1.0 : 1.0));
-            }
-      else {
-#if 0
-            QPointF off = symbols[score()->symIdx()][noteHead()].attach(magS());
-            if (upFlag) {
-                  pt      += off;
-                  pt.rx() -= sw;
-                  }
-            else {
-                  pt      -= off;
-                  pt.rx() += symbols[score()->symIdx()][noteHead()].width(magS()) + sw;
-                  }
-#endif
-            if (upFlag)
-                  pt.rx() += headWidth();
-            }
+      if (upFlag)
+            pt.rx() += headWidth();
       return pt;
-      }
-
-//---------------------------------------------------------
-//   stemYoff
-//---------------------------------------------------------
-
-qreal Note::stemYoff(bool upFlag) const
-      {
-      if (_mirror)
-            upFlag = !upFlag;
-      //
-      // TODO: implement table for all note heads
-      //
-      qreal yo = .2 * mag();
-      if (_headGroup == 5)
-            yo = 1.0 * mag();
-      return upFlag ? -yo : yo;
       }
 
 //---------------------------------------------------------
