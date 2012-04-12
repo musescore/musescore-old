@@ -1047,7 +1047,7 @@ void Chord::layoutStem()
       {
       if (staff() && staff()->useTablature()) {
             // tablatures require stems only if not stemless
-            if(!staff()->staffType()->slashStyle() && _stem) {   // if tab uses stems and this chord has one
+            if (!staff()->staffType()->slashStyle() && _stem) {   // if tab uses stems and this chord has one
                   // in tablatures, stem/hook setup is fixed: a simple 'comb' above the staff
                   qreal sp = spatium();
                   // process stem
@@ -1055,10 +1055,11 @@ void Chord::layoutStem()
                   _stem->setPos(STAFFTYPE_TAB_DEFAULTSTEMPOSX*sp, STAFFTYPE_TAB_DEFAULTSTEMPOSY*sp);
                   // process hook
                   int hookIdx = durationType().hooks();
-                  if (hookIdx != 0) {
+                  if (hookIdx) {
                         _hook->setSubtype(hookIdx);
-                        _hook->setPos(STAFFTYPE_TAB_DEFAULTSTEMPOSX*sp, STAFFTYPE_TAB_DEFAULTSTEMPOSY*sp);
+                        _hook->setPos(_stem->hookPos());
                         _hook->setMag(mag()*score()->styleD(ST_smallNoteMag));
+                        _hook->adjustReadPos();
                         }
                   }
             return;
@@ -1816,7 +1817,6 @@ QPointF Chord::layoutArticulation(Articulation* a)
             else
                   bottom = (aa == A_BOTTOM_CHORD) || (aa == A_CHORD && up());
             bool stemSide = (bottom != up()) && stem();
-
             a->setUp(!bottom);
             if (bottom) {
                   int line = downLine();
@@ -1841,19 +1841,19 @@ QPointF Chord::layoutArticulation(Articulation* a)
                         }
                   }
             else {
-                  int line = upLine();
                   if (stemSide) {
-                        y = chordBotY + stem()->stemLen();
+                        y = stem()->hookPos().y();
                         if (beam())
                               y -= score()->styleS(ST_beamWidth).val() * _spatium * .5;
                         x = stem()->pos().x();
                         int line = lrint((y - 0.5 * _spatium) / _spatium);
-                        if (line >= 0)    // align between staff lines
+                        if (line >= 0 && line <= 4)    // align between staff lines
                               y = (line - .5) * _spatium;
                         else
                               y -= _spatium;
                         }
                   else {
+                        int line = upLine();
                         if (line > 0)
                               y = ((line+1) & ~1) - 3;
                         else

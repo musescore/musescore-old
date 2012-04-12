@@ -203,7 +203,6 @@ class Note : public Element {
       void write(Xml& xml) const;
 
       QPointF stemPos(bool upFlag) const;    ///< Point to connect stem.
-      qreal stemYoff(bool upFlag) const;
       qreal yPos() const;
 
       bool acceptDrop(MuseScoreView*, const QPointF&, Element*) const;

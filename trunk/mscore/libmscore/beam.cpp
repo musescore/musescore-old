@@ -1555,8 +1555,11 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
             setMag(1.0);
 
       if (staff()->useTablature()) {
-            py1 = c1->stemPos().y();
-            py2 = c2->stemPos().y();
+            qreal y = (STAFFTYPE_TAB_DEFAULTSTEMPOSY
+               - STAFFTYPE_TAB_DEFAULTSTEMLEN) * _spatium;
+            py1 = y;
+            py2 = y;
+            _up = true;
             }
       else {
             //
@@ -1799,31 +1802,17 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
             if (chord->hook())
                   score()->undoRemoveElement(chord->hook());
 
-            if (staff()->useTablature()) {
-                  //
-                  // TABLATURE stems have fixed len and pos
-                  //
-                  QPointF p1(STAFFTYPE_TAB_DEFAULTSTEMPOSX * _spatium,
-                     STAFFTYPE_TAB_DEFAULTSTEMPOSY * _spatium);
-                  QPointF p2(STAFFTYPE_TAB_DEFAULTSTEMPOSX * _spatium,
-                     (STAFFTYPE_TAB_DEFAULTSTEMPOSY - STAFFTYPE_TAB_DEFAULTSTEMLEN) * _spatium);
-                  stem->setPos(STAFFTYPE_TAB_DEFAULTSTEMPOSX * _spatium, STAFFTYPE_TAB_DEFAULTSTEMPOSY * _spatium);
-                  }
-            else {
-                  //
-                  // PITCHED STAFF stems
-                  //
-                  QPointF npos(chord->stemPos());   // canvas coordinates
+            QPointF npos(chord->stemPos());   // canvas coordinates
 
-                  //  extend stem to primary beam
-                  qreal x   = npos.x() - parent()->pagePos().x();
-                  QLineF* l = beamSegments.front();   // primary beam
-                  qreal dy  = (x - l->x1()) * slope;
-                  qreal yo  = l->y1() + dy;
+            //  extend stem to primary beam
+            qreal x   = npos.x() - parent()->pagePos().x();
+            QLineF* l = beamSegments.front();   // primary beam
+            qreal dy  = (x - l->x1()) * slope;
+            qreal yo  = l->y1() + dy;
 
-                  stem->setLen(yo + canvPos.y() - npos.y());
-                  stem->setPos(npos - chord->pagePos());
-                  }
+            stem->setLen(yo + canvPos.y() - npos.y());
+            stem->setPos(npos - chord->pagePos());
+
             //
             // layout stem slash for acciacatura
             //
