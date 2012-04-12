@@ -258,6 +258,7 @@ class InspectorNote : public InspectorBase {
       QToolButton* dot3;
       QToolButton* hook;
       QToolButton* stem;
+      QToolButton* beam;
 
       bool dirty() const;
 
@@ -268,6 +269,7 @@ class InspectorNote : public InspectorBase {
       void dot3Clicked();
       void hookClicked();
       void stemClicked();
+      void beamClicked();
 
    public:
       InspectorNote(QWidget* parent);

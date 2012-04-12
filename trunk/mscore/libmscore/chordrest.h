@@ -82,7 +82,7 @@ class ChordRest : public DurationElement {
       virtual int downLine() const              { return 8;}
       int line(bool up) const                   { return up ? upLine() : downLine(); }
       int line() const                          { return _up ? upLine() : downLine(); }
-      virtual QPointF stemPos(bool, bool) const { return pagePos(); }    // point to connect stem
+      virtual QPointF stemPos() const           { return pagePos(); }    // point to connect stem
       bool up() const                           { return _up;   }
       void setUp(bool val)                      { _up = val; }
       QList<Articulation*>* getArticulations()  { return &articulations; }
