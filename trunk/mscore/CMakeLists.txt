@@ -40,7 +40,7 @@ set(AEOLUS            TRUE)         # pipe organ synthesizer
 set(EMBED_ICONS       FALSE)        # do not load icons from share/icons
 
 option (OSC "enable OSC remote control protocol" ON)        # osc remote control
-option (OMR "enable PDF import"  ON)                       # OMR - optical music recognition
+option (OMR "enable PDF import"  OFF)                       # OMR - optical music recognition
 option (BUILD_SCRIPTGEN "enable script bindings" OFF)
 
 if (APPLE OR MINGW)
