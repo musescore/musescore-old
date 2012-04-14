@@ -1791,6 +1791,48 @@ void MusicXml::xmlPart(QDomElement e, QString id)
       }
 
 //---------------------------------------------------------
+//   fixupFiguredBass
+//
+// set correct ticks and (TODO ?) onNote value for the
+// FiguredBass elements in this measure and staff
+// note: FiguredBass element already has a valid track value
+//---------------------------------------------------------
+
+static void fixupFiguredBass(Part* part, Measure* measure)
+      {
+      int staves = part->nstaves();
+      int strack = measure->score()->staffIdx(part) * VOICES;
+      int etrack = strack + staves * VOICES;
+      qDebug("fixupFiguredBass part %p measure %p staves %d strack %d etrack %d",
+             part, measure, staves, strack, etrack);
+
+      for (Segment* seg = measure->first(SegChordRest); seg; seg = seg->next(SegChordRest)) {
+            qDebug("fixupFiguredBass measure %p segment %p", measure, seg);
+            foreach(Element* e, seg->annotations()) {
+                  if (e->type() == FIGURED_BASS) {
+                        FiguredBass* fb = static_cast<FiguredBass*>(e);
+                        if (fb->ticks() <= 0) {
+                              qDebug("fixupFiguredBass fb %p ticks %d track %d", fb, fb->ticks(), fb->track());
+                              // Found FiguredBass w/o valid ticks value
+                              // Find chord to attach to in same staff and copy ticks
+                              for (int tr = fb->track(); tr < fb->track() + VOICES; ++tr) {
+                                    Element* el = seg->element(tr);
+                                    if (el && el->type() == CHORD) {
+                                          // found chord
+                                          Chord* ch = static_cast<Chord*>(el);
+                                          qDebug("fixupFiguredBass chord %p track %d ticks %d",
+                                                 ch, ch->track(), ch->actualTicks());
+                                          fb->setTicks(ch->actualTicks());
+                                          break; // use the first chord found
+                                          }
+                                    }
+                              }
+                        }
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   xmlMeasure
 //---------------------------------------------------------
 
@@ -2042,14 +2084,14 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
                   Segment* s = measure->getSegment(SegChordRest, tick);
                   // TODO: use addelement() instead of Segment::add() ?
                   //       or FiguredBass::addFiguredBassToSegment() ?
-                  // TODO: set correct ticks value (typically same as note attached to,
-                  //       which is unknown now because it has not been read yet)
                   // TODO: set correct onNote value
                   s->add(fb);
                   }
             else
                   domError(e);
             }
+
+      fixupFiguredBass(part, measure);
 
 #ifdef DEBUG_TICK
       qDebug("end_of_measure measure->tick()=%d maxtick=%d lastMeasureLen=%d measureLen=%d",
