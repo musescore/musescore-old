@@ -1,4 +1,5 @@
 16.4 (ws)
+      - handle triple beams
       - updated beam inspector
       - changed shortcut handling:
             - more than one shortcut is now possible for an action
