@@ -82,13 +82,12 @@ static const PropertyData propertyList[] = {
       { P_LAYOUT_BREAK,        "subtype",       T_LAYOUT_BREAK },
       { P_AUTOSCALE,           "autoScale",     T_BOOL   },
       { P_SIZE,                "size",            T_SIZE },
-      { P_SCALE,               0,               T_SCALE  },
+      { P_SCALE,               0,                 T_SCALE  },
       { P_LOCK_ASPECT_RATIO,   "lockAspectRatio", T_BOOL },
       { P_SIZE_IS_SPATIUM,     "sizeIsSpatium",   T_BOOL },
       { P_TEXT_STYLE,          "textStyle",       T_INT  },
       { P_USER_MODIFIED,       0,               T_BOOL   },
-      { P_Y1,                  0,               T_REAL  },
-      { P_Y2,                  0,               T_REAL  },
+      { P_BEAM_POS,            0,               T_POINT  },
       { P_END,                 "",              T_INT    }
       };
 

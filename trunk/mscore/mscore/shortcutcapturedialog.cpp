@@ -21,6 +21,7 @@
 
 #include "shortcutcapturedialog.h"
 #include "musescore.h"
+#include "shortcut.h"
 
 //---------------------------------------------------------
 //   ShortcutCaptureDialog
@@ -33,10 +34,32 @@ ShortcutCaptureDialog::ShortcutCaptureDialog(Shortcut* _s, QMap<QString, Shortcu
       localShortcuts = ls;
       s = _s;
 
-      oshrtLabel->setText(s->key.toString(QKeySequence::NativeText));
+      addButton->setEnabled(false);
+      replaceButton->setEnabled(false);
+      oshrtLabel->setText(s->keysToString());
       connect(clearButton, SIGNAL(clicked()), SLOT(clearClicked()));
+      connect(addButton, SIGNAL(clicked()), SLOT(addClicked()));
+      connect(replaceButton, SIGNAL(clicked()), SLOT(replaceClicked()));
       clearClicked();
       grabKeyboard();
+      }
+
+//---------------------------------------------------------
+//   addClicked
+//---------------------------------------------------------
+
+void ShortcutCaptureDialog::addClicked()
+      {
+      done(1);
+      }
+
+//---------------------------------------------------------
+//   replaceClicked
+//---------------------------------------------------------
+
+void ShortcutCaptureDialog::replaceClicked()
+      {
+      done(2);
       }
 
 //---------------------------------------------------------
@@ -79,14 +102,21 @@ void ShortcutCaptureDialog::keyPressEvent(QKeyEvent* e)
       QString msgString;
 
       foreach (Shortcut* ss, localShortcuts) {
-            if ((s != ss) && (ss->key == key)) {
-                  msgString = tr("Shortcut conflicts with ") + ss->descr;
-                  conflict = true;
-                  break;
+            if (s == ss)
+                  continue;
+            foreach(const QKeySequence& ks, ss->keys()) {
+                  if (ks == key) {
+                        msgString = tr("Shortcut conflicts with ") + ss->descr();
+                        conflict = true;
+                        break;
+                        }
                   }
+            if (conflict)
+                  break;
             }
       messageLabel->setText(msgString);
-      okButton->setEnabled(conflict == false);
+      addButton->setEnabled(conflict == false);
+      replaceButton->setEnabled(conflict == false);
       nshrtLabel->setText(key.toString(QKeySequence::NativeText));
 
       QString A = key.toString(QKeySequence::NativeText);
@@ -99,7 +129,6 @@ qDebug("capture key 0x%x  modifiers 0x%x virt 0x%x scan 0x%x <%s><%s>\n",
       qPrintable(A),
       qPrintable(B)
       );
-
       }
 
 //---------------------------------------------------------

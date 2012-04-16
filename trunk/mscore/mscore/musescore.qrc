@@ -1,6 +1,8 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
    <qresource prefix="/">
+      <file>data/shortcuts.xml</file>
+
       <file>data/paper1.png</file>
       <file>data/paper2.png</file>
       <file>data/paper3.png</file>

@@ -70,6 +70,7 @@
 #include "libmscore/accidental.h"
 #include "libmscore/harmony.h"
 #include "libmscore/rehearsalmark.h"
+#include "shortcut.h"
 
 extern bool useFactorySettings;
 
@@ -82,11 +83,11 @@ void populateIconPalette(Palette* p, const IconAction* a)
       while (a->subtype != -1) {
             Icon* ik = new Icon(gscore);
             ik->setSubtype(a->subtype);
-            Shortcut* s = getShortcut(a->action);
-            QAction* action = getAction(s);
+            Shortcut* s = Shortcut::getShortcut(a->action);
+            QAction* action = s->action();
             QIcon icon(action->icon());
             ik->setAction(a->action, icon);
-            p->append(ik, s->help);
+            p->append(ik, s->help());
             ++a;
             }
       }

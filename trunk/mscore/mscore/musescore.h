@@ -30,8 +30,8 @@
 #include "ui_startdialog.h"
 #include <QtSingleApplication>
 #include "updatechecker.h"
-#include "shortcut.h"
 
+class Shortcut;
 class ScoreView;
 class Element;
 class ToolButton;
@@ -466,8 +466,6 @@ class MuseScore : public QMainWindow {
       Score* currentScore() const         { return cs; }
       ScoreView* currentScoreView() const { return cv; }
 
-      static Shortcut sc[];
-      static Shortcut scSeq[];
       void incMag();
       void decMag();
       void readSettings();
@@ -627,10 +625,7 @@ class MuseScore : public QMainWindow {
 extern MuseScore* mscore;
 extern QString dataPath;
 
-extern Shortcut* getShortcut(const char* id);
-extern QAction* getAction(Shortcut*);
 extern QAction* getAction(const char*);
-extern QMap<QString, Shortcut*> shortcuts;
 extern Shortcut* midiActionMap[128];
 extern void setMscoreLocale(QString localeName);
 extern QPixmap sym2pixmap(const Sym* s, qreal mag);

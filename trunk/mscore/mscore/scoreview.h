@@ -260,6 +260,7 @@ class ScoreView : public QWidget, public MuseScoreView {
       void elementPropertyAction(const QString&, Element* e);
       void paintPageBorder(QPainter& p, Page* page);
       bool dropCanvas(Element*);
+      void editCmd(const QString&);
 
    private slots:
       void enterState();

@@ -13,6 +13,7 @@
 
 #include "libmscore/score.h"
 #include "libmscore/element.h"
+#include "libmscore/beam.h"
 #include "musescore.h"
 #include "inspectorBase.h"
 #include "inspector.h"
@@ -45,6 +46,7 @@ QVariant InspectorBase::getValue(int idx) const
 
       switch (propertyType(ii.t)) {
             case T_SIZE:
+            case T_POINT:
             case T_SCALE:
             case T_SREAL:
             case T_REAL:      return w->property("value");
@@ -67,6 +69,7 @@ void InspectorBase::setValue(int idx, const QVariant& val)
 
       switch (propertyType(ii.t)) {
             case T_SIZE:
+            case T_POINT:
             case T_SCALE:
             case T_SREAL:
             case T_REAL:
@@ -101,6 +104,11 @@ bool InspectorBase::isDefault(int idx)
             qreal v = ii.sv == 0 ? sz.width() : sz.height();
             return val.toDouble() == v;
             }
+      if (t == T_POINT) {
+            QPointF sz = def.toPointF();
+            qreal v = ii.sv == 0 ? sz.x() : sz.y();
+            return val.toDouble() == v;
+            }
       return val == def;
       }
 
@@ -113,7 +121,8 @@ bool InspectorBase::dirty() const
       {
       Element* e = inspector->element();
       for (int i = 0; i < inspectorItems(); ++i) {
-            if (e->getProperty(item(i).t) != getValue(i))
+            P_ID id = item(i).t;
+            if (e->getProperty(id) != getValue(i))
                   return true;
             }
       return false;
@@ -125,8 +134,9 @@ bool InspectorBase::dirty() const
 
 void InspectorBase::valueChanged(int idx)
       {
-      if (item(idx).r)
-            item(idx).r->setEnabled(!isDefault(idx));
+      const InspectorItem& ii = item(idx);
+      if (ii.r)
+            ii.r->setEnabled(!isDefault(idx));
       inspector->enableApply(dirty());
       }
 
@@ -148,6 +158,13 @@ void InspectorBase::setElement(Element* e)
                         val = QVariant(sz.width());
                   else
                         val = QVariant(sz.height());
+                  }
+            else if (pt == T_POINT) {
+                  QPointF sz = e->getProperty(id).toPointF();
+                  if (item(i).sv == 0)
+                        val = QVariant(sz.x());
+                  else
+                        val = QVariant(sz.y());
                   }
             else
                   val = e->getProperty(id);
@@ -186,6 +203,18 @@ void InspectorBase::apply()
                   else {
                         if (sz.height() != v)
                               score->undoChangeProperty(e, id, QVariant(QSizeF(sz.width(), v)));
+                        }
+                  }
+            else if (pt == T_POINT) {
+                  qreal v = getValue(i).toDouble();
+                  QPointF sz = val1.toPointF();
+                  if (item(i).sv == 0) {
+                        if (sz.x() != v)
+                              score->undoChangeProperty(e, id, QVariant(QPointF(v, sz.y())));
+                        }
+                  else {
+                        if (sz.y() != v)
+                              score->undoChangeProperty(e, id, QVariant(QPointF(sz.x(), v)));
                         }
                   }
             else {
@@ -244,6 +273,7 @@ void InspectorBase::mapSignals()
                   case T_REAL:
                   case T_SREAL:
                   case T_SIZE:
+                  case T_POINT:
                   case T_SCALE:
                         connect(w, SIGNAL(valueChanged(double)), valueMapper, SLOT(map()));
                         break;
