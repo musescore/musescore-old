@@ -399,7 +399,7 @@ struct Shortcut1 {
 //   read
 //---------------------------------------------------------
 
-static QList<Shortcut1*> loadBuildinShortcuts()
+static QList<Shortcut1*> loadBuiltinShortcuts()
       {
       QList<Shortcut1*> list;
       QFile f(":/data/shortcuts.xml");
@@ -454,7 +454,7 @@ static QList<Shortcut1*> loadBuildinShortcuts()
 
 void Shortcut::resetToBuildin()
       {
-      QList<Shortcut1*> sl = loadBuildinShortcuts();
+      QList<Shortcut1*> sl = loadBuiltinShortcuts();
       foreach(Shortcut1* sc, sl) {
             Shortcut* s = getShortcut(sc->key);
             if (s) {
@@ -474,7 +474,7 @@ void Shortcut::reset()
       {
       _standardKey = QKeySequence::UnknownKey;
       _keys.clear();
-      QList<Shortcut1*> sl = loadBuildinShortcuts();
+      QList<Shortcut1*> sl = loadBuiltinShortcuts();
       foreach(Shortcut1* sc, sl) {
             if (strcmp(sc->key, _key) == 0) {
                   setKeys(sc->keys);
