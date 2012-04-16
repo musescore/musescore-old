@@ -74,6 +74,7 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
 
    public:
       PreferenceDialog(QWidget* parent);
+      ~PreferenceDialog();
       void updateRemote();
       };
 

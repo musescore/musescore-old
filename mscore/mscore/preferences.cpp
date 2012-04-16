@@ -38,6 +38,7 @@
 #include "libmscore/page.h"
 #include "file.h"
 #include "libmscore/mscore.h"
+#include "shortcut.h"
 
 bool useALSA = false, useJACK = false, usePortaudio = false;
 
@@ -70,56 +71,6 @@ static PeriodItem updatePeriods[] = {
       PeriodItem(2*30*24, QT_TRANSLATE_NOOP("preferences","Every 2 months")),
       PeriodItem(-1,      QT_TRANSLATE_NOOP("preferences","Never")),
       };
-
-//---------------------------------------------------------
-//   writeShortcuts
-//---------------------------------------------------------
-
-static void writeShortcuts()
-      {
-      QSettings s;
-      s.beginGroup("Shortcuts");
-
-      int n = 0;
-      foreach(Shortcut* shortcut, shortcuts) {
-            for (unsigned i = 0;; ++i) {
-                  if (MuseScore::sc[i].xml == shortcut->xml) {
-                        if (MuseScore::sc[i].key != shortcut->key) {
-                              s.setValue(QString("sc[%1]").arg(n),  shortcut->xml);
-                              s.setValue(QString("seq[%1]").arg(n), shortcut->key.toString(QKeySequence::PortableText));
-                              ++n;
-                              }
-                        break;
-                        }
-                  }
-            }
-      s.setValue("n", n);
-      s.endGroup();
-      }
-
-//---------------------------------------------------------
-//   readShortcuts
-//---------------------------------------------------------
-
-static void readShortcuts()
-      {
-      if (useFactorySettings)
-            return;
-      QSettings s;
-      s.beginGroup("Shortcuts");
-      int n = s.value("n", 0).toInt();
-
-      for (int i = 0; i < n; ++i) {
-            QString name = s.value(QString("sc[%1]").arg(i)).toString();
-            QString seq  = s.value(QString("seq[%1]").arg(i)).toString();
-            Shortcut* sc = shortcuts.value(name);
-            if (sc)
-                  sc->key = QKeySequence::fromString(seq, QKeySequence::PortableText);
-            else
-                  qDebug("MuseScore:readShortCuts: unknown tag <%s>\n", qPrintable(name));
-            }
-      s.endGroup();
-      }
 
 //---------------------------------------------------------
 //   appStyleSheet
@@ -435,8 +386,10 @@ void Preferences::write()
       s.setValue("pos", playPanelPos);
       s.endGroup();
 
-      writeShortcuts();
       writePluginList();
+      if (Shortcut::dirty)
+            Shortcut::save();
+      Shortcut::dirty = false;
       }
 
 //---------------------------------------------------------
@@ -625,7 +578,6 @@ void Preferences::read()
       playPanelPos = s.value("pos", playPanelPos).toPoint();
       s.endGroup();
 
-      readShortcuts();
       readPluginList();
       }
 
@@ -748,6 +700,15 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(midiRemoteControlClear, SIGNAL(clicked()), SLOT(midiRemoteControlClearClicked()));
       connect(sfOpenButton,           SIGNAL(clicked()), SLOT(selectSoundFont()));
       updateRemote();
+      }
+
+//---------------------------------------------------------
+//   ~PreferenceDialog
+//---------------------------------------------------------
+
+PreferenceDialog::~PreferenceDialog()
+      {
+      qDeleteAll(localShortcuts);
       }
 
 //---------------------------------------------------------
@@ -929,11 +890,10 @@ void PreferenceDialog::updateValues(Preferences* p)
       //    we need a deep copy to be able to rewind all
       //    changes on "Abort"
       //
-      foreach(Shortcut* s, shortcuts) {
-            Shortcut* ns = new Shortcut(*s);
-            ns->action   = 0;
-            localShortcuts[s->xml] = ns;
-            }
+      qDeleteAll(localShortcuts);
+      localShortcuts.clear();
+      foreach(const Shortcut* s, Shortcut::shortcuts())
+            localShortcuts[s->key()] = new Shortcut(*s);
       updateSCListView();
 
       //
@@ -1095,17 +1055,11 @@ void PreferenceDialog::updateSCListView()
             if (!s)
                   continue;
             ShortcutItem* newItem = new ShortcutItem;
-            newItem->setText(0, s->descr);
-            if (s->icon != -1)
-                  newItem->setIcon(0, *icons[s->icon]);
-            if(!s->key.isEmpty())
-                newItem->setText(1, s->key.toString(QKeySequence::NativeText));
-            else{
-                QList<QKeySequence> list = QKeySequence::keyBindings(s->standardKey);
-                if (list.size() > 0)
-                    newItem->setText(1, list.at(0).toString(QKeySequence::NativeText));
-                }
-            newItem->setData(0, Qt::UserRole, s->xml);
+            newItem->setText(0, s->descr());
+            if (s->icon() != -1)
+                  newItem->setIcon(0, *icons[s->icon()]);
+            newItem->setText(1, s->keysToString());
+            newItem->setData(0, Qt::UserRole, s->key());
             shortcutList->addTopLevelItem(newItem);
             }
       shortcutList->resizeColumnToContents(0);
@@ -1113,7 +1067,7 @@ void PreferenceDialog::updateSCListView()
 
 //---------------------------------------------------------
 //   resetShortcutClicked
-//    reset all shortcuts to buildin defaults
+//    reset selected shortcut to buildin default
 //---------------------------------------------------------
 
 void PreferenceDialog::resetShortcutClicked()
@@ -1124,16 +1078,12 @@ void PreferenceDialog::resetShortcutClicked()
       QString str = active->data(0, Qt::UserRole).toString();
       if (str.isEmpty())
             return;
-      Shortcut* shortcut = localShortcuts[str];
+      Shortcut* shortcut = localShortcuts[str.toAscii().data()];
 
-      for (unsigned i = 0;; ++i) {
-            if (MuseScore::sc[i].xml == shortcut->xml) {
-                  shortcut->key = MuseScore::sc[i].key;
-                  active->setText(1, shortcut->key.toString(QKeySequence::NativeText));
-                  shortcutsChanged = true;
-                  break;
-                  }
-            }
+      shortcut->reset();
+
+      active->setText(1, shortcut->keysToString());
+      shortcutsChanged = true;
       }
 
 //---------------------------------------------------------
@@ -1143,15 +1093,15 @@ void PreferenceDialog::resetShortcutClicked()
 void PreferenceDialog::clearShortcutClicked()
       {
       QTreeWidgetItem* active = shortcutList->currentItem();
-      if (active) {
-            QString str = active->data(0, Qt::UserRole).toString();
-            if (!str.isEmpty()) {
-                  Shortcut* s = localShortcuts[str];
-                  s->key = 0;
-                  active->setText(1, s->key.toString(QKeySequence::NativeText));
-                  shortcutsChanged = true;
-                  }
-            }
+      if (!active)
+            return;
+      QString str = active->data(0, Qt::UserRole).toString();
+      if (str.isEmpty())
+            return;
+      Shortcut* s = localShortcuts[str.toAscii().data()];
+      s->clear();
+      active->setText(1, "");
+      shortcutsChanged = true;
       }
 
 //---------------------------------------------------------
@@ -1161,19 +1111,21 @@ void PreferenceDialog::clearShortcutClicked()
 void PreferenceDialog::defineShortcutClicked()
       {
       QTreeWidgetItem* active = shortcutList->currentItem();
-      if(active){
-          QString str = active->data(0, Qt::UserRole).toString();
-          if (str.isEmpty())
-                return;
-          Shortcut* s = localShortcuts[str];
-          ShortcutCaptureDialog sc(s, localShortcuts, this);
-          if (sc.exec()) {
-                s->key = sc.getKey();
-                active->setText(1, s->key.toString(QKeySequence::NativeText));
-                shortcutsChanged = true;
-                }
-//        clearButton->setEnabled(true);
-          }
+      if (!active)
+            return;
+      QString str = active->data(0, Qt::UserRole).toString();
+      if (str.isEmpty())
+            return;
+      Shortcut* s = localShortcuts[str.toAscii().data()];
+      ShortcutCaptureDialog sc(s, localShortcuts, this);
+      int rv = sc.exec();
+      if (rv == 0)
+            return;
+      if (rv == 2)
+            s->clear();
+      s->addShortcut(sc.getKey());
+      active->setText(1, s->keysToString());
+      shortcutsChanged = true;
       }
 
 //---------------------------------------------------------
@@ -1417,15 +1369,16 @@ void PreferenceDialog::apply()
 
       if (shortcutsChanged) {
             shortcutsChanged = false;
-            foreach(Shortcut* s, localShortcuts) {
-                  Shortcut* os = shortcuts[s->xml];
-                  if (os->key != s->key) {
-                        os->key = s->key;
-                        if (os->action)
-                              os->action->setShortcut(s->key);
+            foreach(const Shortcut* s, localShortcuts) {
+                  Shortcut* os = Shortcut::getShortcut(s->key());
+                  if (os) {
+                        if (!os->compareKeys(*s))
+                              os->setKeys(s->keys());
                         }
                   }
+            Shortcut::dirty = true;
             }
+
       int lang = language->itemData(language->currentIndex()).toInt();
       QString l = lang == 0 ? "system" : mscore->languages().at(lang).key;
       bool languageChanged = l != preferences.language;
@@ -1542,14 +1495,11 @@ void PreferenceDialog::resetAllValues()
       updateValues(&prefs);
 
       shortcutsChanged = true;
-      foreach(Shortcut* sc, localShortcuts)
-            delete sc;
+      qDeleteAll(localShortcuts);
       localShortcuts.clear();
-      for (unsigned i = 0;; ++i) {
-            if (MuseScore::sc[i].xml == 0)
-                  break;
-            localShortcuts[MuseScore::sc[i].xml] = new Shortcut(MuseScore::sc[i]);
-            }
+      Shortcut::resetToBuildin();
+      foreach(const Shortcut* s, Shortcut::shortcuts())
+            localShortcuts[s->key()] = new Shortcut(*s);
       updateSCListView();
       }
 

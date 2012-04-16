@@ -113,13 +113,10 @@ class Beam : public Element {
       void setDistribute(bool val)        { _distribute = val;  }
 
       bool userModified() const;
-      void setUserModified(bool);
+      void setUserModified(bool val);
 
-      qreal y1() const;
-      void setY1(qreal);
-
-      qreal y2() const;
-      void setY2(qreal);
+      QPointF beamPos() const;
+      void setBeamPos(const QPointF& bp);
 
       QVariant getProperty(P_ID propertyId) const;
       bool setProperty(P_ID propertyId, const QVariant&);

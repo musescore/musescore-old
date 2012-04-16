@@ -43,6 +43,44 @@ InspectorBeam::InspectorBeam(QWidget* parent)
       iList[3].w = b.growRight;
       iList[3].r = b.resetGrowRight;
 
+      iList[4].t = P_USER_MODIFIED;
+      iList[4].w = b.userPosition;
+      iList[4].r = b.resetUserPosition;
+
+      iList[5].t = P_BEAM_POS;
+      iList[5].sv = 0;
+      iList[5].w = b.y1;
+      iList[5].r = 0;
+
+      iList[6].t = P_BEAM_POS;
+      iList[6].sv = 1;
+      iList[6].w = b.y2;
+      iList[6].r = 0;
+
       mapSignals();
+      }
+
+//---------------------------------------------------------
+//   valueChanged
+//---------------------------------------------------------
+
+void InspectorBeam::valueChanged(int idx)
+      {
+      if (idx == 4) {
+            bool val = getValue(idx).toBool();
+            iList[5].w->setEnabled(val);
+            iList[6].w->setEnabled(val);
+            }
+      InspectorBase::valueChanged(idx);
+      }
+
+void InspectorBeam::setValue(int idx, const QVariant& val)
+      {
+      if (idx == 4) {
+            bool enable = val.toBool();
+            iList[5].w->setEnabled(enable);
+            iList[6].w->setEnabled(enable);
+            }
+      InspectorBase::setValue(idx, val);
       }
 

@@ -74,6 +74,7 @@
 #include "edittempo.h"
 #include "inspector.h"
 #include "omrpanel.h"
+#include "shortcut.h"
 
 #include "libmscore/mscore.h"
 #include "libmscore/system.h"
@@ -100,8 +101,6 @@ bool enableExperimental = false;
 
 QString dataPath;
 QString iconPath, iconGroup;
-
-QMap<QString, Shortcut*> shortcuts;
 
 bool converterMode = false;
 bool noGui = false;
@@ -464,8 +463,8 @@ MuseScore::MuseScore()
 
       QActionGroup* ag = new QActionGroup(this);
       ag->setExclusive(false);
-      foreach(Shortcut* s, shortcuts) {
-            QAction* a = getAction(s);
+      foreach(const Shortcut* s, Shortcut::shortcuts()) {
+            QAction* a = s->action();
             ag->addAction(a);
             }
       addActions(ag->actions());
@@ -1848,23 +1847,6 @@ void setMscoreLocale(QString localeName)
       }
 
 //---------------------------------------------------------
-//   initShortcuts
-//---------------------------------------------------------
-
-static void initShortcuts()
-      {
-      //
-      // initialize shortcut hash table
-      //
-      shortcuts.clear();
-      for (unsigned i = 0;; ++i) {
-            if (MuseScore::sc[i].xml == 0)
-                  break;
-            shortcuts[MuseScore::sc[i].xml] = new Shortcut(MuseScore::sc[i]);
-            }
-      }
-
-//---------------------------------------------------------
 //   loadScores
 //    load scores for a new session
 //---------------------------------------------------------
@@ -2264,7 +2246,7 @@ int main(int argc, char* av[])
 
       setMscoreLocale(localeName);
 
-      initShortcuts();
+      Shortcut::init();
       preferences.init();
 
       QWidget wi(0);
@@ -2571,27 +2553,28 @@ void MuseScore::changeState(ScoreState val)
 
       if (_sstate == val)
             return;
-      foreach (Shortcut* s, shortcuts) {
-            if (!s->action)
+      foreach (const Shortcut* s, Shortcut::shortcuts()) {
+            QAction* a = s->action();
+            if (!a)
                   continue;
-            if (strcmp(s->xml, "undo") == 0)
-                  s->action->setEnabled((s->state & val) && (cs ? cs->undo()->canUndo() : false));
-            else if (strcmp(s->xml, "redo") == 0)
-                  s->action->setEnabled((s->state & val) && (cs ? cs->undo()->canRedo() : false));
-            else if (strcmp(s->xml, "cut") == 0)
-                  s->action->setEnabled(cs && cs->selection().state());
-            else if (strcmp(s->xml, "copy") == 0)
-                  s->action->setEnabled(cs && cs->selection().state());
-            else if (strcmp(s->xml, "synth-control") == 0) {
+            if (strcmp(s->key(), "undo") == 0)
+                  a->setEnabled((s->state() & val) && (cs ? cs->undo()->canUndo() : false));
+            else if (strcmp(s->key(), "redo") == 0)
+                  a->setEnabled((s->state() & val) && (cs ? cs->undo()->canRedo() : false));
+            else if (strcmp(s->key(), "cut") == 0)
+                  a->setEnabled(cs && cs->selection().state());
+            else if (strcmp(s->key(), "copy") == 0)
+                  a->setEnabled(cs && cs->selection().state());
+            else if (strcmp(s->key(), "synth-control") == 0) {
                   Driver* driver = seq ? seq->getDriver() : 0;
-                  // s->action->setEnabled(driver && driver->getSynth());
+                  // a->setEnabled(driver && driver->getSynth());
                   if (debugMode)
                         qDebug("disable synth control");
-                  s->action->setEnabled(driver);
+                  a->setEnabled(driver);
                   }
             else {
-                  bool enable = s->state & val;
-                  s->action->setEnabled(enable);
+                  bool enable = s->state() & val;
+                  a->setEnabled(enable);
                   }
             }
       if (val != STATE_SEARCH && searchDialog)
@@ -3628,7 +3611,7 @@ void MuseScore::networkFinished(QNetworkReply* reply)
       QString s(ha);
       QString name;
       QRegExp re(".*filename=\"(.*)\"");
-                  
+
       if (!s.isEmpty() && re.indexIn(s) != -1) {
             name = re.cap(1);
              }
@@ -3638,7 +3621,7 @@ void MuseScore::networkFinished(QNetworkReply* reply)
             qDebug("Path <%s>", qPrintable(path));
             if(path.endsWith(".pdf") || path.endsWith(".mscz"))
                   name = path.section('/',-1);
-        	  else 
+        	  else
                   name = "unknown.mscz";
             }
 
@@ -3923,12 +3906,12 @@ void MuseScore::cmd(QAction* a)
       if (debugMode)
             qDebug("MuseScore::cmd <%s>", cmdn.toAscii().data());
 
-      Shortcut* sc = getShortcut(cmdn.toAscii().data());
+      Shortcut* sc = Shortcut::getShortcut(cmdn.toAscii().data());
       if (sc == 0) {
             qDebug("MuseScore::cmd(): unknown action <%s>", qPrintable(cmdn));
             return;
             }
-      if (cs && (sc->state & _sstate) == 0) {
+      if (cs && (sc->state() & _sstate) == 0) {
             QMessageBox::warning(0,
                QWidget::tr("MuseScore: invalid command"),
                QString("Command %1 not valid in current state").arg(cmdn));
@@ -3946,16 +3929,16 @@ void MuseScore::cmd(QAction* a)
             lastShortcut = sc;
             }
 
-      if ((sc->flags & A_SCORE) && ! cs) {
+      if ((sc->flags() & A_SCORE) && ! cs) {
             qDebug("no score");
             return;
             }
-      if (sc->flags & A_CMD) {
+      if (sc->flags() & A_CMD) {
             if (!cv->editMode())
                   cs->startCmd();
             }
       cmd(a, cmdn);
-      if (lastShortcut->flags & A_CMD)
+      if (lastShortcut->flags() & A_CMD)
             cs->endCmd();
       endCmd();
       }

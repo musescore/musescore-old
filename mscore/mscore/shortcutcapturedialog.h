@@ -45,6 +45,8 @@ class ShortcutCaptureDialog : public QDialog, public Ui::ShortcutCaptureDialogBa
 
     private slots:
       void clearClicked();
+      void addClicked();
+      void replaceClicked();
 
     public:
       ShortcutCaptureDialog(Shortcut* s, QMap<QString, Shortcut*> localShortcuts, QWidget* parent = 0);

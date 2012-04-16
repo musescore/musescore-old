@@ -27,12 +27,16 @@ class InspectorBeam : public InspectorBase {
 
       Ui::InspectorBeam b;
 
-      static const int _inspectorItems = 4;
+      static const int _inspectorItems = 7;
       InspectorItem iList[_inspectorItems];
+
+   protected slots:
+      virtual void valueChanged(int idx);
 
    protected:
       virtual const InspectorItem& item(int idx) const { return iList[idx]; }
       virtual int inspectorItems() const { return _inspectorItems; }
+      virtual void setValue(int idx, const QVariant& val);
 
    public:
       InspectorBeam(QWidget* parent);

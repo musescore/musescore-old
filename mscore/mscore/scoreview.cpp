@@ -2788,6 +2788,9 @@ void ScoreView::cmd(const QAction* a)
                   }
             _score->cmdDeleteSelection();
             }
+      else if (cmd == "next-lyric" || cmd == "prev-lyric") {
+            editCmd(cmd);
+            }
       else
             _score->cmd(a);
       _score->processMidiInput();

@@ -15,6 +15,10 @@
 #include "shortcut.h"
 #include "musescore.h"
 #include "icons.h"
+#include "libmscore/xml.h"
+
+bool Shortcut::dirty = false;
+QMap<QString, Shortcut*> Shortcut::_shortcuts;
 
 //---------------------------------------------------------
 //   Shortcut
@@ -22,80 +26,136 @@
 
 Shortcut::Shortcut()
       {
-      state       = STATE_NORMAL;
-      xml         = 0;
-      standardKey = QKeySequence::UnknownKey;
-      key         = 0;
-      context     = Qt::WindowShortcut;
-      icon        = -1;
-      action      = 0;
-      translated  = false;
+      _key         = 0;
+      _descr       = 0;
+      _text        = 0;
+      _help        = 0;
+      _state       = 0;
+      _flags       = 0;
+      _standardKey = QKeySequence::UnknownKey;
+      _context     = Qt::WindowShortcut;
+      _icon        = 0;
+      _action      = 0;
       }
 
-Shortcut::Shortcut(int s, int f, const char* name, const char* d, const QKeySequence& k,
-   Qt::ShortcutContext cont, const char* txt, const char* h, int i)
+Shortcut::Shortcut(int s, int f, const char* name, Qt::ShortcutContext cont, const char* d,
+   const char* txt, const char* h, int i)
       {
-      state       = s;
-      flags       = f;
-      xml         = name;
-      standardKey = QKeySequence::UnknownKey;
-      key         = k;
-      context     = cont;
-      icon        = i;
-      action      = 0;
-      descr       = qApp->translate("action", d);
-      help        = qApp->translate("action", h);
-      text        = qApp->translate("action", txt);
-      translated  = false;
+      _key         = name;
+      _descr       = d;
+      _text        = txt;
+      _help        = h;
+      _state       = s;
+      _flags       = f;
+      _standardKey = QKeySequence::UnknownKey;
+      _context     = cont;
+      _icon        = i;
+      _action      = 0;
       }
 
-Shortcut::Shortcut(int s, int f, const char* name, const char* d, QKeySequence::StandardKey sk,
-   Qt::ShortcutContext cont, const char* txt, const char* h, int i)
+Shortcut::Shortcut(int s, int f, const char* name, const char* d,
+   const char* txt, const char* h, int i)
       {
-      state       = s;
-      flags       = f;
-      xml         = name;
-      standardKey = sk;
-      key         = 0;
-      context     = cont;
-      icon        = i;
-      action      = 0;
-      descr       = qApp->translate("action", d);
-      help        = qApp->translate("action", h);
-      text        = qApp->translate("action", txt);
-      translated  = false;
+      _key         = name;
+      _descr       = d;
+      _text        = txt;
+      _help        = h;
+      _state       = s;
+      _flags       = f;
+      _standardKey = QKeySequence::UnknownKey;
+      _context     = Qt::WindowShortcut;
+      _icon        = i;
+      _action      = 0;
       }
 
-Shortcut::Shortcut(const Shortcut& c)
+Shortcut::Shortcut(const Shortcut& sc)
       {
-      state       = c.state;
-      flags       = c.flags;
-      xml         = c.xml;
-      standardKey = c.standardKey;
-      key         = c.key;
-      context     = c.context;
-      icon        = c.icon;
-      action      = c.action;
-      if (c.translated) {
-            descr   = c.descr;
-            help    = c.help;
-            text    = c.text;
-            }
-      else {
-            descr   = qApp->translate("action", c.descr.toUtf8().data());
-            help    = qApp->translate("action", c.help.toUtf8().data());
-            text    = qApp->translate("action", c.text.toUtf8().data());
-            translated = true;
-            }
+      _key         = sc._key;
+      _descr       = sc._descr;
+      _text        = sc._text;
+      _help        = sc._help;
+      _state       = sc._state;
+      _flags       = sc._flags;
+      _standardKey = sc._standardKey;
+      _keys        = sc._keys;
+      _context     = sc._context;
+      _icon        = sc._icon;
+      _action      = 0;
+      }
+
+Shortcut::~Shortcut()
+      {
+      delete _action;
+      }
+
+//---------------------------------------------------------
+//   clear
+//---------------------------------------------------------
+
+void Shortcut::clear()
+      {
+      _standardKey = QKeySequence::UnknownKey;
+      _keys.clear();
+      if (_action)
+            _action->setShortcuts(_keys);
+      }
+
+//---------------------------------------------------------
+//   setKeys
+//---------------------------------------------------------
+
+void Shortcut::setKeys(const QList<QKeySequence>& ks)
+      {
+      _standardKey = QKeySequence::UnknownKey;
+      _keys = ks;
+      if (_action)
+            _action->setShortcuts(_keys);
+      }
+
+//---------------------------------------------------------
+//   setAction
+//---------------------------------------------------------
+
+void Shortcut::setAction(QAction* a)
+      {
+      delete _action;
+      _action = a;
+      }
+
+//---------------------------------------------------------
+//   descr
+//---------------------------------------------------------
+
+QString Shortcut::descr() const
+      {
+      return qApp->translate("action", _descr);
+      }
+
+//---------------------------------------------------------
+//   text
+//---------------------------------------------------------
+
+QString Shortcut::text() const
+      {
+      return qApp->translate("action", _text);
+      }
+
+//---------------------------------------------------------
+//   help
+//---------------------------------------------------------
+
+QString Shortcut::help() const
+      {
+      return qApp->translate("action", _help);
       }
 
 //---------------------------------------------------------
 //   getShortcut
 //---------------------------------------------------------
 
-Shortcut* getShortcut(const char* id)
+Shortcut* Shortcut::getShortcut(const char* id)
       {
-      Shortcut* s = shortcuts.value(id);
+      Shortcut* s = _shortcuts.value(id);
       if (s == 0) {
             qDebug("internal error: shortcut <%s> not found\n", id);
             return 0;
@@ -110,55 +170,319 @@ Shortcut* getShortcut(const char* id)
 
 QAction* getAction(const char* id)
       {
-      Shortcut* s = getShortcut(id);
-      return getAction(s);
+      Shortcut* s = Shortcut::getShortcut(id);
+      return s->action();
       }
 
-QAction* getAction(Shortcut* s)
+//---------------------------------------------------------
+//   aAction
+//---------------------------------------------------------
+
+QAction* Shortcut::action() const
       {
-      if (s == 0)
-            return 0;
-      if (s->action == 0) {
-            QAction* a = new QAction(s->xml, 0); // mscore);
-            s->action  = a;
-            a->setData(s->xml);
-            if(!s->key.isEmpty())
-                a->setShortcut(s->key);
-            else
-                a->setShortcuts(s->standardKey);
-            a->setShortcutContext(s->context);
-            if (!s->help.isEmpty()) {
-                  a->setToolTip(s->help);
-                  a->setWhatsThis(s->help);
+      if (_action)
+            return _action;
+
+      _action = new QAction(_text, 0);
+      _action->setData(_key);
+
+      if (_keys.isEmpty())
+            _action->setShortcuts(_standardKey);
+      else
+            _action->setShortcuts(_keys);
+
+      _action->setShortcutContext(_context);
+      if (_help) {
+            _action->setToolTip(help());
+            _action->setWhatsThis(help());
+            }
+      else {
+            _action->setToolTip(descr());
+            _action->setWhatsThis(descr());
+            }
+      QList<QKeySequence> kl = _action->shortcuts();
+      if (!kl.isEmpty()) {
+            QString s(_action->toolTip());
+            s += " (";
+            for (int i = 0; i < kl.size(); ++i) {
+                  if (i)
+                        s += ",";
+                  s += kl[i].toString(QKeySequence::NativeText);
                   }
-            else {
-                  a->setToolTip(s->descr);
-                  a->setWhatsThis(s->descr);
-                  }
-            if (s->standardKey != QKeySequence::UnknownKey) {
-                  QList<QKeySequence> kl = a->shortcuts();
-                  if (!kl.isEmpty()) {
-                        QString s(a->toolTip());
-                        s += " (";
-                        for (int i = 0; i < kl.size(); ++i) {
-                              if (i)
-                                    s += ",";
-                              s += kl[i].toString(QKeySequence::NativeText);
+            s += ")";
+            _action->setToolTip(s);
+            }
+      if (_icon != -1)
+            _action->setIcon(*icons[_icon]);
+      return _action;
+      }
+
+//---------------------------------------------------------
+//   addShortcut
+//---------------------------------------------------------
+
+void Shortcut::addShortcut(const QKeySequence& ks)
+      {
+      _keys.append(ks);
+      if (_action)
+            _action->setShortcuts(_keys);
+      dirty = true;
+      }
+
+//---------------------------------------------------------
+//   keysToString
+//---------------------------------------------------------
+
+QString Shortcut::keysToString()
+      {
+      QAction* a = action();
+      QList<QKeySequence> kl = a->shortcuts();
+      QString s;
+      for (int i = 0; i < kl.size(); ++i) {
+            if (i)
+                  s += "; ";
+            s += kl[i].toString(QKeySequence::NativeText);
+            }
+      return s;
+      }
+
+//---------------------------------------------------------
+//   compareKeys
+//    return true if keys are equal
+//---------------------------------------------------------
+
+bool Shortcut::compareKeys(const Shortcut& sc) const
+      {
+      if (sc._keys.size() != _keys.size())
+            return false;
+      for (int i = 0; i < _keys.size(); ++i) {
+            if (sc._keys[i] != _keys[i])
+                  return false;
+            }
+      return true;
+      }
+
+//---------------------------------------------------------
+//   initShortcuts
+//---------------------------------------------------------
+
+void Shortcut::init()
+      {
+      //
+      // initialize shortcut hash table
+      //
+      _shortcuts.clear();
+      for (unsigned i = 0;; ++i) {
+            if (sc[i]._key == 0)
+                  break;
+            _shortcuts[sc[i]._key] = &sc[i];
+            }
+      load();
+      }
+
+//---------------------------------------------------------
+//   save
+//---------------------------------------------------------
+
+void Shortcut::save()
+      {
+      QFile f(dataPath + "/shortcuts.xml");
+      if (!f.open(QIODevice::WriteOnly)) {
+            printf("cannot save shortcuts\n");
+            return;
+            }
+      Xml xml(&f);
+      xml.header();
+      xml.stag("Shortcuts");
+      for (unsigned i = 0;; ++i) {
+            Shortcut* s = &sc[i];
+            if (s->_key == 0)
+                  break;
+            s->write(xml);
+            }
+      xml.etag();
+      f.close();
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Shortcut::write(Xml& xml)
+      {
+      xml.stag("SC");
+      xml.tag("key", _key);
+      if (_standardKey != QKeySequence::UnknownKey)
+            xml.tag("std", QString("%1").arg(_standardKey));
+      foreach(QKeySequence ks, _keys)
+            xml.tag("seq", ks.toString(QKeySequence::PortableText));
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void Shortcut::load()
+      {
+      QFile f(dataPath + "/shortcuts.xml");
+      if (!f.exists()) {
+            f.setFileName(":/data/shortcuts.xml");
+            printf("load <:/data/shortcuts.xml>\n");
+            }
+      else {
+            printf("load <%s>\n", qPrintable(f.fileName()));
+            }
+      if (!f.open(QIODevice::ReadOnly)) {
+            printf("cannot open shortcuts\n");
+            return;
+            }
+      QDomDocument doc;
+      int line, column;
+      QString err;
+      if (!doc.setContent(&f, false, &err, &line, &column)) {
+            printf("error reading shortcuts.xml at line %d column %d: %s\n",
+               line, column, qPrintable(err));
+            return;
+            }
+      f.close();
+
+      QString key;
+      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "Shortcuts") {
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "SC") {
+                              Shortcut* sc = 0;
+                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                                    const QString& tag(eee.tagName());
+                                    const QString& val(eee.text());
+                                    if (tag == "key") {
+                                          sc = getShortcut(val.toAscii().data());
+                                          if (!sc) {
+                                                printf("cannot find shortcut <%s>\n", qPrintable(val));
+                                                break;
+                                                }
+                                          sc->clear();
+                                          }
+                                    else if (tag == "std")
+                                          sc->_standardKey = QKeySequence::StandardKey(val.toInt());
+                                    else if (tag == "seq")
+                                          sc->_keys.append(QKeySequence::fromString(val, QKeySequence::PortableText));
+                                    else
+                                          domError(eee);
+                                    }
                               }
-                        s += ")";
-                        a->setToolTip(s);
+                        else
+                              domError(ee);
                         }
                   }
-            else if (!s->key.isEmpty()) {
-                  a->setToolTip(a->toolTip() +
-                        " (" + s->key.toString(QKeySequence::NativeText) + ")" );
-                  }
-            if (!s->text.isEmpty())
-                  a->setText(s->text);
-            if (s->icon != -1)
-                  a->setIcon(*icons[s->icon]);
+            else
+                  domError(e);
             }
-      return s->action;
+      dirty = false;
       }
 
+//---------------------------------------------------------
+//   Shortcut1
+//---------------------------------------------------------
+
+struct Shortcut1 {
+      char* key;
+      QList<QKeySequence> keys;
+      QKeySequence::StandardKey standardKey;
+
+      Shortcut1()  { key = 0; standardKey = QKeySequence::UnknownKey; }
+      ~Shortcut1() { if (key) free(key); }
+      };
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+static QList<Shortcut1*> loadBuildinShortcuts()
+      {
+      QList<Shortcut1*> list;
+      QFile f(":/data/shortcuts.xml");
+      if (!f.open(QIODevice::ReadOnly)) {
+            printf("cannot open shortcuts\n");
+            return list;
+            }
+      QDomDocument doc;
+      int line, column;
+      QString err;
+      if (!doc.setContent(&f, false, &err, &line, &column)) {
+            printf("error reading shortcuts.xml at line %d column %d: %s\n",
+               line, column, qPrintable(err));
+            return list;
+            }
+      f.close();
+
+      QString key;
+      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "Shortcuts") {
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "SC") {
+                              Shortcut1* sc = new Shortcut1;
+                              sc->key = 0;
+                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                                    const QString& tag(eee.tagName());
+                                    const QString& val(eee.text());
+                                    if (tag == "key")
+                                          sc->key = strdup(val.toAscii().data());
+                                    else if (tag == "std")
+                                          sc->standardKey = QKeySequence::StandardKey(val.toInt());
+                                    else if (tag == "seq")
+                                          sc->keys.append(QKeySequence::fromString(val, QKeySequence::PortableText));
+                                    else
+                                          domError(eee);
+                                    }
+                              }
+                        else
+                              domError(ee);
+                        }
+                  }
+            else
+                  domError(e);
+            }
+      return list;
+      }
+
+//---------------------------------------------------------
+//   resetToBuildin
+//    reset all shortcuts to buildin values
+//---------------------------------------------------------
+
+void Shortcut::resetToBuildin()
+      {
+      QList<Shortcut1*> sl = loadBuildinShortcuts();
+      foreach(Shortcut1* sc, sl) {
+            Shortcut* s = getShortcut(sc->key);
+            if (s) {
+                  s->setKeys(sc->keys);
+                  s->setStandardKey(sc->standardKey);
+                  }
+            }
+      qDeleteAll(sl);
+      dirty = true;
+      }
+
+//---------------------------------------------------------
+//   reset
+//---------------------------------------------------------
+
+void Shortcut::reset()
+      {
+      _standardKey = QKeySequence::UnknownKey;
+      _keys.clear();
+      QList<Shortcut1*> sl = loadBuildinShortcuts();
+      foreach(Shortcut1* sc, sl) {
+            if (strcmp(sc->key, _key) == 0) {
+                  setKeys(sc->keys);
+                  setStandardKey(sc->standardKey);
+                  break;
+                  }
+            }
+      qDeleteAll(sl);
+      dirty = true;
+      }
 

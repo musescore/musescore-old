@@ -32,13 +32,14 @@
 
 //---------------------------------------------------------
 //   BeamFragment
-//    user offsets for beam or beam fragment
+//    position of primary beam
+//    idx 0 - AUTO or DOWN
+//        1 - UP
 //---------------------------------------------------------
 
 struct BeamFragment {
-      qreal py1[2];    // y position of primary beam
-      qreal py2[2];    // idx 0 - AUTO or DOWN
-                      //     1 - UP
+      qreal py1[2];
+      qreal py2[2];
       };
 
 //---------------------------------------------------------
@@ -2022,8 +2023,7 @@ void Beam::toDefault()
       if (growRight() != 1.0)
             score()->undoChangeProperty(this, P_GROW_RIGHT, 1.0);
       if (userModified()) {
-            score()->undoChangeProperty(this, P_Y1, 0.0);
-            score()->undoChangeProperty(this, P_Y2, 0.0);
+            score()->undoChangeProperty(this, P_BEAM_POS, QVariant(beamPos()));
             score()->undoChangeProperty(this, P_USER_MODIFIED, false);
             }
       if (beamDirection() != AUTO)
@@ -2091,36 +2091,25 @@ Element* Beam::drop(const DropData& data)
       }
 
 //---------------------------------------------------------
-//   y1
+//   beamPos
+//    misuse QPointF for y1-y2 real values
 //---------------------------------------------------------
 
-qreal Beam::y1() const
+QPointF Beam::beamPos() const
       {
       if (fragments.isEmpty())
-            return 0.0;
+            return QPointF(0.0, 0.0);
       BeamFragment* f = fragments.back();
       int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
-      return f->py1[idx] / spatium();
+      qreal _spatium = spatium();
+      return QPointF(f->py1[idx] / _spatium, f->py2[idx] / _spatium);
       }
 
 //---------------------------------------------------------
-//   y2
+//   setBeamPos
 //---------------------------------------------------------
 
-qreal Beam::y2() const
-      {
-      if (fragments.isEmpty())
-            return 0.0;
-      BeamFragment* f = fragments.back();
-      int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
-      return f->py2[idx] / spatium();
-      }
-
-//---------------------------------------------------------
-//   setY1
-//---------------------------------------------------------
-
-void Beam::setY1(qreal y)
+void Beam::setBeamPos(const QPointF& bp)
       {
       if (fragments.isEmpty())
             fragments.append(new BeamFragment);
@@ -2128,22 +2117,9 @@ void Beam::setY1(qreal y)
       int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
       _userModified[idx] = true;
       setGenerated(false);
-      f->py1[idx] = y * spatium();
-      }
-
-//---------------------------------------------------------
-//   setY2
-//---------------------------------------------------------
-
-void Beam::setY2(qreal y)
-      {
-      if (fragments.isEmpty())
-            fragments.append(new BeamFragment);
-      BeamFragment* f = fragments.back();
-      int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
-      _userModified[idx] = true;
-      setGenerated(false);
-      f->py2[idx] = y * spatium();
+      qreal _spatium = spatium();
+      f->py1[idx] = bp.x() * _spatium;
+      f->py2[idx] = bp.y() * _spatium;
       }
 
 //---------------------------------------------------------
@@ -2178,8 +2154,7 @@ QVariant Beam::getProperty(P_ID propertyId) const
             case P_GROW_LEFT:      return growLeft();
             case P_GROW_RIGHT:     return growRight();
             case P_USER_MODIFIED:  return userModified();
-            case P_Y1:             return y1();
-            case P_Y2:             return y2();
+            case P_BEAM_POS:       return beamPos();
             default:
                   return Element::getProperty(propertyId);
             }
@@ -2207,15 +2182,17 @@ bool Beam::setProperty(P_ID propertyId, const QVariant& v)
             case P_USER_MODIFIED:
                   setUserModified(v.toBool());
                   break;
-            case P_Y1:
-                  setY1(v.toDouble());
-                  break;
-            case P_Y2:
-                  setY2(v.toDouble());
+            case P_BEAM_POS:
+                  if (userModified())
+                        setBeamPos(v.toPointF());
                   break;
             default:
-                  return Element::setProperty(propertyId, v);
+                  if (!Element::setProperty(propertyId, v))
+                        return false;
+                  break;
             }
+      layout1();
+      layout();
       return true;
       }
 
@@ -2230,6 +2207,8 @@ QVariant Beam::propertyDefault(P_ID id) const
             case P_DISTRIBUTE:     return false;
             case P_GROW_LEFT:      return 1.0;
             case P_GROW_RIGHT:     return 1.0;
+            case P_USER_MODIFIED:  return false;
+            case P_BEAM_POS:       return beamPos();
             default:               return Element::propertyDefault(id);
             }
       return QVariant();

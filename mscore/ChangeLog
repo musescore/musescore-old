@@ -1,3 +1,8 @@
+16.4 (ws)
+      - updated beam inspector
+      - changed shortcut handling:
+            - more than one shortcut is now possible for an action
+            - shortcuts are saved in <local-data>/shortcuts.xml
 14.4 (lv)
       - more work on #15899: MusicXML: support figured bass
         now works correctly for simple, single-staff cases
