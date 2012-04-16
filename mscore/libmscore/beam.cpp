@@ -1217,42 +1217,37 @@ static Bm beamMetric2(bool up, char l1, char l2)
 //    adjust stem len for notes between start-end
 //---------------------------------------------------------
 
-static int adjust(qreal _spatium4, Bm& bm, const QList<Chord*>& cl)
+static int adjust(qreal _spatium4, int slant, const QList<Chord*>& cl)
       {
-      int n           = cl.size() - 1;
+      int n           = cl.size();
       const Chord* c1 = cl[0];
-      const Chord* c2 = cl[n];
+      const Chord* c2 = cl[n-1];
 
       QPointF p1(c1->stemPos());   // canvas coordinates
       QPointF p2(c2->stemPos());   // canvas coordinates
-      p1.ry()     += bm.l * _spatium4;
-      qreal slope = (bm.s * _spatium4) / (p2.x() - p1.x());
+      qreal slope = (slant * _spatium4) / (p2.x() - p1.x());
 
-      int ml = 10;
+      int ml = -1000;
       if (c1->up()) {
             for (int i = 1; i < n; ++i) {
                   const Chord* c3 = cl[i];
-                  QPointF p3(c3->stemPos());   // canvas coordinates
-                  qreal yDown = p3.y();
+                  QPointF p3(c3->stemPos());
                   qreal yUp   = p1.y() + (p3.x() - p1.x()) * slope;
-
-                  qreal l     = (yDown - yUp) / _spatium4;
-                  ml          = qMin(ml, int(l + .5));
+                  qreal l     = (yUp - p3.y()) / _spatium4;
+                  ml          = qMax(ml, int(l + .5));
                   }
             }
       else {
             for (int i = 1; i < n; ++i) {
                   const Chord* c3 = cl[i];
-                  QPointF p3(c3->stemPos());   // canvas coordinates
-                  qreal yDown = p3.y();
+                  QPointF p3(c3->stemPos());
                   qreal yUp   = p1.y() + (p3.x() - p1.x()) * slope;
-
-                  qreal l     = (yUp - yDown) / _spatium4;
-                  ml          = qMin(ml, int(l + .5));
+                  qreal l     = (p3.y() - yUp) / _spatium4;
+                  ml          = qMax(ml, int(l + .5));
                   }
             }
-      if (ml < 10)
-            return 10 - ml;
+      if (ml > 0)
+            return ml;
       return 0;
       }
 
@@ -1378,11 +1373,8 @@ void Beam::computeStemLen(const QList<Chord*>& cl, qreal& py1, int beamLevels)
                         if (maxS == 0) {
                               bm.l = -12;
                               bm.s = 0;
-                              if (cl.size() > 2) {
-                                    int n = adjust(_spatium4, bm, cl);
-                                    if (n)
-                                          bm.l -= n;
-                                    }
+                              if (cl.size() > 2)
+                                    bm.l -= adjust(_spatium4, bm.s, cl);
                               if (l1 & 2)
                                     bm.l -= 1;
                               }
@@ -1435,11 +1427,8 @@ void Beam::computeStemLen(const QList<Chord*>& cl, qreal& py1, int beamLevels)
                         if (maxS == 0) {
                               bm.l = 12;
                               bm.s = 0;
-                              if (cl.size() > 2) {
-                                    int n = adjust(_spatium4, bm, cl);
-                                    if (n)
-                                          bm.l += n;
-                                    }
+                              if (cl.size() > 2)
+                                    bm.l += adjust(_spatium4, bm.s, cl);
                               if (l1 & 2)
                                     bm.l += 1;
                               }
@@ -1471,6 +1460,49 @@ void Beam::computeStemLen(const QList<Chord*>& cl, qreal& py1, int beamLevels)
                         }
                   }
             }
+      else if (beamLevels == 3) {
+            l1 *= 2;
+            l2 *= 2;
+
+            int slant = zeroSlant ? 0 : (l2 > l1 ? 4 : -4);
+            int ll1;
+            if (_up) {
+                  ll1 = l1 - 15 - adjust(_spatium4, slant, cl);
+                  if ((l1 > 24) && (l2 > 24)) {
+                        int lll;
+                        if (slant >= 0)
+                              lll = 9;
+                        else
+                              lll = 13;
+                        ll1 = qMin(lll, ll1);
+                        }
+                  switch (ll1 & 3) {
+                        case 0: ll1 -= 3; break;      // straddle
+                        case 1: break;                // hang
+                        case 2: ll1 -= 1; break;
+                        case 3: ll1 -= 2; break;      // sit
+                        }
+                  }
+            else {
+                  ll1 = 15 + l1 + adjust(_spatium4, slant, cl);
+                  if ((l1 < -7) && (l2 < -7)) {
+                        int lll;
+                        if (slant <= 0)
+                              lll = 7;
+                        else
+                              lll = 3;
+                        ll1 = qMax(lll, ll1);
+                        }
+                  switch (ll1 & 3) {
+                        case 0: ll1 += 3; break;      // straddle
+                        case 1: ll1 += 2; break;      // hang
+                        case 2: ll1 += 1; break;
+                        case 3: break;                // sit
+                        }
+                  }
+            bm.s = slant;
+            bm.l = ll1 - l1;
+            }
       else if (beamLevels > 2 && cl.size() == 2) {
             static const int t[] = { 0, 0, 4, 4, 8, 12, 16 }; // spatium4 added to stem len
             int n = t[beamLevels];
@@ -1479,7 +1511,7 @@ void Beam::computeStemLen(const QList<Chord*>& cl, qreal& py1, int beamLevels)
       else if (cl.size() > 2) {
             if (zeroSlant)
                   bm.s = 0;
-            int ml = adjust(_spatium4, bm, cl);
+            int ml = adjust(_spatium4, bm.s, cl);
             if (ml) {
                   if (c1->up())
                         bm.l -= ml;
