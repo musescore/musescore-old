@@ -1378,7 +1378,7 @@ void Beam::computeStemLen(const QList<Chord*>& cl, qreal& py1, int beamLevels)
                         if (maxS == 0) {
                               bm.l = -12;
                               bm.s = 0;
-                              if (cl.size() > 3) {
+                              if (cl.size() > 2) {
                                     int n = adjust(_spatium4, bm, cl);
                                     if (n)
                                           bm.l -= n;
@@ -1435,7 +1435,7 @@ void Beam::computeStemLen(const QList<Chord*>& cl, qreal& py1, int beamLevels)
                         if (maxS == 0) {
                               bm.l = 12;
                               bm.s = 0;
-                              if (cl.size() > 3) {
+                              if (cl.size() > 2) {
                                     int n = adjust(_spatium4, bm, cl);
                                     if (n)
                                           bm.l += n;

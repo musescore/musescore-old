@@ -685,6 +685,7 @@ bool BarLine::setProperty(P_ID propertyId, const QVariant& v)
             setGenerated(false);
             return true;
             }
+      score()->setLayoutAll(true);
       return Element::setProperty(propertyId, v);
       }
 
