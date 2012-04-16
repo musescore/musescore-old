@@ -533,6 +533,7 @@ class Score {
       void end();             // layout & update canvas
       void end1();
       void end2();
+      void update();
 
       void cmdRemoveTimeSig(TimeSig*);
       void cmdAddTimeSig(Measure*, int staffIdx, TimeSig*);

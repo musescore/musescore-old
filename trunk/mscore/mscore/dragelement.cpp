@@ -112,7 +112,7 @@ void ScoreView::doDragElement(QMouseEvent* ev)
             else
                   setDropTarget(0); // this also resets dropAnchor
             }
-      _score->end();
+      _score->update();
       }
 
 //---------------------------------------------------------

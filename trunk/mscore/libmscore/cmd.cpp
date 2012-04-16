@@ -139,6 +139,22 @@ void Score::end()
       }
 
 //---------------------------------------------------------
+//   update
+//    layout & update
+//---------------------------------------------------------
+
+void Score::update()
+      {
+      Score* score = parentScore() ? parentScore() : this;
+      score->end2();
+      score->end1();
+      foreach(Excerpt* e, score->_excerpts) {
+            e->score()->end2();
+            e->score()->end1();
+            }
+      }
+
+//---------------------------------------------------------
 //   end2
 //---------------------------------------------------------
 

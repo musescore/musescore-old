@@ -1903,11 +1903,15 @@ QPointF Chord::layoutArticulation(Articulation* a)
       qreal staffBotY = staff()->height();
 
       if (stem()) {
+#if 0
             y = stem()->pos().y() + pos().y();
             if (up() && stem()->stemLen() < 0.0)
                   y += stem()->stemLen();
             else if (!up() && stem()->stemLen() > 0.0)
                   y -= stem()->stemLen();
+#endif
+            y = stem()->hookPos().y() + pos().y();
+
             if (beam()) {
                   qreal bw = score()->styleS(ST_beamWidth).val() * _spatium;
                   y += up() ? -bw : bw;

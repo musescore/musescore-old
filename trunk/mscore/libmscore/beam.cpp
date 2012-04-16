@@ -581,11 +581,6 @@ void Beam::layout1()
 
 void Beam::layout()
       {
-//      if (_elements.isEmpty() || !c1 || !c2) {
-      if (_elements.isEmpty()) {
-            qDebug("Beam::layout: no notes\n");
-            return;
-            }
       System* system = _elements.front()->measure()->system();
       setParent(system);
 
@@ -1494,8 +1489,11 @@ void Beam::computeStemLen(const QList<Chord*>& cl, qreal& py1, int beamLevels)
                         adjust2(ml, bm, c1);
                   }
             if (beamLevels > 1) {
-                  static const int t[] = { 0, 0, 4, 4, 8, 12, 16 }; // spatium4 added to stem len
+/*                  static const int t[] = { 0, 0, 4, 4, 8, 12, 16 }; // spatium4 added to stem len
                   int n = t[beamLevels];
+                  */
+                  int n = (beamLevels-1) * 3;
+
                   bm.l += _up ? -n : n;
                   adjust3(ml, bm, c1);
                   }
@@ -1850,6 +1848,8 @@ void Beam::write(Xml& xml, P_ID id) const
 
 void Beam::write(Xml& xml) const
       {
+      if (_elements.isEmpty())
+            return;
       xml.stag(QString("Beam id=\"%1\"").arg(_id));
       Element::writeProperties(xml);
 
@@ -1962,9 +1962,9 @@ void Beam::editDrag(const EditData& ed)
       f->py2[idx] += dy;
       _userModified[idx] = true;
       setGenerated(false);
-// layout1();
-// layout();
-      score()->setLayoutAll(true);
+      layout1();
+      layout();
+      // score()->setLayoutAll(true);
       }
 
 //---------------------------------------------------------
@@ -2191,8 +2191,7 @@ bool Beam::setProperty(P_ID propertyId, const QVariant& v)
                         return false;
                   break;
             }
-      layout1();
-      layout();
+      score()->setLayoutAll(true);
       return true;
       }
 
@@ -2213,3 +2212,4 @@ QVariant Beam::propertyDefault(P_ID id) const
             }
       return QVariant();
       }
+
