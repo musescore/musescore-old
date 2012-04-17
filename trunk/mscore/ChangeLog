@@ -1,4 +1,7 @@
-17.4 (lv)
+17.4 (ws)
+      - #14648: Copying from within tuplet bracket to the same or another or
+        to a normal rest produces strange results (patch from jork3)
+      (lv)
       - #16057: MusicXML support fret diagrams
         -> import partially implemented
       - #15795: MusicXML Import and export of tablature
