@@ -1,5 +1,7 @@
 17.4 (ws)
-      - #14648: Copying from within tuplet bracket to the same or another or
+      - fix #15836: Image::setProperty() rounds size and scale to integers
+        (patch from Miwarre)
+      - fix #14648: Copying from within tuplet bracket to the same or another or
         to a normal rest produces strange results (patch from jork3)
       (lv)
       - #16057: MusicXML support fret diagrams
