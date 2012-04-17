@@ -1497,7 +1497,7 @@ void PreferenceDialog::resetAllValues()
       shortcutsChanged = true;
       qDeleteAll(localShortcuts);
       localShortcuts.clear();
-      Shortcut::resetToBuildin();
+      Shortcut::resetToDefault();
       foreach(const Shortcut* s, Shortcut::shortcuts())
             localShortcuts[s->key()] = new Shortcut(*s);
       updateSCListView();
