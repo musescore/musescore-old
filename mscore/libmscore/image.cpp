@@ -144,10 +144,10 @@ bool Image::setProperty(P_ID propertyId, const QVariant& v)
                   setAutoScale(v.toBool());
                   break;
             case P_SIZE:
-                  setSize(v.toSize());
+                  setSize(v.toSizeF());
                   break;
             case P_SCALE:
-                  setScale(v.toSize());
+                  setScale(v.toSizeF());
                   break;
             case P_LOCK_ASPECT_RATIO:
                   setLockAspectRatio(v.toBool());
