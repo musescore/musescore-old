@@ -76,25 +76,27 @@ void Stem::layout()
       qreal lw  = point(score()->styleS(ST_stemWidth));
       QPointF p1(0.0, 0.0);
       QPointF p2(0.0, l);
-      if (st && !st->useTablature() && chord()) {
-            // adjust P1 for note head
-            Chord* c = chord();
-            if (c->up()) {
-                  Note* n   = c->downNote();
-                  p1 = symbols[score()->symIdx()][n->noteHead()].attach(n->magS());
+      if (st) {
+            if (!st->useTablature() && chord()) {
+                  // adjust P1 for note head
+                  Chord* c = chord();
+                  if (c->up()) {
+                        Note* n   = c->downNote();
+                        p1 = symbols[score()->symIdx()][n->noteHead()].attach(n->magS());
+                        p1.rx() = -lw * .5;
+                        p2.rx() = -lw * .5;
+                        }
+                  else {
+                        Note* n = c->upNote();
+                        p1 = -symbols[score()->symIdx()][n->noteHead()].attach(n->magS());
+                        p1.rx() = lw * .5;
+                        p2.rx() = lw * .5;
+                        }
+                  }
+            else if (st->useTablature()) {
                   p1.rx() = -lw * .5;
                   p2.rx() = -lw * .5;
                   }
-            else {
-                  Note* n = c->upNote();
-                  p1 = -symbols[score()->symIdx()][n->noteHead()].attach(n->magS());
-                  p1.rx() = lw * .5;
-                  p2.rx() = lw * .5;
-                  }
-            }
-      else if (st->useTablature()) {
-            p1.rx() = -lw * .5;
-            p2.rx() = -lw * .5;
             }
       line.setP1(p1);
       line.setP2(p2);
