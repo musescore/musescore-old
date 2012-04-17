@@ -529,6 +529,8 @@ class MuseScore : public QMainWindow {
       QStringList getOpenScoreNames(QString& dir, const QString& filter);
       QString getSaveScoreName(const QString& title,
          QString& name, const QString& filter, QString* selectedFilter);
+      QString getSaveScoreName(const QString& title,
+         QString& name, const QString& filter, QString* selectedFilter, bool selectFolder);
       QString getStyleFilename(bool open, const QString& title = QString());
       QString getFotoFilename();
       QString getChordStyleFilename(bool open);
@@ -558,8 +560,10 @@ class MuseScore : public QMainWindow {
       void endCmd();
       void printFile();
       bool exportFile();
+      bool exportParts();
       bool saveAs(Score*, bool saveCopy, const QString& path, const QString& ext);
       bool savePsPdf(const QString& saveName, QPrinter::OutputFormat format);
+      bool savePsPdf(Score* cs, const QString& saveName, QPrinter::OutputFormat format);
       bool readScore(Score*, QString name);
       bool saveAs(Score*, bool saveCopy = false);
       bool saveSelection(Score*);
