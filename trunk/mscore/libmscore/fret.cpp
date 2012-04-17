@@ -1,7 +1,7 @@
 //=============================================================================
 //  MuseScore
 //  Music Composition & Notation
-//  $Id:$
+//  $Id$
 //
 //  Copyright (C) 2010-2011 Werner Schweer
 //
@@ -369,8 +369,10 @@ void FretDiagram::setDot(int string, int fret)
             _dots = new char[_strings];
             memset(_dots, 0, _strings);
             }
-      _dots[string] = fret;
-      setMarker(string, 0);
+      if (0 <= string && string < _strings) {
+            _dots[string] = fret;
+            setMarker(string, 0);
+            }
       }
 
 //---------------------------------------------------------
@@ -383,7 +385,8 @@ void FretDiagram::setMarker(int string, int marker)
             _marker = new char[_strings];
             memset(_marker, 0, _strings);
             }
-      _marker[string] = marker;
+      if (0 <= string && string < _strings)
+            _marker[string] = marker;
       }
 
 //---------------------------------------------------------
@@ -466,3 +469,75 @@ void FretDiagram::scanElements(void* data, void (*func)(void*, Element*), bool a
             func(data, _harmony);
       }
 
+
+//---------------------------------------------------------
+//   Read MusicXML
+//
+// Set the FretDiagram state based on the MusicXML <figure> node de.
+//---------------------------------------------------------
+
+void FretDiagram::readMusicXML(const QDomElement& de)
+      {
+      qDebug("FretDiagram::readMusicXML");
+
+      // TODO: is this required ?
+      delete _dots;
+      delete _marker;
+      delete _fingering;
+      _dots       = 0;
+      _marker     = 0;
+      _fingering  = 0;
+      _fretOffset = 0;
+      // end TODO: is this required ?
+
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            const QString& tag(e.tagName());
+            int val = e.text().toInt();
+            if (tag == "frame-frets") {
+                  if (val > 0)
+                        setFrets(val);
+                  else
+                        qDebug("FretDiagram::readMusicXML: illegal frame-fret %d", val);
+                  }
+            else if (tag == "frame-note") {
+                  int fret   = -1;
+                  int string = -1;
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        const QString& tag(ee.tagName());
+                        int val = ee.text().toInt();
+                        if (tag == "fret")
+                              fret = val;
+                        else if (tag == "string")
+                              string = val;
+                        else
+                              domError(ee);
+                        }
+                  qDebug("FretDiagram::readMusicXML string %d fret %d", string, fret);
+                  if (string > 0) {
+                        if (fret == 0)
+                              setMarker(strings() - string, 79 /* ??? */);
+                        else if (fret > 0)
+                              setDot(strings() - string, fret);
+                        }
+                  }
+            else if (tag == "frame-strings") {
+                  if (val > 0) {
+                        setStrings(val);
+                        for (int i = 0; i < val; ++i)
+                              setMarker(i, 88 /* ??? */);
+                        }
+                  else
+                        qDebug("FretDiagram::readMusicXML: illegal frame-strings %d", val);
+                  }
+            else
+                  domError(e);
+            }
+      }
+
+//---------------------------------------------------------
+//   Write MusicXML
+//---------------------------------------------------------
+
+void FretDiagram::writeMusicXML(Xml& xml) const
+      {
+      }

@@ -1,7 +1,7 @@
 //=============================================================================
 //  MuseScore
 //  Music Composition & Notation
-//  $Id:$
+//  $Id$
 //
 //  Copyright (C) 2010-2011 Werner Schweer
 //
@@ -56,6 +56,10 @@ class FretDiagram : public Element {
       virtual void read(const QDomElement&);
       virtual QLineF dragAnchor() const;
       virtual QPointF pagePos() const;
+
+      // read / write MusicXML
+      void readMusicXML(const QDomElement& de);
+      void writeMusicXML(Xml& xml) const;
 
       int strings() const    { return _strings; }
       int frets()   const    { return _frets; }

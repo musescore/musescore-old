@@ -85,6 +85,7 @@
 #include "musicxmlsupport.h"
 #include "libmscore/chordline.h"
 #include "libmscore/figuredbass.h"
+#include "libmscore/fret.h"
 
 //---------------------------------------------------------
 //   local defines for debug output
@@ -3037,6 +3038,8 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                         }
                   }
             else if (e.tagName() == "clef")
+                  // TODO: for tablature clef, set staff to tab
+                  // TBD: same for percussion ?
                   xmlClef(e, staff, measure);
             else if (e.tagName() == "staves")
                   ;  // ignore, already handled
@@ -4858,12 +4861,19 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure, int staff)
                               degreeList << HDegree(degreeValue, degreeAlter, SUBTRACT);
                         }
                   }
-            else if (tag == "level") {
-                  domNotImplemented(e);
+            else if (tag == "frame") {
+                  qDebug("xmlHarmony: found harmony frame");
+                  FretDiagram* fd = new FretDiagram(score);
+                  fd->setTrack(staff * VOICES);
+                  // read frame into FretDiagram
+                  fd->readMusicXML(e);
+                  Segment* s = measure->getSegment(SegChordRest, tick);
+                  s->add(fd);
                   }
-            else if (tag == "offset") {
+            else if (tag == "level")
                   domNotImplemented(e);
-                  }
+            else if (tag == "offset")
+                  domNotImplemented(e);
             else
                   domError(e);
             }
@@ -4986,6 +4996,8 @@ void MusicXml::xmlClef(QDomElement e, int staffIdx, Measure* measure)
             }
       else if (c == "percussion")
             clef = CLEF_PERC;
+      else if (c == "TAB")
+            clef = CLEF_TAB2;
       else
             qDebug("ImportMusicXML: unknown clef <sign=%s line=%d oct ch=%d>", qPrintable(c), line, i);
       // note: also generate symbol for tick 0

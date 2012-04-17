@@ -91,6 +91,7 @@
 #include "libmscore/breath.h"
 #include "libmscore/chordline.h"
 #include "libmscore/figuredbass.h"
+#include "libmscore/tablature.h"
 
 //---------------------------------------------------------
 //   local defines for debug output
@@ -982,8 +983,46 @@ void ExportMusicXml::credits(Xml& xml)
       }
 
 //---------------------------------------------------------
+//   midipitch2xml
+//---------------------------------------------------------
+
+static int alterTab[12] = { 0,   1,   0,   1,   0,  0,   1,   0,   1,   0,   1,   0 };
+static char noteTab[12] = { 'C', 'C', 'D', 'D', 'E', 'F', 'F', 'G', 'G', 'A', 'A', 'B' };
+
+static void midipitch2xml(int pitch, char& c, int& alter, int& octave)
+      {
+      // 60 = C 4
+      c      = noteTab[pitch % 12];
+      alter  = alterTab[pitch % 12];
+      octave = pitch / 12 - 1;
+      qDebug("midipitch2xml(pitch %d) step %c, alter %d, octave %d", pitch, c, alter, octave);
+      }
+
+//---------------------------------------------------------
+//   tabpitch2xml
+//---------------------------------------------------------
+
+static char TpcNames[] = "FCGDAEB";
+
+static void tabpitch2xml(int pitch, int tpc, char& c, int& alter, int& octave)
+      {
+      c      = TpcNames[(tpc + 1) % 7];
+      alter  = (tpc + 1) / 7 - 2;
+      octave = pitch / 12 - 1;
+      if (alter < -2 || 2 < alter)
+            qDebug("tabpitch2xml(pitch %d, tpc %d) problem:  step %c, alter %d, octave %d",
+                   pitch, tpc, c, alter, octave);
+      else
+            qDebug("tabpitch2xml(pitch %d, tpc %d) step %c, alter %d, octave %d",
+                   pitch, tpc, c, alter, octave);
+      }
+
+//---------------------------------------------------------
 //   pitch2xml
 //---------------------------------------------------------
+
+// TODO cleanup / validation
+// TBD: use tpc/pitch instead (like tabpitch2xml)
 
 void ExportMusicXml::pitch2xml(Note* note, char& c, int& alter, int& octave)
       {
@@ -1907,8 +1946,9 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
             int octave;
             char buffer[2];
 
-            if (!useDrumset) {
-                  pitch2xml(note, c, alter, octave);
+            // TODO: following code requires further cleanup and validation
+            if (chord->staff() && chord->staff()->useTablature()) {
+                  tabpitch2xml(note->pitch(), note->tpc(), c, alter, octave);
                   buffer[0] = c;
                   buffer[1] = 0;
                   // pitch
@@ -1919,15 +1959,30 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                   xml.tag("octave", octave);
                   xml.etag();
                   }
+
             else {
-                  // unpitched
-                  unpitch2xml(note, c, octave);
-                  buffer[0] = c;
-                  buffer[1] = 0;
-                  xml.stag("unpitched");
-                  xml.tag("display-step", QString(buffer));
-                  xml.tag("display-octave", octave);
-                  xml.etag();
+                  if (!useDrumset) {
+                        pitch2xml(note, c, alter, octave);
+                        buffer[0] = c;
+                        buffer[1] = 0;
+                        // pitch
+                        xml.stag("pitch");
+                        xml.tag("step", QString(buffer));
+                        if (alter)
+                              xml.tag("alter", alter);
+                        xml.tag("octave", octave);
+                        xml.etag();
+                        }
+                  else {
+                        // unpitched
+                        unpitch2xml(note, c, octave);
+                        buffer[0] = c;
+                        buffer[1] = 0;
+                        xml.stag("unpitched");
+                        xml.tag("display-step", QString(buffer));
+                        xml.tag("display-octave", octave);
+                        xml.etag();
+                        }
                   }
 
             // duration
@@ -2127,6 +2182,16 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                         // TODO
                         }
                   }
+
+            // write tablature string / fret
+            if (chord->staff() && chord->staff()->useTablature())
+                  if (note->fret() >= 0 && note->string() >= 0) {
+                        notations.tag(xml);
+                        technical.tag(xml);
+                        xml.tag("string", note->string() + 1);
+                        xml.tag("fret", note->fret());
+                        }
+
             technical.etag(xml);
             if (chord->arpeggio()) {
                   arpeggiate(chord->arpeggio(), note == nl.front(), note == nl.back(), xml, notations);
@@ -3801,8 +3866,14 @@ void ExportMusicXml::write(QIODevice* dev)
                                           }
                                     }
                         }
+
                   // output attributes with the first actual measure (pickup or regular) only
                   if ((irregularMeasureNo + measureNo + pickupMeasureNo) == 4) {
+                        const Instrument* instrument = part->instr();
+
+                        // staff details
+                        // TODO: decide how to handle linked regular / TAB staff
+                        //       currently exported as a two staff part ...
                         for (int i = 0; i < staves; i++) {
                               Staff* st = part->staff(i);
                               if (st->lines() != 5) {
@@ -3811,10 +3882,25 @@ void ExportMusicXml::write(QIODevice* dev)
                                     else
                                           xml.stag("staff-details");
                                     xml.tag("staff-lines", st->lines());
+                                    if (st->useTablature() && instrument->tablature()) {
+                                          QList<int> l = instrument->tablature()->stringList();
+                                          for (int i = 0; i < l.size(); i++) {
+                                                char step  = ' ';
+                                                int alter  = 0;
+                                                int octave = 0;
+                                                midipitch2xml(l.at(i), step, alter, octave);
+                                                xml.stag(QString("staff-tuning line=\"%1\"").arg(i+1));
+                                                xml.tag("tuning-step", QString("%1").arg(step));
+                                                if (alter)
+                                                      xml.tag("tuning-alter", alter);
+                                                xml.tag("tuning-octave", octave);
+                                                xml.etag();
+                                                }
+                                          }
                                     xml.etag();
                                     }
                               }
-                        const Instrument* instrument = part->instr();
+                        // instrument details
                         if (instrument->transpose().chromatic) {
                               xml.stag("transpose");
                               xml.tag("diatonic",  instrument->transpose().diatonic);
