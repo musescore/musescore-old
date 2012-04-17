@@ -512,7 +512,8 @@ QList<Note*> Selection::noteList(int selTrack) const
 
 //---------------------------------------------------------
 //   checkStart
-//     return true if element is NOT a tuplet or is start of a tuplet
+//     return false if element is NOT a tuplet or is start of a tuplet
+//     return true  if element is part of a tuplet, but not the start
 //---------------------------------------------------------
 
 static bool checkStart(Element* e)
@@ -532,6 +533,28 @@ static bool checkStart(Element* e)
       }
 
 //---------------------------------------------------------
+//   checkEnd
+//     return false if element is NOT a tuplet or is end of a tuplet
+//     return true  if element is part of a tuplet, but not the end
+//---------------------------------------------------------
+
+static bool checkEnd(Element* e)
+      {
+      if (e == 0 || !e->isChordRest())
+            return false;
+      ChordRest* cr = static_cast<ChordRest*>(e);
+      if (!cr->tuplet())
+            return false;
+      Tuplet* tuplet = cr->tuplet();
+      while (tuplet) {
+            if (tuplet->elements().back() == e)
+                  return false;
+            tuplet = tuplet->tuplet();
+            }
+      return true;
+      }
+
+//---------------------------------------------------------
 //   canCopy
 //    return false if range selection intersects a tuplet
 //---------------------------------------------------------
@@ -541,15 +564,24 @@ bool Selection::canCopy() const
       if (_state != SEL_RANGE)
             return true;
 
-      for (int staffIdx = _staffStart; staffIdx != _staffEnd; ++staffIdx) {
-            if (checkStart(_startSegment->element(staffIdx)))
-                  return false;
-            // _endSegment is the next segment after the selection,
-            // it must also be at the start of a tuplet so that the
-            // selected tuplet is fully contained in the selection
-            if (_endSegment && checkStart(_endSegment->element(staffIdx)))
-                  return false;
-            }
+      for (int staffIdx = _staffStart; staffIdx != _staffEnd; ++staffIdx)
+            for (int voice = 0; voice < VOICES; ++voice) {
+                  int track = staffIdx * VOICES + voice;
+                  if (checkStart(_startSegment->element(track)))
+                        return false;
+
+                  if (! _endSegment)
+                        continue;
+
+                  // find last segment in the selection.
+                  // Note that _endSegment is the first segment after the selection
+                  Segment *endSegmentSelection = _startSegment;
+                  while (endSegmentSelection->nextCR(track) &&
+                        (endSegmentSelection->nextCR(track)->tick() < _endSegment->tick()))
+                        endSegmentSelection = endSegmentSelection->nextCR(track);
+
+                  if (checkEnd(endSegmentSelection->element(track)))
+                        return false;
+                  }
       return true;
       }
-
