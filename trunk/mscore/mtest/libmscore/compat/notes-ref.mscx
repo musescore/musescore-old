@@ -3,9 +3,6 @@
   <Score>
     <LayerTag id="0" tag="default"></LayerTag>
     <currentLayer>0</currentLayer>
-    <SyntiSettings>
-      <s name="soundfont" val="/usr/local/share/mscore-2.0/sound/TimGM6mb.sf2"/>
-      </SyntiSettings>
     <Division>480</Division>
     <Style>
       <page-layout>
@@ -206,8 +203,8 @@ p, li { white-space: pre-wrap; }
             </Note>
           </Chord>
         <Beam id="2">
-          <l1>-1</l1>
-          <l2>-5</l2>
+          <l1>-3</l1>
+          <l2>-7</l2>
           </Beam>
         <Chord>
           <durationType>eighth</durationType>
@@ -316,8 +313,8 @@ p, li { white-space: pre-wrap; }
             </Note>
           </Chord>
         <Beam id="5">
-          <l1>4</l1>
-          <l2>-1</l2>
+          <l1>1</l1>
+          <l2>-3</l2>
           </Beam>
         <Chord>
           <durationType>32nd</durationType>
@@ -352,8 +349,8 @@ p, li { white-space: pre-wrap; }
             </Note>
           </Chord>
         <Beam id="6">
-          <l1>-5</l1>
-          <l2>-9</l2>
+          <l1>-7</l1>
+          <l2>-11</l2>
           </Beam>
         <Chord>
           <durationType>32nd</durationType>

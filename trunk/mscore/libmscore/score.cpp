@@ -3250,3 +3250,17 @@ void Score::linkId(int val)
       if (val > rootScore()->_linkId)
             rootScore()->_linkId = val;
       }
+
+//---------------------------------------------------------
+//   setTestMode
+//---------------------------------------------------------
+
+void Score::setTestMode(bool val)
+      {
+      Score* score = rootScore();
+      score->_testMode = val;
+      foreach(Excerpt* e, score->_excerpts)
+            e->score()->_testMode = val;
+      }
+
+

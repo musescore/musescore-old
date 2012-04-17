@@ -1371,12 +1371,11 @@ void Beam::computeStemLen(const QList<Chord*>& cl, qreal& py1, int beamLevels)
                         //    2 --
                         //    3 sit
                         if (maxS == 0) {
-                              bm.l = -12;
+                              int ll1 = l1 - 12 - adjust(_spatium4, 0, cl);
+                              if (ll1 & 2)
+                                    ll1 -= 1;
                               bm.s = 0;
-                              if (cl.size() > 2)
-                                    bm.l -= adjust(_spatium4, bm.s, cl);
-                              if (l1 & 2)
-                                    bm.l -= 1;
+                              bm.l = ll1 - l1;
                               }
                         else {
                               int ll1 = l1 - 12;     // sp minimum to primary beam
@@ -1425,12 +1424,11 @@ void Beam::computeStemLen(const QList<Chord*>& cl, qreal& py1, int beamLevels)
                         }
                   else {
                         if (maxS == 0) {
-                              bm.l = 12;
+                              int ll1 = 12 + l1 + adjust(_spatium4, 0, cl);
+                              if (ll1 & 2)
+                                    ll1 += 1;
                               bm.s = 0;
-                              if (cl.size() > 2)
-                                    bm.l += adjust(_spatium4, bm.s, cl);
-                              if (l1 & 2)
-                                    bm.l += 1;
+                              bm.l = ll1 - l1;
                               }
                         else {
                               int ll1 = 12 + l1;     // sp minimum to primary beam
@@ -1732,21 +1730,17 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                               // create broken segment
                               qreal len = beamMinLen;
 
-printf("A idx %d of %d\n", idx, chordRests);
                               if ((idx > 1) && (idx < chordRests)
                                  && (crl[idx-2]->duration() != crl[idx]->duration())) {
                                     Fraction a = crl[idx-2]->duration();
                                     Fraction b = crl[idx-1]->duration();
                                     Fraction c = crl[idx]->duration();
-printf("B %d/%d  < %d/%d\n", a.numerator(), a.denominator(),
-   b.numerator(), b.denominator());
                                     if (((a + b) / 2 == c)
                                        || ((a < c) && !((b+c)/2 == a))) {
                                           len = -len;
                                           }
                                     }
                               else {
-printf("D\n");
                                     // find out direction of beam fragment
                                     // if on first chord: right
                                     // if on last chord:  left

@@ -3,9 +3,6 @@
   <Score>
     <LayerTag id="0" tag="default"></LayerTag>
     <currentLayer>0</currentLayer>
-    <SyntiSettings>
-      <s name="soundfont" val="/usr/local/share/mscore-2.0/sound/TimGM6mb.sf2"/>
-      </SyntiSettings>
     <Division>480</Division>
     <Style>
       <systemDistance>9.2</systemDistance>
