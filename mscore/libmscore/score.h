@@ -884,7 +884,7 @@ class Score {
       void transposeSemitone(int semitone);
       MeasureBase* insertMeasure(ElementType type, MeasureBase*);
       bool testMode() const        { return _testMode; }
-      void setTestMode(bool val)   { _testMode = val;  }
+      void setTestMode(bool val);
       Audio* audio() const         { return _audio;    }
       void setAudio(Audio* a)      { _audio = a;       }
       PlayMode playMode() const    { return _playMode; }

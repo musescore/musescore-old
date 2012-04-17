@@ -72,7 +72,8 @@ void Score::write(Xml& xml, bool selectionOnly)
             }
       xml.tag("currentLayer", _currentLayer);
 
-      _syntiState.write(xml);
+      if (!_testMode)
+            _syntiState.write(xml);
 
       if (pageNumberOffset())
             xml.tag("page-offset", pageNumberOffset());

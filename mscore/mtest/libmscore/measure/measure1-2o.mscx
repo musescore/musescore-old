@@ -3,18 +3,6 @@
   <Score>
     <LayerTag id="0" tag="default"></LayerTag>
     <currentLayer>0</currentLayer>
-    <SyntiSettings>
-      <s name="soundfont" val="/usr/local/share/mscore-2.0/sound/TimGM6mb.sf2"/>
-      <f name="RevRoomsize" val="0.84"/>
-      <f name="RevDamp" val="0.2"/>
-      <f name="RevWidth" val="1"/>
-      <f name="RevGain" val="1.08259e-36"/>
-      <f name="ChoType" val="0"/>
-      <f name="ChoSpeed" val="0.002"/>
-      <f name="ChoDepth" val="0.8"/>
-      <f name="ChoBlocks" val="0.03"/>
-      <f name="ChoGain" val="2"/>
-      </SyntiSettings>
     <Division>480</Division>
     <Style>
       <page-layout>
@@ -393,18 +381,6 @@ p, li { white-space: pre-wrap; }
     <Score>
       <LayerTag id="0" tag="default"></LayerTag>
       <currentLayer>0</currentLayer>
-      <SyntiSettings>
-        <s name="soundfont" val="/usr/local/share/mscore-2.0/sound/TimGM6mb.sf2"/>
-        <f name="RevRoomsize" val="0.84"/>
-        <f name="RevDamp" val="0.2"/>
-        <f name="RevWidth" val="1"/>
-        <f name="RevGain" val="1.08259e-36"/>
-        <f name="ChoType" val="0"/>
-        <f name="ChoSpeed" val="0.002"/>
-        <f name="ChoDepth" val="0.8"/>
-        <f name="ChoBlocks" val="0.03"/>
-        <f name="ChoGain" val="2"/>
-        </SyntiSettings>
       <Division>480</Division>
       <Style>
         <createMultiMeasureRests>1</createMultiMeasureRests>
@@ -676,18 +652,6 @@ p, li { white-space: pre-wrap; }
     <Score>
       <LayerTag id="0" tag="default"></LayerTag>
       <currentLayer>0</currentLayer>
-      <SyntiSettings>
-        <s name="soundfont" val="/usr/local/share/mscore-2.0/sound/TimGM6mb.sf2"/>
-        <f name="RevRoomsize" val="0.84"/>
-        <f name="RevDamp" val="0.2"/>
-        <f name="RevWidth" val="1"/>
-        <f name="RevGain" val="1.08259e-36"/>
-        <f name="ChoType" val="0"/>
-        <f name="ChoSpeed" val="0.002"/>
-        <f name="ChoDepth" val="0.8"/>
-        <f name="ChoBlocks" val="0.03"/>
-        <f name="ChoGain" val="2"/>
-        </SyntiSettings>
       <Division>480</Division>
       <Style>
         <createMultiMeasureRests>1</createMultiMeasureRests>
