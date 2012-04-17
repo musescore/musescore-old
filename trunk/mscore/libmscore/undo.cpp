@@ -581,15 +581,6 @@ void Score::undoChangeTpc(Note* note, int tpc)
       }
 
 //---------------------------------------------------------
-//   undoChangeBeamMode
-//---------------------------------------------------------
-
-void Score::undoChangeBeamMode(ChordRest* cr, BeamMode mode)
-      {
-      undo(new ChangeBeamMode(cr, mode));
-      }
-
-//---------------------------------------------------------
 //   findLinkedVoiceElement
 //---------------------------------------------------------
 
@@ -1997,23 +1988,6 @@ void ChangeChordNoStem::flip()
       bool ns = chord->noStem();
       chord->setNoStem(noStem);
       noStem = ns;
-      }
-
-//---------------------------------------------------------
-//   ChangeBeamMode
-//---------------------------------------------------------
-
-ChangeBeamMode::ChangeBeamMode(ChordRest* _cr, BeamMode _mode)
-      {
-      cr   = _cr;
-      mode = _mode;
-      }
-
-void ChangeBeamMode::flip()
-      {
-      BeamMode omode = cr->beamMode();
-      cr->setBeamMode(mode);
-      mode = omode;
       }
 
 //---------------------------------------------------------

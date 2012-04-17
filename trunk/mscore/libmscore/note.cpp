@@ -1057,22 +1057,12 @@ Element* Note::drop(const DropData& data)
                               score()->setGraceNote(ch, pitch(), NOTE_GRACE32, false, MScore::division/8);
                               break;
                         case ICON_SBEAM:
-                              score()->undoChangeBeamMode(ch, BEAM_BEGIN);
-                              break;
                         case ICON_MBEAM:
-                              score()->undoChangeBeamMode(ch, BEAM_MID);
-                              break;
                         case ICON_NBEAM:
-                              score()->undoChangeBeamMode(ch, BEAM_NO);
-                              break;
                         case ICON_BEAM32:
-                              score()->undoChangeBeamMode(ch, BEAM_BEGIN32);
-                              break;
                         case ICON_BEAM64:
-                              score()->undoChangeBeamMode(ch, BEAM_BEGIN64);
-                              break;
                         case ICON_AUTOBEAM:
-                              score()->undoChangeBeamMode(ch, BEAM_AUTO);
+                              return ch->drop(data);
                               break;
                         }
                   }

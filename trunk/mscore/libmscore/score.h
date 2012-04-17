@@ -463,7 +463,6 @@ class Score {
       void undoChangeFret(Note* note, /*int pitch, int tpc, int line,*/ int fret, int string);
       void spellNotelist(QList<Note*>& notes);
       void undoChangeTpc(Note* note, int tpc);
-      void undoChangeBeamMode(ChordRest* cr, BeamMode mode);
       void undoChangeChordRestLen(ChordRest* cr, const TDuration&);
       void undoChangeEndBarLineType(Measure*, BarLineType);
       void undoChangeBarLineSpan(Staff*, int);

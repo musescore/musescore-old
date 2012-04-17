@@ -41,16 +41,7 @@
 #include "stem.h"
 #include "harmony.h"
 #include "figuredbass.h"
-
-//---------------------------------------------------------
-//   propertyList
-//---------------------------------------------------------
-
-Property<ChordRest> ChordRest::propertyList[] = {
-      { P_SMALL, &ChordRest::pSmall, 0 },
-      };
-
-static const int PROPERTIES = sizeof(ChordRest::propertyList)/sizeof(*ChordRest::propertyList);
+#include "icon.h"
 
 //---------------------------------------------------------
 //   hasArticulation
@@ -812,6 +803,32 @@ Element* ChordRest::drop(const DropData& data)
                   score()->undoAddElement(e);
                   return e;
 
+            case ICON:
+                  {
+                  switch(static_cast<Icon*>(e)->subtype()) {
+                        case ICON_SBEAM:
+                              score()->undoChangeProperty(this, P_BEAM_MODE, BEAM_BEGIN);
+                              break;
+                        case ICON_MBEAM:
+                              score()->undoChangeProperty(this, P_BEAM_MODE, BEAM_MID);
+                              break;
+                        case ICON_NBEAM:
+                              score()->undoChangeProperty(this, P_BEAM_MODE, BEAM_NO);
+                              break;
+                        case ICON_BEAM32:
+                              score()->undoChangeProperty(this, P_BEAM_MODE, BEAM_BEGIN32);
+                              break;
+                        case ICON_BEAM64:
+                              score()->undoChangeProperty(this, P_BEAM_MODE, BEAM_BEGIN64);
+                              break;
+                        case ICON_AUTOBEAM:
+                              score()->undoChangeProperty(this, P_BEAM_MODE, BEAM_AUTO);
+                              break;
+                        }
+                  }
+                  delete e;
+                  break;
+
             default:
                   qDebug("cannot drop %s", e->name());
                   delete e;
@@ -838,11 +855,10 @@ void ChordRest::toDefault()
       score()->undoChangeUserOffset(this, QPointF());
       if (type() == CHORD) {
             score()->undoChangeProperty(this, P_STEM_DIRECTION, int(AUTO));
-            score()->undo(new ChangeBeamMode(this, BEAM_AUTO));
+            score()->undoChangeProperty(this, P_BEAM_MODE, int(BEAM_AUTO));
             }
-      else {
-            score()->undo(new ChangeBeamMode(this, BEAM_NO));
-            }
+      else
+            score()->undoChangeProperty(this, P_BEAM_MODE, int(BEAM_NO));
       }
 
 //---------------------------------------------------------
@@ -1000,11 +1016,11 @@ void ChordRest::removeDeleteBeam()
 
 QVariant ChordRest::getProperty(P_ID propertyId) const
       {
-      for (int i = 0; i < PROPERTIES; ++i) {
-            if (propertyList[i].id == propertyId)
-                  return getVariant(propertyId, ((*(ChordRest*)this).*(propertyList[i].data))());
+      switch(propertyId) {
+            case P_SMALL:     return QVariant(small());
+            case P_BEAM_MODE: return int(beamMode());
+            default:          return Element::getProperty(propertyId);
             }
-      return Element::getProperty(propertyId);
       }
 
 //---------------------------------------------------------
@@ -1013,14 +1029,12 @@ QVariant ChordRest::getProperty(P_ID propertyId) const
 
 bool ChordRest::setProperty(P_ID propertyId, const QVariant& v)
       {
-      for (int i = 0; i < PROPERTIES; ++i) {
-            if (propertyList[i].id == propertyId) {
-                  setVariant(propertyId, ((*this).*(propertyList[i].data))(), v);
-                  setGenerated(false);
-                  return true;
-                  }
+      switch(propertyId) {
+            case P_SMALL:     setSmall(v.toBool()); break;
+            case P_BEAM_MODE: setBeamMode(BeamMode(v.toInt())); break;
+            default:          return Element::setProperty(propertyId, v); break;
             }
-      return Element::setProperty(propertyId, v);
+      score()->setLayoutAll(true);
+      return true;
       }
-
 

@@ -1616,11 +1616,11 @@ void Score::cmdResetBeamMode()
                         continue;
                   if (cr->type() == CHORD) {
                         if (cr->beamMode() != BEAM_AUTO)
-                              undoChangeBeamMode(cr, BEAM_AUTO);
+                              undoChangeProperty(cr, P_BEAM_MODE, int(BEAM_AUTO));
                         }
                   else if (cr->type() == REST) {
                         if (cr->beamMode() != BEAM_NO)
-                              undoChangeBeamMode(cr, BEAM_NO);
+                              undoChangeProperty(cr, P_BEAM_MODE, int(BEAM_NO));
                         }
                   }
             }

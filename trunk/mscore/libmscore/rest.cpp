@@ -202,31 +202,6 @@ Element* Rest::drop(const DropData& data)
                         e = 0;
                         }
                   return e;
-            case ICON:
-                  {
-                  switch (static_cast<Icon*>(e)->subtype()) {
-                        case ICON_SBEAM:
-                              score()->undoChangeBeamMode(this, BEAM_BEGIN);
-                              break;
-                        case ICON_MBEAM:
-                              score()->undoChangeBeamMode(this, BEAM_MID);
-                              break;
-                        case ICON_NBEAM:
-                              score()->undoChangeBeamMode(this, BEAM_NO);
-                              break;
-                        case ICON_BEAM32:
-                              score()->undoChangeBeamMode(this, BEAM_BEGIN32);
-                              break;
-                        case ICON_BEAM64:
-                              score()->undoChangeBeamMode(this, BEAM_BEGIN64);
-                              break;
-                        case ICON_AUTOBEAM:
-                              score()->undoChangeBeamMode(this, BEAM_AUTO);
-                              break;
-                        }
-                  }
-                  delete e;
-                  break;
 
             case CHORD:
                   {
