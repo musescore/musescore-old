@@ -85,7 +85,7 @@ class Shortcut {
       static void init();
       static void load();
       static void save();
-      static void resetToBuildin();
+      static void resetToDefault();
       static bool dirty;
       static Shortcut* getShortcut(const char* key);
       static const QMap<QString, Shortcut*>& shortcuts() { return _shortcuts; }
