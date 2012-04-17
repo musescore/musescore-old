@@ -62,7 +62,6 @@ class Shortcut {
       ~Shortcut();
 
       QAction* action() const;
-      void setAction(QAction* a);
 
       const char* key() const { return _key; }
       QString descr() const;

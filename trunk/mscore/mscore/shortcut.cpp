@@ -85,7 +85,8 @@ Shortcut::Shortcut(const Shortcut& sc)
 
 Shortcut::~Shortcut()
       {
-      delete _action;
+//      delete _action;
+//    _action->deleteLater();
       }
 
 //---------------------------------------------------------
@@ -110,16 +111,6 @@ void Shortcut::setKeys(const QList<QKeySequence>& ks)
       _keys = ks;
       if (_action)
             _action->setShortcuts(_keys);
-      }
-
-//---------------------------------------------------------
-//   setAction
-//---------------------------------------------------------
-
-void Shortcut::setAction(QAction* a)
-      {
-      delete _action;
-      _action = a;
       }
 
 //---------------------------------------------------------
