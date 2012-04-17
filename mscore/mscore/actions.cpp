@@ -94,6 +94,15 @@ Shortcut Shortcut::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          A_SCORE,
+         "file-part-export",
+         QT_TRANSLATE_NOOP("action","Export Parts"),
+         QT_TRANSLATE_NOOP("action","Export Parts..."),
+         QT_TRANSLATE_NOOP("action","Save a copy of the score's parts in various formats"),
+         fileSave_ICON
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         A_SCORE,
          "file-reload",
          QT_TRANSLATE_NOOP("action","File reload"),
          QT_TRANSLATE_NOOP("action","Reload"),

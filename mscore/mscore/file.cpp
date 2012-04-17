@@ -655,18 +655,34 @@ QStringList MuseScore::getOpenScoreNames(QString& dir, const QString& filter)
 //---------------------------------------------------------
 //   getSaveScoreName
 //---------------------------------------------------------
-
 QString MuseScore::getSaveScoreName(const QString& title,
    QString& name, const QString& filter, QString* selectedFilter)
       {
+      return getSaveScoreName(title, name, filter, selectedFilter, false);
+}
+
+QString MuseScore::getSaveScoreName(const QString& title,
+   QString& name, const QString& filter, QString* selectedFilter, bool selectFolder)
+      {
       if (preferences.nativeDialogs) {
-            QString fn = QFileDialog::getSaveFileName(this,
-               title,
-               name,
-               filter,
-               selectedFilter
-               );
-            return fn;
+	    if (!selectFolder) {
+		    QString fn = QFileDialog::getSaveFileName(this,
+				    title,
+				    name,
+				    filter,
+				    selectedFilter
+				    );
+		    return fn;
+                    } else {
+		    QString fn = QFileDialog::getSaveFileName(this,
+				    title,
+				    name,
+				    filter,
+				    selectedFilter,
+				    QFileDialog::ShowDirsOnly
+				    );
+		    return fn;
+	    	   }
             }
 
       QFileInfo myScores(preferences.myScoresPath);
@@ -681,6 +697,9 @@ QString MuseScore::getSaveScoreName(const QString& title,
             saveScoreDialog->setOption(QFileDialog::DontUseNativeDialog, true);
             saveScoreDialog->setAcceptMode(QFileDialog::AcceptSave);
             }
+      if (selectFolder) {
+            saveScoreDialog->setFileMode(QFileDialog::Directory);
+      }
       // setup side bar urls
       QList<QUrl> urls;
       QString home = QDir::homePath();
@@ -694,8 +713,11 @@ QString MuseScore::getSaveScoreName(const QString& title,
       // saveScoreDialog->setDirectory(name);
       saveScoreDialog->selectFile(name);
       QStringList result;
-      connect(saveScoreDialog, SIGNAL(filterSelected(const QString&)),
-         SLOT(saveScoreDialogFilterSelected(const QString&)));
+
+      if (!selectFolder) {
+            connect(saveScoreDialog, SIGNAL(filterSelected(const QString&)),
+               SLOT(saveScoreDialogFilterSelected(const QString&)));
+      }
       if (saveScoreDialog->exec()) {
             result = saveScoreDialog->selectedFiles();
             *selectedFilter = saveScoreDialog->selectedNameFilter();
@@ -1381,6 +1403,90 @@ bool MuseScore::exportFile()
       }
 
 //---------------------------------------------------------
+//   exportParts
+//    return true on success
+//---------------------------------------------------------
+
+bool MuseScore::exportParts()
+      {
+      QStringList fl;
+      fl.append(tr("Uncompressed MuseScore Format (*.mscx)"));
+      fl.append(tr("MusicXML Format (*.xml)"));
+      fl.append(tr("Compressed MusicXML Format (*.mxl)"));
+      fl.append(tr("Standard MIDI File (*.mid)"));
+      fl.append(tr("PDF File (*.pdf)"));
+      fl.append(tr("PostScript File (*.ps)"));
+      fl.append(tr("PNG Bitmap Graphic (*.png)"));
+      fl.append(tr("Scalable Vector Graphic (*.svg)"));
+      fl.append(tr("Lilypond Format (*.ly)"));
+#ifdef HAS_AUDIOFILE
+      fl.append(tr("Wave Audio (*.wav)"));
+      fl.append(tr("Flac Audio (*.flac)"));
+      fl.append(tr("Ogg Vorbis Audio (*.ogg)"));
+#endif
+      fl.append(tr("MP3 Audio (*.mp3)"));
+      QString saveDialogTitle = tr("MuseScore: Export Parts");
+
+      QSettings settings;
+      if (lastSaveCopyDirectory.isEmpty())
+	    lastSaveCopyDirectory = settings.value("lastSaveCopyDirectory", preferences.myScoresPath).toString();
+      if (lastSaveDirectory.isEmpty())
+	    lastSaveDirectory = settings.value("lastSaveDirectory", preferences.myScoresPath).toString();
+      QString saveDirectory = lastSaveCopyDirectory;
+
+      if (saveDirectory.isEmpty()) {
+	    saveDirectory = preferences.myScoresPath;
+	    }
+
+      QString selectedFilter;
+      QString name = QString("");
+      QString filter = fl.join(";;");
+      QString fn = getSaveScoreName(saveDialogTitle, name, filter, &selectedFilter, true);
+      if (fn.isEmpty())
+	    return false;
+
+      lastSaveCopyDirectory = fn;
+
+      Score* thisScore = cs;
+      if (thisScore->parentScore())
+            thisScore = thisScore->parentScore();
+
+      foreach(Excerpt* e, thisScore->excerpts())  {
+	      Score* pScore = e->score();
+            QString partfn = fn + QDir::separator() + thisScore->name() + "-" + pScore->name();
+	      QFileInfo fi(partfn);
+	      QString ext;
+            if (selectedFilter.isEmpty())
+		      ext = fi.suffix();
+            else {
+		      int idx = fl.indexOf(selectedFilter);
+		      if (idx != -1) {
+			      static const char* extensions[] = {
+				      "mscx", "xml", "mxl", "mid", "pdf", "ps", "png", "svg", "ly",
+#ifdef HAS_AUDIOFILE
+				      "wav", "flac", "ogg",
+#endif
+				      "mp3"
+			            };
+                        ext = extensions[idx];
+		            }
+	            }
+            if (ext.isEmpty()) {
+                  QMessageBox::critical(this, tr("MuseScore: Export Parts"), tr("cannot determine file type"));
+                  return false;
+                  }
+
+            if (fi.suffix() != ext)
+                  partfn += "." + ext;
+
+            if (!saveAs(pScore, true, partfn, ext))
+                  return false;
+            }
+      QMessageBox::information(this, tr("MuseScore: Export Parts"), tr("Parts were successfully exported"));
+      return true;
+      }
+
+//---------------------------------------------------------
 //   saveAs
 //---------------------------------------------------------
 
@@ -1431,11 +1537,11 @@ bool MuseScore::saveAs(Score* cs, bool saveCopy, const QString& path, const QStr
             }
       else if (ext == "pdf") {
             // save as pdf file *.pdf
-            rv = savePsPdf(fn, QPrinter::PdfFormat);
+            rv = savePsPdf(cs, fn, QPrinter::PdfFormat);
             }
       else if (ext == "ps") {
             // save as postscript file *.ps
-            rv = savePsPdf(fn, QPrinter::PostScriptFormat);
+            rv = savePsPdf(cs, fn, QPrinter::PostScriptFormat);
             }
       else if (ext == "png") {
             // save as png file *.png
@@ -1468,6 +1574,11 @@ bool MuseScore::saveAs(Score* cs, bool saveCopy, const QString& path, const QStr
 //---------------------------------------------------------
 
 bool MuseScore::savePsPdf(const QString& saveName, QPrinter::OutputFormat format)
+      {
+      return savePsPdf(cs, saveName, format);
+}
+
+bool MuseScore::savePsPdf(Score* cs, const QString& saveName, QPrinter::OutputFormat format)
       {
       const PageFormat* pf = cs->pageFormat();
       QPrinter printerDev(QPrinter::HighResolution);
