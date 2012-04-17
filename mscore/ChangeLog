@@ -1,3 +1,9 @@
+17.4 (lv)
+      - #16057: MusicXML support fret diagrams
+        -> import partially implemented
+      - #15795: MusicXML Import and export of tablature
+        -> export partially implemented
+      - new MusicXML regression testfiles testHarmony3.xml and testTablature1.xml
 16.4 (ws)
       - handle triple beams
       - updated beam inspector
