@@ -81,6 +81,7 @@ enum P_ID {
       P_TEXT_STYLE,
       P_USER_MODIFIED,
       P_BEAM_POS,
+      P_BEAM_MODE,
 
       P_END
       };
@@ -100,6 +101,7 @@ enum P_TYPE {
       T_DIRECTION_H,    // enum DirectionH
       T_LAYOUT_BREAK,
       T_VALUE_TYPE,
+      T_BEAM_MODE,
       };
 
 extern QVariant getProperty(P_ID type, const QDomElement& e);

@@ -1604,6 +1604,7 @@ void Element::setVariant(P_ID id, void* data, const QVariant& value)
             case T_FRACTION:
                   *(Fraction*)data = value.value<Fraction>();
                   break;
+            case T_SCALE:
             case T_POINT:
                   *(QPointF*)data = value.toPointF();
                   break;
@@ -1617,6 +1618,7 @@ void Element::setVariant(P_ID id, void* data, const QVariant& value)
             case T_DIRECTION_H:
             case T_LAYOUT_BREAK:
             case T_VALUE_TYPE:
+            case T_BEAM_MODE:
                   *(int*)data = value.toInt();
                   break;
             }
@@ -1641,6 +1643,7 @@ QVariant Element::getVariant(P_ID id, void* data) const
                   case T_DIRECTION_H:
                   case T_LAYOUT_BREAK:
                   case T_VALUE_TYPE:
+                  case T_BEAM_MODE:
                         return QVariant(*(int*)data);
                   case T_FRACTION:
                         return QVariant::fromValue(*(Fraction*)data);
@@ -1651,6 +1654,7 @@ QVariant Element::getVariant(P_ID id, void* data) const
                   case T_COLOR:
                         return QVariant(*(QColor*)data);
                   case T_POINT:
+                  case T_SCALE:
                         return QVariant(*(QPointF*)data);
                   case T_SIZE:
                         return QVariant(*(QSizeF*)data);

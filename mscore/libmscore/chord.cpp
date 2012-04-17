@@ -1764,7 +1764,7 @@ QVariant Chord::getProperty(P_ID propertyId) const
             case P_SMALL:          return small();
             case P_STEM_DIRECTION: return int(stemDirection());
             default:
-                  return Element::getProperty(propertyId);
+                  return ChordRest::getProperty(propertyId);
             }
       }
 
@@ -1788,7 +1788,7 @@ bool Chord::setProperty(P_ID propertyId, const QVariant& v)
                   score()->setLayoutAll(true);
                   break;
             default:
-                  return Element::setProperty(propertyId, v);
+                  return ChordRest::setProperty(propertyId, v);
             }
       return true;
       }

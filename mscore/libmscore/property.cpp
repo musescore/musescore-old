@@ -88,6 +88,7 @@ static const PropertyData propertyList[] = {
       { P_TEXT_STYLE,          "textStyle",       T_INT  },
       { P_USER_MODIFIED,       0,               T_BOOL   },
       { P_BEAM_POS,            0,               T_POINT  },
+      { P_BEAM_MODE,           "BeamMode",      T_BEAM_MODE  },
       { P_END,                 "",              T_INT    }
       };
 
@@ -169,6 +170,8 @@ QVariant getProperty(P_ID id, const QDomElement& e)
                   else if (value == "user")
                         return QVariant(int(USER_VAL));
                   break;
+            case T_BEAM_MODE:             // TODO
+                  return QVariant(int(0));
             }
       return QVariant();
       }

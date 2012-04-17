@@ -49,7 +49,7 @@ class ChordRest : public DurationElement {
       bool _small;
       Space _space;                       // cached value from layout
       QList<Lyrics*> _lyricsList;
-      TabDurationSymbol * _tabDur;        // stores a duration symbol in tablature staves
+      TabDurationSymbol* _tabDur;         // stores a duration symbol in tablature staves
 
    public:
       ChordRest(Score*);
@@ -67,8 +67,9 @@ class ChordRest : public DurationElement {
       bool readProperties(const QDomElement& e, QList<Tuplet*>*, QList<Spanner*>*);
       virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
 
-      void setBeamMode(BeamMode m)              { _beamMode = m; }
+      void setBeamMode(BeamMode m)              { _beamMode = m;    }
       BeamMode beamMode() const                 { return _beamMode; }
+
       void setBeam(Beam* b);
       virtual Beam* beam() const                { return _beam; }
       int beams() const                         { return _durationType.hooks(); }
@@ -88,7 +89,6 @@ class ChordRest : public DurationElement {
       QList<Articulation*>* getArticulations()  { return &articulations; }
       Articulation* hasArticulation(const Articulation*);
       bool small() const                        { return _small; }
-      void* pSmall()                            { return &_small; }
       void setSmall(bool val);
 
       int staffMove() const                     { return _staffMove; }
@@ -134,7 +134,6 @@ class ChordRest : public DurationElement {
       void removeDeleteBeam();
       virtual QVariant getProperty(P_ID propertyId) const;
       virtual bool setProperty(P_ID propertyId, const QVariant&);
-      static Property<ChordRest> propertyList[];
       };
 
 #endif

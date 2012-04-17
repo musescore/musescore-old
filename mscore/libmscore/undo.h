@@ -47,7 +47,6 @@ class Chord;
 class ChordRest;
 class Harmony;
 class SlurTie;
-class Beam;
 struct MStaff;
 class MeasureBase;
 class Dynamic;
@@ -591,22 +590,6 @@ class SigInsertTime : public UndoCommand {
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("SigInsertTime");
-      };
-
-//---------------------------------------------------------
-//   ChangeBeamMode
-//---------------------------------------------------------
-
-class ChangeBeamMode : public UndoCommand {
-      ChordRest* cr;
-      BeamMode mode;
-      void flip();
-
-   public:
-      ChangeBeamMode(ChordRest*, BeamMode mode);
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      UNDO_NAME("ChangeBeamMode");
       };
 
 #if 0
