@@ -1,4 +1,6 @@
 17.4 (ws)
+      - fix #15154: Style Hrd/Ftr Nums "show first" not checked, 1st page > 1:
+         1st page number still shown (patch from Miwarre)
       - fix #15836: Image::setProperty() rounds size and scale to integers
         (patch from Miwarre)
       - fix #14648: Copying from within tuplet bracket to the same or another or

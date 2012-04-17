@@ -218,7 +218,7 @@ void Page::draw(QPainter* painter) const
 
       QString s1, s2, s3;
 
-      if (_score->styleB(ST_showHeader) && (n || _score->styleB(ST_headerFirstPage))) {
+      if (_score->styleB(ST_showHeader) && (no() || _score->styleB(ST_headerFirstPage))) {
             TextStyle ts = score()->textStyle(TEXT_STYLE_HEADER);
             QPointF o(ts.offset(spatium()));
 
@@ -265,7 +265,7 @@ void Page::draw(QPainter* painter) const
                   }
             }
 
-      if (_score->styleB(ST_showFooter) && (n || _score->styleB(ST_footerFirstPage))) {
+      if (_score->styleB(ST_showFooter) && (no() || _score->styleB(ST_footerFirstPage))) {
             TextStyle ts = score()->textStyle(TEXT_STYLE_FOOTER);
 
             QPointF o(ts.offset(spatium()));
