@@ -2401,6 +2401,9 @@ void ScoreView::normalCopy()
       {
       if (!_score->selection().canCopy()) {
             qDebug("cannot copy selection: intersects a tuplet");
+            QMessageBox::information(0, "MuseScore",
+                  tr("Please select the complete tuplet and retry the copy operation"),
+                  QMessageBox::Ok, QMessageBox::NoButton);
             return;
             }
       QString mimeType = _score->selection().mimeType();
@@ -2421,6 +2424,9 @@ void ScoreView::normalCut()
       {
       if (!_score->selection().canCopy()) {
             qDebug("cannot copy selection: intersects a tuplet");
+            QMessageBox::information(0, "MuseScore",
+                  tr("Please select the complete tuplet and retry the cut operation"),
+                  QMessageBox::Ok, QMessageBox::NoButton);
             return;
             }
       _score->startCmd();
