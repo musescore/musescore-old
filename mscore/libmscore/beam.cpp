@@ -771,7 +771,7 @@ static void initBeamMetrics()
       B(1,  10,  9, -12, -1);
       B(1,  10,  8, -12, -4);
       B(1,  10,  7, -12, -5);
-      B(1,  10,  6, -15, -4);
+      B(1,  10,  6, -15, -5);
       B(1,  10,  5, -16, -5);
       B(1,  10,  4, -20, -4);
       B(1,  10,  3, -20, -5);
@@ -800,7 +800,7 @@ static void initBeamMetrics()
 
       B(0,  3,  4,  13, 1);
       B(0,  3,  5,  13, 2);
-      B(0,  3,  6,  13, 2);
+      B(0,  3,  6,  14, 4);
       B(0,  3,  7,  13, 4);
       B(0,  3,  8,  13, 6);
 
@@ -1233,8 +1233,8 @@ static int adjust(qreal _spatium4, int slant, const QList<Chord*>& cl)
                   const Chord* c3 = cl[i];
                   QPointF p3(c3->stemPos());
                   qreal yUp   = p1.y() + (p3.x() - p1.x()) * slope;
-                  qreal l     = (yUp - p3.y()) / _spatium4;
-                  ml          = qMax(ml, int(l + .5));
+                  int l       = lrint((yUp - p3.y()) / _spatium4 + .5);
+                  ml          = qMax(ml, l);
                   }
             }
       else {
@@ -1242,8 +1242,8 @@ static int adjust(qreal _spatium4, int slant, const QList<Chord*>& cl)
                   const Chord* c3 = cl[i];
                   QPointF p3(c3->stemPos());
                   qreal yUp   = p1.y() + (p3.x() - p1.x()) * slope;
-                  qreal l     = (p3.y() - yUp) / _spatium4;
-                  ml          = qMax(ml, int(l + .5));
+                  int l       = lrint((p3.y() - yUp) / _spatium4 + .5);
+                  ml          = qMax(ml, l);
                   }
             }
       if (ml > 0)
@@ -1256,7 +1256,7 @@ static int adjust(qreal _spatium4, int slant, const QList<Chord*>& cl)
 //    adjust stem position for single beams
 //---------------------------------------------------------
 
-static void adjust2(int /*ml*/, Bm& bm, const Chord* c1)
+static void adjust2(Bm& bm, const Chord* c1)
       {
       static const int dd[4][4] = {
             // St   H  --   S
@@ -1316,6 +1316,27 @@ static int maxSlant(uint interval)
       }
 
 //---------------------------------------------------------
+//   slantTable
+//---------------------------------------------------------
+
+static int* slantTable(uint interval)
+      {
+      static int t[8][5] = {
+            { 0, -1,  0,  0,  0 },
+            { 1, -1,  0,  0,  0 },
+            { 4,  3,  2, -1,  0 },
+            { 5,  4, -1,  0,  0 },
+            { 5, -1,  0,  0,  0 },
+            { 5,  6, -1,  0,  0 },
+            { 6,  5,  7, -1,  0 },
+            { 6,  7,  5,  8, -1 },
+            };
+      if (interval > 7)
+            interval = 7;
+      return &t[interval][0] ;
+      }
+
+//---------------------------------------------------------
 //   computeStemLen
 //---------------------------------------------------------
 
@@ -1326,152 +1347,192 @@ void Beam::computeStemLen(const QList<Chord*>& cl, qreal& py1, int beamLevels)
       const Chord* c1 = cl.front();
       const Chord* c2 = cl.back();
       qreal dx        = c2->pagePos().x() - c1->pagePos().x();
+      bool zeroSlant  = noSlope(cl);
 
-      bool zeroSlant = noSlope(cl);
-      int l1 = c1->line();
-      int l2 = c2->line();
+      int l1 = c1->line() * 2;
+      int l2 = c2->line() * 2;
 
-      Bm bm = beamMetric1(_up, l1, l2);
-      if (bm.s == 0 && bm.l == 0)
-            bm = beamMetric2(_up, l1, l2);
-      if (beamLevels == 2) {
+      Bm bm;
+      if (beamLevels == 1) {
+            bm = beamMetric1(_up, l1 / 2, l2 / 2);
+            if (bm.l) {
+                  if (cl.size() > 2) {
+                        if (_up)
+                              bm.l -= adjust(_spatium4, bm.s, cl);
+                        else
+                              bm.l += adjust(_spatium4, bm.s, cl);
+                        }
+                  }
+            else {
+                  int* st = slantTable(zeroSlant ? 0 : qAbs((l2 - l1) / 2));
+                  int ll1;
+                  if (_up) {
+                        ll1 = l1 - ((l1 & 3) ? 11 : 12);
+                        int ll1m = l1 - 10;
+                        int rll1 = ll1;
+                        if ((l1 > 20) && (l2 > 20)) {
+                              st = slantTable(zeroSlant ? 0 : 1);
+                              rll1 = (zeroSlant || (l2 < l1)) ? 9 : 8;
+                              }
+                        for (int n = 0; ; ll1--) {
+                              int i;
+                              for (i = 0; st[i] != -1; ++i) {
+                                    int slant = (l2 > l1) ? st[i] : -st[i];
+                                    int lll1  = qMin(rll1, ll1m - n - adjust(_spatium4, slant, cl));
+                                    int ll2   = lll1 + slant;
+                                    static bool ba[4][4] = {
+                                          { true,  true,  false, true },
+                                          { true,  true,  false, true },
+                                          { false, false, false, true },
+                                          { true,  true,  false, true }
+                                          };
+                                    if (ba[lll1 & 3][ll2 & 3]) {
+                                          ll1 = lll1;
+                                          bm.s = slant;
+                                          break;
+                                          }
+                                    }
+                              if (st[i] != -1)
+                                    break;
+                              if (++n > 4) {
+                                    printf("beam note not found 1\n");
+                                    break;
+                                    }
+                              }
+                        }
+                  else {
+                        ll1 = ((l1 & 3) ? 11 : 12) + l1;
+                        int rll1 = ll1;
+                        if ((l1 < -4) && (l2 < -4)) {
+                              // extend to middle line, slant is always 0 <= 1
+                              st = slantTable(zeroSlant ? 0 : 1);
+                              rll1 = (zeroSlant || (l2 > l1)) ? 7 : 8;
+                              }
+                        for (int n = 0;;ll1++) {
+                              int i;
+                              for (i = 0; st[i] != -1; ++i) {
+                                    int slant = (l2 > l1) ? st[i] : -st[i];
+                                    int lll1  = qMax(rll1, ll1 + adjust(_spatium4, slant, cl));
+                                    int e1    = lll1 & 3;
+                                    int ll2   = lll1 + slant;
+                                    int e2    = ll2 & 3;
+                                    static bool ba[4][4] = {
+                                          { true,  true,  false, true },
+                                          { true,  true,  false, true },
+                                          { false, false, false, true },
+                                          { true,  true,  false, true }
+                                          };
+                                    if (ba[e1][e2]) {
+                                          ll1 = lll1;
+                                          bm.s = slant;
+                                          break;
+                                          }
+                                    }
+                              if (st[i] != -1)
+                                    break;
+                              if (++n > 4) {
+                                    printf("beam not found 2\n");
+                                    break;
+                                    }
+                              }
+                        }
+                  bm.l = ll1 - l1;
+                  }
+            }
+      else if (beamLevels == 2) {
             int minS, maxS;
             if (zeroSlant)
                   minS = maxS = 0;
             else {
-                  uint interval = qAbs(l2 - l1);
+                  uint interval = qAbs((l2 - l1) / 2);
                   minS          = minSlant(interval);
                   maxS          = maxSlant(interval);
                   }
-            l1 *= 2;
-            l2 *= 2;
-
+            int ll1;
             if (_up) {
-                  //
-                  // extend to middle line, slant is always 1
-                  //
+                  ll1 = l1 - 12;     // sp minimum to primary beam
+                  int rll1 = ll1;
                   if ((l1 > 20) && (l2 > 20)) {
-                        if (maxS == 0) {
-                              bm.l = 9 - l1;
-                              bm.s = 0;
-                              }
-                        else if (l1 > l2) {
-                              bm.l = 9 - l1;
-                              bm.s = -1;
-                              }
-                        else {
-                              bm.l = 8 - l1;
-                              bm.s = 1;
-                              }
+                        minS = zeroSlant ? 0 : 1;
+                        maxS = minS;
+                        rll1 = (zeroSlant || (l2 < l1)) ? 9 : 8;
                         }
-                  else {
-                        // ll % 4:
-                        //    0 straddle
-                        //    1 hang
-                        //    2 --
-                        //    3 sit
-                        if (maxS == 0) {
-                              int ll1 = l1 - 12 - adjust(_spatium4, 0, cl);
-                              if (ll1 & 2)
-                                    ll1 -= 1;
-                              bm.s = 0;
-                              bm.l = ll1 - l1;
-                              }
-                        else {
-                              int ll1 = l1 - 12;     // sp minimum to primary beam
-                              int n = 0;
-                              for (;;ll1--) {
-                                    int i;
-                                    for (i = minS; i <= maxS; ++i) {
-                                          int e1  = ll1 & 3;
-                                          int ll2 = ll1 + ((l2 > l1) ? i : -i);
-                                          if ((l2 - ll2) < 12)
-                                                continue;
-                                          int e2  = ll2 & 3;
-                                          if ((e1 == 0 && e2 == 1) || (e1 == 1 && e2 == 0))
-                                                break;
-                                          }
-                                    if (i <= maxS) {
-                                          bm.l = ll1 - l1;
-                                          bm.s = l2 > l1 ? i : -i;
-                                          break;
-                                          }
-                                    if (++n > 20) {
-                                          printf("beam note not found\n");
-                                          break;
-                                          }
+                  for (int n = 0; ; ll1--) {
+                        int i;
+                        for (i = minS; i <= maxS; ++i) {
+                              int slant = (l2 > l1) ? i : -i;
+                              int lll1  = qMin(rll1, ll1 - adjust(_spatium4, slant, cl));
+                              int e1  = lll1 & 3;
+                              int ll2 = lll1 + slant;
+                              int e2  = ll2 & 3;
+                              static bool ba[4][4] = {
+                                    { true,  true,  false, false  },
+                                    { true,  true,  false, false },
+                                    { false, false, false, false },
+                                    { false, false, false, false }
+                                    };
+                              if (ba[e1][e2]) {
+                                    ll1 = lll1;
+                                    break;
                                     }
+                              }
+                        if (i <= maxS) {
+                              bm.s = l2 > l1 ? i : -i;
+                              break;
+                              }
+                        if (++n > 4) {
+                              printf("beam note not found 1 %d-%d\n", minS, maxS);
+                              break;
                               }
                         }
                   }
             else {
-                  //
-                  // extend to middle line, slant is always 1
-                  //
+                  ll1  = 12 + l1;
+                  int rll1 = ll1;
                   if ((l1 < -4) && (l2 < -4)) {
-                        if (l1 > l2) {
-                              bm.l = 8 - l1;
-                              bm.s = -1;
-                              }
-                        else if (l1 == l2) {
-                              bm.l = 7 - l1;
-                              bm.s = 0;
-                              }
-                        else {
-                              bm.l = 7 - l1;
-                              bm.s = 1;
-                              }
+                        // extend to middle line, slant is always 0 <= 1
+                        minS = zeroSlant ? 0 : 1;
+                        maxS = minS;
+                        rll1 = (zeroSlant || (l2 > l1)) ? 7 : 8;
                         }
-                  else {
-                        if (maxS == 0) {
-                              int ll1 = 12 + l1 + adjust(_spatium4, 0, cl);
-                              if (ll1 & 2)
-                                    ll1 += 1;
-                              bm.s = 0;
-                              bm.l = ll1 - l1;
-                              }
-                        else {
-                              int ll1 = 12 + l1;     // sp minimum to primary beam
-                              int n = 0;
-                              for (;;ll1++) {
-                                    int i;
-                                    for (i = minS; i <= maxS; ++i) {
-                                          int e1  = ll1 & 3;
-                                          int ll2 = ll1 + ((l2 > l1) ? i : -i);
-                                          if ((ll2 - l2) < 12)
-                                                continue;
-                                          int e2  = ll2 & 3;
-                                          if ((e1 == 0 && e2 == 3) || (e1 == 3 && e2 == 0))
-                                                break;
-                                          }
-                                    if (i <= maxS) {
-                                          bm.l = ll1 - l1;
-                                          bm.s = l2 > l1 ? i : -i;
-                                          break;
-                                          }
-                                    if (++n > 20) {
-                                          printf("beam not found\n");
-                                          break;
-                                          }
+                  for (int n = 0;;ll1++) {
+                        int i;
+                        for (i = minS; i <= maxS; ++i) {
+                              int slant = (l2 > l1) ? i : -i;
+                              int lll1  = qMax(rll1, ll1 + adjust(_spatium4, slant, cl));
+                              int e1    = lll1 & 3;
+                              int ll2   = lll1 + slant;
+                              int e2    = ll2 & 3;
+                              static bool ba[4][4] = {
+                                    { true,  false, false, true  },
+                                    { false, false, false, false },
+                                    { false, false, false, false },
+                                    { true,  false, false, true }
+                                    };
+                              if (ba[e1][e2]) {
+                                    ll1 = lll1;
+                                    break;
                                     }
+                              }
+                        if (i <= maxS) {
+                              bm.s = l2 > l1 ? i : -i;
+                              break;
+                              }
+                        if (++n > 4) {
+                              printf("beam not found 2\n");
+                              break;
                               }
                         }
                   }
+            bm.l = ll1 - l1;
             }
       else if (beamLevels == 3) {
-            l1 *= 2;
-            l2 *= 2;
-
             int slant = zeroSlant ? 0 : (l2 > l1 ? 4 : -4);
             int ll1;
             if (_up) {
                   ll1 = l1 - 15 - adjust(_spatium4, slant, cl);
                   if ((l1 > 24) && (l2 > 24)) {
-                        int lll;
-                        if (slant >= 0)
-                              lll = 9;
-                        else
-                              lll = 13;
+                        int lll = (slant >= 0) ? 9 : 13;
                         ll1 = qMin(lll, ll1);
                         }
                   switch (ll1 & 3) {
@@ -1484,11 +1545,7 @@ void Beam::computeStemLen(const QList<Chord*>& cl, qreal& py1, int beamLevels)
             else {
                   ll1 = 15 + l1 + adjust(_spatium4, slant, cl);
                   if ((l1 < -7) && (l2 < -7)) {
-                        int lll;
-                        if (slant <= 0)
-                              lll = 7;
-                        else
-                              lll = 3;
+                        int lll = slant <= 0 ? 7 : 3;
                         ll1 = qMax(lll, ll1);
                         }
                   switch (ll1 & 3) {
@@ -1501,12 +1558,12 @@ void Beam::computeStemLen(const QList<Chord*>& cl, qreal& py1, int beamLevels)
             bm.s = slant;
             bm.l = ll1 - l1;
             }
-      else if (beamLevels > 2 && cl.size() == 2) {
+      else if (beamLevels > 3 && cl.size() == 2) {
             static const int t[] = { 0, 0, 4, 4, 8, 12, 16 }; // spatium4 added to stem len
             int n = t[beamLevels];
             bm.l += _up ? -n : n;
             }
-      else if (cl.size() > 2) {
+      else {
             if (zeroSlant)
                   bm.s = 0;
             int ml = adjust(_spatium4, bm.s, cl);
@@ -1516,12 +1573,9 @@ void Beam::computeStemLen(const QList<Chord*>& cl, qreal& py1, int beamLevels)
                   else
                         bm.l += ml;
                   if (beamLevels == 1)
-                        adjust2(ml, bm, c1);
+                        adjust2(bm, c1);
                   }
             if (beamLevels > 1) {
-/*                  static const int t[] = { 0, 0, 4, 4, 8, 12, 16 }; // spatium4 added to stem len
-                  int n = t[beamLevels];
-                  */
                   int n = (beamLevels-1) * 3;
 
                   bm.l += _up ? -n : n;

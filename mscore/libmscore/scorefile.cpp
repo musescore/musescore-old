@@ -1544,10 +1544,17 @@ void Score::writeSegments(Xml& xml, const Measure* m, int strack, int etrack, Se
                   if (e->isChordRest()) {
                         ChordRest* cr = static_cast<ChordRest*>(e);
                         Beam* beam = cr->beam();
+#ifndef NDEBUG
+                        if (beam && beam->elements().front() == cr && testMode()) {
+                              beam->setId(xml.beamId++);
+                              beam->write(xml);
+                              }
+#else
                         if (beam && !beam->generated() && beam->elements().front() == cr) {
                               beam->setId(xml.beamId++);
                               beam->write(xml);
                               }
+#endif
                         cr->writeTuplet(xml);
                         foreach(Spanner* slur, cr->spannerFor()) {
                               bool found = false;
