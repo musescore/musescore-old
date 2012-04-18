@@ -67,18 +67,18 @@ void MuseScore::initOsc()
       QOscServer* osc = new QOscServer(port, qApp);
       PathObject* oo = new PathObject( "/mscore", QVariant::Int, osc);
       QObject::connect(oo, SIGNAL(data(int)), SLOT(oscIntMessage(int)));
-      oo = new PathObject( "/play", QVariant::Int, osc);
-      QObject::connect(oo, SIGNAL(data(int)), SLOT(oscPlay()));
-      oo = new PathObject( "/stop", QVariant::Int, osc);
-      QObject::connect(oo, SIGNAL(data(int)), SLOT(oscStop()));
+      oo = new PathObject( "/play",QVariant::Invalid, osc);
+      QObject::connect(oo, SIGNAL(data()), SLOT(oscPlay()));
+      oo = new PathObject( "/stop", QVariant::Invalid, osc);
+      QObject::connect(oo, SIGNAL(data()), SLOT(oscStop()));
       oo = new PathObject( "/tempo", QVariant::Int, osc);
       QObject::connect(oo, SIGNAL(data(int)), SLOT(oscTempo(int)));
       oo = new PathObject( "/volume", QVariant::Int, osc);
       QObject::connect(oo, SIGNAL(data(int)), SLOT(oscVolume(int)));
-      oo = new PathObject( "/next", QVariant::Int, osc);
-      QObject::connect(oo, SIGNAL(data(int)), SLOT(oscNext()));
-      oo = new PathObject( "/next-measure", QVariant::Int, osc);
-      QObject::connect(oo, SIGNAL(data(int)), SLOT(oscNextMeasure()));
+      oo = new PathObject( "/next", QVariant::Invalid, osc);
+      QObject::connect(oo, SIGNAL(data()), SLOT(oscNext()));
+      oo = new PathObject( "/next-measure", QVariant::Invalid, osc);
+      QObject::connect(oo, SIGNAL(data()), SLOT(oscNextMeasure()));
       oo = new PathObject( "/goto", QVariant::Int, osc);
       QObject::connect(oo, SIGNAL(data(int)), SLOT(oscGoto(int)));
       oo = new PathObject( "/select-measure", QVariant::Int, osc);
@@ -97,8 +97,8 @@ void MuseScore::initOsc()
             }
       oo = new PathObject( "/open", QVariant::String, osc);
       QObject::connect(oo, SIGNAL(data(QString)), SLOT(oscOpen(QString)));
-      oo = new PathObject( "/close-all", QVariant::Int, osc);
-      QObject::connect(oo, SIGNAL(data(int)), SLOT(oscCloseAll()));
+      oo = new PathObject( "/close-all", QVariant::Invalid, osc);
+      QObject::connect(oo, SIGNAL(data()), SLOT(oscCloseAll()));
       oo = new PathObject( "/plugin", QVariant::String, osc);
       QObject::connect(oo, SIGNAL(data(QString)), SLOT(oscTriggerPlugin(QString)));
 
