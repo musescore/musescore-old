@@ -1,4 +1,5 @@
 18.4 (ws)
+      - fix #16094: Acciaccatura stroke appears offset
       - fix #16097: Opening MXL causes crash
 17.4 (ws)
       - feature #15062: Part export (patch from emeraldimp)
