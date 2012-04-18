@@ -57,7 +57,7 @@ class Stem : public Element {
       QPointF hookPos() const;
       void setLen(qreal l);
       qreal len() const               { return _len; }
-      qreal stemLen() const           { return _len; }
+      qreal stemLen() const;
       };
 
 #endif

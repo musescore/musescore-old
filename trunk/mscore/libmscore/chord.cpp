@@ -83,11 +83,13 @@ void StemSlash::setLine(const QLineF& l)
 void StemSlash::layout()
       {
       Stem* stem = chord()->stem();
-      qreal x, y, h2;
+      qreal h2;
+      qreal l = spatium();
+      QPointF p(stem->hookPos());
+      qreal x = p.x() + l * .1;
+      qreal y = p.y();
+
       if (chord()->beam()) {
-            qreal l = spatium();
-            x = stem->pos().x() + l * .1;
-            y = stem->pos().y() + stem->stemLen();
             if (chord()->up()) {
                   y += l * .3;
                   h2 = l * .8;
@@ -98,9 +100,6 @@ void StemSlash::layout()
                   }
             }
       else {
-            qreal l = spatium();
-            x = stem->pos().x() + l * .1;
-            y = stem->pos().y() + stem->stemLen();
             if (chord()->up()) {
                   y += l * 1.2;
                   h2 = l * .4;
