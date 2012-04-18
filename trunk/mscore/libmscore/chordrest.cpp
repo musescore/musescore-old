@@ -182,8 +182,13 @@ void ChordRest::writeProperties(Xml& xml) const
             xml.tagE(QString("Slur type=\"start\" number=\"%1\"").arg(s->id()+1));
       foreach(Spanner* s, _spannerBack)
             xml.tagE(QString("Slur type=\"stop\" number=\"%1\"").arg(s->id()+1));
+#ifndef NDEBUG
+      if (score()->testMode() && _beam)
+            xml.tag("Beam", _beam->id());
+#else
       if (!xml.clipboardmode && _beam && !_beam->generated())
             xml.tag("Beam", _beam->id());
+#endif
       foreach(Lyrics* lyrics, _lyricsList) {
             if (lyrics)
                   lyrics->write(xml);
@@ -191,8 +196,6 @@ void ChordRest::writeProperties(Xml& xml) const
       Fraction t(globalDuration());
       if (staff())
             t *= staff()->timeStretch(xml.curTick);
-//OPTIMIZE      if (type() == CHORD && static_cast<const Chord*>(this)->noteType() != NOTE_NORMAL)
-//            return;
       xml.curTick += t.ticks();
       }
 
