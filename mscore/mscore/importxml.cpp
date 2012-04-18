@@ -68,7 +68,6 @@
 #include "libmscore/ottava.h"
 #include "libmscore/trill.h"
 #include "libmscore/pedal.h"
-#include "zarchive.h"
 #include "libmscore/harmony.h"
 #include "libmscore/tempotext.h"
 #include "libmscore/articulation.h"
@@ -86,6 +85,7 @@
 #include "libmscore/chordline.h"
 #include "libmscore/figuredbass.h"
 #include "libmscore/fret.h"
+#include "libmscore/qzipreader_p.h"
 
 //---------------------------------------------------------
 //   local defines for debug output
@@ -348,20 +348,13 @@ public:
 
 bool LoadCompressedMusicXml::loader(QFile* qf)
       {
-      Unzip uz;
-      if (!uz.openArchive(qf->fileName())) {
-            error = "Unable to open archive(" + qf->fileName() + "):\n" + uz.errorString();
-            return false;
-            }
-
-      QBuffer cbuf;
-      cbuf.open(QIODevice::WriteOnly);
-      uz.extractFile("META-INF/container.xml", &cbuf);
+      QZipReader f(qf->fileName());
+      QByteArray data = f.fileData("META-INF/container.xml");
 
       QDomDocument container;
       int line, column;
       QString err;
-      if (!container.setContent(cbuf.data(), false, &err, &line, &column)) {
+      if (!container.setContent(data, false, &err, &line, &column)) {
             QString col, ln;
             col.setNum(column);
             ln.setNum(line);
@@ -393,15 +386,13 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
                   domError(e);
             }
       if (rootfile == "") {
-            qDebug("can't find rootfile in: %s", qf->fileName().toLatin1().data());
+            qDebug("can't find rootfile in: %s", qPrintable(qf->fileName()));
             return false;
             }
 
-      QBuffer dbuf;
-      dbuf.open(QIODevice::WriteOnly);
-      uz.extractFile(rootfile, &dbuf);
+      data = f.fileData(rootfile);
 
-      if (!_doc->setContent(dbuf.data(), false, &err, &line, &column)) {
+      if (!_doc->setContent(data, false, &err, &line, &column)) {
             QString col, ln;
             col.setNum(column);
             ln.setNum(line);

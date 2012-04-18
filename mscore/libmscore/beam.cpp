@@ -1555,9 +1555,8 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
       int chordRests = crl.size();
       bool hasBeamSegment[chordRests];
       for (int idx = 0; idx < chordRests; ++idx) {
-            int n = crl[idx]->durationType().hooks();
-            if (n > beamLevels)
-                  beamLevels = n;
+            if (crl[idx]->type() != REST)
+                  beamLevels = qMax(beamLevels, crl[idx]->durationType().hooks());
             hasBeamSegment[idx] = false;
             }
 
@@ -1691,6 +1690,9 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
 
             for (int idx = 0; idx < chordRests; ++idx) {
                   ChordRest* cr = crl[idx];
+                  if (cr->type() == REST)
+                        continue;
+
                   bool b32 = (beamLevel >= 1) && (cr->beamMode() == BEAM_BEGIN32);
                   bool b64 = (beamLevel >= 2) && (cr->beamMode() == BEAM_BEGIN64);
 
