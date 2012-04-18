@@ -294,7 +294,7 @@ Element::~Element()
                               qDebug("======~Element: %p still in selection! generated %d\n",
                                  this, generated());
 //                        if (debugMode)
-                              abort();
+//                              abort();
                         score()->deselect(this);
                         }
                   }

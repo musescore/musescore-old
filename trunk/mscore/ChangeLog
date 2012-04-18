@@ -1,3 +1,5 @@
+18.4 (ws)
+      - fix #16097: Opening MXL causes crash
 17.4 (ws)
       - feature #15062: Part export (patch from emeraldimp)
       - fix #15154: Style Hrd/Ftr Nums "show first" not checked, 1st page > 1:
