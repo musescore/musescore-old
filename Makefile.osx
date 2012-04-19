@@ -40,7 +40,11 @@ release:
 	xcodebuild -project mscore.xcodeproj -configuration Release -target ALL_BUILD;                            \
 
 
-debug:
+debug: xcode
+	cd build;                                  \
+    xcodebuild -project mscore.xcodeproj -configuration Debug -target ALL_BUILD;                            \
+
+xcode:
 	if test ! -d build;                              \
     then                                          \
           mkdir build;              \
@@ -48,8 +52,8 @@ debug:
     cd build;                                  \
     cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}" -DCMAKE_BUILD_TYPE=DEBUG \
           ../mscore -G Xcode;                         \
-    xcodebuild -project mscore.xcodeproj -target lrelease;                             \
-    xcodebuild -project mscore.xcodeproj -configuration Debug -target ALL_BUILD;                            \
+    xcodebuild -project mscore.xcodeproj -target lrelease; 
+
 
 #
 # clean out of source build

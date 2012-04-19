@@ -18,7 +18,7 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-# set (CMAKE_CXX_COMPILER   clang++)
+set (CMAKE_CXX_COMPILER   clang++)
 
 project(mscore)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.0)
@@ -70,11 +70,11 @@ if (APPLE)
       # Flash is required for displaying the videos of MuseScore-Connect.
       # See http://qt.gitorious.org/qt/pages/Qt470KnownIssues
       # Since 10.6+ only runs on intel, just set it to i386.
-      set(CMAKE_OSX_ARCHITECTURES i386)
+      set(CMAKE_OSX_ARCHITECTURES x86_64)
 
       # Adjust and uncomment this variable, if you target a different version
       # of MacOSX.
-      # set(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.6.sdk)
+      set(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.6.sdk)
 
       # Building against the Binary-Package of Qt might require to uncomment
       # and possibly adjust the following path, because the QtUiTools are not
@@ -312,7 +312,11 @@ if (CMAKE_BUILD_TYPE STREQUAL "DEBUG")
       if (MINGW)
             set(FLAGS -DQT_DEBUG -DQT_DLL)
       else (MINGW)
-            set (FLAGS -DQT_DEBUG)
+      		if(APPLE)
+            	set (FLAGS -O0 -DQT_DEBUG)
+            else(APPLE)
+            	set (FLAGS -DQT_DEBUG)
+            endif(APPLE)
       endif (MINGW)
 else (CMAKE_BUILD_TYPE STREQUAL "DEBUG")
       if (MINGW)
