@@ -74,7 +74,7 @@ if (APPLE)
 
       # Adjust and uncomment this variable, if you target a different version
       # of MacOSX.
-      set(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.6.sdk)
+      # set(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.6.sdk)
 
       # Building against the Binary-Package of Qt might require to uncomment
       # and possibly adjust the following path, because the QtUiTools are not
