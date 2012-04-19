@@ -85,7 +85,6 @@
           <text>Slant + Stem len</text>
           </Text>
         <Text>
-          <selected>1</selected>
           <style>Title</style>
           <text>Beam Test-C</text>
           </Text>
@@ -101,13 +100,8 @@
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Beam id="1">
-          <StemDirection>up</StemDirection>
-          <Fragment>
-            <y1>0</y1>
-            <y2>0</y2>
-            </Fragment>
-          <l1>0</l1>
-          <l2>0</l2>
+          <l1>8</l1>
+          <l2>8</l2>
           </Beam>
         <Chord>
           <selected>1</selected>
@@ -127,13 +121,8 @@
             </Note>
           </Chord>
         <Beam id="2">
-          <StemDirection>down</StemDirection>
-          <Fragment>
-            <y1>0</y1>
-            <y2>0</y2>
-            </Fragment>
-          <l1>0</l1>
-          <l2>0</l2>
+          <l1>17</l1>
+          <l2>17</l2>
           </Beam>
         <Chord>
           <BeamMode>begin</BeamMode>
@@ -153,13 +142,8 @@
             </Note>
           </Chord>
         <Beam id="3">
-          <StemDirection>up</StemDirection>
-          <Fragment>
-            <y1>0</y1>
-            <y2>0</y2>
-            </Fragment>
-          <l1>0</l1>
-          <l2>0</l2>
+          <l1>17</l1>
+          <l2>17</l2>
           </Beam>
         <Chord>
           <selected>1</selected>
@@ -199,13 +183,8 @@
         </Measure>
       <Measure number="3">
         <Beam id="4">
-          <StemDirection>up</StemDirection>
-          <Fragment>
-            <y1>0</y1>
-            <y2>0</y2>
-            </Fragment>
-          <l1>0</l1>
-          <l2>0</l2>
+          <l1>8</l1>
+          <l2>7</l2>
           </Beam>
         <Chord>
           <selected>1</selected>
@@ -300,13 +279,8 @@
           <pause>3</pause>
           </LayoutBreak>
         <Beam id="8">
-          <StemDirection>up</StemDirection>
-          <Fragment>
-            <y1>0</y1>
-            <y2>0</y2>
-            </Fragment>
-          <l1>0</l1>
-          <l2>0</l2>
+          <l1>4</l1>
+          <l2>-1</l2>
           </Beam>
         <Chord>
           <BeamMode>begin</BeamMode>
@@ -326,13 +300,8 @@
             </Note>
           </Chord>
         <Beam id="9">
-          <StemDirection>up</StemDirection>
-          <Fragment>
-            <y1>0</y1>
-            <y2>0</y2>
-            </Fragment>
           <l1>0</l1>
-          <l2>0</l2>
+          <l2>-4</l2>
           </Beam>
         <Chord>
           <BeamMode>begin</BeamMode>
@@ -352,13 +321,8 @@
             </Note>
           </Chord>
         <Beam id="10">
-          <StemDirection>up</StemDirection>
-          <Fragment>
-            <y1>0</y1>
-            <y2>0</y2>
-            </Fragment>
           <l1>0</l1>
-          <l2>0</l2>
+          <l2>-5</l2>
           </Beam>
         <Chord>
           <BeamMode>begin</BeamMode>
@@ -388,13 +352,8 @@
         </Measure>
       <Measure number="5">
         <Beam id="11">
-          <StemDirection>up</StemDirection>
-          <Fragment>
-            <y1>0</y1>
-            <y2>0</y2>
-            </Fragment>
-          <l1>0</l1>
-          <l2>0</l2>
+          <l1>8</l1>
+          <l2>9</l2>
           </Beam>
         <Chord>
           <durationType>eighth</durationType>
@@ -527,13 +486,8 @@
         </Measure>
       <Measure number="8">
         <Beam id="16">
-          <StemDirection>up</StemDirection>
-          <Fragment>
-            <y1>0</y1>
-            <y2>0</y2>
-            </Fragment>
-          <l1>0</l1>
-          <l2>0</l2>
+          <l1>19</l1>
+          <l2>20</l2>
           </Beam>
         <Chord>
           <durationType>eighth</durationType>
@@ -552,13 +506,8 @@
             </Note>
           </Chord>
         <Beam id="17">
-          <StemDirection>up</StemDirection>
-          <Fragment>
-            <y1>0</y1>
-            <y2>0</y2>
-            </Fragment>
-          <l1>0</l1>
-          <l2>0</l2>
+          <l1>19</l1>
+          <l2>21</l2>
           </Beam>
         <Chord>
           <BeamMode>begin</BeamMode>
@@ -699,13 +648,8 @@
         </Measure>
       <Measure number="10">
         <Beam id="23">
-          <StemDirection>down</StemDirection>
-          <Fragment>
-            <y1>0</y1>
-            <y2>0</y2>
-            </Fragment>
-          <l1>0</l1>
-          <l2>0</l2>
+          <l1>7</l1>
+          <l2>8</l2>
           </Beam>
         <Chord>
           <durationType>eighth</durationType>
@@ -907,13 +851,8 @@
             </Note>
           </Chord>
         <Beam id="32">
-          <StemDirection>down</StemDirection>
-          <Fragment>
-            <y1>0</y1>
-            <y2>0</y2>
-            </Fragment>
-          <l1>0</l1>
-          <l2>0</l2>
+          <l1>-5</l1>
+          <l2>-1</l2>
           </Beam>
         <Chord>
           <durationType>eighth</durationType>
@@ -932,12 +871,7 @@
             </Note>
           </Chord>
         <Beam id="33">
-          <StemDirection>down</StemDirection>
-          <Fragment>
-            <y1>0</y1>
-            <y2>0</y2>
-            </Fragment>
-          <l1>0</l1>
+          <l1>-5</l1>
           <l2>0</l2>
           </Beam>
         <Chord>
@@ -964,12 +898,7 @@
         </Measure>
       <Measure number="13">
         <Beam id="34">
-          <StemDirection>down</StemDirection>
-          <Fragment>
-            <y1>0</y1>
-            <y2>0</y2>
-            </Fragment>
-          <l1>0</l1>
+          <l1>-5</l1>
           <l2>0</l2>
           </Beam>
         <Chord>
