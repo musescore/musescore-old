@@ -1233,7 +1233,7 @@ static int adjust(qreal _spatium4, int slant, const QList<Chord*>& cl)
                   const Chord* c3 = cl[i];
                   QPointF p3(c3->stemPos());
                   qreal yUp   = p1.y() + (p3.x() - p1.x()) * slope;
-                  int l       = lrint((yUp - p3.y()) / _spatium4 + .5);
+                  int l       = lrint((yUp - p3.y()) / _spatium4);
                   ml          = qMax(ml, l);
                   }
             }
@@ -1242,7 +1242,7 @@ static int adjust(qreal _spatium4, int slant, const QList<Chord*>& cl)
                   const Chord* c3 = cl[i];
                   QPointF p3(c3->stemPos());
                   qreal yUp   = p1.y() + (p3.x() - p1.x()) * slope;
-                  int l       = lrint((p3.y() - yUp) / _spatium4 + .5);
+                  int l       = lrint((p3.y() - yUp) / _spatium4);
                   ml          = qMax(ml, l);
                   }
             }
@@ -1463,16 +1463,14 @@ void Beam::computeStemLen(const QList<Chord*>& cl, qreal& py1, int beamLevels)
                         for (i = minS; i <= maxS; ++i) {
                               int slant = (l2 > l1) ? i : -i;
                               int lll1  = qMin(rll1, ll1 - adjust(_spatium4, slant, cl));
-                              int e1  = lll1 & 3;
-                              int ll2 = lll1 + slant;
-                              int e2  = ll2 & 3;
+                              int ll2   = lll1 + slant;
                               static bool ba[4][4] = {
                                     { true,  true,  false, false  },
                                     { true,  true,  false, false },
                                     { false, false, false, false },
                                     { false, false, false, false }
                                     };
-                              if (ba[e1][e2]) {
+                              if (ba[lll1 & 3][ll2 & 3]) {
                                     ll1 = lll1;
                                     break;
                                     }
@@ -1488,37 +1486,35 @@ void Beam::computeStemLen(const QList<Chord*>& cl, qreal& py1, int beamLevels)
                         }
                   }
             else {
-                  ll1  = 12 + l1;
-                  int rll1 = ll1;
+                  ll1       = 12 + l1;
+                  int rll1  = ll1;
+                  bool down = l2 > l1;
                   if ((l1 < -4) && (l2 < -4)) {
                         // extend to middle line, slant is always 0 <= 1
                         minS = zeroSlant ? 0 : 1;
                         maxS = minS;
-                        rll1 = (zeroSlant || (l2 > l1)) ? 7 : 8;
+                        rll1 = (zeroSlant || down) ? 7 : 8;
                         }
                   for (int n = 0;;ll1++) {
                         int i;
                         for (i = minS; i <= maxS; ++i) {
-                              int slant = (l2 > l1) ? i : -i;
+                              int slant = down ? i : -i;
                               int lll1  = qMax(rll1, ll1 + adjust(_spatium4, slant, cl));
-                              int e1    = lll1 & 3;
                               int ll2   = lll1 + slant;
-                              int e2    = ll2 & 3;
                               static bool ba[4][4] = {
                                     { true,  false, false, true  },
                                     { false, false, false, false },
                                     { false, false, false, false },
                                     { true,  false, false, true }
                                     };
-                              if (ba[e1][e2]) {
+                              if (ba[lll1 & 3][ll2 & 3]) {
                                     ll1 = lll1;
+                                    bm.s = slant;
                                     break;
                                     }
                               }
-                        if (i <= maxS) {
-                              bm.s = l2 > l1 ? i : -i;
+                        if (i <= maxS)
                               break;
-                              }
                         if (++n > 4) {
                               printf("beam not found 2\n");
                               break;
