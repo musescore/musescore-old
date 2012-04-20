@@ -264,6 +264,22 @@ QPointF Chord::stemPos() const
       }
 
 //---------------------------------------------------------
+//   stemPosBeam
+//    return stem position of note on beam side
+//    return canvas coordinates
+//---------------------------------------------------------
+
+QPointF Chord::stemPosBeam() const
+      {
+      if (staff() && staff()->useTablature()) {
+            qreal sp = spatium();
+            return QPointF(STAFFTYPE_TAB_DEFAULTSTEMPOSX*sp, STAFFTYPE_TAB_DEFAULTSTEMPOSY*sp) +
+               pagePos();
+            }
+      return (_up ? upNote() : downNote())->stemPos(_up);
+      }
+
+//---------------------------------------------------------
 //   setSelected
 //---------------------------------------------------------
 
