@@ -35,9 +35,10 @@ class Beam : public Element {
       QList<QLineF*> beamSegments;
       Direction _direction;
       bool _up;
-      bool _distribute;       // equal spacing of elements
-      qreal _grow1;           // define "feather" beams
+      bool _distribute;                   // equal spacing of elements
+      qreal _grow1;                       // define "feather" beams
       qreal _grow2;
+      qreal _beamDist;
 
       QList<BeamFragment*> fragments;     // beam splits across systems
 

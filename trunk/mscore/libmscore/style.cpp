@@ -445,7 +445,7 @@ StyleData::StyleData()
             StyleVal(ST_accidentalDistance,Spatium(0.22)),
             StyleVal(ST_accidentalNoteDistance,Spatium(0.22)),
             StyleVal(ST_beamWidth, Spatium(0.5)),           // was 0.48
-            StyleVal(ST_beamDistance, qreal(0.5)),
+            StyleVal(ST_beamDistance, qreal(0.5)),          // 0.25sp
             StyleVal(ST_beamMinLen,Spatium(1.316178)),      // exactly note head width
             StyleVal(ST_beamMinSlope, qreal(0.05)),
 
