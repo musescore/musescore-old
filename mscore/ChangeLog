@@ -1,3 +1,6 @@
+21.4 (lv)
+      - #15795: MusicXML Import and export of tablature
+        -> import partially implemented
 18.4 (ws)
       - fix #16094: Acciaccatura stroke appears offset
       - fix #16097: Opening MXL causes crash

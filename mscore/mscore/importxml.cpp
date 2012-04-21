@@ -86,6 +86,7 @@
 #include "libmscore/figuredbass.h"
 #include "libmscore/fret.h"
 #include "libmscore/qzipreader_p.h"
+#include "libmscore/stafftype.h"
 
 //---------------------------------------------------------
 //   local defines for debug output
@@ -2918,6 +2919,37 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
       }
 
 //---------------------------------------------------------
+//   xmlStaffDetails
+//---------------------------------------------------------
+
+// TODO: for tablature staff, read string description into Tablature class
+// and store in instrument
+
+static void xmlStaffDetails(Score* score, int staff, QDomElement e)
+      {
+      int number  = e.attribute(QString("number"), "-1").toInt();
+      int staffIdx = staff;
+      if (number != -1)
+            staffIdx += number - 1;
+      int stafflines = 5;
+      for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+            if (ee.tagName() == "staff-lines")
+                  stafflines = ee.text().toInt();
+            else
+                  domNotImplemented(ee);
+            }
+
+      if (number == -1) {
+            int staves = score->part(staff)->nstaves();
+            for (int i = 0; i < staves; ++i) {
+                  score->staff(staffIdx+i)->setLines(stafflines);
+                  }
+            }
+      else
+            score->staff(staffIdx)->setLines(stafflines);
+      }
+
+//---------------------------------------------------------
 //   xmlAttributes
 //---------------------------------------------------------
 
@@ -3028,34 +3060,18 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                               domError(ee);
                         }
                   }
-            else if (e.tagName() == "clef")
+            else if (e.tagName() == "clef") {
                   // TODO: for tablature clef, set staff to tab
+                  // see libmscore/staff.cpp Staff::useTablature()
                   // TBD: same for percussion ?
-                  xmlClef(e, staff, measure);
+                  int st = xmlClef(e, staff, measure);
+                  if (st == TAB_STAFF_TYPE)
+                        score->staff(0 /* TBD staffIdx ? */)->setStaffType(score->staffTypes()[TAB_STAFF_TYPE]);
+                  }
             else if (e.tagName() == "staves")
                   ;  // ignore, already handled
-            else if (e.tagName() == "staff-details") {
-                  int number  = e.attribute(QString("number"), "-1").toInt();
-                  int staffIdx = staff;
-                  if (number != -1)
-                        staffIdx += number - 1;
-                  int stafflines = 5;
-                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        if (ee.tagName() == "staff-lines")
-                              stafflines = ee.text().toInt();
-                        else
-                              domNotImplemented(ee);
-                        }
-
-                  if (number == -1) {
-                        int staves = score->part(staff)->nstaves();
-                        for (int i = 0; i < staves; ++i) {
-                              score->staff(staffIdx+i)->setLines(stafflines);
-                              }
-                        }else {
-                        score->staff(staffIdx)->setLines(stafflines);
-                        }
-                  }
+            else if (e.tagName() == "staff-details")
+                  xmlStaffDetails(score, staff, e);
             else if (e.tagName() == "instruments")
                   domNotImplemented(e);
             else if (e.tagName() == "transpose") {
@@ -4068,12 +4084,18 @@ void MusicXml::xmlNotations(Note* note, ChordRest* cr, int trk, int ticks, QDomE
                               continue;
                         else if (eee.tagName() == "fingering")
                               addTextToNote(eee.text(), TEXT_STYLE_FINGERING, score, note);
-                        else if (eee.tagName() == "fret")
-                              domNotImplemented(eee);
+                        else if (eee.tagName() == "fret") {
+                              if (note->staff()->useTablature())
+                                    note->setFret(eee.text().toInt());
+                              }
                         else if (eee.tagName() == "pluck")
                               addTextToNote(eee.text(), TEXT_STYLE_FINGERING, score, note);
-                        else if (eee.tagName() == "string")
-                              addTextToNote(eee.text(), TEXT_STYLE_STRING_NUMBER, score, note);
+                        else if (eee.tagName() == "string") {
+                              if (note->staff()->useTablature())
+                                    note->setString(eee.text().toInt() - 1);
+                              else
+                                    addTextToNote(eee.text(), TEXT_STYLE_STRING_NUMBER, score, note);
+                              }
                         else if (eee.tagName() == "pull-off")
                               domNotImplemented(eee);
                         else
@@ -4917,9 +4939,10 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure, int staff)
 //   xmlClef
 //---------------------------------------------------------
 
-void MusicXml::xmlClef(QDomElement e, int staffIdx, Measure* measure)
+int MusicXml::xmlClef(QDomElement e, int staffIdx, Measure* measure)
       {
       ClefType clef   = CLEF_G;
+      int res = PITCHED_STAFF_TYPE;
       int clefno = e.attribute(QString("number"), "1").toInt() - 1;
       QString c;
       int i = 0;
@@ -4985,10 +5008,14 @@ void MusicXml::xmlClef(QDomElement e, int staffIdx, Measure* measure)
             else if (line == 1)
                   clef = CLEF_C1;
             }
-      else if (c == "percussion")
+      else if (c == "percussion") {
             clef = CLEF_PERC;
-      else if (c == "TAB")
+            res = PERCUSSION_STAFF_TYPE;
+            }
+      else if (c == "TAB") {
             clef = CLEF_TAB2;
+            res = TAB_STAFF_TYPE;
+            }
       else
             qDebug("ImportMusicXML: unknown clef <sign=%s line=%d oct ch=%d>", qPrintable(c), line, i);
       // note: also generate symbol for tick 0
@@ -4998,4 +5025,5 @@ void MusicXml::xmlClef(QDomElement e, int staffIdx, Measure* measure)
       clefs->setTrack((staffIdx + clefno) * VOICES);
       Segment* s = measure->getSegment(clefs, tick);
       s->add(clefs);
+      return res;
       }
