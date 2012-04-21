@@ -48,28 +48,28 @@
           <staff-tuning line="1">
             <tuning-step>E</tuning-step>
             <tuning-octave>2</tuning-octave>
-          </staff-tuning>
+            </staff-tuning>
           <staff-tuning line="2">
             <tuning-step>A</tuning-step>
             <tuning-octave>2</tuning-octave>
-          </staff-tuning>
+            </staff-tuning>
           <staff-tuning line="3">
             <tuning-step>D</tuning-step>
             <tuning-octave>3</tuning-octave>
-          </staff-tuning>
+            </staff-tuning>
           <staff-tuning line="4">
             <tuning-step>G</tuning-step>
             <tuning-octave>3</tuning-octave>
-          </staff-tuning>
+            </staff-tuning>
           <staff-tuning line="5">
             <tuning-step>B</tuning-step>
             <tuning-octave>3</tuning-octave>
-          </staff-tuning>
+            </staff-tuning>
           <staff-tuning line="6">
             <tuning-step>E</tuning-step>
             <tuning-octave>4</tuning-octave>
-          </staff-tuning>
-        </staff-details>
+            </staff-tuning>
+          </staff-details>
         </attributes>
       <note>
         <pitch>
@@ -84,8 +84,8 @@
           <technical>
             <string>6</string>
             <fret>0</fret>
-          </technical>
-        </notations>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -100,8 +100,8 @@
           <technical>
             <string>5</string>
             <fret>0</fret>
-          </technical>
-        </notations>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -116,8 +116,8 @@
           <technical>
             <string>4</string>
             <fret>0</fret>
-          </technical>
-        </notations>
+            </technical>
+          </notations>
         </note>
       </measure>
     <measure number="2">
@@ -134,8 +134,8 @@
           <technical>
             <string>3</string>
             <fret>0</fret>
-          </technical>
-        </notations>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -145,13 +145,13 @@
         <duration>1</duration>
         <voice>1</voice>
         <type>quarter</type>
-        <stem>down</stem>
+        <stem>up</stem>
         <notations>
           <technical>
             <string>2</string>
             <fret>0</fret>
-          </technical>
-        </notations>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -161,13 +161,13 @@
         <duration>1</duration>
         <voice>1</voice>
         <type>quarter</type>
-        <stem>down</stem>
+        <stem>up</stem>
         <notations>
           <technical>
             <string>1</string>
             <fret>0</fret>
-          </technical>
-        </notations>
+            </technical>
+          </notations>
         </note>
       <barline location="right">
         <bar-style>light-heavy</bar-style>

@@ -257,7 +257,7 @@ class MusicXml {
       void xmlNotations(Note* note, ChordRest* cr, int trk, int ticks, QDomElement node);
       void xmlNote(Measure*, int stave, QDomElement node);
       void xmlHarmony(QDomElement node, int tick, Measure* m, int staff);
-      void xmlClef(QDomElement, int staffIdx, Measure*);
+      int xmlClef(QDomElement, int staffIdx, Measure*);
       void initVoiceMapperAndMapVoices(QDomElement e);
 
    public:
