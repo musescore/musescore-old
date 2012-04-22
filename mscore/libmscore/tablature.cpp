@@ -1,7 +1,7 @@
 //=============================================================================
 //  MuseScore
 //  Music Composition & Notation
-//  $Id:$
+//  $Id$
 //
 //  Copyright (C) 2002-2011 Werner Schweer
 //
@@ -241,3 +241,100 @@ void Tablature::fretChord(Chord * chord) const
       bFretting = false;
       }
 
+//---------------------------------------------------------
+//   MusicXMLStepAltOct2Pitch
+//---------------------------------------------------------
+
+/**
+ Convert MusicXML \a step / \a alter / \a octave to midi pitch.
+ Note: similar to (part of) xmlSetPitch in mscore/importxml.cpp.
+ TODO: combine ?
+ */
+
+static int MusicXMLStepAltOct2Pitch(char step, int alter, int octave)
+      {
+      int istep = step - 'A';
+      //                       a  b   c  d  e  f  g
+      static int table[7]  = { 9, 11, 0, 2, 4, 5, 7 };
+      if (istep < 0 || istep > 6) {
+            qDebug("MusicXMLStepAltOct2Pitch: illegal step %d, <%c>", istep, step);
+            return -1;
+            }
+      int pitch = table[istep] + alter + (octave+1) * 12;
+
+      if (pitch < 0)
+            pitch = -1;
+      if (pitch > 127)
+            pitch = -1;
+
+      return pitch;
+      }
+
+//---------------------------------------------------------
+//   Read MusicXML
+//
+// Set the FretDiagram state based on the MusicXML <figure> node de.
+//---------------------------------------------------------
+
+void Tablature::readMusicXML(const QDomElement& de)
+      {
+      qDebug("Tablature::readMusicXML");
+      _frets = 25;
+
+      for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            const QString& tag(e.tagName());
+            int val = e.text().toInt();
+            if (tag == "staff-lines") {
+                  if (val > 0) {
+                        // resize the string table and init with zeroes
+                        stringTable = QVector<int>(val).toList();
+                        for (int i = 0; i < stringTable.size(); ++i)
+                              qDebug("Tablature::readMusicXML stringTable[%d] = %d", i, stringTable.at(i));
+                        }
+                  else
+                        qDebug("Tablature::readMusicXML: illegal staff-lines %d", val);
+                  }
+            else if (tag == "staff-tuning") {
+                  int     line   = e.attribute("line").toInt();
+                  QString step;
+                  int     alter  = 0;
+                  int     octave = 0;
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        const QString& tag(ee.tagName());
+                        int val = ee.text().toInt();
+                        if (tag == "tuning-alter")
+                              alter = val;
+                        else if (tag == "tuning-octave")
+                              octave = val;
+                        else if (tag == "tuning-step")
+                              step = ee.text();
+                        else
+                              domError(ee);
+                        }
+                  qDebug("Tablature::readMusicXML string %d step/alter/oct %s/%d/%d",
+                         line, qPrintable(step), alter, octave);
+                  if (0 < line && line <= stringTable.size()) {
+                        int pitch = MusicXMLStepAltOct2Pitch(step[0].toLatin1(), alter, octave);
+                        if (pitch >= 0)
+                              stringTable[line - 1] = pitch;
+                        else
+                              qDebug("Tablature::readMusicXML invalid string %d tuning step/alter/oct %s/%d/%d",
+                                     line, qPrintable(step), alter, octave);
+                        }
+                  }
+            else if (tag == "capo")
+                  ; // not supported: silently ignored
+            else
+                  ; // others silently ignored
+            }
+      for (int i = 0; i < stringTable.size(); ++i)
+            qDebug("Tablature::readMusicXML stringTable[%d] = %d", i, stringTable.at(i));
+      }
+
+//---------------------------------------------------------
+//   Write MusicXML
+//---------------------------------------------------------
+
+void Tablature::writeMusicXML(Xml& xml) const
+      {
+      }

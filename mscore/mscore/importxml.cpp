@@ -87,6 +87,7 @@
 #include "libmscore/fret.h"
 #include "libmscore/qzipreader_p.h"
 #include "libmscore/stafftype.h"
+#include "libmscore/tablature.h"
 
 //---------------------------------------------------------
 //   local defines for debug output
@@ -112,7 +113,7 @@ static void xmlSetPitch(Note* n, char step, int alter, int octave, Ottava* ottav
       //                       a  b   c  d  e  f  g
       static int table[7]  = { 9, 11, 0, 2, 4, 5, 7 };
       if (istep < 0 || istep > 6) {
-            qDebug("xmlSetPitch: illegal pitch %d, <%c>", istep, step);
+            qDebug("xmlSetPitch: illegal step %d, <%c>", istep, step);
             return;
             }
       int pitch = table[istep] + alter + (octave+1) * 12;
@@ -2922,10 +2923,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
 //   xmlStaffDetails
 //---------------------------------------------------------
 
-// TODO: for tablature staff, read string description into Tablature class
-// and store in instrument
-
-static void xmlStaffDetails(Score* score, int staff, QDomElement e)
+static void xmlStaffDetails(Score* score, int staff, Tablature* t, QDomElement e)
       {
       int number  = e.attribute(QString("number"), "-1").toInt();
       int staffIdx = staff;
@@ -2947,6 +2945,12 @@ static void xmlStaffDetails(Score* score, int staff, QDomElement e)
             }
       else
             score->staff(staffIdx)->setLines(stafflines);
+
+      if (t) {
+            t->readMusicXML(e);
+            Instrument* i = score->part(staff)->instr();
+            i->setTablature(t);
+            }
       }
 
 //---------------------------------------------------------
@@ -3070,8 +3074,12 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                   }
             else if (e.tagName() == "staves")
                   ;  // ignore, already handled
-            else if (e.tagName() == "staff-details")
-                  xmlStaffDetails(score, staff, e);
+            else if (e.tagName() == "staff-details") {
+                  Tablature* t;
+                  if (score->staff(0 /* TBD staffIdx ? */)->useTablature())
+                        t = new Tablature;
+                  xmlStaffDetails(score, staff, t, e);
+                  }
             else if (e.tagName() == "instruments")
                   domNotImplemented(e);
             else if (e.tagName() == "transpose") {

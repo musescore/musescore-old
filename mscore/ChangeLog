@@ -1,3 +1,6 @@
+22.4 (lv)
+      - #15795: MusicXML Import and export of tablature
+        -> staff tuning import implemented
 21.4 (lv)
       - #15795: MusicXML Import and export of tablature
         -> import partially implemented
