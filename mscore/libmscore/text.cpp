@@ -204,9 +204,9 @@ void Text::layout()
                   w = parent()->width();
                   if (parent()->type() == HBOX || parent()->type() == VBOX || parent()->type() == TBOX) {
                         Box* box = static_cast<Box*>(parent());
-                        x += box->leftMargin() * DPMM;
-                        y += box->topMargin() * DPMM;
-                        w = box->width()   - ((box->leftMargin() + box->rightMargin()) * DPMM);
+                        x += box->leftMargin() * MScore::DPMM;
+                        y += box->topMargin() * MScore::DPMM;
+                        w = box->width()   - ((box->leftMargin() + box->rightMargin()) * MScore::DPMM);
                         }
                   }
 
@@ -256,10 +256,10 @@ QRectF Text::pageRectangle() const
       if (parent() && (parent()->type() == HBOX || parent()->type() == VBOX || parent()->type() == TBOX)) {
             QRectF r = parent()->abbox();
             Box* box = static_cast<Box*>(parent());
-            qreal x = r.x() + box->leftMargin() * DPMM;
-            qreal y = r.y() + box->topMargin() * DPMM;
-            qreal h = r.height() - (box->topMargin() + box->bottomMargin()) * DPMM;
-            qreal w = r.width()  - (box->leftMargin() + box->rightMargin()) * DPMM;
+            qreal x = r.x() + box->leftMargin() * MScore::DPMM;
+            qreal y = r.y() + box->topMargin() * MScore::DPMM;
+            qreal h = r.height() - (box->topMargin() + box->bottomMargin()) * MScore::DPMM;
+            qreal w = r.width()  - (box->leftMargin() + box->rightMargin()) * MScore::DPMM;
 
             // QSizeF ps = _doc->pageSize();
             // return QRectF(x, y, ps.width(), ps.height());
@@ -520,7 +520,7 @@ void Text::startEdit(MuseScoreView*, const QPointF& p)
 
 bool Text::edit(MuseScoreView*, int /*grip*/, int key, Qt::KeyboardModifiers modifiers, const QString& s)
       {
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("Text::edit(%p) key 0x%x mod 0x%x\n", this, key, int(modifiers));
       if (!_editMode || !_cursor) {
             qDebug("Text::edit(%p): not in edit mode: %d %p\n", this, _editMode, _cursor);
@@ -883,7 +883,7 @@ bool Text::mousePress(const QPointF& p, QMouseEvent* ev)
 void Text::paste()
       {
       QString txt = QApplication::clipboard()->text(QClipboard::Clipboard);
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("Text::paste() <%s>\n", qPrintable(txt));
       _cursor->insertText(txt);
       layoutEdit();

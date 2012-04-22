@@ -448,7 +448,7 @@ void Score::updateRepeatList(bool expandRepeats)
             }
       else
             repeatList()->unwind();
-      if (debugMode)
+      if (MScore::debugMode)
             repeatList()->dump();
       setPlaylistDirty(true);
       }

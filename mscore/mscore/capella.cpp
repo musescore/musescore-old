@@ -1473,7 +1473,7 @@ static void processBasicDrawObj(QList<BasicDrawObj*> objects, Segment* s, int tr
 
                         text->setText(st->text());
                         QPointF p(st->pos());
-                        p = p / 32.0 * DPMM;
+                        p = p / 32.0 * MScore::DPMM;
                         // text->setUserOff(st->pos());
                         text->setUserOff(p);
 qDebug("setText %s (%f %f)(%f %f) <%s>\n",
@@ -1928,7 +1928,7 @@ void MuseScore::convertCapella(Score* score, Capella* cap)
 qDebug("==================convert-capella\n");
 
       score->style()->set(ST_measureSpacing, 1.0);
-      score->setSpatium(cap->normalLineDist * DPMM);
+      score->setSpatium(cap->normalLineDist * MScore::DPMM);
       score->style()->set(ST_smallStaffMag, cap->smallLineDist / cap->normalLineDist);
       score->style()->set(ST_systemDistance, Spatium(8));
 //      score->style()->set(ST_hideEmptyStaves, true);

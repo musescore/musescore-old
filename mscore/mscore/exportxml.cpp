@@ -276,7 +276,7 @@ public:
       ExportMusicXml(Score* s)
             {
             score = s; tick = 0; div = 1; tenths = 40;
-            millimeters = score->spatium() * tenths / (10 * DPMM);
+            millimeters = score->spatium() * tenths / (10 * MScore::DPMM);
             }
       void write(QIODevice* dev);
       void credits(Xml& xml);
@@ -870,7 +870,7 @@ void ExportMusicXml::calcDivisions()
 //   defaults
 //---------------------------------------------------------
 
-// _spatium = DPMM * (millimeter * 10.0 / tenths);
+// _spatium = MScore::DPMM * (millimeter * 10.0 / tenths);
 
 static void defaults(Xml& xml, Score* s, double& millimeters, const int& tenths)
       {
@@ -3547,7 +3547,7 @@ void ExportMusicXml::write(QIODevice* dev)
       if (!score->metaTag("copyright").isEmpty())
             xml.tag("rights", score->metaTag("copyright"));
       xml.stag("encoding");
-      if (debugMode) {
+      if (MScore::debugMode) {
             xml.tag("software", QString("MuseScore 0.7.0"));
             xml.tag("encoding-date", QString("2007-09-10"));
             }
@@ -3699,7 +3699,7 @@ void ExportMusicXml::write(QIODevice* dev)
                   else
                         measureTag += QString("\"%1\"").arg(measureNo++);
                   if (preferences.musicxmlExportLayout)
-                        measureTag += QString(" width=\"%1\"").arg(QString::number(m->bbox().width() / DPMM / millimeters * tenths,'f',2));
+                        measureTag += QString(" width=\"%1\"").arg(QString::number(m->bbox().width() / MScore::DPMM / millimeters * tenths,'f',2));
                   xml.stag(measureTag);
 
                   // Handle the <print> element.
@@ -4112,7 +4112,7 @@ bool MuseScore::saveMxl(Score* score, const QString& name)
 
       QFileInfo fi(name);
       QDateTime dt;
-      if (debugMode)
+      if (MScore::debugMode)
             dt = QDateTime(QDate(2007, 9, 10), QTime(12, 0));
       else
             dt = QDateTime::currentDateTime();
@@ -4159,7 +4159,7 @@ double ExportMusicXml::getTenthsFromInches(double inches)
 
 double ExportMusicXml::getTenthsFromDots(double dots)
       {
-      return dots / DPMM / millimeters * tenths;
+      return dots / MScore::DPMM / millimeters * tenths;
       }
 
 

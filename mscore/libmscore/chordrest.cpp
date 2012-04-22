@@ -236,11 +236,11 @@ bool ChordRest::readProperties(const QDomElement& e, QList<Tuplet*>* tuplets, QL
             add(atr);
             }
       else if (tag == "leadingSpace") {
-//            if (debugMode)
+//            if (MScore::debugMode)
                   qDebug("ChordRest: leadingSpace obsolete"); // _extraLeadingSpace = Spatium(val.toDouble());
             }
       else if (tag == "trailingSpace") {
-//            if (debugMode)
+//            if (MScore::debugMode)
                   qDebug("ChordRest: trailingSpace obsolete"); // _extraTrailingSpace = Spatium(val.toDouble());
             }
       else if (tag == "Beam") {

@@ -29,7 +29,7 @@
 
 #include "libmscore/xml.h"
 
-extern bool debugMode;
+static bool debugMode = false;
 
 namespace FluidS {
 

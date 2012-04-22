@@ -931,7 +931,7 @@ void Score::cmdAddTie()
             Chord* chord  = note->chord();
             if (noteEntryMode()) {
                   if (_is.cr() == 0) {
-                        if (debugMode)
+                        if (MScore::debugMode)
                               qDebug("cmdAddTie: no pos");
                         expandVoice();
                         }
@@ -980,7 +980,7 @@ void Score::cmdAddTie()
                         break;
                   }
 /*            if (note2 == 0) {
-                  if (debugMode)
+                  if (MScore::debugMode)
                         qDebug("cmdAddTie: next note for tie not found");
                   continue;
                   }

@@ -187,22 +187,21 @@ class StaffTypeTablature : public StaffType {
       virtual bool isEqual(const StaffType&) const;
 
       // properties getters (some getters require updated metrics)
-      qreal durationBoxH()                { if(!_genDurations && !_slashStyle) return 0.0;
-                                            setDurationMetrics(); return _durationBoxH; }
-      qreal durationBoxY()                { if(!_genDurations && !_slashStyle) return 0.0;
-                                            setDurationMetrics(); return _durationBoxY + _durationFontUserY * DPI*SPATIUM20; }
-      const QFont&  durationFont()        { return _durationFont;     }
+      qreal durationBoxH();
+      qreal durationBoxY();
+
+      const QFont&  durationFont()             { return _durationFont;     }
       const QString durationFontName() const   { return _durationFontName; }
       qreal durationFontSize() const      { return _durationFontSize; }
       qreal durationFontUserY() const     { return _durationFontUserY;}
-      qreal durationFontYOffset()         { setDurationMetrics(); return _durationYOffset + _durationFontUserY * DPI*SPATIUM20; }
+      qreal durationFontYOffset()         { setDurationMetrics(); return _durationYOffset + _durationFontUserY * MScore::DPI*SPATIUM20; }
       qreal fretBoxH()                    { setFretMetrics(); return _fretBoxH; }
-      qreal fretBoxY()                    { setFretMetrics(); return _fretBoxY + _fretFontUserY * DPI*SPATIUM20; }
+      qreal fretBoxY()                    { setFretMetrics(); return _fretBoxY + _fretFontUserY * MScore::DPI*SPATIUM20; }
       const QFont&  fretFont()            { return _fretFont;         }
       const QString fretFontName() const  { return _fretFontName;     }
       qreal fretFontSize() const          { return _fretFontSize;     }
       qreal fretFontUserY() const         { return _fretFontUserY;    }
-      qreal fretFontYOffset()             { setFretMetrics(); return _fretYOffset + _fretFontUserY * DPI*SPATIUM20; }
+      qreal fretFontYOffset()             { setFretMetrics(); return _fretYOffset + _fretFontUserY * MScore::DPI*SPATIUM20; }
       bool  genDurations() const          { return _genDurations;     }
       bool  linesThrough() const          { return _linesThrough;     }
       bool  onLines() const               { return _onLines;          }

@@ -61,7 +61,7 @@ void Album::print()
       QPainter painter(&printer);
       painter.setRenderHint(QPainter::Antialiasing, true);
       painter.setRenderHint(QPainter::TextAntialiasing, true);
-      double mag = printer.logicalDpiX() / DPI;
+      double mag = printer.logicalDpiX() / MScore::DPI;
       painter.scale(mag, mag);
 
       int fromPage = printer.fromPage() - 1;

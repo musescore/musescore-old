@@ -1528,29 +1528,14 @@ void Beam::computeStemLen(const QList<Chord*>& cl, qreal& py1, int beamLevels)
             int ll1;
             if (_up) {
                   ll1 = l1 - 13 - adjust(_spatium4, slant, cl);
-                  if ((l1 > 24) && (l2 > 24)) {
-                        int lll = (slant >= 0) ? 9 : 13;
-                        ll1 = qMin(lll, ll1);
-                        }
-                  switch (ll1 & 3) {
-                        case 0: ll1 -= 3; break;      // straddle
-                        case 1: break;                // hang
-                        case 2: ll1 -= 1; break;
-                        case 3: ll1 -= 2; break;      // sit
-                        }
+                  ll1 = qMin(ll1, 5);
+                  static const int t[4] = { 3, 0, 1, 2 };
+                  ll1 += t[ll1 & 3];      // extend to sit on line
                   }
             else {
                   ll1 = 13 + l1 + adjust(_spatium4, slant, cl);
-                  if ((l1 < -7) && (l2 < -7)) {
-                        int lll = slant <= 0 ? 7 : 3;
-                        ll1 = qMax(lll, ll1);
-                        }
-                  switch (ll1 & 3) {
-                        case 0: ll1 += 3; break;      // straddle
-                        case 1: ll1 += 2; break;      // hang
-                        case 2: ll1 += 1; break;
-                        case 3: break;                // sit
-                        }
+                  ll1 = qMax(ll1, 11);
+                  ll1 += 3 - (ll1 & 3);   // extend to hang on line
                   }
             bm.s = slant;
             bm.l = ll1 - l1;
@@ -1559,30 +1544,15 @@ void Beam::computeStemLen(const QList<Chord*>& cl, qreal& py1, int beamLevels)
             int slant = zeroSlant ? 0 : (l2 > l1 ? 4 : -4);
             int ll1;
             if (_up) {
-                  ll1 = l1 - 15 - adjust(_spatium4, slant, cl);
-                  if ((l1 > 24) && (l2 > 24)) {
-                        int lll = (slant >= 0) ? 9 : 13;
-                        ll1 = qMin(lll, ll1);
-                        }
-                  switch (ll1 & 3) {
-                        case 0: ll1 -= 3; break;      // straddle
-                        case 1: break;                // hang
-                        case 2: ll1 -= 1; break;
-                        case 3: ll1 -= 2; break;      // sit
-                        }
+                  ll1 = l1 - 17 - adjust(_spatium4, slant, cl);
+                  ll1 = qMin(ll1, 1);
+                  static const int t[4] = { 3, 0, 1, 2 };
+                  ll1 += t[ll1 & 3];      // extend to sit on line
                   }
             else {
-                  ll1 = 15 + l1 + adjust(_spatium4, slant, cl);
-                  if ((l1 < -7) && (l2 < -7)) {
-                        int lll = slant <= 0 ? 7 : 3;
-                        ll1 = qMax(lll, ll1);
-                        }
-                  switch (ll1 & 3) {
-                        case 0: ll1 += 3; break;      // straddle
-                        case 1: ll1 += 2; break;      // hang
-                        case 2: ll1 += 1; break;
-                        case 3: break;                // sit
-                        }
+                  ll1 = 17 + l1 + adjust(_spatium4, slant, cl);
+                  ll1 = qMax(ll1, 15);
+                  ll1 += 3 - (ll1 & 3);   // extend to hang on line
                   }
             bm.s = slant;
             bm.l = ll1 - l1;

@@ -90,7 +90,7 @@ void Image::setScale(const QSizeF& scale)
 
 QSizeF Image::scaleForSize(const QSizeF& s) const
       {
-      QSizeF sz = s * (_sizeIsSpatium ? spatium() : DPMM);
+      QSizeF sz = s * (_sizeIsSpatium ? spatium() : MScore::DPMM);
       return QSizeF(
          (sz.width()  * 100.0)/ imageSize().width(),
          (sz.height() * 100.0)/ imageSize().height()
@@ -104,7 +104,7 @@ QSizeF Image::scaleForSize(const QSizeF& s) const
 QSizeF Image::sizeForScale(const QSizeF& scale) const
       {
       QSizeF s = scale / 100.0;
-      qreal sz = _sizeIsSpatium ? spatium() : DPMM;
+      qreal sz = _sizeIsSpatium ? spatium() : MScore::DPMM;
       QSizeF oSize = imageSize() / sz;
       return QSizeF(s.width() * oSize.width(), s.height() * oSize.height());
       }
@@ -312,8 +312,8 @@ void Image::editDrag(const EditData& ed)
             dy /= _spatium;
             }
       else {
-            dx /= DPMM;
-            dy /= DPMM;
+            dx /= MScore::DPMM;
+            dy /= MScore::DPMM;
             }
       if (ed.curGrip == 0) {
             _size.setWidth(_size.width() + dx);
@@ -418,7 +418,7 @@ void RasterImage::draw(QPainter* painter) const
       if (_sizeIsSpatium)
             s = _size * spatium();
       else
-            s = _size * DPMM;
+            s = _size * MScore::DPMM;
       if (score()->printing()) {
             // use original image size for printing
             painter->scale(s.width() / doc.width(), s.height() / doc.height());
@@ -453,7 +453,7 @@ void RasterImage::layout()
                               if (_sizeIsSpatium)
                                     _size /= spatium();
                               else
-                                    _size /= DPMM;
+                                    _size /= MScore::DPMM;
                               }
                         _dirty = true;
                         }
@@ -468,7 +468,7 @@ void RasterImage::layout()
 
 void Image::layout()
       {
-      qreal f = _sizeIsSpatium ? spatium() : DPMM;
+      qreal f = _sizeIsSpatium ? spatium() : MScore::DPMM;
       // if autoscale && inside a box, scale to box relevant size
       if (autoScale() && parent() && ((parent()->type() == HBOX || parent()->type() == VBOX))) {
             if (_lockAspectRatio) {

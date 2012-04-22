@@ -156,7 +156,7 @@ int RepeatList::utick2tick(int tick) const
                   return tick - (at(i)->utick - at(i)->tick);
                   }
             }
-      if (debugMode) {
+      if (MScore::debugMode) {
             qDebug("utick %d not found in RepeatList\n", tick);
             abort();
             }
@@ -208,7 +208,7 @@ int RepeatList::utime2utick(qreal t) const
                   return _score->tempomap()->time2tick(t - at(i)->timeOffset) + (at(i)->utick - at(i)->tick);
                   }
             }
-      if (debugMode) {
+      if (MScore::debugMode) {
             qDebug("time %f not found in RepeatList\n", t);
             abort();
             }

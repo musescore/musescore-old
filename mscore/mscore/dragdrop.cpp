@@ -108,7 +108,7 @@ bool ScoreView::dragMeasureAnchorElement(const QPointF& pos)
 
 void ScoreView::dragEnterEvent(QDragEnterEvent* event)
       {
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("dragEnterEvent");
       double _spatium = score()->spatium();
       dragElement = 0;
@@ -126,7 +126,7 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
 
             QByteArray a = data->data(mimeSymbolFormat);
 
-            if (debugMode)
+            if (MScore::debugMode)
                   qDebug("ScoreView::dragEnterEvent: <%s>", a.data());
 
             QDomDocument doc;
@@ -203,7 +203,7 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
       if (data->hasUrls()) {
             QList<QUrl>ul = data->urls();
             foreach(const QUrl& u, ul) {
-                  if (debugMode)
+                  if (MScore::debugMode)
                         qDebug("drag Url: %s", qPrintable(u.toString()));
                   if (u.scheme() == "file") {
                         QFileInfo fi(u.path());
@@ -550,14 +550,14 @@ void ScoreView::dropEvent(QDropEvent* event)
                      )
                         s = new RasterImage(score());
                   else {
-                        if (debugMode)
+                        if (MScore::debugMode)
                               qDebug("drop: unknown suffix %s\n", qPrintable(suffix));
                         return;
                         }
                   _score->startCmd();
                   QString str(u.toLocalFile());
                   s->load(str);
-if (debugMode)
+if (MScore::debugMode)
       qDebug("drop image <%s> <%s>", qPrintable(str), qPrintable(str));
 
                   Element* el = elementAt(pos);

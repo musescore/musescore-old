@@ -389,7 +389,7 @@ void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool onlySelection
             throw (QString("Cannot create compressed musescore file: " + uz.errorString()));
 
       QDateTime dt;
-      if (debugMode)
+      if (MScore::debugMode)
             dt = QDateTime(QDate(2007, 9, 10), QTime(12, 0));
       else
             dt = QDateTime::currentDateTime();
@@ -957,7 +957,7 @@ bool Score::read(const QDomElement& de)
                   _syntiState.read(ee);
                   }
             else if (tag == "Spatium")
-                  _style.setSpatium (val.toDouble() * DPMM); // obsolete, moved to Style
+                  _style.setSpatium (val.toDouble() * MScore::DPMM); // obsolete, moved to Style
             else if (tag == "page-offset")            // obsolete, moved to Score
                   setPageNumberOffset(i);
             else if (tag == "Division")

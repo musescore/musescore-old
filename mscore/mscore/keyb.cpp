@@ -222,7 +222,7 @@ void ScoreView::editKey(QKeyEvent* ev)
       QString s                       = ev->text();
       bool ctrl                       = modifiers == Qt::ControlModifier;
 
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("keyPressEvent key 0x%02x(%c) mod 0x%04x <%s>\n",
                key, key, int(modifiers), qPrintable(s));
 

@@ -270,7 +270,7 @@ bool Seq::init()
 #endif
 
 #ifdef USE_JACK
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("useJackFlag %d\n", useJackFlag);
       if (useJackFlag) {
             useAlsaFlag      = false;
@@ -288,7 +288,7 @@ bool Seq::init()
             }
 #endif
 #ifdef USE_ALSA
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("useAlsaFlag %d\n", useAlsaFlag);
       if (driver == 0 && useAlsaFlag) {
             driver = new AlsaAudio(this);
@@ -303,7 +303,7 @@ bool Seq::init()
             }
 #endif
 #ifdef USE_PORTAUDIO
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("usePortaudioFlag %d\n", usePortaudioFlag);
       if (usePortaudioFlag) {
             driver = new Portaudio(this);
@@ -343,7 +343,7 @@ bool Seq::init()
 void Seq::exit()
       {
       if (driver) {
-            if (debugMode)
+            if (MScore::debugMode)
                   qDebug("Stop I/O\n");
             stopWait();
             delete driver;

@@ -67,7 +67,7 @@ void SimpleText::drawFrame(QPainter* painter) const
             color = Qt::gray;
       else if (selected())
             color = Qt::blue;
-      QPen pen(color, frameWidth() * DPMM);
+      QPen pen(color, frameWidth() * MScore::DPMM);
       painter->setPen(pen);
       painter->setBrush(Qt::NoBrush);
       if (circle())
@@ -172,9 +172,9 @@ void SimpleText::layoutFrame()
                   frame.setWidth(frame.height());
                   }
             }
-      qreal w = (paddingWidth() + frameWidth() * .5) * DPMM;
+      qreal w = (paddingWidth() + frameWidth() * .5) * MScore::DPMM;
       frame.adjust(-w, -w, w, w);
-      w = frameWidth() * DPMM;
+      w = frameWidth() * MScore::DPMM;
       setbbox(frame.adjusted(-w, -w, w, w));
       }
 

@@ -1714,7 +1714,7 @@ void Score::layoutSystems()
       bool firstSystem        = true;
       bool startWithLongNames = true;
 
-      qreal w  = pageFormat()->printableWidth() * DPI;
+      qreal w  = pageFormat()->printableWidth() * MScore::DPI;
 
       while (curMeasure) {
             ElementType t = curMeasure->type();

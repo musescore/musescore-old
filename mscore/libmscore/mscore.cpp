@@ -17,9 +17,10 @@
 #include "sequencer.h"
 #include "figuredbass.h"
 
-qreal PDPI;
-qreal DPI;
-qreal DPMM;
+qreal MScore::PDPI;
+qreal MScore::DPI;
+qreal MScore::DPMM;
+bool  MScore::debugMode;
 
 MStyle* MScore::_defaultStyle;
 MStyle* MScore::_baseStyle;
@@ -44,7 +45,6 @@ QString MScore::lastError;
 bool    MScore::layoutDebug = false;
 int     MScore::division    = 480;
 int     MScore::sampleRate  = 44100;
-bool    MScore::debugMsg    = false;
 int     MScore::mtcType;
 
 Sequencer* MScore::seq = 0;
@@ -124,7 +124,7 @@ void MScore::init()
             QString s = QString(":/fonts/%1").arg(fonts[i]);
             if (-1 == QFontDatabase::addApplicationFont(s)) {
                   qDebug("Mscore: fatal error: cannot load internal font <%s>\n", fonts[i]);
-                  if (!debugMode)
+                  if (!MScore::debugMode)
                         exit(-1);
                   }
             }

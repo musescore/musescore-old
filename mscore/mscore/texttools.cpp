@@ -214,7 +214,7 @@ void TextTools::updateTools()
       typefaceFamily->setCurrentFont(f);
       double ps = f.pointSizeF();
       if (ps == -1.0)
-            ps = f.pixelSize() * PPI / DPI;
+            ps = f.pixelSize() * PPI / MScore::DPI;
       typefaceSize->setValue(ps);
       typefaceItalic->setChecked(format.fontItalic());
       typefaceBold->setChecked(format.fontWeight() == QFont::Bold);

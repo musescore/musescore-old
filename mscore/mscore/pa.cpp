@@ -105,7 +105,7 @@ bool Portaudio::init()
             return false;
             }
       initialized = true;
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("using PortAudio Version: %s\n", Pa_GetVersionText());
 
       PaDeviceIndex idx = preferences.portaudioDevice;

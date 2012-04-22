@@ -49,17 +49,17 @@ bool MuseScore::importPdf(Score* score, const QString& path)
       qreal sp = omr->spatiumMM();
       if (sp == 0.0)
             sp = 1.5;
-      score->setSpatium(sp * DPMM);
+      score->setSpatium(sp * MScore::DPMM);
       score->style()->set(StyleVal(ST_pageFillLimit, 1.0));
       score->style()->set(StyleVal(ST_lastSystemFillLimit, 0.0));
       score->style()->set(StyleVal(ST_staffLowerBorder, 0.0));
       score->style()->set(StyleVal(ST_measureSpacing, 1.0));
 
       PageFormat pF(*score->pageFormat());
-      pF.setEvenLeftMargin(5.0 * DPMM / DPI);
+      pF.setEvenLeftMargin(5.0 * MScore::DPMM / MScore::DPI);
       pF.setEvenTopMargin(0);
       pF.setEvenBottomMargin(0);
-      pF.setOddLeftMargin(5.0 * DPMM / DPI);
+      pF.setOddLeftMargin(5.0 * MScore::DPMM / MScore::DPI);
       pF.setOddTopMargin(0);
       pF.setOddBottomMargin(0);
       score->setPageFormat(pF);

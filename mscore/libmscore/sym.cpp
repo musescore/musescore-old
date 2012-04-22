@@ -427,7 +427,7 @@ QFont fontId2font(int fontId)
 #ifdef USE_GLYPHS
             qreal size = 20.0;
 #else
-            qreal size = 20.0 * DPI / PPI;
+            qreal size = 20.0 * MScore::DPI / PPI;
 #endif
             if (fontId == 0)
                   f->setFamily("MScore");
@@ -435,9 +435,9 @@ QFont fontId2font(int fontId)
                   f->setFamily("MScore1");
             else if (fontId == 2) {
                   f->setFamily("FreeSerif");
-                  size = 8.0; //  * DPI / PPI;
+                  size = 8.0; //  * MScore::DPI / PPI;
 #ifndef USE_GLYPHS
-                  size = size * DPI / PPI;
+                  size = size * MScore::DPI / PPI;
 #endif
                   }
             else
@@ -474,7 +474,7 @@ void Sym::genGlyphs(const QFont& font)
 //---------------------------------------------------------
 
 Sym::Sym(const char* name, int c, int fid, qreal ax, qreal ay)
-   : _code(c), fontId(fid), _name(name), _attach(ax * DPI/PPI, ay * DPI/PPI)
+   : _code(c), fontId(fid), _name(name), _attach(ax * MScore::DPI/PPI, ay * MScore::DPI/PPI)
       {
       QFont _font(fontId2font(fontId));
       QFontMetricsF fm(_font);
@@ -492,7 +492,7 @@ Sym::Sym(const char* name, int c, int fid, qreal ax, qreal ay)
 Sym::Sym(const char* name, int c, int fid, const QPointF& a, const QRectF& b)
    : _code(c), fontId(fid), _name(name)
       {
-      qreal ds = DPI/PPI;
+      qreal ds = MScore::DPI/PPI;
       _bbox.setRect(b.x() * ds, b.y() * ds, b.width() * ds, b.height() * ds);
       _attach = a * ds;
       w = _bbox.width();
