@@ -2947,9 +2947,12 @@ static void xmlStaffDetails(Score* score, int staff, Tablature* t, QDomElement e
             score->staff(staffIdx)->setLines(stafflines);
 
       if (t) {
+            /* temporarily disabled, as it causes a segfault when reading
+               BeetAnGeSample.xml or BrookeWestSample.xml
             t->readMusicXML(e);
             Instrument* i = score->part(staff)->instr();
             i->setTablature(t);
+            */
             }
       }
 
