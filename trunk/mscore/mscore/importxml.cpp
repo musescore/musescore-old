@@ -2947,12 +2947,9 @@ static void xmlStaffDetails(Score* score, int staff, Tablature* t, QDomElement e
             score->staff(staffIdx)->setLines(stafflines);
 
       if (t) {
-            /* temporarily disabled, as it causes a segfault when reading
-               BeetAnGeSample.xml or BrookeWestSample.xml
             t->readMusicXML(e);
             Instrument* i = score->part(staff)->instr();
             i->setTablature(t);
-            */
             }
       }
 
@@ -3068,20 +3065,30 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                         }
                   }
             else if (e.tagName() == "clef") {
-                  // TODO: for tablature clef, set staff to tab
-                  // see libmscore/staff.cpp Staff::useTablature()
-                  // TBD: same for percussion ?
+                  // for tablature clef, set staff to tab
+                  // TODO TBD: same for percussion ?
                   int st = xmlClef(e, staff, measure);
+                  int number = e.attribute(QString("number"), "-1").toInt();
+                  int staffIdx = staff;
+                  if (number != -1)
+                        staffIdx += number - 1;
+                  qDebug("xmlAttributes clef score->staff(0) %p staffIdx %d score->staff(%d) %p",
+                         score->staff(0), staffIdx, staffIdx, score->staff(staffIdx));
                   if (st == TAB_STAFF_TYPE)
-                        score->staff(0 /* TBD staffIdx ? */)->setStaffType(score->staffTypes()[TAB_STAFF_TYPE]);
+                        score->staff(staffIdx)->setStaffType(score->staffTypes()[TAB_STAFF_TYPE]);
                   }
             else if (e.tagName() == "staves")
                   ;  // ignore, already handled
             else if (e.tagName() == "staff-details") {
+                  int number = e.attribute(QString("number"), "-1").toInt();
+                  int staffIdx = staff;
+                  if (number != -1)
+                        staffIdx += number - 1;
                   Tablature* t;
-                  if (score->staff(0 /* TBD staffIdx ? */)->useTablature())
+                  if (score->staff(staffIdx)->useTablature()) {
                         t = new Tablature;
-                  xmlStaffDetails(score, staff, t, e);
+                        xmlStaffDetails(score, staff, t, e);
+                        }
                   }
             else if (e.tagName() == "instruments")
                   domNotImplemented(e);
