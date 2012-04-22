@@ -792,10 +792,10 @@ Element* ChordRest::drop(const DropData& data)
                   fb->setTrack( (track() / VOICES) * VOICES );
                   fb->setTicks( duration().ticks() );
                   fb->setOnNote(true);
-                  FiguredBass * fbNew = FiguredBass::addFiguredBassToSegment(segment(),
+                  /* FiguredBass * fbNew =*/ FiguredBass::addFiguredBassToSegment(segment(),
                         fb->track(), fb->ticks(), &bNew);
-                  fbNew = fb;
-                  if(bNew)
+                  // fbNew = fb;
+                  if (bNew)
                         score()->undoAddElement(e);
                   return e;
                   }

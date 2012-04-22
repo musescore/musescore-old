@@ -1151,68 +1151,6 @@ static Bm beamMetric1(bool up, char l1, char l2)
       }
 
 //---------------------------------------------------------
-//   beamMetric2
-//---------------------------------------------------------
-
-static Bm beamMetric2(bool up, char l1, char l2)
-      {
-      int d = qAbs(l2 - l1);
-      int slant;
-      int len = 12;
-      switch(d) {
-            case 0: slant = 0; break;
-            case 1: slant = 1; break;
-            case 2: slant = 2; break;
-            case 3: slant = 4; break;
-            case 4: slant = 5; break;
-            case 5: slant = 6; break;
-            case 6: slant = 6; break;
-            case 7:
-            default:
-                    slant = 7; break;
-            }
-      if (up) {
-            len = -len;
-            if ((l1 > 10) && (l2 > 10)) {
-                  slant = 2;
-                  if (l1 > l2) {
-                        slant = -2;
-                        len =  9 - l1 * 2;
-                        }
-                  else {
-                        slant = 2;
-                        len =  7 - l1 * 2;
-                        }
-                  }
-            else {
-                  if (l1 > l2)
-                        slant = -slant;
-                  if (l2 < l1)
-                        len -= (l1 - l2) * 2 + slant;
-                  }
-            }
-      else {
-            if (l1 < -2 && l2 < -2) {
-                  if (l1 > l2) {
-                        slant = -2;
-                        len =  5 - l1 * 2;
-                        }
-                  else {
-                        slant = 2;
-                        len =  7 - l1 * 2;
-                        }
-                  }
-            else {
-                  if (l1 > l2)
-                        slant = -slant;
-                  if (l2 > l1)
-                        len += (l2 - l1) * 2 - slant;
-                  }
-            }
-      return Bm(len, slant);
-      }
-
-//---------------------------------------------------------
 //   adjust
 //    adjust stem len for notes between start-end
 //---------------------------------------------------------
@@ -1257,26 +1195,6 @@ static int adjust(qreal _spatium4, int slant, const QList<Chord*>& cl)
 //---------------------------------------------------------
 
 static void adjust2(Bm& bm, const Chord* c1)
-      {
-      static const int dd[4][4] = {
-            // St   H  --   S
-            {0,  0,  1,  0},     // St
-            {0,  0, -1,  0},     // S
-            {1,  1,  1, -1},     // --
-            {0,  0, -1,  0}      // H
-            };
-      int ys = bm.l + c1->line() * 2;
-      int e1 = qAbs((ys  + 1000) % 4);
-      int e2 = qAbs((ys + 1000 + bm.s) % 4);
-      bm.l  -= dd[e1][e2];
-      }
-
-//---------------------------------------------------------
-//   adjust3
-//    adjust stem position for multiple beams
-//---------------------------------------------------------
-
-static void adjust3(int /*ml*/, Bm& bm, const Chord* c1)
       {
       static const int dd[4][4] = {
             // St   H  --   S
@@ -1888,8 +1806,13 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
             //  extend stem to primary beam
             qreal x   = npos.x() - parent()->pagePos().x();
             QLineF* l = beamSegments.front();   // primary beam
-            qreal dy  = (x - l->x1()) * slope;
-            qreal yo  = l->y1() + dy;
+            qreal yl  = l->y1();
+            qreal xl  = l->x1();
+            if (_up != chord->up()) {
+                  qreal dy = (chord->durationType().hooks() - 1) * _beamDist;
+                  yl += chord->up() ? -dy : dy;
+                  }
+            qreal yo  = yl + (x - xl) * slope;
 
             stem->setLen(yo + canvPos.y() - npos.y());
             stem->setPos(npos - chord->pagePos());
