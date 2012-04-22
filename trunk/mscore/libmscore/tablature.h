@@ -1,7 +1,7 @@
 //=============================================================================
 //  MuseScore
 //  Music Composition & Notation
-//  $Id:$
+//  $Id$
 //
 //  Copyright (C) 2002-2011 Werner Schweer
 //
@@ -41,6 +41,8 @@ public:
       int         frets() const           { return _frets; }
       void        read(const QDomElement&);
       void        write(Xml&) const;
+      void        readMusicXML(const QDomElement& de);
+      void        writeMusicXML(Xml& xml) const;
       };
 
 extern Tablature guitarTablature;
