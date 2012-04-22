@@ -1171,7 +1171,7 @@ void Note::layout()
             StaffTypeTablature* tab = (StaffTypeTablature*)staff()->staffType();
             qreal mags = magS();
             QFont f(tab->fretFontName());
-            int size = lrint(tab->fretFontSize() * DPI / PPI);
+            int size = lrint(tab->fretFontSize() * MScore::DPI / PPI);
             f.setPixelSize(size);
             QFontMetricsF fm(f);
             // when using letters, "+(_fret > 8)" skips 'j'

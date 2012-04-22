@@ -1,4 +1,6 @@
-22.4 (lv)
+22.4  (ws)
+      - moved global variables PDPI, DPI, DPMM, debugMode into class MScore
+      (lv)
       - #15795: MusicXML Import and export of tablature
         -> staff tuning import implemented
 21.4 (lv)

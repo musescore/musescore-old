@@ -457,7 +457,7 @@ void Palette::paintEvent(QPaintEvent* event)
       {
       qreal _spatium = gscore->spatium();
       qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
-      gscore->setSpatium(SPATIUM20  * DPI);
+      gscore->setSpatium(SPATIUM20  * MScore::DPI);
 
       QPainter p(this);
       p.setRenderHint(QPainter::Antialiasing, true);
@@ -627,7 +627,7 @@ void Palette::dragEnterEvent(QDragEnterEvent* event)
       if (data->hasUrls()) {
             QList<QUrl>ul = event->mimeData()->urls();
             QUrl u = ul.front();
-            if (debugMode) {
+            if (MScore::debugMode) {
                   qDebug("dragEnterEvent: Url: %s\n", qPrintable(u.toString()));
                   qDebug("   scheme <%s> path <%s>\n", qPrintable(u.scheme()), qPrintable(u.path()));
                   }
@@ -646,7 +646,7 @@ void Palette::dragEnterEvent(QDragEnterEvent* event)
       else if (data->hasFormat(mimeSymbolFormat))
             event->acceptProposedAction();
       else {
-            if (debugMode) {
+            if (MScore::debugMode) {
                   qDebug("dragEnterEvent: formats:\n");
                   foreach(const QString& s, event->mimeData()->formats())
                         qDebug("   %s\n", s.toLatin1().data());

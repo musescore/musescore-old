@@ -558,7 +558,7 @@ StyleData::StyleData()
 
 // _textStyles.append(TextStyle(defaultTextStyles[i]));
       _chordList = 0;
-      _spatium = SPATIUM20 * DPI;
+      _spatium = SPATIUM20 * MScore::DPI;
       _articulationAnchor[Articulation_Fermata]         = A_TOP_STAFF;
       _articulationAnchor[Articulation_Shortfermata]    = A_TOP_STAFF;
       _articulationAnchor[Articulation_Longfermata]     = A_TOP_STAFF;
@@ -594,7 +594,7 @@ StyleData::StyleData()
       _articulationAnchor[Articulation_Tapping]         = A_TOP_STAFF;
       _articulationAnchor[Articulation_Slapping]        = A_TOP_STAFF;
       _articulationAnchor[Articulation_Popping]         = A_TOP_STAFF;
-      _spatium = SPATIUM20 * DPI;
+      _spatium = SPATIUM20 * MScore::DPI;
       };
 
 StyleData::StyleData(const StyleData& s)
@@ -743,7 +743,7 @@ QFont TextStyleData::font(qreal _spatium) const
       f.setUnderline(underline);
 
       if (sizeIsSpatiumDependent)
-            m *= _spatium / ( SPATIUM20 * DPI);
+            m *= _spatium / ( SPATIUM20 * MScore::DPI);
 
       f.setPointSizeF(m);
       return f;
@@ -755,7 +755,7 @@ QFont TextStyleData::font(qreal _spatium) const
 
 QFont TextStyleData::fontPx(qreal _spatium) const
       {
-      qreal m = size * DPI / PPI;
+      qreal m = size * MScore::DPI / PPI;
 
       QFont f(family);
       f.setBold(bold);
@@ -765,7 +765,7 @@ QFont TextStyleData::fontPx(qreal _spatium) const
       f.setHintingPreference(QFont::PreferVerticalHinting);
 #endif
       if (sizeIsSpatiumDependent)
-            m *= _spatium / (SPATIUM20 * DPI);
+            m *= _spatium / (SPATIUM20 * MScore::DPI);
 
       f.setPixelSize(lrint(m));
       return f;
@@ -900,7 +900,7 @@ void StyleData::load(const QDomElement& de)
                   setTextStyle(s);
                   }
             else if (tag == "Spatium")
-                  setSpatium (val.toDouble() * DPMM);
+                  setSpatium (val.toDouble() * MScore::DPMM);
             else if (tag == "page-layout")
                   _pageFormat.read(e);
             else if (tag == "displayInConcertPitch")
@@ -1029,7 +1029,7 @@ void StyleData::save(Xml& xml, bool optimize) const
             xml.tag(ai.name + "Anchor", int(_articulationAnchor[i]));
             }
       _pageFormat.write(xml);
-      xml.tag("Spatium", _spatium / DPMM);
+      xml.tag("Spatium", _spatium / MScore::DPMM);
       xml.etag();
       }
 

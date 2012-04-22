@@ -177,7 +177,7 @@ void UndoStack::beginMacro()
             return;
             }
       curCmd = new UndoCommand();
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("UndoStack::beginMacro %p, UndoStack %p", curCmd, this);
       }
 
@@ -187,7 +187,7 @@ void UndoStack::beginMacro()
 
 void UndoStack::endMacro(bool rollback)
       {
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("UndoStack::endMacro %d", rollback);
       if (curCmd == 0) {
             qDebug("UndoStack:endMacro(): not active");
@@ -262,7 +262,7 @@ void UndoStack::undo()
       if (curIdx) {
             --curIdx;
             Q_ASSERT(curIdx >= 0);
-            if (debugMode)
+            if (MScore::debugMode)
                   qDebug("--undo index %d", curIdx);
             list[curIdx]->undo();
             }
@@ -275,7 +275,7 @@ void UndoStack::undo()
 void UndoStack::redo()
       {
       if (canRedo()) {
-            if (debugMode)
+            if (MScore::debugMode)
                   qDebug("--redo index %d", curIdx);
             list[curIdx++]->redo();
             }

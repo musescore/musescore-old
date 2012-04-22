@@ -528,7 +528,7 @@ void MusicXml::doCredits()
       /*
       const PageFormat* pf = score->pageFormat();
       qDebug("page format w=%g h=%g spatium=%g DPMM=%g DPI=%g",
-             pf->width(), pf->height(), score->spatium(), DPMM, DPI);
+             pf->width(), pf->height(), score->spatium(), MScore::DPMM, DPI);
       // page width and height in tenths
       const double pw  = pf->width() * 10 * DPI / score->spatium();
       const double ph  = pf->height() * 10 * DPI / score->spatium();
@@ -992,7 +992,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                                     else
                                           domError(eee);
                                     }
-                              double _spatium = DPMM * (millimeter * 10.0 / tenths);
+                              double _spatium = MScore::DPMM * (millimeter * 10.0 / tenths);
                               if (preferences.musicxmlImportLayout)
                                     score->setSpatium(_spatium);
                               }
@@ -4778,7 +4778,7 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure, int staff)
       double styleYOff = score->textStyle(TEXT_STYLE_HARMONY).offset().y();
       OffsetType offsetType = score->textStyle(TEXT_STYLE_HARMONY).offsetType();
       if (offsetType == OFFSET_ABS) {
-            styleYOff = styleYOff * DPMM / score->spatium();
+            styleYOff = styleYOff * MScore::DPMM / score->spatium();
             }
 
       double dy = -0.1 * e.attribute("default-y", QString::number(styleYOff* -10)).toDouble();

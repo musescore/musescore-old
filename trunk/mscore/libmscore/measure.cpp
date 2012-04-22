@@ -847,7 +847,7 @@ void Measure::add(Element* el)
       ElementType type = el->type();
 
 
-//      if (debugMode)
+//      if (MScore::debugMode)
 //            qDebug("measure %p(%d): add %s %p", this, _no, el->name(), el);
 
       switch (type) {
@@ -1247,7 +1247,7 @@ void Measure::insertMStaff(MStaff* staff, int idx)
       staves.insert(idx, staff);
       for (int staffIdx = 0; staffIdx < staves.size(); ++staffIdx)
             staves[staffIdx]->setTrack(staffIdx * VOICES);
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("     Measure::insertMStaff %d -> n:%d", idx, staves.size());
       }
 
@@ -1257,7 +1257,7 @@ void Measure::insertMStaff(MStaff* staff, int idx)
 
 void Measure::removeMStaff(MStaff* /*staff*/, int idx)
       {
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("     Measure::removeMStaff %d", idx);
 
       staves.removeAt(idx);

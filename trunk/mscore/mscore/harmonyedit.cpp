@@ -153,7 +153,7 @@ void ChordStyleEditor::setChordList(ChordList* cl)
             paletteTab->addTab(accPalette, f.family);
             QFont qf(f.family);
             qf.setStyleStrategy(QFont::NoFontMerging);
-            int size = lrint(20.0 * DPI / PPI);
+            int size = lrint(20.0 * MScore::DPI / PPI);
             qf.setPixelSize(size);
 
             QFontMetricsF fi(qf);
@@ -245,7 +245,7 @@ void HarmonyCanvas::paintEvent(QPaintEvent* event)
 
       qreal spatium = gscore->spatium();
       qreal mag = PALETTE_SPATIUM * extraMag / spatium;
-      spatium = SPATIUM20 * DPI;
+      spatium = SPATIUM20 * MScore::DPI;
 
       QPainter p(this);
 

@@ -325,7 +325,7 @@ void TimeSig::layout()
             addbbox(rn.translated(pn));
             }
 
-      qreal im = (DPI * SPATIUM20) / _spatium;
+      qreal im = (MScore::DPI * SPATIUM20) / _spatium;
 
       pz *= im;                           // convert positions to raster units
       pn *= im;
@@ -342,9 +342,9 @@ void TimeSig::draw(QPainter* painter) const
             return;
       painter->setPen(curColor());
       QFont font = fontId2font(0);
-      font.setPixelSize(lrint(20.0 * DPI/PPI));
+      font.setPixelSize(lrint(20.0 * MScore::DPI/PPI));
       painter->setFont(font);
-      qreal mag  = spatium() / (DPI * SPATIUM20);
+      qreal mag  = spatium() / (MScore::DPI * SPATIUM20);
       qreal imag = 1.0 / mag;
 
       painter->scale(mag, mag);

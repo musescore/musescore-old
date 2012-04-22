@@ -638,7 +638,7 @@ void Harmony::render(const QList<RenderAction>& renderList, qreal& x, qreal& y, 
       QStack<QPointF> stack;
       int fontIdx = 0;
       qreal _spatium = spatium();
-      qreal mag = (DPI / PPI) * (_spatium / (SPATIUM20 * DPI));
+      qreal mag = (MScore::DPI / PPI) * (_spatium / (SPATIUM20 * MScore::DPI));
 
       foreach(const RenderAction& a, renderList) {
             if (a.type == RenderAction::RENDER_SET) {

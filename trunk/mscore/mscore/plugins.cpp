@@ -46,7 +46,7 @@ void MuseScore::registerPlugin(const QString& pluginPath)
       foreach(QString s, plugins) {
             QFileInfo fi(s);
             if (fi.baseName() == baseName) {
-                  if (debugMode)
+                  if (MScore::debugMode)
                         qDebug("  Plugin <%s> already registered\n", qPrintable(pluginPath));
                   return;
                   }
@@ -54,11 +54,11 @@ void MuseScore::registerPlugin(const QString& pluginPath)
 
       QFile f(pluginPath);
       if (!f.open(QIODevice::ReadOnly)) {
-            if (debugMode)
+            if (MScore::debugMode)
                   qDebug("Loading Plugin <%s> failed\n", qPrintable(pluginPath));
             return;
             }
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("Register Plugin <%s>\n", qPrintable(pluginPath));
 
       if (se == 0) {
@@ -193,7 +193,7 @@ void MuseScore::registerPlugin(const QString& pluginPath)
                         curMenu = new QMenu(m, menuBar());
                         curMenu->setObjectName(m);
                         menuBar()->insertMenu(menuBar()->actions().back(), (QMenu*)curMenu);
-                        if (debugMode)
+                        if (MScore::debugMode)
                               qDebug("add Menu <%s>\n", qPrintable(m));
                         }
                   else if (i + 1 == n) {
@@ -220,12 +220,12 @@ void MuseScore::registerPlugin(const QString& pluginPath)
                         connect(a, SIGNAL(triggered()), pluginMapper, SLOT(map()));
                         pluginMapper->setMapping(a, pluginIdx);
 #endif
-                        if (debugMode)
+                        if (MScore::debugMode)
                               qDebug("add action <%s>\n", qPrintable(m));
                         }
                   else {
                         curMenu = ((QMenu*)curMenu)->addMenu(m);
-                        if (debugMode)
+                        if (MScore::debugMode)
                               qDebug("add menu <%s>\n", qPrintable(m));
                         }
                   }
@@ -248,13 +248,13 @@ int MuseScore::pluginIdxFromPath(QString pluginPath) {
             idx++;
             }
       return -1;
-}      
+}
 
 //---------------------------------------------------------
 //   addGlobalObjectToPluginEngine
 //---------------------------------------------------------
 
-void MuseScore::addGlobalObjectToPluginEngine(const char * name, const QString & value ) 
+void MuseScore::addGlobalObjectToPluginEngine(const char * name, const QString & value )
       {
       se->globalObject().setProperty(name, se->newVariant(value));
       }
@@ -311,7 +311,7 @@ bool MuseScore::loadPlugin(const QString& filename)
       bool result = false;
 
       QDir pluginDir(mscoreGlobalShare + "plugins");
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("Plugin Path <%s>\n", qPrintable(mscoreGlobalShare + "plugins"));
 
       if (filename.endsWith(".js")){
@@ -370,7 +370,7 @@ ScriptEngine::ScriptEngine()
       globalObject().setProperty("mscoreMajorVersion",  newVariant(majorVersion()));
       globalObject().setProperty("mscoreMinorVersion",  newVariant(minorVersion()));
       globalObject().setProperty("mscoreUpdateVersion", newVariant(updateVersion()));
-      globalObject().setProperty("mscoreDPI",			newVariant(DPI));
+      globalObject().setProperty("mscoreDPI",			newVariant(MScore::DPI));
       //globalObject().setProperty("localeName",          newVariant(lName));
       }
 
@@ -389,16 +389,16 @@ void MuseScore::pluginExecuteFunction(int idx, const char* functionName)
       QString pp = plugins[idx];
       QFile f(pp);
       if (!f.open(QIODevice::ReadOnly)) {
-            if (debugMode)
+            if (MScore::debugMode)
                   qDebug("Loading Plugin <%s> failed\n", qPrintable(pp));
             return;
             }
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("Run Plugin <%s> : <%s>\n", qPrintable(pp), functionName);
       if (se == 0) {
             se = new ScriptEngine();
             se->installTranslatorFunctions();
-            if (debugMode) {
+            if (MScore::debugMode) {
                   QStringList lp = qApp->libraryPaths();
                   foreach(const QString& s, lp)
                         qDebug("lib path <%s>\n", qPrintable(s));
@@ -433,7 +433,7 @@ void MuseScore::pluginExecuteFunction(int idx, const char* functionName)
       f.close();
       QScriptValue run = val.property(functionName);
       if (!run.isFunction()) {
-            if (debugMode)
+            if (MScore::debugMode)
                 qDebug("Execute plugin: no %s function found\n", functionName);
             return;
             }

@@ -444,7 +444,7 @@ static QChar g_cDurationChars[] = { 0xE0FF, 0xE100, 0xE101, 0xE102, 0xE103, 0xE1
 
 void StaffTypeTablature::setDurationMetrics()
 {
-      if(_durationMetricsValid && _refDPI == DPI)           // metrics are still valid
+      if (_durationMetricsValid && _refDPI == MScore::DPI)           // metrics are still valid
             return;
 
       QFontMetricsF fm(durationFont());
@@ -455,17 +455,17 @@ void StaffTypeTablature::setDurationMetrics()
       _durationYOffset = -bb.y() - bb.height()
       // then move up by a default margin and, if marks are above lines, by half the line distance
       // (converted from spatium units to raster units)
-            + ( TAB_DEFAULT_DUR_YOFFS - (_onLines ? 0.0 : lineDistance().val()/2.0) ) * DPI*SPATIUM20;
+            + ( TAB_DEFAULT_DUR_YOFFS - (_onLines ? 0.0 : lineDistance().val()/2.0) ) * MScore::DPI*SPATIUM20;
       _durationBoxH = bb.height();
       _durationBoxY = bb.y()  + _durationYOffset;
       // keep track of the conditions under which metrics have been computed
-      _refDPI = DPI;
+      _refDPI = MScore::DPI;
       _durationMetricsValid = true;
 }
 
 void StaffTypeTablature::setFretMetrics()
 {
-      if(_fretMetricsValid && _refDPI == DPI)
+      if(_fretMetricsValid && _refDPI == MScore::DPI)
             return;
 
       QFontMetricsF fm(fretFont());
@@ -486,14 +486,14 @@ void StaffTypeTablature::setFretMetrics()
             }
       // if on string, we are done; if between strings, raise by half line distance
       if(!_onLines)
-            _fretYOffset -= lineDistance().val()*DPI*SPATIUM20 / 2.0;
+            _fretYOffset -= lineDistance().val()*MScore::DPI*SPATIUM20 / 2.0;
 
       // from _fretYOffset, compute _charBoxH and _charBoxY
       _fretBoxH = bb.height();
       _fretBoxY = bb.y()  + _fretYOffset;
 
       // keep track of the conditions under which metrics have been computed
-      _refDPI = DPI;
+      _refDPI = MScore::DPI;
       _fretMetricsValid = true;
 }
 
@@ -505,7 +505,7 @@ void StaffTypeTablature::setDurationFontSize(qreal val)
       {
       _durationFontSize = val;
 //    _durationFont.setPointSizeF(val);
-      _durationFont.setPixelSize( lrint(val * DPI / PPI) );
+      _durationFont.setPixelSize( lrint(val * MScore::DPI / PPI) );
       _durationMetricsValid = false;
       }
 
@@ -517,7 +517,7 @@ void StaffTypeTablature::setFretFontSize(qreal val)
       {
       _fretFontSize = val;
 //    _fretFont.setPointSizeF(val);
-      _fretFont.setPixelSize( lrint(val * DPI / PPI) );
+      _fretFont.setPixelSize( lrint(val * MScore::DPI / PPI) );
       _fretMetricsValid = false;
       }
 
@@ -644,5 +644,29 @@ qreal StaffType::doty2() const
                   break;
             }
       return 0.0;
+      }
+
+//---------------------------------------------------------
+//   durationBoxH
+//---------------------------------------------------------
+
+qreal StaffTypeTablature::durationBoxH()
+      {
+      if (!_genDurations && !_slashStyle)
+            return 0.0;
+      setDurationMetrics();
+      return _durationBoxH;
+      }
+
+//---------------------------------------------------------
+//   durationBoxY
+//---------------------------------------------------------
+
+qreal StaffTypeTablature::durationBoxY()
+      {
+      if(!_genDurations && !_slashStyle)
+            return 0.0;
+      setDurationMetrics();
+      return _durationBoxY + _durationFontUserY * MScore::MScore::DPI * SPATIUM20;
       }
 

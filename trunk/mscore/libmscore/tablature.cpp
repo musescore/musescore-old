@@ -322,10 +322,12 @@ void Tablature::readMusicXML(const QDomElement& de)
                                      line, qPrintable(step), alter, octave);
                         }
                   }
-            else if (tag == "capo")
+            else if (tag == "capo") {
                   ; // not supported: silently ignored
-            else
+                  }
+            else {
                   ; // others silently ignored
+                  }
             }
       for (int i = 0; i < stringTable.size(); ++i)
             qDebug("Tablature::readMusicXML stringTable[%d] = %d", i, stringTable.at(i));
@@ -335,6 +337,6 @@ void Tablature::readMusicXML(const QDomElement& de)
 //   Write MusicXML
 //---------------------------------------------------------
 
-void Tablature::writeMusicXML(Xml& xml) const
+void Tablature::writeMusicXML(Xml& /*xml*/) const
       {
       }

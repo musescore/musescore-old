@@ -81,7 +81,7 @@
 
 void Score::startCmd()
       {
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("===startCmd()");
       _layoutAll = true;      ///< do a complete relayout
       _playNote = false;
@@ -90,7 +90,7 @@ void Score::startCmd()
       // user-visible undo action.
 
       if (undo()->active()) {
-            // if (debugMode)
+            // if (MScore::debugMode)
             qDebug("Score::startCmd(): cmd already active");
             // abort();
             return;
@@ -108,7 +108,7 @@ void Score::startCmd()
 void Score::endCmd()
       {
       if (!undo()->active()) {
-            // if (debugMode)
+            // if (MScore::debugMode)
                   qDebug("Score::endCmd(): no cmd active");
             end();
             return;
@@ -1633,7 +1633,7 @@ void Score::cmdResetBeamMode()
 
 bool Score::processMidiInput()
       {
-      if (debugMode)
+      if (MScore::debugMode)
           qDebug("processMidiInput");
       if (midiInputQueue.isEmpty())
             return false;
@@ -1642,7 +1642,7 @@ bool Score::processMidiInput()
       Note* n = 0;
       while (!midiInputQueue.isEmpty()) {
             MidiInputEvent ev = midiInputQueue.dequeue();
-            if (debugMode)
+            if (MScore::debugMode)
                   qDebug("<-- !noteentry dequeue %i", ev.pitch);
             if (!noteEntryMode()) {
                   int staffIdx = selection().staffStart();
@@ -2524,7 +2524,7 @@ void Score::cmdMoveLyrics(Lyrics* lyrics, Direction dir)
 void Score::cmd(const QAction* a)
       {
       QString cmd(a ? a->data().toString() : "");
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("Score::cmd <%s>", qPrintable(cmd));
 
       //

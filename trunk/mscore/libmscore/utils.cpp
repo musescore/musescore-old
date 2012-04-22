@@ -61,13 +61,13 @@ Measure* Score::tick2measure(int tick) const
                   return m;
             mb = nmb;
             }
-      qDebug("-tick2measure %d not found\n", tick);
-      if (debugMode) {
-        qDebug("first %p\n", first());
+      qDebug("-tick2measure %d not found", tick);
+      if (MScore::debugMode) {
+            qDebug("first %p", first());
             for (MeasureBase* m = first(); m; m = m->next()) {
                   int st = m->tick();
                   int l  = m->ticks();
-                  qDebug("%d - %d\n", st, st+l);
+                  qDebug("%d - %d", st, st+l);
                   }
             }
       return 0;

@@ -111,7 +111,7 @@ void MeasureBase::add(Element* e)
             LayoutBreak* b = static_cast<LayoutBreak*>(e);
             foreach (Element* ee, _el) {
                   if (ee->type() == LAYOUT_BREAK && static_cast<LayoutBreak*>(ee)->subtype() == b->subtype()) {
-                        if (debugMode)
+                        if (MScore::debugMode)
                               qDebug("warning: layout break already set\n");
                         return;
                         }

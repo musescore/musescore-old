@@ -740,7 +740,7 @@ void Segment::setTick(int t)
 const QList<Lyrics*>* Segment::lyricsList(int staffIdx) const
       {
       if (!(subtype() & (SegChordRest | SegGrace))) {
-            if (debugMode)
+            if (MScore::debugMode)
                   qDebug("warning : lyricsList  bad segment type <%s><%s>\n", name(), subTypeName());
             return 0;
             }

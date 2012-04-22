@@ -384,10 +384,10 @@ void HBox::layout()
       {
       if (parent() && parent()->type() == VBOX) {
             VBox* vb = static_cast<VBox*>(parent());
-            qreal x = vb->leftMargin() * DPMM;
-            qreal y = vb->topMargin() * DPMM;
+            qreal x = vb->leftMargin() * MScore::DPMM;
+            qreal y = vb->topMargin() * MScore::DPMM;
             qreal w = point(boxWidth());
-            qreal h = vb->height() - (vb->topMargin() + vb->bottomMargin()) * DPMM;
+            qreal h = vb->height() - (vb->topMargin() + vb->bottomMargin()) * MScore::DPMM;
             setPos(x, y);
             setbbox(QRectF(0.0, 0.0, w, h));
             }
@@ -486,7 +486,7 @@ QRectF HBox::drag(const EditData& data)
       qreal x1   = userOff().x() + diff;
       if (parent()->type() == VBOX) {
             VBox* vb = static_cast<VBox*>(parent());
-            qreal x2 = parent()->width() - width() - (vb->leftMargin() + vb->rightMargin()) * DPMM;
+            qreal x2 = parent()->width() - width() - (vb->leftMargin() + vb->rightMargin()) * MScore::DPMM;
             if (x1 < 0.0)
                   x1 = 0.0;
             else if (x1 > x2)

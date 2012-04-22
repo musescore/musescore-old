@@ -42,7 +42,7 @@ FretDiagram::FretDiagram(Score* score)
       _fingering  = 0;
       _fretOffset = 0;
       font.setFamily("FreeSans");
-      int size = lrint(4.0 * DPI * mag()/ PPI);
+      int size = lrint(4.0 * MScore::DPI * mag()/ PPI);
       font.setPixelSize(size);
       _harmony = 0;
       }
@@ -538,6 +538,6 @@ void FretDiagram::readMusicXML(const QDomElement& de)
 //   Write MusicXML
 //---------------------------------------------------------
 
-void FretDiagram::writeMusicXML(Xml& xml) const
+void FretDiagram::writeMusicXML(Xml& /*xml*/) const
       {
       }

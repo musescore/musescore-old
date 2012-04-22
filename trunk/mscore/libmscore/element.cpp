@@ -78,7 +78,6 @@
 #include "rehearsalmark.h"
 #include "notedot.h"
 
-extern bool debugMode;
 extern bool showInvisible;
 
 //
@@ -251,7 +250,7 @@ qreal Element::spatium() const
 
 qreal Element::magS() const
       {
-      return _mag * (_score->spatium() /(DPI * SPATIUM20));
+      return _mag * (_score->spatium() /(MScore::DPI * SPATIUM20));
       }
 
 //---------------------------------------------------------
@@ -290,10 +289,10 @@ Element::~Element()
       if (score()) {
             foreach(Element* e, score()->selection().elements()) {
                   if (e == this) {
-//                        if (debugMode)
+//                        if (MScore::debugMode)
                               qDebug("======~Element: %p still in selection! generated %d\n",
                                  this, generated());
-//                        if (debugMode)
+//                        if (MScore::debugMode)
 //                              abort();
                         score()->deselect(this);
                         }
@@ -867,7 +866,7 @@ void StaffLines::draw(QPainter* painter) const
             ll[i].setLine(x1, y, x2, y);
             y += dist;
             }
-      if (debugMode) {
+      if (MScore::debugMode) {
             painter->setPen(QPen(Qt::lightGray, lw, Qt::SolidLine, Qt::FlatCap));
             y = _pos.y() - 3 * dist;
             painter->drawLine(QLineF(x1, y, x2, y));

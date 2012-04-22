@@ -735,7 +735,7 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, const Event& mm)
                   break;
 
             default:
-                  if (debugMode)
+                  if (MScore::debugMode)
                         qDebug("unknown meta type 0x%02x", mm.metaType());
                   break;
             }
@@ -951,7 +951,7 @@ void convertMidi(Score* score, MidiFile* mf)
                   if ((e.type() == ME_META) && (e.metaType() != META_LYRIC))
                         mf->processMeta(score, track, e);
                   }
-            if (debugMode) {
+            if (MScore::debugMode) {
                   qDebug("Track %2d:%2d key %d <%s><%s>", track->outChannel(),
                      track->outPort(), track->hasKey(), qPrintable(track->name()),
                      qPrintable(track->comment()));

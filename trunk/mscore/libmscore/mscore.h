@@ -559,12 +559,6 @@ enum {
       ICON_VFRAME, ICON_HFRAME, ICON_TFRAME, ICON_FFRAME, ICON_MEASURE
       };
 
-
-extern qreal PDPI;
-extern qreal DPI;
-extern qreal DPMM;
-extern bool debugMode;
-
 class MStyle;
 class Sequencer;
 
@@ -609,9 +603,13 @@ class MScore {
 
       static int division;
       static int sampleRate;
-      static bool debugMsg;
       static int mtcType;
       static Sequencer* seq;
+
+      static qreal PDPI;
+      static qreal DPI;
+      static qreal DPMM;
+      static bool debugMode;
       };
 
 //---------------------------------------------------------

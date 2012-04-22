@@ -602,7 +602,7 @@ void domError(const QDomElement& e)
 
 void domNotImplemented(const QDomElement& e)
       {
-      if (!MScore::debugMsg)
+      if (!MScore::debugMode)
             return;
       QString s = domElementPath(e);
       if (!docName.isEmpty())

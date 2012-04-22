@@ -1385,7 +1385,7 @@ void Score::addElement(Element* element)
       {
 //      if (_undoRedo)
 //            qFatal("Score:addElement in undo/redo");
-      if (debugMode) {
+      if (MScore::debugMode) {
             qDebug("   Score(%p)::addElement %p(%s) parent %p(%s)",
                this, element, element->name(), element->parent(),
                element->parent() ? element->parent()->name() : "");
@@ -1513,7 +1513,7 @@ void Score::removeElement(Element* element)
 //            qFatal("Score:addElement in undo/redo");
       Element* parent = element->parent();
 
-      if (debugMode) {
+      if (MScore::debugMode) {
             qDebug("   Score(%p)::removeElement %p(%s) parent %p(%s)",
                this, element, element->name(), parent, parent ? parent->name() : "");
             }
@@ -2738,7 +2738,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                   ee = ee->parent();
             setPlayPos(static_cast<ChordRest*>(ee)->segment()->tick());
             }
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("select element <%s> type %d(state %d) staff %d\n",
                e ? e->name() : "", type, selection().state(), e ? e->staffIdx() : -1);
 
@@ -3151,7 +3151,7 @@ qreal Score::tempo(int tick) const
 
 qreal Score::loWidth() const
       {
-      return pageFormat()->size().width() * DPI;
+      return pageFormat()->size().width() * MScore::DPI;
       }
 
 //---------------------------------------------------------
@@ -3160,7 +3160,7 @@ qreal Score::loWidth() const
 
 qreal Score::loHeight() const
       {
-      return pageFormat()->size().height() * DPI;
+      return pageFormat()->size().height() * MScore::DPI;
       }
 
 //---------------------------------------------------------

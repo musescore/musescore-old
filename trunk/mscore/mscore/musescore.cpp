@@ -96,7 +96,6 @@ Q_IMPORT_PLUGIN(com_trolltech_qt_webkit_ScriptPlugin)
 
 MuseScore* mscore;
 
-bool debugMode          = false;
 bool enableExperimental = false;
 
 QString dataPath;
@@ -1057,12 +1056,12 @@ void MuseScore::helpBrowser()
       {
       QString lang = getLocaleISOCode();
 
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("open handbook for language <%s>", qPrintable(lang));
 
       QFileInfo mscoreHelp(mscoreGlobalShare + QString("man/MuseScore-") + lang + QString(".pdf"));
       if (!mscoreHelp.isReadable()) {
-            if (debugMode) {
+            if (MScore::debugMode) {
                   qDebug("cannot open doc <%s>", qPrintable(mscoreHelp.filePath()));
                   }
             lang = lang.left(2);
@@ -1095,7 +1094,7 @@ void MuseScore::helpBrowser1()
       {
       QString lang = getLocaleISOCode();
 
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("open online handbook for language <%s>", qPrintable(lang));
       QString help("http://www.musescore.org/en/handbook");
       //try to find an exact match
@@ -1424,7 +1423,7 @@ void MuseScore::dragEnterEvent(QDragEnterEvent* event)
       if (data->hasUrls()) {
             QList<QUrl>ul = event->mimeData()->urls();
             foreach(const QUrl& u, ul) {
-                  if (debugMode)
+                  if (MScore::debugMode)
                         qDebug("drag Url: %s", qPrintable(u.toString()));
                   if (u.scheme() == "file") {
                         QFileInfo fi(u.toLocalFile());
@@ -1807,20 +1806,20 @@ void setMscoreLocale(QString localeName)
             }
       translatorList.clear();
 
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("configured localeName <%s>", qPrintable(localeName));
       if (localeName.toLower() == "system") {
             localeName = QLocale::system().name();
-            if (debugMode)
+            if (MScore::debugMode)
                   qDebug("real localeName <%s>", qPrintable(localeName));
             }
 
       QTranslator* translator = new QTranslator;
       QString lp = mscoreGlobalShare + "locale/" + QString("mscore_") + localeName;
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("load translator <%s>", qPrintable(lp));
 
-      if (!translator->load(lp) && debugMode)
+      if (!translator->load(lp) && MScore::debugMode)
             qDebug("load translator <%s> failed", qPrintable(lp));
       else {
             qApp->installTranslator(translator);
@@ -1834,11 +1833,11 @@ void setMscoreLocale(QString localeName)
       resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
 #endif
       QTranslator* qtTranslator = new QTranslator;
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("load translator <qt_%s> from <%s>",
                qPrintable(localeName), qPrintable(resourceDir));
 
-      if (!qtTranslator->load(QLatin1String("qt_") + localeName, resourceDir) && debugMode)
+      if (!qtTranslator->load(QLatin1String("qt_") + localeName, resourceDir) && MScore::debugMode)
             qDebug("load translator <qt_%s> failed", qPrintable(localeName));
       else {
             qApp->installTranslator(qtTranslator);
@@ -2126,7 +2125,7 @@ int main(int argc, char* av[])
                         printVersion("MuseScore");
                         return 0;
                    case 'd':
-                        debugMode = true;
+                        MScore::debugMode = true;
                         break;
                   case 'L':
                         MScore::layoutDebug = true;
@@ -2232,7 +2231,7 @@ int main(int argc, char* av[])
       QDir dir;
       dir.mkpath(dataPath + "/plugins");
 
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("global share: <%s>", qPrintable(mscoreGlobalShare));
 
       // set translator before preferences are read to get
@@ -2251,10 +2250,10 @@ int main(int argc, char* av[])
       preferences.init();
 
       QWidget wi(0);
-      PDPI = wi.logicalDpiX();         // physical resolution
-      DPI  = PDPI;                     // logical drawing resolution
-      DPMM = DPI / INCH;      // dots/mm
-      MScore::init();         // initialize libmscore
+      MScore::PDPI = wi.logicalDpiX();         // physical resolution
+      MScore::DPI  = MScore::PDPI;             // logical drawing resolution
+      MScore::DPMM = MScore::DPI / INCH;       // dots/mm
+      MScore::init();                          // initialize libmscore
       preferences.readDefaultStyle();
 
       if (!useFactorySettings)
@@ -2324,7 +2323,7 @@ int main(int argc, char* av[])
 #endif
       QLocale::setDefault(QLocale(QLocale::C));
 
-      if (debugMode) {
+      if (MScore::debugMode) {
             QStringList sl(QCoreApplication::libraryPaths());
             foreach(const QString& s, sl)
                   qDebug("LibraryPath: <%s>", qPrintable(s));
@@ -2549,7 +2548,7 @@ void MuseScore::clipboardChanged()
 
 void MuseScore::changeState(ScoreState val)
       {
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("MuseScore::changeState: %s", stateName(val));
 
       if (_sstate == val)
@@ -2569,7 +2568,7 @@ void MuseScore::changeState(ScoreState val)
             else if (strcmp(s->key(), "synth-control") == 0) {
                   Driver* driver = seq ? seq->getDriver() : 0;
                   // a->setEnabled(driver && driver->getSynth());
-                  if (debugMode)
+                  if (MScore::debugMode)
                         qDebug("disable synth control");
                   a->setEnabled(driver);
                   }
@@ -3139,8 +3138,8 @@ void MuseScore::writeSessionFile(bool cleanExit)
                         xml.tag("mag", v->mag());
                   else
                         xml.tag("magIdx", v->magIdx());
-                  xml.tag("x",   v->xoffset() / DPMM);
-                  xml.tag("y",   v->yoffset() / DPMM);
+                  xml.tag("x",   v->xoffset() / MScore::DPMM);
+                  xml.tag("y",   v->yoffset() / MScore::DPMM);
                   xml.etag();
                   }
             }
@@ -3159,8 +3158,8 @@ void MuseScore::writeSessionFile(bool cleanExit)
                               xml.tag("mag", v->mag());
                         else
                               xml.tag("magIdx", v->magIdx());
-                        xml.tag("x",   v->xoffset() / DPMM);
-                        xml.tag("y",   v->yoffset() / DPMM);
+                        xml.tag("x",   v->xoffset() / MScore::DPMM);
+                        xml.tag("y",   v->yoffset() / MScore::DPMM);
                         xml.etag();
                         }
                   }
@@ -3343,9 +3342,9 @@ bool MuseScore::restoreSession(bool always)
                                     else if (tag == "magIdx")
                                           magIdx = val.toInt();
                                     else if (tag == "x")
-                                          x = val.toDouble() * DPMM;
+                                          x = val.toDouble() * MScore::DPMM;
                                     else if (tag == "y")
-                                          y = val.toDouble() * DPMM;
+                                          y = val.toDouble() * MScore::DPMM;
                                     else {
                                           domError(eee);
                                           f.close();
@@ -3904,7 +3903,7 @@ void MuseScore::cmd(QAction* a)
 
       QString cmdn(a->data().toString());
 
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("MuseScore::cmd <%s>", cmdn.toAscii().data());
 
       Shortcut* sc = Shortcut::getShortcut(cmdn.toAscii().data());

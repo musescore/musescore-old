@@ -438,7 +438,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             }
       else if (cmd == "insert-hbox") {
             HBox* s = new HBox(score());
-            double w = width() - s->leftMargin() * DPMM - s->rightMargin() * DPMM;
+            double w = width() - s->leftMargin() * MScore::DPMM - s->rightMargin() * MScore::DPMM;
             s->setBoxWidth(Spatium(w / s->spatium()));
             s->setParent(e);
             score()->undoAddElement(s);

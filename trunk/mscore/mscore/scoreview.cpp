@@ -869,7 +869,7 @@ ScoreView::ScoreView(QWidget* parent)
 
       //-----------------------------------------------------------------------
 
-      if (debugMode)
+      if (MScore::debugMode)
             setMouseTracking(true);
 
       if (preferences.bgUseColor)
@@ -1514,7 +1514,7 @@ void ScoreView::moveCursor(int tick)
 
       update(_matrix.mapRect(_cursor->rect()).toRect().adjusted(-1,-1,1,1));
 
-      qreal mag = _spatium / (DPI * SPATIUM20);
+      qreal mag = _spatium / (MScore::DPI * SPATIUM20);
       double w  = _spatium * 2.0 + symbols[score()->symIdx()][quartheadSym].width(mag);
       double h  = 6 * _spatium;
       //
@@ -1559,7 +1559,7 @@ void ScoreView::moveCursor(Segment* segment, int track)
       update(_matrix.mapRect(_cursor->rect()).toRect().adjusted(-1,-1,1,1));
 
       double h;
-      qreal mag = _spatium / (DPI * SPATIUM20);
+      qreal mag = _spatium / (MScore::DPI * SPATIUM20);
       double w  = _spatium * 2.0 + symbols[score()->symIdx()][quartheadSym].width(mag);
 
       if (track == -1) {
@@ -2279,7 +2279,7 @@ void ScoreView::drawElements(QPainter& painter, const QList<const Element*>& el)
             painter.translate(pos);
             e->draw(&painter);
             painter.translate(-pos);
-            if (debugMode && e->selected())
+            if (MScore::debugMode && e->selected())
                   drawDebugInfo(painter, e);
             }
       }
@@ -2410,7 +2410,7 @@ void ScoreView::normalCopy()
       if (!mimeType.isEmpty()) {
             QMimeData* mimeData = new QMimeData;
             mimeData->setData(mimeType, _score->selection().mimeData());
-            if (debugMode)
+            if (MScore::debugMode)
                   qDebug("cmd copy: <%s>", mimeData->data(mimeType).data());
             QApplication::clipboard()->setMimeData(mimeData);
             }
@@ -2471,7 +2471,7 @@ void ScoreView::normalPaste()
 void ScoreView::cmd(const QAction* a)
       {
       QString cmd(a ? a->data().toString() : "");
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("ScoreView::cmd <%s>", qPrintable(cmd));
 
       if (cmd == "escape")
@@ -3676,7 +3676,7 @@ ScoreState ScoreView::mscoreState() const
 
 void ScoreView::enterState()
       {
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("%p enterState <%s>", this, qPrintable(sender()->objectName()));
       }
 
@@ -3687,7 +3687,7 @@ void ScoreView::enterState()
 
 void ScoreView::exitState()
       {
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("%p exitState <%s>", this, qPrintable(sender()->objectName()));
       }
 
@@ -4949,7 +4949,7 @@ void ScoreView::cmdRepeatSelection()
             }
       QMimeData* mimeData = new QMimeData;
       mimeData->setData(mimeType, selection.mimeData());
-      if (debugMode)
+      if (MScore::debugMode)
             qDebug("cmdRepeatSelection: <%s>", mimeData->data(mimeType).data());
       QApplication::clipboard()->setMimeData(mimeData);
 

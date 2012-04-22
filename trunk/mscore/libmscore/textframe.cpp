@@ -57,7 +57,7 @@ void TBox::layout()
                         }
                   else
                         h = text->height();
-                  text->setPos(leftMargin() * DPMM, topMargin() * DPMM);
+                  text->setPos(leftMargin() * MScore::DPMM, topMargin() * MScore::DPMM);
                   setbbox(QRectF(0.0, 0.0, system()->width(), h));
                   }
             }

@@ -37,7 +37,7 @@ QPointF ElementLayout::offset(qreal spatium) const
       if (_offsetType == OFFSET_SPATIUM)
             o *= spatium;
       else
-            o *= DPI;
+            o *= MScore::DPI;
       return o;
       }
 
