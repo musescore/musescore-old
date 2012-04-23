@@ -146,9 +146,9 @@ bool MTest::saveCompareScore(Score* score, const QString& saveName, const QStrin
 
 void MTest::initMTest()
       {
-      DPI  = 120;
-      PDPI = 120;
-      DPMM = DPI / INCH;
+      MScore::DPI  = 120;
+      MScore::PDPI = 120;
+      MScore::DPMM = MScore::DPI / INCH;
 
       mscore = new MScore;
       mscore->init();
