@@ -1008,6 +1008,37 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
                               break;
                               }
                         }
+                  // check if notes moved into this staff
+                  Part* part = staff->part();
+                  int n = part->nstaves();
+                  if (hideStaff && (n > 1)) {
+                        int idx = part->staves()->front()->idx();
+                        for (int i = 0; i < part->nstaves(); ++i) {
+                              int st = idx + i;
+
+                              foreach(MeasureBase* mb, system->measures()) {
+                                    if (mb->type() != MEASURE)
+                                          continue;
+                                    Measure* m = static_cast<Measure*>(mb);
+                                    for (Segment* s = m->first(SegChordRest); s; s = s->next(SegChordRest)) {
+                                          for (int voice = 0; voice < VOICES; ++voice) {
+                                                ChordRest* cr = static_cast<ChordRest*>(s->element(st * VOICES + voice));
+                                                if (cr == 0 || cr->type() == REST)
+                                                      continue;
+                                                int staffMove = cr->staffMove();
+                                                if (staffIdx == st + staffMove) {
+                                                      hideStaff = false;
+                                                      break;
+                                                      }
+                                                }
+                                          }
+                                    if (!hideStaff)
+                                          break;
+                                    }
+                              if (!hideStaff)
+                                    break;
+                              }
+                        }
                   s->setShow(hideStaff ? false : staff->show());
                   }
             else {
