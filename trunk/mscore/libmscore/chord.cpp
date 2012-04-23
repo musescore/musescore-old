@@ -1833,52 +1833,42 @@ QPointF Chord::layoutArticulation(Articulation* a)
                   bottom = (aa == A_BOTTOM_CHORD) || (aa == A_CHORD && up());
             bool stemSide = (bottom != up()) && stem();
             a->setUp(!bottom);
-            if (bottom) {
-                  int line = downLine();
-                  if (stemSide) {
-                        y = chordTopY + stem()->stemLen();
-                        if (beam())
-                              y += score()->styleS(ST_beamWidth).val() * _spatium * .5;
-                        x = stem()->pos().x();
-                        int line   = lrint((y + 0.5 * _spatium) / _spatium);
-                        if (line <= 4)    // align between staff lines
-                              y = (line - .5) * _spatium;
-                        else
-                              y += _spatium;
-                        }
+
+            QPointF pos(stem()->hookPos());
+
+            qreal _spatium2 = _spatium * .5;
+            if (stemSide) {
+                  int line = lrint((pos.y() + 0.5 * _spatium) / _spatium);
+                  if (line >= 0 && line <= 4)    // align between staff lines
+                        pos.ry() = (line * _spatium) + (bottom ? _spatium2 : -_spatium2);
                   else {
-                        int lines = (staff()->lines() - 1) * 2;
-                        if (line < lines)
-                              y = (line & ~1) + 3;
-                        else
-                              y = line + 2;
-                        y *= _spatium * .5;
+                        qreal dy = (score()->styleS(ST_beamWidth).val() + 1) * _spatium2;
+                        pos.ry() += bottom ? dy : - dy;
                         }
                   }
             else {
-                  if (stemSide) {
-                        y = stem()->hookPos().y();
-                        if (beam())
-                              y -= score()->styleS(ST_beamWidth).val() * _spatium * .5;
-                        x = stem()->pos().x();
-                        int line = lrint((y - 0.5 * _spatium) / _spatium);
-                        if (line >= 0 && line <= 4)    // align between staff lines
-                              y = (line - .5) * _spatium;
+                  int line;
+                  if (bottom) {
+                        line = downLine();
+                        int lines = (staff()->lines() - 1) * 2;
+                        if (line < lines)
+                              line = (line & ~1) + 3;
                         else
-                              y -= _spatium;
+                              line += 2;
                         }
                   else {
-                        int line = upLine();
+                        line = upLine();
                         if (line > 0)
-                              y = ((line+1) & ~1) - 3;
+                              line = ((line+1) & ~1) - 3;
                         else
-                              y = line - 2;
-                        y *= _spatium * .5;
+                              line -= 2;
                         }
+                  pos.ry() = line * _spatium2;
                   }
-            a->setPos(x, y);
+
+            a->setPos(pos);
             a->adjustReadPos();
-            return QPointF(x, y);
+            return QPointF(pos);
             }
 
       // reserve space for slur
