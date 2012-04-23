@@ -276,8 +276,11 @@ unsigned Pos::tick() const
 
 unsigned Pos::frame() const
       {
-	if (_type == TICKS)
-            _frame = tempo->tick2time(_tick, _frame, &sn) * MScore::sampleRate;
+	if (_type == TICKS) {
+            // qreal time = _frame / MScore::sampleRate;
+            // _frame = tempo->tick2time(_tick, time, &sn) * MScore::sampleRate;
+            _frame = tempo->tick2time(_tick) * MScore::sampleRate;
+            }
       return _frame;
       }
 
@@ -337,7 +340,6 @@ void Pos::read(QDomNode node)
             _type = FRAMES;
             }
       }
-
 
 //---------------------------------------------------------
 //   PosLen

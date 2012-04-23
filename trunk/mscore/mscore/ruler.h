@@ -67,6 +67,8 @@ class Ruler : public QWidget {
    public:
       Ruler(QWidget* parent = 0);
       void setScore(Score*, Pos* locator);
+      double xmag() const { return _xmag; }
+      int xpos() const { return _xpos; }
       };
 
 #endif
