@@ -28,6 +28,7 @@ class WaveView : public QWidget
       Pos _cursor;
       Pos* _locator;
       Score* _score;
+      QByteArray waves;
 
       TType _timeType;
       int magStep;
@@ -35,8 +36,10 @@ class WaveView : public QWidget
       int _xpos;
 
       int pos2pix(const Pos& p) const;
+      Pos pix2pos(int x) const;
       virtual void paintEvent(QPaintEvent*);
       virtual QSize sizeHint() const { return QSize(50, 50); }
+      int pegel(int frame1, int frame2);
 
    public slots:
       void setMag(double,double);

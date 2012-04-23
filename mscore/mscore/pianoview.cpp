@@ -246,6 +246,8 @@ void PianoView::drawBackground(QPainter* p, const QRectF& r)
 PianoView::PianoView()
    : QGraphicsView()
       {
+      setLineWidth(0);
+      setMidLineWidth(0);
       setScene(new QGraphicsScene);
       setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
       setResizeAnchor(QGraphicsView::AnchorUnderMouse);
@@ -322,8 +324,6 @@ void PianoView::setChord(Chord* c, Pos* l)
 
 void PianoView::setStaff(Staff* s, Pos* l)
       {
-printf("PianoView::setStaff\n");
-
       static const QColor lcColors[3] = { Qt::red, Qt::blue, Qt::blue };
 
       staff    = s;
@@ -387,6 +387,8 @@ printf("PianoView::setStaff\n");
                   boundingRect |= item->mapToScene(item->boundingRect()).boundingRect();
             }
       centerOn(boundingRect.center());
+
+      horizontalScrollBar()->setValue(0);
       }
 
 //---------------------------------------------------------

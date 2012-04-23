@@ -94,9 +94,11 @@ WaveView::WaveView(QWidget* parent)
       {
       _xpos   = 0;
       _xmag   = 0.1;
-      _timeType = TICKS;
+      _timeType = TICKS;      // FRAMES
       setMinimumHeight(50);
       }
+
+static const int WSCALE = 10;
 
 //---------------------------------------------------------
 //   setAudio
@@ -104,26 +106,69 @@ WaveView::WaveView(QWidget* parent)
 
 void WaveView::setAudio(Audio* audio)
       {
+      waves.clear();
       OggVorbis_File vf;
       vorbisData.pos  = 0;
       vorbisData.data = audio->data();
-      int n = ov_open_callbacks(&vorbisData, &vf, 0, 0, ovCallbacks);
-      if (n < 0) {
-            printf("ogg open failed: %d\n", n);
+      int rv = ov_open_callbacks(&vorbisData, &vf, 0, 0, ovCallbacks);
+      if (rv < 0) {
+            printf("ogg open failed: %d\n", rv);
             return;
             }
-      long samples = 0;
-      for(;;) {
-            float** pcm;
-            int section;
-            long rn = ov_read_float(&vf, &pcm, 10000, &section);
-            if (rn == 0)
-                  break;
-            // memcpy(l, pcm[0], rn * sizeof(float));
-            // memcpy(r, pcm[1], rn * sizeof(float));
-            samples += rn;
+      int rn = 0;
+      const int n = 10000 / WSCALE;
+      uchar dst[n];
+      float* r;
+      float* l;
+      for (;;) {
+            for (int i = 0; i < n; ++i) {
+                  float val = 0;
+                  for (int k = 0; k < WSCALE; ++k) {
+                        if (rn == 0) {
+                              float** pcm;
+                              int section;
+                              rn = ov_read_float(&vf, &pcm, 1000, &section);
+                              if (rn == 0) {
+                                    for (; i < n; ++i)
+                                          dst[i] = 0;
+                                    waves.append((char*)dst, n);
+                                    ov_clear(&vf);
+                                    return;
+                                    }
+                              r = pcm[0];
+                              l = pcm[1];
+                              }
+                        val += fabsf(*r++) + fabsf(*l++);
+                        --rn;
+                        }
+                  unsigned int v = lrint(val * 128);
+                  if (v > 255)
+                        v = 255;
+                  dst[i] = v;
+                  }
+            waves.append((char*)dst, n);
             }
-      ov_clear(&vf);
+      }
+
+//---------------------------------------------------------
+//   pegel
+//---------------------------------------------------------
+
+int WaveView::pegel(int frame1, int frame2)
+      {
+      if (frame1 < 0)
+            frame1 = 0;
+      if (frame1 > frame2)
+            return 0;
+      frame1 = (frame1 + WSCALE/2) / WSCALE;
+      frame2 = (frame2 + WSCALE/2) / WSCALE;
+      if (frame2 >= waves.size())
+            frame2 = waves.size()-1;
+      int p = 0;
+      for (int i = frame1; i <= frame2; ++i)
+            p += uchar(waves[i]);
+      p /= (frame2 - frame1 + 1);
+      return p;
       }
 
 //---------------------------------------------------------
@@ -180,8 +225,20 @@ static const int MAP_OFFSET = 5;
 
 int WaveView::pos2pix(const Pos& p) const
       {
-      return lrint((p.time(_timeType)+480) * _xmag)
+      return lrint((p.time(_timeType) + 480) * _xmag)
          + MAP_OFFSET - _xpos + pianoWidth;
+      }
+
+//---------------------------------------------------------
+//   pix2pos
+//---------------------------------------------------------
+
+Pos WaveView::pix2pos(int x) const
+      {
+      x -= (pianoWidth + MAP_OFFSET);
+      if (x < 0)
+            x = 0;
+      return Pos(_score->tempomap(), _score->sigmap(), ((x + _xpos) / _xmag) - 480, _timeType);
       }
 
 //---------------------------------------------------------
@@ -191,16 +248,30 @@ int WaveView::pos2pix(const Pos& p) const
 void WaveView::paintEvent(QPaintEvent* event)
       {
       QPainter p(this);
-      int xoffset = pianoWidth + 5;
+      int xoffset = pianoWidth + MAP_OFFSET;
       QRect rt(0, 0, xoffset, height());
       QRect r(event->rect());
 
-      p.fillRect(r, Qt::yellow);
+      p.fillRect(r, Qt::gray);
       if (rt.intersects(r.translated(_xpos, 0)))
             p.fillRect(rt.translated(-_xpos, 0), Qt::lightGray);
 
-      QPen pen(Qt::lightGray, 2);
-      p.setPen(pen);
+      int x1 = r.x();
+      int x2 = x1 + r.width();
+      if (x1 < pianoWidth)
+            x1 = pianoWidth;
+      Pos p1 = pix2pos(x1);
+      p.setPen(QPen(Qt::blue, 1));
+      for (int i = x1+1; i < x2; ++i) {
+            Pos p2 = pix2pos(i);
+            int val = height() * pegel(p1.frame(), p2.frame()) / 255;
+            p1 = p2;
+            int y1 = height() - val;
+            int y2 = height();
+            p.drawLine(i, y1, i, y2);
+            }
+
+      p.setPen(QPen(Qt::lightGray, 2));
       int y = height() / 2;
       int x = xoffset - _xpos;
       int w = width() - x;

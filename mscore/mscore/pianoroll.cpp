@@ -123,15 +123,21 @@ PianorollEditor::PianorollEditor(QWidget* parent)
 
       // layout
       QHBoxLayout* hbox = new QHBoxLayout;
+      hbox->setSpacing(0);
       hbox->addWidget(piano);
       hbox->addWidget(gv);
 
       split = new QSplitter(Qt::Vertical);
+      split->setLineWidth(0);
+      split->setMidLineWidth(0);
+
       QWidget* split1 = new QWidget;
       split1->setLayout(hbox);
       split->addWidget(split1);
 
       QGridLayout* layout = new QGridLayout;
+      layout->setContentsMargins(0, 0, 0, 0);
+      layout->setSpacing(0);
       mainWidget->setLayout(layout);
       layout->setColumnMinimumWidth(0, pianoWidth + 5);
       layout->setSpacing(0);
@@ -143,15 +149,20 @@ PianorollEditor::PianorollEditor(QWidget* parent)
       setCentralWidget(mainWidget);
 
       connect(gv->verticalScrollBar(), SIGNAL(valueChanged(int)), piano, SLOT(setYpos(int)));
-      connect(hsb,         SIGNAL(valueChanged(int)), SLOT(setXpos(int)));
+
       connect(gv,          SIGNAL(magChanged(double,double)),  ruler, SLOT(setMag(double,double)));
       connect(gv,          SIGNAL(magChanged(double,double)),  piano, SLOT(setMag(double,double)));
       connect(gv,          SIGNAL(pitchChanged(int)),          pl,    SLOT(setPitch(int)));
       connect(gv,          SIGNAL(pitchChanged(int)),          piano, SLOT(setPitch(int)));
       connect(piano,       SIGNAL(pitchChanged(int)),          pl,    SLOT(setPitch(int)));
-      connect(gv,          SIGNAL(posChanged(const Pos&)), pos,   SLOT(setValue(const Pos&)));
-      connect(gv,          SIGNAL(posChanged(const Pos&)), ruler, SLOT(setPos(const Pos&)));
-      connect(ruler,       SIGNAL(posChanged(const Pos&)), pos,   SLOT(setValue(const Pos&)));
+      connect(gv,          SIGNAL(posChanged(const Pos&)),     pos,   SLOT(setValue(const Pos&)));
+      connect(gv,          SIGNAL(posChanged(const Pos&)),     ruler, SLOT(setPos(const Pos&)));
+      connect(ruler,       SIGNAL(posChanged(const Pos&)),     pos,   SLOT(setValue(const Pos&)));
+
+      connect(hsb,         SIGNAL(valueChanged(int)),  SLOT(setXpos(int)));
+      connect(gv,          SIGNAL(xposChanged(int)),   SLOT(setXPos(int)));
+      connect(gv->horizontalScrollBar(), SIGNAL(valueChanged(int)), SLOT(setXpos(int)));
+
       connect(ruler,       SIGNAL(locatorMoved(int)),  SLOT(moveLocator(int)));
       connect(veloType,    SIGNAL(activated(int)),     SLOT(veloTypeChanged(int)));
       connect(velocity,    SIGNAL(valueChanged(int)),  SLOT(velocityChanged(int)));
@@ -167,6 +178,7 @@ PianorollEditor::PianorollEditor(QWidget* parent)
       ag->addAction(a);
       addActions(ag->actions());
       connect(ag, SIGNAL(triggered(QAction*)), SLOT(cmd(QAction*)));
+      setXpos(0);
       }
 
 //---------------------------------------------------------
@@ -414,6 +426,8 @@ void PianorollEditor::heartBeat(Seq* seq)
       if (locator[0].tick() != t) {
             locator[0].setTick(t);
             gv->moveLocator(0);
+            if (waveView)
+                  waveView->moveLocator(0);
             ruler->update();
             if (preferences.followSong)
                   gv->ensureVisible(t);
@@ -429,6 +443,8 @@ void PianorollEditor::moveLocator(int i)
       if (locator[i].valid()) {
             seq->seek(locator[i].tick());
             gv->moveLocator(i);
+            if (waveView)
+                  waveView->moveLocator(i);
             }
       }
 
@@ -611,12 +627,13 @@ void PianorollEditor::showWaveView(bool val)
       if (val) {
             if (waveView == 0) {
                   waveView = new WaveView;
-                  connect(gv, SIGNAL(posChanged(const Pos&)),    waveView, SLOT(setPos(const Pos&)));
                   connect(gv, SIGNAL(magChanged(double,double)), waveView, SLOT(setMag(double,double)));
-                  connect(ruler, SIGNAL(locatorMoved(int)),      waveView, SLOT(moveLocator(int)));
+                  connect(gv, SIGNAL(posChanged(const Pos&)), waveView,   SLOT(setValue(const Pos&)));
                   waveView->setAudio(_score->audio());
                   waveView->setScore(_score, locator);
                   split->addWidget(waveView);
+                  waveView->setMag(ruler->xmag(), 1.0);
+                  waveView->setXpos(ruler->xpos());
                   }
             waveView->setVisible(true);
             }

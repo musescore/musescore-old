@@ -191,6 +191,8 @@ int Ruler::pos2pix(const Pos& p) const
 void Ruler::paintEvent(QPaintEvent* e)
       {
       QPainter p(this);
+//      p.fillRect(e->rect(), Qt::yellow);
+
       const QRect& r = e->rect();
 
       static const int mag[7] = {
