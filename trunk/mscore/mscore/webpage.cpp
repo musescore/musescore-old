@@ -123,6 +123,14 @@ MyWebView::~MyWebView()
       disconnect(this, SIGNAL(loadFinished(bool)), this, SLOT(stopBusyStatic(bool)));
       }
 
+void MyWebView::load ( const QNetworkRequest & request, QNetworkAccessManager::Operation operation, const QByteArray & body) 
+      {
+      QNetworkRequest new_req(request);  
+      new_req.setRawHeader("User-Agent",  QString("MuseScore %1").arg(VERSION).toAscii());  
+      new_req.setRawHeader("Accept-Language",  QString("%1;q=0.8,en-US;q=0.6,en;q=0.4").arg(mscore->getLocaleISOCode()).toAscii());   
+      QWebView::load( new_req, operation, body);
+      }
+
 //---------------------------------------------------------
 //   stopBusy
 //---------------------------------------------------------
@@ -152,7 +160,6 @@ void MyWebView::stopBusy(bool val, bool close)
             if(!preferences.firstStartWeb && close)
                   mscore->showWebPanel(false);
             }
-//      disconnect(this, SIGNAL(loadProgress(int)), progressBar, SLOT(setValue(int)));
       mscore->hideProgressBar();
       setCursor(Qt::ArrowCursor);
       }
@@ -182,11 +189,6 @@ void MyWebView::stopBusyStatic(bool val)
 
 void MyWebView::setBusy()
       {
-/*      progressBar = mscore->showProgressBar();
-      progressBar->setRange(0, 100);
-      progressBar->setValue(0);
-      connect(this, SIGNAL(loadProgress(int)), progressBar, SLOT(setValue(int)));
-*/
       setCursor(Qt::WaitCursor);
       }
 
@@ -213,18 +215,6 @@ void MyWebView::link(const QUrl& url)
 QSize	MyWebView::sizeHint() const
       {
       return QSize(300 , 300);
-      }
-
-//---------------------------------------------------------
-//   load
-//---------------------------------------------------------
-
-void	MyWebView::load(const QNetworkRequest & request, QNetworkAccessManager::Operation operation, const QByteArray & body)
-      {
-      QNetworkRequest new_req(request);
-      new_req.setRawHeader("User-Agent",  QString("MuseScore %1").arg(VERSION).toAscii());
-      new_req.setRawHeader("Accept-Language",  QString("%1;q=0.8,en-US;q=0.6,en;q=0.4").arg(mscore->getLocaleISOCode()).toAscii());
-      QWebView::load( new_req, operation, body);
       }
 
 //---------------------------------------------------------
@@ -303,6 +293,99 @@ void WebPageDockWidget::load()
       connect(web, SIGNAL(loadFinished(bool)), web, SLOT(stopBusyAndFirst(bool)));
       web->setBusy();
       web->load(QNetworkRequest(webUrl()));
+      }
+
+#if QT_VERSION >= 0x040800
+bool WebPageDockWidget::saveCurrentScoreOnline(QString action, QVariantMap parameters, QString fileFieldName)
+      {
+      qDebug("saveCurrentOnline");
+      QWebPage * page = web->webPage();
+      QNetworkAccessManager* manager = page->networkAccessManager();
+      
+      QHttpMultiPart *multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);
+
+      QMap<QString, QVariant>::const_iterator i = parameters.constBegin();
+      while (i != parameters.constEnd()) {
+            QHttpPart part;
+            part.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant(QString("form-data; name=\"%1\"").arg(i.key())));
+            part.setBody(i.value().toString().toAscii());
+            multiPart->append(part);
+            //printf("%s \n", qPrintable(i.key()));
+            //printf("%s \n", qPrintable(i.value().toString()));
+            ++i;
+            }
+
+      if(!fileFieldName.isEmpty()) {
+            QDir dir;
+            QFile *file = new QFile(dir.tempPath() + "/temp.mscz");
+            Score* score = mscore->currentScore();
+            if(score) {
+                  mscore->saveAs(score, true, file->fileName(), "mscz");
+                  }
+            else {
+                  delete multiPart;
+                  return false;
+                  }
+            QHttpPart filePart;
+            filePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("application/octet-stream"));
+            filePart.setRawHeader("Content-Transfer-Encoding", "binary");
+            filePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant(QString("form-data; name=\"%1\"; filename=\"temp.mscz\"").arg(fileFieldName)));
+            file->open(QIODevice::ReadOnly);
+            filePart.setBodyDevice(file);
+            file->setParent(multiPart); // we cannot delete the file now, so delete it with the multiPart
+            multiPart->append(filePart);
+            }
+      
+      QUrl url(action);
+      QNetworkRequest request(url);
+      
+      //QNetworkAccessManager manager;
+      QNetworkReply *reply = manager->post(request, multiPart);
+      multiPart->setParent(reply); // delete the multiPart with the reply
+      // here connect signals etc.
+      connect(reply, SIGNAL(finished()),
+         this, SLOT(saveOnlineFinished()));
+
+      return true;
+      }      
+      
+void WebPageDockWidget::saveOnlineFinished() {
+      qDebug("Save online finished");
+      // delete file
+      QDir dir;
+      QFile file(dir.tempPath() + "/temp.mscz");
+      file.remove();
+      
+      QNetworkReply *reply = (QNetworkReply *)sender();
+      // Reading attributes of the reply
+      // e.g. the HTTP status code
+      QVariant statusCodeV = 
+      reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+   
+      // no error received?
+      if (reply->error() == QNetworkReply::NoError) {
+            //Reading bytes form the reply
+            QByteArray bytes = reply->readAll();  // bytes
+            QString string(bytes); // string
+            web->setHtml(string);
+            }
+      else {
+            // handle errors here
+            }
+      reply->deleteLater();
+      }      
+#endif
+
+bool WebPageDockWidget::setCurrentScoreSource(QString source) 
+      {
+      Score* score = mscore->currentScore();
+      if(score) {
+            score->metaTags().insert("source", "");
+            return true;
+            }
+      else {
+            return false;
+            }
       }
 
 //---------------------------------------------------------
