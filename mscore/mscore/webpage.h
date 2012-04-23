@@ -95,10 +95,17 @@ class WebPageDockWidget : public QDockWidget
 
    public slots:
       void addToJavascript();
+#if QT_VERSION >= 0x040800
+      void saveOnlineFinished();
+#endif   
 
    public:
       WebPageDockWidget(MuseScore* mscore, QWidget* parent = 0);
       Q_INVOKABLE void load();
+#if QT_VERSION >= 0x040800
+      Q_INVOKABLE bool saveCurrentScoreOnline(QString action, QVariantMap parameters, QString fileFieldName);
+#endif      
+      Q_INVOKABLE bool setCurrentScoreSource(QString source);      
       QUrl webUrl();    
       };
 

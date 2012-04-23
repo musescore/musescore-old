@@ -148,6 +148,11 @@
 #include <QtNetwork/QHostAddress>
 #include <QtNetwork/QUdpSocket>
 
+#if QT_VERSION >= 0x040800
+#include <QtNetwork/QHttpPart>
+#include <QtNetwork/QHttpMultiPart>
+#endif
+
 #include <QtScript/QScriptEngine>
 #include <QtScript/QScriptValueIterator>
 #include <QtScript/QScriptable>
