@@ -2252,7 +2252,6 @@ int main(int argc, char* av[])
       QWidget wi(0);
       MScore::PDPI = wi.logicalDpiX();         // physical resolution
       MScore::DPI  = MScore::PDPI;             // logical drawing resolution
-      MScore::DPMM = MScore::DPI / INCH;       // dots/mm
       MScore::init();                          // initialize libmscore
       preferences.readDefaultStyle();
 

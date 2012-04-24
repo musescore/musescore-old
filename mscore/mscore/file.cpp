@@ -1576,7 +1576,7 @@ bool MuseScore::saveAs(Score* cs, bool saveCopy, const QString& path, const QStr
 bool MuseScore::savePsPdf(const QString& saveName, QPrinter::OutputFormat format)
       {
       return savePsPdf(cs, saveName, format);
-}
+      }
 
 bool MuseScore::savePsPdf(Score* cs, const QString& saveName, QPrinter::OutputFormat format)
       {
