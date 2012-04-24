@@ -2623,6 +2623,7 @@ void MuseScore::changeState(ScoreState val)
                   _modeText->show();
                   break;
             case STATE_EDIT:
+            case STATE_LYRICS_EDIT:
                   _modeText->setText(tr("edit mode"));
                   _modeText->show();
                   break;
@@ -2945,7 +2946,7 @@ void MuseScore::setPos(int t)
 
 void MuseScore::undo()
       {
-      if (_sstate == STATE_EDIT) {
+      if (_sstate == STATE_EDIT || _sstate == STATE_LYRICS_EDIT) {
             cv->postCmd("escape");
             qApp->processEvents();
             }
@@ -2976,7 +2977,7 @@ void MuseScore::undo()
 
 void MuseScore::redo()
       {
-      if (_sstate == STATE_EDIT) {
+      if (_sstate == STATE_EDIT || _sstate == STATE_LYRICS_EDIT) {
             cv->postCmd("escape");
             qApp->processEvents();
             }
@@ -3431,6 +3432,7 @@ const char* stateName(ScoreState s)
             case STATE_NORMAL:     return "STATE_NORMAL";
             case STATE_NOTE_ENTRY: return "STATE_NOTE_ENTRY";
             case STATE_EDIT:       return "STATE_EDIT";
+            case STATE_LYRICS_EDIT: return "STATE_LYRICS_EDIT";
             case STATE_PLAY:       return "STATE_PLAY";
             case STATE_SEARCH:     return "STATE_SEARCH";
             case STATE_FOTO:       return "STATE_FOTO";

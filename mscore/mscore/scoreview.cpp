@@ -3657,16 +3657,19 @@ ScoreState ScoreView::mscoreState() const
       {
       if (sm->configuration().contains(states[NOTE_ENTRY]))
             return STATE_NOTE_ENTRY;
-      else if (sm->configuration().contains(states[EDIT]))
-            return STATE_EDIT;
-      else if (sm->configuration().contains(states[FOTOMODE]))
+      if (sm->configuration().contains(states[EDIT])) {
+            if (editObject && editObject->type() == LYRICS)
+                  return STATE_LYRICS_EDIT;
+            else
+                  return STATE_EDIT;
+            }
+      if (sm->configuration().contains(states[FOTOMODE]))
             return STATE_FOTO;
-      else if (sm->configuration().contains(states[PLAY]))
+      if (sm->configuration().contains(states[PLAY]))
             return STATE_PLAY;
-      else if (sm->configuration().contains(states[SEARCH]))
+      if (sm->configuration().contains(states[SEARCH]))
             return STATE_SEARCH;
-      else
-            return STATE_NORMAL;
+      return STATE_NORMAL;
       }
 
 //---------------------------------------------------------

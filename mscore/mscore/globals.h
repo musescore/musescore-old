@@ -37,10 +37,16 @@ extern double converterDpi;
 //---------------------------------------------------------
 
 enum ScoreState {
-      STATE_INIT = 0, STATE_DISABLED = 1, STATE_NORMAL = 2, STATE_NOTE_ENTRY = 4,
-      STATE_EDIT = 8,
-      STATE_PLAY = 16, STATE_SEARCH = 32, STATE_FOTO = 64,
-      STATE_ALL = -1
+      STATE_INIT        = 0,
+      STATE_DISABLED    = 1,
+      STATE_NORMAL      = 2,
+      STATE_NOTE_ENTRY  = 4,
+      STATE_EDIT        = 8,
+      STATE_LYRICS_EDIT = 16,
+      STATE_PLAY        = 32,
+      STATE_SEARCH      = 64,
+      STATE_FOTO        = 128,
+      STATE_ALL         = -1
       };
 
 //---------------------------------------------------------
