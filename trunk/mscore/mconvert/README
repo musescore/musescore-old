@@ -1,0 +1,3 @@
+This program demonstrates the use of libmscore
+to read an *.mscx file and convert it to pdf.
+

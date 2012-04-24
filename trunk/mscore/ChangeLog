@@ -1,3 +1,6 @@
+24.4 (ws)
+      - added new target "mconvert" to demonstrate the use of libmscore in a command
+        line tool
 22.4  (ws)
       - moved global variables PDPI, DPI, DPMM, debugMode into class MScore
       (lv)

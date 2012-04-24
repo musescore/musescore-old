@@ -17,8 +17,8 @@
 #include "sequencer.h"
 #include "figuredbass.h"
 
-qreal MScore::PDPI;
-qreal MScore::DPI;
+qreal MScore::PDPI = 1200;
+qreal MScore::DPI  = 1200;
 qreal MScore::DPMM;
 bool  MScore::debugMode;
 
@@ -59,6 +59,8 @@ extern void initDrumset();
 
 void MScore::init()
       {
+      DPMM = DPI / INCH;       // dots/mm
+
 #ifdef __MINGW32__
       QDir dir(QCoreApplication::applicationDirPath() + QString("/../" INSTALL_NAME));
       _globalShare = dir.absolutePath() + "/";
