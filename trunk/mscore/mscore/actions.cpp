@@ -39,7 +39,7 @@ Shortcut Shortcut::sc[] = {
          ),
 
       Shortcut(
-         STATE_DISABLED | STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         STATE_DISABLED | STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT | STATE_PLAY,
          0,
          "file-open",
          QT_TRANSLATE_NOOP("action","File open"),
@@ -48,7 +48,7 @@ Shortcut Shortcut::sc[] = {
          fileOpen_ICON
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT | STATE_PLAY,
          0,
          "file-save",
          QT_TRANSLATE_NOOP("action","File save"),
@@ -57,7 +57,7 @@ Shortcut Shortcut::sc[] = {
           fileSave_ICON
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT | STATE_PLAY,
          A_SCORE,
          "file-save-as",
          QT_TRANSLATE_NOOP("action","File save as"),
@@ -66,7 +66,7 @@ Shortcut Shortcut::sc[] = {
          fileSaveAs_ICON
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT | STATE_PLAY,
          A_SCORE,
          "file-save-selection",
          QT_TRANSLATE_NOOP("action","Save Selection"),
@@ -75,7 +75,7 @@ Shortcut Shortcut::sc[] = {
          fileSaveAs_ICON
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT | STATE_PLAY,
          A_SCORE,
          "file-save-a-copy",
          QT_TRANSLATE_NOOP("action","File save a copy"),
@@ -83,7 +83,7 @@ Shortcut Shortcut::sc[] = {
          QT_TRANSLATE_NOOP("action","Save a copy of the score in addition to the current file")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT | STATE_PLAY,
          A_SCORE,
          "file-export",
          QT_TRANSLATE_NOOP("action","Export score"),
@@ -92,7 +92,7 @@ Shortcut Shortcut::sc[] = {
          fileSave_ICON
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT | STATE_PLAY,
          A_SCORE,
          "file-part-export",
          QT_TRANSLATE_NOOP("action","Export Parts"),
@@ -101,7 +101,7 @@ Shortcut Shortcut::sc[] = {
          fileSave_ICON
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT | STATE_PLAY,
          A_SCORE,
          "file-reload",
          QT_TRANSLATE_NOOP("action","File reload"),
@@ -109,7 +109,7 @@ Shortcut Shortcut::sc[] = {
          QT_TRANSLATE_NOOP("action","Reload score from file")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT | STATE_PLAY,
          0,
          "file-close",
          QT_TRANSLATE_NOOP("action","File close"),
@@ -117,7 +117,7 @@ Shortcut Shortcut::sc[] = {
          QT_TRANSLATE_NOOP("action","Close current score")
          ),
       Shortcut(
-         STATE_DISABLED | STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         STATE_DISABLED | STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT | STATE_PLAY,
          0,
          "file-new",
          Qt::ApplicationShortcut,
@@ -127,7 +127,7 @@ Shortcut Shortcut::sc[] = {
           fileNew_ICON
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT | STATE_PLAY,
          A_SCORE,
          "print",
          QT_TRANSLATE_NOOP("action","Print"),
@@ -136,7 +136,7 @@ Shortcut Shortcut::sc[] = {
           print_ICON
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT,
          0,
          "undo",
          Qt::ApplicationShortcut,
@@ -146,7 +146,7 @@ Shortcut Shortcut::sc[] = {
           undo_ICON
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT,
          0,
          "redo",
          Qt::ApplicationShortcut,
@@ -156,7 +156,7 @@ Shortcut Shortcut::sc[] = {
           redo_ICON
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT,
          0,
          "cut",
          QT_TRANSLATE_NOOP("action","Cut"),
@@ -165,7 +165,7 @@ Shortcut Shortcut::sc[] = {
           cut_ICON
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_FOTO,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT | STATE_FOTO,
          0,
          "copy",
          QT_TRANSLATE_NOOP("action","Copy"),
@@ -174,7 +174,7 @@ Shortcut Shortcut::sc[] = {
           copy_ICON
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT,
          0,
          "paste",
          Qt::ApplicationShortcut,
@@ -867,7 +867,7 @@ Shortcut Shortcut::sc[] = {
          QT_TRANSLATE_NOOP("action","")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY | STATE_SEARCH | STATE_FOTO,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT | STATE_PLAY | STATE_SEARCH | STATE_FOTO,
          0,
          "escape",
          QT_TRANSLATE_NOOP("action","Escape"),
@@ -875,7 +875,7 @@ Shortcut Shortcut::sc[] = {
          QT_TRANSLATE_NOOP("action","")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT,
          A_CMD,
          "delete",
          QT_TRANSLATE_NOOP("action","Delete"),
@@ -1393,7 +1393,7 @@ Shortcut Shortcut::sc[] = {
           fbeam2_ICON
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT | STATE_PLAY,
          0,
          "toggle-palette",
          Qt::ApplicationShortcut,
@@ -1402,7 +1402,7 @@ Shortcut Shortcut::sc[] = {
          QT_TRANSLATE_NOOP("action","Palette")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT | STATE_PLAY,
          0,
          "toggle-playpanel",
          Qt::ApplicationShortcut,
@@ -1411,7 +1411,7 @@ Shortcut Shortcut::sc[] = {
          QT_TRANSLATE_NOOP("action","Play panel")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT | STATE_PLAY,
          0,
          "toggle-navigator",
          Qt::ApplicationShortcut,
@@ -1424,7 +1424,7 @@ Shortcut Shortcut::sc[] = {
          //Avoid conflict with M in text
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
 #else
-	   STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+	   STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT | STATE_PLAY,
 #endif
          0,
          "toggle-mixer",
@@ -1434,7 +1434,7 @@ Shortcut Shortcut::sc[] = {
          QT_TRANSLATE_NOOP("action","Mixer")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT,
          0,
          "toggle-transport",
          QT_TRANSLATE_NOOP("action","Transport toolbar"),
@@ -1442,7 +1442,7 @@ Shortcut Shortcut::sc[] = {
          QT_TRANSLATE_NOOP("action","")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT,
          0,
          "toggle-noteinput",
          QT_TRANSLATE_NOOP("action","Note input toolbar"),
@@ -1450,7 +1450,7 @@ Shortcut Shortcut::sc[] = {
          QT_TRANSLATE_NOOP("action","")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT,
          0,
          "toggle-statusbar",
          QT_TRANSLATE_NOOP("action","Status bar"),
@@ -1459,7 +1459,7 @@ Shortcut Shortcut::sc[] = {
          ),
 
       Shortcut(
-         STATE_DISABLED | STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY | STATE_FOTO,
+         STATE_DISABLED | STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT | STATE_PLAY | STATE_FOTO,
          0,
          "quit",
          QT_TRANSLATE_NOOP("action","Quit"),
@@ -1468,7 +1468,7 @@ Shortcut Shortcut::sc[] = {
           exit_ICON
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT,
          0,
          "mag",
          QT_TRANSLATE_NOOP("action","Zoom canvas"),
@@ -1635,7 +1635,7 @@ Shortcut Shortcut::sc[] = {
          QT_TRANSLATE_NOOP("action","")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT | STATE_PLAY,
          0,
          "rewind",
          QT_TRANSLATE_NOOP("action","Player rewind"),
@@ -1834,7 +1834,7 @@ Shortcut Shortcut::sc[] = {
          QT_TRANSLATE_NOOP("action","Edit element")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_EDIT,
+         STATE_NORMAL | STATE_EDIT | STATE_LYRICS_EDIT,
          0,
          "reset",
          QT_TRANSLATE_NOOP("action","Reset user settings"),
@@ -1890,7 +1890,7 @@ Shortcut Shortcut::sc[] = {
          QT_TRANSLATE_NOOP("action","Show Page Margins")
          ),
       Shortcut(
-         STATE_EDIT,
+         STATE_EDIT | STATE_LYRICS_EDIT,
          0,
          "show-keys",
          QT_TRANSLATE_NOOP("action","Insert text symbol"),
@@ -1955,7 +1955,7 @@ Shortcut Shortcut::sc[] = {
          QT_TRANSLATE_NOOP("action","Search")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT | STATE_PLAY,
          0,
          "zoomin",
          QT_TRANSLATE_NOOP("action","Zoom in"),
@@ -1963,7 +1963,7 @@ Shortcut Shortcut::sc[] = {
          ),
       Shortcut(
          // conflicts with Ctrl+- in edit mode to enter lyrics hyphen
-         // STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         // STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT,
 
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          0,
@@ -2135,7 +2135,7 @@ Shortcut Shortcut::sc[] = {
          QT_TRANSLATE_NOOP("action","F&ull screen")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT,
          0,
          "hraster",
          QT_TRANSLATE_NOOP("action","Enable horizontal raster"),
@@ -2144,7 +2144,7 @@ Shortcut Shortcut::sc[] = {
          hraster_ICON
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT,
          0,
          "vraster",
          QT_TRANSLATE_NOOP("action","Enable vertical raster"),
@@ -2153,7 +2153,7 @@ Shortcut Shortcut::sc[] = {
          vraster_ICON
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT,
          0,
          "config-raster",
          QT_TRANSLATE_NOOP("action","Configure raster"),
@@ -2187,7 +2187,7 @@ Shortcut Shortcut::sc[] = {
          QT_TRANSLATE_NOOP("action","Piano Keyboard")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY | STATE_FOTO,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT | STATE_PLAY | STATE_FOTO,
          0,
          "media",
          QT_TRANSLATE_NOOP("action","Show media dialog"),
@@ -2211,7 +2211,7 @@ Shortcut Shortcut::sc[] = {
          QT_TRANSLATE_NOOP("action","Join Measure")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY | STATE_FOTO,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT | STATE_PLAY | STATE_FOTO,
          0,
          "page-settings",
          QT_TRANSLATE_NOOP("action","Page Settings"),
@@ -2255,7 +2255,7 @@ Shortcut Shortcut::sc[] = {
          QT_TRANSLATE_NOOP("action","previous score")
          ),
       Shortcut(
-         STATE_INIT | STATE_DISABLED | STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY | STATE_SEARCH | STATE_FOTO,
+         STATE_INIT | STATE_DISABLED | STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_LYRICS_EDIT | STATE_PLAY | STATE_SEARCH | STATE_FOTO,
          0,
          "musescore-connect",
          Qt::ApplicationShortcut,
@@ -2265,7 +2265,7 @@ Shortcut Shortcut::sc[] = {
          community_ICON
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY | STATE_EDIT,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY | STATE_EDIT | STATE_LYRICS_EDIT,
          0,
          "inspector",
          QT_TRANSLATE_NOOP("action","Show Inspector"),
@@ -2274,7 +2274,7 @@ Shortcut Shortcut::sc[] = {
          ),
 #ifdef OMR
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY | STATE_EDIT,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY | STATE_EDIT | STATE_LYRICS_EDIT,
          0,
          "omr",
          QT_TRANSLATE_NOOP("action","Show OMR Panel"),
@@ -2283,7 +2283,7 @@ Shortcut Shortcut::sc[] = {
          ),
 #endif
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY | STATE_EDIT,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY | STATE_EDIT | STATE_LYRICS_EDIT,
          0,
          "metronome",
          QT_TRANSLATE_NOOP("action","Metronome"),
@@ -2391,13 +2391,13 @@ Shortcut Shortcut::sc[] = {
          QT_TRANSLATE_NOOP("action","Toggle View Mode")
          ),
       Shortcut(
-         STATE_EDIT,
+         STATE_LYRICS_EDIT,
          0,
          "next-lyric",
          QT_TRANSLATE_NOOP("action","next syllable")
          ),
       Shortcut(
-         STATE_EDIT,
+         STATE_LYRICS_EDIT,
          0,
          "prev-lyric",
          QT_TRANSLATE_NOOP("action","previous syllable")

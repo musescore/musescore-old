@@ -79,7 +79,7 @@ bool Portaudio::init()
             return false;
             }
       initialized = true;
-      if (debugMode)
+      if (MScore::debugMode)
             printf("using PortAudio Version: %s\n", Pa_GetVersionText());
 
       /* Open an audio I/O stream. */

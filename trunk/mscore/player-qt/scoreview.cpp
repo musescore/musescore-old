@@ -135,10 +135,10 @@ void ScoreView::setScore(const QString& name)
       score = new Score(MScore::defaultStyle());
       score->setLayoutMode(LayoutFloat);
       PageFormat pageFormat;
-      pageFormat.setSize(QSizeF(parentWidth() / DPI, parentHeight() / DPI));
-      pageFormat.setPrintableWidth((parentWidth()-10) / DPI);
-      pageFormat.setEvenLeftMargin(5.0 / DPI);
-      pageFormat.setOddLeftMargin(5.0 / DPI);
+      pageFormat.setSize(QSizeF(parentWidth() / MScore::DPI, parentHeight() / MScore::DPI));
+      pageFormat.setPrintableWidth((parentWidth()-10) / MScore::DPI);
+      pageFormat.setEvenLeftMargin(5.0 / MScore::DPI);
+      pageFormat.setOddLeftMargin(5.0 / MScore::DPI);
       pageFormat.setEvenTopMargin(0.0);
       pageFormat.setEvenBottomMargin(0.0);
       pageFormat.setOddTopMargin(0.0);
@@ -363,7 +363,7 @@ void ScoreView::moveCursor(int tick)
       double y        = system->staffY(0) + system->page()->pos().y();
       double _spatium = score->spatium();
 
-      qreal xmag = _spatium / (DPI * SPATIUM20);
+      qreal xmag = _spatium / (MScore::DPI * SPATIUM20);
       double w   = _spatium * 2.0 + symbols[score->symIdx()][quartheadSym].width(xmag);
       double h   = 10 * _spatium;
       //

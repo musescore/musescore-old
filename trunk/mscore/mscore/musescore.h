@@ -372,7 +372,6 @@ class MuseScore : public QMainWindow {
       void updateUndoRedo();
       void cmdAddChordName2();
       static void convertCapella(Score*, Capella* cap);
-//      int readCapVoice(Score*, CapVoice* cvoice, int staffIdx, int tick);
       void changeScore(int);
       virtual void resizeEvent(QResizeEvent*);
 

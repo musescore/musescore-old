@@ -1714,8 +1714,6 @@ Element* Chord::drop(const DropData& data)
 
 void Chord::renderArticulation(ArticulationType type)
       {
-      qDebug("renderArticulation %d\n", type);
-
       int key  = staff()->key(segment()->tick()).accidentalType();
       QList<NoteEvent*> events;
       int pitch     = upNote()->ppitch();
@@ -1825,7 +1823,9 @@ QPointF Chord::layoutArticulation(Articulation* a)
       qreal x         = centerX();
       qreal y = 0.0;
 
-      if (a->subtype() == Articulation_Tenuto || a->subtype() == Articulation_Staccato) {
+      int st = a->subtype();
+
+      if (st == Articulation_Tenuto || st == Articulation_Staccato) {
             bool bottom;
             if ((aa == A_CHORD) && measure()->hasVoices(a->staffIdx()))
                   bottom = !up();
@@ -1855,6 +1855,7 @@ QPointF Chord::layoutArticulation(Articulation* a)
                               line = (line & ~1) + 3;
                         else
                               line += 2;
+                        pos.rx() -= upNote()->headWidth() * .5;
                         }
                   else {
                         line = upLine();
@@ -1862,6 +1863,7 @@ QPointF Chord::layoutArticulation(Articulation* a)
                               line = ((line+1) & ~1) - 3;
                         else
                               line -= 2;
+                        pos.rx() += upNote()->headWidth() * .5;
                         }
                   pos.ry() = line * _spatium2;
                   }
@@ -1950,7 +1952,7 @@ QPointF Chord::layoutArticulation(Articulation* a)
             }
 
       qreal dist;
-      switch(a->subtype()) {
+      switch(st) {
             case Articulation_Marcato:        dist = 1.0 * _spatium; break;
             case Articulation_Sforzatoaccent: dist = 1.5 * _spatium; break;
             default: dist = score()->styleS(ST_propertyDistance).val() * _spatium;

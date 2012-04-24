@@ -23,7 +23,6 @@
 #include "seq.h"
 #include "runtime.h"
 
-bool debugMode = false;
 QString revision;
 
 Runtime* runtime;
@@ -44,9 +43,9 @@ int main(int argc, char* argv[])
       QApplication app(argc, argv);
 
       QWidget wi(0);
-      PDPI = wi.logicalDpiX();    // physical resolution
-      DPI  = PDPI;                // logical drawing resolution
-      DPMM = DPI / INCH;          // dots/mm
+      MScore::PDPI = wi.logicalDpiX();    // physical resolution
+      MScore::DPI  = MScore::PDPI;                // logical drawing resolution
+      MScore::DPMM = MScore::DPI / INCH;          // dots/mm
 
       runtime = new Runtime;
 

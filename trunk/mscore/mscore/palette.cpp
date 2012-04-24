@@ -230,7 +230,7 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
 
 
       //      mimeData->setData(mimeSymbolFormat, element->mimeData(QPointF()));
-      if( viewer->mscoreState() != STATE_EDIT ) // Already in startCmd in this case
+      if (viewer->mscoreState() != STATE_EDIT && viewer->mscoreState() != STATE_LYRICS_EDIT) // Already in startCmd in this case
           score->startCmd();
       if (sel.state() == SEL_LIST) {
             foreach(Element* e, sel.elements())
@@ -266,8 +266,8 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
             }
       else
             qDebug("unknown selection state\n");
-      if( viewer->mscoreState() != STATE_EDIT ) //Already in startCmd mode in this case
-          score->endCmd();
+      if (viewer->mscoreState() != STATE_EDIT && viewer->mscoreState() != STATE_LYRICS_EDIT) //Already in startCmd mode in this case
+            score->endCmd();
       mscore->endCmd();
       }
 
