@@ -25,6 +25,16 @@
 // TODO LVI 2011-10-30: determine how to report import errors.
 // Currently all output (both debug and error reports) are done using qDebug.
 
+// TODO LVI 2012-04-26: read drumset definition from MusicXML
+// Mapping Musescore DrumInstrument to MusicXML elements
+// pitch         part-list/score-part/midi-instrument/midi-unpitched
+// name          part-list/score-part/score-instrument/instrument-name
+// notehead      part/measure/note/notehead (once for each individual note)
+// line          part/measure/note/unpitched (once for each individual note) + current clef
+// stemdirection part/measure/note/stem (once for each individual note)
+// voice         N/A (leave empty ?)
+// shortcut      N/A (leave empty ?)
+
 /**
  MusicXML import.
  */
@@ -1273,10 +1283,11 @@ void MusicXml::xmlScorePart(QDomElement e, QString id, int& parts)
             // in the <part-list>, but don't contain the corresponding <part>s.
             // (i.e. the part-list is overcomplete).
             // These parts are reported but can safely be ignored.
-            qDebug("Import MusicXml:xmlScorePart: cannot find part %s", qPrintable(id));
+            qDebug("Import MusicXml::xmlScorePart: cannot find part %s", qPrintable(id));
             return;
             }
 
+      qDebug("MusicXml::xmlScorePart: instruments part %s", qPrintable(id));
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "part-name") {
                   // OK? (ws) Yes it should be ok.part-name is display in front of staff in finale. (la)
@@ -1287,8 +1298,11 @@ void MusicXml::xmlScorePart(QDomElement e, QString id, int& parts)
                   part->setShortName(e.text());
                   }
             else if (e.tagName() == "score-instrument") {
+                  QString instrId = e.attribute("id");
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "instrument-name") {
+                              qDebug("MusicXml::xmlScorePart: instrument id %s name %s",
+                                      qPrintable(instrId), qPrintable(ee.text()));
                               // part-name or instrument-name?
                               if (part->longName().isEmpty())
                                     part->setLongName(ee.text());
@@ -1298,11 +1312,15 @@ void MusicXml::xmlScorePart(QDomElement e, QString id, int& parts)
                         }
                   }
             else if (e.tagName() == "midi-instrument") {
+                  QString instrId = e.attribute("id");
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "midi-channel")
                               part->setMidiChannel(ee.text().toInt() - 1);
                         else if (ee.tagName() == "midi-program")
                               part->setMidiProgram(ee.text().toInt() - 1);
+                        else if (ee.tagName() == "midi-unpitched")
+                              qDebug("MusicXml::xmlScorePart: instrument id %s midi-unpitched %s",
+                                      qPrintable(instrId), qPrintable(ee.text()));
                         else if (ee.tagName() == "volume") {
                               double vol = ee.text().toDouble();
                               if (vol >= 0 && vol <= 100)
@@ -4532,7 +4550,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         noteheadColor = QColor(color);
                   }
             else if (tag == "instrument")
-                  domNotImplemented(e);
+                  qDebug("MusicXml::xmlNote instrument %s", qPrintable(e.attribute("id")));
             else if (tag == "cue")
                   domNotImplemented(e);
             else
