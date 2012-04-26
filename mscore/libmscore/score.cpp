@@ -147,7 +147,6 @@ void MeasureBaseList::add(MeasureBase* e)
             return;
             }
       ++_size;
-//      e->setNext(el);
       e->setPrev(el->prev());
       el->prev()->setNext(e);
       el->setPrev(e);
@@ -1186,7 +1185,6 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
       //
       //    search staff
       //
-//      qreal sy1         = 0;
       pos->staffIdx      = 0;
       SysStaff* sstaff   = 0;
       System* system     = pos->measure->system();
@@ -1205,7 +1203,6 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
                   sstaff = ss;
                   break;
                   }
-//            sy1 = sy2;
             }
       if (sstaff == 0)
             return false;
@@ -2147,12 +2144,8 @@ void Score::setSyntiState(const SyntiState& s)
 
 void Score::setLayoutAll(bool val)
       {
-      Score* score = this;
-      while (score->parentScore())
-            score = parentScore();
-      foreach(Excerpt* excerpt, score->_excerpts)
-            excerpt->score()->_layoutAll = val;
-      score->_layoutAll = val;
+      foreach(Score* score, scoreList())
+            score->_layoutAll = val;
       }
 
 //---------------------------------------------------------
@@ -2810,7 +2803,6 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                   Measure* m = static_cast<Measure*>(e);
                   int tick  = m->tick();
                   int etick = tick + m->ticks();
-printf("1select range==== state %d ticks %d\n", _selection.state(), m->ticks());
                   activeTrack = staffIdx * VOICES;
                   if (_selection.state() == SEL_NONE) {
                         _selection.setStaffStart(staffIdx);
@@ -3257,10 +3249,23 @@ void Score::linkId(int val)
 
 void Score::setTestMode(bool val)
       {
-      Score* score = rootScore();
-      score->_testMode = val;
-      foreach(Excerpt* e, score->_excerpts)
-            e->score()->_testMode = val;
+      foreach(Score* score, scoreList())
+            score->_testMode = val;
       }
 
+//---------------------------------------------------------
+//   scoreList
+//    return a list of scores containing the root score
+//    and all part scores (if there are any)
+//---------------------------------------------------------
+
+QList<Score*> Score::scoreList()
+      {
+      QList<Score*> scores;
+      Score* root = rootScore();
+      scores.append(root);
+      foreach(const Excerpt* ex, root->excerpts())
+            scores.append(ex->score());
+      return scores;
+      }
 

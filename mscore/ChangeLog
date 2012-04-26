@@ -1,3 +1,6 @@
+26.4 (ws)
+      - reaktivated "split measure" function
+      - new implementation of "join measure" using ScoreRange() class
 24.4 (ws)
       - added new target "mconvert" to demonstrate the use of libmscore in a command
         line tool
