@@ -56,7 +56,7 @@
 #include "articulation.h"
 #include "noteevent.h"
 #include "slur.h"
-#include "excerpt.h"
+// #include "excerpt.h"
 #include "tempotext.h"
 #include "instrchange.h"
 #include "box.h"
@@ -2921,13 +2921,8 @@ void ChangeNoteEvents::flip()
 
 void Score::undoChangeBarLine(Measure* m, BarLineType barType)
       {
-      Score* s = parentScore() ? parentScore() : this;
-      QList<Score*> scores;
-      scores.append(s);
-      foreach (const Excerpt* ex, s->excerpts())
-            scores.append(ex->score());
-      foreach(Score* score, scores) {
-            Measure* measure = score->tick2measure(m->tick());
+      foreach(Score* s, scoreList()) {
+            Measure* measure = s->tick2measure(m->tick());
             Measure* nm      = m->nextMeasure();
             switch(barType) {
                   case END_BAR:
@@ -2938,7 +2933,7 @@ void Score::undoChangeBarLine(Measure* m, BarLineType barType)
                         s->undoChangeRepeatFlags(measure, measure->repeatFlags() & ~RepeatEnd);
                         if (nm)
                               s->undoChangeRepeatFlags(nm, nm->repeatFlags() & ~RepeatStart);
-                        score->undoChangeEndBarLineType(measure, barType);
+                        s->undoChangeEndBarLineType(measure, barType);
                         measure->setEndBarLineGenerated (false);
                         }
                         break;

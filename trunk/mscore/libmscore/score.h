@@ -827,7 +827,6 @@ class Score {
       void updateAccidentals(Measure* m, int staffIdx);
       QHash<int, LinkedElements*>& links();
       void appendMeasures(int, ElementType);
-//      MeasureBase* appendMeasure(ElementType type);
       bool concertPitch() const { return styleB(ST_concertPitch); }
       void layoutFingering(Fingering*);
       void cmdSplitMeasure(ChordRest*);
@@ -881,7 +880,8 @@ class Score {
       bool undoRedo() const                 { return _undoRedo; }
       void respace(QList<ChordRest*>* elements);
       void transposeSemitone(int semitone);
-      MeasureBase* insertMeasure(ElementType type, MeasureBase*);
+      MeasureBase* insertMeasure(ElementType type, MeasureBase*,
+         bool createEmptyMeasures = false);
       bool testMode() const        { return _testMode; }
       void setTestMode(bool val);
       Audio* audio() const         { return _audio;    }
@@ -890,6 +890,7 @@ class Score {
       void setPlayMode(PlayMode v) { _playMode = v;    }
       int linkId();
       void linkId(int);
+      QList<Score*> scoreList();
       };
 
 extern Score* gscore;

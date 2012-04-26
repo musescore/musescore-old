@@ -61,7 +61,6 @@
 #include "timesig.h"
 #include "repeat.h"
 #include "tempotext.h"
-#include "excerpt.h"
 #include "clef.h"
 #include "noteevent.h"
 #include "breath.h"
@@ -113,10 +112,9 @@ void Score::endCmd()
             end();
             return;
             }
-      Score* score = rootScore();
-      score->end2();
-      foreach(Excerpt* e, score->_excerpts)
-            e->score()->end2();
+
+      foreach(Score* s, scoreList())
+            s->end2();
 
       bool noUndo = undo()->current()->childCount() <= 1;
       if (!noUndo)
@@ -132,10 +130,8 @@ void Score::endCmd()
 
 void Score::end()
       {
-      Score* score = parentScore() ? parentScore() : this;
-      score->end1();
-      foreach(Excerpt* e, score->_excerpts)
-            e->score()->end1();
+      foreach(Score* s, scoreList())
+            s->end1();
       }
 
 //---------------------------------------------------------
@@ -145,12 +141,9 @@ void Score::end()
 
 void Score::update()
       {
-      Score* score = parentScore() ? parentScore() : this;
-      score->end2();
-      score->end1();
-      foreach(Excerpt* e, score->_excerpts) {
-            e->score()->end2();
-            e->score()->end1();
+      foreach(Score* s, scoreList()) {
+            s->end2();
+            s->end1();
             }
       }
 
@@ -205,16 +198,7 @@ void Score::end1()
 void Score::endUndoRedo()
       {
       updateSelection();
-      Score* score = rootScore();
-      if (score->layoutAll()) {
-            score->setUndoRedo(true);
-            score->doLayout();                  // TODO: does not really work
-            score->setUndoRedo(false);
-            score->setUpdateAll(true);
-            score->setPlaylistDirty(true);
-            }
-      foreach(const Excerpt* e, score->excerpts()) {
-            Score* score = e->score();
+      foreach(Score* score, scoreList()) {
             if (score->layoutAll()) {
                   score->setUndoRedo(true);
                   score->doLayout();           // TODO: does not really work
@@ -1237,40 +1221,6 @@ void Score::upDown(bool up, UpDownMode mode)
             }
       _selection.updateState();     // accidentals may have changed
       }
-
-#if 0
-//---------------------------------------------------------
-//   appendMeasure
-//---------------------------------------------------------
-
-MeasureBase* Score::appendMeasure(ElementType type)
-      {
-      int tick = 0;
-      if (last()) {
-            tick = last()->tick();
-            if (last()->type() == MEASURE)
-                  tick += static_cast<Measure*>(last())->ticks();
-            }
-      MeasureBase* mb = static_cast<MeasureBase*>(Element::create(type, this));
-      mb->setTick(tick);
-
-      if (type == MEASURE) {
-            Fraction ts(lastMeasure() ? lastMeasure()->timesig() : Fraction(4,4));
-            Measure* measure = static_cast<Measure*>(mb);
-            measure->setTimesig(ts);
-            measure->setLen(ts);
-            for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-                  Rest* rest = new Rest(this, TDuration(TDuration::V_MEASURE));
-                  rest->setDuration(ts);
-                  rest->setTrack(staffIdx * VOICES);
-                  Segment* s = measure->getSegment(SegChordRest, tick);
-                  s->add(rest);
-                  }
-            }
-      undoInsertMeasure(mb, 0);
-      return mb;
-      }
-#endif
 
 //---------------------------------------------------------
 //   appendMeasures
