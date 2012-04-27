@@ -768,7 +768,7 @@ void MuseScore::editInstrList()
       // there should be at least one measure
       //
       if (cs->measures()->size() == 0)
-            cs->appendMeasures(1, MEASURE);
+            cs->insertMeasure(MEASURE, 0, false);
 
       cs->setLayoutAll(true);
       cs->endCmd();

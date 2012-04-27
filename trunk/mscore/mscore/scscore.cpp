@@ -305,7 +305,8 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
             case 9:    // "appendMeasures",
                   if (argc == 1) {
                         int n = context->argument(0).toInt32();
-                        score->appendMeasures(n, MEASURE);
+                        for (int i = 0; i < n; ++i)
+                              score->insertMeasure(MEASURE, 0, false);
                         return context->engine()->undefinedValue();
                         }
                   break;

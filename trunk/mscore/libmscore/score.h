@@ -826,7 +826,7 @@ class Score {
       void cmdUpdateNotes();
       void updateAccidentals(Measure* m, int staffIdx);
       QHash<int, LinkedElements*>& links();
-      void appendMeasures(int, ElementType);
+//      void appendMeasures(int, ElementType);
       bool concertPitch() const { return styleB(ST_concertPitch); }
       void layoutFingering(Fingering*);
       void cmdSplitMeasure(ChordRest*);
