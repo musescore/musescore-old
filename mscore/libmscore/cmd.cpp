@@ -882,7 +882,7 @@ bool Score::makeGap1(int tick, int staffIdx, Fraction len)
             Measure* m = cr->measure()->nextMeasure();
             if (m == 0) {
                   qDebug("EOS reached");
-                  appendMeasures(1, MEASURE);
+                  insertMeasure(MEASURE, 0, false);
                   m = cr->measure()->nextMeasure();
                   if (m == 0) {
                         qDebug("===EOS reached");
@@ -1220,42 +1220,6 @@ void Score::upDown(bool up, UpDownMode mode)
             _playNote = true;
             }
       _selection.updateState();     // accidentals may have changed
-      }
-
-//---------------------------------------------------------
-//   appendMeasures
-//---------------------------------------------------------
-
-void Score::appendMeasures(int /*n*/, ElementType /*type*/)
-      {
-#if 0
-      bool createEndBar    = false;
-      bool endBarGenerated = false;
-      if (type == MEASURE) {
-            Measure* lm = lastMeasure();
-            if (lm && lm->endBarLineType() == END_BAR) {
-                  if (!lm->endBarLineGenerated()) {
-                        undoChangeEndBarLineType(lm, NORMAL_BAR);
-                        createEndBar = true;
-                        // move end Bar to last Measure;
-                        }
-                  else {
-                        createEndBar    = true;
-                        endBarGenerated = true;
-                        lm->setEndBarLineType(NORMAL_BAR, endBarGenerated);
-                        }
-                  }
-            else if (lm == 0)
-                  createEndBar = true;
-            }
-      for (int i = 0; i < n; ++i)
-            appendMeasure(type);
-      if (createEndBar) {
-            Measure* lm = lastMeasure();
-            if (lm)
-                  lm->setEndBarLineType(END_BAR, endBarGenerated);
-            }
-#endif
       }
 
 //---------------------------------------------------------

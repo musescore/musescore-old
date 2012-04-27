@@ -11,7 +11,7 @@
 #  the file LICENSE.GPL
 #=============================================================================
 
-subdirs(
-      hairpin note midi compat link measure beam split
-      )
+set(TARGET tst_split)
+
+include(${PROJECT_SOURCE_DIR}/mtest/cmake.inc)
 

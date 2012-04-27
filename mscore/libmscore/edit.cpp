@@ -150,7 +150,6 @@ Rest* Score::addRest(int tick, int track, TDuration d, Tuplet* tuplet)
             rest->setDuration(d.fraction());
       rest->setTrack(track);
       rest->setTuplet(tuplet);
-// qDebug("addRest at %d/%d len %s", tick, track, qPrintable(d.name()));
       undoAddCR(rest, measure, tick);
       return rest;
       }
@@ -255,8 +254,6 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
       {
       Measure* measure = tick2measure(tick);
       Rest* r = 0;
-
-qDebug("setRest() %d/%d", l.numerator(), l.denominator());
 
       while (!l.isZero()) {
             //
@@ -364,25 +361,6 @@ Note* Score::addNote(Chord* chord, int pitch)
       select(note, SELECT_SINGLE, 0);
       return note;
       }
-
-#if 0
-//---------------------------------------------------------
-//   addRemoveTimeSigDialog
-//---------------------------------------------------------
-
-static int addRemoveTimeSigDialog()
-      {
-      int n = QMessageBox::question(0,
-         QT_TRANSLATE_NOOP("addRemoveTimeSig", "MuseScore"),
-         QT_TRANSLATE_NOOP("addRemoveTimeSig", "Rewrite measures\nuntil next time signature?"),
-         QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel, QMessageBox::Yes);
-      if (n == QMessageBox::Cancel)
-            return -1;
-      if (n == QMessageBox::Yes)
-            return 1;
-      return 0;
-      }
-#endif
 
 //---------------------------------------------------------
 //   rewriteMeasures
@@ -620,13 +598,6 @@ void Score::timesigStretchChanged(TimeSig* ts, Measure* fm, int staffIdx)
 
 void Score::cmdRemoveTimeSig(TimeSig* ts)
       {
-      int n = 1;
-#if 0
-      int n = addRemoveTimeSigDialog();
-      if (n == -1)
-            return;
-#endif
-
       undoRemoveElement(ts->segment());
 
       Measure* fm = ts->measure();
@@ -638,21 +609,7 @@ void Score::cmdRemoveTimeSig(TimeSig* ts)
                   break;
             lm = m;
             }
-
-      if (n == 0) {
-            //
-            // Set time signature of all measures up to next
-            // time signature. Do not touch measure contents.
-            //
-            for (Measure* m = fm; m; m = m->nextMeasure()) {
-                  if (m->first(SegTimeSig))
-                        break;
-                  undoChangeProperty(m, P_TIMESIG_NOMINAL, QVariant::fromValue(ns));
-                  }
-            }
-      else {
-            rewriteMeasures(fm, ns);
-            }
+      rewriteMeasures(fm, ns);
       }
 
 //---------------------------------------------------------
@@ -849,18 +806,11 @@ void Score::cmdAddTie()
                   if (noteFound || note2)
                         break;
                   }
-/*            if (note2 == 0) {
-                  if (MScore::debugMode)
-                        qDebug("cmdAddTie: next note for tie not found");
-                  continue;
-                  }
-*/
             Tie* tie = new Tie(this);
             tie->setStartNote(note);
             tie->setEndNote(note2);
             tie->setTrack(note->track());
             undoAddElement(tie);
-//            select(note2, SELECT_SINGLE, 0);
             }
       endCmd();
       }
@@ -1156,16 +1106,6 @@ void Score::deleteItem(Element* el)
 
 void Score::cmdRemoveTime(int tick, int len)
       {
-/*      int etick = tick + len;
-      foreach (Beam* b, _beams) {
-            ChordRest* e1 = b->elements().front();
-            ChordRest* e2 = b->elements().back();
-            if ((e1->tick() >= tick && e1->tick() < etick)
-               || (e2->tick() >= tick && e2->tick() < etick)) {
-                  undoRemoveElement(b);
-                  }
-            }
-      */
       undoInsertTime(tick, -len);
       }
 
