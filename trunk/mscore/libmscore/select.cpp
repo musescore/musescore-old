@@ -585,3 +585,23 @@ bool Selection::canCopy() const
                   }
       return true;
       }
+
+//---------------------------------------------------------
+//   measureRange
+//    return false if no measure range selected
+//---------------------------------------------------------
+
+bool Selection::measureRange(Measure** m1, Measure** m2) const
+      {
+      if (state() != SEL_RANGE)
+            return false;
+      *m1 = startSegment()->measure();
+      *m2 = endSegment()->measure();
+      if (m1 == m2)
+            return true;
+      if (*m2 && (*m2)->tick() == endSegment()->tick())
+            *m2 = (*m2)->prevMeasure();
+      return true;
+      }
+
+

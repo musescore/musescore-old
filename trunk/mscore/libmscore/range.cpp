@@ -106,21 +106,27 @@ static void writeSpanner(int track, ChordRest* src, ChordRest* dst,
             Spanner* newSpanner = static_cast<Spanner*>(oldSpanner->clone());
             newSpanner->setTrack(track);
             map->insert(oldSpanner, newSpanner);
-            if (newSpanner->type() == SLUR)
+            if (newSpanner->type() == SLUR) {
                   dst->addSpannerFor(newSpanner);
-            else
+                  newSpanner->setStartElement(dst);
+                  }
+            else {
                   segment->addSpannerFor(newSpanner);
-            newSpanner->setStartElement(segment);
+                  newSpanner->setStartElement(segment);
+                  }
             }
 
       foreach(Spanner* oldSpanner, src->spannerBack()) {
             Spanner* newSpanner = map->value(oldSpanner);
             if (newSpanner) {
-                  if (newSpanner->type() == SLUR)
+                  if (newSpanner->type() == SLUR) {
                         dst->addSpannerBack(newSpanner);
-                  else
+                        newSpanner->setEndElement(dst);
+                        }
+                  else {
                         segment->addSpannerBack(newSpanner);
-                  newSpanner->setEndElement(segment);
+                        newSpanner->setEndElement(segment);
+                        }
                   map->remove(oldSpanner);
                   }
             else {
@@ -353,9 +359,9 @@ bool TrackList::write(int track, Measure* measure, QHash<Spanner*, Spanner*>* ma
       Fraction rest    = m->len();
       Segment* segment = 0;
       int n = size();
+
       for (int i = 0; i < n; ++i) {
             Element* e = at(i);
-
             if (e->isDurationElement()) {
                   Fraction duration = static_cast<DurationElement*>(e)->duration();
                   if (e->type() == CHORD && static_cast<Chord*>(e)->isGrace()) {
@@ -445,16 +451,13 @@ bool TrackList::write(int track, Measure* measure, QHash<Spanner*, Spanner*>* ma
                                     }
                               }
                         if (pos == m->len()) {
-                              pos  = Fraction();
-                              m    = m->nextMeasure();
-                              if (m)
+                              if (m->nextMeasure()) {
+                                    m = m->nextMeasure();
                                     rest = m->len();
-/*                              if (m == 0) {
-                                    printf("end of measure list reached %d/%d\n",
-                                       duration.numerator(), duration.denominator());
-                                    break;
+                                    pos  = Fraction();
                                     }
- */
+                              else
+                                    rest = Fraction();
                               }
                         firstCRinSplit = false;
                         }
@@ -530,9 +533,6 @@ bool ScoreRange::canWrite(const Fraction& f) const
 
 void ScoreRange::read(Segment* first, Segment* last, int startTrack, int endTrack)
       {
-printf("ScoreRange::read(%s %d %s %d)\n", first->subTypeName(), first->tick(),
-      last->subTypeName(), last->tick());
-
       spannerMap.clear();
       for (int track = startTrack; track < endTrack; ++track) {
             TrackList* dl = new TrackList;
@@ -545,7 +545,6 @@ printf("ScoreRange::read(%s %d %s %d)\n", first->subTypeName(), first->tick(),
                   printf("  <%s>\n", s->name());
                   }
             }
-printf("ScoreRange::read: duration %d/%d\n", duration().numerator(), duration().denominator());
       }
 
 //---------------------------------------------------------

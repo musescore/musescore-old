@@ -2175,8 +2175,6 @@ void Score::removeAudio()
 
 bool Score::appendScore(Score* score)
       {
-      int tracks       = score->nstaves() * VOICES;
-      SlurMap* slurMap = new SlurMap[tracks];
       TieMap  tieMap;
       SpannerMap spannerMap;
 
@@ -2184,7 +2182,7 @@ bool Score::appendScore(Score* score)
       for (MeasureBase* mb = ml->first(); mb; mb = mb->next()) {
             MeasureBase* nmb;
             if (mb->type() == MEASURE)
-                  nmb = static_cast<Measure*>(mb)->cloneMeasure(this, slurMap, &tieMap, &spannerMap);
+                  nmb = static_cast<Measure*>(mb)->cloneMeasure(this, &tieMap, &spannerMap);
             else
                   nmb = mb->clone();
             nmb->setNext(0);
@@ -2194,7 +2192,6 @@ bool Score::appendScore(Score* score)
             }
       fixTicks();
       renumberMeasures();
-      delete[] slurMap;
       return true;
       }
 

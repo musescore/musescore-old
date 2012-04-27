@@ -3280,7 +3280,7 @@ Fraction Measure::stretchedLen(Staff* staff) const
 //   cloneMeasure
 //---------------------------------------------------------
 
-Measure* Measure::cloneMeasure(Score* sc, SlurMap* slurMap, TieMap* tieMap, SpannerMap* spannerMap)
+Measure* Measure::cloneMeasure(Score* sc, TieMap* tieMap, SpannerMap* spannerMap)
       {
       Measure* m      = new Measure(sc);
       m->_timesig     = _timesig;
@@ -3345,19 +3345,17 @@ Measure* Measure::cloneMeasure(Score* sc, SlurMap* slurMap, TieMap* tieMap, Span
                                     if (sp->type() != SLUR)
                                           continue;
                                     Slur* s = static_cast<Slur*>(sp);
-
                                     Slur* slur = new Slur(*s);
                                     slur->setScore(sc);
                                     slur->setStartElement(ncr);
                                     ncr->addSlurFor(slur);
-                                    slurMap[track].add(s, slur);
+                                    spannerMap->add(s, slur);
                                     }
                               foreach(Spanner* sp, ocr->spannerBack()) {
                                     if (sp->type() != SLUR)
                                           continue;
                                     Slur* s = static_cast<Slur*>(sp);
-
-                                    Slur* slur = slurMap[track].findNew(s);
+                                    Slur* slur = static_cast<Slur*>(spannerMap->findNew(s));
                                     if (slur) {
                                           slur->setEndElement(ncr);
                                           ncr->addSlurBack(slur);
@@ -3366,7 +3364,7 @@ Measure* Measure::cloneMeasure(Score* sc, SlurMap* slurMap, TieMap* tieMap, Span
                                           qDebug("cloneMeasure(%d): cannot find slur, track %d", tick(), track);
                                           int tracks = score()->nstaves() * VOICES;
                                           for (int i = 0; i < tracks; ++i) {
-                                                Slur* sl = slurMap[i].findNew(s);
+                                                Slur* sl = static_cast<Slur*>(spannerMap->findNew(s));
                                                 if (sl) {
                                                       qDebug("    found in track %d", i);
                                                       break;
