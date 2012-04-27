@@ -235,7 +235,8 @@ void Navigator::mousePressEvent(QMouseEvent* ev)
             QPointF p = matrix.inverted().map(QPointF(ev->pos()));
             QRectF r(_cv->toLogical(QRectF(0.0, 0.0, _cv->width(), _cv->height())));
             double dx = p.x() - (r.x() + (r.width() * .5));
-            r.translate(dx, 0.0);
+            double dy = p.y() - (r.y() + (r.height() * .5));
+            r.translate(dx, dy);
             setViewRect(r);
             emit viewRectMoved(matrix.inverted().mapRect(viewRect));
             update();
