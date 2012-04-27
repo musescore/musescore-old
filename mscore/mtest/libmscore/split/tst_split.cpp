@@ -28,9 +28,12 @@ class TestSplit : public QObject, public MTest
       {
       Q_OBJECT
 
+      void split(const char* file, const char* reference);
+
    private slots:
       void initTestCase();
-      void split();
+      void split1() { split("split.mscx",  "split-ref.mscx"); }
+      void split2() { split("split1.mscx", "split1-ref.mscx"); }
       };
 
 //---------------------------------------------------------
@@ -43,13 +46,12 @@ void TestSplit::initTestCase()
       }
 
 //---------------------------------------------------------
-//   beam
+//   split
 //---------------------------------------------------------
 
-void TestSplit::split()
+void TestSplit::split(const char* f1, const char* ref)
       {
-      const char* path = "split.mscx";
-      Score* score = readScore(DIR + path);
+      Score* score = readScore(DIR + f1);
       QVERIFY(score);
       Measure* m = score->firstMeasure();
       Segment* s = m->first(SegChordRest);
@@ -59,7 +61,7 @@ void TestSplit::split()
 
       score->cmdSplitMeasure(cr);
 
-      QVERIFY(saveCompareScore(score, path, DIR + "split-ref.mscx"));
+      QVERIFY(saveCompareScore(score, f1, DIR + ref));
       delete score;
       }
 

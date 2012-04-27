@@ -28,9 +28,12 @@ class TestJoin : public QObject, public MTest
       {
       Q_OBJECT
 
+      void join(const char* p1, const char* p2);
+
    private slots:
       void initTestCase();
-      void split();
+      void join1() { join("join.mscx",  "join-ref.mscx"); }
+      void join2() { join("join1.mscx", "join1-ref.mscx"); }
       };
 
 //---------------------------------------------------------
@@ -46,20 +49,20 @@ void TestJoin::initTestCase()
 //   beam
 //---------------------------------------------------------
 
-void TestJoin::split()
+void TestJoin::join(const char* p1, const char* p2)
       {
-      const char* path = "join.mscx";
-      Score* score = readScore(DIR + path);
+      Score* score = readScore(DIR + p1);
       QVERIFY(score);
       Measure* m1 = score->firstMeasure();
-      Measure* m2 = m1->nextMeasure()->nextMeasure();
+      Measure* m2 = m1->nextMeasure();
 
       QVERIFY(m1 != 0);
-      QVERIFY(m2 == 0);
+      QVERIFY(m2 != 0);
+      QVERIFY(m1 != m2);
 
       score->cmdJoinMeasure(m1, m2);
 
-      QVERIFY(saveCompareScore(score, path, DIR + "join-ref.mscx"));
+      QVERIFY(saveCompareScore(score, p1, DIR + p2));
       delete score;
       }
 

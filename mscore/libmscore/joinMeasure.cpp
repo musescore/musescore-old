@@ -25,28 +25,28 @@
 
 //---------------------------------------------------------
 //   cmdJoinMeasure
-//    join measures from m1 upto (not including) m2
+//    join measures from m1 upto (including) m2
 //---------------------------------------------------------
 
 void Score::cmdJoinMeasure(Measure* m1, Measure* m2)
       {
-      Measure* mm2 = m2->prevMeasure();   // last measure to join
-
       startCmd();
 
       ScoreRange range;
-      range.read(m1->first(), mm2->last(), 0, nstaves() * VOICES);
+      range.read(m1->first(), m2->last(), 0, nstaves() * VOICES);
 
-      undo(new RemoveMeasures(m1, mm2));
+      undo(new RemoveMeasures(m1, m2));
       Measure* m = static_cast<Measure*>(insertMeasure(MEASURE, m2, true));
 
       m->setTick(m1->tick());
       m->setTimesig(m1->timesig());
       Fraction f;
-      for (Measure* mm = m1; mm && mm != m2; mm = mm->nextMeasure())
+      for (Measure* mm = m1; mm; mm = mm->nextMeasure())  {
             f += mm->len();
+            if (mm == m2)
+                  break;
+            }
       m->setLen(f);
-
       range.write(0, m);
 
       endCmd();

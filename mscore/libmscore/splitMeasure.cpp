@@ -18,6 +18,7 @@
 #include "slur.h"
 #include "tuplet.h"
 #include "slurmap.h"
+#include "spannermap.h"
 #include "tiemap.h"
 #include "tupletmap.h"
 #include "undo.h"
@@ -182,8 +183,8 @@ void Score::cmdSplitMeasure(ChordRest* cr)
       m2->setLen(Fraction::fromTicks(ticks2));
 
       int tracks = nstaves() * VOICES;
-      SlurMap* slurMap = new SlurMap[tracks];
-      TieMap* tieMap   = new TieMap[tracks];
+      SpannerMap spannerMap;
+      TieMap tieMap;
 
       for (int track = 0; track < tracks; ++track) {
             TupletMap tupletMap;
@@ -219,21 +220,20 @@ void Score::cmdSplitMeasure(ChordRest* cr)
                               }
                         seg->add(ncr);
                         }
-#if 0
-                  foreach (Slur* s, ocr->slurFor()) {
-                        Slur* slur = new Slur(this);
-                        slur->setStartElement(ncr);
-                        ncr->addSlurFor(slur);
-                        slurMap[track].add(s, slur);
+                  foreach (Spanner* s, ocr->spannerFor()) {
+                        Spanner* spanner = static_cast<Spanner*>(s->clone());
+                        spanner->setStartElement(ncr);
+                        ncr->addSpannerFor(spanner);
+                        spannerMap.add(s, spanner);
                         }
-                  foreach (Slur* s, ocr->slurBack()) {
-                        Slur* slur = slurMap[track].findNew(s);
-                        if (slur) {
-                              slur->setEndElement(ncr);
-                              ncr->addSlurBack(slur);
+                  foreach (Spanner* s, ocr->spannerBack()) {
+                        Spanner* spanner = spannerMap.findNew(s);
+                        if (spanner) {
+                              spanner->setEndElement(ncr);
+                              ncr->addSpannerBack(spanner);
                               }
                         else {
-                              qDebug("cloneStave: cannot find slur");
+                              qDebug("cloneStave: cannot find spanner");
                               }
                         }
                   foreach (Element* e, seg->annotations()) {
@@ -253,10 +253,10 @@ void Score::cmdSplitMeasure(ChordRest* cr)
                                     Tie* tie = new Tie(this);
                                     nn->setTieFor(tie);
                                     tie->setStartNote(nn);
-                                    tieMap[track].add(on->tieFor(), tie);
+                                    tieMap.add(on->tieFor(), tie);
                                     }
                               if (on->tieBack()) {
-                                    Tie* tie = tieMap[track].findNew(on->tieBack());
+                                    Tie* tie = tieMap.findNew(on->tieBack());
                                     if (tie) {
                                           nn->setTieBack(tie);
                                           tie->setEndNote(nn);
@@ -267,11 +267,8 @@ void Score::cmdSplitMeasure(ChordRest* cr)
                                     }
                               }
                         }
-#endif
                   }
             }
-      delete[] slurMap;
-      delete[] tieMap;
       endCmd();
       }
 

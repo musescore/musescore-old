@@ -21,6 +21,7 @@ class ChordRest;
 class Element;
 class Segment;
 class Note;
+class Measure;
 
 //---------------------------------------------------------
 //   ElementPattern
@@ -111,6 +112,7 @@ class Selection {
       bool canCopy() const;
       void reconstructElementList();
       void updateSelectedElements();
+      bool measureRange(Measure** m1, Measure** m2) const;
       };
 
 #endif
