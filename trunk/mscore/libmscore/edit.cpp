@@ -1581,8 +1581,8 @@ MeasureBase* Score::insertMeasure(ElementType type, MeasureBase* measure,
                               createEndBar = true;
                         }
 
-                  Fraction f = score->sigmap()->timesig(tick).timesig();
-      	      int ticks = f.ticks();
+                  Fraction f = score->sigmap()->timesig(tick).nominal();
+      	      int ticks  = f.ticks();
 
                   Measure* m = static_cast<Measure*>(mb);
                   m->setTimesig(f);

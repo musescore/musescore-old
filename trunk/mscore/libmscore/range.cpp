@@ -65,7 +65,7 @@ TrackList::~TrackList()
 //   readSpanner
 //---------------------------------------------------------
 
-static void readSpanner(int track, const QList<Spanner*>& spannerFor,
+void TrackList::readSpanner(int track, const QList<Spanner*>& spannerFor,
    const QList<Spanner*>& spannerBack, ChordRest* dst,
    QHash<Spanner*,Spanner*>* map)
       {
@@ -76,6 +76,13 @@ static void readSpanner(int track, const QList<Spanner*>& spannerFor,
             map->insert(oldSpanner, newSpanner);
             dst->addSpannerFor(newSpanner);
             newSpanner->setStartElement(dst);
+            int etick = oldSpanner->endTick();
+            if (etick >= range()->last()->tick()) {
+printf("readSpanner %d - %d\n", etick, range()->last()->tick());
+                  newSpanner->setEndElement(oldSpanner->endElement());
+                  oldSpanner->removeSpannerBack();
+                  map->remove(oldSpanner);
+                  }
             }
       foreach (Spanner* oldSpanner, spannerBack) {
             if (track != -1 && oldSpanner->track() != track)
@@ -99,8 +106,8 @@ static void readSpanner(int track, const QList<Spanner*>& spannerFor,
 //   writeSpanner
 //---------------------------------------------------------
 
-static void writeSpanner(int track, ChordRest* src, ChordRest* dst,
-   Segment* segment, QHash<Spanner*, Spanner*>* map)
+void TrackList::writeSpanner(int track, ChordRest* src, ChordRest* dst,
+   Segment* segment, QHash<Spanner*, Spanner*>* map) const
       {
       foreach(Spanner* oldSpanner, src->spannerFor()) {
             Spanner* newSpanner = static_cast<Spanner*>(oldSpanner->clone());
@@ -113,6 +120,12 @@ static void writeSpanner(int track, ChordRest* src, ChordRest* dst,
             else {
                   segment->addSpannerFor(newSpanner);
                   newSpanner->setStartElement(segment);
+                  }
+            int etick = oldSpanner->endTick();
+            if (etick >= range()->last()->tick()) {
+                  newSpanner->setEndElement(oldSpanner->endElement());
+                  newSpanner->addSpannerBack();
+                  map->remove(oldSpanner);
                   }
             }
 
@@ -525,9 +538,7 @@ bool TrackList::write(int track, Measure* measure, QHash<Spanner*, Spanner*>* ma
 
 ScoreRange::~ScoreRange()
       {
-      foreach(TrackList* dl, tracks) {
-            delete dl;
-            }
+      qDeleteAll(tracks);
       }
 
 //---------------------------------------------------------
@@ -551,16 +562,18 @@ bool ScoreRange::canWrite(const Fraction& f) const
 
 void ScoreRange::read(Segment* first, Segment* last, int startTrack, int endTrack)
       {
+      _first = first;
+      _last  = last;
       spannerMap.clear();
       for (int track = startTrack; track < endTrack; ++track) {
-            TrackList* dl = new TrackList;
+            TrackList* dl = new TrackList(this);
             dl->read(track, first, last, &spannerMap);
             tracks.append(dl);
             }
       if (!spannerMap.isEmpty()) {
             printf("ScoreRange::read(): dangling Spanner\n");
             foreach(Spanner* s, spannerMap) {
-                  printf("  <%s>\n", s->name());
+                  printf("  <%s> end %p\n", s->name(), s->endElement());
                   }
             }
       }

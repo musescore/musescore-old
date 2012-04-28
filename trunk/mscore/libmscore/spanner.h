@@ -56,7 +56,7 @@ class SpannerSegment : public Element {
 //---------------------------------------------------------
 
 class Spanner : public Element {
-      Element* _startElement;
+      Element* _startElement;       // can be ChordRest or Segment
       Element* _endElement;
       Anchor _anchor;    // enum Anchor { ANCHOR_SEGMENT, ANCHOR_MEASURE,
                          //    ANCHOR_CHORD, ANCHOR_NOTE};
@@ -109,6 +109,9 @@ class Spanner : public Element {
       void setYoff(qreal d) { _yoffset = d;        }
       qreal yoff() const    { return _yoffset;     }
       virtual bool isEdited(Spanner* originalSpanner) const;
+      int endTick() const;
+      bool removeSpannerBack();
+      void addSpannerBack();
       };
 #endif
 

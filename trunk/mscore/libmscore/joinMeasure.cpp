@@ -28,7 +28,8 @@ void Score::cmdJoinMeasure(Measure* m1, Measure* m2)
       range.read(m1->first(), m2->last(), 0, nstaves() * VOICES);
 
       undo(new RemoveMeasures(m1, m2));
-      Measure* m = static_cast<Measure*>(insertMeasure(MEASURE, m2, true));
+      Measure* m = static_cast<Measure*>(insertMeasure(MEASURE, m2->next(), true));
+      fixTicks();
 
       m->setTick(m1->tick());
       m->setTimesig(m1->timesig());

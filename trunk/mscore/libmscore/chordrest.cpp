@@ -682,27 +682,18 @@ void ChordRest::addSpannerBack(Spanner* s)
 //   removeSpannerFor
 //---------------------------------------------------------
 
-void ChordRest::removeSpannerFor(Spanner* s)
+bool ChordRest::removeSpannerFor(Spanner* s)
       {
-      if (!_spannerFor.removeOne(s)) {
-            qDebug("ChordRest<%p>::removeSpannerFor(): %p not found", this, s);
-            foreach(Spanner* s, _spannerFor)
-                  qDebug("  %p", s);
-            abort();
-            }
+      return _spannerFor.removeOne(s);
       }
 
 //---------------------------------------------------------
 //   removeSpannerBack
 //---------------------------------------------------------
 
-void ChordRest::removeSpannerBack(Spanner* s)
+bool ChordRest::removeSpannerBack(Spanner* s)
       {
-      if (!_spannerBack.removeOne(s)) {
-            qDebug("ChordRest<%p>::removeSpannerBack(): %p not found", this, s);
-            foreach(Spanner* s, _spannerBack)
-                  qDebug("  %p", s);
-            }
+      return _spannerBack.removeOne(s);
       }
 
 //---------------------------------------------------------

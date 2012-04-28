@@ -21,6 +21,8 @@ class Measure;
 class Tuplet;
 class Segment;
 class Spanner;
+class ScoreRange;
+class ChordRest;
 
 //---------------------------------------------------------
 //   TrackList
@@ -29,18 +31,25 @@ class Spanner;
 class TrackList : public QList<Element*>
       {
       Fraction _duration;
+      ScoreRange* _range;
 
       Tuplet* writeTuplet(Tuplet* tuplet, Measure* measure, int tick) const;
       void append(Element*, QHash<Spanner*, Spanner*>*);
       void appendGap(const Fraction&);
+      void readSpanner(int track, const QList<Spanner*>& spannerFor,
+         const QList<Spanner*>& spannerBack, ChordRest* dst,
+         QHash<Spanner*,Spanner*>* map);
+      void writeSpanner(int track, ChordRest* src, ChordRest* dst,
+         Segment* segment, QHash<Spanner*, Spanner*>* map) const;
 
    public:
-      TrackList() {}
+      TrackList(ScoreRange* r) { _range = r; }
       ~TrackList();
       void read(int track, const Segment* fs, const Segment* ls, QHash<Spanner*, Spanner*>*);
       bool canWrite(const Fraction& f) const;
       bool write(int track, Measure*, QHash<Spanner*, Spanner*>*) const;
       Fraction duration() const  { return _duration; }
+      ScoreRange* range() const { return _range; }
       };
 
 //---------------------------------------------------------
@@ -50,6 +59,8 @@ class TrackList : public QList<Element*>
 class ScoreRange {
       mutable QHash<Spanner*, Spanner*> spannerMap;
       QList<TrackList*> tracks;
+      Segment* _first;
+      Segment* _last;
 
    public:
       ScoreRange() {}
@@ -58,6 +69,8 @@ class ScoreRange {
       bool canWrite(const Fraction&) const;
       bool write(int track, Measure*) const;
       Fraction duration() const;
+      Segment* first() const { return _first; }
+      Segment* last() const  { return _last;  }
       };
 
 #endif
