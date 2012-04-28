@@ -39,6 +39,7 @@ class TestSplit : public QObject, public MTest
       void split4() { split("split3.mscx", "split3-ref.mscx"); }
       void split5() { split("split4.mscx", "split4-ref.mscx"); }
       void split6() { split("split5.mscx", "split5-ref.mscx", 6); }
+      void split7() { split("split6.mscx", "split6-ref.mscx"); }
       };
 
 //---------------------------------------------------------
