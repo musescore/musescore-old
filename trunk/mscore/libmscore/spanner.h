@@ -109,6 +109,7 @@ class Spanner : public Element {
       void setYoff(qreal d) { _yoffset = d;        }
       qreal yoff() const    { return _yoffset;     }
       virtual bool isEdited(Spanner* originalSpanner) const;
+      int startTick() const;
       int endTick() const;
       bool removeSpannerBack();
       void addSpannerBack();

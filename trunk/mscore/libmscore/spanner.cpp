@@ -191,6 +191,20 @@ bool Spanner::isEdited(Spanner* originalSpanner) const
       }
 
 //---------------------------------------------------------
+//   startTick
+//---------------------------------------------------------
+
+int Spanner::startTick() const
+      {
+      if (startElement()->isChordRest())
+            return static_cast<ChordRest*>(startElement())->tick();
+      if (startElement()->type() == SEGMENT)
+            return static_cast<Segment*>(startElement())->tick();
+      qDebug("Spanner:: unknown spanner start %s\n", startElement()->name());
+      return 0;
+      }
+
+//---------------------------------------------------------
 //   endTick
 //---------------------------------------------------------
 

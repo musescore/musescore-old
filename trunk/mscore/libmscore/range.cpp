@@ -78,7 +78,6 @@ void TrackList::readSpanner(int track, const QList<Spanner*>& spannerFor,
             newSpanner->setStartElement(dst);
             int etick = oldSpanner->endTick();
             if (etick >= range()->last()->tick()) {
-printf("readSpanner %d - %d\n", etick, range()->last()->tick());
                   newSpanner->setEndElement(oldSpanner->endElement());
                   oldSpanner->removeSpannerBack();
                   map->remove(oldSpanner);
@@ -94,10 +93,16 @@ printf("readSpanner %d - %d\n", etick, range()->last()->tick());
                   map->remove(oldSpanner);
                   }
             else {
-                  qDebug("readSpanner: %s not found", oldSpanner->name());
-                  // TODO: handle failure case:
-                  // - remove start spanner
-                  // - delete spanner
+                  int stick = oldSpanner->startTick();
+                  if (stick < range()->first()->tick()) {
+                        dst->addSpannerBack(oldSpanner);
+                        }
+                  else {
+                        qDebug("readSpanner: %s not found", oldSpanner->name());
+                        // TODO: handle failure case:
+                        // - remove start spanner
+                        // - delete spanner
+                        }
                   }
             }
       }
@@ -143,10 +148,23 @@ void TrackList::writeSpanner(int track, ChordRest* src, ChordRest* dst,
                   map->remove(oldSpanner);
                   }
             else {
-                  qDebug("writeSpanner: %s not found", oldSpanner->name());
-                  // TODO: handle failure case:
-                  // - remove start slur from chord/rest
-                  // - delete slur
+                  int stick = oldSpanner->startTick();
+                  if (stick < range()->first()->tick()) {
+                        if (oldSpanner->type() == SLUR) {
+                              dst->addSpannerBack(oldSpanner);
+                              oldSpanner->setEndElement(dst);
+                              }
+                        else {
+                              segment->addSpannerBack(oldSpanner);
+                              oldSpanner->setEndElement(segment);
+                              }
+                        }
+                  else {
+                        qDebug("writeSpanner: %s not found", oldSpanner->name());
+                        // TODO: handle failure case:
+                        // - remove start slur from chord/rest
+                        // - delete slur
+                        }
                   }
             }
       foreach(Element* e, src->annotations()) {
