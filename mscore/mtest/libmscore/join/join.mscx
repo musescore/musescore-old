@@ -86,7 +86,7 @@
           </Text>
         <Text>
           <style>Subtitle</style>
-          <text>Split Measure</text>
+          <text>Join Measure</text>
           </Text>
         </VBox>
       <Measure number="1" len="1/2">

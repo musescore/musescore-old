@@ -12,14 +12,6 @@
 
 #include "score.h"
 #include "measure.h"
-#include "tiemap.h"
-#include "slurmap.h"
-#include "tupletmap.h"
-#include "note.h"
-#include "chord.h"
-#include "segment.h"
-#include "tuplet.h"
-#include "slur.h"
 #include "undo.h"
 #include "range.h"
 
