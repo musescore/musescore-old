@@ -86,10 +86,10 @@
           </Text>
         <Text>
           <style>Subtitle</style>
-          <text>Join Measure</text>
+          <text>Join Measure+Hairpin</text>
           </Text>
         </VBox>
-      <Measure number="1">
+      <Measure number="1" len="1/2">
         <Clef>
           <concertClefType>G</concertClefType>
           <transposingClefType>G</transposingClefType>
@@ -99,6 +99,10 @@
           <sigD>4</sigD>
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
+        <HairPin id="2">
+          <subtype>0</subtype>
+          <veloChange>10</veloChange>
+          </HairPin>
         <Chord>
           <durationType>quarter</durationType>
           <Note>
@@ -113,6 +117,8 @@
             <tpc>16</tpc>
             </Note>
           </Chord>
+        </Measure>
+      <Measure number="2" len="1/2">
         <Chord>
           <durationType>quarter</durationType>
           <Note>
@@ -120,6 +126,7 @@
             <tpc>18</tpc>
             </Note>
           </Chord>
+        <endSpanner id="2"/>
         <Chord>
           <durationType>quarter</durationType>
           <Note>

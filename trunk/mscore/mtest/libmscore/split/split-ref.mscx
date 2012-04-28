@@ -99,6 +99,11 @@
           <sigD>4</sigD>
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
+        <Tempo>
+          <tempo>1.66667</tempo>
+          <style>Tempo</style>
+          <text>𝅘𝅥 = 100</text>
+          </Tempo>
         <Chord>
           <durationType>quarter</durationType>
           <Note>

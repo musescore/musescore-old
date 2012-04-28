@@ -86,10 +86,10 @@
           </Text>
         <Text>
           <style>Subtitle</style>
-          <text>Join Measure</text>
+          <text>Split Measure</text>
           </Text>
         </VBox>
-      <Measure number="1">
+      <Measure number="1" len="1/2">
         <Clef>
           <concertClefType>G</concertClefType>
           <transposingClefType>G</transposingClefType>
@@ -99,6 +99,11 @@
           <sigD>4</sigD>
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
+        <Tempo>
+          <tempo>1.66667</tempo>
+          <style>Tempo</style>
+          <text>𝅘𝅥 = 100</text>
+          </Tempo>
         <Chord>
           <durationType>quarter</durationType>
           <Note>
@@ -109,10 +114,14 @@
         <Chord>
           <durationType>quarter</durationType>
           <Note>
-            <pitch>62</pitch>
-            <tpc>16</tpc>
+            <Tie>
+              </Tie>
+            <pitch>64</pitch>
+            <tpc>18</tpc>
             </Note>
           </Chord>
+        </Measure>
+      <Measure number="2" len="1/2">
         <Chord>
           <durationType>quarter</durationType>
           <Note>

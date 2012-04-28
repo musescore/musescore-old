@@ -260,22 +260,40 @@ void TrackList::read(int track, const Segment* fs, const Segment* es, QHash<Span
       gap = es->tick() - tick;
       if (gap)
             appendGap(Fraction::fromTicks(gap));
-#if 0
+
       //
-      // TODO: connect ties
+      // connect ties
       //
-      foreach(Element* e, *this) {
+      int n = size();
+      for (int i = 0; i < n; ++i) {
+            Element* e = at(i);
             if (e->type() != CHORD)
                   continue;
-printf("==%s\n", e->name());
             Chord* chord = static_cast<Chord*>(e);
-            foreach(Note* n, chord->notes()) {
-                  if (n->tieFor()) {
-                        printf("  ======tie for\n");
+            foreach(Note* n1, chord->notes()) {
+                  Tie* tie = n1->tieFor();
+                  if (!tie)
+                        continue;
+                  for (int k = i+1; k < n; ++k) {
+                        Element* ee = at(k);
+                        if (ee->type() != CHORD)
+                              continue;
+                        Chord* c2 = static_cast<Chord*>(ee);
+                        bool found = false;
+                        foreach(Note* n2, c2->notes()) {
+                              if (n1->pitch() == n2->pitch()) {
+                                    tie->setEndNote(n2);
+                                    n2->setTieBack(tie);
+                                    found = true;
+                                    break;
+                                    }
+                              }
+                        if (!found)
+                              printf("Tied note not found\n");
+                        break;
                         }
                   }
             }
-#endif
       }
 
 //---------------------------------------------------------
