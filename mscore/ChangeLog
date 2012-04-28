@@ -1,3 +1,5 @@
+28.4 (ws)
+      - misc. enhancements for split/join measure. Do not allow splitting a tuplet.
 27.4 (la)
       - fix #16270: Click in the navigator moves box only horizontally
 26.4 (ws)

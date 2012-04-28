@@ -49,4 +49,3 @@ void Score::cmdSplitMeasure(ChordRest* cr)
       endCmd();
       }
 
-

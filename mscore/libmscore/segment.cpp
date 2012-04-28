@@ -836,4 +836,22 @@ bool Segment::setProperty(P_ID propertyId, const QVariant& v)
       return true;
       }
 
+//---------------------------------------------------------
+//   splitsTuplet
+//---------------------------------------------------------
+
+bool Segment::splitsTuplet() const
+      {
+      if (subtype() != SegChordRest)
+            return false;
+      int tracks = score()->nstaves() * VOICES;
+      for (int track = 0; track < tracks; ++track) {
+            ChordRest* cr = static_cast<ChordRest*>(element(track));
+            if (cr == 0)
+                  continue;
+            if (cr->tuplet() && cr->tuplet()->elements().front() != cr)
+                  return true;
+            }
+      return false;
+      }
 

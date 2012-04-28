@@ -2770,7 +2770,13 @@ void ScoreView::cmd(const QAction* a)
                   if (e->type() == NOTE)
                         e = static_cast<Note*>(e)->chord();
                   ChordRest* cr = static_cast<ChordRest*>(e);
-                  _score->cmdSplitMeasure(cr);
+                  if (cr->segment()->splitsTuplet()) {
+                        QMessageBox::warning(0, "MuseScore",
+                           tr("Cannot split measure here:\n"
+                           "cannot split tuplet"));
+                        }
+                  else
+                        _score->cmdSplitMeasure(cr);
                   }
             }
       else if (cmd == "join-measure") {
