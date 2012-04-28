@@ -29,6 +29,7 @@ class TestJoin : public QObject, public MTest
       Q_OBJECT
 
       void join(const char* p1, const char* p2);
+      void join(const char* p1, const char* p2, int);
 
    private slots:
       void initTestCase();
@@ -37,6 +38,7 @@ class TestJoin : public QObject, public MTest
       void join3() { join("join2.mscx", "join2-ref.mscx"); }
       void join4() { join("join3.mscx", "join3-ref.mscx"); }
       void join5() { join("join4.mscx", "join4-ref.mscx"); }
+      void join6() { join("join5.mscx", "join5-ref.mscx", 1); }
       };
 
 //---------------------------------------------------------
@@ -57,6 +59,25 @@ void TestJoin::join(const char* p1, const char* p2)
       Score* score = readScore(DIR + p1);
       QVERIFY(score);
       Measure* m1 = score->firstMeasure();
+      Measure* m2 = m1->nextMeasure();
+
+      QVERIFY(m1 != 0);
+      QVERIFY(m2 != 0);
+      QVERIFY(m1 != m2);
+
+      score->cmdJoinMeasure(m1, m2);
+
+      QVERIFY(saveCompareScore(score, p1, DIR + p2));
+      delete score;
+      }
+
+void TestJoin::join(const char* p1, const char* p2, int index)
+      {
+      Score* score = readScore(DIR + p1);
+      QVERIFY(score);
+      Measure* m1 = score->firstMeasure();
+      for (int i = 0; i < index; ++i)
+            m1 = m1->nextMeasure();
       Measure* m2 = m1->nextMeasure();
 
       QVERIFY(m1 != 0);
