@@ -234,10 +234,17 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                               foreach(Spanner* spanner, oseg->spannerFor()) {
                                     if ((spanner->track() == srcTrack) && (track != -1)) {
                                           Spanner* nspanner = static_cast<Spanner*>(spanner->linkedClone());
-                                          foreach(SpannerSegment* ss, nspanner->spannerSegments())
+                                          nspanner->setUserOff(QPointF());  // reset user offset as most likely
+                                                                      // it will not fit
+                                          nspanner->setReadPos(QPointF());
+                                          foreach(SpannerSegment* ss, nspanner->spannerSegments()) {
                                                 ss->setParent(0);
+                                                ss->setUserOff(QPointF());
+                                                ss->setReadPos(QPointF());
+                                                }
                                           nspanner->setScore(score);
                                           nspanner->setParent(ns);
+                                          nspanner->setTrack(track == -1 ? 0 : track);
                                           if (spanner->anchor() == ANCHOR_SEGMENT)
                                                 nspanner->setStartElement(ns);
                                           else //spanner->anchor() == ANCHOR_MEASURE
@@ -269,6 +276,9 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                                        || (e->systemFlag() && srcTrack == 0)
                                        ) {
                                           Element* ne = e->clone();
+                                          ne->setUserOff(QPointF());  // reset user offset as most likely
+                                                                      // it will not fit
+                                          ne->setReadPos(QPointF());
                                           ne->setTrack(track == -1 ? 0 : track);
                                           ns->add(ne);
                                           }
@@ -310,6 +320,7 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                                           Slur* s = static_cast<Slur*>(sp);
                                           Slur* slur = new Slur(score);
                                           slur->setStartElement(ncr);
+                                          slur->setTrack(track == -1 ? 0 : track);
                                           ncr->addSlurFor(slur);
                                           slurMap.add(s, slur);
                                           }
