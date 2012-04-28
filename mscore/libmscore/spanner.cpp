@@ -13,6 +13,8 @@
 
 #include "spanner.h"
 #include "system.h"
+#include "chordrest.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   SpannerSegment
@@ -187,3 +189,46 @@ bool Spanner::isEdited(Spanner* originalSpanner) const
             }
       return false;
       }
+
+//---------------------------------------------------------
+//   endTick
+//---------------------------------------------------------
+
+int Spanner::endTick() const
+      {
+      if (endElement()->isChordRest())
+            return static_cast<ChordRest*>(endElement())->tick();
+      if (endElement()->type() == SEGMENT)
+            return static_cast<Segment*>(endElement())->tick();
+      qDebug("Spanner:: unknown spanner end %s\n", endElement()->name());
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   removeSpannerBack
+//---------------------------------------------------------
+
+bool Spanner::removeSpannerBack()
+      {
+      if (endElement()->isChordRest())
+            return static_cast<ChordRest*>(endElement())->removeSpannerBack(this);
+      if (endElement()->type() == SEGMENT)
+            return static_cast<Segment*>(endElement())->removeSpannerBack(this);
+      qDebug("Spanner:: unknown spanner end %s\n", endElement()->name());
+      return false;
+      }
+
+//---------------------------------------------------------
+//   addSpannerBack
+//---------------------------------------------------------
+
+void Spanner::addSpannerBack()
+      {
+      if (endElement()->isChordRest())
+            static_cast<ChordRest*>(endElement())->addSpannerBack(this);
+      else if (endElement()->type() == SEGMENT)
+            static_cast<Segment*>(endElement())->addSpannerBack(this);
+      else
+            qDebug("Spanner:: unknown spanner end %s\n", endElement()->name());
+      }
+

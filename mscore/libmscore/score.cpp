@@ -511,11 +511,13 @@ void Score::fixTicks()
       if (fm == 0)
             return;
 
+      TimeSigMap* smap = sigmap();
       Fraction sig(fm->len());
+      Fraction nsig(fm->timesig());
       if (!parentScore()) {
             tempomap()->clear();
-            sigmap()->clear();
-            sigmap()->add(0, SigEvent(sig,  number));
+            smap->clear();
+            smap->add(0, SigEvent(sig,  nsig, number));
             }
 
       for (MeasureBase* mb = first(); mb; mb = mb->next()) {
@@ -595,9 +597,8 @@ void Score::fixTicks()
             // update time signature map
             //
             if (!parentScore() && (m->len() != sig)) {
-                  // sig = m->timesig();
                   sig = m->len();
-                  sigmap()->add(tick, SigEvent(sig, m->timesig(),  number));
+                  smap->add(tick, SigEvent(sig, m->timesig(),  number));
                   }
             tick += measureTicks;
             }

@@ -36,6 +36,7 @@ class TestJoin : public QObject, public MTest
       void join2() { join("join1.mscx", "join1-ref.mscx"); }
       void join3() { join("join2.mscx", "join2-ref.mscx"); }
       void join4() { join("join3.mscx", "join3-ref.mscx"); }
+      void join5() { join("join4.mscx", "join4-ref.mscx"); }
       };
 
 //---------------------------------------------------------

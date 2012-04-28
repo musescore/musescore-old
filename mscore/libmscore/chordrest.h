@@ -99,13 +99,13 @@ class ChordRest : public DurationElement {
 
       void addSlurFor(Slur* s)                  { addSpannerFor((Spanner*)s);  }
       void addSlurBack(Slur* s)                 { addSpannerBack((Spanner*)s);    }
-      void removeSlurFor(Slur* s)               { removeSpannerFor((Spanner*)s);  }
-      void removeSlurBack(Slur* s)              { removeSpannerBack((Spanner*)s); }
+      bool removeSlurFor(Slur* s)               { return removeSpannerFor((Spanner*)s);  }
+      bool removeSlurBack(Slur* s)              { return removeSpannerBack((Spanner*)s); }
 
       void addSpannerFor(Spanner*);
       void addSpannerBack(Spanner*);
-      void removeSpannerFor(Spanner*);
-      void removeSpannerBack(Spanner*);
+      bool removeSpannerFor(Spanner*);
+      bool removeSpannerBack(Spanner*);
 
       const QList<Element*>& annotations() const { return _annotations;        }
       QList<Element*>& annotations()             { return _annotations;        }
