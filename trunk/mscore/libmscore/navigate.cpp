@@ -11,6 +11,7 @@
 //  the file LICENCE.GPL
 //=============================================================================
 
+#include "navigate.h"
 #include "element.h"
 #include "clef.h"
 #include "score.h"
