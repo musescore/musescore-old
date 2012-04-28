@@ -18,8 +18,6 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-set (CMAKE_CXX_COMPILER   clang++)
-
 project(mscore)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.0)
 
@@ -64,7 +62,7 @@ else (OMR)
 endif (OMR)
 
 if (APPLE)
-
+      set (CMAKE_CXX_COMPILER   clang++)
       # Currently, just 'ppc', 'i386' or 'ppc i386' are useful architectures,
       # because the Flash-Player is not yet available as a 64-bit version.
       # Flash is required for displaying the videos of MuseScore-Connect.
