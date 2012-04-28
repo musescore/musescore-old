@@ -1834,7 +1834,9 @@ QPointF Chord::layoutArticulation(Articulation* a)
             bool stemSide = (bottom != up()) && stem();
             a->setUp(!bottom);
 
-            QPointF pos(stem()->hookPos());
+            QPointF pos;
+            if (stem())
+                  pos = stem()->hookPos();
 
             qreal _spatium2 = _spatium * .5;
             if (stemSide) {

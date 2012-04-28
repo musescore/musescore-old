@@ -125,7 +125,18 @@ class System : public Element {
       QList<SysStaff*>* staves()             { return &_staves;   }
       const QList<SysStaff*>* staves() const { return &_staves;   }
       qreal staffY(int staffIdx) const;
+#ifdef NDEBUG
       SysStaff* staff(int staffIdx) const    { return _staves[staffIdx]; }
+#else
+      SysStaff* staff(int staffIdx) const    {
+            if (staffIdx >= _staves.size()) {
+                  qDebug("System::staff(): bad index %d", staffIdx);
+                  staffIdx = _staves.size() - 1;
+                  abort();
+                  }
+            return _staves[staffIdx];
+            }
+#endif
 
       qreal distanceUp(int idx) const        { return _staves[idx]->distanceUp(); }
       qreal distanceDown(int idx) const      { return _staves[idx]->distanceDown(); }
