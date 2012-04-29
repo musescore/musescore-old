@@ -370,7 +370,9 @@ void WebPageDockWidget::saveOnlineFinished() {
             web->setHtml(string);
             }
       else {
-            // handle errors here
+            int httpStatus = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+            QString message = reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute).toString();
+            qDebug("Save online error %d, HTTP status: %d - %s", reply->error(), httpStatus, qPrintable(message));
             }
       reply->deleteLater();
       }      
