@@ -359,19 +359,27 @@ void WebPageDockWidget::saveOnlineFinished() {
       QNetworkReply *reply = (QNetworkReply *)sender();
       // Reading attributes of the reply
       // e.g. the HTTP status code
-      QVariant statusCodeV = 
-      reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+      int httpStatus = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+      QString message = reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute).toString();
    
       // no error received?
       if (reply->error() == QNetworkReply::NoError) {
-            //Reading bytes form the reply
-            QByteArray bytes = reply->readAll();  // bytes
-            QString string(bytes); // string
-            web->setHtml(string);
+            //deal with redirect
+            if (300 <= httpStatus && httpStatus < 400) {
+                  qDebug("Redirecting to: %s", qPrintable(reply->url().toString()));
+                  web->load(QNetworkRequest(reply->url()));
+                  }	
+            else if (httpStatus == 200) {    
+                  //Reading bytes form the reply    
+                  QByteArray bytes = reply->readAll();
+                  QString string(bytes);
+                  web->setHtml(string);
+                  }
+            else {
+                  qDebug("Unknown HTTP status: %d - %s", httpStatus, qPrintable(message));
+                  }
             }
-      else {
-            int httpStatus = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-            QString message = reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute).toString();
+      else { //error received
             qDebug("Save online error %d, HTTP status: %d - %s", reply->error(), httpStatus, qPrintable(message));
             }
       reply->deleteLater();
