@@ -1867,8 +1867,8 @@ void MusicXml::xmlPart(QDomElement e, QString id)
             // set drumset for instrument
             part->instr()->setUseDrumset(true);
             part->instr()->setDrumset(drumset);
-            // TODO: drumset still not selected after MusicXML import yet
             part->instr()->channel(0).bank = 128;
+            part->instr()->channel(0).updateInitList();
             }
       else
             delete drumset;

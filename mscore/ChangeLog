@@ -1,9 +1,7 @@
 29.4 (lv)
       - fix #15472: Import drumset information from MusicXML
-        drumset is read OK, but remaining issues:
+        drumset is read OK, but one issue remains:
         - notes are drawn on inccorect staff line
-        - notes still do not sound like drums
-          (saving to and loading from MuseScore format fixes this)
 28.4 (ws)
       - misc. fixes for importing 1.2 parts
       - misc. enhancements for split/join measure. Do not allow splitting a tuplet.
