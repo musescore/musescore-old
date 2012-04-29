@@ -98,6 +98,7 @@
 #include "libmscore/qzipreader_p.h"
 #include "libmscore/stafftype.h"
 #include "libmscore/tablature.h"
+#include "libmscore/drumset.h"
 
 //---------------------------------------------------------
 //   local defines for debug output
@@ -105,6 +106,35 @@
 
 // #define DEBUG_VOICE_MAPPER true
 // #define DEBUG_TICK true
+
+//---------------------------------------------------------
+//   MusicXMLStepAltOct2Pitch
+//---------------------------------------------------------
+
+/**
+ Convert MusicXML \a step / \a alter / \a octave to midi pitch.
+ Note: same code is also in libmscore/tablature.cpp.
+ TODO: combine ?
+ */
+
+static int MusicXMLStepAltOct2Pitch(char step, int alter, int octave)
+      {
+      int istep = step - 'A';
+      //                       a  b   c  d  e  f  g
+      static int table[7]  = { 9, 11, 0, 2, 4, 5, 7 };
+      if (istep < 0 || istep > 6) {
+            qDebug("MusicXMLStepAltOct2Pitch: illegal step %d, <%c>", istep, step);
+            return -1;
+            }
+      int pitch = table[istep] + alter + (octave+1) * 12;
+
+      if (pitch < 0)
+            pitch = -1;
+      if (pitch > 127)
+            pitch = -1;
+
+      return pitch;
+      }
 
 //---------------------------------------------------------
 //   xmlSetPitch
@@ -119,14 +149,8 @@ static void xmlSetPitch(Note* n, char step, int alter, int octave, Ottava* ottav
       {
       // qDebug("xmlSetPitch(n=%p, st=%c, alter=%d, octave=%d)",
       //        n, step, alter, octave);
-      int istep = step - 'A';
-      //                       a  b   c  d  e  f  g
-      static int table[7]  = { 9, 11, 0, 2, 4, 5, 7 };
-      if (istep < 0 || istep > 6) {
-            qDebug("xmlSetPitch: illegal step %d, <%c>", istep, step);
-            return;
-            }
-      int pitch = table[istep] + alter + (octave+1) * 12;
+
+      int pitch = MusicXMLStepAltOct2Pitch(step, alter, octave);
 
       if (pitch < 0)
             pitch = 0;
@@ -138,6 +162,7 @@ static void xmlSetPitch(Note* n, char step, int alter, int octave, Ottava* ottav
 
       n->setPitch(pitch);
 
+      int istep = step - 'A';
       //                        a  b  c  d  e  f  g
       static int table1[7]  = { 5, 6, 0, 1, 2, 3, 4 };
       int tpc  = step2tpc(table1[istep], alter);
@@ -1288,6 +1313,8 @@ void MusicXml::xmlScorePart(QDomElement e, QString id, int& parts)
             }
 
       qDebug("MusicXml::xmlScorePart: instruments part %s", qPrintable(id));
+      drumsets.insert(id, MusicXMLDrumset());
+
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "part-name") {
                   // OK? (ws) Yes it should be ok.part-name is display in front of staff in finale. (la)
@@ -1302,7 +1329,8 @@ void MusicXml::xmlScorePart(QDomElement e, QString id, int& parts)
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "instrument-name") {
                               qDebug("MusicXml::xmlScorePart: instrument id %s name %s",
-                                      qPrintable(instrId), qPrintable(ee.text()));
+                                     qPrintable(instrId), qPrintable(ee.text()));
+                              drumsets[id].insert(instrId, MusicXMLDrumInstrument(ee.text()));
                               // part-name or instrument-name?
                               if (part->longName().isEmpty())
                                     part->setLongName(ee.text());
@@ -1318,9 +1346,12 @@ void MusicXml::xmlScorePart(QDomElement e, QString id, int& parts)
                               part->setMidiChannel(ee.text().toInt() - 1);
                         else if (ee.tagName() == "midi-program")
                               part->setMidiProgram(ee.text().toInt() - 1);
-                        else if (ee.tagName() == "midi-unpitched")
+                        else if (ee.tagName() == "midi-unpitched") {
                               qDebug("MusicXml::xmlScorePart: instrument id %s midi-unpitched %s",
-                                      qPrintable(instrId), qPrintable(ee.text()));
+                                     qPrintable(instrId), qPrintable(ee.text()));
+                              if (drumsets[id].contains(instrId))
+                                    drumsets[id][instrId].pitch = ee.text().toInt() - 1;
+                              }
                         else if (ee.tagName() == "volume") {
                               double vol = ee.text().toDouble();
                               if (vol >= 0 && vol <= 100)
@@ -1344,6 +1375,13 @@ void MusicXml::xmlScorePart(QDomElement e, QString id, int& parts)
       part->staves()->push_back(staff);
       score->staves().push_back(staff);
       */
+
+      // dump drumset for this part
+      MusicXMLDrumsetIterator i(drumsets[id]);
+      while (i.hasNext()) {
+            i.next();
+            qDebug("%s %s", qPrintable(i.key()), qPrintable(i.value().toString()));
+            }
       }
 
 
@@ -1800,6 +1838,40 @@ void MusicXml::xmlPart(QDomElement e, QString id)
             ++i;
             }
       spanners.clear();
+
+      // determine if part contains a drumset
+      // this is the case if any instrument has a midi-unpitched element,
+      // (which stored in the MusicXMLDrumInstrument pitch field)
+      // debug: also dump the drumset for this part
+      Drumset* drumset = new Drumset;
+      bool hasDrumset = false;
+      drumset->clear();
+
+      MusicXMLDrumsetIterator ii(drumsets[id]);
+      while (ii.hasNext()) {
+            ii.next();
+            qDebug("%s %s", qPrintable(ii.key()), qPrintable(ii.value().toString()));
+            int pitch = ii.value().pitch;
+            if (0 <= pitch && pitch <= 127) {
+                  hasDrumset = true;
+                  drumset->drum(ii.value().pitch)
+                        = DrumInstrument(ii.value().name.toAscii().constData(),
+                                         ii.value().notehead, ii.value().line, ii.value().stemDirection);
+                  }
+            }
+      qDebug("hasDrumset %d", hasDrumset);
+      if (hasDrumset) {
+            // set staff type to percussion
+            for (int j = 0; j < part->nstaves(); ++j)
+                  part->staff(j)->setStaffType(score->staffTypes()[PERCUSSION_STAFF_TYPE]);
+            // set drumset for instrument
+            part->instr()->setUseDrumset(true);
+            part->instr()->setDrumset(drumset);
+            // TODO: drumset still not selected after MusicXML import yet
+            part->instr()->channel(0).bank = 128;
+            }
+      else
+            delete drumset;
       }
 
 //---------------------------------------------------------
@@ -1906,7 +1978,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number, int measure
             if (e.tagName() == "attributes")
                   xmlAttributes(measure, staff, e.firstChildElement());
             else if (e.tagName() == "note") {
-                  xmlNote(measure, staff, e);
+                  xmlNote(measure, staff, part->id(), e);
                   moveTick(tick, maxtick, lastLen, divisions, e);
 #ifdef DEBUG_TICK
                   qDebug(" after inserting note tick=%d", tick);
@@ -4305,7 +4377,7 @@ void MusicXml::xmlNotations(Note* note, ChordRest* cr, int trk, int ticks, QDomE
  \a Staff is the number of first staff of the part this note belongs to.
  */
 
-void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
+void MusicXml::xmlNote(Measure* measure, int staff, const QString& partId, QDomElement e)
       {
       int ticks = 0;
 #ifdef DEBUG_TICK
@@ -4337,6 +4409,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       QColor noteheadColor = QColor::Invalid;
       bool chord = false;
       int velocity = -1;
+      bool unpitched = false;
+      QString instrId;
 
       // first read all elements required for voice mapping
       QDomElement e2 = e.firstChildElement();
@@ -4456,6 +4530,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   //
                   // TODO: check semantic
                   //
+                  unpitched = true;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "display-step")          // A-G
                               step = ee.text();
@@ -4549,8 +4624,11 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   if (color != 0)
                         noteheadColor = QColor(color);
                   }
-            else if (tag == "instrument")
-                  qDebug("MusicXml::xmlNote instrument %s", qPrintable(e.attribute("id")));
+            else if (tag == "instrument") {
+                  qDebug("MusicXml::xmlNote part %s instrument %s",
+                         qPrintable(partId), qPrintable(e.attribute("id")));
+                  instrId = e.attribute("id");
+                  }
             else if (tag == "cue")
                   domNotImplemented(e);
             else
@@ -4602,7 +4680,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         //                        a  b  c  d  e  f  g
                         static int table2[7]  = { 5, 6, 0, 1, 2, 3, 4 };
                         int dp = 7 * (octave + 2) + table2[istep];
-                        qDebug("dp=%d", dp);
+                        qDebug(" dp=%d po-dp=%d", dp, po-dp);
                         cr->setUserYoffset((po - dp + 3) * score->spatium() / 2);
                         }
                   }
@@ -4670,7 +4748,17 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             // pitch must be set before adding note to chord as note
             // is inserted into pitch sorted list (ws)
 
-            xmlSetPitch(note, c, alter, octave, ottava, track);
+            if (unpitched
+                && drumsets.contains(partId)
+                && drumsets[partId].contains(instrId)) {
+                  // step and oct are display-step and ...-oct
+                  // get pitch from instrument definition in drumset instead
+                  int pitch = drumsets[partId][instrId].pitch;
+                  note->setPitch(pitch);
+                  note->setTpc(pitch2tpc(pitch)); // TODO: necessary ?
+                  }
+            else
+                  xmlSetPitch(note, c, alter, octave, ottava, track);
             cr->add(note);
 
             ((Chord*)cr)->setNoStem(noStem);
@@ -4702,6 +4790,28 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             ((Chord*)cr)->setStemDirection(sd);
 
             note->setVisible(printObject == "yes");
+
+            // set drumset information
+            // note that in MuseScore, the drumset contains defaults for notehead,
+            // line and stem direction, while a MusicXML file contains actual.
+            // the MusicXML values for each note are simply copied to the defaults
+            if (unpitched) {
+                  ClefType clef = cr->staff()->clef(tick);
+                  int po = clefTable[clef].pitchOffset;
+                  int pitch = MusicXMLStepAltOct2Pitch(step[0].toAscii(), 0, octave);
+                  int line = pitch2line(pitch) - pitch2line(po);
+                  // int line = pitch2line(po) - pitch2line(pitch);
+                  qDebug("MusicXml::xmlNote clef %d po %d (line %d) pitch %d (line %d)",
+                         clef, po, pitch2line(po), pitch, pitch2line(pitch));
+                  qDebug("MusicXml::xmlNote part %s instrument %s notehead %d line %d stemDir %d",
+                         qPrintable(partId), qPrintable(instrId), headGroup, line, sd);
+                  if (drumsets.contains(partId)
+                      && drumsets[partId].contains(instrId)) {
+                        drumsets[partId][instrId].notehead = headGroup;
+                        drumsets[partId][instrId].line = line;
+                        drumsets[partId][instrId].stemDirection = sd;
+                        }
+                  }
             }
 
       if (!chord && !grace) {

@@ -27,6 +27,7 @@
 */
 
 #include "libmscore/mscore.h"
+#include "musicxmlsupport.h"
 
 class Instrument;
 class Measure;
@@ -238,6 +239,8 @@ class MusicXml {
       int pageWidth;                             ///< Page width read from defaults
       int pageHeight;                            ///< Page height read from defaults
 
+      QMap<QString, MusicXMLDrumset> drumsets;   ///< Drumset for each part
+
       //-----------------------------
 
 //      void addWedge(int no, int startPos, qreal rx, qreal ry, bool above, bool hasYoffset, qreal yoffset, int subType);
@@ -255,7 +258,7 @@ class MusicXml {
                     QMap<int, Lyrics*>& defyLyrics,
                     QList<Lyrics*>& unNumbrdLyrics);
       void xmlNotations(Note* note, ChordRest* cr, int trk, int ticks, QDomElement node);
-      void xmlNote(Measure*, int stave, QDomElement node);
+      void xmlNote(Measure*, int stave, const QString& partId, QDomElement node);
       void xmlHarmony(QDomElement node, int tick, Measure* m, int staff);
       int xmlClef(QDomElement, int staffIdx, Measure*);
       void initVoiceMapperAndMapVoices(QDomElement e);
