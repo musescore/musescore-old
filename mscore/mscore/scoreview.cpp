@@ -2093,7 +2093,12 @@ void ScoreView::wheelEvent(QWheelEvent* event)
             //
             dy = n * qMax(2, height() / 10);
             }
+          
+      if(dx == 0 && dy == 0)
+            return;
 
+      constraintCanvas(&dx, &dy);
+      
       _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
          _matrix.m22(), _matrix.m23(), _matrix.dx()+dx, _matrix.dy()+dy, _matrix.m33());
       imatrix = _matrix.inverted();
@@ -2101,6 +2106,81 @@ void ScoreView::wheelEvent(QWheelEvent* event)
       scroll(dx, dy, QRect(0, 0, width(), height()));
       emit viewRectChanged();
       emit offsetChanged(_matrix.dx(), _matrix.dy());
+      }
+
+//---------------------------------------------------------
+//   constraints
+//---------------------------------------------------------
+void ScoreView::constraintCanvas (int *dxx, int *dyy)
+      {
+      const qreal margin = 50.0; //move to preferences?
+      int dx = *dxx;
+      int dy = *dyy;
+      QRectF rect = QRectF(0, 0, width(), height());
+      
+      Page* firstPage = score()->pages().front();
+      Page* lastPage = score()->pages().back();
+      
+      if(firstPage && lastPage) {
+            QPointF offsetPt(xoffset(), yoffset());
+            QRectF firstPageRect = QRectF(firstPage->pos().x() * mag(),
+                                      firstPage->pos().y() * mag(), 
+                                      firstPage->width() * mag(), 
+                                      firstPage->height() * mag());
+            QRectF lastPageRect = QRectF(lastPage->pos().x() * mag(), 
+                                         lastPage->pos().y() * mag(), 
+                                         lastPage->width() * mag(), 
+                                         lastPage->height() * mag());
+            QRectF pagesRect = firstPageRect.unite(lastPageRect).translated(offsetPt);
+            pagesRect.adjust(-margin, -margin, margin, margin);
+            QRectF toPagesRect = pagesRect.translated(dx, dy);
+            
+            // move right
+            if(dx > 0) {
+                  if(toPagesRect.right() > rect.right() && toPagesRect.left() > rect.left()) {
+                        if(pagesRect.width() <= rect.width()) {
+                              dx = rect.right() - pagesRect.right();
+                              } 
+                        else {
+                              dx = rect.left() - pagesRect.left();
+                              }
+                        }
+                  } 
+            else { // move left, dx < 0
+                  if(toPagesRect.left() < rect.left() && toPagesRect.right() < rect.right()) {
+                        if(pagesRect.width() <= rect.width()) {
+                              dx = rect.left() - pagesRect.left();
+                              } 
+                        else {
+                              dx = rect.right() - pagesRect.right();
+                              }
+                        }
+                  }
+            
+            // move down
+            if(dy > 0) {
+                  if(toPagesRect.bottom() > rect.bottom() && toPagesRect.top() > rect.top()) {
+                        if(pagesRect.height() <= rect.height()) {
+                              dy = rect.bottom() - pagesRect.bottom();
+                              } 
+                        else {
+                              dy = rect.top() - pagesRect.top();
+                              }
+                        }
+                  } 
+            else { // move up, dy < 0
+                  if(toPagesRect.top() < rect.top() && toPagesRect.bottom() < rect.bottom()) {
+                        if(pagesRect.height() <= rect.height()) {
+                              dy = rect.top() - pagesRect.top();
+                              } 
+                        else {
+                              dy = rect.bottom() - pagesRect.bottom();
+                              }
+                        }
+                  }
+            }
+      *dxx = dx;
+      *dyy = dy;
       }
 
 //---------------------------------------------------------
@@ -2932,6 +3012,11 @@ void ScoreView::dragScoreView(QMouseEvent* ev)
       QPoint d = ev->pos() - _matrix.map(startMove).toPoint();
       int dx   = d.x();
       int dy   = d.y();
+
+      if(dx == 0 && dy == 0)
+            return;
+            
+      constraintCanvas(&dx, &dy);      
 
       _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
          _matrix.m22(), _matrix.m23(), _matrix.dx()+dx, _matrix.dy()+dy, _matrix.m33());
