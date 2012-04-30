@@ -92,6 +92,7 @@
 #include "libmscore/chordline.h"
 #include "libmscore/figuredbass.h"
 #include "libmscore/tablature.h"
+#include "libmscore/rehearsalmark.h"
 
 //---------------------------------------------------------
 //   local defines for debug output
@@ -282,6 +283,7 @@ public:
       void credits(Xml& xml);
       void moveToTick(int t);
       void words(Text const* const text, int staff);
+      void rehearsal(RehearsalMark const* const rmk, int staff);
       void hairpin(Hairpin const* const hp, int staff, int tick);
       void ottava(Ottava const* const ot, int staff, int tick);
       void pedal(Pedal const* const pd, int staff, int tick);
@@ -2646,6 +2648,7 @@ void ExportMusicXml::words(Text const* const text, int staff)
       */
       directionTag(xml, attr, text);
       if (text->type() == REHEARSAL_MARK) {
+            // TODO: check if dead code (see rehearsal below)
             xml.stag("direction-type");
             xml.tag("rehearsal", text->getText());
             xml.etag();
@@ -2653,6 +2656,19 @@ void ExportMusicXml::words(Text const* const text, int staff)
       else
             wordsMetrome(xml, text);
       directionETag(xml, staff, text->mxmlOff());
+      }
+
+//---------------------------------------------------------
+//   rehearsal
+//---------------------------------------------------------
+
+void ExportMusicXml::rehearsal(RehearsalMark const* const rmk, int staff)
+      {
+      directionTag(xml, attr, rmk);
+      xml.stag("direction-type");
+      xml.tag("rehearsal", rmk->getText());
+      xml.etag();
+      directionETag(xml, staff, rmk->mxmlOff());
       }
 
 //---------------------------------------------------------
@@ -3115,6 +3131,7 @@ static void repeatAtMeasureStart(Xml& xml, Attributes& attr, Measure* m, int str
                                     case DYNAMIC:
                                     case HARMONY:
                                     case FIGURED_BASS:
+                                    case REHEARSAL_MARK:
                                     case JUMP: // note: all jumps are handled at measure stop
                                           break;
                                     case MARKER:
@@ -3190,6 +3207,7 @@ static void repeatAtMeasureStop(Xml& xml, Measure* m, int strack, int etrack, in
                                     case DYNAMIC:
                                     case HARMONY:
                                     case FIGURED_BASS:
+                                    case REHEARSAL_MARK:
                                           break;
                                     case MARKER:
                                           {
@@ -3329,6 +3347,9 @@ static void annotations(ExportMusicXml* exp, int strack, int etrack, int track, 
                                     break;
                               case FIGURED_BASS:
                                     exp->figuredBass(static_cast<const FiguredBass*>(e) /*, sstaff */);
+                                    break;
+                              case REHEARSAL_MARK:
+                                    exp->rehearsal(static_cast<const RehearsalMark*>(e), sstaff);
                                     break;
                               case JUMP:
                                     // ignore
