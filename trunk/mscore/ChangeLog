@@ -1,9 +1,11 @@
+3.5 (ws)
+      fix #13035: Beam direction for two notes
 1.5 (lv)
       - #15472: new MusicXML testfile testDrumset1.xml
 30.4 (lv)
       - fix MusicXML export of rehearsal mark
      (la)
-      - fix #8808: Limit scroll area of the score view while scrolling and dragging 
+      - fix #8808: Limit scroll area of the score view while scrolling and dragging
       - fix #16301: Extravanaeous program listing in Add/Remove Programs on windows
 29.4 (lv)
       - fix #15472: Import drumset information from MusicXML

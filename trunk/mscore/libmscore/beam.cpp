@@ -430,18 +430,13 @@ bool Beam::twoBeamedNotes()
       int dist1 = c1->upNote()->line() - 4;
       int dist2 = c2->upNote()->line() - 4;
       if (qAbs(dist1) == qAbs(dist2)) {
-            if (dist1 != 0) {
-                  _up = dist1 > 0;
-                  }
-            else {
-                  _up = false;
-                  Segment* s = c1->segment();
-                  s = s->prev1(SegChordRest);
-                  if (s && s->element(c1->track())) {
-                        Chord* c = static_cast<Chord*>(s->element(c1->track()));
-                        if (c->beam())
-                              _up = c->beam()->up();
-                        }
+            _up = false;
+            Segment* s = c1->segment();
+            s = s->prev1(SegChordRest);
+            if (s && s->element(c1->track())) {
+                  Chord* c = static_cast<Chord*>(s->element(c1->track()));
+                  if ((c->type() == CHORD) && c->beam())
+                        _up = c->beam()->up();
                   }
             }
       else if (qAbs(dist1) > qAbs(dist2))
@@ -496,7 +491,8 @@ void Beam::layout1()
             foreach(ChordRest* cr, _elements) {
                   if (cr->type() == CHORD) {
                         c2 = static_cast<Chord*>(cr);
-                        upCount += c2->up() ? 1 : -1;
+                        if (c2->line() != 4)
+                              upCount += c2->up() ? 1 : -1;
                         if (c2->noteType() != NOTE_NORMAL)
                               isGrace = true;
                         if (c1 == 0)

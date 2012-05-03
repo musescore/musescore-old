@@ -29,16 +29,17 @@ class TestBeam : public QObject, public MTest
 
    private slots:
       void initTestCase();
-      void beamA() { beam("Beam-A.mscx"); }
-      void beamB() { beam("Beam-B.mscx"); }
-      void beamC() { beam("Beam-C.mscx"); }
-      void beamD() { beam("Beam-D.mscx"); }
-      void beamE() { beam("Beam-E.mscx"); }
-      void beamF() { beam("Beam-F.mscx"); }
-      void beamG() { beam("Beam-G.mscx"); }
-      void beam2() { beam("Beam-2.mscx"); }
-      void beam23() { beam("Beam-23.mscx"); }
-      void beamS0() { beam("Beam-S0.mscx"); }
+      void beamA()   { beam("Beam-A.mscx"); }
+      void beamB()   { beam("Beam-B.mscx"); }
+      void beamC()   { beam("Beam-C.mscx"); }
+      void beamD()   { beam("Beam-D.mscx"); }
+      void beamE()   { beam("Beam-E.mscx"); }
+      void beamF()   { beam("Beam-F.mscx"); }
+      void beamG()   { beam("Beam-G.mscx"); }
+      void beam2()   { beam("Beam-2.mscx"); }
+      void beam23()  { beam("Beam-23.mscx"); }
+      void beamS0()  { beam("Beam-S0.mscx"); }
+      void beamDir() { beam("Beam-dir.mscx"); }
       };
 
 //---------------------------------------------------------
