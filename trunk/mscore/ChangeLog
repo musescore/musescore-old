@@ -1,4 +1,5 @@
 3.5 (ws)
+      fix #13036: Beam direction for three or more notes
       fix #13035: Beam direction for two notes
 1.5 (lv)
       - #15472: new MusicXML testfile testDrumset1.xml
