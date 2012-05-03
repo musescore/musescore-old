@@ -1272,9 +1272,9 @@ void Beam::computeStemLen(const QList<Chord*>& cl, qreal& py1, int beamLevels)
             if (bm.l && !(zeroSlant && cl.size() > 2)) {
                   if (cl.size() > 2) {
                         if (_up)
-                              bm.l -= adjust(_spatium4, bm.s, cl);
+                              bm.l = -12 - adjust(_spatium4, bm.s, cl);
                         else
-                              bm.l += adjust(_spatium4, bm.s, cl);
+                              bm.l = 12 + adjust(_spatium4, bm.s, cl);
                         adjust2(bm, c1);
                         }
                   }
@@ -1471,7 +1471,7 @@ void Beam::computeStemLen(const QList<Chord*>& cl, qreal& py1, int beamLevels)
             bm.s = slant;
             bm.l = ll1 - l1;
             }
-      else if (beamLevels > 4) {
+      else { // if (beamLevels > 4) {
             static const int t[] = { 0, 0, 4, 4, 8, 12, 16 }; // spatium4 added to stem len
             int n = t[beamLevels] + 12;
             bm.s = 0;
@@ -1523,11 +1523,10 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
 
       qreal _spatium   = spatium();
       QPointF canvPos(pagePos());
-//      qreal bd         = score()->styleD(ST_beamDistance);
-//      qreal bw         = score()->styleS(ST_beamWidth).val() * _spatium;
       qreal beamMinLen = point(score()->styleS(ST_beamMinLen));
       qreal graceMag   = score()->styleD(ST_graceNoteMag);
 
+      // style values ST_beamDistance and ST_beamWidth not used
       if (beamLevels == 4)
             _beamDist = (2.5 / 3.0) * _spatium;
       else
