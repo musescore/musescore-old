@@ -20,6 +20,7 @@
 #include "stafftype.h"
 #include "undo.h"
 #include "page.h"
+#include "barline.h"
 
 //---------------------------------------------------------
 //   Articulation::articulationList
@@ -481,8 +482,14 @@ bool Articulation::setProperty(P_ID propertyId, const QVariant& v)
             default:
                   return Element::setProperty(propertyId, v);
             }
+      score()->addRefresh(canvasBoundingRect());
+
+      // layout:
       if (chordRest())
             chordRest()->layoutArticulations();
+      else if (parent() && parent()->type() == BAR_LINE)
+            static_cast<BarLine*>(parent())->layout();
+
       score()->addRefresh(canvasBoundingRect());
       score()->setLayoutAll(false);       //DEBUG
       return true;

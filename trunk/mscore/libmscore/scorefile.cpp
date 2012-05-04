@@ -974,7 +974,7 @@ bool Score::read(const QDomElement& de)
                   qreal sp      = _style.spatium();
                   // PageFormat pf = *_style.pageFormat();
                   _style.load(ee);
-                  if (_layoutMode == LayoutFloat) {
+                  if (_layoutMode == LayoutFloat || _layoutMode == LayoutSystem) {
                         _style.setSpatium(sp);
                         // _style.setPageFormat(pf);
                         }
@@ -990,7 +990,7 @@ bool Score::read(const QDomElement& de)
                   _style.setTextStyle(s);
                   }
             else if (tag == "page-layout") {          // obsolete
-                  if (_layoutMode != LayoutFloat) {
+                  if (_layoutMode != LayoutFloat && _layoutMode != LayoutSystem) {
                         PageFormat pf = *pageFormat();
                         pf.read(ee);
                         setPageFormat(pf);

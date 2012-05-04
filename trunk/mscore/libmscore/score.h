@@ -110,7 +110,7 @@ enum {
 //---------------------------------------------------------
 
 enum LayoutMode {
-      LayoutPage, LayoutFloat, LayoutLine
+      LayoutPage, LayoutFloat, LayoutLine, LayoutSystem
       };
 
 //---------------------------------------------------------
@@ -198,15 +198,6 @@ enum PlayMode {
 struct Layer {
       QString name;
       uint tags;
-      };
-
-//---------------------------------------------------------
-//   ViewMode
-//---------------------------------------------------------
-
-enum ViewMode {
-      PAGE_MODE,
-      CONTINUOUS_MODE
       };
 
 //---------------------------------------------------------

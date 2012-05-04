@@ -311,7 +311,7 @@ void ScoreView::editKey(QKeyEvent* ev)
                   ev->accept();
                   return;
                   }
-      }
+            }
       if (!((modifiers & Qt::ShiftModifier) && (key == Qt::Key_Backtab))) {
             if (editObject->edit(this, curGrip, key, modifiers, s)) {
                   updateGrips();
@@ -329,13 +329,23 @@ void ScoreView::editKey(QKeyEvent* ev)
             }
       QPointF delta;
       qreal _spatium = editObject->spatium();
-      qreal xval     = MScore::nudgeStep * _spatium;
 
-      if (modifiers & Qt::ControlModifier)
-            xval = preferences.nudgeStep10 * _spatium;
-      else if (modifiers & Qt::AltModifier)
-            xval = preferences.nudgeStep50 * _spatium;
-      qreal yval = xval;
+      qreal xval, yval;
+      if (editObject->type() == BEAM) {
+            xval = 0.25 * _spatium;
+            if (modifiers & Qt::ControlModifier)
+                  xval = _spatium;
+            else if (modifiers & Qt::AltModifier)
+                  xval = 4 * _spatium;
+            }
+      else {
+            xval = MScore::nudgeStep * _spatium;
+            if (modifiers & Qt::ControlModifier)
+                  xval = preferences.nudgeStep10 * _spatium;
+            else if (modifiers & Qt::AltModifier)
+                  xval = preferences.nudgeStep50 * _spatium;
+            }
+      yval = xval;
 
       if (mscore->vRaster()) {
             qreal vRaster = _spatium / MScore::vRaster();

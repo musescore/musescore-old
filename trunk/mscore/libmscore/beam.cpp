@@ -1633,8 +1633,6 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
       //   COMMON TO BOTH TABLATURES AND PITCHED
       //---------------------------------------------
 
-      int upLines   = 0;
-      int downLines = 0;
       qreal stemWidth = point(score()->styleS(ST_stemWidth));
 
       qreal x1 = c1->stemPos().x();
@@ -1644,7 +1642,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
             bool hasBeamSegment1[chordRests];
             memset(hasBeamSegment1, 0, sizeof(hasBeamSegment));
 
-            qreal dist = _beamDist * beamLevel;
+            qreal dist = _beamDist * beamLevel * (_up ? 1.0 : -1.0);
 
             for (int idx = 0; idx < chordRests; ++idx) {
                   ChordRest* cr = crl[idx];
@@ -1659,17 +1657,9 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   if ((crLevel < beamLevel) || b32 || b64) {
                         if (cr2) {
                               // create short segment
-                              qreal y1;
-                              if (cr2->up()) {
-                                    ++upLines;
-                                    y1 = py1 + _beamDist * (beamLevel - (downLines ? downLines - 1 : 0));
-                                    }
-                              else {
-                                    ++downLines;
-                                    y1 = py1 - _beamDist * (beamLevel - (upLines ? upLines - 1 : 0));
-                                    }
-                              qreal x2  = cr1->stemPos().x();
-                              qreal x3  = cr2->stemPos().x();
+                              qreal y1 = py1 + dist;
+                              qreal x2 = cr1->stemPos().x();
+                              qreal x3 = cr2->stemPos().x();
 
                               qreal lx1 = x2 - canvPos.x();
                               qreal lx2 = x3 - canvPos.x();
@@ -1678,15 +1668,8 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                               beamSegments.append(new QLineF(lx1, ly1, lx2, ly2));
                               }
                         else if (cr1) {
-                              qreal y1 = py1;
-                              if (cr1->up()) {
-                                    ++upLines;
-                                    y1 += dist;
-                                    }
-                              else {
-                                    ++downLines;
-                                    y1 -= dist;
-                                    }
+                              qreal y1 = py1 + _up;
+
                               // create broken segment
                               qreal len = beamMinLen;
 
@@ -1740,12 +1723,6 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
             memcpy(hasBeamSegment, hasBeamSegment1, sizeof(hasBeamSegment));
             if (cr2) {
                   // create segment
-                  if (!cr2->up()) {
-                        ++downLines;
-                        dist = -dist;
-                        }
-                  else
-                        ++upLines;
                   qreal x2 = cr1->stemPos().x();
                   qreal x3 = cr2->stemPos().x();
 
@@ -1767,8 +1744,6 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   }
             else if (cr1) {
                   // create broken segment
-                  if (!cr1->up())
-                        dist = -dist;
                   // qreal x1  = p1.x() + canvPos.x();
                   qreal x3 = cr1->stemPos().x();
                   qreal x2 = x3 - beamMinLen;
@@ -1796,16 +1771,19 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
             if (chord->hook())
                   score()->undoRemoveElement(chord->hook());
 
-            QPointF npos(chord->stemPos());   // canvas coordinates
+            QPointF npos(chord->stemPos());  // in page coordinates
 
             //  extend stem to primary beam
+            //
             qreal x   = npos.x() - parent()->pagePos().x();
             QLineF* l = beamSegments.front();   // primary beam
             qreal yl  = l->y1();
             qreal xl  = l->x1();
-            if (_up != chord->up()) {
+            qreal beamPageY = yl + pagePos().y();
+            bool stemUp     = beamPageY < npos.y();
+            if (_up != stemUp) {
                   qreal dy = (chord->durationType().hooks() - 1) * _beamDist;
-                  yl += chord->up() ? -dy : dy;
+                  yl += stemUp ? -dy : dy;
                   }
             qreal yo  = yl + (x - xl) * slope;
 

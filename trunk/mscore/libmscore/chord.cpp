@@ -250,7 +250,7 @@ void Chord::setStem(Stem* s)
 
 //---------------------------------------------------------
 //   stemPos
-//    return canvas coordinates
+//    return page coordinates
 //---------------------------------------------------------
 
 QPointF Chord::stemPos() const

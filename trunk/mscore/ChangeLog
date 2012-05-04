@@ -1,3 +1,7 @@
+4.5 (ws)
+      - new layout mode "LayoutSystem"
+      - Stem: make "reset to default (Ctrl+R)" undoable
+      - fix tweaking of note stem length
 3.5 (ws)
       fix #13036: Beam direction for three or more notes
       fix #13035: Beam direction for two notes

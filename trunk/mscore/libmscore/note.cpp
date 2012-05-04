@@ -488,7 +488,7 @@ qreal Note::yPos() const
 
 //---------------------------------------------------------
 //   stemPos
-//    return in canvas coordinates
+//    return in page coordinates
 //---------------------------------------------------------
 
 QPointF Note::stemPos(bool upFlag) const
