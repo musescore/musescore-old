@@ -2093,12 +2093,12 @@ void ScoreView::wheelEvent(QWheelEvent* event)
             //
             dy = n * qMax(2, height() / 10);
             }
-          
-      if(dx == 0 && dy == 0)
+
+      if (dx == 0 && dy == 0)
             return;
 
       constraintCanvas(&dx, &dy);
-      
+
       _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
          _matrix.m22(), _matrix.m23(), _matrix.dx()+dx, _matrix.dy()+dy, _matrix.m33());
       imatrix = _matrix.inverted();
@@ -2108,71 +2108,80 @@ void ScoreView::wheelEvent(QWheelEvent* event)
       emit offsetChanged(_matrix.dx(), _matrix.dy());
       }
 
-//---------------------------------------------------------
+//-----------------------------------------------------------------------------
 //   constraints
-//---------------------------------------------------------
-void ScoreView::constraintCanvas (int *dxx, int *dyy)
+// (ws: too restrictive; it should be possible at least to move the right edge
+//    of the score to center of the screen (or top, left, bottom).
+//    I do this often before zooming in.
+//    I believe there should be no limitation at all. Its irritating that dragging
+//    the canvas sometimes work and sometimes not bc. of some arbitrary limitation
+//    which is not immediate obvious.)
+//-----------------------------------------------------------------------------
+
+void ScoreView::constraintCanvas (int* dxx, int* dyy)
       {
+      return;
+
       const qreal margin = 50.0; //move to preferences?
       int dx = *dxx;
       int dy = *dyy;
       QRectF rect = QRectF(0, 0, width(), height());
-      
+
       Page* firstPage = score()->pages().front();
       Page* lastPage = score()->pages().back();
-      
-      if(firstPage && lastPage) {
+
+      if (firstPage && lastPage) {
             QPointF offsetPt(xoffset(), yoffset());
-            QRectF firstPageRect = QRectF(firstPage->pos().x() * mag(),
-                                      firstPage->pos().y() * mag(), 
-                                      firstPage->width() * mag(), 
+            QRectF firstPageRect(firstPage->pos().x() * mag(),
+                                      firstPage->pos().y() * mag(),
+                                      firstPage->width() * mag(),
                                       firstPage->height() * mag());
-            QRectF lastPageRect = QRectF(lastPage->pos().x() * mag(), 
-                                         lastPage->pos().y() * mag(), 
-                                         lastPage->width() * mag(), 
+            QRectF lastPageRect(lastPage->pos().x() * mag(),
+                                         lastPage->pos().y() * mag(),
+                                         lastPage->width() * mag(),
                                          lastPage->height() * mag());
             QRectF pagesRect = firstPageRect.unite(lastPageRect).translated(offsetPt);
             pagesRect.adjust(-margin, -margin, margin, margin);
             QRectF toPagesRect = pagesRect.translated(dx, dy);
-            
+
             // move right
-            if(dx > 0) {
-                  if(toPagesRect.right() > rect.right() && toPagesRect.left() > rect.left()) {
+            if (dx > 0) {
+                  if (toPagesRect.right() > rect.right() && toPagesRect.left() > rect.left()) {
                         if(pagesRect.width() <= rect.width()) {
                               dx = rect.right() - pagesRect.right();
-                              } 
+                              }
                         else {
                               dx = rect.left() - pagesRect.left();
                               }
                         }
-                  } 
+                  }
             else { // move left, dx < 0
-                  if(toPagesRect.left() < rect.left() && toPagesRect.right() < rect.right()) {
-                        if(pagesRect.width() <= rect.width()) {
+                  if (toPagesRect.left() < rect.left() && toPagesRect.right() < rect.right()) {
+                        if (pagesRect.width() <= rect.width()) {
                               dx = rect.left() - pagesRect.left();
-                              } 
+                              }
                         else {
                               dx = rect.right() - pagesRect.right();
                               }
                         }
                   }
-            
+
             // move down
-            if(dy > 0) {
-                  if(toPagesRect.bottom() > rect.bottom() && toPagesRect.top() > rect.top()) {
-                        if(pagesRect.height() <= rect.height()) {
+            if (dy > 0) {
+                  if (toPagesRect.bottom() > rect.bottom() && toPagesRect.top() > rect.top()) {
+                        if (pagesRect.height() <= rect.height()) {
                               dy = rect.bottom() - pagesRect.bottom();
-                              } 
+                              }
                         else {
                               dy = rect.top() - pagesRect.top();
                               }
                         }
-                  } 
+                  }
             else { // move up, dy < 0
-                  if(toPagesRect.top() < rect.top() && toPagesRect.bottom() < rect.bottom()) {
-                        if(pagesRect.height() <= rect.height()) {
+                  if (toPagesRect.top() < rect.top() && toPagesRect.bottom() < rect.bottom()) {
+                        if (pagesRect.height() <= rect.height()) {
                               dy = rect.top() - pagesRect.top();
-                              } 
+                              }
                         else {
                               dy = rect.bottom() - pagesRect.bottom();
                               }
@@ -3013,10 +3022,10 @@ void ScoreView::dragScoreView(QMouseEvent* ev)
       int dx   = d.x();
       int dy   = d.y();
 
-      if(dx == 0 && dy == 0)
+      if (dx == 0 && dy == 0)
             return;
-            
-      constraintCanvas(&dx, &dy);      
+
+      constraintCanvas(&dx, &dy);
 
       _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
          _matrix.m22(), _matrix.m23(), _matrix.dx()+dx, _matrix.dy()+dy, _matrix.m33());

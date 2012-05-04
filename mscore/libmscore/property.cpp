@@ -89,6 +89,7 @@ static const PropertyData propertyList[] = {
       { P_USER_MODIFIED,       0,               T_BOOL   },
       { P_BEAM_POS,            0,               T_POINT  },
       { P_BEAM_MODE,           "BeamMode",      T_BEAM_MODE  },
+      { P_USER_LEN,            "",              T_REAL   },
       { P_END,                 "",              T_INT    }
       };
 

@@ -543,13 +543,15 @@ void BarLine::layout()
                   Articulation* a       = static_cast<Articulation*>(e);
                   ArticulationAnchor aa = a->anchor();
                   qreal distance        = 0.5 * _spatium;
-                  qreal topY            = y1 - distance;
-                  qreal botY            = y2 + distance;
                   qreal x               = width() - (a->width() * .5);
-                  if (aa == A_TOP_STAFF)
+                  if (aa == A_TOP_STAFF) {
+                        qreal topY = y1 - distance;
                         a->setPos(QPointF(x, topY));
-                  else if (aa == A_BOTTOM_STAFF)
+                        }
+                  else if (aa == A_BOTTOM_STAFF) {
+                        qreal botY = y2 + distance;
                         a->setPos(QPointF(x, botY));
+                        }
                   }
             }
       setbbox(r);

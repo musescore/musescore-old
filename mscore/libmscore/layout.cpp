@@ -928,8 +928,17 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
                   if (!isFirstMeasure) {
                         // try to put another system on current row
                         // if not a line break
-                        continueFlag = !((curMeasure->lineBreak() || curMeasure->pageBreak())
-                           && (_layoutMode != LayoutFloat));
+                        switch(_layoutMode) {
+                              case LayoutFloat:
+                                    break;
+                              case LayoutSystem:
+                                    continueFlag = !curMeasure->lineBreak();
+                                    break;
+                              case LayoutLine:
+                              case LayoutPage:
+                                    continueFlag = !(curMeasure->lineBreak() || curMeasure->pageBreak());
+                                    break;
+                              }
                         }
                   }
             else if (curMeasure->type() == MEASURE) {
@@ -964,9 +973,21 @@ bool Score::layoutSystem(qreal& minWidth, qreal w, bool isFirstSystem, bool long
             system->measures().append(curMeasure);
             ElementType nt = curMeasure->next() ? curMeasure->next()->type() : INVALID;
             int n = styleI(ST_FixMeasureNumbers);
+            bool pbreak;
+            switch (_layoutMode) {
+                  case LayoutPage:
+                        pbreak = curMeasure->pageBreak() || curMeasure->lineBreak();
+                        break;
+                  case LayoutFloat:
+                  case LayoutLine:
+                        pbreak = false;
+                        break;
+                  case LayoutSystem:
+                        pbreak = curMeasure->lineBreak();
+                        break;
+                  }
             if ((n && system->measures().size() >= n)
-               || continueFlag || ((curMeasure->pageBreak() || curMeasure->lineBreak()) && _layoutMode != LayoutFloat)
-               || (nt == VBOX || nt == TBOX || nt == FBOX)) {
+               || continueFlag || pbreak || (nt == VBOX || nt == TBOX || nt == FBOX)) {
                   system->setPageBreak(curMeasure->pageBreak());
                   curMeasure = nextMeasure;
                   break;
@@ -2014,7 +2035,7 @@ void Score::layoutPages()
                   }
 
             y += (h + tmargin);
-            if (sr.pageBreak() && (_layoutMode != LayoutFloat)) {
+            if (sr.pageBreak() && (_layoutMode != LayoutFloat && _layoutMode != LayoutSystem)) {
                   qreal d;
                   if (sr.isVbox())
                         d = sr.vbox()->bottomGap();

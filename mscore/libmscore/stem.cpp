@@ -199,8 +199,7 @@ void Stem::read(const QDomElement& de)
 void Stem::updateGrips(int* grips, QRectF* grip) const
       {
       *grips   = 1;
-      QPointF p(0.0, stemLen());
-      grip[0].translate(pagePos() + p);
+      grip[0].translate(pagePos() + line.p2());
       }
 
 //---------------------------------------------------------
@@ -209,7 +208,9 @@ void Stem::updateGrips(int* grips, QRectF* grip) const
 
 void Stem::editDrag(const EditData& ed)
       {
-      _userLen += ed.delta.y();
+      qreal yDelta = ed.delta.y();
+      _userLen += up() ? -yDelta : yDelta;
+      layout();
       Chord* c = static_cast<Chord*>(parent());
       if (c->hook())
             c->hook()->move(0.0, ed.delta.y());
@@ -221,7 +222,7 @@ void Stem::editDrag(const EditData& ed)
 
 void Stem::toDefault()
       {
-      _userLen = 0.0;         // TODO: make undoable
+      score()->undoChangeProperty(this, P_USER_LEN, 0.0);
       Element::toDefault();
       }
 
@@ -258,4 +259,35 @@ Element* Stem::drop(const DropData& data)
       return 0;
       }
 
+//---------------------------------------------------------
+//   getProperty
+//---------------------------------------------------------
+
+QVariant Stem::getProperty(P_ID propertyId) const
+      {
+      switch(propertyId) {
+            case P_USER_LEN:            return userLen();
+            default:
+                  return Element::getProperty(propertyId);
+            }
+      }
+
+//---------------------------------------------------------
+//   setProperty
+//---------------------------------------------------------
+
+bool Stem::setProperty(P_ID propertyId, const QVariant& v)
+      {
+      score()->addRefresh(canvasBoundingRect());
+      switch(propertyId) {
+            case P_USER_LEN:  setUserLen(v.toDouble()); break;
+            default:
+                  return Element::setProperty(propertyId, v);
+            }
+      score()->addRefresh(canvasBoundingRect());
+      layout();
+      score()->addRefresh(canvasBoundingRect());
+      score()->setLayoutAll(false);       //DEBUG
+      return true;
+      }
 

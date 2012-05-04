@@ -51,9 +51,16 @@ class Stem : public Element {
       virtual void toDefault();
       virtual bool acceptDrop(MuseScoreView*, const QPointF&, Element*) const;
       virtual Element* drop(const DropData&);
+
+      virtual QVariant getProperty(P_ID propertyId) const;
+      virtual bool setProperty(P_ID propertyId, const QVariant&);
+
       Chord* chord() const            { return (Chord*)parent(); }
       bool up() const;
+
       qreal userLen() const           { return _userLen; }
+      void setUserLen(qreal l)        { _userLen = l; }
+
       QPointF hookPos() const;
       void setLen(qreal l);
       qreal len() const               { return _len; }
