@@ -375,8 +375,10 @@ void Debugger::updateList(Score* s)
                                                       new ElementItem(sli, ss);
                                                       }
                                                 }
-                                          foreach(Lyrics* lyrics, cr->lyricsList())
-                                                new ElementItem(sei, lyrics);
+                                          foreach(Lyrics* lyrics, cr->lyricsList()) {
+                                                if (lyrics)
+                                                      new ElementItem(sei, lyrics);
+                                                }
                                           DurationElement* de = cr;
                                           while (de->tuplet() && de->tuplet()->elements().front() == de) {
                                                 new ElementItem(sei, de->tuplet());

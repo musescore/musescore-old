@@ -1,3 +1,5 @@
+5.5 (ws)
+      - fix #16294: Many operations cause unrelated measure to stretch
 4.5 (ws)
       - new layout mode "LayoutSystem"
       - Stem: make "reset to default (Ctrl+R)" undoable
