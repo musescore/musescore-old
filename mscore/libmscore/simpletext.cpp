@@ -127,8 +127,11 @@ int SimpleText::alignFlags() const
 
 void SimpleText::layout()
       {
-      if (_text.isEmpty())
+      if (_text.isEmpty()) {
+            setPos(QPointF());
+            setbbox(QRectF());
             return;
+            }
 
       const TextStyle& s(textStyle());
 
