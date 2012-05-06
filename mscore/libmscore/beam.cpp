@@ -1635,7 +1635,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
 
       qreal stemWidth = point(score()->styleS(ST_stemWidth));
 
-      qreal x1 = c1->stemPos().x();
+      qreal x1 = c1->stemPos().x() - canvPos.x();
       for (int beamLevel = 0; beamLevel < beamLevels; ++beamLevel) {
             ChordRest* cr1 = 0;
             ChordRest* cr2 = 0;
@@ -1648,112 +1648,83 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   ChordRest* cr = crl[idx];
                   if (cr->type() == REST)
                         continue;
-
-                  bool b32 = (beamLevel >= 1) && (cr->beamMode() == BEAM_BEGIN32);
-                  bool b64 = (beamLevel >= 2) && (cr->beamMode() == BEAM_BEGIN64);
-
-                  // end current beam level?
                   int crLevel = cr->durationType().hooks() - 1;
-                  if ((crLevel < beamLevel) || b32 || b64) {
-                        if (cr2) {
-                              // create short segment
-                              qreal y1 = py1 + dist;
-                              qreal x2 = cr1->stemPos().x();
-                              qreal x3 = cr2->stemPos().x();
 
-                              qreal lx1 = x2 - canvPos.x();
-                              qreal lx2 = x3 - canvPos.x();
-                              qreal ly1 = (x2 - x1) * slope + y1;
-                              qreal ly2 = (x3 - x1) * slope + y1;
-                              beamSegments.append(new QLineF(lx1, ly1, lx2, ly2));
+                  if ((cr1 == 0) && (crLevel < beamLevel)) {
+                        hasBeamSegment1[idx] = false;
+                        continue;
+                        }
+
+                  (cr1 ? cr2 : cr1) = cr;
+                  if (idx < chordRests-1) {
+                        bool b32 = (beamLevel >= 1) && (cr->beamMode() == BEAM_BEGIN32);
+                        bool b64 = (beamLevel >= 2) && (cr->beamMode() == BEAM_BEGIN64);
+
+                        // end current beam level?
+                        int crLevel = crl[idx+1]->durationType().hooks() - 1;
+                        if (!((crLevel < beamLevel) || b32 || b64)) {
+                              continue;
                               }
-                        else if (cr1) {
-                              qreal y1 = py1 + dist;
+                        }
+                  hasBeamSegment1[idx] = true;
+                  qreal x2 = cr1->stemPos().x() - canvPos.x();
+                  qreal x3;
+                  if (cr2) {
+                        // create segment
+                        x3 = cr2->stemPos().x() - canvPos.x();
 
-                              // create broken segment
-                              qreal len = beamMinLen;
-
-                              if ((idx > 1) && (idx < chordRests)
-                                 && (crl[idx-2]->duration() != crl[idx]->duration())) {
-                                    Fraction a = crl[idx-2]->duration();
-                                    Fraction b = crl[idx-1]->duration();
-                                    Fraction c = crl[idx]->duration();
-                                    if (((a + b) / 2 == c)
-                                       || ((a < c) && !((b+c)/2 == a))) {
-                                          len = -len;
-                                          }
-                                    }
-                              else {
-                                    // find out direction of beam fragment
-                                    // if on first chord: right
-                                    // if on last chord:  left
-                                    // else ...
-                                    //    point to same direction as beam starting
-                                    //       one level higher
-                                    //
-                                    if (!hasBeamSegment[idx-1] && (cr1 != crl[0])) {
-                                          TDuration d = cr1->durationType();
-                                          d = d.shift(-1);
-                                          int rtick = cr1->tick() - cr1->measure()->tick();
-                                          if (rtick % d.ticks())
-                                                len = -len;
-                                          }
-                                    }
-                              qreal x2 = cr1->stemPos().x();
-                              qreal x3 = x2 + len;
-                              beamSegments.push_back(new QLineF(x2 - canvPos.x(), (x2 - x1) * slope + y1,
-                                 x3 - canvPos.x(), (x3 - x1) * slope + y1));
-                              hasBeamSegment1[idx-1] = false;
+                        if (st == SEGMENT_BEGIN)
+                              x3 += _spatium * 2;
+                        else if (st == SEGMENT_END)
+                              x2 -= _spatium * 2;
+                        else {
+                              if (cr1->up())
+                                    x2 -= stemWidth;
+                              if (!cr2->up())
+                                    x3 += stemWidth;
                               }
-                        if (crLevel >= beamLevel) {
-                              cr1 = cr;
-                              hasBeamSegment1[idx] = true;
-                              cr2 = 0;
+                        }
+                  else {
+                        // create broken segment
+
+                        qreal len = beamMinLen;
+                        if (idx == 0)                       // point to right
+                              ;
+                        else if (idx == chordRests-1)       // point to left
+                              len = -len;
+                        else if ((idx > 1) && (idx < chordRests)
+                           && (crl[idx-2]->duration() != crl[idx]->duration())) {
+                              Fraction a = crl[idx-2]->duration();
+                              Fraction b = crl[idx-1]->duration();
+                              Fraction c = crl[idx]->duration();
+                              if (((a + b) / 2 == c)
+                                 || ((a < c) && !((b+c)/2 == a))) {
+                                    len = -len;
+                                    }
                               }
                         else {
-                              hasBeamSegment1[idx] = false;
-                              cr1 = cr2 = 0;
+                              // find out direction of beam fragment:
+                              // point to same direction as beam starting
+                              //    one level higher
+                              //
+                              if (!hasBeamSegment[idx-1]) {
+                                    TDuration d = cr1->durationType();
+                                    d = d.shift(-1);
+                                    int rtick = cr1->tick() - cr1->measure()->tick();
+                                    if (rtick % d.ticks())
+                                          len = -len;
+                                    }
                               }
+                        x3 = x2 + len;
+                        hasBeamSegment1[idx-1] = false;
                         }
-                  else {
-                        (cr1 ? cr2 : cr1) = cr;
-                        hasBeamSegment1[idx] = (cr2 == 0);
-                        }
+                  qreal yo  = py1 + dist * _grow1;
+                  qreal ly1 = (x2 - x1) * slope + yo;
+                  qreal ly2 = (x3 - x1) * slope + yo;
+                  beamSegments.push_back(new QLineF(x2, ly1, x3, ly2));
+                  cr1 = cr2 = 0;
                   }
             memcpy(hasBeamSegment, hasBeamSegment1, sizeof(hasBeamSegment));
-            if (cr2) {
-                  // create segment
-                  qreal x2 = cr1->stemPos().x();
-                  qreal x3 = cr2->stemPos().x();
-
-                  if (st == SEGMENT_BEGIN)
-                        x3 += _spatium * 2;
-                  else if (st == SEGMENT_END)
-                        x2 -= _spatium * 2;
-                  else {
-                        if (cr1->up())
-                              x2 -= stemWidth;
-                        if (!cr2->up())
-                              x3 += stemWidth;
-                        }
-                  qreal lx1 = x2 - canvPos.x();
-                  qreal ly1 = (x2 - x1) * slope + py1 + dist * _grow1;
-                  qreal lx2 = x3 - canvPos.x();
-                  qreal ly2 = (x3 - x1) * slope + py1 + dist  * _grow2;
-                  beamSegments.push_back(new QLineF(lx1, ly1, lx2, ly2));
-                  }
-            else if (cr1) {
-                  // create broken segment
-                  // qreal x1  = p1.x() + canvPos.x();
-                  qreal x3 = cr1->stemPos().x();
-                  qreal x2 = x3 - beamMinLen;
-
-                  qreal lx1 = x2 - canvPos.x();
-                  qreal ly1 = (x2 - x1) * slope + py1 + dist;
-                  qreal lx2 = x3 - canvPos.x();
-                  qreal ly2 = (x3 - x1) * slope + py1 + dist;
-                  beamSegments.push_back(new QLineF(lx1, ly1, lx2, ly2));
-                  }
             }
 
       //---------------------------------------------------
