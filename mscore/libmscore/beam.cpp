@@ -1715,6 +1715,10 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                                           len = -len;
                                     }
                               }
+                        if (_up && len > 0)
+                              x2 -= stemWidth;
+                        else if (!_up && len < 0)
+                              x2 += stemWidth;
                         x3 = x2 + len;
                         hasBeamSegment1[idx-1] = false;
                         }
