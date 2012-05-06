@@ -429,7 +429,7 @@ bool Beam::twoBeamedNotes()
             return false;
       int dist1 = c1->upNote()->line() - 4;
       int dist2 = c2->upNote()->line() - 4;
-      if (qAbs(dist1) == qAbs(dist2)) {
+      if ((dist1 == -dist2) || (-dist1 == dist2)) {
             _up = false;
             Segment* s = c1->segment();
             s = s->prev1(SegChordRest);
@@ -1668,7 +1668,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                               beamSegments.append(new QLineF(lx1, ly1, lx2, ly2));
                               }
                         else if (cr1) {
-                              qreal y1 = py1 + _up;
+                              qreal y1 = py1 + dist;
 
                               // create broken segment
                               qreal len = beamMinLen;
