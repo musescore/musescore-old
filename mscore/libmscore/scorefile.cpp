@@ -1489,7 +1489,7 @@ void Score::writeSegments(Xml& xml, const Measure* m, int strack, int etrack, Se
                                     }
                               }
                         }
-                  foreach(Element* e, segment->annotations()) {
+                  foreach (Element* e, segment->annotations()) {
                         if (e->track() != track || e->generated())
                               continue;
                         if (needTick) {
@@ -1499,7 +1499,7 @@ void Score::writeSegments(Xml& xml, const Measure* m, int strack, int etrack, Se
                               }
                         e->write(xml);
                         }
-                  foreach(Spanner* e, segment->spannerFor()) {
+                  foreach (Spanner* e, segment->spannerFor()) {
                         if (e->track() == track && !e->generated()) {
                               if (needTick) {
                                     xml.tag("tick", segment->tick() - xml.tickDiff);
@@ -1545,7 +1545,7 @@ void Score::writeSegments(Xml& xml, const Measure* m, int strack, int etrack, Se
                         ChordRest* cr = static_cast<ChordRest*>(e);
                         Beam* beam = cr->beam();
 #ifndef NDEBUG
-                        if (beam && beam->elements().front() == cr && testMode()) {
+                        if (beam && beam->elements().front() == cr && (testMode() || !beam->generated())) {
                               beam->setId(xml.beamId++);
                               beam->write(xml);
                               }
