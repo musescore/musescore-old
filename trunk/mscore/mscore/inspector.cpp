@@ -669,6 +669,29 @@ InspectorNoteBase::InspectorNoteBase(QWidget* parent)
       }
 
 //---------------------------------------------------------
+//   block
+//---------------------------------------------------------
+
+void InspectorNoteBase::block(bool val)
+      {
+      small->blockSignals(val);
+      mirrorHead->blockSignals(val);
+      dotPosition->blockSignals(val);
+      ontimeOffset->blockSignals(val);
+      offtimeOffset->blockSignals(val);
+      noteHeadGroup->blockSignals(val);
+      noteHeadType->blockSignals(val);
+      tuning->blockSignals(val);
+      velocity->blockSignals(val);
+      velocityType->blockSignals(val);
+      resetSmall->blockSignals(val);
+      resetMirrorHead->blockSignals(val);
+      resetDotPosition->blockSignals(val);
+      resetOntimeOffset->blockSignals(val);
+      resetOfftimeOffset->blockSignals(val);
+      }
+
+//---------------------------------------------------------
 //   setElement
 //---------------------------------------------------------
 
@@ -678,6 +701,7 @@ void InspectorNoteBase::setElement(Note* n)
       _veloOffset   = 0;
       note          = n;
 
+      block(true);
       small->setChecked(note->small());
       mirrorHead->setCurrentIndex(note->userMirror());
       dotPosition->setCurrentIndex(note->dotPosition());
@@ -707,6 +731,7 @@ void InspectorNoteBase::setElement(Note* n)
       resetDotPosition->setEnabled(note->dotPosition() != AUTO);
       resetOntimeOffset->setEnabled(note->onTimeUserOffset());
       resetOfftimeOffset->setEnabled(note->offTimeUserOffset());
+      block(false);
       }
 
 //---------------------------------------------------------

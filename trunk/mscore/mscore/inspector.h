@@ -94,6 +94,8 @@ class InspectorNoteBase : public QWidget, Ui::InspectorNote {
       int _userVelocity;
       int _veloOffset;
 
+      void block(bool);
+
    private slots:
       void resetSmallClicked();
       void resetMirrorClicked();

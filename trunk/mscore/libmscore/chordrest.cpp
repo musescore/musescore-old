@@ -183,7 +183,7 @@ void ChordRest::writeProperties(Xml& xml) const
       foreach(Spanner* s, _spannerBack)
             xml.tagE(QString("Slur type=\"stop\" number=\"%1\"").arg(s->id()+1));
 #ifndef NDEBUG
-      if (score()->testMode() && _beam)
+      if (_beam && (score()->testMode() || !_beam->generated()))
             xml.tag("Beam", _beam->id());
 #else
       if (!xml.clipboardmode && _beam && !_beam->generated())
