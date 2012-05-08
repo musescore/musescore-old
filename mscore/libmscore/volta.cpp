@@ -102,7 +102,7 @@ void Volta::read(const QDomElement& de)
       for (QDomElement e = de.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             const QString& tag(e.tagName());
             if (tag == "subtype")
-                  _subtype = VoltaType(e.text().toInt());
+                  setSubtype(VoltaType(e.text().toInt()));
             else if (tag == "text")            // obsolete
                   setText(e.text());
             else if (tag == "endings") {
