@@ -971,12 +971,13 @@ bool Score::read(const QDomElement& de)
             else if (tag == "showMargins")
                   _showPageborders = i;
             else if (tag == "Style") {
-                  qreal sp      = _style.spatium();
-                  // PageFormat pf = *_style.pageFormat();
+                  qreal sp = _style.spatium();
                   _style.load(ee);
-                  if (_layoutMode == LayoutFloat || _layoutMode == LayoutSystem) {
+                  // if (_layoutMode == LayoutFloat || _layoutMode == LayoutSystem) {
+                  if (_layoutMode == LayoutFloat) {
+                        // style should not change spatium in
+                        // float mode
                         _style.setSpatium(sp);
-                        // _style.setPageFormat(pf);
                         }
                   }
             else if (tag == "TextStyle") {      // obsolete: is now part of style
