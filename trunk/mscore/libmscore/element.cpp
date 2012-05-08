@@ -689,13 +689,13 @@ bool Element::readProperties(const QDomElement& e)
       else if (tag == "tick")
             score()->curTick = score()->fileDivision(val.toInt());
       else if (tag == "offset") {         // ??obsolete
-            float _spatium = spatium();
+            qreal _spatium = spatium();
             QPointF pt(readPoint(e) * _spatium);
             setUserOff(pt);
             _readPos = QPointF();
             }
       else if (tag == "pos") {
-            float _spatium = spatium();
+            qreal _spatium = spatium();
             setUserOff(QPointF());
             _readPos = readPoint(e) * _spatium;
             }
