@@ -1,3 +1,5 @@
+8.5 (ws)
+      - fixed volta; subtype was not set right on read
 5.5 (ws)
       - fix #16294: Many operations cause unrelated measure to stretch
 4.5 (ws)
