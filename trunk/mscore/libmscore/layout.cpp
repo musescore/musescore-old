@@ -105,7 +105,6 @@ struct AcEl {
 
 //---------------------------------------------------------
 //   layoutChords1
-//    only called from layout0
 //    - calculate displaced note heads
 //---------------------------------------------------------
 
@@ -246,7 +245,7 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
                   acel.x    = 0.0;
                   aclist.append(acel);
                   }
-            qreal xx = note->pos().x() + note->headWidth();
+            qreal xx = note->pos().x() + note->headWidth() + note->chord()->pos().x();
             if (xx > dotPosX)
                   dotPosX = xx;
             }
@@ -566,11 +565,10 @@ void Score::layoutStage2()
 
 void Score::layoutStage3()
       {
+      SegmentTypes st = SegChordRest | SegGrace;
       for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-            for (Segment* segment = firstSegment(); segment; segment = segment->next1()) {
-                  if (segment->subtype() & (SegChordRest | SegGrace)) {
-                        layoutChords1(segment, staffIdx);
-                        }
+            for (Segment* segment = firstSegment(st); segment; segment = segment->next1(st)) {
+                  layoutChords1(segment, staffIdx);
                   }
             }
       }
@@ -584,6 +582,7 @@ void Score::layoutStage3()
 
 void Score::doLayout()
       {
+// printf("doLayout\n");
       {
       QWriteLocker locker(&_layoutLock);
 

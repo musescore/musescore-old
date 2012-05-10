@@ -778,18 +778,17 @@ void Note::read(const QDomElement& de)
                   }
             else if (tag == "NoteDot") {
                   NoteDot* dot = new NoteDot(score());
-                  dot->setParent(this);
                   dot->read(e);
                   for (int i = 0; i < 3; ++i) {
                         if (_dots[i] == 0) {
-                              _dots[i] = dot;
                               dot->setIdx(i);
+                              add(dot);
                               dot = 0;
                               break;
                               }
                         }
                   if (dot) {
-                        qDebug("too many dots\n");
+                        qDebug("Note: too many dots\n");
                         delete dot;
                         }
                   }
@@ -1202,30 +1201,6 @@ void Note::layout()
                   else if (_dots[i])
                         score()->undoRemoveElement(_dots[i]);
                   }
-            if (dots) {
-                  qreal _spatium = spatium();
-                  qreal d  = point(score()->styleS(ST_dotNoteDistance));
-                  qreal dd = point(score()->styleS(ST_dotDotDistance));
-                  qreal y  = 0.0;
-                  qreal x  = chord()->dotPosX() - pos().x() - chord()->pos().x();
-
-                  // do not draw dots on staff line
-                  if ((_line & 1) == 0) {
-                        qreal up;
-                        if (_dotPosition == AUTO)
-                              up = (voice() == 0 || voice() == 2) ? -1.0 : 1.0;
-                        else if (_dotPosition == UP)
-                              up = -1.0;
-                        else
-                              up = 1.0;
-                        y += .5 * _spatium * up;
-                        }
-                  for (int i = 0; i < dots; ++i) {
-                        NoteDot* nd = _dots[i];
-                        nd->setPos(x + d + dd * i, y);
-                        _dots[i]->adjustReadPos();
-                        }
-                  }
             }
 // layout2();
       }
@@ -1238,6 +1213,32 @@ void Note::layout()
 void Note::layout2()
       {
       adjustReadPos();
+
+      int dots = chord()->dots();
+      if (dots) {
+            qreal _spatium = spatium();
+            qreal d  = point(score()->styleS(ST_dotNoteDistance));
+            qreal dd = point(score()->styleS(ST_dotDotDistance));
+            qreal y  = 0.0;
+            qreal x  = chord()->dotPosX() - pos().x() - chord()->pos().x();
+
+            // do not draw dots on staff line
+            if ((_line & 1) == 0) {
+                  qreal up;
+                  if (_dotPosition == AUTO)
+                        up = (voice() == 0 || voice() == 2) ? -1.0 : 1.0;
+                  else if (_dotPosition == UP)
+                        up = -1.0;
+                  else
+                        up = 1.0;
+                  y += .5 * _spatium * up;
+                  }
+            for (int i = 0; i < dots; ++i) {
+                  NoteDot* dot = _dots[i];
+                  dot->setPos(x + d + dd * i, y);
+                  _dots[i]->adjustReadPos();
+                  }
+            }
 
       foreach (Element* e, _el) {
             if (!score()->tagIsValid(e->tag()))
