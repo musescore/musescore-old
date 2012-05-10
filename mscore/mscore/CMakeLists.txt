@@ -283,6 +283,7 @@ if (MINGW)
       ${CROSSQT}/bin/QtNetwork4.dll
       ${CROSSQT}/bin/QtWebKit4.dll
       ${CROSSQT}/bin/phonon4.dll
+      ${CROSSQT}/bin/QtXmlPatterns4.dll
       )
    install_files ( /bin/iconengines .dll
       ${CROSSQT}/plugins/iconengines/qsvgicon4.dll
