@@ -42,6 +42,8 @@
 #include <QtWebKit/QWebFrame>
 
 #include <QtXml/QtXml>
+#include <QtXmlPatterns/QXmlSchema>
+#include <QtXmlPatterns/QXmlSchemaValidator>
 
 #ifdef Q_WS_X11
 #include <QtGui/QX11Info>

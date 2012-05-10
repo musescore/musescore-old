@@ -1,3 +1,5 @@
+10.5 (lv)
+      - preparations for #15006: Use MusicXML schema to validate files before import
 8.5 (ws)
       - fixed volta; subtype was not set right on read
 5.5 (ws)
