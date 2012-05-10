@@ -908,7 +908,7 @@ void ScoreView::setScore(Score* s)
       lasso->setScore(s);
       _foto->setScore(s);
       if (s)
-            s->setLayoutMode(LayoutSystem);
+            s->setLayoutMode(LayoutPage);
       }
 
 //---------------------------------------------------------
