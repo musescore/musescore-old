@@ -2,7 +2,7 @@
 <RCC version="1.0">
    <qresource prefix="/">
       <file>data/shortcuts.xml</file>
-      
+
       <file>data/paper1.png</file>
       <file>data/paper2.png</file>
       <file>data/paper3.png</file>
@@ -155,14 +155,13 @@
       <file>data/icons/format_indent_less.svgz</file>
       <file>data/icons/community.svg</file>
       <file>data/icons/metronome.svg</file>
-
+      <file>data/icons/resetproperty.png</file>
       <file>data/icons/vframe.svg</file>
       <file>data/icons/hframe.svg</file>
       <file>data/icons/tframe.svg</file>
       <file>data/icons/fframe.svg</file>
       <file>data/icons/measure.svg</file>
 
-      <file>data/icons/resetproperty.png</file>
       <file>data/webview.css</file>
 
       <file>data/icons-dark/minus.svg</file>
@@ -290,5 +289,9 @@
       <file>data/icons-dark/fframe.svg</file>
       <file>data/icons-dark/measure.svg</file>
 
+      <file>schema/license.html</file>
+      <file>schema/musicxml.xsd</file>
+      <file>schema/xlink.xsd</file>
+      <file>schema/xml.xsd</file>
    </qresource>
 </RCC>
