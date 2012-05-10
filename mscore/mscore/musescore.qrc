@@ -15,7 +15,6 @@
       <file>data/tab_remove.png</file>
       <file>data/table.svg</file>
 
-
       <file alias="fonts/mscore20.xml">../fonts/mscore20.xml</file>
       <file alias="fonts/gonville.xml">../fonts/gonville.xml</file>
       <file alias="fonts/gonville-20.otf">../fonts/gonville-20.otf</file>
@@ -177,6 +176,7 @@
       <file>data/icons/tframe.svg</file>
       <file>data/icons/fframe.svg</file>
       <file>data/icons/measure.svg</file>
+
       <file>data/webview.css</file>
 
       <file>data/icons-dark/minus.svg</file>
