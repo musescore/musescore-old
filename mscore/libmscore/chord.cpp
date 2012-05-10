@@ -1233,31 +1233,6 @@ void Chord::layout2()
                         }
                   }
             }
-
-      //---------------------------------------------------
-      //    layout fingering
-      //---------------------------------------------------
-#if 0
-      foreach(Note* note, _notes) {
-            foreach(Element* e, *note->el()) {
-                  if ((e->type() == TEXT && e->subtype() == TEXT_FINGERING)
-                     || (e->type() == FINGERING)) {
-                        if (_notes.size() > 1) {
-                              }
-                        else {
-                              qreal x = note->headWidth() * .5;
-                              x -= e->width() * .5;
-                              qreal y;
-                              if (up())
-                                    y = _spatium * .4;     // below
-                              else
-                                    y = -_spatium * 2.4;
-                              e->setPos(x, y);
-                              }
-                        }
-                  }
-            }
-#endif
       }
 
 //---------------------------------------------------------
@@ -1385,7 +1360,6 @@ void Chord::layout()
                         x += (headWidth - note->headWidth());
 
                   note->setPos(x, (note->line() + stepOffset) * stepDistance);
-                  note->layout2();
                   Accidental* accidental = note->accidental();
                   if (accidental)
                         x = accidental->x() + note->x() - minNoteDistance;
@@ -1443,9 +1417,9 @@ void Chord::layout()
                   rr = lhw;
             if (rr > rrr)
                   rrr = rr;
-            qreal xx = note->pos().x() + headWidth + pos().x();
-            if (xx > dotPosX())
-                  setDotPosX(xx);
+//            qreal xx = note->pos().x() + headWidth + pos().x();
+//            if (xx > dotPosX())
+//                  setDotPosX(xx);
             }
       if (dots()) {
             qreal x = dotPosX() + point(score()->styleS(ST_dotNoteDistance)
@@ -1455,14 +1429,11 @@ void Chord::layout()
                   rrr = x;
             }
 
-//      rrr += _extraTrailingSpace.val() * _spatium;
-
       if (_hook) {
             _hook->layout();
             if (up())
                   rrr += _hook->width() + minNoteDistance;
             }
-//      lll += _extraLeadingSpace.val() * _spatium;
 
       if (_noteType != NOTE_NORMAL) {
             // qreal m = score()->styleD(ST_graceNoteMag);
@@ -1484,8 +1455,10 @@ void Chord::layout()
             }
 
       QRectF _bbox;
-      foreach (const Note* n, _notes)
-            _bbox |= n->bbox().translated(n->pos());
+      foreach (Note* note, _notes) {
+            note->layout2();
+            _bbox |= note->bbox().translated(note->pos());
+            }
       foreach(const LedgerLine* l, _ledgerLines)
             _bbox |= l->bbox().translated(l->pos());
       foreach(Articulation* a, articulations)
