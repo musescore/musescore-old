@@ -1945,9 +1945,8 @@ bool MuseScore::savePng(Score* score, const QString& name, bool screenshot, bool
             int h = lrint(r.height() * convDpi / MScore::DPI);
 
             QImage printer(w, h, f);
-
-            printer.setDotsPerMeterX(lrint(MScore::DPMM * 1000.0));
-            printer.setDotsPerMeterY(lrint(MScore::DPMM * 1000.0));
+            printer.setDotsPerMeterX(lrint((convDpi * 1000) / INCH));
+            printer.setDotsPerMeterY(lrint((convDpi * 1000) / INCH));
 
             printer.fill(transparent ? 0 : 0xffffffff);
 
