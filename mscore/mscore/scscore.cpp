@@ -228,7 +228,40 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         }
 
                   if (argc == 2) {
-                        return qScriptValueFromValue(context->engine(), mscore->saveAs(score, true, s, ext));
+                        if(ext == "time") {
+                              score->updateRepeatList(true);
+                              QFile file(s);
+                              file.open(QIODevice::WriteOnly | QIODevice::Text);
+                              QTextStream out(&file);
+                              out << "<events>" << endl;
+                              Measure* lastMeasure = 0;
+                              foreach (const RepeatSegment* rs, *(score->repeatList())) {
+                                    int startTick  = rs->tick;
+                                    int endTick    = startTick + rs->len;
+                                    int tickOffset = rs->utick - rs->tick;
+                                    for (Measure* m = score->tick2measure(startTick); m; m = m->nextMeasure()) {
+                                          int offset = 0;
+                                          if (lastMeasure && m->isRepeatMeasure())
+                                                offset = m->tick() - lastMeasure->tick();
+                                          else
+                                                lastMeasure = m;
+                                          
+                                          SegmentTypes st = SegGrace | SegChordRest;
+                                          for (Segment* seg = lastMeasure->first(st); seg; seg = seg->next(st)) {
+                                                int tick = seg->tick() + tickOffset + offset;
+                                                int time = score->utick2utime(tick) * 1000;
+                                                out <<  QString(" <event elid=\"%1\" position=\"%2\" />").arg(seg->tick()).arg(time) << endl;
+                                                }
+                                          if (m->tick() + m->ticks() >= endTick)
+                                                break;
+                                          }
+                                    }
+                              out << "</events>";
+                              file.close();
+                              return context->engine()->undefinedValue();
+                              }
+                        else
+                              return qScriptValueFromValue(context->engine(), mscore->saveAs(score, true, s, ext));
                         }
 
                   else if (argc == 6 && ext == "png") {
