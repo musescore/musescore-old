@@ -695,8 +695,8 @@ bool ScoreView::saveFotoAs(bool printMode, const QRectF& r)
       else if (ext == "png") {
             QImage::Format f = QImage::Format_ARGB32_Premultiplied;
             QImage printer(w, h, f);
-            printer.setDotsPerMeterX(lrint(MScore::DPMM * 1000.0));
-            printer.setDotsPerMeterY(lrint(MScore::DPMM * 1000.0));
+            printer.setDotsPerMeterX(lrint((convDpi * 1000) / INCH));
+            printer.setDotsPerMeterY(lrint((convDpi * 1000) / INCH));
             printer.fill(transparent ? 0 : 0xffffffff);
             QPainter p(&printer);
             paintRect(printMode, p, r, mag);
