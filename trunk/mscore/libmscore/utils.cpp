@@ -347,10 +347,10 @@ void selectStavesMessage()
       }
 
 static const char* vall[] = {
-            "c","c#","d","d#","e","f","f#","g","g#","a","a#","h"
+            "c","c#","d","d#","e","f","f#","g","g#","a","a#","b"
             };
 static const char* valu[] = {
-            "C","C#","D","D#","E","F","F#","G","G#","A","A#","H"
+            "C","C#","D","D#","E","F","F#","G","G#","A","A#","B"
             };
 
 /*!
