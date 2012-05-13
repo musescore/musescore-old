@@ -961,6 +961,7 @@ MuseScore::MuseScore()
       menuHelp->addSeparator();
       menuHelp->addAction(tr("&About"),   this, SLOT(about()));
       menuHelp->addAction(tr("About &Qt"), this, SLOT(aboutQt()));
+      menuHelp->addAction(tr("About &MusicXML"),   this, SLOT(aboutMusicXML()));
 #if defined(Q_WS_MAC) || defined(Q_WS_WIN)
       menuHelp->addAction(tr("Check for &Update"), this, SLOT(checkForUpdate()));
 #endif
@@ -1135,6 +1136,17 @@ void MuseScore::helpBrowser1()
 void MuseScore::aboutQt()
       {
       QMessageBox::aboutQt(this, QString("MuseScore"));
+      }
+
+//---------------------------------------------------------
+//   aboutMusicXML
+//---------------------------------------------------------
+
+void MuseScore::aboutMusicXML()
+      {
+      AboutMusicXMLBoxDialog ab;
+      ab.show();
+      ab.exec();
       }
 
 //---------------------------------------------------------
@@ -2838,6 +2850,15 @@ AboutBoxDialog::AboutBoxDialog()
       versionLabel->setText(tr("Version: ") + VERSION);
 #endif
       revisionLabel->setText(tr("Revision: %1").arg(revision));
+      }
+
+//---------------------------------------------------------
+//   AboutBoxDialog
+//---------------------------------------------------------
+
+AboutMusicXMLBoxDialog::AboutMusicXMLBoxDialog()
+      {
+      setupUi(this);
       }
 
 //---------------------------------------------------------
