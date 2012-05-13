@@ -779,11 +779,9 @@ KeySigEvent NewWizardPage5::keysig() const
 NewWizard::NewWizard(QWidget* parent)
    : QWizard(parent)
       {
-#if defined(Q_WS_WIN)
       setWizardStyle(QWizard::ClassicStyle);
-#endif
       setPixmap(QWizard::LogoPixmap, QPixmap(":/data/mscore.png"));
-      setPixmap(QWizard::WatermarkPixmap, QPixmap(":/data/bg1.jpg"));
+      setPixmap(QWizard::WatermarkPixmap, 0);
       setWindowTitle(tr("MuseScore: Create New Score"));
       setOption(QWizard::NoCancelButton, false);
       setOption(QWizard::CancelButtonOnLeft, true);
