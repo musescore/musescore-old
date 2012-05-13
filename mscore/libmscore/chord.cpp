@@ -1080,9 +1080,11 @@ void Chord::layoutStem()
             return;
             }
 
-      System* s = segment()->measure()->system();
-      if (s == 0)       //DEBUG
-            return;
+      if (segment()) {
+            System* s = segment()->measure()->system();
+            if (s == 0)       //DEBUG
+                  return;
+            }
 
       if (_stem) {
             qreal _spatium   = spatium();
@@ -1329,6 +1331,8 @@ void Chord::layout()
                         qreal y = note->line() * _spatium * .5;
                         note->setPos(x, y);
                         }
+                  computeUp();
+                  layoutStem();
                   return;
                   }
 
