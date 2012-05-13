@@ -50,10 +50,9 @@ xcode:
           mkdir build;              \
     fi;                             \
     cd build;                                  \
-    cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}" -DCMAKE_BUILD_TYPE=DEBUG \
+    cmake -DCMAKE_INSTALL_PREFIX=../build/mscore/Debug -DCMAKE_BUILD_TYPE=DEBUG \
           ../mscore -G Xcode;                         \
     xcodebuild -project mscore.xcodeproj -target lrelease; 
-
 
 #
 # clean out of source build
