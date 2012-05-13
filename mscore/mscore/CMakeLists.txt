@@ -40,7 +40,7 @@ QT4_WRAP_UI (ui_headers
       slur.ui editdrumset.ui editstaff.ui line.ui linesegment.ui
       voltaproperties.ui timesigproperties.ui
       jumpproperties.ui markerproperties.ui boxproperties.ui
-      instrwizard.ui timesigwizard.ui newwizard.ui aboutbox.ui
+      instrwizard.ui timesigwizard.ui newwizard.ui aboutbox.ui aboutmusicxmlbox.ui
       chordedit.ui transposedialog.ui tempoproperties.ui
       lineproperties.ui excerptsdialog.ui lyrics.ui stafftext.ui
       tupletdialog.ui tupletproperties.ui

@@ -27,6 +27,7 @@
 #include "ui_measuresdialog.h"
 #include "ui_insertmeasuresdialog.h"
 #include "ui_aboutbox.h"
+#include "ui_aboutmusicxmlbox.h"
 #include "ui_startdialog.h"
 #include <QtSingleApplication>
 #include "updatechecker.h"
@@ -124,6 +125,17 @@ class AboutBoxDialog : public QDialog, Ui::AboutBox {
 
    public:
       AboutBoxDialog();
+      };
+
+//---------------------------------------------------------
+//   AboutMusicXMLBoxDialog
+//---------------------------------------------------------
+
+class AboutMusicXMLBoxDialog : public QDialog, Ui::AboutMusicXMLBox {
+      Q_OBJECT
+
+   public:
+      AboutMusicXMLBoxDialog();
       };
 
 //---------------------------------------------------------
@@ -380,6 +392,7 @@ class MuseScore : public QMainWindow {
       void helpBrowser1();
       void about();
       void aboutQt();
+      void aboutMusicXML();
       void openRecentMenu();
       void selectScore(QAction*);
       void startPreferenceDialog();
