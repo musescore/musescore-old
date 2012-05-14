@@ -23,6 +23,7 @@
 #include "fret.h"
 #include "mscore.h"
 #include "stafftext.h"
+#include "icon.h"
 
 static const qreal BOX_MARGIN = 0.0;
 
@@ -415,8 +416,21 @@ void HBox::layout2()
 bool Box::acceptDrop(MuseScoreView*, const QPointF&, Element* e) const
       {
       int type = e->type();
-      if (type == LAYOUT_BREAK || type == TEXT || type == STAFF_TEXT)
-            return true;
+      switch(type) {
+            case LAYOUT_BREAK:
+            case TEXT:
+            case STAFF_TEXT:
+                  return true;
+            case ICON:
+                  switch(static_cast<Icon*>(e)->subtype()) {
+                        case ICON_VFRAME:
+                        case ICON_TFRAME:
+                        case ICON_FFRAME:
+                        case ICON_MEASURE:
+                              return true;
+                        }
+                  break;
+            }
       return false;
       }
 
@@ -466,6 +480,23 @@ Element* Box::drop(const DropData& data)
                   delete e;
                   return text;
                   }
+
+            case ICON:
+                  switch(static_cast<Icon*>(e)->subtype()) {
+                        case ICON_VFRAME:
+                              score()->insertMeasure(VBOX, this);
+                              break;
+                        case ICON_TFRAME:
+                              score()->insertMeasure(TBOX, this);
+                              break;
+                        case ICON_FFRAME:
+                              score()->insertMeasure(FBOX, this);
+                              break;
+                        case ICON_MEASURE:
+                              score()->insertMeasure(MEASURE, this);
+                              break;
+                        }
+                  break;
 
             default:
                   e->setParent(this);

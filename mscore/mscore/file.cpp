@@ -1277,13 +1277,11 @@ void MuseScore::printFile()
       {
       QPrinter printerDev(QPrinter::HighResolution);
       const PageFormat* pf = cs->pageFormat();
-
       printerDev.setPaperSize(pf->size(), QPrinter::Inch);
 
       printerDev.setCreator("MuseScore Version: " VERSION);
       printerDev.setFullPage(true);
       printerDev.setColorMode(QPrinter::Color);
-
       printerDev.setDocName(cs->name());
       printerDev.setDoubleSidedPrinting(pf->twosided());
       printerDev.setOutputFormat(QPrinter::NativeFormat);
@@ -1580,9 +1578,8 @@ bool MuseScore::savePsPdf(const QString& saveName, QPrinter::OutputFormat format
 
 bool MuseScore::savePsPdf(Score* cs, const QString& saveName, QPrinter::OutputFormat format)
       {
-      const PageFormat* pf = cs->pageFormat();
       QPrinter printerDev(QPrinter::HighResolution);
-
+      const PageFormat* pf = cs->pageFormat();
       printerDev.setPaperSize(pf->size(), QPrinter::Inch);
 
       printerDev.setCreator("MuseScore Version: " VERSION);
@@ -1591,6 +1588,7 @@ bool MuseScore::savePsPdf(Score* cs, const QString& saveName, QPrinter::OutputFo
       printerDev.setDocName(cs->name());
       printerDev.setDoubleSidedPrinting(pf->twosided());
       printerDev.setOutputFormat(format);
+
       printerDev.setOutputFileName(saveName);
       QPainter p(&printerDev);
       p.setRenderHint(QPainter::Antialiasing, true);
