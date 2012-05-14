@@ -655,13 +655,10 @@ void Element::writeProperties(Xml& xml) const
                         }
                   }
             }
-      for (int i = 0;; ++i) {
-            const Property<Element>& p = propertyList[i];
-            P_ID id = p.id;
-            if (id == P_END)
-                  break;
-            xml.tag(id, ((*(Element*)this).*(p.data))(), p.defaultVal);
-            }
+      if (color() != Qt::black)
+            xml.tag("color", color());
+      if (!visible())
+            xml.tag("visible", visible());
       }
 
 //---------------------------------------------------------

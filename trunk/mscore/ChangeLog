@@ -1,3 +1,5 @@
+14.5 (ws)
+      - fix #15474: Crash when opening MSCZ-file while navigator is active
 13.5 (la)
       - fix #16238: Down note stem in Drumset dialog are up and mirrored
       - replace H by B in drumset dialog

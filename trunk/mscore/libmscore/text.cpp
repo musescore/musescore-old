@@ -301,9 +301,9 @@ void Text::draw(QPainter* painter) const
       // make it thread save
       {
       QWriteLocker locker(&docRenderLock);
-//      QScopedPointer<QTextDocument> __doc(_doc->clone());
-//      __doc.data()->documentLayout()->draw(painter, c);
-      _doc->documentLayout()->draw(painter, c);
+      QScopedPointer<QTextDocument> __doc(_doc->clone());
+      __doc.data()->documentLayout()->draw(painter, c);
+      // _doc->documentLayout()->draw(painter, c);
       }
 #else
       _doc->documentLayout()->draw(painter, c);
