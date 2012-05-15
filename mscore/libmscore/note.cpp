@@ -1235,8 +1235,10 @@ void Note::layout2()
                   }
             for (int i = 0; i < dots; ++i) {
                   NoteDot* dot = _dots[i];
-                  dot->setPos(x + d + dd * i, y);
-                  _dots[i]->adjustReadPos();
+                  if (dot) {
+                        dot->setPos(x + d + dd * i, y);
+                        _dots[i]->adjustReadPos();
+                        }
                   }
             }
 
