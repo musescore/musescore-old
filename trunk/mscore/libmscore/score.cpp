@@ -3267,3 +3267,21 @@ QList<Score*> Score::scoreList()
       return scores;
       }
 
+//---------------------------------------------------------
+//   switchLayer
+//---------------------------------------------------------
+
+bool Score::switchLayer(const QString& s)
+      {
+      int layerIdx = 0;
+      foreach(const Layer& l, layer()) {
+            if (s == l.name) {
+                  setCurrentLayer(layerIdx);
+                  return true;
+                  }
+            ++layerIdx;
+            }
+      return false;
+      }
+
+

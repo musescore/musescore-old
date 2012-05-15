@@ -881,6 +881,7 @@ class Score {
       int linkId();
       void linkId(int);
       QList<Score*> scoreList();
+      bool switchLayer(const QString& s);
       };
 
 extern Score* gscore;

@@ -1,4 +1,5 @@
 15.5 (ws)
+      - enable layer mechanism for layout break
       - fix #16299: Changing actual time signature causes score corruption
       (la)
       - fix #16473: Edit in Stave Properties causes crash
