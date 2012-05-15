@@ -1,3 +1,5 @@
+15.5 (ws)
+      - fix #16299: Changing actual time signature causes score corruption
 14.5 (ws)
       - fix #15474: Crash when opening MSCZ-file while navigator is active
 13.5 (la)

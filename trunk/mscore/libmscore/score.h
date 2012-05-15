@@ -442,7 +442,6 @@ class Score {
       void undoAddGrace(Chord* c, Segment* s, bool behind);
       void undoAddCR(ChordRest* element, Measure*, int tick);
       void undoRemoveElement(Element* element);
-      void undoChangeMeasureLen(Measure* m, Fraction _old, Fraction _new);
       void undoChangeElement(Element* oldElement, Element* newElement);
       void undoInsertTime(int tick, int len);
       void undoChangeRepeatFlags(Measure*, int);
