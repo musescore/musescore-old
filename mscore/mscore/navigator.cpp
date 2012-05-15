@@ -169,36 +169,18 @@ void Navigator::rescale()
       {
       if (_score->pages().isEmpty())
             return;
-      int sbh     = scrollArea->style()->pixelMetric(QStyle::PM_ScrollBarExtent);
       int h       = height();
-      int w       = scrollArea->width();
       Page* lp    = _score->pages().back();
       qreal scoreWidth  = lp->x() + lp->width();
       qreal scoreHeight = lp->height();
 
       qreal m;
       qreal m1    = h / scoreHeight;
-      qreal m2    = (h-sbh) / scoreHeight;
       int w1      = int (scoreWidth * m1);
-      int w2      = int (scoreWidth * m2);  // always w1 > w2
-
-      if ((w >= w2) && (w < w1)) {
-            setFixedWidth(w1);
-            m = m2;
-            }
-      else {
-            if (scrollArea->horizontalScrollBar()->isVisible()) {
-                  setFixedWidth(w1);
-                  m = m2;
-                  }
-            else {
-                  w1 *= .99;
-                  if (minimumWidth() != w1)
-                        setFixedWidth(w1);
-                  m = m1;
-                  }
-            }
-
+      
+      setFixedWidth(w1);
+      m = m1;
+      
       matrix.setMatrix(m, matrix.m12(), matrix.m13(), matrix.m21(), m,
          matrix.m23(), matrix.m31(), matrix.m32(), matrix.m33());
       int n = pcl.size();
