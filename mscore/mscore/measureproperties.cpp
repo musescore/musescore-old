@@ -200,26 +200,20 @@ void MeasureProperties::apply()
          || measureNumberOffset->value() != m->noOffset()
          || m->len() != len()
          ) {
-            Fraction oLen(m->len());
             score->undo(new ChangeMeasureProperties(
                m,
-               m->timesig(),
-               len(),
                breakMultiMeasureRest->isChecked(),
                repeatCount(),
                layoutStretch->value(),
                measureNumberOffset->value(),
                isIrregular())
                );
-            if (oLen != len()) {
-                  m->adjustToLen(oLen, len());
+            if (m->len() != len()) {
+                  m->adjustToLen(len());
                   score->select(m, SELECT_RANGE, 0);
                   }
             }
-
       score->select(0, SELECT_SINGLE, 0);
-      score->renumberMeasures();
-      score->setLayoutAll(true);
       score->end();
       }
 

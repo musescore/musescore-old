@@ -1638,13 +1638,13 @@ void Measure::cmdRemoveEmptySegment(Segment* s)
 
 //---------------------------------------------------------
 //   adjustToLen
-//    the measure len has changed, adjust elements to
+//    change actual measure len, adjust elements to
 //    new len
 //---------------------------------------------------------
 
-void Measure::adjustToLen(Fraction of, Fraction nf)
+void Measure::adjustToLen(Fraction nf)
       {
-      int ol = of.ticks();
+      int ol = len().ticks();
       int nl = nf.ticks();
 
       int staves = score()->nstaves();
@@ -1726,7 +1726,7 @@ void Measure::adjustToLen(Fraction of, Fraction nf)
                         }
                   }
             }
-      score()->undoChangeMeasureLen(this, of, nf);
+      score()->undo(new ChangeMeasureLen(this, nf));
       if (diff < 0) {
             //
             //  CHECK: do not remove all slurs

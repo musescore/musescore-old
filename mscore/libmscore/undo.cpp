@@ -329,15 +329,6 @@ void Score::undoInsertTime(int tick, int len)
       }
 
 //---------------------------------------------------------
-//   undoChangeMeasureLen
-//---------------------------------------------------------
-
-void Score::undoChangeMeasureLen(Measure* m, Fraction oldTicks, Fraction newTicks)
-      {
-      undo(new ChangeMeasureLen(m, oldTicks, newTicks));
-      }
-
-//---------------------------------------------------------
 //   undoChangeElement
 //---------------------------------------------------------
 
@@ -1857,33 +1848,30 @@ void ChangeKeySig::flip()
 //   ChangeMeasureLen
 //---------------------------------------------------------
 
-ChangeMeasureLen::ChangeMeasureLen(Measure* m, Fraction of, Fraction nf)
+ChangeMeasureLen::ChangeMeasureLen(Measure* m, Fraction l)
       {
       measure     = m;
-      oldDuration = of;
-      newDuration = nf;
+      len         = l;
       }
 
 void ChangeMeasureLen::flip()
       {
-      Fraction of = newDuration;
-      Fraction nf = oldDuration;
+      Fraction oLen = measure->len();
 
       //
       // move EndBarLine and TimeSigAnnounce
       // to end of measure:
       //
-      int endTick = measure->tick() + nf.ticks();
+      int endTick = measure->tick() + len.ticks();
       for (Segment* segment = measure->first(); segment; segment = segment->next()) {
             if (segment->subtype() != SegEndBarLine
                && segment->subtype() != SegTimeSigAnnounce)
                   continue;
             segment->setTick(endTick);
             }
-      measure->setLen(nf);
+      measure->setLen(len);
       measure->score()->addLayoutFlags(LAYOUT_FIX_TICKS);
-      oldDuration = of;
-      newDuration = nf;
+      len = oLen;
       }
 
 //---------------------------------------------------------
@@ -2603,8 +2591,6 @@ void ChangeMStaffProperties::flip()
 
 ChangeMeasureProperties::ChangeMeasureProperties(
    Measure* m,
-   const Fraction& _sig,
-   const Fraction& _len,
    bool _bmm,
    int rc,
    qreal s,
@@ -2612,8 +2598,6 @@ ChangeMeasureProperties::ChangeMeasureProperties(
    bool ir
    ) :
    measure(m),
-   sig(_sig),
-   len(_len),
    breakMM(_bmm),
    repeatCount(rc),
    stretch(s),
@@ -2633,32 +2617,24 @@ void ChangeMeasureProperties::flip()
       qreal s = measure->userStretch();
       int o    = measure->noOffset();
       bool ir  = measure->irregular();
-      Fraction _sig = measure->timesig();
-      Fraction _len = measure->len();
 
       measure->setBreakMultiMeasureRest(breakMM);
       measure->setRepeatCount(repeatCount);
       measure->setUserStretch(stretch);
-      measure->setTimesig(sig);
-      measure->setLen(len);
       Score* score = measure->score();
       if (o != noOffset || ir != irregular) {
             measure->setNoOffset(noOffset);
             measure->setIrregular(irregular);
             score->renumberMeasures();
             }
-
       breakMM     = a;
       repeatCount = r;
       stretch     = s;
       noOffset    = o;
       irregular   = ir;
-      sig         = _sig;
-      len         = _len;
 
       score->addLayoutFlags(LAYOUT_FIX_TICKS);
       score->setLayoutAll(true);
-      score->setDirty(true);
       }
 
 //---------------------------------------------------------

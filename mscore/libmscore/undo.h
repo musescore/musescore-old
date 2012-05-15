@@ -380,12 +380,11 @@ class FlipNoteDotDirection : public UndoCommand {
 
 class ChangeMeasureLen : public UndoCommand {
       Measure* measure;
-      Fraction oldDuration;
-      Fraction newDuration;
+      Fraction len;
       void flip();
 
    public:
-      ChangeMeasureLen(Measure*, Fraction, Fraction);
+      ChangeMeasureLen(Measure*, Fraction);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeMeasureLen");
@@ -988,8 +987,6 @@ class ChangeMStaffProperties : public UndoCommand {
 
 class ChangeMeasureProperties : public UndoCommand {
       Measure* measure;
-      Fraction sig;
-      Fraction len;
       bool breakMM;
       int repeatCount;
       qreal stretch;
@@ -999,8 +996,7 @@ class ChangeMeasureProperties : public UndoCommand {
       void flip();
 
    public:
-      ChangeMeasureProperties(Measure*, const Fraction& sig, const Fraction& len,
-         bool breakMM,
+      ChangeMeasureProperties(Measure*, bool breakMM,
          int repeatCount, qreal stretch, int noOffset, bool irregular);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
