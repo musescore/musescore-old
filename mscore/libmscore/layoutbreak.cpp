@@ -39,6 +39,7 @@ LayoutBreak::LayoutBreak(Score* score)
       _startWithLongNames  = true;
       _startWithMeasureOne = true;
       lw                   = spatium() * 0.3;
+      setFlag(ELEMENT_HAS_TAG, true);
       }
 
 //---------------------------------------------------------

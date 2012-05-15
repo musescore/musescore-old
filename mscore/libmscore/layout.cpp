@@ -596,6 +596,11 @@ void Score::doLayout()
             fixTicks();
       if (layoutFlags & LAYOUT_FIX_PITCH_VELO)
             updateVelo();
+
+      for (MeasureBase* m = first(); m; m = m->next()) {
+            m->layout0();
+            }
+
       layoutFlags = 0;
 
       int nstaves = _staves.size();
@@ -2090,7 +2095,7 @@ void Score::layoutPage(Page* page, int gaps, qreal restHeight)
             return;
             }
 
-      if (!gaps || (restHeight > (ph * (1.0 - styleD(ST_pageFillLimit)))))
+      if (MScore::layoutDebug || !gaps || (restHeight > (ph * (1.0 - styleD(ST_pageFillLimit)))))
             return;
 
       qreal extraDist = restHeight / gaps;

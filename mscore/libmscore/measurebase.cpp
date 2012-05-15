@@ -85,13 +85,17 @@ void MeasureBase::scanElements(void* data, void (*func)(void*, Element*), bool a
       {
       if (type() == MEASURE) {
             foreach(Element* e, _el) {
-                  if ((e->track() == -1) || ((Measure*)this)->visible(e->staffIdx()))
-                        e->scanElements(data, func, all);
+                  if (score()->tagIsValid(e->tag())) {
+                        if ((e->track() == -1) || ((Measure*)this)->visible(e->staffIdx()))
+                              e->scanElements(data, func, all);
+                        }
                   }
             }
       else {
-            foreach(Element* e, _el)
-                  e->scanElements(data, func, all);
+            foreach(Element* e, _el) {
+                  if (score()->tagIsValid(e->tag()))
+                        e->scanElements(data, func, all);
+                  }
             }
       func(data, this);
       }
@@ -202,13 +206,46 @@ qreal MeasureBase::pause() const
       }
 
 //---------------------------------------------------------
+//   layout0
+//---------------------------------------------------------
+
+void MeasureBase::layout0()
+      {
+      _pageBreak = false;
+      _lineBreak = false;
+      _sectionBreak = 0;
+
+      foreach (Element* element, _el) {
+            if (!score()->tagIsValid(element->tag()))
+                  continue;
+            if (element->type() != LAYOUT_BREAK)
+                  continue;
+            LayoutBreak* e = static_cast<LayoutBreak*>(element);
+            switch (e->subtype()) {
+                  case LAYOUT_BREAK_PAGE:
+                        _pageBreak = true;
+                        break;
+                  case LAYOUT_BREAK_LINE:
+                        _lineBreak = true;
+                        break;
+                  case LAYOUT_BREAK_SECTION:
+                        _sectionBreak = e;
+                        break;
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
 void MeasureBase::layout()
       {
       int breakCount = 0;
+
       foreach (Element* element, _el) {
+            if (!score()->tagIsValid(element->tag()))
+                  continue;
             if (element->type() == LAYOUT_BREAK) {
                   qreal _spatium = spatium();
                   qreal x = -_spatium - element->width() + width()

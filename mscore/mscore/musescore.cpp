@@ -3597,15 +3597,9 @@ void MuseScore::midiNoteReceived(int pitch, bool ctrl)
 void MuseScore::switchLayer(const QString& s)
       {
       int layer = 0;
-      foreach(const Layer& l, cs->layer()) {
-            if (s == l.name) {
-                  cs->setCurrentLayer(layer);
-                  cs->setDirty(true);
-                  cs->setLayoutAll(true);
-                  cs->end();
-                  return;
-                  }
-            ++layer;
+      if (cs->switchLayer(s)) {
+            cs->setLayoutAll(true);
+            cs->update();
             }
       }
 

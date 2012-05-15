@@ -82,14 +82,16 @@
 
 void ScoreView::genPropertyMenu1(Element* e, QMenu* popup)
       {
-      if ((!e->generated() || e->type() == BAR_LINE) && (e->type() != LAYOUT_BREAK)) {
+      if (!e->generated() || e->type() == BAR_LINE) {
+            if (e->type() != LAYOUT_BREAK) {
 #if 0
-            if (e->visible())
-                  popup->addAction(tr("Set Invisible"))->setData("invisible");
-            else
-                  popup->addAction(tr("Set Visible"))->setData("invisible");
-            popup->addAction(tr("Color..."))->setData("color");
+                  if (e->visible())
+                        popup->addAction(tr("Set Invisible"))->setData("invisible");
+                  else
+                        popup->addAction(tr("Set Visible"))->setData("invisible");
+                  popup->addAction(tr("Color..."))->setData("color");
 #endif
+                  }
             if (e->flag(ELEMENT_HAS_TAG)) {
                   popup->addSeparator();
 
