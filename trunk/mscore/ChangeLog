@@ -5,6 +5,7 @@
 13.5 (la)
       - fix #16238: Down note stem in Drumset dialog are up and mirrored
       - replace H by B in drumset dialog
+      - fix #16322: use full width in New Score wizard
 10.5 (lv)
       - initial implementation #15006: Use MusicXML schema to validate files before import
 8.5 (ws)
