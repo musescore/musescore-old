@@ -640,8 +640,12 @@ void Element::writeProperties(Xml& xml) const
       {
       if (_links && (_links->size() > 1))
             xml.tag("lid", _links->lid());
-      if (!userOff().isNull())
-            xml.tag("pos", pos() / spatium());
+      if (!userOff().isNull()) {
+            if (type() == VOLTA_SEGMENT)
+                  xml.tag("offset", userOff() / spatium());
+            else
+                  xml.tag("pos", pos() / spatium());
+            }
       if ((track() != xml.curTrack) && (track() != -1)) {
             int t;
             t = track() + xml.trackDiff;
@@ -685,7 +689,7 @@ bool Element::readProperties(const QDomElement& e)
             }
       else if (tag == "tick")
             score()->curTick = score()->fileDivision(val.toInt());
-      else if (tag == "offset") {         // ??obsolete
+      else if (tag == "offset") {         // ??obsolete -> used for volta
             qreal _spatium = spatium();
             QPointF pt(readPoint(e) * _spatium);
             setUserOff(pt);

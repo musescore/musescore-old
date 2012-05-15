@@ -3,7 +3,7 @@
 //  Music Composition & Notation
 //  $Id$
 //
-//  Copyright (C) 2002-2011 Werner Schweer
+//  Copyright (C) 2002-2012 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2
@@ -397,13 +397,14 @@ QPointF SLine::linePos(int grip, System** sys)
                   }
             }
       else {
-            // anchor() == MEASURE
-            Measure* m = static_cast<Measure*>(grip == 0 ? startElement() : endElement());
-            *sys       = m->system();
+            // anchor() == ANCHOR_MEASURE
+            Measure* m;
             if (grip == GRIP_LINE_START) {
+                  m = static_cast<Measure*>(startElement());
                   x = m->pos().x();
                   }
             else {
+                  m = static_cast<Measure*>(endElement());
                   x = m->pos().x() + m->bbox().right();
                   if (type() == VOLTA) {
                         Segment* seg = m->last();
@@ -418,6 +419,7 @@ QPointF SLine::linePos(int grip, System** sys)
                               }
                         }
                   }
+            *sys = m->system();
             }
       //DEBUG:
       if ((*sys)->staves()->isEmpty())
@@ -535,7 +537,7 @@ void SLine::layout()
                   seg->setPos2(QPointF(p2.x() - x1, 0.0));
                   }
             seg->layout();
-            seg->move(QPointF(0.0, _yoffset * spatium()));
+            seg->rypos() += (_yoffset * spatium());
             seg->adjustReadPos();
             }
       }
