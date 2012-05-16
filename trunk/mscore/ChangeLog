@@ -1,6 +1,7 @@
 16.5 (la)
       - fix several issues in about dialogs (#16499, #16496, #16495, #16494, #16497)
       - fix #14736: Footer offset is acting differently on odd and even page
+      - fix #16323: Score does not redraw after transpose 
 15.5 (ws)
       - enable layer mechanism for layout break
       - fix #16299: Changing actual time signature causes score corruption
