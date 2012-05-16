@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>748</width>
-    <height>511</height>
+    <height>512</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -152,7 +152,7 @@
    <item row="0" column="1">
     <widget class="QStackedWidget" name="pageStack">
      <property name="currentIndex">
-      <number>14</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="Seite1">
       <layout class="QVBoxLayout" name="verticalLayout_20">
@@ -492,12 +492,12 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>System distance</string>
+             <string>Min. System distance</string>
             </property>
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QDoubleSpinBox" name="systemDistance">
+           <widget class="QDoubleSpinBox" name="minSystemDistance">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -652,84 +652,18 @@
             </property>
            </widget>
           </item>
-          <item row="8" column="0">
-           <widget class="QLabel" name="label_79">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+          <item row="13" column="0">
+           <spacer>
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
             </property>
-            <property name="toolTip">
-             <string/>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>137</width>
+              <height>21</height>
+             </size>
             </property>
-            <property name="whatsThis">
-             <string/>
-            </property>
-            <property name="text">
-             <string>Page fill threshold</string>
-            </property>
-           </widget>
-          </item>
-          <item row="8" column="1">
-           <widget class="QDoubleSpinBox" name="pageFillThreshold">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="suffix">
-             <string>%</string>
-            </property>
-            <property name="decimals">
-             <number>0</number>
-            </property>
-            <property name="minimum">
-             <double>0.000000000000000</double>
-            </property>
-            <property name="maximum">
-             <double>100.000000000000000</double>
-            </property>
-            <property name="value">
-             <double>70.000000000000000</double>
-            </property>
-           </widget>
-          </item>
-          <item row="8" column="2">
-           <widget class="QLabel" name="label_77">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Last system fill threshold</string>
-            </property>
-           </widget>
-          </item>
-          <item row="8" column="3">
-           <widget class="QDoubleSpinBox" name="lastSystemFillThreshold">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="suffix">
-             <string>%</string>
-            </property>
-            <property name="decimals">
-             <number>0</number>
-            </property>
-            <property name="maximum">
-             <double>100.000000000000000</double>
-            </property>
-            <property name="value">
-             <double>100.000000000000000</double>
-            </property>
-           </widget>
+           </spacer>
           </item>
           <item row="10" column="2">
            <widget class="QCheckBox" name="genCourtesyClef">
@@ -784,19 +718,6 @@
             </property>
            </widget>
           </item>
-          <item row="13" column="0">
-           <spacer>
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>137</width>
-              <height>21</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
           <item row="9" column="0">
            <spacer name="verticalSpacer_9">
             <property name="orientation">
@@ -843,6 +764,76 @@
             </property>
             <property name="maximum">
              <double>500.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>100.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QDoubleSpinBox" name="maxSystemDistance">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="suffix">
+             <string>sp</string>
+            </property>
+            <property name="decimals">
+             <number>1</number>
+            </property>
+            <property name="minimum">
+             <double>-1000.000000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>1000.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QLabel" name="label_191">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Max. System distance</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="0">
+           <widget class="QLabel" name="label_77">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Last system fill threshold</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="1">
+           <widget class="QDoubleSpinBox" name="lastSystemFillThreshold">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="suffix">
+             <string>%</string>
+            </property>
+            <property name="decimals">
+             <number>0</number>
+            </property>
+            <property name="maximum">
+             <double>100.000000000000000</double>
             </property>
             <property name="value">
              <double>100.000000000000000</double>
@@ -4029,14 +4020,12 @@ p, li { white-space: pre-wrap; }
   <tabstop>staffLowerBorder</tabstop>
   <tabstop>staffDistance</tabstop>
   <tabstop>akkoladeDistance</tabstop>
-  <tabstop>systemDistance</tabstop>
+  <tabstop>minSystemDistance</tabstop>
   <tabstop>lyricsDistance</tabstop>
   <tabstop>lyricsMinBottomDistance</tabstop>
   <tabstop>lyricsLineHeight</tabstop>
   <tabstop>systemFrameDistance</tabstop>
   <tabstop>frameSystemDistance</tabstop>
-  <tabstop>pageFillThreshold</tabstop>
-  <tabstop>lastSystemFillThreshold</tabstop>
   <tabstop>genClef</tabstop>
   <tabstop>genTimesig</tabstop>
   <tabstop>genKeysig</tabstop>

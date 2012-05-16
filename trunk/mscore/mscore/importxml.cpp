@@ -1126,7 +1126,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                                           ;
                                     else if (tag == "system-distance") {
                                           if (preferences.musicxmlImportLayout) {
-                                                score->style()->set(ST_systemDistance, val);
+                                                score->style()->set(ST_minSystemDistance, val);
                                                 qDebug("system distance %f", val.val());
                                                 }
                                           }

@@ -1280,7 +1280,7 @@ qDebug("Measure::insertStaff: %d", staffIdx);
       ms->lines->setParent(this);
       ms->lines->setTrack(staffIdx * VOICES);
       ms->distanceUp  = 0.0;
-      ms->distanceDown = point(staffIdx == 0 ? score()->styleS(ST_systemDistance) : score()->styleS(ST_staffDistance));
+      ms->distanceDown = point(staffIdx == 0 ? score()->styleS(ST_minSystemDistance) : score()->styleS(ST_staffDistance));
       ms->lines->setVisible(!staff->invisible());
       insertMStaff(ms, staffIdx);
       }
@@ -1873,7 +1873,7 @@ void Measure::read(const QDomElement& de, int staffIdx)
             s->lines->setParent(this);
             s->lines->setTrack(n * VOICES);
             s->distanceUp = 0.0;
-            s->distanceDown = point(n == 0 ? score()->styleS(ST_systemDistance) : score()->styleS(ST_staffDistance));
+            s->distanceDown = point(n == 0 ? score()->styleS(ST_minSystemDistance) : score()->styleS(ST_staffDistance));
             s->lines->setVisible(!staff->invisible());
             staves.append(s);
             }

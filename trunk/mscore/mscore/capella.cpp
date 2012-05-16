@@ -1930,7 +1930,8 @@ qDebug("==================convert-capella\n");
       score->style()->set(ST_measureSpacing, 1.0);
       score->setSpatium(cap->normalLineDist * MScore::DPMM);
       score->style()->set(ST_smallStaffMag, cap->smallLineDist / cap->normalLineDist);
-      score->style()->set(ST_systemDistance, Spatium(8));
+      score->style()->set(ST_minSystemDistance, Spatium(8));
+      score->style()->set(ST_maxSystemDistance, Spatium(12));
 //      score->style()->set(ST_hideEmptyStaves, true);
 
 #if 1

@@ -316,7 +316,7 @@ void System::layout2()
                         if (type == VBOX || type == TBOX || type == FBOX)
                               nextMeasureIsVBOX = true;
                         }
-                  downDistance = nextMeasureIsVBOX ? ST_systemFrameDistance : ST_systemDistance;
+                  downDistance = nextMeasureIsVBOX ? ST_systemFrameDistance : ST_minSystemDistance;
                   }
             else if (staff->rstaff() < (staff->part()->staves()->size()-1)) {
                   //
