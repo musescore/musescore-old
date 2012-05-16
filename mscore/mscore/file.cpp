@@ -480,14 +480,12 @@ void MuseScore::newFile()
                                     int diff = -part->instr()->transpose().chromatic;
                                     nKey.setAccidentalType(transposeKey(nKey.accidentalType(), diff));
                                     }
-                              if (nKey.accidentalType()) {
-                                    (*(staff->keymap()))[0] = nKey;
-                                    KeySig* keysig = new KeySig(score);
-                                    keysig->setTrack(staffIdx * VOICES);
-                                    keysig->setKeySigEvent(nKey);
-                                    Segment* s = measure->getSegment(keysig, 0);
-                                    s->add(keysig);
-                                    }
+                              (*(staff->keymap()))[0] = nKey;
+                              KeySig* keysig = new KeySig(score);
+                              keysig->setTrack(staffIdx * VOICES);
+                              keysig->setKeySigEvent(nKey);
+                              Segment* s = measure->getSegment(keysig, 0);
+                              s->add(keysig);
                               }
                         }
                   if (staff->primaryStaff()) {
