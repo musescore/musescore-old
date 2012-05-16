@@ -224,6 +224,7 @@ void Page::draw(QPainter* painter) const
 
             bool odd = (n & 1) && _score->styleB(ST_headerOddEven);
             if (odd) {
+                  o.setX(-o.x());
                   s1 = _score->styleSt(ST_oddHeaderL);
                   s2 = _score->styleSt(ST_oddHeaderC);
                   s3 = _score->styleSt(ST_oddHeaderR);
@@ -273,7 +274,7 @@ void Page::draw(QPainter* painter) const
             bool odd = (n & 1) && _score->styleB(ST_footerOddEven);
 
             if (odd) {
-                  o  = -o;
+                  o.setX(-o.x());
                   s1 = _score->styleSt(ST_oddFooterL);
                   s2 = _score->styleSt(ST_oddFooterC);
                   s3 = _score->styleSt(ST_oddFooterR);
