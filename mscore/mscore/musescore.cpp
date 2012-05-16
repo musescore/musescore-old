@@ -2860,6 +2860,7 @@ AboutBoxDialog::AboutBoxDialog()
       versionLabel->setText(tr("Version: ") + VERSION);
 #endif
       revisionLabel->setText(tr("Revision: %1").arg(revision));
+      setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
       }
 
 //---------------------------------------------------------
@@ -2869,6 +2870,7 @@ AboutBoxDialog::AboutBoxDialog()
 AboutMusicXMLBoxDialog::AboutMusicXMLBoxDialog()
       {
       setupUi(this);
+      setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
       }
 
 //---------------------------------------------------------
