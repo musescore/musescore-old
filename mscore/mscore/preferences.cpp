@@ -649,8 +649,6 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       pluginTable->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("load")));
       pluginTable->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Plugin Path")));
 
-      updateValues(&preferences);
-
       connect(buttonBox,          SIGNAL(clicked(QAbstractButton*)), SLOT(buttonBoxClicked(QAbstractButton*)));
       connect(fgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectFgWallpaper()));
       connect(bgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectBgWallpaper()));
@@ -696,6 +694,9 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       for (int idx = 0; idx < n; ++idx)
             exportAudioSampleRate->addItem(QString("%1").arg(exportAudioSampleRates[idx]));
 
+      // update values after ui setup
+      updateValues(&preferences);
+          
       connect(recordButtons,          SIGNAL(buttonClicked(int)), SLOT(recordButtonClicked(int)));
       connect(midiRemoteControlClear, SIGNAL(clicked()), SLOT(midiRemoteControlClearClicked()));
       connect(sfOpenButton,           SIGNAL(clicked()), SLOT(selectSoundFont()));
