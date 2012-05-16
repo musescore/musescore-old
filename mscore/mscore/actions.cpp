@@ -1706,7 +1706,7 @@ Shortcut Shortcut::sc[] = {
          ),
       Shortcut (
          STATE_NORMAL,
-         0,
+         A_CMD,
          "transpose",
          QT_TRANSLATE_NOOP("action","Transpose"),
          QT_TRANSLATE_NOOP("action","&Transpose..."),
