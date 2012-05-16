@@ -38,9 +38,11 @@ StyleType styleTypes[] = {
       StyleType("staffLowerBorder",        ST_SPATIUM),
       StyleType("staffDistance",           ST_SPATIUM),
       StyleType("akkoladeDistance",        ST_SPATIUM),
-      StyleType("systemDistance",          ST_SPATIUM),
+
+      StyleType("minSystemDistance",       ST_SPATIUM),
+      StyleType("maxSystemDistance",       ST_SPATIUM),
+
       StyleType("lyricsDistance",          ST_SPATIUM),
-//      StyleType("figuredBassDistance",     ST_SPATIUM),
       StyleType("lyricsMinBottomDistance", ST_SPATIUM),
       StyleType("lyricsLineHeight",        ST_DOUBLE),      // in % of normal height (default: 1.0)
       StyleType("figuredBassFontFamily",   ST_STRING),
@@ -99,7 +101,7 @@ StyleType styleTypes[] = {
       StyleType("propertyDistanceStem",    ST_SPATIUM),     // note property to note stem
 
       StyleType("propertyDistance",        ST_SPATIUM),     // note property to note property
-      StyleType("pageFillLimit",           ST_DOUBLE),      // 0-1.0
+//      StyleType("pageFillLimit",           ST_DOUBLE),      // 0-1.0
       StyleType("lastSystemFillLimit",     ST_DOUBLE),
 
       StyleType("hairpinY",                ST_SPATIUM),
@@ -394,9 +396,10 @@ StyleData::StyleData()
             StyleVal(ST_staffLowerBorder, Spatium(7.0)),
             StyleVal(ST_staffDistance, Spatium(6.5)),
             StyleVal(ST_akkoladeDistance, Spatium(6.5)),
-            StyleVal(ST_systemDistance, Spatium(9.25)),
+            StyleVal(ST_minSystemDistance, Spatium(8.5)),
+            StyleVal(ST_maxSystemDistance, Spatium(15.0)),
             StyleVal(ST_lyricsDistance, Spatium(2)),
-//            StyleVal(ST_figuredBassDistance, Spatium(2)),
+
             StyleVal(ST_lyricsMinBottomDistance, Spatium(2)),
             StyleVal(ST_lyricsLineHeight, qreal(1.0)),
             StyleVal(ST_figuredBassFontFamily, QString("MScoreBC")),
@@ -457,7 +460,7 @@ StyleData::StyleData()
             StyleVal(ST_propertyDistanceHead, Spatium(1.0)),
             StyleVal(ST_propertyDistanceStem, Spatium(1.8)),
             StyleVal(ST_propertyDistance,     Spatium(1.0)),
-            StyleVal(ST_pageFillLimit,        qreal(0.7)),
+//            StyleVal(ST_pageFillLimit,        qreal(0.7)),
             StyleVal(ST_lastSystemFillLimit,  qreal(0.3)),
 
             StyleVal(ST_hairpinY, Spatium(8)),
@@ -911,6 +914,10 @@ void StyleData::load(const QDomElement& de)
                   _chordList->read(e);
                   _customChordList = true;
                   }
+            else if (tag == "pageFillLimit") { // obsolete
+                  }
+            else if (tag == "systemDistance")  // obsolete
+                  set(StyleVal(ST_minSystemDistance, Spatium(val.toDouble())));
             else {
                   if (tag == "stemDir") {
                         int voice = e.attribute("voice", "1").toInt() - 1;

@@ -50,7 +50,7 @@ bool MuseScore::importPdf(Score* score, const QString& path)
       if (sp == 0.0)
             sp = 1.5;
       score->setSpatium(sp * MScore::DPMM);
-      score->style()->set(StyleVal(ST_pageFillLimit, 1.0));
+//      score->style()->set(StyleVal(ST_pageFillLimit, 1.0));
       score->style()->set(StyleVal(ST_lastSystemFillLimit, 0.0));
       score->style()->set(StyleVal(ST_staffLowerBorder, 0.0));
       score->style()->set(StyleVal(ST_measureSpacing, 1.0));
@@ -64,7 +64,8 @@ bool MuseScore::importPdf(Score* score, const QString& path)
       pF.setOddBottomMargin(0);
       score->setPageFormat(pF);
 
-      score->style()->set(StyleVal(ST_systemDistance,   Spatium(omr->systemDistance())));
+      score->style()->set(StyleVal(ST_minSystemDistance,   Spatium(omr->systemDistance())));
+      score->style()->set(StyleVal(ST_maxSystemDistance,   Spatium(omr->systemDistance())));
       score->style()->set(StyleVal(ST_akkoladeDistance, Spatium(omr->staffDistance())));
 
       Part* part   = new Part(score);

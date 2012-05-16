@@ -1940,7 +1940,7 @@ void Score::layoutPages()
       const qreal _spatium            = spatium();
       const qreal slb                 = styleS(ST_staffLowerBorder).val()    * _spatium;
       const qreal sub                 = styleS(ST_staffUpperBorder).val()    * _spatium;
-      const qreal systemDist          = styleS(ST_systemDistance).val()      * _spatium;
+      const qreal systemDist          = styleS(ST_minSystemDistance).val()   * _spatium;
       const qreal systemFrameDistance = styleS(ST_systemFrameDistance).val() * _spatium;
       const qreal frameSystemDistance = styleS(ST_frameSystemDistance).val() * _spatium;
 
@@ -2083,8 +2083,6 @@ void Score::layoutPages()
 
 void Score::layoutPage(Page* page, int gaps, qreal restHeight)
       {
-      qreal ph = loHeight() - page->bm() - page->tm();
-
       if (!gaps && (_layoutMode == LayoutFloat)) {
             qreal y = restHeight * .5;
             int n = page->systems()->size();
@@ -2095,17 +2093,29 @@ void Score::layoutPage(Page* page, int gaps, qreal restHeight)
             return;
             }
 
-      if (MScore::layoutDebug || !gaps || (restHeight > (ph * (1.0 - styleD(ST_pageFillLimit)))))
+      if (MScore::layoutDebug || !gaps)
             return;
 
-      qreal extraDist = restHeight / gaps;
-      qreal y = 0;
-      int n = page->systems()->size();
-      for (int i = 0; i < n; ++i) {
-            System* system = page->systems()->at(i);
+      const qreal _spatium      = spatium();
+      const qreal maxSystemDist = styleS(ST_maxSystemDistance).val() * _spatium;
+      qreal extraDist           = restHeight / gaps;
+
+      qreal y     = 0.0;
+      qreal lastY = systems()->front()->pos().y() + systems()->front()->height();
+      int idx     = 0;
+
+      foreach(System* system, *page->systems()) {
+            qreal dy = system->pos().y() + y - lastY;
+            if (dy > maxSystemDist) {
+                  // restrict system distance
+                  y = maxSystemDist + lastY - system->pos().y();
+                  }
             system->move(0, y);
-            if (system->addStretch())
+            if (system->addStretch()) {
+                  lastY = system->pos().y() + system->height();
                   y += extraDist;
+                  }
+            ++idx;
             }
       }
 

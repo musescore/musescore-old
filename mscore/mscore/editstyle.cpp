@@ -179,7 +179,8 @@ void EditStyle::getValues()
       lstyle.set(ST_staffLowerBorder,        Spatium(staffLowerBorder->value()));
       lstyle.set(ST_staffDistance,           Spatium(staffDistance->value()));
       lstyle.set(ST_akkoladeDistance,        Spatium(akkoladeDistance->value()));
-      lstyle.set(ST_systemDistance,          Spatium(systemDistance->value()));
+      lstyle.set(ST_minSystemDistance,       Spatium(minSystemDistance->value()));
+      lstyle.set(ST_maxSystemDistance,       Spatium(maxSystemDistance->value()));
       lstyle.set(ST_lyricsDistance,          Spatium(lyricsDistance->value()));
       lstyle.set(ST_lyricsMinBottomDistance, Spatium(lyricsMinBottomDistance->value()));
       lstyle.set(ST_lyricsLineHeight,        Spatium(lyricsLineHeight->value() * .01));
@@ -222,7 +223,7 @@ void EditStyle::getValues()
       lstyle.set(ST_smallStaffMag,           smallStaffSize->value() * 0.01);
       lstyle.set(ST_smallNoteMag,            smallNoteSize->value() * 0.01);
       lstyle.set(ST_smallClefMag,            smallClefSize->value() * 0.01);
-      lstyle.set(ST_pageFillLimit,           pageFillThreshold->value() * 0.01);
+//      lstyle.set(ST_pageFillLimit,           pageFillThreshold->value() * 0.01);
       lstyle.set(ST_lastSystemFillLimit,     lastSystemFillThreshold->value() * 0.01);
       lstyle.set(ST_hairpinY,                Spatium(hairpinY->value()));
       lstyle.set(ST_hairpinWidth,            Spatium(hairpinLineWidth->value()));
@@ -380,7 +381,8 @@ void EditStyle::setValues()
       staffLowerBorder->setValue(lstyle.value(ST_staffLowerBorder).toSpatium().val());
       staffDistance->setValue(lstyle.value(ST_staffDistance).toSpatium().val());
       akkoladeDistance->setValue(lstyle.value(ST_akkoladeDistance).toSpatium().val());
-      systemDistance->setValue(lstyle.value(ST_systemDistance).toSpatium().val());
+      minSystemDistance->setValue(lstyle.value(ST_minSystemDistance).toSpatium().val());
+      maxSystemDistance->setValue(lstyle.value(ST_maxSystemDistance).toSpatium().val());
       lyricsDistance->setValue(lstyle.value(ST_lyricsDistance).toSpatium().val());
       lyricsMinBottomDistance->setValue(lstyle.value(ST_lyricsMinBottomDistance).toSpatium().val());
       lyricsLineHeight->setValue(lstyle.value(ST_lyricsLineHeight).toDouble() * 100.0);
@@ -428,7 +430,7 @@ void EditStyle::setValues()
       smallStaffSize->setValue(lstyle.value(ST_smallStaffMag).toDouble() * 100.0);
       smallNoteSize->setValue(lstyle.value(ST_smallNoteMag).toDouble() * 100.0);
       smallClefSize->setValue(lstyle.value(ST_smallClefMag).toDouble() * 100.0);
-      pageFillThreshold->setValue(lstyle.value(ST_pageFillLimit).toDouble() * 100.0);
+//      pageFillThreshold->setValue(lstyle.value(ST_pageFillLimit).toDouble() * 100.0);
       lastSystemFillThreshold->setValue(lstyle.value(ST_lastSystemFillLimit).toDouble() * 100.0);
 
       hairpinY->setValue(lstyle.value(ST_hairpinY).toSpatium().val());

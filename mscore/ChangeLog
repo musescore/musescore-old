@@ -1,7 +1,11 @@
-16.5 (la)
+16.5 (ws)
+      - Rename style parameter ST_systemDistance to ST_minSystemDistance,
+        replace ST_pageFillLimit with ST_maxSystemDistance. The system distance
+        is now stretched upto maxSystemDistance to fill a page.
+     (la)
       - fix several issues in about dialogs (#16499, #16496, #16495, #16494, #16497)
       - fix #14736: Footer offset is acting differently on odd and even page
-      - fix #16323: Score does not redraw after transpose 
+      - fix #16323: Score does not redraw after transpose
 15.5 (ws)
       - enable layer mechanism for layout break
       - fix #16299: Changing actual time signature causes score corruption

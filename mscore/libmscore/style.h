@@ -136,11 +136,14 @@ enum StyleIdx {
       ST_staffLowerBorder,
       ST_staffDistance,
       ST_akkoladeDistance,
-      ST_systemDistance,
+
+      ST_minSystemDistance,
+      ST_maxSystemDistance,
+
       ST_lyricsDistance,
-//      ST_figuredBassDistance,
       ST_lyricsMinBottomDistance,
       ST_lyricsLineHeight,
+
       ST_figuredBassFontFamily,
       ST_figuredBassFontSize,
       ST_figuredBassYOffset,
@@ -198,7 +201,7 @@ enum StyleIdx {
       ST_propertyDistanceHead,
       ST_propertyDistanceStem,
       ST_propertyDistance,
-      ST_pageFillLimit,
+//      ST_pageFillLimit,
       ST_lastSystemFillLimit,
 
       ST_hairpinY,

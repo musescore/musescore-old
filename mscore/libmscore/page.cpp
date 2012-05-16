@@ -446,8 +446,6 @@ QString PageFormat::name() const
 //         <bottom-margin>56.6929</bottom-margin>
 //         </page-margins>
 //      </page-layout>
-//
-//    sizes are given in units of 1/10 spatium;
 //---------------------------------------------------------
 
 void PageFormat::read(const QDomElement& de)
@@ -460,9 +458,9 @@ void PageFormat::read(const QDomElement& de)
             const QString& tag(e.tagName());
             const QString& val(e.text());
             int i = val.toInt();
-            if (tag == "pageFormat")
+            if (tag == "pageFormat")            // obsolete
                   setSize(getPaperSize(val));
-            else if (tag == "landscape")
+            else if (tag == "landscape")        // obsolete
                   landscape = i;
             else if (tag == "page-margins") {
                   type = e.attribute("type","both");
