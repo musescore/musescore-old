@@ -1135,7 +1135,7 @@ void MuseScore::helpBrowser1()
 
 void MuseScore::aboutQt()
       {
-      QMessageBox::aboutQt(this, QString("MuseScore"));
+      QMessageBox::aboutQt(this, QString("About Qt"));
       }
 
 //---------------------------------------------------------

@@ -1,3 +1,5 @@
+16.5 (la)
+      - fix several issues in about boxes (#16499, #16496, #16495, 16494)
 15.5 (ws)
       - enable layer mechanism for layout break
       - fix #16299: Changing actual time signature causes score corruption
