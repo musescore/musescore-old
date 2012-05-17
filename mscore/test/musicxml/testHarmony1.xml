@@ -326,7 +326,7 @@
         <root>
           <root-step>C</root-step>
           </root>
-        <kind text="mMaj7">minor-major</kind>
+        <kind text="mMaj7">major-minor</kind>
         </harmony>
       <note>
         <pitch>
@@ -834,7 +834,7 @@
         <root>
           <root-step>C</root-step>
           </root>
-        <kind text="Tristan">tristan</kind>
+        <kind text="Tristan">Tristan</kind>
         </harmony>
       <note>
         <pitch>
