@@ -546,6 +546,14 @@ Shortcut Shortcut::sc[] = {
          QT_TRANSLATE_NOOP("action","Add trill")
          ),
       Shortcut(
+        STATE_NORMAL | STATE_NOTE_ENTRY,
+        A_CMD,
+        "add-marcato",
+        QT_TRANSLATE_NOOP("action","Add marcato"),
+        QT_TRANSLATE_NOOP("action","Marcato"),
+        QT_TRANSLATE_NOOP("action","Add marcato")
+        ),
+      Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          A_CMD,
          "stretch+",

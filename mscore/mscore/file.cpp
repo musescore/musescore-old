@@ -1342,7 +1342,7 @@ bool MuseScore::exportFile()
       fl.append(tr("PostScript File (*.ps)"));
       fl.append(tr("PNG Bitmap Graphic (*.png)"));
       fl.append(tr("Scalable Vector Graphic (*.svg)"));
-      fl.append(tr("Lilypond Format (*.ly)"));
+      fl.append(tr("LilyPond Format (*.ly)"));
 #ifdef HAS_AUDIOFILE
       fl.append(tr("Wave Audio (*.wav)"));
       fl.append(tr("Flac Audio (*.flac)"));
@@ -1414,7 +1414,7 @@ bool MuseScore::exportParts()
       fl.append(tr("PostScript File (*.ps)"));
       fl.append(tr("PNG Bitmap Graphic (*.png)"));
       fl.append(tr("Scalable Vector Graphic (*.svg)"));
-      fl.append(tr("Lilypond Format (*.ly)"));
+      fl.append(tr("LilyPond Format (*.ly)"));
 #ifdef HAS_AUDIOFILE
       fl.append(tr("Wave Audio (*.wav)"));
       fl.append(tr("Flac Audio (*.flac)"));

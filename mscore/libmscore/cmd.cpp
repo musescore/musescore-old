@@ -2469,6 +2469,8 @@ void Score::cmd(const QAction* a)
             addArticulation(Articulation_Staccato);
 	else if (cmd == "add-tenuto")
             addArticulation(Articulation_Tenuto);
+  else if (cmd == "add-marcato")
+            addArticulation(Articulation_Marcato);            
 	else if (cmd == "add-trill")
             addArticulation(Articulation_Trill);
       else if (cmd == "add-hairpin")

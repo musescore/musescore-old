@@ -221,6 +221,10 @@
     <seq>_</seq>
     </SC>
   <SC>
+    <key>add-marcato</key>
+    <seq>Ctrl+Alt+O</seq>
+    </SC>
+  <SC>
     <key>stretch+</key>
     <seq>}</seq>
     </SC>
