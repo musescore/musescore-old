@@ -135,8 +135,6 @@ bool Omr::readPdf()
       _ocr->init();
 #endif
 
-printf("Omr::read <%s>\n", qPrintable(_path));
-
       _doc = new Pdf();
       if (!_doc->open(_path)) {
             delete _doc;
@@ -178,7 +176,7 @@ void Omr::process()
       w       /= n;
       _dpmm    = w / 210.0;            // PaperSize A4
 
-printf("*** spatium: %f mm  dpmm: %f\n", spatiumMM(), _dpmm);
+// printf("*** spatium: %f mm  dpmm: %f\n", spatiumMM(), _dpmm);
       }
 
 //---------------------------------------------------------

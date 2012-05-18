@@ -32,13 +32,13 @@ set(GCC_VISIBILITY TRUE)            # requires gcc 4.x?
 set(HAS_AUDIOFILE TRUE)             # requires libsndfile
 
 set(STATIC_SCRIPT_BINDINGS TRUE)
-set(USE_SSE           FALSE)
+set(USE_SSE           TRUE)
 set(SOUNDFONT3        TRUE)         # enable ogg vorbis compressed fonts, require ogg & vorbis
 set(AEOLUS            TRUE)         # pipe organ synthesizer
 set(EMBED_ICONS       FALSE)        # do not load icons from share/icons
 
 option (OSC "enable OSC remote control protocol" ON)        # osc remote control
-option (OMR "enable PDF import"  OFF)                       # OMR - optical music recognition
+option (OMR "enable PDF import"  OFF)                        # OMR - optical music recognition
 option (BUILD_SCRIPTGEN "enable script bindings" OFF)
 
 if (APPLE OR MINGW)

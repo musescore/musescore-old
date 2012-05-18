@@ -19,15 +19,20 @@
 //=============================================================================
 
 #include "utils.h"
+#include "omr.h"
 
-char bitsSetTable[256];
+char Omr::bitsSetTable[256];
 
 //---------------------------------------------------------
 //   initUtils
 //---------------------------------------------------------
 
-void initUtils()
+void Omr::initUtils()
       {
+      static bool initialized = false;
+      if (initialized)
+            return;
+      initialized = true;
       //
       // populate the bitsSetTable
       bitsSetTable[0] = 0;

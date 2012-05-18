@@ -32,7 +32,7 @@
 #include "libmscore/sym.h"
 #include "pattern.h"
 
-// #define SEARCH_NOTES
+#define SEARCH_NOTES
 
 //---------------------------------------------------------
 //   Lv
@@ -91,7 +91,7 @@ void OmrPage::read(int /*pageNo*/)
       for (int system = 0; system < systems; ++system) {
             OmrSystem omrSystem(this);
             for (int i = 0; i < stavesSystem; ++i) {
-                  omrSystem.staves.append(staves[system * stavesSystem + i]);
+                  omrSystem.staves().append(staves[system * stavesSystem + i]);
                   }
             _systems.append(omrSystem);
             }
@@ -127,8 +127,8 @@ int maxP(int* projection, int x1, int x2)
 
 void OmrSystem::searchBarLines()
       {
-      QRect& r1 = staves[0];
-      QRect& r2 = staves[1];
+      OmrStaff& r1 = _staves[0];
+      OmrStaff& r2 = _staves[1];
 
       int x1  = r1.x();
       int x2  = x1 + r1.width();
@@ -166,12 +166,12 @@ void OmrSystem::searchBarLines()
                   int xx = x + x1;
                   if (firstBarLine) {
                         firstBarLine = false;
-                        staves[0].setX(xx);
-                        staves[1].setX(xx);
+                        _staves[0].setX(xx);
+                        _staves[1].setX(xx);
                         }
                   else {
-                        staves[0].setWidth(xx - staves[0].x());
-                        staves[1].setWidth(xx - staves[1].x());
+                        _staves[0].setWidth(xx - _staves[0].x());
+                        _staves[1].setWidth(xx - _staves[1].x());
                         }
                   }
             }
@@ -223,17 +223,20 @@ void OmrSystem::searchBarLines()
 
 void OmrSystem::searchNotes(int sym)
       {
-      double _spatium = _page->spatium();
-      Pattern* pattern = new Pattern(&symbols[0][sym], _spatium);
+      Pattern pattern(&symbols[0][sym], _page->spatium());
 
       QList<OmrNote*> nl1;
       QList<OmrNote*> nl2;
-      foreach(QRectF r, staves) {
-            int x1 = r.x();
-            int x2 = x1 + r.width();
-            int y = r.y();
-            for (int i = -4; i < 12; ++i) {
-                  searchNotes(&nl2, pattern, x1, x2, y + i * _spatium * .5, sym);
+      for (int i = 0; i < _staves.size(); ++i) {
+            OmrStaff* r = &_staves[i];
+            int x1 = r->x();
+            int x2 = x1 + r->width();
+
+            //
+            // search notes on a range of vertical line position
+            //
+            for (int line = -5; line < 14; ++line) {
+                  searchNotes(&nl2, &pattern, x1, x2, r->y(), line, sym);
                   foreach(OmrNote* n, nl1) {
                         foreach(OmrNote* m, nl2) {
                               if (m->r.intersects(n->r)) {
@@ -241,13 +244,12 @@ void OmrSystem::searchNotes(int sym)
                                     }
                               }
                         }
-                  _notes.append(nl1);
+                  r->notes().append(nl1);
                   nl1 = nl2;
                   nl2.clear();      // TODO: optimize
                   }
-            _notes.append(nl2);
+            r->notes().append(nl2);
             }
-      delete pattern;
       }
 
 //---------------------------------------------------------
@@ -392,7 +394,7 @@ void OmrPage::crop()
             if (cropR)
                   break;
             }
-      printf("*** crop: T%d B%d L%d R:%d\n", cropT, cropB, cropL, cropR);
+//      printf("*** crop: T%d B%d L%d R:%d\n", cropT, cropB, cropL, cropR);
       }
 
 //---------------------------------------------------------
@@ -463,11 +465,7 @@ void OmrPage::deSkew()
 
       foreach(const QRect& r, _slices) {
             double rot = skew(r);
-
-            // rot = 0.0;
-            printf("rot %f\n", rot);
-
-            if (rot == 0.0) {
+            if (qAbs(rot) < 0.1) {
                   memcpy(db + wl * r.y(), scanLine(r.y()), wl * r.height() * sizeof(uint));
                   continue;
                   }
@@ -475,7 +473,6 @@ void OmrPage::deSkew()
             QTransform t;
             t.rotate(rot);
             QTransform tt = QImage::trueMatrix(t, width(), r.height());
-
 
             double m11 = tt.m11();
             double m12 = tt.m12();
@@ -489,7 +486,6 @@ void OmrPage::deSkew()
             int y2 = r.y() + r.height();
 
             for (int y = r.y(); y < y2; ++y) {
-
                   const uint* s = scanLine(y);
 
                   m21y += m21;
@@ -546,10 +542,10 @@ int OmrPage::xproject(const uint* p, int wl)
       int x2 = x1 + w/2;
       for (int x = cropL; x < x2; ++x) {
             uint v = *p++;
-            run += bitsSetTable[v & 0xff]
-               + bitsSetTable[(v >> 8) & 0xff]
-               + bitsSetTable[(v >> 16) & 0xff]
-               + bitsSetTable[v >> 24];
+            run += Omr::bitsSetTable[v & 0xff]
+                + Omr::bitsSetTable[(v >> 8) & 0xff]
+                + Omr::bitsSetTable[(v >> 16) & 0xff]
+                + Omr::bitsSetTable[v >> 24];
             }
       return run;
       }
@@ -654,7 +650,7 @@ void OmrPage::getStaffLines()
       {
       int h  = height();
       int wl = wordsPerLine();
-printf("getStaffLines %d %d  crop %d %d\n", h, wl, cropT, cropB);
+// printf("getStaffLines %d %d  crop %d %d\n", h, wl, cropT, cropB);
       if (h < 1)
             return;
 
@@ -663,7 +659,7 @@ printf("getStaffLines %d %d  crop %d %d\n", h, wl, cropT, cropB);
       if (y2 >= h)
             --y2;
 
-printf("  getStaffLines %d-%d, wl %d\n", y1, y2, wl);
+// printf("  getStaffLines %d-%d, wl %d\n", y1, y2, wl);
       double projection[h];
       for (int y = 0; y < y1; ++y)
             projection[y] = 0;
@@ -675,7 +671,7 @@ printf("  getStaffLines %d-%d, wl %d\n", y1, y2, wl);
       int autoTableSize = (wl * 32) / 10;       // 1/10 page width
       if (autoTableSize > y2-y1)
             autoTableSize = y2 - y1;
-printf("   autoTableSize %d\n", autoTableSize);
+// printf("   autoTableSize %d\n", autoTableSize);
       double autoTable[autoTableSize];
       memset(autoTable, 0, sizeof(autoTable));
       for (int i = 0; i < autoTableSize; ++i) {
@@ -698,7 +694,7 @@ printf("   autoTableSize %d\n", autoTableSize);
             printf("*** no staff lines found\n");
             return;
             }
-      printf("*** spatium = %f\n", _spatium);
+//      printf("*** spatium = %f\n", _spatium);
 
       //---------------------------------------------------
       //    look for staves
@@ -745,7 +741,7 @@ printf("   autoTableSize %d\n", autoTableSize);
             }
       qSort(staveTop.begin(), staveTop.end(), sortLvStaves);
       foreach(Lv a, staveTop) {
-            staves.append(QRect(cropL * 32, a.line, width() - cropR*32, _spatium*4));
+            staves.append(OmrStaff(cropL * 32, a.line, width() - cropR*32, _spatium*4));
             }
       }
 
@@ -753,9 +749,7 @@ struct Hv {
       int x;
       int val;
       Hv(int a, int b) : x(a), val(b) {}
-      bool operator< (const Hv& a) const {
-            return a.val < val;
-            }
+      bool operator< (const Hv& a) const { return a.val < val; }
       };
 
 struct Peak {
@@ -763,6 +757,7 @@ struct Peak {
       double val;
 
       bool operator<(const Peak& p) const { return p.val < val; }
+      Peak(int _x, double _val) : x(_x), val(_val) {}
       };
 
 //---------------------------------------------------------
@@ -770,30 +765,26 @@ struct Peak {
 //---------------------------------------------------------
 
 void OmrSystem::searchNotes(QList<OmrNote*>* noteList, Pattern* pattern,
-   int x1, int x2, int y, int sym)
+   int x1, int x2, int y, int line, int sym)
       {
-      y -= 4;                 // MAGIC
+      double _spatium = _page->spatium();
+      y += line * _spatium * .5;
 
       // look for note heads
-//      double w2 = _spatium * .5;
       int hh = pattern->h();
       int hw = pattern->w();
       x2 -= hw;
 
       QList<Peak> notePeaks;
-      int xx1 = -1000;
+      int xx1    = -1000;
       double val = 0.0;
 
       for (int x = x1; x < x2; ++x) {
             Pattern p(&_page->image(), x, y - hh/2, hw, hh);
             double val1 = p.match(pattern);
             if (x > (xx1 + hw)) {
-                  if (xx1 >= 0) {
-                        Peak peak;
-                        peak.x   = xx1;
-                        peak.val = val;
-                        notePeaks.append(peak);
-                        }
+                  if (xx1 >= 0)
+                        notePeaks.append(Peak(xx1, val));
                   xx1 = x;
                   val = val1;
                   }
@@ -805,16 +796,17 @@ void OmrSystem::searchNotes(QList<OmrNote*>* noteList, Pattern* pattern,
                   }
             }
 
+      double th = 0.9; // 0.7;
       qSort(notePeaks);
       int n = notePeaks.size();
       for (int i = 0; i < n; ++i) {
-            if (notePeaks[i].val < 0.75)
+            if (notePeaks[i].val < th)
                   break;
-            int x = notePeaks[i].x;
             OmrNote* note = new OmrNote;
-            note->r    = QRect(x, y - hh/2, hw, hh);
-            note->sym  = sym;
-            note->prob = notePeaks[i].val;
+            note->r.setRect(notePeaks[i].x, y - hh/2, hw, hh);
+            note->line    = line;
+            note->sym     = sym;
+            note->prob    = notePeaks[i].val;
             noteList->append(note);
             }
       }
@@ -876,7 +868,7 @@ void OmrPage::read(QDomElement e)
             else if (tag == "cropB")
                   cropB = val.toInt();
             else if (tag == "staff") {
-                  QRect r = readRectF(e).toRect();
+                  OmrStaff r(readRectF(e).toRect());
                   staves.append(r);
                   }
             else

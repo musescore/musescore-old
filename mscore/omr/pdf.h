@@ -21,8 +21,6 @@
 #ifndef __PDF_H__
 #define __PDF_H__
 
-// typedef struct pdf_xref_ pdf_document;
-
 typedef struct fz_document_s fz_document;
 
 //---------------------------------------------------------

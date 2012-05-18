@@ -18,19 +18,14 @@
 #include "omr/omr.h"
 #include "testutils.h"
 #include "mscore/preferences.h"
+#include "libmscore/page.h"
 
+extern bool importPdf(Score*, const QString&);
 bool debugMode = false;
 bool noGui = true;
 QString revision;
 
 Score* score;
-
-// dummy
-#ifdef OMR
-Omr::Omr(Score*) {}
-void Omr::read(QDomElement) {}
-void Omr::write(Xml&) const {}
-#endif
 
 //---------------------------------------------------------
 //   Preferences
@@ -94,11 +89,31 @@ MTest::MTest()
 
 Score* MTest::readScore(const QString& name)
       {
-      Score* score = new Score(mscore->baseStyle());
-      score->setTestMode(true);
       QString path = root + "/" + name;
-      if (!score->loadMsc(path)) {
-            QWARN(qPrintable(QString("readScore: cannot load <%1>\n").arg(path)));
+      return readCreatedScore(path);
+      }
+
+//---------------------------------------------------------
+//   readCreatedScore
+//---------------------------------------------------------
+
+Score* MTest::readCreatedScore(const QString& name)
+      {
+      Score* score = new Score(mscore->baseStyle());
+      score->setName(name);
+      score->setTestMode(true);
+      QString csl  = score->fileInfo()->suffix().toLower();
+
+      bool rv = false;
+      if (csl == "mscz")
+            rv = score->loadCompressedMsc(name);
+      else if (csl == "mscx")
+            rv = score->loadMsc(name);
+      else if (csl == "pdf")
+            rv = importPdf(score, name);
+
+      if (!rv) {
+            QWARN(qPrintable(QString("readScore: cannot load <%1> type <%2>\n").arg(name).arg(csl)));
             delete score;
             return 0;
             }
@@ -137,6 +152,56 @@ bool MTest::saveCompareScore(Score* score, const QString& saveName, const QStrin
             printf("> failed\n");
             return false;
             }
+      return true;
+      }
+
+//---------------------------------------------------------
+//   savePdf
+//---------------------------------------------------------
+
+bool MTest::savePdf(Score* cs, const QString& saveName)
+      {
+      QPrinter printerDev(QPrinter::HighResolution);
+      const PageFormat* pf = cs->pageFormat();
+      printerDev.setPaperSize(pf->size(), QPrinter::Inch);
+
+      printerDev.setCreator("MuseScore Version: " VERSION);
+      printerDev.setFullPage(true);
+      printerDev.setColorMode(QPrinter::Color);
+      printerDev.setDocName(cs->name());
+      printerDev.setDoubleSidedPrinting(pf->twosided());
+      printerDev.setOutputFormat(QPrinter::PdfFormat);
+
+      printerDev.setOutputFileName(saveName);
+      QPainter p(&printerDev);
+      p.setRenderHint(QPainter::Antialiasing, true);
+      p.setRenderHint(QPainter::TextAntialiasing, true);
+      double mag = printerDev.logicalDpiX() / MScore::DPI;
+            p.scale(mag, mag);
+
+      const QList<Page*> pl = cs->pages();
+      int pages    = pl.size();
+      int offset   = cs->pageNumberOffset();
+      int fromPage = printerDev.fromPage() - 1 - offset;
+      int toPage   = printerDev.toPage() - 1 - offset;
+      if (fromPage < 0)
+                  fromPage = 0;
+      if ((toPage < 0) || (toPage >= pages))
+                  toPage = pages - 1;
+
+      for (int copy = 0; copy < printerDev.numCopies(); ++copy) {
+                  bool firstPage = true;
+                  for (int n = fromPage; n <= toPage; ++n) {
+                              if (!firstPage)
+                                          printerDev.newPage();
+                              firstPage = false;
+
+                              cs->print(&p, n);
+                              if ((copy + 1) < printerDev.numCopies())
+                                          printerDev.newPage();
+                              }
+                  }
+      p.end();
       return true;
       }
 

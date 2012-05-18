@@ -622,7 +622,7 @@ class Score {
       qreal   styleP(StyleIdx idx) const       { return _style.valueS(idx).val() * spatium();  }
       QString styleSt(StyleIdx idx) const      { return _style.valueSt(idx); }
       bool    styleB(StyleIdx idx) const       { return _style.valueB(idx);  }
-      qreal  styleD(StyleIdx idx) const       { return _style.valueD(idx);  }
+      qreal  styleD(StyleIdx idx) const        { return _style.valueD(idx);  }
       int     styleI(StyleIdx idx) const       { return _style.valueI(idx);  }
       const TextStyle& textStyle(int idx) const { return _style.textStyle(idx); }
       const TextStyle& textStyle(const QString& s) const  { return _style.textStyle(s); }

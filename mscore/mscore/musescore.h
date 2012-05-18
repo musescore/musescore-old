@@ -589,7 +589,7 @@ class MuseScore : public QMainWindow {
       bool savePng(Score*, const QString& name);
       bool saveLilypond(Score*, const QString& name);
 
-      static bool importPdf(Score*, const QString& path);
+//      static bool importPdf(Score*, const QString& path);
       static bool importGTP(Score*, const QString& name);
       static bool importBww(Score*, const QString& path);
       static bool importMusicXml(Score*, const QString&);

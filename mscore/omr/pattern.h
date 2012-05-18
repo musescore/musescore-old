@@ -28,7 +28,7 @@ class Sym;
 //    _n % sizeof(int)  is zero, patterns are 32bit padded
 //---------------------------------------------------------
 
-class Pattern : QImage {
+class Pattern {
    protected:
       QImage _image;
 

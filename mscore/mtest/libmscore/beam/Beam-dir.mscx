@@ -443,7 +443,6 @@
           <durationType>eighth</durationType>
           <Beam>9</Beam>
           <Note>
-            <selected>1</selected>
             <pitch>74</pitch>
             <tpc>16</tpc>
             </Note>

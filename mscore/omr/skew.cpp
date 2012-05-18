@@ -20,6 +20,7 @@
 
 #include "image.h"
 #include "utils.h"
+#include "omr.h"
 #include "omrpage.h"
 
 //=============================================================================
@@ -135,7 +136,7 @@ void OmrPage::radonTransform(ulong* projection, int w, int n, const QRect& r)
             int i = n;
             const uchar* p = (const uchar*)scanLine(r.y() + y);
             for (int x = 0; x < n; ++x)
-                  src->setCell(--i, y, bitsSetTable[*p++]);
+                  src->setCell(--i, y, Omr::bitsSetTable[*p++]);
             }
       radonProjection(src, dst, -1, projection);
 
@@ -143,7 +144,7 @@ void OmrPage::radonTransform(ulong* projection, int w, int n, const QRect& r)
       for (int y = 0; y < h; y++) {
             const uchar* p = (const uchar*)scanLine(r.y() + y);
             for (int x = 0; x < n; ++x)
-                  src->setCell(x, y, bitsSetTable[*p++]);
+                  src->setCell(x, y, Omr::bitsSetTable[*p++]);
             }
       radonProjection(src, dst, 1, projection);
 

@@ -130,7 +130,7 @@ else (APPLE)
 endif (APPLE)
 
 if (OMR)
-      set(OMR_FILES importpdf.cpp omrpanel.cpp)
+      set(OMR_FILES omrpanel.cpp)
 endif (OMR)
 
 add_executable ( ${ExecutableName}
