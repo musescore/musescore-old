@@ -45,6 +45,7 @@ struct HLine {
 class OmrNote {
    public:
       int sym;
+      int line;
       QRect r;
       double prob;      // probability
       };
@@ -52,22 +53,40 @@ class OmrNote {
 class OmrPage;
 
 //---------------------------------------------------------
+//   OmrStaff
+//---------------------------------------------------------
+
+class OmrStaff : public QRect {
+      QList<OmrNote*> _notes;
+
+   public:
+      OmrStaff() : QRect() {}
+      OmrStaff(const QRect& r) : QRect(r) {}
+      OmrStaff(int x, int y, int w, int h) : QRect(x, y, w, h) {}
+
+      const QList<OmrNote*>& notes() const  { return _notes;   }
+      QList<OmrNote*>& notes()              { return _notes;   }
+      };
+
+//---------------------------------------------------------
 //   OmrSystem
 //---------------------------------------------------------
 
 class OmrSystem {
       OmrPage* _page;
+      QList<OmrStaff> _staves;
 
-      void searchNotes(QList<OmrNote*>*, Pattern*, int x1, int x2, int y, int sym);
+      void searchNotes(QList<OmrNote*>*, Pattern*, int x1, int x2, int y, int line, int sym);
 
    public:
       OmrSystem(OmrPage* p) { _page = p;  }
-      QList<QRect> staves;
-      QList<QLine> barLines;
-      QList<OmrNote*> _notes;
 
-      const QList<OmrNote*>& notes() const  { return _notes;   }
-      QList<OmrNote*>& notes()              { return _notes;   }
+      const QList<OmrStaff>& staves() const { return _staves; }
+      QList<OmrStaff>& staves()             { return _staves; }
+      int nstaves() const                   { return _staves.size(); }
+
+      QList<QLine> barLines;
+
       void searchBarLines();
       void searchNotes(int sym);
       };
@@ -85,12 +104,10 @@ class OmrPage {
       int cropT, cropB;       // crop values in pixel units
 
       QList<QRect> _slices;
-      QList<QRect> staves;
+      QList<OmrStaff> staves;
       QList<HLine> slines;
 
       QList<QLine>  lines;
-//      QList<OmrNote*> _notes;
-
       QList<OmrSystem> _systems;
 
       void crop();
@@ -116,7 +133,6 @@ class OmrPage {
 
       const QList<QLine>& sl()           { return lines;    }
       const QList<HLine>& l()            { return slines;   }
-      const QList<QRect>& r()            { return staves;   }
 
       const QList<QRect>& slices() const { return _slices;  }
       double spatium() const             { return _spatium; }

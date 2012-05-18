@@ -46,11 +46,16 @@ class Omr {
       Ocr* _ocr;
       Score* _score;
 
+      static void initUtils();
+
       void process1(int page);
 
    public:
       Omr(Score*);
       Omr(const QString& path, Score*);
+
+      static char bitsSetTable[256];
+
       bool readPdf();
       int pagesInDocument() const;
       int numPages() const                 { return _pages.size();          }

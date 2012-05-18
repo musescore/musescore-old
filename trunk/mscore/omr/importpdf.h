@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: importmidi.cpp 2721 2010-02-15 19:41:28Z wschweer $
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2012 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -22,5 +22,9 @@
 #define __IMPORT_PDF_H__
 
 
+class Score;
+class QString;
+
+extern bool importPdf(Score*, const QString&);
 #endif
 

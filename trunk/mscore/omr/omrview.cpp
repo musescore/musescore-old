@@ -221,7 +221,7 @@ void OmrView::paintEvent(QPaintEvent* event)
 
             if (_showStaves) {
                   foreach(const OmrSystem& s, page->systems()) {       // staves
-                        foreach(const QRect& r, s.staves)
+                        foreach(const OmrStaff& r, s.staves())
                               p.fillRect(r, QBrush(QColor(0, 0, 100, 50)));
                         }
                   }
@@ -232,12 +232,14 @@ void OmrView::paintEvent(QPaintEvent* event)
                         foreach(const QLineF& l, system.barLines)
                               p.drawLine(l);
                         }
-                  foreach(const OmrNote* n, system.notes()) {
-                        if (n->sym == quartheadSym)
-                              p.setPen(QPen(QColor(255, 0, 0), 2.0));
-                        else
-                              p.setPen(QPen(QColor(0, 0, 255), 2.0));
-                        p.drawRect(n->r);
+                  foreach(const OmrStaff& staff, system.staves()) {
+                        foreach(const OmrNote* n, staff.notes()) {
+                              if (n->sym == quartheadSym)
+                                    p.setPen(QPen(QColor(255, 0, 0), 2.0));
+                              else
+                                    p.setPen(QPen(QColor(0, 0, 255), 2.0));
+                              p.drawRect(n->r);
+                              }
                         }
                   }
             p.restore();

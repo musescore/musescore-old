@@ -84,6 +84,7 @@
 #ifdef OMR
 #include "omr/omr.h"
 #include "omr/omrpage.h"
+#include "omr/importpdf.h"
 #endif
 
 #include "diff/diff_match_patch.h"
@@ -1660,7 +1661,7 @@ bool MuseScore::readScore(Score* score, QString name)
                   { "ove",  &MuseScore::importOve                },
                   { "scw",  &MuseScore::importOve                },
 #ifdef OMR
-                  { "pdf",  &MuseScore::importPdf                },
+                  { "pdf",  &importPdf                           },
 #endif
                   { "bww",  &MuseScore::importBww                },
                   { "gtp",  &MuseScore::importGTP                },

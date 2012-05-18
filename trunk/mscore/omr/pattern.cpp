@@ -21,13 +21,13 @@
 #include "pattern.h"
 #include "utils.h"
 #include "libmscore/sym.h"
+#include "omr.h"
 
 //---------------------------------------------------------
 //   Pattern
 //---------------------------------------------------------
 
 Pattern::Pattern()
-   : QImage()
       {
       }
 
@@ -46,15 +46,18 @@ Pattern::~Pattern()
 
 double Pattern::match(const Pattern* a) const
       {
-      if (image()->byteCount() != a->image()->byteCount())
+      int n = image()->byteCount();
+      if (n != a->image()->byteCount())
             return 0.0;
       int k = 0;
       const uchar* p1 = image()->bits();
       const uchar* p2 = a->image()->bits();
-      for (int i = 0; i < image()->byteCount(); ++i) {
+      for (int i = 0; i < n; ++i) {
             uchar v = (*(p1++)) ^ (*(p2++));
-            k += bitsSetTable[v];
+            k += Omr::bitsSetTable[v];
             }
+      // remove overscan
+      k -= (image()->bytesPerLine() * 8 - w()) * h();
       return 1.0 - (double(k) / (h() * w()));
       }
 
@@ -64,7 +67,6 @@ double Pattern::match(const Pattern* a) const
 //---------------------------------------------------------
 
 Pattern::Pattern(Sym* symbol, double spatium)
-   : QImage()
       {
       QFont f("MScore");
       f.setPixelSize(lrint(spatium * 4));
@@ -72,7 +74,7 @@ Pattern::Pattern(Sym* symbol, double spatium)
       QString s;
       QChar code(symbol->code());
       QRect r(fm.boundingRect(code));
-      int _w = r.width();
+      int _w = r.right() - r.left(); // r.width();
       int _h = ((r.height() + 1) / 2) * 2;
 
       _image = QImage(_w, _h, QImage::Format_MonoLSB);
@@ -85,7 +87,7 @@ Pattern::Pattern(Sym* symbol, double spatium)
       QPainter painter;
       painter.begin(&_image);
       painter.setFont(f);
-      painter.drawText(0, _h / 2, code);
+      painter.drawText(-r.left(), _h / 2, code);
       painter.end();
 
       int ww = _w % 32;
@@ -94,8 +96,7 @@ Pattern::Pattern(Sym* symbol, double spatium)
       uint mask = 0xffffffff << ww;
       int n = ((_w + 31) / 32) - 1;
       for (int i = 0; i < _h; ++i) {
-            uint* p = (uint*)_image.scanLine(i);
-            p += n;
+            uint* p = ((uint*)_image.scanLine(i)) + n;
             *p = ((*p) & ~mask);
             }
       }
@@ -114,9 +115,8 @@ Pattern::Pattern(QImage* img, int x, int y, int w, int h)
       uint mask = 0xffffffff << ww;
       int n = ((w + 31) / 32) - 1;
       for (int i = 0; i < h; ++i) {
-            uint* p = (uint*)_image.scanLine(i);
-            p += n;
-            *p = ((*p) & ~mask);
+            uint* p = ((uint*)_image.scanLine(i)) + n;
+            *p     &= ~mask;
             }
       }
 
@@ -128,10 +128,9 @@ void Pattern::dump() const
       {
       printf("pattern %d x %d\n", _image.width(), _image.height());
       for (int y = 0; y < _image.height(); ++y) {
-            for (int x = 0; x < _image.bytesPerLine(); ++x) {
-                  uchar c = *(_image.bits() + y * _image.bytesPerLine() + x);
-                  for (int i = 0; i < 8; ++i)
-                        printf("%c", (c & (0x1 << i)) ? '*' : '-');
+            for (int x = 0; x < _image.width(); ++x) {
+                  QRgb pixel = _image.pixel(x, y);
+                  printf("%c", pixel & 0xffffff ? '-' : '*');
                   }
             printf("\n");
             }

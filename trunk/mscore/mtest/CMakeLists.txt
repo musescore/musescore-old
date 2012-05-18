@@ -24,8 +24,10 @@ add_library(
       testutils.cpp
       mcursor.cpp
       ${PROJECT_SOURCE_DIR}/mscore/importmidi.cpp
+      ${PROJECT_SOURCE_DIR}/omr/importpdf.cpp
       ${PROJECT_SOURCE_DIR}/mscore/midifile.cpp
       ${PROJECT_SOURCE_DIR}/mscore/exportmidi.cpp
+      omr
       )
 
 add_executable(
@@ -52,6 +54,6 @@ add_custom_target(reporthtml
       WORKING_DIRECTORY "${PROJECT_BINARY_DIR}/mtest"
       )
 
-subdirs(libmscore)
+subdirs(libmscore omr)
 
 

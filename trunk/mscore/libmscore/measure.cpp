@@ -2019,7 +2019,8 @@ void Measure::read(const QDomElement& de, int staffIdx)
 
                   segment = getSegment(rest, score()->curTick);
                   segment->add(rest);
-
+                  if (!rest->duration().isValid())     // hack
+                        rest->setDuration(timesig()/timeStretch);
                   Fraction ts(timeStretch * rest->globalDuration());
 
                   score()->curTick += ts.ticks();

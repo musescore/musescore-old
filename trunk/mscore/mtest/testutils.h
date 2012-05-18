@@ -31,7 +31,9 @@ class MTest {
 
       MTest();
       Score* readScore(const QString& name);
+      Score* readCreatedScore(const QString& name);
       bool saveScore(Score*, const QString& name);
+      bool savePdf(Score*, const QString& name);
       bool saveCompareScore(Score*, const QString& saveName, const QString& compareWith);
       Element* writeReadElement(Element* element);
       void initMTest();

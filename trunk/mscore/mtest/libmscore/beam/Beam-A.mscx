@@ -105,7 +105,6 @@
           <l2>-1</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>1</Beam>
           <Note>
@@ -114,7 +113,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>1</Beam>
           <Note>
@@ -128,7 +126,6 @@
           <l2>8</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <BeamMode>begin</BeamMode>
           <durationType>eighth</durationType>
           <Beam>2</Beam>
@@ -138,7 +135,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>2</Beam>
           <Note>
@@ -152,7 +148,6 @@
           <l2>21</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>3</Beam>
           <Note>
@@ -161,7 +156,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>3</Beam>
           <Note>
@@ -194,7 +188,6 @@
           <l2>-4</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <BeamMode>begin</BeamMode>
           <durationType>eighth</durationType>
           <Beam>4</Beam>
@@ -204,7 +197,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>4</Beam>
           <Note>
@@ -217,7 +209,6 @@
           <l2>-5</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <BeamMode>begin</BeamMode>
           <durationType>eighth</durationType>
           <Beam>5</Beam>
@@ -227,7 +218,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>5</Beam>
           <Note>
@@ -241,7 +231,6 @@
           <l2>-8</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <BeamMode>begin</BeamMode>
           <durationType>eighth</durationType>
           <Beam>6</Beam>
@@ -251,7 +240,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>6</Beam>
           <Note>
@@ -265,7 +253,6 @@
           <l2>-8</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <BeamMode>begin</BeamMode>
           <durationType>eighth</durationType>
           <Beam>7</Beam>
@@ -275,7 +262,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>7</Beam>
           <Note>
@@ -299,7 +285,6 @@
           <l2>-9</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <BeamMode>begin</BeamMode>
           <durationType>eighth</durationType>
           <Beam>8</Beam>
@@ -309,7 +294,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>8</Beam>
           <Note>
@@ -323,7 +307,6 @@
           <l2>-12</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <BeamMode>begin</BeamMode>
           <durationType>eighth</durationType>
           <Beam>9</Beam>
@@ -333,7 +316,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>9</Beam>
           <Note>
@@ -347,7 +329,6 @@
           <l2>-15</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <BeamMode>begin</BeamMode>
           <durationType>eighth</durationType>
           <Beam>10</Beam>
@@ -357,7 +338,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>10</Beam>
           <Note>
@@ -380,7 +360,6 @@
           <l2>8</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>11</Beam>
           <Note>
@@ -389,7 +368,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>11</Beam>
           <Note>
@@ -402,7 +380,6 @@
           <l2>7</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <BeamMode>begin</BeamMode>
           <durationType>eighth</durationType>
           <Beam>12</Beam>
@@ -412,7 +389,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>12</Beam>
           <Note>
@@ -425,7 +401,6 @@
           <l2>7</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>13</Beam>
           <Note>
@@ -434,7 +409,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>13</Beam>
           <Note>
@@ -447,7 +421,6 @@
           <l2>4</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <BeamMode>begin</BeamMode>
           <durationType>eighth</durationType>
           <Beam>14</Beam>
@@ -457,7 +430,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>14</Beam>
           <Note>
@@ -477,7 +449,6 @@
           <l2>3</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>15</Beam>
           <Note>
@@ -486,7 +457,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>15</Beam>
           <Note>
@@ -500,7 +470,6 @@
           <l2>0</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <BeamMode>begin</BeamMode>
           <durationType>eighth</durationType>
           <Beam>16</Beam>
@@ -510,7 +479,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>16</Beam>
           <Note>
@@ -568,7 +536,6 @@
           <l2>0</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>18</Beam>
           <Note>
@@ -577,7 +544,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>18</Beam>
           <Note>
@@ -591,7 +557,6 @@
           <l2>1</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <BeamMode>begin</BeamMode>
           <durationType>eighth</durationType>
           <Beam>19</Beam>
@@ -601,7 +566,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>19</Beam>
           <Note>
@@ -615,7 +579,6 @@
           <l2>4</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>20</Beam>
           <Note>
@@ -624,7 +587,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>20</Beam>
           <Note>
@@ -638,7 +600,6 @@
           <l2>4</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <BeamMode>begin</BeamMode>
           <durationType>eighth</durationType>
           <Beam>21</Beam>
@@ -648,7 +609,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>21</Beam>
           <Note>
@@ -672,7 +632,6 @@
           <l2>4</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>22</Beam>
           <Note>
@@ -681,7 +640,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>22</Beam>
           <Note>
@@ -694,7 +652,6 @@
           <l2>4</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <BeamMode>begin</BeamMode>
           <durationType>eighth</durationType>
           <Beam>23</Beam>
@@ -704,7 +661,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>23</Beam>
           <Note>
@@ -717,7 +673,6 @@
           <l2>4</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>24</Beam>
           <Note>
@@ -726,7 +681,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>24</Beam>
           <Note>
@@ -749,7 +703,6 @@
           <l2>9</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>25</Beam>
           <Note>
@@ -758,7 +711,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>25</Beam>
           <Note>
@@ -771,7 +723,6 @@
           <l2>12</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <BeamMode>begin</BeamMode>
           <durationType>eighth</durationType>
           <Beam>26</Beam>
@@ -781,7 +732,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>26</Beam>
           <Note>
@@ -794,7 +744,6 @@
           <l2>13</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>27</Beam>
           <Note>
@@ -803,7 +752,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>27</Beam>
           <Note>
@@ -816,7 +764,6 @@
           <l2>16</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <BeamMode>begin</BeamMode>
           <durationType>eighth</durationType>
           <Beam>28</Beam>
@@ -826,7 +773,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>28</Beam>
           <Note>
@@ -849,7 +795,6 @@
           <l2>17</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>29</Beam>
           <Note>
@@ -858,7 +803,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>29</Beam>
           <Note>
@@ -871,7 +815,6 @@
           <l2>20</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <BeamMode>begin</BeamMode>
           <durationType>eighth</durationType>
           <Beam>30</Beam>
@@ -881,7 +824,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>30</Beam>
           <Note>
@@ -894,7 +836,6 @@
           <l2>21</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>31</Beam>
           <Note>
@@ -903,7 +844,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>31</Beam>
           <Note>
@@ -925,7 +865,6 @@
           <l2>7</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>32</Beam>
           <Note>
@@ -934,7 +873,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>32</Beam>
           <Note>
@@ -947,7 +885,6 @@
           <l2>7</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <BeamMode>begin</BeamMode>
           <durationType>eighth</durationType>
           <Beam>33</Beam>
@@ -957,7 +894,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>33</Beam>
           <Note>
@@ -971,7 +907,6 @@
           <l2>7</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>34</Beam>
           <Note>
@@ -980,7 +915,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>34</Beam>
           <Note>
@@ -994,7 +928,6 @@
           <l2>7</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <BeamMode>begin</BeamMode>
           <durationType>eighth</durationType>
           <Beam>35</Beam>
@@ -1004,7 +937,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>35</Beam>
           <Note>
@@ -1024,7 +956,6 @@
           <l2>7</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>36</Beam>
           <Note>
@@ -1033,7 +964,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>36</Beam>
           <Note>
@@ -1133,7 +1063,6 @@
           <l2>19</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <BeamMode>begin</BeamMode>
           <durationType>eighth</durationType>
           <Beam>40</Beam>
@@ -1184,7 +1113,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>42</Beam>
           <Note>
@@ -1208,7 +1136,6 @@
           <l2>16</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>43</Beam>
           <Note>
@@ -1217,7 +1144,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>43</Beam>
           <Note>
@@ -1231,7 +1157,6 @@
           <l2>16</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <BeamMode>begin</BeamMode>
           <durationType>eighth</durationType>
           <Beam>44</Beam>
@@ -1241,7 +1166,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>44</Beam>
           <Note>
@@ -1255,7 +1179,6 @@
           <l2>16</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>45</Beam>
           <Note>
@@ -1264,7 +1187,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>eighth</durationType>
           <Beam>45</Beam>
           <Note>

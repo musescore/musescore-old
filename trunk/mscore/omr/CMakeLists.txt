@@ -40,7 +40,7 @@ add_library (
       ${mocs}
       omrview.cpp pdf.cpp omrpage.cpp
       skew.cpp utils.cpp
-      omr.cpp pattern.cpp
+      omr.cpp pattern.cpp importpdf.cpp
       ${OCR_SRC}
       )
 

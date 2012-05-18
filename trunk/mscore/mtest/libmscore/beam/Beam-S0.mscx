@@ -104,7 +104,6 @@
           <l2>0</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <durationType>16th</durationType>
           <Beam>1</Beam>
           <Note>
@@ -113,7 +112,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>16th</durationType>
           <Beam>1</Beam>
           <Note>
@@ -313,7 +311,6 @@
             </Note>
           </Chord>
         <Chord>
-          <selected>1</selected>
           <durationType>16th</durationType>
           <Beam>6</Beam>
           <Note>
@@ -334,7 +331,6 @@
           <l2>20</l2>
           </Beam>
         <Chord>
-          <selected>1</selected>
           <durationType>16th</durationType>
           <Beam>7</Beam>
           <Note>

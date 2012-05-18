@@ -23,14 +23,24 @@ add_executable(
 
 target_link_libraries(
       ${TARGET}
+      ${QT_LIBRARIES}
+      ${QT_QTSCRIPT_LIBRARY_RELEASE}
+      ${QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE}
+      ${QT_QTTEST_LIBRARY}
       testutils
       libmscore
       msynth
-      ${QT_LIBRARIES}
-      ${QT_QTTEST_LIBRARY}
       zarchive
       z
-      rt
+      dl
+      pthread
+      omr
+      fitz
+      jbig2dec
+      jpeg
+      openjpeg
+      fontconfig
+      freetype
       )
 
 set_target_properties (

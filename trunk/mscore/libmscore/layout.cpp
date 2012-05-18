@@ -2077,8 +2077,8 @@ void Score::layoutPages()
 
 //---------------------------------------------------------
 //   layoutPage
-//    if remaining y space on page is greater (pageHeight*pageFillLimit)
-//    then increase system distance to fill page
+//    increase system distance upto maxSystemDistance
+//    to fill page
 //---------------------------------------------------------
 
 void Score::layoutPage(Page* page, int gaps, qreal restHeight)
@@ -2096,26 +2096,23 @@ void Score::layoutPage(Page* page, int gaps, qreal restHeight)
       if (MScore::layoutDebug || !gaps)
             return;
 
-      const qreal _spatium      = spatium();
-      const qreal maxSystemDist = styleS(ST_maxSystemDistance).val() * _spatium;
+      const qreal maxSystemDist = styleP(ST_maxSystemDistance);
       qreal extraDist           = restHeight / gaps;
 
       qreal y     = 0.0;
       qreal lastY = systems()->front()->pos().y() + systems()->front()->height();
-      int idx     = 0;
 
       foreach(System* system, *page->systems()) {
             qreal dy = system->pos().y() + y - lastY;
-            if (dy > maxSystemDist) {
-                  // restrict system distance
+
+            // restrict system distance
+            if (dy > maxSystemDist)
                   y = maxSystemDist + lastY - system->pos().y();
-                  }
+
             system->move(0, y);
-            if (system->addStretch()) {
-                  lastY = system->pos().y() + system->height();
+            lastY = system->pos().y() + system->height();
+            if (system->addStretch())
                   y += extraDist;
-                  }
-            ++idx;
             }
       }
 

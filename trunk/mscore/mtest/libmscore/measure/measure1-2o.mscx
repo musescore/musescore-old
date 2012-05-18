@@ -255,7 +255,6 @@ p, li { white-space: pre-wrap; }
           <durationType>quarter</durationType>
           <Note>
             <lid>28</lid>
-            <selected>1</selected>
             <pitch>65</pitch>
             <tpc>13</tpc>
             </Note>
