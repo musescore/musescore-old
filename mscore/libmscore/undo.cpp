@@ -2144,7 +2144,12 @@ void ChangeChordRestLen::flip()
       {
       TDuration od = cr->durationType();
       cr->setDurationType(d);
-      cr->setDuration(d.fraction());
+      if (d == TDuration::V_MEASURE) {
+            cr->setDuration(cr->measure()->len());
+            }
+      else {
+            cr->setDuration(d.fraction());
+            }
       d   = od;
       cr->score()->setLayout(cr->measure());
       }
