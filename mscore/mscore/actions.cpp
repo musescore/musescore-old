@@ -1901,9 +1901,9 @@ Shortcut Shortcut::sc[] = {
          STATE_EDIT | STATE_LYRICS_EDIT,
          0,
          "show-keys",
-         QT_TRANSLATE_NOOP("action","Insert text symbol"),
-         QT_TRANSLATE_NOOP("action","Insert Text Symbol..."),
-         QT_TRANSLATE_NOOP("action","Insert special characters and text symbols"),
+         QT_TRANSLATE_NOOP("action","Insert special characters"),
+         QT_TRANSLATE_NOOP("action","Insert Special Characters..."),
+         QT_TRANSLATE_NOOP("action","Insert special characters"),
           keys_ICON
          ),
       Shortcut(

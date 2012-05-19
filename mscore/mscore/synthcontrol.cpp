@@ -165,7 +165,7 @@ void SynthControl::updateSyntiValues()
 
 void SynthControl::setScore(Score* cs)
       {
-      setWindowTitle("MuseScore:Synthesizer " + (cs ? cs->name() : tr("no score")));
+      setWindowTitle("MuseScore: Synthesizer");
       Synth* sy = synti->synth("Fluid");
       soundFonts->clear();
       if (sy)
