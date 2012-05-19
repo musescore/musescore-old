@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MuseScore: Special Text Symbols</string>
+   <string>MuseScore: Special Characters</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
