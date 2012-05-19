@@ -24,8 +24,6 @@ add_executable(
 target_link_libraries(
       ${TARGET}
       ${QT_LIBRARIES}
-      ${QT_QTSCRIPT_LIBRARY_RELEASE}
-      ${QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE}
       ${QT_QTTEST_LIBRARY}
       testutils
       libmscore
