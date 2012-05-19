@@ -2,6 +2,9 @@
       - remove "apply" button from inspector
       - fix #15437: Creating rest via shortcut and undo causes crash
       - new commands: "toggle visibility" (shortcut "V"), "set visible", "set unvisible"
+     (lv)
+      - fix #15006: Use MusicXML schema to validate files before import
+        - add dialog in case of validation error, allowing to load file anyway
 17.5 (lv)
       - fix #15006: Use MusicXML schema to validate files before import
         - updated MusicXML demo- and testfiles for schema compliance
