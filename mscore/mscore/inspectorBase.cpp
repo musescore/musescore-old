@@ -137,7 +137,10 @@ void InspectorBase::valueChanged(int idx)
       const InspectorItem& ii = item(idx);
       if (ii.r)
             ii.r->setEnabled(!isDefault(idx));
-      inspector->enableApply(dirty());
+//      inspector->enableApply(dirty());
+      printf("valueChanged %d\n", idx);
+
+      apply();
       }
 
 //---------------------------------------------------------
