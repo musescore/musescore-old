@@ -2894,6 +2894,27 @@ void ScoreView::cmd(const QAction* a)
       else if (cmd == "next-lyric" || cmd == "prev-lyric") {
             editCmd(cmd);
             }
+      else if (cmd == "toggle-visible") {
+            _score->startCmd();
+            foreach(Element* e, _score->selection().elements())
+                  _score->undo(new ChangeProperty(e, P_VISIBLE, !e->getProperty(P_VISIBLE).toBool()));
+            _score->endCmd();
+            mscore->endCmd();
+            }
+      else if (cmd == "set-visible") {
+            _score->startCmd();
+            foreach(Element* e, _score->selection().elements())
+                  _score->undo(new ChangeProperty(e, P_VISIBLE, true));
+            _score->endCmd();
+            mscore->endCmd();
+            }
+      else if (cmd == "unset-visible") {
+            _score->startCmd();
+            foreach(Element* e, _score->selection().elements())
+                  _score->undo(new ChangeProperty(e, P_VISIBLE, false));
+            _score->endCmd();
+            mscore->endCmd();
+            }
       else
             _score->cmd(a);
       _score->processMidiInput();
