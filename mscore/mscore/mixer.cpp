@@ -80,7 +80,7 @@ void PartEdit::setPart(Part* p, Channel* a)
 InstrumentListEditor::InstrumentListEditor(QWidget* parent)
    : QScrollArea(parent)
       {
-      setWindowTitle(tr("MuseScore: Part List"));
+      setWindowTitle(tr("MuseScore: Mixer"));
       setWidgetResizable(true);
       setWindowFlags(Qt::Dialog);
       QWidget* area = new QWidget(this);
