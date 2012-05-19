@@ -145,8 +145,8 @@ class InspectorElementElement : public QWidget, Ui::InspectorElement {
       void colorChanged(QColor);
       void offsetXChanged(double);
       void offsetYChanged(double);
-      void visibleChanged(int);
       void resetVisibleClicked();
+      void apply();
 
    signals:
       void enableApply();
@@ -154,8 +154,6 @@ class InspectorElementElement : public QWidget, Ui::InspectorElement {
    public:
       InspectorElementElement(QWidget* parent = 0);
       void setElement(Element*);
-      void apply();
-      bool dirty() const;
       };
 
 //---------------------------------------------------------
@@ -170,7 +168,6 @@ class InspectorElement : public InspectorBase {
    public:
       InspectorElement(QWidget* parent);
       virtual void setElement(Element*);
-      virtual void apply();
       };
 
 //---------------------------------------------------------
@@ -222,10 +219,12 @@ class InspectorArticulation : public InspectorBase {
 
       Ui::InspectorArticulation ar;
 
+   public slots:
+      virtual void apply();
+
    public:
       InspectorArticulation(QWidget* parent);
       virtual void setElement(Element*);
-      virtual void apply();
       };
 
 //---------------------------------------------------------
@@ -237,10 +236,12 @@ class InspectorSpacer : public InspectorBase {
 
       Ui::InspectorSpacer sp;
 
+   public slots:
+      virtual void apply();
+
    public:
       InspectorSpacer(QWidget* parent);
       virtual void setElement(Element*);
-      virtual void apply();
       };
 
 //---------------------------------------------------------
@@ -265,7 +266,6 @@ class InspectorNote : public InspectorBase {
       bool dirty() const;
 
    private slots:
-      void checkDirty();
       void dot1Clicked();
       void dot2Clicked();
       void dot3Clicked();
@@ -276,7 +276,6 @@ class InspectorNote : public InspectorBase {
    public:
       InspectorNote(QWidget* parent);
       virtual void setElement(Element*);
-      virtual void apply();
       };
 
 //---------------------------------------------------------
@@ -290,10 +289,12 @@ class InspectorRest : public InspectorBase {
       InspectorSegment* iSegment;
       QCheckBox* small;
 
+   public slots:
+      virtual void apply();
+
    public:
       InspectorRest(QWidget* parent);
       virtual void setElement(Element*);
-      virtual void apply();
       bool dirty() const;
       };
 
@@ -310,7 +311,6 @@ class InspectorClef : public InspectorBase {
    public:
       InspectorClef(QWidget* parent);
       virtual void setElement(Element*);
-      virtual void apply();
       };
 
 //---------------------------------------------------------
@@ -322,20 +322,15 @@ class Inspector : public QDockWidget {
 
       QVBoxLayout* layout;
       InspectorBase* ie;
-      QPushButton* apply;
       Element* _element;
       QList<Element*> _el;
 
       virtual void closeEvent(QCloseEvent*);
 
-   private slots:
-      void applyClicked();
-
    signals:
       void inspectorVisible(bool);
 
    public slots:
-      void enableApply(bool val = true) { apply->setEnabled(val); }
       void reset();
 
    public:

@@ -72,14 +72,7 @@ Inspector::Inspector(QWidget* parent)
       mainWidget->setLayout(layout);
       ie        = 0;
       _element  = 0;
-      QHBoxLayout* hbox = new QHBoxLayout;
-      apply = new QPushButton;
-      apply->setText(tr("Apply"));
-      apply->setEnabled(false);
-      hbox->addWidget(apply);
       layout->addStretch(10);
-      layout->addLayout(hbox);
-      connect(apply, SIGNAL(clicked()), SLOT(applyClicked()));
       }
 
 //---------------------------------------------------------
@@ -98,20 +91,10 @@ void Inspector::closeEvent(QCloseEvent* ev)
 
 void Inspector::reset()
       {
-      if (ie)
+      if (ie) {
             ie->setElement(_element);
-      apply->setEnabled(false);
-      }
-
-//---------------------------------------------------------
-//   applyClicked
-//---------------------------------------------------------
-
-void Inspector::applyClicked()
-      {
-      if (ie)
-            ie->apply();
-      apply->setEnabled(false);
+            // ie->apply();
+            }
       }
 
 //---------------------------------------------------------
@@ -124,7 +107,6 @@ void Inspector::setElement(Element* e)
             delete ie;
             ie = 0;
             _element = e;
-            apply->setEnabled(_element != 0);
 
             if (_element == 0)
                   return;
@@ -146,8 +128,6 @@ void Inspector::setElement(Element* e)
             }
       _element = e;
       ie->setElement(_element);
-      apply->setVisible(true);
-      apply->setEnabled(false);
       }
 
 //---------------------------------------------------------
@@ -161,8 +141,6 @@ void Inspector::setElementList(const QList<Element*>& el)
       layout->insertWidget(0, ie);
       _element = 0;
       _el = el;
-      apply->setVisible(false);
-      apply->setEnabled(false);
       }
 
 //---------------------------------------------------------
@@ -176,24 +154,11 @@ InspectorElementElement::InspectorElementElement(QWidget* parent)
       connect(color,        SIGNAL(colorChanged(QColor)), SLOT(colorChanged(QColor)));
       connect(offsetX,      SIGNAL(valueChanged(double)), SLOT(offsetXChanged(double)));
       connect(offsetY,      SIGNAL(valueChanged(double)), SLOT(offsetYChanged(double)));
-      connect(visible,      SIGNAL(stateChanged(int)),    SLOT(visibleChanged(int)));
+      connect(visible,      SIGNAL(stateChanged(int)),    SLOT(apply()));
       connect(resetColor,   SIGNAL(clicked()), SLOT(resetColorClicked()));
       connect(resetX,       SIGNAL(clicked()), SLOT(resetXClicked()));
       connect(resetY,       SIGNAL(clicked()), SLOT(resetYClicked()));
       connect(resetVisible, SIGNAL(clicked()), SLOT(resetVisibleClicked()));
-      }
-
-//---------------------------------------------------------
-//   dirty
-//---------------------------------------------------------
-
-bool InspectorElementElement::dirty() const
-      {
-      qreal _spatium = e->score()->spatium();
-      return offsetX->value()     != (e->pos().x() / _spatium)
-         ||  offsetY->value()     != (e->pos().y() / _spatium)
-         ||  color->color()       != e->color()
-         ||  visible->isChecked() != e->visible();
       }
 
 //---------------------------------------------------------
@@ -204,27 +169,27 @@ void InspectorElementElement::setElement(Element* element)
       {
       e = element;
       elementName->setText(e->name());
-      color->setColor(e->color());
       qreal _spatium = e->score()->spatium();
+
+      color->blockSignals(true);
+      offsetX->blockSignals(true);
+      offsetY->blockSignals(true);
+      visible->blockSignals(true);
+
+      color->setColor(e->color());
       offsetX->setValue(e->pos().x() / _spatium);
       offsetY->setValue(e->pos().y() / _spatium);
       resetColor->setEnabled(e->color() != MScore::defaultColor);
       resetX->setEnabled(e->userOff().x() != 0.0);
       resetY->setEnabled(e->userOff().y() != 0.0);
-      visible->blockSignals(true);
       visible->setChecked(e->visible());
+
       visible->blockSignals(false);
+      color->blockSignals(false);
+      offsetX->blockSignals(false);
+      offsetY->blockSignals(false);
+
       resetVisible->setEnabled(!e->visible());
-      }
-
-//---------------------------------------------------------
-//   visibleChanged
-//---------------------------------------------------------
-
-void InspectorElementElement::visibleChanged(int)
-      {
-      resetVisible->setEnabled(!visible->isChecked());
-      emit enableApply();
       }
 
 //---------------------------------------------------------
@@ -234,7 +199,7 @@ void InspectorElementElement::visibleChanged(int)
 void InspectorElementElement::colorChanged(QColor)
       {
       resetColor->setEnabled(color->color() != MScore::defaultColor);
-      emit enableApply();
+      apply();
       }
 
 //---------------------------------------------------------
@@ -244,7 +209,7 @@ void InspectorElementElement::colorChanged(QColor)
 void InspectorElementElement::offsetXChanged(double)
       {
       resetX->setEnabled(offsetX->value() != e->ipos().x());
-      emit enableApply();
+      apply();
       }
 
 //---------------------------------------------------------
@@ -254,7 +219,7 @@ void InspectorElementElement::offsetXChanged(double)
 void InspectorElementElement::offsetYChanged(double)
       {
       resetY->setEnabled(offsetY->value() != e->ipos().y());
-      emit enableApply();
+      apply();
       }
 
 //---------------------------------------------------------
@@ -265,7 +230,7 @@ void InspectorElementElement::resetColorClicked()
       {
       color->setColor(MScore::defaultColor);
       resetColor->setEnabled(false);
-      emit enableApply();
+      apply();
       }
 
 //---------------------------------------------------------
@@ -277,7 +242,7 @@ void InspectorElementElement::resetXClicked()
       qreal _spatium = e->score()->spatium();
       offsetX->setValue(e->ipos().x() / _spatium);
       resetX->setEnabled(false);
-      emit enableApply();
+      apply();
       }
 
 //---------------------------------------------------------
@@ -288,7 +253,7 @@ void InspectorElementElement::resetVisibleClicked()
       {
       visible->setChecked(true);
       resetVisible->setEnabled(false);
-      emit enableApply();
+      apply();
       }
 
 //---------------------------------------------------------
@@ -300,7 +265,7 @@ void InspectorElementElement::resetYClicked()
       qreal _spatium = e->score()->spatium();
       offsetY->setValue(e->ipos().y() / _spatium);
       resetY->setEnabled(false);
-      emit enableApply();
+      apply();
       }
 
 //---------------------------------------------------------
@@ -309,8 +274,17 @@ void InspectorElementElement::resetYClicked()
 
 void InspectorElementElement::apply()
       {
+      resetVisible->setEnabled(!visible->isChecked());
+
+      qreal _spatium = e->score()->spatium();
+      if (offsetX->value()        == (e->pos().x() / _spatium)
+         &&  offsetY->value()     == (e->pos().y() / _spatium)
+         &&  color->color()       == e->color()
+         &&  visible->isChecked() == e->visible())
+            return;
+
       Score* score    = e->score();
-      qreal _spatium  = score->spatium();
+      score->startCmd();
       QPointF o(offsetX->value() * _spatium, offsetY->value() * _spatium);
       if (o != e->pos())
             score->undoChangeUserOffset(e, o - e->ipos());
@@ -318,6 +292,8 @@ void InspectorElementElement::apply()
             score->undoChangeProperty(e, P_COLOR, color->color());
       if (e->visible() != visible->isChecked())
             score->undoChangeProperty(e, P_VISIBLE, visible->isChecked());
+      score->endCmd();
+      mscore->endCmd();
       }
 
 //---------------------------------------------------------
@@ -329,7 +305,6 @@ InspectorElement::InspectorElement(QWidget* parent)
       {
       ie = new InspectorElementElement(this);
       layout->addWidget(ie);
-      connect(ie, SIGNAL(enableApply()), inspector, SLOT(enableApply()));
       }
 
 //---------------------------------------------------------
@@ -339,21 +314,6 @@ InspectorElement::InspectorElement(QWidget* parent)
 void InspectorElement::setElement(Element* e)
       {
       ie->setElement(e);
-      }
-
-//---------------------------------------------------------
-//   apply
-//---------------------------------------------------------
-
-void InspectorElement::apply()
-      {
-      Element* e = inspector->element();
-      Score* score = e->score();
-      score->startCmd();
-      ie->apply();
-      score->setLayoutAll(true);
-      score->endCmd();
-      mscore->endCmd();
       }
 
 //---------------------------------------------------------
@@ -580,7 +540,7 @@ void InspectorSegment::setElement(Segment* s)
 void InspectorSegment::leadingSpaceChanged(double)
       {
       resetLeadingSpace->setEnabled(leadingSpace->value() != 0.0);
-      emit enableApply();
+      apply();
       }
 
 //---------------------------------------------------------
@@ -590,7 +550,7 @@ void InspectorSegment::leadingSpaceChanged(double)
 void InspectorSegment::trailingSpaceChanged(double)
       {
       resetTrailingSpace->setEnabled(trailingSpace->value() != 0.0);
-      emit enableApply();
+      apply();
       }
 
 //---------------------------------------------------------
@@ -600,6 +560,7 @@ void InspectorSegment::trailingSpaceChanged(double)
 void InspectorSegment::resetLeadingSpaceClicked()
       {
       leadingSpace->setValue(0.0);
+      apply();
       }
 
 //---------------------------------------------------------
@@ -609,6 +570,7 @@ void InspectorSegment::resetLeadingSpaceClicked()
 void InspectorSegment::resetTrailingSpaceClicked()
       {
       trailingSpace->setValue(0.0);
+      apply();
       }
 
 //---------------------------------------------------------
@@ -617,12 +579,18 @@ void InspectorSegment::resetTrailingSpaceClicked()
 
 void InspectorSegment::apply()
       {
+      if (!dirty())
+            return;
+      Score* score = segment->score();
+      score->startCmd();
       qreal val = leadingSpace->value();
       if (segment->extraLeadingSpace().val() != val)
             segment->score()->undoChangeProperty(segment, P_LEADING_SPACE, val);
       val = trailingSpace->value();
       if (segment->extraTrailingSpace().val() != val)
             segment->score()->undoChangeProperty(segment, P_TRAILING_SPACE, val);
+      score->endCmd();
+      mscore->endCmd();
       }
 
 static const int heads[] = {
@@ -760,6 +728,7 @@ bool InspectorNoteBase::dirty() const
 void InspectorNoteBase::apply()
       {
       Score* score = note->score();
+      score->startCmd();
       bool b = small->isChecked();
       if (note->small() != b)
             score->undoChangeProperty(note, P_SMALL, b);
@@ -787,6 +756,8 @@ void InspectorNoteBase::apply()
             score->undoChangeProperty(note, P_VELO_OFFSET, velocity->value());
       if (note->veloType() != velocityType->currentIndex())
             score->undoChangeProperty(note, P_VELO_TYPE, velocityType->currentIndex());
+      score->endCmd();
+      mscore->endCmd();
       }
 
 //---------------------------------------------------------
@@ -796,7 +767,7 @@ void InspectorNoteBase::apply()
 void InspectorNoteBase::smallChanged(int)
       {
       resetSmall->setEnabled(small->isChecked());
-      emit enableApply();
+      apply();
       }
 
 //---------------------------------------------------------
@@ -806,7 +777,7 @@ void InspectorNoteBase::smallChanged(int)
 void InspectorNoteBase::mirrorHeadChanged(int)
       {
       resetMirrorHead->setEnabled(note->userMirror() != DH_AUTO);
-      emit enableApply();
+      apply();
       }
 
 //---------------------------------------------------------
@@ -816,7 +787,7 @@ void InspectorNoteBase::mirrorHeadChanged(int)
 void InspectorNoteBase::dotPositionChanged(int)
       {
       resetDotPosition->setEnabled(note->dotPosition() != AUTO);
-      emit enableApply();
+      apply();
       }
 
 //---------------------------------------------------------
@@ -826,7 +797,7 @@ void InspectorNoteBase::dotPositionChanged(int)
 void InspectorNoteBase::ontimeOffsetChanged(int)
       {
       resetOntimeOffset->setEnabled(note->onTimeUserOffset());
-      emit enableApply();
+      apply();
       }
 
 //---------------------------------------------------------
@@ -836,7 +807,7 @@ void InspectorNoteBase::ontimeOffsetChanged(int)
 void InspectorNoteBase::offtimeOffsetChanged(int)
       {
       resetOfftimeOffset->setEnabled(note->offTimeUserOffset());
-      emit enableApply();
+      apply();
       }
 
 //---------------------------------------------------------
@@ -846,7 +817,7 @@ void InspectorNoteBase::offtimeOffsetChanged(int)
 void InspectorNoteBase::noteHeadGroupChanged(int val)
       {
       resetNoteHeadGroup->setEnabled(val != 0);
-      emit enableApply();
+      apply();
       }
 
 //---------------------------------------------------------
@@ -856,7 +827,7 @@ void InspectorNoteBase::noteHeadGroupChanged(int val)
 void InspectorNoteBase::noteHeadTypeChanged(int val)
       {
       resetNoteHeadType->setEnabled(val != 0);
-      emit enableApply();
+      apply();
       }
 
 //---------------------------------------------------------
@@ -866,7 +837,7 @@ void InspectorNoteBase::noteHeadTypeChanged(int val)
 void InspectorNoteBase::tuningChanged(double val)
       {
       resetTuning->setEnabled(val != 0.0);
-      emit enableApply();
+      apply();
       }
 
 //---------------------------------------------------------
@@ -890,7 +861,7 @@ void InspectorNoteBase::velocityTypeChanged(int val)
                   break;
             }
       resetVelocityType->setEnabled(val != 0);
-      emit enableApply();
+      apply();
       }
 
 //---------------------------------------------------------
@@ -903,7 +874,7 @@ void InspectorNoteBase::velocityChanged(int val)
             _userVelocity = val;
       else
             _veloOffset = val;
-      emit enableApply();
+      apply();
       }
 
 //---------------------------------------------------------
@@ -1052,25 +1023,12 @@ InspectorNote::InspectorNote(QWidget* parent)
 
       layout->addLayout(hbox);
 
-      connect(iElement, SIGNAL(enableApply()), SLOT(checkDirty()));
-      connect(iNote,    SIGNAL(enableApply()), SLOT(checkDirty()));
-      connect(iChord,   SIGNAL(enableApply()), SLOT(checkDirty()));
-      connect(iSegment, SIGNAL(enableApply()), SLOT(checkDirty()));
       connect(dot1,     SIGNAL(clicked()),     SLOT(dot1Clicked()));
       connect(dot2,     SIGNAL(clicked()),     SLOT(dot2Clicked()));
       connect(dot3,     SIGNAL(clicked()),     SLOT(dot3Clicked()));
       connect(hook,     SIGNAL(clicked()),     SLOT(hookClicked()));
       connect(stem,     SIGNAL(clicked()),     SLOT(stemClicked()));
       connect(beam,     SIGNAL(clicked()),     SLOT(beamClicked()));
-      }
-
-//---------------------------------------------------------
-//   checkDirty
-//---------------------------------------------------------
-
-void InspectorNote::checkDirty()
-      {
-      inspector->enableApply(dirty());
       }
 
 //---------------------------------------------------------
@@ -1092,26 +1050,6 @@ void InspectorNote::setElement(Element* e)
       stem->setEnabled(note->chord()->stem());
       hook->setEnabled(note->chord()->hook());
       beam->setEnabled(note->chord()->beam());
-      }
-
-//---------------------------------------------------------
-//   apply
-//---------------------------------------------------------
-
-void InspectorNote::apply()
-      {
-      Note* note    = static_cast<Note*>(inspector->element());
-      Score*  score = note->score();
-      score->startCmd();
-
-      iElement->apply();
-      iNote->apply();
-      iChord->apply();
-      iSegment->apply();
-
-      score->setLayoutAll(true);
-      score->endCmd();
-      mscore->endCmd();
       }
 
 //---------------------------------------------------------
@@ -1217,20 +1155,6 @@ void InspectorNote::beamClicked()
       }
 
 //---------------------------------------------------------
-//   dirty
-//    return true if a property has changed
-//---------------------------------------------------------
-
-bool InspectorNote::dirty() const
-      {
-      return iElement->dirty()
-         || iNote->dirty()
-         || iChord->dirty()
-         || iSegment->dirty()
-         ;
-      }
-
-//---------------------------------------------------------
 //   InspectorRest
 //---------------------------------------------------------
 
@@ -1244,12 +1168,10 @@ InspectorRest::InspectorRest(QWidget* parent)
       QHBoxLayout* l = new QHBoxLayout;
       small          = new QCheckBox;
       small->setText(tr("Small"));
+      connect(small, SIGNAL(toggled(bool)), SLOT(apply()));
       l->addWidget(small);
       layout->addLayout(l);
       layout->addWidget(iSegment);
-      connect(iElement, SIGNAL(enableApply()), inspector, SLOT(enableApply()));
-      connect(iSegment, SIGNAL(enableApply()), inspector, SLOT(enableApply()));
-      connect(small,    SIGNAL(stateChanged(int)), inspector, SLOT(enableApply()));
       }
 
 //---------------------------------------------------------
@@ -1272,18 +1194,16 @@ void InspectorRest::setElement(Element* e)
 
 void InspectorRest::apply()
       {
-      Rest* rest       = static_cast<Rest*>(inspector->element());
-      Score* score     = rest->score();
-      score->startCmd();
+      Rest* rest = static_cast<Rest*>(inspector->element());
 
-      iElement->apply();
-      iSegment->apply();
       bool val = small->isChecked();
-      if (val != rest->small())
+      if (val != rest->small()) {
+            Score* score     = rest->score();
+            score->startCmd();
             score->undoChangeProperty(rest, P_SMALL, val);
-      score->setLayoutAll(true);
-      score->endCmd();
-      mscore->endCmd();
+            score->endCmd();
+            mscore->endCmd();
+            }
       }
 
 //---------------------------------------------------------
@@ -1298,8 +1218,6 @@ InspectorClef::InspectorClef(QWidget* parent)
 
       layout->addWidget(iElement);
       layout->addWidget(iSegment);
-      connect(iElement, SIGNAL(enableApply()), inspector, SLOT(enableApply()));
-      connect(iSegment, SIGNAL(enableApply()), inspector, SLOT(enableApply()));
       }
 
 //---------------------------------------------------------
@@ -1313,24 +1231,6 @@ void InspectorClef::setElement(Element* e)
 
       iElement->setElement(clef);
       iSegment->setElement(segment);
-      }
-
-//---------------------------------------------------------
-//   apply
-//---------------------------------------------------------
-
-void InspectorClef::apply()
-      {
-      Clef* clef   = static_cast<Clef*>(inspector->element());
-      Score* score = clef->score();
-      score->startCmd();
-
-      iElement->apply();
-      iSegment->apply();
-
-      score->setLayoutAll(true);
-      score->endCmd();
-      mscore->endCmd();
       }
 
 //---------------------------------------------------------
@@ -1394,7 +1294,7 @@ void InspectorChord::setElement(Chord* c)
 void InspectorChord::smallChanged(bool val)
       {
       resetSmall->setEnabled(val);
-      emit enableApply();
+      apply();
       }
 
 //---------------------------------------------------------
@@ -1404,7 +1304,7 @@ void InspectorChord::smallChanged(bool val)
 void InspectorChord::stemlessChanged(bool val)
       {
       resetStemless->setEnabled(val);
-      emit enableApply();
+      apply();
       }
 
 //---------------------------------------------------------
@@ -1414,7 +1314,7 @@ void InspectorChord::stemlessChanged(bool val)
 void InspectorChord::stemDirectionChanged(int idx)
       {
       resetStemDirection->setEnabled(idx != 0);
-      emit enableApply();
+      apply();
       }
 
 //---------------------------------------------------------
@@ -1424,6 +1324,7 @@ void InspectorChord::stemDirectionChanged(int idx)
 void InspectorChord::resetSmallClicked()
       {
       small->setChecked(false);
+      apply();
       }
 
 //---------------------------------------------------------
@@ -1433,6 +1334,7 @@ void InspectorChord::resetSmallClicked()
 void InspectorChord::resetStemlessClicked()
       {
       stemless->setChecked(false);
+      apply();
       }
 
 //---------------------------------------------------------
@@ -1442,6 +1344,7 @@ void InspectorChord::resetStemlessClicked()
 void InspectorChord::resetStemDirectionClicked()
       {
       stemDirection->setCurrentIndex(0);
+      apply();
       }
 
 //---------------------------------------------------------
@@ -1450,7 +1353,10 @@ void InspectorChord::resetStemDirectionClicked()
 
 void InspectorChord::apply()
       {
+      if (!dirty())
+            return;
       Score* score = chord->score();
+      score->startCmd();
       if (small->isChecked() != chord->small())
             score->undoChangeProperty(chord, P_SMALL, small->isChecked());
       if (stemless->isChecked() != chord->noStem())
@@ -1458,6 +1364,7 @@ void InspectorChord::apply()
       Direction d = Direction(stemDirection->currentIndex());
       if (d != chord->stemDirection())
             score->undoChangeProperty(chord, P_STEM_DIRECTION, d);
+      score->endCmd();
+      mscore->endCmd();
       }
-
 

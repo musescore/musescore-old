@@ -1,4 +1,5 @@
 19.5 (ws)
+      - remove "apply" button from inspector
       - fix #15437: Creating rest via shortcut and undo causes crash
       - new commands: "toggle visibility" (shortcut "V"), "set visible", "set unvisible"
 17.5 (lv)

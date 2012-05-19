@@ -59,10 +59,12 @@ class InspectorBase : public QWidget {
       virtual int inspectorItems() const { return 0; }
       void mapSignals();
 
+   public slots:
+      virtual void apply();
+
    public:
       InspectorBase(QWidget* parent);
       virtual void setElement(Element*);
-      virtual void apply();
       };
 
 #endif

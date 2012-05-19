@@ -959,19 +959,19 @@ MuseScore::MuseScore()
       menuHelp->addAction(tr("&Online Handbook"), this, SLOT(helpBrowser1()));
 
       menuHelp->addSeparator();
-      
+
       QAction *aboutAction = new QAction(tr("&About"), 0);
       aboutAction->setMenuRole(QAction::AboutRole);
       connect(aboutAction, SIGNAL(triggered()), this, SLOT(about()));
       menuHelp->addAction(aboutAction);
 
       menuHelp->addAction(tr("About &Qt"), this, SLOT(aboutQt()));
-      
+
       QAction *aboutMusicXMLAction = new QAction(tr("About &MusicXML"), 0);
       aboutMusicXMLAction->setMenuRole(QAction::ApplicationSpecificRole);
       connect(aboutMusicXMLAction, SIGNAL(triggered()), this, SLOT(aboutMusicXML()));
       menuHelp->addAction(aboutMusicXMLAction);
-          
+
 #if defined(Q_WS_MAC) || defined(Q_WS_WIN)
       menuHelp->addAction(tr("Check for &Update"), this, SLOT(checkForUpdate()));
 #endif
@@ -3608,7 +3608,6 @@ void MuseScore::midiNoteReceived(int pitch, bool ctrl)
 
 void MuseScore::switchLayer(const QString& s)
       {
-      int layer = 0;
       if (cs->switchLayer(s)) {
             cs->setLayoutAll(true);
             cs->update();
