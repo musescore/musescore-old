@@ -413,6 +413,28 @@ static bool initMusicXmlSchema(QXmlSchema& schema)
       }
 
 //---------------------------------------------------------
+//   musicXMLValidationErrorDialog
+//---------------------------------------------------------
+
+/**
+ Show a dialog displaying the MusicXML validation error(s)
+ and asks the user if he wants to try to load the file anyway.
+ Return true (try anyway) or false (don't)
+ */
+
+static bool musicXMLValidationErrorDialog(QString& text)
+      {
+      QMessageBox errorDialog;
+      errorDialog.setIcon(QMessageBox::Question);
+      errorDialog.setText(text);
+      errorDialog.setInformativeText("Do you want to try to load this file anyway ?");
+      errorDialog.setDetailedText("Detailed text here in future ...");
+      errorDialog.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+      errorDialog.setDefaultButton(QMessageBox::No);
+      return errorDialog.exec() == QMessageBox::Yes;
+      }
+
+//---------------------------------------------------------
 //   loader
 //---------------------------------------------------------
 
@@ -477,7 +499,9 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
       else {
             qDebug("LoadCompressedMusicXml: file '%s' is not a valid MusicXML file", qPrintable(qf->fileName()));
             MScore::lastError = QT_TRANSLATE_NOOP("file", "this is not a valid MusicXML file\n");
-            return false;
+            QString text = QString("File '%1' is not a valid MusicXML file").arg(qPrintable(qf->fileName()));
+            if (!musicXMLValidationErrorDialog(text))
+                  return false;
             }
 
       if (!_doc->setContent(data, false, &err, &line, &column)) {
@@ -522,7 +546,9 @@ bool MuseScore::importMusicXml(Score* score, const QString& name)
       else {
             qDebug("MuseScore::importMusicXml() file '%s' is not a valid MusicXML file", qPrintable(name));
             MScore::lastError = QT_TRANSLATE_NOOP("file", "this is not a valid MusicXML file\n");
-            return false;
+            QString text = QString("File '%1' is not a valid MusicXML file").arg(name);
+            if (!musicXMLValidationErrorDialog(text))
+                  return false;
             }
 
       // finally load the file
