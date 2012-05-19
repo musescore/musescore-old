@@ -744,4 +744,9 @@
     <key>prev-lyric</key>
     <seq>Ctrl+Space</seq>
     </SC>
+  <SC>
+    <key>toggle-visible</key>
+    <seq>V</seq>
+    </SC>
   </Shortcuts>
+

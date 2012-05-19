@@ -2410,6 +2410,24 @@ Shortcut Shortcut::sc[] = {
          "prev-lyric",
          QT_TRANSLATE_NOOP("action","previous syllable")
          ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
+         "toggle-visible",
+         QT_TRANSLATE_NOOP("action","toggle visibility")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
+         "set-visible",
+         QT_TRANSLATE_NOOP("action","set visible")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
+         "unset-visible",
+         QT_TRANSLATE_NOOP("action","set unvisible")
+         ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, 0)
       };
