@@ -966,6 +966,7 @@ QMenu* MuseScore::genCreateMenu(QWidget* parent)
       QMenu* measures = popup->addMenu(tr("&Measures"));
       measures->addAction(getAction("insert-measure"));
       measures->addAction(getAction("insert-measures"));
+      measures->addSeparator();
       measures->addAction(getAction("append-measure"));
       measures->addAction(getAction("append-measures"));
 
