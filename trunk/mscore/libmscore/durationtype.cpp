@@ -376,8 +376,6 @@ Fraction TDuration::fraction() const
             case V_BREVE:     z = 2; n = 1; break;
             case V_LONG:      z = 4; n = 1; break;
             case V_ZERO:      z = 0; n = 1; break;
-            case V_MEASURE:
-                  abort();
             default:          z = 0; n = 0; break;    // zero+invalid fraction
             }
       Fraction a(z, n);
