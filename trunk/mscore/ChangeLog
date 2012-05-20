@@ -1,3 +1,6 @@
+20.5 (lv)
+      - fix #15006: Use MusicXML schema to validate files before import
+        - add testfiles testInvalid.mxl and testInvalid.xml
 19.5 (ws)
       - remove "apply" button from inspector
       - fix #15437: Creating rest via shortcut and undo causes crash
