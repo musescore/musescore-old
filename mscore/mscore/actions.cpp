@@ -2240,9 +2240,9 @@ Shortcut Shortcut::sc[] = {
          0,
          "layer",
          Qt::ApplicationShortcut,
-         QT_TRANSLATE_NOOP("action","Layer"),
-         QT_TRANSLATE_NOOP("action","&Layer..."),
-         QT_TRANSLATE_NOOP("action","Layer")
+         QT_TRANSLATE_NOOP("action","Layers"),
+         QT_TRANSLATE_NOOP("action","&Layers..."),
+         QT_TRANSLATE_NOOP("action","Layers")
          ),
       Shortcut(
          STATE_NORMAL,

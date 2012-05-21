@@ -86,7 +86,7 @@ void QOscServer::readyRead()
         			    ++i;
         		      while ( data[ i ] != char( 0 ) )
         		            args += data[ i++ ];
-        
+                  i++; //move one byte more!
         			    if ( ! args.isEmpty() ) {
         				        QList<QVariant> list;
         				        foreach( QChar type, args ) {

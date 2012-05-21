@@ -95,7 +95,7 @@ void ScoreView::genPropertyMenu1(Element* e, QMenu* popup)
             if (e->flag(ELEMENT_HAS_TAG)) {
                   popup->addSeparator();
 
-                  QMenu* menuLayer = new QMenu(tr("Layers"));
+                  QMenu* menuLayer = new QMenu(tr("Layer"));
                   for (int i = 0; i < MAX_TAGS; ++i) {
                         QString tagName = score()->layerTags()[i];
                         if (!tagName.isEmpty()) {

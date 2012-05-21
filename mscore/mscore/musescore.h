@@ -427,7 +427,7 @@ class MuseScore : public QMainWindow {
       void oscOpen(QString path);
       void oscCloseAll();
       void oscTriggerPlugin(QString list);
-      void oscColorNote(QString list);
+      void oscColorNote(QVariantList list);
 #endif
       void createNewProfile();
       void deleteProfile();
