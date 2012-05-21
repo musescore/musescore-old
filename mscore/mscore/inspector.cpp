@@ -395,10 +395,10 @@ InspectorArticulation::InspectorArticulation(QWidget* parent)
 
       ar.setupUi(w);
       layout->addWidget(w);
-      connect(ar.x, SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
-      connect(ar.y, SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
-      connect(ar.direction, SIGNAL(currentIndexChanged(int)), inspector, SLOT(enableApply()));
-      connect(ar.anchor, SIGNAL(currentIndexChanged(int)), inspector, SLOT(enableApply()));
+      connect(ar.x,         SIGNAL(valueChanged(double)),     SLOT(apply()));
+      connect(ar.y,         SIGNAL(valueChanged(double)),     SLOT(apply()));
+      connect(ar.direction, SIGNAL(currentIndexChanged(int)), SLOT(apply()));
+      connect(ar.anchor,    SIGNAL(currentIndexChanged(int)), SLOT(apply()));
       }
 
 //---------------------------------------------------------
@@ -437,11 +437,15 @@ void InspectorArticulation::apply()
       qreal _spatium  = score->spatium();
 
       QPointF o(ar.x->value() * _spatium, ar.y->value() * _spatium);
+      Direction d = Direction(ar.direction->currentIndex());
+      ArticulationAnchor anchor = ArticulationAnchor(ar.anchor->currentIndex());
+
+      if (o == a->pos() && anchor == a->anchor() && d == a->direction())
+            return;
+
       score->startCmd();
       if (o != a->pos())
             score->undoChangeUserOffset(a, o - a->ipos());
-      Direction d = Direction(ar.direction->currentIndex());
-      ArticulationAnchor anchor = ArticulationAnchor(ar.anchor->currentIndex());
       if (anchor != a->anchor())
             score->undoChangeProperty(a, P_ARTICULATION_ANCHOR, int(anchor));
       if (d != a->direction())
