@@ -461,7 +461,7 @@ InspectorSpacer::InspectorSpacer(QWidget* parent)
 
       sp.setupUi(w);
       layout->addWidget(w);
-      connect(sp.height, SIGNAL(valueChanged(double)), inspector, SLOT(enableApply()));
+      connect(sp.height, SIGNAL(valueChanged(double)), SLOT(apply()));
       }
 
 //---------------------------------------------------------
@@ -486,11 +486,7 @@ void InspectorSpacer::apply()
       qreal space    = sp.height->value() * spacer->spatium();
       if (space != spacer->gap()) {
             score->startCmd();
-            //TODO make undoable
-            spacer->setGap(space);
-            score->setLayoutAll(true);
-            score->setDirty(true);
-
+            score->undoChangeProperty(spacer, P_SPACE, space);
             score->endCmd();
             mscore->endCmd();
             }

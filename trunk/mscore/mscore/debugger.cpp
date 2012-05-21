@@ -57,6 +57,7 @@
 #include "libmscore/keysig.h"
 #include "libmscore/sig.h"
 #include "libmscore/notedot.h"
+#include "libmscore/spacer.h"
 
 extern bool useFactorySettings;
 
@@ -305,6 +306,13 @@ void Debugger::updateList(Score* s)
                         if (mb->type() != MEASURE)
                               continue;
                         Measure* measure = (Measure*) mb;
+                        foreach (MStaff* ms, *measure->staffList()) {
+                              if (ms->_vspacerUp)
+                                    new ElementItem(si, ms->_vspacerUp);
+                              if (ms->_vspacerDown)
+                                    new ElementItem(si, ms->_vspacerDown);
+                              }
+
                         foreach(Spanner* s, measure->spannerFor()) {
                               SLine* sl = (SLine*)s;
                               ElementItem* si = new ElementItem(mi, s);

@@ -2175,6 +2175,5 @@ QVariant Beam::propertyDefault(P_ID id) const
             case P_BEAM_POS:       return beamPos();
             default:               return Element::propertyDefault(id);
             }
-      return QVariant();
       }
 

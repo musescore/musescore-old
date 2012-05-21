@@ -178,3 +178,51 @@ void Spacer::read(const QDomElement& de)
             }
       layout0();
       }
+
+//---------------------------------------------------------
+//   getProperty
+//---------------------------------------------------------
+
+QVariant Spacer::getProperty(P_ID propertyId) const
+      {
+      switch(propertyId) {
+            case P_SPACE: return gap();
+            default:
+                  return Element::getProperty(propertyId);
+            }
+      }
+
+//---------------------------------------------------------
+//   setProperty
+//---------------------------------------------------------
+
+bool Spacer::setProperty(P_ID propertyId, const QVariant& v)
+      {
+      switch(propertyId) {
+            case P_SPACE:
+                  setGap(v.toDouble());
+                  break;
+            default:
+                  if (!Element::setProperty(propertyId, v))
+                        return false;
+                  break;
+            }
+      score()->setLayoutAll(true);
+      setGenerated(false);
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyDefault
+//---------------------------------------------------------
+
+QVariant Spacer::propertyDefault(P_ID id) const
+      {
+      switch(id) {
+            case P_SPACE: return QVariant(0.0);
+            default:
+                  return Element::propertyDefault(id);
+            }
+      }
+
+

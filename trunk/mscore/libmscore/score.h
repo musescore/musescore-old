@@ -85,6 +85,7 @@ class Fingering;
 class QPainter;
 class FiguredBass;
 class UndoCommand;
+struct PageContext;
 
 extern bool showRubberBand;
 
@@ -360,7 +361,6 @@ class Score {
       void resetUserStretch();
 
       Page* addPage();
-      void layoutPage(Page* page, int gaps, qreal restHeight);
       bool layoutSystem(qreal& minWidth, qreal w, bool, bool);
       QList<System*> layoutSystemRow(qreal w, bool, bool);
       void processSystemHeader(Measure* m, bool);
@@ -882,6 +882,7 @@ class Score {
       void linkId(int);
       QList<Score*> scoreList();
       bool switchLayer(const QString& s);
+      void layoutPage(const PageContext&,  qreal);
       };
 
 extern Score* gscore;
