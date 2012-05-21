@@ -1421,9 +1421,9 @@ void Chord::layout()
                   rr = lhw;
             if (rr > rrr)
                   rrr = rr;
-//            qreal xx = note->pos().x() + headWidth + pos().x();
-//            if (xx > dotPosX())
-//                  setDotPosX(xx);
+            qreal xx = note->pos().x() + headWidth + pos().x();
+            if (xx > dotPosX())
+                  setDotPosX(xx);
             }
       if (dots()) {
             qreal x = dotPosX() + point(score()->styleS(ST_dotNoteDistance)

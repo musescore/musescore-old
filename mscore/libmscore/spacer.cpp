@@ -207,6 +207,7 @@ bool Spacer::setProperty(P_ID propertyId, const QVariant& v)
                         return false;
                   break;
             }
+      layout0();
       score()->setLayoutAll(true);
       setGenerated(false);
       return true;
