@@ -96,6 +96,9 @@ class System : public Element {
 
       QList<SpannerSegment*> _spannerSegments;
 
+      qreal _stretchDistance;
+      qreal _distance;
+
       void setDistanceUp(int n, qreal v)   { _staves[n]->setDistanceUp(v); }
       void setDistanceDown(int n, qreal v) { _staves[n]->setDistanceDown(v); }
 
@@ -163,12 +166,19 @@ class System : public Element {
       bool isVbox() const         { return _vbox;       }
       VBox* vbox() const          { return (VBox*)ml[0];       }
       void setVbox(bool v)        { _vbox = v;          }
-      bool sameLine() const       { return _sameLine;   }
-      bool addStretch() const     { return _addStretch; }
-      void setSameLine(bool v)    { _sameLine = v; }
-      void setAddStretch(bool v)  { _addStretch = v; }
 
       void layoutLyrics(Lyrics*, Segment*, int staffIdx);
+
+      bool addStretch() const     { return _addStretch; }
+      void setAddStretch(bool v)  { _addStretch = v; }
+      bool sameLine() const       { return _sameLine;   }
+      void setSameLine(bool v)    { _sameLine = v; }
+
+      qreal stretchDistance() const      { return _stretchDistance; }
+      void setStretchDistance(qreal val) { _stretchDistance = val;  }
+      void addStretchDistance(qreal val) { _stretchDistance += val;  }
+      qreal distance() const             { return _distance; }
+      void setDistance(qreal val)        { _distance = val;  }
       };
 
 typedef QList<System*>::iterator iSystem;

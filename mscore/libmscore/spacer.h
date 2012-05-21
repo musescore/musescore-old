@@ -56,6 +56,10 @@ class Spacer : public Element {
       virtual void spatiumChanged(qreal, qreal);
       void setGap(qreal sp);
       qreal gap() const     { return _gap; }
+
+      QVariant getProperty(P_ID propertyId) const;
+      bool setProperty(P_ID propertyId, const QVariant&);
+      QVariant propertyDefault(P_ID id) const;
       };
 
 #endif

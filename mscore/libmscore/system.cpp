@@ -330,10 +330,8 @@ void System::layout2()
                   userDist = score()->staff(staffIdx + 1)->userDist();
                   }
 
-            SysStaff* s  = _staves[staffIdx];
-            s->setDistanceDown(score()->styleS(downDistance).val() * _spatium + userDist);
-
-            qreal distDown = 0.0;
+            SysStaff* s    = _staves[staffIdx];
+            qreal distDown = score()->styleS(downDistance).val() * _spatium + userDist;
             qreal distUp   = 0.0;
             foreach(MeasureBase* m, ml) {
                   distDown = qMax(distDown, m->distanceDown(staffIdx));
@@ -341,10 +339,8 @@ void System::layout2()
                   distUp   = qMax(distUp,   m->distanceUp(staffIdx));
                   distUp   = qMax(distUp,   m->userDistanceUp(staffIdx));
                   }
-            if (distDown > s->distanceDown())
-                  s->setDistanceDown(distDown);
-
-            s->setDistanceUp(distUp);     // TODO: min?
+            s->setDistanceDown(distDown);
+            s->setDistanceUp(distUp);
 
             if (!s->show()) {
                   s->setbbox(QRectF());  // already done in layout() ?

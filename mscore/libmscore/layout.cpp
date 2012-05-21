@@ -582,7 +582,6 @@ void Score::layoutStage3()
 
 void Score::doLayout()
       {
-// printf("doLayout\n");
       {
       QWriteLocker locker(&_layoutLock);
 
@@ -1911,23 +1910,60 @@ struct SystemRow {
       qreal tm() const {
             qreal v = 0.0;
             foreach(System* s, systems) {
-                  if (!s->isVbox())
+                  if (!s->staves()->isEmpty())
                         v = qMax(s->distanceUp(0), v);
-                  else
-                        qDebug("distance for vbox? n %d\n", systems.size());
                   }
             return v;
             }
       qreal bm() const {
             qreal v = 0.0;
             foreach(System* s, systems) {
-                  if (!s->isVbox())
-                        v = qMax(s->distanceDown(s->staves()->size() - 1), v);
-                  else
-                        qDebug("distance for vbox? n %d\n", systems.size());
+                  int staffIdx = s->staves()->size() - 1;
+                  if (staffIdx >= 0)
+                        v = qMax(s->distanceDown(staffIdx), v);
                   }
             return v;
             }
+      void clear() {
+            systems.clear();
+            }
+      };
+
+//---------------------------------------------------------
+//   PageContext
+//---------------------------------------------------------
+
+struct PageContext {
+      qreal _spatium;
+      qreal slb;
+      Score* score;
+      Page* page;
+      qreal ey;
+      qreal y;
+      int gaps;
+      SystemRow sr;
+
+      System* lastSystem;
+      qreal prevDist;
+
+      PageContext(Score* s) : score(s) {
+            _spatium = score->spatium();
+            slb      = score->styleS(ST_staffLowerBorder).val() * _spatium;
+            }
+      void newPage() {
+            page       = score->getEmptyPage();
+            ey         = page->height() - page->bm();
+            y          = page->tm();
+            gaps       = 0;
+            lastSystem = 0;
+            prevDist   = 0.0;
+            }
+      void layoutPage() {
+            qreal d = sr.isVbox() ? sr.vbox()->bottomGap() : slb;
+            score->layoutPage(*this, d);
+            }
+      qreal bm() const { return sr.bm(); }
+      qreal tm() const { return sr.tm(); }
       };
 
 //---------------------------------------------------------
@@ -1944,135 +1980,116 @@ void Score::layoutPages()
       const qreal systemFrameDistance = styleS(ST_systemFrameDistance).val() * _spatium;
       const qreal frameSystemDistance = styleS(ST_frameSystemDistance).val() * _spatium;
 
-      curPage            = 0;
-      Page* page         = getEmptyPage();
-      qreal ey           = page->height() - page->bm();
-      qreal y            = page->tm();
-      int nSystems       = _systems.size();
-      System* lastSystem = 0;
-      int gaps           = 0;
+      curPage = 0;
 
-      qreal prevDist     = .0;
+      PageContext pC(this);
+      pC.newPage();
+
+      int nSystems = _systems.size();
 
       for (int i = 0; i < nSystems; ++i) {
             //
             // collect system row
             //
-            SystemRow sr;
+            pC.sr.clear();
             for (;;) {
                   System* system = _systems[i];
-                  sr.systems.append(system);
+                  pC.sr.systems.append(system);
                   if (i+1 == nSystems)
                         break;
                   if (!_systems[i+1]->sameLine())
                         break;
                   ++i;
                   }
-
-            qreal h  = sr.height();
             qreal tmargin = 0.0;    // top system margin
             qreal bmargin;          // bottom system margin
 
-            if (sr.isVbox()) {
-                  VBox* vbox = sr.vbox();
+            if (pC.sr.isVbox()) {
+                  VBox* vbox = pC.sr.vbox();
                   bmargin  = vbox->bottomGap();
                   tmargin += vbox->topGap();
-                  if (lastSystem) {
-                       if (lastSystem->isVbox()) {
-                              tmargin += lastSystem->vbox()->bottomGap();
-                              }
-                        else {
+                  if (pC.lastSystem) {
+                       if (pC.lastSystem->isVbox())
+                              tmargin += pC.lastSystem->vbox()->bottomGap();
+                        else
                               tmargin += systemFrameDistance;
-                              }
                         }
                   }
             else {
-                  if (lastSystem) {
-                        if (lastSystem->isVbox())
-                              tmargin = lastSystem->vbox()->bottomGap() + frameSystemDistance;
+                  if (pC.lastSystem) {
+                        if (pC.lastSystem->isVbox())
+                              tmargin = pC.lastSystem->vbox()->bottomGap() + frameSystemDistance;
                         else
-                              tmargin = qMax(sr.tm(), systemDist);
+                              tmargin = qMax(pC.tm(), systemDist);
                         }
-                  else {
-                        tmargin = qMax(sr.tm(), sub);
-                        }
-                  bmargin = qMax(sr.bm(), slb);
+                  else
+                        tmargin = qMax(pC.tm(), sub);
+                  bmargin = qMax(pC.bm(), slb);
                   }
 
-            tmargin = qMax(tmargin, prevDist);
-            prevDist = bmargin;
+            tmargin     = qMax(tmargin, pC.prevDist);
+            pC.prevDist = bmargin;
 
-            if (lastSystem && (y + h + bmargin + tmargin > ey)) {
+            qreal h = pC.sr.height();
+            if (pC.lastSystem && (pC.y + h + tmargin + bmargin > pC.ey)) {
                   //
                   // prepare next page
                   //
                   qreal d;
-                  if (lastSystem->isVbox())
-                        d = lastSystem->vbox()->bottomGap();
+                  if (pC.lastSystem->isVbox())
+                        d = pC.lastSystem->vbox()->bottomGap();
                   else
                         d = slb;
-                  layoutPage(page, gaps, ey - y - d);
-                  page = getEmptyPage();
-                  ey   = page->height() - page->bm();
-                  gaps = 0;
-                  y    = page->tm();
-                  if (sr.isVbox())
-                        tmargin = sr.vbox()->topGap();
+                  layoutPage(pC, d);
+                  pC.newPage();
+                  if (pC.sr.isVbox())
+                        tmargin = pC.sr.vbox()->topGap();
                   else
-                        tmargin = qMax(sr.tm(), sub);
-                  lastSystem = 0;
+                        tmargin = qMax(pC.sr.tm(), sub);
                   }
 
-            qreal x = page->lm();
-            foreach(System* system, sr.systems) {
-                  system->setPos(x, y + tmargin);
+            qreal x = pC.page->lm();
+            pC.y   += tmargin;
+
+            foreach(System* system, pC.sr.systems) {
+                  system->setPos(x, pC.y);
                   x += system->width();
-                  page->appendSystem(system);
+                  pC.page->appendSystem(system);
                   system->setAddStretch(false);
                   }
 
-            if (lastSystem) {
-                  bool addStretch = !lastSystem->isVbox() && !sr.isVbox();
-                  lastSystem->setAddStretch(addStretch);
+            if (pC.lastSystem) {
+                  bool addStretch = !pC.lastSystem->isVbox() && !pC.sr.isVbox();
+                  pC.lastSystem->setAddStretch(addStretch);
                   if (addStretch)
-                        ++gaps;
+                        ++pC.gaps;
                   }
 
-            y += (h + tmargin);
-            if (sr.pageBreak() && (_layoutMode != LayoutFloat && _layoutMode != LayoutSystem)) {
-                  qreal d;
-                  if (sr.isVbox())
-                        d = sr.vbox()->bottomGap();
-                  else
-                        d = slb;
-                  layoutPage(page, gaps, ey - y - d);
-                  if ((i + 1) == nSystems) {
-                        page = 0;
+            pC.y += h;
+            if (pC.sr.pageBreak() && (_layoutMode == LayoutPage)) {
+                  if ((i + 1) == nSystems)
                         break;
-                        }
-                  page       = getEmptyPage();
-                  ey         = page->height() - page->bm();
-                  gaps       = 0;
-                  y          = page->tm();
-                  lastSystem = 0;
-                  prevDist   = 0;
+                  pC.layoutPage();
+                  pC.newPage();
                   }
-            else {
-                  lastSystem = sr.systems.back();
-                  }
-            }
-      if (page) {
-            qreal d;
-            if (lastSystem->isVbox())
-                  d = lastSystem->vbox()->bottomGap();
             else
-                  d = slb;
-            layoutPage(page, gaps, ey - y - d);
+                  pC.lastSystem = pC.sr.systems.back();
             }
+      if (pC.page)
+            pC.layoutPage();
 
-      // TODO: make undoable:
+      // Remove not needed pages. TODO: make undoable:
       while (_pages.size() > curPage)
             _pages.takeLast();
+      }
+
+//---------------------------------------------------------
+//   systemDistCompare
+//---------------------------------------------------------
+
+static bool systemDistCompare(System* s1, System* s2)
+      {
+      return s1->distance() < s2->distance();
       }
 
 //---------------------------------------------------------
@@ -2081,38 +2098,79 @@ void Score::layoutPages()
 //    to fill page
 //---------------------------------------------------------
 
-void Score::layoutPage(Page* page, int gaps, qreal restHeight)
+void Score::layoutPage(const PageContext& pC, qreal d)
       {
-      if (!gaps && (_layoutMode == LayoutFloat)) {
-            qreal y = restHeight * .5;
-            int n = page->systems()->size();
-            for (int i = 0; i < n; ++i) {
-                  System* system = page->systems()->at(i);
-                  system->move(0, y);
+      Page* page       = pC.page;
+      int gaps         = pC.gaps;
+      qreal restHeight = pC.ey - pC.y - d;
+
+      if (!gaps || MScore::layoutDebug) {
+            if (_layoutMode == LayoutFloat) {
+                  qreal y = restHeight * .5;
+                  int n = page->systems()->size();
+                  for (int i = 0; i < n; ++i) {
+                        System* system = page->systems()->at(i);
+                        system->move(0, y);
+                        }
                   }
             return;
             }
 
-      if (MScore::layoutDebug || !gaps)
-            return;
+      const qreal maxStretch = styleP(ST_maxSystemDistance) - styleP(ST_minSystemDistance);
 
-      const qreal maxSystemDist = styleP(ST_maxSystemDistance);
-      qreal extraDist           = restHeight / gaps;
+      QList<System*> slist;
+      int n = page->systems()->size();
+      for (int i = 0; i < n; ++i) {
+            System* system = page->systems()->at(i);
+            qreal lastY1   = system->pos().y() + system->height();
 
-      qreal y     = 0.0;
-      qreal lastY = systems()->front()->pos().y() + systems()->front()->height();
+            if (system->addStretch()) {
+                  System* ns = page->systems()->at(i + 1);
+                  qreal dist = ns->pos().y() - lastY1;
+                  system->setDistance(dist);
+                  slist.append(system);
+                  system->setStretchDistance(0.0);
+                  }
+            }
+      qSort(slist.begin(), slist.end(), systemDistCompare);
 
-      foreach(System* system, *page->systems()) {
-            qreal dy = system->pos().y() + y - lastY;
+      n = slist.size();
+      for (int i = 0; i < (n-1); ++i) {
+            System* s1 = slist.at(i);
+            System* s2 = slist.at(i + 1);
+            qreal td = s2->distance() - s1->distance();
+            if (td > 0.001) {
+                  int nn = i + 1;
+                  qreal tdd = td * nn;
+                  if (tdd > restHeight) {
+                        tdd = restHeight;
+                        td  = tdd / nn;
+                        }
+                  if (s1->stretchDistance() + td > maxStretch) {
+                        td = maxStretch - s1->stretchDistance();
+                        tdd = td * nn;
+                        }
+                  for (int k = 0; k <= i; ++k)
+                        slist.at(k)->addStretchDistance(td);
+                  restHeight -= tdd;
+                  }
+            }
+      qreal td = restHeight / n;
+      if (td > 0.001) {
+            qreal sd = slist.at(0)->stretchDistance();
+            if (sd + td > maxStretch)
+                  td = maxStretch - sd;
+            for (int k = 0; k < n; ++k)
+                  slist.at(k)->addStretchDistance(td);
+            }
 
-            // restrict system distance
-            if (dy > maxSystemDist)
-                  y = maxSystemDist + lastY - system->pos().y();
-
+      qreal y = 0.0;
+      n = page->systems()->size();
+      for (int i = 0; i < n; ++i) {
+            System* system = page->systems()->at(i);
             system->move(0, y);
-            lastY = system->pos().y() + system->height();
             if (system->addStretch())
-                  y += extraDist;
+                  y += system->stretchDistance();
             }
       }
 

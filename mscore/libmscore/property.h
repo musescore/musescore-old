@@ -83,6 +83,7 @@ enum P_ID {
       P_BEAM_POS,
       P_BEAM_MODE,
       P_USER_LEN,       // used for stems
+      P_SPACE,          // used for spacer
 
       P_END
       };

@@ -1,4 +1,6 @@
-20.5 (lv)
+21.5 (ws)
+      - fix a page layout bug: weird behaviour of system spacer element
+      (lv)
       - fix #15006: Use MusicXML schema to validate files before import
         - add testfiles testInvalid.mxl and testInvalid.xml
 19.5 (ws)
