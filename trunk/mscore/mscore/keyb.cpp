@@ -384,7 +384,7 @@ void ScoreView::editKey(QKeyEvent* ev)
             ed.pos = grip[curGrip].center() + delta;
       editObject->editDrag(ed);
       updateGrips();
-      _score->end();
+      _score->update();
       mscore->endCmd();
       ev->accept();
       }
