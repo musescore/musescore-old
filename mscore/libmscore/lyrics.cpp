@@ -210,7 +210,8 @@ void Lyrics::layout()
             setTextStyle(score()->textStyle((_no % 2) ? TEXT_STYLE_LYRIC2 : TEXT_STYLE_LYRIC1));
       Text::layout();
       qreal lh = lineSpacing() * score()->styleD(ST_lyricsLineHeight);
-
+      if(!parent()) // palette & clone trick
+          return;
       System* sys = measure()->system();
       if (sys == 0) {
             qDebug("lyrics layout: no system!");

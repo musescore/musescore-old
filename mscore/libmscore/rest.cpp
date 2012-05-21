@@ -67,8 +67,9 @@ void Rest::draw(QPainter* painter) const
       qreal _spatium = spatium();
 
       painter->setPen(curColor());
-      Measure* m = measure();
-      if (m && m->multiMeasure()) {
+      
+      if (parent() && measure() && measure()->multiMeasure()) {
+            Measure* m = measure();
             int n     = m->multiMeasure();
             qreal pw = _spatium * .7;
             QPen pen(painter->pen());
@@ -323,7 +324,7 @@ void Rest::layout()
       int line        = lrint(userOff().y() / _spatium); //  + ((staff()->lines()-1) * 2);
       int lineOffset  = 0;
 
-      if (measure()->mstaff(staffIdx())->hasVoices) {
+      if (segment() && measure() && measure()->mstaff(staffIdx())->hasVoices) {
             // move rests in a multi voice context
             bool up = (voice() == 0) || (voice() == 2);       // TODO: use style values
             switch(durationType().type()) {
