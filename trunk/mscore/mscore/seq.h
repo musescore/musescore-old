@@ -120,7 +120,7 @@ class Seq : public QObject, public Sequencer {
       void setPos(int);
       void playEvent(const Event&);
       void guiToSeq(const SeqMsg& msg);
-      void metronome(unsigned n, float* l, float* r);
+      void metronome(unsigned n, float* l);
 
    private slots:
       void seqMessage(int msg);
@@ -168,7 +168,7 @@ class Seq : public QObject, public Sequencer {
       bool isStopped() const    { return state == TRANSPORT_STOP; }
 
       void processMessages();
-      void process(unsigned, float*, float*);
+      void process(unsigned, float*);
       QList<QString> inputPorts();
       int getEndTick() const    { return endTick;  }
       bool isRealtime() const   { return true;     }

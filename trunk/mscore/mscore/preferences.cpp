@@ -128,12 +128,14 @@ void Preferences::init()
       useAlsaAudio       = false;
       useJackAudio       = false;
       usePortaudioAudio  = true;
+      usePulseAudio      = false;
       useJackMidi        = false;
 #else
       useAlsaAudio       = false;
       useJackAudio       = false;
       usePortaudioAudio  = true;
       useJackMidi        = false;
+      usePulseAudio      = true;
 #endif
 
       midiPorts          = 2;
@@ -276,6 +278,7 @@ void Preferences::write()
       s.setValue("useJackAudio",       useJackAudio);
       s.setValue("useJackMidi",        useJackMidi);
       s.setValue("usePortaudioAudio",  usePortaudioAudio);
+      s.setValue("usePulseAudio",      usePulseAudio);
       s.setValue("midiPorts",          midiPorts);
       s.setValue("rememberLastMidiConnections", rememberLastMidiConnections);
 
@@ -436,6 +439,7 @@ void Preferences::read()
       useJackAudio       = s.value("useJackAudio", useJackAudio).toBool();
       useJackMidi        = s.value("useJackMidi",  useJackMidi).toBool();
       usePortaudioAudio  = s.value("usePortaudioAudio", usePortaudioAudio).toBool();
+      usePulseAudio      = s.value("usePulseAudio", usePulseAudio).toBool();
 
       alsaDevice         = s.value("alsaDevice", alsaDevice).toString();
       alsaSampleRate     = s.value("alsaSampleRate", alsaSampleRate).toInt();
@@ -632,6 +636,9 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 #ifndef USE_PORTMIDI
       portmidiDriverInput->setVisible(false);
 #endif
+#ifndef USE_PULSEAUDIO
+      pulseaudioDriver->setVisible(false);
+#endif
 
       QButtonGroup* fgButtons = new QButtonGroup(this);
       fgButtons->setExclusive(true);
@@ -696,7 +703,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 
       // update values after ui setup
       updateValues(&preferences);
-          
+
       connect(recordButtons,          SIGNAL(buttonClicked(int)), SLOT(recordButtonClicked(int)));
       connect(midiRemoteControlClear, SIGNAL(clicked()), SLOT(midiRemoteControlClearClicked()));
       connect(sfOpenButton,           SIGNAL(clicked()), SLOT(selectSoundFont()));
@@ -842,6 +849,7 @@ void PreferenceDialog::updateValues(Preferences* p)
       alsaDriver->setChecked(p->useAlsaAudio);
       jackDriver->setChecked(p->useJackAudio);
       portaudioDriver->setChecked(p->usePortaudioAudio);
+      pulseaudioDriver->setChecked(p->usePulseAudio);
       useJackMidi->setChecked(p->useJackMidi);
 
       alsaDevice->setText(p->alsaDevice);
@@ -1295,6 +1303,7 @@ void PreferenceDialog::apply()
          (preferences.useAlsaAudio != alsaDriver->isChecked())
          || (preferences.useJackAudio != jackDriver->isChecked())
          || (preferences.usePortaudioAudio != portaudioDriver->isChecked())
+         || (preferences.usePulseAudio != pulseaudioDriver->isChecked())
          || (preferences.useJackMidi != useJackMidi->isChecked())
          || (preferences.alsaDevice != alsaDevice->text())
          || (preferences.alsaSampleRate != alsaSampleRate->currentText().toInt())
@@ -1305,6 +1314,7 @@ void PreferenceDialog::apply()
             preferences.useAlsaAudio       = alsaDriver->isChecked();
             preferences.useJackAudio       = jackDriver->isChecked();
             preferences.usePortaudioAudio  = portaudioDriver->isChecked();
+            preferences.usePulseAudio      = pulseaudioDriver->isChecked();
             preferences.useJackMidi        = useJackMidi->isChecked();
             preferences.alsaDevice         = alsaDevice->text();
             preferences.alsaSampleRate     = alsaSampleRate->currentText().toInt();

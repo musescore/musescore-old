@@ -93,6 +93,7 @@ struct Preferences {
       bool useAlsaAudio;
       bool useJackAudio;
       bool usePortaudioAudio;
+      bool usePulseAudio;
       bool useJackMidi;
       int midiPorts;
       bool rememberLastMidiConnections;

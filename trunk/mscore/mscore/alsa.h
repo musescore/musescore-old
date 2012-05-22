@@ -130,7 +130,7 @@ class AlsaAudio : public Driver {
       virtual int getState();
       virtual int sampleRate() const;
       void alsaLoop();
-      void write(int n, void* l, void* r);
+      void write(int n, void* l);
 
       virtual void midiRead();
 

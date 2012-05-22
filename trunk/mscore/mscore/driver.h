@@ -41,13 +41,13 @@ class Driver {
       virtual bool init() = 0;
       virtual bool start() = 0;
       virtual bool stop() = 0;
-      virtual QList<QString> inputPorts() = 0;
+      virtual QList<QString> inputPorts() { return QList<QString>(); }
       virtual void stopTransport() = 0;
       virtual void startTransport() = 0;
       virtual int getState() = 0;
       virtual int sampleRate() const = 0;
-      virtual void registerPort(const QString& name, bool input, bool midi) = 0;
-      virtual void unregisterPort(int) = 0;
+      virtual void registerPort(const QString& name, bool input, bool midi) {}
+      virtual void unregisterPort(int) {}
       virtual void putEvent(const Event&, unsigned /*framePos*/) {}
       virtual void midiRead() {}
       };

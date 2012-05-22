@@ -144,7 +144,7 @@ void Aeolus::proc_queue (uint32_t k)
 //   process
 //---------------------------------------------------------
 
-void Aeolus::process(unsigned nframes, float* lout, float* rout, float gain)
+void Aeolus::process(unsigned nframes, float* out, float gain)
       {
       for (int n = 0; n < NNOTES; n++) {
             int m = _keymap[n];
@@ -198,8 +198,8 @@ void Aeolus::process(unsigned nframes, float* lout, float* rout, float gain)
                   nout = PERIOD;
                   k += PERIOD;
                   }
-            *lout++ += gain * loutb[PERIOD - nout];
-            *rout++ += gain * routb[PERIOD - nout];
+            *out++ += gain * loutb[PERIOD - nout];
+            *out++ += gain * routb[PERIOD - nout];
             --nout;
             --nframes;
             }
