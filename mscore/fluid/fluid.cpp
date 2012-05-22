@@ -483,9 +483,9 @@ void Fluid::program_reset()
 //   process
 //---------------------------------------------------------
 
-void Fluid::process(unsigned len, float* lout, float* rout, float gain)
+void Fluid::process(unsigned len, float* out, float gain)
       {
-      const int byte_size = len * sizeof(float);
+      const int byte_size = len * sizeof(float) * 2;
 
       /* clean the audio buffers */
       memset(left_buf,  0, byte_size);
@@ -508,8 +508,8 @@ void Fluid::process(unsigned len, float* lout, float* rout, float gain)
             mutex.unlock();
             }
       for (unsigned i = 0; i < len; i++) {
-            *lout++ += gain * left_buf[i];
-            *rout++ += gain * right_buf[i];
+            *out++ += gain * left_buf[i];
+            *out++ += gain * right_buf[i];
             }
       }
 

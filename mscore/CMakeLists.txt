@@ -129,6 +129,7 @@ endif (SOUNDFONT3)
 
 include ( ${PROJECT_SOURCE_DIR}/cmake/UsePkgConfig1.cmake )
 include ( ${PROJECT_SOURCE_DIR}/cmake/TargetDoc.cmake)
+include ( ${PROJECT_SOURCE_DIR}/cmake/FindPulseAudio.cmake)
 
 ##
 ##  look for Qt4
@@ -195,6 +196,22 @@ else (APPLE OR MINGW)
       endif (NOT ALSA_INCDIR)
 endif (APPLE OR MINGW)
 
+##
+## pulseaudio
+##
+
+if (APPLE OR MINGW)
+      set (USE_PULSEAUDIO 0)
+else (APPLE OR MINGW)
+      if (PULSEAUDIO_FOUND)
+            set(USE_PULSEAUDIO 1)
+            message("Pulseaudio found.")
+      else (PULSEAUDIO_FOUND)
+            set(USE_PULSEAUDIO 0)
+            message("Pulseaudio not found.")
+      endif (PULSEAUDIO_FOUND)
+endif (APPLE OR MINGW)
+
 
 ##
 ## find jack >= JACK_MIN_VERSION
@@ -253,7 +270,8 @@ if (MINGW)
       set ( USE_PORTMIDI  1 )
 else (MINGW)
    if (APPLE)
-      set ( USE_PORTMIDI  1 )
+      set (USE_PORTMIDI   1)
+      set (USE_PULSEAUDIO 0)
       PKGCONFIG (portaudio-2.0 19 PORTAUDIO_INCDIR PORTAUDIO_LIBDIR PORTAUDIO_LIB PORTAUDIO_CPP )
       if (PORTAUDIO_INCDIR)
    	message("portaudio detected ${PORTAUDIO_INCDIR} ${PORTAUDIO_LIBDIR} ${PORTAUDIO_LIB}")
@@ -263,7 +281,8 @@ else (MINGW)
          set ( USE_PORTAUDIO 0 )
       endif (PORTAUDIO_INCDIR)
    else (APPLE)
-      set (USE_PORTMIDI 0)
+      set (USE_PORTMIDI   0)
+      set (USE_PULSEAUDIO 1)
    endif (APPLE)
 endif (MINGW)
 

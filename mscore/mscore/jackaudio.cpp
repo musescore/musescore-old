@@ -364,7 +364,13 @@ int JackAudio::processAudio(jack_nframes_t frames, void* p)
                         }
                   }
             }
-      audio->seq->process((unsigned)frames, l, r);
+      float buffer[frames * 2];
+      audio->seq->process((unsigned)frames, buffer);
+      float* sp = buffer;
+      for (unsigned i = 0; i < frames; ++i) {
+            *l++ = *sp++;
+            *r++ = *sp++;
+            }
       return 0;
       }
 

@@ -62,6 +62,10 @@
 
 #include <vorbis/vorbisfile.h>
 
+#ifdef USE_PULSEAUDIO
+extern Driver* getPulseAudioDriver(Seq*);
+#endif
+
 Seq* seq;
 MasterSynth* synti;
 
@@ -69,6 +73,43 @@ static const int guiRefresh   = 10;       // Hz
 static const int peakHoldTime = 1400;     // msec
 static const int peakHold     = (peakHoldTime * guiRefresh) / 1000;
 static OggVorbis_File vf;
+
+static const int AUDIO_BUFFER_SIZE = 1024 * 512;  // 2 MB
+
+//---------------------------------------------------------
+//   RenderAudio
+//    the prerendering audio thread
+//---------------------------------------------------------
+
+class RenderAudio : public QThread
+      {
+      float fifo[AUDIO_BUFFER_SIZE];
+      int ridx;               // read index
+      int widx;               // write index
+      volatile int counter;   // objects in fifo
+
+      void clear() {
+	      ridx    = 0;
+            widx    = 0;
+            counter = 0;
+            }
+
+      void push() {
+//            widx = (widx + 1) % maxCount;
+//            ++counter;
+            }
+
+      void pop() {
+//            ridx = (ridx + 1) % maxCount;
+//            --counter;
+            }
+
+   public:
+      RenderAudio() : QThread() {
+            }
+      void run() {
+            }
+      };
 
 //---------------------------------------------------------
 //   VorbisData
@@ -268,6 +309,10 @@ bool Seq::init()
 #ifdef USE_PORTAUDIO
       bool usePortaudioFlag = preferences.usePortaudioAudio;
 #endif
+#ifdef USE_PULSEAUDIO
+      bool usePulseAudioFlag = preferences.usePulseAudio;
+#endif
+
 
 #ifdef USE_JACK
       if (MScore::debugMode)
@@ -308,7 +353,21 @@ bool Seq::init()
       if (usePortaudioFlag) {
             driver = new Portaudio(this);
             if (!driver->init()) {
-                  qDebug("no audio output found\n");
+                  qDebug("init PortAudio failed");
+                  delete driver;
+                  driver = 0;
+                  }
+            else
+                  usePortaudio = true;
+            }
+#endif
+#ifdef USE_PULSEAUDIO
+      if (MScore::debugMode)
+            qDebug("usePulseAudioFlag %d\n", usePulseAudioFlag);
+      if (usePulseAudioFlag) {
+            driver = getPulseAudioDriver(this);
+            if (!driver->init()) {
+                  qDebug("init PulseAudio failed");
                   delete driver;
                   driver = 0;
                   }
@@ -322,14 +381,14 @@ bool Seq::init()
                                 "Sequencer will be disabled.");
             QMessageBox::critical(0, "MuseScore: Init Audio Driver", s);
 #endif
-            qDebug("init audio driver failed\n");
+            qDebug("init audio driver failed");
             return false;
             }
       MScore::sampleRate = driver->sampleRate();
       synti->init(MScore::sampleRate);
 
       if (!driver->start()) {
-            qDebug("Cannot start I/O\n");
+            qDebug("Cannot start I/O");
             return false;
             }
       running = true;
@@ -617,7 +676,7 @@ void Seq::processMessages()
 //   metronome
 //---------------------------------------------------------
 
-void Seq::metronome(unsigned n, float* l, float* r)
+void Seq::metronome(unsigned n, float* p)
       {
       if (!mscore->metronome()) {
             tickRest = 0;
@@ -628,8 +687,9 @@ void Seq::metronome(unsigned n, float* l, float* r)
             int idx = tickLength - tickRest;
             int nn = n < tickRest ? n : tickRest;
             for (int i = 0; i < nn; ++i) {
-                  l[i] += tick[idx] * metronomeVolume;
-                  r[i] += tick[idx] * metronomeVolume;
+                  qreal v = tick[idx] * metronomeVolume;
+                  *p++ += v;
+                  *p++ += v;
                   ++idx;
                   }
             tickRest -= nn;
@@ -638,8 +698,9 @@ void Seq::metronome(unsigned n, float* l, float* r)
             int idx = tackLength - tackRest;
             int nn = n < tackRest ? n : tackRest;
             for (int i = 0; i < nn; ++i) {
-                  l[i] += tack[idx] * metronomeVolume;
-                  r[i] += tack[idx] * metronomeVolume;
+                  qreal v = tack[idx] * metronomeVolume;
+                  *p++ += v;
+                  *p++ += v;
                   ++idx;
                   }
             tackRest -= nn;
@@ -650,7 +711,7 @@ void Seq::metronome(unsigned n, float* l, float* r)
 //   process
 //---------------------------------------------------------
 
-void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
+void Seq::process(unsigned n, float* buffer)
       {
       unsigned frames = n;
       int driverState = driver->getState();
@@ -665,10 +726,8 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
                      state, driverState);
             }
 
-      float* l = lbuffer;
-      float* r = rbuffer;
-      memset(l, 0, sizeof(float) * n);
-      memset(r, 0, sizeof(float) * n);
+      float* p = buffer;
+      memset(p, 0, sizeof(float) * n * 2);
       processMessages();
 
       if (state == TRANSPORT_PLAY) {
@@ -688,10 +747,9 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
                         }
                   if (n) {
                         if (cs->playMode() == PLAYMODE_SYNTHESIZER) {
-                              metronome(n, l, r);
-                              synti->process(n, l, r);
-                              l += n;
-                              r += n;
+                              metronome(n, p);
+                              synti->process(n, p);
+                              p += n * 2;
                               playTime  += n;
                               frames    -= n;
                               framePos  += n;
@@ -703,10 +761,10 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
                                     long rn = ov_read_float(&vf, &pcm, n, &section);
                                     if (rn == 0)
                                           break;
-                                    memcpy(l, pcm[0], rn * sizeof(float));
-                                    memcpy(r, pcm[1], rn * sizeof(float));
-                                    l        += rn;
-                                    r        += rn;
+                                    for (int i = 0; i < rn; ++i) {
+                                          *p++ = pcm[0][i];
+                                          *p++ = pcm[1][i];
+                                          }
                                     playTime += rn;
                                     frames   -= rn;
                                     framePos += rn;
@@ -723,8 +781,8 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
                   }
             if (frames) {
                   if (cs->playMode() == PLAYMODE_SYNTHESIZER) {
-                        metronome(frames, l, r);
-                        synti->process(frames, l, r);
+                        metronome(frames, p);
+                        synti->process(frames, p);
                         playTime += frames;
                         }
                   else {
@@ -735,10 +793,10 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
                               long rn = ov_read_float(&vf, &pcm, n, &section);
                               if (rn == 0)
                                     break;
-                              memcpy(l, pcm[0], rn * sizeof(float));
-                              memcpy(r, pcm[1], rn * sizeof(float));
-                              l        += rn;
-                              r        += rn;
+                              for (int i = 0; i < rn; ++i) {
+                                    *p++ = pcm[0][i];
+                                    *p++ = pcm[1][i];
+                                    }
                               playTime += rn;
                               frames   -= rn;
                               framePos += rn;
@@ -752,22 +810,16 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
                   }
             }
       else {
-            synti->process(frames, l, r);
+            synti->process(frames, p);
             }
       //
       // metering
       //
-      int k    = 0;
       float lv = 0.0f;
       float rv = 0.0f;
       for (unsigned i = 0; i < n; ++i) {
-            float val = fabs(lbuffer[k]);
-            if (lv < val)
-                  lv = val;
-            val = fabs(rbuffer[k]);
-            if (rv < val)
-                  rv = val;
-            k++;
+            lv = qMax(lv, fabsf(buffer[i * 2]));
+            rv = qMax(rv, fabsf(buffer[i * 2 + 1]));
             }
       meterValue[0] = lv;
       meterValue[1] = rv;

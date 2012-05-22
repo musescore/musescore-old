@@ -74,7 +74,7 @@ bool MuseScore::saveAudio(Score* score, const QString& name, const QString& ext)
       QProgressBar* pBar = showProgressBar();
       pBar->reset();
 
-      double peak = 0.0;
+      float peak = 0.0;
       double gain = 1.0;
       EventMap::const_iterator endPos = events.constEnd();
       --endPos;
@@ -112,17 +112,15 @@ bool MuseScore::saveAudio(Score* score, const QString& name, const QString& ext)
                   //
                   memset(buffer, 0, sizeof(float) * FRAMES * 2);
                   int endTime = playTime + frames;
-                  float* l = buffer;
-                  float* r = buffer + FRAMES;
+                  float* p = buffer;
                   for (; playPos != events.constEnd(); ++playPos) {
                         int f = score->utick2utime(playPos.key()) * MScore::sampleRate;
                         if (f >= endTime)
                               break;
                         int n = f - playTime;
-                        synti->process(n, l, r);
+                        synti->process(n, p);
+                        p         += 2 * n;
 
-                        l         += n;
-                        r         += n;
                         playTime  += n;
                         frames    -= n;
                         const Event& e = playPos.value();
@@ -135,25 +133,14 @@ bool MuseScore::saveAudio(Score* score, const QString& name, const QString& ext)
                               }
                         }
                   if (frames) {
-                        synti->process(frames, l, r);
+                        synti->process(frames, p);
                         playTime += frames;
                         }
-                  if (pass == 1) {
-                        float b[FRAMES * 2];
-                        float* dp = b;
-                        float* spl = buffer;
-                        float* spr = buffer + FRAMES;
-                        for (unsigned i = 0; i < FRAMES; ++i) {
-                              *dp++ = *spl++;
-                              *dp++ = *spr++;
-                              }
-                        sf_writef_float(sf, b, FRAMES);
-                        }
+                  if (pass == 1)
+                        sf_writef_float(sf, buffer, FRAMES);
                   else {
-                        for (unsigned i = 0; i < FRAMES * 2; ++i) {
-                              if (qAbs(buffer[i]) > peak)
-                                    peak = qAbs(buffer[i]);
-                              }
+                        for (unsigned i = 0; i < FRAMES * 2; ++i)
+                              peak = qMax(peak, qAbs(buffer[i]));
                         }
                   playTime = endTime;
                   pBar->setValue(playTime);

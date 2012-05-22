@@ -107,6 +107,10 @@ if (USE_PORTAUDIO)
       set (AUDIO ${AUDIO} pa.cpp)
 endif (USE_PORTAUDIO)
 
+if (USE_PULSEAUDIO)
+      set (AUDIO ${AUDIO} pulseaudio.cpp)
+endif (USE_PULSEAUDIO)
+
 if (USE_PORTMIDI)
       set (AUDIO ${AUDIO} pm.cpp)
 endif (USE_PORTMIDI)
@@ -302,6 +306,7 @@ else (MINGW)
       ${QT_QTSCRIPT_LIBRARY_RELEASE}
       ${QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE}
       ${PORTAUDIO_LIB}
+      ${PULSEAUDIO_LIBRARY}
       diff_match_patch
       libmscore
       awl

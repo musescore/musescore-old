@@ -93,11 +93,11 @@ void MasterSynth::init(int sampleRate)
 //   process
 //---------------------------------------------------------
 
-void MasterSynth::process(unsigned n, float* l, float* r)
+void MasterSynth::process(unsigned n, float* p)
       {
       foreach(Synth* s, syntis) {
             if (s->active())
-                  s->process(n, l, r, _gain);
+                  s->process(n, p, _gain);
             }
       }
 

@@ -738,10 +738,13 @@ bool MuseScore::saveMp3(Score* score, const QString& name)
                         if (f >= endTime)
                               break;
                         int n = lrint((f - playTime) * sampleRate);
-                        synti->process(n, l, r);
-
-                        l         += n;
-                        r         += n;
+                        float bu[n * 2];
+                        synti->process(n, bu);
+                        float* sp = bu;
+                        for (int i = 0; i < n; ++i) {
+                              *l++ = *sp++;
+                              *r++ = *sp++;
+                              }
                         playTime += double(n)/double(sampleRate);
                         frames    -= n;
                         const Event& e = playPos.value();
@@ -754,7 +757,13 @@ bool MuseScore::saveMp3(Score* score, const QString& name)
                               }
                         }
                   if (frames) {
-                        synti->process(frames, l, r);
+                        float bu[frames * 2];
+                        synti->process(frames, bu);
+                        float* sp = bu;
+                        for (unsigned i = 0; i < frames; ++i) {
+                              *l++ = *sp++;
+                              *r++ = *sp++;
+                              }
                         playTime += double(frames)/double(sampleRate);
                         }
                   if (pass == 1) {
