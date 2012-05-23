@@ -305,8 +305,6 @@ else (MINGW)
       ${QT_LIBRARIES}
       ${QT_QTSCRIPT_LIBRARY_RELEASE}
       ${QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE}
-      ${PORTAUDIO_LIB}
-      ${PULSEAUDIO_LIBRARY}
       diff_match_patch
       libmscore
       awl
@@ -322,10 +320,14 @@ else (MINGW)
       pthread
       vorbisfile
       )
-if (USE_PORTAUDIO)
-      target_link_libraries(mscore portaudio)
-endif (USE_PORTAUDIO)
+    if (USE_PORTAUDIO)
+      target_link_libraries(mscore ${PORTAUDIO_LIB})
+    endif (USE_PORTAUDIO)
 
+    if (USE_PULSEAUDIO)
+      target_link_libraries(mscore ${PULSEAUDIO_LIBRARY})
+    endif (USE_PULSEAUDIO)
+ 
    set_target_properties (
       mscore
       PROPERTIES
