@@ -141,8 +141,8 @@ bool PulseAudio::init()
       pa_stream_set_write_callback(playstream, paCallback, this);
 
       bufattr.fragsize  = (uint32_t)-1;
-      bufattr.maxlength = FRAMES * 2 * sizeof(short);
-      bufattr.minreq    = pa_usec_to_bytes(0, &ss);
+      bufattr.maxlength = FRAMES * 2 * sizeof(float);
+      bufattr.minreq    = FRAMES * 1 * sizeof(float); // pa_usec_to_bytes(0, &ss);
       bufattr.prebuf    = (uint32_t)-1;
       bufattr.tlength   = bufattr.maxlength;
       int r = pa_stream_connect_playback(playstream, NULL, &bufattr,
