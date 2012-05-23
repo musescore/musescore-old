@@ -34,10 +34,6 @@
 #include "mididriver.h"
 #include "pm.h"
 
-#ifdef Q_WS_MAC // mac does not support non interleaved
-#define INTERLEAVED_AUDIO
-#endif
-
 static PaStream* stream;
 
 //---------------------------------------------------------
@@ -47,20 +43,7 @@ static PaStream* stream;
 int paCallback(const void*, void* out, long unsigned frames,
    const PaStreamCallbackTimeInfo*, PaStreamCallbackFlags, void *)
       {
-#ifdef INTERLEAVED_AUDIO
-      float lb[frames];
-      float rb[frames];
-      seq->process((unsigned)frames, lb, rb);
-      float* op = (float*)out;
-      for (int i = 0; i < frames; ++i) {
-            *op++ = lb[i];
-            *op++ = rb[i];
-            }
-#else
-      float* o1 = ((float**)out)[0];
-      float* o2 = ((float**)out)[1];
-      seq->process((unsigned)frames, o1, o2);
-#endif
+      seq->process((unsigned)frames, (float*)out);
       return 0;
       }
 
@@ -119,11 +102,7 @@ bool Portaudio::init()
 
       out.device           = idx;
       out.channelCount     = 2;
-#ifdef INTERLEAVED_AUDIO
       out.sampleFormat     = paFloat32;
-#else
-      out.sampleFormat     = paFloat32 | paNonInterleaved;
-#endif
       out.suggestedLatency = 0.100;
       out.hostApiSpecificStreamInfo = 0;
 
