@@ -112,6 +112,8 @@ def chapterHeading(html_source, verbose, language_code):
         chapter = 'глава [number]'
     elif language_code == 'ca':
         chapter = 'Cap&iacute;tol [number]'
+    elif language_code == 'ca':
+        chapter = 'Kapitola [number]'  
     elif language_code == 'da':
         chapter = 'Kapitel [number]'
     elif language_code == 'de':
@@ -385,7 +387,7 @@ def downloadImages(html_source, verbose, download_images='all'):
 
         if download_image:
             if verbose:
-                print ' *', file_name
+                print ' *', file_name, url
 
             sock = urllib.urlopen(url)
             out_file = open('sources/'+file_name,"wb")
@@ -538,6 +540,9 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
     elif language_code == 'ca':
         url = 'http://musescore.org/ca/print/book/export/html/3414'
         internal = 'http://musescore.org/ca/manual'
+    elif language_code == 'cs':
+        url = 'http://musescore.org/cs/print/book/export/html/11825'
+        internal = 'http://musescore.org/cs/příručka'
     elif language_code == 'da':
         url = 'http://musescore.org/da/print/book/export/html/1947'
         internal = 'http://musescore.org/da/håndbog'
@@ -633,7 +638,7 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
 
 
 def main():
-    language_choices = ['all','en','bg','da','de','el','es','fi','fr','gl','hu','it','ja','nb','nl','pl','pt-BR','ro','ru', 'zh-hans']
+    language_choices = ['all','en','bg','cs','ca','da','de','el','es','fi','fr','gl','hu','it','ja','nb','nl','pl','pt-BR','ro','ru', 'zh-hans']
   
     parser = OptionParser()
     parser.add_option("-l","--lang", dest="language_code",
