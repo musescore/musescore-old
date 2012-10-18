@@ -54,14 +54,21 @@ debug:
             echo "build directory does already exist, please remove first with 'make clean'"; \
          fi;
 
-
+xcode:
+	mkdir build.xcode;              \
+    cd build.xcode;                                  \
+    cmake -DCMAKE_INSTALL_PREFIX=../build.xcode/mscore/Debug -DCMAKE_BUILD_TYPE=DEBUG \
+          ../mscore -G Xcode;                         \
+    xcodebuild -project mscore.xcodeproj -target lrelease; 
+    
 #
 # clean out of source build
 #
 
 clean:
-	-rm -rf build
-
+	-rm -rf build.release build.debug build.xcode
+	-rm -rf applebuild
+	
 lupdate:
 	cd build;xcodebuild -project mscore.xcodeproj -target lupdate;
 

@@ -45,15 +45,19 @@ if (APPLE)
       set(HAS_AUDIOFILE TRUE)            # requires libsndfile
       set(STATIC_SCRIPT_BINDINGS TRUE)
       
-      set (CMAKE_CXX_COMPILER   clang++) # use clang, comment for 10.4 & 10.5
-      set(CMAKE_OSX_ARCHITECTURES i386)   # build only i386 by default
-      set(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.6.sdk)
-      set(CMAKE_OSX_DEPLOYMENT_TARGET 10.6) #min version required
-      
-      #toggle the following for 10.4 & 10.5
-      #set(CMAKE_OSX_ARCHITECTURES i386 ppc)   # build universal binary
-      #set(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.4u.sdk)
-      #set(CMAKE_OSX_DEPLOYMENT_TARGET 10.4) #min version required
+     set (CMAKE_CXX_COMPILER   clang++)
+      # Currently, just 'ppc', 'i386' or 'ppc i386' are useful architectures,
+      # because the Flash-Player is not yet available as a 64-bit version.
+      # Flash is required for displaying the videos of MuseScore-Connect.
+      # See http://qt.gitorious.org/qt/pages/Qt470KnownIssues
+      # Since 10.6+ only runs on intel, just set it to i386.
+      set(CMAKE_OSX_ARCHITECTURES x86_64)
+
+      # Adjust and uncomment this variable, if you target a different version
+      # of MacOSX.
+      # set(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.6.sdk)
+
+      set(CMAKE_OSX_DEPLOYMENT_TARGET 10.4)      #min version required
       
       find_library(AudioToolboxFW NAMES AudioToolbox)
       find_library(AudioUnitFW NAMES AudioUnit)
@@ -253,14 +257,18 @@ add_custom_command(
    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
    )
 
-set(CMAKE_CXX_FLAGS_DEBUG   "")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
+set(CMAKE_CXX_FLAGS_DEBUG   "-g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG")
 
 if (CMAKE_BUILD_TYPE STREQUAL "DEBUG")
       if (MINGW)
             set(FLAGS -DQT_DEBUG -DQT_DLL)
       else (MINGW)
-            set (FLAGS -DQT_DEBUG)
+      	if(APPLE)
+            	set (FLAGS -O0 -DQT_DEBUG)
+            else (APPLE)
+            	set (FLAGS -DQT_DEBUG)
+            endif(APPLE)
       endif (MINGW)
 else (CMAKE_BUILD_TYPE STREQUAL "DEBUG")
       if (MINGW)
@@ -272,29 +280,18 @@ endif (CMAKE_BUILD_TYPE STREQUAL "DEBUG")
 
 MESSAGE( STATUS "CMAKE_CXX_COMPILER_ID:" ${CMAKE_CXX_COMPILER_ID})
 
-if (${CMAKE_CXX_COMPILER_ID} EQUAL "Clang")
-      add_custom_command(
-         OUTPUT ${PROJECT_BINARY_DIR}/all.h.pch
-         COMMAND ${CMAKE_CXX_COMPILER}
-           -x c++-header -g ${FLAGS}
-           -I${QT_INCLUDE_DIR}
-           -o all.h.pch all.h
-         DEPENDS ${PROJECT_BINARY_DIR}/all.h
-         WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-         )
-      set (PCH ${PROJECT_BINARY_DIR}/all.h.pch)
-else (${CMAKE_CXX_COMPILER_ID} EQUAL "Clang")
-      add_custom_command(
-         OUTPUT ${PROJECT_BINARY_DIR}/all.h.gch
-         COMMAND ${CMAKE_CXX_COMPILER}
-           -x c++-header -g  ${FLAGS} -m32
-           -I${QT_HEADERS_DIR}
-           -o all.h.gch all.h
-         DEPENDS ${PROJECT_BINARY_DIR}/all.h
-         WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-         )
-      set (PCH ${PROJECT_BINARY_DIR}/all.h.gch)
-endif(${CMAKE_CXX_COMPILER_ID} EQUAL "Clang")
+
+add_custom_command(
+ OUTPUT ${PROJECT_BINARY_DIR}/all.h.gch
+ COMMAND ${CMAKE_CXX_COMPILER}
+   -x c++-header -g  ${FLAGS}
+   -I${QT_HEADERS_DIR}
+   -o all.h.gch all.h
+ DEPENDS ${PROJECT_BINARY_DIR}/all.h
+ WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+ )
+set (PCH ${PROJECT_BINARY_DIR}/all.h.gch)
+
 
 ADD_CUSTOM_TARGET(mops1 DEPENDS ${PROJECT_BINARY_DIR}/all.h)
 ADD_CUSTOM_TARGET(mops2 DEPENDS ${PCH})
