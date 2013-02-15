@@ -74,7 +74,7 @@ set(CMAKE_SKIP_RULE_DEPENDENCY TRUE)
 
 # The Mscore version number.
 SET(Mscore_VERSION_MAJOR  "1")
-SET(Mscore_VERSION_MINOR  "2")
+SET(Mscore_VERSION_MINOR  "3")
 SET(Mscore_VERSION_PATCH  "0")
 
 SET(Mscore_VERSION       "${Mscore_VERSION_MAJOR}.${Mscore_VERSION_MINOR}")
@@ -346,6 +346,7 @@ include (InstallRequiredSystemLibraries)
 
   IF(MINGW)
       SET(CPACK_PACKAGE_INSTALL_DIRECTORY "MuseScore")
+      SET(CPACK_PACKAGE_NAME    "MuseScore")
       # There is a bug in NSI that does not handle full unix paths properly. Make
       # sure there is at least one set of four (4) backlasshes.
       SET(CPACK_PACKAGE_ICON "${PROJECT_SOURCE_DIR}/mscore/data\\\\installerhead.bmp")
@@ -380,7 +381,7 @@ include (InstallRequiredSystemLibraries)
       SET(CPACK_SOURCE_STRIP_FILES "")
   ENDIF(MINGW)
 
-  SET(CPACK_SOURCE_PACKAGE_FILE_NAME "mscore")
+  SET(CPACK_SOURCE_PACKAGE_FILE_NAME "MuseScore")
   SET(CPACK_PACKAGE_FILE_NAME     "${CPACK_SOURCE_PACKAGE_FILE_NAME}-${Mscore_VERSION_FULL}")
   SET(CPACK_PACKAGE_EXECUTABLES   "mscore" "MuseScore")
 
@@ -399,7 +400,15 @@ include (InstallRequiredSystemLibraries)
   set(CPACK_PACKAGE_CONTACT       "ws@wschweer.de")
 
 if (MINGW)
-  set(CPACK_GENERATOR             "NSIS")
+  set(CPACK_GENERATOR             "NSIS;WIX")
+  file(TO_CMAKE_PATH $ENV{PROGRAMFILES} PROGRAMFILES)
+  set(CPACK_WIX_ROOT "${PROGRAMFILES}/WiX Toolset v3.7")
+  set(CPACK_WIX_UPGRADE_GUID "645CB2F9-922A-46D6-8FD8-9110B7F36FC5")
+  set(CPACK_WIX_LICENSE_RTF   "${PROJECT_SOURCE_DIR}/LICENSE.rtf")
+  SET(CPACK_WIX_PRODUCT_ICON "${PROJECT_SOURCE_DIR}/mscore/data/mscore.ico")
+  SET(CPACK_WIX_UI_BANNER "${PROJECT_SOURCE_DIR}/packaging/installer_banner.bmp")
+  SET(CPACK_WIX_UI_DIALOG "${PROJECT_SOURCE_DIR}/packaging/installer_background.bmp")
+
   set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/packaging" ${CMAKE_MODULE_PATH}) # Use custom version of NSIS.InstallOptions.ini
 else (MINGW)
   if (NOT APPLE)
