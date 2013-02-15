@@ -107,6 +107,22 @@ Seq::~Seq()
       {
       delete driver;
       }
+      
+//---------------------------------------------------------
+//   stopWait
+//---------------------------------------------------------
+
+void Seq::stopWait()
+      {
+      stop();
+      QMutex mutex;
+      QWaitCondition sleep;
+      while (state != STOP) {
+            mutex.lock();
+            sleep.wait(&mutex, 100);
+            mutex.unlock();
+            }
+      }
 
 //---------------------------------------------------------
 //   setScoreView
@@ -117,12 +133,8 @@ void Seq::setScoreView(ScoreView* v)
       if (cv !=v && cs) {
             disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
             markedNotes.clear();
-            stop();
+            stopWait();
             cs = v ? v->score() : 0;
-#ifndef __MINGW32__
-            while (state != STOP)
-                  usleep(100000);
-#endif
             }
       cv = v;
       cs = cv ? cv->score() : 0;
@@ -274,7 +286,7 @@ void Seq::exit()
       if (driver) {
             if (debugMode)
                   printf("Stop I/O\n");
-            driver->stop();
+            stopWait();
             delete driver;
             driver = 0;
             }
@@ -481,6 +493,8 @@ void Seq::startTransport()
 
 void Seq::playEvent(const Event* event, unsigned framePos)
       {
+      if(!event)
+            return;
       int type = event->type();
       if (type == ME_NOTEON) {
             bool mute;
@@ -666,6 +680,9 @@ void Seq::initInstruments()
 
 void Seq::collectEvents()
       {
+      //do not collect even while playing
+      if (state == PLAY)
+            return;
       foreach(Event* e, events)
             delete e;
       events.clear();
