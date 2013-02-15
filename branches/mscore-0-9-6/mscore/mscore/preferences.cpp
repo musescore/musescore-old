@@ -1063,11 +1063,7 @@ void PreferenceDialog::apply()
          || (preferences.alsaPeriodSize != alsaPeriodSize->currentText().toInt())
          || (preferences.alsaFragments != alsaFragments->value())
             ) {
-            seq->stop();
-#ifndef __MINGW32__
-            while(!seq->isStopped())
-                  usleep(50000);
-#endif
+            seq->stopWait();
             seq->exit();
             preferences.useAlsaAudio       = alsaDriver->isChecked();
             preferences.useJackAudio       = jackDriver->isChecked();

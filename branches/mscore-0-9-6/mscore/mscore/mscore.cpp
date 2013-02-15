@@ -263,7 +263,7 @@ void MuseScore::closeEvent(QCloseEvent* ev)
       if (inspector)
             inspector->writeSettings();
 
-      seq->stop();
+      seq->stopWait();
 #ifndef __MINGW32__
       while(!seq->isStopped())
             usleep(50000);
@@ -1438,8 +1438,10 @@ void MuseScore::removeTab(int i)
 
       if (checkDirty(score))
             return;
-      if (seq->score() == score)
+      if (seq->score() == score) {
+            seq->stopWait();
             seq->setScoreView(0);
+            }
 
       int idx1      = tab1->currentIndex();
       bool firstTab = tab1->view(idx1) == cv;

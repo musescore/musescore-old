@@ -151,6 +151,7 @@ class Seq : public QObject {
 
       void collectEvents();
       void guiStop();
+      void stopWait();
 
       bool init();
       void exit();
