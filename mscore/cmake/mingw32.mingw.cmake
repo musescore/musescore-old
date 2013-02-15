@@ -4,21 +4,13 @@
 
 set (CMAKE_SYSTEM_NAME "Windows")
 
-set (CROSS C:/QtSDK/mingw)
-set (CROSSQT C:/QtSDK/Desktop/Qt/4.8.0/mingw)
+set (CROSS C:/MinGW)
+set (CROSSQT C:/Qt/4.8.4)
 
 set (CMAKE_C_COMPILER     ${CROSS}/bin/gcc.exe)
 set (CMAKE_CXX_COMPILER   ${CROSS}/bin/g++.exe)
 set (CMAKE_STRIP          ${CROSS}/bin/strip.exe)
 set (CMAKE_FIND_ROOT_PATH ${CROSS})
-
-# adjust the default behaviour of the FIND_XXX() commands:
-# search headers and libraries in the target environment, search
-# programs in the host environment
-
-set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
-set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
-set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 
 set (QT_INCLUDE_DIR           ${CROSSQT}/include)
 set (QT_QT_INCLUDE_DIR        ${CROSSQT}/include/Qt)
