@@ -23,7 +23,7 @@ CPUS      = `grep -c processor /proc/cpuinfo`
 
 PREFIX    = "/usr/local"
 #VERSION   = "1.2r${REVISION}"
-VERSION   = 1.2
+VERSION   = 1.3
 
 ROOT=`pwd`
 
