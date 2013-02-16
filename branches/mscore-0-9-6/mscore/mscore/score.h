@@ -800,6 +800,7 @@ class Score : public QObject {
       void doLayout();
       void layoutChords1(Segment* segment, int staffIdx);
       void collectTuplets(QDomElement e, QList<Tuplet*>* tuplets);
+      void cleanVoltas();
       };
 
 extern Score* gscore;

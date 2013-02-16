@@ -2185,3 +2185,19 @@ Text* Score::getText(int subtype)
       return 0;
       }
 
+//---------------------------------------------------------
+//   cleanVoltas
+//---------------------------------------------------------
+void Score::cleanVoltas() 
+      {
+      foreach(Element* gel, _gel) {
+            if(gel->type() == VOLTA) {
+                  Volta* volta = static_cast<Volta*>(gel);
+                  if (volta->staffIdx() >= staves().size()) {
+                        removeElement(volta);
+                        qDebug("remove volta staffidx %d size %d", volta->staffIdx(), staves().size());
+                        }
+                  }
+            }
+      }
+
