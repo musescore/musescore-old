@@ -3498,7 +3498,7 @@ static int convertNotehead(QString mxmlName)
 
 static void addTextToNote(QString txt, int subtype, int style, Score* score, Note* note)
       {
-      if (!txt.isEmpty()) {
+      if (!txt.isEmpty() && note) {
             Text* t = new Text(score);
             t->setSubtype(subtype);
             t->setTextStyle(style);
@@ -3641,6 +3641,8 @@ void MusicXml::xmlNotations(Note* note, ChordRest* cr, int trk, int ticks, QDomE
                               printf("Tie already active\n");
                               }
                         else {
+                              if (!note)
+                                    return;
                               tie = new Tie(score);
                               note->setTieFor(tie);
                               tie->setStartNote(note);
