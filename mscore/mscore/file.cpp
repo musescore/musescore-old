@@ -74,6 +74,30 @@
 #include "beam.h"
 
 //---------------------------------------------------------
+//   createDefaultFileName
+//---------------------------------------------------------
+
+static QString createDefaultFileName(QString fn)
+      {
+      //
+      // special characters in filenames are a constant source
+      // of trouble, this replaces some of them common in german:
+      //
+      fn = fn.simplified();
+      fn = fn.replace(QChar(' '),  "_");
+      fn = fn.replace(QChar('\n'), "_");
+      fn = fn.replace(QChar(0xe4), "ae");
+      fn = fn.replace(QChar(0xf6), "oe");
+      fn = fn.replace(QChar(0xfc), "ue");
+      fn = fn.replace(QChar(0xdf), "ss");
+      fn = fn.replace(QChar(0xc4), "Ae");
+      fn = fn.replace(QChar(0xd6), "Oe");
+      fn = fn.replace(QChar(0xdc), "Ue");
+      fn = fn.replace( QRegExp( "[" + QRegExp::escape( "\\/:*?\"<>|" ) + "]" ), "_" ); //FAT/NTFS special chars
+      return fn;
+      }
+
+//---------------------------------------------------------
 //   load
 //    return true on error
 //---------------------------------------------------------
@@ -658,7 +682,7 @@ void MuseScore::newFile()
             newWizard->createInstruments(score);
             }
       if (!newWizard->title().isEmpty())
-            score->fileInfo()->setFile(newWizard->title());
+            score->fileInfo()->setFile(createDefaultFileName(newWizard->title()));
       for (int i = 0; i < measures; ++i) {
             Measure* measure = new Measure(score);
             score->measures()->add(measure);
