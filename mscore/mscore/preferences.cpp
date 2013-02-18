@@ -822,7 +822,7 @@ void PreferenceDialog::updateSCListView()
                   continue;
             ShortcutItem* newItem = new ShortcutItem;
             newItem->setText(0, s->descr);
-            newItem->setIcon(0, *icons[s->icon]);
+            //newItem->setIcon(0, *icons[s->icon]);
             if(!s->key.isEmpty())
                 newItem->setText(1, s->key.toString(QKeySequence::NativeText));
             else{
