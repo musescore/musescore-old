@@ -16,6 +16,9 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QTreeWidget" name="instrumentList">
+     <attribute name="headerVisible">
+      <bool>false</bool>
+     </attribute>  
      <column>
       <property name="text">
        <string>0</string>
