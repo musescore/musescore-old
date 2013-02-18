@@ -150,11 +150,11 @@ void MuseScore::showPalette(bool visible)
             sp->setMag(0.8);
             sp->setGrid(33, 60);
             sp->setYOffset(1.0);
-            int clefs[20] = {
-                  0, 1, 2, 3, 16, 9, 10, 11, 12, 15, 4, 17, 18, 5, 6, 7, 8, 14, 13, CLEF_PERC2
+            int clefs[19] = {
+                  0, 1, 2, 3, 16, 9, 10, 11, 12, 15, 4, 17, 18, 5, 6, 7, 8, 14, 13
                   };
 
-            for (int i = 0; i < 20; ++i) {
+            for (int i = 0; i < 19; ++i) {
                   int j = clefs[i];
                   Clef* k = new ::Clef(gscore, j);
                   sp->append(k, qApp->translate("clefTable", clefTable[j].name));
@@ -867,12 +867,14 @@ void MuseScore::lineMenu()
             sp->append(trill, tr("Trill line"));
 
             TextLine* textLine = new TextLine(gscore);
+            textLine->setLen(l);  
             textLine->setBeginText("VII");
             sp->append(textLine, tr("Text line"));
             textLine->setEndHook(true);
             textLine->setEndHookHeight(Spatium(1.5));
 
             TextLine* line = new TextLine(gscore);
+            line->setLen(l);
             line->setDiagonal(true);
             sp->append(line, tr("Line"));
             }
