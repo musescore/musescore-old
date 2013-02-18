@@ -677,14 +677,18 @@ QString NewWizardPage4::templatePath() const
 NewWizard::NewWizard(QWidget* parent)
    : QWizard(parent)
       {
+#ifdef Q_WS_MAC      
+      setWizardStyle(QWizard::ClassicStyle);
+#else
       setPixmap(QWizard::LogoPixmap, QPixmap(":/data/mscore.png"));
       setPixmap(QWizard::WatermarkPixmap, QPixmap(":/data/bg1.jpg"));
+#endif      
       setWindowTitle(tr("MuseScore: Create New Score"));
-    setOption(QWizard::NoCancelButton, false);
-    setOption(QWizard::CancelButtonOnLeft, true);
-    setOption(QWizard::HaveFinishButtonOnEarlyPages, true);
-    setOption(QWizard::HaveNextButtonOnLastPage, true);
-
+      
+      setOption(QWizard::NoCancelButton, false);
+      setOption(QWizard::CancelButtonOnLeft, true);
+      setOption(QWizard::HaveFinishButtonOnEarlyPages, true);
+      setOption(QWizard::HaveNextButtonOnLastPage, true);
 
       p1 = new NewWizardPage1;
       p2 = new NewWizardPage2;
