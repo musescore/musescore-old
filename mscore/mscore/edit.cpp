@@ -1853,8 +1853,11 @@ void ScoreView::changeVoice(int voice)
       //
       if (!is->noteEntryMode || is->cr())
             return;
-
-      is->_segment = is->_segment->measure()->firstCRSegment();
+            
+      if(is->_segment)
+            is->_segment = is->_segment->measure()->firstCRSegment();
+      else
+            is->_segment = score()->firstMeasure()->firstCRSegment();
       moveCursor();
       score()->setUpdateAll(true);
       score()->end();
