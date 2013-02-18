@@ -48,3 +48,13 @@ What next?
 - Ability to list your sheets
 - Ability to open a sheet from the list
 - Ability to overwrite/update an existing sheet
+
+Translations
+-----------
+lupdate musescore.com.js  ui\authorize_dialog.ui ui\musescore_dialog.ui ui\musescore_progress.ui ui\start_browser_dialog.ui -ts translations\locale_fr.ts
+lupdate musescore.com.js  ui\authorize_dialog.ui ui\musescore_dialog.ui ui\musescore_progress.ui ui\start_browser_dialog.ui -ts translations\locale_es.ts
+lupdate musescore.com.js  ui\authorize_dialog.ui ui\musescore_dialog.ui ui\musescore_progress.ui ui\start_browser_dialog.ui -ts translations\locale_de.ts
+
+lrelease locale_fr.ts -qm locale_fr.qm
+lrelease locale_es.ts -qm locale_es.qm
+lrelease locale_de.ts -qm locale_de.qm

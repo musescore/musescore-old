@@ -1135,6 +1135,7 @@ function launchBrowser() {
         var file   = new QFile(pluginPath + "/ui/authorize_dialog.ui");
         file.open(QIODevice.OpenMode(QIODevice.ReadOnly, QIODevice.Text));
         form = loader.load(file, null);
+        form.setWindowFlags(Qt.WindowSystemMenuHint);
         form.lineEditUrl.text = url;
         form.lineEditUrl.cursorPosition = 0;
         form.buttonBox.accepted.connect(acceptAuthorize);
@@ -1214,21 +1215,21 @@ function formBeforeUpload(){
       file.open(QIODevice.OpenMode(QIODevice.ReadOnly, QIODevice.Text));
       form = loader.load(file, null);
       form.setWindowFlags(Qt.WindowSystemMenuHint); //remove the what's this button
-      form.verticalLayoutWidget.title.text = curScore.title;
-      form.verticalLayoutWidget.license.addItem(qsTr("All Rights reserved"), "all-rights-reserved");
-      form.verticalLayoutWidget.license.addItem(qsTr("Creative Commons Attribution"), "cc-by");
-	    form.verticalLayoutWidget.license.addItem(qsTr("Creative Commons Attribution Share Alike"), "cc-by-sa");
-      form.verticalLayoutWidget.license.addItem(qsTr("Creative Commons Attribution No Derivative Works"), "cc-by-nd");
-      form.verticalLayoutWidget.license.addItem(qsTr("Creative Commons Attribution Noncommercial"), "cc-by-nc");
-      form.verticalLayoutWidget.license.addItem(qsTr("Creative Commons Attribution Noncommercial Share Alike"), "cc-by-nc-sa");
-	    form.verticalLayoutWidget.license.addItem(qsTr("Creative Commons Attribution Noncommercial Non Derivate Works"), "cc-by-nc-nd");
-      form.verticalLayoutWidget.license.addItem(qsTr("Public Domain"), "publicdomain");
-      form.verticalLayoutWidget.license.addItem(qsTr("Creative Commons Zero"), "cc-zero");
-      form.horizontalLayoutWidget.lblUsername.text = username;
+      form.title.text = curScore.title;
+      form.license.addItem(qsTr("All Rights reserved"), "all-rights-reserved");
+      form.license.addItem(qsTr("Creative Commons Attribution"), "cc-by");
+	    form.license.addItem(qsTr("Creative Commons Attribution Share Alike"), "cc-by-sa");
+      form.license.addItem(qsTr("Creative Commons Attribution No Derivative Works"), "cc-by-nd");
+      form.license.addItem(qsTr("Creative Commons Attribution Noncommercial"), "cc-by-nc");
+      form.license.addItem(qsTr("Creative Commons Attribution Noncommercial Share Alike"), "cc-by-nc-sa");
+	    form.license.addItem(qsTr("Creative Commons Attribution Noncommercial Non Derivate Works"), "cc-by-nc-nd");
+      form.license.addItem(qsTr("Public Domain"), "publicdomain");
+      form.license.addItem(qsTr("Creative Commons Zero"), "cc-zero");
+      form.lblUsername.text = username;
       form.buttonBox.accepted.connect(saveAndUpload);
-      form.horizontalLayoutWidget.btnSignout.pressed.connect(signout);
-      form.horizontalLayoutWidget.chkSignoutOnExit.checked = (preferences.signoutOnExit == 'true');
-      form.horizontalLayoutWidget.chkSignoutOnExit.stateChanged.connect(signoutOnExit);
+      form.btnSignout.pressed.connect(signout);
+      form.chkSignoutOnExit.checked = (preferences.signoutOnExit == 'true');
+      form.chkSignoutOnExit.stateChanged.connect(signoutOnExit);
       form.show();  
 }
 
@@ -1254,11 +1255,11 @@ function saveAndUpload(){
   var path = QDir.tempPath() + "/temp.mscz";
   if(curScore.save(path, "mscz")){
 
-      var description = form.verticalLayoutWidget.description.plainText;
-      var title = form.verticalLayoutWidget.title.text;
-      var tags = form.verticalLayoutWidget.tags.text;
-      var priv = (form.verticalLayoutWidget.rbPrivate.checked?1:0);
-      var licenseCmb = form.verticalLayoutWidget.license;
+      var description = form.description.plainText;
+      var title = form.title.text;
+      var tags = form.tags.text;
+      var priv = (form.rbPrivate.checked?1:0);
+      var licenseCmb = form.license;
       var license = licenseCmb.itemData(licenseCmb.currentIndex);
       
       var accessor = { consumerSecret: consumer.consumerSecret 
@@ -1380,7 +1381,7 @@ function processAnswerUpload(id ,error){
          
          if (array["score_id"]) {
             curScore.source = array["permalink"]; //store source for next time
-            QMessageBox.about(0, qsTr("Success"), qsTr('<a href="%1/my_scores\">Finished! Go to my scores.</a>').arg(base));
+            QMessageBox.about(0, qsTr("Success"), qsTr('Finished! <a href="%1\">Go to my score.</a>').arg(array["permalink"]));
             } 
       } 
      }else{
