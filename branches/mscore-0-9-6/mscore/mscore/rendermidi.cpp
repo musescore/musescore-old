@@ -676,8 +676,8 @@ void Score::fixPpitch()
                   }
             }
 #ifdef Q_WS_MAC      
-      delete velo;
-      delete osl;
+      delete[] velo;
+      delete[] osl;
 #endif
       }
 
