@@ -19,7 +19,6 @@
 #=============================================================================
 
 install(FILES
-      abc_import.js
       createscore.js
       notenames.js
       colornotes.js
@@ -29,4 +28,4 @@ install(FILES
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}plugins
       )
 
-subdirs(break musescore.com)
+subdirs(break musescore.com abc_import)
