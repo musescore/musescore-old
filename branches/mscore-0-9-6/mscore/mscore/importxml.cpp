@@ -630,11 +630,13 @@ void MusicXml::doCredits()
                 && w != crwPoet && w != crwCopyRight) {
                   if (w->page == 1) {
                         Text* t = addText(vbox, score, w->words, TEXT_FRAME, TEXT_STYLE_FRAME);
-                        //computation in tenths, get coordinates in the VBox system
-                        double x = w->defaultX - mgl;
-                        double y = ph - w->defaultY - mgt;
-                        //change tenths to spatium
-                        t->setUserOff(QPointF(x*0.1*score->spatium(), y*0.1*score->spatium()));
+                        if (t) {
+                              //computation in tenths, get coordinates in the VBox system
+                              double x = w->defaultX - mgl;
+                              double y = ph - w->defaultY - mgt;
+                              //change tenths to spatium
+                              t->setUserOff(QPointF(x*0.1*score->spatium(), y*0.1*score->spatium()));
+                              }
                         }
                   }
             }
