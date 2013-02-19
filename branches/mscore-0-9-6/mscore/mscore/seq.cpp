@@ -992,7 +992,7 @@ void Seq::nextMeasure()
 void Seq::nextChord()
       {
       int tick = playPos.key();
-      for (EventMap::const_iterator i = playPos; i != events.constEnd(); ++i) {
+      for (EventMap::const_iterator i = events.find(tick); i != events.constEnd(); ++i) {
             if (i.value()->type() != ME_NOTEON)
                   continue;
             Event* n = i.value();
