@@ -448,7 +448,8 @@ class MuseScore : public QMainWindow {
       void changeState(ScoreState);
       bool readLanguages(const QString& path);
       void setRevision(QString& r){rev = r;}
-      QString revision(){return rev;}
+      Q_INVOKABLE QString revision(){return rev;}
+      Q_INVOKABLE QString version(){ return VERSION;}
       
       void closeScore(Score* score);
       

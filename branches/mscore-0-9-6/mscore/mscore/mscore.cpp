@@ -3175,8 +3175,11 @@ void MuseScore::networkFinished(QNetworkReply* reply)
       QString s(ha);
       QString name;
       QRegExp re(".*filename=\"(.*)\"");
-      if (s.isEmpty() || re.indexIn(s) == -1)
-            name = "unknown.mscz";
+      if (s.isEmpty() || re.indexIn(s) == -1) {
+            QString path(reply->url().path());
+            QFileInfo fi(path);
+            name = fi.fileName();
+            }
       else
             name = re.cap(1);
 
@@ -3202,7 +3205,6 @@ void MuseScore::networkFinished(QNetworkReply* reply)
       score->setCreated(true);
       score->setDirty(true);
       setCurrentScoreView(appendScore(score));
-      lastOpenPath = score->fileInfo()->path();
       writeSessionFile(false);
       }
 
