@@ -1334,8 +1334,7 @@ void Chord::layout()
       //  process ledger lines
       //-----------------------------------------
 
-      foreach(const LedgerLine* l, _ledgerLines)
-            delete l;
+      qDeleteAll(_ledgerLines);
       _ledgerLines.clear();
 
       //---------------------------------------------------
