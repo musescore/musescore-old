@@ -158,7 +158,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>ChordEdit</name>
     <message>
         <source>MuseScore: Harmony Properties</source>
-        <translation>MuseScore: 音符のプロパティ</translation>
+        <translation>MuseScore: 和音のプロパティ</translation>
     </message>
     <message>
         <source>TextLabel</source>
@@ -949,7 +949,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Note Head Type</source>
-        <translation>符頭の型</translation>
+        <translation>符頭の形状</translation>
     </message>
     <message>
         <source>normal</source>
@@ -1290,7 +1290,7 @@ failed: </source>
     <name>EditInstrumentBase</name>
     <message>
         <source>MuseScore: Edit Instrument Properties</source>
-        <translation>MuseScore: 楽器のプロパティを編集</translation>
+        <translation>MuseScore: 楽器プロパティの編集</translation>
     </message>
     <message>
         <source>Instrument Properties</source>
@@ -1377,7 +1377,7 @@ failed: </source>
     </message>
     <message>
         <source>Usable Pitch Range:</source>
-        <translation>使用可能な音程の範囲:</translation>
+        <translation>使用可能な音高の範囲:</translation>
     </message>
     <message>
         <source>Amateur:</source>
@@ -1528,11 +1528,11 @@ failed: </source>
     </message>
     <message>
         <source>TopStaff</source>
-        <translation>最上位譜線</translation>
+        <translation>最上位譜表</translation>
     </message>
     <message>
         <source>BottomStaff</source>
-        <translation>最下位譜線</translation>
+        <translation>最下位譜表</translation>
     </message>
     <message>
         <source>Chord</source>
@@ -1672,7 +1672,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>show first</source>
-        <translation>最初のページにも表示する</translation>
+        <translation>最初にも表示する</translation>
     </message>
     <message>
         <source>odd/even</source>
@@ -1692,7 +1692,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>interval</source>
-        <translation>音程</translation>
+        <translation>間隔</translation>
     </message>
     <message>
         <source>spaces</source>
@@ -1781,7 +1781,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>System distance</source>
-        <translation>段落の間隔</translation>
+        <translation>段の間隔</translation>
     </message>
     <message>
         <source>Lyrics upper margin</source>
@@ -2774,7 +2774,7 @@ failed: </source>
     </message>
     <message>
         <source>irregular</source>
-        <translation>不規則</translation>
+        <translation>小節番号のカウントから除外</translation>
     </message>
     <message>
         <source>break multi measure rest</source>
@@ -3666,11 +3666,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
-        <translation>BB ファイル &lt;※実験的&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
+        <translation>Band-in-a-Box ファイル &lt;※実験的&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation>Overture ファイル &lt;※実験的&gt; (*.ove);;</translation>
+        <translation>Overture ファイル &lt;※実験的&gt; (*.ove)</translation>
     </message>
 </context>
 <context>
@@ -3728,7 +3728,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Create new score from scratch</source>
-        <translation>楽譜を新規作成</translation>
+        <translation>新しい楽譜を最初から作成</translation>
     </message>
 </context>
 <context>
@@ -4065,7 +4065,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Panorama Position</source>
-        <translation>パノラマ ポジション</translation>
+        <translation>パンポット</translation>
     </message>
     <message>
         <source>Reverb</source>
@@ -4238,7 +4238,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Choose Working Directory</source>
-        <translation>「名前を付けて保存」 で使うファルダを選んでください。</translation>
+        <translation>作業用ディレクトリの選択</translation>
     </message>
     <message>
         <source>Choose Instrument List</source>
@@ -4309,7 +4309,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Working Directory:</source>
-        <translation>「名前を付けて保存」 で使うファルダ</translation>
+        <translation>作業用ディレクトリ</translation>
     </message>
     <message>
         <source>Windows</source>
@@ -4603,7 +4603,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Portaudio</source>
-        <translation>オーディオのポート設定</translation>
+        <translation>Portaudio</translation>
     </message>
     <message>
         <source>Api:</source>
@@ -5335,7 +5335,7 @@ failed: </source>
     </message>
     <message>
         <source>same system</source>
-        <translation>同一の段落</translation>
+        <translation>同一の段</translation>
     </message>
     <message>
         <source>Action</source>
@@ -7552,11 +7552,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add System Text</source>
-        <translation>システムテキストの追加</translation>
+        <translation>譜表テキストの追加</translation>
     </message>
     <message>
         <source>System Text</source>
-        <translation>システムテキスト</translation>
+        <translation>譜表テキスト</translation>
     </message>
     <message>
         <source>Add Staff Text</source>
@@ -7772,11 +7772,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>toggle system break</source>
-        <translation>「改ページ」 を動かす</translation>
+        <translation>「改ページ」 を動かす(表現の統一問題)</translation>
     </message>
     <message>
         <source>Toggle System Break</source>
-        <translation>「改行」 を動かす</translation>
+        <translation>「改行」 を動かす(表現の統一問題)</translation>
     </message>
     <message>
         <source>toggle page break</source>
@@ -8184,7 +8184,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Up Note in Chord</source>
-        <translation>一つ上の音に移動</translation>
+        <translation>上に転回</translation>
     </message>
     <message>
         <source>Go to higher pitched note in chord</source>
@@ -8376,11 +8376,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>next score</source>
-        <translation>次の楽譜</translation>
+        <translation>次のスコア</translation>
     </message>
     <message>
         <source>previous score</source>
-        <translation>前の楽譜</translation>
+        <translation>前のスコア</translation>
     </message>
 </context>
 <context>

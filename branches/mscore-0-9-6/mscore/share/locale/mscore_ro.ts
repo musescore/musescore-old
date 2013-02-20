@@ -2037,7 +2037,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Edit Part:</source>
-        <translation>Proprietăţi ştimă nouă/selectată:</translation>
+        <translation>Proprietăţi Parte nouă/selectată:</translation>
     </message>
     <message>
         <source>Instrument:</source>
@@ -2045,7 +2045,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create Part</source>
-        <translation>Extrage ştima selectată</translation>
+        <translation>Extrage Parte selectată</translation>
     </message>
     <message>
         <source>File Name:</source>
@@ -2053,7 +2053,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Part Title:</source>
-        <translation>Titlu Ştimă:</translation>
+        <translation>Titlu Parte:</translation>
     </message>
     <message>
         <source>Close</source>
@@ -2061,7 +2061,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Part-%1</source>
-        <translation>Ştimă-%1</translation>
+        <translation>Parte-%1</translation>
     </message>
 </context>
 <context>
@@ -3688,7 +3688,7 @@ nu este compatibil cu interfaţa curentă</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation>Fișiere Overture &lt;cu titlu de experiment&gt; (*.ove);;</translation>
+        <translation>Fișiere Overture &lt;cu titlu de experiment&gt; (*.ove)</translation>
     </message>
 </context>
 <context>
@@ -4075,7 +4075,7 @@ nu este compatibil cu interfaţa curentă</translation>
     </message>
     <message>
         <source>Part Name</source>
-        <translation>Nume Ştimă</translation>
+        <translation>Nume Parte</translation>
     </message>
     <message>
         <source>Volume</source>
@@ -4127,7 +4127,7 @@ nu este compatibil cu interfaţa curentă</translation>
     </message>
     <message>
         <source>midi sound for part</source>
-        <translation>sunet MIDI pentru ştimă</translation>
+        <translation>sunet MIDI pentru Parte</translation>
     </message>
 </context>
 <context>
@@ -5622,7 +5622,7 @@ Accesaţi "Afişează" &gt; "Sintetizator" din meniu&#13;
     <name>SplitStaff</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: Modificare proprietăţi portativ / ştimă</translation>
+        <translation>MuseScore: Modificare proprietăţi portativ / Parte</translation>
     </message>
     <message>
         <source>Split Staff</source>

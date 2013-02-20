@@ -3704,7 +3704,7 @@ skladbo "%1"?</translation>
     <message>
         <location filename="../../mscore/file.cpp" line="192"/>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation>Overture datoteke &lt;eksperimentalno&gt; (*.ove);;</translation>
+        <translation>Overture datoteke &lt;eksperimentalno&gt; (*.ove)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="552"/>

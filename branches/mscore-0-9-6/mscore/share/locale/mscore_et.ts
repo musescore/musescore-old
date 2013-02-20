@@ -25,7 +25,7 @@ p, li { white-space: pre-wrap; }&#13;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Külasta Musescore &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;kodulehte&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; uusima versiooni ja muu informatsiooni saamiseks.&lt;/span&gt;&lt;/p&gt;&#13;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Toeta Musescore arendust &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;rahaliselt&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Autoriõigus&lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer ja Kaastöötajad.&lt;/span&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Avaldatud GNU Üldise Avaliku Litsentsi alusel&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Autoriõigus&lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer ja Kaastöötajad.&lt;/span&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Avaldatud GNU Üldise Avaliku Litsentsi all.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -47,7 +47,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>Accidental</name>
     <message>
         <source>round bracket</source>
-        <translation>Ümarsulud</translation>
+        <translation>ümarsulud</translation>
     </message>
 </context>
 <context>
@@ -141,22 +141,22 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Arpeggio</source>
-        <translation type="unfinished"/>
+        <translation>Arpedžo</translation>
     </message>
     <message>
         <source>Tremolo</source>
-        <translation type="unfinished">Tremolo</translation>
+        <translation>Tremolo</translation>
     </message>
     <message>
         <source>Glissando</source>
-        <translation type="unfinished">Glissando</translation>
+        <translation>Glissando</translation>
     </message>
 </context>
 <context>
     <name>ChordEdit</name>
     <message>
         <source>MuseScore: Harmony Properties</source>
-        <translation>MuseScore: Harmoonia Omadused</translation>
+        <translation>MuseScore: Harmoonia omadused</translation>
     </message>
     <message>
         <source>TextLabel</source>
@@ -816,22 +816,22 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"/>
+        <translation>Tüüp</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"/>
+        <translation>Väärtus</translation>
     </message>
     <message>
         <source>Alter</source>
-        <translation type="unfinished"/>
+        <translation>Alteratsioon</translation>
     </message>
 </context>
 <context>
     <name>ChordList</name>
     <message>
         <source>Write Chord Description failed: </source>
-        <translation type="unfinished"/>
+        <translation>Akordide nimekirja loomine ebaõnnestus </translation>
     </message>
 </context>
 <context>
@@ -859,7 +859,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Note Properties</source>
-        <translation>Noodi Omadused</translation>
+        <translation>Noodi omadused</translation>
     </message>
     <message>
         <source>tuning offset</source>
@@ -2608,15 +2608,15 @@ ebaõnnestus: </translation>
     </message>
     <message>
         <source>BEGIN</source>
-        <translation>Begin</translation>
+        <translation>ALGUS</translation>
     </message>
     <message>
         <source>MIDDLE</source>
-        <translation>Middle</translation>
+        <translation>KESKOSA</translation>
     </message>
     <message>
         <source>END</source>
-        <translation>End</translation>
+        <translation>LÕPP</translation>
     </message>
     <message>
         <source>Pos2</source>
@@ -2846,19 +2846,19 @@ ebaõnnestus: </translation>
     </message>
     <message>
         <source>Work Title:</source>
-        <translation>Work title:</translation>
+        <translation>Teose Pealkiri</translation>
     </message>
     <message>
         <source>Work Number:</source>
-        <translation>Work number:</translation>
+        <translation>Teose Number</translation>
     </message>
     <message>
         <source>Movement Title:</source>
-        <translation>Movement title:</translation>
+        <translation>Osa Pealkiri</translation>
     </message>
     <message>
         <source>Movement Number:</source>
-        <translation>Movement number:</translation>
+        <translation>Osa Number</translation>
     </message>
     <message>
         <source>Source:</source>
@@ -2977,7 +2977,7 @@ ebaõnnestus: </translation>
     </message>
     <message>
         <source>Clefs</source>
-        <translation/>
+        <translation>Noodivõtmed</translation>
     </message>
     <message>
         <source>4/4 common time</source>
@@ -3001,7 +3001,7 @@ ebaõnnestus: </translation>
     </message>
     <message>
         <source>pedal</source>
-        <translation>Pedal</translation>
+        <translation>pedal</translation>
     </message>
     <message>
         <source>Lines</source>
@@ -3262,7 +3262,7 @@ before closing?</source>
     </message>
     <message>
         <source>Untitled</source>
-        <translation/>
+        <translation>Pealkirjata</translation>
     </message>
     <message>
         <source>Drums</source>
@@ -3270,15 +3270,15 @@ before closing?</source>
     </message>
     <message>
         <source>Beam Properties</source>
-        <translation/>
+        <translation>Joone Omadused</translation>
     </message>
     <message>
         <source>Measures</source>
-        <translation/>
+        <translation>Taktid</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation/>
+        <translation>Tekst</translation>
     </message>
     <message>
         <source>Ottava</source>
@@ -3370,7 +3370,7 @@ before closing?</source>
     </message>
     <message>
         <source>MuseScore: failure</source>
-        <translation>MuseScore: Failure</translation>
+        <translation>MuseScore: viga</translation>
     </message>
     <message>
         <source>Load template file </source>
@@ -3378,11 +3378,11 @@ before closing?</source>
     </message>
     <message>
         <source> failed</source>
-        <translation> Failed</translation>
+        <translation> viga</translation>
     </message>
     <message>
         <source>Go To: </source>
-        <translation/>
+        <translation>Mine: </translation>
     </message>
     <message>
         <source>Online Handbook</source>
@@ -3492,11 +3492,11 @@ Vali "Help" menüüst selle asemel "Online Käsiraamat".</translation>
     </message>
     <message>
         <source>Arpeggio &amp;&amp; Glissando</source>
-        <translation type="unfinished"/>
+        <translation>Arpeggio &amp;&amp; Glissando</translation>
     </message>
     <message>
         <source>Arpeggio</source>
-        <translation type="unfinished"/>
+        <translation>Arpeggio</translation>
     </message>
     <message>
         <source>Breath &amp;&amp; Pauses</source>
@@ -3955,7 +3955,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Properties...</source>
-        <translation type="unfinished"/>
+        <translation>Omadused</translation>
     </message>
 </context>
 <context>
@@ -4168,11 +4168,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>h:mm:s</source>
-        <translation type="unfinished"/>
+        <translation>t:mm:s</translation>
     </message>
     <message>
         <source>0:00:00</source>
-        <translation type="unfinished">0:00:00</translation>
+        <translation>0:00:00</translation>
     </message>
     <message>
         <source>actual tempo</source>
@@ -4188,7 +4188,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>100%</source>
-        <translation type="unfinished">100%</translation>
+        <translation>100%</translation>
     </message>
     <message>
         <source>Rewind</source>
@@ -4200,7 +4200,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Vol</source>
-        <translation type="unfinished">Vol</translation>
+        <translation>Vol</translation>
     </message>
     <message>
         <source>Tmp</source>
@@ -4895,11 +4895,11 @@ Valige vähemalt üks noot või paus ja korrake operatsiooni
     <name>Rest</name>
     <message>
         <source>Rest</source>
-        <translation/>
+        <translation>Paus</translation>
     </message>
     <message>
         <source>Rest Properties...</source>
-        <translation/>
+        <translation>Pausi Omadused...</translation>
     </message>
     <message>
         <source>Tuplet...</source>
@@ -4918,15 +4918,15 @@ Valige vähemalt üks noot või paus ja korrake operatsiooni
     <name>RestPropertyBase</name>
     <message>
         <source>Rest Properties</source>
-        <translation/>
+        <translation>Pausi Omadused</translation>
     </message>
     <message>
         <source>small</source>
-        <translation>Small</translation>
+        <translation>väike</translation>
     </message>
     <message>
         <source>Chord Properties</source>
-        <translation/>
+        <translation>Akordi Omadused</translation>
     </message>
     <message>
         <source>additional leading space </source>
@@ -5016,7 +5016,7 @@ Failed: </translation>
     </message>
     <message>
         <source>MuseScore: Save As</source>
-        <translation/>
+        <translation>MuseScore: Salvesta Kui</translation>
     </message>
     <message>
         <source>Open File
@@ -5026,7 +5026,7 @@ Failed: </translation>
     </message>
     <message>
         <source>MuseScore: Save Style</source>
-        <translation/>
+        <translation>MuseScore: Salvesta Stiil</translation>
     </message>
     <message>
         <source>Open Style File
@@ -5040,43 +5040,43 @@ Failed: </translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
-        <translation/>
+        <translation>MuseScore: Kirjuta Stiil</translation>
     </message>
     <message>
         <source>MuseScore: Read File</source>
-        <translation/>
+        <translation>MuseScore: Loe Faili</translation>
     </message>
     <message>
         <source>MuseScore: transpose</source>
-        <translation>MuseScore: Transpose</translation>
+        <translation>MuseScore: transponeeri</translation>
     </message>
     <message>
         <source>There is nothing selected. Transpose whole score?</source>
-        <translation/>
+        <translation>Midagi pole valitud. Kas transponeerida terve lugu?</translation>
     </message>
     <message>
         <source>Compressed MuseScore File (*.mscz)</source>
-        <translation/>
+        <translation>Pakitud MuseScore Fail (*.mscz)</translation>
     </message>
     <message>
         <source>MuseScore Style File (*.mss)</source>
-        <translation/>
+        <translation>MuseScore Stiili Fail (*.mss)</translation>
     </message>
     <message>
         <source>MuseScore File (*.mscx)</source>
-        <translation/>
+        <translation>MuseScore Fail (*.mscx)</translation>
     </message>
     <message>
         <source>MuseScore: Save File</source>
-        <translation/>
+        <translation>MuseScore: Salvesta Fail</translation>
     </message>
     <message>
         <source>removing old backup file </source>
-        <translation type="unfinished">Removing old backup file </translation>
+        <translation>kustuta vana backup fail </translation>
     </message>
     <message>
         <source> failed</source>
-        <translation type="unfinished"> Failed</translation>
+        <translation> viga</translation>
     </message>
     <message>
         <source>&gt; to backup &lt;</source>
@@ -5092,15 +5092,15 @@ Failed: </translation>
     </message>
     <message>
         <source>MuseScore: Save File failed: </source>
-        <translation/>
+        <translation>MuseScore: Salvestamine ebaõnnestus </translation>
     </message>
     <message>
         <source>renaming old file &lt;</source>
-        <translation type="unfinished"/>
+        <translation>vana faili ümbernimetamine &lt;</translation>
     </message>
     <message>
         <source>renaming temp. file &lt;</source>
-        <translation type="unfinished"/>
+        <translation>temp. faili ümbernimetamine &lt;</translation>
     </message>
     <message>
         <source>&gt; failed:
@@ -5109,66 +5109,69 @@ Failed: </translation>
     </message>
     <message>
         <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation type="unfinished"/>
+        <translation>Pakitud MuseScore Fail (*.mscz)</translation>
     </message>
     <message>
         <source>MuseScore Format (*.mscx)</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore Formaat (*.mscx)</translation>
     </message>
     <message>
         <source>MusicXML Format (*.xml)</source>
-        <translation type="unfinished"/>
+        <translation>MusicXML Formaat (*.xml)</translation>
     </message>
     <message>
         <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation type="unfinished"/>
+        <translation>Pakitud MusicXML Formaat (*.mxl)</translation>
     </message>
     <message>
         <source>Standard MIDI File (*.mid)</source>
-        <translation type="unfinished"/>
+        <translation>Standard MIDI Fail (*.mid)</translation>
     </message>
     <message>
         <source>PDF File (*.pdf)</source>
-        <translation type="unfinished"/>
+        <translation>PDF Fail (*.pdf)</translation>
     </message>
     <message>
         <source>PostScript File (*.ps)</source>
-        <translation type="unfinished"/>
+        <translation>PostScript Fail (*.ps)</translation>
     </message>
     <message>
         <source>PNG Bitmap Graphic (*.png)</source>
-        <translation type="unfinished"/>
+        <translation>PNG Bitmap (*.png)</translation>
     </message>
     <message>
         <source>Scalable Vector Graphic (*.svg)</source>
-        <translation type="unfinished"/>
+        <translation>Scalable Vector Graphic (*.svg)</translation>
     </message>
     <message>
         <source>Lilypond Format (*.ly)</source>
-        <translation type="unfinished"/>
+        <translation>Lilypond Formaat (*.ly)</translation>
     </message>
     <message>
         <source>Wave Audio (*.wav)</source>
-        <translation type="unfinished"/>
+        <translation>Wave Audio (*.wav)</translation>
     </message>
     <message>
         <source>Flac Audio (*.flac)</source>
-        <translation type="unfinished"/>
+        <translation>Flac Audio (*.flac)</translation>
     </message>
     <message>
         <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation type="unfinished"/>
+        <translation>Ogg Vorbis Audio (*.ogg)</translation>
     </message>
     <message>
         <source>MuseScore: Save a Copy</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Salvesta Koopia</translation>
     </message>
     <message>
         <source>The following file is locked: 
 %1 
 
 Try saving to a different location.</source>
-        <translation type="unfinished"/>
+        <translation>See fail on lukustatud: line break&#13;
+%1 line break&#13;
+line break&#13;
+Proovige salvestada teise kataloogi.</translation>
     </message>
     <message>
         <source>The first time signature of a piece can not be removed.</source>
@@ -5207,11 +5210,11 @@ Try saving to a different location.</source>
     <name>ScoreView</name>
     <message>
         <source>Select</source>
-        <translation type="unfinished"/>
+        <translation>Vali</translation>
     </message>
     <message>
         <source>More...</source>
-        <translation type="unfinished"/>
+        <translation>Rohkem...</translation>
     </message>
     <message>
         <source>Object Inspector</source>
@@ -5243,7 +5246,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Measure</source>
-        <translation type="unfinished">Takt</translation>
+        <translation>Takt</translation>
     </message>
     <message>
         <source>unknown drop format: formats %1:
@@ -5263,7 +5266,7 @@ Try saving to a different location.</source>
     <name>SegmentBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>Form</translation>
     </message>
     <message>
         <source>Segment</source>
@@ -5279,15 +5282,15 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Time Signature</source>
-        <translation type="unfinished">Time signature:</translation>
+        <translation>Taktimõõt</translation>
     </message>
     <message>
         <source>Begin Repeat</source>
-        <translation type="unfinished"/>
+        <translation>Alusta Kordust</translation>
     </message>
     <message>
         <source>Chord/Rest</source>
-        <translation type="unfinished">Akord/Paus</translation>
+        <translation>Akord/Paus</translation>
     </message>
     <message>
         <source>Breath Segment</source>
@@ -5303,7 +5306,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Lyrics:</source>
-        <translation type="unfinished"/>
+        <translation>Sõnad:</translation>
     </message>
     <message>
         <source>Segment Type:</source>
@@ -5314,11 +5317,11 @@ Try saving to a different location.</source>
     <name>SelectDialog</name>
     <message>
         <source>MuseScore: Select</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Vali</translation>
     </message>
     <message>
         <source>Search for</source>
-        <translation type="unfinished"/>
+        <translation>Otsi</translation>
     </message>
     <message>
         <source>Element Type:</source>
@@ -5632,234 +5635,234 @@ and check that the file location is correct</source>
     <name>SymbolDialog</name>
     <message>
         <source>MuseScore: Symbols</source>
-        <translation/>
+        <translation>MuseScore: Sümbolid</translation>
     </message>
 </context>
 <context>
     <name>SymbolDialogBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>Vorm</translation>
     </message>
     <message>
         <source>System Flag</source>
-        <translation type="unfinished"/>
+        <translation>Muuda üldiseks</translation>
     </message>
 </context>
 <context>
     <name>SynthControl</name>
     <message>
         <source>Choose Synthesizer SoundFont</source>
-        <translation type="unfinished"/>
+        <translation>Vali helipank</translation>
     </message>
     <message>
         <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
-        <translation type="unfinished"/>
+        <translation>Helipanga failid (*.sf2 *.SF2);;kõik (*)</translation>
     </message>
     <message>
         <source>Synthesizer</source>
-        <translation type="unfinished"/>
+        <translation>Süntesaator</translation>
     </message>
     <message>
         <source>Rev</source>
-        <translation type="unfinished"/>
+        <translation>Reverb</translation>
     </message>
     <message>
         <source>Cho</source>
-        <translation type="unfinished"/>
+        <translation>Koorus</translation>
     </message>
     <message>
         <source>master volume</source>
-        <translation type="unfinished"/>
+        <translation>Peamine helitugevus</translation>
     </message>
     <message>
         <source>Vol</source>
-        <translation type="unfinished">Vol</translation>
+        <translation>Vol</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Master Tuning</source>
-        <translation type="unfinished"/>
+        <translation>Häälestus</translation>
     </message>
     <message>
         <source>Hz</source>
         <extracomment>Frequency Herz</extracomment>
-        <translation type="unfinished"/>
+        <translation>Hz</translation>
     </message>
     <message>
         <source>Reverb</source>
-        <translation type="unfinished">Kaja</translation>
+        <translation>Reverbratsioon</translation>
     </message>
     <message>
         <source>Room Size:</source>
-        <translation type="unfinished"/>
+        <translation>Ruumi suurus:</translation>
     </message>
     <message>
         <source>Damp:</source>
-        <translation type="unfinished"/>
+        <translation>Summutus:</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Laius:</translation>
+        <translation>Laius:</translation>
     </message>
     <message>
         <source>Preset:</source>
-        <translation type="unfinished"/>
+        <translation>Seadistus</translation>
     </message>
     <message>
         <source>not implemented</source>
-        <translation type="unfinished"/>
+        <translation>not implemented</translation>
     </message>
     <message>
         <source>Chorus</source>
-        <translation type="unfinished">Chorus</translation>
+        <translation>Koorus</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"/>
+        <translation>Tüüp</translation>
     </message>
     <message>
         <source>Sine</source>
-        <translation type="unfinished"/>
+        <translation>Siinus</translation>
     </message>
     <message>
         <source>Triangle</source>
-        <translation type="unfinished"/>
+        <translation>Kolmnurk</translation>
     </message>
     <message>
         <source>Number:</source>
-        <translation type="unfinished"/>
+        <translation>Number:</translation>
     </message>
     <message>
         <source>Speed:</source>
-        <translation type="unfinished"/>
+        <translation>Kiirus:</translation>
     </message>
     <message>
         <source>Depth:</source>
-        <translation type="unfinished"/>
+        <translation>Sügavus:</translation>
     </message>
     <message>
         <source>Loaded SoundFont</source>
-        <translation type="unfinished"/>
+        <translation>Laaditud helipank</translation>
     </message>
     <message>
         <source>SoundFont</source>
-        <translation type="unfinished"/>
+        <translation>Helipank</translation>
     </message>
 </context>
 <context>
     <name>TempoProperties</name>
     <message>
         <source>MuseScore: Tempo Text Properties</source>
-        <translation/>
+        <translation>MuseScore: Tempo teksti omadused</translation>
     </message>
     <message>
         <source>Tempo:</source>
-        <translation/>
+        <translation>Tempo</translation>
     </message>
     <message>
         <source>BPM</source>
-        <translation/>
+        <translation>BPM</translation>
     </message>
     <message>
         <source>Tempo Properties</source>
-        <translation/>
+        <translation>Tempo omadused</translation>
     </message>
 </context>
 <context>
     <name>TempoText</name>
     <message>
         <source>Tempo Properties...</source>
-        <translation/>
+        <translation>Tempo omadused...</translation>
     </message>
 </context>
 <context>
     <name>Text</name>
     <message>
         <source>Text Properties...</source>
-        <translation/>
+        <translation>Teksti omadused...</translation>
     </message>
     <message>
         <source>Set Invisible</source>
-        <translation/>
+        <translation>Muuda nähtamatuks</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation/>
+        <translation>Muuda nähtevaks</translation>
     </message>
 </context>
 <context>
     <name>TextBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>Vorm</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"/>
+        <translation>Tüüp:</translation>
     </message>
     <message>
         <source>MM</source>
-        <translation type="unfinished"/>
+        <translation>MM</translation>
     </message>
     <message>
         <source>Space</source>
-        <translation type="unfinished">Space:</translation>
+        <translation>Ruum</translation>
     </message>
     <message>
         <source>Text</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Tekst</translation>
+        <translation>Tekst</translation>
     </message>
     <message>
         <source>Text:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Tekst:</translation>
+        <translation>Tekst:</translation>
     </message>
     <message>
         <source>Offset:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"/>
+        <translation>Nihe:</translation>
     </message>
     <message>
         <source>Abs.:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"/>
+        <translation>Absoluutne.:</translation>
     </message>
     <message>
         <source>Rel.:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"/>
+        <translation>Suhteline.:</translation>
     </message>
     <message>
         <source>TextStyle:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"/>
+        <translation>Teksti stiil</translation>
     </message>
 </context>
 <context>
     <name>TextC</name>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished"/>
+        <translation>Muuda nähtamatuks</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished"/>
+        <translation>Muuda nähtavaks</translation>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation type="unfinished"/>
+        <translation>Partii omadused...</translation>
     </message>
 </context>
 <context>
     <name>TextLineBase</name>
     <message>
         <source>Form</source>
-        <translation/>
+        <translation>Vorm</translation>
     </message>
     <message>
         <source>TextLine</source>
@@ -5867,41 +5870,41 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>line width:</source>
-        <translation>joone laius:</translation>
+        <translation>joone paksus:</translation>
     </message>
     <message>
         <source>BeginText</source>
-        <translation type="unfinished"/>
+        <translation>Algus tekst</translation>
     </message>
     <message>
         <source>ContinueText</source>
-        <translation type="unfinished"/>
+        <translation>Jätkuv tekst</translation>
     </message>
 </context>
 <context>
     <name>TextLineSegment</name>
     <message>
         <source>Line Properties...</source>
-        <translation>Joone Omadused...</translation>
+        <translation>Joone omadused...</translation>
     </message>
     <message>
         <source>Set Invisible</source>
-        <translation/>
+        <translation>Muuda nähtamatuks</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation/>
+        <translation>Muuda nähtavaks</translation>
     </message>
 </context>
 <context>
     <name>TextPaletteBase</name>
     <message>
         <source>MuseScore: Special Text Symbols</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Sümbolid</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished">Tekst</translation>
+        <translation>Tekst</translation>
     </message>
 </context>
 <context>
@@ -5909,284 +5912,284 @@ and check that the file location is correct</source>
     <message>
         <source>mm</source>
         <comment>millimeter unit</comment>
-        <translation type="unfinished">mm</translation>
+        <translation>mm</translation>
     </message>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation type="unfinished">sp</translation>
+        <translation>sp</translation>
     </message>
 </context>
 <context>
     <name>TextProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation type="unfinished">MuseScore: Teksti Omadused</translation>
+        <translation>MuseScore: Teksti omadused</translation>
     </message>
     <message>
         <source>apply to all elements of same type</source>
-        <translation type="unfinished"/>
+        <translation>rakenda muudatused kõikidele samatüübilistele elementidele</translation>
     </message>
 </context>
 <context>
     <name>TextPropertiesBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>Vorm</translation>
     </message>
     <message>
         <source>Font:</source>
-        <translation type="unfinished"/>
+        <translation>Font:</translation>
     </message>
     <message>
         <source>font face</source>
-        <translation type="unfinished"/>
+        <translation>kirja stiil</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation type="unfinished"/>
+        <translation>Suurus:</translation>
     </message>
     <message>
         <source>font point size</source>
-        <translation type="unfinished"/>
+        <translation>Fondi suurus</translation>
     </message>
     <message>
         <source>Style:</source>
-        <translation type="unfinished"/>
+        <translation>Stiil.</translation>
     </message>
     <message>
         <source>bold</source>
-        <translation type="unfinished"/>
+        <translation>Rasvane</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished">B</translation>
+        <translation>B</translation>
     </message>
     <message>
         <source>italic</source>
-        <translation type="unfinished"/>
+        <translation>kaldkiri</translation>
     </message>
     <message>
         <source>I</source>
-        <translation type="unfinished"/>
+        <translation>I</translation>
     </message>
     <message>
         <source>underline</source>
-        <translation>allakriipsutamine</translation>
+        <translation>allajoonitud</translation>
     </message>
     <message>
         <source>U</source>
-        <translation type="unfinished"/>
+        <translation>U</translation>
     </message>
     <message>
         <source>Align:</source>
-        <translation type="unfinished"/>
+        <translation>Joonda:</translation>
     </message>
     <message>
         <source>align left edge of text to reference point</source>
-        <translation type="unfinished"/>
+        <translation>joonda teksti vasak külg keskpunkti</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>center text on reference point</source>
-        <translation type="unfinished"/>
+        <translation>joonda keskpunkti</translation>
     </message>
     <message>
         <source>align right edge of text to reference point</source>
-        <translation type="unfinished"/>
+        <translation>joonda teksti parem külg keskpunkti</translation>
     </message>
     <message>
         <source>align top edge of text to reference point</source>
-        <translation type="unfinished"/>
+        <translation>joonda teksti ülemine külg keskpunkti</translation>
     </message>
     <message>
         <source>center text vertical to reference point</source>
-        <translation type="unfinished"/>
+        <translation>aseta tekst vertikaalselt keskpunktile</translation>
     </message>
     <message>
         <source>align bottom edge of text to reference point</source>
-        <translation type="unfinished"/>
+        <translation>joonda teksti alumine külg keskpunkti</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Värv:</translation>
+        <translation>Värv:</translation>
     </message>
     <message>
         <source>text color</source>
-        <translation type="unfinished"/>
+        <translation>teksti värv</translation>
     </message>
     <message>
         <source>Offset</source>
-        <translation type="unfinished"/>
+        <translation>Nihe</translation>
     </message>
     <message>
         <source>X:</source>
         <extracomment>coordinate</extracomment>
-        <translation type="unfinished"/>
+        <translation>X:</translation>
     </message>
     <message>
         <source>horizontal offset to reference point</source>
-        <translation type="unfinished"/>
+        <translation>horisontaalne nihe keskpunkti suhtes</translation>
     </message>
     <message>
         <source>relX:</source>
-        <translation type="unfinished"/>
+        <translation>relX:</translation>
     </message>
     <message>
         <source>reference point offset in percent of parent width</source>
-        <translation type="unfinished"/>
+        <translation>keskpunkti nihe objekti laiuse suhtes protsentides</translation>
     </message>
     <message>
         <source>%</source>
-        <translation type="unfinished">%</translation>
+        <translation>%</translation>
     </message>
     <message>
         <source>Y:</source>
         <extracomment>coordinate</extracomment>
-        <translation type="unfinished"/>
+        <translation>Y:</translation>
     </message>
     <message>
         <source>vertical offset to reference point</source>
-        <translation type="unfinished"/>
+        <translation>vertikaalne nihe keskpunkti suhtes</translation>
     </message>
     <message>
         <source>relY:</source>
-        <translation type="unfinished"/>
+        <translation>relY:</translation>
     </message>
     <message>
         <source>reference point offset in percent of parent height</source>
-        <translation type="unfinished"/>
+        <translation>keskpunkti nihe objekti kõrguse suhtes protsentides</translation>
     </message>
     <message>
         <source>Unit:</source>
-        <translation type="unfinished"/>
+        <translation>Ühik:</translation>
     </message>
     <message>
         <source>offset is absolute</source>
-        <translation type="unfinished"/>
+        <translation>nihe on absoluutne</translation>
     </message>
     <message>
         <source>MM</source>
-        <translation type="unfinished"/>
+        <translation>MM</translation>
     </message>
     <message>
         <source>offset in Space units</source>
-        <translation type="unfinished"/>
+        <translation>nihe on ruumiühikutes</translation>
     </message>
     <message>
         <source>Space</source>
-        <translation type="unfinished">Space:</translation>
+        <translation>Ruumiühikud</translation>
     </message>
     <message>
         <source>enable text frame</source>
-        <translation type="unfinished"/>
+        <translation>lisa tekstile raam</translation>
     </message>
     <message>
         <source>Frame</source>
-        <translation type="unfinished"/>
+        <translation>Raam</translation>
     </message>
     <message>
         <source>draw circled frame</source>
-        <translation type="unfinished"/>
+        <translation>ümar raam</translation>
     </message>
     <message>
         <source>Circle</source>
-        <translation type="unfinished"/>
+        <translation>Ümar</translation>
     </message>
     <message>
         <source>draw boxed frame</source>
-        <translation type="unfinished"/>
+        <translation>kandiline raam</translation>
     </message>
     <message>
         <source>Box</source>
-        <translation type="unfinished"/>
+        <translation>Kandiline</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Laius:</translation>
+        <translation>Paksus:</translation>
     </message>
     <message>
         <source>frame line width</source>
-        <translation>raami joone laius</translation>
+        <translation>raami joone paksus</translation>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished">mm</translation>
+        <translation>mm</translation>
     </message>
     <message>
         <source>Margin:</source>
-        <translation type="unfinished"/>
+        <translation>Veerg:</translation>
     </message>
     <message>
         <source>frame inner margin</source>
-        <translation type="unfinished"/>
+        <translation>raami sisemine veerg</translation>
     </message>
     <message>
         <source>Round:</source>
-        <translation type="unfinished"/>
+        <translation>Ümarus:</translation>
     </message>
     <message>
         <source>corner round</source>
-        <translation type="unfinished"/>
+        <translation>nurga ümarus</translation>
     </message>
     <message>
         <source>frame color</source>
-        <translation type="unfinished"/>
+        <translation>raami värv</translation>
     </message>
     <message>
         <source>System Flag</source>
-        <translation type="unfinished"/>
+        <translation>Muuda üldiseks</translation>
     </message>
     <message>
         <source>center text vertical to text baseline</source>
-        <translation type="unfinished"/>
+        <translation>joonda tekst vertikaalselt alumise külje suhtes</translation>
     </message>
 </context>
 <context>
     <name>TextStyleDialog</name>
     <message>
         <source>MuseScore: Edit Text Styles</source>
-        <translation>MuseScore: Muuda Teksti Stiile</translation>
+        <translation>MuseScore: Muuda teksti stiile</translation>
     </message>
 </context>
 <context>
     <name>TextTools</name>
     <message>
         <source>Text Edit</source>
-        <translation>Teksti Muutmine</translation>
+        <translation>Teksti redigeerimine</translation>
     </message>
     <message>
         <source>Text Tools</source>
-        <translation type="unfinished"/>
+        <translation>Teksti tööriistad</translation>
     </message>
 </context>
 <context>
     <name>TimeDialog</name>
     <message>
         <source>MuseScore: Time Signatures</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Taktimõõdud</translation>
     </message>
     <message>
         <source>4/4 common time</source>
-        <translation type="unfinished"/>
+        <translation>4/4</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
-        <translation type="unfinished">2/2 alla breve</translation>
+        <translation>2/2 alla breve</translation>
     </message>
 </context>
 <context>
     <name>TimeDialogBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>Vorm</translation>
     </message>
     <message>
         <source>+</source>
-        <translation type="unfinished">+</translation>
+        <translation>+</translation>
     </message>
     <message>
         <source>add time signature to palette</source>
@@ -6198,42 +6201,42 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation>Tekita Taktimõõt</translation>
+        <translation>Loo taktimõõt</translation>
     </message>
 </context>
 <context>
     <name>TimesigWizard</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>Vorm</translation>
     </message>
     <message>
         <source>Enter Time Signature:</source>
-        <translation>Time Signature</translation>
+        <translation>Sisesta taktimõõt</translation>
     </message>
     <message>
         <source>Time Signature: </source>
-        <translation>Time signature: </translation>
+        <translation>Taktimõõt </translation>
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"/>
+        <translation>/</translation>
     </message>
     <message>
         <source>Pickup Measure</source>
-        <translation type="unfinished"/>
+        <translation>Eeltakt</translation>
     </message>
     <message>
         <source>Time Signature</source>
-        <translation>Time signature:</translation>
+        <translation>Taktimõõt</translation>
     </message>
     <message>
         <source>Enter Number of Measures:</source>
-        <translation>Enter number of measures:</translation>
+        <translation>Sisesta taktide arv:</translation>
     </message>
     <message>
         <source>Measures:</source>
-        <translation type="unfinished"/>
+        <translation>Taktide arv:</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
@@ -6250,19 +6253,19 @@ p, li { white-space: pre-wrap; }&#13;
     <name>TransposeDialogBase</name>
     <message>
         <source>Transpose key signatures</source>
-        <translation type="unfinished"/>
+        <translation>Transponeeri võtmemärgid</translation>
     </message>
     <message>
         <source>Transpose chord names</source>
-        <translation type="unfinished"/>
+        <translation>Transponeeri akordi nimed</translation>
     </message>
     <message>
         <source>MuseScore: Transpose</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Transponeeri</translation>
     </message>
     <message>
         <source>Transpose by Key</source>
-        <translation type="unfinished"/>
+        <translation>Transponeeri helistikus</translation>
     </message>
     <message>
         <source>Cb major / Ab minor</source>
@@ -6326,267 +6329,267 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished">Üles</translation>
+        <translation>Üles</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished">Alla</translation>
+        <translation>Alla</translation>
     </message>
     <message>
         <source>Closest</source>
-        <translation type="unfinished"/>
+        <translation>Lähimasse</translation>
     </message>
     <message>
         <source>Transpose by Interval</source>
-        <translation type="unfinished"/>
+        <translation>Transponeeri Intervalli võrra</translation>
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation type="unfinished"/>
+        <translation>Puhas priim</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
-        <translation type="unfinished"/>
+        <translation>Suurendatud priim</translation>
     </message>
     <message>
         <source>Diminished Second</source>
-        <translation type="unfinished"/>
+        <translation>Vähendatud sekund</translation>
     </message>
     <message>
         <source>Minor Second</source>
-        <translation>Väike Sekund</translation>
+        <translation>Väike sekund</translation>
     </message>
     <message>
         <source>Major Second</source>
-        <translation>Suur Sekund</translation>
+        <translation>Suur sekund</translation>
     </message>
     <message>
         <source>Augmented Second</source>
-        <translation type="unfinished"/>
+        <translation>Suurendatud sekund</translation>
     </message>
     <message>
         <source>Diminished Third</source>
-        <translation type="unfinished"/>
+        <translation>Vähendatud terts</translation>
     </message>
     <message>
         <source>Minor Third</source>
-        <translation>Väike Terts</translation>
+        <translation>Väike terts</translation>
     </message>
     <message>
         <source>Major Third</source>
-        <translation>Suur Terts</translation>
+        <translation>Suur terts</translation>
     </message>
     <message>
         <source>Augmented Third</source>
-        <translation type="unfinished"/>
+        <translation>Suurendatud terts</translation>
     </message>
     <message>
         <source>Diminished Fourth</source>
-        <translation type="unfinished"/>
+        <translation>Vähendatud kvart</translation>
     </message>
     <message>
         <source>Perfect Fourth</source>
-        <translation type="unfinished"/>
+        <translation>Puhas kvart</translation>
     </message>
     <message>
         <source>Augmented Fourth</source>
-        <translation type="unfinished"/>
+        <translation>Suurendatud kvart</translation>
     </message>
     <message>
         <source>Diminished Fifth</source>
-        <translation type="unfinished"/>
+        <translation>Vähendatud kvint</translation>
     </message>
     <message>
         <source>Perfect Fifth</source>
-        <translation type="unfinished"/>
+        <translation>Puhas kvint</translation>
     </message>
     <message>
         <source>Augmented Fifth</source>
-        <translation type="unfinished"/>
+        <translation>Suurendatud kvint</translation>
     </message>
     <message>
         <source>Diminished Sixth</source>
-        <translation type="unfinished"/>
+        <translation>Vähendatud sekst</translation>
     </message>
     <message>
         <source>Minor Sixth</source>
-        <translation>Väike Sekst</translation>
+        <translation>Väike sekst</translation>
     </message>
     <message>
         <source>Major Sixth</source>
-        <translation>Suur Sekst</translation>
+        <translation>Suur sekst</translation>
     </message>
     <message>
         <source>Augmented Sixth</source>
-        <translation type="unfinished"/>
+        <translation>Suurendatud sekst</translation>
     </message>
     <message>
         <source>Diminished Seventh</source>
-        <translation type="unfinished"/>
+        <translation>Vähendatud septim</translation>
     </message>
     <message>
         <source>Minor Seventh</source>
-        <translation>Väike Septim</translation>
+        <translation>Väike septim</translation>
     </message>
     <message>
         <source>Major Seventh</source>
-        <translation>Suur Septim</translation>
+        <translation>Suur septim</translation>
     </message>
     <message>
         <source>Augmented Seventh</source>
-        <translation type="unfinished"/>
+        <translation>Suurendatud septim</translation>
     </message>
     <message>
         <source>Diminished Octave</source>
-        <translation type="unfinished"/>
+        <translation>Vähendatud oktav</translation>
     </message>
     <message>
         <source>Perfect Octave</source>
-        <translation type="unfinished"/>
+        <translation>Puhas oktav</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"/>
+        <translation>Valikud</translation>
     </message>
     <message>
         <source>Single sharps and flats only</source>
-        <translation type="unfinished"/>
+        <translation>Ainult diesid ja bemollid</translation>
     </message>
     <message>
         <source>Use double sharps and flats</source>
-        <translation type="unfinished"/>
+        <translation>Kasuta duubeldiese ja -bemolle</translation>
     </message>
 </context>
 <context>
     <name>TremoloBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>Vorm</translation>
     </message>
     <message>
         <source>firstChord</source>
         <extracomment>do not translate</extracomment>
-        <translation type="unfinished"/>
+        <translation>esimene akord</translation>
     </message>
     <message>
         <source>secondChord</source>
         <extracomment>do not translate - only for debugging</extracomment>
-        <translation type="unfinished"/>
+        <translation>teine akord</translation>
     </message>
 </context>
 <context>
     <name>Tuplet</name>
     <message>
         <source>Tuplet Properties...</source>
-        <translation>Duooli Omadused...</translation>
+        <translation>Tupleti omadused...</translation>
     </message>
 </context>
 <context>
     <name>TupletBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>Vorm</translation>
     </message>
 </context>
 <context>
     <name>TupletDialog</name>
     <message>
         <source>MuseScore: create tuplet</source>
-        <translation>MuseScore: tekita duool</translation>
+        <translation>MuseScore: loo tuplet</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation/>
+        <translation>Tüüp</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation/>
+        <translation>Vormindus</translation>
     </message>
     <message>
         <source>Number</source>
-        <translation/>
-    </message>
-    <message>
-        <source>number</source>
         <translation>Number</translation>
     </message>
     <message>
+        <source>number</source>
+        <translation>number</translation>
+    </message>
+    <message>
         <source>relation</source>
-        <translation>Relation</translation>
+        <translation>suhe</translation>
     </message>
     <message>
         <source>nothing</source>
-        <translation>Nothing</translation>
+        <translation>puudub</translation>
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Sulud</translation>
+        <translation>Klamber</translation>
     </message>
     <message>
         <source>auto bracket</source>
-        <translation>auto sulud</translation>
+        <translation>automaatne klamber</translation>
     </message>
     <message>
         <source>bracket</source>
-        <translation>sulud</translation>
+        <translation>klamber</translation>
     </message>
     <message>
         <source>relation:</source>
-        <translation type="unfinished"/>
+        <translation>suhe:</translation>
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"/>
+        <translation>/</translation>
     </message>
 </context>
 <context>
     <name>TupletProperties</name>
     <message>
         <source>MuseScore: Tuplet Properties</source>
-        <translation>MuseScore: Duooli Omadused</translation>
+        <translation>MuseScore: Tupleti omadused</translation>
     </message>
     <message>
         <source>Number</source>
-        <translation/>
-    </message>
-    <message>
-        <source>number</source>
         <translation>Number</translation>
     </message>
     <message>
+        <source>number</source>
+        <translation>number</translation>
+    </message>
+    <message>
         <source>relation</source>
-        <translation>Relation</translation>
+        <translation>suhe</translation>
     </message>
     <message>
         <source>nothing</source>
-        <translation>Nothing</translation>
+        <translation>puudub</translation>
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Sulud</translation>
+        <translation>Klamber</translation>
     </message>
     <message>
         <source>auto bracket</source>
-        <translation>auto sulud</translation>
+        <translation>automaatne klamber</translation>
     </message>
     <message>
         <source>bracket</source>
-        <translation>sulud</translation>
+        <translation>klamber</translation>
     </message>
 </context>
 <context>
     <name>UpdateChecker</name>
     <message>
         <source>An update for MuseScore is available: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
-        <translation>MuseScorele on saadaval uuendus: a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
+        <translation>Uus versioon on saadaval: a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Update Available</source>
-        <translation>Uuendus on saadaval</translation>
+        <translation>Uus versioon on saadaval</translation>
     </message>
     <message>
         <source>No Update Available</source>
-        <translation>Uuendusi pole saadaval</translation>
+        <translation>Uut versiooni pole saadaval</translation>
     </message>
 </context>
 <context>
@@ -6597,14 +6600,14 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>VBox Properties...</source>
-        <translation/>
+        <translation>Raami omadused...</translation>
     </message>
 </context>
 <context>
     <name>VoltaPropertyBase</name>
     <message>
         <source>Volta Properties</source>
-        <translation>Voldi sätted</translation>
+        <translation>Voldi omadused</translation>
     </message>
     <message>
         <source>Text:</source>
@@ -6612,25 +6615,25 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Repeat List:</source>
-        <translation>Korduste nimekiri:</translation>
+        <translation>Korduste järjekord:</translation>
     </message>
 </context>
 <context>
     <name>VoltaSegment</name>
     <message>
         <source>Volta Properties...</source>
-        <translation>Voldi sätted</translation>
+        <translation>Voldi omadused</translation>
     </message>
     <message>
         <source>Line Properties...</source>
-        <translation>Joone Omadused</translation>
+        <translation>Joone omadused</translation>
     </message>
 </context>
 <context>
     <name>WebPageDockWidget</name>
     <message>
         <source>Connect with the &lt;br /&gt; Community</source>
-        <translation>Ühendu kommuuniga</translation>
+        <translation>Ühendu &lt;br /&gt; Kommuuniga</translation>
     </message>
     <message>
         <source>Find help</source>
@@ -6661,7 +6664,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>accidental</name>
     <message>
         <source>none</source>
-        <translation type="unfinished">None</translation>
+        <translation>puudub</translation>
     </message>
     <message>
         <source>sharp</source>
@@ -6685,94 +6688,94 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>flat-slash</source>
-        <translation type="unfinished"/>
+        <translation>bemoll diagonaaljoonega</translation>
     </message>
     <message>
         <source>flat-slash2</source>
-        <translation type="unfinished"/>
+        <translation>bemoll kahe diagonaaljoonega</translation>
     </message>
     <message>
         <source>mirrored-flat2</source>
-        <translation type="unfinished"/>
+        <translation>bemoll koos peegelpildiga</translation>
     </message>
     <message>
         <source>mirrored-flat</source>
-        <translation type="unfinished"/>
+        <translation>peegelpildis bemoll</translation>
     </message>
     <message>
         <source>mirrored-flat-slash</source>
-        <translation type="unfinished"/>
+        <translation>peegelpildis bemoll diagonaaljoonega</translation>
     </message>
     <message>
         <source>flat-flat-slash</source>
-        <translation type="unfinished"/>
+        <translation>duubelbemoll diagonaaljoonega</translation>
     </message>
     <message>
         <source>sharp-slash</source>
-        <translation type="unfinished"/>
+        <translation>diees ühe vertikaaljoonega</translation>
     </message>
     <message>
         <source>sharp-slash2</source>
-        <translation type="unfinished"/>
+        <translation>diees kolme diagonaaljoonega</translation>
     </message>
     <message>
         <source>sharp-slash3</source>
-        <translation type="unfinished"/>
+        <translation>diees ühe vertikaal- ja kolme diagonaaljoonega</translation>
     </message>
     <message>
         <source>sharp-slash4</source>
-        <translation type="unfinished"/>
+        <translation>diees kolme vertikaaljoonega</translation>
     </message>
     <message>
         <source>sharp arrow up</source>
-        <translation type="unfinished"/>
+        <translation>diees noolega üles</translation>
     </message>
     <message>
         <source>sharp arrow down</source>
-        <translation type="unfinished"/>
+        <translation>diees noolega alla</translation>
     </message>
     <message>
         <source>sharp arrow both</source>
-        <translation type="unfinished"/>
+        <translation>diees nooltega</translation>
     </message>
     <message>
         <source>flat arrow up</source>
-        <translation type="unfinished"/>
+        <translation>bemoll noolega üles</translation>
     </message>
     <message>
         <source>flat arrow down</source>
-        <translation type="unfinished"/>
+        <translation>bemoll noolega alla</translation>
     </message>
     <message>
         <source>flat arrow both</source>
-        <translation type="unfinished"/>
+        <translation>bemoll nooltega</translation>
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation type="unfinished"/>
+        <translation>bekaar noolega üles</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation type="unfinished"/>
+        <translation>bekaar noolega alla</translation>
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation type="unfinished"/>
+        <translation>bekaar nooltega</translation>
     </message>
     <message>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation>sori</translation>
     </message>
     <message>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation>koron</translation>
     </message>
 </context>
 <context>
     <name>action</name>
     <message>
         <source>Local &amp;Handbook...</source>
-        <translation>Kohalik %Käsiraamat</translation>
+        <translation>Kohalik &amp;käsiraamat</translation>
     </message>
     <message>
         <source>Open...</source>
@@ -6800,7 +6803,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>file new</source>
-        <translation>uus fail</translation>
+        <translation>Uus fail</translation>
     </message>
     <message>
         <source>New...</source>
@@ -6848,11 +6851,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Note Input</source>
-        <translation>Nootide sisestus</translation>
+        <translation>Nootide sisestamine</translation>
     </message>
     <message>
         <source>Pitch Spell</source>
-        <translation type="unfinished"/>
+        <translation>Korrigeeri alteratsioon</translation>
     </message>
     <message>
         <source>Unison Above</source>
@@ -7100,103 +7103,103 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>up+shift+ctrl</source>
-        <translation type="unfinished"/>
+        <translation>up+shift+ctrl</translation>
     </message>
     <message>
         <source>down+shift+ctrl</source>
-        <translation type="unfinished"/>
+        <translation>down+shift+ctrl</translation>
     </message>
     <message>
         <source>left+ctrl</source>
-        <translation type="unfinished"/>
+        <translation>left+ctrl</translation>
     </message>
     <message>
         <source>add previous chord to selection</source>
-        <translation>lisa valikusse eelmine akord</translation>
+        <translation>Lisa valikusse eelmine akord</translation>
     </message>
     <message>
         <source>left+shift</source>
-        <translation type="unfinished"/>
+        <translation>left+shift</translation>
     </message>
     <message>
         <source>select to beginning of measure</source>
-        <translation>Select to beginning of measure</translation>
+        <translation>Vii valik takti algusesse</translation>
     </message>
     <message>
         <source>add next chord to selection</source>
-        <translation>lisa valikusse järgmine akord</translation>
+        <translation>Lisa valikusse järgmine akord</translation>
     </message>
     <message>
         <source>right+shift</source>
-        <translation type="unfinished"/>
+        <translation>right+shift</translation>
     </message>
     <message>
         <source>select to end of measure</source>
-        <translation>Select to end of measure</translation>
+        <translation>Vii valik takti lõppu</translation>
     </message>
     <message>
         <source>right+ctrl+shift</source>
-        <translation type="unfinished"/>
+        <translation>right+ctrl+shift</translation>
     </message>
     <message>
         <source>select to beginning of line</source>
-        <translation>vali joone alguseni</translation>
+        <translation>Vali rea alguseni</translation>
     </message>
     <message>
         <source>shift+home</source>
-        <translation type="unfinished"/>
+        <translation>shift+home</translation>
     </message>
     <message>
         <source>select to end of line</source>
-        <translation>vali joone lõpuni</translation>
+        <translation>Vali rea lõpuni</translation>
     </message>
     <message>
         <source>shift+end</source>
-        <translation type="unfinished"/>
+        <translation>shift+end</translation>
     </message>
     <message>
         <source>select to beginning of score</source>
-        <translation>Select to beginning of score</translation>
+        <translation>Vali kuni partituuri alguseni</translation>
     </message>
     <message>
         <source>ctrl+shift+home</source>
-        <translation type="unfinished"/>
+        <translation>ctrl+shift+home</translation>
     </message>
     <message>
         <source>select to end of score</source>
-        <translation>Select to end of score</translation>
+        <translation>Vali kuni partituuri lõpuni</translation>
     </message>
     <message>
         <source>ctrl+shift+end</source>
-        <translation type="unfinished"/>
+        <translation>ctrl+shift+end</translation>
     </message>
     <message>
         <source>add staff above to selection</source>
-        <translation>Lisa hääl valiku kohale</translation>
+        <translation>Lisa noodirida valiku kohale</translation>
     </message>
     <message>
         <source>add staff below to selection</source>
-        <translation>Lisa hääl valiku alla</translation>
+        <translation>Lisa noodirida valiku alla</translation>
     </message>
     <message>
         <source>page-prev</source>
-        <translation>Previous page</translation>
+        <translation>Eelmine leht</translation>
     </message>
     <message>
         <source>page-next</source>
-        <translation>Next page</translation>
+        <translation>Järgmine leht</translation>
     </message>
     <message>
         <source>page-top</source>
-        <translation>Top of page</translation>
+        <translation>Lehe algusesse</translation>
     </message>
     <message>
         <source>page-end</source>
-        <translation>End of page</translation>
+        <translation>Lehe lõppu</translation>
     </message>
     <message>
         <source>add slur</source>
-        <translation>lisa legaato</translation>
+        <translation>Lisa legaato</translation>
     </message>
     <message>
         <source>crescendo</source>
@@ -7212,43 +7215,43 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Delete Selected Measures</source>
-        <translation>Kustuta Valitud Taktid</translation>
+        <translation>Kustuta valitud taktid</translation>
     </message>
     <message>
         <source>Append Measure</source>
-        <translation type="unfinished"/>
+        <translation>Lisa takt partituuri lõppu</translation>
     </message>
     <message>
         <source>Append Measures...</source>
-        <translation type="unfinished"/>
+        <translation>Lisa takte partituuri lõppu...</translation>
     </message>
     <message>
         <source>Insert Measure</source>
-        <translation>Lisa Takt</translation>
+        <translation>Lisa takt</translation>
     </message>
     <message>
         <source>Insert Measures...</source>
-        <translation>Lisa Taktid...</translation>
+        <translation>Lisa taktid...</translation>
     </message>
     <message>
         <source>Insert Horizontal Frame</source>
-        <translation>Lisa Horisontaalne Raam</translation>
+        <translation>Lisa horisontaalne raam</translation>
     </message>
     <message>
         <source>Insert Vertical Frame</source>
-        <translation>Lisa Vertikaalne Raam</translation>
+        <translation>Lisa vertikaalne raam</translation>
     </message>
     <message>
         <source>Append Horizontal Frame</source>
-        <translation type="unfinished"/>
+        <translation>Lisa horisontaalne raam partituuri lõppu</translation>
     </message>
     <message>
         <source>Append Vertical Frame</source>
-        <translation type="unfinished"/>
+        <translation>Lisa vertikaalne raam partituuri lõppu</translation>
     </message>
     <message>
         <source>Duplet</source>
-        <translation type="unfinished"/>
+        <translation>Duplet</translation>
     </message>
     <message>
         <source>Triplet</source>
@@ -7276,135 +7279,135 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Nonuplet</source>
-        <translation type="unfinished"/>
+        <translation>Nonool</translation>
     </message>
     <message>
         <source>Other Tuplets</source>
-        <translation>Teised Duoolid</translation>
+        <translation>Teised tupletid</translation>
     </message>
     <message>
         <source>Other...</source>
-        <translation type="unfinished"/>
+        <translation>Teised...</translation>
     </message>
     <message>
         <source>note longa</source>
-        <translation>Note longa</translation>
+        <translation>Noot longa</translation>
     </message>
     <message>
         <source>Longa</source>
-        <translation type="unfinished"/>
+        <translation>Longa</translation>
     </message>
     <message>
         <source>note breve</source>
-        <translation>Note breve</translation>
+        <translation>Noot breve</translation>
     </message>
     <message>
         <source>Double whole note (breve)</source>
-        <translation type="unfinished"/>
+        <translation>Topelt terve noot (breve)</translation>
     </message>
     <message>
         <source>pad note 1/1</source>
-        <translation>Pad note 1/1</translation>
+        <translation>Tervenoot</translation>
     </message>
     <message>
         <source>Whole note (semibreve)</source>
-        <translation type="unfinished"/>
+        <translation>Tervenoot (semibreve)</translation>
     </message>
     <message>
         <source>pad note 1/2</source>
-        <translation>Pad note 1/2</translation>
+        <translation>Poolnoot 1/2</translation>
     </message>
     <message>
         <source>Half note (minim)</source>
-        <translation type="unfinished"/>
+        <translation>Poolnoot (minim)</translation>
     </message>
     <message>
         <source>pad note 1/4</source>
-        <translation>Pad note 1/4</translation>
+        <translation>Veerandnoot 1/4</translation>
     </message>
     <message>
         <source>Quarter note (crochet)</source>
-        <translation type="unfinished"/>
+        <translation>Veerandnoot (crochet)</translation>
     </message>
     <message>
         <source>pad note 1/8</source>
-        <translation>Pad note 1/8</translation>
+        <translation>Kaheksandiknoot 1/8</translation>
     </message>
     <message>
         <source>Eighth note (quaver)</source>
-        <translation type="unfinished"/>
+        <translation>8-ndiknoot (quaver)</translation>
     </message>
     <message>
         <source>pad note 1/16</source>
-        <translation>Pad note 1/16</translation>
+        <translation>Kuueteistkümnendiknoot 1/16</translation>
     </message>
     <message>
         <source>16th note (semiquaver)</source>
-        <translation type="unfinished"/>
+        <translation>16-ndiknoot (semiquaver)</translation>
     </message>
     <message>
         <source>pad note 1/32</source>
-        <translation>Pad note 1/32</translation>
+        <translation>kolmekümnekahendiknoot 1/32</translation>
     </message>
     <message>
         <source>32nd note (demi-semiquaver)</source>
-        <translation type="unfinished"/>
+        <translation>32-ndiknoot (demi-semiquaver)</translation>
     </message>
     <message>
         <source>pad note 1/64</source>
-        <translation>Pad note 1/64</translation>
+        <translation>Kuuekümneneljandiknoot 1/64</translation>
     </message>
     <message>
         <source>64th note (semi-demi-semiquaver)</source>
-        <translation type="unfinished"/>
+        <translation>64ndiknoot (semi-demi-semiquaver)</translation>
     </message>
     <message>
         <source>pad dot</source>
-        <translation>Pad dot</translation>
+        <translation>Punkt</translation>
     </message>
     <message>
         <source>Dot</source>
-        <translation type="unfinished"/>
+        <translation>Punkt</translation>
     </message>
     <message>
         <source>pad double dot</source>
-        <translation>Pad double dot</translation>
+        <translation>Topeltpunkt</translation>
     </message>
     <message>
         <source>Double dot</source>
-        <translation type="unfinished"/>
+        <translation>Topeltpunkt</translation>
     </message>
     <message>
         <source>tie</source>
-        <translation>Tie</translation>
+        <translation>Pide</translation>
     </message>
     <message>
         <source>pad rest</source>
-        <translation>Pad rest</translation>
+        <translation>Paus</translation>
     </message>
     <message>
         <source>double sharp</source>
-        <translation type="unfinished">Double sharp</translation>
+        <translation>Duubeldies</translation>
     </message>
     <message>
         <source>sharp</source>
-        <translation type="unfinished">Sharp</translation>
+        <translation>Dies</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished">Natural</translation>
+        <translation>Bekaar</translation>
     </message>
     <message>
         <source>double flat</source>
-        <translation type="unfinished">Double flat</translation>
+        <translation>Duubelbemoll</translation>
     </message>
     <message>
         <source>acciaccatura</source>
-        <translation type="unfinished">Acciaccatura</translation>
+        <translation>Acciaccatura</translation>
     </message>
     <message>
         <source>appoggiatura</source>
-        <translation type="unfinished">Appoggiatura</translation>
+        <translation>Appoggiatura</translation>
     </message>
     <message>
         <source>grace-4</source>
@@ -7448,7 +7451,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Enable sound while editing</source>
-        <translation>Luba helid muudatuste tegemisel</translation>
+        <translation>Luba helid esitamine muudatuste tegemisel</translation>
     </message>
     <message>
         <source>beam start</source>
@@ -8216,7 +8219,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Pitch down by an octave</source>
-        <translation type="unfinished"/>
+        <translation>Vii oktav alla</translation>
     </message>
     <message>
         <source>Pitch down note in chord</source>
@@ -8232,47 +8235,47 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Go to bottom note in chord</source>
-        <translation type="unfinished"/>
+        <translation>Liigu akordi alumisele noodile</translation>
     </message>
     <message>
         <source>Bottom Note in Chord</source>
-        <translation type="unfinished"/>
+        <translation>Akordi alumine noot</translation>
     </message>
     <message>
         <source>Move down</source>
-        <translation type="unfinished"/>
+        <translation>Liigu alla</translation>
     </message>
     <message>
         <source>Previous chord</source>
-        <translation type="unfinished"/>
+        <translation>Eelmine akord</translation>
     </message>
     <message>
         <source>Previous Chord</source>
-        <translation type="unfinished"/>
+        <translation>Eelmine akord</translation>
     </message>
     <message>
         <source>Previous measure</source>
-        <translation type="unfinished"/>
+        <translation>Eelmine takt</translation>
     </message>
     <message>
         <source>Previous Measure</source>
-        <translation type="unfinished"/>
+        <translation>Eelmine takt</translation>
     </message>
     <message>
         <source>Next chord</source>
-        <translation type="unfinished"/>
+        <translation>Järgmine akord</translation>
     </message>
     <message>
         <source>Next Chord</source>
-        <translation type="unfinished"/>
+        <translation>Järgmine akord</translation>
     </message>
     <message>
         <source>Next measure</source>
-        <translation type="unfinished"/>
+        <translation>Järgmine takt</translation>
     </message>
     <message>
         <source>Next Measure</source>
-        <translation type="unfinished"/>
+        <translation>Järgmine takt</translation>
     </message>
     <message>
         <source>Delete selected measures</source>
@@ -8280,11 +8283,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Append measure</source>
-        <translation type="unfinished"/>
+        <translation>Lisa takt partituuri lõppu</translation>
     </message>
     <message>
         <source>Append measures</source>
-        <translation type="unfinished"/>
+        <translation>Lisa taktid partituuri lõppu</translation>
     </message>
     <message>
         <source>Insert measure</source>
@@ -8300,7 +8303,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Documents Side by Side</source>
-        <translation type="unfinished"/>
+        <translation>Dokumentide kõrvutamine</translation>
     </message>
     <message>
         <source>split window vertical</source>
@@ -8324,7 +8327,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Rewind to start position</source>
-        <translation type="unfinished"/>
+        <translation>Mine algusesse</translation>
     </message>
     <message>
         <source>Seek to end</source>
@@ -8332,23 +8335,23 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Play repeats on/off</source>
-        <translation type="unfinished"/>
+        <translation>Korduste mängimine sees/väljas</translation>
     </message>
     <message>
         <source>Load style</source>
-        <translation type="unfinished"/>
+        <translation>Laadi stiil</translation>
     </message>
     <message>
         <source>Save style</source>
-        <translation type="unfinished"/>
+        <translation>Salvesta stiil</translation>
     </message>
     <message>
         <source>Select all</source>
-        <translation type="unfinished"/>
+        <translation>Vali kõik</translation>
     </message>
     <message>
         <source>Edit Chord Style...</source>
-        <translation>Muuda Akordi Stiili</translation>
+        <translation>Muuda akordi stiili</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -8368,15 +8371,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Parts...</source>
-        <translation type="unfinished"/>
+        <translation>Partiid...</translation>
     </message>
     <message>
         <source>next score</source>
-        <translation type="unfinished"/>
+        <translation>Järgmine partituur</translation>
     </message>
     <message>
         <source>previous score</source>
-        <translation type="unfinished"/>
+        <translation>Eelmine partituur</translation>
     </message>
 </context>
 <context>
@@ -9080,179 +9083,179 @@ p, li { white-space: pre-wrap; }&#13;
     <name>symbol</name>
     <message>
         <source>clef eight</source>
-        <translation type="unfinished"/>
+        <translation>võtme 8</translation>
     </message>
     <message>
         <source>clef one</source>
-        <translation type="unfinished"/>
+        <translation>võtme 1</translation>
     </message>
     <message>
         <source>clef five</source>
-        <translation type="unfinished"/>
+        <translation>võtme 5</translation>
     </message>
     <message>
         <source>f</source>
-        <translation type="unfinished"/>
+        <translation>f</translation>
     </message>
     <message>
         <source>m</source>
-        <translation type="unfinished">m</translation>
+        <translation>m</translation>
     </message>
     <message>
         <source>p</source>
-        <translation type="unfinished"/>
+        <translation>p</translation>
     </message>
     <message>
         <source>r</source>
-        <translation type="unfinished"/>
+        <translation>r</translation>
     </message>
     <message>
         <source>s</source>
-        <translation type="unfinished"/>
+        <translation>s</translation>
     </message>
     <message>
         <source>z</source>
-        <translation type="unfinished"/>
+        <translation>z</translation>
     </message>
     <message>
         <source>note 1/2</source>
-        <translation type="unfinished"/>
+        <translation>1/2 noot</translation>
     </message>
     <message>
         <source>note 1/4</source>
-        <translation type="unfinished"/>
+        <translation>1/4 noot</translation>
     </message>
     <message>
         <source>note 1/8</source>
-        <translation type="unfinished"/>
+        <translation>1/8 noot</translation>
     </message>
     <message>
         <source>note 1/16</source>
-        <translation type="unfinished"/>
+        <translation>1/16 noot</translation>
     </message>
     <message>
         <source>note 1/32</source>
-        <translation type="unfinished"/>
+        <translation>1/32 noot</translation>
     </message>
     <message>
         <source>note 1/64</source>
-        <translation type="unfinished"/>
+        <translation>1/64 noot</translation>
     </message>
     <message>
         <source>dot dot</source>
-        <translation type="unfinished"/>
+        <translation>topeltpunkt</translation>
     </message>
     <message>
         <source>whole rest</source>
-        <translation type="unfinished"/>
+        <translation>terve paus</translation>
     </message>
     <message>
         <source>half rest</source>
-        <translation type="unfinished"/>
+        <translation>poolpaus</translation>
     </message>
     <message>
         <source>outside whole rest</source>
-        <translation type="unfinished"/>
+        <translation>joonel terve paus</translation>
     </message>
     <message>
         <source>outside half rest</source>
-        <translation type="unfinished"/>
+        <translation>joonel poolpaus</translation>
     </message>
     <message>
         <source>rest M3</source>
-        <translation type="unfinished"/>
+        <translation>paus M3</translation>
     </message>
     <message>
         <source>breve rest</source>
-        <translation type="unfinished"/>
+        <translation>breve paus</translation>
     </message>
     <message>
         <source>longa rest</source>
-        <translation type="unfinished"/>
+        <translation>longa paus</translation>
     </message>
     <message>
         <source>quart rest</source>
-        <translation type="unfinished"/>
+        <translation>1/4 paus</translation>
     </message>
     <message>
         <source>clas quart rest</source>
-        <translation type="unfinished"/>
+        <translation>peegeldatud 1/4 paus</translation>
     </message>
     <message>
         <source>eight rest</source>
-        <translation type="unfinished"/>
+        <translation>1/8 paus</translation>
     </message>
     <message>
         <source>16' rest</source>
-        <translation type="unfinished"/>
+        <translation>1/16 paus</translation>
     </message>
     <message>
         <source>32' rest</source>
-        <translation type="unfinished"/>
+        <translation>1/32 paus</translation>
     </message>
     <message>
         <source>64' rest</source>
-        <translation type="unfinished"/>
+        <translation>1/64 paus</translation>
     </message>
     <message>
         <source>128' rest</source>
-        <translation type="unfinished"/>
+        <translation>1/128 paus</translation>
     </message>
     <message>
         <source>sharp</source>
-        <translation type="unfinished">Sharp</translation>
+        <translation>diees</translation>
     </message>
     <message>
         <source>sharp arrow up</source>
-        <translation type="unfinished"/>
+        <translation>diees noolega üles</translation>
     </message>
     <message>
         <source>sharp arrow both</source>
-        <translation type="unfinished"/>
+        <translation>diees nooltega</translation>
     </message>
     <message>
         <source>sharp slash</source>
-        <translation type="unfinished"/>
+        <translation>diees ühe vertikaaljoonega</translation>
     </message>
     <message>
         <source>sharp slash2</source>
-        <translation type="unfinished"/>
+        <translation>diees kolme diagonaaljoonega</translation>
     </message>
     <message>
         <source>sharp slash3</source>
-        <translation type="unfinished"/>
+        <translation>diees ühe vertikaal- ja kolme diagonaaljoonega</translation>
     </message>
     <message>
         <source>sharp slash4</source>
-        <translation type="unfinished"/>
+        <translation>diees kolme vertikaaljoonega</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished">Natural</translation>
+        <translation>bekaar</translation>
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation type="unfinished"/>
+        <translation>bekaar noolega üles</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation type="unfinished"/>
+        <translation>bekaar noolega alla</translation>
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation type="unfinished"/>
+        <translation>bekaar nooltega</translation>
     </message>
     <message>
         <source>flat</source>
-        <translation type="unfinished">Flat</translation>
+        <translation>bemoll</translation>
     </message>
     <message>
         <source>flat arrow up</source>
-        <translation type="unfinished"/>
+        <translation>bemoll noolega üles</translation>
     </message>
     <message>
         <source>flat arrow both</source>
-        <translation type="unfinished"/>
+        <translation>bemoll nooltega</translation>
     </message>
     <message>
         <source>flat slash</source>

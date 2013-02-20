@@ -782,7 +782,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>bb (double flat)</source>
-        <translation>bb (Doppel-b)</translation>
+        <translation>bb­ (Doppel-b)</translation>
     </message>
     <message>
         <source>b (flat)</source>
@@ -1668,7 +1668,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Hide Empty Staves</source>
-        <translation>Verstecke leere Notensysteme</translation>
+        <translation>Leere Notenzeilen verstecken</translation>
     </message>
     <message>
         <source>Articulations, Ornaments</source>
@@ -2256,7 +2256,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Add Above</source>
-        <translation>oberhalb hinzufügen</translation>
+        <translation>Oberhalb hinzufügen</translation>
     </message>
     <message>
         <source>Add Below</source>
@@ -3676,7 +3676,7 @@ ausführen zu können</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation>Overture Dateien &lt;experimentell&gt; (*.ove);;</translation>
+        <translation>Overture Dateien &lt;experimentell&gt; (*.ove)</translation>
     </message>
 </context>
 <context>
@@ -4197,7 +4197,7 @@ ausführen zu können</translation>
     </message>
     <message>
         <source>h:mm:s</source>
-        <translation>h:mm:s</translation>
+        <translation>h:mm:ss</translation>
     </message>
     <message>
         <source>0:00:00</source>
@@ -4455,7 +4455,7 @@ ausführen zu können</translation>
     </message>
     <message>
         <source>Portaudio</source>
-        <translation>Portaudio</translation>
+        <translation>PortAudio</translation>
     </message>
     <message>
         <source>Api:</source>
@@ -5566,7 +5566,7 @@ Die Pfadeinstellungen: "ANSICHT - Synthesizer" überprüfen!</translation>
     </message>
     <message>
         <source>Slur Properties</source>
-        <translation>Eigenschaften Bindebögen</translation>
+        <translation>Eigenschaften Bindebogen</translation>
     </message>
     <message>
         <source>solid</source>
@@ -5585,7 +5585,7 @@ Die Pfadeinstellungen: "ANSICHT - Synthesizer" überprüfen!</translation>
     </message>
     <message>
         <source>Slur Properties...</source>
-        <translation>Eigenschaften Bindebögen...</translation>
+        <translation>Eigenschaften Bindebogen...</translation>
     </message>
 </context>
 <context>
@@ -5798,11 +5798,11 @@ Die Pfadeinstellungen: "ANSICHT - Synthesizer" überprüfen!</translation>
     </message>
     <message>
         <source>Set Invisible</source>
-        <translation>Ausblenden</translation>
+        <translation>Unsichtbar machen</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation>Einblenden</translation>
+        <translation>Sichtbar machen</translation>
     </message>
 </context>
 <context>
@@ -5858,7 +5858,7 @@ Die Pfadeinstellungen: "ANSICHT - Synthesizer" überprüfen!</translation>
     <name>TextC</name>
     <message>
         <source>Set Invisible</source>
-        <translation>Unsichtbar</translation>
+        <translation>Unsichtbar machen</translation>
     </message>
     <message>
         <source>Set Visible</source>

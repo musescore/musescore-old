@@ -26,7 +26,7 @@ p, li { white-space: pre-wrap; }&#13;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Støt MuseScore med &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;din donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2011 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2013 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;&#13;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
@@ -108,7 +108,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>BoxPropertiesBase</name>
     <message>
         <source>MuseScore: Frame Properties</source>
-        <translation>MuseScore: Ramme egenskaber</translation>
+        <translation>MuseScore: Rammeegenskaber</translation>
     </message>
     <message>
         <source>Margins</source>
@@ -158,7 +158,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>ChordEdit</name>
     <message>
         <source>MuseScore: Harmony Properties</source>
-        <translation>MuseScore: Samklangs egenskaber</translation>
+        <translation>MuseScore: Samklangsegenskaber</translation>
     </message>
     <message>
         <source>TextLabel</source>
@@ -202,7 +202,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source># (sharp)</source>
-        <translation>#(hævet ½ tone)</translation>
+        <translation># (hævet ½ tone)</translation>
     </message>
     <message>
         <source>B</source>
@@ -742,7 +742,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Degrees</source>
-        <translation>Klasser</translation>
+        <translation>Trin</translation>
     </message>
     <message>
         <source>Add</source>
@@ -833,14 +833,14 @@ p, li { white-space: pre-wrap; }&#13;
     <name>ChordList</name>
     <message>
         <source>Write Chord Description failed: </source>
-        <translation>Der skete en fejl ved skrivning af akkord beskrivelser: </translation>
+        <translation>Der skete en fejl ved skrivning af akkordbeskrivelser: </translation>
     </message>
 </context>
 <context>
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
-        <translation>Akkord egenskaber</translation>
+        <translation>Akkordegenskaber</translation>
     </message>
     <message>
         <source>small</source>
@@ -861,7 +861,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Note Properties</source>
-        <translation>Node egenskaber</translation>
+        <translation>Nodeegenskaber</translation>
     </message>
     <message>
         <source>tuning offset</source>
@@ -1055,7 +1055,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Chord Description File:</source>
-        <translation>Akkord beskrivelses fil:</translation>
+        <translation>Akkordbeskrivelsesdokument:</translation>
     </message>
     <message>
         <source>...</source>
@@ -1075,7 +1075,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>MuseScore: Chord Style Editor</source>
-        <translation>MuseScore: Akkord stil redigering</translation>
+        <translation>MuseScore: Akkordstilredigering</translation>
     </message>
 </context>
 <context>
@@ -1094,11 +1094,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation>Tekst egenskaber...</translation>
+        <translation>Tekstegenskaber...</translation>
     </message>
     <message>
         <source>MIDI Properties...</source>
-        <translation>MIDI egenskaber...</translation>
+        <translation>MIDI-egenskaber...</translation>
     </message>
 </context>
 <context>
@@ -1112,7 +1112,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>DynamicProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation>MuseScore: Tekst egenskaber</translation>
+        <translation>MuseScore: Tekstegenskaber</translation>
     </message>
     <message>
         <source>Velocity:</source>
@@ -1136,7 +1136,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>MIDI Values</source>
-        <translation>MIDI værdier</translation>
+        <translation>MIDI-værdier</translation>
     </message>
     <message>
         <source>Apply to:</source>
@@ -1214,7 +1214,7 @@ fejl: </translation>
     </message>
     <message>
         <source>Stem Direction:</source>
-        <translation>Nodehals retning:</translation>
+        <translation>Nodehalsretning:</translation>
     </message>
     <message>
         <source>Auto</source>
@@ -1230,7 +1230,7 @@ fejl: </translation>
     </message>
     <message>
         <source>Default Voice:</source>
-        <translation>Standard stemme:</translation>
+        <translation>Standardstemme:</translation>
     </message>
     <message>
         <source>Pitch</source>
@@ -1289,11 +1289,11 @@ fejl: </translation>
     <name>EditInstrumentBase</name>
     <message>
         <source>MuseScore: Edit Instrument Properties</source>
-        <translation>MuseScore: Rediger Instrument formater</translation>
+        <translation>MuseScore: Rediger instrumentegenskaber</translation>
     </message>
     <message>
         <source>Instrument Properties</source>
-        <translation>Instrument formater</translation>
+        <translation>Instrumentegenskaber</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1305,15 +1305,15 @@ fejl: </translation>
     </message>
     <message>
         <source>Transpose</source>
-        <translation>Transponér</translation>
+        <translation>Transponer</translation>
     </message>
     <message>
         <source>Midi Program</source>
-        <translation>Midi program</translation>
+        <translation>Midi-program</translation>
     </message>
     <message>
         <source>Staves</source>
-        <translation>Nodelinier</translation>
+        <translation>Nodelinjer</translation>
     </message>
     <message>
         <source>OK</source>
@@ -1332,15 +1332,15 @@ fejl: </translation>
     <name>EditStaffBase</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: Rediger linie/stemme egenskaber</translation>
+        <translation>MuseScore: Rediger linje/stemme-egenskaber</translation>
     </message>
     <message>
         <source>Staff Properties</source>
-        <translation>Nodelinie egenskaber</translation>
+        <translation>Nodelinje-egenskaber</translation>
     </message>
     <message>
         <source>Lines:</source>
-        <translation>Linier:</translation>
+        <translation>Linjer:</translation>
     </message>
     <message>
         <source>Small</source>
@@ -1348,7 +1348,7 @@ fejl: </translation>
     </message>
     <message>
         <source>Part Properties</source>
-        <translation>Stemme egenskaber</translation>
+        <translation>Stemme-egenskaber</translation>
     </message>
     <message>
         <source>Long Instrument Name:</source>
@@ -1496,7 +1496,7 @@ fejl: </translation>
     </message>
     <message>
         <source>Perfect Octave</source>
-        <translation>Ren okta</translation>
+        <translation>Ren oktav</translation>
     </message>
     <message>
         <source>up</source>
@@ -1527,11 +1527,11 @@ fejl: </translation>
     </message>
     <message>
         <source>TopStaff</source>
-        <translation>Øverste linie</translation>
+        <translation>Øverste linje</translation>
     </message>
     <message>
         <source>BottomStaff</source>
-        <translation>Nederste linie</translation>
+        <translation>Nederste linje</translation>
     </message>
     <message>
         <source>Chord</source>
@@ -1586,7 +1586,7 @@ fejl: </translation>
     </message>
     <message>
         <source>Display in Concert Pitch</source>
-        <translation>Vis som C-partitur</translation>
+        <translation>Vis som c-partitur</translation>
     </message>
     <message>
         <source>Create Multi Measure Rests</source>
@@ -1594,7 +1594,7 @@ fejl: </translation>
     </message>
     <message>
         <source>Hide Empty Staves</source>
-        <translation>Skjul tomme linier</translation>
+        <translation>Skjul tomme nodelinjer</translation>
     </message>
     <message>
         <source>sp</source>
@@ -1639,7 +1639,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Page Numbers</source>
-        <translation>Side nummerering</translation>
+        <translation>Sidenummerering</translation>
     </message>
     <message>
         <source>show first</source>
@@ -1655,7 +1655,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>all staffs</source>
-        <translation>alle nodelinier</translation>
+        <translation>alle nodelinjer</translation>
     </message>
     <message>
         <source>every system</source>
@@ -1667,11 +1667,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>beam width units</source>
-        <translation>bjælke bredde enhed</translation>
+        <translation>bjælkebredde-enheder</translation>
     </message>
     <message>
         <source>Line width</source>
-        <translation>Linie bredde</translation>
+        <translation>Linjebredde</translation>
     </message>
     <message>
         <source>Height</source>
@@ -1707,7 +1707,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>System Bracket Distance:</source>
-        <translation>System klamme afstand:</translation>
+        <translation>Systemklamme-afstand:</translation>
     </message>
     <message>
         <source>Minumum width of measure:</source>
@@ -1736,7 +1736,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Arpeggios</source>
-        <translation>Arpeggio'er</translation>
+        <translation>Arpeggioer</translation>
     </message>
     <message>
         <source>Create courtesy key signatures</source>
@@ -1772,19 +1772,19 @@ space unit</extracomment>
     </message>
     <message>
         <source>Staff distance</source>
-        <translation>Nodelinie afstand</translation>
+        <translation>Nodelinjeafstand</translation>
     </message>
     <message>
         <source>Akkolade distance</source>
-        <translation>Akkolade afstand</translation>
+        <translation>Akkoladeafstand</translation>
     </message>
     <message>
         <source>System distance</source>
-        <translation>System afstand</translation>
+        <translation>Systemafstand</translation>
     </message>
     <message>
         <source>Lyrics upper margin</source>
-        <translation>Sangtekst øver margin</translation>
+        <translation>Sangtekst øvre margin</translation>
     </message>
     <message>
         <source>Lyrics lower margin</source>
@@ -1792,7 +1792,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>V-frame upper margin</source>
-        <translation>V-ramme øver margin</translation>
+        <translation>V-ramme øvre margin</translation>
     </message>
     <message>
         <source>V-frame lower margin</source>
@@ -1868,7 +1868,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Ledger line width</source>
-        <translation>Hjælpelinier bredde</translation>
+        <translation>Hjælpelinjebredde</translation>
     </message>
     <message>
         <source>Distance to note</source>
@@ -1876,15 +1876,15 @@ space unit</extracomment>
     </message>
     <message>
         <source>Hook length</source>
-        <translation>Fane længde</translation>
+        <translation>Fanelængde</translation>
     </message>
     <message>
         <source>Beam width</source>
-        <translation>Bjælke bredde</translation>
+        <translation>Bjælkebredde</translation>
     </message>
     <message>
         <source>Beam distance</source>
-        <translation>Bjælke afstand</translation>
+        <translation>Bjælkeafstand</translation>
     </message>
     <message>
         <source>Minimum length</source>
@@ -1900,23 +1900,23 @@ space unit</extracomment>
     </message>
     <message>
         <source>Small staff size</source>
-        <translation>Lille nodelinie størrelse</translation>
+        <translation>Lille nodelinje-størrelse</translation>
     </message>
     <message>
         <source>Small note size</source>
-        <translation>Lille node størrelse</translation>
+        <translation>Lille node-størrelse</translation>
     </message>
     <message>
         <source>Grace note size</source>
-        <translation>Forslagsnode størrelse</translation>
+        <translation>Forslagsnode-størrelse</translation>
     </message>
     <message>
         <source>Small clef size</source>
-        <translation>Lille nøgle størrelse</translation>
+        <translation>Lille nøgle-størrelse</translation>
     </message>
     <message>
         <source>Line break height</source>
-        <translation>Linieskift højde</translation>
+        <translation>Linjeskifthøjde</translation>
     </message>
     <message>
         <source>Use German names</source>
@@ -1924,23 +1924,23 @@ space unit</extracomment>
     </message>
     <message>
         <source>Chord description file</source>
-        <translation>Akkord beskrivelses fil</translation>
+        <translation>Akkordbeskrivelsesdokument</translation>
     </message>
     <message>
         <source>Articulation - note head distance</source>
-        <translation>Artikulationer - node hoved afstand</translation>
+        <translation>Artikulationer - nodehovedafstand</translation>
     </message>
     <message>
         <source>Articulation - note stem distance</source>
-        <translation>Artikulationer - node hals afstand</translation>
+        <translation>Artikulationer - nodehalsafstand</translation>
     </message>
     <message>
         <source>Articulation - articulation distance</source>
-        <translation>Artikulationer - artikulation afstand</translation>
+        <translation>Artikulationer - artikulationafstand</translation>
     </message>
     <message>
         <source>Stem Direction in Multi Voice Context</source>
-        <translation>Hals retning i flerstemmige sammenhænge</translation>
+        <translation>Halsretning i flerstemmige sammenhænge</translation>
     </message>
 </context>
 <context>
@@ -1963,7 +1963,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>MuseScore: Tempo Text</source>
-        <translation>MusicScore: Tempo tekst</translation>
+        <translation>MusicScore: Tempotekst</translation>
     </message>
 </context>
 <context>
@@ -2032,11 +2032,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>File Name:</source>
-        <translation>Fil navn:</translation>
+        <translation>Filnavn:</translation>
     </message>
     <message>
         <source>Part Title:</source>
-        <translation>Stemme titel:</translation>
+        <translation>Stemmetitel:</translation>
     </message>
     <message>
         <source>Close</source>
@@ -2486,7 +2486,7 @@ fejlede: </translation>
     <name>LinePropertiesDialog</name>
     <message>
         <source>MuseScore: Line Properties</source>
-        <translation>MuseScore: Linie egenskaber</translation>
+        <translation>MuseScore: Linjeegenskaber</translation>
     </message>
     <message>
         <source>Text</source>
@@ -2502,7 +2502,7 @@ fejlede: </translation>
     </message>
     <message>
         <source>Line</source>
-        <translation>Linie</translation>
+        <translation>Linje</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -2510,7 +2510,7 @@ fejlede: </translation>
     </message>
     <message>
         <source>Line style:</source>
-        <translation>Linie stil:</translation>
+        <translation>Linjestil:</translation>
     </message>
     <message>
         <source>solid</source>
@@ -2597,7 +2597,7 @@ fejlede: </translation>
     </message>
     <message>
         <source>LineSegment</source>
-        <translation>LinieSegment</translation>
+        <translation>LinjeSegment</translation>
     </message>
     <message>
         <source>SegmentType:</source>
@@ -3363,7 +3363,7 @@ før lukning?</translation>
     </message>
     <message>
         <source>MuseScore: Barlines</source>
-        <translation>MuseScore: Taktsstreger</translation>
+        <translation>MuseScore: Taktstreger</translation>
     </message>
     <message>
         <source>MuseScore: Fingering</source>
@@ -3675,7 +3675,7 @@ er ikke kompatibelt med det nuværende interface</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation>Overture filer&lt;eksperimentel funktion&gt; (*.ove);;</translation>
+        <translation>Overture filer&lt;eksperimentel funktion&gt; (*.ove)</translation>
     </message>
 </context>
 <context>
@@ -4902,7 +4902,7 @@ Vælg venligst en node eller pause of prøv igen
     </message>
     <message>
         <source>Rest Properties...</source>
-        <translation>Pause egenskaber...</translation>
+        <translation>Pauseegenskaber...</translation>
     </message>
     <message>
         <source>Tuplet...</source>
@@ -5202,11 +5202,11 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>Internal error</source>
-        <translation type="unfinished"/>
+        <translation>Intern fejl</translation>
     </message>
     <message>
         <source>Cannot load picture file %1</source>
-        <translation type="unfinished"/>
+        <translation>Kan ikke indlæse billed filen %1</translation>
     </message>
 </context>
 <context>
@@ -5259,11 +5259,11 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the copy operation</source>
-        <translation type="unfinished"/>
+        <translation>Vælg venligst hele tuplet'en og prøv at kopiere igen</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the cut operation</source>
-        <translation type="unfinished"/>
+        <translation>Vælg venligst hele tuplet'en og prøv at klippe igen</translation>
     </message>
 </context>
 <context>
@@ -6858,7 +6858,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Dynamics...</source>
-        <translation>Dynami...</translation>
+        <translation>Dynamik...</translation>
     </message>
     <message>
         <source>Note Input</source>
@@ -6866,7 +6866,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Pitch Spell</source>
-        <translation>Tonehøjde tolkning</translation>
+        <translation>Tonehøjdetolkning</translation>
     </message>
     <message>
         <source>Unison Above</source>
@@ -6874,7 +6874,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Enter unison above</source>
-        <translation>Tilføj unoson over</translation>
+        <translation>Tilføj unison over</translation>
     </message>
     <message>
         <source>Second Above</source>
@@ -8548,71 +8548,71 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Treble clef</source>
-        <translation>Diskant nøgle</translation>
+        <translation>Diskantnøgle</translation>
     </message>
     <message>
         <source>Treble clef 8va</source>
-        <translation>Diskant nøgle 8va</translation>
+        <translation>Diskantnøgle 8va</translation>
     </message>
     <message>
         <source>Treble clef 15ma</source>
-        <translation>Diskant nøgle 1ma</translation>
+        <translation>Diskantnøgle 1ma</translation>
     </message>
     <message>
         <source>Treble clef 8vb</source>
-        <translation>Diskant nøgle 8vb</translation>
+        <translation>Diskantnøgle 8vb</translation>
     </message>
     <message>
         <source>Bass clef</source>
-        <translation>Bas nøgle</translation>
+        <translation>Basnøgle</translation>
     </message>
     <message>
         <source>Bass clef 8vb</source>
-        <translation>Bas nøgle 8vb</translation>
+        <translation>Basnøgle 8vb</translation>
     </message>
     <message>
         <source>Bass clef 15mb</source>
-        <translation>Bas nøgle 15mb</translation>
+        <translation>Basnøgle 15mb</translation>
     </message>
     <message>
         <source>Baritone clef (C clef)</source>
-        <translation>Baryton nøgle (C nøgle)</translation>
+        <translation>Barytonnøgle (c-nøgle)</translation>
     </message>
     <message>
         <source>Subbass clef</source>
-        <translation>Subbas nøgle</translation>
+        <translation>Subbas-nøgle</translation>
     </message>
     <message>
         <source>Soprano clef</source>
-        <translation>Sopran nøgle</translation>
+        <translation>Soprannøgle</translation>
     </message>
     <message>
         <source>Mezzo-soprano clef</source>
-        <translation>Mezzo-sopran nøgle</translation>
+        <translation>Mezzosopran-nøgle</translation>
     </message>
     <message>
         <source>Alto clef</source>
-        <translation>Alt nøgle (C-nøgle)</translation>
+        <translation>Altnøgle (c-nøgle)</translation>
     </message>
     <message>
         <source>Tenor clef</source>
-        <translation>Tenor nøgle (C-nøgle)</translation>
+        <translation>Tenornøgle (c-nøgle)</translation>
     </message>
     <message>
         <source>Baritone clef (F clef)</source>
-        <translation>Bariton nøgle (F-nøgle)</translation>
+        <translation>Baritonnøgle (f-nøgle)</translation>
     </message>
     <message>
         <source>French violin clef</source>
-        <translation>Fransk violin nøgle</translation>
+        <translation>Fransk violinnøgle</translation>
     </message>
     <message>
         <source>Bass clef 8va</source>
-        <translation>Bas nøgle 8va</translation>
+        <translation>Basnøgle 8va</translation>
     </message>
     <message>
         <source>Bass clef 15ma</source>
-        <translation>Bas nøgle 15ma</translation>
+        <translation>Basnøgle 15ma</translation>
     </message>
 </context>
 <context>
@@ -8726,7 +8726,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Line</source>
-        <translation>Linie</translation>
+        <translation>Linje</translation>
     </message>
     <message>
         <source>Bracket</source>
@@ -8822,7 +8822,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>StaffText</source>
-        <translation>NodelinieTekst</translation>
+        <translation>NodelinjeTekst</translation>
     </message>
     <message>
         <source>Harmony</source>
@@ -8850,7 +8850,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>TextLineSegment</source>
-        <translation>TekstLinieSegment</translation>
+        <translation>TekstLinjeSegment</translation>
     </message>
     <message>
         <source>VoltaSegment</source>
@@ -8922,7 +8922,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>TextLine</source>
-        <translation>TekstLinie</translation>
+        <translation>TekstLinje</translation>
     </message>
     <message>
         <source>Segment</source>
@@ -8955,7 +8955,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>StaffList</source>
-        <translation>NodelinieListe</translation>
+        <translation>NodelinjeListe</translation>
     </message>
     <message>
         <source>MeasureList</source>

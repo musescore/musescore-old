@@ -5227,11 +5227,11 @@ failed: </source>
     </message>
     <message>
         <source>Internal error</source>
-        <translation type="unfinished"/>
+        <translation>Εσωτερικό σφάλμα</translation>
     </message>
     <message>
         <source>Cannot load picture file %1</source>
-        <translation type="unfinished"/>
+        <translation>Αδυναμία φόρτωσης αρχείου εικόνας %1</translation>
     </message>
 </context>
 <context>
@@ -5284,11 +5284,11 @@ failed: </source>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the copy operation</source>
-        <translation type="unfinished"/>
+        <translation>Παρακαλώ επιλέξτε ολόκληρη την υποδιαίρεση χρόνου και επαναλάβετε την διαδικασία αντιγραφής</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the cut operation</source>
-        <translation type="unfinished"/>
+        <translation>Παρακαλώ επιλέξτε ολόκληρη την υποδιαίρεση χρόνου και επαναλάβετε την διαδικασία αποκοπής</translation>
     </message>
 </context>
 <context>

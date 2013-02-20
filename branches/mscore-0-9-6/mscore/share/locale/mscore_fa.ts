@@ -81,7 +81,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>BarLine</source>
-        <translation>Bar Line</translation>
+        <translation>خط میزان</translation>
     </message>
     <message>
         <source>SubType:</source>
@@ -100,14 +100,14 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Chord/Rest</source>
-        <translation>Chord/Rest</translation>
+        <translation>آکورد</translation>
     </message>
 </context>
 <context>
     <name>BoxPropertiesBase</name>
     <message>
         <source>MuseScore: Frame Properties</source>
-        <translation>MuseScore: Frame Properties</translation>
+        <translation>مشخصات قاب</translation>
     </message>
     <message>
         <source>Margins</source>
@@ -138,7 +138,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>ChordBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>حالت</translation>
     </message>
     <message>
         <source>Arpeggio</source>
@@ -157,11 +157,11 @@ p, li { white-space: pre-wrap; }&#13;
     <name>ChordEdit</name>
     <message>
         <source>MuseScore: Harmony Properties</source>
-        <translation>MuseScore: Harmony Properties</translation>
+        <translation>مشخصات توازن</translation>
     </message>
     <message>
         <source>TextLabel</source>
-        <translation>TextLabel</translation>
+        <translation>برچسب</translation>
     </message>
     <message>
         <source>Root</source>
@@ -839,7 +839,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
-        <translation>Chord Properties</translation>
+        <translation>مشخصات اکورد</translation>
     </message>
     <message>
         <source>small</source>
@@ -2131,7 +2131,7 @@ space unit</extracomment>
     <name>ImageProperties</name>
     <message>
         <source>lock aspect ratio</source>
-        <translation>lock aspect ratio</translation>
+        <translation>قفل کردن نسبت بعد تصویر</translation>
     </message>
     <message>
         <source>Image Properties</source>
@@ -2150,27 +2150,27 @@ space unit</extracomment>
     </message>
     <message>
         <source>1/4</source>
-        <translation>crotchet</translation>
+        <translation>1/4</translation>
     </message>
     <message>
         <source>1/8</source>
-        <translation>quaver</translation>
+        <translation>1/8</translation>
     </message>
     <message>
         <source>1/16</source>
-        <translation>semiquaver</translation>
+        <translation>1/16</translation>
     </message>
     <message>
         <source>1/32</source>
-        <translation>demisemiquaver</translation>
+        <translation>1/32</translation>
     </message>
     <message>
         <source>1/64</source>
-        <translation>hemidemisemiquaver</translation>
+        <translation>1/64</translation>
     </message>
     <message>
         <source>1/128</source>
-        <translation>quarterdemisemiquaver</translation>
+        <translation>1/128</translation>
     </message>
 </context>
 <context>
@@ -2185,15 +2185,15 @@ space unit</extracomment>
     </message>
     <message>
         <source>Number of measures to insert</source>
-        <translation>Number of bars to insert</translation>
+        <translation>تعداد میزان ها</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>تایید</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>انصراف</translation>
     </message>
 </context>
 <context>
@@ -2211,15 +2211,15 @@ space unit</extracomment>
     </message>
     <message>
         <source>Back</source>
-        <translation>Back</translation>
+        <translation>عقب</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Forward</translation>
+        <translation>جلو</translation>
     </message>
     <message>
         <source>...</source>
-        <translation>…</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -2289,7 +2289,7 @@ space unit</extracomment>
     <name>InstrumentListEditor</name>
     <message>
         <source>MuseScore: Part List</source>
-        <translation>MuseScore: Part List</translation>
+        <translation>میوزسکور: لیست سازها ( پارت ها )</translation>
     </message>
 </context>
 <context>
@@ -2444,7 +2444,7 @@ failed: </source>
     </message>
     <message>
         <source>Clear</source>
-        <translation>Clear</translation>
+        <translation>پاک کردن</translation>
     </message>
     <message>
         <source>add time signature to palette</source>
@@ -3671,7 +3671,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation>Overture Files &lt;experimental&gt; (*.ove);;</translation>
+        <translation>Overture Files &lt;experimental&gt; (*.ove)</translation>
     </message>
 </context>
 <context>

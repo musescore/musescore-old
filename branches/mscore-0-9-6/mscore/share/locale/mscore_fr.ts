@@ -2675,7 +2675,7 @@ failed: </source>
     </message>
     <message>
         <source>Magnification</source>
-        <translation>Agrandissement</translation>
+        <translation>Zoom</translation>
     </message>
 </context>
 <context>
@@ -3675,7 +3675,7 @@ est incompatible avec l'interface actuel</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation>Fichiers Overture &lt;experimental&gt; (*.ove);;</translation>
+        <translation>Fichiers Overture &lt;experimental&gt; (*.ove)</translation>
     </message>
 </context>
 <context>

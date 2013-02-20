@@ -26,8 +26,8 @@ p, li { white-space: pre-wrap; }line break&#13;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Ajuda a MuseScore amb &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;la teva donació&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;line break&#13;
 line break&#13;
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;line break&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2011 Werner Schweer  Altres. &lt;/span&gt;&lt;/p&gt;line break&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Publicat sota la llicència GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2013 Werner Schweer  Altres. &lt;/span&gt;&lt;/p&gt;line break&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Publicat sota la llicència &lt;a href="http://www.musescore.org/en/about/gpl"&gt;GNU General Public License v2&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -1025,7 +1025,7 @@ line break&#13;
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation>alt. breu</translation>
     </message>
 </context>
 <context>
@@ -3675,18 +3675,18 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation>Fitxers Overture &lt;experimental&gt; (*.ove);;</translation>
+        <translation>Fitxers Overture &lt;experimental&gt; (*.ove)</translation>
     </message>
 </context>
 <context>
     <name>MyWebView</name>
     <message>
         <source>Could not&lt;br /&gt; connect</source>
-        <translation type="unfinished"/>
+        <translation>No s'ha pogut&lt;br /&gt; establir una connexió</translation>
     </message>
     <message>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
-        <translation type="unfinished"/>
+        <translation>Per connectar-vos amb la comunitat, &lt;br&gt; necessiteu tenir &lt;br&gt; connexió a internet habilitada</translation>
     </message>
     <message>
         <source>Retry</source>
@@ -5195,19 +5195,19 @@ Prova a desar-ho en una localització diferent.</translation>
     </message>
     <message>
         <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
-        <translation type="unfinished"/>
+        <translation>No es pot llegir la partitura:&lt;br&gt;La vostra versió de MuseScore és massa antiga.br&gt;&lt;a href="%1"&gt;Actualitzeu-la ara!&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Can't open file. File extension "%1" not supported.</source>
-        <translation type="unfinished"/>
+        <translation>L'arxiu no es pot obrir. L'extensió "%1" no és suportada.</translation>
     </message>
     <message>
         <source>Internal error</source>
-        <translation type="unfinished"/>
+        <translation>Error intern</translation>
     </message>
     <message>
         <source>Cannot load picture file %1</source>
-        <translation type="unfinished"/>
+        <translation>No es pot carregar l'arxiu d'imatge %1</translation>
     </message>
 </context>
 <context>
@@ -5260,11 +5260,12 @@ Prova a desar-ho en una localització diferent.</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the copy operation</source>
-        <translation type="unfinished"/>
+        <translation>Sisplau, seleccioneu el grup irregular complet i torneu a intentar copiar-lo</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the cut operation</source>
-        <translation type="unfinished"/>
+        <translation>Please select the complete tuplet and retry the cut operation&#13;
+Sisplau, seleccioneu el grup irregular complet i reintenteu copiar-lo</translation>
     </message>
 </context>
 <context>
@@ -5867,7 +5868,7 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation type="unfinished">Propietats de pentagrama ...</translation>
+        <translation>Propietats del pentagrama...</translation>
     </message>
 </context>
 <context>
@@ -6157,7 +6158,7 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>center text vertical to text baseline</source>
-        <translation type="unfinished"/>
+        <translation>Centrar el text verticalment a la seva base</translation>
     </message>
 </context>
 <context>
@@ -6645,15 +6646,15 @@ p, li { white-space: pre-wrap; }&#13;
     <name>WebPageDockWidget</name>
     <message>
         <source>Connect with the &lt;br /&gt; Community</source>
-        <translation type="unfinished"/>
+        <translation>Connectar-se amb la &lt;br /&gt; Comunitat</translation>
     </message>
     <message>
         <source>Find help</source>
-        <translation type="unfinished"/>
+        <translation>Cercar ajuda</translation>
     </message>
     <message>
         <source>Improve your skills</source>
-        <translation type="unfinished"/>
+        <translation>Milloreu les vostres habilitats</translation>
     </message>
     <message>
         <source>Read the latest news</source>
@@ -6665,7 +6666,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation>Començar</translation>
     </message>
     <message>
         <source>Close this permanently</source>
@@ -6776,11 +6777,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation>sori</translation>
     </message>
     <message>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation>koron</translation>
     </message>
 </context>
 <context>
@@ -8387,11 +8388,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>next score</source>
-        <translation type="unfinished"/>
+        <translation>partitura següent</translation>
     </message>
     <message>
         <source>previous score</source>
-        <translation type="unfinished"/>
+        <translation>partitura anterior</translation>
     </message>
 </context>
 <context>
@@ -9005,11 +9006,11 @@ p, li { white-space: pre-wrap; }&#13;
     <name>noteheadnames</name>
     <message>
         <source>normal</source>
-        <translation type="unfinished">Normal</translation>
+        <translation>normal</translation>
     </message>
     <message>
         <source>cross</source>
-        <translation type="unfinished">Creu</translation>
+        <translation>creu</translation>
     </message>
     <message>
         <source>diamond</source>
@@ -9025,11 +9026,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>slash</source>
-        <translation type="unfinished">Sostingut</translation>
+        <translation>barra obliqua</translation>
     </message>
     <message>
         <source>xcircle</source>
-        <translation type="unfinished">Cercle en X</translation>
+        <translation>xcercle</translation>
     </message>
     <message>
         <source>do</source>
@@ -9057,7 +9058,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation>alt. breu</translation>
     </message>
 </context>
 <context>
@@ -9939,51 +9940,51 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>s0sol head</source>
-        <translation type="unfinished"/>
+        <translation>s0sol cap</translation>
     </message>
     <message>
         <source>s1sol head</source>
-        <translation type="unfinished"/>
+        <translation>s1sol cap</translation>
     </message>
     <message>
         <source>s2sol head</source>
-        <translation type="unfinished"/>
+        <translation>s2sol cap</translation>
     </message>
     <message>
         <source>longa up alt</source>
-        <translation type="unfinished"/>
+        <translation>longa amunt alt</translation>
     </message>
     <message>
         <source>longa down alt</source>
-        <translation type="unfinished"/>
+        <translation>longa avall alt</translation>
     </message>
     <message>
         <source>brevis head alt</source>
-        <translation type="unfinished"/>
+        <translation>breu cap alt</translation>
     </message>
     <message>
         <source>time sig C dot</source>
-        <translation type="unfinished"/>
+        <translation>indicació de compàs C punt</translation>
     </message>
     <message>
         <source>time sig O</source>
-        <translation type="unfinished"/>
+        <translation>indicació de compàs O</translation>
     </message>
     <message>
         <source>time sig O cut</source>
-        <translation type="unfinished"/>
+        <translation>indicació de compàs O tallat</translation>
     </message>
     <message>
         <source>time sig O dot</source>
-        <translation type="unfinished"/>
+        <translation>indicació de compàs O punt</translation>
     </message>
     <message>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation>sori</translation>
     </message>
     <message>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation>koron</translation>
     </message>
 </context>
 </TS>

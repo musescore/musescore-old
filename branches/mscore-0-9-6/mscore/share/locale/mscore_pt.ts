@@ -949,7 +949,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Note Head Type</source>
-        <translation type="unfinished"/>
+        <translation>Tipo de cabeça da nota</translation>
     </message>
     <message>
         <source>normal</source>
@@ -1021,7 +1021,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>sol</translation>
     </message>
     <message>
         <source>alt. brevis</source>
@@ -1512,7 +1512,7 @@ Falhou: </translation>
     </message>
     <message>
         <source>+octave</source>
-        <translation type="unfinished"/>
+        <translation>+ oitava</translation>
     </message>
 </context>
 <context>
@@ -1728,7 +1728,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>shorten stems</source>
-        <translation type="unfinished"/>
+        <translation>Encurtar as hastes</translation>
     </message>
     <message>
         <source>...</source>
@@ -1748,7 +1748,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Fix Measure Width</source>
-        <translation type="unfinished"/>
+        <translation>Determinar a largura do compasso</translation>
     </message>
     <message>
         <source>Barlines</source>
@@ -1756,23 +1756,23 @@ space unit</extracomment>
     </message>
     <message>
         <source>Barline at start of single staff</source>
-        <translation type="unfinished"/>
+        <translation>Barra no início de pauta individual</translation>
     </message>
     <message>
         <source>Barline at start of multiple staves</source>
-        <translation type="unfinished"/>
+        <translation>Barra no início do sistema</translation>
     </message>
     <message>
         <source>Music upper margin</source>
-        <translation type="unfinished"/>
+        <translation>Margem superior da música</translation>
     </message>
     <message>
         <source>Music lower margin</source>
-        <translation type="unfinished"/>
+        <translation>Margem inferior da música</translation>
     </message>
     <message>
         <source>Staff distance</source>
-        <translation type="unfinished"/>
+        <translation>Distância entre as pautas</translation>
     </message>
     <message>
         <source>Akkolade distance</source>
@@ -1780,7 +1780,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>System distance</source>
-        <translation type="unfinished"/>
+        <translation>Distância entre os sistemas</translation>
     </message>
     <message>
         <source>Lyrics upper margin</source>
@@ -1800,7 +1800,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Spacing (1=tight)</source>
-        <translation type="unfinished"/>
+        <translation>Espaçamento (1=apertado)</translation>
     </message>
     <message>
         <source>Left margin</source>
@@ -1812,11 +1812,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Min. note distance</source>
-        <translation type="unfinished"/>
+        <translation>Min. distância entre notas</translation>
     </message>
     <message>
         <source>Clef left margin</source>
-        <translation type="unfinished"/>
+        <translation>Margem esquerda da clave</translation>
     </message>
     <message>
         <source>Key sig. left margin</source>
@@ -1836,7 +1836,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Begin repeat left margin</source>
-        <translation type="unfinished"/>
+        <translation>Margem esquerda da repetição inicial</translation>
     </message>
     <message>
         <source>Show repeat bar tips ("winged" repeats)</source>
@@ -1844,7 +1844,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Progression</source>
-        <translation type="unfinished"/>
+        <translation>Progressão</translation>
     </message>
     <message>
         <source>Shortest stem</source>
@@ -1860,11 +1860,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Note dot distance</source>
-        <translation type="unfinished"/>
+        <translation>Distância nota ponto</translation>
     </message>
     <message>
         <source>Dot dot distance</source>
-        <translation type="unfinished"/>
+        <translation>Distância ponto-ponto</translation>
     </message>
     <message>
         <source>Ledger line width</source>
@@ -1888,7 +1888,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Minimum length</source>
-        <translation type="unfinished"/>
+        <translation>Comprimento mínimo</translation>
     </message>
     <message>
         <source>Minimum slope</source>
@@ -1912,7 +1912,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Small clef size</source>
-        <translation type="unfinished"/>
+        <translation>Tamanho da clave pequena</translation>
     </message>
     <message>
         <source>Line break height</source>
@@ -1985,7 +1985,7 @@ space unit</extracomment>
     <name>ElementBase</name>
     <message>
         <source>Form</source>
-        <translation>Forma</translation>
+        <translation>Formulário</translation>
     </message>
     <message>
         <source>invalid</source>
@@ -1993,7 +1993,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>selectable</source>
-        <translation type="unfinished"/>
+        <translation>selecionável</translation>
     </message>
     <message>
         <source>droptarget</source>
@@ -2792,7 +2792,7 @@ Falhou: </translation>
     </message>
     <message>
         <source>New Row</source>
-        <translation type="unfinished"/>
+        <translation>Nova Linha</translation>
     </message>
     <message>
         <source>a</source>
@@ -2800,7 +2800,7 @@ Falhou: </translation>
     </message>
     <message>
         <source>visible</source>
-        <translation type="unfinished">Visível</translation>
+        <translation>visível</translation>
     </message>
     <message>
         <source>c</source>
@@ -2834,7 +2834,7 @@ Falhou: </translation>
     <name>MenuNotes</name>
     <message>
         <source>&amp;Notes</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Notas</translation>
     </message>
 </context>
 <context>
@@ -3618,7 +3618,9 @@ Deseja restaurar a sessão</translation>
         <source>Script
 %1
 is incompatible with current interface</source>
-        <translation type="unfinished"/>
+        <translation>Script&#13;
+%1&#13;
+é imcompatível com o interface actual</translation>
     </message>
     <message>
         <source>MuseScore is too old to run script
@@ -3644,27 +3646,27 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
-        <translation type="unfinished"/>
+        <translation>Ficheiros MuseScore (*.mscz *.mscx *.msc);;</translation>
     </message>
     <message>
         <source>MusicXML Files (*.xml *.mxl);;</source>
-        <translation type="unfinished"/>
+        <translation>Ficheiros MusicXML (*.xml *.mxl);;</translation>
     </message>
     <message>
         <source>MIDI Files (*.mid *.midi *.kar);;</source>
-        <translation type="unfinished"/>
+        <translation>Ficheiros MIDI (*.mid *.midi *.kar);;</translation>
     </message>
     <message>
         <source>Muse Data Files (*.md);;</source>
-        <translation type="unfinished"/>
+        <translation>Ficheiros Muse Data (*.md);;</translation>
     </message>
     <message>
         <source>Capella Files (*.cap);;</source>
-        <translation type="unfinished"/>
+        <translation>Ficheiros Capella (*.cap);;</translation>
     </message>
     <message>
         <source>Bagpipe Music Writer Files (*.bww);;</source>
-        <translation type="unfinished"/>
+        <translation>Ficheiros Bagpipe Music Writer (*.bww);;</translation>
     </message>
     <message>
         <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
@@ -3672,7 +3674,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation type="unfinished"/>
+        <translation>Overture Files &lt;experimental&gt; (*.ove)</translation>
     </message>
 </context>
 <context>
@@ -3687,7 +3689,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished"/>
+        <translation>Voltar a tentar</translation>
     </message>
     <message>
         <source>Close this permanently</source>
@@ -3835,7 +3837,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Tuning</source>
-        <translation type="unfinished"/>
+        <translation>Afinação</translation>
     </message>
     <message>
         <source>OnTime:</source>
@@ -5195,7 +5197,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Internal error</source>
-        <translation type="unfinished"/>
+        <translation>Erro interno</translation>
     </message>
     <message>
         <source>Cannot load picture file %1</source>
@@ -5726,7 +5728,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Triangle</source>
-        <translation type="unfinished"/>
+        <translation>Triângulo</translation>
     </message>
     <message>
         <source>Number:</source>
@@ -5826,12 +5828,12 @@ and check that the file location is correct</source>
     <message>
         <source>Abs.:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Abs.:</translation>
+        <translation>Abs.:</translation>
     </message>
     <message>
         <source>Rel.:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Rel.:</translation>
+        <translation>Rel.:</translation>
     </message>
     <message>
         <source>TextStyle:</source>
@@ -5851,7 +5853,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation type="unfinished"/>
+        <translation>Propriedades da Pauta...</translation>
     </message>
 </context>
 <context>
@@ -6633,7 +6635,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Find help</source>
-        <translation type="unfinished"/>
+        <translation>Procuar ajuda</translation>
     </message>
     <message>
         <source>Improve your skills</source>
@@ -6649,11 +6651,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation>Iniciar</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Fechar permanentemente</translation>
     </message>
 </context>
 <context>
@@ -7495,7 +7497,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note Input Toolbar</source>
-        <translation type="unfinished"/>
+        <translation>Barra de entrada de Notas</translation>
     </message>
     <message>
         <source>Status Bar</source>
@@ -7703,7 +7705,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>violin clef</source>
-        <translation type="unfinished"/>
+        <translation>clave de violino</translation>
     </message>
     <message>
         <source>bass clef</source>
@@ -7923,7 +7925,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>All Similar Elements in Same Staff</source>
-        <translation type="unfinished"/>
+        <translation>Todos os Elementos Semelhantes na Mesma Pauta</translation>
     </message>
     <message>
         <source>Synthesizer</source>
@@ -7931,11 +7933,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Synthesizer Control</source>
-        <translation type="unfinished"/>
+        <translation>Controlo do SIntetizador</translation>
     </message>
     <message>
         <source>double duration</source>
-        <translation type="unfinished"/>
+        <translation>duplicar duração</translation>
     </message>
     <message>
         <source>half duration</source>
@@ -8127,11 +8129,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add trill</source>
-        <translation type="unfinished"/>
+        <translation>Adicionar trilo</translation>
     </message>
     <message>
         <source>Trill</source>
-        <translation type="unfinished"/>
+        <translation>Trilo</translation>
     </message>
     <message>
         <source>More stretch</source>
@@ -8191,7 +8193,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Top Note in Chord</source>
-        <translation type="unfinished"/>
+        <translation>Nota Superior do Acorde</translation>
     </message>
     <message>
         <source>Move up</source>
@@ -8235,7 +8237,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bottom Note in Chord</source>
-        <translation type="unfinished"/>
+        <translation>Nota Inferior do Acorde</translation>
     </message>
     <message>
         <source>Move down</source>
@@ -8371,11 +8373,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>next score</source>
-        <translation type="unfinished"/>
+        <translation>próxima pauta</translation>
     </message>
     <message>
         <source>previous score</source>
-        <translation type="unfinished"/>
+        <translation>pauta anterior</translation>
     </message>
 </context>
 <context>
@@ -8903,7 +8905,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Trill</source>
-        <translation type="unfinished"/>
+        <translation>Trilo</translation>
     </message>
     <message>
         <source>TextLine</source>
@@ -8989,7 +8991,7 @@ p, li { white-space: pre-wrap; }
     <name>noteheadnames</name>
     <message>
         <source>normal</source>
-        <translation type="unfinished">normal</translation>
+        <translation>normal</translation>
     </message>
     <message>
         <source>cross</source>
@@ -8997,15 +8999,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished">diamante</translation>
+        <translation>diamante</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished">triângulo</translation>
+        <translation>triângulo</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished">mi</translation>
+        <translation>mi</translation>
     </message>
     <message>
         <source>slash</source>
@@ -9017,27 +9019,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished">dó</translation>
+        <translation>dó</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished">ré</translation>
+        <translation>ré</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished">fá</translation>
+        <translation>fá</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished">lá</translation>
+        <translation>lá</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished"/>
+        <translation>si</translation>
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>sol</translation>
     </message>
     <message>
         <source>alt. brevis</source>
