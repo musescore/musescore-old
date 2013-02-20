@@ -192,9 +192,12 @@ Element* Rest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
       {
       switch (e->type()) {
             case ARTICULATION:
-                  if (e->subtype() == UfermataSym || e->subtype() == DfermataSym)
+                  if (e->subtype() == UfermataSym || e->subtype() == DfermataSym) {
+                        e->setPos(QPoint());
                         score()->addArticulation(this, (Articulation*)e);
-                  return 0;
+                        return e;
+                        }
+                  break;
             case ICON:
                   {
                   switch(e->subtype()) {
