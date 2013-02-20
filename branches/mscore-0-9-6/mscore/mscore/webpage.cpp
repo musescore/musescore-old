@@ -32,6 +32,21 @@
 
 static const char* staticUrl = "http://connect.musescore.com";
 
+
+//---------------------------------------------------------
+//   MyNetworkAccessManager
+//---------------------------------------------------------
+
+QNetworkReply * MyNetworkAccessManager::createRequest(Operation op,
+                                          const QNetworkRequest & req,
+                                          QIODevice * outgoingData)
+      {
+      QNetworkRequest new_req(req); 
+      new_req.setRawHeader("User-Agent",  QString("MuseScore %1").arg(VERSION).toAscii());  
+      new_req.setRawHeader("Accept-Language",  QString("%1;q=0.8,en-US;q=0.6,en;q=0.4").arg(mscore->getLocaleISOCode()).toAscii()); 
+      return QNetworkAccessManager::createRequest(op, new_req, outgoingData);  
+      }
+      
 //---------------------------------------------------------
 //   MyWebPage
 //---------------------------------------------------------
@@ -78,15 +93,7 @@ QObject* MyWebPage::createPlugin(
       /*QUiLoader loader;
       return loader.createWidget(classid, view());*/
       }
-      
-//---------------------------------------------------------
-//   userAgentForUrl
-//---------------------------------------------------------
-
-QString MyWebPage::userAgentForUrl(const QUrl &url) const {
-      return QString("MuseScore %1").arg(VERSION).toAscii();
-      }
-
+            
 //---------------------------------------------------------
 //   MyWebView
 //---------------------------------------------------------
@@ -100,6 +107,8 @@ MyWebView::MyWebView(QWidget *parent):
       // object-tags correctly.
 
       m_page.setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
+      QNetworkAccessManager *networkManager = new MyNetworkAccessManager(this);  
+      m_page.setNetworkAccessManager(networkManager);
       setPage(&m_page);
       
       //set cookie jar for persistent cookies
@@ -118,14 +127,6 @@ MyWebView::~MyWebView()
       disconnect(this, SIGNAL(loadFinished(bool)), this, SLOT(stopBusyAndClose(bool)));
       disconnect(this, SIGNAL(loadFinished(bool)), this, SLOT(stopBusyAndFirst(bool)));
       disconnect(this, SIGNAL(loadFinished(bool)), this, SLOT(stopBusyStatic(bool)));
-      }
-
-void MyWebView::load ( const QNetworkRequest & request, QNetworkAccessManager::Operation operation, const QByteArray & body) 
-      {
-      QNetworkRequest new_req(request);  
-      new_req.setRawHeader("User-Agent",  QString("MuseScore %1").arg(VERSION).toAscii());  
-      new_req.setRawHeader("Accept-Language",  QString("%1;q=0.8,en-US;q=0.6,en;q=0.4").arg(mscore->getLocaleISOCode()).toAscii());   
-      QWebView::load( new_req, operation, body);
       }
 
 //---------------------------------------------------------
