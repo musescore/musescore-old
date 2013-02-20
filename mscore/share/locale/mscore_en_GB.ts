@@ -5,7 +5,7 @@
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
-        <translation>AboutBox</translation>
+        <translation>About</translation>
     </message>
     <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
@@ -26,8 +26,8 @@ p, li { white-space: pre-wrap; }&#13;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2011 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2013 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Released under the &lt;a href="http://www.musescore.org/en/about/gpl"&gt;GNU General Public License v2&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -2675,7 +2675,7 @@ failed: </translation>
     </message>
     <message>
         <source>Magnification</source>
-        <translation>Magnification</translation>
+        <translation>Zoom</translation>
     </message>
 </context>
 <context>
@@ -3153,7 +3153,7 @@ failed: </translation>
     </message>
     <message>
         <source>About&amp;Qt</source>
-        <translation>About&amp;Qt</translation>
+        <translation>About &amp;Qt</translation>
     </message>
     <message>
         <source>MuseScore: Open Help</source>
@@ -3346,7 +3346,7 @@ before closing?</source>
     </message>
     <message>
         <source>Search</source>
-        <translation>Search</translation>
+        <translation>Find</translation>
     </message>
     <message>
         <source>MuseScore: Lines</source>
@@ -3672,14 +3672,14 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation>Overture Files &lt;experimental&gt; (*.ove);;</translation>
+        <translation>Overture Files &lt;experimental&gt; (*.ove)</translation>
     </message>
 </context>
 <context>
     <name>MyWebView</name>
     <message>
         <source>Could not&lt;br /&gt; connect</source>
-        <translation type="unfinished"/>
+        <translation>Verbindung konnte nicht&lt;br /&gt;hergestellt werden</translation>
     </message>
     <message>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
@@ -3974,7 +3974,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Insert new Palette</source>
-        <translation>Insert new Palette</translation>
+        <translation>Insert New Palette</translation>
     </message>
     <message>
         <source>Move Palette Up</source>
@@ -5185,19 +5185,19 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
-        <translation type="unfinished"/>
+        <translation>Diese Partitur kann nicht gelesen werden:&lt;br&gt;Ihre MuseScore-Version ist zu alt.&lt;a href="%1"&gt;Führen Sie jetzt ein Upgrade durch!&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Can't open file. File extension "%1" not supported.</source>
-        <translation type="unfinished"/>
+        <translation>Datei kann nicht geöffnet werden. Dateierweiterung "%1" wird nicht unterstützt.</translation>
     </message>
     <message>
         <source>Internal error</source>
-        <translation type="unfinished"/>
+        <translation>Interner Fehler</translation>
     </message>
     <message>
         <source>Cannot load picture file %1</source>
-        <translation type="unfinished"/>
+        <translation>Bilddatei %1 kann nicht geladen werden</translation>
     </message>
 </context>
 <context>
@@ -5250,7 +5250,7 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the copy operation</source>
-        <translation type="unfinished"/>
+        <translation>Bitte markieren Sie das komplette Tupel und versuchen Sie erneut zu kopieren</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the cut operation</source>
@@ -5359,7 +5359,7 @@ Try saving to a different location.</translation>
     <name>SelectInstrument</name>
     <message>
         <source>Dialog</source>
-        <translation>Dialog</translation>
+        <translation>Select Instrument</translation>
     </message>
     <message>
         <source>0</source>
@@ -7889,11 +7889,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>search</source>
-        <translation>search</translation>
+        <translation>find</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation>Search</translation>
+        <translation>Find</translation>
     </message>
     <message>
         <source>Zoom In</source>

@@ -3674,7 +3674,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation>Tài liệu nhạc Overture &lt;thử nghiệm&gt; (*.ove);;</translation>
+        <translation>Tài liệu nhạc Overture &lt;thử nghiệm&gt; (*.ove)</translation>
     </message>
 </context>
 <context>
@@ -5201,11 +5201,11 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>Internal error</source>
-        <translation type="unfinished"/>
+        <translation>Lỗi nội bộ</translation>
     </message>
     <message>
         <source>Cannot load picture file %1</source>
-        <translation type="unfinished"/>
+        <translation>Không thể tải tập tin ảnh %1</translation>
     </message>
 </context>
 <context>
@@ -5258,11 +5258,11 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the copy operation</source>
-        <translation type="unfinished"/>
+        <translation>Vui lòng chọn đầy đủ liên ba và thử lại thao tác sao chép</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the cut operation</source>
-        <translation type="unfinished"/>
+        <translation>Vui lòng chọn đầy đủ liên ba và thử lại thao tác cắt</translation>
     </message>
 </context>
 <context>
@@ -6155,7 +6155,7 @@ và kiểm tra xem file location có đúng hay không</translation>
     </message>
     <message>
         <source>center text vertical to text baseline</source>
-        <translation type="unfinished"/>
+        <translation>canh giữa văn bản dọc theo đường nền văn bản</translation>
     </message>
 </context>
 <context>

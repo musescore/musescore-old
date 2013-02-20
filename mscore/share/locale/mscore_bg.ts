@@ -28,8 +28,8 @@ p, li { white-space: pre-wrap; }&#13;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2011 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2013 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Released under the &lt;a href="http://www.musescore.org/en/about/gpl"&gt;GNU General Public License&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -3765,7 +3765,7 @@ before closing?</source>
     <message>
         <location filename="../../mscore/file.cpp" line="192"/>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation>Overture файлове &lt;експериментално&gt; (*.ove);;</translation>
+        <translation>Overture файлове &lt;експериментално&gt; (*.ove)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="552"/>
@@ -4690,22 +4690,22 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/webpage.cpp" line="135"/>
         <source>Could not&lt;br /&gt; connect</source>
-        <translation type="unfinished"/>
+        <translation>Неуспешно&lt;br /&gt; свързване</translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="136"/>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
-        <translation type="unfinished"/>
+        <translation>За връзка с общността &lt;br /&gt; трябва да имате интернет &lt;br /&gt; връзка</translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="137"/>
         <source>Retry</source>
-        <translation type="unfinished"/>
+        <translation>Опитай пак</translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="138"/>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Затвори завинаги</translation>
     </message>
 </context>
 <context>
@@ -6549,7 +6549,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/file.cpp" line="876"/>
         <source>Cannot load picture file %1</source>
-        <translation type="unfinished"/>
+        <translation>Не може да зареди изображението %1</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="1015"/>
@@ -6616,7 +6616,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/score.cpp" line="416"/>
         <source>Can't open file. File extension "%1" not supported.</source>
-        <translation type="unfinished"/>
+        <translation>Файлът не може да се отвори. Разширението "%1" не се поддържа.</translation>
     </message>
 </context>
 <context>
@@ -6681,12 +6681,12 @@ failed: </source>
     <message>
         <location filename="../../mscore/scoreview.cpp" line="2359"/>
         <source>Please select the complete tuplet and retry the copy operation</source>
-        <translation type="unfinished"/>
+        <translation>Моля изберете цялата триола и повторете копирането</translation>
     </message>
     <message>
         <location filename="../../mscore/scoreview.cpp" line="2382"/>
         <source>Please select the complete tuplet and retry the cut operation</source>
-        <translation type="unfinished"/>
+        <translation>Моля изберете цялата триола и повторете изрязването</translation>
     </message>
 </context>
 <context>
@@ -8025,7 +8025,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/transposedialog.ui" line="207"/>
         <source>Perfect Unison</source>
-        <translation type="unfinished">Чист Унисон</translation>
+        <translation>Чист Унисон</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="212"/>
@@ -8391,27 +8391,27 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/webpage.cpp" line="235"/>
         <source>Connect with the &lt;br /&gt; Community</source>
-        <translation type="unfinished"/>
+        <translation>Свързване с &lt;br /&gt; Общността</translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="236"/>
         <source>Find help</source>
-        <translation type="unfinished"/>
+        <translation>Намери помощ</translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="237"/>
         <source>Improve your skills</source>
-        <translation type="unfinished"/>
+        <translation>Усъвършенствай уменията си</translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="238"/>
         <source>Read the latest news</source>
-        <translation type="unfinished"/>
+        <translation>Прочети последните новини</translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="239"/>
         <source>Download free sheet music</source>
-        <translation type="unfinished"/>
+        <translation>Свали безплатно ноти</translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="240"/>
@@ -8421,7 +8421,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/webpage.cpp" line="241"/>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Затвори завинаги</translation>
     </message>
 </context>
 <context>
@@ -8911,7 +8911,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/actions.cpp" line="472"/>
         <source>Add B</source>
-        <translation>Добави Ла</translation>
+        <translation>Добави Си</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="469"/>

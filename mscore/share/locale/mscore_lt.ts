@@ -4662,8 +4662,8 @@ Atvėrę meniu „Žinynas“ pabandykite pasirinkti „Žinynas internete“.</
         <source>Error loading plugin
 "%1" line %2:
 %3</source>
-        <translation>Prriedo įkėlimo klaida
-"%1" eilutės nr. %2:
+        <translation>Papildinio įkėlimo klaida&#13;
+"%1" eilutės nr. %2:&#13;
 %3</translation>
     </message>
     <message>

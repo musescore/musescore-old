@@ -1021,7 +1021,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished">Sol</translation>
+        <translation>sol</translation>
     </message>
     <message>
         <source>alt. brevis</source>
@@ -1916,7 +1916,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Line break height</source>
-        <translation>Altura dos saltos de liña</translation>
+        <translation>Altura das quebras de liña</translation>
     </message>
     <message>
         <source>Use German names</source>
@@ -1997,7 +1997,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>droptarget</source>
-        <translation>soltar o destino</translation>
+        <translation>Destino sobre o que se solta</translation>
     </message>
 </context>
 <context>
@@ -2243,11 +2243,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Up</source>
-        <translation>Arriba</translation>
+        <translation>Subir</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Abaixo</translation>
+        <translation>Baixar</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -2522,7 +2522,7 @@ fallou: </translation>
     </message>
     <message>
         <source>dot</source>
-        <translation>puntillo</translation>
+        <translation>puntos</translation>
     </message>
     <message>
         <source>dash dot</source>
@@ -3069,7 +3069,7 @@ fallou: </translation>
     </message>
     <message>
         <source>edit mode</source>
-        <translation>editar modo</translation>
+        <translation>modo de edición</translation>
     </message>
     <message>
         <source>play</source>
@@ -3537,15 +3537,15 @@ No canto disto, escoller «Manual en liña» no menú «Axuda».</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer</source>
-        <translation>Saltos e espaciador</translation>
+        <translation>Quebras e espaciador</translation>
     </message>
     <message>
         <source>Line break</source>
-        <translation>Salto de liña</translation>
+        <translation>Quebra de liña</translation>
     </message>
     <message>
         <source>Page break</source>
-        <translation>Salto de páxina</translation>
+        <translation>Quebra de páxina</translation>
     </message>
     <message>
         <source>Staff spacer</source>
@@ -3585,7 +3585,7 @@ No canto disto, escoller «Manual en liña» no menú «Axuda».</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer...</source>
-        <translation>Saltos e espaciador...</translation>
+        <translation>Quebras e espaciador...</translation>
     </message>
     <message>
         <source>The previous session quit unexpectedly.
@@ -3609,7 +3609,7 @@ Restaurar a sesión?</translation>
     </message>
     <message>
         <source>MuseScore: Breaks &amp; Spacer</source>
-        <translation>MuseScore: Saltos e espaciador</translation>
+        <translation>MuseScore: Quebras e espaciador</translation>
     </message>
     <message>
         <source>Check for Update</source>
@@ -4618,7 +4618,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Drop Target</source>
-        <translation>Soltar o destino</translation>
+        <translation>Destino sobre o que se solta</translation>
     </message>
     <message>
         <source>Default duration:</source>
@@ -5202,11 +5202,11 @@ Tente gardar nun sitio diferente.</translation>
     </message>
     <message>
         <source>Internal error</source>
-        <translation type="unfinished"/>
+        <translation>Erro interno</translation>
     </message>
     <message>
         <source>Cannot load picture file %1</source>
-        <translation type="unfinished"/>
+        <translation>Non é posíbel cargar o ficheiro de imaxe %1</translation>
     </message>
 </context>
 <context>
@@ -5259,11 +5259,11 @@ Tente gardar nun sitio diferente.</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the copy operation</source>
-        <translation type="unfinished"/>
+        <translation>Escolla un grupo artificial completo e tente de novo a operación de copiado</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the cut operation</source>
-        <translation type="unfinished"/>
+        <translation>Escolla un grupo artificial completo e tente de novo a operación de cortado</translation>
     </message>
 </context>
 <context>
@@ -7727,7 +7727,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Exchange Voice 1-3</source>
-        <translation>Intercambiar as voces 1 e 2</translation>
+        <translation>Intercambiar as voces 1 e 3</translation>
     </message>
     <message>
         <source>Exchange Voice 1-4</source>
@@ -7779,19 +7779,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>toggle system break</source>
-        <translation>conmutar o salto de sistema</translation>
+        <translation>conmutar a quebra de sistema</translation>
     </message>
     <message>
         <source>Toggle System Break</source>
-        <translation>Conmutar o salto de sistema</translation>
+        <translation>Conmutar a quebra de sistema</translation>
     </message>
     <message>
         <source>toggle page break</source>
-        <translation>conmutar o salto de páxina</translation>
+        <translation>conmutar a quebra de páxina</translation>
     </message>
     <message>
         <source>Toggle Page Break</source>
-        <translation>Conmutar o salto de páxina</translation>
+        <translation>Conmutar a quebra de páxina</translation>
     </message>
     <message>
         <source>edit element</source>
@@ -8135,7 +8135,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Flat</source>
-        <translation>Sostenido</translation>
+        <translation>Bemol</translation>
     </message>
     <message>
         <source>Add trill</source>
@@ -8859,7 +8859,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>LayoutBreak</source>
-        <translation>SaltoDeDisposición</translation>
+        <translation>QuebraDisposición</translation>
     </message>
     <message>
         <source>Spacer</source>
@@ -9017,7 +9017,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished">mi</translation>
+        <translation>mi</translation>
     </message>
     <message>
         <source>slash</source>
@@ -9963,7 +9963,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>time sig O</source>
-        <translation type="unfinished"/>
+        <translation>marca de tempo O</translation>
     </message>
     <message>
         <source>time sig O cut</source>

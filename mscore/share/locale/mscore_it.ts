@@ -3673,7 +3673,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation>File Overture &lt;sperimentale&gt; (*.ove);;</translation>
+        <translation>File Overture &lt;sperimentale&gt; (*.ove)</translation>
     </message>
 </context>
 <context>
@@ -4452,7 +4452,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Portaudio</source>
-        <translation>Porta Audio</translation>
+        <translation>PortAudio</translation>
     </message>
     <message>
         <source>Api:</source>
@@ -8335,7 +8335,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Rewind to start position</source>
-        <translation>Riavvolvi alla posizione iniziale</translation>
+        <translation>Riavvolgi alla posizione iniziale</translation>
     </message>
     <message>
         <source>Seek to end</source>

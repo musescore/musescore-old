@@ -5,7 +5,7 @@
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
-        <translation type="unfinished"/>
+        <translation>About</translation>
     </message>
     <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
@@ -2674,7 +2674,7 @@ Failed: </translation>
     </message>
     <message>
         <source>Magnification</source>
-        <translation/>
+        <translation>Zoom</translation>
     </message>
 </context>
 <context>
@@ -3153,7 +3153,7 @@ Failed: </translation>
     </message>
     <message>
         <source>About&amp;Qt</source>
-        <translation/>
+        <translation>About &amp;Qt</translation>
     </message>
     <message>
         <source>MuseScore: Open Help</source>
@@ -3346,7 +3346,7 @@ before closing?</source>
     </message>
     <message>
         <source>Search</source>
-        <translation/>
+        <translation>Find</translation>
     </message>
     <message>
         <source>MuseScore: Lines</source>
@@ -3664,7 +3664,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation type="unfinished"/>
+        <translation>Overture Files &lt;experimental&gt; (*.ove)</translation>
     </message>
 </context>
 <context>
@@ -4161,7 +4161,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>h:mm:s</source>
-        <translation type="unfinished"/>
+        <translation>h:mm:ss</translation>
     </message>
     <message>
         <source>0:00:00</source>
@@ -5345,7 +5345,7 @@ Try saving to a different location.</source>
     <name>SelectInstrument</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished"/>
+        <translation>Select Instrument</translation>
     </message>
     <message>
         <source>0</source>
@@ -7865,11 +7865,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>search</source>
-        <translation type="unfinished"/>
+        <translation>find</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"/>
+        <translation>Find</translation>
     </message>
     <message>
         <source>Zoom In</source>

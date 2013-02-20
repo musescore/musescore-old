@@ -26,8 +26,8 @@ p, li { white-space: pre-wrap; }&#13;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Podržite MuseScore &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;svojom donacijom&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer i drugi. &lt;/span&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Objavljeno pod licencom GNU GPL&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2013 Werner Schweer i drugi. &lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Objavljeno pod licencom &lt;a href="http://www.musescore.org/en/about/gpl"&gt;GNU GPL v2&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -108,7 +108,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>BoxPropertiesBase</name>
     <message>
         <source>MuseScore: Frame Properties</source>
-        <translation>MuseScore: Frame Properties</translation>
+        <translation>MuseScore: Svojstva okvira</translation>
     </message>
     <message>
         <source>Margins</source>
@@ -139,7 +139,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>ChordBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>Arpeggio</source>
@@ -298,7 +298,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Other:</source>
-        <translation>Other:</translation>
+        <translation>Ostalo:</translation>
     </message>
     <message>
         <source>5b</source>
@@ -742,23 +742,23 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Degrees</source>
-        <translation>Degrees</translation>
+        <translation>Stupnjevi</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Add</translation>
+        <translation>Dodati</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation>Izbrisati</translation>
     </message>
     <message>
         <source>Bass Note / Inversion</source>
-        <translation>Bass Note / Inversion</translation>
+        <translation>Bas nota / Inverzija</translation>
     </message>
     <message>
         <source>none</source>
-        <translation>none</translation>
+        <translation>ništa</translation>
     </message>
     <message>
         <source>/C</source>
@@ -818,11 +818,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Type</source>
-        <translation>Type</translation>
+        <translation>Vrsta</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation>Value</translation>
+        <translation>Vrijednost</translation>
     </message>
     <message>
         <source>Alter</source>
@@ -840,7 +840,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
-        <translation>Chord Properties</translation>
+        <translation>Svostva akorda</translation>
     </message>
     <message>
         <source>small</source>
@@ -861,7 +861,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Note Properties</source>
-        <translation>Note Properties</translation>
+        <translation>Svojstva note</translation>
     </message>
     <message>
         <source>tuning offset</source>
@@ -878,11 +878,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>up</source>
-        <translation>up</translation>
+        <translation>gore</translation>
     </message>
     <message>
         <source>down</source>
-        <translation>down</translation>
+        <translation>dolje</translation>
     </message>
     <message>
         <source>note head positon </source>
@@ -911,7 +911,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>user</source>
         <extracomment>velocity type</extracomment>
-        <translation>user</translation>
+        <translation>korisnik</translation>
     </message>
     <message>
         <source>offset</source>
@@ -1005,15 +1005,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>whole</source>
-        <translation>semibreve</translation>
+        <translation>cjelina</translation>
     </message>
     <message>
         <source>half</source>
-        <translation>minim</translation>
+        <translation>polovinka</translation>
     </message>
     <message>
         <source>quarter</source>
-        <translation>crotchet</translation>
+        <translation>četvrtinka</translation>
     </message>
     <message>
         <source>breve</source>
@@ -1032,7 +1032,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>ChordRestBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>SlurFor:</source>
@@ -1051,7 +1051,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>ChordStyleEditor</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>Chord Description File:</source>
@@ -1059,7 +1059,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>...</source>
-        <translation>…</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Id</source>
@@ -1067,11 +1067,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation>Ime</translation>
     </message>
     <message>
         <source>Save As</source>
-        <translation>Save As</translation>
+        <translation>Spremi kao</translation>
     </message>
     <message>
         <source>MuseScore: Chord Style Editor</source>
@@ -1082,7 +1082,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>Dynamic</name>
     <message>
         <source>Dynamics</source>
-        <translation>Dynamics</translation>
+        <translation>Dinamika</translation>
     </message>
     <message>
         <source>Set Invisible</source>
@@ -1094,25 +1094,25 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation>Text Properties…</translation>
+        <translation>Svojstva teksta...</translation>
     </message>
     <message>
         <source>MIDI Properties...</source>
-        <translation>MIDI Properties…</translation>
+        <translation>MIDI svojstva...</translation>
     </message>
 </context>
 <context>
     <name>DynamicBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
 </context>
 <context>
     <name>DynamicProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation>MuseScore: Text Properties</translation>
+        <translation>MuseScore: Svojstva teksta</translation>
     </message>
     <message>
         <source>Velocity:</source>
@@ -1120,7 +1120,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>align left</source>
-        <translation>align left</translation>
+        <translation>Pravnaj lijevo</translation>
     </message>
     <message>
         <source>staff</source>
@@ -1132,7 +1132,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>system</source>
-        <translation>system</translation>
+        <translation>sustav</translation>
     </message>
     <message>
         <source>MIDI Values</source>
@@ -1140,7 +1140,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Apply to:</source>
-        <translation>Apply to:</translation>
+        <translation>Primijeni na:</translation>
     </message>
 </context>
 <context>
@@ -1151,11 +1151,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Load</source>
-        <translation>Load</translation>
+        <translation>Učitaj</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Save</translation>
+        <translation>Spremi</translation>
     </message>
     <message>
         <source>MuseScore: Load Drumset</source>
@@ -1172,18 +1172,18 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>Open File
 </source>
-        <translation>Open File
+        <translation>Otvori datoteku
 </translation>
     </message>
     <message>
         <source>
 failed: </source>
         <translation>
-failed: </translation>
+neuspjelo: </translation>
     </message>
     <message>
         <source>MuseScore: Open File</source>
-        <translation>MuseScore: Open File</translation>
+        <translation>MuseScore: Otvori datoteku</translation>
     </message>
     <message>
         <source>MuseScore: Write Drumset</source>
@@ -1202,11 +1202,11 @@ failed: </translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Name:</translation>
+        <translation>Ime</translation>
     </message>
     <message>
         <source>Note Head:</source>
-        <translation>Note Head:</translation>
+        <translation>Notna glava</translation>
     </message>
     <message>
         <source>Staff Line:</source>
@@ -1222,11 +1222,11 @@ failed: </translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Up</translation>
+        <translation>Gore</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Down</translation>
+        <translation>Dolje</translation>
     </message>
     <message>
         <source>Default Voice:</source>
@@ -1234,23 +1234,23 @@ failed: </translation>
     </message>
     <message>
         <source>Pitch</source>
-        <translation>Pitch</translation>
+        <translation>Visina tona</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation>Ime</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation>Note</translation>
+        <translation>Nota</translation>
     </message>
     <message>
         <source>Shortcut</source>
-        <translation>Shortcut</translation>
+        <translation>Prečac</translation>
     </message>
     <message>
         <source>Shortcut:</source>
-        <translation>Shortcut:</translation>
+        <translation>Prečac:</translation>
     </message>
     <message>
         <source>A</source>
@@ -1289,15 +1289,15 @@ failed: </translation>
     <name>EditInstrumentBase</name>
     <message>
         <source>MuseScore: Edit Instrument Properties</source>
-        <translation>MuseScore: Edit Instrument Properties</translation>
+        <translation>MuseScore: Uređivanje svojstava instrumenta</translation>
     </message>
     <message>
         <source>Instrument Properties</source>
-        <translation>Instrument Properties</translation>
+        <translation>Svojstva instrumenta</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation>Ime</translation>
     </message>
     <message>
         <source>Short Name</source>
@@ -1317,11 +1317,11 @@ failed: </translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>U redu</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Otkaži</translation>
     </message>
     <message>
         <source>Pitch</source>
@@ -1372,7 +1372,7 @@ failed: </translation>
     </message>
     <message>
         <source>Invisible</source>
-        <translation>Invisible</translation>
+        <translation>Nevidljivo</translation>
     </message>
     <message>
         <source>Usable Pitch Range:</source>
@@ -1380,7 +1380,7 @@ failed: </translation>
     </message>
     <message>
         <source>Amateur:</source>
-        <translation>Amateur:</translation>
+        <translation>Amater</translation>
     </message>
     <message>
         <source>-</source>
@@ -1500,15 +1500,15 @@ failed: </translation>
     </message>
     <message>
         <source>up</source>
-        <translation>up</translation>
+        <translation>gore</translation>
     </message>
     <message>
         <source>down</source>
-        <translation>down</translation>
+        <translation>dolje</translation>
     </message>
     <message>
         <source>Change Instrument...</source>
-        <translation>Change Instrument…</translation>
+        <translation>Zamijeni instrument</translation>
     </message>
     <message>
         <source>+octave</source>
@@ -1519,7 +1519,7 @@ failed: </translation>
     <name>EditStyle</name>
     <message>
         <source>Symbol</source>
-        <translation>Symbol</translation>
+        <translation>Simbol</translation>
     </message>
     <message>
         <source>Anchor</source>
@@ -1535,26 +1535,26 @@ failed: </translation>
     </message>
     <message>
         <source>Chord</source>
-        <translation>Chord</translation>
+        <translation>Akord</translation>
     </message>
 </context>
 <context>
     <name>EditStyleBase</name>
     <message>
         <source>MuseScore: Edit Style</source>
-        <translation>MuseScore: Edit Style</translation>
+        <translation>MuseScore: Uredi stil</translation>
     </message>
     <message>
         <source>Score</source>
-        <translation>Score</translation>
+        <translation>Skladba</translation>
     </message>
     <message>
         <source>Page</source>
-        <translation>Page</translation>
+        <translation>Stranica</translation>
     </message>
     <message>
         <source>Measure</source>
-        <translation>Bar</translation>
+        <translation>Takt</translation>
     </message>
     <message>
         <source>Numbers</source>
@@ -1566,7 +1566,7 @@ failed: </translation>
     </message>
     <message>
         <source>Sizes</source>
-        <translation>Sizes</translation>
+        <translation>Veličine</translation>
     </message>
     <message>
         <source>Hairpins</source>
@@ -1615,7 +1615,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create time signatures</source>
-        <translation>Create time signatures</translation>
+        <translation>Stvori mjeru</translation>
     </message>
     <message>
         <source>Create key sig for all systems</source>
@@ -1631,15 +1631,15 @@ space unit</extracomment>
     </message>
     <message>
         <source>Page Numbers</source>
-        <translation>Page Numbers</translation>
+        <translation>Brojevi stranica</translation>
     </message>
     <message>
         <source>show first</source>
-        <translation>show first</translation>
+        <translation>pokaži prvo</translation>
     </message>
     <message>
         <source>odd/even</source>
-        <translation>odd/even</translation>
+        <translation>par/nepar</translation>
     </message>
     <message>
         <source>Measure Numbers</source>
@@ -1647,7 +1647,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>all staffs</source>
-        <translation>all staves</translation>
+        <translation>sva crtovlja</translation>
     </message>
     <message>
         <source>every system</source>
@@ -1667,7 +1667,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Height</source>
-        <translation>Height</translation>
+        <translation>Visina</translation>
     </message>
     <message>
         <source>System</source>
@@ -1679,11 +1679,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Articulations, Ornaments</source>
-        <translation>Articulations, Ornaments</translation>
+        <translation>Artikulacija, ornamenti</translation>
     </message>
     <message>
         <source>Voices</source>
-        <translation>Voices</translation>
+        <translation>Glasovi</translation>
     </message>
     <message>
         <source>Minumum width of measure:</source>
@@ -1699,27 +1699,27 @@ space unit</extracomment>
     </message>
     <message>
         <source>Voice 1</source>
-        <translation>Voice 1</translation>
+        <translation>1. glas</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Up</translation>
+        <translation>Gore</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Down</translation>
+        <translation>Dolje</translation>
     </message>
     <message>
         <source>Voice 2</source>
-        <translation>Voice 2</translation>
+        <translation>2. glas</translation>
     </message>
     <message>
         <source>Voice 3</source>
-        <translation>Voice 3</translation>
+        <translation>3. glas</translation>
     </message>
     <message>
         <source>Voice 4</source>
-        <translation>Voice 4</translation>
+        <translation>4. glas</translation>
     </message>
     <message>
         <source>sp</source>
@@ -1752,15 +1752,15 @@ space unit</extracomment>
     </message>
     <message>
         <source>Barlines</source>
-        <translation>Bar lines</translation>
+        <translation>Taktne crte</translation>
     </message>
     <message>
         <source>Barline at start of single staff</source>
-        <translation>Bar line at start of single stave</translation>
+        <translation>Početna taktna crta na jednom crtovlju</translation>
     </message>
     <message>
         <source>Barline at start of multiple staves</source>
-        <translation>Bar line at start of multiple staves</translation>
+        <translation>Početna taktna crta na više crtovlja</translation>
     </message>
     <message>
         <source>Music upper margin</source>
@@ -1804,11 +1804,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Left margin</source>
-        <translation>Left margin</translation>
+        <translation>Lijevi rub</translation>
     </message>
     <message>
         <source>Right margin</source>
-        <translation>Right margin</translation>
+        <translation>Desni rub</translation>
     </message>
     <message>
         <source>Min. note distance</source>
@@ -1951,15 +1951,15 @@ space unit</extracomment>
     </message>
     <message>
         <source>Text:</source>
-        <translation>Text:</translation>
+        <translation>Tekst</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>U redu</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Otkaži</translation>
     </message>
     <message>
         <source>MuseScore: Tempo Text</source>
@@ -1970,22 +1970,22 @@ space unit</extracomment>
     <name>Element</name>
     <message>
         <source>Set Invisible</source>
-        <translation>Set Invisible</translation>
+        <translation>Postavi nevidljivo</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation>Set Visible</translation>
+        <translation>Postavi vidljivo</translation>
     </message>
     <message>
         <source>Color...</source>
-        <translation>Colour…</translation>
+        <translation>Boja...</translation>
     </message>
 </context>
 <context>
     <name>ElementBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>invalid</source>
@@ -1993,7 +1993,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>selectable</source>
-        <translation>selectable</translation>
+        <translation>slektivno</translation>
     </message>
     <message>
         <source>droptarget</source>
@@ -2004,23 +2004,23 @@ space unit</extracomment>
     <name>ExcerptsDialog</name>
     <message>
         <source>MuseScore: Parts</source>
-        <translation>MuseScore: Parts</translation>
+        <translation>MuseScore: Dijelovi</translation>
     </message>
     <message>
         <source>Select Part:</source>
-        <translation>Select Part:</translation>
+        <translation>Označi dio:</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation>Izbriši</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>New</translation>
+        <translation>Novi</translation>
     </message>
     <message>
         <source>Edit Part:</source>
-        <translation>Edit Part:</translation>
+        <translation>Uredi dio:</translation>
     </message>
     <message>
         <source>Instrument:</source>
@@ -2032,15 +2032,15 @@ space unit</extracomment>
     </message>
     <message>
         <source>File Name:</source>
-        <translation>File Name:</translation>
+        <translation>Ime datoteke:</translation>
     </message>
     <message>
         <source>Part Title:</source>
-        <translation>Part Title:</translation>
+        <translation>Naslov dijela</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Close</translation>
+        <translation>Zatvori</translation>
     </message>
     <message>
         <source>Part-%1</source>
@@ -2062,11 +2062,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Show Text</source>
-        <translation>Show Text</translation>
+        <translation>Pokaži tekst</translation>
     </message>
     <message>
         <source>Text:</source>
-        <translation>Text:</translation>
+        <translation>Tekst</translation>
     </message>
 </context>
 <context>
@@ -2080,7 +2080,7 @@ space unit</extracomment>
     <name>HBox</name>
     <message>
         <source>Add Text</source>
-        <translation>Add Text</translation>
+        <translation>Dodaj tekst</translation>
     </message>
     <message>
         <source>HBox Properties...</source>
@@ -2091,7 +2091,7 @@ space unit</extracomment>
     <name>HairpinBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>Hairpin</source>
@@ -2114,18 +2114,18 @@ space unit</extracomment>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation>Text Properties…</translation>
+        <translation>Svojstva teksta...</translation>
     </message>
 </context>
 <context>
     <name>Image</name>
     <message>
         <source>Image</source>
-        <translation>Image</translation>
+        <translation>Slika</translation>
     </message>
     <message>
         <source>Image Properties...</source>
-        <translation>Image Properties…</translation>
+        <translation>Svojstva slike</translation>
     </message>
 </context>
 <context>
@@ -2136,14 +2136,14 @@ space unit</extracomment>
     </message>
     <message>
         <source>Image Properties</source>
-        <translation>Image Properties</translation>
+        <translation>Svojstva slike</translation>
     </message>
 </context>
 <context>
     <name>ImportMidiDialog</name>
     <message>
         <source>MuseScore: Midi Import</source>
-        <translation>MuseScore: Midi Import</translation>
+        <translation>MuseScore: Midi uvoz</translation>
     </message>
     <message>
         <source>Shortest note on import:</source>
@@ -2151,50 +2151,50 @@ space unit</extracomment>
     </message>
     <message>
         <source>1/4</source>
-        <translation>crotchet</translation>
+        <translation>1/4</translation>
     </message>
     <message>
         <source>1/8</source>
-        <translation>quaver</translation>
+        <translation>1/8</translation>
     </message>
     <message>
         <source>1/16</source>
-        <translation>semiquaver</translation>
+        <translation>1/16</translation>
     </message>
     <message>
         <source>1/32</source>
-        <translation>demisemiquaver</translation>
+        <translation>1/32</translation>
     </message>
     <message>
         <source>1/64</source>
-        <translation>hemidemisemiquaver</translation>
+        <translation>1/64</translation>
     </message>
     <message>
         <source>1/128</source>
-        <translation>quarterdemisemiquaver</translation>
+        <translation>1/128</translation>
     </message>
 </context>
 <context>
     <name>InsertMeasuresDialogBase</name>
     <message>
         <source>Mscore: Insert Measures</source>
-        <translation>Mscore: Insert Bars</translation>
+        <translation>Mscore: Umetni takt</translation>
     </message>
     <message>
         <source>Insert empty measures:</source>
-        <translation>Insert empty bars:</translation>
+        <translation>umetni prazne taktove:</translation>
     </message>
     <message>
         <source>Number of measures to insert</source>
-        <translation>Number of bars to insert</translation>
+        <translation>Broj taktova za umetnuti</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>U redu</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Odustani</translation>
     </message>
 </context>
 <context>
@@ -2208,26 +2208,26 @@ space unit</extracomment>
     <name>InspectorBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation>Back</translation>
+        <translation>Natrag</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Forward</translation>
+        <translation>Naprijed</translation>
     </message>
     <message>
         <source>...</source>
-        <translation>…</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
     <name>InstrumentDialogBase</name>
     <message>
         <source>MuseScore: Create Instruments</source>
-        <translation>MuseScore: Create Instruments</translation>
+        <translation>MuseScore: Stvori instrumente</translation>
     </message>
     <message>
         <source>0</source>
@@ -2235,31 +2235,31 @@ space unit</extracomment>
     </message>
     <message>
         <source>Add</source>
-        <translation>Add</translation>
+        <translation>Dodaj</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Remove</translation>
+        <translation>Ukloni</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Up</translation>
+        <translation>Gore</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Down</translation>
+        <translation>Dolje</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Edit</translation>
+        <translation>Uredi</translation>
     </message>
     <message>
         <source>Add Above</source>
-        <translation>Add Above</translation>
+        <translation>Dodaj iznad</translation>
     </message>
     <message>
         <source>Add Below</source>
-        <translation>Add Below</translation>
+        <translation>Dodaj ispod</translation>
     </message>
     <message>
         <source>1</source>
@@ -2267,23 +2267,23 @@ space unit</extracomment>
     </message>
     <message>
         <source>Load</source>
-        <translation>Load</translation>
+        <translation>Učitaj</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Save</translation>
+        <translation>Spremi</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>U redu</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Odustani</translation>
     </message>
     <message>
         <source>show more</source>
-        <translation>show more</translation>
+        <translation>pokaži više</translation>
     </message>
 </context>
 <context>
@@ -2297,7 +2297,7 @@ space unit</extracomment>
     <name>InstrumentWizard</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>0</source>
@@ -2305,27 +2305,27 @@ space unit</extracomment>
     </message>
     <message>
         <source>Add</source>
-        <translation>Add</translation>
+        <translation>Dodaj</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Remove</translation>
+        <translation>Ukloni</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Up</translation>
+        <translation>Gore</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Down</translation>
+        <translation>Dolje</translation>
     </message>
     <message>
         <source>Add Above</source>
-        <translation>Add Above</translation>
+        <translation>Dodaj iznad</translation>
     </message>
     <message>
         <source>Add Below</source>
-        <translation>Add Below</translation>
+        <translation>Dodaj ispod</translation>
     </message>
     <message>
         <source>1</source>
@@ -2337,15 +2337,15 @@ space unit</extracomment>
     </message>
     <message>
         <source>Clef</source>
-        <translation>Clef</translation>
+        <translation>Ključ</translation>
     </message>
     <message>
         <source>Instrument List</source>
-        <translation>Instrument List</translation>
+        <translation>Popis instrumenata</translation>
     </message>
     <message>
         <source>show more</source>
-        <translation>show more</translation>
+        <translation>pokaži više</translation>
     </message>
 </context>
 <context>
@@ -2356,31 +2356,31 @@ space unit</extracomment>
     </message>
     <message>
         <source>Clef</source>
-        <translation>Clef</translation>
+        <translation>Ključ</translation>
     </message>
     <message>
         <source>MuseScore: Save Instrument List</source>
-        <translation>MuseScore: Save Instrument List</translation>
+        <translation>MuseScore: Spremi popis instrumenata</translation>
     </message>
     <message>
         <source>MuseScore Instruments (*.xml);;</source>
-        <translation>MuseScore Instruments (*.xml);;</translation>
+        <translation>MuseScore instrumenti (*.xml);;</translation>
     </message>
     <message>
         <source>Open Instruments File
 </source>
-        <translation>Open Instruments File
+        <translation>Otvori datoteku instrumenata
 </translation>
     </message>
     <message>
         <source>
 failed: </source>
         <translation>
-failed: </translation>
+neuspjelo </translation>
     </message>
     <message>
         <source>MuseScore: Open Instruments file</source>
-        <translation>MuseScore: Open Instruments file</translation>
+        <translation>MuseScore: Otvori datoteku instrumenata</translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
@@ -2388,19 +2388,19 @@ failed: </translation>
     </message>
     <message>
         <source>MuseScore: Load Instrument List</source>
-        <translation>MuseScore: Load Instrument List</translation>
+        <translation>MuseScore:Učitaj popis instrumenata</translation>
     </message>
     <message>
         <source>MuseScore Instruments (*.xml);;All files (*)</source>
-        <translation>MuseScore Instruments (*.xml);;All files (*)</translation>
+        <translation>MuseScore instrumenti (*.xml);;Sve datoteke (*)</translation>
     </message>
     <message>
         <source>Staff %1</source>
-        <translation>Stave %1</translation>
+        <translation>Crtovlje %1</translation>
     </message>
     <message>
         <source>Instrument List</source>
-        <translation>Instrument List</translation>
+        <translation>Popis instrumenata</translation>
     </message>
     <message>
         <source>Write Style failed: </source>
@@ -2422,7 +2422,7 @@ failed: </translation>
     </message>
     <message>
         <source>Jump to:</source>
-        <translation>Jump to:</translation>
+        <translation>Skoči na:</translation>
     </message>
     <message>
         <source>Play until:</source>
@@ -2430,14 +2430,14 @@ failed: </translation>
     </message>
     <message>
         <source>Continue at:</source>
-        <translation>Continue at:</translation>
+        <translation>Nastavi od:</translation>
     </message>
 </context>
 <context>
     <name>KeyEdit</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>Create Key Signature</source>
@@ -2445,7 +2445,7 @@ failed: </translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation>Clear</translation>
+        <translation>Očisti</translation>
     </message>
     <message>
         <source>add time signature to palette</source>
@@ -2453,14 +2453,14 @@ failed: </translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Add</translation>
+        <translation>Dodaj</translation>
     </message>
 </context>
 <context>
     <name>KeyEditor</name>
     <message>
         <source>MuseScore: Key Signatures</source>
-        <translation>MuseScore: Key Signatures</translation>
+        <translation>MuseScore: Tonalitet</translation>
     </message>
 </context>
 <context>
@@ -2490,7 +2490,7 @@ failed: </translation>
     </message>
     <message>
         <source>Text</source>
-        <translation>Text</translation>
+        <translation>Tekst</translation>
     </message>
     <message>
         <source>sp</source>
@@ -2498,7 +2498,7 @@ failed: </translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation>Colour:</translation>
+        <translation>Boja:</translation>
     </message>
     <message>
         <source>Line</source>
@@ -2506,7 +2506,7 @@ failed: </translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Width:</translation>
+        <translation>Širina:</translation>
     </message>
     <message>
         <source>Line style:</source>
@@ -2518,19 +2518,19 @@ failed: </translation>
     </message>
     <message>
         <source>dash</source>
-        <translation>dash</translation>
+        <translation>crtica</translation>
     </message>
     <message>
         <source>dot</source>
-        <translation>dot</translation>
+        <translation>točka</translation>
     </message>
     <message>
         <source>dash dot</source>
-        <translation>dash dot</translation>
+        <translation>crtica točka</translation>
     </message>
     <message>
         <source>dash dot dot</source>
-        <translation>dash dot dot</translation>
+        <translation>crtica točka točka</translation>
     </message>
     <message>
         <source>Hook</source>
@@ -2538,7 +2538,7 @@ failed: </translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Up</translation>
+        <translation>Gore</translation>
     </message>
     <message>
         <source>diagonally</source>
@@ -2546,11 +2546,11 @@ failed: </translation>
     </message>
     <message>
         <source>Begin</source>
-        <translation>Begin</translation>
+        <translation>Početak</translation>
     </message>
     <message>
         <source>...</source>
-        <translation>…</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Ped (Pedal)</source>
@@ -2566,11 +2566,11 @@ failed: </translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation>Continue</translation>
+        <translation>Nastavi</translation>
     </message>
     <message>
         <source>End</source>
-        <translation>End</translation>
+        <translation>Kraj</translation>
     </message>
     <message>
         <source>place:</source>
@@ -2578,11 +2578,11 @@ failed: </translation>
     </message>
     <message>
         <source>Left</source>
-        <translation>Left</translation>
+        <translation>Lijevo</translation>
     </message>
     <message>
         <source>Above</source>
-        <translation>Above</translation>
+        <translation>Iznad</translation>
     </message>
     <message>
         <source>Symb.</source>
@@ -2593,7 +2593,7 @@ failed: </translation>
     <name>LineSegmentBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>LineSegment</source>
@@ -2632,11 +2632,11 @@ failed: </translation>
     <name>LyricsBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>Lyrics</source>
-        <translation>Lyrics</translation>
+        <translation>Stihovi</translation>
     </message>
     <message>
         <source>Syllabic:</source>
@@ -2648,11 +2648,11 @@ failed: </translation>
     </message>
     <message>
         <source>Begin</source>
-        <translation>Begin</translation>
+        <translation>Početak</translation>
     </message>
     <message>
         <source>End</source>
-        <translation>End</translation>
+        <translation>Kraj</translation>
     </message>
     <message>
         <source>Middle</source>
@@ -2660,7 +2660,7 @@ failed: </translation>
     </message>
     <message>
         <source>Row:</source>
-        <translation>Row:</translation>
+        <translation>Red:</translation>
     </message>
     <message>
         <source>End Tick:</source>
@@ -2700,14 +2700,14 @@ failed: </translation>
     <name>Measure</name>
     <message>
         <source>Measure Properties...</source>
-        <translation>Measure Properties…</translation>
+        <translation>Svojstva takta</translation>
     </message>
 </context>
 <context>
     <name>MeasureBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>breakMultiMeasureRest</source>
@@ -2718,7 +2718,7 @@ failed: </translation>
     <name>MeasureProperties</name>
     <message>
         <source>visible</source>
-        <translation>visible</translation>
+        <translation>vidljivo</translation>
     </message>
     <message>
         <source>stemless</source>
@@ -2749,7 +2749,7 @@ failed: </translation>
     </message>
     <message>
         <source>Other</source>
-        <translation>Other</translation>
+        <translation>Ostalo</translation>
     </message>
     <message>
         <source>do not count</source>
@@ -2769,7 +2769,7 @@ failed: </translation>
     </message>
     <message>
         <source>Visible</source>
-        <translation>Visible</translation>
+        <translation>Vidljivo</translation>
     </message>
     <message>
         <source>break multi measure rest</source>
@@ -2777,7 +2777,7 @@ failed: </translation>
     </message>
     <message>
         <source>add to measure number</source>
-        <translation>add to bar number</translation>
+        <translation>dodaj broj takta</translation>
     </message>
     <message>
         <source>layout stretch</source>
@@ -2793,7 +2793,7 @@ failed: </translation>
     </message>
     <message>
         <source>New Row</source>
-        <translation>New Row</translation>
+        <translation>Novi red</translation>
     </message>
     <message>
         <source>a</source>
@@ -2801,7 +2801,7 @@ failed: </translation>
     </message>
     <message>
         <source>visible</source>
-        <translation>visible</translation>
+        <translation>vidljivo</translation>
     </message>
     <message>
         <source>c</source>
@@ -2812,30 +2812,30 @@ failed: </translation>
     <name>MeasuresDialogBase</name>
     <message>
         <source>Mscore: Append Measures</source>
-        <translation>Mscore: Append Bars</translation>
+        <translation>Mscore: Dodati taktove</translation>
     </message>
     <message>
         <source>Append empty measures:</source>
-        <translation>Append empty bars:</translation>
+        <translation>Dadati prazne taktove:</translation>
     </message>
     <message>
         <source>Number of measures to append</source>
-        <translation>Number of bars to append</translation>
+        <translation>Broj taktova za dodati</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>U redu</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Otkaži</translation>
     </message>
 </context>
 <context>
     <name>MenuNotes</name>
     <message>
         <source>&amp;Notes</source>
-        <translation>&amp;Notes</translation>
+        <translation>&amp;Note</translation>
     </message>
 </context>
 <context>
@@ -2846,7 +2846,7 @@ failed: </translation>
     </message>
     <message>
         <source>Work Title:</source>
-        <translation>Work Title:</translation>
+        <translation>Radni naslov:</translation>
     </message>
     <message>
         <source>Work Number:</source>
@@ -2862,7 +2862,7 @@ failed: </translation>
     </message>
     <message>
         <source>Source:</source>
-        <translation>Source:</translation>
+        <translation>Izvorni:</translation>
     </message>
 </context>
 <context>
@@ -2873,7 +2873,7 @@ failed: </translation>
     </message>
     <message>
         <source>Fingering</source>
-        <translation>Fingering</translation>
+        <translation>Prstomet</translation>
     </message>
     <message>
         <source>Tempo</source>
@@ -2881,27 +2881,27 @@ failed: </translation>
     </message>
     <message>
         <source>Metronome</source>
-        <translation>Metronome</translation>
+        <translation>Metronom</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation>Title</translation>
+        <translation>Naslov</translation>
     </message>
     <message>
         <source>Subtitle</source>
-        <translation>Subtitle</translation>
+        <translation>Podnaslov</translation>
     </message>
     <message>
         <source>Composer</source>
-        <translation>Composer</translation>
+        <translation>Skladatelj</translation>
     </message>
     <message>
         <source>Poet</source>
-        <translation>Lyricist</translation>
+        <translation>Tekstopisac</translation>
     </message>
     <message>
         <source>Copyright</source>
-        <translation>Copyright</translation>
+        <translation>Autorska prava</translation>
     </message>
     <message>
         <source>Rehearsal Mark</source>
@@ -2917,67 +2917,67 @@ failed: </translation>
     </message>
     <message>
         <source>G major, E minor</source>
-        <translation>G major, E minor</translation>
+        <translation>G dur, E mol</translation>
     </message>
     <message>
         <source>Cb major, Ab minor</source>
-        <translation>Cb major, Ab minor</translation>
+        <translation>Cb dur, Ab mol</translation>
     </message>
     <message>
         <source>D major, B minor</source>
-        <translation>D major, B minor</translation>
+        <translation>D dur, B mol</translation>
     </message>
     <message>
         <source>Gb major, Eb minor</source>
-        <translation>Gb major, Eb minor</translation>
+        <translation>Gb dur, Eb mol</translation>
     </message>
     <message>
         <source>A major, F# minor</source>
-        <translation>A major, F# minor</translation>
+        <translation>A dur, F# mol</translation>
     </message>
     <message>
         <source>Db major, Bb minor</source>
-        <translation>Db major, Bb minor</translation>
+        <translation>Db dur, Bb mol</translation>
     </message>
     <message>
         <source>E major, C# minor</source>
-        <translation>E major, C# minor</translation>
+        <translation>E dur, C# mol</translation>
     </message>
     <message>
         <source>Ab major, F minor</source>
-        <translation>Ab major, F minor</translation>
+        <translation>Ab dur, F mol</translation>
     </message>
     <message>
         <source>B major, G# minor</source>
-        <translation>B major, G# minor</translation>
+        <translation>B dur, G# mol</translation>
     </message>
     <message>
         <source>Eb major, C minor</source>
-        <translation>Eb major, C minor</translation>
+        <translation>Eb dur, C mol</translation>
     </message>
     <message>
         <source>F# major, D# minor</source>
-        <translation>F# major, D# minor</translation>
+        <translation>F# dur, D# mol</translation>
     </message>
     <message>
         <source>Bb major, G minor</source>
-        <translation>Bb major, G minor</translation>
+        <translation>Bb dur, G mol</translation>
     </message>
     <message>
         <source>C# major, A# minor</source>
-        <translation>C# major, A# minor</translation>
+        <translation>C# dur, A# mol</translation>
     </message>
     <message>
         <source>F major,  D minor</source>
-        <translation>F major, D minor</translation>
+        <translation>F dur,  D mol</translation>
     </message>
     <message>
         <source>C major, A minor</source>
-        <translation>C major, A minor</translation>
+        <translation>C durr, A mol</translation>
     </message>
     <message>
         <source>Clefs</source>
-        <translation>Clefs</translation>
+        <translation>Ključevi</translation>
     </message>
     <message>
         <source>4/4 common time</source>
@@ -3021,7 +3021,7 @@ failed: </translation>
     </message>
     <message>
         <source>Dynamics</source>
-        <translation>Dynamics</translation>
+        <translation>Dinamika</translation>
     </message>
     <message>
         <source>Tremolo</source>
@@ -3045,19 +3045,19 @@ failed: </translation>
     </message>
     <message>
         <source>D.S al Coda</source>
-        <translation>D.S. al Coda</translation>
+        <translation>D.S al Coda</translation>
     </message>
     <message>
         <source>D.S al Fine</source>
-        <translation>D.S. al Fine</translation>
+        <translation>D.S al Fine</translation>
     </message>
     <message>
         <source>D.S</source>
-        <translation>D.S.</translation>
+        <translation>D.S</translation>
     </message>
     <message>
         <source>To Coda</source>
-        <translation>al Coda</translation>
+        <translation>To Coda</translation>
     </message>
     <message>
         <source>Repeats</source>
@@ -3065,15 +3065,15 @@ failed: </translation>
     </message>
     <message>
         <source>Symbols</source>
-        <translation>Symbols</translation>
+        <translation>Simboli</translation>
     </message>
     <message>
         <source>&amp;Create</source>
-        <translation>&amp;Create</translation>
+        <translation>&amp;Stvori</translation>
     </message>
     <message>
         <source>Barlines...</source>
-        <translation>Bar lines…</translation>
+        <translation>Taktne crte...</translation>
     </message>
     <message>
         <source>&amp;Lines...</source>
@@ -3085,7 +3085,7 @@ failed: </translation>
     </message>
     <message>
         <source>MuseScore: Clefs</source>
-        <translation>MuseScore: Clefs</translation>
+        <translation>MuseScore: Ključevi</translation>
     </message>
     <message>
         <source>File Operations</source>
@@ -3105,11 +3105,11 @@ failed: </translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>&amp;Edit</translation>
+        <translation>&amp;Uredi</translation>
     </message>
     <message>
         <source>Voices</source>
-        <translation>Voices</translation>
+        <translation>Glasovi</translation>
     </message>
     <message>
         <source>Preferences...</source>
@@ -3117,7 +3117,7 @@ failed: </translation>
     </message>
     <message>
         <source>Add Note</source>
-        <translation>Add Note</translation>
+        <translation>Dodaj notu</translation>
     </message>
     <message>
         <source>Add Interval</source>
@@ -3129,15 +3129,15 @@ failed: </translation>
     </message>
     <message>
         <source>&amp;Layout</source>
-        <translation>&amp;Layout</translation>
+        <translation>P&amp;ogled</translation>
     </message>
     <message>
         <source>Page Settings...</source>
-        <translation>Page Settings…</translation>
+        <translation>Postavke stranice</translation>
     </message>
     <message>
         <source>&amp;Style</source>
-        <translation>&amp;Style</translation>
+        <translation>&amp;Stil</translation>
     </message>
     <message>
         <source>&amp;Display</source>
@@ -3145,19 +3145,19 @@ failed: </translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation>&amp;Help</translation>
+        <translation>&amp;Pomoć</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation>&amp;About</translation>
+        <translation>&amp;O MuseScore...</translation>
     </message>
     <message>
         <source>About&amp;Qt</source>
-        <translation>About&amp;Qt</translation>
+        <translation>O &amp;Qt</translation>
     </message>
     <message>
         <source>MuseScore: Open Help</source>
-        <translation>MuseScore: Open Help</translation>
+        <translation>MuseScore: Otvori pomoć</translation>
     </message>
     <message>
         <source>note entry mode</source>
@@ -3169,15 +3169,15 @@ failed: </translation>
     </message>
     <message>
         <source>play</source>
-        <translation>play</translation>
+        <translation>sviraj</translation>
     </message>
     <message>
         <source>Symbols1</source>
-        <translation>Symbols1</translation>
+        <translation>Simboli 1</translation>
     </message>
     <message>
         <source>Symbols3</source>
-        <translation>Symbols3</translation>
+        <translation>Simboli 3</translation>
     </message>
     <message>
         <source>InstrumentsLong</source>
@@ -3209,7 +3209,7 @@ failed: </translation>
     </message>
     <message>
         <source>Translator</source>
-        <translation>Translator</translation>
+        <translation>Prevoditelj</translation>
     </message>
     <message>
         <source>System</source>
@@ -3233,7 +3233,7 @@ failed: </translation>
     </message>
     <message>
         <source>Frame</source>
-        <translation>Frame</translation>
+        <translation>Okvir</translation>
     </message>
     <message>
         <source>TextLine</source>
@@ -3249,7 +3249,7 @@ failed: </translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation>&amp;File</translation>
+        <translation>&amp;Datoteka</translation>
     </message>
     <message>
         <source>no score</source>
@@ -3262,7 +3262,7 @@ before closing?</source>
     </message>
     <message>
         <source>Untitled</source>
-        <translation>Untitled</translation>
+        <translation>Bezimena</translation>
     </message>
     <message>
         <source>Drums</source>
@@ -3274,11 +3274,11 @@ before closing?</source>
     </message>
     <message>
         <source>Measures</source>
-        <translation>Bars</translation>
+        <translation>Taktovi</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation>Text</translation>
+        <translation>Tekst</translation>
     </message>
     <message>
         <source>Ottava</source>
@@ -3358,7 +3358,7 @@ before closing?</source>
     </message>
     <message>
         <source>MuseScore: Dynamics</source>
-        <translation>MuseScore: Dynamics</translation>
+        <translation>MuseScore: Dinamika</translation>
     </message>
     <message>
         <source>MuseScore: Barlines</source>
@@ -3370,23 +3370,23 @@ before closing?</source>
     </message>
     <message>
         <source>MuseScore: failure</source>
-        <translation>MuseScore: failure</translation>
+        <translation>MuseScore: neuspjelo</translation>
     </message>
     <message>
         <source>Load template file </source>
-        <translation>Load template file </translation>
+        <translation>Učitaj predložak </translation>
     </message>
     <message>
         <source> failed</source>
-        <translation> failed</translation>
+        <translation> neuspjelo</translation>
     </message>
     <message>
         <source>Go To: </source>
-        <translation>Go To: </translation>
+        <translation>Idi na: </translation>
     </message>
     <message>
         <source>Online Handbook</source>
-        <translation>Online Handbook</translation>
+        <translation>Online priručnik</translation>
     </message>
     <message>
         <source>MuseScore handbook not found at: 
@@ -3428,11 +3428,11 @@ From the "Help" menu try choosing "Online Handbook" instead.</translation>
     </message>
     <message>
         <source>Key Signatures</source>
-        <translation>Key Signatures</translation>
+        <translation>Tonalitet</translation>
     </message>
     <message>
         <source>Time Signatures</source>
-        <translation>Time Signatures</translation>
+        <translation>Mjera</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
@@ -3440,7 +3440,7 @@ From the "Help" menu try choosing "Online Handbook" instead.</translation>
     </message>
     <message>
         <source>Barlines</source>
-        <translation>Bar lines</translation>
+        <translation>Taktne crte</translation>
     </message>
     <message>
         <source>Normal</source>
@@ -3512,7 +3512,7 @@ From the "Help" menu try choosing "Online Handbook" instead.</translation>
     </message>
     <message>
         <source>Fingering %1</source>
-        <translation>Fingering %1</translation>
+        <translation>Prstomet %1</translation>
     </message>
     <message>
         <source>String number %1</source>
@@ -3568,7 +3568,7 @@ From the "Help" menu try choosing "Online Handbook" instead.</translation>
     </message>
     <message>
         <source>Brackets...</source>
-        <translation>Brackets…</translation>
+        <translation>Zagrade...</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments...</source>
@@ -3580,7 +3580,7 @@ From the "Help" menu try choosing "Online Handbook" instead.</translation>
     </message>
     <message>
         <source>MuseScore: Brackets</source>
-        <translation>MuseScore: Brackets</translation>
+        <translation>MuseScore: Zagrade</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer...</source>
@@ -3610,7 +3610,7 @@ Restore session?</source>
     </message>
     <message>
         <source>Check for Update</source>
-        <translation>Check for Update</translation>
+        <translation>Provjeri ažuriranje</translation>
     </message>
     <message>
         <source>Script
@@ -3672,7 +3672,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation>Overture datoteke &lt;eksperimentalno&gt; (*.ove);;</translation>
+        <translation>Overture datoteke &lt;eksperimentalno&gt; (*.ove)</translation>
     </message>
 </context>
 <context>
@@ -3811,7 +3811,7 @@ is incompatible with current interface</translation>
     <name>NoteBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>head index</source>
@@ -3827,7 +3827,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>User</source>
-        <translation>User</translation>
+        <translation>Korisnik</translation>
     </message>
     <message>
         <source>Offset</source>
@@ -3850,58 +3850,58 @@ is incompatible with current interface</translation>
     <name>PageBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>Page</source>
-        <translation>Page</translation>
+        <translation>Stranica</translation>
     </message>
     <message>
         <source>Page No.:</source>
-        <translation>Page No.:</translation>
+        <translation>Stranica br.:</translation>
     </message>
 </context>
 <context>
     <name>PageSettingsBase</name>
     <message>
         <source>MuseScore: Page Settings</source>
-        <translation>MuseScore: Page Settings</translation>
+        <translation>MuseScore:Postavke stranice</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation>Preview</translation>
+        <translation>Prikaz</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation>Apply</translation>
+        <translation>Primijeni</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>U redu</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Otkaži</translation>
     </message>
     <message>
         <source>Page Size</source>
-        <translation>Page Size</translation>
+        <translation>Veličina stranice</translation>
     </message>
     <message>
         <source>Two Sided</source>
-        <translation>Two Sided</translation>
+        <translation>Dvostrano</translation>
     </message>
     <message>
         <source>Landscape</source>
-        <translation>Landscape</translation>
+        <translation>Pejzaž</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Height</translation>
+        <translation>Visina</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation>Width</translation>
+        <translation>Širina</translation>
     </message>
     <message>
         <source>Scaling</source>
@@ -3925,23 +3925,23 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Bottom Margin</source>
-        <translation>Bottom Margin</translation>
+        <translation>Donji rub</translation>
     </message>
     <message>
         <source>Top Margin</source>
-        <translation>Top Margin</translation>
+        <translation>Gornji rub</translation>
     </message>
     <message>
         <source>Right Margin</source>
-        <translation>Right Margin</translation>
+        <translation>Desni rub</translation>
     </message>
     <message>
         <source>Left Margin</source>
-        <translation>Left Margin</translation>
+        <translation>Lijevi rub</translation>
     </message>
     <message>
         <source>Odd Page Margins</source>
-        <translation>Odd Page Margins</translation>
+        <translation>Rubovi neparnih stranica</translation>
     </message>
     <message>
         <source>First page no.</source>
@@ -3952,11 +3952,11 @@ is incompatible with current interface</translation>
     <name>Palette</name>
     <message>
         <source>Delete Contents</source>
-        <translation>Delete Contents</translation>
+        <translation>Izbriši sadržaj</translation>
     </message>
     <message>
         <source>Properties...</source>
-        <translation>Properties…</translation>
+        <translation>Svojstva...</translation>
     </message>
 </context>
 <context>
@@ -3986,7 +3986,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Enable Editing</source>
-        <translation>Enable Editing</translation>
+        <translation>Uključi uređivanje</translation>
     </message>
     <message>
         <source>Delete Palette</source>
@@ -3997,7 +3997,7 @@ is incompatible with current interface</translation>
     <name>PaletteCellProperties</name>
     <message>
         <source>Chord Properties</source>
-        <translation>Chord Properties</translation>
+        <translation>Svojstva akorda</translation>
     </message>
     <message>
         <source>Palette Cell Properties</source>
@@ -4024,7 +4024,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Name:</translation>
+        <translation>Ime:</translation>
     </message>
     <message>
         <source>Cell Size:</source>
@@ -4055,7 +4055,7 @@ is incompatible with current interface</translation>
     <name>PartEditBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>Part Name</source>
@@ -4130,7 +4130,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>user</source>
-        <translation>user</translation>
+        <translation>korisnik</translation>
     </message>
     <message>
         <source>offset</source>
@@ -4146,11 +4146,11 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>toolbar1</source>
-        <translation>toolbar1</translation>
+        <translation>1. alatna traka</translation>
     </message>
     <message>
         <source>toolbar2</source>
-        <translation>toolbar2</translation>
+        <translation>2. alatna traka</translation>
     </message>
 </context>
 <context>
@@ -4169,7 +4169,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>h:mm:s</source>
-        <translation>h:mm:ss</translation>
+        <translation>h:mm:s</translation>
     </message>
     <message>
         <source>0:00:00</source>
@@ -4193,11 +4193,11 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Rewind</source>
-        <translation>Rewind</translation>
+        <translation>Premotaj unatrag</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation>Play</translation>
+        <translation>Sviraj</translation>
     </message>
     <message>
         <source>Vol</source>
@@ -4228,7 +4228,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Images (*.jpg *.gif *.png)</source>
-        <translation>Images (*.jpg *.gif *.png)</translation>
+        <translation>Slike (*.jpg *.gif *.png)</translation>
     </message>
     <message>
         <source>Choose Background Wallpaper</source>
@@ -4244,7 +4244,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Choose Instrument List</source>
-        <translation>Choose Instrument List</translation>
+        <translation>Odaberi popis instrumenata</translation>
     </message>
     <message>
         <source>Choose Starting Score</source>
@@ -4252,11 +4252,11 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Instrument List (*.xml)</source>
-        <translation>Instrument List (*.xml)</translation>
+        <translation>Popis instrumenatat (*.xml)</translation>
     </message>
     <message>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;All (*)</source>
-        <translation>MuseScore Files (*.mscz *.mscx *.msc);;All (*)</translation>
+        <translation>MuseScore datoteke (*.mscz *.mscx *.msc);;Sve (*)</translation>
     </message>
 </context>
 <context>
@@ -4291,15 +4291,15 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Paths</source>
-        <translation>Paths</translation>
+        <translation>Putanja</translation>
     </message>
     <message>
         <source>Instrument List:</source>
-        <translation>Instrument List:</translation>
+        <translation>Popis instrumenata:</translation>
     </message>
     <message>
         <source>Working Directory:</source>
-        <translation>Working Directory:</translation>
+        <translation>Radna mapa:</translation>
     </message>
     <message>
         <source>Windows</source>
@@ -4307,7 +4307,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Auto Save</source>
-        <translation>Auto Save</translation>
+        <translation>Automatsko spremanje</translation>
     </message>
     <message>
         <source>minutes</source>
@@ -4315,7 +4315,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Language</source>
-        <translation>Language</translation>
+        <translation>Jezik</translation>
     </message>
     <message>
         <source>Canvas</source>
@@ -4323,7 +4323,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation>Background</translation>
+        <translation>Pozadina</translation>
     </message>
     <message>
         <source>Wallpaper</source>
@@ -4331,7 +4331,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Colour</translation>
+        <translation>Boja</translation>
     </message>
     <message>
         <source>Notesheet</source>
@@ -4359,7 +4359,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation>Colours</translation>
+        <translation>Boje</translation>
     </message>
     <message>
         <source>Note Entry</source>
@@ -4367,7 +4367,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Enable midi input</source>
-        <translation>Enable MIDI input</translation>
+        <translation>Uključiti midi ulaz</translation>
     </message>
     <message>
         <source>Play notes when editing</source>
@@ -4411,7 +4411,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Device:</source>
-        <translation>Device:</translation>
+        <translation>Uređaj:</translation>
     </message>
     <message>
         <source>default</source>
@@ -4499,11 +4499,11 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation>Import</translation>
+        <translation>Izvoz</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation>Export</translation>
+        <translation>Uvoz</translation>
     </message>
     <message>
         <source>PNG</source>
@@ -4515,7 +4515,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Shortcuts</source>
-        <translation>Shortcuts</translation>
+        <translation>Prečac</translation>
     </message>
     <message>
         <source>Action</source>
@@ -4523,7 +4523,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Shortcut</source>
-        <translation>Shortcut</translation>
+        <translation>Prečac</translation>
     </message>
     <message>
         <source>Reset to Default</source>
@@ -4551,7 +4551,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Save every</source>
-        <translation>Save every</translation>
+        <translation>Spremi sve</translation>
     </message>
     <message>
         <source>Icons</source>
@@ -4563,11 +4563,11 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation>Width</translation>
+        <translation>Širina</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Height</translation>
+        <translation>Visina</translation>
     </message>
     <message>
         <source>Note Entry:</source>
@@ -4583,7 +4583,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation>Text</translation>
+        <translation>Tekst</translation>
     </message>
     <message>
         <source>Score element colors</source>
@@ -4595,19 +4595,19 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Select Voice 1</source>
-        <translation>Select Voice 1</translation>
+        <translation>Odaberi 1. glas</translation>
     </message>
     <message>
         <source>Select Voice 2</source>
-        <translation>Select Voice 2</translation>
+        <translation>Odaberi 2. glas</translation>
     </message>
     <message>
         <source>Select Voice 3</source>
-        <translation>Select Voice 3</translation>
+        <translation>Odaberi 3. glas</translation>
     </message>
     <message>
         <source>Select Voice 4</source>
-        <translation>Select Voice 4</translation>
+        <translation>Odaberi 4. glas</translation>
     </message>
     <message>
         <source>Drop Target</source>
@@ -4635,11 +4635,11 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Two Sided</source>
-        <translation>Two Sided</translation>
+        <translation>Dvostrano</translation>
     </message>
     <message>
         <source>Landscape</source>
-        <translation>Landscape</translation>
+        <translation>Pejzaž</translation>
     </message>
     <message>
         <source>Scaling</source>
@@ -4660,7 +4660,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation>Browse…</translation>
+        <translation>Pregledaj...</translation>
     </message>
     <message>
         <source>Color notes outside of usable pitch range</source>
@@ -4668,7 +4668,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Export MIDI</source>
-        <translation>Export MIDI</translation>
+        <translation>Izvoz MIDI</translation>
     </message>
     <message>
         <source>Auto-correction</source>
@@ -4676,7 +4676,7 @@ is incompatible with current interface</translation>
     </message>
     <message utf8="true">
         <source>Replace 1/2 with fraction character ½</source>
-        <translation>Replace 1/2 with fraction character ½</translation>
+        <translation>1/2 zamijeni znakom ½</translation>
     </message>
     <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
@@ -4696,7 +4696,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Use JACK MIDI output</source>
-        <translation>Use JACK MIDI output</translation>
+        <translation>Koristi JACK MIDI izlaz</translation>
     </message>
     <message>
         <source>Remember last connection(s)</source>
@@ -4708,11 +4708,11 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Automatic Update Check</source>
-        <translation>Automatic Update Check</translation>
+        <translation>Automatski provjeri ažuriranja</translation>
     </message>
     <message>
         <source>Check for new versions of MuseScore on startup</source>
-        <translation>Check for a new version of MuseScore during startup</translation>
+        <translation>Pri pokretanju provjeri novu inačicu MuseScore</translation>
     </message>
     <message>
         <source>Choose PortMidi input interface</source>
@@ -4795,27 +4795,27 @@ Please select a single note or rest and retry operation
     <name>QWidget</name>
     <message>
         <source>MuseScore: load failed:</source>
-        <translation>MuseScore: load failed:</translation>
+        <translation>MuseScore: Neuspjelo učitavanje:</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Quit</translation>
+        <translation>Završi</translation>
     </message>
     <message>
         <source>MuseScore: Load Style</source>
-        <translation>MuseScore: Load Style</translation>
+        <translation>MuseScore: Učitaj stil</translation>
     </message>
     <message>
         <source>MuseScore: load Style failed:</source>
-        <translation>MuseScore: load Style failed:</translation>
+        <translation>MuseScore: Neuspjelo učitavanje stila:</translation>
     </message>
     <message>
         <source>MuseScore: load midi</source>
-        <translation>MuseScore: load MIDI</translation>
+        <translation>MuseScore: učitaj midi</translation>
     </message>
     <message>
         <source>MuseScore: invalid command</source>
-        <translation>MuseScore: invalid command</translation>
+        <translation>neispravna naredba</translation>
     </message>
     <message>
         <source>MuseScore: Load Palettes failed:</source>
@@ -4823,15 +4823,15 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>reading file &lt;</source>
-        <translation>reading file &lt;</translation>
+        <translation>čitanje datoteke &lt;</translation>
     </message>
     <message>
         <source>MuseScore Styles (*.mss);;All Files (*)</source>
-        <translation>MuseScore Styles (*.mss);;All Files (*)</translation>
+        <translation>MuseScore stilovi (*.mss);;Sve datoteke (*)</translation>
     </message>
     <message>
         <source>MuseScore: Load Style failed:</source>
-        <translation>MuseScore: Load Style failed:</translation>
+        <translation>MuseScore: Neuspjelo učitavanje stila:</translation>
     </message>
     <message>
         <source>MuseScore: Import Capella</source>
@@ -4839,23 +4839,23 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>MuseScore: file not found:</source>
-        <translation>MuseScore: file not found:</translation>
+        <translation>MuseScore:datoteka nije pronađena:</translation>
     </message>
     <message>
         <source>MuseScore: Load Chord Description</source>
-        <translation>MuseScore: Load Chord Description</translation>
+        <translation>MuseScore: Učitaj opis akorda</translation>
     </message>
     <message>
         <source>MuseScore Chord Description (*.xml);;All Files (*)</source>
-        <translation>MuseScore Chord Description (*.xml);;All Files (*)</translation>
+        <translation>MuseScore opis akorda (*.xml);;Sve datoteke (*)</translation>
     </message>
     <message>
         <source>MuseScore: Load chord list failed:</source>
-        <translation>MuseScore: Load chord list failed:</translation>
+        <translation>MuseScore: Neuspjelo učitavanje popisa akorda:</translation>
     </message>
     <message>
         <source>MuseScore: Open chord list failed:</source>
-        <translation>MuseScore: Open chord list failed:</translation>
+        <translation>MuseScore: Neuspjelo otvaranje popisa akorda:</translation>
     </message>
     <message>
         <source>MuseScore: Load font symbols failed:</source>
@@ -4867,15 +4867,15 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>MuseScore: Load Chord Description File</source>
-        <translation>MuseScore: Load Chord Description File</translation>
+        <translation>MuseScore: Učitaj datoteku opisa akorda</translation>
     </message>
     <message>
         <source>MuseScore: Save Chord Description File</source>
-        <translation>MuseScore: Save Chord Description File</translation>
+        <translation>MuseScore: Spremi datoteku opisa akorda</translation>
     </message>
     <message>
         <source>MuseScore: Load languages failed:</source>
-        <translation>MuseScore: Load languages failed:</translation>
+        <translation>MuseScore: Neuspjelo učitavanje jezika:</translation>
     </message>
     <message>
         <source>MuseScore: register script plugin:</source>
@@ -4924,7 +4924,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>Chord Properties</source>
-        <translation>Chord Properties</translation>
+        <translation>Svostva akorda</translation>
     </message>
     <message>
         <source>additional leading space </source>
@@ -4944,7 +4944,7 @@ Please select a single note or rest and retry operation
     <name>SLineBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>SLine</source>
@@ -4994,43 +4994,43 @@ please select a measure and try again</source>
     </message>
     <message>
         <source>MuseScore: Save Score</source>
-        <translation>MuseScore: Save Score</translation>
+        <translation>MuseScore: Spremi skladbu</translation>
     </message>
     <message>
         <source>Open Temp File
 </source>
-        <translation>Open Temp File
+        <translation>Otvori predložak
 </translation>
     </message>
     <message>
         <source>
 failed: </source>
         <translation>
-failed: </translation>
+neuspjelo: </translation>
     </message>
     <message>
         <source>MuseScore: Save As</source>
-        <translation>MuseScore: Save As</translation>
+        <translation>MuseScore: Spremi kao</translation>
     </message>
     <message>
         <source>Open File
 </source>
-        <translation>Open File
+        <translation>Otvori datoteku
 </translation>
     </message>
     <message>
         <source>MuseScore: Save Style</source>
-        <translation>MuseScore: Save Style</translation>
+        <translation>MuseScore: Spremi stil</translation>
     </message>
     <message>
         <source>Open Style File
 </source>
-        <translation>Open Style File
+        <translation>Otvori datoteku stila
 </translation>
     </message>
     <message>
         <source>MuseScore: Open Style file</source>
-        <translation>MuseScore: Open Style file</translation>
+        <translation>MuseScore: Otvori datoteku stila</translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
@@ -5038,11 +5038,11 @@ failed: </translation>
     </message>
     <message>
         <source>MuseScore: Read File</source>
-        <translation>MuseScore: Read File</translation>
+        <translation>MuseScore: Čitaj datoteku</translation>
     </message>
     <message>
         <source>MuseScore: transpose</source>
-        <translation>MuseScore: transpose</translation>
+        <translation>MuseScore: transponiranje</translation>
     </message>
     <message>
         <source>There is nothing selected. Transpose whole score?</source>
@@ -5062,7 +5062,7 @@ failed: </translation>
     </message>
     <message>
         <source>MuseScore: Save File</source>
-        <translation>MuseScore: Save File</translation>
+        <translation>MuseScore: Spremi datoteku</translation>
     </message>
     <message>
         <source>removing old backup file </source>
@@ -5070,7 +5070,7 @@ failed: </translation>
     </message>
     <message>
         <source> failed</source>
-        <translation> failed</translation>
+        <translation> neuspjelo</translation>
     </message>
     <message>
         <source>&gt; to backup &lt;</source>
@@ -5078,7 +5078,7 @@ failed: </translation>
     </message>
     <message>
         <source>&gt; failed</source>
-        <translation>&gt; failed</translation>
+        <translation>&gt; neuspjelo</translation>
     </message>
     <message>
         <source>&gt; to &lt;</source>
@@ -5086,7 +5086,7 @@ failed: </translation>
     </message>
     <message>
         <source>MuseScore: Save File failed: </source>
-        <translation>MuseScore: Save File failed: </translation>
+        <translation>MuseScore: Neuspjelo spremanje datoteke: </translation>
     </message>
     <message>
         <source>renaming old file &lt;</source>
@@ -5099,7 +5099,7 @@ failed: </translation>
     <message>
         <source>&gt; failed:
 </source>
-        <translation>&gt; failed:
+        <translation>&gt; neuspjelo:
 </translation>
     </message>
     <message>
@@ -5120,15 +5120,15 @@ failed: </translation>
     </message>
     <message>
         <source>Standard MIDI File (*.mid)</source>
-        <translation>Standard MIDI File (*.mid)</translation>
+        <translation>Standardna MIDI datoteka (*.mid)</translation>
     </message>
     <message>
         <source>PDF File (*.pdf)</source>
-        <translation>PDF File (*.pdf)</translation>
+        <translation>PDF datoteka (*.pdf)</translation>
     </message>
     <message>
         <source>PostScript File (*.ps)</source>
-        <translation>PostScript File (*.ps)</translation>
+        <translation>PostScript datoteka (*.ps)</translation>
     </message>
     <message>
         <source>PNG Bitmap Graphic (*.png)</source>
@@ -5156,7 +5156,7 @@ failed: </translation>
     </message>
     <message>
         <source>MuseScore: Save a Copy</source>
-        <translation>MuseScore: Save a Copy</translation>
+        <translation>MuseScore: Spremi kao kopiju</translation>
     </message>
     <message>
         <source>The following file is locked: 
@@ -5173,7 +5173,7 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>cannot determine file type</source>
-        <translation>cannot determine filetype</translation>
+        <translation>ne mogu utvrditi vrstu datoteke</translation>
     </message>
     <message>
         <source>Write Style failed: </source>
@@ -5181,34 +5181,34 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>Load failed: </source>
-        <translation>Load failed: </translation>
+        <translation>Neuspjelo učitavanje: </translation>
     </message>
     <message>
         <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
-        <translation type="unfinished"/>
+        <translation>Ne mogu čitati skladbu:&lt;br&gt;Tvoja verzija  MuseScore je prestara.&lt;br&gt;&lt;a href="%1"&gt;UNadograditi ju sada!&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Can't open file. File extension "%1" not supported.</source>
-        <translation type="unfinished"/>
+        <translation>Ne mogu otvoriti datoteku. Ekstenzija datoteke "% 1" nije podržana.</translation>
     </message>
     <message>
         <source>Internal error</source>
-        <translation type="unfinished"/>
+        <translation>Interna pogreška</translation>
     </message>
     <message>
         <source>Cannot load picture file %1</source>
-        <translation type="unfinished"/>
+        <translation>Ne mogu učitati datoteku slike %1</translation>
     </message>
 </context>
 <context>
     <name>ScoreView</name>
     <message>
         <source>Select</source>
-        <translation>Select</translation>
+        <translation>Označi</translation>
     </message>
     <message>
         <source>More...</source>
-        <translation>More…</translation>
+        <translation>Više...</translation>
     </message>
     <message>
         <source>Object Inspector</source>
@@ -5240,7 +5240,7 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>Measure</source>
-        <translation>Measure</translation>
+        <translation>Takt</translation>
     </message>
     <message>
         <source>unknown drop format: formats %1:
@@ -5261,7 +5261,7 @@ Try saving to a different location.</translation>
     <name>SegmentBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>Segment</source>
@@ -5273,11 +5273,11 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>Key Signature</source>
-        <translation>Key Signature</translation>
+        <translation>Predznaci</translation>
     </message>
     <message>
         <source>Time Signature</source>
-        <translation>Time Signature</translation>
+        <translation>Takt (mjera)</translation>
     </message>
     <message>
         <source>Begin Repeat</source>
@@ -5285,7 +5285,7 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>Chord/Rest</source>
-        <translation>Chord/Rest</translation>
+        <translation>Akord/Pauza</translation>
     </message>
     <message>
         <source>Breath Segment</source>
@@ -5301,7 +5301,7 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>Lyrics:</source>
-        <translation>Lyrics:</translation>
+        <translation>Stihovi:</translation>
     </message>
     <message>
         <source>Segment Type:</source>
@@ -5312,7 +5312,7 @@ Try saving to a different location.</translation>
     <name>SelectDialog</name>
     <message>
         <source>MuseScore: Select</source>
-        <translation>MuseScore: Select</translation>
+        <translation>MuseScore:Označi</translation>
     </message>
     <message>
         <source>Search for</source>
@@ -5340,15 +5340,15 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>replace selection</source>
-        <translation>replace selection</translation>
+        <translation>zamijeni označeno</translation>
     </message>
     <message>
         <source>add to selection</source>
-        <translation>add to selection</translation>
+        <translation>dodaj u odabir</translation>
     </message>
     <message>
         <source>search in selection</source>
-        <translation>search in selection</translation>
+        <translation>traži u odabiru</translation>
     </message>
     <message>
         <source>subtract from selection</source>
@@ -5367,7 +5367,7 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>show more</source>
-        <translation>show more</translation>
+        <translation>pokaži više</translation>
     </message>
 </context>
 <context>
@@ -5411,7 +5411,7 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>Undefined</source>
-        <translation>Undefined</translation>
+        <translation>Nedefinirano</translation>
     </message>
 </context>
 <context>
@@ -5426,11 +5426,11 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>Old shortcut:</source>
-        <translation>Old shortcut:</translation>
+        <translation>Stari prečac:</translation>
     </message>
     <message>
         <source>New shortcut:</source>
-        <translation>New shortcut:</translation>
+        <translation>Novi prečac:</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -5438,11 +5438,11 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>U redu</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Otkaži</translation>
     </message>
 </context>
 <context>
@@ -5477,11 +5477,11 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Up</translation>
+        <translation>Gore</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Down</translation>
+        <translation>Dolje</translation>
     </message>
 </context>
 <context>
@@ -5526,7 +5526,7 @@ and check that the file location is correct</translation>
     <name>SlurBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>Slur</source>
@@ -5542,7 +5542,7 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>Voice:</source>
-        <translation>Voice:</translation>
+        <translation>Glas:</translation>
     </message>
     <message>
         <source>Tick:</source>
@@ -5583,7 +5583,7 @@ and check that the file location is correct</translation>
     <name>SlurTieBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>startElement</source>
@@ -5644,7 +5644,7 @@ and check that the file location is correct</translation>
     <name>SymbolDialogBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>System Flag</source>
@@ -5708,7 +5708,7 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Width:</translation>
+        <translation>Širina:</translation>
     </message>
     <message>
         <source>Preset:</source>
@@ -5785,7 +5785,7 @@ and check that the file location is correct</translation>
     <name>Text</name>
     <message>
         <source>Text Properties...</source>
-        <translation>Text Properties…</translation>
+        <translation>Svojstva teksta</translation>
     </message>
     <message>
         <source>Set Invisible</source>
@@ -5800,11 +5800,11 @@ and check that the file location is correct</translation>
     <name>TextBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation>Type:</translation>
+        <translation>Vrsta:</translation>
     </message>
     <message>
         <source>MM</source>
@@ -5817,12 +5817,12 @@ and check that the file location is correct</translation>
     <message>
         <source>Text</source>
         <comment>do not translate</comment>
-        <translation>Text</translation>
+        <translation>Tekst</translation>
     </message>
     <message>
         <source>Text:</source>
         <comment>do not translate</comment>
-        <translation>Text:</translation>
+        <translation>Tekst:</translation>
     </message>
     <message>
         <source>Offset:</source>
@@ -5864,7 +5864,7 @@ and check that the file location is correct</translation>
     <name>TextLineBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>TextLine</source>
@@ -5906,7 +5906,7 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation>Text</translation>
+        <translation>Tekst</translation>
     </message>
 </context>
 <context>
@@ -5937,7 +5937,7 @@ and check that the file location is correct</translation>
     <name>TextPropertiesBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>Font:</source>
@@ -5949,7 +5949,7 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation>Size:</translation>
+        <translation>Veličina:</translation>
     </message>
     <message>
         <source>font point size</source>
@@ -5957,11 +5957,11 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>Style:</source>
-        <translation>Style:</translation>
+        <translation>Stil...</translation>
     </message>
     <message>
         <source>bold</source>
-        <translation>bold</translation>
+        <translation>podebljano</translation>
     </message>
     <message>
         <source>B</source>
@@ -5969,7 +5969,7 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>italic</source>
-        <translation>italic</translation>
+        <translation>ukoso</translation>
     </message>
     <message>
         <source>I</source>
@@ -5977,7 +5977,7 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>underline</source>
-        <translation>underline</translation>
+        <translation>podvučeno</translation>
     </message>
     <message>
         <source>U</source>
@@ -5985,7 +5985,7 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>Align:</source>
-        <translation>Align:</translation>
+        <translation>Poravnanje:</translation>
     </message>
     <message>
         <source>align left edge of text to reference point</source>
@@ -5993,7 +5993,7 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>...</source>
-        <translation>…</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>center text on reference point</source>
@@ -6017,11 +6017,11 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation>Colour:</translation>
+        <translation>Boja:</translation>
     </message>
     <message>
         <source>text color</source>
-        <translation>text colour</translation>
+        <translation>boja teksta</translation>
     </message>
     <message>
         <source>Offset</source>
@@ -6091,7 +6091,7 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>Frame</source>
-        <translation>Frame</translation>
+        <translation>Okvir</translation>
     </message>
     <message>
         <source>draw circled frame</source>
@@ -6111,7 +6111,7 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Width:</translation>
+        <translation>Širina:</translation>
     </message>
     <message>
         <source>frame line width</source>
@@ -6123,7 +6123,7 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>Margin:</source>
-        <translation>Margin:</translation>
+        <translation>Rubovi:</translation>
     </message>
     <message>
         <source>frame inner margin</source>
@@ -6172,7 +6172,7 @@ and check that the file location is correct</translation>
     <name>TimeDialog</name>
     <message>
         <source>MuseScore: Time Signatures</source>
-        <translation>MuseScore: Time Signatures</translation>
+        <translation>MuseScore: Takt (mjera)</translation>
     </message>
     <message>
         <source>4/4 common time</source>
@@ -6187,7 +6187,7 @@ and check that the file location is correct</translation>
     <name>TimeDialogBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>+</source>
@@ -6199,18 +6199,18 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Add</translation>
+        <translation>Dodaj</translation>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation>Create Time Signature</translation>
+        <translation>Stvori takt (mjera)</translation>
     </message>
 </context>
 <context>
     <name>TimesigWizard</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>Enter Time Signature:</source>
@@ -6218,7 +6218,7 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>Time Signature: </source>
-        <translation>Time Signature: </translation>
+        <translation>Mjera </translation>
     </message>
     <message>
         <source>/</source>
@@ -6230,7 +6230,7 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>Time Signature</source>
-        <translation>Time Signature</translation>
+        <translation>Mjera</translation>
     </message>
     <message>
         <source>Enter Number of Measures:</source>
@@ -6238,7 +6238,7 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>Measures:</source>
-        <translation>Bars:</translation>
+        <translation>Taktovi:</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
@@ -6263,7 +6263,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>MuseScore: Transpose</source>
-        <translation>MuseScore: Transpose</translation>
+        <translation>MuseScore: Transponiraj</translation>
     </message>
     <message>
         <source>Transpose by Key</source>
@@ -6271,71 +6271,71 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Cb major / Ab minor</source>
-        <translation>Cb major / Ab minor</translation>
+        <translation>Cb dur / Ab mol</translation>
     </message>
     <message>
         <source>Gb major / Eb minor</source>
-        <translation>Gb major / Eb minor</translation>
+        <translation>Gb dur / Eb mol</translation>
     </message>
     <message>
         <source>Db major / Bb minor</source>
-        <translation>Db major / Bb minor</translation>
+        <translation>Db dur / Bb mol</translation>
     </message>
     <message>
         <source>Ab major / F minor</source>
-        <translation>Ab major / F minor</translation>
+        <translation>Ab dur / F mol</translation>
     </message>
     <message>
         <source>Eb major / C minor</source>
-        <translation>Eb major / C minor</translation>
+        <translation>Eb dur / C mol</translation>
     </message>
     <message>
         <source>Bb major / G minor</source>
-        <translation>Bb major / G minor</translation>
+        <translation>Bb dur / G mol</translation>
     </message>
     <message>
         <source>F major / D minor</source>
-        <translation>F major / D minor</translation>
+        <translation>F dur / D mol</translation>
     </message>
     <message>
         <source>C major / A minor</source>
-        <translation>C major / A minor</translation>
+        <translation>C dur / A mol</translation>
     </message>
     <message>
         <source>G major / E minor</source>
-        <translation>G major / E minor</translation>
+        <translation>G dur / E mol</translation>
     </message>
     <message>
         <source>D major / B minor</source>
-        <translation>D major / B minor</translation>
+        <translation>D dur / B mol</translation>
     </message>
     <message>
         <source>A major / F# minor</source>
-        <translation>A major / F# minor</translation>
+        <translation>A dur / F# mol</translation>
     </message>
     <message>
         <source>E major / C# minor</source>
-        <translation>E major / C# minor</translation>
+        <translation>E dur / C# mol</translation>
     </message>
     <message>
         <source>B major / G# minor</source>
-        <translation>B major / G# minor</translation>
+        <translation>B dur / G# mol</translation>
     </message>
     <message>
         <source>F# major / D# minor</source>
-        <translation>F# major / D# minor</translation>
+        <translation>F# dur / D# mol</translation>
     </message>
     <message>
         <source>C# major / A# minor</source>
-        <translation>C# major / A# minor</translation>
+        <translation>C# dur / A# mol</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Up</translation>
+        <translation>Gore</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Down</translation>
+        <translation>Dolje</translation>
     </message>
     <message>
         <source>Closest</source>
@@ -6466,7 +6466,7 @@ p, li { white-space: pre-wrap; }
     <name>TremoloBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>firstChord</source>
@@ -6490,7 +6490,7 @@ p, li { white-space: pre-wrap; }
     <name>TupletBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
 </context>
 <context>
@@ -6501,7 +6501,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Type</source>
-        <translation>Type</translation>
+        <translation>Vrsta</translation>
     </message>
     <message>
         <source>Format</source>
@@ -6521,7 +6521,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>nothing</source>
-        <translation>nothing</translation>
+        <translation>ništa</translation>
     </message>
     <message>
         <source>Bracket</source>
@@ -6564,7 +6564,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>nothing</source>
-        <translation>nothing</translation>
+        <translation>ništa</translation>
     </message>
     <message>
         <source>Bracket</source>
@@ -6598,7 +6598,7 @@ p, li { white-space: pre-wrap; }
     <name>VBox</name>
     <message>
         <source>Add</source>
-        <translation>Add</translation>
+        <translation>Dodaj</translation>
     </message>
     <message>
         <source>VBox Properties...</source>
@@ -6613,7 +6613,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Text:</source>
-        <translation>Text:</translation>
+        <translation>Tekst:</translation>
     </message>
     <message>
         <source>Repeat List:</source>
@@ -6639,7 +6639,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Find help</source>
-        <translation type="unfinished"/>
+        <translation>Potraži pomoć</translation>
     </message>
     <message>
         <source>Improve your skills</source>
@@ -6647,7 +6647,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Read the latest news</source>
-        <translation type="unfinished"/>
+        <translation>Čitajte najnovije vijes</translation>
     </message>
     <message>
         <source>Download free sheet music</source>
@@ -7217,39 +7217,39 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Delete Selected Measures</source>
-        <translation>Delete Selected Measures</translation>
+        <translation>Izbriši oznečenene taktove</translation>
     </message>
     <message>
         <source>Append Measure</source>
-        <translation>Append Measure</translation>
+        <translation>Dodaj takt</translation>
     </message>
     <message>
         <source>Append Measures...</source>
-        <translation>Append Measures…</translation>
+        <translation>Dodaj taktove...</translation>
     </message>
     <message>
         <source>Insert Measure</source>
-        <translation>Insert Measure</translation>
+        <translation>Umetni takt</translation>
     </message>
     <message>
         <source>Insert Measures...</source>
-        <translation>Insert Measures…</translation>
+        <translation>Umetni taktove...</translation>
     </message>
     <message>
         <source>Insert Horizontal Frame</source>
-        <translation>Insert Horizontal Frame</translation>
+        <translation>Umetni vodoravni okvir</translation>
     </message>
     <message>
         <source>Insert Vertical Frame</source>
-        <translation>Insert Vertical Frame</translation>
+        <translation>Umentni okomiti okvir</translation>
     </message>
     <message>
         <source>Append Horizontal Frame</source>
-        <translation>Append Horizontal Frame</translation>
+        <translation>Dodaj vodoravni okcir</translation>
     </message>
     <message>
         <source>Append Vertical Frame</source>
-        <translation>Append Vertical Frame</translation>
+        <translation>Dodaj okomiti okvir</translation>
     </message>
     <message>
         <source>Duplet</source>
@@ -7289,7 +7289,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Other...</source>
-        <translation>Other…</translation>
+        <translation>Ostalo...</translation>
     </message>
     <message>
         <source>note longa</source>
@@ -7369,7 +7369,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Dot</source>
-        <translation>Dot</translation>
+        <translation>Točka</translation>
     </message>
     <message>
         <source>pad double dot</source>
@@ -7397,7 +7397,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural</source>
-        <translation>natural</translation>
+        <translation>prirodni</translation>
     </message>
     <message>
         <source>double flat</source>
@@ -7425,19 +7425,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>voice 1</source>
-        <translation>voice 1</translation>
+        <translation>1.glas</translation>
     </message>
     <message>
         <source>voice 2</source>
-        <translation>voice 2</translation>
+        <translation>2. glas</translation>
     </message>
     <message>
         <source>voice 3</source>
-        <translation>voice 3</translation>
+        <translation>3. glas</translation>
     </message>
     <message>
         <source>voice 4</source>
-        <translation>voice 4</translation>
+        <translation>4. glas</translation>
     </message>
     <message>
         <source>midi input in</source>
@@ -7445,7 +7445,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Enable MIDI Input</source>
-        <translation>Enable MIDI Input</translation>
+        <translation>Uključi MIDI ulaz</translation>
     </message>
     <message>
         <source>editing sound on</source>
@@ -7489,7 +7489,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Mixer</source>
-        <translation>Mixer</translation>
+        <translation>Mikser</translation>
     </message>
     <message>
         <source>Transport Toolbar</source>
@@ -7505,11 +7505,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Status Bar</source>
-        <translation>Status Bar</translation>
+        <translation>Statusna traka</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Quit</translation>
+        <translation>Završi</translation>
     </message>
     <message>
         <source>Mag</source>
@@ -7521,7 +7521,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Lyrics</source>
-        <translation>Lyrics</translation>
+        <translation>Stihovi</translation>
     </message>
     <message>
         <source>Fingering Palette</source>
@@ -7541,7 +7541,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tempo...</source>
-        <translation>Tempo…</translation>
+        <translation>Tempo...</translation>
     </message>
     <message>
         <source>Tempo</source>
@@ -7549,7 +7549,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Metronome</source>
-        <translation>Metronome</translation>
+        <translation>Metronom</translation>
     </message>
     <message>
         <source>Add System Text</source>
@@ -7569,83 +7569,83 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Text</source>
-        <translation>Add Text</translation>
+        <translation>Dodaj tekst</translation>
     </message>
     <message>
         <source>Frame Text</source>
-        <translation>Frame Text</translation>
+        <translation>Tekstni ovir</translation>
     </message>
     <message>
         <source>Add Title</source>
-        <translation>Add Title</translation>
+        <translation>Dodaj naslov</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation>Title</translation>
+        <translation>Naslov</translation>
     </message>
     <message>
         <source>Add Title Text</source>
-        <translation>Add Title Text</translation>
+        <translation>Dodaj tekst naslova</translation>
     </message>
     <message>
         <source>Add Subtitle</source>
-        <translation>Add Subtitle</translation>
+        <translation>Dodaj podnaslov</translation>
     </message>
     <message>
         <source>Subtitle</source>
-        <translation>Subtitle</translation>
+        <translation>Podnaslov</translation>
     </message>
     <message>
         <source>Add Subtitle Text</source>
-        <translation>Add Subtitle Text</translation>
+        <translation>Dodaj tekst podnaslova</translation>
     </message>
     <message>
         <source>Add Composer</source>
-        <translation>Add Composer</translation>
+        <translation>Dodaj skladatelja</translation>
     </message>
     <message>
         <source>Composer</source>
-        <translation>Composer</translation>
+        <translation>Skladatelj</translation>
     </message>
     <message>
         <source>Add Composer Text</source>
-        <translation>Add Composer Text</translation>
+        <translation>Dodaj tekst skladatelja</translation>
     </message>
     <message>
         <source>Add Poet</source>
-        <translation>Add Lyricist</translation>
+        <translation>Dodaj tekstopisca</translation>
     </message>
     <message>
         <source>Poet</source>
-        <translation>Lyricist</translation>
+        <translation>Tekstopisac</translation>
     </message>
     <message>
         <source>Add Poet Text</source>
-        <translation>Add Lyricist Text</translation>
+        <translation>Dodaj tekst tekstopisca</translation>
     </message>
     <message>
         <source>Add Copyright</source>
-        <translation>Add Copyright</translation>
+        <translation>Dodaj autorska prava</translation>
     </message>
     <message>
         <source>Copyright</source>
-        <translation>Copyright</translation>
+        <translation>Autorska prava</translation>
     </message>
     <message>
         <source>Add Copyright Text</source>
-        <translation>Add Copyright Text</translation>
+        <translation>Dodaj tekst autorskih prava</translation>
     </message>
     <message>
         <source>Add Chord Name</source>
-        <translation>Add Chord Name</translation>
+        <translation>Dodaj ima akorda</translation>
     </message>
     <message>
         <source>Chord Name</source>
-        <translation>Chord Name</translation>
+        <translation>Ime akorda</translation>
     </message>
     <message>
         <source>Add Chord Text</source>
-        <translation>Add Chord Text</translation>
+        <translation>Dodaj tekst akorda</translation>
     </message>
     <message>
         <source>show harmony properties for chord</source>
@@ -7665,7 +7665,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Play</source>
-        <translation>Play</translation>
+        <translation>Sviraj</translation>
     </message>
     <message>
         <source>Start or stop playback</source>
@@ -7673,71 +7673,71 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Rewind</source>
-        <translation>Rewind</translation>
+        <translation>Premotaj unatrag</translation>
     </message>
     <message>
         <source>Repeat</source>
-        <translation>Repeat</translation>
+        <translation>Ponovi</translation>
     </message>
     <message>
         <source>Load Style...</source>
-        <translation>Load Style…</translation>
+        <translation>Učitaj stil...</translation>
     </message>
     <message>
         <source>Load Style</source>
-        <translation>Load Style</translation>
+        <translation>Učitaj stil</translation>
     </message>
     <message>
         <source>Save Style...</source>
-        <translation>Save Style…</translation>
+        <translation>Spremi stil...</translation>
     </message>
     <message>
         <source>Save Style</source>
-        <translation>Save Style</translation>
+        <translation>Spremi stil</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation>Select All</translation>
+        <translation>Označi sve</translation>
     </message>
     <message>
         <source>Transpose...</source>
-        <translation>Transpose…</translation>
+        <translation>Transponiraj...</translation>
     </message>
     <message>
         <source>Transpose</source>
-        <translation>Transpose</translation>
+        <translation>Transponiraj</translation>
     </message>
     <message>
         <source>violin clef</source>
-        <translation>violin clef</translation>
+        <translation>violinski ključ</translation>
     </message>
     <message>
         <source>bass clef</source>
-        <translation>bass clef</translation>
+        <translation>bas ključ</translation>
     </message>
     <message>
         <source>Exchange Voice 1-2</source>
-        <translation>Exchange Voice 1-2</translation>
+        <translation>Zamjena glasova 1-2</translation>
     </message>
     <message>
         <source>Exchange Voice 1-3</source>
-        <translation>Exchange Voice 1-3</translation>
+        <translation>Zamjena glasova 1-3</translation>
     </message>
     <message>
         <source>Exchange Voice 1-4</source>
-        <translation>Exchange Voice 1-4</translation>
+        <translation>Zamjena glasova 1-4</translation>
     </message>
     <message>
         <source>Exchange Voice 2-3</source>
-        <translation>Exchange Voice 2-3</translation>
+        <translation>Zamjena glasova 2-3</translation>
     </message>
     <message>
         <source>Exchange Voice 2-4</source>
-        <translation>Exchange Voice 2-4</translation>
+        <translation>Zamjena glasova 2-4</translation>
     </message>
     <message>
         <source>Exchange Voice 3-4</source>
-        <translation>Exchange Voice 3-4</translation>
+        <translation>Zamjena glasova 3-4</translation>
     </message>
     <message>
         <source>display in concert pitch</source>
@@ -7753,11 +7753,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>repeat last command</source>
-        <translation>repeat last command</translation>
+        <translation>ponoviti zadnju naredbu</translation>
     </message>
     <message>
         <source>Repeat last command</source>
-        <translation>Repeat last command</translation>
+        <translation>Ponoviti zadnju naredbu</translation>
     </message>
     <message>
         <source>edit score meta data</source>
@@ -7821,27 +7821,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>show invisible</source>
-        <translation>show invisible</translation>
+        <translation>pokaži nevidljivo</translation>
     </message>
     <message>
         <source>Show Invisible</source>
-        <translation>Show Invisible</translation>
+        <translation>Pokaži nevidljivo</translation>
     </message>
     <message>
         <source>show frames</source>
-        <translation>show frames</translation>
+        <translation>pokaži okvir</translation>
     </message>
     <message>
         <source>Show Frames</source>
-        <translation>Show Frames</translation>
+        <translation>Pokaži okvir</translation>
     </message>
     <message>
         <source>show keyboard</source>
-        <translation>show keyboard</translation>
+        <translation>pokaži klavijaturu</translation>
     </message>
     <message>
         <source>Show Keyboard</source>
-        <translation>Show Keyboard</translation>
+        <translation>Pokaži klavijaturu</translation>
     </message>
     <message>
         <source>enable script debugger</source>
@@ -7853,35 +7853,35 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>enter 1/1 rest</source>
-        <translation>enter 1/1 rest</translation>
+        <translation>unesi 1/1 pauzu</translation>
     </message>
     <message>
         <source>1/1 rest</source>
-        <translation>1/1 rest</translation>
+        <translation>1/1 pauze</translation>
     </message>
     <message>
         <source>enter 1/2 rest</source>
-        <translation>enter ½ rest</translation>
+        <translation>unesi 1/2pauze</translation>
     </message>
     <message>
         <source>1/2 rest</source>
-        <translation>½ rest</translation>
+        <translation>1/2 pauze</translation>
     </message>
     <message>
         <source>enter 1/4 rest</source>
-        <translation>enter ¼ rest</translation>
+        <translation>unesi 1/4 pauze</translation>
     </message>
     <message>
         <source>1/4 rest</source>
-        <translation>¼ rest</translation>
+        <translation>1/4 pauze</translation>
     </message>
     <message>
         <source>enter 1/8 rest</source>
-        <translation>enter 1/8 rest</translation>
+        <translation>unesi 1/8 pauze</translation>
     </message>
     <message>
         <source>1/8 rest</source>
-        <translation>1/8 rest</translation>
+        <translation>1/8 pauze</translation>
     </message>
     <message>
         <source>backspace</source>
@@ -7889,11 +7889,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>search</source>
-        <translation>search</translation>
+        <translation>traži</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation>Search</translation>
+        <translation>Traži</translation>
     </message>
     <message>
         <source>Zoom In</source>
@@ -7973,31 +7973,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>File open</source>
-        <translation>File open</translation>
+        <translation>Otvori datoteku</translation>
     </message>
     <message>
         <source>Load score from file</source>
-        <translation>Load score from file</translation>
+        <translation>Učitaj skladbu iz datoteke</translation>
     </message>
     <message>
         <source>File save</source>
-        <translation>File save</translation>
+        <translation>Spremi datoteku</translation>
     </message>
     <message>
         <source>Save score to file</source>
-        <translation>Save score to file</translation>
+        <translation>Spremi skladbu kao datoteku</translation>
     </message>
     <message>
         <source>File save as</source>
-        <translation>File save as</translation>
+        <translation>Spremi datoteku kao</translation>
     </message>
     <message>
         <source>Save score under a new file name</source>
-        <translation>Save score under a new filename</translation>
+        <translation>Spremi datoteku pod novim imenom</translation>
     </message>
     <message>
         <source>File save a copy</source>
-        <translation>File save a copy</translation>
+        <translation>Spremi datoteku kao kopiju</translation>
     </message>
     <message>
         <source>Save a copy of the score in addition to the current file</source>
@@ -8005,15 +8005,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>File reload</source>
-        <translation>File reload</translation>
+        <translation>Ponovo učitaj datoteku</translation>
     </message>
     <message>
         <source>Reload score from file</source>
-        <translation>Reload score from file</translation>
+        <translation>Ponovo učitaj skladbu iz datoteke</translation>
     </message>
     <message>
         <source>File close</source>
-        <translation>File close</translation>
+        <translation>Zatvori datoteku</translation>
     </message>
     <message>
         <source>Close current score</source>
@@ -8021,15 +8021,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Print</source>
-        <translation>Print</translation>
+        <translation>Ispiši</translation>
     </message>
     <message>
         <source>Print score</source>
-        <translation>Print score</translation>
+        <translation>Ispiši skladbu</translation>
     </message>
     <message>
         <source>Undo last change</source>
-        <translation>Undo last change</translation>
+        <translation>Odbaci zadnju promjenu</translation>
     </message>
     <message>
         <source>Redo last undo</source>
@@ -8045,7 +8045,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Clefs...</source>
-        <translation>Clefs…</translation>
+        <translation>Klučevi...</translation>
     </message>
     <message>
         <source>show keys signatures palette</source>
@@ -8053,7 +8053,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Key Signatures...</source>
-        <translation>Key Signatures…</translation>
+        <translation>Tonaliteti</translation>
     </message>
     <message>
         <source>Show key signatures palette</source>
@@ -8085,39 +8085,39 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Enter note A</source>
-        <translation>Enter note A</translation>
+        <translation>Unesi notu A</translation>
     </message>
     <message>
         <source>Enter note B</source>
-        <translation>Enter note B</translation>
+        <translation>Unesi notu B</translation>
     </message>
     <message>
         <source>Enter note C</source>
-        <translation>Enter note C</translation>
+        <translation>Unesi notu C</translation>
     </message>
     <message>
         <source>Enter note D</source>
-        <translation>Enter note D</translation>
+        <translation>Unesi notu D</translation>
     </message>
     <message>
         <source>Enter note E</source>
-        <translation>Enter note E</translation>
+        <translation>Unesi notu E</translation>
     </message>
     <message>
         <source>Enter note F</source>
-        <translation>Enter note F</translation>
+        <translation>Unesi notu F</translation>
     </message>
     <message>
         <source>Enter note G</source>
-        <translation>Enter note G</translation>
+        <translation>Unesi notu G</translation>
     </message>
     <message>
         <source>Enter rest</source>
-        <translation>Enter rest</translation>
+        <translation>Unesi pauzu</translation>
     </message>
     <message>
         <source>Rest</source>
-        <translation>Rest</translation>
+        <translation>Pauza</translation>
     </message>
     <message>
         <source>Add staccato</source>
@@ -8165,7 +8165,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Up</source>
-        <translation>Up</translation>
+        <translation>Gore</translation>
     </message>
     <message>
         <source>Pitch up octave</source>
@@ -8201,7 +8201,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Move up</source>
-        <translation>Move up</translation>
+        <translation>Pomakni gore</translation>
     </message>
     <message>
         <source>Pitch down</source>
@@ -8209,7 +8209,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Down</source>
-        <translation>Down</translation>
+        <translation>Dolje</translation>
     </message>
     <message>
         <source>Pitch down octave</source>
@@ -8245,59 +8245,59 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Move down</source>
-        <translation>Move down</translation>
+        <translation>Pomakni dollje</translation>
     </message>
     <message>
         <source>Previous chord</source>
-        <translation>Previous chord</translation>
+        <translation>Prethodni akord</translation>
     </message>
     <message>
         <source>Previous Chord</source>
-        <translation>Previous Chord</translation>
+        <translation>Prethodni akord</translation>
     </message>
     <message>
         <source>Previous measure</source>
-        <translation>Previous measure</translation>
+        <translation>Prethodni takt</translation>
     </message>
     <message>
         <source>Previous Measure</source>
-        <translation>Previous Measure</translation>
+        <translation>Prethodni takt</translation>
     </message>
     <message>
         <source>Next chord</source>
-        <translation>Next chord</translation>
+        <translation>Sljedeći akord</translation>
     </message>
     <message>
         <source>Next Chord</source>
-        <translation>Next Chord</translation>
+        <translation>Sjedeći akord</translation>
     </message>
     <message>
         <source>Next measure</source>
-        <translation>Next measure</translation>
+        <translation>Sljedeći takt</translation>
     </message>
     <message>
         <source>Next Measure</source>
-        <translation>Next Measure</translation>
+        <translation>Sljedeći takt</translation>
     </message>
     <message>
         <source>Delete selected measures</source>
-        <translation>Delete selected measures</translation>
+        <translation>Izbriši označeni takt</translation>
     </message>
     <message>
         <source>Append measure</source>
-        <translation>Append measure</translation>
+        <translation>Dodaj takt</translation>
     </message>
     <message>
         <source>Append measures</source>
-        <translation>Append measures</translation>
+        <translation>Dodaj taktove</translation>
     </message>
     <message>
         <source>Insert measure</source>
-        <translation>Insert measure</translation>
+        <translation>Umetni takt</translation>
     </message>
     <message>
         <source>Insert measures</source>
-        <translation>Insert measures</translation>
+        <translation>Umetni taktove</translation>
     </message>
     <message>
         <source>split window horizontal</source>
@@ -8329,7 +8329,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Rewind to start position</source>
-        <translation>Rewind to start position</translation>
+        <translation>Premotaj na početak</translation>
     </message>
     <message>
         <source>Seek to end</source>
@@ -8341,15 +8341,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Load style</source>
-        <translation>Load style</translation>
+        <translation>Učitaj stil</translation>
     </message>
     <message>
         <source>Save style</source>
-        <translation>Save style</translation>
+        <translation>Spremi stil</translation>
     </message>
     <message>
         <source>Select all</source>
-        <translation>Select all</translation>
+        <translation>Označi sve</translation>
     </message>
     <message>
         <source>Edit Chord Style...</source>
@@ -8357,7 +8357,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation>Izbriši</translation>
     </message>
     <message>
         <source>Delete contents of the selected measures</source>
@@ -8377,11 +8377,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>next score</source>
-        <translation type="unfinished"/>
+        <translation>sljedeća skladba</translation>
     </message>
     <message>
         <source>previous score</source>
-        <translation type="unfinished"/>
+        <translation>prethodna skladba</translation>
     </message>
 </context>
 <context>
@@ -8697,11 +8697,11 @@ p, li { white-space: pre-wrap; }
     <name>elementName</name>
     <message>
         <source>Symbol</source>
-        <translation>Symbol</translation>
+        <translation>Simbol</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation>Text</translation>
+        <translation>Tekst</translation>
     </message>
     <message>
         <source>SlurSegment</source>
@@ -8733,7 +8733,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note</source>
-        <translation>Note</translation>
+        <translation>Nota</translation>
     </message>
     <message>
         <source>Stem</source>
@@ -8741,7 +8741,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Clef</source>
-        <translation>Clef</translation>
+        <translation>Ključ</translation>
     </message>
     <message>
         <source>KeySig</source>
@@ -8765,11 +8765,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>RepeatMeasure</source>
-        <translation>RepeatMeasure</translation>
+        <translation>Pnovi takt</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation>Image</translation>
+        <translation>Slika</translation>
     </message>
     <message>
         <source>Tie</source>
@@ -8777,11 +8777,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Dynamic</source>
-        <translation>Dynamic</translation>
+        <translation>Dinamika</translation>
     </message>
     <message>
         <source>Page</source>
-        <translation>Page</translation>
+        <translation>Stranica</translation>
     </message>
     <message>
         <source>Beam</source>
@@ -8793,7 +8793,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Lyrics</source>
-        <translation>Lyrics</translation>
+        <translation>Stihovi</translation>
     </message>
     <message>
         <source>Marker</source>
@@ -8801,7 +8801,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Jump</source>
-        <translation>Jump</translation>
+        <translation>Skoči</translation>
     </message>
     <message>
         <source>Tuplet</source>
@@ -8869,7 +8869,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Measure</source>
-        <translation>Measure</translation>
+        <translation>Takt</translation>
     </message>
     <message>
         <source>StaffLines</source>
@@ -8881,7 +8881,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Selection</source>
-        <translation>Selection</translation>
+        <translation>Izbor</translation>
     </message>
     <message>
         <source>Lasso</source>
@@ -8929,7 +8929,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord</source>
-        <translation>Chord</translation>
+        <translation>Akord</translation>
     </message>
     <message>
         <source>Slur</source>
@@ -8980,15 +8980,15 @@ p, li { white-space: pre-wrap; }
     <name>magTable</name>
     <message>
         <source>Page Width</source>
-        <translation>Page Width</translation>
+        <translation>Širina stranice</translation>
     </message>
     <message>
         <source>Whole Page</source>
-        <translation>Whole Page</translation>
+        <translation>Cijela stranica</translation>
     </message>
     <message>
         <source>Two Pages</source>
-        <translation>Two Pages</translation>
+        <translation>Dvije stranice</translation>
     </message>
 </context>
 <context>
@@ -9011,7 +9011,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished">mi</translation>
+        <translation>mi</translation>
     </message>
     <message>
         <source>slash</source>
@@ -9023,27 +9023,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished">do</translation>
+        <translation>do</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished">re</translation>
+        <translation>re</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished">fa</translation>
+        <translation>fa</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished">la</translation>
+        <translation>la</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished">ti</translation>
+        <translation>ti</translation>
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>sol</translation>
     </message>
     <message>
         <source>alt. brevis</source>
@@ -9054,31 +9054,31 @@ p, li { white-space: pre-wrap; }
     <name>preferences</name>
     <message>
         <source>Never</source>
-        <translation>Never</translation>
+        <translation>Nikad</translation>
     </message>
     <message>
         <source>Every day</source>
-        <translation>Daily</translation>
+        <translation>Svaki dan</translation>
     </message>
     <message>
         <source>Every 3 days</source>
-        <translation>Every 3 days</translation>
+        <translation>Svaki treći dan</translation>
     </message>
     <message>
         <source>Every week</source>
-        <translation>Weekly</translation>
+        <translation>Svaki tjedan</translation>
     </message>
     <message>
         <source>Every 2 weeks</source>
-        <translation>Fortnightly</translation>
+        <translation>Svaka dva tjedna</translation>
     </message>
     <message>
         <source>Every month</source>
-        <translation>Monthly</translation>
+        <translation>Svaki mjesec</translation>
     </message>
     <message>
         <source>Every 2 months</source>
-        <translation>Bimonthly</translation>
+        <translation>Svaka dva mjeseca</translation>
     </message>
 </context>
 <context>
@@ -9121,27 +9121,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>note 1/2</source>
-        <translation>note ½</translation>
+        <translation>1/2 note</translation>
     </message>
     <message>
         <source>note 1/4</source>
-        <translation>note ¼</translation>
+        <translation>1/4 note</translation>
     </message>
     <message>
         <source>note 1/8</source>
-        <translation>note 1/8</translation>
+        <translation>1/8 note</translation>
     </message>
     <message>
         <source>note 1/16</source>
-        <translation>note 1/16</translation>
+        <translation>1/16 note</translation>
     </message>
     <message>
         <source>note 1/32</source>
-        <translation>note 1/32</translation>
+        <translation>1/32 note</translation>
     </message>
     <message>
         <source>note 1/64</source>
-        <translation>note 1/64</translation>
+        <translation>1/64 note</translation>
     </message>
     <message>
         <source>dot dot</source>
@@ -9233,7 +9233,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural</source>
-        <translation>natural</translation>
+        <translation>prirodni</translation>
     </message>
     <message>
         <source>natural arrow up</source>
@@ -9301,7 +9301,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dot</source>
-        <translation>dot</translation>
+        <translation>točka</translation>
     </message>
     <message>
         <source>longa up</source>
@@ -9885,43 +9885,43 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>zero</source>
-        <translation>zero</translation>
+        <translation>nula</translation>
     </message>
     <message>
         <source>one</source>
-        <translation>one</translation>
+        <translation>jedan</translation>
     </message>
     <message>
         <source>two</source>
-        <translation>two</translation>
+        <translation>dva</translation>
     </message>
     <message>
         <source>three</source>
-        <translation>three</translation>
+        <translation>tri</translation>
     </message>
     <message>
         <source>four</source>
-        <translation>four</translation>
+        <translation>četiri</translation>
     </message>
     <message>
         <source>five</source>
-        <translation>five</translation>
+        <translation>pet</translation>
     </message>
     <message>
         <source>six</source>
-        <translation>six</translation>
+        <translation>šest</translation>
     </message>
     <message>
         <source>seven</source>
-        <translation>seven</translation>
+        <translation>sedam</translation>
     </message>
     <message>
         <source>eight</source>
-        <translation>eight</translation>
+        <translation>osam</translation>
     </message>
     <message>
         <source>nine</source>
-        <translation>nine</translation>
+        <translation>devet</translation>
     </message>
     <message>
         <source>plus</source>

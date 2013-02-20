@@ -3076,7 +3076,7 @@ fallido: </translation>
     </message>
     <message>
         <source>Transport Tools</source>
-        <translation>Herramientas de Transporte</translation>
+        <translation>Controles de reproducción</translation>
     </message>
     <message>
         <source>Note Entry</source>
@@ -3665,7 +3665,7 @@ no es compatible con el interfaz actual</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation>Archivos de Overture &lt;experimental&gt; (*.ove);;</translation>
+        <translation>Archivos de Overture &lt;experimental&gt; (*.ove)</translation>
     </message>
 </context>
 <context>
@@ -7489,11 +7489,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Transport Toolbar</source>
-        <translation>Barra de Herramientas de Transporte</translation>
+        <translation>Barra de Controles de Reproducción</translation>
     </message>
     <message>
         <source>Transport</source>
-        <translation>Transporte</translation>
+        <translation>Reproducción</translation>
     </message>
     <message>
         <source>Note Input Toolbar</source>
@@ -8614,7 +8614,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Side Stick</source>
-        <translation type="unfinished"/>
+        <translation>Aro de la caja</translation>
     </message>
     <message>
         <source>Snare (Acoustic)</source>

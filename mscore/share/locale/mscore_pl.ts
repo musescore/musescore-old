@@ -3670,7 +3670,7 @@ jest niekompatybilny z obecnym interfejsem.</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation>Pliki Overture &lt;eksperymentalnie&gt; (*.ove);;</translation>
+        <translation>Pliki Overture &lt;eksperymentalnie&gt; (*.ove)</translation>
     </message>
 </context>
 <context>

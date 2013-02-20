@@ -3668,7 +3668,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation type="unfinished"/>
+        <translation>Overture Files &lt;experimental&gt; (*.ove)</translation>
     </message>
 </context>
 <context>

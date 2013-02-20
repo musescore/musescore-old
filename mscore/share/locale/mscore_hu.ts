@@ -3672,7 +3672,7 @@ szkript futtatásához</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation>Overture fájlok &lt;kísérleti&gt; (*.ove);;</translation>
+        <translation>Overture fájlok &lt;kísérleti&gt; (*.ove)</translation>
     </message>
 </context>
 <context>
@@ -5654,7 +5654,7 @@ győződj meg arról, hogy helyes-e a SoundFont fájl elérési útja.</translat
     </message>
     <message>
         <source>System Flag</source>
-        <translation>Rendszer jelzés</translation>
+        <translation>Sorcsoportjelzés</translation>
     </message>
 </context>
 <context>
@@ -6149,7 +6149,7 @@ győződj meg arról, hogy helyes-e a SoundFont fájl elérési útja.</translat
     </message>
     <message>
         <source>System Flag</source>
-        <translation>Rendszer zászló</translation>
+        <translation>Sorcsoportjelzés</translation>
     </message>
     <message>
         <source>center text vertical to text baseline</source>
@@ -8640,7 +8640,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Hi-Hat Closed</source>
-        <translation type="unfinished"/>
+        <translation>Zárt lábcin</translation>
     </message>
     <message>
         <source>Tom 4</source>
@@ -8648,7 +8648,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Hi-Hat Pedal</source>
-        <translation type="unfinished"/>
+        <translation>Lábcin pedál</translation>
     </message>
     <message>
         <source>Tom 3</source>
@@ -8656,7 +8656,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Hi-Hat Open</source>
-        <translation type="unfinished"/>
+        <translation>Nyitott lábcin</translation>
     </message>
     <message>
         <source>Tom 2</source>
@@ -8668,7 +8668,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Crash 1</source>
-        <translation type="unfinished"/>
+        <translation>Beütő 1</translation>
     </message>
     <message>
         <source>Tom</source>
@@ -8676,7 +8676,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ride</source>
-        <translation type="unfinished"/>
+        <translation>Kísérő</translation>
     </message>
     <message>
         <source>China</source>
@@ -8684,7 +8684,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ride (Bell)</source>
-        <translation type="unfinished"/>
+        <translation>Kísérő (kúp)</translation>
     </message>
     <message>
         <source>Tambourine</source>
@@ -8692,11 +8692,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>open high conga</source>
-        <translation type="unfinished"/>
+        <translation>Nyitott magas konga</translation>
     </message>
     <message>
         <source>low conga</source>
-        <translation type="unfinished"/>
+        <translation>Mély konga</translation>
     </message>
 </context>
 <context>
@@ -9021,7 +9021,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>slash</source>
-        <translation type="unfinished">áthúzott</translation>
+        <translation>perjel</translation>
     </message>
     <message>
         <source>xcircle</source>

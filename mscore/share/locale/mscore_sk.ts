@@ -1242,7 +1242,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordproperties.ui" line="381"/>
         <source>sol</source>
-        <translation type="unfinished">sol</translation>
+        <translation>sol</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="386"/>
@@ -1257,7 +1257,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordproperties.ui" line="396"/>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation>alt. brevis</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="411"/>
@@ -3704,7 +3704,7 @@ do notového zápisu „%1“?</translation>
     <message>
         <location filename="../../mscore/file.cpp" line="192"/>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation>Súbory Overture &lt;experimentálne&gt; (*.ove);;</translation>
+        <translation>Súbory Overture &lt;experimentálne&gt; (*.ove)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="552"/>
@@ -6549,12 +6549,12 @@ nepodarilo sa: </translation>
     <message>
         <location filename="../../mscore/file.cpp" line="875"/>
         <source>Internal error</source>
-        <translation type="unfinished"/>
+        <translation>Vnútorná chyba programu</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="876"/>
         <source>Cannot load picture file %1</source>
-        <translation type="unfinished"/>
+        <translation>Súbor obrázka %1 sa nedá spustiť</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="1015"/>
@@ -6596,7 +6596,7 @@ nepodarilo sa: </translation>
     <message>
         <location filename="../../mscore/file.cpp" line="1220"/>
         <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
-        <translation type="unfinished"/>
+        <translation>Tento notový zápis sa nedá prečítať:&lt;br&gt;Verzia vášho MuseScore je veľmi stará.&lt;br&gt;&lt;a href="%1"&gt;Aktualizujte si ho teraz!&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../../mscore/importmidi.cpp" line="1413"/>
@@ -6616,7 +6616,7 @@ nepodarilo sa: </translation>
     <message>
         <location filename="../../mscore/score.cpp" line="416"/>
         <source>Can't open file. File extension "%1" not supported.</source>
-        <translation type="unfinished"/>
+        <translation>Súbor sa nedá otvoriť. Prípona súboru "%1" nie je podporovaná.</translation>
     </message>
 </context>
 <context>
@@ -6682,12 +6682,12 @@ nepodarilo sa: </translation>
     <message>
         <location filename="../../mscore/scoreview.cpp" line="2359"/>
         <source>Please select the complete tuplet and retry the copy operation</source>
-        <translation type="unfinished"/>
+        <translation>Vyberte, prosím, celú rytmickú skupinu a znova skúste kopírovanie</translation>
     </message>
     <message>
         <location filename="../../mscore/scoreview.cpp" line="2382"/>
         <source>Please select the complete tuplet and retry the cut operation</source>
-        <translation type="unfinished"/>
+        <translation>Vyberte, prosím, celú rytmickú skupinu a znova skúste vystrihnutie</translation>
     </message>
 </context>
 <context>
@@ -7621,7 +7621,7 @@ and check that the file location is correct</translation>
     <message>
         <location filename="../../mscore/textproperties.ui" line="334"/>
         <source>center text vertical to text baseline</source>
-        <translation type="unfinished"/>
+        <translation>vystrediť text zvislo na základnú čiaru textu</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="357"/>
@@ -10311,7 +10311,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/actions.cpp" line="1671"/>
         <source>Seek to begin</source>
-        <translation type="unfinished"/>
+        <translation>Hľadať do začiatku</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1680"/>
@@ -11130,7 +11130,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/drumset.cpp" line="167"/>
         <source>Hi-Hat Closed</source>
-        <translation>Zatvorené činely</translation>
+        <translation>Zatvorené činely hi-hat</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="168"/>
@@ -11140,7 +11140,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/drumset.cpp" line="169"/>
         <source>Hi-Hat Pedal</source>
-        <translation>Pedál činelov</translation>
+        <translation>Pedál činelov hi-hat</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="170"/>
@@ -11150,7 +11150,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/drumset.cpp" line="171"/>
         <source>Hi-Hat Open</source>
-        <translation>Otvorené činely</translation>
+        <translation>Otvorené činely hi-hat</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="172"/>
@@ -11165,7 +11165,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/drumset.cpp" line="174"/>
         <source>Crash 1</source>
-        <translation>Rana 1</translation>
+        <translation>Crash činel 1</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="175"/>
@@ -11175,7 +11175,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/drumset.cpp" line="176"/>
         <source>Ride</source>
-        <translation type="unfinished"/>
+        <translation>Ride činel</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="177"/>
@@ -11189,7 +11189,7 @@ p, li { white-space: pre-wrap; }&#13;
         <location filename="../../mscore/drumset.cpp" line="182"/>
         <location filename="../../mscore/drumset.cpp" line="183"/>
         <source>Ride (Bell)</source>
-        <translation type="unfinished"/>
+        <translation>Ride činel (Bell)</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="179"/>
@@ -11502,7 +11502,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/element.cpp" line="135"/>
         <source>Compound</source>
-        <translation type="unfinished"/>
+        <translation>Zloženina</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="136"/>
@@ -11588,12 +11588,12 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="37"/>
         <source>cross</source>
-        <translation type="unfinished">krížik</translation>
+        <translation>krížik</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="38"/>
         <source>diamond</source>
-        <translation type="unfinished">kosoštvorec</translation>
+        <translation>kosoštvorec</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="39"/>
@@ -11608,7 +11608,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="41"/>
         <source>slash</source>
-        <translation type="unfinished">lomka</translation>
+        <translation>šikmá čiara</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="42"/>
@@ -11648,7 +11648,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="49"/>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation>brevis alt</translation>
     </message>
 </context>
 <context>
@@ -12146,17 +12146,17 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/sym.cpp" line="143"/>
         <source>s0sol head</source>
-        <translation type="unfinished"/>
+        <translation>hlavička s0sol</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="144"/>
         <source>s1sol head</source>
-        <translation type="unfinished"/>
+        <translation>hlavička s1sol</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="145"/>
         <source>s2sol head</source>
-        <translation type="unfinished"/>
+        <translation>hlavička s2sol</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="147"/>
@@ -12466,12 +12466,12 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/sym.cpp" line="210"/>
         <source>grace dash</source>
-        <translation type="unfinished"/>
+        <translation>ozdoba</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="211"/>
         <source>dgrace dash</source>
-        <translation type="unfinished"/>
+        <translation>ozdoba nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="212"/>
@@ -12732,37 +12732,37 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/sym.cpp" line="270"/>
         <source>longa up alt</source>
-        <translation type="unfinished"/>
+        <translation>longa nahor alt</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="271"/>
         <source>longa down alt</source>
-        <translation type="unfinished"/>
+        <translation>longa nadol alt</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="272"/>
         <source>brevis head alt</source>
-        <translation type="unfinished"/>
+        <translation>hlavička brevis alt</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="273"/>
         <source>time sig C dot</source>
-        <translation type="unfinished"/>
+        <translation>označenie taktu C s bodkou</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="274"/>
         <source>time sig O</source>
-        <translation type="unfinished"/>
+        <translation>označenie taktu O</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="275"/>
         <source>time sig O cut</source>
-        <translation type="unfinished"/>
+        <translation>označenie taktu cut</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="276"/>
         <source>time sig O dot</source>
-        <translation type="unfinished"/>
+        <translation>označenie taktu O s bodkou</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="593"/>

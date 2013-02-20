@@ -1784,11 +1784,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Lyrics upper margin</source>
-        <translation>Laulutekstin yläpuolinen marginaali</translation>
+        <translation>Sanoituksen yläpuolinen marginaali</translation>
     </message>
     <message>
         <source>Lyrics lower margin</source>
-        <translation>Laulutekstin alapuolinen marginaali</translation>
+        <translation>Sanoituksen alapuolinen marginaali</translation>
     </message>
     <message>
         <source>V-frame upper margin</source>
@@ -2636,7 +2636,7 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>Lyrics</source>
-        <translation>Lauluteksti</translation>
+        <translation>Sanoitus</translation>
     </message>
     <message>
         <source>Syllabic:</source>
@@ -3097,11 +3097,11 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>Note Entry</source>
-        <translation>Nuotinsyöttö</translation>
+        <translation>Nuotinkirjoitus</translation>
     </message>
     <message>
         <source>Open &amp;Recent</source>
-        <translation>Avaa &amp;entinen</translation>
+        <translation>Avaa &amp;viimeisin</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
@@ -3161,7 +3161,7 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>note entry mode</source>
-        <translation>Nuotinsyöttötila</translation>
+        <translation>Nuotinkirjoitustila</translation>
     </message>
     <message>
         <source>edit mode</source>
@@ -3287,11 +3287,11 @@ ennen sulkemista?</translation>
     </message>
     <message>
         <source>Lyrics odd lines</source>
-        <translation>Laulutekstin parittomat rivit</translation>
+        <translation>Sanoituksen parittomat rivit</translation>
     </message>
     <message>
         <source>Lyrics even lines</source>
-        <translation>Laulutekstin parilliset rivit</translation>
+        <translation>Sanoituksen parilliset rivit</translation>
     </message>
     <message>
         <source>End Bar</source>
@@ -4366,7 +4366,7 @@ on ristiriidassa nykyisen rajapinnan kanssa</translation>
     </message>
     <message>
         <source>Note Entry</source>
-        <translation>Nuotinsyöttö</translation>
+        <translation>Nuotinkirjoitus</translation>
     </message>
     <message>
         <source>Enable midi input</source>
@@ -4574,7 +4574,7 @@ on ristiriidassa nykyisen rajapinnan kanssa</translation>
     </message>
     <message>
         <source>Note Entry:</source>
-        <translation>Nuotinsyöttö:</translation>
+        <translation>Nuotinkirjoitus:</translation>
     </message>
     <message>
         <source>Application Font</source>
@@ -5194,7 +5194,7 @@ Yritä tallentaa eri paikkaan.</translation>
     </message>
     <message>
         <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
-        <translation type="unfinished"/>
+        <translation>Tätä partituuria ei voida lukea:&lt;br&gt;MuseScoren versio on liian vanha.&lt;br&gt;&lt;a href="%1"&gt;Päivitä nyt!&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Can't open file. File extension "%1" not supported.</source>
@@ -5202,11 +5202,11 @@ Yritä tallentaa eri paikkaan.</translation>
     </message>
     <message>
         <source>Internal error</source>
-        <translation type="unfinished"/>
+        <translation>Sisäinen virhe</translation>
     </message>
     <message>
         <source>Cannot load picture file %1</source>
-        <translation type="unfinished"/>
+        <translation>Ei voida ladata kuvatiedostoa %1</translation>
     </message>
 </context>
 <context>
@@ -5259,11 +5259,11 @@ Yritä tallentaa eri paikkaan.</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the copy operation</source>
-        <translation type="unfinished"/>
+        <translation>Valitse koko tupletti ja yritä kopiointia uudelleen</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the cut operation</source>
-        <translation type="unfinished"/>
+        <translation>Valitse koko tupletti ja yritä leikkausta uudelleen</translation>
     </message>
 </context>
 <context>
@@ -5310,7 +5310,7 @@ Yritä tallentaa eri paikkaan.</translation>
     </message>
     <message>
         <source>Lyrics:</source>
-        <translation>Lauluteksti:</translation>
+        <translation>Sanoitus:</translation>
     </message>
     <message>
         <source>Segment Type:</source>
@@ -6156,7 +6156,7 @@ ja tarkista, että tiedoston sijainti on oikein.</translation>
     </message>
     <message>
         <source>center text vertical to text baseline</source>
-        <translation type="unfinished"/>
+        <translation>keskitä teksti pystysuunnassa</translation>
     </message>
 </context>
 <context>
@@ -7510,7 +7510,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note Input Toolbar</source>
-        <translation>Nuotin syöttöpalkki</translation>
+        <translation>Nuotinkirjoituspalkki</translation>
     </message>
     <message>
         <source>Status Bar</source>
@@ -7530,7 +7530,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Lyrics</source>
-        <translation>Lauluteksti</translation>
+        <translation>Sanoitus</translation>
     </message>
     <message>
         <source>Fingering Palette</source>
@@ -7646,15 +7646,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Chord Name</source>
-        <translation>Lisää sointunimi</translation>
+        <translation>Lisää sointu</translation>
     </message>
     <message>
         <source>Chord Name</source>
-        <translation>Sointunimi</translation>
+        <translation>Sointu</translation>
     </message>
     <message>
         <source>Add Chord Text</source>
-        <translation>Lisää sointunimi</translation>
+        <translation>Lisää sointu</translation>
     </message>
     <message>
         <source>show harmony properties for chord</source>
@@ -8086,7 +8086,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note input mode</source>
-        <translation>Nuottien syöttötila</translation>
+        <translation>Nuotinkirjoitustila</translation>
     </message>
     <message>
         <source>Pitch spell</source>
@@ -8612,7 +8612,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bass clef 15ma</source>
-        <translation>Bassoiavain 15ma (kaksi oktaavia ylös)</translation>
+        <translation>Bassoavain 15ma (kaksi oktaavia ylös)</translation>
     </message>
 </context>
 <context>
@@ -8802,7 +8802,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Lyrics</source>
-        <translation>Lauluteksti</translation>
+        <translation>Sanoitus</translation>
     </message>
     <message>
         <source>Marker</source>

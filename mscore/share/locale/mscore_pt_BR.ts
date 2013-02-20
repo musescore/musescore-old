@@ -3675,7 +3675,7 @@ Incompatível com a atual interface</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation>Arquivos Overture &lt;experimental&gt; (*.ove);;</translation>
+        <translation>Arquivos Overture &lt;experimental&gt; (*.ove)</translation>
     </message>
 </context>
 <context>
@@ -5194,19 +5194,19 @@ Tente salvar em um local diferente.</translation>
     </message>
     <message>
         <source>Cannot read this score:&lt;br&gt;Your version of MuseScore is too old.&lt;br&gt;&lt;a href="%1"&gt;Upgrade now!&lt;/a&gt;</source>
-        <translation type="unfinished"/>
+        <translation>Não é possível ler esta partitura:&lt;br&gt;Sua versão do MuseScore é muito antiga.&lt;br&gt;&lt;a href="%1"&gt;Atualize agora!&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Can't open file. File extension "%1" not supported.</source>
-        <translation type="unfinished"/>
+        <translation>Não é possível abrir o arquivo. Extensão "%1" não suportada.</translation>
     </message>
     <message>
         <source>Internal error</source>
-        <translation type="unfinished"/>
+        <translation>Erro interno</translation>
     </message>
     <message>
         <source>Cannot load picture file %1</source>
-        <translation type="unfinished"/>
+        <translation>Não é possível carregar arquivo de imagem %1</translation>
     </message>
 </context>
 <context>
@@ -5259,11 +5259,11 @@ Tente salvar em um local diferente.</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the copy operation</source>
-        <translation type="unfinished"/>
+        <translation>Por favor selecione completamente a quiáltera e tente copiar novamente</translation>
     </message>
     <message>
         <source>Please select the complete tuplet and retry the cut operation</source>
-        <translation type="unfinished"/>
+        <translation>Por favor selecione completamente a quiáltera e tente recortar novamente</translation>
     </message>
 </context>
 <context>
@@ -6156,7 +6156,7 @@ e verifique se a localização do arquivo está correta</translation>
     </message>
     <message>
         <source>center text vertical to text baseline</source>
-        <translation type="unfinished"/>
+        <translation>centralizar o texto verticalmente à sua base</translation>
     </message>
 </context>
 <context>

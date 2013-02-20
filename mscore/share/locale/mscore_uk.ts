@@ -3673,7 +3673,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation>Файли Overture &lt;експериментально&gt; (*.ove);;</translation>
+        <translation>Файли Overture &lt;експериментально&gt; (*.ove)</translation>
     </message>
 </context>
 <context>

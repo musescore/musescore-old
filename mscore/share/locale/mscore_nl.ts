@@ -3621,7 +3621,7 @@ Probeer "Online handboek" in het menu "Help".</translation>
 is incompatible with current interface</source>
         <translation>Script&#13;
 %1&#13;
-is niet compactibel met de huidige interface</translation>
+is niet compatibel met de huidige interface</translation>
     </message>
     <message>
         <source>MuseScore is too old to run script
@@ -3675,7 +3675,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation>Overture bestanden &lt;experimenteel&gt; (*.ove);;</translation>
+        <translation>Overture bestanden &lt;experimenteel&gt; (*.ove)</translation>
     </message>
 </context>
 <context>
@@ -3686,7 +3686,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
-        <translation>Om te connecteren met de community, &lt;br /&gt; moet je internetverbinding &lt;br /&gt; aanstaan.</translation>
+        <translation>Om te verbinden met de community, &lt;br /&gt; moet je internetverbinding &lt;br /&gt; aanstaan.</translation>
     </message>
     <message>
         <source>Retry</source>
@@ -4884,7 +4884,7 @@ Selecteer één noot of rust en probeer het opnieuw
     </message>
     <message>
         <source>MuseScore: register script plugin:</source>
-        <translation>MuseScore: registeer script plugin</translation>
+        <translation>MuseScore: registreer script plugin</translation>
     </message>
 </context>
 <context>
@@ -6645,7 +6645,7 @@ p, li { white-space: pre-wrap; }
     <name>WebPageDockWidget</name>
     <message>
         <source>Connect with the &lt;br /&gt; Community</source>
-        <translation>Connecteer met de &lt;br /&gt; Community</translation>
+        <translation>Verbind met de &lt;br /&gt; Community</translation>
     </message>
     <message>
         <source>Find help</source>
