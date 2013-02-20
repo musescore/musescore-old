@@ -19,7 +19,6 @@
 #=============================================================================
 
 install(FILES
-      createscore.js
       notenames.js
       colornotes.js
       removenotes.js

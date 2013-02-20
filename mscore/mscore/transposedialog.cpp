@@ -282,6 +282,7 @@ void Score::transpose()
                   }
             }
       setLayoutAll(true);
+      fixPpitch();
       }
 
 //---------------------------------------------------------
