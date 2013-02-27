@@ -40,16 +40,15 @@ class PlayPanel : public QWidget, private Ui::PlayPanelBase {
    private slots:
       void volumeChanged(double,int);
       void swingStyleChanged(int);
-      void relTempoChanged(double,int);
 
    signals:
-      void relTempoChanged(double);
+      void relTempoChanged(double,int);
       void posChange(int);
-      void gainChange(float);
+      void volChange(float);      
       void closed();
 
    public slots:
-      void setGain(float);
+      void setVolume(float);
       void setPos(int);
 
    public:
@@ -58,7 +57,7 @@ class PlayPanel : public QWidget, private Ui::PlayPanelBase {
       void heartBeat2(int sec);
 
       void setTempo(double);
-      void setRelTempo(qreal);
+      void setRelTempo(int);
 
       void setEndpos(int);
       void setScore(Score* s);

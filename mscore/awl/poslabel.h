@@ -21,7 +21,12 @@
 #ifndef __AWLPOSLABEL_H__
 #define __AWLPOSLABEL_H__
 
-#include "libmscore/pos.h"
+#include "al/pos.h"
+
+namespace AL {
+      class TempoMap;
+      class TimeSigMap;
+      };
 
 namespace Awl {
 
@@ -31,7 +36,7 @@ namespace Awl {
 
 class PosLabel : public QLabel {
       bool _smpte;
-      Pos pos;
+      AL::Pos pos;
       Q_OBJECT
 
       void updateValue();
@@ -40,14 +45,14 @@ class PosLabel : public QLabel {
       QSize sizeHint() const;
 
    public slots:
-      void setValue(const Pos&);
+      void setValue(const AL::Pos&);
 
    public:
       PosLabel(QWidget* parent = 0);
-      PosLabel(TempoMap*, TimeSigMap*, QWidget* parent = 0);
-      void setContext(TempoMap*, TimeSigMap*);
+      PosLabel(AL::TempoMap*, AL::TimeSigMap*, QWidget* parent = 0);
+      void setContext(AL::TempoMap*, AL::TimeSigMap*);
 
-      Pos value() const { return pos; }
+      AL::Pos value() const { return pos; }
 
       void setSmpte(bool);
       bool smpte() const { return _smpte; }

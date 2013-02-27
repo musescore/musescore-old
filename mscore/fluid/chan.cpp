@@ -123,11 +123,11 @@ void Channel::setcc(int num, int value)
                   break;
 
             case ALL_NOTES_OFF:
-                  synth->allNotesOff(channum);
+                  synth->all_notes_off(channum);
                   break;
 
             case ALL_SOUND_OFF:
-                  synth->allSoundsOff(channum);
+                  synth->all_sounds_off(channum);
                   break;
 
             case ALL_CTRL_OFF:

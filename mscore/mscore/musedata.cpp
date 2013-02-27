@@ -19,27 +19,25 @@
 //=============================================================================
 
 #include "musedata.h"
-#include "musescore.h"
-#include "libmscore/score.h"
-#include "libmscore/part.h"
-#include "libmscore/staff.h"
-#include "libmscore/barline.h"
-#include "libmscore/clef.h"
-#include "libmscore/key.h"
-#include "libmscore/note.h"
-#include "libmscore/chord.h"
-#include "libmscore/rest.h"
-#include "libmscore/text.h"
-#include "libmscore/bracket.h"
-#include "libmscore/tuplet.h"
-#include "libmscore/slur.h"
-#include "libmscore/dynamic.h"
-#include "libmscore/lyrics.h"
-#include "libmscore/articulation.h"
-#include "libmscore/sig.h"
-#include "libmscore/measure.h"
-#include "libmscore/timesig.h"
-#include "libmscore/segment.h"
+#include "score.h"
+#include "part.h"
+#include "staff.h"
+#include "barline.h"
+#include "clef.h"
+#include "key.h"
+#include "note.h"
+#include "chord.h"
+#include "rest.h"
+#include "text.h"
+#include "bracket.h"
+#include "tuplet.h"
+#include "slur.h"
+#include "dynamics.h"
+#include "lyrics.h"
+#include "articulation.h"
+#include "al/sig.h"
+#include "measure.h"
+#include "timesig.h"
 
 //---------------------------------------------------------
 //   musicalAttribute
@@ -60,18 +58,19 @@ void MuseData::musicalAttribute(QString s, Part* part)
             else if (item.startsWith("T:")) {
                   QStringList tl = item.mid(2).split("/");
                   if (tl.size() != 2) {
-                        qDebug("bad time sig <%s>\n", qPrintable(item));
+                        printf("bad time sig <%s>\n", qPrintable(item));
                         continue;
                         }
                   int z = tl[0].toInt();
                   int n = tl[1].toInt();
                   if ((z > 0) && (n > 0)) {
-//TODO                        score->sigmap()->add(curTick, Fraction(z, n));
+                        score->sigmap()->add(curTick, Fraction(z, n));
                         TimeSig* ts = new TimeSig(score);
+                        ts->setTick(curTick);
                         Staff* staff = part->staff(0);
                         ts->setTrack(staff->idx() * VOICES);
                         Measure* measure = score->tick2measure(curTick);
-                        Segment* s = measure->getSegment(ts, curTick);
+                        Segment* s = measure->getSegment(ts);
                         s->add(ts);
                         }
                   }
@@ -79,14 +78,14 @@ void MuseData::musicalAttribute(QString s, Part* part)
                   ;
             else if (item[0] == 'C') {
                   int staffIdx = 1;
-//                  int col = 2;
+                  int col = 2;
                   if (item[1].isDigit()) {
                         staffIdx = item.mid(1,1).toInt();
-//                        col = 3;
+                        col = 3;
                         }
                   staffIdx -= 1;
-/*                  int clef = item.mid(col).toInt();
-                  ClefType mscoreClef = CLEF_G;
+                  int clef = item.mid(col).toInt();
+                  int mscoreClef = CLEF_G;
                   switch(clef) {
                         case 4:  mscoreClef = CLEF_G; break;
                         case 22: mscoreClef = CLEF_F; break;
@@ -94,15 +93,14 @@ void MuseData::musicalAttribute(QString s, Part* part)
                         case 14: mscoreClef = CLEF_C2; break;
                         case 15: mscoreClef = CLEF_C1; break;
                         default:
-                              qDebug("unknown clef %d\n", clef);
+                              printf("unknown clef %d\n", clef);
                               break;
                         }
-                  */
-//                  Staff* staff = part->staff(staffIdx);
-//                  staff->setClef(curTick, mscoreClef);
+                  Staff* staff = part->staff(staffIdx);
+                  staff->clefList()->setClef(curTick, mscoreClef);
                   }
             else
-                  qDebug("unknown $key <%s>\n", qPrintable(item));
+                  printf("unknown $key <%s>\n", qPrintable(item));
             }
       }
 
@@ -144,6 +142,7 @@ void MuseData::readChord(Part*, const QString& s)
       note->setPitch(pitch);
       note->setTpcFromPitch();
       note->setTrack(staffIdx * VOICES + voice);
+      note->setTick(chord->tick());
       chord->add(note);
       }
 
@@ -155,7 +154,7 @@ void MuseData::openSlur(int idx, int tick, Staff* staff, int voice)
       {
       int staffIdx = staff->idx();
       if (slur[idx]) {
-            qDebug("%06d: slur %d already open\n", tick, idx+1);
+            printf("%06d: slur %d already open\n", tick, idx+1);
             return;
             }
       slur[idx] = new Slur(score);
@@ -175,7 +174,7 @@ void MuseData::closeSlur(int idx, int tick, Staff* staff, int voice)
             slur[idx] = 0;
             }
       else
-            qDebug("%06d: slur %d not open\n", tick, idx+1);
+            printf("%06d: slur %d not open\n", tick, idx+1);
       }
 
 //---------------------------------------------------------
@@ -222,7 +221,7 @@ void MuseData::readNote(Part* part, const QString& s)
       if (pitch > 127)
             pitch = 127;
       int ticks = s.mid(5, 3).toInt();
-      ticks     = (ticks * MScore::division + _division/2) / _division;
+      ticks     = (ticks * AL::division + _division/2) / _division;
       int tick  = curTick;
       curTick  += ticks;
 
@@ -254,10 +253,11 @@ void MuseData::readNote(Part* part, const QString& s)
             else if (a == 1 && b == 1)
                   ;
             else
-                  qDebug("unsupported tuple %d/%d\n", a, b);
+                  printf("unsupported tuple %d/%d\n", a, b);
             }
 
       Chord* chord = new Chord(score);
+      chord->setTick(tick);
       chordRest = chord;
       chord->setTrack(gstaff * VOICES);
       chord->setStemDirection(dir);
@@ -266,11 +266,11 @@ void MuseData::readNote(Part* part, const QString& s)
             tuplet->add(chord);
             --ntuplet;
             }
-      TDuration d;
+      Duration d;
       d.setVal(ticks);
-      chord->setDurationType(d);
+      chord->setDuration(d);
 
-      Segment* segment = measure->getSegment(chord, tick);
+      Segment* segment = measure->getSegment(chord);
 
       voice = 0;
       for (; voice < VOICES; ++voice) {
@@ -282,7 +282,7 @@ void MuseData::readNote(Part* part, const QString& s)
                   }
             }
       if (voice == VOICES) {
-            qDebug("cannot allocate voice\n");
+            printf("cannot allocate voice\n");
             delete chord;
             return;
             }
@@ -290,6 +290,7 @@ void MuseData::readNote(Part* part, const QString& s)
       note->setPitch(pitch);
       note->setTpcFromPitch();
       note->setTrack(gstaff * VOICES + voice);
+      note->setTick(tick);
       chord->add(note);
 
       QString dynamics;
@@ -313,46 +314,44 @@ void MuseData::readNote(Part* part, const QString& s)
                   closeSlur(3, tick, staff, voice);
             else if (an[i] == '.') {
                   Articulation* atr = new Articulation(score);
-                  atr->setSubtype(Articulation_Staccato);
+                  atr->setSubtype(StaccatoSym);
                   chord->add(atr);
                   }
             else if (an[i] == '_') {
                   Articulation* atr = new Articulation(score);
-                  atr->setSubtype(Articulation_Tenuto);
+                  atr->setSubtype(TenutoSym);
                   chord->add(atr);
                   }
             else if (an[i] == 'v') {
                   Articulation* atr = new Articulation(score);
-                  atr->setSubtype(Articulation_Upbow);
+                  atr->setSubtype(UpbowSym);
                   chord->add(atr);
                   }
             else if (an[i] == 'n') {
                   Articulation* atr = new Articulation(score);
-                  atr->setSubtype(Articulation_Downbow);
+                  atr->setSubtype(DownbowSym);
                   chord->add(atr);
                   }
             else if (an[i] == 't') {
                   Articulation* atr = new Articulation(score);
-                  atr->setSubtype(Articulation_Trill);
+                  atr->setSubtype(TrillSym);
                   chord->add(atr);
                   }
             else if (an[i] == 'F') {
                   Articulation* atr = new Articulation(score);
-                  atr->setUp(true);
-                  atr->setSubtype(Articulation_Fermata);
+                  atr->setSubtype(UfermataSym);
                   chord->add(atr);
                   }
             else if (an[i] == 'E') {
                   Articulation* atr = new Articulation(score);
-                  atr->setUp(false);
-                  atr->setSubtype(Articulation_Fermata);
+                  atr->setSubtype(DfermataSym);
                   chord->add(atr);
                   }
             else if (an[i] == 'O') {
                   // Articulation* atr = new Articulation(score);
-                  // atr->setSubtype(Articulation_Downbow);
+                  // atr->setSubtype(DownbowSym);
                   // chord->add(atr);
-                  qDebug("%06d: open string '%c' not implemented\n", tick, an[i].toAscii());
+                  printf("%06d: open string '%c' not implemented\n", tick, an[i].toAscii());
                   }
             else if (an[i] == '&') {
                   // skip editorial level
@@ -378,15 +377,15 @@ void MuseData::readNote(Part* part, const QString& s)
             else if (an[i] == ' ')
                   ;
             else {
-                  qDebug("%06d: notation '%c' not implemented\n", tick, an[i].toAscii());
+                  printf("%06d: notation '%c' not implemented\n", tick, an[i].toAscii());
                   }
             }
       if (!dynamics.isEmpty()) {
             Dynamic* dyn = new Dynamic(score);
             dyn->setSubtype(dynamics);
             dyn->setTrack(gstaff * VOICES);
-            Segment* s = measure->getSegment(SegChordRest, tick);
-            s->add(dyn);
+            dyn->setTick(tick);
+            measure->add(dyn);
             }
 
       QString txt = s.mid(43, 36);
@@ -397,6 +396,7 @@ void MuseData::readNote(Part* part, const QString& s)
                   w = diacritical(w);
                   Lyrics* l = new Lyrics(score);
                   l->setText(w);
+                  l->setTick(tick);
                   l->setNo(no++);
                   l->setTrack(gstaff * VOICES);
                   Segment* segment = measure->tick2segment(tick);
@@ -440,7 +440,7 @@ QString MuseData::diacritical(QString s)
 void MuseData::readRest(Part* part, const QString& s)
       {
       int ticks = s.mid(5, 3).toInt();
-      ticks     = (ticks * MScore::division + _division/2) / _division;
+      ticks     = (ticks * AL::division + _division/2) / _division;
 
       int tick  = curTick;
       curTick  += ticks;
@@ -453,13 +453,12 @@ void MuseData::readRest(Part* part, const QString& s)
       Staff* staff = part->staff(staffIdx);
       int gstaff   = staff->idx();
 
-      TDuration d;
+      Duration d;
       d.setVal(ticks);
-      Rest* rest = new Rest(score, d);
-      rest->setDuration(d.fraction());
+      Rest* rest = new Rest(score, tick, d);
       chordRest  = rest;
       rest->setTrack(gstaff * VOICES);
-      Segment* segment = measure->getSegment(rest, tick);
+      Segment* segment = measure->getSegment(rest);
 
       voice = 0;
       for (; voice < VOICES; ++voice) {
@@ -471,7 +470,7 @@ void MuseData::readRest(Part* part, const QString& s)
                   }
             }
       if (voice == VOICES) {
-            qDebug("cannot allocate voice\n");
+            printf("cannot allocate voice\n");
             delete rest;
             return;
             }
@@ -484,7 +483,7 @@ void MuseData::readRest(Part* part, const QString& s)
 void MuseData::readBackup(const QString& s)
       {
       int ticks = s.mid(5, 3).toInt();
-      ticks     = (ticks * MScore::division + _division/2) / _division;
+      ticks     = (ticks * AL::division + _division/2) / _division;
       if (s[0] == 'b')
             curTick  -= ticks;
       else
@@ -502,20 +501,18 @@ Measure* MuseData::createMeasure()
                   continue;
             Measure* m = (Measure*)mb;
             int st = m->tick();
-            int l  = m->ticks();
+            int l  = m->tickLen();
             if (curTick == st)
                   return m;
             if (curTick > st && curTick < (st+l)) {
                   // irregular measure
-#if 0 // TODO
                   Fraction f = score->sigmap()->timesig(st).fraction();
                   score->sigmap()->add(st, curTick - st, f);
                   score->sigmap()->add(curTick, f);
-#endif
                   break;
                   }
             if (curTick < st + l) {
-                  qDebug("cannot create measure at %d\n", curTick);
+                  printf("cannot create measure at %d\n", curTick);
                   return 0;
                   }
             }
@@ -549,7 +546,7 @@ void MuseData::readPart(QStringList sl, Part* part)
                   break;
             }
       if (line >= sl.size()) {
-            qDebug(" $ not found in part\n");
+            printf(" $ not found in part\n");
             return;
             }
       curTick = 0;
@@ -561,7 +558,7 @@ void MuseData::readPart(QStringList sl, Part* part)
       measure = createMeasure();
       for (; line < sl.size(); ++line) {
             s = sl[line];
-// qDebug("%6d: <%s>\n", curTick, qPrintable(s));
+// printf("%6d: <%s>\n", curTick, qPrintable(s));
             char c = s[0].toAscii();
             switch(c) {
                   case 'A':
@@ -600,7 +597,7 @@ void MuseData::readPart(QStringList sl, Part* part)
                         musicalAttribute(s, part);
                         break;
                   default:
-                        qDebug("unknown record <%s>\n", qPrintable(s));
+                        printf("unknown record <%s>\n", qPrintable(s));
                         break;
                   }
             }
@@ -649,7 +646,7 @@ bool MuseData::read(const QString& name)
       {
       QFile fp(name);
       if (!fp.open(QIODevice::ReadOnly)) {
-            qDebug("cannot open file <%s>\n", qPrintable(name));
+            printf("cannot open file <%s>\n", qPrintable(name));
             return false;
             }
       QTextStream ts(&fp);
@@ -709,7 +706,7 @@ bool MuseData::read(const QString& name)
 void MuseData::convert()
       {
       for (int pn = 0; pn < parts.size(); ++pn) {
-            Part* part = (score->parts())[pn];
+            Part* part = (*score->parts())[pn];
             readPart(parts[pn], part);
             }
 #if 0
@@ -735,12 +732,15 @@ void MuseData::convert()
 //    return true on success
 //---------------------------------------------------------
 
-bool MuseScore::importMuseData(Score* score, const QString& name)
+bool Score::importMuseData(const QString& name)
       {
-      MuseData md(score);
+      MuseData md(this);
       if (!md.read(name))
             return false;
       md.convert();
+
+      _saved = false;
+      _created = true;
       return true;
       }
 

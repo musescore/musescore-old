@@ -32,6 +32,7 @@ QT4_WRAP_CPP (mocs
       mslider.h
       pitchedit.h
       pitchlabel.h
+#      posedit.h
       poslabel.h
       denomspinbox.h
       )
@@ -57,11 +58,11 @@ add_library (
       utils.cpp
       denomspinbox.cpp
       )
-set_target_properties (
-      awl
-      PROPERTIES
-         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
-      )
+
+set_target_properties( awl
+   PROPERTIES COMPILE_FLAGS
+      "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
+   )
 
 ADD_DEPENDENCIES(awl mops1)
 ADD_DEPENDENCIES(awl mops2)
@@ -81,12 +82,12 @@ QT4_WRAP_CPP (mocs2
       denomspinbox.h
       pitchedit.h
       pitchlabel.h
-      awlplugin.h
       )
 
 add_library (
       awlplugin SHARED
       ${PROJECT_BINARY_DIR}/all.h
+      ${PCH}
       ${mocs2}
       awlplugin.cpp
       aslider.cpp
@@ -106,19 +107,16 @@ add_library (
 
 ##  "-D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_SHARED -DQT_NO_DEBUG -include ${PROJECT_SOURCE_DIR}/all.h"
 
-#
-# we cannot use our precompiled headers because of -fPIC
-#
-set_target_properties(awlplugin
+set_target_properties( awlplugin
       PROPERTIES
-      COMPILE_FLAGS
-         "-fPIC -D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_SHARED -DQT_NO_DEBUG -include ${PROJECT_SOURCE_DIR}/all.h"
+         COMPILE_FLAGS
+            "-D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_SHARED -DQT_NO_DEBUG -include ${PROJECT_SOURCE_DIR}/all.h"
       )
 
 install( TARGETS awlplugin DESTINATION ${QT_PLUGINS_DIR}/designer/ )
 
-#add_executable(ltest ltest.cpp)
-#target_link_libraries (ltest awlplugin msynth al ${QT_LIBRARIES})
+add_executable(ltest ltest.cpp)
+target_link_libraries (ltest awlplugin ${QT_LIBRARIES})
 
 
 endif (NOT MINGW AND NOT APPLE)

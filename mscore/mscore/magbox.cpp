@@ -20,10 +20,9 @@
 
 #include "magbox.h"
 #include "scoreview.h"
-#include "libmscore/page.h"
-#include "musescore.h"
-#include "libmscore/score.h"
-#include "libmscore/mscore.h"
+#include "page.h"
+#include "mscore.h"
+#include "score.h"
 
 static unsigned int startMag = MAG_100;
 
@@ -50,8 +49,8 @@ MagBox::MagBox(QWidget* parent)
       freeMag = 1.0;
       setEditable(true);
       setInsertPolicy(QComboBox::InsertAtBottom);
-      setToolTip(tr("Zoom"));
-      setWhatsThis(tr("Zoom"));
+      setToolTip(tr("Magnification"));
+      setWhatsThis(tr("Zoom Canvas"));
       setValidator(new MagValidator(this));
 
       unsigned int n = sizeof(magTable)/sizeof(*magTable) - 1;
@@ -100,22 +99,22 @@ double MagBox::getMag(ScoreView* canvas)
       Score* score   = canvas->score();
       if (score == 0)
             return 1.0;
-      const PageFormat* pf = score->pageFormat();
+      PageFormat* pf = score->pageFormat();
       switch(currentIndex()) {
             case MAG_PAGE_WIDTH:      // page width
-                  nmag *= cw / (pf->width() * MScore::DPI);
+                  nmag *= cw / (pf->width() * DPI);
                   break;
             case MAG_PAGE:     // page
                   {
-                  double mag1 = cw  / (pf->width() * MScore::DPI);
-                  double mag2 = ch / (pf->height() * MScore::DPI);
+                  double mag1 = cw  / (pf->width() * DPI);
+                  double mag2 = ch / (pf->height() * DPI);
                   nmag  *= (mag1 > mag2) ? mag2 : mag1;
                   }
                   break;
             case MAG_DBL_PAGE:    // double page
                   {
-                  double mag1 = cw / (pf->width()*2*MScore::DPI+50.0);
-                  double mag2 = ch / (pf->height() * MScore::DPI);
+                  double mag1 = cw / (pf->width()*2*DPI+50.0);
+                  double mag2 = ch / (pf->height() * DPI);
                   nmag  *= (mag1 > mag2) ? mag2 : mag1;
                   }
                   break;

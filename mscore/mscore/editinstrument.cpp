@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "editinstrument.h"
-#include "libmscore/instrtemplate.h"
+#include "instrtemplate.h"
 
 //---------------------------------------------------------
 //   EditInstrument
@@ -67,7 +67,7 @@ EditInstrument::~EditInstrument()
 
 void EditInstrument::on_buttonCancel_pressed()
       {
-//      qDebug("cancel\n");
+//      printf("cancel\n");
       }
 
 //---------------------------------------------------------

@@ -23,31 +23,29 @@
 
 namespace Awl {
 
-//---------------------------------------------------------
-//   ColorLabel
-//---------------------------------------------------------
+      //---------------------------------------------------------
+      //   ColorLabel
+      //---------------------------------------------------------
 
-class ColorLabel : public QFrame {
-      Q_OBJECT
-      QColor _color;
-      QPixmap* _pixmap;
+      class ColorLabel : public QFrame {
+            Q_OBJECT
+            QColor _color;
 
-      virtual void paintEvent(QPaintEvent*);
-      virtual void mousePressEvent(QMouseEvent*);
+            virtual void paintEvent(QPaintEvent*);
+            virtual void mousePressEvent(QMouseEvent*);
 
-   signals:
-      void colorChanged(QColor);
+         signals:
+            void colorChanged(QColor);
 
-   public:
-      ColorLabel(QWidget* parent = 0);
-      ~ColorLabel();
-      void setColor(const QColor& c);
-      virtual QSize sizeHint() const;
-      void setPixmap(QPixmap*);
-      QColor color() const     { return _color; }
-      QPixmap* pixmap() const  { return _pixmap;  }
-      };
+         public:
+            ColorLabel(QWidget* parent = 0) : QFrame (parent) {
+                  _color = Qt::blue;
+                  }
+            void setColor(const QColor& c) { _color = c; update(); }
+            QColor color() const           { return _color; }
+            virtual QSize sizeHint() const { return QSize(50, 20); }
+            };
 
-}  // namespace Awl
+      }  // namespace Awl
 #endif
 

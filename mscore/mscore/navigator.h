@@ -23,81 +23,42 @@
 
 class Score;
 class ScoreView;
-class Page;
-class Navigator;
-
-//---------------------------------------------------------
-//   NScrollArea
-//    modified QScrollArea for Navigator
-//---------------------------------------------------------
-
-class NScrollArea : public QScrollArea {
-      Q_OBJECT
-
-      virtual void resizeEvent(QResizeEvent*);
-
-   public:
-      NScrollArea(QWidget* w = 0);
-      };
-
-//---------------------------------------------------------
-//   PageCache
-//---------------------------------------------------------
-
-struct PageCache {
-      bool valid;
-      Page* page;
-      QImage pm;
-      QTransform matrix;
-      Navigator* navigator;
-      };
 
 //---------------------------------------------------------
 //   Navigator
 //---------------------------------------------------------
 
-class Navigator : public QWidget {
+class Navigator : public QFrame {
       Q_OBJECT
 
       Score* _score;
-      NScrollArea* scrollArea;
       QPointer<ScoreView> _cv;
 
       QRect viewRect;
       QPoint startMove;
-      QList<PageCache> pcl;
-      QList<PageCache*> npcl;
+      bool moving;
+      QPixmap pm;
+      bool redraw;
       QTransform matrix;
-
-      QFuture<void> updatePixmap;
-      QFutureWatcher<void> watcher;
-      bool recreatePixmap;
-
-      int cachedWidth;
-
-      void rescale();
 
       virtual void paintEvent(QPaintEvent*);
       virtual void mousePressEvent(QMouseEvent*);
       virtual void mouseMoveEvent(QMouseEvent*);
+      virtual void mouseReleaseEvent(QMouseEvent*);
       virtual void resizeEvent(QResizeEvent*);
-
-   private slots:
-      void pmFinished();
 
    public slots:
       void updateViewRect();
-      void layoutChanged();
+      void updateLayout();
 
    signals:
       void viewRectMoved(const QRectF&);
 
    public:
-      Navigator(NScrollArea* sa, QWidget* parent = 0);
-      void setScoreView(ScoreView*);
-      void setScore(Score*);
-      Score* score() const { return _score; }
+      Navigator(QWidget* parent = 0);
+      void setScore(ScoreView*);
       void setViewRect(const QRectF& r);
+      void layoutChanged();
       };
 
 #endif

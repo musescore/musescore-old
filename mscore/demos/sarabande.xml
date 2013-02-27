@@ -2,8 +2,8 @@
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 1.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise>
   <work>
-    <work-number>Sarabande</work-number>
     <work-title>Solo Cello Suite II</work-title>
+    <work-number>Sarabande</work-number>
     </work>
   <identification>
     <creator type="composer">Johann Sebastian Bach (1685-1750)</creator>
@@ -313,11 +313,11 @@
           <alter>1</alter>
           <octave>3</octave>
           </pitch>
+        <accidental>sharp</accidental>
         <duration>720</duration>
         <voice>1</voice>
         <type>quarter</type>
         <dot/>
-        <accidental>sharp</accidental>
         <stem>up</stem>
         <notations>
           <ornaments>
@@ -330,10 +330,10 @@
           <step>B</step>
           <octave>2</octave>
           </pitch>
+        <accidental>natural</accidental>
         <duration>240</duration>
         <voice>1</voice>
         <type>eighth</type>
-        <accidental>natural</accidental>
         <stem>up</stem>
         <beam number="1">begin</beam>
         </note>
@@ -1128,10 +1128,10 @@
           <alter>-1</alter>
           <octave>3</octave>
           </pitch>
+        <accidental>flat</accidental>
         <duration>240</duration>
         <voice>2</voice>
         <type>eighth</type>
-        <accidental>flat</accidental>
         <stem>down</stem>
         <beam number="1">end</beam>
         </note>
@@ -1195,11 +1195,11 @@
           <alter>1</alter>
           <octave>3</octave>
           </pitch>
+        <accidental>sharp</accidental>
         <duration>360</duration>
         <voice>1</voice>
         <type>eighth</type>
         <dot/>
-        <accidental>sharp</accidental>
         <stem>down</stem>
         <beam number="1">begin</beam>
         <notations>
@@ -1214,10 +1214,10 @@
           <alter>-1</alter>
           <octave>3</octave>
           </pitch>
+        <accidental>flat</accidental>
         <duration>120</duration>
         <voice>1</voice>
         <type>16th</type>
-        <accidental>flat</accidental>
         <stem>down</stem>
         <beam number="1">end</beam>
         </note>
@@ -1301,10 +1301,10 @@
           <alter>1</alter>
           <octave>3</octave>
           </pitch>
+        <accidental>sharp</accidental>
         <duration>240</duration>
         <voice>1</voice>
         <type>eighth</type>
-        <accidental>sharp</accidental>
         <stem>up</stem>
         <beam number="1">end</beam>
         </note>
@@ -1314,10 +1314,10 @@
           <alter>-1</alter>
           <octave>4</octave>
           </pitch>
+        <accidental>flat</accidental>
         <duration>240</duration>
         <voice>1</voice>
         <type>eighth</type>
-        <accidental>flat</accidental>
         <stem>down</stem>
         <beam number="1">begin</beam>
         </note>
@@ -1402,10 +1402,10 @@
           <step>F</step>
           <octave>3</octave>
           </pitch>
+        <accidental>natural</accidental>
         <duration>240</duration>
         <voice>1</voice>
         <type>eighth</type>
-        <accidental>natural</accidental>
         <stem>down</stem>
         <beam number="1">end</beam>
         </note>
@@ -1497,10 +1497,10 @@
           <alter>-1</alter>
           <octave>2</octave>
           </pitch>
+        <accidental>flat</accidental>
         <duration>240</duration>
         <voice>1</voice>
         <type>eighth</type>
-        <accidental>flat</accidental>
         <stem>up</stem>
         <beam number="1">continue</beam>
         </note>
@@ -1521,10 +1521,10 @@
           <alter>-1</alter>
           <octave>3</octave>
           </pitch>
+        <accidental>flat</accidental>
         <duration>240</duration>
         <voice>1</voice>
         <type>eighth</type>
-        <accidental>flat</accidental>
         <stem>up</stem>
         <beam number="1">continue</beam>
         </note>
@@ -1558,10 +1558,10 @@
           <alter>1</alter>
           <octave>3</octave>
           </pitch>
+        <accidental>sharp</accidental>
         <duration>240</duration>
         <voice>1</voice>
         <type>eighth</type>
-        <accidental>sharp</accidental>
         <stem>down</stem>
         <beam number="1">begin</beam>
         </note>
@@ -1615,10 +1615,10 @@
           <step>E</step>
           <octave>3</octave>
           </pitch>
+        <accidental>natural</accidental>
         <duration>240</duration>
         <voice>1</voice>
         <type>eighth</type>
-        <accidental>natural</accidental>
         <stem>down</stem>
         <beam number="1">begin</beam>
         </note>
@@ -1652,10 +1652,10 @@
           <alter>1</alter>
           <octave>3</octave>
           </pitch>
+        <accidental>sharp</accidental>
         <duration>240</duration>
         <voice>1</voice>
         <type>eighth</type>
-        <accidental>sharp</accidental>
         <stem>down</stem>
         <beam number="1">begin</beam>
         </note>
@@ -1936,11 +1936,11 @@
           <alter>1</alter>
           <octave>2</octave>
           </pitch>
+        <accidental>sharp</accidental>
         <duration>720</duration>
         <voice>2</voice>
         <type>quarter</type>
         <dot/>
-        <accidental>sharp</accidental>
         <stem>down</stem>
         </note>
       <note>
@@ -1978,10 +1978,10 @@
           <alter>1</alter>
           <octave>4</octave>
           </pitch>
+        <accidental>sharp</accidental>
         <duration>120</duration>
         <voice>1</voice>
         <type>16th</type>
-        <accidental>sharp</accidental>
         <stem>up</stem>
         <beam number="1">continue</beam>
         </note>
@@ -2193,10 +2193,10 @@
           <step>B</step>
           <octave>2</octave>
           </pitch>
+        <accidental>natural</accidental>
         <duration>120</duration>
         <voice>1</voice>
         <type>16th</type>
-        <accidental>natural</accidental>
         <stem>up</stem>
         <beam number="1">continue</beam>
         </note>
@@ -2206,10 +2206,10 @@
           <alter>1</alter>
           <octave>3</octave>
           </pitch>
+        <accidental>sharp</accidental>
         <duration>120</duration>
         <voice>1</voice>
         <type>16th</type>
-        <accidental>sharp</accidental>
         <stem>up</stem>
         <beam number="1">end</beam>
         </note>
@@ -2281,10 +2281,10 @@
           <step>B</step>
           <octave>3</octave>
           </pitch>
+        <accidental>natural</accidental>
         <duration>120</duration>
         <voice>1</voice>
         <type>16th</type>
-        <accidental>natural</accidental>
         <stem>up</stem>
         <beam number="1">continue</beam>
         </note>
@@ -2371,11 +2371,11 @@
           <alter>1</alter>
           <octave>3</octave>
           </pitch>
+        <accidental>sharp</accidental>
         <duration>720</duration>
         <voice>2</voice>
         <type>quarter</type>
         <dot/>
-        <accidental>sharp</accidental>
         <stem>down</stem>
         </note>
       <forward>
@@ -2388,10 +2388,10 @@
           <step>B</step>
           <octave>3</octave>
           </pitch>
+        <accidental>natural</accidental>
         <duration>120</duration>
         <voice>1</voice>
         <type>16th</type>
-        <accidental>natural</accidental>
         <stem>up</stem>
         <beam number="1">begin</beam>
         </note>
@@ -2401,10 +2401,10 @@
           <alter>1</alter>
           <octave>4</octave>
           </pitch>
+        <accidental>sharp</accidental>
         <duration>120</duration>
         <voice>1</voice>
         <type>16th</type>
-        <accidental>sharp</accidental>
         <stem>up</stem>
         <beam number="1">continue</beam>
         </note>
@@ -2500,11 +2500,11 @@
           <alter>1</alter>
           <octave>3</octave>
           </pitch>
+        <accidental>sharp</accidental>
         <duration>720</duration>
         <voice>2</voice>
         <type>quarter</type>
         <dot/>
-        <accidental>sharp</accidental>
         <stem>down</stem>
         </note>
       <forward>
@@ -2532,10 +2532,10 @@
           <alter>1</alter>
           <octave>4</octave>
           </pitch>
+        <accidental>sharp</accidental>
         <duration>120</duration>
         <voice>1</voice>
         <type>16th</type>
-        <accidental>sharp</accidental>
         <stem>up</stem>
         <beam number="1">continue</beam>
         </note>

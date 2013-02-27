@@ -1,36 +1,41 @@
 //=============================================================================
 //  MuseScore
-//  Music Composition & Notation
+//  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2008-2011 Werner Schweer
+//  Copyright (C) 2008 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License version 2
-//  as published by the Free Software Foundation and appearing in
-//  the file LICENCE.GPL
+//  it under the terms of the GNU General Public License version 2.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program; if not, write to the Free Software
+//  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
 #include "bb.h"
-#include "musescore.h"
-#include "libmscore/score.h"
-#include "libmscore/part.h"
-#include "libmscore/staff.h"
-#include "libmscore/text.h"
-#include "libmscore/box.h"
-#include "libmscore/slur.h"
-#include "libmscore/note.h"
-#include "libmscore/chord.h"
-#include "libmscore/rest.h"
-#include "libmscore/drumset.h"
-#include "libmscore/utils.h"
-#include "libmscore/harmony.h"
-#include "libmscore/layoutbreak.h"
-#include "libmscore/key.h"
-#include "libmscore/pitchspelling.h"
-#include "libmscore/measure.h"
-#include "libmscore/segment.h"
-#include "libmscore/keysig.h"
+#include "score.h"
+#include "part.h"
+#include "staff.h"
+#include "text.h"
+#include "box.h"
+#include "slur.h"
+#include "note.h"
+#include "chord.h"
+#include "rest.h"
+#include "drumset.h"
+#include "utils.h"
+#include "harmony.h"
+#include "layoutbreak.h"
+#include "key.h"
+#include "pitchspelling.h"
+#include "measure.h"
+#include "keysig.h"
 
 //---------------------------------------------------------
 //   BBTrack
@@ -53,11 +58,11 @@ BBTrack::~BBTrack()
 //---------------------------------------------------------
 
 struct MNote {
-	Event mc;
+	Event* mc;
       QList<Tie*> ties;
 
-      MNote(const Event& _mc) : mc(_mc) {
-            for (int i = 0; i < mc.notes().size(); ++i)
+      MNote(Event* _mc) : mc(_mc) {
+            for (int i = 0; i < mc->notes().size(); ++i)
                   ties.append(0);
             }
       };
@@ -112,11 +117,11 @@ bool BBFile::read(const QString& name)
             case 0x43 ... 0x49:
                   break;
             default:
-                  qDebug("BB: unknown file version %02x\n", _version);
+                  printf("BB: unknown file version %02x\n", _version);
                   return false;
             }
 
-      qDebug("read <%s> version 0x%02x\n", qPrintable(name), _version);
+      printf("read <%s> version 0x%02x\n", qPrintable(name), _version);
 
       //---------------------------------------------------
       //    read title
@@ -136,7 +141,7 @@ bool BBFile::read(const QString& name)
       ++idx;
       _style = a[idx++] - 1;
       if (_style < 0 || _style >= int(sizeof(styles)/sizeof(*styles))) {
-            qDebug("Import bb: unknown style %d\n", _style + 1);
+            printf("Import bb: unknown style %d\n", _style + 1);
             return false;
             }
       _key = a[idx++];
@@ -149,7 +154,7 @@ bool BBFile::read(const QString& name)
                 -3, 4,  -1, -6,  1, -4,  3, -2,  5,  0, -5,  2,  4,  6,  3,  5, 7
            };
       if (_key >= int (sizeof(kt)/sizeof(*kt))) {
-            qDebug("bad key %d\n", _key);
+            printf("bad key %d\n", _key);
             return false;
             }
       _key = kt[_key];
@@ -157,11 +162,11 @@ bool BBFile::read(const QString& name)
       _bpm = a[idx] + (a[idx+1] << 8);
       idx += 2;
 
-      qDebug("Title <%s>\n", _title);
-      qDebug("style %d\n",   _style);
-      qDebug("key   %d\n",   _key);
-      qDebug("sig   %d/%d\n", timesigZ(), timesigN());
-      qDebug("bpm   %d\n", _bpm);
+      printf("Title <%s>\n", _title);
+      printf("style %d\n",   _style);
+      printf("key   %d\n",   _key);
+      printf("sig   %d/%d\n", timesigZ(), timesigN());
+      printf("bpm   %d\n", _bpm);
 
       //---------------------------------------------------
       //    read bar types
@@ -173,7 +178,7 @@ bool BBFile::read(const QString& name)
             if (val == 0)
                   bar += a[idx++];
             else {
-                  qDebug("bar type: bar %d val %d\n", bar, val);
+                  printf("bar type: bar %d val %d\n", bar, val);
                   _barType[bar++] = val;
                   }
             }
@@ -213,7 +218,7 @@ bool BBFile::read(const QString& name)
                         bass = 0;
                   int ibeat = beat + timesigZ() * 4 / timesigN();
                   if (ibeat != _chords[roots].beat) {
-                        qDebug("import bb: inconsistent chord type and root beat\n");
+                        printf("import bb: inconsistent chord type and root beat\n");
                         return false;
                         }
                   _chords[roots].root = root;
@@ -228,22 +233,22 @@ bool BBFile::read(const QString& name)
       _measures = ((maxbeat + timesigZ() - 1) / timesigZ()) + 1;
 
       if (roots != _chords.size()) {
-            qDebug("import bb: roots %d != extensions %d\n", roots, _chords.size());
+            printf("import bb: roots %d != extensions %d\n", roots, _chords.size());
             return false;
             }
-      qDebug("Measures %d\n", _measures);
+      printf("Measures %d\n", _measures);
 
 #if 0
-      qDebug("================chords=======================\n");
+      printf("================chords=======================\n");
       foreach(BBChord c, _chords) {
-            qDebug("chord beat %3d bass %d root %d extension %d\n",
+            printf("chord beat %3d bass %d root %d extension %d\n",
                c.beat, c.bass, c.root, c.extension);
             }
-      qDebug("================chords=======================\n");
+      printf("================chords=======================\n");
 #endif
 
       if (a[idx] == 1) {            //??
-            qDebug("Skip 0x%02x at 0x%04x\n", a[idx], idx);
+            printf("Skip 0x%02x at 0x%04x\n", a[idx], idx);
             ++idx;
             }
 
@@ -251,7 +256,7 @@ bool BBFile::read(const QString& name)
       _endChorus   = a[idx++];
       _repeats     = a[idx++];
 
-      qDebug("start chorus %d  end chorus %d repeats %d, pos now 0x%x\n",
+      printf("start chorus %d  end chorus %d repeats %d, pos now 0x%x\n",
          _startChorus, _endChorus, _repeats, idx);
 
       if (_startChorus >= _endChorus) {
@@ -282,11 +287,11 @@ bool BBFile::read(const QString& name)
                   }
             }
       if (!found) {
-            qDebug("import bb: style file not found\n");
+            printf("import bb: style file not found\n");
             return false;
             }
 
-      qDebug("read styleName at 0x%x\n", idx);
+      printf("read styleName at 0x%x\n", idx);
       len = a[idx++];
       _styleName = new char[len+1];
 
@@ -294,7 +299,7 @@ bool BBFile::read(const QString& name)
             _styleName[i] = a[idx++];
       _styleName[len] = 0;
 
-      qDebug("style name <%s>\n", _styleName);
+      printf("style name <%s>\n", _styleName);
 
       // read midi events
       int eventStart = a[size-4] + a[size-3] * 256;
@@ -303,12 +308,12 @@ bool BBFile::read(const QString& name)
       int endTick = _measures * bbDivision * 4 * timesigZ() / timesigN();
 
       if (eventCount == 0) {
-            qDebug("no melody\n");
+            printf("no melody\n");
             return true;
             }
       else {
             idx = eventStart;
-            qDebug("melody found at 0x%x\n", idx);
+            printf("melody found at 0x%x\n", idx);
             int i = 0;
             int lastLen = 0;
             for (i = 0; i < eventCount; ++i, idx+=12) {
@@ -330,24 +335,25 @@ bool BBFile::read(const QString& name)
                         int tick = a[idx] + (a[idx+1]<<8) + (a[idx+2]<<16) + (a[idx+3]<<24);
                         tick -= 4 * bbDivision;
                         if (tick >= endTick) {
-                              qDebug("event tick %d > %d\n", tick, endTick);
+                              printf("event tick %d > %d\n", tick, endTick);
                               continue;
                               }
-                        Event note(ME_NOTE);
-                        note.setOntime((tick * MScore::division) / bbDivision);
-                        note.setPitch(a[idx + 5]);
-                        note.setVelo(a[idx + 6]);
-                        note.setChannel(channel);
+                        Event* note = new Event(ME_NOTE);
+                        note->setOntime((tick * AL::division) / bbDivision);
+                        note->setPitch(a[idx + 5]);
+                        note->setVelo(a[idx + 6]);
+                        note->setChannel(channel);
                         int len = a[idx+8] + (a[idx+9]<<8) + (a[idx+10]<<16) + (a[idx+11]<<24);
                         if (len == 0) {
                               if (lastLen == 0) {
-                                    qDebug("note event of len 0 at idx %04x\n", idx);
+                                    printf("note event of len 0 at idx %04x\n", idx);
+                                    delete note;
                                     continue;
                                     }
                               len = lastLen;
                               }
                         lastLen = len;
-                        note.setDuration((len * MScore::division) / bbDivision);
+                        note->setDuration((len * AL::division) / bbDivision);
                         track->append(note);
                         }
                   else if (type == 0xb0) {
@@ -356,11 +362,11 @@ bool BBFile::read(const QString& name)
                   else if (type == 0)
                         break;
                   else {
-                        qDebug("unknown event type 0x%02x at x%04x\n", a[idx + 4], idx);
+                        printf("unknown event type 0x%02x at x%04x\n", a[idx + 4], idx);
                         break;
                         }
                   }
-            qDebug("Events found x%02x (%d)\n", i, i);
+            printf("Events found x%02x (%d)\n", i, i);
             }
       return true;
       }
@@ -370,25 +376,24 @@ bool BBFile::read(const QString& name)
 //    return true on success
 //---------------------------------------------------------
 
-bool MuseScore::importBB(Score* score, const QString& name)
+bool Score::importBB(const QString& name)
       {
       BBFile bb;
       if (!bb.read(name)) {
-            qDebug("cannot open file <%s>\n", qPrintable(name));
+            printf("cannot open file <%s>\n", qPrintable(name));
             return false;
             }
-      *(score->sigmap()) = bb.siglist();
 
       QList<BBTrack*>* tracks = bb.tracks();
       int ntracks = tracks->size();
       if (ntracks == 0)             // no events?
             ntracks = 1;
       for (int i = 0; i < ntracks; ++i) {
-            Part* part = new Part(score);
-            Staff* s   = new Staff(score, part, 0);
+            Part* part = new Part(this);
+            Staff* s   = new Staff(this, part, 0);
             part->insertStaff(s);
-            score->staves().append(s);
-            score->appendPart(part);
+            _staves.push_back(s);
+            _parts.push_back(part);
             }
 
       //---------------------------------------------------
@@ -396,13 +401,10 @@ bool MuseScore::importBB(Score* score, const QString& name)
       //---------------------------------------------------
 
       for (int i = 0; i < bb.measures(); ++i) {
-            Measure* measure  = new Measure(score);
-            int tick = score->sigmap()->bar2tick(i, 0);
+            Measure* measure  = new Measure(this);
+            int tick = sigmap()->bar2tick(i, 0, 0);
             measure->setTick(tick);
-            Fraction ts = score->sigmap()->timesig(tick).timesig();
-            measure->setTimesig(ts);
-            measure->setLen(ts);
-      	score->add(measure);
+      	add(measure);
             }
 
       //---------------------------------------------------
@@ -413,54 +415,53 @@ bool MuseScore::importBB(Score* score, const QString& name)
             track->cleanup();
 
       if (tracks->isEmpty()) {
-            for (MeasureBase* mb = score->first(); mb; mb = mb->next()) {
+            for (MeasureBase* mb = first(); mb; mb = mb->next()) {
                   if (mb->type() != MEASURE)
                         continue;
                   Measure* measure = (Measure*)mb;
-                  Rest* rest = new Rest(score, TDuration(TDuration::V_MEASURE));
-                  rest->setDuration(measure->len());
+                  Rest* rest = new Rest(this, measure->tick(), Duration(Duration::V_MEASURE));
                   rest->setTrack(0);
-                  Segment* s = measure->getSegment(rest, measure->tick());
+                  Segment* s = measure->getSegment(rest);
                   s->add(rest);
                   }
             }
       else {
       	int staffIdx = 0;
 	      foreach (BBTrack* track, *tracks)
-                  bb.convertTrack(score, track, staffIdx++);
+                  convertTrack(track, staffIdx++);
             }
 
-      for (MeasureBase* mb = score->first(); mb; mb = mb->next()) {
+      
+      for (MeasureBase* mb = first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
             Measure* measure = (Measure*)mb;
             Segment* s = measure->findSegment(SegChordRest, measure->tick());
-            if (s == 0) {
-                  Rest* rest = new Rest(score, TDuration(TDuration::V_MEASURE));
-                  rest->setDuration(measure->len());
+            if (s == 0) {  
+                  Rest* rest = new Rest(this, measure->tick(), Duration(Duration::V_MEASURE));
                   rest->setTrack(0);
-                  Segment* s = measure->getSegment(rest, measure->tick());
+                  s = measure->getSegment(rest);
                   s->add(rest);
                   }
             }
 
-      score->spell();
+      spell();
 
       //---------------------------------------------------
       //    create title
       //---------------------------------------------------
 
-      Text* text = new Text(score);
-//      text->setSubtype(TEXT_TITLE);
-      text->setTextStyleType(TEXT_STYLE_TITLE);
+      Text* text = new Text(this);
+      text->setSubtype(TEXT_TITLE);
+      text->setTextStyle(TEXT_STYLE_TITLE);
       text->setText(bb.title());
 
-      MeasureBase* measure = score->first();
+      MeasureBase* measure = first();
       if (measure->type() != VBOX) {
-            measure = new VBox(score);
+            measure = new VBox(this);
             measure->setTick(0);
-            measure->setNext(score->first());
-            score->add(measure);
+            measure->setNext(first());
+            add(measure);
             }
       measure->add(text);
 
@@ -471,16 +472,16 @@ bool MuseScore::importBB(Score* score, const QString& name)
       static const int table[] = {
             14, 9, 16, 11, 18, 13, 8, 15, 10, 17, 12, 19
             };
-      foreach(const BBChord& c, bb.chords()) {
-            int tick = c.beat * MScore::division;
-// qDebug("CHORD %d %d\n", c.beat, tick);
-            Measure* m = score->tick2measure(tick);
+      const QList<BBChord> cl = bb.chords();
+      foreach(BBChord c, cl) {
+            int tick = c.beat * AL::division;
+            Measure* m = tick2measure(tick);
             if (m == 0) {
-                  qDebug("import BB: measure for tick %d not found\n", tick);
+                  printf("import BB: measure for tick %d not found\n", tick);
                   continue;
                   }
-            Segment* s = m->getSegment(SegChordRest, tick);
-            Harmony* h = new Harmony(score);
+            Harmony* h = new Harmony(this);
+            h->setTick(tick);
             h->setTrack(0);
             h->setRootTpc(table[c.root-1]);
             if (c.bass > 0)
@@ -489,7 +490,7 @@ bool MuseScore::importBB(Score* score, const QString& name)
                   h->setBaseTpc(INVALID_TPC);
             h->setId(c.extension);
             h->render();
-            s->add(h);
+            m->add(h);
             }
 
       //---------------------------------------------------
@@ -501,12 +502,12 @@ bool MuseScore::importBB(Score* score, const QString& name)
       int endChorus   = bb.endChorus() - 1;
 
       int n = 0;
-      for (MeasureBase* mb = score->first(); mb; mb = mb->next()) {
+      for (MeasureBase* mb = first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
             Measure* measure = (Measure*)mb;
             if (n && (n % 4) == 0) {
-                  LayoutBreak* lb = new LayoutBreak(score);
+                  LayoutBreak* lb = new LayoutBreak(this);
                   lb->setSubtype(LAYOUT_BREAK_LINE);
                   measure->add(lb);
                   }
@@ -519,18 +520,22 @@ bool MuseScore::importBB(Score* score, const QString& name)
             ++n;
             }
 
-      foreach(Staff* staff, score->staves()) {
+      foreach(Staff* staff, _staves) {
             int tick = 0;
             KeySigEvent kse;
             kse.setAccidentalType(bb.key());
             (*staff->keymap())[tick] = kse;
-            KeySig* keysig = new KeySig(score);
-            keysig->setTrack((score->staffIdx(staff->part()) + staff->rstaff()) * VOICES);
-            keysig->setKeySigEvent(kse);
-            Measure* mks = score->tick2measure(tick);
-            Segment* sks = mks->getSegment(keysig, tick);
+            KeySig* keysig = new KeySig(this);
+            keysig->setTick(tick);
+            keysig->setTrack((staffIdx(staff->part()) + staff->rstaff()) * VOICES);
+            keysig->setSubtype(kse);
+            Measure* mks = tick2measure(tick);
+            Segment* sks = mks->getSegment(keysig);
             sks->add(keysig);
             }
+
+      _saved   = false;
+      _created = true;
       return true;
       }
 
@@ -538,56 +543,58 @@ bool MuseScore::importBB(Score* score, const QString& name)
 //   processPendingNotes
 //---------------------------------------------------------
 
-int BBFile::processPendingNotes(Score* score, QList<MNote*>* notes, int len, int track)
+int Score::processPendingNotes(QList<MNote*>* notes, int len, int track)
       {
-      Staff* cstaff    = score->staff(track/VOICES);
-      Drumset* drumset = cstaff->part()->instr()->drumset();
-      bool useDrumset  = cstaff->part()->instr()->useDrumset();
-      int tick         = notes->at(0)->mc.ontime();
+      Staff* cstaff    = staff(track/VOICES);
+      Drumset* drumset = cstaff->part()->drumset();
+      bool useDrumset  = cstaff->part()->useDrumset();
+      int tick         = notes->at(0)->mc->ontime();
 
       //
       // look for len of shortest note
       //
       foreach (const MNote* n, *notes) {
-      	if (n->mc.duration() < len)
-                  len = n->mc.duration();
+      	if (n->mc->duration() < len)
+                  len = n->mc->duration();
             }
 
       //
       // split notes on measure boundary
       //
-      Measure* measure = score->tick2measure(tick);
-      if (measure == 0 || (tick >= (measure->tick() + measure->ticks()))) {
-            qDebug("no measure found for tick %d\n", tick);
+      Measure* measure = tick2measure(tick);
+      if (measure == 0 || (tick >= (measure->tick() + measure->tickLen()))) {
+            printf("no measure found for tick %d\n", tick);
             notes->clear();
             return len;
             }
-      if ((tick + len) > measure->tick() + measure->ticks())
-            len = measure->tick() + measure->ticks() - tick;
+      if ((tick + len) > measure->tick() + measure->tickLen())
+            len = measure->tick() + measure->tickLen() - tick;
 
-      Chord* chord = new Chord(score);
+      Chord* chord = new Chord(this);
+      chord->setTick(tick);
       chord->setTrack(track);
-      TDuration d;
+      Duration d;
       d.setVal(len);
-      chord->setDurationType(d);
-      Segment* s = measure->getSegment(chord, tick);
+      chord->setDuration(d);
+      Segment* s = measure->getSegment(chord);
       s->add(chord);
 
       foreach (MNote* n, *notes) {
-            QList<Event>& nl = n->mc.notes();
+            QList<Event*>& nl = n->mc->notes();
             for (int i = 0; i < nl.size(); ++i) {
-                  const Event& mn = nl[i];
-      		Note* note = new Note(score);
-                  note->setPitch(mn.pitch(), mn.tpc());
+                  Event* mn = nl[i];
+      		Note* note = new Note(this);
+                  note->setPitch(mn->pitch(), mn->tpc());
       		note->setTrack(track);
             	chord->add(note);
+                  note->setTick(tick);
 
                   if (useDrumset) {
-                        if (!drumset->isValid(mn.pitch())) {
-                              qDebug("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
+                        if (!drumset->isValid(mn->pitch())) {
+                              printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                               }
                         else {
-                              chord->setStemDirection(drumset->stemDirection(mn.pitch()));
+                              chord->setStemDirection(drumset->stemDirection(mn->pitch()));
                               }
                         }
                   if (n->ties[i]) {
@@ -596,19 +603,19 @@ int BBFile::processPendingNotes(Score* score, QList<MNote*>* notes, int len, int
                         note->setTieBack(n->ties[i]);
                         }
                   }
-            if (n->mc.duration() <= len) {
+            if (n->mc->duration() <= len) {
                   notes->removeAt(notes->indexOf(n));
                   continue;
                   }
             for (int i = 0; i < nl.size(); ++i) {
-                  const Event& mn = nl[i];
-                  Note* note = chord->findNote(mn.pitch());
-      		n->ties[i] = new Tie(score);
+                  Event* mn = nl[i];
+                  Note* note = chord->findNote(mn->pitch());
+      		n->ties[i] = new Tie(this);
                   n->ties[i]->setStartNote(note);
       		note->setTieFor(n->ties[i]);
                   }
-            n->mc.setOntime(n->mc.ontime() + len);
-            n->mc.setDuration(n->mc.duration() - len);
+            n->mc->setOntime(n->mc->ontime() + len);
+            n->mc->setDuration(n->mc->duration() - len);
             }
       return len;
       }
@@ -620,16 +627,17 @@ int BBFile::processPendingNotes(Score* score, QList<MNote*>* notes, int len, int
 static ciEvent collectNotes(int tick, int voice, ciEvent i, const EventList* el, QList<MNote*>* notes)
       {
       for (;i != el->end(); ++i) {
-            const Event& e = *i;
-            if (e.type() != ME_CHORD)
+            Event* e = *i;
+            if (e->type() != ME_CHORD)
                   continue;
-            if (e.voice() != voice)
+            Event* mc = e;
+            if (mc->voice() != voice)
                   continue;
-            if (e.ontime() > tick)
+            if ((*i)->ontime() > tick)
                   break;
-            if (e.ontime() < tick)
+            if ((*i)->ontime() < tick)
                   continue;
-            MNote* n = new MNote(e);
+            MNote* n = new MNote(mc);
             notes->append(n);
             }
       return i;
@@ -639,7 +647,7 @@ static ciEvent collectNotes(int tick, int voice, ciEvent i, const EventList* el,
 //   convertTrack
 //---------------------------------------------------------
 
-void BBFile::convertTrack(Score* score, BBTrack* track, int staffIdx)
+void Score::convertTrack(BBTrack* track, int staffIdx)
 	{
       track->findChords();
       int voices         = track->separateVoices(2);
@@ -653,26 +661,26 @@ void BBFile::convertTrack(Score* score, BBTrack* track, int staffIdx)
             ciEvent i = collectNotes(ctick, voice, el.begin(), &el, &notes);
 
             for (; i != el.end();) {
-                  const Event& e = *i;
-                  if (e.type() != ME_CHORD || e.voice() != voice) {
+                  Event* e = *i;
+                  if (e->type() != ME_CHORD || e->voice() != voice) {
                         ++i;
                         continue;
                         }
                   //
                   // process pending notes
                   //
-                  int restLen = e.ontime() - ctick;
-// qDebug("ctick %d  rest %d ontick %d size %d\n", ctick, restLen, e.ontime(), notes.size());
+                  int restLen = e->ontime() - ctick;
+// printf("ctick %d  rest %d ontick %d size %d\n", ctick, restLen, e->ontime(), notes.size());
 
                   if (restLen <= 0) {
-                        qDebug("bad restlen ontime %d - ctick %d\n", e.ontime(), ctick);
+                        printf("bad restlen ontime %d - ctick %d\n", e->ontime(), ctick);
                         abort();
                         }
 
                   while (!notes.isEmpty()) {
-                        int len = processPendingNotes(score, &notes, restLen, track);
+                        int len = processPendingNotes(&notes, restLen, track);
                         if (len == 0) {
-                              qDebug("processPendingNotes returns zero, restlen %d, track %d\n", restLen, track);
+                              printf("processPendingNotes returns zero, restlen %d, track %d\n", restLen, track);
                               ctick += restLen;
                               restLen = 0;
                               break;
@@ -680,35 +688,34 @@ void BBFile::convertTrack(Score* score, BBTrack* track, int staffIdx)
                         ctick += len;
                         restLen -= len;
                         }
-// qDebug("  1.ctick %d  rest %d\n", ctick, restLen);
+// printf("  1.ctick %d  rest %d\n", ctick, restLen);
                   //
                   // check for gap and fill with rest
                   //
                   if (voice == 0) {
                         while (restLen > 0) {
                               int len = restLen;
-                  		Measure* measure = score->tick2measure(ctick);
-                              if (measure == 0 || (ctick >= (measure->tick() + measure->ticks()))) {       // at end?
+                  		Measure* measure = tick2measure(ctick);
+                              if (measure == 0 || (ctick >= (measure->tick() + measure->tickLen()))) {       // at end?
                                     ctick += len;
                                     restLen -= len;
                                     break;
                                     }
                               // split rest on measure boundary
-                              if ((ctick + len) > measure->tick() + measure->ticks()) {
-                                    len = measure->tick() + measure->ticks() - ctick;
+                              if ((ctick + len) > measure->tick() + measure->tickLen()) {
+                                    len = measure->tick() + measure->tickLen() - ctick;
                                     if (len <= 0) {
-                                          qDebug("bad len %d\n", len);
+                                          printf("bad len %d\n", len);
                                           break;
                                           }
                                     }
-                              TDuration d;
+                              Duration d;
                               d.setVal(len);
-                              Rest* rest = new Rest(score, d);
-                              rest->setDuration(d.fraction());
+                              Rest* rest = new Rest(this, ctick, d);
                               rest->setTrack(staffIdx * VOICES);
-                              Segment* s = measure->getSegment(rest, ctick);
+                              Segment* s = measure->getSegment(rest);
                               s->add(rest);
-// qDebug("   add rest %d\n", len);
+// printf("   add rest %d\n", len);
 
                               ctick   += len;
                               restLen -= len;
@@ -717,7 +724,7 @@ void BBFile::convertTrack(Score* score, BBTrack* track, int staffIdx)
                   else
                         ctick += restLen;
 
-// qDebug("  2.ctick %d  rest %d\n", ctick, restLen);
+// printf("  2.ctick %d  rest %d\n", ctick, restLen);
                   //
                   // collect all notes at ctick
                   //
@@ -728,7 +735,7 @@ void BBFile::convertTrack(Score* score, BBTrack* track, int staffIdx)
       	// process pending notes
             //
             while (!notes.isEmpty())
-                  processPendingNotes(score, &notes, 0x7fffffff, track);
+                  processPendingNotes(&notes, 0x7fffffff, track);
             }
       }
 
@@ -739,39 +746,39 @@ void BBFile::convertTrack(Score* score, BBTrack* track, int staffIdx)
 
 void BBTrack::quantize(int startTick, int endTick, EventList* dst)
       {
-      int mintick = MScore::division * 64;
+      int mintick = AL::division * 64;
       iEvent i = _events.begin();
       for (; i != _events.end(); ++i) {
-            if (i->ontime() >= startTick)
+            if ((*i)->ontime() >= startTick)
                   break;
             }
       iEvent si = i;
       for (; i != _events.end(); ++i) {
-            const Event& e = *i;
-            if (e.ontime() >= endTick)
+            Event* e = *i;
+            if (e->ontime() >= endTick)
                   break;
-            if (e.type() == ME_NOTE && (e.duration() < mintick))
-                  mintick = e.duration();
+            if (e->type() == ME_NOTE && (e->duration() < mintick))
+                  mintick = e->duration();
             }
-      if (mintick <= MScore::division / 16)        // minimum duration is 1/64
-            mintick = MScore::division / 16;
-      else if (mintick <= MScore::division / 8)
-            mintick = MScore::division / 8;
-      else if (mintick <= MScore::division / 4)
-            mintick = MScore::division / 4;
-      else if (mintick <= MScore::division / 2)
-            mintick = MScore::division / 2;
-      else if (mintick <= MScore::division)
-            mintick = MScore::division;
-      else if (mintick <= MScore::division * 2)
-            mintick = MScore::division * 2;
-      else if (mintick <= MScore::division * 4)
-            mintick = MScore::division * 4;
-      else if (mintick <= MScore::division * 8)
-            mintick = MScore::division * 8;
+      if (mintick <= AL::division / 16)        // minimum duration is 1/64
+            mintick = AL::division / 16;
+      else if (mintick <= AL::division / 8)
+            mintick = AL::division / 8;
+      else if (mintick <= AL::division / 4)
+            mintick = AL::division / 4;
+      else if (mintick <= AL::division / 2)
+            mintick = AL::division / 2;
+      else if (mintick <= AL::division)
+            mintick = AL::division;
+      else if (mintick <= AL::division * 2)
+            mintick = AL::division * 2;
+      else if (mintick <= AL::division * 4)
+            mintick = AL::division * 4;
+      else if (mintick <= AL::division * 8)
+            mintick = AL::division * 8;
       int raster;
-      if (mintick > MScore::division)
-            raster = MScore::division;
+      if (mintick > AL::division)
+            raster = AL::division;
       else
             raster = mintick;
 
@@ -779,16 +786,17 @@ void BBTrack::quantize(int startTick, int endTick, EventList* dst)
       //  quantize onset
       //
       for (iEvent i = si; i != _events.end(); ++i) {
-            Event e = *i;
-            if (e.ontime() >= endTick)
+            Event* e = *i;
+            if (e->ontime() >= endTick)
                   break;
-            if (e.type() == ME_NOTE) {
+            if (e->type() == ME_NOTE) {
+                  Event* note = e;
                   // prefer moving note to the right
-      	      int tick = ((e.ontime() + raster/2) / raster) * raster;
-                  int diff = tick - e.ontime();
-	            int len  = e.duration() - diff;
-	            e.setOntime(tick);
-      	      e.setDuration(len);
+      	      int tick = ((note->ontime() + raster/2) / raster) * raster;
+                  int diff = tick - note->ontime();
+	            int len  = note->duration() - diff;
+	            note->setOntime(tick);
+      	      note->setDuration(len);
                   }
             dst->insert(e);
             }
@@ -796,19 +804,20 @@ void BBTrack::quantize(int startTick, int endTick, EventList* dst)
       //  quantize duration
       //
       for (iEvent i = dst->begin(); i != dst->end(); ++i) {
-            Event& e = *i;
-            if (e.type() != ME_NOTE)
+            Event* e = *i;
+            if (e->type() != ME_NOTE)
                   continue;
-            int tick   = e.ontime();
-            int len    = e.duration();
+            Event* note = e;
+            int tick   = note->ontime();
+            int len    = note->duration();
             int ntick  = tick + len;
             int nntick = -1;
             for (iEvent ii = (i+1); ii != dst->end(); ++ii) {
-                  if (ii->type() == ME_NOTE) {
-                        const Event& ee = *ii;
-                        if (ee.ontime() == tick)
+                  if ((*ii)->type() == ME_NOTE) {
+                        Event* ee = *ii;
+                        if (ee->ontime() == tick)
                               continue;
-                        nntick = ee.ontime();
+                        nntick = ee->ontime();
                         break;
                         }
                   }
@@ -830,7 +839,7 @@ void BBTrack::quantize(int startTick, int endTick, EventList* dst)
                               len = quantizeLen(len, raster);
                         }
                   }
-            e.setDuration(len);
+            note->setDuration(len);
             }
       }
 
@@ -848,16 +857,16 @@ void BBTrack::cleanup()
       //	quantize
       //
       int lastTick = 0;
-      foreach (const Event& e, _events) {
-            if (e.type() != ME_NOTE)
+      foreach (Event* e, _events) {
+            if (e->type() != ME_NOTE)
                   continue;
-            int offtime  = e.offtime();
+            int offtime  = e->offtime();
             if (offtime > lastTick)
                   lastTick = offtime;
             }
       int startTick = 0;
       for (int i = 1;; ++i) {
-            int endTick = bb->siglist().bar2tick(i, 0);
+            int endTick = bb->siglist().bar2tick(i, 0, 0);
             quantize(startTick, endTick, &dl);
             if (endTick > lastTick)
                   break;
@@ -870,20 +879,20 @@ void BBTrack::cleanup()
       _events.clear();
 
       for(iEvent i = dl.begin(); i != dl.end(); ++i) {
-            Event& e = *i;
-            if (e.type() == ME_NOTE) {
+            Event* e = *i;
+            if (e->type() == ME_NOTE) {
                   iEvent ii = i;
                   ++ii;
                   for (; ii != dl.end(); ++ii) {
-                        const Event& ee = *ii;
-                        if (ee.type() != ME_NOTE || ee.pitch() != e.pitch())
+                        Event* ee = *ii;
+                        if (ee->type() != ME_NOTE || ee->pitch() != e->pitch())
                               continue;
-                        if (ee.ontime() >= e.ontime() + e.duration())
+                        if (ee->ontime() >= e->ontime() + e->duration())
                               break;
-                        e.setDuration(ee.ontime() - e.ontime());
+                        e->setDuration(ee->ontime() - e->ontime());
                         break;
                         }
-                  if (e.duration() <= 0)
+                  if (e->duration() <= 0)
                         continue;
                   }
 		_events.insert(e);
@@ -907,53 +916,53 @@ void BBTrack::findChords()
       int jitter = 3;   // tick tolerance for note on/off
 
       for (int i = 0; i < n; ++i) {
-            Event e = _events[i];
-            if (e.type() == ME_INVALID)
+            Event* e = _events[i];
+            if (e == 0)
                   continue;
-            if (e.type() != ME_NOTE) {
+            if (e->type() != ME_NOTE) {
                   dl.append(e);
                   continue;
                   }
 
-            Event note(e);
-            int ontime       = note.ontime();
-            int offtime      = note.offtime();
-            Event chord(ME_CHORD);
-            chord.setOntime(ontime);
-            chord.setDuration(note.duration());
-            chord.notes().append(note);
+            Event* note      = e;
+            int ontime       = note->ontime();
+            int offtime      = note->offtime();
+            Event* chord = new Event(ME_CHORD);
+            chord->setOntime(ontime);
+            chord->setDuration(note->duration());
+            chord->notes().append(note);
             int voice = 0;
-            chord.setVoice(voice);
+            chord->setVoice(voice);
             dl.append(chord);
-            _events[i].setType(ME_INVALID);
+            _events[i] = 0;
 
             bool useDrumset = false;
             if (drumset) {
-                  int pitch = note.pitch();
+                  int pitch = note->pitch();
                   if (drumset->isValid(pitch)) {
                         useDrumset = true;
                         voice = drumset->voice(pitch);
-                        chord.setVoice(voice);
+                        chord->setVoice(voice);
                         }
                   }
             for (int k = i + 1; k < n; ++k) {
-                  if (_events[k].type() != ME_NOTE)
+                  if (_events[k] == 0 || _events[k]->type() != ME_NOTE)
                         continue;
-                  Event nn = _events[k];
-                  if (nn.ontime() - jitter > ontime)
+                  Event* nn = _events[k];
+                  if (nn->ontime() - jitter > ontime)
                         break;
-                  if (qAbs(nn.ontime() - ontime) > jitter || qAbs(nn.offtime() - offtime) > jitter)
+                  if (qAbs(nn->ontime() - ontime) > jitter || qAbs(nn->offtime() - offtime) > jitter)
                         continue;
-                  int pitch = nn.pitch();
+                  int pitch = nn->pitch();
                   if (useDrumset) {
                         if (drumset->isValid(pitch) && drumset->voice(pitch) == voice) {
-                              chord.notes().append(nn);
-                              _events[k].setType(ME_INVALID);
+                              chord->notes().append(nn);
+                              _events[k] = 0;
                               }
                         }
                   else {
-                        chord.notes().append(nn);
-                        _events[k].setType(ME_INVALID);
+                        chord->notes().append(nn);
+                        _events[k] = 0;
                         }
                   }
             }

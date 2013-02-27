@@ -32,7 +32,8 @@
 ;General
 
   ;Name and file
-  Name "@CPACK_PACKAGE_INSTALL_DIRECTORY@ @CPACK_PACKAGE_VERSION_MAJOR@.@CPACK_PACKAGE_VERSION_MINOR@.@CPACK_PACKAGE_VERSION_PATCH@"
+  ;Name "@CPACK_PACKAGE_INSTALL_DIRECTORY@ @CPACK_PACKAGE_VERSION_MAJOR@.@CPACK_PACKAGE_VERSION_MINOR@.@CPACK_PACKAGE_VERSION_PATCH@"
+  Name "@CPACK_PACKAGE_INSTALL_DIRECTORY@ @CPACK_PACKAGE_VERSION_MAJOR@.@CPACK_PACKAGE_VERSION_MINOR@"
   OutFile "@CPACK_TOPLEVEL_DIRECTORY@/@CPACK_OUTPUT_FILE_NAME@"
 
   ;Set compression
@@ -150,7 +151,7 @@ Var AR_RegFlags
 ;--- End of Add/Remove macros ---
 
 Function InstallDesktopShortcut
-  CreateShortcut "$DESKTOP\MuseScore.lnk" "$INSTDIR\bin\@CPACK_PACKAGE_NAME@.exe"
+  CreateShortcut "$DESKTOP\MuseScore.lnk" "$INSTDIR\bin\mscore.exe"
 FunctionEnd
 
 Function un.InstallDesktopShortcut
@@ -164,12 +165,12 @@ FunctionEnd
   !define MUI_ABORTWARNING
   !define MUI_FINISHPAGE_LINK "http://musescore.org"
   !define MUI_FINISHPAGE_LINK_LOCATION "http://musescore.org"
-  !define MUI_FINISHPAGE_RUN "$INSTDIR\bin\@CPACK_PACKAGE_NAME@.exe"
+  !define MUI_FINISHPAGE_RUN "$INSTDIR\bin\mscore.exe"
   !define MUI_FINISHPAGE_SHOWREADME ""
   !define MUI_FINISHPAGE_SHOWREADME_CHECKED
   !define MUI_FINISHPAGE_SHOWREADME_TEXT $(createDesktopShortcut)
   !define MUI_FINISHPAGE_SHOWREADME_FUNCTION InstallDesktopShortcut
-  
+    
 ;--------------------------------
 ; path functions
 
@@ -611,6 +612,7 @@ FunctionEnd
   LangString createDesktopShortcut ${LANG_SPANISH} "Crear un acceso directo en el escritorio"
   LangString createDesktopShortcut ${LANG_DUTCH} "Snelkoppeling op bureablad aanmaken"
   LangString createDesktopShortcut ${LANG_GERMAN} "Desktop-Verknüpfung erstellen"
+
 
 ;--------------------------------
 ;Reserve Files

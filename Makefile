@@ -22,40 +22,34 @@ REVISION  = `cat mscore/mscore/revision.h`
 CPUS      = `grep -c processor /proc/cpuinfo`
 
 PREFIX    = "/usr/local"
-VERSION   = "2.0b${REVISION}"
-#VERSION   = 2.0
+#VERSION   = "1.2r${REVISION}"
+VERSION   = 1.3
 
 ROOT=`pwd`
 
 release:
-	mkdir build.release;                       \
-  cd build.release;                          \
-  cmake -DCMAKE_BUILD_TYPE=RELEASE	       \
-  	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
-  	   ../mscore; 			       \
-  make lrelease;                             \
-  make -j ${CPUS};                           \
-
+	if test ! -d build;                              \
+         then                                          \
+            mkdir build;                               \
+            cd build;                                  \
+            cmake -DCMAKE_BUILD_TYPE=RELEASE	       \
+            	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
+            	   ../mscore; 			       \
+            make lrelease;                             \
+            make -j ${CPUS};                           \
+         else                                          \
+            echo "build directory does already exist, please remove first with 'make clean'"; \
+         fi;
 
 debug:
-	mkdir build.debug;                         \
-  cd build.debug;                            \
-  cmake -DCMAKE_BUILD_TYPE=DEBUG	       \
-  	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
-  	   ../mscore; 		             \
-  make lrelease;                             \
-  make -j ${CPUS};                           \
-
-
-qt5:
-	if test ! -d qt5;                        \
+	if test ! -d build;                              \
          then                                          \
-            mkdir qt5;                         \
-            cd qt5;                            \
-            export PATH=/home/ws/qt/qt5/qtbase/bin:${PATH};        \
-            cmake -DCMAKE_BUILD_TYPE=DEBUG -DBUILD_SCRIPTGEN=NO        \
+            mkdir build;                               \
+            cd build;                                  \
+            cmake -DCMAKE_BUILD_TYPE=DEBUG	       \
             	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
-            	   ../mscore; 		             \
+            	   ../mscore; 			       \
+            make lrelease;                             \
             make -j ${CPUS};                           \
          else                                          \
             echo "build directory does already exist, please remove first with 'make clean'";       \
@@ -90,7 +84,7 @@ win32:
 #
 
 clean:
-	-rm -rf build.debug build.release
+	-rm -rf build
 	-rm -rf win32build win32install
 
 #
@@ -120,8 +114,8 @@ revision:
 version: revision
 	@echo ${VERSION}
 
-install: release revision
-	cd build.release; make install
+install:
+	cd build; make install
 
 #
 #  linux

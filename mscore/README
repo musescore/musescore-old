@@ -18,11 +18,11 @@ Features:
 
 Licence:
       MuseScore is distributed under the GNU General Public License (GPL).
-      Please read the file LICENSE in this directory for more
+      Please read the file COPYING in this directory for more
       details.
 
 Requirements:
-      - qt4 gui lib version >= qt4.8.x
+      - qt4 gui lib version >= qt4.6.x
 
         Note that many linux distributions split packages into a user
         and developer package and that you need to install both.
@@ -57,6 +57,7 @@ User Documentation:
       Look at the handbook section at http://www.musescore.org
 
 Program Documentation:
+
       Type
             cd build
             make doxy
@@ -74,7 +75,7 @@ Test:
             mscore
 
       to start mscore. On first invocation a demofile
-      (Modeste Moussorgsky: Pictures of an exhibition: Promenade)
+      (Marc Sabatella: Reunion)
       is shown. You probably want to change that in the
       "preferences" dialog.
 
@@ -82,12 +83,12 @@ Test:
       Help needed
 =================================================================
 
-      We need your help!
+      We need your help! http://musescore.org
 
 =================================================================
       Contact
 =================================================================
 
-      Werner Schweer; ws at wschweer.de
+      Werner Schweer; info@musescore.org
       http://www.musescore.org/
 

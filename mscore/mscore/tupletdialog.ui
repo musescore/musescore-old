@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>390</width>
-    <height>266</height>
+    <width>374</width>
+    <height>265</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,7 +29,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="musescore.qrc">:/data/bg1.jpg</pixmap>
+      <pixmap resource="mscore.qrc">:/data/bg1.jpg</pixmap>
      </property>
     </widget>
    </item>
@@ -44,7 +44,7 @@
         <string>Type</string>
        </property>
        <property name="flat">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
@@ -138,7 +138,7 @@
         <string>Format</string>
        </property>
        <property name="flat">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <layout class="QHBoxLayout">
         <property name="spacing">
@@ -243,7 +243,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="musescore.qrc"/>
+  <include location="mscore.qrc"/>
  </resources>
  <connections>
   <connection>

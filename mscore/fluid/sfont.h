@@ -23,7 +23,6 @@
 #ifndef _FLUID_DEFSFONT_H
 #define _FLUID_DEFSFONT_H
 
-#include "config.h"
 #include "fluid.h"
 
 namespace FluidS {
@@ -59,8 +58,8 @@ class SFont {
       QList<Preset*> presets;
       QList<Sample*> sample;
 
-      int _id;
-      SFVersion _version;		// sound font version
+      unsigned _id;
+      SFVersion version;		// sound font version
       SFVersion romver;		      // ROM version
       QList<unsigned char*> infos;	// list of info strings (1st byte is ID)
 
@@ -108,14 +107,12 @@ class SFont {
 
       int load_sampledata();
       unsigned int samplePos() const            { return samplepos;  }
-      int id() const                            { return _id; }
-      void setId(int i)                         { _id = i;    }
+      unsigned id() const                       { return _id; }
+      void setId(unsigned i)                    { _id = i;    }
       void setSamplepos(unsigned v)             { samplepos = v; }
       void setSamplesize(unsigned v)            { samplesize = v; }
       unsigned getSamplesize() const            { return samplesize; }
       const QList<Preset*> getPresets() const   { return presets; }
-      SFVersion version() const                 { return _version; }
-      friend class Preset;
       };
 
 //---------------------------------------------------------
@@ -154,9 +151,6 @@ class Sample {
       void load();
       bool valid() const    { return _valid; }
       void setValid(bool v) { _valid = v; }
-#ifdef SOUNDFONT3
-      bool decompressOggVorbis(char* p, int size);
-#endif
       };
 
 //---------------------------------------------------------

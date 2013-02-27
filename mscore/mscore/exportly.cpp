@@ -34,51 +34,51 @@
 // Olav.
 
 
-#include "libmscore/arpeggio.h"
-#include "libmscore/articulation.h"
-#include "libmscore/barline.h"
-#include "libmscore/beam.h"
-#include "libmscore/bracket.h"
-#include "libmscore/chord.h"
-#include "libmscore/clef.h"
+#include "arpeggio.h"
+#include "articulation.h"
+#include "barline.h"
+#include "beam.h"
+#include "bracket.h"
+#include "chord.h"
+#include "clef.h"
 #include "config.h"
-#include "libmscore/dynamic.h"
-#include "libmscore/element.h"
+#include "dynamics.h"
+#include "element.h"
 #include <fstream>
-#include "libmscore/glissando.h"
+#include "glissando.h"
 #include "globals.h"
 #include <iostream>
 using std::cout;
-#include "libmscore/hairpin.h"
-#include "libmscore/harmony.h"
-#include "libmscore/key.h"
-#include "libmscore/keysig.h"
-#include "libmscore/lyrics.h"
-#include "libmscore/measure.h"
-#include "libmscore/note.h"
-#include "libmscore/ottava.h"
-#include "libmscore/page.h"
-#include "libmscore/part.h"
-#include "libmscore/pedal.h"
-#include "libmscore/pitchspelling.h"
-#include "libmscore/repeat.h"
-#include "libmscore/rest.h"
-#include "libmscore/score.h"
-#include "libmscore/segment.h"
-#include "libmscore/slur.h"
-#include "libmscore/staff.h"
+#include "hairpin.h"
+#include "harmony.h"
+#include "key.h"
+#include "keysig.h"
+#include "lyrics.h"
+#include "measure.h"
+#include "note.h"
+#include "ottava.h"
+#include "page.h"
+#include "part.h"
+#include "pedal.h"
+#include "pitchspelling.h"
+#include "repeat.h"
+#include "rest.h"
+#include "score.h"
+#include "segment.h"
+#include "slur.h"
+#include "staff.h"
 #include <stdio.h>
 #include <string.h>
 #include <sstream>
-#include "libmscore/style.h"
-#include "libmscore/sym.h"
-#include "libmscore/tempotext.h"
-#include "libmscore/text.h"
-#include "libmscore/timesig.h"
-#include "libmscore/tremolo.h"
-#include "libmscore/tuplet.h"
-#include "libmscore/volta.h"
-#include "musescore.h"
+#include "style.h"
+#include "sym.h"
+#include "tempotext.h"
+#include "text.h"
+#include "timesig.h"
+#include "tremolo.h"
+#include "tuplet.h"
+#include "volta.h"
+
 
 static  const int MAX_SLURS = 8;
 static  const int BRACKSTAVES=64;
@@ -351,7 +351,7 @@ public:
   {
     score  = s;
     level  = 0;
-    curTicks = MScore::division;
+    curTicks = AL::division;
     slur   = false;
     stemDirection = AUTO;
   }
@@ -417,7 +417,7 @@ void ExportLy::brackRegister(int brnumber, int bratype, int staffnr, bool start,
       lybracks[staffnr].braceno=brnumber;
       break;
     default:
-      qDebug("bracket subtype %d not understood\n", bratype);
+      printf("bracket subtype %d not understood\n", bratype);
     }
 }
 
@@ -432,11 +432,11 @@ void ExportLy::findBrackets()
   initBrackets();
   char groupnumber;
   groupnumber=1;
-  const QList<Part*>& il = score->parts();  //list of parts
+  const QList<Part*>* il = score->parts();  //list of parts
 
-  for (int partnumber = 0; partnumber < il.size(); ++partnumber)  //run thru list of parts
+  for (int partnumber = 0; partnumber < il->size(); ++partnumber)  //run thru list of parts
     {
-      Part* part = il.at(partnumber);
+      Part* part = il->at(partnumber);
       if (part->nstaves() == 2) pianostaff=true;
       for (int stavno = 0; stavno < part->nstaves(); stavno++) //run thru list of staves in part.
 	{
@@ -480,7 +480,7 @@ void ExportLy::findBrackets()
 void ExportLy::bracktest()
       {
       for (int i = 0; i < 10; i++) {
-            qDebug("stavnr: %d braceno: %d brackno %d\n", i, lybracks[i].braceno, lybracks[i].brakno);
+            printf("stavnr: %d braceno: %d brackno %d\n", i, lybracks[i].braceno, lybracks[i].brakno);
             }
       }
 
@@ -507,7 +507,7 @@ void ExportLy::instructionJump(Jump* jp)
   else if (jtp == JUMP_DS)
     words += "\\mark \\markup{Dal segno \\raise #2 \\halign#-1 \\musicglyph #\"scripts.segno\"}";
   else
-    qDebug("jump type=%d not implemented\n", jtp);
+    printf("jump type=%d not implemented\n", jtp);
   out <<  words << " ";
 }
 
@@ -534,9 +534,9 @@ void ExportLy::instructionMarker(Marker* m)
   else if (mtp == MARKER_VARCODA)
 	words = "\\varcodasign ";
   else if (mtp == MARKER_USER)
-	qDebug("unknown user marker\n");
+	printf("unknown user marker\n");
   else
-    qDebug("marker type=%d not implemented\n", mtp);
+    printf("marker type=%d not implemented\n", mtp);
 
   out <<  words << " ";
 
@@ -569,7 +569,7 @@ QString ExportLy::primitiveJump(Jump* jp)
   else if (jtp == JUMP_DS)
       words = "Dal segnoX \\musicglyph #\"scripts.segno\"";
   else
-    qDebug("jump type=%d not implemented\n", jtp);
+    printf("jump type=%d not implemented\n", jtp);
   return  words;
 }
 
@@ -596,9 +596,9 @@ QString ExportLy::primitiveMarker(Marker* m)
   else if (mtp == MARKER_VARCODA)
     words = "\\musicglyph#\"scripts.varcoda\"";
   else if (mtp == MARKER_USER)
-	qDebug("unknown user marker\n");
+	printf("unknown user marker\n");
   else
-    qDebug("marker type=%d not implemented\n", mtp);
+    printf("marker type=%d not implemented\n", mtp);
   return words;
 }
 
@@ -650,7 +650,7 @@ void ExportLy::writeSymbol(QString name)
   //   out << "^\\markup{\\musicglyph #\"accordion.accOldEE\"} ";
   // else
   //   {
-  //   qDebug("ExportLy::symbol(): %s not supported\n", name.toLatin1().data());
+  //   printf("ExportLy::symbol(): %s not supported\n", name.toLatin1().data());
   //   return;
   //   }
 }
@@ -739,9 +739,9 @@ void ExportLy::printChordList()
 	  int factor=1;
 	  // works at least if denominator is 4:
 	  if (timedenom == 2) factor=2; else factor = 1;
-	  int measnum = chordThis->cd.tickpos / (z1 * MScore::division * factor);
-	  qDebug("Measnum chord: \n");
-	  int surplus = chordThis->cd.tickpos % MScore::division;
+	  int measnum = chordThis->cd.tickpos / (z1 * AL::division * factor);
+	  printf("Measnum chord: \n");
+	  int surplus = chordThis->cd.tickpos % AL::division;
 	  if (measnum == 0) surplus = chordThis->cd.tickpos;
 	  level++;
 	  indentF();
@@ -893,7 +893,7 @@ void ExportLy::storeChord(struct InstructionAnchor chordanchor)
       aux->cd.chrName = chord2Name(chordroot);
       n=thisHarmony.chrName;
 
-      aux->cd.tickpos = harmelm->segment()->tick();
+      aux->cd.tickpos = harmelm->tick();
       if (!harmelm->xmlKind().isEmpty())
 	{
 	  aux->cd.extName = harmelm->extensionName();
@@ -961,10 +961,10 @@ void ExportLy::words(Text* text)
        int size;
        findTextProperties(text,style,size);
        //todo: find exact mscore-position of text and not only anchorpoint, and position accordingly in lily.
-//TODO     if ((text->subtypeName() != "RehearsalMark"))
+     if ((text->subtypeName() != "RehearsalMark"))
        // if (text->getText() != "")
        out << "^\\markup {" << style<< " \"" << text->getText() << "\"} ";
-     //     qDebug("tekst %s\n", tekst.toLatin1().data());
+     //     printf("tekst %s\n", tekst.toLatin1().data());
       }
 
 
@@ -988,7 +988,7 @@ void ExportLy::hairpin(Hairpin* hp, int tick)
 	      out << "\\> ";
 	    if (art > 1 ) out << "\\!x ";
 	  }
-//TODO-WS       if (hp->tick2() == tick) out << "\\! "; //end of hairpin
+       if (hp->tick2() == tick) out << "\\! "; //end of hairpin
       }
 
 //---------------------------------------------------------
@@ -1016,7 +1016,7 @@ void ExportLy::ottava(Ottava* ot, int tick)
 	indent();
 	break;
       default:
-	qDebug("ottava subtype %d not understood\n", st);
+	printf("ottava subtype %d not understood\n", st);
       }
     }
   else {
@@ -1082,8 +1082,8 @@ void ExportLy::dynamic(Dynamic* dyn, int nop)
 //-----------------------------------------------------------------------------------
 void ExportLy::findTextProperties(Text* tekst, QString &tekststyle, int &fontsize)
 {
-  QFont fontprops=tekst->font();
-  fontsize= fontprops.pointSizeF();
+  fontsize= tekst->defaultFont().pointSize();
+  QFont fontprops=tekst->defaultFont();
   switch (fontprops.style())
     {
     case QFont::StyleNormal :
@@ -1118,14 +1118,14 @@ void ExportLy::findTextProperties(Text* tekst, QString &tekststyle, int &fontsiz
 
 void ExportLy::textLine(Element* instruction, int tick, bool pre)
 {
-  qDebug("textline\n");
+  printf("textline\n");
   QString rest;
   QPointF point;
   QString lineEnd = "none";
   QString type;
   //  int lineoffset;
   QString lineType;
-//  SLine* sl = (SLine*) instruction;
+  SLine* sl = (SLine*) instruction;
   int fontsize=0;
   TextLine* tekstlinje = (TextLine *) instruction;
   bool post = false;
@@ -1175,7 +1175,7 @@ void ExportLy::textLine(Element* instruction, int tick, bool pre)
 	      out << tekststyle<< "\"" << linetext <<"\"} \n";
 	      indent();
 	    }
-	  point = tekstlinje->frontSegment()->userOff();
+	  point = tekstlinje->lineSegments().first()->userOff();
 	  if (point.y() > 0.0) //below
 	    {
 	      out <<"\\textSpannerDown ";
@@ -1194,7 +1194,6 @@ void ExportLy::textLine(Element* instruction, int tick, bool pre)
 	  textspanswitch=true;
 	}// end if post: after note, start of textline
     }//end of start-of-textline
-#if 0 // TODO-WS
   else if  (sl->tick2() == tick)  //at end of textline.
     {
       if (pre)
@@ -1211,7 +1210,6 @@ void ExportLy::textLine(Element* instruction, int tick, bool pre)
 	  //just relax for the moment.
 	}
     }// end if tick2()
-#endif
 }// end of textLine()
 
 
@@ -1225,54 +1223,54 @@ void ExportLy::anchortest()
 	{
 	  Element * instruction = anchors[i].instruct;
 	  ElementType instructiontype = instruction ->type();
-//	  Text* text = (Text*) instruction;
-	  qDebug("anker nr: %d ", i);
+	  Text* text = (Text*) instruction;
+	  printf("anker nr: %d ", i);
 	  switch(instructiontype)
 	    {
 	    case STAFF_TEXT:
-	      qDebug("STAFF_TEXT ");
-//TODO	      if (text->subtypeName()== "RehearsalMark") qDebug(" rehearsal STAFF ");
-	      qDebug("\n");
+	      printf("STAFF_TEXT ");
+	      if (text->subtypeName()== "RehearsalMark") printf(" rehearsal STAFF ");
+	      printf("\n");
 	      break;
 	    case TEXT:
-	      qDebug("TEXT ");
-//	      if (text->subtypeName()== "RehearsalMark") qDebug(" rehearsal MEASURE");
-	      qDebug("\n");
+	      printf("TEXT ");
+	      if (text->subtypeName()== "RehearsalMark") printf(" rehearsal MEASURE");
+	      printf("\n");
 	      break;
 	    case MARKER:
-	      qDebug("MARKER\n");
+	      printf("MARKER\n");
 	      break;
 	    case JUMP:
-	      qDebug("JUMP\n");
+	      printf("JUMP\n");
 	      break;
 	    case SYMBOL:
-	      qDebug("SYMBOL\n");
+	      printf("SYMBOL\n");
 	      break;
 	    case TEMPO_TEXT:
-	      qDebug("TEMPOTEXT MEASURE\n");
+	      printf("TEMPOTEXT MEASURE\n");
 	      break;
 	    case DYNAMIC:
-	      qDebug("Dynamic\n");
+	      printf("Dynamic\n");
 	      break;
 	    case HARMONY:
-	      qDebug("akkordnavn. \n");
+	      printf("akkordnavn. \n");
 	      break;
 	    case HAIRPIN:
-	      qDebug("hairpin \n");
+	      printf("hairpin \n");
 	      break;
 	    case PEDAL:
-	      qDebug("pedal\n");
+	      printf("pedal\n");
 	      break;
 	    case TEXTLINE:
-	      qDebug("textline\n");
+	      printf("textline\n");
 	      break;
 	    case OTTAVA:
-	      qDebug("ottava\n");
+	      printf("ottava\n");
 	      break;
 	    default: break;
 	    }
 	}
-      qDebug("Anchortest finished\n");
+      printf("Anchortest finished\n");
 }//end anchortest
 
 
@@ -1284,59 +1282,59 @@ void ExportLy::anchortest()
 //---------------------------------------------------------------------
 void ExportLy::jumptest()
 {
-  qDebug("at jumptest A lastjump %d\n", lastJumpOrMarker);
+  printf("at jumptest A lastjump %d\n", lastJumpOrMarker);
       int i;
       for (i=0; i<lastJumpOrMarker; i++)
 	{
-	  qDebug("jumptest 1\n");
+	  printf("jumptest 1\n");
 	  Element * merke = jumpOrMarkerList[i].marker;
-	  qDebug("jumptest 2\n");
+	  printf("jumptest 2\n");
 	  ElementType instructiontype = merke->type();
-	  qDebug("jumptest 3\n");
-//	  Text* text = (Text*) merke;
-	  qDebug("jumptest 4\n");
-	  qDebug("marker nr: %d ", i);
+	  printf("jumptest 3\n");
+	  Text* text = (Text*) merke;
+	  printf("jumptest 4\n");
+	  printf("marker nr: %d ", i);
 	  switch(instructiontype)
 	    {
 	    case STAFF_TEXT:
-	      qDebug("STAFF_TEXT ");
-//	      if (text->subtypeName()== "RehearsalMark") qDebug(" rehearsal ");
-	      qDebug("\n");
+	      printf("STAFF_TEXT ");
+	      if (text->subtypeName()== "RehearsalMark") printf(" rehearsal ");
+	      printf("\n");
 	      break;
 	    case TEXT:
-	      qDebug("TEXT ");
-//	      if (text->subtypeName()== "RehearsalMark") qDebug(" rehearsal ");
-	      qDebug("\n");
+	      printf("TEXT ");
+	      if (text->subtypeName()== "RehearsalMark") printf(" rehearsal ");
+	      printf("\n");
 	      break;
 	    case MARKER:
-	      qDebug("MARKER\n");
+	      printf("MARKER\n");
 	      break;
 	    case JUMP:
-	      qDebug("JUMP\n");
+	      printf("JUMP\n");
 	      break;
 	    case SYMBOL:
-	      qDebug("SYMBOL\n");
+	      printf("SYMBOL\n");
 	      break;
 	    case TEMPO_TEXT:
-	      qDebug("TEMPOTEXT MEASURE\n");
+	      printf("TEMPOTEXT MEASURE\n");
 	      break;
 	    case DYNAMIC:
-	      qDebug("Dynamic\n");
+	      printf("Dynamic\n");
 	      break;
 	    case HARMONY:
-	      qDebug("akkordnavn. \n");
+	      printf("akkordnavn. \n");
 	      break;
 	    case HAIRPIN:
-	      qDebug("hairpin \n");
+	      printf("hairpin \n");
 	      break;
 	    case PEDAL:
-	      qDebug("pedal\n");
+	      printf("pedal\n");
 	      break;
 	    case TEXTLINE:
-	      qDebug("textline\n");
+	      printf("textline\n");
 	      break;
 	    case OTTAVA:
-	      qDebug("ottava\n");
+	      printf("ottava\n");
 	      break;
 	    default:
 	      break;
@@ -1393,7 +1391,7 @@ void ExportLy::storeAnchor(struct InstructionAnchor a)
 	    anchors[nextAnchor++] = a;
 	  }
 	else
-	  qDebug("InstructionHandler: too many instructions\n");
+	  printf("InstructionHandler: too many instructions\n");
 	resetAnchor(anker);
       }
 
@@ -1448,15 +1446,17 @@ void ExportLy::handlePreInstruction(Element * el)
 	  switch(instructiontype)
 	    {
 	    case STAFF_TEXT:
-	    case REHEARSAL_MARK:
+	    case TEXT:
 	      {
+		if (instruction->subtypeName() == "RehearsalMark")
+		  {
 		    tekst = (Text*) instruction;
 		    if (wholemeasurerest >=1) writeMeasuRestNum();
 		    bool ok = false;
-		    // int dec=0;
+		    int dec=0;
 		    QString c;
 		    c=tekst->getText();
-		    // dec = c.toInt(&ok, 10);
+		    dec = c.toInt(&ok, 10);
 		    if (ok) rehearsalnumbers=true;
 		    Element* elm = 0;
     		    foundJoM = checkJumpOrMarker(measurenumber, true, elm); //true means at the start of measure.
@@ -1466,6 +1466,7 @@ void ExportLy::handlePreInstruction(Element * el)
 		        out << "\\mark\\default ";//xxx
 		      privateRehearsalMark++;
 		      removeAnchor(i); //to use this caused trouble at another place. Maybe remove?
+		  }
 		break;
 	      }
 	    case OTTAVA:
@@ -1509,23 +1510,23 @@ void ExportLy::handleElement(Element* el)
 		switch(instructiontype)
 		    {
 		    case MARKER:
-			qDebug("MARKER\n");
+			printf("MARKER\n");
 			instructionMarker((Marker*) instruction);
 			break;
 		    case JUMP:
-			qDebug("JUMP\n");
+			printf("JUMP\n");
 			instructionJump((Jump*) instruction);
 			break;
 		    case SYMBOL:
 			{
 			    cout << "symbol in anchorlist tick: " << anchors[i].tick << "  \n";
 			    sym = (Symbol*) instruction;
-			    name = symbols[0][sym->sym()].name();
+			    name = symbols[sym->sym()].name();
 			    writeSymbol(name);
 			    break;
 			}
 		    case TEMPO_TEXT:
-			//   qDebug("TEMPOTEXT MEASURE\n");
+			//   printf("TEMPOTEXT MEASURE\n");
 			//   tempoText((TempoText*) instruction);
 			break;
 		    case STAFF_TEXT:
@@ -1576,7 +1577,7 @@ void ExportLy::handleElement(Element* el)
 		    case OTTAVA:
 			break;
 		    default:
-			qDebug("post-InstructionHandler::handleElement: direction type %s at tick %d not implemented\n",
+			printf("post-InstructionHandler::handleElement: direction type %s at tick %d not implemented\n",
 			       Element::name(instruction->type()), anchors[i].tick);
 			break;
 		    }
@@ -1640,7 +1641,7 @@ void ExportLy::preserveJumpOrMarker(Element* dir, int mnum, bool start)
       jumpOrMarkerList[lastJumpOrMarker] = mlm;
     }
   else
-    qDebug("PreserveMarker: Too many marksorjumps\n");
+    printf("PreserveMarker: Too many marksorjumps\n");
 }
 
 
@@ -1770,8 +1771,8 @@ void ExportLy::jumpAtMeasureStop(Measure* m)
 	  {
 	    Element* dir = *ci;
 	    int tp = dir->type();
-	    bool end; // start;
-	    // start=true;
+	    bool end, start;
+	    start=true;
 	    end=false;
 
 	    if (tp == JUMP)
@@ -1824,16 +1825,16 @@ bool ExportLy::findMatchInMeasure(int tick, Staff* stf, Measure* m, int strack, 
 	  Element* el = seg->element(st);
 	  if (!el) continue;
 
-	  if ((el->isChordRest()) and ((el->staff() == stf) or (rehearsalmark==true)) && ((seg->tick() >= tick)))
+	  if ((el->isChordRest()) and ((el->staff() == stf) or (rehearsalmark==true)) && ((el->tick() >= tick)))
 	    {
-	      if (seg->tick() > tick) tick=prevElTick;
+	      if (el->tick() > tick) tick=prevElTick;
 	      anker.anchor=el;
 	      found=true;
 	      anker.tick=tick;
 	      anker.start=true;
 	      goto fertig;
 	    }
-	    prevElTick = seg->tick();
+	    prevElTick=el->tick();
 	 }
     }
  fertig:
@@ -1872,7 +1873,6 @@ void ExportLy::buildInstructionListPart(int strack, int etrack)
 
   // part-level elements stored in the score layout: at the global level
   prevElTick=0;
-#if 0 // TODO-WS implementation changed
   foreach(Element* instruction, *(score->gel()))
     {
       bool found=false;
@@ -1880,10 +1880,9 @@ void ExportLy::buildInstructionListPart(int strack, int etrack)
       switch(instruction->type())
 	{
 	case JUMP:
-//TODO-WS	   qDebug("score JUMP found at tick: %d\n", instruction->tick());
-            break;
+	   printf("score JUMP found at tick: %d\n", instruction->tick());
 	case MARKER:
-/*TODO-WS	    qDebug("score MARKER found at tick: %d\n", instruction->tick()); */ break;
+	    printf("score MARKER found at tick: %d\n", instruction->tick());
 	case HAIRPIN:
 	case HARMONY:
 	case OTTAVA:
@@ -1894,12 +1893,12 @@ void ExportLy::buildInstructionListPart(int strack, int etrack)
 	  {
 	    SLine* sl = (SLine*) instruction;
 	    Text* tekst = (Text*) instruction;
-	    //	    if (tekst->subtypeName() == "System") qDebug("Systemtekst in part\n");
-	    //      if (tekst->subtypeName() == "Staff")  qDebug("Stafftest in part\n");
+	    //	    if (tekst->subtypeName() == "System") printf("Systemtekst in part\n");
+	    //      if (tekst->subtypeName() == "Staff")  printf("Stafftest in part\n");
 	    if (tekst->subtypeName() == "RehearsalMark")
 	      {
 		rehearsalm=true;
-		qDebug("found rehearsalmark in part\n");
+		printf("found rehearsalmark in part\n");
 	      }
 	    //start of instruction:
 	    found=findMatchInPart(sl->tick(), sl->staff(), score, strack, etrack, rehearsalm);
@@ -1909,7 +1908,7 @@ void ExportLy::buildInstructionListPart(int strack, int etrack)
 		storeAnchor(anker);
 	      }
 	    //end of instruction:
-//TODO-WS	    found=findMatchInPart(sl->tick2(), sl->staff(), score, strack, etrack, rehearsalm);
+	    found=findMatchInPart(sl->tick2(), sl->staff(), score, strack, etrack, rehearsalm);
 	    if (found)
 	      {
 		anker.instruct=instruction;
@@ -1919,11 +1918,10 @@ void ExportLy::buildInstructionListPart(int strack, int etrack)
 	  } //end textline
 	default:
 	  // all others ignored
-	  // qDebug(" instruction type %s not implemented\n", Element::name(instruction->type()));
+	  // printf(" instruction type %s not implemented\n", Element::name(instruction->type()));
 	  break;
 	}
     }// end foreach element....
-#endif
 
   // part-level elements stored in measures:
   for (MeasureBase* mb = score->measures()->first(); mb; mb = mb->next())
@@ -1950,7 +1948,7 @@ void ExportLy::buildInstructionList(Measure* m, int strack, int etrack)
   for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci)
     {
       bool found=false;
-//      bool rehearsal=false;
+      bool rehearsal=false;
 
       Element* instruction = *ci;
       switch(instruction->type())
@@ -1964,9 +1962,8 @@ void ExportLy::buildInstructionList(Measure* m, int strack, int etrack)
 	case OTTAVA:
 	case PEDAL:
 	case STAFF_TEXT:
-#if 0 // TODO-WS
-	  { 	    //	    if (instruction->subtypeName() == "Staff") qDebug("stafftekst i measure\n");
-	    //   if (instruction->subtypeName() == "System") qDebug("systemtekst i measure\n");
+	  { 	    //	    if (instruction->subtypeName() == "Staff") printf("stafftekst i measure\n");
+	    //   if (instruction->subtypeName() == "System") printf("systemtekst i measure\n");
 	    if (instruction->subtypeName() == "RehearsalMark") rehearsal=true;
 	    found = findMatchInMeasure(instruction->tick(), instruction->staff(), m, strack, etrack, rehearsal);
 	  if (found)
@@ -1974,12 +1971,11 @@ void ExportLy::buildInstructionList(Measure* m, int strack, int etrack)
 	      anker.instruct=instruction;
 	      storeAnchor(anker);
 	    }
-       }
-#endif
 	  break;
+	  }
 	case HARMONY:
 	  {
-	    found = findMatchInMeasure(((Harmony*)instruction)->segment()->tick(), instruction->staff(), m, strack, etrack, false);
+	    found = findMatchInMeasure(instruction->tick(), instruction->staff(), m, strack, etrack, false);
 	    if ((found) && (staffInd == 0)) //only save chords in first staff.
 	      {
 		anker.instruct=instruction;
@@ -2070,13 +2066,13 @@ void ExportLy::findTuplets(ChordRest* cr)
             if (tupletcount == 0) {
                   int actNotes   = t->ratio().numerator();
                   int nrmNotes   = t->ratio().denominator();
-                  int baselength = t->duration().ticks() / nrmNotes;
-                  int thislength = cr->duration().ticks();
+                  int baselength = t->ticks() / nrmNotes;
+                  int thislength = cr->ticks();
 		  tupletcount    = nrmNotes * baselength - thislength;
                   out << "\\times " <<  nrmNotes << "/" << actNotes << "{" ;
                   }
             else if (tupletcount > 1) {
-                  int thislength = cr->duration().ticks();
+                  int thislength = cr->ticks();
                   tupletcount    = tupletcount - thislength;
                   if (tupletcount == 0)
                         tupletcount = -1;
@@ -2203,7 +2199,6 @@ void  ExportLy::findVolta()
       Measure* meas = (Measure*)m;
       findStartRepNoBarline(i,meas);
 
-#if 0 // TODO-WS implementation changed
       foreach(Element* el, *(m->score()->gel()))
 	//for each element at the global level relevant for this measure
 	{
@@ -2233,8 +2228,7 @@ void  ExportLy::findVolta()
 		  voltarray[i].voltart = startending;
 		  voltarray[i].barno=taktnr-1; //register as last element i previous measure
 		}
-#if 0 // TODO-WS
-	      if (v->tick2() == m->tick() + m->ticks()) // if it is at the end of measure
+	      if (v->tick2() == m->tick() + m->tickLen()) // if it is at the end of measure
 		{
 		  i++;
 		  voltarray[i].voltart = endending;
@@ -2246,10 +2240,8 @@ void  ExportLy::findVolta()
 		  // 		    {// see comment above.
 		  // 		    }
 		}
-#endif
 	    }//if volta
 	}// for all global elements
-#endif
       i=voltaCheckBar((Measure *) m, i);
     }//for all measures
   lastind=i;
@@ -2261,29 +2253,29 @@ void ExportLy::voltatest()
   int i=0;
   for (i=0; i<lastind; i++)
     {
-      qDebug("iter: %d\n", i);
+      printf("iter: %d\n", i);
       switch(voltarray[i].voltart)
 	{
 	case startrepeat:
-	  qDebug("startrepeat, bar %d\n", voltarray[i].barno);
+	  printf("startrepeat, bar %d\n", voltarray[i].barno);
 	  break;
 	case endrepeat:
-	  qDebug("endrepeat, bar %d\n", voltarray[i].barno);
+	  printf("endrepeat, bar %d\n", voltarray[i].barno);
 	  break;
 	case bothrepeat:
-	  qDebug("bothrepeat, bar %d\n", voltarray[i].barno);
+	  printf("bothrepeat, bar %d\n", voltarray[i].barno);
 	  break;
 	case endbar:
-	  qDebug("endbar, bar %d\n", voltarray[i].barno);
+	  printf("endbar, bar %d\n", voltarray[i].barno);
 	  break;
 	case doublebar:
-	  qDebug("doublebar, bar %d\n", voltarray[i].barno);
+	  printf("doublebar, bar %d\n", voltarray[i].barno);
 	  break;
 	case startending:
-	  qDebug("startending, bar %d\n", voltarray[i].barno);
+	  printf("startending, bar %d\n", voltarray[i].barno);
 	  break;
 	case endending:
-	  qDebug("endending, bar %d\n", voltarray[i].barno);
+	  printf("endending, bar %d\n", voltarray[i].barno);
 	  break;
 	default:
 	  break;
@@ -2297,9 +2289,9 @@ void ExportLy::voltatest()
 //   exportLilypond
 //---------------------------------------------------------
 
-bool MuseScore::saveLilypond(Score* score, const QString& name)
+bool Score::saveLilypond(const QString& name)
 {
-  ExportLy em(score);
+  ExportLy em(this);
   return em.write(name);
 }
 
@@ -2325,7 +2317,6 @@ void ExportLy::writeClef(int clef)
   case CLEF_C2:     out <<  "mezzo-soprano\n"; break;
   case CLEF_C3:     out <<  "alto\n";          break;
   case CLEF_C4:     out <<  "tenor\n";         break;
-  case CLEF_TAB2:
   case CLEF_TAB:    out <<  "tab\n";           break;
   case CLEF_PERC:   out <<  "percussion\n";    break;
   }
@@ -2339,10 +2330,7 @@ void ExportLy::writeClef(int clef)
 void ExportLy::writeTimeSig(TimeSig* sig)
 {
   int st = sig->subtype();
-  Fraction f = sig->sig();
-  timedenom = f.denominator();
-  z1        = f.numerator();
-
+  sig->getSig(&timedenom, &z1, &z2, &z3, &z4);
   //lilypond writes 4/4 as C by default, so only check for cut.
   if (st == TSIG_ALLA_BREVE)
     {
@@ -2379,7 +2367,7 @@ void ExportLy::writeKeySig(int st)
   case -2: out << "bes"; break;
   case -1: out << "f";   break;
   default:
-    qDebug("illegal key %d\n", st);
+    printf("illegal key %d\n", st);
     break;
   }
   out << " \\major \n";
@@ -2442,12 +2430,8 @@ int ExportLy::findSlur(const Slur* s) const
 void ExportLy::doSlurStart(Chord* chord, bool nextisrest)
 {
   int slurcount=0;
-  foreach(const Spanner* sp, chord->spannerFor())
+  foreach(const Slur* s, chord->slurFor())
     {
-      if (sp->type() != SLUR)
-            continue;
-      const Slur* s = static_cast<const Slur*>(sp);
-
       slurcount++;
 
       int i = findSlur(s);
@@ -2496,7 +2480,7 @@ void ExportLy::doSlurStart(Chord* chord, bool nextisrest)
 	      out << "(";
 	    }
 	  else
-	    qDebug("no free slur slot");
+	    printf("no free slur slot");
 	}
     }
 }
@@ -2509,12 +2493,8 @@ void ExportLy::doSlurStart(Chord* chord, bool nextisrest)
 void ExportLy::doSlurStop(Chord* chord)
 {
 
-  foreach(const Spanner* sp, chord->spannerBack())
+  foreach(const Slur* s, chord->slurBack())
     {
-    if (sp->type() != SLUR)
-          continue;
-    const Slur* s = static_cast<const Slur*>(sp);
-
       // check if on slur list
       int i = findSlur(s);
       if (i < 0)
@@ -2534,7 +2514,7 @@ void ExportLy::doSlurStop(Chord* chord)
 	      out << ")";  //why do we always end here??
 	    }
 	  else
-	    qDebug("no free slur slot");
+	    printf("no free slur slot");
 	}
     }
 
@@ -2588,94 +2568,94 @@ void ExportLy::writeArticulation(ChordRest* c)
     {
       switch(a->subtype())
 	{
-	case Articulation_Fermata:
-        if (a->up())
-	      out << "\\fermata ";
-        else
-	      out << "_\\fermata ";
+	case UfermataSym:
+	  out << "\\fermata ";
 	  break;
-	case Articulation_Thumb:
+	case DfermataSym:
+	  out << "_\\fermata ";
+	  break;
+	case ThumbSym:
 	  out << "\\thumb ";
 	  break;
-	case Articulation_Sforzatoaccent:
+	case SforzatoaccentSym:
 	  out << "-> ";
 	  break;
-	case Articulation_Espressivo:
+	case EspressivoSym:
 	  out << "\\espressivo ";
 	  break;
-	case Articulation_Staccato:
+	case StaccatoSym:
 	  out << "-. ";
 	  break;
-	case Articulation_Staccatissimo:
-        if (a->up())
-	      out << "-| ";
-        else
-	      out << "_| ";
+	case UstaccatissimoSym:
+	  out << "-| ";
 	  break;
-	case Articulation_Tenuto:
+	case DstaccatissimoSym:
+	  out << "_| ";
+	  break;
+	case TenutoSym:
 	  out << "-- ";
 	  break;
-//TODO:	case Articulation_Flageolet:
-//	  out << "\\flageolet ";
-	case Articulation_Portato:
-        if (a->up())
-	      out << "-_ ";
-        else
-	      out << "__ ";
+	case flageoletSym:
+	  out << "\\flageolet ";
+	case UportatoSym:
+	  out << "-_ ";
 	  break;
-	case Articulation_Marcato:
-        if (a->up())
-	      out << "-^ ";
-        else
-	      out << "_^ ";
+	case DportatoSym:
+	  out << "__ ";
 	  break;
-	case Articulation_Ouvert:
+	case UmarcatoSym:
+	  out << "-^ ";
+	  break;
+	case DmarcatoSym:
+	  out << "_^ ";
+	  break;
+	case OuvertSym:
 	  out << "\\open ";
 	  break;
-	case Articulation_Plusstop:
+	case PlusstopSym:
 	  out << "-+ ";
 	  break;
-	case Articulation_Upbow:
+	case UpbowSym:
 	  out << "\\upbow ";
 	  break;
-	case Articulation_Downbow:
+	case DownbowSym:
 	  out << "\\downbow ";
 	  break;
-	case Articulation_Reverseturn:
+	case ReverseturnSym:
 	  out << "\\reverseturn ";
 	  break;
-	case Articulation_Turn:
+	case TurnSym:
 	  out << "\\turn ";
 	  break;
-	case Articulation_Trill:
+	case TrillSym:
 	  out << "\\trill ";
 	  break;
-	case Articulation_Prall:
+	case PrallSym:
 	  out << "\\prall ";
 	  break;
-	case Articulation_Mordent:
+	case MordentSym:
 	  out << "\\mordent ";
 	  break;
-	case Articulation_PrallPrall:
+	case PrallPrallSym:
 	  out << "\\prallprall ";
 	  break;
-	case Articulation_PrallMordent:
+	case PrallMordentSym:
 	  out << "\\prallmordent ";
 	  break;
-	case Articulation_UpPrall:
+	case UpPrallSym:
 	  out << "\\prallup ";
 	  break;
-	case Articulation_DownPrall:
+	case DownPrallSym:
 	  out << "\\pralldown ";
 	  break;
-	case Articulation_UpMordent:
+	case UpMordentSym:
 	  out << "\\upmordent ";
 	  break;
-	case Articulation_DownMordent:
+	case DownMordentSym:
 	  out << "\\downmordent ";
 	  break;
 	default:
-	  qDebug("unsupported note attribute %d\n", a->subtype());
+	  printf("unsupported note attribute %d\n", a->subtype());
 	  break;
 	}// end switch
     }// end foreach
@@ -2694,20 +2674,17 @@ void ExportLy::writeTremolo(Chord * chord)
       int st = tr->subtype();
       switch (st)
 	{
-	case TREMOLO_R8:
+	case TREMOLO_1:
 	  out << ":8 ";
 	  break;
-	case TREMOLO_R16:
+	case TREMOLO_2:
 	  out << ":16 ";
 	  break;
-	case TREMOLO_R32:
+	case TREMOLO_3:
 	  out << ":32 ";
 	  break;
-	case TREMOLO_R64:
-	  out << ":64 ";
-	  break;
 	default:
-	  qDebug("unknown tremolo %d\n", st);
+	  printf("unknown tremolo %d\n", st);
 	  break;
 	}
     }
@@ -2719,23 +2696,26 @@ void ExportLy::writeTremolo(Chord * chord)
 //------------------------------------------------------------------------------------------
 
 void ExportLy::findFingerAndStringno(Note* note, int &fingix, int &stringix, QString (&fingarray)[5], QString (&stringarray)[10])
-      {
-      foreach (const Element* e, note->el()) {
-            if (e->type() == FINGERING) {
-                  const Text* text = static_cast<const Text*>(e);
-                  if (text->textStyleType() == TEXT_STYLE_FINGERING) {
-	                  fingix++;
-      	            Text* f = (Text*)e;
-	                  fingarray[fingix] = f->getText();
-	                  }
-                  else if (text->textStyleType() == TEXT_STYLE_STRING_NUMBER) {
-                        stringix++;
-                        Text * s = (Text*)e;
-                        stringarray[stringix] = s->getText();
-                        }
-                  }
-            }
-      }//end findfingerandstringno
+{
+  foreach (const Element* e, *note->el())
+    {
+      if (e->type() == TEXT)
+	{
+	  if ( e->subtype() == TEXT_FINGERING)
+	    {
+	      fingix++;
+	      Text* f = (Text*)e;
+	      fingarray[fingix] = f->getText();
+	    }
+	  if (e->subtype() == TEXT_STRING_NUMBER)
+	    {
+	      stringix++;
+	      Text * s = (Text*)e;
+	      stringarray[stringix] = s->getText();
+	    }
+	}
+    }
+}//end findfingerandstringno
 
 
 void ExportLy::writeStringInstruction(int &strgix, QString stringarr[10])
@@ -2882,7 +2862,7 @@ bool ExportLy::arpeggioTest(Chord* chord)
 	  out << "\\arpeggioArrowDown ";
 	  break;
 	default:
-	  qDebug("unknown arpeggio subtype %d\n", subtype);
+	  printf("unknown arpeggio subtype %d\n", subtype);
 	  break;
 	}
     }
@@ -2915,19 +2895,29 @@ bool ExportLy::glissandotest(Chord* chord)
 // Find symbols attached to note.
 //------------------------------------------------------------
 
-bool ExportLy::findNoteSymbol(Note* n, QString& symbolname)
-      {
-      symbolname = "";
+bool ExportLy::findNoteSymbol(Note* n, QString &symbolname)
+{
+  bool found = false;
+  ElementList* notelmlist;
+  symbolname="";
 
-      foreach(const Element* symbol, n->el()) {
-            if (symbol->type() == SYMBOL) {
-                  const Symbol* symb = static_cast<const Symbol*>(symbol);
-                  symbolname = symbols[0][symb->sym()].name();
-                  return true; // what about more symbols connected to one note? Return array of names?
-                  }
-            }
-      return false;
-      }//end findNoteSymbol
+  notelmlist = n->el();
+  for (ciElement ci = notelmlist->begin(); ci != notelmlist->end(); ++ci)
+    {
+      Element* symbol = *ci;
+      int elementtype = symbol->type();
+
+      if (elementtype == SYMBOL)
+	{
+	  found = true;
+	  Symbol * symb = (Symbol*) symbol;
+	  symbolname = symbols[symb->sym()].name();
+	  break; // what about more symbols connected to one note? Return array of names?
+	}
+    }
+  return found;
+}//end findNoteSymbol
+
 
 //---------------------------------------------------------
 //   writeChord
@@ -3036,7 +3026,7 @@ void ExportLy::writeChord(Chord* c, bool nextisrest)
        ix++;
      }
 
-  writeLen(c->actualTicks());
+  writeLen(c->tickLen());
 
   if ((symb) and (nl.size() == 1))
     writeSymbol(symbolname);
@@ -3084,86 +3074,86 @@ int ExportLy::getLen(int l, int* dots)
 {
   int len  = 4;
 
-  if (l == 16 * MScore::division) //longa, whole measure of 4/2-time
+  if (l == 16 * AL::division) //longa, whole measure of 4/2-time
     len=-2;
-  else if (l == 12 * MScore::division) // "6/2" "dotted brevis" used for whole-measure rest in 6/2 time.
+  else if (l == 12 * AL::division) // "6/2" "dotted brevis" used for whole-measure rest in 6/2 time.
     len=-3;
-  else if (l == 10 * MScore::division) // "5/2"- time, used for whole-measure rest.
+  else if (l == 10 * AL::division) // "5/2"- time, used for whole-measure rest.
     len=-4;
-  else if (l == 8 * MScore::division) //brevis
+  else if (l == 8 * AL::division) //brevis
     len = -1;
-  else if (l == 7 * MScore::division) //doubledotted whole
+  else if (l == 7 * AL::division) //doubledotted whole
     {
       len = 1;
       *dots = 2;
     }
-  else if (l == 6 * MScore::division) //dotted whole
+  else if (l == 6 * AL::division) //dotted whole
     {
       len  = 1;
       *dots = 1;
     }
-  else if (l == 5 * MScore::division) // whole measure of 5/4-time
+  else if (l == 5 * AL::division) // whole measure of 5/4-time
       len = -5;
-  else if (l == 4 * MScore::division) //whole
+  else if (l == 4 * AL::division) //whole
     len = 1;
-  else if (l == 3 * MScore::division) // dotted half
+  else if (l == 3 * AL::division) // dotted half
     {
       len = 2;
       *dots = 1;
     }
-  else if (l == ((MScore::division/2)*7)) // double-dotted half: 7/8 used for \partial bar.
+  else if (l == ((AL::division/2)*7)) // double-dotted half: 7/8 used for \partial bar.
     {
       len = 2;
       *dots=2;
     }
-  else if (l == 2 * MScore::division)
+  else if (l == 2 * AL::division)
     len = 2;
-  else if (l == MScore::division)
+  else if (l == AL::division)
     len = 4;
-  else if (l == MScore::division *3 /2)
+  else if (l == AL::division *3 /2)
     {
       len=4;
       *dots=1;
     }
-  else if (l == MScore::division / 2)
+  else if (l == AL::division / 2)
     len = 8;
-  else if (l == MScore::division*3 /4) //dotted 8th
+  else if (l == AL::division*3 /4) //dotted 8th
     {
       len = 8;
       *dots=1;
     }
-  else if (l == MScore::division / 4)
+  else if (l == AL::division / 4)
     len = 16;
-  else if (l == MScore::division / 8)
+  else if (l == AL::division / 8)
     len = 32;
-  else if (l == MScore::division * 3 /8) //dotted 16th.
+  else if (l == AL::division * 3 /8) //dotted 16th.
     {
       len = 16;
       *dots = 1;
     }
-  else if (l == MScore::division / 16)
+  else if (l == AL::division / 16)
     len = 64;
-  else if (l == MScore::division /32)
+  else if (l == AL::division /32)
     len = 128;
   //triplets, lily uses nominal value surrounded by \times 2/3 {  }
   //so we set len equal to nominal value
-  else if (l == ((MScore::division  * 8)/3))
+  else if (l == ((AL::division  * 8)/3))
      len = 1;
-  else if (l == MScore::division * 4 /3)
+  else if (l == AL::division * 4 /3)
      len = 2;
-  else if (l == (MScore::division * 2)/3)
+  else if (l == (AL::division * 2)/3)
     len = 4;
-  else if (l == MScore::division /3)
+  else if (l == AL::division /3)
     len = 8;
-  else if (l == MScore::division /(3*2))
+  else if (l == AL::division /(3*2))
     len = 16;
-  else if (l == MScore::division /3*4)
+  else if (l == AL::division /3*4)
     len = 32;
-  else if (l == MScore::division/3*8)
+  else if (l == AL::division/3*8)
     len = 64;
   else if (l == 0)
     len = 1;
-  else qDebug("measure: %d, unsupported len %d (%d,%d)\n", measurenumber, l, l/MScore::division, l % MScore::division);
+  else printf("measure: %d, unsupported len %d (%d,%d)\n", measurenumber, l, l/AL::division, l % AL::division);
   return len;
 }
 
@@ -3361,7 +3351,7 @@ void ExportLy::writeVolta(int measurenumber, int lastind)
 	      curTicks=-1;
 	      break;
           default:
-	    // case none: qDebug("strange voltarraycontents?\n");
+	    // case none: printf("strange voltarraycontents?\n");
 	    break;
 	    }//end switch
 
@@ -3502,27 +3492,24 @@ void ExportLy::findLyrics()
 	    continue;
 	  Measure* meas = (Measure*)mb;
 
-        SegmentTypes st = SegChordRest | SegGrace;
-	  for(Segment* seg = meas->first(st); seg; seg = seg->next(st))
+	  for(Segment* seg = meas->first(); seg; seg = seg->next())
 	    {
-	      const QList<Lyrics*>* lyrlist = seg->lyricsList(staffno);
-            if (!lyrlist)
-                  continue;
+	      LyricsList * lyrlist = seg->lyricsList(staffno);
 
-	      foreach(const Lyrics* lix, *lyrlist)
+	      for (ciLyrics lix = lyrlist->begin(); lix != lyrlist->end(); ++lix)
 		{
-		  if (lix)
+		  if (*lix)
 		    {
-		      verse = (lix)->no();
+		      verse = (*lix)->no();
 		      if ((verse - prevverse) > 1)
 			{
 			  thisLyrics->lyrdat.verselyrics[verse-1] += "__ _ ";
 			}
-		      track = (lix)->track();
+		      track = (*lix)->track();
 		      vox = track - (staffno*VOICES);
 
 		      thisLyrics->lyrdat.segmentnumber[verse]++;
-		      thisLyrics->lyrdat.tick[verse] = (lix)->segment()->tick();
+		      thisLyrics->lyrdat.tick[verse] = (*lix)->tick();
 
 		      if (verse > thisLyrics->numberofverses)
 			{
@@ -3539,21 +3526,18 @@ void ExportLy::findLyrics()
 			    }
 			}
 
-		      QString lyriks = (lix)->getText();
-
-          //  escape '"' character
+		      QString lyriks = (*lix)->getText();
           if (lyriks.contains('"'))
-                 lyriks = "\"" + lyriks.replace("\"","\\\"") + "\"";
-
-		      lyriks = lyriks.replace(" ", "_"); //bolton: if two words on one note.
-		      thisLyrics->lyrdat.verselyrics[verse] += lyriks;
+                lyriks = "\"" + lyriks.replace("\"","\\\"") + "\"";
+          
+		      thisLyrics->lyrdat.verselyrics[verse] += lyriks.replace(" ", "_"); //bolton: if two words on one note.
 
 		      thisLyrics->lyrdat.staffname =  staffname[staffno].staffid;
 		      thisLyrics->lyrdat.voicename[verse] = staffname[staffno].voicename[vox];
 
-		      thisLyrics->lyrdat.tick[verse] = (lix)->segment()->tick();
+		      thisLyrics->lyrdat.tick[verse] = (*lix)->tick();
 
-		      int syl   = (lix)->syllabic();
+		      int syl   = (*lix)->syllabic();
 		      switch(syl)
 			{
 			case Lyrics::SINGLE:
@@ -3569,10 +3553,10 @@ void ExportLy::findLyrics()
 			  thisLyrics->lyrdat.verselyrics[verse] += " -- ";
 			  break;
 			default:
-			  qDebug("unknown syllabic %d\n", syl);
+			  printf("unknown syllabic %d\n", syl);
 			}//switch syllable
-		      cout << " lyrics endtick: " << (lix)->endTick() << "\n";
-		      if ((lix)->ticks() > 0) //more than one note on this syllable
+		      cout << " lyrics endtick: " << (*lix)->endTick() << "\n";
+		      if ((*lix)->endTick() > 0) //more than one note on this syllable
 			{
 			  cout << " _ ";
 			  thisLyrics->lyrdat.verselyrics[verse] += " _ ";
@@ -3744,7 +3728,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 
    // if (m->irregular())
    //   {
-   // 	       qDebug("irregular measure, number: %d\n", measurenumber);
+   // 	       printf("irregular measure, number: %d\n", measurenumber);
    //   }
 
 
@@ -3874,13 +3858,13 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
          continue;
 
        handlePreInstruction(e); // Handle instructions which are to be printed before the element itself
-       barlen=m->ticks();
+       barlen=m->tickLen();
        //handle element:
        switch(e->type())
 	 {
 	 case CLEF:
 	   if (wholemeasurerest >=1) writeMeasuRestNum();
-	   writeClef(static_cast<Clef*>(e)->clefType());
+	   writeClef(e->subtype());
 	   indent();
 	   break;
 	 case TIMESIG:
@@ -3891,18 +3875,18 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 		 writeTimeSig((TimeSig*)e);
 		 out << "\n";
 
-		 int nombarlen=z1*MScore::division;
+		 int nombarlen=z1*AL::division;
 
 		 if (timedenom==8) nombarlen=nombarlen/2;
 		 if (timedenom == 2) nombarlen = 2*nombarlen;
 
 		 if ((barlen<nombarlen) and (measurenumber==1) and (voice == 0))
 		       {
-			     pickup = true;
-           partial = true;
+			     pickup=true;
+			     partial = true;
 			     indent();
-			     const SigEvent ev(m->score()->sigmap()->timesig(m->tick()));
-      	   out << "\\partial " << ev.timesig().denominator() << "*" << ev.timesig().numerator() << "\n";
+			     const AL::SigEvent ev(m->score()->sigmap()->timesig(m->tick()));
+			     out << "\\partial " << ev.fraction().denominator() << "*" << ev.fraction().numerator() << "\n";
 		       }
 		 curTicks=-1; //we always need explicit length after timesig.
 		 indent();
@@ -3931,7 +3915,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 		 cout << "at tick: " << keytick << "\n";
 		 KeyList* kl = score->staff(staffInd)-> keymap();
 		 KeySigEvent key = kl->key(keytick);
-//		 ciKeyList ci = kl->find(keytick);
+		 ciKeyList ci = kl->find(keytick);
 		 //
 		 //		 if (ci != kl->end())
 		 //     {
@@ -3947,7 +3931,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	 case CHORD:
 	     {
 		 if (wholemeasurerest >=1) writeMeasuRestNum();
-		 int ntick = static_cast<Chord*>(e)->tick() - tick;
+		 int ntick = e->tick() - tick;
 		 if (ntick > 0)
 		     {
 			 writeRest(ntick, 2);//invisible rest: s
@@ -3957,8 +3941,8 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 		 measuretick=measuretick+ntick;
 		 checkIfNextIsRest(mb, s, nextisrest, track);
 		 writeChord((Chord*)e, nextisrest);
-		 tick += ((Chord*)e)->actualTicks();
-		 measuretick=measuretick+((Chord*)e)->actualTicks();
+		 tick += ((Chord*)e)->ticks();
+		 measuretick=measuretick+((Chord*)e)->ticks();
 		 break;
 	     }
 	 case REST:
@@ -3973,10 +3957,10 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 
 	     if (!(a.isEmpty()) ) articul = true;
 
-	     int l = ((Rest*)e)->actualTicks();
-	     int mlen=((Rest*)e)->segment()->measure()->ticks();
+	     int l = ((Rest*)e)->ticks();
+	     int mlen=((Rest*)e)->segment()->measure()->tickLen();
 
-	     int nombarl=z1*MScore::division;
+	     int nombarl=z1*AL::division;
 
 	     if (((l==mlen) || (l==0)) and (mlen ==nombarl))  //l == 0 ??
 	       {
@@ -3994,7 +3978,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 		 else
 		   {
 		     //wholemeasurerest: on fermata, output of * and start of new count.
-		     l = ((Rest*)e)->segment()->measure()->ticks();
+		     l = ((Rest*)e)->segment()->measure()->tickLen();
 		     if (articul)
 		       {
 			 writeRest(l,0);
@@ -4016,13 +4000,13 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	  } //end REST
 	  break;
 	case MARKER:
-	  qDebug("ordinary elements: Marker found\n");
+	  printf("ordinary elements: Marker found\n");
 	  break;
 	case BREATH:
 	  out << "\\breathe ";
 	  break;
 	default:
-	  //qDebug("Export Lilypond: unsupported element <%s>\n", e->name());
+	  //printf("Export Lilypond: unsupported element <%s>\n", e->name());
 	  break;
 	} // end switch elementtype
 
@@ -4035,36 +4019,35 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	}
     } //end for all segments
 
-   barlen=m->ticks();
+   barlen=m->tickLen();
    if (barempty == true)
    // no stuff in this bar in this voice: fill empty bar with silent rest
     {
       if ((pickup) and (measurenumber==1) and (voice == 0))
-	{
-
-    const SigEvent ev(m->score()->sigmap()->timesig(m->tick()));
-    out << "\\partial " << ev.timesig().denominator() << "*" << ev.timesig().numerator() << "\n";
-	  indent();
-	  writeRest(barlen,2);
-	  out << "\n";
-	}//end if pickup
+      	{
+      	  const AL::SigEvent ev(m->score()->sigmap()->timesig(m->tick()));
+      	  out << "\\partial " << ev.fraction().denominator() << "*" << ev.fraction().numerator() << "\n";
+      	  indent();
+      	  writeRest(barlen,2);
+      	  out << "\n";
+      	}//end if pickup
       else //if not pickupbar: full measure silent bar
-	{
-	  writeRest(barlen, 2);
-	  curTicks=-1;
-	}
+      	{
+      	  writeRest(barlen, 2);
+      	  curTicks=-1;
+      	}
     }//end bar empty
    else // voice bar not empty
      {
        //we have to fill with spacer rests before and after nonsilent material
        if ((measuretick < barlen) and (measurenumber>0))
-	 {
-	   //fill rest of measure with silent rest
-	   int negative=barlen-measuretick;
-	   curTicks=-1;
-	   writeRest(negative, 2);
-	   curTicks=-1;
-	 }
+      	   {
+      	   //fill rest of measure with silent rest
+      	   int negative=barlen-measuretick;
+      	   curTicks=-1;
+      	   writeRest(negative, 2);
+      	   curTicks=-1;
+      	   }
      }
    int mno;
    if (!partial)
@@ -4107,15 +4090,15 @@ void ExportLy::writeScore()
   privateRehearsalMark='A';
 
 
-  foreach(Part* part, score->parts())
+  foreach(Part* part, *score->parts())
     {
       nextAnchor=0;
       initAnchors();
       resetAnchor(anker);
 
       int n = part->staves()->size();
-      staffname[staffInd].partname  = part->longName().toPlainText();
-      staffname[staffInd].partshort = part->shortName().toPlainText();
+      staffname[staffInd].partname  = part->longName()->getText();
+      staffname[staffInd].partshort = part->shortName()->getText();
       curTicks=-1;
       pickup=false;
 
@@ -4132,9 +4115,9 @@ void ExportLy::writeScore()
 
 
       //ANCHORTEST: print instructionlist
-      //      qDebug("anchortest\n");
+      //      printf("anchortest\n");
       //   anchortest();
-      //      qDebug("jumptest\n");
+      //      printf("jumptest\n");
       //      jumptest(); segfaults!?!?
 
       foreach(Staff* staff, *part->staves())
@@ -4177,8 +4160,6 @@ void ExportLy::writeScore()
 	      relativ="'";
 	      staffpitch=12*5;
 	      break;
-          default:      //??
-            break;
 	    }
 
 	  staffrelativ=relativ;
@@ -4193,7 +4174,7 @@ void ExportLy::writeScore()
 	  staffname[staffInd].staffid.remove(QChar(' '));
 
 	  findVolta();
-	  //qDebug("voltatest\n");
+	  //printf("voltatest\n");
 	  //	  voltatest();
 
 	  for (voice = 0; voice < VOICES; ++voice)  voiceActive[voice] = false;
@@ -4203,7 +4184,7 @@ void ExportLy::writeScore()
 	      prevpitch=staffpitch;
 	      relativ=staffrelativ;
 	      donefirst=false;
-	      partial=0;
+	      partial = false;
 
 	      //for all measures in this voice:
 	      for (MeasureBase* m = score->first(); m; m = m->next())
@@ -4577,23 +4558,31 @@ void ExportLy::writeLilyHeader()
   //---------------------------------------------------
 void ExportLy::writePageFormat()
 {
-  const PageFormat* pf = score->pageFormat();
+  PageFormat* pf = score->pageFormat();
   os << "#(set-default-paper-size ";
-      os << QString(pf->paperSize()->name).toLower();
+  switch(pf->size) {
+  default:
+  case  0: os << "\"a4\""; break;
+  case  2: os << "\"letter\""; break;
+  case  8: os << "\"a3\""; break;
+  case  9: os << "\"a5\""; break;
+  case 10: os << "\"a6\""; break;
+  case 29: os << "\"11x17\""; break;
+  }
 
-  if (pf->size().width() > pf->size().height()) os << " 'landscape";
+  if (pf->landscape) os << " 'landscape";
 
   os << ")\n\n";
 
   // TODO/O.G.: choose between standard formats and specified paper
   // dimensions. We normally don't need both.
 
-  double lw = pf->printableWidth();
+  double lw = pf->width() - pf->evenLeftMargin - pf->evenRightMargin;
   os << "\\paper {\n";
   os <<  "  line-width    = " << lw * INCH << "\\mm\n";
-  os <<  "  left-margin   = " << pf->evenLeftMargin() * INCH << "\\mm\n";
-  os <<  "  top-margin    = " << pf->evenTopMargin() * INCH << "\\mm\n";
-  os <<  "  bottom-margin = " << pf->evenBottomMargin() * INCH << "\\mm\n";
+  os <<  "  left-margin   = " << pf->evenLeftMargin * INCH << "\\mm\n";
+  os <<  "  top-margin    = " << pf->evenTopMargin * INCH << "\\mm\n";
+  os <<  "  bottom-margin = " << pf->evenBottomMargin * INCH << "\\mm\n";
   os <<  "  %%indent = 0 \\mm \n";
   os <<  "  %%set to ##t if your score is less than one page: \n";
   os <<  "  ragged-last-bottom = ##t \n";
@@ -4611,8 +4600,6 @@ void ExportLy::writePageFormat()
 //---------------------------------------------------
 void ExportLy::writeScoreTitles()
 {
-#if 0 //TODOws
-
   os << "\\header {\n";
 
   ++level;
@@ -4636,22 +4623,21 @@ void ExportLy::writeScoreTitles()
       os << "poet = ";
       break;
     default:
-      qDebug("text-type %d not supported\n", e->subtype());
+      printf("text-type %d not supported\n", e->subtype());
       os << "subtitle = ";
       break;
     }
     os << "\"" << s << "\"\n";
   }
 
-  if (!score->metaTag("Copyright").isEmpty())
+  if (score->rights)
     {
       indentF();
-      os << "copyright = \"" << score->metaTag("Copyright") << "\"\n";
+      os << "copyright = \"" << score->rights->getText() << "\"\n";
     }
 
   indentF();
   os << "}\n";
-#endif
 }// end writeScoreTitles
 
 

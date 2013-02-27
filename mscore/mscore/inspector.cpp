@@ -1,55 +1,112 @@
 //=============================================================================
 //  MuseScore
-//  Music Composition & Notation
-//  $Id:$
+//  Linux Music Score Editor
+//  $Id$
 //
-//  Copyright (C) 2011 Werner Schweer
+//  Copyright (C) 2002-2007 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License version 2
-//  as published by the Free Software Foundation and appearing in
-//  the file LICENSE.GPL
+//  it under the terms of the GNU General Public License version 2.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program; if not, write to the Free Software
+//  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
 #include "inspector.h"
-#include "inspectorBeam.h"
-#include "inspectorImage.h"
-#include "inspectorGroupElement.h"
-#include "musescore.h"
-#include "libmscore/element.h"
-#include "libmscore/score.h"
-#include "libmscore/box.h"
-#include "libmscore/undo.h"
-#include "libmscore/spacer.h"
-#include "libmscore/note.h"
-#include "libmscore/chord.h"
-#include "libmscore/segment.h"
-#include "libmscore/rest.h"
-#include "libmscore/beam.h"
-#include "libmscore/clef.h"
-#include "libmscore/notedot.h"
-#include "libmscore/hook.h"
-#include "libmscore/stem.h"
+#include "mscore.h"
+#include "element.h"
+#include "page.h"
+#include "segment.h"
+#include "score.h"
+#include "rest.h"
+#include "note.h"
+#include "chord.h"
+#include "measure.h"
+#include "text.h"
+#include "textstyle.h"
+#include "hairpin.h"
+#include "beam.h"
+#include "tuplet.h"
+#include "globals.h"
+#include "clef.h"
+#include "barline.h"
+#include "hook.h"
+#include "dynamics.h"
+#include "slur.h"
+#include "lyrics.h"
+#include "volta.h"
+#include "line.h"
+#include "textline.h"
+#include "system.h"
+#include "arpeggio.h"
+#include "glissando.h"
+#include "tremolo.h"
+#include "articulation.h"
+
+extern bool useFactorySettings;
 
 //---------------------------------------------------------
-//   showInspector
+//   ElementItem
 //---------------------------------------------------------
 
-void MuseScore::showInspector(bool visible)
+class ElementItem : public QTreeWidgetItem
       {
-      QAction* a = getAction("inspector");
-      if (visible) {
-            if (!inspector) {
-                  inspector = new Inspector();
-                  connect(inspector, SIGNAL(inspectorVisible(bool)), a, SLOT(setChecked(bool)));
-                  addDockWidget(Qt::RightDockWidgetArea, inspector);
+      Element* el;
+
+   public:
+      ElementItem(QTreeWidget* lv, Element* e);
+      ElementItem(QTreeWidgetItem* ei, Element* e);
+      Element* element() const { return el; }
+      void init();
+      };
+
+ElementItem::ElementItem(QTreeWidget* lv, Element* e)
+   : QTreeWidgetItem(lv, e->type())
+      {
+      el = e;
+      init();
+      }
+
+ElementItem::ElementItem(QTreeWidgetItem* ei, Element* e)
+   : QTreeWidgetItem(ei, e->type())
+      {
+      el = e;
+      init();
+      }
+
+//---------------------------------------------------------
+//   init
+//---------------------------------------------------------
+
+void ElementItem::init()
+      {
+      QString s;
+      switch(el->type()) {
+            case PAGE:
+                  {
+                  QString no;
+                  no.setNum(((Page*)el)->no()+1);
+                  s = "Page-" + no;
                   }
-            if (cs)
-                  selectionChanged(cs->selection().state());
+                  break;
+            case MEASURE:
+                  {
+                  QString no;
+                  no.setNum(((Measure*)el)->no()+1);
+                  s = "Measure-" + no;
+                  }
+                  break;
+            default:
+                  s = el->name();
+                  break;
             }
-      if (inspector)
-            inspector->setVisible(visible);
-      a->setChecked(visible);
+      setText(0, s);
       }
 
 //---------------------------------------------------------
@@ -57,1049 +114,763 @@ void MuseScore::showInspector(bool visible)
 //---------------------------------------------------------
 
 Inspector::Inspector(QWidget* parent)
-   : QDockWidget(tr("Inspector"), parent)
+   : QDialog(parent)
       {
-      setObjectName("inspector");
-      setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-      QScrollArea* sa = new QScrollArea;
-      sa->setWidgetResizable(true);
-      QWidget* mainWidget = new QWidget;
-      mainWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding); //??
-      setWidget(sa);
-      sa->setWidget(mainWidget);
+      setupUi(this);
+      setWindowTitle(tr("MuseScore: Object Inspector"));
 
-      layout = new QVBoxLayout;
-      mainWidget->setLayout(layout);
-      ie        = 0;
-      _element  = 0;
+      curElement   = 0;
+      pagePanel    = new ShowPageWidget;
+      systemPanel  = new ShowSystemWidget;
+      measurePanel = new MeasureView;
+      chordPanel   = new ShowChordWidget;
+      notePanel    = new ShowNoteWidget;
+      restPanel    = new ShowRestWidget;
+      timesigPanel = new ShowTimesigWidget;
+      keysigPanel  = new ShowKeysigWidget;
+      clefPanel    = new ShowClefWidget;
+      segmentView  = new SegmentView;
+      textView     = new TextView;
+      elementView  = new ElementView;
+      hairpinView  = new HairpinView;
+      barLineView  = new BarLineView;
+      dynamicView  = new DynamicView;
+      tupletView   = new TupletView;
+      slurView     = new SlurView;
+      tieView      = new TieView;
+      voltaView    = new VoltaView;
+      voltaSegmentView = new VoltaSegmentView;
+      lyricsView   = new LyricsView;
+      beamView     = new BeamView;
+      tremoloView  = new TremoloView;
+
+      stack->addWidget(pagePanel);
+      stack->addWidget(systemPanel);
+      stack->addWidget(measurePanel);
+      stack->addWidget(chordPanel);
+      stack->addWidget(notePanel);
+      stack->addWidget(restPanel);
+      stack->addWidget(timesigPanel);
+      stack->addWidget(keysigPanel);
+      stack->addWidget(clefPanel);
+      stack->addWidget(segmentView);
+      stack->addWidget(textView);
+      stack->addWidget(elementView);
+      stack->addWidget(hairpinView);
+      stack->addWidget(barLineView);
+      stack->addWidget(dynamicView);
+      stack->addWidget(tupletView);
+      stack->addWidget(slurView);
+      stack->addWidget(tieView);
+      stack->addWidget(voltaView);
+      stack->addWidget(voltaSegmentView);
+      stack->addWidget(lyricsView);
+      stack->addWidget(beamView);
+      stack->addWidget(tremoloView);
+
+      connect(pagePanel,    SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(systemPanel,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(measurePanel, SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(chordPanel,   SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(notePanel,    SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(restPanel,    SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(timesigPanel, SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(keysigPanel,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(clefPanel,    SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(segmentView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(textView,     SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(elementView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(hairpinView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(barLineView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(dynamicView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(tupletView,   SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(slurView,     SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(tieView,      SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(voltaView,    SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(voltaSegmentView, SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(lyricsView,   SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(beamView,     SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(tremoloView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(tupletView,   SIGNAL(scoreChanged()), SLOT(layoutScore()));
+      connect(notePanel,    SIGNAL(scoreChanged()), SLOT(layoutScore()));
+
+      connect(list, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(itemClicked(QTreeWidgetItem*,int)));
+      connect(list, SIGNAL(itemExpanded(QTreeWidgetItem*)), SLOT(itemExpanded(QTreeWidgetItem*)));
+      connect(list, SIGNAL(itemCollapsed(QTreeWidgetItem*)), SLOT(itemExpanded(QTreeWidgetItem*)));
+      list->resizeColumnToContents(0);
+      if (!useFactorySettings) {
+            QSettings settings;
+            settings.beginGroup("Inspector");
+            split->restoreState(settings.value("splitter").toByteArray());
+            resize(settings.value("size", QSize(1000, 500)).toSize());
+            move(settings.value("pos", QPoint(10, 10)).toPoint());
+            settings.endGroup();
+            }
+      back->setEnabled(false);
+      forward->setEnabled(false);
+      connect(back,    SIGNAL(clicked()), SLOT(backClicked()));
+      connect(forward, SIGNAL(clicked()), SLOT(forwardClicked()));
+      connect(reload,  SIGNAL(clicked()), SLOT(reloadClicked()));
+      }
+
+//---------------------------------------------------------
+//   writeSettings
+//---------------------------------------------------------
+
+void Inspector::writeSettings()
+      {
+      QSettings settings;
+      settings.beginGroup("Inspector");
+      settings.setValue("size", size());
+      settings.setValue("pos", pos());
+      settings.setValue("splitter", split->saveState());
+      settings.endGroup();
+      }
+
+//---------------------------------------------------------
+//   layoutScore
+//---------------------------------------------------------
+
+void Inspector::layoutScore()
+      {
+      cs->setLayoutAll(true);
+      cs->end();
+      }
+
+//---------------------------------------------------------
+//   addSymbol
+//---------------------------------------------------------
+
+void Inspector::addSymbol(ElementItem* parent, BSymbol* bs)
+      {
+      const QList<Element*>el = bs->getLeafs();
+      ElementItem* i = new ElementItem(parent, bs);
+      if (!el.isEmpty()) {
+            foreach(Element* g, el)
+                  addSymbol(i, static_cast<BSymbol*>(g));
+            }
+      }
+
+//---------------------------------------------------------
+//   addMeasureBaseToList
+//---------------------------------------------------------
+
+static void addMeasureBaseToList(ElementItem* mi, MeasureBase* mb)
+      {
+      foreach(Element* e, *mb->el()) {
+            ElementItem* mmi = new ElementItem(mi, e);
+            if (e->type() == HBOX || e->type() == VBOX)
+                  addMeasureBaseToList(mmi, static_cast<MeasureBase*>(e));
+            }
+      }
+
+//---------------------------------------------------------
+//   showEvent
+//---------------------------------------------------------
+
+void Inspector::showEvent(QShowEvent*)
+      {
+      updateList(cs);
+      }
+
+//---------------------------------------------------------
+//   updateList
+//---------------------------------------------------------
+
+void Inspector::updateList(Score* s)
+      {
+      if (cs != s) {
+            backStack.clear();
+            forwardStack.clear();
+            back->setEnabled(false);
+            forward->setEnabled(false);
+            cs = s;
+            }
+      curElement = 0;
+      list->clear();
+      if (!isVisible())
+            return;
+
+      QTreeWidgetItem* li = new QTreeWidgetItem(list, INVALID);
+      li->setText(0, "Global");
+      foreach(Element* el, *cs->gel()) {
+            if (el->type() == SLUR) {
+                  ElementItem* se = new ElementItem(li, el);
+                  Slur* slur = (Slur*)el;
+                  foreach(Element* el1, *slur->slurSegments())
+                        new ElementItem(se, el1);
+                  }
+            else if (el->type() == VOLTA) {
+                  ElementItem* ei = new ElementItem(li, el);
+                  Volta* volta = static_cast<Volta*>(el);
+                  if (volta->beginText())
+                        new ElementItem(ei, volta->beginText());
+                  if (volta->continueText())
+                        new ElementItem(ei, volta->continueText());
+                  SLine* line = static_cast<SLine*>(el);
+                  foreach(LineSegment* ls, line->lineSegments()) {
+                        ElementItem* sse = new ElementItem(ei, ls);
+                        if (ls->type() == TEXTLINE_SEGMENT) {
+                              if (static_cast<TextLineSegment*>(ls)->text())
+                                    new ElementItem(sse, static_cast<TextLineSegment*>(ls)->text());
+                              }
+                        }
+                  }
+            else if (el->isSLine()) {
+                  ElementItem* se = new ElementItem(li, el);
+                  SLine* line = static_cast<SLine*>(el);
+                  foreach(LineSegment* ls, line->lineSegments()) {
+                        ElementItem* sse = new ElementItem(se, ls);
+                        if (ls->type() == TEXTLINE_SEGMENT) {
+                              if (static_cast<TextLineSegment*>(ls)->text())
+                                    new ElementItem(sse, static_cast<TextLineSegment*>(ls)->text());
+                              }
+                        }
+                  }
+            else
+                  new ElementItem(li, el);
+            }
+      foreach(Beam* beam, cs->beams())
+	      new ElementItem(li, beam);
+
+      int staves = cs->nstaves();
+      int tracks = staves * VOICES;
+      foreach(Page* page, cs->pages()) {
+            ElementItem* pi = new ElementItem(list, page);
+
+            if (page->copyright())
+                  new ElementItem(pi, page->copyright());
+            if (page->pageNo())
+                  new ElementItem(pi, page->pageNo());
+
+            foreach(System* system, *page->systems()) {
+                  ElementItem* si = new ElementItem(pi, system);
+
+                  if (system->getBarLine())
+                        new ElementItem(si, system->getBarLine());
+
+                  // SysStaffList* staffList = system->staves();
+
+                  foreach (MeasureBase* mb, system->measures()) {
+                        ElementItem* mi = new ElementItem(si, mb);
+
+                        addMeasureBaseToList(mi, mb);
+
+                        if (mb->type() != MEASURE)
+                              continue;
+                        Measure* measure = (Measure*) mb;
+                        if (measure->noText())
+                              new ElementItem(mi, measure->noText());
+                        for (Segment* segment = measure->first(); segment; segment = segment->next()) {
+                              ElementItem* segItem = new ElementItem(mi, segment);
+                              for (int track = 0; track < tracks; ++track) {
+                                    Element* e = segment->element(track);
+                                    if (!e)
+                                          continue;
+                                    ElementItem* sei = new ElementItem(segItem, e);
+                                    if (e->type() == CHORD) {
+                                          Chord* chord = (Chord*)e;
+                                          if (chord->hook())
+                                                new ElementItem(sei, chord->hook());
+                                          if (chord->stem())
+                                                new ElementItem(sei, chord->stem());
+                                          if (chord->arpeggio())
+                                                new ElementItem(sei, chord->arpeggio());
+                                          if (chord->tremolo())
+                                                new ElementItem(sei, chord->tremolo());
+                                          if (chord->glissando())
+                                                new ElementItem(sei, chord->glissando());
+
+                                          foreach(Articulation* a, *chord->getArticulations())
+                                                new ElementItem(sei, a);
+                                          foreach(LedgerLine* h, *chord->ledgerLines())
+                                                new ElementItem(sei, h);
+                                          foreach(Note* note, chord->notes()) {
+                                                ElementItem* ni = new ElementItem(sei, note);
+                                                if (note->accidental()) {
+                                                      new ElementItem(ni, note->accidental());
+                                                      }
+                                                foreach(Element* f, *note->el()) {
+                                                      if (f->type() == SYMBOL || f->type() == IMAGE) {
+                                                            BSymbol* bs = static_cast<BSymbol*>(f);
+                                                            addSymbol(ni, bs);
+                                                            }
+                                                      else
+                                                            new ElementItem(ni, f);
+                                                      }
+                                                if (note->tieFor()) {
+                                                      Tie* tie = note->tieFor();
+                                                      ElementItem* ti = new ElementItem(ni, tie);
+                                                      foreach(Element* el1, *tie->slurSegments())
+                                                            new ElementItem(ti, el1);
+                                                      }
+                                                }
+                                          }
+                                    }
+                              for (int i = 0; i < staves; ++i) {
+                                    foreach(Lyrics* l, *(segment->lyricsList(i))) {
+                                          if (l)
+                                                new ElementItem(segItem, l);
+                                          }
+                                    }
+                              }
+                        foreach(Tuplet* tuplet, *measure->tuplets()) {
+					ElementItem* item = new ElementItem(mi, tuplet);
+                              if (tuplet->number())
+                                    new ElementItem(item, tuplet->number());
+                              }
+                        }
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   searchElement
+//---------------------------------------------------------
+
+bool Inspector::searchElement(QTreeWidgetItem* pi, Element* el)
+      {
+      for (int i = 0;; ++i) {
+            QTreeWidgetItem* item = pi->child(i);
+            if (item == 0)
+                  break;
+            ElementItem* ei = (ElementItem*)item;
+            if (ei->element() == el) {
+                  QTreeWidget* tw = pi->treeWidget();
+                  tw->setItemExpanded(item, true);
+                  tw->setCurrentItem(item);
+                  tw->scrollToItem(item);
+                  return true;
+                  }
+            if (searchElement(item, el)) {
+                  pi->treeWidget()->setItemExpanded(item, true);
+                  return true;
+                  }
+            }
+      return false;
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void Inspector::setElement(Element* el)
+      {
+      if (curElement) {
+            backStack.push(curElement);
+            back->setEnabled(true);
+            forwardStack.clear();
+            forward->setEnabled(false);
+            }
+      updateElement(el);
+      }
+
+//---------------------------------------------------------
+//   itemExpanded
+//---------------------------------------------------------
+
+void Inspector::itemExpanded(QTreeWidgetItem*)
+      {
+      list->resizeColumnToContents(0);
+      }
+
+//---------------------------------------------------------
+//   itemClicked
+//---------------------------------------------------------
+
+void Inspector::itemClicked(QTreeWidgetItem* i, int)
+      {
+      if (i == 0)
+            return;
+      if (i->type() == INVALID)
+            return;
+      Element* el = static_cast<ElementItem*>(i)->element();
+      if (curElement) {
+            backStack.push(curElement);
+            back->setEnabled(true);
+            forwardStack.clear();
+            forward->setEnabled(false);
+            }
+      updateElement(el);
+      }
+
+//---------------------------------------------------------
+//   updateElement
+//---------------------------------------------------------
+
+void Inspector::updateElement(Element* el)
+      {
+      if (el == 0 || !isVisible())
+            return;
+      for (int i = 0;; ++i) {
+            QTreeWidgetItem* item = list->topLevelItem(i);
+            if (item == 0) {
+                  printf("Inspector::Element not found %s %p\n", el->name(), el);
+                  break;
+                  }
+            ElementItem* ei = (ElementItem*)item;
+            if (ei->element() == el) {
+                  list->setItemExpanded(item, true);
+                  list->setCurrentItem(item);
+                  list->scrollToItem(item);
+                  break;
+                  }
+            if (searchElement(item, el)) {
+                  list->setItemExpanded(item, true);
+                  break;
+                  }
+            }
+      setWindowTitle(QString("MuseScore: List Edit: ") + el->name());
+      ShowElementBase* ew = 0;
+      switch (el->type()) {
+            case PAGE:          ew = pagePanel;    break;
+            case SYSTEM:        ew = systemPanel;  break;
+            case MEASURE:       ew = measurePanel; break;
+            case CHORD:         ew = chordPanel;   break;
+            case NOTE:          ew = notePanel;    break;
+            case REST:          ew = restPanel;    break;
+            case CLEF:          ew = clefPanel;    break;
+            case TIMESIG:       ew = timesigPanel; break;
+            case KEYSIG:        ew = keysigPanel;  break;
+            case SEGMENT:       ew = segmentView;  break;
+            case HAIRPIN:       ew = hairpinView;  break;
+            case BAR_LINE:      ew = barLineView;  break;
+            case DYNAMIC:       ew = dynamicView;  break;
+            case TUPLET:        ew = tupletView;   break;
+            case SLUR:          ew = slurView;     break;
+            case TIE:           ew = tieView;      break;
+            case VOLTA:         ew = voltaView;    break;
+            case VOLTA_SEGMENT: ew = voltaSegmentView; break;
+            case LYRICS:        ew = lyricsView;   break;
+            case BEAM:          ew = beamView;     break;
+            case TREMOLO:       ew = tremoloView;  break;
+            case MARKER:
+            case JUMP:
+            case TEXT:
+                  ew = textView;
+                  break;
+            default:
+                  ew = elementView;
+                  break;
+            }
+      curElement = el;
+      ew->setElement(el);
+      stack->setCurrentWidget(ew);
+      }
+
+//---------------------------------------------------------
+//   ElementListWidgetItem
+//---------------------------------------------------------
+
+class ElementListWidgetItem : public QListWidgetItem {
+      Element* e;
+
+   public:
+      ElementListWidgetItem(Element* el) : QListWidgetItem () {
+            e = el;
+            setText(e->name());
+            }
+      Element* element() const { return e; }
+      };
+
+//---------------------------------------------------------
+//   ShowPageWidget
+//---------------------------------------------------------
+
+ShowPageWidget::ShowPageWidget()
+   : ShowElementBase()
+      {
+      QWidget* page = new QWidget;
+      pb.setupUi(page);
+      layout->addWidget(page);
       layout->addStretch(10);
       }
 
 //---------------------------------------------------------
-//   closeEvent
+//   setElement
 //---------------------------------------------------------
 
-void Inspector::closeEvent(QCloseEvent* ev)
+void ShowPageWidget::setElement(Element* e)
       {
-      emit inspectorVisible(false);
-      QWidget::closeEvent(ev);
+      Page* p = (Page*)e;
+      ShowElementBase::setElement(e);
+      pb.pageNo->setValue(p->no());
       }
 
 //---------------------------------------------------------
-//   reset
+//   itemClicked
 //---------------------------------------------------------
 
-void Inspector::reset()
+void ShowPageWidget::itemClicked(QListWidgetItem* i)
       {
-      if (ie) {
-            ie->setElement(_element);
-            // ie->apply();
-            }
+      ElementListWidgetItem* item = (ElementListWidgetItem*)i;
+      emit elementChanged(item->element());
+      }
+
+//---------------------------------------------------------
+//   ShowSystemWidget
+//---------------------------------------------------------
+
+ShowSystemWidget::ShowSystemWidget()
+   : ShowElementBase()
+      {
+      layout->addStretch(100);
+      }
+
+//---------------------------------------------------------
+//   MeasureView
+//---------------------------------------------------------
+
+MeasureView::MeasureView()
+   : ShowElementBase()
+      {
+      QWidget* seg = new QWidget;
+      mb.setupUi(seg);
+      layout->addWidget(seg);
+      layout->addStretch(10);
+      connect(mb.sel, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(elementClicked(QTreeWidgetItem*)));
+      connect(mb.nextButton, SIGNAL(clicked()), SLOT(nextClicked()));
+      connect(mb.prevButton, SIGNAL(clicked()), SLOT(prevClicked()));
+      seg->show();
+      }
+
+//---------------------------------------------------------
+//   nextClicked
+//---------------------------------------------------------
+
+void MeasureView::nextClicked()
+      {
+      emit elementChanged(((MeasureBase*)element())->next());
+      }
+
+//---------------------------------------------------------
+//   prevClicked
+//---------------------------------------------------------
+
+void MeasureView::prevClicked()
+      {
+      emit elementChanged(((MeasureBase*)element())->prev());
       }
 
 //---------------------------------------------------------
 //   setElement
 //---------------------------------------------------------
 
-void Inspector::setElement(Element* e)
+void MeasureView::setElement(Element* e)
       {
-      if (e == 0 || _element == 0 || (e->type() != _element->type())) {
-            delete ie;
-            ie = 0;
-            _element = e;
+      Measure* m = (Measure*)e;
+      ShowElementBase::setElement(e);
 
-            if (_element == 0)
-                  return;
-            switch(_element->type()) {
-                  case FBOX:
-                  case TBOX:
-                  case VBOX:         ie = new InspectorVBox(this); break;
-                  case HBOX:         ie = new InspectorHBox(this); break;
-                  case ARTICULATION: ie = new InspectorArticulation(this); break;
-                  case SPACER:       ie = new InspectorSpacer(this); break;
-                  case NOTE:         ie = new InspectorNote(this); break;
-                  case REST:         ie = new InspectorRest(this); break;
-                  case CLEF:         ie = new InspectorClef(this); break;
-                  case BEAM:         ie = new InspectorBeam(this); break;
-                  case IMAGE:        ie = new InspectorImage(this); break;
-                  default:           ie = new InspectorElement(this); break;
+      mb.segments->setValue(m->size());
+      mb.staves->setValue(m->staffList()->size());
+//      mb.beams->setValue(m->beams()->size());
+      mb.tuplets->setValue(m->tuplets()->size());
+      mb.measureNo->setValue(m->no());
+      mb.noOffset->setValue(m->noOffset());
+      mb.stretch->setValue(m->userStretch());
+      mb.lineBreak->setChecked(m->lineBreak());
+      mb.pageBreak->setChecked(m->pageBreak());
+      mb.irregular->setChecked(m->irregular());
+      mb.endRepeat->setValue(m->repeatCount());
+      mb.repeatFlags->setText(QString("0x%1").arg(m->repeatFlags(), 6, 16, QChar('0')));
+      mb.breakMultiMeasureRest->setChecked(m->getBreakMultiMeasureRest());
+      mb.breakMMRest->setChecked(m->breakMMRest());
+      mb.endBarLineType->setValue(m->endBarLineType());
+      mb.endBarLineGenerated->setChecked(m->endBarLineGenerated());
+      mb.endBarLineVisible->setChecked(m->endBarLineVisible());
+      mb.multiMeasure->setValue(m->multiMeasure());
+
+      mb.sel->clear();
+      foreach(const Element* e, *m->el()) {
+            QTreeWidgetItem* item = new QTreeWidgetItem;
+            item->setText(0, e->name());
+            item->setText(1, QString("%1").arg(e->subtype()));
+            void* p = (void*) e;
+            item->setData(0, Qt::UserRole, QVariant::fromValue<void*>(p));
+            mb.sel->addTopLevelItem(item);
+            }
+      mb.prevButton->setEnabled(m->prev());
+      mb.nextButton->setEnabled(m->next());
+      }
+
+//---------------------------------------------------------
+//   elementClicked
+//---------------------------------------------------------
+
+void MeasureView::elementClicked(QTreeWidgetItem* item)
+      {
+      Element* e = (Element*)item->data(0, Qt::UserRole).value<void*>();
+      emit elementChanged(e);
+      }
+
+//---------------------------------------------------------
+//   SegmentView
+//---------------------------------------------------------
+
+SegmentView::SegmentView()
+   : ShowElementBase()
+      {
+      QWidget* seg = new QWidget;
+      sb.setupUi(seg);
+      layout->addWidget(seg);
+      layout->addStretch(10);
+      sb.segmentType->clear();
+      sb.segmentType->addItem("SegClef",               0x1);
+      sb.segmentType->addItem("SegKeySig",             0x2);
+      sb.segmentType->addItem("SegTimeSig",            0x4);
+      sb.segmentType->addItem("SegStartRepeatBarLine", 0x8);
+      sb.segmentType->addItem("SegBarLine",            0x10);
+      sb.segmentType->addItem("SegGrace",              0x20);
+      sb.segmentType->addItem("SegChordRest",          0x40);
+      sb.segmentType->addItem("SegBreath",             0x80);
+      sb.segmentType->addItem("SegEndBarLine",         0x100);
+      sb.segmentType->addItem("SegTimeSigAnnounce",    0x200);
+      sb.segmentType->addItem("SegKeySigAnnounce",     0x400);
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void SegmentView::setElement(Element* e)
+      {
+      ShowElementBase::setElement(e);
+
+      Segment* s = (Segment*)e;
+      ShowElementBase::setElement(e);
+      int st = s->subtype();
+      int idx;
+      for (idx = 0; idx < 11; ++idx) {
+            if ((1 << idx) == st)
+                  break;
+            }
+      sb.segmentType->setCurrentIndex(idx);
+      sb.lyrics->clear();
+
+      Score* cs = e->score();
+      for (int i = 0; i < cs->nstaves(); ++i) {
+            const LyricsList* ll = s->lyricsList(i);
+            if (ll) {
+                  foreach(Lyrics* l, *ll) {
+                        QString s;
+                        s.setNum(long(l), 16);
+                        QListWidgetItem* item = new QListWidgetItem(s, 0, long(l));
+                        sb.lyrics->addItem(item);
+                        }
                   }
-            layout->insertWidget(0, ie);
             }
-      _element = e;
-      ie->setElement(_element);
       }
 
 //---------------------------------------------------------
-//   setElementList
+//   ShowChordWidget
 //---------------------------------------------------------
 
-void Inspector::setElementList(const QList<Element*>& el)
+ShowChordWidget::ShowChordWidget()
+   : ShowElementBase()
       {
-      delete ie;
-      ie = new InspectorGroupElement(this);
-      layout->insertWidget(0, ie);
-      _element = 0;
-      _el = el;
-      }
+      // chord rest
+      QWidget* chr = new QWidget;
+      crb.setupUi(chr);
+      layout->addWidget(chr);
+      connect(crb.beamButton, SIGNAL(clicked()), SLOT(beamClicked()));
+      connect(crb.tupletButton, SIGNAL(clicked()), SLOT(tupletClicked()));
+      connect(crb.upFlag,   SIGNAL(toggled(bool)), SLOT(upChanged(bool)));
+      connect(crb.beamMode, SIGNAL(activated(int)), SLOT(beamModeChanged(int)));
+      connect(crb.attributes, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
+      connect(crb.slurFor, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
+      connect(crb.slurBack, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
 
-//---------------------------------------------------------
-//   InspectorElementElement
-//---------------------------------------------------------
+      // chord
+      QWidget* ch = new QWidget;
+      cb.setupUi(ch);
+      layout->addWidget(ch);
+      layout->addStretch(100);
+      connect(cb.hookButton, SIGNAL(clicked()), SLOT(hookClicked()));
+      connect(cb.stemButton, SIGNAL(clicked()), SLOT(stemClicked()));
+      connect(cb.stemSlashButton, SIGNAL(clicked()), SLOT(stemSlashClicked()));
+      connect(cb.arpeggioButton, SIGNAL(clicked()), SLOT(arpeggioClicked()));
+      connect(cb.tremoloButton, SIGNAL(clicked()), SLOT(tremoloClicked()));
+      connect(cb.glissandoButton, SIGNAL(clicked()), SLOT(glissandoClicked()));
 
-InspectorElementElement::InspectorElementElement(QWidget* parent)
-   : QWidget(parent)
-      {
-      setupUi(this);
-      connect(color,        SIGNAL(colorChanged(QColor)), SLOT(colorChanged(QColor)));
-      connect(offsetX,      SIGNAL(valueChanged(double)), SLOT(offsetXChanged(double)));
-      connect(offsetY,      SIGNAL(valueChanged(double)), SLOT(offsetYChanged(double)));
-      connect(visible,      SIGNAL(stateChanged(int)),    SLOT(apply()));
-      connect(resetColor,   SIGNAL(clicked()), SLOT(resetColorClicked()));
-      connect(resetX,       SIGNAL(clicked()), SLOT(resetXClicked()));
-      connect(resetY,       SIGNAL(clicked()), SLOT(resetYClicked()));
-      connect(resetVisible, SIGNAL(clicked()), SLOT(resetVisibleClicked()));
+      connect(cb.stemDirection, SIGNAL(activated(int)), SLOT(directionChanged(int)));
+      connect(cb.helplineList, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
+      connect(cb.notes, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
+
+      crb.beamMode->addItem(tr("auto"));
+      crb.beamMode->addItem(tr("beam begin"));
+      crb.beamMode->addItem(tr("beam mid"));
+      crb.beamMode->addItem(tr("beam end"));
+      crb.beamMode->addItem(tr("no beam"));
+      crb.beamMode->addItem(tr("begin 1/32"));
+
+      cb.stemDirection->addItem(tr("Auto"), 0);
+      cb.stemDirection->addItem(tr("Up"), 1);
+      cb.stemDirection->addItem(tr("Down"), 2);
       }
 
 //---------------------------------------------------------
 //   setElement
 //---------------------------------------------------------
 
-void InspectorElementElement::setElement(Element* element)
+void ShowChordWidget::setElement(Element* e)
       {
-      e = element;
-      elementName->setText(e->name());
-      qreal _spatium = e->score()->spatium();
+      Chord* chord = (Chord*)e;
+      ShowElementBase::setElement(e);
 
-      color->blockSignals(true);
-      offsetX->blockSignals(true);
-      offsetY->blockSignals(true);
-      visible->blockSignals(true);
+      crb.beamButton->setEnabled(chord->beam());
+      crb.tupletButton->setEnabled(chord->tuplet());
+      crb.upFlag->setChecked(chord->up());
+      crb.beamMode->setCurrentIndex(int(chord->beamMode()));
+      crb.dots->setValue(chord->dots());
+      crb.ticks->setValue(chord->ticks());
+      crb.duration->setValue(int(chord->duration().type()));
+      crb.move->setValue(chord->staffMove());
 
-      color->setColor(e->color());
-      offsetX->setValue(e->pos().x() / _spatium);
-      offsetY->setValue(e->pos().y() / _spatium);
-      resetColor->setEnabled(e->color() != MScore::defaultColor);
-      resetX->setEnabled(e->userOff().x() != 0.0);
-      resetY->setEnabled(e->userOff().y() != 0.0);
-      visible->setChecked(e->visible());
+      cb.hookButton->setEnabled(chord->hook());
+      cb.stemButton->setEnabled(chord->stem());
+      cb.graceNote->setChecked(chord->noteType() != NOTE_NORMAL);
+      cb.stemDirection->setCurrentIndex(int(chord->stemDirection()));
 
-      visible->blockSignals(false);
-      color->blockSignals(false);
-      offsetX->blockSignals(false);
-      offsetY->blockSignals(false);
+      cb.stemSlashButton->setEnabled(chord->stemSlash());
+      cb.arpeggioButton->setEnabled(chord->arpeggio());
+      cb.tremoloButton->setEnabled(chord->tremolo());
+      cb.glissandoButton->setEnabled(chord->glissando());
 
-      resetVisible->setEnabled(!e->visible());
-      }
-
-//---------------------------------------------------------
-//   colorChanged
-//---------------------------------------------------------
-
-void InspectorElementElement::colorChanged(QColor)
-      {
-      resetColor->setEnabled(color->color() != MScore::defaultColor);
-      apply();
-      }
-
-//---------------------------------------------------------
-//   offsetXChanged
-//---------------------------------------------------------
-
-void InspectorElementElement::offsetXChanged(double)
-      {
-      resetX->setEnabled(offsetX->value() != e->ipos().x());
-      apply();
-      }
-
-//---------------------------------------------------------
-//   offsetYChanged
-//---------------------------------------------------------
-
-void InspectorElementElement::offsetYChanged(double)
-      {
-      resetY->setEnabled(offsetY->value() != e->ipos().y());
-      apply();
-      }
-
-//---------------------------------------------------------
-//   resetColorClicked
-//---------------------------------------------------------
-
-void InspectorElementElement::resetColorClicked()
-      {
-      color->setColor(MScore::defaultColor);
-      resetColor->setEnabled(false);
-      apply();
-      }
-
-//---------------------------------------------------------
-//   resetXClicked
-//---------------------------------------------------------
-
-void InspectorElementElement::resetXClicked()
-      {
-      qreal _spatium = e->score()->spatium();
-      offsetX->setValue(e->ipos().x() / _spatium);
-      resetX->setEnabled(false);
-      apply();
-      }
-
-//---------------------------------------------------------
-//   resetVisibleClicked
-//---------------------------------------------------------
-
-void InspectorElementElement::resetVisibleClicked()
-      {
-      visible->setChecked(true);
-      resetVisible->setEnabled(false);
-      apply();
-      }
-
-//---------------------------------------------------------
-//   resetTrailingSpace
-//---------------------------------------------------------
-
-void InspectorElementElement::resetYClicked()
-      {
-      qreal _spatium = e->score()->spatium();
-      offsetY->setValue(e->ipos().y() / _spatium);
-      resetY->setEnabled(false);
-      apply();
-      }
-
-//---------------------------------------------------------
-//   apply
-//---------------------------------------------------------
-
-void InspectorElementElement::apply()
-      {
-      resetVisible->setEnabled(!visible->isChecked());
-
-      qreal _spatium = e->score()->spatium();
-      if (offsetX->value()        == (e->pos().x() / _spatium)
-         &&  offsetY->value()     == (e->pos().y() / _spatium)
-         &&  color->color()       == e->color()
-         &&  visible->isChecked() == e->visible())
-            return;
-
-      Score* score    = e->score();
-      score->startCmd();
-      QPointF o(offsetX->value() * _spatium, offsetY->value() * _spatium);
-      if (o != e->pos())
-            score->undoChangeUserOffset(e, o - e->ipos());
-      if (e->color() != color->color())
-            score->undoChangeProperty(e, P_COLOR, color->color());
-      if (e->visible() != visible->isChecked())
-            score->undoChangeProperty(e, P_VISIBLE, visible->isChecked());
-      score->endCmd();
-      mscore->endCmd();
-      }
-
-//---------------------------------------------------------
-//   InspectorElement
-//---------------------------------------------------------
-
-InspectorElement::InspectorElement(QWidget* parent)
-   : InspectorBase(parent)
-      {
-      ie = new InspectorElementElement(this);
-      layout->addWidget(ie);
-      }
-
-//---------------------------------------------------------
-//   setElement
-//---------------------------------------------------------
-
-void InspectorElement::setElement(Element* e)
-      {
-      ie->setElement(e);
-      }
-
-//---------------------------------------------------------
-//   InspectorVBox
-//---------------------------------------------------------
-
-InspectorVBox::InspectorVBox(QWidget* parent)
-   : InspectorBase(parent)
-      {
-      QWidget* w = new QWidget;
-      vb.setupUi(w);
-      layout->addWidget(w);
-
-      iList[0].t = P_TOP_GAP;
-      iList[0].w = vb.topGap;
-      iList[0].r = vb.resetTopGap;
-
-      iList[1].t = P_BOTTOM_GAP;
-      iList[1].w = vb.bottomGap;
-      iList[1].r = vb.resetBottomGap;
-
-      iList[2].t = P_LEFT_MARGIN;
-      iList[2].w = vb.leftMargin;
-      iList[2].r = vb.resetLeftMargin;
-
-      iList[3].t = P_RIGHT_MARGIN;
-      iList[3].w = vb.rightMargin;
-      iList[3].r = vb.resetRightMargin;
-
-      iList[4].t = P_TOP_MARGIN;
-      iList[4].w = vb.topMargin;
-      iList[4].r = vb.resetTopMargin;
-
-      iList[5].t = P_BOTTOM_MARGIN;
-      iList[5].w = vb.bottomMargin;
-      iList[5].r = vb.resetBottomMargin;
-
-      iList[6].t = P_BOX_HEIGHT;
-      iList[6].w = vb.height;
-      iList[6].r = 0;
-
-      mapSignals();
-      }
-
-//---------------------------------------------------------
-//   InspectorHBox
-//---------------------------------------------------------
-
-InspectorHBox::InspectorHBox(QWidget* parent)
-   : InspectorBase(parent)
-      {
-      QWidget* w = new QWidget;
-      hb.setupUi(w);
-      layout->addWidget(w);
-
-      iList[0].t = P_TOP_GAP;
-      iList[0].w = hb.leftGap;
-      iList[0].r = hb.resetLeftGap;
-
-      iList[1].t = P_BOTTOM_GAP;
-      iList[1].w = hb.rightGap;
-      iList[1].r = hb.resetRightGap;
-
-      iList[2].t = P_BOX_WIDTH;
-      iList[2].w = hb.width;
-      iList[2].r = 0;
-
-      mapSignals();
-      }
-
-//---------------------------------------------------------
-//   InspectorArticulation
-//---------------------------------------------------------
-
-InspectorArticulation::InspectorArticulation(QWidget* parent)
-   : InspectorBase(parent)
-      {
-      QWidget* w = new QWidget;
-
-      ar.setupUi(w);
-      layout->addWidget(w);
-      connect(ar.x,         SIGNAL(valueChanged(double)),     SLOT(apply()));
-      connect(ar.y,         SIGNAL(valueChanged(double)),     SLOT(apply()));
-      connect(ar.direction, SIGNAL(currentIndexChanged(int)), SLOT(apply()));
-      connect(ar.anchor,    SIGNAL(currentIndexChanged(int)), SLOT(apply()));
-      }
-
-//---------------------------------------------------------
-//   setElement
-//---------------------------------------------------------
-
-void InspectorArticulation::setElement(Element* e)
-      {
-      Articulation* a = static_cast<Articulation*>(e);
-      qreal _spatium = e->score()->spatium();
-      ar.elementName->setText(e->name());
-      ar.x->blockSignals(true);
-      ar.y->blockSignals(true);
-      ar.direction->blockSignals(true);
-      ar.anchor->blockSignals(true);
-
-      ar.x->setValue(a->pos().x() / _spatium);
-      ar.y->setValue(a->pos().y() / _spatium);
-      ar.direction->setCurrentIndex(int(a->direction()));
-      ar.anchor->setCurrentIndex(int(a->anchor()));
-
-      ar.x->blockSignals(false);
-      ar.y->blockSignals(false);
-      ar.direction->blockSignals(false);
-      ar.anchor->blockSignals(false);
-      }
-
-//---------------------------------------------------------
-//   apply
-//---------------------------------------------------------
-
-void InspectorArticulation::apply()
-      {
-      Articulation* a = static_cast<Articulation*>(inspector->element());
-      Score* score    = a->score();
-      qreal _spatium  = score->spatium();
-
-      QPointF o(ar.x->value() * _spatium, ar.y->value() * _spatium);
-      Direction d = Direction(ar.direction->currentIndex());
-      ArticulationAnchor anchor = ArticulationAnchor(ar.anchor->currentIndex());
-
-      if (o == a->pos() && anchor == a->anchor() && d == a->direction())
-            return;
-
-      score->startCmd();
-      if (o != a->pos())
-            score->undoChangeUserOffset(a, o - a->ipos());
-      if (anchor != a->anchor())
-            score->undoChangeProperty(a, P_ARTICULATION_ANCHOR, int(anchor));
-      if (d != a->direction())
-            score->undoChangeProperty(a, P_DIRECTION, int(d));
-      score->endCmd();
-      mscore->endCmd();
-      }
-
-//---------------------------------------------------------
-//   InspectorSpacer
-//---------------------------------------------------------
-
-InspectorSpacer::InspectorSpacer(QWidget* parent)
-   : InspectorBase(parent)
-      {
-      QWidget* w = new QWidget;
-
-      sp.setupUi(w);
-      layout->addWidget(w);
-      connect(sp.height, SIGNAL(valueChanged(double)), SLOT(apply()));
-      }
-
-//---------------------------------------------------------
-//   setElement
-//---------------------------------------------------------
-
-void InspectorSpacer::setElement(Element* e)
-      {
-      Spacer* spacer = static_cast<Spacer*>(e);
-      sp.elementName->setText(e->name());
-      sp.height->setValue(spacer->gap() / spacer->spatium());
-      }
-
-//---------------------------------------------------------
-//   apply
-//---------------------------------------------------------
-
-void InspectorSpacer::apply()
-      {
-      Spacer* spacer = static_cast<Spacer*>(inspector->element());
-      Score* score   = spacer->score();
-      qreal space    = sp.height->value() * spacer->spatium();
-      if (space != spacer->gap()) {
-            score->startCmd();
-            score->undoChangeProperty(spacer, P_SPACE, space);
-            score->endCmd();
-            mscore->endCmd();
+      crb.attributes->clear();
+      foreach(Articulation* a, *chord->getArticulations()) {
+            QString s;
+            s.setNum(long(a), 16);
+            QListWidgetItem* item = new QListWidgetItem(s, 0, long(a));
+            crb.attributes->addItem(item);
             }
-      }
-
-//---------------------------------------------------------
-//   InspectorSegment
-//---------------------------------------------------------
-
-InspectorSegment::InspectorSegment(QWidget* parent)
-   : QWidget(parent)
-      {
-      setupUi(this);
-      connect(leadingSpace,       SIGNAL(valueChanged(double)), SLOT(leadingSpaceChanged(double)));
-      connect(trailingSpace,      SIGNAL(valueChanged(double)), SLOT(trailingSpaceChanged(double)));
-      connect(resetLeadingSpace,  SIGNAL(clicked()), SLOT(resetLeadingSpaceClicked()));
-      connect(resetTrailingSpace, SIGNAL(clicked()), SLOT(resetTrailingSpaceClicked()));
-      }
-
-//---------------------------------------------------------
-//   dirty
-//---------------------------------------------------------
-
-bool InspectorSegment::dirty() const
-      {
-      return segment->extraLeadingSpace().val() != leadingSpace->value()
-         || segment->extraTrailingSpace().val() != trailingSpace->value();
-      }
-
-//---------------------------------------------------------
-//   setElement
-//---------------------------------------------------------
-
-void InspectorSegment::setElement(Segment* s)
-      {
-      segment = s;
-      leadingSpace->setValue(segment->extraLeadingSpace().val());
-      trailingSpace->setValue(segment->extraTrailingSpace().val());
-      resetLeadingSpace->setEnabled(leadingSpace->value() != 0.0);
-      resetTrailingSpace->setEnabled(leadingSpace->value() != 0.0);
-      }
-
-//---------------------------------------------------------
-//   leadingSpaceChanged
-//---------------------------------------------------------
-
-void InspectorSegment::leadingSpaceChanged(double)
-      {
-      resetLeadingSpace->setEnabled(leadingSpace->value() != 0.0);
-      apply();
-      }
-
-//---------------------------------------------------------
-//   trailingSpaceChanged
-//---------------------------------------------------------
-
-void InspectorSegment::trailingSpaceChanged(double)
-      {
-      resetTrailingSpace->setEnabled(trailingSpace->value() != 0.0);
-      apply();
-      }
-
-//---------------------------------------------------------
-//   resetLeadingSpace
-//---------------------------------------------------------
-
-void InspectorSegment::resetLeadingSpaceClicked()
-      {
-      leadingSpace->setValue(0.0);
-      apply();
-      }
-
-//---------------------------------------------------------
-//   resetTrailingSpace
-//---------------------------------------------------------
-
-void InspectorSegment::resetTrailingSpaceClicked()
-      {
-      trailingSpace->setValue(0.0);
-      apply();
-      }
-
-//---------------------------------------------------------
-//   apply
-//---------------------------------------------------------
-
-void InspectorSegment::apply()
-      {
-      if (!dirty())
-            return;
-      Score* score = segment->score();
-      score->startCmd();
-      qreal val = leadingSpace->value();
-      if (segment->extraLeadingSpace().val() != val)
-            segment->score()->undoChangeProperty(segment, P_LEADING_SPACE, val);
-      val = trailingSpace->value();
-      if (segment->extraTrailingSpace().val() != val)
-            segment->score()->undoChangeProperty(segment, P_TRAILING_SPACE, val);
-      score->endCmd();
-      mscore->endCmd();
-      }
-
-static const int heads[] = {
-      HEAD_NORMAL, HEAD_CROSS, HEAD_DIAMOND, HEAD_TRIANGLE,
-      HEAD_SLASH, HEAD_XCIRCLE, HEAD_DO, HEAD_RE, HEAD_MI, HEAD_FA, HEAD_SOL, HEAD_LA, HEAD_TI,
-      HEAD_BREVIS_ALT
-      };
-
-//---------------------------------------------------------
-//   InspectorNoteBase
-//---------------------------------------------------------
-
-InspectorNoteBase::InspectorNoteBase(QWidget* parent)
-   : QWidget(parent)
-      {
-      setupUi(this);
-      //
-      // fix order of note heads
-      //
-      for (int i = 0; i < HEAD_GROUPS; ++i) {
-            noteHeadGroup->setItemData(i, QVariant(heads[i]));
+      crb.slurFor->clear();
+      foreach(Slur* slur, chord->slurFor()) {
+            QString s;
+            s.setNum(long(slur), 16);
+            QListWidgetItem* item = new QListWidgetItem(s, 0, long(slur));
+            crb.slurFor->addItem(item);
             }
-      connect(small,              SIGNAL(stateChanged(int)),        SLOT(smallChanged(int)));
-      connect(mirrorHead,         SIGNAL(currentIndexChanged(int)), SLOT(mirrorHeadChanged(int)));
-      connect(dotPosition,        SIGNAL(currentIndexChanged(int)), SLOT(dotPositionChanged(int)));
-      connect(ontimeOffset,       SIGNAL(valueChanged(int)),        SLOT(ontimeOffsetChanged(int)));
-      connect(offtimeOffset,      SIGNAL(valueChanged(int)),        SLOT(offtimeOffsetChanged(int)));
-      connect(resetSmall,         SIGNAL(clicked()), SLOT(resetSmallClicked()));
-      connect(resetMirrorHead,    SIGNAL(clicked()), SLOT(resetMirrorClicked()));
-      connect(resetDotPosition,   SIGNAL(clicked()), SLOT(resetDotPositionClicked()));
-      connect(resetOntimeOffset,  SIGNAL(clicked()), SLOT(resetOntimeOffsetClicked()));
-      connect(resetOfftimeOffset, SIGNAL(clicked()), SLOT(resetOfftimeOffsetClicked()));
-
-      connect(noteHeadGroup,      SIGNAL(currentIndexChanged(int)), SLOT(noteHeadGroupChanged(int)));
-      connect(noteHeadType,       SIGNAL(currentIndexChanged(int)), SLOT(noteHeadTypeChanged(int)));
-      connect(tuning,             SIGNAL(valueChanged(double)),     SLOT(tuningChanged(double)));
-      connect(velocityType,       SIGNAL(currentIndexChanged(int)), SLOT(velocityTypeChanged(int)));
-      connect(velocity,           SIGNAL(valueChanged(int)),        SLOT(velocityChanged(int)));
-
-      connect(resetNoteHeadGroup, SIGNAL(clicked()), SLOT(resetNoteHeadGroupClicked()));
-      connect(resetNoteHeadType,  SIGNAL(clicked()), SLOT(resetNoteHeadTypeClicked()));
-      connect(resetTuning,        SIGNAL(clicked()), SLOT(resetTuningClicked()));
-      connect(resetVelocityType,  SIGNAL(clicked()), SLOT(resetVelocityTypeClicked()));
-      }
-
-//---------------------------------------------------------
-//   block
-//---------------------------------------------------------
-
-void InspectorNoteBase::block(bool val)
-      {
-      small->blockSignals(val);
-      mirrorHead->blockSignals(val);
-      dotPosition->blockSignals(val);
-      ontimeOffset->blockSignals(val);
-      offtimeOffset->blockSignals(val);
-      noteHeadGroup->blockSignals(val);
-      noteHeadType->blockSignals(val);
-      tuning->blockSignals(val);
-      velocity->blockSignals(val);
-      velocityType->blockSignals(val);
-      resetSmall->blockSignals(val);
-      resetMirrorHead->blockSignals(val);
-      resetDotPosition->blockSignals(val);
-      resetOntimeOffset->blockSignals(val);
-      resetOfftimeOffset->blockSignals(val);
-      }
-
-//---------------------------------------------------------
-//   setElement
-//---------------------------------------------------------
-
-void InspectorNoteBase::setElement(Note* n)
-      {
-      _userVelocity = 0;
-      _veloOffset   = 0;
-      note          = n;
-
-      block(true);
-      small->setChecked(note->small());
-      mirrorHead->setCurrentIndex(note->userMirror());
-      dotPosition->setCurrentIndex(note->dotPosition());
-      ontimeOffset->setValue(note->onTimeOffset());
-      offtimeOffset->setValue(note->offTimeOffset());
-
-      int headGroup = note->headGroup();
-      int headGroupIndex = 0;
-      for (int i = 0; i < HEAD_GROUPS; ++i) {
-            noteHeadGroup->setItemData(i, QVariant(heads[i]));
-            if (headGroup == heads[i])
-                  headGroupIndex = i;
+      crb.slurBack->clear();
+      foreach(Slur* slur, chord->slurBack()) {
+            QString s;
+            s.setNum(long(slur), 16);
+            QListWidgetItem* item = new QListWidgetItem(s, 0, long(slur));
+            crb.slurBack->addItem(item);
             }
-      noteHeadGroup->setCurrentIndex(headGroupIndex);
-      noteHeadType->setCurrentIndex(int(note->headType()));
-      tuning->setValue(note->tuning());
-      int val = note->veloOffset();
-      velocity->setValue(val);
-      velocityType->setCurrentIndex(int(note->veloType()));
-      if (note->veloType() == USER_VAL)
-            _userVelocity = val;
-      else
-            _veloOffset = val;
 
-      resetSmall->setEnabled(note->small());
-      resetMirrorHead->setEnabled(note->userMirror() != DH_AUTO);
-      resetDotPosition->setEnabled(note->dotPosition() != AUTO);
-      resetOntimeOffset->setEnabled(note->onTimeUserOffset());
-      resetOfftimeOffset->setEnabled(note->offTimeUserOffset());
-      block(false);
-      }
-
-//---------------------------------------------------------
-//   dirty
-//---------------------------------------------------------
-
-bool InspectorNoteBase::dirty() const
-      {
-      return note->small()            != small->isChecked()
-         || note->userMirror()        != mirrorHead->currentIndex()
-         || note->dotPosition()       != dotPosition->currentIndex()
-         || note->onTimeUserOffset()  != ontimeOffset->value()
-         || note->offTimeUserOffset() != offtimeOffset->value()
-         || note->headGroup()         != noteHeadGroup->itemData(noteHeadGroup->currentIndex())
-         || note->headType()          != noteHeadType->currentIndex()
-         || note->tuning()            != tuning->value()
-         || note->veloOffset()        != velocity->value()
-         || note->veloType()          != velocityType->currentIndex()
-         ;
-      }
-
-//---------------------------------------------------------
-//   apply
-//---------------------------------------------------------
-
-void InspectorNoteBase::apply()
-      {
-      Score* score = note->score();
-      score->startCmd();
-      bool b = small->isChecked();
-      if (note->small() != b)
-            score->undoChangeProperty(note, P_SMALL, b);
-      int val = mirrorHead->currentIndex();
-      if (note->userMirror() != val)
-            score->undoChangeProperty(note, P_MIRROR_HEAD, val);
-      val = dotPosition->currentIndex();
-      if (note->dotPosition() != val)
-            score->undoChangeProperty(note, P_DOT_POSITION, val);
-      val = ontimeOffset->value();
-      if (note->onTimeOffset() != val)
-            score->undoChangeProperty(note, P_ONTIME_OFFSET, val);
-      val = offtimeOffset->value();
-      if (note->offTimeOffset() != val)
-            score->undoChangeProperty(note, P_OFFTIME_OFFSET, val);
-      val = noteHeadGroup->itemData(noteHeadGroup->currentIndex()).toInt();
-      if (note->headGroup() != val)
-            score->undoChangeProperty(note, P_HEAD_GROUP, val);
-      val = noteHeadType->currentIndex();
-      if (note->headType() != val)
-            score->undoChangeProperty(note, P_HEAD_TYPE, val);
-      if (note->tuning() != tuning->value())
-            score->undoChangeProperty(note, P_TUNING, tuning->value());
-      if (note->veloOffset() != velocity->value())
-            score->undoChangeProperty(note, P_VELO_OFFSET, velocity->value());
-      if (note->veloType() != velocityType->currentIndex())
-            score->undoChangeProperty(note, P_VELO_TYPE, velocityType->currentIndex());
-      score->endCmd();
-      mscore->endCmd();
-      }
-
-//---------------------------------------------------------
-//   smallChanged
-//---------------------------------------------------------
-
-void InspectorNoteBase::smallChanged(int)
-      {
-      resetSmall->setEnabled(small->isChecked());
-      apply();
-      }
-
-//---------------------------------------------------------
-//   mirrorHeadChanged
-//---------------------------------------------------------
-
-void InspectorNoteBase::mirrorHeadChanged(int)
-      {
-      resetMirrorHead->setEnabled(note->userMirror() != DH_AUTO);
-      apply();
-      }
-
-//---------------------------------------------------------
-//   dotPositionChanged
-//---------------------------------------------------------
-
-void InspectorNoteBase::dotPositionChanged(int)
-      {
-      resetDotPosition->setEnabled(note->dotPosition() != AUTO);
-      apply();
-      }
-
-//---------------------------------------------------------
-//   ontimeOffsetChanged
-//---------------------------------------------------------
-
-void InspectorNoteBase::ontimeOffsetChanged(int)
-      {
-      resetOntimeOffset->setEnabled(note->onTimeUserOffset());
-      apply();
-      }
-
-//---------------------------------------------------------
-//   offtimeOffsetChanged
-//---------------------------------------------------------
-
-void InspectorNoteBase::offtimeOffsetChanged(int)
-      {
-      resetOfftimeOffset->setEnabled(note->offTimeUserOffset());
-      apply();
-      }
-
-//---------------------------------------------------------
-//   noteHeadGroupChanged
-//---------------------------------------------------------
-
-void InspectorNoteBase::noteHeadGroupChanged(int val)
-      {
-      resetNoteHeadGroup->setEnabled(val != 0);
-      apply();
-      }
-
-//---------------------------------------------------------
-//   noteHeadTypeChanged
-//---------------------------------------------------------
-
-void InspectorNoteBase::noteHeadTypeChanged(int val)
-      {
-      resetNoteHeadType->setEnabled(val != 0);
-      apply();
-      }
-
-//---------------------------------------------------------
-//   tuningChanged
-//---------------------------------------------------------
-
-void InspectorNoteBase::tuningChanged(double val)
-      {
-      resetTuning->setEnabled(val != 0.0);
-      apply();
-      }
-
-//---------------------------------------------------------
-//   velocityTypeChanged
-//---------------------------------------------------------
-
-void InspectorNoteBase::velocityTypeChanged(int val)
-      {
-      switch(val) {
-            case USER_VAL:
-                  velocity->setEnabled(true);
-                  velocity->setSuffix("");
-                  velocity->setRange(0, 127);
-                  velocity->setValue(_userVelocity);
-                  break;
-            case OFFSET_VAL:
-                  velocity->setEnabled(true);
-                  velocity->setSuffix("%");
-                  velocity->setRange(-200, 200);
-                  velocity->setValue(_veloOffset);
-                  break;
+      cb.helplineList->clear();
+      foreach(LedgerLine* h, *chord->ledgerLines()) {
+            QString s;
+            s.setNum(long(h), 16);
+            QListWidgetItem* item = new QListWidgetItem(s, 0, long(h));
+            cb.helplineList->addItem(item);
             }
-      resetVelocityType->setEnabled(val != 0);
-      apply();
-      }
-
-//---------------------------------------------------------
-//   velocityChanged
-//---------------------------------------------------------
-
-void InspectorNoteBase::velocityChanged(int val)
-      {
-      if (velocityType->currentIndex() == USER_VAL)
-            _userVelocity = val;
-      else
-            _veloOffset = val;
-      apply();
-      }
-
-//---------------------------------------------------------
-//   resetSmall
-//---------------------------------------------------------
-
-void InspectorNoteBase::resetSmallClicked()
-      {
-      small->setChecked(false);
-      }
-
-//---------------------------------------------------------
-//   resetMirrorClicked
-//---------------------------------------------------------
-
-void InspectorNoteBase::resetMirrorClicked()
-      {
-      mirrorHead->setCurrentIndex(0);
-      }
-
-//---------------------------------------------------------
-//   resetDotPositionClicked
-//---------------------------------------------------------
-
-void InspectorNoteBase::resetDotPositionClicked()
-      {
-      dotPosition->setCurrentIndex(0);
-      }
-
-//---------------------------------------------------------
-//   resetOntimeOffsetClicked
-//---------------------------------------------------------
-
-void InspectorNoteBase::resetOntimeOffsetClicked()
-      {
-      ontimeOffset->setValue(0);
-      }
-
-//---------------------------------------------------------
-//   resetOfftimeOffsetClicked
-//---------------------------------------------------------
-
-void InspectorNoteBase::resetOfftimeOffsetClicked()
-      {
-      offtimeOffset->setValue(0);
-      }
-
-//---------------------------------------------------------
-//   resetNoteHeadGroupClicked
-//---------------------------------------------------------
-
-void InspectorNoteBase::resetNoteHeadGroupClicked()
-      {
-      noteHeadGroup->setCurrentIndex(0);
-      }
-
-//---------------------------------------------------------
-//   resetNoteHeadTypeClicked
-//---------------------------------------------------------
-
-void InspectorNoteBase::resetNoteHeadTypeClicked()
-      {
-      noteHeadType->setCurrentIndex(0);
-      }
-
-//---------------------------------------------------------
-//   resetTuningClicked
-//---------------------------------------------------------
-
-void InspectorNoteBase::resetTuningClicked()
-      {
-      tuning->setValue(0.0);
-      }
-
-//---------------------------------------------------------
-//   resetVelocityTypeClicked
-//---------------------------------------------------------
-
-void InspectorNoteBase::resetVelocityTypeClicked()
-      {
-      velocityType->setCurrentIndex(0);
-      }
-
-//---------------------------------------------------------
-//   InspectorNote
-//---------------------------------------------------------
-
-InspectorNote::InspectorNote(QWidget* parent)
-   : InspectorBase(parent)
-      {
-      iElement = new InspectorElementElement(this);
-      layout->addWidget(iElement);
-
-      iNote    = new InspectorNoteBase(this);
-      layout->addWidget(iNote);
-
-      iChord = new InspectorChord(this);
-      layout->addWidget(iChord);
-
-      iSegment = new InspectorSegment(this);
-      layout->addWidget(iSegment);
-
-      layout->addSpacing(20);
-
-      //
-      // Select
-      //
-      QLabel* l = new QLabel;
-      l->setText(tr("Select"));
-      QFont font(l->font());
-      font.setBold(true);
-      l->setFont(font);
-      l->setAlignment(Qt::AlignHCenter);
-      layout->addWidget(l);
-      QFrame* f = new QFrame;
-      f->setFrameStyle(QFrame::HLine | QFrame::Raised);
-      f->setLineWidth(2);
-      layout->addWidget(f);
-
-      QHBoxLayout* hbox = new QHBoxLayout;
-      dot1 = new QToolButton(this);
-      dot1->setText(tr("Dot1"));
-      dot1->setEnabled(false);
-      hbox->addWidget(dot1);
-      dot2 = new QToolButton(this);
-      dot2->setText(tr("Dot2"));
-      dot2->setEnabled(false);
-      hbox->addWidget(dot2);
-      dot3 = new QToolButton(this);
-      dot3->setText(tr("Dot3"));
-      dot3->setEnabled(false);
-      hbox->addWidget(dot3);
-      hook = new QToolButton(this);
-      hook->setText(tr("Hook"));
-      hook->setEnabled(false);
-      hbox->addWidget(hook);
-      stem = new QToolButton(this);
-      stem->setText(tr("Stem"));
-      stem->setEnabled(false);
-      hbox->addWidget(stem);
-      beam = new QToolButton(this);
-      beam->setText(tr("Beam"));
-      beam->setEnabled(false);
-      hbox->addWidget(beam);
-
-
-      layout->addLayout(hbox);
-
-      connect(dot1,     SIGNAL(clicked()),     SLOT(dot1Clicked()));
-      connect(dot2,     SIGNAL(clicked()),     SLOT(dot2Clicked()));
-      connect(dot3,     SIGNAL(clicked()),     SLOT(dot3Clicked()));
-      connect(hook,     SIGNAL(clicked()),     SLOT(hookClicked()));
-      connect(stem,     SIGNAL(clicked()),     SLOT(stemClicked()));
-      connect(beam,     SIGNAL(clicked()),     SLOT(beamClicked()));
-      }
-
-//---------------------------------------------------------
-//   setElement
-//---------------------------------------------------------
-
-void InspectorNote::setElement(Element* e)
-      {
-      Note* note = static_cast<Note*>(e);
-      Segment* segment = note->chord()->segment();
-
-      iElement->setElement(e);
-      iNote->setElement(note);
-      iChord->setElement(note->chord());
-      iSegment->setElement(segment);
-      dot1->setEnabled(note->dot(0));
-      dot2->setEnabled(note->dot(1));
-      dot3->setEnabled(note->dot(2));
-      stem->setEnabled(note->chord()->stem());
-      hook->setEnabled(note->chord()->hook());
-      beam->setEnabled(note->chord()->beam());
-      }
-
-//---------------------------------------------------------
-//   dot1Clicked
-//---------------------------------------------------------
-
-void InspectorNote::dot1Clicked()
-      {
-      Note* note = static_cast<Note*>(inspector->element());
-      if (note == 0)
-            return;
-      NoteDot* dot = note->dot(0);
-      if (dot) {
-            dot->score()->select(dot);
-            inspector->setElement(dot);
-            dot->score()->end();
-            }
-      }
-
-//---------------------------------------------------------
-//   dot2Clicked
-//---------------------------------------------------------
-
-void InspectorNote::dot2Clicked()
-      {
-      Note* note = static_cast<Note*>(inspector->element());
-      if (note == 0)
-            return;
-      NoteDot* dot = note->dot(1);
-      if (dot) {
-            dot->score()->select(dot);
-            inspector->setElement(dot);
-            dot->score()->end();
-            }
-      }
-
-//---------------------------------------------------------
-//   dot3Clicked
-//---------------------------------------------------------
-
-void InspectorNote::dot3Clicked()
-      {
-      Note* note = static_cast<Note*>(inspector->element());
-      if (note == 0)
-            return;
-      NoteDot* dot = note->dot(2);
-      if (dot) {
-            dot->score()->select(dot);
-            inspector->setElement(dot);
-            dot->score()->end();
+      cb.notes->clear();
+      foreach(Note* n, chord->notes()) {
+            QString s;
+            s.setNum(long(n), 16);
+            QListWidgetItem* item = new QListWidgetItem(s, 0, long(n));
+            cb.notes->addItem(item);
             }
       }
 
@@ -1107,264 +878,1104 @@ void InspectorNote::dot3Clicked()
 //   hookClicked
 //---------------------------------------------------------
 
-void InspectorNote::hookClicked()
+void ShowChordWidget::hookClicked()
       {
-      Note* note = static_cast<Note*>(inspector->element());
-      if (note == 0)
-            return;
-      Hook* hook = note->chord()->hook();
-      if (hook) {
-            note->score()->select(hook);
-            inspector->setElement(hook);
-            note->score()->end();
-            }
+      emit elementChanged(((Chord*)element())->hook());
       }
 
 //---------------------------------------------------------
 //   stemClicked
 //---------------------------------------------------------
 
-void InspectorNote::stemClicked()
+void ShowChordWidget::stemClicked()
       {
-      Note* note = static_cast<Note*>(inspector->element());
-      if (note == 0)
-            return;
-      Stem* stem = note->chord()->stem();
-      if (stem) {
-            note->score()->select(stem);
-            inspector->setElement(stem);
-            note->score()->end();
-            }
+      emit elementChanged(((Chord*)element())->stem());
       }
 
 //---------------------------------------------------------
 //   beamClicked
 //---------------------------------------------------------
 
-void InspectorNote::beamClicked()
+void ShowChordWidget::beamClicked()
       {
-      Note* note = static_cast<Note*>(inspector->element());
-      if (note == 0)
-            return;
-      Beam* beam = note->chord()->beam();
-      if (beam) {
-            note->score()->select(beam);
-            inspector->setElement(beam);
-            note->score()->end();
+      emit elementChanged(((Chord*)element())->beam());
+      }
+
+//---------------------------------------------------------
+//   tupletClicked
+//---------------------------------------------------------
+
+void ShowChordWidget::tupletClicked()
+      {
+      emit elementChanged(((Chord*)element())->tuplet());
+      }
+
+void ShowChordWidget::stemSlashClicked()
+      {
+      emit elementChanged(((Chord*)element())->stemSlash());
+      }
+
+void ShowChordWidget::arpeggioClicked()
+      {
+      emit elementChanged(((Chord*)element())->arpeggio());
+      }
+
+void ShowChordWidget::tremoloClicked()
+      {
+      emit elementChanged(((Chord*)element())->tremolo());
+      }
+
+void ShowChordWidget::glissandoClicked()
+      {
+      emit elementChanged(((Chord*)element())->glissando());
+      }
+
+//---------------------------------------------------------
+//   upChanged
+//---------------------------------------------------------
+
+void ShowChordWidget::upChanged(bool val)
+      {
+      ((Chord*)element())->setUp(val);
+      }
+
+//---------------------------------------------------------
+//   beamModeChanged
+//---------------------------------------------------------
+
+void ShowChordWidget::beamModeChanged(int n)
+      {
+      ((Chord*)element())->setBeamMode(BeamMode(n));
+      element()->score()->setLayoutAll(true);
+      }
+
+//---------------------------------------------------------
+//   directionChanged
+//---------------------------------------------------------
+
+void ShowChordWidget::directionChanged(int val)
+      {
+      ((Chord*)element())->setStemDirection(Direction(val));
+      }
+
+//---------------------------------------------------------
+//   ShowNoteWidget
+//---------------------------------------------------------
+
+ShowNoteWidget::ShowNoteWidget()
+   : ShowElementBase()
+      {
+      QWidget* note = new QWidget;
+      nb.setupUi(note);
+      layout->addWidget(note);
+      layout->addStretch(10);
+
+      connect(nb.tieFor, SIGNAL(clicked()), SLOT(tieForClicked()));
+      connect(nb.tieBack, SIGNAL(clicked()), SLOT(tieBackClicked()));
+      connect(nb.accidental, SIGNAL(clicked()), SLOT(accidentalClicked()));
+      connect(nb.fingering, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
+      connect(nb.tpc, SIGNAL(valueChanged(int)), SLOT(tpcChanged(int)));
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void ShowNoteWidget::setElement(Element* e)
+      {
+      Note* note = (Note*)e;
+      ShowElementBase::setElement(e);
+
+      nb.pitch->setValue(note->pitch());
+      nb.ppitch->setValue(note->ppitch());
+      nb.velo->setValue(note->velocity());
+      nb.tuning->setValue(note->tuning());
+      nb.line->setValue(note->line());
+      nb.mirror->setChecked(note->mirror());
+      nb.tpc->setValue(note->tpc());
+      nb.headGroup->setValue(note->headGroup());
+      nb.hidden->setChecked(note->hidden());
+      nb.subchannel->setValue(note->subchannel());
+
+      nb.tieFor->setEnabled(note->tieFor());
+      nb.tieBack->setEnabled(note->tieBack());
+      nb.accidental->setEnabled(note->accidental());
+      nb.userAccidental->setValue(note->userAccidental());
+
+      nb.onTimeType->setCurrentIndex(note->onTimeType());
+      nb.onTimeOffset->setValue(note->onTimeOffset());
+      nb.offTimeOffset->setValue(note->offTimeOffset());
+      nb.offTimeType->setCurrentIndex(note->offTimeType());
+      nb.onTimeUserOffset->setValue(note->onTimeUserOffset());
+      nb.offTimeUserOffset->setValue(note->offTimeUserOffset());
+
+      foreach(Element* text, *note->el()) {
+            QString s;
+            s.setNum(long(text), 16);
+            QListWidgetItem* item = new QListWidgetItem(s, 0, long(text));
+            nb.fingering->addItem(item);
             }
       }
 
 //---------------------------------------------------------
-//   InspectorRest
+//   tpcChanged
 //---------------------------------------------------------
 
-InspectorRest::InspectorRest(QWidget* parent)
-   : InspectorBase(parent)
+void ShowNoteWidget::tpcChanged(int val)
       {
-      iElement = new InspectorElementElement(this);
-      iSegment = new InspectorSegment(this);
+      ((Note*)element())->setTpc(val);
+      emit scoreChanged();
+      }
 
-      layout->addWidget(iElement);
-      QHBoxLayout* l = new QHBoxLayout;
-      small          = new QCheckBox;
-      small->setText(tr("Small"));
-      connect(small, SIGNAL(toggled(bool)), SLOT(apply()));
-      l->addWidget(small);
-      layout->addLayout(l);
-      layout->addWidget(iSegment);
+//---------------------------------------------------------
+//   tieForClicked
+//---------------------------------------------------------
+
+void ShowNoteWidget::tieForClicked()
+      {
+      emit elementChanged(((Note*)element())->tieFor());
+      }
+
+//---------------------------------------------------------
+//   tieBackClicked
+//---------------------------------------------------------
+
+void ShowNoteWidget::tieBackClicked()
+      {
+      emit elementChanged(((Note*)element())->tieBack());
+      }
+
+//---------------------------------------------------------
+//   accidentalClicked
+//---------------------------------------------------------
+
+void ShowNoteWidget::accidentalClicked()
+      {
+      emit elementChanged(((Note*)element())->accidental());
+      }
+
+//---------------------------------------------------------
+//   ShowRestWidget
+//---------------------------------------------------------
+
+ShowRestWidget::ShowRestWidget()
+   : ShowElementBase()
+      {
+      // chort rest
+      QWidget* chr = new QWidget;
+      crb.setupUi(chr);
+      layout->addWidget(chr);
+      crb.beamMode->addItem(tr("auto"));
+      crb.beamMode->addItem(tr("beam begin"));
+      crb.beamMode->addItem(tr("beam mid"));
+      crb.beamMode->addItem(tr("beam end"));
+      crb.beamMode->addItem(tr("no beam"));
+      crb.beamMode->addItem(tr("begin 1/32"));
+
+      connect(crb.beamButton, SIGNAL(clicked()), SLOT(beamClicked()));
+      connect(crb.tupletButton, SIGNAL(clicked()), SLOT(tupletClicked()));
+      connect(crb.attributes, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
+      connect(crb.slurFor, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
+      connect(crb.slurBack, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
+
+      QFrame* line = new QFrame(this);
+      line->setFrameStyle(QFrame::HLine | QFrame::Raised);
+      line->setLineWidth(1);
+      layout->addWidget(line);
+
+      QHBoxLayout* hb = new QHBoxLayout;
+      segment = new QSpinBox(this);
+      hb->addWidget(new QLabel(tr("Segment:"), this));
+      hb->addWidget(segment);
+      hb->addStretch(100);
+
+      layout->addLayout(hb);
+      layout->addStretch(100);
       }
 
 //---------------------------------------------------------
 //   setElement
 //---------------------------------------------------------
 
-void InspectorRest::setElement(Element* e)
+void ShowRestWidget::setElement(Element* e)
       {
-      Rest* rest = static_cast<Rest*>(e);
-      Segment* segment = rest->segment();
+      Rest* rest = (Rest*)e;
+      ShowElementBase::setElement(e);
 
-      iElement->setElement(rest);
-      iSegment->setElement(segment);
-      small->setChecked(rest->small());
+      crb.beamButton->setEnabled(rest->beam());
+      crb.tupletButton->setEnabled(rest->tuplet());
+      crb.upFlag->setChecked(rest->up());
+      crb.beamMode->setCurrentIndex(int(rest->beamMode()));
+      crb.attributes->clear();
+      crb.dots->setValue(rest->dots());
+      crb.ticks->setValue(rest->ticks());
+      crb.duration->setValue(int(rest->duration().type()));
+      crb.move->setValue(rest->staffMove());
+
+      crb.slurFor->clear();
+      foreach(Slur* slur, rest->slurFor()) {
+            QString s;
+            s.setNum(long(slur), 16);
+            QListWidgetItem* item = new QListWidgetItem(s, 0, long(slur));
+            crb.slurFor->addItem(item);
+            }
+      crb.slurBack->clear();
+      foreach(Slur* slur, rest->slurBack()) {
+            QString s;
+            s.setNum(long(slur), 16);
+            QListWidgetItem* item = new QListWidgetItem(s, 0, long(slur));
+            crb.slurBack->addItem(item);
+            }
+
+      foreach(Articulation* a, *rest->getArticulations()) {
+            QString s;
+            s.setNum(long(a), 16);
+            QListWidgetItem* item = new QListWidgetItem(s, 0, long(a));
+            crb.attributes->addItem(item);
+            }
+
+      Measure* m = rest->measure();
+      int seg = 0;
+      int tracks = 0; // TODO cs->nstaves() * VOICES;
+      for (Segment* s = m->first(); s; s = s->next(), ++seg) {
+            int track;
+            for (track = 0; track < tracks; ++track) {
+                  Element* e = s->element(track);
+                  if (e == rest)
+                        break;
+                  }
+            if (track < tracks)
+                  break;
+            }
+      segment->setValue(seg);
       }
 
 //---------------------------------------------------------
-//   apply
+//   beamClicked
 //---------------------------------------------------------
 
-void InspectorRest::apply()
+void ShowRestWidget::beamClicked()
       {
-      Rest* rest = static_cast<Rest*>(inspector->element());
+      emit elementChanged(static_cast<Rest*>(element())->beam());
+      }
 
-      bool val = small->isChecked();
-      if (val != rest->small()) {
-            Score* score     = rest->score();
-            score->startCmd();
-            score->undoChangeProperty(rest, P_SMALL, val);
-            score->endCmd();
-            mscore->endCmd();
+//---------------------------------------------------------
+//   tupletClicked
+//---------------------------------------------------------
+
+void ShowRestWidget::tupletClicked()
+      {
+      emit elementChanged(static_cast<Rest*>(element())->tuplet());
+      }
+
+//---------------------------------------------------------
+//   ShowClefWidget
+//---------------------------------------------------------
+
+ShowClefWidget::ShowClefWidget()
+   : ShowElementBase()
+      {
+      QFrame* line = new QFrame(this);
+      line->setFrameStyle(QFrame::HLine | QFrame::Raised);
+      line->setLineWidth(1);
+      layout->addWidget(line);
+
+      QHBoxLayout* hb = new QHBoxLayout;
+      idx = new QSpinBox(this);
+      idx->setRange(0, 1000000);
+      hb->addWidget(new QLabel(tr("Clef Type:"), this));
+      hb->addWidget(idx);
+      hb->addStretch(100);
+
+      layout->addLayout(hb);
+      layout->addStretch(100);
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void ShowClefWidget::setElement(Element* e)
+      {
+      Clef* clef = (Clef*)e;
+      ShowElementBase::setElement(e);
+      idx->setValue(clef->subtype());
+      }
+
+//---------------------------------------------------------
+//   ShowTimesigWidget
+//---------------------------------------------------------
+
+ShowTimesigWidget::ShowTimesigWidget()
+   : ShowElementBase()
+      {
+      layout->addStretch(100);
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void ShowTimesigWidget::setElement(Element* e)
+      {
+//      TimeSig* tsig = (TimeSig*)e;
+      ShowElementBase::setElement(e);
+      }
+
+//---------------------------------------------------------
+//   ShowKeysigWidget
+//---------------------------------------------------------
+
+ShowKeysigWidget::ShowKeysigWidget()
+   : ShowElementBase()
+      {
+      layout->addStretch(100);
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void ShowKeysigWidget::setElement(Element* e)
+      {
+//      KeySig* tsig = (KeySig*)e;
+      ShowElementBase::setElement(e);
+      }
+
+//---------------------------------------------------------
+//   ElementView
+//---------------------------------------------------------
+
+ElementView::ElementView()
+   : ShowElementBase()
+      {
+      layout->addStretch(10);
+      }
+
+//---------------------------------------------------------
+//   TextView
+//---------------------------------------------------------
+
+TextView::TextView()
+   : ShowElementBase()
+      {
+      QWidget* page = new QWidget;
+      tb.setupUi(page);
+      layout->addWidget(page);
+      layout->addStretch(10);
+      connect(tb.text, SIGNAL(textChanged()), SLOT(textChanged()));
+      }
+
+//---------------------------------------------------------
+//   textChanged
+//---------------------------------------------------------
+
+void TextView::textChanged()
+      {
+      emit scoreChanged();
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void TextView::setElement(Element* e)
+      {
+      Text* te = (Text*)e;
+      tb.textStyle->clear();
+      foreach(const TextStyle* s, e->score()->textStyles()) {
+            tb.textStyle->addItem(s->name);
+            }
+
+      ShowElementBase::setElement(e);
+      tb.text->setDocument(te->doc()->clone());
+      tb.xoffset->setValue(te->xoff());
+      tb.yoffset->setValue(te->yoff());
+      tb.rxoffset->setValue(te->reloff().x());
+      tb.ryoffset->setValue(te->reloff().y());
+      tb.offsetType->setCurrentIndex(int(te->offsetType()));
+      tb.textStyle->setCurrentIndex(te->textStyle());
+      }
+
+//---------------------------------------------------------
+//   HairpinView
+//---------------------------------------------------------
+
+HairpinView::HairpinView()
+   : ShowElementBase()
+      {
+      QWidget* hairpin = new QWidget;
+      hp.setupUi(hairpin);
+      layout->addWidget(hairpin);
+      layout->addStretch(10);
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void HairpinView::setElement(Element* e)
+      {
+      Hairpin* hairpin = (Hairpin*)e;
+      ShowElementBase::setElement(e);
+      hp.tick1->setValue(hairpin->tick());
+      hp.tick2->setValue(hairpin->tick2());
+      }
+
+//---------------------------------------------------------
+//   BarLineView
+//---------------------------------------------------------
+
+BarLineView::BarLineView()
+   : ShowElementBase()
+      {
+      QWidget* barline = new QWidget;
+      bl.setupUi(barline);
+      layout->addWidget(barline);
+      layout->addStretch(10);
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void BarLineView::setElement(Element* e)
+      {
+      BarLine* barline = (BarLine*)e;
+      ShowElementBase::setElement(e);
+      bl.subType->setValue(barline->subtype());
+      }
+
+//---------------------------------------------------------
+//   DynamicView
+//---------------------------------------------------------
+
+DynamicView::DynamicView()
+   : ShowElementBase()
+      {
+      QWidget* tw = new QWidget;
+      tb.setupUi(tw);
+      layout->addWidget(tw);
+
+      QWidget* dynamic = new QWidget;
+      bl.setupUi(dynamic);
+      layout->addWidget(dynamic);
+      layout->addStretch(10);
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void DynamicView::setElement(Element* e)
+      {
+      Dynamic* dynamic = (Dynamic*)e;
+
+//      tb.style->clear();
+//      foreach (TextStyle* s, dynamic->score()->textStyles())
+//            tb.style->addItem(s->name);
+      tb.text->setText(dynamic->getText());
+//      tb.xoffset->setValue(dynamic->styleOffset().x());
+//      tb.yoffset->setValue(dynamic->styleOffset().y());
+
+      ShowElementBase::setElement(e);
+      bl.subType->setValue(dynamic->subtype());
+      }
+
+//---------------------------------------------------------
+//   TupletView
+//---------------------------------------------------------
+
+TupletView::TupletView()
+   : ShowElementBase()
+      {
+      QWidget* tw = new QWidget;
+      tb.setupUi(tw);
+      layout->addWidget(tw);
+      layout->addStretch(10);
+
+      connect(tb.number, SIGNAL(clicked()), SLOT(numberClicked()));
+      connect(tb.elements, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(elementClicked(QTreeWidgetItem*)));
+      }
+
+//---------------------------------------------------------
+//   numberClicked
+//---------------------------------------------------------
+
+void TupletView::numberClicked()
+      {
+      emit elementChanged(((Tuplet*)element())->number());
+      }
+
+//---------------------------------------------------------
+//   elementClicked
+//---------------------------------------------------------
+
+void TupletView::elementClicked(QTreeWidgetItem* item)
+      {
+      Element* e = (Element*)item->data(0, Qt::UserRole).value<void*>();
+      emit elementChanged(e);
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void TupletView::setElement(Element* e)
+      {
+      ShowElementBase::setElement(e);
+      Tuplet* tuplet = (Tuplet*)e;
+      tb.baseLen->setText(tuplet->baseLen().name());
+      tb.ratioZ->setValue(tuplet->ratio().numerator());
+      tb.ratioN->setValue(tuplet->ratio().denominator());
+      tb.number->setEnabled(tuplet->number());
+      tb.elements->clear();
+      foreach(DurationElement* e, tuplet->elements()) {
+            QTreeWidgetItem* item = new QTreeWidgetItem;
+            item->setText(0, e->name());
+            item->setText(1, QString("%1").arg(e->tick()));
+            item->setText(2, QString("%1").arg(e->tickLen()));
+            void* p = (void*) e;
+            item->setData(0, Qt::UserRole, QVariant::fromValue<void*>(p));
+            tb.elements->addTopLevelItem(item);
             }
       }
 
 //---------------------------------------------------------
-//   InspectorClef
+//   DoubleLabel
 //---------------------------------------------------------
 
-InspectorClef::InspectorClef(QWidget* parent)
-   : InspectorBase(parent)
+DoubleLabel::DoubleLabel(QWidget* parent)
+   : QLabel(parent)
       {
-      iElement = new InspectorElementElement(this);
-      iSegment = new InspectorSegment(this);
+//      setFrameStyle(QFrame::LineEditPanel | QFrame::Sunken);
+  //    setPaletteBackgroundColor(palette().active().brightText());
+      }
 
-      layout->addWidget(iElement);
-      layout->addWidget(iSegment);
+//---------------------------------------------------------
+//   setValue
+//---------------------------------------------------------
+
+void DoubleLabel::setValue(double val)
+      {
+      QString s;
+      setText(s.setNum(val, 'g', 3));
+      }
+
+//---------------------------------------------------------
+//   sizeHint
+//---------------------------------------------------------
+
+QSize DoubleLabel::sizeHint() const
+      {
+      QFontMetrics fm = fontMetrics();
+      int h           = fm.height() + 4;
+      int n           = 3 + 3;
+      int w = fm.width(QString("-0.")) + fm.width('0') * n + 6;
+      return QSize(w, h);
+      }
+
+//---------------------------------------------------------
+//   ShowElementBase
+//---------------------------------------------------------
+
+ShowElementBase::ShowElementBase()
+   : QWidget()
+      {
+      QWidget* elemView = new QWidget;
+      eb.setupUi(elemView);
+      layout = new QVBoxLayout;
+      setLayout(layout);
+      layout->addWidget(elemView);
+      connect(eb.parentButton,   SIGNAL(clicked()), SLOT(parentClicked()));
+      connect(eb.offsetx,        SIGNAL(valueChanged(double)), SLOT(offsetxChanged(double)));
+      connect(eb.offsety,        SIGNAL(valueChanged(double)), SLOT(offsetyChanged(double)));
+      connect(eb.selected,       SIGNAL(clicked(bool)), SLOT(selectedClicked(bool)));
+      connect(eb.visible,        SIGNAL(clicked(bool)), SLOT(visibleClicked(bool)));
+      }
+
+//---------------------------------------------------------
+//   gotoElement
+//---------------------------------------------------------
+
+void ShowElementBase::gotoElement(QListWidgetItem* ai)
+      {
+      Element* e = (Element*)(ai->type());
+      emit elementChanged(e);
+      }
+
+//---------------------------------------------------------
+//   ShowElementBase
+//---------------------------------------------------------
+
+void ShowElementBase::setElement(Element* e)
+      {
+      el = e;
+
+      eb.address->setText(QString("%1").arg((unsigned long)e, 0, 16));
+
+      eb.subtype->setValue(e->subtype());
+      eb.selected->setChecked(e->selected());
+      eb.selectable->setChecked(e->selectable());
+      eb.droptarget->setChecked(e->dropTarget());
+      eb.generated->setChecked(e->generated());
+      eb.visible->setChecked(e->visible());
+      eb.track->setValue(e->track());
+      eb.time->setValue(e->tick());
+      eb.posx->setValue(e->ipos().x());
+      eb.posy->setValue(e->ipos().y());
+      eb.cposx->setValue(e->canvasPos().x());
+      eb.cposy->setValue(e->canvasPos().y());
+      eb.offsetx->setValue(e->userOff().x());
+      eb.offsety->setValue(e->userOff().y());
+      eb.bboxx->setValue(e->bbox().x());
+      eb.bboxy->setValue(e->bbox().y());
+      eb.bboxw->setValue(e->bbox().width());
+      eb.bboxh->setValue(e->bbox().height());
+      eb.color->setColor(e->color());
+      eb.parentButton->setEnabled(e->parent());
+      eb.mag->setValue(e->mag());
+      eb.systemFlag->setChecked(e->systemFlag());
+      }
+
+//---------------------------------------------------------
+//   selectedClicked
+//---------------------------------------------------------
+
+void ShowElementBase::selectedClicked(bool val)
+      {
+      QRectF r(el->abbox());
+      if (val)
+            el->score()->select(el, SELECT_ADD, 0);
+      else
+            el->score()->deselect(el);
+      el->score()->addRefresh(r | el->abbox());
+      }
+
+//---------------------------------------------------------
+//   visibleClicked
+//---------------------------------------------------------
+
+void ShowElementBase::visibleClicked(bool val)
+      {
+      QRectF r(el->abbox());
+      el->setVisible(val);
+      el->score()->addRefresh(r | el->abbox());
+      }
+
+//---------------------------------------------------------
+//   parentClicked
+//---------------------------------------------------------
+
+void ShowElementBase::parentClicked()
+      {
+      emit elementChanged(el->parent());
+      }
+
+//---------------------------------------------------------
+//   offsetxChanged
+//---------------------------------------------------------
+
+void ShowElementBase::offsetxChanged(double val)
+      {
+      QRectF r(el->abbox());
+      el->setUserXoffset(val);
+//      Element* e = el;
+//TODO      while ((e = e->parent()))
+      el->score()->addRefresh(r | el->abbox());
+      }
+
+//---------------------------------------------------------
+//   offsetyChanged
+//---------------------------------------------------------
+
+void ShowElementBase::offsetyChanged(double val)
+      {
+      QRectF r(el->abbox());
+      el->setUserYoffset(val);
+      el->score()->addRefresh(r | el->abbox());
+      }
+
+//---------------------------------------------------------
+//   SlurView
+//---------------------------------------------------------
+
+SlurView::SlurView()
+   : ShowElementBase()
+      {
+      QWidget* slurTie = new QWidget;
+      st.setupUi(slurTie);
+      QWidget* slur = new QWidget;
+      sb.setupUi(slur);
+      layout->addWidget(slurTie);
+      layout->addWidget(slur);
+      layout->addStretch(10);
+      connect(st.segments, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(segmentClicked(QTreeWidgetItem*)));
+      connect(st.startElement,   SIGNAL(clicked()), SLOT(startClicked()));
+      connect(st.endElement,   SIGNAL(clicked()), SLOT(endClicked()));
+      }
+
+//---------------------------------------------------------
+//   startClicked
+//---------------------------------------------------------
+
+void SlurView::startClicked()
+      {
+      emit elementChanged(static_cast<SlurTie*>(element())->startElement());
+      }
+
+//---------------------------------------------------------
+//   endClicked
+//---------------------------------------------------------
+
+void SlurView::endClicked()
+      {
+      emit elementChanged(static_cast<SlurTie*>(element())->endElement());
       }
 
 //---------------------------------------------------------
 //   setElement
 //---------------------------------------------------------
 
-void InspectorClef::setElement(Element* e)
+void SlurView::setElement(Element* e)
       {
-      Clef* clef = static_cast<Clef*>(e);
-      Segment* segment = clef->segment();
+      Slur* slur = (Slur*)e;
+      ShowElementBase::setElement(e);
 
-      iElement->setElement(clef);
-      iSegment->setElement(segment);
+      st.segments->clear();
+      QList<SlurSegment*>* el = slur->slurSegments();
+      foreach(const Element* e, *el) {
+            QTreeWidgetItem* item = new QTreeWidgetItem;
+            item->setText(0, QString("%1").arg((unsigned long)e, 8, 16));
+            item->setData(0, Qt::UserRole, QVariant::fromValue<void*>((void*)e));
+            st.segments->addTopLevelItem(item);
+            }
+      st.upFlag->setChecked(slur->isUp());
+      st.direction->setCurrentIndex(slur->slurDirection());
+      st.startElement->setEnabled(slur->startElement());
+      st.endElement->setEnabled(slur->endElement());
+
+      sb.tick2->setValue(slur->tick2());
+      sb.staff2->setValue(slur->track2() / VOICES);
+      sb.voice2->setValue(slur->track2() % VOICES);
       }
 
 //---------------------------------------------------------
-//   InspectorChord
+//   segmentClicked
 //---------------------------------------------------------
 
-InspectorChord::InspectorChord(QWidget* parent)
-   : QWidget(parent)
+void SlurView::segmentClicked(QTreeWidgetItem* item)
       {
-      setupUi(this);
-      connect(small,         SIGNAL(toggled(bool)),            SLOT(smallChanged(bool)));
-      connect(stemless,      SIGNAL(toggled(bool)),            SLOT(stemlessChanged(bool)));
-      connect(stemDirection, SIGNAL(currentIndexChanged(int)), SLOT(stemDirectionChanged(int)));
-
-      connect(resetSmall,    SIGNAL(clicked()),      SLOT(resetSmallClicked()));
-      connect(resetStemless, SIGNAL(clicked()),      SLOT(resetStemlessClicked()));
-      connect(resetStemDirection, SIGNAL(clicked()), SLOT(resetStemDirectionClicked()));
+      Element* e = (Element*)item->data(0, Qt::UserRole).value<void*>();
+      emit elementChanged(e);
       }
 
 //---------------------------------------------------------
-//   dirty
+//   segmentClicked
 //---------------------------------------------------------
 
-bool InspectorChord::dirty() const
+void TieView::segmentClicked(QTreeWidgetItem* item)
       {
-      return chord->small() != small->isChecked()
-         || chord->noStem() != stemless->isChecked()
-         || chord->stemDirection() != (Direction)(stemDirection->currentIndex())
-         ;
+      Element* e = (Element*)item->data(0, Qt::UserRole).value<void*>();
+      emit elementChanged(e);
+      }
+
+//---------------------------------------------------------
+//   TieView
+//---------------------------------------------------------
+
+TieView::TieView()
+   : ShowElementBase()
+      {
+      QWidget* tie = new QWidget;
+      st.setupUi(tie);
+      layout->addWidget(tie);
+      layout->addStretch(10);
+      connect(st.segments, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(segmentClicked(QTreeWidgetItem*)));
       }
 
 //---------------------------------------------------------
 //   setElement
 //---------------------------------------------------------
 
-void InspectorChord::setElement(Chord* c)
+void TieView::setElement(Element* e)
       {
-      chord = c;
+      Tie* tie = (Tie*)e;
+      ShowElementBase::setElement(e);
 
-      small->blockSignals(true);
-      stemless->blockSignals(true);
-      stemDirection->blockSignals(true);
-
-      small->setChecked(chord->small());
-      stemless->setChecked(chord->noStem());
-      stemDirection->setCurrentIndex(chord->stemDirection());
-
-      resetSmall->setEnabled(chord->small());
-      resetStemless->setEnabled(chord->noStem());
-      resetStemDirection->setEnabled(stemDirection->currentIndex() != 0);
-
-      small->blockSignals(false);
-      stemless->blockSignals(false);
-      stemDirection->blockSignals(false);
+      st.segments->clear();
+      QList<SlurSegment*>* el = tie->slurSegments();
+      foreach(const Element* e, *el) {
+            QTreeWidgetItem* item = new QTreeWidgetItem;
+            item->setText(0, QString("%1").arg((unsigned long)e, 8, 16));
+item->setText(1, "klops");
+            item->setData(0, Qt::UserRole, QVariant::fromValue<void*>((void*)e));
+            st.segments->addTopLevelItem(item);
+            }
+      st.upFlag->setChecked(tie->isUp());
+      st.direction->setCurrentIndex(tie->slurDirection());
       }
 
 //---------------------------------------------------------
-//   smallChanged
+//   segmentClicked
 //---------------------------------------------------------
 
-void InspectorChord::smallChanged(bool val)
+void VoltaView::segmentClicked(QTreeWidgetItem* item)
       {
-      resetSmall->setEnabled(val);
-      apply();
+      Element* e = (Element*)item->data(0, Qt::UserRole).value<void*>();
+      emit elementChanged(e);
       }
 
 //---------------------------------------------------------
-//   stemlessChanged
+//   beginTextClicked
 //---------------------------------------------------------
 
-void InspectorChord::stemlessChanged(bool val)
+void VoltaView::beginTextClicked()
       {
-      resetStemless->setEnabled(val);
-      apply();
+      emit elementChanged(static_cast<Volta*>(element())->beginText());
       }
 
 //---------------------------------------------------------
-//   stemDirectionChanged
+//   continueTextClicked
 //---------------------------------------------------------
 
-void InspectorChord::stemDirectionChanged(int idx)
+void VoltaView::continueTextClicked()
       {
-      resetStemDirection->setEnabled(idx != 0);
-      apply();
+      emit elementChanged(static_cast<Volta*>(element())->continueText());
       }
 
 //---------------------------------------------------------
-//   resetSmall
+//   VoltaView
 //---------------------------------------------------------
 
-void InspectorChord::resetSmallClicked()
+VoltaView::VoltaView()
+   : ShowElementBase()
       {
-      small->setChecked(false);
-      apply();
+      // SLineBase
+      QWidget* w = new QWidget;
+      lb.setupUi(w);
+      layout->addWidget(w);
+
+      // TextLineBase
+      w = new QWidget;
+      tlb.setupUi(w);
+      layout->addWidget(w);
+
+      layout->addStretch(10);
+      connect(lb.segments, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(segmentClicked(QTreeWidgetItem*)));
+      connect(tlb.beginText, SIGNAL(clicked()), SLOT(beginTextClicked()));
+      connect(tlb.continueText, SIGNAL(clicked()), SLOT(continueTextClicked()));
       }
 
 //---------------------------------------------------------
-//   resetStemless
+//   setElement
 //---------------------------------------------------------
 
-void InspectorChord::resetStemlessClicked()
+void VoltaView::setElement(Element* e)
       {
-      stemless->setChecked(false);
-      apply();
+      Volta* volta = (Volta*)e;
+      ShowElementBase::setElement(e);
+
+      tlb.lineWidth->setValue(volta->lineWidth().val());
+      lb.tick2->setValue(volta->tick2());
+      lb.anchor->setCurrentIndex(int(volta->anchor()));
+      lb.diagonal->setChecked(volta->diagonal());
+
+      lb.segments->clear();
+      const QList<LineSegment*>& el = volta->lineSegments();
+      foreach(const Element* e, el) {
+            QTreeWidgetItem* item = new QTreeWidgetItem;
+            item->setText(0, QString("%1").arg((unsigned long)e, 8, 16));
+            item->setData(0, Qt::UserRole, QVariant::fromValue<void*>((void*)e));
+            lb.segments->addTopLevelItem(item);
+            }
+      tlb.beginText->setEnabled(volta->beginText());
+      tlb.continueText->setEnabled(volta->continueText());
       }
 
 //---------------------------------------------------------
-//   resetStemDirection
+//   VoltaSegmentView
 //---------------------------------------------------------
 
-void InspectorChord::resetStemDirectionClicked()
+VoltaSegmentView::VoltaSegmentView()
+   : ShowElementBase()
       {
-      stemDirection->setCurrentIndex(0);
-      apply();
+      QWidget* w = new QWidget;
+      lb.setupUi(w);
+      layout->addWidget(w);
+      layout->addStretch(10);
       }
 
 //---------------------------------------------------------
-//   apply
+//   setElement
 //---------------------------------------------------------
 
-void InspectorChord::apply()
+void VoltaSegmentView::setElement(Element* e)
       {
-      if (!dirty())
+      VoltaSegment* vs = (VoltaSegment*)e;
+      ShowElementBase::setElement(e);
+
+      lb.segmentType->setCurrentIndex(vs->subtype());
+      lb.pos2x->setValue(vs->pos2().x());
+      lb.pos2y->setValue(vs->pos2().y());
+      lb.offset2x->setValue(vs->userOff2().x());
+      lb.offset2y->setValue(vs->userOff2().y());
+      }
+
+//---------------------------------------------------------
+//   LyricsView
+//---------------------------------------------------------
+
+LyricsView::LyricsView()
+   : ShowElementBase()
+      {
+      QWidget* w = new QWidget;
+      lb.setupUi(w);
+      layout->addWidget(w);
+      layout->addStretch(10);
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void LyricsView::setElement(Element* e)
+      {
+      Lyrics* l = (Lyrics*)e;
+      ShowElementBase::setElement(e);
+
+      lb.row->setValue(l->no());
+      lb.endTick->setValue(l->endTick());
+      lb.syllabic->setCurrentIndex(l->syllabic());
+      }
+
+//---------------------------------------------------------
+//   backClicked
+//---------------------------------------------------------
+
+void Inspector::backClicked()
+      {
+      if (backStack.isEmpty())
             return;
-      Score* score = chord->score();
-      score->startCmd();
-      if (small->isChecked() != chord->small())
-            score->undoChangeProperty(chord, P_SMALL, small->isChecked());
-      if (stemless->isChecked() != chord->noStem())
-            score->undoChangeProperty(chord, P_NO_STEM, stemless->isChecked());
-      Direction d = Direction(stemDirection->currentIndex());
-      if (d != chord->stemDirection())
-            score->undoChangeProperty(chord, P_STEM_DIRECTION, d);
-      score->endCmd();
-      mscore->endCmd();
+      forwardStack.push(curElement);
+      forward->setEnabled(true);
+      updateElement(backStack.pop());
+      back->setEnabled(!backStack.isEmpty());
+      }
+
+//---------------------------------------------------------
+//   forwardClicked
+//---------------------------------------------------------
+
+void Inspector::forwardClicked()
+      {
+      if (forwardStack.isEmpty())
+            return;
+      backStack.push(curElement);
+      back->setEnabled(true);
+      updateElement(forwardStack.pop());
+      forward->setEnabled(!forwardStack.isEmpty());
+      }
+
+//---------------------------------------------------------
+//   reloadClicked
+//---------------------------------------------------------
+
+void Inspector::reloadClicked()
+      {
+      Element* e = curElement;
+	updateList(cs);
+	if (e)
+	      updateElement(e);
+      }
+
+//---------------------------------------------------------
+//   BeamView
+//---------------------------------------------------------
+
+BeamView::BeamView()
+   : ShowElementBase()
+      {
+      QWidget* w = new QWidget;
+      bb.setupUi(w);
+      layout->addWidget(w);
+      layout->addStretch(10);
+      connect(bb.elements, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(elementClicked(QTreeWidgetItem*)));
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void BeamView::setElement(Element* e)
+      {
+      Beam* b = (Beam*)e;
+      ShowElementBase::setElement(e);
+
+      bb.up->setValue(b->up());
+      bb.elements->clear();
+      foreach (ChordRest* cr, b->elements()) {
+            QTreeWidgetItem* item = new QTreeWidgetItem;
+            item->setText(0, QString("%1").arg((unsigned long)e, 8, 16));
+            item->setData(0, Qt::UserRole, QVariant::fromValue<void*>((void*)cr));
+            item->setText(1, cr->name());
+            bb.elements->addTopLevelItem(item);
+            }
+      }
+
+//---------------------------------------------------------
+//   elementClicked
+//---------------------------------------------------------
+
+void BeamView::elementClicked(QTreeWidgetItem* item)
+      {
+      Element* e = (Element*)item->data(0, Qt::UserRole).value<void*>();
+      emit elementChanged(e);
+      }
+
+//---------------------------------------------------------
+//   TremoloView
+//---------------------------------------------------------
+
+TremoloView::TremoloView()
+   : ShowElementBase()
+      {
+      QWidget* w = new QWidget;
+      tb.setupUi(w);
+      layout->addWidget(w);
+      layout->addStretch(10);
+      connect(tb.firstChord, SIGNAL(clicked()), SLOT(chord1Clicked()));
+      connect(tb.secondChord, SIGNAL(clicked()), SLOT(chord2Clicked()));
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void TremoloView::setElement(Element* e)
+      {
+      Tremolo* b = static_cast<Tremolo*>(e);
+      ShowElementBase::setElement(e);
+
+      tb.firstChord->setEnabled(b->chord1());
+      tb.secondChord->setEnabled(b->chord2());
+      }
+
+//---------------------------------------------------------
+//   chord1Clicked
+//---------------------------------------------------------
+
+void TremoloView::chord1Clicked()
+      {
+      emit elementChanged(static_cast<Tremolo*>(element())->chord1());
+      }
+
+//---------------------------------------------------------
+//   chord2Clicked
+//---------------------------------------------------------
+
+void TremoloView::chord2Clicked()
+      {
+      emit elementChanged(static_cast<Tremolo*>(element())->chord2());
       }
 

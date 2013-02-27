@@ -57,13 +57,11 @@ void DenominatorSpinBox::stepBy(int steps)
 
 QValidator::State DenominatorSpinBox::validate(QString& input, int& pos) const
       {
-      if (input.isEmpty())
-            return QValidator::Intermediate;
       bool ok;
       int val = input.toInt(&ok);
       if (!ok)
             return QValidator::Invalid;
-      if (val & (val - 1) != 0)
+      if (val != 1 && (val % 2))
             return QValidator::Intermediate;
       return QValidator::Acceptable;
       }

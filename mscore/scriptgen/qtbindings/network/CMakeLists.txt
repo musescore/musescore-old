@@ -101,7 +101,7 @@ set_target_properties(
       qtscript_network
       PROPERTIES
       COMPILE_FLAGS
-         "-D QT_NO_OPENSSL -D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_NO_DEBUG"
+         "-D QT_NO_OPENSSL -D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_NO_DEBUG -include ${PROJECT_SOURCE_DIR}/all.h"
       LINK_FLAGS "-L${QT_LIBRARY_DIR}"
       )
 

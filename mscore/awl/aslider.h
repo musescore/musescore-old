@@ -21,8 +21,6 @@
 #ifndef __AWLASLIDER_H__
 #define __AWLASLIDER_H__
 
-#include "msynth/sparm.h"
-
 namespace Awl {
 
 //---------------------------------------------------------
@@ -124,7 +122,6 @@ class AbstractSlider : public QWidget {
       double pageStep() const    { return _pageStep; }
       void setPageStep(double f) { _pageStep = f;    }
       void setEnabled(bool val);
-      virtual void init(const SyntiParameter& p);
       };
 
 }

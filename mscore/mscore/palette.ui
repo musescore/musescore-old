@@ -96,14 +96,7 @@
         <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
        </property>
        <item row="0" column="1">
-        <widget class="QDoubleSpinBox" name="elementOffset">
-         <property name="suffix">
-          <string>sp</string>
-         </property>
-         <property name="minimum">
-          <double>-99.000000000000000</double>
-         </property>
-        </widget>
+        <widget class="QDoubleSpinBox" name="elementOffset"/>
        </item>
        <item row="0" column="0">
         <widget class="QLabel" name="label_5">

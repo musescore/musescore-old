@@ -23,21 +23,19 @@
 #ifdef HAS_AUDIOFILE
 
 #include <sndfile.h>
-#include "libmscore/score.h"
+#include "score.h"
 #include "fluid.h"
-// #include "libmscore/tempo.h"
-#include "libmscore/note.h"
-#include "musescore.h"
-#include "libmscore/part.h"
+#include "al/tempo.h"
+#include "note.h"
+#include "mscore.h"
+#include "part.h"
 #include "preferences.h"
-#include "seq.h"
-#include "libmscore/mscore.h"
 
 //---------------------------------------------------------
 //   saveAudio
 //---------------------------------------------------------
 
-bool MuseScore::saveAudio(Score* score, const QString& name, const QString& ext)
+bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont)
       {
       int format;
       if (ext == "wav")
@@ -47,17 +45,13 @@ bool MuseScore::saveAudio(Score* score, const QString& name, const QString& ext)
       else if (ext == "flac")
             format = SF_FORMAT_FLAC | SF_FORMAT_PCM_16;
       else {
-            qDebug("unknown audio file type <%s>\n", qPrintable(ext));
+            fprintf(stderr, "unknown audio file type <%s>\n", qPrintable(ext));
             return false;
             }
-      int sampleRate = preferences.exportAudioSampleRate;
-
-      MasterSynth* synti = new MasterSynth();
-      synti->init(sampleRate);
-      synti->setState(score->syntiState());
+      static const int sampleRate = 44100;
 
       EventMap events;
-      score->toEList(&events);
+      toEList(&events);
 
       SF_INFO info;
       memset(&info, 0, sizeof(info));
@@ -66,95 +60,128 @@ bool MuseScore::saveAudio(Score* score, const QString& name, const QString& ext)
       info.format     = format;
       SNDFILE* sf     = sf_open(qPrintable(name), SFM_WRITE, &info);
       if (sf == 0) {
-            qDebug("open soundfile failed: %s\n", sf_strerror(sf));
-            delete synti;
+            fprintf(stderr, "open soundfile failed: %s\n", sf_strerror(sf));
             return false;
             }
 
-      QProgressBar* pBar = showProgressBar();
+      QProgressBar* pBar = mscore->showProgressBar();
       pBar->reset();
 
-      float peak = 0.0;
+      double peak = 0.0;
       double gain = 1.0;
-      EventMap::const_iterator endPos = events.constEnd();
-      --endPos;
-      const int et = (score->utick2utime(endPos.key()) + 1) * MScore::sampleRate;
       for (int pass = 0; pass < 2; ++pass) {
+            Synth* synth = new FluidS::Fluid();
+            synth->init(sampleRate);
+            
+            synth->setMasterTuning(preferences.tuning);
+            synth->setMasterGain(preferences.masterGain);
+            synth->setEffectParameter(0, 0, preferences.reverbRoomSize);
+            synth->setEffectParameter(0, 1, preferences.reverbDamp);
+            synth->setEffectParameter(0, 2, preferences.reverbWidth);
+            synth->setEffectParameter(0, 3, preferences.reverbGain);
+
+            synth->setEffectParameter(1, 4, preferences.chorusGain);
+            
+            if (soundFont.isEmpty()) {
+                  if (!preferences.soundFont.isEmpty())
+                        soundFont = preferences.soundFont;
+                  else
+                        soundFont = QString(getenv("DEFAULT_SOUNDFONT"));
+                  if (soundFont.isEmpty()) {
+                        fprintf(stderr, "MuseScore: error: no soundfont configured\n");
+                        delete synth;
+                        return false;
+                        }
+                  }
+            bool rv = synth->loadSoundFont(soundFont);
+            if (!rv) {
+                  fprintf(stderr, "MuseScore: error: loading sound font <%s> failed\n", qPrintable(soundFont));
+                  delete synth;
+                  return false;
+                  }
             EventMap::const_iterator playPos;
             playPos = events.constBegin();
-            pBar->setRange(0, et);
+            EventMap::const_iterator endPos = events.constEnd();
+            --endPos;
+            double et = utick2utime(endPos.key());
+            et += 1.0;   // add trailer (sec)
+            pBar->setRange(0, int(et));
 
             //
             // init instruments
             //
-            foreach(const Part* part, score->parts()) {
-                  foreach(const Channel& a, part->instr()->channel()) {
+            foreach(const Part* part, _parts) {
+                  foreach(const Channel& a, part->channel()) {
                         a.updateInitList();
-                        foreach(Event e, a.init) {
-                              if (e.type() == ME_INVALID)
+                        foreach(Event* e, a.init) {
+                              if (e == 0)
                                     continue;
-                              e.setChannel(a.channel);
-                              int syntiIdx= score->midiMapping(a.channel)->articulation->synti;
-                              synti->play(e, syntiIdx);
+                              e->setChannel(a.channel);
+                              synth->play(*e);
                               }
                         }
                   }
 
-            static const unsigned FRAMES = 512;
+            static const unsigned int FRAMES = 512;
             float buffer[FRAMES * 2];
-            int playTime = 0;
-            synti->setGain(gain);
+            int stride      = 2;
+            double playTime = 0.0;
 
             for (;;) {
-                  unsigned frames = FRAMES;
+                  unsigned int frames = FRAMES;
                   //
                   // collect events for one segment
                   //
-                  memset(buffer, 0, sizeof(float) * FRAMES * 2);
-                  int endTime = playTime + frames;
-                  float* p = buffer;
+                  double endTime = playTime + double(frames)/double(sampleRate);
+                  float* l = buffer;
+                  float* r = buffer + 1;
                   for (; playPos != events.constEnd(); ++playPos) {
-                        int f = score->utick2utime(playPos.key()) * MScore::sampleRate;
+                        double f = utick2utime(playPos.key());
                         if (f >= endTime)
                               break;
-                        int n = f - playTime;
-                        synti->process(n, p);
-                        p         += 2 * n;
+                        int n = lrint((f - playTime) * sampleRate);
+                        synth->process(n, l, r, stride);
 
-                        playTime  += n;
+                        l         += n * stride;
+                        r         += n * stride;
+                        playTime += double(n)/double(sampleRate);
                         frames    -= n;
-                        const Event& e = playPos.value();
-                        if (e.isChannelEvent()) {
-                              int channelIdx = e.channel();
-                              Channel* c = score->midiMapping(channelIdx)->articulation;
-                              if (!c->mute) {
-                                    synti->play(e, c->synti);
-                                    }
+                        const Event* e = playPos.value();
+                        if (e->isChannelEvent()) {
+                              int channelIdx = e->channel();
+                              Channel* c = _midiMapping[channelIdx].articulation;
+                              if (!c->mute)
+                                    synth->play(*e);
                               }
                         }
                   if (frames) {
-                        synti->process(frames, p);
-                        playTime += frames;
+                        synth->process(frames, l, r, stride);
+                        playTime += double(frames)/double(sampleRate);
                         }
-                  if (pass == 1)
-                        sf_writef_float(sf, buffer, FRAMES);
-                  else {
+                  if (pass == 1) {
                         for (unsigned i = 0; i < FRAMES * 2; ++i)
-                              peak = qMax(peak, qAbs(buffer[i]));
+                              buffer[i] *= gain;
+                        sf_writef_float(sf, buffer, FRAMES);
+                        }
+                  else {
+                        for (unsigned i = 0; i < FRAMES * 2; ++i) {
+                              if (qAbs(buffer[i]) > peak)
+                                    peak = qAbs(buffer[i]);
+                              }
                         }
                   playTime = endTime;
-                  pBar->setValue(playTime);
-                  if (playTime >= et)
+                  pBar->setValue(int(playTime));
+                  if (playTime > et)
                         break;
                   }
+            delete synth;
             gain = 0.99 / peak;
             }
 
-      hideProgressBar();
+      mscore->hideProgressBar();
 
-      delete synti;
       if (sf_close(sf)) {
-            qDebug("close soundfile failed\n");
+            fprintf(stderr, "close soundfile failed\n");
             return false;
             }
 

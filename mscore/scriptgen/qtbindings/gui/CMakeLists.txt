@@ -18,11 +18,14 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
+set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
+
 if (STATIC_SCRIPT_BINDINGS)
       set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -Winvalid-pch -DQT_STATICPLUGIN")
       set(LIBTYPE "STATIC")
 else (STATIC_SCRIPT_BINDINGS)
-      set(CMAKE_CXX_FLAGS "-g -Wall -Wextra")
+      set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -Winvalid-pch")
       set(LIBTYPE "SHARED")
 endif (STATIC_SCRIPT_BINDINGS)
 
@@ -225,7 +228,7 @@ add_library (
       qtscript_QRubberBand.cpp
       qtscript_QScrollArea.cpp
       qtscript_QScrollBar.cpp
-#      qtscript_QSessionManager.cpp  # does not work with qt4.8
+      qtscript_QSessionManager.cpp
       qtscript_QShortcut.cpp
       qtscript_QShortcutEvent.cpp
       qtscript_QShowEvent.cpp
@@ -604,9 +607,8 @@ add_library (
 set_target_properties(qtscript_gui
       PROPERTIES
       COMPILE_FLAGS
-         "-g -Wall -Wextra -Winvalid-pch -D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN"
-      LINK_FLAGS
-         "-L${QT_LIBRARY_DIR}"
+         "-D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_NO_DEBUG -include ${PROJECT_SOURCE_DIR}/all.h"
+      LINK_FLAGS "-L${QT_LIBRARY_DIR}"
       )
 
 if (STATIC_SCRIPT_BINDINGS)

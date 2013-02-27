@@ -37,6 +37,7 @@ class SymbolDialog : public QWidget, Ui::SymbolDialogBase {
       void createSymbolPalette();
 
    private slots:
+      void setDirty();
       void systemFlagChanged(int state);
 
    public:

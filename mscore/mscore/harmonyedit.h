@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2009-2011 Werner Schweer and others
+//  Copyright (C) 2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -30,28 +30,23 @@ class ChordList;
 //    ChordStyleEditor
 //---------------------------------------------------------
 
-class ChordStyleEditor : public QDialog, Ui::ChordStyleEditor {
+class ChordStyleEditor : public QWidget, Ui::ChordStyleEditor {
       Q_OBJECT
 
       bool _dirty;
       Palette* sp1;
-      Score* score;
       ChordList* chordList;
 
       void loadChordDescriptionFile(const QString&);
-      void setChordList(ChordList* cl);
+      void updateChordDescription(ChordDescription*);
 
    private slots:
       void fileButtonClicked();
       void saveButtonClicked();
       void harmonyChanged(QTreeWidgetItem*, QTreeWidgetItem*);
 
-   public slots:
-      virtual void accept();
-
    public:
       ChordStyleEditor(QWidget* parent = 0);
-      void setScore(Score*);
       bool dirty() const { return _dirty; }
       void save();
       void restore();

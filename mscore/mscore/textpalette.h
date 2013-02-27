@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -23,7 +23,7 @@
 
 #include "ui_textpalette.h"
 
-class Text;
+class TextB;
 
 //---------------------------------------------------------
 //   TextPalette
@@ -32,21 +32,63 @@ class Text;
 class TextPalette : public QWidget, public Ui::TextPaletteBase {
       Q_OBJECT
 
-      Text* _textElement;
-      QPushButton* buttons[256];;
-      QButtonGroup* sg;
-      int curPage;
+      TextB* _textElement;
 
       void closeEvent(QCloseEvent* ev);
 
    private slots:
       void symbolClicked(int);
-      void populate();
 
    public:
       TextPalette(QWidget* parent);
-      void setText(Text* te);
-      Text* text() { return _textElement; }
+      void setText(TextB* te);
+      TextB* text() { return _textElement; }
+      };
+
+//---------------------------------------------------------
+//   TextTools
+//---------------------------------------------------------
+
+class TextTools : public QDockWidget {
+      Q_OBJECT
+
+      TextB* _textElement;
+      QTextCharFormat format;
+      QTextBlockFormat bformat;
+      QDoubleSpinBox* typefaceSize;
+      QFontComboBox* typefaceFamily;
+      QAction* typefaceBold;
+      QAction* typefaceItalic;
+      QAction* typefaceUnderline;
+      QAction* leftAlign;
+      QAction* centerAlign;
+      QAction* rightAlign;
+      QAction* typefaceSubscript;
+      QAction* typefaceSuperscript;
+      QAction* showKeyboard;
+
+      void blockAllSignals(bool val);
+
+   private slots:
+      void sizeChanged(double value);
+      void moveFocus();
+      void fontChanged(const QFont&);
+      void boldClicked(bool);
+      void italicClicked(bool);
+      void underlineClicked(bool);
+      void subscriptClicked(bool);
+      void superscriptClicked(bool);
+      void setLeftAlign();
+      void setRightAlign();
+      void setHCenterAlign();
+      void showKeyboardClicked(bool);
+
+   public:
+      TextTools(QWidget* parent = 0);
+      void setText(TextB* te);
+      void setCharFormat(const QTextCharFormat&);
+      void setBlockFormat(const QTextBlockFormat&);
+      QAction* kbAction() const { return showKeyboard; }
       };
 
 #endif

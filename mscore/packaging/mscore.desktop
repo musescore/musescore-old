@@ -1,12 +1,10 @@
 [Desktop Entry]
-Version=2.0
+Version=1.0
 Comment=WYSIWYG Music score typesetter
 Comment[ru]=Визуальный редактор нотных партитур
-Comment[fr]=Gravure de partitions musicales
 Exec=mscore
-GenericName=Music notation
-GenericName[de]=Notensatz
-GenericName[fr]=Notation musicale
+GenericName=mscore
+GenericName[ru]=MuseScore
 Icon=mscore
 Name=MuseScore
 StartupNotify=true

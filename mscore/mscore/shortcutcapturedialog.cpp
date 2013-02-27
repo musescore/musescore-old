@@ -20,8 +20,7 @@
 //=============================================================================
 
 #include "shortcutcapturedialog.h"
-#include "musescore.h"
-#include "shortcut.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   ShortcutCaptureDialog
@@ -34,32 +33,10 @@ ShortcutCaptureDialog::ShortcutCaptureDialog(Shortcut* _s, QMap<QString, Shortcu
       localShortcuts = ls;
       s = _s;
 
-      addButton->setEnabled(false);
-      replaceButton->setEnabled(false);
-      oshrtLabel->setText(s->keysToString());
+      oshrtLabel->setText(s->key.toString(QKeySequence::NativeText));
       connect(clearButton, SIGNAL(clicked()), SLOT(clearClicked()));
-      connect(addButton, SIGNAL(clicked()), SLOT(addClicked()));
-      connect(replaceButton, SIGNAL(clicked()), SLOT(replaceClicked()));
       clearClicked();
       grabKeyboard();
-      }
-
-//---------------------------------------------------------
-//   addClicked
-//---------------------------------------------------------
-
-void ShortcutCaptureDialog::addClicked()
-      {
-      done(1);
-      }
-
-//---------------------------------------------------------
-//   replaceClicked
-//---------------------------------------------------------
-
-void ShortcutCaptureDialog::replaceClicked()
-      {
-      done(2);
       }
 
 //---------------------------------------------------------
@@ -92,9 +69,6 @@ void ShortcutCaptureDialog::keyPressEvent(QKeyEvent* e)
             case 1: key = QKeySequence(key[0], k); break;
             case 2: key = QKeySequence(key[0], key[1], k); break;
             case 3: key = QKeySequence(key[0], key[1], key[2], k); break;
-            default:
-                  qDebug("internal error: bad key count\n");
-                  break;
             }
 
       // Check against conflicting shortcuts
@@ -102,33 +76,25 @@ void ShortcutCaptureDialog::keyPressEvent(QKeyEvent* e)
       QString msgString;
 
       foreach (Shortcut* ss, localShortcuts) {
-            if (s == ss)
-                  continue;
-            foreach(const QKeySequence& ks, ss->keys()) {
-                  if (ks == key) {
-                        msgString = tr("Shortcut conflicts with ") + ss->descr();
-                        conflict = true;
-                        break;
-                        }
-                  }
-            if (conflict)
+            if ((s != ss) && (ss->key == key)) {
+                  msgString = tr("Shortcut conflicts with ") + ss->descr;
+                  conflict = true;
                   break;
+                  }
             }
       messageLabel->setText(msgString);
-      addButton->setEnabled(conflict == false);
-      replaceButton->setEnabled(conflict == false);
+      okButton->setEnabled(conflict == false);
       nshrtLabel->setText(key.toString(QKeySequence::NativeText));
 
-      QString A = key.toString(QKeySequence::NativeText);
-      QString B = key.toString(QKeySequence::PortableText);
-qDebug("capture key 0x%x  modifiers 0x%x virt 0x%x scan 0x%x <%s><%s>\n",
+printf("capture key 0x%x  modifiers 0x%x virt 0x%x scan 0x%x <%s><%s>\n",
       k,
       int(e->modifiers()),
       int(e->nativeVirtualKey()),
       int(e->nativeScanCode()),
-      qPrintable(A),
-      qPrintable(B)
+      qPrintable(key.toString(QKeySequence::NativeText)),
+      qPrintable(key.toString(QKeySequence::PortableText))
       );
+
       }
 
 //---------------------------------------------------------

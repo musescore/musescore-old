@@ -20,11 +20,11 @@
 
 #include "symboldialog.h"
 #include "palette.h"
-#include "musescore.h"
-#include "libmscore/sym.h"
-#include "libmscore/style.h"
-#include "libmscore/element.h"
-#include "libmscore/symbol.h"
+#include "mscore.h"
+#include "sym.h"
+#include "style.h"
+#include "element.h"
+#include "symbol.h"
 #include "preferences.h"
 
 //---------------------------------------------------------
@@ -49,17 +49,28 @@ SymbolDialog::SymbolDialog(QWidget* parent)
       setWindowTitle(tr("MuseScore: Symbols"));
       QLayout* l = new QVBoxLayout();
       frame->setLayout(l);
-      createSymbolPalette();
-      QScrollArea* sa = new PaletteScrollArea(sp);
+      QScrollArea* sa = new QScrollArea;
       l->addWidget(sa);
+
+      createSymbolPalette();
 
       sp->setAcceptDrops(false);
       sp->setDrawGrid(true);
       sp->setSelectable(true);
 
+      connect(sp, SIGNAL(changed()), SLOT(setDirty()));      
       connect(systemFlag, SIGNAL(stateChanged(int)), SLOT(systemFlagChanged(int)));
 
       sa->setWidget(sp);
+      }
+
+//---------------------------------------------------------
+//   setDirty
+//---------------------------------------------------------
+
+void SymbolDialog::setDirty()
+      {
+      preferences.dirty = true;
       }
 
 //---------------------------------------------------------
@@ -68,14 +79,13 @@ SymbolDialog::SymbolDialog(QWidget* parent)
 
 void SymbolDialog::systemFlagChanged(int state)
       {
-//      bool sysFlag = false;
-//      if (state == Qt::Checked)
-//            sysFlag = true;
-//      for (int i = 0; i < sp->size(); ++i) {
-//            Element* e = sp->element(i);
-//            if (e)
-//                  e->setSystemFlag(sysFlag);
-//            }
+      bool sysFlag = false;
+      if(state == Qt::Checked)
+            sysFlag = true;
+      for (int i = 0; i < sp->size(); ++i) {
+            Element* e = sp->element(i);
+            if(e)
+                  e->setSystemFlag(sysFlag);
+            } 
       }
-
 

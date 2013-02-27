@@ -21,8 +21,6 @@
 #ifndef __MUSICXMLSUPPORT_H__
 #define __MUSICXMLSUPPORT_H__
 
-#include "libmscore/mscore.h"
-
 //---------------------------------------------------------
 //   NoteList
 //---------------------------------------------------------
@@ -77,37 +75,5 @@ class VoiceOverlapDetector {
    private:
       QMap<int, NoteList> _noteLists; ///< The notelists for all the voices
       };
-
-//---------------------------------------------------------
-//   MusicXMLDrumInstrument
-//---------------------------------------------------------
-
-/**
- A single instrument in a MusicXML drumset.
- */
-
-struct MusicXMLDrumInstrument {
-      int pitch;
-      QString name;
-      NoteHeadGroup notehead; ///< notehead symbol set
-      int line;               ///< place notehead onto this line
-      Direction stemDirection;
-
-      QString toString() const;
-
-      MusicXMLDrumInstrument()
-         : pitch(-1), name(), notehead(HEAD_INVALID), line(0), stemDirection(AUTO) {}
-      MusicXMLDrumInstrument(QString s)
-         : pitch(-1), name(s), notehead(HEAD_INVALID), line(0), stemDirection(AUTO) {}
-      MusicXMLDrumInstrument(int p, QString s, NoteHeadGroup nh, int l, Direction d)
-         : pitch(p), name(s), notehead(nh), line(l), stemDirection(d) {}
-      };
-
-/**
- A MusicXML drumset.
- */
-
-typedef QMap<QString, MusicXMLDrumInstrument> MusicXMLDrumset;
-typedef QMapIterator<QString, MusicXMLDrumInstrument> MusicXMLDrumsetIterator;
 
 #endif

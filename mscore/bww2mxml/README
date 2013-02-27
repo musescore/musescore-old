@@ -26,12 +26,15 @@ Build (using Qt only, no MuseScore dependencies):
       - qmake
       - make
 
+Test:
+      - cd test
+      - ./iotest
+
 Usage:
       bww2mxml file.bww file.xml
 
 Status:
-      This is a very preliminary version. It basically extracts only the notes
-      and the measure structure.
+      This is still an incomplete version.
       Supported:
         TuneTempo, title, type, composer, footer, line breaks
         clef, key, time signature, (dotted) notes, ties, triplets,
