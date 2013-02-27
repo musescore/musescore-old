@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Editor_Dlg" script:language="StarBasic">REM *****  BASIC  *****
+
+Dim oDlgMain As Object
+
+Sub AnchorButtonClicked
+	bWrapSettings = (Not oDlgMain.getControl(&quot;AnchorAsCharacter&quot;).getState()) And bInWriter
+
+	&apos; grey out Wrap radio buttons if Anchor is &quot;as Character&quot;
+	oDlgMain.getControl(&quot;WrapFrameControl&quot;).setEnable(bWrapSettings)
+	oDlgMain.getControl(&quot;NoWrap&quot;).setEnable(bWrapSettings)
+	oDlgMain.getControl(&quot;OptimalPageWrap&quot;).setEnable(bWrapSettings)
+	oDlgMain.getControl(&quot;WrapThrough&quot;).setEnable(bWrapSettings)
+
+End Sub
+
+&apos; Create the main dialog
+Sub OOoLilyPondDialog( sCode, sTemplate As String, iAnchor, iWrap As Integer)
+	&apos; Load the library OOoLilyPond...
+	DialogLibraries.LoadLibrary( &quot;OOoLilyPond&quot; )
+	
+	&apos; Create the dialog object
+	oDlgMain = createUnoDialog( DialogLibraries.GetByName(&quot;OOoLilyPond&quot;).GetByName(&quot;Editor_GUI&quot;) )
+
+	&apos; Set the actual value...
+	ListOfTemplates(oDlgMain.getControl(&quot;Template&quot;), False)
+	oDlgMain.getControl(&quot;Template&quot;).setText(sTemplate)
+
+	If iAnchor = com.sun.star.text.TextContentAnchorType.AS_CHARACTER Then oDlgMain.getControl(&quot;AnchorAsCharacter&quot;).setState(true)
+	If iAnchor = com.sun.star.text.TextContentAnchorType.AT_PARAGRAPH Then  oDlgMain.getControl(&quot;AnchorToParagraph&quot;).setState(true)
+	If iAnchor = com.sun.star.text.TextContentAnchorType.AT_PAGE Then oDlgMain.getControl(&quot;AnchorToPage&quot;).setState(true)
+	&apos; grey out Wrap radio buttons if Anchor is &quot;as Character&quot;
+	If iWrap = com.sun.star.text.WrapTextMode.NONE Then oDlgMain.getControl(&quot;NoWrap&quot;).setState(true)
+	If iWrap = com.sun.star.text.WrapTextMode.DYNAMIC Then oDlgMain.getControl(&quot;OptimalPageWrap&quot;).setState(true)
+	If iWrap = com.sun.star.text.WrapTextMode.THROUGHT Then oDlgMain.getControl(&quot;WrapThrough&quot;).setState(true)
+
+	bWrapSettings = (Not oDlgMain.getControl(&quot;AnchorAsCharacter&quot;).getState()) And bInWriter
+
+	&apos; grey out Anchor and Wrap radio buttons when we are not in Writer
+	oDlgMain.getControl(&quot;AnchorFrameControl&quot;).setEnable(bInWriter)
+	oDlgMain.getControl(&quot;AnchorAsCharacter&quot;).setEnable(bInWriter)
+	oDlgMain.getControl(&quot;AnchorToParagraph&quot;).setEnable(bInWriter)
+	oDlgMain.getControl(&quot;AnchorToPage&quot;).setEnable(bInWriter)
+	&apos; grey out Wrap radio butttons when Anchor is &quot;as Character&quot;
+	oDlgMain.getControl(&quot;WrapFrameControl&quot;).setEnable(bWrapSettings)
+	oDlgMain.getControl(&quot;NoWrap&quot;).setEnable(bWrapSettings)
+	oDlgMain.getControl(&quot;OptimalPageWrap&quot;).setEnable(bWrapSettings)
+	oDlgMain.getControl(&quot;WrapThrough&quot;).setEnable(bWrapSettings)
+	
+	oDlgMain.getControl(&quot;LilyPondCode&quot;).setText(sCode)
+	
+    oDlgMain.Execute()                                                                          
+End Sub
+
+Sub LilyPondButton_Clicked
+
+	Dim sCode, sTemplate As String
+	Dim iAnchor, iWrap As Integer
+
+	&apos; Get the general information used to compile the equation.
+	&apos; Get the LilyPond code, the type of equation and the size of font.
+	
+	sCode = oDlgMain.getControl(&quot;LilyPondCode&quot;).getText()
+	
+	sTemplate = oDlgMain.getControl(&quot;Template&quot;).getText()
+	
+	if oDlgMain.getControl(&quot;AnchorAsCharacter&quot;).getState() then iAnchor = com.sun.star.text.TextContentAnchorType.AS_CHARACTER
+	if oDlgMain.getControl(&quot;AnchorToParagraph&quot;).getState() then iAnchor = com.sun.star.text.TextContentAnchorType.AT_PARAGRAPH
+	if oDlgMain.getControl(&quot;AnchorToPage&quot;).getState() then iAnchor = com.sun.star.text.TextContentAnchorType.AT_PAGE
+
+	if oDlgMain.getControl(&quot;NoWrap&quot;).getState() then iWrap = com.sun.star.text.WrapTextMode.NONE
+	if oDlgMain.getControl(&quot;OptimalPageWrap&quot;).getState() then iWrap = com.sun.star.text.WrapTextMode.DYNAMIC
+	if oDlgMain.getControl(&quot;WrapThrough&quot;).getState() then iWrap = com.sun.star.text.WrapTextMode.THROUGHT
+		
+	&apos; Create the LilyPond music and insert it...
+	if bInWriter then
+		MakeMusic(sCode, sTemplate , iAnchor , iWrap)
+	else
+		MakeMusic(sCode, sTemplate , -1 , -1)
+	end if
+	
+End Sub
+
+Sub ConfigButton_Clicked
+	ConfigDialog()
+	ListOfTemplates(oDlgMain.getControl(&quot;Template&quot;), False)
+End Sub
+
+</script:module>

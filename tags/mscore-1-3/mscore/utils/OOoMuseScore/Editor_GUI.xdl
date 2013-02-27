@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="Editor_GUI" dlg:left="128" dlg:top="182" dlg:width="384" dlg:height="270" dlg:closeable="true" dlg:moveable="true" dlg:title="OOoLilyPond Editor">
+ <dlg:bulletinboard>
+  <dlg:button dlg:id="ButtonLatex" dlg:tab-index="5" dlg:left="235" dlg:top="254" dlg:width="30" dlg:height="14" dlg:help-text="Call LilyPond to render the code into music notation." dlg:value="Generate">
+   <script:event script:event-name="on-performaction" script:macro-name="vnd.sun.star.script:OOoLilyPond.Editor_Dlg.LilyPondButton_Clicked?language=Basic&amp;location=application" script:language="Script"/>
+  </dlg:button>
+  <dlg:button dlg:id="ButtonConfig" dlg:tab-index="6" dlg:left="310" dlg:top="33" dlg:width="70" dlg:height="14" dlg:help-text="Open the configuration dialog." dlg:value="Config">
+   <script:event script:event-name="on-performaction" script:macro-name="vnd.sun.star.script:OOoLilyPond.Editor_Dlg.ConfigButton_Clicked?language=Basic&amp;location=application" script:language="Script"/>
+  </dlg:button>
+  <dlg:textfield dlg:id="TextField2" dlg:tab-index="8" dlg:left="226" dlg:top="-125" dlg:width="4" dlg:height="0"/>
+  <dlg:textfield dlg:id="LilyPondCode" dlg:tab-index="1" dlg:left="3" dlg:top="58" dlg:width="379" dlg:height="191" dlg:hide-inactive-selection="false" dlg:hard-linebreaks="true" dlg:hscroll="true" dlg:vscroll="true" dlg:multiline="true"/>
+  <dlg:text dlg:id="Template Label" dlg:tab-index="9" dlg:left="153" dlg:top="9" dlg:width="28" dlg:height="10" dlg:value="Template:"/>
+  <dlg:radiogroup>
+   <dlg:radio dlg:id="AnchorAsCharacter" dlg:tab-index="2" dlg:left="8" dlg:top="15" dlg:width="48" dlg:height="12" dlg:help-text="The OOoLilyPond object is inserted into the Text like a character." dlg:value="As Character" dlg:checked="true">
+    <script:event script:event-name="on-itemstatechange" script:macro-name="vnd.sun.star.script:OOoLilyPond.Editor_Dlg.AnchorButtonClicked?language=Basic&amp;location=application" script:language="Script"/>
+   </dlg:radio>
+   <dlg:radio dlg:id="AnchorToParagraph" dlg:tab-index="3" dlg:left="8" dlg:top="27" dlg:width="47" dlg:height="12" dlg:help-text="The OOoLilyPond object is inserted like an image and can be placed freely. The object keeps the position relative to the paragraph." dlg:value="To Paragraph">
+    <script:event script:event-name="on-itemstatechange" script:macro-name="vnd.sun.star.script:OOoLilyPond.Editor_Dlg.AnchorButtonClicked?language=Basic&amp;location=application" script:language="Script"/>
+   </dlg:radio>
+   <dlg:radio dlg:id="AnchorToPage" dlg:tab-index="4" dlg:left="8" dlg:top="39" dlg:width="34" dlg:height="10" dlg:help-text="The OOoLilyPond object is inserted like an image and can be placed freely. The object keeps the position relative to the page." dlg:value="To Page">
+    <script:event script:event-name="on-itemstatechange" script:macro-name="vnd.sun.star.script:OOoLilyPond.Editor_Dlg.AnchorButtonClicked?language=Basic&amp;location=application" script:language="Script"/>
+   </dlg:radio>
+   <dlg:radio dlg:id="OptimalPageWrap" dlg:tab-index="11" dlg:left="79" dlg:top="27" dlg:width="63" dlg:height="12" dlg:help-text="The text is flowing on the right or left side of the OOoLIlyPond object." dlg:value="Optimal Page Wrap"/>
+   <dlg:radio dlg:id="NoWrap" dlg:tab-index="10" dlg:left="79" dlg:top="15" dlg:width="48" dlg:height="12" dlg:help-text="The text is not flowing around the OOoLilyPond object." dlg:value="No Wrap" dlg:checked="true"/>
+  </dlg:radiogroup>
+  <dlg:titledbox dlg:id="AnchorFrameControl" dlg:tab-index="7" dlg:left="6" dlg:top="5" dlg:width="52" dlg:height="47">
+   <dlg:title dlg:value="Anchor"/>
+  </dlg:titledbox>
+  <dlg:titledbox dlg:id="WrapFrameControl" dlg:tab-index="13" dlg:left="78" dlg:top="5" dlg:width="68" dlg:height="47">
+   <dlg:title dlg:value="Wrap"/>
+  </dlg:titledbox>
+  <dlg:radiogroup>
+   <dlg:radio dlg:id="WrapThrough" dlg:tab-index="12" dlg:left="79" dlg:top="38" dlg:width="63" dlg:height="12" dlg:help-text="The text is flowing through the OOoLilyPond object." dlg:value="Wrap Through"/>
+  </dlg:radiogroup>
+  <dlg:combobox dlg:id="Template" dlg:tab-index="14" dlg:left="190" dlg:top="7" dlg:width="102" dlg:height="12" dlg:help-text="You can create your own templates using a text editor." dlg:value="Template" dlg:spin="true"/>
+  <dlg:combobox dlg:id="ComboBox1" dlg:tab-index="15" dlg:left="30" dlg:top="46" dlg:width="2" dlg:height="0" dlg:spin="true"/>
+  <dlg:button dlg:id="btnSaveCode" dlg:tab-index="17" dlg:left="82" dlg:top="254" dlg:width="41" dlg:height="12" dlg:value="SaveCode">
+   <script:event script:event-name="on-performaction" script:macro-name="vnd.sun.star.script:OOoLilyPond.Main.saveCodeToTempFile?language=Basic&amp;location=application" script:language="Script"/>
+  </dlg:button>
+  <dlg:button dlg:id="btnRunMScoreTemp" dlg:tab-index="18" dlg:left="126" dlg:top="254" dlg:width="52" dlg:height="12" dlg:value="RunMSTemp">
+   <script:event script:event-name="on-performaction" script:macro-name="vnd.sun.star.script:OOoLilyPond.Main.runMScoreWithTempFile?language=Basic&amp;location=application" script:language="Script"/>
+  </dlg:button>
+  <dlg:button dlg:id="btnLoadCodeFrTemp" dlg:tab-index="19" dlg:left="183" dlg:top="254" dlg:width="49" dlg:height="12" dlg:value="LoadCodeTemp">
+   <script:event script:event-name="on-performaction" script:macro-name="vnd.sun.star.script:OOoLilyPond.Main.loadCodeFromTempFile?language=Basic&amp;location=application" script:language="Script"/>
+  </dlg:button>
+  <dlg:button dlg:id="BtnLoadDefault" dlg:tab-index="16" dlg:left="27" dlg:top="254" dlg:width="50" dlg:height="12" dlg:value="LoadDefault">
+   <script:event script:event-name="on-performaction" script:macro-name="vnd.sun.star.script:OOoLilyPond.Main.loadDefaultCode?language=Basic&amp;location=application" script:language="Script"/>
+  </dlg:button>
+  <dlg:button dlg:id="btnHandleMScore" dlg:tab-index="0" dlg:left="310" dlg:top="5" dlg:width="70" dlg:height="23" dlg:default="true" dlg:value="Run MScore">
+   <script:event script:event-name="on-performaction" script:macro-name="vnd.sun.star.script:OOoLilyPond.Main.handleMScore?language=Basic&amp;location=application" script:language="Script"/>
+  </dlg:button>
+ </dlg:bulletinboard>
+</dlg:window>

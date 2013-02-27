@@ -1,0 +1,310 @@
+#!/usr/bin/python
+import sys
+import getopt
+import re
+import os
+
+(options, files) = \
+ getopt.getopt (sys.argv[1:],
+        '',
+        ['dir='])
+
+
+outdir = ''
+for opt in options:
+    o = opt[0]
+    a = opt[1]
+    if o == '--dir':
+        outdir = a
+    else:
+        print o
+        raise getopt.error
+
+# Ugh
+# for design_size in [11,13,14,16,18,20,23,26]:
+for design_size in [20]:
+    mname = 'Emmentaler'
+    name = 'MScore'
+    filename = mname.lower ()
+    script = '''#!/usr/bin/fontforge
+
+New();
+
+# Separate Feta versioning?
+#         *  using 20 as Weight works for gnome-font-select widget: gfs
+
+notice = "";
+notice += "This font is distributed under the GNU General Public License. ";
+notice += "As a special exception, if you create a document which uses ";
+notice += "this font, and embed this font or unaltered portions of this ";
+notice += "font into the document, this font does not by itself cause the ";
+notice += "resulting document to be covered by the GNU General Public License.";;
+
+# SetFontNames("%(name)s-%(design_size)d", "%(name)s", "%(name)s %(design_size)d", "%(design_size)d", notice, "2.11.65");
+  SetFontNames("%(name)s-%(design_size)d", "%(name)s", "%(name)s", "%(design_size)d", notice, "2.11.65");
+
+MergeFonts("feta%(design_size)d.pfb");
+# MergeFonts("parmesan%(design_size)d.pfb");
+
+# load nummer/din after setting PUA.
+# remap characters
+
+Select(256 +   0); SetUnicodeValue(  0 + 0xE100, 0);
+Select(256 +   1); SetUnicodeValue(  1 + 0xE100, 0);
+Select(256 +   2); SetUnicodeValue(  2 + 0xE100, 0);
+Select(256 +   3); SetUnicodeValue(  3 + 0xE100, 0);
+Select(256 +   4); SetUnicodeValue(  4 + 0xE100, 0);
+Select(256 +   5); SetUnicodeValue(  5 + 0xE100, 0);
+Select(256 +   6); SetUnicodeValue(  6 + 0xE100, 0);
+Select(256 +   7); SetUnicodeValue(  7 + 0xE100, 0);
+Select(256 +   8); SetUnicodeValue(  8 + 0xE100, 0);
+Select(256 +   9); SetUnicodeValue(  9 + 0xE100, 0);
+Select(256 +  10); SetUnicodeValue( 10 + 0xE100, 0);
+Select(256 +  11); SetUnicodeValue( 11 + 0xE100, 0);
+Select(256 +  12); SetUnicodeValue( 12 + 0xE100, 0);
+Select(256 +  13); SetUnicodeValue( 13 + 0xE100, 0);
+Select(256 +  14); SetUnicodeValue( 14 + 0xE100, 0);
+Select(256 +  15); SetUnicodeValue(193 + 0xE100, 0);
+
+Select(256 +  16); SetUnicodeValue(194 + 0xE100, 0);
+Select(256 +  17); SetUnicodeValue(195 + 0xE100, 0);
+Select(256 +  18); SetUnicodeValue( 15 + 0xE100, 0);
+Select(256 +  19); SetUnicodeValue( 16 + 0xE100, 0);
+Select(256 +  20); SetUnicodeValue( 17 + 0xE100, 0);
+Select(256 +  21); SetUnicodeValue( 18 + 0xE100, 0);
+Select(256 +  22); SetUnicodeValue( 19 + 0xE100, 0);
+Select(256 +  23); SetUnicodeValue(190 + 0xE100, 0);
+Select(256 +  24); SetUnicodeValue(191 + 0xE100, 0);
+Select(256 +  25); SetUnicodeValue(192 + 0xE100, 0);
+Select(256 +  26); SetUnicodeValue( 20 + 0xE100, 0);
+Select(256 +  27); SetUnicodeValue(187 + 0xE100, 0);
+Select(256 +  28); SetUnicodeValue(188 + 0xE100, 0);
+Select(256 +  29); SetUnicodeValue(189 + 0xE100, 0);
+Select(256 +  30); SetUnicodeValue( 21 + 0xE100, 0);
+Select(256 +  31); SetUnicodeValue( 22 + 0xE100, 0);
+
+//20
+Select(256 +  32); SetUnicodeValue( 23 + 0xE100, 0);
+Select(256 +  33); SetUnicodeValue( 24 + 0xE100, 0);
+Select(256 +  34); SetUnicodeValue( 25 + 0xE100, 0);
+Select(256 +  35); SetUnicodeValue( 26 + 0xE100, 0);
+Select(256 +  36); SetUnicodeValue( 27 + 0xE100, 0);
+Select(256 +  37); SetUnicodeValue( 28 + 0xE100, 0);
+Select(256 +  38); SetUnicodeValue( 29 + 0xE100, 0);
+Select(256 +  39); SetUnicodeValue( 30 + 0xE100, 0);
+Select(256 +  40); SetUnicodeValue( 31 + 0xE100, 0);
+Select(256 +  41); SetUnicodeValue( 32 + 0xE100, 0);
+Select(256 +  42); SetUnicodeValue( 33 + 0xE100, 0);
+Select(256 +  43); SetUnicodeValue( 34 + 0xE100, 0);
+Select(256 +  44); SetUnicodeValue( 35 + 0xE100, 0);
+Select(256 +  45); SetUnicodeValue( 36 + 0xE100, 0);
+Select(256 +  46); SetUnicodeValue( 37 + 0xE100, 0);
+Select(256 +  47); SetUnicodeValue( 38 + 0xE100, 0);
+
+//30
+Select(256 +  48); SetUnicodeValue( 39 + 0xE100, 0);
+Select(256 +  49); SetUnicodeValue( 40 + 0xE100, 0);
+Select(256 +  50); SetUnicodeValue( 41 + 0xE100, 0);
+Select(256 +  51); SetUnicodeValue( 42 + 0xE100, 0);
+Select(256 +  52); SetUnicodeValue(186 + 0xE100, 0);
+Select(256 +  53); SetUnicodeValue( 43 + 0xE100, 0);
+Select(256 +  54); SetUnicodeValue( 44 + 0xE100, 0);
+Select(256 +  55); SetUnicodeValue( 45 + 0xE100, 0);
+Select(256 +  56); SetUnicodeValue( 46 + 0xE100, 0);
+Select(256 +  57); SetUnicodeValue( 47 + 0xE100, 0);
+Select(256 +  58); SetUnicodeValue( 48 + 0xE100, 0);
+Select(256 +  59); SetUnicodeValue( 49 + 0xE100, 0);
+Select(256 +  60); SetUnicodeValue( 50 + 0xE100, 0);
+Select(256 +  61); SetUnicodeValue( 51 + 0xE100, 0);
+Select(256 +  62); SetUnicodeValue( 52 + 0xE100, 0);
+Select(256 +  63); SetUnicodeValue( 53 + 0xE100, 0);
+
+//40
+Select(256 +  64); SetUnicodeValue( 54 + 0xE100, 0);
+Select(256 +  65); SetUnicodeValue( 55 + 0xE100, 0);
+Select(256 +  66); SetUnicodeValue( 56 + 0xE100, 0);
+Select(256 +  67); SetUnicodeValue( 57 + 0xE100, 0);
+Select(256 +  68); SetUnicodeValue( 58 + 0xE100, 0);
+Select(256 +  69); SetUnicodeValue( 59 + 0xE100, 0);
+Select(256 +  70); SetUnicodeValue( 60 + 0xE100, 0);
+Select(256 +  71); SetUnicodeValue( 61 + 0xE100, 0);
+Select(256 +  72); SetUnicodeValue( 62 + 0xE100, 0);
+Select(256 +  73); SetUnicodeValue( 63 + 0xE100, 0);
+Select(256 +  74); SetUnicodeValue( 64 + 0xE100, 0);
+Select(256 +  75); SetUnicodeValue( 65 + 0xE100, 0);
+Select(256 +  76); SetUnicodeValue( 66 + 0xE100, 0);
+Select(256 +  77); SetUnicodeValue( 67 + 0xE100, 0);
+Select(256 +  78); SetUnicodeValue( 68 + 0xE100, 0);
+Select(256 +  79); SetUnicodeValue( 69 + 0xE100, 0);
+
+//50
+Select(256 +  80); SetUnicodeValue( 70 + 0xE100, 0);
+Select(256 +  81); SetUnicodeValue( 71 + 0xE100, 0);
+Select(256 +  82); SetUnicodeValue( 72 + 0xE100, 0);
+Select(256 +  83); SetUnicodeValue( 73 + 0xE100, 0);
+Select(256 +  84); SetUnicodeValue( 74 + 0xE100, 0);
+Select(256 +  85); SetUnicodeValue( 75 + 0xE100, 0);
+Select(256 +  86); SetUnicodeValue( 76 + 0xE100, 0);
+Select(256 +  87); SetUnicodeValue( 77 + 0xE100, 0);
+Select(256 +  88); SetUnicodeValue( 78 + 0xE100, 0);
+Select(256 +  89); SetUnicodeValue( 79 + 0xE100, 0);
+Select(256 +  90); SetUnicodeValue( 80 + 0xE100, 0);
+Select(256 +  91); SetUnicodeValue( 81 + 0xE100, 0);
+Select(256 +  92); SetUnicodeValue( 82 + 0xE100, 0);
+Select(256 +  93); SetUnicodeValue( 83 + 0xE100, 0);
+Select(256 +  94); SetUnicodeValue( 84 + 0xE100, 0);
+Select(256 +  95); SetUnicodeValue( 85 + 0xE100, 0);
+
+//60
+Select(256 +  96); SetUnicodeValue( 86 + 0xE100, 0);
+Select(256 +  97); SetUnicodeValue( 87 + 0xE100, 0);
+Select(256 +  98); SetUnicodeValue( 88 + 0xE100, 0);
+Select(256 +  99); SetUnicodeValue( 89 + 0xE100, 0);
+Select(256 + 100); SetUnicodeValue( 90 + 0xE100, 0);
+Select(256 + 101); SetUnicodeValue( 91 + 0xE100, 0);
+Select(256 + 102); SetUnicodeValue( 92 + 0xE100, 0);
+Select(256 + 103); SetUnicodeValue( 93 + 0xE100, 0);
+Select(256 + 104); SetUnicodeValue( 94 + 0xE100, 0);
+Select(256 + 105); SetUnicodeValue( 95 + 0xE100, 0);
+Select(256 + 106); SetUnicodeValue( 96 + 0xE100, 0);
+Select(256 + 107); SetUnicodeValue( 97 + 0xE100, 0);
+Select(256 + 108); SetUnicodeValue( 98 + 0xE100, 0);
+Select(256 + 109); SetUnicodeValue( 99 + 0xE100, 0);
+Select(256 + 110); SetUnicodeValue(100 + 0xE100, 0);
+Select(256 + 111); SetUnicodeValue(101 + 0xE100, 0);
+
+//70
+Select(256 + 112); SetUnicodeValue(102 + 0xE100, 0);
+Select(256 + 113); SetUnicodeValue(103 + 0xE100, 0);
+Select(256 + 114); SetUnicodeValue(104 + 0xE100, 0);
+Select(256 + 115); SetUnicodeValue(105 + 0xE100, 0);
+Select(256 + 116); SetUnicodeValue(106 + 0xE100, 0);
+Select(256 + 117); SetUnicodeValue(107 + 0xE100, 0);
+Select(256 + 118); SetUnicodeValue(108 + 0xE100, 0);
+Select(256 + 119); SetUnicodeValue(109 + 0xE100, 0);
+Select(256 + 120); SetUnicodeValue(110 + 0xE100, 0);
+Select(256 + 121); SetUnicodeValue(111 + 0xE100, 0);
+Select(256 + 122); SetUnicodeValue(112 + 0xE100, 0);
+Select(256 + 123); SetUnicodeValue(113 + 0xE100, 0);
+Select(256 + 124); SetUnicodeValue(114 + 0xE100, 0);
+Select(256 + 125); SetUnicodeValue(115 + 0xE100, 0);
+Select(256 + 126); SetUnicodeValue(116 + 0xE100, 0);
+Select(256 + 127); SetUnicodeValue(117 + 0xE100, 0);
+
+//80
+Select(256 + 128); SetUnicodeValue(118 + 0xE100, 0);
+Select(256 + 129); SetUnicodeValue(119 + 0xE100, 0);
+Select(256 + 130); SetUnicodeValue(120 + 0xE100, 0);
+Select(256 + 131); SetUnicodeValue(121 + 0xE100, 0);
+Select(256 + 132); SetUnicodeValue(122 + 0xE100, 0);
+Select(256 + 133); SetUnicodeValue(123 + 0xE100, 0);
+Select(256 + 134); SetUnicodeValue(124 + 0xE100, 0);
+Select(256 + 135); SetUnicodeValue(125 + 0xE100, 0);
+Select(256 + 136); SetUnicodeValue(126 + 0xE100, 0);
+Select(256 + 137); SetUnicodeValue(127 + 0xE100, 0);
+Select(256 + 138); SetUnicodeValue(128 + 0xE100, 0);
+Select(256 + 139); SetUnicodeValue(129 + 0xE100, 0);
+Select(256 + 140); SetUnicodeValue(130 + 0xE100, 0);
+Select(256 + 141); SetUnicodeValue(131 + 0xE100, 0);
+Select(256 + 142); SetUnicodeValue(132 + 0xE100, 0);
+Select(256 + 143); SetUnicodeValue(133 + 0xE100, 0);
+
+//90
+Select(256 + 144); SetUnicodeValue(134 + 0xE100, 0);
+Select(256 + 145); SetUnicodeValue(135 + 0xE100, 0);
+Select(256 + 146); SetUnicodeValue(136 + 0xE100, 0);
+
+Select(256 + 147); SetUnicodeValue(137 + 0xE100, 0);
+
+Select(256 + 148); SetUnicodeValue(138 + 0xE100, 0);
+Select(256 + 149); SetUnicodeValue(139 + 0xE100, 0);
+Select(256 + 150); SetUnicodeValue(140 + 0xE100, 0);
+Select(256 + 151); SetUnicodeValue(141 + 0xE100, 0);
+Select(256 + 152); SetUnicodeValue(142 + 0xE100, 0);
+Select(256 + 153); SetUnicodeValue(143 + 0xE100, 0);
+
+Select(256 + 154); SetUnicodeValue(185 + 0xE100, 0);
+Select(256 + 155); SetUnicodeValue(144 + 0xE100, 0);
+Select(256 + 156); SetUnicodeValue(145 + 0xE100, 0);
+Select(256 + 157); SetUnicodeValue(146 + 0xE100, 0);
+Select(256 + 158); SetUnicodeValue(147 + 0xE100, 0);
+
+Select(256 + 159); SetUnicodeValue(184 + 0xE100, 0);
+Select(256 + 160); SetUnicodeValue(148 + 0xE100, 0);
+Select(256 + 161); SetUnicodeValue(149 + 0xE100, 0);
+Select(256 + 162); SetUnicodeValue(150 + 0xE100, 0);
+Select(256 + 163); SetUnicodeValue(151 + 0xE100, 0);
+Select(256 + 164); SetUnicodeValue(152 + 0xE100, 0);
+Select(256 + 165); SetUnicodeValue(153 + 0xE100, 0);
+
+Select(256 + 166); SetUnicodeValue(183 + 0xE100, 0);
+Select(256 + 167); SetUnicodeValue(154 + 0xE100, 0);
+Select(256 + 168); SetUnicodeValue(155 + 0xE100, 0);
+Select(256 + 169); SetUnicodeValue(156 + 0xE100, 0);
+Select(256 + 170); SetUnicodeValue(157 + 0xE100, 0);
+Select(256 + 171); SetUnicodeValue(158 + 0xE100, 0);
+Select(256 + 172); SetUnicodeValue(159 + 0xE100, 0);
+Select(256 + 173); SetUnicodeValue(160 + 0xE100, 0);
+Select(256 + 174); SetUnicodeValue(161 + 0xE100, 0);
+Select(256 + 175); SetUnicodeValue(162 + 0xE100, 0);
+Select(256 + 176); SetUnicodeValue(163 + 0xE100, 0);
+Select(256 + 177); SetUnicodeValue(164 + 0xE100, 0);
+Select(256 + 178); SetUnicodeValue(165 + 0xE100, 0);
+Select(256 + 179); SetUnicodeValue(166 + 0xE100, 0);
+Select(256 + 180); SetUnicodeValue(167 + 0xE100, 0);
+Select(256 + 181); SetUnicodeValue(168 + 0xE100, 0);
+Select(256 + 182); SetUnicodeValue(169 + 0xE100, 0);
+Select(256 + 183); SetUnicodeValue(170 + 0xE100, 0);
+Select(256 + 184); SetUnicodeValue(171 + 0xE100, 0);
+Select(256 + 185); SetUnicodeValue(172 + 0xE100, 0);
+Select(256 + 186); SetUnicodeValue(173 + 0xE100, 0);
+Select(256 + 187); SetUnicodeValue(174 + 0xE100, 0);
+
+Select(256 + 188); SetUnicodeValue(181 + 0xE100, 0);
+Select(256 + 189); SetUnicodeValue(182 + 0xE100, 0);
+Select(256 + 190); SetUnicodeValue(175 + 0xE100, 0);
+Select(256 + 191); SetUnicodeValue(176 + 0xE100, 0);
+Select(256 + 192); SetUnicodeValue(177 + 0xE100, 0);
+Select(256 + 193); SetUnicodeValue(178 + 0xE100, 0);
+Select(256 + 194); SetUnicodeValue(179 + 0xE100, 0);
+
+Select(256 + 195); SetUnicodeValue(180 + 0xE100, 0);
+
+MergeFonts("feta-alphabet%(design_size)d.pfb");
+MergeKern("feta-alphabet%(design_size)d.tfm");
+
+LoadTableFromFile("LILF", "%(filename)s-%(design_size)d.subfonts");
+LoadTableFromFile("LILC", "feta%(design_size)d.otf-table");
+LoadTableFromFile("LILY", "feta%(design_size)d.otf-gtable");
+
+Generate("%(filename)s-%(design_size)d.ttf");
+# Generate("%(filename)s-%(design_size)d.otf");
+# Generate("%(filename)s-%(design_size)d.svg");
+''' % vars()
+
+    basename = '%s-%d' % (filename, design_size)
+    path = os.path.join (outdir, basename + '.pe')
+    open (path, 'w').write (script)
+
+    subfonts = ['feta%(design_size)d',
+#          'parmesan%(design_size)d',
+          'feta-alphabet%(design_size)d']
+
+    ns = []
+    for s in subfonts:
+        ns.append ('%s' % (s % vars()))
+
+    subfonts_str = ' '.join (ns)
+
+    open (os.path.join (outdir, '%(filename)s-%(design_size)d.subfonts' % vars()), 'w').write (subfonts_str)
+
+    path = os.path.join (outdir, '%s-%d.dep' % (filename, design_size))
+
+    deps = r'''%(filename)s-%(design_size)d.otf: $(outdir)/feta%(design_size)d.pfa \
+#  $(outdir)/parmesan%(design_size)d.pfa  \
+ $(outdir)/feta-alphabet%(design_size)d.pfa feta%(design_size)d.otf-table \
+ $(outdir)/feta-alphabet%(design_size)d.pfa feta%(design_size)d.otf-gtable
+''' % vars()
+    open (path, 'w').write (deps)
+
+    open (os.path.join (outdir, basename + '.fontname'), 'w').write ("%s-%d" % (name, design_size))

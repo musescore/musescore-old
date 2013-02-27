@@ -1,0 +1,4 @@
+#!/usr/bin/fontforge
+
+Open("MuseJazz.sfd");
+Generate("MuseJazz.ttf");

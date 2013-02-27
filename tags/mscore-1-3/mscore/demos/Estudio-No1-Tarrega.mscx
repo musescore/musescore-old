@@ -1,0 +1,2933 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<museScore version="1.10">
+  <Mag>1</Mag>
+  <xoff>-210.042</xoff>
+  <yoff>-11.7639</yoff>
+  <Spatium>1.76389</Spatium>
+  <Division>480</Division>
+  <Style>
+    <akkoladeDistance>5.5</akkoladeDistance>
+    <lyricsDistance>6.5</lyricsDistance>
+    <frameSystemDistance>7</frameSystemDistance>
+    <bracketDistance>0.3</bracketDistance>
+    <minNoteDistance>0.5</minNoteDistance>
+    <measureSpacing>1.3</measureSpacing>
+    <ledgerLineWidth>0.08</ledgerLineWidth>
+    <beamMinSlope>0.1</beamMinSlope>
+    <dotNoteDistance>0.5</dotNoteDistance>
+    <lastSystemFillLimit>0.5</lastSystemFillLimit>
+    </Style>
+  <showInvisible>1</showInvisible>
+  <showFrames>1</showFrames>
+  <page-layout>
+    <pageFormat>A4</pageFormat>
+    <page-margins type="both">
+      <left-margin>56.6929</left-margin>
+      <right-margin>56.6929</right-margin>
+      <top-margin>56.6929</top-margin>
+      <bottom-margin>113.386</bottom-margin>
+      </page-margins>
+    </page-layout>
+  <siglist>
+    <sig tick="0">
+      <nom>4</nom>
+      <denom>4</denom>
+      </sig>
+    </siglist>
+  <tempolist fix="2">
+    <relTempo>142</relTempo>
+    <tempo tick="0">1</tempo>
+    </tempolist>
+  <Part>
+    <Staff>
+      <cleflist>
+        <clef tick="0" idx="3"/>
+        </cleflist>
+      <keylist>
+        <key tick="0" idx="0"/>
+        </keylist>
+      <bracket type="-1" span="1"/>
+      </Staff>
+    <trackName>Guitar</trackName>
+    <name>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Guitar</p></body></html>
+      </name>
+    <shortName>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Guit.</p></body></html>
+      </shortName>
+    <Instrument>
+      <Channel name="normal">
+        <program value="24"/>
+        <controller ctrl="7" value="100"/>
+        <controller ctrl="10" value="65"/>
+        <controller ctrl="93" value="39"/>
+        <controller ctrl="91" value="30"/>
+        </Channel>
+      </Instrument>
+    </Part>
+  <Part>
+    <Staff>
+      <cleflist>
+        <clef tick="0" idx="5"/>
+        </cleflist>
+      <keylist>
+        <key tick="0" idx="0"/>
+        </keylist>
+      <bracket type="-1" span="1"/>
+      </Staff>
+    <trackName>Bass Guitar</trackName>
+    <name>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Bass Guitar</p></body></html>
+      </name>
+    <shortName>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">B. Guit.</p></body></html>
+      </shortName>
+    <Instrument>
+      <Channel name="normal">
+        <program value="32"/>
+        <controller ctrl="7" value="127"/>
+        <controller ctrl="10" value="63"/>
+        <controller ctrl="93" value="30"/>
+        <controller ctrl="91" value="53"/>
+        </Channel>
+      </Instrument>
+    </Part>
+  <Staff id="1">
+    <VBox>
+      <height>10</height>
+      <leftMargin>5</leftMargin>
+      <rightMargin>5</rightMargin>
+      <topMargin>5</topMargin>
+      <bottomMargin>5</bottomMargin>
+      <Text>
+        <subtype>Title</subtype>
+        <style>2</style>
+        <text>Estudio Nr. 1</text>
+        </Text>
+      <Text>
+        <subtype>Composer</subtype>
+        <style>4</style>
+        <text>Francisco Tarrega (1852-1909)</text>
+        </Text>
+      </VBox>
+    <Measure number="1">
+      <Tempo>
+        <tempo>1</tempo>
+        <subtype>Tempo</subtype>
+        <offset x="-7.65" y="-1.5"/>
+        <systemFlag>1</systemFlag>
+        <style>14</style>
+        <text>Adagio</text>
+        </Tempo>
+      <Clef>
+        <subtype>3</subtype>
+        <offset x="0" y="3"/>
+        </Clef>
+      <TimeSig>
+        <subtype>260</subtype>
+        <den>4</den>
+        <nom1>4</nom1>
+        </TimeSig>
+      <Tuplet id="1">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="1">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>1</Beam>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>1</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>1</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Tuplet id="2">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="2">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>2</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>2</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>2</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Tuplet id="3">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="3">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>3</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>3</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>3</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Tuplet id="4">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="4">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>4</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>4</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>4</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>4</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>4</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>4</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>0</tick>
+        <ticklen>1440</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>48</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="7"/>
+        <track>1</track>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="2">
+      <Tuplet id="5">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="5">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>5</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>5</Beam>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>5</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>5</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>5</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>5</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Tuplet id="6">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="6">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>6</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>6</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>6</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>6</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>6</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>6</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Tuplet id="7">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="7">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>7</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>7</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>7</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>7</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>7</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>7</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Tuplet id="8">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="8">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>8</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>8</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>8</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>8</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>8</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>8</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>1920</tick>
+        <ticklen>1440</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>48</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="7"/>
+        <track>1</track>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="3">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
+      <Tuplet id="9">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="9">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>9</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>9</Beam>
+        <Note pitch="43" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>9</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>9</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>9</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>9</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Tuplet id="10">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="10">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>10</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>10</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>10</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>10</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>10</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>10</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Tuplet id="11">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="11">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>11</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>11</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>11</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>11</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>11</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>11</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Tuplet id="12">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="12">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>12</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>12</Beam>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>12</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>12</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>12</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>12</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>3840</tick>
+        <ticklen>1440</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>43</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="7"/>
+        <track>1</track>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="4">
+      <Tuplet id="13">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="13">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>13</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>13</Beam>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>13</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>13</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>13</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>13</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Tuplet id="14">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="14">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>14</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>14</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>14</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>14</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>14</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>14</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Tuplet id="15">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="15">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>15</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>15</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>15</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>15</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>15</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>15</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Tuplet id="16">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="16">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>16</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>16</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>16</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>16</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>16</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>16</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>5760</tick>
+        <ticklen>1440</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>48</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="7"/>
+        <track>1</track>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="5">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
+      <Tuplet id="17">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="17">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>17</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>17</Beam>
+        <Note pitch="40" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>17</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>17</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>17</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>17</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Tuplet id="18">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="18">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>18</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>18</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>18</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>18</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>18</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>18</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Tuplet id="19">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="19">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>19</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>19</Beam>
+        <Note pitch="68" tpc="22"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>19</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>19</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>19</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>19</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Tuplet id="20">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="20">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>20</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>20</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>20</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>20</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>20</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>20</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>7680</tick>
+        <ticklen>1440</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>40</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="7"/>
+        <track>1</track>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="6">
+      <Tuplet id="21">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="21">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>21</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>21</Beam>
+        <Note pitch="45" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>21</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>21</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>21</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>21</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Tuplet id="22">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="22">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>22</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>22</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>22</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>22</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>22</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>22</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Tuplet id="23">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="23">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>23</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>23</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>23</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>23</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>23</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>23</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Tuplet id="24">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="24">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>24</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>24</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>24</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>24</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>24</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>24</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>9600</tick>
+        <ticklen>1440</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>45</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="7"/>
+        <track>1</track>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="7">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
+      <Tuplet id="25">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="25">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>25</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>25</Beam>
+        <Note pitch="50" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>25</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>25</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>25</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>25</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Tuplet id="26">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="26">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>26</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>26</Beam>
+        <Note pitch="66" tpc="20"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>26</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>26</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>26</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>26</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Tuplet id="27">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="27">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>27</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>27</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>27</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>27</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>27</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>27</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Tuplet id="28">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="28">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>28</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>28</Beam>
+        <Note pitch="66" tpc="20"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>28</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>28</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>28</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>28</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>11520</tick>
+        <ticklen>1440</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>50</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="7"/>
+        <track>1</track>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="8">
+      <endRepeat>2</endRepeat>
+      <Tuplet id="29">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="29">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>29</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>29</Beam>
+        <Note pitch="43" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>29</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>29</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>29</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>29</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Tuplet id="30">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="30">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>30</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>30</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>30</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>30</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>30</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>30</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
+      <Chord>
+        <track>1</track>
+        <tick>13440</tick>
+        <ticklen>1440</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>43</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>14400</tick>
+        <ticklen>480</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>43</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="7"/>
+        <track>1</track>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="9">
+      <startRepeat/>
+      <Tuplet id="31">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="31">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>31</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>31</Beam>
+        <Note pitch="43" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>31</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>31</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>31</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>31</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Tuplet id="32">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="32">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>32</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>32</Beam>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>32</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>32</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>32</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>32</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Tuplet id="33">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="33">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>33</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>33</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>33</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>33</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>33</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>33</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Tuplet id="34">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="34">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>34</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>34</Beam>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>34</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>34</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>34</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>34</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <BarLine>
+        </BarLine>
+      <Chord>
+        <track>1</track>
+        <tick>15360</tick>
+        <ticklen>1440</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>43</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="7"/>
+        <track>1</track>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="10">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
+      <Tuplet id="35">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="35">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>35</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>35</Beam>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>35</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>35</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>35</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>35</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Tuplet id="36">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="36">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>36</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>36</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>36</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>36</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>36</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>36</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Tuplet id="37">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="37">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>37</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>37</Beam>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>37</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>37</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>37</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>37</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Tuplet id="38">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="38">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>38</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>38</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>38</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>38</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>38</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>38</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <BarLine>
+        </BarLine>
+      <Chord>
+        <track>1</track>
+        <tick>17280</tick>
+        <ticklen>1440</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>48</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="7"/>
+        <track>1</track>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="11">
+      <Tuplet id="39">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="39">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>39</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>39</Beam>
+        <Note pitch="47" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>39</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>39</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>39</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>39</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Tuplet id="40">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="40">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>40</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>40</Beam>
+        <Note pitch="66" tpc="20"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>40</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>40</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>40</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>40</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Tuplet id="41">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="41">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>41</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>41</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>41</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>41</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>41</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>41</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Tuplet id="42">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="42">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>42</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>42</Beam>
+        <Note pitch="66" tpc="20"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>42</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>42</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>42</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>42</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>19200</tick>
+        <ticklen>1440</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>47</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="7"/>
+        <track>1</track>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="12">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
+      <Tuplet id="43">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="43">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>43</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>43</Beam>
+        <Note pitch="40" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>43</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>43</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>43</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>43</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Tuplet id="44">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="44">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>44</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>44</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>44</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>44</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>44</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>44</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Tuplet id="45">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="45">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>45</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>45</Beam>
+        <Note pitch="66" tpc="20"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>45</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>45</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>45</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>45</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Tuplet id="46">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="46">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>46</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>46</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>46</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>46</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>46</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>46</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>21120</tick>
+        <ticklen>1440</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>40</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="7"/>
+        <track>1</track>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="13">
+      <Tuplet id="47">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="47">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>47</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>47</Beam>
+        <Note pitch="41" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>47</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>47</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>47</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>47</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Tuplet id="48">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="48">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>48</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>48</Beam>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>48</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>48</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>48</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>48</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Tuplet id="49">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="49">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>49</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>49</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>49</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>49</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>49</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>49</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Tuplet id="50">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="50">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>50</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>50</Beam>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>50</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>50</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>50</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>50</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>23040</tick>
+        <ticklen>1440</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>41</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="7"/>
+        <track>1</track>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="14">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
+      <Tuplet id="51">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="51">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>51</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>51</Beam>
+        <Note pitch="43" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>51</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>51</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>51</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>51</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Tuplet id="52">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="52">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>52</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>52</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>52</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>52</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>52</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>52</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Tuplet id="53">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="53">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>53</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>53</Beam>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>53</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>53</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>53</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>53</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Tuplet id="54">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="54">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>54</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>54</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>54</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>54</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>54</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>54</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>24960</tick>
+        <ticklen>1440</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>43</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="7"/>
+        <track>1</track>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="15">
+      <Tuplet id="55">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="55">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>55</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>55</Beam>
+        <Note pitch="43" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>55</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>55</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>55</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>55</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Tuplet id="56">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="56">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>56</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>56</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>56</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>56</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>56</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>56</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Tuplet id="57">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="57">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>57</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>57</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>57</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>57</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>57</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>57</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Tuplet id="58">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="58">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>58</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>58</Beam>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>58</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>58</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>58</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>58</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>26880</tick>
+        <ticklen>1440</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>43</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="6"/>
+        <track>1</track>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="16">
+      <endRepeat>0</endRepeat>
+      <Tuplet id="59">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="59">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>59</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>59</Beam>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>59</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>59</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>59</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>59</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Tuplet id="60">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <text>3</text>
+          </Number>
+        </Tuplet>
+      <Beam id="60">
+        </Beam>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>60</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>60</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>60</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>60</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>60</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>60</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
+      <Chord>
+        <track>1</track>
+        <tick>28800</tick>
+        <ticklen>960</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>48</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <ticklen>480</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>48</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="7"/>
+        <track>1</track>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    </Staff>
+  <Staff id="2">
+    <Measure number="1">
+      <Clef>
+        <subtype>5</subtype>
+        <offset x="0" y="1"/>
+        </Clef>
+      <TimeSig>
+        <subtype>260</subtype>
+        <den>4</den>
+        <nom1>4</nom1>
+        </TimeSig>
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="36" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="31" tpc="15"/>
+        </Chord>
+      </Measure>
+    <Measure number="2">
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="36" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="31" tpc="15"/>
+        </Chord>
+      </Measure>
+    <Measure number="3">
+      <Chord>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="31" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="33" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="31" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="29" tpc="13"/>
+        </Chord>
+      </Measure>
+    <Measure number="4">
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="36" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="31" tpc="15"/>
+        </Chord>
+      </Measure>
+    <Measure number="5">
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="28" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="32" tpc="22"/>
+        </Chord>
+      </Measure>
+    <Measure number="6">
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="33" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="36" tpc="14"/>
+        </Chord>
+      </Measure>
+    <Measure number="7">
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="38" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="31" tpc="15"/>
+        </Chord>
+      </Measure>
+    <Measure number="8">
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="31" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="31" tpc="15"/>
+        </Chord>
+      </Measure>
+    <Measure number="9">
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="31" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="43" tpc="15"/>
+        </Chord>
+      <BarLine>
+        </BarLine>
+      </Measure>
+    <Measure number="10">
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="36" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="29" tpc="13"/>
+        </Chord>
+      <BarLine>
+        </BarLine>
+      </Measure>
+    <Measure number="11">
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="35" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="31" tpc="15"/>
+        </Chord>
+      </Measure>
+    <Measure number="12">
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="28" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="30" tpc="20"/>
+        </Chord>
+      </Measure>
+    <Measure number="13">
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="29" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="31" tpc="15"/>
+        </Chord>
+      </Measure>
+    <Measure number="14">
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="31" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="41" tpc="13"/>
+        </Chord>
+      </Measure>
+    <Measure number="15">
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="31" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="31" tpc="15"/>
+        </Chord>
+      </Measure>
+    <Measure number="16">
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="36" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="36" tpc="14"/>
+        </Chord>
+      </Measure>
+    </Staff>
+  <cursorTrack>4</cursorTrack>
+  </museScore>
