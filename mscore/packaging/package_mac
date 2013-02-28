@@ -58,8 +58,6 @@ DEVS=$(hdiutil attach ${WORKING_DIRECTORY}/${DMGNAME} | cut -f 1)
 DEV=$(echo $DEVS | cut -f 1 -d ' ')
 VOLUME=$(mount |grep ${DEV} | cut -f 3 -d ' ')
  
-codesign -s "Developer ID Application: MuseScore" --resource-rules mscore/packaging/CodeResources -f -v ${APP_PATH}
-
 # copy in the application bundle
 cp -Rp ${APP_PATH} ${VOLUME}/${APPNAME}.app
 
@@ -67,6 +65,8 @@ cp -Rp ${APP_PATH} ${VOLUME}/${APPNAME}.app
 macdeployqt ${VOLUME}/${APPNAME}.app
 
 mv ${VOLUME}/${APPNAME}.app  ${VOLUME}/${LONG_NAME}.app 
+
+codesign -s "Developer ID Application: MuseScore" --resource-rules mscore/packaging/CodeResources -f -v ${VOLUME}/${LONG_NAME}.app
 
 # copy in background image
 mkdir -p ${VOLUME}/Pictures
