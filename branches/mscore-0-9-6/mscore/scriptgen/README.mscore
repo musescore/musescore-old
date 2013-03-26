@@ -1,0 +1,8 @@
+This code was generated with Qt Script Generator.
+Qt Script Generator is a tool that generates Qt bindings for Qt Script. With the generated bindings you get 
+access to substantial portions of the Qt API from within Qt Script and then MuseScore plugins.
+
+Qt Script Generator is available for download here https://code.google.com/p/qtscriptgenerator/
+The source code is here http://qt.gitorious.org/qt-labs/qtscriptgenerator
+
+Note: A few Linux distributions (Fedora,...) already package these bindings as a separate package.

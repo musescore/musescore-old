@@ -115,8 +115,4 @@ set_target_properties( awlplugin
 
 install( TARGETS awlplugin DESTINATION ${QT_PLUGINS_DIR}/designer/ )
 
-add_executable(ltest ltest.cpp)
-target_link_libraries (ltest awlplugin ${QT_LIBRARIES})
-
-
 endif (NOT MINGW AND NOT APPLE)
