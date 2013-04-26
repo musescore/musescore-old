@@ -1,6 +1,8 @@
 /* Copyright unknown. Code by Laurent de Soras <laurent@ohmforce.com>.
+ * This file is licensed under the WTFPL v2 license.
+ * http://www.wtfpl.net/about/
  */
-
+ 
 #ifndef __FASTLOG_H__
 #define __FASTLOG_H__
 
