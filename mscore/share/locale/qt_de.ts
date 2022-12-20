@@ -51,7 +51,7 @@
     <name>Phonon::</name>
     <message>
         <source>Notifications</source>
-        <translation>Benachrichtungen</translation>
+        <translation>Benachrichtigungen</translation>
     </message>
     <message>
         <source>Music</source>
